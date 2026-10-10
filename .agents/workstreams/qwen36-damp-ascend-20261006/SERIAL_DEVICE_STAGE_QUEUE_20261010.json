@@ -1,6 +1,6 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-10T13:43:00Z",
+  "updated_at_utc": "2026-10-10T14:19:01Z",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -31,7 +31,7 @@
     {
       "paper": "SKVQ",
       "owner": "sparse_attention_ready_queue",
-      "stage": "Minimal worker initialization/fork repair with actual spawn child plugin installation proof; default TP-local calibration remains downstream",
+      "stage": "009 named worker-extension RPC adapter with actual safe encoder/dispatch preflight; default calibration downstream remains frozen",
       "state": "PREPARING_OFF_DEVICE",
       "ready": false
     }
@@ -41,40 +41,41 @@
   "previous": {
     "paper": "SKVQ",
     "owner": "MAIN",
-    "state": "FAILED_WORKER_FORK_RELEASED",
-    "operation": "exec-00000000000003ed",
+    "state": "FAILED_RPC_SERIALIZATION_RELEASED",
+    "operation": "exec-0000000000000435",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-007/SOURCE_MANIFEST.json",
-      "bytes": 41933,
-      "sha256": "f0cb6a88c398db104f8aa5903471293145088407b598d765ff9d4c81fc6177f8"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/SOURCE_MANIFEST.json",
+      "bytes": 48234,
+      "sha256": "199d22ddf5b9151c1177290fe4f767333e84490312eec34c184b4069dd0a436c"
     },
-    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-007-main-20261010-001",
-    "software58_operation": "exec-00000000000003e9",
-    "source_count": 98,
-    "mount9TRAIN_operation": "exec-00000000000003ea",
-    "fresh_operation": "exec-00000000000003ec",
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-008-main-20261010-001",
+    "software68_source104_operation": "exec-000000000000042f",
+    "mount9TRAIN_operation": "exec-0000000000000430",
+    "fresh_operation": "exec-0000000000000434",
     "physical_devices": [
       4,
       5,
       6,
       7
     ],
-    "scope": "baseline calibration capture only; not quantized candidate or E2E",
-    "next_on_failure": "exact own cleanup then off-device repair; admit actually ready independent successor",
-    "cause": "Actual all4 N1/Format.ND and full Engine config passed; native worker initialization aborted at ATen ParallelOpenMP.cpp:64 Invalid thread pool after multithreaded fork, before model weights. Runtime/process adaptation failure, not SKVQ numerical or performance verdict.",
-    "actual_all4_N1_passed": true,
-    "actual_full_engine_config_passed": true,
-    "model_weights_loaded": false,
+    "scope": "baseline calibration capture only, not quantized candidate or E2E",
+    "next_on_failure": "exact own cleanup, independently verify release, off-device repair; admit actually ready other-paper successor",
+    "cause": "Actual all4 N1/full Engine, weights/profile/cache/warmup succeeded. First callable install_rpc rejected by native safe Msgpack encoder before any worker hook or sample; restore RPC rejected too. Implementation RPC integration failure, not SKVQ numeric or algorithm outcome.",
     "result": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-007-main-20261010-001/HOST_RESULT.json",
-      "bytes": 40333,
-      "sha256": "349799af213985521fe16d61332f722165d5b002dce8caf9067a0989b28330fc"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-008-main-20261010-001/HOST_RESULT.json",
+      "bytes": 40142,
+      "sha256": "1d7cf1ab78d44d8ce36690be48dce35db1d2f281da80acd080e1f2f13a1c1165"
     },
-    "release_verified_operation": "exec-00000000000003f0",
-    "device_stopped_utc": "2026-10-10T13:35:27.96022329Z",
+    "release_verified_operation": "exec-0000000000000443",
+    "device_stopped_utc": "2026-10-10T14:13:51.71907223Z",
+    "actual_all4_N1_passed": true,
+    "model_weights_loaded": true,
+    "native_engine_initialized": true,
+    "plugin_hooks_installed": false,
+    "calibration_samples": 0,
     "exact_owned_stopped_retained": true
   },
-  "idle_cause": "No actually ready successor: KIVI014 initialized cache capacity adaptation and SKVQ007 worker fork adaptation both failed; three off-device agents preparing fixes. Do not count idle as success or rerun frozen failures.",
+  "idle_cause": "Actual008 safely released after RPC integration failure; 015 cache provider and009 named RPC are still off-device preparation, no fully ready independent successor. Not external NPU occupation.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -165,22 +166,22 @@
     }
   ],
   "latest_resource_snapshot": {
-    "operation": "exec-00000000000003f0",
-    "compute_processes": [],
+    "operation": "exec-0000000000000443",
     "physical_devices": [
       4,
       5,
       6,
       7
     ],
+    "compute_processes": [],
     "hbm_mib": [
       2868,
+      2867,
       2866,
-      2865,
       2861
     ],
-    "protected0to3": "external HYPIC remains active and untouched",
-    "scope": "exact release independently inspected; fresh admission required"
+    "protected0to3": "external HYPIC still live and untouched",
+    "scope": "independent exact stopped-retained verification; fresh admission required"
   },
   "history_terminals": [
     {
@@ -460,6 +461,43 @@
       },
       "release_verified_operation": "exec-00000000000003f0",
       "device_stopped_utc": "2026-10-10T13:35:27.96022329Z",
+      "exact_owned_stopped_retained": true
+    },
+    {
+      "paper": "SKVQ",
+      "owner": "MAIN",
+      "state": "FAILED_RPC_SERIALIZATION_RELEASED",
+      "operation": "exec-0000000000000435",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/SOURCE_MANIFEST.json",
+        "bytes": 48234,
+        "sha256": "199d22ddf5b9151c1177290fe4f767333e84490312eec34c184b4069dd0a436c"
+      },
+      "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-008-main-20261010-001",
+      "software68_source104_operation": "exec-000000000000042f",
+      "mount9TRAIN_operation": "exec-0000000000000430",
+      "fresh_operation": "exec-0000000000000434",
+      "physical_devices": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "scope": "baseline calibration capture only, not quantized candidate or E2E",
+      "next_on_failure": "exact own cleanup, independently verify release, off-device repair; admit actually ready other-paper successor",
+      "cause": "Actual all4 N1/full Engine, weights/profile/cache/warmup succeeded. First callable install_rpc rejected by native safe Msgpack encoder before any worker hook or sample; restore RPC rejected too. Implementation RPC integration failure, not SKVQ numeric or algorithm outcome.",
+      "result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-008-main-20261010-001/HOST_RESULT.json",
+        "bytes": 40142,
+        "sha256": "1d7cf1ab78d44d8ce36690be48dce35db1d2f281da80acd080e1f2f13a1c1165"
+      },
+      "release_verified_operation": "exec-0000000000000443",
+      "device_stopped_utc": "2026-10-10T14:13:51.71907223Z",
+      "actual_all4_N1_passed": true,
+      "model_weights_loaded": true,
+      "native_engine_initialized": true,
+      "plugin_hooks_installed": false,
+      "calibration_samples": 0,
       "exact_owned_stopped_retained": true
     }
   ]

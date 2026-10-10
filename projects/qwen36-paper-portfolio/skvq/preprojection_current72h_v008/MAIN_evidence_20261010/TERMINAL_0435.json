@@ -1,0 +1,93 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": "exit code",
+  "found": true,
+  "kind": "exec",
+  "ok": false,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "MAIN_SKVQ_HOST_ENABLE=1",
+          "/usr/bin/prlimit",
+          "--cpu=7200:7200",
+          "--",
+          "/usr/bin/python3",
+          "-B",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/MAIN_HOST.py",
+          "--execute",
+          "--source-manifest-sha256",
+          "199d22ddf5b9151c1177290fe4f767333e84490312eec34c184b4069dd0a436c",
+          "--output",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-008-main-20261010-001"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/env",
+        "cwd": null,
+        "durationMs": 420356,
+        "error": "exit code",
+        "exitCode": 1,
+        "id": "exec-0000000000000435",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "Traceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/MAIN_HOST.py\", line 325, in <module>\n    if __name__==\"__main__\":main()\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/MAIN_HOST.py\", line 324, in main\n    require(a.output,\"explicit absent new output\");execute(a)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/MAIN_HOST.py\", line 319, in execute\n    if ctl.primary:raise ctl.primary\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/MAIN_HOST.py\", line 288, in execute\n    ctl.exec(\"capture256\",[str(HERE/\"capture_current.py\"),\"--execute\",\"--source-manifest-sha256\",lock[\"sha256\"],\"--inputs\",str(inputs/\"INPUTS.json\"),\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/MAIN_HOST.py\", line 230, in exec\n    if primary:raise primary\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/MAIN_HOST.py\", line 223, in exec\n    require(self.child.returncode==0,\"actual child nonzero; raw stdout/stderr retained\")\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/io_contract.py\", line 12, in require\n    if not v:raise ValueError(m)\nValueError: actual child nonzero; raw stdout/stderr retained\n",
+        "stdout": "{\"host_result\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-008-main-20261010-001/HOST_RESULT.json\", \"sha256\": \"1d7cf1ab78d44d8ce36690be48dce35db1d2f281da80acd080e1f2f13a1c1165\", \"bytes\": 40142}, \"status\": \"FAILED\"}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 358,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 358,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 358
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 358,
+        "routeLookupMs": 0,
+        "totalMs": 358
+      }
+    },
+    "traceId": "7cdfd0db-2f2e-4d64-85b6-276eddb017ba"
+  },
+  "operationId": "exec-0000000000000435",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": false,
+  "terminal": true
+}

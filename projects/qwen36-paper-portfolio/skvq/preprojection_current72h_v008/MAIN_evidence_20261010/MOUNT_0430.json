@@ -1,0 +1,93 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "--cpu=120:120",
+          "--as=268435456:268435456",
+          "--",
+          "/usr/bin/python3",
+          "-I",
+          "-B",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/mount_preflight.py",
+          "--execute",
+          "--source-manifest-sha256",
+          "199d22ddf5b9151c1177290fe4f767333e84490312eec34c184b4069dd0a436c",
+          "--output",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-mount-preflight-008-main-20261010-001"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/prlimit",
+        "cwd": null,
+        "durationMs": 1459,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000430",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"status\": \"MOUNT_TRAIN_PREFLIGHT_ONLY\", \"results\": [{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-mount-preflight-008-main-20261010-001/preflight-MOUNT_PREFLIGHT.json\", \"sha256\": \"e275c5760f9caacc122f073aedd9ac05caf465062b0258b3395e13c5925087d2\", \"bytes\": 32053}, {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-mount-preflight-008-main-20261010-001/tp4-capture-MOUNT_PREFLIGHT.json\", \"sha256\": \"c6ca6aa7eb90be4d7b686c54a71665f568ec1a80934e5d115cb8de43fc8761f6\", \"bytes\": 32315}], \"source_ref\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/SOURCE_MANIFEST.json\", \"bytes\": 48234, \"sha256\": \"199d22ddf5b9151c1177290fe4f767333e84490312eec34c184b4069dd0a436c\"}, \"native_ready\": false, \"model_ready\": false}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 350,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 350,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 350
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 349,
+        "routeLookupMs": 0,
+        "totalMs": 349
+      }
+    },
+    "traceId": "febc86ed-f16a-4938-b9cb-80bc33ab3eb7"
+  },
+  "operationId": "exec-0000000000000430",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}

@@ -1,0 +1,69 @@
+can not use command: npu-smi info
+2026-10-10 14:10:56,760 - 186 - ServiceProfiler - INFO - VLLM_USE_V1 not set, auto-detected via vLLM 0.23.0+empty: default 1
+`Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+can not use command: npu-smi info
+(EngineCore pid=274) 2026-10-10 14:11:40,074 - 274 - ServiceProfiler - INFO - VLLM_USE_V1 not set, auto-detected via vLLM 0.23.0+empty: default 1
+(EngineCore pid=274) /vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py:139: UserWarning: Failed to get the IP address, using 0.0.0.0 by default. The value can be set by the environment variable VLLM_HOST_IP or HOST_IP.
+(EngineCore pid=274)   mq_connect_ip = get_ip()
+can not use command: npu-smi info
+can not use command: npu-smi info
+can not use command: npu-smi info
+can not use command: npu-smi info
+2026-10-10 14:11:57,859 - 292 - ServiceProfiler - INFO - VLLM_USE_V1 not set, auto-detected via vLLM 0.23.0+empty: default 1
+2026-10-10 14:11:57,940 - 293 - ServiceProfiler - INFO - VLLM_USE_V1 not set, auto-detected via vLLM 0.23.0+empty: default 1
+2026-10-10 14:11:58,364 - 294 - ServiceProfiler - INFO - VLLM_USE_V1 not set, auto-detected via vLLM 0.23.0+empty: default 1
+2026-10-10 14:11:58,457 - 291 - ServiceProfiler - INFO - VLLM_USE_V1 not set, auto-detected via vLLM 0.23.0+empty: default 1
+`Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+`Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+`Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+`Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+[W1010 14:12:10.355489210 socket.cpp:207] [c10d] The hostname of the client socket cannot be retrieved. err=-3
+[W1010 14:12:11.617762840 socket.cpp:207] [c10d] The hostname of the client socket cannot be retrieved. err=-3
+[W1010 14:12:11.751044110 socket.cpp:207] [c10d] The hostname of the client socket cannot be retrieved. err=-3
+[rank2]:[W1010 14:12:11.753975300 ProcessGroupGloo.cpp:511] Warning: Unable to resolve hostname to a (local) address. Using the loopback address as fallback. Manually set the network interface to bind to with GLOO_SOCKET_IFNAME. (function operator())
+[rank1]:[W1010 14:12:11.855280830 ProcessGroupGloo.cpp:511] Warning: Unable to resolve hostname to a (local) address. Using the loopback address as fallback. Manually set the network interface to bind to with GLOO_SOCKET_IFNAME. (function operator())
+[W1010 14:12:11.965850090 socket.cpp:207] [c10d] The hostname of the client socket cannot be retrieved. err=-3
+[rank3]:[W1010 14:12:11.968642170 ProcessGroupGloo.cpp:511] Warning: Unable to resolve hostname to a (local) address. Using the loopback address as fallback. Manually set the network interface to bind to with GLOO_SOCKET_IFNAME. (function operator())
+[rank0]:[W1010 14:12:11.974279610 ProcessGroupGloo.cpp:511] Warning: Unable to resolve hostname to a (local) address. Using the loopback address as fallback. Manually set the network interface to bind to with GLOO_SOCKET_IFNAME. (function operator())
+[rank0]:[W1010 14:12:11.259983870 NPUCachingAllocator.cpp:202] Warning: The current CANN and HDK(driver) versions require processing for 32 padding size, with memory allocation. (function operator())
+[rank1]:[W1010 14:12:11.266594740 NPUCachingAllocator.cpp:202] Warning: The current CANN and HDK(driver) versions require processing for 32 padding size, with memory allocation. (function operator())
+[rank2]:[W1010 14:12:11.277446760 NPUCachingAllocator.cpp:202] Warning: The current CANN and HDK(driver) versions require processing for 32 padding size, with memory allocation. (function operator())
+[rank3]:[W1010 14:12:11.279006250 NPUCachingAllocator.cpp:202] Warning: The current CANN and HDK(driver) versions require processing for 32 padding size, with memory allocation. (function operator())
+(Worker pid=293) The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+(Worker pid=294) The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+(Worker pid=291) The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+(Worker pid=292) The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards:   0% Completed | 0/15 [00:00<?, ?it/s]
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards:   7% Completed | 1/15 [00:00<00:03,  4.17it/s]
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards:  13% Completed | 2/15 [00:00<00:05,  2.51it/s]
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards:  20% Completed | 3/15 [00:01<00:05,  2.21it/s]
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards:  27% Completed | 4/15 [00:01<00:04,  2.22it/s]
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards:  33% Completed | 5/15 [00:02<00:04,  2.23it/s]
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards:  40% Completed | 6/15 [00:02<00:03,  2.33it/s]
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards:  47% Completed | 7/15 [00:03<00:03,  2.19it/s]
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards:  53% Completed | 8/15 [00:03<00:03,  2.20it/s]
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards:  60% Completed | 9/15 [00:03<00:02,  2.27it/s]
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards:  67% Completed | 10/15 [00:04<00:02,  2.32it/s]
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards:  73% Completed | 11/15 [00:04<00:01,  2.23it/s]
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards:  80% Completed | 12/15 [00:05<00:01,  2.31it/s]
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards:  87% Completed | 13/15 [00:05<00:00,  2.59it/s]
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards:  93% Completed | 14/15 [00:06<00:00,  2.20it/s]
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards: 100% Completed | 15/15 [00:06<00:00,  2.45it/s]
+(Worker_TP0 pid=291) Loading safetensors checkpoint shards: 100% Completed | 15/15 [00:06<00:00,  2.34it/s]
+(Worker_TP0 pid=291) 
+(EngineCore pid=274) `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+(EngineCore pid=274) The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+Traceback (most recent call last):
+  File "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/capture_current.py", line 122, in <module>
+    if __name__=="__main__":main()
+                            ^^^^^^
+  File "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/capture_current.py", line 121, in main
+    print(json.dumps(run(a.inputs,a.output,a.admission,a.max_total_seconds),sort_keys=True))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/capture_current.py", line 113, in run
+    require(primary is None and all(not r.get("secondary") and not r.get("primary") for r in secondary),"actual producer/cleanup failure; no calibration promotion")
+  File "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-capture-chain-v1-001/io_contract.py", line 12, in require
+    if not v:raise ValueError(m)
+             ^^^^^^^^^^^^^^^^^^^
+ValueError: actual producer/cleanup failure; no calibration promotion

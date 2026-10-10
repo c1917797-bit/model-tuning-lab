@@ -1,0 +1,84 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "-B",
+          "-c",
+          "import pathlib,json,subprocess,sys,hashlib\np=pathlib.Path('/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-008-main-20261010-001');root=pathlib.Path('/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008')\nv=json.loads((p/'HOST_RESULT.json').read_bytes());sys.path.insert(0,str(root))\nimport MAIN_HOST as h\nh.C.configure('199d22ddf5b9151c1177290fe4f767333e84490312eec34c184b4069dd0a436c');h.C.source()\nfor e in v['owned']:\n x=json.loads(subprocess.check_output(['/usr/bin/docker','inspect',e['cid']],timeout=10))[0];e['mounts']={k:tuple(w)for k,w in e['mounts'].items()}\n h.Control.validate(None,x,e)\n assert not x['State']['Running'] and x['State']['Pid']==0 and not x.get('ExecIDs') and not x['State']['OOMKilled']\n print(json.dumps({'cid':x['Id'],'source':e['source'],'stopped':True,'retained':True,'FinishedAt':x['State']['FinishedAt'],'devices':e['devices']}))\ncmd=pathlib.Path('/proc')/str(v['host_pid'])/'cmdline'\nassert not cmd.exists()or str(root).encode()not in cmd.read_bytes()\nsmi=subprocess.check_output(['/usr/local/sbin/npu-smi','info'],text=True,timeout=10)\nprint(smi)\n"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/python3",
+        "cwd": null,
+        "durationMs": 1304,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000443",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"cid\": \"b4b78f3811a4068ae3fb9b19b1007f1a8d37a400b89d0d24ac4c2d64e7b9c42d\", \"source\": \"199d22ddf5b9151c1177290fe4f767333e84490312eec34c184b4069dd0a436c\", \"stopped\": true, \"retained\": true, \"FinishedAt\": \"2026-10-10T14:07:49.45051754Z\", \"devices\": {}}\n{\"cid\": \"d032c795b33b1391ec1a6a67b73d5d958958156ae9e14a621d2999caf676d3d7\", \"source\": \"199d22ddf5b9151c1177290fe4f767333e84490312eec34c184b4069dd0a436c\", \"stopped\": true, \"retained\": true, \"FinishedAt\": \"2026-10-10T14:13:51.71907223Z\", \"devices\": {\"/dev/davinci4\": \"/dev/davinci0\", \"/dev/davinci5\": \"/dev/davinci1\", \"/dev/davinci6\": \"/dev/davinci2\", \"/dev/davinci7\": \"/dev/davinci3\", \"/dev/davinci_manager\": \"/dev/davinci_manager\", \"/dev/devmm_svm\": \"/dev/devmm_svm\", \"/dev/hisi_hdc\": \"/dev/hisi_hdc\"}}\n+------------------------------------------------------------------------------------------------+\n| npu-smi 25.2.0                   Version: 25.2.0                                               |\n+---------------------------+---------------+----------------------------------------------------+\n| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|\n| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |\n+===========================+===============+====================================================+\n| 0     910B4               | OK            | 125.5       42                0    / 0             |\n| 0                         | 0000:C1:00.0  | 5           0    / 0          27234/ 32768         |\n+===========================+===============+====================================================+\n| 1     910B4               | OK            | 103.6       40                0    / 0             |\n| 0                         | 0000:C2:00.0  | 6           0    / 0          27236/ 32768         |\n+===========================+===============+====================================================+\n| 2     910B4               | OK            | 108.5       42                0    / 0             |\n| 0                         | 0000:81:00.0  | 6           0    / 0          27234/ 32768         |\n+===========================+===============+====================================================+\n| 3     910B4               | OK            | 104.6       41                0    / 0             |\n| 0                         | 0000:82:00.0  | 6           0    / 0          27233/ 32768         |\n+===========================+===============+====================================================+\n| 4     910B4               | OK            | 93.9        43                0    / 0             |\n| 0                         | 0000:01:00.0  | 0           0    / 0          2868 / 32768         |\n+===========================+===============+====================================================+\n| 5     910B4               | OK            | 96.7        41                0    / 0             |\n| 0                         | 0000:02:00.0  | 0           0    / 0          2867 / 32768         |\n+===========================+===============+====================================================+\n| 6     910B4               | OK            | 95.0        43                0    / 0             |\n| 0                         | 0000:41:00.0  | 0           0    / 0          2866 / 32768         |\n+===========================+===============+====================================================+\n| 7     910B4               | OK            | 86.6        44                0    / 0             |\n| 0                         | 0000:42:00.0  | 0           0    / 0          2861 / 32768         |\n+===========================+===============+====================================================+\n+---------------------------+---------------+----------------------------------------------------+\n| NPU     Chip              | Process id    | Process name             | Process memory(MB)      |\n+===========================+===============+====================================================+\n| 0       0                 | 3811485       | VLLMWorker_TP            | 24416                   |\n+===========================+===============+====================================================+\n| 1       0                 | 3811486       | VLLMWorker_TP            | 24416                   |\n+===========================+===============+====================================================+\n| 2       0                 | 3811487       | VLLMWorker_TP            | 24416                   |\n+===========================+===============+====================================================+\n| 3       0                 | 3811488       | VLLMWorker_TP            | 24416                   |\n+===========================+===============+====================================================+\n| No running processes found in NPU 4                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 5                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 6                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 7                                                            |\n+===========================+===============+====================================================+\n\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 365,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 364,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 365
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 364,
+        "routeLookupMs": 0,
+        "totalMs": 364
+      }
+    },
+    "traceId": "27887a3f-e213-4b44-8f06-0492c4848598"
+  },
+  "operationId": "exec-0000000000000443",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}
