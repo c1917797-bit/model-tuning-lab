@@ -2,24 +2,17 @@
 
 ## 0. Status
 
-- r15 source-lineage E2E is terminal, independently audited and exactly released. On eight post-hoc-selected samples, original `3ad0967` scored 13/24 and current `c12060c` 10/24; current source has 24/24 request-ID four-worker proof while original supports aggregate repair only. This is a source-sensitivity signal, not a causal or full-quality verdict. See `HYPIC_R15_SOURCE_LINEAGE_TERMINAL_AUDIT_20261010.md`. r16 full original-source max-2048 pair is now prospectively frozen, offline selectors and auditor import passed, but has not started; read `HYPIC_R16_ORIGINAL_SOURCE_FULL_PREREGISTRATION_20261010.md` before any device action.
-- r15 source-lineage diagnostic is preregistered but has not touched devices: eight r13-selected max-2048/c8 samples, HYPIC-on old `3ad0967` versus current `c12060c`, physical NPU0–3 only, fresh roots and independent auditor. Two clean source checkouts and both offline source/model/dataset preflights passed. Read `HYPIC_R15_SOURCE_LINEAGE_PREREGISTRATION_20261010.md` before admission; do not use its selected subset as a full-quality verdict.
-- 2026-10-10 verification-route correction: r13 is a completed negative-quality experiment, not an incomplete run. Compare the closer 2026-09-06 same-model TP4 success with the current r13 source/protocol differences; the current plugin differs semantically from the successful `3ad0967` source. The next device test, if admitted, is a small preregistered HYPIC-on source-lineage E2E diagnostic on physical NPU0–3, not another GDN unit probe or a rerun of r13. See `HYPIC_VALIDATION_ROUTE_CORRECTION_20261010.md`. r5 isolated GDN was terminal-valid but synthetic and non-causal; its container was released.
-- 2026-10-09 CPU BF16 RoPE screen: FP32-compute/BF16-store and one relative-position rotation both worsen all three sampled cross-anchor comparisons against direct native BF16 K; neither is an admitted repair. See `HYPIC_BF16_ROPE_NUMERICAL_SCREEN_20261009.md`. RoPE causality remains unproven.
-- 2026-10-09 offline reporting/source-map reconciliation: r13's actual
-  container bind list, service import path and 32-file Python source digest
-  now replay-pass `verify_ascend_source_map_case.py`; r12's missing raw
-  bind/source receipt remains a historical fact. The source-map Skill case
-  stays partial because its map was retrospective rather than frozen before
-  the c12060c edit. A new
-  `HYPIC_R13_TERMINAL_NEGATIVE_REPORT_20261009.md` states the bounded
-  final r13 rejection and six-phase performance benefit in separate tables;
-  `verify_paper_to_ascend_reporting_case.py` checks its phase rows,
-  formulas, receipts and profile boundaries. The reporting Skill remains
-  partial pending exact historical command/failure-ledger completion review.
-  Benchmark, canary and monkeypatch-delivery cases now replay-check bounded r13
-  mixed verdicts without an NPU rerun; delivery promotion remains barred.
-  All 29 main Skills have cases: 7 bounded verified, 22 partial.
+- r16 original-source full 2048/c8 quality pair is terminal and
+  independently audited on physical NPU0–3: 224/381 no-cache →
+  210/381 HYPIC (−3.6745 pp), `REJECT_OR_QUALIFY`; aggregate hot
+  364/381 is a separate activation shortfall. Both 127×3 arms have
+  valid source/score/guard/release evidence. The candidate's exit 1
+  is the preregistered hot-coverage failure, not incomplete rows.
+  See `HYPIC_R16_ORIGINAL_SOURCE_FULL_TERMINAL_AUDIT_20261010.md`
+  and `MODEL_QUALITY_R16_TERMINAL_SKILL_CASE_20261010.md`.
+  Do not launch original-source adoption performance after this gate;
+  do not pool r13/r15/r16 or rewrite historical 1024/c32 success.
+- r15 source-lineage E2E is terminal, independently audited and exactly released. On eight post-hoc-selected samples, original `3ad0967` scored 13/24 and current `c12060c` 10/24; this was a source-sensitivity signal, not a population or causal verdict. The subsequent full r16 original-source pair above supersedes any inference drawn from that selected subset. See `HYPIC_R15_SOURCE_LINEAGE_TERMINAL_AUDIT_20261010.md`.
 - The source-map checkpoint `a863fee7` is committed locally, but its
   2026-10-09 GitHub HTTPS push failed with unavailable Username credentials.
   Do not claim origin/main or the workstream remote contains this or later
@@ -94,28 +87,28 @@ the original Prefill numeric miss and the partial main-29 Skill inventory.
 
 ## 4. Current Action
 
-Do not relaunch frozen r13/r14 quality, matched-performance, Prefill, Decode,
-or isolated GDN phases. Treat r13 as complete negative quality and positive
-performance evidence. First compare the old same-model TP4 success with r13's
-source, cap, concurrency, and cache identity; replay existing raw evidence
-offline. Only then admit a bounded, single-variable source-lineage E2E
-diagnostic under a new contract/root. No CANN/HCCL/GDN quality root cause is
-proven. NPU4–7 remain outside this task.
+Do not relaunch frozen r13–r16 quality, matched-performance, Prefill,
+Decode or isolated GDN phases. r13 is positive performance and
+negative quality under `c12060c`; r16 is negative quality under
+original `3ad0967`. Keep identities and decisions separate. Archive
+the r16 case, run repository/Skill regressions, and require a new
+single-variable same-identity control before any technical repair
+claim. No CANN/HCCL/GDN quality root cause is proven. NPU4–7 remain
+outside this task.
 
 ## 5. Next Actions
 
-1. Run the focused HYPIC, six-phase performance, Prefill profiler, and
-   case-registry replay checks.
-2. Map the final performance success and quality rejection to the exact Skills;
-   do not convert performance success into an unconditional deployment claim.
-3. Preserve the completed profiler audit and parser-environment failure.
-   Recheck `verify_r13_strict_mode_path.py`: strict mode had 140 zero-start
-   materializations and no non-strict combined-Prefill. This rules out one
-   hypothesis, not the quality regression. Keep full Skill acceptance partial
-   until numerical cause, default-ruler and integration gates pass.
-   Before editing the plugin or repeating quality, test BF16 RoPE against actual pinned-runtime K/cache/logits and GDN parity under a new one-switch diagnostic contract; CPU screening alone cannot assign r13 causality.
+1. Replay the r16 independent audit, exact raw-hash checks, updated quality
+   Skill case, focused regressions and full Maintainer Skill Tree validator.
+2. Keep r13 positive performance and r13/r16 negative quality in separate
+   source/ruler identities. Preserve the completed profiler and parser
+   failure; do not use them to assign RoPE/GDN/cache causality.
+3. A technical repair must start with a prospective one-variable device
+   diagnostic and same-identity control. Keep full Skill acceptance partial
+   until the default-ruler GSM8K/c32, deterministic canary and integration
+   gates are actually met; do not relaunch old roots.
 4. Commit only a reviewed coherent checkpoint. Push only when authentication
-   works and then verify the live remote ref.
+   works and independently verify the live remote ref.
 
 ## 6. Validation Commands
 
@@ -130,6 +123,7 @@ python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_decode.py
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_retry5_failure.py
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r14_variability_terminal.py
+python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r16_original_source_full_terminal.py
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_skill_cases.py
 python3 -B -m unittest discover -s .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007 -p 'test_*.py'
 git diff --check

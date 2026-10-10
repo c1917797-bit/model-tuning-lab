@@ -4,8 +4,8 @@
   "campaign_code": "P",
   "long_term_acceptance": "partial-evidence",
   "behavioral_evidence_verified": true,
-  "task": "Review every scored HYPIC 2048-token explicit-boundary request on physical NPU0-3 TP4, then independently decide full r13 paired quality and strict worker-hot coverage under concurrency 8",
-  "executed_at_utc": "2026-10-09",
+  "task": "Independently audit full r13 and original-source r16 HYPIC 2048-token explicit-boundary quality pairs on physical NPU0-3 TP4, separating all-request quality from treatment activation",
+  "executed_at_utc": "2026-10-10",
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "303658f0a652ed392c875e58941c6b1d246552f7",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
@@ -85,6 +85,18 @@
     "r14_c1_selected_median_common_prefix_chars_baseline_candidate": [1229, 1901],
     "r14_c1_concurrency_or_cache_residency_causal_root_proven": false,
     "r14_c1_changes_r13_full_quality_verdict": false,
+    "r16_original_source_full_pair_evidence_valid": true,
+    "r16_source_commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
+    "r16_scored_responses_per_arm": 381,
+    "r16_correct_baseline_candidate": [224, 210],
+    "r16_delta_percentage_points": -3.674540682414698,
+    "r16_quality_decision": "REJECT_OR_QUALIFY",
+    "r16_aggregate_verified_hot_requests": [364, 381],
+    "r16_per_request_four_worker_proof_available": false,
+    "r16_guard_samples_baseline_candidate": [999, 1078],
+    "r16_exact_owned_release_valid": true,
+    "r16_same_source_performance_admitted_after_quality_failure": false,
+    "r16_repair_or_causal_root_proven": false,
     "main_skill_integrated": false
   },
   "evidence": [
@@ -195,10 +207,22 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_rope_bf16_screen.py",
       "sha256": "62905c9c67996673195c7c5f3baffebc7531998a093c193d8058ff3bdaba2d5f"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R16_ORIGINAL_SOURCE_FULL_TERMINAL_AUDIT_20261010.md",
+      "sha256": "834add73f023968796721ca387cf0fb678dc93674e6fa8d549da91842e52e5e8"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/MODEL_QUALITY_R16_TERMINAL_SKILL_CASE_20261010.md",
+      "sha256": "64f9f7feec3728a576a19d42b59042264b8a492e284ad8f9d4a5c2a986c28565"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r16_original_source_full_terminal.py",
+      "sha256": "c527bd4e7a8e9cb67ea26899703f08bfc434335639c99e9f12b3f1ba27864ca2"
     }
   ],
   "replayable_regression_recorded": true,
   "boundary": "r9-r12 remain immutable activation failures without a valid full pair. r13 supplies a valid same-identity 127x3 control/treatment quality pair: deployed quality 230/381 to 219/381 is REJECT_OR_QUALIFY and strict hot coverage 368/381 is FAIL; all 13 cold IDs show ready-then-evicted material before partial-prefill rejection. A new read-only source/runtime replay proves strict position-independent mode and 140 zero-start candidate materializations, so the non-strict combined-Prefill approximation was not observed and is not a supported explanation for r13 quality loss; numerical equivalence of the strict path is still unproven. The prospective r14 c1 3-sample x3 matched diagnostic is complete and replay-valid: both arms 3/9 correct, candidate 9/9 four-worker hot, but campaign size, order, service lifecycle and cache history also changed, so no concurrency or capacity root is isolated. Current main lacks the branch's per-scored-request proof wording, and neither the c8 LongBench-v2-only task nor r14 selected diagnostic validates the default GSM8K/c32 ruler or deterministic canary. No full Skill or paper acceptance follows; six-phase performance has a separate valid positive audit.",
-  "next_gate": "Integrate and replay main request-level proof requirements, then validate missing default-ruler dataset/canary conditions before upgrading this Skill case. Any fresh device test must prospectively isolate one numerical or concurrency hypothesis with an exact-source short canary and matching control; for RoPE use actual native BF16 target K/output as oracle, not only same-anchor mathematical identity. CPU cross-anchor evidence rejects both FP32-compute/BF16-store and one BF16 relative rotation as repair candidates; do not rerun r13/r14 roots or turn the selected r14 result into formal quality acceptance.",
+  "next_gate": "r16 original-source full 127x3 max-2048/c8 quality is independently valid but REJECT_OR_QUALIFY at 224/381 to 210/381; aggregate hot coverage 364/381 is incomplete and per-request four-worker proof is unavailable. Do not use historical 1024/c32 success, r15 selected examples or r13 speed to override this. Integrate and replay main request-level proof wording, then validate the missing default LongBench-v2+GSM8K/c32 and deterministic canary conditions before upgrading this Skill. A repair needs a new preregistered one-variable same-identity control; do not rerun r13-r16 roots or claim a RoPE/GDN/cache cause without direct NPU evidence.",
   "drift_trigger": "Revalidate after main Skill/reference or registry blob changes, plugin source/telemetry changes, model/service fingerprint drift, or any dataset/evaluator/concurrency/generation-ruler change."
 }

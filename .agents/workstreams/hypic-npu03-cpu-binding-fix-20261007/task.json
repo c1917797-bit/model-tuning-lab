@@ -1018,5 +1018,25 @@
     "causal_root_proven": false,
     "scope": "diagnostic only; immutable r13 quality remains REJECT_OR_QUALIFY"
   },
-  "next_action": "r15 source-lineage eight-sample diagnostic is terminal and independently audited: old source 13/24 versus current 10/24, directional but biased and non-causal; see HYPIC_R15_SOURCE_LINEAGE_TERMINAL_AUDIT_20261010.md. The decision-changing successor r16 is frozen in HYPIC_R16_ORIGINAL_SOURCE_FULL_PREREGISTRATION_20261010.md: run a fresh full 127x3 max-2048/c8 no-cache baseline and HYPIC-only candidate with the same original 3ad0967 source, physical NPU0-3 only. First verify actual NPU0-3/8223 idleness and new-root absence; run the baseline under continuous guard, independently audit, then admit the candidate only after a fresh idle preflight. Never reuse r13/r14/r15 roots or pool their rows. If quality fails, stop; if it passes, performance and GSM8K remain separate. GitHub HTTPS credentials remain unavailable; do not claim remote/main sync. Never use NPU4-7 or stop external work."
+  "r16_full_original_source_quality_terminal": {
+    "report": "HYPIC_R16_ORIGINAL_SOURCE_FULL_TERMINAL_AUDIT_20261010.md",
+    "skill_case": "MODEL_QUALITY_R16_TERMINAL_SKILL_CASE_20261010.md",
+    "independent_audit": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/hypic-r16-original-source-full-quality-audit.json",
+    "independent_audit_sha256": "52914becb93266ac4a27e8491b40bf8456b566ee8f828038250098bfec33a4ee",
+    "source_commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
+    "baseline_controller": "exec-0000000000000060",
+    "candidate_controller": "exec-00000000000000ae",
+    "samples_per_arm": 127,
+    "scored_responses_per_arm": 381,
+    "baseline_correct": 224,
+    "candidate_correct": 210,
+    "delta_percentage_points": -3.674540682414698,
+    "quality_decision": "REJECT_OR_QUALIFY",
+    "aggregate_verified_hot_requests": 364,
+    "guard_samples_baseline_candidate": [999, 1078],
+    "source_identity_isolation_and_exact_release_valid": true,
+    "original_source_per_request_four_worker_proof": false,
+    "same_source_performance_admitted_after_quality_failure": false
+  },
+  "next_action": "Do not rerun completed HYPIC phases. r16 original-source full 127x3 max-2048/c8 pair is terminal and independently audited: 224/381 no-cache to 210/381 HYPIC, REJECT_OR_QUALIFY; aggregate hot 364/381 is separate activation failure. Preserve r13/r15/r16 immutable roots and historical 1024/c32 result; do not launch original-source adoption performance after this quality rejection or splice r13 speed onto r16. Run focused Skill cases and repository regressions, commit the negative case and handoff locally, then pursue only a new preregistered single-variable technical repair with same-identity control on actual-idle physical NPU0-3. No causal RoPE/GDN/cache root is yet proven. GitHub HTTPS credentials remain unavailable; do not claim remote/main sync or repeat identical failed push. Never use NPU4-7 or stop external work."
 }

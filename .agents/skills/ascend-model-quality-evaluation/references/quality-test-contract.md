@@ -59,6 +59,15 @@ unverified when runtime telemetry cannot distinguish those requests, even
 if a serialized canary and aggregate counts pass. Report those narrower
 facts separately rather than weakening the frozen quality gate.
 
+If a preregistered activation gate makes a controller exit nonzero
+*after* all scored rows, an independent audit may still classify the
+paired all-request quality effect, but only after proving complete
+rows, matched identity, scorer replay, uninterrupted isolation and
+exact owned release. Preserve the activation failure as a separate
+failed gate: it cannot erase an adverse quality result or be relabeled
+as an in-path pass. A historical successful source or output cap is
+context, not a matching baseline for a changed ruler.
+
 For a conditional path backed by reusable materialized state, a serialized
 canary is also not a concurrency/capacity gate. Before the full suite, stress
 distinct eligible prompts at the target concurrency and output cap; record
