@@ -1,29 +1,27 @@
 # Current human-authorized 72h successor — 2026-10-09
 
-## Current execution — 2026-10-10 10:10 UTC
+## Current execution — 2026-10-10 10:19 UTC
 
-MAIN0270 v007 is RUNNING; poll that exact operation, never duplicate.
-Actual026d passed source180,34 regressions and four default-OFF CLIs.
-Complete real input creation precedes container creation; actual composite
-text_config.vocab_size is validated. All runtime role Refs must belong to
-the mounted source closure. Kernel, thresholds, workload and cutoff unchanged.
-Native/model result remains pending; no new E2E or task PASS.
+MAIN0270 v007 is TERMINAL FAILED; do not restart unchanged. No live own NPU job.
+CPU8 and all four native N1 canaries passed. Actual model startup failed BEFORE
+worker/weights: SchedulerConfig rejects batched32768 < model33792 while chunking
+is disabled; model also warns disabled chunked prefill is unsupported.
+This is a preparation/configuration adaptation defect, NOT a paper no-go.
+Full installed engine configuration must be checked before the next device lease.
 
-025a v004 passed CPU8/all4 tiny canaries and native ACL import, then failed
-before model at top-level vocab_size.0263 v005 failed a MAIN test-count CLI edit.
-0268 v006 failed in Devices[] CPU because four roles pointed at unmountedv004.
-These are implementation/preparation defects, not paper no-go.0261/026f
-independently confirm exact own CIDs stopped-retained/Pid0/noExec/noOOM.
-Original sources/results remain immutable; no protected0-3 task was stopped.
+Independent0286 confirms own exact candidate80e292b9 stopped-retained/Pid0/noExec/
+noOOM, physical4-7 no processes and HBM2869/2867/2866/2861MiB.
+No protected0-3 task was stopped. Resource facts are snapshots, not future admission.
 
-Failure-yield rule: remove pending repair from the device lane; paper owner
-continues preparation while MAIN admits another genuinely ready paper.
-Three independent preparation assignments continue: SKVQ preprojection capture,
-KIVI raw64/whole adjudication, mixed002 collect-release-off-device-oracle split.
-Ready independent NPU successor count remains0, not gap-free utilization.
-See SERIAL_DEVICE_STAGE_QUEUE_20261010.json and
-SERIAL_FAILURE_YIELD_REPAIR_20261010.json. PortfolioOct12 07:00:25Z,
-physical4-7 only and32GiB HugeTLB SPENT unchanged.
+KIVI is removed from CURRENT and returns to off-device repair. SKVQ independent
+capture remains priority backup; mixed002 separates raw acquisition from long
+CPU adjudication. Ready independent NPU successor count is still0, so there is
+a real idle gap. Written rules and local regression PASS are not actual handoff.
+Normal push51099f5d4415dcc214d42e46ff8c10a412cd345f was independently read back
+by027c. This terminal update postdates that commit; save/push separately.
+See SERIAL_DEVICE_STAGE_QUEUE_20261010.json and SERIAL_FAILURE_YIELD_REPAIR_20261010.json.
+Fixed cutoffOct12 07:00:25Z, physical4-7 only, HugeTLB32GiB SPENT unchanged.
+No new formal end-to-end performance or task-accuracy result.
 
 ## Current execution — 2026-10-10 09:35 UTC
 

@@ -1,6 +1,6 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-10T10:10:53Z",
+  "updated_at_utc": "2026-10-10T10:19:46Z",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -10,46 +10,31 @@
     2,
     3
   ],
-  "current": {
-    "paper": "KIVI",
-    "stage": "input preflight, CPU8, all4N1, TP4 eager32768+2",
-    "state": "running",
-    "operation": "exec-0000000000000270",
-    "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-007/SOURCE_MANIFEST.json",
-      "bytes": 63991,
-      "sha256": "e20059758ee2408951066a265050d66653484174232bc118d69eca5c802f2581"
-    },
-    "software": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_FIRSTDECODE_SOFTWARE_MAIN_20261010_007.json",
-      "bytes": 528,
-      "sha256": "d94444c84f42d7cf71dc02f55c9bb7fd50e5583a71ce858fa58279864005f9fe"
-    },
-    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-007",
-    "owner": "MAIN",
-    "result": "pending; operation running is not computation or PASS"
-  },
+  "current": null,
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
   "preparation": [
     {
       "owner": "recurrent_lifecycle_ready_queue",
       "paper": "KIVI",
-      "stage": "v007-bound independent all4/raw64 and whole consumer",
-      "ready": false
+      "stage": "KIVI native SchedulerConfig/full engine-config preflight repair; delivered raw consumer007 waits for missing model raw",
+      "ready": false,
+      "state": "PREPARING_OFF_DEVICE"
     },
     {
       "owner": "kivi_model_successor",
       "paper": "KIVI",
       "stage": "mixed002: complete raw collection then release, followed by off-device long oracle",
-      "ready": false
+      "ready": false,
+      "state": "PREPARING_OFF_DEVICE"
     },
     {
       "owner": "sparse_attention_ready_queue",
       "paper": "SKVQ",
       "stage": "SKVQ current72h preprojection capture entry and dependency closure",
       "ready": false,
-      "restriction": "do not repeat measured Quest25/50 per-head failure or reopen expired Ada/SparQ scope"
+      "restriction": "do not repeat measured Quest25/50 per-head failure or reopen expired Ada/SparQ scope",
+      "state": "PREPARING_OFF_DEVICE"
     }
   ],
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
@@ -81,7 +66,7 @@
     },
     "release_verified_operation": "exec-0000000000000261"
   },
-  "idle_cause": null,
+  "idle_cause": "All exact own device stages terminated and release independently verified. No other-paper stage yet satisfies actual prerequisites. SKVQ capture is preparing; KIVI native configuration repair is off-device. No blocked paper retains a device reservation.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -95,6 +80,32 @@
       "cause": "MAIN relocation left four roles at unmounted v004 paths",
       "NPU_started": false,
       "release_operation": "exec-000000000000026f"
+    },
+    {
+      "paper": "KIVI",
+      "stage": "input preflight, CPU8, all4N1, TP4 eager32768+2",
+      "state": "failed_before_model_worker",
+      "operation": "exec-0000000000000270",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-007/SOURCE_MANIFEST.json",
+        "bytes": 63991,
+        "sha256": "e20059758ee2408951066a265050d66653484174232bc118d69eca5c802f2581"
+      },
+      "software": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_FIRSTDECODE_SOFTWARE_MAIN_20261010_007.json",
+        "bytes": 528,
+        "sha256": "d94444c84f42d7cf71dc02f55c9bb7fd50e5583a71ce858fa58279864005f9fe"
+      },
+      "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-007",
+      "owner": "MAIN",
+      "result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-007/RESULT.json",
+        "bytes": 9920,
+        "sha256": "5eb4e878ae0f08fbe1d34be424acd4b47f5f17af9b2c4183158a2806698fa9fb"
+      },
+      "cause": "Installed SchedulerConfig rejected max_num_batched_tokens32768 < max_model_len33792 with chunked prefill disabled. Model also warns disabling chunked prefill unsupported. Preparation/config adaptation failure, not algorithm no-go.",
+      "release_verified_operation": "exec-0000000000000286",
+      "own_container_stopped_retained": true
     }
   ]
 }

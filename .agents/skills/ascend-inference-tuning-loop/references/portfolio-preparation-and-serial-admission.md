@@ -147,6 +147,31 @@ Go reservation under the inherited256MiB soft AS limit; the changed Docker-only
 AS restoration passed MA0e69. Keep the parent plus CLI RSS and cgroup budget;
 do not make the whole controller unbounded or count that diagnostic as numerics.
 
+## Native configuration checks before device admission
+
+Parser success is not engine-configuration success. Exercise the installed
+configuration constructors with the actual checkpoint and intended flags
+before a device lease whenever that path is genuinely device-free. Include
+batch/model-length inequalities, model capabilities, chunking/prefix/mamba
+interactions, runtime role paths and mounted dependency imports. Keep a
+negative regression from the actual rejected configuration; mocked parsers
+and a large source-test count cannot promote the native gate.
+
+If a constructor genuinely requires hardware, separate and report the exact
+CPU-validated subset. Run the remaining native configuration check after the
+bounded canary but before weights or the long matrix; do not stub the platform
+or advertise complete no-card validation. A configuration adaptation is a
+new frozen experiment, and observed token scheduling must still match the
+original numerical coverage. Source reasoning alone does not prove one full
+prefill frame was executed.
+
+Keep long, device-independent numerical consumers out of the device lease.
+Seal complete raw capture and lifecycle indices, verify exact own stop-retain
+and resource release, then adjudicate immutable raw in a separately budgeted
+CPU stage. Another ready paper can use the serial NPU lane meanwhile. Preserve
+all raw and check the larger retention budget before acquisition. A local
+release-order regression is not an observed cross-paper handoff.
+
 ## Phase-DAG continuation and the serial device lane
 
 Queue executable STAGES, not whole papers. Each paper keeps one owner and its
