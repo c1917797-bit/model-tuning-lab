@@ -6,6 +6,17 @@ The frozen r13 experiment is **complete with a negative quality decision**, not 
 
 1. The user-supplied colleague report used HYPIC v0.8.5 `3ad0967`, Qwen3.5-27B, 2×910C/TP2, quality max-1024/c32, and 32k/1024/c16 performance. It is an external reference, not an r13 denominator.
 2. The closer 2026-09-06 NPU4–7 experiment used Qwen3.6-27B, 4×910B4/TP4, the same pinned image and HYPIC `3ad0967`. Its independently audited 18/18 units found performance TPOT -18.9911%, LongBench-v2 -0.2625 pp and GSM8K -0.1516 pp at max-1024/c32. Its source is `.agents/workstreams/WS-20260904-qwen38-dense-paper-to-ascend/decision-hypic-formal-npu4-7-tp4-b40960.json`; raw root is `/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906`. NPU4–7 are reference evidence only, never a resource for this task.
+   A source-level request-contract check further narrows that historical quality
+   claim: `hypic_quality_eval.py` sent ordinary chat `messages` and did not
+   attach `vllm_xargs.hypic_segment_ends`. Its recorded hot-path proof was for
+   the fixed-output performance ruler, not for each LongBench/GSM8K quality
+   request. The old quality scores therefore establish only the historical
+   natural-request deployment comparison, **not** explicit-segment in-path
+   quality preservation. In contrast, current `hotpath_quality_full.py` sends
+   `vllm_xargs.hypic_segment_ends=[boundary,prompt_tokens]` and joins scored
+   request IDs to boundary and worker-hot events. This is a workload/path
+   change in addition to source, output cap, lane and capacity changes; do not
+   use the old quality acceptance to overturn an explicit-segment 2048 result.
 3. r13 changed physical lane/CPU set, output cap to 2048, quality concurrency to c8, context/cache capacity, and HYPIC source to `c12060c`. Its dataset and evaluator SHA256 match the older Qwen3.6 historical contract, but its generation ruler does not. Baseline and candidate *within r13* are matched; old and new absolute quality scores are not interchangeable.
 4. Git ancestry proves `3ad0967` is the parent of `c12060c`, but the 9 changed files are not telemetry-only. Scheduler changes hold prefills during pending materialization, rebuild an evicted scheduler entry, and reset retry counts after success; runner adds request-level proof. This is a concrete source-drift hypothesis, not proof that these edits caused the quality drop.
 
