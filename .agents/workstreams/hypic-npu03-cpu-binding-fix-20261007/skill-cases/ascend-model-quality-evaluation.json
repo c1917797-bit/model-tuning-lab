@@ -98,6 +98,9 @@
     "r16_per_request_four_worker_proof_available": false,
     "r16_guard_samples_baseline_candidate": [999, 1078],
     "r16_exact_owned_release_valid": true,
+    "r16_regressions_newly_length_limited": [16, 30],
+    "r16_matched_predictions_unchanged": [321, 381],
+    "r16_simple_truncation_explains_all_score_flips": false,
     "r16_same_source_performance_admitted_after_quality_failure": false,
     "r16_repair_or_causal_root_proven": false,
     "main_skill_integrated": false
@@ -213,11 +216,11 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R16_ORIGINAL_SOURCE_FULL_TERMINAL_AUDIT_20261010.md",
-      "sha256": "e699a07ae337f41bb970a90035e5336a81fdf5155c2ff3cae4b253705b34ed6f"
+      "sha256": "6d298d99d062025907e332dbb4c60c6d47a4f1f782b08be980381103c65aa1cf"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/MODEL_QUALITY_R16_TERMINAL_SKILL_CASE_20261010.md",
-      "sha256": "baced7e2fee65215bf5be38220f7c0b9c238e2213e72a9e4da719b9bec107b51"
+      "sha256": "87dcd4c083ceda3862e859674266a5a9b4ea2024ad6f552ff6f696c1c6fd7f7c"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r16_original_source_full_terminal.py",

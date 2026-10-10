@@ -63,6 +63,15 @@ HYPIC numerical defect or as a complete historical-rule pass: GSM8K
 was not run under the r16 ruler. The r16 candidate also lacks full
 hot coverage, which independently limits in-path attribution.
 
+A read-only paired-row replay found 30 correct-to-incorrect flips:
+16 became newly length-limited on the candidate, while 14 did not.
+Across all rows, 26 changed from non-length to length and 14 in the
+reverse direction; 321/381 matched predictions were unchanged. This
+is a finish-reason association, not a causal proof. Simple truncation
+cannot account for all score flips; a future prospective comparison
+should change only the 2048→1024 output cap at fixed c8/source/service
+identity, then test concurrency separately if needed.
+
 r13 on later `c12060c` was also negative (230/381→219/381), while
 its matched performance was positive. r15's eight selected cases
 (13/24 original versus 10/24 later source) were diagnostic, not a

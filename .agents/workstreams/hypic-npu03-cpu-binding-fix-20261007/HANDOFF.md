@@ -103,8 +103,10 @@ outside this task.
 2. Keep r13 positive performance and r13/r16 negative quality in separate
    source/ruler identities. Preserve the completed profiler and parser
    failure; do not use them to assign RoPE/GDN/cache causality.
-3. A technical repair must start with a prospective one-variable device
-   diagnostic and same-identity control. Keep full Skill acceptance partial
+3. A technical repair must start with a prospective one-variable E2E
+   comparison: isolate max-2048 versus 1024 at fixed c8/source first,
+   then concurrency if needed; 16/30 r16 regressions became newly
+   length-limited, 14 did not. Keep full Skill acceptance partial
    until the default-ruler GSM8K/c32, deterministic canary and integration
    gates are actually met; do not relaunch old roots.
 4. Commit only a reviewed coherent checkpoint. Push only when authentication

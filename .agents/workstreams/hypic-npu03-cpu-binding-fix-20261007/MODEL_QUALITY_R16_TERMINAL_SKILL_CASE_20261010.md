@@ -25,6 +25,11 @@ are stricter, so preserve `REJECT_OR_QUALIFY` without treating it
 as a demonstrated causal numerical defect. The older overall
 acceptance also required GSM8K, absent from r16.
 
+Read-only paired-row replay shows 16/30 correctness regressions newly
+length-limited and 14/30 not newly length-limited. Treat this as a
+reason to isolate output cap in the next one-variable E2E comparison,
+not as proof that truncation or a GDN operator caused the regression.
+
 Reusable boundary: historical 1024/c32 success is not a matching
 baseline for 2048/c8; selected examples and r13 performance cannot
 promote this full negative pair. The Skill remains partial for its
