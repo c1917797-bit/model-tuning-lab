@@ -1,5 +1,54 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Preparation successor update — 2026-10-10 after AdaKV025 failure
+
+Actual KIVI v2 fix4/source-only materialization/full20 completed0086/0087/0088;
+new source39f0cd37b348d0cf91cc48deb940426b6a88e5b9d7ab7153c621baf1b8ade2c9.
+Whole0088 original is retained under lowbit/run-kivi-bootstrap-off-execution-receipts-backup-user72h-20261010-001;
+MAIN later operation lookup was not_found, but read the retained completed exit0
+original. No rerun, Torch, native or model authority is inferred.
+Actual AdaKV derived026-002 full12 passed008a exit0 after0089 failed before
+Python because an added /usr/bin/time wrapper was unavailable. Both originals
+retained under sparse/adakv-derived026-software-evidence-20261010-001.
+Result dc1124a9fae8ab5c43210911efb4ed549bfc0c97f29332f26ad673af2ba6bc7d.
+This consumer still refuses failed025; neither software PASS grants E1.
+
+CURRENT no device job; source preparations API-only after bounded CPU tests.
+NEXT actual AdaKV warm-PA first-fault diagnostic; BACKUP KIVI live FA-consumer.
+Fresh008b found4-7 baseline/no process, foreign0-3 unchanged, MemAvailable
+94049616kB; snapshot is not future admission. Ready NPU count remains0.
+HF IPv4 HEAD008c also timed out. Exact-name local dataset discovery is diagnostic,
+not permission to substitute an unverified historical file. All acceptance gates,
+first Oct10 07:00:25Z and total Oct12 07:00:25Z stay unchanged.
+
+
+## Current execution — 2026-10-10 AdaKV025 terminal (supersedes RUNNING below)
+
+Read ADAKV025_NATIVE_PA_FAILURE_20261010.json first. Whole0076 is FAILED
+exit1/728169ms. Four actual model weights and real register passed, but batch16
+eager warm BEFORE FULL capture failed in native paged_attention_mask_145
+(physical4/stream7/task183). First kernel fault is01:07:04Z; later sync exception
+is not itself the cause. RAW_PRE/FAILURE/native logs and whole original retained.
+Root cause UNKNOWN: no numerical/model/E1/task or paper-wide no-go.
+
+MAIN007d stopped only its exact failed candidate CID and retained it. Independent
+inspect confirms Pid0/noExec/OOMfalse; physical4–7 baseline/no processes. Protected
+foreign HYPIC0–3 unchanged. Original last PID predicate must not overwrite the
+earlier PA fault or be interpreted as proven external occupation.
+
+CURRENT no device job. NEXT actual warm-FA ABI/format/per-call diagnostic source
+owned by recurrent preparer; not ready for NPU. Independent KIVI v2 real4 then20
+software assigned CPU1, AdaKV derived026-002 real12 CPU2; MAIN CPU0. Shared prep
+CPU3/RAM<=1GiB plus unchanged reserve. No Torch/Docker/NPU in those software jobs.
+Ready NPU successor count0 is a real preparation/diagnosis gap, not utilization.
+
+Official input-v5 real60 tests passed0080; acquisition0083 failed at HuggingFace
+with Network is unreachable before any container. No complete input/task authority.
+Retain partial official Git artifacts; no unchanged retry or TLS bypass.
+First Oct10 07:00:25Z / total Oct12 07:00:25Z fixed; HugeTLB32GiB SPENT.
+No new throughput/TTFT/TPOT/task result. Goal ACTIVE/unmet; normal push auth pending.
+
+
 ## Current execution — 2026-10-10 01:03 UTC (supersedes earlier RUNNING/idle)
 
 Read ADAKV025_REGISTRATION_REPAIR_RUNNING_20261010.json first. New025 source

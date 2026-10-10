@@ -1,0 +1,164 @@
+{
+  "schema": "qwen36.causal-stage-checkpoint/v1",
+  "observed_utc": "2026-10-10 01:19:17 UTC",
+  "status": "ADAKV025_MODEL_FAILED_BEFORE_FIRST_REQUEST",
+  "goal": "ACTIVE_NOT_MET",
+  "previous_turn": "progress: real registration repair and four model loads; latest read discovered new PA failure",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/SOURCE_MANIFEST.json",
+    "sha256": "012edb318fc7fe0b6154ff5253b4dcf705fd77c0fa65c8e4f4aef1b3da4a8b60"
+  },
+  "original_terminal": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV025_MODEL0076_TERMINAL_ORIGINAL.json",
+    "bytes": 11705,
+    "sha256": "eeb81bc6173738fab08e5ccf0e02b044b1ff2edfdc9729666441afffab1b47d7"
+  },
+  "result": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-025-001/RESULT.json",
+    "sha256": "ce8ffdbcd1e785b05158e457f99bc0853233c394b2f7fac1a0d2ca2f9c265c67"
+  },
+  "first_fault": {
+    "utc": "2026-10-10T01:07:04.590294Z",
+    "kernel": "paged_attention_mask_145",
+    "physical": 4,
+    "stream": 7,
+    "task": 183,
+    "diagnostic_error": "MTE invalid GM address or cross-device access timeout",
+    "raw": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-025-001/candidate/graph-output/live/rank0-pid456-step0000-FAILURE.json",
+      "sha256": "017b3669e364c1bede508b6ea2ae88fdaa7e649945545ba97426562329a3c0e8"
+    },
+    "pre": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-025-001/candidate/graph-output/live/rank0-pid456-warm001-RAW_PRE.json",
+      "sha256": "a65791faa78b0f12082caf0b29dc57ebe4777dd4ce654690a23011ffdcd6d0ff"
+    },
+    "n": 16,
+    "capture_requested": false,
+    "scope": "eager warm before first FULL graph capture; synchronize site not causal operator proof",
+    "native_debug": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV025_NATIVE_LOGS_001/debug/plog/plog-456_20261010010349152.log",
+      "sha256": "7bf1d90015cf5df2fd5c4196052e392af1636e5e890c66807832a20fdc99179c"
+    }
+  },
+  "cause_class": "UNKNOWN_CAUSE",
+  "causal_confidence": "Native kernel identity and phase proved; offending input/layout/lifetime field not proved.",
+  "not_method_rejection": true,
+  "controller_terminal_secondary_context": "Whole0076 exit1/728169ms ended with PID/UDA/program predicate. Manual own-only fatal stop007d ran after earlier EngineCore/kernel failure. Do not interpret last predicate as evidence of external occupation or replace first PA fault.",
+  "cleanup": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-025-001/candidate/cleanup.json",
+    "sha256": "10232e555a783d06da5b9520174925c96885f6036d22865f0ae7eba76dc3d472",
+    "stopped": true,
+    "retained": true,
+    "deleted": false,
+    "errors": [],
+    "owned_cid": "c247f4c29792ca8b34d1e4396c0d87dfe9b28b23b4759942afd14c51e3041750",
+    "independent_inspect": "Pid0/noExec/OOMfalse; container exit137 from bounded stop, not OOM.",
+    "physical4_7": "no process, HBM baseline2868/2866/2865/2861MiB",
+    "protected0_3": "foreign3757221-24 remain; no stop or change",
+    "original_stop": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV025_FATAL007D_STOP_ORIGINAL.json",
+      "bytes": 4918,
+      "sha256": "874ea9717aa489a3ef8ed1b39a4398c63bbb5fc94a57d917f5c14948927f1ab2"
+    },
+    "log_copy_original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV025_LOGCOPY007E_RELEASE_ORIGINAL.json",
+      "bytes": 16969,
+      "sha256": "5da454434ab2e6351790238252438ecece35f30cd22eefbdf44f4262579d8781"
+    },
+    "log_copy_original_scope": "whole007e exit1 because final grep found no uppercase error in run log; preceding docker cp/inspect/SMI completed. Full log hashes and actual debug extraction independently verified0081/0082."
+  },
+  "decision": "DIAGNOSE",
+  "next": {
+    "owner": "recurrent_lifecycle_ready_queue",
+    "action": "source-bound real warm FA input/layout/format and per-writer/per-PA synchronization diagnostic; no math or threshold change, no new controller",
+    "prediction": "First sync failure plus before-call raw ABI will discriminate cache writer vs PA and input/layout cause.",
+    "not_ready_for_NPU": "new source and full software still pending"
+  },
+  "official_inputs": {
+    "source_sha256": "a2af993773fbe427920079a9f60b603f90055ecaf30ad6e3cb82b9e5ea8fd825",
+    "software60": {
+      "operation": "exec-0000000000000080",
+      "exit": 0,
+      "result_sha256": "aa273f679703a85a57fabe084cfdb557ffb3a846f1dd5d90755f8150e9e1b5c7"
+    },
+    "actual_once": {
+      "operation": "exec-0000000000000083",
+      "exit": 1,
+      "duration_ms": 38035,
+      "phase": "HF immutable dataset fetch",
+      "error": "URLError OSError101 Network is unreachable",
+      "container": null,
+      "NPU": false,
+      "result_sha256": "64065f99da6fcdadba0f6e02a62476927a88778dd92451febe56186f9e0677b9",
+      "whole_original": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/FINAL_INPUT_V5_0083_TERMINAL_ORIGINAL.json",
+        "sha256": "39d57161c317f07f281a01fec21acd91f550bbbd246a2bef7dcb6b2797e330cf",
+        "bytes": 13646
+      }
+    },
+    "scope": "no actual complete input authority or task result; fixed official Git blobs fetched earlier in this run are partial artifacts only"
+  },
+  "queue": {
+    "current_device": null,
+    "NPU_ready_count": 0,
+    "next": "AdaKV targeted actual-PA diagnostic, source pending",
+    "backup": "KIVI v2 actual4/software materialization/full20 assigned CPU1; no NPU permission",
+    "other": "AdaKV derived026-002 actual12 assignedCPU2; failed025 cannot be promoted",
+    "joint_prep": {
+      "CPU": [
+        0,
+        1,
+        2
+      ],
+      "RAM_max_bytes": 1073741824,
+      "reserve_unchanged": true
+    }
+  },
+  "unchanged": {
+    "first_cutoff": "2026-10-10T07:00:25Z",
+    "total_cutoff": "2026-10-12T07:00:25Z",
+    "HugeTLB_32GiB": "SPENT",
+    "tensor_gates": true,
+    "formal_output1024": true,
+    "formal_pairs": 3,
+    "final_tasks_max2048": true
+  },
+  "result_scope": {
+    "new_e2e": false,
+    "new_accuracy": false,
+    "accepted_nonhypic": false
+  },
+  "originals": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV025_MODEL0076_TERMINAL_ORIGINAL.json",
+      "bytes": 11705,
+      "sha256": "eeb81bc6173738fab08e5ccf0e02b044b1ff2edfdc9729666441afffab1b47d7"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV025_FATAL007D_STOP_ORIGINAL.json",
+      "bytes": 4918,
+      "sha256": "874ea9717aa489a3ef8ed1b39a4398c63bbb5fc94a57d917f5c14948927f1ab2"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV025_LOGCOPY007E_RELEASE_ORIGINAL.json",
+      "bytes": 16969,
+      "sha256": "5da454434ab2e6351790238252438ecece35f30cd22eefbdf44f4262579d8781"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/ADAKV025_KERNEL0082_ORIGINAL.json",
+      "bytes": 8253,
+      "sha256": "7d54019448d6effa432b16eaf859b274708a41cfcb1d187563100f4492425649"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/FINAL_INPUT_V5_0080_SOFTWARE60_ORIGINAL.json",
+      "bytes": 14072,
+      "sha256": "5741dcecce7b000bb9423d9e01d74e2af755fc5431e5723af0b45be7670d5fc6"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-c84-model-restart-and-E1-evidence-20261010-001/FINAL_INPUT_V5_0083_LAUNCH_ORIGINAL.json",
+      "bytes": 3227,
+      "sha256": "e024067e3ea4914fe42284373a503bf3ca247cbbfae1e5cd49839a9f340556a8"
+    }
+  ],
+  "timestamp_basis": "clock tool at checkpoint, not experiment execution timestamp"
+}
