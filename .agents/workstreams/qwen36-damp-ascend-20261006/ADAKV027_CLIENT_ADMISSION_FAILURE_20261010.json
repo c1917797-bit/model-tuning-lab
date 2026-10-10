@@ -1,0 +1,164 @@
+{
+  "schema": "paper-portfolio.causal-stage-record/v1",
+  "recorded_at_utc": "2026-10-10T03:20:00Z",
+  "paper": "AdaKV",
+  "status": "failed",
+  "decision": "REPAIR",
+  "failed_stage": "N2 client admission before first inference request",
+  "cause_class": "ADAPTATION_IMPLEMENTATION",
+  "causal_confidence": "source-and-original-traceback-proved",
+  "summary": "Parent-only model_contract facade does not propagate into the separately launched immutable025 lifecycle_client.py. It rejects the explicitly adapted author_reference SHA before run()/HTTP.",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv026-ast-startup-fence-overlay-v1-user72h-20261010/SOURCE_MANIFEST.json",
+    "sha256": "351a61658c93c8278700b7f3e3e57306f692cf3a6b4a220ad3496776ce9322a6"
+  },
+  "original_terminal": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-ast-startup-027-001/MAIN_ORIGINAL_00C6_TERMINAL_20261010.json",
+    "sha256": "6f8ad183a5264fb2ea627b4f92eb1815d12cdd4f841957f942d025a9da2e8629"
+  },
+  "operation": {
+    "peerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "id": "exec-00000000000000c6",
+    "exit_code": 1,
+    "duration_ms": 579512,
+    "cancelled": false,
+    "timed_out": false
+  },
+  "first_fault": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-ast-startup-027-001/candidate/client.stderr",
+    "sha256": "e25569e09fac07fdbe81fadf5875c4ac34f5622a4700bc066cd5270233c7f60d"
+  },
+  "result": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-ast-startup-027-001/RESULT.json",
+    "sha256": "10491ce1d208e87e0b1fb9a25f6a8b6abc05d9b553cd4edfd6760017ca766544"
+  },
+  "overlay_envelope": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-ast-startup-027-001/AST_STARTUP_OVERLAY_RESULT.json",
+    "sha256": "91281072580d8731308ef3abd0ea6946832575afad139af80711d4ce55f17ae1"
+  },
+  "causal_source": {
+    "facade": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv026-ast-startup-fence-overlay-v1-user72h-20261010/facade.py",
+      "sha256": "ba01262b87194cbcb608f90760816c4e2854761084823dcf854b4abee714c827"
+    },
+    "client": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/lifecycle_client.py",
+      "sha256": "6149d47db78df05a146320cbc8076452e3fe784f613bf0de3eac80074db05e29"
+    },
+    "model_contract": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/model_contract.py",
+      "sha256": "82243c277890aef7c24ea5eb5fbfa0658b314a39c01d7b2a7ddf34b2bf363e9f"
+    }
+  },
+  "actual_scope": {
+    "software_tests": 136,
+    "software_operation": "exec-00000000000000c3",
+    "source_materialization_files": 104,
+    "materialization_operation": "exec-00000000000000c4",
+    "cpu_actual_torch_reference_load": true,
+    "physical4_7_canary_and_registration": true,
+    "four_tp_workers_weight_load": true,
+    "server_logs_full_decode_capture_sizes": 16,
+    "health_http_200": true,
+    "first_lifecycle_request_sent": false,
+    "complete_numerical_gate": false,
+    "matched_performance": false,
+    "task_scores": false
+  },
+  "preserved_positive": {
+    "software": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv026-ast-startup-fence-overlay-v1-user72h-20261010/MAIN-full136-20261010-001.json",
+      "sha256": "fffadb152d2c1a8df73951eb9ec7de17ba8bfa5ff0829d5477b731ad9427b974"
+    },
+    "materialization": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-audit025-ast-startup-materialize-main-20261010-027-001/RESULT.json",
+      "sha256": "72f612323048c0b63f2f61c635e0f68faa9d6e9333e8897051128235b8d01363"
+    },
+    "CPU_reference": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-ast-startup-027-001/cpu-preflight/CPU_REFERENCE_LOAD.json",
+      "sha256": "cd7284fbf61b9319c86950a1c39d7765689a57a5e979e67684c9eceb50d7f845"
+    },
+    "N1": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-ast-startup-027-001/candidate/CANARY_N1.json",
+      "sha256": "407ec0c5b4189ec3ebc059dca433acca13a6426b37387990e65d35286d28b520"
+    }
+  },
+  "independent_release": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-ast-startup-027-001/MAIN_RELEASE_00C7_ORIGINAL_20261010.json",
+    "sha256": "9352e41f3abdc239fffe4ad383134b8df685a4ba5ccc75796e6b8c186e463215"
+  },
+  "cleanup": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-ast-startup-027-001/candidate/cleanup.json",
+    "sha256": "dcbaff1de5e4d7a9af772a10708be99357c85f11d9af978aee786b41ae9022ef"
+  },
+  "resource_state": {
+    "owned_cids_stopped_retained": [
+      "27c1a15a5b25ae655564334f892a4988a4aa87dea01a536d48d765c8cb008964",
+      "1c320a5cc9a7b5144546601d25e692de671ddfbf671d508794e9bf28b7520b32"
+    ],
+    "pid_zero": true,
+    "exec_ids_null": true,
+    "oom": false,
+    "physical4_7_no_compute_pids": true,
+    "physical4_7_hbm_mib": [
+      2868,
+      2866,
+      2865,
+      2861
+    ],
+    "protected0_3_pids": [
+      498470,
+      498471,
+      498472,
+      498473
+    ],
+    "protected_workload_mutated": false,
+    "ordinary_available_kib": 80512952,
+    "hugetlb_kib": 1975517184,
+    "hugetlb32gib_authorization": "SPENT"
+  },
+  "input_progress": {
+    "authority": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-shared-final-task-inputs-003-MAIN-user72h-tokenlist-005/INPUT_AUTHORITY.json",
+      "sha256": "99cb786502a09ecab1061b555d7425b74f15bd93cc90696c5f4bc2db24cb8fbc"
+    },
+    "status": "CPU_INPUTS_CONSUMED",
+    "LongBench_v2": 503,
+    "GSM8K": 1319,
+    "LongBench_v2_prompt_cap": 38912,
+    "LongBench_v2_head_tail_truncated": 376,
+    "scores": false
+  },
+  "next": {
+    "owner": "recurrent_lifecycle_ready_queue",
+    "repair": "New explicit source-bound lifecycle child bootstrap, preserving original client and all math/thresholds. Run actual admission with current materialization before model allocation in the same-image Devices=[] stage.",
+    "test_prediction": "The exact real lifecycle child accepts only current materialization and rejects wrong source/hash before any model/network call; original execution is delegated unchanged after admission.",
+    "refutation": "Any missing child facade, unintended source change, unauthenticated materialization or lost workload coverage rejects the repair.",
+    "next_performance_owner": "sparse_attention_ready_queue",
+    "independent_backup_owner": "lowbit_ready_queue",
+    "NPU_ready_successor_count": 0
+  },
+  "unchanged_gates": {
+    "performance_output_tokens": 1024,
+    "formal_pairs": 3,
+    "task_thinking": false,
+    "task_max_tokens": 2048,
+    "task_eos": "normal",
+    "per_task_max_loss_pp": 1,
+    "per_task_max_relative_loss_percent": 1,
+    "numeric_thresholds_unchanged": true,
+    "model_lifecycle_coverage_unchanged": true
+  },
+  "clocks": {
+    "first_repair_cutoff_utc": "2026-10-10T07:00:25Z",
+    "total_cutoff_utc": "2026-10-12T07:00:25Z",
+    "reset": false
+  },
+  "lesson": "A parent monkeypatch and successful guest source/N1 checks do not verify a later fresh subprocess. Before model admission, execute each real downstream CLI's source/materialization boundary with the actual immutable outputs. A correctly rejecting old guard is an integration failure, not paper no-go.",
+  "conclusion_scope": "Model startup/graph capture and reference loading progressed; complete N2, E2E, final task acceptance and portability remain unverified. Cold-start success does not prove the historical unsynchronized PA defect fixed.",
+  "git": {
+    "branch": "work/qwen36-damp-ascend-20261006",
+    "base": "98f284aa931d6664ad5b4d5a8cbf07250cd772d8",
+    "push_status": "known authentication blocker; not claimed"
+  }
+}

@@ -1,5 +1,33 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Current execution — 2026-10-10 03:20 UTC
+
+Read ADAKV027_CLIENT_ADMISSION_FAILURE_20261010.json first. Original00c6 is
+TERMINAL FAILED exit1/579512ms, not live. Same-image real Torch author loader,
+physical4–7 canary/register, all4 model weights,16 FULL graph captures and
+health200 completed; the original025 client then rejected the new author guard
+at materialization admission BEFORE its first request. Parent facade was not
+installed in that fresh child. This is a proved integration/preflight defect,
+not numerical failure or evidence against AdaKV. Preserve027 bytes and failure.
+
+Actual00c7 independently proves both owned CIDs stopped/retained,Pid0/noExec/
+noOOM;4–7 idle baseline/no process, protected0–3 workers498470–73 untouched.
+CURRENT no NPU job. NEXT recurrent owner prepares an explicit source-bound
+client child and real same-image pre-model admission, then affected full model
+N2. Sparse owner prepares matched E1; lowbit owner independent fused KIVI
+algorithm-specific source. No NPU-ready backup exists yet; idle cause is the
+client integration gap, not external occupation. Preparers remain API-only.
+
+Original00a7 official input production/independent consumption has COMPLETED:
+503 LongBench-v2 +1319 GSM8K. LongBench-v2 uses explicit38912 prompt cap and
+376 head-tail truncations, not full2M context. No task scores. Full136 software
+00c3 and104-file materialization00c4 passed;11 original execution receipts
+and the00c6/00c7 originals were saved and hash-readback verified externally.
+
+Repair Oct10 07:00:25Z and total Oct12 07:00:25Z unchanged. No new matched
+throughput/TTFT/TPOT or accuracy acceptance. HugeTLB32GiB SPENT;0–3 protected.
+Normal Git authentication remains unresolved; local checkpoint is not a push.
+
 ## Current execution — 2026-10-10 02:35 UTC
 
 Read ADAKV026_AST_COMPATIBILITY_PROVED_20261010.json. MAIN00b5 passed14
