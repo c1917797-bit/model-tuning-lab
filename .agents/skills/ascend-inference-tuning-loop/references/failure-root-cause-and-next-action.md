@@ -1,5 +1,25 @@
 # Root-cause classification must select the next experiment
 
+## Author AST fingerprints across interpreter versions
+
+When frozen official-source AST hashes fail, compare identical raw bytes under
+the actual host and image interpreters before changing author code or hashes.
+CPython3.12 adds empty type_params to definitions absent from CPython3.9 dumps;
+unchanged algorithms can therefore be rejected before numerical comparison.
+
+Only after exact-image evidence proves this difference, use a source-qualified
+projection of known empty schema extensions on a deep copy. Preserve original
+source-byte identity and stored hashes; compile the original tree. Reject changed
+bodies, nonempty generics, unknown fields and unsupported interpreter schemas.
+Test real author methods and negative mutations, not only a synthetic fixture.
+
+AdaKV026 recovery passed14 host regressions and same-image Devices=[] precheck:
+all4 native3.12 hashes differed and all4 projected hashes matched unchanged
+originals. This proves the reference serialization defect, not author arithmetic,
+real-Torch loading, model numerics, the earlier PA failure or performance.
+Carry the precheck into the real before-model entry and rerun the complete
+affected model gate. Exact sources/results remain in the workstream.
+
 ## Native enum transport versus semantic identity
 
 A source-pinned producer can correctly verify an enum member and then serialize

@@ -1,0 +1,132 @@
+{
+  "schema": "paper.causal-stage-record/v1",
+  "recorded_utc": "2026-10-10T02:33:10Z",
+  "paper": "AdaKV",
+  "stage": "Reference AST serializer compatibility",
+  "previous_fault_result": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-model-once-017-main-20261010-padiag-026-002/RESULT.json",
+    "sha256": "2917c0c7ffe6959a22818e3a477f5fe9a54dd87f80d89050ac68e2cd743af75b"
+  },
+  "classification": "REFERENCE_OR_TEST",
+  "causal_confidence": "proved for exact first-request AST hash rejection",
+  "cause": "CPython3.12 FunctionDef AST serialization adds empty type_params absent from frozen CPython3.9 hashes",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv026-author-ast-py39-projection-v1-user72h-20261010/SOURCE_MANIFEST.json",
+    "bytes": 7100,
+    "sha256": "4b95c028e2dcd54008f0e7ef2dcf180ccbcd79ebbfffb9061eca4e3481e10772"
+  },
+  "software": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-adakv026-ast14-software-20261010-001.json",
+    "sha256": "53870ca22daf68a8d6844937886a049819688c2e3a16b830ce869a0a19222392"
+  },
+  "same_image_precheck": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-adakv026-ast-sameimage-20261010-001/AST_PRECHECK.json",
+    "sha256": "0624cd89d0223b81b13b422a888a77669aee1041df28c402a2a831c9353c78c5",
+    "python": "3.12.13 (main, Aug  3 2026, 03:44:26) [GCC 11.4.0]",
+    "native_all4_differ": true,
+    "projected_all4_match": true,
+    "raw_author_bytes_unchanged": true,
+    "author_compiled_not_executed": true,
+    "real_torch_loader_executed": false
+  },
+  "actual_ops": {
+    "software": "exec-00000000000000b5",
+    "same_image": "exec-00000000000000b9",
+    "same_image_exit": 0,
+    "same_image_seconds": 0.645
+  },
+  "cleanup": {
+    "cid": "f0613531b3528bbd79340ef1be22ed6fefb7c0931737ecea4ceeae4ae72c8083",
+    "stopped_retained": true,
+    "Pid": 0,
+    "OOMKilled": false,
+    "exit_code": 0,
+    "devices": []
+  },
+  "transport": {
+    "initial_create_ack_timeout": true,
+    "existing_exact_container_discovered_before_retry": true,
+    "same_idempotency_key_recovered_original_operation": "exec-00000000000000b6",
+    "idempotent": true,
+    "no_duplicate_create": true
+  },
+  "unchanged": [
+    "original author36510 bytes and all4 stored hashes",
+    "original025/026 artifacts",
+    "NPU tensor thresholds",
+    "physical4-7 only and foreign0-3 protected",
+    "repair and total cutoffs"
+  ],
+  "scope": {
+    "algorithm_correctness": false,
+    "full_model_PASS": false,
+    "prior_unsynced_PA_fixed": false,
+    "performance": false,
+    "task_scores": false
+  },
+  "next": {
+    "action": "integrate strict AST overlay and startup-only synchronization recipe; actual real-Torch loader before model; complete affected regression and fresh N2",
+    "owner": "MAIN + recurrent_lifecycle_ready_queue",
+    "NPU_ready_count": 0
+  },
+  "current": {
+    "operation": "exec-00000000000000a7",
+    "last_verified_state": "running",
+    "stage": "official503/1319 input production and independent consumption",
+    "scoring": false
+  },
+  "cutoffs": {
+    "repair": 1791615625,
+    "total": 1791788425,
+    "reset": false
+  },
+  "archives": [
+    {
+      "sha256": "33058103cc2b187f9e1aed3bc225e470869d06324b369bd4bccad9d6d4228ece",
+      "bytes": 1651,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-adakv026-ast-sameimage-20261010-001/receipts/c103AstSoftwareInput.json"
+    },
+    {
+      "sha256": "d3c12e1ded8483d7d8f6b2bae0abc32347b4eff021a4d1bc963b3586ff356f04",
+      "bytes": 5178,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-adakv026-ast-sameimage-20261010-001/receipts/c103AstSoftwareTerminal.json"
+    },
+    {
+      "sha256": "8b43e9be74c63ae047460e97e5a12e802fac9557da86c5ca3b97453540161b7d",
+      "bytes": 4375,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-adakv026-ast-sameimage-20261010-001/receipts/c103AstCreateInput.json"
+    },
+    {
+      "sha256": "e82ee87945cb7129b887ce23084125979b67425299e50c689479d9f79d3fa95f",
+      "bytes": 794,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-adakv026-ast-sameimage-20261010-001/receipts/c103AstCreate.json"
+    },
+    {
+      "sha256": "88a868f18b294c070eb981e2c3c9aae893b170fa542cb67bcb290c0bd52109e9",
+      "bytes": 1547,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-adakv026-ast-sameimage-20261010-001/receipts/c103AstCreateOriginalRecovery.json"
+    },
+    {
+      "sha256": "5e7efc8896de205bdfef0539cbbfe2345c8ee6336dd13e4342cacd8eddd60cac",
+      "bytes": 20784,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-adakv026-ast-sameimage-20261010-001/receipts/c103AstInspectBefore.json"
+    },
+    {
+      "sha256": "7be631c0cdea602f4eaaae7d5e4237e2e19e4ae5e43dcd222f0d2db1ce187908",
+      "bytes": 2329,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-adakv026-ast-sameimage-20261010-001/receipts/c103AstGuest0.json"
+    },
+    {
+      "sha256": "60095a65de98aa9b2be3480a9246a9900331f77cafe03e47464fb092eafbacc2",
+      "bytes": 4258,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-adakv026-ast-sameimage-20261010-001/receipts/c103AstGuest1.json"
+    },
+    {
+      "sha256": "db55dd0a183705a14589d6b43b42bded78217d6aa3f9f3fcd9d37ab9beae8b81",
+      "bytes": 21485,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/MAIN-adakv026-ast-sameimage-20261010-001/receipts/c103AstInspectAfter.json"
+    }
+  ],
+  "archives_readback_verified": 9,
+  "git_push_authentication_unresolved": true
+}

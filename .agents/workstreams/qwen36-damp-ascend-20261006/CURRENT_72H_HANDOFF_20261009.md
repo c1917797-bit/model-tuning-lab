@@ -1,5 +1,27 @@
 # Current human-authorized 72h successor — 2026-10-09
 
+## Current execution — 2026-10-10 02:35 UTC
+
+Read ADAKV026_AST_COMPATIBILITY_PROVED_20261010.json. MAIN00b5 passed14
+regressions; same660 Devices=[] MAIN00b9 proved the Python3.12 empty type_params
+difference for all4 unchanged author methods. First-request AST rejection is a
+proved REFERENCE_OR_TEST defect, not an algorithm failure. Strict projection
+keeps author bytes/old hashes/original compiled tree; real-Torch loader and new
+N2 remain UNRUN. The earlier unsynchronized PA failure is NOT declared fixed.
+Exact precheck CIDf0613531b352 is exited0/Pid0/OOMfalse and retained, Devices=[].
+
+CURRENT00a7 official input producer/consumer is reverified live after transient
+routing loss; never restart on observation failure. Nine original structured
+AST receipts are saved/read back. NEXT recurrent owner closes AST+startup-only
+fence integration, complete regression, real-Torch before-model load and fresh
+N2. Sparse owner closes matched E1; KIVI remains independent source-only backup.
+No NPU-ready successor or new E2E/task acceptance is claimed. Preparers stay
+remote-exec CPU0; MAIN's subsecond CPU0/256MiB probes used a summed budget with
+unchanged reserve and did not overlap timed NPU work.
+
+Repair Oct10 07:00:25Z and total Oct12 07:00:25Z unchanged;0–3 protected,
+HugeTLB32GiB SPENT. Normal Git push authentication is still unresolved.
+
 ## Current execution — 2026-10-10 02:16 UTC
 
 Read ADAKV026_AST_FIRST_REQUEST_AND_INPUTV7_20261010.json first. AdaKV009e is now
