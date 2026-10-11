@@ -1188,5 +1188,15 @@
     "quality_decision": "REJECT_OR_QUALIFY",
     "report": "HYPIC_R19_REPAIRED_C32_LONGBENCH_TERMINAL_AUDIT_20261010.md"
   },
-  "next_action": "Both r19 GSM8K arms and the paired off-path audit are terminal and immutable: PASS at 3838/3957 to 3840/3957. R19 explicit-segment LongBench remains REJECT_OR_QUALIFY at 227/381 to 219/381; GSM8K cannot override it. Narrow the in-path early-response divergence and cache/scheduler hypotheses from existing evidence, then freeze one bounded prospective source-matched repair only if justified. Do not repeat validated historical performance, use NPU4-7, stop external work, or claim GitHub/main sync."
+  "r20_serial_diagnostic": {
+    "preregistration": "HYPIC_R20_SERIAL_DIAGNOSTIC_PREREGISTRATION_20261011.json",
+    "state": "frozen and offline-checked; no NPU phase launched",
+    "sample_indexes": [59, 82, 126],
+    "baseline_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r20-serial-baseline",
+    "candidate_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r20-serial-hypic",
+    "preregistration_sha256": "480b415761be8eeee69b1bd75479b60c37e75c642127034ec4b1728b00f76098",
+    "offline_checks": "Both arm --check modes, independent audit --check, three host-only tests, and 15-request historical payload-hash replay passed.",
+    "claim_boundary": "Diagnostic only, not a population quality pass or replacement for r19."
+  },
+  "next_action": "R19 LongBench remains REJECT_OR_QUALIFY (227/381 to 219/381); GSM8K off-path PASS cannot override it. R20 same-source serial three-sample diagnostic is frozen, offline-checked and not launched. Freshly prove direct chicaihong01/ma route, physical NPU0-3 and port 8223 actually idle, and exact new roots absent; then run baseline and independent audit/release before candidate. Preserve r13-r19 roots, never use NPU4-7 or stop external work, and do not claim GitHub/main sync."
 }

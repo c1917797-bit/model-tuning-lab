@@ -1,0 +1,84 @@
+{
+  "schema": "hypic-r20-serial-diagnostic-preregistration/v1",
+  "purpose": "Diagnose whether the r19 in-path answer/length divergence requires c32 inter-sample contention; not a population quality or adoption test.",
+  "selection": "Post-hoc r19 anchors fixed before r20 execution: one 3/3 cap-associated loss, one non-cap paired loss, and the nearest-length stable both-correct control.",
+  "sample_indexes_in_order": [59, 82, 126],
+  "sample_identity": [
+    {
+      "index": 59,
+      "sample_id": "66ebb0e55a08c7b9b35ddd6a",
+      "prompt_sha256": "7f8fe37b6b928123cf82ba839bd8c49a0677c5bf4a32446d990afb674c9e66ba",
+      "prompt_tokens": 20414,
+      "boundary": 16384,
+      "reference": "D"
+    },
+    {
+      "index": 82,
+      "sample_id": "66ebde0f5a08c7b9b35e1256",
+      "prompt_sha256": "d548a688123df4a96b91441e97ce1e410f894843dd06281297951a65bba361a0",
+      "prompt_tokens": 21827,
+      "boundary": 16384,
+      "reference": "D"
+    },
+    {
+      "index": 126,
+      "sample_id": "66f10d67821e116aacb268d0",
+      "prompt_sha256": "20d603babdf3b8a1b95c2dd05ac8670df1d3fe8b5b0466044367ca74566e4ce3",
+      "prompt_tokens": 20530,
+      "boundary": 16384,
+      "reference": "B"
+    }
+  ],
+  "model": "Qwen3.6-27B",
+  "model_index_sha256": "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b",
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "source_root": "/cache/cch/hypic_vllm_ascend-hotproof-20261008",
+  "source_commit": "4429e35177979c874bf053ab29789e4773f39b22",
+  "dataset_sha256": "cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a",
+  "evaluator_sha256": "9c8cf4204964220acd31adc8a3f73332374f123e1b8681a522b33eff33504cc0",
+  "arms": ["no-cache", "hypic-only"],
+  "treatment_switch": "VLLM_ASCEND_HYPIC_ENABLE=0 versus 1; evidence-file path is arm-specific",
+  "physical_npus": [0, 1, 2, 3],
+  "forbidden_npus": [4, 5, 6, 7],
+  "cpu_set": "112-191",
+  "port": 8223,
+  "tensor_parallel": 4,
+  "max_model_len": 41984,
+  "gpu_memory_utilization": 0.85,
+  "material_cache_max_mb": 3584,
+  "max_materialized_segments": 10,
+  "max_output_tokens": 2048,
+  "ignore_eos": false,
+  "temperature": 0,
+  "seed": 0,
+  "enable_thinking": false,
+  "explicit_segment_ends": true,
+  "warm_requests_per_sample": 2,
+  "repetitions_per_sample": 3,
+  "sample_concurrency": 1,
+  "arm_order": ["no-cache", "hypic-only"],
+  "arm_roots": {
+    "no-cache": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r20-serial-baseline",
+    "hypic-only": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r20-serial-hypic"
+  },
+  "file_sha256": {
+    "r20_serial_diagnostic.py": "c951390d0b4eb464566e3b2ad79c5f802e210e07f51804a92c3b93a7b5307c31",
+    "r20_serial_diagnostic_audit.py": "33e4ac87b46ae5e66d41fa8f85ff2101dd012181f182d36900a73d12d84c6aa1",
+    "test_r20_serial_diagnostic.py": "27fabf45cf9e54198cdec04daa5f72cb3f66bab3a47d9edb0a97a836bb2d5eb0"
+  },
+  "time_budget": {
+    "max_seconds_per_arm": 7200,
+    "launch_order": "baseline terminal and independently audited before candidate",
+    "timeout_rule": "An observation timeout is ambiguous; inspect the same controller and exact owned resources, never launch a duplicate."
+  },
+  "primary_observations": [
+    "per-sample correctness and finish reason in all three scored repetitions",
+    "identical response prefix length across arms and within arm",
+    "per-request four-worker hot proof joined to scored request ID",
+    "materialization, eviction and pending-gate events",
+    "continuous physical NPU0-3 isolation and exact owned release"
+  ],
+  "decision_rule": "Diagnostic only. If candidate differs with clean serial isolation and proved hot activation, c32 contention is not necessary for that observed difference. If serial outputs converge, c32 cache/scheduling remains a hypothesis. Incomplete/variable results are inconclusive. No three-sample outcome may overturn r19 or establish population quality preservation.",
+  "admission": "Before each arm: fresh direct chicaihong01/ma route, loaded host-development contract, physical NPU0-3 and port 8223 actually idle, exact new root absent, source/model hashes valid, prior arm terminal and released. Never touch foreign tasks or NPU4-7.",
+  "execution_state": "frozen-offline-preflight-pending"
+}
