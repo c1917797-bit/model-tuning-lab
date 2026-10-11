@@ -1,0 +1,131 @@
+{
+  "schema": "paper-portfolio.evidence-checkpoint/v1",
+  "recorded_at_utc": "2026-10-11T07:28:00Z",
+  "maintainer_rule_fix": {
+    "commit": "16eaf1806f2ea3bb810ea8f12027f418bf780047",
+    "pushed_verified_operation": "exec-00000000000006f9",
+    "scope": "Small concurrency contradiction correction; device-free prep parallel, MAIN device stages serial. Numerical/E2E/task gates and cutoff unchanged."
+  },
+  "writer011": {
+    "paper": "SKVQ",
+    "owner": "MAIN",
+    "operation": "exec-000000000000070e",
+    "state": "TERMINAL_WRITER011_FULL_WHOLE_PASS_NO_MODEL_ACCEPTANCE",
+    "whole_operation": "exec-0000000000000757",
+    "whole": {
+      "bytes": 2529,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-actual-writer-bridge-011-main-20261011-001/WRITER_WHOLE.json",
+      "sha256": "73cf2ee4d91c81f6cc1ad6acefcf645f69fb9be401105536b89fcd0c4cbc95fb"
+    },
+    "release_verified_operation": "exec-0000000000000752",
+    "cases": 128,
+    "axis_writer_calls": 256,
+    "only_physical_card": 4
+  },
+  "reader008": {
+    "paper": "SKVQ",
+    "owner": "MAIN",
+    "operation": "exec-00000000000007a2",
+    "state": "TERMINAL_CPU_MOUNT_ADAPTATION_FAILED_RELEASED",
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-008-main-20261011-001",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-008/SOURCE_MANIFEST.json",
+      "bytes": 91079,
+      "sha256": "7497b71753e8b3e4f75d2db1ca774014f67a537ac2da4ca06f9f010a9ec8d7b0"
+    },
+    "software_pass_operation": "exec-000000000000079f",
+    "software_tests": 83,
+    "fresh_admission_operation": "exec-000000000000079b",
+    "scope": "Replay writer011 whole; same-image CPU parity; physical4->logical0 canary and128 compiled-reader cases; exact owned release before independent CPU reference. Not model/E2E/task acceptance.",
+    "latest_actual": "07a2 terminal exit1/duration160254ms; reader CPU writer-whole replay cannot read existing host calibration_whole_ref_file omitted from guest mounts. Actual NPU observations empty. Exact owned CPU release verified07b9.",
+    "poll_only_existing_operation": false,
+    "classification": "ADAPTATION_IMPLEMENTATION",
+    "NPU_started": false,
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-008-main-20261011-001/HOST_RESULT.json",
+      "bytes": 40334,
+      "sha256": "fe8d6fc845d639e579113209fdacf2d3c84c5adbd4cfe4ee360afca789cd4266"
+    },
+    "release_operation": "exec-00000000000007b9"
+  },
+  "first_fault": {
+    "classification": "ADAPTATION_IMPLEMENTATION",
+    "confidence": "confirmed from host existence plus exact guest mount map and actual traceback",
+    "stderr": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-008-main-20261011-001/reader-cpu.stderr",
+      "bytes": 3872,
+      "sha256": "9261e2c853e01aaab723c6c49aa6de12dada01558710f2d09b8d3cfcbe0171d0"
+    },
+    "missing_descriptor": {
+      "bytes": 248,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ_CAL012_WHOLE_READER001_REF_20261011.json",
+      "sha256": "de740917569860ad3764107acfb8202ad09fb017703e5264082ebb6cc8e098a1"
+    },
+    "source_defect": "reader_host inherits calibration CPU mounts but not the immediately preceding writer CPU descriptor closure. Host file exists; no covering guest mount. No NPU tensor result was produced."
+  },
+  "release": {
+    "operation": "exec-00000000000007b9",
+    "cid": "3b33aa3a90b934ff4e7bf1aeda6d82e7714842180d5e8aa431f78c75e7429d26",
+    "running": false,
+    "pid": 0,
+    "exec_ids": null,
+    "oom_killed": false,
+    "devices": [],
+    "retained": true
+  },
+  "software": {
+    "operation": "exec-000000000000079f",
+    "tests": 83,
+    "source_refs": 303,
+    "original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN079F_COMPILED008_SOFTWARE_AGENTWEB_ORIGINAL.json",
+      "bytes": 10630,
+      "sha256": "13c02f1af5586cf50dd4aa7e2e31aff76ee8e0e23457a42dad4708e32ef8dfb1"
+    },
+    "scope": "source/software only; did not validate all transitive runtime evidence mounts"
+  },
+  "original_operation_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN07A2_READER008_FAILED_AGENTWEB_ORIGINAL.json",
+  "decision": "Repair minimal missing evidence mount closure in new009; preserve failed008 and valid writer011, no identical retry or paper rejection.",
+  "next": [
+    {
+      "paper": "SKVQ",
+      "stage": "Reader009 repair of actual omitted writer descriptor; model007 ready source must rebind valid successor. Existing writer011 whole remains valid.",
+      "ready": false,
+      "state": "PREPARING_ADAPTATION_REPAIR"
+    },
+    {
+      "paper": "SKVQ",
+      "stage": "matched006 single direct E2E successor from existing matched005 shell; repair long-decode scheduler/finish, source handoff and smoke. Current model007 only2 decode, not a1024 performance endpoint.",
+      "ready": false,
+      "state": "PREPARING_OFF_DEVICE"
+    },
+    {
+      "paper": "KIVI",
+      "stage": "actual32769 AV D32->D8 diagnostic: producer001 partial deployment only; source/host software pending. host-only002 frozen clock fix includes prelude in1800; exact real producer12 original required.",
+      "ready": false,
+      "state": "SOURCE_READY_NOT_NPU_READY"
+    }
+  ],
+  "goal_status": {
+    "accepted_non_hypic": false,
+    "new_e2e": false,
+    "new_task_accuracy": false,
+    "ready_device_successors": 0,
+    "zero_idle": false,
+    "portfolio_cutoff_epoch": 1791788425
+  },
+  "acceptance": {
+    "throughput_gain_percent": 10,
+    "performance_output_tokens": 1024,
+    "accuracy_no_thinking": true,
+    "accuracy_max_tokens": 2048,
+    "accuracy_normal_eos": true,
+    "accuracy_loss_conservative_max_pp": 1,
+    "accuracy_loss_conservative_max_relative_percent": 1
+  },
+  "scope_limits": [
+    "Writer128 Q2/Q4 actual NPU byte checks do not prove reader attention/model/E2E/task acceptance.",
+    "Reader008 failure is current adaptation defect, not SKVQ mechanism rejection.",
+    "KIVI scoped fixed1024 -72.2557% and diagnostic129 -71.8418% unchanged; D8 source is not measured success."
+  ]
+}

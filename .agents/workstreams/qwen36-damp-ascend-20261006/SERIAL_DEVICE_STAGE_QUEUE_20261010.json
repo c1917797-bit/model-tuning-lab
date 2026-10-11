@@ -1,6 +1,6 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11T06:33:00Z",
+  "updated_at_utc": "2026-10-11T07:28:00Z",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -13,59 +13,70 @@
   "current": {
     "paper": "SKVQ",
     "owner": "MAIN",
-    "operation": "exec-000000000000070e",
-    "state": "RUNNING_HOST_CHAIN_CPU_INPUT_COMPLETE_NPU_PENDING",
-    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-actual-writer-bridge-011-main-20261011-001",
+    "operation": "exec-00000000000007a2",
+    "state": "TERMINAL_CPU_MOUNT_ADAPTATION_FAILED_RELEASED",
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-008-main-20261011-001",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-actual-writer-bridge-v1-011/SOURCE_MANIFEST.json",
-      "bytes": 77276,
-      "sha256": "a16ca96969dd5d852493913fc3409fcd5c74ae2884d56cf5e12c255df5f7ae6f"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-008/SOURCE_MANIFEST.json",
+      "bytes": 91079,
+      "sha256": "7497b71753e8b3e4f75d2db1ca774014f67a537ac2da4ca06f9f010a9ec8d7b0"
     },
-    "software_pass_operation": "exec-0000000000000706",
-    "software_tests": 93,
-    "fresh_admission_operation": "exec-000000000000070a",
-    "scope": "CPU plan/scalar then physical4->logical0 canary/writer; stop own NPU before independent raw oracle; not model/E2E/task acceptance",
-    "latest_actual": "CPU_RESULT status ACTUAL_INPUT_PLAN_NUMPY24_COMPLETE, Devices_empty true; operation070e still running. No actual canary or numerical PASS verified.",
-    "poll_only_existing_operation": true
+    "software_pass_operation": "exec-000000000000079f",
+    "software_tests": 83,
+    "fresh_admission_operation": "exec-000000000000079b",
+    "scope": "Replay writer011 whole; same-image CPU parity; physical4->logical0 canary and128 compiled-reader cases; exact owned release before independent CPU reference. Not model/E2E/task acceptance.",
+    "latest_actual": "07a2 terminal exit1/duration160254ms; reader CPU writer-whole replay cannot read existing host calibration_whole_ref_file omitted from guest mounts. Actual NPU observations empty. Exact owned CPU release verified07b9.",
+    "poll_only_existing_operation": false,
+    "classification": "ADAPTATION_IMPLEMENTATION",
+    "NPU_started": false,
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-008-main-20261011-001/HOST_RESULT.json",
+      "bytes": 40334,
+      "sha256": "fe8d6fc845d639e579113209fdacf2d3c84c5adbd4cfe4ee360afca789cd4266"
+    },
+    "release_operation": "exec-00000000000007b9"
   },
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
   "preparation": [
     {
       "paper": "SKVQ",
-      "stage": "compiled007 frozen local71 PASS; installed79 and actual writer011 whole pending",
+      "stage": "Reader009 repair of actual omitted writer descriptor; model007 ready source must rebind valid successor. Existing writer011 whole remains valid.",
       "ready": false,
-      "state": "SOURCE_READY_NOT_NPU_READY"
+      "state": "PREPARING_ADAPTATION_REPAIR"
     },
     {
       "paper": "SKVQ",
-      "stage": "model006 bound compiled007, import namespace and same-invocation evidence handoff",
+      "stage": "matched006 single direct E2E successor from existing matched005 shell; repair long-decode scheduler/finish, source handoff and smoke. Current model007 only2 decode, not a1024 performance endpoint.",
       "ready": false,
       "state": "PREPARING_OFF_DEVICE"
     },
     {
       "paper": "KIVI",
-      "stage": "actual32769-frame AV tile D32->D8 diagnostic, no reduction-order or lifecycle changes; host closure in preparation",
+      "stage": "actual32769 AV D32->D8 diagnostic: producer001 partial deployment only; source/host software pending. host-only002 frozen clock fix includes prelude in1800; exact real producer12 original required.",
       "ready": false,
-      "state": "PREPARING_OFF_DEVICE"
+      "state": "SOURCE_READY_NOT_NPU_READY"
     }
   ],
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
   "no_new_model_performance_or_accuracy_pass": true,
   "previous": {
-    "paper": "KIVI",
+    "paper": "SKVQ",
     "owner": "MAIN",
-    "operation": "exec-0000000000000661",
-    "state": "RUNNING_CANDIDATE_COST129_003",
-    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-cost129-candidate-main-20261011-003",
-    "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-cost129-bootstrap-v1-003/SOURCE_MANIFEST.json",
-      "bytes": 161966,
-      "sha256": "806ff538b0d4cf196c818067fb30bb7fdce57697ba1296fcf5321fece79cd68c"
+    "operation": "exec-000000000000070e",
+    "state": "TERMINAL_WRITER011_FULL_WHOLE_PASS_NO_MODEL_ACCEPTANCE",
+    "whole_operation": "exec-0000000000000757",
+    "whole": {
+      "bytes": 2529,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-actual-writer-bridge-011-main-20261011-001/WRITER_WHOLE.json",
+      "sha256": "73cf2ee4d91c81f6cc1ad6acefcf645f69fb9be401105536b89fcd0c4cbc95fb"
     },
-    "scope": "diagnostic only; fresh controller checks required before device load"
+    "release_verified_operation": "exec-0000000000000752",
+    "cases": 128,
+    "axis_writer_calls": 256,
+    "only_physical_card": 4
   },
-  "idle_cause": "Current host070e has completed device-free input plan and remains running; NPU execution not yet verified. No independently qualified backup device stage; zero-idle not achieved.",
+  "idle_cause": "Reader008 CPU prerequisite failed before NPU. Correct transitive evidence descriptor mount closure off-device; KIVI D8 backup still lacks complete target installation/software. No executable ready device stage and no zero-idle claim.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -961,15 +972,15 @@
     "actual_cross_paper_batch": "UNRUN; only SKVQ010 release profile currently reviewed",
     "zero_idle_claim": false
   },
-  "current_off_device": "MAIN cost attribution + agent writer010 source repair",
-  "current_successor_rule": "Release verified06a7. Fix exact import root cause off-device; only newly frozen/reviewed/actually preflighted successor may run. Do not rerun009 or promote compiled006 local tests to NPU readiness.",
+  "current_off_device": "Reader009 minimal source-bound evidence-mount repair; matched006 E2E/lifecycle handoff preparation; MAIN completes KIVI D8 backup deployment and actual source checks.",
+  "current_successor_rule": "Do not rerun008. Retain valid writer011 full whole0757; fix missing mount in fresh source009, actual preflight then NPU gate. Admit ready KIVI D8 only after actual prerequisites; no fabricated readiness.",
   "scheduling_audit": {
-    "current": "No device stage running after069a failure",
-    "next": "writer010 fresh-process imports, exact preflight, MAIN single admission when qualified",
-    "backup": "KIVI guard hypothesis awaiting actual cost justification",
+    "current": "No running MAIN device stage;07a2 failed before NPU and own CPU released.",
+    "next": "Reader009 repair/preflight; model007 and matched006 need successor binding before actual admission.",
+    "backup": "KIVI D8 producer001 +host002 actual software and complete deployment still missing. Not counted ready.",
     "zero_idle_claim": false
   },
-  "current_preparation_checkpoint": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ_WRITER_IMPORT_FAILURE_KIVI_COST_20261011.json",
+  "current_preparation_checkpoint": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ_WRITER011_PASS_READER008_MOUNT_FAILURE_20261011.json",
   "maintainer_rule_fix": {
     "commit": "16eaf1806f2ea3bb810ea8f12027f418bf780047",
     "remote_verified_operation": "exec-00000000000006f9",

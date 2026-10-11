@@ -1,3 +1,12 @@
+## 2026-10-11 07:28 UTC — writer011 whole PASS; reader008 CPU mount failure, no NPU run
+
+- Read `SKVQ_WRITER011_PASS_READER008_MOUNT_FAILURE_20261011.json` and the current queue. Writer011 whole0757 independently PASS:128 Q2/Q4 cases,256 writer-axis calls; immutable result reused. This is not reader/model/E2E/task acceptance.
+- Reader008 actual installed83 tests/303-source closure PASS079f. Host07a2 terminal FAILED exit1/160254ms before NPU: writer-whole replay cannot read its248-byte calibration descriptor. Host file exists, exact guest mounts omit it. Confirmed adaptation mount-closure defect, not algorithm/numerical no-go. Do not rerun008.
+- Exact owned CPU container3b33aa3a90b934ff4e7bf1aeda6d82e7714842180d5e8aa431f78c75e7429d26 stopped retained; independent07b9 Pid0/noExec/noOOM/Devices[]. No active MAIN NPU stage. Reader009 source-bound repair and actual dependency-closure regression in preparation; no widened broad mount or relaxed gates.
+- NEXT: qualify reader repair, then real TP4 model smoke and prepared matched1024 successor. Parallel matched006 preparation closes long-decode lifecycle/handoff, with130-output smoke crossing first generated-token seal before full1024. KIVI actual32769 D8 backup remains partial installed/source-only, not device-ready. Zero ready device successors; no zero-idle claim.
+- Small maintainer-rule fix16eaf1806f2ea3bb810ea8f12027f418bf780047 already pushed and validated20 skills: parallel device-free prep, MAIN serial device stages; no acceptance or fixed-cutoff relaxation. Preserve source/failed artifacts and actual-byte references; do not rewrite successful predecessor histories.
+- Cutoff1791788425 unchanged; onlyphysical4–7 and protected0–3/external workloads. No accepted non-HYPIC technique, new E2E or task accuracy result. Older RUNNING sections below are historical.
+
 ## 2026-10-11 06:33 UTC — writer011 actual host running; installed93 and CPU input plan complete
 
 - CURRENT: poll only exec-000000000000070e. SKVQ writer011 actual installed93 PASS0706; fresh admission070a physical4–7 idle. Host root `/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-actual-writer-bridge-011-main-20261011-001`. Actual CPU_RESULT says ACTUAL_INPUT_PLAN_NUMPY24_COMPLETE and Devices_empty=true. No NPU numerical/canary PASS or new E2E/task acceptance verified yet. Do not duplicate launch.
