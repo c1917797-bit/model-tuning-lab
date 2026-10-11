@@ -44,17 +44,22 @@ complete predecessor replay in the actual consumer image/interpreter, with the
 exact read-only evidence mounts, before admitting the costly model stage.
 Compilation, CLI smoke and a helper fixture do not prove that replay seam.
 
-SKVQ021 actually completed its TP4 model capture, then its post-release
-independent consumer rejected the predecessor's safety-body identity before
-numerical comparison. Preserve this as an incomplete validation chain, not
-candidate numerical failure or paper no-gain. The failing predicate is observed;
-an interpreter-schema explanation remains a hypothesis until actual source and
-both interpreter outputs prove it. After a source-qualified consumer repair,
-reuse unchanged captured tensors only if their complete producer/source/
-ownership identities still qualify; otherwise recapture. Run the complete
-affected independent gate under a new result identity, not an unchanged
-expensive model retry. Exact evidence:
-`.agents/workstreams/qwen36-damp-ascend-20261006/SKVQ021_REFERENCE_REPLAY_FAILURE_LESSONS_20261011.json`.
+SKVQ021 completed its TP4 capture, then its post-release independent consumer
+rejected the predecessor's safety-body identity before numerical comparison.
+Actual host3.9 and same-image3.12 diagnosis proved that16 empty type_params
+alone explain both original and adapted safety AST mismatches; registered
+literal changes and original source identities still matched. This proves a
+reference serialization defect, not a completed recovery or numerical PASS.
+Keep the original failed run and its then-UNKNOWN causal record unchanged.
+
+Repair only the source-qualified consumer seam under a new result identity.
+Before reusing captured tensors, qualify the complete producer/source/ownership
+chain and run the full affected independent mathematics; otherwise recapture.
+Keep budgets, numerical thresholds and downstream gates unchanged. Exact
+diagnostic evidence and still-missing gates:
+`.agents/workstreams/qwen36-damp-ascend-20261006/SKVQ021_ACTUAL_AST_DIAGNOSIS_LESSONS_20261011.json`.
+The earlier `SKVQ021_REFERENCE_REPLAY_FAILURE_LESSONS_20261011.json` remains
+the historical observation before this root cause was proved.
 
 ## Native enum transport versus semantic identity
 
@@ -117,6 +122,13 @@ new experiment/output identity, owner, remaining budget and successor consumer.
 A top-level command exit and a child-suite exit must both be recorded. Partial
 passing cases do not make an incomplete aggregate pass. Missing evidence is
 explicitly missing, never reconstructed as an original receipt.
+
+When a failed parent never emitted its final result index or post-input identity
+check, child success cannot fill that gap implicitly. A recovery consumer must
+explicitly qualify the original successful-child receipts and perform the missing
+checks under a new recovery schema. Do not change the old FAILED/exit1 into PASS,
+fabricate its absent result, or route a recovered component through an unchanged
+legacy consumer that requires whole-parent success.
 
 ## Classification to action
 

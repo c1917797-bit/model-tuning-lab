@@ -1,0 +1,220 @@
+{
+  "schema": "paper-portfolio.causal-learning/v1",
+  "recorded_at_utc": "2026-10-11T17:57:00Z",
+  "portfolio_cutoff_epoch": 1791788425,
+  "decision": "REPAIR",
+  "classification": "REFERENCE_OR_TEST",
+  "causal_confidence": "PROVED_FOR_PREMATHEMATICAL_AST_PREDICATE",
+  "original_failed_operation": "exec-0000000000000a25",
+  "original_exit": 1,
+  "old_failed_result_unchanged": true,
+  "historical_unknown_record": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ021_REFERENCE_REPLAY_FAILURE_LESSONS_20261011.json",
+  "diagnosis": {
+    "host_operation": "exec-0000000000000a30",
+    "image_operation": "exec-0000000000000a33",
+    "host_original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN0A30_SKVQ013_ACTUAL_HOST_AST_ORIGINAL_20261011.json",
+      "size": 6548,
+      "sha256": "7bf00860340fbfa474e9eb2d559040f33a8cffa28608d029a029c4d4f8b7e8f2"
+    },
+    "image_original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN0A33_SKVQ013_ACTUAL_IMAGE_AST_ORIGINAL_20261011.json",
+      "size": 18175,
+      "sha256": "712e0040d60ad3107c060ef8a807e1520f4e7f39a9666e669772fc0ca09da99d"
+    },
+    "sources": {
+      "control": {
+        "bytes": 25396,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/MAIN_HOST.py",
+        "sha256": "05b1522a2ef0a9ccc7f203818378d064c910cb4fdab0f3c753fa44792cf962e4"
+      },
+      "reader_host": {
+        "bytes": 19592,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-013/reader_host.py",
+        "sha256": "9b034bd58b528198c4b968021cab58fedcc4b45dbf4f7cf26503089c307ec99a"
+      },
+      "schema": {
+        "bytes": 6351,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-013/writer_ast_compat.py",
+        "sha256": "2986f69a31c6ef27fc333a2dd02fcf9dbb570dc9f3e69d7f1ff950a62f1b57b4"
+      }
+    },
+    "host": {
+      "python": "3.9.9 (main, Dec  3 2025, 09:05:37) \n[GCC 10.3.1]",
+      "native_original": "ed8993c286547e4fd03ee8bcc0aeaeb707e569a36f3b118293628b19ab5320fb",
+      "native_adapted": "ceeaf84a8c26b10668b9208a5f86375b45e2fe7303d262272829c8773ba0ef30",
+      "projected_original": "ed8993c286547e4fd03ee8bcc0aeaeb707e569a36f3b118293628b19ab5320fb",
+      "projected_adapted": "ceeaf84a8c26b10668b9208a5f86375b45e2fe7303d262272829c8773ba0ef30",
+      "checks": {
+        "donor": true,
+        "literals": true,
+        "native_adapted": true,
+        "native_original": true,
+        "projected_adapted": true,
+        "projected_original": true
+      },
+      "empty_type_params_nodes": [
+        0,
+        0
+      ]
+    },
+    "image": {
+      "python": "3.12.13 (main, Aug  3 2026, 03:44:26) [GCC 11.4.0]",
+      "image_sha256": "660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+      "devices": [],
+      "native_original": "b5196fc44b2ae0b8bd0c167123cc5f5652a97c171089044b21e7ea5c9ee37556",
+      "native_adapted": "cb13955d9cf5d0f30a4175c5f2f160d6b5bd512f115f3af617bba112d35caf1f",
+      "projected_original": "ed8993c286547e4fd03ee8bcc0aeaeb707e569a36f3b118293628b19ab5320fb",
+      "projected_adapted": "ceeaf84a8c26b10668b9208a5f86375b45e2fe7303d262272829c8773ba0ef30",
+      "checks": {
+        "donor": true,
+        "literals": true,
+        "native_adapted": false,
+        "native_original": false,
+        "projected_adapted": true,
+        "projected_original": true
+      },
+      "empty_type_params_nodes": [
+        16,
+        16
+      ],
+      "own_container": {
+        "cid": "ba52b1961f14e232bfad50ca5a483cb27ade7d00d26b1b9be56f5c6811836d7f",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-11T17:47:28.65950715Z",
+          "FinishedAt": "2026-10-11T17:47:28.96183223Z"
+        },
+        "ExecIDs": null,
+        "retained": true
+      }
+    },
+    "scope": "Serialization identity only; neither full predecessor replay nor any of the128 independent mathematics is passed by this diagnostic."
+  },
+  "matched_source_software": {
+    "operation": "exec-0000000000000a34",
+    "exit": 0,
+    "wall_ms": 99048,
+    "receipt": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/SKVQ_MATCHED021_SOFTWARE_MAIN_20261011_001.json",
+      "size": 839,
+      "sha256": "2961693d7a090b88f7cdb40d2dd86d1f635f73135b43ff762b3f071ceb93bd9b"
+    },
+    "actual_full_byte_closure": {
+      "actual_source_rows": 382,
+      "actual_upstream_manifests": 5,
+      "all_actual_bytes_SHA_and_compile_checked": true,
+      "installed_paths_checked": true,
+      "local_mirrors_only": false
+    },
+    "actual_passed_tests": 153,
+    "actual_skipped_tests": 0,
+    "actual_source_files": 382,
+    "actual_tests": 153,
+    "elapsed_seconds": 98.88558765000198,
+    "graph_verified": false,
+    "installed_full_closure_checked": true,
+    "lifecycle_verified": false,
+    "model_ready": false,
+    "native_ready": false,
+    "no_Docker": true,
+    "no_NPU": true,
+    "no_Torch": true,
+    "performance_ready": false,
+    "schema": "skvq.B1-1024.software/v1",
+    "source_ref": {
+      "bytes": 123356,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-b1-matched1024-v1-021/SOURCE_MANIFEST.json",
+      "sha256": "145e5dc2ac6b439d7df98ac64e8f824a460f260ace7a1cc344a5d783370c7737"
+    },
+    "status": "SOFTWARE_ONLY",
+    "task_ready": false,
+    "whole_176": false,
+    "outer_stdout_truncated": true,
+    "full_original_suite_stderr_not_proved_retained": true,
+    "deployed_patch_count": 46
+  },
+  "capture_recovery": {
+    "existing_capture_operation": "exec-0000000000000a25",
+    "frames": 128,
+    "dimensions": "4 ranks x16 full-attention layers x2 actual decode executions; full1536 outputs each",
+    "original_result_field": null,
+    "original_independent_exit": 1,
+    "successful_prior_cli_refs": [
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-021-main-20261011-001/model-B1-CLI-1791739476021978880.json",
+        "size": 2905,
+        "sha256": "42422617427b997ea27105a97747f1861cb76f1f5286d597c6c4c03ff01cd6b5"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-021-main-20261011-001/model-N1-CLI-1791739073869483580.json",
+        "size": 2328,
+        "sha256": "dbf0c3d11b5932ccb043f84da84a4b7e1188f221b6f201d36ce27834b9229668"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-021-main-20261011-001/model-cpu-CLI-1791738897473455050.json",
+        "size": 2899,
+        "sha256": "0f95d3b3844346ce12c5bd60b405de3a59fcfa818fd91e753ccafbf08fcf795c"
+      }
+    ],
+    "next": "Explicit new source-bound recovery consumer with unchanged128 math, exact successful-child index, actual post-payload hash, ownedCPU resource and whole-result checks. Never rewrite failed HOST status or fabricate its absent result. Raw reuse subject to those qualifications; otherwise recapture.",
+    "recovery_source": "PREPARING_NOT_DEPLOYED",
+    "recovery_numeric_run": "UNRUN",
+    "recovery_whole": "UNRUN"
+  },
+  "scoped_success": {
+    "paper": "KIVI",
+    "actual_firstdecode_frames": 64,
+    "ranks": 4,
+    "full_attention_layers": 16,
+    "prompt_tokens": 32768,
+    "actual_read_length": 32769,
+    "eager": true,
+    "batch": 1,
+    "independent_operation": "exec-0000000000000a18",
+    "whole_operation": "exec-0000000000000a23",
+    "scope": "Firstdecode output mathematics only; not full long/mixed/GDN/graph or E2E/task acceptance."
+  },
+  "scheduling": {
+    "fresh_read_operations": [
+      "exec-0000000000000a35",
+      "exec-0000000000000a36"
+    ],
+    "at_epoch": 1791741405.6336133,
+    "physical4_7_compute": [],
+    "AICore_percent": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "HBM_MiB": [
+      2869,
+      2868,
+      2866,
+      2862
+    ],
+    "executable_device_successor_count": 0,
+    "idle_cause": "Recovery chain incomplete; not observed foreign NPU occupation.",
+    "zero_idle_claim": false
+  },
+  "unchanged_gates": [
+    "NPU numerical tolerances and complete affected coverage",
+    "physical4-7 only; protected0-3",
+    "CPU/RAM/disk/reserve admission and owned stop-retain",
+    "fixed1024 matched performance, profilingOFF, TTFT/TPOT",
+    "three formal matched pairs and final LBv2/GSM8K thinkingOFF/max2048/normalEOS",
+    "fixed portfolio cutoff; no renewal"
+  ],
+  "performance_pass": false,
+  "task_accuracy_pass": false,
+  "accepted_non_HYPIC_technique": false
+}

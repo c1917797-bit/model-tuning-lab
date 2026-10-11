@@ -1,7 +1,7 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11T17:37:01Z",
-  "latest_stage_decision": "KIVI full64 firstdecode independent/whole PASS only. SKVQ021 actual CPU/N1/TP4 capture exited0; terminal0a25 exit1 at independent predecessor safety replay before mathematics. Underlying cause UNKNOWN, DIAGNOSE then source-supported repair; no model numeric/performance/task acceptance.",
+  "updated_at_utc": "2026-10-11T17:57:00Z",
+  "latest_stage_decision": "SKVQ pre-mathematics safety AST mismatch proved REFERENCE_OR_TEST by actual host3.9 and same660 image3.12:16 empty type_params, both strict projected hashes exact. Original0a25 FAILED/resultnull unchanged; explicit new128 recovery consumer/whole pending. Matched021 actual153/382 closure PASS host only; no model/performance/task acceptance.",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -34,7 +34,10 @@
     },
     "model_ready": false,
     "performance_ready": false,
-    "next": "Preserve original0a25, diagnose actual reader013 safety identity across interpreters. Repair only proved seam, qualify unchanged raw reuse, then run complete independent gate. No unchanged model recapture.",
+    "next": "Source-qualified narrow AST consumer repair; explicitly qualify original successful CPU/N1/B1 receipts and missing post-payload hash, then complete unchanged128 independent mathematics and new whole. Never fabricate old HOST.result/PASS or repeat unchanged expensive model capture.",
+    "causal_confidence": "PROVED_PREMATHEMATICAL_REFERENCE_SERIALIZATION_DEFECT",
+    "active_device_lease": false,
+    "latest_decision_record": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ021_ACTUAL_AST_DIAGNOSIS_LESSONS_20261011.json",
     "exit_code": 1,
     "independent_numeric_pass": false,
     "own_release_verified": true,
@@ -47,23 +50,23 @@
     {
       "owner": "skvq_writer_next",
       "paper": "SKVQ",
-      "state": "MATCHED021_SOURCE_FROZEN_RUNTIME_PREDECESSOR_PENDING",
+      "state": "MATCHED021_HOST153_PASS_RECOVERY128_WHOLE_AND_IMAGE_PENDING",
       "ready": false,
-      "next_gate": "actual0a25 MODEL021 all128 independent -> whole -> matched153 zero-skip -> same-image source -> matched1024 smoke/full/screen, only paper delta"
+      "next_gate": "Explicit recovered model128+whole (originalFAILED remains) -> new matched consumer -> same-image source/entry -> preregistered matched1024 smoke/full/screen, only paper delta"
     },
     {
       "owner": "kivi_hotpath_prepare",
       "paper": "KIVI",
-      "state": "FIRSTDECODE_FULL64_WHOLE_PASSED_ONLY_LONG004_COST_AUDIT",
+      "state": "FIRSTDECODE_FULL64_PASS_LONG_COST_AND_TASK_DOMAIN_ASSEMBLY_PENDING",
       "ready": false,
       "next_gate": "Bind actual47307B first whole and original0a23/0a18 argv before long004; full640 must fit actual5310s cost without coverage/budget relaxation. Task independent40960 checker source prepared; real domain producer still missing."
     },
     {
       "owner": "skvq_numeric_path_review",
-      "paper": "KIVI",
-      "state": "KIVI_LONG004_PREDECESSOR_AND_ORACLE_COST_REVIEW",
+      "paper": "SKVQ",
+      "state": "COMPLETED_SOURCE_NUMERIC_CONSUMER_AND_COST_REVIEW_NO_TARGET_PASS",
       "ready": false,
-      "next_gate": "Audit actual outer first whole/argv binding and estimate full640 cost from raw64 measured1130.523s; no long NPU before cost-qualified packet."
+      "next_gate": "Completed audit handed to recovery owner; actual128 consumer remains UNRUN; fourCPU/8GiB/3600s including180cleanup unchanged"
     }
   ],
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
@@ -93,7 +96,7 @@
     "performance_ready": false,
     "independent_whole_pending": true
   },
-  "idle_cause": "Own SKVQ021 TP4 stopped17:24:51Z and independent CPU stopped17:27:56Z, independently confirmed0a2d. No executable backup: SKVQ predecessor replay failed before mathematics; matched021 installed32/46 source patches only; KIVI long cost/domain runtime incomplete. Fresh global admission required; no zero-idle claim.",
+  "idle_cause": "Fresh17:56:45UTC actual4-7 idle. Own old0a25 model released. No executable backup: recovered128 consumer/whole and exact-image matched admission remain pending; KIVI long cost and task-domain owner incomplete. No zero-idle claim.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -227,12 +230,13 @@
     }
   ],
   "latest_resource_snapshot": {
-    "operation": "exec-00000000000009f5",
-    "observed_at_utc": "2026-10-11T15:48:08Z",
-    "physical4_7": "idle; no process/AICore0; HBM2869/2866/2867/2861MiB",
+    "operation": "exec-0000000000000a35",
+    "observed_at_utc": "2026-10-11T17:56:45Z",
+    "physical4_7": "no process/AICore0; HBM2869/2868/2866/2862MiB",
     "protected0_3": "not touched",
     "ready_npu_backup": 0,
-    "zero_idle_claim": false
+    "zero_idle_claim": false,
+    "remaining_read_completion_operation": "exec-0000000000000a36"
   },
   "history_terminals": [
     {
