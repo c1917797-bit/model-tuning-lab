@@ -1,0 +1,135 @@
+{
+  "schema": "model-tuning-lab.recovery-whole-and-interface-main/v1",
+  "recorded_at_utc": "2026-10-11 19:29:34 UTC",
+  "prior_turn": "progress: maintainer rule/evidence checkpoint committed and actual recovery terminal inspected; remote publishing outcome remains unknown after timeout",
+  "current": {
+    "operation": "exec-0000000000000a4e",
+    "observed_state": "completed",
+    "terminal": true,
+    "command": {
+      "command": "/usr/bin/prlimit",
+      "args": [
+        "--cpu=900:900",
+        "--as=536870912:536870912",
+        "--",
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-reader013-control-ast-compat-v1-001/recovery_whole.py",
+        "--execute",
+        "--source-manifest-sha256",
+        "40ff14f26dfde8bd0a4c896d5192ca8751b2023d85a1c44e484288bbce963292",
+        "--root",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model021-readonly-recovery-main-20261011-001",
+        "--original-ref-json",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-SKVQ-CURRENT-HANDOFF-20261011-001/ORIGINAL0A25_RECOVERY001_REF_20261011.json",
+        "--recovery-original-ref-json",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-SKVQ-CURRENT-HANDOFF-20261011-001/RECOVERY0A3D_RECOVERY001_REF_20261011.json",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model021-readonly-recovery-main-20261011-001/RECOVERY_WHOLE.json"
+      ],
+      "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+      "timeout": 900,
+      "sync": false,
+      "mode": "job",
+      "maxOutputBytes": 16000,
+      "idempotencyKey": "main-skvq-model021-readonly-recovery-whole-20261011-001"
+    },
+    "new_whole_pass": false,
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model021-readonly-recovery-main-20261011-001/RECOVERY_WHOLE.json"
+  },
+  "recovery_terminal": {
+    "observed_actual_record_utc": "2026-10-11T19:14:40Z",
+    "fresh_old_handle": "not_found, not a reason to restart",
+    "original_archive": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN0A3D_SKVQ021_RECOVERY_ACTUAL_COMPLETED_20261011.json",
+      "bytes": 2805,
+      "sha256": "8703c78c77dfbf252bb7d736a3bb12a50aa0b5f14aa4cdf763ce2b18b871a3f6"
+    },
+    "archive_readback": true,
+    "descriptor": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-SKVQ-CURRENT-HANDOFF-20261011-001/RECOVERY0A3D_RECOVERY001_REF_20261011.json",
+    "host_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model021-readonly-recovery-main-20261011-001/RECOVERY_HOST.json",
+      "bytes": 40420,
+      "sha256": "cefe15f4a385e81ae7fc7d61f3f4ac6af932952e602f52bd514f76658c29efcb"
+    },
+    "status": "ACTUAL_RECOVERED_COMPONENT_PENDING_NEW_WHOLE",
+    "component_ref": {
+      "bytes": 175955,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model021-readonly-recovery-main-20261011-001/MODEL_COMPONENT.json",
+      "sha256": "c4caf636dd6722988f094ba28ac0af9aac984155e617a572517da77a3f6344b6"
+    },
+    "old0a25_unchanged": true
+  },
+  "prelaunch_orchestration_fault": "MAIN orchestration read used guessed args[11], which is existing result directory: fs error21; no execute reached. Corrected by exact '--original-ref-json' flag lookup and original SHA/bytes-qualified read. No source/maths/gate changed.",
+  "MAIN_install_interfaces": {
+    "source": {
+      "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-owner002-install-interface-20261011-001/SOURCE_MANIFEST.json",
+      "bytes": 3966,
+      "sha256": "cb3f48bd45042f7eb5d3a52cbe77837f61679d8a44eb6420f0c1d7f187f2b4f3"
+    },
+    "actual_result": {
+      "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-owner002-install-interface-20261011-001/MAIN_LOCAL_CLI_RESULT_20261011_1930.json",
+      "bytes": 12401,
+      "sha256": "8404214e7360a24d2db704b82d2f4f8f3ab4b85ad7e418563a364accf87dce73"
+    },
+    "tests": 9,
+    "passed": 9,
+    "skipped": 0,
+    "tool_chunk": "d0187c",
+    "elapsed_seconds": 0.48499999986961484,
+    "readset_verified": 648,
+    "whole_source_read_and_hashed": true,
+    "scope": "Actual registration/lifecycle functions with explicit source-qualified native fixtures; actual native backend, geometry and full install not proved."
+  },
+  "graph_originals": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/native009-public-aclgraph-input-source-v1-001/acl_graph.py",
+      "bytes": 15628,
+      "sha256": "27f3b838f223dec86113649625f65b158969a30ce0265271d6a3ce1403db2491"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/native009-public-dispatch-cache-source-v3-001/cudagraph_dispatcher.py",
+      "bytes": 15611,
+      "sha256": "2ac6454dd72c9f54d159b5a2da0fdd60a4f841970eb32dbf54129e3c6a8d0bfd"
+    }
+  ],
+  "graph_source_MAIN_read_mirror_hash": true,
+  "graph_lesson": "ACLGraph replay does not rerun runnable Python or copy persistent inputs; implement real pre-replay control binding and capture actual QKV.",
+  "parallel_next": [
+    "source-bound real graph provider integration",
+    "fixed writer scratch preserving original math",
+    "actual native owner binding prerequisites"
+  ],
+  "not_proved": [
+    "new recovery independent whole",
+    "actual native installation of owner002",
+    "formal C16 graph/lifecycle/full176",
+    "three matched E2E pairs",
+    "final LongBench-v2/GSM8K"
+  ],
+  "invariants": {
+    "cutoff": 1791788425,
+    "physical_npu": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected_npu": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "no_threshold_or_scope_reduction": true,
+    "no_duplicate_recovery": true
+  },
+  "remote_sync": {
+    "local_commit": "1e1b418015309244cf856c9dba85b9ba867d2810",
+    "push": "exec0a4a120s timeout",
+    "independent_remote_ref": "exec0a4c60s timeout",
+    "state": "UNKNOWN not confirmed"
+  },
+  "next": "Poll only actual0a4e; terminal proof determines original-source successor admission or bounded causal repair. No new target load while independent whole is running."
+}

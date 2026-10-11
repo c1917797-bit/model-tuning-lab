@@ -1,0 +1,140 @@
+{
+  "schema": "ascend.maintainer.whole-result-boundary-lessons/v1",
+  "observed_utc": "2026-10-11T19:35:23Z",
+  "work_branch": "work/qwen36-damp-ascend-20261006",
+  "original_cutoff_epoch": 1791788425,
+  "failed_stage": "SKVQ021 recovery independent whole",
+  "operation": "exec-0000000000000a4e",
+  "terminal": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN0A4E_RECOVERY_WHOLE_FAILED_ACTUAL_20261011.json",
+    "bytes": 4530,
+    "sha256": "30b4fc21ad094ca1f6cc1b901e06b1693f78710f0ad96d2dc1453ea1f178792c"
+  },
+  "observed": {
+    "exit_code": 1,
+    "duration_ms": 184722,
+    "timed_out": false,
+    "cancelled": false,
+    "stdout_empty": true,
+    "exception": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+    "first_fault_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-021/model_whole.py",
+      "bytes": 23075,
+      "sha256": "0ab7f4acc1deeb91497f90faa2a5cedca13ff4f4308be443739d9a43b8894453",
+      "line": 135
+    },
+    "expression": "json.loads(lines[-1])"
+  },
+  "actual_original_stdout_refs": [
+    {
+      "stage": "cpu",
+      "ref": {
+        "bytes": 1210,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-021-main-20261011-001/model-cpu.stdout",
+        "sha256": "38f5d595d1ba6ee35921fec1eae688c88a8044b75721af6e03c905e1e83a579d"
+      },
+      "main_read_and_independent_hash_match": true
+    },
+    {
+      "stage": "n1",
+      "ref": {
+        "bytes": 5345,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-021-main-20261011-001/model-N1.stdout",
+        "sha256": "a92eb4822a883a42ba08fd002cbf24d60237f9f4da1305a6a296c3c33a906d65"
+      },
+      "main_read_and_independent_hash_match": true
+    },
+    {
+      "stage": "model",
+      "ref": {
+        "bytes": 26318,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-021-main-20261011-001/model-B1.stdout",
+        "sha256": "96e776a43bf664e4ea802f6a91b62663ebe6b4541e1b2a4f4e45ac2d03fc9d3b"
+      },
+      "main_read_and_independent_hash_match": true
+    }
+  ],
+  "cpu_tail_observed": {
+    "ref_json_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-021-main-20261011-001/cpu/RESULT.json",
+    "result_ref_line_before_footer": true,
+    "footer": "DrvMngGetConsoleLogLevel failed. (g_conLogLevel=3)",
+    "last_line_not_json": true
+  },
+  "cause_class": "REFERENCE_OR_TEST",
+  "causal_confidence": "proved for first result-parser fault; later whole predicates not qualified",
+  "permitted_conclusion": "Current whole consumer rejects the original successful CPU child stdout footer; whole failed before complete acceptance. Not a candidate arithmetic or method rejection.",
+  "alternatives_not_claimed": [
+    "Driver footer root cause not diagnosed",
+    "Later predicates may still fail",
+    "All child source/results are not independently accepted by this failed whole"
+  ],
+  "decision": "REPAIR",
+  "changed_hypothesis": "Strict source-bound result Ref extraction must tolerate only qualified original log framing, not arbitrary JSON.",
+  "minimal_repair": "New separately frozen consumer identity/output namespace, exact registered Ref matching and source-qualified footer handling; preserve all unrelated original guards.",
+  "regression_required": [
+    "Real original cpu/n1/model stdout through actual consumer",
+    "Missing or conflicting/duplicate result Refs",
+    "Unknown trailing output",
+    "Wrong path/size/SHA",
+    "Nonzero/cancelled/timed-out child",
+    "Default-OFF and complete affected whole"
+  ],
+  "unchanged": [
+    "Candidate mathematics",
+    "128-frame and 196608-output coverage",
+    "Tensor threshold .005",
+    "Original failed 0a25/0a4e records",
+    "Physical NPU4-7 only; protect0-3",
+    "Fixed cutoff",
+    "Matched fixed1024 E2E; final normal-EOS/no-thinking/max2048 task gates"
+  ],
+  "successful_practices": [
+    "Reused immutable original NPU capture in distinct CPU recovery instead of recapture",
+    "MAIN reran nine actual source-qualified installation-interface tests; fixtures remain explicit",
+    "Read actual graph source to expose persistent-buffer and request-ingress requirement"
+  ],
+  "limits": {
+    "independent_recovery_whole_pass": false,
+    "new_npu_gate": false,
+    "graph_verified": false,
+    "lifecycle_verified": false,
+    "performance_gain_verified": false,
+    "task_accuracy_verified": false,
+    "new_non_hypic_accepted": false
+  },
+  "next_owner": "MAIN",
+  "next_action": "Repair and real-entry regressions before a new bounded independent whole; matched022 remains gated. Do not rerun unchanged consumer.",
+  "git_sync": {
+    "prior_local_commit": "1e1b418015309244cf856c9dba85b9ba867d2810",
+    "prior_push": "UNKNOWN after timeout; not claimed synchronized",
+    "latest_remote_query": {
+      "operation": "exec-0000000000000a53",
+      "exit_code": 0,
+      "remote_head": "0d53b2fe81eaaa3b90c810c84e147797711ed687",
+      "meaning": "Connectivity restored; prior commit not on this branch at query. Normal push pending this checkpoint."
+    }
+  },
+  "raw_outputs_in_git": false,
+  "credential_included": false,
+  "validation": {
+    "mst": {
+      "operation": "exec-0000000000000a50",
+      "exit_code": 0,
+      "skills": 20
+    },
+    "diff_check": {
+      "operation": "exec-0000000000000a51",
+      "exit_code": 0
+    },
+    "evidence_json": {
+      "operation": "exec-0000000000000a52",
+      "exit_code": 0
+    },
+    "local_skill_structural": {
+      "exit_code": 0,
+      "chunk": "acf313"
+    },
+    "remote_readback_exact": true,
+    "raw_terminal_archive_exact": true
+  }
+}

@@ -1,5 +1,31 @@
 # Root-cause classification must select the next experiment
 
+## Structured results are not necessarily the last stdout line
+
+A successful child can print its exact result Ref and then emit a driver exit
+message. Before a long independent whole replay, check the original completed
+stdout and its byte/SHA identity against the actual producer/consumer contract.
+A last-line JSON parser can reject a valid child before mathematics. Preserve
+that failed whole and fix only the proved result-transport boundary under a new
+source/output identity; never relabel the original terminal or claim later gates.
+
+Do not repair this by accepting arbitrary JSON from a log. Bind exactly one
+result Ref to the registered path, size and SHA, verify its immutable contents
+and the exact completed child command/exit/ownership, and qualify any permitted
+prefix/footer against observed source-bound logs. Reject conflicting or duplicate
+Refs, unknown trailing output, wrong hashes and failed children. Regression must
+exercise the original affected stdout and these negative cases through the real
+consumer, not only a clean fixture. The complete affected whole remains required.
+
+SKVQ021 recovery whole exec0a4e failed at original model_whole.py:135 after
+184.722s, exit1, not timeout: the original CPU stdout contains its RESULT Ref
+followed by DrvMngGetConsoleLogLevel failed. (g_conLogLevel=3). MAIN read all three
+successful-child stdout originals and independently matched their byte/SHA Refs.
+This proves a result-parser defect; it proves neither candidate arithmetic failure
+nor whole success. No new whole/performance/task PASS follows. Exact raw/source
+references and the bounded next diagnostic/repair are in
+`.agents/workstreams/qwen36-damp-ascend-20261006/WHOLE_STDOUT_BOUNDARY_LESSONS_20261011.json`.
+
 ## Formal graph contracts and honest readiness
 
 Freeze the final common configuration before extending a pilot. Read the actual

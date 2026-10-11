@@ -1,3 +1,26 @@
+## 2026-10-11 19:35:23 UTC — whole FAILED; original CPU stdout framing defect proved
+
+- Supersedes the preceding note's status ambiguity: exec0a4e is terminal exit1 after184.722s, not timed out/cancelled, with JSONDecodeError at original model_whole.py:135. It did NOT publish independent recovery whole PASS. No active handle remains for this stage; do not poll/restart it.
+- MAIN read and independently byte/SHA-matched cpu, n1 and model successful-child stdout originals. First CPU result Ref is followed by the exact driver footer DrvMngGetConsoleLogLevel failed. (g_conLogLevel=3); unchanged last-line JSON parsing is the proved first defect. Later whole predicates remain unqualified; this is REFERENCE_OR_TEST, not candidate arithmetic/method rejection.
+- Actual full0a4e terminal archived outside Git with byte/SHA. WHOLE_STDOUT_BOUNDARY_LESSONS_20261011.json binds actual source/first fault/log identities and unchanged gates. Maintenance skill adds strict registered result-Ref/log-framing recovery, with real original/negative tests required. No arbitrary-JSON scanning or old-failure relabeling.
+- Next is one new source/output consumer repair and real-entry regressions, followed by the complete affected900 whole if admitted. Existing recovered component alone does not admit matched022. Candidate math/coverage/tolerance/cutoff and final formal protocol unchanged.
+- Three preparers were informed of actual failure. Their fixture/graph-source preparation is not NPU/model acceptance. No new E2E throughput or task-accuracy result. Fresh remote query exec0a53 succeeded and showed0d53b2f (before local1e1b4180); connectivity restored, normal push awaits this checkpoint. MST20, diff/JSON and local skill structural checks passed; installed documentation/raw archive readback matched exactly.
+
+## 2026-10-11 19:29:34 UTC — independent recovery whole launched; MAIN interface9 passed
+
+- Actual recovery terminal was preserved from the previously observed full AWMCP record:2805B/SHA8703c78c77dfbf252bb7d736a3bb12a50aa0b5f14aa4cdf763ce2b18b871a3f6. Fresh old0a3d lookup is not_found; no restart. RECOVERY_HOST/component/post-payload/release originals remain; whole must qualify their complete chain.
+- Existing exec0a4e now completed; exact900-second independent whole argv consumes strict old0a25 and actual0a3d descriptors. Do not restart or promote component before actual whole. Evidence:RECOVERY_WHOLE_AND_INTERFACE_MAIN_20261011.json.
+- MAIN reviewed full newKIVI9 test/fixture/CLI source, checked actual bytes, and independently ran exact cold CLI:9 PASS/0skip;12401B/SHA8404214e7360a24d2db704b82d2f4f8f3ab4b85ad7e418563a364accf87dce73. Explicit fixture boundary retained; not native geometry/backend/model.
+- Both actual graph originals read and local mirror hashed to expected identities; supplied writer. ACL replay does not execute Python runnable, so provider/kernel need real pre-replay input/controls seam. Numeric fixed-scratch and native owner binding preparations remain parallel, with no target launch permission.
+- Remote checkpoint1e1b4180 synchronization UNKNOWN after actual push/ref-query timeouts; no repeat publishing. Original cutoff/physical4-7/protected0-3/full acceptance unchanged. No new accepted performance or task result. This record and note await next validated checkpoint.
+
+## 2026-10-11 19:22:48 UTC — maintainer checkpoint committed; remote synchronization UNKNOWN
+
+- MAIN-owned8 lesson/evidence/handoff files committed as1e1b418015309244cf856c9dba85b9ba867d2810. Actual MST20/JSON6/skill structural/diff checks passed; selected owned files clean immediately after commit. Unrelated dirty source/history excluded.
+- Normal push exec0a4a reached120002ms timeout, exitCode null, no stdout/stderr. Independent ls-remote exec0a4c reached60002ms timeout. Neither proves remote rejection or success. Do not claim pushed, force-push or blindly repeat an unknown publishing outcome; first acquire a fresh remote ref when connectivity is available.
+- Local upstream before remote-check was0d53b2fe81eaaa3b90c810c84e147797711ed687. New commit is locally recoverable; remote confirmation pending. This note is an uncommitted durable status update for the next checkpoint.
+- Actual recovery0a3d completed exit0; independent new whole remains next. No new accepted performance/task result.
+
 ## 2026-10-11 19:19 UTC — requested maintainer lessons checkpoint; recovery terminal now observed
 
 - User requested success/failure persistence. Durable loop reference now includes formal graph-domain/peak-memory/real-installation boundaries; existing first-fault, causal repair, smoke-first and executable NEXT rules remain. MST actual exec0a41 exit0:20 skills; skill-creator local structural validation exit0. Neither is algorithm acceptance.
