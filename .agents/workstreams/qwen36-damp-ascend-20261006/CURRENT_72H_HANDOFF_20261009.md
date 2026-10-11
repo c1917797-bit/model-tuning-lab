@@ -1,3 +1,10 @@
+## 2026-10-11 02:20:04 UTC — live KIVI all4 compute; SKVQ calibration007 source repair deployed
+
+- Read CAL007_SOURCE_AND_LIVE_CANDIDATE_20261011.json. Original05e5 still RUNNING; actual05ec confirms physical4-7 worker PIDs2132624/25/26/27 and exact owned TP4. No candidate/pair/task result. Keep source006 frozen and poll the original only; after actual terminal verify exact release then independent arm/pair.
+- Cal007 MAIN-reviewed/deployed20 exact files; actual05ee verifies194 source bytes/AST. This is NOTinstalled53, actual128fits or NPU evidence. Derived001 installed28/full256 independent raw/whole remains prerequisite. Keep old014 FAILED original. No NPU recapture.
+- Current seven-CPU budget including reserve precludes unreviewed CPU fitting/oracle overlap; source-only preparation continues. After release admit highest-value actual ready stage before report prose. No READY_NPU backup is claimed.
+- Mixed012 full capture5400 cost and42-task/full1822x2arm time remain unresolved scheduling risks; source delivery never proves deadline fit. Fixed1791788425 cutoff and protected0-3/external/SPENT32GiB stay unchanged.
+
 ## 2026-10-11 02:03:23 UTC — KIVI dense fixed1024 arm consumed; candidate05e5 dispatched
 
 - Read KIVI_DENSE_ARM_AND_CANDIDATE_20261011.json. Actual05d6 completed0/1196.665s; independent05e3 consumed complete dense arm, 1024tokens, TTFT4.9195345s/TPOT0.59001658s/throughput1.68280739tok/s. Scope B1 eager32768/1024 one measured request, not formalC16/full1024numerical/tasks or a speedup.

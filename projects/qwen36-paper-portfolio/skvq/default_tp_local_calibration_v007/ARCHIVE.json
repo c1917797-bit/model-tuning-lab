@@ -1,0 +1,21 @@
+{
+  "schema": "paper-portfolio.source-archive/v1",
+  "created_utc": "2026-10-11 02:20:04 UTC",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-007/SOURCE_MANIFEST.json",
+    "bytes": 58698,
+    "sha256": "92f92c3d028a5af47f1fd52e521a3b8cd644ad0af39707dc7992ec4c9191a63b"
+  },
+  "declared_runtime_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-007",
+  "archive_is_execution_authority": false,
+  "byte_exact": true,
+  "source_gate_original": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_CAL007_SOURCE_05EE_ORIGINAL_20261011.json",
+    "bytes": 7846,
+    "sha256": "1aea4d697e5e5e379c61482e50cb83bc0e7d12f0250280d265115c209e9a006a"
+  },
+  "installed_software53_pass": false,
+  "calibration_executed": false,
+  "NPU_pass": false,
+  "scope": "Source-only recovery of capture014 failed whole -> derived001 -> calibration007. Exact runtime source bytes, no old failure upgraded. Actual calibration and downstream gates remain pending."
+}

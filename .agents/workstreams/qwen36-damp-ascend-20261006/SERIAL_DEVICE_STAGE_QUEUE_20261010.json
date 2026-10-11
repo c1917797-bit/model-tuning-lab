@@ -1,6 +1,6 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11 02:03:23 UTC",
+  "updated_at_utc": "2026-10-11 02:20:04 UTC",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -27,7 +27,7 @@
       "sha256": "613c7def7a2d98b4117fb5dd2a15dcd734c8c8c8376b51113644716a865b2799"
     },
     "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-candidate-main-20261011-006",
-    "scope": "TP4 candidate diagnostic32768/1024 B1;05e7 observes Devices[]preflight, no NPU/model/performance result yet"
+    "scope": "TP4 candidate diagnostic32768/1024 B1; actual05ec sees four VLLMWorker_TP on physical4-7, all4 canary passed; original05e5 remains live. No completed candidate/pair."
   },
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
@@ -43,7 +43,7 @@
     {
       "paper": "SKVQ",
       "owner": "sparse_attention_ready_queue",
-      "stage": "derived001 reviewed/deployed/17byte-exact05e6; installed173/software28/full256/derivedwhole pending; cal007 local53 ready for MAIN review, downstream old006 dependency repair active",
+      "stage": "derived001 deployed, full256/software28 pending; cal007 MAIN reviewed/deployed and actual194 source bytes/AST passed05ee, installed53/128fits pending; writer003/reader002/model003/B1coldhot003 local preparation not admitted",
       "state": "PREPARING_OFF_DEVICE",
       "ready": false
     },
@@ -81,7 +81,7 @@
       "sha256": "613c7def7a2d98b4117fb5dd2a15dcd734c8c8c8376b51113644716a865b2799"
     },
     "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-dense-main-20261011-006",
-    "scope": "TP4 dense diagnostic32768/1024 B1; actual NPU stage and pair result pending",
+    "scope": "TP4 dense diagnostic32768/1024 B1 actually completed and independently consumed05e3; candidate/pair pending.",
     "terminal_exit_code": 0,
     "arm_consumer_operation": "exec-00000000000005e3",
     "release_operation": "exec-00000000000005e4",
@@ -93,7 +93,7 @@
       "wall_seconds": 608.5069529699394
     }
   },
-  "idle_cause": "Candidate same-image preflight after dense release; necessary gate, not simultaneous NPU compute or a zero-idle claim.",
+  "idle_cause": "Current candidate compute observed on4-7 at02:12:59; no continuous zero-idle claim.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",

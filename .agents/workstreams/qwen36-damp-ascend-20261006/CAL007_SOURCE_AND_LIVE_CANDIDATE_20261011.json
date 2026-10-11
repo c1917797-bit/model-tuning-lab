@@ -1,0 +1,130 @@
+{
+  "schema": "paper-portfolio.cal007-source-and-live-candidate/v1",
+  "utc": "2026-10-11 02:20:04 UTC",
+  "goal_alignment": {
+    "long": "non-HYPIC transferable Ascend plugin >=10% matched fixed1024 E2E with final task loss within latest contract",
+    "medium": "faithful mechanism -> independent NPU -> matched model -> tasks",
+    "short": "Finish original KIVI05e5; prepare independent SKVQ source/consumer edges without interfering with timed run"
+  },
+  "prior_turn": "VERIFIED_WAIT original05e5 confirmed running",
+  "portfolio_cutoff_epoch": 1791788425,
+  "current": {
+    "paper": "KIVI",
+    "operation": "exec-00000000000005e5",
+    "state": "RUNNING",
+    "observed_compute_utc": "2026-10-11T02:12:59.271121+00:00",
+    "physical_cards": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "worker_PIDs": [
+      2132624,
+      2132625,
+      2132626,
+      2132627
+    ],
+    "container": "6c505b40f5233a5c88c723060147198aaf02d305745465e097b065f74edf40cc",
+    "original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_CANDIDATE_05EC_INSPECT_ORIGINAL_20261011.json",
+      "bytes": 18913,
+      "sha256": "782ee41e1f0b3fed2bf5cfc57129d066dcb2d5cbfb499c617818c8c39d0843c9"
+    },
+    "measured_result_pending": true
+  },
+  "backup": {
+    "paper": "SKVQ",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-007/SOURCE_MANIFEST.json",
+      "bytes": 58698,
+      "sha256": "92f92c3d028a5af47f1fd52e521a3b8cd644ad0af39707dc7992ec4c9191a63b"
+    },
+    "source_files": 20,
+    "source_closure": 194,
+    "actual_source_gate_operation": "exec-00000000000005ee",
+    "actual_source_gate_original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_CAL007_SOURCE_05EE_ORIGINAL_20261011.json",
+      "bytes": 7846,
+      "sha256": "1aea4d697e5e5e379c61482e50cb83bc0e7d12f0250280d265115c209e9a006a"
+    },
+    "source_byte_AST_pass": true,
+    "software53_pass": false,
+    "derived001_full256_pass": false,
+    "calibration128_pass": false,
+    "NPU_ready": false,
+    "repair": "Explicit new derived001 whole and clean isolated reader, exact original014/derived input mount closure; original05a7 failure is immutable. Author grouping function and independent math unchanged.",
+    "next_exact_software": {
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "2",
+        "/usr/bin/prlimit",
+        "--cpu=120:120",
+        "--as=268435456:268435456",
+        "--",
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-007/software_check.py",
+        "--source-manifest-sha256",
+        "92f92c3d028a5af47f1fd52e521a3b8cd644ad0af39707dc7992ec4c9191a63b"
+      ],
+      "tests": 53,
+      "status": "UNRUN installed194/full53; local full53 UNRUN",
+      "wall_seconds": 110,
+      "CPU": 1
+    },
+    "predecessor": {
+      "status": "UNRUN_INSTALLED; LOCAL_28_PASS_ONLY",
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "2",
+        "/usr/bin/prlimit",
+        "--cpu=120:120",
+        "--as=536870912:536870912",
+        "--",
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-001/software_check.py",
+        "--execute",
+        "--source-manifest-sha256",
+        "33e04ccc8ab5898aa148ec847c31f0d4eceb3d6099c8bb701b1c9d082e5f2aed",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-001/MAIN_SOFTWARE_28.json"
+      ],
+      "wall_seconds": 110,
+      "CPU": 1,
+      "AS_bytes": 536870912,
+      "no_Docker": true,
+      "no_Torch": true,
+      "no_NPU": true,
+      "cpuset": "MAIN must read effective affinity; CPU2 is request only, not already admitted."
+    },
+    "CPU_queue": "7 effective CPUs are committed to current candidate incl unchanged reserve; do not overlap new fitting/oracle workloads."
+  },
+  "scheduling_risks": {
+    "mixed012": "Prepared source not admitted. 16 ordered phases each include1024 long holder; derive actual frame cost and validate5400 cap against evidence before launch. B1 extrapolation is not a hard lower bound.",
+    "final_tasks": "42-domain total diagnostic storage and full1822x2arm time still not closed; no acceptance or on-time success promised.",
+    "ready_device_successors": 0
+  },
+  "conclusions": {
+    "new_paired_performance": false,
+    "new_task_accuracy": false,
+    "goal_achieved": false,
+    "paper_no_go": false
+  },
+  "boundaries": {
+    "protected_cards": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "external_untouched": true,
+    "hugetlb32GiB": "SPENT",
+    "live006_source_changed": false
+  }
+}
