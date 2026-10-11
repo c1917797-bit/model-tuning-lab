@@ -1,3 +1,10 @@
+## 2026-10-11 02:03:23 UTC — KIVI dense fixed1024 arm consumed; candidate05e5 dispatched
+
+- Read KIVI_DENSE_ARM_AND_CANDIDATE_20261011.json. Actual05d6 completed0/1196.665s; independent05e3 consumed complete dense arm, 1024tokens, TTFT4.9195345s/TPOT0.59001658s/throughput1.68280739tok/s. Scope B1 eager32768/1024 one measured request, not formalC16/full1024numerical/tasks or a speedup.
+- Exact own stop-retain/Pid0/noExec/noOOM and all4-7 release independently verified05e4. Original05e5 is current candidate006, frozen same-source/same-config.05e7 observes its Devices[]preflight; actual NPU compute not yet observed. Poll only05e5. Terminal -> own release -> independent arm -> pair with actual arm-consumer originals. No duplicate model launch.
+- SKVQ derived001 source reviewed/deployed and byte/AST checked05e6; source archive is recoverable, not target173/software28/full256raw or whole PASS. Long CPU checks remain queued under unchanged joint budget. Cal007 local53 prepared; downstream old006 hardpin/whole handoffs are actively repaired off-device before NPU admission.
+- Full mixed012/C16 and42-task domain successors remain preparation, not acceptance. No independent READY_NPU backup or zero-idle claim. Maintain fixed cutoff1791788425, protected0-3/external untouched and SPENT32GiB cap.
+
 ## 2026-10-11T01:38:46Z — KIVI actual full64 independent/whole accepted; B1screen006 real same-image75 passed, dense dispatched
 
 - Read KIVI_FULL64_PASS_B1_DIAGNOSTIC_20261011.json. Original05c8 completed0 in1482.016s; all64 FA writer/full1536-output comparisons on unchanged actual018 passed. Exact CPU release05d1; independent whole05d2 completed0. Scope is B1 eager32768+2 firstdecode only, not full1024/mixed/C16/graph/task acceptance. No new NPU recapture.

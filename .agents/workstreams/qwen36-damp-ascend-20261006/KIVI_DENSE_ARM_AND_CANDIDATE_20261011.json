@@ -1,0 +1,175 @@
+{
+  "schema": "paper-validation-stage/v1",
+  "recorded_utc": "2026-10-11 02:03:23 UTC",
+  "goal_status": "ACTIVE_UNMET",
+  "previous_goal_turn": "VERIFIED_WAIT: original05d6 running confirmed by actual operation_get; not an experiment result",
+  "direction": {
+    "long": "Non-HYPIC deployable Ascend plugin with >=10% matched E2E benefit and final task allowance",
+    "medium": "mechanism -> independent realNPU correctness -> same-stack paired1024 -> formal3pairs -> final tasks",
+    "short": "finish KIVI diagnostic candidate and independent pair; prepare full/mixed/task and independent SKVQ gaps"
+  },
+  "scope": "Diagnostic B1 eager, input32768, fixed1024, one measured request after two 2-token warmups. Not finalC16, full1024 numerical or task acceptance.",
+  "dense": {
+    "operation": "exec-00000000000005d6",
+    "exit_code": 0,
+    "duration_ms": 1196665,
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-dense-main-20261011-006/RESULT.json",
+      "bytes": 2734639,
+      "sha256": "b557f78641de57782f1331e10cf375df09ea89533f7dae6d741c65d648257e95"
+    },
+    "independent_operation": "exec-00000000000005e3",
+    "independent_arm": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-dense-main-20261011-006/ARM_CONSUMED.json",
+      "bytes": 170473,
+      "sha256": "f2e5d70c60edf21f318e5c25361e2d8a1a8c2e9c02ce855d3d7f69d8e86a1366"
+    },
+    "metrics": {
+      "mean_tpot_seconds": 0.5900165815835405,
+      "mean_ttft_seconds": 4.9195344999898225,
+      "output_tokens_per_second": 1.682807394397326,
+      "wall_seconds": 608.5069529699394
+    },
+    "full1024_numerically_verified": false,
+    "performance_accepted": false,
+    "release_operation": "exec-00000000000005e4",
+    "exact_device_cid": "105a3a49c19b3f3f292b35aa1c94b61b0978f575d4fff898d388cd1f32ae51ab",
+    "device_stopped_utc": "2026-10-11T01:57:24.9054443Z"
+  },
+  "candidate": {
+    "operation": "exec-00000000000005e5",
+    "state": "RUNNING",
+    "command": {
+      "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-matched1024-bootstrap-v1-006/host_run.py",
+        "--execute",
+        "--source",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-matched1024-bootstrap-v1-006/SOURCE_MANIFEST.json",
+        "--source-sha256",
+        "613c7def7a2d98b4117fb5dd2a15dcd734c8c8c8376b51113644716a865b2799",
+        "--component",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json",
+        "--component-sha256",
+        "d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d",
+        "--model-manifest",
+        "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+        "--model-manifest-sha256",
+        "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+        "--software",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-software-main-20261011-006/cpu-preflight/SOFTWARE.json",
+        "--software-sha256",
+        "6c1e3725a3308d93601c32d2fa55f5baa5fdfa7b64e3919fa0f4c7699f1368bd",
+        "--software-stage",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-software-main-20261011-006/RESULT.json",
+        "--software-stage-sha256",
+        "9b3504086ae32e76f9f5766985b5c851d1b5cc1132d7811d8b9e1b24f60eb8eb",
+        "--arm",
+        "candidate",
+        "--predecessor-arguments",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_RAW024_05C8_CONSUMER_ARGUMENTS_20261011.json",
+        "--predecessor-arguments-sha256",
+        "ebd897c1650383c510e9e3c7a75f14068c742ed425298e83244803bdd6455e0f",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-candidate-main-20261011-006",
+        "--port",
+        "8250"
+      ],
+      "phase_seconds": 5400,
+      "currently_admitted": false
+    },
+    "last_observation_operation": "exec-00000000000005e7",
+    "last_observation_utc": "2026-10-11T02:01:05.166901Z",
+    "last_phase": "Devices[] preflight with actual ownCID; physical4-7 idle at sample",
+    "NPU_running_not_yet_observed": true
+  },
+  "backup": {
+    "paper": "SKVQ",
+    "gate": "derived014 independent CPU raw reconsumption",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-001/SOURCE_MANIFEST.json",
+      "bytes": 50965,
+      "sha256": "33e04ccc8ab5898aa148ec847c31f0d4eceb3d6099c8bb701b1c9d082e5f2aed"
+    },
+    "runtime_source_files": 17,
+    "source_byte_ast_operation": "exec-00000000000005e6",
+    "canonical_archive": "projects/qwen36-paper-portfolio/skvq/capture014_offline_consumer_v001",
+    "full_source173_and_software28": "UNRUN_INSTALLED",
+    "full256_raw_and_derived_whole": "UNRUN",
+    "cal007": "source prepared/local53 PASS reported by preparer, MAIN review pending",
+    "writer_reader_model": "proved oldcal006 identity/whole handoff incompatibility; thin repair in independent prep, no runtime result"
+  },
+  "decision": {
+    "code": "CONTINUE_CURRENT_AND_PREPARE_NEXT",
+    "primary_reason": "actual dense whole+independent arm succeeded, no candidate speed result yet",
+    "no_broader_success_or_failure": true,
+    "unchanged_cutoff_epoch": 1791788425,
+    "not_renewed_deadline": true
+  },
+  "lessons": [
+    "Distinguish a completed fixed1024 baseline arm from a matched performance gain; candidate and independent pair are mandatory.",
+    "Preserve exact original success and actual own release before successor dispatch; count observed compute separately from CPU preflight and launch ACK.",
+    "For reusable real NPU captures, repair a proved stable-identity timestamp comparison offline while preserving full raw mathematical coverage and old FAILED envelope; do not recapture unchanged data.",
+    "Downstream stages must consume the actual new source/schema: an old calibration hardpin is a preparation defect to repair before taking cards, not a paper rejection."
+  ],
+  "original_refs": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_B1_DENSE_05D6_ORIGINAL_20261011.json",
+      "bytes": 4333,
+      "sha256": "d356836e763981447522eb0863c39ed7225de424f8943725e15f78a8379fe57a"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_B1_DENSE_05D6_CONSUMER_ARGUMENTS_20261011.json",
+      "bytes": 2330,
+      "sha256": "c041d2b83d55a1d481fd0919b5612f8a325716bb47970d0856b0d6af0c9898af"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_B1_DENSE_CONSUME_05E3_ORIGINAL_20261011.json",
+      "bytes": 2912,
+      "sha256": "c84d37176dbb2db09063735610b62c366d8c8f914ec0e8178ba8de859eab4c0b"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_B1_DENSE_RELEASE_05E4_ORIGINAL_20261011.json",
+      "bytes": 12798,
+      "sha256": "e59bd9e56f16241e4356b4a58827ff33d0050b8209cfd8cdac0ea339d7f13b69"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_B1_CANDIDATE_05E5_LAUNCH_ORIGINAL_20261011.json",
+      "bytes": 1412,
+      "sha256": "df41b3266b52e06d82133f34c79071e5b625b8b66243c6ad410908f1b83b80d7"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ_DERIVED001_SOURCE_05E6_ORIGINAL_20261011.json",
+      "bytes": 6995,
+      "sha256": "2348b9c6e0e091d5444cdcade005d0b5d943a7e78b3d14cee60ba25faf6a6685"
+    }
+  ],
+  "safety": {
+    "physical_devices": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "external_workloads_untouched": true,
+    "hugepage32_cap": "SPENT",
+    "live_source006_unchanged": true,
+    "CPU_joint_overlap_not_admitted": true
+  },
+  "remaining": [
+    "candidate006 terminal/independent arm/pair",
+    "complete NPU mixed/lifecycle/long-decode domain",
+    "formal3 paired performance rounds",
+    "LongBench-v2/GSM8K all frozen cases no-thinking2048 normalEOS",
+    "portability verification and final delivery"
+  ]
+}
