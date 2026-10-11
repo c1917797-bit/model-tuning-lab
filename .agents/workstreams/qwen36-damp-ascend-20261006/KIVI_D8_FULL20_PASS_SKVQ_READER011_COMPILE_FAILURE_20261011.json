@@ -1,0 +1,103 @@
+{
+  "schema": "paper-portfolio.stage-decision/v1",
+  "observed_at_utc": "2026-10-11 09:39:31 UTC",
+  "portfolio_cutoff_epoch": 1791788425,
+  "decision": "ADVANCE_KIVI_TO_MODEL_PREPARATION_REPAIR_SKVQ_COMPILATION",
+  "physical_devices": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "device_stage_concurrency": 1,
+  "kivi": {
+    "operation": "exec-000000000000089b",
+    "exit_code": 0,
+    "host_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-owned-main-D8-FULL20-001/RESULT.json",
+      "bytes": 373844,
+      "sha256": "b69a528f46a365eb9d376851c65e47aff60112444e4999a77ec5b58b094e3325"
+    },
+    "whole_operation": "exec-000000000000089f",
+    "whole": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-D8-FULL20-001/RESULT.json",
+      "bytes": 2117,
+      "sha256": "19e0e9c70e4a044cc2cb33eec34c79008fb2469ecad3d1a706a057c9fba6fb24"
+    },
+    "coverage": {
+      "frames": 20,
+      "output_rows": 24,
+      "kernel_calls": 60,
+      "bits": [
+        2,
+        4
+      ],
+      "dtypes": [
+        "float16",
+        "bfloat16"
+      ],
+      "read_lengths": [
+        128,
+        129,
+        130,
+        256,
+        257
+      ],
+      "writer_fork_reuse": true,
+      "all8_pool_fields": true
+    },
+    "independent": {
+      "all24_output_rows_bitwise_Ascend_boundary_reference": true,
+      "official_split_max_relative_rms": 0.003284108772782965,
+      "unchanged_threshold": 0.005
+    },
+    "release_audit_operation": "exec-000000000000089e",
+    "exact_cpu_cid": "f50f4415ccf0e7a3ed1a6daf4ebc55620a5229972aea0c2dbfec3afa07a0e40e",
+    "exact_npu_cid": "11d081b21da285567aa48121448218b742ecc9a15f9bfe81dd36dd724e5bc027",
+    "only_physical": 4,
+    "scope": "Controlled eager packed3 component; not full176/model/graph/performance/task acceptance",
+    "next": "Bind actual whole to D8 B1 plugin, final95 + actual same-image prerequisite, then source-qualified candidate fixed1024 and dual-source dense comparison"
+  },
+  "skvq": {
+    "operation": "exec-000000000000087e",
+    "exit_code": 1,
+    "classification": "ADAPTATION_IMPLEMENTATION",
+    "causal_confidence": "first failure proven at Ascend QK compiler; exact offending dynamic slice not uniquely localized",
+    "first_fault": "MLIRCompilationError [ConvertLinalgRToBinary] LLVM ERROR: Failed to obtain op buffer shape size which should be static.",
+    "numerical_cases": 0,
+    "host_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-011-main-20261011-001/HOST_RESULT.json",
+      "bytes": 74851,
+      "sha256": "21060e73474823896092206c3f2ef6eb89862a659d56cb6ffb83a3c0a4b30504"
+    },
+    "numerical_failure": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-011-main-20261011-001/candidate/work/numeric/RESULT.json",
+      "bytes": 9119,
+      "sha256": "e328a093dce486220b4feddee85dc28eac3dc549a5505073b56a3f630011bc32"
+    },
+    "release_audit_operation": "exec-0000000000000896",
+    "next": "One reader012 six-load flatten candidate with original masks/math; local105 passed but actual113/compile/numerics pending; not a paper no-go"
+  },
+  "scheduling": {
+    "ready_device_successors": 0,
+    "current_device_job": null,
+    "short_gap_cause": "KIVI result binding/same-image preparation; SKVQ compiler repair. No proved external card occupation.",
+    "next_owner": "kivi_hotpath_prepare",
+    "backup_owner": "skvq_numeric_path_review",
+    "model_successor_owner": "skvq_writer_next",
+    "no_zero_idle_claim": true
+  },
+  "acceptance": {
+    "new_E2E_gain": false,
+    "final_task_results": false,
+    "last_valid_KIVI_B1_fixed1024_percent": -72.2556908951,
+    "full_goal_met": false
+  },
+  "git_fetch": {
+    "operation": "exec-000000000000089d",
+    "timeout_seconds": 60,
+    "completed": false,
+    "note": "No stdout; later independent orientation089e completed. Fetch failure does not establish resource failure."
+  }
+}
+

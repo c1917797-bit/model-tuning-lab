@@ -1,0 +1,116 @@
+{
+  "schema": "paper-portfolio.actual-stage-checkpoint/v1",
+  "observed_at_utc": "2026-10-11 09:56:29 UTC",
+  "portfolio_cutoff_epoch": 1791788425,
+  "previous_turn_classification": "Usage audit: no paper progress. Current turn: actual deployment and same-image95 PASS, candidate original handle live.",
+  "paper": "KIVI",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-matched1024-d8-bootstrap-v1-001/SOURCE_MANIFEST.json",
+    "bytes": 163055,
+    "sha256": "3f3e4973d46cacf9baef7b59d897fc24d563db67d2ffc44cff4532650c41829e"
+  },
+  "component_whole": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-D8-FULL20-001/RESULT.json",
+    "bytes": 2117,
+    "sha256": "19e0e9c70e4a044cc2cb33eec34c79008fb2469ecad3d1a706a057c9fba6fb24"
+  },
+  "source_install_operation": "exec-00000000000008a2",
+  "software": {
+    "operation": "exec-00000000000008a3",
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-software-main-d8-20261011-001/RESULT.json",
+      "bytes": 1466,
+      "sha256": "8b1ec8449b7d3c27923763b6b9b3dd66517b37e9f16de9cd710b55e51497901a"
+    },
+    "software": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-software-main-d8-20261011-001/cpu-preflight/SOFTWARE.json",
+      "bytes": 373972,
+      "sha256": "d80322884db67890c940ce834d0f66df17e2dc0454ae71e06a2ab22d5d46d83b"
+    },
+    "NPU": false,
+    "tests": 95,
+    "actual_suite_seconds": 16.374915020074695,
+    "host_seconds": 99.75882423995063,
+    "passed": true
+  },
+  "candidate": {
+    "operation": "exec-00000000000008a7",
+    "state": "RUNNING_LAST_VERIFIED",
+    "argv": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-matched1024-d8-bootstrap-v1-001/host_run.py",
+      "--execute",
+      "--source",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-matched1024-d8-bootstrap-v1-001/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "3f3e4973d46cacf9baef7b59d897fc24d563db67d2ffc44cff4532650c41829e",
+      "--component",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-D8-FULL20-001/RESULT.json",
+      "--component-sha256",
+      "19e0e9c70e4a044cc2cb33eec34c79008fb2469ecad3d1a706a057c9fba6fb24",
+      "--model-manifest",
+      "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+      "--model-manifest-sha256",
+      "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+      "--software",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-software-main-d8-20261011-001/cpu-preflight/SOFTWARE.json",
+      "--software-sha256",
+      "d80322884db67890c940ce834d0f66df17e2dc0454ae71e06a2ab22d5d46d83b",
+      "--software-stage",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-software-main-d8-20261011-001/RESULT.json",
+      "--software-stage-sha256",
+      "8b1ec8449b7d3c27923763b6b9b3dd66517b37e9f16de9cd710b55e51497901a",
+      "--arm",
+      "candidate",
+      "--predecessor-arguments",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_RAW024_05C8_CONSUMER_ARGUMENTS_20261011.json",
+      "--predecessor-arguments-sha256",
+      "ebd897c1650383c510e9e3c7a75f14068c742ed425298e83244803bdd6455e0f",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-candidate-main-d8-20261011-001",
+      "--port",
+      "8250"
+    ],
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-candidate-main-d8-20261011-001",
+    "owned_cid": "afb173b5ab682ee3f340ba60849e3fa0c7fce89154c9b9aa30aa8754f5ebcb99",
+    "phase_seconds_including_cleanup": 5400,
+    "physical_devices": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "logical_to_physical": {
+      "0": 4,
+      "1": 5,
+      "2": 6,
+      "3": 7
+    },
+    "privileged": false,
+    "progress_operation": "exec-00000000000008ab",
+    "progress": "Original018 independent replay passed; CPU Devices[] stopped retained; candidate container/server startup live. At sample no current NPU compute PID yet. Not a throughput or zero-idle claim."
+  },
+  "backup": {
+    "paper": "SKVQ",
+    "state": "READER012_EXACT_SOURCE_DEPLOYED_ONLY",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-012/SOURCE_MANIFEST.json",
+      "bytes": 98181,
+      "sha256": "352f1d89acb55559cd753aeee74d20b5694f3abe4bce684a2740ebfcec8787ac"
+    },
+    "prepare_operation": "exec-00000000000008aa",
+    "source_count": 308,
+    "own_files": 33,
+    "dependencies": 275,
+    "python_files": 247,
+    "target_software113": "UNRUN",
+    "compiler_numeric": "UNRUN",
+    "next": "After current lease ends and actual cleanup, run original target113 then fresh native compile/numeric. No unchanged reader011 retry."
+  },
+  "performance_accepted": false,
+  "task_accuracy_accepted": false,
+  "new_successful_technique": false,
+  "lesson": "Keep component/matrix qualification separate from actual-model timing. Exact-source pack deployment is preparation, not NPU PASS. Preserve failed compiler evidence and run one source-backed candidate; do not infer paper no-go. Use compact targeted logs, no repeated full handoff/manifest dump."
+}

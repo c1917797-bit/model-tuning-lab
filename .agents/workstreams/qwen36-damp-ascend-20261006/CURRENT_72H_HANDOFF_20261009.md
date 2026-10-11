@@ -1,3 +1,18 @@
+## 2026-10-11 09:56:29 UTC — KIVI D8 same-image95 PASS; actual model candidate running
+
+- Read KIVI_D8_SAMEIMAGE95_MODEL_RUNNING_SKVQ012_DEPLOYED_20261011.json. Source install08a2 and same-image95 operation08a3 passed; actual suite16.375s, CPU owned stage99.759s, cleanup passed.
+- MAIN current exact handle exec-00000000000008a7, fixed32768 input and [2,2,1024], B1/TP4/BF16/eager/same6GiB/port8250; only physical4-7. Original predecessor replay passed, CPU preflight stopped-retained; candidate afb173b5ab682ee3f340ba60849e3fa0c7fce89154c9b9aa30aa8754f5ebcb99 server startup live at08ab. No model result yet. Poll same handle; never duplicate launch.
+- SKVQ reader012 deployed, actual08aa checks all308 source refs/247 Python sources. Target113, compiler/numeric and whole pending. This is source preparation only; no ready device backup or zero-idle claim.
+- Next: terminal08a7 -> exact cleanup -> independent arm consumer -> old006/newD8 source-qualified fixed1024 pair. Then admit SKVQ012 target/native gates. Cutoff1791788425 unchanged. No accepted new technique/task accuracy.
+
+## 2026-10-11 09:39:31 UTC — KIVI D8 full component gate PASS; SKVQ reader011 compile failure
+
+- Read KIVI_D8_FULL20_PASS_SKVQ_READER011_COMPILE_FAILURE_20261011.json. Actual089b exit0; independent089f exit0 verifies20frames/24outputs/60kernels,2/4bit FP16/BF16 seal/fork/reuse and all8 pool fields. All24 outputs bitwise against independent Ascend-boundary reference; original threshold0.005 unchanged. Not model/full176/graph/performance/task acceptance.
+- Exact owned CPU/NPU stopped retained independently089e; onlyphysical4 was used. Next D8 B1 actual whole binding, final95/same-image, then fixed1024 candidate versus strict matching old dense005e3. Old -72.2557% remains the latest valid fixed1024 result until a new pair completes.
+- SKVQ011087e FAILED at first QK Ascend compilation, zero numerical cases. Original static-buffer error and qk.ttir/ttadapter retained. Single012 fixed-flatten candidate is a diagnostic repair hypothesis, not proven compile/numeric success; local105 only. Separate model/matched successor prep continues.
+- No current device job/ready device successor at this checkpoint; admission gap is preparation, not proved external occupation. Physical4-7 MAIN serial,0-3/external protected,HugeTLB32GiBSPENT; cutoff1791788425 unchanged. No new joint acceptance or task score.
+
+
 ## 2026-10-11 08:49 UTC — KIVI D8 raw numerical PASS; SKVQ reader010 CPU AST failure
 
 - Latest decision: `KIVI_D8_RAW_PASS_READER010_AST_FAILURE_20261011.json`. No live device job or ready successor at this checkpoint; two targeted off-device preparations run.

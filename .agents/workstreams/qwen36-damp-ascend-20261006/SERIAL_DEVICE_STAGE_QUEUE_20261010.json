@@ -1,6 +1,7 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11 08:43:34 UTC",
+  "updated_at_utc": "2026-10-11 09:56:29 UTC",
+  "latest_stage_decision": "KIVI_D8_SAMEIMAGE95_MODEL_RUNNING_SKVQ012_DEPLOYED_20261011.json",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -10,28 +11,47 @@
     2,
     3
   ],
-  "current": null,
+  "current": {
+    "paper": "KIVI",
+    "owner": "MAIN",
+    "operation": "exec-00000000000008a7",
+    "state": "D8_B1_FIXED1024_HOST_RUNNING_SERVER_STARTUP_LAST_VERIFIED",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-matched1024-d8-bootstrap-v1-001/SOURCE_MANIFEST.json",
+      "bytes": 163055,
+      "sha256": "3f3e4973d46cacf9baef7b59d897fc24d563db67d2ffc44cff4532650c41829e"
+    },
+    "physical_devices": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-candidate-main-d8-20261011-001"
+  },
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
   "preparation": [
     {
-      "paper": "SKVQ",
-      "state": "READER010_FAILED_CPU_AST_COMPATIBILITY_READER011_PREPARING",
-      "stage": "009 actual07f5 failed94/95 exact-CUT test.010 changes only deterministic test fixture/root identity; target0811 copied30 files/verified275 dependencies,7 source updates and15 metadata patches applied. Target95 pending, local87 PASS not NPU.",
-      "ready": false
-    },
-    {
-      "paper": "SKVQ",
-      "state": "MODEL009_LOCAL77_PASS_PREDECESSOR_FAILED_NOT_ADMITTED",
-      "stage": "Model009 local77 PASS. Final010-bound matched006131 hit110s cutoff;130 prior passes not aggregate PASS. Preserve timeout; repeated identical retry interrupted. Target installation/passing entry still missing.",
-      "ready": false
-    },
-    {
       "paper": "KIVI",
-      "owner": "kivi_hotpath_prepare",
-      "state": "D8_NUMERIC_CHILD_PASS_FULL_MATRIX_AND_MODEL_PREPARING",
-      "device_ready": false,
-      "scope": "Evidence-backed AV D8 scheduling; 2/4bit dtype/seal/fork/reuse matrix next. Not E2E."
+      "owner": "MAIN",
+      "state": "ACTUAL_D8_SAMEIMAGE95_PASS_MODEL_RUNNING",
+      "ready": false,
+      "next_gate": "Actual terminal/cleanup then whole arm and dual-source fixed1024 pair"
+    },
+    {
+      "paper": "SKVQ",
+      "owner": "MAIN",
+      "state": "READER012_SOURCE_DEPLOYED_TARGET113_AND_NPU_PENDING",
+      "ready": false,
+      "next_gate": "Target113 then same-image/native reader after current lease"
+    },
+    {
+      "paper": "SKVQ",
+      "owner": "skvq_writer_next",
+      "state": "MODEL_MATCHED_DOWNSTREAM_PENDING_READER012_WHOLE",
+      "ready": false,
+      "next_gate": "Actual reader012 whole -> exact new model and pair source bindings; no borrowed diagnostic PASS"
     }
   ],
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
@@ -52,7 +72,7 @@
     "axis_writer_calls": 256,
     "only_physical_card": 4
   },
-  "idle_cause": "CURRENT singlephysical4 diagnostic;5-7 not busy under serial device-stage policy. No ready device successor; reader010 target95 still pending. No zero-idle claim.",
+  "idle_cause": "Current KIVI D8 lease server startup live at08ab; no zero-idle assertion. SKVQ012 exact sources installed but target113/native gate pending.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -948,15 +968,15 @@
     "actual_cross_paper_batch": "UNRUN; only SKVQ010 release profile currently reviewed",
     "zero_idle_claim": false
   },
-  "current_off_device": "KIVI0843 original independent consumer PASS14outputs/8pools; diagnostic0844 plain median72.05512->25.92020ms. FullD8 matrix/model preparation. SKVQ082f CPU replay failure exact3.9/3.12 AST schema drift; narrow source-bound adapter preparing.",
-  "current_successor_rule": "Next actual-ready ticket wins MAIN serial admission: SKVQ repaired actual same-image predecessor replay then reader numeric; or KIVI fullD8 matrix after software and publication fix. No unchanged retry or full-host PASS from0843 recovery.",
+  "current_off_device": "SKVQ012 exact deployed308 closure passed08aa; downstream code/test optimization prepared locally pending actual reader WHOLE.",
+  "current_successor_rule": "Finish actual08a7 terminal and cleanup, consume model evidence; then execute reader012 target113/native stage if freshly admitted. Do not rerun reader011 unchanged.",
   "scheduling_audit": {
     "current": "082f terminal exit1/290287ms; only CPU predecessor replay, actual_npu_observations0",
     "next": "Repair proven AST compatibility; recover KIVI published numeric with independent original consumer",
     "backup": "No ready device ticket",
     "zero_idle_claim": false
   },
-  "current_preparation_checkpoint": ".agents/workstreams/qwen36-damp-ascend-20261006/KIVI_D8_RAW_PASS_READER010_AST_FAILURE_20261011.json",
+  "current_preparation_checkpoint": ".agents/workstreams/qwen36-damp-ascend-20261006/KIVI_D8_SAMEIMAGE95_MODEL_RUNNING_SKVQ012_DEPLOYED_20261011.json",
   "maintainer_rule_fix": {
     "commit": "16eaf1806f2ea3bb810ea8f12027f418bf780047",
     "remote_verified_operation": "exec-00000000000006f9",
