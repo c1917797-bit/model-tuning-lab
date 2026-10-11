@@ -1,3 +1,12 @@
+## 2026-10-11 12:27 UTC — SKVQ component whole PASS; FIA004 native ABI evidence
+
+- Latest stage: SKVQ_WHOLE_PASS_FIA004_ABI_FAILURE_20261011.json and current serial queue. Reader013 compat001 target14 PASS0932; actual complete readonly whole0933 exit0/145.587s. READER_WHOLE.json 2553B SHA14dc0ce12bb25e267de9fbd83f490a2af955e9b04e656029cb3f92df24c00ee2. All64 Q2/Q4 =128 NPU cases/384 calls/196608 output elements consumed; original013 source/math/ownership unchanged, explicit compat identity retained. Not model/graph/lifecycle/whole176/performance/task PASS.
+- Independent review found model012 exact -I cold whole CLI fails importing bridge_contract; previous helper tests missed real startup. Agent skvq_writer_next prepares model013 and matched010. Windows resource absence must be reported as platform limitation, not shimmed into a target PASS; MAIN Linux full software/cold CLI remains required. Old012/009 uninstalled, not eligible.
+- FIA0040927 exit1/179.282s after target15 PASS0925. Base format0 gate now passes; one fullD256 control native call returned, second QK256/V32 call rejected by installed aclnnFusedInferAttentionScoreV3 tiler (only QK192/V128 unequal-width case supported). Numeric/oracle/performance NOT passed. Raw result and MAIN0927 original retained. Exact owned CPU/NPU independently exited/Pid0/noExec/noOOM, NPU onlyphysical4->0.
+- KIVI preparers now implement real packed actual32769 -> original dequant -> fullD256 FIA plus complete independent output/LSE under reused singlecard controller. Do not repeat float65/V32 or infer paper no-go.
+- MAIN deployment fault: global path replacement corrupted three unexecuted compat files; SHA check caught it. Ten restoration patches each exact readback restored frozen bytes before tests. Use header-only patch relocation, nested action outcome checks, and actual cold CLI regressions.
+- No active NPU job or executable backup currently; no zero-idle claim. Deadline1791788425 and only4-7/protected0-3 remain. No newly accepted non-HYPIC technique. Older RUNNING headers below are historical.
+
 ## 2026-10-11 12:01 UTC — SKVQ128 numeric PASS; strict stdout repair; FIA003 layout evidence
 
 - Read SKVQ128_PASS_CONSUMER_LOG_FAILURE_FIA003_20261011.json and current serial queue. SKVQ01308df exit0, all128 independent cases/384 NPU calls passed at4096; not model/performance/task acceptance.

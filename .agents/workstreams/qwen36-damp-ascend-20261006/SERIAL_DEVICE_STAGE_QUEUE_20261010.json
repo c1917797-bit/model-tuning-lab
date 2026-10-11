@@ -1,7 +1,7 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11 11:59:00 UTC",
-  "latest_stage_decision": "SKVQ128_PASS_CONSUMER_LOG_FAILURE_FIA003_20261011.json",
+  "updated_at_utc": "2026-10-11T12:27:00Z",
+  "latest_stage_decision": "SKVQ_WHOLE_PASS_FIA004_ABI_FAILURE_20261011.json",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -13,80 +13,65 @@
   ],
   "current": {
     "paper": "KIVI",
-    "operation": "exec-0000000000000916",
-    "state": "TERMINAL_DIAGNOSTIC_FORMAT0_CONTIGUOUS_NO_FIA_CALL",
+    "operation": "exec-0000000000000927",
+    "state": "TERMINAL_NATIVE_FIA_D256_CONTROL_RETURNED_V32_UNSUPPORTED",
     "exit": 1,
-    "cleanup_verified_operation": "exec-000000000000091a",
     "source": {
       "bytes": 2504,
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-capability-single4-owner-v1-003/SOURCE_MANIFEST.json",
-      "sha256": "ae04a6caadd63640eebfeba36799e1629da89953e8111cfd5f9d7a2e438edec0"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-capability-single4-owner-v1-004/SOURCE_MANIFEST.json",
+      "sha256": "a9883f5c192fb799215a362726c9c3f5c67baff3ba8dbb69fd37a958303901bb"
     },
     "only_physical": 4,
     "software": {
-      "operation": "exec-0000000000000913",
-      "tests": 14,
-      "exit": 0
+      "operation": "exec-0000000000000925",
+      "tests": 15,
+      "exit_code": 0
     },
-    "argv": [
-      "/usr/bin/python3",
-      "-B",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-capability-single4-owner-v1-003/host_once.py",
-      "--execute",
-      "--source",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-capability-single4-owner-v1-003/SOURCE_MANIFEST.json",
-      "--source-sha256",
-      "ae04a6caadd63640eebfeba36799e1629da89953e8111cfd5f9d7a2e438edec0",
-      "--software",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-software-main-FIA-OWNER003-001/RESULT.json",
-      "--software-sha256",
-      "b4a53b413fa967e3a3e93e212bd6b9e00b81e7266b65a1600df2abe0dbafe660",
-      "--producer-software",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN087C_KIVI_D8_FULL20_SOFTWARE_ORIGINAL_20261011.json",
-      "--producer-software-sha256",
-      "419cc87ac44b7ac94260b761cf2452793f6057277f742db4b9b91895fc2c18d2",
-      "--output",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-owned-main-FIA-CAP003-001"
-    ]
+    "owned_cleanup_verified": true,
+    "next_device_stage": null
   },
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
   "preparation": [
     {
       "paper": "SKVQ",
-      "owner": "skvq_numeric_path_review",
-      "state": "STRICT_STDOUT_READONLY_CONSUMER_REPAIR",
+      "owner": "skvq_writer_next",
+      "state": "MODEL013_COLD_CLI_REPAIR_TARGET_PENDING",
       "ready": false,
-      "next_gate": "Actual0908 confirms native INFO+Ref JSON parsing bug, not math failure. Repair private consumer with exact source and full old gates."
+      "next_gate": "reader013 whole0933 PASS; fix exact -I model_whole import and Linux cold CLI, target full software, TP4 actual model"
     },
     {
-      "paper": "SKVQ",
-      "owner": "skvq_writer_next",
-      "state": "DOWNSTREAM_CONSUMER_COMPATIBILITY_PREPARING",
+      "paper": "KIVI",
+      "owner": "skvq_numeric_path_review",
+      "state": "REAL_PACKED_FULLD256_ADAPTER_PREPARING",
       "ready": false,
-      "next_gate": "Propagate explicit reader compat to model/matched/after-release independent entry; preserve original math and budgets."
+      "next_gate": "actual32769 packed input dequant->fullD256 FIA; full independent output/LSE, no float65 substitute"
     },
     {
       "paper": "KIVI",
       "owner": "kivi_hotpath_prepare",
-      "state": "NATIVE_FIA_BASE_FORMAT_SOURCE_REVIEW",
+      "state": "REAL_PACKED_FULLD256_INDEPENDENT_GATE_PREPARING",
       "ready": false,
-      "next_gate": "Inspect actual layout evidence then choose specific adaptation; no enum or ND cast guess."
+      "next_gate": "Reuse existing singlecard owner; actual immutable packed fixtures and fail-closed independent consumer"
     }
   ],
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
   "no_new_model_performance_or_accuracy_pass": true,
   "previous": {
     "paper": "SKVQ",
-    "operation": "exec-00000000000008df",
-    "state": "NATIVE128_PASS_FINAL_CONSUMER_FAILED",
-    "numeric_cases": 128,
+    "operation": "exec-0000000000000933",
+    "state": "ALL64_Q2Q4_COMPONENT_WHOLE_PASS",
+    "whole": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-013-main-20261011-001/READER_WHOLE.json",
+      "bytes": 2553,
+      "sha256": "14dc0ce12bb25e267de9fbd83f490a2af955e9b04e656029cb3f92df24c00ee2"
+    },
+    "actual_cases": 128,
     "kernel_calls": 384,
-    "whole_diagnostic_operation": "exec-0000000000000908",
-    "whole_exit": 1,
-    "first_fault": "reader_whole.py161 parses native INFO-prefixed stdout as pure JSON; all four child exits0"
+    "model_ready": false,
+    "performance_ready": false
   },
-  "idle_cause": "FIA0030916 terminal: six contiguous BF16 base-format0 inputs rejected by own ND2-only predicate before FIA. Exact owned release091a; no ready device successor until source-supported format fix or SKVQ strict stdout consumer/downstream repair passes. No zero-idle claim.",
+  "idle_cause": "FIA004 native call2 rejects QK256/V32 in installed tiler, owned devices released. SKVQ readonly whole now passes; model cold -I CLI repair pending. No executable device successor yet; no zero-idle claim.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -1032,15 +1017,15 @@
     "remote_parallel_cpu_admitted": false,
     "ready_device_successor_count": 0
   },
-  "current_off_device": "KIVI002 deployed, target checks queued behind CPU_QUEUE; KIVI dequant/FIA exact mechanism preparation. SKVQ model011/matched008 successor local preparation. Compiler gather fallback source review completed, only if013 fails.",
-  "current_successor_rule": "Poll08df only; exact terminal and own cleanup before FIA002 source/software/native admission. FIA002 source deployed, target software pending. No repeat012/FIA001 or formal/task expansion of regressedD8.",
+  "current_off_device": "SKVQ model013 cold CLI fix and target software; KIVI actual packed fullD256 adapter and independent consumer prepared in parallel.",
+  "current_successor_rule": "No active NPU job. Admit first source-reviewed actual prerequisites-passed model or real packed numerical gate; frozen protocol and only4-7 remain.",
   "scheduling_audit": {
-    "current": "SKVQ01308df source119PASS, actual host active",
-    "next": "FIA002 missing-base-manifest repair sources deployed, actual13 software pending",
-    "backup": "No fully ready device successor; model011/matched008 CPU preparation active",
+    "current": "FIA0040927 terminal/released; native ABI limitation recorded",
+    "next": "SKVQ model013; preceding128component whole0933 passed",
+    "backup": "KIVI actual packedfull32769 fullD256 source preparation, not yetready",
     "zero_idle_claim": false
   },
-  "current_preparation_checkpoint": ".agents/workstreams/qwen36-damp-ascend-20261006/KIVI_D8_SAMEIMAGE95_MODEL_RUNNING_SKVQ012_DEPLOYED_20261011.json",
+  "current_preparation_checkpoint": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ_WHOLE_PASS_FIA004_ABI_FAILURE_20261011.json",
   "maintainer_rule_fix": {
     "commit": "16eaf1806f2ea3bb810ea8f12027f418bf780047",
     "remote_verified_operation": "exec-00000000000006f9",

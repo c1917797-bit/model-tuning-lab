@@ -103,6 +103,9 @@ load. This rule does not guarantee the first real-device attempt will pass.
   explicitly pending, never fabricated to mark a packet ready.
 - Test real CLI/aggregate entry points and the fresh-clone transitive source
   closure, not only helper mocks.
+  Use the exact delivered interpreter flags (including -I when specified) in
+  fresh-process default-OFF and negative-admission tests. A helper imported
+  after the test runner changes sys.path cannot prove standalone CLI imports.
   Before device reservation, execute the real source/admission path in a
   same-image no-device container with exact read-only transitive source and
   immutable-evidence mounts. Host imports alone do not prove container path
@@ -163,6 +166,10 @@ load. This rule does not guarantee the first real-device attempt will pass.
 ## Git and Artifact Rules
 
 - Commit small configuration, code, summaries, commands, and checksums.
+  When relocating a patch, rewrite only its file-header paths; never replace
+  path prefixes across the patch body. Verify deployed bytes against the
+  reviewed source before execution; a successful patch response is not a
+  source-identity check. Distinguish transport success from nested action errors.
 - Keep datasets, weights, checkpoints, traces, dumps, and large logs outside
   Git; reference immutable hashes and controlled locations.
 - Push every stage to the current workstream branch.

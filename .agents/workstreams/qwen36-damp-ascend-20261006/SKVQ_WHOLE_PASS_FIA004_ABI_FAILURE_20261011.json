@@ -1,0 +1,79 @@
+{
+  "schema": "paper-portfolio.stage-decision/v1",
+  "updated_at_utc": "2026-10-11T12:25:00Z",
+  "portfolio_cutoff_epoch": 1791788425,
+  "long_term": "Non-HYPIC reproducible >=10% matched E2E plugin gain; task accuracy gate remains pending",
+  "skvq": {
+    "operation": "exec-0000000000000933",
+    "exit_code": 0,
+    "duration_ms": 145587,
+    "compat_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-reader013-stdout-compat-v1-001/SOURCE_MANIFEST.json",
+      "bytes": 77266,
+      "sha256": "d3ad1b0e172104df6e1ffbe9fdf8f62aa66969635647c7874c675626b930c072"
+    },
+    "target_software": {
+      "operation": "exec-0000000000000932",
+      "tests": 14,
+      "exit_code": 0
+    },
+    "whole": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-013-main-20261011-001/READER_WHOLE.json",
+      "bytes": 2553,
+      "sha256": "14dc0ce12bb25e267de9fbd83f490a2af955e9b04e656029cb3f92df24c00ee2"
+    },
+    "scope": "128 cases/384 actual NPU kernel calls/196608 output elements, all64 calibration tensors at4096 last-query Q2/Q4; complete prior ownership/math replay",
+    "no_new_npu_rerun": true,
+    "graph": false,
+    "lifecycle": false,
+    "model": false,
+    "performance": false,
+    "task": false,
+    "next": "model013 fixes actual -I standalone whole import found by independent review; actual target software and TP4 model still pending"
+  },
+  "kivi": {
+    "operation": "exec-0000000000000927",
+    "exit_code": 1,
+    "duration_ms": 179282,
+    "source": {
+      "bytes": 2504,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-capability-single4-owner-v1-004/SOURCE_MANIFEST.json",
+      "sha256": "a9883f5c192fb799215a362726c9c3f5c67baff3ba8dbb69fd37a958303901bb"
+    },
+    "software": {
+      "operation": "exec-0000000000000925",
+      "tests": 15,
+      "exit_code": 0
+    },
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-owned-main-FIA-CAP004-001",
+    "result": {
+      "bytes": 129974,
+      "sha256": "f7e5ec72911475a65bc691fb05d902820abd96607c2c7c2e2e5528718521a115"
+    },
+    "native_attempts": 2,
+    "native_completed": 1,
+    "first_fault": "Installed aclnnFusedInferAttentionScoreV3 rejects QK256/V32 no-quant BNSD at tiling CheckInputLayout common_checker.cpp1231; equal-width fullD256 control returned",
+    "classification": "ADAPTATION_IMPLEMENTATION_OPERATOR_ABI",
+    "numerical_pass": false,
+    "cleanup": "Both exact owned containers independently inspected exited/Pid0/noExec/noOOM; only NPU device4->0; stopped retained not deleted",
+    "next": "Prepare real packed actual32769 -> source-pinned dequant -> fullD256 FIA with independent complete output/LSE; no repeat float65/V32"
+  },
+  "main_deployment_failure": {
+    "affected": "unexecuted compat001 source install",
+    "cause": "MAIN rewrote patch body path prefixes while relocating headers; root apply error initially hidden by outer transport ok",
+    "detection": "Exact byte readback rejected three files before execution",
+    "repair": "10 reviewed restoration patches, every after SHA verified; original source identities restored, actual14 target tests and complete whole passed",
+    "learning": "Header-only path changes, nested action outcome checks, actual -I cold CLI smoke"
+  },
+  "scheduling": {
+    "npu_stage_running": false,
+    "device_ready_successors": 0,
+    "parallel_preparation": [
+      "skvq_writer_next:model013+matched010",
+      "skvq_numeric_path_review:live packed fullD256 adapter",
+      "kivi_hotpath_prepare:independent packed fullD256 gate"
+    ],
+    "zero_idle_claim": false
+  },
+  "accepted_new_technology": false
+}
