@@ -39,6 +39,23 @@ real-Torch loading, model numerics, the earlier PA failure or performance.
 Carry the precheck into the real before-model entry and rerun the complete
 affected model gate. Exact sources/results remain in the workstream.
 
+The same distinction applies to inherited controller safety ASTs. Exercise the
+complete predecessor replay in the actual consumer image/interpreter, with the
+exact read-only evidence mounts, before admitting the costly model stage.
+Compilation, CLI smoke and a helper fixture do not prove that replay seam.
+
+SKVQ021 actually completed its TP4 model capture, then its post-release
+independent consumer rejected the predecessor's safety-body identity before
+numerical comparison. Preserve this as an incomplete validation chain, not
+candidate numerical failure or paper no-gain. The failing predicate is observed;
+an interpreter-schema explanation remains a hypothesis until actual source and
+both interpreter outputs prove it. After a source-qualified consumer repair,
+reuse unchanged captured tensors only if their complete producer/source/
+ownership identities still qualify; otherwise recapture. Run the complete
+affected independent gate under a new result identity, not an unchanged
+expensive model retry. Exact evidence:
+`.agents/workstreams/qwen36-damp-ascend-20261006/SKVQ021_REFERENCE_REPLAY_FAILURE_LESSONS_20261011.json`.
+
 ## Native enum transport versus semantic identity
 
 A source-pinned producer can correctly verify an enum member and then serialize

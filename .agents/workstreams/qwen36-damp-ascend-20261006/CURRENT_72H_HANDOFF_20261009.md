@@ -1,3 +1,11 @@
+## 2026-10-11 17:37 UTC — SKVQ021 model captured; predecessor replay failed before mathematics
+
+- Original0a25 is terminal exit1/1079.685s, not running. CPU, N1 binding and real TP4 B1 model child exits were0; independent CPU child exit1 rejected reader013 inherited safety-body identity before any numerical comparison. Cause is UNKNOWN pending actual interpreter/source comparison; this does not reject the method.
+- HOST_RESULT156218B/3f7c652bab52b6992844b7669a97712a340cd9f984434bdac7365cb859221fcb and producer11463B/a25250567158e00e4f3ddeeac9560d72ab1e478c6317a487360b3fc0386e6a54 retained. Original operation archived outside Git as MAIN0A25_SKVQ021_ORIGINAL_FAILED_20261011.json. Exact0a2d independently checked all3 owned containers stopped-retained/Pid0/noOOM. This is own release, not fresh global card-idle proof.
+- KIVI full64 firstdecode independent/whole PASS remains scoped to B1 eager32768+2; no long/mixed/GDN/graph, paired performance or final tasks PASS. Prior checkpoint e5a39fd3 normally pushed successfully.
+- Matched021 is source-only partially deployed32/46 patches;14 remain, target153 and exact-image closure precheck UNRUN, prerequisite model whole null. Executable device-successor count0; no claim of continuous utilization. Three API-only preparers address SKVQ actual replay, KIVI oracle cost and complete task-domain runtime wiring.
+- Fixed cutoff1791788425 unchanged. Read SKVQ021_REFERENCE_REPLAY_FAILURE_LESSONS_20261011.json for causal decision and inherited evidence; earlier headings below are historical.
+
 ## 2026-10-11 17:12 UTC — KIVI actual full64 firstdecode passed; SKVQ021 model repair dispatched
 
 - Real0a18 exit0/1130.523s; RAW_RESULT505820B/d95516f4d6674be66262351bcde938ee5f158a564b2ffc79ce95d24fa884fb2a. Full64 independent FP64 reference consumed actual4rank x16FA x1536 outputs at length32769. Exact CPU528a707... stopped-retained/Pid0/noOOM confirmed0a22; no external workload stopped.

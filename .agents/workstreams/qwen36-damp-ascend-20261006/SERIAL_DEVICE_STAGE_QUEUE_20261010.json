@@ -1,7 +1,7 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11T17:12:00Z",
-  "latest_stage_decision": "KIVI raw0a18 completed1130.523s, full64 independent/whole0a23 passed FIRSTDECODE_OWNED_RAW_AND_WHOLE_CONSUMED only; long/GDN/mixed/task/performance pending. SKVQ021 exact346 source and Linux123/0skip passed0a1d, new model0a25 running after raw CPU release; no acceptance.",
+  "updated_at_utc": "2026-10-11T17:37:01Z",
+  "latest_stage_decision": "KIVI full64 firstdecode independent/whole PASS only. SKVQ021 actual CPU/N1/TP4 capture exited0; terminal0a25 exit1 at independent predecessor safety replay before mathematics. Underlying cause UNKNOWN, DIAGNOSE then source-supported repair; no model numeric/performance/task acceptance.",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -13,7 +13,7 @@
   ],
   "current": {
     "paper": "SKVQ",
-    "state": "MODEL021_NATIVE_BINDING_REPAIR_HOST_RUNNING",
+    "state": "TERMINAL_FAILED_PREDECESSOR_REPLAY_BEFORE_NUMERICS",
     "operation": "exec-0000000000000a25",
     "reserved_physical_devices": [
       4,
@@ -21,7 +21,7 @@
       6,
       7
     ],
-    "physical_devices_compute_proved": false,
+    "physical_devices_compute_proved": true,
     "source": {
       "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-021/SOURCE_MANIFEST.json",
       "bytes": 114564,
@@ -34,7 +34,12 @@
     },
     "model_ready": false,
     "performance_ready": false,
-    "next": "Poll exact0a25, no duplicate/target CPU job during CPU_QUEUE. After terminal verify own-only release, preserve original and consume actual128-frame whole. Matched021 source frozen but actual predecessor remains null."
+    "next": "Preserve original0a25, diagnose actual reader013 safety identity across interpreters. Repair only proved seam, qualify unchanged raw reuse, then run complete independent gate. No unchanged model recapture.",
+    "exit_code": 1,
+    "independent_numeric_pass": false,
+    "own_release_verified": true,
+    "release_operation": "exec-0000000000000a2d",
+    "decision_record": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ021_REFERENCE_REPLAY_FAILURE_LESSONS_20261011.json"
   },
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
@@ -88,7 +93,7 @@
     "performance_ready": false,
     "independent_whole_pending": true
   },
-  "idle_cause": "Latest actual0a22 17:07:48Z physical4-7 baseline2869/2866/2867/2861MiB no NPU compute; prior KIVI CPU terminated and independently released. New0a25 host prelude running: not yet device compute proof or zero-idle. No executable backup while long640 cost/actual predecessor pending.",
+  "idle_cause": "Own SKVQ021 TP4 stopped17:24:51Z and independent CPU stopped17:27:56Z, independently confirmed0a2d. No executable backup: SKVQ predecessor replay failed before mathematics; matched021 installed32/46 source patches only; KIVI long cost/domain runtime incomplete. Fresh global admission required; no zero-idle claim.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -1012,23 +1017,20 @@
     "local_parallel": "kivi_hotpath_prepare: bounded local official-source audit of reusable native quantized KV attention; no remote/NPU/Git."
   },
   "parallel_preparers_20261011": {
-    "observed_at_utc": "2026-10-11 11:08:48 UTC",
-    "device_owner": "MAIN:exec-00000000000008df",
+    "observed_at_utc": "2026-10-11T17:37:01Z",
+    "device_owner": "MAIN ONLY; no currently live owned device stage proved",
     "agents": [
       {
         "name": "kivi_hotpath_prepare",
-        "state": "RUNNING",
-        "scope": "exact existing dequant BF16 to FIA mechanism; no remote/NPU"
+        "scope": "complete task-domain runtime and independent raw chain; API-only"
       },
       {
         "name": "skvq_writer_next",
-        "state": "RUNNING",
-        "scope": "model011/matched008 source-bound013 successors; no remote/NPU"
+        "scope": "actual reader013 safety replay diagnosis; API-only"
       },
       {
         "name": "skvq_numeric_path_review",
-        "state": "COMPLETED_BOUNDED_PREP",
-        "scope": "013 installer plus official GM-to-UB gather fallback; no unqualified runtime PASS"
+        "scope": "source-equivalent bounded oracle cost diagnostic; API-only"
       }
     ],
     "remote_parallel_cpu_admitted": false,
@@ -1036,11 +1038,9 @@
   },
   "current_off_device": {
     "paper": "KIVI",
-    "software123": "09ec exit0/101.973s target123PASS",
-    "raw64": "09ef exit1 numerical threshold at rank0 layer19; same tensors backend/reference attribution pending",
-    "long002": "DO NOT RUN; source root/helper absent after inner patch rejection; missing firstwhole mount established",
-    "long003": "preparing exact RO repair",
-    "paired003": "identity successor needed"
+    "firstdecode": "full64 raw0a18/whole0a23 passed only",
+    "long004": "actual bounded cost fit unproved; do not admit",
+    "task_domain": "complete runtime wiring preparing; actual producer/whole missing"
   },
   "current_successor_rule": "No live device controller. Exact source/software/actual prerequisites before dispatch; failures yield to ready other paper. No actual ready successor currently.",
   "scheduling_audit": {
@@ -1049,7 +1049,7 @@
     "backup": "KIVI numerical repair -> firstdecode -> long003 ->paired003",
     "zero_idle_claim": false
   },
-  "current_preparation_checkpoint": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ018_DISPATCH_KIVI_COMPONENT_RECOVERY_20261011.json",
+  "current_preparation_checkpoint": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ021_REFERENCE_REPLAY_FAILURE_LESSONS_20261011.json",
   "maintainer_rule_fix": {
     "commit": "16eaf1806f2ea3bb810ea8f12027f418bf780047",
     "remote_verified_operation": "exec-00000000000006f9",

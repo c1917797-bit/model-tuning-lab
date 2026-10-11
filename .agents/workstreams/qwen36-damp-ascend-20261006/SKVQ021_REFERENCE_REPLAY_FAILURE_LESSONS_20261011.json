@@ -1,0 +1,83 @@
+{
+  "schema": "paper-causal-lessons/v1",
+  "updated_at_utc": "2026-10-11T17:37:01Z",
+  "paper": "SKVQ",
+  "failed_stage": "POST_RELEASE_INDEPENDENT_PREDECESSOR_SAFETY_REPLAY",
+  "cause_class": "UNKNOWN_CAUSE",
+  "causal_confidence": {
+    "failure_locus": "PROVED",
+    "interpreter_schema_cause": "UNPROVED"
+  },
+  "decision": "DIAGNOSE",
+  "original_operation": {
+    "id": "exec-0000000000000a25",
+    "exit": 1,
+    "duration_ms": 1079685,
+    "cancelled": false,
+    "timed_out": false,
+    "archive": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN0A25_SKVQ021_ORIGINAL_FAILED_20261011.json"
+  },
+  "source_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-021/SOURCE_MANIFEST.json",
+    "bytes": 114564,
+    "sha256": "df86506856e7ccce061dd1d295d6b1f1e82cb29502d0f92f5b4eb234bc915294"
+  },
+  "actual_stage_exits": {
+    "model-cpu": 0,
+    "model-N1": 0,
+    "model-B1": 0,
+    "model-independent": 1
+  },
+  "host_result": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-021-main-20261011-001/HOST_RESULT.json",
+    "bytes": 156218,
+    "sha256": "3f7c652bab52b6992844b7669a97712a340cd9f984434bdac7365cb859221fcb"
+  },
+  "first_fault": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-021-main-20261011-001/model-independent.stderr",
+    "bytes": 2988,
+    "sha256": "f0a9d6f96bb1c5dffdaa5568e0c31c8e60860209ce7ad14052931b115ac4cf74",
+    "predicate": "reader013/reader_whole.py148: byte-qualified inherited safety body and exact registered singlecard literals"
+  },
+  "math_comparison_reached": false,
+  "independent_numeric_pass": false,
+  "own_release": {
+    "operation": "exec-0000000000000a2d",
+    "containers": 3,
+    "stopped_retained": true,
+    "pid_zero": true,
+    "oom": false,
+    "global_card_idle_proved": false
+  },
+  "independent_control": null,
+  "alternative_explanations": [
+    "Actual source/AST serialization differs across host/image interpreters",
+    "A source, registered-literal or reference identity mismatch remains possible"
+  ],
+  "next_diagnostic": "Compare original and adapted safety source bytes plus all4 identity fields under actual host/image interpreters; reuse established known-empty-schema normalization only if proved.",
+  "repair_prediction": "Unchanged raw producer/source identities plus proved narrow replay repair permit full independent math to execute; any changed body/unknown field must still reject.",
+  "reuse_rule": "Keep old failure immutable; new consumer/source and output identity; reuse captured raw only after complete unchanged-producer qualification. Otherwise recapture.",
+  "unchanged_gates": {
+    "numerical": "unchanged registered thresholds and full affected matrix",
+    "performance": "matched fixed1024; separate TTFT/TPOT; three formal pairs",
+    "tasks": "LongBench-v2/GSM8K no-thinking/max2048/normalEOS; report pp and relative loss",
+    "physical_devices": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "portfolio_cutoff_epoch": 1791788425
+  },
+  "scope": "Current validation chain incomplete, not candidate numerical failure, method no-gain, or full acceptance.",
+  "success_predecessor": "KIVI raw0a18 + whole0a23 full64 firstdecode passed only; no long lifecycle/E2E/tasks.",
+  "partial_preparation": {
+    "matched021_applied_patches": 32,
+    "total_patches": 46,
+    "actual_target153": "UNRUN",
+    "exact_image_closure": "UNRUN",
+    "actual_model_whole_ref": null,
+    "ready_device_successors": 0
+  },
+  "maintainer_reference": ".agents/skills/ascend-inference-tuning-loop/references/failure-root-cause-and-next-action.md"
+}
