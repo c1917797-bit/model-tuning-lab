@@ -1190,7 +1190,7 @@
   },
   "r20_serial_diagnostic": {
     "preregistration": "HYPIC_R20_SERIAL_DIAGNOSTIC_PREREGISTRATION_20261011.json",
-    "state": "no-cache terminal and independently audited; hypic-only controller running",
+    "state": "both arms terminal; independent candidate and paired audits passed; diagnostic only",
     "sample_indexes": [59, 82, 126],
     "baseline_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r20-serial-baseline",
     "candidate_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r20-serial-hypic",
@@ -1204,8 +1204,18 @@
     "baseline_arm_result_sha256": "07890fbb4c423aff06afe6036b7c5080da3babddf96d29cd899df9ab68944a54",
     "baseline_independent_raw_audit": "audit_arm exit 0; source, request, scorer, isolation and exact release replay passed",
     "candidate_controller_operation": "exec-0000000000000690",
+    "candidate_controller_exit_code": 0,
+    "candidate_samples": 3,
+    "candidate_scored_rows": 9,
+    "candidate_correct": 9,
+    "candidate_proved_hot": 9,
+    "candidate_clean_guard_samples": 149,
+    "candidate_arm_result_sha256": "8cbdddb9284177dd6d020670af7af1b2e23ea31941fdf2df81e256a8a97640ce",
+    "paired_audit": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/hypic-r20-serial-diagnostic-paired-audit.json",
+    "paired_audit_sha256": "44bd68b877f941af24422160941ca5006b8deabe5b3396f8e038fc3d6f41ae15",
+    "terminal_report": "HYPIC_R20_SERIAL_DIAGNOSTIC_TERMINAL_AUDIT_20261011.md",
     "offline_checks": "Both arm --check modes, independent audit --check, three host-only tests, and 15-request historical payload-hash replay passed.",
     "claim_boundary": "Diagnostic only, not a population quality pass or replacement for r19."
   },
-  "next_action": "Poll exact live r20 hypic-only controller exec-0000000000000690 and its immutable candidate root; do not restart on slow observation. On terminal, independently audit 3x3 raw rows, source, boundary/four-worker proof, physical isolation and exact owned release, then run frozen r20 paired auditor. R20 is diagnostic only: r19 LongBench remains REJECT_OR_QUALIFY (227/381 to 219/381); GSM8K off-path PASS cannot override it. Preserve r13-r19 roots, never use NPU4-7 or stop external work, and do not claim GitHub/main sync."
+  "next_action": "Use existing r19 per-request evidence to localize why c32/max2048 quality was 227/381 to 219/381 while r20 selected c1 samples were 9/9 in both arms with 9/9 candidate hot proof. Do not infer causality from r20. Only if read-only analysis cannot distinguish load/cache/scheduling causes, freeze one bounded c32 intervention with a fresh control and one switch. Preserve r13-r20 roots and r19 REJECT_OR_QUALIFY, never use NPU4-7 or stop external work, and do not claim GitHub/main sync."
 }

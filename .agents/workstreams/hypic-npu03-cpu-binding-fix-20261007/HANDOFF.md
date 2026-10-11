@@ -1,6 +1,6 @@
 # HYPIC NPU0–3 — current handoff
 
-## 2026-10-11 r20 bounded diagnostic, candidate running
+## 2026-10-11 r20 bounded diagnostic, terminal
 
 The fresh-root, same-source serial control/HYPIC diagnostic is frozen in
 `HYPIC_R20_SERIAL_DIAGNOSTIC_PREREGISTRATION_20261011.json`. It uses samples
@@ -20,15 +20,18 @@ Control arm `exec-0000000000000675` terminated exit 0 after 3/3 samples and
 identity and exact owned resource release. Immutable arm-result SHA256 is
 `07890fbb4c423aff06afe6036b7c5080da3babddf96d29cd899df9ab68944a54`.
 Its root is `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r20-serial-baseline`.
-After fresh direct-route, candidate-root absence and physical NPU0–3/8223
-idle checks, the frozen HYPIC-only arm was started as
-`exec-0000000000000690`, root
-`/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r20-serial-hypic`.
-It is **running, not terminal**. Poll that same handle and immutable root;
-never relaunch because an observation is slow or times out. On terminal,
-independently audit its raw rows, source, four-worker proof, isolation and
-exact release, then run the frozen paired auditor. Do not treat this
-post-hoc three-sample diagnostic as population quality acceptance.
+The frozen HYPIC-only arm `exec-0000000000000690` also terminated exit 0,
+with 3/3 samples and 9/9 scored responses. Independent candidate and paired
+raw-artifact audits passed: both arms 9/9 correct, zero length caps,
+candidate 9/9 four-worker hot proof, 149 clean physical isolation samples
+per arm, source identity and exact owned release. Candidate arm-result SHA256
+is `8cbdddb9284177dd6d020670af7af1b2e23ea31941fdf2df81e256a8a97640ce`.
+Frozen paired audit SHA256 is
+`44bd68b877f941af24422160941ca5006b8deabe5b3396f8e038fc3d6f41ae15`;
+see `HYPIC_R20_SERIAL_DIAGNOSTIC_TERMINAL_AUDIT_20261011.md`. Both roots
+are terminal and immutable. This post-hoc three-sample result does not
+overturn r19's full-c32 quality rejection. Next localize the c32-specific
+difference with existing r19 raw events before admitting any new device run.
 
 ## 2026-10-11 protocol-gap checkpoint
 
