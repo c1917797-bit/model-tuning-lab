@@ -1,0 +1,199 @@
+{
+  "schema": "skvq.model-reader-once.entry/v1",
+  "default_enabled": false,
+  "source_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-002/SOURCE_MANIFEST.json",
+    "bytes": 73192,
+    "sha256": "b5a4d6e76341419eaecb1274003355d1c1e53db140c9b8b5abc789a4782f1902"
+  },
+  "actual_source_count": 221,
+  "actual_own_count": 13,
+  "actual_dependency_count": 208,
+  "local_software": {
+    "status": "11/11 ACTUAL_LOCAL_PASS",
+    "scope": "Local Windows stdlib actual archived source/AST/transport fixtures plus original N1 qualify metadata function. No Torch/device getter; native hardware observation not executed. All six original source Refs unchanged. Not Linux installed221/same-image/N1/model/whole PASS.",
+    "receipt": "LOCAL_PASS_RESULT.json"
+  },
+  "software": {
+    "status": "UNRUN",
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "<MAIN validated free CPU>",
+      "/usr/bin/prlimit",
+      "--cpu=120:120",
+      "--as=536870912:536870912",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-002/software_check.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "b5a4d6e76341419eaecb1274003355d1c1e53db140c9b8b5abc789a4782f1902",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-software-002-main-20261011-001.json"
+    ],
+    "requirements": "MAIN selects verified free host CPU; 512MiB AS+RSS bound; stdlib source gate, no Torch/Docker/NPU.",
+    "actual_tests": 11
+  },
+  "host": {
+    "status": "UNRUN/DATA_PENDING",
+    "unique_entry": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-002/model_host.py",
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-002-main-20261011-001",
+    "reader_whole_descriptor_file": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-skvq-reader001-actual-whole-REF.json",
+    "descriptor_file_status": "MISSING; must contain actual strict3Ref to real reader001 owned whole result; not synthetic",
+    "argv": [
+      "/usr/bin/env",
+      "MAIN_SKVQ_MODEL_READER_HOST_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--cpu=9000:9000",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-002/model_host.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "b5a4d6e76341419eaecb1274003355d1c1e53db140c9b8b5abc789a4782f1902",
+      "--reader-whole-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-skvq-reader001-actual-whole-REF.json",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-002-main-20261011-001"
+    ]
+  },
+  "whole": {
+    "status": "UNRUN/MISSING_ACTUAL_TERMINAL",
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-002/model_whole.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "b5a4d6e76341419eaecb1274003355d1c1e53db140c9b8b5abc789a4782f1902",
+      "--root",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-002-main-20261011-001",
+      "--original-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-002-main-20261011-001/WHOLE_ORIGINAL_REF.json",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-002-main-20261011-001/MODEL_WHOLE.json"
+    ],
+    "original_requirement": "MAIN stores actual completed/succeeded agentweb.operation/v1 whole envelope for the exact host argv, then strict3Ref file. No synthesized original or status fallback."
+  },
+  "stage_DAG": [
+    "actual capture014 complete256 ordered samples/64 layers + all4 identities/terminal",
+    "actual cal006 fit128 rank-axis/64artifact whole with original capture source",
+    "actual writer002 all128 Q2/Q4 artifact native writer whole",
+    "actual reader001 physical4 all128cases/384 compiled calls + independent full math owned whole",
+    "current Devices[] CPU8 source+reader/primitives/parser+real safe RPC codec (no HAL/ModelConfig); stop-retain",
+    "current TP4 N1 real Format.ND/tiny+actual full EngineConfig/native worker extension resolution before weights",
+    "weights/native6GiB initialized real capacity>=33792 + named worker install all4/all16FA/32owned hooks; 32768 token IDs +3outputs -> two real compiled decode steps",
+    "all4 actual original native finished -> own restore -> stop-retain source/Devices4..7/Pid0/noExec/noOOM",
+    "new Devices[] CPU8 full128frame/all196608 output independent math; stop-retain",
+    "host whole-original + all3 owner/resource/rawcmdline + both releases + independent full128 consumer -> minimal B1 FA numeric smoke only"
+  ],
+  "materialize": {
+    "patch": "MATERIALIZE.patch",
+    "cwd": "/cache/cch/qwen36-paper-preparation-20261007/lowbit",
+    "method": "MAIN a_apply_patch Add-only relative newlowbit002 leaf; exact13py+manifest. Never overwrite frozen001/reader001/014/cal006/writer002."
+  },
+  "inherited_source_refs": {
+    "reader": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-001/SOURCE_MANIFEST.json",
+      "bytes": 58779,
+      "sha256": "67a07f213095e2193c1979d1fde5ad72a985d0aa9a3fb32b0eef64037770c6a1"
+    },
+    "capture": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/SOURCE_MANIFEST.json",
+      "bytes": 82562,
+      "sha256": "9c7b1118b1cd1f2a20ab7fde0ecb98031bf14289c9c795c18f48de9cdb805acd"
+    },
+    "calibration": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-006/SOURCE_MANIFEST.json",
+      "bytes": 52456,
+      "sha256": "07b526100b7184b4555138a7318c5f4a7c45ac451207ea96f656173cba1366c1"
+    },
+    "writer": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-actual-writer-bridge-v1-002/SOURCE_MANIFEST.json",
+      "bytes": 51408,
+      "sha256": "445b3f25bac488f1053b57e24c82177b833440b013faf6402b3153e4be73f433"
+    },
+    "original_prompt": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/INPUT_PROTOCOL.json",
+      "bytes": 164697,
+      "sha256": "45433e3876bc08799424587baa5261679fb65eaa656f81519ed265ca8c654ff3"
+    },
+    "original_Control": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/MAIN_HOST.py",
+      "bytes": 25396,
+      "sha256": "05b1522a2ef0a9ccc7f203818378d064c910cb4fdab0f3c753fa44792cf962e4"
+    }
+  },
+  "minimal_deltas": [
+    "002 actual same six-source native_format_patch_chain + explicit runtime metadata access closure; actual original N1 qualify/validate_chain source-only regression and three negative cases.",
+    "Explicit own5/dependency2 registry selection: raw_sink belongs dependency; runtime_capture_current selects current014 own, not historic011 dependency.",
+    "Fresh original Factory namespace binds new registry helper; only policy10->6GiB literal+annotation, no original module mutation/math change.",
+    "Actual factory_delta_ref + original reader INSTALL/FINAL captured TP identity consumed in whole.",
+    "Native prefill+cache update/GDN48 original function identities retained; no GDN content claim.",
+    "Reuse exact014 source-qualified Control AST, only disk320->24GiB; new source/owner/output scope, two registered cleanup/time blocks.",
+    "Safe string worker RPC+spawn; no insecure pickle/dummy request/constructed finished output."
+  ],
+  "resources": {
+    "CPU_QUEUE": true,
+    "joint_CPU_budget": 7,
+    "host_cpu": 1,
+    "guest_cpu": 4,
+    "reserve_cpu": 2,
+    "host_memory_bytes": 536870912,
+    "guest_CPU_memory_bytes": 8589934592,
+    "guest_model_memory_bytes": 68719476736,
+    "ordinary_reserve_bytes": 8589934592,
+    "CPU_ordinary_floor_bytes": 17716740096,
+    "model_ordinary_floor_bytes": 77846282240,
+    "model_block_seconds": 5400,
+    "after_release_CPU_block_seconds": 3600,
+    "cleanup_included_seconds": 360,
+    "total_seconds": 9000,
+    "output_snapshot_cap_bytes": 17179869184,
+    "disk_initial_model_bytes": 25769803776,
+    "common_native_cache_bytes": 6442450944,
+    "physical_cards": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "logical_devices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "physical_HBM_reserve_MiB": 3072
+  },
+  "resource_estimates": {
+    "raw_budget_reason": "original all64 K/V prefill ~2GiB; two full compact snapshots per layer ~6-10GiB conservative aggregate including full query/scores/probs/output and journals; 16GiB snapshot cap includes JIT/logs. Actual peak/time unknown until device/whole; no capacity from KIVI PASS.",
+    "time_budget_note": "5400 inclusive180 cleanup model block +3600 inclusive180 cleanup after-release independent CPU; initial CPU900 and N1240 count inside model block. Entire9000 must fit original1791788425. CPU numerical cost UNRUN; hard budgets fail closed."
+  },
+  "CPU_parallel_admission": "CPU_QUEUE:7CPU/RAM unchanged; no peer registration/overlap claim. Historical0581 released perMAIN; each future stage still needs current admission.",
+  "scope": "B1 eager first two SKVQ Q2 FA decode steps. No all176/mixed/reset/fork/FULL graph/GDN content/matched1024/task authority.",
+  "remaining_actual": [
+    "capture014 whole full256 samples",
+    "cal006 actual128 rank fits/64artifacts whole",
+    "writer002 actual128 artifacts numeric whole",
+    "reader001 actual128cases/384kernels whole",
+    "current same660 CPU/N1/model/independent whole"
+  ],
+  "deadline_epoch": 1791788425,
+  "native_ready": false,
+  "model_ready": false,
+  "performance_ready": false,
+  "task_ready": false,
+  "whole_176": false,
+  "graph_verified": false,
+  "lifecycle_verified": false,
+  "predecessor_model_source_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-001/SOURCE_MANIFEST.json",
+    "bytes": 71141,
+    "sha256": "2e77b3c4a6232e4b5d91e69693d38091ee147936c946e5bb6f71d22dc4d1f275"
+  },
+  "confirmed_predecessor_defect": "Frozen001 manifest omitted native_format_patch_chain accessed by original014 N1 qualify before device tiny; kept001 unchanged.002 adds exact original six Refs and access-closure assertion/regression; no format/math/resource change."
+}

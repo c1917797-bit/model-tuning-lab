@@ -1,6 +1,6 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-10T23:48:29Z",
+  "updated_at_utc": "2026-10-11T00:27:46Z",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -14,63 +14,77 @@
     "paper": "SKVQ",
     "owner": "MAIN",
     "operation": "exec-00000000000005a7",
-    "state": "RUNNING_FULL_PIPELINE_PRE_NPU_STATE_NOT_YET_VERIFIED",
+    "state": "RUNNING_DEVICE_FREE_FULL_CAPTURE_CONSUMER",
     "source": {
       "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/SOURCE_MANIFEST.json",
       "bytes": 82562,
       "sha256": "9c7b1118b1cd1f2a20ab7fde0ecb98031bf14289c9c795c18f48de9cdb805acd"
     },
     "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-014-main-20261010-001",
-    "physical_devices": [
+    "physical_devices": [],
+    "scope": "full256x4096 baseline calibration capture, not quantized numerical, E2E or task score",
+    "actual_verified_sample_count": 256,
+    "sample_observation_utc": "2026-10-11T00:26:52Z",
+    "actual_worker_host_pids": [],
+    "actual_original": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ014_RELEASE_05B6_ORIGINAL_20261011.json",
+      "bytes": 27268,
+      "sha256": "16913523d1696f400cd169cf196d17daaf68137b95ad03868433392cbea5eeb5"
+    },
+    "device_stage_released_at": "2026-10-11T00:26:24.0514711Z",
+    "capture_physical_devices": [
       4,
       5,
       6,
       7
-    ],
-    "scope": "full256x4096 baseline calibration capture, not quantized numerical, E2E or task score"
+    ]
   },
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
   "preparation": [
     {
       "paper": "KIVI",
-      "owner": "kivi_model_successor",
-      "stage": "Independent reference budget repair after real0581 timeout; immutable018 retained",
-      "state": "REFERENCE_REPAIR_OFF_DEVICE",
-      "ready": false
+      "owner": "MAIN",
+      "stage": "raw024/whole023 independent vector reference preserves64 and original scalar equivalence;22runtime files exact; agent local219PASS; target same660219 then full64 unrun",
+      "state": "SOURCE_DEPLOYED_TARGET_SOFTWARE_PENDING",
+      "ready": false,
+      "entry": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-vector-writer-v024-20261011/SOURCE_MANIFEST.json",
+        "bytes": 13550,
+        "sha256": "a39f189a473947bb28aed5e9885a101e7cd02b7c8438ee892735543f3d0ce265"
+      }
+    },
+    {
+      "paper": "KIVI",
+      "owner": "MAIN",
+      "stage": "B1screen005 source300 verified actual05b3; same-image66 and actualfull64 predecessor missing",
+      "state": "NUMERICAL_PREDECESSOR_PENDING",
+      "ready": false,
+      "entry": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-matched1024-bootstrap-v1-005/SOURCE_MANIFEST.json",
+        "bytes": 146019,
+        "sha256": "4d6381f308137791b948b7fe0add5a7aede8efac26f082c6d817f2fec569bb27"
+      }
     },
     {
       "paper": "SKVQ",
       "owner": "MAIN",
-      "stage": "014 actual source143/software155 and full mount9TRAIN PASS; executable CPU->N1->TP4 calibration controller waiting for joint CPU admission",
-      "state": "RUNNING_FULL_HOST_05A7",
-      "ready_for_entry": false,
-      "ready_for_unconditional_NPU": false,
-      "source": {
-        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/SOURCE_MANIFEST.json",
-        "bytes": 82562,
-        "sha256": "9c7b1118b1cd1f2a20ab7fde0ecb98031bf14289c9c795c18f48de9cdb805acd"
-      },
-      "entry": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/ENTRY.json",
-      "CPU_total": 7,
-      "ordinary_total_bytes": 77846282240,
-      "seconds_including_cleanup": 7200,
-      "raw_with_this_entry_requires_CPU": 9,
-      "shared_CPU_observed": 7,
-      "operation": "exec-00000000000005a7"
-    },
-    {
-      "paper": "KIVI",
-      "owner": "kivi_model_successor",
-      "stage": "B1screen004 local66/source chain reviewed; mixed008 source314/paired286 assembled and113 archived; sameimage191/48 pending and numerical64 missing",
-      "state": "NUMERICAL_PREDECESSOR_PENDING",
+      "stage": "006 actual43/source161; writer002 actual33/source181; reader001 actual29/source204; all wait actual014 complete consumed capture and fitting",
+      "state": "ACTUAL_CAPTURE_PENDING",
       "ready": false
     },
     {
       "paper": "SKVQ",
       "owner": "sparse_attention_ready_queue",
-      "stage": "cal006 actual43/source161; writer002 actual33/source181; reader001 actual29/source204; model001 missingN1 metadata identified off-device,002repair pending; actual014/calibration/writer/reader remain missing",
-      "state": "DATA_PENDING_OFF_DEVICE",
+      "stage": "model00215files deployed exact/MAIN local11PASS; full221 target software and actual004stages unrun; fixed1024 successor preparing",
+      "state": "SOURCE_DEPLOYED_DATA_PENDING",
+      "ready": false
+    },
+    {
+      "paper": "KIVI",
+      "owner": "recurrent_lifecycle_ready_queue",
+      "stage": "final tasks frozen inputs1822;task domain38912+2048 capacity/numeric/lifecycle extension preparing; no task score",
+      "state": "PREPARING_OFF_DEVICE",
       "ready": false
     }
   ],
@@ -104,7 +118,7 @@
       }
     ]
   },
-  "idle_cause": "Previous CPU independent raw had no device workload and blocked unregistered overlap; it is now terminal. SKVQ full controller started; actual compute ownership must be observed, not inferred.",
+  "idle_cause": "Own TP4 capture stopped-retained/Pid0/noExec/noOOM verified actual05b6; physical4-7 baseline/noPID.05a7 remains live in CPU-only full raw consumer; frozen standaloneCPU7 prevents unqualified peer workloads. Ready NPU successor count0: KIVI actualfull64 and SKVQ actualcapturewhole/calibration/writer predecessors missing.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -226,10 +240,10 @@
     }
   ],
   "latest_resource_snapshot": {
-    "operation": "exec-0000000000000594",
-    "time_utc": "2026-10-10T23:00:51Z",
-    "physical4_7": "no PID/AICore0/HBM2869,2866,2866,2862MiB",
-    "ordinary_available_KiB": 115269108,
+    "operation": "exec-00000000000005b1",
+    "time_utc": "2026-10-11T00:12:28Z",
+    "physical4_7": "own TP4 workers905420,905424,905425,905426;HBM21993,21990,21991,21985MiB",
+    "ordinary_available_KiB": 103114032,
     "not_reusable_for_future_admission": true
   },
   "history_terminals": [
@@ -848,14 +862,13 @@
   "current_off_device": null,
   "current_successor_rule": "Poll05a7; on terminal retain original and independently verify exact own release. Success feeds cal006; failure returns to source-supported repair. No duplicate fullhost.",
   "scheduling_audit": {
-    "last_raw": "0581 terminal1/bounded child and exact own release verified05a6",
-    "current": "05a7 reviewed full SKVQ014 started after fresh aggregate admission; phase actual NPU not yet verified",
-    "next": "No duplicate raw023 or014; prepare reference repair and actual-data consumers while current pipeline runs"
+    "current": "Actual05a7 live at00:19:27; independent observation05b1 confirms147samples/TP4physical4-7",
+    "next": "On full terminal exact own release: SKVQ006 fitting if whole PASS; KIVIraw024sameimage219/full64 after aggregate CPU admission. No unreviewed overlap or duplicate capture.",
+    "repair": "Reference arithmetic unchanged; newvector vs original scalar byte equivalence tested locally, actual target pending."
   },
   "current_preparation_checkpoint": {
-    "path": ".agents/workstreams/qwen36-damp-ascend-20261006/KIVI_RAW023_TIMEOUT_SKVQ014_DISPATCH_20261011.json",
-    "kivi008": "source314/286 and113 exact canonical files; same-image/NPU unrun",
-    "raw023": "failed runtime budget, not numeric verdict",
+    "path": ".agents/workstreams/qwen36-damp-ascend-20261006/VECTOR_REFERENCE_AND_MODEL_SUCCESSORS_20261011.json",
+    "source_only": true,
     "paired_e2e": "UNRUN"
   }
 }

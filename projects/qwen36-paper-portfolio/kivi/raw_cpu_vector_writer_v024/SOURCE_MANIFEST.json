@@ -1,0 +1,279 @@
+{
+  "schema": "kivi.actual-firstdecode-whole-consumer-source/v1",
+  "root": "C:/Users/Huawei/AppData/Local/Temp/kivi-raw-cpu-vector-writer-v024-20261011",
+  "remote_root": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-vector-writer-v024-20261011",
+  "default_enabled": false,
+  "files": {
+    "consume_first_decode_progress.py": {
+      "bytes": 11241,
+      "sha256": "746b706bfd41356daf6e3ba90be67b920255b877ba9ebc303b848a825d4e2a19"
+    },
+    "consume_prefill_vector.py": {
+      "bytes": 26942,
+      "sha256": "905d06d4f93f47c62dc5ac730b6bc881fb17568cb0df58612f8d7f93767e75eb"
+    },
+    "consume_raw_cpu.py": {
+      "bytes": 5580,
+      "sha256": "75905984e40d16c3fdbaf94efcc6899abc34de848366c1400864b67fdceb0bc0"
+    },
+    "cpu_raw_resources.py": {
+      "bytes": 28412,
+      "sha256": "aa97aa3190eb4f6de79679c9d9c05b59fc021e4f8b9ad4adcfc07f0c0f53a88a"
+    },
+    "delegate.py": {
+      "bytes": 1688,
+      "sha256": "ae67deeec4b70f6f43f621270ddcee4aece40752b8e28754ced70005e2873c8d"
+    },
+    "independent_vector_writer.py": {
+      "bytes": 4864,
+      "sha256": "6de0ef8972d956b8e53c628830a41e54c417d4a13e404e19ab48f57ab1cf70f5"
+    },
+    "main.py": {
+      "bytes": 9915,
+      "sha256": "de3755385ce47e23bb97b91f8f2ccff54f1fc7afaca3979463fff8185ea674c4"
+    },
+    "raw_cpu8.py": {
+      "bytes": 6197,
+      "sha256": "bd6402b144bd3e50530311fa0670c746194d8150cf4f18a290650b61fef9b87c"
+    },
+    "test_cpu_raw.py": {
+      "bytes": 49093,
+      "sha256": "b140bd10251b074ea4ea545fadd5b0ec823e1646a33bf1e86a78939e31e919f0"
+    },
+    "test_equivalence.py": {
+      "bytes": 12758,
+      "sha256": "0ba2ff29c7d3ebd1e074421f5fe50b746fd38b7f02afcb2888d101e26720a1a9"
+    },
+    "test_full_reader.py": {
+      "bytes": 15151,
+      "sha256": "219400d3441a8e6837e3172e96c3416a74865822379945ba290df2dca52894cb"
+    }
+  },
+  "producer_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json",
+    "bytes": 110307,
+    "sha256": "a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4"
+  },
+  "base_whole": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-vector-writer-v023-20261011/SOURCE_MANIFEST.json",
+    "bytes": 16365,
+    "sha256": "09ae6fca169c145774ee1466f423348cdf506aa1f5565f0131a44f1dfcbbf6cc"
+  },
+  "reviewed_peer_profile": {
+    "schema": "kivi.reviewed-skvq-peer-profile/v1",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/SOURCE_MANIFEST.json",
+      "bytes": 48234,
+      "sha256": "199d22ddf5b9151c1177290fe4f767333e84490312eec34c184b4069dd0a436c"
+    },
+    "resources_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/resources.py",
+      "bytes": 6404,
+      "sha256": "660cdd7e2639db7fbf4400a257de116b264bba9c42a530df2fe5bc734ae9624c"
+    },
+    "host_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-008/MAIN_HOST.py",
+      "bytes": 25186,
+      "sha256": "6067bb0a327b1dded44efda7415429db98262668bfcf41b1cc37f41afc60542e"
+    },
+    "owner": "skvq-current72h-preprojection-v1-008",
+    "phase": "tp4-capture",
+    "guest_memory_bytes": 68719476736,
+    "guest_CPU": 4,
+    "total_CPU": 7,
+    "guest_future_workspace_bytes": 343597383680
+  },
+  "software_tests": 219,
+  "new_software_tests": 104,
+  "inherited_software_tests": 115,
+  "scope": "Retained018 all64 independent reference with exact new independent vector writer; unchanged output oracle, tensor thresholds, owner/geometry/retirement/cleanup gates. No NPU recapture.",
+  "budgets": {
+    "host_CPU": 1,
+    "guest_CPU": 1,
+    "guest_memory_bytes": 8589934592,
+    "host_AS_RSS_bytes": 536870912,
+    "reserve_memory_bytes": 8589934592,
+    "Devices": [],
+    "phase_seconds_including_cleanup": 5400,
+    "cleanup_seconds": 90,
+    "child_seconds": 5310,
+    "workspace_bytes": 34359738368,
+    "standalone_CPU": 2,
+    "standalone_RAM_full_declared_bytes": 17716740096,
+    "standalone_new_disk_floor_bytes": 42949672960,
+    "running_peer_CPU": 7,
+    "running_joint_CPU": 9,
+    "running_joint_RAM_full_declared_bytes": 95563022336,
+    "running_new_disk_floor_bytes": 386547056640,
+    "stopped_peer_remaining_CPU": 3,
+    "stopped_joint_CPU": 5,
+    "stopped_joint_RAM_full_declared_bytes": 26843545600,
+    "software": {
+      "CPU": 1,
+      "CPU_seconds": 240,
+      "wall_seconds": 300,
+      "memory_bytes": 8589934592,
+      "Devices": [],
+      "scope": "same660 Python3.12 NumPy1.26.4 complete219 source/reference fixtures; no NPU"
+    },
+    "cutoff_epoch": 1791788425,
+    "clock_reset": false,
+    "reference_cost": {
+      "scalar_oneFA_local_synthetic_seconds": 53.732227799948305,
+      "vector_oneFA_local_synthetic_seconds": 0.5957685,
+      "target_attention_only_oneFA_seconds": 19.758,
+      "target_all64_seconds": null,
+      "scope": "not comparable hosts; no full64 fit claim"
+    }
+  },
+  "changes": [
+    "Exact new raw024 caller plus vector writer/reader and diagnostic-progress aggregate sources; original018 scalar codec and aggregate remain pinned and cross-tested.",
+    "All64 result gate requires NumPy1.26.4, original scalar identity, no candidate math call, and exact reference manifest.",
+    "Whole CLI exposes software only; actual raw/consume uses raw024 source-qualified CPU-resource delegate. No legacy raw direct route."
+  ],
+  "evidence_scope": {
+    "local_software": "UNRUN at source snapshot",
+    "MAIN_software": "UNRUN",
+    "numeric64": "MISSING; original0581 bounded child timeout retained",
+    "parallel_actual": "UNRUN"
+  },
+  "required": [
+    "Actual current018190 stage/report and retained0548 complete whole020 source/owner/release replay required; old055c/diagnostics not permissions.",
+    "Fresh standalone CPU2/16.5GiB/40GiB resource admission required; no NPU idle dependency.",
+    "Original all64 raw numerical child/CPU8 owner/cleanup and full original terminal remain mandatory. Not whole176/FULL/mixed/perf.",
+    "Peer profile covers only exact SKVQ008 source and explicit new MAIN jointlease; currentSKVQ011 and010 not covered; use standalone."
+  ],
+  "model_ready": false,
+  "performance_ready": false,
+  "run_authority": false,
+  "predecessor": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-provenance-v023-20261011/SOURCE_MANIFEST.json",
+    "bytes": 11123,
+    "sha256": "337da6b9edf7704771ee8973445a5d23b7a63b6a9ec0451afadaa94838994c5a",
+    "modified": false
+  },
+  "actual_producer_model": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/RESULT.json",
+    "bytes": 1090213,
+    "sha256": "18e831dbf9c35b10f18d80d40a445155dc98ba656835c1918ee40fc4c7b4f6d4"
+  },
+  "actual_raw_full64": null,
+  "peer_coverage": {
+    "reviewed_source": "only SKVQ008",
+    "SKVQ010": "NOT COVERED; no auto rebind or peer lease permission",
+    "actual_parallel": "UNRUN",
+    "standalone": "legal with fresh own/common resource admission; never requires4-7 idle",
+    "SKVQ011": "NOT COVERED; standalone only without new reviewed common lease"
+  },
+  "actual_producer_terminal": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI018_0548_ORIGINAL_20261010.json",
+    "bytes": 8686,
+    "sha256": "fd71a259d096f75631cb5b6b54e33bee4747ccb7946e1454468a3c6486adc370"
+  },
+  "inherited_base_software": 115,
+  "source_changes": [
+    "Exact new raw024 caller plus vector writer/reader and diagnostic-progress aggregate sources; original018 scalar codec and aggregate remain pinned and cross-tested.",
+    "All64 result gate requires NumPy1.26.4, original scalar identity, no candidate math call, and exact reference manifest.",
+    "Whole CLI exposes software only; actual raw/consume uses raw024 source-qualified CPU-resource delegate. No legacy raw direct route.",
+    "cpu_raw_resources exact cleanup source SHA mechanically rebinds whole023; all controller/resource predicates, branches and budgets unchanged.",
+    "Software complete-file fixtures are created under explicitly RW output.parent, never the RO source mount; source/reference math unchanged."
+  ],
+  "state": "PREPARED_SOURCE_SOFTWARE_UNRUN",
+  "actual_raw_result": null,
+  "actual_raw_terminal": null,
+  "resource_phase_fixture": {
+    "FIRST_OBSERVATION": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/observation-1791664278790524020.json",
+      "bytes": 11530,
+      "sha256": "00f5041f558d4fe8dcb5ecf258bca8ef3f97b739dc1852d56c68c5978a59018b"
+    },
+    "engine": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/engine-1791664278788955340.json",
+      "bytes": 3140,
+      "sha256": "be1757c38ee007179517be04f10582b90c9924447e7734fd7c601fc9d4a05830"
+    },
+    "scan": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/OUTPUT-SCAN-1791664278748210610.json",
+      "bytes": 1275,
+      "sha256": "7d7689e6dc841eac5413eff903e903119d526ca150a80ceea835467a9306e6ca"
+    },
+    "namespace": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/KIVI_ALL4_NAMESPACE_RAW.json",
+      "bytes": 24074,
+      "sha256": "154a008968f09ecdadcf72aa1e74869c6236fd69d4cee28e3bac623a9eeb5c6e"
+    }
+  },
+  "required_actual": "New same660 Devices[] complete219; fresh standalone CPU2/16.5GiB/disk40GiB admission; unchanged018 producer replay; new raw024 all64 math/whole consumption/CPU cleanup/terminal. No device recapture.",
+  "adapted_raw_entry_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-vector-writer-v024-20261011/consume_raw_cpu.py",
+    "bytes": 5580,
+    "sha256": "75905984e40d16c3fdbaf94efcc6899abc34de848366c1400864b67fdceb0bc0"
+  },
+  "provenance_fixture": {
+    "client": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/CLIENT_RESULT.json",
+      "bytes": 2619,
+      "sha256": "3c2429534f4911c5fad9cadafa65b99781554cf473eae88d045f1d777bb21fc4"
+    },
+    "rank": {
+      "bytes": 8515,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/run-kivi-owned-layout-1791664208586952020/r0-p397-s58987110-PACKED-QWEN-r0-FIRSTDECODE-FINAL.json",
+      "sha256": "e04443b25859fe0a12eadf6ac24ad7c92d4054f88f6077f8157970b365fcf8eb"
+    },
+    "frame": {
+      "bytes": 194377,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/run-kivi-owned-layout-1791664208586952020/r0-p397-s58987110-r0-language_model-model-layers-11-self_attn-attn-e000002-PACKED-FRAME.json",
+      "sha256": "8596a2cd5d31c748b91e8054630a7658a7e7579bbc056b1e85b35c216a3c1135"
+    },
+    "owner": {
+      "bytes": 2030,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/run-kivi-owned-layout-1791664208586952020/r0-p397-s58987110-PACKED-QWEN-r0-language_model.model.layers.11.self_attn.attn-e000002-r00-OWNER.json",
+      "sha256": "621187bfaf60a73c1ec4e82d209114de7f778d318c3a3d50171bb8033a3cea47"
+    },
+    "provenance": {
+      "bytes": 175975,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/candidate/run-kivi-owned-layout-1791664208586952020/r0-p397-s58987110-PACKED-QWEN-r0-language_model.model.layers.11.self_attn.attn-e000001-s00-ORIGINAL-PREFILL.json",
+      "sha256": "301aea71ff6584a17913760c88eaf3ea83e22e31f9f32ce7e3dd6fa72bf4a4ac"
+    }
+  },
+  "original_failures": {
+    "raw022_0574": {
+      "status": "FAILED source role mismatch before mathematics",
+      "stderr_sha256": "afaec6214721b3b5179d16aa8d7e1c58a5a496519823525d36d5884045f9149c",
+      "preserved": true
+    },
+    "raw023_0581": {
+      "exit_code": 1,
+      "duration_seconds": 5327.241,
+      "primary": "bounded original child; never retry",
+      "preserved": true,
+      "numeric_mismatch_reported": false
+    },
+    "local219_001": {
+      "tests": 219,
+      "errors": 1,
+      "failures": 4,
+      "elapsed_seconds": 87.811,
+      "cause": "new whole core cleanup SHA not rebound in source-qualified resource consumer",
+      "report_sha256": "7a6cdc657c45e011f86bd4fecf936efd5cd30b3ecc85321f2ca77d281b240f1c",
+      "preserved": true
+    }
+  },
+  "reference_sources": {
+    "writer": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-vector-writer-v024-20261011/consume_prefill_vector.py",
+      "bytes": 26942,
+      "sha256": "905d06d4f93f47c62dc5ac730b6bc881fb17568cb0df58612f8d7f93767e75eb"
+    },
+    "vector": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-vector-writer-v024-20261011/independent_vector_writer.py",
+      "bytes": 4864,
+      "sha256": "6de0ef8972d956b8e53c628830a41e54c417d4a13e404e19ab48f57ab1cf70f5"
+    },
+    "aggregate": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-vector-writer-v024-20261011/consume_first_decode_progress.py",
+      "bytes": 11241,
+      "sha256": "746b706bfd41356daf6e3ba90be67b920255b877ba9ebc303b848a825d4e2a19"
+    }
+  }
+}

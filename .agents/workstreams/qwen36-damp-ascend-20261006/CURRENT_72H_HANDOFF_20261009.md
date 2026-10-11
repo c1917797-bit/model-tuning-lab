@@ -1,3 +1,17 @@
+## 2026-10-11T00:27:46Z — SKVQ256 capture complete; own TP4 released, full independent consumer still live
+
+- Actual05b5 shows256/256 samples;05b6 verifies exact own TP4 stopped-retained/Pid0/noExec/noOOM at00:26:24Z, physical4-7 baseline/noPID. Original05a7 remains live in Devices[] independent full capture consumer. No capture whole/calibration/quantized/E2E/task PASS yet; no duplicate launch.
+- Ready NPU successor count remains0. StandaloneCPU7 controller prevents unreviewed peer CPU overlap. Next: actual successful014 whole ->006 CPU calibration; KIVIraw024 target219 -> independentfull64 ->B1screen005. Never recapture valid018 or retry unchanged023 timeout.
+- New source89 files archived; five actual05b2-failure/05b3-source300/05b4/05b5/05b6 originals retained outsideGit. Mixed009 cost audit proves576 writer/output row calls, with credible scalar-reference budget risk, not measured algorithm failure; preparer assigned narrow independent vector tail1..127 extension. Original009 and numerical gates remain unchanged.
+
+## 2026-10-11T00:19:38Z — actual SKVQ205 samples; vector raw024 and fixed1024/model successors deployed
+
+- Read VECTOR_REFERENCE_AND_MODEL_SUCCESSORS_20261011.json. Original05a7 is still live. Actual05b4 shows205/256 samples;05b1 proves own TP4 workers on physical4-7. No full capture whole or quantized/E2E/task PASS yet. Poll05a7 only.
+- KIVI whole023/raw024 independent vector writer keeps original scalar semantics, output oracle and all64 coverage. MAIN reviewed changed sources, deployed and read back22 exact files. Agent local219PASS is NOTsame660/full64. B1screen005 actual05b3 source300 verified; same-image66 and actualraw64 remain prerequisites. No018 recapture.
+- SKVQ model00215files byte-exact; MAINlocal11PASS after preserving Python-launcher/sandbox failures. Full target221/software, actual fitting/writer/reader/model remain missing. Only source-archived002, not a model result.
+- Runtime sources archived byte-for-byte separately from generated evidence. Actual05b2 MAINcommand assembly error occurred after116source checks; fixed05b3 completed with300source audit. No algorithm/threshold change. Original dry-run path allowlist error retained and fixed with exact paths.
+- Latest goal alignment: seek real matched1024 model gain, not card occupancy/source volume. After actual014 terminal and exact own release, consume full capture and admit006fit; independently repairedraw024 awaits sameimage/CPU admission. Remaining fixed cutoff1791788425;0-3/protected unchanged;32GiB capSPENT. HTTPS push remains unconfirmed.
+
 ## 2026-10-10T23:48:29Z — raw023 independent reference timed out and released; SKVQ014 full pipeline started
 
 - Read KIVI_RAW023_TIMEOUT_SKVQ014_DISPATCH_20261011.json. Actual0581 terminated exit1/5327.241s at bounded child time gate; full64 numerical verdict remains INCOMPLETE, not an algorithm failure. Keep valid018 capture and every023 original; no unchanged repeat. Independent vector writer with original scalar cross-checks is prepared off-device, not yet actual same-image/raw64 PASS.

@@ -1,0 +1,138 @@
+{
+  "schema": "kivi.whole-vector-source-handoff/v1",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-vector-writer-v023-20261011/SOURCE_MANIFEST.json",
+    "bytes": 16365,
+    "sha256": "09ae6fca169c145774ee1466f423348cdf506aa1f5565f0131a44f1dfcbbf6cc"
+  },
+  "local_root": "C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-whole-vector-writer-v023-20261011",
+  "frozen": true,
+  "producer_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json",
+    "bytes": 110307,
+    "sha256": "a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4"
+  },
+  "files": {
+    "consume_whole.py": {
+      "bytes": 57621,
+      "sha256": "72847aec8fc1021fafc15ca60b44bcc594d705145b2b4b5618b90385d9903f97"
+    },
+    "main.py": {
+      "bytes": 5765,
+      "sha256": "6307efcffa7bd04d39e7f1e311ee4ba7298841547d454bb4ce96f76048eb1637"
+    },
+    "raw_cpu8.py": {
+      "bytes": 5284,
+      "sha256": "51f8c80ba3ba0a02200b415cb8aabee6f33e331d9327b563f9f7cec36b5c2f73"
+    },
+    "test_driver_consumer.py": {
+      "bytes": 18464,
+      "sha256": "78f9e217daf645e2736f15d5c290141dc9da7835fc9be55f8c5ebdd842ed7d02"
+    },
+    "test_explicit_consumer.py": {
+      "bytes": 12007,
+      "sha256": "42e3f90f178fe2f1bcef0f14b8d041910142e4583d158b95f8a75d4003cbf523"
+    },
+    "test_whole.py": {
+      "bytes": 57750,
+      "sha256": "354fba8cde41738241ebf6c32b64b3c32f0266b2b3aa3c477c52260c97762621"
+    }
+  },
+  "commands": {
+    "default_OFF": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-vector-writer-v023-20261011/main.py"
+    ],
+    "software": [
+      "/usr/local/python3.12.13/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-vector-writer-v023-20261011/main.py",
+      "--execute",
+      "--mode",
+      "software",
+      "--source-manifest-sha256",
+      "09ae6fca169c145774ee1466f423348cdf506aa1f5565f0131a44f1dfcbbf6cc",
+      "--producer-archive",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018",
+      "--reviewed-deps",
+      "/kivi-reviewed-deps",
+      "--output",
+      "@NEW_RW_SOFTWARE115_JSON@"
+    ]
+  },
+  "actual_raw_and_consume_entry": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-vector-writer-v024-20261011/SOURCE_MANIFEST.json",
+    "bytes": 13550,
+    "sha256": "a39f189a473947bb28aed5e9885a101e7cd02b7c8438ee892735543f3d0ce265"
+  },
+  "scope": "Retained018 all64 independent reference with exact new independent vector writer; unchanged output oracle, tensor thresholds, owner/geometry/retirement/cleanup gates. No NPU recapture.",
+  "required_actual": {
+    "producer_190": "Actual completed same-image190/report/source stage remains mandatory.",
+    "producer_model": "Actual0548 retained exit0/capture exists; full current consumer producer_only safety/source/cleanup and full64 independent raw still mandatory. 055c consumer phase failure and055d nonacceptance wrapper label failure preserved.",
+    "raw64": "MISSING: raw0230581 timed out before terminal acceptance; new raw024 all64 reference result, original CPU owner/cleanup/terminal mandatory."
+  },
+  "software": "Included original115 in raw024 complete219; target sameimage219 UNRUN",
+  "permissions": {
+    "NPU": false,
+    "model_ready": false,
+    "performance_ready": false,
+    "run_authority": false,
+    "whole176": false,
+    "mixed_verified": false,
+    "FULL_verified": false
+  },
+  "budgets": {
+    "local_software": {
+      "CPU": 1,
+      "CPU_seconds": 120,
+      "wall_seconds": 150,
+      "memory_bytes": 536870912,
+      "execution": "single-thread stdlib local fixtures; no remote execution/Torch/Docker/NPU"
+    },
+    "whole_consumer": {
+      "CPU": 1,
+      "AS_RSS_bytes": 536870912,
+      "CPU_seconds": 120,
+      "wall_seconds": 150,
+      "new_output_bytes": 1048576
+    },
+    "independent_raw_phase": {
+      "host_CPU": 1,
+      "guest_CPU": 1,
+      "host_AS_RSS_bytes": 536870912,
+      "guest_memory_bytes": 8589934592,
+      "Devices": [],
+      "phase_seconds_including_cleanup": 5400,
+      "cleanup_seconds": 90,
+      "original_child_limit_seconds": 5310,
+      "sourceCPUallocation_required": 2,
+      "ordinary_initial_floor_bytes": 17716740096,
+      "workspace_allowance_bytes": 34359738368,
+      "estimate": "Scalar writer local synthetic oneFA53.732s; new vector writer0.596s same digest. Original target attention-only oneFA19.758s. Neither is target full64 fit proof."
+    },
+    "producer_phase_seconds": 5400,
+    "producer_cleanup_seconds": 90,
+    "total_cutoff_epoch": 1791788425,
+    "protected_physical": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "budget_reset": false
+  },
+  "source_changes": [
+    "Exact new raw024 caller plus vector writer/reader and diagnostic-progress aggregate sources; original018 scalar codec and aggregate remain pinned and cross-tested.",
+    "All64 result gate requires NumPy1.26.4, original scalar identity, no candidate math call, and exact reference manifest.",
+    "Whole CLI exposes software only; actual raw/consume uses raw024 source-qualified CPU-resource delegate. No legacy raw direct route."
+  ]
+}
