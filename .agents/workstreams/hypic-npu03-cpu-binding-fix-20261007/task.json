@@ -1190,13 +1190,15 @@
   },
   "r20_serial_diagnostic": {
     "preregistration": "HYPIC_R20_SERIAL_DIAGNOSTIC_PREREGISTRATION_20261011.json",
-    "state": "frozen and offline-checked; no NPU phase launched",
+    "state": "no-cache controller running; candidate not launched",
     "sample_indexes": [59, 82, 126],
     "baseline_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r20-serial-baseline",
     "candidate_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r20-serial-hypic",
     "preregistration_sha256": "480b415761be8eeee69b1bd75479b60c37e75c642127034ec4b1728b00f76098",
+    "baseline_controller_operation": "exec-0000000000000675",
+    "baseline_first_progress": "service-starting at 2026-10-11T05:29:09.851315+00:00; handle confirmed running",
     "offline_checks": "Both arm --check modes, independent audit --check, three host-only tests, and 15-request historical payload-hash replay passed.",
     "claim_boundary": "Diagnostic only, not a population quality pass or replacement for r19."
   },
-  "next_action": "R19 LongBench remains REJECT_OR_QUALIFY (227/381 to 219/381); GSM8K off-path PASS cannot override it. R20 same-source serial three-sample diagnostic is frozen, offline-checked and not launched. Freshly prove direct chicaihong01/ma route, physical NPU0-3 and port 8223 actually idle, and exact new roots absent; then run baseline and independent audit/release before candidate. Preserve r13-r19 roots, never use NPU4-7 or stop external work, and do not claim GitHub/main sync."
+  "next_action": "Poll exact live r20 no-cache controller exec-0000000000000675 and its immutable baseline root; do not restart it on slow observation. On terminal, independently audit 3x3 raw rows, source, physical isolation and exact owned release. Only then refresh direct route and physical NPU0-3/8223 idle proof and admit the separately frozen candidate root. R19 LongBench remains REJECT_OR_QUALIFY (227/381 to 219/381); GSM8K off-path PASS cannot override it. Preserve r13-r19 roots, never use NPU4-7 or stop external work, and do not claim GitHub/main sync."
 }

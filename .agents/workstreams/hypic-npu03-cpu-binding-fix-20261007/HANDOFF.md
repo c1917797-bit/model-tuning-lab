@@ -1,6 +1,6 @@
 # HYPIC NPU0–3 — current handoff
 
-## 2026-10-11 r20 bounded diagnostic prepared, not launched
+## 2026-10-11 r20 bounded diagnostic, control running
 
 The fresh-root, same-source serial control/HYPIC diagnostic is frozen in
 `HYPIC_R20_SERIAL_DIAGNOSTIC_PREREGISTRATION_20261011.json`. It uses samples
@@ -9,11 +9,20 @@ three scored repetitions per sample at concurrency 1. Source, model, image,
 material-cache budget and physical NPU0–3 identity match r19; the only
 within-r20 treatment switch is `VLLM_ASCEND_HYPIC_ENABLE`. Both adapter
 `--check` modes, auditor `--check`, three host-only regressions and
-historical request-hash replay passed. The new roots are absent; no NPU
-service has been launched. Next admit the baseline only after a fresh direct
-route, real physical 0–3/8223 idle proof and exact-root check. Audit and
-release it before admitting the candidate. This post-hoc-selected diagnostic
+historical request-hash replay passed. The control launch and its root are
+recorded below; the candidate root remains absent. Audit and release the
+control before admitting the candidate. This post-hoc-selected diagnostic
 cannot overturn r19 or establish population quality.
+
+Control-arm launch update: after a fresh direct route and actual physical
+NPU0–3/8223 idle check, the no-cache controller was started at about
+2026-10-11 05:29 UTC as AWMCP exec `exec-0000000000000675`. Its immutable
+root is `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r20-serial-baseline`.
+The first observed progress stage is `service-starting`; the handle is
+confirmed running, **not terminal**. Poll that same handle and root; never
+relaunch because an observation is slow or times out. Do not start the
+candidate until this control has terminated, passed an independent raw-artifact
+audit and released only its exact owned resources.
 
 ## 2026-10-11 protocol-gap checkpoint
 
