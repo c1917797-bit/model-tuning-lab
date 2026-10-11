@@ -1,3 +1,11 @@
+## 2026-10-11 14:03:39 UTC — SKVQ016 dispatched; KIVI same-image200 PASS; packed003 remains failed
+
+- Current exact handle exec-0000000000000994: RUNNING host prelude/CPU then TP4; actual NPU occupancy not yet proven. Read SKVQ016_DISPATCH_KIVI200_SOFTWARE_20261011.json and serial queue. Target016 Linux94/94 zero-skips PASS0991. Original reader013 whole unchanged and independently replayed by host before device create. Source MF108337/f818fdd091b0eb1a374d1cda68aa387d1d255cae77773705be6bf0a46604bf8d. No duplicate dispatch.
+- KIVI packed003097f FAILED evidence256MiB during independent CPU; two native calls completed but no003 numeric/whole PASS. Full-state dedup saved35.7MB; repeated inspect grew75.2MB. Exact own CPU/NPU independently stopped-retained/noOOM0987. Agent repairs receipt storage without reducing fields, checks or budget; no unchanged native rerun.
+- KIVI firstdecode002 deployed56files/219deps098a, actual same660 Devices[]200 tests passed098e/137.274s. Own CPU independently stopped/noOOM0993. Not model/performance authority; valid packed prerequisite and long640 still pending.
+- Parallel preparers: packed receipt/recovery, long640 independent model, matched012 fixed1024 successor. No ready device backup or zero-idle claim. 015 not deployed due a real local consumer completeness negative;016 fixes full original/fresh SMI coverage, not math.095b remains UNKNOWN.
+- Prior0a5f2258 successfully pushed0992 after original TLS failure0983; no main/force change. Cutoff1791788425 unchanged. No new non-HYPIC E2E/accuracy acceptance. Older headers below are historical.
+
 ## 2026-10-11 13:39 UTC — KIVI003 live; original raw numeric PASS; SKVQ controller repair
 
 - Read KIVI_PACKED003_RUNNING_SKVQ014_CONTROLLER_FAILURE_20261011.json and current serial queue. MAIN exact handle exec-000000000000097f is RUNNING; only physical4->logical0 after same-image checks. Target20 tests passed097d; source MF3375/3a7367ec912bd04fdd5b0bbe316aaa3d6e0c053dc85271203c27fc89496697de. Poll same handle, do not duplicate.
