@@ -1,3 +1,10 @@
+## 2026-10-11T01:38:46Z — KIVI actual full64 independent/whole accepted; B1screen006 real same-image75 passed, dense dispatched
+
+- Read KIVI_FULL64_PASS_B1_DIAGNOSTIC_20261011.json. Original05c8 completed0 in1482.016s; all64 FA writer/full1536-output comparisons on unchanged actual018 passed. Exact CPU release05d1; independent whole05d2 completed0. Scope is B1 eager32768+2 firstdecode only, not full1024/mixed/C16/graph/task acceptance. No new NPU recapture.
+- B1screen006 runtime source301/archive54/default-OFF verified; actualsame660 Devices[]75 passed05d3 (17.134s suite/100.160s whole), exact own stop-retain05d5 verified. Original05d6 dense diagnostic is dispatched on physical4–7, not yet a performance result. Poll05d6, retain original terminal, exact own release, independent arm consumer, then frozen candidate006. Same32768 input/fixed1024 output/B1/eager/common6GiB; both observers/profiling OFF. Three formal pairs/full tasks remain mandatory later.
+- Parallel source lanes: SKVQ actual014 identity repair delivered derived consumer001 (MAIN review/same-image/full256 pending); KIVI mixed/output reference cost and task-domain adaptation remain source work. No ready independent NPU backup, no zero-idle claim. Don't hold a ready successor for Git/report prose.
+- New canonical archive54 files is a recoverable source snapshot, not relocated execution authority. Protected0–3/external untouched,32GiB HugeTLB authority SPENT, portfolio cutoff1791788425 unchanged.
+
 ## 2026-10-11T01:03:43Z — SKVQ014 reference identity failure isolated; KIVI same-image219 passed, actualfull64 running
 
 - Read SKVQ014_REFERENCE_FAILURE_KIVI219_PASS_20261011.json. Actual05a7 ended exit1 after full256 capture; consumer rejects whole identity objects whose only difference is observed_utc_ns in all4 ranks (actual05c4). No quantized numerical or paper no-go. Preserve failed original and all raw; prepare a bounded independent consumer repair, including adjacent predicates and real negative tests. Do not fabricate an old successful whole or recapture unchanged data.
