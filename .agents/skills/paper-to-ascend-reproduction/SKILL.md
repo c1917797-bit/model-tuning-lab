@@ -200,11 +200,13 @@ machine-specific values and one-off incidents in the workstream retrospective.
 
 ## HYPIC lessons already learned
 
-HYPIC reproduced a prior practice direction on a changed environment by keeping
-a same-denominator A/B: native prefix cache off in both arms, with only
-`VLLM_ASCEND_HYPIC_ENABLE` changed. It showed large latency/throughput gains for
-the frozen Qwen3.6-27B TP4 workload while quality deltas stayed inside measured
-baseline repeat ranges.
+Earlier HYPIC practice evidence reported a favorable performance direction
+and quality scores on its own natural-request, 1024-token, TP2 ruler. Later
+explicit-segment 2048-token evaluation on a different model/topology produced
+a valid LongBench-v2 quality rejection despite separately measured performance
+gains. Keep those claims tied to their own source and ruler; historical
+runtime-enabled quality is not proof that the mechanism preserved quality on
+an in-path workload. The workstream handoff holds the exact experiment records.
 
 Reusable lessons:
 
@@ -217,6 +219,10 @@ Reusable lessons:
 - complete only after independent hash/count/index audit and resource release;
 - distinguish direction reproduction from absolute reproduction when model,
   accelerator generation, or TP degree changes.
+- use token-level log-probability traces only to localize candidate divergence;
+  compare them with within-arm repeat variability and hot-path evidence before
+  making a mechanism claim. A small diagnostic that lacks activation proof is
+  inconclusive and cannot replace the frozen full quality suite.
 
 ## Completion gate
 

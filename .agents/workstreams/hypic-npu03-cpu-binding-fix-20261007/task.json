@@ -2,7 +2,7 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "r13_quality_rejected_six_phase_performance_valid_r14_c1_diagnostic_complete_attribution_pending",
+  "state": "r19_quality_rejected_r22_bounded_diagnostic_inconclusive_skill_mapping_pending",
   "execution_state": "in-progress",
   "integration_state": "not-ready",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
@@ -1228,7 +1228,7 @@
     "claim_boundary": "Diagnostic-only victim/request hash correlation; no r19 verdict change or performance claim."
   },
   "r22_c32_logprob_oracle": {
-    "state": "no-cache terminal and independently audited; hypic-only controller running",
+    "state": "terminal; both 32-sample arms independently audited; paired diagnostic inconclusive",
     "preregistration": "HYPIC_R22_C32_LOGPROB_ORACLE_PREREGISTRATION_20261011.json",
     "handoff": "HYPIC_R22_C32_LOGPROB_ORACLE_HANDOFF_20261011.md",
     "source_commit": "4429e35177979c874bf053ab29789e4773f39b22",
@@ -1238,12 +1238,20 @@
     "baseline_scored_rows": 96,
     "baseline_guard_samples": 324,
     "baseline_arm_result_sha256": "b2e7bec9914974a40689ba29901c2f45628d36f2bb1b9f614660b02d88ad7e2e",
-    "candidate_controller": "exec-00000000000007ae",
+    "candidate_controller": "exec-00000000000007ae (terminal exit 1 after all rows; coverage gate incomplete)",
     "candidate_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r22-c32-logprob-hypic",
     "sample_indexes": "64-95 inclusive; sample 082 traced",
     "max_output_tokens": 2048,
     "concurrency": 32,
+    "baseline_correct": 54,
+    "candidate_correct": 54,
+    "candidate_proved_hot": 34,
+    "sample_082_candidate_hot": "0/3",
+    "candidate_guard_samples": 363,
+    "paired_audit": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/hypic-r22-c32-logprob-oracle-paired-audit.json",
+    "paired_audit_sha256": "23568b259c3bff7b3da562db0532a817c1705972ac283af55f8245d197185e1a",
+    "interpretation": "Both subset arms scored 54/96; sample 082 was correct and naturally stopped in both arms, but lacked candidate hot proof. First cross-arm token divergence positions 124/23/212 are comparable to within-arm variability; inconclusive, not causal and not a full-suite verdict.",
     "claim_boundary": "bounded output-numerics diagnostic only; prior waves absent; no r19 verdict change"
   },
-  "next_action": "Poll existing r22 hypic-only controller exec-00000000000007ae and its exact root; observation timeout or missing route is not terminal, never restart or duplicate. At terminal independently audit 32 samples/96 rows/160 IDs, sample-082 token-logprobs and per-request four-worker hot proof, source/isolation/exact release, then run frozen paired audit. Preserve r19 REJECT_OR_QUALIFY and immutable roots. Do not launch superseded r21, use NPU4-7, stop external work, or claim GitHub/main sync."
+  "next_action": "Freeze and host-test a direct numerical oracle for KV/GDN/position state on a request with verified HYPIC hot execution; the prior hash-only r21 plan cannot inspect material contents/generation. Admit a new physical NPU0-3 diagnostic only if its auditor can distinguish the mechanism and after fresh lane/port/root/source checks. Preserve r19 REJECT_OR_QUALIFY and immutable r22 roots. Do not launch another unchanged c32 wave, use NPU4-7, stop external work, or claim GitHub/main sync."
 }

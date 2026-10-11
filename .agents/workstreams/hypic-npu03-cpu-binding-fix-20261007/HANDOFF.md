@@ -1,6 +1,6 @@
 # HYPIC NPU0–3 — current handoff
 
-## 2026-10-11 r22 candidate active — preserve controller handle
+## 2026-10-11 r22 candidate terminal — bounded diagnostic inconclusive
 
 The frozen no-cache controller `exec-0000000000000774` terminated exit 0 at
 07:15:50 UTC with 32/32 samples and 96 scored responses. Independent auditor
@@ -12,15 +12,26 @@ Sample 082 has three scored token-logprob arrays of 480, 619 and 549 entries,
 each with top-five alternatives. Never restart or reuse the baseline root.
 
 After a fresh direct-route, physical NPU0–3/8223 idle, root-absence and
-same-source offline check, the frozen `hypic-only` candidate started. Its
-**only** controller is `exec-00000000000007ae`; immutable output root is
-`/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r22-c32-logprob-hypic`.
-Poll that exact handle and root. While it is running or its terminal state is
-unproven, do not restart or create a duplicate. At terminal, independently
-audit 32 samples/96 scored/160 IDs, sample-082 logprobs and per-request
-four-worker hot proof, source identity, uninterrupted physical isolation and
-exact owned release. Then run the frozen paired audit. This is diagnostic
-only and cannot change r19's full-suite quality rejection.
+same-source offline check, the frozen `hypic-only` candidate ran to 32/32
+samples and 96/96 scored responses. Controller `exec-00000000000007ae`
+terminated exit 1 after recording `candidate scored boundary/hot coverage
+incomplete`; it was not restarted. Independent candidate audit
+`r22_c32_logprob_oracle_audit.py --arm hypic-only` passed 96 rows, 160 unique
+request IDs, source identity, 363 clean physical isolation samples and exact
+owned release. Candidate score was 54/96; only 34/96 scored requests had
+four-worker hot proof, and sample 082 had 0/3 hot proofs.
+
+The frozen paired raw-artifact audit
+`/cache/cch/hypic-npu03-cpu-binding-fix-20261007/hypic-r22-c32-logprob-oracle-paired-audit.json`
+exited 0 with SHA256
+`23568b259c3bff7b3da562db0532a817c1705972ac283af55f8245d197185e1a`.
+Both arms scored 54/96. All three sample-082 responses were correct and
+naturally stopped in both arms. First differing-token positions were 124,
+23, and 212; within-arm divergence positions were 23/34/23 for no-cache and
+34/34/57 for HYPIC. The difference is within a similarly variable output
+regime, and the traced sample lacks hot proof, so the diagnostic is
+inconclusive about HYPIC causality. This 32-sample wave omits r19's first two
+waves and cannot overturn r19's full-suite `REJECT_OR_QUALIFY`.
 
 ## 2026-10-11 r22 bounded output-numerics oracle — preregistration context
 
