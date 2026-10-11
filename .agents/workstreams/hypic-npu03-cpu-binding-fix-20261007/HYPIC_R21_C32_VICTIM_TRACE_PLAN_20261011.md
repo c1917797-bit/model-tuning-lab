@@ -1,10 +1,29 @@
 # r21 planned diagnostic: identify c32 HYPIC material victims per hot request
 
-Status: **planned only; no new source bytes or NPU run admitted**. This is
+Status: **device run not admitted; superseded after source-level falsifier check**. This is
 an evidence-instrumentation diagnostic, not an optimization or a replacement
 for the frozen r19 quality decision. The source worktree, final source hash,
 controller/auditor hashes and output roots must be frozen in a separate
 machine-readable preregistration before any device action.
+
+## 2026-10-11 admission reversal
+
+Host-only evidence instrumentation was committed in a separate source tree at
+`b5f016adbc2945649d0b5c6c00944b4fe3f41327`; 211 focused/pure tests
+passed, one skipped. No r21 output root or NPU run was created. The proposed
+trace would log the scheduler's material-prefix hash and the worker plan's
+material-prefix hash, not the contents/generation of the material actually
+read for full-attention KV and GDN replay. Both replay paths call
+`MATERIAL_CACHE.get(...)` and fail closed when material/layer state is absent
+(`patches/attention.py` and `patches/gdn.py`). R19 has hot-proven wrong
+responses that returned successfully. A hash-only c32 wave therefore cannot
+distinguish wrong-but-present material, position/state numerical mismatch,
+or a same-hash replacement, and cannot establish the claimed root cause.
+Do not launch the proposed 32-sample pair as written. Preserve this plan and
+source checkpoint as a rejected diagnostic design; next isolate actual
+full-attention KV/GDN/position-state numerical equivalence at a matched
+hot replay, with a host-tested oracle and a new frozen, bounded device
+contract. The r19 full-quality verdict remains unchanged.
 
 ## Scientific question and prior evidence
 

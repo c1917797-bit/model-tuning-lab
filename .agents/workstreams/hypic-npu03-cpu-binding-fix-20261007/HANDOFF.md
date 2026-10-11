@@ -1,5 +1,18 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-11 r21 admission reversal — no device run
+
+The r21 source-only hash fields passed 211 host tests (one skipped) and were
+committed separately at `b5f016adbc2945649d0b5c6c00944b4fe3f41327`.
+Source inspection then showed that a hash-only c32 wave cannot observe actual
+KV/GDN material contents or generation at replay; missing material already
+fails closed in attention/GDN. The planned 32-sample device pair was **not**
+launched. See the admission reversal in
+`HYPIC_R21_C32_VICTIM_TRACE_PLAN_20261011.md`. Do not start r21 from that
+old plan. Next build a direct, bounded native-versus-HYPIC KV/GDN/position
+state numerical oracle, host-test and freeze it, then use only physical
+NPU0–3 when actually idle. Preserve r19's rejection and all immutable roots.
+
 ## 2026-10-11 r21 diagnostic planned, not launched
 
 `HYPIC_R21_C32_VICTIM_TRACE_PLAN_20261011.md` freezes the next *question*
