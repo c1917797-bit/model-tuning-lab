@@ -1,5 +1,17 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-11 r22 bounded output-numerics oracle — pre-device
+
+See `HYPIC_R22_C32_LOGPROB_ORACLE_HANDOFF_20261011.md` and its frozen JSON
+contract. On unchanged r19 source 4429e3, the new adapter selects the
+original third-wave indexes 64–95 at c32 and traces token logprobs for
+sample 082 only. Both arm offline checks, independent auditor offline check,
+three r22 host tests, standalone r19 tests and 29-Skill structural validation
+pass. Neither arm has started. The wave omits r19's earlier two waves and is
+diagnostic only. Next action: fresh direct-route/physical-lane/port/root
+admission, then no-cache arm to terminal and independent audit before the
+HYPIC arm. Never use NPU4–7 or change the r19 quality verdict.
+
 ## 2026-10-11 r21 admission reversal — no device run
 
 The r21 source-only hash fields passed 211 host tests (one skipped) and were
