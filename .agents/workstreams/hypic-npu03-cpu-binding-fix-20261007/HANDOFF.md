@@ -1,5 +1,15 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-11 protocol-gap checkpoint
+
+Read `HYPIC_R19_HISTORICAL_PROTOCOL_GAP_20261011.md` before launching
+another quality phase. The prior reported natural-request/1024/TP2 quality
+result and r19 explicit-segment/2048/TP4 result answer different questions.
+R19 remains a valid all-request LongBench quality rejection, with a separate
+134/381 four-worker-hot proof shortfall. No NPU work or frozen verdict change
+was produced by this read-only comparison. A source-matched, new-root bounded
+diagnostic must be frozen before any further full suite.
+
 ## 0. Status
 
 - Current terminal r19 GSM8K off-path safety pair (2026-10-10): no-cache 3838/3957 (1280/1274/1284) versus HYPIC 3840/3957 (1281/1279/1280), +0.05054 pp; frozen GSM8K decision `PASS` for runtime-enabled natural requests only. Controller `exec-00000000000004a3` exited 0; candidate-only and paired independent audits `exec-0000000000000510`/`exec-0000000000000512` exited 0. Both arms' raw rows, source identity, 991/990 clean isolation samples, and exact owned release were verified. Paired audit SHA256 `496f1dfacb3c3a8dd03f8ee07368fb142b432498c0ee5dbb5722e1d4f85fd187`; see `HYPIC_R19_GSM8K_PAIR_TERMINAL_AUDIT_20261010.md`. This off-path pass does not override the explicit-segment LongBench regression or prove hot-path quality.
