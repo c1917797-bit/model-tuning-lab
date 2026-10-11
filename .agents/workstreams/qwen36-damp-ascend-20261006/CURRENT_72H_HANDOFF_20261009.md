@@ -1,3 +1,9 @@
+## 2026-10-11 14:44 UTC — SKVQ018 dispatched; KIVI component recovered only
+
+- Active09b8 hostPID1039250, prerequisite replay before same-image Devices[] and owned4-7 TP4; last09b9 no NPU processes. Target09b2 actual95 PASS/0 skip. Source109053B/36a8b5c40dffb7491207e957af47b87a6344b2b7062213921d5e8b06fa653eb0. Poll exact handle; no duplicate.
+- KIVI original003 raw independent09b0 exit0 and complete consumer09b5 exit0: PACKED_NUMERICAL_COMPONENT_RECOVERED_ONLY, rank0/layer11/32769. Final5561B/ebe49c4c8bef6ecc7f06507cd3e069f73380d304141d05e2465f53bdc32047dd. No seal128/slotreuse/model; old failed host remains FAILED budget. New first003 separately admitted model pending.
+- Three preparers: KIVI first003; long640109 local PASS but100 precise dependencies missing; SKVQ matched014 and observer-off formal. Admitted device backup0/no zero-idle claim. Fixed cutoff1791788425 unchanged. See SKVQ018_DISPATCH_KIVI_COMPONENT_RECOVERY_20261011.json and serial queue. Older entries below historical.
+
 ## 2026-10-11 14:29 UTC — SKVQ016 import failure;017 negative-fixture failure; no active NPU stage
 
 - Original0994 completed exit1/491.843s. All4 canaries ran; before full model inference, raw_sink import failed because the exact post_rope_live -> tp_provider preload chain was missing. HOST_RESULT86021/b3cedeac68fea1ad5d572b2b784ed55891ec587d072bb67f06fd57a555a9d96b; exact own CPU/NPU stopped-retained/Pid0/noExec/noOOM09a0. Original is MAIN0994_SKVQ016_FAILED_ORIGINAL_20261011.json outside Git. This is proved adaptation failure, not paper no-go.

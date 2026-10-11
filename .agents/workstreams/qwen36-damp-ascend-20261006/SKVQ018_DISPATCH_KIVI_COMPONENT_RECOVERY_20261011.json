@@ -1,0 +1,89 @@
+{
+  "schema": "paper-portfolio.stage-checkpoint/v1",
+  "updated_at_utc": "2026-10-11 14:44:00 UTC",
+  "portfolio_cutoff_epoch": 1791788425,
+  "current": {
+    "paper": "SKVQ",
+    "operation": "exec-00000000000009b8",
+    "state": "RUNNING_PREREQUISITE_REPLAY",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-018/SOURCE_MANIFEST.json",
+      "bytes": 109053,
+      "sha256": "36a8b5c40dffb7491207e957af47b87a6344b2b7062213921d5e8b06fa653eb0"
+    },
+    "software_operation": "exec-00000000000009b2",
+    "software_tests": 95,
+    "software_skips": 0,
+    "host_pid": 1039250,
+    "device_stage_running": false,
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-018-main-20261011-001",
+    "next": "Poll09b8 only; same-image Devices[] then owned4-7 N1/model and independent CPU. ACK is not NPU occupancy.",
+    "model_ready": false,
+    "performance_ready": false
+  },
+  "scope": "No new accepted E2E or task accuracy result",
+  "kivi_recovery": {
+    "operation": "exec-00000000000009b0",
+    "consume_operation": "exec-00000000000009b5",
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-fia-recovery-003-component-main-001/RESULT.json",
+      "bytes": 5561,
+      "sha256": "ebe49c4c8bef6ecc7f06507cd3e069f73380d304141d05e2465f53bdc32047dd"
+    },
+    "coverage": {
+      "bits": [
+        2,
+        4
+      ],
+      "captured_bits": [
+        2
+      ],
+      "derived_real_input_bits": [
+        4
+      ],
+      "fullD": 256,
+      "layers": [
+        11
+      ],
+      "lengths": [
+        32769
+      ],
+      "lse_elements_per_case": 6,
+      "output_elements_per_case": 1536,
+      "ranks": [
+        0
+      ],
+      "seal128": false,
+      "slot_reuse": false,
+      "whole_model": false
+    },
+    "status": "PACKED_NUMERICAL_COMPONENT_RECOVERED_ONLY",
+    "old_host_status": "FAILED",
+    "original_resource_gate_pass": false,
+    "model_ready": false,
+    "performance_ready": false
+  },
+  "preparation": [
+    {
+      "owner": "kivi_hotpath_prepare",
+      "paper": "KIVI",
+      "state": "RUNNING_OFF_DEVICE",
+      "ready": false,
+      "next_gate": "firstdecode003 explicit scoped recovered component; new actual same-image/mount checks before NPU"
+    },
+    {
+      "owner": "skvq_numeric_path_review",
+      "paper": "KIVI",
+      "state": "RUNNING_OFF_DEVICE",
+      "ready": false,
+      "next_gate": "109 local PASS; 100 exact dependency refs missing, actual oracle cost pending; not source-ready"
+    },
+    {
+      "owner": "skvq_writer_next",
+      "paper": "SKVQ",
+      "state": "RUNNING_OFF_DEVICE",
+      "ready": false,
+      "next_gate": "matched014 source prepared, actual model018 whole pending; observer-off formal successor preparation"
+    }
+  ]
+}
