@@ -1,0 +1,150 @@
+{
+  "schema": "model-tuning-lab.formal-common-and-owner-review/v1",
+  "recorded_at_utc": "2026-10-11T19:07:29Z",
+  "previous_turn_classification": "progress: authoritative maintainer causal rules and evidence were saved/read back; no algorithm acceptance upgrade",
+  "current_operation": {
+    "id": "exec-0000000000000a3d",
+    "last_observed": "RUNNING",
+    "last_observed_at_utc": "2026-10-11T19:06:29Z",
+    "duplicate_started": false
+  },
+  "formal_common": {
+    "ref": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/sparq_author_full_v9/common.py",
+      "bytes": 1888,
+      "sha256": "9eaaa6b8aa3eeb515a1779cd15bd095c784f29077f0aaeb97bf101914a071e99"
+    },
+    "actual_original_read_by_MAIN": true,
+    "frozen_sha_matches": true,
+    "local_mirror": "C:/Users/Huawei/AppData/Local/Temp/skvq-post022-final-gate-audit-20261011-001/COMMON_ACTUAL_20261011.py",
+    "settings": {
+      "tensor_parallel": 4,
+      "max_model_len": 40960,
+      "max_num_seqs": 16,
+      "max_num_batched_tokens": 40960,
+      "graph": "FULL_DECODE_ONLY",
+      "capture_batch_sizes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "prefix_caching": false,
+      "enforce_eager": false,
+      "native_kv_bytes": 10737418240,
+      "aux_ceiling_bytes": 2147483648,
+      "chunked_prefill": false,
+      "async_scheduling": false
+    },
+    "scope": "Frozen formal source contract, not an admitted native provider or measured performance."
+  },
+  "kivi_owner002": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-task-domain-owner-v1-002/SOURCE_MANIFEST.json",
+      "bytes": 198649,
+      "sha256": "16cb47d0cda385db2d71bf700e582cc61df58fec74441668cc2a747881151c22"
+    },
+    "MAIN_changed_file_review": 6,
+    "actual_changed_bytes_match": true,
+    "MAIN_actual_cli_rerun": [
+      {
+        "file": "owner-002/test_owner002_chain.py",
+        "tests": 5,
+        "exit_code": 0,
+        "tool_chunk": "9059b5",
+        "python": "3.9",
+        "flags": [
+          "-I",
+          "-B"
+        ],
+        "offline_test_closure": "OWNER002_LOCAL_CLOSURE.json"
+      },
+      {
+        "file": "owner-002/test_owner_entry.py",
+        "tests": 10,
+        "exit_code": 0,
+        "tool_chunk": "946fa3",
+        "python": "3.9",
+        "flags": [
+          "-I",
+          "-B"
+        ],
+        "offline_test_closure": "OWNER002_LOCAL_CLOSURE.json"
+      }
+    ],
+    "first_MAIN_attempts": {
+      "cause": "local sandbox Path.resolve WinError5 before test execution",
+      "tool_chunks": [
+        "c099db",
+        "81b0da"
+      ],
+      "classification": "ENVIRONMENT_OR_SCHEDULING",
+      "rerun": "same source after narrowly scoped sandbox escalation; 15 pass"
+    },
+    "agent_other_runtime12_log_read": true,
+    "MAIN_runtime12_rerun": false,
+    "full_original150_MAIN_verification": false,
+    "target_install": false,
+    "actual_native_initialize": false,
+    "actual_bridge_install": false,
+    "scope": "Real bootstrap/worker/prebind interface only with explicitly native fixtures; no target/NPU/model acceptance."
+  },
+  "recovery_source": {
+    "actual_target_equals_local": true,
+    "ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-reader013-control-ast-compat-v1-001/SOURCE_MANIFEST.json",
+      "bytes": 88049,
+      "sha256": "40ff14f26dfde8bd0a4c896d5192ca8751b2023d85a1c44e484288bbce963292"
+    },
+    "independent900_entry_prepared_not_launched": true,
+    "requires": [
+      "actual successful0a3d terminal and stdout Ref",
+      "new actual operation archive/strict descriptor",
+      "exact old0a25 strict descriptor",
+      "fresh whole result output"
+    ]
+  },
+  "next_local_parallel": [
+    "KIVI actual install-interface preflight in new test-only source; source-qualified fixtures explicitly bounded",
+    "SKVQ real allocator/provider/request slot and graph-input contract against formal COMMON",
+    "SKVQ original mathematical kernel domain B1..16/context40960 plus fixed workspace"
+  ],
+  "not_proved": [
+    "full128 recovery independent whole",
+    "formal C16/40 three pairs",
+    "GDN/mixed/lifecycle/graph complete",
+    "LongBench-v2/GSM8K full task scoring",
+    "10percent accepted transferable non-HYPIC technique"
+  ],
+  "invariants": {
+    "cutoff": 1791788425,
+    "physical_npu": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected_npu": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "no_new_target_admission_while_current_CPU_QUEUE": true,
+    "no_running_source_mutation": true,
+    "no_performance_or_task_gate_shrink": true
+  },
+  "commit_push_pending": true
+}

@@ -1,0 +1,93 @@
+{
+  "schema": "model-tuning-lab.domain-and-repair-lessons/v1",
+  "recorded_at_utc": "2026-10-11T18:58:00Z",
+  "scope": "Evidence-backed source/local preparation lessons; no new native, numerical, performance or task acceptance.",
+  "lessons": [
+    {
+      "finding": "B1-only owner/capacity/engine-wide finish is not formal C16/task support",
+      "class": "ADAPTATION_IMPLEMENTATION",
+      "decision": "Implement allocator/provider/per-request lifecycle/domain seams under a new source; do not change formal acceptance to B1.",
+      "confidence": "source-supported; not a target failure"
+    },
+    {
+      "finding": "Logical free blocks and suppressed writes do not release the retained preallocated dense HBM slab",
+      "class": "ADAPTATION_IMPLEMENTATION",
+      "decision": "Bind compact Spec/manager to actual Ascend allocation/backend; preserve GDN/shared-storage ownership and prove actual allocated bytes.",
+      "confidence": "source-supported; conditional size algebra is not observed OOM"
+    },
+    {
+      "finding": "Native reshape/cache write has notification side effects not yet qualified",
+      "class": "UNKNOWN_CAUSE",
+      "decision": "Acquire source-bound notification/fence implementation before decode-write suppression; retain exactly-once packed append and reject stale fallback.",
+      "confidence": "source review only; prototype not implemented"
+    },
+    {
+      "finding": "Cold entry budget must include prechecks; bootstrap-only ON test can silently exercise installer OFF",
+      "class": "ADAPTATION_IMPLEMENTATION",
+      "decision": "Preserve fixed clock and real dual-enable chain; qualified local repair still requires installed image/native tests.",
+      "confidence": "original defect source-reviewed; new local matrix read by MAIN"
+    },
+    {
+      "finding": "Actual source-qualified full replay can reuse original successful capture without rewriting old failed parent",
+      "class": "REFERENCE_OR_TEST",
+      "decision": "Keep original failure/null result; consume new schema, full mathematics and independent whole before promotion.",
+      "confidence": "actual host and image replay passed; full recovery still running"
+    },
+    {
+      "finding": "Static review and peer preparation are useful but not executable or numerical readiness",
+      "class": "ENVIRONMENT_OR_SCHEDULING",
+      "decision": "Close next actual launcher and consumer while current runs; count verified successor entries, not agents/files.",
+      "confidence": "current readiness remains incomplete"
+    }
+  ],
+  "evidence_refs": [
+    {
+      "path": ".agents/workstreams/qwen36-damp-ascend-20261006/ENTRY_SEAMS_LESSONS_20261011.json",
+      "kind": "prior MAIN source diagnosis"
+    },
+    {
+      "path": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ022_SOURCE_REVIEW_AND_IMAGE_REPLAY_20261011.json",
+      "kind": "MAIN reviewed actual image receipt plus scoped local source packet"
+    },
+    {
+      "path": "C:/Users/Huawei/AppData/Local/Temp/skvq-post022-final-gate-audit-20261011-001/REPORT.md",
+      "bytes": 6006,
+      "sha256": "83e66756476f92db865ca940a2155330b87c3c2c7d5ad68c1d7200708439a710",
+      "kind": "actual local source audit; read/hash verified by MAIN"
+    },
+    {
+      "path": "C:/Users/Huawei/AppData/Local/Temp/skvq-post022-final-gate-audit-20261011-001/MIGRATION_DAG.json",
+      "bytes": 9756,
+      "sha256": "9d335e577c1785a42764bf116e7186b06d5fdfe0d8a09ced47a38ecb77a2f588",
+      "kind": "actual local migration plan; not implemented"
+    },
+    {
+      "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-fia-task-domain-runtime-20261011-001/OWNER002_CLI_MATRIX.json",
+      "bytes": 5008,
+      "sha256": "a6d433f7e8d8d56f31a9eed5bb006ce10a0d4258a8018ab75a3036b7fa2e87f4",
+      "kind": "actual local CLI logs read/hash verified; not MAIN rerun or target native"
+    }
+  ],
+  "status": {
+    "original_failed_operation": "exec-0000000000000a25",
+    "recovery_operation": "exec-0000000000000a3d",
+    "observed_recovery": "RUNNING",
+    "actual_image_replay_exit": 0,
+    "actual_image_replay_seconds": 159.8773107000161,
+    "full128_numeric_pass": false,
+    "independent_whole_pass": false,
+    "formal_C16_40_pass": false,
+    "final_tasks_pass": false,
+    "kivi_local_tests": 27,
+    "kivi_target_install_pass": false,
+    "prefix_formal_common_not_yet_read": true,
+    "commit_push_pending": true
+  },
+  "invariants": {
+    "fixed_cutoff": 1791788425,
+    "no_running_source_changes": true,
+    "no_gate_relaxation": true,
+    "no_new_target_load_during_exclusive_CPU_QUEUE": true,
+    "no_paper_wide_negative": true
+  }
+}

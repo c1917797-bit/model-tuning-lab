@@ -1,0 +1,70 @@
+{
+  "schema": "skvq.recovery001.actual-source-and-launch/v1",
+  "recorded_at_utc": "2026-10-11 18:22:05 UTC",
+  "source_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-reader013-control-ast-compat-v1-001/SOURCE_MANIFEST.json",
+    "bytes": 88049,
+    "sha256": "40ff14f26dfde8bd0a4c896d5192ca8751b2023d85a1c44e484288bbce963292"
+  },
+  "entry_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-reader013-control-ast-compat-v1-001/ENTRY.json",
+    "bytes": 7125,
+    "sha256": "bc83079a212a0b3fd65b6e31c0357da8dc0a6b1ffab8ea13d24fc25f7c04baaf"
+  },
+  "source_deployment": {
+    "patches": 24,
+    "exact_final_files": 10,
+    "actual_software_operation": "exec-0000000000000a3c",
+    "exit_code": 0,
+    "duration_ms": 3614,
+    "complete_source_count": 355,
+    "compiled_python_count": 289,
+    "tests": 17,
+    "passed": 17,
+    "skipped": 0,
+    "raw_original_operation": "AWMCP operation_get exec-0000000000000a3c; original raw structured output retained"
+  },
+  "recovery": {
+    "operationId": "exec-0000000000000a3d",
+    "status": "RUNNING_NO_VERDICT",
+    "actual_argv": [
+      "/usr/bin/env",
+      "MAIN_SKVQ_MODEL_RECOVERY_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--cpu=3600:3600",
+      "--",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-reader013-control-ast-compat-v1-001/recovery_host.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "40ff14f26dfde8bd0a4c896d5192ca8751b2023d85a1c44e484288bbce963292",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model021-readonly-recovery-main-20261011-001"
+    ],
+    "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model021-readonly-recovery-main-20261011-001",
+    "total_seconds": 3600,
+    "cleanup_included_seconds": 180,
+    "whole_seconds": 900,
+    "portfolio_cutoff_epoch": 1791788425,
+    "devices": [],
+    "cpu": 4,
+    "memory_bytes": 8589934592,
+    "original_failed_operation": "exec-0000000000000a25",
+    "original_host_still_failed": true,
+    "original_capture_and_sources_read_only": true,
+    "new_numeric_ref": null,
+    "new_whole_ref": null
+  },
+  "scope": {
+    "no_new_npu_capture": true,
+    "model_ready": false,
+    "native_ready": false,
+    "performance_ready": false,
+    "task_ready": false,
+    "graph_verified": false,
+    "lifecycle_verified": false
+  },
+  "next": "Poll only existing0a3d; preserve terminal raw record and stdout exact Ref, then actual host3.9 independent new recovery whole. No retry/clock renewal on deterministic failure. Matched022 source-bound consumer preparation proceeds locally; no parallel target loads in CPU_QUEUE."
+}

@@ -1,0 +1,104 @@
+{
+  "schema": "model-tuning-lab.maintainer-lessons-checkpoint/v1",
+  "recorded_at_utc": "2026-10-11T19:17:05Z",
+  "scope": "Evidence-backed maintenance update; no new full-model acceptance.",
+  "lessons": [
+    {
+      "id": "failure_attribution",
+      "rule": "Proved implementation or reference faults require a new bounded repair and complete affected regression; incomplete evidence does not reject a paper.",
+      "retained_first_fault": "Original0a25 failed unchanged; recovery has a distinct result and source identity."
+    },
+    {
+      "id": "real_entry",
+      "rule": "Test real cold CLI and dual-enable installation chain; qualify fixtures separately from actual native geometry/installation.",
+      "evidence": "MAIN reran15 local owner002 tests, 0skip; 9 new interface tests agent-reported only, pending MAIN audit."
+    },
+    {
+      "id": "formal_domain",
+      "rule": "Read actual frozen COMMON; preserve formal graph/configuration, request lifecycle, batch tails and task limits. B1 eager screening is not C16 graph acceptance.",
+      "evidence_ref": ".agents/workstreams/qwen36-damp-ascend-20261006/FORMAL_COMMON_AND_OWNER_REVIEW_20261011.json"
+    },
+    {
+      "id": "memory",
+      "rule": "Distinguish logical blocks, physical slab, IO savings and HBM savings; charge all intermediates/capture lifetime, not only lower-bound packed pool."
+    },
+    {
+      "id": "queue",
+      "rule": "Close exact executable NEXT and its independent consumer during CURRENT; count useful completed gates and measured idle causes, not source deliveries or dummy occupancy."
+    },
+    {
+      "id": "successful_recovery",
+      "rule": "Qualify original immutable producer/raw/source/ownership and preserve old failure. Terminal exit0 with a component result still requires the independent whole verifier."
+    },
+    {
+      "id": "fixed_deadline",
+      "rule": "Cold-entry timing includes source and predecessor checks, child work and cleanup; no renewed deadline or tolerance/coverage reduction."
+    }
+  ],
+  "actual_recovery_observation": {
+    "operation_id": "exec-0000000000000a3d",
+    "state": "completed",
+    "exit_code": 0,
+    "duration_ms": 3126022,
+    "cancelled": false,
+    "timed_out": false,
+    "stdout": "{\"bytes\": 40420, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model021-readonly-recovery-main-20261011-001/RECOVERY_HOST.json\", \"sha256\": \"cefe15f4a385e81ae7fc7d61f3f4ac6af932952e602f52bd514f76658c29efcb\"}\n",
+    "result_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model021-readonly-recovery-main-20261011-001/RECOVERY_HOST.json",
+      "bytes": 40420,
+      "sha256": "cefe15f4a385e81ae7fc7d61f3f4ac6af932952e602f52bd514f76658c29efcb"
+    },
+    "result_status": "ACTUAL_RECOVERED_COMPONENT_PENDING_NEW_WHOLE",
+    "primary": null,
+    "owned_release_claim": [
+      {
+        "name": "skvq-run-skvq-model021-readonly-recovery-main-20261011-001-model-independent",
+        "released": true,
+        "release_ref": {
+          "bytes": 665,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model021-readonly-recovery-main-20261011-001/STOP_RETAIN-1791745865655987140.json",
+          "sha256": "717e67bd468d96851f74e23144c2124e08388b880d627673b49696c2be5617b9"
+        }
+      }
+    ],
+    "MAIN_result_bytes_hash_verified": true,
+    "independent_whole_pass": false,
+    "no_new_npu_capture": true,
+    "old_failed_parent_unchanged": true
+  },
+  "historical_records_not_rewritten": [
+    ".agents/workstreams/qwen36-damp-ascend-20261006/ENTRY_SEAMS_LESSONS_20261011.json",
+    ".agents/workstreams/qwen36-damp-ascend-20261006/DOMAIN_AND_REPAIR_LESSONS_20261011.json",
+    ".agents/workstreams/qwen36-damp-ascend-20261006/FORMAL_COMMON_AND_OWNER_REVIEW_20261011.json"
+  ],
+  "acceptance": {
+    "new_non_HYPIC_technology": false,
+    "formal_C16_graph": false,
+    "matched_three_pair_gain": null,
+    "longbenchv2": null,
+    "gsm8k": null
+  },
+  "invariants": {
+    "cutoff_epoch": 1791788425,
+    "physical_npu": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected_npu": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "performance_output_tokens": 1024,
+    "task_max_tokens": 2048,
+    "thinking": false,
+    "normal_task_eos": true,
+    "task_allowance_not_tensor_tolerance": true
+  },
+  "durable_skill": ".agents/skills/ascend-inference-tuning-loop/SKILL.md",
+  "durable_reference": ".agents/skills/ascend-inference-tuning-loop/references/failure-root-cause-and-next-action.md",
+  "next": "Independent source-bound recovery whole, then actual installed successor prerequisites and relevant NPU/full-model gates; preserve missing formal/task evidence."
+}

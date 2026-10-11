@@ -1,5 +1,151 @@
 # Root-cause classification must select the next experiment
 
+## Formal graph contracts and honest readiness
+
+Freeze the final common configuration before extending a pilot. Read the actual
+source and hash it: a shared-prefix workload can still have prefix caching OFF,
+and a concurrent client can still use a different native graph/allocation path.
+Carry final batch tails, context, graph mode and task limits into the provider,
+kernel and independent consumer. Do not silently replace the formal graph control
+with eager merely because the pilot was eager.
+
+For graph ports, prepare fixed workspace and stable input bindings before capture,
+then verify actual capture and replay with changing requests. A software slot-table
+test is not a graph test. Charge every allocation, intermediate and capture lifetime
+in one auxiliary-memory ledger; a lower-bound estimate cannot qualify a peak cap.
+If the budget rejects a full candidate, repair its allocation path or retain a
+scoped unsupported result, not an invented measured OOM.
+
+Test the actual installation edge separately from source-qualified fixtures.
+A fixture can prove callback order, rollback and first-fault preservation; it
+cannot establish target-image geometry or a fully installed native backend.
+Keep default-OFF and explicit-ON results separate and preserve production source
+pins. Report completed real entry tests, not only delivered code or an agent's
+ready label.
+
+Successful terminal execution also remains scoped: bind its exact result Ref,
+verify bytes and cleanup, then run the independent whole consumer. Do not promote
+a component recovery, initial decode or software PASS to full model acceptance.
+
+Evidence and pending boundaries:
+`.agents/workstreams/qwen36-damp-ascend-20261006/FORMAL_COMMON_AND_OWNER_REVIEW_20261011.json`
+and `MAINTAINER_LESSONS_CHECKPOINT_20261011.json`. The actual formal common
+uses graph capture with prefix OFF; independently rerun15 owner-interface tests
+passed locally. SKVQ recovery001 now has exit0 and a result declaring the new whole
+pending. None of these is a new end-to-end performance or task-accuracy result.
+
+## Pilot domains, real memory savings and repair readiness
+
+Keep a domain ledger from the pilot through final acceptance: actual context
+length, batch/tail shapes, request retirement and reuse, prefill/decode mixing,
+graph mode and task output limit. A B1-only cache that closes the whole engine
+at finish is not a C16 provider. Increasing CLI concurrency or max_tokens does
+not implement missing ownership, capacity or lifecycle semantics. Label this
+as unfinished adaptation, not evidence against the paper; prepare its allocator,
+provider and final-task consumer while the pilot runs.
+
+Distinguish IO savings from HBM savings. Suppressing an unused dense decode
+write can save writes/launches, but a retained preallocated dense slab still
+occupies memory. Returning logical blocks to a free queue does not shrink that
+allocation. A compact-cache port must connect its actual Spec/manager,
+Ascend allocation/backend layout, prefill workspace and per-request slot/epoch
+lifetime. Verify actual allocated storage and all legitimate readers/writers;
+do not free a request's other live cache groups or storage shared with GDN.
+Capacity arithmetic is conditional on residency, sharing, dtype and alignment,
+not an observed OOM. Client concurrency alone does not prove simultaneous
+cache residency; shared prompt tokens alone do not prove prefix caching ON.
+
+Before removing a native write, inspect the complete original function,
+including cache-write notifications, transfer/fence semantics and downstream
+consumers. Preserve dense/prefill behavior and exactly-once candidate append.
+Reject unsupported mixed/lifecycle paths; never fall back to stale dense cache.
+Freeze a new source and explicit provenance predicates for the changed write
+path. Run the affected independent mathematics and lifecycle checks before
+paired whole-model performance. This is a paper-linked cost hypothesis, not a
+speedup forecast or permission to replace final C16 validation with B1.
+
+Record preparation success at its actual level. Local CLI/ON-chain tests can
+close an interface defect but do not prove native initialization, installation
+in the target image or numerical execution. MAIN independently reviews source
+and deployed bytes; actual-image and NPU gates remain explicit successors.
+Protect time for final performance and tasks instead of spending the remaining
+window only on pilots or rebuilding controllers already available.
+
+Evidence and unresolved boundaries:
+`.agents/workstreams/qwen36-damp-ascend-20261006/DOMAIN_AND_REPAIR_LESSONS_20261011.json`.
+The SKVQ domain/allocation audit is source-only; KIVI owner002's27 reported
+local CLI passes are not a native/model PASS. No new accepted technology follows.
+
+## Entry clocks, activation and coverage after source-only success
+
+When an owned stage has a fixed external timeout, start its internal monotonic
+clock at the cold execute entry, before source closure and predecessor replay.
+Pass that same start into the original controller and cleanup; derive remaining
+child time from it rather than renewing a full budget after prechecks. Keep the
+fixed cutoff and cleanup reserve unchanged. If the wrapper cannot preserve
+cleanup within the remaining time, refuse admission. Static review can prove a
+late-start defect, but cannot prove an actual timeout or a repaired target run.
+
+Test explicit ON and default OFF separately. Setting a bootstrap flag while
+leaving the installer's independent enable flag OFF can construct a sink yet
+return the original worker unchanged. Such a PASS proves only the exercised OFF
+behavior, not provider/callback/native-worker integration. The ON preflight must
+use the real enable chain and production interfaces in the pinned image without
+devices, reject missing bindings, and assert the replacement path was reached.
+This interface test still does not grant numerical or performance acceptance.
+
+Preregister workload inputs AND the expected event classes with their producer
+and consumer. Request count or maximum concurrency does not guarantee every
+intermediate batch size, tail, slot reuse or cache event under normal EOS.
+Record actual classes and missing classes; a coverage miss is incomplete
+validation, not arithmetic failure or a paper no-go. Prepare justified inputs
+before a new experiment, but never force EOS, pad requests, remove failed cases,
+reduce concurrency or weaken the live coverage predicate to manufacture PASS.
+
+Recovery schemas may add evidence edges absent from legacy mount traversal.
+Audit the real read set through source-qualified consumers, including recovery
+owner results, original operation envelopes, receipts, children and logs. Mount
+only the exact owned tree and necessary external files read-only at their
+expected absolute paths; reject broad parents and writable overlaps. Exercise
+the real mount constructor and cold reader, with a missing-root negative, before
+device admission. A legacy collector following only host_result_ref or
+*_whole_ref cannot establish visibility for newly named recovery refs.
+
+Evidence snapshot and uncompleted repairs:
+`.agents/workstreams/qwen36-damp-ascend-20261006/ENTRY_SEAMS_LESSONS_20261011.json`.
+Its KIVI timing/ON findings are source-review defects, not observed NPU failures;
+its SKVQ mount repair is locally tested, not a target-image PASS.
+
+## Successful recovery practices retain their exact scope
+
+A source-bound consumer repair can recover valid captured inputs without a
+second expensive producer only when the original successful-child identities,
+ownership, raw completeness and immutable input checks are independently
+qualified. Give recovery a distinct schema and output root; complete missing
+mathematics and final identity checks there. Preserve the old failed parent and
+null result. Bind the terminal's actual stdout result Ref to the result consumed
+by the whole verifier; an exit-zero envelope alone is insufficient.
+
+SKVQ recovery001 passed actual target Linux source verification and all17
+software cases without skips. Its full host-side predecessor replay also
+completed successfully, with the durable receipt retaining the original input
+and new consumer source. This validates those specific seams only.
+A later actual-image3.12 full predecessor replay completed in159.877s with exit0; at the Oct11 18:56UTC
+snapshot the128-frame mathematics and independent whole were still pending.
+Local matched022's157 passes and2 Windows skips are not159 target
+passes. Keep installed bytes, local checks, actual-image execution, mathematics,
+matched E2E and task scoring as distinct evidence stages.
+
+Do not transplant a faster oracle from another paper merely because both use
+low-bit attention. Preserve the specified intermediate casts, masks, summation
+order, metric denominators and full returned score/probability/output coverage.
+An exact-product optimization needs an independent exactness certificate and
+fallback outside it; local agreement or a reduced error is not equivalence.
+Qualify the affected complete reference on original inputs under a new source
+identity, and measure actual cost before promising budget fit. Keep numerical
+thresholds, coverage, cutoff and the candidate algorithm unchanged.
+
+
 ## Qualify physical layout by its actual consumer
 
 Do not reuse a recurrent-state-only format predicate for an independently

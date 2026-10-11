@@ -1,0 +1,116 @@
+{
+  "schema": "model-tuning-lab.entry-seams-lessons/v1",
+  "recorded_at_utc": "2026-10-11T18:35:54Z",
+  "classification_scope": "source_review_and_actual_predecessor_replay_not_algorithm_acceptance",
+  "lessons": [
+    {
+      "id": "entry_clock",
+      "cause_class": "ADAPTATION_IMPLEMENTATION",
+      "confidence": "proved_source_order",
+      "source_manifest_sha256": "c365f16656501b684724d9bd59d3d12556b79aa721331c1af4f29b12559ab805",
+      "source_files": [
+        {
+          "name": "task_main.py",
+          "sha256": "af0b893bac0e8d90dd5fb11e557bc119f26cb799b07d29362bfcdd9389b0b735"
+        },
+        {
+          "name": "domain_raw_cpu8.py",
+          "sha256": "fcad78a3cac4f5b4af00e9f94b6f0ce6cf31f6fde8ebc1534b9151bb3dc1d512"
+        }
+      ],
+      "observed": "Source/replay precede internal phase start; external timeout includes them.",
+      "next": "Move and propagate same cold-entry clock in a NEW source; preserve5400/90 and fixed cutoff.",
+      "repair_verified": false,
+      "target_timeout_observed": false
+    },
+    {
+      "id": "on_path",
+      "cause_class": "REFERENCE_OR_TEST",
+      "confidence": "proved_local_test_source",
+      "source": {
+        "name": "test_owner_entry.py",
+        "sha256": "9717397d92ec45db5d6f2d5b7125bbd3984a8e2ee5d1c2973a125ec42412ffdc"
+      },
+      "observed": "test09 sets bootstrap flag only and asserts original worker returned; cannot establish installer ON.",
+      "next": "Same-image no-device actual enable-chain interface regression with negative missing-bindings cases.",
+      "repair_verified": false
+    },
+    {
+      "id": "event_coverage",
+      "cause_class": "UNKNOWN_CAUSE",
+      "confidence": "source_proves_coverage_requirement_not_runtime_coverage",
+      "observed": "42 normal-EOS requests do not logically guarantee all36 registered classes.",
+      "next": "Retain registered coverage and actual missing classes. New justified input plan only if original coverage fails; no forcedEOS or paper-wide no-go.",
+      "actual_coverage": null
+    },
+    {
+      "id": "recovery_mounts",
+      "cause_class": "ADAPTATION_IMPLEMENTATION",
+      "confidence": "proved_consumer_readset",
+      "observed": "Legacy mount collector omits newly named recovery refs; exact owner tree and external original envelope needed.",
+      "next": "New matched022 exactRO constructor/cold reader and missing-root negatives; target precheck required.",
+      "local_suite": {
+        "tests": 159,
+        "passed": 157,
+        "skipped": 2,
+        "elapsed_seconds": 87.516,
+        "reported_by": "skvq_writer_next",
+        "independent_target_replay": false
+      },
+      "candidate_manifest_sha256": "6dc0512f13234b53f0989b74b222b79bfa5ffe2b9c2252aa9ae5cf9d5443851d",
+      "target_verified": false
+    },
+    {
+      "id": "recovery_success_scope",
+      "actual_source_software": {
+        "operation": "exec-0000000000000a3c",
+        "exit_code": 0,
+        "tests": 17,
+        "skipped": 0,
+        "source_manifest_sha256": "40ff14f26dfde8bd0a4c896d5192ca8751b2023d85a1c44e484288bbce963292"
+      },
+      "actual_host_replay": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model021-readonly-recovery-main-20261011-001/MAIN_REPLAY_RECEIPTS/reader-replay-0/CHILD.json",
+        "bytes": 1632,
+        "exit_code": 0,
+        "elapsed_seconds": 147.38654411002062
+      },
+      "recovery_operation": "exec-0000000000000a3d",
+      "latest_verified_state": "running",
+      "full128_numeric_pass": false,
+      "independent_whole_pass": false
+    },
+    {
+      "id": "oracle_reuse",
+      "observed": "KIVI final-onlyA16 and SKVQ intermediateA16/metric contracts differ.",
+      "next": "Reuse only independently justified exact reductions with original casts/full metrics/fallback and actual timing; no direct whole-oracle transplant.",
+      "optimization_implemented": false,
+      "target_speedup_measured": false
+    }
+  ],
+  "acceptance": {
+    "new_non_HYPIC_accepted_technology": false,
+    "matched_e2e_gain": null,
+    "longbenchv2": null,
+    "gsm8k": null
+  },
+  "invariants": {
+    "physical_npu": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected_npu": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "portfolio_cutoff": 1791788425,
+    "final_performance_output_tokens": 1024,
+    "no_relabel_old_failed": true,
+    "no_relax_numerical_threshold": true
+  },
+  "durable_rules": ".agents/skills/ascend-inference-tuning-loop/references/failure-root-cause-and-next-action.md"
+}

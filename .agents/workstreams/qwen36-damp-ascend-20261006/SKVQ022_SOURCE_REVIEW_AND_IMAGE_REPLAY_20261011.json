@@ -1,0 +1,94 @@
+{
+  "schema": "model-tuning-lab.skvq-successor-review/v1",
+  "recorded_at_utc": "2026-10-11T18:44:22Z",
+  "current": {
+    "operation": "exec-0000000000000a3d",
+    "state": "RUNNING",
+    "original_failed_operation": "exec-0000000000000a25",
+    "original_failed_operation_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN0A25_SKVQ021_ORIGINAL_FAILED_20261011.json",
+      "bytes": 3825,
+      "sha256": "07fb89658e49a6844a21c7ef14f0d16fbdc513e5c8f701f1e6206184052dbf0b"
+    },
+    "full128_numeric_pass": false,
+    "independent_whole_pass": false,
+    "actual_image_reader_replay": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model021-readonly-recovery-main-20261011-001/REPLAY_RECEIPTS/reader-replay-0/CHILD.json",
+      "bytes": 1641,
+      "sha256": "8230608cdecf1467ef7fe38cc0320cd5ce12a4a108ec95e852020d9dd13dcff2",
+      "exit_code": 0,
+      "elapsed_seconds": 159.8773107000161,
+      "python": "3.12.13",
+      "no_numeric_recovery_claim": true
+    }
+  },
+  "next": {
+    "source_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-b1-matched1024-v1-022/SOURCE_MANIFEST.json",
+      "bytes": 133029,
+      "sha256": "6dc0512f13234b53f0989b74b222b79bfa5ffe2b9c2252aa9ae5cf9d5443851d"
+    },
+    "entry_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-b1-matched1024-v1-022/ENTRY.json",
+      "bytes": 17549,
+      "sha256": "987bb9eb9525d70aed296adc326b8f20913b3f7d27ed53a794d03343d70aeaa7"
+    },
+    "install_plan": {
+      "path": "C:/Users/Huawei/AppData/Local/Temp/skvq-matched022-recovery-predecessor-prep-20261011-001/INSTALL_READY.json",
+      "bytes": 79321,
+      "sha256": "b2df541c851e5925ebc85fddf30f1ed42fd6c50a07d5f7fba6f8bbe15729fb7d"
+    },
+    "main_independent_review": {
+      "patches": 33,
+      "final_files": 39,
+      "all_local_bytes_exact": true,
+      "headers_exact_relative_scope": true,
+      "new_recovery_mount_seam_checked": true,
+      "affected_functions_read": true
+    },
+    "gate_order": [
+      "actual128 recovery whole",
+      "install via exact donor identity and all33 patches",
+      "actual target159/0skip software and same-image source closure",
+      "dense/candidate130 smoke and independent whole",
+      "candidate1024/448 frame correctness and independent whole",
+      "observerOFF dense/candidate1024 B1 screening and independent whole"
+    ],
+    "target_installed": false,
+    "target159_pass": false,
+    "actual_predecessor_ref": null,
+    "not_formal_C16_40": true,
+    "not_final_tasks": true
+  },
+  "backup": {
+    "paper": "KIVI",
+    "local_agent": "kivi_owner_review",
+    "action": "new owner002 fixes late-entry clock and true ON interface regression; preserve001 frozen and original42/C16/6GiB/5400/90/cutoff",
+    "target_load_authorized": false
+  },
+  "remaining_final": [
+    "mixed/chunked lifecycle and GDN48 content/full176",
+    "actual graph and complete task/concurrency domain",
+    "matched formal performance three pairs",
+    "LongBench-v2/GSM8K no-thinking max2048 normalEOS",
+    "migration evidence and plugin delivery"
+  ],
+  "invariants": {
+    "cutoff": 1791788425,
+    "no_new_peer_target_admission_during_CPU_QUEUE": true,
+    "physical_npu": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected_npu": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "no_old_failure_relabel": true
+  },
+  "commit_push_pending": true
+}
