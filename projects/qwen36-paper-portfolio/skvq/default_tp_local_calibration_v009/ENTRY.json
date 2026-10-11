@@ -1,0 +1,329 @@
+{
+  "schema": "skvq.default-tp-local.entry/v1",
+  "default_enabled": false,
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-009/SOURCE_MANIFEST.json",
+    "bytes": 59079,
+    "sha256": "b7f2df2627c3f66f5033604c800816c73cc68c548832e9351912ab969946df47"
+  },
+  "target_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-009",
+  "patch_base": "/cache/cch/qwen36-paper-preparation-20261007/lowbit",
+  "materialize_patch": "MATERIALIZE.patch",
+  "capture_source_bindings": {
+    "current_contract.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/current_contract.py",
+      "bytes": 5755,
+      "sha256": "68c6f47eb589189bc1430a16b5001f6bc9b6456788e4feae0dbdcdc3b70f4bdb"
+    },
+    "consume_whole.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/consume_whole.py",
+      "bytes": 3029,
+      "sha256": "6784108006c973a394c1846e7d8d4dd59ebcb629a2e7b65101b4747216dfeea4"
+    },
+    "consume_stage.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/consume_stage.py",
+      "bytes": 6267,
+      "sha256": "c9538d88c3347c6aafe28d07d1efbf15979b4e3bbf8d02d1db7a938e0a93d5b4"
+    },
+    "MAIN_HOST.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/MAIN_HOST.py",
+      "bytes": 25396,
+      "sha256": "05b1522a2ef0a9ccc7f203818378d064c910cb4fdab0f3c753fa44792cf962e4"
+    },
+    "resources.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/resources.py",
+      "bytes": 6404,
+      "sha256": "660cdd7e2639db7fbf4400a257de116b264bba9c42a530df2fe5bc734ae9624c"
+    },
+    "mount_preflight.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/mount_preflight.py",
+      "bytes": 9233,
+      "sha256": "b1d94c72d7a710ecca4cae30d390def36379943a23ab8c794ad25efae17fc42c"
+    }
+  },
+  "software": {
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "2",
+      "/usr/bin/prlimit",
+      "--cpu=120:120",
+      "--as=268435456:268435456",
+      "--",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-009/software_check.py",
+      "--source-manifest-sha256",
+      "b7f2df2627c3f66f5033604c800816c73cc68c548832e9351912ab969946df47"
+    ],
+    "tests": 53,
+    "status": "UNRUN installed194/full53 and local00953",
+    "wall_seconds": 110,
+    "CPU": 1
+  },
+  "prerequisite": {
+    "capture_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/SOURCE_MANIFEST.json",
+      "bytes": 82562,
+      "sha256": "9c7b1118b1cd1f2a20ab7fde0ecb98031bf14289c9c795c18f48de9cdb805acd"
+    },
+    "derived_consumer_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-002/SOURCE_MANIFEST.json",
+      "bytes": 51314,
+      "sha256": "cb2a944dfb04c152a5d488c55685ab97db6741bac6ea41b3c7a3b1c33300ae10"
+    },
+    "actual_successful_capture_whole_ref_json": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-002-main-20261011-001/DERIVED_WHOLE_REF.json",
+    "status": "DATA_PENDING actual derived001 whole; original05a7 FAILED remains immutable",
+    "instruction": "MAIN writes strict exact3Ref descriptor only after actual new derived CPU child+whole success. Clean isolated precheck replays whole originals/source/owned/release; no old source-success schema union."
+  },
+  "host": {
+    "argv": [
+      "/usr/bin/env",
+      "MAIN_SKVQ_CALIBRATION_CPU_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--cpu=600:600",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-009/cpu_host.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "b7f2df2627c3f66f5033604c800816c73cc68c548832e9351912ab969946df47",
+      "--whole-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-002-main-20261011-001/DERIVED_WHOLE_REF.json",
+      "--feature-mode",
+      "bf16-exact-cpu32",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-009-main-20261011-001"
+    ],
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-009-main-20261011-001",
+    "result": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-009-main-20261011-001/HOST_RESULT.json",
+    "status": "UNRUN CPU_QUEUE7, no approved peer/overlap, no NPU idle observation"
+  },
+  "cpu_workload": {
+    "argv": [
+      "/usr/local/python3.12.13/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-009/cpu_entry.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "b7f2df2627c3f66f5033604c800816c73cc68c548832e9351912ab969946df47",
+      "--whole-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-002-main-20261011-001/DERIVED_WHOLE_REF.json",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-009-main-20261011-001/work",
+      "--feature-mode",
+      "bf16-exact-cpu32"
+    ],
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-009-main-20261011-001/work",
+    "result": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-009-main-20261011-001/work/CPU_WORKLOAD_RESULT.json",
+    "status": "UNRUN genuine128fits and64 artifacts required"
+  },
+  "whole_consumer": {
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "2",
+      "/usr/bin/prlimit",
+      "--cpu=180:180",
+      "--as=268435456:268435456",
+      "--",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-009/consume_cpu_whole.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "b7f2df2627c3f66f5033604c800816c73cc68c548832e9351912ab969946df47",
+      "--root",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-009-main-20261011-001",
+      "--original-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-009-main-20261011-001/MAIN_ORIGINAL_REF.json",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-009-main-20261011-001/CALIBRATION_WHOLE.json"
+    ],
+    "result": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-009-main-20261011-001/CALIBRATION_WHOLE.json",
+    "status": "UNRUN actual new own parent0 and all128/64 oracle/whole",
+    "readonly_full_math_replay": true
+  },
+  "derived_whole_precheck": {
+    "argv_template": [
+      "<actual sys.executable>",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-009/whole_precheck.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "b7f2df2627c3f66f5033604c800816c73cc68c548832e9351912ab969946df47",
+      "--whole-ref-inline",
+      "<strict exact3Ref JSON, actual DERIVED_WHOLE.json>"
+    ],
+    "subprocess_only": true,
+    "parent_namespace_not_modified": true,
+    "timeout_seconds": 120,
+    "publish_new_authority": false,
+    "metadata_replay_not_allraw_math": true
+  },
+  "CPU_ONLY_environment": {
+    "TORCH_DEVICE_BACKEND_AUTOLOAD": "0",
+    "ASCEND_RT_VISIBLE_DEVICES": "",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1"
+  },
+  "resource": {
+    "CPU": 7,
+    "host_bytes": 536870912,
+    "guest_bytes": 8589934592,
+    "ordinary_reserve_bytes": 8589934592,
+    "total_seconds": 600,
+    "cleanup_included_seconds": 90,
+    "output_bytes_cap": 33554432,
+    "noNPU": true,
+    "torch_backend_autoload": 0,
+    "library_threads": 1,
+    "output_peak_not_measured": true,
+    "owned_host_adapter": "Exact source-qualified frozen014 Control AST in a new scoped namespace; CPU8 Devices[], no NPU idle/observe/lease. Host whole replays all128 math +64 writer records using six exact origin-byte snapshots, not inaccessible guest paths.",
+    "CPU_QUEUE_no_peer_admission": true,
+    "ordinary_floor_bytes": 17716740096,
+    "disk_reserve_bytes": 8589934592
+  },
+  "clock": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/USER_72H_PROTOCOL_20261009.json",
+    "bytes": 1379,
+    "sha256": "b605d2a01118c4087e3450b3d800ef5bf40f6d0f882c1606a1e9117ed56151d1"
+  },
+  "portfolio_cutoff_epoch": 1791788425,
+  "mechanism": {
+    "global_channels": 1024,
+    "TP": 4,
+    "local_channels": 256,
+    "FA_layers": 16,
+    "rank_fits": 128,
+    "metric": "minmax",
+    "groups": 4,
+    "mean_group_size": 64,
+    "unified_clip": 0.95,
+    "smooth": false,
+    "runtime_pre_rope": false,
+    "K_statistics": "All256 original pre-QKnorm/pre-RoPE K raw statistics",
+    "V_statistics": "Actual original V projection/post-RoPE equivalence from same captures",
+    "precision": "Explicit named BF16-exact CPU32 fitting; original BF16 statistics remain identical as values. Not author FP16 calibration equivalence.",
+    "adaptation": "Named Qwen TP-local256 grouping, not global1024 author clustering equivalence or paper outcome.",
+    "teacher_required": false,
+    "recapture_Qpre_or_gate_required_for_default": false
+  },
+  "module_snapshot_protocol": {
+    "schema": "skvq.actual-library-origin-byte-snapshots/v1",
+    "labels": [
+      "torch",
+      "numpy",
+      "sklearn",
+      "actual_sklearn_KMeans",
+      "threadpoolctl",
+      "actual_threadpool_info"
+    ],
+    "mode": "actual loaded original paths+wholebytes copied at dependency stage; all live origins preserved/rechecked in producer and independent live child; whole host uses only exact new owned snapshots independently matched to all original guest3Refs",
+    "max_individual_bytes": 2097152,
+    "max_total_bytes": 12582912,
+    "existing_total_output_cap_bytes": 33554432,
+    "output_budget_not_increased": true,
+    "snapshots_do_not_grant_library_or_algorithm_PASS": true
+  },
+  "source_rebind": {
+    "old_cal006": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-006/SOURCE_MANIFEST.json",
+      "bytes": 52456,
+      "sha256": "07b526100b7184b4555138a7318c5f4a7c45ac451207ea96f656173cba1366c1"
+    },
+    "old014": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/SOURCE_MANIFEST.json",
+      "bytes": 82562,
+      "sha256": "9c7b1118b1cd1f2a20ab7fde0ecb98031bf14289c9c795c18f48de9cdb805acd"
+    },
+    "unchanged_math_and_library_files": [
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-006/author_sources.json",
+        "bytes": 64574,
+        "sha256": "564370d75035bf5b2db8d7dc869fe19cd1fd49a3f8c110caa11569ab7787bb77"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-006/cluster_producer.py",
+        "bytes": 11296,
+        "sha256": "138f1a564a61853fc0c79d14eb6f862401e646e22f628b57fc047553021f5aaf"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-006/cluster_oracle.py",
+        "bytes": 2399,
+        "sha256": "22d955d7b884a41fa9fb895a081847257cf2a1d3a0eaebf977adaacd6d4fbe8b"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-006/consume.py",
+        "bytes": 11309,
+        "sha256": "3003ee5e8943affcc61e0bb91b2a0a2a6d162f358c4e38e6b6ab175fcbe7848a"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-006/library_probe.py",
+        "bytes": 4433,
+        "sha256": "601043f66afc24e890792ca653912c4d50cd36a9cc2904cff215187cab662d3e"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-006/module_snapshots.py",
+        "bytes": 4492,
+        "sha256": "028694cb6051105055992b39c2397c005bdfb0ae41bce6c4a3a341c121b47933"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-006/torch_zip_int64.py",
+        "bytes": 3232,
+        "sha256": "32aa64d477f3407ade7c4bb74e7e969fbb26d64925b4011bfbcd083041052bee"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-006/test_module_snapshots.py",
+        "bytes": 10112,
+        "sha256": "ecaf8ccf1add9efd0b74bcdf254c597a26f4462b85693c2a3efb77374b38d39f"
+      }
+    ],
+    "previous_cal007": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-007/SOURCE_MANIFEST.json",
+      "bytes": 58698,
+      "sha256": "92f92c3d028a5af47f1fd52e521a3b8cd644ad0af39707dc7992ec4c9191a63b"
+    },
+    "actual_derived_consumer002": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-002/SOURCE_MANIFEST.json",
+      "bytes": 51314,
+      "sha256": "cb2a944dfb04c152a5d488c55685ab97db6741bac6ea41b3c7a3b1c33300ae10"
+    },
+    "previous_local008": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-008/SOURCE_MANIFEST.json",
+      "bytes": 58852,
+      "sha256": "df9107f19c12ebbdd5c681c018686347a944a2f793171689bcee04d1b8064363"
+    }
+  },
+  "current_counts": {
+    "own": 18,
+    "dependencies": 176,
+    "total": 194,
+    "py": 17,
+    "software_tests": 53
+  },
+  "actual_missing": [
+    "actual frozen derived001 fullraw plus successful whole original",
+    "MAIN installed full source and53 software",
+    "same660 fitting libraries/128fits64 artifacts within600incl90",
+    "actual owned cal009 whole",
+    "Current009 full software/source; derived002 actual fullraw whole; all128 author fits; native and E2E/task gates"
+  ],
+  "actual_fitting_executed": false,
+  "actual_current_full_capture_consumed": false,
+  "native_ready": false,
+  "model_ready": false,
+  "performance_ready": false,
+  "task_ready": false,
+  "install": {
+    "status": "UNRUN current009"
+  }
+}

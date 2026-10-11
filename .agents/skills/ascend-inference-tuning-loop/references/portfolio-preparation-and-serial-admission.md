@@ -79,9 +79,11 @@ commands do not make archived resource facts fresh or guarantee numerical PASS.
 At device admission, bind the actual physical mapping, host/cgroup budgets and
 ownership once for the bounded matrix, monitor changes, preserve first failure
 and already-valid child evidence, and release only the owned lease. Device
-jobs use MAIN-coordinated disjoint admission only when the actual controller
-and aggregate budget support it; no preparer independently starts a container
-or reserves cards just because it finishes a packet.
+jobs obey the latest explicit concurrency authority. Under the current serial
+mode, no second paper enters the device lease. Disjoint admission requires a
+later explicit authorization plus reviewed compatible controllers and one
+aggregate budget; no preparer independently starts a container or reserves
+cards just because it finishes a packet.
 
 When a gap is genuinely blocked or out of scope, record its concrete dependency
 and continue another actionable paper. Missing draft inheritance is a source
@@ -90,9 +92,11 @@ Do not hold a preparation slot awaiting MAIN when other assigned work remains.
 
 MAIN selects the highest-value ready successor using remaining time and
 current evidence, rather than waiting for every paper to be ready. Independent
-cross-paper or within-paper numerical/preparation shards may share disjoint
-authorized cards only with compatible reviewed controllers and one joint budget.
-TP4/full-model/profile/formal performance is exclusive. All papers keep a fair
+cross-paper or within-paper device-free preparation continues in parallel.
+Under the current serial mode, disjoint cards do not authorize a second paper's
+device job. If concurrency is explicitly reauthorized later, first review the
+controllers and one joint budget. TP4/full-model/profile/formal performance
+remains exclusive. All papers keep a fair
 same-stack/common-optimization dense comparison.
 
 Fresh process/HBM/AICore mapping and host/cgroup resources govern admission.

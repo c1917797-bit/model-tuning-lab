@@ -1,0 +1,56 @@
+{
+  "schema": "skvq.calibration-three-wheel-download-lock/v1",
+  "packages": [
+    {
+      "name": "scikit-learn",
+      "version": "1.4.2",
+      "filename": "scikit_learn-1.4.2-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+      "bytes": 11507077,
+      "sha256": "671e2f0c3f2c15409dae4f282a3a619601fa824d2c820e5b608d9d775f91780c",
+      "url": "https://files.pythonhosted.org/packages/5d/ce/8937a0c6afd79f3486f39361ff58dd299ca1b19deb6b9deb59fe510d212f/scikit_learn-1.4.2-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+      "metadata": "https://pypi.org/pypi/scikit-learn/1.4.2/json"
+    },
+    {
+      "name": "joblib",
+      "version": "1.4.2",
+      "filename": "joblib-1.4.2-py3-none-any.whl",
+      "bytes": 301817,
+      "sha256": "06d478d5674cbc267e7496a410ee875abd68e4340feff4490bcb7afb88060ae6",
+      "url": "https://files.pythonhosted.org/packages/91/29/df4b9b42f2be0b623cbd5e2140cafcaa2bef0759a00b7b70104dcfe2fb51/joblib-1.4.2-py3-none-any.whl",
+      "metadata": "https://pypi.org/pypi/joblib/1.4.2/json"
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.5.0",
+      "filename": "threadpoolctl-3.5.0-py3-none-any.whl",
+      "bytes": 18414,
+      "sha256": "56c1e26c150397e58c4926da8eeee87533b1e32bef131bd4bf6a2f45f3185467",
+      "url": "https://files.pythonhosted.org/packages/4b/2c/ffbf7a134b9ab11a67b0cf0726453cedd9c5043a4fe7a35d1cefa9a1bcfb/threadpoolctl-3.5.0-py3-none-any.whl",
+      "metadata": "https://pypi.org/pypi/threadpoolctl/3.5.0/json"
+    }
+  ],
+  "total_wheel_bytes": 11827308,
+  "native_baseline": {
+    "numpy": "1.26.4",
+    "scipy": "1.13.1",
+    "torch": "2.10.0+cpu"
+  },
+  "adaptation": "sklearn1.4.2; n_init10 explicit; original body unmodified; not author1.2.1 bitwise equivalence",
+  "native_origin_refs": {
+    "torch": {
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch/__init__.py",
+      "bytes": 106868,
+      "sha256": "51c90fe34a7cf869517d1bab4cd114498790e169ec668f1a154c35ec64117a5e"
+    },
+    "numpy": {
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/__init__.py",
+      "bytes": 17005,
+      "sha256": "22cd1535fa14d74ef6f457cca149ffdc80875f460be313b8f895273f78bc402e"
+    },
+    "scipy": {
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/scipy/__init__.py",
+      "bytes": 4144,
+      "sha256": "f09d8a342acb52bb982073fbeb2594d9363ff55433d3dd710066142db7c0bee9"
+    }
+  }
+}

@@ -1,0 +1,433 @@
+{
+  "schema": "kivi.cost129-protocol-successor-entry/v1",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-cost129-bootstrap-v1-003/SOURCE_MANIFEST.json",
+    "bytes": 161966,
+    "sha256": "806ff538b0d4cf196c818067fb30bb7fdce57697ba1296fcf5321fece79cd68c"
+  },
+  "reader_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-cost129-dual-source-reader-v1-003/SOURCE_MANIFEST.json",
+    "bytes": 92427,
+    "sha256": "c92bcc6a29a9131e8077eb0d4449d5349b9c6dad94d4a81ab2225275365185d1"
+  },
+  "status": "PREPARED_LOCAL110_PLUS23_NOT_TARGET_ADMITTED",
+  "immutable_dense_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-cost129-bootstrap-v1-001/SOURCE_MANIFEST.json",
+    "bytes": 148006,
+    "sha256": "56aa4844756055266ea7e05b6a2b862e4eac3be9f449cc3ae1d16d5c855bc0b6"
+  },
+  "immutable_dense_reader": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-cost129-owner-reader-v1-002/SOURCE_MANIFEST.json",
+    "bytes": 78174,
+    "sha256": "783ed6edeb26e55ff0b8706b15346c43b91bf8a2040058b60df9ea2f4aad8c7e"
+  },
+  "frozen": true,
+  "changes": [
+    "runtime_owner.post_input exact protocol 2,2,129 and error text only",
+    "software_check registers original98+new12 actual provider/input/post_input/file chain",
+    "screen_whole Context OWNER equals actual unchanged safety_host declaration",
+    "separate fixed-two-source pair reader preserves dense001 and candidate003 Refs; unchanged original pair predicates except exact source identities and returned identity fields"
+  ],
+  "actual_failure_preserved": {
+    "operation": "exec-0000000000000623",
+    "reason": "inherited protocol assertion required2,2,1024; actualrecipe2,2,129",
+    "recipe": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-cost129-candidate-main-20261011-001/candidate/RECIPE.json",
+      "bytes": 5590,
+      "sha256": "7e80003ca58907e42d2ffaa0711fa5b6da3dc6bba3b8a6525f476858354c0df6"
+    },
+    "local_transfer": "5591B; exactly one terminal LF removed in memory recovers original5590B SHA; file unchanged"
+  },
+  "commands": {
+    "source_audit": {
+      "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+      "command": "/usr/bin/python3",
+      "args": [
+        "-I",
+        "-B",
+        "-c",
+        "import hashlib,importlib.util,json,sys\nfrom pathlib import Path\nroot=Path(\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-cost129-bootstrap-v1-003\")\np=root/\"SOURCE_MANIFEST.json\";wire=p.read_bytes()\nassert len(wire)==161966 and hashlib.sha256(wire).hexdigest()==\"806ff538b0d4cf196c818067fb30bb7fdce57697ba1296fcf5321fece79cd68c\"\nspec=importlib.util.spec_from_file_location(\"_kivi_screen_source_audit\",root/\"loader.py\")\nl=importlib.util.module_from_spec(spec);sys.modules[spec.name]=l;spec.loader.exec_module(l)\nm,r=l.source(\"806ff538b0d4cf196c818067fb30bb7fdce57697ba1296fcf5321fece79cd68c\")\nassert (len(m[\"files\"]),len(m[\"dependencies\"]),m[\"source_count\"],m[\"software_tests_declared\"])==(55,305,360,110)\nassert not any(n in sys.modules for n in (\"torch\",\"torch_npu\",\"triton\",\"numpy\"))\nprint(json.dumps(dict(source=r,own=55,dependencies=305,total=360,source_only=True,NPU=False)))\n"
+      ],
+      "wall_seconds": 150,
+      "NPU": false
+    },
+    "default_OFF": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-cost129-bootstrap-v1-003/host_run.py"
+    ],
+    "software_only": {
+      "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-cost129-bootstrap-v1-003/host_run.py",
+        "--execute",
+        "--source",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-cost129-bootstrap-v1-003/SOURCE_MANIFEST.json",
+        "--source-sha256",
+        "806ff538b0d4cf196c818067fb30bb7fdce57697ba1296fcf5321fece79cd68c",
+        "--component",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json",
+        "--component-sha256",
+        "d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d",
+        "--model-manifest",
+        "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+        "--model-manifest-sha256",
+        "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+        "--software-only",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-cost129-software-main-20261011-003"
+      ],
+      "phase_seconds": 240,
+      "NPU": false,
+      "uses_existing_CPU_controller": true
+    },
+    "candidate": {
+      "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-cost129-bootstrap-v1-003/host_run.py",
+        "--execute",
+        "--source",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-cost129-bootstrap-v1-003/SOURCE_MANIFEST.json",
+        "--source-sha256",
+        "806ff538b0d4cf196c818067fb30bb7fdce57697ba1296fcf5321fece79cd68c",
+        "--component",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json",
+        "--component-sha256",
+        "d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d",
+        "--model-manifest",
+        "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+        "--model-manifest-sha256",
+        "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+        "--software",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-cost129-software-main-20261011-003/cpu-preflight/SOFTWARE.json",
+        "--software-sha256",
+        "@ACTUAL_NEW110_SOFTWARE_SHA256@",
+        "--software-stage",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-cost129-software-main-20261011-003/RESULT.json",
+        "--software-stage-sha256",
+        "@ACTUAL_NEW110_SOFTWARE_STAGE_SHA256@",
+        "--arm",
+        "candidate",
+        "--predecessor-arguments",
+        "@ACTUAL018_WHOLE023_RAW024_ARGUMENTS_JSON@",
+        "--predecessor-arguments-sha256",
+        "@ACTUAL018_ARGUMENTS_SHA256@",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-cost129-candidate-main-20261011-003",
+        "--port",
+        "8250"
+      ],
+      "phase_seconds": 5400,
+      "currently_admitted": false
+    },
+    "candidate_arm_consume": {
+      "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-cost129-bootstrap-v1-003/screen_whole.py",
+        "--execute",
+        "--source-manifest-sha256",
+        "806ff538b0d4cf196c818067fb30bb7fdce57697ba1296fcf5321fece79cd68c",
+        "--arguments",
+        "@ACTUAL_CANDIDATE_ARM_ARGUMENTS_JSON@",
+        "--arguments-sha256",
+        "@ACTUAL_CANDIDATE_ARM_ARGUMENTS_SHA256@",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-cost129-candidate-main-20261011-003/ARM_CONSUMED.json"
+      ],
+      "wall_seconds": 150,
+      "NPU": false
+    },
+    "local_software": {
+      "shell": "powershell",
+      "command": "$env:KIVI_COST_BASELINE='C:/Users/Huawei/AppData/Local/Temp/kivi-b1-matched1024-runtime-20261011-006/bootstrap'; & 'C:/Users/Huawei/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe' -I -B 'C:/Users/Huawei/AppData/Local/Temp/kivi-cost129-protocol-successor-20261011-003/bootstrap/software_check.py' --execute --local --source-manifest-sha256 '806ff538b0d4cf196c818067fb30bb7fdce57697ba1296fcf5321fece79cd68c' --producer-archive 'C:/Users/Huawei/AppData/Local/Temp/kivi-firstdecode-hbm-budget-v018-20261010/bootstrap' --reviewed-deps 'C:/Users/Huawei/AppData/Local/Packages/sandbox.{48fdcea7-5947-498c-a068-4bc4cdaddb04}/AC/Temp/kivi-c132-reviewed-source/model-deps' --oracle-archive 'C:/Users/Huawei/AppData/Local/Temp/c164-kivi-e2e-deps/oracle.py' --driver-archive 'C:/Users/Huawei/AppData/Local/Temp/c164-kivi-producer-resource-fault' --output 'C:/Users/Huawei/AppData/Local/Temp/kivi-cost129-protocol-successor-20261011-003/LOCAL110_002.json'",
+      "NPU": false,
+      "scope": "actual110 local source/inert tests; no framework/NPU"
+    },
+    "dense_reconsume_existing0611": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-cost129-owner-reader-v1-002/arm.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "783ed6edeb26e55ff0b8706b15346c43b91bf8a2040058b60df9ea2f4aad8c7e",
+      "--arguments",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-cost129-dense-main-20261011-001/MAIN_ARM_ARGUMENTS.json",
+      "--arguments-sha256",
+      "b682b8ebe173b20af98f274b031c58a0864ba7e82ba1bbb7a91d1dfa0288ec66",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-cost129-dense-main-20261011-001/ARM_CONSUMED_OWNER002_REPLAY003.json"
+    ],
+    "reader_software": {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-cost129-dual-source-reader-v1-003/software_check.py",
+        "--execute",
+        "--source-manifest-sha256",
+        "c92bcc6a29a9131e8077eb0d4449d5349b9c6dad94d4a81ab2225275365185d1",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_COST003_READER23_001.json"
+      ],
+      "wall_seconds": 150,
+      "NPU": false
+    },
+    "pair": {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-cost129-dual-source-reader-v1-003/source_pair.py",
+        "--execute",
+        "--source-manifest-sha256",
+        "c92bcc6a29a9131e8077eb0d4449d5349b9c6dad94d4a81ab2225275365185d1",
+        "--dense",
+        "@ACTUAL_DENSE_ARM_CONSUMED_PATH@",
+        "--dense-sha256",
+        "@ACTUAL_DENSE_ARM_SHA256@",
+        "--dense-terminal",
+        "@ACTUAL_DENSE_CONSUMER_TERMINAL_PATH@",
+        "--dense-terminal-sha256",
+        "@ACTUAL_DENSE_CONSUMER_TERMINAL_SHA256@",
+        "--dense-operation",
+        "@ACTUAL_DENSE_CONSUMER_EXEC_ID@",
+        "--dense-peer",
+        "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "--candidate",
+        "@ACTUAL_CANDIDATE_ARM_CONSUMED_PATH@",
+        "--candidate-sha256",
+        "@ACTUAL_CANDIDATE_ARM_SHA256@",
+        "--candidate-terminal",
+        "@ACTUAL_CANDIDATE_CONSUMER_TERMINAL_PATH@",
+        "--candidate-terminal-sha256",
+        "@ACTUAL_CANDIDATE_CONSUMER_TERMINAL_SHA256@",
+        "--candidate-operation",
+        "@ACTUAL_CANDIDATE_CONSUMER_EXEC_ID@",
+        "--candidate-peer",
+        "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_B1_COST129_DIAGNOSTIC_DENSE001_CANDIDATE003_001.json"
+      ],
+      "wall_seconds": 150,
+      "NPU": false
+    },
+    "reader_default_OFF": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-cost129-dual-source-reader-v1-003/source_pair.py"
+    ],
+    "local_software_reader": {
+      "shell": "powershell",
+      "command": "python -I -B 'C:/Users/Huawei/AppData/Local/Temp/kivi-cost129-dual-source-reader-20261011-003/software_check.py' --execute --dense-archive 'C:/Users/Huawei/AppData/Local/Temp/kivi-b1-cost-attribution-20261011-001/bootstrap' --candidate-archive 'C:/Users/Huawei/AppData/Local/Temp/kivi-cost129-protocol-successor-20261011-003/bootstrap' --reader-archive 'C:/Users/Huawei/AppData/Local/Temp/kivi-cost129-owner-reader-20261011-002' --output '<NEW_LOCAL_OUTPUT>.json'"
+    }
+  },
+  "budget": {
+    "phase_seconds_including_cleanup": 5400,
+    "cleanup_seconds": 90,
+    "guest_limit_bytes": 68719476736,
+    "CPU_preflight_limit_bytes": 8589934592,
+    "host_limit_bytes": 536870912,
+    "reserve_bytes": 9126805504,
+    "ordinary_initial_floor_bytes": 78383153152,
+    "CPU_total": 7,
+    "physical_devices": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "physical_hbm_limit_mib_per_card": 29696,
+    "workspace_limit_bytes": 34359738368,
+    "raw_capture_expected_bytes": "Disabled in both screen arms. Existing32GiB whole-output cap retained; scalar boundary evidence plus buffered HTTP raw published only outside response timing.",
+    "raw_consumer": "Independent original018 all64 raw024 + whole023 must actually pass exact source/owner/math/terminal gates; no recapture or1024 numeric claim.",
+    "software": {
+      "CPU": 1,
+      "guest_limit_bytes": 8589934592,
+      "host_limit_bytes": 536870912,
+      "wall_seconds": 150,
+      "phase_seconds_including_cleanup": 240,
+      "cleanup_seconds": 90,
+      "output_bytes": 1048576,
+      "execution_profile": "same660-Devices[]-CPU8 Python3.12; original controller/child, not host3.9 native-source execution",
+      "serial_admission_unchanged": true,
+      "parallel_CPU_NPU_admitted": false
+    },
+    "explicit_cache_provider": {
+      "schema": "kivi.explicit-provider-budget-proposal/v1",
+      "scope": "source-proven logical terms plus explicitly unmeasured overhead proposal, not admission",
+      "same_total_budget_bytes": 6442450944,
+      "dense_actual014": {
+        "blocks": 422,
+        "native_bytes": 10723688448,
+        "actual_compact_bytes": 0,
+        "failed_before_compact": true
+      },
+      "candidate_2bit": {
+        "blocks": 198,
+        "pages": 2376,
+        "native_bytes": 5031493632,
+        "compact_logical_bytes": 967967744,
+        "metadata_B16_all16_bytes": 69754880,
+        "full_prefill_gather_peak_bytes": 67108864,
+        "packed_scores_probs_result_peak_bytes": 13025280,
+        "unmeasured_allocation_margin_bytes": 268435456,
+        "charged_total_bytes": 6417785856,
+        "unassigned_bytes": 24665088
+      },
+      "candidate_4bit": {
+        "blocks": 180,
+        "pages": 2160,
+        "native_bytes": 4574085120,
+        "compact_logical_bytes": 1449263616,
+        "overhead_bytes": 418324480,
+        "charged_total_bytes": 6441673216,
+        "unassigned_bytes": 777728
+      },
+      "source_proven_residency": {
+        "FA_blocks": 22,
+        "GDN_groups": 3,
+        "GDN_blocks_each": 1,
+        "blocks_per_request": 25,
+        "null_blocks": 1,
+        "max_full_resident_2bit": 7,
+        "max_full_resident_4bit": 7,
+        "slot_capacity": 16,
+        "external_concurrency_unchanged": 16,
+        "actual_preemption_supported": false,
+        "minimum_B1_blocks_including_null": 26
+      },
+      "formula": {
+        "native": "B * actual uniform page bytes * actual group size",
+        "compact": "16 * (12B*(128*256*bits/8+4096) + 12B*128*(256*bits/8+32) + 16*257*256*2 + (32/bits)*4)",
+        "metadata": "16 FA * B16 * (ceil(33792/128)+33792+4) * int64",
+        "prefill": "gather list K,V and cat K,V coexist, 4 * 32768 * 256 * A16",
+        "packed": "two B16*H6*L33792 A16 tensors + B16*H6*D256 A16 result"
+      },
+      "unproved": [
+        "allocator reserved peak/fragmentation incl freed metadata generations",
+        "opaque torch/NPU kernel workspace and writer temporary bound",
+        "native FIA activation/workspace peak with changed cache shape",
+        "fresh whole-model memory/resources/lease",
+        "C16 scheduling/preemption",
+        "new compact geometry full64 output numeric and original writer provenance"
+      ],
+      "model_ready": false,
+      "performance_ready": false,
+      "run_authority": false,
+      "dense_source_same_budget": {
+        "blocks": 253,
+        "native_bytes": 6429130752,
+        "actual_run": false
+      }
+    },
+    "paired_phases": 2,
+    "paired_upper_bound_seconds": 10800,
+    "paired_execution": "Dense then candidate in independent nonoverwriting outputs/leases; exact dense stop-retain before candidate. Each arm5400 including90 cleanup and same absolute cutoff; no budget reset."
+  },
+  "cutoff": 1791788425,
+  "prerequisites": [
+    "MAIN source360 byte audit and defaultOFF",
+    "same660 Devices[] complete110 within original240 incl90/child150",
+    "new reader23 pure software on host",
+    "MAIN fresh safety/lease/RAM/HBM/disk admission; prior raw024 all64 and whole gates remain mandatory",
+    "candidate003 complete129 actual result/native finished/4rank cost publication/release",
+    "actual candidate003 whole reader success and actual dense001 reader002 terminal"
+  ],
+  "dense_reuse": {
+    "capture_operation": "exec-0000000000000611",
+    "whole_reader_operation": "exec-000000000000061f",
+    "new_capture_required": false,
+    "local_full_dense_originals_available": false,
+    "actual_reconsume_command_provided": true,
+    "strict_pair_accepts_only_reader002_dense001_and_screen_whole003_candidate003": true
+  },
+  "software": {
+    "producer": {
+      "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-cost129-protocol-successor-20261011-003/LOCAL110_002.json",
+      "bytes": 680,
+      "sha256": "da6297ccc02f75e040575a0fcb6b427ca4e97553c2672d189f89b1d418069d3e",
+      "tests": 110,
+      "seconds": 17.713,
+      "successful": true
+    },
+    "reader": {
+      "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-cost129-dual-source-reader-20261011-003/LOCAL23_001.json",
+      "bytes": 3154,
+      "sha256": "4a4e4c256c9ef7435b147ca209d93798325fe06f6e0e6af16c83679e318802f3",
+      "tests": 23,
+      "seconds": 0.536,
+      "successful": true
+    },
+    "scope": "Python3.12.14 local source/inert provider + actual real-file protocol tests; pair operation records are explicit synthetic fixtures, not actual remote successes. Target software/NPU unrun.",
+    "reader_host39": {
+      "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-cost129-dual-source-reader-20261011-003/LOCAL23_002_PY39.json",
+      "bytes": 2183,
+      "sha256": "fcf67fe0e4c182feb70f21b43f0d5c39a8facf1bf2cd4b953b1ee816d1ec0996",
+      "tests": 23,
+      "seconds": 0.625,
+      "successful": true
+    }
+  },
+  "preserved_failures": [
+    "immutable001/source304/software98",
+    "candidate0623 original failure",
+    "producer LOCAL110_001 namespace fixture conflict",
+    "reader LOCAL20_001 Windows-only archive path mismatch",
+    "all earlier NPU/model failures"
+  ],
+  "materialization": {
+    "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit",
+    "relative_headers": true,
+    "overwrites": false,
+    "EOF_preserved": true
+  },
+  "interpretation": [
+    "All category wall/thread CPU is inclusive; no sum across nested categories or ranks.",
+    "kernel.forward is dispatch/allocation/guards, not completed device kernel time; existing_sync may drain earlier queue work.",
+    "refresh includes row_plan/H2D/fence; finish includes seal/writer/fence. begin/_guard_quant item implicit waits may not appear as existing_sync.",
+    "host.observe is common concurrent controller wall/process CPU; process CPU excludes Docker CLI and worker processes.",
+    "Original006 mathematics/guards/storage budget unchanged; short129 intentionally changes workload, no new performance gain claim."
+  ],
+  "not_claimed": [
+    "candidate129 successful",
+    "actual candidate costs/pair",
+    "new performance improvement",
+    "fixed1024 numerical coverage",
+    "C16/FULL/final task acceptance"
+  ],
+  "run_authority": false,
+  "performance_accepted": false,
+  "NPU": false,
+  "source_closure": {
+    "producer": {
+      "own": 55,
+      "dependencies": 305,
+      "total": 360
+    },
+    "reader": {
+      "own": 3,
+      "dependencies": 367,
+      "total": 370
+    },
+    "unchanged_host_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-cost129-bootstrap-v1-001/host_run.py",
+      "bytes": 23065,
+      "sha256": "804f5bbe3d915aeb0587481ea4ff0fc2c34600afbb9715bce27ced5da6dc75c7"
+    },
+    "mount_builder": "model_contract.required_source_mounts exact full own+dependencies+donor; all original001 test closure files and MF declared; no new mount framework",
+    "mount_semantics": "source artifacts RO at exact original paths; repository RO; /usr/local/Ascend/driver RO; original29file model RO at /models/Qwen3.6-27B; owned output/IPC mounts remain original controlled RW",
+    "extra_old_source_dependencies": "Exact original001 54py+MF added to declare protocol regression old-source and shared provider fixture. Existing250 preserved."
+  }
+}

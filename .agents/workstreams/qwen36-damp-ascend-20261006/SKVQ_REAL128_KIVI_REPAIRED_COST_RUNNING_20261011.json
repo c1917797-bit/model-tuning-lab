@@ -1,0 +1,141 @@
+{
+  "schema": "qwen36.paper-stage-checkpoint/v1",
+  "updated_at_utc": "2026-10-11T05:27:00Z",
+  "portfolio_cutoff_epoch": 1791788425,
+  "alignment": {
+    "long_term": "Qwen3.6-27B Ascend plugin/monkeypatch >=10% fixed1024 matched E2E; TTFT/TPOT; final task criteria unchanged",
+    "medium_term": "mechanism -> actual NPU correctness -> matched E2E -> final LongBench-v2/GSM8K; independent evidence",
+    "short_term": "KIVI repaired candidate cost129 diagnostic plus SKVQ read-only JSON-rank-key consumer repair; no unchanged producer reruns",
+    "previous_turn": "progress: actual deployment, same-image tests and real128fits; not acceptance"
+  },
+  "devices": {
+    "allowed": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "serial": true,
+    "latest_readonly_admission": "exec-0000000000000659",
+    "actual_in_use_not_yet_observed": true
+  },
+  "kivi": {
+    "actual_fixed1024_existing": {
+      "scope": "B1/C1 one full32768 input; not C16/formal/finaltasks",
+      "throughput_dense": 1.6828073944,
+      "throughput_candidate": 0.4668832851,
+      "gain_percent": -72.2556909,
+      "conclusion": "current implementation/configuration regression; not paper invalid"
+    },
+    "old_cost_candidate": {
+      "operation": "exec-0000000000000623",
+      "state": "FAILED",
+      "cause": "post_input required[2,2,1024], actual diagnostic[2,2,129]; implementation protocol error"
+    },
+    "repaired_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-cost129-bootstrap-v1-003/SOURCE_MANIFEST.json",
+      "bytes": 161966,
+      "sha256": "806ff538b0d4cf196c818067fb30bb7fdce57697ba1296fcf5321fece79cd68c"
+    },
+    "software": {
+      "operation": "exec-000000000000064f",
+      "state": "COMPLETED_EXIT0",
+      "tests": 110,
+      "elapsed_seconds": 113.482,
+      "software_sha256": "baa3516b9bf40c72d81f3ef9647bfa7d9ca2d1948277fc9f2ea4efaea4b88d30"
+    },
+    "candidate": {
+      "operation": "exec-0000000000000661",
+      "state": "RUNNING",
+      "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-cost129-candidate-main-20261011-003",
+      "reuse_dense": "actual0611 accepted061f, no recapture",
+      "scope": "129-token diagnostic; not fixed1024 performance gain or correctness expansion"
+    }
+  },
+  "skvq": {
+    "calibration_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-012/SOURCE_MANIFEST.json",
+      "bytes": 71735,
+      "sha256": "8103ff0fc4777d30d49eaa99b4491d70ae39ac9bdbd691fa22de953f3722baa3"
+    },
+    "bundle": {
+      "operation": "exec-0000000000000633",
+      "files": 915,
+      "bytes": 44086070,
+      "static_pass": true,
+      "original_image_unchanged": true
+    },
+    "software": {
+      "operation": "exec-0000000000000631",
+      "tests": 116,
+      "executed": 115,
+      "skipped": 1,
+      "scope": "one Windows-only refusal test skipped on Linux"
+    },
+    "actual_host": {
+      "operation": "exec-0000000000000637",
+      "state": "COMPLETED_EXIT0",
+      "elapsed_seconds": 216.806,
+      "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-012-main-20261011-002",
+      "actual_fits": 128,
+      "artifacts": 64,
+      "independent_whole_pending": true
+    },
+    "release": {
+      "operation": "exec-0000000000000649",
+      "cid": "d8a530fa0c5950be869fff4facfc6f3fe69a85b3aef57317e278d600c70f48cf",
+      "stopped": true,
+      "deleted": false,
+      "pid": 0,
+      "no_oom": true
+    },
+    "whole": {
+      "operation": "exec-0000000000000656",
+      "state": "FAILED",
+      "scope": "math checks reached terminal equality but full whole acceptance absent",
+      "cause": "consume builds checked integer rank keys, JSON saved keys are strings; exact independent==consumed fails",
+      "actual_key_probe": "exec-0000000000000662",
+      "next": "source-bound read-only consumer repair, explicit writer successor integration; preserve producer/artifacts, no rerun"
+    },
+    "main_boundary_failures": {
+      "operations": [
+        "exec-000000000000062e",
+        "exec-0000000000000632",
+        "exec-0000000000000647",
+        "exec-0000000000000654",
+        "exec-000000000000065b"
+      ],
+      "causes": [
+        "supply metadata EOF transfer mismatch",
+        "MCP wrapper instead of AgentWeb operation envelope",
+        "invented whole sink instead of frozen required name",
+        "ss binary unavailable; replaced by /proc/net exact listener check"
+      ],
+      "rule": "check actual schema/CLI/bytes before submission; no algorithm no-go from these failures"
+    }
+  },
+  "skill_change": {
+    "file": ".agents/skills/ascend-inference-tuning-loop/references/portfolio-preparation-and-serial-admission.md",
+    "scope": "two stale disjoint-device clauses aligned with current explicit serial authority; no gate relaxed",
+    "validation": "exec-000000000000063d validate-mst20/diffcheck exit0"
+  },
+  "acceptance": {
+    "new_NPU_correctness": false,
+    "new_fixed1024_performance": false,
+    "new_task_accuracy": false,
+    "goal_met": false
+  },
+  "scheduling": {
+    "ready_NPU_backup_count": 0,
+    "zero_idle_claim": false,
+    "preparation_parallel": true,
+    "device_stages_serial": true,
+    "ordinary_HugeTLB_extra_release_authorized": false
+  }
+}

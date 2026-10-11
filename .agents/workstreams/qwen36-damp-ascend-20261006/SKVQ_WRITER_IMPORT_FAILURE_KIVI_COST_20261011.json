@@ -1,0 +1,81 @@
+{
+  "schema": "paper-portfolio.stage-checkpoint/v1",
+  "created_at_utc": "2026-10-11T06:04:00Z",
+  "portfolio_cutoff_epoch": 1791788425,
+  "goal": "At least one new non-HYPIC paper technique, plugin/monkeypatch, >=10% fixed1024 matched E2E gain; final tasks within frozen loss limits. NOT ACHIEVED.",
+  "maintainer_rule_changes": {
+    "scope": "minimal clarification under explicit human permission; no threshold relaxation",
+    "changes": [
+      "Latest serial device authority supersedes stale disjoint grants; device-free agent preparation stays parallel.",
+      "Replay each required full predecessor once within one bounded invocation, bind exact refs and recheck immutable identity; fresh replay next invocation; no generic PASS cache.",
+      "Check reuse module import closure in a fresh process; RO mounts and AST/mock imports alone do not establish executability."
+    ],
+    "validation": "validate-mst20 PASS069c; final revalidation required",
+    "archive_whitespace_exception": "Frozen source archives retain original trailing blank lines for exact source identity; one-command core.whitespace=-blank-at-eof only. Other checks unchanged; no persistent Git setting."
+  },
+  "kivi": {
+    "candidate_producer": "exec-0000000000000661",
+    "exit_code": 0,
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-cost129-candidate-main-20261011-003/RESULT.json",
+      "bytes": 1901425,
+      "sha256": "f72699068aff17f781732b544122de5c92037c53f3cb9720d79fc0b3efac11c0"
+    },
+    "candidate_whole": "exec-000000000000069e",
+    "release": "exec-0000000000000698",
+    "dense_replay": "exec-00000000000006a3",
+    "dense_replay_reason": "Original061f operation record expired/not_found; read-only replay of immutable dense001 artifacts took3.694s and reproduced identical consumed SHA. No dense model/NPU rerun.",
+    "pair_operation": "exec-00000000000006a6",
+    "pair": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_B1_COST129_DIAGNOSTIC_DENSE001_CANDIDATE003_001.json",
+      "bytes": 2852,
+      "sha256": "c0c89f30196177de0a91361bdca101c78d79ac22914d64aa80802589c91b049e"
+    },
+    "diagnostic_only": true,
+    "output_tokens": 129,
+    "diagnostic_improvement_percent": -71.84175238180934,
+    "prior_fixed1024_improvement_percent": -72.25569089512976,
+    "next": "Inspect inclusive worker cost data; validate a measured bottleneck before new guard/kernel candidate. No formal/per-task expansion of this regressed implementation.",
+    "observer_context": "Readonly CAL012 replay on CPU166 shared host during cost diagnostic; joint CPU ledger <=7. Diagnostic times are not observer-off final acceptance."
+  },
+  "skvq": {
+    "calibration_whole": "exec-000000000000068c",
+    "calibration_whole_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-012-main-20261011-002/CALIBRATION_WHOLE_READER001.json",
+      "bytes": 312954,
+      "sha256": "ed7f1127cd20d71da30040c3ca746490edce87137704344cb5ae63498e374f3e"
+    },
+    "actual_128_fits_64_artifacts_independently_checked": true,
+    "writer_software": "exec-0000000000000692: 72 PASS",
+    "writer_operation": "exec-000000000000069a",
+    "writer_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-actual-writer-bridge-009-main-20261011-001/HOST_RESULT.json",
+      "bytes": 70911,
+      "sha256": "965ea1097e8b9f202e765c20bb16935100adeef6b62101197b4c4512572711ea"
+    },
+    "writer_exit_code": 1,
+    "classification": "ADAPTATION_IMPLEMENTATION",
+    "first_fault": "CANARY.json ModuleNotFoundError current_contract while loading exact capture014/n1_format.py; before tensor arithmetic/writer.",
+    "algorithm_verdict": "Not validated; no numerical mismatch or paper-level no-go established.",
+    "release": "exec-00000000000006a7: exact own two containers stopped retained, Pid0/noExec/noOOM",
+    "next": "Agent prepares writer010 explicit source-bound namespace closure and clean-process negative tests. Preserve009 and existing calibration; do not blind rerun.",
+    "compiled_reader006": "Local frozen298Refs/57tests, not deployed or NPU-tested; successor source e32ccdc0b86ecfeacca6988305aca7cde4089ba758f5066b8e58392ed14bcf02."
+  },
+  "resource_snapshot": {
+    "operation": "exec-00000000000006a4",
+    "physical4_7": "No PID, AICore0, HBM2868/2866/2866/2861MiB after writer failure",
+    "protected0_3": "external HYPIC running; untouched",
+    "ready_npu_backup": 0,
+    "zero_idle_claim": false
+  },
+  "acceptance": {
+    "new_deployment_success": false,
+    "new_formal_performance": false,
+    "new_task_accuracy": false
+  },
+  "git": {
+    "branch": "work/qwen36-damp-ascend-20261006",
+    "before_head": "231590e6fa125ad97e22fc8fdc73f14a66fb6d33",
+    "publication": "pending normal commit/push; source archives exact"
+  }
+}

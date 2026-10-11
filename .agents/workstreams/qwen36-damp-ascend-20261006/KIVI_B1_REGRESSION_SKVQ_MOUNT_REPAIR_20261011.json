@@ -1,0 +1,225 @@
+{
+  "schema": "paper-portfolio.kivi-regression-skvq-mount-repair/v1",
+  "updated_at_utc": "2026-10-11T03:21:00Z",
+  "previous_turn_classification": "VERIFIED_WAIT exact0602 live; preceding probability answer adds no new acceptance",
+  "objective_acceptance_met": false,
+  "portfolio_cutoff_epoch": 1791788425,
+  "kivi": {
+    "source": {
+      "bytes": 146941,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-matched1024-bootstrap-v1-006/SOURCE_MANIFEST.json",
+      "sha256": "613c7def7a2d98b4117fb5dd2a15dcd734c8c8c8376b51113644716a865b2799"
+    },
+    "original_candidate_operation": "exec-00000000000005e5",
+    "terminal_exit_code": 0,
+    "elapsed_seconds": 2822.113,
+    "release_operation": "exec-00000000000005f9",
+    "stopped_at": "2026-10-11T02:46:14.24623745Z",
+    "arm_consumer_operation": "exec-00000000000005fa",
+    "failed_main_cli_operation": "exec-00000000000005f8",
+    "failed_main_cli_cause": "MAIN passed inline JSON where --arguments expects a file; corrected only transport, original failure retained",
+    "pair_operation": "exec-00000000000005fc",
+    "pair_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_B1_FIXED1024_PAIR_20261011_006.json",
+      "bytes": 1610,
+      "sha256": "35994c6801149d3d55a57a0a7f861b6759c6858754df1410547ab719e877b7b8"
+    },
+    "pair": {
+      "C16_verified": false,
+      "FULL_verified": false,
+      "candidate": {
+        "bytes": 7577404,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-candidate-main-20261011-006/RESULT.json",
+        "sha256": "ff0f5d9ecdd84cb084a637e9c6a7d1a88d96dde5dcb1d73715bf4d30531a002f"
+      },
+      "candidate_metrics": {
+        "mean_tpot_seconds": 2.1185715263050535,
+        "mean_ttft_seconds": 25.968456730013713,
+        "output_tokens_per_second": 0.46688328514120686,
+        "wall_seconds": 2193.267637950019
+      },
+      "dense": {
+        "bytes": 2734639,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-dense-main-20261011-006/RESULT.json",
+        "sha256": "b557f78641de57782f1331e10cf375df09ea89533f7dae6d741c65d648257e95"
+      },
+      "dense_metrics": {
+        "mean_tpot_seconds": 0.5900165815835405,
+        "mean_ttft_seconds": 4.9195344999898225,
+        "output_tokens_per_second": 1.682807394397326,
+        "wall_seconds": 608.5069529699394
+      },
+      "final_task_accuracy_verified": false,
+      "improvement_percent": -72.25569089512976,
+      "model_ready": false,
+      "performance_accepted": false,
+      "protocol": {
+        "arm_order": [
+          "dense",
+          "candidate"
+        ],
+        "concurrency": 1,
+        "ignore_eos": true,
+        "input_tokens": 32768,
+        "min_tokens": 1024,
+        "output_tokens": 1024,
+        "prompt_kind": "raw-token-ids-no-chat-template",
+        "requests": 1,
+        "rounds": 1,
+        "seed": 0,
+        "temperature": 0,
+        "thinking": false,
+        "warmup_output_tokens": 2,
+        "warmups": 2
+      },
+      "run_authority": false,
+      "schema": "kivi.b1-fixed1024-pair/v1",
+      "screen_pass": false,
+      "source": {
+        "bytes": 146941,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-matched1024-bootstrap-v1-006/SOURCE_MANIFEST.json",
+        "sha256": "613c7def7a2d98b4117fb5dd2a15dcd734c8c8c8376b51113644716a865b2799"
+      },
+      "throughput_ratio": 0.27744309104870235
+    },
+    "decision": "DIAGNOSE measured B1 regression; no paper-wide rejection, no C16 or full task acceptance",
+    "causal_confidence": "UNKNOWN performance cause; counting sync/checks is not timing",
+    "next": "same-source short actual-model decode cost diagnostic; retain numerical/lifecycle checks, separate host dispatch/wait and asynchronous NPU time"
+  },
+  "skvq": {
+    "original_capture": "014 full256 actual native baseline data retained; original05a7 FAILED, never upgraded",
+    "failed_derived_operation": "exec-00000000000005fd",
+    "failed_derived_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-002/SOURCE_MANIFEST.json",
+      "bytes": 51314,
+      "sha256": "cb2a944dfb04c152a5d488c55685ab97db6741bac6ea41b3c7a3b1c33300ae10"
+    },
+    "failure": "old TP4 metadata mount replay could not stat /usr/local/Ascend/driver in Devices[] image",
+    "causal_class": "REFERENCE_OR_TEST / ENVIRONMENT_OR_SCHEDULING",
+    "causal_confidence": "PROVED by actual0600 all3 old-owner mount replay: only TP4 driver directory missing; all nine TRAIN hashes pass",
+    "diagnostic_operation": "exec-0000000000000600",
+    "diagnostic_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-002-mount-diagnostic-20261011-001/ACTUAL_MOUNT_REPLAY.json",
+      "bytes": 726,
+      "sha256": "1463d7162154a2cc940617910c20aca40000f6f5b5e866891b86a3258ac87a67"
+    },
+    "repair": "exact one driver directory RO for stat identity; Devices[] and no-Torch/no-NPU unchanged; no old receipt/gate/math edit",
+    "local003_failure": "30 pass plus test11 error: Linux mount constructor received Windows local Ref path. Retained LOCAL_SOFTWARE_31_FAILED_ORIGINAL.json; source003 never executed remotely",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/SOURCE_MANIFEST.json",
+      "bytes": 51748,
+      "sha256": "f843ee6bd7b5e90cfc6066600f4e2177860fe310eaa8f8e1cdeff5fb6d6d26d2"
+    },
+    "local004_software": {
+      "tests": 31,
+      "exit_code": 0
+    },
+    "installed004": {
+      "operation": "exec-0000000000000601",
+      "source_count": 173,
+      "tests": 31,
+      "exit_code": 0,
+      "seconds": 2.4173456199932843
+    },
+    "operation": "exec-0000000000000602",
+    "state": "RUNNING actual operation polled in C204; no new terminal",
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-004-main-20261011-001",
+    "actual_progress": "ORIGINAL_OWNED_PREFLIGHT and ORDERED_IDENTITY_PREFLIGHT passed; STAGE-01 baseline-start exists; STAGE-02 not present at03:20 read",
+    "full_raw_pass": false,
+    "calibration_pass": false,
+    "native_quantized_pass": false,
+    "model_ready": false,
+    "next": "terminal -> exact own release -> immutable original -> independent whole -> actual cal010 -> writer/reader/model/B1"
+  },
+  "cal010": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-010/SOURCE_MANIFEST.json",
+      "sha256": "f859e133601651942caae807d1cf10963bf69ebb4130b97e15be620e6d0272a7",
+      "bytes": 58965
+    },
+    "own_files": 18,
+    "dependencies": 176,
+    "source_total": 194,
+    "local53_pass_reported": true,
+    "MAIN_diff_review": "009->010 only owner/path and derived002->004 exact binding; eight math/library bodies unchanged",
+    "deployed": true,
+    "installed53": false,
+    "actual128fits64artifacts": false,
+    "total_seconds": 600,
+    "cleanup_included_seconds": 90,
+    "requires": "actual derived004 successful whole, not oldfailed receipt"
+  },
+  "source_archive_policy": "byte-exact source-only recovery copies, not runnable relocated authority; use original declared runtime mounts/ENTRY and exact immutable hashes",
+  "safety": {
+    "physical_allowed": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "HugeTLB32GiB": "SPENT",
+    "CPU_QUEUE_no_peer_admission": true,
+    "no_new_NPU_launch": true,
+    "no_external_workload_touched": true
+  },
+  "original_tool_refs": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_B1_PAIR_05FC_ORIGINAL_20261011.json",
+      "bytes": 3956,
+      "sha256": "655b1aa2a25eb83c9d74a9dd399f08e9bf67959e48de7ecf4f74575e35df854c"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKQV_OFFLINE_002_05FD_FAILED_ORIGINAL_20261011.json",
+      "bytes": 4431,
+      "sha256": "01779c7320f0cfa9a39e484e780246c3d3ff02aad302c7265346ebff0deee2c7"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ_OFFLINE_002_RELEASE_05FE_ORIGINAL_20261011.json",
+      "bytes": 10258,
+      "sha256": "307632fbe985e21a29574daa5e7fed01045c5cbb2158d75f133781a8d06194be"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_CANDIDATE_RELEASE_05F9_ORIGINAL_20261011.json",
+      "bytes": 12737,
+      "sha256": "5de6bfaa7107989de50fa44f3a26b276b187afb3adc59a35a2362647519bbb9e"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_DERIVED002_CAL009_SOFTWARE_05FB_ORIGINAL_20261011.json",
+      "bytes": 14003,
+      "sha256": "12ec10e57db274c7a68e872c0c03c141b23bbc1488decaaf23afd500fe601603"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ_MOUNT_DIAGNOSTIC_0600_ORIGINAL_20261011.json",
+      "bytes": 3619,
+      "sha256": "4a0fe5c273b9dfb0d63ad21061db50e5acc612916142ccae9256e264a3dfc194"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_C203_ORIENTATION_MOUNT_05FF_ORIGINAL_20261011.json",
+      "bytes": 17045,
+      "sha256": "4b3fec2d55fca318e7b89e507c19fef7cd39435920c725613e6435452a9ad54d"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ_DERIVED004_SOFTWARE_0601_ORIGINAL_20261011.json",
+      "bytes": 8487,
+      "sha256": "81d3b6ccc8a6049c093f5bcc073049a7ab1d635a3bbd7859f294357ac4d330d2"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ_DERIVED004_LAUNCH_0602_ORIGINAL_20261011.json",
+      "bytes": 1412,
+      "sha256": "0a2c649de37bfa826796f3ea2328c609dcca539ce002b96eee3cb60340b621cb"
+    }
+  ],
+  "missing": [
+    "SKVQ full raw and whole/calibration/native/model/E2E/tasks",
+    "KIVI measured cause, full numerical/lifecycle/C16/3 formal pairs/tasks",
+    "new accepted non-HYPIC technique",
+    "cross-environment measured portability"
+  ],
+  "git_publication": "PENDING; previous231590e normal push failed TLS, no force/main/TLS bypass"
+}

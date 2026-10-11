@@ -1,0 +1,433 @@
+{
+  "schema": "skvq.default-tp-local.entry/v1",
+  "default_enabled": false,
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-012/SOURCE_MANIFEST.json",
+    "bytes": 71735,
+    "sha256": "8103ff0fc4777d30d49eaa99b4491d70ae39ac9bdbd691fa22de953f3722baa3"
+  },
+  "target_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-012",
+  "patch_base": "/cache/cch/qwen36-paper-preparation-20261007/lowbit",
+  "materialize_patch": "MATERIALIZE.patch",
+  "capture_source_bindings": {
+    "current_contract.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/current_contract.py",
+      "bytes": 5755,
+      "sha256": "68c6f47eb589189bc1430a16b5001f6bc9b6456788e4feae0dbdcdc3b70f4bdb"
+    },
+    "consume_whole.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/consume_whole.py",
+      "bytes": 3029,
+      "sha256": "6784108006c973a394c1846e7d8d4dd59ebcb629a2e7b65101b4747216dfeea4"
+    },
+    "consume_stage.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/consume_stage.py",
+      "bytes": 6267,
+      "sha256": "c9538d88c3347c6aafe28d07d1efbf15979b4e3bbf8d02d1db7a938e0a93d5b4"
+    },
+    "MAIN_HOST.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/MAIN_HOST.py",
+      "bytes": 25396,
+      "sha256": "05b1522a2ef0a9ccc7f203818378d064c910cb4fdab0f3c753fa44792cf962e4"
+    },
+    "resources.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/resources.py",
+      "bytes": 6404,
+      "sha256": "660cdd7e2639db7fbf4400a257de116b264bba9c42a530df2fe5bc734ae9624c"
+    },
+    "mount_preflight.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/mount_preflight.py",
+      "bytes": 9233,
+      "sha256": "b1d94c72d7a710ecca4cae30d390def36379943a23ab8c794ad25efae17fc42c"
+    }
+  },
+  "software": {
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "2",
+      "/usr/bin/prlimit",
+      "--cpu=120:120",
+      "--as=268435456:268435456",
+      "--",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-012/software_check.py",
+      "--source-manifest-sha256",
+      "8103ff0fc4777d30d49eaa99b4491d70ae39ac9bdbd691fa22de953f3722baa3"
+    ],
+    "tests": 116,
+    "status": "Actual final identity LOCAL116 exit0,115 executed+POSIX FIFO1 Windows skip,6.4982036s; installed233/full116 UNRUN; target ABI/author128fits UNRUN",
+    "wall_seconds": 110,
+    "CPU": 1,
+    "local_actual_receipt": "LOCAL_SOFTWARE116_PASS_ORIGINAL_005.json",
+    "local_failed_pre_freeze": [
+      "PRE_FREEZE_SYNTAX_FAILURE_001.json",
+      "LOCAL_SOFTWARE116_FAILED_PARAMETER_FIXTURE_ORIGINAL_002.json",
+      "LOCAL_SOFTWARE116_FAILED_POSIX_PATH_FIXTURE_ORIGINAL_004.json"
+    ],
+    "previous_pass_preserved": "LOCAL_SOFTWARE116_PASS_ORIGINAL_003.json (previous draft identity; not final authority)",
+    "local_actual_wall_seconds": 6.4982036
+  },
+  "prerequisite": {
+    "capture_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/SOURCE_MANIFEST.json",
+      "bytes": 82562,
+      "sha256": "9c7b1118b1cd1f2a20ab7fde0ecb98031bf14289c9c795c18f48de9cdb805acd"
+    },
+    "derived_consumer_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/SOURCE_MANIFEST.json",
+      "bytes": 51748,
+      "sha256": "f843ee6bd7b5e90cfc6066600f4e2177860fe310eaa8f8e1cdeff5fb6d6d26d2"
+    },
+    "actual_successful_capture_whole_ref_json": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-004-main-20261011-001/DERIVED_WHOLE_REF.json",
+    "status": "Actual derived0040605 host3.9 whole exists; same-image original complete replay UNRUN, required before fit",
+    "instruction": "Use exact existing DERIVED_WHOLE_REF.json; new private source-bound AST representation adapter replays unmodified004 source/originals/owner/release/fullraw metadata before fitting. No recapture, no old failed promotion.",
+    "dependency_ref_json": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-three-wheel-bundle-v1-001/BUNDLE_REF.json",
+    "dependency_input_status": "actual wheels/tree/manifest PENDING MAIN; exact required input, not fabricated"
+  },
+  "host": {
+    "argv": [
+      "/usr/bin/env",
+      "MAIN_SKVQ_CALIBRATION_CPU_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--cpu=600:600",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-012/cpu_host.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "8103ff0fc4777d30d49eaa99b4491d70ae39ac9bdbd691fa22de953f3722baa3",
+      "--whole-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-004-main-20261011-001/DERIVED_WHOLE_REF.json",
+      "--feature-mode",
+      "bf16-exact-cpu32",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-012-main-20261011-001",
+      "--dependency-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-three-wheel-bundle-v1-001/BUNDLE_REF.json"
+    ],
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-012-main-20261011-001",
+    "result": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-012-main-20261011-001/HOST_RESULT.json",
+    "status": "UNRUN CPU_QUEUE7, no approved peer/overlap; no NPU idle lease"
+  },
+  "cpu_workload": {
+    "argv": [
+      "/usr/local/python3.12.13/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-012/cpu_entry.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "8103ff0fc4777d30d49eaa99b4491d70ae39ac9bdbd691fa22de953f3722baa3",
+      "--whole-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-004-main-20261011-001/DERIVED_WHOLE_REF.json",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-012-main-20261011-001/work",
+      "--feature-mode",
+      "bf16-exact-cpu32",
+      "--dependency-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-three-wheel-bundle-v1-001/BUNDLE_REF.json"
+    ],
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-012-main-20261011-001/work",
+    "result": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-012-main-20261011-001/work/CPU_WORKLOAD_RESULT.json",
+    "status": "UNRUN synthetic before-fit ABI then genuine128 author fits+64 artifacts; no runtime readiness from smoke",
+    "pre_fit_actual_chain": [
+      "actual cpu_entry.run",
+      "calibration_inputs.inputs(actual strict004 whole Ref)",
+      "whole_precheck.precheck actual fresh Python3.12.13 -I child",
+      "private original004 whole reader all original source/operation/owner/resource/fullraw checks",
+      "only after equality with exact original whole, library and128 actual fits"
+    ]
+  },
+  "whole_consumer": {
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "2",
+      "/usr/bin/prlimit",
+      "--cpu=180:180",
+      "--as=268435456:268435456",
+      "--",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-012/consume_cpu_whole.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "8103ff0fc4777d30d49eaa99b4491d70ae39ac9bdbd691fa22de953f3722baa3",
+      "--root",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-012-main-20261011-001",
+      "--original-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-012-main-20261011-001/MAIN_ORIGINAL_REF.json",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-012-main-20261011-001/CALIBRATION_WHOLE.json"
+    ],
+    "result": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-012-main-20261011-001/CALIBRATION_WHOLE.json",
+    "status": "UNRUN separate actual new cal012 terminal + all128fits/64artifacts; no cal011 upgrade",
+    "readonly_full_math_replay": true,
+    "wall_seconds": 180,
+    "cleanup_not_model_lease": true
+  },
+  "derived_whole_precheck": {
+    "argv_template": [
+      "<actual sys.executable>",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-012/whole_precheck.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "8103ff0fc4777d30d49eaa99b4491d70ae39ac9bdbd691fa22de953f3722baa3",
+      "--whole-ref-inline",
+      "<strict exact3Ref JSON, actual DERIVED_WHOLE.json>"
+    ],
+    "subprocess_only": true,
+    "parent_namespace_not_modified": true,
+    "timeout_seconds": 120,
+    "publish_new_authority": false,
+    "metadata_replay_not_allraw_math": true,
+    "sameimage_exact_argv": [
+      "/usr/local/python3.12.13/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-012/whole_precheck.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "8103ff0fc4777d30d49eaa99b4491d70ae39ac9bdbd691fa22de953f3722baa3",
+      "--whole-ref-inline",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-004-main-20261011-001/DERIVED_WHOLE.json\",\"bytes\":3556,\"sha256\":\"3e0ad278a807703c6db30a6243e352d015fe401a9e71aecd1952b2317e7a0e4d\"}"
+    ],
+    "mounts": "Reuse cpu_host.mount_set(output,source,actual_whole,dependency_file) exact complete old004/capture014/new012/dependencies RO plus one reviewed same-path bundle RO and sole owned calibration work RW; no new controller."
+  },
+  "CPU_ONLY_environment": {
+    "TORCH_DEVICE_BACKEND_AUTOLOAD": "0",
+    "ASCEND_RT_VISIBLE_DEVICES": "",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1"
+  },
+  "resource": {
+    "CPU": 7,
+    "host_bytes": 536870912,
+    "guest_bytes": 8589934592,
+    "ordinary_reserve_bytes": 8589934592,
+    "total_seconds": 600,
+    "cleanup_included_seconds": 90,
+    "output_bytes_cap": 33554432,
+    "noNPU": true,
+    "torch_backend_autoload": 0,
+    "library_threads": 1,
+    "output_peak_not_measured": true,
+    "owned_host_adapter": "Original immutable014 Control AST unchanged, same7CPU/8GiB/.5GiB/8GiB reserve/600incl90; one extra exact same-path small RO bundle, no image/site-packages install",
+    "CPU_QUEUE_no_peer_admission": true,
+    "ordinary_floor_bytes": 17716740096,
+    "disk_reserve_bytes": 8589934592
+  },
+  "clock": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/USER_72H_PROTOCOL_20261009.json",
+    "bytes": 1379,
+    "sha256": "b605d2a01118c4087e3450b3d800ef5bf40f6d0f882c1606a1e9117ed56151d1"
+  },
+  "portfolio_cutoff_epoch": 1791788425,
+  "mechanism": {
+    "global_channels": 1024,
+    "TP": 4,
+    "local_channels": 256,
+    "FA_layers": 16,
+    "rank_fits": 128,
+    "metric": "minmax",
+    "groups": 4,
+    "mean_group_size": 64,
+    "unified_clip": 0.95,
+    "smooth": false,
+    "runtime_pre_rope": false,
+    "K_statistics": "All256 original pre-QKnorm/pre-RoPE K raw statistics",
+    "V_statistics": "Actual original V projection/post-RoPE equivalence from same captures",
+    "precision": "Explicit named BF16-exact CPU32 fitting; original BF16 statistics remain identical as values. Not author FP16 calibration equivalence.",
+    "adaptation": "Named Qwen TP-local256 grouping, not global1024 author clustering equivalence or paper outcome.",
+    "teacher_required": false,
+    "recapture_Qpre_or_gate_required_for_default": false
+  },
+  "module_snapshot_protocol": {
+    "schema": "skvq.actual-library-origin-byte-snapshots/v1",
+    "labels": [
+      "torch",
+      "numpy",
+      "sklearn",
+      "actual_sklearn_KMeans",
+      "threadpoolctl",
+      "actual_threadpool_info"
+    ],
+    "mode": "actual loaded original paths+wholebytes copied at dependency stage; all live origins preserved/rechecked in producer and independent live child; whole host uses only exact new owned snapshots independently matched to all original guest3Refs",
+    "max_individual_bytes": 2097152,
+    "max_total_bytes": 12582912,
+    "existing_total_output_cap_bytes": 33554432,
+    "output_budget_not_increased": true,
+    "snapshots_do_not_grant_library_or_algorithm_PASS": true
+  },
+  "source_rebind": {
+    "predecessor_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-default-tp-local-calibration-v1-011/SOURCE_MANIFEST.json",
+      "sha256": "ee2c595ac5de7968f7803edd8fb6b7abe843527d620a9203cb281eb1a42a9b57",
+      "bytes": 62275
+    },
+    "author_algorithm_rewritten": false,
+    "native_numpy_scipy_torch_replaced": false,
+    "source_delta": [
+      "common root/stage identity",
+      "library source-bound current_modules + after-thread synthetic smoke",
+      "cpu_entry library-only argument/result",
+      "cpu_host one RO bundle argument/mount/result",
+      "whole exact CLI/mount/input replay",
+      "dependency_overlay helper"
+    ],
+    "downstream_rebind": "NOT performed; writer007/reader005/model005/B1005 still frozen cal011. Only after real cal012 whole may explicit successor inherit actual64 artifacts."
+  },
+  "current_counts": {
+    "own": 31,
+    "dependencies": 202,
+    "total": 233,
+    "py": 22,
+    "software_tests": 116
+  },
+  "actual_missing": [
+    "actual exact3wheel bytes and complete extracted ROtree",
+    "actual bundle manifest including native origin3Refs",
+    "installed full233-source/full116 software",
+    "same660 synthetic library import/KMeans smoke inside real library child",
+    "actual128fits/64artifacts and separate whole within600/90; original0618 preserved"
+  ],
+  "actual_fitting_executed": false,
+  "actual_current_full_capture_consumed": false,
+  "native_ready": false,
+  "model_ready": false,
+  "performance_ready": false,
+  "task_ready": false,
+  "install": {
+    "status": "SOURCE_FROZEN:31own+202deps233; final local116 executed. Actual exact bundle/target import/fullfit and separate whole required, NOT native/model/task ready."
+  },
+  "ast_representation": {
+    "schema": "skvq.source-bound-empty-type-params-projection/v1",
+    "allowed_interpreters": [
+      "3.9",
+      "3.10",
+      "3.11",
+      "3.12"
+    ],
+    "only_omitted_field": "empty type_params on ClassDef/FunctionDef/AsyncFunctionDef",
+    "control_source_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-preprojection-current72h-v1-014/MAIN_HOST.py",
+      "bytes": 25396,
+      "sha256": "05b1522a2ef0a9ccc7f203818378d064c910cb4fdab0f3c753fa44792cf962e4"
+    },
+    "control_legacy_sha256": "ed8993c286547e4fd03ee8bcc0aeaeb707e569a36f3b118293628b19ab5320fb",
+    "author_legacy_sha256": "183b3406c04207247dda1aa5cc23caeffe59a52d5ccb92bb0bb6774eac71f070",
+    "derived_reader_expression_changes": 1,
+    "original_files_modified": false,
+    "actual_derived_host_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-004-main-20261011-001/HOST_RESULT.json",
+      "bytes": 22920,
+      "sha256": "151cb47d83516c844a0b714faf30067b1e5c48d74bd386214f3e1475d4ddb0ff"
+    },
+    "actual_derived_whole_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-004-main-20261011-001/DERIVED_WHOLE.json",
+      "bytes": 3556,
+      "sha256": "3e0ad278a807703c6db30a6243e352d015fe401a9e71aecd1952b2317e7a0e4d"
+    },
+    "sameimage_actual_complete_replay": "UNRUN",
+    "adjacent_producer_consumer_digest_only": [
+      "cpu_host.py",
+      "cluster_producer.py",
+      "consume.py"
+    ],
+    "all_fitting_math_and_compiled_bodies_unchanged": true
+  },
+  "downstream_inheritance": [
+    {
+      "stage": "writer007/reader005/model005/B1005",
+      "change": "Remain immutable cal011 pinned; later new explicit successor only after actual cal012 whole, no blind preemptive rebind",
+      "actual": "NOT DONE"
+    }
+  ],
+  "dependency_supply": {
+    "schema": "skvq.calibration-ro-three-wheel-bundle/v1",
+    "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-three-wheel-bundle-v1-001",
+    "runtime_input_ref_required": true,
+    "input_manifest_required": true,
+    "versions": {
+      "scikit-learn": "1.4.2",
+      "joblib": "1.4.2",
+      "threadpoolctl": "3.5.0"
+    },
+    "native_baseline": {
+      "torch": "2.10.0+cpu",
+      "numpy": "1.26.4",
+      "scipy": "1.13.1"
+    },
+    "semantics": "named sklearn1.4.2 CPU-library adaptation, not author1.2.1 bitwise equivalence; original author body/explicit n_init10/random_stateNone remain",
+    "three_isolated_children": true,
+    "cold_explicit_bind": true,
+    "same_process_ref_root_pid_origin_idempotence_required": true,
+    "independent_child_no_framework_import": true,
+    "wheels_downloaded_by_this_agent": false,
+    "actual_sameimage_import_fit_checked": false,
+    "author128_fit_checked": false,
+    "metadata_original_fetches": [
+      {
+        "name": "scikit-learn",
+        "path": "C:/Users/Huawei/AppData/Local/Temp/skvq-cal011-ro-library-supply-20261011-003/scikit-learn-1.4.2-PYPI.json",
+        "url": "https://pypi.org/pypi/scikit-learn/1.4.2/json",
+        "status": 200,
+        "bytes": 31565,
+        "sha256": "52a58f9ed0b331e9197fbde859d15c0a7d2c33c16d748a0bc0d819e0184a2539",
+        "local_representation": "complete UTF8 official JSON + one trailing LF; runtime Ref uses actual saved bytes, not network raw SHA"
+      },
+      {
+        "name": "joblib",
+        "path": "C:/Users/Huawei/AppData/Local/Temp/skvq-cal011-ro-library-supply-20261011-003/joblib-1.4.2-PYPI.json",
+        "url": "https://pypi.org/pypi/joblib/1.4.2/json",
+        "status": 200,
+        "bytes": 7614,
+        "sha256": "2f4b4bc09a83001086d58394d18a0b70ea7cb023b2ecb1072deaea466a84225b",
+        "local_representation": "complete UTF8 official JSON + one trailing LF; runtime Ref uses actual saved bytes, not network raw SHA"
+      },
+      {
+        "name": "threadpoolctl",
+        "path": "C:/Users/Huawei/AppData/Local/Temp/skvq-cal011-ro-library-supply-20261011-003/threadpoolctl-3.5.0-PYPI.json",
+        "url": "https://pypi.org/pypi/threadpoolctl/3.5.0/json",
+        "status": 200,
+        "bytes": 16569,
+        "sha256": "3453c4258d761521ca9543ecac09e1e572db7c07727beb868aefdd3cd3d21431",
+        "local_representation": "complete UTF8 official JSON + one trailing LF; runtime Ref uses actual saved bytes, not network raw SHA"
+      }
+    ],
+    "baseline_refs": {
+      "torch": {
+        "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch/__init__.py",
+        "bytes": 106868,
+        "sha256": "51c90fe34a7cf869517d1bab4cd114498790e169ec668f1a154c35ec64117a5e"
+      },
+      "numpy": {
+        "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/__init__.py",
+        "bytes": 17005,
+        "sha256": "22cd1535fa14d74ef6f457cca149ffdc80875f460be313b8f895273f78bc402e"
+      },
+      "scipy": {
+        "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/scipy/__init__.py",
+        "bytes": 4144,
+        "sha256": "f09d8a342acb52bb982073fbeb2594d9363ff55433d3dd710066142db7c0bee9"
+      }
+    },
+    "actual_bundle_manifest_reported_by_MAIN": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-calibration-three-wheel-bundle-v1-001/BUNDLE.json",
+      "bytes": 3716,
+      "sha256": "bc7fdf00d468f006ed13c36cb85f6c4444dd99bf3ecbae83c7cd59ef70487d32",
+      "scope": "MAIN reported actual8files/wheelSHA; this agent has not read actual expanded tree. BUNDLE_REF actual checked at execution; no importABI grant."
+    }
+  },
+  "source_freeze_note": "MF local_software pending text is a pre-execution declaration. Final complete exact-MF receipt005 separately records actual local115+1skip; source manifest not rewritten after tested identity."
+}

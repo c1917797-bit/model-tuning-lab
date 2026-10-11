@@ -1,6 +1,6 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11 02:20:04 UTC",
+  "updated_at_utc": "2026-10-11T06:04:00Z",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -10,56 +10,27 @@
     2,
     3
   ],
-  "current": {
-    "paper": "KIVI",
-    "owner": "MAIN",
-    "operation": "exec-00000000000005e5",
-    "state": "RUNNING_CANDIDATE_B1_FIXED1024_DIAGNOSTIC",
-    "physical_devices": [
-      4,
-      5,
-      6,
-      7
-    ],
-    "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-matched1024-bootstrap-v1-006/SOURCE_MANIFEST.json",
-      "bytes": 146941,
-      "sha256": "613c7def7a2d98b4117fb5dd2a15dcd734c8c8c8376b51113644716a865b2799"
-    },
-    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-candidate-main-20261011-006",
-    "scope": "TP4 candidate diagnostic32768/1024 B1; actual05ec sees four VLLMWorker_TP on physical4-7, all4 canary passed; original05e5 remains live. No completed candidate/pair."
-  },
+  "current": null,
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
   "preparation": [
     {
-      "paper": "KIVI",
-      "owner": "MAIN",
-      "stage": "dense05d6 complete/arm05e3 accepted; candidate05e5 running",
-      "state": "DIAGNOSTIC_PAIR_RUNNING",
+      "paper": "SKVQ",
+      "stage": "writer010 exact source namespace/import repair + new-process regression",
       "ready": false,
-      "ready_for_gate": "Current candidate; no additional executable device successor. Full numerical/C16/tasks remain pending."
+      "state": "PREPARING_OFF_DEVICE"
     },
     {
       "paper": "SKVQ",
-      "owner": "sparse_attention_ready_queue",
-      "stage": "derived001 deployed, full256/software28 pending; cal007 MAIN reviewed/deployed and actual194 source bytes/AST passed05ee, installed53/128fits pending; writer003/reader002/model003/B1coldhot003 local preparation not admitted",
-      "state": "PREPARING_OFF_DEVICE",
-      "ready": false
+      "stage": "compiled006 local frozen; installed65 and actual writer whole dependency pending",
+      "ready": false,
+      "state": "SOURCE_READY_NOT_NPU_READY"
     },
     {
       "paper": "KIVI",
-      "owner": "kivi_model_successor",
-      "stage": "mixed012/paired012 source preparation; new independent output reference, target227/66 and actual full mixed pending",
-      "state": "PREPARING_OFF_DEVICE",
-      "ready": false
-    },
-    {
-      "paper": "KIVI",
-      "owner": "recurrent_lifecycle_ready_queue",
-      "stage": "42task-domain actualworker/reference/budget closure; full1822tasks remain unrun",
-      "state": "PREPARING_OFF_DEVICE",
-      "ready": false
+      "stage": "cost129 measured attribution; guard-only candidate source exists but NPU qualification pending",
+      "ready": false,
+      "state": "OFF_DEVICE_COST_REVIEW"
     }
   ],
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
@@ -67,33 +38,17 @@
   "previous": {
     "paper": "KIVI",
     "owner": "MAIN",
-    "operation": "exec-00000000000005d6",
-    "state": "DENSE_B1_FIXED1024_ARM_CONSUMED",
-    "physical_devices": [
-      4,
-      5,
-      6,
-      7
-    ],
+    "operation": "exec-0000000000000661",
+    "state": "RUNNING_CANDIDATE_COST129_003",
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-cost129-candidate-main-20261011-003",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-matched1024-bootstrap-v1-006/SOURCE_MANIFEST.json",
-      "bytes": 146941,
-      "sha256": "613c7def7a2d98b4117fb5dd2a15dcd734c8c8c8376b51113644716a865b2799"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-cost129-bootstrap-v1-003/SOURCE_MANIFEST.json",
+      "bytes": 161966,
+      "sha256": "806ff538b0d4cf196c818067fb30bb7fdce57697ba1296fcf5321fece79cd68c"
     },
-    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-dense-main-20261011-006",
-    "scope": "TP4 dense diagnostic32768/1024 B1 actually completed and independently consumed05e3; candidate/pair pending.",
-    "terminal_exit_code": 0,
-    "arm_consumer_operation": "exec-00000000000005e3",
-    "release_operation": "exec-00000000000005e4",
-    "device_stopped_utc": "2026-10-11T01:57:24.9054443Z",
-    "metrics": {
-      "mean_tpot_seconds": 0.5900165815835405,
-      "mean_ttft_seconds": 4.9195344999898225,
-      "output_tokens_per_second": 1.682807394397326,
-      "wall_seconds": 608.5069529699394
-    }
+    "scope": "diagnostic only; fresh controller checks required before device load"
   },
-  "idle_cause": "Current candidate compute observed on4-7 at02:12:59; no continuous zero-idle claim.",
+  "idle_cause": "Writer009 failed missing sibling import before tensor; no qualified NPU successor. Internal readiness gap, not external4-7 occupation.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -212,13 +167,26 @@
         "sha256": "02846b0b53692dfa614f55a75c5b2df96629128889d8e3d42edcc67cef2e1d08"
       },
       "cause": "Original predecessor replay namespaces leak into subsequent original guarded loaders; paired frontend pin is stale relative to actual bindings.py. Repair008, not paper no-go."
+    },
+    {
+      "paper": "SKVQ",
+      "operation": "exec-00000000000005fd",
+      "scope": "CPU-only offline derived002 historical mount replay",
+      "cause": "PROVED missing RO driver source;0600 diagnostic confirms",
+      "repair_source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/SOURCE_MANIFEST.json",
+        "bytes": 51748,
+        "sha256": "f843ee6bd7b5e90cfc6066600f4e2177860fe310eaa8f8e1cdeff5fb6d6d26d2"
+      },
+      "repair_status": "installed31 PASS; actual004 fullraw RUNNING; no upgrade originalfailure"
     }
   ],
   "latest_resource_snapshot": {
-    "operation": "exec-00000000000005e7",
-    "time_utc": "2026-10-11T02:01:05.166901Z",
-    "physical4_7": "no PID/HBM idle; candidate own Devices[] preflight active",
-    "not_reusable_for_future_admission": true
+    "operation": "exec-00000000000006a4",
+    "physical4_7": "No PID, AICore0, HBM2868/2866/2866/2861MiB after writer failure",
+    "protected0_3": "external HYPIC running; untouched",
+    "ready_npu_backup": 0,
+    "zero_idle_claim": false
   },
   "history_terminals": [
     {
@@ -905,6 +873,66 @@
         "output_tokens_per_second": 1.682807394397326,
         "wall_seconds": 608.5069529699394
       }
+    },
+    {
+      "paper": "KIVI",
+      "operation": "exec-00000000000005e5",
+      "exit_code": 0,
+      "release": "exec-00000000000005f9",
+      "pair": "exec-00000000000005fc",
+      "throughput_improvement_percent": -72.25569089512976
+    },
+    {
+      "calibration_whole": "exec-000000000000068c",
+      "calibration_whole_ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-012-main-20261011-002/CALIBRATION_WHOLE_READER001.json",
+        "bytes": 312954,
+        "sha256": "ed7f1127cd20d71da30040c3ca746490edce87137704344cb5ae63498e374f3e"
+      },
+      "actual_128_fits_64_artifacts_independently_checked": true,
+      "writer_software": "exec-0000000000000692: 72 PASS",
+      "writer_operation": "exec-000000000000069a",
+      "writer_result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-actual-writer-bridge-009-main-20261011-001/HOST_RESULT.json",
+        "bytes": 70911,
+        "sha256": "965ea1097e8b9f202e765c20bb16935100adeef6b62101197b4c4512572711ea"
+      },
+      "writer_exit_code": 1,
+      "classification": "ADAPTATION_IMPLEMENTATION",
+      "first_fault": "CANARY.json ModuleNotFoundError current_contract while loading exact capture014/n1_format.py; before tensor arithmetic/writer.",
+      "algorithm_verdict": "Not validated; no numerical mismatch or paper-level no-go established.",
+      "release": "exec-00000000000006a7: exact own two containers stopped retained, Pid0/noExec/noOOM",
+      "next": "Agent prepares writer010 explicit source-bound namespace closure and clean-process negative tests. Preserve009 and existing calibration; do not blind rerun.",
+      "compiled_reader006": "Local frozen298Refs/57tests, not deployed or NPU-tested; successor source e32ccdc0b86ecfeacca6988305aca7cde4089ba758f5066b8e58392ed14bcf02.",
+      "paper": "SKVQ",
+      "state": "WRITER009_CANARY_IMPORT_FAILED_RELEASED"
+    },
+    {
+      "candidate_producer": "exec-0000000000000661",
+      "exit_code": 0,
+      "result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-cost129-candidate-main-20261011-003/RESULT.json",
+        "bytes": 1901425,
+        "sha256": "f72699068aff17f781732b544122de5c92037c53f3cb9720d79fc0b3efac11c0"
+      },
+      "candidate_whole": "exec-000000000000069e",
+      "release": "exec-0000000000000698",
+      "dense_replay": "exec-00000000000006a3",
+      "dense_replay_reason": "Original061f operation record expired/not_found; read-only replay of immutable dense001 artifacts took3.694s and reproduced identical consumed SHA. No dense model/NPU rerun.",
+      "pair_operation": "exec-00000000000006a6",
+      "pair": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_B1_COST129_DIAGNOSTIC_DENSE001_CANDIDATE003_001.json",
+        "bytes": 2852,
+        "sha256": "c0c89f30196177de0a91361bdca101c78d79ac22914d64aa80802589c91b049e"
+      },
+      "diagnostic_only": true,
+      "output_tokens": 129,
+      "diagnostic_improvement_percent": -71.84175238180934,
+      "prior_fixed1024_improvement_percent": -72.25569089512976,
+      "next": "Inspect inclusive worker cost data; validate a measured bottleneck before new guard/kernel candidate. No formal/per-task expansion of this regressed implementation.",
+      "observer_context": "Readonly CAL012 replay on CPU166 shared host during cost diagnostic; joint CPU ledger <=7. Diagnostic times are not observer-off final acceptance.",
+      "paper": "KIVI",
+      "state": "COST129_PAIR_CONSUMED_REGRESSION_DIAGNOSTIC"
     }
   ],
   "scheduler_repair": {
@@ -915,16 +943,13 @@
     "actual_cross_paper_batch": "UNRUN; only SKVQ010 release profile currently reviewed",
     "zero_idle_claim": false
   },
-  "current_off_device": null,
-  "current_successor_rule": "Poll original05e5 only; actual terminal -> exact own release -> candidate independent screen_whole -> pair.py with actual arm-consumer original envelopes. Full numerical/mixed and formalC16/tasks remain separate. On failure preserve and classify, repair off-device, admit an actually qualified independent successor.",
+  "current_off_device": "MAIN cost attribution + agent writer010 source repair",
+  "current_successor_rule": "Release verified06a7. Fix exact import root cause off-device; only newly frozen/reviewed/actually preflighted successor may run. Do not rerun009 or promote compiled006 local tests to NPU readiness.",
   "scheduling_audit": {
-    "current": "05e5 candidate dispatched after actual dense terminal, independent arm PASS and exact release",
-    "next": "candidate independent arm/pair consumption upon success",
-    "backup": "SKVQ derived001 source deployed, target prerequisites pending; no ready independent NPU backup"
+    "current": "No device stage running after069a failure",
+    "next": "writer010 fresh-process imports, exact preflight, MAIN single admission when qualified",
+    "backup": "KIVI guard hypothesis awaiting actual cost justification",
+    "zero_idle_claim": false
   },
-  "current_preparation_checkpoint": {
-    "path": ".agents/workstreams/qwen36-damp-ascend-20261006/KIVI_DENSE_ARM_AND_CANDIDATE_20261011.json",
-    "source_only": false,
-    "paired_e2e": "PENDING_CANDIDATE_AND_PAIR"
-  }
+  "current_preparation_checkpoint": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ_WRITER_IMPORT_FAILURE_KIVI_COST_20261011.json"
 }

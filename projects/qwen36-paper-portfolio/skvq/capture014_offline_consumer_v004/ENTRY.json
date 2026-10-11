@@ -1,0 +1,278 @@
+{
+  "schema": "skvq.capture014.offline.entry/v1",
+  "source_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/SOURCE_MANIFEST.json",
+    "bytes": 51748,
+    "sha256": "f843ee6bd7b5e90cfc6066600f4e2177860fe310eaa8f8e1cdeff5fb6d6d26d2"
+  },
+  "default_enabled": false,
+  "local_source_root": "C:/Users/Huawei/AppData/Local/Temp/skvq-capture014-offline-consumer-20261011-004",
+  "declared_source_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004",
+  "purpose": "One MAIN-owned Devices[] reconsumption of already captured/released014; no NPU recapture. Old05a7 remains exit1.",
+  "original_failure_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ014_05A7_FAILED_ORIGINAL_20261011.json",
+    "bytes": 4349,
+    "sha256": "8f35cb6b73d3c4576a38d26ecdc11149469b6fbe68a2b492e337e5aea4df0d99"
+  },
+  "source_files": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/capture_identity.py",
+      "bytes": 2479,
+      "sha256": "2050e12f63362ea7cf72d3bce14f40d9ab6ed3c7226c621ee18f3e86b82defa7"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/consume_cpu_whole.py",
+      "bytes": 12501,
+      "sha256": "e0c1fcca073bbbe52f2aeae51df8604752fe3627a2ec94b8833a6a991da2d2ca"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/consume_loader_derived.py",
+      "bytes": 3969,
+      "sha256": "6aa18cedb05bb02d697bd27506da940d06160bb4a3566a73b7605e7d7cd481a2"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/consume_previous_host.py",
+      "bytes": 15999,
+      "sha256": "5cbfd54a113e10ec5dfc98665205703d577614d25bc1c603cdea5d637a6c3371"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/consume_raw.py",
+      "bytes": 5915,
+      "sha256": "296ad87439549f1026f47f6a60260933383d219ac4462b0a672f340d250449f0"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/cpu_host.py",
+      "bytes": 10059,
+      "sha256": "bfcfa2ec486d2fb5eb68e270cbbdf84d05e680b3e853cd9d81cf356faa8f27a0"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/identity_preflight.py",
+      "bytes": 3378,
+      "sha256": "5e86db77af34b7371b51153a5c44d69b3aa9809aa555ef2c4ba170239ebdda61"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/offline_contract.py",
+      "bytes": 7148,
+      "sha256": "a2969476671c4d5d15c502f1e91b1eb132bac7c27bd1228586917281dbcbe21f"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/order_oracle_derived.py",
+      "bytes": 10896,
+      "sha256": "d5f8c79392ab561ffeb074fc97c483363bc72a7e6e6399fe32c964fd63cf3c34"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/previous_failure.py",
+      "bytes": 6777,
+      "sha256": "58c380696152a5f8b92faef9ecb582eaedc11c50d002c6105ebb15fba8299ce4"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/software_check.py",
+      "bytes": 2611,
+      "sha256": "6b791f3f818906f0c81b1ed1ff70da43a96e1cfc1851d357c3bc73ba06a53355"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/test_entry.py",
+      "bytes": 10781,
+      "sha256": "fa363cd55ee8d08a673d7d37471d7a1779b09eb839fa55e61a604d2953cab6b7"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/test_identity.py",
+      "bytes": 16090,
+      "sha256": "72805197d2bde8cbc782b0145a49b9cdd4987c164f21ff21a56b0f89ebb3cbe8"
+    }
+  ],
+  "source_count": 173,
+  "own_file_count": 13,
+  "dependency_count": 160,
+  "identity_delta": {
+    "old_assertions": [
+      "consume_loader_current.py:22 full snapshot equality",
+      "order_oracle_current.py consume_install_raw full snapshot equality"
+    ],
+    "new_gate": "Invoke unchanged original TP identity oracle on both actual observations; exact16 keys/types; require before.time<after.time and recursive exact15 stable fields; raw==loader exact separately.",
+    "stable_keys_count": 15,
+    "no_cgroup_or_NSpid_fields_in_actual_identity": "Not fabricated. Actual process cgroup/NSpid/rawcmdline retained by original source-qualified host proofs.",
+    "unchanged": "All independent original QKV math, global1024 join, typed QKV qualification, preprojection K/V, original all3 owner/resource/mount/source/N1/SMI/HBM3GiB/cmdline guards.",
+    "clock_repair": "Same source/identity math; entry start charged to3600incl180; actual original Control.left regression; old001 immutable.",
+    "mount_repair": {
+      "old002_failed_operation": "exec-00000000000005fd",
+      "diagnostic_operation": "exec-0000000000000600",
+      "actual_failure": "only /usr/local/Ascend/driver missing in Devices[] TP4 historical replay; all9 TRAIN and other2 phases passed",
+      "change": "add exact driver directory RO; no devices/no Torch/no predicates relaxed"
+    }
+  },
+  "commands": {
+    "software": {
+      "status": "UNRUN current installed/source31 and local31",
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "2",
+        "/usr/bin/prlimit",
+        "--cpu=120:120",
+        "--as=536870912:536870912",
+        "--",
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/software_check.py",
+        "--execute",
+        "--source-manifest-sha256",
+        "f843ee6bd7b5e90cfc6066600f4e2177860fe310eaa8f8e1cdeff5fb6d6d26d2",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/MAIN_SOFTWARE_31.json"
+      ],
+      "wall_seconds": 110,
+      "CPU": 1,
+      "AS_bytes": 536870912,
+      "no_Docker": true,
+      "no_Torch": true,
+      "no_NPU": true,
+      "cpuset": "MAIN must read effective affinity; CPU2 is request only, not already admitted."
+    },
+    "host": {
+      "status": "UNRUN; MAIN_ONLY",
+      "argv": [
+        "/usr/bin/env",
+        "MAIN_SKVQ_OFFLINE_CPU_ENABLE=1",
+        "/usr/bin/prlimit",
+        "--cpu=3600:3600",
+        "--",
+        "/usr/bin/python3",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/cpu_host.py",
+        "--execute",
+        "--source-manifest-sha256",
+        "f843ee6bd7b5e90cfc6066600f4e2177860fe310eaa8f8e1cdeff5fb6d6d26d2",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-004-main-20261011-001"
+      ],
+      "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-004-main-20261011-001",
+      "total_seconds": 3600,
+      "cleanup_included_seconds": 180,
+      "work_cap_seconds": 3420,
+      "no_remote_execution_by_preparer": true,
+      "no_NPU_create": true,
+      "no_NPU_idle_predicate": true,
+      "ordinary_RAM_floor_bytes": 11274289152,
+      "guest_bytes": 2147483648,
+      "host_bytes": 536870912,
+      "reserve_bytes": 8589934592,
+      "host_CPU": 1,
+      "guest_CPU": 4,
+      "reserve_CPU": 2,
+      "total_CPU": 7,
+      "CPU_QUEUE_no_peer_admission": true
+    },
+    "actual_guest": {
+      "called_only_by_host": true,
+      "argv": [
+        "/usr/bin/docker",
+        "exec",
+        "<ACTUAL_OWNED_CPU_CID>",
+        "/bin/bash",
+        "-c",
+        "source /usr/local/Ascend/cann-9.1.0/set_env.sh && exec \"$@\"",
+        "skvq-owned",
+        "/usr/local/python3.12.13/bin/python3",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/consume_raw.py",
+        "--execute",
+        "--source-manifest-sha256",
+        "f843ee6bd7b5e90cfc6066600f4e2177860fe310eaa8f8e1cdeff5fb6d6d26d2",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-004-main-20261011-001/work"
+      ],
+      "placeholder_note": "CID only this documented dynamic argv slot; source code uses actual owned create/inspect CID. No invented CID/Ref.",
+      "work_leaf": "Host makes NEW empty work directory; old014 raw only RO; no old receipt overwritten."
+    },
+    "whole": {
+      "status": "UNRUN; only after new actual terminal0 and exact Ref of its original external envelope",
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "2",
+        "/usr/bin/prlimit",
+        "--cpu=120:120",
+        "--as=536870912:536870912",
+        "--",
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-capture014-offline-consumer-v1-004/consume_cpu_whole.py",
+        "--execute",
+        "--source-manifest-sha256",
+        "f843ee6bd7b5e90cfc6066600f4e2177860fe310eaa8f8e1cdeff5fb6d6d26d2",
+        "--root",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-004-main-20261011-001",
+        "--original-ref-json",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-004-main-20261011-001/WHOLE_ORIGINAL_REF.json",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-004-main-20261011-001/DERIVED_WHOLE.json"
+      ],
+      "wall_seconds": 110,
+      "CPU": 1,
+      "AS_bytes": 536870912,
+      "MAIN_persistence_required": "Preserve the actual new AW whole envelope untouched at WHOLE_ORIGINAL.json and its actual exact3Ref at WHOLE_ORIGINAL_REF.json. Do not construct successful originals.",
+      "expected_schema": "skvq.capture014.offline.whole/v1",
+      "expected_status": "RELEASED014_ALL256_RAW_DERIVED_CPU_WHOLE_CONSUMED_NOT_CALIBRATED",
+      "before_original_cutoff": "MAIN must reserve software/whole CPU windows and total3720 CPU host+whole before1791788425; no continuation lease."
+    }
+  },
+  "mount_protocol": {
+    "inherited_original_independent_consumer_mounts": "All unchanged paths but every old014 output now read-only.",
+    "additional_RO": [
+      "new source root",
+      "full old014 runroot",
+      "exact actual source-v2 TRAIN root for old mount-preflight host source lookup",
+      "every173 own/dependency Ref at its exact path when not already inside an explicit RO directory",
+      "exact /usr/local/Ascend/driver for original metadata replay only; Devices[] retained"
+    ],
+    "sole_RW": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-capture014-offline-004-main-20261011-001",
+    "no_broad_cache_mount": true,
+    "no_original_tree_edit": true,
+    "no_driver_mount_added": false,
+    "Devices": [],
+    "source_v1_guest_ALIAS": "Existing actual TRAIN v2->v1 RO mapping preserved; real source-v2 also explicit RO for independent old mount metadata replay."
+  },
+  "output_protocol": {
+    "maximum_new_bytes": 67108864,
+    "no_raw_copy": true,
+    "raw_QKV_read_bytes": 274877906944,
+    "raw_preprojection_K_read_bytes": 34359738368,
+    "weight_payload": "Execute exact original payload() AST; whole15 indexed shards rehashed after release and equal old before. Old after-success not fabricated.",
+    "progress": [
+      "STAGE-00-start.json",
+      "STAGE-01-baseline-start.json",
+      "STAGE-02-baseline-complete-projection-start.json",
+      "STAGE-03-projection-complete-payload-start.json",
+      "STAGE-04-payload-complete.json"
+    ],
+    "work_outputs": [
+      "ORIGINAL_FAILURE_CONSUMED.json",
+      "ORIGINAL_OWNED_PREFLIGHT.json",
+      "ORDERED_IDENTITY_PREFLIGHT.json",
+      "BASELINE_CONSUMED.json",
+      "PREPROJECTION_CONSUMED.json",
+      "PAYLOAD_AFTER_RELEASE.json",
+      "CAPTURE_CONSUMED.json",
+      "ORIGINAL_HOST_CONSUMED_DERIVED.json",
+      "CPU_WORKLOAD_RESULT.json"
+    ],
+    "final_whole": "DERIVED_WHOLE.json"
+  },
+  "verification": {
+    "local_current_UNRUN": true,
+    "installed173_source_31_software_UNRUN": true,
+    "same660_fullraw_UNRUN": true,
+    "new_owned_whole_UNRUN": true,
+    "NUMERICAL_NPU_PASS": false,
+    "model_ready": false,
+    "performance_ready": false,
+    "task_ready": false
+  },
+  "downstream": {
+    "cal006": "Frozen07b526 calibration still rejects oldfailed05a7 and this new envelope by oldschema; requires one explicit source/whole consumer rebind AFTER this derived contract is reviewed/frozen. Do not run cal006 unchanged.",
+    "calibration_data_authority": "Only actual DERIVED_WHOLE generated from new successful CPU terminal and full raw math can become calibration input; small metadata28 is not data authority."
+  }
+}

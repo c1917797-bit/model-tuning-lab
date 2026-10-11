@@ -133,6 +133,10 @@ method-level E2E rejection.
    in Git and large originals outside Git. Never lower thresholds, fabricate PASS,
    exclude observed failures retroactively or retry unchanged deterministic errors.
 4. Run complete affected software/CLI/same-image preflight before scarce cards.
+   Exercise reused modules and their transitive imports in a fresh process using
+   the exact guest entrypoint and source-qualified names. Read-only mounts or
+   AST/mock-only tests do not prove import closure; reject foreign cached modules
+   and preserve failure before any device initialization.
 5. Run the relevant complete NPU numerical/state/lifecycle/graph gate.
 6. Only after that passes advance to paired whole-model performance and tasks.
 7. Update the causal record: repaired-but-unverified, verified repair, still
@@ -152,12 +156,12 @@ mounts, new outputs and a real next-stage consumer. Source in memory or an
 author's ready flag is not executable readiness.
 
 Close NEXT during CURRENT, rather than waiting for terminal to discover
-fixture/import/controller defects. Under the user's current explicit permission,
-independent numerical/preparation jobs may use disjoint physical4/5/6/7 under
-one MAIN-coordinated ownership and summed CPU/RAM/disk ledger. Preserve foreign
-occupation checks; a frozen controller demanding other cards idle cannot be
-made concurrency-compatible by verbal permission alone. Freeze/review a new
-controller/grouping before launch; never mutate a live source or identity.
+fixture/import/controller defects. Device-free preparation remains parallel.
+Use the latest explicit device-concurrency authority: under the current serial
+mode, only MAIN admits one paper's device stage. If disjoint device work is
+explicitly authorized later, first review compatible controllers and one summed
+CPU/RAM/disk ledger. Preserve foreign occupation checks; never mutate a live
+source or identity to make an incompatible controller appear concurrent.
 
 TP4/model/profile/formal paired timing remains exclusive across all four cards.
 Track actual admission, compute ownership, terminal, release, dispatch and idle
@@ -209,7 +213,7 @@ triggers; run scripts/validate-mst.sh and skill structural validation. Explicitl
 review these decision cases: timeout -> scheduling repair; proved code defect ->
 adaptation repair; wrong fixture -> reference/test repair; valid comparable
 no-gain -> measured-configuration redesign; missing originals -> unknown/inconclusive.
-Check current concurrency text has no stale cross-paper serial-only restriction.
+Check concurrency text follows the latest explicit authority, not an old grant.
 Documentation validation never grants native/model/performance/task acceptance.
 
 ## Cross-phase artifact visibility before NPU admission
@@ -220,6 +224,17 @@ owned experiment tree read-only at the same absolute path in every consumer;
 only each controller's own /results alias may be writable. Do not mount a broad
 cache root. Include ABI, CPU inspect/ownership/cleanup, allocation/plan, canary
 and fresh proof descendants, not just the first file that failed.
+
+A post-release CPU replay may revalidate several historical owners whose source
+paths differ from the original CPU consumer's mounts. Build visibility from all
+actual inputs the replay inspects, not only that last consumer. If a historical
+device-stage directory is needed only for stat identity, mount that exact directory
+read-only; it does not justify exposing devices or relaxing the old predicate.
+Exercise the real historical records in the same image before the long raw pass.
+SKVQ014's offline002 failed because the old TP4 record inspected a driver directory
+absent from the new CPU image; actual0600 isolated that single missing source.
+The RO repair passed installed31 regressions, but full raw/calibration and model
+acceptance remained separate. Keep exact original failures in the workstream.
 
 Before creating a device-bearing container, run the actual same-image no-device
 entry that checks the common mount's read-only flag and SHA-bound existing
@@ -278,9 +293,19 @@ repair is unfinished; time spent does not become evidence against the paper.
 Reuse source-bound unaffected predecessor evidence, but rerun the complete
 affected gate after a repair and state why the other evidence remains valid.
 
+Within one bounded admission or whole-result verification, execute each required
+full predecessor replay once and pass its consumed result to dependent helpers.
+Bind that reuse to exact input/source references and recheck their immutable
+identity before final acceptance; changed references invalidate it. Start a fresh
+replay for the next invocation. Do not introduce a persistent generic PASS cache,
+skip mathematical checks, widen the budget or refit unchanged producer artifacts
+to compensate for duplicate helper-level replay. Compare the full call graph's
+work with the phase budget before scarce-device admission.
+
 MAIN keeps an executable ready inventory, not an authored-source inventory.
 While CURRENT computes, close NEXT's exact launch and successor consumer.
-Split independent numeric smoke/full jobs across4–7 using the summed ledger;
+Keep device stages serial under the current authority; disjoint smoke/full jobs
+require explicit later authorization and a reviewed summed ledger.
 TP4/model/profile/formal paired timing remains exclusive. Measure useful stage
 completions per card-hour, launch failures, native compute ownership, terminal
 to release/next dispatch latency and idle causes. Queue target is at least one
