@@ -1,5 +1,14 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-11 r21 diagnostic planned, not launched
+
+`HYPIC_R21_C32_VICTIM_TRACE_PLAN_20261011.md` freezes the next *question*
+and bounded workload. It does not authorize a device run yet: new source
+bytes, host tests, final source identity, fresh roots and an independent
+auditor still need to be frozen and checked. Preserve the immutable r19/r20
+plugin source and evidence. Do not use instrumented timings as a performance
+result or let a 32-sample diagnostic replace the full 127×3 quality ruler.
+
 ## 2026-10-11 r19/r20 read-only localization
 
 See `HYPIC_R19_R20_LOAD_STATE_LOCALIZATION_20261011.md`. The r19 net
@@ -23,9 +32,8 @@ three scored repetitions per sample at concurrency 1. Source, model, image,
 material-cache budget and physical NPU0–3 identity match r19; the only
 within-r20 treatment switch is `VLLM_ASCEND_HYPIC_ENABLE`. Both adapter
 `--check` modes, auditor `--check`, three host-only regressions and
-historical request-hash replay passed. The control launch and its root are
-recorded below; the candidate root remains absent. Audit and release the
-control before admitting the candidate. This post-hoc-selected diagnostic
+historical request-hash replay passed. Both terminal arm roots and audits are
+recorded below. This post-hoc-selected diagnostic
 cannot overturn r19 or establish population quality.
 
 Control arm `exec-0000000000000675` terminated exit 0 after 3/3 samples and

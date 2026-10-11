@@ -1217,5 +1217,15 @@
     "offline_checks": "Both arm --check modes, independent audit --check, three host-only tests, and 15-request historical payload-hash replay passed.",
     "claim_boundary": "Diagnostic only, not a population quality pass or replacement for r19."
   },
-  "next_action": "Read HYPIC_R19_R20_LOAD_STATE_LOCALIZATION_20261011.md. Read-only r19 replay excludes missing hot proof or output cap as sole cause; c32 versus c1 state/scheduler cause is not isolated. Freeze one bounded c32 intervention that exposes request-level material victim/state or compares native/HYPIC decode state, with a fresh root and matched control, before any device action. Then require a new full 127x3 matched pair for revised adoption. Preserve r13-r20 roots and r19 REJECT_OR_QUALIFY, never use NPU4-7 or stop external work, and do not claim GitHub/main sync."
+  "r21_c32_victim_trace": {
+    "state": "planned; no source mutation or device run admitted",
+    "plan": "HYPIC_R21_C32_VICTIM_TRACE_PLAN_20261011.md",
+    "source_base_commit": "4429e35177979c874bf053ab29789e4773f39b22",
+    "sample_indexes": "33-64 inclusive",
+    "concurrency": 32,
+    "scored_repetitions": 3,
+    "max_output_tokens": 2048,
+    "claim_boundary": "Diagnostic-only victim/request hash correlation; no r19 verdict change or performance claim."
+  },
+  "next_action": "Read HYPIC_R21_C32_VICTIM_TRACE_PLAN_20261011.md. Create a separate source worktree from 4429e3 without touching r19/r20 source; implement only bounded hash-identity diagnostics with host tests. Freeze exact new source/controller/auditor hashes and fresh roots before any NPU run. Then, only if physical NPU0-3 and port8223 are actually idle, run bounded matched c32 trace arms under continuous isolation. R19 remains REJECT_OR_QUALIFY; later corrected full 127x3 pair and same-source performance audit are still required. Never use NPU4-7 or stop external work; do not claim GitHub/main sync."
 }
