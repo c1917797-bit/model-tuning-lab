@@ -133,12 +133,13 @@ load. This rule does not guarantee the first real-device attempt will pass.
   actual process/HBM usage, aggregate host-RAM/disk/cgroup limits and source
   identities. Device declarations do not prove occupation; idle accelerators
   do not authorize lowering resource gates or reclaiming protected workloads.
-- Respect the current explicit concurrency authority. In this portfolio,
-  MAIN may run independent numerical/preparation jobs across papers or within
-  a paper on disjoint physical4/5/6/7, after reviewing compatible controllers,
-  ownership and ONE summed budget. Preparers never self-admit devices.
-  All TP4/model/calibration and formal performance/profiling remain exclusive;
-  overlapping timing cannot establish a comparable speedup.
+- Respect the latest explicit concurrency authority. The current portfolio
+  uses parallel device-free preparation and MAIN-serialized device stages on
+  physical4-7. A frozen four-card matrix may be one stage; do not insert another
+  paper's device job into that lease. Preparers never self-admit devices.
+  Disjoint device concurrency needs later explicit authorization, compatible
+  reviewed controllers and ONE summed resource budget. TP4/model/profiling/
+  formal paired timing remains exclusive; overlapping timing is not comparable.
 - Parallel agents prepare the next gates/adapters during a running job, with
   frozen live sources and distinct edit scopes. Observe terminal exit, retain
   evidence/release only owned resources, then dispatch the admitted successor

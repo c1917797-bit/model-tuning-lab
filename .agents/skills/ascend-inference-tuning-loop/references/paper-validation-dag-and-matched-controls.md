@@ -3,8 +3,9 @@
 ## Trigger and ownership
 
 Use with the portfolio reference when multiple papers prepare independently
-with MAIN coordinating disjoint numerical/preparation admission and exclusive
-TP4/model/formal-timing use of the four-card Ascend lane. This is a
+and MAIN serializes their device stages on the four-card Ascend lane under the
+current authority. A frozen four-card matrix may be one stage; TP4/model/
+formal timing remains exclusive. This is a
 reusable workflow, not permission to use protected cards or a claim that an
 authored packet is runnable. Keep live queue counts, owners, fixed cutoffs and
 actual operation handles in the active workstream, not this timeless reference.
