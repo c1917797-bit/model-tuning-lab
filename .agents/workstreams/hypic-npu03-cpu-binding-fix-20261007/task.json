@@ -1228,16 +1228,22 @@
     "claim_boundary": "Diagnostic-only victim/request hash correlation; no r19 verdict change or performance claim."
   },
   "r22_c32_logprob_oracle": {
-    "state": "no-cache controller running; candidate not launched",
+    "state": "no-cache terminal and independently audited; hypic-only controller running",
     "preregistration": "HYPIC_R22_C32_LOGPROB_ORACLE_PREREGISTRATION_20261011.json",
     "handoff": "HYPIC_R22_C32_LOGPROB_ORACLE_HANDOFF_20261011.md",
     "source_commit": "4429e35177979c874bf053ab29789e4773f39b22",
     "baseline_controller": "exec-0000000000000774",
     "baseline_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r22-c32-logprob-baseline",
+    "baseline_audit_controller": "exec-00000000000007a4",
+    "baseline_scored_rows": 96,
+    "baseline_guard_samples": 324,
+    "baseline_arm_result_sha256": "b2e7bec9914974a40689ba29901c2f45628d36f2bb1b9f614660b02d88ad7e2e",
+    "candidate_controller": "exec-00000000000007ae",
+    "candidate_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r22-c32-logprob-hypic",
     "sample_indexes": "64-95 inclusive; sample 082 traced",
     "max_output_tokens": 2048,
     "concurrency": 32,
     "claim_boundary": "bounded output-numerics diagnostic only; prior waves absent; no r19 verdict change"
   },
-  "next_action": "Poll existing r22 no-cache controller exec-0000000000000774 and its exact root; observation timeout or missing route is not terminal, never restart or duplicate. At terminal independently audit 32 samples/96 rows/160 IDs, source/isolation/exact release; only then recheck direct route and actual physical0-3/8223 idle before candidate. Preserve r19 REJECT_OR_QUALIFY and immutable roots. Do not launch superseded r21, use NPU4-7, stop external work, or claim GitHub/main sync."
+  "next_action": "Poll existing r22 hypic-only controller exec-00000000000007ae and its exact root; observation timeout or missing route is not terminal, never restart or duplicate. At terminal independently audit 32 samples/96 rows/160 IDs, sample-082 token-logprobs and per-request four-worker hot proof, source/isolation/exact release, then run frozen paired audit. Preserve r19 REJECT_OR_QUALIFY and immutable roots. Do not launch superseded r21, use NPU4-7, stop external work, or claim GitHub/main sync."
 }

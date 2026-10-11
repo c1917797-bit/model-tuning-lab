@@ -1,30 +1,37 @@
 # HYPIC NPU0–3 — current handoff
 
-## 2026-10-11 r22 baseline active — preserve controller handle
+## 2026-10-11 r22 candidate active — preserve controller handle
 
-The frozen r22 no-cache arm started after direct-route/physical NPU0–3/8223
-idle proof. Its only controller is `exec-0000000000000774`; immutable output
-root is `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r22-c32-logprob-baseline`.
-Last observed controller state was running; root progress said
-`service-starting` at 06:47:22 UTC and the exact owned container was up.
-An operation observation and topology briefly timed out, then the same
-handle again reported running. Do **not** restart, create a duplicate root,
-or start the candidate while the handle is live or its terminal state is
-unproven. Next poll this exact handle and root; only after terminal plus
-independent baseline arm audit and exact owned release may the candidate be
-admitted under a fresh physical 0–3/8223 idle check.
+The frozen no-cache controller `exec-0000000000000774` terminated exit 0 at
+07:15:50 UTC with 32/32 samples and 96 scored responses. Independent auditor
+`exec-00000000000007a4` exited 0, replaying 160 unique request IDs, source
+identity, 324 clean physical isolation samples and exact owned release. The
+immutable baseline arm-result SHA256 is
+`b2e7bec9914974a40689ba29901c2f45628d36f2bb1b9f614660b02d88ad7e2e`.
+Sample 082 has three scored token-logprob arrays of 480, 619 and 549 entries,
+each with top-five alternatives. Never restart or reuse the baseline root.
 
-## 2026-10-11 r22 bounded output-numerics oracle — pre-device
+After a fresh direct-route, physical NPU0–3/8223 idle, root-absence and
+same-source offline check, the frozen `hypic-only` candidate started. Its
+**only** controller is `exec-00000000000007ae`; immutable output root is
+`/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r22-c32-logprob-hypic`.
+Poll that exact handle and root. While it is running or its terminal state is
+unproven, do not restart or create a duplicate. At terminal, independently
+audit 32 samples/96 scored/160 IDs, sample-082 logprobs and per-request
+four-worker hot proof, source identity, uninterrupted physical isolation and
+exact owned release. Then run the frozen paired audit. This is diagnostic
+only and cannot change r19's full-suite quality rejection.
+
+## 2026-10-11 r22 bounded output-numerics oracle — preregistration context
 
 See `HYPIC_R22_C32_LOGPROB_ORACLE_HANDOFF_20261011.md` and its frozen JSON
 contract. On unchanged r19 source 4429e3, the new adapter selects the
 original third-wave indexes 64–95 at c32 and traces token logprobs for
 sample 082 only. Both arm offline checks, independent auditor offline check,
 three r22 host tests, standalone r19 tests and 29-Skill structural validation
-pass. Neither arm has started. The wave omits r19's earlier two waves and is
-diagnostic only. Next action: fresh direct-route/physical-lane/port/root
-admission, then no-cache arm to terminal and independent audit before the
-HYPIC arm. Never use NPU4–7 or change the r19 quality verdict.
+pass. At freeze time neither arm had started; current execution state is
+above. The wave omits r19's earlier two waves and is diagnostic only. Never
+use NPU4–7 or change the r19 quality verdict.
 
 ## 2026-10-11 r21 admission reversal — no device run
 
