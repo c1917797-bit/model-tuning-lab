@@ -1,3 +1,10 @@
+## 2026-10-11 14:29 UTC — SKVQ016 import failure;017 negative-fixture failure; no active NPU stage
+
+- Original0994 completed exit1/491.843s. All4 canaries ran; before full model inference, raw_sink import failed because the exact post_rope_live -> tp_provider preload chain was missing. HOST_RESULT86021/b3cedeac68fea1ad5d572b2b784ed55891ec587d072bb67f06fd57a555a9d96b; exact own CPU/NPU stopped-retained/Pid0/noExec/noOOM09a0. Original is MAIN0994_SKVQ016_FAILED_ORIGINAL_20261011.json outside Git. This is proved adaptation failure, not paper no-go.
+- New017 exact25 source files verified09a9. Target95 software09aa completed exit1/82.764s: prior94 tests passed and real nine-module cold registry loaded. The additional missing-dependency negative wrongly mutated immutable C.obj; no NPU launched. Preserve MAIN09AA_SKVQ017_SOFTWARE_FAILED_ORIGINAL_20261011.json. New018 must use a private negative-test facade, keep production C immutable, and rerun95/zero-skips before same-image/NPU.
+- KIVI packed004 target28 software09a4 exit0/8.537s; real759769-byte inspect roundtrips losslessly into27723 bytes. This is evidence-storage validation only. Original003 host remains failed; scoped independent raw numerical recovery and long640 still pending.
+- Latest direct09a5 physical4-7 idle/AICore0/no compute PID. Ready device backup count0; no continuous-use or E2E/accuracy claim. Three preparers continue: SKVQ018/matched successor, KIVI003 raw recovery, long640 full closure/oracle budget. Fixed cutoff1791788425 unchanged. See SKVQ016_IMPORT_FAILURE_AND_017_REPAIR_20261011.json and serial queue; older RUNNING entries below are historical.
+
 ## 2026-10-11 14:03:39 UTC — SKVQ016 dispatched; KIVI same-image200 PASS; packed003 remains failed
 
 - Current exact handle exec-0000000000000994: RUNNING host prelude/CPU then TP4; actual NPU occupancy not yet proven. Read SKVQ016_DISPATCH_KIVI200_SOFTWARE_20261011.json and serial queue. Target016 Linux94/94 zero-skips PASS0991. Original reader013 whole unchanged and independently replayed by host before device create. Source MF108337/f818fdd091b0eb1a374d1cda68aa387d1d255cae77773705be6bf0a46604bf8d. No duplicate dispatch.

@@ -1,0 +1,94 @@
+{
+  "schema": "paper-portfolio.causal-repair/v1",
+  "updated_at_utc": "2026-10-11 14:26:29 UTC",
+  "fixed_cutoff_epoch": 1791788425,
+  "previous": {
+    "paper": "SKVQ",
+    "operation": "exec-0000000000000994",
+    "state": "FAILED_ADAPTATION_RELEASED",
+    "exit_code": 1,
+    "duration_ms": 491843,
+    "classification": "ADAPTATION_IMPLEMENTATION",
+    "confidence": "PROVED",
+    "first_fault": "ModuleNotFoundError: No module named 'post_rope_live' during capture_registry -> raw_sink import; transitive tp_provider also absent from named preload order.",
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-016-main-20261011-001/HOST_RESULT.json",
+      "bytes": 86021,
+      "sha256": "b3cedeac68fea1ad5d572b2b784ed55891ec587d072bb67f06fd57a555a9d96b"
+    },
+    "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN0994_SKVQ016_FAILED_ORIGINAL_20261011.json",
+    "release_operation": "exec-00000000000009a0",
+    "own_cids": [
+      "c58aa933ba04a06d0cff1e6cc91295e15d04b31befefaa66b8bc2742f3ed2b09",
+      "0448b9b1e6f4611686835d73c12136f7f838b2e3d6f625dba6184315190f4b7c"
+    ],
+    "released_retained_pid0_noexec_nooom": true,
+    "all4_canary": true,
+    "model_inference": false,
+    "numerics_pass": false,
+    "performance_pass": false,
+    "task_pass": false,
+    "decision": "REPAIR_SAME_ENTRY_AND_REAL_COLD_REGISTRY_REGRESSION"
+  },
+  "current": {
+    "paper": "SKVQ",
+    "operation": "exec-00000000000009aa",
+    "state": "FAILED_TEST_REFERENCE_NO_NPU",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-017/SOURCE_MANIFEST.json",
+      "bytes": 108587,
+      "sha256": "5a7bd823169282fec125c624ec776f9a1e2879b5c7c5f1c69814e0c51b3af0f0"
+    },
+    "expected_tests": 95,
+    "expected_skips": 0,
+    "device_stage_running": false,
+    "next": "No duplicate09aa/model017 launch; implement negative-fixture-only successor018, target95/0 then same-image prerequisite."
+  },
+  "source_deployment": {
+    "operation": "09a9",
+    "files": 25,
+    "exact_bytes_sha256": true
+  },
+  "kivi_packed004_software": {
+    "operation": "09a4",
+    "exit_code": 0,
+    "duration_ms": 8537,
+    "scope": "28 source/storage regression only, no NPU",
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-software-main-FIA-PACKED004-001/RESULT.json",
+      "bytes": 1074,
+      "sha256": "e06f0414fb9a7cca468aa8014fd1e08d4cda294634f75da7fb44fd46d1c7ac09"
+    },
+    "roundtrip_original_bytes": 759769,
+    "stored_bytes": 27723,
+    "original003_host_gate_still_failed": true
+  },
+  "latest_idle_snapshot": {
+    "operation": "09a5",
+    "cards": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "compute_processes": 0,
+    "AICore_percent": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "zero_idle_claim": false
+  },
+  "ready_device_backup_count": 0,
+  "acceptance": {
+    "new_non_HYPIC_accepted": false,
+    "performance": false,
+    "task_accuracy": false
+  },
+  "next_owners": {
+    "skvq_writer_next": "matched013 source+017 cold registry repair",
+    "kivi_hotpath_prepare": "CPU-only original003 independent component recovery",
+    "skvq_numeric_path_review": "long640 full closure/regression/oracle cost"
+  }
+}

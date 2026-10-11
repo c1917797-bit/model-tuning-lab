@@ -585,6 +585,14 @@ For device-free consumers, device mappings describe visibility, cpusets describe
 
 A large fixture suite can still miss a framework boundary if it manufactures a plain dict or an unpatched class while the deployed backend returns a defaultdict or installs its own subclass. Validate the actual source-qualified producer body, container/value semantics, backend patch order and public consumer path. Accept only the proved representation while preserving layer coverage, source identity and numerical gates; do not replace a brittle type check with arbitrary acceptance. Audit adjacent consumers in the same repair so the next device run is not another one-assertion discovery. Keep this regression device-free when the genuine code permits it, and separately label any hardware-dependent remainder.
 
+Keep negative-test injection compatible with the real loader interface too.
+A local mutable module cannot stand in for a deployed immutable facade: use a
+private test proxy for the specific missing-data case, restore it afterward,
+and run the positive cold import through the unchanged real loader. Never make
+the production facade mutable just to pass a fixture. SKVQ017 target software
+caught this before NPU admission; see the workstream's
+`SKVQ016_IMPORT_FAILURE_AND_017_REPAIR_20261011.json` for the original failure.
+
 
 ## Executable finite handoff reference
 
