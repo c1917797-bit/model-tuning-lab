@@ -1,0 +1,209 @@
+{
+  "schema": "paper-portfolio.actual-reference-recovery/v1",
+  "utc": "2026-10-11T01:03:43Z",
+  "previous_goal_turn": "progress: actual05a7 terminal changed the next action",
+  "goal": "active_unmet",
+  "cutoff_epoch": 1791788425,
+  "SKVQ014": {
+    "operation": "exec-00000000000005a7",
+    "exit_code": 1,
+    "timed_out": false,
+    "duration_ms": 3889905,
+    "first_fault": "consume_loader_current.py:22 same real captured rank process",
+    "classification": "REFERENCE_OR_TEST",
+    "confidence": "all4 original identity objects differ only in observed_utc_ns; producer timestamp semantics and adjacent consumers still under review",
+    "cause_scope": "consumer whole-object equality conflates observation timestamp with stable process identity; no quantization numerical verdict",
+    "original_host_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-current72h-projection-014-main-20261010-001/HOST_RESULT.json",
+      "bytes": 113022,
+      "sha256": "8f1c512544ac46e77912a3ee870b9610d3ae8ba333c89ecdd12b9731ec48687f"
+    },
+    "capture_samples": 256,
+    "capture_whole_pass": false,
+    "all_owned_stopped_retained": true,
+    "independent_release_operation": "exec-00000000000005c2",
+    "cpu_finished_at": "2026-10-11T00:52:20.40132327Z",
+    "action": "preserve original014; off-device minimal identity/consumer repair and real positive/negative regressions; do not recapture or fabricate successful old whole",
+    "owner": "sparse_attention_ready_queue",
+    "calibration_and_later": "PENDING"
+  },
+  "KIVI": {
+    "software219": {
+      "operation": "exec-00000000000005c3",
+      "exit_code": 0,
+      "elapsed_seconds": 209.075,
+      "suite_elapsed_seconds": 185.10847863997333,
+      "tests": 219,
+      "actual_same_image": true,
+      "Devices": [],
+      "report": {
+        "bytes": 592,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-consumer-software219-main-same660-004/cpu-preflight/SOFTWARE219.json",
+        "sha256": "f9c6d9519d2d2b50c425d5d6f19116e35a285ec8bfa89409c6482720cd9606ac"
+      },
+      "host_result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-consumer-software219-main-same660-004/RESULT.json",
+        "bytes": 2844,
+        "sha256": "0237261d3c949c93bc1b9461338fb45008f5751d9010944fa6c3124b3960eeee"
+      },
+      "exact_release_operation": "exec-00000000000005c7",
+      "full_raw_pass": false
+    },
+    "current": {
+      "operation": "exec-00000000000005c8",
+      "state": "RUNNING_INDEPENDENT_FULL64_ORIGINAL018_RAW",
+      "original_capture": "exec-0000000000000548",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-vector-writer-v024-20261011/SOURCE_MANIFEST.json",
+        "bytes": 13550,
+        "sha256": "a39f189a473947bb28aed5e9885a101e7cd02b7c8438ee892735543f3d0ce265"
+      },
+      "argv": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/usr/bin/prlimit",
+        "--cpu=5400:5400",
+        "--as=536870912:unlimited",
+        "--",
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-vector-writer-v024-20261011/main.py",
+        "--execute",
+        "--mode",
+        "raw",
+        "--source-manifest-sha256",
+        "a39f189a473947bb28aed5e9885a101e7cd02b7c8438ee892735543f3d0ce265",
+        "--result",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018/RESULT.json",
+        "--result-sha256",
+        "18e831dbf9c35b10f18d80d40a445155dc98ba656835c1918ee40fc4c7b4f6d4",
+        "--terminal",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI018_0548_ORIGINAL_20261010.json",
+        "--terminal-sha256",
+        "fd71a259d096f75631cb5b6b54e33bee4747ccb7946e1454468a3c6486adc370",
+        "--peer",
+        "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "--operation",
+        "exec-0000000000000548",
+        "--expected-command",
+        "/usr/bin/python3",
+        "--expected-args",
+        "[\"-I\",\"-B\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/host_run.py\",\"--execute\",\"--source\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json\",\"--source-sha256\",\"a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4\",\"--component\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-signed-v3-20261010-001/RESULT.json\",\"--component-sha256\",\"d686123d97f9856d72bd2efc4a7d3441cc0a5794250ebd8807519071af3b217d\",\"--model-manifest\",\"/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json\",\"--model-manifest-sha256\",\"11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c\",\"--software\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-software-main-20261010-018/cpu-preflight/SOFTWARE.json\",\"--software-sha256\",\"9bff0f7a049befad6b5f157af9bd5f40d84ff7fe627e8f3d07f53f542e0eb01e\",\"--software-stage\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-software-main-20261010-018/RESULT.json\",\"--software-stage-sha256\",\"efe251de8393377f811cd0fae81de0e10e4a0142a41c007a5194d70a8013e1d8\",\"--output\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-main-20261010-018\",\"--port\",\"8250\"]",
+        "--raw-phase-output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-firstdecode-independent-raw-main-v024-vector-standalone-001",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-firstdecode-independent-raw-main-v024-vector-standalone-001/RAW_ENTRY_RESULT.json",
+        "--base-whole",
+        "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-vector-writer-v023-20261011",
+        "--cpu-only-raw",
+        "--joint-peer-plan",
+        "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-vector-writer-v024-20261011/STANDALONE_PLAN.json",
+        "--raw-host-cpu",
+        "0"
+      ],
+      "Devices": [],
+      "no_new_capture": true,
+      "budget": {
+        "host_CPU": 1,
+        "guest_CPU": 1,
+        "guest_memory_bytes": 8589934592,
+        "host_AS_RSS_bytes": 536870912,
+        "reserve_memory_bytes": 8589934592,
+        "Devices": [],
+        "phase_seconds_including_cleanup": 5400,
+        "cleanup_seconds": 90,
+        "child_seconds": 5310,
+        "workspace_bytes": 34359738368,
+        "standalone_CPU": 2,
+        "standalone_RAM_full_declared_bytes": 17716740096,
+        "standalone_new_disk_floor_bytes": 42949672960,
+        "running_peer_CPU": 7,
+        "running_joint_CPU": 9,
+        "running_joint_RAM_full_declared_bytes": 95563022336,
+        "running_new_disk_floor_bytes": 386547056640,
+        "stopped_peer_remaining_CPU": 3,
+        "stopped_joint_CPU": 5,
+        "stopped_joint_RAM_full_declared_bytes": 26843545600,
+        "software": {
+          "CPU": 1,
+          "CPU_seconds": 240,
+          "wall_seconds": 300,
+          "memory_bytes": 8589934592,
+          "Devices": [],
+          "scope": "same660 Python3.12 NumPy1.26.4 complete219 source/reference fixtures; no NPU"
+        },
+        "cutoff_epoch": 1791788425,
+        "clock_reset": false,
+        "reference_cost": {
+          "scalar_oneFA_local_synthetic_seconds": 53.732227799948305,
+          "vector_oneFA_local_synthetic_seconds": 0.5957685,
+          "target_attention_only_oneFA_seconds": 19.758,
+          "target_all64_seconds": null,
+          "scope": "not comparable hosts; no full64 fit claim"
+        }
+      },
+      "original_terminal": false,
+      "mathematical_pass": false
+    },
+    "next": "actualfull64 -> reviewed B1 matched1024 diagnostic screen; full mixed/lifecycle, formal3 pairs and1822 tasks remain required"
+  },
+  "git": {
+    "prior_head": "1e4d5484169218367c256cf52f6fde148117f606",
+    "actual_push": "exec-00000000000005c5",
+    "exit_code": 0,
+    "remote_advance": "4db1c42 ->1e4d548",
+    "branch": "work/qwen36-damp-ascend-20261006",
+    "force": false,
+    "main_modified": false
+  },
+  "resources": {
+    "actual_release_and_preflight": "exec-00000000000005c7",
+    "physical4_7": "last fresh snapshot no compute PID/baseline; current phase is CPU",
+    "ready_NPU_count": 0,
+    "idle_reason": "missing mathematical/data prerequisites, not external occupation",
+    "HugeTLB32GiB": "SPENT",
+    "protected0_3": "unchanged"
+  },
+  "originals": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ014_05A7_FAILED_ORIGINAL_20261011.json",
+      "bytes": 4349,
+      "sha256": "8f35cb6b73d3c4576a38d26ecdc11149469b6fbe68a2b492e337e5aea4df0d99"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ014_IDENTITY_DIFF_05C4_ORIGINAL_20261011.json",
+      "bytes": 6162,
+      "sha256": "c5801d74d15f3f5779101280dd0ceed43cf81c3571404dc74f4a4f716a7a8481"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ014_RELEASE_05C2_ORIGINAL_20261011.json",
+      "bytes": 52527,
+      "sha256": "3a065732913ed980b1d6a65ede122645578a9bca6dffe7be25b9a8c52ee0144d"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_SAME219_05C3_ORIGINAL_20261011.json",
+      "bytes": 2852,
+      "sha256": "b036c273c22bf26cd4f95acf7a0619cb49928c98324b6d1b3ac65df1b7c52dc8"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_SAME219_RELEASE_05C7_ORIGINAL_20261011.json",
+      "bytes": 5740,
+      "sha256": "2f291d2808d5d712664cfee13b3bfb4869763043bf2e9a27ee1457d3bbc7b38c"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_GIT_PUSH_05C5_ORIGINAL_20261011.json",
+      "bytes": 3207,
+      "sha256": "627ffe9b47070c6b32fc09709461f66b5a0501cabf72c134fcd2358dd165bdab"
+    }
+  ],
+  "missing": [
+    "KIVI actualfull64",
+    "SKVQ qualifiedcapture/fitting/writer/reader/model",
+    "fixed1024 full-model paired screen",
+    "3 formal pairs",
+    "503LBv2+1319GSM8K tasks",
+    "supported-envelope portability"
+  ]
+}

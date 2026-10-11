@@ -1,3 +1,10 @@
+## 2026-10-11T01:03:43Z — SKVQ014 reference identity failure isolated; KIVI same-image219 passed, actualfull64 running
+
+- Read SKVQ014_REFERENCE_FAILURE_KIVI219_PASS_20261011.json. Actual05a7 ended exit1 after full256 capture; consumer rejects whole identity objects whose only difference is observed_utc_ns in all4 ranks (actual05c4). No quantized numerical or paper no-go. Preserve failed original and all raw; prepare a bounded independent consumer repair, including adjacent predicates and real negative tests. Do not fabricate an old successful whole or recapture unchanged data.
+- Actual05c2 independently proves all3 own014 containers stopped-retained/Pid0/noExec/noOOM. CPU release00:52:20Z. Device lane has no ready successor, not external occupation; no artificial utilization claim.
+- Actual05c3 same660 Devices[] full219 passed (185.108s suite/209.075s whole);05c7 verifies exact CPU release/fresh ordinaryRAM and disk. MAIN dispatched original05c8 raw024 full64 on unchanged real018 capture. Poll05c8 only; no duplicate acquisition or same-failure rerun. Mathematical/model/E2E/task gates still pending.
+- Actual05c5 normal Git push succeeded:4db1c42 ->1e4d548 on work/qwen36-damp-ascend-20261006. No force/main change. Current checkpoint must be pushed separately. Fixed cutoff1791788425, protected0-3/external and SPENT32GiB unchanged.
+
 ## 2026-10-11T00:49:10Z — exact same-image219 host entry prepared; SKVQ original CPU adjudication remains live
 
 - Read KIVI_VECTOR_CPU8_ENTRY_20261011.json. Newwrapper004 reuses actual057e CPU8 controller; actual05be verifies8byte-exact runtime/archive files,17reference Python files, original artifact Refs, scalar-codec path and real default-OFF CLI. Actual same660219/full64 remain UNRUN. Do not confuse source preflight with numeric PASS.
