@@ -1,5 +1,25 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-11 post-commit replay repair
+
+After 4b4af34, the reproduction verifier failed with
+`branch Skill version boundary changed`: its expected HEAD Skill blob still
+identified the preceding revision, although the worktree SHA had been updated.
+The expected blob now pins the actually committed Skill content
+`4c07dd5f7a5e4010c857b30d77081b85450dd632`; both dependent case manifests
+pin the revised verifier SHA. Main boundaries and frozen experiment judgments
+are unchanged. Commit-time checks must include a post-commit replay, not just
+a pre-commit worktree pass.
+
+Host `python3 -B` replay passed reproduction and all case provenance checks
+(exec 081e/081f); the registry contains 29 cases: 7 marked bounded verified
+and 22 partial-evidence, no missing cases. This is provenance/status replay,
+not a fresh functional rerun of all Skills. The shared py311 environment
+lacks PyYAML (081b); the documented system-python replay works and no package
+was installed. Structural validation passed 29 Skills (081c), diff check
+passed (081d). No device workload was started; r19/r22 remain unchanged.
+
+
 ## 2026-10-11 r22 candidate terminal — bounded diagnostic inconclusive
 
 The frozen no-cache controller `exec-0000000000000774` terminated exit 0 at

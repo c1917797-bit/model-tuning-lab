@@ -17,7 +17,8 @@ REPO = HERE.parents[2]
 MAIN = "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2"
 SKILL_PATH = ".agents/skills/paper-to-ascend-reproduction/SKILL.md"
 MAIN_SKILL_BLOB = "d0298d9fdf1ce7ba27f1bd711d26834b6bd7b6aa"
-BRANCH_SKILL_BLOB = "167d4555bc1f8ffa650d3e8f846a197538ce4a59"
+# Frozen Skill content recorded by 4b4af34; verifier-only commits preserve it.
+BRANCH_SKILL_BLOB = "4c07dd5f7a5e4010c857b30d77081b85450dd632"
 BRANCH_SKILL_WORKTREE_SHA256 = (
     "3f8cca174bc3e5e1f59d93d017e2a6777cf37a23d664f240a1f30cd29cae797f"
 )
