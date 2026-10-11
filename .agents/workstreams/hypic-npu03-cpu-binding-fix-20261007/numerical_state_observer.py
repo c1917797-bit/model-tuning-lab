@@ -1,0 +1,152 @@
+"""Opt-in source-bound observation seams; no device launcher or acceptance claim."""
+from __future__ import annotations
+
+import ast
+import hashlib
+import os
+import types
+from dataclasses import dataclass
+from pathlib import Path
+
+SWITCH = "HYPIC_STATE_OBSERVER_ENABLE"
+HOOK = "_hypic_diagnostic_state_observer"
+SPECS = {
+    "attention": ("0e13fbf953f40d3e6103fc7e4b1858755d8992d108d8b1763659aa29fb502876",
+                  "_repair_position_independent_kv"),
+    "gdn": ("72d58fdf03a4317ee4493ac475cd4b059ae3ed7f9138243446737a860537623d",
+            "_position_independent_gdn_core"),
+    "runner": ("5d3078267d55e6ca41000ba195c387e2f3fc6fec6bbe89cf73b8a67fbfb8f8e0", "_rewrite_position_independent_inputs"),
+}
+
+
+def hook(stage):
+    return ast.Expr(ast.Call(ast.Name(HOOK, ast.Load()),
+                             [ast.Constant(stage), ast.Call(
+                                 ast.Name("locals", ast.Load()), [], [])], []))
+
+
+class GDNHooks(ast.NodeTransformer):
+    def __init__(self):
+        self.initial = self.committed = 0
+
+    def visit_Assign(self, node):
+        if any(isinstance(t, ast.Name) and t.id == "cache_composes"
+               for t in node.targets):
+            self.initial += 1
+            return [hook("gdn_initial"), node]
+        return node
+
+    def visit_Expr(self, node):
+        value = node.value
+        if (isinstance(value, ast.Call) and isinstance(value.func, ast.Attribute)
+                and value.func.attr == "index_copy_"
+                and isinstance(value.func.value, ast.Name)
+                and value.func.value.id == "ssm_cache"):
+            self.committed += 1
+            return [node, hook("gdn_committed")]
+        return node
+
+
+def instrument(source, filename, function_name, namespace, component):
+    tree = ast.parse(source, filename)
+    definitions = [node for node in tree.body
+                   if isinstance(node, ast.FunctionDef) and node.name == function_name]
+    if len(definitions) != 1:
+        raise ValueError("expected one exact function")
+    function = definitions[0]
+    if function.decorator_list:
+        raise ValueError("unexpected decorator; review source boundary")
+    if component == "gdn":
+        injector = GDNHooks()
+        function = injector.visit(function)
+        if (injector.initial, injector.committed) != (1, 1):
+            raise ValueError("GDN observation seam drift")
+    elif component in {"attention", "runner"}:
+        function.body.append(hook("kv_committed" if component == "attention"
+                                  else "positions_committed"))
+    else:
+        raise ValueError("unknown observation component")
+    unit = ast.fix_missing_locations(ast.Module(
+        body=[ast.ImportFrom(module="__future__", names=[
+            ast.alias(name="annotations")], level=0), function], type_ignores=[]))
+    local = {}
+    exec(compile(unit, filename, "exec", dont_inherit=True), namespace, local)
+    return local[function_name]
+
+
+@dataclass
+class Handle:
+    changes: list
+    globals_added: list
+
+    def uninstall(self):
+        # Refuse to overwrite another actor's later patch.
+        for module, name, original, replacement in self.changes:
+            if getattr(module, name) is not replacement:
+                raise RuntimeError("observer function ownership changed")
+        for module, callback in self.globals_added:
+            if getattr(module, HOOK) is not callback:
+                raise RuntimeError("observer global ownership changed")
+        for module, name, original, _replacement in reversed(self.changes):
+            setattr(module, name, original)
+        for module, _callback in self.globals_added:
+            delattr(module, HOOK)
+        self.changes.clear()
+        self.globals_added.clear()
+
+
+def install(modules, callback, *, request_id, layers, source_hashes=None):
+    """Bind to explicit modules. Callback must synchronously copy owned snapshots.
+
+    Disabled mode returns before source reads, imports, or mutations. No log
+    or snapshot alone is a substitute for independently joined hot receipts.
+    """
+    if os.environ.get(SWITCH) != "1":
+        return Handle([], [])
+    if not request_id or not layers or not callable(callback):
+        raise ValueError("explicit request, layer allowlist and callback required")
+    if set(modules) != set(SPECS):
+        raise ValueError("all three exact runtime modules required")
+    hashes = source_hashes or {k: v[0] for k, v in SPECS.items()}
+    prepared = []
+    for component, (_expected, name) in SPECS.items():
+        module = modules[component]
+        path = Path(module.__file__)
+        raw = path.read_bytes()
+        if not hashes.get(component) or hashlib.sha256(raw).hexdigest() != hashes[component]:
+            raise ValueError("runtime source hash mismatch: " + component)
+        if hasattr(module, HOOK):
+            raise RuntimeError("observer global already exists")
+        original = getattr(module, name)
+        # Refuse to replace unrelated wrappers, even if the file matches.
+        if (not isinstance(original, types.FunctionType)
+                or original.__code__.co_filename != str(path)
+                or original.__name__ != name):
+            raise ValueError("runtime callable identity mismatch: " + component)
+        replacement = instrument(raw.decode(), str(path), name, module.__dict__, component)
+        prepared.append((module, name, original, replacement))
+
+    allowed_layers = frozenset(layers)
+
+    def observe(stage, frame):
+        ctx = frame.get("ctx")
+        if ctx is None or request_id not in ctx.req_ids:
+            return
+        if stage != "positions_committed" and frame.get("layer_name") not in allowed_layers:
+            return
+        plan = ctx.plans.get(request_id)
+        if plan is None or not any(entry is not None for entry in plan.entries):
+            return
+        callback(stage, request_id, frame)
+
+    handle = Handle([], [])
+    try:
+        for module, name, original, replacement in prepared:
+            setattr(module, HOOK, observe)
+            handle.globals_added.append((module, observe))
+            setattr(module, name, replacement)
+            handle.changes.append((module, name, original, replacement))
+    except Exception:
+        handle.uninstall()
+        raise
+    return handle

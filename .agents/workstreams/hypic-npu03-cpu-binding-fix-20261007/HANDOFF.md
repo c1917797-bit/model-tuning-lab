@@ -1,5 +1,29 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-11 observer/capture host checkpoint (no device admission)
+
+numerical_state_observer.py now source-hash-binds in-memory function replacements
+for KV replay completion, GDN pre-compose/post-state-write, and position rewrite.
+It is disabled unless HYPIC_STATE_OBSERVER_ENABLE=1, requires explicit request
+and layer allowlists, rejects changed modules/callables, and restores only its
+own replacements. It does not edit the frozen runtime source on disk.
+
+numerical_state_capture.py takes synchronous owned CPU snapshots of canonical
+KV samples and actual destination slots, RoPE table rows, GDN incoming head0
+state and T/S composition inputs, conv-tail reconstruction inputs, actual GDN
+and conv destination states, and expected/actual positions. Scalar budget is
+bounded; snapshots are diagnostic data, not proof of device or hot execution.
+Only head0 and selected KV rows are captured: no full-layer/tensor equivalence
+claim. Producer-generation integrity capture is still absent.
+
+Seventeen host tests passed under shared py311 (0849), including frozen source
+hash/injection checks, disabled no-op, unload, source refusal, owned snapshots,
+bounds and synthetic actual-destination mismatches. These are not NPU tests.
+Independent numerical reconstruction, raw-file writer, four-rank hot-receipt
+join and serving entrypoint/manifest remain unimplemented. Do not launch a
+service until these pieces and the bounded diagnostic contract are verified.
+
+
 ## 2026-10-11 numerical-oracle preparation, no device admission
 
 Read HYPIC_NUMERICAL_STATE_ORACLE_SOURCE_MAP_20261011.md before continuing.

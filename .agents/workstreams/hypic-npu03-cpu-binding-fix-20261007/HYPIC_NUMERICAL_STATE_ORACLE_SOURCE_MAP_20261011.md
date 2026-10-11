@@ -1,7 +1,8 @@
 # Direct state oracle: source map and offline comparator (2026-10-11)
 
-Status: comparator implemented; **capture adapter not implemented, no device
-experiment admitted**. This is diagnostic infrastructure, not a HYPIC repair,
+Status: comparator plus initial observer/capture host implementation; **loader
+and independent reconstruction audit incomplete, no device experiment admitted**.
+See the latest workstream HANDOFF checkpoint. This is diagnostic infrastructure, not a HYPIC repair,
 numerical-equivalence result, quality acceptance, or a replacement for r19/r22.
 
 ## Frozen evidence and source
