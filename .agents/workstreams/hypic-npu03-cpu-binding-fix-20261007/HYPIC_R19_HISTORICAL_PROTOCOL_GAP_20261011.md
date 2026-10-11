@@ -28,6 +28,15 @@ candidate logged 126 materialization-ready events and 116 evictions with ten
 materialized segments of capacity; churn is a hypothesis, not an identified
 victim or causal mechanism.
 
+A fresh read-only replay of all 127 sample files found 60 samples on which
+both arms were correct and stopped naturally in all three repetitions. There
+was **no** sample on which control was correct 3/3 while candidate was wrong
+3/3 with all candidate responses stopping naturally. Sample 059 was the
+single 3/3 control-correct/candidate-wrong sample whose three candidate
+responses all hit the cap. This strengthens the priority of investigating
+output-length/response divergence, but it still does not establish causation
+or change the frozen population-level decision.
+
 The experimental question is therefore *not* whether to add a stricter
 threshold to the old success. The new explicit-segment quality workload asks
 whether the mechanism is safe when it actually participates. The old
@@ -43,7 +52,11 @@ not refute the prior natural-request result.
    EOS, two warm requests, control/treatment switch only, and a fixed set of
    preselected cap-loss and stable-control samples. Run serially first, with
    a fresh matching control; compare exact response prefix, finish reason,
-   answer, worker-hot evidence, and materialization/eviction events.
+   answer, worker-hot evidence, and materialization/eviction events. The
+   post-hoc diagnostic anchors are fixed now as sample indexes 059 (3/3
+   cap-associated loss), 082 (one non-cap paired loss; prompt length 21,827),
+   and 126 (3/3 correct in both arms, prompt length 20,530, nearest prompt
+   length among stable both-correct samples to index 059's 20,414).
 3. If the serial pair still diverges, investigate source/position-state
    correctness before another c32 suite. If it converges but c32 diverges,
    investigate scheduler/cache pressure with one bounded c32 canary. Either
