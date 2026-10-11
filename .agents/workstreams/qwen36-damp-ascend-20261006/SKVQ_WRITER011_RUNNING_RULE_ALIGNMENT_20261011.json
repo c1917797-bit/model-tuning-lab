@@ -1,0 +1,92 @@
+{
+  "schema": "paper-portfolio.actual-stage-checkpoint/v1",
+  "updated_at_utc": "2026-10-11T06:33:00Z",
+  "current": {
+    "paper": "SKVQ",
+    "owner": "MAIN",
+    "operation": "exec-000000000000070e",
+    "state": "RUNNING_HOST_CHAIN_CPU_INPUT_COMPLETE_NPU_PENDING",
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-actual-writer-bridge-011-main-20261011-001",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-actual-writer-bridge-v1-011/SOURCE_MANIFEST.json",
+      "bytes": 77276,
+      "sha256": "a16ca96969dd5d852493913fc3409fcd5c74ae2884d56cf5e12c255df5f7ae6f"
+    },
+    "software_pass_operation": "exec-0000000000000706",
+    "software_tests": 93,
+    "fresh_admission_operation": "exec-000000000000070a",
+    "scope": "CPU plan/scalar then physical4->logical0 canary/writer; stop own NPU before independent raw oracle; not model/E2E/task acceptance",
+    "latest_actual": "CPU_RESULT status ACTUAL_INPUT_PLAN_NUMPY24_COMPLETE, Devices_empty true; operation070e still running. No actual canary or numerical PASS verified.",
+    "poll_only_existing_operation": true
+  },
+  "preparation": [
+    {
+      "paper": "SKVQ",
+      "stage": "compiled007 frozen local71 PASS; installed79 and actual writer011 whole pending",
+      "ready": false,
+      "state": "SOURCE_READY_NOT_NPU_READY"
+    },
+    {
+      "paper": "SKVQ",
+      "stage": "model006 bound compiled007, import namespace and same-invocation evidence handoff",
+      "ready": false,
+      "state": "PREPARING_OFF_DEVICE"
+    },
+    {
+      "paper": "KIVI",
+      "stage": "actual32769-frame AV tile D32->D8 diagnostic, no reduction-order or lifecycle changes; host closure in preparation",
+      "ready": false,
+      "state": "PREPARING_OFF_DEVICE"
+    }
+  ],
+  "resource": {
+    "operation": "exec-000000000000070a",
+    "observed_at_utc": "2026-10-11T06:21:09Z",
+    "physical4_7": "No compute PID/AICore0/HBM2868,2866,2866,2861MiB at admission; not live NPU status",
+    "protected0_3": "Protected; no compute at this snapshot. External declaration-only containers not stopped.",
+    "ready_npu_backup": 0,
+    "zero_idle_claim": false
+  },
+  "rule_fix": {
+    "commit": "16eaf1806f2ea3bb810ea8f12027f418bf780047",
+    "remote_verified_operation": "exec-00000000000006f9",
+    "scope": "Resolve remaining entry/DAG concurrency contradiction; parallel off-device preparation, MAIN serial device stages. Gates and fixed cutoff unchanged."
+  },
+  "actual_cpu_input_result": {
+    "Devices_empty": true,
+    "attention_output_verified": false,
+    "calibration_whole_ref": {
+      "bytes": 312954,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-default-tp-local-012-main-20261011-002/CALIBRATION_WHOLE_READER001.json",
+      "sha256": "ed7f1127cd20d71da30040c3ca746490edce87137704344cb5ae63498e374f3e"
+    },
+    "graph_verified": false,
+    "input_plan_ref": {
+      "bytes": 342117,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-actual-writer-bridge-011-main-20261011-001/input-plan/work/plan/INPUT_PLAN.json",
+      "sha256": "2d6dc8fc1210a9bc9b842af7675a6e698b773ef89307381b68b9146e2648310a"
+    },
+    "lifecycle_verified": false,
+    "model_ready": false,
+    "native_ready": false,
+    "numpy_ref": {
+      "bytes": 3651,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-actual-writer-bridge-011-main-20261011-001/input-plan/work/NUMPY_PREFLIGHT.json",
+      "sha256": "44850fa1ff471582002fb0f4cc82bbc25c2baf486f07fa89a1db5daba239d474"
+    },
+    "packed_reader_verified": false,
+    "performance_ready": false,
+    "schema": "skvq.actual-writer.cpu/v1",
+    "source_ref": {
+      "bytes": 77276,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-actual-writer-bridge-v1-011/SOURCE_MANIFEST.json",
+      "sha256": "a16ca96969dd5d852493913fc3409fcd5c74ae2884d56cf5e12c255df5f7ae6f"
+    },
+    "status": "ACTUAL_INPUT_PLAN_NUMPY24_COMPLETE",
+    "task_ready": false,
+    "whole_176": false
+  },
+  "source_only_archive_status": "141-file coherent source archive prepared locally with exact reconstruction; not yet remote/Git at this checkpoint",
+  "performance_scope": "No new E2E or task result. Existing fixed1024 KIVI regression and cost129 diagnostic remain unchanged.",
+  "portfolio_cutoff_epoch": 1791788425
+}

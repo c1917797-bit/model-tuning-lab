@@ -1,6 +1,6 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11T06:02:33Z",
+  "updated_at_utc": "2026-10-11T06:33:00Z",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -10,27 +10,44 @@
     2,
     3
   ],
-  "current": null,
+  "current": {
+    "paper": "SKVQ",
+    "owner": "MAIN",
+    "operation": "exec-000000000000070e",
+    "state": "RUNNING_HOST_CHAIN_CPU_INPUT_COMPLETE_NPU_PENDING",
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-actual-writer-bridge-011-main-20261011-001",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-actual-writer-bridge-v1-011/SOURCE_MANIFEST.json",
+      "bytes": 77276,
+      "sha256": "a16ca96969dd5d852493913fc3409fcd5c74ae2884d56cf5e12c255df5f7ae6f"
+    },
+    "software_pass_operation": "exec-0000000000000706",
+    "software_tests": 93,
+    "fresh_admission_operation": "exec-000000000000070a",
+    "scope": "CPU plan/scalar then physical4->logical0 canary/writer; stop own NPU before independent raw oracle; not model/E2E/task acceptance",
+    "latest_actual": "CPU_RESULT status ACTUAL_INPUT_PLAN_NUMPY24_COMPLETE, Devices_empty true; operation070e still running. No actual canary or numerical PASS verified.",
+    "poll_only_existing_operation": true
+  },
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
   "preparation": [
     {
       "paper": "SKVQ",
-      "stage": "writer010 exact source namespace/import repair + new-process regression",
-      "ready": false,
-      "state": "PREPARING_OFF_DEVICE"
-    },
-    {
-      "paper": "SKVQ",
-      "stage": "compiled006 local frozen; installed65 and actual writer whole dependency pending",
+      "stage": "compiled007 frozen local71 PASS; installed79 and actual writer011 whole pending",
       "ready": false,
       "state": "SOURCE_READY_NOT_NPU_READY"
     },
     {
-      "paper": "KIVI",
-      "stage": "cost129 measured attribution; guard-only candidate source exists but NPU qualification pending",
+      "paper": "SKVQ",
+      "stage": "model006 bound compiled007, import namespace and same-invocation evidence handoff",
       "ready": false,
-      "state": "OFF_DEVICE_COST_REVIEW"
+      "state": "PREPARING_OFF_DEVICE"
+    },
+    {
+      "paper": "KIVI",
+      "stage": "actual32769-frame AV tile D32->D8 diagnostic, no reduction-order or lifecycle changes; host closure in preparation",
+      "ready": false,
+      "state": "PREPARING_OFF_DEVICE"
     }
   ],
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
@@ -48,7 +65,7 @@
     },
     "scope": "diagnostic only; fresh controller checks required before device load"
   },
-  "idle_cause": "Writer009 failed missing sibling import before tensor; no qualified NPU successor. Internal readiness gap, not external4-7 occupation.",
+  "idle_cause": "Current host070e has completed device-free input plan and remains running; NPU execution not yet verified. No independently qualified backup device stage; zero-idle not achieved.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -182,9 +199,10 @@
     }
   ],
   "latest_resource_snapshot": {
-    "operation": "exec-00000000000006a4",
-    "physical4_7": "No PID, AICore0, HBM2868/2866/2866/2861MiB after writer failure",
-    "protected0_3": "external HYPIC running; untouched",
+    "operation": "exec-000000000000070a",
+    "observed_at_utc": "2026-10-11T06:21:09Z",
+    "physical4_7": "No compute PID/AICore0/HBM2868,2866,2866,2861MiB at admission; not live NPU status",
+    "protected0_3": "Protected; no compute at this snapshot. External declaration-only containers not stopped.",
     "ready_npu_backup": 0,
     "zero_idle_claim": false
   },
@@ -951,5 +969,10 @@
     "backup": "KIVI guard hypothesis awaiting actual cost justification",
     "zero_idle_claim": false
   },
-  "current_preparation_checkpoint": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ_WRITER_IMPORT_FAILURE_KIVI_COST_20261011.json"
+  "current_preparation_checkpoint": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ_WRITER_IMPORT_FAILURE_KIVI_COST_20261011.json",
+  "maintainer_rule_fix": {
+    "commit": "16eaf1806f2ea3bb810ea8f12027f418bf780047",
+    "remote_verified_operation": "exec-00000000000006f9",
+    "scope": "Resolve remaining entry/DAG concurrency contradiction; parallel off-device preparation, MAIN serial device stages. Gates and fixed cutoff unchanged."
+  }
 }

@@ -1,3 +1,11 @@
+## 2026-10-11 06:33 UTC — writer011 actual host running; installed93 and CPU input plan complete
+
+- CURRENT: poll only exec-000000000000070e. SKVQ writer011 actual installed93 PASS0706; fresh admission070a physical4–7 idle. Host root `/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-actual-writer-bridge-011-main-20261011-001`. Actual CPU_RESULT says ACTUAL_INPUT_PLAN_NUMPY24_COMPLETE and Devices_empty=true. No NPU numerical/canary PASS or new E2E/task acceptance verified yet. Do not duplicate launch.
+- Source MF77276/SHAa16ca96969dd5d852493913fc3409fcd5c74ae2884d56cf5e12c255df5f7ae6f. Writer009 import failure remains failed;010 frozen source-only.011 fixes exact format namespace and explicit empty-log handling with real fresh-process regressions, no math/gate weakening. Exact owned release and independent whole180 remain mandatory after terminal; host3600 includes cleanup.
+- NEXT preparation: compiled007 local71 PASS but installed79/actual writer whole pending; model006 new source-bound handoff in preparation; KIVI actual32769 AV D32-to-D8 diagnostic/host closure in preparation. No qualified NPU backup, no zero-idle claim. KIVI previous fixed1024 -72.2557% and diagnostic129 -71.8418% remain valid scoped negative results, not paper-wide no-go.
+- Minor maintainer correction16eaf1806f2ea3bb810ea8f12027f418bf780047 pushed; remote06f9 exact match. Entry/DAG now agree on parallel off-device preparation and MAIN serial device stages. Actual20-skills validation06e4 PASS. No threshold, authorization or cutoff relaxation.
+- Fixed portfolio cutoff1791788425 unchanged. Only physical4–7;0–3/external workloads protected. Read current queue first; all older running statements below are historical. No accepted non-HYPIC technique yet.
+
 ## 2026-10-11 06:02 UTC — maintainer rules repaired; SKVQ writer import fault; KIVI diagnostic pair consumed
 
 - Read SKVQ_WRITER_IMPORT_FAILURE_KIVI_COST_20261011.json first. Actual CAL012 readonly068c PASS128 independent fits/64 artifacts. Writer009 installed72 PASS, actual069a FAILED before tensor: exact n1_format import cannot find sibling current_contract. Two owned containers stopped retained; independent06a7 Pid0/noExec/noOOM;06a4 physical4–7 idle. Not an algorithm/numeric verdict. Agent prepares source-qualified010 import closure plus process-fresh tests. Do not repeat009.
