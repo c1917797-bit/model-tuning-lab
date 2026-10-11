@@ -1,5 +1,34 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-11 serving-loader/package host checkpoint
+
+numerical_state_loader.py now arms a narrow HYPIC import/registration hook.
+It installs state observers after the original register/apply_patches completes,
+and obtains initialized TP rank only at the first selected hot forward. Each
+worker capture seals only after all four component stages and the exact step
+receipt; owned observer hooks are then removed. Failure leaves no success seal.
+
+state-observer-package adapts the repository template with a byte-bound
+entrypoint, opt-in sitecustomize and common launcher. It verifies support-file
+hashes before loading. Disabled startup does not import HYPIC or the observer.
+Enabled invalid configuration terminates startup (78), avoiding Python's normal
+sitecustomize-error swallowing. This package is DRAFT, not a delivery candidate.
+Manifest image/runtime-version fields refer to prior pinned-image evidence and
+must be checked at admission; its evidence commit currently denotes the
+pre-package base, not the later package checkpoint.
+
+41 host tests passed (088a); static package identity passed (0888), and disabled
+launcher subprocess passed (0889). Tests cover lifecycle order, disable, unload,
+duplicate/late installation refusal, incomplete-capture no-seal, and packaged
+enabled/disabled startup without importing the real runtime. Actual device
+worker activation, rank/PID mapping and live import compatibility remain untested.
+
+Next pin the manifest to this code checkpoint, freeze one known-serial-hot r20
+sample and exact selected layer names/request ID/new raw root, then run the
+bounded integrated diagnostic only after live preflight and independent-auditor
+readiness. Do not expand back into another unchanged c32/full quality wave.
+No NPU task was launched and no frozen plugin bytes or old verdicts changed.
+
 ## 2026-10-11 raw-writer and step-receipt checkpoint (host only)
 
 Added a source-bound post-validation wrapper in numerical_state_observer.py.
