@@ -1,3 +1,10 @@
+## 2026-10-11 15:21 UTC — KIVI raw captured; SKVQ019 dispatched after target106
+
+- KIVI09ca exit0/651.165s, raw RESULT1075257B/746af53c5951d7646032c64cfa4c2c8fd75c565ab08fe33c39abb06dd22c5f8f; actual32768+2 response and4 rank bundles, native final observed. Original terminal preserved MAIN09CA_KIVI_FIA_FIRST003_ORIGINAL_20261011.json. Independent123/raw64/whole still pending: not numerical, performance or task PASS.
+- Exact own735f68... stopped-retained/Pid0/noExec/noOOM independently09d4; physical4-7 idle. Observed gap through15:21:06 is deployment/admission, not external occupation. No zero-idle claim.
+- SKVQ019 source110017B/d2cc2dc1b36ca162d589987e857f9839f013497a91fcaa32eaf62dfee49f837b deployed exact26. Target106/106 no skips09db/83.204s. Fresh4-7 idle/MemAvailable116142436kB; current09df running host prelude. Poll exact handle, no duplicate; actual NPU work not yet proven.018 failure remains unchanged.
+- Parallel: KIVI independent small CPU adapter, long002 local117, paired002; SKVQ matched019. No admitted device backup. Cutoff1791788425 unchanged. See KIVI_FIRST003_CAPTURE_SKVQ019_DISPATCH_20261011.json and queue. Older headings historical.
+
 ## 2026-10-11 15:01 UTC — KIVI first003 active after target205 software PASS
 
 - Exact09ca running host prelude, not yet NPU proof; source124634B/41086024593e407467e10d310c92de23bec1173f6c017c0693f361b603e91cb3. All56 installed/223 dependencies checked09c4. Same660 Devices[] actual205 PASS09c6/140.163s; exact CPU stopped-retained/noOOM/Pid0/noExec09c9. Fresh4-7 idle before dispatch. Poll09ca, no duplicate.

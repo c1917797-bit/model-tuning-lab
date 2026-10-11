@@ -1,7 +1,7 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11 15:01 UTC",
-  "latest_stage_decision": "KIVI_FIA_FIRST003_DISPATCH_20261011.json",
+  "updated_at_utc": "2026-10-11T15:21:30Z",
+  "latest_stage_decision": "KIVI first003 raw capture completed and released; SKVQ019 target106 passed and09df dispatched.",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -12,74 +12,49 @@
     3
   ],
   "current": {
-    "paper": "KIVI",
-    "operation": "exec-00000000000009ca",
+    "paper": "SKVQ",
+    "operation": "exec-00000000000009df",
     "state": "RUNNING_HOST_PRELUDE",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-model-firstdecode-v1-003/SOURCE_MANIFEST.json",
-      "bytes": 124634,
-      "sha256": "41086024593e407467e10d310c92de23bec1173f6c017c0693f361b603e91cb3"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-019/SOURCE_MANIFEST.json",
+      "bytes": 110017,
+      "sha256": "d2cc2dc1b36ca162d589987e857f9839f013497a91fcaa32eaf62dfee49f837b"
     },
-    "independent_source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-model-firstdecode-independent-v1-003/SOURCE_MANIFEST.json",
-      "bytes": 3624,
-      "sha256": "6bf20370d01467aff26beaa3d713d9b39fc16ab83232c9082edb268d58a2177a"
-    },
-    "software_operation": "exec-00000000000009c6",
-    "software_tests": 205,
+    "software_operation": "exec-00000000000009db",
+    "software_tests": 106,
+    "software_skipped": 0,
     "software_ref": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-FIA003-software-main-20261011-001/cpu-preflight/SOFTWARE.json",
-      "bytes": 276764,
-      "sha256": "bfaa940ab8ce092f2376bcf42da093b9fb0f52998c45f285b8b079ce2595de5e"
-    },
-    "software_stage_ref": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-FIA003-software-main-20261011-001/RESULT.json",
-      "bytes": 1489,
-      "sha256": "5bb66cd3ee51b1b32edbee71b3453dcb378949944630a956a28a592b4fd3ddea"
-    },
-    "software_release": "exec-00000000000009c9",
-    "component_recovery": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-fia-recovery-003-component-main-001/RESULT.json",
-      "bytes": 5561,
-      "sha256": "ebe49c4c8bef6ecc7f06507cd3e069f73380d304141d05e2465f53bdc32047dd"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-software-019-main-20261011-001.json",
+      "bytes": 697,
+      "sha256": "ffd49fa33aa6ee22eeed40271ab7244ba9f5b1b08dead7005487f4e905b65747"
     },
     "argv": [
+      "/usr/bin/env",
+      "MAIN_SKVQ_MODEL_READER_HOST_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--cpu=9000:9000",
+      "--",
       "/usr/bin/python3",
-      "-I",
       "-B",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-model-firstdecode-v1-003/host_run.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-019/model_host.py",
       "--execute",
-      "--source",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-model-firstdecode-v1-003/SOURCE_MANIFEST.json",
-      "--source-sha256",
-      "41086024593e407467e10d310c92de23bec1173f6c017c0693f361b603e91cb3",
-      "--component",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-fia-recovery-003-component-main-001/RESULT.json",
-      "--component-sha256",
-      "ebe49c4c8bef6ecc7f06507cd3e069f73380d304141d05e2465f53bdc32047dd",
-      "--model-manifest",
-      "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
-      "--model-manifest-sha256",
-      "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
-      "--software",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-FIA003-software-main-20261011-001/cpu-preflight/SOFTWARE.json",
-      "--software-sha256",
-      "bfaa940ab8ce092f2376bcf42da093b9fb0f52998c45f285b8b079ce2595de5e",
-      "--software-stage",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-FIA003-software-main-20261011-001/RESULT.json",
-      "--software-stage-sha256",
-      "5bb66cd3ee51b1b32edbee71b3453dcb378949944630a956a28a592b4fd3ddea",
+      "--source-manifest-sha256",
+      "d2cc2dc1b36ca162d589987e857f9839f013497a91fcaa32eaf62dfee49f837b",
+      "--reader-whole-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-SKVQ-CURRENT-HANDOFF-20261011-001/READER013_WHOLE_REF.json",
       "--output",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-FIA003-main-20261011-001",
-      "--port",
-      "8250"
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-019-main-20261011-001"
     ],
-    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-FIA003-main-20261011-001",
-    "device_stage_running": false,
+    "physical_devices": [
+      4,
+      5,
+      6,
+      7
+    ],
     "NPU_occupancy_not_yet_verified": true,
     "model_ready": false,
     "performance_ready": false,
-    "next": "Poll09ca exact only. Actual CPU preflight -> owned all4 N1 -> TP4 32768+2 firstdecode -> exact release -> independent full64. No component or software promotion."
+    "next": "Poll09df exact; source-bound CPU->N1->model->own release->whole. Do not duplicate. KIVI independent123/raw64 awaits minimal CPU adapter."
   },
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
@@ -109,20 +84,31 @@
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
   "no_new_model_performance_or_accuracy_pass": true,
   "previous": {
-    "paper": "SKVQ",
-    "operation": "exec-0000000000000933",
-    "state": "ALL64_Q2Q4_COMPONENT_WHOLE_PASS",
-    "whole": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-013-main-20261011-001/READER_WHOLE.json",
-      "bytes": 2553,
-      "sha256": "14dc0ce12bb25e267de9fbd83f490a2af955e9b04e656029cb3f92df24c00ee2"
+    "operation": "exec-00000000000009ca",
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-model-firstdecode-FIA003-main-20261011-001/RESULT.json",
+      "bytes": 1075257,
+      "sha256": "746af53c5951d7646032c64cfa4c2c8fd75c565ab08fe33c39abb06dd22c5f8f"
     },
-    "actual_cases": 128,
-    "kernel_calls": 384,
+    "exit": 0,
+    "elapsed_seconds": 651.165,
+    "status": "RAW_CAPTURED_PENDING_INDEPENDENT_WHOLE_CONSUMPTION",
+    "original": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN09CA_KIVI_FIA_FIRST003_ORIGINAL_20261011.json",
+    "original_sha256": "f954f163ed3301e11ca4d395f0a60e1bce587ee06e49923cd918216435373ce0",
+    "own_cid": "735f68b6d0346df535c7e65a3b8586db3fd94c0cc4295172825d14a504db3e1f",
+    "release_operation": "exec-00000000000009d4",
+    "stopped_retained": true,
+    "pid": 0,
+    "execs": [],
+    "oom": false,
+    "client_prompt_tokens": 32768,
+    "client_completion_tokens": 2,
+    "rank_bundles": 4,
     "model_ready": false,
-    "performance_ready": false
+    "performance_ready": false,
+    "independent_whole_pending": true
   },
-  "idle_cause": "09ca host prelude after actual205 PASS; no NPU occupancy proof or ready backup.",
+  "idle_cause": "Observed release15:10:38 through15:21:06 fresh snapshot idle: MAIN deployment/admission gap, not external use.09df dispatch does not prove compute.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -1069,9 +1055,11 @@
     "ready_device_successor_count": 0
   },
   "current_off_device": {
-    "kivi_hotpath_prepare": "FIA paired successor;003 source delivered",
-    "skvq_numeric_path_review": "actual FIA model and long-boundary independent capture/consumer;003 explicit binding pending",
-    "skvq_writer_next": "model015 targeted controller fix"
+    "paper": "KIVI",
+    "next": "source-reviewed exact ind003123 software adapter then independent original64 raw and whole",
+    "state": "SOURCE_DELIVERED_PENDING_MAIN_DEPLOY_AND_SAME_IMAGE",
+    "long002": "local117 pass, not target/NPU",
+    "paired002": "local delta tests pending; actual first/long missing"
   },
   "current_successor_rule": "MAIN09ca owns serial controller lane. No duplicate or peer CPU/NPU. Terminal+release precedes next stage.",
   "scheduling_audit": {
