@@ -1,7 +1,7 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11 11:02:16 UTC",
-  "latest_stage_decision": "KIVI_D8_PAIR_REGRESSION_SKVQ012_COMPILER_FIA_ACTIVE_20261011.json",
+  "updated_at_utc": "2026-10-11 11:59:00 UTC",
+  "latest_stage_decision": "SKVQ128_PASS_CONSUMER_LOG_FAILURE_FIA003_20261011.json",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -12,83 +12,81 @@
     3
   ],
   "current": {
-    "paper": "SKVQ",
-    "operation": "exec-00000000000008df",
-    "state": "RUNNING_SAME_IMAGE_PREFLIGHT_NATIVE_PENDING",
+    "paper": "KIVI",
+    "operation": "exec-0000000000000916",
+    "state": "TERMINAL_DIAGNOSTIC_FORMAT0_CONTIGUOUS_NO_FIA_CALL",
+    "exit": 1,
+    "cleanup_verified_operation": "exec-000000000000091a",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-013/SOURCE_MANIFEST.json",
-      "bytes": 97215,
-      "sha256": "0fea70f3793328ce07772c5f51e291a24cc1d8434aee81e9d02be6546e9de113"
+      "bytes": 2504,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-capability-single4-owner-v1-003/SOURCE_MANIFEST.json",
+      "sha256": "ae04a6caadd63640eebfeba36799e1629da89953e8111cfd5f9d7a2e438edec0"
     },
+    "only_physical": 4,
     "software": {
-      "operation": "exec-00000000000008de",
-      "tests": 119,
-      "exit": 0,
-      "seconds": 20.415
+      "operation": "exec-0000000000000913",
+      "tests": 14,
+      "exit": 0
     },
     "argv": [
-      "/usr/bin/env",
-      "MAIN_SKVQ_READER_HOST_ENABLE=1",
-      "/usr/bin/prlimit",
-      "--cpu=3600:3600",
-      "--",
       "/usr/bin/python3",
       "-B",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-013/reader_host.py",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-capability-single4-owner-v1-003/host_once.py",
       "--execute",
-      "--source-manifest-sha256",
-      "0fea70f3793328ce07772c5f51e291a24cc1d8434aee81e9d02be6546e9de113",
-      "--writer-whole-ref-json",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN0757_WRITER011_WHOLE_REF.json",
+      "--source",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-capability-single4-owner-v1-003/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "ae04a6caadd63640eebfeba36799e1629da89953e8111cfd5f9d7a2e438edec0",
+      "--software",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-software-main-FIA-OWNER003-001/RESULT.json",
+      "--software-sha256",
+      "b4a53b413fa967e3a3e93e212bd6b9e00b81e7266b65a1600df2abe0dbafe660",
+      "--producer-software",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN087C_KIVI_D8_FULL20_SOFTWARE_ORIGINAL_20261011.json",
+      "--producer-software-sha256",
+      "419cc87ac44b7ac94260b761cf2452793f6057277f742db4b9b91895fc2c18d2",
       "--output",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-013-main-20261011-001"
-    ],
-    "only_physical": 4
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-owned-main-FIA-CAP003-001"
+    ]
   },
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
   "preparation": [
     {
-      "paper": "KIVI",
-      "owner": "kivi_hotpath_prepare",
-      "state": "NATIVE_ANTIQUANT_MECHANISM_COMPATIBILITY_PREPARING",
-      "ready": false,
-      "next_gate": "Exact installed quant axis/offset/storage and double BF16 rounding; do not guess modes. FIA float probe not quantized/model qualification."
-    },
-    {
       "paper": "SKVQ",
       "owner": "skvq_numeric_path_review",
-      "state": "013_INTEGER_OFFSET_RESHAPE_REPAIR_LOCAL111_INSTALL_PACKAGE_PREPARING",
+      "state": "STRICT_STDOUT_READONLY_CONSUMER_REPAIR",
       "ready": false,
-      "next_gate": "Deploy separate013, actual target software then fresh native compilation/numerical/whole; preserve012 failure."
+      "next_gate": "Actual0908 confirms native INFO+Ref JSON parsing bug, not math failure. Repair private consumer with exact source and full old gates."
     },
     {
       "paper": "SKVQ",
       "owner": "skvq_writer_next",
-      "state": "FINAL_TASK_VARIABLE_LENGTH_BATCH_PROVIDER_GAPS_PREPARING",
+      "state": "DOWNSTREAM_CONSUMER_COMPATIBILITY_PREPARING",
       "ready": false,
-      "next_gate": "Actual task domain40960/activebatch1..16/normal EOS not supported by reader012 capacity33792/batch1,16; requires new numerical qualification, not CLI-only change."
+      "next_gate": "Propagate explicit reader compat to model/matched/after-release independent entry; preserve original math and budgets."
+    },
+    {
+      "paper": "KIVI",
+      "owner": "kivi_hotpath_prepare",
+      "state": "NATIVE_FIA_BASE_FORMAT_SOURCE_REVIEW",
+      "ready": false,
+      "next_gate": "Inspect actual layout evidence then choose specific adaptation; no enum or ND cast guess."
     }
   ],
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
   "no_new_model_performance_or_accuracy_pass": true,
   "previous": {
     "paper": "SKVQ",
-    "owner": "MAIN",
-    "operation": "exec-000000000000070e",
-    "state": "TERMINAL_WRITER011_FULL_WHOLE_PASS_NO_MODEL_ACCEPTANCE",
-    "whole_operation": "exec-0000000000000757",
-    "whole": {
-      "bytes": 2529,
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-actual-writer-bridge-011-main-20261011-001/WRITER_WHOLE.json",
-      "sha256": "73cf2ee4d91c81f6cc1ad6acefcf645f69fb9be401105536b89fcd0c4cbc95fb"
-    },
-    "release_verified_operation": "exec-0000000000000752",
-    "cases": 128,
-    "axis_writer_calls": 256,
-    "only_physical_card": 4
+    "operation": "exec-00000000000008df",
+    "state": "NATIVE128_PASS_FINAL_CONSUMER_FAILED",
+    "numeric_cases": 128,
+    "kernel_calls": 384,
+    "whole_diagnostic_operation": "exec-0000000000000908",
+    "whole_exit": 1,
+    "first_fault": "reader_whole.py161 parses native INFO-prefixed stdout as pure JSON; all four child exits0"
   },
-  "idle_cause": "After08c7 failed at first native QK compilation, exact own release08ce verified.08d2 observed physical4-7 idle.08d8 now active in CPU preflight at08d9; no continuous compute or zero-idle claim.",
+  "idle_cause": "FIA0030916 terminal: six contiguous BF16 base-format0 inputs rejected by own ND2-only predicate before FIA. Exact owned release091a; no ready device successor until source-supported format fix or SKVQ strict stdout consumer/downstream repair passes. No zero-idle claim.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",

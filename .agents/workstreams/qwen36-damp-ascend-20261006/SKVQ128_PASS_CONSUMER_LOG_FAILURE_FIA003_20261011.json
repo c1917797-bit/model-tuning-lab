@@ -1,0 +1,93 @@
+{
+  "schema": "paper-portfolio.stage-decision/v1",
+  "observed_at_utc": "2026-10-11T11:57:42Z",
+  "goal_achieved": false,
+  "cutoff_epoch": 1791788425,
+  "skvq": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-013/SOURCE_MANIFEST.json",
+      "bytes": 97215,
+      "sha256": "0fea70f3793328ce07772c5f51e291a24cc1d8434aee81e9d02be6546e9de113"
+    },
+    "host_operation": "exec-00000000000008df",
+    "host_exit": 0,
+    "actual_cases": 128,
+    "actual_kernel_calls": 384,
+    "numerical_scope": "all64 rank/layer, Q2/Q4, actual4096 last causal query; independent output/scores/probabilities and all6 heads <=.005 RMS",
+    "independent_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-013-main-20261011-001/candidate/work/numeric/INDEPENDENT.json",
+      "bytes": 158785,
+      "sha256": "dc3bbf944afc83b9b4bdddd15ad7ef046f97689108efaf9806b6d3b92cc3ef57"
+    },
+    "whole_08f5": "operation registry missing; no output; original terminal unknown",
+    "diagnostic": {
+      "operation": "exec-0000000000000908",
+      "exit": 1,
+      "seconds": 134.21903316990938,
+      "timed_out": false,
+      "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/reader013-whole-diagnostic-20261011-001",
+      "first_fault": "reader_whole.py:161 JSONDecodeError; canary/numeric stdout have five native vLLM INFO records then one valid Ref JSON; CPU/independent stdout pure JSON",
+      "classification": "RESULT_CONSUMER_ADAPTATION",
+      "next_action": "Source-pinned strict log+Ref parser in explicit private read-only compatibility adapter; preserve all old evidence and full numerical/ownership replay; propagate to all downstream reconsumers. No NPU rerun."
+    },
+    "model011_software": {
+      "operation": "exec-0000000000000903",
+      "tests": 77,
+      "exit": 0,
+      "seconds": 59.791963430005126
+    },
+    "matched008_software": {
+      "operation": "exec-0000000000000909",
+      "tests": 131,
+      "exit": 0,
+      "seconds": 78.05549695994705
+    },
+    "model_run": false,
+    "performance_ready": false,
+    "task_ready": false
+  },
+  "kivi": {
+    "fia002": {
+      "operation": "exec-00000000000008fe",
+      "exit": 1,
+      "canary_passed": true,
+      "native_calls": 0,
+      "reason": "nonpaged ND only, no NZ conversion",
+      "classification": "LAYOUT_PREDICATE_FAILURE_UNDERDETERMINED",
+      "IntEnum_ND_equals_2": true,
+      "no_enum_fix_justified": true,
+      "cleanup_verified_operation": "exec-000000000000090e",
+      "cpu_cid": "f4959fdc0568e3a15e15f3a30deaf44f9942d6679b35bb48f1d655892773e88a",
+      "npu_cid": "9be94f61e7834425a6b0098059d2024e4ac1a12cdb95c42912322e198581524f"
+    },
+    "fia003": {
+      "source": {
+        "bytes": 2504,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-capability-single4-owner-v1-003/SOURCE_MANIFEST.json",
+        "sha256": "ae04a6caadd63640eebfeba36799e1629da89953e8111cfd5f9d7a2e438edec0"
+      },
+      "only_delta": "Record all six actual input layouts before unchanged predicate; no math, format cast, native call or threshold change.",
+      "software_operation": "exec-0000000000000913",
+      "tests": 14,
+      "software_pass": true,
+      "operation": "exec-0000000000000916",
+      "state": "FAILED_BEFORE_NATIVE_CALL",
+      "exit": 1,
+      "seconds": 178.133,
+      "layout_diagnosis": "All six BF16 inputs are contiguous with expected logical strides and actual Format.NCHW=0. Own ND2-only predicate refuses before FIA; not enum mismatch or noncontiguity.",
+      "native_calls": 0,
+      "cleanup_verified_operation": "exec-000000000000091a",
+      "raw_sha256": "ae6d9cc6cc18b4a9caffba19fce7d3157853d3690985d77b080b726d582903cd",
+      "only_physical_card": 4
+    }
+  },
+  "lessons": [
+    "Framework logging to stdout must be tested against the real result consumer; helper CLI mocks do not prove native stdout framing.",
+    "Recover immutable successful device artifacts using a narrowly corrected independent consumer; never fabricate the missing original terminal or rerun expensive NPU stages solely for parser failure.",
+    "Save bounded consumer stdout/stderr before remote operation retention expires.",
+    "Many prepared source packages are not an executable successor queue. Report actual idle gaps and data-dependent missing gates.",
+    "Exact target byte readback remains necessary: patch success did not preserve eight final-LF source bytes; only byte-verified EOF repair restored frozen hashes."
+  ],
+  "no_new_non_HYPIC_acceptance": true,
+  "no_new_task_scores": true
+}

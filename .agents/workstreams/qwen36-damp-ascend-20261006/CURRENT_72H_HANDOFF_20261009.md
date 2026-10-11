@@ -1,3 +1,11 @@
+## 2026-10-11 12:01 UTC — SKVQ128 numeric PASS; strict stdout repair; FIA003 layout evidence
+
+- Read SKVQ128_PASS_CONSUMER_LOG_FAILURE_FIA003_20261011.json and current serial queue. SKVQ01308df exit0, all128 independent cases/384 NPU calls passed at4096; not model/performance/task acceptance.
+- Readonly0908 exit1/134.219s now proves final consumer JSONDecodeError at reader_whole.py161: two native stdout streams contain five vLLM INFO lines plus one strict result Ref. Preserve old source and actual logs; repair narrow private parser and all downstream reconsumers. No numerical rerun, fabricated08f5 terminal or paper no-go.
+- Model011 actual77 PASS0903; matched008 actual131 PASS0909. Source/software does not bypass missing reader whole. Two local agents prepare consumer and downstream compatibility; another reviews native FIA formats.
+- MAIN0916 FIA003 completed exit1/178.133s after actual14 PASS0913. All six BF16 inputs are contiguous, expected logical strides, actual Format.NCHW=0; own ND2-only predicate rejected before any FIA call. This is not enum mismatch, noncontiguity or proof of unsupported FIA. Exact own CPU/NPU independently stopped/Pid0/noExec/noOOM091a. Next: source-supported base-format adaptation, never unchanged003 retry.
+- Real4-7 idle gaps remain; no zero-idle claim. Deadline1791788425, serial device stage, protected0-3/external and spent HugeTLB cap unchanged. No new accepted non-HYPIC technique or task score. Older RUNNING headers below are historical.
+
 ## 2026-10-11 — SKVQ013 live; KIVI D8 paired regression; FIA001 CPU mount defect
 
 - Read KIVI_D8_PAIR_REGRESSION_SKVQ012_COMPILER_FIA_ACTIVE_20261011.json and SERIAL_DEVICE_STAGE_QUEUE_20261010.json first. Current exact handle exec-00000000000008df: SKVQ013 actual source119 PASS20.415s, same-image/native matrix underway; physical4 only. Poll only this handle, never duplicate.
