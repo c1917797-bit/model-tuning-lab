@@ -1,0 +1,58 @@
+{
+  "schema": "qwen36.paper-stage-checkpoint/v1",
+  "recorded_utc": "2026-10-11 08:34:37 UTC",
+  "classification": "KIVI_HARNESS_BUDGET_FAILURE_SKVQ_READER_ADMITTED",
+  "fixed_cutoff_epoch": 1791788425,
+  "protected_physical": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "device_stage_concurrency": 1,
+  "kivi": {
+    "operation": "exec-000000000000080f",
+    "exit_code": 1,
+    "duration_ms": 382557,
+    "source_sha256": "c1a86dfbd23d9d8e99a947631e9a1d5a900af05f455aa9bb3399a7e902ca5e92",
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-owned-main-D8-HOST003-001",
+    "original": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN080F_KIVI_HOST003_FAILED_ORIGINAL_20261011.json",
+    "first_fault": "evidence256MiB/cache aggregate512MiB",
+    "first_reject_evidence_bytes": 378208829,
+    "first_reject_cache_bytes": 1539203,
+    "post_release_directory_logical_bytes": 445441890,
+    "post_release_unique_inode_bytes": 223493978,
+    "pending_alias_bytes": 221947912,
+    "actual_cpu_pass": true,
+    "actual_npu4_canary_pass": true,
+    "numeric_result_published_but_not_consumed": true,
+    "algorithm_or_performance_verdict": "UNPROVEN; controller failure is not algorithm no-go",
+    "release_verified_operation": "exec-000000000000082a",
+    "own_containers_stopped_retained": true,
+    "next": "Inspect published actual numeric evidence and independent recovery; fix successful-publication pending hardlink leak only if source-supported. Do not relax budgets or erase original failure."
+  },
+  "skvq": {
+    "operation": "exec-000000000000082f",
+    "state": "RUNNING_NO_TERMINAL_YET",
+    "source_sha256": "38b07d9e00a2d7ada79bf515d4f563f5f428a7a2af31b4d1d5b6c48909a0ba37",
+    "software_original": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN0812_READER010_SOFTWARE_ORIGINAL_20261011.json",
+    "software_tests": 95,
+    "software_exit": 0,
+    "device_admission": {
+      "smi": "0829",
+      "memory": "082b",
+      "disk": "082c",
+      "source_output_inventory": "082e",
+      "physical": 4,
+      "logical": 0
+    },
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-010-main-20261011-001",
+    "scope": "128 Q2/Q4 compiled-reader cases; source-bound independent numerical result. No model/performance/task acceptance.",
+    "successor": "Actual reader whole -> model009 target regression/admission -> matched006 after timeout cause is repaired."
+  },
+  "acceptance": {
+    "new_non_hypic_e2e_success": false,
+    "new_task_accuracy": false,
+    "zero_idle_claim": false
+  }
+}

@@ -1,3 +1,19 @@
+## 2026-10-11 08:49 UTC — KIVI D8 raw numerical PASS; SKVQ reader010 CPU AST failure
+
+- Latest decision: `KIVI_D8_RAW_PASS_READER010_AST_FAILURE_20261011.json`. No live device job or ready successor at this checkpoint; two targeted off-device preparations run.
+- Actual original independent consumer0843 exit0/0.957s: 14 full outputs bitwise,8 entire pools and independent finish at real32769 pass. Original080f host remains failed; child exit0 not established.
+- Diagnostic0844 median plain72.05512->25.92020ms; AV59.72809->13.71534ms. Not E2E, not pure-device timing; next full boundary/dtype matrix and model plugin.
+- Reader010082f exit1 in no-device predecessor replay, no NPU. Actual3.9 receipt hashes match cross-version emptytype_params diagnosis; preserve frozen writer011 and all four source/AST/literal gates. Repair isolated compatibility then prove actual image replay.
+- Keep cutoff1791788425 and physical4-7/main serial policy. No new non-HYPIC joint acceptance or task score.
+
+## 2026-10-11 08:34 UTC — reader010 admitted; KIVI080f evidence-budget failure released
+
+- Read `READER010_ADMITTED_KIVI080F_BUDGET_FAILURE_20261011.json` and the live serial queue first.
+- Poll existing `exec-000000000000082f` only: SKVQ reader010 same-image prerequisite then physical4 numeric gate. Actual95 software PASS0812; no reader/model/E2E/task PASS yet.
+- KIVI080f exit1: evidence cap, not a numerical/paper verdict. Exact owned containers stopped retained independently082a. Published numeric result still needs independent assessment.
+- Diagnosis0832/0833: 445441890 logical bytes versus223493978 unique-inode bytes; successful publications retained pending hardlink aliases. No original evidence deleted or cap relaxed.
+- Model009 local77 PASS; matched006 final130 completed before110s timeout is not full131 PASS. Preserve old failures, actual writer011/calibration, and fixed cutoff1791788425. No new non-HYPIC acceptance.
+
 ## 2026-10-11 07:28 UTC — writer011 whole PASS; reader008 CPU mount failure, no NPU run
 
 - Read `SKVQ_WRITER011_PASS_READER008_MOUNT_FAILURE_20261011.json` and the current queue. Writer011 whole0757 independently PASS:128 Q2/Q4 cases,256 writer-axis calls; immutable result reused. This is not reader/model/E2E/task acceptance.

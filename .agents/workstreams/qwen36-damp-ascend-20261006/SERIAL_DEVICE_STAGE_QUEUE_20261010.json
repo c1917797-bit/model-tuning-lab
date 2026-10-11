@@ -1,6 +1,6 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11T07:28:00Z",
+  "updated_at_utc": "2026-10-11 08:43:34 UTC",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -10,52 +10,28 @@
     2,
     3
   ],
-  "current": {
-    "paper": "SKVQ",
-    "owner": "MAIN",
-    "operation": "exec-00000000000007a2",
-    "state": "TERMINAL_CPU_MOUNT_ADAPTATION_FAILED_RELEASED",
-    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-008-main-20261011-001",
-    "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-008/SOURCE_MANIFEST.json",
-      "bytes": 91079,
-      "sha256": "7497b71753e8b3e4f75d2db1ca774014f67a537ac2da4ca06f9f010a9ec8d7b0"
-    },
-    "software_pass_operation": "exec-000000000000079f",
-    "software_tests": 83,
-    "fresh_admission_operation": "exec-000000000000079b",
-    "scope": "Replay writer011 whole; same-image CPU parity; physical4->logical0 canary and128 compiled-reader cases; exact owned release before independent CPU reference. Not model/E2E/task acceptance.",
-    "latest_actual": "07a2 terminal exit1/duration160254ms; reader CPU writer-whole replay cannot read existing host calibration_whole_ref_file omitted from guest mounts. Actual NPU observations empty. Exact owned CPU release verified07b9.",
-    "poll_only_existing_operation": false,
-    "classification": "ADAPTATION_IMPLEMENTATION",
-    "NPU_started": false,
-    "result": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-008-main-20261011-001/HOST_RESULT.json",
-      "bytes": 40334,
-      "sha256": "fe8d6fc845d639e579113209fdacf2d3c84c5adbd4cfe4ee360afca789cd4266"
-    },
-    "release_operation": "exec-00000000000007b9"
-  },
+  "current": null,
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
   "preparation": [
     {
       "paper": "SKVQ",
-      "stage": "Reader009 repair of actual omitted writer descriptor; model007 ready source must rebind valid successor. Existing writer011 whole remains valid.",
-      "ready": false,
-      "state": "PREPARING_ADAPTATION_REPAIR"
+      "state": "READER010_FAILED_CPU_AST_COMPATIBILITY_READER011_PREPARING",
+      "stage": "009 actual07f5 failed94/95 exact-CUT test.010 changes only deterministic test fixture/root identity; target0811 copied30 files/verified275 dependencies,7 source updates and15 metadata patches applied. Target95 pending, local87 PASS not NPU.",
+      "ready": false
     },
     {
       "paper": "SKVQ",
-      "stage": "matched006 single direct E2E successor from existing matched005 shell; repair long-decode scheduler/finish, source handoff and smoke. Current model007 only2 decode, not a1024 performance endpoint.",
-      "ready": false,
-      "state": "PREPARING_OFF_DEVICE"
+      "state": "MODEL009_LOCAL77_PASS_PREDECESSOR_FAILED_NOT_ADMITTED",
+      "stage": "Model009 local77 PASS. Final010-bound matched006131 hit110s cutoff;130 prior passes not aggregate PASS. Preserve timeout; repeated identical retry interrupted. Target installation/passing entry still missing.",
+      "ready": false
     },
     {
       "paper": "KIVI",
-      "stage": "actual32769 AV D32->D8 diagnostic: producer001 partial deployment only; source/host software pending. host-only002 frozen clock fix includes prelude in1800; exact real producer12 original required.",
-      "ready": false,
-      "state": "SOURCE_READY_NOT_NPU_READY"
+      "owner": "kivi_hotpath_prepare",
+      "state": "D8_NUMERIC_CHILD_PASS_FULL_MATRIX_AND_MODEL_PREPARING",
+      "device_ready": false,
+      "scope": "Evidence-backed AV D8 scheduling; 2/4bit dtype/seal/fork/reuse matrix next. Not E2E."
     }
   ],
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
@@ -76,7 +52,7 @@
     "axis_writer_calls": 256,
     "only_physical_card": 4
   },
-  "idle_cause": "Reader008 CPU prerequisite failed before NPU. Correct transitive evidence descriptor mount closure off-device; KIVI D8 backup still lacks complete target installation/software. No executable ready device stage and no zero-idle claim.",
+  "idle_cause": "CURRENT singlephysical4 diagnostic;5-7 not busy under serial device-stage policy. No ready device successor; reader010 target95 still pending. No zero-idle claim.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -972,15 +948,15 @@
     "actual_cross_paper_batch": "UNRUN; only SKVQ010 release profile currently reviewed",
     "zero_idle_claim": false
   },
-  "current_off_device": "Reader009 minimal source-bound evidence-mount repair; matched006 E2E/lifecycle handoff preparation; MAIN completes KIVI D8 backup deployment and actual source checks.",
-  "current_successor_rule": "Do not rerun008. Retain valid writer011 full whole0757; fix missing mount in fresh source009, actual preflight then NPU gate. Admit ready KIVI D8 only after actual prerequisites; no fabricated readiness.",
+  "current_off_device": "KIVI0843 original independent consumer PASS14outputs/8pools; diagnostic0844 plain median72.05512->25.92020ms. FullD8 matrix/model preparation. SKVQ082f CPU replay failure exact3.9/3.12 AST schema drift; narrow source-bound adapter preparing.",
+  "current_successor_rule": "Next actual-ready ticket wins MAIN serial admission: SKVQ repaired actual same-image predecessor replay then reader numeric; or KIVI fullD8 matrix after software and publication fix. No unchanged retry or full-host PASS from0843 recovery.",
   "scheduling_audit": {
-    "current": "No running MAIN device stage;07a2 failed before NPU and own CPU released.",
-    "next": "Reader009 repair/preflight; model007 and matched006 need successor binding before actual admission.",
-    "backup": "KIVI D8 producer001 +host002 actual software and complete deployment still missing. Not counted ready.",
+    "current": "082f terminal exit1/290287ms; only CPU predecessor replay, actual_npu_observations0",
+    "next": "Repair proven AST compatibility; recover KIVI published numeric with independent original consumer",
+    "backup": "No ready device ticket",
     "zero_idle_claim": false
   },
-  "current_preparation_checkpoint": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ_WRITER011_PASS_READER008_MOUNT_FAILURE_20261011.json",
+  "current_preparation_checkpoint": ".agents/workstreams/qwen36-damp-ascend-20261006/KIVI_D8_RAW_PASS_READER010_AST_FAILURE_20261011.json",
   "maintainer_rule_fix": {
     "commit": "16eaf1806f2ea3bb810ea8f12027f418bf780047",
     "remote_verified_operation": "exec-00000000000006f9",
