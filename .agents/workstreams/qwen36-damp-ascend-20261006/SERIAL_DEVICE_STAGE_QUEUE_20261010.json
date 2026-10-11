@@ -968,6 +968,54 @@
     "actual_cross_paper_batch": "UNRUN; only SKVQ010 release profile currently reviewed",
     "zero_idle_claim": false
   },
+  "parallel_cpu_readiness": {
+    "observed_at_utc": "2026-10-11 10:05:01 UTC",
+    "operation": "exec-00000000000008b0",
+    "effective_cpus": [
+      0,
+      1,
+      2,
+      3,
+      144,
+      145,
+      166
+    ],
+    "model_guest_cpus": [
+      1,
+      2,
+      3,
+      144
+    ],
+    "host_cpu": 0,
+    "reserve_cpus": [
+      145,
+      166
+    ],
+    "independent_free_cpus": [],
+    "decision": "Do not run SKVQ target113 on CPU2 while actual model08a7 is active; do not consume model reserve or change its timing. Exact installed source ready, software gate queued after release.",
+    "local_parallel": "kivi_hotpath_prepare: bounded local official-source audit of reusable native quantized KV attention; no remote/NPU/Git."
+  },
+  "parallel_preparers_20261011": {
+    "observed_at_utc": "2026-10-11T10:17:21Z",
+    "device_owner": "MAIN:exec-00000000000008a7",
+    "agents": [
+      {
+        "name": "skvq_writer_next",
+        "state": "DISPATCHED",
+        "scope": "local reader012 WHOLE-to-model/pair adapter; no fabricated predecessor PASS",
+        "budget_minutes": 30
+      },
+      {
+        "name": "kivi_hotpath_prepare",
+        "state": "DISPATCHED",
+        "scope": "local native FIA capability probe with independent reference; unknown modes pending",
+        "budget_minutes": 30
+      }
+    ],
+    "remote_parallel_cpu_admitted": false,
+    "ready_device_successor_count": 0,
+    "evidence_file": ".agents/workstreams/qwen36-damp-ascend-20261006/NATIVE_FIA_INTERFACE_EVIDENCE_20261011.json"
+  },
   "current_off_device": "SKVQ012 exact deployed308 closure passed08aa; downstream code/test optimization prepared locally pending actual reader WHOLE.",
   "current_successor_rule": "Finish actual08a7 terminal and cleanup, consume model evidence; then execute reader012 target113/native stage if freshly admitted. Do not rerun reader011 unchanged.",
   "scheduling_audit": {

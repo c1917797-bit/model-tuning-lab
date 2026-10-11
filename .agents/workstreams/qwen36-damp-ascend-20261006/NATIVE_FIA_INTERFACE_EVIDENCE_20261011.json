@@ -1,0 +1,54 @@
+{
+  "schema": "native-fia-adaptation-evidence/v1",
+  "observed_at_utc": "2026-10-11T10:17:21Z",
+  "classification": "PREPARATION_ONLY_NOT_NPU_OR_PERFORMANCE_PASS",
+  "current_model_operation": "exec-00000000000008a7",
+  "current_model_unchanged": true,
+  "installed_schema": {
+    "container": "afb173b5ab682ee3f340ba60849e3fa0c7fce89154c9b9aa30aa8754f5ebcb99",
+    "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/csrc/aten/npu_native_functions_by_codegen.yaml",
+    "bytes": 251222,
+    "sha256": "1c83a892cf1850682f027442f05f396a720110c43b120d1ab687be103052234f",
+    "evidence_operation": "exec-00000000000008b3",
+    "facts": [
+      "FIA v1 exposes separate key/value antiquant scale and offset, independent modes, softmax_lse_flag and two Tensor returns.",
+      "FIA v2 exposes separate key/value dequant scale/offset, modes and return_softmax_lse.",
+      "Neither inspected signature explicitly names value_head_dim; this alone does not prove unequal dimensions unsupported."
+    ]
+  },
+  "reference_source": {
+    "repo": "/cache/cch/ops-transformer",
+    "commit": "0684247214bae5abb5cb6dc7d90b34a6ad401cdd",
+    "installed_binary_equivalence": false,
+    "feature_source": "attention/fused_infer_attention_score/op_host/arch22/fused_infer_attention_score_tiling_check_feature.cpp",
+    "feature_sha256": "5b7969a920d9575d6c6f04d6d86168ed5c91b1cb1c78a5c358d00e5354cb6bbf",
+    "consistency_sha256": "c669be1af478ff947e7486b489afd9e20a04efc9524215a53f291bb5d3bbe3b3",
+    "facts": [
+      "Reference LSE consistency code requires FLOAT32 and actual TN1/BNS11 dimensions.",
+      "Reference PAGE_ATTENTION/NZ/NO_ROPE branch limits QK/V to 64 or128; do not reuse this wrapper for proposed256/32 capability test.",
+      "Source ABI, quantization shape legality and installed binary behavior still require verification."
+    ]
+  },
+  "algorithm_binding": {
+    "k_group_tokens": 32,
+    "k_page_tokens": 128,
+    "v_group_channels": 32,
+    "v_head_channels": 256,
+    "warning": "Page/window128 is not K or V quantization group size.",
+    "hypothesis": "Evaluate grouped native FIA outputs and LSE merge, preserving quantization and FP16/BF16 boundary semantics; not a generic unrelated kernel optimization."
+  },
+  "next": [
+    "Local independent probe preparation; unknown quant modes remain pending.",
+    "After current TP4 model releases: SKVQ012 software then native gate according to serial admission.",
+    "Only admit a native FIA diagnostic with exact source, supported parameter provenance, independent oracle and unchanged numerical gate."
+  ],
+  "missing": [
+    "installed binary/source binding",
+    "actual supported quantization shapes/modes",
+    "native unequal-dimension/LSE numeric execution",
+    "model/plugin lifecycle integration",
+    "matched throughput",
+    "task accuracy"
+  ],
+  "no_new_accepted_technique": true
+}
