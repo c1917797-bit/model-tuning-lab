@@ -14,19 +14,24 @@
   "current": {
     "paper": "SKVQ",
     "operation": "exec-00000000000009b8",
-    "state": "RUNNING_PREREQUISITE_REPLAY",
+    "state": "FAILED_OWNERSHIP_OBSERVER_RELEASED",
     "source": {
       "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-018/SOURCE_MANIFEST.json",
       "bytes": 109053,
       "sha256": "36a8b5c40dffb7491207e957af47b87a6344b2b7062213921d5e8b06fa653eb0"
     },
-    "software_operation": "exec-00000000000009b2",
-    "software_tests": 95,
-    "software_skips": 0,
-    "host_pid": 1039250,
+    "exit_code": 1,
+    "duration_ms": 415222,
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-018-main-20261011-001/HOST_RESULT.json",
+      "bytes": 83605,
+      "sha256": "2ac22c784f5538c3a04499dee2ccba6f12190094a3582df43db773724138ee8d"
+    },
+    "first_fault": "Ownership gate rejected prior proven own PID1088907/start65549932 while commandline became empty,cgroups root,stat R/vsize/rss0; not proof of external workload.",
+    "classification": "OWNERSHIP_OBSERVER_TRANSITION_UNRESOLVED",
     "device_stage_running": false,
-    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-018-main-20261011-001",
-    "next": "Poll09b8 only; same-image Devices[] then owned4-7 N1/model and independent CPU. ACK is not NPU occupancy.",
+    "owned_released_operation": "exec-00000000000009c0",
+    "next": "Do not rerun018. Agent prepares019 bounded positive-exit recheck; MAIN deploys KIVI first003 for same-image205 then separately admitted model numeric.",
     "model_ready": false,
     "performance_ready": false
   },
@@ -71,7 +76,7 @@
     "model_ready": false,
     "performance_ready": false
   },
-  "idle_cause": "09b8 live prerequisite replay before device creation. No admitted backup or zero-idle claim.",
+  "idle_cause": "09b8 terminal ownership observer, own released09c0. KIVI first003 source delivery complete but same-image205 pending; no admitted backup.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",

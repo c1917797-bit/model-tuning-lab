@@ -1,3 +1,9 @@
+## 2026-10-11 14:52 UTC — SKVQ018 terminal ownership-observer failure; exact own release verified
+
+- Original09b8 exit1/415.222s, HOST_RESULT83605B/2ac22c784f5538c3a04499dee2ccba6f12190094a3582df43db773724138ee8d. Before model inference, ownership gate rejected PID1088907/start65549932 after prior full own proof; cmdline became empty, cgroups root and stat R with vsize/rss0. This is not proof of external occupancy; exit transition remains unresolved. Original MAIN09B8_SKVQ018_FAILED_ORIGINAL_20261011.json preserved. No blind018 rerun.
+- Own CPU ee6d39b2... and NPU1fce8811... independently stopped-retained/Pid0/noExec/noOOM09c0. Only physical4-7 mapped. Agent prepares019 bounded positive-exit recheck; no foreign process stopped. MAIN switches to KIVI first003 installation/same-image205. Prior RUNNING header below is historical.
+- Long640 missing100 exact refs now fetched: local/remote100 SHA+bytes equal, ordinary realpaths09c1. Agent rebinds first003; not yet source-ready or NPU qualified. No new full-model/performance/task PASS.
+
 ## 2026-10-11 14:44 UTC — SKVQ018 dispatched; KIVI component recovered only
 
 - Active09b8 hostPID1039250, prerequisite replay before same-image Devices[] and owned4-7 TP4; last09b9 no NPU processes. Target09b2 actual95 PASS/0 skip. Source109053B/36a8b5c40dffb7491207e957af47b87a6344b2b7062213921d5e8b06fa653eb0. Poll exact handle; no duplicate.
