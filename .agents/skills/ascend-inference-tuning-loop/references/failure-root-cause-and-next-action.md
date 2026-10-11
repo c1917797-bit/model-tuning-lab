@@ -355,3 +355,26 @@ from original logs/raw bytes. That pass covers controlled eager tensors of actua
 read length at most257; capacity33792 is not a long-context test. The next useful
 step is actual model integration and real-context output validation, not more
 unchanged toy passes or a premature paper/performance success claim.
+
+## Active native callable identity and oracle rounding boundaries
+
+A module file's matching bytes do not prove its active function still originates
+there. A legitimate Ascend worker patch may replace the public function. Qualify
+the exact public source, patch registration and replacement source, then inspect
+the already-active callable after the real native patch and before weights:
+module/origin, globals, code, defaults and closure. Do not import or repatch solely
+to manufacture identity. Reject unknown wrappers; persist the evidence in each
+worker and require the whole consumer to check it. SKVQ020's wrong-origin rejection
+was a reference/integration defect. New021 software123 passed; its real model
+gate remained separate. A file named MTP in the native patch chain is not proof
+that MTP was enabled or authorization to change the algorithm.
+
+An attention oracle must justify its intermediate rounding from the specified
+paper/backend contract. A final A16 output does not imply BF16 casts after QK
+and softmax. Preserve the original failure, use the same captured input to
+separate boundary hypotheses, and freeze a corrected independent reference only
+when source evidence supports it. Keep candidate math, coverage and tolerance
+unchanged and rerun the complete affected gate. KIVI's corrected reference passed
+all64 actual firstdecode frames, not long lifecycle or E2E/task acceptance.
+Neither correcting an oracle nor a diagnostic error reduction grants PASS.
+Exact failed and successful references are retained in the active workstream.

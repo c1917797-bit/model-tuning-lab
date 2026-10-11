@@ -1,7 +1,7 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11T16:10:04Z",
-  "latest_stage_decision": "SKVQ020 exact deployed27, Linux118/0skip actual PASS;0a01 model host dispatched serial4-7. KIVI09fc reproduces failure and isolates QK A16-reference boundary;ind004 actual64 mathematical reference repair preparing.",
+  "updated_at_utc": "2026-10-11T17:12:00Z",
+  "latest_stage_decision": "KIVI raw0a18 completed1130.523s, full64 independent/whole0a23 passed FIRSTDECODE_OWNED_RAW_AND_WHOLE_CONSUMED only; long/GDN/mixed/task/performance pending. SKVQ021 exact346 source and Linux123/0skip passed0a1d, new model0a25 running after raw CPU release; no acceptance.",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -13,28 +13,28 @@
   ],
   "current": {
     "paper": "SKVQ",
-    "state": "MODEL_HOST_RUNNING_NPU_EXECUTION_NOT_YET_PROVEN",
-    "operation": "exec-0000000000000a01",
+    "state": "MODEL021_NATIVE_BINDING_REPAIR_HOST_RUNNING",
+    "operation": "exec-0000000000000a25",
     "reserved_physical_devices": [
       4,
       5,
       6,
       7
     ],
-    "physical_devices": [],
+    "physical_devices_compute_proved": false,
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-020/SOURCE_MANIFEST.json",
-      "bytes": 111200,
-      "sha256": "f72c366207d3a93f08d83cf9ec027bec17d30b14427b04a2dd79fee239845494"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-021/SOURCE_MANIFEST.json",
+      "bytes": 114564,
+      "sha256": "df86506856e7ccce061dd1d295d6b1f1e82cb29502d0f92f5b4eb234bc915294"
     },
     "software_actual": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-software-020-main-20261011-001.json",
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-software-021-main-20261011-001.json",
       "bytes": 697,
-      "sha256": "be90284966d691784433b6a76dd9a2b54501e12dab8d3fb7d2ee82ccc1b533ab"
+      "sha256": "cf2afe38de49d10bb2e1b5a848337da8bdc8b241b8ca307eab238da1e8e7d4c5"
     },
     "model_ready": false,
     "performance_ready": false,
-    "next": "Poll existing0a01, source-bound same-image CPU -> actualN1 -> model all128 -> stop-retain -> independent numerical -> whole. No parallel target CPU admission under CPU_QUEUE."
+    "next": "Poll exact0a25, no duplicate/target CPU job during CPU_QUEUE. After terminal verify own-only release, preserve original and consume actual128-frame whole. Matched021 source frozen but actual predecessor remains null."
   },
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
@@ -42,23 +42,23 @@
     {
       "owner": "skvq_writer_next",
       "paper": "SKVQ",
-      "state": "MATCHED020_SOURCE_FROZEN_RUNTIME_PENDING",
+      "state": "MATCHED021_SOURCE_FROZEN_RUNTIME_PREDECESSOR_PENDING",
       "ready": false,
-      "next_gate": "actual model020 whole -> real smoke/qualification -> observerOFF dense/candidate"
+      "next_gate": "actual0a25 MODEL021 all128 independent -> whole -> matched153 zero-skip -> same-image source -> matched1024 smoke/full/screen, only paper delta"
+    },
+    {
+      "owner": "kivi_hotpath_prepare",
+      "paper": "KIVI",
+      "state": "FIRSTDECODE_FULL64_WHOLE_PASSED_ONLY_LONG004_COST_AUDIT",
+      "ready": false,
+      "next_gate": "Bind actual47307B first whole and original0a23/0a18 argv before long004; full640 must fit actual5310s cost without coverage/budget relaxation. Task independent40960 checker source prepared; real domain producer still missing."
     },
     {
       "owner": "skvq_numeric_path_review",
       "paper": "KIVI",
-      "state": "INDEPENDENT004_REFERENCE_SEMANTICS_REPAIR",
+      "state": "KIVI_LONG004_PREDECESSOR_AND_ORACLE_COST_REVIEW",
       "ready": false,
-      "next_gate": "new high precision same packed reference consumes existing actual64; original09ef preserved and .005 unchanged"
-    },
-    {
-      "owner": "kivi_hotpath_prepare",
-      "paper": "SKVQ + KIVI",
-      "state": "MATCHED020_COLD_CHAIN_AUDIT_NEW_KIVI_INDEPENDENT_SOURCE_REBIND",
-      "ready": false,
-      "next_gate": "real entry/mount/data-dependent refs, no invented PASS"
+      "next_gate": "Audit actual outer first whole/argv binding and estimate full640 cost from raw64 measured1130.523s; no long NPU before cost-qualified packet."
     }
   ],
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
@@ -88,7 +88,7 @@
     "performance_ready": false,
     "independent_whole_pending": true
   },
-  "idle_cause": "Fresh09f5 15:48:08 physical4–7 idle with baseline HBM and no NPU process. No admitted device successor: SKVQ source repair and KIVI numeric attribution pending.",
+  "idle_cause": "Latest actual0a22 17:07:48Z physical4-7 baseline2869/2866/2867/2861MiB no NPU compute; prior KIVI CPU terminated and independently released. New0a25 host prelude running: not yet device compute proof or zero-idle. No executable backup while long640 cost/actual predecessor pending.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",

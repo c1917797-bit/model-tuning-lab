@@ -1,0 +1,136 @@
+{
+  "schema": "paper-portfolio.causal-stage/v1",
+  "stage": "KIVI_REF004_FIRSTDECODE_PASS_SKVQ021_DISPATCH_20261011",
+  "portfolio_cutoff_epoch": 1791788425,
+  "alignment": {
+    "long_term": "plugin/monkeypatch Ascend >=10% paired full model; TTFT/TPOT; final task loss allowance <=1% both units conservatively",
+    "medium_term": "mechanism/source -> genuine NPU numerical -> paired E2E -> tasks -> supported portability",
+    "short_term": "finish actual firstdecode independent whole and dispatch source-proved SKVQ binding recovery; audit KIVI long oracle cost before admission"
+  },
+  "previous_goal_turn": "NO_PROGRESS_MODEL_SELECTION_QUESTION",
+  "kivi": {
+    "producer_operation": "exec-00000000000009ca",
+    "raw_operation": "exec-0000000000000a18",
+    "raw_exit": 0,
+    "raw_elapsed_seconds": 1130.523,
+    "raw_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-firstdecode-independent-raw-FIA003-REF004-main-20261011-001/cpu-preflight/RAW_RESULT.json",
+      "bytes": 505820,
+      "sha256": "d95516f4d6674be66262351bcde938ee5f158a564b2ffc79ce95d24fa884fb2a"
+    },
+    "whole_operation": "exec-0000000000000a23",
+    "whole_exit": 0,
+    "whole_elapsed_seconds": 3.008,
+    "whole": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_FIA_FIRST003_REF004_WHOLE_001.json",
+      "bytes": 47307,
+      "sha256": "94982f53d1d571215758b8f68d1133d2a01deb7a93f7f7c499f7eae34f91e412"
+    },
+    "original_whole_envelope": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN0A23_KIVI_REF004_WHOLE_ORIGINAL_20261011.json",
+    "status": "FIRSTDECODE_OWNED_RAW_AND_WHOLE_CONSUMED",
+    "coverage": {
+      "ranks": 4,
+      "FA_layers_per_rank": 16,
+      "full_outputs_per_FA": 1536,
+      "firstdecode_length": 32769,
+      "input_tokens": 32768,
+      "output_tokens": 2,
+      "eager": true
+    },
+    "actual_CPU_cid": "528a707fff0771fef3960746b80733f5f711a479e605c571bf05a533c495fe58",
+    "cleanup_independent_operation": "exec-0000000000000a22",
+    "stopped_retained": true,
+    "pid": 0,
+    "OOM": false,
+    "full_model_correctness": false,
+    "GDN_numeric": false,
+    "graph": false,
+    "mixed": false,
+    "performance": false,
+    "tasks": false,
+    "reference_repair": {
+      "cause_class": "REFERENCE_OR_TEST",
+      "candidate_changed": false,
+      "tolerance": 0.005,
+      "coverage_unchanged": true,
+      "failed_original": "exec-00000000000009ef",
+      "same_input_diagnostic": "exec-00000000000009fc",
+      "new_reference": "167d7e4718e40a02066c228cec2a122508bbc95f4cf5f8271144adf06ecb8213"
+    }
+  },
+  "skvq": {
+    "old_failure": "exec-0000000000000a01",
+    "cause_class": "REFERENCE_OR_TEST",
+    "scope": "wrong assumption about active native bind_kv_cache origin after legitimate Ascend worker patch",
+    "decision": "REPAIR_AND_RERUN_AFFECTED_GATE",
+    "predicted": "native binding source accepted before weights; unknown wrappers remain rejected; actual all128 numeric still required",
+    "refutation": "identity failure on exact native patch chain or actual numeric failure",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-021/SOURCE_MANIFEST.json",
+      "bytes": 114564,
+      "sha256": "df86506856e7ccce061dd1d295d6b1f1e82cb29502d0f92f5b4eb234bc915294"
+    },
+    "actual_source_refs": 346,
+    "compiled_python": 281,
+    "closure_operation": "exec-0000000000000a1c",
+    "transport_failure_preserved": "exec-0000000000000a1b",
+    "software_operation": "exec-0000000000000a1d",
+    "software": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-software-021-main-20261011-001.json",
+      "bytes": 697,
+      "sha256": "cf2afe38de49d10bb2e1b5a848337da8bdc8b241b8ca307eab238da1e8e7d4c5"
+    },
+    "tests": 123,
+    "skips": 0,
+    "prelaunch_operation": "exec-0000000000000a24",
+    "current_operation": "exec-0000000000000a25",
+    "state": "HOST_RUNNING_NOT_YET_NPU_COMPUTE_PROOF",
+    "argv": [
+      "/usr/bin/env",
+      "MAIN_SKVQ_MODEL_READER_HOST_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--cpu=9000:9000",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-021/model_host.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "df86506856e7ccce061dd1d295d6b1f1e82cb29502d0f92f5b4eb234bc915294",
+      "--reader-whole-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-SKVQ-CURRENT-HANDOFF-20261011-001/READER013_WHOLE_REF.json",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-021-main-20261011-001"
+    ],
+    "host_wall_seconds": 9000,
+    "whole_reserve_seconds": 900,
+    "CPU_QUEUE_no_peer_admission": true
+  },
+  "next": {
+    "skvq_matched021": "SOURCE_ONLY actual MODEL021 whole null; original012 donor -> ABSENT02137 files reviewed delivery, Linux153/0skip pending",
+    "kivi_long004": "FIRST WHOLE MUST BE BOUND; cost5310s not proved; simple64x10 exceeds budget, audit costs rather than admit blindly",
+    "kivi_task40960": "independent checker local11 PASS only; actual full-domain producer/bootstrap/whole pending"
+  },
+  "live_resources": {
+    "operation": "exec-0000000000000a22",
+    "observed_epoch": 1791738468.0560713,
+    "MemAvailable_kB": 116139408,
+    "cache_available_bytes": 205870010368,
+    "physical4_7_HBM_MiB": [
+      2869,
+      2866,
+      2867,
+      2861
+    ],
+    "NPU_compute": false,
+    "zero_idle_claim": false
+  },
+  "publication": {
+    "branch": "work/qwen36-damp-ascend-20261006",
+    "head_before": "699a039d46319d6d2e2f367071a4646cd4663cc4",
+    "fetch": "0a20 standard30s and0a22 HTTP1.1 20s bounded timeout; retain errors, independent checks completed",
+    "push_pending": true
+  },
+  "acceptance_met": false,
+  "no_paper_wide_no_go": true
+}
