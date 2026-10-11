@@ -1,0 +1,122 @@
+{
+  "schema": "paper-portfolio.stage-checkpoint/v1",
+  "updated_at_utc": "2026-10-11 11:08:48 UTC",
+  "goal_status": "NOT_MET_NO_NEW_NON_HYPIC_TECHNIQUE_ACCEPTED",
+  "portfolio_cutoff_epoch": 1791788425,
+  "current": {
+    "paper": "SKVQ",
+    "operation": "exec-00000000000008df",
+    "state": "RUNNING_SAME_IMAGE_PREFLIGHT_NATIVE_PENDING",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-013/SOURCE_MANIFEST.json",
+      "bytes": 97215,
+      "sha256": "0fea70f3793328ce07772c5f51e291a24cc1d8434aee81e9d02be6546e9de113"
+    },
+    "software": {
+      "operation": "exec-00000000000008de",
+      "tests": 119,
+      "exit": 0,
+      "seconds": 20.415
+    },
+    "argv": [
+      "/usr/bin/env",
+      "MAIN_SKVQ_READER_HOST_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--cpu=3600:3600",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-013/reader_host.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "0fea70f3793328ce07772c5f51e291a24cc1d8434aee81e9d02be6546e9de113",
+      "--writer-whole-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN0757_WRITER011_WHOLE_REF.json",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-013-main-20261011-001"
+    ],
+    "only_physical": 4
+  },
+  "kivi_d8": {
+    "producer": "exec-00000000000008a7",
+    "missing_original_consumer": "exec-00000000000008c2",
+    "recovered_read_only_consumer": "exec-00000000000008cf",
+    "recovered_arm_equals_old_sha": "9b7d79f0b409e896119737930d77f716bb5f48c5456e5750ac6d4fd94e9e9d44",
+    "pair_operation": "exec-00000000000008d1",
+    "pair": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI_B1_FIXED1024_D8_PAIR_20261011_001.json",
+      "bytes": 2727,
+      "sha256": "52d9674c1be5dcf80308d9c4b43a416a2bf902a371efa4af41d303e7fc3703e0"
+    },
+    "input": 32768,
+    "output": 1024,
+    "concurrency": 1,
+    "dense_tps": 1.6828073943973267,
+    "candidate_tps": 0.6710011228608296,
+    "throughput_change_percent": -60.12608899302232,
+    "dense_TTFT_seconds": 4.9195344999898225,
+    "candidate_TTFT_seconds": 25.3342923799064,
+    "dense_TPOT_seconds": 0.5900165815835405,
+    "candidate_TPOT_seconds": 1.467002144447762,
+    "decision": "CURRENT_CONFIGURATION_SCREEN_REGRESSION_NO_FORMAL_OR_TASK_EXPANSION",
+    "full1024_numerical_qualification": false,
+    "formal_performance": false,
+    "task_accuracy": false,
+    "scope": "B1 screening only; not paper-wide no-go"
+  },
+  "skvq012": {
+    "operation": "exec-00000000000008c7",
+    "exit": 1,
+    "duration_ms": 588766,
+    "actual_numerical_cases": 0,
+    "classification": "IMPLEMENTATION_COMPILER_FAILURE_NOT_ALGORITHM_NO_GO",
+    "error": "OffsetAnalysis.cpp:290 assertion data.getPtr(); qk.ttir has reshape of pointer tensors before load",
+    "original": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN08C7_SKVQ012_TERMINAL_ORIGINAL_20261011.json",
+    "host_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-012-main-20261011-001/HOST_RESULT.json",
+      "bytes": 74850,
+      "sha256": "fa0527b1ba8b40cc508974bec0858eea9a1bbbc1e962cd2651b9cf081a8fb8be"
+    },
+    "release": "exec-00000000000008ce",
+    "next_hypothesis": "013 flatten integer offsets before adding scalar base; six addresses only, math/masks/thresholds unchanged; target compiler/numeric pending"
+  },
+  "fia001": {
+    "operation": "exec-00000000000008d8",
+    "exit": 1,
+    "duration_ms": 67761,
+    "npu_started": false,
+    "classification": "ADAPTER_MOUNT_CLOSURE_FAILURE_NOT_ALGORITHM_NO_GO",
+    "error": "base SOURCE_MANIFEST omitted from new C.ROOT mount closure; exact guest artifact visibility rejects actual regular file",
+    "source": {
+      "bytes": 2503,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-capability-single4-owner-v1-001/SOURCE_MANIFEST.json",
+      "sha256": "a8618a4dfb15d5ba7155aa146a5cb8a295b00219f8b221475f0e2d3b52928d31"
+    },
+    "original": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN08D8_KIVI_FIA001_TERMINAL_ORIGINAL_20261011.json",
+    "release": "exec-00000000000008db",
+    "own_cid": "b85506373d27c4c505b49a9de59905f3cba5f7c5af5ae9adf0f1b41ce1676a26",
+    "stopped_retained": true,
+    "Devices": [],
+    "npu_container_created": false,
+    "next": "FIA002 add exact base_source Ref; new real closure regression13 local passed; on-target source/software/native pending"
+  },
+  "readiness": {
+    "device_stage_concurrency": 1,
+    "next_fully_ready_device_tickets": 0,
+    "zero_idle_claim": false,
+    "external_occupation_not_proved": true,
+    "parallel_local": [
+      "KIVI native FIA adapter/quantization mechanism",
+      "SKVQ013 repair and compiler fallback",
+      "SKVQ model011/matched008 successor"
+    ],
+    "task_gap": "reader capacity33792/B1,B16 does not qualify40960 variable-batch normal-EOS task domain"
+  },
+  "lessons_applied": [
+    "One compile failure only invalidates this implementation, not paper mechanism.",
+    "A new adapter root must include the donor manifest itself in exact RO closure, not merely the donor files. Preserve failed run; negative regression required.",
+    "Original operation missing: read-only reconsume immutable evidence into a new output, never rerun model or fabricate original receipt.",
+    "A regressed matched screen does not justify formal3pair/task expenditure; adapt the measured mechanism hot path first.",
+    "No source count, software PASS, or live preparation agent constitutes a ready device ticket or continuous NPU use."
+  ]
+}

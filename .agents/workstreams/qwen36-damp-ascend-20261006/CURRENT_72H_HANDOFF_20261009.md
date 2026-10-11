@@ -1,3 +1,11 @@
+## 2026-10-11 — SKVQ013 live; KIVI D8 paired regression; FIA001 CPU mount defect
+
+- Read KIVI_D8_PAIR_REGRESSION_SKVQ012_COMPILER_FIA_ACTIVE_20261011.json and SERIAL_DEVICE_STAGE_QUEUE_20261010.json first. Current exact handle exec-00000000000008df: SKVQ013 actual source119 PASS20.415s, same-image/native matrix underway; physical4 only. Poll only this handle, never duplicate.
+- KIVI08cf independently reconsumed immutable D8 evidence after missing08c2; byte-identical ARM SHA. Strict08d1 fixed32768/1024 B1 pair: dense1.682807 vs D8 0.671001tok/s, -60.1261%; TTFT4.9195 vs25.3343s, TPOT0.5900 vs1.4670s. No formal/task expansion of this regressed configuration; full1024 numeric qualification remains false.
+- SKVQ01208c7 FAILED first QK compilation (OffsetAnalysis pointer reshape), zero numeric cases; exact owned release08ce.013 changes only six integer-offset-before-base expressions with119 target tests. Compiler/numerical/whole remain unproven until08df evidence.
+- FIA00108d8 FAILED in CPU artifact visibility before any NPU: base SOURCE_MANIFEST omitted from new root exact RO closure. CPU stopped-retained08db/Pid0/noExec/noOOM/Devices[]. FIA002 fixes the exact missing Ref plus13th real closure regression; source files deployed, actual prepare/software/native pending. Preserve001 and all originals.
+- Parallel local model011/matched008 and KIVI dequant/FIA mechanism preparation continue. No ready device successor/zero-idle claim; no new accepted non-HYPIC technique or task accuracy. Fixed cutoff1791788425, protected0-3/external and MAIN serialized device stages unchanged. Older RUNNING entries below are historical.
+
 ## 2026-10-11 10:44 UTC — KIVI D8 terminal recovered; SKVQ012 active single4 admission
 
 - Read KIVI_D8_TERMINAL_SKVQ012_RUNNING_20261011.json and SERIAL_DEVICE_STAGE_QUEUE_20261010.json. KIVI08a7 completed exit0; owned containers stopped-retained independently08bf. Actual candidate output1024 screening metrics exist, but consumer08c2 registry is missing;08c5 found no live consumer and immutable ARM_CONSUMED.json present. Recover by fresh read-only consumer output after CPU_QUEUE; no NPU rerun or fabricated original exit. No formal/per-task acceptance.
