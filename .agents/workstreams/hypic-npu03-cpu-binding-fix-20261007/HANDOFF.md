@@ -1,5 +1,19 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-11 numerical-oracle preparation, no device admission
+
+Read HYPIC_NUMERICAL_STATE_ORACLE_SOURCE_MAP_20261011.md before continuing.
+The unchanged clean runtime source remains 4429e3. Source inspection maps
+canonical material, actual KV destination slots, GDN state/conv slots and
+position rewrites separately; it does not identify the quality-loss cause.
+numerical_state_oracle.py now rejects cross-request/rank/generation/coordinate
+mixing and reports numerical deltas without claiming acceptance. Seven host
+synthetic tests passed (0834), 29-Skill structure passed (0835), and diff check
+passed (0836). The runtime observer is still NOT implemented. No new device
+root or workload was created. The next milestone is capture integration and
+independent hot-request receipt validation, not another full quality rerun.
+
+
 ## 2026-10-11 post-commit replay repair
 
 After 4b4af34, the reproduction verifier failed with
