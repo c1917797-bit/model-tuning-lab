@@ -1,6 +1,6 @@
 # HYPIC NPU0–3 — current handoff
 
-## 2026-10-11 r20 bounded diagnostic, control running
+## 2026-10-11 r20 bounded diagnostic, candidate running
 
 The fresh-root, same-source serial control/HYPIC diagnostic is frozen in
 `HYPIC_R20_SERIAL_DIAGNOSTIC_PREREGISTRATION_20261011.json`. It uses samples
@@ -14,15 +14,21 @@ recorded below; the candidate root remains absent. Audit and release the
 control before admitting the candidate. This post-hoc-selected diagnostic
 cannot overturn r19 or establish population quality.
 
-Control-arm launch update: after a fresh direct route and actual physical
-NPU0–3/8223 idle check, the no-cache controller was started at about
-2026-10-11 05:29 UTC as AWMCP exec `exec-0000000000000675`. Its immutable
-root is `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r20-serial-baseline`.
-The first observed progress stage is `service-starting`; the handle is
-confirmed running, **not terminal**. Poll that same handle and root; never
-relaunch because an observation is slow or times out. Do not start the
-candidate until this control has terminated, passed an independent raw-artifact
-audit and released only its exact owned resources.
+Control arm `exec-0000000000000675` terminated exit 0 after 3/3 samples and
+9/9 scored responses. Independent raw-artifact `audit_arm` replay passed:
+9/9 correct, no length caps, 149 clean physical isolation samples, source
+identity and exact owned resource release. Immutable arm-result SHA256 is
+`07890fbb4c423aff06afe6036b7c5080da3babddf96d29cd899df9ab68944a54`.
+Its root is `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r20-serial-baseline`.
+After fresh direct-route, candidate-root absence and physical NPU0–3/8223
+idle checks, the frozen HYPIC-only arm was started as
+`exec-0000000000000690`, root
+`/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r20-serial-hypic`.
+It is **running, not terminal**. Poll that same handle and immutable root;
+never relaunch because an observation is slow or times out. On terminal,
+independently audit its raw rows, source, four-worker proof, isolation and
+exact release, then run the frozen paired auditor. Do not treat this
+post-hoc three-sample diagnostic as population quality acceptance.
 
 ## 2026-10-11 protocol-gap checkpoint
 
