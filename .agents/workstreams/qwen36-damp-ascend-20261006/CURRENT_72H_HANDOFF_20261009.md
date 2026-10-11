@@ -1,3 +1,8 @@
+## 2026-10-11 15:01 UTC — KIVI first003 active after target205 software PASS
+
+- Exact09ca running host prelude, not yet NPU proof; source124634B/41086024593e407467e10d310c92de23bec1173f6c017c0693f361b603e91cb3. All56 installed/223 dependencies checked09c4. Same660 Devices[] actual205 PASS09c6/140.163s; exact CPU stopped-retained/noOOM/Pid0/noExec09c9. Fresh4-7 idle before dispatch. Poll09ca, no duplicate.
+- Scope: one genuine decode/all4all16/full1536/native finish then independent whole. Long seal128/reuse, fixed1024 pairs and task accuracy pending. Recovered component is not model PASS. Agents: SKVQ019 bounded own-exit observer repair; KIVI long002 complete496 refs/117 local PASS; KIVI paired successor. No admitted device backup/zero-idle claim. Cutoff1791788425 unchanged. See KIVI_FIA_FIRST003_DISPATCH_20261011.json and serial queue. Earlier headers historical.
+
 ## 2026-10-11 14:52 UTC — SKVQ018 terminal ownership-observer failure; exact own release verified
 
 - Original09b8 exit1/415.222s, HOST_RESULT83605B/2ac22c784f5538c3a04499dee2ccba6f12190094a3582df43db773724138ee8d. Before model inference, ownership gate rejected PID1088907/start65549932 after prior full own proof; cmdline became empty, cgroups root and stat R with vsize/rss0. This is not proof of external occupancy; exit transition remains unresolved. Original MAIN09B8_SKVQ018_FAILED_ORIGINAL_20261011.json preserved. No blind018 rerun.
