@@ -150,3 +150,48 @@ def install(modules, callback, *, request_id, layers, source_hashes=None):
         handle.uninstall()
         raise
     return handle
+
+
+def install_step_receipt(runner, emit, *, request_id, rank, source_hash=None):
+    """Observe successful existing hybrid validation, without weakening it."""
+    if os.environ.get(SWITCH) != "1":
+        return Handle([], [])
+    import functools
+    import inspect
+    if not request_id or type(rank) is not int or rank not in range(4) or not callable(emit):
+        raise ValueError("explicit request/rank/emitter required")
+    path = Path(runner.__file__)
+    expected = source_hash or SPECS["runner"][0]
+    if hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+        raise ValueError("receipt runner source hash mismatch")
+    name = "_validate_and_emit_hot_request_evidence"
+    original = getattr(runner, name)
+    if (not isinstance(original, types.FunctionType)
+            or original.__code__.co_filename != str(path)
+            or original.__name__ != name):
+        raise ValueError("receipt callable identity mismatch")
+    signature = inspect.signature(original)
+
+    @functools.wraps(original)
+    def observed(*args, **kwargs):
+        bound = signature.bind(*args, **kwargs)
+        bound.apply_defaults()
+        result = original(*args, **kwargs)
+        ctx = bound.arguments["ctx"]
+        skipped = ctx.verified_hot_request_tokens.get(request_id, 0)
+        if skipped > 0:
+            emit({
+                "schema": "hypic-state-step-receipt/v1",
+                "event": "observer_validated_hot_step",
+                "request_id": request_id, "rank": rank, "pid": os.getpid(),
+                "step": int(ctx.batch_plan.step_id),
+                "skipped_prefix_tokens": int(skipped),
+                "expected_full_layers": sorted(bound.arguments["expected_full_layers"]),
+                "expected_gdn_layers": sorted(bound.arguments["expected_gdn_layers"]),
+                "validation_completed": True,
+                "runtime_source_sha256": expected,
+            })
+        return result
+
+    setattr(runner, name, observed)
+    return Handle([(runner, name, original, observed)], [])

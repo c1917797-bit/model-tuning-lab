@@ -244,3 +244,34 @@ def join_request_hot_receipts(report, receipts, worker_bindings):
         "physical_device_proven": False,
         "limitation": "legacy hot receipts omit step; producer-generation and step-specific proof still required",
     }
+
+
+def join_step_receipts(report, receipts, worker_bindings, *, runtime_sha256,
+                       kv_layer, gdn_layer):
+    """Join source-bound post-validation receipts to exact sampled worker steps."""
+    expected = {(row["rank"], row["pid"], row["step"]) for row in report["ranks"]}
+    if ({rank: pid for rank, pid, _ in expected} != worker_bindings
+            or set(worker_bindings) != set(range(4))
+            or len(set(worker_bindings.values())) != 4):
+        raise ValueError("step worker inventory mismatch")
+    if len(runtime_sha256) != 64 or any(c not in "0123456789abcdef" for c in runtime_sha256):
+        raise ValueError("invalid runtime digest")
+    seen = set()
+    for receipt in receipts:
+        key = (receipt.get("rank"), receipt.get("pid"), receipt.get("step"))
+        if (receipt.get("schema") != "hypic-state-step-receipt/v1"
+                or receipt.get("event") != "observer_validated_hot_step"
+                or receipt.get("request_id") != report["request_id"]
+                or receipt.get("validation_completed") is not True
+                or receipt.get("runtime_source_sha256") != runtime_sha256
+                or key not in expected or key in seen
+                or type(receipt.get("skipped_prefix_tokens")) is not int
+                or receipt["skipped_prefix_tokens"] <= 0
+                or kv_layer not in receipt.get("expected_full_layers", [])
+                or gdn_layer not in receipt.get("expected_gdn_layers", [])):
+            raise ValueError("invalid/misbound/duplicate step receipt")
+        seen.add(key)
+    if seen != expected:
+        raise ValueError("missing four-worker step receipts")
+    return dict(captured_step_receipts_joined=True, physical_device_proven=False,
+                producer_generation_proven=False, quality_or_causality_proven=False)

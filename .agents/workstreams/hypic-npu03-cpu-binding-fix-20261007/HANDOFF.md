@@ -1,5 +1,32 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-11 raw-writer and step-receipt checkpoint (host only)
+
+Added a source-bound post-validation wrapper in numerical_state_observer.py.
+It emits a selected request/rank/PID/step receipt only after the existing
+hybrid validator returns successfully. Disabled mode does not inspect modules;
+uninstall restores the exact original callable. Independent join_step_receipts
+requires all four matching identities, source digest and selected-layer inventory.
+This is host-tested machinery, NOT actual device step proof yet.
+
+numerical_state_writer.py exclusively creates bounded per-worker raw files
+(32 events / 64 MiB maximum), fsyncs contents, and seals the exact inventory and
+digests. Missing seal, mismatched worker/request, nonfinite data, budget overrun,
+tampering, extra files and symlink artifacts fail closed. No raw output is
+committed. A digest seal detects later changes but is not hardware write protection
+or independent provenance attestation.
+
+Seven new tests plus the prior 26 passed (exec0870, 33 total). Next finish the
+disabled serving loader/manifest, transactional installation/rollback and actual
+rank/PID inventory binding; then freeze and admit one bounded integrated request.
+Template and package-validator contracts were read. No device workload started,
+no runtime plugin source changed; material-generation correctness remains unproved.
+
+Read-only host snapshot exec086a at about 09:03 UTC found NPU0-3 without
+processes and 8223 free; recheck before any launch. Root filesystem / reports
+100% used, but /cache has 199 GiB available. CPU test temporaries were routed
+to /cache/cch. No unrelated cleanup or foreign task change was performed.
+
 ## 2026-10-11 independent numerical reconstruction checkpoint (host only)
 
 numerical_state_audit.py reconstructs NeoX KV relocation, GDN T@H+S and
