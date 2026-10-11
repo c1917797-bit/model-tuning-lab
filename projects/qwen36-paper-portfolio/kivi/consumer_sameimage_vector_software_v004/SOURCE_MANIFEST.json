@@ -1,0 +1,86 @@
+{
+  "schema": "kivi.sameimage-consumer-software-sources/v1",
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-vector-software-v004-20261011",
+  "default_enabled": false,
+  "files": {
+    "software_cpu8.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-vector-software-v004-20261011/software_cpu8.py",
+      "bytes": 9435,
+      "sha256": "934ed72273280cb50c67f20efbd55406b17dd9fa01d55c1da25159f96a29c8ee"
+    },
+    "MOUNTS.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-vector-software-v004-20261011/MOUNTS.json",
+      "bytes": 11282,
+      "sha256": "105cd2a9e079caf6b428e49ca540e22d307f548524828b9e06bbfe5b2e03ccc9"
+    }
+  },
+  "mounts": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-vector-software-v004-20261011/MOUNTS.json",
+    "bytes": 11282,
+    "sha256": "105cd2a9e079caf6b428e49ca540e22d307f548524828b9e06bbfe5b2e03ccc9"
+  },
+  "whole_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-firstdecode-whole-vector-writer-v023-20261011/SOURCE_MANIFEST.json",
+    "bytes": 16365,
+    "sha256": "09ae6fca169c145774ee1466f423348cdf506aa1f5565f0131a44f1dfcbbf6cc"
+  },
+  "raw_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-vector-writer-v024-20261011/SOURCE_MANIFEST.json",
+    "bytes": 13550,
+    "sha256": "a39f189a473947bb28aed5e9885a101e7cd02b7c8438ee892735543f3d0ce265"
+  },
+  "producer_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/SOURCE_MANIFEST.json",
+    "bytes": 110307,
+    "sha256": "a5726b3ec27178f574962b02a745ffe20060ebd42bf2de3d4cffc0161df5a7e4"
+  },
+  "borrowed_implementation": "Original057e same660 CPU8 wrapper, source-qualified unchanged018 controller plus raw024 CPU resource adapter; parameter/source/mount/child budget adaptation only. No candidate or mathematical source rewrite.",
+  "resources": {
+    "Devices": [],
+    "host_CPU": 1,
+    "guest_CPU": 1,
+    "total_CPU": 2,
+    "guest_memory_bytes": 8589934592,
+    "host_AS_RSS_bytes": 536870912,
+    "reserve_memory_bytes": 8589934592,
+    "total_RAM_bytes": 17716740096,
+    "new_disk_floor_bytes": 42949672960,
+    "whole_output_limit_bytes": 34359738368,
+    "phase_seconds_including_cleanup": 420,
+    "child_wall_seconds": 300,
+    "child_CPU_seconds": 240,
+    "child_AS_bytes": 8589934592,
+    "cleanup_seconds": 90,
+    "standalone": true,
+    "NPU_idle_required": false,
+    "peer_lease": false,
+    "fixed_cutoff_epoch": 1791788425
+  },
+  "original_implementation_pins": {
+    "host_run": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/host_run.py",
+      "bytes": 21215,
+      "sha256": "86747f9c5f5d24f2f6418ce0613dc95f625d4459cba948823133371eca8ba986"
+    },
+    "safety_host": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-model-firstdecode-bootstrap-v1-018/safety_host.py",
+      "bytes": 21569,
+      "sha256": "2f6d876a3363840aabfa7ee09db1b2b01700ba8bce17fd3fab040464af2d6408"
+    }
+  },
+  "actual_state": "PREPARATION_ONLY_UNRUN",
+  "permissions": {
+    "NPU": false,
+    "model_ready": false,
+    "performance_ready": false,
+    "run_authority": false,
+    "raw_mathematics_checked": false
+  },
+  "scope": "Same660 Devices[] full219 original whole/reference tests. New independent vector reference requires NumPy and 8GiB virtual limit inside original guest8GiB cgroup. Host512MiB, CPU2, RAM16.5GiB, disk40GiB, cleanup90 unchanged. Child300 + startup30 + cleanup90 = total420. No math, model, speed or task PASS.",
+  "predecessor": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-vector-software-v004-20261011/SOURCE_MANIFEST.json",
+    "bytes": 3674,
+    "sha256": "2db42e6c309d1df14c955c13c28882c9b0e332db0d05656678453283b3bb8958"
+  },
+  "software_tests": 219
+}

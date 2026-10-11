@@ -1,0 +1,148 @@
+{
+  "schema": "paper-portfolio.kivi-vector-sameimage-entry/v1",
+  "utc": "2026-10-11T00:49:10Z",
+  "previous_turn": "verified wait: original05a7 confirmed live",
+  "goal": "active_unmet",
+  "cutoff_epoch": 1791788425,
+  "change": "Reuse original057e CPU8 wrapper for raw024 full219. No candidate math/source or numerical tolerance changes.",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-vector-software-v004-20261011/SOURCE_MANIFEST.json",
+    "bytes": 4049,
+    "sha256": "9d568740875ee0003ad05368355babb80912c6cdd2a239ad2651c6903b98f662"
+  },
+  "entry": {
+    "schema": "kivi.sameimage-vector-software-entry/v1",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-vector-software-v004-20261011/SOURCE_MANIFEST.json",
+      "bytes": 4049,
+      "sha256": "9d568740875ee0003ad05368355babb80912c6cdd2a239ad2651c6903b98f662"
+    },
+    "previous_actual_original": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_SAME192_057E_ORIGINAL_20261011.json",
+    "expected_tests": 219,
+    "prerequisites": [
+      "actual SKVQ014 terminal and verified exact release of CPU consumer",
+      "fresh standaloneCPU2/ordinaryRAM16.5GiB/disk40GiB/owned namespace and actual hostCPU eligibility",
+      "all frozen source plus exact original018 artifact and transitive mounts"
+    ],
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "@ACTUAL_ELIGIBLE_HOST_CPU@",
+      "/usr/bin/prlimit",
+      "--cpu=300:300",
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-vector-software-v004-20261011/software_cpu8.py",
+      "--execute",
+      "--source-sha256",
+      "9d568740875ee0003ad05368355babb80912c6cdd2a239ad2651c6903b98f662",
+      "--host-cpu",
+      "@ACTUAL_ELIGIBLE_HOST_CPU@",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-consumer-software219-main-same660-004"
+    ],
+    "budgets": {
+      "Devices": [],
+      "host_CPU": 1,
+      "guest_CPU": 1,
+      "total_CPU": 2,
+      "guest_memory_bytes": 8589934592,
+      "host_AS_RSS_bytes": 536870912,
+      "reserve_memory_bytes": 8589934592,
+      "total_RAM_bytes": 17716740096,
+      "new_disk_floor_bytes": 42949672960,
+      "whole_output_limit_bytes": 34359738368,
+      "phase_seconds_including_cleanup": 420,
+      "child_wall_seconds": 300,
+      "child_CPU_seconds": 240,
+      "child_AS_bytes": 8589934592,
+      "cleanup_seconds": 90,
+      "standalone": true,
+      "NPU_idle_required": false,
+      "peer_lease": false,
+      "fixed_cutoff_epoch": 1791788425
+    },
+    "on_pass": "preserve original result and prove exact CPU8 release; raw024 full64 unchanged018 raw on actual authority",
+    "scope": "software readiness only; no NPU or algorithm acceptance",
+    "cutoff_epoch": 1791788425
+  },
+  "canonical_files": [
+    {
+      "runtime": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-vector-software-v004-20261011/software_cpu8.py",
+      "canonical": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/kivi/consumer_sameimage_vector_software_v004/software_cpu8.py",
+      "bytes": 9435,
+      "sha256": "934ed72273280cb50c67f20efbd55406b17dd9fa01d55c1da25159f96a29c8ee"
+    },
+    {
+      "runtime": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-vector-software-v004-20261011/MOUNTS.json",
+      "canonical": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/kivi/consumer_sameimage_vector_software_v004/MOUNTS.json",
+      "bytes": 11282,
+      "sha256": "105cd2a9e079caf6b428e49ca540e22d307f548524828b9e06bbfe5b2e03ccc9"
+    },
+    {
+      "runtime": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-vector-software-v004-20261011/SOURCE_MANIFEST.json",
+      "canonical": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/kivi/consumer_sameimage_vector_software_v004/SOURCE_MANIFEST.json",
+      "bytes": 4049,
+      "sha256": "9d568740875ee0003ad05368355babb80912c6cdd2a239ad2651c6903b98f662"
+    },
+    {
+      "runtime": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-vector-software-v004-20261011/ENTRY.json",
+      "canonical": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/kivi/consumer_sameimage_vector_software_v004/ENTRY.json",
+      "bytes": 2234,
+      "sha256": "db032239262ac77e362d56964845496e33519dff16f31b855f5fa14a7df6b373"
+    }
+  ],
+  "actual_preflight": {
+    "operation": "exec-00000000000005be",
+    "exit_code": 0,
+    "byte_exact_files": 8,
+    "reference_python_source_files": 17,
+    "original_artifact_refs_checked": true,
+    "default_OFF": true,
+    "target_sameimage_219": "UNRUN",
+    "raw64": "UNRUN",
+    "NPU": false
+  },
+  "current": {
+    "operation": "exec-00000000000005a7",
+    "terminal": false,
+    "source_frozen": true,
+    "independent_CPU_only": true,
+    "whole_capture_pass": false
+  },
+  "originals": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_KIVI_SOFTWARE219_HOST_SOURCE_05BE_ORIGINAL_20261011.json",
+      "bytes": 7844,
+      "sha256": "dcd127fade37f0a4c468ae16bb5d15ebe62389016ca8d25de74754c8336f8343"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_GIT_REMOTE_REF_05BF_ORIGINAL_20261011.json",
+      "bytes": 2185,
+      "sha256": "78dabeb3d83e5f23b28f9a1e1769247221b2e853656389d8d9dab987eb8966f1"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SKVQ014_CPU_IO_05C0_ORIGINAL_20261011.json",
+      "bytes": 4670,
+      "sha256": "b75ef0e2facc5e9a2abfa6781fd1e70194d557973af91645b91a6be53bfc911e"
+    }
+  ],
+  "git": {
+    "local_prior": "ee9c13c340901f764b5ac18d08b9274626fac2d2",
+    "prior_push": "05b9 subprocess60s timeout; remote outcome now read-only checked",
+    "remote_05bf": "4db1c42b3d33f78cbb5c29f579e831c324e3d21d",
+    "push_current": "pending; not claimed"
+  },
+  "remaining": [
+    "actual same660219",
+    "actual KIVI full64 independent numerical",
+    "actual SKVQ capture whole/calibration/writer/reader/model",
+    "paired1024 model speed",
+    "3 formal pairs",
+    "1822 final tasks and portability"
+  ],
+  "protected": "0-3/external untouched;32GiB HugeTLB SPENT"
+}

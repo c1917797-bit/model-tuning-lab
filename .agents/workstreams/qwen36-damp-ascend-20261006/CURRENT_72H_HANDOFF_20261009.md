@@ -1,3 +1,11 @@
+## 2026-10-11T00:49:10Z — exact same-image219 host entry prepared; SKVQ original CPU adjudication remains live
+
+- Read KIVI_VECTOR_CPU8_ENTRY_20261011.json. Newwrapper004 reuses actual057e CPU8 controller; actual05be verifies8byte-exact runtime/archive files,17reference Python files, original artifact Refs, scalar-codec path and real default-OFF CLI. Actual same660219/full64 remain UNRUN. Do not confuse source preflight with numeric PASS.
+- Original05a7 live at00:49; actual05c0 shows CPU consumer1213542 working, with464314091168 bytes read by00:47:33 and no final receipt. Physical4-7 released;ready NPU count0. Retain frozen source, no duplicate capture or unreviewed standaloneCPU overlap.
+- After actual capture whole and exact owned release, execute006 calibration; KIVI software219/full64 remains independently queued. SKVQ preparer found repetitive static SHA IO in B1 per-token wrappers; source-supported common OFF/ON cold/hot fix preparing, not a measured speedup.
+- Actual remote-ref05bf is still4db1c42; previous05b9 timed out and did not advance this branch as observed. Local source checkpoint is not push or acceptance. Fixed cutoff1791788425 and protected0-3/SPENT32GiB unchanged.
+
+
 ## 2026-10-11T00:27:46Z — SKVQ256 capture complete; own TP4 released, full independent consumer still live
 
 - Actual05b5 shows256/256 samples;05b6 verifies exact own TP4 stopped-retained/Pid0/noExec/noOOM at00:26:24Z, physical4-7 baseline/noPID. Original05a7 remains live in Devices[] independent full capture consumer. No capture whole/calibration/quantized/E2E/task PASS yet; no duplicate launch.

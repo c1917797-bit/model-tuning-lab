@@ -1,6 +1,6 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11T00:27:46Z",
+  "updated_at_utc": "2026-10-11T00:49:10Z",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -45,14 +45,20 @@
     {
       "paper": "KIVI",
       "owner": "MAIN",
-      "stage": "raw024/whole023 independent vector reference preserves64 and original scalar equivalence;22runtime files exact; agent local219PASS; target same660219 then full64 unrun",
-      "state": "SOURCE_DEPLOYED_TARGET_SOFTWARE_PENDING",
+      "stage": "raw024/whole023 source exact; new same660software219 host wrapper004 audit05be passed (actual paths/Refs/defaultOFF), actual guest219 and full64 remain unrun",
+      "state": "TARGET_SOFTWARE_ENTRY_READY_WAIT_STANDALONE_RESOURCE",
       "ready": false,
       "entry": {
         "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-raw-cpu-vector-writer-v024-20261011/SOURCE_MANIFEST.json",
         "bytes": 13550,
         "sha256": "a39f189a473947bb28aed5e9885a101e7cd02b7c8438ee892735543f3d0ce265"
-      }
+      },
+      "next_entry": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/kivi-consumer-sameimage-vector-software-v004-20261011/SOURCE_MANIFEST.json",
+        "bytes": 4049,
+        "sha256": "9d568740875ee0003ad05368355babb80912c6cdd2a239ad2651c6903b98f662"
+      },
+      "ready_for_gate": "same-image software219 after actual014 CPU terminal/release and fresh admission; NOT NPU"
     },
     {
       "paper": "KIVI",
@@ -240,10 +246,10 @@
     }
   ],
   "latest_resource_snapshot": {
-    "operation": "exec-00000000000005b1",
-    "time_utc": "2026-10-11T00:12:28Z",
-    "physical4_7": "own TP4 workers905420,905424,905425,905426;HBM21993,21990,21991,21985MiB",
-    "ordinary_available_KiB": 103114032,
+    "operation": "exec-00000000000005bb",
+    "time_utc": "2026-10-11T00:41:18Z",
+    "physical4_7": "no compute PID/HBM2869,2865,2867,2861MiB",
+    "ordinary_available_KiB": 115294448,
     "not_reusable_for_future_admission": true
   },
   "history_terminals": [
@@ -862,9 +868,9 @@
   "current_off_device": null,
   "current_successor_rule": "Poll05a7; on terminal retain original and independently verify exact own release. Success feeds cal006; failure returns to source-supported repair. No duplicate fullhost.",
   "scheduling_audit": {
-    "current": "Actual05a7 live at00:19:27; independent observation05b1 confirms147samples/TP4physical4-7",
-    "next": "On full terminal exact own release: SKVQ006 fitting if whole PASS; KIVIraw024sameimage219/full64 after aggregate CPU admission. No unreviewed overlap or duplicate capture.",
-    "repair": "Reference arithmetic unchanged; newvector vs original scalar byte equivalence tested locally, actual target pending."
+    "current": "Original05a7 RUNNING00:49; actual05c0 independentCPU PID1213542 active00:47:33, rchar464314091168, no result; NPU released",
+    "next": "After actual05a7 whole/release: cal006 if accepted capture; software219 wrapper004 then raw024 independentfull64. No unreviewed standalone overlap.",
+    "repair": "Target219 external host entry gap closed through exact original057e CPU8 controller reuse; guest suite still unrun. SKVQ repeated static source SHA in hot path reported by preparer; minimal common OFF/ON cold/hot repair in progress, MAIN review pending."
   },
   "current_preparation_checkpoint": {
     "path": ".agents/workstreams/qwen36-damp-ascend-20261006/VECTOR_REFERENCE_AND_MODEL_SUCCESSORS_20261011.json",
