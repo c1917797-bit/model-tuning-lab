@@ -1,3 +1,11 @@
+## 2026-10-11 10:44 UTC — KIVI D8 terminal recovered; SKVQ012 active single4 admission
+
+- Read KIVI_D8_TERMINAL_SKVQ012_RUNNING_20261011.json and SERIAL_DEVICE_STAGE_QUEUE_20261010.json. KIVI08a7 completed exit0; owned containers stopped-retained independently08bf. Actual candidate output1024 screening metrics exist, but consumer08c2 registry is missing;08c5 found no live consumer and immutable ARM_CONSUMED.json present. Recover by fresh read-only consumer output after CPU_QUEUE; no NPU rerun or fabricated original exit. No formal/per-task acceptance.
+- SKVQ012 target113 actual08c3 PASS20.273s. MAIN08c7 is RUNNING; poll this exact handle, never duplicate. Actual progress08c9 (host observation) shows writer replay done, CPU128/NumPy12 gate PASS and owned single4-reader container at canary stage. Physical4 only; compiled128-case correctness and readerWHOLE remain pending.
+- Three local preparation followups active: KIVI native FIA owner adapter; SKVQ model010/matched007 real wiring audit; independent full-model numerical gap audit. No remote/NPU permission for preparers; no source/software-only promotion. Devices serial, protected0-3/external and SPENT HugeTLB cap unchanged; cutoff1791788425 fixed.
+- Cards were actually idle at08c4/08c8. Current single4 admission is not four-card continuous compute or zero-idle proof. No accepted new non-HYPIC technique or task score.
+
+
 ## 2026-10-11 09:56:29 UTC — KIVI D8 same-image95 PASS; actual model candidate running
 
 - Read KIVI_D8_SAMEIMAGE95_MODEL_RUNNING_SKVQ012_DEPLOYED_20261011.json. Source install08a2 and same-image95 operation08a3 passed; actual suite16.375s, CPU owned stage99.759s, cleanup passed.

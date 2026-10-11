@@ -1,7 +1,7 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11 09:56:29 UTC",
-  "latest_stage_decision": "KIVI_D8_SAMEIMAGE95_MODEL_RUNNING_SKVQ012_DEPLOYED_20261011.json",
+  "updated_at_utc": "2026-10-11T10:42:00Z",
+  "latest_stage_decision": "KIVI_D8_TERMINAL_SKVQ012_RUNNING_20261011.json",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -12,22 +12,19 @@
     3
   ],
   "current": {
-    "paper": "KIVI",
+    "paper": "SKVQ",
     "owner": "MAIN",
-    "operation": "exec-00000000000008a7",
-    "state": "D8_B1_FIXED1024_HOST_RUNNING_SERVER_STARTUP_LAST_VERIFIED",
+    "operation": "exec-00000000000008c7",
+    "state": "HOST_RUNNING_PREDECESSOR_REPLAY_NPU_NOT_YET_OBSERVED",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-b1-matched1024-d8-bootstrap-v1-001/SOURCE_MANIFEST.json",
-      "bytes": 163055,
-      "sha256": "3f3e4973d46cacf9baef7b59d897fc24d563db67d2ffc44cff4532650c41829e"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-012/SOURCE_MANIFEST.json",
+      "bytes": 98181,
+      "sha256": "352f1d89acb55559cd753aeee74d20b5694f3abe4bce684a2740ebfcec8787ac"
     },
     "physical_devices": [
-      4,
-      5,
-      6,
-      7
+      4
     ],
-    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-candidate-main-d8-20261011-001"
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-012-main-20261011-001"
   },
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
@@ -35,23 +32,23 @@
     {
       "paper": "KIVI",
       "owner": "MAIN",
-      "state": "ACTUAL_D8_SAMEIMAGE95_PASS_MODEL_RUNNING",
+      "state": "PRODUCER_EXIT0_ARM_FILE_PRESENT_CONSUMER_OPERATION_MISSING",
       "ready": false,
-      "next_gate": "Actual terminal/cleanup then whole arm and dual-source fixed1024 pair"
+      "next_gate": "Read-only independent arm replay to fresh output after CPU_QUEUE releases; preserve original08c2 missing, no model/NPU rerun; strict dual-source pair."
     },
     {
       "paper": "SKVQ",
       "owner": "MAIN",
-      "state": "READER012_SOURCE_DEPLOYED_TARGET113_AND_NPU_PENDING",
+      "state": "TARGET113_PASS_HOST08C7_RUNNING",
       "ready": false,
-      "next_gate": "Target113 then same-image/native reader after current lease"
+      "next_gate": "Actual same-image/native128 cases then independent/whole, no borrowed PASS"
     },
     {
       "paper": "SKVQ",
       "owner": "skvq_writer_next",
-      "state": "MODEL_MATCHED_DOWNSTREAM_PENDING_READER012_WHOLE",
+      "state": "MODEL010_MATCHED007_LOCAL_FROZEN_REVIEW_IN_PROGRESS",
       "ready": false,
-      "next_gate": "Actual reader012 whole -> exact new model and pair source bindings; no borrowed diagnostic PASS"
+      "next_gate": "Actual reader012 WHOLE plus MAIN deployment and target checks; local77/131 not NPU qualification"
     }
   ],
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
@@ -72,7 +69,7 @@
     "axis_writer_calls": 256,
     "only_physical_card": 4
   },
-  "idle_cause": "Current KIVI D8 lease server startup live at08ab; no zero-idle assertion. SKVQ012 exact sources installed but target113/native gate pending.",
+  "idle_cause": "KIVI exact stop10:25:27Z; no NPU process at08c4/08c8. SKVQ08c7 dispatched but at08c8 only predecessor CPU replay; no exact next-device-compute timestamp or zero-idle claim.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -996,28 +993,33 @@
     "local_parallel": "kivi_hotpath_prepare: bounded local official-source audit of reusable native quantized KV attention; no remote/NPU/Git."
   },
   "parallel_preparers_20261011": {
-    "observed_at_utc": "2026-10-11T10:17:21Z",
-    "device_owner": "MAIN:exec-00000000000008a7",
+    "observed_at_utc": "2026-10-11T10:42:00Z",
+    "device_owner": "MAIN:exec-00000000000008c7",
     "agents": [
       {
-        "name": "skvq_writer_next",
-        "state": "DISPATCHED",
-        "scope": "local reader012 WHOLE-to-model/pair adapter; no fabricated predecessor PASS",
-        "budget_minutes": 30
+        "name": "kivi_hotpath_prepare",
+        "state": "FOLLOWUP_DISPATCHED",
+        "scope": "local FIA owner integration; no remote/NPU/Git",
+        "budget_minutes": 25
       },
       {
-        "name": "kivi_hotpath_prepare",
-        "state": "DISPATCHED",
-        "scope": "local native FIA capability probe with independent reference; unknown modes pending",
-        "budget_minutes": 30
+        "name": "skvq_writer_next",
+        "state": "FOLLOWUP_DISPATCHED",
+        "scope": "local frozen downstream real wiring review; no remote/NPU/Git",
+        "budget_minutes": 20
+      },
+      {
+        "name": "skvq_numeric_path_review",
+        "state": "FOLLOWUP_DISPATCHED",
+        "scope": "local independent full-model numerical gap review; no remote/NPU/Git",
+        "budget_minutes": 15
       }
     ],
     "remote_parallel_cpu_admitted": false,
-    "ready_device_successor_count": 0,
-    "evidence_file": ".agents/workstreams/qwen36-damp-ascend-20261006/NATIVE_FIA_INTERFACE_EVIDENCE_20261011.json"
+    "ready_device_successor_count": 0
   },
-  "current_off_device": "SKVQ012 exact deployed308 closure passed08aa; downstream code/test optimization prepared locally pending actual reader WHOLE.",
-  "current_successor_rule": "Finish actual08a7 terminal and cleanup, consume model evidence; then execute reader012 target113/native stage if freshly admitted. Do not rerun reader011 unchanged.",
+  "current_off_device": "Three local preparers: KIVI FIA exact owner integration, SKVQ downstream real wiring review, independent full-model numerical-gap review. MAIN device lane serialized.",
+  "current_successor_rule": "Poll08c7 only; verify exact terminal and own cleanup. CPU-only KIVI recovery/pair queued due frozen CPU_QUEUE. Admit only actual numerical-qualified next stage.",
   "scheduling_audit": {
     "current": "082f terminal exit1/290287ms; only CPU predecessor replay, actual_npu_observations0",
     "next": "Repair proven AST compatibility; recover KIVI published numeric with independent original consumer",

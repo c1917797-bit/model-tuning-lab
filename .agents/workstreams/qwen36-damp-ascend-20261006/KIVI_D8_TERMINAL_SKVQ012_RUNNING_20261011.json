@@ -1,0 +1,111 @@
+{
+  "schema": "paper-portfolio.stage-checkpoint/v1",
+  "observed_at_utc": "2026-10-11T10:42:00Z",
+  "decision": "CONTINUE_SKVQ_NATIVE_GATE_AND_LOCAL_ADAPTATION; NO_NEW_ACCEPTED_TECHNIQUE",
+  "portfolio_cutoff_epoch": 1791788425,
+  "prior_turn": "Status-only orientation found idle cards and completed preparers; no new algorithm gate. This continuation dispatches actual08c7.",
+  "kivi": {
+    "producer_operation": "exec-00000000000008a7",
+    "producer_exit_code": 0,
+    "producer_duration_ms": 2139611,
+    "producer_terminal": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN08A7_KIVI_D8_MODEL_TERMINAL_ORIGINAL_20261011.json",
+      "bytes": 4366,
+      "sha256": "e39ac1a67b6630db9a7ad622fbf40dc76c1463f9f904e1008638780bdaa64b23"
+    },
+    "release_verified_operation": "exec-00000000000008bf",
+    "consumer_operation": "exec-00000000000008c2",
+    "consumer_registry_status": "not_found; not fabricated as exit0",
+    "recovery_operation": "exec-00000000000008c5",
+    "recovery": "No matching live consumer; original ARM_CONSUMED.json present. Retain original and replay read-only verifier to fresh output after serial CPU gate. Never rerun NPU model for missing registry.",
+    "arm": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-candidate-main-d8-20261011-001/ARM_CONSUMED.json",
+      "bytes": 240083,
+      "sha256": "9b7d79f0b409e896119737930d77f716bb5f48c5456e5750ac6d4fd94e9e9d44"
+    },
+    "reported_candidate_metrics_not_yet_dual_source_pair": {
+      "output_tokens_per_second": 0.6710011228608296,
+      "mean_ttft_seconds": 25.3342923799064,
+      "mean_tpot_seconds": 1.467002144447762
+    },
+    "full1024_numerically_verified": false,
+    "performance_accepted": false
+  },
+  "skvq": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-compiled-reader-v1-012/SOURCE_MANIFEST.json",
+      "bytes": 98181,
+      "sha256": "352f1d89acb55559cd753aeee74d20b5694f3abe4bce684a2740ebfcec8787ac"
+    },
+    "software_operation": "exec-00000000000008c3",
+    "software_exit_code": 0,
+    "software_tests": 113,
+    "software_test_seconds": 20.273,
+    "operation": "exec-00000000000008c7",
+    "state": "RUNNING_PREDECESSOR_REPLAY_LAST_OBSERVED; not yet NPU execution proof",
+    "launch_original": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN08C7_SKVQ012_LAUNCH_ORIGINAL_20261011.json",
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-compiled-reader-012-main-20261011-001",
+    "physical_devices": [
+      4
+    ],
+    "resource_profile": {
+      "physical_cards": [
+        4
+      ],
+      "guest_logical_device": 0,
+      "host_cpu": 1,
+      "guest_cpu": 1,
+      "reserve_cpu": 2,
+      "joint_cpu": 4,
+      "guest_memory_bytes": 8589934592,
+      "host_memory_bytes": 536870912,
+      "ordinary_reserve_bytes": 8589934592,
+      "joint_ordinary_floor_bytes": 17716740096,
+      "device_block_seconds": 1800,
+      "cleanup_included_seconds": 90,
+      "after_release_independent_CPU_block_seconds": 1800,
+      "after_release_cleanup_included_seconds": 90,
+      "total_seconds": 3600,
+      "output_cap_bytes": 1073741824,
+      "jit_cache_cap_bytes": 536870912,
+      "compilecache_included_in_output_cap": true,
+      "disk_start_required_bytes": 9663676416,
+      "disk_runtime_reserve_bytes": 8589934592,
+      "cpu_queue_no_peer_admission": true,
+      "physical_HBM_reserve_MiB": 3072
+    },
+    "successor": "Actual host terminal/own cleanup -> independent reader WHOLE -> model010/matched007. No borrowed old diagnostic PASS."
+  },
+  "parallel_preparation": {
+    "active_followups": [
+      "kivi_hotpath_prepare",
+      "skvq_writer_next",
+      "skvq_numeric_path_review"
+    ],
+    "scope": "Local source/wiring only; no remote or device admission by preparers.",
+    "no_device_successor_claim": true
+  },
+  "scheduling": {
+    "last_idle_snapshot": "exec-00000000000008c8",
+    "actual_no_process_cards": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "next_compute_start_utc": null,
+    "zero_idle_claim": false,
+    "reason": "Actual model release not immediately followed by prepared device gate; software/recovery and prerequisite CPU replay cause current gap.",
+    "remedy": "Serial reviewed stage08c7 dispatched; three concrete local preparation followups. Validate actual compute/next terminal, not source-count occupancy."
+  },
+  "lessons": [
+    "Missing operation registry does not erase original artifact or authorize a model restart; recover exact PID/artifact, reconsume immutable evidence separately if terminal required.",
+    "Finished preparation agents are not parallel active work. Refill concrete missing edges and preserve default-OFF/no fabricated runtime references.",
+    "CPU113 software pass is only source readiness; compile/numeric/whole/model/E2E/task gates remain distinct."
+  ],
+  "acceptance": {
+    "joint_target_met": false,
+    "new_task_accuracy": null,
+    "formal_three_pairs": false
+  }
+}
