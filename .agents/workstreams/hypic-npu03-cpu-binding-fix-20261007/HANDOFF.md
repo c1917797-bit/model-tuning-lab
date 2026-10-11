@@ -1,5 +1,31 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-11 independent numerical reconstruction checkpoint (host only)
+
+numerical_state_audit.py reconstructs NeoX KV relocation, GDN T@H+S and
+conv-tail updates from captured inputs without importing production HYPIC.
+It compares against captured actual destinations, reports CPU-float64 and
+destination-cast residuals, and makes no automatic numerical/quality verdict.
+This isolates replay/composition residuals; it does NOT independently regenerate
+the cached material T/S/KV or prove their producer generation is correct.
+
+Nine new synthetic tests plus the existing seventeen passed (exec085a, 26 total).
+Controls distinguish injected KV-key/value, GDN-state/conv and position errors,
+reject incomplete/duplicate capture, cross-request/step/PID/layer mixing,
+malformed tensor values, missing/duplicate/foreign hot receipts, and worker
+inventory mismatches. These are CPU host tests, not NPU functional acceptance.
+
+Source inspection found legacy worker_hot_request_verified receipts contain PID
+and request but no step. The join therefore reports request-level coverage only,
+explicitly step_level_hot_proven=false. Do not silently promote it to a
+step-specific causal proof. Add a source-bound observer receipt at validation
+completion and independently audit rank/PID inventory before device admission.
+
+Next: exclusive raw-data writer, disabled loader/manifest, step receipt, rollback
+tests and exact single-request capture contract. Selected-head/row scope and
+producer-generation gaps remain. No NPU workload was started, no frozen source
+was changed, r19/r22 verdicts and immutable roots are unchanged.
+
 ## 2026-10-11 observer/capture host checkpoint (no device admission)
 
 numerical_state_observer.py now source-hash-binds in-memory function replacements
