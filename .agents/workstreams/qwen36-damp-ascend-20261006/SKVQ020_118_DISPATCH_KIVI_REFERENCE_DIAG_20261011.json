@@ -1,0 +1,63 @@
+{
+  "schema": "paper-portfolio.stage-checkpoint/v1",
+  "updated_at_utc": "2026-10-11T16:10:04Z",
+  "cutoff_epoch": 1791788425,
+  "classification": "progress",
+  "SKVQ": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-020/SOURCE_MANIFEST.json",
+      "bytes": 111200,
+      "sha256": "f72c366207d3a93f08d83cf9ec027bec17d30b14427b04a2dd79fee239845494"
+    },
+    "exact27deployed": true,
+    "source_proof_operation": "exec-00000000000009fe",
+    "software_operation": "exec-00000000000009ff",
+    "software_tests": 118,
+    "skipped": 0,
+    "elapsed_seconds": 83.142,
+    "model_operation": "exec-0000000000000a01",
+    "model_argv": [
+      "/usr/bin/env",
+      "MAIN_SKVQ_MODEL_READER_HOST_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--cpu=9000:9000",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-020/model_host.py",
+      "--execute",
+      "--source-manifest-sha256",
+      "f72c366207d3a93f08d83cf9ec027bec17d30b14427b04a2dd79fee239845494",
+      "--reader-whole-ref-json",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-SKVQ-CURRENT-HANDOFF-20261011-001/READER013_WHOLE_REF.json",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-020-main-20261011-001"
+    ],
+    "NPU_execution_not_yet_proven": true,
+    "model_ready": false,
+    "performance_ready": false
+  },
+  "KIVI": {
+    "diagnostic_operation": "exec-00000000000009fc",
+    "exit": 0,
+    "elapsed_seconds": 31.613,
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/KIVI09EF_LAYER19_BOUNDARY_DIAGNOSTIC_001.json",
+      "bytes": 110286,
+      "sha256": "3292d7ac0319cbb9274867f5c7e4af2b84d4768cea9516099bc39309cdf3fb55"
+    },
+    "original_relative_rms": 0.006826750630736978,
+    "without_QK_A16": 0.0017548653806770042,
+    "without_probability_A16": 0.006563811073446501,
+    "no_intermediate_A16": 0.0012624363157866586,
+    "qualification_granted": false,
+    "lesson": "Independent reference must represent paper mathematics and documented operator semantic boundary, not insert unrequired low-precision intermediates. Source discrepancy plus discriminating raw-data diagnostics triggers new reference experiment, preserving old failure/threshold/full coverage. Never change candidate to satisfy a wrong reference.",
+    "next": "ind004 high precision raw64 on original capture; no default NPU recapture; all input/kernel/writer/identity checks retained"
+  },
+  "git_prior": {
+    "push_operation": "exec-00000000000009f7",
+    "exit": 0,
+    "remote_commit": "805bffc85e7992198d0bda27fee7add7b824784b"
+  },
+  "no_final_acceptance": true
+}

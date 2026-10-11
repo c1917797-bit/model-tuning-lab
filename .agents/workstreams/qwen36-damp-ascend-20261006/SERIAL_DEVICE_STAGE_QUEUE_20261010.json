@@ -1,7 +1,7 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11T15:48:08Z",
-  "latest_stage_decision": "SKVQ019 implementation failed and released; KIVI independent123 passed, raw64 stopped on actual third FA numeric threshold. Repairs parallel.",
+  "updated_at_utc": "2026-10-11T16:10:04Z",
+  "latest_stage_decision": "SKVQ020 exact deployed27, Linux118/0skip actual PASS;0a01 model host dispatched serial4-7. KIVI09fc reproduces failure and isolates QK A16-reference boundary;ind004 actual64 mathematical reference repair preparing.",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -12,20 +12,29 @@
     3
   ],
   "current": {
-    "paper": "KIVI + SKVQ",
-    "state": "OFF_DEVICE_REPAIR_AFTER_TERMINALS",
+    "paper": "SKVQ",
+    "state": "MODEL_HOST_RUNNING_NPU_EXECUTION_NOT_YET_PROVEN",
+    "operation": "exec-0000000000000a01",
+    "reserved_physical_devices": [
+      4,
+      5,
+      6,
+      7
+    ],
     "physical_devices": [],
-    "KIVI_raw_operation": "exec-00000000000009ef",
-    "KIVI_raw_exit": 1,
-    "KIVI_raw_primary": "Actual rank0 layer19 independent output compare: relative_rms0.006826750630736978 > .005, max_abs.015625; two prior FA passed. Same packed tensor reference/backend boundary attribution pending.",
-    "KIVI_raw_release_operation": "exec-00000000000009f5",
-    "SKVQ_operation": "exec-00000000000009df",
-    "SKVQ_exit": 1,
-    "SKVQ_primary": "model_factory.geometry incorrectly expects outer [tuple]; actual runner creates direct(K,V), actual bind assigns same object.020 implementation repair preparing.",
-    "SKVQ_release_operation": "exec-00000000000009eb",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-020/SOURCE_MANIFEST.json",
+      "bytes": 111200,
+      "sha256": "f72c366207d3a93f08d83cf9ec027bec17d30b14427b04a2dd79fee239845494"
+    },
+    "software_actual": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-software-020-main-20261011-001.json",
+      "bytes": 697,
+      "sha256": "be90284966d691784433b6a76dd9a2b54501e12dab8d3fb7d2ee82ccc1b533ab"
+    },
     "model_ready": false,
     "performance_ready": false,
-    "next": "Fix source-proven direct pair SKVQ020 and run actual new software118 before device; KIVI use immutable capture to attribute .005 failure before new NPU. Do not run long002: missing precise first-whole RO mount."
+    "next": "Poll existing0a01, source-bound same-image CPU -> actualN1 -> model all128 -> stop-retain -> independent numerical -> whole. No parallel target CPU admission under CPU_QUEUE."
   },
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
@@ -33,23 +42,23 @@
     {
       "owner": "skvq_writer_next",
       "paper": "SKVQ",
-      "state": "PREPARING_MODEL020_DIRECT_NATIVE_PAIR",
+      "state": "MATCHED020_SOURCE_FROZEN_RUNTIME_PENDING",
       "ready": false,
-      "next_gate": "118 local+actual target118 then source-bound model; metadata original tuple identity, no math change"
+      "next_gate": "actual model020 whole -> real smoke/qualification -> observerOFF dense/candidate"
     },
     {
       "owner": "skvq_numeric_path_review",
       "paper": "KIVI",
-      "state": "ATTRIBUTING_ACTUAL_NUMERICAL_FAILURE",
+      "state": "INDEPENDENT004_REFERENCE_SEMANTICS_REPAIR",
       "ready": false,
-      "next_gate": "same packed K/V FIA vs independent BF16 intermediate rounding; raw64 currentfailed"
+      "next_gate": "new high precision same packed reference consumes existing actual64; original09ef preserved and .005 unchanged"
     },
     {
       "owner": "kivi_hotpath_prepare",
-      "paper": "KIVI",
-      "state": "PREPARING_LONG003_AND_PAIRED003",
+      "paper": "SKVQ + KIVI",
+      "state": "MATCHED020_COLD_CHAIN_AUDIT_NEW_KIVI_INDEPENDENT_SOURCE_REBIND",
       "ready": false,
-      "next_gate": "source-proven exact first-whole RO mount; actual corrected first64 then640+12 thenpaired"
+      "next_gate": "real entry/mount/data-dependent refs, no invented PASS"
     }
   ],
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
