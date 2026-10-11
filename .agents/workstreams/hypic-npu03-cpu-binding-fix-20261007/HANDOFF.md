@@ -1,5 +1,19 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-11 r22 baseline active — preserve controller handle
+
+The frozen r22 no-cache arm started after direct-route/physical NPU0–3/8223
+idle proof. Its only controller is `exec-0000000000000774`; immutable output
+root is `/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r22-c32-logprob-baseline`.
+Last observed controller state was running; root progress said
+`service-starting` at 06:47:22 UTC and the exact owned container was up.
+An operation observation and topology briefly timed out, then the same
+handle again reported running. Do **not** restart, create a duplicate root,
+or start the candidate while the handle is live or its terminal state is
+unproven. Next poll this exact handle and root; only after terminal plus
+independent baseline arm audit and exact owned release may the candidate be
+admitted under a fresh physical 0–3/8223 idle check.
+
 ## 2026-10-11 r22 bounded output-numerics oracle — pre-device
 
 See `HYPIC_R22_C32_LOGPROB_ORACLE_HANDOFF_20261011.md` and its frozen JSON
