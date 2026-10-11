@@ -1,5 +1,19 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-11 r19/r20 read-only localization
+
+See `HYPIC_R19_R20_LOAD_STATE_LOCALIZATION_20261011.md`. The r19 net
+quality loss is 23 lost versus 15 gained paired rows; eight losses have
+four-worker hot proof and seven losses stop naturally. Therefore neither
+missing hot proof nor the 2048-token cap alone explains the regression.
+Sample 059's first c32 wrong answer is hot-proven after a 242.42 s
+admission-to-hot interval with five global material evictions, while its
+serial counterpart is hot-proven/correct after 5.73 s with no evictions.
+These are correlations only; no source-level cause has been isolated. Do
+not relabel r19 or launch an unchanged c32 rerun. Prioritize a single
+prospectively frozen state/scheduler diagnostic that can actually distinguish
+mechanisms, then require a new full matched pair for adoption.
+
 ## 2026-10-11 r20 bounded diagnostic, terminal
 
 The fresh-root, same-source serial control/HYPIC diagnostic is frozen in

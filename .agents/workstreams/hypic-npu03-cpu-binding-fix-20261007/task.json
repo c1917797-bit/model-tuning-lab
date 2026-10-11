@@ -1217,5 +1217,5 @@
     "offline_checks": "Both arm --check modes, independent audit --check, three host-only tests, and 15-request historical payload-hash replay passed.",
     "claim_boundary": "Diagnostic only, not a population quality pass or replacement for r19."
   },
-  "next_action": "Use existing r19 per-request evidence to localize why c32/max2048 quality was 227/381 to 219/381 while r20 selected c1 samples were 9/9 in both arms with 9/9 candidate hot proof. Do not infer causality from r20. Only if read-only analysis cannot distinguish load/cache/scheduling causes, freeze one bounded c32 intervention with a fresh control and one switch. Preserve r13-r20 roots and r19 REJECT_OR_QUALIFY, never use NPU4-7 or stop external work, and do not claim GitHub/main sync."
+  "next_action": "Read HYPIC_R19_R20_LOAD_STATE_LOCALIZATION_20261011.md. Read-only r19 replay excludes missing hot proof or output cap as sole cause; c32 versus c1 state/scheduler cause is not isolated. Freeze one bounded c32 intervention that exposes request-level material victim/state or compares native/HYPIC decode state, with a fresh root and matched control, before any device action. Then require a new full 127x3 matched pair for revised adoption. Preserve r13-r20 roots and r19 REJECT_OR_QUALIFY, never use NPU4-7 or stop external work, and do not claim GitHub/main sync."
 }
