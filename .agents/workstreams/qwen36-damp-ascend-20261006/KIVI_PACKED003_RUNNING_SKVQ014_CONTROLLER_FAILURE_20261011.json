@@ -1,0 +1,125 @@
+{
+  "schema": "paper-portfolio.stage-decision/v1",
+  "updated_at_utc": "2026-10-11T13:39:00Z",
+  "classification": "PROGRESS_NOT_ACCEPTANCE",
+  "fixed_cutoff_epoch": 1791788425,
+  "kivi_previous": {
+    "owner_operation": "exec-0000000000000969",
+    "exit_code": 1,
+    "first_fault": "evidence256MiB/cache aggregate512MiB; one traversal, not peak claim",
+    "classification": "ADAPTATION_EVIDENCE_STORAGE",
+    "actual_native_calls": 2,
+    "raw": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-owned-main-FIA-PACKED002-001/physical4/numeric/raw/RESULT.json",
+      "bytes": 622690,
+      "sha256": "5f1f74d3e50bc19f0e733f09730107a53c94ab8efc68045e9214ec898f242a63"
+    },
+    "independent_recovery": {
+      "operation": "exec-0000000000000971",
+      "exit_code": 0,
+      "wall_seconds": 34.265,
+      "relative_rms_bits2": 0.0035295523989060428,
+      "relative_rms_bits4": 0.002940335031848279,
+      "threshold": 0.005,
+      "full8_fields_and_finish": true,
+      "scope": "rank0 layer11 actual length32769; captured2bit and derived4bit; not model/long lifecycle/performance/task",
+      "durable_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN0971_KIVI_PACKED002_INDEPENDENT_RAW_DIAGNOSTIC_20261011.json",
+      "durable_sha256": "8dfd4c3b6a03460e329567032e2c8354b85ec9e70a96a024a842b652e91ca558",
+      "original_host_remains_failed": true
+    },
+    "inventory": {
+      "files": 775,
+      "logical_and_unique_bytes": 285569742,
+      "binary_bytes": 210002992,
+      "declared_inspect_bytes": 55202708,
+      "raw_observation_bytes": 365802,
+      "other_bytes": 19998240
+    },
+    "cleanup": {
+      "cpu_inspect": "0978",
+      "npu_inspect": "0974",
+      "stopped_retained": true,
+      "pid": 0,
+      "no_exec": true,
+      "no_oom": true
+    }
+  },
+  "kivi_current": {
+    "operation": "exec-000000000000097f",
+    "state": "RUNNING",
+    "source": {
+      "bytes": 3375,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-003/SOURCE_MANIFEST.json",
+      "sha256": "3a7367ec912bd04fdd5b0bbe316aaa3d6e0c053dc85271203c27fc89496697de"
+    },
+    "software": {
+      "operation": "097d",
+      "tests": 20,
+      "exit_code": 0,
+      "seconds": 6.772614499903284,
+      "sha256": "ccf34b53b54ce82fe48c8e7cf3a9be86093287ed8f5d945304fd0a941c2147b2"
+    },
+    "delta": "Complete post-finish field read; verified unchanged bytes reuse prior immutable Ref. Changed fields fully persisted; original independent oracle/math/controller/budgets unchanged.",
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-owned-main-FIA-PACKED003-001",
+    "command": [
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-003/host_once.py",
+      "--execute",
+      "--source",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-003/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "3a7367ec912bd04fdd5b0bbe316aaa3d6e0c053dc85271203c27fc89496697de",
+      "--software",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-software-main-FIA-PACKED003-001/RESULT.json",
+      "--software-sha256",
+      "ccf34b53b54ce82fe48c8e7cf3a9be86093287ed8f5d945304fd0a941c2147b2",
+      "--producer-software",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN087C_KIVI_D8_FULL20_SOFTWARE_ORIGINAL_20261011.json",
+      "--producer-software-sha256",
+      "419cc87ac44b7ac94260b761cf2452793f6057277f742db4b9b91895fc2c18d2",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-owned-main-FIA-PACKED003-001"
+    ],
+    "physical_device": 4,
+    "logical_device": 0,
+    "next": "poll same097f; terminal -> exact own cleanup -> original independent whole; no duplicate launch"
+  },
+  "skvq": {
+    "model014": {
+      "operation": "095b",
+      "exit_code": 1,
+      "classification": "UNKNOWN_CONTROLLER_OWNERSHIP_FAILURE",
+      "first_fault": "actual foreign workload/ownership conflict",
+      "external_conflict_proved": false,
+      "exit_race_proved": false,
+      "next": "model015 complete-first-snapshot retirement diagnostics/strict replay; actual code fix pending full tests"
+    },
+    "matched011": {
+      "operation": "096f",
+      "actual_tests": 135,
+      "skips": 0,
+      "seconds": 84.849769,
+      "source_closure": 368,
+      "report_sha256": "9d7a947a61054c4087d00501b95753966958aff492181edb18e8e8e20610405c",
+      "scope": "SOFTWARE_ONLY, no model predecessor whole"
+    }
+  },
+  "agents": {
+    "kivi_hotpath_prepare": "FIA paired successor;003 source delivered",
+    "skvq_numeric_path_review": "actual FIA model and long-boundary independent capture/consumer;003 explicit binding pending",
+    "skvq_writer_next": "model015 targeted controller fix"
+  },
+  "rules": [
+    "A completed preparer requires prompt next-edge dispatch; source packets do not count as executable successors.",
+    "Whole output budget includes raw binaries, state JSON, repeated inspect and controller logs, with actual dynamic scan retained.",
+    "Original host failure remains failed even if preserved NPU raw later passes an independent mathematical audit.",
+    "Ownership message without failed PID proof does not establish foreign workload; preserve UNKNOWN and capture discriminating evidence."
+  ],
+  "acceptance": {
+    "new_technique_accepted": false,
+    "model_performance_pass": false,
+    "final_task_pass": false,
+    "zero_idle_claim": false
+  }
+}

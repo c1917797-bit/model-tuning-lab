@@ -1,3 +1,11 @@
+## 2026-10-11 13:39 UTC — KIVI003 live; original raw numeric PASS; SKVQ controller repair
+
+- Read KIVI_PACKED003_RUNNING_SKVQ014_CONTROLLER_FAILURE_20261011.json and current serial queue. MAIN exact handle exec-000000000000097f is RUNNING; only physical4->logical0 after same-image checks. Target20 tests passed097d; source MF3375/3a7367ec912bd04fdd5b0bbe316aaa3d6e0c053dc85271203c27fc89496697de. Poll same handle, do not duplicate.
+- Original0969 FAILED evidence256MiB cap. Both native fullD256 calls executed; independent0971 passed unchanged0.005 full-output/full8pool/finish at actual32769 (rank0/layer11 only). Original failure remains failed, not model/performance/task authority. Exact owned CPU/NPU independently stopped-retained0974/0978. Actual775files285569742B, including55.2MB repeated inspect;003 reuses only full-read byte-equal fields, no cap/math/controller change.
+- SKVQ model014095b failed ownership observer. Missing rejectedPID evidence prevents foreign-workload/exit-race attribution; UNKNOWN remains. Agent prepares015 full-snapshot diagnostics and strict source-bound retirement handling. Matched011 actual135/135 zero-skips PASS096f/84.85s, not model readiness.
+- Three off-device preparers live; no ready device backup or zero-idle claim. KIVI actual FIA firstdecode/long-boundary/paired consumers pending. Cutoff1791788425 unchanged. No new accepted non-HYPIC technique, E2E win or task score. Older headers below are historical.
+
+
 ## 2026-10-11 12:27 UTC — SKVQ component whole PASS; FIA004 native ABI evidence
 
 - Latest stage: SKVQ_WHOLE_PASS_FIA004_ABI_FAILURE_20261011.json and current serial queue. Reader013 compat001 target14 PASS0932; actual complete readonly whole0933 exit0/145.587s. READER_WHOLE.json 2553B SHA14dc0ce12bb25e267de9fbd83f490a2af955e9b04e656029cb3f92df24c00ee2. All64 Q2/Q4 =128 NPU cases/384 calls/196608 output elements consumed; original013 source/math/ownership unchanged, explicit compat identity retained. Not model/graph/lifecycle/whole176/performance/task PASS.

@@ -1,7 +1,7 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11T12:27:00Z",
-  "latest_stage_decision": "SKVQ_WHOLE_PASS_FIA004_ABI_FAILURE_20261011.json",
+  "updated_at_utc": "2026-10-11T13:39:00Z",
+  "latest_stage_decision": "KIVI_PACKED003_RUNNING_SKVQ014_CONTROLLER_FAILURE_20261011.json",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -12,47 +12,69 @@
     3
   ],
   "current": {
-    "paper": "KIVI",
-    "operation": "exec-0000000000000927",
-    "state": "TERMINAL_NATIVE_FIA_D256_CONTROL_RETURNED_V32_UNSUPPORTED",
-    "exit": 1,
+    "operation": "exec-000000000000097f",
+    "state": "RUNNING",
     "source": {
-      "bytes": 2504,
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-capability-single4-owner-v1-004/SOURCE_MANIFEST.json",
-      "sha256": "a9883f5c192fb799215a362726c9c3f5c67baff3ba8dbb69fd37a958303901bb"
+      "bytes": 3375,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-003/SOURCE_MANIFEST.json",
+      "sha256": "3a7367ec912bd04fdd5b0bbe316aaa3d6e0c053dc85271203c27fc89496697de"
     },
-    "only_physical": 4,
     "software": {
-      "operation": "exec-0000000000000925",
-      "tests": 15,
-      "exit_code": 0
+      "operation": "097d",
+      "tests": 20,
+      "exit_code": 0,
+      "seconds": 6.772614499903284,
+      "sha256": "ccf34b53b54ce82fe48c8e7cf3a9be86093287ed8f5d945304fd0a941c2147b2"
     },
-    "owned_cleanup_verified": true,
-    "next_device_stage": null
+    "delta": "Complete post-finish field read; verified unchanged bytes reuse prior immutable Ref. Changed fields fully persisted; original independent oracle/math/controller/budgets unchanged.",
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-owned-main-FIA-PACKED003-001",
+    "command": [
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-003/host_once.py",
+      "--execute",
+      "--source",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-003/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "3a7367ec912bd04fdd5b0bbe316aaa3d6e0c053dc85271203c27fc89496697de",
+      "--software",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-software-main-FIA-PACKED003-001/RESULT.json",
+      "--software-sha256",
+      "ccf34b53b54ce82fe48c8e7cf3a9be86093287ed8f5d945304fd0a941c2147b2",
+      "--producer-software",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN087C_KIVI_D8_FULL20_SOFTWARE_ORIGINAL_20261011.json",
+      "--producer-software-sha256",
+      "419cc87ac44b7ac94260b761cf2452793f6057277f742db4b9b91895fc2c18d2",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-owned-main-FIA-PACKED003-001"
+    ],
+    "physical_device": 4,
+    "logical_device": 0,
+    "next": "poll same097f; terminal -> exact own cleanup -> original independent whole; no duplicate launch"
   },
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
   "preparation": [
     {
-      "paper": "SKVQ",
-      "owner": "skvq_writer_next",
-      "state": "MODEL013_COLD_CLI_REPAIR_TARGET_PENDING",
-      "ready": false,
-      "next_gate": "reader013 whole0933 PASS; fix exact -I model_whole import and Linux cold CLI, target full software, TP4 actual model"
-    },
-    {
-      "paper": "KIVI",
-      "owner": "skvq_numeric_path_review",
-      "state": "REAL_PACKED_FULLD256_ADAPTER_PREPARING",
-      "ready": false,
-      "next_gate": "actual32769 packed input dequant->fullD256 FIA; full independent output/LSE, no float65 substitute"
-    },
-    {
-      "paper": "KIVI",
       "owner": "kivi_hotpath_prepare",
-      "state": "REAL_PACKED_FULLD256_INDEPENDENT_GATE_PREPARING",
+      "paper": "KIVI",
+      "state": "RUNNING_OFF_DEVICE",
       "ready": false,
-      "next_gate": "Reuse existing singlecard owner; actual immutable packed fixtures and fail-closed independent consumer"
+      "next_gate": "FIA paired successor;003 source delivered"
+    },
+    {
+      "owner": "skvq_numeric_path_review",
+      "paper": "KIVI",
+      "state": "RUNNING_OFF_DEVICE",
+      "ready": false,
+      "next_gate": "actual FIA model and long-boundary independent capture/consumer;003 explicit binding pending"
+    },
+    {
+      "owner": "skvq_writer_next",
+      "paper": "SKVQ",
+      "state": "RUNNING_OFF_DEVICE",
+      "ready": false,
+      "next_gate": "model015 targeted controller fix"
     }
   ],
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
@@ -71,7 +93,7 @@
     "model_ready": false,
     "performance_ready": false
   },
-  "idle_cause": "FIA004 native call2 rejects QK256/V32 in installed tiler, owned devices released. SKVQ readonly whole now passes; model cold -I CLI repair pending. No executable device successor yet; no zero-idle claim.",
+  "idle_cause": "Last fresh097e all4-7 idle. New003 device gate097f is live, initial CPU preflight; no continuous4-card compute claim. No ready device backup until model015/source software or model FIA prerequisites complete.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -205,10 +227,10 @@
     }
   ],
   "latest_resource_snapshot": {
-    "operation": "exec-00000000000008db",
-    "observed_at_utc": "2026-10-11T11:01:31.41045814Z",
-    "physical4_7": "FIA001 stopped at CPU visibility; no NPU created.08df subsequent actual admission live; device stage not yet independently observed.",
-    "protected0_3": "Unchanged boundary; no external stop/delete.",
+    "operation": "097e",
+    "observed_at_utc": "2026-10-11T13:37:02Z",
+    "physical4_7": "idle before actual097f dispatch",
+    "protected0_3": "unchanged; no external mutation",
     "ready_npu_backup": 0,
     "zero_idle_claim": false
   },
@@ -1017,15 +1039,19 @@
     "remote_parallel_cpu_admitted": false,
     "ready_device_successor_count": 0
   },
-  "current_off_device": "SKVQ model013 cold CLI fix and target software; KIVI actual packed fullD256 adapter and independent consumer prepared in parallel.",
+  "current_off_device": {
+    "kivi_hotpath_prepare": "FIA paired successor;003 source delivered",
+    "skvq_numeric_path_review": "actual FIA model and long-boundary independent capture/consumer;003 explicit binding pending",
+    "skvq_writer_next": "model015 targeted controller fix"
+  },
   "current_successor_rule": "No active NPU job. Admit first source-reviewed actual prerequisites-passed model or real packed numerical gate; frozen protocol and only4-7 remain.",
   "scheduling_audit": {
-    "current": "FIA0040927 terminal/released; native ABI limitation recorded",
-    "next": "SKVQ model013; preceding128component whole0933 passed",
-    "backup": "KIVI actual packedfull32769 fullD256 source preparation, not yetready",
+    "current": "KIVI003097f live",
+    "next": "SKVQ model015 source/full tests pending",
+    "backup": "KIVI FIA whole->model->long boundaries->pair; not admitted",
     "zero_idle_claim": false
   },
-  "current_preparation_checkpoint": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ_WHOLE_PASS_FIA004_ABI_FAILURE_20261011.json",
+  "current_preparation_checkpoint": ".agents/workstreams/qwen36-damp-ascend-20261006/KIVI_PACKED003_RUNNING_SKVQ014_CONTROLLER_FAILURE_20261011.json",
   "maintainer_rule_fix": {
     "commit": "16eaf1806f2ea3bb810ea8f12027f418bf780047",
     "remote_verified_operation": "exec-00000000000006f9",
