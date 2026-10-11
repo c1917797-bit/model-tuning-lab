@@ -1,3 +1,11 @@
+## 2026-10-11 15:48 UTC — Actual KIVI numeric failure; SKVQ native pair repair
+
+- KIVI09ec actual same-image123 PASS;09ef independent raw exit1/141.252s. Two FA completed; rank0 layer19 output relativeRMS0.006826750630736978 exceeds.005 (maxabs.015625). Source/raw/logs preserved; same packed K/V backend-vs-reference rounding attribution pending. No full64/numerical/model/performance/task PASS. Original09ef saved lowbit/MAIN09EF_KIVI_FIA_RAW_FAILED_ORIGINAL_20261011.json; raw entry2908/67ab71a87738bc4129c5083ce97674fc745032ad8324bc3da87accea62fff7e8. Independent09f5 verifies own4cbf17... stopped retained/Pid0/noExec/noOOM, Devices[].
+- SKVQ01909df exit1/733.057s, actual weights loaded; model_factory.py77 rejects native container. Exact original bind_kv_cache source21028/36cae980896d5607ce238606ec6c053eff17b7597a0c9185549f94583c1b9de6 assigns direct same(K,V), not outer[tuple].020 fixes source-proven representation and records original storage metadata;118 tests pending. Original019 failure/owned release09eb preserved. No algorithm or numerical no-go.
+- Long002 exact first-whole RO mount missing, confirmed by2 reviewers; newlong003/paired003 preparing. MAIN attempted11 source helper chunks with absoluteheaders; every inner patch rejected, despite outerok. Confirmed09f4 helper absent: no install/run. Use relative headers and inspect inner result.ok/applied; do not treat transportok as source success. matched019 root still donor012 copy only, no019patches: DO NOT RUN.
+- Fresh09f5 15:48:08UTC physical4-7 idle, no process/AICore0/HBM2869/2866/2867/2861MiB. No admitted device successor;3 preparers active on actual repairs. Fixed cutoff1791788425 unchanged. Cards idle due readiness, not external workload; no zero-idle claim.
+- Local checkpoint4beaa6b7 retained; normal09e7 Git push exit128 TLS termination. Remote push not verified. Earlier headings historical.
+
 ## 2026-10-11 15:21 UTC — KIVI raw captured; SKVQ019 dispatched after target106
 
 - KIVI09ca exit0/651.165s, raw RESULT1075257B/746af53c5951d7646032c64cfa4c2c8fd75c565ab08fe33c39abb06dd22c5f8f; actual32768+2 response and4 rank bundles, native final observed. Original terminal preserved MAIN09CA_KIVI_FIA_FIRST003_ORIGINAL_20261011.json. Independent123/raw64/whole still pending: not numerical, performance or task PASS.

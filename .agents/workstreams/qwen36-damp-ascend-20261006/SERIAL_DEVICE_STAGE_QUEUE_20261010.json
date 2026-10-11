@@ -1,7 +1,7 @@
 {
   "schema": "paper-portfolio.serial-stage-queue/v1",
-  "updated_at_utc": "2026-10-11T15:21:30Z",
-  "latest_stage_decision": "KIVI first003 raw capture completed and released; SKVQ019 target106 passed and09df dispatched.",
+  "updated_at_utc": "2026-10-11T15:48:08Z",
+  "latest_stage_decision": "SKVQ019 implementation failed and released; KIVI independent123 passed, raw64 stopped on actual third FA numeric threshold. Repairs parallel.",
   "authority": "latest human failure-yield request; parallel preparation, MAIN serial physical4-7",
   "portfolio_cutoff_epoch": 1791788425,
   "device_stage_concurrency": 1,
@@ -12,73 +12,44 @@
     3
   ],
   "current": {
-    "paper": "SKVQ",
-    "operation": "exec-00000000000009df",
-    "state": "RUNNING_HOST_PRELUDE",
-    "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-019/SOURCE_MANIFEST.json",
-      "bytes": 110017,
-      "sha256": "d2cc2dc1b36ca162d589987e857f9839f013497a91fcaa32eaf62dfee49f837b"
-    },
-    "software_operation": "exec-00000000000009db",
-    "software_tests": 106,
-    "software_skipped": 0,
-    "software_ref": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-software-019-main-20261011-001.json",
-      "bytes": 697,
-      "sha256": "ffd49fa33aa6ee22eeed40271ab7244ba9f5b1b08dead7005487f4e905b65747"
-    },
-    "argv": [
-      "/usr/bin/env",
-      "MAIN_SKVQ_MODEL_READER_HOST_ENABLE=1",
-      "/usr/bin/prlimit",
-      "--cpu=9000:9000",
-      "--",
-      "/usr/bin/python3",
-      "-B",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-model-reader-once-v1-019/model_host.py",
-      "--execute",
-      "--source-manifest-sha256",
-      "d2cc2dc1b36ca162d589987e857f9839f013497a91fcaa32eaf62dfee49f837b",
-      "--reader-whole-ref-json",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN-SKVQ-CURRENT-HANDOFF-20261011-001/READER013_WHOLE_REF.json",
-      "--output",
-      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-model-reader-019-main-20261011-001"
-    ],
-    "physical_devices": [
-      4,
-      5,
-      6,
-      7
-    ],
-    "NPU_occupancy_not_yet_verified": true,
+    "paper": "KIVI + SKVQ",
+    "state": "OFF_DEVICE_REPAIR_AFTER_TERMINALS",
+    "physical_devices": [],
+    "KIVI_raw_operation": "exec-00000000000009ef",
+    "KIVI_raw_exit": 1,
+    "KIVI_raw_primary": "Actual rank0 layer19 independent output compare: relative_rms0.006826750630736978 > .005, max_abs.015625; two prior FA passed. Same packed tensor reference/backend boundary attribution pending.",
+    "KIVI_raw_release_operation": "exec-00000000000009f5",
+    "SKVQ_operation": "exec-00000000000009df",
+    "SKVQ_exit": 1,
+    "SKVQ_primary": "model_factory.geometry incorrectly expects outer [tuple]; actual runner creates direct(K,V), actual bind assigns same object.020 implementation repair preparing.",
+    "SKVQ_release_operation": "exec-00000000000009eb",
     "model_ready": false,
     "performance_ready": false,
-    "next": "Poll09df exact; source-bound CPU->N1->model->own release->whole. Do not duplicate. KIVI independent123/raw64 awaits minimal CPU adapter."
+    "next": "Fix source-proven direct pair SKVQ020 and run actual new software118 before device; KIVI use immutable capture to attribute .005 failure before new NPU. Do not run long002: missing precise first-whole RO mount."
   },
   "next_ready_device_stage": null,
   "ready_device_successor_count": 0,
   "preparation": [
     {
-      "owner": "kivi_hotpath_prepare",
-      "paper": "KIVI",
-      "state": "RUNNING_OFF_DEVICE",
+      "owner": "skvq_writer_next",
+      "paper": "SKVQ",
+      "state": "PREPARING_MODEL020_DIRECT_NATIVE_PAIR",
       "ready": false,
-      "next_gate": "firstdecode003 explicit scoped recovered component; new actual same-image/mount checks before NPU"
+      "next_gate": "118 local+actual target118 then source-bound model; metadata original tuple identity, no math change"
     },
     {
       "owner": "skvq_numeric_path_review",
       "paper": "KIVI",
-      "state": "RUNNING_OFF_DEVICE",
+      "state": "ATTRIBUTING_ACTUAL_NUMERICAL_FAILURE",
       "ready": false,
-      "next_gate": "109 local PASS; 100 exact dependency refs missing, actual oracle cost pending; not source-ready"
+      "next_gate": "same packed K/V FIA vs independent BF16 intermediate rounding; raw64 currentfailed"
     },
     {
-      "owner": "skvq_writer_next",
-      "paper": "SKVQ",
-      "state": "RUNNING_OFF_DEVICE",
+      "owner": "kivi_hotpath_prepare",
+      "paper": "KIVI",
+      "state": "PREPARING_LONG003_AND_PAIRED003",
       "ready": false,
-      "next_gate": "matched014 source prepared, actual model018 whole pending; observer-off formal successor preparation"
+      "next_gate": "source-proven exact first-whole RO mount; actual corrected first64 then640+12 thenpaired"
     }
   ],
   "terminal_dispatch_rule": "Verify terminal and exact owned cleanup first. Pending repair returns to PREPARING and releases the device lane. Admit highest-value other-paper stage whose actual prerequisites pass; never substitute source count for readiness. If no stage ready, record concrete idle cause and prepare independent successor.",
@@ -108,7 +79,7 @@
     "performance_ready": false,
     "independent_whole_pending": true
   },
-  "idle_cause": "Observed release15:10:38 through15:21:06 fresh snapshot idle: MAIN deployment/admission gap, not external use.09df dispatch does not prove compute.",
+  "idle_cause": "Fresh09f5 15:48:08 physical4–7 idle with baseline HBM and no NPU process. No admitted device successor: SKVQ source repair and KIVI numeric attribution pending.",
   "new_failures": [
     {
       "operation": "exec-0000000000000263",
@@ -242,10 +213,10 @@
     }
   ],
   "latest_resource_snapshot": {
-    "operation": "097e",
-    "observed_at_utc": "2026-10-11T13:37:02Z",
-    "physical4_7": "idle before actual097f dispatch",
-    "protected0_3": "unchanged; no external mutation",
+    "operation": "exec-00000000000009f5",
+    "observed_at_utc": "2026-10-11T15:48:08Z",
+    "physical4_7": "idle; no process/AICore0; HBM2869/2866/2867/2861MiB",
+    "protected0_3": "not touched",
     "ready_npu_backup": 0,
     "zero_idle_claim": false
   },
@@ -1056,16 +1027,17 @@
   },
   "current_off_device": {
     "paper": "KIVI",
-    "next": "source-reviewed exact ind003123 software adapter then independent original64 raw and whole",
-    "state": "SOURCE_DELIVERED_PENDING_MAIN_DEPLOY_AND_SAME_IMAGE",
-    "long002": "local117 pass, not target/NPU",
-    "paired002": "local delta tests pending; actual first/long missing"
+    "software123": "09ec exit0/101.973s target123PASS",
+    "raw64": "09ef exit1 numerical threshold at rank0 layer19; same tensors backend/reference attribution pending",
+    "long002": "DO NOT RUN; source root/helper absent after inner patch rejection; missing firstwhole mount established",
+    "long003": "preparing exact RO repair",
+    "paired003": "identity successor needed"
   },
-  "current_successor_rule": "MAIN09ca owns serial controller lane. No duplicate or peer CPU/NPU. Terminal+release precedes next stage.",
+  "current_successor_rule": "No live device controller. Exact source/software/actual prerequisites before dispatch; failures yield to ready other paper. No actual ready successor currently.",
   "scheduling_audit": {
-    "current": "KIVI003097f live",
-    "next": "SKVQ model015 source/full tests pending",
-    "backup": "KIVI FIA whole->model->long boundaries->pair; not admitted",
+    "current": "off-device repairs",
+    "next": "SKVQ020 target118 -> model if complete",
+    "backup": "KIVI numerical repair -> firstdecode -> long003 ->paired003",
     "zero_idle_claim": false
   },
   "current_preparation_checkpoint": ".agents/workstreams/qwen36-damp-ascend-20261006/SKVQ018_DISPATCH_KIVI_COMPONENT_RECOVERY_20261011.json",
