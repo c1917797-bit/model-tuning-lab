@@ -1,5 +1,30 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 exact-main acceptance gates corrected
+
+SKILL_ACCEPTANCE_SCOPE_REVIEW_20261012.md distinguishes Skill validation from
+algorithm adoption for quality, benchmark and reporting. Exact-main benchmark
+allows evidence classes explicitly out of scope; exact-main quality allows
+regression/inconclusive results. Algorithm repair, causal root proof, speed
+testing and integration of branch-only wording are not universal quality-Skill
+acceptance prerequisites. Existing human/experiment requirements and r19's
+quality-first performance restriction are unchanged.
+
+QUALITY_CONTRACT_OBLIGATION_AUDIT_20261012.md audits all8 quality protocol
+items using main Skill/reference and r19 receipts (008b/0092/0094). Completed
+rows/statistics/negative classification are retained. Historical tokenizer/
+host-driver identity, actual HTTP attempt accounting and chronology remain
+incomplete or divergent; do not synthesize old proof from current host state.
+Two case next-gates are corrected without promotion. Counts remain7/22.
+0096 passed provenance29 and9 existing benchmark/reporting regression tests.
+No NPU work, runtime changes, raw edits or new main/remote claim.
+
+Next review the remaining partial cases against actual main obligations,
+reusing the completed transformation and HYPIC evidence; do not repeat these
+three scope reviews or use causal tooling as a universal entry gate. Same-source
+descriptive performance still awaits the requested prospective choice.
+Fixed08:47:14UTC Oct13 delivery deadline remains unchanged.
+
 ## 2026-10-12 repeat3 attempt inventory closed, proof gaps retained
 
 HYPIC_R13_REPEAT3_ATTEMPTS_20261012.json/.md enumerate all22 original/retry

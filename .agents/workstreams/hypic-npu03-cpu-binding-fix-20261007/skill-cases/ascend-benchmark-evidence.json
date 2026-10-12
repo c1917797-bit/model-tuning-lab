@@ -3,6 +3,7 @@
   "skill": "ascend-benchmark-evidence",
   "campaign_code": "V",
   "long_term_acceptance": "partial-evidence",
+  "exact_main_scope_review": {"positive_algorithm_outcome_required":false,"all_evidence_classes_measured_in_every_case_required":false,"correctness_first_progression_still_required":true},
   "behavioral_evidence_verified": true,
   "task": "Reject a drifted historical HYPIC baseline, classify pre-health foreign-process retries as invalid evidence, and independently replay the bounded r13 quality rejection beside the valid six-phase performance gain without treating speed as quality acceptance",
   "executed_at_utc": "2026-10-09",
@@ -42,6 +43,7 @@
     "retry14_exact_owned_service_removed": true
   },
   "evidence": [
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/SKILL_ACCEPTANCE_SCOPE_REVIEW_20261012.md","sha256":"17a8f0cc67f86f91dbba53ee1d5892b6b40afeed73e54f532863b6bac6fdd081"},
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/BENCHMARK_BASELINE_REUSE_ACCEPTANCE_20261008.md",
       "sha256": "914a5068e158a5fa993cddc3f716726cc0ddbefe2714786126e973e02d2cd5e9"
@@ -108,8 +110,8 @@
     "retry18_audit_sha256": "43d5289c7d22c137ae3453e5e73b945ef33cd73642e3cdce04690e232bb6b6cf"
   },
   "replayable_regression_recorded": true,
-  "boundary": "The main Skill's comparability rule rejected an old 0.9-utilization denominator against 0.85. Pre-health foreign-process retries have zero valid benchmark rows. Current r13 supplies a valid 127x3 LongBench-v2 quality pair (230/381 to 219/381, REJECT_OR_QUALIFY, strict four-worker quality hot 368/381 FAIL) and a distinct six-phase fixed-output performance pair (weighted TPOT -21.5243%, TTFT P95 -40.8694 s, candidate hot 120/120 PASS). These different workloads cannot be pooled, and a speed screen cannot override the failed quality gate. Startup/cold, broader boundary, lifecycle/soak, resource classes, GSM8K quality and main integration remain outside this bounded case; long-term acceptance stays partial.",
-  "next_gate": "Retain immutable r13 and retry roots. Replay missing cold/startup, boundary, lifecycle and resource evidence classes under a prospectively frozen matched protocol, and validate the default GSM8K quality ruler before upgrading this Skill. A new device experiment requires a distinct preregistered root, fresh direct routing, actually idle physical NPU0-3 and 8223, continuous guard, and no modification of foreign work. Push/integrate only with working authorized Git credentials; do not infer full Skill acceptance from the valid bounded r13 measurements.",
+  "boundary": "The bounded r13 quality rejection and six-phase performance effect remain valid separate results, with strict quality hot368/381 and performance hot120/120. A speed effect cannot establish quality acceptance. Exact-main Verification permits cold, steady, boundary, lifecycle and resource classes to be separately reported or explicitly out of scope; missing out-of-scope classes and a GSM8K suite are not automatic requirements of every benchmark case. Full Skill acceptance remains partial pending applicable identity, correctness-first/low-high progression, diagnostic-overhead and exclusion review. This does not waive any measurement explicitly required by the owning experiment or human and does not prove main integration.",
+  "next_gate": "Audit existing r13 contracts and receipts against each applicable exact-main protocol obligation; state cold/startup, boundary, lifecycle and resource scope explicitly instead of automatically launching every class. Preserve correctness-first and low/high progression deviations and all excluded attempts. Do not rerun completed r13 phases. Any future candidate measurement remains governed by its own frozen quality/progression gates and fresh physical0-3 isolation; remote integration remains separate.",
   "drift_trigger": "Revalidate after main Skill or registry blob changes, model/image/source/physical topology or common serving flags change, workload/scorer changes, or any raw receipt hash drift.",
   "retry18_followup": {
     "attempt_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry18",

@@ -3,6 +3,7 @@
   "skill": "ascend-model-quality-evaluation",
   "campaign_code": "P",
   "long_term_acceptance": "partial-evidence",
+  "exact_main_scope_review": {"positive_algorithm_outcome_required":false,"causal_root_required":false,"same_source_performance_required":false,"branch_amendment_required_to_audit_exact_main":false},
   "behavioral_evidence_verified": true,
   "task": "Independently audit r13, r16 and repaired-source r19 HYPIC max-2048 explicit-boundary LongBench quality pairs and the r19 natural-request GSM8K off-path safety pair on physical NPU0-3 TP4, separating all-request quality, per-request hot proof and full-suite adoption.",
   "executed_at_utc": "2026-10-10",
@@ -128,6 +129,10 @@
     "main_skill_integrated": false
   },
   "evidence": [
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/QUALITY_CONTRACT_OBLIGATION_AUDIT_20261012.md","sha256":"a3ea8b45a146ba807e955174c7ae6691e095581dd7a07b8f7451ccffa50c0dcc"},
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R19_FINAL_QUALITY_REPORT_20261012.md","sha256":"836bba2175bf3debe9e8debd7d880c4c0dc143f5acf09622644e5ba4469f901d"},
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r19_final_quality_report.py","sha256":"e3001375efdd676dc3e889b9a5d8dfca0963a2a50d7d0e4a96c9172ee7b963ed"},
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/SKILL_ACCEPTANCE_SCOPE_REVIEW_20261012.md","sha256":"17a8f0cc67f86f91dbba53ee1d5892b6b40afeed73e54f532863b6bac6fdd081"},
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/MODEL_QUALITY_SKILL_REQUEST_COVERAGE_ACCEPTANCE_20261008.md",
       "sha256": "08d881c3e66d0f72bfbff48c75ca9ac58aa44ebb409230e8020f73e0f88dea53"
@@ -270,7 +275,7 @@
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "r9-r12 remain immutable activation failures without a valid full pair. R13/r16/r19 explicit-segment LongBench paired quality results are negative under their separate source/concurrency identities and cannot be pooled. R19 repaired-source c32 max-2048 LongBench is 227/381 to 219/381 (-2.0997pp), with 134/381 requests carrying four-worker hot proof and 247 unproved, not proven cold. R19 same-source c32 max-2048 GSM8K natural-request safety is independently audited as 3838/3957 to 3840/3957 (+0.05054pp), off-path PASS; it does not prove HYPIC in-path safety or override the LongBench rejection. A short deterministic canary and exact release are valid for r19, but the technical quality-loss root and repaired-source performance remain unproven. The historical six-phase positive performance result belongs to another source. Main lacks the branch's per-scored-request proof wording, so no full current-main Skill, paper or adoption acceptance follows.",
-  "next_gate": "Preserve r13/r16/r19 immutable source-scoped results and the r19 off-path GSM8K PASS separately. Use the completed LongBench request-level evidence to narrow early-response divergence, length-limit and cache/scheduler hypotheses without assigning unproved causality. Any repair requires a prospectively frozen one-variable source-matched pair and exact resource isolation; only quality-admissible repaired source may proceed to matched performance/adoption. Integrate and replay request-level mechanism wording before promoting the Skill; do not use NPU4-7 or claim main/remote synchronization.",
+  "boundary": "r13/r16/r19 retain separate source-scoped negative LongBench results. r19 LongBench 227/381 to219/381 and same-source GSM8K3838/3957 to3840/3957 are complete, independently audited quality results, not missing suites. GSM8K is off-path safety only;134/381 LongBench requests have four-worker hot proof and247 remain unproved. Negative classification can validate quality-evaluation behavior; algorithm repair, numerical causality, performance and integration of branch-only wording are not prerequisites for assessing this exact-main Skill. Full acceptance stays partial pending a requirement-by-requirement provenance/workflow audit, including required tokenizer/runtime identities and actual retry counts not established in the final report. Existing quality/adoption rejections and all original evidence remain unchanged.",
+  "next_gate": "Use the completed r19 report and8676-row read-only replay to audit exact-main identity, retry-accounting, canary, paired-score/category/length and lifecycle obligations. Record any unavailable historical fields explicitly; do not rerun full quality just to recreate metadata, require algorithm success, or make branch-only wording integration a prerequisite for assessing main. Any separately authorized repair/adoption attempt still needs its own frozen matched design and physical0-3 isolation; same-source performance is a separate pending decision.",
   "drift_trigger": "Revalidate after main Skill/reference or registry blob changes, plugin source/telemetry changes, model/service fingerprint drift, or any dataset/evaluator/concurrency/generation-ruler change."
 }
