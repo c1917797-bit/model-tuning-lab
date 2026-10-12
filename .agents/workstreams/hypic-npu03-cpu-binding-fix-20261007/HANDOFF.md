@@ -1,5 +1,17 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 bounded native delivery lifecycle planned
+
+HYPIC_NATIVE_LIFECYCLE_PLAN_20261012.md and native_lifecycle_contract.json
+freeze only actual HYPIC enabled/disabled/uninstalled replacement-restart
+controls, sample59 with two1-token warmups and one max2048 target per phase.
+Unchanged4429e35; existing physical guard/service/controller reused, no observer.
+9 audit regressions and all3 offline configurations pass; no device result yet.
+Read native_lifecycle_checkpoint for the current exact operation before action.
+Only0-3/8223 after fresh direct/idle proof; stop progression if a stage fails.
+No full quality rerun or pending-choice performance launch.8/21, r19 rejection,
+fixed08:47:14UTC Oct13 deadline and remote-auth boundary remain unchanged.
+
 ## 2026-10-12 prospective native HYPIC draft identity complete
 
 HYPIC_NATIVE_DELIVERY_DRAFT_20261012.md records complete static validation of
