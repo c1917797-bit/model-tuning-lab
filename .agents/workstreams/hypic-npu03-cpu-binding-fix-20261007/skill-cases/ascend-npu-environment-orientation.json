@@ -1,5 +1,6 @@
 {
   "schema": "mst-real-task-skill-case/v1",
+  "native_lifecycle_enabled_failure_20261012": {"decision":"FAILED_SEMANTIC_GUARD","report":"HYPIC_NATIVE_LIFECYCLE_ENABLED_FAILURE_20261012.md","controller":"exec-0000000000000141","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","requests_complete":3,"target_hot_workers":4,"reference":"D","prediction":"A","completion_tokens":2048,"finish_reason":"length","clean_isolation_samples":104,"exact_owned_release":true,"failure_audit_sha256":"94dd02e81529acedf25ace6979cc6b72a1e265505adf1ea2cf36afd29e7bf82a","canary_pass":false,"disabled_uninstalled_complete":false,"population_quality_or_performance_claim":false,"old_verdict_changed":false,"replay":"python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_lifecycle_failure_audit.py"},
   "skill": "ascend-npu-environment-orientation",
   "campaign_code": "V",
   "long_term_acceptance": "partial-evidence",
@@ -25,6 +26,9 @@
     "scored_rows": 0
   },
   "evidence": [
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_lifecycle_failure_audit.py","sha256":"05c7314e035e5905a33f1b18c8fb8e0dfc5221cf842db6f2a94e2ff316e19924"},
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_LIFECYCLE_ENABLED_FAILURE_20261012.md","sha256":"b512b1594a1864c681589d86fcb61e511d6643ae69626b4315e48b512dc22a49"},
+    {"path":".agents/experiments/exp-20261012-hypic-native-lifecycle.yaml","sha256":"bd8acd2913bbb979e5b3311f626d2afa790ea584481cc4fd8f886e152e3f1881"},
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/NPU_ENVIRONMENT_ORIENTATION_ACCEPTANCE_20261008.md",
       "sha256": "10d5d8c4f18b7aea6b93506cda10d4512f993d722365b46c1a73b67d6233e45c"

@@ -1,5 +1,22 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 native enabled terminal: semantic failure, not missing activation
+
+exec0141 ended exit0 in563.354s;3/3 responses, four-worker target hot proof,
+104 clean isolation samples and exact owned release23:03:44UTC. But target59
+hit2048/length and scored A versus reference D. Frozen auditor0154 failed its
+semantic/natural-stop gate. Recorder0157 independently preserves that negative
+decision with SHA25694dd02e81529acedf25ace6979cc6b72a1e265505adf1ea2cf36afd29e7bf82a.
+Read HYPIC_NATIVE_LIFECYCLE_ENABLED_FAILURE_20261012.md and replay
+native_lifecycle_failure_audit.py. No live controller or service remains.
+Disabled/uninstalled were not started under frozen progression; no unchanged
+enabled retry or gate rewrite. Current environment YAML is prospective, not
+historical backfill. Three Skill cases gain this bounded failed-case evidence;
+8/21 counts, r19 rejection, missing current-source speed and auth boundary stay.
+Next review failure/recovery obligations: any recovery-only controls must be
+explicitly separate from passing this canary. Do not add an observer or GDN task.
+Pending descriptive-performance choice and08:47:14UTC Oct13 deadline unchanged.
+
 ## 2026-10-12 native enabled lifecycle started — do not relaunch
 
 Planned checkpoint344e8cd9; final offline013d passed syntax,9 audit regressions,

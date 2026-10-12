@@ -1,0 +1,92 @@
+schema: ascend-inference-treatment/v1
+id: exp-20261012-hypic-native-lifecycle
+status: partial_component
+branch: work/hypic-npu03-cpu-binding-fix-20261007
+objective: Validate actual native HYPIC delivery controls and stateless rollback without repeating full quality or claiming performance.
+parent_experiment: exp-20261007-hypic-npu03-cpu-binding-fix
+environment:
+  scope: prospective 2026-10-12 enabled lifecycle, not historical r19 backfill
+  source:
+    commit: 4429e35177979c874bf053ab29789e4773f39b22
+    package_version: 0.8.5
+    python_tree_sha256: a5ebed77cc4ae0035e2634b81dc0606d8e37cc9d32f8894b984325bec1056692
+    manifest_sha256: dbac56e41b40214eff24ed305af77e18b50799a36b20e023f381a8dd3af05691
+    build_flags: unchanged official image; no framework edits or image rebuild
+  model:
+    directory: /cache/efim/Qwen3.6-27B
+    revision: unavailable; local identity below
+    index_sha256: a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b
+    shard_identity: frozen size and mtime; not full shard byte hashes
+    tokenizer_revision: unavailable; six tokenizer/config file hashes in raw environment.json
+    tokenizer_json_sha256: 5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42
+    dtype: bfloat16
+    quantization: none
+    tp: 4
+    dp: 1
+    pp: 1
+    max_model_len: 41984
+    max_output_tokens: 2048
+  software:
+    image: sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1
+    os_arch: Linux Euler 5.10.0-182.0.0.95.h3184.eulerosv2r13.aarch64
+    python: 3.12.13 in pinned-image CPU metadata; no separate runtime interpreter override claim
+    vllm: 0.23.0+empty
+    vllm_ascend: 0.23.0
+    torch: 2.10.0+cpu
+    torch_npu: 2.10.0.post4
+    cann: 9.1.0 pinned-image metadata; V100R001C11SPC001B243
+    driver: 25.2.0
+    driver_info_sha256: 9c8e598b7cc42b97e398cda3b4d3c6e967f3e9880b706f38e7dc5a5c80b9f920
+    firmware: unavailable
+    compiler_operator_package: unavailable; pinned image identity only
+  hardware:
+    product: Ascend910B4
+    physical_npus: [0, 1, 2, 3]
+    forbidden_npus: [4, 5, 6, 7]
+    container_visible_npus: [0, 1, 2, 3]
+    hbm_mb_each: 32768
+    cpu_affinity: 112-191
+    numa_policy: explicit cpuset; automatic CPU binding disabled; no additional host policy changes
+    interconnect_topology: unavailable; AIV configuration is not a measured transport-path proof
+    power_clock_policy: unavailable
+  runtime:
+    boundary: exact owned pinned-image Docker service
+    port: 8223
+    entrypoint: "hypic_vllm_ascend:register"
+    switch: VLLM_ASCEND_HYPIC_ENABLE
+    enabled_value: "1"
+    cache_root: /cache
+    docker_root: /cache/docker
+    host_tmpdir: /cache/cch
+    material_cache_mb: 3584
+    segments: 10
+    gpu_memory_utilization: 0.85
+    exact_command_mounts_and_nonsecret_env: raw container-inspect.json and hash-bound source-attestation.json
+    worker_identity: raw service-start.json and worker-namespace-map.json
+evidence:
+  raw_root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/native-lifecycle-20261012-enabled
+  environment_sha256: 2a42ef6f016f1ff1b315f8e457604ba56b65a4dd10351626436257b0a239f40d
+  installed_probe_sha256: 6fd7e9808d662e218c06af7306d0d8b08e240699f3a21413c3224061ba42c7a5
+  controller: exec-0000000000000141
+  frozen_auditor: exec-0000000000000154
+  failure_recorder: exec-0000000000000157
+  failure_audit_sha256: 94dd02e81529acedf25ace6979cc6b72a1e265505adf1ea2cf36afd29e7bf82a
+  replay: python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_lifecycle_failure_audit.py
+baseline_drift:
+  source_vs_r19: same 4429e35 package digest
+  launcher_vs_r19: prospective identity-check native wrapper; not the historical wrapper
+  historical_tokenizer_driver_identity: unavailable; current facts do not establish historical equality
+  decision: not admitted as a historical performance rebaseline or full paired quality result
+decision:
+  enabled_execution: terminal_complete
+  enabled_canary: FAILED_SEMANTIC_GUARD
+  actual_hot_workers: 4
+  reference: D
+  prediction: A
+  finish_reason: length
+  output_tokens: 2048
+  clean_isolation_samples: 104
+  exact_owned_release: true
+  disabled_uninstalled: not_started_after_frozen_gate_failure
+  adoption: false
+  full_quality_or_performance_claim: false
