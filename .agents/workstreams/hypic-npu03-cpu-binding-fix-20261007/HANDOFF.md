@@ -1,5 +1,28 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 tool-adapter original task bounded acceptance
+
+TOOL_ADAPTER_OBLIGATION_ACCEPTANCE_20261012.md maps all six exact-main
+workflow items to the actual repository. Fresh inventory00b2 and replay00b4
+found only CLAUDE.md, the exact main one-line canonical reference. No duplicate
+governance exists, so replacement is conditional/not needed. Live execution
+in every possible coding tool is not a requirement of this adapter audit.
+The verifier now includes untracked adapter files and rejects symlink drift;
+eight positive/negative regressions passed00b4. The original case, not a smaller
+replacement, is bounded verified. Current totals8 verified/21 partial/0 missing.
+All29 functional acceptance and main/remote integration remain incomplete.
+Combined replay00b8 passed real adapter audit,20 regressions,29-case provenance,
+29-Skill structure,diff check and task/case count consistency at8/21.
+
+The pinned main's14 missing generic trigger/scope entries are already repaired
+on this branch (00b1); do not rewrite them again. Skill text/registry not changed
+this stage. Old reports remain historical; the new case supplement qualifies
+the earlier conservative partial label without changing HYPIC evidence.
+Next review the runtime-monkeypatch case against existing package/rollback
+receipts; add only missing real acceptance, not more observer machinery.
+Same-source performance awaits prospective choice; no NPU launch authorized
+by silence. Deadline08:47:14UTC Oct13 and two untouched observer-v3 drafts stay.
+
 ## 2026-10-12 transformation validator false pass repaired
 
 TRANSFORMATION_VERIFICATION_REGRESSION_20261012.md records a real mismatch:

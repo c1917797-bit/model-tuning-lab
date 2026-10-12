@@ -1,8 +1,8 @@
 {
   "schema": "mst-real-task-skill-case/v1",
   "skill": "mst-tool-adapter-boundary",
-  "campaign_code": "P",
-  "long_term_acceptance": "partial-evidence",
+  "campaign_code": "V",
+  "long_term_acceptance": "verified",
   "behavioral_evidence_verified": true,
   "task": "Audit the actual model-tuning-lab coding-agent adapter against canonical AGENTS.md and exact current-main maintainer Skill without disturbing the live HYPIC service",
   "executed_at_utc": "2026-10-09",
@@ -11,16 +11,24 @@
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
   "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "current_skill_and_registry_blobs_unchanged": true,
-  "environment_scope": "chicaihong01 named HYPIC task clone, branch-local read-only adapter audit while physical NPU0-3 candidate service runs independently",
+  "environment_scope": "Actual chicaihong01 HYPIC task repository adapter audit; all root coding-tool adapters inventoried including untracked files; CPU-only, no NPU or external-tool launch",
   "observed": {
-    "tracked_adapter_inventory": ["CLAUDE.md"],
+    "tracked_adapter_inventory": [
+      "CLAUDE.md"
+    ],
     "claude_is_exact_one_line_agents_shim": true,
     "current_branch_matches_main_adapter": true,
     "canonical_bootstrap_declares_role_registry_skill_tree_and_adapter_boundary": true,
     "duplicate_governance_rules": false,
     "adapter_repair_exercised": false,
     "other_tool_adapters_exercised": false,
-    "live_claude_agent_interpretation_exercised": false
+    "live_claude_agent_interpretation_exercised": false,
+    "filesystem_adapter_inventory": [
+      "CLAUDE.md"
+    ],
+    "untracked_adapter_inventory_included": true,
+    "negative_regression_tests_passed": 8,
+    "six_workflow_obligations_reviewed": true
   },
   "evidence": [
     {
@@ -29,7 +37,7 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_tool_adapter_boundary_case.py",
-      "sha256": "fba86f73d07ab0d1539f6d66a29f3235ea881ec03a995f4f905dd94ab237cd7a"
+      "sha256": "699211a0b69c30f6327fb2937f10fecd12ed1b6037e3a268252ef81a0b1faad1"
     },
     {
       "path": "CLAUDE.md",
@@ -38,9 +46,19 @@
     {
       "path": "AGENTS.md",
       "sha256": "a904211035ad5498b5392a38bfaf4c3dba28a0d6b024f63b5fb2476f8b29f9e8"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/TOOL_ADAPTER_OBLIGATION_ACCEPTANCE_20261012.md",
+      "sha256": "ac8e67a21d9e95dff7d8500a25f45c5f2472d6fecbc6d8139d0b4c10ceaf856a"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_tool_adapter_boundary_case.py",
+      "sha256": "577bd127a60115349e5006ce7b99fb86d084e8be5f7feadb85e8dd84a848b934"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "The existing single tracked Claude shim satisfies this Skill's thin-adapter boundary in one real repository. No adapter migration, tool-agent behavioral interpretation, other tool adapters, or full Skill-wide pass is claimed.",
-  "drift_trigger": "Re-run after main/AGENTS.md/CLAUDE.md changes, new tracked adapter files, or an actual cross-tool conflict."
+  "boundary": "Bounded verified for the original real repository's complete single-CLAUDE-adapter audit, including actual-file inventory, reference/duplication/conflict checks and fail-closed drift controls. No migration was necessary. This is not live tool-agent obedience, other tools' configuration semantics, all29 functionality or main/remote integration.",
+  "drift_trigger": "Re-run after main/AGENTS.md/CLAUDE.md changes, any tracked or untracked coding-tool adapter change, or an actual cross-tool conflict; new adapters require a new scoped audit, not automatic acceptance.",
+  "revalidated_at_utc": "2026-10-12",
+  "acceptance_basis": "Bounded verification of the original actual-repository thin-adapter audit. Replacement is conditional on duplication, which is absent; live execution in every tool and nonexistent adapter migrations are not unconditional Skill requirements. All six exact-main workflow obligations are mapped in the supplement."
 }
