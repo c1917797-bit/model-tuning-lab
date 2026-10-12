@@ -1,5 +1,19 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 r23 disabled controller RUNNING
+
+Started exact operation exec-0000000000000ccd asynchronously (7200s timeout).
+Operation poll confirmed RUNNING, not terminal. Owning code checkpoint f40e5897.
+Raw root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r23-state-disabled
+Exact owned container: hypic_npu03_bindingfix_quality_hypic_only_20261007_hotpath-cache10r23-state-disabled
+The controller performs fresh physical0-3/8223 admission and continuous guard.
+Startup log at exec0cce shows pinned HYPIC v0.8.5 plugin installation complete;
+service health, requests, disabled proof and release are NOT yet established.
+Do not restart on slowness, lost observation or heartbeat. Poll same operation
+and inspect this root. On terminal inspect terminal.json then run independent
+r23_state_audit.py --mode disabled with shared py311. Enabled mode is NOT started;
+admit it only after disabled audit passes and fresh route/lane/port checks.
+
 ## 2026-10-12 r23 bounded integrated diagnostic frozen
 
 r23_state_diagnostic.py reuses the unchanged guarded quality service and pinned

@@ -4,6 +4,14 @@
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
   "state": "r19_quality_rejected_r22_bounded_diagnostic_inconclusive_skill_mapping_pending",
   "execution_state": "in-progress",
+  "r23_state_diagnostic": {
+    "state": "disabled-controller-running",
+    "controller_operation": "exec-0000000000000ccd",
+    "code_checkpoint": "f40e5897",
+    "raw_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r23-state-disabled",
+    "next": "Poll same operation; terminal.json then independent disabled audit; enabled not started",
+    "quality_or_performance_claim": false
+  },
   "observer_request_identity_checkpoint": {
     "date": "2026-10-12",
     "state": "host-tests-passed-no-device-run",
