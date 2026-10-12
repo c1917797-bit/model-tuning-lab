@@ -1,0 +1,71 @@
+{
+  "schema": "ascend.explicit-renewed-window/v1",
+  "start_epoch": 1791835594,
+  "cutoff_epoch": 1791878794,
+  "start_utc": "2026-10-12T20:06:34Z",
+  "cutoff_utc": "2026-10-13T08:06:34Z",
+  "hours": 12,
+  "explicit_new_human_authority": "再给你12个小时",
+  "old_window_kept_historical": true,
+  "human_authority": [
+    "为什么不多个agent并行，都一点希望和概率呢",
+    "再给你12个小时"
+  ],
+  "observed_authority_anchor": "first clock observation following renewed human authorization; frozen before new execution",
+  "supersedes_active_clock_only": "KIVI_NEW12H_AUTHORITY_20261012_R67.json",
+  "prior_window_and_results_immutable": true,
+  "prior_numerical_fence_historical": true,
+  "objective": "New non-HYPIC Qwen3.6-27B Ascend plugin/monkeypatch; matched E2E >=10%; TTFT/TPOT separate; complete final LongBench-v2/GSM8K under latest frozen user quality protocol",
+  "scope": {
+    "training": false,
+    "distillation": false,
+    "speculation_or_MTP": false,
+    "physical_NPU": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected_NPU": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "upstream_or_original_image_changes": false,
+    "source_delivery": "plugin repository; versioned explicit opt-in"
+  },
+  "acceptance": {
+    "numerical_tolerances_unchanged": true,
+    "force_performance_output_tokens": 1024,
+    "formal_matched_pairs": 3,
+    "profiling_and_numeric_observers_off_for_formal": true,
+    "final_thinking": false,
+    "final_max_tokens": 2048,
+    "final_normal_EOS": true,
+    "task_loss_units": "absolute percentage points and relative percent; latest allowed1% for each; no conversion to tensor error"
+  },
+  "parallel_roles": {
+    "MAIN": "actual runtime/source/resource admission, serial physical4--7 gates and E2E/task execution",
+    "adakv_current_prepare": "AdaKV executable cold entry/new-clock adapter/normal-EOS lifecycle and task-source consumer",
+    "kivi_owner_review": "SKVQ source-qualified same-image/numerical/formal/task stage closure; reuse calibration and independent128",
+    "damp_operator_reuse": "KIVI pending-before-AV math/graph/lifecycle/long-capture cost attribution; reuse immutable raw and never enable unqualified oracle"
+  },
+  "scheduler": {
+    "rolling_source_preparation": true,
+    "source_agents_no_device_or_git_authority": true,
+    "device_and_TP4_performance_serial": true,
+    "aggregate_host_resources_required": true,
+    "no_dummy_load": true,
+    "next_stage_requires_actual_predecessor_consumption": true
+  },
+  "planning": {
+    "decision_checkpoints": "T+2h actual numeric readiness and T+4h first legal matched screen; not new hard stop times",
+    "final_evaluation_reserve_target_seconds": 21600,
+    "reassess_with_actual_completed_costs": true,
+    "do_not_stop_entire_objective_at_an_internal_planning_checkpoint": true,
+    "only_final_window_is_hard_cutoff": true,
+    "failed_gate_action": "preserve first fault; repair a proved seam boundedly or yield to genuinely ready other paper; no unchanged failure rerun"
+  },
+  "success": false
+}
