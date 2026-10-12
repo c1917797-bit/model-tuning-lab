@@ -1,0 +1,134 @@
+{
+  "schema": "hypic-author-reference-pin/v2",
+  "commit": "98147c01909004e66d98bcb18b886927d41b0ee5",
+  "snapshot_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/author-hypic-98147c0-20261012.git",
+  "source_repository": "https://github.com/redai-studio/HYPIC",
+  "files": [
+    {
+      "path": "python/sglang/srt/layers/attention/hybrid_linear_attn_backend.py",
+      "blob": "a31e9a8bfb67d5bc227b586fc2c358bffb8374fe",
+      "sha256": "14beafaf5492614b07d9ca943dd35a1f756a4b65ca7bf68944cc9eaa69cd8b62",
+      "expected_sha256": "14beafaf5492614b07d9ca943dd35a1f756a4b65ca7bf68944cc9eaa69cd8b62",
+      "local": true,
+      "match": true,
+      "bytes": 109713
+    },
+    {
+      "path": "python/sglang/srt/layers/attention/linear/gdn_backend.py",
+      "blob": "80fab5e638626d3cd87fafd9609b5dbaee69fc58",
+      "sha256": "e34ffb7d2c0871a9dd8365ad9ab72ba2628cde22d48611414d2041a388dbf3da",
+      "expected_sha256": "e34ffb7d2c0871a9dd8365ad9ab72ba2628cde22d48611414d2041a388dbf3da",
+      "local": true,
+      "match": true,
+      "bytes": 74183
+    },
+    {
+      "path": "python/sglang/srt/model_executor/forward_batch_info.py",
+      "blob": "7a6d4e657fa219f8a2a606db5fb137fb05108145",
+      "sha256": "e17e559cd845a9aaba1cef906b300ebca24e69447d43d922e33a23a2b2845890",
+      "expected_sha256": "e17e559cd845a9aaba1cef906b300ebca24e69447d43d922e33a23a2b2845890",
+      "local": true,
+      "match": true,
+      "bytes": 73568
+    },
+    {
+      "path": "python/sglang/srt/pic/conv_tails.py",
+      "blob": "3fb2d7c95404fe4d883de5f3d5232c8016ee7c88",
+      "sha256": "e38c2e5399ae267b0f3e1b6cc24bd7903503111fb3bda8cbce71f63db91ce830",
+      "expected_sha256": "e38c2e5399ae267b0f3e1b6cc24bd7903503111fb3bda8cbce71f63db91ce830",
+      "local": true,
+      "match": true,
+      "bytes": 8578
+    },
+    {
+      "path": "python/sglang/srt/pic/pic_alloc.py",
+      "blob": "7d2f3bb74183f989f08c37ec6b4cae0529c26464",
+      "sha256": "c1412cfd6759fe815f3f2e94eca38a413d33b49603f00d660c1e0ab4ff42a104",
+      "expected_sha256": "c1412cfd6759fe815f3f2e94eca38a413d33b49603f00d660c1e0ab4ff42a104",
+      "local": true,
+      "match": true,
+      "bytes": 12630
+    },
+    {
+      "path": "python/sglang/srt/pic/picache.py",
+      "blob": "2be86895586b88a98840a75ce98777a56e9b43a7",
+      "sha256": "8cdc717cdb6ff8092af1f1b960a7f614eded020f0c9b894497ba32189775b048",
+      "expected_sha256": "8cdc717cdb6ff8092af1f1b960a7f614eded020f0c9b894497ba32189775b048",
+      "local": true,
+      "match": true,
+      "bytes": 26170
+    },
+    {
+      "path": "python/sglang/srt/pic/scatter_xfer.py",
+      "blob": "cbb545aafefbb6be8c05eeeef1702a4250ce4d60",
+      "sha256": "9198083403e1712c737a51100f87a724a6a9e463c77d5b40742a6606981d52b1",
+      "expected_sha256": "9198083403e1712c737a51100f87a724a6a9e463c77d5b40742a6606981d52b1",
+      "local": true,
+      "match": true,
+      "bytes": 49569
+    },
+    {
+      "path": "python/sglang/srt/pic/segmenter.py",
+      "blob": "f3e7ea4a08fd6f7c4962d90bf524e95bc3241d98",
+      "sha256": "5707128191aeea2b2332944591a29fee416c4674d04c111f17679ee37645ed0b",
+      "expected_sha256": "5707128191aeea2b2332944591a29fee416c4674d04c111f17679ee37645ed0b",
+      "local": true,
+      "match": true,
+      "bytes": 1540
+    },
+    {
+      "path": "sgl-model-gateway/src/policies/pic.rs",
+      "blob": "0552abfa31ee816377e46ca66ddabcc35c8b92fa",
+      "sha256": "070e86482bf4c165e95fb90d982e9f9077d25a928082982bd4827b19c0ed1cae",
+      "expected_sha256": "070e86482bf4c165e95fb90d982e9f9077d25a928082982bd4827b19c0ed1cae",
+      "local": true,
+      "match": true,
+      "bytes": 9821
+    },
+    {
+      "path": "sgl-model-gateway/src/routers/http/pd_router.rs",
+      "blob": "2906e7304c470cbc0cf95e78264218021afc8657",
+      "sha256": "9396ead476b7d66dab54163ece3dc2a00ae9baf275368dc41f6304c538f1a260",
+      "expected_sha256": "9396ead476b7d66dab54163ece3dc2a00ae9baf275368dc41f6304c538f1a260",
+      "local": true,
+      "match": true,
+      "bytes": 86147
+    }
+  ],
+  "extra_files": [
+    {
+      "path": "LICENSE",
+      "blob": "9c422689c8f5c317c7c65153b1209349ec57007e",
+      "sha256": "1495e1e757ef4d0925a2350563cf5754bb23c51701a8ec4fb3c5cdcbedae6747",
+      "bytes": 11346
+    },
+    {
+      "path": "README.md",
+      "blob": "658124d4a1361255fbaced430116561c0f0e00e2",
+      "sha256": "88272c9aebf4dff894922b9442b582c9d6a17b91c1768eceaf570fc3d5f3a2aa",
+      "bytes": 6440
+    },
+    {
+      "path": "python/sglang/test/srt/pic/test_seam_sink.py",
+      "blob": "075f683b4beb99bd66475368ef43536352cb9ca5",
+      "sha256": "1f933af8b9c2919b6e64a1cbfe6aedade2e18eafbd497565a0c4038cfb749ec4",
+      "bytes": 790
+    },
+    {
+      "path": "examples/pic/quick_test_offline.py",
+      "blob": "7e9ae702b6f91fad69aa77b43dd027463fe4c9ba",
+      "sha256": "c12cdf54b14a161ddc391ba740869cd18d6ead1b535789b47f5981b7fbe9c9c3",
+      "bytes": 9507
+    },
+    {
+      "path": "examples/pic/distribute/README.md",
+      "blob": "0894804610f3d4aa71d57002f9d34ed9b76665f8",
+      "sha256": "4eb47fb5d16005558945c40c22d515e0513b2bac26999646379fbc8d9ea98824",
+      "bytes": 2515
+    }
+  ],
+  "matched": 10,
+  "missing": 0,
+  "network_fetch_during_audit": false,
+  "operation": "exec-0000000000000191"
+}

@@ -1,4 +1,15 @@
 {
+  "paper_ingestion_author_closure": {
+    "report": "PAPER_AUTHOR_REFERENCE_CLOSURE_20261012.md",
+    "receipt": "PAPER_AUTHOR_REFERENCE_FULL_PIN_20261012.json",
+    "operation": "exec-0000000000000191",
+    "author_commit": "98147c01909004e66d98bcb18b886927d41b0ee5",
+    "reference_match": "10/10",
+    "skill": "paper-ingestion",
+    "acceptance": "bounded verified",
+    "original_task_scope_unchanged": true,
+    "preimplementation_historical_gate_unproved": true
+  },
   "paper_ingestion_scope_checkpoint": {
     "report": "PAPER_INGESTION_SCOPE_CORRECTION_20261012.md",
     "source_receipt": "PAPER_AUTHOR_REFERENCE_PIN_20261012.json",
@@ -922,8 +933,8 @@
   "skill_case_inventory": {
     "registered_skills": 29,
     "cases_with_verified_provenance": 29,
-    "bounded_verified": 8,
-    "partial_evidence": 21,
+    "bounded_verified": 9,
+    "partial_evidence": 20,
     "missing": 0,
     "transformation_suite_verified_skills": [
       "mst-agentsmd-authoring",

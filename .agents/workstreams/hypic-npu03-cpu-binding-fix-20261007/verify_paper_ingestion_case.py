@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import ast
 import hashlib
 import json
 import subprocess
@@ -88,16 +89,25 @@ def main() -> int:
                    "retrospectively", "not accepted for", "not implemented/tested"):
         require(" ".join(marker.lower().split()) in note,
                 f"ingestion note omitted boundary: {marker}")
-    pin = json.loads((HERE / "PAPER_AUTHOR_REFERENCE_PIN_20261012.json").read_text())
+    pin = json.loads((HERE / "PAPER_AUTHOR_REFERENCE_FULL_PIN_20261012.json").read_text())
     require(pin["commit"] == "98147c01909004e66d98bcb18b886927d41b0ee5",
             "author reference revision drift")
     snapshot = Path(pin["snapshot_root"])
     require(git(snapshot, "rev-parse", "HEAD") == pin["commit"], "snapshot HEAD drift")
     available = set(git(snapshot, "cat-file", "--batch-all-objects",
                         "--batch-check=%(objectname)").splitlines())
-    require(len(pin["files"]) == 10 and pin["matched"] == 3 and pin["missing"] == 7,
+    require(len(pin["files"]) == 10 and pin["matched"] == 10 and pin["missing"] == 0,
             "source audit coverage changed without a new receipt")
+    upstream = ast.parse(git(PLUGIN, "show", "HEAD:hypic_vllm_ascend/upstream_parity.py"))
+    expected = next(ast.literal_eval(n.value) for n in upstream.body
+                    if isinstance(n, ast.AnnAssign) and isinstance(n.target, ast.Name)
+                    and n.target.id == "UPSTREAM_REFERENCE_HASHES")
+    require(len(pin["files"]) == len(expected)
+            and {r["path"] for r in pin["files"]} == set(expected),
+            "reference path coverage/uniqueness drift")
     for row in pin["files"]:
+        require(row["expected_sha256"] == expected[row["path"]]
+                and row["local"] and row["match"], "historical reference hash drift")
         require(git(snapshot, "rev-parse", pin["commit"] + ":" + row["path"]) == row["blob"],
                 "author tree path/blob drift")
         if row["local"]:
@@ -109,10 +119,19 @@ def main() -> int:
         else:
             require(row["sha256"] is None and row["match"] is None,
                     "missing bytes must not be asserted equal")
+    require(len(pin["extra_files"]) == 5, "reference/license inventory drift")
+    for row in pin["extra_files"]:
+        require(row["blob"] in available, "reference object unavailable")
+        require(git(snapshot, "rev-parse", pin["commit"] + ":" + row["path"]) == row["blob"],
+                "reference object path drift")
+        data = subprocess.check_output(("git", "cat-file", "blob", row["blob"]),
+                                       cwd=snapshot, timeout=10)
+        require(hashlib.sha256(data).hexdigest() == row["sha256"],
+                "reference/license bytes drift")
     case = json.loads((HERE / "skill-cases/paper-ingestion.json").read_text())
     require(case["current_evidence_supplement"]["r19_full_paired_quality_complete"]
             and case["current_evidence_supplement"]["ingestion_does_not_require_new_quality_run"]
-            and case["long_term_acceptance"] == "partial-evidence",
+            and case["long_term_acceptance"] == "verified",
             "current ingestion scope/status drift")
 
     print(json.dumps({
@@ -125,9 +144,9 @@ def main() -> int:
         "paper_c3_in_target": False,
         "historical_upstream_origin_commit_proven": False,
         "current_author_reference_commit": pin["commit"],
-        "reference_files_byte_matched": 3,
-        "reference_files_unverified": 7,
-        "long_term_acceptance": "partial-evidence",
+        "reference_files_byte_matched": 10,
+        "reference_files_unverified": 0,
+        "long_term_acceptance": "verified",
     }, sort_keys=True))
     return 0
 

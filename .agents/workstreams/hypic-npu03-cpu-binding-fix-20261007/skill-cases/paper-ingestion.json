@@ -2,7 +2,7 @@
   "schema": "mst-real-task-skill-case/v1",
   "skill": "paper-ingestion",
   "campaign_code": "P",
-  "long_term_acceptance": "partial-evidence",
+  "long_term_acceptance": "verified",
   "behavioral_evidence_verified": true,
   "task": "Ingest versioned HYPIC paper into bounded C1/C2/C3 target hypotheses for the actual Qwen3.5-architecture hybrid checkpoint, separating author SGLang claims, vLLM-Ascend derivative and incomplete local evidence",
   "executed_at_utc": "2026-10-09",
@@ -39,7 +39,7 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_paper_ingestion_case.py",
-      "sha256": "f983c7d4b74a5a1b07c801a6f7df1a74343216f248fc2dcc06513d952b6681bd"
+      "sha256": "ed50b86576d837ab4f54e331644a2df293df9c458e75e4c3cd8150cd3eef0f0e"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_ARCHITECTURE_FIT.md",
@@ -52,6 +52,14 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_AUTHOR_REFERENCE_PIN_20261012.json",
       "sha256": "37d82091e22bd1c51535028bef91286fc93a31b7dca5ace0d72216527026d904"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_AUTHOR_REFERENCE_CLOSURE_20261012.md",
+      "sha256": "50b6cb454897d8b89d6900be64b35667ec0bef8161ed62aba3f189b1f3630788"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_AUTHOR_REFERENCE_FULL_PIN_20261012.json",
+      "sha256": "f70be5c2ef584b32627d5eb2b7516f541e6a53979737d7330953b2a2ff2579e9"
     }
   ],
   "external_sources": {
@@ -65,8 +73,8 @@
     "derivative_plugin_head": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f"
   },
   "replayable_regression_recorded": true,
-  "boundary": "A versioned paper, existing source/architecture audit and current model config support a bounded C1/C2 text-only test hypothesis. This retrospective case is not a pre-implementation gate, exact upstream code revision, full C3 implementation, matched quality result, author-claim reproduction or main integration. Branch-only bounded/full-scope guidance is not credited to exact main.",
-  "next_gate": "Complete the fixed author-source/reference-test/license review and audit the original ingestion obligations against the retained note. Existing r19 full paired quality is complete and must not be repeated for ingestion. Preserve C3 absence and retrospective timing as boundaries, not requests to implement C3. Current-source performance and algorithm adoption remain separate decisions; no promotion or main integration is implied.",
+  "boundary": "Bounded verification of the original retrospective paper-ingestion task against exact main, supported by the paper/model note, ten author reference hashes, five source/license/test identities and a seven-obligation review. Historical observed fields remain October9 snapshots. No claim of historical preimplementation compliance, full C3 implementation, author GPU tests, whole-project license clearance, quality preservation, source-equivalent current performance or main integration.",
+  "next_gate": "Revalidate ingestion on source/paper/model/contract drift. Do not repeat completed r19 quality or implement C3 to re-accept this case. Downstream HYPIC quality rejection, pending same-source performance decision and remaining20 Skill cases still require their own evidence; authorized main integration waits for working credentials.",
   "drift_trigger": "Revalidate on paper version, author-code commit/license, main or branch Skill/reference/registry blob, target config/index, derivative source, or workload/quality contract change.",
   "current_evidence_supplement": {
     "as_of_utc": "2026-10-12",
@@ -85,5 +93,18 @@
     "author_reference_commit": "98147c01909004e66d98bcb18b886927d41b0ee5",
     "matched_reference_files": 3,
     "unverified_reference_files": 7
+  },
+  "current_author_reference_closure": {
+    "as_of_utc": "2026-10-12",
+    "operation": "exec-0000000000000191",
+    "author_commit": "98147c01909004e66d98bcb18b886927d41b0ee5",
+    "reference_files_matched": 10,
+    "reference_files_total": 10,
+    "license_reference_test_objects_checked": 5,
+    "all_seven_exact_main_ingestion_obligations_reviewed": true,
+    "original_case_scope_unchanged": true,
+    "historical_preimplementation_compliance_claimed": false,
+    "full_paper_reproduction_claimed": false,
+    "report": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_AUTHOR_REFERENCE_CLOSURE_20261012.md"
   }
 }

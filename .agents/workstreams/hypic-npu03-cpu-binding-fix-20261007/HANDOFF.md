@@ -1,5 +1,22 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 author source identity and ingestion obligation closure
+
+Independent local-object audit0191 proves10/10 historical reference hashes
+match author98147c0; five license/README/test-reference objects also pinned.
+Validation0194 passed8 real/corrupt source receipt tests, ingestion replay,
+29-case provenance,29-Skill structure,task count consistency and diff check.
+Read PAPER_AUTHOR_REFERENCE_CLOSURE_20261012.md and full-pin JSON.
+Earlier3/10 receipt is historical and unchanged; no new NPU experiment.
+The original ingestion task's seven exact-main obligations were reviewed, not
+replaced by a source-hash-only task. It is now bounded verified. Historical
+preimplementation sequencing failure, missingC3 and r19 rejection remain.
+Current totals9 bounded verified/20 partial/0 missing; no whole-goal completion.
+Do not continue source-pin work unless evidence drifts. Next focus remaining
+Skill obligations/current-source performance choice; no observer/GDN or quality
+rerun. No live NPU controller, no auth retry or main/remote sync.
+Deadline08:47:14UTC Oct13 unchanged; two observer-v3 drafts preserved.
+
 ## 2026-10-12 paper ingestion scope and reference pin
 
 PAPER_INGESTION_SCOPE_CORRECTION_20261012.md corrects the stale case next_gate:
