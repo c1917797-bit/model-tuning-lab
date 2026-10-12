@@ -1,5 +1,27 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 r23 disabled AUDITED; enabled RUNNING
+
+Disabled controller exec-0000000000000ccd finished exit0 after 611.6 seconds.
+All four responses persisted (two warmups, one max2048 target, one post request).
+Independent auditor exec-0000000000000cdb passed: source/image, physical0-3,
+framework-rank/PID/namespace inventory, 114 clean isolation probes, zero capture
+files in disabled mode, exact container removal and port release.
+Audit: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/r23-state-disabled-independent-audit.json
+SHA256 38f25f63e7d0e114c23bc9c8229f189e047d8a440097c4292a07e04403d46bab.
+This is diagnostic-wrapper control evidence, not full quality or paper success.
+
+After a fresh chicaihong01/ma direct-route resolution, enabled controller
+exec-0000000000000cdc started with the same frozen code/contract and was polled
+RUNNING. Its own admission checks physical0-3/8223 and exclusive fresh root.
+Raw root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r23-state-enabled
+Exact owned container: hypic_npu03_bindingfix_quality_hypic_only_20261007_hotpath-cache10r23-state-enabled
+Do not restart on observation timeout. Poll same handle/raw root; after terminal,
+inspect terminal.json and run r23_state_audit.py --mode enabled with shared py311.
+If capture/activation fails, preserve exact failure phase and do not rerun the
+same bytes. Do not modify frozen support files while this service is active.
+r19/r22 judgments remain unchanged. No remote/main synchronization is claimed.
+
 ## 2026-10-12 r23 disabled controller RUNNING
 
 Started exact operation exec-0000000000000ccd asynchronously (7200s timeout).

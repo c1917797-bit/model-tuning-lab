@@ -5,11 +5,13 @@
   "state": "r19_quality_rejected_r22_bounded_diagnostic_inconclusive_skill_mapping_pending",
   "execution_state": "in-progress",
   "r23_state_diagnostic": {
-    "state": "disabled-controller-running",
-    "controller_operation": "exec-0000000000000ccd",
+    "state": "disabled-audited-enabled-controller-running",
+    "controller_operation": "exec-0000000000000cdc",
     "code_checkpoint": "f40e5897",
-    "raw_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r23-state-disabled",
-    "next": "Poll same operation; terminal.json then independent disabled audit; enabled not started",
+    "raw_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r23-state-enabled",
+    "disabled_audit_sha256": "38f25f63e7d0e114c23bc9c8229f189e047d8a440097c4292a07e04403d46bab",
+    "disabled_clean_isolation_samples": 114,
+    "next": "Poll same enabled operation; inspect terminal then independent enabled audit; never restart unchanged or modify active frozen files",
     "quality_or_performance_claim": false
   },
   "observer_request_identity_checkpoint": {
