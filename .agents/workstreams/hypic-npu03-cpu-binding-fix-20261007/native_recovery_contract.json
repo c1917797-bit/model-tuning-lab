@@ -1,0 +1,22 @@
+{
+  "schema": "hypic-native-recovery/v1",
+  "scope": "Recovery-only disabled/uninstalled controls; original enabled canary remains failed, original successful progression stays stopped.",
+  "files": {
+    "native_recovery.py": "e6fd285d65d234b6eb1a533806620a95fef8559d8e88852a6f3e2f478cecfe67",
+    "native_recovery_audit.py": "4f9deefed44fa1b584389b54f38beabc6a5ea39b394bd563173615c266fcc621",
+    "test_native_recovery.py": "da329867d354d2b09307216f5dd6a3fac3e6be5caab66244a0b6007f5e6b1609",
+    "native_lifecycle_contract.json": "0f6578ca003e0e285bdf0432febc1281716056fe2544113d2649c76c7be4754c",
+    "native_lifecycle_failure_audit.py": "05c7314e035e5905a33f1b18c8fb8e0dfc5221cf842db6f2a94e2ff316e19924",
+    "HYPIC_NATIVE_RECOVERY_PLAN_20261012.md": "9422df270e14ffe8023fe94ecda20a58d70497338586afe41fc41a37aa81f028"
+  },
+  "enabled_failure_audit_sha256": "94dd02e81529acedf25ace6979cc6b72a1e265505adf1ea2cf36afd29e7bf82a",
+  "modes": [
+    "disabled",
+    "uninstalled"
+  ],
+  "raw_root_policy": "Previously reserved never-created roots; reject any existing root. No enabled retry.",
+  "gate": "Unchanged native_lifecycle_audit for each control; disabled must pass before uninstalled.",
+  "deadline_utc": "2026-10-13T08:47:14Z",
+  "quality_or_performance_claim": false,
+  "package_promotion_ready": false
+}

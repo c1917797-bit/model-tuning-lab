@@ -1,5 +1,17 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 recovery-only controls planned after failed enabled canary
+
+Read HYPIC_NATIVE_RECOVERY_PLAN_20261012.md and native_recovery_contract.json.
+Original enabled FAILED_SEMANTIC_GUARD and stopped progression stay unchanged.
+Supplement only previously unexecuted disabled/uninstalled controls, using
+the original sample, max2048, source4429e35, wrapper and frozen audit gates.
+No enabled retry, full quality, observer, GDN or pending-choice performance.
+New admission receipt distinguishes recovery from original success progression.
+Original reserved disabled/uninstalled roots must still be absent. Run disabled
+once after planned checkpoint and fresh admission; independently audit before
+uninstalled. No device run in this planned checkpoint. Deadline/counts/auth stay.
+
 ## 2026-10-12 native enabled terminal: semantic failure, not missing activation
 
 exec0141 ended exit0 in563.354s;3/3 responses, four-worker target hot proof,
