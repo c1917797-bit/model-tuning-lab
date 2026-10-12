@@ -39,11 +39,19 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_paper_ingestion_case.py",
-      "sha256": "8fd3317725cded5494bdb9f084c316beeda9a53c1808477030627d8b8a4f1e36"
+      "sha256": "f983c7d4b74a5a1b07c801a6f7df1a74343216f248fc2dcc06513d952b6681bd"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_ARCHITECTURE_FIT.md",
       "sha256": "d93107c4f69c1a30511183acb0dde1e31f3e9bcf41b2721d983e2e8daf6c6f31"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_INGESTION_SCOPE_CORRECTION_20261012.md",
+      "sha256": "6487d0db3978d0b045531d75c7e3131331f360d6e5aa2c76de9ddbe0e3f9fc8a"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_AUTHOR_REFERENCE_PIN_20261012.json",
+      "sha256": "37d82091e22bd1c51535028bef91286fc93a31b7dca5ace0d72216527026d904"
     }
   ],
   "external_sources": {
@@ -58,6 +66,24 @@
   },
   "replayable_regression_recorded": true,
   "boundary": "A versioned paper, existing source/architecture audit and current model config support a bounded C1/C2 text-only test hypothesis. This retrospective case is not a pre-implementation gate, exact upstream code revision, full C3 implementation, matched quality result, author-claim reproduction or main integration. Branch-only bounded/full-scope guidance is not credited to exact main.",
-  "next_gate": "Pin author Git revision and source/license mapping; freeze the current paired claim rule; on actually idle physical NPU0-3 run same-identity explicit-boundary max2048 quality and repeated performance with continuous isolation; assess C3 separately only with authorized multi-replica resources.",
-  "drift_trigger": "Revalidate on paper version, author-code commit/license, main or branch Skill/reference/registry blob, target config/index, derivative source, or workload/quality contract change."
+  "next_gate": "Complete the fixed author-source/reference-test/license review and audit the original ingestion obligations against the retained note. Existing r19 full paired quality is complete and must not be repeated for ingestion. Preserve C3 absence and retrospective timing as boundaries, not requests to implement C3. Current-source performance and algorithm adoption remain separate decisions; no promotion or main integration is implied.",
+  "drift_trigger": "Revalidate on paper version, author-code commit/license, main or branch Skill/reference/registry blob, target config/index, derivative source, or workload/quality contract change.",
+  "current_evidence_supplement": {
+    "as_of_utc": "2026-10-12",
+    "historical_observed_fields_date": "2026-10-09",
+    "r19_full_paired_quality_complete": true,
+    "r19_scored_responses": 8676,
+    "r19_quality_verdict_unchanged": true,
+    "ingestion_does_not_require_new_quality_run": true,
+    "c3_implementation_not_an_ingestion_gate": true,
+    "acceptance_promoted": false,
+    "source_comparison_operation": "exec-0000000000000183",
+    "source_comparison_terminal": true,
+    "report": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_INGESTION_SCOPE_CORRECTION_20261012.md",
+    "source_comparison_outcome": "retrieval timeout; local-only follow-up audited 3 matching reference files and 7 unavailable",
+    "local_source_audit_operation": "exec-0000000000000188",
+    "author_reference_commit": "98147c01909004e66d98bcb18b886927d41b0ee5",
+    "matched_reference_files": 3,
+    "unverified_reference_files": 7
+  }
 }

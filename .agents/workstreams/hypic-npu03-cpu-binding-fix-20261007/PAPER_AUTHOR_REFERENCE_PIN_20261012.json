@@ -1,0 +1,92 @@
+{
+  "schema": "hypic-author-reference-pin/v1",
+  "source_repository": "https://github.com/redai-studio/HYPIC",
+  "snapshot_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/author-hypic-98147c0-20261012.git",
+  "operation": "exec-0000000000000188",
+  "network_fetch_during_audit": false,
+  "commit": "98147c01909004e66d98bcb18b886927d41b0ee5",
+  "files": [
+    {
+      "path": "python/sglang/srt/layers/attention/hybrid_linear_attn_backend.py",
+      "blob": "a31e9a8bfb67d5bc227b586fc2c358bffb8374fe",
+      "local": false,
+      "expected_sha256": "14beafaf5492614b07d9ca943dd35a1f756a4b65ca7bf68944cc9eaa69cd8b62",
+      "sha256": null,
+      "match": null
+    },
+    {
+      "path": "python/sglang/srt/layers/attention/linear/gdn_backend.py",
+      "blob": "80fab5e638626d3cd87fafd9609b5dbaee69fc58",
+      "local": false,
+      "expected_sha256": "e34ffb7d2c0871a9dd8365ad9ab72ba2628cde22d48611414d2041a388dbf3da",
+      "sha256": null,
+      "match": null
+    },
+    {
+      "path": "python/sglang/srt/model_executor/forward_batch_info.py",
+      "blob": "7a6d4e657fa219f8a2a606db5fb137fb05108145",
+      "local": false,
+      "expected_sha256": "e17e559cd845a9aaba1cef906b300ebca24e69447d43d922e33a23a2b2845890",
+      "sha256": null,
+      "match": null
+    },
+    {
+      "path": "python/sglang/srt/pic/conv_tails.py",
+      "blob": "3fb2d7c95404fe4d883de5f3d5232c8016ee7c88",
+      "local": false,
+      "expected_sha256": "e38c2e5399ae267b0f3e1b6cc24bd7903503111fb3bda8cbce71f63db91ce830",
+      "sha256": null,
+      "match": null
+    },
+    {
+      "path": "python/sglang/srt/pic/pic_alloc.py",
+      "blob": "7d2f3bb74183f989f08c37ec6b4cae0529c26464",
+      "local": false,
+      "expected_sha256": "c1412cfd6759fe815f3f2e94eca38a413d33b49603f00d660c1e0ab4ff42a104",
+      "sha256": null,
+      "match": null
+    },
+    {
+      "path": "python/sglang/srt/pic/picache.py",
+      "blob": "2be86895586b88a98840a75ce98777a56e9b43a7",
+      "local": true,
+      "expected_sha256": "8cdc717cdb6ff8092af1f1b960a7f614eded020f0c9b894497ba32189775b048",
+      "sha256": "8cdc717cdb6ff8092af1f1b960a7f614eded020f0c9b894497ba32189775b048",
+      "match": true
+    },
+    {
+      "path": "python/sglang/srt/pic/scatter_xfer.py",
+      "blob": "cbb545aafefbb6be8c05eeeef1702a4250ce4d60",
+      "local": true,
+      "expected_sha256": "9198083403e1712c737a51100f87a724a6a9e463c77d5b40742a6606981d52b1",
+      "sha256": "9198083403e1712c737a51100f87a724a6a9e463c77d5b40742a6606981d52b1",
+      "match": true
+    },
+    {
+      "path": "python/sglang/srt/pic/segmenter.py",
+      "blob": "f3e7ea4a08fd6f7c4962d90bf524e95bc3241d98",
+      "local": true,
+      "expected_sha256": "5707128191aeea2b2332944591a29fee416c4674d04c111f17679ee37645ed0b",
+      "sha256": "5707128191aeea2b2332944591a29fee416c4674d04c111f17679ee37645ed0b",
+      "match": true
+    },
+    {
+      "path": "sgl-model-gateway/src/policies/pic.rs",
+      "blob": "0552abfa31ee816377e46ca66ddabcc35c8b92fa",
+      "local": false,
+      "expected_sha256": "070e86482bf4c165e95fb90d982e9f9077d25a928082982bd4827b19c0ed1cae",
+      "sha256": null,
+      "match": null
+    },
+    {
+      "path": "sgl-model-gateway/src/routers/http/pd_router.rs",
+      "blob": "2906e7304c470cbc0cf95e78264218021afc8657",
+      "local": false,
+      "expected_sha256": "9396ead476b7d66dab54163ece3dc2a00ae9baf275368dc41f6304c538f1a260",
+      "sha256": null,
+      "match": null
+    }
+  ],
+  "matched": 3,
+  "missing": 7
+}

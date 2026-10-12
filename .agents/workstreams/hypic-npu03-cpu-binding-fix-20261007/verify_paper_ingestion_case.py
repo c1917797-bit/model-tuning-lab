@@ -88,6 +88,33 @@ def main() -> int:
                    "retrospectively", "not accepted for", "not implemented/tested"):
         require(" ".join(marker.lower().split()) in note,
                 f"ingestion note omitted boundary: {marker}")
+    pin = json.loads((HERE / "PAPER_AUTHOR_REFERENCE_PIN_20261012.json").read_text())
+    require(pin["commit"] == "98147c01909004e66d98bcb18b886927d41b0ee5",
+            "author reference revision drift")
+    snapshot = Path(pin["snapshot_root"])
+    require(git(snapshot, "rev-parse", "HEAD") == pin["commit"], "snapshot HEAD drift")
+    available = set(git(snapshot, "cat-file", "--batch-all-objects",
+                        "--batch-check=%(objectname)").splitlines())
+    require(len(pin["files"]) == 10 and pin["matched"] == 3 and pin["missing"] == 7,
+            "source audit coverage changed without a new receipt")
+    for row in pin["files"]:
+        require(git(snapshot, "rev-parse", pin["commit"] + ":" + row["path"]) == row["blob"],
+                "author tree path/blob drift")
+        if row["local"]:
+            require(row["blob"] in available, "reviewed author blob unavailable")
+            data = subprocess.check_output(("git", "cat-file", "blob", row["blob"]),
+                                           cwd=snapshot, timeout=10)
+            require(hashlib.sha256(data).hexdigest() == row["sha256"] ==
+                    row["expected_sha256"], "author reference bytes drift")
+        else:
+            require(row["sha256"] is None and row["match"] is None,
+                    "missing bytes must not be asserted equal")
+    case = json.loads((HERE / "skill-cases/paper-ingestion.json").read_text())
+    require(case["current_evidence_supplement"]["r19_full_paired_quality_complete"]
+            and case["current_evidence_supplement"]["ingestion_does_not_require_new_quality_run"]
+            and case["long_term_acceptance"] == "partial-evidence",
+            "current ingestion scope/status drift")
+
     print(json.dumps({
         "schema": "paper-ingestion-real-task-case/v1",
         "paper_version": "2607.01299v2",
@@ -96,7 +123,10 @@ def main() -> int:
         "target_full_layers": 16,
         "branch_skill_differs_from_main": True,
         "paper_c3_in_target": False,
-        "exact_upstream_commit_pinned": False,
+        "historical_upstream_origin_commit_proven": False,
+        "current_author_reference_commit": pin["commit"],
+        "reference_files_byte_matched": 3,
+        "reference_files_unverified": 7,
         "long_term_acceptance": "partial-evidence",
     }, sort_keys=True))
     return 0

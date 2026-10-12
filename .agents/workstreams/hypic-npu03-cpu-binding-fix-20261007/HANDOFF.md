@@ -1,5 +1,22 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 paper ingestion scope and reference pin
+
+PAPER_INGESTION_SCOPE_CORRECTION_20261012.md corrects the stale case next_gate:
+r19 full paired quality already completed; ingestion must not demand a repeat,
+C3 implementation or algorithm success. Historical observed fields remain dated
+October9 and no Skill/experiment acceptance changed (8 bounded/21 partial).
+
+Author reference98147c0 is pinned. Read-only retrieval0183 timed out at180s.
+Local-only audit0188 completed104ms: picache/scatter_xfer/segmenter match the
+historical reference hashes;7 other blobs absent, not verified or mismatched.
+PAPER_AUTHOR_REFERENCE_PIN_20261012.json preserves this exact partial coverage.
+No author GPU test or new NPU run, no HYPIC source change or whole-paper claim.
+Next finish remaining source/license obligation review if it can be done within
+the fixed deadline; do not let ingestion trigger new quality/observer/C3 work.
+Current-source performance choice pending; no live NPU controller; no auth retry
+or main/remote sync. Deadline08:47:14UTC Oct13 and8/21 remain unchanged.
+
 ## 2026-10-12 disabled recovery terminal failed; no live controller
 
 exec0165 ended exit0 in541.448s,3/3 responses. Frozen audit0171 failed only
