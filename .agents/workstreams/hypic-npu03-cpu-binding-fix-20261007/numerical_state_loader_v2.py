@@ -1,9 +1,34 @@
 """Prospective r23 import repair; frozen v1 and its experiment stay unchanged."""
 import importlib.abc
+import functools
+import json
+import os
 import sys
 import numerical_state_loader as frozen
 
-RuntimeAdapter = frozen.RuntimeAdapter
+
+class RuntimeAdapter(frozen.RuntimeAdapter):
+    def __init__(self, plugin, config):
+        super().__init__(plugin, config)
+        registered = self.replacement
+
+        @functools.wraps(registered)
+        def register():
+            try:
+                result = registered()
+                print(json.dumps(dict(schema="hypic-state-observer-installed/v2",
+                    pid=os.getpid(), manifest_sha256=config["manifest_sha256"],
+                    plugin_sha256=frozen.PLUGIN_SHA, request_id=config["request_id"],
+                    kv_layer=config["kv_layer"], gdn_layer=config["gdn_layer"])),
+                    file=sys.stderr, flush=True)
+                return result
+            except Exception:
+                # vLLM catches Exception and may silently continue serving.
+                import traceback
+                traceback.print_exc()
+                raise SystemExit(78)
+        self.replacement = register
+        plugin.register = register
 
 
 class RegistrationFinder(frozen.RegistrationFinder):

@@ -1,5 +1,36 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 r24 successor ready for one bounded NPU diagnostic
+
+CPU-only exact-image probes exec0cfd and exec0d06 successfully executed the real
+HYPIC register, installed the observer and uninstalled it without numbered NPU
+devices or network. Package-v2 manifest SHA256:
+2bfae5228908c682d4cefc8cf9a05e877a56dc5f10d87fef9a0572aca955b70c.
+The repaired loader now emits source/manifest/request-bound registration markers
+and exits78 on registration exceptions that vLLM could otherwise swallow.
+The r24 controller requires markers from all actual namespace worker PIDs before
+requests, and checks swallowed import failure logs during startup.
+
+Frozen r24 contract SHA256:
+1c9bec9f4c35bf20e25b47e11bd9bf4518924b7314cd0a1ecb31fe3e70f69d47.
+One serial known-hot sample59: two one-token warmups, one max2048 target, one
+post-uninstall request. Source4429e3 unchanged, physical0-3 only, port8223.
+New root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r24-state-enabled.
+No new device run yet. Static package/preflight/3 new tests passed exec0d0a/b/c.
+Retained r23 disabled control independently replayed with shared py311 (0d0e):
+114 clean isolation probes. Its date/identity are retained, not a new baseline.
+Disabled launcher/sitecustomize bytes are identical and v2 disabled subprocess
+proves changed support is not imported. Reuse is diagnostic-only, NOT paired
+quality/performance or complete delivery promotion. Do not repeat disabled/full
+quality merely to assign a new run number. Initial replay with system Python
+failed on missing torch (0d0d); shared py311 replay passed, no installs.
+
+Next admit enabled only after fresh ma/direct route, physical0-3/8223 idle and
+new-root check; controller continuous guard owns only its exact container.
+After terminal use shared py311 r24_state_audit.py --mode enabled; old roots
+immutable. Do not claim sampled residuals prove material generation or full
+quality. r19/r22 unchanged; 29 Skill functional acceptance incomplete.
+
 ## 2026-10-12 r23 TERMINAL FAILED; editable-import defect isolated and CPU-fixed
 
 Enabled controller exec-0000000000000cdc ended exit1 after four successful
