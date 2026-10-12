@@ -1,5 +1,28 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 reporting provenance correction, no device rerun
+
+The Decode report had a truncated capture.json SHA256 (44 hex characters).
+Fresh raw hashing confirmed the full64-character receipt; only report text and
+dependent report/case hashes were corrected. Frozen raw files, capture verifier,
+measurement gates and all scientific verdicts remain unchanged.
+
+The reporting-case verifier now binds each of six labelled control hashes to
+its exact raw file. Before correction exec0074 failed specifically at capture;
+after correction exec0075 passed the real six-file check and6 regression tests
+(valid, truncated, wrong full-length, swapped label, duplicate, unlabelled).
+Full historical reporting replay exec0078 passed, including both raw profiler
+verifiers; exec007a passed29-case provenance,29-Skill structure and diff checks.
+This repairs an evidence-reporting defect, not HYPIC quality or adoption.
+Counts stay7 bounded verified/22 partial. Old controller source provenance and
+comprehensive excluded-retry ledger review remain open. No NPU service started.
+
+Next continue exact historical provenance/failure-ledger review; do not expand
+observer work or repeat terminal quality. Same-source descriptive performance
+choice remains pending; no launch authorized. Deadline08:47:14UTC Oct13 remains.
+Local checkpoint only; unchanged remote authentication not retried.
+Untracked observer-v3 drafts remain untouched.
+
 ## 2026-10-12 r19 final quality report and raw replay complete
 
 Code checkpoint f05c35d3 adds HYPIC_R19_FINAL_QUALITY_REPORT_20261012.md and

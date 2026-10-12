@@ -39,6 +39,7 @@
     "case_integrated_in_main": false
   },
   "evidence": [
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_reporting_receipt_hashes.py","sha256":"4af97b34400b0f8de0a6fcb5e704e455e9a09997c935d5f8ed3a71ff37e84670"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R19_FINAL_QUALITY_REPORT_20261012.md","sha256":"836bba2175bf3debe9e8debd7d880c4c0dc143f5acf09622644e5ba4469f901d"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r19_final_quality_report.py","sha256":"e3001375efdd676dc3e889b9a5d8dfca0963a2a50d7d0e4a96c9172ee7b963ed"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_r19_final_quality_report.py","sha256":"7bfdf82d48e9d44d90b4e3a9000f4fd3413de7205e9bd56b0eabcffc513c7732"},
@@ -48,11 +49,11 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_paper_to_ascend_reporting_case.py",
-      "sha256": "3b497531423cb5c3f52408b496d508f3f0a0b26df4c5f8a94e459970fed83228"
+      "sha256": "1038db29bd9b46258e9d04f6dd71a71990b2222ed0d0b86445b6b15782587af4"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R13_TERMINAL_NEGATIVE_REPORT_20261009.md",
-      "sha256": "998240c3f2e5125d707b1df5d84ce8763da5bbbae8a4d49b885d367f752231e1"
+      "sha256": "9801c6a5ac73db2872308f4abfd36ddb8d77dd40a0c6a401c5d8aed768c5fada"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PIERCING_REPORT.md",
@@ -80,7 +81,7 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_PROFILER_DECODE_AUDIT_20261009.md",
-      "sha256": "f7aefd73e9836f22ec34ebc7b2d5becbc1ed40c1d0b34d5a60b2baae66a538fd"
+      "sha256": "41821d170eae98dd512a990d4e027774213e47cb1b4917b832d5853870cd2d40"
     }
   ],
   "external_raw_receipts": {

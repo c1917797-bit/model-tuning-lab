@@ -6,6 +6,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import statistics
 import subprocess
 import sys
@@ -37,7 +38,33 @@ def checked_bytes(path: Path, expected: str) -> bytes:
     return raw
 
 
+def audit_report_receipt_hashes(report: str, receipts: dict[str, str]) -> None:
+    """Bind each labelled report digest to its raw file, not just any substring."""
+    for label, expected in receipts.items():
+        matches = re.findall(r"\b" + re.escape(label) + r"\s+`([0-9a-f]+)`", report)
+        require(len(matches) == 1 and matches[0] == expected
+                and re.fullmatch(r"[0-9a-f]{64}", matches[0]) is not None,
+                f"report receipt hash mismatch: {label}")
+
+
+def audit_decode_report_receipts() -> None:
+    raw = ROOT / "profiler-hypic-hotcold-20261009-r6"
+    files = {
+        "contract": raw / "decode/contract.json",
+        "capture": raw / "decode/capture.json",
+        "artifact inventory": raw / "decode/artifact-audit.json",
+        "guard": raw / "hypic-only-decode/lane-guard.json",
+        "release": raw / "decode/release.json",
+        "result": raw / "decode/result.json",
+    }
+    audit_report_receipt_hashes(
+        (HERE / "HYPIC_PROFILER_DECODE_AUDIT_20261009.md").read_text(),
+        {label: hashlib.sha256(path.read_bytes()).hexdigest()
+         for label, path in files.items()})
+
+
 def audit_terminal_report(quality: dict, performance: dict) -> None:
+    audit_decode_report_receipts()
     report = (HERE / "HYPIC_R13_TERMINAL_NEGATIVE_REPORT_20261009.md").read_text()
     for required in (
         "final negative result for the frozen r13 C1/C2 experiment",

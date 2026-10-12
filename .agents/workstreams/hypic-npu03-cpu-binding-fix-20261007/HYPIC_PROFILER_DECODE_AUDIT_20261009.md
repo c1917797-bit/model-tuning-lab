@@ -19,7 +19,7 @@ quality and six-phase performance verdicts are not changed.
   inventory sizes and SHA256 hashes. Original raw files were not parsed or
   modified. Control SHA256: contract
   `a6ad132a6ccaf0f49632a9233560910ef9849de062807f3637178f16d0a8d9c7`;
-  capture `179c5aec5b2e155f360e31278d4d1917b46b69368e7f5f`;
+  capture `179c5aec5b2e155f360e31278d4dba16655f5d9dc1dd4d1917b46b69368e7f5f`;
   artifact inventory
   `7639b43ca22109c4abc0d0f879febff7dffbc6e65603278417240ddae4ea520a`;
   guard `22b64c880836a8c038e5b8406caa98f63785f72feb64e2ba56b9c5b4e477c3f3`;

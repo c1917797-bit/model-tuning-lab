@@ -281,7 +281,7 @@ retry21 是唯一纳入六阶段审计的该轮原始根。部分尝试在
 | 独立质量双口径审计 | `hotpath-quality-cache10r13-dual-audit.json` | `f66b9760bfb4f9391863cd386658211c58ab07d0dfc2de58ea2091ed4d2c9b7b` | 分数、逐 ID 热证明、隔离与释放 |
 | 独立六阶段性能审计 | `hotpath-cache10r13-matched-performance-audit.json` | `d8f710f6ccd79ad79a31a36926963eac650761c921924d08b4fb0d2a1a206062` | 6×40 响应、三轮效应 |
 | G2 r13 source attestation | `quality-context-41984-hotpath-cache10r13-full-hypic/hypic-only/source-attestation.json` | `d2169d9b36561aa59c1fdcded08df9c98f7fee6a145e7aca1290986c1a92a687` | 服务中 Python 源码，不是全部二进制 |
-| Prefill/Decode 诊断 | 仓库 `HYPIC_PROFILER_PREFILL_AUDIT_20261009.md` / `HYPIC_PROFILER_DECODE_AUDIT_20261009.md` | `9e5822afbdbc482a8a9deb3ca3fb96bc192ad4fcccb12f523491f104fcba6556` / `f7aefd73e9836f22ec34ebc7b2d5becbc1ed40c1d0b34d5a60b2baae66a538fd` | 候选诊断，非质量根因 |
+| Prefill/Decode 诊断 | 仓库 `HYPIC_PROFILER_PREFILL_AUDIT_20261009.md` / `HYPIC_PROFILER_DECODE_AUDIT_20261009.md` | `9e5822afbdbc482a8a9deb3ca3fb96bc192ad4fcccb12f523491f104fcba6556` / `41821d170eae98dd512a990d4e027774213e47cb1b4917b832d5853870cd2d40` | 候选诊断，非质量根因 |
 
 旧实验、原始 profile 和所有失败重试均不覆盖或删除。
 以下命令只读回放已有证据，不重新拉起服务：
