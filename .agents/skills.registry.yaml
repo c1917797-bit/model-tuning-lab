@@ -209,6 +209,7 @@ skills:
       - deliver a new inference runtime technique
       - package an Ascend monkeypatch or runtime plugin
       - validate monkeypatch activation rollback or promotion
+      - validate hot-unload safety of retained runtime function references
       - runtime monkeypatch delivery
       - 新技术 monkeypatch 交付
       - 可移除运行时补丁

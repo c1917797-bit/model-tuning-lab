@@ -1,5 +1,26 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 r25retry1 TERMINAL ISOLATION FAILED
+
+Experience ingestion: existing runtime-monkeypatch-delivery reference and
+registry gain a hot-unload-only retained-reference rule, with r24 negative
+evidence and observer-v2 CPU reproducer. No new Skill or universal paper gate.
+Three focused CPU tests0d76,29-item structure0d75,provenance replay0d77
+(7 bounded verified/22 partial),diff-check0d78 passed. No functional promotion
+or main/remote sync is implied. Frozen runtime/package/attempt bytes unchanged.
+
+exec0d65 exited1 before health; zero responses/captures. 46 guard samples,
+two detections of NPU1 PID735127 in cannbench_ds container efc5e45e8a54
+at12:23:30/33 UTC, no probe errors. Exact own a6db266b7f12 container,
+NPU processes and port released at12:24:37.998 UTC. Independent audit0d71:
+6621a40043be83b3ae798704e0849b86bc37a13795b09604e38c748c3816a61e
+at /cache/cch/hypic-npu03-cpu-binding-fix-20261007/r25retry1-state-enabled-isolation-failure-audit.json.
+This is environmental interference, not HYPIC failure or a device result for
+the observer fix. Preserve the immutable root. No live owned service remains.
+Wait for actual idle0-3/8223; avoid an immediate restart loop. No foreign-task
+mutation,4-7 use,full quality rerun or unchanged auth retry. Older RUNNING
+sections below are historical. Main/remote and Skill acceptance not complete.
+
 ## 2026-10-12 r25retry1 RUNNING after fresh idle admission
 
 Unique controller exec-0000000000000d65 launched from code checkpointab8b6248.

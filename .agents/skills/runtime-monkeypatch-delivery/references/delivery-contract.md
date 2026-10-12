@@ -76,6 +76,28 @@ categories.
 Do not spend the full matrix after a preregistered gate fails. Do not use a
 microbenchmark, profile, or compile-cache hit as a service-level win.
 
+## Hot-unloadable instrumentation: retained references
+
+Only for packages supporting in-process hot uninstall: restoring a module
+attribute does not invalidate function aliases retained by callers or compiled
+graphs. Test a saved callable after uninstall and a real post-uninstall request
+before claiming serving rollback. This is not a new gate for every paper.
+
+Do not delete callback globals still needed by retained aliases. Use an explicit
+safe rollback, such as restarting the owned service or generation-specific inert
+dispatchers that release session references and cannot reactivate old aliases on
+reinstall. Disclose inert names remaining until restart; active-hook removal is
+not zero namespace residue.
+
+Example: HYPIC diagnostic r24 completed its target and four-worker capture, then
+failed its post-uninstall request with a missing callback global. See workstream
+`.agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/`:
+`HYPIC_R24_PARTIAL_CAPTURE_AND_UNINSTALL_FAILURE_20261012.md` and CPU regression
+`test_numerical_state_observer_v2.py`. Valid partial captures do not upgrade a
+failed lifecycle gate. Observer failure is not automatically HYPIC quality loss.
+CPU/import tests are not device rollback; r25/r25retry1 pre-health isolation
+failures provide no device result for this fix.
+
 ## Terminal decision
 
 Record `accepted`, `partial-component`, `rejected`, `failed`, or
