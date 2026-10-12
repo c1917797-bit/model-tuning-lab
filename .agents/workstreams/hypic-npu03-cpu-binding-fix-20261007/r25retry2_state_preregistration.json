@@ -1,0 +1,60 @@
+{
+  "schema": "hypic-r25retry2-bounded-state/v1",
+  "purpose": "Regression of retained-alias-safe observer uninstall in integrated HYPIC serving; no full quality or speed acceptance",
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "source_commit": "4429e35177979c874bf053ab29789e4773f39b22",
+  "source_tree_sha256": "a5ebed77cc4ae0035e2634b81dc0606d8e37cc9d32f8894b984325bec1056692",
+  "runner_sha256": "5d3078267d55e6ca41000ba195c387e2f3fc6fec6bbe89cf73b8a67fbfb8f8e0",
+  "body_request_id": "hypic-state-r25retry2-s059",
+  "kv_layer": "language_model.model.layers.3.self_attn.attn",
+  "gdn_layer": "language_model.model.layers.0.linear_attn",
+  "sample": 59,
+  "warmup_requests": 2,
+  "warmup_max_tokens": 1,
+  "target_requests": 1,
+  "target_max_tokens": 2048,
+  "post_uninstall_max_tokens": 1,
+  "concurrency": 1,
+  "physical_npus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "port": 8223,
+  "sequence": [
+    "retained-r23-disabled-control-identity",
+    "v3-disabled-no-import-equivalence",
+    "v3-fixed-image-register-cpu",
+    "enabled",
+    "independent-enabled-audit"
+  ],
+  "abort": "Any actual foreign physical0-3 process or probe error invalidates attempt; release only exact owned container; never resume/reuse raw roots",
+  "acceptance": "4 responses, four worker registration then four sealed captures with exact request/step/source/physical joins; report independent sampled residuals, no equivalence or quality acceptance",
+  "limits": "Selected two layers/head0/KV rows only. Material producer-generation correctness not proven. Different attention contexts not treated as defects.",
+  "files": {
+    "r16_original_source_full_adapter.py": "78f1043df97936c4862593ec268ace9b13af0b929c5fefa47c3cfaccedfb8600",
+    "hotpath_quality_full.py": "8ee34e61635731038df4312763ca2cac72b31578980a24539ca442fe7979c06d",
+    "binding_off_quality.py": "714012b683142201fc4cf40d734f4d48f53210d7ade93479bf550e27020db0c4",
+    "binding_off_service.py": "73d2bfe0ce626ce0fc628337204cef4bfd6248a76f149f96175c31346f3f7c56",
+    "numerical_state_capture.py": "4f56123080ebded1500f67884bdd023e8018f3e48d12f928c312916ccd3e3e0f",
+    "numerical_state_writer.py": "1554f004363c6f1fa55df1b8cf42538f5999be488d9e9c0f1dfee43f40503cfb",
+    "numerical_state_audit.py": "2e801e9a324864b7cf2572c103d1335aae7867e58717bf4955513d27b7a28bf0",
+    "state-observer-package-v3/MANIFEST.json": "8d8b4f037736acbf1521a817ecfbd73e7a584e1bf2e4065e683198b15722e59c",
+    "state-observer-package-v3/hypic_diagnostic_patch.py": "6508c9887d33e083f9a8e605384f6a21fd55a8c0f3b710d419618d30738d8b08",
+    "state-observer-package-v3/sitecustomize.py": "99ca1ecaf7d19c5db2b9e48b8ed73ffb8d4b212c2012de90cf9c60722f901e70",
+    "state-observer-package-v3/run_with_patch.sh": "78ab23fb19b63572072fd9cda7cd9f022eef0dafb8a3bc7442a2761220618b12",
+    "numerical_state_observer_v2.py": "766e1b3c8805baecbf841e49f74f5e765202176f3d03a1e5619c8827ab90941e",
+    "numerical_state_loader_v3.py": "e18b9e6c7f011373e27afe7b4df8d9796801c020c6045ac3a767acc248f3e40f",
+    "r25retry2_state_diagnostic.py": "e1c2375d7363cf8ec35daef2b7e0650289ca707b320a09ea8be29b27fd232194",
+    "r25retry2_state_audit.py": "0e1fc13b8ef489a7e8fdf0041a7bf05ff42521a86e5d235d244145d6e8bcaa51"
+  },
+  "control_reuse": {
+    "scope": "diagnostic wrapper control only, not paired quality/performance or delivery promotion",
+    "original_run": "r23-state-disabled",
+    "audit_sha256": "38f25f63e7d0e114c23bc9c8229f189e047d8a440097c4292a07e04403d46bab",
+    "basis": "unchanged serving source/image/workload; byte-identical disabled launcher/sitecustomize; switch=0 returns before changed support import; retained r23 identity is not relabeled and not a same-new-package paired quality/performance baseline"
+  },
+  "changed_premise": "Only the observer lifecycle changes versus r24: observer-v2 generation-specific inert dispatchers via standalone loader-v3; same HYPIC/image/sample/request counts/caps. r24 remains failed and immutable. CPU retained-alias reproduction and 65 numerical tests passed; fixed-image real register/uninstall probe exec-0000000000000d43 passed without numbered NPU devices. Retry2 changes only attempt/root/request identifiers after foreign task ceased. No treatment, workload, cap or gate change; frozen r25 preserved. Retry2 follows confirmed external-driver/container exit, not merely a quiet NPU snapshot.",
+  "retry_of": "r25retry1: environmental isolation failure before health; zero responses/captures; original foreign PID330700 gone and cannbench_ds stopped on 2026-10-12T20:01:57Z"
+}
