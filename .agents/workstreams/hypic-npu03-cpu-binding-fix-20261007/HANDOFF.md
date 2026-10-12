@@ -1,5 +1,16 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 lineage observer and independent audit implemented, CPU only
+
+14 real-store/synthetic-CPU tests passed exec00041, including duplicate/recreate,
+content mutation, wrong request/step/rank, independent flag recomputation and
+saved-wrapper rollback. No NPU run or real producer-generation proof yet.
+See HYPIC_MATERIAL_LINEAGE_IMPLEMENTATION_20261012.md. Next integrate consumer
+capture into the same AST transformation as replay observation (separate hooks
+would overwrite each other); start producer writer before warmups. Freeze bounded
+concurrent schedule only after combined source-bound tests. Do not rerun serial
+lifecycle or unchanged full quality. Main/remote and29 functional acceptance remain open.
+
 ## 2026-10-12 material-lineage discriminator, CPU-only evidence
 
 Exact-source probe exec00037 passed five checks. Duplicate same-hash/layer

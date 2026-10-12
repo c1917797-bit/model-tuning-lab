@@ -4,6 +4,14 @@
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
   "state": "r19_quality_rejected_r22_bounded_diagnostic_inconclusive_skill_mapping_pending",
   "execution_state": "in-progress",
+  "material_lineage_observer": {
+    "state": "host-tested-not-service-integrated-no-device-proof",
+    "test_operation": "exec-0000000000000041",
+    "host_tests": 14,
+    "report": "HYPIC_MATERIAL_LINEAGE_IMPLEMENTATION_20261012.md",
+    "next": "Combine consumer and replay seams in one source-bound AST observer; install producer capture before warmups, then freeze a bounded concurrent diagnostic",
+    "quality_cause_proven": false
+  },
   "material_lineage_cpu_discriminator": {
     "state": "five-source-bound-cpu-checks-passed-no-device-run",
     "operation": "exec-0000000000000037",
