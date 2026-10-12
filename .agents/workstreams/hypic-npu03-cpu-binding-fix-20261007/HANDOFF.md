@@ -1,5 +1,26 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 actual native package CPU lifecycle and image metadata
+
+HYPIC_NATIVE_CPU_LIFECYCLE_20261012.md closes the pinned-image metadata
+lookup and real installed-entrypoint CPU checks. Image660ce23 reports
+vLLM0.23.0+empty/vLLM-Ascend0.23.0/CANN9.1.0 via actual metadata, not tags.
+exec00f7 installed unchanged4429e35 in a disposable image-local virtualenv,
+discovered native entrypoint, called real register unset/0 with no bootstrap
+import, uninstalled and proved distribution/module/entrypoint absent in a
+new interpreter.15.097s, no devices/network/model, read-only image/source.
+00f9 found the owned inspection containers absent and original source clean.
+00fc independently replays hashed records and existing runtime case.
+
+This is not enabled-hook, real-request or NPU rollback acceptance. Historical
+host-driver/runtime-overlay identity remains unproved; current immutable
+image metadata cannot manufacture past runtime evidence. Full native MANIFEST
+and technique-level controls/rollback remain gaps. Counts8/21 unchanged.
+Next bind a prospective native package only to proven identities and actual
+launch contract; do not rewrite4429e35, repeat quality or expand observer work.
+Same-source descriptive performance choice still pending, no NPU launch.
+Fixed08:47:14UTC Oct13 deadline, unchanged auth and two observer-v3 drafts stay.
+
 ## 2026-10-12 native profile implemented without rewriting HYPIC
 
 NATIVE_PLUGIN_PROFILE_REGRESSION_20261012.md supersedes only the earlier

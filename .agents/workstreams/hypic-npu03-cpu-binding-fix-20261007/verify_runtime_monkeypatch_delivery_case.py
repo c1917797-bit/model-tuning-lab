@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import subprocess
@@ -40,7 +41,73 @@ def git(*args: str, cwd: Path = REPO) -> str:
     return result.stdout.strip()
 
 
+def verify_native_cpu_receipts() -> dict:
+    """Replay only CPU installation facts; never launch or infer device success."""
+    raw = Path("/cache/cch/hypic-npu03-cpu-binding-fix-20261007/"
+               "native-delivery-cpu-20261012")
+    pinned_image = "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
+    records = {}
+    for name, sha in (
+        ("image-probe-record.json", "af1632019b98eba1fcb3d975ed894b0da60883b660d20762e047ee377c453c54"),
+        ("cpu-lifecycle-record.json", "40010d430a660de87c76d74b025cb1e0a1e03ff63c1a0ebc1746821a6d076189"),
+    ):
+        b = (raw / name).read_bytes()
+        expect(hashlib.sha256(b).hexdigest() == sha, "CPU raw receipt drift: " + name)
+        record = json.loads(b)
+        expect(record["state"] == "completed" and record["exitCode"] == 0
+               and not record["timedOut"] and not record["cancelled"],
+               "CPU probe did not complete")
+        args = record["args"]
+        expect(record["command"] == "docker" and args[0] == "run"
+               and pinned_image in args and "--read-only" in args
+               and "--rm" in args and args[args.index("--network") + 1] == "none"
+               and args[args.index("--cap-drop") + 1] == "ALL"
+               and not any(a == "--privileged" or a.startswith("--device") for a in args),
+               "CPU probe isolation drift")
+        records[name] = json.loads(record["stdout"])
+    version = records["image-probe-record.json"]
+    expect(not version["numbered_npu_devices"] and not version["manager_devices"],
+           "image probe exposed devices")
+    expected_versions = {"vllm": "0.23.0+empty", "vllm-ascend": "0.23.0",
+                         "torch": "2.10.0+cpu", "torch-npu": "2.10.0.post4",
+                         "transformers": "5.5.4", "triton-ascend": "3.2.2"}
+    expect({k: version["packages"][k]["version"] for k in expected_versions}
+           == expected_versions, "image version metadata drift")
+    cann = version["cann_version_files"]
+    expect(cann and all(x["sha256"] == "a9b17ef608ebeb70ade09cde1c12a545eb5e8f3e5312f6806ca0d368b0464848"
+                       and hashlib.sha256(x["content"].encode()).hexdigest() == x["sha256"]
+                       and "\nversion=9.1.0\n" in x["content"] for x in cann),
+           "CANN metadata receipt mismatch")
+    result = records["cpu-lifecycle-record.json"]
+    expect(result["schema"] == "hypic-native-cpu-lifecycle/v1"
+           and result["source_files"] == 32
+           and result["python_tree_sha256"] == "a5ebed77cc4ae0035e2634b81dc0606d8e37cc9d32f8894b984325bec1056692"
+           and result["device_nodes"] == [], "CPU lifecycle source/device mismatch")
+    expect([x["switch"] for x in result["controls"]] == [None, "0"],
+           "disabled controls incomplete")
+    for item in result["controls"]:
+        control = item["result"]
+        expect(control["entrypoint"] == "hypic_vllm_ascend:register"
+               and control["version"] == "0.8.5"
+               and control["module"] == "/tmp/hypic/hypic_vllm_ascend/__init__.py"
+               and control["bootstrap_imported"] is False
+               and control["device_framework_imported"] is False, "disabled dispatch mismatch")
+    expect(result["after_uninstall_new_interpreter"] == {
+        "distribution_absent": True, "entrypoint_absent": True, "import_absent": True},
+        "fresh-interpreter uninstall not proved")
+    expect(all(result[k] is False for k in
+               ["enabled_hook_tested", "serving_request_tested", "npu_rollback_tested"]),
+           "CPU evidence falsely promoted")
+    probe = HERE / "probe_native_hypic_cpu_lifecycle.py"
+    expect(hashlib.sha256(probe.read_bytes()).hexdigest()
+           == "16fd5ba69df7b4d002b5c2f163d81a07ddb187fa7d5d25e2a88812d42f28e8b1",
+           "executed CPU probe bytes drift")
+    return {"image_metadata_recorded": True, "native_cpu_disabled_uninstall": "PASS",
+            "enabled_hook_or_device_rollback_proven": False}
+
+
 def main() -> int:
+    native_cpu = verify_native_cpu_receipts()
     expect(git("rev-parse", "origin/main") == MAIN,
            "locally tracked main changed; case needs re-review")
     for path, expected in (
@@ -138,6 +205,7 @@ def main() -> int:
         "main_wrapper_forces_treatment": True,
         "branch_static_validator_tests": 9,
         "branch_native_profile_tests": 12,
+        "native_cpu_replay": native_cpu,
         "plugin_source": PLUGIN_COMMIT,
         "r12_four_worker_hot": 52,
         "r12_scored": 57,

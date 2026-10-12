@@ -1,5 +1,6 @@
 {
   "schema": "mst-real-task-skill-case/v1",
+  "native_cpu_lifecycle_20261012": {"report":"HYPIC_NATIVE_CPU_LIFECYCLE_20261012.md","image_probe":"exec-00000000000000f2","native_cpu_lifecycle":"exec-00000000000000f7","read_only_receipt_replay":"exec-00000000000000fc","image_version_metadata_available":true,"actual_native_install_and_disabled_dispatch":true,"fresh_interpreter_uninstall":true,"source_changed":false,"enabled_hook_tested":false,"real_request_tested":false,"npu_rollback_tested":false,"full_hypic_manifest_validated":false,"overall_skill_acceptance":"partial-evidence","npu_launch_scheduled":false},
   "native_profile_regression_20261012": {"state":"implemented-branch-static-only","report":"NATIVE_PLUGIN_PROFILE_REGRESSION_20261012.md","negative_before_fix":"exec-00000000000000d7","cpu_tests_passed":21,"legacy_tests":9,"native_tests":12,"actual_hypic_source_helper_check":"exec-00000000000000da","actual_source_files":32,"full_hypic_manifest_validated":false,"device_activation_proven_by_static_profile":false,"npu_rerun":false},
   "native_plugin_delivery_reuse_20261012": {"report":"HYPIC_NATIVE_PLUGIN_DELIVERY_REUSE_20261012.md","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","entrypoint":"hypic_vllm_ascend:register","loader_kind":"vllm.general_plugins","python_files":32,"python_tree_sha256":"a5ebed77cc4ae0035e2634b81dc0606d8e37cc9d32f8894b984325bec1056692","both_r19_longbench_attestations_match":true,"cpu_dispatch_probe":"exec-00000000000000cd","bootstrap_mocked":true,"native_manifest_profile_implemented":false,"new_device_acceptance":false,"required_next_route":"Retain the existing native hook and switch; do not convert tested source to a new sitecustomize implementation merely to fit the generic validator."},
   "diagnostic_observer_supplement_20261012": {
@@ -72,6 +73,8 @@
     "main_skill_repair_integrated": false
   },
   "evidence": [
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_CPU_LIFECYCLE_20261012.md","sha256":"fcd945a9f397069e26dccf1aa35523cde946d7f9df2b232e390b80cb8a665325"},
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/probe_native_hypic_cpu_lifecycle.py","sha256":"16fd5ba69df7b4d002b5c2f163d81a07ddb187fa7d5d25e2a88812d42f28e8b1"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/NATIVE_PLUGIN_PROFILE_REGRESSION_20261012.md","sha256":"e168ac6d6b07727a13c5047ee7ab9a1f8d6d84ee41f2b26bc61717e6d5a9b892"},
     {"path":"tests/test_validate_native_plugin_package.py","sha256":"e1794a715c400fd63f1f5371440afb01be7351acefdedb0d86e3d88e58f371d5"},
     {"path":".agents/skills/runtime-monkeypatch-delivery/SKILL.md","sha256":"8ca0229ba43de0d3a18f7e2129e098acd21c2e362d2a28bf6f5e058f55cea3c1"},
@@ -110,7 +113,7 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_runtime_monkeypatch_delivery_case.py",
-      "sha256": "fc0d2e59fb2e19b621fcc60368dbe8122156d5b2a8f1ba87fd95b104585e0241"
+      "sha256": "997eeffe7bc82b491222b14e63e034564b063cf827b7f2f8c13490813f5de686"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_TERMINAL_AUDIT.md",
