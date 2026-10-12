@@ -5,6 +5,8 @@
   "state": "evidence_convergence_quality_terminal_performance_source_gap_skill_acceptance_partial",
   "convergence_checkpoint": {"as_of_utc":"2026-10-12T20:50:54Z","report":"HYPIC_12H_CONVERGENCE_20261012.md","ledger":"HYPIC_EVIDENCE_REUSE_20261012.json","window_start_utc":"2026-10-12T20:47:14Z","deadline_utc":"2026-10-13T08:47:14Z","lineage_expansion_on_critical_path":false,"new_npu_launch_scheduled":false,"old_verdicts_changed":false,"full_goal_complete":false},
   "execution_state": "in-progress",
+  "r19_final_quality_report": {"checkpoint":"f05c35d33ccdf61c7ef7e5cdc9eb546a50de7ed4","report":"HYPIC_R19_FINAL_QUALITY_REPORT_20261012.md","raw_scored_responses_replayed":8676,"raw_replay_operation":"exec-0000000000000066","regression_operation":"exec-0000000000000067","tests":4,"text_counterexamples":9,"report_scope":"Complete r19 paired quality negative report only; same-source performance missing, old r13 reporting provenance gaps retained","main_skill_blob":"7902b3f9c96ebd6b77a35b328333ad3834fe4a9f","main_reference_blob":"40582e499b5589893524df3b74aabfeebe040f8c","quality_decision_changed":false,"npu_rerun":false,"full_skill_promotion":false},
+  "same_source_performance_decision_request": "User asked prospectively whether to permit three matched 4429e35 performance pairs as descriptive evidence only while retaining r19 quality rejection. No launch authorized by the question itself; continue offline Skill acceptance while awaiting the answer.",
   "material_lineage_observer": {
     "state": "host-tested-not-service-integrated-no-device-proof",
     "test_operation": "exec-0000000000000041",

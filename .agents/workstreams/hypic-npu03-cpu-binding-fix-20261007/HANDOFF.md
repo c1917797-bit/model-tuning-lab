@@ -1,5 +1,24 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 r19 final quality report and raw replay complete
+
+Code checkpoint f05c35d3 adds HYPIC_R19_FINAL_QUALITY_REPORT_20261012.md and
+read-only verify_r19_final_quality_report.py. exec0066 independently rescored
+8676 stored responses and reconciled commands/binds/source, four-worker ID
+proof, continuous isolation and exact release; exec0067 passed4 tests with9
+text counterexamples. No model inference, raw rewrite or threshold change.
+LongBench remains227/381->219/381 rejected/qualified; GSM8K3838/3957->3840/3957
+is off-path safety PASS. Report complete is not HYPIC adoption complete.
+
+Reporting case gets hashed supplementary evidence but stays partial because
+its older r13 exact-controller/full-failure-ledger review is still open.
+Main29 count remains7 bounded verified/22 partial. The user has been asked
+whether to allow future descriptive same-source4429e35 performance despite
+the preserved quality rejection; the question itself is not launch authority.
+While awaiting that choice continue read-only historical report provenance
+review. The fixed08:47:14UTC Oct13 convergence deadline below is unchanged.
+Untracked observer-v3 drafts remain untouched and undeployed; no remote sync.
+
 ## 2026-10-12 current resume override: evidence convergence, not tool expansion
 
 Read HYPIC_12H_CONVERGENCE_20261012.md and HYPIC_EVIDENCE_REUSE_20261012.json
