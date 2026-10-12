@@ -1,5 +1,17 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 material-lineage discriminator, CPU-only evidence
+
+Exact-source probe exec00037 passed five checks. Duplicate same-hash/layer
+put may return True and report ready while retaining the old object/payload;
+same-hash regeneration after eviction can instead create new object/values.
+CPU clones are owned; protected replay survives a competing cache insertion.
+See HYPIC_MATERIAL_LINEAGE_DISCRIMINATOR_20261012.md and
+probe_material_lineage_cpu.py. This is not a device or quality-root proof.
+Next producer/consumer capture must observe actual committed object generations,
+not count put/ready events; start before warmup and use existing bounded replay
+observer. No unchanged serial/full-suite rerun; r19 remains rejected/qualified.
+
 ## 2026-10-12 r25retry2 TERMINAL: bounded observer lifecycle PASS
 
 Controller exec-0000000000000014 exit0 after624.884s. Four responses complete:

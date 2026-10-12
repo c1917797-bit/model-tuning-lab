@@ -4,6 +4,14 @@
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
   "state": "r19_quality_rejected_r22_bounded_diagnostic_inconclusive_skill_mapping_pending",
   "execution_state": "in-progress",
+  "material_lineage_cpu_discriminator": {
+    "state": "five-source-bound-cpu-checks-passed-no-device-run",
+    "operation": "exec-0000000000000037",
+    "source_commit": "4429e35177979c874bf053ab29789e4773f39b22",
+    "report": "HYPIC_MATERIAL_LINEAGE_DISCRIMINATOR_20261012.md",
+    "finding": "Duplicate put/ready is not a new generation; observe actual committed object and payload at producer/consumer",
+    "quality_cause_proven": false
+  },
   "r25retry2_state_diagnostic": {
     "state": "terminal-bounded-lifecycle-pass-independent-audit-valid",
     "controller_exit_code": 0,
