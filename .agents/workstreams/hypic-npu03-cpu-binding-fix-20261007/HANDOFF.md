@@ -1,5 +1,24 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 r24 enabled controller RUNNING
+
+Controller exec-0000000000000d16 is confirmed live; code checkpoint941df882.
+Raw root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r24-state-enabled.
+Exact own container: hypic_npu03_bindingfix_quality_hypic_only_20261007_hotpath-cache10r24-state-enabled.
+Admission/controller enforce physical0-3 only, port8223 idle, fresh root and
+continuous physical-process guard. Poll this same operation/root; timeout is not
+terminal. After terminal inspect terminal.json and run shared-py311
+r24_state_audit.py --mode enabled. Do not modify frozen package/support while live.
+
+An earlier outer launcher exec0d15 incorrectly invoked check() and main() in one
+interpreter: base configuration is intentionally single-use, so it failed before
+root/container creation with historical controller import identity drift.
+This was launch orchestration, not source drift or an NPU attempt. Corrected by
+calling the frozen controller directly in a fresh process; no experiment rerun.
+Prelaunch space check: /cache/cch free173024395264 bytes.
+Case replay exec0d17 still reports29 provenance cases,7 bounded verified and22
+partial. This is not full main-Skill functional acceptance or remote sync.
+
 ## 2026-10-12 r24 successor ready for one bounded NPU diagnostic
 
 CPU-only exact-image probes exec0cfd and exec0d06 successfully executed the real

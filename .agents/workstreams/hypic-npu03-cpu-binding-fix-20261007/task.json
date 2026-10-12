@@ -4,6 +4,20 @@
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
   "state": "r19_quality_rejected_r22_bounded_diagnostic_inconclusive_skill_mapping_pending",
   "execution_state": "in-progress",
+  "r24_state_diagnostic": {
+    "state": "enabled-controller-running",
+    "controller_operation": "exec-0000000000000d16",
+    "code_checkpoint": "941df882",
+    "preregistration_sha256": "1c9bec9f4c35bf20e25b47e11bd9bf4518924b7314cd0a1ecb31fe3e70f69d47",
+    "raw_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r24-state-enabled",
+    "cpu_real_register_operations": [
+      "exec-0000000000000cfd",
+      "exec-0000000000000d06"
+    ],
+    "retained_disabled_replay": "exec-0000000000000d0e",
+    "next": "Poll exact operation/root; do not restart while live or ambiguous; after terminal run shared-py311 r24_state_audit.py --mode enabled",
+    "claim": "diagnostic only; no quality/performance success"
+  },
   "r23_state_diagnostic": {
     "state": "enabled-terminal-failed-loader-integration-cpu-v2-repair",
     "controller_operation": "exec-0000000000000cdc",
@@ -1278,5 +1292,5 @@
     "interpretation": "Both subset arms scored 54/96; sample 082 was correct and naturally stopped in both arms, but lacked candidate hot proof. First cross-arm token divergence positions 124/23/212 are comparable to within-arm variability; inconclusive, not causal and not a full-suite verdict.",
     "claim_boundary": "bounded output-numerics diagnostic only; prior waves absent; no r19 verdict change"
   },
-  "next_action": "Version successor package/contract with v2 full meta-path lookup; prove real register and per-worker activation, fail fast on plugin import failures; no unchanged r23 rerun See latest r23 HANDOFF and HYPIC_R23_LOADER_FAILURE_20261012.md. All r23 resources released; r19 quality rejection unchanged; no main/remote synchronization."
+  "next_action": "Poll exact operation/root; do not restart while live or ambiguous; after terminal run shared-py311 r24_state_audit.py --mode enabled. r19/r22 unchanged; only physical NPU0-3 permitted; no remote push with unchanged credentials."
 }
