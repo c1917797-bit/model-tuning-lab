@@ -1,5 +1,6 @@
 {
   "schema": "mst-real-task-skill-case/v1",
+  "native_recovery_disabled_failure_20261012": {"report":"HYPIC_NATIVE_RECOVERY_DISABLED_FAILURE_20261012.md","decision":"FAILED_SEMANTIC_GUARD","controller":"exec-0000000000000165","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","requests_complete":3,"disabled_treatment_event_count":0,"enabled_disabled_predictions":["A","A"],"reference":"D","enabled_disabled_completion_tokens":[2048,2048],"enabled_disabled_finish_reasons":["length","length"],"clean_isolation_samples":100,"exact_owned_release":true,"one_switch_command_fingerprint_match":true,"paired_failure_audit_sha256":"b528aef3639ab8d3229e8f9f34fa890fcf8a73010db7a24a4fea0b9155045c7f","semantic_recovery_pass":false,"uninstalled_started":false,"old_quality_verdict_changed":false,"replay":"python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_recovery_failure_audit.py"},
   "failed_path_scope_review_20261012": {"report":"CANARY_FAILED_PATH_SCOPE_20261012.md","tested_main_skill_blob":"07dceac8c65c9d1696d8e2fa5543d9b8784a7628","failed_terminal_is_valid_skill_outcome":true,"algorithm_repair_universal_gate":false,"paper_c3_universal_canary_gate":false,"acceptance_promoted":false,"existing_case_and_failure_replay":"exec-000000000000016a"},
   "native_lifecycle_enabled_failure_20261012": {"decision":"FAILED_SEMANTIC_GUARD","report":"HYPIC_NATIVE_LIFECYCLE_ENABLED_FAILURE_20261012.md","controller":"exec-0000000000000141","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","requests_complete":3,"target_hot_workers":4,"reference":"D","prediction":"A","completion_tokens":2048,"finish_reason":"length","clean_isolation_samples":104,"exact_owned_release":true,"failure_audit_sha256":"94dd02e81529acedf25ace6979cc6b72a1e265505adf1ea2cf36afd29e7bf82a","canary_pass":false,"disabled_uninstalled_complete":false,"population_quality_or_performance_claim":false,"old_verdict_changed":false,"replay":"python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_lifecycle_failure_audit.py"},
   "skill": "ascend-canary-implementation",
@@ -40,6 +41,8 @@
     "case_integrated_in_main": false
   },
   "evidence": [
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_RECOVERY_DISABLED_FAILURE_20261012.md","sha256":"a6010dafaa39c6bcb03ace6d8f7b2e5e9d37230f7c6ef2991d4fa414670bb334"},
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_recovery_failure_audit.py","sha256":"f7df4121617b68c3926863d0227726067e77fb422f2e4d69e777b51053be3598"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/CANARY_FAILED_PATH_SCOPE_20261012.md","sha256":"1291413a5474af864eda2050fa73c3aea82f6474061401cd02c43b583a1e3183"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_lifecycle_failure_audit.py","sha256":"05c7314e035e5905a33f1b18c8fb8e0dfc5221cf842db6f2a94e2ff316e19924"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_LIFECYCLE_ENABLED_FAILURE_20261012.md","sha256":"b512b1594a1864c681589d86fcb61e511d6643ae69626b4315e48b512dc22a49"},

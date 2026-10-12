@@ -1,5 +1,25 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 disabled recovery terminal failed; no live controller
+
+exec0165 ended exit0 in541.448s,3/3 responses. Frozen audit0171 failed only
+semantic/natural-stop after identity, physical mapping, isolation, marker and
+release checks. Like enabled, disabled target59 scoredA/referenceD,2048/length;
+disabled emitted0 HYPIC events,100 clean guard samples, exact release23:29:26UTC.
+Independent failure recorder0173 proves normalized one-switch command, binds,
+fingerprint and recorded driver/tokenizer/config agreement; failure audit SHA
+b528aef3639ab8d3229e8f9f34fa890fcf8a73010db7a24a4fea0b9155045c7f.
+Read HYPIC_NATIVE_RECOVERY_DISABLED_FAILURE_20261012.md and replay
+native_recovery_failure_audit.py. Both old failures/r19 remain unchanged.
+Enabling HYPIC is not necessary for this sample's wrong/truncated response;
+this is not a population-quality or causal-equivalence result. Recovery semantic
+gate still fails. Uninstalled stage/root not started; original/recovery
+progression stopped. Do not retry enabled/disabled unchanged or silently relax
+gates; any remaining recovery action requires a distinct prospective rationale.
+Three cases gain bounded negative evidence,8/21 stays. Current-source performance
+choice pending; no observer/GDN work, no auth retry or main/remote sync.
+Fixed deadline08:47:14UTC Oct13 unchanged; no live service/controller remains.
+
 ## 2026-10-12 Canary failed-path scope correction while recovery runs
 
 CANARY_FAILED_PATH_SCOPE_20261012.md corrects the case next_gate that had
