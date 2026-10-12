@@ -1,0 +1,91 @@
+{
+  "schema": "paper-window-closure/v1",
+  "as_of_utc": "2026-10-12T07:03:00Z",
+  "original_cut_epoch": 1791788425,
+  "window_state": "EXPIRED_UNMET",
+  "goal_achieved": false,
+  "goal_not_redefined": true,
+  "cutoff_extended": false,
+  "paper_no_go": false,
+  "current_implementation_decision": "INCONCLUSIVE_UNQUALIFIED_NOT_READY_FOR_E2E",
+  "reason": "Saved original D32 long first case misses .005; cause contribution unresolved; D8 full qualification/model/performance/task evidence absent.",
+  "stage_record": "KIVI_LONG_MATH_FIRSTFAULT_20261012_R58.json",
+  "pushed_stage_commit": "ef8fced33fc2d505fb012ec807750960a0ba222c",
+  "remaining_gates": [
+    "failed-frame attribution and source-bound operator repair if supported",
+    "full relevant NPU numerical/lifecycle/graph qualification",
+    "same-configuration fixed1024 full-model paired screening",
+    "three formal matched performance pairs with TTFT/TPOT",
+    "paired final LongBench-v2/GSM8K no-thinking max2048 normalEOS",
+    "portable opt-in plugin delivery"
+  ],
+  "last_resource_audit_operation": "exec-0000000000000c96",
+  "no_task_NPU_job_running": true,
+  "per_card_snapshot": "NPU4–7 idle sample; no compute PIDs; not proof of continuous zero-idle use",
+  "owned_cpu_cid": "e8937ffec8f4d5af228b65546ed0cc4ef70cf1623f77c33897eb454b1463921c",
+  "owned_cpu_stop_retained": true,
+  "deleted": false,
+  "private_preparation": [
+    {
+      "local_ref": {
+        "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-a16-boundary-cpu-host-20261012-001/SOURCE_MANIFEST.json",
+        "bytes": 3658,
+        "sha256": "80708893ce72b1e9ed95ad531ad2fbd8ba9fe2ab223bb292d825ae782c709f19"
+      },
+      "scope": "CPU cold owner; local3 only; not admitted; MAIN review and actual source/runtime unrun",
+      "remote_installed": false,
+      "NPU_executed": false,
+      "run_authority": false
+    },
+    {
+      "local_ref": {
+        "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-a16-boundary-diagnostic-20261012-001/SOURCE_MANIFEST.json",
+        "bytes": 2413,
+        "sha256": "2f08e55531b39aa99fead109e21f95183d26244c7fce882d93cb0dc1b6038efb"
+      },
+      "scope": "Four same-frame rounding diagnostics; local4 only; no actual diagnosis result",
+      "remote_installed": false,
+      "NPU_executed": false,
+      "run_authority": false
+    },
+    {
+      "local_ref": {
+        "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-saved-D32-all64-failure-consumer-20261012-002/SOURCE_MANIFEST.json",
+        "bytes": 1404,
+        "sha256": "736efbf4cd04f6c078ab89e9b51e9527d26d36a4ebac7c4344aa574d85bc32e5"
+      },
+      "scope": "Failure-only consumption with original terminal archive gap explicit; local10 only; actual whole unrun",
+      "remote_installed": false,
+      "NPU_executed": false,
+      "run_authority": false
+    },
+    {
+      "local_ref": {
+        "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-direct-d8-model-20261012-001/ENTRY.json",
+        "bytes": 24504,
+        "sha256": "f7002ed19ad87a9f1a0f716608de2b49fb9babbc3c8f5624f6c9e4617ca70822"
+      },
+      "scope": "Direct D8 numerical/model and matched1024 source trees; local149+149; real component/first64/640 whole prerequisites missing",
+      "remote_installed": false,
+      "NPU_executed": false,
+      "run_authority": false
+    },
+    {
+      "local_ref": {
+        "path": "C:/Users/Huawei/AppData/Local/Temp/kivi-d8-layer3-causal-20261012-001/SOURCE_MANIFEST.json",
+        "bytes": 1798,
+        "sha256": "7dda60b2ccfc8f63977a5fc05a7470629990fdecd778831014e15a49cb1d034a"
+      },
+      "scope": "S/P/output NPU observation preparation; local6; OWNER/PREFILL and new replay/whole missing; not executable",
+      "remote_installed": false,
+      "NPU_executed": false,
+      "run_authority": false
+    }
+  ],
+  "next_action": {
+    "permission_pending": "New explicit bounded experiment window, not automatic renewal of historical clocks",
+    "recommended_first_stage": "At most two hours failed-frame attribution and necessary KIVI operator repair verification; E2E remains the overall goal, not granted by diagnostics",
+    "no_unchanged_rerun": true,
+    "latest_task_loss_allowance": "Per latest human instruction at most1%; report both pp and relative percent; unrelated to tensor .005"
+  }
+}
