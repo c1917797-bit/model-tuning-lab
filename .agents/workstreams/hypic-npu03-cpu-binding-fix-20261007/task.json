@@ -5,14 +5,18 @@
   "state": "r19_quality_rejected_r22_bounded_diagnostic_inconclusive_skill_mapping_pending",
   "execution_state": "in-progress",
   "r23_state_diagnostic": {
-    "state": "disabled-audited-enabled-controller-running",
+    "state": "enabled-terminal-failed-loader-integration-cpu-v2-repair",
     "controller_operation": "exec-0000000000000cdc",
     "code_checkpoint": "f40e5897",
     "raw_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r23-state-enabled",
     "disabled_audit_sha256": "38f25f63e7d0e114c23bc9c8229f189e047d8a440097c4292a07e04403d46bab",
     "disabled_clean_isolation_samples": 114,
-    "next": "Poll same enabled operation; inspect terminal then independent enabled audit; never restart unchanged or modify active frozen files",
-    "quality_or_performance_claim": false
+    "next": "Version successor package/contract with v2 full meta-path lookup; prove real register and per-worker activation, fail fast on plugin import failures; no unchanged r23 rerun",
+    "quality_or_performance_claim": false,
+    "enabled_clean_isolation_samples": 99,
+    "enabled_failure_audit_sha256": "77e039fe78bcdcbe0810b7a3ac9e9998755b4dcf7530781bfff99fb7a219054c",
+    "cpu_real_entrypoint_probe": "exec-0000000000000cf0",
+    "resources_released": true
   },
   "observer_request_identity_checkpoint": {
     "date": "2026-10-12",
@@ -1274,5 +1278,5 @@
     "interpretation": "Both subset arms scored 54/96; sample 082 was correct and naturally stopped in both arms, but lacked candidate hot proof. First cross-arm token divergence positions 124/23/212 are comparable to within-arm variability; inconclusive, not causal and not a full-suite verdict.",
     "claim_boundary": "bounded output-numerics diagnostic only; prior waves absent; no r19 verdict change"
   },
-  "next_action": "Serving loader and draft source-bound package now implemented. numerical_state_loader uses a narrow HYPIC import/registration hook, installs observers after original register/apply_patches, resolves initialized TP rank at first selected hot forward, seals only after four component stages plus matching validated-step receipt, and uninstalls owned hooks. state-observer-package follows repository template; entrypoint verifies package and support hashes; disabled mode does not import HYPIC/observer, enabled bad config exits 78 rather than silently starting. 41 host tests exec088a; package static validator0888 and disabled launcher0889 passed. No device workload or real activation proof yet. Next pin manifest evidence commit to this code checkpoint, freeze exact one-request sample/layers/request ID/raw root and bounded diagnostic adapter/independent auditor, verify actual pinned-image import/TP-group API, then fresh direct-route physical0-3/8223 idle admission. Use existing r20 serial known-hot sample, not another c32/full-suite rerun. Producer-generation/material input correctness/native-PIC equivalence remain unproved. No change to r19/r22 judgments, no remote push with unchanged credentials, no foreign-task or NPU4-7 mutations. Root / full; /cache available; route temp/raw writes there and verify owned container writable paths before launch."
+  "next_action": "Version successor package/contract with v2 full meta-path lookup; prove real register and per-worker activation, fail fast on plugin import failures; no unchanged r23 rerun See latest r23 HANDOFF and HYPIC_R23_LOADER_FAILURE_20261012.md. All r23 resources released; r19 quality rejection unchanged; no main/remote synchronization."
 }
