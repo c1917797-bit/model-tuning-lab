@@ -1,5 +1,25 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 runtime template worker startup defect fixed, CPU only
+
+RUNTIME_WORKER_STARTUP_REGRESSION_20261012.md records a failing real subprocess
+counterexample00bb: launcher preflight succeeded,worker-local patch raised,
+but Python continued into the service and returned0. The copied template
+loader now emits bounded FAILED and exits78 for enabled activation/import
+errors. Disabled control remains intact; nine tests passed00bd. This changes
+only the generic template/test assets, not frozen packages or HYPIC source.
+Skill Creator quick validation passed;00bf replays existing delivery evidence
+without device work. r25retry2 remains observer-only rollback, not technique
+delivery. Case next_gate no longer demands fixing the algorithm before any
+Skill validation; rejected/failed are legitimate terminal outcomes.
+
+Actual HYPIC MANIFEST/control/rollback gaps and promotion restrictions remain.
+Counts8 bounded verified/21 partial. Keep the two observer-v3 drafts untouched.
+No new NPU work, accepted package, root-cause claim or main/remote integration.
+Next inspect actual HYPIC package feasibility from retained source identities
+and receipt gaps; do not start another quality wave or expand observers.
+Same-source descriptive performance choice remains pending; deadline unchanged.
+
 ## 2026-10-12 tool-adapter original task bounded acceptance
 
 TOOL_ADAPTER_OBLIGATION_ACCEPTANCE_20261012.md maps all six exact-main

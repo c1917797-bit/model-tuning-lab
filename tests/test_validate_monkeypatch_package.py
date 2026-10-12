@@ -130,5 +130,46 @@ class PackageValidatorTests(unittest.TestCase):
                 self.assertNotIn("MODEL_TUNING_PATCH_ACTIVE", result.stderr)
 
 
+
+    def worker_failure_command(self) -> tuple:
+        # Wrapper preflight succeeds; only the actual service interpreter fails.
+        return ("bash", str(self.package / "run_with_patch.sh"), "bash", "-c",
+                'export MTL_TEST_ACTIVATION_FAIL=1; exec "$1" -c '
+                '\'print("WORKER_REQUEST_OK")\'', "worker-probe", sys.executable)
+
+    def inject_worker_failure(self) -> None:
+        manifest = self.valid_fixture()
+        (self.package / "patch.py").write_text(
+            "import os\ndef activate():\n"
+            "    if os.environ.get('MTL_TEST_ACTIVATION_FAIL') == '1':\n"
+            "        raise RuntimeError('worker-only CPU fixture failure')\n",
+            encoding="utf-8")
+        manifest["treatment"]["patch_sha256"] = hashlib.sha256(
+            (self.package / "patch.py").read_bytes()).hexdigest()
+        self.save(manifest)
+
+    def test_enabled_worker_failure_stops_service_body(self) -> None:
+        self.inject_worker_failure()
+        env = os.environ.copy()
+        env.pop("MTL_TEST_ACTIVATION_FAIL", None)
+        env["MODEL_TUNING_RUNTIME_PATCH_ENABLE"] = "1"
+        result = subprocess.run(self.worker_failure_command(), cwd=REPO, env=env,
+                                capture_output=True, text=True, check=False)
+        self.assertEqual(result.returncode, 78, result.stderr)
+        self.assertNotIn("WORKER_REQUEST_OK", result.stdout)
+        self.assertIn("MODEL_TUNING_PATCH_FAILED", result.stderr)
+
+    def test_disabled_worker_ignores_broken_treatment(self) -> None:
+        self.inject_worker_failure()
+        env = os.environ.copy()
+        env.pop("MTL_TEST_ACTIVATION_FAIL", None)
+        env["MODEL_TUNING_RUNTIME_PATCH_ENABLE"] = "0"
+        result = subprocess.run(self.worker_failure_command(), cwd=REPO, env=env,
+                                capture_output=True, text=True, check=False)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("WORKER_REQUEST_OK", result.stdout)
+        self.assertNotIn("MODEL_TUNING_PATCH_ACTIVE", result.stderr)
+        self.assertNotIn("MODEL_TUNING_PATCH_FAILED", result.stderr)
+
 if __name__ == "__main__":
     unittest.main()

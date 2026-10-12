@@ -37,7 +37,7 @@
     "main_documented_validator_absent": true,
     "main_template_wrapper_forced_enabled": true,
     "branch_same_wrapper_disabled_control_cpu_fixture_passed": true,
-    "branch_static_validator_tests_passed": 7,
+    "branch_static_validator_tests_passed": 9,
     "branch_static_validator_only": true,
     "plugin_source_commit": "c12060cd47e7575ead059983d7a8bb4704165c98",
     "r12_scored_responses": 57,
@@ -49,10 +49,19 @@
     "source_fix_npu_causal_effect_isolated": false,
     "r13_unpacked_plugin_same_identity_pair_complete": true,
     "r13_unpacked_plugin_performance_six_phases_complete": true,
-    "r13_unpacked_plugin_performance_strict_hot": [120, 120],
-    "r13_unpacked_plugin_quality_correct_baseline_candidate": [230, 219],
+    "r13_unpacked_plugin_performance_strict_hot": [
+      120,
+      120
+    ],
+    "r13_unpacked_plugin_quality_correct_baseline_candidate": [
+      230,
+      219
+    ],
     "r13_unpacked_plugin_quality_decision": "REJECT_OR_QUALIFY",
-    "r13_unpacked_plugin_quality_strict_hot": [368, 381],
+    "r13_unpacked_plugin_quality_strict_hot": [
+      368,
+      381
+    ],
     "manifest_package_full_repeated_performance_complete": false,
     "manifest_package_full_2048_token_paired_quality_complete": false,
     "disable_uninstall_restart_rollback_complete": false,
@@ -91,7 +100,7 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_runtime_monkeypatch_delivery_case.py",
-      "sha256": "3180677899ab44ed2e9ba9f3f42a13b03e05f0b04a2cdc1f22da005ef9a5ae64"
+      "sha256": "2eccbf630a23b9e5aef5ec4c52cb1abd3ab4fe79d8ecb3767677e4f5b483a44f"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_TERMINAL_AUDIT.md",
@@ -103,7 +112,7 @@
     },
     {
       "path": "tests/test_validate_monkeypatch_package.py",
-      "sha256": "c142aba561007e205d27543933c61a1adaa738348126739623dc99c1b80e6a5c"
+      "sha256": "b11ac3a6deaabfee4a8384fdc148a40c73a4dadb86e28c81e6a428e8786bc273"
     },
     {
       "path": ".agents/skills/runtime-monkeypatch-delivery/assets/template/run_with_patch.sh",
@@ -120,6 +129,18 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_benchmark_evidence_r13_case.py",
       "sha256": "9f59a0e1587cb25d5a61e7245d91b577b2e9abd64834ee8edf5cba6b6212458b"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/RUNTIME_WORKER_STARTUP_REGRESSION_20261012.md",
+      "sha256": "a5351190da67bf5efc71cef704ca23a5002259f9b1b0dc24159d89e1575bfe2e"
+    },
+    {
+      "path": ".agents/skills/runtime-monkeypatch-delivery/assets/template/sitecustomize.py",
+      "sha256": "6f0c1ecafc2b772a6254ffd04fc94ca4edec7fa534a84219402d7556e33baac7"
+    },
+    {
+      "path": ".agents/skills/runtime-monkeypatch-delivery/assets/template/MANIFEST.json",
+      "sha256": "df1414e73aea583a5cf1e863e07e560af9f5e0ce813b3958bcdfa7c92c77259c"
     }
   ],
   "external_raw_receipts": {
@@ -131,6 +152,18 @@
   },
   "replayable_regression_recorded": true,
   "boundary": "The exact main Skill's named validator path is absent and its template wrapper forces activation; the branch repair passes only static identity and CPU same-wrapper switch tests. r12 had 52/57 request-level four-worker proofs and no live control. Later r13 independently proved actual clean plugin source/import, a same-identity disabled/enabled 127x3 quality pair, and six matched performance phases with 120/120 candidate hot proof. The unpacked implementation was fast but quality regressed 230/381 to 219/381 and strict quality hot coverage missed 13/381. It was never a hash-bound MANIFEST package using the template wrapper; disable-uninstall-restart rollback and A/B/C attribution are unproven. No delivery or paper acceptance follows, and the branch repair is not main-integrated.",
-  "next_gate": "Do not rerun r13/r14 or package the unchanged quality-failing bytes as an accepted delivery. First isolate and repair the quality/activation defect under a new falsifiable hypothesis; then create a hash-bound MANIFEST package for the changed candidate, integrate and rerun the static-validator repair, prove same-wrapper disabled/enabled per-worker behavior, and run only the prospectively matched gates that the new package identity requires, including rollback and A/B/C attribution. Device use remains limited to actually idle physical NPU0-3 with continuous isolation and no external-work modification; push/integrate only after Git credentials work.",
-  "drift_trigger": "Revalidate after main Skill/reference/registry, package schema or bytes, plugin source/test commit, image/model/physical lane, dataset/evaluator, raw r12 artifact, or any delivery acceptance rule changes."
+  "next_gate": "Do not rerun terminal HYPIC suites or substitute observer delivery for the technique. The exact-main Skill permits a valid rejected/failed terminal outcome; algorithm quality repair is not a universal prerequisite for Skill validation. Real technique-package gaps remain: source/manifest identity, same-wrapper per-process disabled/enabled evidence, and executed disable/uninstall/restart rollback. Any prospective device acceptance must retain the quality-first restriction or an explicit user-approved alternative and use only actually idle physical NPU0-3 with continuous isolation. No retrospective package can create past runtime evidence. Keep promotion false and main integration pending working Git authentication.",
+  "drift_trigger": "Revalidate after main Skill/reference/registry, package schema or bytes, plugin source/test commit, image/model/physical lane, dataset/evaluator, raw r12 artifact, or any delivery acceptance rule changes.",
+  "worker_startup_regression_20261012": {
+    "scope": "generic copied template only, CPU subprocesses; not live HYPIC source",
+    "pre_fix_operation": "exec-00000000000000bb",
+    "pre_fix_worker_failure_exit": 0,
+    "post_fix_operation": "exec-00000000000000bd",
+    "post_fix_worker_failure_exit": 78,
+    "tests_passed": 9,
+    "disabled_control_passed": true,
+    "existing_device_evidence_replay": "exec-00000000000000bf",
+    "npu_rerun": false,
+    "overall_acceptance_changed": false
+  }
 }

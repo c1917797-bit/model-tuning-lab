@@ -1,5 +1,6 @@
 {
   "schema": "ascend-runtime-repair-task/v1",
+  "runtime_template_worker_startup_regression": {"report":"RUNTIME_WORKER_STARTUP_REGRESSION_20261012.md","pre_fix_failure_operation":"exec-00000000000000bb","post_fix_pass_operation":"exec-00000000000000bd","tests":9,"old_device_evidence_replay":"exec-00000000000000bf","scope":"CPU generic template, not HYPIC technique source","npu_rerun":false,"full_skill_promotion":false},
   "transformation_verification_regression": {"report":"TRANSFORMATION_VERIFICATION_REGRESSION_20261012.md","old_fixture_rejected_operation":"exec-000000000000009d","corrected_fixture_pass_operation":"exec-000000000000009e","regression_operation":"exec-00000000000000a1","tests_passed":12,"dependent_cases_updated":6,"historical_false_pass_preserved":true,"overall_skill_counts_changed":false,"npu_work":false,"main_remote_integrated":false},
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",

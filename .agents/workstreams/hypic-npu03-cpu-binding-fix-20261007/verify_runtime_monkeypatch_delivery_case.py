@@ -62,10 +62,12 @@ def main() -> int:
            "main wrapper no longer forces treatment on; update case")
     expect((REPO / "scripts/validate_monkeypatch_package.py").is_file(),
            "branch validator absent")
+    test_env = os.environ.copy()
+    test_env["TMPDIR"] = "/cache/cch"
     tests = command(
         sys.executable, "-B", "-m", "unittest", "discover", "-s", "tests",
-        "-p", "test_validate_monkeypatch_package.py")
-    expect(tests.returncode == 0 and "Ran 7 tests" in tests.stderr,
+        "-p", "test_validate_monkeypatch_package.py", env=test_env)
+    expect(tests.returncode == 0 and "Ran 9 tests" in tests.stderr,
            f"static validator regression failed: {tests.stderr}")
 
     expect(git("rev-parse", "HEAD", cwd=PLUGIN) == PLUGIN_COMMIT,
@@ -128,7 +130,7 @@ def main() -> int:
         "main": MAIN,
         "main_validator_missing": True,
         "main_wrapper_forces_treatment": True,
-        "branch_static_validator_tests": 7,
+        "branch_static_validator_tests": 9,
         "plugin_source": PLUGIN_COMMIT,
         "r12_four_worker_hot": 52,
         "r12_scored": 57,
