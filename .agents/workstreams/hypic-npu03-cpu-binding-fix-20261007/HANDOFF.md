@@ -1,5 +1,21 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 r25retry2 RUNNING; external blocker resolved
+
+20:01:57UTC fresh evidence: original PID330700 absent, cannbench_ds stopped.
+Fresh direct ma physical0-3/8223 admission passed before launch. Docker data
+and raw paths are on /cache with145273298944 free bytes; / remains full and
+was not cleaned. TMPDIR=/cache/cch. No4-7 or foreign-task actions.
+
+Controller exec-0000000000000014 is confirmed RUNNING, checkpoint9b3f6b3c.
+Raw root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r25retry2-state-enabled.
+Frozen contract SHA2563921e2b27d8bad406eaa1653b3a30cbdca3feb413d6dee4d89c4210568cb126a.
+Normalized code check confirms only attempt/root/request identifiers changed
+from retry1; all support hashes unchanged. Offline check0e and admission12 pass.
+Continuous physical guard and exact own cleanup stay enabled.
+Poll exact r25retry2 controller exec-0000000000000014 and immutable root; never restart while live/ambiguous. After terminal inspect terminal.json then use shared py311 r25retry2_state_audit.py --mode enabled. Only physical0-3, continuous guard, exact own cleanup. r19/r22 and earlier failed attempts unchanged. No baseline rerun or unproven main/remote/Skill-complete claims.
+Earlier blocked/running sections are historical; no prior result is relabeled.
+
 ## 2026-10-12 external-resource blocker confirmed after full watch
 
 Read-only watcher exec0d80 completed600.602s, exit0 means watch succeeded,

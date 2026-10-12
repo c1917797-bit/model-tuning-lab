@@ -4,6 +4,18 @@
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
   "state": "r19_quality_rejected_r22_bounded_diagnostic_inconclusive_skill_mapping_pending",
   "execution_state": "in-progress",
+  "r25retry2_state_diagnostic": {
+    "state": "enabled-controller-running",
+    "controller_operation": "exec-0000000000000014",
+    "code_checkpoint": "9b3f6b3c",
+    "preregistration_sha256": "3921e2b27d8bad406eaa1653b3a30cbdca3feb413d6dee4d89c4210568cb126a",
+    "raw_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r25retry2-state-enabled",
+    "retry_reason": "Original interfering driver exited and cannbench_ds stopped; previous attempts produced no responses/captures",
+    "same_source_workload_gates": true,
+    "preflight_operation": "exec-0000000000000012",
+    "docker_backing_free_bytes": 145273298944,
+    "quality_or_performance_claim": false
+  },
   "external_job_wait": {
     "state": "watch-terminal-external-job-still-running",
     "watch_exit_code": 0,
@@ -1368,5 +1380,5 @@
     "interpretation": "Both subset arms scored 54/96; sample 082 was correct and naturally stopped in both arms, but lacked candidate hot proof. First cross-arm token divergence positions 124/23/212 are comparable to within-arm variability; inconclusive, not causal and not a full-suite verdict.",
     "claim_boundary": "bounded output-numerics diagnostic only; prior waves absent; no r19 verdict change"
   },
-  "next_action": "External resource blocker: cannbench_ds original PID330700/start_ticks73089605 remained live throughout watcher0d80 and fresh recheck0d91. Do not treat watcher exit0 as external-job completion. Resume device work only after job completion or an interference-free physical0-3 window, fresh direct ma/process/8223 admission, and a new immutable attempt root. Never change foreign tasks/use4-7. r19/r22/r24/r25/r25retry1 decisions unchanged; no broad rerun or auth retry."
+  "next_action": "Poll exact r25retry2 controller exec-0000000000000014 and immutable root; never restart while live/ambiguous. After terminal inspect terminal.json then use shared py311 r25retry2_state_audit.py --mode enabled. Only physical0-3, continuous guard, exact own cleanup. r19/r22 and earlier failed attempts unchanged. No baseline rerun or unproven main/remote/Skill-complete claims."
 }
