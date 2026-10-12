@@ -1,5 +1,18 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 r25 enabled controller RUNNING
+
+Unique controller exec-0000000000000d4c is live; code checkpointad5d1390.
+Raw root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r25-state-enabled.
+Fresh direct ma admission found physical0-3 and8223 idle; NPU4-7 had foreign
+workers and remain untouched. /cache free172371017728 bytes at admission.
+The controller continuously guards physical0-3 and releases only its exact
+owned container. Poll this exact operation/root; do not restart on timeout.
+After terminal inspect terminal.json and run shared-py311 r25_state_audit.py
+--mode enabled. Frozen support/package/root may not be edited or reused.
+r24 remains failed with valid partial captures. No full quality/performance
+result, main/remote sync or all-Skill acceptance is implied.
+
 ## 2026-10-12 r25 lifecycle successor frozen, not yet launched
 
 Only observer rollback changes: new observer_v2 and standalone loader_v3 keep
