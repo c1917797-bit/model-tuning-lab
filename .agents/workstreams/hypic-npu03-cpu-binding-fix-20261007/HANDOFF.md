@@ -1,5 +1,19 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 native enabled lifecycle started — do not relaunch
+
+Planned checkpoint344e8cd9; final offline013d passed syntax,9 audit regressions,
+all3 phase preflights,29 structure and diff. Fresh direct0140 proved physical0-3
+and8223 free, source/package/contract unchanged and cache space adequate.
+Enabled controller exec-0000000000000141 is running; poll exactly this handle
+and /cache/cch/hypic-npu03-cpu-binding-fix-20261007/native-lifecycle-20261012-enabled.
+Contract SHA2560f6578ca003e0e285bdf0432febc1281716056fe2544113d2649c76c7be4754c.
+Do not restart on slow progress/observation timeout. After terminal, independently
+audit with native_lifecycle_audit.py --mode enabled. Only if valid/released and
+fresh0-3/8223 free continue disabled then uninstalled, each independently audited.
+This is actual HYPIC delivery lifecycle, not observer, quality rerun or performance.
+No adoption,29-Skill completion or main/remote sync claim. Fixed deadline unchanged.
+
 ## 2026-10-12 bounded native delivery lifecycle planned
 
 HYPIC_NATIVE_LIFECYCLE_PLAN_20261012.md and native_lifecycle_contract.json
