@@ -4,6 +4,7 @@ from __future__ import annotations
 import ast
 import hashlib
 import os
+import re
 import types
 from dataclasses import dataclass
 from pathlib import Path
@@ -95,7 +96,31 @@ class Handle:
         self.globals_added.clear()
 
 
-def install(modules, callback, *, request_id, layers, source_hashes=None):
+class RequestIdentity:
+    """Bind once to one observed ID; never use an unconstrained prefix match."""
+    def __init__(self, request_id, randomized=False):
+        self.request_id = request_id
+        self.randomized = randomized
+        self.bound = None
+
+    def resolve(self, request_ids):
+        pattern = re.escape(self.request_id) + r"-[0-9a-f]{8}"
+        matches = [value for value in request_ids
+                   if (re.fullmatch(pattern, value) if self.randomized
+                       else value == self.request_id)]
+        if len(matches) > 1:
+            raise RuntimeError("ambiguous diagnostic request identity")
+        if not matches:
+            return None
+        actual = matches[0]
+        if self.bound is not None and actual != self.bound:
+            raise RuntimeError("diagnostic request identity rebound")
+        self.bound = actual
+        return actual
+
+
+def install(modules, callback, *, request_id, layers, source_hashes=None,
+            randomized_request_id=False):
     """Bind to explicit modules. Callback must synchronously copy owned snapshots.
 
     Disabled mode returns before source reads, imports, or mutations. No log
@@ -127,17 +152,21 @@ def install(modules, callback, *, request_id, layers, source_hashes=None):
         prepared.append((module, name, original, replacement))
 
     allowed_layers = frozenset(layers)
+    identity = RequestIdentity(request_id, randomized_request_id)
 
     def observe(stage, frame):
         ctx = frame.get("ctx")
-        if ctx is None or request_id not in ctx.req_ids:
+        if ctx is None:
+            return
+        actual_id = identity.resolve(ctx.req_ids)
+        if actual_id is None:
             return
         if stage != "positions_committed" and frame.get("layer_name") not in allowed_layers:
             return
-        plan = ctx.plans.get(request_id)
+        plan = ctx.plans.get(actual_id)
         if plan is None or not any(entry is not None for entry in plan.entries):
             return
-        callback(stage, request_id, frame)
+        callback(stage, actual_id, frame)
 
     handle = Handle([], [])
     try:

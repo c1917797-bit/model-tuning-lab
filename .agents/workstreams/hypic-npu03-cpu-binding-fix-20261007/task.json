@@ -4,6 +4,17 @@
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
   "state": "r19_quality_rejected_r22_bounded_diagnostic_inconclusive_skill_mapping_pending",
   "execution_state": "in-progress",
+  "observer_request_identity_checkpoint": {
+    "date": "2026-10-12",
+    "state": "host-tests-passed-no-device-run",
+    "image_inspections": ["exec-0000000000000cb7", "exec-0000000000000cb9", "exec-0000000000000cba"],
+    "finding": "New observer exact pre-known ID could not match vLLM randomized internal ID; not a HYPIC quality root-cause claim",
+    "repair": "Strict eight-hex suffix, one-time binding, ambiguity/rebind refusal, actual internal ID in Session and receipts; randomization unchanged",
+    "host_test_operation": "exec-0000000000000cbd",
+    "host_tests_passed": 45,
+    "static_package_operation": "exec-0000000000000cbe",
+    "next": "One guarded r20 known-hot integrated sample with explicit external ID, frozen layers/new raw root and independent capture audit; no unchanged full rerun"
+  },
   "integration_state": "not-ready",
   "branch": "work/hypic-npu03-cpu-binding-fix-20261007",
   "base_commit": "87647ac",

@@ -1,5 +1,41 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 pinned-image request-identity correction (CPU only)
+
+Pinned-image inspection (exec0cb7/0cb9/0cba, no network, no devices,
+read-only owned --rm containers) verified vllm 0.23.0+empty,
+vllm-ascend 0.23.0, torch 2.10.0+cpu and torch-npu 2.10.0.post4.
+TP get_tp_group().world_size/rank_in_group exists in the actual image.
+
+Found an integration defect in the new observer, NOT a demonstrated HYPIC
+quality cause: it required a pre-known exact internal request ID, but vLLM
+appends eight random hex characters to the external chat ID. The bounded
+diagnostic must send an explicit unique body request_id without an overriding
+X-Request-Id header, n=1 and one prompt, configure request_id as chatcmpl- plus
+that value, and independently verify the response ID. Randomization stays ON.
+Observer now matches only the exact external ID plus the eight-hex suffix,
+binds once, rejects ambiguity/rebinding, and passes the actual internal ID into
+capture metadata and post-validation step receipts. No general prefix matching.
+Ordinary install callers still default to exact-ID matching.
+
+Source anchors in image 660ce23a...:
+- chat_completion/serving.py:256-280; SHA256 b6f42caa8aa6b45ccaefd266c1ff8994e55e3e3ab41e829ed0fb9c454487d9a2
+- engine/serving.py; SHA256 38b242a091b2b4502a58b7d9b8a274ac17611b383fecc30e9b714f5da9c8dc75
+- v1/engine/input_processor.py:223-240; SHA256 c5673988c0f7cfec268220e3f044e718702c015a4f236c020937cfd40a793f15
+
+45 host tests passed exec0cbd (including ambiguity, bad suffix, one-time binding
+and actual-ID Session propagation); static package check and diff check passed
+exec0cbe. Manifest pins revised support bytes and actual 3020be48 package base.
+These are not device proofs. No NPU task, quality rerun, frozen runtime edit or
+foreign-resource mutation occurred. r19/r22 conclusions remain unchanged.
+
+Next executable milestone remains ONE r20 known-hot integrated sample (prefer59):
+finish its small guarded controller + independent capture/step/rank auditor,
+freeze exact layers/request/raw root, verify real import/activation and launch
+only after fresh direct route and physical0-3/8223 admission. Do not replace this
+with another broad host-only framework, unchanged c32 wave or standalone GDN.
+Do not infer slot/material correctness from source inspection or CPU tests.
+
 ## 2026-10-11 serving-loader/package host checkpoint
 
 numerical_state_loader.py now arms a narrow HYPIC import/registration hook.

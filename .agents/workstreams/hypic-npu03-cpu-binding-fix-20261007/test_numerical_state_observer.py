@@ -7,12 +7,36 @@ import types
 import unittest
 from unittest.mock import patch
 
-from numerical_state_observer import HOOK, SWITCH, SPECS, install, instrument
+from numerical_state_observer import HOOK, SWITCH, SPECS, install, instrument, RequestIdentity
 
 SOURCE_ROOT = Path("/cache/cch/hypic_vllm_ascend-hotproof-20261008/hypic_vllm_ascend/patches")
 
 
 class ObserverTests(unittest.TestCase):
+    def test_randomized_id_binds_exactly_once(self):
+        identity = RequestIdentity("chatcmpl-diag", True)
+        self.assertIsNone(identity.resolve(["chatcmpl-other-12345678"]))
+        self.assertEqual(identity.resolve(["chatcmpl-diag-ab12cd34"]),
+                         "chatcmpl-diag-ab12cd34")
+        self.assertEqual(identity.resolve(["chatcmpl-diag-ab12cd34"]),
+                         "chatcmpl-diag-ab12cd34")
+        with self.assertRaisesRegex(RuntimeError, "rebound"):
+            identity.resolve(["chatcmpl-diag-deadbeef"])
+
+    def test_randomized_id_rejects_ambiguity_and_bad_suffixes(self):
+        identity = RequestIdentity("chatcmpl-diag", True)
+        for value in ["chatcmpl-diag", "chatcmpl-diag-1234567",
+                      "chatcmpl-diag-123456789", "chatcmpl-diag-zzzzzzzz",
+                      "chatcmpl-diag_0-12345678", "chatcmpl-diag-12345678-extra"]:
+            self.assertIsNone(identity.resolve([value]))
+        with self.assertRaisesRegex(RuntimeError, "ambiguous"):
+            identity.resolve(["chatcmpl-diag-ab12cd34", "chatcmpl-diag-deadbeef"])
+
+    def test_exact_id_mode_does_not_expand_matching(self):
+        identity = RequestIdentity("target")
+        self.assertIsNone(identity.resolve(["target-ab12cd34"]))
+        self.assertEqual(identity.resolve(["target"]), "target")
+
     def test_frozen_runtime_hashes_and_injection_seams(self):
         for component, (digest, name) in SPECS.items():
             path = SOURCE_ROOT / (component + ".py")

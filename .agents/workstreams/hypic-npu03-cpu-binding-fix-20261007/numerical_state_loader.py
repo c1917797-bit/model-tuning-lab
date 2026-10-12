@@ -91,7 +91,8 @@ class RuntimeAdapter:
                 self.modules = {name: importlib.import_module(TARGET+".patches."+name)
                                 for name in ("attention", "gdn", "runner")}
                 self.observer = install(self.modules, self.capture,
-                    request_id=config["request_id"], layers={config["kv_layer"], config["gdn_layer"]})
+                    request_id=config["request_id"], layers={config["kv_layer"], config["gdn_layer"]},
+                    randomized_request_id=True)
             return result
         self.replacement = register
         plugin.register = register
@@ -105,7 +106,8 @@ class RuntimeAdapter:
                 group = get_tp_group()
                 if group.world_size != 4:
                     raise RuntimeError("diagnostic requires TP4")
-                self.session = Session(self.modules, self.config,
+                resolved_config = dict(self.config, request_id=request_id)
+                self.session = Session(self.modules, resolved_config,
                     rank=int(group.rank_in_group), device=int(torch.npu.current_device()))
                 self.session.handles.append(self.observer)
             self.session.capture(stage, request_id, frame)

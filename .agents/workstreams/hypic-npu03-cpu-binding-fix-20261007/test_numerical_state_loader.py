@@ -18,6 +18,25 @@ class DummyHandle:
 
 
 class LoaderTests(unittest.TestCase):
+    def test_capture_session_uses_resolved_internal_id(self):
+        adapter = object.__new__(loader.RuntimeAdapter)
+        adapter.session = None
+        adapter.config = self.config("/raw")
+        adapter.modules = {}
+        adapter.observer = DummyHandle()
+        fake_torch = types.SimpleNamespace(npu=types.SimpleNamespace(current_device=lambda: 2))
+        fake_parallel = types.SimpleNamespace(
+            get_tp_group=lambda: types.SimpleNamespace(world_size=4, rank_in_group=2))
+        with patch.dict(sys.modules, {"torch": fake_torch,
+                    "vllm.distributed.parallel_state": fake_parallel}), \
+             patch.object(loader, "Session") as session:
+            session.return_value.handles = []
+            adapter.capture("positions_committed", "selected-ab12cd34", {})
+            self.assertEqual(session.call_args.args[1]["request_id"], "selected-ab12cd34")
+            self.assertEqual(adapter.config["request_id"], "selected")
+            session.return_value.capture.assert_called_once_with(
+                "positions_committed", "selected-ab12cd34", {})
+
     def test_packaged_enabled_loader_and_rollback_without_runtime_import(self):
         import json
         import subprocess
