@@ -5,7 +5,7 @@
   "state": "r19_quality_rejected_r22_bounded_diagnostic_inconclusive_skill_mapping_pending",
   "execution_state": "in-progress",
   "r24_state_diagnostic": {
-    "state": "enabled-controller-running",
+    "state": "terminal-failed-post-uninstall-valid-partial-capture",
     "controller_operation": "exec-0000000000000d16",
     "code_checkpoint": "941df882",
     "preregistration_sha256": "1c9bec9f4c35bf20e25b47e11bd9bf4518924b7314cd0a1ecb31fe3e70f69d47",
@@ -15,8 +15,25 @@
       "exec-0000000000000d06"
     ],
     "retained_disabled_replay": "exec-0000000000000d0e",
-    "next": "Poll exact operation/root; do not restart while live or ambiguous; after terminal run shared-py311 r24_state_audit.py --mode enabled",
-    "claim": "diagnostic only; no quality/performance success"
+    "next": "Do not rerun r24. Package the CPU-tested observer-v2 retained-alias fix prospectively, verify exact-image integration, freeze a new bounded lifecycle diagnostic, then admit only on fresh direct ma route with physical NPU0-3/8223 idle and continuous isolation. Preserve r19/r22 verdicts; no broad quality wave without a changed causal premise.",
+    "claim": "diagnostic only; no quality/performance success",
+    "controller_exit_code": 1,
+    "independent_partial_audit_operation": "exec-0000000000000d2a",
+    "independent_partial_audit": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/r24-state-enabled-partial-capture-audit.json",
+    "independent_partial_audit_sha256": "aaf7f910e93eabb74222fad7aa27431a880cb697178c4c007627b28c8a986518",
+    "successful_requests": 3,
+    "target_output_tokens": 1496,
+    "captured_workers": 4,
+    "captured_step": 8,
+    "isolation_samples": 110,
+    "released": true,
+    "post_uninstall_passed": false,
+    "source_valid": true,
+    "limited_device_capture_valid": true,
+    "producer_generation_proven": false,
+    "quality_or_causality_proven": false,
+    "terminal_report": "HYPIC_R24_PARTIAL_CAPTURE_AND_UNINSTALL_FAILURE_20261012.md",
+    "prospective_fix": "numerical_state_observer_v2.py; not yet wired into serving package; 52 CPU numerical tests passed exec-0000000000000d30; no NPU rollback proof"
   },
   "r23_state_diagnostic": {
     "state": "enabled-terminal-failed-loader-integration-cpu-v2-repair",
@@ -1292,5 +1309,5 @@
     "interpretation": "Both subset arms scored 54/96; sample 082 was correct and naturally stopped in both arms, but lacked candidate hot proof. First cross-arm token divergence positions 124/23/212 are comparable to within-arm variability; inconclusive, not causal and not a full-suite verdict.",
     "claim_boundary": "bounded output-numerics diagnostic only; prior waves absent; no r19 verdict change"
   },
-  "next_action": "Poll exact operation/root; do not restart while live or ambiguous; after terminal run shared-py311 r24_state_audit.py --mode enabled. r19/r22 unchanged; only physical NPU0-3 permitted; no remote push with unchanged credentials."
+  "next_action": "Do not rerun r24. Package the CPU-tested observer-v2 retained-alias fix prospectively, verify exact-image integration, freeze a new bounded lifecycle diagnostic, then admit only on fresh direct ma route with physical NPU0-3/8223 idle and continuous isolation. Preserve r19/r22 verdicts; no broad quality wave without a changed causal premise."
 }

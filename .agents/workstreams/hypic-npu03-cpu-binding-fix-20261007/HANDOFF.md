@@ -1,5 +1,30 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 r24 TERMINAL FAILED; valid partial capture and CPU lifecycle fix
+
+r24 exec-0000000000000d16 ended exit1: target completed1496 output tokens,
+four workers sealed five events each at step8, then post-uninstall HTTP500.
+Independent partial audit exec0d2a validates source, selected captures,
+110 clean isolation samples and exact owned release. SHA256
+aaf7f910e93eabb74222fad7aa27431a880cb697178c4c007627b28c8a986518.
+Whole r24 remains FAILED_POST_UNINSTALL; frozen files/root immutable.
+See HYPIC_R24_PARTIAL_CAPTURE_AND_UNINSTALL_FAILURE_20261012.md.
+
+All four sampled destination-cast comparisons (KV/state/conv/positions) have
+zero residual. This is limited sampling, not material-generation/full-tensor
+equivalence or the cause of r19 quality loss.
+
+The observer deleted a callback global still used by retained instrumented
+function aliases. New prospective observer_v2 keeps disabled generation-specific
+dispatchers, releases callbacks and prevents reactivation on reinstall.
+52 CPU numerical tests pass exec0d30. It is NOT yet in a serving package and
+has NO NPU post-uninstall proof. No owned NPU service remains.
+
+Next package/freeze only this lifecycle correction and validate one bounded
+successor after fresh physical0-3/8223 admission; do not rerun r24 or broad
+unchanged quality. r19/r22 unchanged; main/remote unsynchronized; Skills not
+fully accepted. Read older sections below as historical, not current running state.
+
 ## 2026-10-12 r24 enabled controller RUNNING
 
 Controller exec-0000000000000d16 is confirmed live; code checkpoint941df882.
