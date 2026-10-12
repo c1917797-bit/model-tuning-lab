@@ -1,0 +1,93 @@
+{
+  "schema": "ascend.kivi.fp32-repair-and-dispatch/v1",
+  "recorded_at_utc": "2026-10-12 11:22:06 UTC",
+  "window_start_epoch": 1791796795,
+  "cutoff_epoch": 1791839995,
+  "numerical_target_fence_epoch": 1791818395,
+  "goal_scope": "Qwen3.6-27B non-HYPIC monkeypatch; matched model >=10%; final LBv2/GSM8K <=1% task loss, both units reported",
+  "classification": "ADAPTATION_IMPLEMENTATION repaired on scoped real NPU; full-model qualification pending",
+  "first_fault_preserved": true,
+  "changed_math": "FP32 QK scores and softmax probabilities; original two A16 affine decode boundaries, masks, asymmetric K/V axes, metadata/writer unchanged",
+  "independent_reference": "Original ind004 FP64 reference 7730 bytes / 5d6278c20800e6b90b9e0fc5869fbaf9b5fdce5d4d652d7725cb68e8c4fed444, tolerance 0.005 unchanged",
+  "source": {
+    "external": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-component-numeric-v1-001/kernel.py",
+    "bytes": 10814,
+    "sha256": "a5622c480d90e12491740858979fff2984637480e8ae0e16bed5df1a23484df3",
+    "repository_snapshot": "projects/qwen36-paper-portfolio/kivi/direct_fp32_repair_v1/kernel.py",
+    "default_off": true,
+    "graph_supported": false
+  },
+  "diagnostic": {
+    "operation": "exec-0000000000000ca2",
+    "consumed": "exec-0000000000000ca3",
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R67_A16_DIAGNOSTIC_CONSUMED_001.json",
+      "bytes": 2096,
+      "sha256": "167115a7fe916d23413c48dc0c82fd58b57281481dc4a3f821d7263690879f47"
+    },
+    "conclusion": "Adding original BF16 score/prob boundaries reproduces all1536 original failed NPU outputs; scoped causal diagnosis only"
+  },
+  "short_npu": {
+    "operation": "exec-0000000000000ca9",
+    "whole_operation": "exec-0000000000000cac",
+    "whole": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-FP32-FULL20-001/RESULT.json",
+      "bytes": 2322,
+      "sha256": "445a3132b69c0963f7c5b068f7783e042c2b2c46b5355a495ddc4b6b1773bed7"
+    },
+    "frames": 20,
+    "outputs": 24,
+    "max_relative_rms": 0.00003155849773070608,
+    "scope": "Controlled eager true short128..257,2/4bit,FP16/BF16,B1/2,fork/slot reuse; not all-model"
+  },
+  "failed_long_frame_repair": {
+    "operation": "exec-0000000000000cb1",
+    "whole_operation": "exec-0000000000000cbc",
+    "whole": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-packed3-consume-main-FP32-LAYER3-001/RESULT.json",
+      "bytes": 2316,
+      "sha256": "8848a546741832eeeb4dec57678c4273a0ac0a387573835e88577a3f16bb4d15"
+    },
+    "rank": 0,
+    "layer": 3,
+    "length": 32769,
+    "elements": 1536,
+    "bitwise_equal_independent_golden": true,
+    "relative_rms": 0,
+    "max_absolute": 0,
+    "scope": "Original before8 fields immutable; full independent mathematics/finish/cleanup; one frame only"
+  },
+  "current_preparation_failure": {
+    "operation": "exec-0000000000000cec",
+    "archive": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R71_0CEC_FIRST64_INSTALL_FAILED_ORIGINAL.json",
+    "exit": 1,
+    "npu_started": false,
+    "cause": "Installer external dependencies incorrectly include three own not-yet-created targets; actual0ced proves all3roots absent",
+    "decision": "Repair installer dependency ordering with all Ref checks preserved; original frozen source unchanged",
+    "owner": "kivi_hotpath_prepare"
+  },
+  "scheduling": {
+    "past_30min_continuous_utilization": "UNMEASURED: no complete continuous per-card evidence",
+    "latest_snapshot": "exec0ce5: physical4-7 idle HBM2861..2868MiB/no processes; protected0-3 active external TP4; no mutation",
+    "npu_ready_tickets": 0,
+    "gap_cause": "First64 installation/entry preparation not yet target-qualified; backup SKVQ whole pending",
+    "current": "MAIN target install and actual entry regressions for directFP32 first64",
+    "next": "New first64 -> full independent64 -> long640 preregistered gate",
+    "backup": "SKVQ old valid capture/math recovery with new strict whole; source-bound durable upstream consumption reviewed",
+    "parallel_owners": [
+      "kivi_hotpath_prepare: cold installer/first64 and long640",
+      "kivi_owner_review: mixed/domain/graph native provider and capacity admission",
+      "damp_operator_reuse: SKVQ strict recovery whole"
+    ]
+  },
+  "not_proved": [
+    "all64 newFP32 actual model",
+    "long640 multi-step/12finishes",
+    "production mixed/graph/task domain",
+    "paired1024 E2E screen",
+    "three formal performance pairs",
+    "final2048 normalEOS task accuracy",
+    "new accepted technology"
+  ],
+  "checkpoint_policy": "Small reviewed source and evidence index only; no raw tensors, logs, data, credentials; preserve unrelated dirty work"
+}
