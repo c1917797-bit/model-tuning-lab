@@ -1,8 +1,25 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 repeat3 attempt inventory closed, proof gaps retained
+
+HYPIC_R13_REPEAT3_ATTEMPTS_20261012.json/.md enumerate all22 original/retry
+roots. Read-only verifier exec0085 passed all receipt hashes/facts and4
+negative controls (invented zero, invalid inclusion, invented release, bad hash).
+19 terminal-invalid,2 missing terminal receipts (retry5/6),1 admitted retry21.
+20 attempts have foreign-process observations. retry4's40 rows contain16 ok
+but only15 fixed1024-token completions; all excluded for isolation failure.
+18 pre-health cleanup receipts prove container removal but explicitly lack
+worker-release proof; retry5/6 have no release receipt in those roots.
+Missing historical proof is not a current leak and not permission to clean up.
+
+Reporting case gains this scoped evidence without promotion. Next inspect
+remaining historical profiler command/failure evidence, not repeat3 again.
+d844beb8 records the prior hash fix; its handoff typo44 is corrected to46 here.
+No NPU rerun, changed scientific verdict, foreign action or remote sync.
+
 ## 2026-10-12 reporting provenance correction, no device rerun
 
-The Decode report had a truncated capture.json SHA256 (44 hex characters).
+The Decode report had a truncated capture.json SHA256 (46 hex characters).
 Fresh raw hashing confirmed the full64-character receipt; only report text and
 dependent report/case hashes were corrected. Frozen raw files, capture verifier,
 measurement gates and all scientific verdicts remain unchanged.

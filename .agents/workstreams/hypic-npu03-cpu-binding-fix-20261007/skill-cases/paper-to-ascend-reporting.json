@@ -3,6 +3,7 @@
   "skill": "paper-to-ascend-reporting",
   "campaign_code": "P",
   "long_term_acceptance": "partial-evidence",
+  "r13_repeat3_inventory_supplement": {"report":"HYPIC_R13_REPEAT3_ATTEMPTS_20261012.md","roots":22,"invalid_terminal_receipts":19,"missing_terminal_receipts":2,"admitted":1,"replay_operation":"exec-0000000000000085","negative_controls_passed":4,"full_skill_promotion":false},
   "r19_final_quality_report_supplement": {"checkpoint":"f05c35d33ccdf61c7ef7e5cdc9eb546a50de7ed4","report":"HYPIC_R19_FINAL_QUALITY_REPORT_20261012.md","raw_scored_responses_replayed":8676,"raw_replay_operation":"exec-0000000000000066","regression_operation":"exec-0000000000000067","tests":4,"text_counterexamples":9,"report_scope":"Complete r19 paired quality negative report only; same-source performance missing, old r13 reporting provenance gaps retained","main_skill_blob":"7902b3f9c96ebd6b77a35b328333ad3834fe4a9f","main_reference_blob":"40582e499b5589893524df3b74aabfeebe040f8c","quality_decision_changed":false,"npu_rerun":false,"full_skill_promotion":false},
   "behavioral_evidence_verified": true,
   "task": "Audit HYPIC progress and terminal reports against exact-main evidence-bound reporting rules; keep historical r12/clean2/c16 separate from the completed r13 quality pair, matched performance and diagnostic profiles",
@@ -39,6 +40,9 @@
     "case_integrated_in_main": false
   },
   "evidence": [
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R13_REPEAT3_ATTEMPTS_20261012.json","sha256":"5b8d5cd46a10d7f1767db9e64c2cc96c627e2896109a0763158b43b68b934f75"},
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R13_REPEAT3_ATTEMPTS_20261012.md","sha256":"06cfdaa5626f0aec69febcfaccdb0f613c05cbc1ad04446f90fcab04dbf4cd7e"},
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r13_repeat3_attempt_inventory.py","sha256":"f4d60a3b763372c26da5d1363ba7d302847805c7739e3650948de8cb57a9b55e"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_reporting_receipt_hashes.py","sha256":"4af97b34400b0f8de0a6fcb5e704e455e9a09997c935d5f8ed3a71ff37e84670"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R19_FINAL_QUALITY_REPORT_20261012.md","sha256":"836bba2175bf3debe9e8debd7d880c4c0dc143f5acf09622644e5ba4469f901d"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r19_final_quality_report.py","sha256":"e3001375efdd676dc3e889b9a5d8dfca0963a2a50d7d0e4a96c9172ee7b963ed"},
@@ -93,6 +97,6 @@
   },
   "replayable_regression_recorded": true,
   "boundary": "A scoped terminal negative-result report now exists and its phase rows, key formulas, source hashes, section/claim boundaries and Prefill/Decode receipts replay-pass. The r13 quality pair and separate six-phase performance pair are complete, but quality is rejected and 13/381 candidate quality requests lack four-worker hot proof; the candidate-only profiles are not a matched baseline/treatment profile or quality root cause. The report still needs a comprehensive line-by-line final-completion review of exact historical command/source and all failure-ledger entries before the full reporting Skill can be marked verified. Do not claim adoption or main integration.",
-  "next_gate": "Review the bounded terminal report against every executed controller command/contract and environmental failure receipt, especially the historical Prefill controller source and omitted zero-row retries; close any remaining exact-recovery and provenance gaps without rerunning old experiment roots, then independently certify the Skill's final report completion gate.",
+  "next_gate": "The sixth performance phase now has a complete original/retry1-21 receipt inventory, including explicit missing and incomplete cleanup proof. Review remaining historical profiler controller/source and failure receipts, especially Prefill byte provenance. Never manufacture missing historical evidence or rerun old roots to fill it; state irrecoverable boundaries before any final Skill promotion.",
   "drift_trigger": "Revalidate when main Skill/template/registry or report/evidence hashes change, or when a new independently scoped experiment changes the conclusion."
 }

@@ -1,0 +1,822 @@
+{
+  "schema": "hypic-r13-repeat3-attempt-inventory/v1",
+  "scope": "Only the original plus retry1-21 of hypic-only repeat3, not all HYPIC experiments. Missing receipts stay null; no algorithm attribution or fresh device proof.",
+  "root_prefix": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3",
+  "entries": [
+    {
+      "attempt": 0,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T07:38:01.045578+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 22,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T07:38:01.044695+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "bd32cc49b01db11ebbc4933994ca869e6fd5ac08a28c86ef57ee9ed13582de60",
+        "arm-result.json": "905b7cc4b5a2967d59c38e533485ddedfd83f4f7e7d3d4fedc43f0c90ab8df38",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "380fac3ccc3b6f3a342c5115233b496516227bd942e1af7198a4a0e7e4a608d8",
+        "hypic-only/pre-health-release.json": "a82c7429856651f0140df140609c85a17f82904fa09a8e75d350a371e041c709",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 2,
+      "foreign_processes": [
+        {
+          "container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+          "physical_npu": 3,
+          "pid": 1579551
+        }
+      ]
+    },
+    {
+      "attempt": 1,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry1",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T08:10:49.037510+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 64,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T08:10:49.036379+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "ba66da2eab06370b5f1d3b8f43c209cc6128e8e2db3b3295df96dcb23a59dad8",
+        "arm-result.json": "40e5f168253694e9a318a4938f2a89e771427b8d9400a86a33e95379626e4e6c",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "46c2e5beecea3bf81031bd3445a497506ad314526d6a1edf8353e447502234ee",
+        "hypic-only/pre-health-release.json": "3f61df9aac289fb401ee0f262d69413d750218cabb671d9d85529b2c7bfe29de",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 2,
+      "foreign_processes": [
+        {
+          "container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+          "physical_npu": 3,
+          "pid": 1940264
+        }
+      ]
+    },
+    {
+      "attempt": 2,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry2",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T08:20:44.547206+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 68,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T08:20:44.546459+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "0c58d0fd1ea1aff6a26e12e6d90da1f4229a23056c27843898f852b2f32f502c",
+        "arm-result.json": "d641cfdf0b8c0b7657665d58d8f02761095e6677049af2fb962bb70621995f55",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "b0b0687fc59c22b7e2e455fb6fdb02433c232743d57adff8259bef7c013cb1d4",
+        "hypic-only/pre-health-release.json": "a9f5dd8c2c9838cfaa4969db8afb3a1e38d4626942b781a018b4da320d78fe94",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 2,
+      "foreign_processes": [
+        {
+          "container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+          "physical_npu": 1,
+          "pid": 2075054
+        },
+        {
+          "physical_npu": 1,
+          "pid": 2075054
+        }
+      ]
+    },
+    {
+      "attempt": 3,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry3",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T09:19:06.388077+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 20,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T09:19:06.387345+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "4b5f052f3d593ae3f18809cc4abc536e5a8010f8dd651e059427a9db17fa6430",
+        "arm-result.json": "b5dc3cbf3b5bdb2ef5339c38a176018e0f1c422b819c8ae96a96b3138a56e989",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "71ab16271c01749770fb34c4131b495a838dc24426d6bebb68db97d33e4909f2",
+        "hypic-only/pre-health-release.json": "6243302a434aa93f614e977a539278d0a4782676c1c198d7a3ba36ffaf07664a",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 2,
+      "foreign_processes": [
+        {
+          "container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+          "physical_npu": 3,
+          "pid": 2731002
+        }
+      ]
+    },
+    {
+      "attempt": 4,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry4",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid",
+      "recorded_result_time": "2026-10-09T09:51:26.138856+00:00",
+      "benchmark_rows": 40,
+      "ok_rows": 16,
+      "fixed_1024_ok_rows": 15,
+      "guard_samples": 120,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/service-stop.json": {
+          "container_removed": true,
+          "worker_release_proven": null,
+          "owned_npus_released": true,
+          "port_released": true,
+          "at_utc": "2026-10-09T09:51:26.136859+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "ea583f6e41ed38f76766def75d2592c1812e2220338115c89677211b6e3f22e9",
+        "arm-result.json": "5a93ce9402e9ae20c6370cae16f32c1674e57867bd477b33241f7190cd6bc88d",
+        "performance.json": "323ced3b25c2e0ac1bfaed2f69e3dbfe369a9617f0d0d6488b9fe5fb2a4e13a5",
+        "hypic-only/lane-guard.json": "0551cda9bcdf0a9394a55ed777241610b75a0e89924fd2df26c818b9bb177480",
+        "hypic-only/pre-health-release.json": null,
+        "hypic-only/service-stop.json": "0d8c3b4bf4be2d3761df618e66fdc4edc3f291f58ef4d64f2748dd5a1b8bfec3"
+      },
+      "foreign_observations_count": 2,
+      "foreign_processes": [
+        {
+          "container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+          "physical_npu": 1,
+          "pid": 3079008
+        }
+      ]
+    },
+    {
+      "attempt": 5,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry5",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": null,
+      "recorded_error": null,
+      "recorded_result_time": null,
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 2,
+      "probe_errors": [],
+      "release_facts": {},
+      "receipts": {
+        "contract.json": "8a1020814dad5ea91520fb44c161137a2b7212d36e65a1c294f100c096a96057",
+        "arm-result.json": null,
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "24d9e1f91596214903a95d9fe8b7ff91562a8fc5411eedd63a3e7845c9e8ce87",
+        "hypic-only/pre-health-release.json": null,
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 1,
+      "foreign_processes": [
+        {
+          "container_id": "87ab8b2137c62e965c4ed88ce241b306794316cc04625770648a1d1c3bd1caaa",
+          "physical_npu": 0,
+          "pid": 3539167
+        }
+      ]
+    },
+    {
+      "attempt": 6,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry6",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": null,
+      "recorded_error": null,
+      "recorded_result_time": null,
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": null,
+      "probe_errors": null,
+      "release_facts": {},
+      "receipts": {
+        "contract.json": "6da197fb0cbf5cbf61bf7fe27384e80753a7702d3d6ab201f632998b6967ef7d",
+        "arm-result.json": null,
+        "performance.json": null,
+        "hypic-only/lane-guard.json": null,
+        "hypic-only/pre-health-release.json": null,
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": null,
+      "foreign_processes": null
+    },
+    {
+      "attempt": 7,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry7",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T11:05:18.603833+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 18,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T11:05:18.603240+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "f82589e57fd6a8161d3a02d76820879d14f5d36f35252e61d90227264a65caae",
+        "arm-result.json": "ae30162d2f99350346c68dcc6c095f50af53586231e99da8957d27772ab44292",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "d94ac87d6dad9e092251c5508edc6a5fa989f79898b212cdae96a6ba20baf547",
+        "hypic-only/pre-health-release.json": "e215032b9f93fe5437ccb72de63beac10362f5ccf922a919cb0d6679ac0030be",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 2,
+      "foreign_processes": [
+        {
+          "container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+          "physical_npu": 1,
+          "pid": 3843558
+        }
+      ]
+    },
+    {
+      "attempt": 8,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry8",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T11:17:13.152815+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 4,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T11:17:13.152205+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "af5c0d92782b74a13f75ceb2e2d00c7648921f7c8ff19f77990b5dcaba04c6fd",
+        "arm-result.json": "8983440e3bfcb63ddc30c18c6d7135562a2ec22835e0b85b6657813c060e464e",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "abd898d77ce5344d00f3c37a242ad273a63169b66f02b55e87d133f6a9d328d4",
+        "hypic-only/pre-health-release.json": "5d734132c103c759468c7e2d507121a22a72f45c7bcc67b88737c5062e892d06",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 1,
+      "foreign_processes": [
+        {
+          "physical_npu": 0,
+          "pid": 3967272
+        }
+      ]
+    },
+    {
+      "attempt": 9,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry9",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T11:24:18.286494+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 12,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T11:24:18.285904+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "908da8facd35743aa86ea3c0109c1f61f2a7b94a0c2027e4d402e4e634dbbe69",
+        "arm-result.json": "78c0e7ac42b7318da4fec5594be535797ec0cfa8d5ab292d594401c761faa928",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "b6c91535d7949a33fd5b116c839ddfa0662399f030c987cd9b10945391501153",
+        "hypic-only/pre-health-release.json": "1dc86a50bc3097f136a1989a448f8a53dbefe6f86d922062175a8e0178046654",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 1,
+      "foreign_processes": [
+        {
+          "container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+          "physical_npu": 2,
+          "pid": 4049211
+        }
+      ]
+    },
+    {
+      "attempt": 10,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry10",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T11:31:47.524247+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 14,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T11:31:47.523675+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "ef6a1ed2d80b8ec24d6ab0cdfdebeec90843bdd7a3e212fe2d7b2cd8fb2d6194",
+        "arm-result.json": "20d093997fa0162162444b244f014a22c62eed5d74748167bb22d90dd22bb04c",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "3d927395be3644c31f53cf2f6ae364548d1f137a069e0d64cf8141bd860c97f4",
+        "hypic-only/pre-health-release.json": "a6f01538119d0956fb33a8e8d6acc7abfb2feb330e4a1570e314baaded0fb357",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 2,
+      "foreign_processes": [
+        {
+          "container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+          "physical_npu": 1,
+          "pid": 4117079
+        }
+      ]
+    },
+    {
+      "attempt": 11,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry11",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T11:36:43.043940+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 4,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T11:36:43.043351+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "6f322856a535b4e72a9bdc3ea67d3fbf5c1953fc0e4349ceb5de78b183c48ef6",
+        "arm-result.json": "bf1dc55873a6d4f4ee00cd118e76f5927d62cef2f72f7686e078bb27c23bbc7b",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "968cfbf1e5ead7b048e080b54c70935b1405ef83e847e4943e72528431bbb2ae",
+        "hypic-only/pre-health-release.json": "140b3d84cc8d46faace562c2767229d6c8cfa1c24ea7715d9a3a3898ad55e596",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 1,
+      "foreign_processes": [
+        {
+          "container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+          "physical_npu": 2,
+          "pid": 4177138
+        }
+      ]
+    },
+    {
+      "attempt": 12,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry12",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T11:46:58.453223+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 14,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T11:46:58.452594+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "29bcacfab5221eb41b600684bbf62169768006174c25922d8a66fb22aa2d49b8",
+        "arm-result.json": "51cf772d9a5a89d8b54d0d03a2340f4fd182b912d1b117abc7b47e25eb27c0be",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "73194d540af378da878fe0ce1eb7d306fe1535402bd02606de886909a1753d8c",
+        "hypic-only/pre-health-release.json": "3c029e80400e94ea2baf4b504b4988986e49ee2abdd12cb95a953068904af15c",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 2,
+      "foreign_processes": [
+        {
+          "container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+          "physical_npu": 1,
+          "pid": 91292
+        }
+      ]
+    },
+    {
+      "attempt": 13,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry13",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T11:55:55.409159+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 2,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T11:55:55.408397+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "9819b6073659577c063afa5f91403c4fed7ec4f191f95e4c0345a5edb56c0838",
+        "arm-result.json": "300c9873ea527885172b4b52180965fa00a0da158a3a97f2ee2ed23fd26c13e0",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "b434b9b6dabc56f574b6cd8a1bf64f28810a55ac19a706fcc573e895391cf9e9",
+        "hypic-only/pre-health-release.json": "0d5f1275949210bd637b181f6af63b0540a53e1b0a149663f721ba8a9fcd0168",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 1,
+      "foreign_processes": [
+        {
+          "container_id": "87ab8b2137c62e965c4ed88ce241b306794316cc04625770648a1d1c3bd1caaa",
+          "physical_npu": 0,
+          "pid": 202622
+        }
+      ]
+    },
+    {
+      "attempt": 14,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry14",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T12:00:43.410550+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 18,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T12:00:43.409795+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "b260e81ab4f766ee1b5ee3c485d5d3f993dfdbb4ba8733dff339700616dd2c2a",
+        "arm-result.json": "8438fbd58b4be0c06412667c57442e7340e5dc08d1d7889a059f736113eaae0a",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "71f8ece8c31869544653661b26c9f520ed6a7a8210b93c2c4b79dfa8ad89b0ed",
+        "hypic-only/pre-health-release.json": "7afb397349d54ce1c19725bcd5e22523d84ac3e9d3d44cb8ed8222439e7ffc09",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 2,
+      "foreign_processes": [
+        {
+          "container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+          "physical_npu": 1,
+          "pid": 242978
+        }
+      ]
+    },
+    {
+      "attempt": 15,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry15",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T12:58:03.528842+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 4,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T12:58:03.527940+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "b8331abfde3f27795764c397093d44bc1a668473de1128411bccb1e654a9fdbc",
+        "arm-result.json": "4289a5f9fda33f408704393c0171a8c3bd94792f8ad79192d8a6716fe5dfdff1",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "01c75d73399207ce42730e83d6d81592fa5c4a0f5051f16fa7def77fc8b380a8",
+        "hypic-only/pre-health-release.json": "f68643f8f64378713ede52dfd753f4a3650527d00c0fdd08c8d988a3d494d2d2",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 2,
+      "foreign_processes": [
+        {
+          "container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+          "physical_npu": 2,
+          "pid": 865188
+        }
+      ]
+    },
+    {
+      "attempt": 16,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry16",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T13:13:56.289659+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 22,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T13:13:56.288907+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "04d39eb0549d4cf5fadca1b553bfa10aa05998937bab0e82eed7083cb8224eb3",
+        "arm-result.json": "a3ececc5d0ba20e84f9206a980a9eceb96d7593b555f79e00fb5cea05f0bc316",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "d4cdb7b17484b8e0aef5e3d2d2d5845e6aeabb7355fee8a5a4264fe0b1048da9",
+        "hypic-only/pre-health-release.json": "f13295b5b234d41c827fa82cc7653ccdd83fef266ad015a771c69c0160cb4862",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 2,
+      "foreign_processes": [
+        {
+          "container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+          "physical_npu": 2,
+          "pid": 1032336
+        }
+      ]
+    },
+    {
+      "attempt": 17,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry17",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T13:28:48.002263+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 26,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T13:28:48.001529+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "78065f257df89c1eb032b22f4372d5a21793b97084657b8ea56324cca7cc7d22",
+        "arm-result.json": "04c59278c0720e531e88dc0936a4b4a04f991ed178bf9e06472045dd14b49e46",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "f0276d28026a9b7da0218db46093521aa70be4077d2c77c9f0654f7011b168b6",
+        "hypic-only/pre-health-release.json": "bb665f2c1afa4db4f3eb5acd143c79fdf0cb44e16e646ccfdce6f6feeaf63898",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 1,
+      "foreign_processes": [
+        {
+          "container_id": "87ab8b2137c62e965c4ed88ce241b306794316cc04625770648a1d1c3bd1caaa",
+          "physical_npu": 0,
+          "pid": 1198578
+        }
+      ]
+    },
+    {
+      "attempt": 18,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry18",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T13:50:49.008996+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 80,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T13:50:49.008006+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "c03c8fdf79ffe02ed42ee2e80558479e372b2be0959128795e83c6dbe7dd322a",
+        "arm-result.json": "c0bd15e0a0a6340e338bcbf05a5f4791139d747589ad63b1351cb67f198bd4bc",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "6ae72bebd66aba903dd9f8bfebf90561374bd2699363428268b97d4f498f553b",
+        "hypic-only/pre-health-release.json": "413c9d8d3b2af629b5c6732c0eeba857299ea28794d9245d8ae2b2a365a5048c",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 2,
+      "foreign_processes": [
+        {
+          "container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+          "physical_npu": 1,
+          "pid": 1420898
+        },
+        {
+          "physical_npu": 1,
+          "pid": 1420898
+        }
+      ]
+    },
+    {
+      "attempt": 19,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry19",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T14:19:43.588901+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 46,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T14:19:43.587947+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "fe59917a8ddf62cb538e7a5e9ef30d63d2eae8d14fd5f3798a495211d303b8f9",
+        "arm-result.json": "25cce108c805d785d4ac01b092990bafced2a3409667cdf1fa2813d572d78506",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "f4d59b8e9553aa1b526af1e3d6b9e03d5e9a6b90cb9175c9f14f1958eeee91e5",
+        "hypic-only/pre-health-release.json": "e938b1a0e99c76d281bf781909bc4392b853f3af424c3a33f925f54125ae59e7",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 2,
+      "foreign_processes": [
+        {
+          "container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+          "physical_npu": 2,
+          "pid": 1731309
+        }
+      ]
+    },
+    {
+      "attempt": 20,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry20",
+      "included_in_frozen_six_phase_result": false,
+      "result_valid": false,
+      "recorded_error": "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; guard close: RuntimeError: lane guard invalid; service did not reach proven health",
+      "recorded_result_time": "2026-10-09T14:36:51.148173+00:00",
+      "benchmark_rows": null,
+      "ok_rows": null,
+      "fixed_1024_ok_rows": null,
+      "guard_samples": 36,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/pre-health-release.json": {
+          "container_removed": true,
+          "worker_release_proven": false,
+          "owned_npus_released": null,
+          "port_released": null,
+          "at_utc": "2026-10-09T14:36:51.147457+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "58ab99d5742582a6e66b256844324742480dc882bff77edf91910711796c750f",
+        "arm-result.json": "8a5c6cdbda2344615dae10f14e10bfcc36924c6b567004311aebcdb4a58f9046",
+        "performance.json": null,
+        "hypic-only/lane-guard.json": "4efe09fe5750e112356e6029fad68e712358f993f9474bd58035720492b72690",
+        "hypic-only/pre-health-release.json": "c184f1d0af692b0b93b3deaef12cc4a49c3269f0dae66141d522ef11a6135576",
+        "hypic-only/service-stop.json": null
+      },
+      "foreign_observations_count": 1,
+      "foreign_processes": [
+        {
+          "container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+          "physical_npu": 3,
+          "pid": 1890601
+        }
+      ]
+    },
+    {
+      "attempt": 21,
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry21",
+      "included_in_frozen_six_phase_result": true,
+      "result_valid": true,
+      "recorded_error": null,
+      "recorded_result_time": "2026-10-09T15:15:30.653961+00:00",
+      "benchmark_rows": 40,
+      "ok_rows": 40,
+      "fixed_1024_ok_rows": 40,
+      "guard_samples": 164,
+      "probe_errors": [],
+      "release_facts": {
+        "hypic-only/service-stop.json": {
+          "container_removed": true,
+          "worker_release_proven": null,
+          "owned_npus_released": true,
+          "port_released": true,
+          "at_utc": "2026-10-09T15:15:30.651935+00:00"
+        }
+      },
+      "receipts": {
+        "contract.json": "8eae15412565395cf4d48db0be618825427f5695aa88c8d8cd9ed4fde1202dc4",
+        "arm-result.json": "a0c88a883dda5513c4fe579e70d5be0028bb338963bcd9ee1d7d5f6d1183e05e",
+        "performance.json": "c5db8436d0172a7db1117d26eca0eb9b54af4aa2b2ac4e7ba4c778b507af9ab9",
+        "hypic-only/lane-guard.json": "c7917f198b1c9f555c8caded4e62f5bb3542273b59b90bc951f7497de4b66295",
+        "hypic-only/pre-health-release.json": null,
+        "hypic-only/service-stop.json": "6aa4c4dfc1ed9808bc46792f3b653ec84a96deb58cf934b428dce1dc827f7331"
+      },
+      "foreign_observations_count": 0,
+      "foreign_processes": []
+    }
+  ]
+}
