@@ -80,6 +80,42 @@ def check_hashed_file(root: Path, section: dict, path_key: str,
     return str(path.relative_to(root)), actual
 
 
+def native_plugin_identity(root: Path, manifest: dict, treatment: dict,
+                           module: str, entrypoint: str) -> int:
+    """Validate declaration and complete package Python inventory, never import."""
+    require(treatment.get("entry_point_group") == "vllm.general_plugins",
+            "entry_point_group must be vllm.general_plugins")
+    name = nonplaceholder(treatment.get("entry_point_name"), "entry_point_name")
+    require(IDENT.fullmatch(name) is not None, "entry_point_name invalid")
+    try:
+        import tomllib
+    except ImportError as exc:
+        raise ValueError("native-plugin validation requires Python 3.11; "
+                         "use the configured host-test Python environment") from exc
+    config = tomllib.loads((root / treatment["loader_file"]).read_text(encoding="utf-8"))
+    project = mapping(config.get("project", {}), "project")
+    groups = mapping(project.get("entry-points", {}), "project.entry-points")
+    entries = mapping(groups.get("vllm.general_plugins", {}), "vllm.general_plugins")
+    require(entries.get(name) == entrypoint, "native entrypoint declaration mismatch")
+    package = root / module.split(".")[0]
+    require(package.is_dir() and not package.is_symlink(),
+            "native plugin root must be a nonsymlink package directory")
+    require(not any(path.is_symlink() for path in package.rglob("*")),
+            "native source symlink needs review")
+    actual = {path.relative_to(root).as_posix()
+              for path in package.rglob("*.py") if path.is_file()}
+    files = manifest.get("source_files")
+    require(isinstance(files, list) and bool(files), "native source_files missing")
+    declared = set()
+    for index, item in enumerate(files):
+        item = mapping(item, f"source_files[{index}]")
+        relative, _ = check_hashed_file(root, item, "path", "sha256")
+        require(relative not in declared, "duplicate native source file")
+        declared.add(relative)
+    require(actual == declared, "native source file inventory mismatch")
+    return len(declared)
+
+
 def validate(package_dir: Path) -> dict:
     root = package_dir.resolve()
     require(root.is_dir(), "package directory does not exist")
@@ -110,6 +146,9 @@ def validate(package_dir: Path) -> dict:
     digest(source.get("source_sha256"), "source_sha256")
 
     treatment = mapping(manifest.get("treatment"), "treatment")
+    loader_kind = treatment.get("loader_kind", "sitecustomize")
+    require(loader_kind in {"sitecustomize", "vllm.general_plugins"},
+            "unknown loader_kind")
     switch = nonplaceholder(treatment.get("switch"), "switch")
     require(ENV_NAME.fullmatch(switch) is not None,
             "switch must be an environment variable name")
@@ -122,18 +161,30 @@ def validate(package_dir: Path) -> dict:
         root, treatment, "loader_file", "loader_sha256")
     launcher_file, launcher_sha = check_hashed_file(
         root, treatment, "launcher_file", "launcher_sha256")
-    require(loader_file == "sitecustomize.py",
-            "loader_file must be sitecustomize.py for this package schema")
-    require(launcher_file == "run_with_patch.sh",
-            "launcher_file must be run_with_patch.sh for this package schema")
+    if loader_kind == "sitecustomize":
+        require(loader_file == "sitecustomize.py",
+                "loader_file must be sitecustomize.py for this package schema")
+        require(launcher_file == "run_with_patch.sh",
+                "launcher_file must be run_with_patch.sh for this package schema")
+    else:
+        require(loader_file == "pyproject.toml",
+                "native loader_file must be pyproject.toml")
     entrypoint = nonplaceholder(treatment.get("entrypoint"), "entrypoint")
     parts = entrypoint.split(":")
     require(len(parts) == 2 and bool(parts[0]) and bool(parts[1])
             and all(IDENT.fullmatch(part) for part in parts[0].split("."))
             and IDENT.fullmatch(parts[1]) is not None,
             "entrypoint must be module:callable")
-    require(parts[0].replace(".", "/") + ".py" == patch_file,
+    module_path = parts[0].replace(".", "/")
+    entrypoint_files = {module_path + ".py"}
+    if loader_kind == "vllm.general_plugins":
+        entrypoint_files.add(module_path + "/__init__.py")
+    require(patch_file in entrypoint_files,
             "entrypoint module does not match patch_file")
+    source_files_verified = 0
+    if loader_kind == "vllm.general_plugins":
+        source_files_verified = native_plugin_identity(
+            root, manifest, treatment, parts[0], entrypoint)
     require(b"Implement the one declared treatment" not in
             (root / patch_file).read_bytes(),
             "template patch has not been implemented")
@@ -167,6 +218,8 @@ def validate(package_dir: Path) -> dict:
     return {
         "schema": "runtime-monkeypatch-package-static-check/v1",
         "static_identity_valid": True,
+        "loader_kind": loader_kind,
+        "source_files_verified": source_files_verified,
         "not_runtime_activation_or_delivery_acceptance": True,
         "name": name,
         "manifest_sha256": file_hash(manifest_path),

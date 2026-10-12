@@ -211,6 +211,7 @@ skills:
       - validate monkeypatch activation rollback or promotion
       - validate hot-unload safety of retained runtime function references
       - runtime monkeypatch delivery
+      - bind an existing native vLLM plugin without replacing its loading route
       - 新技术 monkeypatch 交付
       - 可移除运行时补丁
     scope:

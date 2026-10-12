@@ -37,8 +37,10 @@ inapplicable; they are not silently exempt.
 1. Require source mapping and a passed canary with a frozen baseline.
 2. Resolve the module, object, package version, and source bytes imported inside
    the live container; record their hashes before patching.
-3. Copy the template under [assets/template](assets/template) into the owning
-   workstream and implement only the declared treatment.
+3. Preserve an existing supported plugin entrypoint when it already expresses
+   the treatment. Otherwise copy [assets/template](assets/template) into the
+   owning workstream. Bind either route using the delivery contract; do not
+   rewrite measured code solely to fit a template loader.
 4. Use one explicit environment switch. Disabled mode must leave official
    behavior intact; run both arms through the same wrapper with only that
    switch changed. Uninstall must require no image or framework repair.

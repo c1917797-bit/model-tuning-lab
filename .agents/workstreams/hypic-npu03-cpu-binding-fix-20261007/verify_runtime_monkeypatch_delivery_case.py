@@ -69,6 +69,12 @@ def main() -> int:
         "-p", "test_validate_monkeypatch_package.py", env=test_env)
     expect(tests.returncode == 0 and "Ran 9 tests" in tests.stderr,
            f"static validator regression failed: {tests.stderr}")
+    native_tests = command(
+        "/cache/cch/python-envs/model-tuning-lab-py311/bin/python", "-B", "-m",
+        "unittest", "discover", "-s", "tests", "-p",
+        "test_validate_native_plugin_package.py", env=test_env)
+    expect(native_tests.returncode == 0 and "Ran 12 tests" in native_tests.stderr,
+           f"native declaration/static identity regression failed: {native_tests.stderr}")
 
     expect(git("rev-parse", "HEAD", cwd=PLUGIN) == PLUGIN_COMMIT,
            "plugin source commit drift")
@@ -131,6 +137,7 @@ def main() -> int:
         "main_validator_missing": True,
         "main_wrapper_forces_treatment": True,
         "branch_static_validator_tests": 9,
+        "branch_native_profile_tests": 12,
         "plugin_source": PLUGIN_COMMIT,
         "r12_four_worker_hot": 52,
         "r12_scored": 57,

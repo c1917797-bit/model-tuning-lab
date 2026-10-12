@@ -1,5 +1,23 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 native profile implemented without rewriting HYPIC
+
+NATIVE_PLUGIN_PROFILE_REGRESSION_20261012.md supersedes only the earlier
+profile-missing status. Generic validator now supports declarative native
+vllm.general_plugins alongside default legacy sitecustomize.00d7 demonstrated
+the original rejection;00d9/00e0 pass9 legacy plus12 native CPU regressions.
+00da verifies actual HYPIC pyproject/32-source inventory through the helper,
+not a full manifest. Native TOML checking uses configured host Python3.11.
+Skill/reference/registry now preserve existing supported plugin loading.
+
+HYPIC source4429e35 and all prior device roots remain unchanged. Real version
+provenance and technique-package lifecycle proof remain gaps; no guessed fields
+or retrospective device acceptance. Counts8/21, no current-source speed claim.
+Next use the supported native route if/when assembling a fully evidenced
+package; do not replace its entrypoint, launch a new observer or rerun quality.
+No NPU launch. Pending descriptive-performance choice and fixed deadline stay.
+Remote authentication unchanged; retain both observer-v3 untracked drafts.
+
 ## 2026-10-12 preserve native HYPIC delivery route, no source rewrite
 
 HYPIC_NATIVE_PLUGIN_DELIVERY_REUSE_20261012.md records fresh clean4429e35,

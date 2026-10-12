@@ -18,6 +18,33 @@ build source, and SHA256. Never overwrite files in the official image.
 
 ## Manifest identity
 
+### Existing native vLLM plugin profile
+
+Keep a working `vllm.general_plugins` registration instead of adding a second
+`sitecustomize` activation route. The static validator accepts optional
+`treatment.loader_kind` values `sitecustomize` (default, backward compatible)
+or `vllm.general_plugins`.
+
+For the native profile, bind `loader_file: pyproject.toml` and its SHA256,
+`entry_point_group: vllm.general_plugins`, `entry_point_name`, and the exact
+`module:callable` entrypoint. `patch_file` identifies that module's `.py` or
+package `__init__.py`; it does not substitute for whole-package identity.
+Include top-level `source_files`, a complete list of `{path, sha256}` for all
+Python files below the plugin's top-level package. Duplicate, missing, changed,
+escaping or symlinked source files fail validation. Bind the actual launch
+wrapper by path/SHA256 without requiring a new activation wrapper.
+
+Native TOML validation uses Python3.11's standard `tomllib`; on chicaihong01 use
+the existing host-test Python environment described by host-maintenance.
+Older Python can still validate the legacy profile; the native profile fails
+with a clear version requirement rather than silently skipping TOML checks.
+
+All source/image/framework/CANN identity and live control/rollback obligations
+remain. Static declaration/source-file matching is not installed-entrypoint
+discovery, process activation or delivery acceptance. Missing historical version
+evidence remains missing; a retrospective manifest cannot create runtime proof.
+No native profile requires an algorithm rewrite or a new observer.
+
 `MANIFEST.json` records:
 
 - schema, candidate name, and terminal state;

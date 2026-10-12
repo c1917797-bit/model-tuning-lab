@@ -1,5 +1,6 @@
 {
   "schema": "mst-real-task-skill-case/v1",
+  "native_profile_regression_20261012": {"state":"implemented-branch-static-only","report":"NATIVE_PLUGIN_PROFILE_REGRESSION_20261012.md","negative_before_fix":"exec-00000000000000d7","cpu_tests_passed":21,"legacy_tests":9,"native_tests":12,"actual_hypic_source_helper_check":"exec-00000000000000da","actual_source_files":32,"full_hypic_manifest_validated":false,"device_activation_proven_by_static_profile":false,"npu_rerun":false},
   "native_plugin_delivery_reuse_20261012": {"report":"HYPIC_NATIVE_PLUGIN_DELIVERY_REUSE_20261012.md","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","entrypoint":"hypic_vllm_ascend:register","loader_kind":"vllm.general_plugins","python_files":32,"python_tree_sha256":"a5ebed77cc4ae0035e2634b81dc0606d8e37cc9d32f8894b984325bec1056692","both_r19_longbench_attestations_match":true,"cpu_dispatch_probe":"exec-00000000000000cd","bootstrap_mocked":true,"native_manifest_profile_implemented":false,"new_device_acceptance":false,"required_next_route":"Retain the existing native hook and switch; do not convert tested source to a new sitecustomize implementation merely to fit the generic validator."},
   "diagnostic_observer_supplement_20261012": {
     "scope": "diagnostic observer only, not the HYPIC technique delivery package",
@@ -71,6 +72,10 @@
     "main_skill_repair_integrated": false
   },
   "evidence": [
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/NATIVE_PLUGIN_PROFILE_REGRESSION_20261012.md","sha256":"e168ac6d6b07727a13c5047ee7ab9a1f8d6d84ee41f2b26bc61717e6d5a9b892"},
+    {"path":"tests/test_validate_native_plugin_package.py","sha256":"e1794a715c400fd63f1f5371440afb01be7351acefdedb0d86e3d88e58f371d5"},
+    {"path":".agents/skills/runtime-monkeypatch-delivery/SKILL.md","sha256":"8ca0229ba43de0d3a18f7e2129e098acd21c2e362d2a28bf6f5e058f55cea3c1"},
+    {"path":".agents/skills/runtime-monkeypatch-delivery/references/delivery-contract.md","sha256":"1768256bb279f419df6d2ae35c58f69e61e9688082a101535bbb84f381752d17"},
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_PLUGIN_DELIVERY_REUSE_20261012.md",
       "sha256": "861d0a18025e402afcc492602cc652c216693d87ddb2f918e918901d4e61e14e"
@@ -105,7 +110,7 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_runtime_monkeypatch_delivery_case.py",
-      "sha256": "2eccbf630a23b9e5aef5ec4c52cb1abd3ab4fe79d8ecb3767677e4f5b483a44f"
+      "sha256": "fc0d2e59fb2e19b621fcc60368dbe8122156d5b2a8f1ba87fd95b104585e0241"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_TERMINAL_AUDIT.md",
@@ -113,7 +118,7 @@
     },
     {
       "path": "scripts/validate_monkeypatch_package.py",
-      "sha256": "f9c6fde7afd51dc8af10f137f0a893dd2c203bcb5b00e08b902031091ecb24cd"
+      "sha256": "958bd3e2e5f06342c87c5e92b03c4ab2b269daebbb212653b196e8099e50a105"
     },
     {
       "path": "tests/test_validate_monkeypatch_package.py",
