@@ -1,5 +1,23 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 external-resource blocker confirmed after full watch
+
+Read-only watcher exec0d80 completed600.602s, exit0 means watch succeeded,
+NOT that external job exited. Its final state is still-running-at-watch-window-end:
+PID330700/start_ticks73089605, cgroup cannbench_ds matched throughout.
+Fresh direct ma recheck exec0d91 confirms the same process remains alive.
+The same intermittent physicalNPU1 job previously invalidated both r25 starts.
+No safe current device step is available without an external-state change;
+do not launch between bursts, stop foreign work or use4-7. Revalidate after
+the driver ends or an interference-free0-3 window becomes available. No own
+device service remains. This is resource-blocked, not scientific completion.
+
+Read-only gate review reused existing r19 frozen contract/auditor and
+HYPIC_R19_QUALITY_UNCERTAINTY_DIAGNOSIS_20261010.md without recomputation:
+quality range/length/category rejection is independent of hot-proof failure;
+the exploratory clustered interval includes zero, so rejection does not prove
+a universal causal quality defect. No verdict, dataset or threshold changed.
+
 ## 2026-10-12 live intermittent driver identified; read-only wait
 
 Snapshot exec0d7e at12:33:35UTC showed physical0-3 empty and8223 free,

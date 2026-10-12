@@ -5,7 +5,11 @@
   "state": "r19_quality_rejected_r22_bounded_diagnostic_inconclusive_skill_mapping_pending",
   "execution_state": "in-progress",
   "external_job_wait": {
-    "state": "read-only-watch-running",
+    "state": "watch-terminal-external-job-still-running",
+    "watch_exit_code": 0,
+    "watch_duration_ms": 600602,
+    "original_start_ticks": "73089605",
+    "fresh_recheck_operation": "exec-0000000000000d91",
     "operation": "exec-0000000000000d80",
     "pid": 330700,
     "container": "cannbench_ds",
@@ -1364,5 +1368,5 @@
     "interpretation": "Both subset arms scored 54/96; sample 082 was correct and naturally stopped in both arms, but lacked candidate hot proof. First cross-arm token divergence positions 124/23/212 are comparable to within-arm variability; inconclusive, not causal and not a full-suite verdict.",
     "claim_boundary": "bounded output-numerics diagnostic only; prior waves absent; no r19 verdict change"
   },
-  "next_action": "Poll read-only external-job watcher exec-0000000000000d80 for original cannbench_ds PID330700 (qmm_small/QuantMatmul driver); it is not an NPU experiment. On watch timeout revalidate the same original process and physical state; do not infer task exit. After confirmed driver exit, fresh ma/direct-route physical0-3/8223 and other-job checks precede any new-root bounded HYPIC retry. Old roots immutable; no foreign-task changes or4-7 use."
+  "next_action": "External resource blocker: cannbench_ds original PID330700/start_ticks73089605 remained live throughout watcher0d80 and fresh recheck0d91. Do not treat watcher exit0 as external-job completion. Resume device work only after job completion or an interference-free physical0-3 window, fresh direct ma/process/8223 admission, and a new immutable attempt root. Never change foreign tasks/use4-7. r19/r22/r24/r25/r25retry1 decisions unchanged; no broad rerun or auth retry."
 }
