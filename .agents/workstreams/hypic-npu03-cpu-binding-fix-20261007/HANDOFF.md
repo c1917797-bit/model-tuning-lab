@@ -1,5 +1,18 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 disabled recovery controller running
+
+Planned checkpoint c5df4863, 15 tests and both preflights passed0162.
+Fresh direct0164 proved physical0-3/8223 idle,135GiB cache,source clean and
+reserved new root absent. Unique disabled recovery controller:
+exec-0000000000000165; raw native-lifecycle-20261012-disabled.
+Poll this exact handle/root; never restart for slow startup or observation
+timeout. Run native_recovery_audit.py --mode disabled --write only after terminal.
+Only after valid audit, exact release and fresh idle proof may the uninstalled
+control run. Original enabled remains FAILED_SEMANTIC_GUARD; recovery is not
+resumed successful progression. No new performance/quality or observer.
+Fixed08:47:14UTC deadline,8/21 counts and unchanged remote auth remain.
+
 ## 2026-10-12 recovery-only controls planned after failed enabled canary
 
 Read HYPIC_NATIVE_RECOVERY_PLAN_20261012.md and native_recovery_contract.json.
