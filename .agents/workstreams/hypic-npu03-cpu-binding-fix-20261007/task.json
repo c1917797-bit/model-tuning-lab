@@ -4,6 +4,18 @@
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
   "state": "r19_quality_rejected_r22_bounded_diagnostic_inconclusive_skill_mapping_pending",
   "execution_state": "in-progress",
+  "r25_state_diagnostic": {
+    "state": "frozen-preflight-passed-not-started",
+    "preregistration_sha256": "800af21655f5e6d2f1ae9578b3748062607e8d1415e535916a87a2c2f4a9b009",
+    "raw_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r25-state-enabled",
+    "fixed_image_cpu_operation": "exec-0000000000000d43",
+    "host_tests": 65,
+    "controller_tests": 3,
+    "changed_premise": "retained-alias-safe observer-v2 through loader-v3; HYPIC source/image/workload unchanged",
+    "device_run_started": false,
+    "quality_or_performance_claim": false,
+    "next": "Admit only after fresh direct ma route and physical0-3/8223 idle. Run exact controller once, then independent r25 audit."
+  },
   "r24_state_diagnostic": {
     "state": "terminal-failed-post-uninstall-valid-partial-capture",
     "controller_operation": "exec-0000000000000d16",

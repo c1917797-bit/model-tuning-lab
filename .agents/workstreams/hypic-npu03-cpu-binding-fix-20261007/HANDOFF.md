@@ -1,5 +1,32 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 r25 lifecycle successor frozen, not yet launched
+
+Only observer rollback changes: new observer_v2 and standalone loader_v3 keep
+generation-specific inert dispatcher globals for retained callable aliases.
+Frozen HYPIC source/image, sample59, two warmups/max2048 target/post request
+remain unchanged. Old r24 files/root remain immutable and FAILED_POST_UNINSTALL.
+New package-v3 static manifest SHA256:
+8d8b4f037736acbf1521a817ecfbd73e7a584e1bf2e4065e683198b15722e59c.
+r25 contract SHA256:
+800af21655f5e6d2f1ae9578b3748062607e8d1415e535916a87a2c2f4a9b009.
+
+65 numerical host tests exec0d3f,3 controller tests0d48 and no-device preflight
+0d49 passed. Fixed-image CPU-only real register/uninstall probe0d43 passed;
+its read-only/no-network/no-numbered-device container self-removed.
+This proves actual source registration and inert alias-global lookup, not NPU
+forward or device rollback. PEP660 resolution is covered by the finder unit tests;
+the CPU probe used an explicit read-only source path, not an editable install.
+
+Next use r25_state_diagnostic.py --mode enabled --run in a fresh interpreter
+after current ma/direct route and physical0-3/8223 admission, never check() then
+main() in one interpreter. The guarded controller enforces exclusive root:
+quality-context-41984-hotpath-cache10r25-state-enabled under the existing raw base.
+After terminal use shared py311 r25_state_audit.py --mode enabled.
+Do not rerun r24 or launch full quality/performance based on this diagnostic.
+Retained r23 disabled evidence remains diagnostic-only with original identity;
+v3 default-disabled path imports no changed support. No delivery promotion claim.
+
 ## 2026-10-12 r24 TERMINAL FAILED; valid partial capture and CPU lifecycle fix
 
 r24 exec-0000000000000d16 ended exit1: target completed1496 output tokens,
