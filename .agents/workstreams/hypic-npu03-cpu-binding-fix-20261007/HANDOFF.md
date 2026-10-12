@@ -1,5 +1,24 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 r23 bounded integrated diagnostic frozen
+
+r23_state_diagnostic.py reuses the unchanged guarded quality service and pinned
+4429e3 HYPIC source. Only sample59 (20414 prompt tokens, boundary16384) is used:
+two 1-token warmups, one natural-EOS max2048 target, one 1-token post-uninstall
+request. First disabled observer, independent audit, then enabled observer.
+This tests observer integration and sampled residuals, NOT full quality or speed.
+r23_state_preregistration.json SHA256:
+b1197dfe932a656c083feea7fa15d40c7c9ce08c581c4ac84c7b30deec0320e5.
+Two new roots are quality-context-41984-hotpath-cache10r23-state-disabled/enabled
+under the existing external raw base. Never resume or reuse either root.
+The new independent auditor binds source, Docker physical device declarations,
+physical host/namespace PID map, framework Worker_TP rank logs, continuous guard,
+exact release, four sealed snapshots and same-step hot receipts.
+48 host tests passed exec0cca; both no-device preflights exec0cc9, structure/static
+checks exec0ccb passed. Live capture remains unproven. Next run disabled only;
+run r23_state_audit.py --mode disabled with shared py311 after terminal success;
+only then admit enabled after fresh physical0-3/8223 checks.
+
 ## 2026-10-12 pinned-image request-identity correction (CPU only)
 
 Pinned-image inspection (exec0cb7/0cb9/0cba, no network, no devices,
