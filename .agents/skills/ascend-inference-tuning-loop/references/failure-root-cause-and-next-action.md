@@ -579,3 +579,22 @@ unchanged and rerun the complete affected gate. KIVI's corrected reference passe
 all64 actual firstdecode frames, not long lifecycle or E2E/task acceptance.
 Neither correcting an oracle nor a diagnostic error reduction grants PASS.
 Exact failed and successful references are retained in the active workstream.
+
+## Representative passes and intermediate-precision diagnosis
+
+A passing representative frame does not qualify the other layers or ranks.
+Preserve the first failing full-matrix case with complete original output,
+reference, input identity and untouched results; an early stop leaves the other
+cases untested. Separate saved-NPU mathematics from a new NPU experiment.
+
+When a candidate has low-precision intermediate scores/probabilities but the
+registered reference uses higher precision, trace both source boundaries and
+run a same-input diagnostic control to isolate their contribution. Do not cast
+the acceptance oracle to candidate precision, loosen its threshold or promote
+the diagnostic merely to erase a failure. A source discrepancy proves a testable
+hypothesis, not its numerical contribution or a paper-wide limitation. An
+operator repair must preserve the paper mechanism, use a new identity and pass
+the complete affected NPU gate before E2E timing. Task-quality allowance is a
+separate final measurement.
+
+Current scoped evidence: `../../../workstreams/qwen36-damp-ascend-20261006/KIVI_LONG_MATH_FIRSTFAULT_20261012_R58.json`.

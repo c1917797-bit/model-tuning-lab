@@ -1,0 +1,142 @@
+{
+  "schema": "kivi.causal-stage-checkpoint/v1",
+  "as_of_utc": "2026-10-12T06:48:00Z",
+  "cut_epoch": 1791788425,
+  "goal_met": false,
+  "scope": "KIVI saved original D32 mathematical validation and D8 retained-raw consumption; no new NPU run/E2E/task acceptance",
+  "singleframe_recovered": {
+    "original_operation": "exec-0000000000000c83",
+    "old_failed_consumer": "exec-0000000000000c85",
+    "repair": "strict unique result JSON Ref semantic equality instead of serialized key order; all source/child/owner/cleanup/math predicates retained",
+    "consumer": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-saved018-D32-original-consumer-v1-003/SOURCE_MANIFEST.json",
+      "bytes": 1569,
+      "sha256": "b56d657c8c13626a252d74ee6fc5bf1bb4b9fb4964fbdca9a2ee7cebc41d0d4c"
+    },
+    "actual_linux_whole_operation": "exec-0000000000000c8d",
+    "actual_exit": 0,
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_SAVED_D32_CPU_CONSUMED_003.json",
+      "bytes": 1299,
+      "sha256": "116413b53bb63c9a1aa1c865ac0cdd7282c527dbbcb115596bcf3ccdc7c6385e"
+    },
+    "rank": 0,
+    "layer": 11,
+    "context": 32769,
+    "elements": 1536,
+    "relative_rms": 0.003495290067332477,
+    "threshold": 0.005,
+    "all64": false,
+    "d8_first64": false,
+    "model_ready": false
+  },
+  "all64_first_fault": {
+    "operation": "exec-0000000000000c8a",
+    "observed_terminal_exit": 1,
+    "observed_duration_ms": 38156,
+    "observed_timed_out": false,
+    "original_terminal_archive": null,
+    "archive_gap": "MAIN observed completed original operation at 06:41UTC but failed to save that response; later selected-RGW poll returned not_found. Do not fabricate an archive or relaunch.",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-saved018-D32-all64-cpu-v1-001/SOURCE_MANIFEST.json",
+      "bytes": 2709,
+      "sha256": "f2121156e39a66ac7c3820d33688bea8dafedf19521f48773f9af7142b13cfbb"
+    },
+    "source_audit_operation": "exec-0000000000000c89",
+    "source_audit_exit": 0,
+    "actual_host_tests": 10,
+    "complete_readset_refs": 1188,
+    "host_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-saved018-D32-cpu-all64-main-001/RESULT.json",
+      "bytes": 3013,
+      "sha256": "544372d615d9cc8c5708fab98d98cdb411586318860468ae5c57e212d1be65e9"
+    },
+    "math_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-saved018-D32-cpu-all64-main-001/cpu/math/RESULT.json",
+      "bytes": 3084,
+      "sha256": "f2c97e66dd46d0a41ddfbda3b34663ac5a6134ee6499283aeaf397020767beb6"
+    },
+    "case": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-saved018-D32-cpu-all64-main-001/cpu/math/rank0-layer3.json",
+      "bytes": 69029,
+      "sha256": "cdcdf7942d1ed6d9b16c3e2e515dee117fb2e9239b749510938abbf1a29ec191"
+    },
+    "completed_cases": 1,
+    "expected_cases": 64,
+    "untested_cases": 63,
+    "rank": 0,
+    "layer": 3,
+    "context": 32769,
+    "elements": 1536,
+    "relative_rms": 0.014501818676638824,
+    "max_abs": 0.03125,
+    "threshold": 0.005,
+    "whole_raw_unchanged": true,
+    "actual_peak_rss_kib": 370116,
+    "actual_math_seconds": 6.562763000023551,
+    "status": "failed_first_mathematical_case",
+    "S_P_observed": false,
+    "causal_confidence": "source precision-boundary discrepancy proved; numerical contribution and D8 generalization not yet proved",
+    "cause_class": "UNKNOWN_CAUSE_PENDING_STAGE_DIAGNOSTIC",
+    "unchanged_retry_allowed": false,
+    "paper_no_go": false
+  },
+  "retained_D8_raw": {
+    "scope": "rank0/layer11 only; paired 14 outputs, original failed host remains failed",
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R56_D8_RETAINED_RAW_CONSUMED_001.json",
+      "bytes": 2538,
+      "sha256": "3e05d8db5c1ca27b0e465d2374486cb2a656f1a7a1539e2eee48f0fc6796fce5"
+    },
+    "outputs": 14,
+    "kernel_calls_reported": 42,
+    "read_length": 32769,
+    "full_pool_fields": 8,
+    "whole_output_bytes_equal": true,
+    "host_owned_admission_semantically_consumed": false,
+    "model_ready": false,
+    "performance_ready": false
+  },
+  "cleanup": {
+    "cid": "e8937ffec8f4d5af228b65546ed0cc4ef70cf1623f77c33897eb454b1463921c",
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-saved018-D32-cpu-all64-main-001/cpu/cleanup.json",
+      "bytes": 1130,
+      "sha256": "ccc9aa4d1993c64aa33b34eec052076d630277aa5626af767ca25ecc60d1249d"
+    },
+    "fresh_actual_inspect_operation": "exec-0000000000000c8f",
+    "actual_devices": [],
+    "actual_running": false,
+    "pid": 0,
+    "exec_ids": null,
+    "oom": false,
+    "retained": true,
+    "deleted": false
+  },
+  "scheduling": {
+    "physical": "NPU4–7 only; NPU0–3 protected",
+    "last_physical_snapshot_operation": "exec-0000000000000c87",
+    "last_snapshot": "all 4–7 no compute process; AICore0; HBM2862–2868MiB",
+    "continuous_utilization_proved": false,
+    "ready_for_full_model_count": 0,
+    "idle_cause": "algorithm qualification and prepared-stage predecessor gaps, not proved external occupancy",
+    "periodic_audit": "native app heartbeat ascend ACTIVE every30min confirmed; healthy quiet; immediate terminal/delivery dispatch remains required",
+    "fixed_deadline_redefined": false
+  },
+  "next": {
+    "decision": "DIAGNOSE",
+    "owner": "MAIN with three private preparers",
+    "action": "same captured rank0/layer3 independent CPU precision-boundary control; maintain original high-precision golden, exact inputs and .005; if proved candidate error, new source-qualified operator repair and full affected NPU gate",
+    "unmet": [
+      "D8 first64 source/whole",
+      "complete640 frames/native12/lifecycle .005",
+      "same-source whole-model fixed1024 paired performance",
+      "three formal pairs",
+      "LongBench-v2/GSM8K max2048 normalEOS/no-thinking",
+      "portability"
+    ],
+    "pending_direct_model_packet": "Temp/kivi-direct-d8-model-20261012-001/ENTRY.json: only source/local149+149; actual component/first64 prerequisites null; no model authority",
+    "full_model_phase_seconds": 5400,
+    "full_model_phase_fits_remaining_cutoff": false
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "workstream-active-stage-checkpoint/v1",
+  "scope": "KIVI/DAMP stage dispatch, not whole-paper status or accepted technology",
+  "as_of_utc": "2026-10-12T04:43:00Z",
+  "cut_epoch": 1791788425,
+  "active_goal_acceptance_met": false,
+  "long008": {
+    "operation": "exec-0000000000000c48",
+    "terminal": true,
+    "exit_code": 1,
+    "timed_out": false,
+    "controlled_stop_operation": "exec-0000000000000c62",
+    "container_retained": true,
+    "deleted": false,
+    "diagnostic_budget_decision": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN0C48_LONG008_DIAGNOSTIC_ABORT_20261012/DECISION.json",
+    "decision_sha256": "de77edf2cf2724e3cadda8913e5ff0c8c4cf15b1bcfecaccb66023aba0a8badc",
+    "original_terminal_sha256": "987a829d50820ed7d5780fc22e371ba71a9880dfb92560ca9977515333d31e24",
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-FIA-boundary008-main-20261012-001/RESULT.json",
+      "bytes": 19174,
+      "sha256": "6f1530e9df32a35a5e7e8ee259ed905d39f212436fcf1eddd558c9755bcdd3e9"
+    },
+    "release_check_operation": "exec-0000000000000c63",
+    "fresh_physical_4_7": "No NPU processes; AICore0; HBM2862–2869MiB",
+    "full_640_native12_qualification": false,
+    "performance": null,
+    "accuracy": null,
+    "attribution": "Incomplete implementation/diagnostic validation budget. Parent post-stop observe saw transient idle-baseline failure; later fresh actual release passed. Not a paper no-go."
+  },
+  "paired008": {
+    "same660_short_operation": "exec-0000000000000c64",
+    "terminal": true,
+    "exit_code": 1,
+    "timed_out": false,
+    "raw_software_report": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-b1-matched1024-short129-fia-pair008-software-main-001/cpu-preflight/SOFTWARE.json",
+      "bytes": 629244,
+      "tests": 120,
+      "successful": true,
+      "execution_profile": "same660-Devices[]-CPU8",
+      "python_version_absent": true
+    },
+    "stage_accepted": false,
+    "attribution": "Producer report omits actual python_version required by unchanged complete consumer. Source adaptation contract bug; not numeric or paper failure.",
+    "fixed_runtime_not_started": true,
+    "reason_no_fixed_retry": "Same deterministic producer contract omission; do not repeat until new immutable source corrects actual sys.version_info production and real report-consumer regression."
+  },
+  "parallel_preparation": {
+    "owner_review": "new paired009 minimal actual interpreter report contract repair, independent regression, source-pinned donor install",
+    "hotpath_prepare": "KIVI two-launch dequant leaf002; same plans host control scalars +8-row UB tile; unchanged group32/twoBF16RTNE; defaultOFF; no NPU pass",
+    "damp_operator_reuse": "isolated sourceclosure_v2 catches four assembly SHA drift; old v1 preserved; real final192/RunAuthority still missing"
+  },
+  "scheduling_rule": "Serial MAIN on physical4–7, concurrent no-card source preparation. No repeated full-paper status inventory, no repeated deterministic failure. Next NPU dispatch requires actual source/software admission, never fabricate READY or weak PASS."
+}
