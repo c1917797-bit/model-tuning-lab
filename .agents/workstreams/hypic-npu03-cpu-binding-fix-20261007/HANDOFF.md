@@ -1,5 +1,24 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 preserve native HYPIC delivery route, no source rewrite
+
+HYPIC_NATIVE_PLUGIN_DELIVERY_REUSE_20261012.md records fresh clean4429e35,
+native vllm.general_plugins entrypoint and default-disabled switch.00cc rehashed
+32 Python files and matched both r19 LongBench retained container attestations.
+00cd proves only register/config dispatch with mocked bootstrap (unset/0 off,
+1 once,invalid rejected); it is not new NPU hook activation or device rollback.
+
+Follow the Skill's supported-hook preference: keep native registration rather
+than forcing measured source into sitecustomize. The generic static validator
+does not yet support this native profile; no manifest acceptance was claimed.
+Explicit historical framework/CANN version fields and technique-level rollback
+remain gaps. Do not fill them from guessed names or today's host snapshot.
+No source/image/old raw root changed; counts8/21, remote authentication unchanged.
+Next resolve only decision-changing delivery identity gaps or exact-main case
+obligations; do not launch repeated quality or a rewritten HYPIC treatment.
+Same-source descriptive performance still needs the pending prospective choice.
+Deadline08:47:14UTC Oct13 unchanged; observer-v3 drafts preserved and unloaded.
+
 ## 2026-10-12 runtime template worker startup defect fixed, CPU only
 
 RUNTIME_WORKER_STARTUP_REGRESSION_20261012.md records a failing real subprocess

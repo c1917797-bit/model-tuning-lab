@@ -1,5 +1,6 @@
 {
   "schema": "mst-real-task-skill-case/v1",
+  "native_plugin_delivery_reuse_20261012": {"report":"HYPIC_NATIVE_PLUGIN_DELIVERY_REUSE_20261012.md","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","entrypoint":"hypic_vllm_ascend:register","loader_kind":"vllm.general_plugins","python_files":32,"python_tree_sha256":"a5ebed77cc4ae0035e2634b81dc0606d8e37cc9d32f8894b984325bec1056692","both_r19_longbench_attestations_match":true,"cpu_dispatch_probe":"exec-00000000000000cd","bootstrap_mocked":true,"native_manifest_profile_implemented":false,"new_device_acceptance":false,"required_next_route":"Retain the existing native hook and switch; do not convert tested source to a new sitecustomize implementation merely to fit the generic validator."},
   "diagnostic_observer_supplement_20261012": {
     "scope": "diagnostic observer only, not the HYPIC technique delivery package",
     "r24_decision": "FAILED_POST_UNINSTALL",
@@ -70,6 +71,10 @@
     "main_skill_repair_integrated": false
   },
   "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_PLUGIN_DELIVERY_REUSE_20261012.md",
+      "sha256": "861d0a18025e402afcc492602cc652c216693d87ddb2f918e918901d4e61e14e"
+    },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R25RETRY2_STATE_ROLLBACK_TERMINAL_20261012.md",
       "sha256": "88015fb0d72e253d2ecea74934204a03b171d5f9c1965e6e86946e764cd1c6d7"
