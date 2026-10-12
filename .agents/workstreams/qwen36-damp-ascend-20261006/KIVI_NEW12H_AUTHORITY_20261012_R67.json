@@ -1,0 +1,99 @@
+{
+  "schema": "ascend.authorized-recovery-window/v1",
+  "state": "authorized_preparing_not_qualified",
+  "start_epoch": 1791796795,
+  "cutoff_epoch": 1791839995,
+  "start_utc": "2026-10-12T09:19:55Z",
+  "cutoff_utc": "2026-10-12T21:19:55Z",
+  "total_hours": 12,
+  "includes_initial_two_hours": true,
+  "deadline_reset": false,
+  "historical_closure": "KIVI_WINDOW_CLOSURE_20261012_R59.json",
+  "human_authority": [
+    "批准新的 2 小时归因与修复验证窗口",
+    "反思一下为什么，达成可以再穿刺12个小时",
+    "可以多agent并行执行，NPU4-7卡充分使用",
+    "这会要12个小时内给我穿刺成功一个，如果有风险，请提前消除风险"
+  ],
+  "goal": "New non-HYPIC Qwen3.6-27B Ascend plugin/monkeypatch; matched E2E throughput >=10%; TTFT/TPOT separately; final LBv2/GSM8K loss within latest 1% task constraint",
+  "success": false,
+  "source_branch": "work/qwen36-damp-ascend-20261006",
+  "parent_commit": "ca7e7fd9cd412dcfebc03ee788bea95a21a62f71",
+  "model": "/cache/efim/Qwen3.6-27B",
+  "model_manifest_sha256": "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c",
+  "image_digest": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "physical_devices": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_devices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "reflection": {
+    "proved_preparation_defects": [
+      "Large software test counts did not prove real cold entry and report consumers",
+      "Representative long-context numerical PASS was not complete matrix qualification",
+      "No actual executable successor at several terminal events",
+      "Direct model installer has B1/mixed-frame/domain restrictions; changing CLI cannot fix them"
+    ],
+    "unresolved_numerical_cause": "Saved D32 r0/layer3 RMS0.014501818676638824 exceeds immutable0.005; extra BF16 score/prob boundaries are a hypothesis awaiting actual same-input diagnostic.",
+    "paper_wide_no_go": false
+  },
+  "owners": {
+    "MAIN": "Fresh source/resource admission, diagnostic execution, numerical source review, serial TP4/model/performance",
+    "damp_operator_reuse": "Complete bounded same660 CPU diagnostic owner and strict whole consumer",
+    "kivi_hotpath_prepare": "Paper-linked FP32 S/P repair plus actual short NPU and frozen failing-frame executable gate",
+    "kivi_owner_review": "Production direct packed mixed/task-domain plugin adapter, final paired/task consumers"
+  },
+  "ready_queue": {
+    "CURRENT": "CPU diagnostic packet final review pending",
+    "NEXT": "FP32 short-NPU packet being implemented",
+    "BACKUP": "Full model/task mixed adapter being implemented",
+    "actual_NPU_ready_tickets": 0
+  },
+  "fences": {
+    "numerical_repair_end_epoch": 1791818395,
+    "final_verification_reserve_seconds": 21600,
+    "unchanged_tensor_rms": 0.005,
+    "performance_output_tokens": 1024,
+    "formal_pair_repetitions": 3,
+    "profile_disabled": true,
+    "final_tasks": {
+      "thinking": false,
+      "max_tokens": 2048,
+      "normal_EOS": true,
+      "loss_report": "percentage points AND relative percent per task; no conversion to tensor tolerance"
+    },
+    "old_results_immutable": true,
+    "no_threshold_relaxation": true,
+    "no_dummy_load": true,
+    "no_original_runtime_changes": true
+  },
+  "risks_and_actions": [
+    {
+      "risk": "BF16 boundary contribution not proved",
+      "action": "One frozen failing-frame 1536-element diagnostic; never replace oracle"
+    },
+    {
+      "risk": "Repair unqualified on real NPU",
+      "action": "New source-specific short and multistep matrix before E2E"
+    },
+    {
+      "risk": "B1 plugin cannot support mixed/final task domain",
+      "action": "Actual mixed dispatcher/provider/metadata adaptation in parallel, not CLI change"
+    },
+    {
+      "risk": "Final tasks exceed time",
+      "action": "Reserve >=6h; bounded smoke and real event-density/RSS checks, same global clock"
+    },
+    {
+      "risk": "Goal object retains historical blocked status",
+      "action": "This new human-authorized window is separate; cannot falsify goal complete/resume via unsupported API"
+    }
+  ]
+}
