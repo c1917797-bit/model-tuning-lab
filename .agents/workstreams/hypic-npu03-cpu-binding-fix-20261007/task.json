@@ -4,6 +4,19 @@
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
   "state": "r19_quality_rejected_r22_bounded_diagnostic_inconclusive_skill_mapping_pending",
   "execution_state": "in-progress",
+  "external_job_wait": {
+    "state": "read-only-watch-running",
+    "operation": "exec-0000000000000d80",
+    "pid": 330700,
+    "container": "cannbench_ds",
+    "job": "run_fix_op.sh qmm_small QuantMatmul 1",
+    "observed_at_utc": "2026-10-12T12:33:35Z",
+    "observed_elapsed_seconds": 2970,
+    "identity_check": "proc start_ticks and cgroup container; avoid PID-reuse inference",
+    "watch_seconds": 600,
+    "device_work_started": false,
+    "claim": "Live external driver can intermittently launch NPU1 tests; idle snapshot is not driver completion"
+  },
   "r25retry1_state_diagnostic": {
     "state": "terminal-isolation-failed-before-health",
     "controller_exit_code": 1,
@@ -1351,5 +1364,5 @@
     "interpretation": "Both subset arms scored 54/96; sample 082 was correct and naturally stopped in both arms, but lacked candidate hot proof. First cross-arm token divergence positions 124/23/212 are comparable to within-arm variability; inconclusive, not causal and not a full-suite verdict.",
     "claim_boundary": "bounded output-numerics diagnostic only; prior waves absent; no r19 verdict change"
   },
-  "next_action": "r25retry1 is terminal isolation-failed before health, independently audited; no live own service. Wait for actual physical0-3/8223 idle and assess a sufficiently stable window before a new-root same-protocol retry; no immediate restart loop. Preserve r19/r22/r24/r25/r25retry1 roots and verdicts, do not rerun full quality without a changed causal premise. Never stop foreign jobs or use4-7; unchanged origin auth is not retried."
+  "next_action": "Poll read-only external-job watcher exec-0000000000000d80 for original cannbench_ds PID330700 (qmm_small/QuantMatmul driver); it is not an NPU experiment. On watch timeout revalidate the same original process and physical state; do not infer task exit. After confirmed driver exit, fresh ma/direct-route physical0-3/8223 and other-job checks precede any new-root bounded HYPIC retry. Old roots immutable; no foreign-task changes or4-7 use."
 }

@@ -1,5 +1,20 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 live intermittent driver identified; read-only wait
+
+Snapshot exec0d7e at12:33:35UTC showed physical0-3 empty and8223 free,
+but cannbench_ds still had live PID330700 (elapsed2970s):
+run_fix_op.sh qmm_small QuantMatmul 1, with an active child debug runner.
+This is a live intermittent job, not merely a device declaration. Container
+identity does not prove the human launcher. No foreign task was modified.
+
+Read-only watcher exec-0000000000000d80 is confirmed RUNNING. It observes the
+same PID/start_ticks/cgroup for up to600s, no device allocation. Poll this
+specific handle; expiration with still-running output is not task completion.
+Only confirmed exit plus new physical/process/port checks may admit a fresh-root
+bounded HYPIC retry. Do not spend repeated service startups between its bursts.
+No own NPU service is running. r19/r22/r24/r25/r25retry1 verdicts unchanged.
+
 ## 2026-10-12 r25retry1 TERMINAL ISOLATION FAILED
 
 Experience ingestion: existing runtime-monkeypatch-delivery reference and
