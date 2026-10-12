@@ -1,5 +1,17 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 Canary failed-path scope correction while recovery runs
+
+CANARY_FAILED_PATH_SCOPE_20261012.md corrects the case next_gate that had
+conflated algorithm repair/admission of a changed candidate with validation
+of the exact-main Skill's failed-outcome path. Main workflow8 explicitly
+requires failure classification/recovery; C3 and quality-cause proof are not
+universal Canary gates. No acceptance promotion or evidence rewrite.
+Historical canary and native enabled failure replays016a both passed.
+Disabled recovery remains the single controller0165; poll it, do not repeat
+enabled/quality or add observers. Original scientific decisions,8/21 and
+fixed deadline remain. No unchanged auth retry or main/remote sync.
+
 ## 2026-10-12 disabled recovery controller running
 
 Planned checkpoint c5df4863, 15 tests and both preflights passed0162.

@@ -1,5 +1,6 @@
 {
   "schema": "mst-real-task-skill-case/v1",
+  "failed_path_scope_review_20261012": {"report":"CANARY_FAILED_PATH_SCOPE_20261012.md","tested_main_skill_blob":"07dceac8c65c9d1696d8e2fa5543d9b8784a7628","failed_terminal_is_valid_skill_outcome":true,"algorithm_repair_universal_gate":false,"paper_c3_universal_canary_gate":false,"acceptance_promoted":false,"existing_case_and_failure_replay":"exec-000000000000016a"},
   "native_lifecycle_enabled_failure_20261012": {"decision":"FAILED_SEMANTIC_GUARD","report":"HYPIC_NATIVE_LIFECYCLE_ENABLED_FAILURE_20261012.md","controller":"exec-0000000000000141","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","requests_complete":3,"target_hot_workers":4,"reference":"D","prediction":"A","completion_tokens":2048,"finish_reason":"length","clean_isolation_samples":104,"exact_owned_release":true,"failure_audit_sha256":"94dd02e81529acedf25ace6979cc6b72a1e265505adf1ea2cf36afd29e7bf82a","canary_pass":false,"disabled_uninstalled_complete":false,"population_quality_or_performance_claim":false,"old_verdict_changed":false,"replay":"python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_lifecycle_failure_audit.py"},
   "skill": "ascend-canary-implementation",
   "campaign_code": "P",
@@ -39,6 +40,7 @@
     "case_integrated_in_main": false
   },
   "evidence": [
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/CANARY_FAILED_PATH_SCOPE_20261012.md","sha256":"1291413a5474af864eda2050fa73c3aea82f6474061401cd02c43b583a1e3183"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_lifecycle_failure_audit.py","sha256":"05c7314e035e5905a33f1b18c8fb8e0dfc5221cf842db6f2a94e2ff316e19924"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_LIFECYCLE_ENABLED_FAILURE_20261012.md","sha256":"b512b1594a1864c681589d86fcb61e511d6643ae69626b4315e48b512dc22a49"},
     {"path":".agents/experiments/exp-20261012-hypic-native-lifecycle.yaml","sha256":"bd8acd2913bbb979e5b3311f626d2afa790ea584481cc4fd8f886e152e3f1881"},
@@ -77,7 +79,7 @@
     "r13_performance_audit_sha256": "d8f710f6ccd79ad79a31a36926963eac650761c921924d08b4fb0d2a1a206062"
   },
   "replayable_regression_recorded": true,
-  "boundary": "Historical one-request activation pass has both predictions incorrect and cannot authorize scale. Separate r13 c12060c same-identity 127x3 quality and six-phase performance are complete, but quality is REJECT_OR_QUALIFY, strict quality hot proof is 368/381, no current small correctness canary passed, prospective preimplementation gates are missing, and paper C3 is not implemented; acceptance-to-scale and adoption remain false.",
-  "next_gate": "Keep r13 roots immutable. Isolate the quality/activation failure under a new pre-registered one-variable hypothesis; only after a changed candidate is justified, prove its exact-source short correctness canary and disabled control on actually idle physical NPU0-3 before any fresh full pair. Do not repeat the existing r13 pair.",
+  "boundary": "Historical one-request activation has both predictions incorrect and cannot authorize scale. Separate r13 c12060c full quality and six-phase performance are complete but quality is REJECT_OR_QUALIFY, with strict heat coverage368/381. Historical preimplementation gates remain unproved. These are retained negative/partial facts, not requirements to fix HYPIC before verifying the Skill's failed-outcome handling. Missing paper C3 is a separate paper-completeness boundary, not an exact-main Canary workflow gate. Current4429e35 native lifecycle is a prospective supplement, not retroactive proof for3ad0967 orc12060c; enabled failed semantics and recovery controls are being verified. No acceptance-to-scale or adoption.",
+  "next_gate": "Preserve original historical replay scope and all frozen roots. Check the exact-main Canary obligations against actual evidence: preimplementation note/checkpoint, live imported source identity, one-variable same-sample disabled/enabled behavior, same-environment comparison, failed classification and executed recovery, and reproducible reporting. Use the already-running native recovery controls only as prospectively labeled supplemental evidence, not historical backfill. Algorithm repair, new full quality waves, C3 implementation and a successful candidate are not universal prerequisites for verifying this Skill's failure-handling path. Keep overall partial status until all claimed obligations are supported; no scale or package promotion after the failed semantic gate.",
   "drift_trigger": "Revalidate if exact-main Skill/registry, paired raw canary receipts, serving image, source commit, model/evaluator, or explicit-boundary request protocol changes."
 }
