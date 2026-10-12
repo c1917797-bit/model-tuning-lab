@@ -1,5 +1,30 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 prospective native HYPIC draft identity complete
+
+HYPIC_NATIVE_DELIVERY_DRAFT_20261012.md records complete static validation of
+a real prospective native bundle, not just validator helper/fixture success.
+All71 exported Git files remain exactly4429e35;32 Python files are bound.
+The manifest and small identity-check/pass-through launcher are new delivery
+assets, not claimed to be the historical r19 wrapper. Native registration and
+actual HYPIC implementation are unchanged; no new observer or activation hook.
+
+Image import-spec/AST resolved model_runner_v1.py under /vllm-workspace, not
+site-packages (failed0104 preserved, corrected0105). Live import remains false.
+010c CPU-tested unset/0/1 switch forwarding,invalid/absent arguments,source
+drift and missing-install rejection;1 only reached a harmless environment
+command. No enabled hooks/model/device work.0112 independently verifies all
+archive blobs/receipts;0116 runtime-case replay passes with draft unpromoted.
+
+Draft root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/native-delivery-package-20261012
+Manifest dbac56e41b40214eff24ed305af77e18b50799a36b20e023f381a8dd3af05691.
+Old historical missing-package claims remain true; this is a new draft.
+Next map only remaining live same-source control/rollback obligations and
+their prospective admission. Do not keep building package/observer machinery,
+repeat terminal quality, or infer permission from the pending performance
+choice. No NPU launch;counts8/21,r19 rejection,deadline08:47:14UTC Oct13,
+auth boundary and two observer-v3 drafts unchanged. Main/remote not synced.
+
 ## 2026-10-12 actual native package CPU lifecycle and image metadata
 
 HYPIC_NATIVE_CPU_LIFECYCLE_20261012.md closes the pinned-image metadata

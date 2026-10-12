@@ -108,6 +108,14 @@ def verify_native_cpu_receipts() -> dict:
 
 def main() -> int:
     native_cpu = verify_native_cpu_receipts()
+    package_run = command(
+        "/cache/cch/python-envs/model-tuning-lab-py311/bin/python", "-B",
+        str(HERE / "verify_native_hypic_package.py"))
+    expect(package_run.returncode == 0, f"native draft replay failed: {package_run.stderr}")
+    native_package = json.loads(package_run.stdout)
+    expect(native_package["unchanged_git_archive_files"] == 71
+           and native_package["package_promotion_ready"] is False,
+           "native draft completeness/promotion drift")
     expect(git("rev-parse", "origin/main") == MAIN,
            "locally tracked main changed; case needs re-review")
     for path, expected in (
@@ -206,6 +214,7 @@ def main() -> int:
         "branch_static_validator_tests": 9,
         "branch_native_profile_tests": 12,
         "native_cpu_replay": native_cpu,
+        "native_draft_replay": native_package,
         "plugin_source": PLUGIN_COMMIT,
         "r12_four_worker_hot": 52,
         "r12_scored": 57,

@@ -1,0 +1,195 @@
+{
+  "schema": "runtime-monkeypatch-delivery/v1",
+  "name": "hypic-4429e35-native-delivery",
+  "status": "draft",
+  "source_contract": {
+    "image_digest": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "framework_version": "vllm=0.23.0+empty; vllm-ascend=0.23.0; torch=2.10.0+cpu; torch-npu=2.10.0.post4",
+    "cann_version": "9.1.0 (V100R001C11SPC001B243)",
+    "live_module": "vllm_ascend.worker.model_runner_v1",
+    "live_object": "NPUModelRunner",
+    "source_sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968",
+    "identity_basis": "Pinned-image import-spec file and AST plus installed package metadata; live_module/live_object are intended targets, not proof of live worker import.",
+    "live_import_proven": false,
+    "host_driver_identity_proven": false
+  },
+  "treatment": {
+    "loader_kind": "vllm.general_plugins",
+    "switch": "VLLM_ASCEND_HYPIC_ENABLE",
+    "enabled_value": "1",
+    "single_primary_variable": true,
+    "patch_file": "hypic_vllm_ascend/__init__.py",
+    "patch_sha256": "84cfc3a61ac52aec9c40f6272fbab3768d728b7e0f94225c50b40ff3857f4fd8",
+    "loader_file": "pyproject.toml",
+    "loader_sha256": "67470f68a303d5292289f5bdee508cece00b2f8e3ea5d87fb81ee8b68f43cfbb",
+    "launcher_file": "run_with_native_plugin.sh",
+    "launcher_sha256": "761d56373829b2195a7ce5dff9d435945cd2593121e317dc52d2cdfa51b385dc",
+    "entry_point_group": "vllm.general_plugins",
+    "entry_point_name": "hypic_vllm_ascend",
+    "entrypoint": "hypic_vllm_ascend:register",
+    "default_enabled": false,
+    "launcher_scope": "Prospective identity-check/pass-through launcher only; no new activation hook; not the historical r19 wrapper."
+  },
+  "activation": {
+    "marker_prefix": "plugin_build_active",
+    "required_roles": [
+      "engine",
+      "tp_worker_rank_0",
+      "tp_worker_rank_1",
+      "tp_worker_rank_2",
+      "tp_worker_rank_3"
+    ],
+    "disabled_control_required": true,
+    "marker_alone_sufficient": false,
+    "required_hot_event": "worker_hot_request_verified",
+    "ledger_requirement": "Bind every relevant PID/rank/request/source before claiming activation. plugin_build_active precedes apply_patches and is not hook-completion proof."
+  },
+  "rollback": {
+    "disable_command": "VLLM_ASCEND_HYPIC_ENABLE=0 bash ./run_with_native_plugin.sh \"$@\"",
+    "uninstall_command": "python3 -m pip uninstall -y hypic-vllm-ascend-plugin",
+    "scope": "Commands only inside the exact owned service environment. Stop that service before uninstall; restart the unchanged official serving command and verify a real request plus exact resource release. No existing service may be changed by assembling this draft.",
+    "device_executed": false
+  },
+  "evidence": {
+    "experiment_id": "hypic-native-delivery-4429e35-draft-20261012",
+    "branch": "work/hypic-request-hotproof-20261008",
+    "commit": "4429e35177979c874bf053ab29789e4773f39b22",
+    "commit_scope": "HYPIC implementation/source archive only; prospective launcher/manifest are hash-bound new delivery assets, not claimed present in this source commit.",
+    "maintainer_branch": "work/hypic-npu03-cpu-binding-fix-20261007",
+    "maintainer_base_commit": "c5c32c8a07cbdbc602510674fd2f1e4a72f5f6af",
+    "quality_result": "r19 LongBench REJECT_OR_QUALIFY; do not reinterpret as delivery acceptance",
+    "same_source_performance_complete": false,
+    "package_promotion_ready": false
+  },
+  "source_files": [
+    {
+      "path": "hypic_vllm_ascend/__init__.py",
+      "sha256": "84cfc3a61ac52aec9c40f6272fbab3768d728b7e0f94225c50b40ff3857f4fd8"
+    },
+    {
+      "path": "hypic_vllm_ascend/auto_segment.py",
+      "sha256": "8a585e2ea0135aad218a38a3f633ecec47619679c980c57d11a02e1fee9d6ea4"
+    },
+    {
+      "path": "hypic_vllm_ascend/cache.py",
+      "sha256": "51eedd390e430496a567aa7c976c0a299deb7720b2dd3b9d774a897fb2244892"
+    },
+    {
+      "path": "hypic_vllm_ascend/capabilities.py",
+      "sha256": "b340b20634abba6ca92dcaf1bc28852308a836c89a266935ed23f7f48f4e001b"
+    },
+    {
+      "path": "hypic_vllm_ascend/context.py",
+      "sha256": "c95550602542a30a09dd2979e6e58c1d1bd17d653ff05880347d96aaf2a4aac0"
+    },
+    {
+      "path": "hypic_vllm_ascend/conv_tails.py",
+      "sha256": "7e0d8f37202c889e83ef4d847349beb6cf675eaa9890fcb4be23b0459e531c69"
+    },
+    {
+      "path": "hypic_vllm_ascend/diagnostics.py",
+      "sha256": "035084679dcc1f9ac2cfff9714415218d326d6efd8a4960ed6ad023940afdf08"
+    },
+    {
+      "path": "hypic_vllm_ascend/envs.py",
+      "sha256": "0f4a5abcfed256493f453cbd9eaeca6e65012ef2667c9cf10220e012711b22dd"
+    },
+    {
+      "path": "hypic_vllm_ascend/graph.py",
+      "sha256": "587d58e0481f1791e5a47ad45574dd9b32ea301c3c8ee3e064a09c96c02f23f2"
+    },
+    {
+      "path": "hypic_vllm_ascend/hotpath.py",
+      "sha256": "9dd705ae0e609037f36f7ce37794b69ca5523e536b86e4b751d6a57faf579bff"
+    },
+    {
+      "path": "hypic_vllm_ascend/ingress.py",
+      "sha256": "1cee95874eccb1887377af104537fb930c8fda178efbefe1fc74c84c15f80c75"
+    },
+    {
+      "path": "hypic_vllm_ascend/material.py",
+      "sha256": "cd677063af4e296be00d12ae9f148fc384cdf4f29b376170f89cd56eb5cf6f68"
+    },
+    {
+      "path": "hypic_vllm_ascend/metadata.py",
+      "sha256": "3ed07eb9269a8ddf9bbb167c6dd316b876577791053827ff4a315a4eb87bf465"
+    },
+    {
+      "path": "hypic_vllm_ascend/patches/__init__.py",
+      "sha256": "d2215a52721cb5c12d8c1cb4a79b3ea1a4b3d5e80a4d26d7d03f150911d8d866"
+    },
+    {
+      "path": "hypic_vllm_ascend/patches/attention.py",
+      "sha256": "0e13fbf953f40d3e6103fc7e4b1858755d8992d108d8b1763659aa29fb502876"
+    },
+    {
+      "path": "hypic_vllm_ascend/patches/bootstrap.py",
+      "sha256": "7f6f7dd0d261dea65c4822fd2d4dfc5c4b83133898a4898a4ec93ea9ef521f8b"
+    },
+    {
+      "path": "hypic_vllm_ascend/patches/gdn.py",
+      "sha256": "72d58fdf03a4317ee4493ac475cd4b059ae3ed7f9138243446737a860537623d"
+    },
+    {
+      "path": "hypic_vllm_ascend/patches/import_hook.py",
+      "sha256": "3e233c67623960af52585336be464315c601a2b5a21296b4b8a501958b22d44a"
+    },
+    {
+      "path": "hypic_vllm_ascend/patches/processor.py",
+      "sha256": "ba1b5003cded597f8fe047945e064c9e5a89d10cb09a97227ce7d4ce5bde6719"
+    },
+    {
+      "path": "hypic_vllm_ascend/patches/runner.py",
+      "sha256": "5d3078267d55e6ca41000ba195c387e2f3fc6fec6bbe89cf73b8a67fbfb8f8e0"
+    },
+    {
+      "path": "hypic_vllm_ascend/patches/scheduler.py",
+      "sha256": "c19155be244b0fdca6cb97bf1a3c475568bfb1635e36512568d59735c241c55f"
+    },
+    {
+      "path": "hypic_vllm_ascend/planner.py",
+      "sha256": "0adb5be5b40055c53f9ac26e5953d2baddcc5b5a69de6bb85054509a79279b54"
+    },
+    {
+      "path": "hypic_vllm_ascend/policy.py",
+      "sha256": "cc635d030c7d3ad82a638567007e552833ebc61787bfe88ec26f1828eed6ea4b"
+    },
+    {
+      "path": "hypic_vllm_ascend/position_independent.py",
+      "sha256": "b98b4f964c175e8b4e6244a35029ac767a160ef0d7a192de86ecbb764cf2d4e8"
+    },
+    {
+      "path": "hypic_vllm_ascend/request.py",
+      "sha256": "bec6371d3008e22bd11fbb1132f464012ec51ca300facdbaea46e7fb4e0c8e4d"
+    },
+    {
+      "path": "hypic_vllm_ascend/runtime.py",
+      "sha256": "c1aef4523f7d2149b4736c7d786169466d6546a5cdd3cb394168523da1fa649a"
+    },
+    {
+      "path": "hypic_vllm_ascend/seam.py",
+      "sha256": "470bf5c4f6d9f90b772c523bcc789d67f1e5c6382b73278a9098105d4e10f94e"
+    },
+    {
+      "path": "hypic_vllm_ascend/segmenter.py",
+      "sha256": "a54a984cfcded530966add711e3a0572a6cf6ab4d2f7327095728461239ce4f1"
+    },
+    {
+      "path": "hypic_vllm_ascend/stats.py",
+      "sha256": "833c08805b84391b0bde5cee4240e001de0d1938e1442b7dfba3ca4eea3d8c8d"
+    },
+    {
+      "path": "hypic_vllm_ascend/topology.py",
+      "sha256": "0b18c6d84afe85d31062ec3be1498394aa13a6d1bab56d7672e46f771704e314"
+    },
+    {
+      "path": "hypic_vllm_ascend/transition.py",
+      "sha256": "401f03dd1a2b8495d76c4b54ca545b5375e38da8b1b7af9be3e282238205eb2d"
+    },
+    {
+      "path": "hypic_vllm_ascend/upstream_parity.py",
+      "sha256": "88d51de88c8fa625d2371ed1e38bfb7bf9bcd3448b5f2e4a450540cba8b9fa31"
+    }
+  ],
+  "native_libraries": []
+}
