@@ -2,14 +2,15 @@
   "schema": "ascend-runtime-repair-task/v1",
   "task_id": "hypic-npu03-cpu-binding-fix-20261007",
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
-  "state": "r19_quality_rejected_r22_bounded_diagnostic_inconclusive_skill_mapping_pending",
+  "state": "evidence_convergence_quality_terminal_performance_source_gap_skill_acceptance_partial",
+  "convergence_checkpoint": {"as_of_utc":"2026-10-12T20:50:54Z","report":"HYPIC_12H_CONVERGENCE_20261012.md","ledger":"HYPIC_EVIDENCE_REUSE_20261012.json","window_start_utc":"2026-10-12T20:47:14Z","deadline_utc":"2026-10-13T08:47:14Z","lineage_expansion_on_critical_path":false,"new_npu_launch_scheduled":false,"old_verdicts_changed":false,"full_goal_complete":false},
   "execution_state": "in-progress",
   "material_lineage_observer": {
     "state": "host-tested-not-service-integrated-no-device-proof",
     "test_operation": "exec-0000000000000041",
     "host_tests": 14,
     "report": "HYPIC_MATERIAL_LINEAGE_IMPLEMENTATION_20261012.md",
-    "next": "Combine consumer and replay seams in one source-bound AST observer; install producer capture before warmups, then freeze a bounded concurrent diagnostic",
+    "next": "Preserved CPU-tested diagnostic groundwork; further integration is off the current critical path pending a decision-changing need. See convergence_checkpoint.",
     "quality_cause_proven": false
   },
   "material_lineage_cpu_discriminator": {
@@ -434,7 +435,7 @@
   "goal_horizons": {
     "long_term": "Give all 29 exact-main Skills representative real-task acceptance, evidence provenance and replayable regressions; integrate reviewed results to main/remote when authorized.",
     "medium_term": "Close the HYPIC Skill-chain quality, performance and isolation evidence gaps without promoting branch-local or cold-request evidence to a paper-complete claim.",
-    "short_term": "Preserve the valid r13 127x3 max-2048 paired quality rejection and strict hot-path failure; complete the frozen serial six-phase performance/isolated-release audit on physical NPU0-3 without converting a performance benefit into quality acceptance."
+    "short_term": "Complete source-scoped HYPIC explicit-segment max2048 quality and performance/isolation audit on physical0-3. Preserve completed negative quality; do not splice r13 speed into r19 or rerun terminal evidence."
   },
   "performance_candidate_repeat3_retry5_environmental_failure": {
     "campaign": "cache10perf",
@@ -910,7 +911,7 @@
       "mst-skill-governor",
       "mst-skill-tree-design"
     ],
-    "cannbot_profiler_state": "partial-evidence: routing/readiness verified, actual NPU profiler capture not performed",
+    "cannbot_profiler_state": "partial-evidence: real four-rank Prefill/Decode captures and parsing recorded in current case; frozen47-column gate missed with46 observed; no causal root proven",
     "verifier": "verify_skill_cases.py"
   },
   "timeboxed_milestone_plan": {
@@ -1409,5 +1410,5 @@
     "interpretation": "Both subset arms scored 54/96; sample 082 was correct and naturally stopped in both arms, but lacked candidate hot proof. First cross-arm token divergence positions 124/23/212 are comparable to within-arm variability; inconclusive, not causal and not a full-suite verdict.",
     "claim_boundary": "bounded output-numerics diagnostic only; prior waves absent; no r19 verdict change"
   },
-  "next_action": "r25retry2 terminal PASS for bounded observer lifecycle, independently audited; no live own service. Do not repeat serial observer rollback. Next isolate HYPIC c32 quality via a prospective concurrency/material-generation discriminator based on r19/r20 and current real captures; serial sampled residuals do not prove generation/full quality. Preserve all old roots/verdicts; only0-3, fresh admission, no foreign-task changes, no unmatched performance/full baseline rerun, no unchanged auth retry."
+  "next_action": "Use HYPIC_EVIDENCE_REUSE_20261012.json and HYPIC_12H_CONVERGENCE_20261012.md as current resume point. Existing quality pairs and r13 six performance phases are terminal; do not rerun them. Review exact-main partial Skill obligations against retained evidence, then execute only decision-changing missing acceptance. Do not auto-expand lineage instrumentation or bypass the r19 quality-first adoption-performance gate. Preserve untracked observer-v3 drafts, all frozen verdicts and roots. Only physical0-3; fresh ma/direct admission and continuous guard before any later NPU action; no foreign modifications,4-7 or unchanged auth retries."
 }

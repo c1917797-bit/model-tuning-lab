@@ -1,5 +1,31 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 current resume override: evidence convergence, not tool expansion
+
+Read HYPIC_12H_CONVERGENCE_20261012.md and HYPIC_EVIDENCE_REUSE_20261012.json
+first. They supersede all older "next" paragraphs below, without changing any
+frozen verdict. Window20:47:14UTC Oct12 to08:47:14UTC Oct13; never reset it.
+Full three-stage goal remains open; no new NPU launch is scheduled.
+
+Six external audit receipts were re-read/hash-checked. r19 full LongBench and
+GSM8K are already terminal (negative in-path deployment quality; positive
+off-path safety respectively). r13 six-stage speed belongs to c12060c, not
+r19's4429e35. Same-source4429e35 performance remains missing and the existing
+quality-first adoption gate is not bypassed. Detailed numerical causality is
+unresolved, but is not needed to report the completed negative quality result.
+
+Stop automatic lineage-tool expansion. Preserve the untracked observer-v3
+and test drafts as undeployed work; do not delete or launch them. Next review
+exact-main partial-case obligations against existing behavior evidence before
+scheduling any missing acceptance.29 cases remain7 bounded verified/22 partial.
+Task's stale "profiling not performed" field is corrected from current case:
+actual Prefill/Decode capture exists, but the47-column gate missed (46).
+
+Fresh Git: ef32d7c8 ahead97 before this checkpoint; remote auth unchanged.
+No main/remote sync. Read-only host snapshot found no8223 listener; this is
+not a future device lease. Only physical0-3 with fresh direct admission and
+continuous guard; foreign workloads and4-7 untouched.
+
 ## 2026-10-12 lineage observer and independent audit implemented, CPU only
 
 14 real-store/synthetic-CPU tests passed exec00041, including duplicate/recreate,

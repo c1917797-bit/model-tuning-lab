@@ -1,0 +1,23 @@
+schema: mst-practice-iteration/v1
+id: hypic-evidence-convergence-20261012
+repository: model-tuning-lab
+status: in_progress
+date: '2026-10-12'
+validated_commit: ef32d7c8ce4bb3afc75b81d7b782104a6cedb422
+stage_goal: Converge the complete three-stage HYPIC and main-Skill objective using verified existing evidence without repeating terminal experiments.
+changes:
+  - type: docs
+    description: Correct current workstream resume state and freeze a source-scoped reuse ledger and bounded convergence window.
+    files:
+      - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/task.json
+      - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HANDOFF.md
+      - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_EVIDENCE_REUSE_20261012.json
+      - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_12H_CONVERGENCE_20261012.md
+validation_commands:
+  - python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_skill_cases.py
+  - ./scripts/validate-mst.sh
+  - git diff --check
+lessons_ingested:
+  - lesson: A terminal negative quality pair is not missing work; separate source-scoped results and verify current evidence before scheduling repeats.
+    destination: .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_12H_CONVERGENCE_20261012.md
+    severity: high

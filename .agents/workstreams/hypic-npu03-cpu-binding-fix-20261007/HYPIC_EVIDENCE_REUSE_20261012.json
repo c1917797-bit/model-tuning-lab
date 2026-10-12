@@ -1,0 +1,109 @@
+{
+  "schema": "hypic-evidence-reuse-ledger/v1",
+  "as_of_utc": "2026-10-12T20:50:54Z",
+  "reviewed_code_checkpoint": "ef32d7c8ce4bb3afc75b81d7b782104a6cedb422",
+  "verification_scope": "Existing audit JSON bytes and decision fields re-read; not a new NPU run or a fresh full raw-row replay.",
+  "physical_npus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "external_receipts": [
+    {
+      "id": "r13-quality",
+      "path": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/hotpath-quality-cache10r13-dual-audit.json",
+      "sha256": "f66b9760bfb4f9391863cd386658211c58ab07d0dfc2de58ea2091ed4d2c9b7b",
+      "source": "c12060cd47e7575ead059983d7a8bb4704165c98",
+      "scope": "LongBench explicit segments c8 max2048, 127x3 per arm",
+      "state": "complete-negative",
+      "claim": "230/381 -> 219/381; REJECT_OR_QUALIFY; strict hot 368/381",
+      "reuse": "Retain source-scoped negative evidence; never label incomplete because quality failed."
+    },
+    {
+      "id": "r13-performance",
+      "path": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/hotpath-cache10r13-matched-performance-audit.json",
+      "sha256": "d8f710f6ccd79ad79a31a36926963eac650761c921924d08b4fb0d2a1a206062",
+      "source": "c12060cd47e7575ead059983d7a8bb4704165c98",
+      "scope": "c16 input32768 fixed-output1024, six phases",
+      "state": "complete-positive-screen",
+      "claim": "weighted TPOT -21.524278%; TTFT P95 -40.869375s; hot120/120",
+      "reuse": "Source-scoped speed evidence only; cannot combine with r19 as same-source acceptance."
+    },
+    {
+      "id": "r16-quality",
+      "path": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/hypic-r16-original-source-full-quality-audit.json",
+      "sha256": "52914becb93266ac4a27e8491b40bf8456b566ee8f828038250098bfec33a4ee",
+      "source": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
+      "scope": "LongBench explicit segments c8 max2048,127x3",
+      "state": "complete-negative",
+      "claim": "224/381 -> 210/381; REJECT_OR_QUALIFY",
+      "reuse": "Original-source quality evidence for this ruler, not historical1024/c32; no GSM8K pair for this ruler."
+    },
+    {
+      "id": "r19-longbench",
+      "path": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/hypic-r19-c32-2048-longbench-paired-audit.json",
+      "sha256": "40ce887336be3446aa87a8e552fb50d366234fc10006ad5a3140f3dc0df16d9b",
+      "source": "4429e35177979c874bf053ab29789e4773f39b22",
+      "scope": "LongBench explicit segments c32 max2048,127x3",
+      "state": "complete-negative",
+      "claim": "227/381 -> 219/381; REJECT_OR_QUALIFY",
+      "reuse": "Full all-request quality complete. Supplementary terminal-report ID join proves134/381 four-worker hot; immutable base audit has older aggregate-only wording."
+    },
+    {
+      "id": "r19-gsm8k",
+      "path": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/hypic-r19-c32-2048-gsm8k-paired-audit.json",
+      "sha256": "496f1dfacb3c3a8dd03f8ee07368fb142b432498c0ee5dbb5722e1d4f85fd187",
+      "source": "4429e35177979c874bf053ab29789e4773f39b22",
+      "scope": "GSM8K natural requests c32 max2048,1319x3",
+      "state": "complete-off-path-pass",
+      "claim": "3838/3957 -> 3840/3957; safety PASS",
+      "reuse": "Do not rerun. This is off-path safety, not explicit-segment HYPIC quality preservation."
+    },
+    {
+      "id": "r25retry2",
+      "path": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/r25retry2-state-enabled-independent-audit.json",
+      "sha256": "01d49278c92c931ccaff5a6d204e750d20010953e32daa64a5c7e980c3bd83c5",
+      "source": "4429e35177979c874bf053ab29789e4773f39b22",
+      "scope": "sample59 bounded observer capture/uninstall, four responses",
+      "state": "complete-bounded-lifecycle-pass",
+      "claim": "four workers step8;117 clean probes; exact release; post-uninstall request passed",
+      "reuse": "Observer lifecycle only; not full quality, full tensor equality or HYPIC adoption."
+    }
+  ],
+  "remaining": [
+    {
+      "id": "same-source-performance",
+      "state": "missing-for-4429e35",
+      "rule": "Do not splice r13 speed onto r19 quality. Existing quality gate prohibits adoption performance after rejection; prospective descriptive performance would require a distinct explicit contract, not an implied gate relaxation."
+    },
+    {
+      "id": "quality-repair",
+      "state": "not-proven",
+      "rule": "r19 is a completed negative experiment, not missing rows. Root-cause investigation remains unresolved and is not a prerequisite to reporting its result. No unchanged full suite or automatic lineage-tool expansion."
+    },
+    {
+      "id": "skill-functional-acceptance",
+      "state": "7-bounded-22-partial",
+      "rule": "All29 have cases; provenance/structure is not functional acceptance. Review exact obligations and existing evidence before any new device work."
+    },
+    {
+      "id": "integration",
+      "state": "local-only-auth-unavailable",
+      "rule": "No unchanged failed auth retries; no main/remote sync claim."
+    }
+  ],
+  "drafts_preserved_not_deployed": [
+    "numerical_state_observer_v3.py",
+    "test_numerical_state_observer_v3.py"
+  ],
+  "do_not_repeat": [
+    "r13 six performance phases",
+    "r16/r19 complete quality pairs",
+    "r19 GSM8K",
+    "r22 unchanged c32 diagnostic",
+    "r25retry2 serial lifecycle"
+  ],
+  "frozen_verdicts_changed": false,
+  "full_goal_complete": false
+}
