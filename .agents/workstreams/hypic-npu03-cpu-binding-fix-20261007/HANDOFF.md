@@ -1,5 +1,15 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 r25retry1 RUNNING after fresh idle admission
+
+Unique controller exec-0000000000000d65 launched from code checkpointab8b6248.
+Raw root: /cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r25retry1-state-enabled.
+Fresh direct ma/physical0-3/8223 checks passed. Only attempt/root/request
+identifiers differ from r25; no baseline, source, ruler or gate changes.
+Continuous guard remains mandatory. Poll exact handle/root, never restart on
+observation timeout; terminal independent auditor is r25retry1_state_audit.py
+--mode enabled using shared py311. Preserve both earlier failed roots.
+
 ## 2026-10-12 r25 retry1 frozen; no new treatment or ruler
 
 r25retry1_state_diagnostic.py and independent r25retry1_state_audit.py differ

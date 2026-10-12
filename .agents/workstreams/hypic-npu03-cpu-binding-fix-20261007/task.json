@@ -5,12 +5,14 @@
   "state": "r19_quality_rejected_r22_bounded_diagnostic_inconclusive_skill_mapping_pending",
   "execution_state": "in-progress",
   "r25retry1_state_diagnostic": {
-    "state": "frozen-preflight-passed-not-started",
+    "state": "enabled-controller-running",
+    "controller_operation": "exec-0000000000000d65",
+    "code_checkpoint": "ab8b6248",
     "preregistration_sha256": "0e15eee84de054027c8576e86f3bb1931d353d67b62001aa6b7299355acfa8ce",
     "raw_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r25retry1-state-enabled",
     "retry_reason": "r25 failed environmental isolation before health, zero responses/captures",
     "same_treatment_source_workload_and_gates": true,
-    "next": "Fresh physical0-3/8223 admission then run r25retry1_state_diagnostic.py --mode enabled --run once; preserve r25."
+    "next": "Poll exact r25retry1 controller exec-0000000000000d65 and its immutable root; no restart while running or ambiguous. On terminal inspect terminal.json, then shared-py311 r25retry1_state_audit.py --mode enabled. r25 is independently isolation-failed; r24 remains FAILED_POST_UNINSTALL. Physical0-3 only, no foreign-task modifications, no repeated auth-failed push."
   },
   "r25_state_diagnostic": {
     "state": "terminal-isolation-failed-before-health",
@@ -1341,5 +1343,5 @@
     "interpretation": "Both subset arms scored 54/96; sample 082 was correct and naturally stopped in both arms, but lacked candidate hot proof. First cross-arm token divergence positions 124/23/212 are comparable to within-arm variability; inconclusive, not causal and not a full-suite verdict.",
     "claim_boundary": "bounded output-numerics diagnostic only; prior waves absent; no r19 verdict change"
   },
-  "next_action": "r25 terminal pre-health isolation failure audited and released; preserve its root. r25retry1 is frozen with only new attempt/root/request identity. Recheck direct ma route and actual physical0-3/8223 idle before launching it once; after terminal use independent retry auditor. No full quality rerun, no external task change."
+  "next_action": "Poll exact r25retry1 controller exec-0000000000000d65 and its immutable root; no restart while running or ambiguous. On terminal inspect terminal.json, then shared-py311 r25retry1_state_audit.py --mode enabled. r25 is independently isolation-failed; r24 remains FAILED_POST_UNINSTALL. Physical0-3 only, no foreign-task modifications, no repeated auth-failed push."
 }
