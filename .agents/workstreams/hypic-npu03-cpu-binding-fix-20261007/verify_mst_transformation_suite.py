@@ -28,11 +28,62 @@ def require(value: bool, message: str) -> None:
         raise RuntimeError(message)
 
 
+ALLOWED_STATUSES = {"stable", "experimental", "deprecated", "retired"}
+
+
+def verify_registry_contract(root: Path) -> int:
+    """Check every maintainer registry, including unexpected component trees."""
+    registries = sorted(root.rglob(".agents/skills.registry.yaml"))
+    require(root / ".agents/skills.registry.yaml" in registries,
+            "root registry missing")
+    root_registry = yaml.safe_load((root / ".agents/skills.registry.yaml").read_text())
+    if len(registries) > 1:
+        precedence = root_registry.get("selection", {}).get("precedence", [])
+        require("crate_scoped" in precedence and "workspace_scoped" in precedence
+                and precedence.index("crate_scoped") < precedence.index("workspace_scoped"),
+                "component registry lacks narrower selection precedence")
+    count = 0
+    for registry_path in registries:
+        owner = registry_path.parent.parent.resolve()
+        registry = yaml.safe_load(registry_path.read_text())
+        entries = registry.get("skills", [])
+        ids = [entry["id"] for entry in entries]
+        require(len(ids) == len(set(ids)), "duplicate Skill IDs")
+        declared = set()
+        for entry in entries:
+            require(entry.get("status") in ALLOWED_STATUSES,
+                    f"invalid Skill status: {entry['id']}={entry.get('status')}")
+            require(bool(entry.get("triggers")), f"missing triggers: {entry['id']}")
+            skill_dir = (owner / entry["path"]).resolve()
+            require(skill_dir.is_relative_to(owner / ".agents/skills"),
+                    f"maintainer path escapes tree: {entry['id']}")
+            require(skill_dir not in declared, "duplicate Skill path")
+            declared.add(skill_dir)
+            skill_file = skill_dir / "SKILL.md"
+            require(skill_file.is_file(), f"missing Skill file: {entry['id']}")
+            text = skill_file.read_text()
+            parts = text.split("---", 2)
+            require(len(parts) == 3 and not parts[0].strip(),
+                    f"frontmatter absent: {entry['id']}")
+            frontmatter = yaml.safe_load(parts[1])
+            require(isinstance(frontmatter, dict) and
+                    frontmatter.get("name") == entry["id"] and
+                    bool(frontmatter.get("description")),
+                    f"frontmatter mismatch: {entry['id']}")
+            require("## Purpose" in text and "## Workflow" in text,
+                    f"behavioral sections absent: {entry['id']}")
+            count += 1
+        actual = {p.resolve() for p in (owner / ".agents/skills").iterdir() if p.is_dir()}
+        require(actual == declared, "orphan or missing Skill directory")
+    return count
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--fixture", type=Path, default=DEFAULT_FIXTURE)
     args = parser.parse_args()
     root = args.fixture.resolve()
+    registry_skill_count = verify_registry_contract(root)
     snapshot = json.loads((root.parent / "input-snapshot.json").read_text())
     require(snapshot["misplaced_runtime_skill"].startswith(".agents/skills/"),
             "input does not exercise runtime separation")
@@ -53,6 +104,7 @@ def main() -> int:
     ids = [item["id"] for item in entries]
     require(len(ids) == len(set(ids)), "duplicate Skill IDs")
     require(EXPECTED_CORE <= set(ids), "default transformation tree incomplete")
+    require(registry_skill_count == len(ids), "this fixture expects a single package")
     require("mst-runtime-skill-boundary" in ids,
             "runtime boundary Skill not added for observed need")
     for item in entries:
@@ -84,6 +136,10 @@ def main() -> int:
             "runtime Skill claims or references maintainer governance")
     policy = yaml.safe_load(
         (root / "runtime-skills/publish-policy.yaml").read_text())
+    runtime_ids = {item["id"] for item in runtime_registry["skills"]}
+    require(all(item.get("skill") in runtime_ids
+                for item in policy.get("allowed", [])),
+            "maintainer or unknown Skill exposed as runtime asset")
     require(policy["default"] == "deny"
             and policy["allowed"][0]["safety_review"] == "required",
             "publish policy is not deny-by-default with review")

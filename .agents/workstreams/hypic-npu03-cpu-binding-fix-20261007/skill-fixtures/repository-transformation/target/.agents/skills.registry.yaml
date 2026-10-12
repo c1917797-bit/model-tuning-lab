@@ -6,43 +6,43 @@ selection:
 skills:
   - id: mst-repo-onboarding
     path: .agents/skills/mst-repo-onboarding
-    status: active
+    status: experimental
     purpose: Orient a maintainer before changes.
     triggers: [first repository task]
     scope: [repository]
   - id: mst-repo-transformation
     path: .agents/skills/mst-repo-transformation
-    status: active
+    status: experimental
     purpose: Maintain the repository transformation.
     triggers: [maintainer-system change]
     scope: [repository]
   - id: mst-agentsmd-authoring
     path: .agents/skills/mst-agentsmd-authoring
-    status: active
+    status: experimental
     purpose: Keep the bootstrap minimal and canonical.
     triggers: [AGENTS.md change]
     scope: [AGENTS.md]
   - id: mst-skill-tree-design
     path: .agents/skills/mst-skill-tree-design
-    status: active
+    status: experimental
     purpose: Keep the tree small and task-oriented.
     triggers: [registry or tree design]
     scope: [.agents/skills.registry.yaml, .agents/skills]
   - id: mst-transformation-verification
     path: .agents/skills/mst-transformation-verification
-    status: active
+    status: experimental
     purpose: Replay structural acceptance checks.
     triggers: [transformation verification]
     scope: [repository]
   - id: mst-skill-governor
     path: .agents/skills/mst-skill-governor
-    status: active
+    status: experimental
     purpose: Govern reusable Skill changes.
     triggers: [Skill add, move, deprecate, or edit]
     scope: [.agents]
   - id: mst-runtime-skill-boundary
     path: .agents/skills/mst-runtime-skill-boundary
-    status: active
+    status: experimental
     purpose: Separate tenant runtime Skills from maintainer Skills.
     triggers: [runtime Skill or publication change]
     scope: [.agents/skills, runtime-skills]

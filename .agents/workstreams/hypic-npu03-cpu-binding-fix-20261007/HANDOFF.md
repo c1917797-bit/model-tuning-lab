@@ -1,5 +1,26 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 transformation validator false pass repaired
+
+TRANSFORMATION_VERIFICATION_REGRESSION_20261012.md records a real mismatch:
+the original fixture used illegal active statuses while its checker accepted
+any nonempty value. Exact-main Skill text was correct. The new checker first
+rejected the unchanged fixture (009d), then the seven experimental statuses
+passed the full fixture/product check (009e). Twelve negative/positive tests
+passed00a1, including nested registry traversal and maintainer publication.
+Five dependent cases now pin the repaired verifier and hashed supplement;
+transformation-verification adds this behavior without replacing its original
+29-Skill task or promoting its overall partial status. Counts remain7/22.
+Combined replay exec00ac passed12 regressions, full fixture/product health,
+29-case provenance,29-Skill structure,task JSON and git diff --check.
+
+No NPU inference, runtime patch or immutable HYPIC result changed. Preserve
+both untracked observer-v3 drafts. Main/remote integration is not claimed;
+unchanged authentication is not retried. Deadline08:47:14UTC Oct13 unchanged.
+Next inspect actual main selection metadata against the retained diagnostic
+before deciding a minimal repair; do not rerun this fixture merely for counts.
+Same-source descriptive performance remains pending prospective user choice.
+
 ## 2026-10-12 exact-main acceptance gates corrected
 
 SKILL_ACCEPTANCE_SCOPE_REVIEW_20261012.md distinguishes Skill validation from

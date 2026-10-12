@@ -20,14 +20,36 @@
       "runtime_skill_separated": true,
       "fixture_validator_exit_code": 0
   },
+  "fixture_regression_supplement": {
+    "executed_at_utc": "2026-10-12",
+    "scope": "Corrected single-package transformation fixture and nested-registry checker negative controls; not replacement for whole-main acceptance",
+    "historical_status_check_false_positive": true,
+    "old_fixture_rejected_operation": "exec-000000000000009d",
+    "corrected_fixture_pass_operation": "exec-000000000000009e",
+    "regression_operation": "exec-00000000000000a1",
+    "regression_tests_passed": 12,
+    "overall_acceptance_changed": false
+  },
   "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/TRANSFORMATION_VERIFICATION_REGRESSION_20261012.md",
+      "sha256": "59e3c03f1b33c3c025ca25f0708aecb0ad8af70104f2210d8691f3b02a92673d"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_mst_transformation_registry.py",
+      "sha256": "ad570f16c7374c9cf9ff800d5585638b525ba5e573d5915f4b60419664e92a72"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/target/.agents/skills.registry.yaml",
+      "sha256": "1aac33427ea49a728c91c75daf7450e6d04be3ab56e8ecb18d77a06bdc63f40c"
+    },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/MST_TRANSFORMATION_SUITE_CASE_20261009.md",
       "sha256": "2155699c4ad67e66b0bca71a208f4cc918ebf40b95800be06cc191b270bdea84"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_mst_transformation_suite.py",
-      "sha256": "2237502131419e8457e1cf6805cd82ac94ee626d9d4175107968d1c208a90612"
+      "sha256": "1012ca75ea81c6e459740a2d318ca6fe4b7786738b5be87f7efbe93e617e276a"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/input-snapshot.json",
