@@ -1,5 +1,26 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 r25retry2 TERMINAL: bounded observer lifecycle PASS
+
+Controller exec-0000000000000014 exit0 after624.884s. Four responses complete:
+two warmups, target1275 tokens natural stop, post-uninstall1-token response.
+Independent frozen auditor exec00021 exit0; report SHA256
+01d49278c92c931ccaff5a6d204e750d20010953e32daa64a5c7e980c3bd83c5.
+Four workers/step8/sealed events/source/physical identity joins passed;
+117 clean isolation probes; exact owned c7b9dcf282e6 container/NPU/8223
+released at20:16:39UTC. No live own service remains.
+See HYPIC_R25RETRY2_STATE_ROLLBACK_TERMINAL_20261012.md.
+
+Selected KV/GDN-state/conv/position destination-cast residuals are zero.
+FP64 GDN maxima are1.4594e-7,9.3289e-7,5.6221e-8,0. This is selected
+layers/head0/rows only, not material-generation/full-tensor/quality equivalence.
+The retained-alias hot-uninstall defect is now device-regressed for this
+bounded path; do not rerun this same serial diagnostic. Runtime-delivery case
+records successful supplement but remains partial for the HYPIC package.
+r25retry2 terminal PASS for bounded observer lifecycle, independently audited; no live own service. Do not repeat serial observer rollback. Next isolate HYPIC c32 quality via a prospective concurrency/material-generation discriminator based on r19/r20 and current real captures; serial sampled residuals do not prove generation/full quality. Preserve all old roots/verdicts; only0-3, fresh admission, no foreign-task changes, no unmatched performance/full baseline rerun, no unchanged auth retry.
+29 Skill status remains7 bounded verified/22 partial; main/remote not synced.
+Older RUNNING/blocker sections below are historical.
+
 ## 2026-10-12 r25retry2 RUNNING; external blocker resolved
 
 20:01:57UTC fresh evidence: original PID330700 absent, cannbench_ds stopped.

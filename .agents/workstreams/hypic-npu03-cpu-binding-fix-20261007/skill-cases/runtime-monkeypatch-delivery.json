@@ -12,7 +12,12 @@
     "r25_own_resources_released": true,
     "r25_failure_audit_sha256": "b4472f4fd93a924c53bb89094fd1675b43a62a2b41a6d724edb323c82da61d2a",
     "observer_fix_cpu_tests": 65,
-    "observer_fix_device_result": "not-tested; pending fresh-root retry",
+    "observer_fix_device_result": "r25retry2 bounded integrated lifecycle PASS; four responses including post-uninstall; not full HYPIC delivery acceptance",
+    "r25retry2_audit_sha256": "01d49278c92c931ccaff5a6d204e750d20010953e32daa64a5c7e980c3bd83c5",
+    "r25retry2_guard_samples": 117,
+    "r25retry2_exact_owned_release": true,
+    "r25retry2_four_worker_step_join": 8,
+    "r25retry2_producer_generation_proven": false,
     "lesson": "Restoring a module attribute does not invalidate retained callable aliases. Test real post-uninstall requests; preserve failed whole-experiment classification while separately auditing partial captures."
   },
   "skill": "runtime-monkeypatch-delivery",
@@ -56,6 +61,14 @@
     "main_skill_repair_integrated": false
   },
   "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R25RETRY2_STATE_ROLLBACK_TERMINAL_20261012.md",
+      "sha256": "88015fb0d72e253d2ecea74934204a03b171d5f9c1965e6e86946e764cd1c6d7"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/r25retry2_state_audit.py",
+      "sha256": "0e1fc13b8ef489a7e8fdf0041a7bf05ff42521a86e5d235d244145d6e8bcaa51"
+    },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R24_PARTIAL_CAPTURE_AND_UNINSTALL_FAILURE_20261012.md",
       "sha256": "0db029a2ce6f61a72af21280f5ca4c280ea5b19c0caf0347c693cfb324608deb"
