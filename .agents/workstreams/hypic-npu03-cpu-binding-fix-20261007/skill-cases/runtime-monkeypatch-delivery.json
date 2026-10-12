@@ -1,5 +1,20 @@
 {
   "schema": "mst-real-task-skill-case/v1",
+  "diagnostic_observer_supplement_20261012": {
+    "scope": "diagnostic observer only, not the HYPIC technique delivery package",
+    "r24_decision": "FAILED_POST_UNINSTALL",
+    "r24_limited_capture_valid": true,
+    "r24_quality_or_causality_proven": false,
+    "r24_partial_audit_sha256": "aaf7f910e93eabb74222fad7aa27431a880cb697178c4c007627b28c8a986518",
+    "r25_decision": "ISOLATION_FAILED_BEFORE_HEALTH",
+    "r25_responses": 0,
+    "r25_captures": 0,
+    "r25_own_resources_released": true,
+    "r25_failure_audit_sha256": "b4472f4fd93a924c53bb89094fd1675b43a62a2b41a6d724edb323c82da61d2a",
+    "observer_fix_cpu_tests": 65,
+    "observer_fix_device_result": "not-tested; pending fresh-root retry",
+    "lesson": "Restoring a module attribute does not invalidate retained callable aliases. Test real post-uninstall requests; preserve failed whole-experiment classification while separately auditing partial captures."
+  },
   "skill": "runtime-monkeypatch-delivery",
   "campaign_code": "N",
   "long_term_acceptance": "partial-evidence",
@@ -41,6 +56,22 @@
     "main_skill_repair_integrated": false
   },
   "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R24_PARTIAL_CAPTURE_AND_UNINSTALL_FAILURE_20261012.md",
+      "sha256": "0db029a2ce6f61a72af21280f5ca4c280ea5b19c0caf0347c693cfb324608deb"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R25_PREHEALTH_ISOLATION_FAILURE_20261012.md",
+      "sha256": "7ff9a78d76ffcbe854eebf932d7308baec21ac91d69fc0110eb28187d8e8bc36"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/r24_partial_capture_audit.py",
+      "sha256": "242cc9938c6fbaf63c461a87b18684433914b60f896280c2973ffc4b7dc3f2b2"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/r25_isolation_failure_audit.py",
+      "sha256": "41e687a03a90b8f218f4f047baaf43b23bcc1d9ef927237469ad2cd9221e18c2"
+    },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/RUNTIME_MONKEYPATCH_DELIVERY_CASE_20261008.md",
       "sha256": "29ccf8d5076128c099c0025a04e83c08bd1637e41b5aa83e666269248c08f8ba"

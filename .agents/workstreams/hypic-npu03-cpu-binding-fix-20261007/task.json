@@ -4,8 +4,16 @@
   "objective": "Validate the HYPIC physical-NPU0-3 piercing and the main-branch Skill set with matched quality, performance, isolation, and per-Skill evidence; preserve CPU-binding-off repair findings.",
   "state": "r19_quality_rejected_r22_bounded_diagnostic_inconclusive_skill_mapping_pending",
   "execution_state": "in-progress",
+  "r25retry1_state_diagnostic": {
+    "state": "frozen-preflight-passed-not-started",
+    "preregistration_sha256": "0e15eee84de054027c8576e86f3bb1931d353d67b62001aa6b7299355acfa8ce",
+    "raw_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r25retry1-state-enabled",
+    "retry_reason": "r25 failed environmental isolation before health, zero responses/captures",
+    "same_treatment_source_workload_and_gates": true,
+    "next": "Fresh physical0-3/8223 admission then run r25retry1_state_diagnostic.py --mode enabled --run once; preserve r25."
+  },
   "r25_state_diagnostic": {
-    "state": "enabled-controller-running",
+    "state": "terminal-isolation-failed-before-health",
     "controller_operation": "exec-0000000000000d4c",
     "code_checkpoint": "ad5d1390",
     "preregistration_sha256": "800af21655f5e6d2f1ae9578b3748062607e8d1415e535916a87a2c2f4a9b009",
@@ -16,7 +24,17 @@
     "changed_premise": "retained-alias-safe observer-v2 through loader-v3; HYPIC source/image/workload unchanged",
     "device_run_started": true,
     "quality_or_performance_claim": false,
-    "next": "Poll exact exec-0000000000000d4c and immutable r25 root; no restart on observation timeout. After terminal run shared-py311 independent r25 audit."
+    "next": "Preserve r25 raw root. Only fresh-root same-protocol retry on actual idle physical0-3/8223; never modify foreign tasks.",
+    "controller_exit_code": 1,
+    "responses": 0,
+    "captures": 0,
+    "guard_samples": 24,
+    "foreign_npu": 1,
+    "foreign_pid": 586905,
+    "foreign_container_id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+    "resources_released": true,
+    "independent_failure_audit_sha256": "b4472f4fd93a924c53bb89094fd1675b43a62a2b41a6d724edb323c82da61d2a",
+    "report": "HYPIC_R25_PREHEALTH_ISOLATION_FAILURE_20261012.md"
   },
   "r24_state_diagnostic": {
     "state": "terminal-failed-post-uninstall-valid-partial-capture",
@@ -1323,5 +1341,5 @@
     "interpretation": "Both subset arms scored 54/96; sample 082 was correct and naturally stopped in both arms, but lacked candidate hot proof. First cross-arm token divergence positions 124/23/212 are comparable to within-arm variability; inconclusive, not causal and not a full-suite verdict.",
     "claim_boundary": "bounded output-numerics diagnostic only; prior waves absent; no r19 verdict change"
   },
-  "next_action": "Poll exact r25 controller exec-0000000000000d4c and immutable quality-context-41984-hotpath-cache10r25-state-enabled root; never restart on observation timeout. After terminal inspect and run shared-py311 r25_state_audit.py --mode enabled. Do not alter frozen files or r19/r22/r24 verdicts; only physical NPU0-3 allowed; authentication unchanged so no repeated remote push."
+  "next_action": "r25 terminal pre-health isolation failure audited and released; preserve its root. r25retry1 is frozen with only new attempt/root/request identity. Recheck direct ma route and actual physical0-3/8223 idle before launching it once; after terminal use independent retry auditor. No full quality rerun, no external task change."
 }

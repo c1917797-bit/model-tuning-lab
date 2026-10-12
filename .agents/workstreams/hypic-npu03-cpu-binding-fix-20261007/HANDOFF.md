@@ -1,5 +1,28 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-12 r25 retry1 frozen; no new treatment or ruler
+
+r25retry1_state_diagnostic.py and independent r25retry1_state_audit.py differ
+from r25 only in attempt/root/request identifiers. Same observer-v2/package-v3,
+HYPIC/image/sample/caps/gates; no baseline rerun. Frozen contract SHA256
+0e15eee84de054027c8576e86f3bb1931d353d67b62001aa6b7299355acfa8ce.
+No-device preflight exec0d60 passed. Admit once after fresh physical0-3/8223
+check, continuously guard, then independently audit. Never reuse r25 root.
+Runtime-delivery case now includes r24 partial/failure and r25 isolation
+evidence separately; provenance replay0d61 passed, still7 verified/22 partial.
+
+## 2026-10-12 r25 TERMINAL ISOLATION FAILED, zero responses
+
+exec0d4c ended exit1 before health: guard captured physicalNPU1 PID586905
+in cannbench_ds container efc5e45e8a54 at12:09:49 UTC. 24 probes, no probe
+errors; zero responses/captures. Exact own container/port/process release
+passed at12:10:53 UTC. Independent failure audit exec0d59 SHA256
+b4472f4fd93a924c53bb89094fd1675b43a62a2b41a6d724edb323c82da61d2a.
+See HYPIC_R25_PREHEALTH_ISOLATION_FAILURE_20261012.md. Observer fix has no
+new device outcome; this is not HYPIC failure. Keep old root immutable.
+Wait for actual idle0-3/8223; a retry needs a new root and continuous guard.
+Do not stop external work or use4-7; do not rerun any full quality wave.
+
 ## 2026-10-12 r25 enabled controller RUNNING
 
 Unique controller exec-0000000000000d4c is live; code checkpointad5d1390.
