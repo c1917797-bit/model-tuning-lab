@@ -1,5 +1,21 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-13 five phases audited; final HYPIC repeat3 running
+
+Baseline repeat3 controller02c5 exit0,released07:25:13UTC. Independent audit02d4:
+40 fixed1024 rows/42 IDs,176 clean guard samples,same4429e35 and exact release.
+Weighted TPOT74.7991ms,TTFT P95 89.4104s; final candidate not yet measured.
+See HYPIC_CURRENT_SOURCE_BASELINE_REPEAT3_AUDIT_20261013.md.
+Fresh ma/direct admission02d5 passed5 predecessors,source,new-root absence,
+physical0–3/8223 idle. Final phase controller exec-00000000000002d6 runs hypic-only/repeat3:
+/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-current4429-performance-20261013-hypic-only-repeat3.
+Poll exact handle/root; never restart while running/ambiguous. Terminal
+--arm hypic-only --phase repeat3 --action audit-phase; then --action audit-all
+once (exclusive aggregate file), and final paired report. No more NPU stages.
+Progress5/6 audited; deadline08:47:14UTC,quality rejection/no deployment unchanged.
+Automation hypic absent; active goal continuation in-session. No main/remote sync.
+
+
 ## 2026-10-13 offline question-level interpretation supplement
 
 Readonly raw replay02ca/02cd: r19 has127 distinct questions x3; 8 improved,
