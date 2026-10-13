@@ -1,13 +1,146 @@
 {
-  "operational_lifecycle_20261013": {"decision":"ISOLATION_FAILED_BEFORE_HEALTH","report":"OPERATIONAL_LIFECYCLE_TERMINAL_20261013.md","controller":"exec-00000000000000bf","independent_audit":"exec-00000000000000cb","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","operational_responses":0,"foreign_container":"cannbench_ds","foreign_npu":3,"foreign_pid":3713849,"exact_owned_release":true,"uninstalled_started":false,"lifecycle_pass":false,"overall_acceptance_changed":false,"old_quality_decision_changed":false,"automatic_retry":false},
-  "selective_main_template_repair_20261013": {"scope":"Existing main sitecustomize route only; no native HYPIC/NPU acceptance","report":"RUNTIME_SELECTIVE_INTEGRATION_20261013.md","candidate_tree":"401e86402860220029d268fc748c8e5af24b6442","fixture":"/cache/cch/mst-runtime-selective-kk_oc_zi","selected_files":5,"cpu_tests":9,"unchanged_target_paths":175,"execution":"exec-000000000000008c","separate_object_review":"exec-000000000000008e","main_changed":false,"full_skill_acceptance":false},
+  "operational_lifecycle_20261013": {
+    "decision": "ISOLATION_FAILED_BEFORE_HEALTH",
+    "report": "OPERATIONAL_LIFECYCLE_TERMINAL_20261013.md",
+    "controller": "exec-00000000000000bf",
+    "independent_audit": "exec-00000000000000cb",
+    "source_commit": "4429e35177979c874bf053ab29789e4773f39b22",
+    "operational_responses": 0,
+    "foreign_container": "cannbench_ds",
+    "foreign_npu": 3,
+    "foreign_pid": 3713849,
+    "exact_owned_release": true,
+    "uninstalled_started": false,
+    "lifecycle_pass": false,
+    "overall_acceptance_changed": false,
+    "old_quality_decision_changed": false,
+    "automatic_retry": false
+  },
+  "selective_main_template_repair_20261013": {
+    "scope": "Existing main sitecustomize route only; no native HYPIC/NPU acceptance",
+    "report": "RUNTIME_SELECTIVE_INTEGRATION_20261013.md",
+    "candidate_tree": "401e86402860220029d268fc748c8e5af24b6442",
+    "fixture": "/cache/cch/mst-runtime-selective-kk_oc_zi",
+    "selected_files": 5,
+    "cpu_tests": 9,
+    "unchanged_target_paths": 175,
+    "execution": "exec-000000000000008c",
+    "separate_object_review": "exec-000000000000008e",
+    "main_changed": false,
+    "full_skill_acceptance": false
+  },
   "schema": "mst-real-task-skill-case/v1",
-  "native_recovery_disabled_failure_20261012": {"report":"HYPIC_NATIVE_RECOVERY_DISABLED_FAILURE_20261012.md","decision":"FAILED_SEMANTIC_GUARD","controller":"exec-0000000000000165","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","requests_complete":3,"disabled_treatment_event_count":0,"enabled_disabled_predictions":["A","A"],"reference":"D","enabled_disabled_completion_tokens":[2048,2048],"enabled_disabled_finish_reasons":["length","length"],"clean_isolation_samples":100,"exact_owned_release":true,"one_switch_command_fingerprint_match":true,"paired_failure_audit_sha256":"b528aef3639ab8d3229e8f9f34fa890fcf8a73010db7a24a4fea0b9155045c7f","semantic_recovery_pass":false,"uninstalled_started":false,"old_quality_verdict_changed":false,"replay":"python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_recovery_failure_audit.py"},
-  "native_lifecycle_enabled_failure_20261012": {"decision":"FAILED_SEMANTIC_GUARD","report":"HYPIC_NATIVE_LIFECYCLE_ENABLED_FAILURE_20261012.md","controller":"exec-0000000000000141","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","requests_complete":3,"target_hot_workers":4,"reference":"D","prediction":"A","completion_tokens":2048,"finish_reason":"length","clean_isolation_samples":104,"exact_owned_release":true,"failure_audit_sha256":"94dd02e81529acedf25ace6979cc6b72a1e265505adf1ea2cf36afd29e7bf82a","canary_pass":false,"disabled_uninstalled_complete":false,"population_quality_or_performance_claim":false,"old_verdict_changed":false,"replay":"python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_lifecycle_failure_audit.py"},
-  "native_delivery_draft_20261012": {"report":"HYPIC_NATIVE_DELIVERY_DRAFT_20261012.md","bundle":"/cache/cch/hypic-npu03-cpu-binding-fix-20261007/native-delivery-package-20261012","manifest_sha256":"dbac56e41b40214eff24ed305af77e18b50799a36b20e023f381a8dd3af05691","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","unchanged_git_archive_files":71,"python_source_files":32,"static_package_valid":true,"launcher_cpu_test":"exec-000000000000010c","independent_replay":"exec-0000000000000112","runtime_case_replay":"exec-0000000000000116","status":"draft","historical_r19_packaged_retrospectively":false,"live_import_proven":false,"enabled_real_request_control_complete":false,"npu_rollback_complete":false,"package_promotion_ready":false,"npu_launch_scheduled":false},
-  "native_cpu_lifecycle_20261012": {"report":"HYPIC_NATIVE_CPU_LIFECYCLE_20261012.md","image_probe":"exec-00000000000000f2","native_cpu_lifecycle":"exec-00000000000000f7","read_only_receipt_replay":"exec-00000000000000fc","image_version_metadata_available":true,"actual_native_install_and_disabled_dispatch":true,"fresh_interpreter_uninstall":true,"source_changed":false,"enabled_hook_tested":false,"real_request_tested":false,"npu_rollback_tested":false,"full_hypic_manifest_validated":false,"overall_skill_acceptance":"partial-evidence","npu_launch_scheduled":false},
-  "native_profile_regression_20261012": {"state":"implemented-branch-static-only","report":"NATIVE_PLUGIN_PROFILE_REGRESSION_20261012.md","negative_before_fix":"exec-00000000000000d7","cpu_tests_passed":21,"legacy_tests":9,"native_tests":12,"actual_hypic_source_helper_check":"exec-00000000000000da","actual_source_files":32,"full_hypic_manifest_validated":false,"device_activation_proven_by_static_profile":false,"npu_rerun":false},
-  "native_plugin_delivery_reuse_20261012": {"report":"HYPIC_NATIVE_PLUGIN_DELIVERY_REUSE_20261012.md","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","entrypoint":"hypic_vllm_ascend:register","loader_kind":"vllm.general_plugins","python_files":32,"python_tree_sha256":"a5ebed77cc4ae0035e2634b81dc0606d8e37cc9d32f8894b984325bec1056692","both_r19_longbench_attestations_match":true,"cpu_dispatch_probe":"exec-00000000000000cd","bootstrap_mocked":true,"native_manifest_profile_implemented":false,"new_device_acceptance":false,"required_next_route":"Retain the existing native hook and switch; do not convert tested source to a new sitecustomize implementation merely to fit the generic validator."},
+  "native_recovery_disabled_failure_20261012": {
+    "report": "HYPIC_NATIVE_RECOVERY_DISABLED_FAILURE_20261012.md",
+    "decision": "FAILED_SEMANTIC_GUARD",
+    "controller": "exec-0000000000000165",
+    "source_commit": "4429e35177979c874bf053ab29789e4773f39b22",
+    "requests_complete": 3,
+    "disabled_treatment_event_count": 0,
+    "enabled_disabled_predictions": [
+      "A",
+      "A"
+    ],
+    "reference": "D",
+    "enabled_disabled_completion_tokens": [
+      2048,
+      2048
+    ],
+    "enabled_disabled_finish_reasons": [
+      "length",
+      "length"
+    ],
+    "clean_isolation_samples": 100,
+    "exact_owned_release": true,
+    "one_switch_command_fingerprint_match": true,
+    "paired_failure_audit_sha256": "b528aef3639ab8d3229e8f9f34fa890fcf8a73010db7a24a4fea0b9155045c7f",
+    "semantic_recovery_pass": false,
+    "uninstalled_started": false,
+    "old_quality_verdict_changed": false,
+    "replay": "python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_recovery_failure_audit.py"
+  },
+  "native_lifecycle_enabled_failure_20261012": {
+    "decision": "FAILED_SEMANTIC_GUARD",
+    "report": "HYPIC_NATIVE_LIFECYCLE_ENABLED_FAILURE_20261012.md",
+    "controller": "exec-0000000000000141",
+    "source_commit": "4429e35177979c874bf053ab29789e4773f39b22",
+    "requests_complete": 3,
+    "target_hot_workers": 4,
+    "reference": "D",
+    "prediction": "A",
+    "completion_tokens": 2048,
+    "finish_reason": "length",
+    "clean_isolation_samples": 104,
+    "exact_owned_release": true,
+    "failure_audit_sha256": "94dd02e81529acedf25ace6979cc6b72a1e265505adf1ea2cf36afd29e7bf82a",
+    "canary_pass": false,
+    "disabled_uninstalled_complete": false,
+    "population_quality_or_performance_claim": false,
+    "old_verdict_changed": false,
+    "replay": "python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_lifecycle_failure_audit.py"
+  },
+  "native_delivery_draft_20261012": {
+    "report": "HYPIC_NATIVE_DELIVERY_DRAFT_20261012.md",
+    "bundle": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/native-delivery-package-20261012",
+    "manifest_sha256": "dbac56e41b40214eff24ed305af77e18b50799a36b20e023f381a8dd3af05691",
+    "source_commit": "4429e35177979c874bf053ab29789e4773f39b22",
+    "unchanged_git_archive_files": 71,
+    "python_source_files": 32,
+    "static_package_valid": true,
+    "launcher_cpu_test": "exec-000000000000010c",
+    "independent_replay": "exec-0000000000000112",
+    "runtime_case_replay": "exec-0000000000000116",
+    "status": "draft",
+    "historical_r19_packaged_retrospectively": false,
+    "live_import_proven": false,
+    "enabled_real_request_control_complete": false,
+    "npu_rollback_complete": false,
+    "package_promotion_ready": false,
+    "npu_launch_scheduled": false
+  },
+  "native_cpu_lifecycle_20261012": {
+    "report": "HYPIC_NATIVE_CPU_LIFECYCLE_20261012.md",
+    "image_probe": "exec-00000000000000f2",
+    "native_cpu_lifecycle": "exec-00000000000000f7",
+    "read_only_receipt_replay": "exec-00000000000000fc",
+    "image_version_metadata_available": true,
+    "actual_native_install_and_disabled_dispatch": true,
+    "fresh_interpreter_uninstall": true,
+    "source_changed": false,
+    "enabled_hook_tested": false,
+    "real_request_tested": false,
+    "npu_rollback_tested": false,
+    "full_hypic_manifest_validated": false,
+    "overall_skill_acceptance": "partial-evidence",
+    "npu_launch_scheduled": false
+  },
+  "native_profile_regression_20261012": {
+    "state": "implemented-branch-static-only",
+    "report": "NATIVE_PLUGIN_PROFILE_REGRESSION_20261012.md",
+    "negative_before_fix": "exec-00000000000000d7",
+    "cpu_tests_passed": 21,
+    "legacy_tests": 9,
+    "native_tests": 12,
+    "actual_hypic_source_helper_check": "exec-00000000000000da",
+    "actual_source_files": 32,
+    "full_hypic_manifest_validated": false,
+    "device_activation_proven_by_static_profile": false,
+    "npu_rerun": false
+  },
+  "native_plugin_delivery_reuse_20261012": {
+    "report": "HYPIC_NATIVE_PLUGIN_DELIVERY_REUSE_20261012.md",
+    "source_commit": "4429e35177979c874bf053ab29789e4773f39b22",
+    "entrypoint": "hypic_vllm_ascend:register",
+    "loader_kind": "vllm.general_plugins",
+    "python_files": 32,
+    "python_tree_sha256": "a5ebed77cc4ae0035e2634b81dc0606d8e37cc9d32f8894b984325bec1056692",
+    "both_r19_longbench_attestations_match": true,
+    "cpu_dispatch_probe": "exec-00000000000000cd",
+    "bootstrap_mocked": true,
+    "native_manifest_profile_implemented": false,
+    "new_device_acceptance": false,
+    "required_next_route": "Retain the existing native hook and switch; do not convert tested source to a new sitecustomize implementation merely to fit the generic validator."
+  },
   "diagnostic_observer_supplement_20261012": {
     "scope": "diagnostic observer only, not the HYPIC technique delivery package",
     "r24_decision": "FAILED_POST_UNINSTALL",
@@ -38,7 +171,7 @@
   "tested_skill_git_blob_oid": "5ac9f8b07d8e092dcba7e1b0cfd5423469534666",
   "tested_reference_git_blob_oid": "302cf8cde20e7fda93b2972bbf1e5bab9fd81dde",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
-  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "reviewed_current_main_commit": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "current_skill_and_registry_blobs_unchanged": true,
   "environment_scope": "chicaihong01/ma, Qwen3.6-27B BF16 TP4, physical NPU0-3; r12 19-prompt c8 2048-token stress and r13 same-identity 127x3 max2048 quality plus separate six-phase fixed-1024 performance, clean read-only plugin c12060c against pinned official image; branch-only static validator repair, no MANIFEST package",
   "observed": {
@@ -78,32 +211,110 @@
     "main_skill_repair_integrated": false
   },
   "evidence": [
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/OPERATIONAL_LIFECYCLE_TERMINAL_20261013.md","sha256":"366ad13d148d6f6ec9444132c5c11f4838342a8e6ba02595e2f13c3f1ca4c751"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/OPERATIONAL_LIFECYCLE_RECEIPTS_20261013.json","sha256":"f14d44abb262bc94e787db996bc347121fa8d903f3c4c96bbc10a693eec0e4fa"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/operational_lifecycle_failure_20261013.py","sha256":"741214dbf5c985f24b5648f5fe970402f9c1a0e5a41f39d7f314cf34effa23d9"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_operational_lifecycle_failure_20261013.py","sha256":"1c837082688ae2b4ddb32a7a168791ae1859d3cc1831c892495349c4babfc132"},
-{"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/RUNTIME_SELECTIVE_INTEGRATION_20261013.md","sha256":"ea5aece61a8411e3cf7e4eb6e34b77621fe0b697baa481994cf4f3dfcb7efdba"},
-{"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/RUNTIME_SELECTIVE_INTEGRATION_RECEIPTS_20261013.json","sha256":"1e1b1c5880bcbbf65ffd29fb133308b0841dc8f40aa6dfcfb32807141c5de48e"},
-{"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/integration/runtime-template/repair.diff.json","sha256":"d8dd42d35315e34f030998638b6c457ad3e1851b812b355e9e4a020181181130"},
-{"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/integration/runtime-template/result.json","sha256":"60e0c8d7da86f7516f08ed9e20d47baa45283b489192502b9da30b0cd8cc341a"},
-{"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/RUNTIME_SELECTIVE_INTEGRATION_PLAN_20261013.json","sha256":"e35853cba9248948a8a70c87adb07c5967f449287fd8c4828d39b6526a0ed147"},
-{"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_runtime_selective_integration.py","sha256":"baf8678c2c3adb26f5ff7b32d97efa817c983ae7b894b7eb981dab667e85e623"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_RECOVERY_DISABLED_FAILURE_20261012.md","sha256":"a6010dafaa39c6bcb03ace6d8f7b2e5e9d37230f7c6ef2991d4fa414670bb334"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_recovery_failure_audit.py","sha256":"f7df4121617b68c3926863d0227726067e77fb422f2e4d69e777b51053be3598"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_lifecycle_failure_audit.py","sha256":"05c7314e035e5905a33f1b18c8fb8e0dfc5221cf842db6f2a94e2ff316e19924"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_LIFECYCLE_ENABLED_FAILURE_20261012.md","sha256":"b512b1594a1864c681589d86fcb61e511d6643ae69626b4315e48b512dc22a49"},
-    {"path":".agents/experiments/exp-20261012-hypic-native-lifecycle.yaml","sha256":"bd8acd2913bbb979e5b3311f626d2afa790ea584481cc4fd8f886e152e3f1881"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_DELIVERY_DRAFT_20261012.md","sha256":"6a94504acace2c85c7024ba4ed5fae68ec416c8d1124a41a03c115f150690d61"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hypic-native-delivery/MANIFEST.json","sha256":"dbac56e41b40214eff24ed305af77e18b50799a36b20e023f381a8dd3af05691"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hypic-native-delivery/run_with_native_plugin.sh","sha256":"761d56373829b2195a7ce5dff9d435945cd2593121e317dc52d2cdfa51b385dc"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/probe_native_hypic_launcher.py","sha256":"182936f65ba19ff4432d0d809da9a39a461ddee67a26bac8ab9fba0fa9c54ddf"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_native_hypic_package.py","sha256":"fecc69ce5c80bda2e6417ddb10a80ce7dd21d2c1aca4fcd94b8a756de329eb84"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_CPU_LIFECYCLE_20261012.md","sha256":"fcd945a9f397069e26dccf1aa35523cde946d7f9df2b232e390b80cb8a665325"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/probe_native_hypic_cpu_lifecycle.py","sha256":"16fd5ba69df7b4d002b5c2f163d81a07ddb187fa7d5d25e2a88812d42f28e8b1"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/NATIVE_PLUGIN_PROFILE_REGRESSION_20261012.md","sha256":"e168ac6d6b07727a13c5047ee7ab9a1f8d6d84ee41f2b26bc61717e6d5a9b892"},
-    {"path":"tests/test_validate_native_plugin_package.py","sha256":"e1794a715c400fd63f1f5371440afb01be7351acefdedb0d86e3d88e58f371d5"},
-    {"path":".agents/skills/runtime-monkeypatch-delivery/SKILL.md","sha256":"8ca0229ba43de0d3a18f7e2129e098acd21c2e362d2a28bf6f5e058f55cea3c1"},
-    {"path":".agents/skills/runtime-monkeypatch-delivery/references/delivery-contract.md","sha256":"1768256bb279f419df6d2ae35c58f69e61e9688082a101535bbb84f381752d17"},
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/OPERATIONAL_LIFECYCLE_TERMINAL_20261013.md",
+      "sha256": "366ad13d148d6f6ec9444132c5c11f4838342a8e6ba02595e2f13c3f1ca4c751"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/OPERATIONAL_LIFECYCLE_RECEIPTS_20261013.json",
+      "sha256": "f14d44abb262bc94e787db996bc347121fa8d903f3c4c96bbc10a693eec0e4fa"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/operational_lifecycle_failure_20261013.py",
+      "sha256": "741214dbf5c985f24b5648f5fe970402f9c1a0e5a41f39d7f314cf34effa23d9"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_operational_lifecycle_failure_20261013.py",
+      "sha256": "1c837082688ae2b4ddb32a7a168791ae1859d3cc1831c892495349c4babfc132"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/RUNTIME_SELECTIVE_INTEGRATION_20261013.md",
+      "sha256": "ea5aece61a8411e3cf7e4eb6e34b77621fe0b697baa481994cf4f3dfcb7efdba"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/RUNTIME_SELECTIVE_INTEGRATION_RECEIPTS_20261013.json",
+      "sha256": "1e1b1c5880bcbbf65ffd29fb133308b0841dc8f40aa6dfcfb32807141c5de48e"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/integration/runtime-template/repair.diff.json",
+      "sha256": "d8dd42d35315e34f030998638b6c457ad3e1851b812b355e9e4a020181181130"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/integration/runtime-template/result.json",
+      "sha256": "60e0c8d7da86f7516f08ed9e20d47baa45283b489192502b9da30b0cd8cc341a"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/RUNTIME_SELECTIVE_INTEGRATION_PLAN_20261013.json",
+      "sha256": "e35853cba9248948a8a70c87adb07c5967f449287fd8c4828d39b6526a0ed147"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_runtime_selective_integration.py",
+      "sha256": "baf8678c2c3adb26f5ff7b32d97efa817c983ae7b894b7eb981dab667e85e623"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_RECOVERY_DISABLED_FAILURE_20261012.md",
+      "sha256": "a6010dafaa39c6bcb03ace6d8f7b2e5e9d37230f7c6ef2991d4fa414670bb334"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_recovery_failure_audit.py",
+      "sha256": "f7df4121617b68c3926863d0227726067e77fb422f2e4d69e777b51053be3598"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_lifecycle_failure_audit.py",
+      "sha256": "05c7314e035e5905a33f1b18c8fb8e0dfc5221cf842db6f2a94e2ff316e19924"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_LIFECYCLE_ENABLED_FAILURE_20261012.md",
+      "sha256": "b512b1594a1864c681589d86fcb61e511d6643ae69626b4315e48b512dc22a49"
+    },
+    {
+      "path": ".agents/experiments/exp-20261012-hypic-native-lifecycle.yaml",
+      "sha256": "bd8acd2913bbb979e5b3311f626d2afa790ea584481cc4fd8f886e152e3f1881"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_DELIVERY_DRAFT_20261012.md",
+      "sha256": "6a94504acace2c85c7024ba4ed5fae68ec416c8d1124a41a03c115f150690d61"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hypic-native-delivery/MANIFEST.json",
+      "sha256": "dbac56e41b40214eff24ed305af77e18b50799a36b20e023f381a8dd3af05691"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/hypic-native-delivery/run_with_native_plugin.sh",
+      "sha256": "761d56373829b2195a7ce5dff9d435945cd2593121e317dc52d2cdfa51b385dc"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/probe_native_hypic_launcher.py",
+      "sha256": "182936f65ba19ff4432d0d809da9a39a461ddee67a26bac8ab9fba0fa9c54ddf"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_native_hypic_package.py",
+      "sha256": "fecc69ce5c80bda2e6417ddb10a80ce7dd21d2c1aca4fcd94b8a756de329eb84"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_CPU_LIFECYCLE_20261012.md",
+      "sha256": "fcd945a9f397069e26dccf1aa35523cde946d7f9df2b232e390b80cb8a665325"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/probe_native_hypic_cpu_lifecycle.py",
+      "sha256": "16fd5ba69df7b4d002b5c2f163d81a07ddb187fa7d5d25e2a88812d42f28e8b1"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/NATIVE_PLUGIN_PROFILE_REGRESSION_20261012.md",
+      "sha256": "e168ac6d6b07727a13c5047ee7ab9a1f8d6d84ee41f2b26bc61717e6d5a9b892"
+    },
+    {
+      "path": "tests/test_validate_native_plugin_package.py",
+      "sha256": "e1794a715c400fd63f1f5371440afb01be7351acefdedb0d86e3d88e58f371d5"
+    },
+    {
+      "path": ".agents/skills/runtime-monkeypatch-delivery/SKILL.md",
+      "sha256": "8ca0229ba43de0d3a18f7e2129e098acd21c2e362d2a28bf6f5e058f55cea3c1"
+    },
+    {
+      "path": ".agents/skills/runtime-monkeypatch-delivery/references/delivery-contract.md",
+      "sha256": "1768256bb279f419df6d2ae35c58f69e61e9688082a101535bbb84f381752d17"
+    },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_PLUGIN_DELIVERY_REUSE_20261012.md",
       "sha256": "861d0a18025e402afcc492602cc652c216693d87ddb2f918e918901d4e61e14e"
@@ -179,6 +390,18 @@
     {
       "path": ".agents/skills/runtime-monkeypatch-delivery/assets/template/MANIFEST.json",
       "sha256": "df1414e73aea583a5cf1e863e07e560af9f5e0ce813b3958bcdfa7c92c77259c"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/MAIN_REPAIR_REPLAY_RECEIPT_20261013.json",
+      "sha256": "19233286f6095cef21051da183e442babb49d427060a904d90e1d40fd8ffba38"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_integrated_main_repairs.py",
+      "sha256": "b57d867f278a7c138b32632e23b6b73adba4636f6a5506022cad48bf526b2978"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_integrated_main_repairs.py",
+      "sha256": "b1815e0207d6aef307e9a58e33190971b855e644ac3c22e76b2a6abcfc8217cb"
     }
   ],
   "external_raw_receipts": {
@@ -189,7 +412,7 @@
     "r12_service_stop_sha256": "fc3682c4e0a1c766827e5c486b3a317b67055d7690dd8b3f5533c8ce3b6cee57"
   },
   "replayable_regression_recorded": true,
-  "boundary": "The exact main Skill's named validator path is absent and its template wrapper forces activation; the branch repair passes only static identity and CPU same-wrapper switch tests. r12 had 52/57 request-level four-worker proofs and no live control. Later r13 independently proved actual clean plugin source/import, a same-identity disabled/enabled 127x3 quality pair, and six matched performance phases with 120/120 candidate hot proof. The unpacked implementation was fast but quality regressed 230/381 to 219/381 and strict quality hot coverage missed 13/381. It was never a hash-bound MANIFEST package using the template wrapper; disable-uninstall-restart rollback and A/B/C attribution are unproven. No delivery or paper acceptance follows, and the branch repair is not main-integrated.",
+  "boundary": "The exact main Skill's named validator path is absent and its template wrapper forces activation; the branch repair passes only static identity and CPU same-wrapper switch tests. r12 had 52/57 request-level four-worker proofs and no live control. Later r13 independently proved actual clean plugin source/import, a same-identity disabled/enabled 127x3 quality pair, and six matched performance phases with 120/120 candidate hot proof. The unpacked implementation was fast but quality regressed 230/381 to 219/381 and strict quality hot coverage missed 13/381. It was never a hash-bound MANIFEST package using the template wrapper; disable-uninstall-restart rollback and A/B/C attribution are unproven. No delivery or paper acceptance follows, and the branch repair is not main-integrated. Main23ec33d7 now integrates the generic template/validator repair; nine CPU tests and two direct-CLI controls pass in a fresh main clone. This does not repair or promote the native HYPIC package and does not close its real-service lifecycle gap.",
   "next_gate": "Do not rerun terminal HYPIC suites or substitute observer delivery for the technique. The exact-main Skill permits a valid rejected/failed terminal outcome; algorithm quality repair is not a universal prerequisite for Skill validation. Real technique-package gaps remain: source/manifest identity, same-wrapper per-process disabled/enabled evidence, and executed disable/uninstall/restart rollback. Any prospective device acceptance must retain the quality-first restriction or an explicit user-approved alternative and use only actually idle physical NPU0-3 with continuous isolation. No retrospective package can create past runtime evidence. Keep promotion false and main integration pending working Git authentication.",
   "drift_trigger": "Revalidate after main Skill/reference/registry, package schema or bytes, plugin source/test commit, image/model/physical lane, dataset/evaluator, raw r12 artifact, or any delivery acceptance rule changes.",
   "worker_startup_regression_20261012": {
@@ -203,5 +426,24 @@
     "existing_device_evidence_replay": "exec-00000000000000bf",
     "npu_rerun": false,
     "overall_acceptance_changed": false
+  },
+  "main_review_20261013": {
+    "previous_main": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+    "current_main": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+    "scope": "Review of integrated diff and exact Skill/registry identities; historical device outcomes unchanged",
+    "entrypoint_changed": false,
+    "runtime_assets_changed": true,
+    "new_device_work": false
+  },
+  "main_template_repair_20261013": {
+    "main_commit": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+    "integrated": true,
+    "cpu_tests_passed": 9,
+    "direct_cli_controls": 2,
+    "worker_failure_exit": 78,
+    "default_disabled": true,
+    "full_skill_acceptance": false,
+    "device_lifecycle_verified": false,
+    "independent_replay_operation": "exec-0000000000000117"
   }
 }

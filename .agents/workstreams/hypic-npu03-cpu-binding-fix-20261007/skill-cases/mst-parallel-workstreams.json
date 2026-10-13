@@ -1,4 +1,5 @@
 {
+  "main_review_20261013": {"previous_main":"ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2","current_main":"23ec33d7d692bb77d17fb5b81aabacf57adad5c7","scope":"Review of integrated diff and exact Skill/registry identities; historical device outcomes unchanged","entrypoint_changed":false,"runtime_assets_changed":false,"new_device_work":false},
   "schema": "mst-real-task-skill-case/v1",
   "skill": "mst-parallel-workstreams",
   "campaign_code": "V",
@@ -9,7 +10,7 @@
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "c47b989bc006561d347e0fbfe5d59026fb8e91e0",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
-  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "reviewed_current_main_commit": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "current_skill_and_registry_blobs_unchanged": true,
   "environment_scope": "chicaihong01 CPU-only retained Git lifecycle fixture; actual Git transport to a local bare remote; real model-tuning-lab primary/upstream and NPU resources untouched",
   "observed": {
@@ -34,7 +35,7 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_handoff_current.py",
-      "sha256": "9ba3902347050e457ec93b7c38e18012467fc5c75f0caa37f2fdba0317fa5868"
+      "sha256": "58f29739af9f1aa83c2243a84100216855a7abb796a781453519e44fb646ad7e"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY19_PREREGISTRATION_20261009.md",

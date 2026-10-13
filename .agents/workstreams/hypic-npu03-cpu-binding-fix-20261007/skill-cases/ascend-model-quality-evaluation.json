@@ -1,4 +1,5 @@
 {
+  "main_review_20261013": {"previous_main":"ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2","current_main":"23ec33d7d692bb77d17fb5b81aabacf57adad5c7","scope":"Review of integrated diff and exact Skill/registry identities; historical device outcomes unchanged","entrypoint_changed":false,"runtime_assets_changed":false,"new_device_work":false},
   "schema": "mst-real-task-skill-case/v1",
   "current_campaign_resume": {"campaign":"current4429-performance-20261013","aggregate_sha256":"67ba6cf14fc9bed993acbdf421eb438f22d56957f3e56baad170a4bb871e53fe","next_action_kind":"offline-evidence-review","new_device_work_authorized":false,"historical_observations_unchanged":true,"regression":"verify_completed_campaign_routes.py"},
   "skill": "ascend-model-quality-evaluation",
@@ -12,7 +13,7 @@
   "tested_skill_git_blob_oid": "303658f0a652ed392c875e58941c6b1d246552f7",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
   "tested_reference_git_blob_oid": "a3d5ca9a98883ce651fc275f404a524b126f07c7",
-  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "reviewed_current_main_commit": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "current_skill_and_registry_blobs_unchanged": true,
   "environment_scope": "chicaihong01/ma; r9-r12 immutable activation failures, r13/r16 c8 LongBench pairs, repaired-source r19 c32 LongBench 127x3 in-path pair, and r19 c32 GSM8K 1319x3 off-path pair; Qwen3.6-27B BF16 TP4 physical NPU0-3, natural-EOS max-2048. Both r19 pairs are terminal and independently audited; in-path LongBench is rejected, off-path GSM8K safety passes, and no full Skill acceptance follows.",
   "observed": {

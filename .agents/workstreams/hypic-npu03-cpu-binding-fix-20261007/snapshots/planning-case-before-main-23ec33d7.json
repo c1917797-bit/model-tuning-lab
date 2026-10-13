@@ -1,0 +1,113 @@
+{
+  "schema": "mst-real-task-skill-case/v1",
+  "skill": "mst-practice-iteration-planning",
+  "campaign_code": "P",
+  "long_term_acceptance": "partial-evidence",
+  "behavioral_evidence_verified": true,
+  "task": "Use current-main practice-iteration guidance to make a verifiable HYPIC NPU0-3 quality-preflight stage plan and test the plan against the repository validator",
+  "executed_at_utc": "2026-10-08",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "tested_skill_git_blob_oid": "171e1f401b18dc6aaa4d38a2c3b6b260fca46123",
+  "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
+  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "current_skill_and_registry_blobs_unchanged": true,
+  "environment_scope": "chicaihong01 named worktree, CPU-only repository planning and validation; no new NPU experiment",
+  "observed": {
+    "main_example_schema": "practice-iteration/v1",
+    "validator_required_schema": "mst-practice-iteration/v1",
+    "main_example_missing_validated_commit": true,
+    "first_validator_exit": 1,
+    "first_validator_error": "missing practice iteration schema",
+    "branch_repair_commit": "4a95c87b8bf6a59557ad0e45c42e7b0616593caa",
+    "repaired_validator_exit": 0,
+    "plan_status": "in_progress",
+    "future_iterations_with_pass_criteria": 2,
+    "quality_pair_complete": false,
+    "main_skill_integrated": false,
+    "completed_lifecycle_review_20261013": {
+      "task": "Exact-main onboarding after stopping further HYPIC quality work",
+      "plan_commit": "d7b1738495f53ebac59bad3f2e0969eebf036284",
+      "executed_evidence_commit": "f98bcc675882091138491eb557b14976642437e0",
+      "publication_commit": "c142c93f3849d9de4a4620ebdacfae572259193e",
+      "repair_commit": "63354d357f2309302975fbe40d0d67d182009330",
+      "historical_stale_declared_file_rejected": true,
+      "corrected_files_matched": 4,
+      "focused_tests_passed": 7,
+      "execution": "chicaihong01/mc exec-0000000000000051 exit0",
+      "main_integrated": false,
+      "new_npu_work": false
+    }
+  },
+  "evidence": [
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PRACTICE_ITERATION_SCHEMA_ACCEPTANCE_20261008.md",
+      "sha256": "f267a9dca346ffa6d770d328d19c30e78ed9c244230fb7ece6269ce2f708f11a"
+    },
+    {
+      "path": ".agents/evals/practice-iterations/hypic-npu03-quality-preflight-20261008.yaml",
+      "sha256": "ea78b10f9703ef3ab3fd454224d56f9bf195de17b378150a4038ac856338a827"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_practice_iteration_case.py",
+      "sha256": "1f39d3af38f7ab5e36d6cc9b6c741491c009c6ab66f9a089d429a1c3404e7502"
+    },
+    {
+      "path": ".agents/skills/mst-practice-iteration-planning/SKILL.md",
+      "sha256": "cfce04ecad0310a2d291f57ffd8453b121671c75ee29c662d0a93f0c759dbcfd"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_completed_iteration.py",
+      "sha256": "3143376f4a486ac44fe75ffebb4906c2f34e4610a029c97e1521bb8162393e6e"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_completed_iteration.py",
+      "sha256": "dff3185e438598e0aaa886ccd6f044ab2d3e141d5405d27935d236c9a2e05273"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/COMPLETED_ITERATION_REVIEW_20261013.md",
+      "sha256": "cc1f36379aec108fca6b63b87e8dcc99049072baa2c924d02795b1124c23f39a"
+    },
+    {
+      "path": ".agents/evals/practice-iterations/hypic-remaining-skills-onboarding-20261013.yaml",
+      "sha256": "5c8185c5fd03a71bf1e5100e66cfbb86d68326f443dfbfed27bb5e79f64dc029"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/integration/planning-schema/manifest.json",
+      "sha256": "cbdc9fbea22767c8c7ee5dd3e0c6b0655439581f778e1782f531659f31f6b8b5"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/integration/planning-schema/planning-schema.diff.json",
+      "sha256": "179192a36815c41be977b097d23e2c2f4a2284660431c196281ff341e79b96c4"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/preflight_planning_integration.py",
+      "sha256": "6bb6264b3f4fc5adaa28aa25d967547c3e08261c8cccb5cd01057451d7e57572"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_planning_integration.py",
+      "sha256": "6cc6be79a78c048e91202ab5ed38acdead2d2c6d9c4b91eb593c9b12bf724631"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PLANNING_SELECTIVE_INTEGRATION_20261013.md",
+      "sha256": "cd5267ec669636ba323e3e89f4868ff31827a3ad4ebd5f2ce4416f334f4367fa"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PLANNING_INTEGRATION_PREFLIGHT_RECEIPT_20261013.json",
+      "sha256": "6f430abf621f8540579e0043c720fb1fc04588658bd5d29da532c443d7ce840d"
+    }
+  ],
+  "replayable_regression_recorded": true,
+  "boundary": "Current main Skill's exact output example fails the current repository validator, so main long-term acceptance is partial. The named branch repair passes on a real HYPIC stage plan, but it has not been integrated and replayed from a fresh main clone. This case does not establish an uninterrupted NPU window or HYPIC quality/performance. The 2026-10-13 supplement validates the branch's completed-plan lifecycle and rejects stale checkpoint/file association; main acceptance remains partial, independently of HYPIC quality.",
+  "drift_trigger": "Revalidate after the practice-iteration Skill or validate-mst.sh schema changes, main integration, or a change to the HYPIC stage ruler.",
+  "selective_integration_preflight_20261013": {
+    "candidate": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/integration/planning-schema/manifest.json",
+    "controls_passed": 7,
+    "operation": "chicaihong01/mc exec-000000000000007a exit0",
+    "exact_allowlisted_paths": 1,
+    "pinned_target": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+    "read_only_apply_check": true,
+    "main_changed": false,
+    "remote_authenticated": false,
+    "integration_ready": false
+  }
+}

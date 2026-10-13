@@ -1,0 +1,26 @@
+{
+  "schema": "mst-main-repair-replay/v1",
+  "main_commit": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+  "target_parent": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "source_commit": "06365feb165898a86305296dc007b40ec4e09461",
+  "fresh_clone_kind": "local-no-hardlinks-clone-of-published-main",
+  "fresh_clone": {
+    "peer": "lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d",
+    "route": "peer_direct",
+    "id": "exec-0000000000000106",
+    "state": "completed",
+    "exitCode": 0,
+    "stdout": "FRESH_CLONE=/cache/cch/mst-main-repair-replay-wctz16xx/clone\n{\"command\": [\"python3\", \"-B\", \".agents/workstreams/skill-repairs-20261013/validate_selected_repairs.py\"], \"exit\": 0, \"out\": \"{\\\"all_skill_acceptance\\\": false, \\\"changed_paths\\\": 17, \\\"device_acceptance\\\": false, \\\"direct_cli_controls\\\": 2, \\\"planning_controls\\\": 3, \\\"registry_entries\\\": 29, \\\"selected_repair_files\\\": 6}\\n\", \"err\": \"\"}\n{\"command\": [\"/cache/cch/python-envs/model-tuning-lab-py311/bin/python\", \"-B\", \"-m\", \"unittest\", \"discover\", \"-s\", \"tests\", \"-p\", \"test_validate_monkeypatch_package.py\"], \"exit\": 0, \"out\": \"\", \"err\": \".........\\n----------------------------------------------------------------------\\nRan 9 tests in 0.779s\\n\\nOK\\n\"}\n{\"command\": [\"bash\", \"scripts/validate-mst.sh\"], \"exit\": 0, \"out\": \"PASS: Maintainer Skill Tree structure is valid (29 skills)\\n\", \"err\": \"\"}\nFRESH_MAIN_REPLAY_PASS=23ec33d7d692bb77d17fb5b81aabacf57adad5c7\n",
+    "stderr": ""
+  },
+  "integration": {
+    "peer": "lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d",
+    "route": "peer_direct",
+    "id": "exec-0000000000000104",
+    "state": "completed",
+    "exitCode": 0,
+    "stdout": "{\"command\": [\"git\", \"merge-base\", \"--is-ancestor\", \"c03604ad184a154c90757ef805445b997ddbad92\", \"origin/work/hypic-npu03-cpu-binding-fix-20261007\"], \"exit\": 0, \"out\": \"\", \"err\": \"\"}\n{\"command\": [\"git\", \"add\", \"--\", \".agents/workstreams/skill-repairs-20261013/task.json\", \".agents/workstreams/skill-repairs-20261013/integration-evidence.json\", \".agents/workstreams/skill-repairs-20261013/HANDOFF.md\", \".agents/workstreams/skill-repairs-20261013/knowledge-proposals.json\", \".agents/HANDOFF.md\"], \"exit\": 0, \"out\": \"\", \"err\": \"\"}\n{\"command\": [\"python3\", \"-B\", \".agents/workstreams/skill-repairs-20261013/validate_selected_repairs.py\"], \"exit\": 0, \"out\": \"{\\\"all_skill_acceptance\\\": false, \\\"changed_paths\\\": 17, \\\"device_acceptance\\\": false, \\\"direct_cli_controls\\\": 2, \\\"planning_controls\\\": 3, \\\"registry_entries\\\": 29, \\\"selected_repair_files\\\": 6}\\n\", \"err\": \"\"}\n{\"command\": [\"/cache/cch/python-envs/model-tuning-lab-py311/bin/python\", \"-B\", \"-m\", \"unittest\", \"discover\", \"-s\", \"tests\", \"-p\", \"test_validate_monkeypatch_package.py\"], \"exit\": 0, \"out\": \"\", \"err\": \".........\\n----------------------------------------------------------------------\\nRan 9 tests in 0.671s\\n\\nOK\\n\"}\n{\"command\": [\"bash\", \"scripts/validate-mst.sh\"], \"exit\": 0, \"out\": \"PASS: Maintainer Skill Tree structure is valid (29 skills)\\n\", \"err\": \"\"}\n{\"command\": [\"git\", \"diff\", \"--cached\", \"--check\"], \"exit\": 0, \"out\": \"\", \"err\": \"\"}\n{\"command\": [\"timeout\", \"-k\", \"5s\", \"45s\", \"git\", \"fetch\", \"--no-tags\", \"--recurse-submodules=no\", \"origin\", \"refs/heads/main:refs/remotes/origin/main\", \"refs/heads/work/skill-repairs-20261013:refs/remotes/origin/work/skill-repairs-20261013\"], \"exit\": 0, \"out\": \"\", \"err\": \"\"}\n{\"command\": [\"git\", \"commit\", \"-m\", \"Merge validated planning and runtime-template repairs\"], \"exit\": 0, \"out\": \"[main 23ec33d7] Merge validated planning and runtime-template repairs\\n\", \"err\": \"\"}\nVALIDATED_MERGE=23ec33d7d692bb77d17fb5b81aabacf57adad5c7 TREE=4829c831079cf20a9436aae8fc91aa8ba8c21dbe\n{\"command\": [\"timeout\", \"-k\", \"5s\", \"45s\", \"git\", \"push\", \"origin\", \"HEAD:refs/heads/main\"], \"exit\": 0, \"out\": \"\", \"err\": \"\"}\n{\"command\": [\"timeout\", \"-k\", \"5s\", \"45s\", \"git\", \"fetch\", \"--no-tags\", \"origin\", \"refs/heads/main:refs/remotes/origin/main\"], \"exit\": 0, \"out\": \"\", \"err\": \"\"}\n{\"command\": [\"git\", \"merge-base\", \"--is-ancestor\", \"06365feb165898a86305296dc007b40ec4e09461\", \"origin/main\"], \"exit\": 0, \"out\": \"\", \"err\": \"\"}\nVERIFIED_MAIN=23ec33d7d692bb77d17fb5b81aabacf57adad5c7 SOURCE=06365feb165898a86305296dc007b40ec4e09461\n",
+    "stderr": ""
+  },
+  "boundary": "CPU-only planning/template acceptance; no quality, device lifecycle or all-Skill acceptance"
+}

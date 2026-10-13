@@ -6,8 +6,9 @@ As of2026-10-13: device campaign terminal; broad Skill-validation goal incomplet
 Branch work/hypic-npu03-cpu-binding-fix-20261007; runtime source4429e35.
 Six-phase same-source performance is complete, not a quality pass.
 Current task.active_attempt=null; no performance controller remains active.
-Execution in-progress / integration not-ready. Work branch published;main unchanged through049b0c17; new network checkpoint is local-only.
-29 cases:12 bounded verified,17 partial,0 missing. No all-Skill success claim.
+Execution in-progress / integration not-ready for the whole experimental branch.
+Selective repairs integrated into main23ec33d7; remote equality verified mc010f.
+29 cases:13 bounded verified,16 partial,0 missing. No all-Skill success claim.
 App heartbeat hypic is absent; do not recreate it for the finished supplement.
 
 ## 1. North Star
@@ -60,13 +61,11 @@ Global .agents/HANDOFF.md describes integrated history,not this unmerged result.
 ## 4. Current Action
 
 Plan059f343a pushed/verified00c0; lifecyclemc00bf failed isolation, exact release.
-Repair branch06365feb pushed/fetched00e4; main unchanged. New fetches timeout before merge.
-GitHub TCP443 timeout: see INTEGRATION_NETWORK_CHECKPOINT_20261013.json; not an authentication diagnosis.
-
-Planning-schema selective integration candidate passed seven guards and a
-read-only exact-main apply check. See PLANNING_SELECTIVE_INTEGRATION_20261013.md;
-authenticated target refresh/final-tree validation remain required. Main unchanged.
-
+Repair source06365feb merged/pushed as main23ec33d7, verified mc0104/010f.
+Earlier TCP timeout recovered; retained network checkpoint is historical.
+Planning-schema gap closed on exact main; fresh local clone and mc0117 replay
+passed 3 planning controls, 2 CLI controls, 9 runtime tests and 6 audit controls.
+See MAIN_SKILL_REVIEW_AFTER_INTEGRATION_20261013.md; no device acceptance.
 Named-workstream lifecycle passed in a retained local-bare Git fixture:
 seven commits/pushes,drift/revalidation,no-ff integration and eligible cleanup;
 seven lifecycle guards and six false-attestation controls passed. See
@@ -77,7 +76,7 @@ Transformation portable delivery passed three new and12 existing controls;
 see TRANSFORMATION_PORTABLE_ACCEPTANCE_20261013.md. Onboarding passed six
 inventory tests: ONBOARDING_EXACT_MAIN_ACCEPTANCE_20261013.md.
 Completed-plan repair passed seven controls: COMPLETED_ITERATION_REVIEW_20261013.md.
-Planning main example remains defective/unmerged; acceptance stays partial.
+Planning main example repaired/integrated; bounded case promoted to verified.
 
 Completed obligation reviews — do not repeat unchanged:
 - INFERENCE_LOOP_OBLIGATION_REVIEW_20261013.md: eight tests/six raw runs.
@@ -106,9 +105,9 @@ evidence; this Git fixture is not that separate workflow.
    do not rerun completed HYPIC merely to improve acceptance counts.
 3. Record only demonstrated fixes and task-scoped acceptance; derive current
    counts from verified case evidence, never from structural checks alone.
-4. Repair branch06365feb is published; fresh main fetch is network-blocked.
-   Do not blind-push or bypass TLS/credentials; when connectivity returns,
-   fetch exact refs and validate the final merge tree before primary push.
+4. main23ec33d7 is published. Retain repair remote branch; after exact usage
+   and claim checks reclaim only its clean, merged local worktree/branch.
+   Original experiment branch is not ready for whole-branch integration.
 5. Lifecycle attempt terminal:0 requests, uninstall not started; no retry scheduled.
    Continue offline integration; no quality/performance rerun or old-root reuse.
 

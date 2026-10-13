@@ -1,4 +1,5 @@
 {
+  "main_review_20261013": {"previous_main":"ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2","current_main":"23ec33d7d692bb77d17fb5b81aabacf57adad5c7","scope":"Review of integrated diff and exact Skill/registry identities; historical device outcomes unchanged","entrypoint_changed":false,"runtime_assets_changed":false,"new_device_work":false},
   "operational_lifecycle_20261013": {"decision":"ISOLATION_FAILED_BEFORE_HEALTH","report":"OPERATIONAL_LIFECYCLE_TERMINAL_20261013.md","controller":"exec-00000000000000bf","independent_audit":"exec-00000000000000cb","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","operational_responses":0,"foreign_container":"cannbench_ds","foreign_npu":3,"foreign_pid":3713849,"exact_owned_release":true,"uninstalled_started":false,"lifecycle_pass":false,"overall_acceptance_changed":false,"old_quality_decision_changed":false,"automatic_retry":false},
   "schema": "mst-real-task-skill-case/v1",
   "current_campaign_resume": {"campaign":"current4429-performance-20261013","aggregate_sha256":"67ba6cf14fc9bed993acbdf421eb438f22d56957f3e56baad170a4bb871e53fe","next_action_kind":"offline-evidence-review","new_device_work_authorized":false,"historical_observations_unchanged":true,"regression":"verify_completed_campaign_routes.py"},
@@ -14,7 +15,7 @@
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "07dceac8c65c9d1696d8e2fa5543d9b8784a7628",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
-  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "reviewed_current_main_commit": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "current_skill_and_registry_blobs_unchanged": true,
   "environment_scope": "Read-only retrospective of historical real-weight canary and separately audited r13 full pair; no new NPU use or unchanged rerun",
   "observed": {

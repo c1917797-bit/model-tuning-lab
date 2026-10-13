@@ -1,4 +1,5 @@
 {
+  "main_review_20261013": {"previous_main":"ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2","current_main":"23ec33d7d692bb77d17fb5b81aabacf57adad5c7","scope":"Review of integrated diff and exact Skill/registry identities; historical device outcomes unchanged","entrypoint_changed":false,"runtime_assets_changed":false,"new_device_work":false},
   "schema": "mst-real-task-skill-case/v1",
   "current_campaign_resume": {"campaign":"current4429-performance-20261013","aggregate_sha256":"67ba6cf14fc9bed993acbdf421eb438f22d56957f3e56baad170a4bb871e53fe","next_action_kind":"offline-evidence-review","new_device_work_authorized":false,"historical_observations_unchanged":true,"regression":"verify_completed_campaign_routes.py"},
   "native_recovery_disabled_failure_20261012": {"report":"HYPIC_NATIVE_RECOVERY_DISABLED_FAILURE_20261012.md","decision":"FAILED_SEMANTIC_GUARD","controller":"exec-0000000000000165","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","requests_complete":3,"disabled_treatment_event_count":0,"enabled_disabled_predictions":["A","A"],"reference":"D","enabled_disabled_completion_tokens":[2048,2048],"enabled_disabled_finish_reasons":["length","length"],"clean_isolation_samples":100,"exact_owned_release":true,"one_switch_command_fingerprint_match":true,"paired_failure_audit_sha256":"b528aef3639ab8d3229e8f9f34fa890fcf8a73010db7a24a4fea0b9155045c7f","semantic_recovery_pass":false,"uninstalled_started":false,"old_quality_verdict_changed":false,"replay":"python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_recovery_failure_audit.py"},
@@ -11,7 +12,7 @@
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "f0c22149753c29765110eb1f0532c216220ef79c",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
-  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "reviewed_current_main_commit": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "current_skill_and_registry_blobs_unchanged": true,
   "environment_scope": "chicaihong01/ma, Qwen3.6-27B BF16, pinned image/source/model-index/dataset fingerprints, TP4 physical NPU0-3; cache10r5 invalid before model health",
   "observed": {

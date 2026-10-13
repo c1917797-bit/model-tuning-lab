@@ -25,11 +25,11 @@ def git(*args: str) -> str:
 
 
 def main() -> int:
-    main_skill = git("show", "origin/main:.agents/skills/mst-practice-iteration-planning/SKILL.md")
+    main_skill = git("show", "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2:.agents/skills/mst-practice-iteration-planning/SKILL.md")
     repaired_skill = SKILL.read_text(encoding="utf-8")
     require("schema: practice-iteration/v1" in main_skill
             and "validated_commit:" not in main_skill,
-            "main Skill mismatch no longer reproduces; review case")
+            "historical main Skill identity mismatch")
     require("schema: mst-practice-iteration/v1" in repaired_skill
             and "validated_commit: <last validated Git checkpoint" in repaired_skill,
             "branch Skill output contract not repaired")
@@ -60,7 +60,7 @@ def main() -> int:
                       "plan": plan["id"], "status": plan["status"],
                       "validated_input_commit": checkpoint,
                       "next_iterations": len(plan["next_iterations"]),
-                      "main_output_example_rejected_by_current_validator": True},
+                      "historical_main_output_example_rejected": True},
                      sort_keys=True))
     return 0
 

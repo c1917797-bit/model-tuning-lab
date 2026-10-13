@@ -16,11 +16,11 @@ class SkillCaseTests(unittest.TestCase):
         self.main_commit = cases.git("rev-parse", "origin/main")
         self.case_path = cases.CASES / "mst-repo-onboarding.json"
 
-    def test_historical_case_is_partial_not_long_term_verified(self) -> None:
+    def test_current_inventory_preserves_bounded_acceptance(self) -> None:
         skill, state = cases.check_case(
             self.case_path, self.main_commit, {"mst-repo-onboarding"})
         self.assertEqual(skill, "mst-repo-onboarding")
-        self.assertEqual(state, "partial-evidence")
+        self.assertEqual(state, "verified")
         output = io.StringIO()
         with contextlib.redirect_stdout(output):
             self.assertEqual(cases.main(), 0)
@@ -29,8 +29,8 @@ class SkillCaseTests(unittest.TestCase):
         self.assertEqual(report["cases_with_verified_provenance"], 29)
         self.assertEqual(report["skills_without_case"], 0)
         self.assertEqual(report["missing_skill_ids"], [])
-        self.assertEqual(report["case_acceptance"]["partial-evidence"], 22)
-        self.assertEqual(report["case_acceptance"]["verified"], 7)
+        self.assertEqual(report["case_acceptance"]["partial-evidence"], 16)
+        self.assertEqual(report["case_acceptance"]["verified"], 13)
         self.assertEqual(report["cases_with_verified_provenance"]
                          + report["skills_without_case"], 29)
 
@@ -154,7 +154,7 @@ class SkillCaseTests(unittest.TestCase):
         skill, state = cases.check_case(
             path, self.main_commit, {"paper-ingestion"})
         self.assertEqual(skill, "paper-ingestion")
-        self.assertEqual(state, "partial-evidence")
+        self.assertEqual(state, "verified")
         item = json.loads(path.read_text())
         self.assertTrue(item["observed"]["branch_skill_differs_from_exact_main"])
         self.assertFalse(item["observed"]["exact_author_git_commit_pinned"])
@@ -300,15 +300,17 @@ class SkillCaseTests(unittest.TestCase):
         self.assertEqual(item["observed"]["r12_cold_scored_producer_rematerialization"], 4)
         self.assertFalse(item["observed"]["r12_exact_cache_eviction_causality_proven"])
 
-    def test_practice_iteration_main_contract_defect_stays_partial(self) -> None:
+    def test_practice_iteration_closed_main_gap_is_bounded(self) -> None:
         path = cases.CASES / "mst-practice-iteration-planning.json"
         skill, state = cases.check_case(
             path, self.main_commit, {"mst-practice-iteration-planning"})
         self.assertEqual(skill, "mst-practice-iteration-planning")
-        self.assertEqual(state, "partial-evidence")
+        self.assertEqual(state, "verified")
         item = json.loads(path.read_text())
         self.assertEqual(item["observed"]["first_validator_exit"], 1)
-        self.assertFalse(item["observed"]["main_skill_integrated"])
+        self.assertFalse(item["observed"]["main_skill_integrated"])  # historical snapshot
+        self.assertTrue(item["main_integration_acceptance_20261013"]["main_skill_integrated"])
+        self.assertFalse(item["main_integration_acceptance_20261013"]["device_lifecycle_verified"])
 
     def test_experience_ingestion_case_keeps_main_gap_partial(self) -> None:
         path = cases.CASES / "mst-experience-ingestion.json"
@@ -357,6 +359,10 @@ class SkillCaseTests(unittest.TestCase):
         item = json.loads(path.read_text())
         self.assertEqual(item["observed"]["scored_requests_before_abort"], 0)
         self.assertFalse(item["replayable_regression_recorded"])
+
+    def test_unreviewed_main_still_fails_closed(self) -> None:
+        with self.assertRaisesRegex(RuntimeError, "main moved"):
+            cases.check_case(self.case_path, "0" * 40, {"mst-repo-onboarding"})
 
     def test_wrong_evidence_bytes_fail_closed(self) -> None:
         with patch.object(cases, "evidence_path", return_value=Path(__file__)):

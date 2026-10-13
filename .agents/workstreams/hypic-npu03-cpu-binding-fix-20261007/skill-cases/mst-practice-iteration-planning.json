@@ -2,14 +2,14 @@
   "schema": "mst-real-task-skill-case/v1",
   "skill": "mst-practice-iteration-planning",
   "campaign_code": "P",
-  "long_term_acceptance": "partial-evidence",
+  "long_term_acceptance": "verified",
   "behavioral_evidence_verified": true,
-  "task": "Use current-main practice-iteration guidance to make a verifiable HYPIC NPU0-3 quality-preflight stage plan and test the plan against the repository validator",
-  "executed_at_utc": "2026-10-08",
-  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
-  "tested_skill_git_blob_oid": "171e1f401b18dc6aaa4d38a2c3b6b260fca46123",
+  "task": "Validate the integrated planning Skill on the completed six-file selective-repair task and its exact generated example; preserve the earlier HYPIC planning failure as historical evidence",
+  "executed_at_utc": "2026-10-13",
+  "tested_main_commit": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+  "tested_skill_git_blob_oid": "9be62a7adfec954b2b08d8d3d30e496e676d9ac8",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
-  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "reviewed_current_main_commit": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "current_skill_and_registry_blobs_unchanged": true,
   "environment_scope": "chicaihong01 named worktree, CPU-only repository planning and validation; no new NPU experiment",
   "observed": {
@@ -49,7 +49,7 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_practice_iteration_case.py",
-      "sha256": "1f39d3af38f7ab5e36d6cc9b6c741491c009c6ab66f9a089d429a1c3404e7502"
+      "sha256": "ea077ad91c88215319c31410f814cd36a25770caaa23d676cb1ac91a57b26102"
     },
     {
       "path": ".agents/skills/mst-practice-iteration-planning/SKILL.md",
@@ -94,11 +94,27 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PLANNING_INTEGRATION_PREFLIGHT_RECEIPT_20261013.json",
       "sha256": "6f430abf621f8540579e0043c720fb1fc04588658bd5d29da532c443d7ce840d"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/MAIN_REPAIR_REPLAY_RECEIPT_20261013.json",
+      "sha256": "19233286f6095cef21051da183e442babb49d427060a904d90e1d40fd8ffba38"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_integrated_main_repairs.py",
+      "sha256": "b57d867f278a7c138b32632e23b6b73adba4636f6a5506022cad48bf526b2978"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_integrated_main_repairs.py",
+      "sha256": "b1815e0207d6aef307e9a58e33190971b855e644ac3c22e76b2a6abcfc8217cb"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/snapshots/planning-case-before-main-23ec33d7.json",
+      "sha256": "b2770586318bb37788a47b1c7f871e9f2d18b00711ba356b92930eb3e4324945"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "Current main Skill's exact output example fails the current repository validator, so main long-term acceptance is partial. The named branch repair passes on a real HYPIC stage plan, but it has not been integrated and replayed from a fresh main clone. This case does not establish an uninterrupted NPU window or HYPIC quality/performance. The 2026-10-13 supplement validates the branch's completed-plan lifecycle and rejects stale checkpoint/file association; main acceptance remains partial, independently of HYPIC quality.",
-  "drift_trigger": "Revalidate after the practice-iteration Skill or validate-mst.sh schema changes, main integration, or a change to the HYPIC stage ruler.",
+  "boundary": "Verified for the integrated planning example and completed selective-repair iteration at main23ec33d7: exact checkpoint/files, validation commands, lesson routing, valid example and two invalid examples, plus fresh local main-clone replay. Historical observed fields retain the October8/13 pre-integration failures. Not proof of HYPIC quality, NPU lifecycle, fresh-agent resumption or all29-Skill behavior.",
+  "drift_trigger": "Revalidate planning Skill, schema validator, template dependencies or current main changes; this is bounded task acceptance.",
   "selective_integration_preflight_20261013": {
     "candidate": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/integration/planning-schema/manifest.json",
     "controls_passed": 7,
@@ -109,5 +125,31 @@
     "main_changed": false,
     "remote_authenticated": false,
     "integration_ready": false
+  },
+  "main_review_20261013": {
+    "previous_main": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+    "current_main": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+    "scope": "Review of integrated diff and exact Skill/registry identities; historical device outcomes unchanged",
+    "entrypoint_changed": true,
+    "runtime_assets_changed": false,
+    "new_device_work": false
+  },
+  "historical_test_binding": {
+    "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+    "tested_skill_git_blob_oid": "171e1f401b18dc6aaa4d38a2c3b6b260fca46123",
+    "case_snapshot": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/snapshots/planning-case-before-main-23ec33d7.json"
+  },
+  "main_integration_acceptance_20261013": {
+    "main_commit": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+    "main_skill_integrated": true,
+    "planning_bounded_verified": true,
+    "completed_plan": "skill-repairs-planning-20261013",
+    "validated_content_commit": "f9af6d162b34ceaf96179ecbd963d8b90172693c",
+    "fresh_clone_operation": "exec-0000000000000106",
+    "independent_replay_operation": "exec-0000000000000117",
+    "planning_controls": 3,
+    "receipt_negative_controls": 5,
+    "device_lifecycle_verified": false,
+    "quality_or_performance_claim": false
   }
 }

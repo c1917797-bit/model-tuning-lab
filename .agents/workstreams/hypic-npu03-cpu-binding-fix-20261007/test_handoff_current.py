@@ -173,7 +173,9 @@ class HandoffTests(unittest.TestCase):
         self.assertNotIn("exec-00000000000002d6", text)
         self.assertIn("No additional quality,observer,GDN,profiling or performance run", text)
         self.assertIn("fresh-agent orient/validate/push", text)
-        self.assertIn("Work branch published;main unchanged", text)
+        self.assertIn("Selective repairs integrated into main23ec33d7", text)
+        self.assertEqual(json.loads((HERE / "task.json").read_text())["integrated_main_repairs_20261013"]["main_commit"],
+                         "23ec33d7d692bb77d17fb5b81aabacf57adad5c7")
         task = json.loads((HERE / "task.json").read_text())
         receipt = json.loads((HERE / task["remote_publication_20261013"]["receipt"]).read_text())
         verify_publication(task, receipt)

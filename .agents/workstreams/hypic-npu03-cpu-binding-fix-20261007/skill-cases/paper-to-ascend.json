@@ -1,4 +1,5 @@
 {
+  "main_review_20261013": {"previous_main":"ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2","current_main":"23ec33d7d692bb77d17fb5b81aabacf57adad5c7","scope":"Review of integrated diff and exact Skill/registry identities; historical device outcomes unchanged","entrypoint_changed":false,"runtime_assets_changed":false,"new_device_work":false},
   "schema": "mst-real-task-skill-case/v1",
   "skill": "paper-to-ascend",
   "campaign_code": "N",
@@ -10,7 +11,7 @@
   "tested_skill_git_blob_oid": "ad455c2d22d64eaff61384c23c39bd4693d15636",
   "tested_reference_git_blob_oid": "744b6daa280b14a90930b7be0c7a1055e9170935",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
-  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "reviewed_current_main_commit": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "current_skill_and_registry_blobs_unchanged": true,
   "environment_scope": "chicaihong01/ma; Qwen3.6-named Qwen3_5ForConditionalGeneration hybrid text checkpoint, BF16 TP4, official pinned vLLM-Ascend image, physical NPU0-3 only; historical c16/1024, r12 c8/max2048 stress, and the terminal r13 c8/0.85/cache10 full-quality plus six-phase-performance pair are separate identities",
   "observed": {

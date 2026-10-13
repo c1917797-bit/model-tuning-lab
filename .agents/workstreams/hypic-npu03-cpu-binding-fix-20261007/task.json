@@ -1,4 +1,5 @@
 {
+  "integrated_main_repairs_20261013": {"main_commit":"23ec33d7d692bb77d17fb5b81aabacf57adad5c7","source_commit":"06365feb165898a86305296dc007b40ec4e09461","state":"selective-repairs-published-exact-main-replayed","main_updated":true,"whole_experiment_integrated":false,"report":"MAIN_SKILL_REVIEW_AFTER_INTEGRATION_20261013.md","receipt":"MAIN_REPAIR_REPLAY_RECEIPT_20261013.json","replay":"verify_integrated_main_repairs.py","publication_verification":"exec-000000000000010f","independent_replay":"exec-0000000000000117","supersedes_network_blocker":true,"bounded_verified":13,"partial_evidence":16,"new_device_work":false,"repair_worktree_cleanup":"pending-live-usage-check"},
   "selective_integration_network_checkpoint_20261013": {"report":"INTEGRATION_NETWORK_CHECKPOINT_20261013.json","published_ready_tip":"06365feb165898a86305296dc007b40ec4e09461","state":"work-branch-published-main-refresh-network-blocked","main_updated":false,"device_work":false,"network_probe":"exec-00000000000000ee"},
   "operational_lifecycle_20261013": {"state":"isolation-failed-before-health","plan":"OPERATIONAL_LIFECYCLE_20261013.md","contract":"operational_lifecycle_20261013.json","authority":"human expressly allowed one bounded lifecycle-only campaign","deadline_utc":"2026-10-13T18:00:00Z","active_controller":null,"completed_modes":[],"quality_or_performance":false,"controller":"exec-00000000000000bf","peerId":"lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d","raw_root":"/cache/cch/hypic-npu03-cpu-binding-fix-20261007/operational-lifecycle-20261013-disabled","terminal_report":"OPERATIONAL_LIFECYCLE_TERMINAL_20261013.md","independent_audit":"operational_lifecycle_failure_20261013.py","operational_responses":0,"owned_resources_released":true,"uninstalled_started":false,"retry_scheduled":false},
   "remote_publication_20261013": {"report":"REMOTE_PUBLICATION_20261013.md","receipt":"REMOTE_PUBLICATION_RECEIPT_20261013.json","code_checkpoint":"b5d9c9398f7fd4571c76b163490f83d609ced96f","operation":"exec-000000000000009f","work_branch_remote_equal":true,"remote_main":"ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2","main_updated":false,"authentication_blocker_superseded":true,"next":"Fetch refs and prepare named selective integration workstream; do not merge whole experimental branch"},
@@ -962,8 +963,8 @@
   "skill_case_inventory": {
     "registered_skills": 29,
     "cases_with_verified_provenance": 29,
-    "bounded_verified": 12,
-    "partial_evidence": 17,
+    "bounded_verified": 13,
+    "partial_evidence": 16,
     "missing": 0,
     "transformation_suite_verified_skills": [
       "mst-agentsmd-authoring",
@@ -1472,5 +1473,5 @@
     "interpretation": "Both subset arms scored 54/96; sample 082 was correct and naturally stopped in both arms, but lacked candidate hot proof. First cross-arm token divergence positions 124/23/212 are comparable to within-arm variability; inconclusive, not causal and not a full-suite verdict.",
     "claim_boundary": "bounded output-numerics diagnostic only; prior waves absent; no r19 verdict change"
   },
-  "next_action": "No further device stages: authorized lifecycle attempt terminated before health on foreign NPU3 process; exact own resources released, no retry scheduled. Continue remaining exact-main obligations offline and six-file selective integration;12 bounded/17 partial, old quality rejection unchanged."
+  "next_action": "No further device stages: authorized lifecycle attempt terminated before health, no retry scheduled. Continue remaining exact-main obligations offline; selective six-file repairs are in main23ec33d7 with fresh-clone replay.13 bounded/16 partial; old quality rejection unchanged. Check usage before reclaiming merged repair worktree; do not merge whole experiment branch."
 }

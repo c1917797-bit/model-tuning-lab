@@ -1,4 +1,5 @@
 {
+  "main_review_20261013": {"previous_main":"ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2","current_main":"23ec33d7d692bb77d17fb5b81aabacf57adad5c7","scope":"Review of integrated diff and exact Skill/registry identities; historical device outcomes unchanged","entrypoint_changed":false,"runtime_assets_changed":false,"new_device_work":false},
   "schema": "mst-real-task-skill-case/v1",
   "stage_review_20261013": {"report":"INFERENCE_LOOP_OBLIGATION_REVIEW_20261013.md","replay_peer":"lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d","replay_operation":"exec-0000000000000034","tests_passed":8,"raw_runs_verified":6,"first_screen_tpot_reduction_percent":81.22383070023939,"ttft_original_aggregation_unspecified":true,"ttft_pass_for_all_retained_rulers":true,"acceptance_promoted":false,"new_device_work":false},
   "current_campaign_resume": {"campaign":"current4429-performance-20261013","aggregate_sha256":"67ba6cf14fc9bed993acbdf421eb438f22d56957f3e56baad170a4bb871e53fe","next_action_kind":"offline-evidence-review","new_device_work_authorized":false,"historical_observations_unchanged":true,"regression":"verify_completed_campaign_routes.py"},
@@ -11,7 +12,7 @@
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "010d1a8bd5ab21fcdff6c50e3bad74f974ccae8d",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
-  "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "reviewed_current_main_commit": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "current_skill_and_registry_blobs_unchanged": true,
   "environment_scope": "chicaihong01/ma; physical NPU0-3, Qwen3.6-27B BF16 TP4; 32768 input/16384 prefix/1024 fixed output/c16, 40 requests and two warmups per round; frozen no-cache baseline against enable_cpu_binding=false only",
   "observed": {
