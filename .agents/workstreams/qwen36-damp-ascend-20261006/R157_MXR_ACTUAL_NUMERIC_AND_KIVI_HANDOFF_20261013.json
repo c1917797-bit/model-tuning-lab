@@ -1,0 +1,184 @@
+{
+  "schema": "ascend.r157.actual-stage-handoff/v1",
+  "recorded_utc": "2026-10-13T19:17:00Z",
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R156_NEW24H_AUTHORITY_20261013.json",
+    "bytes": 4025,
+    "sha256": "cd1ec8cf2f12e551a5b49e95b66ef053064ac634aef1e4524430d46ce333f300"
+  },
+  "deadline_utc": "2026-10-14T18:27:36Z",
+  "historical_R118_unchanged": "2026-10-13T20:22:10Z",
+  "goal_achieved": false,
+  "mxr": {
+    "build": {
+      "operation_id": "exec-0000000000000126",
+      "terminal_exit": 0,
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-y16-build-owned-main-R118_030_001/cpu/build/BUILD.json",
+        "bytes": 327263,
+        "sha256": "328818e361067e52be90de977c1da8c6a2851c18392151f9af625b9dc8dedff1"
+      },
+      "library": {
+        "bytes": 286256,
+        "sha256": "7b8eea213ce35e584eca5763e9b7af1e6097f065896f3423b64cc1ae98655eb3"
+      }
+    },
+    "numeric": {
+      "operation_id": "exec-000000000000012f",
+      "terminal_exit": 1,
+      "host_ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-y16-single5-owned-main-R118_031_001/RESULT.json",
+        "bytes": 291907,
+        "sha256": "e19999813791fe681779bf969cee82b0c334b3739f4e00945ab2c4878234e661"
+      },
+      "numeric_ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-y16-single5-owned-main-R118_031_001/physical5/numeric/RESULT.json",
+        "bytes": 214714,
+        "sha256": "3bb9b43eeb0776c8c857034fa7cbf7244fb81c195718164ff9c48f0df90983b0"
+      },
+      "primary": "ValueError('candidate original fullE0/.002 gate failed; no unchanged rerun or relaxedgold')",
+      "rank2_old_frob": 0.0030071241985744628,
+      "rank2_compensated_frob": 0.003006766598249553,
+      "frozen_limit": 0.002,
+      "repeats": 3,
+      "control_bitwise_original": true,
+      "guards_input_pointers": true,
+      "original_failure_reproduced": true,
+      "complete_four_rank_matrix": false,
+      "full_gdn": false,
+      "graph": false,
+      "whole_model": false,
+      "performance": false,
+      "task_accuracy": false,
+      "classification": "Source-specific intermediate Y16 compensation was insufficient on the real rank2 frame; current candidate numerical failure, not paper-wide no-go.",
+      "next": "Localize retained FP32 workspace error and require source-supported correction; do not rerun unchanged or relax oracle."
+    },
+    "cleanup": {
+      "after_inspect": {
+        "bytes": 227909,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-y16-single5-owned-main-R118_031_001/physical5/inspect-1791918427262111060.json",
+        "sha256": "c536d9dab931d10cae7d9f769b2357dfb3b68fc6afdaa879f5a96bf28da78801"
+      },
+      "before_inspect": {
+        "bytes": 227968,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-y16-single5-owned-main-R118_031_001/physical5/inspect-1791918412028616760.json",
+        "sha256": "62b61d26a1dd1fc6aafbdbca4827df4fb290b00143262d7cfe28c0808f95224c"
+      },
+      "container": "843ee1bb159ae0394d5d402c88e9378c75e80eb65ef6b8fd5a6da79ce1c1e145",
+      "cumulative_cleanup_seconds": 16.34282661999896,
+      "deleted": false,
+      "errors": [],
+      "primary_error": "ValueError('actual child exit1')",
+      "protected_boundary": {
+        "baseline": [],
+        "external_added": [],
+        "external_changed": [],
+        "external_removed": [],
+        "external_unchanged_claimed": false,
+        "observed": [],
+        "own_on_protected": false,
+        "schema": "sparq.protected-boundary/v1"
+      },
+      "release_smi": {
+        "bytes": 5203,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-y16-single5-owned-main-R118_031_001/physical5/release-smi-1791918428332421280.json",
+        "sha256": "0b7d0f38f2b13bff15e72e187b4d48f92e374748186c4b26595e90b6d338f9a1"
+      },
+      "retained": true,
+      "stop_receipt": {
+        "bytes": 601,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-y16-single5-owned-main-R118_031_001/physical5/stop-retain-1791918427216509480.json",
+        "sha256": "27da7a4ba11d6d2de7dd831de60a78d740f0c644252d0522ddfa82c61767d7c0"
+      },
+      "stopped": true
+    }
+  },
+  "kivi": {
+    "operation_id": "exec-0000000000000136",
+    "state_at_recording": "running_not_terminal",
+    "peer_id": "lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d",
+    "route": "peer_direct",
+    "physical": 4,
+    "logical": 0,
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/SOURCE_MANIFEST.json",
+      "bytes": 26988,
+      "sha256": "52688f37a7a978225b69470139d90ebc02dfe9bcef28111f8885d45077898629"
+    },
+    "cohort": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R157_KIVI_ATOMIC_COHORT.json",
+      "bytes": 1428,
+      "sha256": "5c982c224ec85185b6af1f5bc8e4e6b8d5144623574df543cfb56d0a1184f711"
+    },
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r156-main-atomic-001",
+    "actual_command": [
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/host.py",
+      "--execute",
+      "--source",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "52688f37a7a978225b69470139d90ebc02dfe9bcef28111f8885d45077898629",
+      "--cohort",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R157_KIVI_ATOMIC_COHORT.json",
+      "--cohort-sha256",
+      "5c982c224ec85185b6af1f5bc8e4e6b8d5144623574df543cfb56d0a1184f711",
+      "--run-id",
+      "kivi-atomic-main-r157",
+      "--physical",
+      "4",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r156-main-atomic-001"
+    ],
+    "source_audit": {
+      "operation_id": "exec-0000000000000129",
+      "terminal_exit": 0,
+      "static_refs": 184,
+      "NPU": false
+    },
+    "gate": "Same-image controls then real inactive/active append and seal atomic diagnostic. Diagnostic host exit0 alone is not numerical/graph/model qualification.",
+    "next": "Poll existing operation only; consume actual branch verdict, raw fault and exact owned stop-retain/release before promotion or successor."
+  },
+  "resource_snapshot": {
+    "operation_id": "exec-0000000000000133",
+    "utc": "2026-10-13T19:12:03.874286Z",
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "processes": [],
+    "AICore": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "HBM_used_MiB": [
+      2861,
+      2860,
+      2861,
+      2860
+    ],
+    "health": "OK",
+    "continuous_30min_utilization": "UNMEASURED",
+    "note": "This snapshot preceded KIVI0136. It is not a claim of current idle state."
+  },
+  "preparation": {
+    "owners": [
+      "damp_operator_reuse: MXR first divergence and qualified full-GDN successor",
+      "adakv_current_prepare: SKVQ vectorized writer original256 GLOBAL gate",
+      "mxr_resume_audit: GSM8K/HumanEval/MMLU actual smoke/full evaluation client"
+    ],
+    "risk": "Task-serving seam and actual full-task runtime remain unproven. Freeze definitions and measure smoke timing before H2; do not count metadata-ready as runnable."
+  },
+  "next_gate": "H2 2026-10-13T20:27:36Z, H4 22:27:36Z. H4 without qualified whole-model smoke requires explicit major risk update and truly executable alternative, not silent extension.",
+  "claims": {
+    "new_accepted_technique": false,
+    "new_e2e_performance": false,
+    "new_task_accuracy": false,
+    "HYPIC": "historic exemplar only"
+  },
+  "git_scope": "This handoff only; unrelated dirty HANDOFF and unvalidated/untracked source trees preserved."
+}
