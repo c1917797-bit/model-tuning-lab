@@ -1,0 +1,18 @@
+schema: mst-practice-iteration/v1
+id: skill-repairs-planning-20261013
+repository: model-tuning-lab
+status: in_progress
+date: 2026-10-13
+validated_commit: 3194848e598a919ad2d499867330fe23c5732b33
+stage_goal: Make the documented planning example pass the repository validator.
+changes:
+  - type: skill-tree
+    description: Select the schema and checkpoint-field repair.
+    files: [.agents/skills/mst-practice-iteration-planning/SKILL.md]
+validation_commands:
+  - python3 -B .agents/workstreams/skill-repairs-20261013/validate_selected_repairs.py
+  - bash scripts/validate-mst.sh
+lessons_ingested:
+  - lesson: Instantiate examples through the maintained validator, not a heading-only check.
+    destination: .agents/skills/mst-practice-iteration-planning/SKILL.md
+    severity: medium

@@ -7,7 +7,7 @@
   "target_branch": "main",
   "remote": "origin",
   "worktree": "/cache/cch/model-tuning-lab-skill-repairs-20261013",
-  "execution_state": "started",
+  "execution_state": "in-progress",
   "integration_state": "not-ready",
   "original_base": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "source_archive_commit": "c03604ad184a154c90757ef805445b997ddbad92",
@@ -150,6 +150,16 @@
       "name": "main-integration-plane",
       "mode": "exclusive",
       "lock": "/cache/cch/model-tuning-lab-hypic-e2e-20261006/.git/mst-integrator-skill-repairs-20261013.lock"
+    },
+    {
+      "type": "file",
+      "path": ".agents/evals/practice-iterations/skill-repairs-planning-20261013.yaml",
+      "mode": "exclusive"
+    },
+    {
+      "type": "file",
+      "path": ".agents/evals/practice-iterations/skill-repairs-runtime-20261013.yaml",
+      "mode": "exclusive"
     }
   ],
   "resource_leases": {
@@ -163,6 +173,10 @@
     "git diff --check"
   ],
   "retention": "Retain remote work branch; reclaim owned clean worktree only after main push, reachability and claim release proof",
-  "resume": "Validate and publish start checkpoint before importing repair files.",
-  "validated_content_commit": null
+  "resume": "Run selected acceptance, commit content and push, then bind ready evidence before final-tree integration.",
+  "validated_content_commit": null,
+  "mode_overrides": {
+    "scripts/validate_monkeypatch_package.py": "100755"
+  },
+  "mode_override_reason": "mc00d2 direct Skill command failed PermissionError on source mode100644. Preserve original source binding; derive only executable bit with new direct-CLI controls."
 }
