@@ -1,0 +1,56 @@
+{
+  "schema": "ascend.paper-stage-checkpoint/v1",
+  "stage": "diagnosed_not_accepted",
+  "fixed_cutoff_utc": "2026-10-13T08:06:34Z",
+  "historical_cutoffs_unchanged": true,
+  "baseline_and_acceptance": {
+    "final_combination_throughput_gain_min_percent": 10,
+    "individual_method_not_required_to_reach_10": true,
+    "individual_correct_reproducible_positive_e2e_required_before_composition": true,
+    "composition_control": "dense/A/B/A+B; same stack/workload/common optimizations; three paired rounds; forced1024, profiling off",
+    "final_tasks": "LongBench-v2/GSM8K, think off, max2048 normalEOS; latest human <=1% loss, report pp and relative; numerical tensor gates unchanged",
+    "no_addition_of_individual_speedup_percentages": true
+  },
+  "five_native_paths": {
+    "scope": "one saved failed input, five native layouts, not full suite/model/task",
+    "report": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-five-path-r110-main-001/diagnostic-005/REPORT.json",
+      "bytes": 72747,
+      "sha256": "961325a3a0f079af3b5ab2b0f2a3690c01a5d61a12c01965481d2f808fc7e742"
+    },
+    "all_five_bitwise_same": true,
+    "rr": 0.01264801131637034,
+    "cosine": 0.999920666217804,
+    "unchanged_limits": {
+      "rr_max": 0.005,
+      "cosine_min": 0.99998
+    },
+    "all_failed": true,
+    "decision": "layout/offset explanation excluded for this input only; actual binary/tiling to source correspondence unknown; no paper-wide no-go"
+  },
+  "skvq_normalization": {
+    "scope": "actual normalized config smoke passed; model failed at worker import before algorithm",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R87/skvq-normalized-full47-v1-002/SOURCE_MANIFEST.json",
+      "bytes": 3895,
+      "sha256": "695f62e4598e2157e8b591dc58a76df8793756060ac99ee6d391cf6dce7e56fb"
+    },
+    "host_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-formal-013-normalized-r110-main-001/HOST_RESULT.json",
+      "bytes": 3072,
+      "sha256": "66d4c258d58526b64860834702a7c29a58b680459bc4f27f6f83579691cb063d"
+    },
+    "actual_primary": "formal_source.py84 rejects loaded own module formal_worker: normalized wrapper shadows immutable engine module",
+    "classification": "ADAPTATION_IMPLEMENTATION",
+    "confidence": "proved by all four spawned worker traceback chains",
+    "algorithm_numeric_qualified": false,
+    "performance_ready": false,
+    "task_ready": false,
+    "owned_container": "08c82d9bf5d4f8ca508a3ed2093ce3ffc5d433f7a98333b87c8b5c4798696e9f",
+    "cleanup": "stopped retained; fresh inspect Pid0/noExec/OOMfalse; physical4-7 released,0-3 unmapped",
+    "operation_registry": "launch0285 ACK preserved; later poll found:false; terminal not reconstructed, actual files/owned cleanup inspected",
+    "successor": "unique worker module, preserve strict source provenance; reproduce actual importlib/sys.modules entry before device reservation; new immutable source/output/inputs only"
+  },
+  "combination_scope": "KIVI/SKVQ/Ada share KV ownership/hooks and are not simple toggle compositions; compatibility source audit in progress; no accepted new combination",
+  "readiness": "no new full numerical, paired performance or task PASS; preparers repair worker seam and independent numerical cause off-device; no dummy load"
+}
