@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Latest C1 integration preparation: identity-bound LinearMaterialPool now connects
+public material producer to pinned request-private copies. NPU clone readiness uses
+conservative device synchronization before publish/yield; not device-tested here.
+63 CPU controls001b pass. Native boundary closure drafted with exact GDN source
+binding, private conv buffer and unchanged native conv/chunk calls; no native cache
+mutation. Boundary closure not yet device-validated or connected to serving hook.
+No NPU job. Next wire canonical selector/store and runtime C1 reuse, then C2/seam.
+
 Latest: canonical C1 public-body builder implemented, excludes live boundary,
 uses independent official-state dual invocation and clones public output/conv tail.
 61 CPU controls0019 pass including token coverage and producer alias isolation.

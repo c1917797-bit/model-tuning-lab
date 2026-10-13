@@ -1,0 +1,44 @@
+"""Current-request C1 boundary evaluation on private native state buffers."""
+import torch
+
+def make_boundary_runner(layer,projected,b,a,incoming_conv):
+    """Caller passes ONLY the current request's live boundary, not public body.
+    Official primitive calls are unchanged; conv/SSM input caches stay private.
+    Must execute inside the real forward context on the request's device.
+    """
+    from pathlib import Path
+    import hashlib,inspect
+    if type(layer).__name__!="AscendGatedDeltaNetAttention" or type(layer).__module__!="vllm_ascend.ops.gdn":
+        raise ValueError("unexpected boundary layer")
+    if hashlib.sha256(Path(inspect.getfile(type(layer))).read_bytes()).hexdigest()!="d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816":
+        raise ValueError("GDN source drift")
+    length=projected.shape[0]
+    if length<3 or projected.ndim!=2 or b.shape[0]!=length or a.shape[0]!=length:
+        raise ValueError("live boundary coverage mismatch")
+    if incoming_conv.shape!=(3,projected.shape[1]):
+        raise ValueError("selected width4 conv-state layout mismatch")
+    # Independent producer may wrap the official module alias; import the
+    # unchanged primitive directly so private boundary isn't published.
+    from vllm_ascend.ops.triton.fla.chunk import chunk_gated_delta_rule
+    from vllm_ascend.device.device_op import DeviceOperator
+    def run(initial_state):
+        conv_state=incoming_conv.detach().clone().unsqueeze(0).contiguous()
+        conv_output=torch.empty_like(projected)
+        starts=torch.tensor([0,length],dtype=torch.int32,device=projected.device)
+        indices=torch.zeros(1,dtype=torch.int32,device=projected.device)
+        torch.ops._C_ascend.npu_causal_conv1d_custom(
+            conv_output,projected,layer.conv1d.weight.view(projected.shape[1],4).transpose(0,1),
+            conv_state=conv_state,bias_opt=layer.conv1d.bias,
+            query_start_loc_opt=starts,cache_indices_opt=indices,
+            initial_state_mode_opt=torch.ones(1,dtype=torch.bool,device=projected.device),
+            num_accepted_tokens_opt=None,activation_mode=1 if layer.activation else 0,
+            pad_slot_id=-1,run_mode=0)
+        q,k,v=layer.rearrange_mixed_qkv(conv_output)
+        g,beta=DeviceOperator.fused_gdn_gating(layer.A_log,a,b,layer.dt_bias)
+        output,state=chunk_gated_delta_rule(
+            q=q,k=k,v=v,g=g,beta=beta,initial_state=initial_state.unsqueeze(0).contiguous(),
+            output_final_state=True,cu_seqlens=starts,prebuilt_meta=None,
+            head_first=False,use_qk_l2norm_in_kernel=True)
+        if state is None:raise ValueError("native boundary final state missing")
+        return output[0],state[0]
+    return run

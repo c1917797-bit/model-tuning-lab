@@ -3,6 +3,14 @@ from collections import OrderedDict
 from contextlib import contextmanager
 import threading
 import hashlib,json
+def complete_material_copies(tensors):
+    # Conservative first implementation: finish each producing device before
+    # another request/stream can observe cloned material. Optimize only after
+    # event-based readiness has its own device evidence.
+    devices={v.device for v in tensors.values() if v.device.type=="npu"}
+    if devices:
+        import torch
+        for device in devices:torch.npu.synchronize(device)
 def material_key(model_identity,implementation_identity,token_ids,public_context_identity):
     if not model_identity or not implementation_identity or not public_context_identity or not token_ids:
         raise ValueError("complete identity and nonempty tokens required")
@@ -16,6 +24,7 @@ class PublicPool:
         if not tensors or size>self.capacity:raise ValueError("material exceeds pool")
         # Public data cannot alias the producer's private write buffers.
         data={k:v.detach().clone() for k,v in tensors.items()}
+        complete_material_copies(data)
         with self.lock:
             if key in self.entries:raise ValueError("immutable material already published")
             need=self.used+size-self.capacity;victims=[]
@@ -34,6 +43,8 @@ class PublicPool:
             entry=self.entries[key];entry['pins']+=1;self.entries.move_to_end(key)
         try:
             # Request relocation/composition must never write into public tensors.
-            yield entry['generation'],{k:v.clone() for k,v in entry['data'].items()}
+            private={k:v.clone() for k,v in entry['data'].items()}
+            complete_material_copies(private)
+            yield entry['generation'],private
         finally:
             with self.lock:entry['pins']-=1
