@@ -11,7 +11,7 @@
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
   "execution_state": "started",
   "integration_state": "not-ready",
-  "objective": "Independently reimplement the complete HYPIC method from the paper on the selected 27B checkpoint and validate Paper-to-Ascend through real Ascend execution.",
+  "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
     "independent_algorithm_and_operators": "Human explicitly requested a fresh end-to-end paper implementation without reusing successful HYPIC code",
     "physical_npus": [
@@ -21,7 +21,9 @@
       3
     ],
     "only_model": "27B; human rejected smaller-model C3 fallback",
-    "deployment": false
+    "deployment": false,
+    "clarification": "Latest human request: use all four cards together as oneTP4 instance; only algorithm-related monkeypatch must be independently reimplemented.",
+    "requires_dual_tp2": false
   },
   "paper": {
     "url": "https://arxiv.org/html/2607.01299v2",
@@ -33,17 +35,18 @@
     "required_mechanisms": [
       "C1 state composition including convolution boundary warmup",
       "C2 KV relocation and seam propagation through hybrid layers",
-      "C3 two real 27B instances with cold-segment scatter, transfer and combine",
       "public/private pool ownership, PDC coexistence, capacity and eviction",
       "paired quality, repeated performance, mechanism ablations and rollback"
     ],
-    "identity": "Independent Ascend/vLLM faithful-port candidate; SGLang/NIXL backend adaptation must be declared",
+    "identity": "Independent single-instance C1/C2 Ascend implementation with native PDC coexistence; distributedC3 excluded by latest scope clarification.",
     "unavailable_original_evidence": [
       "Private Prod-RAG trace not supplied",
       "Original four-model H20 numerical matrix is outside selected 27B/0-3 hardware scope"
     ],
     "no_existing_hypic_imports": true,
-    "no_model_quantization_or_training": true
+    "no_model_quantization_or_training": true,
+    "successful_workflow_reuse": "Existing generic launch/benchmark/evaluator/guard tools may be reused only after reviewing exact protocol and source identity; existing HYPIC treatment code forbidden.",
+    "distributed_c3": "Out of scope for this requested successful-case reproduction; user-supplied launch explicitly sets REQUIRE_DISTRIBUTED_C3=0."
   },
   "model": {
     "path": "/cache/efim/Qwen3.6-27B",
@@ -57,42 +60,37 @@
   "milestones": [
     {
       "id": "M0",
-      "name": "Paper identity, independent derivation, parity and acceptance contract",
+      "name": "Freeze supplied workflow, paper equations, independent source policy and protocol",
       "state": "in-progress"
     },
     {
       "id": "M1",
-      "name": "Prove two TP2 27B instances fit and execute on physical0-1/2-3",
+      "name": "NativeTP4 baseline and official runtime source-map",
       "state": "pending"
     },
     {
       "id": "M2",
-      "name": "Independent CPU reference and actual-shape NPU primitives",
+      "name": "Independent C1/C2 reference and actual-shape NPU correctness",
       "state": "pending"
     },
     {
       "id": "M3",
-      "name": "C1/C2 service package, worker activation and semantic Canary",
+      "name": "Fresh monkeypatch service Canary and PDC coexistence",
       "state": "pending"
     },
     {
       "id": "M4",
-      "name": "C3 real-instance LPT scatter, transport pipeline and combine",
+      "name": "Four-group matched three-round performance",
       "state": "pending"
     },
     {
       "id": "M5",
-      "name": "Clean repeated performance and ablations",
+      "name": "Paired three-round quality with natural stopping",
       "state": "pending"
     },
     {
       "id": "M6",
-      "name": "Paired public-task quality and robustness",
-      "state": "pending"
-    },
-    {
-      "id": "M7",
-      "name": "Disable/uninstall/restart, independent audit, Skill evidence and published handoff",
+      "name": "Disable/uninstall/restart/release; raw audit, report and Skill evidence",
       "state": "pending"
     }
   ],
@@ -153,5 +151,40 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Publish discovery start checkpoint; inspect pinned official framework and build a fresh capacity-only smoke contract without old HYPIC mounts."
+  "next_action": "Save latest scope and detailed night plan. Resolve safe Git connectivity and publish start. Freeze nativeTP4 controller and baseline; independently derive C1/C2, no dual-instance prerequisite.",
+  "overnight": {
+    "timezone": "Europe/Moscow",
+    "end_local": "2026-10-14T10:00:00+03:00",
+    "end_utc": "2026-10-14T07:00:00Z",
+    "followup_minutes": 10,
+    "latest_human_override": "10:00 replaces the earlier08:00; singleTP4 replaces proposeddualTP2/C3.",
+    "at_deadline": "Stop new device stages, retain and release exact owned services according to controller, report actual completion; keep unfinished goal active."
+  },
+  "workload": {
+    "source": "User-supplied successful-case attachment",
+    "input_tokens": 32768,
+    "native_prefix_tokens": 8192,
+    "pic_segment_tokens": 16384,
+    "pic_placement": "relocated",
+    "relocation_min": 1024,
+    "relocation_max": 7168,
+    "output_tokens": 1024,
+    "requests": 40,
+    "concurrency": 16,
+    "warmups": 2,
+    "repetitions": 3,
+    "groups": [
+      "G1 nativePDC off, newHYPIC off",
+      "G2 nativePDC on, newHYPIC off",
+      "G3 nativePDC off, newHYPIC on",
+      "G4 nativePDC on, newHYPIC on"
+    ],
+    "tp": 4,
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
 }
