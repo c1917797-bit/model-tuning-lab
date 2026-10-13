@@ -7,7 +7,7 @@ Branch work/hypic-npu03-cpu-binding-fix-20261007; runtime source4429e35.
 Six-phase same-source performance is complete, not a quality pass.
 Current task.active_attempt=null; no performance controller remains active.
 Execution in-progress / integration not-ready. No main/remote synchronization.
-29 cases:11 bounded verified,18 partial,0 missing. No all-Skill success claim.
+29 cases:12 bounded verified,17 partial,0 missing. No all-Skill success claim.
 App heartbeat hypic is absent; do not recreate it for the finished supplement.
 
 ## 1. North Star
@@ -59,44 +59,36 @@ Global .agents/HANDOFF.md describes integrated history,not this unmerged result.
 
 ## 4. Current Action
 
-Transformation verification: target-only delivery failed, then passed after the
-validator became self-contained. Three new and12 existing controls passed;
-see TRANSFORMATION_PORTABLE_ACCEPTANCE_20261013.md. One bounded promotion.
+Named-workstream lifecycle passed in a retained local-bare Git fixture:
+seven commits/pushes,drift/revalidation,no-ff integration and eligible cleanup;
+seven lifecycle guards and six false-attestation controls passed. See
+WORKSTREAM_LIFECYCLE_ACCEPTANCE_20261013.md. This is not real main integration.
+Fixture /cache/cch/mst-workstream-lifecycle-f6v78cil remains for read-only audit.
 
-Onboarding passed: retained exact-main copy,six inventory tests; see
-ONBOARDING_EXACT_MAIN_ACCEPTANCE_20261013.md. Completed-plan association repair
-passed seven controls: COMPLETED_ITERATION_REVIEW_20261013.md,63354d35.
-Planning main example remains defective/unmerged; its acceptance stays partial.
+Transformation portable delivery passed three new and12 existing controls;
+see TRANSFORMATION_PORTABLE_ACCEPTANCE_20261013.md. Onboarding passed six
+inventory tests: ONBOARDING_EXACT_MAIN_ACCEPTANCE_20261013.md.
+Completed-plan repair passed seven controls: COMPLETED_ITERATION_REVIEW_20261013.md.
+Planning main example remains defective/unmerged; acceptance stays partial.
 
-Inference-loop first-screen threshold review is complete (eight tests/six raw
-runs); see INFERENCE_LOOP_OBLIGATION_REVIEW_20261013.md. Host-gap association
-is complete (eight traces/six tests); see HYPIC_HOST_GAP_ASSOCIATION_20261013.md.
-Do not repeat these completed reviews or infer causal proof from overlap.
+Completed obligation reviews — do not repeat unchanged:
+- INFERENCE_LOOP_OBLIGATION_REVIEW_20261013.md: eight tests/six raw runs.
+- HYPIC_HOST_GAP_ASSOCIATION_20261013.md: eight traces/six tests; no causal proof.
+- BENCHMARK_R13_PROTOCOL_OBLIGATION_REVIEW_20261013.md: chronology/identity/
+  diagnostic-overhead limits remain partial; no repeated device phases.
+- HYPIC_PROFILER_HISTORY_REVIEW_20261013.md: all7 phases,six controls; r3 omission
+  corrected; executed Prefill controller bytes remain unavailable.
+- Report repair ea5e16b2: six-phase replay and7 report tests passed.
 
-Host-maintenance entrypoint refactor:185 to102 lines, three required references;
-original procedures preserved except relocated link syntax. Eight tests and
-two historical abort replays passed. See hypic-host-reference-split-20261013
-transformation eval. Branch repair only; do not repeat the fourteen-entry
-registry repair or infer full Skill/main acceptance from this structure check.
-
-Benchmark r13 obligation review is complete; see
-BENCHMARK_R13_PROTOCOL_OBLIGATION_REVIEW_20261013.md. Reconnection replay0004
-passed; historical identity/progression/overhead limits remain partial evidence.
-Do not repeat this review or its completed device phases. Counts remain9/20.
-
-Current/historical handoff repair is committed874ec388. Report review031a
-found missing round-level TPOT P95/duration; repaired from existing raw data.
-031c passed six-phase raw replay and7 report tests; report repair commitea5e16b2.
-0329 reviewed all7 retained profiler phases and6 negative-control tests.
-See HYPIC_PROFILER_HISTORY_REVIEW_20261013.md: r3 was omitted from the old
-failure table; Prefill executed-controller bytes remain unavailable. Do not
-repeat this completed inventory/search. No Skill promotion; review only
-genuinely remaining exact-main obligations against existing evidence.
-Preserve negative verdicts,exact raw hashes and the two pre-existing untracked
+Host-maintenance reference extraction (185→102 lines,three references) passed
+eight tests/two historical abort replays: hypic-host-reference-split-20261013 eval.
+This is a branch repair; do not repeat the fourteen-entry registry repair.
+Current/historical handoff repair remains at874ec388.
+Preserve negative verdicts,exact raw hashes and both pre-existing untracked
 observer-v3 drafts; do not stage or activate them.
-Do not reinterpret the successful performance supplement as a deployment gate.
+Do not convert the successful performance supplement into deployment acceptance.
 Loop-framework full acceptance still lacks fresh-agent orient/validate/push
-evidence; local docs/tests alone cannot prove that behavior.
+evidence; this Git fixture is not that separate workflow.
 
 ## 5. Next Actions
 

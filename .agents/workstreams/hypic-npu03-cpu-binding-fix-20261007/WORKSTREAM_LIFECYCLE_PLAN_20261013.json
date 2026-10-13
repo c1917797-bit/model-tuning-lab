@@ -1,0 +1,44 @@
+{
+  "schema": "mst-workstream-lifecycle-acceptance-plan/v1",
+  "id": "mst-local-git-lifecycle-20261013",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "skill": "mst-parallel-workstreams",
+  "skill_blob": "c47b989bc006561d347e0fbfe5d59026fb8e91e0",
+  "task": "Exercise actual Git start/push/drift/revalidation/serialized merge/reclamation in an isolated repository; do not mutate model-tuning-lab main.",
+  "scope": {
+    "host": "chicaihong01",
+    "resource": "CPU and local files only",
+    "root_prefix": "/cache/cch/mst-workstream-lifecycle-",
+    "transport": "local bare Git remote, not GitHub authentication",
+    "retain": "bare remote and primary checkout for independent read-only audit",
+    "cleanup": "only the fixture-owned worktree after reachability, clean state and released claims are proven"
+  },
+  "steps": [
+    "fresh primary equals bare origin",
+    "named worktree plus frozen original base and claims",
+    "start validation/commit/push/equality before product edit",
+    "bounded product change and validated branch checkpoint",
+    "advance target and reject stale integration",
+    "merge fetched target without rewriting history and revalidate",
+    "mark branch completed/ready with validated content identity",
+    "exclusive integrator prepares no-ff merge and target-owned state",
+    "validate exact final tree then commit/push normally",
+    "verify parent/source/remote equality and reclaim exact fixture worktree"
+  ],
+  "negative_controls": [
+    "detached authoring rejected",
+    "dirty readiness rejected",
+    "stale target rejected",
+    "wrong attested source rejected",
+    "competing integrator rejected",
+    "exclusive-claim order chooses earlier claimant",
+    "unmerged reclamation rejected"
+  ],
+  "boundaries": [
+    "No real GitHub push or main integration proved",
+    "No actual multi-agent scheduling proved",
+    "No NPU work",
+    "No HYPIC quality retest",
+    "Do not promote based on synthetic gate unit tests alone; require complete actual Git transaction and independent final audit"
+  ]
+}

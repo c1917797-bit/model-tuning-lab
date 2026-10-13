@@ -1,17 +1,17 @@
 {
   "schema": "mst-real-task-skill-case/v1",
   "skill": "mst-parallel-workstreams",
-  "campaign_code": "P",
-  "long_term_acceptance": "partial-evidence",
+  "campaign_code": "V",
+  "long_term_acceptance": "verified",
   "behavioral_evidence_verified": true,
-  "task": "Audit live HYPIC workstream branch and repair ambiguous execution-versus-integration task state without touching the concurrent canonical workstream or NPU service",
+  "task": "Execute and independently audit exact-main named-workstream start/push/drift/revalidation/serialized integration/reclamation in an isolated Git repository with local bare origin",
   "executed_at_utc": "2026-10-09",
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "c47b989bc006561d347e0fbfe5d59026fb8e91e0",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
   "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "current_skill_and_registry_blobs_unchanged": true,
-  "environment_scope": "chicaihong01 named HYPIC task clone; branch-local state and CPU-only regression; physical NPU0-3 live quality service and unrelated canonical dirty workstream untouched",
+  "environment_scope": "chicaihong01 CPU-only retained Git lifecycle fixture; actual Git transport to a local bare remote; real model-tuning-lab primary/upstream and NPU resources untouched",
   "observed": {
     "named_branch_attached": true,
     "task_clone_worktree_count": 1,
@@ -37,9 +37,53 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY19_PREREGISTRATION_20261009.md",
       "sha256": "b1e1afeb63d0bad7d8b2d42bab434f6fe83ad4e9fc7f5ccf982fd189f3dd3b30"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/WORKSTREAM_LIFECYCLE_PLAN_20261013.json",
+      "sha256": "958ad2ac70b8534e231e4e2a273563e3fe2308cff7fcd6a8f6932ba43568d11e"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/run_local_git_lifecycle.py",
+      "sha256": "169f9ecafc031ef835a717621cce643218adcfc80fbe271048b49d3cb8452638"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/audit_local_git_lifecycle.py",
+      "sha256": "dc01faf29b57a3e7245db30c6bedcd417cf00db3257ffe4e48379aa4adab8e9f"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_local_git_lifecycle_audit.py",
+      "sha256": "a645efb91592d27bcfbc04a6b94dd873c034edcce8dec4c9553af1046cd3df3a"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/WORKSTREAM_LIFECYCLE_ACCEPTANCE_20261013.md",
+      "sha256": "9d566451c2d4d5317cd480f0581adb2955496ef0e2579887fd57616a07017cdf"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/WORKSTREAM_LIFECYCLE_RECEIPTS_20261013.json",
+      "sha256": "17a87d9c0e59a58726a8d9b3a4f6db0be34243be4fd5acf80f67d947ce68f805"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "The main Skill's separate state axes exposed and repaired one real handoff defect. At case execution, the HYPIC task was 51 commits ahead of upstream. Later workstream pushes do not prove main integration or reclamation; the wider Skill-validation task remains in progress. The mutable live task.json is checked by the focused regression, not pinned as immutable case evidence. No full 29-Skill acceptance follows.",
-  "drift_trigger": "Re-run and update this case after task.json or handoff-test changes, r13 terminal transition, upstream/main movement, any new worktree claim, or eventual remote push/integration."
+  "boundary": "Bounded verified for actual Git workstream creation/start push, target drift and revalidation, exact-source serialized no-ff integration, remote equality and eligible cleanup using a local bare origin. Seven lifecycle guards and six independent false-attestation controls pass. No GitHub authentication/protection, actual multi-agent scheduling, real model-tuning-lab main integration, NPU readiness or all29-Skill acceptance follows. The historical case remains retained; current production workstream stays in-progress/not-ready.",
+  "drift_trigger": "Replay retained object/receipt audit after Skill contract, lifecycle runner/auditor, actual Git state, registry or fixture provenance changes; real GitHub integration needs separate authenticated evidence.",
+  "historical_scope_before_local_lifecycle": {
+    "task": "Audit live HYPIC workstream branch and repair ambiguous execution-versus-integration task state without touching the concurrent canonical workstream or NPU service",
+    "environment_scope": "chicaihong01 named HYPIC task clone; branch-local state and CPU-only regression; physical NPU0-3 live quality service and unrelated canonical dirty workstream untouched",
+    "boundary": "The main Skill's separate state axes exposed and repaired one real handoff defect. At case execution, the HYPIC task was 51 commits ahead of upstream. Later workstream pushes do not prove main integration or reclamation; the wider Skill-validation task remains in progress. The mutable live task.json is checked by the focused regression, not pinned as immutable case evidence. No full 29-Skill acceptance follows."
+  },
+  "local_lifecycle_supplement_20261013": {
+    "root": "/cache/cch/mst-workstream-lifecycle-f6v78cil",
+    "actual_commits": 7,
+    "actual_pushes": 7,
+    "lifecycle_negative_controls": 7,
+    "auditor_negative_controls": 6,
+    "run": "mc exec-0000000000000069 exit0",
+    "independent_audit": "mc exec-000000000000006a exit0",
+    "regression": "mc exec-000000000000006c exit0",
+    "source": "b483d2bd58757b6d1604c1199ab7747d9438718c",
+    "merged": "6cfd993eb1619626ea16c1535f26ca1e88f964ba",
+    "remote_branch_retained": true,
+    "real_github_authentication": false,
+    "real_main_integrated": false
+  }
 }

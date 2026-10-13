@@ -1,0 +1,54 @@
+{
+  "schema": "sanitized-execution-receipts/v1",
+  "peer": "chicaihong01/mc",
+  "run": {
+    "operation_id": "exec-0000000000000069",
+    "command": "python3",
+    "args": [
+      "-B",
+      ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/run_local_git_lifecycle.py",
+      "--run"
+    ],
+    "cwd": "/cache/cch/model-tuning-lab-hypic-e2e-20261006",
+    "exit_code": 0,
+    "stdout": "{\"base\": \"10bc1b154a53571b10439d5f97cee2ea3504bb60\", \"frozen_policy_sha256\": \"995fbc3386d3fc602c13cb605742ee5e1e2fc65f62fab9789efa0a082c036004\", \"implemented\": \"470147cdcfdc70882c3311418e96da644f96b055\", \"merged\": \"6cfd993eb1619626ea16c1535f26ca1e88f964ba\", \"negative_controls\": 7, \"real_github_authentication\": false, \"real_model_tuning_main_changed\": false, \"revalidated\": \"0f43f88449316f3168019aa36c6096950ede9418\", \"root\": \"/cache/cch/mst-workstream-lifecycle-f6v78cil\", \"schema\": \"mst-local-git-lifecycle-result/v1\", \"skill_blob\": \"c47b989bc006561d347e0fbfe5d59026fb8e91e0\", \"source\": \"b483d2bd58757b6d1604c1199ab7747d9438718c\", \"start\": \"494fdc5137404ac6b986da2e355a5bf5b854b9b4\", \"target_parent\": \"aadfe8157be5e85b265413d88b734d29c9389032\", \"transport\": \"local bare Git origin\"}\n",
+    "stderr": ""
+  },
+  "initial_audit": {
+    "operation_id": "exec-000000000000006a",
+    "command": "python3",
+    "args": [
+      "-B",
+      ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/audit_local_git_lifecycle.py",
+      "/cache/cch/mst-workstream-lifecycle-f6v78cil"
+    ],
+    "cwd": "/cache/cch/model-tuning-lab-hypic-e2e-20261006",
+    "exit_code": 0,
+    "stdout": "{\"actual_commits\": 7, \"actual_pushes\": 7, \"merged\": \"6cfd993eb1619626ea16c1535f26ca1e88f964ba\", \"negative_controls\": 7, \"remote_branch_retained\": true, \"root\": \"/cache/cch/mst-workstream-lifecycle-f6v78cil\", \"schema\": \"mst-local-git-lifecycle-audit/v1\", \"scope\": \"local bare Git transport; not GitHub authentication or actual model-tuning-lab main\", \"source\": \"b483d2bd58757b6d1604c1199ab7747d9438718c\", \"valid\": true, \"worktrees_remaining\": 1}\n",
+    "stderr": ""
+  },
+  "initial_regression": {
+    "operation_id": "exec-000000000000006b",
+    "command": "bash",
+    "args": [
+      "-c",
+      "set -e\npython3 -B -m unittest discover -s .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007 -p test_local_git_lifecycle_audit.py\npython3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/audit_local_git_lifecycle.py /cache/cch/mst-workstream-lifecycle-f6v78cil\nsha256sum .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/WORKSTREAM_LIFECYCLE_PLAN_20261013.json .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/run_local_git_lifecycle.py .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/audit_local_git_lifecycle.py .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_local_git_lifecycle_audit.py /cache/cch/mst-workstream-lifecycle-f6v78cil/result.json /cache/cch/mst-workstream-lifecycle-f6v78cil/execution-journal.json\n"
+    ],
+    "cwd": "/cache/cch/model-tuning-lab-hypic-e2e-20261006",
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "..E...\n======================================================================\nERROR: test_wrong_original_base (test_local_git_lifecycle_audit.LifecycleAttestationTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/cache/cch/model-tuning-lab-hypic-e2e-20261006/.agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_local_git_lifecycle_audit.py\", line 23, in test_wrong_original_base\n    self.rejects(\"base\",self.actual[\"implemented\"])\n  File \"/cache/cch/model-tuning-lab-hypic-e2e-20261006/.agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_local_git_lifecycle_audit.py\", line 17, in rejects\n    audit(self.root,altered)\n  File \"/cache/cch/model-tuning-lab-hypic-e2e-20261006/.agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/audit_local_git_lifecycle.py\", line 34, in audit\n    subprocess.run([\"git\",\"merge-base\",\"--is-ancestor\",parent,child],cwd=primary,\n  File \"/usr/lib64/python3.9/subprocess.py\", line 528, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['git', 'merge-base', '--is-ancestor', '470147cdcfdc70882c3311418e96da644f96b055', '494fdc5137404ac6b986da2e355a5bf5b854b9b4']' returned non-zero exit status 1.\n\n----------------------------------------------------------------------\nRan 6 tests in 0.147s\n\nFAILED (errors=1)\n"
+  },
+  "corrected_regression": {
+    "operation_id": "exec-000000000000006c",
+    "command": "bash",
+    "args": [
+      "-c",
+      "set -e\npython3 -B -m unittest discover -s .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007 -p test_local_git_lifecycle_audit.py\npython3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/audit_local_git_lifecycle.py /cache/cch/mst-workstream-lifecycle-f6v78cil\nsha256sum .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/WORKSTREAM_LIFECYCLE_PLAN_20261013.json .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/run_local_git_lifecycle.py .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/audit_local_git_lifecycle.py .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_local_git_lifecycle_audit.py /cache/cch/mst-workstream-lifecycle-f6v78cil/result.json /cache/cch/mst-workstream-lifecycle-f6v78cil/execution-journal.json\n"
+    ],
+    "cwd": "/cache/cch/model-tuning-lab-hypic-e2e-20261006",
+    "exit_code": 0,
+    "stdout": "{\"actual_commits\": 7, \"actual_pushes\": 7, \"merged\": \"6cfd993eb1619626ea16c1535f26ca1e88f964ba\", \"negative_controls\": 7, \"remote_branch_retained\": true, \"root\": \"/cache/cch/mst-workstream-lifecycle-f6v78cil\", \"schema\": \"mst-local-git-lifecycle-audit/v1\", \"scope\": \"local bare Git transport; not GitHub authentication or actual model-tuning-lab main\", \"source\": \"b483d2bd58757b6d1604c1199ab7747d9438718c\", \"valid\": true, \"worktrees_remaining\": 1}\n958ad2ac70b8534e231e4e2a273563e3fe2308cff7fcd6a8f6932ba43568d11e  .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/WORKSTREAM_LIFECYCLE_PLAN_20261013.json\n169f9ecafc031ef835a717621cce643218adcfc80fbe271048b49d3cb8452638  .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/run_local_git_lifecycle.py\ndc01faf29b57a3e7245db30c6bedcd417cf00db3257ffe4e48379aa4adab8e9f  .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/audit_local_git_lifecycle.py\na645efb91592d27bcfbc04a6b94dd873c034edcce8dec4c9553af1046cd3df3a  .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_local_git_lifecycle_audit.py\na77919f54f7fc39451f5f08fa633a1679f1cb8e35b20ca0e70977b40f46f680f  /cache/cch/mst-workstream-lifecycle-f6v78cil/result.json\nc736250fb3bedf891af59119d6e0932b8ebac858caa1f14686c4988fce032cf9  /cache/cch/mst-workstream-lifecycle-f6v78cil/execution-journal.json\n",
+    "stderr": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.242s\n\nOK\n"
+  }
+}
