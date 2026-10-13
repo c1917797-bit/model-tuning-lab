@@ -1,5 +1,26 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-13 six-phase current-source performance completed
+
+Final offline validation02f7 passed raw-derived report tables/hash checks,
+five statistics regressions,29-case provenance and29-Skill structure,task JSON
+and diff whitespace. Benchmark/reporting cases link the report and replay
+hashes; acceptance remains9 bounded verified/20 partial,not a new promotion.
+
+Final controller02d6 exit0, exact release07:42:23UTC. Independent audit02f1
+passed40 fixed1024 requests/42 IDs/40 four-worker hot proofs/162 clean guard
+samples. Aggregate and independent statistics02f3 exit0:
+67ba6cf14fc9bed993acbdf421eb438f22d56957f3e56baad170a4bb871e53fe.
+All6 phases valid,240 scored responses,120/120 candidate hot coverage,
+1006 clean guard samples. Median TPOT−22.0163%,TTFT P95−49.6429%,
+throughput+31.7543%; r19 quality REJECT_OR_QUALIFY/no deployment unchanged.
+Read HYPIC_CURRENT_SOURCE_PERFORMANCE_FINAL_20261013.md.
+No further NPU phases; all exact services released;02f5 physical0–3/8223 idle.
+Do not rerun exclusive audit-all writer; use summarize_current_source_performance.py
+for read-only replay. Fixed deadline unchanged, supplement completed before it.
+App heartbeat absent; do not recreate for finished supplement.9 bounded/20 partial
+Skills remain; no main/remote synchronization or full-goal completion claim.
+
 ## 2026-10-13 report statistics prepared while final phase runs
 
 summarize_current_source_performance.py is read-only: after exclusive audit-all
