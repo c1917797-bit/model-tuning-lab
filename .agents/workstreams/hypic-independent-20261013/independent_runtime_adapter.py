@@ -4,9 +4,33 @@ from pathlib import Path
 from independent_request_map import freeze_request_slices
 from independent_runner_context import install_runner_context
 from independent_cache_map import freeze_cache_slices
+from independent_linear_map import freeze_prefill_linear_slices
 BLOCK_TABLE_SHA256="8f77809c12af3bd9d56974edbbe5c792995f2620aadfe62411806f2e68d2ef0a"
 RUNNER_SHA256="94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968"
 steps=weakref.WeakKeyDictionary();lock=threading.Lock()
+
+def associate_native_linear(layer,requests,metadata):
+    """Source-bound pure-prefill GDN association for the treatment entry.
+    Reject mixed/spec batches; fallback selection must happen before invoking.
+    No tensor mutation or independently claimed scheduler ownership lease.
+    """
+    cls=type(layer)
+    if cls.__name__!="AscendGatedDeltaNetAttention" or cls.__module__!="vllm_ascend.ops.gdn":
+        raise ValueError("unexpected linear runtime class")
+    if hashlib.sha256(Path(inspect.getfile(cls)).read_bytes()).hexdigest()!="d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816":
+        raise ValueError("official GDN source drift")
+    if metadata.num_prefills!=len(requests):
+        raise ValueError("pure-prefill sequence coverage mismatch")
+    conv,state=layer.kv_cache[0],layer.kv_cache[1]
+    if conv.shape[0]!=state.shape[0]:
+        raise ValueError("conv/SSM slot capacity mismatch")
+    return freeze_prefill_linear_slices(
+        requests,metadata.prefill_query_start_loc.detach().cpu().tolist(),
+        metadata.prefill_state_indices.detach().cpu().tolist(),
+        metadata.prefill_has_initial_state.detach().cpu().tolist(),
+        state_capacity=state.shape[0],
+        speculative=metadata.spec_sequence_masks is not None,
+        num_decodes=metadata.num_decodes)
 def verify_runner(cls):
     if cls.__name__!="NPUModelRunner" or cls.__module__!="vllm_ascend.worker.model_runner_v1":
         raise ValueError("unexpected runner identity")

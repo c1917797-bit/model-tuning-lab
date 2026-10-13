@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Latest offline treatment preparation: independent_linear_map plus source-bound
+associate_native_linear added for exact pure-prefill request/metadata/SSM slot
+association; rejects alias, sequence-order mismatch, bad initial flag and spec/mixed
+batches.57 component tests0013 pass; no new device run. Runtime GDN mapping not
+yet exercised. Next use this at C1 treatment entry, build public segment material
+and write private state after live boundary; integrate C2/seam before formal claims.
+No complete serving treatment implementation exists yet.
+
 LATEST ma/000f R3 terminal exit0,3 native responses. Independent raw audit:
 four TP rank receipts0–3, same request step1 Prefill25 and step2 Decode1,
 group0/16 full-attention layers/block128; CPU table slots equal live device slots.
