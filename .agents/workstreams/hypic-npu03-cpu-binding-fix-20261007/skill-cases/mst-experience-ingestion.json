@@ -1,5 +1,12 @@
 {
-  "main_review_20261013": {"previous_main":"ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2","current_main":"23ec33d7d692bb77d17fb5b81aabacf57adad5c7","scope":"Review of integrated diff and exact Skill/registry identities; historical device outcomes unchanged","entrypoint_changed":false,"runtime_assets_changed":false,"new_device_work":false},
+  "main_review_20261013": {
+    "previous_main": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+    "current_main": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+    "scope": "Review of integrated diff and exact Skill/registry identities; historical device outcomes unchanged",
+    "entrypoint_changed": false,
+    "runtime_assets_changed": false,
+    "new_device_work": false
+  },
   "schema": "mst-real-task-skill-case/v1",
   "skill": "mst-experience-ingestion",
   "campaign_code": "V",
@@ -19,7 +26,10 @@
     "branch_host_skill_contains_guard": true,
     "branch_registry_discovery_trigger_added": true,
     "attempts_checked": 2,
-    "physical_npus_with_foreign_processes": [2, 3],
+    "physical_npus_with_foreign_processes": [
+      2,
+      3
+    ],
     "scored_samples_per_attempt": 0,
     "owned_containers_removed": true,
     "immutable_raw_hashes_checked": true,
@@ -42,9 +52,33 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R7_RESOURCE_CONFLICT.md",
       "sha256": "c276c442c07527b8016641f3865cc726c690f8c4610075a0077e32adbc0a6f55"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/EXPERIENCE_MAIN_REPAIR_REVIEW_20261013.json",
+      "sha256": "583f5c6baa693d7244bd0a87697197cd02f7d8003aa6c082660b2faae7a825fa"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_main_repair_ingestion.py",
+      "sha256": "7cb3020949787f5283d9649369dd2c2a756f1211cfb1e56d4484e8f9365228ef"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_main_repair_ingestion.py",
+      "sha256": "362165221a54241c763ab74c71455f00732eb3706e9eb0fccd67fc96b9b968f9"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "This real session validates bounded experience classification and the branch-local guard/eval against two raw startup aborts. The current main host-maintenance Skill lacks the continuous re-entry rule, so long-term acceptance remains partial until integrated and tested from a fresh main checkout. It does not establish HYPIC quality or performance.",
-  "drift_trigger": "Revalidate when main integrates the host-maintenance guard or registry, raw artifact roots change, or the shared-NPU isolation protocol changes."
+  "boundary": "This real session validates bounded experience classification and the branch-local guard/eval against two raw startup aborts. The current main host-maintenance Skill lacks the continuous re-entry rule, so long-term acceptance remains partial until integrated and tested from a fresh main checkout. It does not establish HYPIC quality or performance. A separate real main-repair review maps three accepted lessons to explicit classifications and four-question gates; seven controls pass. Two incomplete main proposal records still need selective metadata integration. This supplement does not retroactively integrate the old host guard or promote full Skill acceptance.",
+  "drift_trigger": "Revalidate when main integrates the host-maintenance guard or registry, raw artifact roots change, or the shared-NPU isolation protocol changes.",
+  "main_repair_ingestion_review_20261013": {
+    "source_main": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+    "report": "EXPERIENCE_MAIN_REPAIR_REVIEW_20261013.json",
+    "structured_lessons": 3,
+    "main_proposals_with_all_explicit_fields": 1,
+    "supplement_proposals_with_all_explicit_fields": 3,
+    "tests_passed": 7,
+    "operation": "exec-0000000000000131",
+    "supplement_main_integrated": false,
+    "original_host_guard_case_unchanged": true
+  },
+  "next_gate": "Selectively reconcile the two main proposal records using the source-bound review after publication and target refresh. Keep original host-guard evidence partial; no device reruns or whole experimental-branch merge."
 }

@@ -77,7 +77,6 @@ see TRANSFORMATION_PORTABLE_ACCEPTANCE_20261013.md. Onboarding passed six
 inventory tests: ONBOARDING_EXACT_MAIN_ACCEPTANCE_20261013.md.
 Completed-plan repair passed seven controls: COMPLETED_ITERATION_REVIEW_20261013.md.
 Planning main example repaired/integrated; bounded case promoted to verified.
-
 Completed obligation reviews — do not repeat unchanged:
 - INFERENCE_LOOP_OBLIGATION_REVIEW_20261013.md: eight tests/six raw runs.
 - HYPIC_HOST_GAP_ASSOCIATION_20261013.md: eight traces/six tests; no causal proof.
@@ -86,10 +85,10 @@ Completed obligation reviews — do not repeat unchanged:
 - HYPIC_PROFILER_HISTORY_REVIEW_20261013.md: all7 phases,six controls; r3 omission
   corrected; executed Prefill controller bytes remain unavailable.
 - Report repair ea5e16b2: six-phase replay and7 report tests passed.
-
 Host-maintenance reference extraction (185→102 lines,three references) passed
 eight tests/two historical abort replays: hypic-host-reference-split-20261013 eval.
 This is a branch repair; do not repeat the fourteen-entry registry repair.
+See EXPERIENCE_MAIN_REPAIR_REVIEW_20261013.json for three explicit lessons.
 Current/historical handoff repair remains at874ec388.
 Preserve negative verdicts,exact raw hashes and both pre-existing untracked
 observer-v3 drafts; do not stage or activate them.
@@ -105,9 +104,9 @@ evidence; this Git fixture is not that separate workflow.
    do not rerun completed HYPIC merely to improve acceptance counts.
 3. Record only demonstrated fixes and task-scoped acceptance; derive current
    counts from verified case evidence, never from structural checks alone.
-4. main23ec33d7 is published. Retain repair remote branch; after exact usage
-   and claim checks reclaim only its clean, merged local worktree/branch.
-   Original experiment branch is not ready for whole-branch integration.
+4. mc012e remote-ref refresh failed before cleanup; retain checkout/branch/lock.
+   No deletion occurred. Recheck connectivity once changed, then exact usage.
+   Seven ingestion controls passed; selectively integrate two proposal records.
 5. Lifecycle attempt terminal:0 requests, uninstall not started; no retry scheduled.
    Continue offline integration; no quality/performance rerun or old-root reuse.
 

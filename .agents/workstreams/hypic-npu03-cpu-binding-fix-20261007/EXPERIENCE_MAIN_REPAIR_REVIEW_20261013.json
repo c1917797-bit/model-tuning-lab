@@ -1,0 +1,85 @@
+{
+  "schema": "mst-experience-ingestion-review/v1",
+  "status": "branch-supplement-not-main-integrated",
+  "main_commit": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+  "source_proposal_blob": "24a66ce8c986dc44266f0f56948c637e958afabf",
+  "practice_source": "skill-repairs-20261013 selective integration on chicaihong01",
+  "task_goal": "Make actual planning and generic runtime-template failures reproducible and reusable without importing HYPIC experiment code",
+  "selected_skills": [
+    "mst-experience-ingestion",
+    "mst-transformation-verification",
+    "mst-practice-iteration-planning",
+    "runtime-monkeypatch-delivery",
+    "mst-git-checkpoint-policy"
+  ],
+  "facts": [
+    "Main's planning example used the wrong schema and omitted the validated checkpoint field; the repaired generated example passes while old-schema and missing-checkpoint controls fail.",
+    "The generic runtime template needed a real validator, opt-in activation and fatal worker-local startup failure handling; nine subprocess tests pass on the integrated repair.",
+    "The documented direct validator command raised PermissionError at mode0644; deriving executable mode0755 with unchanged source bytes fixed that command and both positive/negative direct CLI controls pass.",
+    "Six selected files were normally merged and pushed as main23ec33d7; a fresh local no-hardlinks clone passed focused checks and structure validation.",
+    "Main's proposal records have all four ingestion questions explicit for the direct-CLI lesson, but planning/runtime records omit explicit trigger/action/verification fields; this supplement makes the mapping explicit without rewriting their historical decision."
+  ],
+  "registry_decision": {
+    "changed": false,
+    "reason": "No new Skill, Skill name, description or discovery trigger is introduced by this lesson-record supplement; existing destination IDs remain selected and registry blob2611864 is unchanged."
+  },
+  "lessons": [
+    {
+      "id": "planning-schema",
+      "classification": 1,
+      "scope": "repository-specific",
+      "severity": "medium",
+      "trigger": "When copying the documented practice-iteration YAML into a real maintenance plan",
+      "different_action": "Instantiate the actual example and run the maintained validator; include the maintained schema and a real validated_commit",
+      "destination": ".agents/skills/mst-practice-iteration-planning/SKILL.md",
+      "verification": "validate_selected_repairs.py planning controls: valid passes, old schema and missing checkpoint fail",
+      "validation_command": "python3 -B .agents/workstreams/skill-repairs-20261013/validate_selected_repairs.py",
+      "files_changed": [
+        ".agents/skills/mst-practice-iteration-planning/SKILL.md"
+      ],
+      "checkpoint": "f9af6d162b34ceaf96179ecbd963d8b90172693c"
+    },
+    {
+      "id": "runtime-template",
+      "classification": 1,
+      "scope": "general",
+      "severity": "high",
+      "trigger": "When delivering a new inference-runtime technique through the reusable monkeypatch template",
+      "different_action": "Leave activation disabled unless opted in, validate exact package identity, and abort worker startup when enabled installation fails",
+      "destination": ".agents/skills/runtime-monkeypatch-delivery/assets/template",
+      "verification": "Nine subprocess tests exercise switches, worker installation failure, manifest identity and invalid packages; CPU scope only",
+      "validation_command": "python -B -m unittest discover -s tests -p test_validate_monkeypatch_package.py",
+      "files_changed": [
+        ".agents/skills/runtime-monkeypatch-delivery/assets/template/MANIFEST.json",
+        ".agents/skills/runtime-monkeypatch-delivery/assets/template/run_with_patch.sh",
+        ".agents/skills/runtime-monkeypatch-delivery/assets/template/sitecustomize.py",
+        "scripts/validate_monkeypatch_package.py",
+        "tests/test_validate_monkeypatch_package.py"
+      ],
+      "checkpoint": "f9af6d162b34ceaf96179ecbd963d8b90172693c"
+    },
+    {
+      "id": "documented-direct-cli",
+      "classification": 5,
+      "scope": "general",
+      "severity": "medium",
+      "trigger": "A Skill documents an executable command",
+      "different_action": "Execute the exact command, not only python script.py",
+      "destination": "scripts/validate_monkeypatch_package.py",
+      "verification": "validate_selected_repairs.py direct_cli controls",
+      "validation_command": "python3 -B .agents/workstreams/skill-repairs-20261013/validate_selected_repairs.py",
+      "files_changed": [
+        "scripts/validate_monkeypatch_package.py"
+      ],
+      "checkpoint": "f9af6d162b34ceaf96179ecbd963d8b90172693c"
+    }
+  ],
+  "claim_boundary": {
+    "new_npu_work": false,
+    "historical_host_guard_integrated": false,
+    "full_skill_acceptance": false,
+    "proposed_metadata_integrated": false,
+    "original_hypic_verdict_unchanged": true
+  },
+  "next": "After validation and publication, selectively reconcile the two incomplete proposal records into a new named main workstream. Do not merge the whole HYPIC branch or retry NPU stages."
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "mst-worktree-retention/v1",
+  "target": "/cache/cch/model-tuning-lab-skill-repairs-20261013",
+  "retained_source": "06365feb165898a86305296dc007b40ec4e09461",
+  "published_main": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+  "operation": "exec-000000000000012e",
+  "state": "completed",
+  "exitCode": 1,
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 23, in <module>\nAssertionError: remote state unavailable\n",
+  "mutation_reached": false,
+  "classification": "remote-ref-refresh-unavailable-before-mutation",
+  "worktree_deleted": false,
+  "local_branch_deleted": false,
+  "remote_branch_deleted": false,
+  "lock_released": false,
+  "next": "Keep the exact worktree and lock; recheck remote state once connectivity changes, then perform live usage and retention guards; no force removal"
+}
