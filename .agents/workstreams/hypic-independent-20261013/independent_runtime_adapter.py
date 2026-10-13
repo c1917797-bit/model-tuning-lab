@@ -4,7 +4,7 @@ from pathlib import Path
 from independent_request_map import freeze_request_slices
 from independent_runner_context import install_runner_context
 from independent_cache_map import freeze_cache_slices
-BLOCK_TABLE_SHA256="b79a46abf8feb0e2ad9e9de64b55e6fc6d3597eadbd903993cbf4e3e74f1f324"
+BLOCK_TABLE_SHA256="8f77809c12af3bd9d56974edbbe5c792995f2620aadfe62411806f2e68d2ef0a"
 RUNNER_SHA256="94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968"
 steps=weakref.WeakKeyDictionary();lock=threading.Lock()
 def verify_runner(cls):
@@ -43,7 +43,7 @@ def capture_native_cache_slices(runner,requests,*,attention_group_ids):
     if not groups or len(set(groups))!=len(groups) or any(type(x) is not int or x<0 for x in groups):
         raise ValueError("explicit unique attention cache groups required")
     verify_runner(type(runner))
-    from vllm.v1.worker.block_table import MultiGroupBlockTable
+    from vllm_ascend.worker.block_table import MultiGroupBlockTable
     cls=type(runner.input_batch.block_table)
     if cls is not MultiGroupBlockTable:
         raise ValueError("unexpected block-table implementation")

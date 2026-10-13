@@ -103,7 +103,8 @@ def run_contract(contract):
     raw=Path(contract["raw_root"])
     if raw.exists():raise RuntimeError("Immutable attempt root already exists")
     assert hashlib.sha256((model/"config.json").read_bytes()).hexdigest()==contract["model_config_sha256"]
-    command(["docker","image","inspect",image])
+    image_info=json.loads(command(["docker","image","inspect",image]))[0]
+    inherited_pythonpath=next((x.split("=",1)[1] for x in image_info["Config"].get("Env",[]) if x.startswith("PYTHONPATH=")),"")
     diagnostic=contract.get("cache_diagnostic")
     if diagnostic:
         for name,expected in diagnostic["source_sha256"].items():
@@ -161,7 +162,7 @@ def run_contract(contract):
         for k,v in env.items():args+=["-e",k+"="+v]
         if diagnostic:
             args+=["-v",str(HERE)+":/probe:ro",
-                   "-e","PYTHONPATH=/probe/diagnostic_bootstrap:/probe",
+                   "-e","PYTHONPATH=/probe/diagnostic_bootstrap:/probe:"+inherited_pythonpath,
                    "-e","INDEPENDENT_CACHE_DIAGNOSTIC=1",
                    "-e","INDEPENDENT_DIAGNOSTIC_ROOT=/scratch/diagnostics",
                    "-e","INDEPENDENT_DIAGNOSTIC_BATCHES=2"]

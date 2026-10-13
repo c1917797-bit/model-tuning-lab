@@ -1,0 +1,43 @@
+{
+  "scope": "Bounded native TP4 request/cache association; no HYPIC treatment",
+  "operation": "exec-000000000000000f",
+  "audit": "independent raw receipt/isolation/container absence checks passed",
+  "raw_root": "/cache/cch/hypic-independent-20261013/tp4-cache-association-r3-ascend-table",
+  "responses": 3,
+  "rank_receipts": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "per_rank_steps": [
+    1,
+    2
+  ],
+  "prefill_scheduled_tokens": 25,
+  "decode_scheduled_tokens": 1,
+  "full_attention_group": 0,
+  "full_attention_layers": 16,
+  "block_size": 128,
+  "isolation_samples": 187,
+  "physical_cards_observed": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "exact_removed_container": "a88eebfa2edc47cfb6ef6c9a66b82c0ff73e244703742e896568559713ad07f2",
+  "hashes": {
+    "result.json": "4c89fcd535d14b39eb96557555e1daed3a04e698129492a42d6bd3b2a76ce271",
+    "events.jsonl": "24cb34a38771058d09096e3b7573a5e63cbeb775808172a3bfbf1d0b8107bf03",
+    "service.log": "faf722beda5d9b8c67e6a736294120475008dfdb325d194b85a31c60fd918512",
+    "responses.json": "02bbf6b158a985b31b47defd92d11644ff89e6d5f06a40c0bdd1dab349051a72"
+  },
+  "limitations": [
+    "Only first request's first two steps observed",
+    "No linear state lease/slot capture",
+    "No actual cache layout format capture",
+    "Not HYPIC activation, formal baseline, performance, quality or all-Skill acceptance",
+    "Runtime sources at launch pinned by contract hashes; Git HEAD alone did not include pending edits"
+  ]
+}

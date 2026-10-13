@@ -1,5 +1,61 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST ma/000f R3 terminal exit0,3 native responses. Independent raw audit:
+four TP rank receipts0–3, same request step1 Prefill25 and step2 Decode1,
+group0/16 full-attention layers/block128; CPU table slots equal live device slots.
+187 clean isolation samples, exacta88eebfa... absent,8233 free/final0–3 empty.
+TP4_CACHE_ASSOCIATION_R3_AUDIT.json preserves hashes and limits.
+No owned live device job. Do not rerun this passed association prerequisite.
+Next directly integrate independent hybrid treatment: linear state association/
+actual cache layout, public segment build then C1/C2 reuse and seam propagation.
+No full HYPIC activation, formal benchmark or quality evidence exists yet.
+
+CURRENT ma/exec-000000000000000f: TP4 association-r3-ascend-table live.
+Raw /cache/cch/hypic-independent-20261013/tp4-cache-association-r3-ascend-table.
+R2 release independently audited000d:169clean samples/exact absence; four
+observer-installed receipts exist, but zero association receipts/successful requests.
+52 regression controls000d pass after exact Ascend class binding.
+R3 NEW contract/support hash; poll same ma/000f; no mounted runtime edits/restart.
+This is bounded real serving prerequisite, not independent HYPIC success.
+
+Latest R2/ma000a terminal exit1:health200, four physical workers present,
+first request500,0 successful responses,169 clean samples, exact731454db...
+removed/8233 free/final0–3 empty by controller. Raw root immutable.
+Trace identifies adapter class identity mismatch: actual Ascend block table,
+not upstream vLLM implementation. Official image source reviewed; Ascend class
+uses same no-CP slot kernel and CPU table API; SHA2568f77809c... frozen in adapter.
+Class guard retained, now binds exact official Ascend class, not arbitrary duck type.
+No live device job; need source-hash updated NEW contract after tests/release audit.
+
+CURRENT repaired TP4 association-r2-pythonpath ma/exec-000000000000000a
+running/awaiting terminal audit. Root
+/cache/cch/hypic-independent-20261013/tp4-cache-association-r2-pythonpath.
+No-card0008 proves acl resolves under preserved image PYTHONPATH.
+New R2 contract freezes changed controller; old R1 raw root never reused.
+Poll exact ma peer/000a; no live mounted runtime source edits or restart.
+Only0–3 TP4, native requests/read-only cache receipts, no HYPIC treatment.
+
+Latest terminal:TP4 association-r1/ma0005 exit1 before health,0 requests,
+62 clean isolation samples, exact416227ed... removed,8233 free,final0–3 empty.
+Independent raw/release audit confirms no foreign samples and container absent.
+Root cause: new bootstrap replaced image PYTHONPATH, hiding CANN acl package.
+No HYPIC activation/quality result. Fix preserves inherited image Python paths.
+Old root immutable; new contract/root required after no-card acl resolution check.
+No owned device job currently live. Older CURRENT0005 lines are superseded.
+
+CURRENT TP4 cache-association-r1 controller exec-0000000000000005 on ma
+lgw_a6109c51076a4a2c9d2674ca5a8704a0 is live/awaiting audit.
+Raw root /cache/cch/hypic-independent-20261013/tp4-cache-association-r1;
+source checkpointa9051e0d, controllerd01a6a76 and six support hashes frozen.
+52 CPU tests0003 and29 Skill structure0004 pass. Fresh physical0–3 idle,
+8233 free and new-root absence0004 confirmed before launch; controller rechecks.
+Only physical0–3 mapped, TP4, actual27B weights, three32-token native requests,
+bounded post-prepare cache association (two batches/worker), no HYPIC treatment.
+AWMCP primary/RU recovered from404; old019a/r2 remains terminal, do not restart.
+Poll same ma/0005 and raw root; no edits to mounted source while live.
+After terminal audit fourworker receipts/request slots, continuous isolation and
+exact release. Controller native semantic pass alone is not observer acceptance.
+
 Latest continuation: runtime post-prepare callback and bounded cache diagnostic
 implemented; selects FullAttentionSpec groups from actual cache configuration,
 captures request/group/rank/PID/step and device slot comparison.44 CPU controls
