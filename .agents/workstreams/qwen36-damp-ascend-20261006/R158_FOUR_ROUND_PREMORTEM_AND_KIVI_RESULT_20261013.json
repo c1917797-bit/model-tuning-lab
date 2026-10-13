@@ -1,0 +1,130 @@
+{
+  "schema": "ascend.r158.evidence-based-premortem/v1",
+  "recorded_utc": "2026-10-13T19:35:14Z",
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R156_NEW24H_AUTHORITY_20261013.json",
+    "bytes": 4025,
+    "sha256": "cd1ec8cf2f12e551a5b49e95b66ef053064ac634aef1e4524430d46ce333f300"
+  },
+  "deadline_utc": "2026-10-14T18:27:36Z",
+  "clock_reset": false,
+  "success_claim": false,
+  "review_status": "MAIN four scenario rounds completed; three preparers continue executable work and challenge specific risks; not a probability estimate",
+  "actual_new_evidence": {
+    "kivi": {
+      "operation": "exec-0000000000000136",
+      "operation_exit": 0,
+      "operation_exit_semantics": "diagnostic captured successfully, not numeric pass",
+      "host_result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r156-main-atomic-001/RESULT.json",
+        "bytes": 1017984,
+        "sha256": "86dc62a0bc511ae3231502613a8a3d16c6114db87b733848b60dbaaf48a770d5"
+      },
+      "raw_result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r156-main-atomic-001/physical-single/producer/raw/ZERO_STAGE_RESULT.json",
+        "bytes": 2882,
+        "sha256": "e70e5f3b2f0851482203a5bc2418083d4e1d53236b0044c6dfdb6c286eed5489"
+      },
+      "inactive_boundary_errors": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "continuous_warm_returned": false,
+      "continuous_warm_error": "507034 vector core timeout at 2026-10-13T19:24:44Z",
+      "active_branches_executed": 0,
+      "graph_captured": false,
+      "numerical_qualified": false,
+      "model_ready": false,
+      "performance_ready": false,
+      "cleanup": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r156-main-atomic-001/physical-single/cleanup.json",
+        "bytes": 2050,
+        "sha256": "bdc3d9503dbd0003feafa2a95b130b078bf62682c570b757380a46e2720d7826"
+      },
+      "container_stopped_retained": true,
+      "cleanup_errors": [],
+      "protected_own_process": false
+    },
+    "mxr": {
+      "original_frob": 0.0030071241985744628,
+      "compensated_frob": 0.003006766598249553,
+      "limit": 0.002,
+      "verdict": "031 current compensated implementation remains incorrect for frozen gate; Y16 is not proved to be dominant cause",
+      "next_saved_tensor_diagnostic_source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-y16-saved-delta-v1-032/SOURCE_MANIFEST.json",
+        "bytes": 2589,
+        "sha256": "ae52a686258350cf2b9a6dda3d0a394a1a06f46d98d6810fe07e118950b3f21c"
+      },
+      "actual_source_audit_operation": "exec-000000000000014f",
+      "source_input_refs_verified": 10,
+      "actual_cpu_tensor_analysis_executed": false,
+      "npu_or_model_pass": false
+    },
+    "resources": {
+      "snapshot_utc": "2026-10-13T19:27:21.925223Z",
+      "physical4_7_pids": [],
+      "all4_7_AICore_percent": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "HBM_MiB": [
+        2861,
+        2860,
+        2861,
+        2860
+      ],
+      "continuous_utilization": "unmeasured",
+      "no_claim_of_zero_idle": true
+    }
+  },
+  "rounds": [
+    {
+      "id": 1,
+      "scenario": "Single issue appears fixed but another failure prevents complete execution",
+      "evidence": "KIVI inactive flags repaired, continuous warm still times out; MXR Y16 repair leaves full tensor outside unchanged gate",
+      "action": "Separate first-fault hypotheses; preserve actual failures. KIVI next diagnostic must identify continuous dispatch failure kernel/ordering, not repeat whole failed run. MXR first consume all saved regional/tensor errors before choosing a precision repair.",
+      "pass_condition": "Independent complete device gate, not process exit0, CPU pass or one repaired flag",
+      "exit": "No unchanged deterministic rerun; current implementation failure does not invalidate paper"
+    },
+    {
+      "id": 2,
+      "scenario": "Kernel or memory optimization works locally but full model gains less than10%",
+      "evidence": "SKVQ prior graph-reserve failure; new vector packing only software evidence so far; all routes remain whole-model unqualified",
+      "action": "Maintain real worker/model integration executable in parallel with numerical repair. Check actual dispatch, graph memory, copies/metadata/fallback cost, then matched1024 screen. Consider composition only after independent qualification and measure combined implementation.",
+      "pass_condition": "Real whole-model matched output throughput, separate TTFT/TPOT; formal3pairs if promising",
+      "exit": "Valid paired insufficient gain is scoped to tested configuration; no adding kernel or technique speedup percentages"
+    },
+    {
+      "id": 3,
+      "scenario": "Performance passes late but task protocol or full evaluation cannot finish",
+      "evidence": "Latest GSM8K/HumanEval/MMLU server and tokenized inputs not yet qualified; old mixed workload/task interface cannot simply be relabeled",
+      "action": "Complete task chain now. Independently check tokenizer/prompt/EOS/scorer identity and HumanEval sandbox; measure both arms during smoke. Compute full-start deadline from remaining paired evaluation, formal performance, portability and cleanup duration with explicit uncertainty margin.",
+      "pass_condition": "Full official task coverage and reported pp/relative loss at latest allowed threshold; smoke does not prove<=1%loss",
+      "exit": "Warn and freeze candidate early if measured remaining work cannot fit; never downsample full task or loosen tolerance to meet clock"
+    },
+    {
+      "id": 4,
+      "scenario": "All routes fail or share the same runtime bottleneck; parallel agents still leave cards idle",
+      "evidence": "Three active preparers, but a source packet is not a ready hardware job; KIVI released at19:25 and19:27 snapshot all4-7idle",
+      "action": "Keep MAIN as one admission owner; use compatible disjoint single-card jobs, exclusive TP4/performance. Promote only executable READY task with source/input/command/resource/output/consumer. If no READY task, directly repair nearest missing prerequisite and record preparation gap; no dummyload. Use H4/H8 milestone misses as schedule escalation, not silent extension.",
+      "pass_condition": "Actually consumed NPU stage and bounded successor job, plus rigorous acceptance within unchanged deadline",
+      "exit": "If no new technology qualifies at cutoff, report exact unmet gates and bounded conclusions, not success or universal paper no-go"
+    }
+  ],
+  "near_term": {
+    "parallel_preparers": 3,
+    "mxr": "032 deployed and source/input audited;033 existing-owner thin execution configuration pending final review",
+    "skvq": "original256 GLOBAL gate successor under preparation; not yet MAIN-admitted",
+    "kivi": "0136 terminal consumed; next precise continuous-warm diagnosis not yet READY",
+    "evaluation": "dedicated agent preparing latest three-task executable chain; not task-ready",
+    "MAIN": "next genuine READY admission, exact raw-result consumption, fixed deadline"
+  },
+  "milestones_ref": "R156_MILESTONES_AND_CONTINGENCIES_20261013.json",
+  "risk_status": "Material success risk remains: no candidate has yet reached current whole-model acceptance. Engineering risk reduction is not a guarantee of research benefit."
+}
