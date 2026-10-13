@@ -1,0 +1,178 @@
+{
+  "schema": "ascend.dispatch-and-causal-preparation-checkpoint/v1",
+  "id": "R143",
+  "created_utc": "2026-10-13T16:04:39Z",
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R118_NEW12H_AUTHORITY_20261013.json",
+    "bytes": 3832,
+    "sha256": "32b3d57baa8f5f843d95675de57e0e8d5579dd8766c9d3d9bd320f834af05a72",
+    "cutoff_epoch": 1791922930,
+    "renewed": false
+  },
+  "goals": {
+    "long": "New non-HYPIC Qwen3.6-27B Ascend plugin/monkeypatch with matched E2E throughput >=10%; separate TTFT/TPOT; latest GSM8K/HumanEval/MMLU smoke then full task gates.",
+    "medium": "Finish mechanism/real-worker/numerical/state/graph evidence before matched model performance; do not convert adaptation failures into paper-wide no-go.",
+    "short": "Fix actual SKVQ constructor source binding, prove full same-image real CPU constructor before TP4; close missing KIVI deployment dependencies; isolate actual MXR FP32 workspace error from final cast."
+  },
+  "actuals": {
+    "skvq007": {
+      "operation": "exec-0000000000000055",
+      "original": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R143_SKVQ007_MC0055_ORIGINAL.json",
+      "host_result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-formal-013-r118-service007-main-001/HOST_RESULT.json",
+        "bytes": 3634,
+        "sha256": "87a5da2b396afcc007c403f6a03a425590581fdffd9ecafc589d9c1e3c1178f1"
+      },
+      "status": "FAILED",
+      "root_cause": "Actual PrefillArena constructor derives SOURCE_MANIFEST from new writer.__file__, while requiring original math002 hash. factory003 replaced writer but retained original prefill constructor. This is a proven adaptation/provenance defect before the numerical client, not paper/mechanism or task accuracy failure.",
+      "causal_log": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-formal-013-r118-service007-main-001/round0-candidate/server.stdout",
+        "bytes": 57003,
+        "sha256": "3e80d59ea7e6d1e3a11b969c86c51239ea0bd2f27b56947740a2018c5a1e7780"
+      },
+      "raw_failure_time_utc": "2026-10-13T15:30:46Z",
+      "stop_finished_utc": "2026-10-13T15:42:25.19981557Z",
+      "stop_method": "Exact owned host SIGINT after original finally/cleanup review; exact own CID stop-retain.",
+      "cid": "01aaa46fcf251e935d17d0ec68f751088e2a8bdbf3b457ac59e03b3142c7b04d",
+      "cleanup": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-formal-013-r118-service007-main-001/round0-candidate/cleanup.json",
+        "sha256": "65c97adad30689ccf33e89151524cf84d0c85830b24f7e022faa8302d7285f35"
+      },
+      "fresh_release_original": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R143_SKVQ007_RELEASE_MC006F_ORIGINAL.json",
+      "fresh_release_assertions": [
+        "exact CID stopped/Pid0/noExec/noOOM; exit137 retained",
+        "physical4-7 no compute processes; AICore0, HBM2860/2859/2861/2859MiB at snapshot"
+      ],
+      "numerical_started": false,
+      "performance_ready": false,
+      "task_ready": false
+    },
+    "mxr021": {
+      "operation": "exec-0000000000000070",
+      "original": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R143_MXR021_MC0070_ORIGINAL.json",
+      "exit_code": 0,
+      "duration_ms": 30620,
+      "Devices": [],
+      "owner_result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-rank2-attribution-owned-main-R118_021_001/RESULT.json",
+        "bytes": 72674,
+        "sha256": "9f064bc60dfc23c8131facaaf1111c3167eb39dfb92e8eb67cbe91602d36f46f"
+      },
+      "diagnostic": {
+        "bytes": 164212,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-rank2-attribution-owned-main-R118_021_001/cpu/diagnostic/RESULT.json",
+        "sha256": "c0ba8ad3214e21304e83af8cbbe81ca3d8f04e847c64d259e1746cb4e6bcc99e"
+      },
+      "status": "CPU_DIAGNOSTIC_EXECUTED",
+      "primary": null,
+      "secondary": [],
+      "cleanup": {
+        "bytes": 1635,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-rank2-attribution-owned-main-R118_021_001/cpu/cleanup.json",
+        "sha256": "6ce9ba393b127ab4a57566a92bc49850ad55b75131a3ab7da9762abbf7778890"
+      },
+      "original_three_failures_reproduced": true,
+      "original_Frob": 0.0030071241985744628,
+      "unchanged_Frob_limit": 0.002,
+      "input_quantization_Frob": 0.0003881365993095257,
+      "ideal_FP32_then_BF16_Frob": 0.0007452934709353111,
+      "ideal_cast_orders_bitwise_equal": true,
+      "actual_vs_exact_quantized_inverse_Frob": 0.0029827763317027784,
+      "actual_vs_ideal_cast_Frob": 0.0029483098387763835,
+      "head_tile_rows": 108,
+      "tail_identity_all_12x64_three_repeats": true,
+      "conclusion": "Input quantization and ideal final rounding do not explain actual error. Actual pre-cast FP32 workspace was not saved; kernel arithmetic and actual device cast are not uniquely separated.",
+      "NPU": false,
+      "model_ready": false,
+      "performance_ready": false,
+      "task_ready": false
+    },
+    "kivi004": {
+      "source": "e2b7e96a959b8b733fc20bb6956cc721a3e90c42ce233465f031ad83121ceadd",
+      "deployed_files": 11,
+      "original_source_audit": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R143_KIVI004_MC0075_ORIGINAL.json",
+      "diagnostic_original": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R143_KIVI004_GAP_MC0077_ORIGINAL.json",
+      "status": "PREP_GAP",
+      "root_cause": "Pinned original graph001 SOURCE_MANIFEST and directory not present on target. Own local24 tests and deployed owner do not prove transitive target readiness.",
+      "missing_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-fullgraph-plugin-v1-001/SOURCE_MANIFEST.json",
+      "containers_started": 0,
+      "NPU": false,
+      "ready": false
+    }
+  },
+  "dispatch_rules_applied": [
+    "Preparation is incomplete until actual target transitive closure, real same-image aggregate construction, exact inputs/CLI/consumer and successor are proven; imports or local helper controls alone cannot enter READY.",
+    "Run real constructors with real CPU tensors/allocation ledgers when hardware-independent. Test original failure and repaired success; retain source provenance and all numerical gates.",
+    "Missing dependency closure is a batched preparation problem: inventory recursively before scarce-device admission, deploy exact immutable originals, then run one source audit; no one-leaf-at-a-time card reservation.",
+    "Fatal child-worker startup failure must not wait for parent wrapper timeout. The existing parent-poll/health loop failed to terminate promptly. Source-bound fail-fast improvement remains pending, not claimed implemented.",
+    "Release exact owned failed task before offline repair. MAIN dispatches only a genuinely ready successor on terminal/release, not on the 30-minute audit timer.",
+    "Parallel agents have separate scopes: SKVQ constructor repair, KIVI dependency closure/latest-task interface, MXR real-workspace diagnostic. CPU co-admission requires one summed budget; unchanged021 requires serial use and is not approved alongside TP4.",
+    "Fixed window and all numerical/performance/task gates remain unchanged. New immutable source versions require applicable authority review; a denied proposal is not bypassed."
+  ],
+  "queue": [
+    {
+      "priority": 1,
+      "name": "SKVQ corrected prefill constructor",
+      "status": "PREP_GAP",
+      "owner": "adakv_current_prepare",
+      "next": "Close existing CPU owner entry and actual same660 full A.build/PrefillArena regression; reviewed new service only afterwards.",
+      "local_source_controls": "Original real ctor failure reproduced; repaired real CPU allocation/13 storages 15044608 bytes plus source inverse/defaultOFF/foreign checks passed.",
+      "pending": [
+        "actual same-image full factory source-build",
+        "CPU owner invocation/RO closure/result consumption",
+        "service source revision authority review",
+        "fresh corrected TP4 FULL47"
+      ]
+    },
+    {
+      "priority": 2,
+      "name": "KIVI one-real-frame graph backup",
+      "status": "PREP_GAP",
+      "owner": "mxr_resume_audit",
+      "next": "Install original missing graph closure byte-exact, target source audit/Linux24, then admitted Devices[]36→physical4 graph→independent1536/.005.",
+      "pending": [
+        "missing original graph transitive dependencies",
+        "target source audit",
+        "same-image36",
+        "real graph step"
+      ],
+      "scope": "Only saved32768→32769 one-step correctness; not model or performance."
+    },
+    {
+      "priority": 3,
+      "name": "MXR true FP32 workspace attribution",
+      "status": "PREPARING",
+      "owner": "damp_operator_reuse",
+      "next": "New narrow source-bound diagnostic saves true pre-cast FP32 workspace and retains original casts/3 repeats/independent limits; no unchanged deterministic retry.",
+      "pending": [
+        "source patch/provenance",
+        "preflight",
+        "new actual NPU outputs"
+      ]
+    },
+    {
+      "priority": 4,
+      "name": "Latest GSM8K/HumanEval/MMLU task successor",
+      "status": "PREP_GAP",
+      "next": "Finish exact tokenization/input/client/actual request-ID chain and post-release CPU scoring; real FULL47 remains execution prerequisite.",
+      "pending": [
+        "same-image actual tokenizer",
+        "frozen full inputs/client",
+        "native requestID mapping",
+        "task-only wrappers and raw consumers"
+      ]
+    }
+  ],
+  "efficiency": {
+    "zero_idle_achieved": false,
+    "window_utilization": "UNMEASURED: no continuous full-window evidence",
+    "current_gap_class": "Preparation and causal repair; transient direct-control timeouts recovered, not ongoing host failure.",
+    "npu_fake_load_started": false,
+    "summary": "This checkpoint is scheduling/preparation and failure attribution, not new algorithm acceptance."
+  },
+  "handoff": {
+    "old_records_immutable": true,
+    "unrelated_dirty_paths_preserved": true,
+    "remaining_acceptance": "No new paper has completed current model performance and latest full task acceptance in this stage."
+  }
+}
