@@ -1,0 +1,20 @@
+{
+  "schema": "independent-c1-math-result/v1",
+  "operation": "exec-0000000000000171",
+  "exit": 0,
+  "tests": 8,
+  "dtype": "FP64",
+  "tolerance": {
+    "rtol": 1e-10,
+    "atol": 1e-10
+  },
+  "tp4_dimensions": {
+    "key_heads": 4,
+    "value_heads": 12,
+    "key_dim": 128,
+    "value_dim": 128
+  },
+  "npu_executed": false,
+  "service_executed": false,
+  "derivation_source": "https://arxiv.org/html/2607.01299v2"
+}

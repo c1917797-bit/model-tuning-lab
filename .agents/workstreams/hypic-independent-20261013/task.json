@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "started",
+  "execution_state": "in-progress",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -151,7 +151,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Save latest scope and detailed night plan. Resolve safe Git connectivity and publish start. Freeze nativeTP4 controller and baseline; independently derive C1/C2, no dual-instance prerequisite.",
+  "next_action": "Freeze and publish nativeTP4 smoke/baseline controller; run only on fresh idle physical0–3. In parallel deriveC2/conv from paper and official interfaces; no existingHYPIC treatment code.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-14T10:00:00+03:00",
@@ -186,5 +186,24 @@
       2,
       3
     ]
+  },
+  "publication": {
+    "state": "verified-via-desktop-relay",
+    "published_commit": "7d742068f943cfcfa7437fba54bf4412e0464d0f",
+    "receipt": "PUBLICATION_RECEIPT.json",
+    "original_commit_preserved": true
+  },
+  "math_reference": {
+    "state": "cpu-reference-passed",
+    "operation": "exec-0000000000000171",
+    "tests": 8,
+    "scope": "Independent same-inputC1 FP64 oracle including configuredTP4 dimensions; not NPU or service correctness",
+    "source": "independent_c1_reference.py"
+  },
+  "official_source_map": {
+    "operation": "exec-0000000000000168",
+    "receipt": "OFFICIAL_SOURCE_MAP.json",
+    "existing_hypic_present": false,
+    "device_use": false
   }
 }

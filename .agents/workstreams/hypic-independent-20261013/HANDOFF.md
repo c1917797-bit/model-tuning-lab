@@ -15,7 +15,10 @@ Deadline:2026-10-14 10:00 Europe/Moscow /07:00UTC. Every10minutes re-evaluate
 current task/process evidence and advance the next eligible gate.
 Do not interrupt live controllers due to observation timeouts.
 No owned device service or port is active yet.
-Current source start checkpoint ece346af; remote push0159 exit124.
+Start/current-plan commit7d742068 is now published and live-ref verified.
+PUBLICATION_RECEIPT.json preserves the original-object desktop relay proof.
+OFFICIAL_SOURCE_MAP.json records image0168; no existingHYPIC module installed.
+Next: independent mathematical reference and nativeTP4 baseline contract.
 Network015b: GitHub TLS timeout, arxiv certificate verification error.
 Preserve TLS verification. Main local23ec33d7; remote refresh unproved.
 Do not restart old HYPIC roots or import/copy its treatment code.
