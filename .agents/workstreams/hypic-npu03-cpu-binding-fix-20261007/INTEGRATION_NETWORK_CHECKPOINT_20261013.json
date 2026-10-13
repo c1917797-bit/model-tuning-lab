@@ -1,0 +1,55 @@
+{
+  "schema": "mst-integration-network-checkpoint/v1",
+  "recorded_at_utc": "2026-10-13T17:38:41Z",
+  "peer": "lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d",
+  "route": "peer_direct",
+  "repair_branch": "work/skill-repairs-20261013",
+  "published_ready_tip": "06365feb165898a86305296dc007b40ec4e09461",
+  "publication_verification_operation": "exec-00000000000000e4",
+  "last_known_target": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "main_merge_started": false,
+  "failed_refresh_operations": [
+    {
+      "id": "exec-00000000000000e9",
+      "child_timeout_exit": 124,
+      "scope": "all origin branches"
+    },
+    {
+      "id": "exec-00000000000000ec",
+      "child_timeout_exit": 124,
+      "scope": "main and repair branch only, no tags or submodules"
+    }
+  ],
+  "network_diagnostic": {
+    "operation": "exec-00000000000000ee",
+    "exit": 0,
+    "stdout": "{\"remote_scheme\": \"https\", \"remote_host\": \"github.com\", \"git_proxy_configured\": false, \"env_proxy_keys\": [], \"fetch_refspecs\": [\"+refs/heads/*:refs/remotes/origin/*\"]}\n{\"dns_exit\": 0, \"ipv4\": [\"20.205.243.166\"]}\n{\"ip\": \"20.205.243.166\", \"phase\": \"tcp\", \"error_type\": \"timeout\", \"errno\": null, \"seconds\": 6.008}\nNO_CONFIGURATION_CHANGED\n"
+  },
+  "interpretation": {
+    "dns": "resolved",
+    "observed_failed_phase": "TCP443 connection to current resolved GitHub address",
+    "tls_or_auth_attempted_in_this_probe": false,
+    "underlying_network_cause_proven": false,
+    "credentials_invalid_proven": false,
+    "unrelated_branch_size_cause_proven": false
+  },
+  "retained_worktrees": [
+    "/cache/cch/model-tuning-lab-hypic-e2e-20261006",
+    "/cache/cch/model-tuning-lab-skill-repairs-20261013",
+    "/cache/cch/model-tuning-lab-integration-main-20261013"
+  ],
+  "policy": {
+    "new_device_work": false,
+    "quality_or_performance_rerun": false,
+    "network_settings_changed": false,
+    "credentials_changed": false,
+    "tls_verification_disabled": false,
+    "force_push": false
+  },
+  "next_action": "After host GitHub connectivity returns, freshly resolve route, fetch exact source/target refs, validate source and final target-owned merge state, then normal no-ff integration and verify primary equality. Do not repeat unchanged push attempts. Preserve original experiment and its two untracked drafts.",
+  "functional_inventory": {
+    "bounded_verified": 12,
+    "partial_evidence": 17,
+    "total": 29
+  }
+}

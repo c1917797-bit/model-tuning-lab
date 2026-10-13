@@ -6,7 +6,7 @@ As of2026-10-13: device campaign terminal; broad Skill-validation goal incomplet
 Branch work/hypic-npu03-cpu-binding-fix-20261007; runtime source4429e35.
 Six-phase same-source performance is complete, not a quality pass.
 Current task.active_attempt=null; no performance controller remains active.
-Execution in-progress / integration not-ready. Work branch published;main unchanged.
+Execution in-progress / integration not-ready. Work branch published;main unchanged through049b0c17; new network checkpoint is local-only.
 29 cases:12 bounded verified,17 partial,0 missing. No all-Skill success claim.
 App heartbeat hypic is absent; do not recreate it for the finished supplement.
 
@@ -60,7 +60,8 @@ Global .agents/HANDOFF.md describes integrated history,not this unmerged result.
 ## 4. Current Action
 
 Plan059f343a pushed/verified00c0; lifecyclemc00bf failed isolation, exact release.
-Integration start3194848e pushed/verified00c2; no product import, main unchanged.
+Repair branch06365feb pushed/fetched00e4; main unchanged. New fetches timeout before merge.
+GitHub TCP443 timeout: see INTEGRATION_NETWORK_CHECKPOINT_20261013.json; not an authentication diagnosis.
 
 Planning-schema selective integration candidate passed seven guards and a
 read-only exact-main apply check. See PLANNING_SELECTIVE_INTEGRATION_20261013.md;
@@ -105,9 +106,9 @@ evidence; this Git fixture is not that separate workflow.
    do not rerun completed HYPIC merely to improve acceptance counts.
 3. Record only demonstrated fixes and task-scoped acceptance; derive current
    counts from verified case evidence, never from structural checks alone.
-4. Historical007f timed out;new009b/009f supersede the remote-unknown blocker:
-   target read and workstream push verified. Refresh refs before integration.
-   The connected MCPGit list has no target repo;use the verified host Git route.
+4. Repair branch06365feb is published; fresh main fetch is network-blocked.
+   Do not blind-push or bypass TLS/credentials; when connectivity returns,
+   fetch exact refs and validate the final merge tree before primary push.
 5. Lifecycle attempt terminal:0 requests, uninstall not started; no retry scheduled.
    Continue offline integration; no quality/performance rerun or old-root reuse.
 
