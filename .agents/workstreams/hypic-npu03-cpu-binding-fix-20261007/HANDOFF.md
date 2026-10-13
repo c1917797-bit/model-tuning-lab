@@ -1,5 +1,20 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-13 two phases audited; HYPIC repeat2 running
+
+Candidate screen terminal06:10:03UTC; expired02a3 handle not a failure.
+Audit02ab exit0:40/40 rows,42 IDs,40/40 boundary/four-worker proof,
+164 clean isolation samples,same4429e35 source and exact owned release.
+See HYPIC_CURRENT_SOURCE_SCREEN_PAIR_AUDIT_20261013.md. Screen-only weighted
+TPOT75.6181→58.3311ms(-22.861%);TTFT P95 88.5053→45.0214s(-49.131%).
+Not a three-round conclusion; r19 quality rejection/deployment false unchanged.
+Fresh idle admission02ad passed. Current controller exec-00000000000002af
+runs hypic-only/repeat2 at immutable root
+/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-current4429-performance-20261013-hypic-only-repeat2.
+Poll exact operation/root; no restart while running/ambiguous. Terminal audit-phase
+before no-cache/repeat2,no-cache/repeat3,hypic-only/repeat3,then audit-all.
+Progress2/6 valid phases. Automation hypic active; deadline08:47:14UTC unchanged.
+
 ## 2026-10-13 baseline independently valid; candidate screen running
 
 Current-source baseline completed03:15:45UTC; expired0254 handle is NOT a failure.
