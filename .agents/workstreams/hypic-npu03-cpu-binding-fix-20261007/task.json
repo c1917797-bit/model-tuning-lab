@@ -1,4 +1,15 @@
 {
+  "existing_profile_timeline_checkpoint": {
+    "report": "HYPIC_EXISTING_PROFILE_TIMELINE_20261013.md",
+    "analysis_operation": "exec-00000000000001a4",
+    "independent_audit_operation": "exec-00000000000001af",
+    "raw_result": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profile-timeline-analysis-20261013.json",
+    "raw_result_sha256": "90385d77afe877b66758529d9272d0674b7d89d3798349577fd19b96b372bddd",
+    "new_npu_capture": false,
+    "phase_rank_timelines_verified": 8,
+    "per_step_or_cpu_numa_causality_proven": false,
+    "skill_promotions": 0
+  },
   "paper_ingestion_author_closure": {
     "report": "PAPER_AUTHOR_REFERENCE_CLOSURE_20261012.md",
     "receipt": "PAPER_AUTHOR_REFERENCE_FULL_PIN_20261012.json",

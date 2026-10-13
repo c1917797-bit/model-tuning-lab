@@ -1,5 +1,22 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-13 existing-profile timeline analysis (no device rerun)
+
+HYPIC_EXISTING_PROFILE_TIMELINE_20261013.md records post-hoc c12060c
+Prefill/Decode CSV interval analysis.01a4 passed7 interval tests and both
+original raw profile audits;01af independently sweep-verified8 phase/rank
+timelines plus input hashes. Output SHA90385d77afe877b66758529d9272d0674b7d89d3798349577fd19b96b372bddd.
+
+Decode exported span~1.811s: compute1.671-1.677s,communication69.6-77.4ms.
+Prefill span~6.595s includes3.67-3.86s largest no-exported-kernel gaps.
+Naive hcom duration sums nearly double communication union in rank0; they
+are not removable wall time. No per-step labels or CPU/NUMA causal proof.
+Three Skill cases gain bounded evidence; architecture/source chronology
+is not retrospectively repaired. Counts9/20 unchanged; no promotion.
+Next inspect existing host events if needed; no new capture/quality/observer/GDN.
+Current4429e35 speed remains pending the prospective user choice. No live NPU
+controller, source changes, auth retry or main/remote sync. Deadline unchanged.
+
 ## 2026-10-12 author source identity and ingestion obligation closure
 
 Independent local-object audit0191 proves10/10 historical reference hashes

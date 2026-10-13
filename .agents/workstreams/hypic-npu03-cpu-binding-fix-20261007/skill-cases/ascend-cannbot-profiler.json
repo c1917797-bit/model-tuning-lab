@@ -85,10 +85,42 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/REPORT.md",
       "sha256": "3752f2fc2bb87b5b1395536a9eb2cd7e1358ecb5a89897f892cb8737e22627de"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/analyze_hypic_profile_timeline.py",
+      "sha256": "685772e00293e15f0a395315e075d4d3cb0df665392141064655a438909d82fc"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_hypic_profile_timeline.py",
+      "sha256": "f457a9dfcb17aa3443e52ab6615c1fa0404a259eeb5906ac8805f269482619b0"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profile_timeline.py",
+      "sha256": "eff2e41a9e24feff4041f57f707798f404f75bcf910b45a74701d90e15315bae"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_EXISTING_PROFILE_TIMELINE_20261013.md",
+      "sha256": "3368023ce688997b237fe8e92d2a8af137a88a46898e5714ba64ee3969120896"
     }
   ],
   "replayable_regression_recorded": true,
   "boundary": "Routing and real four-rank Prefill/Decode captures with offline parser evidence are behaviorally verified. The preregistered Prefill >=47 column gate missed because CANN 9.1.0 emitted 46 detailed columns; this mismatch is retained. The first Decode offline parse failed without the driver management node, and a clean copy parsed successfully with the management node but no numbered NPU devices. No CANN/HCCL or HYPIC quality-regression root cause was established, so full Skill acceptance is not claimed.",
   "branch_local_skill_amendment_pending_integration": true,
-  "drift_trigger": "Use the valid Prefill/Decode traces for bounded attribution without confusing overlapping kernel sums with wall time; review the prospective semantic-field and offline-parser Skill amendments, then recheck main Skill/source/profiler-stack identities before promotion."
+  "drift_trigger": "Use the valid Prefill/Decode traces for bounded attribution without confusing overlapping kernel sums with wall time; review the prospective semantic-field and offline-parser Skill amendments, then recheck main Skill/source/profiler-stack identities before promotion.",
+  "existing_profile_supplement": {
+    "as_of_utc": "2026-10-13",
+    "analysis_source_commit": "c12060cd47e7575ead059983d7a8bb4704165c98",
+    "new_device_capture": false,
+    "phase_rank_timelines_independently_verified": 8,
+    "output_sha256": "90385d77afe877b66758529d9272d0674b7d89d3798349577fd19b96b372bddd",
+    "independent_audit_operation": "exec-00000000000001af",
+    "per_step_latency_proven": false,
+    "cpu_numa_causality_proven": false,
+    "recorded_tp_local_gdn_qk_heads": 4,
+    "recorded_tp_local_gdn_v_heads": 12,
+    "current_r19_quality_complete": true,
+    "historical_chronology_repaired": false,
+    "acceptance_promoted": false
+  },
+  "next_gate": "Use the existing traces to correlate the recorded largest hardware gaps with host events if supported. Blank Step fields do not prove per-step latency; retain missing CPU/NUMA and causal dependencies explicitly. Do not rerun capture, quality, GDN or HCCL tasks just to improve this case label; any decision-changing new capture needs its own admission. Preserve the frozen47-column miss and sourcec12060c versus current4429e35 distinction."
 }

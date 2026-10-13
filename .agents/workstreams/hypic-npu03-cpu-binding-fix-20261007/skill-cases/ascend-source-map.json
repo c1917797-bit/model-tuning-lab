@@ -29,7 +29,10 @@
     "r12_scored_responses": 57,
     "full_2048_token_paired_quality_complete": true,
     "r13_deployed_quality_decision": "REJECT_OR_QUALIFY",
-    "r13_strict_four_worker_hot_requests": [368, 381],
+    "r13_strict_four_worker_hot_requests": [
+      368,
+      381
+    ],
     "case_integrated_in_main": false
   },
   "evidence": [
@@ -48,6 +51,14 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_TERMINAL_AUDIT.md",
       "sha256": "bfdf1bee864719a0bbc44f88aba58d0bcb7c330d2ae358ad5fcb3f9fec57e9d3"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profile_timeline.py",
+      "sha256": "eff2e41a9e24feff4041f57f707798f404f75bcf910b45a74701d90e15315bae"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_EXISTING_PROFILE_TIMELINE_20261013.md",
+      "sha256": "3368023ce688997b237fe8e92d2a8af137a88a46898e5714ba64ee3969120896"
     }
   ],
   "external_raw_receipts": {
@@ -62,5 +73,20 @@
   "replayable_regression_recorded": true,
   "boundary": "r12 independently retained neither actual Docker binds nor a source digest; r13 later retained the controller-captured actual bind list and in-container Python digest, which an independent auditor replay-verified. The complete raw docker inspect bytes were not retained. This retrospectively proves the C1/C2 source seam and serving identity, not that the source-map Skill prospectively selected the minimal patch before editing. C3 is absent and the r13 full pair is quality-rejected with 368/381 strict hot coverage. Do not claim paper-complete reproduction, causal benefit of c12060c, compiled binary attestation, or main integration.",
   "next_gate": "For a new independently scoped change, freeze the measured bottleneck, exact seam, minimal falsifiable hypothesis, canary and rollback before editing; prove a focused failing-to-passing regression and actual serving-source identity. Do not rerun the completed r13 pair solely to close a source-map documentation gate.",
-  "drift_trigger": "Revalidate if main Skill or registry, plugin source, serving image/command/bind, model, r12/r13 raw receipts or future experiment contract changes."
+  "drift_trigger": "Revalidate if main Skill or registry, plugin source, serving image/command/bind, model, r12/r13 raw receipts or future experiment contract changes.",
+  "existing_profile_supplement": {
+    "as_of_utc": "2026-10-13",
+    "analysis_source_commit": "c12060cd47e7575ead059983d7a8bb4704165c98",
+    "new_device_capture": false,
+    "phase_rank_timelines_independently_verified": 8,
+    "output_sha256": "90385d77afe877b66758529d9272d0674b7d89d3798349577fd19b96b372bddd",
+    "independent_audit_operation": "exec-00000000000001af",
+    "per_step_latency_proven": false,
+    "cpu_numa_causality_proven": false,
+    "recorded_tp_local_gdn_qk_heads": 4,
+    "recorded_tp_local_gdn_v_heads": 12,
+    "current_r19_quality_complete": true,
+    "historical_chronology_repaired": false,
+    "acceptance_promoted": false
+  }
 }

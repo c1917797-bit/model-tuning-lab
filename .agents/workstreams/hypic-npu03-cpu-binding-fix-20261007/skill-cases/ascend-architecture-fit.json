@@ -44,6 +44,14 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10R12_TERMINAL_AUDIT.md",
       "sha256": "bfdf1bee864719a0bbc44f88aba58d0bcb7c330d2ae358ad5fcb3f9fec57e9d3"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profile_timeline.py",
+      "sha256": "eff2e41a9e24feff4041f57f707798f404f75bcf910b45a74701d90e15315bae"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_EXISTING_PROFILE_TIMELINE_20261013.md",
+      "sha256": "3368023ce688997b237fe8e92d2a8af137a88a46898e5714ba64ee3969120896"
     }
   ],
   "external_raw_receipts": {
@@ -56,6 +64,21 @@
   },
   "replayable_regression_recorded": true,
   "boundary": "The current model and configured derivative support a bounded C1/C2 text hot-reuse fit decision; C3 does not fit the one-TP4-replica service. Existing source audit is explicitly retrospective, so exact-main Skill's pre-implementation Git evidence gate was not historically met. Performance evidence does not substitute for complete hot-path quality, paper C3, adoption, or all-model generalization.",
-  "next_gate": "For the next architecture-changing implementation, record exact target/config/tokenizer/runtime/operator/topology and fit verdict in Git before editing code. Finish this HYPIC campaign's prospectively frozen paired explicit-boundary max2048 quality and performance only on actually idle physical NPU0-3; treat C3 as a separate authorized multi-replica scope.",
-  "drift_trigger": "Revalidate when exact-main Skill/registry, model config/tokenizer/index, derivative source, serving image/runtime/topology, paper mechanism, source-audit or raw performance receipt changes."
+  "next_gate": "Keep the original pre-implementation chronology gate unproved; no retrospective edit can repair it. Existing source/model/config and recorded TP-local tensors support bounded C1/C2 fit only. R19 paired max2048 quality is already complete and must not be repeated for this case. For a future genuinely needed architecture-changing implementation, freeze exact target/runtime/operator/topology fit in Git before code changes; do not launch a new implementation or C3 work merely to raise acceptance counts.",
+  "drift_trigger": "Revalidate when exact-main Skill/registry, model config/tokenizer/index, derivative source, serving image/runtime/topology, paper mechanism, source-audit or raw performance receipt changes.",
+  "existing_profile_supplement": {
+    "as_of_utc": "2026-10-13",
+    "analysis_source_commit": "c12060cd47e7575ead059983d7a8bb4704165c98",
+    "new_device_capture": false,
+    "phase_rank_timelines_independently_verified": 8,
+    "output_sha256": "90385d77afe877b66758529d9272d0674b7d89d3798349577fd19b96b372bddd",
+    "independent_audit_operation": "exec-00000000000001af",
+    "per_step_latency_proven": false,
+    "cpu_numa_causality_proven": false,
+    "recorded_tp_local_gdn_qk_heads": 4,
+    "recorded_tp_local_gdn_v_heads": 12,
+    "current_r19_quality_complete": true,
+    "historical_chronology_repaired": false,
+    "acceptance_promoted": false
+  }
 }
