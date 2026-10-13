@@ -1,0 +1,109 @@
+{
+  "schema": "model-tuning-lab.stage-readiness-checkpoint/v1",
+  "observed_utc": "2026-10-13T15:06:19Z",
+  "authority": "R118_NEW12H_AUTHORITY_20261013.json",
+  "cutoff_utc": "2026-10-13T20:22:10Z",
+  "goal": "New non-HYPIC plugin/monkeypatch technique; paired full-model output throughput >=10%; report TTFT/TPOT; latest human GSM8K/HumanEval/MMLU smoke then full task acceptance. No claim of accepted new technique.",
+  "dispatch_policy": {
+    "preparation": "Three independent active preparation owners; source-ready is not device-ready. Use actual aggregate entry rather than isolated import or synthetic module stand-ins.",
+    "ready": [
+      "deployed complete source identities",
+      "actual clean aggregate entry",
+      "same-image bounded no-device preflight where relevant",
+      "exact real inputs and independent consumer",
+      "explicit resource/mutex budget",
+      "new output path and current frozen deadline"
+    ],
+    "lookahead": "Prepare CURRENT, immediate NEXT and one independent fallback; missing runnable fallback is a preparation gap, not external NPU occupation.",
+    "failure": "Stop exact owned device workload and verify release. Off-device causal repair uses retained data. Admit a different actually ready paper without waiting for the failed paper's repair.",
+    "no_busywork": "Do not invent load or weaken numerical gates to claim zero gaps. Do not duplicate consumed evidence or add generic controller layers without a concrete need.",
+    "resource": "Physical4-7 only. Disjoint numerics require compatible controllers and summed host budgets; TP4/matched timing remains exclusive. Frozen MXR016 controller still requires other cards idle; do not falsely claim 4-card parallel validation.",
+    "dispatch_trigger": "MAIN dispatches at evidence-backed stage completion after actual release; 30-minute review is an audit, not the dispatch interval."
+  },
+  "queue": [
+    {
+      "id": "MXR016",
+      "state": "TERMINAL_NUMERICAL_FAILURE",
+      "operation": "MC exec-000000000000003a",
+      "physical_cards": [
+        4
+      ],
+      "rank0": "3 repeats pass",
+      "rank1": "3 repeats pass",
+      "rank2": "3 deterministic repeats fail frob .0030071241985744628 > .002",
+      "rank3": "not executed",
+      "released": true,
+      "next": "CPU-only retained-output attribution; do not repeat unchanged NPU or dispatch long/model candidates"
+    },
+    {
+      "id": "SKVQ007",
+      "state": "LOCAL_AGGREGATE_PASS_NOT_DEVICE_READY",
+      "predecessor": "006 actual MC002c ImportError: replay module initialized after whole imports it",
+      "repair": "Put actual formal_replay before actual formal_whole; original modules and math unchanged",
+      "local_tests": 63,
+      "next": "Seal exact packet, deploy, actual Linux prepare, same-image P3, then source-bound NPU/model gate if qualified"
+    },
+    {
+      "id": "MXR018_LONG_CAPTURE_AND_019_020_AUTHOR_REPLAY",
+      "state": "PREPARED_IN_PART_DEPENDENCY_HELD",
+      "reason": "Short actual-frame candidate numerical failure prevents candidate promotion; native long capture is not proof that failed author replay works",
+      "next": "Keep prepared source; resume only if new attribution supports numerical repair"
+    }
+  ],
+  "facts": {
+    "same_image020": "MC0037 actual exit0 /32.568s; MAIN0038 independent real source, child, stopped retained Devices[] consumption passed",
+    "mxr016_report": {
+      "bytes": 2658,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-r118-recovered-all4frame-replay-20261013-016/RESULT.json",
+      "sha256": "1fc971613bc004123048e7b75a9f6594a758ad41c0b6ca458518517084bacbf1"
+    },
+    "rank2_refs": [
+      {
+        "bytes": 3737,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-r118-recovered-all4frame-replay-20261013-016/rank-2/RESULT.json",
+        "sha256": "c24f3a126b91edbf35718e0d078626521532bcc144ab6234d16c9b59df58d7e2"
+      },
+      {
+        "bytes": 596449,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-r118-recovered-all4frame-replay-20261013-016/rank-2/case-000/OUTPUTS.pt",
+        "sha256": "97d1b7faa84e319c3a3b303481e4a3333a1431a5ddcbf7bf1d167aca643fb107"
+      },
+      {
+        "bytes": 1773,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-r118-recovered-all4frame-replay-20261013-016/rank-2/original-consumer/case-000.json",
+        "sha256": "2e3579c23c8c0fddc1b57ddb7ae5559142efaa6d4e448605fff67ebd98c39a10"
+      },
+      {
+        "bytes": 2278,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-r118-native-capture-20261013-008/candidate/model/capture/worker-410/RUNTIME.json",
+        "sha256": "ff11abb367d502ad8aebd7ca5f67fa5304edffb3143b3a88dbd5e34c1bdeef9b"
+      },
+      {
+        "bytes": 3120,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-r118-native-capture-20261013-008/candidate/model/capture/worker-410/case-000/CASE.json",
+        "sha256": "8702534f76178d35686ef3d09e9ea2270c5859d8db45a1013cfb6284e72f28cb"
+      },
+      {
+        "bytes": 398621,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-r118-native-capture-20261013-008/candidate/model/capture/worker-410/case-000/BEFORE.pt",
+        "sha256": "4ab8a7a2aa0d5b134c109dc98b76be17727031a9a483ee09c2477b1dd5b58876"
+      },
+      {
+        "bytes": 597081,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-r118-native-capture-20261013-008/candidate/model/capture/worker-410/case-000/RAW.pt",
+        "sha256": "5808edd42566291a50336ff4e354a5c119adac7a02e68049b3255e8007806830"
+      }
+    ],
+    "numeric_scope": "129-token actual captured A, solve-only; not full GDN/state/graph/model/performance/task qualification",
+    "input_conversion": "Existing independent FP64 diagnostic .0003881365993095257; input FP16 rounding alone does not explain .003007 total. Kernel/cast/layout cause still under investigation.",
+    "cleanup": "MAIN MC003c freshly proves own CID c4770f9ec168f85890564b4a56c61affe50047658f8c6b77a22805eac2a1a286 stopped, retained, Pid0, no ExecIDs/OOM; nonprivileged physical4->logical0; no0-3 mapping.",
+    "window_utilization": "UNMEASURED: do not extrapolate snapshots to continuous30-minute zero-idle",
+    "new_accepted_performance_or_task_accuracy": false
+  },
+  "raw_evidence_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit",
+  "original_files": [
+    "MAIN_R141_MXR016_MC003A_ORIGINAL.json",
+    "MAIN_R141_MXR016_ACTUAL_REFS.json",
+    "MAIN_R141_MXR020_MC0037_ORIGINAL.json"
+  ]
+}
