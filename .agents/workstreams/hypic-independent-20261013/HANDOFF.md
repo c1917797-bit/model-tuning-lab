@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Latest: exact-token canonical/relocated segment selector and digest implemented.
+67 CPU controls001d pass; missing/ambiguous segments, wrong canonical context,
+partial Prefill and PDC overlap rejected by first-stage helper. These restrictions
+are temporary prototype limits, NOT new final acceptance criteria: required PDC
+coexistence/chunked handling remain unfinished. Unsupported requests must safely
+fall back before mutation; no coverage or full-success claim from fallback.
+Selector not yet connected to actual runner prompt token state; no NPU job.
+Next attach selector/store to runtime treatment and complete overlap/chunk logic.
+
 Latest C1 integration preparation: identity-bound LinearMaterialPool now connects
 public material producer to pinned request-private copies. NPU clone readiness uses
 conservative device synchronization before publish/yield; not device-tested here.
