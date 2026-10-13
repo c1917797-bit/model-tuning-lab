@@ -66,7 +66,7 @@
     {
       "id": "M1",
       "name": "NativeTP4 baseline and official runtime source-map",
-      "state": "pending"
+      "state": "in-progress"
     },
     {
       "id": "M2",
@@ -134,9 +134,16 @@
     }
   ],
   "resource_leases": {
-    "physical_npus": [],
-    "service_ports": [],
-    "state": "No active device lease; every future start needs fresh process/port guard"
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "service_ports": [
+      8233
+    ],
+    "state": "Owned native smoke attempt; continuous physical guard, exact label-bound cleanup"
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -151,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Freeze and publish nativeTP4 smoke/baseline controller; run only on fresh idle physical0–3. In parallel deriveC2/conv from paper and official interfaces; no existingHYPIC treatment code.",
+  "next_action": "Poll exact native smoke0183 on originalmc peer; preserve same root, no restart while live/uncertain. Then independently audit result/responses/isolation/release; continue native benchmark setup andC2 derivation.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-14T10:00:00+03:00",
@@ -189,7 +196,7 @@
   },
   "publication": {
     "state": "verified-via-desktop-relay",
-    "published_commit": "7d742068f943cfcfa7437fba54bf4412e0464d0f",
+    "published_commit": "dd220fba9aaf367f5490371257dcdc2f9dbb7cf5",
     "receipt": "PUBLICATION_RECEIPT.json",
     "original_commit_preserved": true
   },
@@ -205,5 +212,22 @@
     "receipt": "OFFICIAL_SOURCE_MAP.json",
     "existing_hypic_present": false,
     "device_use": false
+  },
+  "active_attempt": {
+    "phase": "native-tp4-smoke-r1",
+    "operation": "exec-0000000000000183",
+    "peer": "lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d",
+    "state": "running-or-awaiting-terminal-audit",
+    "code_commit": "dd220fba9aaf367f5490371257dcdc2f9dbb7cf5",
+    "controller_sha256": "97bc326f169312df84e2edadfec023abc88deb4fedf9eeddd17c6ddfdd70e64d",
+    "raw_root": "/cache/cch/hypic-independent-20261013/native-smoke-r1",
+    "port": 8233,
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "container": "hypic-independent-native-smoke-r1-20261013"
   }
 }

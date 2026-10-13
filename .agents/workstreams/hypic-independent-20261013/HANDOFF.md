@@ -14,7 +14,11 @@ and independent raw audit. Record each terminal result and resume verified units
 Deadline:2026-10-14 10:00 Europe/Moscow /07:00UTC. Every10minutes re-evaluate
 current task/process evidence and advance the next eligible gate.
 Do not interrupt live controllers due to observation timeouts.
-No owned device service or port is active yet.
+NativeTP4 smoke0183 is active/awaiting terminal audit on chicaihong01/mc.
+Peer lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d; port8233; only physical0–3.
+Raw /cache/cch/hypic-independent-20261013/native-smoke-r1 is immutable.
+Poll the same peer/handle; never relaunch while live or terminal uncertain.
+Controller source97bc326f; code checkpointdd220fba is published/ref-verified.
 Start/current-plan commit7d742068 is now published and live-ref verified.
 PUBLICATION_RECEIPT.json preserves the original-object desktop relay proof.
 OFFICIAL_SOURCE_MAP.json records image0168; no existingHYPIC module installed.
