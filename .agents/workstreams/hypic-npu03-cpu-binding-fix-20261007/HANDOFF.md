@@ -1,5 +1,16 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-13 report statistics prepared while final phase runs
+
+summarize_current_source_performance.py is read-only: after exclusive audit-all
+exists,it independently replays all six phases,joins them by phase,checks the
+aggregate/source/quality boundary,and computes per-round changes,means,sample
+SD,medians and ranges. Five synthetic arithmetic/order/invalid-value tests
+passed02d9. This is not device evidence or an aggregate completion claim.
+Use python3 -B summarize_current_source_performance.py after final audit-all;
+do not run any performance phase again. Controller02d6 remains the only
+current phase. Original performance helpers and runtime source are unchanged.
+
 ## 2026-10-13 five phases audited; final HYPIC repeat3 running
 
 Baseline repeat3 controller02c5 exit0,released07:25:13UTC. Independent audit02d4:
