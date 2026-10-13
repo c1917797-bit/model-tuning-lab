@@ -1,0 +1,106 @@
+{
+  "schema": "ascend.r156.new-window-starting-evidence/v1",
+  "observed_utc": "2026-10-13T18:33:18Z",
+  "acceptance_passed": false,
+  "scope": "new24h start; historical HYPIC excluded",
+  "previous_goal_status_turn": "no-progress status-only; resumed real execution",
+  "SKVQ009": {
+    "operation": "exec-00000000000000f0",
+    "exit": 1,
+    "primary": "physical HBM reserve3GiB guard during model batch capture",
+    "oom": false,
+    "model_numeric_FULL47_started": false,
+    "performance_ready": false,
+    "task_ready": false,
+    "host_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-formal-013-r118-service009-main-001/HOST_RESULT.json",
+      "bytes": 3483,
+      "sha256": "e5f98271cbde01dd006a926db07e0396202549383f8ad253e12e04c7aa9e7790"
+    },
+    "original_terminal": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R154_SKVQ009_MC00F0_ORIGINAL.json",
+    "release_original": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R154_SKVQ009_RELEASE_MC00FC_ORIGINAL.json",
+    "captured_model_batch_count": 14,
+    "last_complete_batch": 3,
+    "explicit_tensor_ledger_constant": true,
+    "root_cause_scope": "unexplained runtime memory growth; NOT proof of writer tensor leak. New vector-pack graph node reduction candidate pending."
+  },
+  "KIVI009": {
+    "operation": "exec-0000000000000101",
+    "source_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-disjoint-zero-single-owner-r118-v1-009/SOURCE_MANIFEST.json",
+      "bytes": 21394,
+      "sha256": "c527057c9794bdc164aa026f31d15cbb14286414ccf8cd43cfb151a541c47ede"
+    },
+    "same_image_preflight_operation": "exec-0000000000000100",
+    "software_tests": 92,
+    "software_passed": true,
+    "physical": 4,
+    "own_cid": "e918394bd72a5ea0dd1971c83fcc0b024362e73578965a341fd58bb5b0db694d",
+    "exit": 1,
+    "host_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r118-main-009-zero/RESULT.json",
+      "bytes": 5369,
+      "sha256": "2d7694678a40b61bac2f9e1d6879a3ae74cb0571c6d15503800f0ba9eb0a4049"
+    },
+    "raw_observations": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r118-main-009-zero/physical-single/producer/raw/ZERO_CONTROL_KERNEL_OBSERVATIONS.json",
+      "bytes": 8228,
+      "sha256": "ac07b1006ae3bc5ac43c84dcd8dd0419c26447ba25cd416be0c4d934a8a6795b"
+    },
+    "raw_stage": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r118-main-009-zero/physical-single/producer/raw/ZERO_STAGE_RESULT.json",
+    "primary_device_error": "507034 Vector core timeout during subsequent original warm chain; exact failing kernel not uniquely localized",
+    "secondary_diagnostic_error": "full actual pool-hash evidence; synthetic consumer expected8 tensor fields but real pool has9",
+    "inactive_error_bits": [
+      0,
+      1,
+      3,
+      7
+    ],
+    "six_step_observations_completed": true,
+    "all_task_or_performance_claims": false,
+    "cleanup": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r118-main-009-zero/physical-single/cleanup.json",
+      "bytes": 2069,
+      "sha256": "ab44006f342d756350f7689fdaaa9606f0e257cadaa9d89addf1bb57644a922d"
+    },
+    "stopped_retained": true,
+    "release_fresh_operation": "exec-0000000000000105"
+  },
+  "MXR025026": {
+    "new_files_deployed": 13,
+    "source_audit_operation": "exec-000000000000010a",
+    "source_audit_pass": false,
+    "build_started": false,
+    "reason": "pto_common literal relay is6361bytes but actual upstream6360bytes; possible extra LF must verify original before source successor",
+    "actual_common": {
+      "path": "/cache/cch/paper-sources/mxr-tri-inverse-20260918/pto-isa-01666f3b386f296c95e6e05825fe63b8e6bb4ef4/include/pto/npu/a2a3/common.hpp",
+      "bytes": 6360,
+      "sha256": "2fc27d34fc0b5884170446e980aeef36af00826a48d88591e2b69e7cb62ad8c6"
+    },
+    "algorithm_change_under_review": "block16 intermediate Y high+low correction; compiled control must bitwise match prior output before candidate judgment"
+  },
+  "preparation_agents": [
+    "adakv_current_prepare: SKVQ vector packing own numerical gate",
+    "mxr_resume_audit: KIVI inactive atomic and diagnostic report correction",
+    "damp_operator_reuse: MXR actual source pin correction, compile and numeric bridge"
+  ],
+  "resource_claims": {
+    "latest_verified_snapshot_utc": "2026-10-13T18:28:20.960278Z",
+    "physical4_7_no_processes": true,
+    "physical4_7_HBM_MiB": [
+      2861,
+      2860,
+      2861,
+      2860
+    ],
+    "continuous_30min_utilization": "unmeasured",
+    "no_idle_guarantee": false
+  },
+  "next_actions": [
+    "Preserve fixed R118 experiments; new R156 runs opt-in separate output/source",
+    "Correct precise MXR source provenance and run no-device compile then actual captured-frame gate",
+    "New KIVI value-masked atomic correctness gate, keep original timeout",
+    "SKVQ vectorized packing original independent byte/NPU gate before service",
+    "Consume final formal matched performance and GSM8K/HumanEval/MMLU; none yet accepted"
+  ]
+}

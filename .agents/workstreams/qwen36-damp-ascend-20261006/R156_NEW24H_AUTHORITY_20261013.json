@@ -1,0 +1,112 @@
+{
+  "schema": "ascend.paper-portfolio.new24h-authority/v1",
+  "authority_source": "Direct human user in current thread: 帮我继续高效穿刺24小时，期望能有一个可用的技术，希望不要让我失望",
+  "recorded_observation_utc": "2026-10-13T18:27:36Z",
+  "start_epoch": 1791916056,
+  "cutoff_epoch": 1792002456,
+  "cutoff_utc": "2026-10-14T18:27:36Z",
+  "hours": 24,
+  "historical_authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R118_NEW12H_AUTHORITY_20261013.json",
+    "bytes": 3832,
+    "sha256": "32b3d57baa8f5f843d95675de57e0e8d5579dd8766c9d3d9bd320f834af05a72"
+  },
+  "historical_runs_immutable": true,
+  "old_R118_cutoff_epoch": 1791922930,
+  "old_run_limits_unchanged": true,
+  "new_sources_required_for_new_window": true,
+  "hardware": {
+    "host": "chicaihong01",
+    "peer": "lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d",
+    "physical_npus": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "no_further_hugepage_release": true
+  },
+  "delivery": {
+    "model": "Qwen3.6-27B",
+    "format": "explicit-opt-in plugin/monkeypatch",
+    "new_technique_beyond_HYPIC": true,
+    "training": false,
+    "distillation": false,
+    "original_runtime_edits": false
+  },
+  "acceptance": {
+    "throughput_gain_min": 0.1,
+    "performance_output_tokens": 1024,
+    "formal_paired_rounds": 3,
+    "same_stack_input_concurrency_common_options": true,
+    "profile_off": true,
+    "report_TTFT_TPOT_separately": true,
+    "task_benchmarks": [
+      "GSM8K",
+      "HumanEval",
+      "MMLU"
+    ],
+    "task_thinking": false,
+    "task_max_output": 2048,
+    "task_normal_EOS": true,
+    "smoke_before_full": true,
+    "max_loss_user_percent": 1,
+    "conservative_loss_interpretation": "report both percentage points and relative loss; require both <=1 until clarified",
+    "tensor_tolerances_not_relaxed": true,
+    "technique_composition_allowed": true
+  },
+  "execution_policy": {
+    "agents_parallel_prepare": true,
+    "MAIN_device_admission": true,
+    "single_card_diagnostics_can_parallel_when_compatible": true,
+    "TP4_performance_exclusive": true,
+    "verified_ready_requires": [
+      "source identity",
+      "independent oracle",
+      "actual worker/operator path",
+      "same-image preflight",
+      "bounded exact command",
+      "resource and card mapping",
+      "unique output",
+      "outcome consumer"
+    ],
+    "no_dummy_load": true,
+    "no_unchanged_deterministic_rerun": true,
+    "only_new_evidence_driven_repair": true,
+    "freeze_ready_queue_before_current_job_ends": true,
+    "continuous_utilization_claim_requires_continuous_evidence": true,
+    "periodic_review_minutes": 30,
+    "notify_only_material_changes": true,
+    "coherent_phase_checkpoint_not_minute_spam": true
+  },
+  "priority_now": [
+    "SKVQ vector-pack mechanism-specific graph-node reduction and original numeric gates; service graph integration only on PASS",
+    "MXR compiled-control bitwise anchor plus compensated inversion actual captured-frame numerical gate",
+    "KIVI actual zero-control vector timeout attribution and algorithm-specific kernel repair"
+  ],
+  "milestones": [
+    {
+      "by_hours": 4,
+      "required": "At least one candidate reaches a valid whole-model smoke or report concrete remaining blocker and fallback; preparation alone not milestone success"
+    },
+    {
+      "by_hours": 10,
+      "required": "Paired whole-model performance screening for numerically qualified candidate; stop unproductive route using scoped cause evidence"
+    },
+    {
+      "by_hours": 20,
+      "required": "Run three formal matched performance pairs and smoke/full GSM8K/HumanEval/MMLU on promising candidate, accounting actual remaining time"
+    },
+    {
+      "by_hours": 24,
+      "required": "Report complete acceptance or exact unmet requirements, code/evidence/handoff; do not claim success from partial gates"
+    }
+  ],
+  "success_not_guaranteed": true
+}

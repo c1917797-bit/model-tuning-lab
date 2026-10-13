@@ -1,0 +1,135 @@
+{
+  "schema": "ascend.r156.milestones-and-contingencies/v1",
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R156_NEW24H_AUTHORITY_20261013.json",
+    "bytes": 4025,
+    "sha256": "cd1ec8cf2f12e551a5b49e95b66ef053064ac634aef1e4524430d46ce333f300"
+  },
+  "timezone_display": "Europe/Moscow UTC+03",
+  "historical_HYPIC_not_new_success": true,
+  "success_status": "UNPROVEN",
+  "start_utc": "2026-10-13T18:27:36Z",
+  "deadline_utc": "2026-10-14T18:27:36Z",
+  "clock_must_not_reset": true,
+  "milestones": [
+    {
+      "id": "M0",
+      "hours": 2,
+      "deadline": "2026-10-13T20:27:36Z",
+      "outcome": "Prioritized candidate sources compile in frozen image, failed-frame cause isolated, independent reference/source/inputs/commands/resources/unique outputs ready. Freeze performance workload and task eval definitions; run evaluation harness smoke or estimate runtime from existing exact-stack valid evidence.",
+      "evidence": "Actual build and preflight receipts, immutable READY descriptors, runnable dense/candidate/task commands and measured/explicitly uncertain runtime estimate.",
+      "if_missed": "Flag missing executable dependencies; fix precise input/build/adapter defects without relabeling paper invalid; narrow active breadth to finish one real candidate."
+    },
+    {
+      "id": "M1",
+      "hours": 4,
+      "deadline": "2026-10-13T22:27:36Z",
+      "outcome": "At least one candidate passes applicable NPU numeric/state/graph gate and enters valid whole-model smoke with actual worker/operator dispatch.",
+      "evidence": "Independent NPU verdict plus service logs and request result; CPU-only and synthetic examples do not satisfy.",
+      "if_missed": "Notify major schedule risk now, name exact cause and remaining work; promote genuinely READY alternative. Do not rerun identical failure or silently extend."
+    },
+    {
+      "id": "M2",
+      "hours": 8,
+      "deadline": "2026-10-14T02:27:36Z",
+      "outcome": "One valid same-config dense/candidate whole-model paired performance screen with fixed1024 output and TTFT/TPOT; task smoke GSM8K/HumanEval/MMLU.",
+      "evidence": "Raw requests, exact workload and source identities, output lengths, timing metrics, independent paired comparison and smoke answers.",
+      "if_missed": "No formal performance claim. Implement only evidence-backed critical-path repair; if no valid model path, report risk instead of spending all time on lower-level gates."
+    },
+    {
+      "id": "M3",
+      "hours": 14,
+      "deadline": "2026-10-14T08:27:36Z",
+      "outcome": "Promising candidate completes three formal paired performance rounds; compose techniques only when interactions independently qualify. Full task evaluation started with measured projected finish.",
+      "evidence": "All3 raw pairs, same commonopts/baseline and no profiler; task job identity/progress and measured ETA.",
+      "if_missed": "Freeze best validated implementation, eliminate extra variants, reserve sufficient full evaluation time; results below10% remain unmet even if numerics pass."
+    },
+    {
+      "id": "M4",
+      "hours": 20,
+      "deadline": "2026-10-14T14:27:36Z",
+      "outcome": "Full GSM8K/HumanEval/MMLU paired or provenance-matched frozen-baseline results available; report absolute and relative loss, failures, EOS/length stats; portability/opt-in/rollback smoke.",
+      "evidence": "Task definitions, raw outputs/scorers/configuration and checkpoint hashes; measured precision loss not tensor tolerances.",
+      "if_missed": "Do not promote smoke to full. Use remaining time only to finish highest-value missing acceptance evidence; warn if deadline not feasible."
+    },
+    {
+      "id": "M5",
+      "hours": 24,
+      "deadline": "2026-10-14T18:27:36Z",
+      "outcome": "Deliver qualified plugin plus reproducible proof, or exact unmet requirements and scoped technical findings. Source/provenance/tests/commands/logs/handoff in coherent committed remote branch.",
+      "evidence": "Final requirement-by-requirement audit, normal push acknowledgement; no main/force push.",
+      "if_missed": "Stop new loads at fixed deadline, preserve output and clean up only owned jobs. No automatic authority renewal."
+    }
+  ],
+  "simulation": [
+    {
+      "scenario": "Environment or launcher/input contract fails",
+      "classification": "not effectively validated",
+      "next": "Repair exact mismatch and cold same-image check; leave original run; schedule another READY task. Do not infer algorithm failure."
+    },
+    {
+      "scenario": "NPU numerical/state/graph error",
+      "classification": "current implementation incorrect or backend incompatibility",
+      "next": "Localize first divergence against independent oracle; one new mechanism-specific repair with preserved failing case; do not relax gate."
+    },
+    {
+      "scenario": "SKVQ graph memory reserve fails",
+      "classification": "current memory/runtime integration unsupported under current resource margin",
+      "next": "Measure explicit vs runtime allocations; test vectorized packing node reduction; no arbitrary safety-reserve reduction or batch16-only padding without correctness proof."
+    },
+    {
+      "scenario": "KIVI inactive atomic error flags / vector timeout",
+      "classification": "real device behavior inconsistent with intended inactive path; precise root not yet fully proven",
+      "next": "Test value-masked atomic rewrite and legal/illegal active branches; retain original timeout, partial observations and report-consumer failure separately."
+    },
+    {
+      "scenario": "MXR inversion remains outside FP64 numeric gate",
+      "classification": "current candidate numerical failure",
+      "next": "Require new-compiled control bitwise match then compensate intermediate precision; save all outputs before rejection; no conclusion that all MXR methods fail."
+    },
+    {
+      "scenario": "Correctness passes but throughput below10%",
+      "classification": "current configuration insufficient",
+      "next": "Use measured end-to-end critical path; at most justified bounded tuning/composition of already-qualified mechanisms. No adding kernel speedups or performance percentages."
+    },
+    {
+      "scenario": "Throughput passes but task accuracy exceeds tolerance",
+      "classification": "joint acceptance failed",
+      "next": "Tune documented algorithm strength or revert offending part, then rerun paired relevant gates and affected task tests; do not cherry-pick easier samples."
+    },
+    {
+      "scenario": "No READY job while card idle",
+      "classification": "preparation/scheduling gap",
+      "next": "MAIN fixes closest executable blocker; agents prepare next-stage executables before completion; record gap as unknown unless continuous evidence; never dummy load."
+    },
+    {
+      "scenario": "Independent one-card jobs ready",
+      "classification": "parallel eligible only with verified disjoint scope",
+      "next": "Disjoint physical4-7 mapping and summed host resources, separate outputs/controllers; TP4/model performance exclusive. An old all4-idle controller is not declared compatible by label."
+    },
+    {
+      "scenario": "Task evaluation time exceeds remaining window",
+      "classification": "delivery risk",
+      "next": "Use measured smoke ETA early and freeze candidate; notify early. Never substitute smoke or smaller task dataset for requested full evaluation."
+    }
+  ],
+  "prepared_actual": [
+    "SKVQ009 real TP4 memory breakdown and failed3GiB reserve guard retained",
+    "KIVI009180staticrefs and actualsame66092tests pass; physical4 failed diagnostic retained; inactive flags and later timeout now separate",
+    "MXR025/02613sourcefiles deployed; actual source audit caught one or more dependency mismatch; compilation not yet passed"
+  ],
+  "pending_no_claim": [
+    "At least one new candidate complete NPU->whole-model->paired performance->full tasks acceptance",
+    "Verified complete next-stage READY queue for all three candidates",
+    "Continuous card utilization evidence",
+    "All actual full-task runtime forecasts"
+  ],
+  "scheduler": {
+    "parallel_preparers": 3,
+    "MAIN_authority": "device admission/release/paired performance",
+    "resource_policy": "physical4-7 only; compatible disjoint diagnostics; TP4exclusive",
+    "review_minutes": 30,
+    "notification_policy": "material risk or stage outcome only; no repetitive token/portfolio summaries"
+  },
+  "route_value_not_guaranteed": true
+}
