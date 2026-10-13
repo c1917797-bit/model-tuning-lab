@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Latest algorithm checkpoint: independent_linear_reuse connects live boundary
+callback -> cached affine-body composition -> private output/conv-tail result.
+Same-input FP64 full recurrence comparison and public/initial nonmutation controls
+pass;59 tests0016 total. Cached body core outputs explicitly approximate PIC,
+not asserted equivalent to full current-context output. No native slot mutation.
+Still missing actual boundary_runner closure/public material producer and GDN
+runtime hook, C2 full-attention reuse and seam propagation. No NPU job this turn.
+Next implement these serving paths rather than repeating primitive tests.
+
 Latest offline treatment preparation: independent_linear_map plus source-bound
 associate_native_linear added for exact pure-prefill request/metadata/SSM slot
 association; rejects alias, sequence-order mismatch, bad initial flag and spec/mixed
