@@ -1,5 +1,29 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-13 completed-campaign resume-route regression
+
+Five case next_gate fields still directed fresh-card work, pending performance
+authorization or polling of terminal native recovery. Corrected canary,
+orientation,tuning-loop,quality and ingestion cases to current offline review.
+Native enabled/disabled both FAILED_SEMANTIC_GUARD; uninstalled not run.
+All original task/observed/raw receipt/acceptance fields retained;9/20 unchanged.
+02ff passed real aggregate-bound route check,six regressions,29-case provenance,
+29-Skill structure and diff. First patch was atomically rejected due to reversed
+hunk order;02fe proved no partial write, corrected-order patch then succeeded.
+
+Experience classification5 (verification case), source this real completed
+HYPIC maintenance session. Trigger: a campaign reaches terminal state while
+distributed case instructions still describe running/pending work.
+Different next action: consult terminal task/aggregate before following old
+next_gate; preserve historical gaps without scheduling replacement experiments.
+Destination: five case resume policies and verify_completed_campaign_routes.py.
+Verification: python3 -B verify_completed_campaign_routes.py and
+python3 -B -m unittest test_completed_campaign_routes.py from this workstream.
+These tests check resume routing only,not full Skill behavior. No NPU run,
+source change,old-root rewrite,acceptance promotion or main/remote sync.
+Next: continue exact-main obligation review offline;do not refill evidence gaps
+with duplicated completed HYPIC runs. Canonical Skill text was not changed.
+
 ## 2026-10-13 six-phase current-source performance completed
 
 Final offline validation02f7 passed raw-derived report tables/hash checks,

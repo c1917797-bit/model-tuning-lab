@@ -1,5 +1,6 @@
 {
   "schema": "mst-real-task-skill-case/v1",
+  "current_campaign_resume": {"campaign":"current4429-performance-20261013","aggregate_sha256":"67ba6cf14fc9bed993acbdf421eb438f22d56957f3e56baad170a4bb871e53fe","next_action_kind":"offline-evidence-review","new_device_work_authorized":false,"historical_observations_unchanged":true,"regression":"verify_completed_campaign_routes.py"},
   "native_recovery_disabled_failure_20261012": {"report":"HYPIC_NATIVE_RECOVERY_DISABLED_FAILURE_20261012.md","decision":"FAILED_SEMANTIC_GUARD","controller":"exec-0000000000000165","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","requests_complete":3,"disabled_treatment_event_count":0,"enabled_disabled_predictions":["A","A"],"reference":"D","enabled_disabled_completion_tokens":[2048,2048],"enabled_disabled_finish_reasons":["length","length"],"clean_isolation_samples":100,"exact_owned_release":true,"one_switch_command_fingerprint_match":true,"paired_failure_audit_sha256":"b528aef3639ab8d3229e8f9f34fa890fcf8a73010db7a24a4fea0b9155045c7f","semantic_recovery_pass":false,"uninstalled_started":false,"old_quality_verdict_changed":false,"replay":"python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_recovery_failure_audit.py"},
   "native_lifecycle_enabled_failure_20261012": {"decision":"FAILED_SEMANTIC_GUARD","report":"HYPIC_NATIVE_LIFECYCLE_ENABLED_FAILURE_20261012.md","controller":"exec-0000000000000141","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","requests_complete":3,"target_hot_workers":4,"reference":"D","prediction":"A","completion_tokens":2048,"finish_reason":"length","clean_isolation_samples":104,"exact_owned_release":true,"failure_audit_sha256":"94dd02e81529acedf25ace6979cc6b72a1e265505adf1ea2cf36afd29e7bf82a","canary_pass":false,"disabled_uninstalled_complete":false,"population_quality_or_performance_claim":false,"old_verdict_changed":false,"replay":"python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_lifecycle_failure_audit.py"},
   "skill": "ascend-npu-environment-orientation",
@@ -27,6 +28,8 @@
     "scored_rows": 0
   },
   "evidence": [
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_completed_campaign_routes.py","sha256":"eb28a07040bba5b8cf2c6a3b6a2d2291cb174d20da3cf0b9f7cac79e34dc6f6a"},
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_completed_campaign_routes.py","sha256":"6b9e08a229a1227c43cc7aad54b38137962f7a900a78422a6f766c6edde156e4"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_NATIVE_RECOVERY_DISABLED_FAILURE_20261012.md","sha256":"a6010dafaa39c6bcb03ace6d8f7b2e5e9d37230f7c6ef2991d4fa414670bb334"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_recovery_failure_audit.py","sha256":"f7df4121617b68c3926863d0227726067e77fb422f2e4d69e777b51053be3598"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/native_lifecycle_failure_audit.py","sha256":"05c7314e035e5905a33f1b18c8fb8e0dfc5221cf842db6f2a94e2ff316e19924"},
@@ -52,5 +55,5 @@
   },
   "replayable_regression_recorded": false,
   "boundary": "The HYPIC campaign row is V for its bounded pinned-worker evidence, but long-term full current-main Skill acceptance is partial: no unified experiment YAML with all software/topology fields and explicit unavailability markers, no same-identity cache10r5 inference canary or baseline-drift decision, and no complete orientation-stage behavioral replay. The cache10r5 candidate was environment-invalid before health, not a quality result.",
-  "next_gate": "On a fresh, actually clean physical NPU0-3 window, complete the Skill's full environment record and same-identity canary, compare material drift, commit/push a clean orientation checkpoint, and retain a focused replayable check. Do not rerun the invalid cache10r5 root."
+  "next_gate": "Retain the original cache10r5 pre-health invalid result and its missing same-identity Canary; do not create a replacement experiment to backfill history. Native enabled/disabled controls and current4429 six performance phases are separately terminal, not retrospective proof for cache10r5. Review existing metadata/release/source receipts offline and mark missing historical identity fields unavailable. No fresh-card window, new Canary or NPU launch is needed for current case review. At the next independently needed and authorized experiment, capture orientation prospectively; full Skill acceptance and main integration remain incomplete."
 }

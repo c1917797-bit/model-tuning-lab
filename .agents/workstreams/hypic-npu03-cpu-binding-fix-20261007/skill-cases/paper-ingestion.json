@@ -1,5 +1,6 @@
 {
   "schema": "mst-real-task-skill-case/v1",
+  "current_campaign_resume": {"campaign":"current4429-performance-20261013","aggregate_sha256":"67ba6cf14fc9bed993acbdf421eb438f22d56957f3e56baad170a4bb871e53fe","next_action_kind":"offline-evidence-review","new_device_work_authorized":false,"historical_observations_unchanged":true,"regression":"verify_completed_campaign_routes.py"},
   "skill": "paper-ingestion",
   "campaign_code": "P",
   "long_term_acceptance": "verified",
@@ -33,6 +34,8 @@
     "case_integrated_in_main": false
   },
   "evidence": [
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_completed_campaign_routes.py","sha256":"eb28a07040bba5b8cf2c6a3b6a2d2291cb174d20da3cf0b9f7cac79e34dc6f6a"},
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_completed_campaign_routes.py","sha256":"6b9e08a229a1227c43cc7aad54b38137962f7a900a78422a6f766c6edde156e4"},
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_INGESTION_CASE_20261009.md",
       "sha256": "71b43dedf0a1705f0da910ed93d9fdfa87ee52330a5a142ff8ce3327a05a9bca"
@@ -74,7 +77,7 @@
   },
   "replayable_regression_recorded": true,
   "boundary": "Bounded verification of the original retrospective paper-ingestion task against exact main, supported by the paper/model note, ten author reference hashes, five source/license/test identities and a seven-obligation review. Historical observed fields remain October9 snapshots. No claim of historical preimplementation compliance, full C3 implementation, author GPU tests, whole-project license clearance, quality preservation, source-equivalent current performance or main integration.",
-  "next_gate": "Revalidate ingestion on source/paper/model/contract drift. Do not repeat completed r19 quality or implement C3 to re-accept this case. Downstream HYPIC quality rejection, pending same-source performance decision and remaining20 Skill cases still require their own evidence; authorized main integration waits for working credentials.",
+  "next_gate": "Revalidate ingestion only on paper/source/model/contract drift. The author reference closure remains bounded verified; do not repeat r19 quality or implement C3 for this case. Current4429 same-source performance supplement is complete and retains the separate r19 quality rejection. Remaining20 partial Skill cases need their own requirement-scoped evidence review; authorized main/remote integration still requires working authentication. No new experiment is requested by this case.",
   "drift_trigger": "Revalidate on paper version, author-code commit/license, main or branch Skill/reference/registry blob, target config/index, derivative source, or workload/quality contract change.",
   "current_evidence_supplement": {
     "as_of_utc": "2026-10-12",

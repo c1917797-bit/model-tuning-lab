@@ -1,5 +1,6 @@
 {
   "schema": "mst-real-task-skill-case/v1",
+  "current_campaign_resume": {"campaign":"current4429-performance-20261013","aggregate_sha256":"67ba6cf14fc9bed993acbdf421eb438f22d56957f3e56baad170a4bb871e53fe","next_action_kind":"offline-evidence-review","new_device_work_authorized":false,"historical_observations_unchanged":true,"regression":"verify_completed_campaign_routes.py"},
   "skill": "ascend-inference-tuning-loop",
   "campaign_code": "P",
   "long_term_acceptance": "partial-evidence",
@@ -33,6 +34,8 @@
     "main_and_remote_integration_complete": false
   },
   "evidence": [
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_completed_campaign_routes.py","sha256":"eb28a07040bba5b8cf2c6a3b6a2d2291cb174d20da3cf0b9f7cac79e34dc6f6a"},
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_completed_campaign_routes.py","sha256":"6b9e08a229a1227c43cc7aad54b38137962f7a900a78422a6f766c6edde156e4"},
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ASCEND_INFERENCE_TUNING_LOOP_CASE_20261008.md",
       "sha256": "4203bdf070b6f0ee34ea51514ae1e1679021f145bb897c133771a3f7f20dad8f"
@@ -77,7 +80,7 @@
   },
   "replayable_regression_recorded": true,
   "boundary": "This is a validated bounded CPU-binding-off comparison plus a series of HYPIC activation and environmental isolation negatives, not full HYPIC acceptance or remote integration. Retry14's continuous guard captured foreign physical NPU1 use before health/scoring; zero rows means no performance result. The exact owned retry14 service was removed, while foreign work was untouched. These repeated environmental outcomes improve scheduling knowledge but neither pass nor fail the HYPIC technique. The main Skill's full continuous workflow remains partial.",
-  "next_gate": "Preserve the r13 quality rejection and every phase root. The user authorized opportunistic monitoring and running only while physical NPU0-3 and port 8223 are actually unused; no coordinated window or fixed idle-duration threshold is required. Immediately re-prove direct routing and physical process/port state, use a distinct preregistered root and existing continuous guard, and never stop or modify foreign work.",
+  "next_gate": "Current4429 six-phase performance supplement and its independent aggregate are complete; r19 quality remains REJECT_OR_QUALIFY. No further phase, opportunistic device polling or new root is required for this campaign. Review existing planned/measured/decided/recovered checkpoints and remaining exact-main workflow obligations offline; unchanged remote authentication blocks push/integration, not evidence preservation. Historical r13/CPU-binding results remain source-scoped and immutable. A future genuinely needed experiment requires its own admission and is not authorized by this next_gate.",
   "drift_trigger": "Revalidate when the main Skill or registry blob, source/image/model/physical lane, workload, serving flags, benchmark/scorer, or any raw artifact hash changes.",
   "retry18_followup": {
     "attempt_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry18",
