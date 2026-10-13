@@ -1,0 +1,14 @@
+{
+  "schema": "sanitized-execution-receipt/v1",
+  "peer": "chicaihong01/mc",
+  "operation_id": "exec-000000000000007a",
+  "command": "bash",
+  "args": [
+    "-c",
+    "set -e\npython3 -B -m unittest discover -s .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007 -p test_planning_integration.py\npython3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/preflight_planning_integration.py --target /cache/cch/mst-main-onboarding-20261013-f8113561\nsha256sum .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/integration/planning-schema/manifest.json .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/integration/planning-schema/planning-schema.diff.json .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/preflight_planning_integration.py .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_planning_integration.py\n"
+  ],
+  "cwd": "/cache/cch/model-tuning-lab-hypic-e2e-20261006",
+  "exit_code": 0,
+  "stdout": "{\"boundary\": \"Applies cleanly to pinned local main; live remote and final-tree gates remain.\", \"integration_ready\": false, \"main_changed\": false, \"patch_sha256\": \"c675e747fa70695e733f413ca877860383a089fb0543b2a719047095cf63383a\", \"paths\": [\".agents/skills/mst-practice-iteration-planning/SKILL.md\"], \"remote_authenticated\": false, \"schema\": \"mst-selective-integration-preflight/v1\", \"source_commit\": \"4a95c87b8bf6a59557ad0e45c42e7b0616593caa\", \"target_commit\": \"ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2\", \"valid\": true}\ncbdc9fbea22767c8c7ee5dd3e0c6b0655439581f778e1782f531659f31f6b8b5  .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/integration/planning-schema/manifest.json\n179192a36815c41be977b097d23e2c2f4a2284660431c196281ff341e79b96c4  .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/integration/planning-schema/planning-schema.diff.json\n6bb6264b3f4fc5adaa28aa25d967547c3e08261c8cccb5cd01057451d7e57572  .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/preflight_planning_integration.py\n6cc6be79a78c048e91202ab5ed38acdead2d2c6d9c4b91eb593c9b12bf724631  .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_planning_integration.py\n",
+  "stderr": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.001s\n\nOK\n"
+}

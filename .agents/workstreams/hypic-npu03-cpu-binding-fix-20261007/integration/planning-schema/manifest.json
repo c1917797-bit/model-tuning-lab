@@ -1,0 +1,33 @@
+{
+  "schema": "mst-selective-integration-candidate/v1",
+  "state": "offline-preflight-only",
+  "target_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "source_commit": "4a95c87b8bf6a59557ad0e45c42e7b0616593caa",
+  "paths": [
+    ".agents/skills/mst-practice-iteration-planning/SKILL.md"
+  ],
+  "before_blob": "171e1f401b18dc6aaa4d38a2c3b6b260fca46123",
+  "after_blob": "9be62a7adfec954b2b08d8d3d30e496e676d9ac8",
+  "patch": "planning-schema.diff.json",
+  "remote_authentication_verified": false,
+  "primary_changed": false,
+  "required_before_integration": [
+    "refresh authenticated remote refs",
+    "create or resume authorized named integration workstream with remote start checkpoint",
+    "recheck exact target parent or invalidate candidate on drift",
+    "apply only allowlisted diff, not whole source commit",
+    "run original validator and example contract regression in prospective target",
+    "serialize exact-source merge, validate final tree, push normally and verify equality"
+  ],
+  "source_evidence": [
+    "PRACTICE_ITERATION_SCHEMA_ACCEPTANCE_20261008.md",
+    "COMPLETED_ITERATION_REVIEW_20261013.md"
+  ],
+  "excluded": [
+    "HYPIC runtime code",
+    "NPU experiments",
+    "quality verdict changes",
+    "historical workstream imports",
+    "unrelated Skill changes"
+  ]
+}

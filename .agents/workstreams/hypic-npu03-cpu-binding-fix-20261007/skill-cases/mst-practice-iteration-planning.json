@@ -70,9 +70,44 @@
     {
       "path": ".agents/evals/practice-iterations/hypic-remaining-skills-onboarding-20261013.yaml",
       "sha256": "5c8185c5fd03a71bf1e5100e66cfbb86d68326f443dfbfed27bb5e79f64dc029"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/integration/planning-schema/manifest.json",
+      "sha256": "cbdc9fbea22767c8c7ee5dd3e0c6b0655439581f778e1782f531659f31f6b8b5"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/integration/planning-schema/planning-schema.diff.json",
+      "sha256": "179192a36815c41be977b097d23e2c2f4a2284660431c196281ff341e79b96c4"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/preflight_planning_integration.py",
+      "sha256": "6bb6264b3f4fc5adaa28aa25d967547c3e08261c8cccb5cd01057451d7e57572"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_planning_integration.py",
+      "sha256": "6cc6be79a78c048e91202ab5ed38acdead2d2c6d9c4b91eb593c9b12bf724631"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PLANNING_SELECTIVE_INTEGRATION_20261013.md",
+      "sha256": "cd5267ec669636ba323e3e89f4868ff31827a3ad4ebd5f2ce4416f334f4367fa"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PLANNING_INTEGRATION_PREFLIGHT_RECEIPT_20261013.json",
+      "sha256": "6f430abf621f8540579e0043c720fb1fc04588658bd5d29da532c443d7ce840d"
     }
   ],
   "replayable_regression_recorded": true,
   "boundary": "Current main Skill's exact output example fails the current repository validator, so main long-term acceptance is partial. The named branch repair passes on a real HYPIC stage plan, but it has not been integrated and replayed from a fresh main clone. This case does not establish an uninterrupted NPU window or HYPIC quality/performance. The 2026-10-13 supplement validates the branch's completed-plan lifecycle and rejects stale checkpoint/file association; main acceptance remains partial, independently of HYPIC quality.",
-  "drift_trigger": "Revalidate after the practice-iteration Skill or validate-mst.sh schema changes, main integration, or a change to the HYPIC stage ruler."
+  "drift_trigger": "Revalidate after the practice-iteration Skill or validate-mst.sh schema changes, main integration, or a change to the HYPIC stage ruler.",
+  "selective_integration_preflight_20261013": {
+    "candidate": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/integration/planning-schema/manifest.json",
+    "controls_passed": 7,
+    "operation": "chicaihong01/mc exec-000000000000007a exit0",
+    "exact_allowlisted_paths": 1,
+    "pinned_target": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+    "read_only_apply_check": true,
+    "main_changed": false,
+    "remote_authenticated": false,
+    "integration_ready": false
+  }
 }

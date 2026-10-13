@@ -59,6 +59,10 @@ Global .agents/HANDOFF.md describes integrated history,not this unmerged result.
 
 ## 4. Current Action
 
+Planning-schema selective integration candidate passed seven guards and a
+read-only exact-main apply check. See PLANNING_SELECTIVE_INTEGRATION_20261013.md;
+authenticated target refresh/final-tree validation remain required. Main unchanged.
+
 Named-workstream lifecycle passed in a retained local-bare Git fixture:
 seven commits/pushes,drift/revalidation,no-ff integration and eligible cleanup;
 seven lifecycle guards and six false-attestation controls passed. See
