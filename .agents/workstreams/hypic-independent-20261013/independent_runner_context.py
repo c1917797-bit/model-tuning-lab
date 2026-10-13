@@ -2,7 +2,7 @@
 from contextvars import ContextVar
 from functools import wraps
 CURRENT_REQUEST_SLICES=ContextVar("independent_hypic_request_slices",default=None)
-def install_runner_context(runner_class,freeze_from_runner,*,enabled=False,verify_source=None):
+def install_runner_context(runner_class,freeze_from_runner,*,enabled=False,verify_source=None,after_prepare=None):
     if not enabled:return lambda:None
     if verify_source is None:raise ValueError("source verification required")
     verify_source(runner_class)
@@ -14,6 +14,8 @@ def install_runner_context(runner_class,freeze_from_runner,*,enabled=False,verif
     def wrapped_prepare(self,*args,**kwargs):
         output=prepare(self,*args,**kwargs)
         CURRENT_REQUEST_SLICES.set(freeze_from_runner(self,args,kwargs))
+        if after_prepare is not None:
+            after_prepare(self,CURRENT_REQUEST_SLICES.get())
         return output
     @wraps(execute)
     def wrapped_execute(self,*args,**kwargs):

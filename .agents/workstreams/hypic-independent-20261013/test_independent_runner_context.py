@@ -23,6 +23,18 @@ class RunnerContextTests(unittest.TestCase):
         self.assertIs(cls._prepare_inputs,original);self.assertEqual(checks,[cls])
     def test_enabled_requires_verification(self):
         with self.assertRaises(ValueError):install_runner_context(self.make_runner(),None,enabled=True)
+    def test_observer_after_native_prepare_and_failure_cleanup(self):
+        cls=self.make_runner();events=[]
+        def observe(r,s):
+            events.append((s,CURRENT_REQUEST_SLICES.get()))
+            if s==('bad',):raise ValueError('slot mismatch')
+        stop=install_runner_context(cls,lambda r,a,k:tuple(a),enabled=True,
+                                    verify_source=lambda c:None,after_prepare=observe)
+        self.assertEqual(cls().execute_model('ok'),('ok',))
+        self.assertEqual(events,[(('ok',),('ok',))])
+        with self.assertRaises(ValueError):cls().execute_model('bad')
+        self.assertIsNone(CURRENT_REQUEST_SLICES.get())
+        stop()
     def test_duplicate_install_and_foreign_overwrite_fail_closed(self):
         cls=self.make_runner()
         stop=install_runner_context(cls,lambda r,a,k:tuple(a),enabled=True,verify_source=lambda c:None)

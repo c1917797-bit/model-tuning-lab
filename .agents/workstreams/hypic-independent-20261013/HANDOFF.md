@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Latest continuation: runtime post-prepare callback and bounded cache diagnostic
+implemented; selects FullAttentionSpec groups from actual cache configuration,
+captures request/group/rank/PID/step and device slot comparison.44 CPU controls
+pass00b0. Default-disabled import-completion loader added; disabled00b1 imports
+no torch and installs no hooks. It records per-worker exclusive fsynced receipts.
+No NPU job started. Loader enabled-path/official worker spawn still unverified.
+Next review/freeze startup loader and support hashes, then new TP4 bounded service
+contract with diagnostic RO mount and new immutable raw root. Do not run stale
+NATIVE_SMOKE_CONTRACT controller hash. Full treatment remains unimplemented.
+
 Newest offline checkpoint:00a9 confirms official block_table source SHA256
 b79a46abf8feb0e2ad9e9de64b55e6fc6d3597eadbd903993cbf4e3e74f1f324.
 Independent cache map validates request/table-derived slots against actual device

@@ -68,3 +68,29 @@ def capture_native_cache_slices(runner,requests,*,attention_group_ids):
     # Preserve native cache group IDs, not ordinal positions in this subset.
     from dataclasses import replace
     return tuple(replace(x,group=groups[x.group]) for x in captured)
+
+def activate_cache_diagnostic(*,enabled=False,emit=None,max_batches=2):
+    """Bounded real prepare-path observer. No technique activation/cache writes."""
+    if not enabled:return lambda:None
+    if not callable(emit) or type(max_batches) is not int or max_batches<1 or max_batches>4:
+        raise ValueError("bounded diagnostic sink required")
+    import vllm_ascend.ops
+    from vllm_ascend.worker.model_runner_v1 import NPUModelRunner
+    from vllm.v1.kv_cache_interface import FullAttentionSpec
+    seen=weakref.WeakKeyDictionary()
+    def observe(runner,requests):
+        if seen.get(runner,0)>=max_batches:return
+        groups=runner.kv_cache_config.kv_cache_groups
+        ids=tuple(i for i,g in enumerate(groups) if isinstance(g.kv_cache_spec,FullAttentionSpec))
+        if not ids:raise ValueError("no explicit full-attention cache group")
+        captured=capture_native_cache_slices(runner,requests,attention_group_ids=ids)
+        from dataclasses import asdict
+        import os
+        emit({"event":"native_cache_association","pid":os.getpid(),
+              "requests":[asdict(x) for x in requests],
+              "cache_slices":[asdict(x) for x in captured],
+              "group_layers":{str(i):list(groups[i].layer_names) for i in ids},
+              "scope":"read-only association; no ownership lease or HYPIC activation"})
+        seen[runner]=seen.get(runner,0)+1
+    return install_runner_context(NPUModelRunner,freeze_native_runner,enabled=True,
+                                  verify_source=verify_runner,after_prepare=observe)
