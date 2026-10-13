@@ -1,0 +1,344 @@
+{
+  "schema": "hypic-profiler-history-review/v1",
+  "scope": "Seven retained phase directories in r1-r6; not a new capture or retroactive acceptance",
+  "source_provenance": {
+    "prefill_r2_executed_controller_bytes": "not-proven-in-retained-evidence",
+    "contracts_record_plugin_commit_not_controller_digest": true,
+    "tracked_versions": [
+      {
+        "commit": "820ee0c2d6d67864073f80a140609d96664374f3",
+        "metadata": "2026-10-09T17:34:16+00:00 docs: audit hypic prefill profiler and preserve decode isolation failures",
+        "git_blob": "9f181ebb075ec458cc08e8450a0979f5c64946eb",
+        "sha256": "70aeedcf7f789c3bb59515f628c8c15d3bff48a6de35e1cc274c242f4c38da28",
+        "identity_lines": [
+          "RAW_ROOT = Path(\"/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r4\")",
+          "        quality.QROOT = RAW_ROOT",
+          "        quality.ATTEMPT = \"profiler-hypic-hotcold-20261009-r4\""
+        ]
+      },
+      {
+        "commit": "788e2091158ca6135bb67f4bac16512e17b13c25",
+        "metadata": "2026-10-09T17:51:15+00:00 test: preserve hypic profiler retry5 isolation evidence",
+        "git_blob": "c44655667d156eaef112345f5bc0e57afd889805",
+        "sha256": "2cf82acb8b6624087f0525b2eea8122b32efc133261fc27561b05b725a708d80",
+        "identity_lines": [
+          "RAW_ROOT = Path(\"/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r5\")",
+          "        quality.QROOT = RAW_ROOT"
+        ]
+      },
+      {
+        "commit": "30eba46ddf159b415d3f4d1d6042c3bddd378d4f",
+        "metadata": "2026-10-09T18:16:08+00:00 test: preregister robust hypic decode profiler retry6",
+        "git_blob": "0c73158adda929df52da975799ea5bc275a0d3bc",
+        "sha256": "738015c7820fe62cae914d3857fda3c15ec47cf5f4471082acf35d03e3974ec3",
+        "identity_lines": [
+          "RAW_ROOT = Path(\"/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r6\")",
+          "        quality.QROOT = RAW_ROOT"
+        ]
+      }
+    ]
+  },
+  "attempts": [
+    {
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r1",
+      "phase": "prefill",
+      "outcome": "isolation-invalid",
+      "result_valid": false,
+      "errors": [
+        "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error",
+        "continuous lane guard recorded foreign activity or probe error"
+      ],
+      "capture_present": false,
+      "release": {
+        "at_utc": "2026-10-09T16:42:37.268666+00:00",
+        "container_removed": true,
+        "owned_workers_released": true,
+        "port_released": true
+      },
+      "receipts": {
+        "contract.json": {
+          "sha256": "345eebf841f4db25f18e43bac31cb9e0138d60ff0831a06d1048242082f81266",
+          "size": 7987
+        },
+        "release.json": {
+          "sha256": "63dc36c6e217d17ad38f98b22121ccc38db4045c9a7d210a0a579aa642254324",
+          "size": 139
+        },
+        "result.json": {
+          "sha256": "721396daec6f1d3d8e136b9be8ce2439f0804794977183aa8d9c926d7da4e84e",
+          "size": 605
+        }
+      },
+      "guard": {
+        "sha256": "7cee35b5a4b9f86fce8025a7358c54119a244e8a27220b650a28a63b90c0adc9",
+        "samples": 42,
+        "foreign": [
+          {
+            "at_utc": "2026-10-09T16:41:33.479018+00:00",
+            "processes": [
+              {
+                "container_id": "87ab8b2137c62e965c4ed88ce241b306794316cc04625770648a1d1c3bd1caaa",
+                "physical_npu": 0,
+                "pid": 3148909
+              }
+            ]
+          }
+        ],
+        "probe_errors": []
+      }
+    },
+    {
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r2",
+      "phase": "prefill",
+      "outcome": "capture-valid",
+      "result_valid": true,
+      "errors": [],
+      "capture_present": true,
+      "release": {
+        "at_utc": "2026-10-09T16:56:20.247831+00:00",
+        "container_removed": true,
+        "owned_workers_released": true,
+        "port_released": true
+      },
+      "receipts": {
+        "contract.json": {
+          "sha256": "54f72f823bf88c4ba9163ca4497c537280dec1067b5393b9a8b42425399fb138",
+          "size": 7987
+        },
+        "capture.json": {
+          "sha256": "5853dff8f335939116d7ee89deae839fad9c8d983b8c38f98df10c156d3c8a5b",
+          "size": 373
+        },
+        "release.json": {
+          "sha256": "74174566fe0602f9a6d4200dee0aa59cce5bb7345005f13ad2debe8f5e95cd8b",
+          "size": 139
+        },
+        "result.json": {
+          "sha256": "c400e15775c82675f5ee57761370302460319b1ab2457deae2fd8978e071de15",
+          "size": 950
+        },
+        "artifact-audit.json": {
+          "sha256": "ec479b547ae72890dfb5f232bad8b7dd3d7f89ddac9dd9f17a18b1d02b13e3f6",
+          "size": 73789
+        }
+      },
+      "guard": {
+        "sha256": "4734d3678d2aebe4c4b2b4694f72e7667cbde1f83631e6ee94301d120737f6a7",
+        "samples": 88,
+        "foreign": [],
+        "probe_errors": []
+      }
+    },
+    {
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r2",
+      "phase": "decode",
+      "outcome": "isolation-invalid",
+      "result_valid": false,
+      "errors": [
+        "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error",
+        "continuous lane guard recorded foreign activity or probe error"
+      ],
+      "capture_present": false,
+      "release": {
+        "at_utc": "2026-10-09T17:07:53.677783+00:00",
+        "container_removed": true,
+        "owned_workers_released": true,
+        "port_released": true
+      },
+      "receipts": {
+        "contract.json": {
+          "sha256": "380005e664d0ef95f5489bfeacad59d105482e74c9d0568c86a44545f768e851",
+          "size": 7980
+        },
+        "release.json": {
+          "sha256": "b759fb04a25386a38ba20486a48afc84d03768f7a6d57a7d6c378841a63179cc",
+          "size": 139
+        },
+        "result.json": {
+          "sha256": "d71f436bd8a75cd86b870fb10e808e440061d6c418c33e5f5ebf4685c38cfe30",
+          "size": 604
+        }
+      },
+      "guard": {
+        "sha256": "e7cd2c09386ac7797ca26781b41bd60d23ab1a86bf18af60d3f574965ccb7061",
+        "samples": 88,
+        "foreign": [
+          {
+            "at_utc": "2026-10-09T17:06:17.580046+00:00",
+            "processes": [
+              {
+                "container_id": "87ab8b2137c62e965c4ed88ce241b306794316cc04625770648a1d1c3bd1caaa",
+                "physical_npu": 0,
+                "pid": 3418373
+              }
+            ]
+          }
+        ],
+        "probe_errors": []
+      }
+    },
+    {
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r3",
+      "phase": "decode",
+      "outcome": "admission-rejected",
+      "result_valid": false,
+      "errors": [
+        "RuntimeError: physical NPU0-3 have a running process"
+      ],
+      "capture_present": false,
+      "release": null,
+      "receipts": {
+        "contract.json": {
+          "sha256": "2c2580ea84bb1fe64a469c3062e64fc493d2a64d6369fdef409104f716cfa03d",
+          "size": 7980
+        },
+        "result.json": {
+          "sha256": "47b255126deb855e6fa503798b23cfa19c0dc0ba4200b9ec7055bb6ff5b3e623",
+          "size": 363
+        }
+      },
+      "guard": null
+    },
+    {
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r4",
+      "phase": "decode",
+      "outcome": "isolation-invalid",
+      "result_valid": false,
+      "errors": [
+        "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error",
+        "continuous lane guard recorded foreign activity or probe error"
+      ],
+      "capture_present": false,
+      "release": {
+        "at_utc": "2026-10-09T17:19:20.553749+00:00",
+        "container_removed": true,
+        "owned_workers_released": true,
+        "port_released": true
+      },
+      "receipts": {
+        "contract.json": {
+          "sha256": "0da13b1c6e4718b414813351b29eb2f374cc7d7593afaa5e3ffebbd52773f4e6",
+          "size": 7980
+        },
+        "release.json": {
+          "sha256": "3f1fe9f05d553bdb73d0410be540e5dd6b3f7c872d06537bd16aecac93c1023a",
+          "size": 139
+        },
+        "result.json": {
+          "sha256": "378ac76225caea71919ba071adc9fd378a9713b470d5600b6689cb7fbe42e1be",
+          "size": 604
+        }
+      },
+      "guard": {
+        "sha256": "d8d14d331c1898ee578bf59f11b6605acee6519845d83682d4f762c6fe08b03d",
+        "samples": 4,
+        "foreign": [
+          {
+            "at_utc": "2026-10-09T17:18:18.815436+00:00",
+            "processes": [
+              {
+                "container_id": "87ab8b2137c62e965c4ed88ce241b306794316cc04625770648a1d1c3bd1caaa",
+                "physical_npu": 0,
+                "pid": 3541845
+              }
+            ]
+          }
+        ],
+        "probe_errors": []
+      }
+    },
+    {
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r5",
+      "phase": "decode",
+      "outcome": "isolation-invalid",
+      "result_valid": false,
+      "errors": [
+        "RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error",
+        "continuous lane guard recorded foreign activity or probe error"
+      ],
+      "capture_present": false,
+      "release": {
+        "at_utc": "2026-10-09T17:40:42.586536+00:00",
+        "container_removed": true,
+        "owned_workers_released": true,
+        "port_released": true
+      },
+      "receipts": {
+        "contract.json": {
+          "sha256": "db100436a5901fe45d9b90321441c55098bf9d10842777e22bba074adb65ddc5",
+          "size": 7980
+        },
+        "release.json": {
+          "sha256": "60794eb7dc56140ac48c28a18379d3aa2c81357b84e0f9c6634a56d61c68482e",
+          "size": 139
+        },
+        "result.json": {
+          "sha256": "b10005d2848cf4070761a38ebb9edf2b698fc8d1b2ab1fe1cd539f45d9fcc807",
+          "size": 604
+        }
+      },
+      "guard": {
+        "sha256": "c70898e22e29eaf0e77c4a69a9a9ee74c02670738c1422c6d4bb3be3e05bfdf1",
+        "samples": 4,
+        "foreign": [
+          {
+            "at_utc": "2026-10-09T17:39:40.716675+00:00",
+            "processes": [
+              {
+                "container_id": "87ab8b2137c62e965c4ed88ce241b306794316cc04625770648a1d1c3bd1caaa",
+                "physical_npu": 0,
+                "pid": 3750311
+              }
+            ]
+          }
+        ],
+        "probe_errors": []
+      }
+    },
+    {
+      "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-hypic-hotcold-20261009-r6",
+      "phase": "decode",
+      "outcome": "capture-valid",
+      "result_valid": true,
+      "errors": [],
+      "capture_present": true,
+      "release": {
+        "at_utc": "2026-10-09T18:45:00.067466+00:00",
+        "container_removed": true,
+        "owned_workers_released": true,
+        "port_released": true
+      },
+      "receipts": {
+        "contract.json": {
+          "sha256": "a6ad132a6ccaf0f49632a9233560910ef9849de062807f3637178f16d0a8d9c7",
+          "size": 7980
+        },
+        "capture.json": {
+          "sha256": "179c5aec5b2e155f360e31278d4dba16655f5d9dc1dd4d1917b46b69368e7f5f",
+          "size": 497
+        },
+        "release.json": {
+          "sha256": "4ac3630c49c532b582b3ee0789e61d996814aebc8d3360c174c495ba592e4b4b",
+          "size": 139
+        },
+        "result.json": {
+          "sha256": "80981b54f21957da3c46559b67dead569b73abcae1c9a9eef12b066a3e370d09",
+          "size": 1077
+        },
+        "artifact-audit.json": {
+          "sha256": "7639b43ca22109c4abc0d0f879febff7dffbc6e65603278417240ddae4ea520a",
+          "size": 117237
+        }
+      },
+      "guard": {
+        "sha256": "22b64c880836a8c038e5b8406caa98f63785f72feb64e2ba56b9c5b4e477c3f3",
+        "samples": 85,
+        "foreign": [],
+        "probe_errors": []
+      }
+    }
+  ],
+  "quality_decision_changed": false,
+  "full_skill_promotion": false,
+  "new_device_work": false
+}

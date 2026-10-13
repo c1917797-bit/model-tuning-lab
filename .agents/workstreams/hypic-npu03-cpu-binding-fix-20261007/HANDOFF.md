@@ -51,8 +51,12 @@ Global .agents/HANDOFF.md describes integrated history,not this unmerged result.
 
 Current/historical handoff repair is committed874ec388. Report review031a
 found missing round-level TPOT P95/duration; repaired from existing raw data.
-031c passed six-phase raw replay and7 report tests. No Skill promotion;
-continue remaining exact-main obligations against existing evidence only.
+031c passed six-phase raw replay and7 report tests; report repair commitea5e16b2.
+0329 reviewed all7 retained profiler phases and6 negative-control tests.
+See HYPIC_PROFILER_HISTORY_REVIEW_20261013.md: r3 was omitted from the old
+failure table; Prefill executed-controller bytes remain unavailable. Do not
+repeat this completed inventory/search. No Skill promotion; review only
+genuinely remaining exact-main obligations against existing evidence.
 Preserve negative verdicts,exact raw hashes and the two pre-existing untracked
 observer-v3 drafts; do not stage or activate them.
 Do not reinterpret the successful performance supplement as a deployment gate.

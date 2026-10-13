@@ -101,6 +101,22 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_EXISTING_PROFILE_TIMELINE_20261013.md",
       "sha256": "3368023ce688997b237fe8e92d2a8af137a88a46898e5714ba64ee3969120896"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_PROFILER_HISTORY_REVIEW_20261013.json",
+      "sha256": "b1bd9dc88151a4fde35602a66a358535dd4588a38b9312e3f01377edee9bd59d"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_PROFILER_HISTORY_REVIEW_20261013.md",
+      "sha256": "1f23b6e576be613e67e097ddaa8bd62c56d07795761b48b7f2d47686ae1cfdd9"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_history.py",
+      "sha256": "9f51cfa14019fc923e246cb2244caaa406fb2e6eaee6c755754240d54c1274ce"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_hypic_profiler_history.py",
+      "sha256": "f5575ecdbd91e42663c1345d2c4f7dfb8fae89db30cdd1422f8462e367a6f427"
     }
   ],
   "replayable_regression_recorded": true,
@@ -122,5 +138,22 @@
     "historical_chronology_repaired": false,
     "acceptance_promoted": false
   },
-  "next_gate": "Use the existing traces to correlate the recorded largest hardware gaps with host events if supported. Blank Step fields do not prove per-step latency; retain missing CPU/NUMA and causal dependencies explicitly. Do not rerun capture, quality, GDN or HCCL tasks just to improve this case label; any decision-changing new capture needs its own admission. Preserve the frozen47-column miss and sourcec12060c versus current4429e35 distinction."
+  "next_gate": "Use the existing traces to correlate the recorded largest hardware gaps with host events if supported. Blank Step fields do not prove per-step latency; retain missing CPU/NUMA and causal dependencies explicitly. Do not rerun capture, quality, GDN or HCCL tasks just to improve this case label; any decision-changing new capture needs its own admission. Preserve the frozen47-column miss and sourcec12060c versus current4429e35 distinction.",
+  "profiler_history_review": {
+    "report": "HYPIC_PROFILER_HISTORY_REVIEW_20261013.md",
+    "manifest": "HYPIC_PROFILER_HISTORY_REVIEW_20261013.json",
+    "inspection_operation": "exec-0000000000000326",
+    "replay_operation": "exec-0000000000000329",
+    "retained_phase_attempts": 7,
+    "valid_captures": 2,
+    "isolation_invalid": 4,
+    "preflight_rejected": 1,
+    "release_receipts_verified": 6,
+    "r3_release_receipt": "not available; no cleanup invented",
+    "prefill_executed_controller_byte_proof": "not available in retained contracts and tracked source versions",
+    "source_plugin_commit_is_not_controller_identity": true,
+    "new_device_work": false,
+    "full_skill_promotion": false,
+    "tests": 6
+  }
 }

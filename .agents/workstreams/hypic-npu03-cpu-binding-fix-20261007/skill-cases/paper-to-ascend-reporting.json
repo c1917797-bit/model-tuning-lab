@@ -1,12 +1,76 @@
 {
   "schema": "mst-real-task-skill-case/v1",
-  "current_report_completion_review": {"report":"HYPIC_CURRENT_SOURCE_PERFORMANCE_FINAL_20261013.md","report_sha256":"d403aa41e25068e0830b33ad39b0b8ff93651c886ea5423a81f9f9148346ad34","main_skill_blob":"7902b3f9c96ebd6b77a35b328333ad3834fe4a9f","counterexample_operation":"exec-000000000000031a","counterexample":"Per-round TPOT P95 and batch duration absent although aggregate values present; completion review failed before repair","repair":"Report now retains all five metrics for each of three paired rounds; raw aggregate and quality verdict unchanged","verification_operation":"exec-000000000000031c","tests":7,"text_mutation_negative_controls":10,"independent_raw_phase_replays":6,"scope":"Current-source descriptive performance report only; original r13 controller/profile/failure-ledger review remains separate and incomplete","full_skill_promotion":false,"raw_data_changed":false,"new_device_work":false,"remaining_obligations":["Historical r13 exact controller/source and Prefill byte provenance review","Unrecorded transport retry and historical full runtime/tokenizer identities remain unavailable, not reconstructed from current host","Remote integration requires working authentication; no unchanged-auth retry"]},
-  "current4429_performance_supplement": {"date":"2026-10-13","source_commit":"4429e35177979c874bf053ab29789e4773f39b22","report":"HYPIC_CURRENT_SOURCE_PERFORMANCE_FINAL_20261013.md","aggregate_path":"/cache/cch/hypic-npu03-cpu-binding-fix-20261007/current4429-performance-20261013-audit.json","aggregate_sha256":"67ba6cf14fc9bed993acbdf421eb438f22d56957f3e56baad170a4bb871e53fe","phase_audit_operation":"exec-00000000000002f1","aggregate_replay_operation":"exec-00000000000002f3","phases":6,"scored_responses":240,"candidate_four_worker_hot":[120,120],"clean_guard_samples":1006,"quality_decision":"REJECT_OR_QUALIFY","deployment_allowed":false,"authorization":"Explicit user permission for descriptive speed despite quality rejection","full_skill_promotion":false,"raw_roots_reused":false,"new_quality_run":false},
+  "current_report_completion_review": {
+    "report": "HYPIC_CURRENT_SOURCE_PERFORMANCE_FINAL_20261013.md",
+    "report_sha256": "d403aa41e25068e0830b33ad39b0b8ff93651c886ea5423a81f9f9148346ad34",
+    "main_skill_blob": "7902b3f9c96ebd6b77a35b328333ad3834fe4a9f",
+    "counterexample_operation": "exec-000000000000031a",
+    "counterexample": "Per-round TPOT P95 and batch duration absent although aggregate values present; completion review failed before repair",
+    "repair": "Report now retains all five metrics for each of three paired rounds; raw aggregate and quality verdict unchanged",
+    "verification_operation": "exec-000000000000031c",
+    "tests": 7,
+    "text_mutation_negative_controls": 10,
+    "independent_raw_phase_replays": 6,
+    "scope": "Current-source descriptive performance report only; original r13 controller/profile/failure-ledger review remains separate and incomplete",
+    "full_skill_promotion": false,
+    "raw_data_changed": false,
+    "new_device_work": false,
+    "remaining_obligations": [
+      "Historical r13 exact controller/source and Prefill byte provenance review",
+      "Unrecorded transport retry and historical full runtime/tokenizer identities remain unavailable, not reconstructed from current host",
+      "Remote integration requires working authentication; no unchanged-auth retry"
+    ]
+  },
+  "current4429_performance_supplement": {
+    "date": "2026-10-13",
+    "source_commit": "4429e35177979c874bf053ab29789e4773f39b22",
+    "report": "HYPIC_CURRENT_SOURCE_PERFORMANCE_FINAL_20261013.md",
+    "aggregate_path": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/current4429-performance-20261013-audit.json",
+    "aggregate_sha256": "67ba6cf14fc9bed993acbdf421eb438f22d56957f3e56baad170a4bb871e53fe",
+    "phase_audit_operation": "exec-00000000000002f1",
+    "aggregate_replay_operation": "exec-00000000000002f3",
+    "phases": 6,
+    "scored_responses": 240,
+    "candidate_four_worker_hot": [
+      120,
+      120
+    ],
+    "clean_guard_samples": 1006,
+    "quality_decision": "REJECT_OR_QUALIFY",
+    "deployment_allowed": false,
+    "authorization": "Explicit user permission for descriptive speed despite quality rejection",
+    "full_skill_promotion": false,
+    "raw_roots_reused": false,
+    "new_quality_run": false
+  },
   "skill": "paper-to-ascend-reporting",
   "campaign_code": "P",
   "long_term_acceptance": "partial-evidence",
-  "r13_repeat3_inventory_supplement": {"report":"HYPIC_R13_REPEAT3_ATTEMPTS_20261012.md","roots":22,"invalid_terminal_receipts":19,"missing_terminal_receipts":2,"admitted":1,"replay_operation":"exec-0000000000000085","negative_controls_passed":4,"full_skill_promotion":false},
-  "r19_final_quality_report_supplement": {"checkpoint":"f05c35d33ccdf61c7ef7e5cdc9eb546a50de7ed4","report":"HYPIC_R19_FINAL_QUALITY_REPORT_20261012.md","raw_scored_responses_replayed":8676,"raw_replay_operation":"exec-0000000000000066","regression_operation":"exec-0000000000000067","tests":4,"text_counterexamples":9,"report_scope":"Complete r19 paired quality negative report only; same-source performance missing, old r13 reporting provenance gaps retained","main_skill_blob":"7902b3f9c96ebd6b77a35b328333ad3834fe4a9f","main_reference_blob":"40582e499b5589893524df3b74aabfeebe040f8c","quality_decision_changed":false,"npu_rerun":false,"full_skill_promotion":false},
+  "r13_repeat3_inventory_supplement": {
+    "report": "HYPIC_R13_REPEAT3_ATTEMPTS_20261012.md",
+    "roots": 22,
+    "invalid_terminal_receipts": 19,
+    "missing_terminal_receipts": 2,
+    "admitted": 1,
+    "replay_operation": "exec-0000000000000085",
+    "negative_controls_passed": 4,
+    "full_skill_promotion": false
+  },
+  "r19_final_quality_report_supplement": {
+    "checkpoint": "f05c35d33ccdf61c7ef7e5cdc9eb546a50de7ed4",
+    "report": "HYPIC_R19_FINAL_QUALITY_REPORT_20261012.md",
+    "raw_scored_responses_replayed": 8676,
+    "raw_replay_operation": "exec-0000000000000066",
+    "regression_operation": "exec-0000000000000067",
+    "tests": 4,
+    "text_counterexamples": 9,
+    "report_scope": "Complete r19 paired quality negative report only; same-source performance missing, old r13 reporting provenance gaps retained",
+    "main_skill_blob": "7902b3f9c96ebd6b77a35b328333ad3834fe4a9f",
+    "main_reference_blob": "40582e499b5589893524df3b74aabfeebe040f8c",
+    "quality_decision_changed": false,
+    "npu_rerun": false,
+    "full_skill_promotion": false
+  },
   "behavioral_evidence_verified": true,
   "task": "Audit HYPIC progress and terminal reports against exact-main evidence-bound reporting rules; keep historical r12/clean2/c16 separate from the completed r13 quality pair, matched performance and diagnostic profiles",
   "executed_at_utc": "2026-10-09",
@@ -28,12 +92,21 @@
     "existing_piercing_report_contains_superseded_progress_snapshots": true,
     "current_same_identity_no_cache_control_complete": true,
     "current_full_paired_max2048_quality_complete": true,
-    "r13_correct_baseline_candidate": [230, 219],
+    "r13_correct_baseline_candidate": [
+      230,
+      219
+    ],
     "r13_deployed_quality_decision": "REJECT_OR_QUALIFY",
-    "r13_strict_four_worker_hot_requests": [368, 381],
+    "r13_strict_four_worker_hot_requests": [
+      368,
+      381
+    ],
     "current_six_phase_matched_performance_complete": true,
     "r13_weighted_tpot_saved_percent": 21.524278158508903,
-    "r13_performance_four_worker_hot_requests": [120, 120],
+    "r13_performance_four_worker_hot_requests": [
+      120,
+      120
+    ],
     "candidate_prefill_decode_profiles_replay_valid": true,
     "matched_baseline_treatment_profile_complete": false,
     "current_matched_performance_and_profile_complete": false,
@@ -42,20 +115,62 @@
     "case_integrated_in_main": false
   },
   "evidence": [
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_current_source_performance_report.py","sha256":"7d9c26c8a87a92d6b2290877f813d8f9011bd8a47a762ea3aa75a3982c4758fd"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_current_source_performance_report.py","sha256":"af98e316c92b1f144f1defff61dab5884693ae44e000ffbda3728ffcc97acd40"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_CURRENT_SOURCE_PERFORMANCE_FINAL_20261013.md","sha256":"d403aa41e25068e0830b33ad39b0b8ff93651c886ea5423a81f9f9148346ad34"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/summarize_current_source_performance.py","sha256":"1cf1841f7464cca5e3cd99d5b2966e497cb01557ac541f3e34747cb64aec81ad"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_summarize_current_source_performance.py","sha256":"1d51b2243f3ac2ded1fc5cbcc49749d33682a254ea510446fe6077250eced81f"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/current_source_performance_20261013.py","sha256":"ed0a0c71d84215381f079e4b15af4c76e3bc3694a9578fc7d0ff324d12024a37"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/SKILL_ACCEPTANCE_SCOPE_REVIEW_20261012.md","sha256":"17a8f0cc67f86f91dbba53ee1d5892b6b40afeed73e54f532863b6bac6fdd081"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R13_REPEAT3_ATTEMPTS_20261012.json","sha256":"5b8d5cd46a10d7f1767db9e64c2cc96c627e2896109a0763158b43b68b934f75"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R13_REPEAT3_ATTEMPTS_20261012.md","sha256":"06cfdaa5626f0aec69febcfaccdb0f613c05cbc1ad04446f90fcab04dbf4cd7e"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r13_repeat3_attempt_inventory.py","sha256":"f4d60a3b763372c26da5d1363ba7d302847805c7739e3650948de8cb57a9b55e"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_reporting_receipt_hashes.py","sha256":"4af97b34400b0f8de0a6fcb5e704e455e9a09997c935d5f8ed3a71ff37e84670"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R19_FINAL_QUALITY_REPORT_20261012.md","sha256":"836bba2175bf3debe9e8debd7d880c4c0dc143f5acf09622644e5ba4469f901d"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r19_final_quality_report.py","sha256":"e3001375efdd676dc3e889b9a5d8dfca0963a2a50d7d0e4a96c9172ee7b963ed"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_r19_final_quality_report.py","sha256":"7bfdf82d48e9d44d90b4e3a9000f4fd3413de7205e9bd56b0eabcffc513c7732"},
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_current_source_performance_report.py",
+      "sha256": "7d9c26c8a87a92d6b2290877f813d8f9011bd8a47a762ea3aa75a3982c4758fd"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_current_source_performance_report.py",
+      "sha256": "af98e316c92b1f144f1defff61dab5884693ae44e000ffbda3728ffcc97acd40"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_CURRENT_SOURCE_PERFORMANCE_FINAL_20261013.md",
+      "sha256": "d403aa41e25068e0830b33ad39b0b8ff93651c886ea5423a81f9f9148346ad34"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/summarize_current_source_performance.py",
+      "sha256": "1cf1841f7464cca5e3cd99d5b2966e497cb01557ac541f3e34747cb64aec81ad"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_summarize_current_source_performance.py",
+      "sha256": "1d51b2243f3ac2ded1fc5cbcc49749d33682a254ea510446fe6077250eced81f"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/current_source_performance_20261013.py",
+      "sha256": "ed0a0c71d84215381f079e4b15af4c76e3bc3694a9578fc7d0ff324d12024a37"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/SKILL_ACCEPTANCE_SCOPE_REVIEW_20261012.md",
+      "sha256": "17a8f0cc67f86f91dbba53ee1d5892b6b40afeed73e54f532863b6bac6fdd081"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R13_REPEAT3_ATTEMPTS_20261012.json",
+      "sha256": "5b8d5cd46a10d7f1767db9e64c2cc96c627e2896109a0763158b43b68b934f75"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R13_REPEAT3_ATTEMPTS_20261012.md",
+      "sha256": "06cfdaa5626f0aec69febcfaccdb0f613c05cbc1ad04446f90fcab04dbf4cd7e"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r13_repeat3_attempt_inventory.py",
+      "sha256": "f4d60a3b763372c26da5d1363ba7d302847805c7739e3650948de8cb57a9b55e"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_reporting_receipt_hashes.py",
+      "sha256": "4af97b34400b0f8de0a6fcb5e704e455e9a09997c935d5f8ed3a71ff37e84670"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_R19_FINAL_QUALITY_REPORT_20261012.md",
+      "sha256": "836bba2175bf3debe9e8debd7d880c4c0dc143f5acf09622644e5ba4469f901d"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_r19_final_quality_report.py",
+      "sha256": "e3001375efdd676dc3e889b9a5d8dfca0963a2a50d7d0e4a96c9172ee7b963ed"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_r19_final_quality_report.py",
+      "sha256": "7bfdf82d48e9d44d90b4e3a9000f4fd3413de7205e9bd56b0eabcffc513c7732"
+    },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PAPER_TO_ASCEND_REPORTING_CASE_20261009.md",
       "sha256": "1116f355879e5cddfe946c518faaae91e32528dd76a32a163bbe0c247c403b30"
@@ -95,6 +210,22 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_PROFILER_DECODE_AUDIT_20261009.md",
       "sha256": "41821d170eae98dd512a990d4e027774213e47cb1b4917b832d5853870cd2d40"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_PROFILER_HISTORY_REVIEW_20261013.json",
+      "sha256": "b1bd9dc88151a4fde35602a66a358535dd4588a38b9312e3f01377edee9bd59d"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_PROFILER_HISTORY_REVIEW_20261013.md",
+      "sha256": "1f23b6e576be613e67e097ddaa8bd62c56d07795761b48b7f2d47686ae1cfdd9"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_hypic_profiler_history.py",
+      "sha256": "9f51cfa14019fc923e246cb2244caaa406fb2e6eaee6c755754240d54c1274ce"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_hypic_profiler_history.py",
+      "sha256": "f5575ecdbd91e42663c1345d2c4f7dfb8fae89db30cdd1422f8462e367a6f427"
     }
   ],
   "external_raw_receipts": {
@@ -106,6 +237,23 @@
   },
   "replayable_regression_recorded": true,
   "boundary": "A scoped terminal negative-result report now exists and its phase rows, key formulas, source hashes, section/claim boundaries and Prefill/Decode receipts replay-pass. The r13 quality pair and separate six-phase performance pair are complete, but quality is rejected and 13/381 candidate quality requests lack four-worker hot proof; the candidate-only profiles are not a matched baseline/treatment profile or quality root cause. The report still needs a comprehensive line-by-line final-completion review of exact historical command/source and all failure-ledger entries before the full reporting Skill can be marked verified. Do not claim adoption or main integration.",
-  "next_gate": "The sixth performance phase now has a complete original/retry1-21 receipt inventory, including explicit missing and incomplete cleanup proof. Review remaining historical profiler controller/source and failure receipts, especially Prefill byte provenance. Never manufacture missing historical evidence or rerun old roots to fill it; state irrecoverable boundaries before any final Skill promotion.",
-  "drift_trigger": "Revalidate when main Skill/template/registry or report/evidence hashes change, or when a new independently scoped experiment changes the conclusion."
+  "next_gate": "Retained profiler r1-r6 device-attempt inventory is now reviewed: seven phases include the previously omitted r3 admission rejection. Prefill executed-controller bytes are not proven by retained contracts or tracked versions; stop repeating the same search or reconstructing a claimed historical hash. Parser launch transcripts remain unavailable in the inspected top-level copies, with no exhaustive external-archive claim. Preserve the original >=47 miss and r13 quality rejection. Review only genuinely remaining historical quality/performance command obligations; current4429 report replay is separate, not replacement proof. No device rerun or full Skill promotion is authorized.",
+  "drift_trigger": "Revalidate when main Skill/template/registry or report/evidence hashes change, or when a new independently scoped experiment changes the conclusion.",
+  "profiler_history_review": {
+    "report": "HYPIC_PROFILER_HISTORY_REVIEW_20261013.md",
+    "manifest": "HYPIC_PROFILER_HISTORY_REVIEW_20261013.json",
+    "inspection_operation": "exec-0000000000000326",
+    "replay_operation": "exec-0000000000000329",
+    "retained_phase_attempts": 7,
+    "valid_captures": 2,
+    "isolation_invalid": 4,
+    "preflight_rejected": 1,
+    "release_receipts_verified": 6,
+    "r3_release_receipt": "not available; no cleanup invented",
+    "prefill_executed_controller_byte_proof": "not available in retained contracts and tracked source versions",
+    "source_plugin_commit_is_not_controller_identity": true,
+    "new_device_work": false,
+    "full_skill_promotion": false,
+    "tests": 6
+  }
 }
