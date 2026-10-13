@@ -10,6 +10,7 @@ class BridgeTests(unittest.TestCase):
         g=-torch.rand(1,17,4)*.1;beta=torch.rand(1,17,4)
         calls=[]
         def runner(q,k,v,g,beta,initial_state,**kw):
+            self.assertEqual(k.shape[2],v.shape[2])
             calls.append(kw)
             kn=torch.nn.functional.normalize(k[0].float(),dim=-1)
             ref=accumulate_segment(kn,v[0].float(),beta[0],g[0].exp())

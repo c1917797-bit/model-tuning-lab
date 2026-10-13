@@ -20,6 +20,9 @@ def official_segment_affine(runner, keys, values, log_decay, beta, *, cu_seqlens
         cu_seqlens=torch.tensor([0,t],device=keys.device,dtype=torch.int64)
     if cu_seqlens.numel()!=2:
         raise ValueError("one public segment only")
+    # Explicit grouped-head expansion keeps both official invocations on the
+    # equal-head ABI; the recurrence uses one key for each associated value head.
+    keys=keys.repeat_interleave(hv//hk,dim=2).contiguous()
     kw=dict(output_final_state=True,cu_seqlens=cu_seqlens,prebuilt_meta=prebuilt_meta,
             head_first=False,use_qk_l2norm_in_kernel=True)
     zero=torch.zeros((1,hv,dk,dv),device=keys.device,dtype=torch.float32)
