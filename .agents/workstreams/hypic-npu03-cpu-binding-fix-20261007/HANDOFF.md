@@ -1,5 +1,18 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-13 first current-source performance phase running
+
+Frozen checkpoint e94ca151;6 CPU tests and29-Skill structure passed0250.
+Admission0251: physical0–3 idle,8223 free,Docker root/cache/docker,/cache114GiB
+available (root/ remains100%; no cleanup). Fresh ma/direct launch0254 running:
+exec-0000000000000254, no-cache/screen. Poll it and immutable raw root
+/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-current4429-performance-20261013-no-cache-screen.
+Do not restart while running/ambiguous. Terminal independent --action audit-phase
+before fresh ma/direct and physical idle admission for hypic-only/screen.
+Remaining order: hypic-only/repeat2,no-cache/repeat2,no-cache/repeat3,hypic-only/repeat3.
+Use current_source_performance_20261013.py; final --action audit-all.
+Only descriptive speed; r19 rejection/no deployment and deadline08:47:14UTC remain.
+
 ## 2026-10-13 current-source descriptive performance authorized
 
 User approved three paired4429e35 performance rounds despite r19 quality rejection.
