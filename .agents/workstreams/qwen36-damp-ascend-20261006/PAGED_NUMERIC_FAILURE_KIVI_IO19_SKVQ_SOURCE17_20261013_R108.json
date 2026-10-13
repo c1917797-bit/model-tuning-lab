@@ -1,0 +1,119 @@
+{
+  "schema": "ascend-paper-stage-r108/v1",
+  "recorded_utc": "2026-10-13T03:09:00Z",
+  "goal_completed": false,
+  "latest_human_scope": {
+    "combination_allowed": true,
+    "combination_acceptance": "Actual dense,A,B,A+B and complete numeric gates; no arithmetic sum of speedups",
+    "accuracy": "latest allowed task loss1%; report both percentage points and relative; no tensor tolerance conversion"
+  },
+  "window": {
+    "start": 1791835594,
+    "cutoff": 1791878794,
+    "reset": false
+  },
+  "paged": {
+    "old_import_failure": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-paged-r107-numeric-main-001/component-001/REPORT.json",
+      "bytes": 13467,
+      "sha256": "19ed9b0670ff08fb7f63d74b1d5273ffd07f0a9caac17ff885eb662f25a929f9"
+    },
+    "new_numeric_failure": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-paged-r108-numeric-main-002/component-002/REPORT.json",
+      "bytes": 17900,
+      "sha256": "7923390391b6a0305f6b0ca7ca99e9a02442481c9e43576d820990069ac7190d"
+    },
+    "operation": "exec-0000000000000248",
+    "exit": 1,
+    "elapsed_ms": 25240,
+    "case": {
+      "length": 31,
+      "order": [
+        0
+      ],
+      "step": 1
+    },
+    "raw": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-paged-r108-numeric-main-002/component-002/first-failure.pt",
+      "bytes": 26163299,
+      "sha256": "b2c238938dccdcacb611f66728bae0fe3e2c13ce757d420d67fb85641f76b435"
+    },
+    "independent_CPU": {
+      "relative_rms": 0.012648011557757854,
+      "cosine": 0.9999210834503174,
+      "max_abs": 0.000091552734375
+    },
+    "state_bitwise": {
+      "key": true,
+      "value": true
+    },
+    "reference_vs_independent": {
+      "relative_rms": 0,
+      "cosine": 1.0000001192092896,
+      "max_abs": 0
+    },
+    "class": "numerical mismatch of current native paged selected support; native continuous control not yet captured; paper conclusion inconclusive",
+    "numerical_gate": {
+      "relative_rms": 0.005,
+      "cosine": 0.99998,
+      "unchanged": true
+    },
+    "released_CID": "41e9f41478875cec8bbf511ac0ee58df99f372dec8fae51dd52ebe28c79dc004",
+    "model_ready": false,
+    "performance_ready": false,
+    "task_ready": false
+  },
+  "kivi": {
+    "original011": "bounded actual output entries",
+    "attribution": "diagnostic transport contract incompatible with original1025 append directory entries; not paper/math no-go",
+    "Linux_same660_IO19": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-atomic-r108-main-001/IO19.json",
+      "bytes": 2234,
+      "sha256": "59b50c4acb94ae97e9a1d8d12fc0c87633c5374f8621221463086ec4c51c79b8"
+    },
+    "IO19_operation": "exec-0000000000000232",
+    "tests": 19,
+    "source": "d50b73f9c09b4c645ff02ce865ae51b869188b067850e5ebd17fe17b196fdd0b",
+    "numeric640_pending": true,
+    "limits_unchanged": true
+  },
+  "skvq": {
+    "same660_source17": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-atomic-r108-main-001/SKVQ_FULL47_SOFTWARE17_CORRECTED.json",
+      "bytes": 3333,
+      "sha256": "5cce99114a4198b5474f9e2330c04596c9e6aff96913c6ac60cba36c2f2edfe7"
+    },
+    "operation": "exec-000000000000025b",
+    "tests": 17,
+    "extra_RO_sources": 28,
+    "full47_pending": true,
+    "HAL_pending": true,
+    "model_pending": true,
+    "performance_pending": true,
+    "task_pending": true
+  },
+  "lessons": [
+    "Check full actual guest read closure, driver-library RO paths and writable output contract before device lease; helper tests do not prove CLI visibility.",
+    "Keep unknown API handle exit distinct from quiescent file status; do not restart a missing handle blindly.",
+    "Whole physical state can be bitwise correct while attention output fails; preserve actual first-failure raw and diagnose native controls without relaxing gates.",
+    "A small positive candidate may be combined only after independent correctness and real four-arm matched tests; overlapping KV-format variants are alternatives until lifecycle compatibility proved."
+  ],
+  "protected_physical": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "physical_allowed": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "next": [
+    "Capture native paged-offset/paged-zero-offset/continuous controls against the retained independent oracle, with new source/output.",
+    "Dispatch SKVQ full47 after actual input/CPU readiness and fresh joint host/device admission; no dummy load.",
+    "Review KIVI012 source/pin repair and actual target201; no raw unmodified011 retry."
+  ],
+  "new_perf_or_task_claim": false
+}
