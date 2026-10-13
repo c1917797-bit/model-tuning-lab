@@ -90,6 +90,16 @@ Weighted TPOT and batch throughput are independently recalculated from raw rows.
 | repeat2 | 74.7410 | 58.4195 | -21.8374% | 89.4044 | 45.0163 | 102.1759 / 134.6307 |
 | repeat3 | 74.7991 | 58.2802 | -22.0844% | 89.4104 | 45.4714 | 102.0650 / 134.2829 |
 
+
+All five reported metrics retain their individual round values; these two
+columns complement the preceding table rather than a pooled summary.
+
+| Round | G1 TPOT P95 ms | G2 TPOT P95 ms | G1 batch duration s | G2 batch duration s |
+|---|---:|---:|---:|---:|
+| screen | 112.4825 | 78.2506 | 406.9780 | 304.5919 |
+| repeat2 | 111.7113 | 78.3386 | 400.8774 | 304.2396 |
+| repeat3 | 110.7979 | 78.1860 | 401.3130 | 305.0276 |
+
 | Metric | G1 mean ± sample SD | G2 mean ± sample SD | G1 median | G2 median | Median relative change |
 |---|---:|---:|---:|---:|---:|
 | Weighted TPOT (ms/token) | 75.0528 ± 0.4905 | 58.3436 ± 0.0705 | 74.7991 | 58.3311 | -22.0163% |

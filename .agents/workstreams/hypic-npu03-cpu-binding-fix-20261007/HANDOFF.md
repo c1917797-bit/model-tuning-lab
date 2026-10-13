@@ -49,8 +49,10 @@ Global .agents/HANDOFF.md describes integrated history,not this unmerged result.
 
 ## 4. Current Action
 
-Current/historical handoff repair is validated; checkpoint it and review
-remaining exact-main obligations against existing evidence only.
+Current/historical handoff repair is committed874ec388. Report review031a
+found missing round-level TPOT P95/duration; repaired from existing raw data.
+031c passed six-phase raw replay and7 report tests. No Skill promotion;
+continue remaining exact-main obligations against existing evidence only.
 Preserve negative verdicts,exact raw hashes and the two pre-existing untracked
 observer-v3 drafts; do not stage or activate them.
 Do not reinterpret the successful performance supplement as a deployment gate.
@@ -78,6 +80,7 @@ Run from /cache/cch/model-tuning-lab-hypic-e2e-20261006:
 python3 -B -m unittest discover -s .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007 -p 'test_handoff_current.py'
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_completed_campaign_routes.py
 python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_skill_cases.py
+python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_current_source_performance_report.py
 bash scripts/validate-mst.sh
 git diff --check
 ```
