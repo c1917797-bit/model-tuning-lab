@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "scope": "whole-hypic-second-piercing-retrospective",
+  "date": "2026-10-13",
+  "source_checkpoint": "b9386cd8b98ceca4be89d2a090db071f21842388",
+  "facts": [
+    "历史成功、环境修复、HYPIC 配对收益、质量、机制覆盖和 Skill 验收是不同结论。",
+    "历史 3ad0967 与当前 4429e35 不是逐字节相同实现；自然请求与显式分段不是同一请求路径。",
+    "当前源码六阶段性能完成：240 条计分响应，候选 120/120 四 worker 热证明。",
+    "r19 完整 LongBench 为 227/381→219/381；净少 8 条正确响应，不等于 8 个独立题全部失败。",
+    "诊断扩展、严格门槛误用和交接陈旧拖慢了交付；真实外来占卡与连接波动是另类阻塞。",
+    "main 29 项有案例，13 bounded verified、16 partial；速度成功不能替代质量、生命周期或全部 Skill 验收。"
+  ],
+  "evidence": [
+    {
+      "path": "HYPIC_CURRENT_SOURCE_PERFORMANCE_FINAL_20261013.md",
+      "sha256": "d403aa41e25068e0830b33ad39b0b8ff93651c886ea5423a81f9f9148346ad34"
+    },
+    {
+      "path": "HYPIC_R19_FINAL_QUALITY_REPORT_20261012.md",
+      "sha256": "836bba2175bf3debe9e8debd7d880c4c0dc143f5acf09622644e5ba4469f901d"
+    },
+    {
+      "path": "HYPIC_R19_QUESTION_LEVEL_INTERPRETATION_20261013.md",
+      "sha256": "1b5484cbc741fd33bf6bbe88f5954970ede66eb3285cafbe82ed840445843057"
+    },
+    {
+      "path": "HYPIC_VALIDATION_ROUTE_CORRECTION_20261010.md",
+      "sha256": "1501390e23c5ae1f11ddbe064ce95a78d2d036e2377f2fe019e810ad6f3c5279"
+    },
+    {
+      "path": "HOTPATH_CACHE10R13_ACCEPTANCE_GATE_RETROSPECTIVE.md",
+      "sha256": "cb8f745c8b3084a5e83bada89d86b48f55d6d97511f28b4f2d2e5fd31a462d9a"
+    },
+    {
+      "path": "HYPIC_R19_CONTROLLER_GATE_RETROSPECTIVE_20261010.md",
+      "sha256": "9c293a9986daa32fc6d5e5a1e5b3c423c091f7d7fe66fcea2be1b30f86627c1c"
+    },
+    {
+      "path": "HYPIC_PROFILER_HISTORY_REVIEW_20261013.md",
+      "sha256": "1f23b6e576be613e67e097ddaa8bd62c56d07795761b48b7f2d47686ae1cfdd9"
+    },
+    {
+      "path": "MAIN_SKILL_REVIEW_AFTER_INTEGRATION_20261013.md",
+      "sha256": "4d1a021346b0ffab600dc5b49a6ae00c38fb59c478fc982a8d5c91caf517a14b"
+    },
+    {
+      "path": "OPERATIONAL_LIFECYCLE_TERMINAL_20261013.md",
+      "sha256": "366ad13d148d6f6ec9444132c5c11f4838342a8e6ba02595e2f13c3f1ca4c751"
+    },
+    {
+      "path": "LOOP_HANDOFF_REPAIR_20261013.md",
+      "sha256": "82dc1a2964157680c6302f814a3fda0b62bd532c591523ae07827b699a1df8d8"
+    }
+  ],
+  "outcomes": {
+    "runtime_source": "4429e35177979c874bf053ab29789e4773f39b22",
+    "performance": {
+      "phases": 6,
+      "scored_responses": 240,
+      "candidate_hot_requests": 120,
+      "tpot_median_reduction_pct": 22.0163,
+      "ttft_p95_median_reduction_pct": 49.6429,
+      "throughput_median_increase_pct": 31.7543
+    },
+    "quality": {
+      "baseline": 227,
+      "candidate": 219,
+      "responses_per_arm": 381,
+      "hot_proved": 134,
+      "decision": "REJECT_OR_QUALIFY",
+      "gsm8k_scope": "off-path"
+    },
+    "skills": {
+      "total": 29,
+      "bounded_verified": 13,
+      "partial": 16
+    },
+    "deployment_allowed": false,
+    "new_device_work": false,
+    "historical_verdicts_changed": false,
+    "whole_branch_main_integration": false
+  },
+  "lessons": [
+    {
+      "id": "identity",
+      "classification": 5,
+      "trigger": "历史技术复现",
+      "different_action": "先锁定既有成功源码、镜像、模型、请求路径、输出及并发；有差异则标迁移复现，先完成同身份一键开关对照。",
+      "destination": "HYPIC_CAMPAIGN_LESSONS_20261013.json#identity",
+      "related_skill": "paper-to-ascend-reproduction",
+      "verification": "拒绝把 3ad0967/c12060c 的数值拼成 4429e35 的同源码结果。",
+      "evidence": [
+        "HYPIC_VALIDATION_ROUTE_CORRECTION_20261010.md",
+        "HYPIC_CURRENT_SOURCE_PERFORMANCE_FINAL_20261013.md"
+      ]
+    },
+    {
+      "id": "effect",
+      "classification": 5,
+      "trigger": "跨卡相对提升小",
+      "different_action": "同时报告同卡基线、绝对时延差、相对下降及吞吐；先排查共同慢项，不用百分比直接否定技术。",
+      "destination": "HYPIC_CAMPAIGN_LESSONS_20261013.json#effect",
+      "related_skill": "ascend-performance-optimization",
+      "verification": "环境修复约 81.12% 不得归因 HYPIC；HYPIC 当前 TPOT 中位降幅为 22.0163%。",
+      "evidence": [
+        "HOTPATH_CACHE10R13_ACCEPTANCE_GATE_RETROSPECTIVE.md"
+      ]
+    },
+    {
+      "id": "reuse",
+      "classification": 5,
+      "trigger": "已有基线与终态结果",
+      "different_action": "比对完整实验身份和原始哈希后复用；不可为了资料好看重跑、覆盖已完成根。",
+      "destination": "HYPIC_CAMPAIGN_LESSONS_20261013.json#reuse",
+      "related_skill": "ascend-benchmark-evidence",
+      "verification": "通过来源摘要核验；旧终态路径保持不变，新增复盘不生成设备请求。",
+      "evidence": [
+        "HYPIC_CURRENT_SOURCE_PERFORMANCE_FINAL_20261013.md",
+        "HYPIC_R19_FINAL_QUALITY_REPORT_20261012.md"
+      ]
+    },
+    {
+      "id": "gates",
+      "classification": 5,
+      "trigger": "热证明不足或控制器 exit1",
+      "different_action": "分开记录数据完整性、全请求效果、机制覆盖、采用决定；只有全热声明才要求全请求热证明，完整质量结果仍可报告。",
+      "destination": "HYPIC_CAMPAIGN_LESSONS_20261013.json#gates",
+      "related_skill": "paper-to-ascend-reproduction",
+      "verification": "完整 381 响应且热证明 134 时保留质量负结论，不标缺失响应，也不标机制全部通过。",
+      "evidence": [
+        "HOTPATH_CACHE10R13_ACCEPTANCE_GATE_RETROSPECTIVE.md",
+        "HYPIC_R19_CONTROLLER_GATE_RETROSPECTIVE_20261010.md"
+      ]
+    },
+    {
+      "id": "quality",
+      "classification": 5,
+      "trigger": "质量得分下降",
+      "different_action": "按响应与独立题分别统计，保留重复波动和截断；不把相关性、净差或 off-path PASS 当单一因果或热路径等价。",
+      "destination": "HYPIC_CAMPAIGN_LESSONS_20261013.json#quality",
+      "related_skill": "ascend-model-quality-evaluation",
+      "verification": "断言 227→219、23退化/15改善、13题退化/8题改善；GSM8K 仅 off-path。",
+      "evidence": [
+        "HYPIC_R19_FINAL_QUALITY_REPORT_20261012.md",
+        "HYPIC_R19_QUESTION_LEVEL_INTERPRETATION_20261013.md"
+      ]
+    },
+    {
+      "id": "focus",
+      "classification": 5,
+      "trigger": "已成功技术的再次穿刺",
+      "different_action": "以既有 monkeypatch 集成验证为主；先复用证据，只补缺口。算子/observer 仅在能改变当前决定且有时限时进入新支线。",
+      "destination": "HYPIC_CAMPAIGN_LESSONS_20261013.json#focus",
+      "related_skill": "mst-practice-iteration-planning",
+      "verification": "诊断未解释端到端质量就不得宣称根因；完整负结果可结项，不需无限追加波次。",
+      "evidence": [
+        "HYPIC_VALIDATION_ROUTE_CORRECTION_20261010.md",
+        "HOTPATH_CACHE10R13_ACCEPTANCE_GATE_RETROSPECTIVE.md"
+      ]
+    },
+    {
+      "id": "isolation",
+      "classification": 5,
+      "trigger": "共享设备运行",
+      "different_action": "启动前与运行中核验真实物理进程；被动映射不算占用，外来实际任务不停止，精确释放自有容器。",
+      "destination": "HYPIC_CAMPAIGN_LESSONS_20261013.json#isolation",
+      "related_skill": "chicaihong01-host-maintenance",
+      "verification": "pre-health 外来占卡导致零响应按环境失败，不进入性能分母；不使用4–7。",
+      "evidence": [
+        "OPERATIONAL_LIFECYCLE_TERMINAL_20261013.md",
+        "HYPIC_CURRENT_SOURCE_PERFORMANCE_FINAL_20261013.md"
+      ]
+    },
+    {
+      "id": "profiling",
+      "classification": 5,
+      "trigger": "采集与解析异常",
+      "different_action": "分开判断采集、解析、隔离、控制器版本和归因；缺失历史字节标缺失，不改旧门槛，不自动重复采集。",
+      "destination": "HYPIC_CAMPAIGN_LESSONS_20261013.json#profiling",
+      "related_skill": "ascend-cannbot-profiler",
+      "verification": "七次尝试与两次有效采集分开；46列未达原47列门槛，不重写成通过。",
+      "evidence": [
+        "HYPIC_PROFILER_HISTORY_REVIEW_20261013.md"
+      ]
+    },
+    {
+      "id": "lifecycle",
+      "classification": 5,
+      "trigger": "运行时补丁交付",
+      "different_action": "默认关闭、源码绑定、失败显式报错，并分别验证启用/禁用/卸载/重启及释放；CPU测试不代替真实服务。",
+      "destination": "HYPIC_CAMPAIGN_LESSONS_20261013.json#lifecycle",
+      "related_skill": "runtime-monkeypatch-delivery",
+      "verification": "disabled pre-health 中断且 uninstall 未开始时保持 partial，不因模板测试成功而晋级。",
+      "evidence": [
+        "MAIN_SKILL_REVIEW_AFTER_INTEGRATION_20261013.md",
+        "OPERATIONAL_LIFECYCLE_TERMINAL_20261013.md"
+      ]
+    },
+    {
+      "id": "handoff",
+      "classification": 5,
+      "trigger": "长期任务与连接句柄变化",
+      "different_action": "当前交接只写终态、唯一下一步和权威根；peer+handle一起记录，超时或句柄缺失先查实际状态，不重复启动。",
+      "destination": "HYPIC_CAMPAIGN_LESSONS_20261013.json#handoff",
+      "related_skill": "mst-maintainer-handoff",
+      "verification": "禁止已终态 GSM8K 标 active；历史日记与当前交接分离，生命周期无重试安排。",
+      "evidence": [
+        "LOOP_HANDOFF_REPAIR_20261013.md",
+        "HYPIC_CURRENT_SOURCE_PERFORMANCE_FINAL_20261013.md"
+      ]
+    },
+    {
+      "id": "acceptance",
+      "classification": 5,
+      "trigger": "以论文实践验收多个Skill",
+      "different_action": "逐项按真实功能义务验收，保留负案例；结构、资料存在、CPU回归、NPU端到端分别计数。",
+      "destination": "HYPIC_CAMPAIGN_LESSONS_20261013.json#acceptance",
+      "related_skill": "mst-transformation-verification",
+      "verification": "维持13/16，拒绝29结构通过→29功能通过；论文质量拒绝不阻塞无关Skill。",
+      "evidence": [
+        "MAIN_SKILL_REVIEW_AFTER_INTEGRATION_20261013.md"
+      ]
+    },
+    {
+      "id": "publication",
+      "classification": 5,
+      "trigger": "沉淀结果与集成",
+      "different_action": "按原工作流提交完整经验，选择性集成已验证修复；现场核验远端精确分支，不把本地commit或网络恢复当main更新。",
+      "destination": "HYPIC_CAMPAIGN_LESSONS_20261013.json#publication",
+      "related_skill": "mst-git-checkpoint-policy",
+      "verification": "本复盘只推work分支；历史main23ec六文件修复不等于整个实验已集成。",
+      "evidence": [
+        "MAIN_SKILL_REVIEW_AFTER_INTEGRATION_20261013.md"
+      ]
+    }
+  ],
+  "verification_command": "python3 -B verify_hypic_campaign_lessons.py"
+}

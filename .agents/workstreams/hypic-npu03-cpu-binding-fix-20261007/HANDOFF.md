@@ -22,6 +22,8 @@ isolation evidence on physical0–3; no repeated runs of completed roots.
 
 ## 2. Current Focus
 
+Whole-campaign lessons: HYPIC_CAMPAIGN_RETROSPECTIVE_20261013.md and HYPIC_CAMPAIGN_LESSONS_20261013.json.
+Replay verify_hypic_campaign_lessons.py; offline ingestion only, no new device work or acceptance promotion.
 Human direction2026-10-13: stop further HYPIC quality testing/causal diagnosis;
 retain the frozen results and validate remaining Skills independently. A
 positive HYPIC quality outcome is not a prerequisite for unrelated Skills.
