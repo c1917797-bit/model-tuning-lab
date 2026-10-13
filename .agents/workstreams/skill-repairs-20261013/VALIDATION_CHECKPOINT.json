@@ -1,0 +1,19 @@
+{
+  "schema": "mst-selected-repair-checkpoint/v1",
+  "validated_content_commit": "f9af6d162b34ceaf96179ecbd963d8b90172693c",
+  "target_peer": "lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d",
+  "route": "peer_direct",
+  "code_validation": {
+    "id": "exec-00000000000000d7",
+    "exitCode": 0,
+    "stdout": "[work/skill-repairs-20261013 f9af6d16] test: add target-owned registry and repair scope validation\n 3 files changed, 62 insertions(+), 31 deletions(-)\n rewrite .agents/workstreams/skill-repairs-20261013/HANDOFF.md (96%)\n create mode 100644 .agents/workstreams/skill-repairs-20261013/REPAIR_SCOPE.md\n{\"remote\":\"unknown\"}\n{\"command\": [\"python3\", \"-B\", \".agents/workstreams/skill-repairs-20261013/validate_selected_repairs.py\"], \"exit\": 0, \"stdout\": \"{\\\"all_skill_acceptance\\\": false, \\\"changed_paths\\\": 15, \\\"device_acceptance\\\": false, \\\"direct_cli_controls\\\": 2, \\\"planning_controls\\\": 3, \\\"registry_entries\\\": 29, \\\"selected_repair_files\\\": 6}\\n\", \"stderr\": \"\"}\n{\"command\": [\"/cache/cch/python-envs/model-tuning-lab-py311/bin/python\", \"-B\", \"-m\", \"unittest\", \"discover\", \"-s\", \"tests\", \"-p\", \"test_validate_monkeypatch_package.py\"], \"exit\": 0, \"stdout\": \"\", \"stderr\": \".........\\n----------------------------------------------------------------------\\nRan 9 tests in 0.668s\\n\\nOK\\n\"}\n{\"command\": [\"bash\", \"scripts/validate-mst.sh\"], \"exit\": 0, \"stdout\": \"PASS: Maintainer Skill Tree structure is valid (29 skills)\\n\", \"stderr\": \"\"}\n{\"command\": [\"git\", \"diff\", \"--check\"], \"exit\": 0, \"stdout\": \"\", \"stderr\": \"\"}\nCONTENT_COMMIT=f9af6d162b34ceaf96179ecbd963d8b90172693c\n{\"push_state\":\"timeout-remote-unknown\"}\n"
+  },
+  "remote_probe": {
+    "id": "exec-00000000000000dc",
+    "exitCode": 0,
+    "stdout": "{\"command\": [\"git\", \"status\", \"--short\"], \"exit\": 0, \"stdout\": \"\"}\n{\"command\": [\"git\", \"rev-parse\", \"HEAD\"], \"exit\": 0, \"stdout\": \"f9af6d162b34ceaf96179ecbd963d8b90172693c\\n\"}\n{\"command\": [\"git\", \"status\", \"--short\"], \"exit\": 0, \"stdout\": \"\"}\n{\"command\": [\"git\", \"-C\", \"/cache/cch/model-tuning-lab-integration-main-20261013\", \"rev-parse\", \"HEAD\"], \"exit\": 0, \"stdout\": \"ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2\\n\"}\n{\"remote_state\":\"timeout-unknown\"}\n"
+  },
+  "main_changed": false,
+  "device_work": false,
+  "publication_verified": false
+}

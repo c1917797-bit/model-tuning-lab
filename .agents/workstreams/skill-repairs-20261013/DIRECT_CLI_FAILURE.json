@@ -1,0 +1,19 @@
+{
+  "args": [
+    "-B",
+    "-c",
+    "import subprocess,json\nfrom pathlib import Path\np=Path(\"scripts/validate_monkeypatch_package.py\")\ntry:\n r=subprocess.run([str(p),\".agents/skills/runtime-monkeypatch-delivery/assets/template\"],capture_output=True,text=True)\n print(json.dumps(dict(exit=r.returncode,stderr=r.stderr)))\nexcept PermissionError as e:\n print(json.dumps(dict(direct_skill_command_failed=True,error_type=type(e).__name__,mode=oct(p.stat().st_mode&0o777))))\n"
+  ],
+  "cancelled": false,
+  "command": "python3",
+  "cwd": "/cache/cch/model-tuning-lab-skill-repairs-20261013",
+  "durationMs": 48,
+  "error": null,
+  "exitCode": 0,
+  "id": "exec-00000000000000d2",
+  "lane": "process",
+  "state": "completed",
+  "stderr": "",
+  "stdout": "{\"direct_skill_command_failed\": true, \"error_type\": \"PermissionError\", \"mode\": \"0o644\"}\n",
+  "timedOut": false
+}

@@ -7,7 +7,9 @@ if [ "$#" -eq 0 ]; then
   exit 2
 fi
 
-export MODEL_TUNING_RUNTIME_PATCH_ENABLE=1
+# The same launcher is used for both arms. Unset means disabled; set 1
+# explicitly for the treatment and 0 for the matched control.
+export MODEL_TUNING_RUNTIME_PATCH_ENABLE="${MODEL_TUNING_RUNTIME_PATCH_ENABLE:-0}"
 export MODEL_TUNING_RUNTIME_PATCH_ENTRYPOINT="${MODEL_TUNING_RUNTIME_PATCH_ENTRYPOINT:-patch:activate}"
 export PYTHONPATH="${package_dir}${PYTHONPATH:+:${PYTHONPATH}}"
 

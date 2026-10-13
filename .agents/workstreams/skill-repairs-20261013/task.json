@@ -1,0 +1,194 @@
+{
+  "schema": "mst-workstream/v1",
+  "task_id": "skill-repairs-20261013",
+  "owner": "Codex / c1917797-bit",
+  "created_at": "2026-10-13T16:37:55Z",
+  "branch": "work/skill-repairs-20261013",
+  "target_branch": "main",
+  "remote": "origin",
+  "worktree": "/cache/cch/model-tuning-lab-skill-repairs-20261013",
+  "execution_state": "completed",
+  "integration_state": "merged",
+  "original_base": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "source_archive_commit": "c03604ad184a154c90757ef805445b997ddbad92",
+  "objective": "Integrate the validated planning example and existing main runtime-template repair without importing experimental HYPIC code.",
+  "boundaries": [
+    "Only six declared repair files, task-owned validation/evidence and target-owned handoff reconciliation",
+    "No NPU, model-quality, performance, observer or native-plugin work",
+    "No whole HYPIC branch merge; no positive HYPIC or all-Skill acceptance claim"
+  ],
+  "frozen_constraints": {
+    "AGENTS.md": "a904211035ad5498b5392a38bfaf4c3dba28a0d6b024f63b5fb2476f8b29f9e8",
+    ".agents/git-policy.yaml": "0d160291a1e02b75d9aa1157ddc800b2ea5e4c6a49734d0479fca39d0b6b5a43",
+    ".agents/skills/mst-parallel-workstreams/SKILL.md": "1935194fe285e2d2163f66bd915c39f3b5dffc464cdb52a20571738fa868fcee",
+    ".agents/protected-paths.yaml": null
+  },
+  "selected_files": [
+    {
+      "path": ".agents/skills/mst-practice-iteration-planning/SKILL.md",
+      "source_commit": "4a95c87b8bf6a59557ad0e45c42e7b0616593caa",
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "171e1f401b18dc6aaa4d38a2c3b6b260fca46123"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "9be62a7adfec954b2b08d8d3d30e496e676d9ac8"
+      }
+    },
+    {
+      "path": "scripts/validate_monkeypatch_package.py",
+      "source_commit": "72bd32946345054f8251c856fb8c896443640443",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "54e3669a89a72eab0879ed8d21cf254f8d078f93"
+      }
+    },
+    {
+      "path": "tests/test_validate_monkeypatch_package.py",
+      "source_commit": "10a99926aaa05eca4ddb72cad514e2d58b60b473",
+      "before": null,
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "6f76de37d02cc9a2da83d89859d36a4ec3cc995e"
+      }
+    },
+    {
+      "path": ".agents/skills/runtime-monkeypatch-delivery/assets/template/MANIFEST.json",
+      "source_commit": "10a99926aaa05eca4ddb72cad514e2d58b60b473",
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "bf497f486cf4f6a92ce76441fc3e2d765701f52d"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "8048267d8e8ba2f04dac16689a8188db8dad19bf"
+      }
+    },
+    {
+      "path": ".agents/skills/runtime-monkeypatch-delivery/assets/template/run_with_patch.sh",
+      "source_commit": "10a99926aaa05eca4ddb72cad514e2d58b60b473",
+      "before": {
+        "mode": "100755",
+        "type": "blob",
+        "oid": "fc961a6650893d40a0c0847fd3337ef230c29ba1"
+      },
+      "after": {
+        "mode": "100755",
+        "type": "blob",
+        "oid": "fd9acb5aa745d13a05548b028c22f403d8d692d0"
+      }
+    },
+    {
+      "path": ".agents/skills/runtime-monkeypatch-delivery/assets/template/sitecustomize.py",
+      "source_commit": "10a99926aaa05eca4ddb72cad514e2d58b60b473",
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "30685fe26f1b975e5e100ebbda3d56261bd8ed59"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "oid": "f4a9689e932748f2fd959631a2c34d2a2559e088"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "task": "hypic-npu03-cpu-binding-fix-20261007",
+      "source_commit": "c03604ad184a154c90757ef805445b997ddbad92",
+      "requirement": "Published evidence/source only; whole experiment task need not be integration-ready and will not be merged"
+    }
+  ],
+  "claims": [
+    {
+      "type": "file",
+      "path": ".agents/skills/mst-practice-iteration-planning/SKILL.md",
+      "mode": "exclusive"
+    },
+    {
+      "type": "file",
+      "path": "scripts/validate_monkeypatch_package.py",
+      "mode": "exclusive"
+    },
+    {
+      "type": "file",
+      "path": "tests/test_validate_monkeypatch_package.py",
+      "mode": "exclusive"
+    },
+    {
+      "type": "file",
+      "path": ".agents/skills/runtime-monkeypatch-delivery/assets/template/MANIFEST.json",
+      "mode": "exclusive"
+    },
+    {
+      "type": "file",
+      "path": ".agents/skills/runtime-monkeypatch-delivery/assets/template/run_with_patch.sh",
+      "mode": "exclusive"
+    },
+    {
+      "type": "file",
+      "path": ".agents/skills/runtime-monkeypatch-delivery/assets/template/sitecustomize.py",
+      "mode": "exclusive"
+    },
+    {
+      "type": "knowledge",
+      "path": ".agents/HANDOFF.md",
+      "mode": "exclusive",
+      "actor": "serialized target integrator only"
+    },
+    {
+      "type": "resource",
+      "name": "main-integration-plane",
+      "mode": "exclusive",
+      "lock": "/cache/cch/model-tuning-lab-hypic-e2e-20261006/.git/mst-integrator-skill-repairs-20261013.lock"
+    },
+    {
+      "type": "file",
+      "path": ".agents/evals/practice-iterations/skill-repairs-planning-20261013.yaml",
+      "mode": "exclusive"
+    },
+    {
+      "type": "file",
+      "path": ".agents/evals/practice-iterations/skill-repairs-runtime-20261013.yaml",
+      "mode": "exclusive"
+    }
+  ],
+  "resource_leases": {
+    "physical_npus": [],
+    "service_ports": []
+  },
+  "validation_commands": [
+    "python3 -B .agents/workstreams/skill-repairs-20261013/validate_selected_repairs.py",
+    "/cache/cch/python-envs/model-tuning-lab-py311/bin/python -B -m unittest discover -s tests -p test_validate_monkeypatch_package.py",
+    "bash scripts/validate-mst.sh",
+    "git diff --check"
+  ],
+  "retention": "Retain remote work branch; reclaim owned clean worktree only after main push, reachability and claim release proof",
+  "resume": "After normal main push, fetch and verify exact merge tip, 0/0 divergence and source ancestry. Then inspect usage, reclaim this owned worktree/local branch and release integration lock. Retain remote branch. This state is not effective while an uncommitted merge is pending.",
+  "validated_content_commit": "f9af6d162b34ceaf96179ecbd963d8b90172693c",
+  "mode_overrides": {
+    "scripts/validate_monkeypatch_package.py": "100755"
+  },
+  "mode_override_reason": "mc00d2 direct Skill command failed PermissionError on source mode100644. Preserve original source binding; derive only executable bit with new direct-CLI controls.",
+  "publication": {
+    "state": "verified",
+    "published_checkpoint": "90c64c80a75b239bbbec65478547128e2f450ad0",
+    "operation": "exec-00000000000000e2",
+    "remote_equal": true
+  },
+  "integration_source": "06365feb165898a86305296dc007b40ec4e09461",
+  "integration_target_parent": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "claims_release": {
+    "effective_when": "validated merge is normally pushed and source reachability verified",
+    "action": "release file/knowledge/integration-plane claims; only then reclaim unused owned worktree"
+  }
+}

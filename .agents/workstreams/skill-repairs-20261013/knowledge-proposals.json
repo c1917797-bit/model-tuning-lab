@@ -1,0 +1,30 @@
+{
+  "schema": "mst-knowledge-proposals/v1",
+  "proposals": [
+    {
+      "id": "planning-schema",
+      "destination": ".agents/skills/mst-practice-iteration-planning/SKILL.md",
+      "decision": "accepted",
+      "basis": "Existing example violates its own maintained validator schema and omits validated_commit.",
+      "scope": "Reusable demonstrated repair only; no HYPIC or full-Skill promotion"
+    },
+    {
+      "id": "runtime-template",
+      "destination": ".agents/skills/runtime-monkeypatch-delivery/assets/template",
+      "decision": "accepted",
+      "basis": "Named validator missing in main; wrapper forced enable and worker-local startup failure was swallowed.",
+      "scope": "Reusable demonstrated repair only; no HYPIC or full-Skill promotion"
+    },
+    {
+      "id": "documented-direct-cli",
+      "destination": "scripts/validate_monkeypatch_package.py",
+      "decision": "accepted",
+      "classification": 5,
+      "basis": "mc00d2 PermissionError proved source mode100644 was unusable for the documented direct invocation; 100755 derivation passes direct positive/negative tests.",
+      "trigger": "A Skill documents an executable command",
+      "different_action": "Execute the exact command, not only python script.py",
+      "verification": "validate_selected_repairs.py direct_cli controls"
+    }
+  ],
+  "global_handoff_owner": "integrator"
+}

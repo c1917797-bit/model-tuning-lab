@@ -1,0 +1,34 @@
+{
+  "schema": "mst-integration-evidence/v1",
+  "state": "merged",
+  "target_parent": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "validated_source": "06365feb165898a86305296dc007b40ec4e09461",
+  "main_changed": true,
+  "source_archive": "c03604ad184a154c90757ef805445b997ddbad92",
+  "validated_content_commit": "f9af6d162b34ceaf96179ecbd963d8b90172693c",
+  "publication_verified": true,
+  "reason": "Target-owned state for exact-source no-ff integration; effective only after final-tree gates, merge commit and normal primary push.",
+  "validation": {
+    "operation": "exec-00000000000000d7",
+    "exit_code": 0,
+    "registry_entries": 29,
+    "selected_repair_files": 6,
+    "runtime_tests": 9,
+    "planning_controls": 3,
+    "direct_cli_controls": 2,
+    "device_acceptance": false,
+    "all_skill_acceptance": false
+  },
+  "next": "After normal main push, fetch and verify exact merge tip, 0/0 divergence and source ancestry. Then inspect usage, reclaim this owned worktree/local branch and release integration lock. Retain remote branch. This state is not effective while an uncommitted merge is pending.",
+  "source_validation": {
+    "operation": "exec-0000000000000102",
+    "exact_remote_source": "06365feb165898a86305296dc007b40ec4e09461",
+    "target_parent": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2"
+  },
+  "final_tree_gates": [
+    "selected repair source/mode/scope/registry controls",
+    "9 runtime subprocess tests",
+    "29 Skill structure validation",
+    "merged-state/proposal/global-handoff provenance and Git staged-tree checks"
+  ]
+}

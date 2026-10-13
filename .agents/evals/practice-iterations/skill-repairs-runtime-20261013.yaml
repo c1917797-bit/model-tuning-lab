@@ -1,0 +1,18 @@
+schema: mst-practice-iteration/v1
+id: skill-repairs-runtime-20261013
+repository: model-tuning-lab
+status: done
+date: 2026-10-13
+validated_commit: f9af6d162b34ceaf96179ecbd963d8b90172693c
+stage_goal: Make the existing runtime template safe by default and its documented validator executable.
+changes:
+  - type: validation
+    description: Select the validator, wrapper, worker failure and manifest repairs; correct the executable bit.
+    files: [scripts/validate_monkeypatch_package.py]
+validation_commands:
+  - python3 -B .agents/workstreams/skill-repairs-20261013/validate_selected_repairs.py
+  - bash scripts/validate-mst.sh
+lessons_ingested:
+  - lesson: Test the exact documented CLI and worker interpreter; preflight success is insufficient.
+    destination: scripts/validate_monkeypatch_package.py
+    severity: medium

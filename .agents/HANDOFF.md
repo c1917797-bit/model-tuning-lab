@@ -1,5 +1,24 @@
 # Maintainer Handoff
 
+## Selected planning and runtime-template repairs — 2026-10-13
+
+Integrated only six reusable repair files from the HYPIC Skill-validation work:
+the planning example uses the maintained schema/checkpoint field; the generic
+monkeypatch wrapper respects unset/disabled/enabled controls, worker startup
+failure aborts safely, and the documented package validator exists and is executable.
+Two completed evals retain the demonstrated failures and regression controls.
+
+Exact fetched source: `06365feb165898a86305296dc007b40ec4e09461`;
+target parent: `ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2`.
+Final-tree gates cover9 runtime subprocess tests,3 planning controls,2 direct
+CLI controls and29-entry registry/structure validation. Source byte bindings,
+the explicit executable-mode correction and target-owned integration state live in
+`.agents/workstreams/skill-repairs-20261013/`.
+This is reusable tooling repair, not HYPIC acceptance: no new NPU run, quality
+reclassification, experimental runtime import or claim that all29 Skills work.
+Retain the remote repair branch; reclaim only its clean unused worktree/local
+branch after the exact merge is pushed and reachable. Other worktrees stay intact.
+
 ## README capability refresh — 2026-10-08
 
 The README now reflects the actual 29-Skill main tree: Paper-to-Ascend,
