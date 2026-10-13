@@ -1,5 +1,16 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-13 offline question-level interpretation supplement
+
+Readonly raw replay02ca/02cd: r19 has127 distinct questions x3; 8 improved,
+13 regressed,106 equal three-response totals,not8 independent failed questions.
+Within-arm correctness-variable questions13→22; only index59 goes3/3→0/3.
+23 response regressions include15 stop→length and6 stop→stop; association is
+not causal or statistical-significance proof. Frozen r19 verdict unchanged.
+Report/replay linked to quality-evaluation case;9 bounded/20 partial unchanged.
+No new NPU task; no-cache/repeat3 controller02c5 remains running. Next performance
+action is its terminal audit,not a quality rerun. App heartbeat remains absent.
+
 ## 2026-10-13 four phases audited; baseline repeat3 running
 
 Baseline repeat2 terminal07:05:56UTC; independent audit02c3 exit0:
