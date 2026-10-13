@@ -1,0 +1,111 @@
+{
+  "schema": "ascend.preparation-dispatch-stage/v1",
+  "created_utc": "2026-10-13 16:28:50 UTC",
+  "authority": {
+    "start_epoch": 1791879730,
+    "cutoff_epoch": 1791922930,
+    "unchanged": true
+  },
+  "supersedes_status_record": "R143_DISPATCH_PREFLIGHT_AND_FAILURE_ATTRIBUTION_20261013.json",
+  "current": {
+    "paper": "SKVQ",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R118/skvq-service-full-v1-008/SOURCE_MANIFEST.json",
+      "bytes": 21508,
+      "sha256": "948916a3cdb94c98e4af4bcb14d4168f733ade02387b15e65f4df3283617732e"
+    },
+    "operation": {
+      "peer": "lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d",
+      "id": "exec-0000000000000093",
+      "state": "running_as_of_MC009D_read",
+      "physical": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-formal-013-r118-service008-main-001",
+      "owned_cid": "144bc9ce49ba9f856439165ac5e09c9cce757326298937b395da3a49fe38abcd"
+    },
+    "actual_cpu": {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-constructor004-cpu-main-001/RESULT.json",
+        "bytes": 215861,
+        "sha256": "2b1ee933dcfc15f74df55d506748118c5b6a4f3bf74df872838edf94ad1478f8"
+      },
+      "operation": "exec-0000000000000089",
+      "exit": 0,
+      "genuine_source_build": true,
+      "old_failure_reproduced": "exact frozen002 source",
+      "new_constructor": true,
+      "unique_storages": 13,
+      "explicit_bytes": 15044608,
+      "default_off_and_foreign_rejected": true,
+      "device_fds": [],
+      "Devices": [],
+      "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+      "stopped_retained": true,
+      "cleanup_errors": []
+    },
+    "prepare": {
+      "operation": "exec-000000000000008f",
+      "exit": 0,
+      "inputs_sha256": "f13fa6b9548037a92befbc41730d308344c8125ab028a64ce9165ce658351cb6"
+    },
+    "meaning": "CPU construction fix verified; MC00A0 later observed exact owned four physical4-7 workers after weights, now graph compilation. FULL47, E2E and tasks not yet passed",
+    "latest_physical_observation": {"operation":"exec-00000000000000a0","owned_cid":"144bc9ce49ba9f856439165ac5e09c9cce757326298937b395da3a49fe38abcd","physical_worker_pids":{"4":3419425,"5":3419426,"6":3419427,"7":3419428},"HBM_MiB":[19718,19672,19672,19672],"AICore_percent":[0,0,0,0],"classification":"necessary graph compilation and startup, not measured sustained NPU utilization","mapping":{"0":4,"1":5,"2":6,"3":7},"privileged":false}
+  },
+  "queue": [
+    {
+      "paper": "KIVI",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-r118-v1-004/SOURCE_MANIFEST.json",
+        "bytes": 9478,
+        "sha256": "e2b7e96a959b8b733fc20bb6956cc721a3e90c42ce233465f031ad83121ceadd"
+      },
+      "state": "HOST_SOURCE_AND_24_SOFTWARE_CONTROLS_VERIFIED_NPU_PENDING",
+      "actual_source_op": "exec-0000000000000092",
+      "unique_refs": 121,
+      "actual_software_op": "exec-0000000000000095",
+      "tests": 24,
+      "failures": 0,
+      "repair": "Deployed immutable graph00114 and predecessor00310 missing original files; complete original138rows checked, no checker/golden relaxation",
+      "next": "After SKVQ genuine termination and release, use existing004 owned workflow; same660 software stage then NPU graph and independent1536. No concurrent TP4 or borrowed readiness.",
+      "blockers": "No actual same66036/NPUgraph/independent1536 result yet"
+    },
+    {
+      "paper": "MXR",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr-rank2-workspace-trace-v1-022/SOURCE_MANIFEST.json",
+        "bytes": 18084,
+        "sha256": "d8f0f33ba0c7ccc67699091bd4137ceae00a61b3fc2f72ab495c6b4572a8ef34"
+      },
+      "state": "DEPLOYED_TARGET_SOURCE_AUDIT_ONLY",
+      "actual_source_op": "exec-000000000000009c",
+      "readset": 185,
+      "next": "Original same66012 software controls then fresh isolated physical4 real pre-cast FP32 observation; budget300 incl90, child120. All4-7idle required by unchanged owner.",
+      "purpose": "Distinguish real pre-cast residual from actual final cast. Must preserve three original failed BF16 outputs bitwise.",
+      "matrix_pass": false
+    }
+  ],
+  "dispatch_rules": [
+    "READY is the actual executable dependency closure on target, not an agent completion flag; cold-source construction and actual downstream Ref/argv consumer must be exercised without NPU first.",
+    "Prepare source, data, command, output-absence, resource budget, independent consumer and successor DAG together. Source-only passes do not confer numerical or model qualification.",
+    "MAIN retains single ownership of physical4-7. Dispatch after exact previous termination/stop-retain/release; do not use periodic30min audit as job scheduling timer.",
+    "Queue head that needs code repair yields to genuinely ready compatible work; no filler load and no permission to overlap matched TP4 measurements.",
+    "Keep failures immutable; original007 constructor failure is adaptation failure, not paper no-go; old deterministic failures are not rerun unchanged.",
+    "30minute utilization/idle remains unmeasured absent a continuous log calculation; point snapshot is not full-window proof."
+  ],
+  "remaining_risks": [
+    "Worker-fatal startup fast-exit is diagnosed but NOT implemented. Existing loop observes parent alive/HTTP and original1800 startup timeout. Proposed source-bound owned fatal receipt must retain exact CID/PID provenance; never kill by broad log regex.",
+    "Actual008 diagnostic, then paired screen, formal3pairs and current task suite may not fit remaining window; original per-host5400incl90 and whole900 unchanged. Last host admission18:52:10Z, whole20:07:10Z. No auto-extension.",
+    "Auxiliary command ticket expected_after_real_terminal corrected007to008 locally by one byte. All executable command/args unchanged; oldSHA f22bcb6ad1196812c4ed1cfa315b184bd50b8d6534bc53ad2f8688edc9ffd9af, newSHA 3c67d87877c6e33fd078c3b8b842ac2f0b63ab45a723cbbbf9f671e439265998. No frozen source changes.",
+    "No new accepted performance or task score. GSM8K/HumanEval/MMLU smoke then full with latest1percent loss constraint; historical HYPIC excluded."
+  ],
+  "publication": {
+    "previous_commit": "a37de76358d2b2707c29b3dbbe84f3e0935fc59f",
+    "push_MC0082": "timeout_preserved",
+    "remote_read_MC0099": "99d8bc4d6578966974f5ff8211430afd448422e1",
+    "normal_push_pending": true
+  }
+}
