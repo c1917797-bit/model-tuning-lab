@@ -9,7 +9,10 @@ changes:
   - type: validation
     description: Retain an isolated exact-main checkout and structured onboarding evidence instead of inferring functional acceptance from prior reports.
     files:
-      - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-cases/mst-repo-onboarding.json
+      - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_onboarding_snapshot.py
+      - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_onboarding_snapshot.py
+      - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ONBOARDING_EXACT_MAIN_ACCEPTANCE_20261013.md
+      - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ONBOARDING_EXACT_MAIN_RECEIPT_20261013.json
 validation_commands:
   - "bash scripts/validate-mst.sh"
   - "python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_onboarding_snapshot.py /cache/cch/mst-main-onboarding-20261013-f8113561"
@@ -29,3 +32,7 @@ scope:
   admission: New isolated acceptance checkout, not an authoritative maintenance repository.
   no_npu_work: true
   no_algorithm_outcome_prerequisite: true
+publication:
+  case_commit: c142c93f3849d9de4a4620ebdacfae572259193e
+  case_path: .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-cases/mst-repo-onboarding.json
+  distinction: This later ledger publication is separate from the executed evidence checkpoint above.
