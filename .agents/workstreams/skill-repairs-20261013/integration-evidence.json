@@ -4,5 +4,20 @@
   "target_parent": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "validated_source": null,
   "main_changed": false,
-  "source_archive": "c03604ad184a154c90757ef805445b997ddbad92"
+  "source_archive": "c03604ad184a154c90757ef805445b997ddbad92",
+  "validated_content_commit": "f9af6d162b34ceaf96179ecbd963d8b90172693c",
+  "publication_verified": false,
+  "reason": "Push and read-only remote-ref verification timed out; exact published source cannot be attested.",
+  "validation": {
+    "operation": "exec-00000000000000d7",
+    "exit_code": 0,
+    "registry_entries": 29,
+    "selected_repair_files": 6,
+    "runtime_tests": 9,
+    "planning_controls": 3,
+    "direct_cli_controls": 2,
+    "device_acceptance": false,
+    "all_skill_acceptance": false
+  },
+  "next": "Verify exact fetched work branch tip and current main parent, then final-tree merged-state tests before main update."
 }

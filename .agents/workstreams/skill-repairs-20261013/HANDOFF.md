@@ -1,26 +1,35 @@
 # Skill repairs integration
 ## Status
-In-progress/not-ready. Six selected repair files imported and CPU validated.
-Target parent ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2.
-No NPU allocation, no HYPIC code imported, no main update yet.
+Offline repair work completed; integration NOT READY because publication is unverified.
+Validated content: f9af6d162b34ceaf96179ecbd963d8b90172693c.
+Local main remains ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2; no merge was attempted.
+No NPU allocation, no HYPIC code imported and no quality/performance reruns.
 
-## Evidence
-Start3194848e remotely verified inmc00c2; source archivec03604ad is published.
-See task.json immutable source-byte bindings and separate executable-bit override.
-REPAIR_SCOPE.md records evidence, limits and ingestion destinations.
-validate_selected_repairs.py checks byte/mode/scope/constraints, registry,
-instantiated planning examples and direct executable CLI.
-Nine runtime subprocess tests cover switch controls and worker-local abort.
+## Evidence and limits
+Six source-bound files repaired; explicit executable-bit exception retains original source mode.
+mc00d7 passed 9 runtime subprocess tests, 3 planning controls, 2 direct CLI controls,
+29-entry registry/structure validation and diff checks. See VALIDATION_CHECKPOINT.json.
+The exact CLI previously failed PermissionError in mc00d2; executable mode is now tested.
+Completed evals bind the tested content checkpoint, not a future metadata commit.
+These bounded checks do not prove real service lifecycle success or all 29 Skills effective.
+The original workstream's published 049b0c17 preserves the sole lifecycle attempt:
+ISOLATION_FAILED_BEFORE_HEALTH; exact owned resources released; no automatic retry.
+Functional inventory remains 12 bounded verified / 17 partial.
 
-## Next
-Content94851c0b passed tests; push00d4 timed out, remote unknown.
-Finish registry checks, then bind the exact content commit in completed
-evals,ready task and integration evidence,then validate/push that ledger.
-Fetch target and source again; validate the target-owned merged state in the
-final no-ff merge tree BEFORE committing/pushing main. Do not merge whole HYPIC.
+## Publication failure
+mc00d4 and mc00d7 pushes timed out. Read-only mc00dc also timed out.
+Remote state is unknown, not proven absent or synced. Do not repeatedly push unchanged
+credentials/connectivity, mark ready, force-push, or merge locally guessed remote tips.
 
-## Recovery and retention
-Original experiment and two untracked observer drafts remain untouched.
-One current-thread integrator retains its declared lock. Reclaim this worktree
-only after exact-source main integration,pushed reachability and released claims.
-Remote work branch retained. Do not discard original source bindings or base.
+## Resume
+After connectivity changes, freshly resolve an authorized host route and fetch refs.
+Verify/publish this named branch, bind the exact fetched source and current target parent,
+then reconcile target-owned merged state and global handoff before final-tree tests
+and a deliberate no-ff main merge. A content checkpoint is not a readiness-ledger tip.
+Do not merge the whole HYPIC branch, change quality conclusions or start new device work.
+
+## Retention
+Retain this worktree and the current-thread integration lock while integration is pending.
+Original experiment and its two untracked observer drafts remain untouched.
+Reclaim only after main push, source reachability, claim release and clean-worktree proof.
+Remote work branch is retained.
