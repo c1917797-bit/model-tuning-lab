@@ -1,0 +1,63 @@
+{
+  "scope": "C2-text-only-localKV bounded evidence",
+  "samples": 5,
+  "rows": [
+    {
+      "scope": "C2-text-only-localKV; not MRoPE multimodal or service",
+      "shape": [
+        65,
+        1,
+        256
+      ],
+      "rotary_dim": 64,
+      "shift": 1024,
+      "public_unchanged": true,
+      "private_nonalias": true,
+      "tail_unchanged": true,
+      "same_input_reference_max_abs": 0.007769826321028628,
+      "same_input_reference_rms": 0.0007788892525203198,
+      "absolute_new_anchor_rms": 0.0009895990960779783,
+      "finite": true
+    },
+    {
+      "scope": "C2-text-only-localKV; not MRoPE multimodal or service",
+      "shape": [
+        65,
+        1,
+        256
+      ],
+      "rotary_dim": 64,
+      "shift": 4096,
+      "public_unchanged": true,
+      "private_nonalias": true,
+      "tail_unchanged": true,
+      "same_input_reference_max_abs": 0.0076674633359274935,
+      "same_input_reference_rms": 0.0008153836145802091,
+      "absolute_new_anchor_rms": 0.0010424176326617675,
+      "finite": true
+    },
+    {
+      "scope": "C2-text-only-localKV; not MRoPE multimodal or service",
+      "shape": [
+        65,
+        1,
+        256
+      ],
+      "rotary_dim": 64,
+      "shift": 7168,
+      "public_unchanged": true,
+      "private_nonalias": true,
+      "tail_unchanged": true,
+      "same_input_reference_max_abs": 0.007765258487403948,
+      "same_input_reference_rms": 0.0008092239144345482,
+      "absolute_new_anchor_rms": 0.001029149576856574,
+      "finite": true
+    }
+  ],
+  "removed": "458841f364789a51b693048f75acfe02ca93196006f7b0c2670029b8b785938e",
+  "hashes": {
+    "result.json": "fd447b496d660fddb645289175e5d6a9ecf09a5176bcf533d164746d81dd254d",
+    "events.jsonl": "213f116f4b4c04e0c7bcde8f8232f4401426e79317b6b2e755e8adfc559fcab5",
+    "stdout.log": "d49ebfc606315602d3011aa54bd0d147bfb4a12237451f9f2cbb730e6ec5a4a3"
+  }
+}

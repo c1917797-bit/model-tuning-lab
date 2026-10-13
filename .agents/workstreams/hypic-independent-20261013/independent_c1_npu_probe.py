@@ -63,12 +63,23 @@ def main():
                     return output
                 material=official_segment_affine(synchronized_runner,k.npu(),v.npu(),g.npu(),beta.npu())
                 actual=apply_segment(material,incoming.npu())
+                expanded=k.npu().repeat_interleave(3,dim=2).contiguous()
+                _,direct=synchronized_runner(expanded,expanded,v.npu(),g.npu(),beta.npu(),
+                    initial_state=incoming.npu()[None],output_final_state=True,
+                    cu_seqlens=torch.tensor([0,65],device='npu',dtype=torch.int64),
+                    prebuilt_meta=None,head_first=False,use_qk_l2norm_in_kernel=True)
                 torch.npu.synchronize()
                 diff=actual.cpu().double()-expected
+                direct_cpu=direct[0].cpu().double()
+                added=actual.cpu().double()-direct_cpu
+                direct_error=direct_cpu-expected
                 print(json.dumps({"scope":"C1-selected27B-TP4-local-shape-only","shape":[65,4,12,128,128],
                                   "finite":bool(torch.isfinite(diff).all()),
                                   "max_abs":float(diff.abs().max()),"rms":float(diff.square().mean().sqrt()),
                                   "reference_rms":float(expected.square().mean().sqrt()),
+                                  "direct_reference_rms_error":float(direct_error.square().mean().sqrt()),
+                                  "composition_vs_direct_max_abs":float(added.abs().max()),
+                                  "composition_vs_direct_rms":float(added.square().mean().sqrt()),
                                   "not_service_or_full_algorithm":True}),flush=True)
         finally:
             if 'originals' in locals():

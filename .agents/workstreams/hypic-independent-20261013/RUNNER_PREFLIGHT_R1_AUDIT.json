@@ -1,0 +1,24 @@
+{
+  "scope": "Official NPU-backed runner class source/install/uninstall only; no weights or inference",
+  "operation": "exec-000000000000009c",
+  "raw_root": "/cache/cch/hypic-independent-20261013/runner-preflight-r1",
+  "exit_code": 0,
+  "source_verified": true,
+  "installed": true,
+  "uninstalled": true,
+  "inference_requests": 0,
+  "weights_loaded": false,
+  "isolation_samples": 17,
+  "removed_container": "83df4dd220941ed640bd781562dc8b756d2cd2ab0540c24da111f881423632fc",
+  "absence_probe": "exec-00000000000000a5: Docker inspect No such object",
+  "raw_sha256": {
+    "result.json": "df00cca19edd5e82636a1037900a0cdf655ba38bd986d7d7f39e66ab9daa34ed",
+    "events.jsonl": "bae552d42d2d02e7dd545422c1b802e4157de9faf49c24a79ed280a08b73cb0f",
+    "stdout.log": "677b4eb477464cc1ede878758f1f71258889e93d76228e17bb67a15af3798110"
+  },
+  "limitations": [
+    "Class hooks only, not real worker requests",
+    "Isolation audit00a7 PASS:17 clean samples,11 owned physical0 observations; terminal matches raw result",
+    "Not HYPIC activation, performance, quality or Skill acceptance"
+  ]
+}

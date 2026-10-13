@@ -71,7 +71,7 @@
     {
       "id": "M2",
       "name": "Independent C1/C2 reference and actual-shape NPU correctness",
-      "state": "pending"
+      "state": "in-progress"
     },
     {
       "id": "M3",
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Inspect official GDN ABI and implement independentNPU bridge; journal8CPU controls passed. Freeze fresh controller hash/root before device work; never restart r2.",
+  "next_action": "Integrate independently derived C1/C2/conv/material and slot adapters into source-bound removable runtime hooks; validate live cache layout/request-slot association before technique activation. No formal candidate benchmark until real activation evidence.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-14T10:00:00+03:00",
@@ -195,10 +195,11 @@
     ]
   },
   "publication": {
-    "state": "verified-via-desktop-relay",
-    "published_commit": "ee85ac329b8675638f1f9fe38319ef3896e37c43",
+    "state": "latest-local-checkpoint-not-published-TLS-failure",
+    "published_commit": "bf71afe1ecc6e11d2a6b023995e89bb1c93ab9be",
     "receipt": "PUBLICATION_RECEIPT.json",
-    "original_commit_preserved": true
+    "original_commit_preserved": true,
+    "local_checkpoint": "b0c20d098d3c77c47b23bae82948d44045112929"
   },
   "math_reference": {
     "state": "cpu-reference-passed",
@@ -214,21 +215,9 @@
     "device_use": false
   },
   "active_attempt": {
-    "phase": "native-tp4-smoke-r2",
-    "operation": "exec-000000000000019a",
-    "peer": "lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d",
-    "state": "terminal-controller-lost; bounded recovery3/3 semantic pass; historical isolation invalid",
-    "code_commit": "ee85ac329b8675638f1f9fe38319ef3896e37c43",
-    "controller_sha256": "953d0958d67cceeac66c044adb551bb1835c1182626fa0ac4d9816aca7af7e7d",
-    "raw_root": "/cache/cch/hypic-independent-20261013/native-smoke-r2",
-    "port": 8233,
-    "physical_npus": [
-      0,
-      1,
-      2,
-      3
-    ],
-    "container": "hypic-independent-native-smoke-r2-20261013"
+    "state": "none; all latest bounded device experiments terminal and released",
+    "last_operation": "exec-0000000000000087",
+    "raw_root": "/cache/cch/hypic-independent-20261013/slots-numeric-r2-nd"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",

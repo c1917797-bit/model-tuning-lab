@@ -3,8 +3,8 @@ import json,time,subprocess,hashlib
 from pathlib import Path
 import native_tp4_smoke as n
 HERE=Path(__file__).resolve().parent
-ROOT=Path("/cache/cch/hypic-independent-20261013/c1-numeric-r6-stateonly")
-NAME="hypic-independent-c1-numeric-r6-stateonly"
+ROOT=Path("/cache/cch/hypic-independent-20261013/c1-numeric-r8-segments")
+NAME="hypic-independent-c1-numeric-r8-segments"
 IMAGE="sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
 def main():
     assert not ROOT.exists(),"immutable root exists"
@@ -19,7 +19,7 @@ def main():
             if Path(d).exists():args+=["--device",d]
         for src,dst in [(str(HERE),"/probe"),("/cache/efim/Qwen3.6-27B","/model"),("/usr/local/Ascend/driver","/usr/local/Ascend/driver"),("/usr/local/Ascend/firmware","/usr/local/Ascend/firmware"),("/usr/local/dcmi","/usr/local/dcmi"),("/etc/ascend_install.info","/etc/ascend_install.info")]:
             if Path(src).exists():args+=["-v",src+":"+dst+":ro"]
-        args+=["-e","ASCEND_RT_VISIBLE_DEVICES=0","-e","PYTHONDONTWRITEBYTECODE=1",IMAGE,"-B","/probe/independent_c1_npu_probe.py"]
+        args+=["-e","ASCEND_RT_VISIBLE_DEVICES=0","-e","PYTHONDONTWRITEBYTECODE=1",IMAGE,"-B","/probe/independent_c1_segment_probe.py"]
         journal.append({"event":"launch","argv":args,"sources":{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in HERE.glob("independent_c1*.py")}})
         cid=n.command(args).strip();n.command(["docker","start",cid])
         deadline=time.monotonic()+240

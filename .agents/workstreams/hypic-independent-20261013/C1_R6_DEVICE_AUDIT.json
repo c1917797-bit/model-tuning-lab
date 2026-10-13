@@ -1,0 +1,24 @@
+{
+  "valid": true,
+  "exit": 0,
+  "npu_observed": true,
+  "samples": 39,
+  "foreign": 0,
+  "cards": [
+    0
+  ],
+  "removed": "6058ec0486327457249b90bd02db8f8803ec2242e721f2d2f36ebf2338784363",
+  "inspect_code": 1,
+  "final": [],
+  "hashes": {
+    "result.json": "1009c424958a47f4912079c5037102b2dd976bc8e1a6be814ecaa63de7bbebe5",
+    "events.jsonl": "d697829c8c3cd7f841cc9e9f592594c771d5e0f915d857cc3dd88a253a356ba4",
+    "stdout.log": "e58261744e8f2a34d2a6c4e47fa0a0146fb690c2513ed1c7264115f0e49ba0d6"
+  },
+  "scope": "bounded-C1-local-shape-device-execution; no service or full numerical acceptance",
+  "operation": "exec-0000000000000054",
+  "max_abs": 0.002056388419771349,
+  "rms": 0.0003037328833585161,
+  "reference_rms": 0.09033710962369494,
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-numeric-r6-stateonly"
+}

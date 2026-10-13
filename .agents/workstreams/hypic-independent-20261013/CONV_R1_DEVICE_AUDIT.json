@@ -1,0 +1,28 @@
+{
+  "scope": "bounded-actual-local-conv",
+  "operation": "exec-0000000000000075",
+  "samples": 5,
+  "foreign": 0,
+  "removed": "3bda31311c8c76a00fd9932c42c0d8242bbcc19343875b9a6c188a881dc45560",
+  "rows": [
+    {
+      "scope": "conv-width4-channels2560 local; not model integration",
+      "warmup": 3,
+      "finite": true,
+      "stitched_native_rms": 0,
+      "stitched_native_max": 0,
+      "native_reference_rms": 0.000016527274949666306,
+      "public_unchanged": true,
+      "state_tail_shape": [
+        1,
+        3,
+        2560
+      ]
+    }
+  ],
+  "hashes": {
+    "result.json": "5293bad817d17540288a966aa43ebfa01363ea58e5e7eed1c47a78ff95106ac6",
+    "events.jsonl": "049bceeae4fb943fd3362ed5fdf48976adeff20a804ba0f8c5b7568258ef5c55",
+    "stdout.log": "b25a189ce7b744a2741aa759cfdcca4a3bf37d795e0f36514acfe1f4b813b21a"
+  }
+}
