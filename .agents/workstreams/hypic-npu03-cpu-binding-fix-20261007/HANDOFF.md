@@ -55,6 +55,11 @@ Global .agents/HANDOFF.md describes integrated history,not this unmerged result.
 
 ## 4. Current Action
 
+Benchmark r13 obligation review is complete; see
+BENCHMARK_R13_PROTOCOL_OBLIGATION_REVIEW_20261013.md. Reconnection replay0004
+passed; historical identity/progression/overhead limits remain partial evidence.
+Do not repeat this review or its completed device phases. Counts remain9/20.
+
 Current/historical handoff repair is committed874ec388. Report review031a
 found missing round-level TPOT P95/duration; repaired from existing raw data.
 031c passed six-phase raw replay and7 report tests; report repair commitea5e16b2.
