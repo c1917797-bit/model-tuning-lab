@@ -83,5 +83,6 @@
   "validated_content_commit": "631d6bc951718287c8a3b59c23c3ce2a40fa3ed7",
   "fresh_clone_replay": {"operation":"exec-0000000000000146","receipt":"REPLAY_RECEIPT.json","tests":7,"structure":29,"remote_clone":false},
   "publication_attempt": {"operation":"exec-0000000000000143","push_exit":124,"remote_read_operation":"exec-0000000000000145","remote_read_exit":124,"remote_content_commit":"unverified"},
-  "resume": "Local content631d6bc9 and fresh clone replay passed. Resolve publication before marking ready or merging. Do not repeat failed pushes without fresh remote availability evidence."
+  "publication_recovery": {"operation":"exec-0000000000000172","receipt":"PUBLICATION_RECOVERY.json","published_tip":"83a4ac3203fa5f9fc8d320b75dae519e2ab0b8c3","remote_equal":true,"main_unchanged":true},
+  "resume": "Publication blocker resolved by normal push and exact remote ref verification0172. Preserve historical failure receipts. Next bind readiness to the fetched source and integrate against freshly fetched main; no device work."
 }

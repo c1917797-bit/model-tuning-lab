@@ -1,0 +1,18 @@
+{
+  "schema": "mst-publication-recovery/v1",
+  "operation": "exec-0000000000000172",
+  "exit_code": 0,
+  "stdout": "{\"python_explicit_existing_ca\": \"verified\", \"tls\": \"TLSv1.3\"}\n{\"acceptance_promoted\": false, \"base\": \"23ec33d7d692bb77d17fb5b81aabacf57adad5c7\", \"complete_records\": 3, \"historical_decisions_preserved\": true, \"review_source\": \"b9386cd8b98ceca4be89d2a090db071f21842388\", \"runtime_changed\": false, \"supplemented_records\": 2}\nPASS: Maintainer Skill Tree structure is valid (29 skills)\n{\"push_exit\": 0, \"head\": \"83a4ac3203fa5f9fc8d320b75dae519e2ab0b8c3\"}\n{\"remote_read_exit\": 0, \"refs\": [\"23ec33d7d692bb77d17fb5b81aabacf57adad5c7\\trefs/heads/main\", \"83a4ac3203fa5f9fc8d320b75dae519e2ab0b8c3\\trefs/heads/work/lesson-records-20261013\"]}\nGIT_READ_WRITE_RECOVERY_VERIFIED\n",
+  "previous_network_failure_preserved": "NETWORK_CHECK.json",
+  "published_content_tip": "83a4ac3203fa5f9fc8d320b75dae519e2ab0b8c3",
+  "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+  "cause_boundary": "Earlier network timeouts were real; link recovered without configuration changes. Python default CA file absence is separate and not proved to be the Git timeout cause.",
+  "diagnostic_correction": {
+    "python_existing_ca_bundle": "/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem",
+    "certificate_verification": true,
+    "hostname_verification": true,
+    "proof": "TLSv1.3 success with explicit existing trust bundle; curl and actual Git read/write also succeeded"
+  },
+  "system_configuration_changed": false,
+  "npus_used": false
+}
