@@ -104,8 +104,8 @@ evidence; this Git fixture is not that separate workflow.
    do not rerun completed HYPIC merely to improve acceptance counts.
 3. Record only demonstrated fixes and task-scoped acceptance; derive current
    counts from verified case evidence, never from structural checks alone.
-4. mc012e remote-ref refresh failed before cleanup; retain checkout/branch/lock.
-   No deletion occurred. Recheck connectivity once changed, then exact usage.
+4. mc0134 reclaimed the owned repair worktree/local branch and released its lock.
+   Main and repair remote branch retain all commits; only two worktrees remain.
    Seven ingestion controls passed; selectively integrate two proposal records.
 5. Lifecycle attempt terminal:0 requests, uninstall not started; no retry scheduled.
    Continue offline integration; no quality/performance rerun or old-root reuse.

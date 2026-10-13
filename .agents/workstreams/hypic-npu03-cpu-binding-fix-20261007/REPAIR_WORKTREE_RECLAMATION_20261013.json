@@ -1,0 +1,17 @@
+{
+  "schema": "mst-worktree-reclamation/v1",
+  "operation": "exec-0000000000000134",
+  "peer": "lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d",
+  "route": "peer_direct",
+  "state": "completed",
+  "exitCode": 0,
+  "stdout": "{\"preflight\": \"pass\", \"remote_refs\": {\"refs/heads/main\": \"23ec33d7d692bb77d17fb5b81aabacf57adad5c7\", \"refs/heads/work/skill-repairs-20261013\": \"06365feb165898a86305296dc007b40ec4e09461\"}, \"processes_scanned\": 2054, \"external_path_users\": [], \"denied\": [], \"explicit_container_references\": [], \"broad_parent_mounts\": 34, \"interpretation\": \"parent mounts alone do not declare this new owned child checkout\", \"retention\": \"Retain remote work branch; reclaim owned clean worktree only after main push, reachability and claim release proof\"}\nDeleted branch work/skill-repairs-20261013 (was 06365feb).\n{\"result\": \"reclaimed-owned-merged-worktree\", \"removed_path\": \"/cache/cch/model-tuning-lab-skill-repairs-20261013\", \"local_branch_deleted\": \"work/skill-repairs-20261013\", \"remote_branch_retained\": \"06365feb165898a86305296dc007b40ec4e09461\", \"main_unchanged\": \"23ec33d7d692bb77d17fb5b81aabacf57adad5c7\", \"integration_lock_released\": true, \"worktrees\": \"worktree /cache/cch/model-tuning-lab-hypic-e2e-20261006\\nHEAD 5bb0b18cfef43904603d907d90b4b8e545c47eb2\\nbranch refs/heads/work/hypic-npu03-cpu-binding-fix-20261007\\n\\nworktree /cache/cch/model-tuning-lab-integration-main-20261013\\nHEAD 23ec33d7d692bb77d17fb5b81aabacf57adad5c7\\nbranch refs/heads/main\"}\n",
+  "stderr": "",
+  "previous_pre_mutation_failure": "REPAIR_WORKTREE_RETENTION_20261013.json",
+  "recovery": {
+    "source_commit": "06365feb165898a86305296dc007b40ec4e09461",
+    "retained_remote_branch": "origin/work/skill-repairs-20261013",
+    "integrated_main": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7"
+  },
+  "boundary": "Only the owned clean merged repair checkout/local branch and owned empty integration lock were removed. No container, original experiment tree, draft or remote branch was removed."
+}
