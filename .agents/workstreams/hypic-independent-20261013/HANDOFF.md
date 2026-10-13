@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Latest: canonical C1 public-body builder implemented, excludes live boundary,
+uses independent official-state dual invocation and clones public output/conv tail.
+61 CPU controls0019 pass including token coverage and producer alias isolation.
+Draft removable disabled-by-default public GDN producer hook added: exact official
+source binding, explicit canonical request selector, original core/chunk unchanged,
+post-native body builder and device synchronization before publish. Not yet enabled
+or device-validated; selector/sink still need serving integration. No NPU job.
+Next wire canonical segment token identity and sink, then private C1 reuse/C2 seam.
+
 Latest algorithm checkpoint: independent_linear_reuse connects live boundary
 callback -> cached affine-body composition -> private output/conv-tail result.
 Same-input FP64 full recurrence comparison and public/initial nonmutation controls
