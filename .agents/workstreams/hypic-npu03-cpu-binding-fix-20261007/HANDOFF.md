@@ -13,7 +13,10 @@ physical0–3 and8223 idle. Baseline repeat2 now runs exec-00000000000002bc:
 Poll exact handle/root; never restart while running/ambiguous. After terminal
 independent audit, remaining order no-cache/repeat3,hypic-only/repeat3,audit-all.
 Progress3/6 audited; r19 quality rejection/no deployment unchanged.
-Automation hypic continues; deadline08:47:14UTC unchanged. No main/remote sync.
+Automation update returned not-found; local hypic configuration also missing.
+Do not claim automatic continuation or recreate a possibly deleted automation
+without checking user intent. Exact controller02bc is still running.
+Deadline08:47:14UTC unchanged. No main/remote sync.
 
 
 ## 2026-10-13 two phases audited; HYPIC repeat2 running
