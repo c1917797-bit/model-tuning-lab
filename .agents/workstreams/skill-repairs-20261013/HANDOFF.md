@@ -1,30 +1,26 @@
 # Skill repairs integration
 ## Status
-Started/not-ready. Target main at ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2.
-Owning branch work/skill-repairs-20261013; no repair files imported yet.
-This is a selective integration workstream, not a HYPIC rerun.
-
-## Objective and boundaries
-Integrate the planning-schema example repair and five-file main runtime-template
-repair already validated in the published experiment branch. Use task.json
-path/commit/blob bindings. Do not merge the whole experiment branch or add the
-native-plugin/observer source. No device allocation, quality or performance work.
+In-progress/not-ready. Six selected repair files imported and CPU validated.
+Target parent ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2.
+No NPU allocation, no HYPIC code imported, no main update yet.
 
 ## Evidence
-Source archive c03604ad184a154c90757ef805445b997ddbad92 on the remote experiment
-work branch retains PLANNING_SELECTIVE_INTEGRATION_20261013.md,
-RUNTIME_SELECTIVE_INTEGRATION_20261013.md and their hashed receipts.
-Read them through Git; they are not copied wholesale into main.
+Start3194848e remotely verified inmc00c2; source archivec03604ad is published.
+See task.json immutable source-byte bindings and separate executable-bit override.
+REPAIR_SCOPE.md records evidence, limits and ingestion destinations.
+validate_selected_repairs.py checks byte/mode/scope/constraints, registry,
+instantiated planning examples and direct executable CLI.
+Nine runtime subprocess tests cover switch controls and worker-local abort.
 
 ## Next
-Publish this start checkpoint and verify upstream equality; then import only
-the declared six files, add narrow self-contained validation, validate and push.
-Before integration fetch the target, attest exact validated source/target,
-prepare target-owned merged state in the no-ff merge tree, validate that final
-tree, and push/verify main. No unvalidated state commit after the merge.
+Content94851c0b passed tests; push00d4 timed out, remote unknown.
+Finish registry checks, then bind the exact content commit in completed
+evals,ready task and integration evidence,then validate/push that ledger.
+Fetch target and source again; validate the target-owned merged state in the
+final no-ff merge tree BEFORE committing/pushing main. Do not merge whole HYPIC.
 
-## Claims and recovery
-One current-thread integrator owns the lock recorded in task.json. Existing
-experiment worktree/drafts stay untouched. Three registered worktrees are below
-the repository budget8. Never recreate an existing worktree after tool timeout.
-Retain original base and checkpoint provenance; stop on remote drift/failed gates.
+## Recovery and retention
+Original experiment and two untracked observer drafts remain untouched.
+One current-thread integrator retains its declared lock. Reclaim this worktree
+only after exact-source main integration,pushed reachability and released claims.
+Remote work branch retained. Do not discard original source bindings or base.

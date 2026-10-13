@@ -68,9 +68,22 @@ def direct_cli():
         need(r.returncode==2,"direct CLI fail-closed")
     finally:case.doCleanups()
     return 2
+def registry():
+    files=list(REPO.glob("**/.agents/skills.registry.yaml"))
+    need(files==[REPO/".agents/skills.registry.yaml"],"unexpected component registry; review scope")
+    rows=yaml.safe_load(files[0].read_text())["skills"]
+    ids=[r["id"] for r in rows]
+    need(len(ids)==len(set(ids))==29,"registry identity/count")
+    need(set(ids)=={p.parent.name for p in (REPO/".agents/skills").glob("*/SKILL.md")},"registry filesystem agreement")
+    for row in rows:
+        need(row["status"] in ["stable","experimental","deprecated","retired"],"registry status")
+        text=(REPO/row["path"]/"SKILL.md").read_text()
+        fm=yaml.safe_load(re.match(r"---\n(.*?)\n---",text,re.S).group(1))
+        need(fm["name"]==row["id"] and fm["description"],"Skill discovery identity")
+    return len(rows)
 def main():
     task=json.loads((HERE/"task.json").read_text())
-    result=dict(changed_paths=scope(task),planning_controls=planning(),direct_cli_controls=direct_cli(),
+    result=dict(changed_paths=scope(task),registry_entries=registry(),planning_controls=planning(),direct_cli_controls=direct_cli(),
         selected_repair_files=len(task["selected_files"]),device_acceptance=False,all_skill_acceptance=False)
     print(json.dumps(result,sort_keys=True))
 if __name__=="__main__":main()
