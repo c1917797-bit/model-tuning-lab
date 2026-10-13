@@ -1,5 +1,20 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-13 retained quality identity and retry evidence closure
+
+HYPIC_R19_RETAINED_METADATA_20261013.md and replay01c3 recover four historical
+vLLM0.23.0 engine logs and NPU25.2.0 display observations; four logged engine
+configs match. Logs have638/638/3957/3957 successful POST records, not a
+per-request client-attempt ledger. Frozen evaluator counterexample proves
+1/2/3 attempts can persist identical success rows. Actual retries remain
+unknown; no tokenizer-byte/complete-driver claim or historical backfill.
+Do not repeat inspection of these same logs or rerun quality for metadata.
+This closes a bounded evidence question, not full Skill conformance:
+9 bounded/20 partial, r19 negative verdict and all old roots remain.
+No device job, source change, observer/GDN expansion or auth retry.
+Current-source descriptive performance still awaits user choice; deadline
+08:47:14UTC Oct13 unchanged. Main/remote not synced.
+
 ## 2026-10-13 existing-profile timeline analysis (no device rerun)
 
 HYPIC_EXISTING_PROFILE_TIMELINE_20261013.md records post-hoc c12060c
