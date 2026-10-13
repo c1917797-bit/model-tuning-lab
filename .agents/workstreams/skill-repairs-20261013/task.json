@@ -8,7 +8,7 @@
   "remote": "origin",
   "worktree": "/cache/cch/model-tuning-lab-skill-repairs-20261013",
   "execution_state": "completed",
-  "integration_state": "not-ready",
+  "integration_state": "ready",
   "original_base": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "source_archive_commit": "c03604ad184a154c90757ef805445b997ddbad92",
   "objective": "Integrate the validated planning example and existing main runtime-template repair without importing experimental HYPIC code.",
@@ -173,16 +173,16 @@
     "git diff --check"
   ],
   "retention": "Retain remote work branch; reclaim owned clean worktree only after main push, reachability and claim release proof",
-  "resume": "Offline repair validation is complete. Do not rerun device work. When remote access returns, fetch/verify and publish this work branch, bind the exact fetched ready tip, recheck main and validate target-owned merged tree before no-ff merge and main push.",
+  "resume": "Push this readiness ledger, fetch its exact remote tip, then validate that exact source in target-owned merged tree before no-ff main commit/push. No further device work.",
   "validated_content_commit": "f9af6d162b34ceaf96179ecbd963d8b90172693c",
   "mode_overrides": {
     "scripts/validate_monkeypatch_package.py": "100755"
   },
   "mode_override_reason": "mc00d2 direct Skill command failed PermissionError on source mode100644. Preserve original source binding; derive only executable bit with new direct-CLI controls.",
   "publication": {
-    "state": "unverified-timeout",
-    "last_push_operation": "exec-00000000000000d7",
-    "last_read_operation": "exec-00000000000000dc",
-    "remote_equal": false
+    "state": "verified",
+    "published_checkpoint": "90c64c80a75b239bbbec65478547128e2f450ad0",
+    "operation": "exec-00000000000000e2",
+    "remote_equal": true
   }
 }

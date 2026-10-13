@@ -1,13 +1,13 @@
 {
   "schema": "mst-integration-evidence/v1",
-  "state": "not-ready",
+  "state": "ready",
   "target_parent": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
-  "validated_source": null,
+  "validated_source": "90c64c80a75b239bbbec65478547128e2f450ad0",
   "main_changed": false,
   "source_archive": "c03604ad184a154c90757ef805445b997ddbad92",
   "validated_content_commit": "f9af6d162b34ceaf96179ecbd963d8b90172693c",
-  "publication_verified": false,
-  "reason": "Push and read-only remote-ref verification timed out; exact published source cannot be attested.",
+  "publication_verified": true,
+  "reason": "mc00e2 normal push/fetch verified divergence 0/0; current main still equals original target parent. Readiness ledger itself requires normal publication before integration.",
   "validation": {
     "operation": "exec-00000000000000d7",
     "exit_code": 0,
@@ -19,5 +19,5 @@
     "device_acceptance": false,
     "all_skill_acceptance": false
   },
-  "next": "Verify exact fetched work branch tip and current main parent, then final-tree merged-state tests before main update."
+  "next": "Push this readiness ledger, fetch its exact remote tip, then validate that exact source in target-owned merged tree before no-ff main commit/push. No further device work."
 }
