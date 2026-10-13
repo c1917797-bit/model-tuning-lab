@@ -1,0 +1,24 @@
+schema: mst-practice-iteration/v1
+id: hypic-remaining-skills-onboarding-20261013
+repository: model-tuning-lab
+status: in_progress
+date: "2026-10-13"
+validated_commit: f8113561030557594e19df4bba391cd92518bac3
+stage_goal: Verify exact-main repository onboarding for the newly redirected remaining-Skill acceptance phase without NPU work.
+changes:
+  - type: validation
+    description: Retain an isolated exact-main checkout and structured onboarding evidence instead of inferring functional acceptance from prior reports.
+    files:
+      - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-cases/mst-repo-onboarding.json
+validation_commands:
+  - "bash scripts/validate-mst.sh"
+  - "Compare exact-main registry IDs with all actual Skill directories and entrypoints; reject missing or orphan Skills."
+  - "Report repository identity, backlog tasks, last commit and structural changes from the retained acceptance checkout."
+lessons_ingested: []
+scope:
+  main_commit: ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2
+  human_direction: Stop further HYPIC quality work and validate remaining Skills independently.
+  clone_source: Local object database; no GitHub authentication or remote freshness claim.
+  admission: New isolated acceptance checkout, not an authoritative maintenance repository.
+  no_npu_work: true
+  no_algorithm_outcome_prerequisite: true
