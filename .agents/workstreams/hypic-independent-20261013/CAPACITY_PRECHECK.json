@@ -1,0 +1,26 @@
+{
+  "schema": "hypic-independent-capacity/v1",
+  "operation": "exec-0000000000000156",
+  "model": {
+    "path": "/cache/efim/Qwen3.6-27B",
+    "actual_architecture": "Qwen3_5ForConditionalGeneration",
+    "config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+    "index_sha256": "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b",
+    "dtype": "BF16",
+    "linear_layers": 48,
+    "full_attention_layers": 16
+  },
+  "model_total_tensor_bytes": 55562855904,
+  "tp2_weight_gib_lower_bound": 25.87347100675106,
+  "tp2_private_kv_gib_at_32768": 1,
+  "tp2_recurrent_state_gib_per_request": 0.0703125,
+  "two_instance_fit": "UNPROVEN",
+  "excluded_costs": [
+    "public segment cache",
+    "graph and workspaces",
+    "runtime reserved HBM",
+    "uneven/replicated model partitions",
+    "service capacity"
+  ],
+  "next": "Measure native-only dual-TP2 load and actual requests; no previous HYPIC plugin allowed."
+}

@@ -1,0 +1,157 @@
+{
+  "schema": "mst-workstream/v1",
+  "task_id": "hypic-independent-20261013",
+  "owner": "Codex / c1917797-bit",
+  "created_at": "2026-10-13T19:36:44Z",
+  "branch": "work/hypic-independent-20261013",
+  "target_branch": "main",
+  "remote": "origin",
+  "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+  "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
+  "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
+  "execution_state": "started",
+  "integration_state": "not-ready",
+  "objective": "Independently reimplement the complete HYPIC method from the paper on the selected 27B checkpoint and validate Paper-to-Ascend through real Ascend execution.",
+  "authority": {
+    "independent_algorithm_and_operators": "Human explicitly requested a fresh end-to-end paper implementation without reusing successful HYPIC code",
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "only_model": "27B; human rejected smaller-model C3 fallback",
+    "deployment": false
+  },
+  "paper": {
+    "url": "https://arxiv.org/html/2607.01299v2",
+    "revision": "2607.01299v2",
+    "title": "HYPIC: Accelerating Hybrid-Attention LLM Serving with Position-Independent Caching",
+    "reference_source_policy": "Paper equations and ordinary framework APIs only; no copied/imported existing HYPIC algorithms, kernels, scheduler or plugin"
+  },
+  "scope": {
+    "required_mechanisms": [
+      "C1 state composition including convolution boundary warmup",
+      "C2 KV relocation and seam propagation through hybrid layers",
+      "C3 two real 27B instances with cold-segment scatter, transfer and combine",
+      "public/private pool ownership, PDC coexistence, capacity and eviction",
+      "paired quality, repeated performance, mechanism ablations and rollback"
+    ],
+    "identity": "Independent Ascend/vLLM faithful-port candidate; SGLang/NIXL backend adaptation must be declared",
+    "unavailable_original_evidence": [
+      "Private Prod-RAG trace not supplied",
+      "Original four-model H20 numerical matrix is outside selected 27B/0-3 hardware scope"
+    ],
+    "no_existing_hypic_imports": true,
+    "no_model_quantization_or_training": true
+  },
+  "model": {
+    "path": "/cache/efim/Qwen3.6-27B",
+    "actual_architecture": "Qwen3_5ForConditionalGeneration",
+    "config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+    "index_sha256": "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b",
+    "dtype": "BF16",
+    "linear_layers": 48,
+    "full_attention_layers": 16
+  },
+  "milestones": [
+    {
+      "id": "M0",
+      "name": "Paper identity, independent derivation, parity and acceptance contract",
+      "state": "in-progress"
+    },
+    {
+      "id": "M1",
+      "name": "Prove two TP2 27B instances fit and execute on physical0-1/2-3",
+      "state": "pending"
+    },
+    {
+      "id": "M2",
+      "name": "Independent CPU reference and actual-shape NPU primitives",
+      "state": "pending"
+    },
+    {
+      "id": "M3",
+      "name": "C1/C2 service package, worker activation and semantic Canary",
+      "state": "pending"
+    },
+    {
+      "id": "M4",
+      "name": "C3 real-instance LPT scatter, transport pipeline and combine",
+      "state": "pending"
+    },
+    {
+      "id": "M5",
+      "name": "Clean repeated performance and ablations",
+      "state": "pending"
+    },
+    {
+      "id": "M6",
+      "name": "Paired public-task quality and robustness",
+      "state": "pending"
+    },
+    {
+      "id": "M7",
+      "name": "Disable/uninstall/restart, independent audit, Skill evidence and published handoff",
+      "state": "pending"
+    }
+  ],
+  "frozen_git_blobs": {
+    "AGENTS.md": "4d83309e9751b6972e6844b8ecf9492c45bd6b45",
+    ".agents/git-policy.yaml": "e13acac7e842ca710fda0197c516eccb458dfc0e",
+    ".agents/skills/mst-parallel-workstreams/SKILL.md": "c47b989bc006561d347e0fbfe5d59026fb8e91e0"
+  },
+  "claims": [
+    {
+      "type": "file",
+      "path": ".agents/workstreams/hypic-independent-20261013",
+      "mode": "exclusive"
+    },
+    {
+      "type": "file",
+      "path": "src/model_tuning_lab/hypic_independent",
+      "mode": "exclusive"
+    },
+    {
+      "type": "semantic",
+      "name": "Independent HYPIC paper reconstruction on27B",
+      "mode": "exclusive"
+    },
+    {
+      "type": "knowledge",
+      "path": ".agents/HANDOFF.md",
+      "mode": "exclusive",
+      "actor": "serialized target integrator only"
+    },
+    {
+      "type": "strategy",
+      "path": ".agents/git-policy.yaml",
+      "mode": "read"
+    },
+    {
+      "type": "resource",
+      "name": "physical-npu0-3",
+      "mode": "shared",
+      "admission": "Only actual idle physical processes, foreign jobs untouched; exact owned services only"
+    }
+  ],
+  "resource_leases": {
+    "physical_npus": [],
+    "service_ports": [],
+    "state": "No active device lease; every future start needs fresh process/port guard"
+  },
+  "generation_policy": {
+    "non_thinking_max_output_tokens": 1024,
+    "thinking_max_output_tokens": 2048,
+    "default_enable_thinking": false,
+    "baseline_candidate_settings_identical": true,
+    "performance_fixed_output_tokens": 1024
+  },
+  "progress_policy": {
+    "reuse": "Only same-identity verified unit evidence; never import old campaign outcomes as new results",
+    "review": "Review critical path and gate progress every milestone; 24-hour review is not permission to stop unfinished scope or change paper",
+    "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
+  },
+  "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
+  "next_action": "Publish discovery start checkpoint; inspect pinned official framework and build a fresh capacity-only smoke contract without old HYPIC mounts."
+}
