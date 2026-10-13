@@ -1,0 +1,15 @@
+{
+  "schema": "mst-knowledge-proposals/v1",
+  "proposals": [
+    {
+      "id": "explicit-repair-ingestion",
+      "classification": 5,
+      "decision": "proposed",
+      "destination": ".agents/workstreams/skill-repairs-20261013/knowledge-proposals.json",
+      "trigger": "Reconcile demonstrated maintenance repairs into main",
+      "different_action": "Make all four ingestion questions explicit while preserving historical decisions",
+      "verification": "Source-bound additive-only audit plus negative controls and structure validation"
+    }
+  ],
+  "global_handoff_owner": "integrator"
+}
