@@ -85,6 +85,16 @@ Before selecting a successor after any failure, apply
 A proved adaptation defect requires repair and regression, not paper rejection;
 unknown causes require discriminating evidence and remain inconclusive.
 
+When the user permits combined techniques, apply the performance target to the
+final combination, not automatically to every component. Retain a correctly
+verified, repeatable sub-target gain as a component candidate; historical
+single-technique promotion thresholds still describe their old experiments.
+Preregister a new combination ticket and matched dense/A/B/A+B measurements.
+Do not sum speedup percentages. Audit cache ownership, graph keys, lifetime,
+allocation and numerical interactions before combining hooks; revalidate the
+combined implementation and final task quality, even when A and B passed alone.
+No component or combination is accepted without its actual required evidence.
+
 ## Ready-before-resource execution rule
 
 Maintainer instruction2026-10-06: prepare the next algorithm migration while
@@ -148,6 +158,11 @@ load. This rule does not guarantee the first real-device attempt will pass.
   evidence/release only owned resources, then dispatch the admitted successor
   without waiting for report prose. Preserve proven OFF/calibration artifacts
   when only a missing arm is needed; never repeat expensive valid work blindly.
+  Check the actual agent status before replenishing work: a message-only call
+  does not restart a completed or errored preparer. Use the execution-triggering
+  follow-up, then verify it is running. If capacity prevents continuation, retain
+  its existing files and transfer the missing narrow gate to an available owner;
+  do not count queued messages or a source delivery as active preparation.
 - A real-device failure retains the first raw-before/exception/nullable-after
   and has a scoped implementation diagnosis. No unchanged deterministic retry,
   relaxed threshold, fake padded batch, dummy utilization or paper-wide no-go

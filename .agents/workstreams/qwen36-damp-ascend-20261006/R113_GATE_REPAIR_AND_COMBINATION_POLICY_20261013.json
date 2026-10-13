@@ -1,0 +1,134 @@
+{
+  "schema": "ascend.gate-repair-and-combination-policy/v1",
+  "window": {
+    "start_epoch": 1791835594,
+    "cutoff_epoch": 1791878794,
+    "not_extended": true
+  },
+  "acceptance": {
+    "final_combined_e2e_speedup_min": 1.1,
+    "individual_component_minimum_not_automatically_1_10": true,
+    "matched_arms": [
+      "dense",
+      "A",
+      "B",
+      "A+B"
+    ],
+    "formal_pairs": 3,
+    "performance_output_tokens": 1024,
+    "final_tasks": [
+      "LongBench-v2",
+      "GSM8K"
+    ],
+    "thinking": false,
+    "max_tokens": 2048,
+    "normal_EOS": true,
+    "report_loss_units": [
+      "percentage_points",
+      "relative_percent"
+    ],
+    "latest_allowed_loss_each": 1,
+    "numerical_gates_unchanged": true
+  },
+  "previous_failure": {
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-formal-013-normalized-r110-main-003",
+    "host_result_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-formal-013-normalized-r110-main-003/HOST_RESULT.json",
+      "bytes": 3061,
+      "sha256": "4dbdd138f04a672d74c49d8e235c301956e00ebf96bb9d1313beffbbda118899"
+    },
+    "first_fault_utc": "2026-10-13T05:34:40Z",
+    "failure_scope": "real four-rank worker/weights reached; pre-capture warmup writer descriptor guard failed before FULL47",
+    "actual_old_descriptor_values": "not retained; unknown",
+    "source_diagnosis": "native FULL-target warmup forces NONE and default descriptor lacks num_reqs/uniform; original writer bind still requires actual exact-B uniform descriptor",
+    "own_container": "5d648b145c50759feb43d3232c625d87ec60d1744e572819c18e5532fa23157a",
+    "stopped_retained_utc": "2026-10-13T05:40:26.79620647Z",
+    "released_verified": true,
+    "not_relabelled_PASS": true
+  },
+  "source_repair": {
+    "manifest": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R87/skvq-normalized-full47-v1-005/SOURCE_MANIFEST.json",
+      "bytes": 5194,
+      "sha256": "145f6a270e71b42f5b7c9f2b917603d56f337d608b21788ec614a1a685a8fb88"
+    },
+    "only_changed_compute_site": "capture writer binding; genuine native uniform unpadded FULL-target NONE dummy may use original bind_eager",
+    "actual_native_frame_and_context_identity_required": true,
+    "FULL_original_strict_bind_retained": true,
+    "math_controls_epochs_not_changed": true,
+    "same_image_source_operation": "exec-00000000000002a9",
+    "actual_source_tests": 36,
+    "same_image_source_report": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-normalized005-admission-r113-main-001/SOURCE16.json",
+      "bytes": 6272,
+      "sha256": "0a401d3ab3768ef137994f2c383555b65913872eccf14987044baeb3844b211d"
+    },
+    "native_full47_qualification": false
+  },
+  "precision_control": {
+    "actual_CPU_operation": "exec-00000000000002a8",
+    "report": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-power2-cpu-r113-main-001/diagnostic-001/REPORT.json",
+      "bytes": 2365,
+      "sha256": "149de821ceb3679ec0384750d20082baf5fb7609ff785edec92d077a9fe0980a"
+    },
+    "factors": {
+      "query": 2,
+      "key": 0.5,
+      "value": 2,
+      "output_inverse": 0.5
+    },
+    "all_full_physical_half_roundtrip_exact": true,
+    "complete_FP32_QK_and_ideal_AV_inverse_bits_match": true,
+    "original_independent_golden_unchanged": true,
+    "CPU_container_stopped_retained": "64a0b8b269e9737098df1c9b4def49e77c88ab62b0c460f9e9a9ee9f0b0baa41",
+    "NPU_control_run": false,
+    "matrix96_qualified": false,
+    "model_ready": false
+  },
+  "current": {
+    "operation": "exec-00000000000002ae",
+    "output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-formal-013-normalized-r111-main-001",
+    "actual_owned_CID": "2eb432e65bebf49b77be888925f0b3d3f4283741618557eea60042ce278ac6e2",
+    "physical_to_logical": {
+      "4": 0,
+      "5": 1,
+      "6": 2,
+      "7": 3
+    },
+    "observed_utc": "2026-10-13T06:34:22Z",
+    "stage": "running; four ranks weights loaded; compile/profile preceding graph warmup",
+    "observed_worker_PIDs": [
+      1781677,
+      1781678,
+      1781679,
+      1781680
+    ],
+    "phase_budget_seconds": 5400,
+    "cleanup_seconds": 90,
+    "numerical_PASS": false,
+    "performance_result": false,
+    "final_task_result": false,
+    "continuous_utilization": "not measured; snapshots do not prove zero-idle window"
+  },
+  "lessons": [
+    "message-only calls do not execute completed/errored preparers; trigger follow-up and verify actual status",
+    "cold source/module qualification is not native capture or numerical acceptance",
+    "representation/precision hypotheses must preserve original oracle and task limit must not become tensor tolerance",
+    "retain repeatable sub-target components and verify combinations directly; do not add percentages or blindly combine competing KV owners"
+  ],
+  "pending": {
+    "Norm005_actual_warmup_and_FULL_capture": true,
+    "full47_matrix_and_independent_whole": true,
+    "matched_screen_and_three_pairs": true,
+    "full_tasks": true,
+    "portability_and_final_plugin_delivery": true,
+    "Power2_NPU_owner_bridge_and_single_frame": true
+  },
+  "publication": {
+    "previous_local_HEAD": "856b22433bc2632bbc59af81379838a7132d4054",
+    "previous_remote_confirmed_HEAD": "a0e4c59a5556dcd1a306a68dfce062c3868f65cf",
+    "previous_push_timed_out": true,
+    "no_remote_sync_claim": true
+  }
+}

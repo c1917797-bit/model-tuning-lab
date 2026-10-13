@@ -1,0 +1,99 @@
+{
+  "schema": "skvq.normalized-common-adapter/v1",
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R87/skvq-normalized-full47-v1-005",
+  "donor_ref": {
+    "bytes": 158126,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-full47-r87-v1-002/SOURCE_MANIFEST.json",
+    "sha256": "a533a37184c274ce62d3c13ed69abd268dcfa7baef9bdbfcec5b605e9978f6e9"
+  },
+  "configuration_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-formal-013-r87-main-full47-001/round0-candidate/CONFIG_SMOKE_001.json",
+    "bytes": 3499,
+    "sha256": "a62f797af0c92b69280d73d80bb6ef44dee80f9105884ef74cfe5e3d0509912e"
+  },
+  "engine_ref": {
+    "bytes": 175813,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-formal-provider-r87-v1-013/SOURCE_MANIFEST.json",
+    "sha256": "ce2d2e21a245bdc47afa87794beadaa2591618305a323e5132d744c2e26118f0"
+  },
+  "files": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R87/skvq-normalized-full47-v1-005/host.py",
+      "bytes": 212,
+      "sha256": "439a321b5da29d2790629815881023e89bd3d62de133ab55d2803c7b141109cc"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R87/skvq-normalized-full47-v1-005/guest.py",
+      "bytes": 214,
+      "sha256": "07e0e10d1585b9c9c53756618b04dc775b33af3f8004de2fe831721d6290874f"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R87/skvq-normalized-full47-v1-005/independent.py",
+      "bytes": 226,
+      "sha256": "5fc0227ad75730057b9e56901bb3615f90b14162808371c5c48bb8f582af4df4"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R87/skvq-normalized-full47-v1-005/whole.py",
+      "bytes": 214,
+      "sha256": "ad4e43e01e9b07e0863170e21ef23bf2e092cf2e5ed657e7d611153b979bd4f4"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R87/skvq-normalized-full47-v1-005/skvq_normalized_worker.py",
+      "bytes": 197,
+      "sha256": "b422809947c9e4eed3b0415e43cc70dd1a0ed51ecd8e1f3b28bd859a91d62fb1"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R87/skvq-normalized-full47-v1-005/bridge.py",
+      "bytes": 13402,
+      "sha256": "44029b95b49d9ba33e3d7d9fee3eaa5dcd283f0c693a0c9bfa815f96172f0fa1"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R87/skvq-normalized-full47-v1-005/software_check.py",
+      "bytes": 9514,
+      "sha256": "79386bf3620d1c06908c03ffead15e767a008818af34f7dfac481b0448faedda"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R87/skvq-normalized-full47-v1-005/warmup.py",
+      "bytes": 7113,
+      "sha256": "ccc9636f8e8a1e78da22dd2d594665677dad2969bfcc00a8c250ca09a88713fd"
+    }
+  ],
+  "clock": {
+    "start": 1791835594,
+    "cutoff": 1791878794
+  },
+  "changes": [
+    "common and validate_runner warmup2->1 inverse-AST",
+    "single source-bound common resolver for private graph and spawned worker",
+    "preserve requested pa_shape_list and separately require complete actual expanded additional",
+    "actual normalized configuration before unchanged production assertion",
+    "new readonly source closure and explicit adapter attribution",
+    "restore new spawn resolver root after actual immutable S.source",
+    "unique skvq_normalized_worker importlib entry; original formal_source provenance guard unchanged",
+    "exact worker resolver string in original server_argv and configuration, full inverse AST",
+    "actual wrapper module file origin retained; unchanged original worker body compiled from original Ref",
+    "replace unique-namespace raw exec with original strict S.module formal_worker import and export original class",
+    "reject every preexisting original module including same-file partial; preserve it on negative",
+    "source real importlib defaultOFF provenance/cleanup and six original methodpins; immutable receiver guards retained",
+    "single capture writer binding inverse-AST; original FULL writer unchanged",
+    "only source-bound native uniform FULL-target NONE dummy warmup uses original bind_eager",
+    "actual native callback final scalar/CPU metadata/context identity and QKV snapshot before acceptance",
+    "no descriptors padding math controls epochs changed; no numerical qualification inferred"
+  ],
+  "math_changed": false,
+  "native_memory_bytes": 10737418240,
+  "auxiliary_ceiling_bytes": 2147483648,
+  "guest_RAM_bytes": 68719476736,
+  "actual_qualifications": {
+    "same_image_source": null,
+    "native_config": null,
+    "all47": null,
+    "performance": null,
+    "tasks": null
+  },
+  "supersedes_adapter_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R87/skvq-normalized-full47-v1-004/SOURCE_MANIFEST.json",
+    "bytes": 4555,
+    "sha256": "786f865b0f97477567538fe943b1f0a0ff78bd8d9d8d8be658ee12786daa5ad8"
+  }
+}

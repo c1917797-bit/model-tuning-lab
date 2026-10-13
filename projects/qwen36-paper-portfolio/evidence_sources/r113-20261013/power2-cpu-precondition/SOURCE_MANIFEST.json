@@ -1,0 +1,32 @@
+{
+  "schema": "adakv.power2-FP16-CPU-precondition-source/v1",
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R87/adakv-fia-power2-precondition-v1-001",
+  "default_enabled": false,
+  "window": {"start": 1791835594, "cutoff": 1791878794},
+  "files": {
+    "control.py": {"path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R87/adakv-fia-power2-precondition-v1-001/control.py", "bytes": 8967, "sha256": "be1b97200fc4a28c4b238574305f8e2018a873fd3a6b3f2682145f149d5d0baa"},
+    "test_control.py": {"path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R87/adakv-fia-power2-precondition-v1-001/test_control.py", "bytes": 3332, "sha256": "4614255c248a16778caeafb2fd494003a63e793fa893d8c936adf596e95df2cb"},
+    "README.md": {"path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R87/adakv-fia-power2-precondition-v1-001/README.md", "bytes": 2832, "sha256": "d2644efdea3e64ac021748380a74f8e4f797b2c7bb5eec1720c1e6258d9cf291"}
+  },
+  "dependencies": {
+    "original_raw": {"path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-paged-r108-numeric-main-002/component-002/first-failure.pt", "bytes": 26163299, "sha256": "b2c238938dccdcacb611f66728bae0fe3e2c13ce757d420d67fb85641f76b435"},
+    "unchanged_independent_reference": {"path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R87/adakv-paged-numeric-bootstrap-v1-002/numeric.py", "bytes": 12739, "sha256": "035535ce19d6fd426d9f1fd94faad37a08e696be744df68cfbaf049c761153e3"},
+    "original_failed_report": {"path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-paged-r108-numeric-main-002/component-002/REPORT.json", "bytes": 17900, "sha256": "7923390391b6a0305f6b0ca7ca99e9a02442481c9e43576d820990069ac7190d"},
+    "actual_direct_half_exactness": {"path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-bf16-cpu-attribution-r112-main-001/FLOAT16_SOURCE_EXACTNESS_001.json", "bytes": 1342, "sha256": "4d527a03fedca5ade88ccf476a41d8392e357b15d87b0ba9fd14d8114832ef56"},
+    "actual_CPU_attribution": {"path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-bf16-cpu-attribution-r112-main-001/diagnostic-001/REPORT.json", "bytes": 9114, "sha256": "beab5d4698ba9bbd6827789a4bc1c50d223bdde2821d96aca1893508a7bd3aa6"}
+  },
+  "input_factors": {"query": 2.0, "key": 0.5, "value": 2.0},
+  "output_inverse_FP32_factor": 0.5,
+  "limits_unchanged": {"relative_rms": 0.005, "cosine": 0.99998},
+  "actual_scaled_precondition_ref": null,
+  "MAIN_external_source_owner_resource_admission_required": true,
+  "future_native_caller": null,
+  "CPU_proposal": {"cpu": 1, "memory_bytes": 2147483648, "child_seconds": 120, "cleanup_seconds": 60, "physical_devices": []},
+  "software": {"scope": "stdlib IEEE/source controls only; no actual saved-frame computation", "corrected_operation": "6d5a56", "tests_passed": 8, "initial_operation": "7a9d1b", "initial_test_errors": 1, "initial_exec_exit_zero_masked_test_failure": true},
+  "NPU": false,
+  "numerical_qualified": false,
+  "matrix96_qualified": false,
+  "model_ready": false,
+  "performance_ready": false,
+  "task_ready": false
+}
