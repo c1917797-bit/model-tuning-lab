@@ -2,7 +2,7 @@
 import hashlib,inspect,threading,weakref
 from pathlib import Path
 from independent_request_map import freeze_request_slices
-from independent_runner_context import install_runner_context
+from independent_runner_context import install_runner_context,CURRENT_PROMPT_TOKENS
 from independent_cache_map import freeze_cache_slices
 from independent_linear_map import freeze_prefill_linear_slices
 BLOCK_TABLE_SHA256="8f77809c12af3bd9d56974edbbe5c792995f2620aadfe62411806f2e68d2ef0a"
@@ -47,6 +47,8 @@ def freeze_native_runner(runner,args,kwargs):
     scheduled=args[1] if len(args)>1 else kwargs['num_scheduled_tokens']
     scheduled=tuple(int(x) for x in scheduled[:n])
     computed=tuple(int(x) for x in runner.input_batch.num_computed_tokens_cpu[:n])
+    from independent_prompt_snapshot import freeze_prompt_tokens
+    CURRENT_PROMPT_TOKENS.set(freeze_prompt_tokens(ids,runner.requests))
     boundaries=tuple(int(x) for x in runner.query_start_loc.cpu[:n+1].tolist())
     with lock:
         step=steps.get(runner,0)+1;steps[runner]=step

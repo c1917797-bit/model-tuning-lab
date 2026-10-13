@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Latest integration checkpoint: immutable runner prompt snapshots now available in
+request-scoped context; source mapping confirms inherited GPU runner records
+CachedRequestState.prompt_token_ids.69 CPU controls0021 pass. CanonicalPublicStage
+wires exact public token identity/layer/rank selector to bounded C1 material sink
+and removable GDN producer; rejects wrong source/token identity, skips decode,
+partial prefill and existing material. New stage not device-validated.
+No NPU job; next freeze canonical raw-token service request and activate public
+producer on one real request, then connect private C1 reuse and C2/seam.
+
 Latest: exact-token canonical/relocated segment selector and digest implemented.
 67 CPU controls001d pass; missing/ambiguous segments, wrong canonical context,
 partial Prefill and PDC overlap rejected by first-stage helper. These restrictions

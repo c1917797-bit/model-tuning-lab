@@ -2,6 +2,7 @@
 from contextvars import ContextVar
 from functools import wraps
 CURRENT_REQUEST_SLICES=ContextVar("independent_hypic_request_slices",default=None)
+CURRENT_PROMPT_TOKENS=ContextVar("independent_hypic_prompt_tokens",default=None)
 def install_runner_context(runner_class,freeze_from_runner,*,enabled=False,verify_source=None,after_prepare=None):
     if not enabled:return lambda:None
     if verify_source is None:raise ValueError("source verification required")
@@ -20,8 +21,11 @@ def install_runner_context(runner_class,freeze_from_runner,*,enabled=False,verif
     @wraps(execute)
     def wrapped_execute(self,*args,**kwargs):
         token=CURRENT_REQUEST_SLICES.set(None)
+        prompt_token=CURRENT_PROMPT_TOKENS.set(None)
         try:return execute(self,*args,**kwargs)
-        finally:CURRENT_REQUEST_SLICES.reset(token)
+        finally:
+            CURRENT_REQUEST_SLICES.reset(token)
+            CURRENT_PROMPT_TOKENS.reset(prompt_token)
     wrapped_prepare._independent_context_owned=True
     wrapped_execute._independent_context_owned=True
     runner_class._prepare_inputs=wrapped_prepare;runner_class.execute_model=wrapped_execute
