@@ -1,5 +1,17 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-13 current-source descriptive performance authorized
+
+User approved three paired4429e35 performance rounds despite r19 quality rejection.
+Read HYPIC_CURRENT_SOURCE_PERFORMANCE_PLAN_20261013.md and use
+current_source_performance_20261013.py; all six roots are new and exclusive.
+Offline preflight024f passed exact clean source, paired configuration and pins.
+No new device job yet. Next validate tests/structure, checkpoint, fresh ma/direct
+and actual physical0–3/8223 admission, then first no-cache/screen phase.
+Quality REJECT_OR_QUALIFY and no deployment remain. Do not repeat quality,
+observer/GDN, old performance roots or credential failures. No main/remote sync.
+Deadline08:47:14UTC Oct13 unchanged;9 bounded/20 partial Skills unchanged.
+
 ## 2026-10-13 retained quality identity and retry evidence closure
 
 HYPIC_R19_RETAINED_METADATA_20261013.md and replay01c3 recover four historical
