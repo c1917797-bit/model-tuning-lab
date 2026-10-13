@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import statistics
 from pathlib import Path
 
@@ -48,6 +49,42 @@ def verify_hash(path: Path, expected: str) -> None:
     require(actual == expected, f"raw artifact SHA256 drift: {path}")
 
 
+def screen_thresholds(baselines: list[dict], screen: dict) -> dict:
+    """Replay this historical screen; do not replace it with repeat medians.
+
+    The plan fixes the TPOT denominator to the baseline mean but does not
+    name a TTFT aggregation. Report that ambiguity rather than inventing a
+    new frozen ruler: compare each retained baseline, its mean and median.
+    """
+    require(len(baselines) == 3, "screen requires three frozen baselines")
+    def positive(row: dict, key: str) -> float:
+        value = float(row[key])
+        require(math.isfinite(value) and value > 0, "invalid screen metric: " + key)
+        return value
+    tpot = [positive(row, "tpot_weighted_ms") for row in baselines]
+    ttft = [positive(row, "ttft_p95_ms") for row in baselines]
+    candidate_tpot = positive(screen, "tpot_weighted_ms")
+    candidate_ttft = positive(screen, "ttft_p95_ms")
+    denominator = statistics.mean(tpot)
+    rulers = {f"run{i + 1}": value for i, value in enumerate(ttft)}
+    rulers.update(mean=statistics.mean(ttft), median=statistics.median(ttft))
+    passes = {name: candidate_ttft <= value * 1.10
+              for name, value in rulers.items()}
+    ttft_verdict = ("pass-for-all-retained-rulers" if all(passes.values())
+                    else "fail-for-all-retained-rulers" if not any(passes.values())
+                    else "ambiguous-ruler")
+    return {
+        "baseline_tpot_mean_ms": denominator,
+        "screen_tpot_reduction_percent": 100 * (denominator - candidate_tpot) / denominator,
+        "screen_tpot_pass": candidate_tpot <= denominator * 0.80,
+        "screen_ttft_p95_ms": candidate_ttft,
+        "ttft_baseline_rulers_ms": rulers,
+        "ttft_pass_by_ruler": passes,
+        "ttft_verdict": ttft_verdict,
+        "ttft_original_aggregation_unspecified": True,
+    }
+
+
 def verify() -> dict:
     record = yaml.safe_load(EXPERIMENT.read_text(encoding="utf-8"))
     require(record["id"] == "exp-20261007-hypic-npu03-cpu-binding-fix"
@@ -59,6 +96,8 @@ def verify() -> dict:
     baseline_root = Path(record["baseline_reuse"]["root"])
     candidate_root = Path(record["scope"]["artifact_root"]) / "no-cache"
     expected_config = None
+    baseline_summaries: list[dict] = []
+    screen_summary = None
     baseline_tpot: list[float] = []
     candidate_tpot: list[float] = []
     for index in (1, 2, 3):
@@ -74,6 +113,7 @@ def verify() -> dict:
             expected_config = raw["config"]
         require(raw["config"] == expected_config,
                 "baseline workload configuration drift")
+        baseline_summaries.append(summary)
         baseline_tpot.append(float(summary["tpot_weighted_ms"]))
     for phase, directory in PHASES:
         base = candidate_root / directory
@@ -108,11 +148,17 @@ def verify() -> dict:
                 and cleanup["owned_npus_released"] is True
                 and cleanup["port_released"] is True,
                 f"{phase}: owned-resource release unproven")
+        if directory == "screen":
+            screen_summary = summary
         candidate_tpot.append(float(summary["tpot_weighted_ms"]))
     baseline_median = statistics.median(baseline_tpot)
     candidate_median = statistics.median(candidate_tpot)
     improvement = 100 * (baseline_median - candidate_median) / baseline_median
-    require(improvement >= 20, "predeclared TPOT fail-fast gate not met")
+    require(screen_summary is not None, "screen summary missing")
+    screen_audit = screen_thresholds(baseline_summaries, screen_summary)
+    require(screen_audit["screen_tpot_pass"], "predeclared first-screen TPOT gate not met")
+    require(screen_audit["ttft_verdict"] == "pass-for-all-retained-rulers",
+            "historical screen TTFT pass is failed or ambiguous")
     for relative, expected in RETRY14_RECEIPTS.items():
         verify_hash(RETRY14_ROOT / relative, expected)
     verify_hash(RETRY14_REPORT, RETRY14_REPORT_SHA256)
@@ -156,6 +202,7 @@ def verify() -> dict:
         "baseline_median_ms": baseline_median,
         "candidate_median_ms": candidate_median,
         "median_tpot_reduction_percent": improvement,
+        "screen_threshold_audit": screen_audit,
         "raw_runs_verified": 6,
         "candidate_exact_output_and_cleanup_verified": 3,
         "case_scope": "CPU-binding-off no-cache performance only",

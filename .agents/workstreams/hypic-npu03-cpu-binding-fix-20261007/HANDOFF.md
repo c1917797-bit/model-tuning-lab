@@ -21,6 +21,10 @@ isolation evidence on physical0–3; no repeated runs of completed roots.
 
 ## 2. Current Focus
 
+Human direction2026-10-13: stop further HYPIC quality testing/causal diagnosis;
+retain the frozen results and validate remaining Skills independently. A
+positive HYPIC quality outcome is not a prerequisite for unrelated Skills.
+
 User policy update2026-10-13: future quality uses thinking=true/max2048 or
 thinking=false/max1024 (default), with identical mode/cap in both arms.
 See ascend-model-quality-evaluation and its two contract profiles. Existing
@@ -54,6 +58,10 @@ Global .agents/HANDOFF.md describes integrated history,not this unmerged result.
   0312 passed15 focused checks, historical replays,29 provenance and29 structure checks.
 
 ## 4. Current Action
+
+Inference-loop obligation review and first-screen threshold replay repair are
+complete; see INFERENCE_LOOP_OBLIGATION_REVIEW_20261013.md. Eight tests and
+six raw runs passed; original outcomes and9/20 acceptance are unchanged.
 
 Host-event gap association is complete; see HYPIC_HOST_GAP_ASSOCIATION_20261013.md.
 All8 existing traces analyzed; six tests passed. Temporal overlap is not causal

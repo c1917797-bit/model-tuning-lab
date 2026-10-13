@@ -1,5 +1,6 @@
 {
   "schema": "mst-real-task-skill-case/v1",
+  "stage_review_20261013": {"report":"INFERENCE_LOOP_OBLIGATION_REVIEW_20261013.md","replay_peer":"lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d","replay_operation":"exec-0000000000000034","tests_passed":8,"raw_runs_verified":6,"first_screen_tpot_reduction_percent":81.22383070023939,"ttft_original_aggregation_unspecified":true,"ttft_pass_for_all_retained_rulers":true,"acceptance_promoted":false,"new_device_work":false},
   "current_campaign_resume": {"campaign":"current4429-performance-20261013","aggregate_sha256":"67ba6cf14fc9bed993acbdf421eb438f22d56957f3e56baad170a4bb871e53fe","next_action_kind":"offline-evidence-review","new_device_work_authorized":false,"historical_observations_unchanged":true,"regression":"verify_completed_campaign_routes.py"},
   "skill": "ascend-inference-tuning-loop",
   "campaign_code": "P",
@@ -34,6 +35,8 @@
     "main_and_remote_integration_complete": false
   },
   "evidence": [
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_inference_screen_thresholds.py","sha256":"f605f461919509a41465bfbf4e1e945cd91022d3819bbac83bbda6ff9c986b7e"},
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/INFERENCE_LOOP_OBLIGATION_REVIEW_20261013.md","sha256":"2fd498ec4611a2f892b4e2be1ef3db44911a2c85da6e17b980dc3e559b83e994"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_completed_campaign_routes.py","sha256":"eb28a07040bba5b8cf2c6a3b6a2d2291cb174d20da3cf0b9f7cac79e34dc6f6a"},
     {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_completed_campaign_routes.py","sha256":"6b9e08a229a1227c43cc7aad54b38137962f7a900a78422a6f766c6edde156e4"},
     {
@@ -42,7 +45,7 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_inference_tuning_loop_case.py",
-      "sha256": "1c36d74b0bc73de63e404849a343e0e9ea7a5caf9f477bf9dd723d9511c14200"
+      "sha256": "b1ce24739600c2deba5292e3064592ea4f4eb6fd16c9ecea724edf1b4832e5f6"
     },
     {
       "path": ".agents/experiments/exp-20261007-hypic-npu03-cpu-binding-fix.yaml",
@@ -80,7 +83,7 @@
   },
   "replayable_regression_recorded": true,
   "boundary": "This is a validated bounded CPU-binding-off comparison plus a series of HYPIC activation and environmental isolation negatives, not full HYPIC acceptance or remote integration. Retry14's continuous guard captured foreign physical NPU1 use before health/scoring; zero rows means no performance result. The exact owned retry14 service was removed, while foreign work was untouched. These repeated environmental outcomes improve scheduling knowledge but neither pass nor fail the HYPIC technique. The main Skill's full continuous workflow remains partial.",
-  "next_gate": "Current4429 six-phase performance supplement and its independent aggregate are complete; r19 quality remains REJECT_OR_QUALIFY. No further phase, opportunistic device polling or new root is required for this campaign. Review existing planned/measured/decided/recovered checkpoints and remaining exact-main workflow obligations offline; unchanged remote authentication blocks push/integration, not evidence preservation. Historical r13/CPU-binding results remain source-scoped and immutable. A future genuinely needed experiment requires its own admission and is not authorized by this next_gate.",
+  "next_gate": "Exact-main seven-stage obligation review is complete; see INFERENCE_LOOP_OBLIGATION_REVIEW_20261013.md. First-screen TPOT uses the predeclared baseline mean; TTFT ambiguity is explicit and this historical run passes all retained rulers. Eight regressions and six raw runs replayed. Do not repeat completed stages or reviews to increase counts. Pre-edit opportunity/runtime identity gaps and historical stage-push timing cannot be reconstructed. Upstream equality and reviewed main integration await working authentication. Per human direction, do not pursue further HYPIC quality work; validate remaining Skills independently while preserving existing outcomes.",
   "drift_trigger": "Revalidate when the main Skill or registry blob, source/image/model/physical lane, workload, serving flags, benchmark/scorer, or any raw artifact hash changes.",
   "retry18_followup": {
     "attempt_root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-hotpath-cache10perf-hypic-only-repeat3-retry18",
