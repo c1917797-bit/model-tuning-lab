@@ -26,13 +26,15 @@
     "remote_push_and_primary_integration_verified": false
   },
   "evidence": [
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/REMOTE_PUBLICATION_RECEIPT_20261013.json","sha256":"4eab40a000bd46e300dcc988d115eaea580c2ec1972b67cde78c3360e1d9dd59"},
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/REMOTE_PUBLICATION_20261013.md","sha256":"037c0bece034fb241fd0b6944e17d432f8648220f77be4eb406b67ca674ce3e4"},
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/PARALLEL_WORKSTREAM_R13_STATE_CASE_20261009.md",
       "sha256": "a9292e304a7f07c830cf06e363ee83bc2043d708aa65bef1fbd3de6c911f69bc"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_handoff_current.py",
-      "sha256": "86d8f6ec93207accf25d9cc357973ee9748ae604b12117ba43c6008a2ab11a40"
+      "sha256": "9ba3902347050e457ec93b7c38e18012467fc5c75f0caa37f2fdba0317fa5868"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HOTPATH_CACHE10PERF_RETRY19_PREREGISTRATION_20261009.md",

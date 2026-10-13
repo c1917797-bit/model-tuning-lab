@@ -25,6 +25,8 @@
     "integrated_main_skill_changed": false
   },
   "evidence": [
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/REMOTE_PUBLICATION_RECEIPT_20261013.json","sha256":"4eab40a000bd46e300dcc988d115eaea580c2ec1972b67cde78c3360e1d9dd59"},
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/REMOTE_PUBLICATION_20261013.md","sha256":"037c0bece034fb241fd0b6944e17d432f8648220f77be4eb406b67ca674ce3e4"},
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/LOOP_FRAMEWORK_R13_HANDOFF_CASE_20261009.md",
       "sha256": "e99c6dd3fbd4a4069b0e90185023744d255064ce1c672b4959801396b2f36991"
@@ -43,7 +45,7 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_handoff_current.py",
-      "sha256": "86d8f6ec93207accf25d9cc357973ee9748ae604b12117ba43c6008a2ab11a40"
+      "sha256": "9ba3902347050e457ec93b7c38e18012467fc5c75f0caa37f2fdba0317fa5868"
     }
   ],
   "replayable_regression_recorded": true,

@@ -6,7 +6,7 @@ As of2026-10-13: device campaign terminal; broad Skill-validation goal incomplet
 Branch work/hypic-npu03-cpu-binding-fix-20261007; runtime source4429e35.
 Six-phase same-source performance is complete, not a quality pass.
 Current task.active_attempt=null; no performance controller remains active.
-Execution in-progress / integration not-ready. No main/remote synchronization.
+Execution in-progress / integration not-ready. Work branch published;main unchanged.
 29 cases:12 bounded verified,17 partial,0 missing. No all-Skill success claim.
 App heartbeat hypic is absent; do not recreate it for the finished supplement.
 
@@ -59,8 +59,8 @@ Global .agents/HANDOFF.md describes integrated history,not this unmerged result.
 
 ## 4. Current Action
 
-Runtime template five-file candidate passed nine CPU tests and exact-tree review;
-see RUNTIME_SELECTIVE_INTEGRATION_20261013.md. No main/NPU changes;12/17 unchanged.
+Push009f verified work branch atb5d9c939;main unchanged. See REMOTE_PUBLICATION_20261013.md.
+Next is selective integration;runtime five-file candidate passed nine CPU tests.
 
 Planning-schema selective integration candidate passed seven guards and a
 read-only exact-main apply check. See PLANNING_SELECTIVE_INTEGRATION_20261013.md;
@@ -105,9 +105,9 @@ evidence; this Git fixture is not that separate workflow.
    do not rerun completed HYPIC merely to improve acceptance counts.
 3. Record only demonstrated fixes and task-scoped acceptance; derive current
    counts from verified case evidence, never from structural checks alone.
-4. Remote state is UNKNOWN: latest read007f timed out after20 seconds; the
-   connected MCPGit list has no target repo. Do not repeat unchanged retries
-   or claim integration. Recover access,refresh target,then verify any push.
+4. Historical007f timed out;new009b/009f supersede the remote-unknown blocker:
+   target read and workstream push verified. Refresh refs before integration.
+   The connected MCPGit list has no target repo;use the verified host Git route.
 5. Fixed experiment deadline2026-10-13T08:47:14Z is unchanged. No new device
    stages are scheduled or authorized by this handoff.
 

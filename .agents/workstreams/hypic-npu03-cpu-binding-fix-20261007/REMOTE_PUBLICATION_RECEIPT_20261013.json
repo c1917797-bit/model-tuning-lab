@@ -1,0 +1,68 @@
+{
+  "schema": "mst-remote-publication/v1",
+  "repository": "c1917797-bit/model-tuning-lab",
+  "published_branch": "work/hypic-npu03-cpu-binding-fix-20261007",
+  "published_code_commit": "b5d9c9398f7fd4571c76b163490f83d609ced96f",
+  "remote_main_at_verification": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "mutation_scope": "normal push to existing workstream branch only",
+  "discovery": {
+    "args": [
+      "-B",
+      "-c",
+      "import subprocess, os, json, re, urllib.parse\nrepo=\"/cache/cch/model-tuning-lab-hypic-e2e-20261006\"\nurl=subprocess.check_output([\"git\",\"remote\",\"get-url\",\"origin\"],cwd=repo,text=True).strip()\nparts=urllib.parse.urlsplit(url)\nassert parts.hostname==\"github.com\" and parts.path.strip(\"/\") in {\"c1917797-bit/model-tuning-lab\",\"c1917797-bit/model-tuning-lab.git\"}\nenv=os.environ.copy()\nenv.update(GIT_TERMINAL_PROMPT=\"0\",GCM_INTERACTIVE=\"Never\",GIT_ASKPASS=\"/bin/false\",SSH_ASKPASS=\"/bin/false\")\nhelpers=subprocess.run([\"git\",\"config\",\"--get-all\",\"credential.helper\"],cwd=repo,text=True,capture_output=True).stdout.splitlines()\nprint(json.dumps({\"origin_expected_repo\":True,\"credential_helpers\":len(helpers),\"helper_shell_commands\":sum(h.startswith(\"!\") for h in helpers),\"url_has_userinfo\":bool(parts.username or parts.password)}),flush=True)\ncmd=[\"git\",\"-c\",\"credential.interactive=false\",\"-c\",\"credential.helper=\",\"-c\",\"http.connectTimeout=8\",\"-c\",\"http.lowSpeedLimit=1\",\"-c\",\"http.lowSpeedTime=15\",\"ls-remote\",\"--exit-code\",\"origin\",\"refs/heads/main\"]\ntry:\n r=subprocess.run(cmd,cwd=repo,env=env,capture_output=True,text=True,timeout=20)\n err=r.stderr.lower()\n reason=(\"prompt_disabled\" if \"terminal prompts disabled\" in err or \"could not read username\" in err else\n \"auth_rejected\" if \"authentication failed\" in err or \"403\" in err else\n \"remote_missing_or_private\" if \"repository not found\" in err else\n \"transport_failure\" if \"unable to access\" in err else \"other\")\n refs=[line for line in r.stdout.splitlines() if re.fullmatch(r\"[0-9a-f]{40}\\s+refs/heads/main\",line)]\n print(json.dumps({\"exit_code\":r.returncode,\"classification\":\"success\" if r.returncode==0 and refs else reason,\"main_refs\":refs}))\nexcept subprocess.TimeoutExpired:\n print(json.dumps({\"classification\":\"timeout\",\"seconds\":20,\"authentication_diagnosed\":False}))\n"
+    ],
+    "cancelled": false,
+    "command": "python3",
+    "cwd": "/cache/cch/model-tuning-lab-hypic-e2e-20261006",
+    "durationMs": 1388,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-000000000000009b",
+    "lane": "job",
+    "state": "completed",
+    "stderr": "",
+    "stdout": "{\"origin_expected_repo\": true, \"credential_helpers\": 0, \"helper_shell_commands\": 0, \"url_has_userinfo\": false}\n{\"exit_code\": 0, \"classification\": \"success\", \"main_refs\": [\"ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2\\trefs/heads/main\"]}\n",
+    "timedOut": false
+  },
+  "push_preflight": {
+    "args": [
+      "-B",
+      "-c",
+      "import subprocess,os,json\nrepo=\"/cache/cch/model-tuning-lab-hypic-e2e-20261006\"\nenv=os.environ.copy(); env.update(GIT_TERMINAL_PROMPT=\"0\",GCM_INTERACTIVE=\"Never\",GIT_ASKPASS=\"/bin/false\",SSH_ASKPASS=\"/bin/false\")\nbranch=subprocess.check_output([\"git\",\"branch\",\"--show-current\"],cwd=repo,text=True).strip()\nassert branch==\"work/hypic-npu03-cpu-binding-fix-20261007\"\ncmd=[\"git\",\"-c\",\"credential.interactive=false\",\"-c\",\"http.connectTimeout=8\",\"-c\",\"http.lowSpeedLimit=1\",\"-c\",\"http.lowSpeedTime=15\",\"push\",\"--dry-run\",\"origin\",\"HEAD:refs/heads/\"+branch]\ntry:\n r=subprocess.run(cmd,cwd=repo,env=env,capture_output=True,text=True,timeout=25)\n err=(r.stdout+r.stderr).lower()\n category=(\"success\" if r.returncode==0 else \"credentials_required\" if \"could not read username\" in err or \"terminal prompts disabled\" in err or \"could not read password\" in err else \"authentication_rejected\" if \"authentication failed\" in err else \"non_fast_forward\" if \"non-fast-forward\" in err or \"fetch first\" in err else \"permission_denied\" if \"403\" in err or \"permission\" in err else \"other_error\")\n print(json.dumps({\"dry_run\":True,\"exit_code\":r.returncode,\"classification\":category,\"remote_mutation\":False}))\nexcept subprocess.TimeoutExpired:\n print(json.dumps({\"dry_run\":True,\"classification\":\"timeout\",\"seconds\":25,\"remote_mutation\":False}))\n"
+    ],
+    "cancelled": false,
+    "command": "python3",
+    "cwd": "/cache/cch/model-tuning-lab-hypic-e2e-20261006",
+    "durationMs": 1143,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-000000000000009e",
+    "lane": "job",
+    "state": "completed",
+    "stderr": "",
+    "stdout": "{\"dry_run\": true, \"exit_code\": 0, \"classification\": \"success\", \"remote_mutation\": false}\n",
+    "timedOut": false
+  },
+  "push_and_remote_verification": {
+    "args": [
+      "-B",
+      "-c",
+      "import subprocess,os,json,re\nrepo=\"/cache/cch/model-tuning-lab-hypic-e2e-20261006\"\nbranch=\"work/hypic-npu03-cpu-binding-fix-20261007\"\nexpected=\"b5d9c9398f7fd4571c76b163490f83d609ced96f\"\ndef git(*args): return subprocess.check_output([\"git\",*args],cwd=repo,text=True).strip()\nassert git(\"rev-parse\",\"HEAD\")==expected\nassert git(\"branch\",\"--show-current\")==branch\nassert not git(\"diff\",\"--name-only\") and not git(\"diff\",\"--cached\",\"--name-only\")\nenv=os.environ.copy();env.update(GIT_TERMINAL_PROMPT=\"0\",GCM_INTERACTIVE=\"Never\",GIT_ASKPASS=\"/bin/false\",SSH_ASKPASS=\"/bin/false\")\ncommon=[\"git\",\"-c\",\"credential.interactive=false\",\"-c\",\"http.connectTimeout=10\",\"-c\",\"http.lowSpeedLimit=1\",\"-c\",\"http.lowSpeedTime=30\"]\nr=subprocess.run(common+[\"push\",\"origin\",\"HEAD:refs/heads/\"+branch],cwd=repo,env=env,capture_output=True,text=True,timeout=120)\nprint(json.dumps({\"push_exit\":r.returncode,\"expected_commit\":expected,\"branch\":branch}),flush=True)\nif r.returncode: raise SystemExit(\"Push failed; sanitized output retained in process memory only. No retry.\")\nr=subprocess.run(common+[\"ls-remote\",\"--exit-code\",\"origin\",\"refs/heads/\"+branch,\"refs/heads/main\"],cwd=repo,env=env,capture_output=True,text=True,timeout=30)\nrefs={}\nfor line in r.stdout.splitlines():\n if re.fullmatch(r\"[0-9a-f]{40}\\s+refs/heads/[A-Za-z0-9_./-]+\",line):\n  oid,name=line.split();refs[name]=oid\nprint(json.dumps({\"verification_exit\":r.returncode,\"remote_refs\":refs,\"work_branch_equal\":refs.get(\"refs/heads/\"+branch)==expected,\"main_unchanged\":refs.get(\"refs/heads/main\")==\"ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2\"}),flush=True)\nassert r.returncode==0 and refs.get(\"refs/heads/\"+branch)==expected\n"
+    ],
+    "cancelled": false,
+    "command": "python3",
+    "cwd": "/cache/cch/model-tuning-lab-hypic-e2e-20261006",
+    "durationMs": 5128,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-000000000000009f",
+    "lane": "job",
+    "state": "completed",
+    "stderr": "",
+    "stdout": "{\"push_exit\": 0, \"expected_commit\": \"b5d9c9398f7fd4571c76b163490f83d609ced96f\", \"branch\": \"work/hypic-npu03-cpu-binding-fix-20261007\"}\n{\"verification_exit\": 0, \"remote_refs\": {\"refs/heads/main\": \"ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2\", \"refs/heads/work/hypic-npu03-cpu-binding-fix-20261007\": \"b5d9c9398f7fd4571c76b163490f83d609ced96f\"}, \"work_branch_equal\": true, \"main_unchanged\": true}\n",
+    "timedOut": false
+  },
+  "main_updated": false,
+  "all_skills_accepted": false,
+  "quality_rerun": false
+}

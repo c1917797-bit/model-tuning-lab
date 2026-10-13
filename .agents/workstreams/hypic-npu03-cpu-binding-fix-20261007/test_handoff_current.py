@@ -15,6 +15,27 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[2]
 
 
+def verify_publication(task: dict, receipt: dict) -> None:
+    """Check recorded branch publication, without claiming current remote freshness."""
+    state = task["remote_publication_20261013"]
+    branch = receipt["published_branch"]
+    commit = state["code_checkpoint"]
+    assert branch == "work/hypic-npu03-cpu-binding-fix-20261007"
+    assert receipt["published_code_commit"] == commit
+    assert state["main_updated"] is False and receipt["main_updated"] is False
+    record = receipt["push_and_remote_verification"]
+    assert record["state"] == "completed" and record["exitCode"] == 0
+    rows = [json.loads(line) for line in record["stdout"].splitlines()]
+    pushed, verified = rows
+    assert pushed["push_exit"] == 0 and pushed["expected_commit"] == commit
+    assert pushed["branch"] == branch
+    assert verified["verification_exit"] == 0
+    assert verified["remote_refs"]["refs/heads/" + branch] == commit
+    assert verified["remote_refs"]["refs/heads/main"] == state["remote_main"]
+    assert state["work_branch_remote_equal"] is True
+    assert verified["work_branch_equal"] is True and verified["main_unchanged"] is True
+
+
 class HandoffTests(unittest.TestCase):
     def test_current_shape_and_history_retention(self) -> None:
         current = (HERE / "HANDOFF.md").read_text(encoding="utf-8")
@@ -152,7 +173,32 @@ class HandoffTests(unittest.TestCase):
         self.assertNotIn("exec-00000000000002d6", text)
         self.assertIn("No additional quality,observer,GDN,profiling or performance run", text)
         self.assertIn("fresh-agent orient/validate/push", text)
-        self.assertIn("No main/remote synchronization", text)
+        self.assertIn("Work branch published;main unchanged", text)
+        task = json.loads((HERE / "task.json").read_text())
+        receipt = json.loads((HERE / task["remote_publication_20261013"]["receipt"]).read_text())
+        verify_publication(task, receipt)
+        subprocess.run(("git", "merge-base", "--is-ancestor",
+                        receipt["published_code_commit"], "HEAD"), cwd=REPO, check=True)
+
+    def test_publication_false_claims_rejected(self) -> None:
+        task = json.loads((HERE / "task.json").read_text())
+        original = json.loads((HERE / task["remote_publication_20261013"]["receipt"]).read_text())
+        for failure in ("commit", "exit", "remote-ref", "main-claim"):
+            receipt = json.loads(json.dumps(original))
+            if failure == "commit":
+                receipt["published_code_commit"] = "0" * 40
+            elif failure == "exit":
+                receipt["push_and_remote_verification"]["exitCode"] = 1
+            elif failure == "main-claim":
+                receipt["main_updated"] = True
+            else:
+                record = receipt["push_and_remote_verification"]
+                rows = [json.loads(line) for line in record["stdout"].splitlines()]
+                rows[1]["remote_refs"]["refs/heads/" + receipt["published_branch"]] = "0" * 40
+                record["stdout"] = "\n".join(json.dumps(row) for row in rows)
+            with self.subTest(failure=failure):
+                with self.assertRaises(AssertionError):
+                    verify_publication(task, receipt)
 
 
 if __name__ == "__main__":
