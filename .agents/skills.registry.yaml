@@ -47,7 +47,7 @@ skills:
   - id: ascend-model-quality-evaluation
     path: .agents/skills/ascend-model-quality-evaluation
     status: experimental
-    purpose: Produce reproducible paired Ascend model-quality evidence with a 2048-token quality cap and measured baseline variability.
+    purpose: Produce reproducible paired Ascend model-quality evidence with mode-specific caps (thinking 2048, non-thinking 1024) and measured baseline variability.
     triggers:
       - test Ascend model accuracy or quality
       - compare baseline and candidate quality

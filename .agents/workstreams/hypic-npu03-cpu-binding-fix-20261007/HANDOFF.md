@@ -21,6 +21,12 @@ isolation evidence on physical0–3; no repeated runs of completed roots.
 
 ## 2. Current Focus
 
+User policy update2026-10-13: future quality uses thinking=true/max2048 or
+thinking=false/max1024 (default), with identical mode/cap in both arms.
+See ascend-model-quality-evaluation and its two contract profiles. Existing
+r19 non-thinking/max2048 evidence and verdict remain immutable; no new run
+is authorized by this configuration change. Fixed-output performance is unchanged.
+
 Offline exact-main obligation review and handoff/state repair only.
 Use task.json.current_source_performance_checkpoint as current campaign state;
 older named attempt/milestone entries are historical,not live instructions.

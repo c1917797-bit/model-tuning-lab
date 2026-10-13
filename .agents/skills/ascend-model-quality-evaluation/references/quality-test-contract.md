@@ -22,9 +22,11 @@ Use this reference when creating or reviewing a concrete quality experiment.
 
 ## Frozen generation profile
 
+Select one profile before either arm. Non-thinking is the default:
+
 ```json
 {
-  "max_output_tokens": 2048,
+  "max_output_tokens": 1024,
   "ignore_eos": false,
   "seed": 0,
   "temperature": 0,
@@ -34,8 +36,31 @@ Use this reference when creating or reviewing a concrete quality experiment.
 }
 ```
 
+Thinking-enabled profile:
+
+```json
+{
+  "max_output_tokens": 2048,
+  "ignore_eos": false,
+  "seed": 0,
+  "temperature": 0,
+  "enable_thinking": true,
+  "concurrency": 32,
+  "repetitions_per_arm_and_dataset": 3
+}
+```
+
+The cap covers total generated tokens, including thinking and final answer;
+it is not an independent budget for each. Record the actual request/template
+field that implements `enable_thinking` and verify model support. Both arms
+must use the same mode, cap and effective template. These are natural-stopping
+quality profiles, not fixed-output performance settings.
+
 Record any additional sampling and stopping parameters. A changed field creates
-a new ruler and requires a fresh baseline.
+a new ruler: reuse only an exactly matching verified baseline, otherwise obtain
+a new matched baseline under its own execution authorization. Preserve previous
+contracts and results (including non-thinking max2048); do not relabel, pool,
+or retroactively truncate/rescore them under this 2026-10-13 policy.
 
 ## Treatment-path coverage preflight
 

@@ -68,8 +68,11 @@ For performance work, also use:
 
 For accuracy, semantic-quality, deterministic-canary, or lossless claims, also
 use `ascend-model-quality-evaluation`. Its default Paper-to-Ascend quality
-ruler uses a 2048-token natural-stopping cap and requires a fresh baseline when
-that cap or any evaluator invariant changes.
+ruler uses natural stopping with a 2048-token cap when thinking is enabled,
+or 1024 when disabled (the default). Freeze the same mode and cap for baseline
+and candidate; reuse only an exactly matching verified baseline. Changing mode,
+cap or an evaluator invariant requires a matching new ruler, not relabeling
+historical results. See that Skill's quality-test contract for both profiles.
 
 When the task is to reproduce a prior paper/practice result, historical ruler,
 or adoption claim, use `paper-to-ascend-reproduction` to freeze the scientific

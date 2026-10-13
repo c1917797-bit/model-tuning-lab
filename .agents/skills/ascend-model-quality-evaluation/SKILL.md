@@ -1,6 +1,6 @@
 ---
 name: ascend-model-quality-evaluation
-description: Use to design, run, compare, or review Ascend inference accuracy and model-quality evaluations; freeze a paired baseline/candidate ruler, use a 2048-token quality cap, measure baseline variability, and prevent performance evidence from being relabeled as quality evidence.
+description: Use to design, run, compare, or review Ascend inference accuracy and model-quality evaluations; freeze paired thinking-mode output budgets, measure baseline variability, and prevent performance evidence from being relabeled as quality evidence.
 ---
 
 # Ascend Model Quality Evaluation
@@ -18,22 +18,34 @@ Unless the owning experiment freezes a stricter dataset-specific contract, use:
 
 - baseline and candidate evaluated on the same dataset files, sample IDs,
   order, prompts, chat template, tokenizer, postprocessor, and scorer;
-- `max_output_tokens=2048`;
-- natural stopping with `ignore_eos=false`; 2048 is a cap, not a requirement
-  that every sample generate 2048 tokens;
-- `seed=0`, `temperature=0`, and thinking disabled;
+- thinking enabled: `enable_thinking=true`, `max_output_tokens=2048`;
+- thinking disabled (default): `enable_thinking=false`,
+  `max_output_tokens=1024`;
+- natural stopping with `ignore_eos=false`; these are output caps, not
+  fixed output lengths. The thinking-mode cap covers the total generated
+  thinking and final-answer tokens, not an extra allowance for each;
+- `seed=0` and `temperature=0`;
 - concurrency 32 and three complete repetitions per arm and dataset;
 - a fresh service lifecycle for quality after performance measurement;
 - LongBench-v2 and GSM8K when reproducing the current HYPIC ruler; include
   NIAH+ or CEval only when their authoritative frozen files and scorers exist.
 
-Changing the output cap, concurrency, dataset revision, evaluator, prompt,
+Freeze the selected thinking mode and its cap identically in both arms.
+Verify the evaluator actually forwards the mode through the model's supported
+chat-template/request option; a label or answer style is not mode evidence.
+If the model cannot support the requested mode, report that limitation rather
+than silently substituting the other mode.
+
+Changing the thinking mode, output cap, concurrency, dataset revision, evaluator, prompt,
 postprocessor, stopping behavior, or generation settings creates a new ruler.
 Re-run its baseline; do not pool it with the old ruler.
 
-The completed historical HYPIC evidence used a 1024-token cap. Preserve it as
-historical evidence. Never rewrite or relabel those measurements as 2048-token
-results.
+Historical HYPIC runs include separately frozen 1024- and 2048-token caps.
+The 2026-10-13 mode-specific policy applies prospectively: preserve each old
+run's actual mode, cap, hashes and verdict. Do not relabel old non-thinking
+2048-token runs as 1024-token results or truncate their saved outputs to rescore.
+Reuse a completed baseline only if it matches the new ruler exactly; otherwise
+a new matched baseline requires a separately authorized experiment.
 
 Before a long suite, tokenize the longest required prompt with the frozen
 template and confirm prompt tokens plus the output cap fit the service's
@@ -104,7 +116,7 @@ A quality pass requires all applicable conditions:
 - treatment activation and physical Ascend execution are proven.
 
 If a required dataset is unexpectedly missing, the service changes identity
-during the run, the 2048-token cap is not actually applied, or artifacts
+during the run, the frozen mode-specific cap is not actually applied, or artifacts
 disagree, fail closed as `invalid` or `inconclusive`; do not substitute another
 dataset silently. A documented upstream/time-budget stop is
 `incomplete-fail-fast`, not a quality comparison.
