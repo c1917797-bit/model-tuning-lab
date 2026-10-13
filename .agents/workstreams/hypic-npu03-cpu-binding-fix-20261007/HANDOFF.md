@@ -31,7 +31,7 @@ See ascend-model-quality-evaluation and its two contract profiles. Existing
 r19 non-thinking/max2048 evidence and verdict remain immutable; no new run
 is authorized by this configuration change. Fixed-output performance is unchanged.
 
-New human authority: one bounded operational lifecycle only; see OPERATIONAL_LIFECYCLE_20261013.md.
+Authorized lifecycle aborted before health on foreign NPU3 PID; see OPERATIONAL_LIFECYCLE_TERMINAL_20261013.md.
 Use task.json.current_source_performance_checkpoint as current campaign state;
 older named attempt/milestone entries are historical,not live instructions.
 The original full single-service quality attempts and retry history are retained
@@ -59,8 +59,8 @@ Global .agents/HANDOFF.md describes integrated history,not this unmerged result.
 
 ## 4. Current Action
 
-Push00a8 verified work branch atc03604ad;main unchanged. See REMOTE_PUBLICATION_20261013.md.
-Integration start3194848e remote unknown (00af/00b1/00b4 timeout); no product import.
+Plan059f343a pushed/verified00c0; lifecyclemc00bf failed isolation, exact release.
+Integration start3194848e pushed/verified00c2; no product import, main unchanged.
 
 Planning-schema selective integration candidate passed seven guards and a
 read-only exact-main apply check. See PLANNING_SELECTIVE_INTEGRATION_20261013.md;
@@ -108,8 +108,8 @@ evidence; this Git fixture is not that separate workflow.
 4. Historical007f timed out;new009b/009f supersede the remote-unknown blocker:
    target read and workstream push verified. Refresh refs before integration.
    The connected MCPGit list has no target repo;use the verified host Git route.
-5. Old experiment deadline unchanged. New lifecycle-only authority expires
-   2026-10-13T18:00:00Z; two1-token service controls, no quality/performance rerun.
+5. Lifecycle attempt terminal:0 requests, uninstall not started; no retry scheduled.
+   Continue offline integration; no quality/performance rerun or old-root reuse.
 
 ## 6. Validation Commands
 
@@ -155,5 +155,5 @@ same host/repository/worktree/HEAD before continuing. Operation IDs are peer-sco
 keep original peer+handle; missing on another peer is not terminal proof.
 Inspect original process/raw state before retrying ambiguous work. Fallback
 does not authorize new NPU work or expand physical0–3. Credentials only in fields.
-No active service needs stopping. If future state conflicts with this page,
+Lifecycle mc00bf terminal and exact own resources released; do not restart. If state conflicts,
 inspect exact live ownership and raw terminal receipts before any action.

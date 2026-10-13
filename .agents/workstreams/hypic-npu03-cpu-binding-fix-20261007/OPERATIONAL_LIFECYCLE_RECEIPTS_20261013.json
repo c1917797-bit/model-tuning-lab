@@ -1,0 +1,97 @@
+{
+  "controller": {
+    "args": [
+      "-B",
+      "operational_lifecycle_20261013.py",
+      "--mode",
+      "disabled",
+      "--run"
+    ],
+    "cancelled": false,
+    "command": "python3",
+    "cwd": "/cache/cch/model-tuning-lab-hypic-e2e-20261006/.agents/workstreams/hypic-npu03-cpu-binding-fix-20261007",
+    "durationMs": 168934,
+    "error": "exit code",
+    "exitCode": 1,
+    "id": "exec-00000000000000bf",
+    "lane": "job",
+    "state": "completed",
+    "stderr": "",
+    "stdout": "{\"arm\": \"hypic-only\", \"at_utc\": \"2026-10-13T16:59:08.285920+00:00\", \"container_id\": \"ee50838d44e14e2d59cdde68d3d08a4749f153f1adcc83f2ddc8e66ad876fe33\", \"schema\": \"hypic-bindingoff-quality-status/v1\", \"stage\": \"release-with-lane-conflict\"}\n{\"mode\": \"disabled\", \"completed\": false, \"error\": \"RuntimeError: quality lane guard detected foreign NPU0-3 process or probe error; cleanup: owned service released, but shared lane unavailable: physical NPU0-3 have a running process\", \"root\": \"/cache/cch/hypic-npu03-cpu-binding-fix-20261007/operational-lifecycle-20261013-disabled\"}\n",
+    "timedOut": false
+  },
+  "integration_start_publication": {
+    "args": [
+      "-B",
+      "-c",
+      "import subprocess,os,json\nenv=os.environ.copy();env.update(GIT_TERMINAL_PROMPT=\"0\",GIT_ASKPASS=\"/bin/false\")\nassert subprocess.check_output([\"git\",\"rev-parse\",\"HEAD\"],text=True).strip()==\"3194848e598a919ad2d499867330fe23c5732b33\"\nassert not subprocess.check_output([\"git\",\"status\",\"--porcelain\"],text=True).strip()\nr=subprocess.run([\"git\",\"-c\",\"http.lowSpeedLimit=1\",\"-c\",\"http.lowSpeedTime=12\",\"push\",\"-u\",\"origin\",\"HEAD:refs/heads/work/skill-repairs-20261013\"],capture_output=True,text=True,env=env,timeout=25)\nprint(json.dumps(dict(push_exit=r.returncode)));r.check_returncode()\nr=subprocess.run([\"git\",\"ls-remote\",\"origin\",\"refs/heads/work/skill-repairs-20261013\"],capture_output=True,text=True,env=env,timeout=15)\nprint(json.dumps(dict(verify_exit=r.returncode,refs=r.stdout.splitlines())))\n"
+    ],
+    "cancelled": false,
+    "command": "python3",
+    "cwd": "/cache/cch/model-tuning-lab-skill-repairs-20261013",
+    "durationMs": 3349,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-00000000000000c2",
+    "lane": "job",
+    "state": "completed",
+    "stderr": "",
+    "stdout": "{\"push_exit\": 0}\n{\"verify_exit\": 0, \"refs\": [\"3194848e598a919ad2d499867330fe23c5732b33\\trefs/heads/work/skill-repairs-20261013\"]}\n",
+    "timedOut": false
+  },
+  "audit": {
+    "args": [
+      "-lc",
+      "python3 -B -m unittest test_operational_lifecycle_failure_20261013 && python3 -B operational_lifecycle_failure_20261013.py"
+    ],
+    "cancelled": false,
+    "command": "bash",
+    "cwd": "/cache/cch/model-tuning-lab-hypic-e2e-20261006/.agents/workstreams/hypic-npu03-cpu-binding-fix-20261007",
+    "durationMs": 156,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-00000000000000cb",
+    "lane": "process",
+    "state": "completed",
+    "stderr": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK\n",
+    "stdout": "{\n  \"all_skill_acceptance\": false,\n  \"artifact_hashes\": {\n    \"container-inspect.json\": \"0e2b0b13e606c6a5218fedeb5e06089be5096af314878ad0a6346372562a8b1d\",\n    \"contract.json\": \"9b90571daf24a2b1c92c6ed3962d3d9cd69a9a6b0c57c15d7418e0a88460889c\",\n    \"hypic-only/hypic-evidence.jsonl\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n    \"hypic-only/lane-guard.json\": \"c88c2a0913e1cc4eb595fffbd81d1caa8ef773ab4d631d422a04bdc5934e1d5a\",\n    \"hypic-only/service-stop.ee50838d44e1.json\": \"bfe9d8c2485537b0773280e11b07173da76b6891fe722be1b09ac7bb8098cc4e\",\n    \"hypic-only/service-stop.json\": \"bfe9d8c2485537b0773280e11b07173da76b6891fe722be1b09ac7bb8098cc4e\",\n    \"hypic-only/service.full.ee50838d44e1.log\": \"c45dd54788f16c27069e9001ac0a9039a6d9e33adecf61fa75ca34d12d49996c\",\n    \"hypic-only/status.json\": \"61b78de2a2daed06f85a752eb817660eb4b8ef80dc374878c5280c48fdc29002\",\n    \"installed.json\": \"6fd7e9808d662e218c06af7306d0d8b08e240699f3a21413c3224061ba42c7a5\",\n    \"terminal.json\": \"5c2e6a9f9b4aba7451893625aba20fe1f8b17242af5a1e3cd8f79cc8294d8534\"\n  },\n  \"decision\": \"ISOLATION_FAILED_BEFORE_HEALTH\",\n  \"exact_owned_release\": true,\n  \"foreign_observations\": [\n    {\n      \"at_utc\": \"2026-10-13T16:58:03.308276+00:00\",\n      \"container_id\": \"efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\",\n      \"physical_npu\": 3,\n      \"pid\": 3713849\n    },\n    {\n      \"at_utc\": \"2026-10-13T16:58:04.784918+00:00\",\n      \"container_id\": \"efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\",\n      \"physical_npu\": 3,\n      \"pid\": 3713849\n    }\n  ],\n  \"guard_samples\": 20,\n  \"lifecycle_pass\": false,\n  \"old_quality_decision_changed\": false,\n  \"operational_responses\": 0,\n  \"quality_or_performance_claim\": false,\n  \"scored_requests\": 0,\n  \"source_at_health_proven\": false,\n  \"uninstalled_started\": false\n}\n",
+    "timedOut": false
+  },
+  "release_snapshot": {
+    "args": [
+      "-lc",
+      "docker inspect --format '{{.Id}} {{.Name}} {{.State.Status}}' efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\ndocker ps -a --filter id=ee50838d44e14e2d59cdde68d3d08a4749f153f1adcc83f2ddc8e66ad876fe33 --format '{{.ID}} {{.Names}} {{.Status}}'\nss -lntp | grep ':8223 ' || true\nnpu-smi info\n"
+    ],
+    "cancelled": false,
+    "command": "bash",
+    "cwd": "/cache/cch/model-tuning-lab-hypic-e2e-20261006",
+    "durationMs": 1205,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-00000000000000c9",
+    "lane": "process",
+    "state": "completed",
+    "stderr": "",
+    "stdout": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6 /cannbench_ds running\n+------------------------------------------------------------------------------------------------+\n| npu-smi 25.2.0                   Version: 25.2.0                                               |\n+---------------------------+---------------+----------------------------------------------------+\n| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|\n| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |\n+===========================+===============+====================================================+\n| 0     910B4               | OK            | 92.2        37                0    / 0             |\n| 0                         | 0000:C1:00.0  | 0           0    / 0          2866 / 32768         |\n+===========================+===============+====================================================+\n| 1     910B4               | OK            | 83.5        37                0    / 0             |\n| 0                         | 0000:C2:00.0  | 0           0    / 0          2868 / 32768         |\n+===========================+===============+====================================================+\n| 2     910B4               | OK            | 88.4        37                0    / 0             |\n| 0                         | 0000:81:00.0  | 0           0    / 0          2868 / 32768         |\n+===========================+===============+====================================================+\n| 3     910B4               | OK            | 86.8        39                0    / 0             |\n| 0                         | 0000:82:00.0  | 0           0    / 0          2866 / 32768         |\n+===========================+===============+====================================================+\n| 4     910B4               | OK            | 93.7        44                0    / 0             |\n| 0                         | 0000:01:00.0  | 0           0    / 0          2860 / 32768         |\n+===========================+===============+====================================================+\n| 5     910B4               | OK            | 96.2        42                0    / 0             |\n| 0                         | 0000:02:00.0  | 0           0    / 0          2860 / 32768         |\n+===========================+===============+====================================================+\n| 6     910B4               | OK            | 94.8        42                0    / 0             |\n| 0                         | 0000:41:00.0  | 0           0    / 0          2860 / 32768         |\n+===========================+===============+====================================================+\n| 7     910B4               | OK            | 85.8        43                0    / 0             |\n| 0                         | 0000:42:00.0  | 0           0    / 0          2860 / 32768         |\n+===========================+===============+====================================================+\n+---------------------------+---------------+----------------------------------------------------+\n| NPU     Chip              | Process id    | Process name             | Process memory(MB)      |\n+===========================+===============+====================================================+\n| No running processes found in NPU 0                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 1                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 2                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 3                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 4                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 5                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 6                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 7                                                            |\n+===========================+===============+====================================================+\n",
+    "timedOut": false
+  },
+  "plan_publication": {
+    "args": [
+      "-B",
+      "-c",
+      "import subprocess,json,os\nenv=os.environ.copy();env.update(GIT_TERMINAL_PROMPT=\"0\",GIT_ASKPASS=\"/bin/false\")\ntry:\n r=subprocess.run([\"git\",\"ls-remote\",\"origin\",\"refs/heads/main\",\"refs/heads/work/skill-repairs-20261013\",\"refs/heads/work/hypic-npu03-cpu-binding-fix-20261007\"],capture_output=True,text=True,timeout=15,env=env)\n print(json.dumps(dict(exit=r.returncode,refs=r.stdout.splitlines())))\nexcept subprocess.TimeoutExpired:print('{\"remote_state\":\"unknown\"}')\n"
+    ],
+    "cancelled": false,
+    "command": "python3",
+    "cwd": "/cache/cch/model-tuning-lab-hypic-e2e-20261006",
+    "durationMs": 1366,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-00000000000000c0",
+    "lane": "job",
+    "state": "completed",
+    "stderr": "",
+    "stdout": "{\"exit\": 0, \"refs\": [\"ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2\\trefs/heads/main\", \"059f343a4c33d6ad5024a15eeb6cf9d9138aaa87\\trefs/heads/work/hypic-npu03-cpu-binding-fix-20261007\"]}\n",
+    "timedOut": false
+  }
+}
