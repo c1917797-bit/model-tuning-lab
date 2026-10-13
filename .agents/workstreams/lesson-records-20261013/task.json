@@ -80,5 +80,8 @@
     "git diff --check"
   ],
   "retention": "Retain remote branch; reclaim local worktree only after published merge and unused proof.",
-  "resume": "Focused checks0142 passed; publish content, then bind readiness to exact published checkpoint."
+  "validated_content_commit": "631d6bc951718287c8a3b59c23c3ce2a40fa3ed7",
+  "fresh_clone_replay": {"operation":"exec-0000000000000146","receipt":"REPLAY_RECEIPT.json","tests":7,"structure":29,"remote_clone":false},
+  "publication_attempt": {"operation":"exec-0000000000000143","push_exit":124,"remote_read_operation":"exec-0000000000000145","remote_read_exit":124,"remote_content_commit":"unverified"},
+  "resume": "Local content631d6bc9 and fresh clone replay passed. Resolve publication before marking ready or merging. Do not repeat failed pushes without fresh remote availability evidence."
 }

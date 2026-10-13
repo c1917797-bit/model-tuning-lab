@@ -1,0 +1,10 @@
+{
+  "schema": "mst-lesson-replay-receipt/v1",
+  "validated_content_commit": "631d6bc951718287c8a3b59c23c3ce2a40fa3ed7",
+  "operation": "exec-0000000000000146",
+  "exit_code": 0,
+  "stdout": "{\"clone\": \"/cache/cch/mst-lesson-replay-pysq1n_2/clone\", \"head\": \"631d6bc951718287c8a3b59c23c3ce2a40fa3ed7\", \"source\": \"local committed checkout; not remote equality\"}\n{\"cmd\": [\"python3\", \"-B\", \".agents/workstreams/lesson-records-20261013/verify_lesson_records.py\"], \"exit\": 0, \"out\": \"{\\\"acceptance_promoted\\\": false, \\\"base\\\": \\\"23ec33d7d692bb77d17fb5b81aabacf57adad5c7\\\", \\\"complete_records\\\": 3, \\\"historical_decisions_preserved\\\": true, \\\"review_source\\\": \\\"b9386cd8b98ceca4be89d2a090db071f21842388\\\", \\\"runtime_changed\\\": false, \\\"supplemented_records\\\": 2}\\n\", \"err\": \"\"}\n{\"cmd\": [\"python3\", \"-B\", \"-m\", \"unittest\", \"discover\", \"-s\", \".agents/workstreams/lesson-records-20261013\", \"-p\", \"test_lesson_records.py\"], \"exit\": 0, \"out\": \"\", \"err\": \".......\\n----------------------------------------------------------------------\\nRan 7 tests in 0.049s\\n\\nOK\\n\"}\n{\"cmd\": [\"bash\", \"scripts/validate-mst.sh\"], \"exit\": 0, \"out\": \"PASS: Maintainer Skill Tree structure is valid (29 skills)\\n\", \"err\": \"\"}\n{\"cmd\": [\"git\", \"diff\", \"--check\"], \"exit\": 0, \"out\": \"\", \"err\": \"\"}\nFRESH_LOCAL_CHECKOUT_REPLAY_PASS\n",
+  "clone_source": "local --no-hardlinks clone; not GitHub download",
+  "device_work": false,
+  "main_updated": false
+}
