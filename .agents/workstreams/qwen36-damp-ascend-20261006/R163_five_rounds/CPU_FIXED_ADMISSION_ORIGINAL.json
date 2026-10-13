@@ -1,0 +1,81 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"cancelTool\": \"operation_cancel\",\n  \"channel\": \"control\",\n  \"fallbackUsed\": false,\n  \"gatewayInstanceId\": \"tpc-rgw-01\",\n  \"idempotencyKey\": \"r163-corrected-cpu-admission-both-001\",\n  \"logicalGatewayId\": \"tpc\",\n  \"ok\": true,\n  \"operationId\": \"exec-0000000000000050\",\n  \"operationKind\": \"exec\",\n  \"pollTool\": \"operation_get\",\n  \"requestDeadlineMs\": 10000,\n  \"result\": {\n    \"execId\": \"exec-0000000000000050\",\n    \"lane\": \"process\",\n    \"ok\": true,\n    \"record\": {\n      \"args\": [\n        \"-I\",\n        \"-B\",\n        \"-c\",\n        \"import pathlib,json,hashlib,importlib.util,argparse,time,os\\np=pathlib.Path(\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R163_DUAL_CPU_FIXED_COHORT.json\\\");b=p.read_bytes();cr=dict(path=str(p),bytes=len(b),sha256=hashlib.sha256(b).hexdigest());c=json.loads(b);print(json.dumps(cr))\\nrow=c['members'][0];s=importlib.util.spec_from_file_location('h',str(pathlib.Path(row['source']['path']).parent/'host.py'));h=importlib.util.module_from_spec(s);s.loader.exec_module(h);a=argparse.Namespace(source=pathlib.Path(row['source']['path']),source_sha256=row['source']['sha256'],cohort=p,cohort_sha256=cr['sha256'],run_id=row['run_id'],physical=row['cards'][0],output=pathlib.Path(row['output_root']))\\nown,m,bm,B,refs=h.prepare(a);C,E=h.runtime(own,m,bm,B,refs,time.monotonic());H=E['helper'](bm);hv=H.cpu_view(os.getpid());dv=H.daemon_view()\\nfor row in c['members']:print(json.dumps(dict(run=row['run_id'],cpu=m['_cohort']['policy'].cpu_plan(c,row['run_id'],hv,dv))))\\nprint('VERIFIED_CPU_SCOPE '+json.dumps(dict(host=hv['effective_cpus'],daemon=dv['effective_cpus'],capacity=dv['effective_capacity'])))\\n\"\n      ],\n      \"cancelled\": false,\n      \"command\": \"/usr/bin/python3\",\n      \"cwd\": null,\n      \"durationMs\": 676,\n      \"error\": null,\n      \"exitCode\": 0,\n      \"id\": \"exec-0000000000000050\",\n      \"lane\": \"process\",\n      \"state\": \"completed\",\n      \"stderr\": \"\",\n      \"stdout\": \"{\\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R163_DUAL_CPU_FIXED_COHORT.json\\\", \\\"bytes\\\": 2246, \\\"sha256\\\": \\\"07399851c8ff642179e0265ed5f755139123e47b8ece1b3492ca1ef118e3ea27\\\"}\\n{\\\"run\\\": \\\"kivi-dual-main-r163-cpu-fixed\\\", \\\"cpu\\\": {\\\"host_cpu\\\": 0, \\\"guest_cpu\\\": 1, \\\"reserve_cpus\\\": [144, 145], \\\"host_cpu_budget\\\": 1, \\\"guest_cpu_budget\\\": 1, \\\"reserve_cpu_budget\\\": 2, \\\"common_finite_capacity\\\": null, \\\"future_external_guarantee\\\": false}}\\n{\\\"run\\\": \\\"skvq-full-main-r163-cpu-fixed\\\", \\\"cpu\\\": {\\\"host_cpu\\\": 2, \\\"guest_cpu\\\": 3, \\\"reserve_cpus\\\": [144, 145], \\\"host_cpu_budget\\\": 1, \\\"guest_cpu_budget\\\": 1, \\\"reserve_cpu_budget\\\": 2, \\\"common_finite_capacity\\\": null, \\\"future_external_guarantee\\\": false}}\\nVERIFIED_CPU_SCOPE {\\\"host\\\": [0, 1, 2, 3, 144, 145, 166], \\\"daemon\\\": [0, 1, 2, 3, 144, 145, 166], \\\"capacity\\\": 7}\\n\",\n      \"timedOut\": false\n    },\n    \"running\": false,\n    \"state\": \"completed\"\n  },\n  \"rgwHttp\": \"http://agentweb:17888\",\n  \"rgwRouting\": {\n    \"attemptErrors\": [],\n    \"strategy\": \"peer-hot3-with-command-retry\"\n  },\n  \"routeDecision\": \"peer_direct\",\n  \"routeSelectionMode\": \"client-force-direct\",\n  \"selectedLogicalGatewayId\": \"tpc\",\n  \"selectedRgw\": \"http://agentweb:17888\",\n  \"sessionId\": null,\n  \"targetPeerId\": \"lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d\",\n  \"targetRole\": \"upstream\",\n  \"timings\": {\n    \"awmcp\": {\n      \"attemptCount\": 1,\n      \"rgwRequestMs\": 1079,\n      \"rgwResponseDecodeMs\": 0,\n      \"rgwResponseHeadersMs\": 1079,\n      \"routeCacheHit\": false,\n      \"routeLookupMode\": \"client-force-direct\",\n      \"routeLookupMs\": 1467,\n      \"totalMs\": 2547\n    },\n    \"rgw\": {\n      \"dispatchMs\": 0,\n      \"journalMs\": 0,\n      \"peerRoundTripMs\": 1078,\n      \"routeLookupMs\": 0,\n      \"totalMs\": 1078\n    }\n  },\n  \"traceId\": \"c2b36ea4-0274-4ede-b95c-4a521906fbae\"\n}"
+    }
+  ],
+  "structuredContent": {
+    "cancelTool": "operation_cancel",
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "idempotencyKey": "r163-corrected-cpu-admission-both-001",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "operationId": "exec-0000000000000050",
+    "operationKind": "exec",
+    "pollTool": "operation_get",
+    "requestDeadlineMs": 10000,
+    "result": {
+      "execId": "exec-0000000000000050",
+      "lane": "process",
+      "ok": true,
+      "record": {
+        "args": [
+          "-I",
+          "-B",
+          "-c",
+          "import pathlib,json,hashlib,importlib.util,argparse,time,os\np=pathlib.Path(\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R163_DUAL_CPU_FIXED_COHORT.json\");b=p.read_bytes();cr=dict(path=str(p),bytes=len(b),sha256=hashlib.sha256(b).hexdigest());c=json.loads(b);print(json.dumps(cr))\nrow=c['members'][0];s=importlib.util.spec_from_file_location('h',str(pathlib.Path(row['source']['path']).parent/'host.py'));h=importlib.util.module_from_spec(s);s.loader.exec_module(h);a=argparse.Namespace(source=pathlib.Path(row['source']['path']),source_sha256=row['source']['sha256'],cohort=p,cohort_sha256=cr['sha256'],run_id=row['run_id'],physical=row['cards'][0],output=pathlib.Path(row['output_root']))\nown,m,bm,B,refs=h.prepare(a);C,E=h.runtime(own,m,bm,B,refs,time.monotonic());H=E['helper'](bm);hv=H.cpu_view(os.getpid());dv=H.daemon_view()\nfor row in c['members']:print(json.dumps(dict(run=row['run_id'],cpu=m['_cohort']['policy'].cpu_plan(c,row['run_id'],hv,dv))))\nprint('VERIFIED_CPU_SCOPE '+json.dumps(dict(host=hv['effective_cpus'],daemon=dv['effective_cpus'],capacity=dv['effective_capacity'])))\n"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/python3",
+        "cwd": null,
+        "durationMs": 676,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000050",
+        "lane": "process",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R163_DUAL_CPU_FIXED_COHORT.json\", \"bytes\": 2246, \"sha256\": \"07399851c8ff642179e0265ed5f755139123e47b8ece1b3492ca1ef118e3ea27\"}\n{\"run\": \"kivi-dual-main-r163-cpu-fixed\", \"cpu\": {\"host_cpu\": 0, \"guest_cpu\": 1, \"reserve_cpus\": [144, 145], \"host_cpu_budget\": 1, \"guest_cpu_budget\": 1, \"reserve_cpu_budget\": 2, \"common_finite_capacity\": null, \"future_external_guarantee\": false}}\n{\"run\": \"skvq-full-main-r163-cpu-fixed\", \"cpu\": {\"host_cpu\": 2, \"guest_cpu\": 3, \"reserve_cpus\": [144, 145], \"host_cpu_budget\": 1, \"guest_cpu_budget\": 1, \"reserve_cpu_budget\": 2, \"common_finite_capacity\": null, \"future_external_guarantee\": false}}\nVERIFIED_CPU_SCOPE {\"host\": [0, 1, 2, 3, 144, 145, 166], \"daemon\": [0, 1, 2, 3, 144, 145, 166], \"capacity\": 7}\n",
+        "timedOut": false
+      },
+      "running": false,
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "routeSelectionMode": "client-force-direct",
+    "selectedLogicalGatewayId": "tpc",
+    "selectedRgw": "http://agentweb:17888",
+    "sessionId": null,
+    "targetPeerId": "lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 1079,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 1079,
+        "routeCacheHit": false,
+        "routeLookupMode": "client-force-direct",
+        "routeLookupMs": 1467,
+        "totalMs": 2547
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 1078,
+        "routeLookupMs": 0,
+        "totalMs": 1078
+      }
+    },
+    "traceId": "c2b36ea4-0274-4ede-b95c-4a521906fbae"
+  },
+  "isError": false
+}

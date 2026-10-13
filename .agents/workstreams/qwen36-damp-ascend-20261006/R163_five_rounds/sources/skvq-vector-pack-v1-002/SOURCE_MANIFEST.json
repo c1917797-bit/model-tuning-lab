@@ -1,0 +1,273 @@
+{
+  "schema": "skvq.vector256-cohort-source/v1",
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002",
+  "default_enabled": false,
+  "ready": false,
+  "start_epoch": 1791916056,
+  "cutoff": 1792002456,
+  "stage": "quantize",
+  "files": {
+    "common.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/common.py",
+      "bytes": 2480,
+      "sha256": "696e7474148107ba0441135ea2eda3137516895dd617d64074e3fc5d14a2becd"
+    },
+    "consume.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/consume.py",
+      "bytes": 5573,
+      "sha256": "9a767cbb3ff66cea0931553f43a9ee466905d8ccca8da3eeb516b56c48487cf2"
+    },
+    "guest.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/guest.py",
+      "bytes": 4409,
+      "sha256": "0e664e185c85caa98b1399d15e4ec6249874a39dcf8e15e4fe6d24bc4838dd04"
+    },
+    "host.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/host.py",
+      "bytes": 6238,
+      "sha256": "d6008862d1295a9a4db61ccc935a4d4b9eb3ab0bef8afc584c9cd090ee1d92b9"
+    },
+    "software_check.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/software_check.py",
+      "bytes": 6003,
+      "sha256": "43112059fa750d615ac3b185021e5b464910913fca79f6e70574f5ea5bb9867f"
+    },
+    "writer.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/writer.py",
+      "bytes": 16784,
+      "sha256": "fac6d76fcc907a694e666cff5470f579e065e660782335347b69453754b0339c"
+    },
+    "cache_scan.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cache_scan.py",
+      "bytes": 4277,
+      "sha256": "79dc8de88d84120f80f7b88763b0811f8463daefd94eb455e57bcb0aadc509a2"
+    },
+    "README.md": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/README.md",
+      "bytes": 3642,
+      "sha256": "bb8c4018cdfd5ccef0ff74989fc13162af1897fdbc2e8405d7091e5651d7b9d2"
+    },
+    "test_entry.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/test_entry.py",
+      "bytes": 3026,
+      "sha256": "f7118c80d6ace1e3be7a33717785bfa3ce1166c6d5c85bb4851d421317d038f9"
+    }
+  },
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R156_NEW24H_AUTHORITY_20261013.json",
+    "bytes": 4025,
+    "sha256": "cd1ec8cf2f12e551a5b49e95b66ef053064ac634aef1e4524430d46ce333f300"
+  },
+  "base_source": {
+    "bytes": 12385,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/SOURCE_MANIFEST.json",
+    "sha256": "7aa51f300fbe7f92d35ab8903e82c54fb272754e20c9da345ddfec8b9db4679c"
+  },
+  "owner_binding": {
+    "bytes": 15994,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-004/binding.py",
+    "sha256": "ff6ff3a3a7fdf186dd8481b0e28e980ee631163cf0cb3c85246ccc9b471beeb3"
+  },
+  "donor_contract": {
+    "bytes": 16480,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/once_contract.py",
+    "sha256": "7789d63886da0ebe9420b0f56b584c81eae9e50ab561dbf64940df37eb31aa6a"
+  },
+  "donor_host": {
+    "bytes": 29763,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/host_once.py",
+    "sha256": "6414c912b216f3896a21e7b321717b604c4be7db21220ed034a798da460a0be8"
+  },
+  "donor_safety": {
+    "bytes": 6865,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/safety_lifecycle.py",
+    "sha256": "4bbd492809c9ba1922fd3885b101f8cc6fe187884703c21e4a2d44acd1444b75"
+  },
+  "inspect_store": {
+    "bytes": 3401,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-004/inspect_store.py",
+    "sha256": "d533a19c72d2be25791dcb0906d0c66ff7eb42ff29dca9d4657eb823c8464a48"
+  },
+  "cohort_policy": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/POLICY_SOURCE.json",
+    "bytes": 879,
+    "sha256": "1a02dbf2310f690044da1682f3c53fa6fa9544267ef55a286e4670f3a29a49da"
+  },
+  "cohort_runtime": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_runtime.py",
+    "bytes": 9836,
+    "sha256": "f7df120d3cf8e6cfc9faa406ea091bb0efbba8b1afa5cf1a9b620bce4649adbb"
+  },
+  "controller_adapter": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/controller_adapter.py",
+    "bytes": 6035,
+    "sha256": "25c57edc162810ed33b4ace8ed9a4882374d6bc4d9846d64a5229fca12162c41"
+  },
+  "window": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/window.py",
+    "bytes": 903,
+    "sha256": "13152a5f1192d38d50496182de2cef06c65992b30deaade850bf24910967302d"
+  },
+  "idle_policy": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R118/skvq-writer-native-v1-003/idle_policy.py",
+    "bytes": 6194,
+    "sha256": "1988d3843b340a06b0c402b96886ea7a6feb8bab573f67fb8c74512bcca33616"
+  },
+  "idle_helper": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+    "bytes": 33743,
+    "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86"
+  },
+  "original_writer": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R118/skvq-writer-native-v1-003/writer.py",
+    "bytes": 16780,
+    "sha256": "05df54778201e4b350524d03a9588cbcfe277382d1183bc7e50d927797a61866"
+  },
+  "original_gate": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R118/skvq-writer-native-v1-003/gate.py",
+    "bytes": 11357,
+    "sha256": "45e02c54d580607091b06a8109f59baf3aa19a74125eef5b5d9845c4f93404a7"
+  },
+  "oracle": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-task-domain-math-prototype-v1-002/donors/writer_byte_oracle.py",
+    "bytes": 6778,
+    "sha256": "deea191c19694ecb961f17f291eba5a3fdd8298f862a12dbed860e7d73c03b70"
+  },
+  "donor": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-task-domain-math-prototype-v1-002/donors/device_writer.py",
+    "bytes": 2386,
+    "sha256": "4fe983904f436496c4d8ff74517f0b330bf8cf8942c09ed01c5f653ff9ed9081"
+  },
+  "phase_seconds": 180,
+  "cleanup_seconds": 60,
+  "guest_bytes": 8589934592,
+  "host_bytes": 536870912,
+  "reserve_bytes": 8589934592,
+  "evidence_bytes": 268435456,
+  "cache_bytes": 536870912,
+  "CPU_total": 4,
+  "physical_allowed": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "logical": 0,
+  "prior_pass_inherited": false,
+  "model_ready": false,
+  "performance_ready": false,
+  "task_ready": false,
+  "dependencies": [
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R156_NEW24H_AUTHORITY_20261013.json",
+      "bytes": 4025,
+      "sha256": "cd1ec8cf2f12e551a5b49e95b66ef053064ac634aef1e4524430d46ce333f300"
+    },
+    {
+      "bytes": 12385,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/SOURCE_MANIFEST.json",
+      "sha256": "7aa51f300fbe7f92d35ab8903e82c54fb272754e20c9da345ddfec8b9db4679c"
+    },
+    {
+      "bytes": 15994,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-004/binding.py",
+      "sha256": "ff6ff3a3a7fdf186dd8481b0e28e980ee631163cf0cb3c85246ccc9b471beeb3"
+    },
+    {
+      "bytes": 16480,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/once_contract.py",
+      "sha256": "7789d63886da0ebe9420b0f56b584c81eae9e50ab561dbf64940df37eb31aa6a"
+    },
+    {
+      "bytes": 29763,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/host_once.py",
+      "sha256": "6414c912b216f3896a21e7b321717b604c4be7db21220ed034a798da460a0be8"
+    },
+    {
+      "bytes": 6865,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/safety_lifecycle.py",
+      "sha256": "4bbd492809c9ba1922fd3885b101f8cc6fe187884703c21e4a2d44acd1444b75"
+    },
+    {
+      "bytes": 3401,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-004/inspect_store.py",
+      "sha256": "d533a19c72d2be25791dcb0906d0c66ff7eb42ff29dca9d4657eb823c8464a48"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/POLICY_SOURCE.json",
+      "bytes": 879,
+      "sha256": "1a02dbf2310f690044da1682f3c53fa6fa9544267ef55a286e4670f3a29a49da"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_runtime.py",
+      "bytes": 9836,
+      "sha256": "f7df120d3cf8e6cfc9faa406ea091bb0efbba8b1afa5cf1a9b620bce4649adbb"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/controller_adapter.py",
+      "bytes": 6035,
+      "sha256": "25c57edc162810ed33b4ace8ed9a4882374d6bc4d9846d64a5229fca12162c41"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/window.py",
+      "bytes": 903,
+      "sha256": "13152a5f1192d38d50496182de2cef06c65992b30deaade850bf24910967302d"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R118/skvq-writer-native-v1-003/idle_policy.py",
+      "bytes": 6194,
+      "sha256": "1988d3843b340a06b0c402b96886ea7a6feb8bab573f67fb8c74512bcca33616"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+      "bytes": 33743,
+      "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86"
+    },
+    {
+      "bytes": 16355,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv030-fa-physical-layout-observation-v6-user72h-20261010/output_budget.py",
+      "sha256": "44e5ccfdad173e6b9eebc025260e489893d672c316c6aac3f8bf68a5e03c16ad"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R118/skvq-writer-native-v1-003/writer.py",
+      "bytes": 16780,
+      "sha256": "05df54778201e4b350524d03a9588cbcfe277382d1183bc7e50d927797a61866"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R118/skvq-writer-native-v1-003/gate.py",
+      "bytes": 11357,
+      "sha256": "45e02c54d580607091b06a8109f59baf3aa19a74125eef5b5d9845c4f93404a7"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-task-domain-math-prototype-v1-002/donors/writer_byte_oracle.py",
+      "bytes": 6778,
+      "sha256": "deea191c19694ecb961f17f291eba5a3fdd8298f862a12dbed860e7d73c03b70"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/skvq-task-domain-math-prototype-v1-002/donors/device_writer.py",
+      "bytes": 2386,
+      "sha256": "4fe983904f436496c4d8ff74517f0b330bf8cf8942c09ed01c5f653ff9ed9081"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_policy.py",
+      "bytes": 10024,
+      "sha256": "3b11b2eee79b2da97cc9f2204826a3cb4a1b349b29ed2a8e86d6ea0786c43476"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/test_policy.py",
+      "bytes": 8181,
+      "sha256": "07feeef02374ac8c46db39c26d2332d8b4fdecab8279961d605d0fcc5668d428"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R162_protected_observer/observer.py",
+      "bytes": 6275,
+      "sha256": "fafdb2685481d3e1c77dad977156cf3ed4838e515d6c3a4a4d4042751f0c216f"
+    }
+  ],
+  "protected_observer": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R162_protected_observer/observer.py",
+    "bytes": 6275,
+    "sha256": "fafdb2685481d3e1c77dad977156cf3ed4838e515d6c3a4a4d4042751f0c216f"
+  },
+  "cohort_compatibility": "main-fixed-disjoint-diagnostic-v1"
+}

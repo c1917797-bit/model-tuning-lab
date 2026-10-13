@@ -1,0 +1,104 @@
+{
+  "schema": "r156.task-timing-cold-seam/v1",
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/latest-task-timing-cold-entry-v1-002",
+  "default_enabled": false,
+  "start_epoch": 1791916056,
+  "cutoff": 1792002456,
+  "task_source_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/latest-three-task-v1-001/SOURCE_MANIFEST.json",
+    "bytes": 6351,
+    "sha256": "ab7bab6a2d88a5bd4629cafacc0e6412f1e915da0d72ab25984ff1c74550de97"
+  },
+  "original_timing_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/latest-three-task-v1-001/timing.py",
+    "bytes": 4129,
+    "sha256": "b5de79ac76ca6f86f2b6b8b1b646aeb5bd2a43ba56d12ca48f8238e51cceca41"
+  },
+  "files": {
+    "entry.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/latest-task-timing-cold-entry-v1-002/entry.py",
+      "bytes": 4477,
+      "sha256": "598dfeb10226f9ceeb07e7ca951ff422b25b1c3a599583655bc5ae9d6a25356d"
+    },
+    "test_entry.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/latest-task-timing-cold-entry-v1-002/test_entry.py",
+      "bytes": 3002,
+      "sha256": "6bbc1f8da6fb2860aa3dbf18468f6eeb3cf22adb84acea78ee1b390f1b7bb514"
+    }
+  },
+  "local_source_map": {
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/latest-three-task-v1-001/client_entry.py": {
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\latest-three-task-r156-20261013-001\\client_entry.py",
+      "bytes": 3294,
+      "sha256": "a525d8ce051606e94ef7aa471b0e5fa46d98f206754e1fab5044954a9537a7aa"
+    },
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/latest-three-task-v1-001/client.py": {
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\latest-three-task-r156-20261013-001\\client.py",
+      "bytes": 14155,
+      "sha256": "52fc68bac8c6d0b4313cf2a6c8bc3b1bcffbbda3c94d454b5a0ba49e2008c5c9"
+    },
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/latest-three-task-v1-001/consume.py": {
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\latest-three-task-r156-20261013-001\\consume.py",
+      "bytes": 10643,
+      "sha256": "bc35bc20872026cbb521322c826e0ff24498a833dc4ecd8ee76196e7ff4b4a5b"
+    },
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/latest-three-task-v1-001/core.py": {
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\latest-three-task-r156-20261013-001\\core.py",
+      "bytes": 4924,
+      "sha256": "a4402dd76448bcd6a25ae0b193d24c50980217c95123cd259a4a52eb9bee2aa3"
+    },
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/latest-three-task-v1-001/DEPENDENCIES.json": {
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\latest-three-task-r156-20261013-001\\DEPENDENCIES.json",
+      "bytes": 6891,
+      "sha256": "b46db71534da7a941c9b86b3265016ed89e7f66a7563d74ca023fa2689f7d225"
+    },
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/latest-three-task-v1-001/HE_PACKAGE_SOURCE.json": {
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\latest-three-task-r156-20261013-001\\HE_PACKAGE_SOURCE.json",
+      "bytes": 1529,
+      "sha256": "b774c1f7a5c32b9ef2120a5da2f0a302d9bba4782bbf9c6c34c963c005356384"
+    },
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/latest-three-task-v1-001/he_sandbox.py": {
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\latest-three-task-r156-20261013-001\\he_sandbox.py",
+      "bytes": 13906,
+      "sha256": "f5374fd72064b6ca234f9ed0c0f8faeba54c6c1f2d488c338bbad544f9502e9b"
+    },
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/latest-three-task-v1-001/inputs.py": {
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\latest-three-task-r156-20261013-001\\inputs.py",
+      "bytes": 5017,
+      "sha256": "b284d77d2e4f616bb90fc5e550089afef06445241b6fec37387aaf871724ca34"
+    },
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/latest-three-task-v1-001/owner_seam.py": {
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\latest-three-task-r156-20261013-001\\owner_seam.py",
+      "bytes": 4864,
+      "sha256": "dfe7da99b42d5f4899ad7f349baabf414174047fa3a954c18119eb0591cada82"
+    },
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/latest-three-task-v1-001/README.md": {
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\latest-three-task-r156-20261013-001\\README.md",
+      "bytes": 7549,
+      "sha256": "9d324844a6b5e83a2459dec7d97b0c7533f25a32c8cf9440073a0990392724fb"
+    },
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/latest-three-task-v1-001/test_accuracy.py": {
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\latest-three-task-r156-20261013-001\\test_accuracy.py",
+      "bytes": 16546,
+      "sha256": "99dc4cc3e89a1f8d3a99cd3794c0d3cee8294d1da2d3144156f518f12ab0bf7a"
+    },
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/latest-three-task-v1-001/timing.py": {
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\latest-three-task-r156-20261013-001\\timing.py",
+      "bytes": 4129,
+      "sha256": "b5de79ac76ca6f86f2b6b8b1b646aeb5bd2a43ba56d12ca48f8238e51cceca41"
+    },
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/latest-three-task-v1-001/HE_SANDBOX_SOURCE.json": {
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\latest-three-task-r156-20261013-001\\HE_SANDBOX_SOURCE.json",
+      "bytes": 560,
+      "sha256": "91a18271c555d7ab5d335d377850ede2b916f4a708ed5168fa8765d61b4529b4"
+    },
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/latest-three-task-v1-001/SOURCE_MANIFEST.json": {
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\latest-three-task-r156-20261013-001\\SOURCE_MANIFEST.json",
+      "bytes": 6351,
+      "sha256": "ab7bab6a2d88a5bd4629cafacc0e6412f1e915da0d72ab25984ff1c74550de97"
+    }
+  },
+  "source_only": true,
+  "actual_estimate": null,
+  "NPU": false
+}

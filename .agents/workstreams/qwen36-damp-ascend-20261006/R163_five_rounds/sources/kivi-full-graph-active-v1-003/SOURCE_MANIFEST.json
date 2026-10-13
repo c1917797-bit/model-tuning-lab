@@ -1,0 +1,593 @@
+{
+  "CPU_total": 4,
+  "actual_graph_raw": null,
+  "actual_multistep": null,
+  "actual_original_consumer": null,
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R156_NEW24H_AUTHORITY_20261013.json",
+    "bytes": 4025,
+    "sha256": "cd1ec8cf2f12e551a5b49e95b66ef053064ac634aef1e4524430d46ce333f300"
+  },
+  "base_source": {
+    "bytes": 12385,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/SOURCE_MANIFEST.json",
+    "sha256": "7aa51f300fbe7f92d35ab8903e82c54fb272754e20c9da345ddfec8b9db4679c"
+  },
+  "cache_bytes": 536870912,
+  "cleanup_seconds": 90,
+  "cutoff": 1792002456,
+  "default_enabled": false,
+  "donor_contract": {
+    "bytes": 16480,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/once_contract.py",
+    "sha256": "7789d63886da0ebe9420b0f56b584c81eae9e50ab561dbf64940df37eb31aa6a"
+  },
+  "donor_host": {
+    "bytes": 29763,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/host_once.py",
+    "sha256": "6414c912b216f3896a21e7b321717b604c4be7db21220ed034a798da460a0be8"
+  },
+  "donor_safety": {
+    "bytes": 6865,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/safety_lifecycle.py",
+    "sha256": "4bbd492809c9ba1922fd3885b101f8cc6fe187884703c21e4a2d44acd1444b75"
+  },
+  "evidence_bytes": 268435456,
+  "expected": [
+    "Same660 original36+writer16+unchanged002atomic/address26+new21 software tests",
+    "Original full warm and saved32769 GLOBAL1536 graph; active128 6 GLOBAL9216 outputs separate fresh NPU process",
+    "Stop-retain then both original independent full-pool/FP64 .005 consumers",
+    "Original full terminal/source/mapping/cleanup consumption; no model/perf/task promotion"
+  ],
+  "files": {
+    "atomic_check.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/atomic_check.py",
+      "bytes": 1718,
+      "sha256": "7f631903cea0da817f65106aef9780f02e4c6030a1de69e20fb8eb1657510b38"
+    },
+    "cache_scan.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/cache_scan.py",
+      "bytes": 4277,
+      "sha256": "79dc8de88d84120f80f7b88763b0811f8463daefd94eb455e57bcb0aadc509a2"
+    },
+    "cohort_policy.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/cohort_policy.py",
+      "bytes": 10024,
+      "sha256": "3b11b2eee79b2da97cc9f2204826a3cb4a1b349b29ed2a8e86d6ea0786c43476"
+    },
+    "cohort_runtime.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_runtime.py",
+      "bytes": 9836,
+      "sha256": "f7df120d3cf8e6cfc9faa406ea091bb0efbba8b1afa5cf1a9b620bce4649adbb"
+    },
+    "consume.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/consume.py",
+      "bytes": 7775,
+      "sha256": "d681b524b73d882101f088e85b91bb177621ddf038062af233915f7c185779cc"
+    },
+    "controller_adapter.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/controller_adapter.py",
+      "bytes": 6056,
+      "sha256": "2da7dfaca4544c7b9f96c6c23f0788dbba57ccd9f38d1e9d3661b36fef155ed0"
+    },
+    "graph_evidence.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/graph_evidence.py",
+      "bytes": 9166,
+      "sha256": "aebfd54d1a44cb0b9e4eb8268ae26a8fb357c2b13aae876ea98a8b339e9d65ec"
+    },
+    "graph_writer.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/graph_writer.py",
+      "bytes": 5636,
+      "sha256": "33ab969eae661e20af86c5b88331481c789d5a3af54c795c0cf97f27b396f5f9"
+    },
+    "guest.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/guest.py",
+      "bytes": 7759,
+      "sha256": "e8761348b34d3bbf654d002b7448f208e4e495c37821ced1ee4940578d652c4c"
+    },
+    "host.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/host.py",
+      "bytes": 9952,
+      "sha256": "75b73e56a3e45ba037e2a4a1858034ad819ad2788ce8d8d677ea02dfc293952b"
+    },
+    "independent.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/independent.py",
+      "bytes": 7291,
+      "sha256": "d34d6768ff6b87f9121368dd03b98e9f19fab94b46ceb90cae2526a12c46c0fb"
+    },
+    "original_graph_writer005.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/original_graph_writer005.py",
+      "bytes": 5554,
+      "sha256": "d943a0232d0e16371c769398ffec3ed787cfccfc9dea7ab4276c163cf28f1e6d"
+    },
+    "POLICY_SOURCE.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/POLICY_SOURCE.json",
+      "bytes": 867,
+      "sha256": "ca1189f73094a9c6fecd5713801c18e69a64bbf69af47e34f37d5a324a501802"
+    },
+    "R156_NEW24H_AUTHORITY_20261013.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/R156_NEW24H_AUTHORITY_20261013.json",
+      "bytes": 4025,
+      "sha256": "cd1ec8cf2f12e551a5b49e95b66ef053064ac634aef1e4524430d46ce333f300"
+    },
+    "README.md": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/README.md",
+      "bytes": 5616,
+      "sha256": "03782663f85af4e7a6734ca9950ff5f1dde079c77c5c27828cfef1ad59474da4"
+    },
+    "reference.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/reference.py",
+      "bytes": 7181,
+      "sha256": "5bb39ab93141778bf9b8f70725e8b899f6993683b0a5e1006175ca007f34c062"
+    },
+    "test_atomic_value.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/test_atomic_value.py",
+      "bytes": 6143,
+      "sha256": "76072b462f0d3b9c4f4d68783a4bc609023fa766aaa2ec9d023ea832275764f3"
+    },
+    "test_policy.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/test_policy.py",
+      "bytes": 8181,
+      "sha256": "07feeef02374ac8c46db39c26d2332d8b4fdecab8279961d605d0fcc5668d428"
+    },
+    "test_prefix.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/test_prefix.py",
+      "bytes": 7598,
+      "sha256": "6f739d930f84d754bd28258483cc3e122cf3f9647587353531450fc62683e47e"
+    },
+    "window.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/window.py",
+      "bytes": 903,
+      "sha256": "13152a5f1192d38d50496182de2cef06c65992b30deaade850bf24910967302d"
+    },
+    "writer_check.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/writer_check.py",
+      "bytes": 2007,
+      "sha256": "4098763b350ccc6303d76ea8f35eb9b61be1f51901fe06eafc7c5aaed90e3381"
+    },
+    "zero_contract.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/zero_contract.py",
+      "bytes": 3852,
+      "sha256": "8449724c1f20d4a83d96e12598dd94a72c5c4f78809c04de4854ec43dab2af81"
+    },
+    "ZERO_CONTROL_KERNEL_OBSERVATIONS.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/ZERO_CONTROL_KERNEL_OBSERVATIONS.json",
+      "bytes": 8228,
+      "sha256": "ac07b1006ae3bc5ac43c84dcd8dd0419c26447ba25cd416be0c4d934a8a6795b"
+    },
+    "zero_entry.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/zero_entry.py",
+      "bytes": 4085,
+      "sha256": "5a27cbcfdec783ae695eee0c7c26e39e7a6eb124e14699528dd8b7d57fec522c"
+    },
+    "zero_probe.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/zero_probe.py",
+      "bytes": 6081,
+      "sha256": "74e5df106a46fcf42ae93e08e4141e176fea67a3022a42bd996ae5eaadf69cde"
+    },
+    "ZERO_SOURCE.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/ZERO_SOURCE.json",
+      "bytes": 4532,
+      "sha256": "02261f88a5b2ee53e7d5ec0bdc5c45b027913cdae00fc74938d578425f741f3e"
+    },
+    "ZERO_STAGE_RESULT.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/ZERO_STAGE_RESULT.json",
+      "bytes": 2853,
+      "sha256": "ad91a25c56767c1445fdb5fc9d2f66c6cab2f106fdfa38b700afbc30632fae11"
+    },
+    "active_producer.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/active_producer.py",
+      "bytes": 9030,
+      "sha256": "bca60f8946f87bf7cb0525e8dec8e07167b11b0ff5c3aa442a3d3fe75b3229b9"
+    },
+    "active_reference.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/active_reference.py",
+      "bytes": 7181,
+      "sha256": "5bb39ab93141778bf9b8f70725e8b899f6993683b0a5e1006175ca007f34c062"
+    },
+    "COMMANDS.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/COMMANDS.json",
+      "bytes": 2820,
+      "sha256": "f18ffff52b8445dc5efce32454ac0f41c87e776c34193784627d2f0e2933b429"
+    },
+    "decision.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/decision.py",
+      "bytes": 1968,
+      "sha256": "ceb4977636691d7e8ad547218ae2955aa995959a802af5e57cabe7a0636e100f"
+    },
+    "graph_seam.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/graph_seam.py",
+      "bytes": 2761,
+      "sha256": "4a57dbcd12ed34bd9d696bc15e82dee88df90972bd5a37cc5e7d26531f619313"
+    },
+    "test_dual.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/test_dual.py",
+      "bytes": 7059,
+      "sha256": "303f3cd8809e8a4a9afdaf68157bce840719e05f85278a39671bde4f82b82b1d"
+    }
+  },
+  "graph_source": {
+    "bytes": 7774,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-fullgraph-plugin-v1-001/SOURCE_MANIFEST.json",
+    "sha256": "d0eed41cbda770c59e4fdb6ef2ed648362a5d074928c254df2307c291cfc3f82"
+  },
+  "guest_bytes": 8589934592,
+  "host_bytes": 536870912,
+  "inspect_store": {
+    "bytes": 3401,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-004/inspect_store.py",
+    "sha256": "d533a19c72d2be25791dcb0906d0c66ff7eb42ff29dca9d4657eb823c8464a48"
+  },
+  "logical": 0,
+  "model_ready": false,
+  "oracle": {
+    "bytes": 7730,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-component-numeric-v1-001/oracle.py",
+    "sha256": "5d6278c20800e6b90b9e0fc5869fbaf9b5fdce5d4d652d7725cb68e8c4fed444"
+  },
+  "output_budget": {
+    "bytes": 16355,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv030-fa-physical-layout-observation-v6-user72h-20261010/output_budget.py",
+    "sha256": "44e5ccfdad173e6b9eebc025260e489893d672c316c6aac3f8bf68a5e03c16ad"
+  },
+  "owner_binding": {
+    "bytes": 15994,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-004/binding.py",
+    "sha256": "ff6ff3a3a7fdf186dd8481b0e28e980ee631163cf0cb3c85246ccc9b471beeb3"
+  },
+  "performance_ready": false,
+  "phase_seconds": 1800,
+  "reserve_bytes": 8589934592,
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003",
+  "run_authority": false,
+  "schema": "kivi.direct-fp32.graph-single4-owner-sources/v3",
+  "start_epoch": 1791916056,
+  "predecessor_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-v1-003/SOURCE_MANIFEST.json",
+    "bytes": 8203,
+    "sha256": "5a02e3610c18a5d1197700b4791cd5643309211362caa3cb9eb264590a386e43"
+  },
+  "predecessor_files": {
+    "cache_scan.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-v1-003/cache_scan.py",
+      "bytes": 4271,
+      "sha256": "c8efa5eccb63e1e839c890edef4ba0d40bdb1157188fa210321341819b3ea2e5"
+    },
+    "consume.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-v1-003/consume.py",
+      "bytes": 6806,
+      "sha256": "2b1ab483c212b73f4ea4b31006948f6bc57d85fe38e8afb9af44c5ec2650369e"
+    },
+    "controller_adapter.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-v1-003/controller_adapter.py",
+      "bytes": 3520,
+      "sha256": "11dcd5e4ca5881d1a8ed53a4665455afed04dfccbe00160cc053db04861804b6"
+    },
+    "graph_evidence.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-v1-003/graph_evidence.py",
+      "bytes": 9164,
+      "sha256": "04d313c9461fa6e9796f92e758cbeba8ac6da5c18cd5689cb131786d46605709"
+    },
+    "guest.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-v1-003/guest.py",
+      "bytes": 5272,
+      "sha256": "138c30bef94238de87463e6cc87449e663ece45a7123b9d02d79035e6a6bb825"
+    },
+    "host.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-v1-003/host.py",
+      "bytes": 7928,
+      "sha256": "ca5aa916aad5a4da03e48c51d06fb06953cb34526b541b0a65fafbe1a7641224"
+    },
+    "independent.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-v1-003/independent.py",
+      "bytes": 7291,
+      "sha256": "d34d6768ff6b87f9121368dd03b98e9f19fab94b46ceb90cae2526a12c46c0fb"
+    },
+    "test_owner.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-v1-003/test_owner.py",
+      "bytes": 8091,
+      "sha256": "1cd4094065f3bd1a5eaf8d23b98242eb7b4b3258a121f1fc81bcfb7984a35b59"
+    },
+    "window.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-v1-003/window.py",
+      "bytes": 933,
+      "sha256": "7220afbc45fde68b76ba6d246745663d079fcdb73b1d313a577aaaa5a6ed55cf"
+    }
+  },
+  "local_software_tests": 21,
+  "idle_policy": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R118/skvq-writer-native-v1-003/idle_policy.py",
+    "bytes": 6194,
+    "sha256": "1988d3843b340a06b0c402b96886ea7a6feb8bab573f67fb8c74512bcca33616"
+  },
+  "idle_helper": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+    "bytes": 33743,
+    "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86"
+  },
+  "delta_scope": [
+    "Only source load replaces frozen original writer with byte-exact002 fixed writer",
+    "New R156 clock/receipt AST seam; full inverse original calculation/graph/initialization preserved",
+    "Four original owner stages use same1800 phase;600 caps each new native domain",
+    "R162 observer source-bound private install only; original mapping/RAM/CPU/cleanup retained",
+    "Originalactive producer removes separate prefix observation, retains full original warm/graph/author inputs",
+    "Fail-closed original operation + both exact independent references; no model/performance permission"
+  ],
+  "prior_actual_npu_pass_inherited": false,
+  "actual_source_audit": null,
+  "actual_same_image_software": null,
+  "ready": false,
+  "writer_repair": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-graph-writer-channel32-r118-v1-005/SOURCE_MANIFEST.json",
+    "bytes": 3635,
+    "sha256": "a22901c8bb6fb3b908e0c38115315f42b8adc18d3f1f65b23cc97a4a983450ef"
+  },
+  "original004_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-r118-v1-004/SOURCE_MANIFEST.json",
+    "bytes": 9478,
+    "sha256": "e2b7e96a959b8b733fc20bb6956cc721a3e90c42ce233465f031ad83121ceadd"
+  },
+  "original004_files": {
+    "independent.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-r118-v1-004/independent.py",
+      "bytes": 7291,
+      "sha256": "d34d6768ff6b87f9121368dd03b98e9f19fab94b46ceb90cae2526a12c46c0fb"
+    },
+    "graph_evidence.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-r118-v1-004/graph_evidence.py",
+      "bytes": 9166,
+      "sha256": "aebfd54d1a44cb0b9e4eb8268ae26a8fb357c2b13aae876ea98a8b339e9d65ec"
+    },
+    "host.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-r118-v1-004/host.py",
+      "bytes": 8061,
+      "sha256": "7f9f1d1f50ed02145e38f2af7c171c164a1c8d546dc5fa110241b1095b71134a"
+    },
+    "guest.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-r118-v1-004/guest.py",
+      "bytes": 5275,
+      "sha256": "1897619ceb11dfd21af90d0888400808ce5847f041d5337cc356aec5497a3d78"
+    },
+    "cache_scan.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-r118-v1-004/cache_scan.py",
+      "bytes": 4271,
+      "sha256": "c8efa5eccb63e1e839c890edef4ba0d40bdb1157188fa210321341819b3ea2e5"
+    },
+    "test_owner.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-r118-v1-004/test_owner.py",
+      "bytes": 9545,
+      "sha256": "e9485da3f99c0e9c1d58d710c6459dcf1f6c3d77bc6be3eb16872011b5aa0b74"
+    },
+    "window.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-r118-v1-004/window.py",
+      "bytes": 1110,
+      "sha256": "0049467da62333708bed16c1087d88951b2f2cdfca3d6490a1afd33dbdf3c791"
+    },
+    "consume.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-r118-v1-004/consume.py",
+      "bytes": 6807,
+      "sha256": "3b02d515b18a07e5ba4b53df146958db5d92abea02dc2d94a6f24b3546f664f9"
+    },
+    "controller_adapter.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-graph-single4-owner-r118-v1-004/controller_adapter.py",
+      "bytes": 3522,
+      "sha256": "07600fcf8682ff620b78cc488f1cc7893b77f58b267917be3012667bbecd8e40"
+    }
+  },
+  "active_key_seal_qualified": false,
+  "frozen": true,
+  "original006_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-channel32-graph-single4-owner-r118-v1-006/SOURCE_MANIFEST.json",
+    "bytes": 13541,
+    "sha256": "b8d573ac109b1139562995596ade1e48668d6a479fca9b491d88d115d6a8f48a"
+  },
+  "original006_files": {
+    "cache_scan.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-channel32-graph-single4-owner-r118-v1-006/cache_scan.py",
+      "bytes": 4271,
+      "sha256": "c8efa5eccb63e1e839c890edef4ba0d40bdb1157188fa210321341819b3ea2e5"
+    },
+    "consume.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-channel32-graph-single4-owner-r118-v1-006/consume.py",
+      "bytes": 7428,
+      "sha256": "84bc1cd9252fb550630e17e63e9a38832dc7fd6360f4d23f979d055143ad077b"
+    },
+    "controller_adapter.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-channel32-graph-single4-owner-r118-v1-006/controller_adapter.py",
+      "bytes": 3553,
+      "sha256": "0687c7b3f395b1ffde9e8f98e671fdd410344f76ef19255774d63ce26f5c010f"
+    },
+    "graph_evidence.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-channel32-graph-single4-owner-r118-v1-006/graph_evidence.py",
+      "bytes": 9166,
+      "sha256": "aebfd54d1a44cb0b9e4eb8268ae26a8fb357c2b13aae876ea98a8b339e9d65ec"
+    },
+    "guest.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-channel32-graph-single4-owner-r118-v1-006/guest.py",
+      "bytes": 5779,
+      "sha256": "45fe0c37eb5699827b6e86f7feb616eaeb3cca3cb8736f8b83d0ce0028974951"
+    },
+    "host.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-channel32-graph-single4-owner-r118-v1-006/host.py",
+      "bytes": 8385,
+      "sha256": "523c37239d2960959b7707a8548f3cf93df2c85de7fb3cc1b02657ac78572248"
+    },
+    "independent.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-channel32-graph-single4-owner-r118-v1-006/independent.py",
+      "bytes": 7291,
+      "sha256": "d34d6768ff6b87f9121368dd03b98e9f19fab94b46ceb90cae2526a12c46c0fb"
+    },
+    "SOURCE_DELTA.json": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-channel32-graph-single4-owner-r118-v1-006/SOURCE_DELTA.json",
+      "bytes": 4328,
+      "sha256": "cf70065ad8ef02e46dc6d7cc9207dfaad6f47bafab269aaed020cf0323e78109"
+    },
+    "test_delivery.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-channel32-graph-single4-owner-r118-v1-006/test_delivery.py",
+      "bytes": 3715,
+      "sha256": "94df4a3938492843464115782e75af7667839696603dcc21bd4bbb16bdcc58f4"
+    },
+    "test_owner.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-channel32-graph-single4-owner-r118-v1-006/test_owner.py",
+      "bytes": 9546,
+      "sha256": "891df1a3b799e62e2f3d363ba2f5b26e1b896c93cb688dfae116757b4dc694b7"
+    },
+    "window.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-channel32-graph-single4-owner-r118-v1-006/window.py",
+      "bytes": 1110,
+      "sha256": "0049467da62333708bed16c1087d88951b2f2cdfca3d6490a1afd33dbdf3c791"
+    },
+    "writer_check.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-channel32-graph-single4-owner-r118-v1-006/writer_check.py",
+      "bytes": 2007,
+      "sha256": "4098763b350ccc6303d76ea8f35eb9b61be1f51901fe06eafc7c5aaed90e3381"
+    }
+  },
+  "physical_allowed": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "cohort_policy": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/POLICY_SOURCE.json",
+    "bytes": 879,
+    "sha256": "1a02dbf2310f690044da1682f3c53fa6fa9544267ef55a286e4670f3a29a49da"
+  },
+  "cohort_runtime": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_runtime.py",
+    "bytes": 9836,
+    "sha256": "f7df120d3cf8e6cfc9faa406ea091bb0efbba8b1afa5cf1a9b620bce4649adbb"
+  },
+  "cohort_compatibility": "main-fixed-disjoint-diagnostic-v1",
+  "original008_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-disjoint-graph-single-owner-r118-v1-008/SOURCE_MANIFEST.json",
+    "bytes": 17451,
+    "sha256": "d52cf72cb6416c5edb9d7d7022b95c1493edd15ec5a308d2f0b2efc41ca997c4"
+  },
+  "original008_files": {
+    "cache_scan.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-disjoint-graph-single-owner-r118-v1-008/cache_scan.py",
+      "bytes": 4277,
+      "sha256": "79dc8de88d84120f80f7b88763b0811f8463daefd94eb455e57bcb0aadc509a2"
+    },
+    "cohort_runtime.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-disjoint-graph-single-owner-r118-v1-008/cohort_runtime.py",
+      "bytes": 9836,
+      "sha256": "f7df120d3cf8e6cfc9faa406ea091bb0efbba8b1afa5cf1a9b620bce4649adbb"
+    },
+    "consume.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-disjoint-graph-single-owner-r118-v1-008/consume.py",
+      "bytes": 7993,
+      "sha256": "2427cabbdd3ede180090b30f255effa26a3063408611289a5d877fbb5c369bd7"
+    },
+    "controller_adapter.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-disjoint-graph-single-owner-r118-v1-008/controller_adapter.py",
+      "bytes": 6035,
+      "sha256": "beb7683a5b7d76ecd9a7bba4d4d980ea491775384a348ff0034a16f163ffe8e3"
+    },
+    "graph_evidence.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-disjoint-graph-single-owner-r118-v1-008/graph_evidence.py",
+      "bytes": 9166,
+      "sha256": "aebfd54d1a44cb0b9e4eb8268ae26a8fb357c2b13aae876ea98a8b339e9d65ec"
+    },
+    "guest.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-disjoint-graph-single-owner-r118-v1-008/guest.py",
+      "bytes": 5779,
+      "sha256": "45fe0c37eb5699827b6e86f7feb616eaeb3cca3cb8736f8b83d0ce0028974951"
+    },
+    "host.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-disjoint-graph-single-owner-r118-v1-008/host.py",
+      "bytes": 9332,
+      "sha256": "adedd071b3c2f4e6c6754cce9f50fe6357e441106280796a96b6593e01a9ba6e"
+    },
+    "independent.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-disjoint-graph-single-owner-r118-v1-008/independent.py",
+      "bytes": 7291,
+      "sha256": "d34d6768ff6b87f9121368dd03b98e9f19fab94b46ceb90cae2526a12c46c0fb"
+    },
+    "test_cohort_binding.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-disjoint-graph-single-owner-r118-v1-008/test_cohort_binding.py",
+      "bytes": 6570,
+      "sha256": "5c1d756c674fd73103bb7acae47201723e3cf9e0d0b72942885d758383426148"
+    },
+    "test_owner.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-disjoint-graph-single-owner-r118-v1-008/test_owner.py",
+      "bytes": 9730,
+      "sha256": "5be9ac49b623ecefdacc7a0a8af051675fca67cf3ae468e30f0c598773090304"
+    },
+    "window.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-disjoint-graph-single-owner-r118-v1-008/window.py",
+      "bytes": 1110,
+      "sha256": "0049467da62333708bed16c1087d88951b2f2cdfca3d6490a1afd33dbdf3c791"
+    },
+    "writer_check.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-disjoint-graph-single-owner-r118-v1-008/writer_check.py",
+      "bytes": 2007,
+      "sha256": "4098763b350ccc6303d76ea8f35eb9b61be1f51901fe06eafc7c5aaed90e3381"
+    }
+  },
+  "zero_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/ZERO_SOURCE.json",
+    "bytes": 4532,
+    "sha256": "02261f88a5b2ee53e7d5ec0bdc5c45b027913cdae00fc74938d578425f741f3e"
+  },
+  "purpose": "New full original warm/graph and active128 two-domain correctness gate after 002 six-prefix completion evidence; not a repetition of prefix",
+  "local_test_evidence": {
+    "scope": "SOFTWARE_ONLY",
+    "tests": 21,
+    "successful": true,
+    "run": "8b05c0",
+    "elapsed_test_seconds": 0.686,
+    "previous_runs": [
+      "b4b1c3",
+      "1f71ed"
+    ],
+    "initial_negative_fixture_fix": "Original test08 mistakenly supplied129 tail slots allowing slot16; changed ONLY synthetic pool fixture to original128 geometry, then actual original oracle rejected OOB. Candidate/oracle unchanged.",
+    "local_windows_sandbox": "86038a Path.resolve WinError5; authorized same command 8b05c0 actual PASS",
+    "same_image": false,
+    "NPU": false
+  },
+  "atomic_writer": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/graph_writer.py",
+    "bytes": 5636,
+    "sha256": "33ab969eae661e20af86c5b88331481c789d5a3af54c795c0cf97f27b396f5f9"
+  },
+  "original009_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-disjoint-zero-single-owner-r118-v1-009/SOURCE_MANIFEST.json",
+    "bytes": 21394,
+    "sha256": "c527057c9794bdc164aa026f31d15cbb14286414ccf8cd43cfb151a541c47ede"
+  },
+  "prior_atomic_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/SOURCE_MANIFEST.json",
+    "bytes": 26988,
+    "sha256": "52688f37a7a978225b69470139d90ebc02dfe9bcef28111f8885d45077898629"
+  },
+  "actual_prefix": null,
+  "original_strict_warm_compile_returned": false,
+  "actual_writer": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/graph_writer.py",
+    "bytes": 5636,
+    "sha256": "33ab969eae661e20af86c5b88331481c789d5a3af54c795c0cf97f27b396f5f9"
+  },
+  "prefix_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/SOURCE_MANIFEST.json",
+    "bytes": 27392,
+    "sha256": "19481ce0aaf73af0e0c34eea6281a26646367883fc67aad3d9d5c39276e69354"
+  },
+  "active_original_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-active-seal-cases-r118-v1-002/SOURCE_MANIFEST.json",
+    "bytes": 4834,
+    "sha256": "2cbf95560985564c13119f4b9d33fbca45e228da914bd93c8f5e0341f716a61e"
+  },
+  "active_source": {
+    "bytes": 3729,
+    "sha256": "34db2794e71049d6eb433a3c0c9d28f8bc92ee6962e180bca773fb3adfc5e164",
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/ACTIVE_SOURCE_MANIFEST.json"
+  },
+  "observer": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R162_protected_observer/observer.py",
+    "bytes": 6275,
+    "sha256": "fafdb2685481d3e1c77dad977156cf3ed4838e515d6c3a4a4d4042751f0c216f"
+  }
+}

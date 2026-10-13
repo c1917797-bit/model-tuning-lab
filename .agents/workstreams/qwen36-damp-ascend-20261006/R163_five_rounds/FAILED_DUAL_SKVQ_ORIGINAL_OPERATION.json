@@ -1,0 +1,107 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": \"exit code\",\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": false,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/host.py\",\n          \"--execute\",\n          \"--source\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/SOURCE_MANIFEST.json\",\n          \"--source-sha256\",\n          \"8ada3f2607b551c462380b832b20c165c9d641b66eac7fc90a86903195633815\",\n          \"--cohort\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R163_DUAL_COHORT.json\",\n          \"--cohort-sha256\",\n          \"b68154e0a6650d41cfbdc8a6c908cdb3ea7612a7e58b71379604edd423b3cdc9\",\n          \"--run-id\",\n          \"skvq-full-main-r163\",\n          \"--physical\",\n          \"6\",\n          \"--output\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r156-main-skvq-full-003\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 600,\n        \"error\": \"exit code\",\n        \"exitCode\": 1,\n        \"id\": \"exec-0000000000000047\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"Traceback (most recent call last):\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/host.py\\\", line 52, in <module>\\n    if __name__=='__main__':raise SystemExit(main())\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/host.py\\\", line 23, in main\\n    co=E['Joint'](a,own,bm,None,dict(source=own,input_files=refs),H,started);Owned=E['controller'](H);observer=J.load('_vector_protected_observer',m['protected_observer']);observer.install(H,m['idle_helper'],out,C.write,lambda:([os.getpid()],[c.cid for c in co.controllers if c.cid]));stages=[];cleanups=[];primary=None\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/host_once.py\\\", line 39, in __init__\\n    self.cpu=H.cpu_admission(self.host_initial,self.daemon_initial)\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_runtime.py\\\", line 44, in cpu\\n    def cpu(self,host,daemon):return self.p.cpu_plan(self.plan,self.row['run_id'],host,daemon)\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_policy.py\\\", line 144, in cpu_plan\\n    need(guests | reserve <= set(daemon['effective_cpus'])\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_policy.py\\\", line 19, in need\\n    raise ValueError(message)\\nValueError: actual daemon aggregate guest/reserve CPU capacity\\n\",\n        \"stdout\": \"\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"https://agentweb-tpc.westar.uk\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 905,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 905,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 905\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 406,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 406\n      }\n    },\n    \"traceId\": \"34d6e6dc-0574-47ff-93c8-0b8bb49fdc55\"\n  },\n  \"operationId\": \"exec-0000000000000047\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": false,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": "exit code",
+    "found": true,
+    "kind": "exec",
+    "ok": false,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/host.py",
+            "--execute",
+            "--source",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/SOURCE_MANIFEST.json",
+            "--source-sha256",
+            "8ada3f2607b551c462380b832b20c165c9d641b66eac7fc90a86903195633815",
+            "--cohort",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R163_DUAL_COHORT.json",
+            "--cohort-sha256",
+            "b68154e0a6650d41cfbdc8a6c908cdb3ea7612a7e58b71379604edd423b3cdc9",
+            "--run-id",
+            "skvq-full-main-r163",
+            "--physical",
+            "6",
+            "--output",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r156-main-skvq-full-003"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 600,
+          "error": "exit code",
+          "exitCode": 1,
+          "id": "exec-0000000000000047",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "Traceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/host.py\", line 52, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/host.py\", line 23, in main\n    co=E['Joint'](a,own,bm,None,dict(source=own,input_files=refs),H,started);Owned=E['controller'](H);observer=J.load('_vector_protected_observer',m['protected_observer']);observer.install(H,m['idle_helper'],out,C.write,lambda:([os.getpid()],[c.cid for c in co.controllers if c.cid]));stages=[];cleanups=[];primary=None\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/host_once.py\", line 39, in __init__\n    self.cpu=H.cpu_admission(self.host_initial,self.daemon_initial)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_runtime.py\", line 44, in cpu\n    def cpu(self,host,daemon):return self.p.cpu_plan(self.plan,self.row['run_id'],host,daemon)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_policy.py\", line 144, in cpu_plan\n    need(guests | reserve <= set(daemon['effective_cpus'])\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_policy.py\", line 19, in need\n    raise ValueError(message)\nValueError: actual daemon aggregate guest/reserve CPU capacity\n",
+          "stdout": "",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "https://agentweb-tpc.westar.uk",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 905,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 905,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 905
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 406,
+          "routeLookupMs": 0,
+          "totalMs": 406
+        }
+      },
+      "traceId": "34d6e6dc-0574-47ff-93c8-0b8bb49fdc55"
+    },
+    "operationId": "exec-0000000000000047",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": false,
+    "terminal": true
+  },
+  "isError": false
+}

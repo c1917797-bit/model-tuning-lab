@@ -1,0 +1,95 @@
+{
+  "schema": "ascend.five-rounds-stage-update/v1",
+  "recorded_utc": "2026-10-13T21:03:00Z",
+  "supersedes_only_live_status": "REHEARSAL_AND_NATIVE_GATES.json is preserved as the earlier snapshot; this update contains later results.",
+  "software_tests": 59,
+  "derivation": "57 original plus 2 non-contiguous cpuset controls rerun MAIN669f6a exit0",
+  "five_rounds_finished": true,
+  "final_acceptance": false,
+  "performance_result": null,
+  "task_result": null,
+  "skvq": {
+    "actual_host_operation": "exec-0000000000000053",
+    "independent_operation": "exec-000000000000005e",
+    "verdict_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r156-main-skvq-full-003-cpufixed/MAIN_INDEPENDENT_FULL256_GUARD64.json",
+      "bytes": 1225,
+      "sha256": "d20f1fa6fbc7344854e27a73a2938c67ede82bee77257d535d8288518d2766bb"
+    },
+    "verdict": {
+      "actual64_guard_observations": true,
+      "actual_all256_byte_cells": true,
+      "actual_capture_mode": "GLOBAL",
+      "cohort": {
+        "bytes": 2246,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R163_DUAL_CPU_FIXED_COHORT.json",
+        "sha256": "07399851c8ff642179e0265ed5f755139123e47b8ece1b3492ca1ef118e3ea27"
+      },
+      "component_only": true,
+      "host_ref": {
+        "bytes": 83107,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r156-main-skvq-full-003-cpufixed/RESULT.json",
+        "sha256": "5d549e389b1cb1fb2bad55a11f9ce46f335db4563907e277bd8a57c5d8cdc158"
+      },
+      "model_ready": false,
+      "operation_ref": {
+        "bytes": 7017,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r156-main-skvq-full-003-cpufixed/MAIN_ORIGINAL_OPERATION.json",
+        "sha256": "dc3d6eff45f1adf4a0495c134296cd0e0b765606e962bfb0ffe4185f82a86a91"
+      },
+      "performance_ready": false,
+      "schema": "skvq.vector256-independent-component/v1",
+      "source": {
+        "bytes": 13850,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/SOURCE_MANIFEST.json",
+        "sha256": "8ada3f2607b551c462380b832b20c165c9d641b66eac7fc90a86903195633815"
+      },
+      "task_ready": false
+    },
+    "scope": "component 256 byte cells plus 64 guards; model/performance/tasks NOT qualified"
+  },
+  "kivi": {
+    "actual_host_operation": "exec-0000000000000051",
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r156-main-dual-003-cpufixed/RESULT.json",
+      "bytes": 6423,
+      "sha256": "1468b211f7e3a9cf8751d111c553f3f8aca08c0955b6233a080bcc34ede250dc"
+    },
+    "result_scope": "Actual same-image software36+16+26+21 completed. Physical4 graph phase failed at GLOBAL capture_end; active128 not reached.",
+    "category": "implementation/runtime graph integration, not paper invalidity or measured numerical failure",
+    "symptom": "EE1016 synchronous rtMemcpy not allowed during GLOBAL capture; reported working operator append",
+    "root_cause_status": "Exact initiating call unresolved; agent analysing real source/trace, not repeating unchanged or switching to RELAXED to claim pass",
+    "cleanups": "both owned CIDs stopped retained with errors[]; parent secondary[]"
+  },
+  "dispatch": {
+    "prior_failed_dual": "reserve4,5 not in real allowed CPU set; neither original attempt reached container creation",
+    "corrected": "fresh exact cpu admission accepted reserve144,145; new IDs/output and unchanged sources. Original failures retained.",
+    "actual_effective_cpu_set": [
+      0,
+      1,
+      2,
+      3,
+      144,
+      145,
+      166
+    ],
+    "active_npu_operations": [],
+    "last_release_snapshot": "both new operators terminal; all four owned stage CIDs stopped retained, no NPU4-7 process; external NPU0 process untouched",
+    "no_gap_claim": false
+  },
+  "current_successors": [
+    "KIVI GLOBAL capture synchronous-copy root cause and minimal source repair",
+    "MXR full GDN/native worker/state/graph gate after captured4rank inverse PASS",
+    "SKVQ service source-factory adaptation to actual new vector receipts",
+    "Latest GSM8K/HumanEval/MMLU no-card inputs and cold owner with code-evaluation sandbox"
+  ],
+  "tokenizer": {
+    "actual_host_root": "/cache/efim/Qwen3.6-27B",
+    "seven_assets_whole_hash_fresh_pass": true,
+    "weights_read": false
+  },
+  "deadline_utc": "2026-10-14T18:27:36Z",
+  "deadline_extended": false,
+  "success_guarantee": "None. Rehearsals remove known engineering failure modes; success still requires actual matched >=10% model throughput and final task quality.",
+  "reusable_action": "Always run live CPU/cgroup admission before experiment output creation. Source-only audit and passing synthetic policy tests are not deployment admission."
+}

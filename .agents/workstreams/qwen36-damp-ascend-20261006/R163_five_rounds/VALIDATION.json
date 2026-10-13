@@ -1,0 +1,13 @@
+{
+  "schema": "ascend.rehearsal-checkpoint-validation/v1",
+  "archive54_whole_bytes": "PASS exec0061",
+  "maintainer_tree": "PASS 20 skills exec0061",
+  "strict_staged_whitespace": "FAILED exec0064: only blank-at-EOF in four frozen source files; deliberately not rewriting numerically tested/source-pinned bytes",
+  "frozen_source_exceptions": [
+    ".agents/workstreams/qwen36-damp-ascend-20261006/R162_protected_observer/observer.py",
+    ".agents/workstreams/qwen36-damp-ascend-20261006/R162_protected_observer/test_observer.py",
+    ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-002/software_check.py",
+    ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-003/software_check.py"
+  ],
+  "policy": "Require strict whitespace check for every other staged file and all other whitespace classes for full staged patch. Preserve exact tested source hashes. Does not override runtime numerical/acceptance gates."
+}

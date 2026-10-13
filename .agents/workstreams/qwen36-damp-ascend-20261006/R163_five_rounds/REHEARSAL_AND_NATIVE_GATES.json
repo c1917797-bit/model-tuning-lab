@@ -1,0 +1,502 @@
+{
+  "schema": "ascend.five-rounds-rehearsal-and-native-evidence/v1",
+  "recorded_utc": "2026-10-13T20:58:00Z",
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R156_NEW24H_AUTHORITY_20261013.json",
+    "bytes": 4025,
+    "sha256": "cd1ec8cf2f12e551a5b49e95b66ef053064ac634aef1e4524430d46ce333f300"
+  },
+  "deadline_utc": "2026-10-14T18:27:36Z",
+  "deadline_renewed": false,
+  "goal": {
+    "model": "actual /cache/efim/Qwen3.6-27B frozen checkpoint, not a name-only identity",
+    "delivery": "vLLM-Ascend opt-in plugin/monkeypatch",
+    "performance": "same stack/input/concurrency/common optimization; profiling OFF; output1024; >=10% E2E throughput; three paired rounds; TTFT and TPOT",
+    "task_quality": "latest human GSM8K/HumanEval/MMLU, smoke then full, thinking OFF, max2048, normal EOS; <=1% loss report pp and relative; not a tensor tolerance",
+    "hypic": "historical example, not this campaign result",
+    "task_gate_passed": false,
+    "performance_gate_passed": false
+  },
+  "rounds": [
+    {
+      "id": 1,
+      "risk": "Frozen source, time window or cold entry differs from actual execution",
+      "observed": "MXR034 adapter retained historical R118 cutoff although new source manifest claimed R156; found before that version's NPU launch.",
+      "action": "Preserved old drafts; new037 private adapter changed the exact clock seam, source inverse checked; actual038 build and039 numerical passed.",
+      "software_evidence": "14 shared Round1/2 MAIN controls bf6b86 exit0, 1.890s",
+      "remaining": "No graph/full-model authorization from captured4frame result."
+    },
+    {
+      "id": 2,
+      "risk": "False whole-card mutual exclusion, protected PID churn, or unreal CPU allocation causes empty cards",
+      "observed": "Old other-card idle assumption and short-lived external0-3 PID disappearance can reject safe own-card execution. MAIN also selected reserve CPUs4,5 without checking actual non-contiguous cpuset.",
+      "action": "R162 observer source6275/fafdb... retained exact PID/start/CID boundaries; 11 Linux controls and actual external-process integration passed. Failed dual exec0046/0047 retained, no containers created. Actual cpu_view exec004e showed 0-3,144,145,166; new cohort uses reserve144,145 and actual cpu_plan both passed exec0050.",
+      "software_evidence": "14 shared Round1/2 include aggregate memory/CPU and protected identity negatives; not a full scheduler admission proof",
+      "remaining": "No proven full-window zero-idle metric. MXR production concurrency remains unqualified; target CPU admission must be evaluated before creating any experimental output."
+    },
+    {
+      "id": 3,
+      "risk": "Subset or metadata passes are mistaken for independent numerical/graph correctness",
+      "observed": "6-stage zero prefix cannot stand for whole output/active128/slot reuse, and a failed parent cannot be relabelled PASS.",
+      "action": "21 source-bound negative controls reject NaN, shape/head errors, slot OOB, pool mutation, candidate-importing reference, missing graph/epochs and relaxed thresholds. New003 separates fresh processes for real frame graph and active128, retains independent FP64/author-byte oracles.",
+      "software_evidence": "MAIN f5ac7a exit0,21 tests/.627s; frozen test SHA303f3cd8...82b82b1d",
+      "remaining": "KIVI003 actual complete stages/independent verdict pending; model native lifecycle still separate."
+    },
+    {
+      "id": 4,
+      "risk": "Discard useful <10% components or add two claimed gains without a measured combination",
+      "observed": "Old formal screen >=1.10 cannot also serve as a component retention policy.",
+      "action": "12 controls exercised separate planning-only component retention and final combination decision; require matched D/A/B/A+B and actual three pairs; no gain addition, no automatic performance authority.",
+      "software_evidence": "MAIN880797 exit0,12/.001s; initial sandbox WinError5 kept as environment failure",
+      "remaining": "New planning predicate is not wired into a final production combination consumer; no actual combined model measurement."
+    },
+    {
+      "id": 5,
+      "risk": "Candidate finishes but tasks have broken cold imports, absent inputs, unsafe code evaluation or no time remaining",
+      "observed": "Existing timing -I entry could not find core. Actual task tokenized inputs/owner and HumanEval sandbox remain missing.",
+      "action": "New source-pinned cold entry retains old timing math;10 actual CLI/source/cold-import controls passed. Seven actual tokenizer/config assets rehashed successfully, no weight read. Missing paired-smoke timing returns unknown ETA, never an invented latest start.",
+      "software_evidence": "MAIN4f7bfd exit0,10/.519s",
+      "remaining": "Real GSM8K/HumanEval/MMLU smoke/full inputs, CPU owner, HumanEval sandbox and measured full-run ETA still pending."
+    }
+  ],
+  "software_total": {
+    "tests": 57,
+    "derivation": "14+21+12+10; shared Round1/2 counted only once",
+    "claim_scope": "CPU/software/fault-injection only; does not qualify paper mechanisms or E2E benefit"
+  },
+  "native_progress": [
+    {
+      "method": "MXR diag16 defect correction037",
+      "physical": 5,
+      "operation": "exec-000000000000001e",
+      "source_build": "exec-0000000000000014",
+      "host_result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-y16-single5-owned-main-R156_039_001/RESULT.json",
+        "bytes": 294133,
+        "sha256": "5e126fd1412764ac47197cd99144f451417b92e0f6dde940e1f10ecbe623d03b"
+      },
+      "numeric_result": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-y16-single5-owned-main-R156_039_001/physical5/numeric/RESULT.json",
+        "bytes": 242693,
+        "sha256": "8b36505fe8b27a2468e1a98142745a98cbaf1abb2dc4b760274ce739ff9efcf4"
+      },
+      "result": "captured four ranks, three repeats each; all unchanged independent FP64 thresholds pass; guards and input/pointers intact; old rank2 failure reproduced",
+      "candidate_frob_rank2": 0.0007546666591027862,
+      "old_rank2": 0.0030071241985744628,
+      "frob_limit": 0.002,
+      "scope": "inverse component on four captured inputs; NOT full GDN/state/graph/model/tasks",
+      "own_container_stopped_retained": true
+    },
+    {
+      "method": "SKVQ vector packing002",
+      "physical": 6,
+      "operation": "exec-000000000000002b",
+      "independent_operation": "exec-000000000000002f",
+      "independent": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r156-main-skvq-vector-002/MAIN_INDEPENDENT_VECTOR256.json",
+        "bytes": 1209,
+        "sha256": "fd3b4be4fd03d936acbc35057f1d581070d47856d055e79fa6d2dba34e998696"
+      },
+      "result": "all256 float16/bfloat16 2/4bit B1..16 K/V eager/GLOBAL byte cells pass independent original scalar oracle",
+      "scope": "quantize-only component; complete64 guards and service integration NOT qualified",
+      "own_containers_stopped_retained": true
+    }
+  ],
+  "successors": [
+    {
+      "run_id": "kivi-dual-main-r163-cpu-fixed",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/SOURCE_MANIFEST.json",
+        "bytes": 30751,
+        "sha256": "5d63e4820b4c810630768a9b734301b7122d649e013d08b7b6ff8b6f321a8c52"
+      },
+      "physical": 4,
+      "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r156-main-dual-003-cpufixed",
+      "operation": "exec-0000000000000051",
+      "state_at_checkpoint": "running, no numerical verdict"
+    },
+    {
+      "run_id": "skvq-full-main-r163-cpu-fixed",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/SOURCE_MANIFEST.json",
+        "bytes": 13850,
+        "sha256": "8ada3f2607b551c462380b832b20c165c9d641b66eac7fc90a86903195633815"
+      },
+      "physical": 6,
+      "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r156-main-skvq-full-003-cpufixed",
+      "operation": "exec-0000000000000053",
+      "state_at_checkpoint": "running, no numerical verdict"
+    }
+  ],
+  "schedule": {
+    "cohort": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R163_DUAL_CPU_FIXED_COHORT.json",
+      "bytes": 2246,
+      "sha256": "07399851c8ff642179e0265ed5f755139123e47b8ece1b3492ca1ef118e3ea27"
+    },
+    "failed_cohort": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R163_DUAL_COHORT.json",
+      "bytes": 2204,
+      "sha256": "b68154e0a6650d41cfbdc8a6c908cdb3ea7612a7e58b71379604edd423b3cdc9"
+    },
+    "failed_operations": [
+      "exec-0000000000000046",
+      "exec-0000000000000047"
+    ],
+    "failure_category": "MAIN dispatch resource configuration, before Docker create; not algorithm failure",
+    "protected_cards": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "thirty_minute_effective_utilization": "not measured; no continuous evidence",
+    "agents": [
+      "damp_operator_reuse: MXR fullGDN/worker successor",
+      "mxr_resume_audit: KIVI actual native worker/graph/same-graph baseline",
+      "adakv_current_prepare: SKVQ successor and latest3 task source/tokenizer/inputs"
+    ]
+  },
+  "highest_risks": [
+    "Native full-model wiring remains incomplete after component gates; current evidence does not establish >=10% potential in this workload.",
+    "KIVI old graph wire loads previous writer and lacks retirement event awaited by old client; needs explicit fix, cannot reuse eager baseline for graph candidate.",
+    "SKVQ old source factory recognizes different receipt and writer; requires source-specific compatibility seam, not a forged old PASS.",
+    "Task inputs/owner/sandbox and full-run ETA remain incomplete; deadline is not extended.",
+    "No guarantee of research success; no tensor threshold or final acceptance relaxation."
+  ],
+  "portable_lessons": [
+    "One successful isolated gate does not prove entire DAG executable: check the actual successor cold command before parent finish.",
+    "Use live affinity/cgroup capacity and disjoint leases, not contiguous CPU IDs or NPU indices as CPU IDs.",
+    "Record environment/adaptation/test/method-current-config failure separately, and repair implementation errors before judging paper value.",
+    "Keep source/commands/raw receipts/failure and exact qualifications immutable; only MAIN dispatches hardware.",
+    "Use finite smoke evidence and measured ETA to reserve final validation time; task1% and tensor correctness are separate.",
+    "Retain useful independently correct components below10 for a measured combination, never sum isolated speedups."
+  ],
+  "archive_policy": "Files below are byte-exact archival copies. Original absolute-source references remain frozen. Archive is not runnable authority or a relocation claim; restore exact paths or create a separately audited rebase manifest. Original outputs/tensors/binaries stay at recorded experiment paths.",
+  "files": [
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/mxr-diag16-defect-v1-037/adapter.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/adapter.py",
+      "bytes": 3092,
+      "sha256": "ca9a82e01500ab203d1fa4d01a348d9187d50858d4f91c256687c04fd1185242"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/mxr-diag16-defect-v1-037/build.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/build.py",
+      "bytes": 6540,
+      "sha256": "d0131f99f04a142ffd22ee74027231e1fe6056136ff8460b4b2940b2ad5035dd"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/mxr-diag16-defect-v1-037/derive.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/derive.py",
+      "bytes": 4738,
+      "sha256": "ad27a52c1c92dfb9daa6a1e2c501285aad7d7465a383a623cfe14b7749949d2f"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/mxr-diag16-defect-v1-037/numeric.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/numeric.py",
+      "bytes": 11620,
+      "sha256": "b9ab2b1f4baeca10fe54685e4eaf1358abbe508946a1dfebba2b5d7b2f6b999c"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/mxr-diag16-defect-v1-037/README.md",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/README.md",
+      "bytes": 3749,
+      "sha256": "2abccf1bbe47f76c84856aba745fcf8bffa265b1a44a8e28e9c206fa9fff0fcb"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/mxr-diag16-defect-v1-037/test_candidate.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/test_candidate.py",
+      "bytes": 10323,
+      "sha256": "0a764ffed7fef8843d2768ed620f58703a6156874290db4ff1a05a98ae95de29"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/mxr-diag16-defect-v1-037/tri_inverse_y16_impl.cpp",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/tri_inverse_y16_impl.cpp",
+      "bytes": 43758,
+      "sha256": "d09475b6753b960fb5fa9ffb5eb0d2a05ea67975221a9dbda3d9c406f6f2c261"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/mxr-diag16-defect-v1-037/tri_inverse_y16.cpp",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/tri_inverse_y16.cpp",
+      "bytes": 2623,
+      "sha256": "97f7800e44b960f74ec15a6f51d10e99edb378746de0581432de914e10afe2cb"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/mxr-diag16-defect-v1-037/SOURCE_MANIFEST.json",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/SOURCE_MANIFEST.json",
+      "bytes": 17260,
+      "sha256": "a5642a92dfe0635b9ff7c84944935ea9cd88264061676b984efce10e37ffdb88"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/mxr-diag16-build-binding-v1-038/binding.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-build-binding-v1-038/binding.py",
+      "bytes": 1713,
+      "sha256": "f76dc98098d138f7b30e8f8d18745a60b1cbba9a7ef1d7e020635be380892b02"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/mxr-diag16-build-binding-v1-038/host.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-build-binding-v1-038/host.py",
+      "bytes": 1099,
+      "sha256": "f399d8f457b53fab466b452d24f5b1337fcfe1c52407c581c7783539e8aebf6d"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/mxr-diag16-build-binding-v1-038/README.md",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-build-binding-v1-038/README.md",
+      "bytes": 2382,
+      "sha256": "68e747d5abe7fbbc098ef585fc610a4ed4b4e17bfddc752ac79c961a91e89bbb"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/mxr-diag16-build-binding-v1-038/test_binding.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-build-binding-v1-038/test_binding.py",
+      "bytes": 3603,
+      "sha256": "53d4278482f43a5c8fc63d8d0e1d3f2db1947b70de74924481473629bae646df"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/mxr-diag16-build-binding-v1-038/SOURCE_MANIFEST.json",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-build-binding-v1-038/SOURCE_MANIFEST.json",
+      "bytes": 5104,
+      "sha256": "27702b268056e63ab2d88595891fd89bd7872793ba51b41d8e40249925b53100"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/mxr-diag16-numeric-binding-v1-039/host.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-numeric-binding-v1-039/host.py",
+      "bytes": 1235,
+      "sha256": "18f2bb3f59446454c966c8048724a0b2004a1d6c5d5613475cb5f39e2548facb"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/mxr-diag16-numeric-binding-v1-039/SOURCE_MANIFEST.json",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-numeric-binding-v1-039/SOURCE_MANIFEST.json",
+      "bytes": 5319,
+      "sha256": "9269c6c4732bf7800f209fd350b50642d232e75fae7b1919284e147f44eac08f"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-002/README.md",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/README.md",
+      "bytes": 3642,
+      "sha256": "bb8c4018cdfd5ccef0ff74989fc13162af1897fdbc2e8405d7091e5651d7b9d2"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-002/common.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/common.py",
+      "bytes": 2480,
+      "sha256": "696e7474148107ba0441135ea2eda3137516895dd617d64074e3fc5d14a2becd"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-002/consume.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/consume.py",
+      "bytes": 5573,
+      "sha256": "9a767cbb3ff66cea0931553f43a9ee466905d8ccca8da3eeb516b56c48487cf2"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-002/guest.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/guest.py",
+      "bytes": 4409,
+      "sha256": "0e664e185c85caa98b1399d15e4ec6249874a39dcf8e15e4fe6d24bc4838dd04"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-002/host.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/host.py",
+      "bytes": 6238,
+      "sha256": "d6008862d1295a9a4db61ccc935a4d4b9eb3ab0bef8afc584c9cd090ee1d92b9"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-002/software_check.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/software_check.py",
+      "bytes": 6003,
+      "sha256": "43112059fa750d615ac3b185021e5b464910913fca79f6e70574f5ea5bb9867f"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-002/test_entry.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/test_entry.py",
+      "bytes": 3026,
+      "sha256": "f7118c80d6ace1e3be7a33717785bfa3ce1166c6d5c85bb4851d421317d038f9"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-002/writer.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/writer.py",
+      "bytes": 16784,
+      "sha256": "fac6d76fcc907a694e666cff5470f579e065e660782335347b69453754b0339c"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-002/SOURCE_MANIFEST.json",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-002/SOURCE_MANIFEST.json",
+      "bytes": 13359,
+      "sha256": "6e87dc22472a4e05515f61a0d6f634dc54a1c0d02a0cce6152b3bc0ce29eaded"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/kivi-full-graph-active-v1-003/active_producer.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/active_producer.py",
+      "bytes": 9030,
+      "sha256": "bca60f8946f87bf7cb0525e8dec8e07167b11b0ff5c3aa442a3d3fe75b3229b9"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/kivi-full-graph-active-v1-003/active_reference.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/active_reference.py",
+      "bytes": 7181,
+      "sha256": "5bb39ab93141778bf9b8f70725e8b899f6993683b0a5e1006175ca007f34c062"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/kivi-full-graph-active-v1-003/ACTIVE_SOURCE_MANIFEST.json",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/ACTIVE_SOURCE_MANIFEST.json",
+      "bytes": 3729,
+      "sha256": "34db2794e71049d6eb433a3c0c9d28f8bc92ee6962e180bca773fb3adfc5e164"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/kivi-full-graph-active-v1-003/COMMANDS.json",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/COMMANDS.json",
+      "bytes": 2820,
+      "sha256": "f18ffff52b8445dc5efce32454ac0f41c87e776c34193784627d2f0e2933b429"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/kivi-full-graph-active-v1-003/consume.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/consume.py",
+      "bytes": 7775,
+      "sha256": "d681b524b73d882101f088e85b91bb177621ddf038062af233915f7c185779cc"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/kivi-full-graph-active-v1-003/controller_adapter.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/controller_adapter.py",
+      "bytes": 6056,
+      "sha256": "2da7dfaca4544c7b9f96c6c23f0788dbba57ccd9f38d1e9d3661b36fef155ed0"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/kivi-full-graph-active-v1-003/decision.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/decision.py",
+      "bytes": 1968,
+      "sha256": "ceb4977636691d7e8ad547218ae2955aa995959a802af5e57cabe7a0636e100f"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/kivi-full-graph-active-v1-003/graph_seam.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/graph_seam.py",
+      "bytes": 2761,
+      "sha256": "4a57dbcd12ed34bd9d696bc15e82dee88df90972bd5a37cc5e7d26531f619313"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/kivi-full-graph-active-v1-003/guest.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/guest.py",
+      "bytes": 7759,
+      "sha256": "e8761348b34d3bbf654d002b7448f208e4e495c37821ced1ee4940578d652c4c"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/kivi-full-graph-active-v1-003/host.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/host.py",
+      "bytes": 9952,
+      "sha256": "75b73e56a3e45ba037e2a4a1858034ad819ad2788ce8d8d677ea02dfc293952b"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/kivi-full-graph-active-v1-003/README.md",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/README.md",
+      "bytes": 5616,
+      "sha256": "03782663f85af4e7a6734ca9950ff5f1dde079c77c5c27828cfef1ad59474da4"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/kivi-full-graph-active-v1-003/SOURCE_MANIFEST.json",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/SOURCE_MANIFEST.json",
+      "bytes": 30751,
+      "sha256": "5d63e4820b4c810630768a9b734301b7122d649e013d08b7b6ff8b6f321a8c52"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/kivi-full-graph-active-v1-003/test_dual.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/test_dual.py",
+      "bytes": 7059,
+      "sha256": "303f3cd8809e8a4a9afdaf68157bce840719e05f85278a39671bde4f82b82b1d"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-003/common.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/common.py",
+      "bytes": 2480,
+      "sha256": "696e7474148107ba0441135ea2eda3137516895dd617d64074e3fc5d14a2becd"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-003/consume.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/consume.py",
+      "bytes": 5573,
+      "sha256": "9a767cbb3ff66cea0931553f43a9ee466905d8ccca8da3eeb516b56c48487cf2"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-003/guest.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/guest.py",
+      "bytes": 4409,
+      "sha256": "0e664e185c85caa98b1399d15e4ec6249874a39dcf8e15e4fe6d24bc4838dd04"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-003/host.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/host.py",
+      "bytes": 6238,
+      "sha256": "d6008862d1295a9a4db61ccc935a4d4b9eb3ab0bef8afc584c9cd090ee1d92b9"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-003/software_check.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/software_check.py",
+      "bytes": 6003,
+      "sha256": "43112059fa750d615ac3b185021e5b464910913fca79f6e70574f5ea5bb9867f"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-003/test_entry.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/test_entry.py",
+      "bytes": 3026,
+      "sha256": "f7118c80d6ace1e3be7a33717785bfa3ce1166c6d5c85bb4851d421317d038f9"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-003/writer.py",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/writer.py",
+      "bytes": 16784,
+      "sha256": "fac6d76fcc907a694e666cff5470f579e065e660782335347b69453754b0339c"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-003/README.md",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/README.md",
+      "bytes": 3871,
+      "sha256": "b1ca57088c0b99c23291565d832a929c8bdb9cce014d561bd701631a66c77b6d"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/sources/skvq-vector-pack-v1-003/SOURCE_MANIFEST.json",
+      "original_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/skvq-vector-pack-v1-003/SOURCE_MANIFEST.json",
+      "bytes": 13850,
+      "sha256": "8ada3f2607b551c462380b832b20c165c9d641b66eac7fc90a86903195633815"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/rehearsal/mxr-r156-engineering-rounds-20261013-040/test_rounds.py",
+      "original_path": "C:/Users/Huawei/AppData/Local/Temp/mxr-r156-engineering-rounds-20261013-040/test_rounds.py",
+      "bytes": 11774,
+      "sha256": "15846bf8aec2227d45921ac33f784c47b61aff921322cbf0b62414267efb6e38"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/rehearsal/kivi-full-graph-active-r156-20261013-003/test_dual.py",
+      "original_path": "C:/Users/Huawei/AppData/Local/Temp/kivi-full-graph-active-r156-20261013-003/test_dual.py",
+      "bytes": 7059,
+      "sha256": "303f3cd8809e8a4a9afdaf68157bce840719e05f85278a39671bde4f82b82b1d"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/rehearsal/round45-composition-predicates-r156-20261013-001/decision.py",
+      "original_path": "C:/Users/Huawei/AppData/Local/Temp/round45-composition-predicates-r156-20261013-001/decision.py",
+      "bytes": 3074,
+      "sha256": "5445b201cfc89be94d0f7c8f15ce6f0ac7a74a7408ba9a1aa7c5eab51f9f4287"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/rehearsal/round45-composition-predicates-r156-20261013-001/test_decision.py",
+      "original_path": "C:/Users/Huawei/AppData/Local/Temp/round45-composition-predicates-r156-20261013-001/test_decision.py",
+      "bytes": 3082,
+      "sha256": "f2030d86d0378f28828a8a676b1c0443cd09f83bdc9ff6a9692974fbcb262eed"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/rehearsal/latest-task-timing-cold-entry-r156-20261013-002/entry.py",
+      "original_path": "C:/Users/Huawei/AppData/Local/Temp/latest-task-timing-cold-entry-r156-20261013-002/entry.py",
+      "bytes": 4477,
+      "sha256": "598dfeb10226f9ceeb07e7ca951ff422b25b1c3a599583655bc5ae9d6a25356d"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/rehearsal/latest-task-timing-cold-entry-r156-20261013-002/test_entry.py",
+      "original_path": "C:/Users/Huawei/AppData/Local/Temp/latest-task-timing-cold-entry-r156-20261013-002/test_entry.py",
+      "bytes": 3002,
+      "sha256": "6bbc1f8da6fb2860aa3dbf18468f6eeb3cf22adb84acea78ee1b390f1b7bb514"
+    },
+    {
+      "archive": ".agents/workstreams/qwen36-damp-ascend-20261006/R163_five_rounds/rehearsal/latest-task-timing-cold-entry-r156-20261013-002/SOURCE_MANIFEST.json",
+      "original_path": "C:/Users/Huawei/AppData/Local/Temp/latest-task-timing-cold-entry-r156-20261013-002/SOURCE_MANIFEST.json",
+      "bytes": 6382,
+      "sha256": "5e9342374c4a1f979bbaa50ae5a307b997f1590a310698919a1fb5c3a24d1412"
+    }
+  ]
+}

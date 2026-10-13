@@ -1,0 +1,402 @@
+{
+  "schema": "mxr.y16.compensated-source/v1",
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037",
+  "default_enabled": false,
+  "window": {
+    "start": 1791916056,
+    "cutoff": 1792002456
+  },
+  "files": {
+    "adapter.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/adapter.py",
+      "bytes": 3092,
+      "sha256": "ca9a82e01500ab203d1fa4d01a348d9187d50858d4f91c256687c04fd1185242"
+    },
+    "build.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/build.py",
+      "bytes": 6540,
+      "sha256": "d0131f99f04a142ffd22ee74027231e1fe6056136ff8460b4b2940b2ad5035dd"
+    },
+    "derive.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/derive.py",
+      "bytes": 4738,
+      "sha256": "ad27a52c1c92dfb9daa6a1e2c501285aad7d7465a383a623cfe14b7749949d2f"
+    },
+    "numeric.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/numeric.py",
+      "bytes": 11620,
+      "sha256": "b9ab2b1f4baeca10fe54685e4eaf1358abbe508946a1dfebba2b5d7b2f6b999c"
+    },
+    "README.md": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/README.md",
+      "bytes": 3749,
+      "sha256": "2abccf1bbe47f76c84856aba745fcf8bffa265b1a44a8e28e9c206fa9fff0fcb"
+    },
+    "test_candidate.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/test_candidate.py",
+      "bytes": 10323,
+      "sha256": "0a764ffed7fef8843d2768ed620f58703a6156874290db4ff1a05a98ae95de29"
+    },
+    "tri_inverse_y16_impl.cpp": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/tri_inverse_y16_impl.cpp",
+      "bytes": 43758,
+      "sha256": "d09475b6753b960fb5fa9ffb5eb0d2a05ea67975221a9dbda3d9c406f6f2c261"
+    },
+    "tri_inverse_y16.cpp": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/tri_inverse_y16.cpp",
+      "bytes": 2623,
+      "sha256": "97f7800e44b960f74ec15a6f51d10e99edb378746de0581432de914e10afe2cb"
+    }
+  },
+  "dependencies": {
+    "current_authority": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R156_NEW24H_AUTHORITY_20261013.json",
+      "bytes": 4025,
+      "sha256": "cd1ec8cf2f12e551a5b49e95b66ef053064ac634aef1e4524430d46ce333f300"
+    },
+    "recovery_validator": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr008-cpu-recovery-v1-001/recover.py",
+      "bytes": 11659,
+      "sha256": "da27220db9e53664cf86b7726172bee9bd12a7719cc0e6df6adebbfd2b5acb7f"
+    },
+    "recovery_inputs": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr008-cpu-recovery-v1-001/INPUTS.json",
+      "bytes": 15920,
+      "sha256": "3e9a34e1a4459d26a884105f87d849f34a2e29b887d2e8918e4b38a1f06ecf2e"
+    },
+    "original_consumer": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/consume_capture.py",
+      "bytes": 10097,
+      "sha256": "7c31e87b409ef095e5789a2bc1b71a987a69dc237789c125ad749a69fecec6c3"
+    },
+    "old_capture": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/mxr_capture/capture.py",
+      "bytes": 10903,
+      "sha256": "92f5d918532ab110e084db3c245b971bfa40ce6eaa6046215ed66927d6daae97"
+    },
+    "old_solve": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/mxr_capture/solve.py",
+      "bytes": 5633,
+      "sha256": "0285bd2aacaf89936658556cc21bac83b4c023e6995782686fcb9c9c5cfe2a5d"
+    },
+    "old_binary": {
+      "path": "/cache/cch/mxr-qwen36-ascend-20260918/npu-gate-v11/compiled/tri_inverse_jit_MEMORY_BASE.so",
+      "bytes": 149472,
+      "sha256": "1a518ef0603d266d3d62218d0a30a97e14618a7657faf6ab586f417ca59267af"
+    },
+    "author_impl": {
+      "path": "/cache/cch/paper-sources/mxr-tri-inverse-20260918/extracted/megagdn-pto-d357fd38608f99ddf9b9fb2d217b2e731ecd3a72/kernels/pto/tri_inverse_impl.cpp",
+      "bytes": 40303,
+      "sha256": "509dc66a42b95c70ce16f39b428332bb561402fe365cd42a5442b61b1b23fd20"
+    },
+    "author_entry": {
+      "path": "/cache/cch/paper-sources/mxr-tri-inverse-20260918/extracted/megagdn-pto-d357fd38608f99ddf9b9fb2d217b2e731ecd3a72/kernels/pto/tri_inverse.cpp",
+      "bytes": 2133,
+      "sha256": "cf8ac0441380a60d970a279b3f79abc6bf77b1c3a7aeb548c22b38e9adf58268"
+    },
+    "author_python": {
+      "path": "/cache/cch/paper-sources/mxr-tri-inverse-20260918/extracted/megagdn-pto-d357fd38608f99ddf9b9fb2d217b2e731ecd3a72/megagdn_pto/fast_inverse.py",
+      "bytes": 7263,
+      "sha256": "3f0049160d846800a51669c0eb9be36058ac02edea2100f2bf99c6599714c722"
+    },
+    "compile_py": {
+      "path": "/cache/cch/paper-sources/mxr-tri-inverse-20260918/extracted/megagdn-pto-d357fd38608f99ddf9b9fb2d217b2e731ecd3a72/megagdn_pto/compile.py",
+      "bytes": 8940,
+      "sha256": "23bbe505d415e1e9992cb7e7686046da07fedde00b3831c64309be285cb9bfd4"
+    },
+    "kernel_utils": {
+      "path": "/cache/cch/paper-sources/mxr-tri-inverse-20260918/extracted/megagdn-pto-d357fd38608f99ddf9b9fb2d217b2e731ecd3a72/kernels/pto/include/kernel_utils.h",
+      "bytes": 5189,
+      "sha256": "cd87c08110f39a6d4163188bc9c75a48360edad7a16bdb4ff8bdddfbbe5f9bfc"
+    },
+    "pto_inst": {
+      "path": "/cache/cch/paper-sources/mxr-tri-inverse-20260918/pto-isa-01666f3b386f296c95e6e05825fe63b8e6bb4ef4/include/pto/pto-inst.hpp",
+      "bytes": 1142,
+      "sha256": "aad2bcecf659808d5b0dc93be743cff7cfe7f9a4b5c247bd400f43aed70c0c40"
+    },
+    "pto_TMov": {
+      "path": "/cache/cch/paper-sources/mxr-tri-inverse-20260918/pto-isa-01666f3b386f296c95e6e05825fe63b8e6bb4ef4/include/pto/npu/a2a3/TMov.hpp",
+      "bytes": 12923,
+      "sha256": "7eadab5994be0f7403268f6cbc54df27138cf1047634250219a895cad650d191"
+    },
+    "pto_TMatmul": {
+      "path": "/cache/cch/paper-sources/mxr-tri-inverse-20260918/pto-isa-01666f3b386f296c95e6e05825fe63b8e6bb4ef4/include/pto/npu/a2a3/TMatmul.hpp",
+      "bytes": 10965,
+      "sha256": "e4ec288b101cf2a8ec0a5a175fcd27a2fb285d2c9b40cc4a63f6af088db2c896"
+    },
+    "pto_common": {
+      "path": "/cache/cch/paper-sources/mxr-tri-inverse-20260918/pto-isa-01666f3b386f296c95e6e05825fe63b8e6bb4ef4/include/pto/npu/a2a3/common.hpp",
+      "bytes": 6360,
+      "sha256": "2fc27d34fc0b5884170446e980aeef36af00826a48d88591e2b69e7cb62ad8c6"
+    },
+    "guest_capture_entry": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-launch-20261013-003/guest_capture_entry.py",
+      "bytes": 8309,
+      "sha256": "37c951e1ae2f4b650d93d414b930f9dd83a05913a68b213edfdd8143c2d70cd0"
+    },
+    "capture_overlay": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-launch-20261013-003/capture_overlay.py",
+      "bytes": 6707,
+      "sha256": "848e180ac7612a69996a901ae68e3858825bf0878bbb0653708d55c37e4a234f"
+    },
+    "cann_python": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-d8-fp32-model-boundary-r87-v1-011/cann_python.py",
+      "bytes": 4503,
+      "sha256": "cee927f1107fe6714e86ab1dceecafeff800980a00b8df9fcc47ff6831ba5104"
+    },
+    "source22": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr-rank2-workspace-trace-v1-022/SOURCE_MANIFEST.json",
+      "bytes": 18084,
+      "sha256": "d8f0f33ba0c7ccc67699091bd4137ceae00a61b3fc2f72ab495c6b4572a8ef34"
+    },
+    "observation22": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-rank2-workspace-owned-main-R118_022_001/physical4/trace/RESULT.json",
+      "bytes": 68311,
+      "sha256": "2c7f062e9c5479e23da8eaa83a4b045affb821bbec6f7ad62ae3c635f562e03e"
+    },
+    "derive028": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr-y16-compensated-v1-028/derive.py",
+      "bytes": 5999,
+      "sha256": "33be9c5ee33dc2cea27c85b965d3a34e9fafc6b7d85bb2aa9cf94a6ed4a28ee6"
+    },
+    "saved032_actual": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-saved031-delta-owned-main-R156_033_001/cpu/diagnostic/RESULT.json",
+      "bytes": 113602,
+      "sha256": "1cb10ad59e2e89d4576b26f425854ff7caeac4b2c2467c8a35408895f5be58d4"
+    },
+    "failed031_actual": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-y16-single5-owned-main-R118_031_001/physical5/numeric/RESULT.json",
+      "bytes": 214714,
+      "sha256": "3bb9b43eeb0776c8c857034fa7cbf7244fb81c195718164ff9c48f0df90983b0"
+    }
+  },
+  "author_root": "/cache/cch/paper-sources/mxr-tri-inverse-20260918/extracted/megagdn-pto-d357fd38608f99ddf9b9fb2d217b2e731ecd3a72",
+  "pto_root": "/cache/cch/paper-sources/mxr-tri-inverse-20260918/pto-isa-01666f3b386f296c95e6e05825fe63b8e6bb4ef4",
+  "upstream_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-d8-fp32-model-boundary-r87-v1-011",
+  "compiler_contract": {
+    "flags_donor": {
+      "path": "/cache/cch/paper-sources/mxr-tri-inverse-20260918/extracted/megagdn-pto-d357fd38608f99ddf9b9fb2d217b2e731ecd3a72/megagdn_pto/compile.py",
+      "bytes": 8940,
+      "sha256": "23bbe505d415e1e9992cb7e7686046da07fedde00b3831c64309be285cb9bfd4"
+    },
+    "memory_model": "MEMORY_BASE",
+    "arch": "dav-2201",
+    "import_author_compile_module": false,
+    "auto_device_query": false,
+    "existing_library_reuse": false,
+    "compile_timeout_seconds": 180,
+    "nm_timeout_seconds": 15,
+    "whole_actual_pto_header_closure": "read/hash before and after actual compilation, required; no guessed full-tree hash"
+  },
+  "kernel_contract": {
+    "namespace": "mxr_diag16_defect_v1",
+    "exports": [
+      "call_mxr_y16_control",
+      "call_mxr_y16_compensated"
+    ],
+    "ctypes_args": [
+      "uint32_t",
+      "void*stream",
+      "void*out_FP32",
+      "void*in_FP16",
+      "void*minus_identity_FP16",
+      "uint32_t_matrix64",
+      "uint32_t_matrices",
+      "uint32_t_heads_lowerflag",
+      "void*cu_int32"
+    ],
+    "source_inverse_changes": 23,
+    "change_scope": "one diagonal16 inverse-trick defect correction R=I-X-A16*X then X=X+X*R; original block16/32 recursion and final casts unchanged; old Y16-only compensation removed",
+    "l1_extent_bytes": {
+      "old": 49152,
+      "new": 57344
+    },
+    "l0a_bytes": 16384,
+    "l0b_bytes": 16384,
+    "l0c_bytes": 32768,
+    "extra_ub_bytes": 0,
+    "hardware_precision_or_sync_proved": false,
+    "base_inverse_changes": 17,
+    "new_inverse_changes": 6,
+    "added_Cube_GEMMs_per_Matrix64": 5,
+    "saved_diagnostic_not_runtime_trace": true
+  },
+  "gate_contract": {
+    "schema": "mxr.y16.actual-captured-frame-gate/v1",
+    "source": "this exact MF Ref3",
+    "input_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr008-cpu-recovery-v1-001/INPUTS.json",
+      "bytes": 15920,
+      "sha256": "3e9a34e1a4459d26a884105f87d849f34a2e29b887d2e8918e4b38a1f06ecf2e"
+    },
+    "rank_order": [
+      2,
+      0,
+      1,
+      3
+    ],
+    "repeats": 3,
+    "modes": [
+      "original",
+      "control",
+      "compensated"
+    ],
+    "maximum_actual_launches": 36,
+    "shape": [
+      1,
+      129,
+      12,
+      64
+    ],
+    "oracle": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/consume_capture.py",
+      "bytes": 10097,
+      "sha256": "7c31e87b409ef095e5789a2bc1b71a987a69dc237789c125ad749a69fecec6c3"
+    },
+    "reference": "unchanged original001 CPU FP64 triangular inverse of full original FP32 A",
+    "limits": {
+      "frob_relative": 0.002,
+      "rmse_over_mean_ref_abs": 0.02,
+      "r2_min": 0.999
+    },
+    "control_precondition": "disabled new namespace FP32+BF16 whole bytes equal old deployed per rank/repeat",
+    "rank2_anchor": "current old deployed FP32 all3 equal pinned actual022 raw workspaces, original numerical failure remains failed",
+    "full_inputs_guards_pointers_finite_determinism": true,
+    "save_full_raw_before_all_rejections": true,
+    "stop_first_failure": true,
+    "no_automatic_retry": true
+  },
+  "resources": {
+    "build": {
+      "Devices": [],
+      "guest_bytes": 8589934592,
+      "guest_cpu": 1,
+      "host_bytes": 536870912,
+      "reserve_bytes": 8589934592,
+      "phase_seconds": 450,
+      "child_seconds": 210,
+      "cleanup_seconds": 90
+    },
+    "numeric": {
+      "physical": [
+        5
+      ],
+      "logical": [
+        0
+      ],
+      "guest_bytes": 8589934592,
+      "guest_cpu": 1,
+      "host_bytes": 536870912,
+      "reserve_bytes": 8589934592,
+      "output_bytes": 4294967296,
+      "phase_seconds": 300,
+      "child_seconds": 120,
+      "cleanup_seconds": 90,
+      "maximum_raw_payload_bytes": 28846368
+    },
+    "per_card_parallel_admitted": false,
+    "owner_ref": null,
+    "actual_admission_required": true
+  },
+  "software": {
+    "actual_local_operation": "25f462",
+    "exit_code": 0,
+    "tests": 15,
+    "elapsed_seconds": 0.349,
+    "scope": "local stdlib controls; real instances body exercised with software-only library/solve stubs, not NPU or live admission",
+    "same_image_actual_ref": null,
+    "preserved_test_fixture_failure": "913a9a missing fixture old_binary; production unchanged; corrected fixture then passed",
+    "historical034_software": {
+      "operation": "6b6c45",
+      "tests": 15,
+      "exit_code": 0,
+      "scope": "did not exercise adapter.instances window body; insufficient clock coverage"
+    }
+  },
+  "build_ref": null,
+  "numeric_ref": null,
+  "matrix_gate_pass": false,
+  "full_gdn_state_qualified": false,
+  "graph_qualified": false,
+  "model_ready": false,
+  "performance_ready": false,
+  "task_ready": false,
+  "successor_audit": {
+    "historical_source028": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr-y16-compensated-v1-028/SOURCE_MANIFEST.json",
+      "bytes": 14000,
+      "sha256": "5e135350214f2efb7b5bb29adb23ebe666e88404c6ddb0b1925e839a3462cf12"
+    },
+    "failed031": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-y16-single5-owned-main-R118_031_001/physical5/numeric/RESULT.json",
+      "bytes": 214714,
+      "sha256": "3bb9b43eeb0776c8c857034fa7cbf7244fb81c195718164ff9c48f0df90983b0"
+    },
+    "saved032": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-saved031-delta-owned-main-R156_033_001/cpu/diagnostic/RESULT.json",
+      "bytes": 113602,
+      "sha256": "1cb10ad59e2e89d4576b26f425854ff7caeac4b2c2467c8a35408895f5be58d4"
+    },
+    "actual_basis": "bad saved diagonal16 inputs explain dominant offdiag; one iterative-refinement attempt, not proven exact hardware root",
+    "old_sources_and_failures_retained": true,
+    "python_registered_inverse": {
+      "build.py": [
+        {
+          "old": "CUT=1791922930",
+          "next": "CUT=1792002456"
+        },
+        {
+          "old": "dict(start=1791879730,cutoff=CUT)",
+          "next": "dict(start=1791916056,cutoff=CUT)"
+        },
+        {
+          "old": "D.sources(checked(m['dependencies']['author_impl']),checked(m['dependencies']['author_entry']))",
+          "next": "D.sources(checked(m['dependencies']['author_impl']),checked(m['dependencies']['author_entry']),m['dependencies']['derive028'])"
+        },
+        {
+          "old": "libmxr_y16_compensated_MEMORY_BASE.so",
+          "next": "libmxr_diag16_defect_MEMORY_BASE.so"
+        }
+      ],
+      "adapter.py": [
+        {
+          "old": "dict(start=1791879730,cutoff=1791922930)",
+          "next": "dict(start=1791916056,cutoff=1792002456)"
+        }
+      ],
+      "numeric.py": [
+        {
+          "old": "CUT=1791922930",
+          "next": "CUT=1792002456"
+        },
+        {
+          "old": "dict(start=1791879730,cutoff=CUT)",
+          "next": "dict(start=1791916056,cutoff=CUT)"
+        }
+      ]
+    },
+    "new_library_filename": "libmxr_diag16_defect_MEMORY_BASE.so",
+    "export_names_are_stable_ABI_roles_not_old_Y16_arithmetic": true,
+    "clock037_fix": {
+      "frozen_private034_manifest": {
+        "bytes": 16167,
+        "sha256": "f3cf37bc6b749ecc64b6103470cd6d5d156f95e187692df8af45efb23fcc88ca",
+        "scope": "local source-only draft; not deployed/run evidence"
+      },
+      "only_production_change": "adapter.instances exact window literal",
+      "unchanged_production_files": [
+        "build.py",
+        "derive.py",
+        "numeric.py",
+        "tri_inverse_y16_impl.cpp",
+        "tri_inverse_y16.cpp"
+      ],
+      "actual_instances_body_covered": true,
+      "software_stubs_only_at": [
+        "load_old",
+        "ctypes.CDLL"
+      ],
+      "new_or_foreign_window_rejected": true
+    }
+  }
+}

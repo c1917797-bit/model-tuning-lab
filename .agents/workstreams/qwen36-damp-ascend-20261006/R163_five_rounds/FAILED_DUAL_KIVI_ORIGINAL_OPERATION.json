@@ -1,0 +1,107 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": \"exit code\",\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": false,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-B\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/host.py\",\n          \"--execute\",\n          \"--source\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/SOURCE_MANIFEST.json\",\n          \"--source-sha256\",\n          \"5d63e4820b4c810630768a9b734301b7122d649e013d08b7b6ff8b6f321a8c52\",\n          \"--cohort\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R163_DUAL_COHORT.json\",\n          \"--cohort-sha256\",\n          \"b68154e0a6650d41cfbdc8a6c908cdb3ea7612a7e58b71379604edd423b3cdc9\",\n          \"--run-id\",\n          \"kivi-dual-main-r163\",\n          \"--physical\",\n          \"4\",\n          \"--output\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r156-main-dual-003\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 731,\n        \"error\": \"exit code\",\n        \"exitCode\": 1,\n        \"id\": \"exec-0000000000000046\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"Traceback (most recent call last):\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/host.py\\\", line 70, in <module>\\n    if __name__=='__main__':raise SystemExit(main())\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/host.py\\\", line 38, in main\\n    bm=dict(bm,cache_accountant=m['files']['cache_scan.py'],numeric_script=m['files']['guest.py']);H=E['helper'](bm);policy=load('_graph_r156_idle_policy',m['idle_policy']);policy.install(H,m['idle_helper']);E['COHORT_SHARED']=m['_runtime'].install(E,C,E['L'],H,m['_cohort'],m,checked);co=E['Joint'](a,own,bm,None,dict(source=own,input_files=refs),H,started);Observer=load('_r162_protected_actual',m['observer']);observer_receipt=Observer.install(H,m['idle_helper'],out,C.write,lambda:([__import__('os').getpid()],[x.cid for x in co.controllers if x.cid]));Owned=E['controller'](H)\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/host_once.py\\\", line 39, in __init__\\n    self.cpu=H.cpu_admission(self.host_initial,self.daemon_initial)\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_runtime.py\\\", line 44, in cpu\\n    def cpu(self,host,daemon):return self.p.cpu_plan(self.plan,self.row['run_id'],host,daemon)\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_policy.py\\\", line 144, in cpu_plan\\n    need(guests | reserve <= set(daemon['effective_cpus'])\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_policy.py\\\", line 19, in need\\n    raise ValueError(message)\\nValueError: actual daemon aggregate guest/reserve CPU capacity\\n\",\n        \"stdout\": \"\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"https://agentweb-tpc.westar.uk\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 910,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 910,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 910\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 405,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 405\n      }\n    },\n    \"traceId\": \"4ee96903-961f-4b87-bdfc-f2eec11aafe7\"\n  },\n  \"operationId\": \"exec-0000000000000046\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": false,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": "exit code",
+    "found": true,
+    "kind": "exec",
+    "ok": false,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-B",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/host.py",
+            "--execute",
+            "--source",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/SOURCE_MANIFEST.json",
+            "--source-sha256",
+            "5d63e4820b4c810630768a9b734301b7122d649e013d08b7b6ff8b6f321a8c52",
+            "--cohort",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R163_DUAL_COHORT.json",
+            "--cohort-sha256",
+            "b68154e0a6650d41cfbdc8a6c908cdb3ea7612a7e58b71379604edd423b3cdc9",
+            "--run-id",
+            "kivi-dual-main-r163",
+            "--physical",
+            "4",
+            "--output",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kivi-direct-fp32-graph-owner-r156-main-dual-003"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 731,
+          "error": "exit code",
+          "exitCode": 1,
+          "id": "exec-0000000000000046",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "Traceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/host.py\", line 70, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/host.py\", line 38, in main\n    bm=dict(bm,cache_accountant=m['files']['cache_scan.py'],numeric_script=m['files']['guest.py']);H=E['helper'](bm);policy=load('_graph_r156_idle_policy',m['idle_policy']);policy.install(H,m['idle_helper']);E['COHORT_SHARED']=m['_runtime'].install(E,C,E['L'],H,m['_cohort'],m,checked);co=E['Joint'](a,own,bm,None,dict(source=own,input_files=refs),H,started);Observer=load('_r162_protected_actual',m['observer']);observer_receipt=Observer.install(H,m['idle_helper'],out,C.write,lambda:([__import__('os').getpid()],[x.cid for x in co.controllers if x.cid]));Owned=E['controller'](H)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/host_once.py\", line 39, in __init__\n    self.cpu=H.cpu_admission(self.host_initial,self.daemon_initial)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_runtime.py\", line 44, in cpu\n    def cpu(self,host,daemon):return self.p.cpu_plan(self.plan,self.row['run_id'],host,daemon)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_policy.py\", line 144, in cpu_plan\n    need(guests | reserve <= set(daemon['effective_cpus'])\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cohort_policy.py\", line 19, in need\n    raise ValueError(message)\nValueError: actual daemon aggregate guest/reserve CPU capacity\n",
+          "stdout": "",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "https://agentweb-tpc.westar.uk",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 910,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 910,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 910
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 405,
+          "routeLookupMs": 0,
+          "totalMs": 405
+        }
+      },
+      "traceId": "4ee96903-961f-4b87-bdfc-f2eec11aafe7"
+    },
+    "operationId": "exec-0000000000000046",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": false,
+    "terminal": true
+  },
+  "isError": false
+}

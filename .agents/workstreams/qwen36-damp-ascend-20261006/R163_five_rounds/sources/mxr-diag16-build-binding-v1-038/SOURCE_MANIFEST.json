@@ -1,0 +1,114 @@
+{
+  "schema": "mxr.y16.device-free-build-owner-source/v1",
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-build-binding-v1-038",
+  "default_enabled": false,
+  "window": {
+    "start": 1791916056,
+    "cutoff": 1792002456
+  },
+  "files": {
+    "binding.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-build-binding-v1-038/binding.py",
+      "bytes": 1713,
+      "sha256": "f76dc98098d138f7b30e8f8d18745a60b1cbba9a7ef1d7e020635be380892b02"
+    },
+    "host.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-build-binding-v1-038/host.py",
+      "bytes": 1099,
+      "sha256": "f399d8f457b53fab466b452d24f5b1337fcfe1c52407c581c7783539e8aebf6d"
+    },
+    "README.md": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-build-binding-v1-038/README.md",
+      "bytes": 2382,
+      "sha256": "68e747d5abe7fbbc098ef585fc610a4ed4b4e17bfddc752ac79c961a91e89bbb"
+    },
+    "test_binding.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-build-binding-v1-038/test_binding.py",
+      "bytes": 3603,
+      "sha256": "53d4278482f43a5c8fc63d8d0e1d3f2db1947b70de74924481473629bae646df"
+    }
+  },
+  "dependencies": {
+    "software_source023": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr022-device-free-software-v1-023/SOURCE_MANIFEST.json",
+      "bytes": 3416,
+      "sha256": "73003c1688c1334b5e6d64925d3279130b6b6104dd30071c9bff2d1719b60c41"
+    },
+    "software_owner023": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr022-device-free-software-v1-023/host.py",
+      "bytes": 9357,
+      "sha256": "b88ae0ebcc465b200c8b539a7c1297aea06982ea676295d2b53052c5df33f639"
+    },
+    "target_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/SOURCE_MANIFEST.json",
+      "bytes": 17260,
+      "sha256": "a5642a92dfe0635b9ff7c84944935ea9cd88264061676b984efce10e37ffdb88"
+    },
+    "original_host030": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr-y16-device-free-build-owner-v1-030/host.py",
+      "bytes": 9447,
+      "sha256": "9afe435ff2c1c18c22b33b56398777f3ab1d37a3e3223bfd8c944c99232cd136"
+    },
+    "original_source030": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr-y16-device-free-build-owner-v1-030/SOURCE_MANIFEST.json",
+      "bytes": 4749,
+      "sha256": "165353afb16e64f2a17c70d4eb76d3ce69b679beccb001f396f64dd5622e238a"
+    }
+  },
+  "phase_seconds": 450,
+  "maximum_build_child_seconds": 210,
+  "compiler_timeout_seconds": 180,
+  "nm_timeout_seconds": 15,
+  "cleanup_seconds": 90,
+  "minimum_remaining_before_build": 210,
+  "startup_and_software_charged": true,
+  "guest_bytes": 8589934592,
+  "guest_cpu": 1,
+  "host_bytes": 536870912,
+  "reserve_bytes": 8589934592,
+  "output_bytes": 4294967296,
+  "Devices": [],
+  "requires_all4_7_idle": true,
+  "serial_CPU_only": true,
+  "parallel_model_resource_admitted": false,
+  "actual_local_software": {
+    "operation": "2f1bce",
+    "exit_code": 0,
+    "tests": 8,
+    "elapsed_seconds": 0.183,
+    "scope": "local source/function code plus explicit synthetic stage metadata; no live readset or resource qualification"
+  },
+  "actual_same_image_software": null,
+  "actual_build": null,
+  "NPU": false,
+  "matrix_gate_pass": false,
+  "graph_qualified": false,
+  "model_ready": false,
+  "performance_ready": false,
+  "task_ready": false,
+  "successor_audit": {
+    "original_source030": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr-y16-device-free-build-owner-v1-030/SOURCE_MANIFEST.json",
+      "bytes": 4749,
+      "sha256": "165353afb16e64f2a17c70d4eb76d3ce69b679beccb001f396f64dd5622e238a"
+    },
+    "one_conditional_diag16_refinement_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/SOURCE_MANIFEST.json",
+      "bytes": 17260,
+      "sha256": "a5642a92dfe0635b9ff7c84944935ea9cd88264061676b984efce10e37ffdb88"
+    },
+    "new_R156_clock_explicit": true,
+    "old_runs_and_files_immutable": true,
+    "stage_functions_code_unchanged": true,
+    "source_and_clock_data_bindings_only": true,
+    "actual_build": null,
+    "adapter_clock_contract_repaired037": true,
+    "production_algorithms_same034": true
+  },
+  "complete_RO_roots": [
+    "/cache/cch/paper-sources/mxr-tri-inverse-20260918/extracted/megagdn-pto-d357fd38608f99ddf9b9fb2d217b2e731ecd3a72",
+    "/cache/cch/paper-sources/mxr-tri-inverse-20260918/pto-isa-01666f3b386f296c95e6e05825fe63b8e6bb4ef4"
+  ],
+  "prior_actual_compile_PASS_inherited": false,
+  "complete_RO_header_verification_required": true
+}

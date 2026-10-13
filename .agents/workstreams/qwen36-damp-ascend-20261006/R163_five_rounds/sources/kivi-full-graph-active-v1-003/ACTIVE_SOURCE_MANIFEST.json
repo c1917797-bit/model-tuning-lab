@@ -1,0 +1,92 @@
+{
+  "schema": "kivi.active128-slot-reuse-source/v1",
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003",
+  "default_enabled": false,
+  "cutoff": 1792002456,
+  "files": {
+    "active_producer.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/active_producer.py",
+      "bytes": 9030,
+      "sha256": "bca60f8946f87bf7cb0525e8dec8e07167b11b0ff5c3aa442a3d3fe75b3229b9"
+    },
+    "active_reference.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-full-graph-active-v1-003/active_reference.py",
+      "bytes": 7181,
+      "sha256": "5bb39ab93141778bf9b8f70725e8b899f6993683b0a5e1006175ca007f34c062"
+    }
+  },
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R156_NEW24H_AUTHORITY_20261013.json",
+    "bytes": 4025,
+    "sha256": "cd1ec8cf2f12e551a5b49e95b66ef053064ac634aef1e4524430d46ce333f300"
+  },
+  "graph_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-fullgraph-plugin-v1-001/SOURCE_MANIFEST.json",
+    "bytes": 7774,
+    "sha256": "d0eed41cbda770c59e4fdb6ef2ed648362a5d074928c254df2307c291cfc3f82"
+  },
+  "standalone": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-fullgraph-plugin-v1-001/standalone_graph.py",
+    "bytes": 13143,
+    "sha256": "5bd797686890e33d49a6262c63a37f30b56ee444996a04257ed1ee914d09ce3d"
+  },
+  "writer": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-continuous-prefix-v1-002/graph_writer.py",
+    "bytes": 5636,
+    "sha256": "33ab969eae661e20af86c5b88331481c789d5a3af54c795c0cf97f27b396f5f9"
+  },
+  "author": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-author-bytebind-v1-001/author/quant/new_pack.py",
+    "bytes": 8708,
+    "sha256": "3678af0e34a0ba18e5d80a4128acf11d4070667c800a15540a16d07253a4f75e"
+  },
+  "oracle": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-fp32-component-numeric-v1-001/oracle.py",
+    "bytes": 7730,
+    "sha256": "5d6278c20800e6b90b9e0fc5869fbaf9b5fdce5d4d652d7725cb68e8c4fed444"
+  },
+  "scope": {
+    "bits": 2,
+    "G": 32,
+    "D": 256,
+    "initial255": true,
+    "replays_each_epoch": 3,
+    "epochs": 2,
+    "native_scheduler": false,
+    "model": false,
+    "performance": false,
+    "task": false
+  },
+  "resources": {
+    "guest_bytes": 8589934592,
+    "host_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "phase_seconds": 1800,
+    "cleanup_seconds": 90,
+    "producer_cap_seconds": 900,
+    "consumer_cap_seconds": 180,
+    "raw_bytes": 268435456,
+    "jit_bytes": 536870912
+  },
+  "target_sameimage_CPU": null,
+  "target_NPU": null,
+  "owner006": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-channel32-graph-single4-owner-r118-v1-006/SOURCE_MANIFEST.json",
+    "bytes": 13541,
+    "sha256": "b8d573ac109b1139562995596ade1e48668d6a479fca9b491d88d115d6a8f48a"
+  },
+  "local_only_controls": {
+    "NPU": false,
+    "target_sameimage": false
+  },
+  "predecessor_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-active-seal-cases-r118-v1-001/SOURCE_MANIFEST.json",
+    "bytes": 4359,
+    "sha256": "f1ed94926c4b6c244abac8e6b5276360faa1ca1288f1027e2c21414fb04c0884"
+  },
+  "source_delta": {
+    "scope": "Original complete producer with only R156 window, reference filename and no diagnostic-prefix attachment; original full warm/capture/state/math retained",
+    "algorithm_changed": false,
+    "NPU": false
+  }
+}
