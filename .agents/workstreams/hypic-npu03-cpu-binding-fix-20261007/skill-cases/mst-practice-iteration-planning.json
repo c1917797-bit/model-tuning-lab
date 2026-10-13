@@ -23,7 +23,20 @@
     "plan_status": "in_progress",
     "future_iterations_with_pass_criteria": 2,
     "quality_pair_complete": false,
-    "main_skill_integrated": false
+    "main_skill_integrated": false,
+    "completed_lifecycle_review_20261013": {
+      "task": "Exact-main onboarding after stopping further HYPIC quality work",
+      "plan_commit": "d7b1738495f53ebac59bad3f2e0969eebf036284",
+      "executed_evidence_commit": "f98bcc675882091138491eb557b14976642437e0",
+      "publication_commit": "c142c93f3849d9de4a4620ebdacfae572259193e",
+      "repair_commit": "63354d357f2309302975fbe40d0d67d182009330",
+      "historical_stale_declared_file_rejected": true,
+      "corrected_files_matched": 4,
+      "focused_tests_passed": 7,
+      "execution": "chicaihong01/mc exec-0000000000000051 exit0",
+      "main_integrated": false,
+      "new_npu_work": false
+    }
   },
   "evidence": [
     {
@@ -41,9 +54,25 @@
     {
       "path": ".agents/skills/mst-practice-iteration-planning/SKILL.md",
       "sha256": "cfce04ecad0310a2d291f57ffd8453b121671c75ee29c662d0a93f0c759dbcfd"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_completed_iteration.py",
+      "sha256": "3143376f4a486ac44fe75ffebb4906c2f34e4610a029c97e1521bb8162393e6e"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_completed_iteration.py",
+      "sha256": "dff3185e438598e0aaa886ccd6f044ab2d3e141d5405d27935d236c9a2e05273"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/COMPLETED_ITERATION_REVIEW_20261013.md",
+      "sha256": "cc1f36379aec108fca6b63b87e8dcc99049072baa2c924d02795b1124c23f39a"
+    },
+    {
+      "path": ".agents/evals/practice-iterations/hypic-remaining-skills-onboarding-20261013.yaml",
+      "sha256": "5c8185c5fd03a71bf1e5100e66cfbb86d68326f443dfbfed27bb5e79f64dc029"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "Current main Skill's exact output example fails the current repository validator, so main long-term acceptance is partial. The named branch repair passes on a real HYPIC stage plan, but it has not been integrated and replayed from a fresh main clone. This case does not establish an uninterrupted NPU window or HYPIC quality/performance.",
+  "boundary": "Current main Skill's exact output example fails the current repository validator, so main long-term acceptance is partial. The named branch repair passes on a real HYPIC stage plan, but it has not been integrated and replayed from a fresh main clone. This case does not establish an uninterrupted NPU window or HYPIC quality/performance. The 2026-10-13 supplement validates the branch's completed-plan lifecycle and rejects stale checkpoint/file association; main acceptance remains partial, independently of HYPIC quality.",
   "drift_trigger": "Revalidate after the practice-iteration Skill or validate-mst.sh schema changes, main integration, or a change to the HYPIC stage ruler."
 }

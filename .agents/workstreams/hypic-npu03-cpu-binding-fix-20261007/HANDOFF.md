@@ -59,16 +59,17 @@ Global .agents/HANDOFF.md describes integrated history,not this unmerged result.
 
 ## 4. Current Action
 
-Exact-main repository onboarding passed with a retained isolated copy and six
-inventory tests; see ONBOARDING_EXACT_MAIN_ACCEPTANCE_20261013.md. No NPU work.
+Exact-main onboarding passed with a retained isolated copy and six inventory
+tests; see ONBOARDING_EXACT_MAIN_ACCEPTANCE_20261013.md (10/19 current counts).
+Completed-plan audit corrected a stale declared-file/checkpoint association:
+four executed evidence files and later case publication are now separate.
+Seven controls passed; see COMPLETED_ITERATION_REVIEW_20261013.md,63354d35.
+Planning main example remains defective/unmerged; its acceptance stays partial.
 
-Inference-loop obligation review and first-screen threshold replay repair are
-complete; see INFERENCE_LOOP_OBLIGATION_REVIEW_20261013.md. Eight tests and
-six raw runs passed; original outcomes and9/20 acceptance are unchanged.
-
-Host-event gap association is complete; see HYPIC_HOST_GAP_ASSOCIATION_20261013.md.
-All8 existing traces analyzed; six tests passed. Temporal overlap is not causal
-proof; no new NPU run, Skill promotion or quality-verdict change.
+Inference-loop first-screen threshold review is complete (eight tests/six raw
+runs); see INFERENCE_LOOP_OBLIGATION_REVIEW_20261013.md. Host-gap association
+is complete (eight traces/six tests); see HYPIC_HOST_GAP_ASSOCIATION_20261013.md.
+Do not repeat these completed reviews or infer causal proof from overlap.
 
 Host-maintenance entrypoint refactor:185 to102 lines, three required references;
 original procedures preserved except relocated link syntax. Eight tests and
