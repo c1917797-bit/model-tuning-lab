@@ -134,16 +134,9 @@
     }
   ],
   "resource_leases": {
-    "physical_npus": [
-      0,
-      1,
-      2,
-      3
-    ],
-    "service_ports": [
-      8233
-    ],
-    "state": "Owned native smoke attempt; continuous physical guard, exact label-bound cleanup"
+    "physical_npus": [],
+    "service_ports": [],
+    "state": "r1 exact owned resources released; r2 not yet admitted"
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +151,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll exact native smoke0183 on originalmc peer; preserve same root, no restart while live/uncertain. Then independently audit result/responses/isolation/release; continue native benchmark setup andC2 derivation.",
+  "next_action": "Publish parser fix and r2 contract; freshly admit nativeTP4 r2 only on idle physical0–3/8233. r1 root immutable; no unchanged replay.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-14T10:00:00+03:00",
@@ -213,21 +206,12 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": {
-    "phase": "native-tp4-smoke-r1",
-    "operation": "exec-0000000000000183",
-    "peer": "lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d",
-    "state": "running-or-awaiting-terminal-audit",
-    "code_commit": "dd220fba9aaf367f5490371257dcdc2f9dbb7cf5",
-    "controller_sha256": "97bc326f169312df84e2edadfec023abc88deb4fedf9eeddd17c6ddfdd70e64d",
-    "raw_root": "/cache/cch/hypic-independent-20261013/native-smoke-r1",
-    "port": 8233,
-    "physical_npus": [
-      0,
-      1,
-      2,
-      3
-    ],
-    "container": "hypic-independent-native-smoke-r1-20261013"
+  "active_attempt": null,
+  "native_smoke_r1": {
+    "state": "terminal-controller-parser-failure",
+    "report": "NATIVE_SMOKE_R1_TERMINAL.json",
+    "responses": 0,
+    "released": true,
+    "operation": "exec-0000000000000183"
   }
 }

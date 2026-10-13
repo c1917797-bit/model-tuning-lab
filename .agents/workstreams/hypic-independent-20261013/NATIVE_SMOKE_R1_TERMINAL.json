@@ -1,0 +1,47 @@
+{
+  "schema": "native-smoke-terminal/v1",
+  "attempt": "r1",
+  "operation": "exec-0000000000000183",
+  "code_commit": "dd220fba9aaf367f5490371257dcdc2f9dbb7cf5",
+  "raw_root": "/cache/cch/hypic-independent-20261013/native-smoke-r1",
+  "raw_hashes": {
+    "result.json": "b60d6c59888ec8818fcd0a55d11b50dc50742194f4bfe5ab7abfeb2ee1c03c57",
+    "service.log": "88c43faf17b7518f9fe8602c90d920480a45fd75748d597f7488c71d21f35ac8",
+    "launch.json": "a374e3bf62a23e135f2554f08a87f514a8f8559aa0a6d6f5f3f051ecb8414424",
+    "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "preflight.json": "ae80f52d5ddac1fd5d66f2c8675a5ea6c1552cfd22f8aabe7c86e3f3a8e383a8",
+    "service-start.json": "33760aa3540e95fdb9fe57b024d64b49e9b5636924a37c9dfd451f1c73806519",
+    "isolation.json": "2d4ad5ea20e51fb2e9505e222d712a42710f4dbfcb63bac965427bb50876abf8",
+    "release.json": "e8aba9aa4402cdea32718d9e093c33ae4ba8079c1e0dee719e7cb0176935331a"
+  },
+  "result": {
+    "valid": false,
+    "error": {
+      "type": "RuntimeError",
+      "message": "Isolation guard failed: [{'type': 'ValueError', 'message': 'Incomplete physical0-3 process table'}]"
+    },
+    "guard_errors": [
+      {
+        "type": "ValueError",
+        "message": "Incomplete physical0-3 process table"
+      }
+    ],
+    "isolation_samples": 57,
+    "responses": 0,
+    "worker_pids": [],
+    "physical_devices_seen": [],
+    "release": {
+      "owned_container": "ea2fc379fd9ce4bbd99f6ea29ed21184dcee917f9c38de49530ce4705d49b4d9",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    }
+  },
+  "classification": "Controller process-table parser defect; no native semantic or HYPIC result",
+  "reproduced_failure": "exec-0000000000000190: actual combinedNPU/Chip row missed; two controls fail",
+  "repair_checks": "exec-0000000000000192:6 parser controls pass",
+  "old_failed_raw_table_retained": false,
+  "limitation": "r1 failed-table raw text was not saved; available actual host table-format receipt and failure-phase regression establish parser defect; no foreign-process attribution",
+  "successor": "r2 new immutable root with combined-column parser, raw parse-error retention and PID/cgroup ownership receipts",
+  "original_outcome_preserved": true
+}

@@ -19,10 +19,15 @@ TASK = "hypic-independent-20261013"
 def command(args, timeout=30):
     return subprocess.check_output(args, text=True, stderr=subprocess.STDOUT, timeout=timeout)
 
+class ProcessTableError(ValueError):
+    def __init__(self,message,raw):
+        super().__init__(message)
+        self.raw=raw
+
 def processes(text):
     marker = "Process id"
     if marker not in text:
-        raise ValueError("NPU process table unavailable")
+        raise ProcessTableError("NPU process table unavailable",text)
     tail = text.split(marker, 1)[1]
     rows = []
     seen = set()
@@ -31,11 +36,16 @@ def processes(text):
             m = re.search(r"NPU\s+(\d+)", line)
             if m: seen.add(int(m.group(1)))
         columns = [c.strip() for c in line.split("|")]
+        combined = columns[1].split() if len(columns)>=5 else []
+        if len(combined)==2 and all(x.isdigit() for x in combined) and columns[2].isdigit():
+            npu,pid=int(combined[0]),int(columns[2])
+            rows.append((npu,pid));seen.add(npu)
+            continue
         if len(columns) >= 6 and columns[1].isdigit() and columns[2].isdigit() and columns[3].isdigit():
             npu, pid = int(columns[1]), int(columns[3])
             rows.append((npu,pid)); seen.add(npu)
     if not set(range(4)) <= seen:
-        raise ValueError("Incomplete physical0-3 process table")
+        raise ProcessTableError("Incomplete physical0-3 process table",text)
     return rows
 
 def inspect(cid):
@@ -45,7 +55,7 @@ def snapshot(cid=None):
     text = command(["npu-smi","info"],timeout=15)
     rows = processes(text)
     target = [(n,p) for n,p in rows if n in range(4)]
-    foreign = []
+    foreign = [];owners=[]
     for n,pid in target:
         try:
             cgroup = Path("/proc",str(pid),"cgroup").read_text()
@@ -53,7 +63,8 @@ def snapshot(cid=None):
             cgroup = "owner_unverified"
         if not cid or cid not in cgroup:
             foreign.append({"npu":n,"pid":pid,"cgroup":cgroup})
-    return {"utc":datetime.now(timezone.utc).isoformat(),"processes":target,"foreign":foreign,"raw":text}
+        owners.append({"npu":n,"pid":pid,"cgroup":cgroup,"owned":bool(cid and cid in cgroup)})
+    return {"utc":datetime.now(timezone.utc).isoformat(),"processes":target,"owners":owners,"foreign":foreign,"raw":text}
 
 def port_free(port):
     with socket.socket() as s:
@@ -96,7 +107,7 @@ def run_contract(contract):
                 worker_pids.update(pid for device,pid in snap["processes"])
                 physical_devices_seen.update(device for device,pid in snap["processes"])
             except Exception as exc:
-                guard_error.append({"type":type(exc).__name__,"message":str(exc)})
+                guard_error.append({"type":type(exc).__name__,"message":str(exc),"raw":getattr(exc,"raw",None)})
                 return
             guard_stop.wait(3)
     def require_guard():
