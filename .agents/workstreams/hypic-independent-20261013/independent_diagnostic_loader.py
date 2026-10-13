@@ -38,6 +38,29 @@ def enable():
             try:
                 _stop=activate_cache_diagnostic(enabled=True,emit=emit,max_batches=maximum)
                 emit({"event":"observer_installed","pid":os.getpid(),"technique_enabled":False})
+                public_config=os.environ.get("INDEPENDENT_PUBLIC_STAGE_CONFIG")
+                if public_config:
+                    from independent_public_stage import CanonicalPublicStage
+                    config=json.loads(Path(public_config).read_text())
+                    stage=CanonicalPublicStage(**config)
+                    def publish(material):
+                        generation=stage.publish(material)
+                        from dataclasses import asdict
+                        emit({"event":"public_linear_material_published","pid":os.getpid(),
+                              "identity":asdict(material.identity),"generation":generation,
+                              "transition_shape":list(material.affine.transition.shape),
+                              "core_body_shape":list(material.core_outputs.shape)})
+                    from independent_public_gdn_hook import install_public_gdn_producer
+                    producer_stop=install_public_gdn_producer(
+                        enabled=True,select_public=stage.select_public,publish=publish)
+                    context_stop=_stop
+                    def combined_stop():
+                        producer_stop()
+                        context_stop()
+                    _stop=combined_stop
+                    emit({"event":"public_producer_installed","pid":os.getpid(),
+                          "tokens_sha256":stage.digest,"length":len(stage.tokens),
+                          "private_reuse_enabled":False})
             except BaseException:
                 os.close(fd)
                 raise

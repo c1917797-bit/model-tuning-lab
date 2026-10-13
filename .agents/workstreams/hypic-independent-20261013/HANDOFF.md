@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Latest public producer integration: worker loader optionally installs canonical
+GDN producer from frozen config and emits per-layer/rank/generation material
+receipts; private reuse still disabled.71 controls0023 pass including exact
+canonical/private selector distinction. Native TP4 controller now supports frozen
+raw-token completion payload and bounded request timeout for public stage.
+Next freeze64-token canonical config/source hashes/new root and run producer;
+these new paths not device-verified. No owned NPU job currently.
+
 Latest integration checkpoint: immutable runner prompt snapshots now available in
 request-scoped context; source mapping confirms inherited GPU runner records
 CachedRequestState.prompt_token_ids.69 CPU controls0021 pass. CanonicalPublicStage

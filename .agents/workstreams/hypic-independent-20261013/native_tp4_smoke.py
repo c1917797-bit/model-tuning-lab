@@ -90,11 +90,11 @@ def write(root,name,data):
         json.dump(data,f,ensure_ascii=False,indent=2)
         f.flush()
 
-def request(port,payload=None):
-    path="/health" if payload is None else "/v1/chat/completions"
+def request(port,payload=None,*,completion=False,timeout=60):
+    path="/health" if payload is None else ("/v1/completions" if completion else "/v1/chat/completions")
     data=None if payload is None else json.dumps(payload).encode()
     req=urllib.request.Request("http://127.0.0.1:"+str(port)+path,data=data,headers={"Content-Type":"application/json"})
-    with urllib.request.urlopen(req,timeout=60 if data else 3) as response:
+    with urllib.request.urlopen(req,timeout=timeout if data else 3) as response:
         raw=response.read()
         return json.loads(raw) if data else response.status
 
@@ -166,6 +166,8 @@ def run_contract(contract):
                    "-e","INDEPENDENT_CACHE_DIAGNOSTIC=1",
                    "-e","INDEPENDENT_DIAGNOSTIC_ROOT=/scratch/diagnostics",
                    "-e","INDEPENDENT_DIAGNOSTIC_BATCHES=2"]
+            if diagnostic.get("public_config"):
+                args+=["-e","INDEPENDENT_PUBLIC_STAGE_CONFIG=/probe/"+diagnostic["public_config"]]
         args += [image,"serve","/model","--served-model-name","qwen3.5","--host","0.0.0.0",
                  "--port",str(port),"--tensor-parallel-size","4","--data-parallel-size","1",
                  "--max-model-len","40960","--max-num-batched-tokens","40960",
@@ -198,19 +200,25 @@ def run_contract(contract):
         else:raise TimeoutError("Native health deadline")
         payload={"model":"qwen3.5","messages":[{"role":"user","content":"Calculate 2 + 2. Reply with only the integer."}],
                  "temperature":0,"seed":0,"max_tokens":32,"chat_template_kwargs":{"enable_thinking":False}}
+        payload=contract.get("request_payload",payload)
         for i in range(3):
             require_guard()
             before=snapshot(cid);retain_snapshot(before)
             if before["foreign"]:raise RuntimeError("Foreign process before request")
-            response=request(port,payload)
+            response=request(port,payload,completion=contract.get("completion",False),
+                             timeout=contract.get("request_timeout_seconds",60))
             journal.append({"event":"response","index":i,"payload":payload,"response":response})
             require_guard()
             responses.append({"index":i,"payload":payload,"response":response})
             after=snapshot(cid);retain_snapshot(after)
             if after["foreign"]:raise RuntimeError("Foreign process after request")
-        texts=[r["response"]["choices"][0]["message"]["content"].strip() for r in responses]
-        assert all(t.rstrip(".")=="4" for t in texts),"Native smoke semantic result"
-        assert len(set(texts))==1,"Native repeated response variability"
+        if not contract.get("completion",False):
+            texts=[r["response"]["choices"][0]["message"]["content"].strip() for r in responses]
+            assert all(t.rstrip(".")=="4" for t in texts),"Native smoke semantic result"
+            assert len(set(texts))==1,"Native repeated response variability"
+        else:
+            assert all(isinstance(r["response"]["choices"][0]["text"],str) for r in responses)
+            assert all(r["response"]["usage"]["completion_tokens"]>0 for r in responses)
         assert len(worker_pids)>=4,"Missing physical worker evidence"
         assert physical_devices_seen==set(range(4)),"Missing physical card coverage"
         valid=True
