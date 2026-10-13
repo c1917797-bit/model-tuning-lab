@@ -104,12 +104,21 @@ def run_contract(contract):
     if raw.exists():raise RuntimeError("Immutable attempt root already exists")
     assert hashlib.sha256((model/"config.json").read_bytes()).hexdigest()==contract["model_config_sha256"]
     command(["docker","image","inspect",image])
+    diagnostic=contract.get("cache_diagnostic")
+    if diagnostic:
+        for name,expected in diagnostic["source_sha256"].items():
+            path=HERE/name
+            if path.resolve().is_relative_to(HERE.resolve()) is False:
+                raise ValueError("diagnostic source outside workstream")
+            if hashlib.sha256(path.read_bytes()).hexdigest()!=expected:
+                raise ValueError("diagnostic source drift: "+name)
     first=snapshot()
     if first["foreign"]:raise RuntimeError("Physical0-3 occupied before admission")
     port_free(port)
     for p in range(contract["hccl_ports"][0],contract["hccl_ports"][1]+1):port_free(p)
     raw.mkdir(parents=True,exist_ok=False)
     (raw/"tmp").mkdir()
+    if diagnostic:(raw/"diagnostics").mkdir()
     write(raw,"preflight.json",first)
     journal=DurableJournal(raw/"events.jsonl")
     journal.append({"event":"preflight","snapshot":first})
@@ -150,6 +159,12 @@ def run_contract(contract):
              str(contract["hccl_ports"][0])+"-"+str(contract["hccl_ports"][1]),
              "TMPDIR":"/scratch/tmp","PYTHONDONTWRITEBYTECODE":"1"}
         for k,v in env.items():args+=["-e",k+"="+v]
+        if diagnostic:
+            args+=["-v",str(HERE)+":/probe:ro",
+                   "-e","PYTHONPATH=/probe/diagnostic_bootstrap:/probe",
+                   "-e","INDEPENDENT_CACHE_DIAGNOSTIC=1",
+                   "-e","INDEPENDENT_DIAGNOSTIC_ROOT=/scratch/diagnostics",
+                   "-e","INDEPENDENT_DIAGNOSTIC_BATCHES=2"]
         args += [image,"serve","/model","--served-model-name","qwen3.5","--host","0.0.0.0",
                  "--port",str(port),"--tensor-parallel-size","4","--data-parallel-size","1",
                  "--max-model-len","40960","--max-num-batched-tokens","40960",
@@ -158,6 +173,7 @@ def run_contract(contract):
                  "--compilation-config",'{"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_capture_sizes":[1,4,8,16,24,32]}',
                  "--trust-remote-code","--async-scheduling"]
         write(raw,"launch.json",{"argv":args,"controller_sha256":hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                                 "diagnostic_sources":diagnostic,
                                  "git_commit":command(["git","rev-parse","HEAD"]).strip()})
         cid=command(args,timeout=30).strip()
         guard_thread=threading.Thread(target=guard_loop,daemon=True)
@@ -213,7 +229,8 @@ def run_contract(contract):
                 command(["docker","rm",cid])
                 release["removed"]=True
             except Exception as e:release["error"]=str(e)
-        try:port_free(port);release["port_free"]=True
+        try:
+            release["port_free"]=not command(["ss","-H","-ltn","sport = :"+str(port)]).strip()
         except OSError:pass
         final=snapshot()
         release["final_physical_processes"]=final["processes"]
@@ -232,7 +249,8 @@ def run_contract(contract):
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument("--run",action="store_true")
-    args=parser.parse_args();contract=json.loads(CONTRACT.read_text())
+    parser.add_argument("--contract",type=Path,default=CONTRACT)
+    args=parser.parse_args();contract=json.loads(args.contract.read_text())
     expected=contract["controller_sha256"]
     assert hashlib.sha256(Path(__file__).read_bytes()).hexdigest()==expected
     assert contract["physical_npus"]==[0,1,2,3] and contract["tp"]==4
