@@ -1,0 +1,140 @@
+{
+  "schema": "ascend.r109.actual-four-path-and-skvq-config/v1",
+  "window": {
+    "start": 1791835594,
+    "cutoff": 1791878794,
+    "utc": "2026-10-13T08:06:34Z",
+    "unchanged": true
+  },
+  "target": "chicaihong01/ma",
+  "new_user_combination_policy": {
+    "single_technique_10percent_required": false,
+    "combination_E2E_throughput_at_least": 1.1,
+    "paired_arms": [
+      "dense",
+      "A",
+      "B",
+      "A+B"
+    ],
+    "sum_of_single_percentages_is_not_evidence": true,
+    "old_tickets_immutable": true,
+    "accuracy_final_tasks_only": "latest user <=1%; report percentage-point and relative losses separately",
+    "unverified_combinations_no_success_claim": true
+  },
+  "four_path": {
+    "operation": "exec-000000000000026d",
+    "exit_code": 0,
+    "duration_ms": 26379,
+    "scope": "one preserved L31/step1 failed input; actual NPU4 only",
+    "source_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R87/adakv-paged-four-path-v1-004/SOURCE_MANIFEST.json",
+      "bytes": 5512,
+      "sha256": "cd9157a270e6f913dff2b51cb3f6c6bc82e593b9d1f54c851ffeb5b9bb71e209"
+    },
+    "report_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-four-path-r109-main-005/diagnostic-004/REPORT.json",
+      "bytes": 70405,
+      "sha256": "b9c189e7135a760e2f3dda542c5a5882435d513ed376585539ae454ec2ad0484"
+    },
+    "raw_ref": {
+      "bytes": 113204917,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-four-path-r109-main-005/diagnostic-004/FOUR_PATHS.pt",
+      "sha256": "c9c4d9f7bfc9c07b42e35d6b0340cb8dcb46eba66bacaeb32ae3e3fe4f1a5ee7"
+    },
+    "paths": [
+      {
+        "name": "original_offset_paged",
+        "math": {
+          "cosine": 0.999920666217804,
+          "relative_rms": 0.01264801131637034
+        },
+        "original_limits_pass": false,
+        "all_state_input_pointer_checks": true,
+        "sha256": "ba4875c24d122068eea2c8249493ac7d8407679c44c4ddc043dd855b271e4324"
+      },
+      {
+        "name": "exact_zero_offset_paged",
+        "math": {
+          "cosine": 0.999920666217804,
+          "relative_rms": 0.01264801131637034
+        },
+        "original_limits_pass": false,
+        "all_state_input_pointer_checks": true,
+        "sha256": "ba4875c24d122068eea2c8249493ac7d8407679c44c4ddc043dd855b271e4324"
+      },
+      {
+        "name": "original_contiguous_TND",
+        "math": {
+          "cosine": 0.999920666217804,
+          "relative_rms": 0.01264801131637034
+        },
+        "original_limits_pass": false,
+        "all_state_input_pointer_checks": true,
+        "sha256": "ba4875c24d122068eea2c8249493ac7d8407679c44c4ddc043dd855b271e4324"
+      },
+      {
+        "name": "exact_zero_offset_cat_TND",
+        "math": {
+          "cosine": 0.999920666217804,
+          "relative_rms": 0.01264801131637034
+        },
+        "original_limits_pass": false,
+        "all_state_input_pointer_checks": true,
+        "sha256": "ba4875c24d122068eea2c8249493ac7d8407679c44c4ddc043dd855b271e4324"
+      }
+    ],
+    "all_six_pairwise_bitwise": true,
+    "original_fail_reproduced": true,
+    "qualified": false,
+    "model_ready": false,
+    "interpretation": "This one input excludes offset/cat/layout storage corruption as cause; all four native BF16 paths differ from independent FP32/finalBF16 gold identically. No threshold changed. Not paper-level no-go.",
+    "same660_source_controls": {
+      "operation": "exec-0000000000000269",
+      "actual_tests": 20,
+      "skips": 0,
+      "passed": true,
+      "scope": "stdlib controls only; strict module-local fixture redirection leaves RO production/test source and assertions unchanged"
+    },
+    "create_failure": {
+      "operation": "exec-000000000000026b",
+      "exit_code": 1,
+      "cause": "MAIN command serialization omitted /usr/bin/docker executable",
+      "no_container_created": true,
+      "original_empty_output_preserved": true,
+      "corrected_new_output": "run-adakv-four-path-r109-main-005"
+    },
+    "cleanup": {
+      "cid": "7cf045b2baea361ef59c282506215302d1ffbf081cfa9b23a63195594bc4e6f3",
+      "stopped_retained": true,
+      "parent_budget_met": true,
+      "no_NPU4_7_processes_after_release": true
+    }
+  },
+  "skvq": {
+    "operation": "exec-0000000000000270",
+    "exit_code": 1,
+    "duration_ms": 191720,
+    "host_result_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-formal-013-r87-main-full47-001/HOST_RESULT.json",
+      "bytes": 2965,
+      "sha256": "5e6dc3be16063387ed1cfddb05eea9fc7a6f4d8ea7f55fb6959d04b6e471c923"
+    },
+    "server_error_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-formal-013-r87-main-full47-001/round0-candidate/server.stderr",
+      "bytes": 4544,
+      "sha256": "d5bfe04ba5096664184f31772314eb39340b1fbe00a18904a2f79c01e0bba78e"
+    },
+    "actual_HAL_initialized_logical0_device_count4": true,
+    "full_actual_workers_not_started": true,
+    "normalized_config_preweight_assertion_failed": true,
+    "exact_diff_unobserved": true,
+    "cascade_log_not_proven_cause": true,
+    "model_math_performance_accuracy_unmeasured": true,
+    "owned_CID": "b3a457e6f4c3f3c5577eae12ba9865c69c934075bc1630492d37fa0b72f313ae",
+    "controller_cleanup_stopped_retained": true,
+    "next": "Short source-bound actual create_engine_config smoke that publishes all normalized fields before assertion; only then minimal adapter repair, new run root. Never rerun unchanged deterministic failure."
+  },
+  "combined_success": false,
+  "goal": "active; full joint acceptance not met",
+  "no_protected_0_3_mutation": true
+}
