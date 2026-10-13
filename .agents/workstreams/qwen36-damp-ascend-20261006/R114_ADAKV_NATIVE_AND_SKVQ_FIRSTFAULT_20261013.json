@@ -1,0 +1,87 @@
+{
+  "schema": "ascend.r114-native-repair-observation/v1",
+  "recorded_utc": "2026-10-13T07:38:00Z",
+  "final_acceptance": false,
+  "source_operation": "exec-00000000000002c9",
+  "original_operation_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R114_ADAKV_POWER2_02C9_ORIGINAL_20261013.json",
+    "bytes": 2780,
+    "sha256": "8e39432e9603f3766f28f1799af9a264d438f7e64fce4d14b16cb4e758fedac4"
+  },
+  "actual_scope": "Saved original failed frame, two actual native NPU calls in same owned process; NOT full 96/240 suite, graph, model, performance or task quality.",
+  "actual_NPU": {
+    "physical": 4,
+    "logical": 0,
+    "PID": 2188118,
+    "independent_host_process_observations": 7,
+    "original_BF16_output_bitwise_reproduced": true,
+    "original_BF16_relative_rms": 0.01264801131637034,
+    "original_BF16_cosine": 0.999920666217804,
+    "exact_scaled_FP16_relative_rms": 0.0022262981852286035,
+    "exact_scaled_FP16_cosine": 0.9999974370002747,
+    "limits_unchanged": {
+      "relative_rms_max": 0.005,
+      "cosine_min": 0.99998
+    },
+    "single_frame_pass": true,
+    "finite_state_guards_and_pointers_pass": true,
+    "input_and_original_gold_unchanged": true
+  },
+  "report_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-power2-owned-main-r114-001/physical4/numeric/REPORT.json",
+    "bytes": 72491,
+    "sha256": "121950c5139b1614146dda0594ff7f262beb6a186068f2fd935fde4bfb3aa92e"
+  },
+  "raw_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-power2-owned-main-r114-001/physical4/numeric/POWER2_FP16_CONTROL.pt",
+    "bytes": 121916882,
+    "sha256": "afa611716ee38683c3daacb4ccebe1c5007cc159120ee54010a21e053c291c60"
+  },
+  "owner_report_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-adakv-power2-owned-main-r114-001/RESULT.json",
+    "bytes": 40167,
+    "sha256": "3aeadc72c3c717644206181e43606c58f7490f8ae4efef3bd5907363a0eba137"
+  },
+  "cleanup": {
+    "CPU_CID": "5744b41b4b60e11453a44ac483374c6ad79239105e1db7c2bb0167b1b1966ccf",
+    "NPU_CID": "a3eab131cfe9c3e626656c42b266853acf4278bc1c4d86db2a261231997cf675",
+    "both_stopped_retained": true,
+    "errors": [],
+    "no_OOM": true
+  },
+  "skvq_previous_first_fault": {
+    "operation": "exec-00000000000002ae",
+    "first_fault_utc": "2026-10-13T06:37:12Z",
+    "stage": "real TP4 FULL GLOBAL graph capture; warmup adaptation succeeded first",
+    "failure": "writer.py161 scalar RHS bitwise_left_shift; CopyKernelOpApi.cpp55 aclrtMemcpy107030 during GLOBAL capture",
+    "attribution": "ADAPTATION_IMPLEMENTATION; scalar-host-materialization hypothesis strongly supported by traceback, device-resident shift successor pending actual NPU",
+    "same_source_unchanged_retry_forbidden": true,
+    "owned_stopped_retained_CID": "2eb432e65bebf49b77be888925f0b3d3f4283741618557eea60042ce278ac6e2",
+    "release_utc": "2026-10-13T06:45:47.22199265Z",
+    "secondary_owner_observer_error": "followed intentional own stop, not proof of foreign occupation",
+    "full47_pass": false
+  },
+  "new_ready_gates": {
+    "adakv_full_matrix": "preparer closing exactness/support and existing single4 owner bridge",
+    "skvq_shift": "new source-bound writer GLOBAL quantization control preparation",
+    "mxr": "read-only resumption audit, no paper-wide negative supported"
+  },
+  "utilization": {
+    "latest_snapshot_operation": "exec-00000000000002dc",
+    "physical4_7": "no processes, AICore0, baseline HBM at snapshot",
+    "continuous_window_utilization": "unmeasured",
+    "ready_NPU_at_snapshot": 0,
+    "cause": "prepared guest gates still missing reviewed executable owner/matrix closure, not external4-7 occupation",
+    "no_dummy_load": true
+  },
+  "fixed_window_cutoff_utc": "2026-10-13T08:06:34Z",
+  "not_extended": true,
+  "new_quality_authority": ".agents/workstreams/qwen36-damp-ascend-20261006/R115_TASK_ACCURACY_CONTRACT_20261013.json",
+  "open_gates": [
+    "complete relevant numerical/lifecycle/graph matrix",
+    "matched full-model performance and 3 formal pairs",
+    "new GSM8K/HumanEval/MMLU smoke and full quality",
+    "portability and safe opt-in plugin delivery"
+  ]
+}
+

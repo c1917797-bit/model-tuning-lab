@@ -1,0 +1,71 @@
+{
+  "schema": "ascend.current-user-task-accuracy-contract/v1",
+  "recorded_utc": "2026-10-13T07:38:00Z",
+  "authority": "Current human request: accuracy tests use GSM8K, HumanEval and MMLU; run smoke before full evaluation. This overrides old automation task lists for NEW experiments only.",
+  "supersedes_for_new_experiments": [
+    "LongBench-v2/GSM8K task set in R113 and older goal/heartbeat text"
+  ],
+  "final_tasks": [
+    "GSM8K",
+    "HumanEval",
+    "MMLU"
+  ],
+  "historical_results_unchanged": true,
+  "acceptance": {
+    "full_model_throughput_gain_min_percent": 10,
+    "performance_output_tokens": 1024,
+    "formal_pairs": 3,
+    "report": [
+      "throughput",
+      "TTFT",
+      "TPOT"
+    ],
+    "task_allowed_loss": 1,
+    "loss_unit_human_not_narrowed": true,
+    "conservative_admission": "Require both <=1 percentage point and <=1 relative percent loss per task until explicitly narrowed; report both; never apply to intermediate tensors.",
+    "no_change_to_numerical_gates": true
+  },
+  "tasks": {
+    "GSM8K": {
+      "metric": "exact_match under frozen numeric-answer extraction",
+      "smoke_proposed_count": 32,
+      "full_split": "official test; revision and exact item list to freeze before launch"
+    },
+    "HumanEval": {
+      "metric": "pass@1 under identical deterministic generation and frozen evaluator",
+      "smoke_proposed_count": 16,
+      "full_split": "all official problems for the frozen dataset revision; no cherry-picked omissions",
+      "execution_safety": "Generated code must run in a separate nonprivileged no-network/no-NPU sandbox, no secrets or broad host mounts, one temporary write directory, with CPU/RAM/time/process limits. Scorer and extraction must be frozen."
+    },
+    "MMLU": {
+      "metric": "accuracy, with all subjects and aggregate weighting explicitly reported",
+      "smoke_proposed": "two deterministically selected test items per subject, separate from any tuning set",
+      "full_split": "all official test subjects for the frozen revision",
+      "prompt_scoring_pending": "Freeze few-shot count, prompt template, answer extraction versus loglikelihood scoring before any launch; do not mix protocols."
+    }
+  },
+  "generation": {
+    "thinking": false,
+    "temperature": 0,
+    "seed": 0,
+    "generation_max_tokens": 2048,
+    "EOS": "normal; do not force 1024 for task evaluation",
+    "scope": "Generative tasks. Any non-generative MMLU scoring choice must be explicitly registered, not silently equated."
+  },
+  "smoke_is_not_acceptance": true,
+  "smoke_purpose": [
+    "real plugin/backend activation",
+    "dataset/prompt/scorer and generated-code sandbox checks",
+    "early obvious task regression or truncation detection"
+  ],
+  "frozen_input_ids_pending": true,
+  "dataset_scorer_revision_pending": true,
+  "paired_baseline_fingerprint_required": true,
+  "smoke_has_run": false,
+  "full_has_run": false,
+  "ready_for_task_launch": false,
+  "fixed_window_cutoff_utc": "2026-10-13T08:06:34Z",
+  "window_not_extended": true,
+  "remaining_scope": "Preparation only until actual source/data/evaluator/sandbox/consumer prerequisites and budget fit are verified."
+}
+

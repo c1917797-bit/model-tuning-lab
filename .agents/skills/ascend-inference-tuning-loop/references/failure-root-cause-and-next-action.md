@@ -598,3 +598,20 @@ the complete affected NPU gate before E2E timing. Task-quality allowance is a
 separate final measurement.
 
 Current scoped evidence: `../../../workstreams/qwen36-damp-ascend-20261006/KIVI_LONG_MATH_FIRSTFAULT_20261012_R58.json`.
+
+## Captured host-copy errors: prove operator dispatch before rewriting constants
+
+For a graph-capture host/device-copy failure, inspect the actual overload and
+backend fallback warning before concluding that a Python scalar is the cause.
+NPU-resident inputs do not prove NPU execution: an unsupported Tensor-out
+overload can still fall back to CPU. Preserve the earliest native warning and
+traceback, distinguish eager byte correctness from all-native execution, and
+update the causal hypothesis when the next experiment falsifies it.
+
+An algebraically equivalent repair (for example bounded disjoint bit fields
+packed by integer powers-of-two multiplication and addition) needs an exact
+range/overflow argument and independent complete-byte checks, followed by the
+same real GLOBAL capture matrix. Source/API availability or cold tests do not
+qualify the actual dtype/out overload. A component pass does not qualify the
+remaining writer, cache lifecycle or full-model graph. Evidence and pending
+successor: `../../../workstreams/qwen36-damp-ascend-20261006/R116_SKVQ_GRAPH_DISPATCH_20261013.json`.

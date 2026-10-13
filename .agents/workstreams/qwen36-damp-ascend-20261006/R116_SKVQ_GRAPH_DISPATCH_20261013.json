@@ -1,0 +1,125 @@
+{
+  "schema": "ascend.r116-graph-dispatch-causal-record/v1",
+  "recorded_utc": "2026-10-13T07:58:00Z",
+  "fixed_cutoff_utc": "2026-10-13T08:06:34Z",
+  "window_extended": false,
+  "operation": "exec-00000000000002fa",
+  "original_operation_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_R116_SKVQ_02FA_ORIGINAL_20261013.json",
+    "bytes": 3973,
+    "sha256": "54d535e13fd88b43d8430ca68fe9da9297baa04f4668e2f3d4a076c47c812ced"
+  },
+  "owner_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-writer-owned-main-r116-001/RESULT.json",
+    "bytes": 3252,
+    "sha256": "8228f126ad2f58b6e635893a00515cf19eee1cba070a45fb912e120958a220ab"
+  },
+  "child_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-writer-owned-main-r116-001/physical4/matrix-child.json",
+    "bytes": 10828,
+    "sha256": "2168f028a279a2f11a36ae896e146e3eb41cf79bc1f91b28bf49452d2a28bc65"
+  },
+  "native_report_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-writer-owned-main-r116-001/physical4/run-skvq-writer-shift-native-quantize001/RESULT.json",
+    "bytes": 10585,
+    "sha256": "6ca68b268750a5c359192c4bc9a691bd0b8b284e42dbc4d57e9bb9cfe7a4efe6"
+  },
+  "stderr_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-writer-owned-main-r116-001/physical4/matrix.stderr",
+    "bytes": 4385,
+    "sha256": "8c627a8d4e40d6f0e405691b796f63c5ac3b82b4890940d389dfb93027e049ab"
+  },
+  "source_ref": {
+    "bytes": 5557,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R87/skvq-writer-shift-native-v1-003/SOURCE_MANIFEST.json",
+    "sha256": "e2bba48aab3300695891904b470c8f7e5bf6b4c69f7496b8aeb1436fd7ec1c3c"
+  },
+  "result": "FAILED",
+  "classification": "ADAPTATION_IMPLEMENTATION",
+  "first_fault": {
+    "utc": "2026-10-13T07:53:39Z",
+    "operator": "aten::bitwise_left_shift.Tensor_out",
+    "observed": "actual torch_npu warning: unsupported on NPU and CPU fallback; GLOBAL capture then aclrtMemcpy107030",
+    "prior_hypothesis_updated": "Moving the RHS to an NPU Tensor was insufficient; dispatch of this actual overload is the evidenced issue.",
+    "not_paper_failure": true
+  },
+  "actual_scope": {
+    "same_image_software": true,
+    "physical": 4,
+    "logical": 0,
+    "pid": 2566160,
+    "host_process_observations": 2,
+    "completed_eager_cells": 2,
+    "registered_cells": 256,
+    "global_pass": false,
+    "eager_caveat": "The first two byte checks passed but shift used CPU fallback; not all-native qualification.",
+    "full47": false,
+    "model_performance": false,
+    "task_quality": false
+  },
+  "cleanup": [
+    {
+      "cleanup": {
+        "bytes": 1619,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-writer-owned-main-r116-001/cpu-preflight/cleanup.json",
+        "sha256": "5d403fb4134d49538d71bdf549cf4b19b84c6351af5aa472713c36f0f486bf2d"
+      },
+      "cid": "7330236be2830bb15aa36fab2d02018b4e9476d2cce96d2c894e6c2a8598b357",
+      "stopped_retained": true,
+      "errors": [],
+      "state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 137,
+        "Error": "",
+        "StartedAt": "2026-10-13T07:53:05.8799459Z",
+        "FinishedAt": "2026-10-13T07:53:24.58685569Z"
+      },
+      "exec_ids": null
+    },
+    {
+      "cleanup": {
+        "bytes": 1633,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-skvq-writer-owned-main-r116-001/physical4/cleanup.json",
+        "sha256": "629f210fcc136c2becc97d16e9239b077c5220353e9c28f68cde665d8a7028d7"
+      },
+      "cid": "953005ee50611c3772b250ac70f2dca81e5351b66c63e6c3987d86f27aec5179",
+      "stopped_retained": true,
+      "errors": [],
+      "state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 137,
+        "Error": "",
+        "StartedAt": "2026-10-13T07:53:29.16903852Z",
+        "FinishedAt": "2026-10-13T07:53:59.42384855Z"
+      },
+      "exec_ids": null
+    }
+  ],
+  "next_action": "NEW004 hypothesis: exact bounded bit packing using device integer multiplication/addition; full raw-byte GLOBAL matrix required. Do not retry NEW003.",
+  "adakv96": {
+    "not_started": true,
+    "reason": "780-second full-matrix owner required new private cache-accountant binding; readiness not complete by latest legal launch07:53:34Z.",
+    "classification": "PREPARATION_CONTRACT_AND_DEADLINE",
+    "single_frame_pass_not_inherited": true
+  },
+  "mxr": {
+    "status": "CURRENT_MODEL_INTEGRATION_INCOMPLETE",
+    "old_qwen38_profile_no_go_withdrawn": true,
+    "reference_v023_service_A": "FP32; old local MXR gateFP16",
+    "next": "source-bound deployed seam and actual FP32 A capture; qualify precision bridge before model."
+  },
+  "current_task_accuracy_contract": "R115_TASK_ACCURACY_CONTRACT_20261013.json",
+  "joint_acceptance": false
+}
