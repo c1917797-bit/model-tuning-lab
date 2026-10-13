@@ -1,0 +1,34 @@
+{
+  "scope": "bounded-native-recovery-only",
+  "historical_r2_valid": false,
+  "historical_gap": "controller process vanished; original continuous isolation lost",
+  "recovery_operation": "exec-000000000000000a",
+  "recovery_exit": 1,
+  "recovery_exit_reason": "port bind EADDRINUSE after exact container removal; subsequent independent audit has no listening socket and no NPU0-3 processes",
+  "responses": 3,
+  "outputs": [
+    "4",
+    "4",
+    "4"
+  ],
+  "isolation_samples": 19,
+  "foreign_samples": 0,
+  "physical_cards": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "exact_removed_container": "1fe9f605ffc0de544c4b4af8059a8c9329cd86a5ca55259e7eedcd1661d0947d",
+  "raw_root": "/cache/cch/hypic-independent-20261013/native-smoke-r2/recovery-1",
+  "hashes": {
+    "service.log": "cd72aedcd971b9b55302e7f05baa3b62d1f6a782b5b29550e517c1877429ee3a",
+    "responses.json": "fb4e8e632fc2ca87a782227136c454c86b634791d3930929b883e21cae6fd048",
+    "isolation.json": "b9b3c389d9ab03ff501b5e58b05a651112e52d9c34b3f2502cd9564f6051aee6"
+  },
+  "not_proven": [
+    "formal performance baseline",
+    "new HYPIC device/service correctness",
+    "historical continuous isolation"
+  ]
+}

@@ -1,4 +1,25 @@
 import unittest
+import tempfile
+import json
+from pathlib import Path
+from native_tp4_smoke import DurableJournal
+
+class DurableJournalTests(unittest.TestCase):
+    def test_event_readable_before_close(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/"events.jsonl"
+            journal=DurableJournal(path)
+            try:
+                journal.append({"event":"response","index":0})
+                self.assertEqual(json.loads(path.read_text()),{"event":"response","index":0})
+                with self.assertRaises(FileExistsError):DurableJournal(path)
+            finally:journal.close()
+    def test_each_event_is_separate_json(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/"events.jsonl";journal=DurableJournal(path)
+            for i in range(3):journal.append({"index":i})
+            journal.close()
+            self.assertEqual([json.loads(x)["index"] for x in path.read_text().splitlines()],[0,1,2])
 from native_tp4_smoke import processes
 HEADER="Process id"
 class PhysicalProcessParserTests(unittest.TestCase):

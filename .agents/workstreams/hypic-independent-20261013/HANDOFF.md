@@ -18,8 +18,19 @@ NativeTP4 r1/0183 terminal: controller table-parser failure before health,0respo
 Exact owned container/port released; original raw root immutable.
 NATIVE_SMOKE_R1_TERMINAL.json retains evidence and limits.
 Actual combinedNPU/Chip process-column regression0190 failed; repair0192 passes6tests.
-Next: publish changed controller953d0958/r2contract, then freshly admit r2 on0–3/8233.
-R2 root /cache/cch/hypic-independent-20261013/native-smoke-r2 must be new.
+Changed controller953d0958/r2contract published as ee85ac32 and live-ref verified.
+R2 controller019a missing and /proc confirms no controller; container remains healthy.
+Recovery000a on originalmc attaches ONLY exact CID1fe9f605ffc0de544c4b4af8059a8c9329cd86a5ca55259e7eedcd1661d0947d,
+performs three bounded native requests and exact cleanup, records recovery-1.
+Historical r2 continuous isolation is missing and cannot be promoted as valid.
+Recovery000a terminal:3/3 answers4,19clean samples and physical0–3 coverage.
+Exact container removed; post-terminal independent check proves no8233listener and no0–3processes.
+Recovery exit1 arose at non-reuse bind after removal; do not conflate it with semantic failure.
+NATIVE_R2_RECOVERY_AUDIT.json records bounded pass and original missing isolation.
+Never restart r2. Next: durable per-event evidence and official numerical ABI bridge.
+Raw /cache/cch/hypic-independent-20261013/native-smoke-r2 is immutable.
+Independent C2/RoPE/conv reference CPU0001 passes seven controls; not NPU proof.
+After recovery audit repair durable controller evidence before the next device stage.
 Start/current-plan commit7d742068 is now published and live-ref verified.
 PUBLICATION_RECEIPT.json preserves the original-object desktop relay proof.
 OFFICIAL_SOURCE_MAP.json records image0168; no existingHYPIC module installed.

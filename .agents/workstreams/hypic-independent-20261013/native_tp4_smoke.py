@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import os
 import re
 import socket
 import subprocess
@@ -15,6 +16,19 @@ from datetime import datetime, timezone
 HERE = Path(__file__).resolve().parent
 CONTRACT = HERE / "NATIVE_SMOKE_CONTRACT.json"
 TASK = "hypic-independent-20261013"
+
+class DurableJournal:
+    """Exclusive append-only evidence, synced before returning to device work."""
+    def __init__(self,path):
+        self.file=Path(path).open("x",encoding="utf-8")
+        self.lock=threading.Lock()
+    def append(self,event):
+        with self.lock:
+            self.file.write(json.dumps(event,ensure_ascii=False)+"\n")
+            self.file.flush()
+            os.fsync(self.file.fileno())
+    def close(self):
+        with self.lock:self.file.close()
 
 def command(args, timeout=30):
     return subprocess.check_output(args, text=True, stderr=subprocess.STDOUT, timeout=timeout)
@@ -97,12 +111,17 @@ def run_contract(contract):
     raw.mkdir(parents=True,exist_ok=False)
     (raw/"tmp").mkdir()
     write(raw,"preflight.json",first)
+    journal=DurableJournal(raw/"events.jsonl")
+    journal.append({"event":"preflight","snapshot":first})
     cid=None;responses=[];samples=[];valid=False;error=None;worker_pids=set()
     physical_devices_seen=set();guard_stop=threading.Event();guard_error=[];guard_thread=None
+    def retain_snapshot(snap):
+        journal.append({"event":"isolation","snapshot":snap})
+        samples.append(snap)
     def guard_loop():
         while not guard_stop.is_set():
             try:
-                snap=snapshot(cid);samples.append(snap)
+                snap=snapshot(cid);retain_snapshot(snap)
                 if snap["foreign"]:raise RuntimeError("Foreign physical process detected")
                 worker_pids.update(pid for device,pid in snap["processes"])
                 physical_devices_seen.update(device for device,pid in snap["processes"])
@@ -151,7 +170,7 @@ def run_contract(contract):
         deadline=time.monotonic()+contract["startup_timeout_seconds"]
         while time.monotonic()<deadline:
             require_guard()
-            snap=snapshot(cid);samples.append(snap)
+            snap=snapshot(cid);retain_snapshot(snap)
             if snap["foreign"]:raise RuntimeError("Foreign physical process detected")
             worker_pids.update(p for n,p in snap["processes"])
             if not inspect(cid)["State"]["Running"]:raise RuntimeError("Owned native service exited before health")
@@ -164,12 +183,13 @@ def run_contract(contract):
                  "temperature":0,"seed":0,"max_tokens":32,"chat_template_kwargs":{"enable_thinking":False}}
         for i in range(3):
             require_guard()
-            before=snapshot(cid);samples.append(before)
+            before=snapshot(cid);retain_snapshot(before)
             if before["foreign"]:raise RuntimeError("Foreign process before request")
             response=request(port,payload)
+            journal.append({"event":"response","index":i,"payload":payload,"response":response})
             require_guard()
             responses.append({"index":i,"payload":payload,"response":response})
-            after=snapshot(cid);samples.append(after)
+            after=snapshot(cid);retain_snapshot(after)
             if after["foreign"]:raise RuntimeError("Foreign process after request")
         texts=[r["response"]["choices"][0]["message"]["content"].strip() for r in responses]
         assert all(t.rstrip(".")=="4" for t in texts),"Native smoke semantic result"
@@ -205,6 +225,8 @@ def run_contract(contract):
                 "responses":len(responses),"worker_pids":sorted(worker_pids),
                 "physical_devices_seen":sorted(physical_devices_seen),"release":release}
         write(raw,"result.json",result)
+        journal.append({"event":"terminal","result":result})
+        journal.close()
         print(json.dumps(result),flush=True)
     if not result["valid"]:raise SystemExit(1)
 

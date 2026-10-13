@@ -134,9 +134,16 @@
     }
   ],
   "resource_leases": {
-    "physical_npus": [],
-    "service_ports": [],
-    "state": "r1 exact owned resources released; r2 not yet admitted"
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "service_ports": [
+      8233
+    ],
+    "state": "Released; independent recovery audit confirms no0–3 processes and no8233 listener"
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -151,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Publish parser fix and r2 contract; freshly admit nativeTP4 r2 only on idle physical0–3/8233. r1 root immutable; no unchanged replay.",
+  "next_action": "Inspect official GDN ABI and implement independentNPU bridge; journal8CPU controls passed. Freeze fresh controller hash/root before device work; never restart r2.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-14T10:00:00+03:00",
@@ -189,7 +196,7 @@
   },
   "publication": {
     "state": "verified-via-desktop-relay",
-    "published_commit": "dd220fba9aaf367f5490371257dcdc2f9dbb7cf5",
+    "published_commit": "ee85ac329b8675638f1f9fe38319ef3896e37c43",
     "receipt": "PUBLICATION_RECEIPT.json",
     "original_commit_preserved": true
   },
@@ -206,7 +213,23 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": null,
+  "active_attempt": {
+    "phase": "native-tp4-smoke-r2",
+    "operation": "exec-000000000000019a",
+    "peer": "lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d",
+    "state": "terminal-controller-lost; bounded recovery3/3 semantic pass; historical isolation invalid",
+    "code_commit": "ee85ac329b8675638f1f9fe38319ef3896e37c43",
+    "controller_sha256": "953d0958d67cceeac66c044adb551bb1835c1182626fa0ac4d9816aca7af7e7d",
+    "raw_root": "/cache/cch/hypic-independent-20261013/native-smoke-r2",
+    "port": 8233,
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "container": "hypic-independent-native-smoke-r2-20261013"
+  },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
     "report": "NATIVE_SMOKE_R1_TERMINAL.json",
