@@ -1,0 +1,75 @@
+{
+  "schema": "mst-selective-runtime-repair-result/v1",
+  "plan_sha256": "e35853cba9248948a8a70c87adb07c5967f449287fd8c4828d39b6526a0ed147",
+  "runner_sha256": "baf8678c2c3adb26f5ff7b32d97efa817c983ae7b894b7eb981dab667e85e623",
+  "candidate_tree": "401e86402860220029d268fc748c8e5af24b6442",
+  "target_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "changed_paths": [
+    ".agents/skills/runtime-monkeypatch-delivery/assets/template/MANIFEST.json",
+    ".agents/skills/runtime-monkeypatch-delivery/assets/template/run_with_patch.sh",
+    ".agents/skills/runtime-monkeypatch-delivery/assets/template/sitecustomize.py",
+    "scripts/validate_monkeypatch_package.py",
+    "tests/test_validate_monkeypatch_package.py"
+  ],
+  "patch_sha256": "1abaae8168bc3bdda702592df7894a614917345410ebbd42ca81d149702b948a",
+  "checks": [
+    {
+      "name": "legacy-tests",
+      "command": [
+        "/cache/cch/python-envs/model-tuning-lab-py311/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_validate_monkeypatch_package.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "stdout": "legacy-tests.stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "legacy-tests.stderr.txt",
+      "stderr_sha256": "aedf682f35257f3d5744f6d6430f1b97a0dfbed2f2de10c9b416af7d61831f9f"
+    },
+    {
+      "name": "skill-tree",
+      "command": [
+        "bash",
+        "scripts/validate-mst.sh"
+      ],
+      "exit_code": 0,
+      "stdout": "skill-tree.stdout.txt",
+      "stdout_sha256": "6a3f629cc40dd62cf2d60aef96d4a836d4319242561155586c44b35c13009cbb",
+      "stderr": "skill-tree.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "diff-check.stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "diff-check.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "source_before": {
+    "head": "10a99926aaa05eca4ddb72cad514e2d58b60b473",
+    "status": "?? .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/RUNTIME_SELECTIVE_INTEGRATION_PLAN_20261013.json\n?? .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/numerical_state_observer_v3.py\n?? .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_numerical_state_observer_v3.py\n?? .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_runtime_selective_integration.py\n"
+  },
+  "source_after": {
+    "head": "10a99926aaa05eca4ddb72cad514e2d58b60b473",
+    "status": "?? .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/RUNTIME_SELECTIVE_INTEGRATION_PLAN_20261013.json\n?? .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/numerical_state_observer_v3.py\n?? .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_numerical_state_observer_v3.py\n?? .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_runtime_selective_integration.py\n"
+  },
+  "main_changed": false,
+  "device_acceptance": false,
+  "source_object_store_dependency": "/cache/cch/model-tuning-lab-hypic-e2e-20261006",
+  "fixture": "/cache/cch/mst-runtime-selective-kk_oc_zi"
+}

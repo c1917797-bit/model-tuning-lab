@@ -59,6 +59,9 @@ Global .agents/HANDOFF.md describes integrated history,not this unmerged result.
 
 ## 4. Current Action
 
+Runtime template five-file candidate passed nine CPU tests and exact-tree review;
+see RUNTIME_SELECTIVE_INTEGRATION_20261013.md. No main/NPU changes;12/17 unchanged.
+
 Planning-schema selective integration candidate passed seven guards and a
 read-only exact-main apply check. See PLANNING_SELECTIVE_INTEGRATION_20261013.md;
 authenticated target refresh/final-tree validation remain required. Main unchanged.
@@ -102,9 +105,9 @@ evidence; this Git fixture is not that separate workflow.
    do not rerun completed HYPIC merely to improve acceptance counts.
 3. Record only demonstrated fixes and task-scoped acceptance; derive current
    counts from verified case evidence, never from structural checks alone.
-4. Remote authentication remains unresolved. Do not repeat unchanged failed
-   pushes or claim main integration. Push only when authentication changes
-   and existing authorization applies; then independently verify equality.
+4. Remote state is UNKNOWN: latest read007f timed out after20 seconds; the
+   connected MCPGit list has no target repo. Do not repeat unchanged retries
+   or claim integration. Recover access,refresh target,then verify any push.
 5. Fixed experiment deadline2026-10-13T08:47:14Z is unchanged. No new device
    stages are scheduled or authorized by this handoff.
 

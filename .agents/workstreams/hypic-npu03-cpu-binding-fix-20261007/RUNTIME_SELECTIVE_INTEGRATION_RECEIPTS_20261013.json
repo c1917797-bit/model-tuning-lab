@@ -1,0 +1,41 @@
+{
+  "schema": "mst-selective-runtime-integration-receipts/v1",
+  "maker": {
+    "args": [
+      "-B",
+      "/cache/cch/model-tuning-lab-hypic-e2e-20261006/.agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_runtime_selective_integration.py",
+      "--run"
+    ],
+    "cancelled": false,
+    "command": "python3",
+    "cwd": "/cache/cch/model-tuning-lab-hypic-e2e-20261006",
+    "durationMs": 1276,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-000000000000008c",
+    "lane": "job",
+    "state": "completed",
+    "stderr": "",
+    "stdout": "{\"fixture_created\": \"/cache/cch/mst-runtime-selective-kk_oc_zi\"}\n{\"check\": \"legacy-tests\", \"exit_code\": 0}\n{\"check\": \"skill-tree\", \"exit_code\": 0}\n{\"check\": \"diff-check\", \"exit_code\": 0}\n{\"audit\": \"PASS\", \"candidate_tree\": \"401e86402860220029d268fc748c8e5af24b6442\", \"changed_paths\": [\".agents/skills/runtime-monkeypatch-delivery/assets/template/MANIFEST.json\", \".agents/skills/runtime-monkeypatch-delivery/assets/template/run_with_patch.sh\", \".agents/skills/runtime-monkeypatch-delivery/assets/template/sitecustomize.py\", \"scripts/validate_monkeypatch_package.py\", \"tests/test_validate_monkeypatch_package.py\"], \"cpu_tests\": 9, \"fixture\": \"/cache/cch/mst-runtime-selective-kk_oc_zi\", \"full_skill_acceptance\": false, \"main_changed\": false}\n",
+    "timedOut": false
+  },
+  "independent_review": {
+    "args": [
+      "-B",
+      "-c",
+      "import json, subprocess, hashlib, pathlib\nrepo=pathlib.Path(\"/cache/cch/model-tuning-lab-hypic-e2e-20261006\")\nfixture=pathlib.Path(\"/cache/cch/mst-runtime-selective-kk_oc_zi\")\nplan=json.loads((repo/\".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/RUNTIME_SELECTIVE_INTEGRATION_PLAN_20261013.json\").read_text())\ndef git(cwd,*args): return subprocess.check_output([\"git\",*args],cwd=cwd)\ndef tree(cwd,ref):\n out={}\n for line in git(cwd,\"ls-tree\",\"-r\",\"-z\",ref).split(b\"\\0\"):\n  if line:\n   identity,path=line.split(b\"\\t\"); out[path.decode()]=identity.decode()\n return out\ncandidate=fixture/\"candidate\"\nresult=json.loads((fixture/\"result.json\").read_text())\nbefore=tree(repo,plan[\"target_commit\"]); expected=dict(before)\nfor entry in plan[\"files\"]: expected[entry[\"path\"]]=tree(repo,entry[\"source_commit\"])[entry[\"path\"]]\nactual=tree(candidate,result[\"candidate_tree\"])\nassert actual==expected\nchanges=sorted(path for path in set(before)|set(actual) if before.get(path)!=actual.get(path))\nassert changes==sorted(e[\"path\"] for e in plan[\"files\"])\nassert not git(candidate,\"diff\",\"--name-only\").strip()\nassert not git(candidate,\"ls-files\",\"--others\",\"--exclude-standard\").strip()\nfor entry in plan[\"files\"]:\n p=entry[\"path\"]; assert (candidate/p).read_bytes()==git(repo,\"show\",entry[\"source_commit\"]+\":\"+p)\npatch=json.loads((fixture/\"repair.diff.json\").read_text()).encode()\nassert hashlib.sha256(patch).hexdigest()==result[\"patch_sha256\"]\nassert b\"hypic-npu03-cpu-binding-fix\" not in patch\nassert \".agents/skills/runtime-monkeypatch-delivery/SKILL.md\" not in changes\nprint(json.dumps({\"independent_tree_review\":\"PASS\",\"unchanged_paths\":len(before)-sum(p in before for p in changes),\"changed_files\":len(changes),\"candidate_tree\":result[\"candidate_tree\"],\"runtime_skill_text_changed\":False,\"patch_excludes_experiment_paths\":True,\"result_sha256\":hashlib.sha256((fixture/\"result.json\").read_bytes()).hexdigest(),\"patch_sha256\":result[\"patch_sha256\"]},sort_keys=True))\n"
+    ],
+    "cancelled": false,
+    "command": "python3",
+    "cwd": "/cache/cch/model-tuning-lab-hypic-e2e-20261006",
+    "durationMs": 115,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-000000000000008e",
+    "lane": "process",
+    "state": "completed",
+    "stderr": "",
+    "stdout": "{\"candidate_tree\": \"401e86402860220029d268fc748c8e5af24b6442\", \"changed_files\": 5, \"independent_tree_review\": \"PASS\", \"patch_excludes_experiment_paths\": true, \"patch_sha256\": \"1abaae8168bc3bdda702592df7894a614917345410ebbd42ca81d149702b948a\", \"result_sha256\": \"60e0c8d7da86f7516f08ed9e20d47baa45283b489192502b9da30b0cd8cc341a\", \"runtime_skill_text_changed\": false, \"unchanged_paths\": 175}\n",
+    "timedOut": false
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "mst-selective-runtime-repair/v1",
+  "target_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
+  "scope": "Existing main sitecustomize template repair only; not native HYPIC delivery or NPU acceptance",
+  "source_checkpoint": "10a99926aaa05eca4ddb72cad514e2d58b60b473",
+  "files": [
+    {
+      "path": "scripts/validate_monkeypatch_package.py",
+      "source_commit": "72bd32946345054f8251c856fb8c896443640443"
+    },
+    {
+      "path": "tests/test_validate_monkeypatch_package.py",
+      "source_commit": "10a99926aaa05eca4ddb72cad514e2d58b60b473"
+    },
+    {
+      "path": ".agents/skills/runtime-monkeypatch-delivery/assets/template/MANIFEST.json",
+      "source_commit": "10a99926aaa05eca4ddb72cad514e2d58b60b473"
+    },
+    {
+      "path": ".agents/skills/runtime-monkeypatch-delivery/assets/template/run_with_patch.sh",
+      "source_commit": "10a99926aaa05eca4ddb72cad514e2d58b60b473"
+    },
+    {
+      "path": ".agents/skills/runtime-monkeypatch-delivery/assets/template/sitecustomize.py",
+      "source_commit": "10a99926aaa05eca4ddb72cad514e2d58b60b473"
+    }
+  ],
+  "gates": [
+    "Complete candidate tree is exact target plus five hash-bound files; all other content/modes unchanged",
+    "Nine legacy CPU tests pass in isolated candidate with no branch workstream code dependencies",
+    "Candidate validate-mst and git diff --check pass",
+    "Source checkout HEAD/status unchanged",
+    "Independent object and retained receipt audit"
+  ],
+  "exclusions": [
+    "No native plugin profile import",
+    "No Skill instruction/reference changes",
+    "No HYPIC, observer or NPU execution",
+    "No main/ref/remote mutation",
+    "No overall Skill promotion"
+  ],
+  "status": "frozen-before-execution"
+}
