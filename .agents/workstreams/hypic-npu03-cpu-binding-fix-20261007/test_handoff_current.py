@@ -135,8 +135,16 @@ class HandoffTests(unittest.TestCase):
             self.assertTrue(result["service_stop"][key])
         self.assertEqual(result["service_stop"]["at_utc"],
                          "2026-10-10T17:11:41.241053+00:00")
-        self.assertEqual(task["skill_case_inventory"]["bounded_verified"], 9)
-        self.assertEqual(task["skill_case_inventory"]["partial_evidence"], 20)
+        statuses = [json.loads(p.read_text())["long_term_acceptance"]
+                    for p in (HERE / "skill-cases").glob("*.json")]
+        self.assertEqual(len(statuses), 29)
+        verified = statuses.count("verified")
+        partial = statuses.count("partial-evidence")
+        self.assertEqual(verified + partial, 29)
+        self.assertEqual(task["skill_case_inventory"]["bounded_verified"], verified)
+        self.assertEqual(task["skill_case_inventory"]["partial_evidence"], partial)
+        self.assertIn(f"29 cases:{verified} bounded verified,{partial} partial,0 missing.",
+                      (HERE / "HANDOFF.md").read_text())
 
     def test_current_page_does_not_resume_old_controller(self) -> None:
         text = (HERE / "HANDOFF.md").read_text()
