@@ -429,15 +429,8 @@
     "resource_limit": "physical NPU0-3 and port 8223 only; never NPU4-7; do not stop or modify foreign work",
     "retry_budget": "one attempt; no retry6 without fresh explicit authorization"
   },
-  "active_attempt": {
-    "campaign": "cache10r19-c32-gsm8k",
-    "arm": "hypic-only",
-    "controller_operation": "exec-00000000000004a3",
-    "root": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r19-c32-gsm8k-hypic",
-    "state": "running; valid no-cache baseline independent audit, candidate root absent, fresh physical NPU0-3 and port 8223 idle admission passed; poll same controller and immutable root",
-    "preregistration": "HYPIC_R19_GSM8K_PHASE_PREREGISTRATION_20261010.json",
-    "source_commit": "4429e35177979c874bf053ab29789e4773f39b22"
-  },
+  "active_attempt": null,
+  "retired_active_attempt_20261013": {"original_entry":{"campaign":"cache10r19-c32-gsm8k","arm":"hypic-only","controller_operation":"exec-00000000000004a3","root":"/cache/cch/hypic-npu03-cpu-binding-fix-20261007/quality-context-41984-hotpath-cache10r19-c32-gsm8k-hypic","state":"running; valid no-cache baseline independent audit, candidate root absent, fresh physical NPU0-3 and port 8223 idle admission passed; poll same controller and immutable root","preregistration":"HYPIC_R19_GSM8K_PHASE_PREREGISTRATION_20261010.json","source_commit":"4429e35177979c874bf053ab29789e4773f39b22"},"reason":"Stale running entry contradicted terminal raw receipts; no process was stopped by this metadata repair","terminal_proof_operation":"exec-0000000000000308","arm_result_sha256":"3814b62c948bdc275cc3ef221678191c1160b97dbe2f7907c545f89f108dfa9b","paired_audit_sha256":"496f1dfacb3c3a8dd03f8ee07368fb142b432498c0ee5dbb5722e1d4f85fd187","terminal_at_utc":"2026-10-10T17:11:41.241053+00:00"},
   "r18_candidate_terminal": {
     "campaign": "cache10r18-c32-longbench",
     "arm": "hypic-only",

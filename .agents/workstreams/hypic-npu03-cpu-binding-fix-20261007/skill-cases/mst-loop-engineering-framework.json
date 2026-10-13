@@ -32,9 +32,28 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_loop_framework_case.py",
       "sha256": "a85e39e7fabd2cd43afbf82042abd14992edee469e580a95d34559e7825d6c14"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/LOOP_HANDOFF_REPAIR_20261013.md",
+      "sha256": "82dc1a2964157680c6302f814a3fda0b62bd532c591523ae07827b699a1df8d8"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HANDOFF_SNAPSHOT_20261013_0802.md",
+      "sha256": "a79dfa7aa634a1f69575c24d56fb0dc03efeecc9a15ef1dee07cfa1d336311cd"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_handoff_current.py",
+      "sha256": "8654b583ac542036ccc11b0139d0c8ca74b891b00dfe1a6f21b8359de2d047fb"
     }
   ],
   "replayable_regression_recorded": true,
   "boundary": "This case verifies one real non-drift counterexample and repaired branch-local resume state against the exact main Skill's generic contract. It does not prove a fresh agent can complete the full loop, push to GitHub, integrate main, obtain terminal HYPIC quality/performance, or validate the branch-only three-horizon reference as main text.",
-  "drift_trigger": "Re-run after the main Skill or registry changes, after task-manifest/handoff schema changes, and at r13 terminal/candidate handoff; perform a fresh-agent orient/validate/push trial when GitHub auth is available."
+  "drift_trigger": "Re-run after the main Skill or registry changes, after task-manifest/handoff schema changes, and at r13 terminal/candidate handoff; perform a fresh-agent orient/validate/push trial when GitHub auth is available.",
+  "current_terminal_handoff_repair": {
+    "report": "LOOP_HANDOFF_REPAIR_20261013.md",
+    "original_state_failure": "exec-0000000000000306",
+    "terminal_evidence": "exec-0000000000000308",
+    "scope": "CPU-only current-state repair and byte-preserving historical archive; not a fresh-agent or push trial",
+    "acceptance_changed": false
+  }
 }
