@@ -1,11 +1,23 @@
 {
   "schema": "mst-real-task-skill-case/v1",
-  "host_reference_split_20261013": {"base_commit":"924857d39f7b06ca197322acc460ae2afb01ad86","source_lines":185,"entrypoint_lines":102,"moved_sections":3,"prechange_check":"2026-10-13 operation0005 exit1: entrypoint exceeds120","postchange_check":"2026-10-13 operation0006 exit0","negative_and_positive_tests":8,"raw_startup_abort_replays":2,"exact_main_promoted":false,"new_device_work":false,"scope":"Lossless host-maintenance reference extraction and referrer compatibility, not all-Skill behavior"},
+  "host_reference_split_20261013": {
+    "base_commit": "924857d39f7b06ca197322acc460ae2afb01ad86",
+    "source_lines": 185,
+    "entrypoint_lines": 102,
+    "moved_sections": 3,
+    "prechange_check": "2026-10-13 operation0005 exit1: entrypoint exceeds120",
+    "postchange_check": "2026-10-13 operation0006 exit0",
+    "negative_and_positive_tests": 8,
+    "raw_startup_abort_replays": 2,
+    "exact_main_promoted": false,
+    "new_device_work": false,
+    "scope": "Lossless host-maintenance reference extraction and referrer compatibility, not all-Skill behavior"
+  },
   "skill": "mst-transformation-verification",
-  "campaign_code": "P",
-  "long_term_acceptance": "partial-evidence",
-  "behavioral_evidence_verified": false,
-  "task": "Verify the existing 29-Skill maintainer tree in the HYPIC task clone and independently inspect exact-main structural and selection-boundary risks",
+  "campaign_code": "V",
+  "long_term_acceptance": "verified",
+  "behavioral_evidence_verified": true,
+  "task": "Apply exact-main transformation verification to the retained single-package Python service, detect standalone-delivery failure, repair it and verify the copied target without parent helpers",
   "executed_at_utc": "2026-10-09",
   "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "549bc84019471e696af0dac5eb90f1664e19c2d8",
@@ -37,9 +49,18 @@
     "overall_acceptance_changed": false
   },
   "evidence": [
-    {"path":".agents/evals/transformation-cases/hypic-host-reference-split-20261013.yaml","sha256":"398062ce3b729e11140582ca8ceedb45767334bc7f44728151cc228082cfa2f1"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_host_skill_reference_split.py","sha256":"776f4f4bffc49b1933d583c430b864cf9c7192cd3b79005d5c6b5fe5c7d40bfc"},
-    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_host_skill_reference_split.py","sha256":"ecbdf939b66177c4a9a9ffb2ee0fe47eb22b32c17e344ee77014194e5b25195e"},
+    {
+      "path": ".agents/evals/transformation-cases/hypic-host-reference-split-20261013.yaml",
+      "sha256": "398062ce3b729e11140582ca8ceedb45767334bc7f44728151cc228082cfa2f1"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_host_skill_reference_split.py",
+      "sha256": "776f4f4bffc49b1933d583c430b864cf9c7192cd3b79005d5c6b5fe5c7d40bfc"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_host_skill_reference_split.py",
+      "sha256": "ecbdf939b66177c4a9a9ffb2ee0fe47eb22b32c17e344ee77014194e5b25195e"
+    },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/TRANSFORMATION_VERIFICATION_REGRESSION_20261012.md",
       "sha256": "59e3c03f1b33c3c025ca25f0708aecb0ad8af70104f2210d8691f3b02a92673d"
@@ -54,7 +75,7 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_mst_transformation_suite.py",
-      "sha256": "1012ca75ea81c6e459740a2d318ca6fe4b7786738b5be87f7efbe93e617e276a"
+      "sha256": "333526d7be55974ee771e924580c7138eddfb4d475551ef3d744db055d96a104"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/TRANSFORMATION_VERIFICATION_REAL_TASK_20261009.md",
@@ -63,9 +84,44 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/MAIN_SKILL_TREE_DIAGNOSTIC.md",
       "sha256": "1cdbb4673dc0c68d29d0fa24b457ddd246385d9cc11839eb2ac606aad0523818"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/target/scripts/verify_maintainer_tree.py",
+      "sha256": "d8faebf19501bc01959d12304c4a2869a3c1441f2d66f04fc83a689d13dc9ebc"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/target/scripts/validate-mst.sh",
+      "sha256": "f77d4e9dfc902a664c8f3d66f1b0520fbc2b394ce2095a024d06e9e93a1fa47e"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_transformation_portability.py",
+      "sha256": "e4c950d58b64b3a9c0d20b219735d9ddeca8a5d90bea8b919ffb6307885d72ee"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/TRANSFORMATION_PORTABLE_ACCEPTANCE_20261013.md",
+      "sha256": "85abdbffc5f8e71277d58e252cf57686ee8ea3cfcafd52e85694fcffd6e368e9"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/TRANSFORMATION_PORTABILITY_RECEIPTS_20261013.json",
+      "sha256": "6cbed5e7ce1927c0ea94d29fb4d38f9838064e447662441d61bb1c99ed308ac7"
     }
   ],
   "replayable_regression_recorded": true,
-  "boundary": "The validator and exact-main inspection prove this existing tree's structural state and identify selection/design gaps. They do not validate a newly transformed repository, actual Skill selection, a runtime deployment, all 29 Skill behaviors, or main/remote integration of branch repair.",
-  "drift_trigger": "Repeat after main Skill/registry, AGENTS.md, adapter, validator, subcomponent layout, or task-clone provenance changes; exercise a fresh-clone transformation and ambiguous-selection fixture before full acceptance."
+  "boundary": "Bounded verified for exact-main instructions on one transformed single-package service: all applicable Bootstrap/Registry/Skills/Boundaries/Experience/Output checks reviewed, portable entrypoint and product health pass, and 15 regression controls pass. Nested discovery tests do not prove Cargo dependency semantics or live tenant publication. Whole29-Skill behavior, actual main/remote integration and HYPIC quality remain separate uncompleted claims. Historical main-tree gaps are preserved, not relabeled as having passed.",
+  "drift_trigger": "Revalidate after this main Skill blob, delivered validator/fixture schema, adapter/runtime policy, component shape or acceptance inputs change.",
+  "portable_delivery_supplement_20261013": {
+    "failure": "chicaihong01/mc exec-0000000000000059 exit1",
+    "repair": "chicaihong01/mc exec-000000000000005b exit0",
+    "standalone_tests": 3,
+    "existing_regressions": 12,
+    "parent_helper_required": false,
+    "fixture_validator": "scripts/verify_maintainer_tree.py",
+    "new_device_work": false
+  },
+  "historical_acceptance_before_portable_review": {
+    "state": "partial-evidence",
+    "behavioral_evidence_verified": false,
+    "task": "Verify the existing 29-Skill maintainer tree in the HYPIC task clone and independently inspect exact-main structural and selection-boundary risks",
+    "boundary": "The validator and exact-main inspection prove this existing tree's structural state and identify selection/design gaps. They do not validate a newly transformed repository, actual Skill selection, a runtime deployment, all 29 Skill behaviors, or main/remote integration of branch repair."
+  }
 }

@@ -7,7 +7,7 @@ Branch work/hypic-npu03-cpu-binding-fix-20261007; runtime source4429e35.
 Six-phase same-source performance is complete, not a quality pass.
 Current task.active_attempt=null; no performance controller remains active.
 Execution in-progress / integration not-ready. No main/remote synchronization.
-29 cases:10 bounded verified,19 partial,0 missing. No all-Skill success claim.
+29 cases:11 bounded verified,18 partial,0 missing. No all-Skill success claim.
 App heartbeat hypic is absent; do not recreate it for the finished supplement.
 
 ## 1. North Star
@@ -59,11 +59,13 @@ Global .agents/HANDOFF.md describes integrated history,not this unmerged result.
 
 ## 4. Current Action
 
-Exact-main onboarding passed with a retained isolated copy and six inventory
-tests; see ONBOARDING_EXACT_MAIN_ACCEPTANCE_20261013.md (10/19 current counts).
-Completed-plan audit corrected a stale declared-file/checkpoint association:
-four executed evidence files and later case publication are now separate.
-Seven controls passed; see COMPLETED_ITERATION_REVIEW_20261013.md,63354d35.
+Transformation verification: target-only delivery failed, then passed after the
+validator became self-contained. Three new and12 existing controls passed;
+see TRANSFORMATION_PORTABLE_ACCEPTANCE_20261013.md. One bounded promotion.
+
+Onboarding passed: retained exact-main copy,six inventory tests; see
+ONBOARDING_EXACT_MAIN_ACCEPTANCE_20261013.md. Completed-plan association repair
+passed seven controls: COMPLETED_ITERATION_REVIEW_20261013.md,63354d35.
 Planning main example remains defective/unmerged; its acceptance stays partial.
 
 Inference-loop first-screen threshold review is complete (eight tests/six raw

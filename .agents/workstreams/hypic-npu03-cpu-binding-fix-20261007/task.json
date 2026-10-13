@@ -1,4 +1,5 @@
 {
+  "transformation_portable_acceptance_20261013": {"report":"TRANSFORMATION_PORTABLE_ACCEPTANCE_20261013.md","scope":"Exact-main Skill applied to a single-package transformation, with standalone-copy failure and repair","tests_passed":15,"bounded_verified_skill":"mst-transformation-verification","new_npu_work":false,"main_remote_integrated":false},
   "remaining_skill_validation_direction_20261013": {"authority":"Human asked to stop caring about HYPIC quality and validate subsequent Skills","further_hypic_quality_work":false,"historical_quality_results_preserved":true,"quality_success_required_for_unrelated_skills":false,"onboarding_copy":"/cache/cch/mst-main-onboarding-20261013-f8113561","onboarding_report":"ONBOARDING_EXACT_MAIN_ACCEPTANCE_20261013.md","onboarding_replay_operation":"exec-000000000000003e","new_device_work":false},
   "host_reference_split_checkpoint": {"base_commit":"924857d39f7b06ca197322acc460ae2afb01ad86","source_lines":185,"entrypoint_lines":102,"moved_sections":3,"prechange_check":"2026-10-13 operation0005 exit1: entrypoint exceeds120","postchange_check":"2026-10-13 operation0006 exit0","negative_and_positive_tests":8,"raw_startup_abort_replays":2,"exact_main_promoted":false,"new_device_work":false,"scope":"Lossless host-maintenance reference extraction and referrer compatibility, not all-Skill behavior"},
   "benchmark_protocol_review_checkpoint": {"report":"BENCHMARK_R13_PROTOCOL_OBLIGATION_REVIEW_20261013.md","report_sha256":"f8865d54a07b3afb7c3967ed2d27308deb95891b113ec1768de5787dca2cab0e","reviewed_main_skill_blob":"03ade79d697e974891410ea95f0ce54a8160b8c6","state":"obligation-review-complete-partial-evidence-retained","raw_replay_operation":"exec-0000000000000004","operation_session":"2026-10-13 after ma reconnection; handles may reset","full_skill_promotion":false,"new_device_work":false,"remaining_limits":["historical identity and chronology","correctness-first/low-high progression","unisolated diagnostic overhead","remote integration"]},
@@ -955,15 +956,16 @@
   "skill_case_inventory": {
     "registered_skills": 29,
     "cases_with_verified_provenance": 29,
-    "bounded_verified": 10,
-    "partial_evidence": 19,
+    "bounded_verified": 11,
+    "partial_evidence": 18,
     "missing": 0,
     "transformation_suite_verified_skills": [
       "mst-agentsmd-authoring",
       "mst-repo-transformation",
       "mst-runtime-skill-boundary",
       "mst-skill-governor",
-      "mst-skill-tree-design"
+      "mst-skill-tree-design",
+      "mst-transformation-verification"
     ],
     "cannbot_profiler_state": "partial-evidence: real four-rank Prefill/Decode captures and parsing recorded in current case; frozen47-column gate missed with46 observed; no causal root proven",
     "verifier": "verify_skill_cases.py"

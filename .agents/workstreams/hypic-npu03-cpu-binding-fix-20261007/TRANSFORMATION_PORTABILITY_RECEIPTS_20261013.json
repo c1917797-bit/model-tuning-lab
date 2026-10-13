@@ -1,0 +1,34 @@
+{
+  "schema": "sanitized-execution-receipts/v1",
+  "peer": "chicaihong01/mc",
+  "failure": {
+    "operation_id": "exec-0000000000000059",
+    "command": "python3",
+    "args": [
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007",
+      "-p",
+      "test_transformation_portability.py"
+    ],
+    "cwd": "/cache/cch/model-tuning-lab-hypic-e2e-20261006",
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "FFF\n======================================================================\nFAIL: test_delivered_tree_rejects_adapter_duplication (test_transformation_portability.StandaloneTransformationTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/cache/cch/model-tuning-lab-hypic-e2e-20261006/.agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_transformation_portability.py\", line 37, in test_delivered_tree_rejects_adapter_duplication\n    self.assertIn(\"thin shim\", result.stderr)\nAssertionError: 'thin shim' not found in \"python3: can't open file '/cache/cch/mst-portable-3jgitdik/../../../verify_mst_transformation_suite.py': [Errno 2] No such file or directory\\n\"\n\n======================================================================\nFAIL: test_delivered_tree_rejects_bad_registry_status (test_transformation_portability.StandaloneTransformationTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/cache/cch/model-tuning-lab-hypic-e2e-20261006/.agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_transformation_portability.py\", line 32, in test_delivered_tree_rejects_bad_registry_status\n    self.assertIn(\"invalid Skill status\", result.stderr)\nAssertionError: 'invalid Skill status' not found in \"python3: can't open file '/cache/cch/mst-portable-kc12x61l/../../../verify_mst_transformation_suite.py': [Errno 2] No such file or directory\\n\"\n\n======================================================================\nFAIL: test_delivered_tree_runs_without_parent_helpers (test_transformation_portability.StandaloneTransformationTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/cache/cch/model-tuning-lab-hypic-e2e-20261006/.agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_transformation_portability.py\", line 21, in test_delivered_tree_runs_without_parent_helpers\n    self.assertEqual(result.returncode, 0, result.stderr)\nAssertionError: 2 != 0 : python3: can't open file '/cache/cch/mst-portable-psk8ia2m/../../../verify_mst_transformation_suite.py': [Errno 2] No such file or directory\n\n\n----------------------------------------------------------------------\nRan 3 tests in 0.095s\n\nFAILED (failures=3)\n"
+  },
+  "success": {
+    "operation_id": "exec-000000000000005b",
+    "command": "bash",
+    "args": [
+      "-c",
+      "set -e\npython3 -B -m unittest discover -s .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007 -p test_transformation_portability.py\npython3 -B -m unittest discover -s .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007 -p test_mst_transformation_registry.py\npython3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_mst_transformation_suite.py\nbash .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/target/scripts/validate-mst.sh\ngit diff --check\nsha256sum .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_mst_transformation_suite.py .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_transformation_portability.py .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/target/scripts/validate-mst.sh .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/target/scripts/verify_maintainer_tree.py\n"
+    ],
+    "cwd": "/cache/cch/model-tuning-lab-hypic-e2e-20261006",
+    "exit_code": 0,
+    "stdout": "{\"agents_lines\": 23, \"fixture\": \"/cache/cch/model-tuning-lab-hypic-e2e-20261006/.agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/target\", \"governance_record\": true, \"maintainer_skills\": 7, \"product_health\": \"ok\", \"runtime_boundary\": true, \"schema\": \"mst-transformation-suite-result/v1\", \"thin_adapter\": true}\n{\"agents_lines\": 23, \"fixture\": \"/cache/cch/model-tuning-lab-hypic-e2e-20261006/.agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/target\", \"governance_record\": true, \"maintainer_skills\": 7, \"product_health\": \"ok\", \"runtime_boundary\": true, \"schema\": \"mst-transformation-suite-result/v1\", \"thin_adapter\": true}\n333526d7be55974ee771e924580c7138eddfb4d475551ef3d744db055d96a104  .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_mst_transformation_suite.py\ne4c950d58b64b3a9c0d20b219735d9ddeca8a5d90bea8b919ffb6307885d72ee  .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_transformation_portability.py\nf77d4e9dfc902a664c8f3d66f1b0520fbc2b394ce2095a024d06e9e93a1fa47e  .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/target/scripts/validate-mst.sh\nd8faebf19501bc01959d12304c4a2869a3c1441f2d66f04fc83a689d13dc9ebc  .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/target/scripts/verify_maintainer_tree.py\n",
+    "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.474s\n\nOK\n............\n----------------------------------------------------------------------\nRan 12 tests in 0.849s\n\nOK\n"
+  }
+}

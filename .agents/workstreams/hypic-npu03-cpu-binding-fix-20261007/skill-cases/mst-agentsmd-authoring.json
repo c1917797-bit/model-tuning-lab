@@ -13,13 +13,13 @@
   "current_skill_and_registry_blobs_unchanged": true,
   "environment_scope": "isolated single-package Python service transformation fixture inside the named HYPIC workstream; CPU-only; no live NPU, container, remote, or canonical repository mutation",
   "observed": {
-      "agents_lines": 23,
-      "maintainer_role": true,
-      "registry_pointer": true,
-      "skill_tree_pointer": true,
-      "thin_claude_adapter": true,
-      "duplicated_workflows": false,
-      "fixture_validator_exit_code": 0
+    "agents_lines": 23,
+    "maintainer_role": true,
+    "registry_pointer": true,
+    "skill_tree_pointer": true,
+    "thin_claude_adapter": true,
+    "duplicated_workflows": false,
+    "fixture_validator_exit_code": 0
   },
   "fixture_regression_supplement": {
     "executed_at_utc": "2026-10-12",
@@ -50,14 +50,43 @@
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_mst_transformation_suite.py",
-      "sha256": "1012ca75ea81c6e459740a2d318ca6fe4b7786738b5be87f7efbe93e617e276a"
+      "sha256": "333526d7be55974ee771e924580c7138eddfb4d475551ef3d744db055d96a104"
     },
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/input-snapshot.json",
       "sha256": "f3b77e82296593a4cb1bff4392c3ceaad60090c6fd38635ca1145ad7b53554af"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/target/scripts/verify_maintainer_tree.py",
+      "sha256": "d8faebf19501bc01959d12304c4a2869a3c1441f2d66f04fc83a689d13dc9ebc"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-fixtures/repository-transformation/target/scripts/validate-mst.sh",
+      "sha256": "f77d4e9dfc902a664c8f3d66f1b0520fbc2b394ce2095a024d06e9e93a1fa47e"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_transformation_portability.py",
+      "sha256": "e4c950d58b64b3a9c0d20b219735d9ddeca8a5d90bea8b919ffb6307885d72ee"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/TRANSFORMATION_PORTABLE_ACCEPTANCE_20261013.md",
+      "sha256": "85abdbffc5f8e71277d58e252cf57686ee8ea3cfcafd52e85694fcffd6e368e9"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/TRANSFORMATION_PORTABILITY_RECEIPTS_20261013.json",
+      "sha256": "6cbed5e7ce1927c0ea94d29fb4d38f9838064e447662441d61bb1c99ed308ac7"
     }
   ],
   "replayable_regression_recorded": true,
   "boundary": "Verified for a bounded single-package Python transformation: concise bootstrap, canonical pointers, runtime boundary, and exact one-line CLAUDE adapter. It does not cover multi-role or nested AGENTS.md layouts.",
-  "drift_trigger": "Re-run after the main Skill blob, bootstrap requirements, adapter policy, or fixture verifier changes."
+  "drift_trigger": "Re-run after the main Skill blob, bootstrap requirements, adapter policy, or fixture verifier changes.",
+  "portable_delivery_supplement_20261013": {
+    "failure": "chicaihong01/mc exec-0000000000000059 exit1",
+    "repair": "chicaihong01/mc exec-000000000000005b exit0",
+    "standalone_tests": 3,
+    "existing_regressions": 12,
+    "parent_helper_required": false,
+    "fixture_validator": "scripts/verify_maintainer_tree.py",
+    "new_device_work": false
+  }
 }
