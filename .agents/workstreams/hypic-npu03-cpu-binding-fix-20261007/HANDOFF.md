@@ -55,6 +55,10 @@ Global .agents/HANDOFF.md describes integrated history,not this unmerged result.
 
 ## 4. Current Action
 
+Host-event gap association is complete; see HYPIC_HOST_GAP_ASSOCIATION_20261013.md.
+All8 existing traces analyzed; six tests passed. Temporal overlap is not causal
+proof; no new NPU run, Skill promotion or quality-verdict change.
+
 Host-maintenance entrypoint refactor:185 to102 lines, three required references;
 original procedures preserved except relocated link syntax. Eight tests and
 two historical abort replays passed. See hypic-host-reference-split-20261013
@@ -132,7 +136,11 @@ Relevant reports:
 
 Aggregate /cache/cch/hypic-npu03-cpu-binding-fix-20261007/current4429-performance-20261013-audit.json
 SHA25667ba6cf14fc9bed993acbdf421eb438f22d56957f3e56baad170a4bb871e53fe.
-Remote work must freshly resolve chicaihong01/ma,load host-development and
-prove force_direct target identity. Credentials only in connector fields.
+User authorized mb/mc fallback2026-10-13 when ma fails. Freshly resolve the
+chosen chicaihong01 node,load host-development and prove force_direct identity,
+same host/repository/worktree/HEAD before continuing. Operation IDs are peer-scoped:
+keep original peer+handle; missing on another peer is not terminal proof.
+Inspect original process/raw state before retrying ambiguous work. Fallback
+does not authorize new NPU work or expand physical0–3. Credentials only in fields.
 No active service needs stopping. If future state conflicts with this page,
 inspect exact live ownership and raw terminal receipts before any action.

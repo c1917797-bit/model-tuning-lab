@@ -117,6 +117,22 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_hypic_profiler_history.py",
       "sha256": "f5575ecdbd91e42663c1345d2c4f7dfb8fae89db30cdd1422f8462e367a6f427"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/correlate_hypic_host_gaps.py",
+      "sha256": "4d8187a51c600e196344504a45e322bcae2b37f9ffcd32edb382ba4fabf6b5ee"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_hypic_host_gaps.py",
+      "sha256": "38417d295c012aa56f0967c2234ecab68ae0cc9765a93ed1e9e65fee59b5f38e"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_HOST_GAP_ASSOCIATION_20261013.json",
+      "sha256": "95a9d97e3af954cafd7fff879e1833fa2859ba54c0242beea34dd3637acd6c13"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/HYPIC_HOST_GAP_ASSOCIATION_20261013.md",
+      "sha256": "7823ebfa4c4a75ff71ad05afdf5ab124bf2fd1cb8d15c7924ab6c9a17c98cbc8"
     }
   ],
   "replayable_regression_recorded": true,
@@ -138,7 +154,7 @@
     "historical_chronology_repaired": false,
     "acceptance_promoted": false
   },
-  "next_gate": "Use the existing traces to correlate the recorded largest hardware gaps with host events if supported. Blank Step fields do not prove per-step latency; retain missing CPU/NUMA and causal dependencies explicitly. Do not rerun capture, quality, GDN or HCCL tasks just to improve this case label; any decision-changing new capture needs its own admission. Preserve the frozen47-column miss and sourcec12060c versus current4429e35 distinction.",
+  "next_gate": "Existing-trace largest-gap host association is complete and inconclusive for causality. Do not repeat this analysis or device captures to improve case labels. Missing clock calibration, dependency joins, per-step identity, CPU/NUMA attribution and matched-baseline profiles remain explicit limits. Preserve the frozen47-column miss and sourcec12060c versus current4429e35 distinction. Any decision-changing new device capture requires separate admission.",
   "profiler_history_review": {
     "report": "HYPIC_PROFILER_HISTORY_REVIEW_20261013.md",
     "manifest": "HYPIC_PROFILER_HISTORY_REVIEW_20261013.json",
@@ -155,5 +171,20 @@
     "new_device_work": false,
     "full_skill_promotion": false,
     "tests": 6
+  },
+  "host_gap_association": {
+    "as_of_utc": "2026-10-13",
+    "report": "HYPIC_HOST_GAP_ASSOCIATION_20261013.md",
+    "phase_rank_traces": 8,
+    "tests_passed": 6,
+    "analysis_peer": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "analysis_operation": "exec-0000000000000014",
+    "analysis_source_commit": "c12060cd47e7575ead059983d7a8bb4704165c98",
+    "decode_observed_overlap": "AscendCL@aclmdlRIExecuteAsync overlaps the largest recorded hardware gap on all four ranks; temporal association only",
+    "prefill_observation": "Most of each largest gap has no exported host-event coverage; absence is not proof of CPU idleness",
+    "causality_proven": false,
+    "cpu_numa_attribution_proven": false,
+    "new_device_capture": false,
+    "acceptance_promoted": false
   }
 }

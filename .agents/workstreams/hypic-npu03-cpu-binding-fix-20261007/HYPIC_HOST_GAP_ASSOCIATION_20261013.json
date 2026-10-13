@@ -1,0 +1,568 @@
+{
+  "new_device_work": false,
+  "rows": [
+    {
+      "causality_proven": false,
+      "cpu_numa_attribution_proven": false,
+      "gap_end_ns": "1791564970723251930",
+      "gap_ms": 3666.74648,
+      "gap_start_ns": "1791564967056505450",
+      "host_event_counts": {
+        "CANN": 5,
+        "Python": 6
+      },
+      "host_union_ms": 0.2623,
+      "kernel_sha256": "5df1cdc137317f080e4dd47c89bdb121908b2aacef03d4b3939e4a0bb3f391f9",
+      "no_exported_host_event_ms": 3666.48418,
+      "phase": "prefill",
+      "rank": 0,
+      "top_host_events": [
+        {
+          "end_ns": "1791564970723228810",
+          "index": 29962,
+          "lane": "Python",
+          "name": "Dequeue@_compute_slot_mapping_kernel",
+          "overlap_ns": 201050,
+          "pid": 264,
+          "start_ns": "1791564970723027760",
+          "tid": 395
+        },
+        {
+          "end_ns": "1791564970723211890",
+          "index": 76597,
+          "lane": "CANN",
+          "name": "Node@launch",
+          "overlap_ns": 145660,
+          "pid": 270591,
+          "start_ns": "1791564970723066230",
+          "tid": 395
+        },
+        {
+          "end_ns": "1791564970723203050",
+          "index": 209,
+          "lane": "Python",
+          "name": "aten::slice",
+          "overlap_ns": 52550,
+          "pid": 264,
+          "start_ns": "1791564970723150500",
+          "tid": 264
+        },
+        {
+          "end_ns": "1791564970723012660",
+          "index": 207,
+          "lane": "Python",
+          "name": "_compute_slot_mapping_kernel",
+          "overlap_ns": 38800,
+          "pid": 264,
+          "start_ns": "1791564970722973860",
+          "tid": 264
+        },
+        {
+          "end_ns": "1791564970723009110",
+          "index": 41260,
+          "lane": "Python",
+          "name": "Enqueue@_compute_slot_mapping_kernel",
+          "overlap_ns": 29720,
+          "pid": 264,
+          "start_ns": "1791564970722979390",
+          "tid": 264
+        }
+      ],
+      "trace_path": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-offline-parse-20261009-r2-prefill/rank0_264_20261009165606822_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+      "trace_sha256": "f62310332f19ab517d69c1e0cbc4aafc3d9ed61e08b34996dd0931a50d90f62b"
+    },
+    {
+      "causality_proven": false,
+      "cpu_numa_attribution_proven": false,
+      "gap_end_ns": "1791564970916857500",
+      "gap_ms": 3861.32702,
+      "gap_start_ns": "1791564967055530480",
+      "host_event_counts": {
+        "CANN": 5,
+        "Python": 7
+      },
+      "host_union_ms": 0.21794,
+      "kernel_sha256": "8704d02682d359d3160895081cfe101fe57c3c48bfddc27d27b02bfefbe49b32",
+      "no_exported_host_event_ms": 3861.10908,
+      "phase": "prefill",
+      "rank": 1,
+      "top_host_events": [
+        {
+          "end_ns": "1791564970916834110",
+          "index": 29964,
+          "lane": "Python",
+          "name": "Dequeue@_compute_slot_mapping_kernel",
+          "overlap_ns": 141420,
+          "pid": 265,
+          "start_ns": "1791564970916692690",
+          "tid": 409
+        },
+        {
+          "end_ns": "1791564970916821100",
+          "index": 76594,
+          "lane": "CANN",
+          "name": "Node@launch",
+          "overlap_ns": 106410,
+          "pid": 271615,
+          "start_ns": "1791564970916714690",
+          "tid": 409
+        },
+        {
+          "end_ns": "1791564970916686420",
+          "index": 207,
+          "lane": "Python",
+          "name": "_compute_slot_mapping_kernel",
+          "overlap_ns": 44910,
+          "pid": 265,
+          "start_ns": "1791564970916641510",
+          "tid": 265
+        },
+        {
+          "end_ns": "1791564970916683990",
+          "index": 41262,
+          "lane": "Python",
+          "name": "Enqueue@_compute_slot_mapping_kernel",
+          "overlap_ns": 24290,
+          "pid": 265,
+          "start_ns": "1791564970916659700",
+          "tid": 265
+        },
+        {
+          "end_ns": "1791564970916809850",
+          "index": 209,
+          "lane": "Python",
+          "name": "aten::slice",
+          "overlap_ns": 24010,
+          "pid": 265,
+          "start_ns": "1791564970916785840",
+          "tid": 265
+        }
+      ],
+      "trace_path": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-offline-parse-20261009-r2-prefill/rank1_265_20261009165606822_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+      "trace_sha256": "3f7890764d10ba6a9425cfdfbf5efa617b7dce05ebac5000e5999eb7d3f08828"
+    },
+    {
+      "causality_proven": false,
+      "cpu_numa_attribution_proven": false,
+      "gap_end_ns": "1791564970893455690",
+      "gap_ms": 3836.96694,
+      "gap_start_ns": "1791564967056488750",
+      "host_event_counts": {
+        "CANN": 5,
+        "Python": 7
+      },
+      "host_union_ms": 0.18866,
+      "kernel_sha256": "33b4dc12491901f2a98bbc88ef22f326f6d2f226cbd9bf17d02474560be9badf",
+      "no_exported_host_event_ms": 3836.77828,
+      "phase": "prefill",
+      "rank": 2,
+      "top_host_events": [
+        {
+          "end_ns": "1791564970893429260",
+          "index": 29964,
+          "lane": "Python",
+          "name": "Dequeue@_compute_slot_mapping_kernel",
+          "overlap_ns": 138310,
+          "pid": 266,
+          "start_ns": "1791564970893290950",
+          "tid": 393
+        },
+        {
+          "end_ns": "1791564970893417960",
+          "index": 76596,
+          "lane": "CANN",
+          "name": "Node@launch",
+          "overlap_ns": 114130,
+          "pid": 272639,
+          "start_ns": "1791564970893303830",
+          "tid": 393
+        },
+        {
+          "end_ns": "1791564970893284050",
+          "index": 207,
+          "lane": "Python",
+          "name": "_compute_slot_mapping_kernel",
+          "overlap_ns": 34280,
+          "pid": 266,
+          "start_ns": "1791564970893249770",
+          "tid": 266
+        },
+        {
+          "end_ns": "1791564970893422890",
+          "index": 209,
+          "lane": "Python",
+          "name": "aten::slice",
+          "overlap_ns": 31840,
+          "pid": 266,
+          "start_ns": "1791564970893391050",
+          "tid": 266
+        },
+        {
+          "end_ns": "1791564970893281370",
+          "index": 41262,
+          "lane": "Python",
+          "name": "Enqueue@_compute_slot_mapping_kernel",
+          "overlap_ns": 28150,
+          "pid": 266,
+          "start_ns": "1791564970893253220",
+          "tid": 266
+        }
+      ],
+      "trace_path": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-offline-parse-20261009-r2-prefill/rank2_266_20261009165606822_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+      "trace_sha256": "cf8f01e7fc5765ed691a2b9e941275e6a900dbb9de1cb464832e681ad1144008"
+    },
+    {
+      "causality_proven": false,
+      "cpu_numa_attribution_proven": false,
+      "gap_end_ns": "1791564970866986565",
+      "gap_ms": 3810.7039,
+      "gap_start_ns": "1791564967056282665",
+      "host_event_counts": {
+        "CANN": 5,
+        "Python": 6
+      },
+      "host_union_ms": 0.239725,
+      "kernel_sha256": "0117fa5df4981c86dcfe12609afef3a94a747700475145ef644d944e97fe5804",
+      "no_exported_host_event_ms": 3810.464175,
+      "phase": "prefill",
+      "rank": 3,
+      "top_host_events": [
+        {
+          "end_ns": "1791564970866960450",
+          "index": 29964,
+          "lane": "Python",
+          "name": "Dequeue@_compute_slot_mapping_kernel",
+          "overlap_ns": 183970,
+          "pid": 267,
+          "start_ns": "1791564970866776480",
+          "tid": 407
+        },
+        {
+          "end_ns": "1791564970866946370",
+          "index": 76595,
+          "lane": "CANN",
+          "name": "Node@launch",
+          "overlap_ns": 148120,
+          "pid": 273663,
+          "start_ns": "1791564970866798250",
+          "tid": 407
+        },
+        {
+          "end_ns": "1791564970866937470",
+          "index": 209,
+          "lane": "Python",
+          "name": "aten::slice",
+          "overlap_ns": 49120,
+          "pid": 267,
+          "start_ns": "1791564970866888350",
+          "tid": 267
+        },
+        {
+          "end_ns": "1791564970866768540",
+          "index": 207,
+          "lane": "Python",
+          "name": "_compute_slot_mapping_kernel",
+          "overlap_ns": 37680,
+          "pid": 267,
+          "start_ns": "1791564970866730860",
+          "tid": 267
+        },
+        {
+          "end_ns": "1791564970866764510",
+          "index": 41262,
+          "lane": "Python",
+          "name": "Enqueue@_compute_slot_mapping_kernel",
+          "overlap_ns": 28440,
+          "pid": 267,
+          "start_ns": "1791564970866736070",
+          "tid": 267
+        }
+      ],
+      "trace_path": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-offline-parse-20261009-r2-prefill/rank3_267_20261009165606822_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+      "trace_sha256": "d9138d4861e987a2dd514864ca478c2bb1779d7a2165fc5735a7e4b0bcd19346"
+    },
+    {
+      "causality_proven": false,
+      "cpu_numa_attribution_proven": false,
+      "gap_end_ns": "1791571479510471215",
+      "gap_ms": 3.51552,
+      "gap_start_ns": "1791571479506955695",
+      "host_event_counts": {
+        "CANN": 18,
+        "Python": 15
+      },
+      "host_union_ms": 3.151025,
+      "kernel_sha256": "9dfed46f26f6c0c6afa4d321199090384b246316ce280288e7b9f1ef54b982e3",
+      "no_exported_host_event_ms": 0.364495,
+      "phase": "decode",
+      "rank": 0,
+      "top_host_events": [
+        {
+          "end_ns": "1791571479510469750",
+          "index": 110908,
+          "lane": "CANN",
+          "name": "AscendCL@aclmdlRIExecuteAsync",
+          "overlap_ns": 2954700,
+          "pid": 270591,
+          "start_ns": "1791571479507515050",
+          "tid": 264
+        },
+        {
+          "end_ns": "1791571479507047570",
+          "index": 51877,
+          "lane": "Python",
+          "name": "Dequeue@HcclAllreduce",
+          "overlap_ns": 91875,
+          "pid": 264,
+          "start_ns": "1791571479506822310",
+          "tid": 408
+        },
+        {
+          "end_ns": "1791571479507066280",
+          "index": 695,
+          "lane": "Python",
+          "name": "aten::copy_",
+          "overlap_ns": 77280,
+          "pid": 264,
+          "start_ns": "1791571479506989000",
+          "tid": 264
+        },
+        {
+          "end_ns": "1791571479507024900",
+          "index": 110880,
+          "lane": "CANN",
+          "name": "AscendCL@hcom_allReduce_",
+          "overlap_ns": 69205,
+          "pid": 270591,
+          "start_ns": "1791571479506842120",
+          "tid": 408
+        },
+        {
+          "end_ns": "1791571479507024900",
+          "index": 110881,
+          "lane": "CANN",
+          "name": "Node@launch",
+          "overlap_ns": 69205,
+          "pid": 270591,
+          "start_ns": "1791571479506842120",
+          "tid": 408
+        }
+      ],
+      "trace_path": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-offline-parse-20261009-r6-decode-manager/rank0_264_20261009184439357_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+      "trace_sha256": "f4f936df719a55dd82a23076782d6411e9bf2728ae528c3931cdfe7575aab47b"
+    },
+    {
+      "causality_proven": false,
+      "cpu_numa_attribution_proven": false,
+      "gap_end_ns": "1791571479510401535",
+      "gap_ms": 3.44346,
+      "gap_start_ns": "1791571479506958075",
+      "host_event_counts": {
+        "CANN": 17,
+        "Python": 13
+      },
+      "host_union_ms": 3.141265,
+      "kernel_sha256": "a17519a8bbcd592fd88684a81cd9975cdc9ef543377e4a56cb92b6aed2f595ef",
+      "no_exported_host_event_ms": 0.302195,
+      "phase": "decode",
+      "rank": 1,
+      "top_host_events": [
+        {
+          "end_ns": "1791571479510398300",
+          "index": 111030,
+          "lane": "CANN",
+          "name": "AscendCL@aclmdlRIExecuteAsync",
+          "overlap_ns": 2987540,
+          "pid": 271615,
+          "start_ns": "1791571479507410760",
+          "tid": 265
+        },
+        {
+          "end_ns": "1791571479507013570",
+          "index": 52003,
+          "lane": "Python",
+          "name": "Dequeue@HcclAllreduce",
+          "overlap_ns": 55495,
+          "pid": 265,
+          "start_ns": "1791571479506802660",
+          "tid": 410
+        },
+        {
+          "end_ns": "1791571479507004640",
+          "index": 697,
+          "lane": "Python",
+          "name": "aten::copy_",
+          "overlap_ns": 46565,
+          "pid": 265,
+          "start_ns": "1791571479506940480",
+          "tid": 265
+        },
+        {
+          "end_ns": "1791571479506995710",
+          "index": 111002,
+          "lane": "CANN",
+          "name": "AscendCL@hcom_allReduce_",
+          "overlap_ns": 37635,
+          "pid": 271615,
+          "start_ns": "1791571479506816380",
+          "tid": 410
+        },
+        {
+          "end_ns": "1791571479506995710",
+          "index": 111003,
+          "lane": "CANN",
+          "name": "Node@launch",
+          "overlap_ns": 37635,
+          "pid": 271615,
+          "start_ns": "1791571479506816380",
+          "tid": 410
+        }
+      ],
+      "trace_path": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-offline-parse-20261009-r6-decode-manager/rank1_265_20261009184439357_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+      "trace_sha256": "01b89d513be272e156626fc3d79a61d212e6571913fed87920c81ee8726e60bf"
+    },
+    {
+      "causality_proven": false,
+      "cpu_numa_attribution_proven": false,
+      "gap_end_ns": "1791571479510914295",
+      "gap_ms": 3.9554,
+      "gap_start_ns": "1791571479506958895",
+      "host_event_counts": {
+        "CANN": 13,
+        "Python": 13
+      },
+      "host_union_ms": 3.639615,
+      "kernel_sha256": "27da6c09a6fcdc1551d6665e5dd3d93b00c8718d8cbcc415ae471a28b0297921",
+      "no_exported_host_event_ms": 0.315785,
+      "phase": "decode",
+      "rank": 2,
+      "top_host_events": [
+        {
+          "end_ns": "1791571479510913170",
+          "index": 111030,
+          "lane": "CANN",
+          "name": "AscendCL@aclmdlRIExecuteAsync",
+          "overlap_ns": 3512670,
+          "pid": 272639,
+          "start_ns": "1791571479507400500",
+          "tid": 266
+        },
+        {
+          "end_ns": "1791571479507071080",
+          "index": 52013,
+          "lane": "Python",
+          "name": "Dequeue@aclnnInplaceCopy",
+          "overlap_ns": 31130,
+          "pid": 266,
+          "start_ns": "1791571479507039950",
+          "tid": 396
+        },
+        {
+          "end_ns": "1791571479507366290",
+          "index": 111028,
+          "lane": "CANN",
+          "name": "AscendCL@aclrtSynchronizeStreamWithTimeout",
+          "overlap_ns": 25810,
+          "pid": 272639,
+          "start_ns": "1791571479507340480",
+          "tid": 266
+        },
+        {
+          "end_ns": "1791571479507069280",
+          "index": 111025,
+          "lane": "CANN",
+          "name": "AscendCL@aclnnInplaceCopy",
+          "overlap_ns": 23850,
+          "pid": 272639,
+          "start_ns": "1791571479507045430",
+          "tid": 396
+        },
+        {
+          "end_ns": "1791571479506981550",
+          "index": 52003,
+          "lane": "Python",
+          "name": "Dequeue@HcclAllreduce",
+          "overlap_ns": 22655,
+          "pid": 266,
+          "start_ns": "1791571479506765790",
+          "tid": 396
+        }
+      ],
+      "trace_path": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-offline-parse-20261009-r6-decode-manager/rank2_266_20261009184439357_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+      "trace_sha256": "522801cd4d85a7b4acdc33297c80261a4495b15425fe0c193714c1581be9d9f1"
+    },
+    {
+      "causality_proven": false,
+      "cpu_numa_attribution_proven": false,
+      "gap_end_ns": "1791571479510535430",
+      "gap_ms": 3.57756,
+      "gap_start_ns": "1791571479506957870",
+      "host_event_counts": {
+        "CANN": 8,
+        "Python": 3
+      },
+      "host_union_ms": 3.38054,
+      "kernel_sha256": "fcc87254c55d93a48accae435c59f248389c500534a8b2075a21e72f520bb309",
+      "no_exported_host_event_ms": 0.19702,
+      "phase": "decode",
+      "rank": 3,
+      "top_host_events": [
+        {
+          "end_ns": "1791571479510535960",
+          "index": 111031,
+          "lane": "CANN",
+          "name": "AscendCL@aclmdlRIExecuteAsync",
+          "overlap_ns": 3309080,
+          "pid": 273663,
+          "start_ns": "1791571479507226350",
+          "tid": 267
+        },
+        {
+          "end_ns": "1791571479507008090",
+          "index": 52013,
+          "lane": "Python",
+          "name": "Dequeue@aclnnInplaceCopy",
+          "overlap_ns": 33270,
+          "pid": 267,
+          "start_ns": "1791571479506974820",
+          "tid": 394
+        },
+        {
+          "end_ns": "1791571479507184980",
+          "index": 111029,
+          "lane": "CANN",
+          "name": "AscendCL@aclrtSynchronizeStreamWithTimeout",
+          "overlap_ns": 23980,
+          "pid": 273663,
+          "start_ns": "1791571479507161000",
+          "tid": 267
+        },
+        {
+          "end_ns": "1791571479507005830",
+          "index": 111026,
+          "lane": "CANN",
+          "name": "AscendCL@aclnnInplaceCopy",
+          "overlap_ns": 23410,
+          "pid": 273663,
+          "start_ns": "1791571479506982420",
+          "tid": 394
+        },
+        {
+          "end_ns": "1791571479507001970",
+          "index": 111028,
+          "lane": "CANN",
+          "name": "AscendCL@aclrtMemcpyAsync",
+          "overlap_ns": 13760,
+          "pid": 273663,
+          "start_ns": "1791571479506988210",
+          "tid": 394
+        }
+      ],
+      "trace_path": "/cache/cch/hypic-npu03-cpu-binding-fix-20261007/profiler-offline-parse-20261009-r6-decode-manager/rank3_267_20261009184439358_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+      "trace_sha256": "c54c6380eb5e2ba8e307566fa25c3996f85c1c613973e5d3f1221be07721da67"
+    }
+  ],
+  "schema": "hypic-host-gap-association/v1",
+  "scope": "largest exported-kernel gap per rank; temporal association only",
+  "source_commit": "c12060cd47e7575ead059983d7a8bb4704165c98"
+}
