@@ -55,6 +55,12 @@ Global .agents/HANDOFF.md describes integrated history,not this unmerged result.
 
 ## 4. Current Action
 
+Host-maintenance entrypoint refactor:185 to102 lines, three required references;
+original procedures preserved except relocated link syntax. Eight tests and
+two historical abort replays passed. See hypic-host-reference-split-20261013
+transformation eval. Branch repair only; do not repeat the fourteen-entry
+registry repair or infer full Skill/main acceptance from this structure check.
+
 Benchmark r13 obligation review is complete; see
 BENCHMARK_R13_PROTOCOL_OBLIGATION_REVIEW_20261013.md. Reconnection replay0004
 passed; historical identity/progression/overhead limits remain partial evidence.

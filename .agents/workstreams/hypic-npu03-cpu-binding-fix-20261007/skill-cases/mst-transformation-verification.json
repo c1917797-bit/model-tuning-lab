@@ -1,5 +1,6 @@
 {
   "schema": "mst-real-task-skill-case/v1",
+  "host_reference_split_20261013": {"base_commit":"924857d39f7b06ca197322acc460ae2afb01ad86","source_lines":185,"entrypoint_lines":102,"moved_sections":3,"prechange_check":"2026-10-13 operation0005 exit1: entrypoint exceeds120","postchange_check":"2026-10-13 operation0006 exit0","negative_and_positive_tests":8,"raw_startup_abort_replays":2,"exact_main_promoted":false,"new_device_work":false,"scope":"Lossless host-maintenance reference extraction and referrer compatibility, not all-Skill behavior"},
   "skill": "mst-transformation-verification",
   "campaign_code": "P",
   "long_term_acceptance": "partial-evidence",
@@ -36,6 +37,9 @@
     "overall_acceptance_changed": false
   },
   "evidence": [
+    {"path":".agents/evals/transformation-cases/hypic-host-reference-split-20261013.yaml","sha256":"398062ce3b729e11140582ca8ceedb45767334bc7f44728151cc228082cfa2f1"},
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_host_skill_reference_split.py","sha256":"776f4f4bffc49b1933d583c430b864cf9c7192cd3b79005d5c6b5fe5c7d40bfc"},
+    {"path":".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_host_skill_reference_split.py","sha256":"ecbdf939b66177c4a9a9ffb2ee0fe47eb22b32c17e344ee77014194e5b25195e"},
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/TRANSFORMATION_VERIFICATION_REGRESSION_20261012.md",
       "sha256": "59e3c03f1b33c3c025ca25f0708aecb0ad8af70104f2210d8691f3b02a92673d"

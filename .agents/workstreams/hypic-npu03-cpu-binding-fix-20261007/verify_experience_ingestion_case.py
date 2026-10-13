@@ -37,7 +37,13 @@ def main() -> int:
             "ingestion four-question gate incomplete")
     require(len(case["facts"]) in range(3, 8), "practice fact count out of range")
     main_skill = subprocess.check_output(("git", "show", "origin/main:.agents/skills/chicaihong01-host-maintenance/SKILL.md"), cwd=REPO, text=True)
-    branch_skill = (REPO / lesson["destination"]).read_text(encoding="utf-8")
+    branch_path = REPO / lesson["destination"]
+    branch_skill = branch_path.read_text(encoding="utf-8")
+    safety_reference = branch_path.parent / "references/machine-experiment-safety.md"
+    if safety_reference.is_file():
+        require("[references/machine-experiment-safety.md](references/machine-experiment-safety.md)"
+                in branch_skill, "safety reference is not routed from the Skill")
+        branch_skill += "\n" + safety_reference.read_text(encoding="utf-8")
     require("Container-local" in main_skill
             and "physical-device process guard" not in main_skill,
             "main coverage needs fresh review")

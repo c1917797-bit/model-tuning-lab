@@ -1,0 +1,34 @@
+schema: mst-transformation-case/v1
+id: hypic-host-reference-split-20261013
+source_session: hypic-npu03-cpu-binding-fix-20261007
+source_checkpoint: 924857d39f7b06ca197322acc460ae2afb01ad86
+goal: Preserve host-maintenance instructions while making its entrypoint comply with the existing 120-line design contract.
+selected_skills:
+  - mst-experience-ingestion
+  - mst-skill-governor
+  - mst-skill-tree-design
+  - mst-transformation-verification
+facts:
+  - The existing host-maintenance entrypoint is 185 lines.
+  - The exact-main design Skill requires entrypoints of at most 120 lines.
+  - A real pre-change check failed on that limit (2026-10-13 operation0005).
+  - Three detailed sections can move without removing their content or changing resource authority.
+  - The ingestion replay previously assumed all safety text lived in SKILL.md.
+  - Registry routing for all14 generic entries was already repaired and was not repeated.
+lessons_ingested:
+  - classification: 1
+    trigger: A maintainer Skill exceeds its existing size contract because it combines distinct operating modes.
+    different_action: Move intact procedures into explicitly required mode-specific references; retain core authority and ambiguous-outcome rules.
+    destination: .agents/skills/chicaihong01-host-maintenance/SKILL.md
+    verification: Reconstruct the prior instructions exactly from the routed references, with only the relocated relative link normalized.
+  - classification: 5
+    trigger: A source-reading verifier depends on a monolithic Skill file after lossless reference extraction.
+    different_action: Follow only the explicitly linked safety reference and reject missing routing; keep the original raw evidence checks.
+    destination: .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_experience_ingestion_case.py
+    verification: Replay the retained two startup-abort receipts and run negative controls for missing routes and deleted instructions.
+validation_commands:
+  - python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_host_skill_reference_split.py
+  - python3 -B -m unittest discover -s .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007 -p test_host_skill_reference_split.py
+  - python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_experience_ingestion_case.py
+  - bash scripts/validate-mst.sh
+boundary: Documentation/referrer regression only; no NPU behavior, historical main repair, full29 acceptance, new runtime permission, or main/remote integration is claimed.

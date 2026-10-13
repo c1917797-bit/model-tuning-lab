@@ -14,7 +14,7 @@ skills:
   - id: chicaihong01-host-maintenance
     path: .agents/skills/chicaihong01-host-maintenance
     status: stable
-    purpose: Enter and verify the canonical chicaihong01 maintenance environment through AWMCP from a fresh clone.
+    purpose: Enter and verify the canonical chicaihong01 environment through AWMCP, with required session, host-test, and runtime-safety references.
     triggers:
       - maintain code or run experiments on chicaihong01
       - connect a fresh clone to the target host
