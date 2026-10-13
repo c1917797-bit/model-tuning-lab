@@ -1,6 +1,27 @@
 # HYPIC NPU0–3 — current handoff
 
+## 2026-10-13 baseline independently valid; candidate screen running
+
+Current-source baseline completed03:15:45UTC; expired0254 handle is NOT a failure.
+Independent audit02a1 exit0:40 fixed1024 requests/42 IDs,170 clean guard samples,
+same4429e35 mounted bytes/four physical workers/exact release. See
+HYPIC_CURRENT_SOURCE_BASELINE_SCREEN_AUDIT_20261013.md;TPOT75.6181ms,
+TTFT P95 88.5053s. No rerun. Progress1/6 audited phases.
+Fresh admission02a2 passed actual0–3/8223 idle,new root absent,source identity.
+Candidate hypic-only/screen now running exec-00000000000002a3 with root
+/cache/cch/hypic-npu03-cpu-binding-fix-20261007/performance-context-41984-current4429-performance-20261013-hypic-only-screen.
+Poll this exact operation/root; never restart while running or ambiguous.
+Terminal audit-phase before hypic-only/repeat2. No quality/observer/GDN expansion.
+User subsequently authorized scheduling; automation hypic is ACTIVE every10min.
+This supersedes the earlier pending-scheduling caveat. Deadline08:47:14UTC remains.
+
 ## 2026-10-13 first current-source performance phase running
+
+Background continuation caveat: creation of a new10-minute task heartbeat was
+rejected by automatic safety review pending explicit scheduling authorization.
+User was asked separately. No new heartbeat was created; do not claim autonomous
+phase continuation. Existing local automation 'ascend' belongs to another thread
+and NPU4–7; it was not changed. Controller0254 itself remains running independently.
 
 Frozen checkpoint e94ca151;6 CPU tests and29-Skill structure passed0250.
 Admission0251: physical0–3 idle,8223 free,Docker root/cache/docker,/cache114GiB
