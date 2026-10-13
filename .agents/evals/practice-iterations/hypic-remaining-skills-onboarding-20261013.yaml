@@ -1,9 +1,9 @@
 schema: mst-practice-iteration/v1
 id: hypic-remaining-skills-onboarding-20261013
 repository: model-tuning-lab
-status: in_progress
+status: done
 date: "2026-10-13"
-validated_commit: f8113561030557594e19df4bba391cd92518bac3
+validated_commit: f98bcc675882091138491eb557b14976642437e0
 stage_goal: Verify exact-main repository onboarding for the newly redirected remaining-Skill acceptance phase without NPU work.
 changes:
   - type: validation
@@ -12,9 +12,16 @@ changes:
       - .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/skill-cases/mst-repo-onboarding.json
 validation_commands:
   - "bash scripts/validate-mst.sh"
-  - "Compare exact-main registry IDs with all actual Skill directories and entrypoints; reject missing or orphan Skills."
-  - "Report repository identity, backlog tasks, last commit and structural changes from the retained acceptance checkout."
-lessons_ingested: []
+  - "python3 -B .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_onboarding_snapshot.py /cache/cch/mst-main-onboarding-20261013-f8113561"
+  - "python3 -B -m unittest discover -s .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ -p test_onboarding_snapshot.py"
+lessons_ingested:
+  - lesson: On repository resumption, retain exact-checkpoint input identities and label legacy backlog counts separately from other workstream records.
+    destination: .agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_onboarding_snapshot.py
+    severity: medium
+    classification: 5
+    trigger: Resuming into a different repository snapshot or validating onboarding.
+    different_action: Preserve the acceptance copy and report the task-discovery scope rather than interpreting zero legacy backlogs as zero live tasks.
+    verification: Exact-main execution plus six inventory regression controls.
 scope:
   main_commit: ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2
   human_direction: Stop further HYPIC quality work and validate remaining Skills independently.

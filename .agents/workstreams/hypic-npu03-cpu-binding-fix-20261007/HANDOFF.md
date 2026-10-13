@@ -7,7 +7,7 @@ Branch work/hypic-npu03-cpu-binding-fix-20261007; runtime source4429e35.
 Six-phase same-source performance is complete, not a quality pass.
 Current task.active_attempt=null; no performance controller remains active.
 Execution in-progress / integration not-ready. No main/remote synchronization.
-29 cases:9 bounded verified,20 partial,0 missing. No all-Skill success claim.
+29 cases:10 bounded verified,19 partial,0 missing. No all-Skill success claim.
 App heartbeat hypic is absent; do not recreate it for the finished supplement.
 
 ## 1. North Star
@@ -59,6 +59,9 @@ Global .agents/HANDOFF.md describes integrated history,not this unmerged result.
 
 ## 4. Current Action
 
+Exact-main repository onboarding passed with a retained isolated copy and six
+inventory tests; see ONBOARDING_EXACT_MAIN_ACCEPTANCE_20261013.md. No NPU work.
+
 Inference-loop obligation review and first-screen threshold replay repair are
 complete; see INFERENCE_LOOP_OBLIGATION_REVIEW_20261013.md. Eight tests and
 six raw runs passed; original outcomes and9/20 acceptance are unchanged.
@@ -98,8 +101,8 @@ evidence; local docs/tests alone cannot prove that behavior.
 2. Review remaining exact-main Skill obligations against existing evidence.
    Historical missing identity/chronology/retry data remains unavailable;
    do not rerun completed HYPIC merely to improve acceptance counts.
-3. Record only demonstrated fixes and task-scoped acceptance. Preserve9/20
-   unless the original Skill requirements are actually proven.
+3. Record only demonstrated fixes and task-scoped acceptance; derive current
+   counts from verified case evidence, never from structural checks alone.
 4. Remote authentication remains unresolved. Do not repeat unchanged failed
    pushes or claim main integration. Push only when authentication changes
    and existing authorization applies; then independently verify equality.

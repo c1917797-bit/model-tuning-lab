@@ -2,15 +2,15 @@
   "schema": "mst-real-task-skill-case/v1",
   "skill": "mst-repo-onboarding",
   "campaign_code": "V",
-  "long_term_acceptance": "partial-evidence",
-  "task": "Read and report a genuinely fresh GitHub main clone using the onboarding workflow",
-  "executed_at_utc": "2026-10-08",
-  "tested_main_commit": "f1f37a39bd86f7db5fd3ee3dea358ae6868275c6",
+  "long_term_acceptance": "verified",
+  "task": "Execute exact-main repository onboarding for the human-directed remaining-Skill validation phase using a retained isolated local checkout",
+  "executed_at_utc": "2026-10-13",
+  "tested_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "tested_skill_git_blob_oid": "a1eb74cee760653f63181f8e4e775a7cf29ee75c",
   "tested_registry_git_blob_oid": "2611864bbcf719d57920aae03ff9eb85521526b4",
   "reviewed_current_main_commit": "ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2",
   "current_skill_and_registry_blobs_unchanged": true,
-  "environment_scope": "chicaihong01 host, fresh GitHub HTTPS main clone; repository-only, no NPU",
+  "environment_scope": "chicaihong01/mc; retained isolated local shared-object clone of pinned main; repository-only, no NPU or GitHub authentication test",
   "observed": {
     "registry_skill_ids": 29,
     "skill_directories": 29,
@@ -23,12 +23,47 @@
     {
       "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ONBOARDING_FRESH_CLONE_ACCEPTANCE_20261008.md",
       "sha256": "6a557394869bbe8dc78fe90df9f43aed6c9ffe2ae33fe0aa9c6d22f0d59e3e73"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/verify_onboarding_snapshot.py",
+      "sha256": "6e11aada6f4ca411285597ace61741caa5ef09a33e96084a66f5add38649a57b"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/test_onboarding_snapshot.py",
+      "sha256": "8f05b5ab8bc0239280a96892438753c79e19c0f62848c59ca6cb1d46b7c9de36"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ONBOARDING_EXACT_MAIN_ACCEPTANCE_20261013.md",
+      "sha256": "b85ab7d7697a45bf8eb88a5f1860ba16f569630d6df9962173fbe7fdaadce9eb"
+    },
+    {
+      "path": ".agents/workstreams/hypic-npu03-cpu-binding-fix-20261007/ONBOARDING_EXACT_MAIN_RECEIPT_20261013.json",
+      "sha256": "85181563682334fe9f1d7379400d12ff6844b78ce42ab242aba7286aebb626eb"
     }
   ],
-  "raw_clone_retained": false,
-  "original_clone_path": "/cache/cch/mst-onboarding-acceptance-20261008-1018",
-  "reviewed_clone_present": false,
-  "replayable_regression_recorded": false,
-  "boundary": "The historical report supports a bounded fresh-clone onboarding result. The original clone and raw terminal capture are unavailable for independent replay; unchanged Skill/registry blobs do not prove all onboarding inputs remained identical. This case does not verify host AWMCP connection, NPU behavior, or the other 28 Skills.",
-  "next_gate": "At a later real onboarding need, retain a sanitized command/output receipt and focused regression procedure; do not rerun this case solely to increase the verified count."
+  "raw_clone_retained": true,
+  "original_clone_path": "/cache/cch/mst-main-onboarding-20261013-f8113561",
+  "reviewed_clone_present": true,
+  "replayable_regression_recorded": true,
+  "boundary": "Bounded exact-main repository onboarding is now verified by a newly retained isolated checkout, actual unchanged main validator execution, direct inventory, structured report and six negative/boundary controls. This does not recover the old GitHub clone, prove remote authentication/freshness, discover current live host tasks, or verify the other 28 Skills. Zero legacy backlogs is explicitly not zero workstream tasks.",
+  "next_gate": "Use the retained read-only snapshot replay after relevant identity or evidence changes; do not recreate the clone merely to raise counts. Continue remaining Skills independently of HYPIC quality. No main/remote integration is claimed.",
+  "historical_github_case": {
+    "executed_at_utc": "2026-10-08",
+    "tested_main_commit": "f1f37a39bd86f7db5fd3ee3dea358ae6868275c6",
+    "raw_clone_retained": false,
+    "original_clone_path": "/cache/cch/mst-onboarding-acceptance-20261008-1018",
+    "boundary": "The historical report supports a bounded fresh-clone onboarding result. The original clone and raw terminal capture are unavailable for independent replay; unchanged Skill/registry blobs do not prove all onboarding inputs remained identical. This case does not verify host AWMCP connection, NPU behavior, or the other 28 Skills."
+  },
+  "behavioral_evidence_verified": true,
+  "current_acceptance": {
+    "report": "ONBOARDING_EXACT_MAIN_ACCEPTANCE_20261013.md",
+    "receipt": "ONBOARDING_EXACT_MAIN_RECEIPT_20261013.json",
+    "clone_operation": "exec-000000000000003b",
+    "replay_operation": "exec-000000000000003e",
+    "peer_id": "lgw_fba5a82fcb8b4c1eb9c2ae2d1b87d61d",
+    "tests_passed": 6,
+    "legacy_backlogs": 0,
+    "alternative_workstream_records": 10,
+    "acceptance_scope": "exact pinned main onboarding workflow"
+  }
 }
