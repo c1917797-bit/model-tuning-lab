@@ -1,0 +1,10 @@
+{
+  "schema": "mst-publication-network-check/v1",
+  "operation": "exec-0000000000000151",
+  "exit_code": 0,
+  "stdout": "{\"dns\": \"ok\", \"addresses\": [{\"family\": 2, \"ip\": \"20.205.243.166\"}]}\n{\"ip\": \"20.205.243.166\", \"tcp_tls\": \"failed\", \"error_type\": \"timeout\", \"errno\": null, \"seconds\": 6.006}\n",
+  "interpretation": "DNS resolves; bounded TCP/TLS connection attempt times out. This does not prove an authentication failure or a specific network root cause.",
+  "settings_changed": false,
+  "automatic_write_retry": false,
+  "main_updated": false
+}
