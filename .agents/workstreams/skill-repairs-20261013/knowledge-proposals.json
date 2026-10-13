@@ -1,0 +1,18 @@
+{
+  "schema": "mst-knowledge-proposals/v1",
+  "proposals": [
+    {
+      "id": "planning-schema",
+      "destination": ".agents/skills/mst-practice-iteration-planning/SKILL.md",
+      "decision": "proposed",
+      "basis": "Existing example violates its own maintained validator schema and omits validated_commit."
+    },
+    {
+      "id": "runtime-template",
+      "destination": ".agents/skills/runtime-monkeypatch-delivery/assets/template",
+      "decision": "proposed",
+      "basis": "Named validator missing in main; wrapper forced enable and worker-local startup failure was swallowed."
+    }
+  ],
+  "global_handoff_owner": "integrator"
+}
