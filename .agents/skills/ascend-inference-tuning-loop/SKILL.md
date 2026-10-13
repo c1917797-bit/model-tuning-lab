@@ -146,13 +146,14 @@ load. This rule does not guarantee the first real-device attempt will pass.
   actual process/HBM usage, aggregate host-RAM/disk/cgroup limits and source
   identities. Device declarations do not prove occupation; idle accelerators
   do not authorize lowering resource gates or reclaiming protected workloads.
-- Respect the latest explicit concurrency authority. The current portfolio
-  uses parallel device-free preparation and MAIN-serialized device stages on
-  physical4-7. A frozen four-card matrix may be one stage; do not insert another
-  paper's device job into that lease. Preparers never self-admit devices.
-  Disjoint device concurrency needs later explicit authorization, compatible
-  reviewed controllers and ONE summed resource budget. TP4/model/profiling/
-  formal paired timing remains exclusive; overlapping timing is not comparable.
+- Respect the latest explicit concurrency authority recorded in the active
+  window, not an older serial-only template. MAIN serializes admission and owns
+  physical-device leases; that does not require all independent correctness
+  stages to execute serially. Disjoint concurrency requires explicit authority,
+  compatible reviewed controllers, exact mappings and ONE summed resource
+  budget. Preparers never self-admit devices. A frozen four-card matrix is one
+  lease; TP4/model/profiling/formal paired timing remains exclusive. Overlapping
+  timing is not comparable. An unknown exit or release keeps its lease reserved.
 - Parallel agents prepare the next gates/adapters during a running job, with
   frozen live sources and distinct edit scopes. Observe terminal exit, retain
   evidence/release only owned resources, then dispatch the admitted successor
@@ -177,6 +178,39 @@ load. This rule does not guarantee the first real-device attempt will pass.
   reordered or restarted to hide tail waiting; use its measured progress to
   design the next packet. Separate lightweight no-device preflight budgets from
   model budgets, while preserving the full model's admission and reserve gates.
+
+## Adaptive phase scheduling
+
+Treat each paper as a dependency DAG, not a card reservation held until the
+paper finishes. On a terminal/release event, replenish preparation work and
+admit the next ready node without waiting for report prose. A failed node goes
+to bounded device-free repair; it does not block another paper's ready node.
+
+Among source- and gate-qualified nodes, prefer the next end-to-end acceptance
+edge with the smallest remaining critical path; break ties by deadline slack,
+waiting age and bounded phase duration. Pack compatible disjoint correctness
+nodes against physical devices and summed RAM/CPU/disk limits plus the unchanged
+reserve. Once a four-card comparison is ready, reserve its earliest safe start;
+backfill only work whose full budget and cleanup cannot delay that reservation.
+Do not duplicate a complete case merely to fill the fourth card.
+
+Improve this policy during the active campaign, not by repeatedly restating it:
+use measured stage durations, ready-to-start delay, handoff defects and useful
+validation completions. Attribute idle gaps to preparation, admission, resource,
+release, controller or unavailable evidence; change the responsible component.
+Evaluate the next comparable cycle before claiming an improvement. Missing
+continuous telemetry means utilization is unmeasured. Freeze live tickets;
+scheduling/controller fixes create new versions and preserve failed evidence.
+Keep the workstream's CURRENT/NEXT/BACKUP ledger current at stage transitions;
+persist reusable skill changes at coherent milestones, not every polling tick.
+
+Treat idle HBM as a versioned environment observation, not a permanent exact
+snapshot or arbitrary lower bound. After a host restart, recheck health, compute
+processes, device FD ownership, utilization and the justified memory ceiling;
+repair a proved admission false-negative without relaxing numerical gates.
+Bind operation continuity to the target, boot/session, source and command.
+After an interrupted mutation, inspect actual bytes or owned process state
+before resuming; a reused operation number is not proof of the previous run.
 
 ## Git and Artifact Rules
 
