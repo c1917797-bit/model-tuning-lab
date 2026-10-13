@@ -1,0 +1,36 @@
+{
+  "schema": "hypic-operational-lifecycle/v1",
+  "authorized_scope": "2026-10-13 human explicitly allowed ONE bounded lifecycle-only validation on idle physical0-3; no quality/performance/observer/GDN.",
+  "deadline_utc": "2026-10-13T18:00:00Z",
+  "phase_alarm_seconds": 1200,
+  "cleanup_allowance_seconds": 300,
+  "executor_timeout_seconds": 1600,
+  "modes": [
+    "disabled",
+    "uninstalled"
+  ],
+  "legacy_contract_sha256": "0f6578ca003e0e285bdf0432febc1281716056fe2544113d2649c76c7be4754c",
+  "files": {
+    "operational_lifecycle_20261013.py": "1bc5b049f26a35fc9af9d6159c691d0ab460ca2ba1856fbfa9cdb9cd80f4fce1",
+    "operational_lifecycle_audit_20261013.py": "97092d1458e1352c281539fbdbb70f0e278b20fda48e0dd9ad2d4e580b131c47",
+    "test_operational_lifecycle_20261013.py": "758dce5bbcee08d993e45ac604bf62768703e1b746bc74517b55613075b30e29"
+  },
+  "phase_spec_sha256": {
+    "disabled": "2a60c48120b30c4b997d7bce008cc54c28d7f22486e6db8ce79de9669edeaecd",
+    "uninstalled": "30e4d5d43dcd8644ff7d3dc9e591bc3d7b179218b6c29be16a2e47822a73dcce"
+  },
+  "smoke_request_sha256": {
+    "disabled": "f3287c36042a4e09f6e673bc20b4bfb201e6b67e6658d62a5531673be923573f",
+    "uninstalled": "befdeba0194c0d7396976cc3d63ea8b37387318dde73d50aea02de1946bb617e"
+  },
+  "request_limit": "one 1-token response per service; same retained input59; no accuracy scoring, no performance measurement",
+  "forbidden_claims": [
+    "quality pass",
+    "old canary pass",
+    "deployment acceptance",
+    "all29 Skill acceptance",
+    "hot uninstall",
+    "same writable-layer restoration"
+  ],
+  "stop_rule": "No retries; uninstalled only after disabled independent audit and fresh physical0-3/8223 idle. Stop on foreign process, source/request/identity failure, or timeout; release exact owned resource only."
+}
