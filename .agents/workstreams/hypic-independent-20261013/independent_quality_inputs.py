@@ -1,6 +1,13 @@
 """Deterministic full-denominator LongBench token/segment freezing."""
 from independent_segment_selection import token_digest
 
+def unique_public_segments(segments):
+    entries={}
+    for segment in segments:
+        digest=token_digest(segment)
+        entries.setdefault(digest,list(segment))
+    return list(entries.values())
+
 def context_segment(token_ids,offsets,context_start,context_end,*,max_tokens=16384):
     if len(token_ids)!=len(offsets) or not 0<=context_start<context_end:
         raise ValueError("exact token offsets/context span required")

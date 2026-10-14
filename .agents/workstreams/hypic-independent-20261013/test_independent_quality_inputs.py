@@ -1,6 +1,10 @@
 import unittest
-from independent_quality_inputs import context_segment,quality_generation
+from independent_quality_inputs import context_segment,quality_generation,unique_public_segments
 class QualityInputTests(unittest.TestCase):
+    def test_material_dedup_preserves_request_denominator(self):
+        segments=[[1]*16,[2]*16,[1]*16]
+        self.assertEqual(unique_public_segments(segments),segments[:2])
+        self.assertEqual(len(segments),3)
     def test_exact_context_rows_and_trim(self):
         ids=list(range(40));offsets=[(i,i+1) for i in range(40)]
         selection,segment=context_segment(ids,offsets,3,38,max_tokens=32)

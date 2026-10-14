@@ -2,7 +2,7 @@
 import argparse,hashlib,json,os
 from pathlib import Path
 from independent_quality_ruler import load_ruler,EXPECTED
-from independent_quality_inputs import context_segment,quality_generation
+from independent_quality_inputs import context_segment,quality_generation,unique_public_segments
 DATA_SHA="cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a"
 
 def freeze(data_path,ruler_path,model_path,root):
@@ -38,7 +38,7 @@ def freeze(data_path,ruler_path,model_path,root):
         segments.append(list(segment))
     payload={"schema":"hypic-quality-inputs/v1","dataset":"longbenchv2",
         "generation":quality_generation(),"repetitions":3,"requests":rows}
-    catalog={"schema":"hypic-public-catalog/v1","public_segments":segments}
+    catalog={"schema":"hypic-public-catalog/v1","public_segments":unique_public_segments(segments)}
     files={"inputs.json":payload,"catalog.json":catalog}
     receipt={"schema":"hypic-quality-input-freeze/v1","samples":127,
         "dataset_sha256":DATA_SHA,"ruler_sha256":EXPECTED,
