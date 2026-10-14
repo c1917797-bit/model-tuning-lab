@@ -211,9 +211,13 @@ def run_contract(contract):
         payload={"model":"qwen3.5","messages":[{"role":"user","content":"Calculate 2 + 2. Reply with only the integer."}],
                  "temperature":0,"seed":0,"max_tokens":32,"chat_template_kwargs":{"enable_thinking":False}}
         payload=contract.get("request_payload",payload)
+        payloads=contract.get("request_payloads")
+        if contract.get("request_payload_specs"):
+            from synthetic_compact_workload import expand_payloads
+            payloads=expand_payloads(contract["request_payload_specs"],contract["public_token_recipe"])
         for i in range(3):
-            if contract.get("request_payloads"):
-                payload=contract["request_payloads"][i]
+            if payloads:
+                payload=payloads[i]
             require_guard()
             before=snapshot(cid);retain_snapshot(before)
             if before["foreign"]:raise RuntimeError("Foreign process before request")

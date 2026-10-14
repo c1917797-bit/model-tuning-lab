@@ -18,6 +18,10 @@ def enable():
     config_path=(base/manifest['config']).resolve()
     if not config_path.is_relative_to(base):raise ValueError('config outside package')
     config=json.loads(config_path.read_text())
+    if 'public_token_recipe' in config:
+        if 'public_tokens' in config:raise ValueError('ambiguous public token configuration')
+        from synthetic_compact_workload import public_tokens_from_recipe
+        config['public_tokens']=public_tokens_from_recipe(config.pop('public_token_recipe'))
     raw=Path(os.environ['INDEPENDENT_COMPACT_RAW'])
     if not raw.is_absolute() or not raw.is_dir():raise ValueError('existing absolute raw root required')
     class Loader:
