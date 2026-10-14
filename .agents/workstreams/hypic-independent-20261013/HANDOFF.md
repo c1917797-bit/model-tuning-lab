@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST12h implementation: private C1 hook now plans all pure-prefill requests,
+validates exact request/rank/step/row/token slices and unique state slots, pins
+materials and prepares ALL results before any native cache commit. Mixed misses
+fall back whole layer before mutation. New independent_prefill_batch helper and
+6 CPU controls coverc16 offsets/owners, alias/wrongstep, miss and late failure.
+74 independent CPU tests pass ma/0053. NOT device/batched service acceptance;
+mixed decode/spec/PDC-overlap/chunks and C2 batch/skipped query remain incomplete.
+No NPU job launched. Next C2 full batch/actual skipped compute and seam, then
+capacity admission and integrated device validation under extended deadline.
+
 LATEST2026-10-14 human extension: another12hours, end19:03:48UTC/22:03:48MSK.
 Write permission restored. Automation hypic-12 active every10minutes; delete at
 deadline/full acceptance. New CONTINUATION_12H_20261014.md overrides old times.
