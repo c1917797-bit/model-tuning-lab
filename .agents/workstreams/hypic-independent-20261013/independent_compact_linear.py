@@ -48,3 +48,24 @@ def execute_compact_linear(material,expected,plan,initial_state,incoming_conv,
     if not all(torch.isfinite(t).all().item() for t in (output,state,tail)):
         raise ValueError("nonfinite compact C1 result")
     return output,state,tail
+
+
+def execute_native_linear_plan(plan,initial_state,incoming_conv,*,run_live):
+    """Keep native-entry live computation; never acquire/apply public material.
+
+    Operates on private state copies so the batch caller can prepare every
+    request before committing any actual state slot.
+    """
+    from independent_mixed_query_plan import NativeQueryPlan
+    if not isinstance(plan,NativeQueryPlan) or plan.skipped_tokens!=0:
+        raise ValueError('native mixed entry required')
+    if tuple(plan.retained_offsets)!=tuple(range(plan.scheduled_tokens)):
+        raise ValueError('native entry must preserve every row')
+    output,state,tail=run_live(0,plan.scheduled_tokens,
+                              initial_state.clone(),incoming_conv.clone())
+    wanted=(plan.scheduled_tokens,initial_state.shape[0],initial_state.shape[-1])
+    if output.shape!=wanted or state.shape!=initial_state.shape or tail.shape!=incoming_conv.shape:
+        raise ValueError('native mixed output/state layout mismatch')
+    if not all(torch.isfinite(t).all().item() for t in (output,state,tail)):
+        raise ValueError('nonfinite native mixed result')
+    return output,state,tail

@@ -13,9 +13,10 @@ def install_compact_gdn(stage,*,enabled=False,emit=None):
     from vllm.model_executor.layers.mamba.gdn.qwen_gdn_linear_attn import QwenGatedDeltaNetAttention as cls
     from independent_runner_context import CURRENT_REQUEST_SLICES
     from independent_compact_model_hook import CURRENT_COMPACT_MODEL
-    from independent_runtime_adapter import associate_native_linear
+    from independent_runtime_adapter import associate_native_linear,associate_native_mixed_linear
     from independent_native_boundary import make_boundary_runner
-    from independent_compact_linear import execute_compact_linear
+    from independent_compact_linear import execute_compact_linear,execute_native_linear_plan
+    from independent_mixed_query_plan import NativeQueryPlan
     from independent_compact_material_pool import CompactLinearMaterialPool
     if not isinstance(stage.compact_store,CompactLinearMaterialPool):
         raise ValueError('compact CPU material store required')
@@ -37,16 +38,21 @@ def install_compact_gdn(stage,*,enabled=False,emit=None):
         raw=get_forward_context().attn_metadata
         if not isinstance(raw,dict) or self.prefix not in raw:
             raise ValueError('native linear metadata absent')
-        associations=associate_native_linear(self,requests,raw[self.prefix])
+        mixed=any(isinstance(p,NativeQueryPlan) for p in plans)
+        associations=(associate_native_mixed_linear(self,requests,raw[self.prefix])
+                      if mixed else associate_native_linear(self,requests,raw[self.prefix]))
         total=sum(len(p.retained_offsets) for p in plans)
         if any(x.shape[0]!=total for x in (mixed_qkv,b,a,core_attn_out)):
             raise ValueError('compact GDN projected row coverage mismatch')
         conv_cache,state_cache=self.kv_cache[:2];prepared=[];offset=0
         with ExitStack() as leases:
             for plan,assoc in zip(plans,associations):
-                expected=stage.identity(self.prefix,plan.rank)
-                generation,material=leases.enter_context(
-                    stage.compact_store.acquire_private(expected,device=mixed_qkv.device))
+                is_native=isinstance(plan,NativeQueryPlan)
+                generation=None;material=None
+                if not is_native:
+                    expected=stage.identity(self.prefix,plan.rank)
+                    generation,material=leases.enter_context(
+                        stage.compact_store.acquire_private(expected,device=mixed_qkv.device))
                 slot=assoc.state_slot
                 state=state_cache[slot].transpose(-1,-2).contiguous().clone()
                 tail=conv_cache[slot].clone()
@@ -56,7 +62,10 @@ def install_compact_gdn(stage,*,enabled=False,emit=None):
                     span=slice(base+lo,base+hi)
                     return make_boundary_runner(self,mixed_qkv[span],b[span],a[span],conv,
                                                 return_conv=True)(incoming)
-                output,final,tail=execute_compact_linear(material,expected,plan,state,tail,run_live=live)
+                if is_native:
+                    output,final,tail=execute_native_linear_plan(plan,state,tail,run_live=live)
+                else:
+                    output,final,tail=execute_compact_linear(material,expected,plan,state,tail,run_live=live)
                 native=final.transpose(-1,-2).contiguous()
                 end=offset+len(plan.retained_offsets)
                 if native.shape!=state_cache[slot].shape or tail.shape!=conv_cache[slot].shape or output.shape!=core_attn_out[offset:end].shape:
@@ -71,7 +80,8 @@ def install_compact_gdn(stage,*,enabled=False,emit=None):
                 core_attn_out[start:end].copy_(output.to(core_attn_out.dtype))
             torch.npu.synchronize()
             for plan,slot,generation,start,end,output,native,tail in prepared:
-                emit({'event':'compact_gdn_body_composed','request_id':plan.request_id,
+                emit({'event':('mixed_native_gdn_completed' if isinstance(plan,NativeQueryPlan)
+                               else 'compact_gdn_body_composed'),'request_id':plan.request_id,
                     'rank':plan.rank,'step':plan.step,'layer':self.prefix,'slot':slot,
                     'generation':generation,'retained_rows':end-start,
                     'skipped_body_tokens':plan.skipped_tokens,'finite':True})

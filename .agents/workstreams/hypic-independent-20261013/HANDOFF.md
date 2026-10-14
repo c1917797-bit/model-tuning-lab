@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST mixed GDN computation dispatch implemented: NativeQueryPlan entries
+compute EVERY retained live row via existing official-primitive boundary runner,
+never acquire/apply public material. Native state/conv copies are prepared before
+batch slot commit; emit mixed_native_gdn_completed, not hot-body proof.013e
+passes10 mixed query/state/native-dispatch controls including nonfinite/late
+failure and caller-state immutability. Runtime selector still all-hot: NOT mixed
+device acceptance. Next C2 native-entry window binding/metadata dispatch, then
+enable mixed admission only after source-bound fixture and official-image gates.
+
 LATEST mixed GDN association: official-image0133/0138 proves decode-first
 non-spec full state map and rebased prefill tail; gdn_attn.py SHA27f5561c...
 bound in associate_native_mixed_linear. New immutable mapping validates exact
