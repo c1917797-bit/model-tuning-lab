@@ -1,0 +1,16 @@
+{
+  "schema": "ascend.causal-evidence-locators/v1",
+  "local_base": "C:/Users/Huawei/paper-piercing-handoff/NEW48H-20261014",
+  "local_kind": "MAIN-delivered actual artifacts; verify_cases executed here",
+  "large_data_included": false,
+  "files": {
+    "GE005_ACTUAL_ATTRIBUTION.json": {"remote_report_ref": null, "status": "exact local locator plus EVIDENCE hash; remote report mapping pending, contained raw refs are explicit"},
+    "GE007_ACTUAL_CONSUMPTION.json": {"remote_report_ref": null, "status": "exact local locator plus EVIDENCE hash; remote report mapping pending"},
+    "GE008_ACTUAL_OWNER_RESULT.json": {"remote_report_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-ge008-numeric-new48h-MAIN-20261014-001/RESULT.json"},
+    "GE008_ACTUAL_NUMERIC_RESULT.json": {"remote_report_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-ge008-numeric-new48h-MAIN-20261014-001/numeric/result/RESULT.json"},
+    "GE008_ACTUAL_RELEASE_DIAGNOSTIC.json": {"remote_report_ref": null, "status": "actual MA0289 compact release delivered by MAIN; remote persisted report mapping not proved"},
+    "DL_CPU54_ACTUAL_DECOMPOSITION.json": {"remote_report_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-attribution003-new48h-MAIN-20261014-001/cpu-preflight/producer/DECOMPOSITION.json"},
+    "DL_KDMA006_ACTUAL_BUILD_RESULT.json": {"remote_report_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-kdma-compile006-new48h-MAIN-20261014-001/cpu-preflight/producer/build/RESULT.json"}
+  },
+  "identity_rule": "Pair each locator with exact bytes/sha256 from EVIDENCE.json; a path is not a new PASS receipt. Never infer missing remote mapping from local filename."
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "ascend.causal-regression-evidence/v1",
+  "scope": "frozen saved artifacts, not re-execution",
+  "files": [
+    {
+      "name": "GE005_ACTUAL_ATTRIBUTION.json",
+      "bytes": 7511,
+      "sha256": "3e200d3e155661591bf066474632841a8d424410baccae1c2dd7a84df9304e8a"
+    },
+    {
+      "name": "GE007_ACTUAL_CONSUMPTION.json",
+      "bytes": 6020,
+      "sha256": "2ac1eff5d6c988e78f0a6a1246732cbc71e1d465e0634bb06771e48e547ab6f0"
+    },
+    {
+      "name": "GE008_ACTUAL_OWNER_RESULT.json",
+      "bytes": 1495,
+      "sha256": "42765145b823706dd22824e5fba4f814457c0232b01c5b43023ecd57b5c2ddaa"
+    },
+    {
+      "name": "GE008_ACTUAL_NUMERIC_RESULT.json",
+      "bytes": 68738,
+      "sha256": "4bf33c203d0dc1e8a9b277c969e757ab42090531f01cac5ca2af94017fef6893"
+    },
+    {
+      "name": "GE008_ACTUAL_RELEASE_DIAGNOSTIC.json",
+      "bytes": 5819,
+      "sha256": "170eaa6d37d3129349fbe6c8c44ee6b8503e3f127e08d5f9bcf404de9f940294"
+    },
+    {
+      "name": "DL_CPU54_ACTUAL_DECOMPOSITION.json",
+      "bytes": 48090,
+      "sha256": "1b0e225e9824f82b77451c22f21ace0a12e2c2d641270c8673680386ca13686a"
+    },
+    {
+      "name": "DL_KDMA006_ACTUAL_BUILD_RESULT.json",
+      "bytes": 8334,
+      "sha256": "78802729280ca584dfc157cce2f3821936df7a505a6454a4c9569d06203ff892"
+    }
+  ],
+  "MXR056": {
+    "status": "raw-source-pending",
+    "owned_pid_proven": false,
+    "causal_attribution_final": false
+  },
+  "local_locator": {
+    "base": "C:/Users/Huawei/paper-piercing-handoff/NEW48H-20261014",
+    "kind": "actual MAIN saved handoff files",
+    "remote_mapping": "not inferred; map each artifact from its original experiment Ref before remote audit"
+  }
+}

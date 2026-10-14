@@ -42,6 +42,15 @@ validation or a policy update is not an algorithm acceptance result.
 
 ## Experiment Contract
 
+For mechanism comprehension, hardware mapping, numerical diagnosis or a new
+paper adaptation, use the scoped [AI Infra / Ascend knowledge base](../../../docs/knowledge-base/ascend-infra/INDEX.md).
+Read only the module needed for the decision. Produce the actual model/path,
+mathematical invariants, adaptable seams, competing failure hypotheses and a
+discriminating experiment before changing the candidate. Distinguish source
+facts, derivations, measured cases and pending hypotheses; knowledge-base tests
+are not NPU or model acceptance. Promote reusable evidence-backed cases at
+coherent stages, not every polling tick.
+
 Before ranking or resuming papers, apply
 [architecture and bottleneck selection](references/architecture-and-bottleneck-selection.md).
 Bind the installed hybrid-model stages and actual hardware execution costs;
