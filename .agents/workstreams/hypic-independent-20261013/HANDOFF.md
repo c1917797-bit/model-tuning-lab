@@ -1072,6 +1072,15 @@ Do not infer exact owner from generic error; snapshot after it is separate.
 No liveownedjob. Old start wording929d9b42 superseded by this terminal.
 # Latest catalog runtime draft
 
+LATEST r7/035b terminalexit1:external NPU0PID2429017 at15:53:24UTC,
+capturedCID87ab8b... independently inspected0369 as /Maxon4ick_vllm,
+NOT previouscannbench_ds. Only ownedCID947e121b...removed;external untouched.
+186samples/1publicresponse;82sources unchanged/8233free/final snapshotempty.
+All4ranks published48C1+16KV and first private48C1+16C2hot receipts,
+model32256->15880(skip16376). Private HTTP response/PDC/second request
+unfinished;wholegateNOTaccepted. Rawr7immutable, no ownedlivejob.
+FORMAL_CANARY_PDC_R7_TERMINAL_AUDIT.json retains exact attribution/hashes.
+
 LATEST r6/0338 terminalexit0:3responses,274clean isolation samples,
 78sourcehashes unchanged, exactCID996519b7...absent/8233free/final0-3empty.
 Independent audit FORMAL_CANARY_PDC_R6_TERMINAL_AUDIT.json rejects mechanism:

@@ -1,0 +1,84 @@
+{
+  "operation": "035b",
+  "result": {
+    "valid": false,
+    "error": {
+      "type": "RemoteDisconnected",
+      "message": "Remote end closed connection without response"
+    },
+    "guard_errors": [
+      {
+        "type": "RuntimeError",
+        "message": "Foreign physical process detected",
+        "raw": null
+      }
+    ],
+    "isolation_samples": 186,
+    "responses": 1,
+    "worker_pids": [
+      2352144,
+      2352145,
+      2352146,
+      2352147
+    ],
+    "physical_devices_seen": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "release": {
+      "owned_container": "947e121bbe911fa924f3171ffef35dbc2d38f00f22d43a65738311e22f274e76",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": [
+        [
+          0,
+          2429017
+        ]
+      ]
+    }
+  },
+  "foreign": [
+    {
+      "utc": "2026-10-14T15:53:24.822048+00:00",
+      "npu": 0,
+      "pid": 2429017,
+      "ownership_status": "foreign-cgroup",
+      "container_ids": [
+        "87ab8b2137c62e965c4ed88ce241b306794316cc04625770648a1d1c3bd1caaa"
+      ]
+    }
+  ],
+  "foreign_container_name": "/Maxon4ick_vllm",
+  "sources": 82,
+  "exact_own_absent": true,
+  "final_physical_processes": [],
+  "worker_event_counts": {
+    "compact_hypic_hooks_installed": 4,
+    "native_request_progress": 16,
+    "compact_public_state_published": 192,
+    "compact_public_kv_published": 64,
+    "compact_gdn_body_composed": 192,
+    "compact_c2_queries_completed": 64,
+    "compact_model_rows_completed": 4
+  },
+  "mechanism_accepted": false,
+  "scope": "partial mechanism only;private responses/PDC/fullgate interrupted",
+  "raw_hashes": {
+    "result.json": "2000bed86bb1ea4060a8d2de7da73362cbc08c49dbdc419c3dd2b16c71e0f47f",
+    "events.jsonl": "8363c520286fd9314fc18e7fcd1fa8dd24e53e66f03e04a25142753d3770627d",
+    "service.log": "8716fefe6186e8ce3d04949008bc2d80e53aa9365e365aa594a3da571c5b9049",
+    "launch.json": "77f03426ddb39f2e7b94cf0fcd0bd9388aa49ed77cc5889448c3d71db8d5e4ae",
+    "responses.json": "c82a97246260a38c2763163f0942546e5028a693c4ec2cbfe65d3e4c4b53abb6",
+    "preflight.json": "dde329742e47a79335e93fb3edc286d1513afe485c35306ef5812b12e08e52a9",
+    "service-start.json": "d0f065c9ad863e5181ac71614ea2fa16edee91c918b97d65aa8c785308a7f8d7",
+    "isolation.json": "a6ee4af760ccd4c34013ce35b9742b783b4f4e776ef26195795249ca07887cc7",
+    "release.json": "9a4f945df4adc0095e99d85197194edb65656840b173a92ce7a93bd34440106d",
+    "diagnostics/compact-worker-58.jsonl": "5168c4a53fd1615df4d42afebe81855ea439b31a80b3de04aab3332739149d08",
+    "diagnostics/compact-worker-59.jsonl": "dfe036a694a09c4d618e45931389a3331a3056b630aacba45b662cf09bce1392",
+    "diagnostics/compact-worker-61.jsonl": "e0ce2516986a0a7c8524a2d82d2189bc5973a429b3009a0a8eda599febaed751",
+    "diagnostics/compact-worker-60.jsonl": "50db2fc9bae29176ade2f6153b2eaf8c496056a14d6d212395d2ccdf13081760"
+  },
+  "foreign_name_scope": "exact captured foreign container id queried;missing name means unresolved"
+}
