@@ -1012,3 +1012,10 @@ device stage passed or algorithm failed from these resource interruptions.
 HOST_REGRESSION_0275.json records exact command result/scope. Includes mocked
 runtime ABI tests, not NPU/model/29Skill functional acceptance. No device work.
 PDC R2 remains external-interrupted; no owned live controller.
+# CURRENT read-only occupancy observer
+
+ma exec-0000000000000277 confirmed live; no NPU allocation/service mutation.
+Every10seconds observe actual0-3 processes up to10minutes, return after180seconds
+sampled idle or bounded timeout. This is NOT reservation or new scientific gate;
+fresh physical/port admission still required before any new device launch.
+Do not duplicate observer while running; poll same handle. Device R2 terminal.

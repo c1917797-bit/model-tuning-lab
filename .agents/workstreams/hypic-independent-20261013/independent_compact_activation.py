@@ -45,7 +45,7 @@ def activate_compact_hypic(config,*,enabled=False,emit=None):
               'transition_shape':list(material.affine.transition.shape),
               'zero_state_shape':list(material.affine.zero_state.shape)})
     stop=install_owned_chain((
-        lambda:activate_compact_runner(enabled=True,allow_mixed=stage.enable_mixed),
+        lambda:activate_compact_runner(enabled=True,allow_mixed=stage.enable_mixed,emit=emit),
         lambda:stage.install_producer(enabled=True,publish=publish),
         lambda:install_compact_gdn(stage,enabled=True,emit=emit),
         lambda:install_compact_c2(stage,enabled=True,emit=emit),
