@@ -1,0 +1,76 @@
+{
+  "operation": "exec-000000000000043f",
+  "worker_census": {
+    "compact-worker-60.jsonl": {
+      "events": 23974,
+      "bytes": 8685236,
+      "counts": {
+        "compact_hypic_hooks_installed": 1,
+        "native_request_progress": 64,
+        "compact_public_state_published": 48,
+        "compact_public_kv_published": 16,
+        "compact_gdn_body_composed": 1920,
+        "compact_c2_queries_completed": 640,
+        "compact_model_rows_completed": 37,
+        "mixed_native_gdn_completed": 15936,
+        "mixed_native_c2_completed": 5312
+      },
+      "model_steps": 37
+    },
+    "compact-worker-61.jsonl": {
+      "events": 23974,
+      "bytes": 8685236,
+      "counts": {
+        "compact_hypic_hooks_installed": 1,
+        "native_request_progress": 64,
+        "compact_public_state_published": 48,
+        "compact_public_kv_published": 16,
+        "compact_gdn_body_composed": 1920,
+        "compact_c2_queries_completed": 640,
+        "compact_model_rows_completed": 37,
+        "mixed_native_gdn_completed": 15936,
+        "mixed_native_c2_completed": 5312
+      },
+      "model_steps": 37
+    },
+    "compact-worker-62.jsonl": {
+      "events": 23974,
+      "bytes": 8685236,
+      "counts": {
+        "compact_hypic_hooks_installed": 1,
+        "native_request_progress": 64,
+        "compact_public_state_published": 48,
+        "compact_public_kv_published": 16,
+        "compact_gdn_body_composed": 1920,
+        "compact_c2_queries_completed": 640,
+        "compact_model_rows_completed": 37,
+        "mixed_native_gdn_completed": 15936,
+        "mixed_native_c2_completed": 5312
+      },
+      "model_steps": 37
+    },
+    "compact-worker-63.jsonl": {
+      "events": 23974,
+      "bytes": 8685236,
+      "counts": {
+        "compact_hypic_hooks_installed": 1,
+        "native_request_progress": 64,
+        "compact_public_state_published": 48,
+        "compact_public_kv_published": 16,
+        "compact_gdn_body_composed": 1920,
+        "compact_c2_queries_completed": 640,
+        "compact_model_rows_completed": 37,
+        "mixed_native_gdn_completed": 15936,
+        "mixed_native_c2_completed": 5312
+      },
+      "model_steps": 37
+    }
+  },
+  "source_observations": [
+    "independent_compact_loader.emit hashes manifest and fsyncs every event",
+    "independent_compact_gdn_hook dispatches mixed native requests individually and synchronizes per layer",
+    "CompactLinearMaterialPool.acquire_private copies CPU transition/zero_state/conv material to device per private acquisition"
+  ],
+  "causal_status": "unproven; no profiler or matched overhead ablation yet",
+  "next_required": "Retain current regression. Measure phase-bounded diagnostic overhead and native mixed-batch dispatch before proposing new source/checkpoint; never silently remove fourworker coverage proof or reinterpret current timing."
+}
