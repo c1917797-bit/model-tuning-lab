@@ -1072,6 +1072,12 @@ Do not infer exact owner from generic error; snapshot after it is separate.
 No liveownedjob. Old start wording929d9b42 superseded by this terminal.
 # Latest catalog runtime draft
 
+Readiness follow-up: independent_material_readiness now isolates token digests,
+requires explicit selection when multiple segments appear, and rejects missing
+segment identity instead of combining unrelated GDN/KV layer counts. Host
+negative controls cover split A-linear/B-KV and incomplete selected segment.
+No NPU job launched; all prior launch bindings remain stale.
+
 CatalogCompactStage opt-in via public_segments supports per-segment identity,
 canonical B/tail producers, complete48/16 material readiness and model-wide pins.
 Private C1/KV hooks resolve per-plan digests; single-segment path unchanged.
