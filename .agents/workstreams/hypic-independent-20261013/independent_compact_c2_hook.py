@@ -17,6 +17,7 @@ def install_compact_c2(stage,*,enabled=False,emit=None):
     from independent_c2_metadata import window_metadata
     from independent_c2_reference import relocate_keys
     from independent_kv_slots import install_private_kv_parts
+    from independent_mixed_query_plan import NativeQueryPlan
     original=cls.forward
     if hashlib.sha256(Path(inspect.getfile(inspect.unwrap(original))).read_bytes()).hexdigest()!='80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390':
         raise ValueError('official C2 backend source drift')
@@ -50,6 +51,7 @@ def install_compact_c2(stage,*,enabled=False,emit=None):
         groups=[gid for gid,names in selected.attention_groups if layer.layer_name in names]
         if len(groups)!=1:raise ValueError('full-attention group association missing')
         group=groups[0];prepared=[];offset=0;all_slots=set()
+        mixed=any(isinstance(p,NativeQueryPlan) for p in selected.plans)
         with ExitStack() as leases:
             for plan in selected.plans:
                 caches=[c for c in selected.cache_slices if c.request_id==plan.request_id and c.group==group]
@@ -59,6 +61,13 @@ def install_compact_c2(stage,*,enabled=False,emit=None):
                 if all_slots.intersection(cache.slots):raise ValueError('cross-request scheduled KV alias')
                 all_slots.update(cache.slots)
                 binding=bind_c2_cache(plan,cache,writable_slots=owned[0])
+                if isinstance(plan,NativeQueryPlan):
+                    metas=tuple(window_metadata(attn_metadata,w,request_row=cache.row,
+                        cache_hit_state=AscendAttentionState.PrefillCacheHit,
+                        allow_mixed=mixed) for w in binding.windows)
+                    prepared.append((plan,binding,None,offset,None,None,metas))
+                    offset+=len(plan.retained_offsets)
+                    continue
                 generation,data=leases.enter_context(stage.compact_kv_store.acquire_private(
                     identity_key(stage.identity(layer.layer_name,plan.rank))))
                 body_len=plan.skipped_tokens
@@ -72,19 +81,22 @@ def install_compact_c2(stage,*,enabled=False,emit=None):
                 if not torch.isfinite(k).all().item() or not torch.isfinite(v).all().item():
                     raise ValueError('nonfinite compact public KV')
                 metas=tuple(window_metadata(attn_metadata,w,request_row=cache.row,
-                    cache_hit_state=AscendAttentionState.PrefillCacheHit) for w in binding.windows)
+                    cache_hit_state=AscendAttentionState.PrefillCacheHit,
+                    allow_mixed=mixed) for w in binding.windows)
                 prepared.append((plan,binding,generation,offset,k,v,metas));offset+=len(plan.retained_offsets)
             if any(t.shape[0]!=offset for t in (query,key,value,output)):
                 raise ValueError('compact C2 projected row coverage mismatch')
             if kv_cache is None or len(kv_cache)!=2:raise ValueError('native paged KV parts absent')
             for plan,binding,generation,base,k,v,metas in prepared:
-                install_private_kv_parts(kv_cache[0],kv_cache[1],k,v,
-                    binding.body_slots,set(binding.body_slots))
+                if not isinstance(plan,NativeQueryPlan):
+                    install_private_kv_parts(kv_cache[0],kv_cache[1],k,v,
+                        binding.body_slots,set(binding.body_slots))
                 for w,meta in zip(binding.windows,metas):
                     span=slice(base+w.compact_start,base+w.compact_end)
                     original(self,layer,query[span],key[span],value[span],kv_cache,meta,output[span],None,None)
                 torch.npu.synchronize()
-                emit({'event':'compact_c2_queries_completed','request_id':plan.request_id,
+                emit({'event':('mixed_native_c2_completed' if isinstance(plan,NativeQueryPlan)
+                               else 'compact_c2_queries_completed'),'request_id':plan.request_id,
                     'rank':plan.rank,'step':plan.step,'layer':layer.layer_name,
                     'generation':generation,'retained_rows':len(plan.retained_offsets),
                     'skipped_body_queries':plan.skipped_tokens,'query_windows':len(binding.windows)})

@@ -7,11 +7,14 @@ from dataclasses import replace
 import torch
 
 
-def window_metadata(native, window, *, request_row, cache_hit_state):
-    if (not native.causal or native.num_decodes or native.num_decode_tokens
+def window_metadata(native, window, *, request_row, cache_hit_state,allow_mixed=False):
+    if (not native.causal or (not allow_mixed and (native.num_decodes or native.num_decode_tokens))
             or native.prefill is not None or native.decode_meta is not None
             or native.kvcomp_metadata is not None):
         raise ValueError("C2 window requires ordinary causal pure prefill")
+    if allow_mixed and (native.num_decode_tokens!=native.num_decodes or
+                        native.num_decodes<0 or native.num_prefills<1):
+        raise ValueError('unsupported mixed decode/prefill metadata')
     if native.block_tables is None or not 0<=request_row<native.block_tables.shape[0]:
         raise ValueError("request block-table row missing")
     n=len(window.logical_positions)

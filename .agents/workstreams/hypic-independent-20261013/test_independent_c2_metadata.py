@@ -20,6 +20,19 @@ def metadata():
 
 
 class MetadataTests(unittest.TestCase):
+    def test_explicit_mixed_window_removes_decode_counts_without_mutation(self):
+        native=metadata();native.num_decodes=1;native.num_decode_tokens=1
+        window=BoundQueryWindow(0,1,(4,),(12,),5,(9,3))
+        result=window_metadata(native,window,request_row=1,
+                               cache_hit_state='paged',allow_mixed=True)
+        self.assertEqual((result.num_decodes,result.num_decode_tokens,result.num_prefills),(0,0,1))
+        self.assertEqual(result.query_start_loc.tolist(),[0,1])
+        self.assertEqual(result.seq_lens_list,[5])
+        self.assertEqual(native.num_decodes,1)
+        native.num_decode_tokens=2
+        with self.assertRaises(ValueError):
+            window_metadata(native,window,request_row=1,cache_hit_state='paged',allow_mixed=True)
+
     def test_window_preserves_other_request_and_native_object(self):
         native=metadata()
         window=BoundQueryWindow(0,2,(3,4),(39,12),5,(9,3))

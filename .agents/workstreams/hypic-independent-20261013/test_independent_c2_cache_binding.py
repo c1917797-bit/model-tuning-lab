@@ -8,6 +8,17 @@ from independent_c2_cache_binding import bind_c2_cache
 
 
 class CacheBindingTests(unittest.TestCase):
+    def test_native_decode_has_no_public_body_and_writes_only_new_slot(self):
+        from independent_mixed_query_plan import NativeQueryPlan
+        p=NativeQueryPlan('d',1,4,0,5,1,'decode')
+        c=CacheSlice('d',1,4,2,0,4,(9,3),(13,))
+        b=bind_c2_cache(p,c,writable_slots=(13,))
+        self.assertEqual(b.body_slots,())
+        self.assertEqual(b.windows[0].logical_positions,(5,))
+        self.assertEqual(b.windows[0].write_slots,(13,))
+        self.assertEqual(b.windows[0].kv_end,6)
+        with self.assertRaises(ValueError):bind_c2_cache(p,c,writable_slots=(12,))
+
     def fixture(self,computed=0):
         req=RequestSlice('r',1,4,computed,12,0,0,12)
         seg=SegmentSelection(computed+2,computed+10,False,'x')

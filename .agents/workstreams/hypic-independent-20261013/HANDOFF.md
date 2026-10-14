@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST mixed C2 dispatch implemented but NOT admitted by selector: native
+entries bind every scheduled KV write to exact current-step lease, have empty
+public body and no public material acquisition/install. Per-request paged
+causal window dispatch emits mixed_native_c2_completed, never hot proof.
+Official0142 confirms PrefillCacheHit uses request block tables/seq_lens; explicit
+allow_mixed metadata resets counts to one pure request, rejects CP/KVcomp and
+count drift, leaves original metadata intact.0145 passes13 metadata/cache/mixed
+plan controls. Next source-bound integrated fixture for mixed GDN/C2/model,
+then selector/runtime admission and new hash-bound official-image gate. No
+device task, no performance or quality claim; old manifests now intentionally
+fail source binding and must not be launched.
+
 LATEST mixed GDN computation dispatch implemented: NativeQueryPlan entries
 compute EVERY retained live row via existing official-primitive boundary runner,
 never acquire/apply public material. Native state/conv copies are prepared before

@@ -23,6 +23,10 @@ class NativeQueryPlan:
     @property
     def skipped_tokens(self): return 0
     @property
+    def body_start(self): return 0
+    @property
+    def body_end(self): return 0
+    @property
     def windows(self):
         return (QueryWindow(0,self.scheduled_tokens,
                 self.computed_tokens+self.scheduled_tokens,0,self.scheduled_tokens),)
