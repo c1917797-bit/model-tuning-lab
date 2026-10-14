@@ -170,6 +170,12 @@ load. This rule does not guarantee the first real-device attempt will pass.
   follow-up, then verify it is running. If capacity prevents continuation, retain
   its existing files and transfer the missing narrow gate to an available owner;
   do not count queued messages or a source delivery as active preparation.
+- Separate preparer completion from device dispatch: completing an independent
+  preparation node submits artifacts for MAIN review and queueing, not permission
+  to launch. Reassign its agent to another independent preparation node without
+  waiting for card availability. A dependent repair or downstream gate waits for
+  its actual predecessor evidence; MAIN alone dispatches a qualified ready node
+  after fresh resource admission and verified release of overlapping leases.
 - A real-device failure retains the first raw-before/exception/nullable-after
   and has a scoped implementation diagnosis. No unchanged deterministic retry,
   relaxed threshold, fake padded batch, dummy utilization or paper-wide no-go
