@@ -1,0 +1,52 @@
+{
+  "operation": "0338",
+  "result": {
+    "valid": true,
+    "error": null,
+    "guard_errors": [],
+    "isolation_samples": 274,
+    "responses": 3,
+    "worker_pids": [
+      2133659,
+      2133660,
+      2133661,
+      2133662
+    ],
+    "physical_devices_seen": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "release": {
+      "owned_container": "996519b7a3c612f5944469437745fa61f7451547d4f3de2d1b302ba48d446619",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    }
+  },
+  "sources": 78,
+  "exact_own_absent": true,
+  "final_physical_processes": [],
+  "worker_event_counts": {
+    "compact_hypic_hooks_installed": 4,
+    "native_request_progress": 24
+  },
+  "mechanism_accepted": false,
+  "reason": "chunked public producer has no complete material publication;native responses do not prove HYPIC reuse",
+  "raw_hashes": {
+    "result.json": "a84914f98ff85c46ac4c3121257da5d2cb2b3dfa5e39efcaeed188e96613e044",
+    "events.jsonl": "019535bc7b931007b08e715cfd143d402d71e88cf5cac6e78b081ca3158b182b",
+    "service.log": "01b1e80c4e9d66ef837c1b0ca0f8651fa675082712d9acf7e9b8a75c0f64ab0b",
+    "launch.json": "cb681505246a1184246b6a0d69138d64b8f20189af42078b584aa75de1deebc1",
+    "responses.json": "745da0ba0deb451d7147e22e9fefb1e1e54ae2fd7bdd0a957c893b77c5d7288b",
+    "preflight.json": "861d65e0851f8e82283d92e93c231accae5719cf741311d58ad7f85152b35e93",
+    "service-start.json": "d5cf1c8bdad3da7acd3ee536870ad68017686d85bbec8182df7aa8dceda41698",
+    "isolation.json": "2d65dbf147b654889f72f3cc0ea029cfbd3c9f140f517ef9e3d2e72fd319553a",
+    "release.json": "612be5e13d80bfc07603c73da7d47f8f2f399866460b7e7b69eb45ce13ee93c0",
+    "diagnostics/compact-worker-58.jsonl": "9b426e132fcc4bd7fb504578b9cccf4d41db7e0fc3eb2f6cc5cf455e3babd35e",
+    "diagnostics/compact-worker-59.jsonl": "75388d90ba22370834fda9c56c6f60e1cba9074d6812eaaf0c8f29c30c7006fd",
+    "diagnostics/compact-worker-61.jsonl": "3b7e52a1e6a8d41b21fb28eda96e0be916f86aabe792fdc50373b0bfb8054252",
+    "diagnostics/compact-worker-60.jsonl": "133b55142e0954a35137460322dedefb053a8e9755a2febc6ad00d31484912cc"
+  }
+}

@@ -1072,6 +1072,15 @@ Do not infer exact owner from generic error; snapshot after it is separate.
 No liveownedjob. Old start wording929d9b42 superseded by this terminal.
 # Latest catalog runtime draft
 
+LATEST r6/0338 terminalexit0:3responses,274clean isolation samples,
+78sourcehashes unchanged, exactCID996519b7...absent/8233free/final0-3empty.
+Independent audit FORMAL_CANARY_PDC_R6_TERMINAL_AUDIT.json rejects mechanism:
+only4install+24progress events, no publicmaterial/privateC1/C2 hot receipts.
+Publicproducer was15360+1280 scheduled chunks;complete-prefill selector skipped
+publication. Private responses were nativefallback, NOT HYPIC acceptance.
+No liveownedNPUjob. Raw r6immutable. Integrate independently tested chunk
+coverage/C1 composition/KV assembly before new source-bound device attempt.
+
 Latest device terminal: r5/02cf exited1 at14:09UTC after foreign NPU0PID1435885
 from cannbench_ds appeared during initialization.93samples/0responses.
 Independent02d9 checks73source hashes unchanged, exact ownedCIDefad06b... absent,
