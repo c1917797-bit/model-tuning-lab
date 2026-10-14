@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST 16:31UTC: checkpoint1ff4d72d freezes prospective r9 contract/manifest.
+68e6c9c2 adds same-artifact nativeA8192+tail256 unscored warmup and actual
+/proc/PID/status NSpid capture (no PID-order inference). Host038c242tests,
+038d8448-token artifact check and0390structure29 PASS. No new NPU launch.
+R8 unchanged: two long private fourrank48C1/16C2 PASS, PDCfirstcomputed0
+and missing physical namespace map keep wholeCanary unaccepted.
+Next revalidate r9 controller/support/manifest hashes, newroot absent,
+physical0-3/8233 and external evaluators fresh idle, then launch exact r9
+controller once and persist handle. 0394 momentary0-3empty is NOT reservation.
+Full performance/quality/lifecycle pending; no new remote-publication claim.
+
 LATEST long-r5/0214 terminalexit1,0responses,99samples. Physical0PID105755
 at11:58:47UTC twice has confirmed foreign-cgroupefc5e45e.../cannbench_ds;
 NOT ambiguous root cgroup or our worker. Exact8f2fb34f... absent independently;
