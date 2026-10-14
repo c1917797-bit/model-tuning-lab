@@ -961,3 +961,12 @@ Loader accepts hash-bound external public_token_artifact;0255 host controls pass
 FORMAL_COMPACT_CONFIG binds sealed publicB;future service needs read-only
 /inputs/tokens.json mount and NEW manifest. Loader SHA changed after r8 terminal;
 old manifests MUST NOT launch. No liveownedNPUjob; actual worker activation pending.
+# CURRENT formal-token PDC Canary
+
+ma exec-000000000000025e started from f95f87b5 after025d59hashes/newroot/
+physical0-3empty/8233free checks. Raw formal-canary-pdc-r1 under
+/cache/cch/hypic-independent-20261013. Only0-3 TP4/27B, actual tokenizer B16384
+producer then2private A8192+bridge+B+tail32K/output1024. Native PDC enabled.
+Poll exact handle/root; running or unclear no restart or mounted-source edits.
+Independent terminal audit must prove fourrank materials/reuse/PDCcomputed prefix,
+sources/request tokens/isolation/exact owned release; not formal performance.
