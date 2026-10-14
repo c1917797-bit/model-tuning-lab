@@ -39,12 +39,12 @@ def pin_complete_material(linear_pool,kv_pool,linear_keys,kv_keys):
 class CompactCanonicalStage(CanonicalPublicStage):
     def __init__(self,*,model_identity,code_identity,public_tokens,
                  capacity_bytes,boundary_tokens=8,kv_capacity_bytes=536870912,
-                 enable_mixed=False,allow_public_tail=False):
+                 enable_mixed=False,allow_public_tail=False,allow_public_chunks=False):
         if type(enable_mixed) is not bool:raise ValueError('explicit mixed boolean required')
         self.enable_mixed=enable_mixed
         super().__init__(model_identity=model_identity,code_identity=code_identity,
             public_tokens=public_tokens,capacity_bytes=capacity_bytes,boundary_tokens=boundary_tokens,
-            allow_public_tail=allow_public_tail)
+            allow_public_tail=allow_public_tail,allow_public_chunks=allow_public_chunks)
         self.compact_store=CompactLinearMaterialPool(capacity_bytes)
         self.store=self.compact_store
         self.compact_kv_store=PublicPool(kv_capacity_bytes)
@@ -117,4 +117,5 @@ class CompactCanonicalStage(CanonicalPublicStage):
     def install_producer(self,*,enabled=False,publish=None):
         from independent_public_gdn_hook import install_public_gdn_producer
         return install_public_gdn_producer(enabled=enabled,select_public=self.select_public,
-            publish=self.publish if publish is None else publish,compact=True)
+            publish=self.publish if publish is None else publish,compact=True,
+            allow_chunks=self.allow_public_chunks)

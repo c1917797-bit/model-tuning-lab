@@ -20,6 +20,7 @@ def install_compact_c2(stage,*,enabled=False,emit=None):
     from independent_mixed_query_plan import NativeQueryPlan
     from independent_plan_material_identity import identity_for_plan
     original=cls.forward
+    public_chunks={}
     if hashlib.sha256(Path(inspect.getfile(inspect.unwrap(original))).read_bytes()).hexdigest()!='80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390':
         raise ValueError('official C2 backend source drift')
     if getattr(original,'_independent_c2_owned',False) or getattr(original,'_independent_compact_c2_owned',False):
@@ -40,6 +41,26 @@ def install_compact_c2(stage,*,enabled=False,emit=None):
                     with stage.compact_kv_store.lock:present=cache_key in stage.compact_kv_store.entries
                     if not present:
                         cut=stage.boundary
+                        if stage.allow_public_chunks:
+                            from independent_public_chunk_plan import public_chunk
+                            from independent_public_chunk_kv import PublicChunkKV
+                            chunk=public_chunk(req.computed_tokens,req.scheduled_tokens,
+                                identity.length,boundary=identity.boundary_tokens)
+                            assembly_key=(req.request_id,cache_key)
+                            if assembly_key not in public_chunks:
+                                if req.computed_tokens!=0 or len(public_chunks)>=64:
+                                    raise ValueError("bounded zero-start KV producer required")
+                                public_chunks[assembly_key]=PublicChunkKV(req.request_id,identity)
+                            data=public_chunks[assembly_key].accept(req.request_id,identity,chunk,
+                                key.reshape(key.shape[0],1,256),value.reshape(value.shape[0],1,256))
+                            if data is not None:
+                                stage.compact_kv_store.publish(cache_key,data)
+                                emit({'event':'compact_public_kv_published','rank':req.rank,
+                                    'layer':layer.layer_name,'body_tokens':identity.length-cut,
+                                    'tokens_sha256':identity.tokens_sha256,
+                                    'producer_request_id':req.request_id,'chunked':True})
+                                del public_chunks[assembly_key]
+                            return native()
                         stage.compact_kv_store.publish(cache_key,{
                             'keys':key.reshape(key.shape[0],1,256)[cut:identity.length].detach().to('cpu'),
                             'values':value.reshape(value.shape[0],1,256)[cut:identity.length].detach().to('cpu'),
@@ -108,4 +129,5 @@ def install_compact_c2(stage,*,enabled=False,emit=None):
     def stop():
         if cls.forward is not wrapped:raise RuntimeError('compact C2 hook ownership changed')
         cls.forward=original
+        public_chunks.clear()
     return stop

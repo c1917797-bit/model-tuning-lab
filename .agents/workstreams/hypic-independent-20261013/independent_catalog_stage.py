@@ -29,7 +29,11 @@ class CatalogCompactStage(CompactCanonicalStage):
     def is_public_prompt(self,tokens):return self.public_digest(tokens) is not None
     def public_identity_for_request(self,layer,request,tokens):
         digest=self.public_digest(tokens)
-        if digest is None or request.computed_tokens!=0 or request.scheduled_tokens!=len(tokens):return None
+        if digest is None:return None
+        length=len(self.catalog.tokens(digest))
+        if self.allow_public_chunks:
+            if not 0<=request.computed_tokens<length or request.scheduled_tokens<=0:return None
+        elif request.computed_tokens!=0 or request.scheduled_tokens!=len(tokens):return None
         return self.identity(layer,request.rank,tokens_sha256=digest)
     def select_mixed(self,model,requests,prompts,snap):
         linear,full=self.layer_inventory(model)

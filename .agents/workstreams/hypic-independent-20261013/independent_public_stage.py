@@ -6,7 +6,9 @@ from independent_runner_context import CURRENT_PROMPT_TOKENS
 
 class CanonicalPublicStage:
     def __init__(self,*,model_identity,code_identity,public_tokens,capacity_bytes,
-                 boundary_tokens=8,allow_public_tail=False):
+                 boundary_tokens=8,allow_public_tail=False,allow_public_chunks=False):
+        if type(allow_public_chunks) is not bool:raise ValueError("explicit public-chunk boolean required")
+        self.allow_public_chunks=allow_public_chunks
         if type(allow_public_tail) is not bool:raise ValueError("explicit public-tail boolean required")
         self.allow_public_tail=allow_public_tail
         if not model_identity or not code_identity:raise ValueError("frozen source identities required")
@@ -31,7 +33,9 @@ class CanonicalPublicStage:
         return identity
     def public_identity_for_request(self,layer,request,tokens):
         if not self.is_public_prompt(tokens):return None
-        if request.computed_tokens!=0 or request.scheduled_tokens!=len(tokens):return None
+        if self.allow_public_chunks:
+            if not 0<=request.computed_tokens<len(self.tokens) or request.scheduled_tokens<=0:return None
+        elif request.computed_tokens!=0 or request.scheduled_tokens!=len(tokens):return None
         return self.identity(layer,request.rank)
     def is_public_prompt(self,tokens):
         if tokens is None:return False
