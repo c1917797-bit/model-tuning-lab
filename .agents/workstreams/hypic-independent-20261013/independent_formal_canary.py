@@ -3,7 +3,11 @@ import hashlib,json
 from pathlib import Path
 
 def load_formal_canary(spec):
-    if set(spec)!={"path","sha256"}:raise ValueError("exact artifact path/hash required")
+    if not {"path","sha256"}<=set(spec) or set(spec)-{"path","sha256","public_tail_tokens"}:
+        raise ValueError("exact artifact path/hash and optional producer tail required")
+    tail_length=spec.get("public_tail_tokens",0)
+    if type(tail_length) is not int or tail_length not in (0,256):
+        raise ValueError("producer tail must be0 or256")
     path=Path(spec["path"])
     if not path.is_absolute() or path.is_symlink() or path.stat().st_size>33554432:
         raise ValueError("bounded absolute token artifact required")
@@ -12,7 +16,13 @@ def load_formal_canary(spec):
     d=json.loads(data);reqs=d["requests"];public=d["public_segment"]
     if len(reqs)!=40 or len(public)!=16384 or len(d["native_prefix"])!=8192:
         raise ValueError("formal artifact denominator mismatch")
-    prompts=[public]
+    producer=list(public)
+    if tail_length:
+        first=reqs[0];end=first["segment_end"]
+        tail=first["token_ids"][end:end+tail_length]
+        if len(tail)!=tail_length:raise ValueError("producer tail unavailable")
+        producer+=tail
+    prompts=[producer]
     for i in (0,1):
         r=reqs[i];s=8192+1024+i*512
         if r["index"]!=i or r["segment_start"]!=s or r["segment_end"]!=s+16384:
