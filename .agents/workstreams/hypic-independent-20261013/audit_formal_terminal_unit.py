@@ -35,7 +35,8 @@ def audit_unit(raw_root, contract_path):
         raise ValueError("owned service/image drift")
     if set(start["devices"])!={"/dev/davinci"+str(i) for i in range(4)}:
         raise ValueError("physical device declaration mismatch")
-    expected=contract.get("baseline_host_source_sha256",{})
+    expected=contract.get("baseline_host_source_sha256") or contract.get("cache_diagnostic",{}).get("source_sha256",{})
+    if not expected:raise ValueError("complete bound source map required")
     drift=[name for name,digest in expected.items() if hashlib.sha256(Path(name).read_bytes()).hexdigest()!=digest]
     if drift:raise ValueError("source drift: "+repr(drift))
     if hashlib.sha256(Path("native_tp4_smoke.py").read_bytes()).hexdigest()!=contract["controller_sha256"]:
