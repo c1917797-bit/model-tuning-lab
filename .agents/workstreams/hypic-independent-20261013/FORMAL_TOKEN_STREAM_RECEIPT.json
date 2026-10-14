@@ -1,0 +1,16 @@
+{
+  "schema": "independent-formal-tokens/v1",
+  "requests": 40,
+  "input_tokens": 32768,
+  "native_prefix_tokens": 8192,
+  "pic_tokens": 16384,
+  "tokenizer_sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+  "builder_sha256": "9c0043faa9e94b4e72465cfb49d2321a05e51c6275fab5b45c7deaaec59cd882",
+  "payload_digest": "50f528fa8eb439c56219b0161b16bf12fb2a8fd80effab87d89d725a4cc4c72f",
+  "output_tokens": 1024,
+  "concurrency": 16,
+  "same_input_all_groups": true,
+  "scope": "CPU token artifact only; warmup/service/quality not executed",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-token-streams-r1",
+  "independent_audit_operation": "exec-0000000000000247"
+}
