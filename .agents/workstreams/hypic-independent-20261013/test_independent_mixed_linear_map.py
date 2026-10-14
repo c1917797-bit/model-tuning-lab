@@ -4,6 +4,17 @@ from independent_request_map import RequestSlice
 from independent_mixed_linear_map import freeze_mixed_linear_slices
 
 class MixedLinearTests(unittest.TestCase):
+    def test_first_token_prefill_is_not_stateful_decode(self):
+        r=RequestSlice('first',0,1,0,1,0,0,1)
+        result=freeze_mixed_linear_slices((r,),[0,1],[2],[False],
+            state_capacity=4,num_decodes=0,num_prefills=1,num_decode_tokens=0,
+            prefill_query_start=[0,1],prefill_state_indices=[2],
+            prefill_has_initial=[False])
+        self.assertFalse(result[0].has_initial_state)
+        with self.assertRaises(ValueError):
+            freeze_mixed_linear_slices((r,),[0,1],[2],[False],
+                state_capacity=4,num_decodes=1,num_prefills=0,num_decode_tokens=1)
+
     def reqs(self):
         return (RequestSlice('d',1,7,100,1,0,0,1),
                 RequestSlice('h',1,7,0,32,1,1,33),

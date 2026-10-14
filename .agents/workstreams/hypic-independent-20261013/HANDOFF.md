@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST actual Ascend builder checked014c/014d: SHA42cc0284..., distinct from
+base gdn_attn.py. Adapter now binds BOTH actual builder and metadata source.
+Fixed one-token FIRST prefill classification: no computed state remains prefill;
+only one-token STATEFUL rows qualify decode.014e passes10 mixed association/
+model controls;014a passes16 model/native-GDN/C2 controls. Mixed model fixture
+retains decode/cold rows, prunes hot body and restores all3sample endpoints;
+late error releases pins/context. NOT full actual GDN+C2 integrated fixture or
+NPU acceptance; next complete handler fixtures and enable scoped mixed selector.
+
 LATEST mixed C2 dispatch implemented but NOT admitted by selector: native
 entries bind every scheduled KV write to exact current-step lease, have empty
 public body and no public material acquisition/install. Per-request paged

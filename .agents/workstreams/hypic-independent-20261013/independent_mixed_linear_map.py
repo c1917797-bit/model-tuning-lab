@@ -25,7 +25,8 @@ def freeze_mixed_linear_slices(requests,query_start,state_indices,has_initial,
             (r.rank,r.step)!=identity or
             (r.token_start,r.token_end)!=(starts[row],starts[row+1]) or
             r.scheduled_tokens!=starts[row+1]-starts[row] or
-            (r.scheduled_tokens==1)!=(row<num_decodes) or
+            (row<num_decodes and (r.scheduled_tokens!=1 or r.computed_tokens<1)) or
+            (row>=num_decodes and r.scheduled_tokens==1 and r.computed_tokens>0) or
             r.scheduled_tokens<1 or initial[row]!=(r.computed_tokens>0)):
             raise ValueError('decode-first request/state identity drift')
         seen.add(r.request_id)

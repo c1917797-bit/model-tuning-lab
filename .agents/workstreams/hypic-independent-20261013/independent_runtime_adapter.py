@@ -40,6 +40,7 @@ def associate_native_mixed_linear(layer,requests,metadata):
     """
     from vllm.model_executor.layers.mamba.gdn.qwen_gdn_linear_attn import QwenGatedDeltaNetAttention
     from vllm.v1.attention.backends.gdn_attn import GDNAttentionMetadata
+    from vllm_ascend.ops.gdn_attn_builder import AscendGDNAttentionMetadataBuilder
     from independent_mixed_linear_map import freeze_mixed_linear_slices
     if type(layer) is not QwenGatedDeltaNetAttention or type(metadata) is not GDNAttentionMetadata:
         raise ValueError('unexpected mixed GDN runtime identity')
@@ -47,6 +48,8 @@ def associate_native_mixed_linear(layer,requests,metadata):
         raise ValueError('official mixed GDN source drift')
     if hashlib.sha256(Path(inspect.getfile(GDNAttentionMetadata)).read_bytes()).hexdigest()!='27f5561c4b191f2be5a4a91820a6c64a38b755477b3f037178fb02bbc3bc1caf':
         raise ValueError('official mixed metadata builder drift')
+    if hashlib.sha256(Path(inspect.getfile(AscendGDNAttentionMetadataBuilder)).read_bytes()).hexdigest()!='42cc0284b57193112b8a8ad19704aa3401f02294f0c36333c307d748f462fe16':
+        raise ValueError('actual Ascend mixed metadata builder drift')
     if metadata.num_prefills<1 or metadata.has_initial_state is None:
         raise ValueError('mixed association requires native prefill tail')
     conv,state=layer.kv_cache[:2]

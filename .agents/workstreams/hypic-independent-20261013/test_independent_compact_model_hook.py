@@ -7,6 +7,53 @@ from independent_compact_model_hook import CompactModelSelection,install_compact
 
 
 class ModelHookTests(unittest.TestCase):
+    def test_mixed_decode_hot_and_cold_restore_each_sampler_row(self):
+        from independent_mixed_query_plan import plan_mixed_queries
+        requests=(RequestSlice('decode',0,8,100,1,0,0,1),
+                  RequestSlice('hot',0,8,0,32,1,1,33),
+                  RequestSlice('cold',0,8,8,4,2,33,37))
+        plans=plan_mixed_queries(requests,
+            {'hot':SegmentSelection(8,24,False,'x')},{'hot'},
+            seam_tokens=8,public_length=16)
+        selection=CompactModelSelection(plans,(0,32,36))
+        Base,Model=self.classes();events=[]
+        stop=install_compact_model(Model,enabled=True,verify_source=lambda c:None,
+            select=lambda *args:selection,emit=events.append)
+        ids=torch.arange(37)
+        positions=torch.cat((torch.tensor([100]),torch.arange(32),torch.arange(8,12)))
+        try:
+            model=Model();out=model.forward(ids,positions)
+            self.assertEqual(model.rows,29)
+            for row in (0,32,36):
+                self.assertEqual(out[row,0].item(),(ids[row]+positions[row]).item())
+            self.assertTrue((out[17:25]==0).all())
+            self.assertEqual(events[0]['request_ids'],['decode','hot','cold'])
+            self.assertIsNone(CURRENT_COMPACT_MODEL.get())
+        finally:stop()
+        self.assertIs(Model.forward,Base.forward)
+
+    def test_mixed_failure_unpins_material_and_restores_context(self):
+        from contextlib import contextmanager
+        from independent_mixed_query_plan import NativeQueryPlan
+        flags=[]
+        @contextmanager
+        def guard():
+            flags.append('pin')
+            try:yield
+            finally:flags.append('unpin')
+        selection=CompactModelSelection(
+            (NativeQueryPlan('native',0,1,0,0,12,'cold-material'),),
+            (11,),material_guard=guard())
+        Base,Model=self.classes()
+        stop=install_compact_model(Model,enabled=True,verify_source=lambda c:None,
+            select=lambda *args:selection,emit=lambda e:None)
+        try:
+            model=Model();model.fail=True
+            with self.assertRaises(RuntimeError):model.forward(torch.arange(12),torch.arange(12))
+            self.assertEqual(flags,['pin','unpin'])
+            self.assertIsNone(CURRENT_COMPACT_MODEL.get())
+        finally:stop()
+
     def classes(self):
         class Base:
             def forward(self,ids,positions,intermediate_tensors=None,inputs_embeds=None):
