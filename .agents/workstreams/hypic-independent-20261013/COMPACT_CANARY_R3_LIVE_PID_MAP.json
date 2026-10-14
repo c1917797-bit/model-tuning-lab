@@ -1,0 +1,41 @@
+{
+  "utc": "2026-10-14T08:41:06.954359+00:00",
+  "container_id": "1b877089cba3c3296b3671a45ce18dd48bb789604267079d344a9c58708f8c8b",
+  "rows": [
+    {
+      "physical_npu": 0,
+      "host_pid": 2225315,
+      "owned": true,
+      "namespace_pid_line": "NSpid:\t2225315\t57",
+      "exact_cgroup_matches": true
+    },
+    {
+      "physical_npu": 1,
+      "host_pid": 2225316,
+      "owned": true,
+      "namespace_pid_line": "NSpid:\t2225316\t58",
+      "exact_cgroup_matches": true
+    },
+    {
+      "physical_npu": 2,
+      "host_pid": 2225317,
+      "owned": true,
+      "namespace_pid_line": "NSpid:\t2225317\t59",
+      "exact_cgroup_matches": true
+    },
+    {
+      "physical_npu": 3,
+      "host_pid": 2225318,
+      "owned": true,
+      "namespace_pid_line": "NSpid:\t2225318\t60",
+      "exact_cgroup_matches": true
+    }
+  ],
+  "foreign_count": 0,
+  "worker_files": [
+    "compact-worker-58.jsonl",
+    "compact-worker-57.jsonl",
+    "compact-worker-59.jsonl",
+    "compact-worker-60.jsonl"
+  ]
+}

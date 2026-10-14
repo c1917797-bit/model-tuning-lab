@@ -1,5 +1,27 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST compact-canary-r3/00e9 terminalexit0. Independent00f9 PASS: canonical
+public48C1+16C2/rank; two private requests on ALL4ranks each48C1+16C2,
+80original/24retained/56body rows skipped,8decode tokens each. Exact API IDs
+joined via official completion -0 then engine8hex random suffix; source
+manifestb1ee892a... and all50support hashes unchanged. Live NSpid/cgroup map
+binds worker57/58/59/60 to host2225315/16/17/18 and physical0/1/2/3.
+155clean isolation samples; exact1b877089... absent/8233free/final0–3empty.
+COMPACT_CANARY_R3_AUDIT.json retains all raw/worker hashes. This establishes
+real compact integrated mechanism, NOT formal latency or task quality.
+Root immutable, no rerun. No owned live device job. Next actual16K PIC/32K
+input/full-generation gate and mixed/PDC/graph admission before frozen formal
+G1–G4 three-round performance and paired quality/lifecycle. Keep deadline fixed.
+
+CURRENT compact-canary-r3 exec-00000000000000e9 on ma peer
+lgw_a6109c51076a4a2c9d2674ca5a8704a0; checkpoint2e0069d2, raw root
+/cache/cch/hypic-independent-20261013/compact-canary-r3.08:36UTC00e5 confirms
+known evaluatorPID2146605 ended/physical0–3empty/8233free;00e6 confirms no
+active kernel_eval evaluator in previous foreign container. New frozen r3
+root, same implementation/protocol. Poll exact handle/root; no mounted-source
+edits or restart while live/uncertain. Terminal independently audit mechanism
+with audit_compact_mechanism plus response/source/PID/physical/release evidence.
+
 LATEST compact-canary-r2/00d9 terminalexit1,0responses,4samples: foreign
 physical0PID2142484 incannbench_ds/efc5e45e... appeared in startup; owned
 28a68d800a8a... removed/8233free, final snapshotempty. This is another external

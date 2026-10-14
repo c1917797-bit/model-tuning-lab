@@ -1,0 +1,55 @@
+{
+  "api_request_links": {
+    "cmpl-9c8f40a6d2ad302b-0-b6bd260b": "cmpl-9c8f40a6d2ad302b",
+    "cmpl-ac0d8dbb5f11454e-0-a3d5e27b": "cmpl-ac0d8dbb5f11454e"
+  },
+  "completion_tokens": [
+    1,
+    8,
+    8
+  ],
+  "container": "1b877089cba3c3296b3671a45ce18dd48bb789604267079d344a9c58708f8c8b",
+  "manifest_sha256": "b1ee892abaa8b7dd96083c04713dae51a159b8d989270f68e115d2b45d61023c",
+  "mechanism": {
+    "per_rank_full_layers": 16,
+    "per_rank_linear_layers": 48,
+    "quality_or_numeric_equivalence_proven": false,
+    "requests": [
+      "cmpl-9c8f40a6d2ad302b-0-b6bd260b",
+      "cmpl-ac0d8dbb5f11454e-0-a3d5e27b"
+    ],
+    "scope": "hash-bound all-rank/all-layer compact mechanism coverage only",
+    "skipped_body_rows": 56,
+    "worker_pids": {
+      "0": 57,
+      "1": 58,
+      "2": 59,
+      "3": 60
+    }
+  },
+  "pass": true,
+  "raw_sha256": {
+    "events.jsonl": "e580ec7df130ef5bf9dcffb9397efbe5b126eea0b197220e42331ffbbc6e4635",
+    "isolation.json": "6f35ec507d0b3679ded6d55deea8c2e478d76ecc59f6d333d23b6eecc55e6369",
+    "launch.json": "2648bea49b889847bdc105ee636559a86eee357b1ea4fd92eeb111c4819443ea",
+    "preflight.json": "26858915927071a221a3ef47a9bcc39eeb40e6a688b0edc6159392b231f3bd51",
+    "release.json": "1f83a9f3bee1e6079b020c2755ead7fe080387dca20f93ffe317cb544a7070a5",
+    "responses.json": "b947123e0346f202240b23c56b4cac5907b0bbc0f5b016da6580b52e21444710",
+    "result.json": "53f79f8f620b2bb99d09e787e0e6b1a19f4d6c76b00297ab6cf557a7e9e10845",
+    "service-start.json": "04c3f143a6784dfa1286ad0d827ed98af74bb5a6475379aabeb71dcde2999367",
+    "service.log": "ef6a0aff9ac8e4e1fa72a855ccf356bcc93f7d1220c7e0faca6f8a497b0bcecb"
+  },
+  "responses": 3,
+  "samples": 155,
+  "worker_ledger_sha256": {
+    "compact-worker-57.jsonl": "055b82fb2645072b0866c1b314d4883217b678a3dfa055469a5c7640bff4c7e4",
+    "compact-worker-58.jsonl": "2935942a2ff246d0e1dc93b0275f120136328d2d16d4850cee37454b6bf60ad1",
+    "compact-worker-59.jsonl": "a76ef659c10926e8cffba0566f07098421887951bf50f119f8389e49b99f0fc1",
+    "compact-worker-60.jsonl": "b105a79fa9c589f6193f36a97f4c3e28e2426c16c47f80c9d22daee5ba431cab"
+  },
+  "audit_operation": "exec-00000000000000f9",
+  "controller_operation": "exec-00000000000000e9",
+  "raw_root": "/cache/cch/hypic-independent-20261013/compact-canary-r3",
+  "request_id_source_rule": "Official completion/serving.py adds -0; v1/engine/input_processor.py appends - plus8hex random_uuid. Verified pinned image source before API association.",
+  "next_gate": "Long-segment/full-generation, mixed batching/PDC and matched performance/quality/lifecycle remain unverified."
+}
