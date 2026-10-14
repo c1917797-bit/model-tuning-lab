@@ -1,5 +1,12 @@
 # Full127 CPU token freeze
 
+Latest031b r3 CPU generator exit0. inputsSHA unchanged2f61c72f... proves all
+127 request rows preserved; catalogSHA now
+fb13827a063b32df1131e17bf4b29ea008380d55ab0a2e7debe8a845e30ed792.
+0313 old-r2 full-catalog audit exit0 after155108ms,0selection errors with
+in-memory126segment dedup; oldr2 still not loader-ready. Fresh r3 independent
+audit exec-000000000000031d started; poll exacthandle before acceptance.
+
 Latest0310 terminal timeout120s, no conclusion.0313 same immutable-r2 audit
 running with900s limit; poll exact handle, do not duplicate.
 0314 independently found127catalog entries but126unique token identities.
