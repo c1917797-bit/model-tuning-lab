@@ -1,0 +1,25 @@
+{
+  "operation": "exec-0000000000000442",
+  "host_only": true,
+  "synthetic_events_per_trial": 1000,
+  "fsync_batch_size": {
+    "1": {
+      "trials_ms": [
+        662.62105,
+        649.25792,
+        654.77881
+      ],
+      "median_ms": 654.77881
+    },
+    "64": {
+      "trials_ms": [
+        18.7443,
+        18.70374,
+        20.38098
+      ],
+      "median_ms": 18.7443
+    }
+  },
+  "scope": "I/O microcost only; no algorithm benchmark, no device work, no permission to weaken durability",
+  "interpretation": "Per-worker 23974 writes extrapolate about15.7s at this synthetic host median; actual container/concurrent I/O may differ. This microtest does not explain or attribute the whole paired regression."
+}
