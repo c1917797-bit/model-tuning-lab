@@ -39,3 +39,33 @@ def summarize_three_rounds(phases):
     return {"rounds":rows,"weighted_tpot_median_ms":statistics.median(values),
             "weighted_tpot_min_ms":min(values),"weighted_tpot_max_ms":max(values),
             "scope":"timing protocol only; source/activation/quality/isolation audit separate"}
+
+def summarize_matched_groups(phases):
+    expected={(group,round_id) for group in ("G1","G2","G3","G4") for round_id in (1,2,3)}
+    if set(phases)!=expected:raise ValueError("all12 group/round phases required")
+    switches={"G1":(False,False),"G2":(True,False),
+              "G3":(False,True),"G4":(True,True)}
+    identity=None;results={}
+    required={"image","model_config_sha256","algorithm_manifest_sha256",
+              "payload_digest","tp","physical_npus","cpu_set","input_tokens",
+              "output_tokens","concurrency","decode_graph"}
+    for (group,round_id),phase in phases.items():
+        current=phase["identity"]
+        if set(current)!=required:raise ValueError("complete exact matched identity required")
+        if current["tp"]!=4 or current["physical_npus"]!=[0,1,2,3]:
+            raise ValueError("selected physical singleTP4 scope mismatch")
+        if (current["input_tokens"],current["output_tokens"],current["concurrency"])!=(32768,1024,16):
+            raise ValueError("frozen performance dimensions mismatch")
+        if identity is None:identity=current
+        elif current!=identity:raise ValueError("group/round source or input identity drift")
+        a,b=phase["pdc_enabled"],phase["hypic_enabled"]
+        if type(a) is not bool or type(b) is not bool or (a,b)!=switches[group]:
+            raise ValueError("four-group switch identity mismatch")
+        results.setdefault(group,{})[round_id]=phase["records"]
+    summaries={g:summarize_three_rounds(r) for g,r in results.items()}
+    base=summaries["G1"]["weighted_tpot_median_ms"]
+    if base<=0:raise ValueError("nonpositive baseline timing")
+    return {"identity":identity,"groups":summaries,
+            "tpot_median_reduction_vs_g1_percent":{
+                g:100*(1-summaries[g]["weighted_tpot_median_ms"]/base) for g in ("G2","G3","G4")},
+            "scope":"declared matched identities/timing protocol; raw source/activation/physical/quality audit still mandatory"}
