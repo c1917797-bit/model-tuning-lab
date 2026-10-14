@@ -946,3 +946,12 @@ Terminal independent mechanism/source/isolation/PID/exact-release audit required
 Formal token stream0246/0247 is prepared separately and NOT this probe's ruler.
 Actual successful-case A8192+bridge1024-7168+B16384+tail geometry is confirmed023e;
 normal PDC8192 does not overlap B. Prior overlap hypothesis was misread.
+# Latest long-r8 terminal supersedes live text
+
+024b exit1;foreign-cgroupphysical0PID391164 at12:25:43UTC belongs to cannbench_ds.
+68isolation samples,0requests.024f confirms56sources unchanged and exactCIDabsent.
+8233free/final0-3empty; only owned container released; external untouched.
+COMPACT_LONG_R8_TERMINAL_AUDIT.json retains raw hashes and precise attribution.
+No algorithm repair conclusion. No liveownedjob; do not restart/reuse r8 root.
+Repeated idle snapshots are transient; stable coordinated window will avoid
+another full initialization followed by interference. Offline formal input ready.

@@ -1,0 +1,62 @@
+{
+  "result": {
+    "valid": false,
+    "error": {
+      "type": "RuntimeError",
+      "message": "Isolation guard failed: [{'type': 'RuntimeError', 'message': 'Foreign physical process detected', 'raw': None}]"
+    },
+    "guard_errors": [
+      {
+        "type": "RuntimeError",
+        "message": "Foreign physical process detected",
+        "raw": null
+      }
+    ],
+    "isolation_samples": 68,
+    "responses": 0,
+    "worker_pids": [
+      382540,
+      382541,
+      382542,
+      382543
+    ],
+    "physical_devices_seen": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "release": {
+      "owned_container": "6f15a65437836c195ec1c8819cd099ce327ffeeff46507d846271b9f4b3e93c7",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    }
+  },
+  "foreign": [
+    {
+      "utc": "2026-10-14T12:25:43.060184+00:00",
+      "device": 0,
+      "pid": 391164,
+      "status": "foreign-cgroup",
+      "cgroup": "13:blkio:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+    }
+  ],
+  "own_absent": true,
+  "source_hashes": 56,
+  "hashes": {
+    "result.json": "cb4da9e9c97f0b63dad84f26b11709394a9dd40e81c5bb62dbfa0931791f9cb7",
+    "events.jsonl": "eb17a7a1f12e2f3e280fcd15229f3475eaee90a92b4446abc36ee29d325ad5b3",
+    "service.log": "e1c7fdf50ea0ae238b8cf36714191addab9672b59d585fd5d6758cb1f7ab674a",
+    "launch.json": "6915d3719134912e241b6440717734beb93cfde2d096054a413dea7a37a76bf1",
+    "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "preflight.json": "b064f78d48a52809be0483a715602a3681c144e74db0820ef96c61f732cf37d5",
+    "service-start.json": "e2245456cad1d504eda5198b69a3e56cfdc4b7a8ab6c7945ac08559ccd7cae39",
+    "isolation.json": "c969741f70a987e111c16121e4b0a01cf67b80b256d9af3de24cc5f1c0a959d3",
+    "release.json": "7cf548ad675f1f2625fb6b35465454c0cf40f26a25b9e14cf93fee54ba04794c",
+    "diagnostics/compact-worker-59.jsonl": "bda77de0ed37f9ad138400289020ac0d02a28d9f829dd78f150b9bc56630d581",
+    "diagnostics/compact-worker-62.jsonl": "6addeec44b5e5035716f5746e44da7f3188beee6b4248e1ca01ae522e595c4df",
+    "diagnostics/compact-worker-61.jsonl": "16adb77dbe044ca81d47cffec6dfcc76e06a3d7eb1354d4678391affaf1652d8",
+    "diagnostics/compact-worker-60.jsonl": "19485be34155dfbdb083a6b6eda56f863fc534ba30fa582a1ac178048d2e6b56"
+  }
+}
