@@ -1,0 +1,35 @@
+{
+  "schema": "hypic-live-physical-join/v1",
+  "operation": "exec-00000000000003a5",
+  "controller": "exec-0000000000000399",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-canary-pdc-r9",
+  "owned_cid": "91ad774b6b7330b5f8277f306b64d9aa32d9e291925b1d08ed5cb801bc4e94d6",
+  "mapping": [
+    {
+      "rank": 0,
+      "inner_pid": 59,
+      "host_pid": 2851118,
+      "physical_npu": 0
+    },
+    {
+      "rank": 1,
+      "inner_pid": 60,
+      "host_pid": 2851119,
+      "physical_npu": 1
+    },
+    {
+      "rank": 2,
+      "inner_pid": 61,
+      "host_pid": 2851120,
+      "physical_npu": 2
+    },
+    {
+      "rank": 3,
+      "inner_pid": 62,
+      "host_pid": 2851121,
+      "physical_npu": 3
+    }
+  ],
+  "scope": "Independent explicit live NSpid+cgroup join to native request progress. Not PDC/hot mechanism/terminal source-isolation-release acceptance.",
+  "state": "live-controller-not-restarted"
+}
