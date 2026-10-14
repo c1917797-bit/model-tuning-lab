@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST runtime capture: official runner source00a1 proves non-spec sampling
+uses query_start_loc endpoints and stores logits_indices during prepare.
+independent_compact_runtime_snapshot captures real sampling indices/cache groups
+from verified runner; grants current-step scheduled writes only after rejecting
+cross-request or computed-prefix aliases.00a3 passes3 CPU negative/positive
+controls. activate_compact_runner now feeds a scoped CURRENT_RUNTIME_SNAPSHOT
+after native prepare; native mixed/decode paths remain outside compact selection.
+Enabled official-runtime capture not yet executed. Next build all-layer material
+readiness selector/stage and atomic loader integration, then official preflight.
+No new device job. Do not infer complete HYPIC acceptance from these CPU checks.
+
 LATEST compact public producer/C2 handler: public GDN producer now optionally
 builds only body T/S/conv-tail without cloning body core outputs. Compact C2
 backend draft captures canonical body KV onCPU, resolves explicit cache-group
