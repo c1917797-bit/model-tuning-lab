@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT long-r5 exec-0000000000000214 on ma peer
+lgw_a6109c51076a4a2c9d2674ca5a8704a0; checkpoint6610aee2;rawroot
+/cache/cch/hypic-independent-20261013/compact-long-r5.0212 freshsources/
+0-3empty/8233free/no external evaluator/newroot absent. SAMErepairedmetadata
+16K/32K/1024 contract; newnamespace guard, unresolved still failsclosed.
+Poll exact handle/root; no restart/mountedsource edits. Capture live PIDmap
+then independently audit complete requests, body skip,source,isolation,release.
+
 LATEST ownership guard now records owned-cgroup/owned-pid-namespace/
 foreign-cgroup/ownership-unresolved. When cgroup unavailable/root, exact live
 CID initPID namespace equality is independently checked; historical PID alone
