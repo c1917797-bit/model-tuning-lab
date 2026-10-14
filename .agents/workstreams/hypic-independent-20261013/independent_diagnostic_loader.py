@@ -54,7 +54,13 @@ def enable():
                     producer_stop=install_public_gdn_producer(
                         enabled=True,select_public=stage.select_public,publish=publish)
                     context_stop=_stop
+                    private_stop=lambda:None
+                    if os.environ.get("INDEPENDENT_PRIVATE_C1")=="1":
+                        from independent_private_gdn_hook import install_private_c1
+                        private_stop=install_private_c1(stage,enabled=True,emit=emit)
+                        emit({"event":"private_c1_installed","pid":os.getpid(),"c2_enabled":False})
                     def combined_stop():
+                        private_stop()
                         producer_stop()
                         context_stop()
                     _stop=combined_stop

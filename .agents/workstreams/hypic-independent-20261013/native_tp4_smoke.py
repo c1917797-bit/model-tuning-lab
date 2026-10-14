@@ -168,6 +168,8 @@ def run_contract(contract):
                    "-e","INDEPENDENT_DIAGNOSTIC_BATCHES=2"]
             if diagnostic.get("public_config"):
                 args+=["-e","INDEPENDENT_PUBLIC_STAGE_CONFIG=/probe/"+diagnostic["public_config"]]
+            if diagnostic.get("private_c1"):
+                args+=["-e","INDEPENDENT_PRIVATE_C1=1"]
         args += [image,"serve","/model","--served-model-name","qwen3.5","--host","0.0.0.0",
                  "--port",str(port),"--tensor-parallel-size","4","--data-parallel-size","1",
                  "--max-model-len","40960","--max-num-batched-tokens","40960",
@@ -202,6 +204,8 @@ def run_contract(contract):
                  "temperature":0,"seed":0,"max_tokens":32,"chat_template_kwargs":{"enable_thinking":False}}
         payload=contract.get("request_payload",payload)
         for i in range(3):
+            if contract.get("request_payloads"):
+                payload=contract["request_payloads"][i]
             require_guard()
             before=snapshot(cid);retain_snapshot(before)
             if before["foreign"]:raise RuntimeError("Foreign process before request")

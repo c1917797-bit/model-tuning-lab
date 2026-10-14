@@ -1,5 +1,49 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST private-C1-r3/003f terminal exit0/3 responses; independent audit confirms
+192public and384 private reuse events:two requests x4 ranks x48 exact layers,
+56body tokens skipped each, all private finite, exact segment8:72, pinned generation.
+194clean isolation samples, exact058bfab5... absent,8233 free/final0–3 empty.
+PRIVATE_C1_R3_AUDIT.json retains hashes/limits. Bounded C1-only activation proven,
+not full HYPIC/performance/quality or c16/PDC/chunk acceptance. Do not repeat alone.
+Next critical path: C2 canonical KV/position-aware private reuse and seam, expand
+batched/overlap paths, then full integrated Canary and frozen benchmarks.
+No owned live NPU job.
+
+CURRENT private-C1-r3-conv-dtype ma/exec-000000000000003f live.
+Root /cache/cch/hypic-independent-20261013/private-c1-canary-r3-conv-dtype.
+Same public/private requests, new frozen dtype repair.0–3 only/C2 disabled.
+Poll same ma/003f/root; no mounted source changes/restart while live.
+
+Private-C1-r2 terminal raw:1 public response/private500,192public publications,
+0 reuse;192clean samples/exactfd258bf... absence independently audited.
+Explicit sync exposes CausalConv1d prototype mismatch: BF16 x/weights with FP32
+convStates from cached public tail. Private conv buffer now casts to projected
+dtype before clone/call; public data unchanged.76 controls003d pass.
+This is a concrete repair, not yet device pass. Old R2 root immutable.
+
+CURRENT private-C1-r2-recurrence ma/exec-000000000000003b live.
+Root /cache/cch/hypic-independent-20261013/private-c1-canary-r2-recurrence.
+Same frozen public/private payloads and coverage target, new recurrence/sync repair.
+Only0–3, C2 disabled. Poll exact ma/003b; no mounted code edits or restart.
+
+Private-C1-r1/0037 terminal:public request succeeds, first private500,0 reuse
+receipts,192clean samples/exact363197fe... absence independently audited.
+Async507015 surfaces entering boundary after prefix; exact kernel origin not
+isolated. New independent<=64 token recurrence/output avoids short-span chunk
+output and adds explicit synchronization afterconv/attention.75 CPU controls0039
+pass; NOT a verified device fix. New R2 recurrence contract frozen; old root kept.
+
+CURRENT private-C1-canary-r1 ma/exec-0000000000000037 running.
+Root /cache/cch/hypic-independent-20261013/private-c1-canary-r1.
+Frozen requests:public64 tokens then two private80-token prompts (8prefix+64segment
++8tail), one output token each;0–3 TP4 only. Public generation plus private C1
+enabled; C2 disabled. Expect192 public publications and384 private layer/rank
+reuse receipts across two private requests,56 skipped body tokens each.
+Do not equate response success/fallback with coverage. Audit finite receipts,
+actual native layouts/state commit/source identity/isolation/exact release.
+Poll same ma/0037; no mounted runtime edits/restart while live.
+
 Latest private serving draft: independent_private_gdn_hook now connects exact
 Qwen GDN entry, runtime prompt/segment, pure-prefill state slot, pinned material,
 private native prefix/boundary/tail, finite checks, final state/conv/output commit

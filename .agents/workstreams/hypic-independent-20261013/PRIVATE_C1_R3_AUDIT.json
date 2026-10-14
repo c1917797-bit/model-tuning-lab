@@ -1,0 +1,36 @@
+{
+  "scope": "Bounded integrated C1-only real-weight Canary; C2 disabled",
+  "operation": "exec-000000000000003f",
+  "root": "/cache/cch/hypic-independent-20261013/private-c1-canary-r3-conv-dtype",
+  "responses": 3,
+  "public_materials": 192,
+  "private_reuse_events": 384,
+  "private_requests": 2,
+  "ranks": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "layers_per_rank": 48,
+  "public_tokens": 64,
+  "boundary_tokens": 8,
+  "private_input_tokens": 80,
+  "skipped_body_tokens_per_layer": 56,
+  "all_private_results_finite": true,
+  "isolation_samples": 194,
+  "removed_container": "058bfab5d0fab27e65a5fcd175a4c4707f91a293e34f6f31685df4c2bf4c4fa0",
+  "exact_absence_verified": true,
+  "raw_sha256": {
+    "result.json": "8b8b8eacf37314045bd2b64a8304e86745a84c0d14f0045f24c8e6711fbab181",
+    "events.jsonl": "179d3aac6c7495a9c4e9e1123a9e41175bc1133cf58e38f4d989954bd9f034ff",
+    "responses.json": "65a59da5498548e4e10fdafcf34e036568289827cab47925453d370030e7e0c9"
+  },
+  "limitations": [
+    "Single complete Prefill per batch only",
+    "No c16/PDC-overlap/chunked handling acceptance",
+    "No C2 seam/KV serving reuse",
+    "No paired quality/performance/long-output conclusion",
+    "Finite private outputs/states do not establish numerical equivalence"
+  ]
+}
