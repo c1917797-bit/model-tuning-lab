@@ -1028,3 +1028,12 @@ d578a09c31835524a87f6f062568d19c64fc8c8ada2afa485a2fcf5934cd8f1f maps0-3only.
 Raw /cache/cch/hypic-independent-20261013/formal-canary-pdc-r3.
 Poll exact handle/root; no restart/source edits. Independent terminal PDCfirst
 progress/fourrank prefix material/long reuse/source/isolation/release audit required.
+# Latest R3 terminal supersedes CURRENT
+
+027f exit1:confirmed cannbench_dsphysical0PID798955 at13:05:22UTC.
+22samples/0requests;0281 independently59sourcehashes/exactCIDabsence/portrelease.
+FORMAL_CANARY_PDC_R3_TERMINAL_AUDIT.json preserves original raw hashes.
+No liveownedjob; no mechanism result.0277 sampled idle does not reserve resources,
+as actual external jobs returned during initialization. Old R3 root immutable.
+Continue useful offline preparation; obtain coordinated window's real start
+before spending another initialization attempt on identical transient gaps.

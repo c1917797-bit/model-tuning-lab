@@ -1,0 +1,56 @@
+{
+  "operation": "027f",
+  "result": {
+    "valid": false,
+    "error": {
+      "type": "RuntimeError",
+      "message": "Foreign physical process detected"
+    },
+    "guard_errors": [
+      {
+        "type": "RuntimeError",
+        "message": "Foreign physical process detected",
+        "raw": null
+      }
+    ],
+    "isolation_samples": 22,
+    "responses": 0,
+    "worker_pids": [],
+    "physical_devices_seen": [],
+    "release": {
+      "owned_container": "d578a09c31835524a87f6f062568d19c64fc8c8ada2afa485a2fcf5934cd8f1f",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    }
+  },
+  "foreign": [
+    {
+      "utc": "2026-10-14T13:05:22.278711+00:00",
+      "npu": 0,
+      "pid": 798955,
+      "status": "foreign-cgroup",
+      "cgroup": "13:blkio:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+    },
+    {
+      "utc": "2026-10-14T13:05:22.355077+00:00",
+      "npu": 0,
+      "pid": 798955,
+      "status": "foreign-cgroup",
+      "cgroup": "13:blkio:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+    }
+  ],
+  "sources": 59,
+  "exact_own_absent": true,
+  "raw_hashes": {
+    "result.json": "85fe7b4d5d4bf7e290c97e4c9d4a3af3e91f54b22cfdbcd387e67cad59fbdaa2",
+    "events.jsonl": "523aa66a6af9536d99a3e1ba6b6893efd24122fc967ee7a8e2ffe3e8cd9df154",
+    "service.log": "d821ce539423c44eb26fd3dc561c2d2002095da032ff26adf90e83a4405414bf",
+    "launch.json": "7c6987aa814d80fe6a16e09944732204cae0bd9fc0e63f0869935c000f050ddf",
+    "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "preflight.json": "0af3042f9f0165a948de6285752d048bd8d1506f5889cc2666a9d9c9bbb7bcff",
+    "service-start.json": "1a6bbe16c9cef8c0af753398fd090d72e45eb0bb94b9739198f4e417952abb1f",
+    "isolation.json": "385e5e6695880cfaf3ddcaebd64ebe32663d807e440ad883f47b4e4ed043f7e0",
+    "release.json": "2423a7668d6102414392a082f6117865a8cc1316a35edadaaf0669cec4843cd2"
+  }
+}
