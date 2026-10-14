@@ -1,0 +1,65 @@
+{
+  "operation": "02cf",
+  "result": {
+    "valid": false,
+    "error": {
+      "type": "RuntimeError",
+      "message": "Isolation guard failed: [{'type': 'RuntimeError', 'message': 'Foreign physical process detected', 'raw': None}]"
+    },
+    "guard_errors": [
+      {
+        "type": "RuntimeError",
+        "message": "Foreign physical process detected",
+        "raw": null
+      }
+    ],
+    "isolation_samples": 93,
+    "responses": 0,
+    "worker_pids": [
+      1415447,
+      1415448,
+      1415449,
+      1415450
+    ],
+    "physical_devices_seen": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "release": {
+      "owned_container": "efad06b07a626e39bbf6dabde753c3201d2d2557f9ffd5ce9504e8dece67ecb0",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    }
+  },
+  "foreign": [
+    {
+      "utc": "2026-10-14T14:09:19.222768+00:00",
+      "npu": 0,
+      "pid": 1435885,
+      "cgroup": "13:blkio:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n12:freezer:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n11:memory:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n10:perf_event:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n9:rdma:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n8:pids:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n7:cpuset:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n6:net_cls,net_prio:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n5:hugetlb:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n4:devices:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n3:files:/\n2:cpu,cpuacct:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n1:name=systemd:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n",
+      "ownership_status": "foreign-cgroup"
+    }
+  ],
+  "foreign_container_name": "/cannbench_ds",
+  "sources": 73,
+  "exact_own_absent": true,
+  "final_physical_processes": [],
+  "raw_hashes": {
+    "result.json": "396da51f2fe8698e8a9a029bdddb9b9532c6bb80b90a2e4e45e2fd9ad283e9ac",
+    "events.jsonl": "ec2c2740956f0a4dbad795320e77a63c66fc87a2197f336988503c005c70d152",
+    "service.log": "098c64c22a87afb716be917fc4c000e15d14efd590318f112a22c174550fb43d",
+    "launch.json": "a8ab52f75293cd91f7db605e6ca35e69e59061537bd37fd1f3712e8d2dc8c44e",
+    "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "preflight.json": "1ec90354e251c602bbbabfef5843b84c572dd808674995a8bbf0e774f8972a71",
+    "service-start.json": "e40b5df84be99790bb14de788b376128dce59bb73fb519b30f271ac9c51e07c6",
+    "isolation.json": "17fe68c155249b425d23a7d8e276dd52f390077bf221c2e04290a03007919368",
+    "release.json": "dd7e501eb36ecb5f1c123e8d928894bf181fa1cefe6b5f8946e9c59d6b72cbfd",
+    "diagnostics/compact-worker-59.jsonl": "0e40367c23783031c544c34421d62fcec22f3a2d94044c35304cbfa9369cae8e",
+    "diagnostics/compact-worker-62.jsonl": "60048ae74db3a8c134c956d9876bf22bfe304c8d4519bec7905893f482555b45",
+    "diagnostics/compact-worker-61.jsonl": "640a698c628d5facd90fb21ac2a54589804e54bc93d0c2d861ef9a04033aa305",
+    "diagnostics/compact-worker-60.jsonl": "e173fa179810ae9cf40e7678686ddad2a6485e1d7b5a58ef63500d07685a8233"
+  }
+}

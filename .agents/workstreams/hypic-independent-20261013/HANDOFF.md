@@ -1072,6 +1072,13 @@ Do not infer exact owner from generic error; snapshot after it is separate.
 No liveownedjob. Old start wording929d9b42 superseded by this terminal.
 # Latest catalog runtime draft
 
+Latest device terminal: r5/02cf exited1 at14:09UTC after foreign NPU0PID1435885
+from cannbench_ds appeared during initialization.93samples/0responses.
+Independent02d9 checks73source hashes unchanged, exact ownedCIDefad06b... absent,
+8233free/final0-3empty. Raw formal-canary-pdc-r5 immutable; external untouched.
+FORMAL_CANARY_PDC_R5_TERMINAL_AUDIT.json preserves hashes and attribution.
+No owned live job; no long-boundary/PDC/quality mechanism conclusion.
+
 Latest external catalog loader: public_catalog_artifact binds absolute regular
 JSON path, raw SHA256 and exact1-128 segment count; schema hypic-public-catalog/v1,
 public_segments arrays,32MiB raw bound/32768 tokens per segment. Reuses independent
