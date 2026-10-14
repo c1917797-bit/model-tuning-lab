@@ -11,7 +11,7 @@ class WarmupTests(unittest.TestCase):
                        record=events.append,require_material_ready=lambda:checks.append(len(events)))
         self.assertEqual(checks,[2]);self.assertEqual(len(events),4)
         self.assertTrue(all(x["scored"] is False for x in events))
-        self.assertEqual([len(x["payload"]["prompt"]) for x in w],[16384,16384,8448,8448])
+        self.assertEqual([len(x["payload"]["prompt"]) for x in w],[16640,16640,8448,8448])
     def test_missing_material_aborts_before_native_warmup(self):
         events=[]
         def fail():raise RuntimeError("missing rank")

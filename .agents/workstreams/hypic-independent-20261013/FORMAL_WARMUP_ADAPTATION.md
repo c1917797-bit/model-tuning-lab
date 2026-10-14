@@ -1,5 +1,11 @@
 # Warmup protocol boundary
 
+Latest draft0265: opt-in allow_public_tail selector and prefix-only GDN/KV
+capture implemented. Defaultfalse; threeCPU controls pass. Real fourworker/
+device correctness unverified. Prepared warmup builder now emits B+tail256,
+but must not run until the enabled prefix path and new source manifest pass.
+The historical unimplemented discussion below describes the prior checkpoint.
+
 Reviewed benchmark defaults0263: two PIC producers and two native warmups,
 warm tail256. They are unscored and separate from40 measured/c16 requests.
 Independent native warmups use A8192+distinct tail256, preserving this geometry.

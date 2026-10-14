@@ -32,7 +32,8 @@ def install_compact_c2(stage,*,enabled=False,emit=None):
         if selected is None:
             if requests and len(requests)==1 and prompts and key is not None:
                 req=requests[0]
-                if prompts.get(req.request_id)==stage.tokens and req.computed_tokens==0 and req.scheduled_tokens==len(stage.tokens):
+                public_prompt=prompts.get(req.request_id)
+                if stage.is_public_prompt(public_prompt) and req.computed_tokens==0 and req.scheduled_tokens==len(public_prompt):
                     identity=stage.identity(layer.layer_name,req.rank);cache_key=identity_key(identity)
                     with stage.compact_kv_store.lock:present=cache_key in stage.compact_kv_store.entries
                     if not present:

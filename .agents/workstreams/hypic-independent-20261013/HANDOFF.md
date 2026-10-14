@@ -979,3 +979,12 @@ FORMAL_CANARY_PDC_R1_TERMINAL_AUDIT.json retains exact foreign provenance/hashes
 No liveownedjob or PDC/long-boundary proof. Do not restart oldroot.
 Coordination window needs to actually suppress new external0-3 jobs;
 transient empty snapshots repeatedly fail during full27B initialization.
+# Latest draft public-prefix capture
+
+0265 three host controls pass for default-off allow_public_tail selection and
+GDN field/conv projection truncation to B prefix, excluding tail state.
+Compact C2 publication uses same explicit producer selector and B-only KV rows.
+Prepared warmup builder now B+distinct tail256 to match reference geometry.
+Actual hooks/device behavior still unverified; no NPU launch.
+Source hashes changed after025e terminal: ALL old manifests/contracts stale.
+Freeze new package and enabled-path tests before next hardware attempt.

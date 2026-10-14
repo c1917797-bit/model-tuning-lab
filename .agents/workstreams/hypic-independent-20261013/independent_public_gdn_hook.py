@@ -6,6 +6,17 @@ from functools import wraps
 _context=ContextVar("independent_public_gdn_context",default=None)
 GDN_SHA256="d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816"
 
+def prefix_material_inputs(length,projected,fields):
+    if type(length) is not int or length<1 or projected.ndim!=2 or projected.shape[0]<length:
+        raise ValueError("public prefix projected coverage mismatch")
+    tensors=[]
+    for name in ("k","v","g","beta"):
+        value=fields[name]
+        if value.ndim<2 or value.shape[0]!=1 or value.shape[1]<length:
+            raise ValueError("public prefix field coverage mismatch")
+        tensors.append(value[:,:length].contiguous())
+    return (*tensors,projected[:length].contiguous())
+
 def install_public_gdn_producer(*,enabled=False,select_public=None,publish=None,compact=False):
     if not enabled:return lambda:None
     if not callable(select_public) or not callable(publish):
@@ -27,7 +38,7 @@ def install_public_gdn_producer(*,enabled=False,select_public=None,publish=None,
         requests=CURRENT_REQUEST_SLICES.get()
         identity=select_public(self,requests) if requests else None
         if identity is None:return original_core(self,mixed_qkv,b,a,core_attn_out)
-        if len(requests)!=1 or requests[0].computed_tokens!=0 or requests[0].scheduled_tokens!=identity.length:
+        if len(requests)!=1 or requests[0].computed_tokens!=0 or requests[0].scheduled_tokens<identity.length:
             raise ValueError("canonical public request must be one complete zero-prefix prefill")
         if identity.layer!=self.prefix or identity.rank!=requests[0].rank:
             raise ValueError("canonical layer/rank mismatch")
@@ -39,14 +50,16 @@ def install_public_gdn_producer(*,enabled=False,select_public=None,publish=None,
         context=_context.get()
         if context is not None:
             identity,projected=context
+            length=identity.length
+            k,v,g,beta,projected=prefix_material_inputs(length,projected,kwargs)
             # Official source invokes chunk with named q/k/v/g/beta fields.
             if compact:
                 material=build_native_compact_linear_public_body(
-                    identity,kwargs["k"],kwargs["v"],kwargs["g"],kwargs["beta"],projected)
+                    identity,k,v,g,beta,projected)
             else:
                 material=build_native_linear_public_body(
-                    identity,kwargs["k"],kwargs["v"],kwargs["g"],kwargs["beta"],
-                    output[0],projected)
+                    identity,k,v,g,beta,
+                    output[0][:,:length].contiguous(),projected)
             import torch
             torch.npu.synchronize()
             publish(material)
