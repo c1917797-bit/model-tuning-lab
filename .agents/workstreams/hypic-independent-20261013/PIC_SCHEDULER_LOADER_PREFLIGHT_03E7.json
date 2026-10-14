@@ -1,0 +1,20 @@
+{
+  "schema": "hypic-loader-preflight/v1",
+  "host_suite": {
+    "operation": "exec-00000000000003e6",
+    "tests": 267,
+    "exit_code": 0
+  },
+  "official_ast_compile": {
+    "operation": "exec-00000000000003e1",
+    "exit_code": 0
+  },
+  "cpu_only_import": {
+    "operation": "exec-00000000000003e7",
+    "exit_code": 1,
+    "scope": "No NPU devices, no driver mount, no model/request; official Transformers imports torch_npu despite autoload disabled, dependency initialization fails before Scheduler definition/install proof."
+  },
+  "source_checkpoint": "c7b5749f",
+  "decision": "Host controls pass; official runtime import/install still unproven. Do not claim Ascend service activation or silently patch upstream imports.",
+  "next": "Bounded pinned-image real driver/ABI class preflight under fresh physical0-3 admission; then new enabled scheduler contract, actual engine cap plus fourworker mechanisms."
+}

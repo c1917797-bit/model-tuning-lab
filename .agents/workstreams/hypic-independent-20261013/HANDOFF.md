@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST c7b5749f wires default-off scheduler import hook/engine ledger and
+current fourrank generation readiness984697cd;267hosttests03e6PASS and
+official9ae1491f... ASTcompile03e1PASS. CPU-only official import03e7FAIL
+before scheduler class:Transformers explicitlyimports torch_npu without driver
+mount;NOT scheduler install/service proof. No newNPUjob. Next exactdriver/ABI
+classpreflight and bounded integratednewcontract after freshphysical admission.
+OriginalG3failure6b59913d retained;R4loggingbudgetd565c66e unchangedalgorithm.
+Scheduler enable opt-in config scheduler_admission_enabled;defaultFALSE.
+Full40c16/performance/quality/lifecycle still unverified. Deadline unchanged.
+
 LATEST G3r1/03bc terminalexit1:40records12success28failure. Independent03da
 85sourcesunchanged/320cleanisolations/exact64a6026d...absent/8233free.
 Own10000-event evidence cap reached all4workers (3.62MiB each),8812mixed
