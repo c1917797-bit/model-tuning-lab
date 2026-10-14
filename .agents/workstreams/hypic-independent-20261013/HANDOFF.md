@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST compact-long-r1/00ff terminalexit1,0responses,120samples: foreign
+physical0PID2408350 incannbench_ds/efc5e45e... appeared during API startup.
+Independent0109 verifies exact5b5fc82b... absent/8233free/final0–3empty and
+retains raw hashes COMPACT_LONG_R1_TERMINAL.json. No long algorithm result.
+Controller now has opt-in immediate stop of ONLY exact owned label/image/
+physical-device verified CID upon foreign detection; healthGETtimeout3s.
+010c passes3 owned-stop negative controls and8 harness regressions. Foreign
+resources untouched. COMPACT_LONG_R2_CONTRACT.json freezes newroot/controller
+hash, same algorithm/request protocol; do not launch until new fresh idle
+and actual previous evaluator terminal checks. No owned live device job.
+
 CURRENT compact-long-r1 controllerexec-00000000000000ff on current ma peer
 lgw_a6109c51076a4a2c9d2674ca5a8704a0; checkpointf9011848. Raw root
 /cache/cch/hypic-independent-20261013/compact-long-r1. Frozen16Kpublic/32K

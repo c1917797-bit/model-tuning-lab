@@ -1,0 +1,60 @@
+{
+  "foreign": [
+    {
+      "cgroup_container": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+      "npu": 0,
+      "pid": 2408350
+    }
+  ],
+  "raw_sha256": {
+    "events.jsonl": "3647088d0f895bf469c07ae5ef00d0f31f78ce1c2c9a8d3a7f1954901fe2fa03",
+    "isolation.json": "2896f78840dc6ddbd6e900a469fe11dd82c1fbbdbffb7fe3c7821585d08ba118",
+    "launch.json": "6aad6e9c389231cc4bc49760d12dda4ae2bd5c547af42b616e822ea627068914",
+    "preflight.json": "211aae2e408e648be39b7590137528abeff3de8bbac9786b186e3c2264ea58b7",
+    "release.json": "ea1845ad2690c93e8ba05d99c0f81a092cfcece8cf3be9a8a0d4cbd783943b40",
+    "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "result.json": "b0c09311311dcd9d7ceb367348df7e7901fac0ced7048f15a7ec49bb521afac6",
+    "service-start.json": "7d7f20a3a70a1fbda00b727d505d086c227949c222eada63336dc7eeaaee39aa",
+    "service.log": "762ad80df43504ccec4adb745f772cd20644d1441f8d018e4721770ef5237c0c"
+  },
+  "result": {
+    "error": {
+      "message": "Isolation guard failed: [{'type': 'RuntimeError', 'message': 'Foreign physical process detected', 'raw': None}]",
+      "type": "RuntimeError"
+    },
+    "guard_errors": [
+      {
+        "message": "Foreign physical process detected",
+        "raw": null,
+        "type": "RuntimeError"
+      }
+    ],
+    "isolation_samples": 120,
+    "physical_devices_seen": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "release": {
+      "final_physical_processes": [],
+      "owned_container": "5b5fc82b1fbfa8c87c5f2eebcc81fbbefb328ae8ed3f358476b211a0f4159337",
+      "port_free": true,
+      "removed": true
+    },
+    "responses": 0,
+    "valid": false,
+    "worker_pids": [
+      2378627,
+      2378628,
+      2378629,
+      2378630
+    ]
+  },
+  "samples": 120,
+  "scope": "startup isolation interruption, no algorithm request result",
+  "audit_operation": "exec-0000000000000109",
+  "controller_operation": "exec-00000000000000ff",
+  "raw_root": "/cache/cch/hypic-independent-20261013/compact-long-r1",
+  "next": "Guard now supports immediate label/image/device-verified owned stop on foreign process; health timeout3s. Longr2 only after fresh actual0-3 idle and external active evaluator check."
+}

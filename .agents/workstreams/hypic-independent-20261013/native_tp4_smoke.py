@@ -98,6 +98,20 @@ def request(port,payload=None,*,completion=False,timeout=60):
         raw=response.read()
         return json.loads(raw) if data else response.status
 
+def stop_owned_on_foreign(cid,*,image,inspect_fn=None,command_fn=None):
+    """Abort only the exact controller-created container; retain it for logs."""
+    inspect_fn=inspect if inspect_fn is None else inspect_fn
+    command_fn=command if command_fn is None else command_fn
+    if not re.fullmatch(r"[0-9a-f]{64}",cid):raise ValueError("exact full owned CID required")
+    meta=inspect_fn(cid)
+    if meta["Id"]!=cid or meta["Image"]!=image or meta["Config"]["Labels"].get("model-tuning-lab.task")!=TASK:
+        raise ValueError("owned controller container identity mismatch")
+    devices={d["PathOnHost"] for d in meta["HostConfig"]["Devices"] if re.fullmatch(r"/dev/davinci\d+",d["PathOnHost"])}
+    if devices!={"/dev/davinci"+str(i) for i in range(4)}:
+        raise ValueError("owned container physical device mapping drift")
+    if meta["State"]["Running"]:command_fn(["docker","stop","-t","3",cid],timeout=20)
+
+
 def run_contract(contract):
     image=contract["image"];model=Path(contract["model"]);port=contract["port"]
     raw=Path(contract["raw_root"])
@@ -132,7 +146,12 @@ def run_contract(contract):
         while not guard_stop.is_set():
             try:
                 snap=snapshot(cid);retain_snapshot(snap)
-                if snap["foreign"]:raise RuntimeError("Foreign physical process detected")
+                if snap["foreign"]:
+                    guard_error.append({"type":"RuntimeError","message":"Foreign physical process detected","raw":None})
+                    if contract.get("stop_owned_on_foreign"):
+                        journal.append({"event":"foreign_interrupt_owned_stop","container_id":cid})
+                        stop_owned_on_foreign(cid,image=image)
+                    return
                 worker_pids.update(pid for device,pid in snap["processes"])
                 physical_devices_seen.update(device for device,pid in snap["processes"])
             except Exception as exc:
@@ -204,7 +223,7 @@ def run_contract(contract):
             worker_pids.update(p for n,p in snap["processes"])
             if not inspect(cid)["State"]["Running"]:raise RuntimeError("Owned native service exited before health")
             try:
-                if request(port)==200:break
+                if request(port,timeout=3)==200:break
             except (urllib.error.URLError,TimeoutError):pass
             time.sleep(5)
         else:raise TimeoutError("Native health deadline")
