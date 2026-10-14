@@ -997,3 +997,12 @@ then two A8192+bridge+B+tail private32K/output1024, nativePDC enabled.
 Poll exact handle/root; no restart or live source edits. Terminal independent
 actual prefix-only material/fourrank long reuse/PDC/isolation/exact release audit.
 Old r1 remains confirmed external interruption and immutable.
+# Latest R2 terminal supersedes CURRENT
+
+026f terminal exit1: physical2PID681904 confirmed foreign cannbench_ds at
+12:53:57UTC.44isolation samples/0requests.0273 independently checks58sources
+unchanged/exactCIDabsent/8233release/final0-3empty. External untouched.
+FORMAL_CANARY_PDC_R2_TERMINAL_AUDIT.json retains original raw hashes.
+No liveownedjob, no prefix material/PDC/long repair proof. Oldroot immutable.
+Stable coordination has not actually prevented new0-3 jobs; do not declare
+device stage passed or algorithm failed from these resource interruptions.

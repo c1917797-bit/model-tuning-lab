@@ -1,0 +1,43 @@
+{
+  "operation": "026f",
+  "result": {
+    "valid": false,
+    "error": {
+      "type": "RuntimeError",
+      "message": "Foreign physical process detected"
+    },
+    "guard_errors": [],
+    "isolation_samples": 44,
+    "responses": 0,
+    "worker_pids": [],
+    "physical_devices_seen": [],
+    "release": {
+      "owned_container": "a05b6a88e30a504a46eb58f193251bd6c41dc4306580510db81ae980ae991d94",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    }
+  },
+  "foreign": [
+    {
+      "utc": "2026-10-14T12:53:57.587568+00:00",
+      "npu": 2,
+      "pid": 681904,
+      "status": "foreign-cgroup",
+      "cgroup": "13:blkio:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+    }
+  ],
+  "sources": 58,
+  "exact_own_absent": true,
+  "raw_hashes": {
+    "result.json": "cf40501b1c8a864f24d97b3a9013c74e9f4d209d04817e619f89eb8bc383f926",
+    "events.jsonl": "589b4b458c6b8f6e6d7eef00a05eb1f490b012605ae0387a227a256ce2af3649",
+    "service.log": "070f521442eaf94552f75d9a279b844ef9d90b7d48e244e8687ff14d1f9457e4",
+    "launch.json": "5388c758e8eaf818e4ebcfd512a927893cd44e40fc3c9fb498d2eebf4a96b350",
+    "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "preflight.json": "2a660856c390ff2bf3ad36d92e3e37815f2c60fa3f7d75399099413cff54898c",
+    "service-start.json": "9ba965264e34a39a2f0677da22580bd53aaed412f44e75e1ec49ce7c66ba1ad4",
+    "isolation.json": "35e1836916b848a23275a09ca0ccab9bda882fec566c8ed308b7ec353ba577a9",
+    "release.json": "235fad86e3ed9bc983acac5f47f28e92219bee084be681cbd4a09301817ee5eb"
+  }
+}
