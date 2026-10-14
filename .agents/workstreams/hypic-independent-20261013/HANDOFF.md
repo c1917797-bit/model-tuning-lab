@@ -1072,6 +1072,14 @@ Do not infer exact owner from generic error; snapshot after it is separate.
 No liveownedjob. Old start wording929d9b42 superseded by this terminal.
 # Latest catalog runtime draft
 
+Latest external catalog loader: public_catalog_artifact binds absolute regular
+JSON path, raw SHA256 and exact1-128 segment count; schema hypic-public-catalog/v1,
+public_segments arrays,32MiB raw bound/32768 tokens per segment. Reuses independent
+catalog identity validation; rejects duplicates/invalid tokens/ambiguous config.
+Worker loader resolves artifact before activation; raw tokens stay outside Git.
+02c4 full215 host controls pass. No actual quality dataset/NPU activation yet.
+All existing launch manifests/contracts stale; no owned live device job.
+
 Readiness follow-up: independent_material_readiness now isolates token digests,
 requires explicit selection when multiple segments appear, and rejects missing
 segment identity instead of combining unrelated GDN/KV layer counts. Host

@@ -18,6 +18,8 @@ def enable():
     config_path=(base/manifest['config']).resolve()
     if not config_path.is_relative_to(base):raise ValueError('config outside package')
     config=json.loads(config_path.read_text())
+    from independent_catalog_artifact import resolve_catalog_config
+    config=resolve_catalog_config(config)
     from independent_evidence_limits import evidence_limits
     limits=evidence_limits(config.pop("evidence_limits",None))
     if 'public_token_artifact' in config:
