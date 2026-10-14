@@ -150,6 +150,11 @@ def run_contract(contract):
     image_info=json.loads(command(["docker","image","inspect",image]))[0]
     inherited_pythonpath=next((x.split("=",1)[1] for x in image_info["Config"].get("Env",[]) if x.startswith("PYTHONPATH=")),"")
     diagnostic=contract.get("cache_diagnostic")
+    formal_artifact=contract.get("formal_token_artifact")
+    formal_payloads=None
+    if formal_artifact:
+        from independent_formal_canary import load_formal_canary
+        formal_payloads=load_formal_canary(formal_artifact)
     if diagnostic:
         for name,expected in diagnostic["source_sha256"].items():
             path=HERE/name
@@ -203,6 +208,8 @@ def run_contract(contract):
                         ("/usr/local/dcmi","/usr/local/dcmi"),
                         ("/etc/ascend_install.info","/etc/ascend_install.info")]:
             if Path(src).exists():args+=["-v",src+":"+dst+(":rw" if dst=="/scratch" else ":ro")]
+        if formal_artifact:
+            args+=["-v",formal_artifact["path"]+":/inputs/tokens.json:ro"]
         env={"ASCEND_RT_VISIBLE_DEVICES":"0,1,2,3","HCCL_OP_EXPANSION_MODE":"AIV",
              "PYTORCH_NPU_ALLOC_CONF":"expandable_segments:True","TASK_QUEUE_ENABLE":"1",
              "VLLM_ASCEND_ENABLE_FLASHCOMM":"1","HCCL_NPU_SOCKET_PORT_RANGE":
@@ -261,6 +268,10 @@ def run_contract(contract):
                  "temperature":0,"seed":0,"max_tokens":32,"chat_template_kwargs":{"enable_thinking":False}}
         payload=contract.get("request_payload",payload)
         payloads=contract.get("request_payloads")
+        if formal_payloads is not None:
+            if payloads or contract.get("request_payload_specs"):
+                raise ValueError("ambiguous formal request payloads")
+            payloads=formal_payloads
         if contract.get("request_payload_specs"):
             from synthetic_compact_workload import expand_payloads
             payloads=expand_payloads(contract["request_payload_specs"],contract["public_token_recipe"])
