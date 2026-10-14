@@ -1,5 +1,5 @@
 import unittest
-from independent_formal_layout import formal_layout
+from independent_formal_layout import formal_layout, assemble_formal_prompts
 from independent_request_map import RequestSlice
 from independent_segment_selection import SegmentSelection
 from independent_mixed_query_plan import plan_mixed_queries, NativeQueryPlan
@@ -21,5 +21,19 @@ class FormalLayoutTests(unittest.TestCase):
     def test_invalid_index(self):
         for index in (-1,True,1.0,"0"):
             with self.assertRaises(ValueError):formal_layout(index)
+
+    def test_supplied_streams_preserve_full_denominator(self):
+        a=[1]*8192;b=[2]*16384
+        parts=[([100+i]*formal_layout(i).bridge,[200+i]*formal_layout(i).tail) for i in range(40)]
+        prompts=assemble_formal_prompts(a,b,parts)
+        self.assertEqual(len(prompts),40)
+        for p in prompts:
+            t=p["token_ids"];x=formal_layout(p["index"])
+            self.assertEqual(t[:8192],tuple(a))
+            self.assertEqual(t[p["segment_start"]:p["segment_end"]],tuple(b))
+            self.assertEqual(len(t),32768)
+        with self.assertRaises(ValueError):assemble_formal_prompts(a,b,parts[:-1])
+        parts[0]=([True]*1024,parts[0][1])
+        with self.assertRaises(ValueError):assemble_formal_prompts(a,b,parts)
 
 if __name__=="__main__":unittest.main()
