@@ -65,6 +65,14 @@ def processes(text):
 def inspect(cid):
     return json.loads(command(["docker","inspect",cid]))[0]
 
+def classify_process_owner(cgroup,cid,*,same_pid_namespace=False):
+    if cid and cid in cgroup:return 'owned-cgroup'
+    if cid and same_pid_namespace:return 'owned-pid-namespace'
+    paths=[line.split(':',2)[-1] for line in cgroup.splitlines()]
+    if paths and any(path not in ('/','owner_unverified') for path in paths):
+        return 'foreign-cgroup'
+    return 'ownership-unresolved'
+
 def snapshot(cid=None):
     text = command(["npu-smi","info"],timeout=15)
     rows = processes(text)
@@ -75,9 +83,23 @@ def snapshot(cid=None):
             cgroup = Path("/proc",str(pid),"cgroup").read_text()
         except OSError:
             cgroup = "owner_unverified"
-        if not cid or cid not in cgroup:
-            foreign.append({"npu":n,"pid":pid,"cgroup":cgroup})
-        owners.append({"npu":n,"pid":pid,"cgroup":cgroup,"owned":bool(cid and cid in cgroup)})
+        same_namespace=False
+        if cid and cid not in cgroup:
+            try:
+                meta=inspect(cid)
+                if meta['Id']!=cid:raise ValueError('exact container identity changed')
+                initpid=meta['State']['Pid']
+                # Independent live membership proof; do not infer ownership
+                # from a familiar PID or a historical process receipt.
+                if meta['State']['Running'] and initpid>0:
+                    same_namespace=(Path('/proc',str(pid),'ns','pid').readlink()==
+                                    Path('/proc',str(initpid),'ns','pid').readlink())
+            except (OSError,KeyError,ValueError,subprocess.SubprocessError):pass
+        status=classify_process_owner(cgroup,cid,same_pid_namespace=same_namespace)
+        owned=status.startswith('owned-')
+        observation={"npu":n,"pid":pid,"cgroup":cgroup,"ownership_status":status}
+        if not owned:foreign.append(observation)
+        owners.append(dict(observation,owned=owned))
     return {"utc":datetime.now(timezone.utc).isoformat(),"processes":target,"owners":owners,"foreign":foreign,"raw":text}
 
 def port_free(port):

@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST ownership guard now records owned-cgroup/owned-pid-namespace/
+foreign-cgroup/ownership-unresolved. When cgroup unavailable/root, exact live
+CID initPID namespace equality is independently checked; historical PID alone
+never grants ownership. Unresolved STILL blocks/stops only owned job, true
+foreign unchanged; not relaxed isolation.020e passes13 ownership/harness/wave
+controls. Controller SHA changed, NEWlong-r5 contract required. Cannot recover
+long-r4 transientPID identity retroactively or call it proven foreign.
+
 LATEST long-r4/0201 TERMINAL startup guardexit1,0responses,23samples.
 0206 source/release audit56hashes unchanged/exact f1f57915... absent. Observed
 physical0PID4188328 has root cgroup only; identity unresolved, NOT proof of
