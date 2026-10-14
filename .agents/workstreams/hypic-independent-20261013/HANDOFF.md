@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST real-mixed launch harness: native_tp4_smoke now supports explicit
+request_waves e.g[[0],[1,2]] and bounded0-5s start delays. Canonical producer
+finishes before private overlap; default stays sequential. Per-response client
+start/end timings retained, but worker SAME-step native+hot ledger is required
+to prove mixed execution.01b6 passes3 overlap/coverage/guard controls and8
+existing harness regressions. Controller changed: freeze NEW hash/manifest/root
+before launch; never reuse old contracts. No new device job. Next create mixed
+Canary config/current source manifest and contract, then fresh idle admission.
+
 LATEST mixed-class preflight r2/01a7 exit0; independent01ae PASS disabled
 unchanged, enable_mixedFALSE/TRUE exact original-method restoration,50source
 hashes unchanged,16clean samples with physical0 observed, exact80e35ab2... absent,

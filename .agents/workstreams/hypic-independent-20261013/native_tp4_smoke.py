@@ -234,17 +234,21 @@ def run_contract(contract):
         if contract.get("request_payload_specs"):
             from synthetic_compact_workload import expand_payloads
             payloads=expand_payloads(contract["request_payload_specs"],contract["public_token_recipe"])
-        for i in range(3):
-            if payloads:
-                payload=payloads[i]
+        from independent_request_waves import execute_waves
+        payloads=payloads if payloads else [payload]*3
+        if len(payloads)!=3:raise ValueError('smoke requires exact3 payloads')
+        waves=contract.get('request_waves',[[0],[1],[2]])
+        delays={int(k):v for k,v in contract.get('request_start_delays',{}).items()}
+        def send(payload):
             require_guard()
             before=snapshot(cid);retain_snapshot(before)
             if before["foreign"]:raise RuntimeError("Foreign process before request")
-            response=request(port,payload,completion=contract.get("completion",False),
-                             timeout=contract.get("request_timeout_seconds",60))
-            journal.append({"event":"response","index":i,"payload":payload,"response":response})
+            return request(port,payload,completion=contract.get("completion",False),
+                           timeout=contract.get("request_timeout_seconds",60))
+        for record in execute_waves(payloads,waves,send,check_guard=require_guard,start_delays=delays):
+            journal.append(dict(record,event='response'))
             require_guard()
-            responses.append({"index":i,"payload":payload,"response":response})
+            responses.append(record)
             after=snapshot(cid);retain_snapshot(after)
             if after["foreign"]:raise RuntimeError("Foreign process after request")
         if not contract.get("completion",False):
