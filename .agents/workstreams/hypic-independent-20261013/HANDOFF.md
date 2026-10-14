@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST executable sand-table0156 PASS: formal32768/16384/c16 row protocol,
+4ranks x3placements x4PDCprogress=48combinations, hot/cold/partial/decode mix.
+Independent dense-row oracle, sampler retention, causal endpoints, and full
+native/hot write coverage without any PDCprefix writes verified.0158 PASS25
+existing failure/rollback/map controls (private-state unchanged on late failure,
+nonfinite rejection, pin/context release, lease drift). This is CPU planning/
+component rehearsal, NOT real handler integration, numerical or quality proof.
+Next actual handler fixture/official runtime loadability then new immutable
+mixed Canary. Deadline19:03:48UTC unchanged; no new card task this turn.
+
 LATEST scoped mixed admission wired: enable_mixed boolean defaultsFALSE;
 explicit opt-in captures mixed runner snapshots and selects per-request plans
 only with all48C1/16C2 materials ready/pinned and at least one body omission.
