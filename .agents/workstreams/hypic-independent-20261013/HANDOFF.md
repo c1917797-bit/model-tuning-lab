@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT G1round1 native baseline exec-0000000000000423 on fresh ma a6109,
+root /cache/cch/hypic-independent-20261013/formal-performance-g1-r1.
+G3r2/03f4 terminal exit0:40/40success,617clean isolation,exact release.
+Independent041d full40 fourrank48/16 hot coverage PASS;0420 all91source
+bindings/explicit physical PID maps/full transport PASS;0422 actual oldCID
+absent/physical0-3 idle/8233free. G1 PDCoff/HYPICoff same full protocol.
+Absolute19:03:48UTC unchanged; own guard releases at deadline if unfinished.
+No matched speed claim yet; fullmatrix/quality/lifecycle/29Skills incomplete.
+Poll0423/root;never restart live/unknown. Older running entries below historical.
+
 CURRENT G3round1 successorr2 exec-00000000000003f4,freshma a6109,
 checkpoint8630ea49,rawroot/cache/cch/hypic-independent-20261013/formal-performance-g3-r2.
 03f3 all91sources/newroot/physical0-3/8233/HCCL/no staged evaluator PASS.
