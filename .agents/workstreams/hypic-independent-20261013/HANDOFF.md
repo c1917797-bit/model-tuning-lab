@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST long-r5/0214 terminalexit1,0responses,99samples. Physical0PID105755
+at11:58:47UTC twice has confirmed foreign-cgroupefc5e45e.../cannbench_ds;
+NOT ambiguous root cgroup or our worker. Exact8f2fb34f... absent independently;
+finalsnapshot retains ONLY foreign105755, never touched. No live owned job.
+Repair still untested on private long request. Stable30minute0-3 window asked
+as coordination, not new permission; otherwise continue fresh monitoring and
+offline real handler work. Root immutable; audit hashes before source change.
+
 CURRENT long-r5 exec-0000000000000214 on ma peer
 lgw_a6109c51076a4a2c9d2674ca5a8704a0; checkpoint6610aee2;rawroot
 /cache/cch/hypic-independent-20261013/compact-long-r5.0212 freshsources/

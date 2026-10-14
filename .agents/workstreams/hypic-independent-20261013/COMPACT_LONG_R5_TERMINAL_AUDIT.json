@@ -1,0 +1,76 @@
+{
+  "scope": "execution interrupted by confirmed foreign container, not algorithm result",
+  "operation": "0214",
+  "source_hashes_checked": 56,
+  "foreign_observations": [
+    {
+      "utc": "2026-10-14T11:58:47.303548+00:00",
+      "device": 0,
+      "pid": 105755,
+      "ownership_status": "foreign-cgroup",
+      "cgroup": "13:blkio:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+    },
+    {
+      "utc": "2026-10-14T11:58:47.966582+00:00",
+      "device": 0,
+      "pid": 105755,
+      "ownership_status": "foreign-cgroup",
+      "cgroup": "13:blkio:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+    }
+  ],
+  "own_absent": true,
+  "result": {
+    "valid": false,
+    "error": {
+      "type": "RuntimeError",
+      "message": "Foreign physical process detected"
+    },
+    "guard_errors": [
+      {
+        "type": "RuntimeError",
+        "message": "Foreign physical process detected",
+        "raw": null
+      }
+    ],
+    "isolation_samples": 99,
+    "responses": 0,
+    "worker_pids": [
+      80382,
+      80383,
+      80384,
+      80386
+    ],
+    "physical_devices_seen": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "release": {
+      "owned_container": "8f2fb34f69392c006ff16aa6b787b826cb6b2f1eceda46223ee4c5923637894e",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": [
+        [
+          0,
+          105755
+        ]
+      ]
+    }
+  },
+  "raw_hashes": {
+    "result.json": "0c62fb8ff2054a7db19632e1b053d9be41903dfc120262ee80cdc707f814259a",
+    "events.jsonl": "7227888b74bd526945deb4d9f2e238cdcfefb47791467f8afbe5dde09824ac8a",
+    "service.log": "44dc609f923ba15845e0f42505979654849393f4ddac284aa761ee62e36c9825",
+    "launch.json": "f0e64830c5f7175b51aa7ce659167a82d8ad59c43c351936b5146c346dc7a6cf",
+    "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "preflight.json": "940a428e5cc6b40d40225d69ab1dfb5cf911ee56ce1dbc959dbee2c709255f8a",
+    "service-start.json": "384973843c0a21d7d6363b51576692e9716fbdfd03c80884c990eaaf11e6ba1f",
+    "isolation.json": "c803761c3b7a1bd6bb43e89555078eb5881687f38369a324744ca6de7376fa02",
+    "release.json": "4331d877edaa6ab1a907c5c484e6d22a28546bf7284ed6cef0bb37945bb3ba79",
+    "diagnostics/compact-worker-58.jsonl": "aada1dd40414178d07d4cb7c3b00ee6080442d9061451147dde53a3a94a25868",
+    "diagnostics/compact-worker-59.jsonl": "bda77de0ed37f9ad138400289020ac0d02a28d9f829dd78f150b9bc56630d581",
+    "diagnostics/compact-worker-61.jsonl": "16adb77dbe044ca81d47cffec6dfcc76e06a3d7eb1354d4678391affaf1652d8",
+    "diagnostics/compact-worker-60.jsonl": "19485be34155dfbdb083a6b6eda56f863fc534ba30fa582a1ac178048d2e6b56"
+  }
+}
