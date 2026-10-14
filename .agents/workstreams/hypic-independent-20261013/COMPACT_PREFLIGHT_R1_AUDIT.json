@@ -1,0 +1,24 @@
+{
+  "scope": "Official NPU-backed complete class hook install/uninstall only; no real requests",
+  "controller_operation": "exec-00000000000000be",
+  "independent_audit_operation": "exec-00000000000000c5",
+  "raw_root": "/cache/cch/hypic-independent-20261013/compact-preflight-r1",
+  "checkpoint": "ec5bce4d",
+  "exit_code": 0,
+  "source_verified": true,
+  "installed": true,
+  "original_methods_restored": true,
+  "weights_loaded": false,
+  "inference_requests": 0,
+  "isolation_samples": 16,
+  "owned_physical0_observations": 11,
+  "exact_removed_container": "9522b1fbb2101d9d74a111b86dd00bb04c78132fd638e2d83194b3ad68ae2863",
+  "independent_absence_verified": true,
+  "final_physical0_3_processes": [],
+  "raw_sha256": {
+    "events.jsonl": "4ea828a87f00860aa269a617a6cf1b1c55ac592b6eb79dfcbcd21d78e0248ad9",
+    "result.json": "ab57947e6650393d6692c0e03930a74094e8a3a68aa3fd2aa4f9428320eaf876",
+    "stdout.log": "342c0e0ca644b6c03e4905675a5e5ed50a504ad62ce433df33ffe15c663df09b"
+  },
+  "limitations": ["No worker inference activation", "No compact numerical integration", "No performance or quality acceptance"]
+}

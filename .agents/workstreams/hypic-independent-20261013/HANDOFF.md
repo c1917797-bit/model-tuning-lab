@@ -1,5 +1,23 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST compact-preflight-r1/00be terminalexit0. Independent00c5 verifies all
+launched Python hashes unchanged, real official enabled class flags and exact
+original methods after uninstall;16clean isolation samples,11owned physical0
+observations, exact9522b1fbb210... absent and final0–3empty. Receipt
+COMPACT_PREFLIGHT_R1_AUDIT.json. No weights/requests: this passes loadability
+only. Root immutable, do not rerun. No live owned job. Next add hash-bound
+worker loader and integrated27B TP4 request/activation contract, then launch
+only after new fresh direct route/physical0–3/8233 checks.
+
+CURRENT compact-preflight-r1 controllerexec-00000000000000be on ma peer
+lgw_a6109c51076a4a2c9d2674ca5a8704a0; raw root
+/cache/cch/hypic-independent-20261013/compact-preflight-r1. Checkpointec5bce4d.
+Physical0 only, all0–3 isolation guard,240s bounded class install/uninstall;
+no weights/inference.00c0 confirmed exact9522b1fbb210 container running.
+Poll same handle/root; no restart or mounted-Python edits while live/uncertain.
+After terminal independently audit source/ownership/precise release before
+new integrated service attempt. This class preflight cannot prove HYPIC requests.
+
 LATEST complete compact assembly: CompactCanonicalStage verifies48linear/
 16full layer inventory, checks all material before model admission and pins
 all layers across the model forward. Scoped runtime snapshot supplies sampler
