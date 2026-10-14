@@ -1,0 +1,116 @@
+{
+  "schema": "hypic-quality-data-location/v1",
+  "operations": [
+    "02eb",
+    "02ec"
+  ],
+  "files": [
+    {
+      "path": "/cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2/data_40sample.json",
+      "sha256": "27532fd1c332fccbc1bb621bf202e944868807773ca4ecfe446eecbde8876f66",
+      "count": 40,
+      "first_keys": [
+        "_id",
+        "domain",
+        "sub_domain",
+        "difficulty",
+        "length",
+        "question",
+        "choice_A",
+        "choice_B",
+        "choice_C",
+        "choice_D",
+        "answer",
+        "context"
+      ]
+    },
+    {
+      "path": "/cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2/data_full.json",
+      "sha256": "f3833b46bf4ccca48fc2f81a0efdcf9cd362ac2ec426c66068b1363e094250a1",
+      "count": 503,
+      "first_keys": [
+        "_id",
+        "domain",
+        "sub_domain",
+        "difficulty",
+        "length",
+        "question",
+        "choice_A",
+        "choice_B",
+        "choice_C",
+        "choice_D",
+        "answer",
+        "context"
+      ]
+    },
+    {
+      "path": "/cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2/full_data.json",
+      "sha256": "15d61c22d92c96900b3c4948b6aeea218d3214b676a65df48e7b8555604c7fe2",
+      "count": 503,
+      "first_keys": [
+        "_id",
+        "domain",
+        "sub_domain",
+        "difficulty",
+        "length",
+        "question",
+        "choice_A",
+        "choice_B",
+        "choice_C",
+        "choice_D",
+        "answer",
+        "context"
+      ]
+    },
+    {
+      "path": "/cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2/data_filtered_40k.json",
+      "sha256": "cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a",
+      "count": 127,
+      "first_keys": [
+        "_id",
+        "domain",
+        "sub_domain",
+        "difficulty",
+        "length",
+        "question",
+        "choice_A",
+        "choice_B",
+        "choice_C",
+        "choice_D",
+        "answer",
+        "context",
+        "_input_length"
+      ]
+    },
+    {
+      "path": "/cache/cch/hhs-aisbench/ais_bench/datasets/LongBench-v2/data.json",
+      "sha256": "cdaa9e98deaefbba86f5eadeb287dd2ae90ed8f33313587dc547218b770fa39a",
+      "count": 127,
+      "first_keys": [
+        "_id",
+        "domain",
+        "sub_domain",
+        "difficulty",
+        "length",
+        "question",
+        "choice_A",
+        "choice_B",
+        "choice_C",
+        "choice_D",
+        "answer",
+        "context",
+        "_input_length"
+      ]
+    },
+    {
+      "path": "/cache/cch/hhs-aisbench/ais_bench/datasets/gsm8k/test.jsonl",
+      "sha256": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+      "count": 1319,
+      "first_keys": [
+        "question",
+        "answer"
+      ]
+    }
+  ],
+  "scope": "Raw dataset identity/count only; no prompt template, tokenizer, evaluator, NPU or quality acceptance."
+}

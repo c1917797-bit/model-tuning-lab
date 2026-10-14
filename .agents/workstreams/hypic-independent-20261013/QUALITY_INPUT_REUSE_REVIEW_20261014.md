@@ -1,5 +1,13 @@
 # Quality input reuse review
 
+Latest02eb/02ec resolves and verifies raw data files under
+/cache/cch/hhs-aisbench/ais_bench/datasets. LongBench-v2/data.json and
+data_filtered_40k.json both match frozen cdaa9e98... and127 rows;
+gsm8k/test.jsonl matches3730d312... and1319 rows. Receipt records all variants.
+The503-row full files and40-row subset are distinct; do not substitute them.
+Earlier unresolved-location notes below are historical. Evaluator/template/
+fresh token segment generation are still unresolved, not quality acceptance.
+
 Read-only probes02de/02e2/02e5 examined old contracts and sample-report schema,
 not prior HYPIC treatment implementation. Old outcome roots remain immutable.
 
