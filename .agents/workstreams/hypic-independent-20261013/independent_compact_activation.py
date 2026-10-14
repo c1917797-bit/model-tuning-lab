@@ -25,7 +25,7 @@ def verify_model_source(cls):
             raise ValueError('official hybrid model source drift')
 
 
-def activate_compact_hypic(config,*,enabled=False,emit=None):
+def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_limit=128):
     if not enabled:return lambda:None
     if not callable(emit):raise ValueError('activation evidence sink required')
     # Official ops registration precedes runtime imports; never patch source files.
@@ -48,7 +48,8 @@ def activate_compact_hypic(config,*,enabled=False,emit=None):
               'transition_shape':list(material.affine.transition.shape),
               'zero_state_shape':list(material.affine.zero_state.shape)})
     stop=install_owned_chain((
-        lambda:activate_compact_runner(enabled=True,allow_mixed=stage.enable_mixed,emit=emit),
+        lambda:activate_compact_runner(enabled=True,allow_mixed=stage.enable_mixed,emit=emit,
+                                      request_limit=request_progress_limit),
         lambda:stage.install_producer(enabled=True,publish=publish),
         lambda:install_compact_gdn(stage,enabled=True,emit=emit),
         lambda:install_compact_c2(stage,enabled=True,emit=emit),

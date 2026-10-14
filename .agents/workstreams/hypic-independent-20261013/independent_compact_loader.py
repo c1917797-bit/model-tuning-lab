@@ -18,6 +18,8 @@ def enable():
     config_path=(base/manifest['config']).resolve()
     if not config_path.is_relative_to(base):raise ValueError('config outside package')
     config=json.loads(config_path.read_text())
+    from independent_evidence_limits import evidence_limits
+    limits=evidence_limits(config.pop("evidence_limits",None))
     if 'public_token_artifact' in config:
         if 'public_tokens' in config or 'public_token_recipe' in config:
             raise ValueError('ambiguous public token configuration')
@@ -44,7 +46,8 @@ def enable():
                 event=dict(event,pid=os.getpid(),manifest_sha256=hashlib.sha256(manifest_path.read_bytes()).hexdigest())
                 data=(json.dumps(event,sort_keys=True)+'\n').encode()
                 with lock:
-                    if count>=10000 or size+len(data)>33554432:raise ValueError('compact evidence bound exceeded')
+                    if count>=limits["max_events"] or size+len(data)>limits["max_bytes"]:
+                        raise ValueError('compact evidence bound exceeded')
                     view=memoryview(data)
                     while view:
                         n=os.write(fd,view)
@@ -53,7 +56,8 @@ def enable():
                     os.fsync(fd);count+=1;size+=len(data)
             try:
                 from independent_compact_activation import activate_compact_hypic
-                _stop=activate_compact_hypic(config,enabled=True,emit=emit)
+                _stop=activate_compact_hypic(config,enabled=True,emit=emit,
+                                           request_progress_limit=limits["max_requests"])
             except BaseException:
                 os.close(fd);raise
             sys.meta_path.remove(_finder)
