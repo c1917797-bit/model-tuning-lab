@@ -1,0 +1,26 @@
+{
+  "scope": "Startup interrupted by external isolation interference; no HYPIC request result",
+  "controller_operation": "exec-00000000000000d9",
+  "raw_root": "/cache/cch/hypic-independent-20261013/compact-canary-r2",
+  "exit_code": 1,
+  "responses": 0,
+  "isolation_samples": 4,
+  "foreign_physical_device": 0,
+  "foreign_pid_observed": 2142484,
+  "foreign_container": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+  "foreign_name": "cannbench_ds",
+  "ongoing_external_task_observed": "PID2146605 kernel_eval.staged_eval, child eval process2156570 observed after terminal",
+  "foreign_untouched": true,
+  "owned_container_removed": "28a68d800a8a31ff2dc9fba4e531d407a8def4726f4d39040b39bab425ad38fe",
+  "port8233_free": true,
+  "final_physical_processes_at_release": [],
+  "raw_sha256": {
+    "events.jsonl": "58360683f4a964bfde59510c02b4c6aa4cee48eb2b30130ae6ab557613a72ca2",
+    "isolation.json": "8724494fd966bb70b30dbcb5b066ee0af931dd463b319b346e9c1656d51b2ad8",
+    "launch.json": "ed46ac503b9330d96e93a66fad4e9db14195496f752773ddf2d2426db832a5b5",
+    "release.json": "1cd54eea2eab84616d82e0dc64dbf17a1ac36aa8991542600a4e83508f155a29",
+    "result.json": "fabff3a0188a1c28ed48e384b10e17e0b4e97b1c2db59fb1e60c529dde2f043c",
+    "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "next": "Monitor the active external evaluator through terminal and revalidate physical0-3/port before a NEW immutable attempt; do not reuse r1/r2"
+}

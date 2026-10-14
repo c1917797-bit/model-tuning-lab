@@ -1,5 +1,27 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST compact-canary-r2/00d9 terminalexit1,0responses,4samples: foreign
+physical0PID2142484 incannbench_ds/efc5e45e... appeared in startup; owned
+28a68d800a8a... removed/8233free, final snapshotempty. This is another external
+interference execution failure, not algorithm rejection. Foreign task untouched.
+Post-terminal docker process inspection confirms active kernel_eval.staged_eval
+PID2146605/child2156570; transient gaps between cases are not evaluator terminal.
+Monitor actual evaluator/physical processes, then freeze NEW root before launch;
+do not reuse r1/r2 or count short gap as a finished foreign job. Passive container
+presence alone remains nonblocking. Terminal COMPACT_CANARY_R2_TERMINAL.json.
+Offline independent audit_compact_mechanism added: requires exact per-request/
+rank/step48linear+16full and24retained/56skipped rows, source identity and stable
+worker PID.00e1 passes3 synthetic missing/duplicate/fallback/step negative
+controls; no real successful compact ledger yet. No owned live device job.
+
+CURRENT compact-canary-r2 controllerexec-00000000000000d9 on current ma peer
+lgw_a6109c51076a4a2c9d2674ca5a8704a0. Raw root
+/cache/cch/hypic-independent-20261013/compact-canary-r2.08:30UTC00d8 fresh
+physical0–3empty/8233free, foreignPID2089110 ended. Same frozen code/protocol
+as r1, newroot only. Poll exact handle/root, no restart or mounted-source edits
+while live/uncertain. Audit full4rank/64layer activation and skipped rows after
+terminal; HTTP/request count alone is not compact HYPIC mechanism success.
+
 LATEST compact-canary-r1/00cf terminalexit1,0responses: foreign physical3
 PID2089110 belongs tocannbench_ds/efc5e45e... and appeared during startup.
 Isolation guard stopped ONLY ownedfb728e77...; independent absence/8233free
