@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT compact-long-r1 controllerexec-00000000000000ff on current ma peer
+lgw_a6109c51076a4a2c9d2674ca5a8704a0; checkpointf9011848. Raw root
+/cache/cch/hypic-independent-20261013/compact-long-r1. Frozen16Kpublic/32K
+private, placements4096/7168, two private1024fixed-output requests; eager,
+nativePDCoff,27Bphysical0–3TP4. Required16376body rows skipped/16392retained,
+all4rank48linear+16full proof. Synthetic recipes keep large token arrays out
+ofGit; generated actual payloads are retained in immutable raw evidence.
+00fc passes12 focused recipe/loader/controller tests. No formal paired
+performance or task-quality claim. Poll exacthandle/root; no restart or
+mountedPython/config/manifest edits while live/uncertain. Audit new rawroot
+after terminal, capture live NSpid/cgroup->physical map before workers exit.
+
 LATEST compact-canary-r3/00e9 terminalexit0. Independent00f9 PASS: canonical
 public48C1+16C2/rank; two private requests on ALL4ranks each48C1+16C2,
 80original/24retained/56body rows skipped,8decode tokens each. Exact API IDs
