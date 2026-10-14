@@ -1,5 +1,27 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST compact-canary-r1/00cf terminalexit1,0responses: foreign physical3
+PID2089110 belongs tocannbench_ds/efc5e45e... and appeared during startup.
+Isolation guard stopped ONLY ownedfb728e77...; independent absence/8233free
+verified. Foreign task untouched and still active on3 at08:28UTC. Terminal
+COMPACT_CANARY_R1_TERMINAL.json. This is not a HYPIC algorithm result.
+Frozen COMPACT_CANARY_R2_CONTRACT.json keeps same code/protocol with NEW raw
+root/owned container. DO NOT launch while actual0–3 foreign processes remain.
+Wait for fresh idle snapshot; then new topology/direct/source/port checks.
+No owned live device job. r1 root remains immutable and must not be reused.
+
+CURRENT compact-canary-r1 controllerexec-00000000000000cf on ma peer
+lgw_a6109c51076a4a2c9d2674ca5a8704a0. Raw root
+/cache/cch/hypic-independent-20261013/compact-canary-r1; checkpoint3d72cc84.
+Hash-bound compact worker loader,27B physical0–3TP4 eager/nativePDCoff;
+canonical64-token public material, two relocated80-token private prompts,
+8fixed decode tokens each. Required per private request/rank48C1 and16C2
+markers,56body rows skipped and24retained model rows.120CPU regressions00cd
+passed before launch. Not formal1024output performance or task quality.
+Poll exact handle/root. No restart or edits to mounted Python/manifest/config
+while live/uncertain. Terminal requires independent source/request/worker,
+all-layer activation/skip and physical isolation/exact release audit.
+
 LATEST compact-preflight-r1/00be terminalexit0. Independent00c5 verifies all
 launched Python hashes unchanged, real official enabled class flags and exact
 original methods after uninstall;16clean isolation samples,11owned physical0

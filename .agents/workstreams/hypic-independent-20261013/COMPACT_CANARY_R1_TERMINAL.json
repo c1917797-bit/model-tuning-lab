@@ -1,0 +1,29 @@
+{
+  "scope": "Failed execution due to external isolation interference; algorithm not evaluated",
+  "controller_operation": "exec-00000000000000cf",
+  "checkpoint": "3d72cc84",
+  "raw_root": "/cache/cch/hypic-independent-20261013/compact-canary-r1",
+  "exit_code": 1,
+  "responses": 0,
+  "isolation_samples": 3,
+  "failure": "Foreign physical process appeared on NPU3 during startup",
+  "foreign_container": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+  "foreign_name": "cannbench_ds",
+  "foreign_pid": 2089110,
+  "foreign_command": "kernel_eval.staged_eval cann benchmark on container device0 mapping to physical3",
+  "foreign_untouched": true,
+  "exact_owned_container_removed": "fb728e77a524c615b829d394de088c918a71f8bc6da5ef2fe0bf04ead9ca5159",
+  "independent_absence_check": "Docker inspect of exact owned CID returned No such object after terminal",
+  "port8233_free": true,
+  "raw_evidence_inspection": "Independent reads of immutable result/isolation/service log and SHA256; full technique source audit not claimed",
+  "raw_sha256": {
+    "events.jsonl": "d5cf9231a27e86670637f0c648403e609a6b21a7bedbce9bed43921b9c9e36f0",
+    "isolation.json": "8d1d43538044de552774cc89e3fd3d37f14f667d249269f533d8ff799ba118a4",
+    "launch.json": "f47de0a47c0acfdb6be8884530d2df73cbe1d41c1c400231fffc155d52a19893",
+    "release.json": "0fb7f65699f28ac2a29b5033ce6f2f1808e39a0bac507a9883b643c1ff74905e",
+    "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "result.json": "fd83b49bd81b150a108fe45960386ae8649e88161dabb605fe166e68547aa94a",
+    "service.log": "60bfc930abeb875a49ac48624c7bb868428a72483e347adc61a6e87d939ea509"
+  },
+  "next": "Wait for actual0-3 idle then launch frozen new r2 root; preserve r1 immutable"
+}
