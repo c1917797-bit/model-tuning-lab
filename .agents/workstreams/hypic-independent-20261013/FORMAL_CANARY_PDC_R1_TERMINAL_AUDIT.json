@@ -1,0 +1,61 @@
+{
+  "operation": "025e",
+  "result": {
+    "valid": false,
+    "error": {
+      "type": "RuntimeError",
+      "message": "Foreign physical process detected"
+    },
+    "guard_errors": [
+      {
+        "type": "RuntimeError",
+        "message": "Foreign physical process detected",
+        "raw": null
+      }
+    ],
+    "isolation_samples": 22,
+    "responses": 0,
+    "worker_pids": [],
+    "physical_devices_seen": [],
+    "release": {
+      "owned_container": "0cba5e0b62c02867118e5b634c4ccdec0d59cdc9bfe9998ba5bb6228238ae19f",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": [
+        [
+          0,
+          522605
+        ]
+      ]
+    }
+  },
+  "foreign": [
+    {
+      "utc": "2026-10-14T12:39:37.517477+00:00",
+      "npu": 0,
+      "pid": 522605,
+      "status": "foreign-cgroup",
+      "cgroup": "13:blkio:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+    },
+    {
+      "utc": "2026-10-14T12:39:37.660975+00:00",
+      "npu": 0,
+      "pid": 522605,
+      "status": "foreign-cgroup",
+      "cgroup": "13:blkio:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6"
+    }
+  ],
+  "source_count": 58,
+  "exact_own_absent": true,
+  "raw_hashes": {
+    "result.json": "958d3f077da8292d8727fcc4ed5c49dd44c7ad4b7fa2ee92d76871e5cff27009",
+    "events.jsonl": "0dbc07eed250ed50f7bc740cd4c7f244cbb380a95f3298080036a1e80985e6d5",
+    "service.log": "bd401077126b1eb07f1eea23b0b3e00bcbf68dd168e1d604ece6107969879bae",
+    "launch.json": "1bc8eeabacfd148066adba5d337ae75beed9301b89af28d4346c100dccdd87ae",
+    "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "preflight.json": "2509025a6ed7d320c81ed2a77fc35bc4d9ddbcf21f7e8b93b71865a2c58f97a9",
+    "service-start.json": "983d2f569b0e184ef8e1b03edf303e59abf530c6a386b96a0cf5c602f39adc65",
+    "isolation.json": "782a786d031544c1df57bc0843f817c87f538be0a7c2607b28c3b357b4c25626",
+    "release.json": "d80cfc40d9f3433a3dc50144d044d9c2f61b982bec0a13ec79672900627e7387"
+  }
+}

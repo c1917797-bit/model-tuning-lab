@@ -970,3 +970,12 @@ producer then2private A8192+bridge+B+tail32K/output1024. Native PDC enabled.
 Poll exact handle/root; running or unclear no restart or mounted-source edits.
 Independent terminal audit must prove fourrank materials/reuse/PDCcomputed prefix,
 sources/request tokens/isolation/exact owned release; not formal performance.
+# Latest formal PDC Canary terminal supersedes live text
+
+025e exit1,0requests/22samples:confirmed cannbench_dsphysical0PID522605.
+0260 independently proves58sourcehashes unchanged and exact ownCIDabsent;
+8233released, external process untouched. Raw formal-canary-pdc-r1 immutable.
+FORMAL_CANARY_PDC_R1_TERMINAL_AUDIT.json retains exact foreign provenance/hashes.
+No liveownedjob or PDC/long-boundary proof. Do not restart oldroot.
+Coordination window needs to actually suppress new external0-3 jobs;
+transient empty snapshots repeatedly fail during full27B initialization.
