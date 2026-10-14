@@ -1,0 +1,23 @@
+{
+  "schema": "independent-preflight-terminal-audit/v1",
+  "operation": "018a",
+  "scope": "execution failure, not algorithm result",
+  "raw_root": "/cache/cch/hypic-independent-20261013/compact-mixed-preflight-r1",
+  "sources_checked": 50,
+  "source_drift": [],
+  "samples": 2,
+  "foreign": [
+    [
+      0,
+      3506733
+    ]
+  ],
+  "own_cid": "d4a420f68bba9d4811abc4080223f5b33131965a33e0f6e9e1ec92555fe27fcf",
+  "own_absent": true,
+  "probe_stdout_bytes": 0,
+  "raw_hashes": {
+    "result.json": "8b98854de72b5e22e2e0c0546b696342e5b59c5af5c7bcabc88e2ac90af3661b",
+    "events.jsonl": "4d5705c431c07a5b9f52147a264f4fe602c52334194c63c63ab69a288e41605a",
+    "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

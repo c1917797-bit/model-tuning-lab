@@ -1,5 +1,20 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST mixed preflight018a TERMINAL exit1: after fresh idle, foreign physical0
+PID3506733 appeared.018c independently proves cgroupcannbench_ds/efc5e45e...
+not ours; exact ownd4a420f6... absent.2isolation samples,empty probe stdout;
+no installation result. No live owned job. Root immutable, DO NOT repeat into
+uncoordinated short gaps. Offline actual handler fixtures remain actionable;
+stable0-3 window needed for device gates. Foreign tasks untouched.
+
+CURRENT mixed-class preflight exec-000000000000018a on fresh ma peer
+lgw_a6109c51076a4a2c9d2674ca5a8704a0; rawroot
+/cache/cch/hypic-independent-20261013/compact-mixed-preflight-r1.
+0188 foreign evaluator inventory empty;0189 physical0-3empty/port26491free.
+Physical0only,240s bound; disabled/default/mixed installation+exact uninstall,
+no weights/requests. Poll exact handle/root, no mounted-source edits/restart.
+Terminal independently audit launch source hashes, cases and isolation/release.
+
 LATEST GDN handler precommit mapping guard now requires exact complete
 plan/state count, request/rank/step/row span/initial flag and unique state slots
 before any preparation; zip truncation cannot silently certify incomplete
