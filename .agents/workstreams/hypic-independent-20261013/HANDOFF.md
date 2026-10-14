@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST real mixed Canary01be exit0; independent01ce PASS3 responses1/512/8,
+54source hashes unchanged, physical/NSpid mapping all4ranks, per-request
+48GDN+16C2 body omission56/retained24. SAMEstep4 all4ranks includes native
+decode1row+hotprefill complete64layers.181clean isolation samples; exact
+333fe5ad... absent/8233free/final0-3empty. Audit COMPACT_MIXED_CANARY_R1_AUDIT.json.
+Bounded real mixed mechanism success, NOT formal16K/performance/quality/PDC
+orgraph acceptance. Root immutable, do not repeat. No live owned device job.
+Next current-source16Kpublic/32Kprivate/1024output bounded gate, then PDC/chunk
+and frozenG1-G4 three-round formal measurement, quality/lifecycle.
+
 CURRENT real mixed Canary exec-00000000000001be on ma peer
 lgw_a6109c51076a4a2c9d2674ca5a8704a0; checkpoint7e47ac27,rawroot
 /cache/cch/hypic-independent-20261013/compact-mixed-canary-r1.

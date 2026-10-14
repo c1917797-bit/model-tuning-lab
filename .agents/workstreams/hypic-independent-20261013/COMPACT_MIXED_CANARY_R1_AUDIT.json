@@ -1,0 +1,63 @@
+{
+  "scope": "bounded real mixed C1/C2 Canary, not formal performance/quality",
+  "controller": "01be",
+  "valid": true,
+  "completion_tokens": {
+    "0": 1,
+    "1": 512,
+    "2": 8
+  },
+  "source_hashes_checked": 54,
+  "four_rank_proofs": [
+    {
+      "rank": 0,
+      "mixed_step": 4,
+      "native_gdn": 48,
+      "native_c2": 16,
+      "hot_gdn": 48,
+      "hot_c2": 16
+    },
+    {
+      "rank": 1,
+      "mixed_step": 4,
+      "native_gdn": 48,
+      "native_c2": 16,
+      "hot_gdn": 48,
+      "hot_c2": 16
+    },
+    {
+      "rank": 3,
+      "mixed_step": 4,
+      "native_gdn": 48,
+      "native_c2": 16,
+      "hot_gdn": 48,
+      "hot_c2": 16
+    },
+    {
+      "rank": 2,
+      "mixed_step": 4,
+      "native_gdn": 48,
+      "native_c2": 16,
+      "hot_gdn": 48,
+      "hot_c2": 16
+    }
+  ],
+  "isolation_samples": 181,
+  "own_absent": true,
+  "port_free": true,
+  "raw_hashes": {
+    "result.json": "da8d0305589417e93037e5663c239433a9e26e36cf398b5159b75d68fdbe4a62",
+    "events.jsonl": "134bbe418c56718b5d4a12384dd99b31009316833d474a76db0d67235f800b89",
+    "service.log": "80f54e0ebbb6b1cc8aeb4d1df28d8e3411323d43183769d117b649db4edb7c33",
+    "launch.json": "27df90fb07f061d521d66dbb1870d22ba2b920a0539be70f46c41428c481ea4e",
+    "responses.json": "a7fc7f61ea9365b3b90f747fbf3afdaa1d34768c744804624471d66a4cad2e1f",
+    "preflight.json": "d74dc818b7b3f222dafbf0acec7eb393afcd2e112ce0092b49d3d4adbdbfa451",
+    "service-start.json": "c25fce4d189a3fe634e5ed234b42549ed68aab1382e3c902206a47819a37a2c3",
+    "isolation.json": "4255ac713ceb8eec570646ea0db4d54758d3c308ebf2f2b36f90d0ca825e564f",
+    "release.json": "0624e8ae53fd0f8e39fbfeb433c58a961386a6b931fc2a4eab3548be89c1bea6",
+    "diagnostics/compact-worker-58.jsonl": "9e866259859f387bd2610cccc75e812c025797100384e053abe5265a3b125af0",
+    "diagnostics/compact-worker-59.jsonl": "2d6adec4e72a0668d1208e95982991ecd689438e55e0c5a96e4f01f690fef4e3",
+    "diagnostics/compact-worker-61.jsonl": "245ff0594d2f47748a6a1a933175ae86f1d6207f6db2bd19ce4431a1242a3878",
+    "diagnostics/compact-worker-60.jsonl": "48d26797137e2b751c103de2c500839898cba76c57b39ad165f9981e0109da04"
+  }
+}
