@@ -1,0 +1,14 @@
+{
+  "schema": "hypic-publication-read-check/v1",
+  "remote_branch": "work/hypic-independent-20261013",
+  "live_remote_commit": "bf71afe1ecc6e11d2a6b023995e89bb1c93ab9be",
+  "desktop_relay_branch": "b0c20d098d3c77c47b23bae82948d44045112929",
+  "relay_commit_scope": "old WIP state-only material path; not current verified scheduler/runtime checkpoint",
+  "relay_main": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+  "desktop_route": "live ls-remote succeeds outside sandbox; sandbox resolver failure was not remote Git failure",
+  "mutation": false,
+  "pushed": false,
+  "remote_main_verified": false,
+  "write_auth_verified": false,
+  "next": "Transfer exact current authorized passed checkpoint Git objects with SHA/type checks before normal work-branch fast-forward and live remote verification. Never claim current synchronization from old relay WIP."
+}
