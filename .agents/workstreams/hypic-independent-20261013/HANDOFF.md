@@ -988,3 +988,12 @@ Prepared warmup builder now B+distinct tail256 to match reference geometry.
 Actual hooks/device behavior still unverified; no NPU launch.
 Source hashes changed after025e terminal: ALL old manifests/contracts stale.
 Freeze new package and enabled-path tests before next hardware attempt.
+# CURRENT formal-token PDC r2
+
+ma exec-000000000000026f launched checkpoint31b60166 after026e physical0-3empty/
+8233free. Raw /cache/cch/hypic-independent-20261013/formal-canary-pdc-r2.
+New R2 package enables publicB-prefix capture within B+tail256; producer16640
+then two A8192+bridge+B+tail private32K/output1024, nativePDC enabled.
+Poll exact handle/root; no restart or live source edits. Terminal independent
+actual prefix-only material/fourrank long reuse/PDC/isolation/exact release audit.
+Old r1 remains confirmed external interruption and immutable.
