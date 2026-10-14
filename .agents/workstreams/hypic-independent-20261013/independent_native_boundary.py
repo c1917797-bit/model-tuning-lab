@@ -45,9 +45,11 @@ def make_boundary_runner(layer,projected,b,a,incoming_conv,*,return_conv=False):
             from independent_recurrent_boundary import recurrent_boundary
             output,state=recurrent_boundary(q,k,v,g,beta,initial_state.unsqueeze(0).contiguous())
         else:
+            from independent_boundary_metadata import build_boundary_metadata
+            meta=build_boundary_metadata(layer,length,projected.device)
             output,state=chunk_gated_delta_rule(
                 q=q,k=k,v=v,g=g,beta=beta,initial_state=initial_state.unsqueeze(0).contiguous(),
-                output_final_state=True,cu_seqlens=starts,prebuilt_meta=None,
+                output_final_state=True,cu_seqlens=starts,prebuilt_meta=meta,
                 head_first=False,use_qk_l2norm_in_kernel=True)
         torch.npu.synchronize()
         if state is None:raise ValueError("native boundary final state missing")

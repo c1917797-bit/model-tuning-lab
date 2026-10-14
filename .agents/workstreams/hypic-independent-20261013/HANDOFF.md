@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST longboundary repair: independent_boundary_metadata source-binds official
+Ascend builder42cc0284... and supplies request-local CPUcu_seqlens[0,length],
+actual total value-head/TP geometry and generated chunk indices. Longboundary
+chunk call now receives prebuilt_meta instead ofNone; short recurrent branch
+unchanged. CPUgeometry/dispatch checks do NOT prove NPU repair. Next independent
+official-image metadata construction at exact4104/7176/suffix shapes and NEW
+source-bound long-r4 same16K/32K/1024 contract, never overwrite long-r3 evidence.
+
 LATEST long-r3 terminal source/release audit:55frozen hashes unchanged before
 any repair; exact owned CID absent; raw hashes COMPACT_LONG_R3_TERMINAL_AUDIT.json.
 Official source comparison01ed/01ee identifies concrete ABI gap: production
