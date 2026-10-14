@@ -55,11 +55,18 @@ def enable():
                         enabled=True,select_public=stage.select_public,publish=publish)
                     context_stop=_stop
                     private_stop=lambda:None
+                    c2_stop=lambda:None
+                    stage.c2_enabled=os.environ.get("INDEPENDENT_C2_KV")=="1"
+                    if stage.c2_enabled:
+                        from independent_c2_kv_hook import install_c2_kv
+                        c2_stop=install_c2_kv(stage,enabled=True,emit=emit)
+                        emit({"event":"c2_kv_installed","pid":os.getpid()})
                     if os.environ.get("INDEPENDENT_PRIVATE_C1")=="1":
                         from independent_private_gdn_hook import install_private_c1
                         private_stop=install_private_c1(stage,enabled=True,emit=emit)
                         emit({"event":"private_c1_installed","pid":os.getpid(),"c2_enabled":False})
                     def combined_stop():
+                        c2_stop()
                         private_stop()
                         producer_stop()
                         context_stop()

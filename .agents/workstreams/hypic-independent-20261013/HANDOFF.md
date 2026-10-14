@@ -1,5 +1,22 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST C1+C2-r1/0046 terminal exit0/3 responses; independent0047 confirms
+192C1 public/384C1 reuse/64C2 public/128C2 reuse, exact full-attention16layers/rank,
+two private requests/all4ranks/56body/finite.181clean samples/exactcda47bb... absence.
+C1_C2_R1_AUDIT.json retains hashes/limits. No owned NPU job.
+C2 still does NOT skip projections/queries; full seam/batched/PDC/chunk and formal
+performance/quality remain incomplete. Next finish critical missing serving paths
+instead of rerunning this same canary or declaring full paper success.
+
+CURRENT C1+C2 canary-r1 ma/exec-0000000000000046 running.
+Raw /cache/cch/hypic-independent-20261013/c1-c2-canary-r1.
+Same64public+two80private one-token requests; only0–3 TP4.
+C1 private body reuse + C2 publicKV/private relocation enabled.
+Expected192 C1 public/384 C1 reuse/64 C2 public/128 C2 reuse; audit exact layer,
+rank/request/step coverage, finite results, source and release. C2 does NOT skip
+projection/body queries; no full optimized C2/seam or performance claim.
+Poll exact ma/0046/root; no mounted runtime edits/restart while live.
+
 Latest C2 serving draft targets exact official AscendAttentionBackendImpl.forward
 SHA80005aba..., before reshape_and_cache. Canonical public K/V body captured into
 bounded pinned pool; private body keys relocated (text NeoX64/theta1e7), values

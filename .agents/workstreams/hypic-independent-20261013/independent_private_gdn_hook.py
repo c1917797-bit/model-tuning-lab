@@ -72,7 +72,7 @@ def install_private_c1(stage,*,enabled=False,emit=None):
                   "rank":req.rank,"step":req.step,"layer":self.prefix,
                   "slot":slot,"generation":generation,"segment_start":selected.start,
                   "segment_end":selected.end,"skipped_body_tokens":expected.length-expected.boundary_tokens,
-                  "finite":True,"c2_enabled":False})
+                  "finite":True,"c2_enabled":bool(getattr(stage,"c2_enabled",False))})
         return None
     wrapped._independent_private_owned=True
     cls._forward_core=wrapped

@@ -1,0 +1,32 @@
+{
+  "scope": "Bounded C1 body reuse plus C2 KV relocation Canary",
+  "root": "/cache/cch/hypic-independent-20261013/c1-c2-canary-r1",
+  "operation": "exec-0000000000000046",
+  "responses": 3,
+  "c1_public": 192,
+  "c1_private": 384,
+  "c2_public": 64,
+  "c2_private": 128,
+  "ranks": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "private_requests": 2,
+  "body_tokens": 56,
+  "private_finite": true,
+  "isolation_samples": 181,
+  "exact_container_absence": true,
+  "raw_sha256": {
+    "result.json": "bfeb3617e5596b8af3e467a9572760dd0ade757fc3ee70b581a5f0ce4eda6047",
+    "events.jsonl": "1adbc6ba530a34677a765cefdd6133a424e7a04cb36acea5308e70f14445b555",
+    "responses.json": "d8484b4b788cb0bbd0192f64296947deb9d001bd8ff0d645fdb0b222d9d2f149"
+  },
+  "limits": [
+    "C2 projections and attention queries not skipped",
+    "No full seam/hidden-state propagation acceptance",
+    "Single complete-prefill requests only; no c16/PDC/chunk acceptance",
+    "One generated token per request; no quality/performance conclusion"
+  ]
+}
