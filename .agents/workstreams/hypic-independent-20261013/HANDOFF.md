@@ -1019,3 +1019,12 @@ Every10seconds observe actual0-3 processes up to10minutes, return after180second
 sampled idle or bounded timeout. This is NOT reservation or new scientific gate;
 fresh physical/port admission still required before any new device launch.
 Do not duplicate observer while running; poll same handle. Device R2 terminal.
+# CURRENT formal PDC r3 live
+
+0277 read-only observer terminal:180seconds sampled idle after foreign jobs.
+New checkpoint971b898b/packageR3 adds bounded first native preparation receipts.
+ma exec-000000000000027f running, exact CID
+d578a09c31835524a87f6f062568d19c64fc8c8ada2afa485a2fcf5934cd8f1f maps0-3only.
+Raw /cache/cch/hypic-independent-20261013/formal-canary-pdc-r3.
+Poll exact handle/root; no restart/source edits. Independent terminal PDCfirst
+progress/fourrank prefix material/long reuse/source/isolation/release audit required.
