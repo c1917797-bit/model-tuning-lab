@@ -215,10 +215,10 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "terminal long-r5 exit1 real foreign-cgroupphysical0PID105755 cannbench_ds;99samples,0responses,exactownCID absent;no liveownedjob;repair untested,stable window requested",
-    "last_operation": "exec-0000000000000214",
+    "state": "long-r7/0235 terminal exit1 before admission: physical0-3 occupied; no container/raw root/request created.0236 root absent and later snapshot empty; transient occupancy, not algorithm result. No live owned job; stable window still needed operationally.",
+    "last_operation": "exec-0000000000000235",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
-    "raw_root": "/cache/cch/hypic-independent-20261013/compact-long-r5"
+    "raw_root": "/cache/cch/hypic-independent-20261013/compact-long-r7"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",

@@ -908,3 +908,22 @@ Only new COMPACT_LONG_R7_CONTRACT.json may launch the same-size repaired
 long probe, with explicit PDC false and unchanged algorithm/support hashes.
 Human agrees to coordinate stable window but its start is not confirmed.
 Actual PDC hit accounting, mixed HYPIC/PDC admission and G2/G4 remain unverified.
+# CURRENT live long-r7
+
+ma exec-0000000000000235 launched from checkpoint131087e0 with R7 contract.
+Raw root /cache/cch/hypic-independent-20261013/compact-long-r7.
+0233 fresh physical0-3 empty/8233free;0234 checks57hashes/new-root absence.
+Only physical0-3 TP4/27B; same16K PIC/32Kinput/1024private outputs; PDC false.
+Poll exact handle/root; running or unclear never restart or edit mounted sources.
+Stable window coordination helps but is not a new permission prerequisite;
+human already authorized actual-idle launch. Foreign workload remains untouched.
+Terminal needs independent source/mechanism/request/isolation/exact release audit.
+# Latest terminal supersedes CURRENT long-r7
+
+0235 exited1 at first physical admission snapshot, before raw mkdir/docker run.
+0236 confirms r7 root absent and later0-3 snapshot empty at12:10:44UTC.
+Thus no owned container, no model request, no algorithm repair result.
+Prelaunch0233 was empty but occupancy changed by controller admission.
+Do not describe this as confirmed cannbench_ds: failure did not preserve PID.
+No live owned job. Preserve exact0235 terminal; coordinate stable window
+and fresh admission before a separately identified next attempt.
