@@ -1,0 +1,18 @@
+{
+  "controller": "exec-00000000000003f4",
+  "controller_exit": 0,
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-performance-g3-r2",
+  "responses": 40,
+  "isolation_samples": 617,
+  "foreign_snapshots": 0,
+  "independent_hot_audit": "exec-000000000000041d",
+  "accepted_hot_coverage": true,
+  "hot_denominator": 40,
+  "hot_missing": [],
+  "result_sha256": "81bc6ece7175501c8f17cbc0597fe866018367a64f65b94534f8d6cefa330b22",
+  "performance_unit_sha256": "f1415ac33f137b24791ce1ea38cbd683428ecbac5b10cbdb9027310648b0ccf5",
+  "events_sha256": "9f1017098137aa78ac1602a945f4f13ffac9f6d42eaa5b9cad4bb79ab897bc52",
+  "release_sha256": "5137359819359605421cb1bac02a6f9e9d7032c608b14c180d6b09ceb80ebc00",
+  "controller_release": {"removed": true, "port_free": true, "final_physical_processes": []},
+  "remaining_gate": "Independent source binding and physical/release verification before next device launch. No matched G1 speed comparison, full matrix, quality or lifecycle acceptance."
+}
