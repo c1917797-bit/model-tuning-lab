@@ -934,3 +934,15 @@ PDC_OVERLAP_GAP.md records genuine missing overlap support and unproven exact
 native8192 workload layout. No runtime source change/device run; do not count
 native fallback as HYPIC hot activation or change denominator for green coverage.
 Long repair remains untested;0235 terminal admission failure supersedes live text.
+# CURRENT long-r8 live
+
+0249 actual physical0-3 empty/8233free at12:22UTC; new R8 contract checkpointbf806ed5.
+ma controller exec-000000000000024b confirmed running, exact own CID
+6f15a65437836c195ec1c8819cd099ce327ffeeff46507d846271b9f4b3e93c7.
+Raw /cache/cch/hypic-independent-20261013/compact-long-r8;service-start maps only0-3.
+Same repaired GDN metadata/16K PIC/32Kinput/1024private-output stress probe.
+No source edits while running; poll exact handle/root; no timeout restart.
+Terminal independent mechanism/source/isolation/PID/exact-release audit required.
+Formal token stream0246/0247 is prepared separately and NOT this probe's ruler.
+Actual successful-case A8192+bridge1024-7168+B16384+tail geometry is confirmed023e;
+normal PDC8192 does not overlap B. Prior overlap hypothesis was misread.
