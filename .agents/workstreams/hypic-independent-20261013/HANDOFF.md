@@ -1047,3 +1047,11 @@ Same ownership guard/exact release path retained.0292 full195 host tests pass.
 No real formal performance run; device Canary remains external-interrupted.
 Controller SHA changed, all old launch contracts stale; rebind before device use.
 Do not skip actual Canary/independent mechanism and isolation gates.
+# Latest quality scope review
+
+Quality remains full127 LongBench paired3rounds/nonthinking1024 naturalEOS;
+GSM8K frozen comparable samples, NIAH+/CEval only with authoritative inputs.
+QUALITY_RUNTIME_COVERAGE_GAP.md records current single-fixed-B runtime limitation.
+Do not call native fallback quality proof of HYPIC activation; multi-segment
+per-request material identity/ownership remains required. No new quality run.
+Plan header now reflects latest19:03:48UTC authorization; old times historical.
