@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST compact public producer/C2 handler: public GDN producer now optionally
+builds only body T/S/conv-tail without cloning body core outputs. Compact C2
+backend draft captures canonical body KV onCPU, resolves explicit cache-group
+and write leases, relocates body keys, writes native separate paged K/V parts,
+then dispatches retained prefix/seam and suffix with separate causal endpoints.
+Body capture excludes padded rows. CPU0099 passes14 compact tests plus2 public
+builder and3 existing slot regressions. Enabled C2/GDN hooks are still untested
+in official runtime, not installed. No new device job. Next complete real
+runner sampling/cache capture and all-layer readiness admission, stage/loader
+atomic install/uninstall, official image source-bound enabled preflight and
+integrated27B TP4 device contract. Do not treat handler draft as activation.
+
 LATEST compact GDN draft: independent_compact_gdn_hook source-binds official
 GDN core, consumes model compact context and native request/state mapping,
 prepares ALL requests using native prefix/seam/suffix primitives plus compact

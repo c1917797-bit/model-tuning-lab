@@ -6,7 +6,7 @@ from functools import wraps
 _context=ContextVar("independent_public_gdn_context",default=None)
 GDN_SHA256="d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816"
 
-def install_public_gdn_producer(*,enabled=False,select_public=None,publish=None):
+def install_public_gdn_producer(*,enabled=False,select_public=None,publish=None,compact=False):
     if not enabled:return lambda:None
     if not callable(select_public) or not callable(publish):
         raise ValueError("explicit public request selector and material sink required")
@@ -14,6 +14,7 @@ def install_public_gdn_producer(*,enabled=False,select_public=None,publish=None)
     import vllm_ascend.ops.gdn as module
     from independent_runner_context import CURRENT_REQUEST_SLICES
     from independent_linear_public_builder import build_native_linear_public_body
+    from independent_linear_public_builder import build_native_compact_linear_public_body
     from vllm.model_executor.layers.mamba.gdn.qwen_gdn_linear_attn import QwenGatedDeltaNetAttention
     cls=QwenGatedDeltaNetAttention
     if hashlib.sha256(Path(inspect.getfile(inspect.unwrap(cls._forward_core))).read_bytes()).hexdigest()!=GDN_SHA256:
@@ -39,9 +40,13 @@ def install_public_gdn_producer(*,enabled=False,select_public=None,publish=None)
         if context is not None:
             identity,projected=context
             # Official source invokes chunk with named q/k/v/g/beta fields.
-            material=build_native_linear_public_body(
-                identity,kwargs["k"],kwargs["v"],kwargs["g"],kwargs["beta"],
-                output[0],projected)
+            if compact:
+                material=build_native_compact_linear_public_body(
+                    identity,kwargs["k"],kwargs["v"],kwargs["g"],kwargs["beta"],projected)
+            else:
+                material=build_native_linear_public_body(
+                    identity,kwargs["k"],kwargs["v"],kwargs["g"],kwargs["beta"],
+                    output[0],projected)
             import torch
             torch.npu.synchronize()
             publish(material)

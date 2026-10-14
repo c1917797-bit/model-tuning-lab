@@ -32,3 +32,24 @@ def build_native_linear_public_body(identity,keys,values,log_decay,beta,
     return build_linear_public_body(identity,keys,values,log_decay,beta,
                                     core_outputs,projected_segment,
                                     state_runner=official_state_only)
+
+def build_compact_linear_public_body(identity,keys,values,log_decay,beta,
+                                     projected_segment,*,state_runner):
+    """Canonical producer for compact serving: no body output tensor required."""
+    from independent_compact_material_pool import CompactLinearBody
+    validate_material(identity,identity)
+    length=identity.length;cut=identity.boundary_tokens
+    if keys.ndim!=4 or values.ndim!=4 or keys.shape[:2]!=(1,length) or values.shape[:2]!=(1,length):
+        raise ValueError('canonical public key/value coverage mismatch')
+    if log_decay.shape[:2]!=(1,length) or beta.shape!=log_decay.shape:
+        raise ValueError('canonical public gate coverage mismatch')
+    if projected_segment.ndim!=2 or projected_segment.shape[0]!=length:
+        raise ValueError('canonical convolution input coverage mismatch')
+    affine=official_segment_affine(state_runner,keys[:,cut:].contiguous(),
+        values[:,cut:].contiguous(),log_decay[:,cut:].contiguous(),beta[:,cut:].contiguous())
+    return CompactLinearBody(identity,affine,projected_segment[-3:].detach().float().clone())
+
+def build_native_compact_linear_public_body(identity,keys,values,log_decay,beta,projected_segment):
+    from independent_c1_state_only import official_state_only
+    return build_compact_linear_public_body(identity,keys,values,log_decay,beta,
+        projected_segment,state_runner=official_state_only)

@@ -12,6 +12,9 @@ class CompactModelSelection:
     plans: tuple
     sampled_rows: tuple
     prompt_logprobs: bool = False
+    cache_slices: tuple = ()
+    attention_groups: tuple = ()
+    writable_kv_slots: tuple = ()
 
 
 def install_compact_model(model_class,*,enabled=False,verify_source=None,
