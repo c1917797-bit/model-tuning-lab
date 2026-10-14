@@ -1,5 +1,41 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST public-r2-target-fix terminal raw valid=true/3 responses; original002e
+handle expired, raw terminal journal authoritative. Independent audit verifies192
+unique layer/rank publications (48x4), exact token/source identity and shapes:
+T12x128x128,body56x12x128.194 clean isolation samples, exact7aa7c7... absent,
+8233 free/final0–3 empty. PUBLIC_STAGE_R2_AUDIT.json retains hashes/limits.
+Do not rerun public generation alone. No material-value/finite receipts in this
+attempt; do not assert numerical correctness. Next private C1 reuse including
+prefix/boundary/body/tail with slot writes, then C2/seam and integrated Canary.
+No owned live NPU job at this checkpoint.
+
+CURRENT public-r2-target-fix ma/exec-000000000000002e running.
+Raw /cache/cch/hypic-independent-20261013/public-stage-r2-target-fix.
+Exact actual Qwen class target/keyword ABI fix,71 CPU controls002c pass.
+New config code identity is producer source SHA; all support/config hashes frozen.
+Old r1 source/response success does not establish material production:0/192.
+Poll ma/002e/root, no runtime edits/restart while live.0–3 only, no private reuse.
+
+LATEST public-r1/ma0026 terminal:3 native responses,172 clean isolation samples,
+exact33c6d81b... removed/8233 free/final0–3 empty. Independent audit sees ZERO
+public materials on every rank: public producer acceptance FAIL, not success.
+Official patch_qwen3_5 copies Ascend methods onto actual QwenGatedDeltaNetAttention;
+later patching Ascend class did not affect copied method. Fixed exact actual class
+target, source-bound method unwrap, and core_attn_out keyword ABI. Native boundary/
+linear association guards updated to same actual class. Old root immutable.
+No live job. Next new frozen public-r2 contract/source hashes after regression.
+
+CURRENT canonical public-stage-r1 ma/exec-0000000000000026 live.
+Root /cache/cch/hypic-independent-20261013/public-stage-r1; frozen64 raw token
+IDs1000–1063, boundary8,256MiB/rank pool, source identityaefed206.
+Only0–3 TP4, official27B, three one-token completions; request bound300s.
+All independent support/config files hashed in NEW contract. Public GDN producer
+enabled, private reuse disabled. Audit48 linear layers x4 ranks publication,
+finite state/material, source/requests/isolation/exact release after terminal.
+Poll same ma/0026/root; no mounted source/config edits or restart while live.
+This is public-generation prerequisite, not complete HYPIC or formal benchmark.
+
 Latest public producer integration: worker loader optionally installs canonical
 GDN producer from frozen config and emits per-layer/rank/generation material
 receipts; private reuse still disabled.71 controls0023 pass including exact

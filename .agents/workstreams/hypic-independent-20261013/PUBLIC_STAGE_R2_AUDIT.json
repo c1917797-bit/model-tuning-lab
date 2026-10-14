@@ -1,0 +1,43 @@
+{
+  "scope": "Canonical public C1 material execution only",
+  "root": "/cache/cch/hypic-independent-20261013/public-stage-r2-target-fix",
+  "original_operation": "exec-000000000000002e",
+  "handle_expired": true,
+  "terminal_proof": "immutable raw result and terminal journal",
+  "published": 192,
+  "layers_per_rank": 48,
+  "ranks": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "public_tokens": 64,
+  "live_boundary": 8,
+  "body_tokens": 56,
+  "transition_shape": [
+    12,
+    128,
+    128
+  ],
+  "core_body_shape": [
+    56,
+    12,
+    128
+  ],
+  "responses": 3,
+  "isolation_samples": 194,
+  "container_absence_verified": true,
+  "removed_container": "7aa7c7e468eddaae9dd2c67504cc2e9e606d6bb620ec05513915afee567ca43b",
+  "raw_sha256": {
+    "result.json": "04cdea3d4eee89704da87a9e45771ab868fa368d43f84ede210b2b22f0e55ec0",
+    "events.jsonl": "a97cebc4cb16570e889bbd17f3c3c66c50872ddbb936851a43c751e0d2a6cb26",
+    "responses.json": "87a877f8bb7e4b872032b1360f0943a9fb9577497e7d513051889451b0f244bc"
+  },
+  "limitations": [
+    "No private reuse enabled",
+    "No material tensor dump/finite-value receipt; numerical acceptance unproven",
+    "Not complete C1/C2 serving validation or performance/quality",
+    "Old zero-material R1 not reclassified"
+  ]
+}

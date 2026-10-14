@@ -15,9 +15,10 @@ def associate_native_linear(layer,requests,metadata):
     No tensor mutation or independently claimed scheduler ownership lease.
     """
     cls=type(layer)
-    if cls.__name__!="AscendGatedDeltaNetAttention" or cls.__module__!="vllm_ascend.ops.gdn":
+    from vllm.model_executor.layers.mamba.gdn.qwen_gdn_linear_attn import QwenGatedDeltaNetAttention
+    if cls is not QwenGatedDeltaNetAttention:
         raise ValueError("unexpected linear runtime class")
-    if hashlib.sha256(Path(inspect.getfile(cls)).read_bytes()).hexdigest()!="d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816":
+    if hashlib.sha256(Path(inspect.getfile(inspect.unwrap(cls._forward_core))).read_bytes()).hexdigest()!="d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816":
         raise ValueError("official GDN source drift")
     if metadata.num_prefills!=len(requests):
         raise ValueError("pure-prefill sequence coverage mismatch")

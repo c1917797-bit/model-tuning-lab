@@ -8,9 +8,10 @@ def make_boundary_runner(layer,projected,b,a,incoming_conv):
     """
     from pathlib import Path
     import hashlib,inspect
-    if type(layer).__name__!="AscendGatedDeltaNetAttention" or type(layer).__module__!="vllm_ascend.ops.gdn":
+    from vllm.model_executor.layers.mamba.gdn.qwen_gdn_linear_attn import QwenGatedDeltaNetAttention
+    if type(layer) is not QwenGatedDeltaNetAttention:
         raise ValueError("unexpected boundary layer")
-    if hashlib.sha256(Path(inspect.getfile(type(layer))).read_bytes()).hexdigest()!="d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816":
+    if hashlib.sha256(Path(inspect.getfile(inspect.unwrap(type(layer)._forward_core))).read_bytes()).hexdigest()!="d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816":
         raise ValueError("GDN source drift")
     length=projected.shape[0]
     if length<3 or projected.ndim!=2 or b.shape[0]!=length or a.shape[0]!=length:
