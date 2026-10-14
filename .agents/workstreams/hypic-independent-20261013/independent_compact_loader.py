@@ -22,6 +22,8 @@ def enable():
     config=resolve_catalog_config(config)
     from independent_evidence_limits import evidence_limits
     limits=evidence_limits(config.pop("evidence_limits",None))
+    scheduler_enabled=config.pop("scheduler_admission_enabled",False)
+    if type(scheduler_enabled) is not bool:raise ValueError('explicit scheduler admission boolean required')
     if 'public_token_artifact' in config:
         if 'public_tokens' in config or 'public_token_recipe' in config:
             raise ValueError('ambiguous public token configuration')
@@ -33,6 +35,8 @@ def enable():
         config['public_tokens']=public_tokens_from_recipe(config.pop('public_token_recipe'))
     raw=Path(os.environ['INDEPENDENT_COMPACT_RAW'])
     if not raw.is_absolute() or not raw.is_dir():raise ValueError('existing absolute raw root required')
+    from independent_pic_scheduler_loader import enable_scheduler
+    enable_scheduler(manifest_path,config,raw,enabled=scheduler_enabled)
     class Loader:
         def __init__(self,original):self.original=original
         def create_module(self,spec):
