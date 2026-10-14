@@ -1,0 +1,59 @@
+{
+  "operation": "exec-0000000000000432",
+  "exit_code": 0,
+  "evidence": {
+    "container": "550e348c7046ed682c3724a046a2b1d126dfb30e51de3c7dfed595f471241552",
+    "running": true,
+    "algorithm_environment": [],
+    "mount_destinations": [
+      "/scratch",
+      "/usr/local/Ascend/driver",
+      "/usr/local/Ascend/firmware",
+      "/usr/local/dcmi",
+      "/etc/ascend_install.info",
+      "/inputs/tokens.json",
+      "/model"
+    ],
+    "command": [
+      "serve",
+      "/model",
+      "--served-model-name",
+      "qwen3.5",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "8233",
+      "--tensor-parallel-size",
+      "4",
+      "--data-parallel-size",
+      "1",
+      "--max-model-len",
+      "40960",
+      "--max-num-batched-tokens",
+      "40960",
+      "--max-num-seqs",
+      "32",
+      "--gpu-memory-utilization",
+      "0.85",
+      "--no-enable-prefix-caching",
+      "--additional-config",
+      "{\"enable_cpu_binding\":false}",
+      "--compilation-config",
+      "{\"cudagraph_mode\":\"NONE\"}",
+      "--trust-remote-code",
+      "--async-scheduling",
+      "--enforce-eager"
+    ],
+    "devices": [
+      "/dev/davinci0",
+      "/dev/davinci1",
+      "/dev/davinci2",
+      "/dev/davinci3",
+      "/dev/davinci_manager",
+      "/dev/hisi_hdc",
+      "/dev/devmm_svm"
+    ],
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
+  },
+  "scope": "Live container image/devices/command/mount/algorithm-off proof only; full40 transport/isolation/release terminal gate pending"
+}
