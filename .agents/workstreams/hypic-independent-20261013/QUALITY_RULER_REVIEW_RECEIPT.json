@@ -1,0 +1,19 @@
+{
+  "prompt_sha256": {
+    "LONGBENCH_PROMPT": "f83e3a6a0b6dadd20aa0b1098ae6b2e17a97ad85332c11f93f0b9baa9da97be1",
+    "GSM8K_PROMPT": "da11364642ac6e0ad4223d97d7003cb8671aa2752b54a625052723fcd1f3fc75"
+  },
+  "score_controls": 3,
+  "loaded_names": [
+    "GSM8K_PROMPT",
+    "LONGBENCH_PROMPT",
+    "build_case",
+    "extract_non_reasoning",
+    "first_option",
+    "gsm8k_prediction",
+    "score_case"
+  ],
+  "http_runner_loaded": false,
+  "operation": "02fd",
+  "scope": "Reviewed generic pure scorer/templates only;3CPU controls,not quality acceptance"
+}
