@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST G3r1/03bc terminalexit1:40records12success28failure. Independent03da
+85sourcesunchanged/320cleanisolations/exact64a6026d...absent/8233free.
+Own10000-event evidence cap reached all4workers (3.62MiB each),8812mixed
+native events dominate. Worker exception caused16streamerror/12HTTP500;
+NOT external contention or numerical proof. No ownedlivejob, oldroot immutable.
+Next bounded full40 logging repair and independent PICsafe chunk integration;
+planner24b753c2 passes6CPUtests but NOT runtime. Full matrix/quality/lifecycle
+unverified; no new remotepublication claim.
+
 CURRENT G3round1 full40/c16 performance+concurrent-mechanism gate started
 exec-00000000000003bc on freshma a6109,checkpoint942b08da. Rawroot
 /cache/cch/hypic-independent-20261013/formal-performance-g3-r1.

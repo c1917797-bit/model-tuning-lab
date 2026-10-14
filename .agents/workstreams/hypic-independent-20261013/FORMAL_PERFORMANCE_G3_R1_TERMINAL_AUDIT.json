@@ -1,0 +1,99 @@
+{
+  "operation": "exec-00000000000003bc",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-performance-g3-r1",
+  "responses": 40,
+  "successful": 12,
+  "failed": 28,
+  "errors": {
+    "{'type': 'ValueError', 'message': 'service stream error'}": 16,
+    "{'type': 'HTTPError', 'message': 'HTTP Error 500: Internal Server Error'}": 12
+  },
+  "sources_unchanged": 85,
+  "isolation_samples": 320,
+  "all_clean": true,
+  "independent_release": true,
+  "diagnostics": [
+    {
+      "file": "compact-worker-58.jsonl",
+      "events": 10000,
+      "bytes": 3624637,
+      "counts": {
+        "compact_hypic_hooks_installed": 1,
+        "native_request_progress": 41,
+        "compact_public_state_published": 48,
+        "compact_public_kv_published": 16,
+        "compact_gdn_body_composed": 822,
+        "compact_c2_queries_completed": 273,
+        "compact_model_rows_completed": 17,
+        "mixed_native_gdn_completed": 6594,
+        "mixed_native_c2_completed": 2188
+      },
+      "sha256": "2f08b1aeee0015e5e8500f8af37e42cfee803bcdcbdebf5f023f55d8fef4a0d0"
+    },
+    {
+      "file": "compact-worker-59.jsonl",
+      "events": 10000,
+      "bytes": 3624637,
+      "counts": {
+        "compact_hypic_hooks_installed": 1,
+        "native_request_progress": 41,
+        "compact_public_state_published": 48,
+        "compact_public_kv_published": 16,
+        "compact_gdn_body_composed": 822,
+        "compact_c2_queries_completed": 273,
+        "compact_model_rows_completed": 17,
+        "mixed_native_gdn_completed": 6594,
+        "mixed_native_c2_completed": 2188
+      },
+      "sha256": "e3bf0732e0ed7a6e45fbc15345389cd27cdcecab629e69a6e4bccc71e1443e85"
+    },
+    {
+      "file": "compact-worker-61.jsonl",
+      "events": 10000,
+      "bytes": 3624637,
+      "counts": {
+        "compact_hypic_hooks_installed": 1,
+        "native_request_progress": 41,
+        "compact_public_state_published": 48,
+        "compact_public_kv_published": 16,
+        "compact_gdn_body_composed": 822,
+        "compact_c2_queries_completed": 273,
+        "compact_model_rows_completed": 17,
+        "mixed_native_gdn_completed": 6594,
+        "mixed_native_c2_completed": 2188
+      },
+      "sha256": "fb47dc293f93338f58dabfaebad17fb573b2e88cf59bedbb6a82160e3a6d676c"
+    },
+    {
+      "file": "compact-worker-60.jsonl",
+      "events": 10000,
+      "bytes": 3624637,
+      "counts": {
+        "compact_hypic_hooks_installed": 1,
+        "native_request_progress": 41,
+        "compact_public_state_published": 48,
+        "compact_public_kv_published": 16,
+        "compact_gdn_body_composed": 822,
+        "compact_c2_queries_completed": 273,
+        "compact_model_rows_completed": 17,
+        "mixed_native_gdn_completed": 6594,
+        "mixed_native_c2_completed": 2188
+      },
+      "sha256": "f9913ff6daf7e96b58ffeb9140d57d88b2e4ecbc66df1bdcb6f01de5cdb116a1"
+    }
+  ],
+  "raw_hashes": {
+    "result.json": "55c79020ebec81d4d5f12307ee72830927c3c571cb82d4230c2bdf27adfa2c5a",
+    "events.jsonl": "2eb6faf9619a46d825a6765c4c3d5ca6dc23c6174bb74f92d790b6d2c1162864",
+    "service.log": "f786bd4733b8fc9f21d32b1e47342d1344c8a984c2d45ebfc7c5b295466757d5",
+    "launch.json": "73f1483df367acffa24c52f6bb459c8210d1af412d663e0fec7c1f4ac759c54d",
+    "responses.json": "2ef734d2590db443ec43b5ba0ce8245b7cf46bd1e462f41410225de30b32d2f3",
+    "preflight.json": "234a481851708131155c96dd781fc3e3d419b297cd37a5b08e67b58c87b0b6b8",
+    "performance-unit.json": "d3d116547500478d19444450fbbc09a050f6fda8d8daf4c80b4602a9cc937944",
+    "service-start.json": "65f7cd97247b9d496d31b13a45d4c94821f6d65485a5437f2fd524b92ca49bd7",
+    "isolation.json": "0218208c32b056b1311b5f6e291b8778f2dcc3c77c6bb244b3d9fe1767a7b91e",
+    "release.json": "1f0f610d2285bb5e46a0d2b207d98b79e72f64261a6e95779fb8498de2c5400a"
+  },
+  "decision": "FAILED own evidence quota, plus independent concurrent partial-body coverage gap; no performance comparison/quality acceptance",
+  "audit_operation": "exec-00000000000003da"
+}
