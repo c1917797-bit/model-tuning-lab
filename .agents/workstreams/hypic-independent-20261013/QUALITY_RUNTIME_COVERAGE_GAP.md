@@ -1,5 +1,12 @@
 # Full quality coverage gap
 
+Latest host checkpoint02b1: CatalogCompactStage now implements opt-in
+per-segment producer selection, identity, complete48/16 readiness and pin guards.
+205 host controls pass, including explicit fake inventory/pin selection fixtures.
+Catalog loader/artifact and real multi-segment worker/material execution remain
+unverified. Earlier single-fixed-B description below is historical baseline.
+This does NOT establish full127 coverage or quality acceptance.
+
 Source evidence: CanonicalPublicStage stores one immutable self.tokens and
 CompactCanonicalStage selects private requests against that single token stream.
 FORMAL_COMPACT_CONFIG_R2 binds one benchmark B segment. These interfaces cannot

@@ -34,17 +34,18 @@ def install_compact_c2(stage,*,enabled=False,emit=None):
             if requests and len(requests)==1 and prompts and key is not None:
                 req=requests[0]
                 public_prompt=prompts.get(req.request_id)
-                if stage.is_public_prompt(public_prompt) and req.computed_tokens==0 and req.scheduled_tokens==len(public_prompt):
-                    identity=stage.identity(layer.layer_name,req.rank);cache_key=identity_key(identity)
+                identity=stage.public_identity_for_request(layer.layer_name,req,public_prompt)
+                if identity is not None:
+                    cache_key=identity_key(identity)
                     with stage.compact_kv_store.lock:present=cache_key in stage.compact_kv_store.entries
                     if not present:
                         cut=stage.boundary
                         stage.compact_kv_store.publish(cache_key,{
-                            'keys':key.reshape(key.shape[0],1,256)[cut:len(stage.tokens)].detach().to('cpu'),
-                            'values':value.reshape(value.shape[0],1,256)[cut:len(stage.tokens)].detach().to('cpu'),
-                            'positions':torch.arange(cut,len(stage.tokens),dtype=torch.int64)})
+                            'keys':key.reshape(key.shape[0],1,256)[cut:identity.length].detach().to('cpu'),
+                            'values':value.reshape(value.shape[0],1,256)[cut:identity.length].detach().to('cpu'),
+                            'positions':torch.arange(cut,identity.length,dtype=torch.int64)})
                         emit({'event':'compact_public_kv_published','rank':req.rank,'layer':layer.layer_name,
-                              'body_tokens':len(stage.tokens)-cut})
+                              'body_tokens':identity.length-cut,'tokens_sha256':identity.tokens_sha256})
             return native()
         if key is None or value is None or output is None or attn_metadata is None:
             raise ValueError('compact C2 query/KV/output metadata absent')

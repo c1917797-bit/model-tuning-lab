@@ -15,26 +15,32 @@ class CanonicalPublicStage:
             raise ValueError("public segment/live boundary invalid")
         self.model=model_identity;self.code=code_identity;self.boundary=boundary_tokens
         self.store=LinearMaterialPool(capacity_bytes)
-    def identity(self,layer,rank):
+    def identity(self,layer,rank,*,tokens_sha256=None):
+        if tokens_sha256 is not None and tokens_sha256!=self.digest:
+            raise ValueError("single public segment identity mismatch")
         return MaterialIdentity(self.model,self.code,layer,rank,self.digest,
                                 len(self.tokens),self.boundary)
     def select_public(self,layer,requests):
         if len(requests)!=1:return None
         request=requests[0];prompts=CURRENT_PROMPT_TOKENS.get()
         tokens=prompts.get(request.request_id) if prompts is not None else None
-        if not self.is_public_prompt(tokens):return None
-        if request.computed_tokens!=0 or request.scheduled_tokens!=len(tokens):return None
-        identity=self.identity(layer.prefix,request.rank)
+        identity=self.public_identity_for_request(layer.prefix,request,tokens)
+        if identity is None:return None
         with self.store.pool.lock:
             if identity_key(identity) in self.store.pool.entries:return None
         return identity
+    def public_identity_for_request(self,layer,request,tokens):
+        if not self.is_public_prompt(tokens):return None
+        if request.computed_tokens!=0 or request.scheduled_tokens!=len(tokens):return None
+        return self.identity(layer,request.rank)
     def is_public_prompt(self,tokens):
         if tokens is None:return False
         tokens=tuple(tokens)
         return tokens==self.tokens or (self.allow_public_tail and
             len(tokens)>len(self.tokens) and tokens[:len(self.tokens)]==self.tokens)
     def publish(self,material):
-        expected=self.identity(material.identity.layer,material.identity.rank)
+        expected=self.identity(material.identity.layer,material.identity.rank,
+                               tokens_sha256=material.identity.tokens_sha256)
         if material.identity!=expected:raise ValueError("public producer identity mismatch")
         return self.store.publish(material)
     def install(self,*,enabled=False):

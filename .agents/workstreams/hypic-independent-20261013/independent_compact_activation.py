@@ -36,7 +36,10 @@ def activate_compact_hypic(config,*,enabled=False,emit=None):
     from independent_compact_gdn_hook import install_compact_gdn
     from independent_compact_c2_hook import install_compact_c2
     from independent_compact_model_hook import install_compact_model
-    stage=CompactCanonicalStage(**config)
+    if "public_segments" in config:
+        from independent_catalog_stage import CatalogCompactStage
+        stage=CatalogCompactStage(**config)
+    else:stage=CompactCanonicalStage(**config)
     def publish(material):
         generation=stage.publish(material)
         emit({'event':'compact_public_state_published','rank':material.identity.rank,

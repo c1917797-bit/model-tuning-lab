@@ -1070,3 +1070,11 @@ Independent terminal mechanism/PDC/source/PID/isolation/exact release required.
 Physical0-3 occupied before admission. No container/model/request created.
 Do not infer exact owner from generic error; snapshot after it is separate.
 No liveownedjob. Old start wording929d9b42 superseded by this terminal.
+# Latest catalog runtime draft
+
+CatalogCompactStage opt-in via public_segments supports per-segment identity,
+canonical B/tail producers, complete48/16 material readiness and model-wide pins.
+Private C1/KV hooks resolve per-plan digests; single-segment path unchanged.
+02b1 full205hosttests pass. Multi-segment activation/data loader/NPU proof missing.
+No liveownedjob/device work; source bindings stale after new runtime changes.
+Do not claim full quality or publish this draft as accepted serving code.
