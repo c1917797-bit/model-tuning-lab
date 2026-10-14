@@ -1,0 +1,55 @@
+{
+  "operation": "01d5",
+  "classification": "private long-boundary native chunk AICore507015 execution failure; not external interference",
+  "sources_checked": 55,
+  "own_absent": true,
+  "result": {
+    "valid": false,
+    "error": {
+      "type": "HTTPError",
+      "message": "HTTP Error 500: Internal Server Error"
+    },
+    "guard_errors": [
+      {
+        "type": "RuntimeError",
+        "message": "Foreign physical process detected",
+        "raw": null
+      }
+    ],
+    "isolation_samples": 145,
+    "responses": 1,
+    "worker_pids": [
+      4033942,
+      4033943,
+      4033944,
+      4033945
+    ],
+    "physical_devices_seen": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "release": {
+      "owned_container": "fdfb22a43f566fe83337d859f334bea39a0561fbb4d4a8f77f2b39a0e560c5de",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    }
+  },
+  "raw_hashes": {
+    "result.json": "12ef97ab06615d14c8488606e70f14aa8685a0312d9f9ba5b6c3c46512fec1ad",
+    "events.jsonl": "0c9c3aff18c273d075df2063ec0c79c8d714b802ffb7bbc98dd01c6977d819a4",
+    "service.log": "42ae03f8e73818fc6f282ac63d93f24a7cc2416ae71830a8deb26cf8ffd82112",
+    "launch.json": "4698347374d4db068c60cfa6966619f5b450f3f9ca3d49704e46c0d141e53dc9",
+    "responses.json": "e52c1d1f9be97ccfd4d346be73d078523f0839c825dfeedbb18219fd6970795c",
+    "preflight.json": "2baf03b23032b2fd62c97c260223589b0c739b9703d6b29e9a34b1d1a9953cf5",
+    "service-start.json": "aa1d75879038e0cc1b6d218255c776941d1f1ce90ccdea6f406f487001dfd82a",
+    "isolation.json": "f2c57f68c93e48f7e92c640faa9774186b3fd95a57e1ffdb764516a34b2ff505",
+    "release.json": "ff2c92dd2feea8e3d19642d1d9545683199a437ee4406a02f987a5325b54f6f6",
+    "diagnostics/compact-worker-58.jsonl": "d0872740cf6dc852c941f3faca42b71ae8877f2005a95e18cb0eececdd56ca48",
+    "diagnostics/compact-worker-59.jsonl": "c393353d5e9b0dfd553519dd264ee7f31e4b23947a293207fc816d31a7368654",
+    "diagnostics/compact-worker-61.jsonl": "6d53c4f71755a097ae9b7d85b275cf7278d9ef7f3b7f05b903e1bf81639181f9",
+    "diagnostics/compact-worker-60.jsonl": "6e9cc247b6c73ef942545da991dc36cd6e6583afcbb4f5dc98fa056b4c0c3ae1"
+  }
+}

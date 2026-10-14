@@ -1,5 +1,26 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST long-r3 terminal source/release audit:55frozen hashes unchanged before
+any repair; exact owned CID absent; raw hashes COMPACT_LONG_R3_TERMINAL_AUDIT.json.
+Official source comparison01ed/01ee identifies concrete ABI gap: production
+AscendGDN passes attn_metadata.non_spec_prefill_metadata.chunk; our longboundary
+passed prebuilt_meta=None. chunk.py then sends chunk_indices=None into AscendC
+fwd_h/fwd_o instead of native precomputed chunk64 indices. Root cause still a
+hypothesis until same-size integrated rerun. Next generate request-local official
+prefill metadata from exact boundary length and local head geometry; bind builder
+source, CPU-negative controls, NEWroot/currentmanifest, preserve formal ruler.
+
+LATEST long-r3/01d5 TERMINAL exit1. Public16K response1token COMPLETE and
+all4rank48C1+16C2 public material published. Private first-layer live boundary
+fails independent_native_boundary.py:52 after chunk_gated_delta_rule call,
+NPU507015 AICore scalar internal-buffer out-of-bounds. No hot completion proof.
+IMPORTANT guard foreign list contains same OWN hostPIDs4033942/43/44/45 after
+worker error/exit and cgroup path reverted to root; NOT external-job evidence.
+Do not blame interference. Exactfdfb22a4... absence independently checked;
+final0-3empty/8233free controller receipt. No live owned job, root immutable.
+Next full source/release terminal audit and repair long native-boundary metadata/
+kernel ABI against official current path, not retry unchanged or smaller ruler.
+
 CURRENT long-r3 controllerexec-00000000000001d5 on ma peer
 lgw_a6109c51076a4a2c9d2674ca5a8704a0; checkpoint7230fba0;rawroot
 /cache/cch/hypic-independent-20261013/compact-long-r3.01d3 freshsourcehashes,
