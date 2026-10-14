@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT G3round1 successorr2 exec-00000000000003f4,freshma a6109,
+checkpoint8630ea49,rawroot/cache/cch/hypic-independent-20261013/formal-performance-g3-r2.
+03f3 all91sources/newroot/physical0-3/8233/HCCL/no staged evaluator PASS.
+267hosttests03f0 anddeadline boundaries03efPASS. R5 enables independent
+PICsafe scheduler, R4finite100000events/128MiBworker. Same40/c16/32768/1024,
+eager/PDCoff/2B+2Aunscoredwarmups. Originalr1failed preserved, no reuse.
+Poll exacthandle/root;running/unknown neverrestart/edit mountedruntime.
+Require actualengine caps/full40fourrank48/16/source/isolation/exactrelease.
+Absolute19:03:48UTC own guard stops exactownedCID; deadline not extended.
+Fullmatrix/quality/lifecycle and29functionalSkills remain unverified.
+
 LATEST03eb pinnedofficialScheduler import/install/uninstall PASS after adding
 read-only hostdriver libs, NO NPUdevices/model/request. Prior03e7CPUdriver
 failure retained. No activeAscend platform/engine execution claim. New scheduler
