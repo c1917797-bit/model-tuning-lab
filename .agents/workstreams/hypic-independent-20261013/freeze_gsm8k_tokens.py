@@ -15,8 +15,9 @@ def freeze(data,ruler,model,root):
     rows=[]
     for i,sample in enumerate(samples):
         prompt,reference=functions["build_case"]("gsm8k",sample)
-        ids=tokenizer.apply_chat_template([{"role":"user","content":prompt}],tokenize=True,
+        rendered=tokenizer.apply_chat_template([{"role":"user","content":prompt}],tokenize=False,
             add_generation_prompt=True,enable_thinking=False)
+        ids=tokenizer(rendered,add_special_tokens=False)["input_ids"]
         if len(ids)+1024>40960:raise ValueError("GSM service capacity exceeded")
         rows.append({"index":i,"sample_id":hashlib.sha256(json.dumps(sample,sort_keys=True).encode()).hexdigest(),
             "token_ids":ids,"reference":reference,"prompt_sha256":hashlib.sha256(prompt.encode()).hexdigest()})
