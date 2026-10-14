@@ -1,0 +1,24 @@
+{
+  "private_requests": 1,
+  "requests": [
+    {
+      "scope": "hash-bound all-rank/all-layer compact mechanism coverage only",
+      "requests": [
+        "cmpl-a2ed8b7325775507-0-8202e43e"
+      ],
+      "worker_pids": {
+        "0": 58,
+        "1": 59,
+        "2": 60,
+        "3": 61
+      },
+      "per_rank_linear_layers": 48,
+      "per_rank_full_layers": 16,
+      "skipped_body_rows": 16376,
+      "quality_or_numeric_equivalence_proven": false
+    }
+  ],
+  "scope": "one executed private mechanism step only; no completed privateHTTP/PDC/two-request acceptance",
+  "negative_missing_rank_layers_rejected": true,
+  "whole_r7_gate_passed": false
+}
