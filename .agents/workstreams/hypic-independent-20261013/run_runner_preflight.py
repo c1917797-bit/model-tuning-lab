@@ -6,6 +6,7 @@ HERE=Path(__file__).resolve().parent
 ROOT=Path("/cache/cch/hypic-independent-20261013/runner-preflight-r1")
 NAME="hypic-independent-runner-preflight-r1"
 IMAGE="sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
+PROBE="independent_runner_npu_preflight.py"
 def main():
     assert not ROOT.exists(),"immutable root exists"
     first=n.snapshot();assert not first["foreign"],"physical0–3 busy"
@@ -19,7 +20,7 @@ def main():
             if Path(d).exists():args+=["--device",d]
         for src,dst in [(str(HERE),"/probe"),("/cache/efim/Qwen3.6-27B","/model"),("/usr/local/Ascend/driver","/usr/local/Ascend/driver"),("/usr/local/Ascend/firmware","/usr/local/Ascend/firmware"),("/usr/local/dcmi","/usr/local/dcmi"),("/etc/ascend_install.info","/etc/ascend_install.info")]:
             if Path(src).exists():args+=["-v",src+":"+dst+":ro"]
-        args+=["-e","ASCEND_RT_VISIBLE_DEVICES=0","-e","PYTHONDONTWRITEBYTECODE=1",IMAGE,"-B","/probe/independent_runner_npu_preflight.py"]
+        args+=["-e","ASCEND_RT_VISIBLE_DEVICES=0","-e","PYTHONDONTWRITEBYTECODE=1",IMAGE,"-B","/probe/"+PROBE]
         journal.append({"event":"launch","argv":args,"sources":{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in HERE.glob("independent*.py")}})
         cid=n.command(args).strip();n.command(["docker","start",cid])
         deadline=time.monotonic()+240
