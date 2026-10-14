@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT G3round1 full40/c16 performance+concurrent-mechanism gate started
+exec-00000000000003bc on freshma a6109,checkpoint942b08da. Rawroot
+/cache/cch/hypic-independent-20261013/formal-performance-g3-r1.
+03bb85sourcehashes/newroot/physical0-3/8233/HCCL/no staged evaluator PASS.
+PDCoff/newHYPICon,eager,same32768/1024 tokenartifact,2B+2A unscoredwarmups.
+Poll exacthandle/root;running/unknown neverrestart or edit mountedruntime.
+All40/c16results retained; native partial-body fallback is NOT hotcoverage.
+Terminal require per-request fourrank48/16 mechanism/source/isolation/release.
+No matchingG1 yet: timing not improvement/acceptance; remaining matrix pending.
+
 LATEST r9/0399 terminalexit0; independent03b7 validates3responses, both
 32768/1024 private requests, all4rank48C1/16C2 skip16376,85sourcehashes,
 291cleanisolations, explicitNSpid physicalmap and exact91ad774b... removal.
