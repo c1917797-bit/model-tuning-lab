@@ -148,6 +148,9 @@ def stop_owned_on_foreign(cid,*,image,inspect_fn=None,command_fn=None):
 
 
 def run_contract(contract):
+    from independent_execution_deadline import deadline_epoch,deadline_reached
+    stop_at=deadline_epoch(contract.get("absolute_stop_utc"))
+    if deadline_reached(stop_at,time.time()):raise TimeoutError("Frozen execution deadline reached before admission")
     image=contract["image"];model=Path(contract["model"]);port=contract["port"]
     pdc_flag=prefix_cache_flag(contract)
     raw=Path(contract["raw_root"])
@@ -195,6 +198,11 @@ def run_contract(contract):
     def guard_loop():
         while not guard_stop.is_set():
             try:
+                if deadline_reached(stop_at,time.time()):
+                    guard_error.append({"type":"TimeoutError","message":"Frozen execution deadline reached","raw":None})
+                    journal.append({"event":"deadline_interrupt_owned_stop","container_id":cid})
+                    stop_owned_on_foreign(cid,image=image)
+                    return
                 snap=snapshot(cid);retain_snapshot(snap)
                 if snap["foreign"]:
                     guard_error.append({"type":"RuntimeError","message":"Foreign physical process detected","raw":None})
@@ -209,8 +217,10 @@ def run_contract(contract):
                 return
             guard_stop.wait(3)
     def require_guard():
+        if deadline_reached(stop_at,time.time()):raise TimeoutError("Frozen execution deadline reached")
         if guard_error:raise RuntimeError("Isolation guard failed: "+str(guard_error))
     try:
+        require_guard()
         args=["docker","run","-d","--name",contract["container_name"],"--network","host",
               "--shm-size","16g","--cpuset-cpus",contract["cpu_set"],
               "--label","model-tuning-lab.task="+TASK,"--label","model-tuning-lab.phase=native-smoke",
