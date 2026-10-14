@@ -40,9 +40,19 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
         from independent_catalog_stage import CatalogCompactStage
         stage=CatalogCompactStage(**config)
     else:stage=CompactCanonicalStage(**config)
+    from independent_runner_context import CURRENT_REQUEST_SLICES
+    from independent_linear_material_pool import identity_key
+    def evicted(pool,event):
+        requests=CURRENT_REQUEST_SLICES.get()
+        if not requests or len({r.rank for r in requests})!=1:
+            raise ValueError("eviction worker rank context required")
+        emit(dict(event,event="compact_public_material_evicted",pool=pool,rank=requests[0].rank))
+    stage.compact_store.pool.on_eviction=lambda event:evicted("linear",event)
+    stage.compact_kv_store.on_eviction=lambda event:evicted("kv",event)
     def publish(material):
         generation=stage.publish(material)
         emit({'event':'compact_public_state_published','rank':material.identity.rank,
+              'key':identity_key(material.identity),'pool':'linear',
               'layer':material.identity.layer,'generation':generation,
               'tokens_sha256':material.identity.tokens_sha256,
               'transition_shape':list(material.affine.transition.shape),

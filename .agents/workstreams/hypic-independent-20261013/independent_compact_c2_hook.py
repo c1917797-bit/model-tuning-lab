@@ -54,19 +54,21 @@ def install_compact_c2(stage,*,enabled=False,emit=None):
                             data=public_chunks[assembly_key].accept(req.request_id,identity,chunk,
                                 key.reshape(key.shape[0],1,256),value.reshape(value.shape[0],1,256))
                             if data is not None:
-                                stage.compact_kv_store.publish(cache_key,data)
+                                generation=stage.compact_kv_store.publish(cache_key,data)
                                 emit({'event':'compact_public_kv_published','rank':req.rank,
                                     'layer':layer.layer_name,'body_tokens':identity.length-cut,
                                     'tokens_sha256':identity.tokens_sha256,
-                                    'producer_request_id':req.request_id,'chunked':True})
+                                    'producer_request_id':req.request_id,'chunked':True,
+                                    'key':cache_key,'pool':'kv','generation':generation})
                                 del public_chunks[assembly_key]
                             return native()
-                        stage.compact_kv_store.publish(cache_key,{
+                        generation=stage.compact_kv_store.publish(cache_key,{
                             'keys':key.reshape(key.shape[0],1,256)[cut:identity.length].detach().to('cpu'),
                             'values':value.reshape(value.shape[0],1,256)[cut:identity.length].detach().to('cpu'),
                             'positions':torch.arange(cut,identity.length,dtype=torch.int64)})
                         emit({'event':'compact_public_kv_published','rank':req.rank,'layer':layer.layer_name,
-                              'body_tokens':identity.length-cut,'tokens_sha256':identity.tokens_sha256})
+                              'body_tokens':identity.length-cut,'tokens_sha256':identity.tokens_sha256,
+                              'key':cache_key,'pool':'kv','generation':generation})
             return native()
         if key is None or value is None or output is None or attn_metadata is None:
             raise ValueError('compact C2 query/KV/output metadata absent')

@@ -278,7 +278,7 @@ def run_contract(contract):
         if contract.get("formal_quality"):
             from independent_quality_workload import run_quality_workload
             from independent_quality_client import http_quality
-            from independent_material_readiness import materials_ready
+            from independent_current_material_readiness import current_materials_ready
             def quality_ready(digest):
                 if not diagnostic:return
                 manifest_hash=hashlib.sha256((HERE/diagnostic["compact_manifest"]).read_bytes()).hexdigest()
@@ -288,7 +288,7 @@ def run_contract(contract):
                     for path in (raw/"diagnostics").glob("compact-worker-*.jsonl"):
                         data=path.read_text();complete=data[:data.rfind("\n")+1]
                         worker_events.extend(json.loads(line) for line in complete.splitlines())
-                    if materials_ready(worker_events,manifest_hash,digest):return
+                    if current_materials_ready(worker_events,manifest_hash,digest):return
                     time.sleep(1)
                 raise TimeoutError("four-rank selected quality material readiness")
             result_unit=run_quality_workload(quality_spec,
