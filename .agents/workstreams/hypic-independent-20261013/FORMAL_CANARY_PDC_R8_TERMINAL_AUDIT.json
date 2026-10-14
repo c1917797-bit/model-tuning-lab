@@ -1,0 +1,175 @@
+{
+  "operation": "0377",
+  "result": {
+    "valid": true,
+    "error": null,
+    "guard_errors": [],
+    "isolation_samples": 289,
+    "responses": 3,
+    "worker_pids": [
+      2546320,
+      2546321,
+      2546322,
+      2546323
+    ],
+    "physical_devices_seen": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "release": {
+      "owned_container": "1c59149a5fb84d8d8771a328bbd5327802eb0ae009f1e5dbc9acc38837c69df8",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    }
+  },
+  "sources": 83,
+  "exact_own_absent": true,
+  "final_physical_processes": [],
+  "owner_fields": [
+    "npu",
+    "pid",
+    "cgroup",
+    "ownership_status",
+    "owned"
+  ],
+  "raw_hashes": {
+    "result.json": "b54b0d9c69cb949f8fc7a236e2c32e60222a6e9a1c3f405f1dd969822fdc8a48",
+    "events.jsonl": "58c5a5f0e2b209739cc27f12aac06474ec2344edcd85d4ec6c0846e45ef005c7",
+    "service.log": "59b03ede37e107880d948812414043f9bef555e83be89c94a5ccdbdebbe5fc0c",
+    "launch.json": "7589a1486a3a566dd0b24760d02ba7a29c0eebf7fe220e97db1d4b122b6a6159",
+    "responses.json": "25c6f84de94d346270ae8bcc22b65dd743b032de5ce854242be30c8dceaaa089",
+    "preflight.json": "031e92f546778af228702dc16bd394de76c5d16a18a80f644760f99bf7e44a35",
+    "service-start.json": "d93e898655a5f7a5f063c64fc2e9a7b7a4bc5ff096683b3e211bae8764c897dc",
+    "isolation.json": "2402bcccefd9f53179a5f9e5446356b9ece0c508624ffc35f9da15c359306766",
+    "release.json": "2f27f6f6b67afe85c41ddf4fbbefff47be1d0c16a832bff88f3e61357f577aed",
+    "diagnostics/compact-worker-59.jsonl": "180213aa710eeb91df9d687cfd40d25fabf8cbd1e0d25eeea5962b4cb7b4d47f",
+    "diagnostics/compact-worker-62.jsonl": "f4999a6e3b18c6ae5e0350743914ac47f7325aeafc39276d0c4d921c106c7247",
+    "diagnostics/compact-worker-61.jsonl": "f58f7bb0c4649318dcc66d8978868e8a9b1270e88e03f110621ddadc0af37b5c",
+    "diagnostics/compact-worker-60.jsonl": "0e47e5c3da65111ac7af49f15ff8aa9bca64904df64cda4dcb59b95e3c5b6b8d"
+  },
+  "mechanism": {
+    "private_requests": 2,
+    "requests": [
+      {
+        "scope": "hash-bound all-rank/all-layer compact mechanism coverage only",
+        "requests": [
+          "cmpl-9ce57595deee05bf-0-ba98f2f6"
+        ],
+        "worker_pids": {
+          "0": 59,
+          "1": 60,
+          "2": 61,
+          "3": 62
+        },
+        "per_rank_linear_layers": 48,
+        "per_rank_full_layers": 16,
+        "skipped_body_rows": 16376,
+        "quality_or_numeric_equivalence_proven": false
+      },
+      {
+        "scope": "hash-bound all-rank/all-layer compact mechanism coverage only",
+        "requests": [
+          "cmpl-9d9141e2d2529c5e-0-a35fe6b9"
+        ],
+        "worker_pids": {
+          "0": 59,
+          "1": 60,
+          "2": 61,
+          "3": 62
+        },
+        "per_rank_linear_layers": 48,
+        "per_rank_full_layers": 16,
+        "skipped_body_rows": 16376,
+        "quality_or_numeric_equivalence_proven": false
+      }
+    ],
+    "scope": "chunk-step mechanism only; HTTP association/PDC/physical/source/release audits remain separate"
+  },
+  "responses": [
+    {
+      "index": 0,
+      "id": "cmpl-9038f2a82727ce52",
+      "usage": {
+        "prompt_tokens": 16640,
+        "total_tokens": 16641,
+        "completion_tokens": 1,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "length"
+    },
+    {
+      "index": 1,
+      "id": "cmpl-9ce57595deee05bf",
+      "usage": {
+        "prompt_tokens": 32768,
+        "total_tokens": 33792,
+        "completion_tokens": 1024,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "length"
+    },
+    {
+      "index": 2,
+      "id": "cmpl-9d9141e2d2529c5e",
+      "usage": {
+        "prompt_tokens": 32768,
+        "total_tokens": 33792,
+        "completion_tokens": 1024,
+        "prompt_tokens_details": null
+      },
+      "finish_reason": "length"
+    }
+  ],
+  "pdc_accepted": false,
+  "pdc_first_computed": [
+    {
+      "rank": 0,
+      "request_id": "cmpl-9ce57595deee05bf-0-ba98f2f6",
+      "computed_tokens": 0
+    },
+    {
+      "rank": 0,
+      "request_id": "cmpl-9d9141e2d2529c5e-0-a35fe6b9",
+      "computed_tokens": 0
+    },
+    {
+      "rank": 3,
+      "request_id": "cmpl-9ce57595deee05bf-0-ba98f2f6",
+      "computed_tokens": 0
+    },
+    {
+      "rank": 3,
+      "request_id": "cmpl-9d9141e2d2529c5e-0-a35fe6b9",
+      "computed_tokens": 0
+    },
+    {
+      "rank": 2,
+      "request_id": "cmpl-9ce57595deee05bf-0-ba98f2f6",
+      "computed_tokens": 0
+    },
+    {
+      "rank": 2,
+      "request_id": "cmpl-9d9141e2d2529c5e-0-a35fe6b9",
+      "computed_tokens": 0
+    },
+    {
+      "rank": 1,
+      "request_id": "cmpl-9ce57595deee05bf-0-ba98f2f6",
+      "computed_tokens": 0
+    },
+    {
+      "rank": 1,
+      "request_id": "cmpl-9d9141e2d2529c5e-0-a35fe6b9",
+      "computed_tokens": 0
+    }
+  ],
+  "full_canary_accepted": false,
+  "remaining": [
+    "observed native PDC hit",
+    "captured NSpid rank-to-physical PID map",
+    "full performance/quality/lifecycle"
+  ]
+}

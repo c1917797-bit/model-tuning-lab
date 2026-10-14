@@ -1072,6 +1072,16 @@ Do not infer exact owner from generic error; snapshot after it is separate.
 No liveownedjob. Old start wording929d9b42 superseded by this terminal.
 # Latest catalog runtime draft
 
+LATEST r8/0377 terminalexit0:public16640/1 then two32768/1024responses,
+289clean isolation,83source hashes unchanged/exactCID1c59149a...absent,
+8233free/final0-3empty. Independent0388 accepts bothprivate fourrank48C1/16C2
+stepmechanisms with16376rows skipped. Newgeneration readiness037f also passes.
+PDCNOTaccepted:initialcomputed0for bothprivate requests. Canary prewarmedB only,
+not dedicated nativeA8192; repair protocol prospectively, oldrootimmutable.
+Also snapshots preservedhostPIDs/cgroups but noNSpid mapping; do not infer
+rank->physicalPID from numeric ordering. Capture realNSpid on nextownedrun.
+No ownedlivejob. FORMAL_CANARY_PDC_R8_TERMINAL_AUDIT.json retains all gaps.
+
 LATEST r7/035b terminalexit1:external NPU0PID2429017 at15:53:24UTC,
 capturedCID87ab8b... independently inspected0369 as /Maxon4ick_vllm,
 NOT previouscannbench_ds. Only ownedCID947e121b...removed;external untouched.
