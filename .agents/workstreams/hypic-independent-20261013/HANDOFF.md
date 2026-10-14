@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Latest: execute_private_linear connects live prefix/boundary, cached body and
+live tail with private state/conv flow.73 CPU controls0033 pass; test verifies
+live spans exclude cached body and final state composition, failure leaves native
+input unchanged. Native private span closure now supports1+ tokens and optional
+returned conv state; this new path not device-tested. No NPU job.
+Next removable Qwen GDN private hook: exact actual metadata slots, pinned material,
+native private span closure, finite checks, atomic final state/output publication.
+Then real public+private C1 canary; C2/seam and formal tests remain unfinished.
+
 LATEST public-r2-target-fix terminal raw valid=true/3 responses; original002e
 handle expired, raw terminal journal authoritative. Independent audit verifies192
 unique layer/rank publications (48x4), exact token/source identity and shapes:

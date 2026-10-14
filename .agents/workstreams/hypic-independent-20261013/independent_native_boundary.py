@@ -1,7 +1,7 @@
 """Current-request C1 boundary evaluation on private native state buffers."""
 import torch
 
-def make_boundary_runner(layer,projected,b,a,incoming_conv):
+def make_boundary_runner(layer,projected,b,a,incoming_conv,*,return_conv=False):
     """Caller passes ONLY the current request's live boundary, not public body.
     Official primitive calls are unchanged; conv/SSM input caches stay private.
     Must execute inside the real forward context on the request's device.
@@ -14,7 +14,7 @@ def make_boundary_runner(layer,projected,b,a,incoming_conv):
     if hashlib.sha256(Path(inspect.getfile(inspect.unwrap(type(layer)._forward_core))).read_bytes()).hexdigest()!="d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816":
         raise ValueError("GDN source drift")
     length=projected.shape[0]
-    if length<3 or projected.ndim!=2 or b.shape[0]!=length or a.shape[0]!=length:
+    if length<1 or projected.ndim!=2 or b.shape[0]!=length or a.shape[0]!=length:
         raise ValueError("live boundary coverage mismatch")
     if incoming_conv.shape!=(3,projected.shape[1]):
         raise ValueError("selected width4 conv-state layout mismatch")
@@ -41,5 +41,6 @@ def make_boundary_runner(layer,projected,b,a,incoming_conv):
             output_final_state=True,cu_seqlens=starts,prebuilt_meta=None,
             head_first=False,use_qk_l2norm_in_kernel=True)
         if state is None:raise ValueError("native boundary final state missing")
+        if return_conv:return output[0],state[0],conv_state[0].clone()
         return output[0],state[0]
     return run
