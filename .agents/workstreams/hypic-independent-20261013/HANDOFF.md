@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Latest C2 serving draft targets exact official AscendAttentionBackendImpl.forward
+SHA80005aba..., before reshape_and_cache. Canonical public K/V body captured into
+bounded pinned pool; private body keys relocated (text NeoX64/theta1e7), values
+copied into private inputs; unchanged backend writes actual slots. Default disabled,
+not yet device validated. Does NOT skip QKV projections or body attention queries;
+must not call this full optimized C2/seam acceptance. Single full-prefill only.
+Next integrate C1+C2 startup and bounded real canary, then implement missing skipped
+query/hidden propagation and batch/PDC/chunks before formal conclusions.
+
 LATEST private-C1-r3/003f terminal exit0/3 responses; independent audit confirms
 192public and384 private reuse events:two requests x4 ranks x48 exact layers,
 56body tokens skipped each, all private finite, exact segment8:72, pinned generation.
