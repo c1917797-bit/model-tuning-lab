@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST long-r4/0201 TERMINAL startup guardexit1,0responses,23samples.
+0206 source/release audit56hashes unchanged/exact f1f57915... absent. Observed
+physical0PID4188328 has root cgroup only; identity unresolved, NOT proof of
+cannbench_ds/foreign person or algorithm failure. No device repair result.
+COMPACT_LONG_R4_TERMINAL_AUDIT.json preserves raw hashes. No owned live job.
+Next inspect startup provenance/race handling without weakening true-foreign
+isolation, then freeze new root for unchanged same-size repaired test.
+
 CURRENT repaired long-r4 exec-0000000000000201 on ma peer
 lgw_a6109c51076a4a2c9d2674ca5a8704a0; checkpointefe22a24;rawroot
 /cache/cch/hypic-independent-20261013/compact-long-r4.01fc actual official

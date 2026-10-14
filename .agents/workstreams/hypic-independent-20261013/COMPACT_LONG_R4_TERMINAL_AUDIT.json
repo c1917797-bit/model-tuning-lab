@@ -1,0 +1,51 @@
+{
+  "operation": "0201",
+  "foreign_observations": [
+    {
+      "utc": "2026-10-14T11:48:47.769839+00:00",
+      "npu": 0,
+      "pid": 4188328,
+      "cgroup": "13:blkio:/"
+    }
+  ],
+  "source_hashes_checked": 56,
+  "own_absent": true,
+  "result": {
+    "valid": false,
+    "error": {
+      "type": "RuntimeError",
+      "message": "Isolation guard failed: [{'type': 'RuntimeError', 'message': 'Foreign physical process detected', 'raw': None}]"
+    },
+    "guard_errors": [
+      {
+        "type": "RuntimeError",
+        "message": "Foreign physical process detected",
+        "raw": null
+      }
+    ],
+    "isolation_samples": 23,
+    "responses": 0,
+    "worker_pids": [],
+    "physical_devices_seen": [],
+    "release": {
+      "owned_container": "f1f57915608f8ddbd1c982e428f90842b345ff070777c0ddab013138e41c22cd",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    }
+  },
+  "raw_hashes": {
+    "result.json": "ebe1bc241d5e0d9adf7407337e80351b13b7e59fe5c4221a893534330f6a38da",
+    "events.jsonl": "9e84eaa7bfb9a6fd6583a10061b752ba0e0ad0e7eb3e9e329d5f6ed5f2ca7577",
+    "service.log": "cbaa257266e29634f30b857369190211ddf1f8acfb03469c85cafa898458c599",
+    "launch.json": "d6f273cd757eb29acf32897722e314db66d17a1e172688319a48f1c5c2092912",
+    "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "preflight.json": "1817d0758845a88e979deb7828718e26a2452c81ea738652e9bbaa53c133a554",
+    "service-start.json": "bb8b7544aba36edb66c2b8247b96acc28fcfea65c3a41a079b21cdf9759c3f40",
+    "isolation.json": "01124bbd115a97f5bbd67234f797e156dc5dad665ff3f354b5ee5888694b407b",
+    "release.json": "7a44794dece6b7b46973a5ba0a4df634cb3f75398676fb58a0f189889cf37922",
+    "tmp/npu_utils-f6101c.o": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tmp/npu_utils-f6101c-29d2fca4.o.tmp": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tmp/tmp4a6chhpd/npu_utils.cpp": "58ce0a00a88d5d6350876d2b51bb44fd6a4fd7cdd658cbac7be6ffc85b06e460"
+  }
+}
