@@ -1,5 +1,19 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST model-entry hook: independent_compact_model_hook now prunes input IDs/
+embeddings and text positions before the official model layer loop, scopes
+CURRENT_COMPACT_MODEL, restores original output rows for sampler indexing,
+rejects pruned sampling rows/PP/prompt logprobs, and supports owned uninstall
+including inherited forward restoration.008b passed3 fixture CPU controls:
+actual wrapped function sees7/12rows, sampled row restored, disabled unchanged,
+failure context cleanup. This is a generic callback hook, NOT yet connected to
+official model selection or attention/GDN handlers. It cannot be enabled live
+until source-bound all-layer admission and actual handler integration exist.
+Next attach compact C1 handler and C2 paged handler to this request context;
+add state-only public storage and sampler selection from real runner metadata.
+No new device job. Current last completed source inspections0088/0089 locate
+Qwen3_5Model inherited Qwen3NextModel.forward and GDN core metadata path.
+
 LATEST compact-stream implementation2026-10-14: C2 query planner/cache binding/
 paged metadata78e420f9 now connects to independent_compact_linear and
 independent_compact_rows. CompactC1 computes prefix/seam, applies cached body

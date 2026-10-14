@@ -1,0 +1,92 @@
+"""Removable, opt-in model row pruning. Layer dispatch is supplied separately."""
+from contextvars import ContextVar
+from dataclasses import dataclass
+from functools import wraps
+import torch
+
+CURRENT_COMPACT_MODEL=ContextVar('independent_compact_model',default=None)
+
+
+@dataclass(frozen=True)
+class CompactModelSelection:
+    plans: tuple
+    sampled_rows: tuple
+    prompt_logprobs: bool = False
+
+
+def install_compact_model(model_class,*,enabled=False,verify_source=None,
+                          select=None,emit=None):
+    if not enabled:return lambda:None
+    if not all(callable(x) for x in (verify_source,select,emit)):
+        raise ValueError('source verifier, complete selection and evidence sink required')
+    verify_source(model_class)
+    inherited='forward' not in model_class.__dict__
+    original=model_class.forward
+    if getattr(original,'_independent_compact_model_owned',False):
+        raise RuntimeError('compact model hook already installed')
+
+    @wraps(original)
+    def wrapped(self,input_ids,positions,intermediate_tensors=None,inputs_embeds=None):
+        selection=select(self,input_ids,positions,intermediate_tensors,inputs_embeds)
+        if selection is None:
+            return original(self,input_ids,positions,intermediate_tensors,inputs_embeds)
+        if intermediate_tensors is not None or selection.prompt_logprobs:
+            raise ValueError('compact model requires single PP and no prompt logprobs')
+        if CURRENT_COMPACT_MODEL.get() is not None:
+            raise RuntimeError('nested compact model context')
+        plans=tuple(selection.plans)
+        if not plans:raise ValueError('empty compact selection')
+        total=positions.shape[-1];cursor=0;rows=[];ids=set()
+        for plan in plans:
+            if (plan.token_start!=cursor or plan.request_id in ids
+                    or (plan.rank,plan.step)!=(plans[0].rank,plans[0].step)):
+                raise ValueError('compact batch identity/row coverage mismatch')
+            ids.add(plan.request_id);rows.extend(plan.packed_rows())
+            cursor+=plan.scheduled_tokens
+        if cursor!=total or len(set(rows))!=len(rows):
+            raise ValueError('compact batch token coverage mismatch')
+        samples=tuple(selection.sampled_rows)
+        if not samples or any(type(x) is not int or x not in rows for x in samples):
+            raise ValueError('sampling or logit row was pruned')
+        if positions.ndim not in (1,2):raise ValueError('unsupported position shape')
+        for p in plans:
+            logical=positions[...,p.token_start:p.token_start+p.scheduled_tokens]
+            expected=torch.arange(p.computed_tokens,p.computed_tokens+p.scheduled_tokens,
+                                  dtype=positions.dtype,device=positions.device)
+            if not torch.equal(logical,expected.expand_as(logical)):
+                raise ValueError('text position identity drift')
+        index=torch.tensor(rows,dtype=torch.int64,device=positions.device)
+        compact_ids=None
+        if input_ids is not None:
+            if input_ids.ndim!=1 or input_ids.shape[0]!=total:
+                raise ValueError('input ID row mismatch')
+            compact_ids=input_ids.index_select(0,index.to(input_ids.device))
+        compact_embeds=None
+        if inputs_embeds is not None:
+            if inputs_embeds.ndim!=2 or inputs_embeds.shape[0]!=total:
+                raise ValueError('embedding row mismatch')
+            compact_embeds=inputs_embeds.index_select(0,index.to(inputs_embeds.device))
+        if compact_ids is None and compact_embeds is None:
+            raise ValueError('model input absent')
+        token=CURRENT_COMPACT_MODEL.set(selection)
+        try:
+            output=original(self,compact_ids,positions.index_select(-1,index),None,compact_embeds)
+            if not isinstance(output,torch.Tensor) or output.ndim!=2 or output.shape[0]!=len(rows):
+                raise ValueError('auxiliary/PP output or compact output row mismatch')
+            # Pruned rows are never sampled. Zero placeholders restore the
+            # official runner indexing contract without inventing body outputs.
+            restored=output.new_zeros((total,output.shape[1]))
+            restored.index_copy_(0,index.to(output.device),output)
+            emit({'event':'compact_model_rows_completed','rank':plans[0].rank,
+                  'step':plans[0].step,'original_rows':total,'retained_rows':len(rows),
+                  'sampled_rows':list(samples),'request_ids':[p.request_id for p in plans],
+                  'scope':'model row pruning; layer mechanism proof required separately'})
+            return restored
+        finally:CURRENT_COMPACT_MODEL.reset(token)
+    wrapped._independent_compact_model_owned=True
+    model_class.forward=wrapped
+    def stop():
+        if model_class.forward is not wrapped:raise RuntimeError('model hook ownership changed')
+        if inherited:delattr(model_class,'forward')
+        else:model_class.forward=original
+    return stop
