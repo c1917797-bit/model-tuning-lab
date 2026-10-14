@@ -1,5 +1,11 @@
 # Full127 CPU token freeze
 
+Latest031d terminal exit0 after155359ms:127sample identities/126unique segments,
+0full-catalog selection errors and all file hashes valid. Receipt
+QUALITY_R3_TOKEN_AUDIT_031D.json. No liveCPU audit or ownedNPUjob.
+Bounded schedule0325 has2host controls proving all381scored indexes retained;
+actual executor/material readiness/capacity/quality remain missing.
+
 Latest031b r3 CPU generator exit0. inputsSHA unchanged2f61c72f... proves all
 127 request rows preserved; catalogSHA now
 fb13827a063b32df1131e17bf4b29ea008380d55ab0a2e7debe8a845e30ed792.
