@@ -1,0 +1,44 @@
+{
+  "schema": "hypic-live-admission-gap/v1",
+  "operation": "exec-00000000000003c6",
+  "controller": "exec-00000000000003bc",
+  "state": "confirmed running; no restart/source edit",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-performance-g3-r1",
+  "observations": [
+    {
+      "request_id": "cmpl-82fead59c715caa7-0-9224f37a",
+      "rank": 0,
+      "steps": [
+        {
+          "step": 8,
+          "computed": 0,
+          "scheduled": 16381
+        },
+        {
+          "step": 9,
+          "computed": 16381,
+          "scheduled": 16387
+        }
+      ]
+    },
+    {
+      "request_id": "cmpl-bac583902469e939-0-9b79f723",
+      "rank": 0,
+      "steps": [
+        {
+          "step": 9,
+          "computed": 0,
+          "scheduled": 24570
+        },
+        {
+          "step": 10,
+          "computed": 24570,
+          "scheduled": 8198
+        }
+      ]
+    }
+  ],
+  "source_rule": "independent_mixed_query_plan preserves partial-body and pdc-overlap entries as NativeQueryPlan. Once computed tokens enter PIC body, current full-body composition cannot retroactively skip all16376.",
+  "diagnosis": "Concrete actual c16 scheduler/chunk admission gap, not external interference. Whole40 coverage must be independently audited at terminal; current hot count not final.",
+  "next": "Retain immutable run and full denominator. After terminal/source/release audit, implement independently derived partial-body/scheduler integration preserving c16 and frozen input/output, with actual boundary shapes and fourrank mechanism tests. Do not silently lower coverage, drop requests, use c1, or import old scheduler."
+}
