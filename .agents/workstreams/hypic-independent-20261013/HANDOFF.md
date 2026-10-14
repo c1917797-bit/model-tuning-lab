@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST compact GDN draft: independent_compact_gdn_hook source-binds official
+GDN core, consumes model compact context and native request/state mapping,
+prepares ALL requests using native prefix/seam/suffix primitives plus compact
+T/S before slot/output writes. Missing material raises before commit; no
+mid-compact native fallback. independent_compact_material_pool keeps only
+CPU-resident T/S/conv-tail and transfers private pinned copies to device.
+0090 passed2 CPU storage/disabled-import tests. Enabled hook is NOT yet
+official-runtime tested or installed. Producer must publish compact_store;
+model selection/all-layer admission and compact C2 backend handler pending.
+No new NPU job. Next integrate actual public producer and paged KV handler,
+then official loadability and bounded27B TP4 integrated proof under deadline.
+
 LATEST model-entry hook: independent_compact_model_hook now prunes input IDs/
 embeddings and text positions before the official model layer loop, scopes
 CURRENT_COMPACT_MODEL, restores original output rows for sampler indexing,
