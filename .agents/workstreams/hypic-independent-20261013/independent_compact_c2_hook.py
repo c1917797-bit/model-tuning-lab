@@ -18,6 +18,7 @@ def install_compact_c2(stage,*,enabled=False,emit=None):
     from independent_c2_reference import relocate_keys
     from independent_kv_slots import install_private_kv_parts
     from independent_mixed_query_plan import NativeQueryPlan
+    from independent_plan_material_identity import identity_for_plan
     original=cls.forward
     if hashlib.sha256(Path(inspect.getfile(inspect.unwrap(original))).read_bytes()).hexdigest()!='80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390':
         raise ValueError('official C2 backend source drift')
@@ -70,7 +71,7 @@ def install_compact_c2(stage,*,enabled=False,emit=None):
                     offset+=len(plan.retained_offsets)
                     continue
                 generation,data=leases.enter_context(stage.compact_kv_store.acquire_private(
-                    identity_key(stage.identity(layer.layer_name,plan.rank))))
+                    identity_key(identity_for_plan(stage,layer.layer_name,plan))))
                 body_len=plan.skipped_tokens
                 if data['keys'].shape!=(body_len,1,256) or data['values'].shape!=data['keys'].shape:
                     raise ValueError('cached body KV shape mismatch')

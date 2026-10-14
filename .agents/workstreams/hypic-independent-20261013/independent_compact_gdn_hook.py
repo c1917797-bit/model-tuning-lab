@@ -18,6 +18,7 @@ def install_compact_gdn(stage,*,enabled=False,emit=None):
     from independent_compact_linear import execute_compact_linear,execute_native_linear_plan
     from independent_mixed_query_plan import NativeQueryPlan
     from independent_linear_map import validate_linear_plan_associations
+    from independent_plan_material_identity import identity_for_plan
     from independent_compact_material_pool import CompactLinearMaterialPool
     if not isinstance(stage.compact_store,CompactLinearMaterialPool):
         raise ValueError('compact CPU material store required')
@@ -52,7 +53,7 @@ def install_compact_gdn(stage,*,enabled=False,emit=None):
                 is_native=isinstance(plan,NativeQueryPlan)
                 generation=None;material=None
                 if not is_native:
-                    expected=stage.identity(self.prefix,plan.rank)
+                    expected=identity_for_plan(stage,self.prefix,plan)
                     generation,material=leases.enter_context(
                         stage.compact_store.acquire_private(expected,device=mixed_qkv.device))
                 slot=assoc.state_slot
