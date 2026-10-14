@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST compact-stream implementation2026-10-14: C2 query planner/cache binding/
+paged metadata78e420f9 now connects to independent_compact_linear and
+independent_compact_rows. CompactC1 computes prefix/seam, applies cached body
+T/S, restores canonical conv tail, then computes suffix; never reads cached
+body core outputs. Hidden/residual/text positions gather together per request.
+Operation0082 passed5 compact CPU controls and20 C2 controls;29Skill structure
+and diff checks pass. Same-input FP64 final state matches dense recurrence.
+Not live-model/NPU acceptance: actual decoder hook, state-only public storage,
+all-layer readiness/ownership, sampler restoration and backend dispatch pending.
+Next integrate these components into the source-bound removable model-layer
+hook, then freeze bounded real27B TP4 service validation. No new device job.
+Current thread automatic followup is hypic (created after old hypic-12 was absent).
+
 LATEST12h implementation: private C1 hook now plans all pure-prefill requests,
 validates exact request/rank/step/row/token slices and unique state slots, pins
 materials and prepares ALL results before any native cache commit. Mixed misses
@@ -11,7 +24,7 @@ No NPU job launched. Next C2 full batch/actual skipped compute and seam, then
 capacity admission and integrated device validation under extended deadline.
 
 LATEST2026-10-14 human extension: another12hours, end19:03:48UTC/22:03:48MSK.
-Write permission restored. Automation hypic-12 active every10minutes; delete at
+Write permission restored. Automation hypic active every10minutes; delete at
 deadline/full acceptance. New CONTINUATION_12H_20261014.md overrides old times.
 No new device job. Critical path: actual C2 skipped compute/seam, capacity,
 c16/PDC/chunks, full-generation canary, formal performance/quality/lifecycle.

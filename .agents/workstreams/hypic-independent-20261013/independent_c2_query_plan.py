@@ -28,6 +28,7 @@ class C2QueryPlan:
     body_end: int
     retained_offsets: tuple
     windows: tuple
+    tokens_sha256: str
 
     @property
     def skipped_tokens(self):
@@ -82,4 +83,4 @@ def plan_c2_queries(request, selection, *, seam_tokens, public_length):
             raise ValueError("causal endpoint mismatch")
     return C2QueryPlan(request.request_id,request.rank,request.step,
                        request.token_start,computed,request.scheduled_tokens,
-                       body_start,body_end,retained,tuple(windows))
+                       body_start,body_end,retained,tuple(windows),selection.tokens_sha256)
