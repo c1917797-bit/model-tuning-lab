@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST complete compact assembly: CompactCanonicalStage verifies48linear/
+16full layer inventory, checks all material before model admission and pins
+all layers across the model forward. Scoped runtime snapshot supplies sampler
+indices, native KV maps and current-step leases. Atomic activation installs
+runner->public producer->compactGDN->compactC2->model and unwinds reverse on
+failure/uninstall. Official model source hashes refreshed00ae.00ad passes6
+stage/modelCPU controls;00b2 passes3 atomic-install controls. No official
+enabled runtime or device activation yet. Next freeze exact package hashes
+and bounded official-image preflight, then integrated27B TP4 request contract.
+No owned live device job; performance/quality/lifecycle for compact code pending.
+
 LATEST runtime capture: official runner source00a1 proves non-spec sampling
 uses query_start_loc endpoints and stores logits_indices during prepare.
 independent_compact_runtime_snapshot captures real sampling indices/cache groups

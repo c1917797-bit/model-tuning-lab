@@ -3,6 +3,7 @@ from contextvars import ContextVar
 from dataclasses import dataclass
 from functools import wraps
 import torch
+from contextlib import ExitStack
 
 CURRENT_COMPACT_MODEL=ContextVar('independent_compact_model',default=None)
 
@@ -15,6 +16,7 @@ class CompactModelSelection:
     cache_slices: tuple = ()
     attention_groups: tuple = ()
     writable_kv_slots: tuple = ()
+    material_guard: object = None
 
 
 def install_compact_model(model_class,*,enabled=False,verify_source=None,
@@ -46,7 +48,7 @@ def install_compact_model(model_class,*,enabled=False,verify_source=None,
                 raise ValueError('compact batch identity/row coverage mismatch')
             ids.add(plan.request_id);rows.extend(plan.packed_rows())
             cursor+=plan.scheduled_tokens
-        if cursor!=total or len(set(rows))!=len(rows):
+        if cursor>total or len(set(rows))!=len(rows):
             raise ValueError('compact batch token coverage mismatch')
         samples=tuple(selection.sampled_rows)
         if not samples or any(type(x) is not int or x not in rows for x in samples):
@@ -73,7 +75,10 @@ def install_compact_model(model_class,*,enabled=False,verify_source=None,
             raise ValueError('model input absent')
         token=CURRENT_COMPACT_MODEL.set(selection)
         try:
-            output=original(self,compact_ids,positions.index_select(-1,index),None,compact_embeds)
+            with ExitStack() as resources:
+                if selection.material_guard is not None:
+                    resources.enter_context(selection.material_guard)
+                output=original(self,compact_ids,positions.index_select(-1,index),None,compact_embeds)
             if not isinstance(output,torch.Tensor) or output.ndim!=2 or output.shape[0]!=len(rows):
                 raise ValueError('auxiliary/PP output or compact output row mismatch')
             # Pruned rows are never sampled. Zero placeholders restore the
