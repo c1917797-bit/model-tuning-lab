@@ -1,0 +1,31 @@
+{
+  "utc": "2026-10-14T11:22:29.401336+00:00",
+  "cid": "333fe5ad6b09167b12ed7798dde3d92f2262a33db5f26a93398cc71ff9a68a88",
+  "mapping": [
+    {
+      "physical_npu": 0,
+      "host_pid": 3906038,
+      "namespace_pid_line": "NSpid:\t3906038\t58",
+      "owned_cgroup": true
+    },
+    {
+      "physical_npu": 1,
+      "host_pid": 3906039,
+      "namespace_pid_line": "NSpid:\t3906039\t59",
+      "owned_cgroup": true
+    },
+    {
+      "physical_npu": 2,
+      "host_pid": 3906040,
+      "namespace_pid_line": "NSpid:\t3906040\t60",
+      "owned_cgroup": true
+    },
+    {
+      "physical_npu": 3,
+      "host_pid": 3906041,
+      "namespace_pid_line": "NSpid:\t3906041\t61",
+      "owned_cgroup": true
+    }
+  ],
+  "foreign_count": 0
+}

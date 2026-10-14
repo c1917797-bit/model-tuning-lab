@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT real mixed Canary exec-00000000000001be on ma peer
+lgw_a6109c51076a4a2c9d2674ca5a8704a0; checkpoint7e47ac27,rawroot
+/cache/cch/hypic-independent-20261013/compact-mixed-canary-r1.
+01bd fresh0-3empty/8233free/no external evaluators/newroot absent.27BTP4,
+public64 then two80-token private requests overlapping512/8fixeddecode;
+second delayed1s. enable_mixedTRUE; eager/nativePDCoff. Require fourrank
+SAME-step native decode+hotprefill48C1/16C2 evidence, not client overlap alone.
+Poll exact handle/root, no restart or mountedsource edits while live/uncertain;
+capture live PIDnamespace/cgroup mapping before exit and audit exact release.
+
 LATEST real-mixed launch harness: native_tp4_smoke now supports explicit
 request_waves e.g[[0],[1,2]] and bounded0-5s start delays. Canonical producer
 finishes before private overlap; default stays sequential. Per-response client
