@@ -1,0 +1,51 @@
+{
+  "operation": "01a7",
+  "scope": "NPU-backed class loadability, not inference",
+  "proof": {
+    "scope": "official NPU-backed full hook-chain preflight only",
+    "installed": true,
+    "uninstalled": true,
+    "source_verified": true,
+    "weights_loaded": false,
+    "inference_requests": 0,
+    "cases": [
+      {
+        "enable_mixed": false,
+        "installed": true,
+        "exact_uninstall": true
+      },
+      {
+        "enable_mixed": true,
+        "installed": true,
+        "exact_uninstall": true
+      }
+    ],
+    "disabled_unchanged": true,
+    "events": [
+      {
+        "event": "compact_hypic_hooks_installed",
+        "pid": 1,
+        "default_disabled": true,
+        "scope": "installation; real request proof pending"
+      },
+      {
+        "event": "compact_hypic_hooks_installed",
+        "pid": 1,
+        "default_disabled": true,
+        "scope": "installation; real request proof pending"
+      }
+    ]
+  },
+  "sources_checked": 50,
+  "source_drift": [],
+  "clean_samples": 16,
+  "physical0_observed": true,
+  "owned_cid": "80e35ab2b60503254a61d5a736596e54d56527752094abab9134cf5a47b6b3a0",
+  "owned_absent": true,
+  "final_processes": [],
+  "raw_hashes": {
+    "result.json": "c2d2d3ec5278eddd9bf61b2e5406ad54865e33e92b5260939a576cf2deeb7963",
+    "events.jsonl": "d69971fe528689ab923c02d3e8844e99b85f8e3a251dcb7aa019c7778598e69e",
+    "stdout.log": "d653134d4f7530d6a2509db348a005450326ebf61a47f1192d70b3c21e6bf7f8"
+  }
+}

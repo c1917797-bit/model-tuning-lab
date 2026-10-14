@@ -1,5 +1,21 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST mixed-class preflight r2/01a7 exit0; independent01ae PASS disabled
+unchanged, enable_mixedFALSE/TRUE exact original-method restoration,50source
+hashes unchanged,16clean samples with physical0 observed, exact80e35ab2... absent,
+final0-3empty. COMPACT_MIXED_PREFLIGHT_R2_AUDIT.json retains raw hashes.
+Class loadability only,0weights/0requests; NOT actual mixed serving proof.
+No owned live job. Next frozen NEW mixed integrated request Canary/current
+manifest; preserve r2root immutable, no repeat of passed class preflight.
+
+CURRENT mixed-class preflight r2 exec-00000000000001a7 on ma peer
+lgw_a6109c51076a4a2c9d2674ca5a8704a0; rawroot
+/cache/cch/hypic-independent-20261013/compact-mixed-preflight-r2.
+Fresh01a6 physical0-3idle/evaluators absent/port26491free/newroot absent.
+Same frozen disabled/default/mixed installation/uninstall protocol as r1;
+current source hashes recorded in raw launch. Physical0only,no weights/requests.
+Poll exact handle/root; no mounted-source edits/restart while live/uncertain.
+
 LATEST actual C2 WRAPPER CPU sandtable019b passes2 cases: native decode/cold
 entries use exact request-local slots/causal endpoints, never acquire public
 material; late second-request invalid lease prevents ALL backend calls/output
