@@ -1,5 +1,31 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST mixed-query planning: independent_mixed_query_plan preserves all rows
+for native decode/cold/partial/PDC-overlap entries while eligible hot entries
+retain causal C2 windows and prune body.0126 passes4 mixed controls and5 C2
+regressions including packed order/step/alias rejection. NOT runtime-enabled:
+compact GDN and C2 handlers still require all-hot batches. Next implement
+source-bound native subset metadata/dispatch for native entries before selector
+or runner admission changes; never feed NativeQueryPlan into current C1 handler.
+No new device task. Full mixed/PDC/model acceptance remains unproven.
+
+LATEST compact-long-r2/0113 TERMINAL exit1: foreign physical process during
+startup,0responses,27samples. foreign_interrupt_owned_stop stopped ONLY exact
+owned4f3720abd2a3f998423a2ec7fb15263e93af4e8e306e76b3e2ba1626977d5733.
+Independent check confirms CID absent/8233free. No live owned job or long
+algorithm result. Raw root immutable. Do not relaunch into transient foreign
+evaluator gaps; advance mixed/PDC implementation while waiting for stable idle.
+
+CURRENT compact-long-r2 controllerexec-0000000000000113 on current ma peer
+lgw_a6109c51076a4a2c9d2674ca5a8704a0; checkpoint14a43551. Raw root
+/cache/cch/hypic-independent-20261013/compact-long-r2.09:05UTC0111 confirms
+physical0–3empty/8233free and no active kernel_eval processes in previously
+interfering container. Same16K/32K/1024 contract, newroot; controller now
+promptly stops ONLY exact owned CID on foreign process, preserving logs.
+Poll exact handle/root; no restart or mounted-source edits while live/uncertain.
+Capture NSpid/cgroup->physical map during worker lifetime, then independent
+source/actual recipe/request/all-layer skip/isolation/release audit on terminal.
+
 LATEST compact-long-r1/00ff terminalexit1,0responses,120samples: foreign
 physical0PID2408350 incannbench_ds/efc5e45e... appeared during API startup.
 Independent0109 verifies exact5b5fc82b... absent/8233free/final0–3empty and
