@@ -1,5 +1,12 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST GDN handler precommit mapping guard now requires exact complete
+plan/state count, request/rank/step/row span/initial flag and unique state slots
+before any preparation; zip truncation cannot silently certify incomplete
+coverage.0174 passes7 association controls. No new NPU job; full handler
+execution/official mixed preflight still pending. Existing root contracts remain
+immutable and old source hashes must not be treated as current launch identity.
+
 LATEST mixed-class preflight new wrapper/contract prepared, NEW rawroot
 /cache/cch/hypic-independent-20261013/compact-mixed-preflight-r1 does not exist.
 NOT STARTED:0164 finds live cannbench_ds staged_evalPID2897314 and child2912793,

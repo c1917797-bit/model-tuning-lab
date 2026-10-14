@@ -11,6 +11,26 @@ class LinearSlice:
     token_end: int
     has_initial_state: bool
 
+def validate_linear_plan_associations(plans,associations):
+    """Validate complete identity/slot coverage before any GDN preparation.
+
+    Never use zip alone to certify coverage; truncated mappings must fail.
+    """
+    plans=tuple(plans);associations=tuple(associations)
+    if not plans or len(plans)!=len(associations):
+        raise ValueError('linear plan/state coverage missing')
+    slots=set()
+    for row,(plan,assoc) in enumerate(zip(plans,associations)):
+        if ((plan.request_id,plan.rank,plan.step,plan.token_start,
+             plan.token_start+plan.scheduled_tokens)!=
+            (assoc.request_id,assoc.rank,assoc.step,assoc.token_start,assoc.token_end)
+            or assoc.row!=row or type(assoc.state_slot) is not int
+            or assoc.state_slot<0 or assoc.state_slot in slots
+            or assoc.has_initial_state!=(plan.computed_tokens>0)):
+            raise ValueError('linear plan/state identity or slot alias')
+        slots.add(assoc.state_slot)
+    return associations
+
 def freeze_prefill_linear_slices(requests,query_start,state_indices,has_initial,
                                  *,state_capacity,speculative=False,num_decodes=0):
     requests=tuple(requests)

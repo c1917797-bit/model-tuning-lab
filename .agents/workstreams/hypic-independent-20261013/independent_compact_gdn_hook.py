@@ -17,6 +17,7 @@ def install_compact_gdn(stage,*,enabled=False,emit=None):
     from independent_native_boundary import make_boundary_runner
     from independent_compact_linear import execute_compact_linear,execute_native_linear_plan
     from independent_mixed_query_plan import NativeQueryPlan
+    from independent_linear_map import validate_linear_plan_associations
     from independent_compact_material_pool import CompactLinearMaterialPool
     if not isinstance(stage.compact_store,CompactLinearMaterialPool):
         raise ValueError('compact CPU material store required')
@@ -41,6 +42,7 @@ def install_compact_gdn(stage,*,enabled=False,emit=None):
         mixed=any(isinstance(p,NativeQueryPlan) for p in plans)
         associations=(associate_native_mixed_linear(self,requests,raw[self.prefix])
                       if mixed else associate_native_linear(self,requests,raw[self.prefix]))
+        associations=validate_linear_plan_associations(plans,associations)
         total=sum(len(p.retained_offsets) for p in plans)
         if any(x.shape[0]!=total for x in (mixed_qkv,b,a,core_attn_out)):
             raise ValueError('compact GDN projected row coverage mismatch')
