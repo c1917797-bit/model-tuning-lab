@@ -1,6 +1,24 @@
 """Full paired quality execution; no service ownership or old treatment code."""
-import concurrent.futures,hashlib
+import concurrent.futures,hashlib,json,urllib.request
 from independent_quality_schedule import quality_schedule
+
+def http_quality(port,payload,*,guard,timeout=2400):
+    if type(port) is not int or not 1<=port<=65535:raise ValueError("valid loopback port required")
+    guard()
+    request=urllib.request.Request("http://127.0.0.1:"+str(port)+"/v1/completions",
+        data=json.dumps(payload).encode(),headers={"Content-Type":"application/json"})
+    chunks=[];size=0
+    with urllib.request.urlopen(request,timeout=timeout) as response:
+        while True:
+            guard();chunk=response.read(65536)
+            if not chunk:break
+            size+=len(chunk)
+            if size>8388608:raise ValueError("bounded quality response exceeded")
+            chunks.append(chunk)
+    guard()
+    result=json.loads(b"".join(chunks))
+    if not isinstance(result,dict):raise ValueError("quality response object required")
+    return result
 
 def quality_payload(row):
     ids=row["token_ids"]
