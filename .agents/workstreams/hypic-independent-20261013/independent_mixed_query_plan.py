@@ -36,14 +36,15 @@ class NativeQueryPlan:
         return tuple(range(self.computed_tokens,self.computed_tokens+self.scheduled_tokens))
 
 
-def plan_mixed_queries(requests,selections,ready_ids,*,seam_tokens,public_length):
+def plan_mixed_queries(requests,selections,ready_ids,*,seam_tokens,public_length,
+                       public_lengths=None):
     """Selections are previously token-validated; readiness is all-layer pinned.
 
     This planner does not acquire pins or mutate caches. Caller must hold the
     readiness generation through execution. Invalid batch identity fails closed,
     while valid unsupported request shapes stay native within the same batch.
     """
-    requests=tuple(requests);ready=frozenset(ready_ids)
+    requests=tuple(requests);ready=frozenset(ready_ids);lengths=dict(public_lengths or {})
     if not requests: raise ValueError('empty mixed batch')
     rank=requests[0].rank;step=requests[0].step
     ids=set();cursor=0;plans=[]
@@ -69,10 +70,10 @@ def plan_mixed_queries(requests,selections,ready_ids,*,seam_tokens,public_length
                 reason='partial-body'
             else:
                 plans.append(plan_c2_queries(req,selection,
-                    seam_tokens=seam_tokens,public_length=public_length))
+                    seam_tokens=seam_tokens,public_length=lengths.get(req.request_id,public_length)))
                 continue
         plans.append(NativeQueryPlan(req.request_id,req.rank,req.step,
                      req.token_start,req.computed_tokens,req.scheduled_tokens,reason))
-    if not ready.issubset(ids) or not set(selections).issubset(ids):
+    if not ready.issubset(ids) or not set(selections).issubset(ids) or not set(lengths).issubset(ids):
         raise ValueError('selection/readiness outside current batch')
     return tuple(plans)
