@@ -1,5 +1,12 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST mixed-class preflight new wrapper/contract prepared, NEW rawroot
+/cache/cch/hypic-independent-20261013/compact-mixed-preflight-r1 does not exist.
+NOT STARTED:0164 finds live cannbench_ds staged_evalPID2897314 and child2912793,
+targeting physicaldevice3. npu-smi momentarily empty is an evaluator gap, not
+terminal. Foreign task untouched; do not launch until real evaluator terminal
+and fresh0-3/port/source checks. Continue actual handler fixture offline.
+
 LATEST official class-chain probe extended to disabled control plus BOTH
 enable_mixedFALSE/TRUE install/uninstall, comparing every original method after
 each case.015c source inspection showed previous probe covered default-only,
