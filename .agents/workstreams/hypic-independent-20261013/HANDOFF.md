@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST actual C2 WRAPPER CPU sandtable019b passes2 cases: native decode/cold
+entries use exact request-local slots/causal endpoints, never acquire public
+material; late second-request invalid lease prevents ALL backend calls/output
+writes. Exact uninstall and native metadata unchanged asserted. Test explicitly
+mocks external official ABI/source verification/NPU/backend, never changes
+production verifier: NOT official import, hot branch or device proof. Next
+actual GDN wrapper fixture and stable-window official mixed preflight.
+
 LATEST mixed preflight018a TERMINAL exit1: after fresh idle, foreign physical0
 PID3506733 appeared.018c independently proves cgroupcannbench_ds/efc5e45e...
 not ours; exact ownd4a420f6... absent.2isolation samples,empty probe stdout;
