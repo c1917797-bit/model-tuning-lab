@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Latest private serving draft: independent_private_gdn_hook now connects exact
+Qwen GDN entry, runtime prompt/segment, pure-prefill state slot, pinned material,
+private native prefix/boundary/tail, finite checks, final state/conv/output commit
+and rank/request/step/generation evidence. Default disabled/removable. Not device
+tested. First draft handles ONE pure-prefill request; c16/PDC-overlap/chunks remain
+unfinished and fallback is not technique coverage. C2 disabled. No live NPU job.
+Next install private hook after public producer and freeze public+relocated private
+canary with exact expected192 per-layer reuse events, then verify on0–3.
+
 Latest: execute_private_linear connects live prefix/boundary, cached body and
 live tail with private state/conv flow.73 CPU controls0033 pass; test verifies
 live spans exclude cached body and final state composition, failure leaves native
