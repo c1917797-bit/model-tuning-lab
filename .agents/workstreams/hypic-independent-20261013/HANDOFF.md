@@ -927,3 +927,10 @@ Prelaunch0233 was empty but occupancy changed by controller admission.
 Do not describe this as confirmed cannbench_ds: failure did not preserve PID.
 No live owned job. Preserve exact0235 terminal; coordinate stable window
 and fresh admission before a separately identified next attempt.
+# Latest PDC overlap review
+
+0238 seven planner controls pass, including formal-scale four-rank PDC overlap.
+PDC_OVERLAP_GAP.md records genuine missing overlap support and unproven exact
+native8192 workload layout. No runtime source change/device run; do not count
+native fallback as HYPIC hot activation or change denominator for green coverage.
+Long repair remains untested;0235 terminal admission failure supersedes live text.
