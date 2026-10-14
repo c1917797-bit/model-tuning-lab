@@ -32,6 +32,38 @@ def associate_native_linear(layer,requests,metadata):
         state_capacity=state.shape[0],
         speculative=metadata.spec_sequence_masks is not None,
         num_decodes=metadata.num_decodes)
+def associate_native_mixed_linear(layer,requests,metadata):
+    """Verified decode-first mixed association; no cache writes or activation.
+
+    Decode-only frames have no initial-state mask in the official builder and
+    stay on the unchanged native path. This entry requires a prefill tail.
+    """
+    from vllm.model_executor.layers.mamba.gdn.qwen_gdn_linear_attn import QwenGatedDeltaNetAttention
+    from vllm.v1.attention.backends.gdn_attn import GDNAttentionMetadata
+    from independent_mixed_linear_map import freeze_mixed_linear_slices
+    if type(layer) is not QwenGatedDeltaNetAttention or type(metadata) is not GDNAttentionMetadata:
+        raise ValueError('unexpected mixed GDN runtime identity')
+    if hashlib.sha256(Path(inspect.getfile(inspect.unwrap(type(layer)._forward_core))).read_bytes()).hexdigest()!='d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816':
+        raise ValueError('official mixed GDN source drift')
+    if hashlib.sha256(Path(inspect.getfile(GDNAttentionMetadata)).read_bytes()).hexdigest()!='27f5561c4b191f2be5a4a91820a6c64a38b755477b3f037178fb02bbc3bc1caf':
+        raise ValueError('official mixed metadata builder drift')
+    if metadata.num_prefills<1 or metadata.has_initial_state is None:
+        raise ValueError('mixed association requires native prefill tail')
+    conv,state=layer.kv_cache[:2]
+    if conv.shape[0]!=state.shape[0]:raise ValueError('mixed conv/state capacity drift')
+    def cpu(value):
+        if value is None:raise ValueError('mixed metadata tensor missing')
+        return value.detach().cpu().tolist()
+    return freeze_mixed_linear_slices(requests,
+        cpu(metadata.non_spec_query_start_loc),cpu(metadata.non_spec_state_indices_tensor),
+        cpu(metadata.has_initial_state),state_capacity=state.shape[0],
+        num_decodes=metadata.num_decodes,num_prefills=metadata.num_prefills,
+        num_decode_tokens=metadata.num_decode_tokens,
+        prefill_query_start=cpu(metadata.prefill_query_start_loc),
+        prefill_state_indices=cpu(metadata.prefill_state_indices),
+        prefill_has_initial=cpu(metadata.prefill_has_initial_state),
+        speculative=metadata.spec_sequence_masks is not None)
+
 def verify_runner(cls):
     if cls.__name__!="NPUModelRunner" or cls.__module__!="vllm_ascend.worker.model_runner_v1":
         raise ValueError("unexpected runner identity")

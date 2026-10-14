@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST mixed GDN association: official-image0133/0138 proves decode-first
+non-spec full state map and rebased prefill tail; gdn_attn.py SHA27f5561c...
+bound in associate_native_mixed_linear. New immutable mapping validates exact
+request/rank/step/row, state slots, initial flags and prefill-tail correspondence.
+0137 passes4 association negative/positive controls plus4 mixed query controls.
+No runtime admission enabled and no new device job. Next wire native-entry
+GDN computation and C2 per-request dispatch; current all-hot handler unchanged.
+
 LATEST mixed-query planning: independent_mixed_query_plan preserves all rows
 for native decode/cold/partial/PDC-overlap entries while eligible hot entries
 retain causal C2 windows and prune body.0126 passes4 mixed controls and5 C2
