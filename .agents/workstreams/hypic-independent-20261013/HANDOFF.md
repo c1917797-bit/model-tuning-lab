@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT r9 exec-0000000000000399 on fresh ma a6109, checkpointd8319287.
+Rawroot/cache/cch/hypic-independent-20261013/formal-canary-pdc-r9.
+0397 all85sourcehashes/newroot/physical0-3/8233/HCCL PASS;0398 no staged
+evaluator, only passive external containers/attach. Poll exacthandle/root;
+running/unknown neverrestart or edit mounted runtime. NativeA8192+tail256
+unscored warmup precedes existing Bproducer and two32K/1024private requests.
+Terminal audit PDCprogress+actualNSpid map+all4rank48C1/16C2/source/isolation/
+exactrelease. This is bounded gate, NOT formal matrix/fullquality acceptance.
+
 LATEST 16:31UTC: checkpoint1ff4d72d freezes prospective r9 contract/manifest.
 68e6c9c2 adds same-artifact nativeA8192+tail256 unscored warmup and actual
 /proc/PID/status NSpid capture (no PID-order inference). Host038c242tests,
