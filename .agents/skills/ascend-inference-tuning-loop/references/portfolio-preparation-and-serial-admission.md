@@ -3,9 +3,10 @@
 Use this for the user-authorized multi-paper Ascend portfolio, not unrelated
 single-change work. Current hardware is physical NPU4–7; NPU0–3 is protected.
 Use the latest workstream authority for concurrency, not an older allowance.
-Earlier authorization allowed MAIN-coordinated disjoint numerical preparation;
-the Oct9 phase-DAG request chooses parallel preparation but SERIAL device
-stages. Apply that stricter current mode. A four-card matrix/TP4 can be one
+Do not hard-code a historical serial-only authorization as the current mode.
+When the active authority permits independent single-card numerical stages,
+MAIN may admit reviewed compatible controllers under one joint resource budget.
+A four-card matrix/TP4 can be one
 frozen stage internally; never insert another paper's NPU job into its lease.
 TP4/model/profiling/formal timing retains exclusive four-card admission.
 Keep project-specific deadlines in workstream records, not a moving universal
@@ -79,9 +80,9 @@ commands do not make archived resource facts fresh or guarantee numerical PASS.
 At device admission, bind the actual physical mapping, host/cgroup budgets and
 ownership once for the bounded matrix, monitor changes, preserve first failure
 and already-valid child evidence, and release only the owned lease. Device
-jobs obey the latest explicit concurrency authority. Under the current serial
-mode, no second paper enters the device lease. Disjoint admission requires a
-later explicit authorization plus reviewed compatible controllers and one
+jobs obey the latest explicit concurrency authority. Under serial-only
+authority, no second paper enters the device lease. Disjoint admission requires
+explicit active authorization plus reviewed compatible controllers and one
 aggregate budget; no preparer independently starts a container or reserves
 cards just because it finishes a packet.
 
@@ -93,8 +94,8 @@ Do not hold a preparation slot awaiting MAIN when other assigned work remains.
 MAIN selects the highest-value ready successor using remaining time and
 current evidence, rather than waiting for every paper to be ready. Independent
 cross-paper or within-paper device-free preparation continues in parallel.
-Under the current serial mode, disjoint cards do not authorize a second paper's
-device job. If concurrency is explicitly reauthorized later, first review the
+Disjoint cards alone do not authorize a second paper's device job. If the active
+authority permits concurrency, first review the
 controllers and one joint budget. TP4/full-model/profile/formal performance
 remains exclusive. All papers keep a fair
 same-stack/common-optimization dense comparison.
@@ -220,7 +221,7 @@ passed, failed and blocked states must not borrow one another's authority.
 
 Device-free source/oracle/adapter work runs across papers in distinct edit
 scopes within agent and joint host budgets. MAIN is the only device dispatcher.
-For the current serial mode, admit one complete bounded device stage at a time;
+Under serial-only authority, admit one complete bounded device stage at a time;
 a numerical full matrix or a matched dense/candidate pair is an indivisible
 stage. Freeze its inputs and source until actual termination. A delivered patch
 is only preparation, not an NPU ticket.
@@ -276,8 +277,8 @@ causal classification and fixed acceptance deadline.
 When the user authorizes periodic checks, use the product's recurring mechanism
 and update an existing matching monitor rather than adding a background shell
 loop or duplicate schedule. Store cadence in the active workstream. This
-portfolio's Oct9 authorization uses15-minute checks plus immediate
-terminal/delivery handling; fifteen minutes is not a universal skill requirement.
+portfolio previously used15-minute checks; use the latest authorized cadence
+plus immediate terminal/delivery handling, not a historical interval.
 A periodic wakeup checks evidence and continues authorized work, not a guarantee
 that sampling or scheduling occurs at an exact deadline.
 
@@ -452,6 +453,20 @@ load or a source-only readiness label.
 [Actual successes, failures and queue gaps](../../../workstreams/qwen36-damp-ascend-20261006/EXECUTABLE_READINESS_LEARNING_20261008.md).
 
 ## Terminal-triggered readiness, not source-count utilization
+
+At every actual delivery or terminal event, reconcile live agent handles and
+gate-ready receipts before returning to ordinary work. A finished agent needs
+a follow-up that triggers execution, not merely a message or a queue label.
+Record CURRENT's real operation and phase, NEXT's unrun gate and accepted
+prerequisite Refs, and BACKUP's concrete independent missing edge. Count only
+MAIN-reviewed executable gates; software PASS never becomes NPU-ready by prose.
+Size the buffer by compatible resource demand and remaining stage time, not
+paper count. Do not delay a valid CURRENT merely because BACKUP is unfinished.
+If executable count is zero, identify the exact missing producer/CLI/mount or
+resource admission and assign its bounded repair while other preparers close
+an independent path. Shared-controller failures are correlated risk, not three
+independent ready candidates. Writing this rule is not a demonstrated handoff:
+verify actual dispatch, device compute and release timestamps separately.
 
 For this explicitly parallel portfolio, keep three distinct lanes:
 CURRENT is one MAIN-owned actual live operation; NEXT is the highest-value
