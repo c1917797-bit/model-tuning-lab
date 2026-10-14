@@ -16,7 +16,9 @@ def material_key(model_identity,implementation_identity,token_ids,public_context
         raise ValueError("complete identity and nonempty tokens required")
     return hashlib.sha256(json.dumps([model_identity,implementation_identity,list(token_ids),public_context_identity],separators=(',',':')).encode()).hexdigest()
 class PublicPool:
-    def __init__(self,capacity_bytes):
+    def __init__(self,capacity_bytes,*,on_eviction=None):
+        if on_eviction is not None and not callable(on_eviction):raise ValueError("eviction observer must be callable")
+        self.on_eviction=on_eviction
         if capacity_bytes<=0:raise ValueError("positive capacity required")
         self.capacity=capacity_bytes;self.used=0;self.entries=OrderedDict();self.lock=threading.RLock();self.generation=0
     def publish(self,key,tensors):
@@ -32,7 +34,11 @@ class PublicPool:
                 if need<=0:break
                 if not e['pins']:victims.append(candidate);need-=e['size']
             if need>0:raise BufferError("all capacity pinned; publication unchanged")
-            for candidate in victims:self.used-=self.entries.pop(candidate)['size']
+            for candidate in victims:
+                victim=self.entries.pop(candidate);self.used-=victim['size']
+                if self.on_eviction is not None:
+                    self.on_eviction({'key':candidate,'generation':victim['generation'],
+                                      'size_bytes':victim['size']})
             self.generation+=1
             self.entries[key]={'data':data,'size':size,'pins':0,'generation':self.generation}
             self.used+=size
