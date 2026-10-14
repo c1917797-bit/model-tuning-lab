@@ -8,6 +8,7 @@
 | --- | --- | --- |
 | 选论文、确认适用层 | [架构与数值](architecture-and-numerics.md) | 实际模型机制、命中路径、语义不变量 |
 | 设计 Ascend 算子或服务 hook | [硬件与运行时](ascend-and-runtime.md) | 复用来源、数据布局、同步/状态/图契约 |
+| 学习别人如何把论文迁移到真实 Ascend | [迁移工程案例](paper-to-ascend-engineering-cases.md) | 论文不变量、硬件适配边界、真实模型闭环、可复用接口与证据限制 |
 | 判断收益、设计实验 | [性能与因果验证](performance-and-causal-validation.md) | 工作负载、可辨别对照、预算、结论边界 |
 | 类似失败再次出现 | [实测因果案例](cases/CASES.md) | 已证实事实、尚缺证据、下一次鉴别实验 |
 | 核实外部论断和版本 | [来源索引](sources.md) | 一手来源、版本范围、实际部署身份 |
