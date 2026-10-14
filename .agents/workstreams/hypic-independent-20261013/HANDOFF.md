@@ -1,5 +1,12 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST03eb pinnedofficialScheduler import/install/uninstall PASS after adding
+read-only hostdriver libs, NO NPUdevices/model/request. Prior03e7CPUdriver
+failure retained. No activeAscend platform/engine execution claim. New scheduler
+loader c7b5749f and267hosttests ready for prospective R5config/manifest/contract;
+next actual27BTP4 full40c16 successor must prove enginecap and4rankmechanisms.
+No unchangedretry/oldroot reuse; freshphysical0-3/8233/source admission required.
+
 LATEST c7b5749f wires default-off scheduler import hook/engine ledger and
 current fourrank generation readiness984697cd;267hosttests03e6PASS and
 official9ae1491f... ASTcompile03e1PASS. CPU-only official import03e7FAIL
