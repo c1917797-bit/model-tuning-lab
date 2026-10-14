@@ -1,5 +1,12 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST official class-chain probe extended to disabled control plus BOTH
+enable_mixedFALSE/TRUE install/uninstall, comparing every original method after
+each case.015c source inspection showed previous probe covered default-only,
+so old preflight success cannot prove new mixed installation. New probe NOT
+executed on device yet; new immutable controller/root/hash contract required.
+No weights/requests in this gate; it remains loadability, not handler execution.
+
 LATEST executable sand-table0156 PASS: formal32768/16384/c16 row protocol,
 4ranks x3placements x4PDCprogress=48combinations, hot/cold/partial/decode mix.
 Independent dense-row oracle, sampler retention, causal endpoints, and full
