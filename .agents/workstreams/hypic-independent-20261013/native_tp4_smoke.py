@@ -151,6 +151,15 @@ def run_contract(contract):
     inherited_pythonpath=next((x.split("=",1)[1] for x in image_info["Config"].get("Env",[]) if x.startswith("PYTHONPATH=")),"")
     diagnostic=contract.get("cache_diagnostic")
     formal_artifact=contract.get("formal_token_artifact")
+    quality_spec=contract.get("quality_workload")
+    if contract.get("formal_quality"):
+        if contract.get("formal_performance") or not quality_spec or formal_artifact:
+            raise ValueError("exclusive frozen quality workload required")
+        from independent_quality_workload import read_bound
+        quality_inputs=read_bound(quality_spec["inputs"])
+        read_bound(quality_spec["catalog"])
+        if any(len(x["token_ids"])+1024>40960 for x in quality_inputs["requests"]):
+            raise ValueError("quality input exceeds actual service capacity")
     formal_payloads=None
     if formal_artifact:
         from independent_formal_canary import load_formal_canary
@@ -210,6 +219,8 @@ def run_contract(contract):
             if Path(src).exists():args+=["-v",src+":"+dst+(":rw" if dst=="/scratch" else ":ro")]
         if formal_artifact:
             args+=["-v",formal_artifact["path"]+":/inputs/tokens.json:ro"]
+        if quality_spec:
+            args+=["-v",quality_spec["catalog"]["path"]+":/inputs/catalog.json:ro"]
         env={"ASCEND_RT_VISIBLE_DEVICES":"0,1,2,3","HCCL_OP_EXPANSION_MODE":"AIV",
              "PYTORCH_NPU_ALLOC_CONF":"expandable_segments:True","TASK_QUEUE_ENABLE":"1",
              "VLLM_ASCEND_ENABLE_FLASHCOMM":"1","HCCL_NPU_SOCKET_PORT_RANGE":
@@ -264,7 +275,31 @@ def run_contract(contract):
             except (urllib.error.URLError,TimeoutError):pass
             time.sleep(5)
         else:raise TimeoutError("Native health deadline")
-        if contract.get("formal_performance"):
+        if contract.get("formal_quality"):
+            from independent_quality_workload import run_quality_workload
+            from independent_quality_client import http_quality
+            from independent_material_readiness import materials_ready
+            def quality_ready(digest):
+                if not diagnostic:return
+                manifest_hash=hashlib.sha256((HERE/diagnostic["compact_manifest"]).read_bytes()).hexdigest()
+                until=time.monotonic()+300
+                while time.monotonic()<until:
+                    require_guard();worker_events=[]
+                    for path in (raw/"diagnostics").glob("compact-worker-*.jsonl"):
+                        data=path.read_text();complete=data[:data.rfind("\n")+1]
+                        worker_events.extend(json.loads(line) for line in complete.splitlines())
+                    if materials_ready(worker_events,manifest_hash,digest):return
+                    time.sleep(1)
+                raise TimeoutError("four-rank selected quality material readiness")
+            result_unit=run_quality_workload(quality_spec,
+                send=lambda p:http_quality(port,p,guard=require_guard,timeout=2400),
+                guard=require_guard,record=journal.append,
+                require_material_ready=quality_ready)
+            responses=result_unit["results"]
+            write(raw,"quality-unit.json",result_unit)
+            if result_unit["successful"]!=381:
+                raise RuntimeError("full quality request failures retained")
+        elif contract.get("formal_performance"):
             if not formal_artifact:raise ValueError("formal performance artifact required")
             from independent_formal_workload import run_formal_workload
             from independent_formal_client import http_measure

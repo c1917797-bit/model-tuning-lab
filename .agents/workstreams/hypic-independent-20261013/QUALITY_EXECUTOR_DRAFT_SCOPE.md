@@ -1,5 +1,14 @@
 # Quality executor draft
 
+Latest controller formal_quality branch connects workload/guardedHTTP/durable
+journal and quality-unit.json, ROcatalog mount, actual40960service capacity check.
+Readiness explicitly selects the segment digest across all4worker receipts.
+Baseline still does matched producers, material gate no-op without algorithm.
+0330 all225hostcontrols pass. New controller invalidates ALL old launch
+contracts; freeze new before any device use. No hardware quality run.
+Controller valid means completed requests/isolation/release, NOT quality passes;
+paired score/hot-path/source audits are independent required gates.
+
 Latest032a guarded loopback HTTP transport and quality-client controls pass3.
 Actual TCP fixture verifies natural-stop/1024/nonthinking token completion
 request and usage identity; this is a test server, NOT the27B model.
@@ -14,6 +23,6 @@ Batch size10 is a planning default, not proven pool capacity; derive/freeze
 actual material memory/admission before launch. Never silently change it for
 one arm or discard cold/failure samples. Interruption leaves incomplete campaign.
 
-Still missing: durable rawwriter/controller integration,
+Still missing: real-service validation of durable rawwriter/controller integration,
 sourcebound producer readiness, per-ID fourrank receipts, independent score/
 identity audit, GSM8K executor and hardwareCanary. Full goal remains incomplete.
