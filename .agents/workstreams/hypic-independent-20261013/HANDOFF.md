@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST r9/0399 terminalexit0; independent03b7 validates3responses, both
+32768/1024 private requests, all4rank48C1/16C2 skip16376,85sourcehashes,
+291cleanisolations, explicitNSpid physicalmap and exact91ad774b... removal.
+No ownedlivejob. OriginalPDC>=8192 gate FAIL:bothrequests allranks7680.
+Officialee38c68c... patch_mamba_config and runtime log prove1536-token
+hybrid blocks; floor8192/1536*1536=7680. Preserve originalgate failure;
+do not classify unavoidable partialblock as HYPIC fault or rerun unchanged.
+Next freeze source-derived full-block PDC criterion prospectively for formal
+protocol; review concurrent private chunk/mixed coverage before G1-G4 matrix.
+Full performance/quality/lifecycle and29functionalSkills remain unverified.
+
 CURRENT r9 exec-0000000000000399 on fresh ma a6109, checkpointd8319287.
 Rawroot/cache/cch/hypic-independent-20261013/formal-canary-pdc-r9.
 0397 all85sourcehashes/newroot/physical0-3/8233/HCCL PASS;0398 no staged

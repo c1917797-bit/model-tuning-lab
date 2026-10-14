@@ -1,0 +1,141 @@
+{
+  "mechanism": {
+    "private_requests": 2,
+    "requests": [
+      {
+        "scope": "hash-bound all-rank/all-layer compact mechanism coverage only",
+        "requests": [
+          "cmpl-b226eae11be34a24-0-85804585"
+        ],
+        "worker_pids": {
+          "0": 59,
+          "1": 60,
+          "2": 61,
+          "3": 62
+        },
+        "per_rank_linear_layers": 48,
+        "per_rank_full_layers": 16,
+        "skipped_body_rows": 16376,
+        "quality_or_numeric_equivalence_proven": false
+      },
+      {
+        "scope": "hash-bound all-rank/all-layer compact mechanism coverage only",
+        "requests": [
+          "cmpl-be052eaa79ccbc06-0-808193e5"
+        ],
+        "worker_pids": {
+          "0": 59,
+          "1": 60,
+          "2": 61,
+          "3": 62
+        },
+        "per_rank_linear_layers": 48,
+        "per_rank_full_layers": 16,
+        "skipped_body_rows": 16376,
+        "quality_or_numeric_equivalence_proven": false
+      }
+    ],
+    "scope": "chunk-step mechanism only; HTTP association/PDC/physical/source/release audits remain separate"
+  },
+  "physical": {
+    "ranks": {
+      "0": {
+        "inner_pid": 59,
+        "host_pid": 2851118,
+        "physical_npu": 0
+      },
+      "1": {
+        "inner_pid": 60,
+        "host_pid": 2851119,
+        "physical_npu": 1
+      },
+      "2": {
+        "inner_pid": 61,
+        "host_pid": 2851120,
+        "physical_npu": 2
+      },
+      "3": {
+        "inner_pid": 62,
+        "host_pid": 2851121,
+        "physical_npu": 3
+      }
+    },
+    "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+  },
+  "prefix": [
+    {
+      "request_id": "cmpl-b226eae11be34a24-0-85804585",
+      "initial_computed": [
+        7680,
+        7680,
+        7680,
+        7680
+      ],
+      "original_8192_gate": false
+    },
+    {
+      "request_id": "cmpl-be052eaa79ccbc06-0-808193e5",
+      "initial_computed": [
+        7680,
+        7680,
+        7680,
+        7680
+      ],
+      "original_8192_gate": false
+    }
+  ],
+  "responses": 3,
+  "private_tokens": [
+    [
+      32768,
+      1024
+    ],
+    [
+      32768,
+      1024
+    ]
+  ],
+  "isolation_samples": 291,
+  "all_clean": true,
+  "sources": 85,
+  "release_independent": true,
+  "result": {
+    "valid": true,
+    "error": null,
+    "guard_errors": [],
+    "isolation_samples": 291,
+    "responses": 3,
+    "worker_pids": [
+      2851118,
+      2851119,
+      2851120,
+      2851121
+    ],
+    "physical_devices_seen": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "release": {
+      "owned_container": "91ad774b6b7330b5f8277f306b64d9aa32d9e291925b1d08ed5cb801bc4e94d6",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    }
+  },
+  "raw_hashes": {
+    "result.json": "523cfd28470671a44812f02a1c3b7ae05528ea6863c539b47d7b9fe95e5ede56",
+    "events.jsonl": "c1b015a0c7e6b3eba2bcc33637c661810818be1199d45fbdfce4a2bbec587e3b",
+    "service.log": "19fac631b3550619842984dfb3e2f387b775c8980efb1ffb5387010fc461570c",
+    "launch.json": "799fa48cf8b0b7250f5a8f9e259999ea453e7151f2ff345717bee8a7ce1101ee",
+    "responses.json": "cd35eb272831283dd8cf87b12b80847a2bacd9123c29d67584215a9460fb224d",
+    "preflight.json": "c8026ce51e1cedff8a5f9e82582ca2455814e86a1d7705620004a71aca5832a2",
+    "service-start.json": "b440a17d04be77f5c6138b3d35d33e607ac7f5b0a7ac2be60a07ef8aa374a700",
+    "isolation.json": "b176b377d53b950718b17707cab8834a4534d6f1935cea030b0b6ad9870bc7e5",
+    "release.json": "d0bd1eeab7a314c4fa8c6934b637b812b13fae9ce0d2852ab1fcd90d96b39ffd"
+  },
+  "whole_original_canary_accepted": false,
+  "operation": "exec-00000000000003b7",
+  "decision": "partial-component; original >=8192 PDC gate fails, observed full-block native reuse7680 and independent C1/C2 mechanism pass; not full performance/quality acceptance"
+}
