@@ -1,0 +1,18 @@
+{
+  "deadline_utc": "2026-10-14T19:03:48Z",
+  "automation_id": "hypic",
+  "automation_deleted": true,
+  "release_operation": "exec-0000000000000450",
+  "release_utc": "2026-10-14T19:04:01.875348+00:00",
+  "exact_owned_containers_absent": true,
+  "physical0_3_processes": [],
+  "port8233_listeners": "",
+  "completed_measured_matrix_units": ["G1 round1", "G3 round1 successor r2"],
+  "remaining_matrix_units": 10,
+  "performance_verdict": "REGRESSION_OBSERVED_SINGLE_ROUND: TPOT +59.919%, TTFTP95 +76.720%",
+  "mechanism_evidence": "G3 full40 all4worker 48C1/16C2 hot coverage independently passed; not quality or performance success",
+  "remaining": ["G2/G4 full protocol and remaining repetitions", "performance regression repair and device verification", "full paired naturalEOS quality", "complete disable/uninstall/restart lifecycle", "Paper-to-Ascend functional acceptance", "29Skill individual functional acceptance", "verified publication of accepted checkpoints"],
+  "draft_c2_layer_barrier": "CPU controls only; not in frozen manifest; no real NPU equivalence or speed claim",
+  "goal_complete": false,
+  "new_device_starts_allowed": false
+}

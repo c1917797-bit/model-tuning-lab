@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+DEADLINE CLOSEOUT19:03:48UTC:automation hypic deleted. No new device starts.
+0450 at19:04:01 confirms both exactownedCIDs absent,physical0-3 no processes,
+8233free. Full objective NOT complete. Matrix2/12 measured (G1/G3round1),
+10units missing; firstpair performanceREGRESSION retained. Quality/full
+lifecycle/Paper-to-Ascend/29functionalSkills/publication incomplete.
+Draft C2 layerbarrier checkpointb16ec198:9native/ordering tests0449 plus
+2hot KV/seam CPUdouble tests044e passed after identityfixture repair.
+Not wired into frozen manifest,not realNPUequivalence/performance proof.
+Resume device work only with fresh human authorization; preserve all raw roots.
+
 LATEST G1/0423 terminal exit0:40success/433clean/exact550e348c...release.
 Independent0439 full40 transport/91bindings/release receipts PASS.
 Matched first-round G1 vs G3 audit:TPOT284.1146 vs454.3541ms (+59.919%),
