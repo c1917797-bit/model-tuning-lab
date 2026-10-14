@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT long-r3 controllerexec-00000000000001d5 on ma peer
+lgw_a6109c51076a4a2c9d2674ca5a8704a0; checkpoint7230fba0;rawroot
+/cache/cch/hypic-independent-20261013/compact-long-r3.01d3 freshsourcehashes,
+0-3empty/8233free/no external evaluator/newroot absent. Same frozen16Kpublic,
+32Kprivate/1024output/placements4096+7168,eager/PDCoff; currentenable_mixedTRUE.
+Poll exact handle/root, capture live physical/NSpid map; no mountedsource edits
+or restart while running/uncertain. Terminal audit16376skipped/16392retained,
+all4rank64layer/request/source/isolation/release. Not formal performance/quality.
+
 LATEST real mixed Canary01be exit0; independent01ce PASS3 responses1/512/8,
 54source hashes unchanged, physical/NSpid mapping all4ranks, per-request
 48GDN+16C2 body omission56/retained24. SAMEstep4 all4ranks includes native
