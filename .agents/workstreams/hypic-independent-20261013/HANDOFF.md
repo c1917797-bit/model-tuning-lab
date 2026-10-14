@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT repaired long-r4 exec-0000000000000201 on ma peer
+lgw_a6109c51076a4a2c9d2674ca5a8704a0; checkpointefe22a24;rawroot
+/cache/cch/hypic-independent-20261013/compact-long-r4.01fc actual official
+builder CPU checks65/4104/7176/12288 PASS;01ff freshsource/0-3empty/8233free/
+no external evaluator/newroot absent. SAME16K/32K/1024 ruler, newmetadata only.
+Poll exact handle/root, capture live physical/NSpid map; no source edits/restart
+while live/uncertain. Not a repair-success claim until full terminal audit.
+
 LATEST longboundary repair: independent_boundary_metadata source-binds official
 Ascend builder42cc0284... and supplies request-local CPUcu_seqlens[0,length],
 actual total value-head/TP geometry and generated chunk indices. Longboundary
