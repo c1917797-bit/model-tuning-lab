@@ -18,6 +18,11 @@ def enable():
     config_path=(base/manifest['config']).resolve()
     if not config_path.is_relative_to(base):raise ValueError('config outside package')
     config=json.loads(config_path.read_text())
+    if 'public_token_artifact' in config:
+        if 'public_tokens' in config or 'public_token_recipe' in config:
+            raise ValueError('ambiguous public token configuration')
+        from independent_public_token_artifact import public_tokens_from_artifact
+        config['public_tokens']=public_tokens_from_artifact(config.pop('public_token_artifact'))
     if 'public_token_recipe' in config:
         if 'public_tokens' in config:raise ValueError('ambiguous public token configuration')
         from synthetic_compact_workload import public_tokens_from_recipe

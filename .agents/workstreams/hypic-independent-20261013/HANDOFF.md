@@ -955,3 +955,9 @@ COMPACT_LONG_R8_TERMINAL_AUDIT.json retains raw hashes and precise attribution.
 No algorithm repair conclusion. No liveownedjob; do not restart/reuse r8 root.
 Repeated idle snapshots are transient; stable coordinated window will avoid
 another full initialization followed by interference. Offline formal input ready.
+# Latest formal token bridge
+
+Loader accepts hash-bound external public_token_artifact;0255 host controls pass.
+FORMAL_COMPACT_CONFIG binds sealed publicB;future service needs read-only
+/inputs/tokens.json mount and NEW manifest. Loader SHA changed after r8 terminal;
+old manifests MUST NOT launch. No liveownedNPUjob; actual worker activation pending.
