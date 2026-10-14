@@ -38,7 +38,10 @@ def pin_complete_material(linear_pool,kv_pool,linear_keys,kv_keys):
 
 class CompactCanonicalStage(CanonicalPublicStage):
     def __init__(self,*,model_identity,code_identity,public_tokens,
-                 capacity_bytes,boundary_tokens=8,kv_capacity_bytes=536870912):
+                 capacity_bytes,boundary_tokens=8,kv_capacity_bytes=536870912,
+                 enable_mixed=False):
+        if type(enable_mixed) is not bool:raise ValueError('explicit mixed boolean required')
+        self.enable_mixed=enable_mixed
         super().__init__(model_identity=model_identity,code_identity=code_identity,
             public_tokens=public_tokens,capacity_bytes=capacity_bytes,boundary_tokens=boundary_tokens)
         self.compact_store=CompactLinearMaterialPool(capacity_bytes)
@@ -63,6 +66,7 @@ class CompactCanonicalStage(CanonicalPublicStage):
         if tuple(r.request_id for r in requests)!=snap.request_ids or any((r.rank,r.step)!=(snap.rank,snap.step) for r in requests):
             raise ValueError('runtime snapshot/request identity changed')
         if any(prompts.get(r.request_id)==self.tokens for r in requests):return None
+        if self.enable_mixed:return self.select_mixed(model,requests,prompts,snap)
         plans=[]
         for req in requests:
             tokens=prompts.get(req.request_id)
@@ -83,6 +87,30 @@ class CompactCanonicalStage(CanonicalPublicStage):
             with self.compact_kv_store.lock:
                 if any(k not in self.compact_store.pool.entries for k in lkeys) or any(k not in self.compact_kv_store.entries for k in kkeys):return None
         return CompactModelSelection(tuple(plans),snap.sampled_rows,False,
+            snap.cache_slices,snap.attention_groups,snap.writable_kv_slots,
+            pin_complete_material(self.compact_store.pool,self.compact_kv_store,lkeys,kkeys))
+    def select_mixed(self,model,requests,prompts,snap):
+        from independent_mixed_query_plan import plan_mixed_queries
+        linear,full=self.layer_inventory(model)
+        if set(name for _,names in snap.attention_groups for name in names)!=set(full):
+            raise ValueError('mixed full-attention inventory changed')
+        lkeys=tuple(identity_key(self.identity(name,snap.rank)) for name in linear)
+        kkeys=tuple(identity_key(self.identity(name,snap.rank)) for name in full)
+        with self.compact_store.pool.lock:
+            with self.compact_kv_store.lock:
+                ready=(all(k in self.compact_store.pool.entries for k in lkeys) and
+                       all(k in self.compact_kv_store.entries for k in kkeys))
+        if not ready:return None
+        selections={}
+        for req in requests:
+            tokens=prompts.get(req.request_id)
+            if tokens is None:continue
+            try:selections[req.request_id]=select_segment(tokens,self.tokens)
+            except ValueError:continue
+        plans=plan_mixed_queries(requests,selections,set(selections),
+                                seam_tokens=self.boundary,public_length=len(self.tokens))
+        if not any(p.skipped_tokens for p in plans):return None
+        return CompactModelSelection(plans,snap.sampled_rows,False,
             snap.cache_slices,snap.attention_groups,snap.writable_kv_slots,
             pin_complete_material(self.compact_store.pool,self.compact_kv_store,lkeys,kkeys))
     def install_producer(self,*,enabled=False,publish=None):

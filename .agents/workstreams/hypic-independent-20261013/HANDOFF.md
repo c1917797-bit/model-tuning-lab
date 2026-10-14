@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST scoped mixed admission wired: enable_mixed boolean defaultsFALSE;
+explicit opt-in captures mixed runner snapshots and selects per-request plans
+only with all48C1/16C2 materials ready/pinned and at least one body omission.
+Cold/decode/partial entries preserve live rows; pure decode stays native.
+0151 passes18 stage/model/map controls including missing-material fallback,
+all-layer pin lifecycle, three sampler endpoints and default-off unchanged.
+NOT real mixed runtime proof. Existing manifests invalid after source edits.
+Next actual-handler fixture and hash-bound official-image loadability, then
+freeze NEW mixed integrated Canary under fresh physical0-3/port checks.
+
 LATEST actual Ascend builder checked014c/014d: SHA42cc0284..., distinct from
 base gdn_attn.py. Adapter now binds BOTH actual builder and metadata source.
 Fixed one-token FIRST prefill classification: no computed state remains prefill;

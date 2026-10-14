@@ -69,7 +69,7 @@ def capture_compact_runtime(runner,requests):
                                   prompt_logprobs=bool(runner.num_prompt_logprobs))
 
 
-def activate_compact_runner(*,enabled=False):
+def activate_compact_runner(*,enabled=False,allow_mixed=False):
     if not enabled:return lambda:None
     import vllm_ascend.ops
     from vllm_ascend.worker.model_runner_v1 import NPUModelRunner
@@ -79,7 +79,9 @@ def activate_compact_runner(*,enabled=False):
         CURRENT_RUNTIME_SNAPSHOT.set(None)
         # Native mixed/decode and profiling paths continue without compact
         # admission. Complete eligible prefill is checked later by selector.
-        if not requests or runner.use_cp or any(r.scheduled_tokens<=1 for r in requests):return
+        if not requests or runner.use_cp:return
+        if not allow_mixed and any(r.scheduled_tokens<=1 for r in requests):return
+        if allow_mixed and all(r.scheduled_tokens<=1 for r in requests):return
         CURRENT_RUNTIME_SNAPSHOT.set(capture_compact_runtime(runner,requests))
     return install_runner_context(NPUModelRunner,freeze_native_runner,enabled=True,
                                   verify_source=verify_runner,after_prepare=capture)
