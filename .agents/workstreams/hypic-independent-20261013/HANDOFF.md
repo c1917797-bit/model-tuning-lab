@@ -1006,3 +1006,9 @@ FORMAL_CANARY_PDC_R2_TERMINAL_AUDIT.json retains original raw hashes.
 No liveownedjob, no prefix material/PDC/long repair proof. Oldroot immutable.
 Stable coordination has not actually prevented new0-3 jobs; do not declare
 device stage passed or algorithm failed from these resource interruptions.
+# Latest full host regression
+
+0275 host unittest discovery passes178tests on current73cdd140 checkpoint.
+HOST_REGRESSION_0275.json records exact command result/scope. Includes mocked
+runtime ABI tests, not NPU/model/29Skill functional acceptance. No device work.
+PDC R2 remains external-interrupted; no owned live controller.
