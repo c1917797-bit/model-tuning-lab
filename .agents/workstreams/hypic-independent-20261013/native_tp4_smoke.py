@@ -98,6 +98,12 @@ def snapshot(cid=None):
         status=classify_process_owner(cgroup,cid,same_pid_namespace=same_namespace)
         owned=status.startswith('owned-')
         observation={"npu":n,"pid":pid,"cgroup":cgroup,"ownership_status":status}
+        from independent_process_namespace import namespace_pids
+        try:
+            observation["nspid"]=list(namespace_pids(
+                Path("/proc",str(pid),"status").read_text(),pid))
+        except (OSError,ValueError) as exc:
+            observation["nspid"]=None;observation["nspid_error"]=str(exc)
         if not owned:foreign.append(observation)
         owners.append(dict(observation,owned=owned))
     return {"utc":datetime.now(timezone.utc).isoformat(),"processes":target,"owners":owners,"foreign":foreign,"raw":text}
@@ -341,6 +347,16 @@ def run_contract(contract):
                 payloads=expand_payloads(contract["request_payload_specs"],contract["public_token_recipe"])
             from independent_request_waves import execute_waves
             payloads=payloads if payloads else [payload]*3
+            if contract.get("native_prefix_warmup"):
+                if contract["native_prefix_warmup"] is not True or not formal_artifact or not pdc_flag=="--enable-prefix-caching":
+                    raise ValueError("explicit formal nativePDC warmup required")
+                from independent_formal_canary import native_prefix_warmup
+                require_guard()
+                warm_payload=native_prefix_warmup(formal_artifact)
+                warm_response=request(port,warm_payload,completion=True,timeout=900)
+                require_guard()
+                journal.append({"event":"native-prefix-warmup","scored":False,
+                    "prompt_tokens":len(warm_payload["prompt"]),"response":warm_response})
             if len(payloads)!=3:raise ValueError('smoke requires exact3 payloads')
             waves=contract.get('request_waves',[[0],[1],[2]])
             delays={int(k):v for k,v in contract.get('request_start_delays',{}).items()}

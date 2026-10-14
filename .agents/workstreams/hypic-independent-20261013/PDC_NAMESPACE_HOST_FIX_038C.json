@@ -1,0 +1,17 @@
+{
+  "schema": "hypic-host-fix/v1",
+  "tests": {
+    "operation": "exec-000000000000038c",
+    "count": 242,
+    "exit_code": 0
+  },
+  "artifact_check": {
+    "operation": "exec-000000000000038d",
+    "native_prefix_tokens": 8192,
+    "tail_tokens": 256,
+    "input_tokens": 8448,
+    "exit_code": 0
+  },
+  "scope": "Host-only controls. No new NPU execution, no PDC acceptance. r8 immutable PDC failure unchanged.",
+  "next": "Freeze new source-bound contract/root with native_prefix_warmup=true; freshly admit physical0-3/8233 and independently audit observed prefix progress and actual NSpid mapping."
+}

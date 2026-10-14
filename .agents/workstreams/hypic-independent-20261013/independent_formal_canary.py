@@ -2,6 +2,15 @@
 import hashlib,json
 from pathlib import Path
 
+def native_prefix_warmup(spec):
+    # Validate same immutable artifact and private geometry first.
+    load_formal_canary(spec)
+    raw=Path(spec["path"]).read_bytes()
+    if hashlib.sha256(raw).hexdigest()!=spec["sha256"]:raise ValueError("warmup artifact drift")
+    d=json.loads(raw);tokens=list(d["native_prefix"])+list(d["requests"][0]["token_ids"][-256:])
+    return {"model":"qwen3.5","prompt":tokens,"temperature":0,"seed":0,
+            "max_tokens":1,"ignore_eos":True}
+
 def load_formal_canary(spec):
     if not {"path","sha256"}<=set(spec) or set(spec)-{"path","sha256","public_tail_tokens"}:
         raise ValueError("exact artifact path/hash and optional producer tail required")
