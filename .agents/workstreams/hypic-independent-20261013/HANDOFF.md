@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST G1/0423 terminal exit0:40success/433clean/exact550e348c...release.
+Independent0439 full40 transport/91bindings/release receipts PASS.
+Matched first-round G1 vs G3 audit:TPOT284.1146 vs454.3541ms (+59.919%),
+TTFTP95 352364.16 vs622696.54ms (+76.720%). REGRESSION_OBSERVED,
+not optimization acceptance. G3full40 mechanisms passed separately.
+No current owned controller. Confirm actual physical absence before new launch.
+Deadline19:03:48UTC unchanged; full12matrix/quality/lifecycle remain missing.
+Source inspection found per-event fsync and per-layer synchronize; causes
+unproven until measured. Preserve source/version and failed outcomes.
+Older running entries below historical; do NOT restart0423 or03f4.
+
 CURRENT G1round1 native baseline exec-0000000000000423 on fresh ma a6109,
 root /cache/cch/hypic-independent-20261013/formal-performance-g1-r1.
 G3r2/03f4 terminal exit0:40/40success,617clean isolation,exact release.

@@ -1,0 +1,59 @@
+{
+  "operation": "exec-000000000000043a",
+  "exit_code": 0,
+  "matched_keys": [
+    "controller_sha256",
+    "image",
+    "model",
+    "model_config_sha256",
+    "physical_npus",
+    "tp",
+    "cpu_set",
+    "formal_token_artifact",
+    "enforce_eager",
+    "max_output_tokens"
+  ],
+  "g1": {
+    "terminal_unit_valid": true,
+    "timing": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 284.11462358545026,
+      "ttft_p95_ms": 352364.1630600032,
+      "tpot_p95_ms": 296.47351508788233
+    },
+    "isolation_samples": 433,
+    "source_bindings": 91,
+    "raw_sha256": {
+      "result.json": "ab8a5506456ed1b08f82416641183d1221cf84d2d5dc92b0e9ec7dc1a65415f9",
+      "events.jsonl": "e306cb2c70bf58ba3b65913c48acc82ded978841d54093b195af527375c24cad",
+      "performance-unit.json": "a26ffcf77372afa4a0e32c6a0e08bfd157743085693bed7594e201fd0cb4a289",
+      "release.json": "84ac4290bd21589358c2f3be77cc0b6710c5d1f7b349ad51f84958447f0006a9"
+    },
+    "scope": "full40 transport/timing and declared source/isolation/release receipts; actual physical release and hot/PDC/quality separate"
+  },
+  "g3": {
+    "terminal_unit_valid": true,
+    "timing": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 454.35406830859347,
+      "ttft_p95_ms": 622696.5415500017,
+      "tpot_p95_ms": 541.9943522656183
+    },
+    "isolation_samples": 617,
+    "source_bindings": 91,
+    "raw_sha256": {
+      "result.json": "81bc6ece7175501c8f17cbc0597fe866018367a64f65b94534f8d6cefa330b22",
+      "events.jsonl": "9f1017098137aa78ac1602a945f4f13ffac9f6d42eaa5b9cad4bb79ab897bc52",
+      "performance-unit.json": "f1415ac33f137b24791ce1ea38cbd683428ecbac5b10cbdb9027310648b0ccf5",
+      "release.json": "5137359819359605421cb1bac02a6f9e9d7032c608b14c180d6b09ceb80ebc00"
+    },
+    "scope": "full40 transport/timing and declared source/isolation/release receipts; actual physical release and hot/PDC/quality separate"
+  },
+  "tpot_increase_percent": 59.919282779171,
+  "ttft_p95_increase_percent": 76.71960058093772,
+  "scope": "single round only; regression observed, three rounds and G2/G4 pending",
+  "performance_verdict": "REGRESSION_OBSERVED_SINGLE_ROUND",
+  "deployment_accepted": false
+}
