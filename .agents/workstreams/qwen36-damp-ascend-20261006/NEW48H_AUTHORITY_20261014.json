@@ -1,0 +1,108 @@
+{
+  "schema": "ascend.paper-portfolio.new48h-authority/v1",
+  "authority_source": "Direct human user: 帮我设置一个目标，继续开始穿刺论文，我要在2天内有一个穿刺成功的论文",
+  "start_utc": "2026-10-14T07:18:17Z",
+  "cutoff_utc": "2026-10-16T07:18:17Z",
+  "start_epoch": 1791962297,
+  "cutoff_epoch": 1792135097,
+  "timezone": "Europe/Moscow",
+  "start_local": "2026-10-14T10:18:17+03:00",
+  "cutoff_local": "2026-10-16T10:18:17+03:00",
+  "hours": 48,
+  "previous_authority": "R156_NEW24H_AUTHORITY_20261013.json",
+  "historical_sources_outputs_cutoffs_immutable": true,
+  "new_source_tickets_require_current_authority": true,
+  "model": {
+    "path": "/cache/efim/Qwen3.6-27B",
+    "config_bytes": 4308,
+    "config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+    "model_type": "qwen3_5",
+    "gdn_layers": 48,
+    "full_attention_layers": 16,
+    "weights_full_identity": "retain original checkpoint manifest; config hash alone is not full weights hash"
+  },
+  "hardware": {
+    "physical_npus": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "hugepage_release_32GiB": "SPENT"
+  },
+  "delivery": {
+    "plugin_monkeypatch": true,
+    "explicit_optin": true,
+    "training": false,
+    "distillation": false,
+    "original_runtime_image_changes": false,
+    "hypic": "historical exemplar excluded from new success"
+  },
+  "acceptance": {
+    "throughput_gain_min": 0.1,
+    "performance_output_tokens": 1024,
+    "formal_paired_rounds": 3,
+    "same_stack_input_concurrency_common_optimizations": true,
+    "profile_off": true,
+    "report": [
+      "TTFT",
+      "TPOT"
+    ],
+    "accuracy": [
+      "GSM8K",
+      "HumanEval",
+      "MMLU"
+    ],
+    "thinking": false,
+    "max_tokens": 2048,
+    "normal_EOS": true,
+    "smoke_before_full": true,
+    "max_user_loss_percent": 1,
+    "loss_interpretation": "report percentage-point and relative loss separately; conservatively both <=1 until clarified",
+    "composition": "numerically qualified components permitted; require measured D/A/B/A+B and combined task validation"
+  },
+  "milestones": [
+    {
+      "by_hours": 2,
+      "deliver": "current bottleneck/source identities and condition-based shortlist; official code audit; next actual diagnostic dispatch"
+    },
+    {
+      "by_hours": 8,
+      "deliver": "at least one actual NPU correctness gate and full-model smoke, or concrete root cause and bounded successor"
+    },
+    {
+      "by_hours": 20,
+      "deliver": "valid whole-model matched fixed1024 screening; retain repeatable subtarget gains for combination"
+    },
+    {
+      "by_hours": 32,
+      "deliver": "qualified candidate/combination three performance pairs; task smoke and full evaluation underway with measured remaining budget"
+    },
+    {
+      "by_hours": 44,
+      "deliver": "full accuracy/performance evidence consumed independently; reproducibility and migration qualification"
+    },
+    {
+      "by_hours": 48,
+      "deliver": "final achieved or unmet acceptance with source/raw refs/root causes; no automatic extension"
+    }
+  ],
+  "schedule": {
+    "parallel_preparation_agents": 3,
+    "MAIN_owns_device_admission": true,
+    "compatible_disjoint_numerics": true,
+    "aggregate_resource_budget_required": true,
+    "TP4_formal_timing_exclusive": true,
+    "dummy_occupancy": false,
+    "periodic_audit_minutes": 30,
+    "continuous_utilization_requires_continuous_evidence": true
+  },
+  "success_guaranteed": false,
+  "current_accepted_new_technique": false
+}

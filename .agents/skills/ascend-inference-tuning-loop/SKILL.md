@@ -42,6 +42,12 @@ validation or a policy update is not an algorithm acceptance result.
 
 ## Experiment Contract
 
+Before ranking or resuming papers, apply
+[architecture and bottleneck selection](references/architecture-and-bottleneck-selection.md).
+Bind the installed hybrid-model stages and actual hardware execution costs;
+official code, publication year and previous adaptation effort do not establish
+local end-to-end opportunity. Keep unresolved opportunities as bounded diagnostics.
+
 Use one ID such as `exp-YYYYMMDD-short-name`, one `work/*` branch, and one
 `.agents/experiments/<id>.yaml` record. Declare before implementation:
 
