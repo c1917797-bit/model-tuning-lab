@@ -1037,3 +1037,13 @@ No liveownedjob; no mechanism result.0277 sampled idle does not reserve resource
 as actual external jobs returned during initialization. Old R3 root immutable.
 Continue useful offline preparation; obtain coordinated window's real start
 before spending another initialization attempt on identical transient gaps.
+# Latest formal performance controller draft
+
+Controller formal_performance mode now calls immutable warmup/full40 streaming
+workload, preserves raw per-request timing/error records and performance-unit.json.
+HYPIC groups wait for source-manifest-bound fourrank48linear/16KV materials;
+baseline groups still execute matched unscored warmups without material gate.
+Same ownership guard/exact release path retained.0292 full195 host tests pass.
+No real formal performance run; device Canary remains external-interrupted.
+Controller SHA changed, all old launch contracts stale; rebind before device use.
+Do not skip actual Canary/independent mechanism and isolation gates.

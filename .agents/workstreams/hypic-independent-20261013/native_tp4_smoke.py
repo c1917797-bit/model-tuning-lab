@@ -264,41 +264,70 @@ def run_contract(contract):
             except (urllib.error.URLError,TimeoutError):pass
             time.sleep(5)
         else:raise TimeoutError("Native health deadline")
-        payload={"model":"qwen3.5","messages":[{"role":"user","content":"Calculate 2 + 2. Reply with only the integer."}],
-                 "temperature":0,"seed":0,"max_tokens":32,"chat_template_kwargs":{"enable_thinking":False}}
-        payload=contract.get("request_payload",payload)
-        payloads=contract.get("request_payloads")
-        if formal_payloads is not None:
-            if payloads or contract.get("request_payload_specs"):
-                raise ValueError("ambiguous formal request payloads")
-            payloads=formal_payloads
-        if contract.get("request_payload_specs"):
-            from synthetic_compact_workload import expand_payloads
-            payloads=expand_payloads(contract["request_payload_specs"],contract["public_token_recipe"])
-        from independent_request_waves import execute_waves
-        payloads=payloads if payloads else [payload]*3
-        if len(payloads)!=3:raise ValueError('smoke requires exact3 payloads')
-        waves=contract.get('request_waves',[[0],[1],[2]])
-        delays={int(k):v for k,v in contract.get('request_start_delays',{}).items()}
-        def send(payload):
-            require_guard()
-            before=snapshot(cid);retain_snapshot(before)
-            if before["foreign"]:raise RuntimeError("Foreign process before request")
-            return request(port,payload,completion=contract.get("completion",False),
-                           timeout=contract.get("request_timeout_seconds",60))
-        for record in execute_waves(payloads,waves,send,check_guard=require_guard,start_delays=delays):
-            journal.append(dict(record,event='response'))
-            require_guard()
-            responses.append(record)
-            after=snapshot(cid);retain_snapshot(after)
-            if after["foreign"]:raise RuntimeError("Foreign process after request")
-        if not contract.get("completion",False):
-            texts=[r["response"]["choices"][0]["message"]["content"].strip() for r in responses]
-            assert all(t.rstrip(".")=="4" for t in texts),"Native smoke semantic result"
-            assert len(set(texts))==1,"Native repeated response variability"
+        if contract.get("formal_performance"):
+            if not formal_artifact:raise ValueError("formal performance artifact required")
+            from independent_formal_workload import run_formal_workload
+            from independent_formal_client import http_measure
+            from independent_material_readiness import materials_ready
+            def ready():
+                if not diagnostic:return
+                manifest_hash=hashlib.sha256((HERE/diagnostic["compact_manifest"]).read_bytes()).hexdigest()
+                until=time.monotonic()+300
+                while time.monotonic()<until:
+                    require_guard();worker_events=[]
+                    for path in (raw/"diagnostics").glob("compact-worker-*.jsonl"):
+                        data=path.read_text()
+                        complete=data[:data.rfind("\n")+1]
+                        worker_events.extend(json.loads(line) for line in complete.splitlines())
+                    if materials_ready(worker_events,manifest_hash):return
+                    time.sleep(1)
+                raise TimeoutError("four-rank public material readiness")
+            def warm_send(p):
+                require_guard()
+                return request(port,p,completion=True,timeout=900)
+            result_unit=run_formal_workload(formal_artifact,
+                send_warmup=warm_send,
+                send_measured=lambda p:http_measure(port,p,guard=require_guard,timeout=1800),
+                guard=require_guard,record=journal.append,require_material_ready=ready)
+            responses=result_unit["results"]
+            write(raw,"performance-unit.json",result_unit)
+            if not result_unit["valid"]:raise RuntimeError("formal measured request failure")
         else:
-            assert all(isinstance(r["response"]["choices"][0]["text"],str) for r in responses)
-            assert all(r["response"]["usage"]["completion_tokens"]>0 for r in responses)
+            payload={"model":"qwen3.5","messages":[{"role":"user","content":"Calculate 2 + 2. Reply with only the integer."}],
+                     "temperature":0,"seed":0,"max_tokens":32,"chat_template_kwargs":{"enable_thinking":False}}
+            payload=contract.get("request_payload",payload)
+            payloads=contract.get("request_payloads")
+            if formal_payloads is not None:
+                if payloads or contract.get("request_payload_specs"):
+                    raise ValueError("ambiguous formal request payloads")
+                payloads=formal_payloads
+            if contract.get("request_payload_specs"):
+                from synthetic_compact_workload import expand_payloads
+                payloads=expand_payloads(contract["request_payload_specs"],contract["public_token_recipe"])
+            from independent_request_waves import execute_waves
+            payloads=payloads if payloads else [payload]*3
+            if len(payloads)!=3:raise ValueError('smoke requires exact3 payloads')
+            waves=contract.get('request_waves',[[0],[1],[2]])
+            delays={int(k):v for k,v in contract.get('request_start_delays',{}).items()}
+            def send(payload):
+                require_guard()
+                before=snapshot(cid);retain_snapshot(before)
+                if before["foreign"]:raise RuntimeError("Foreign process before request")
+                return request(port,payload,completion=contract.get("completion",False),
+                               timeout=contract.get("request_timeout_seconds",60))
+            for record in execute_waves(payloads,waves,send,check_guard=require_guard,start_delays=delays):
+                journal.append(dict(record,event='response'))
+                require_guard()
+                responses.append(record)
+                after=snapshot(cid);retain_snapshot(after)
+                if after["foreign"]:raise RuntimeError("Foreign process after request")
+            if not contract.get("completion",False):
+                texts=[r["response"]["choices"][0]["message"]["content"].strip() for r in responses]
+                assert all(t.rstrip(".")=="4" for t in texts),"Native smoke semantic result"
+                assert len(set(texts))==1,"Native repeated response variability"
+            else:
+                assert all(isinstance(r["response"]["choices"][0]["text"],str) for r in responses)
+                assert all(r["response"]["usage"]["completion_tokens"]>0 for r in responses)
         assert len(worker_pids)>=4,"Missing physical worker evidence"
         assert physical_devices_seen==set(range(4)),"Missing physical card coverage"
         valid=True
