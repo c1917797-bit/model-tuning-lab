@@ -1064,3 +1064,9 @@ Same bounded B+tail256/two32Kprivate1024/PDC protocol; exact matcher is now line
 controller also contains unused formal-performance branch(defaultfalse here).
 Poll same handle/root; no source changes/restart while running/unclear.
 Independent terminal mechanism/PDC/source/PID/isolation/exact release required.
+# Latest R4 admission terminal supersedes CURRENT
+
+02a8 terminal exit1 at firstsnapshot before raw mkdir/docker run:
+Physical0-3 occupied before admission. No container/model/request created.
+Do not infer exact owner from generic error; snapshot after it is separate.
+No liveownedjob. Old start wording929d9b42 superseded by this terminal.
