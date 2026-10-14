@@ -1,5 +1,12 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST2026-10-14 human extension: another12hours, end19:03:48UTC/22:03:48MSK.
+Write permission restored. Automation hypic-12 active every10minutes; delete at
+deadline/full acceptance. New CONTINUATION_12H_20261014.md overrides old times.
+No new device job. Critical path: actual C2 skipped compute/seam, capacity,
+c16/PDC/chunks, full-generation canary, formal performance/quality/lifecycle.
+Do not rerun the already passed bounded C1+C2 canary as substitute.
+
 LATEST C1+C2-r1/0046 terminal exit0/3 responses; independent0047 confirms
 192C1 public/384C1 reuse/64C2 public/128C2 reuse, exact full-attention16layers/rank,
 two private requests/all4ranks/56body/finite.181clean samples/exactcda47bb... absence.
