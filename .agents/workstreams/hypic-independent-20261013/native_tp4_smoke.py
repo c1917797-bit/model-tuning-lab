@@ -161,8 +161,9 @@ def run_contract(contract):
              "TMPDIR":"/scratch/tmp","PYTHONDONTWRITEBYTECODE":"1"}
         for k,v in env.items():args+=["-e",k+"="+v]
         if diagnostic:
+            bootstrap="compact_bootstrap" if diagnostic.get("compact_manifest") else "diagnostic_bootstrap"
             args+=["-v",str(HERE)+":/probe:ro",
-                   "-e","PYTHONPATH=/probe/diagnostic_bootstrap:/probe:"+inherited_pythonpath,
+                   "-e","PYTHONPATH=/probe/"+bootstrap+":/probe:"+inherited_pythonpath,
                    "-e","INDEPENDENT_CACHE_DIAGNOSTIC=1",
                    "-e","INDEPENDENT_DIAGNOSTIC_ROOT=/scratch/diagnostics",
                    "-e","INDEPENDENT_DIAGNOSTIC_BATCHES=2"]
@@ -172,13 +173,18 @@ def run_contract(contract):
                 args+=["-e","INDEPENDENT_PRIVATE_C1=1"]
             if diagnostic.get("c2_kv"):
                 args+=["-e","INDEPENDENT_C2_KV=1"]
+            if diagnostic.get("compact_manifest"):
+                args+=["-e","INDEPENDENT_COMPACT_HYPIC=1",
+                       "-e","INDEPENDENT_COMPACT_MANIFEST=/probe/"+diagnostic["compact_manifest"],
+                       "-e","INDEPENDENT_COMPACT_RAW=/scratch/diagnostics"]
         args += [image,"serve","/model","--served-model-name","qwen3.5","--host","0.0.0.0",
                  "--port",str(port),"--tensor-parallel-size","4","--data-parallel-size","1",
                  "--max-model-len","40960","--max-num-batched-tokens","40960",
                  "--max-num-seqs","32","--gpu-memory-utilization","0.85",
                  "--no-enable-prefix-caching","--additional-config",'{"enable_cpu_binding":false}',
-                 "--compilation-config",'{"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_capture_sizes":[1,4,8,16,24,32]}',
+                 "--compilation-config",('{"cudagraph_mode":"NONE"}' if contract.get("enforce_eager") else '{"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_capture_sizes":[1,4,8,16,24,32]}'),
                  "--trust-remote-code","--async-scheduling"]
+        if contract.get("enforce_eager"):args.append("--enforce-eager")
         write(raw,"launch.json",{"argv":args,"controller_sha256":hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                                  "diagnostic_sources":diagnostic,
                                  "git_commit":command(["git","rev-parse","HEAD"]).strip()})
