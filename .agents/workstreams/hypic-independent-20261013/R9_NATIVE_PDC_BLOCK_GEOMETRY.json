@@ -1,0 +1,17 @@
+{
+  "schema": "hypic-pdc-geometry-review/v1",
+  "source_operation": "exec-00000000000003aa",
+  "log_operation": "exec-00000000000003a8",
+  "progress_operation": "exec-00000000000003a7",
+  "official_source": "/vllm-workspace/vllm-ascend/vllm_ascend/patch/platform/patch_mamba_config.py",
+  "official_sha256": "ee38c68c27357a7d18f7e368e03a352bb312f79c3576431a64f688ce953716ac",
+  "runtime_block_tokens": 1536,
+  "native_prefix_tokens": 8192,
+  "full_block_prefix_tokens": 7680,
+  "first_private_observed_computed_tokens": 7680,
+  "four_ranks": true,
+  "inference": "Observed count matches floor(8192/1536)*1536. Current source chooses page size from SSM state and KV token geometry.",
+  "decision": "Do not relax r9 original >=8192 gate during execution. Preserve failed original gate separately from observed native cache/HYPIC coexistence evidence. No whole-canary/performance/quality acceptance.",
+  "controller": "exec-0000000000000399",
+  "state": "running; no restart/source mutation"
+}
