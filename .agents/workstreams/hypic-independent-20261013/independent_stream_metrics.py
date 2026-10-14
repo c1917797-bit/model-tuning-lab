@@ -3,7 +3,7 @@ import json
 import math
 
 def measure_stream(lines,*,started,clock):
-    first=None;usage=None;finish=None;text=[]
+    first=None;usage=None;finish=None;text=[];request_id=None
     done=False
     for raw in lines:
         if isinstance(raw,bytes):raw=raw.decode("utf-8")
@@ -14,6 +14,10 @@ def measure_stream(lines,*,started,clock):
         if data=="[DONE]":
             done=True;break
         packet=json.loads(data)
+        if packet.get("id") is not None:
+            if request_id is not None and packet["id"]!=request_id:
+                raise ValueError("stream request identity changed")
+            request_id=packet["id"]
         if packet.get("error"):raise ValueError("service stream error")
         for choice in packet.get("choices",[]):
             if choice.get("index",0)!=0:raise ValueError("single-choice protocol required")
@@ -34,7 +38,7 @@ def measure_stream(lines,*,started,clock):
         raise ValueError("invalid monotonic timestamps")
     # Match the supplied successful-case ruler: divide by output_tokens.
     # Do not relabel this as the output_tokens-1 convention.
-    return {"started":started,"first_content":first,"ended":ended,
+    return {"request_id":request_id,"started":started,"first_content":first,"ended":ended,
             "ttft_ms":1000*(first-started),"duration_ms":1000*(ended-started),
             "tpot_ms":1000*(ended-first)/count,
             "tpot_denominator":"completion_tokens",
