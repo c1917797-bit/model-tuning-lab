@@ -898,3 +898,13 @@ Do not restart old HYPIC roots or import/copy its treatment code.
 Reuse benchmark/evaluator/launcher infrastructure only after independent review.
 At deadline stop new NPU stages, preserve/finish/release exact owned resources,
 report actual completion and remaining gates; unfinished long goal stays active.
+# Latest offline PDC-control checkpoint
+
+Native controller now accepts only explicit boolean enable_prefix_caching;
+absent/false preserves no-PDC, true selects unchanged official native PDC.
+Five host PDC/ownership controls pass0231; no device work or coexistence claim.
+R6 contract was NEVER launched and is superseded by controller SHA change.
+Only new COMPACT_LONG_R7_CONTRACT.json may launch the same-size repaired
+long probe, with explicit PDC false and unchanged algorithm/support hashes.
+Human agrees to coordinate stable window but its start is not confirmed.
+Actual PDC hit accounting, mixed HYPIC/PDC admission and G2/G4 remain unverified.

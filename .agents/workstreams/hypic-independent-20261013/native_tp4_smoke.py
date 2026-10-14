@@ -106,6 +106,13 @@ def port_free(port):
     with socket.socket() as s:
         s.bind(("0.0.0.0",port))
 
+def prefix_cache_flag(contract):
+    """Native PDC switch; absent means historical no-PDC protocol."""
+    enabled=contract.get("enable_prefix_caching",False)
+    if type(enabled) is not bool:
+        raise ValueError("enable_prefix_caching must be an explicit boolean")
+    return "--enable-prefix-caching" if enabled else "--no-enable-prefix-caching"
+
 def write(root,name,data):
     path=root/name
     with path.open("x",encoding="utf-8") as f:
@@ -136,6 +143,7 @@ def stop_owned_on_foreign(cid,*,image,inspect_fn=None,command_fn=None):
 
 def run_contract(contract):
     image=contract["image"];model=Path(contract["model"]);port=contract["port"]
+    pdc_flag=prefix_cache_flag(contract)
     raw=Path(contract["raw_root"])
     if raw.exists():raise RuntimeError("Immutable attempt root already exists")
     assert hashlib.sha256((model/"config.json").read_bytes()).hexdigest()==contract["model_config_sha256"]
@@ -222,7 +230,7 @@ def run_contract(contract):
                  "--port",str(port),"--tensor-parallel-size","4","--data-parallel-size","1",
                  "--max-model-len","40960","--max-num-batched-tokens","40960",
                  "--max-num-seqs","32","--gpu-memory-utilization","0.85",
-                 "--no-enable-prefix-caching","--additional-config",'{"enable_cpu_binding":false}',
+                 pdc_flag,"--additional-config",'{"enable_cpu_binding":false}',
                  "--compilation-config",('{"cudagraph_mode":"NONE"}' if contract.get("enforce_eager") else '{"cudagraph_mode":"FULL_DECODE_ONLY","cudagraph_capture_sizes":[1,4,8,16,24,32]}'),
                  "--trust-remote-code","--async-scheduling"]
         if contract.get("enforce_eager"):args.append("--enforce-eager")
