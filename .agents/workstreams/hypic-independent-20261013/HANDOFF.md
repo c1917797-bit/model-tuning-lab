@@ -1055,3 +1055,12 @@ QUALITY_RUNTIME_COVERAGE_GAP.md records current single-fixed-B runtime limitatio
 Do not call native fallback quality proof of HYPIC activation; multi-segment
 per-request material identity/ownership remains required. No new quality run.
 Plan header now reflects latest19:03:48UTC authorization; old times historical.
+# CURRENT formal PDC r4
+
+ma exec-00000000000002a8 launched checkpointfcd17d86, new immutable raw
+/cache/cch/hypic-independent-20261013/formal-canary-pdc-r4.
+02a3 fresh physical0-3empty/8233free;02a6 full201hosttests pass.
+Same bounded B+tail256/two32Kprivate1024/PDC protocol; exact matcher is now linear,
+controller also contains unused formal-performance branch(defaultfalse here).
+Poll same handle/root; no source changes/restart while running/unclear.
+Independent terminal mechanism/PDC/source/PID/isolation/exact release required.
