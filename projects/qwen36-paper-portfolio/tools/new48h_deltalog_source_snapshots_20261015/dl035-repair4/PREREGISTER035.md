@@ -1,0 +1,15 @@
+# 035 preregistered new reference-domain experiment
+
+This is a new experiment, not a reclassification of any old failure. Original031 and033 strict/unrounded metrics and actual failures remain preserved. Actual034 recovered32mixed/272requests had31 old output failures, zero old state failures; all31 dominant cells matched candidate/native/directRNE, but only236/272 entire request outputs were bitwise directRNE. This supports testing a different output-reference domain; it does NOT supply new035 qualification.
+
+Primary changed decode readout: independent existing CPU64 operational recurrence, then direct binary64-to-BF16 integer RNE (exact013 implementation SHA60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d), same original .00303 peak-normalized threshold per request. Independent CPU64 state limit remains7.92e-7. Whole-core native peer output/state, flush/copy/dead payload, all byte guards/runtime callable/afteroperand/initial anchor/continuity remain hard. Native unchanged prefill CPU64 rounding discrepancy stays diagnostic only as previously preregistered. Uncast CPU64 and cast-floor metrics retained, never retroactively converted to PASS. This is CPU64-operational reference, not an exact-real Exp theorem.
+
+Denominator retains original max(peak,1e-30); tiny/zero reference therefore has an absolute floor, not bitwise zero certification. Signed-zero readout equality is numerical, not a new bitwise requirement. Nonfinite/overflow reject. Inputs/scale/heads/slot guards unchanged plus explicit independent row/scale validation.
+
+New heldout seed260815535+B appears identically in native_fixture, capture anchor, independent domain regeneration. Native sequence ABI is [0]+[1]*B as source-proved builder adjacent differences; old arange gate remains in historical consumers. No production DSO, kernel, recurrence, threshold, controller or resource increase.
+
+Full pipeline: reviewed new template -> actual022 composite bind -> sourceaudit -> same-image CPU -> NEW035 NPU16 + original strict consumer (failure retained) + new035 domain -> same-source diagnostic16 release receipt -> NEW035 NPU160 + both consumers. Only actual successful full160 may enter future source-bound model diagnostic smoke. No model/perf/task/graph/PDC qualification.032 needs a separate immutable revision accepting new035 schema/template/files; old032 pins must reject035.
+
+Inherited031repair1 controller keeps2880numeric-owner/1800child/600consumer/90cleanup,8GiB guest/.5host+8reserve,32GiB raw limit. Fixed cutoff1792135097 unchanged. CPU stage no device; NPU stage explicitphysical5 only. Typed run031.py stages remain original owner orchestration, no new scheduler.
+
+Software: test_035 real default-OFF cold CLI and direct-RNE controls, real independent oracle request fixture with wrong scale/head/slot/input negatives. Inherited tests retained as historical audit material; not all are claimed current035 PASS (test_031 references old SOURCE_TEMPLATE_BASE/inverse/schema). MAIN review/delivery/same-image CPU/NPU all pending.

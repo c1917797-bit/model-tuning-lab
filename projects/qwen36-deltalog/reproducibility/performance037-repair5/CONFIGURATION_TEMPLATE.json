@@ -1,0 +1,25 @@
+{
+  "schema": "deltalog.production-screen-binding-inputs/v037",
+  "library_ref": null,
+  "operator_schema": null,
+  "composite_api_ref": null,
+  "composite_source_ref": null,
+  "composite_certificate_ref": null,
+  "composite_cpu_owner_ref": null,
+  "production_build_ref": null,
+  "diagnostic_predecessor_ref": null,
+  "model_smoke_api_ref": null,
+  "model_smoke_pins_ref": null,
+  "model_smoke_plan": {
+    "model_diagnostic_source_ref": null,
+    "model_smoke_owner_ref": null,
+    "model_smoke_terminal_ref": null,
+    "production_source_ref": null,
+    "qualification_ref": null,
+    "bridge_source_ref": null
+  },
+  "validation_inputs_ref": null,
+  "validation_output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-production-validation-PF037R5-MAIN-001",
+  "preregistered_domain_component_reuse": false,
+  "dependencies": []
+}

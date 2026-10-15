@@ -1,0 +1,21 @@
+{
+  "schema": "deltalog.coherent-checkpoint-validation/v1",
+  "source_archive_files": 203,
+  "byte_exact_AST": "PASS",
+  "maintainer_skill_tree": {
+    "skills": 20,
+    "status": "PASS"
+  },
+  "authored_case_diff_check": "PASS",
+  "full_staged_whitespace": {
+    "exit": 2,
+    "stdout": "projects/qwen36-deltalog/reproducibility/performance037-repair5/CHANGES.diff:61: trailing whitespace.\n+ \nprojects/qwen36-deltalog/reproducibility/performance037-repair5/guest_canary.py:25: new blank line at EOF.\nprojects/qwen36-deltalog/reproducibility/performance037-repair5/host_pair.py:23: trailing whitespace.\n+ \nprojects/qwen36-deltalog/reproducibility/performance037-repair5/host_pair.py:137: new blank line at EOF.\nprojects/qwen36-deltalog/reproducibility/performance037-repair5/owned_create.py:33: new blank line at EOF.\nprojects/qwen36-deltalog/reproducibility/performance037-repair5/owned_substrate.py:58: new blank line at EOF.\nprojects/qwen36-deltalog/reproducibility/performance037-repair5/pair_consume.py:47: new blank line at EOF.\nprojects/qwen36-deltalog/reproducibility/performance037-repair5/paired_driver.py:33: new blank line at EOF.\nprojects/qwen36-deltalog/reproducibility/performance037-repair5/worker_receipt.py:24: new blank line at EOF.\nprojects/qwen36-deltalog/reproducibility/performance037-repair5/worker_snapshot_owner.py:40: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair4/real_process_controls.py:53: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair4/terminal_fence.py:72: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair4/test_035.py:46: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair4/test_terminal_fence.py:70: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair4/test_tree_anchor.py:42: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/model036-repair5/CHANGES.diff:54: trailing whitespace.\n+ \nprojects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/model036-repair5/CHANGES.diff:57: trailing whitespace.\n+ \nprojects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/model036-repair5/CHANGES.diff:59: trailing whitespace.\n+ \nprojects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/model036-repair5/CHANGES.diff:61: trailing whitespace.\n+ \nprojects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/savedframe039-repair1/bridge_io.py:24: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/savedframe039-repair1/host.py:223: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/savedframe039-repair1/scope_adapter.py:160: new blank line at EOF.\n",
+    "stderr": "",
+    "status": "FAILED_STYLE_ONLY_FROZEN_BYTE_ARCHIVES_RETAINED"
+  },
+  "why_not_reformat": "These are byte-exact originals bound to preserved experiments. Reformatting would falsify archived source identity. No runtime or mathematical PASS is inferred.",
+  "source_manifest_not_relocatable_release": true,
+  "original_failed160_retained": true,
+  "new_model_or_performance_or_task_pass": false,
+  "publication": "Pending normal work-branch push; no success claim, no force/main update"
+}

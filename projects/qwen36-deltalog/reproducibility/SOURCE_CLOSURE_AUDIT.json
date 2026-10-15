@@ -1,0 +1,972 @@
+{
+  "schema": "deltalog.final-source-closure-audit/v1",
+  "scope": "source-only; not installation/numeric/performance/task qualification",
+  "actual_repo_HEAD": "3118674f6731323342b57f68d29eb5e19a87229e",
+  "tracked_total": 3105,
+  "deltalog_tracked": 179,
+  "all_deltalog_tracked_equal_HEAD": true,
+  "source_chain": {
+    "source035_manifest": {
+      "bytes": 26248,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair4/SOURCE_MANIFEST.json",
+      "sha256": "e5566351d02b04792b871f67092876f69b7fb58bbc81c36d21360fb328ec6524"
+    },
+    "composite022": {
+      "bytes": 162171,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/BOUND_SOURCE.json",
+      "sha256": "b5f4c0798f2fab7fb3c706666c38b6eab7318fa6a55e40191dd419bb6aaacb6c"
+    },
+    "component016": {
+      "bytes": 53261,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-precast-empirical-new48h-v1-016/BOUND_NUMERIC_SOURCE.json",
+      "sha256": "7d61ca178c78ee8d883d608d644931c555fe44b3ad36c5cdbfea71bb464a7045"
+    },
+    "B010_build": {
+      "bytes": 5191,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/RESULT.json",
+      "sha256": "29b86fcadb62e9b25c320f164254074a1c43f06a560843d3c89d4f3c9e73222b"
+    },
+    "B010_kernel_source": {
+      "bytes": 1694,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-key-projection-B-new48h-v1-010/kernel/SOURCE_MANIFEST.json",
+      "sha256": "56a46e89869929f6c1a43b8e0d0870c7b2bb0429c6446499ab67d63b5e243161"
+    },
+    "library": {
+      "bytes": 2332672,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/key_projection-build/libqwen36_gdn_deltalog_decode_key_projection_ops.so",
+      "sha256": "298749129c8586ecea56cb6076c435631b6fbef4b4e7757636ff87a4ec09abf7"
+    }
+  },
+  "actual_build": {
+    "schema": "deltalog-key-projection-actual-build/v010",
+    "source_manifest": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-key-projection-B-new48h-v1-010/kernel/SOURCE_MANIFEST.json",
+      "bytes": 1694,
+      "sha256": "56a46e89869929f6c1a43b8e0d0870c7b2bb0429c6446499ab67d63b5e243161"
+    },
+    "authority": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+      "bytes": 3591,
+      "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+    },
+    "commands": [
+      {
+        "argv": [
+          "/usr/local/python3.12.13/lib/python3.12/site-packages/cmake/data/bin/cmake",
+          "--version"
+        ],
+        "exit_code": 0,
+        "error": null,
+        "stdout": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/cmake-version.stdout",
+          "bytes": 90,
+          "sha256": "9e2032657b821ca15fdf749298148b08afc4d86fe8a6f709a8459318fa1c018f"
+        },
+        "stderr": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/cmake-version.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "argv": [
+          "/usr/local/python3.12.13/lib/python3.12/site-packages/cmake/data/bin/cmake",
+          "-S",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-key-projection-B-new48h-v1-010/kernel/key_projection",
+          "-B",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/key_projection-build",
+          "-DCMAKE_BUILD_TYPE=Release",
+          "-DASCEND_CANN_PACKAGE_PATH=/usr/local/Ascend/cann-9.1.0",
+          "-DASCEND_COMPUTE_UNIT=ascend910b",
+          "-DENABLE_COPY_KERNEL_SRC_TO_ASCENDC=FALSE",
+          "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+          "-DPython3_EXECUTABLE=/usr/local/python3.12.13/bin/python3"
+        ],
+        "exit_code": 0,
+        "error": null,
+        "stdout": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/key_projection-configure.stdout",
+          "bytes": 1125,
+          "sha256": "c9a260af40eff2b01a284326a2ac69ba98834c5d1f18cfc01dbd2373f6f3bed3"
+        },
+        "stderr": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/key_projection-configure.stderr",
+          "bytes": 512,
+          "sha256": "2c9b07fbbee38e48b337b6cb49d4bfc32aef127cde7c91927bcce5a095e34883"
+        }
+      },
+      {
+        "argv": [
+          "/usr/local/python3.12.13/lib/python3.12/site-packages/cmake/data/bin/cmake",
+          "--build",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/key_projection-build",
+          "--parallel",
+          "1",
+          "--verbose"
+        ],
+        "exit_code": 0,
+        "error": null,
+        "stdout": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/key_projection-build.stdout",
+          "bytes": 7889,
+          "sha256": "368f1861f7b8a4a0e4762851bd4c03949fc0669f605a046d9c0df212c5624fa5"
+        },
+        "stderr": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/key_projection-build.stderr",
+          "bytes": 20288,
+          "sha256": "41c052bd5b33598c2f0a48ad8fee5cc6d34b9ea1713b0416cdc05e21790db928"
+        }
+      }
+    ],
+    "artifacts": [
+      {
+        "arm": "key_projection",
+        "library": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/key_projection-build/libqwen36_gdn_deltalog_decode_key_projection_ops.so",
+          "bytes": 2332672,
+          "sha256": "298749129c8586ecea56cb6076c435631b6fbef4b4e7757636ff87a4ec09abf7"
+        },
+        "cache": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/key_projection-build/CMakeCache.txt",
+          "bytes": 19183,
+          "sha256": "58e8f171613d07470d9fec5fe28f3ca445face725b1ef94894fe22ed5b626eea"
+        },
+        "compile_commands": {
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/key_projection-build/compile_commands.json",
+          "bytes": 1368,
+          "sha256": "39101630d4836b3274fb1a4113f0d52071ce7f7645eb5abcc9a0e0d511aa159b"
+        }
+      }
+    ],
+    "primary": null,
+    "elapsed_seconds": 150.71052971002064,
+    "Devices": [],
+    "NPU": false,
+    "numeric_qualified": false,
+    "model_ready": false,
+    "original_a369_source_identity_verified": false
+  },
+  "kernel_source": {
+    "schema": "deltalog-key-projection-source/v010",
+    "files": [
+      {
+        "sha256": "a18480fcd03a0f9e4d31ab765bcf2992ed43b56a6b88b7d8e180c380e10dea3a",
+        "bytes": 4482,
+        "path": "build_pair.py"
+      },
+      {
+        "sha256": "bbaab80d23f4c12041e8af698e43a90fece04ab858ea881d9fa8930efaa41b11",
+        "bytes": 4979,
+        "path": "key_projection/CMakeLists.txt"
+      },
+      {
+        "sha256": "1a83f60f09433417a7c9a2320b18dc849ffed2ba3436682362c859940ac6b532",
+        "bytes": 677,
+        "path": "key_projection/op_extension/ops.h"
+      },
+      {
+        "sha256": "8aea5aff887fb8efb5acf657f863200f34e6cd474d3f8e70abab08bfc645dda5",
+        "bytes": 8217,
+        "path": "key_projection/op_extension/qwen36_gdn_deltalog_decode_key_projection_torch.cpp"
+      },
+      {
+        "sha256": "bd2a280f67823174151f765cf8dfae8aad43dfcc74278ec542d1d661a63b7af0",
+        "bytes": 1233,
+        "path": "key_projection/op_extension/register.cpp"
+      },
+      {
+        "sha256": "e36fbd3fc09a554c49f88de6e3620633ee2c7db3dea6b8064891f9e789ecf896",
+        "bytes": 1035,
+        "path": "key_projection/op_kernel/qwen36_gdn_deltalog_decode_key_projection_kernel.asc"
+      },
+      {
+        "sha256": "0002d12314d4a91b8b27e7c65ccf3f8d719f05c90c8883347037b07edff41db4",
+        "bytes": 374,
+        "path": "key_projection/op_kernel/qwen36_gdn_deltalog_decode_key_projection_tiling.h"
+      },
+      {
+        "sha256": "fa91f8ebbbf7505c1d1f4fdf8736986be9c8fa8d654cfb60445eb538af13d7b1",
+        "bytes": 23394,
+        "path": "key_projection/op_kernel/qwen36_gdn_deltalog_decode_key_projection.h"
+      }
+    ],
+    "default_enabled": false,
+    "origin": "A007 namespaced skeleton; append evaluation organization only; no library artifact yet"
+  },
+  "local_to_repository": [
+    {
+      "sha256": "a18480fcd03a0f9e4d31ab765bcf2992ed43b56a6b88b7d8e180c380e10dea3a",
+      "bytes": 4482,
+      "name": "build_pair.py",
+      "kind": "kernel",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-key-projection-B-new48h-20261015-010/kernel/build_pair.py",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "56a46e89869929f6c1a43b8e0d0870c7b2bb0429c6446499ab67d63b5e243161",
+      "bytes": 1694,
+      "name": "SOURCE_MANIFEST.json",
+      "kind": "kernel",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-key-projection-B-new48h-20261015-010/kernel/SOURCE_MANIFEST.json",
+      "repo_exact_matches": [
+        "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/readout_sidecar015/B010_ORIGINAL_SOURCE.json"
+      ]
+    },
+    {
+      "sha256": "bbaab80d23f4c12041e8af698e43a90fece04ab858ea881d9fa8930efaa41b11",
+      "bytes": 4979,
+      "name": "key_projection/CMakeLists.txt",
+      "kind": "kernel",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-key-projection-B-new48h-20261015-010/kernel/key_projection/CMakeLists.txt",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "1a83f60f09433417a7c9a2320b18dc849ffed2ba3436682362c859940ac6b532",
+      "bytes": 677,
+      "name": "key_projection/op_extension/ops.h",
+      "kind": "kernel",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-key-projection-B-new48h-20261015-010/kernel/key_projection/op_extension/ops.h",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "8aea5aff887fb8efb5acf657f863200f34e6cd474d3f8e70abab08bfc645dda5",
+      "bytes": 8217,
+      "name": "key_projection/op_extension/qwen36_gdn_deltalog_decode_key_projection_torch.cpp",
+      "kind": "kernel",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-key-projection-B-new48h-20261015-010/kernel/key_projection/op_extension/qwen36_gdn_deltalog_decode_key_projection_torch.cpp",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "bd2a280f67823174151f765cf8dfae8aad43dfcc74278ec542d1d661a63b7af0",
+      "bytes": 1233,
+      "name": "key_projection/op_extension/register.cpp",
+      "kind": "kernel",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-key-projection-B-new48h-20261015-010/kernel/key_projection/op_extension/register.cpp",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "e36fbd3fc09a554c49f88de6e3620633ee2c7db3dea6b8064891f9e789ecf896",
+      "bytes": 1035,
+      "name": "key_projection/op_kernel/qwen36_gdn_deltalog_decode_key_projection_kernel.asc",
+      "kind": "kernel",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-key-projection-B-new48h-20261015-010/kernel/key_projection/op_kernel/qwen36_gdn_deltalog_decode_key_projection_kernel.asc",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "0002d12314d4a91b8b27e7c65ccf3f8d719f05c90c8883347037b07edff41db4",
+      "bytes": 374,
+      "name": "key_projection/op_kernel/qwen36_gdn_deltalog_decode_key_projection_tiling.h",
+      "kind": "kernel",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-key-projection-B-new48h-20261015-010/kernel/key_projection/op_kernel/qwen36_gdn_deltalog_decode_key_projection_tiling.h",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "fa91f8ebbbf7505c1d1f4fdf8736986be9c8fa8d654cfb60445eb538af13d7b1",
+      "bytes": 23394,
+      "name": "key_projection/op_kernel/qwen36_gdn_deltalog_decode_key_projection.h",
+      "kind": "kernel",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-key-projection-B-new48h-20261015-010/kernel/key_projection/op_kernel/qwen36_gdn_deltalog_decode_key_projection.h",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "5e093d3b1b6d7243ee62dea34b56e1ecbf123bfb278bb73b0741bb7f4120e4e3",
+      "bytes": 1880,
+      "name": "bind_source.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/bind_source.py",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "de37313e0285abea48defdcc39c75ecbeaace8e502cda8b09b000c6329fba7ae",
+      "bytes": 1252,
+      "name": "COMMANDS.json",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/COMMANDS.json",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "6432e5d8152dfc538b9669fea0fc5a46d9462af0fbf7854f7f13ca422a486707",
+      "bytes": 375,
+      "name": "entry.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/entry.py",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "08bd62593b8f99846c2e3df52051bd528bab5ab96a48b0170f6a301da3252c47",
+      "bytes": 5300,
+      "name": "HANDOFF.md",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/HANDOFF.md",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "3003b6edac92eb78650babae5b884029ca13d04b05bdbd0c99bdbb233cd1d4a7",
+      "bytes": 1234,
+      "name": "REPAIR.md",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/REPAIR.md",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "b002f6417ce6181cae95ece22e32c5528ebaa764746cb2229543fb5e414cb8d6",
+      "bytes": 9407,
+      "name": "SOURCE_TEMPLATE.json",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/SOURCE_TEMPLATE.json",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "180136f1b1a883ea972ca3277c59b1ba9e790563314651ece46d4e68a6fe2fc5",
+      "bytes": 1230,
+      "name": "test_admission_contract.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/test_admission_contract.py",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "e0dbe57c6bea974c836dc3fb8b87a7c1bfdb105e0605e1171b14bd215c875b49",
+      "bytes": 2937,
+      "name": "test_keyword_dispatch.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/test_keyword_dispatch.py",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "caa500722f3510cf2545d4fb019b076048a07476f22d06d2e39e30a4f6333ed4",
+      "bytes": 5035,
+      "name": "test_wiring.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/test_wiring.py",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "6246da8d5db3705e06d7775640cb8111b7d23dbe62f1a2c21bd6a5c3db7d208f",
+      "bytes": 1113,
+      "name": "verify_sources.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/verify_sources.py",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "91b02f25a6773cda37a89105faa28488b80f1683f93761752d237d1ae589e805",
+      "bytes": 95,
+      "name": "qwen36_deltalog_service/__init__.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/qwen36_deltalog_service/__init__.py",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "98a93ae468e31aaec6b4242195d3788515cb94814e851b087db2d544a9bbe79b",
+      "bytes": 3930,
+      "name": "qwen36_deltalog_service/admission.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/qwen36_deltalog_service/admission.py",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "8eab3843ccf2edfddce36ff21868bdc55148e6770db59d3028c5fdda9832c1e8",
+      "bytes": 2845,
+      "name": "qwen36_deltalog_service/binding.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/qwen36_deltalog_service/binding.py",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "32dedd1fae3f93e6dd8a9b6a3d23229448b30b022b9c3182b931e5f7c1f76677",
+      "bytes": 15543,
+      "name": "qwen36_deltalog_service/builder_mirror.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/qwen36_deltalog_service/builder_mirror.py",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "60ce142f1467720fbaec93a612a0c806bf982e022e69a74671bcbf5f7fd9dbee",
+      "bytes": 1269,
+      "name": "qwen36_deltalog_service/contract.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/qwen36_deltalog_service/contract.py",
+      "repo_exact_matches": [
+        "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair1/qwen36_deltalog_fresh/contract.py"
+      ]
+    },
+    {
+      "sha256": "71db61ff77c055bdac6259a6d57b0f6f7a7dbea411b2d933dac22261a36ea120",
+      "bytes": 1918,
+      "name": "qwen36_deltalog_service/cpu_metadata.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/qwen36_deltalog_service/cpu_metadata.py",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "ea3cf3a0ae961a52945351778de51ea24169f6fc4f35bff5bb7c1b824bd4f3bf",
+      "bytes": 3108,
+      "name": "qwen36_deltalog_service/integration.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/qwen36_deltalog_service/integration.py",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "a8a372e95b74d10c675475a1a3b365fc0019d4b58c8ced4bd2c1e84178506579",
+      "bytes": 2671,
+      "name": "qwen36_deltalog_service/layout_controls.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/qwen36_deltalog_service/layout_controls.py",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "1b9a2e53ce137f319ca5939be6e21fa293735edd363cdc37f7b438626e985470",
+      "bytes": 11828,
+      "name": "qwen36_deltalog_service/primitives.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/qwen36_deltalog_service/primitives.py",
+      "repo_exact_matches": [
+        "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair1/dependencies/primitives021.py"
+      ]
+    },
+    {
+      "sha256": "913fa9514bc0509babaf81565ab46fa4b746967e7c0deb7d06849f4d42672465",
+      "bytes": 9313,
+      "name": "qwen36_deltalog_service/runtime_helpers.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/qwen36_deltalog_service/runtime_helpers.py",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "096c8f9abed09328c01e069403e8e5511765b0c0c315b665e58dd8fb9e3c8cc3",
+      "bytes": 8832,
+      "name": "qwen36_deltalog_service/runtime.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/qwen36_deltalog_service/runtime.py",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "b9230fde5a7a45db8fe69af9c1acc7104b7082da81c022a76f594c0c389a899f",
+      "bytes": 2683,
+      "name": "qwen36_deltalog_service/transform.py",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/qwen36_deltalog_service/transform.py",
+      "repo_exact_matches": [
+        "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair1/qwen36_deltalog_fresh/transform.py"
+      ]
+    },
+    {
+      "sha256": "33a1359e96a5107181b97794f556d1a5f7c24134bd32616e4061cd8902b5d9d4",
+      "bytes": 85,
+      "name": "qwen36_deltalog_service-0.0.23.dist-info/entry_points.txt",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/qwen36_deltalog_service-0.0.23.dist-info/entry_points.txt",
+      "repo_exact_matches": []
+    },
+    {
+      "sha256": "856c754964c8de01019aec547f1845ab767aa4c8b24082277417ed736343de21",
+      "bytes": 68,
+      "name": "qwen36_deltalog_service-0.0.23.dist-info/METADATA",
+      "kind": "diagnostic",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-service-composite-new48h-20261015-023-repair1/qwen36_deltalog_service-0.0.23.dist-info/METADATA",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "bind_source.py",
+      "sha256": "c12bdad1f6b330a5835960f673878cc835d7fd5f348189de2b55755fce4c755f",
+      "bytes": 3658,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/bind_source.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "cap48_provider.py",
+      "sha256": "0f7ea41e49bf0a0cdd4ed9d255e5b5b900471e66af4180f34d5c07aa5edc19a2",
+      "bytes": 2056,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/cap48_provider.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "CHANGES.diff",
+      "sha256": "ecad422de280003f8ea5bd50b44cc610b07de7e05f70af33a86537dc53880641",
+      "bytes": 17819,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/CHANGES.diff",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "COMMANDS.json",
+      "sha256": "5d80f4042bff4cb90555904a5de12a4409e74d2f0321128c295bae80e7beaf69",
+      "bytes": 4913,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/COMMANDS.json",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "CONFIGURATION_TEMPLATE.json",
+      "sha256": "ae0220dfae2547eb66939d99f2c22e3494e8e49521c1f910d81429bf035c3332",
+      "bytes": 853,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/CONFIGURATION_TEMPLATE.json",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "cpu_preflight.py",
+      "sha256": "50030deba440e4565efd490c762927eeab631cecbe02604d1a0b555cc37a65d4",
+      "bytes": 1400,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/cpu_preflight.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "finite_numeric.py",
+      "sha256": "2e8b39ad7ee6dd9353ff33bc6b527287d4208c1d0d879aeb00495e0eb25816f4",
+      "bytes": 2984,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/finite_numeric.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "guest_canary.py",
+      "sha256": "10a823e14112bb6f2f6459acd8a598ff687f5b1aa3efed0a6d15332a32a52bf7",
+      "bytes": 1649,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/guest_canary.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "HANDOFF.md",
+      "sha256": "cfb3e5342a1c1960d5c3c83c6ef8f354f65a0f701ffd85726271a484298e283a",
+      "bytes": 6521,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/HANDOFF.md",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "host_pair.py",
+      "sha256": "faaa7548eecfa716e10f766a2050308fa011b9302608eff033f4bbc31028e0f1",
+      "bytes": 10704,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/host_pair.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "host_validate.py",
+      "sha256": "d7fb542115be692d8f5b2686a00fa1f2d245fb06cf0b6b6d4d177eb66667de3b",
+      "bytes": 3105,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/host_validate.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "mechanical.py",
+      "sha256": "0622c21a8f7be7d459def167af32eb459bf4ff1699a03ee52e3a4ff86fc1190d",
+      "bytes": 1928,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/mechanical.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "owned_create.py",
+      "sha256": "f6df587ee2913a62b7f70193d57896381f713f6c039151b4db3f16c4baafa7f6",
+      "bytes": 2122,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/owned_create.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "owned_substrate.py",
+      "sha256": "b32370f14e58df009679a31cb8e94ac479ec9c12f3b2ea5b2985a4a0684970f9",
+      "bytes": 3194,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/owned_substrate.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "pair_consume.py",
+      "sha256": "f1aa5221aef6e1297c45ccdc18ba2392d484da53dc13522dad35f848df157277",
+      "bytes": 4272,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/pair_consume.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "paired_driver.py",
+      "sha256": "df5f453810c6f057bef0f258664bd8b3bb7ea135f558e2694e34eceb73a2821c",
+      "bytes": 2215,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/paired_driver.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "production_numeric.py",
+      "sha256": "b0bb665fa043aa6d07a65a8da8ad1b04d1dd708c9afcb2c5a7f51f7be2614fdd",
+      "bytes": 9198,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/production_numeric.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "QUALIFICATION_TEMPLATE.json",
+      "sha256": "b0e53f704b021da89d0206dcf520ee4eadd9f5d8af9f0f856d4b08ffcd8fb0d8",
+      "bytes": 477,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/QUALIFICATION_TEMPLATE.json",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "screen_admission.py",
+      "sha256": "72419272ffd5a221472365a3e9b50da1daf89bfb225d12e52e3c4b75fb8a47c7",
+      "bytes": 7366,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/screen_admission.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "screen_binding.py",
+      "sha256": "c55915afddf8c447896ad92ebaef9d9b9fd0d71b567fa702542b7c03030ff947",
+      "bytes": 1314,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/screen_binding.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "seal_transport.py",
+      "sha256": "7a21de2d6637ec3d6ca4cac4e1ecbe760b8ca63c656bb145af962adcb022b18f",
+      "bytes": 3712,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/seal_transport.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "SEALED_FILES.json",
+      "sha256": "8efbe24c586e6ea387182bdb4db6ea72b3e19f9b009fac59a892adccbeaa52cc",
+      "bytes": 17629,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/SEALED_FILES.json",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "server_entry.py",
+      "sha256": "a1936eb02f175bc1b355d90f2a780b2b84adb5efff7edaed72f0e7679ae445f9",
+      "bytes": 2407,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/server_entry.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "snapshot_publication.py",
+      "sha256": "0a137ab0a12a97854054233c2958407bb1df8afea9e6c397b281be37d388656d",
+      "bytes": 997,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/snapshot_publication.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "source_audit.py",
+      "sha256": "f3fdd362c43e88d8bdd17c9feb143d211d701a9b85d2bc15f57e1c2e3f005230",
+      "bytes": 739,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/source_audit.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "SOURCE_DELTA.json",
+      "sha256": "81b6c0882974724c0a40180d38fee125a63ab64648b713167ba726f5d3bafae2",
+      "bytes": 34909,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/SOURCE_DELTA.json",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "test_health_cpu.py",
+      "sha256": "8a7b24f7b142866f55f636ec4daec9dfbc43279af055d060d3f36e46898f81de",
+      "bytes": 3109,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/test_health_cpu.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "test_receiver.py",
+      "sha256": "cc8ec8b1cbfa72eb6d18ebbadf201c3ef3a78c88c9ee81d7751f7cf4476a625f",
+      "bytes": 8279,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/test_receiver.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "test_software.py",
+      "sha256": "4248621cd099a6684a2b55ee4ce232186f89de4fad4f6aaf888d044a7b0d4def",
+      "bytes": 2362,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/test_software.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "test_validation_edges.py",
+      "sha256": "66d320b2a84ba690f9bc060152b9aeccec40fa2e3b329e638f79c17bd20f9b58",
+      "bytes": 7397,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/test_validation_edges.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "VALIDATION_INPUTS_TEMPLATE.json",
+      "sha256": "fa2facda01ac1a8aec06c76cad7df1adb845b648f34c0783b961317c97cac242",
+      "bytes": 169,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/VALIDATION_INPUTS_TEMPLATE.json",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "whole_consume.py",
+      "sha256": "23b089d60a0e891b589b35a5895163a25e1a85896ccb81be05c8a901cbe30d7f",
+      "bytes": 8654,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/whole_consume.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "worker_receipt.py",
+      "sha256": "7f0913ff7a28f98e4542343693d074d68732b39bdb69b2c7df0a98d4a068cdc5",
+      "bytes": 1434,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/worker_receipt.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "worker_snapshot_owner.py",
+      "sha256": "bc0894c9aded1994dc0cf796537fd707d04d1c69174df5aa2d76cc90b1602bd2",
+      "bytes": 2299,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/worker_snapshot_owner.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "dependencies/direct_round013.py",
+      "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d",
+      "bytes": 3378,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/dependencies/direct_round013.py",
+      "repo_exact_matches": [
+        "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair1/direct_round.py",
+        "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/guard020_repair2/direct_round.py",
+        "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/precast016/direct_round.py"
+      ]
+    },
+    {
+      "name": "dependencies/numeric_oracle.py",
+      "sha256": "cd395a05dbfcb21f1104d617afb1fab6f80374016585e9096ca24d85c2cae97a",
+      "bytes": 3407,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/dependencies/numeric_oracle.py",
+      "repo_exact_matches": [
+        "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair1/oracle.py"
+      ]
+    },
+    {
+      "name": "dependencies/publication_common.py",
+      "sha256": "996122e469ec64fc2c8bc1c0bfb077c1b675cb07c157206c697e02feb67a3dde",
+      "bytes": 6403,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/dependencies/publication_common.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "qwen36_deltalog_screen/__init__.py",
+      "sha256": "91b02f25a6773cda37a89105faa28488b80f1683f93761752d237d1ae589e805",
+      "bytes": 95,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/qwen36_deltalog_screen/__init__.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "qwen36_deltalog_screen/admission.py",
+      "sha256": "82b8f522296421a730525003a2f6a8f8d21025467043222936d9e7681403de2f",
+      "bytes": 3931,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/qwen36_deltalog_screen/admission.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "qwen36_deltalog_screen/binding.py",
+      "sha256": "8eab3843ccf2edfddce36ff21868bdc55148e6770db59d3028c5fdda9832c1e8",
+      "bytes": 2845,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/qwen36_deltalog_screen/binding.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "qwen36_deltalog_screen/builder_mirror.py",
+      "sha256": "32dedd1fae3f93e6dd8a9b6a3d23229448b30b022b9c3182b931e5f7c1f76677",
+      "bytes": 15543,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/qwen36_deltalog_screen/builder_mirror.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "qwen36_deltalog_screen/contract.py",
+      "sha256": "60ce142f1467720fbaec93a612a0c806bf982e022e69a74671bcbf5f7fd9dbee",
+      "bytes": 1269,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/qwen36_deltalog_screen/contract.py",
+      "repo_exact_matches": [
+        "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair1/qwen36_deltalog_fresh/contract.py"
+      ]
+    },
+    {
+      "name": "qwen36_deltalog_screen/cpu_metadata.py",
+      "sha256": "71db61ff77c055bdac6259a6d57b0f6f7a7dbea411b2d933dac22261a36ea120",
+      "bytes": 1918,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/qwen36_deltalog_screen/cpu_metadata.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "qwen36_deltalog_screen/health.py",
+      "sha256": "ba1209f1d4eef0119253a41f3ce7bbd1b04d6243187cf187927a372e95f8d23e",
+      "bytes": 1253,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/qwen36_deltalog_screen/health.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "qwen36_deltalog_screen/integration.py",
+      "sha256": "42ed7bcaf64076c2bbef55c0c220b6f7d7571d1b6495d740c96338f436c88b7f",
+      "bytes": 2731,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/qwen36_deltalog_screen/integration.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "qwen36_deltalog_screen/layout_controls.py",
+      "sha256": "a8a372e95b74d10c675475a1a3b365fc0019d4b58c8ced4bd2c1e84178506579",
+      "bytes": 2671,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/qwen36_deltalog_screen/layout_controls.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "qwen36_deltalog_screen/primitives.py",
+      "sha256": "31b5031d2dbcf0fb5635c219483e1095161d3b86fc144361a28585e30b1e73e1",
+      "bytes": 11426,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/qwen36_deltalog_screen/primitives.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "qwen36_deltalog_screen/runtime_helpers.py",
+      "sha256": "682c1c29088596fa529c79a07b34e7b7ccc36a6dfac99594ff67ef5592447bee",
+      "bytes": 8897,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/qwen36_deltalog_screen/runtime_helpers.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "qwen36_deltalog_screen/runtime.py",
+      "sha256": "11dff8ad30e4b4c4fd06f39cac680cb2a6f824856a0adee9e8bf1b4310d4bf2d",
+      "bytes": 8118,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/qwen36_deltalog_screen/runtime.py",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "qwen36_deltalog_screen/transform.py",
+      "sha256": "b9230fde5a7a45db8fe69af9c1acc7104b7082da81c022a76f594c0c389a899f",
+      "bytes": 2683,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/qwen36_deltalog_screen/transform.py",
+      "repo_exact_matches": [
+        "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair1/qwen36_deltalog_fresh/transform.py"
+      ]
+    },
+    {
+      "name": "qwen36_deltalog_screen-0.0.1.dist-info/entry_points.txt",
+      "sha256": "265c813c898d6fe2ec10859979292ba09e223ba5202c4bc9142c08b17d04a610",
+      "bytes": 83,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/qwen36_deltalog_screen-0.0.1.dist-info/entry_points.txt",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "qwen36_deltalog_screen-0.0.1.dist-info/METADATA",
+      "sha256": "fcc7df7b20f5ced19314f4dbeaa87f55a3b3ce3f2dfc3783b723449410fe243b",
+      "bytes": 69,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/qwen36_deltalog_screen-0.0.1.dist-info/METADATA",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "receivers/DOMAIN_PINS.json",
+      "sha256": "9220f5562726db29a626c9feac5f893d5db7e780f631d5f96ef44fb2a5948621",
+      "bytes": 30912,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/receivers/DOMAIN_PINS.json",
+      "repo_exact_matches": []
+    },
+    {
+      "name": "receivers/model_smoke_receipt.py",
+      "sha256": "0b00a6a4a8e7bf7cb2b2eca48777ab4332ee78954afac5d93a0335631914a5ac",
+      "bytes": 7357,
+      "kind": "screen",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair5/receivers/model_smoke_receipt.py",
+      "repo_exact_matches": []
+    }
+  ],
+  "repo_exact_matches": [
+    {
+      "path": "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair1/dependencies/primitives021.py",
+      "sha256": "1b9a2e53ce137f319ca5939be6e21fa293735edd363cdc37f7b438626e985470",
+      "bytes": 11828,
+      "matches_HEAD": true
+    },
+    {
+      "path": "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair1/direct_round.py",
+      "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d",
+      "bytes": 3378,
+      "matches_HEAD": true
+    },
+    {
+      "path": "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair1/oracle.py",
+      "sha256": "cd395a05dbfcb21f1104d617afb1fab6f80374016585e9096ca24d85c2cae97a",
+      "bytes": 3407,
+      "matches_HEAD": true
+    },
+    {
+      "path": "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair1/qwen36_deltalog_fresh/contract.py",
+      "sha256": "60ce142f1467720fbaec93a612a0c806bf982e022e69a74671bcbf5f7fd9dbee",
+      "bytes": 1269,
+      "matches_HEAD": true
+    },
+    {
+      "path": "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/dl035-repair1/qwen36_deltalog_fresh/transform.py",
+      "sha256": "b9230fde5a7a45db8fe69af9c1acc7104b7082da81c022a76f594c0c389a899f",
+      "bytes": 2683,
+      "matches_HEAD": true
+    },
+    {
+      "path": "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/guard020_repair2/direct_round.py",
+      "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d",
+      "bytes": 3378,
+      "matches_HEAD": true
+    },
+    {
+      "path": "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/precast016/direct_round.py",
+      "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d",
+      "bytes": 3378,
+      "matches_HEAD": true
+    },
+    {
+      "path": "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015/readout_sidecar015/B010_ORIGINAL_SOURCE.json",
+      "sha256": "56a46e89869929f6c1a43b8e0d0870c7b2bb0429c6446499ab67d63b5e243161",
+      "bytes": 1694,
+      "matches_HEAD": true
+    }
+  ],
+  "limitations": [
+    "No source/runtime modified",
+    "No build/NPU run",
+    "No DSO committed or copied",
+    "Bare source snapshots are not a relocatable release",
+    "PF037R5 final binding/model/performance actual receipts remain pending",
+    "Current install uses source-bound absolute root and dist-info/PYTHONPATH, not a closed wheel packaging contract",
+    "Build scripts retain old fixed experimental authority; direct mechanical CMake recipe is separate from authority to execute new experiments",
+    "Only metadata/source was read; no raw tensors/weights copied"
+  ]
+}

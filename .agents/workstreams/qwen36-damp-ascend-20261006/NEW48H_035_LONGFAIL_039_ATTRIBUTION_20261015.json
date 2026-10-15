@@ -1,0 +1,177 @@
+{
+  "schema": "deltalog.real-first-fault-and-highprecision-attribution/v1",
+  "as_of_utc": "2026-10-15T18:10:48Z",
+  "scope": "No new model/performance/task acceptance; no algorithm-wide rejection",
+  "window": {
+    "start": 1791962297,
+    "cutoff": 1792135097
+  },
+  "current_model": "/cache/efim/Qwen3.6-27B",
+  "protected_npus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "full160": {
+    "operation": "exec-0000000000000829",
+    "exit": 3,
+    "duration_seconds": 614.487,
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair4/SOURCE_MANIFEST.json",
+      "bytes": 26248,
+      "sha256": "e5566351d02b04792b871f67092876f69b7fb58bbc81c36d21360fb328ec6524"
+    },
+    "owner": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035r4-numeric160-new48h-MAIN-20261015-001/RESULT.json",
+      "bytes": 1673,
+      "sha256": "825cfa7ac6246ebb839192e39898d405dedd9ab71746dea2b6874e0f23ce8fc9"
+    },
+    "first_numerical_fault": {
+      "batch": 16,
+      "step": 80,
+      "request": 10,
+      "state_relative_l2": 1.6945361761574516e-8,
+      "output_normalized_peak": 0.005208333333333333,
+      "state_limit": 7.92e-7,
+      "output_limit": 0.00303
+    },
+    "derived_chain_failures": 79,
+    "independent_numerical_faults": 1,
+    "coverage": {
+      "mixed_raw": 320,
+      "total_raw_records": 328
+    },
+    "model_ready": false
+  },
+  "diagnostic039": {
+    "source": {
+      "sha256": "211e0bc79f6e0ac450ad4569a0f39b5a44c441086b4c45387749a8311e47ee89",
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog035-step80-savedraw-v1-039-repair1/SOURCE_MANIFEST.json",
+      "bytes": 32744
+    },
+    "operation": "exec-000000000000085e",
+    "exit": 0,
+    "duration_ms": 5357,
+    "owner": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl035-step80-cpu039repair1-new48h-MAIN-20261015-001/RESULT.json",
+      "bytes": 1341,
+      "sha256": "330cf52e0b3c98ce088d5986f94656055f13c8f45f4ec83a281802a3347dd67b"
+    },
+    "diagnosis": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl035-step80-cpu039repair1-new48h-MAIN-20261015-001/native/result/DIAGNOSIS.json",
+      "bytes": 25391,
+      "sha256": "f48d1af9f21a2f6f15abdef58f0b3187d77ca901fc61af5c631eb9c37c358231"
+    },
+    "NPU": false,
+    "qualification": false,
+    "selected_observation": {
+      "RNE_floor": 0.00260609143964399,
+      "actual_NPU_FP32_precast_available": false,
+      "batch": 16,
+      "candidate_diff_RNE_cells": 1,
+      "candidate_native_peer": 0.005208333333333333,
+      "candidate_state_relative_l2": 1.6945361761574516e-8,
+      "candidate_vs_direct_RNE": 0.005208333333333333,
+      "candidate_vs_unrounded_CPU64": 0.002606374185407189,
+      "dominant_RNE_gap_coord": [
+        2,
+        28
+      ],
+      "dominant_independent_MP": {
+        "CPU64_minus_MP100": "-9.6162467838983063061339633417671217292158265477953077925720561670269525101030983697E-21",
+        "agreement_abs": "2.70269525101030983697E-83",
+        "midpoint_margins": [
+          {
+            "CPU64_minus_midpoint": "9.5364845078028405954417845435955314314924180507659912109375E-7",
+            "MP100_minus_midpoint": "9.536484507802936757909623526658592771125835721983283369202977953077925720561670269525101030983697E-7",
+            "MP80_minus_midpoint": "9.5364845078029367579096235266585927711258357219832833692029779530779257205614E-7",
+            "midpoint": -0.00012731552124023438
+          },
+          {
+            "CPU64_minus_midpoint": "-2.586562596594045582154564044685685075819492340087890625E-11",
+            "MP100_minus_midpoint": "-2.58656259563242090376473341407228874164278016716630797022046922074279438329730474898969016303E-11",
+            "MP80_minus_midpoint": "-2.586562595632420903764733414072288741642780167166307970220469220742794386E-11",
+            "midpoint": -0.00012636184692382812
+          },
+          {
+            "CPU64_minus_midpoint": "-9.5370018203221594045582154564044685685075819492340087890625E-7",
+            "MP100_minus_midpoint": "-9.537001820322063242090376473341407228874164278016716630797022046922074279438329730474898969016303E-7",
+            "MP80_minus_midpoint": "-9.5370018203220632420903764733414072288741642780167166307970220469220742794386E-7",
+            "midpoint": -0.00012540817260742188
+          }
+        ],
+        "precision100": "-0.0001263618727894540813242090376473341407228874164278016716630797022046922074279438329730474898969016303",
+        "precision80": "-0.00012636187278945408132420903764733414072288741642780167166307970220469220742794386",
+        "scope": "independent high-precision natural-exp recurrence on exact stored binary operands, not CANN Exp accuracy theorem or actual NPU precast"
+      },
+      "length_after": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "length_before": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "native_diff_RNE_cells": 0,
+      "native_state_vs_candidate_before_local_reference": 1.0573684474084276e-7,
+      "native_vs_direct_RNE": 0,
+      "old_failed160_unchanged": true,
+      "old_output_limit": 0.00303,
+      "old_state_limit": 7.92e-7,
+      "original_failed_owner": {
+        "bytes": 1673,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035r4-numeric160-new48h-MAIN-20261015-001/RESULT.json",
+        "sha256": "825cfa7ac6246ebb839192e39898d405dedd9ab71746dea2b6874e0f23ce8fc9"
+      },
+      "qualification": false,
+      "raw": {
+        "bytes": 151267875,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035r4-numeric160-new48h-MAIN-20261015-001/numeric/result/mixed-B16-080.pt",
+        "sha256": "6057c3726a57f778116e8dd1ff7eef6e2aed9c7d4c4213f286c21d18be58171b"
+      },
+      "request": 10,
+      "schema": "deltalog035.step80-readout-diagnostic/v039",
+      "scope": "independent local one-step CPU64 from candidate-before represented state, not separate native-before or full trajectory",
+      "slot": 10,
+      "step": 80
+    }
+  },
+  "next": {
+    "decision": "DIAGNOSE",
+    "cause": "UNKNOWN_CAUSE at candidate FP32 arithmetic versus cast boundary; independent CPU64 uncertainty excluded at dominant cell",
+    "entry": "040 whole-B16 same-saved-frame production/debug sidecar, MAIN review and CPU/device prerequisite pending",
+    "old_failure_unchanged": true,
+    "no_threshold_change": true,
+    "model036r5": "deployed source-only; unbound; forbidden with failed160",
+    "pf037r5": "deployed source-only; unbound; forbidden with failed160",
+    "accuracy015r4": "local production-path wiring draft; unsealed at snapshot",
+    "backup": "MXR028 saved raw CPU diagnostic preparation"
+  },
+  "publication": {
+    "base_head": "3118674f6731323342b57f68d29eb5e19a87229e",
+    "normal_push_pending": true,
+    "no_force_or_main": true
+  },
+  "utilization": "Fresh idle snapshots, not continuous 30-minute utilization proof"
+}

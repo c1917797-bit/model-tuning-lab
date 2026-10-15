@@ -1,0 +1,59 @@
+{
+  "schema": "deltalog.direct-RNE-model-diagnostic-owned-commands/v036",
+  "prepared_only": true,
+  "ready": false,
+  "binding": {
+    "command": "/usr/bin/python3",
+    "args": [
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-model-directRNE-smoke-v1-MODEL036-repair5/bind_source.py",
+      "--execute",
+      "--template-sha256",
+      "MAIN_REVIEWED_MODEL036R5_TEMPLATE_SHA",
+      "--plugin-source-ref",
+      "EXACT_DEPLOYED_023_REPAIR1_REF_JSON",
+      "--bridge-owner-ref",
+      "ACTUAL_035R4_FULL160_SUCCESS_OWNER_REF_JSON",
+      "--bridge-source-ref",
+      "ACTUAL_BOUND_035R1_REF_JSON"
+    ]
+  },
+  "sourceaudit": {
+    "command": "/usr/bin/python3",
+    "args": [
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-model-directRNE-smoke-v1-MODEL036-repair5/host_ticket.py",
+      "--source-audit",
+      "--source-ref",
+      "ACTUAL_BOUND_MODEL036_REF_JSON"
+    ]
+  },
+  "execute": {
+    "command": "/usr/bin/prlimit",
+    "args": [
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-model-directRNE-smoke-v1-MODEL036-repair5/host_ticket.py",
+      "--execute",
+      "--source-ref",
+      "ACTUAL_BOUND_MODEL036_REF_JSON"
+    ]
+  },
+  "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-deltalog-MODEL036R5-main-NEW48H_MODEL036R5_001",
+  "whole_seconds": 2700,
+  "cleanup_seconds": 270,
+  "model_guest_GiB": 48,
+  "output_GiB": 4,
+  "missing_actual": [
+    "actual035-repair4 bound source/full160 original success owner/domain/release",
+    "actualMODEL036R5 source binding/imageCPU48/parser/model/selected directRNE results"
+  ],
+  "model_numeric_qualified": false,
+  "accuracy014_receiver_updated": false,
+  "PF033_receiver_updated": false,
+  "PF037_receiver_updated": false
+}

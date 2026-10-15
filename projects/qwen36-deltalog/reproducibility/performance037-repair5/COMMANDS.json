@@ -1,0 +1,112 @@
+{
+  "schema": "deltalog.production-screen-commands/v037",
+  "default_enabled": false,
+  "prepared_only": true,
+  "NPU_executed": false,
+  "remote_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/deltalog-production-screen-PF037R5",
+  "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+  "placeholder_rule": "Each uppercase REF_JSON is a JSON-encoded exact {path,bytes,sha256} referring to an existing immutable file. Null templates are intentionally rejected; do not invent evidence.",
+  "steps": [
+    {
+      "stage": "MAIN review and source-only deploy",
+      "instruction": "Rehash SEALED_FILES/DELIVERY bytes; deploy under remote_root only. Review original025 exact safety sources, prerequisites/readset, fresh physical4-7/device mapping/resource ledger. No card operation is authorized by this source preparation. No source or output overwrite."
+    },
+    {
+      "stage": "bind actual configuration once",
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "REMOTE_ROOT/bind_source.py",
+        "--execute",
+        "--configuration-ref",
+        "CONFIGURATION_REF_JSON"
+      ],
+      "output": "REMOTE_ROOT/SOURCE_MANIFEST.json only after actual035-repair4 successful160 + actualMODEL036R5 result/terminal and explicit direct-RNE contracts in both selected reports; null templates rejected."
+    },
+    {
+      "stage": "source-only audit",
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "REMOTE_ROOT/source_audit.py",
+        "--execute",
+        "--source-ref",
+        "SOURCE_REF_JSON"
+      ],
+      "note": "No NPU claim. Actual same-image software stage is re-run by the existing pair owner, not by an unowned container."
+    },
+    {
+      "stage": "real finite-policy validation using original025 owned controller",
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "REMOTE_ROOT/host_validate.py",
+        "--execute",
+        "--source-ref",
+        "SOURCE_REF_JSON"
+      ],
+      "budget": {
+        "owner_phase_seconds": 3600,
+        "shared_cleanup_seconds": 180,
+        "numeric_guest_seconds": 600,
+        "numeric_loop_seconds": 560
+      },
+      "instruction": "Use actual AWMCP direct route; MAIN records full actual terminal envelope Ref after owner exits. Producer can diagnose16; formal screen strictly requires genuine full160 and320 rows. Read-only raw/source mounts derive from exact inputs; no new controller."
+    },
+    {
+      "stage": "freeze actual qualification",
+      "instruction": "Only after successful genuine035R4 full160 + actualMODEL036R5 with exact selected contract + separate actual production validation, save a NEW QUALIFICATION_TEMPLATE-shaped file with exact actual Refs, then compute QUALIFICATION_REF_JSON. Never convert old failure into primaryNone or invent futurePASS."
+    },
+    {
+      "stage": "one matched sync screen",
+      "environment": {
+        "QWEN36_DELTALOG_SCREEN033_PAIR_ENABLE": "1"
+      },
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "REMOTE_ROOT/host_pair.py",
+        "--execute",
+        "--source-ref",
+        "SOURCE_REF_JSON",
+        "--qualification-ref",
+        "QUALIFICATION_REF_JSON",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-production-screen-PF037R5-MAIN-001"
+      ],
+      "budget": {
+        "phase_seconds": 3600,
+        "shared_cleanup_seconds": 180,
+        "same_image_CPU_seconds": 120,
+        "canary_each_seconds": 180,
+        "startup_each_max_seconds": 900,
+        "client_timeout_seconds": 1800
+      },
+      "note": "Caps share one phase; not additive independent budgets. Actual owner may reject insufficient remaining budget or resource conflict. Both arms sync/eager/PDCoff/cap48/lazy. DefaultOFF plugin is enabled only by candidate entry."
+    },
+    {
+      "stage": "after-parent-exit independent whole consumption",
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "REMOTE_ROOT/whole_consume.py",
+        "--execute",
+        "--result-ref",
+        "PAIR_RESULT_REF_JSON",
+        "--terminal-ref",
+        "ACTUAL_PAIR_TERMINAL_REF_JSON",
+        "--source-ref",
+        "SOURCE_REF_JSON",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-production-screen-PF037R5-MAIN-001/WHOLE.json"
+      ],
+      "note": "Exact actual terminal/source/cleanup/PID/raw binding and recomputed paired statistics. Acceptance, formal3 and task remain false. Only then consider three new independent formal pair outputs and final task gates."
+    }
+  ],
+  "not_a_success": "Actual035R4 successful160, actualMODEL036R5 smoke with explicit direct-RNE contract and separate production finite NPU validation are required and not supplied. Old failures remain unchanged. No future PASS/performance/task claim."
+}

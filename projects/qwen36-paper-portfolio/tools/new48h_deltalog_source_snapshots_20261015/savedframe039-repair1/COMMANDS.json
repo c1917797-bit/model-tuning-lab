@@ -1,0 +1,78 @@
+{
+  "schema": "deltalog.selected-savedframe-owned-CPU-commands/v039",
+  "source": {
+    "sha256": "211e0bc79f6e0ac450ad4569a0f39b5a44c441086b4c45387749a8311e47ee89",
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog035-step80-savedraw-v1-039-repair1/SOURCE_MANIFEST.json",
+    "bytes": 32744
+  },
+  "execute": {
+    "command": "/usr/bin/python3",
+    "args": [
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog035-step80-savedraw-v1-039-repair1/host.py",
+      "--execute",
+      "--owner-ref",
+      "{\"sha256\":\"211e0bc79f6e0ac450ad4569a0f39b5a44c441086b4c45387749a8311e47ee89\",\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog035-step80-savedraw-v1-039-repair1/SOURCE_MANIFEST.json\",\"bytes\":32744}",
+      "--target-source-ref",
+      "{\"sha256\":\"211e0bc79f6e0ac450ad4569a0f39b5a44c441086b4c45387749a8311e47ee89\",\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog035-step80-savedraw-v1-039-repair1/SOURCE_MANIFEST.json\",\"bytes\":32744}",
+      "--authority-ref",
+      "{\"bytes\":3591,\"path\":\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json\",\"sha256\":\"71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99\"}",
+      "--lifecycle-ref",
+      "{\"bytes\":162171,\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/BOUND_SOURCE.json\",\"sha256\":\"b5f4c0798f2fab7fb3c706666c38b6eab7318fa6a55e40191dd419bb6aaacb6c\"}",
+      "--stage",
+      "cpu",
+      "--steps",
+      "16",
+      "--host-cpu",
+      "ACTUAL_HOST_CPU",
+      "--guest-cpu",
+      "ACTUAL_GUEST_CPU",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl035-step80-cpu039repair1-new48h-MAIN-20261015-001"
+    ]
+  },
+  "audit": {
+    "command": "/usr/bin/python3",
+    "args": [
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog035-step80-savedraw-v1-039-repair1/host.py",
+      "--execute",
+      "--owner-ref",
+      "{\"sha256\":\"211e0bc79f6e0ac450ad4569a0f39b5a44c441086b4c45387749a8311e47ee89\",\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog035-step80-savedraw-v1-039-repair1/SOURCE_MANIFEST.json\",\"bytes\":32744}",
+      "--target-source-ref",
+      "{\"sha256\":\"211e0bc79f6e0ac450ad4569a0f39b5a44c441086b4c45387749a8311e47ee89\",\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog035-step80-savedraw-v1-039-repair1/SOURCE_MANIFEST.json\",\"bytes\":32744}",
+      "--authority-ref",
+      "{\"bytes\":3591,\"path\":\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json\",\"sha256\":\"71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99\"}",
+      "--lifecycle-ref",
+      "{\"bytes\":162171,\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/BOUND_SOURCE.json\",\"sha256\":\"b5f4c0798f2fab7fb3c706666c38b6eab7318fa6a55e40191dd419bb6aaacb6c\"}",
+      "--stage",
+      "cpu",
+      "--steps",
+      "16",
+      "--host-cpu",
+      "ACTUAL_HOST_CPU",
+      "--guest-cpu",
+      "ACTUAL_GUEST_CPU",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl035-step80-cpu039repair1-new48h-MAIN-20261015-001",
+      "--source-audit-only"
+    ]
+  },
+  "defaultOFF": true,
+  "NPU": false,
+  "qualification": false,
+  "expected_owner_schema": "deltalog.fresh-bridge-owned-host/v5",
+  "expected_stage_schema": "deltalog035.saved-frame-CPU/v039",
+  "expected_result": "native/result/DIAGNOSIS.json",
+  "budget": {
+    "owner_seconds": 720,
+    "child_seconds": 480,
+    "cleanup_seconds": 90,
+    "guest_GiB": 8,
+    "host_GiB": 0.5,
+    "reserve_GiB": 8
+  },
+  "fixed_cutoff": 1792135097
+}

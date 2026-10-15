@@ -1,0 +1,154 @@
+--- PF037R4/bind_source.py
++++ PF037R5/bind_source.py
+@@ -17,7 +17,7 @@
+  from types import SimpleNamespace
+  def checked(r):A.need(A.ref(r['path'])==r,'actual source-bound model dependency');return Path(r['path'])
+  C=SimpleNamespace(obj=A.obj,checked=checked,need=A.need)
+- receipt=api.consume(C,m['model_smoke_plan']);A.need(receipt['schema']=='deltalog.actualMODEL036R4-model-diagnostic-smoke/v037-repair4'and receipt['selected_numeric_pass']is True,'actual035160 plus realMODEL036 smoke required before binding PF037R4')
++ receipt=api.consume(C,m['model_smoke_plan']);A.need(receipt['schema']=='deltalog.actualMODEL036R5-model-diagnostic-smoke/v037-repair5'and receipt['selected_numeric_pass']is True,'actual035160 plus realMODEL036 smoke required before binding PF037R5')
+  A.need(m['diagnostic_predecessor_ref']==m['model_smoke_plan']['production_source_ref'],'same original023R1 finite-domain predecessor')
+  owner=A.obj(m['model_smoke_plan']['qualification_ref']);inputs=A.obj(m['validation_inputs_ref'])
+  A.need(inputs['producer_ref']==owner['result']and inputs['source031_ref']==m['model_smoke_plan']['bridge_source_ref'],'same actual035 full160 source/raw for separate production finite NPU comparison')
+--- PF037R4/host_pair.py
++++ PF037R5/host_pair.py
+@@ -27,7 +27,7 @@
+  sr=json.loads(a.source_ref);m=source(sr);qref=json.loads(a.qualification_ref);q=qualify(qref,sr)
+  if time.time()+3600>1792135097:raise ValueError('full frozen phase cannot fit fixed cutoff')
+  c,S,H,pairs=load()
+- if a.output.parent!=c.PREP/'lowbit'or not a.output.name.startswith('run-dl-production-screen-PF037R4-')or a.output.exists():raise ValueError('new absent PF037R4 performance output, not savedraw033')
++ if a.output.parent!=c.PREP/'lowbit'or not a.output.name.startswith('run-dl-production-screen-PF037R5-')or a.output.exists():raise ValueError('new absent PF037R5 performance output, not savedraw033')
+  os.sched_setaffinity(0,{166})
+  soft,hard=resource.getrlimit(resource.RLIMIT_AS)
+  if hard!=resource.RLIM_INFINITY:raise ValueError('original Docker child unlimitedAS wrapper required')
+--- PF037R4/host_validate.py
++++ PF037R5/host_validate.py
+@@ -11,7 +11,7 @@
+  sr=json.loads(a.source_ref);m=source(sr);c,S,H,pairs=load();started=time.monotonic()
+  if time.time()+3600>1792135097:raise ValueError('full existing owner budget must fit fixed cutoff')
+  os.sched_setaffinity(0,{166});out=Path(m['validation_output_root'])
+- if out.parent!=c.PREP/'lowbit' or not out.name.startswith('run-dl-production-validation-PF037R4-')or out.exists():raise ValueError('exclusive PF037R4 production validation output, not savedraw033')
++ if out.parent!=c.PREP/'lowbit' or not out.name.startswith('run-dl-production-validation-PF037R5-')or out.exists():raise ValueError('exclusive PF037R5 production validation output, not savedraw033')
+  plan=c.obj(m['validation_inputs_ref']);prod=c.obj(plan['producer_ref'])
+  refs=[sr,*m['files'].values(),*m['dependencies'],*REFS.values(),m['validation_inputs_ref'],plan['producer_ref'],plan['source031_ref'],plan['diagnostic_primitives_ref'],plan['oracle_ref']]
+  refs.extend(row['raw']for row in prod['records']if row['kind']=='mixed')
+--- PF037R4/owned_substrate.py
++++ PF037R5/owned_substrate.py
+@@ -41,7 +41,7 @@
+  # Whole genuine actual025 IO/helper remains. Only new explicit task scope.
+  c.CUTOFF=1792135097;c.CUT='2026-10-16T07:18:17+00:00'
+  S=load_source('safety_host',REFS['safety_host'])
+- S.PHASE=3600;S.CLEANUP=180;S.OWNER='dl-production-screen-PF037R4'
++ S.PHASE=3600;S.CLEANUP=180;S.OWNER='dl-production-screen-PF037R5'
+  original_env=S.environment
+  def environment(cpu=False):
+   value=original_env(cpu)
+--- PF037R4/receivers/model_smoke_receipt.py
++++ PF037R5/receivers/model_smoke_receipt.py
+@@ -44,14 +44,14 @@
+  validate_terminal(C,terminal['result']['record'],m,sr)
+  loaded=C.obj(v['actual_loaded_workers']);r=C.obj(v['independent_smoke_consumer']);tensor=C.obj(r['selected_tensor_ref'])
+  pins=json.loads(Path(__file__).with_name('DOMAIN_PINS.json').read_bytes())
+- C.need(r.get('validation_contract')==tensor.get('validation_contract')==pins['selected_model_validation_contract'],'explicit MODEL036R4 direct-RNE selected-model contract in BOTH reports; old unknown-v026 PASS refused')
++ C.need(r.get('validation_contract')==tensor.get('validation_contract')==pins['selected_model_validation_contract'],'explicit MODEL036R5 direct-RNE selected-model contract in BOTH reports; old unknown-v026 PASS refused')
+  C.need(loaded['schema']=='deltalog.actual-all4-loaded/v004'and loaded['source']==sr and [x['rank']for x in loaded['rows']]==[0,1,2,3],'actual allfour loaded workers')
+  C.need(r['schema']=='deltalog.model-selected-tensor-independent-consumption/v026'and r['source']==sr and r['actual_loaded_workers']==v['actual_loaded_workers']and r['actual_client']==v['client']and r['selected_modified_decode_pass']is True and r['smoke_dispatch_and_response_pass']is True,'actual independent model tensor/client joins')
+  d=r['dispatch'];C.need(d['dispatch_trajectory_pass']is True and [x['rank']for x in d['rows']]==[0,1,2,3],'actual fourrank dispatch')
+  for row in d['rows']:C.need(row['all48']is True and len(row['requests'])==2 and all(x['prefill']is True and x['decode']>=9 for x in row['requests'].values()),'each actual rank48 layers both requests >=9decode')
+  C.need([(x['prompt_tokens'],x['output_tokens'])for x in r['responses']]==[(16,10),(129,10)],'two real requests, not warmup/sample')
+  C.need(tensor['source']==sr and tensor['primary']is None and tensor['modified_decode_arithmetic_pass']is True and tensor['full48_tensor_qualified']is False and tensor['model_numeric_qualified']is False,'selected numeric scope, not all48 proof')
+- return dict(schema='deltalog.actualMODEL036R4-model-diagnostic-smoke/v037-repair4',owner=owner_ref,terminal=plan['model_smoke_terminal_ref'],source=sr,consumer=v['independent_smoke_consumer'],selected_tensor=r['selected_tensor_ref'],loaded=v['actual_loaded_workers'],all4x48_dispatch=True,selected_numeric_pass=True,task_smoke_admitted=True,model_numeric_qualified=False,full_task_admitted=False,performance_ready=False)
++ return dict(schema='deltalog.actualMODEL036R5-model-diagnostic-smoke/v037-repair5',owner=owner_ref,terminal=plan['model_smoke_terminal_ref'],source=sr,consumer=v['independent_smoke_consumer'],selected_tensor=r['selected_tensor_ref'],loaded=v['actual_loaded_workers'],all4x48_dispatch=True,selected_numeric_pass=True,task_smoke_admitted=True,model_numeric_qualified=False,full_task_admitted=False,performance_ready=False)
+ 
+ def closure(C,plan):
+  pins=json.loads(Path(__file__).with_name('DOMAIN_PINS.json').read_bytes())
+--- PF037R4/screen_admission.py
++++ PF037R5/screen_admission.py
+@@ -44,7 +44,7 @@
+  p=q['smoke_plan'];A.need(p['production_source_ref']==m['diagnostic_predecessor_ref'],'explicit023 predecessor, not a false production-source identity')
+  A.need(p==m['model_smoke_plan'],'same actualMODEL036 smoke frozen at source binding')
+  s=module.consume(C,p)
+- A.need(s['schema']=='deltalog.actualMODEL036R4-model-diagnostic-smoke/v037-repair4'and s['all4x48_dispatch']is True and s['selected_numeric_pass']is True and s['performance_ready']is False and s['model_numeric_qualified']is False,'actual boundedMODEL036 source/dispatch/selected numerical evidence, not full model acceptance')
++ A.need(s['schema']=='deltalog.actualMODEL036R5-model-diagnostic-smoke/v037-repair5'and s['all4x48_dispatch']is True and s['selected_numeric_pass']is True and s['performance_ready']is False and s['model_numeric_qualified']is False,'actual boundedMODEL036 source/dispatch/selected numerical evidence, not full model acceptance')
+  b=A.obj(p['qualification_ref']);A.need(b['schema']=='deltalog.diagnostic-owned-host/v035'and b['target_source']==p['bridge_source_ref']and b['steps']==160 and b['primary']is None and not b['secondary'] and b['stopped_retained']is True and b['diagnostic_capture_complete']is True,'actual successful original035 full160 relevant bridge before formal screen')
+  d=A.obj(b['independent_consumer']);A.need(d['schema']=='deltalog.diagnostic-consumption/v035'and d['diagnostic_capture_complete']is True and d['domain_checks_pass']is True,'actual closed035 domain bridge evidence')
+  domain=A.obj(d['domain_consumer']);A.need(domain['schema']=='deltalog.direct-RNE-domain-audit/v035'and not domain['failures']and not domain['missing_evidence']and domain['domain_checks_pass']is True and domain['diagnostic_qualified']is False,'retain original035 diagnostic scope/oldFAIL; no missing gate')
+--- PF037R4/seal_transport.py
++++ PF037R5/seal_transport.py
+@@ -2,8 +2,8 @@
+ import base64,difflib,hashlib,json
+ from pathlib import Path
+ P=Path(__file__).resolve().parent
+-OLD=Path('C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair2')
+-REMOTE='/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/deltalog-production-screen-PF037R4'
++OLD=Path('C:/Users/Huawei/AppData/Local/Temp/deltalog-production-screen-new48h-20261015-037-repair4')
++REMOTE='/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/deltalog-production-screen-PF037R5'
+ exclude={'SOURCE_DELTA.json','CHANGES.diff','DELIVERY.json','SEALED_FILES.json'}
+ def ref(path,b):return dict(path=path,bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
+ def encode(x):return (json.dumps(x,sort_keys=True,indent=2,ensure_ascii=False)+'\n').encode()
+@@ -12,15 +12,21 @@
+  b.decode('utf8');assert b'\r'not in b and b.endswith(b'\n'),k
+ math=('qwen36_deltalog_screen/runtime.py','qwen36_deltalog_screen/primitives.py','qwen36_deltalog_screen/health.py','qwen36_deltalog_screen/runtime_helpers.py','qwen36_deltalog_screen/integration.py','qwen36_deltalog_screen/cpu_metadata.py','qwen36_deltalog_screen/builder_mirror.py','production_numeric.py','finite_numeric.py','snapshot_publication.py','worker_receipt.py','worker_snapshot_owner.py','test_validation_edges.py','dependencies/publication_common.py','dependencies/direct_round013.py','dependencies/numeric_oracle.py','paired_driver.py','server_entry.py','pair_consume.py','whole_consume.py','owned_create.py','cap48_provider.py')
+ for name in math:assert files[name]==(OLD/name).read_bytes(),'protected production math/protocol/owner unchanged '+name
++import sys
++sys.path.insert(0,str(P));from test_receiver import source_identity
++assert source_identity(json.loads(files['CONFIGURATION_TEMPLATE.json']),json.loads(files['COMMANDS.json']),files['owned_substrate.py'].decode(),files['host_validate.py'].decode(),files['host_pair.py'].decode())
++pins=json.loads(files['receivers/DOMAIN_PINS.json'])
++assert pins['model036_template']['sha256']=='82cc86940c1cd77a533415d809649f73847b552926bd1b2504730172c8377470'
++assert pins['reviewed_domain_template_ref']['sha256']=='e9243ee9acc0f066421dc7e3b11285533a8df3c8478830afe40be6e25f18dd49'
+ delta=[];diff=[]
+ for k,b in sorted(files.items()):
+  prior=OLD/k;old=prior.read_bytes()if prior.is_file()else b''
+  delta.append(dict(file=k,current=ref(REMOTE+'/'+k,b),baseline=ref(str(prior),old)if prior.is_file()else None,byte_identical=prior.is_file()and old==b))
+- if k.endswith('.py')and old!=b:diff.extend(difflib.unified_diff(old.decode().splitlines(True),b.decode().splitlines(True),fromfile='PF037R2/'+k,tofile='PF037R4/'+k))
++ if k.endswith('.py')and old!=b:diff.extend(difflib.unified_diff(old.decode().splitlines(True),b.decode().splitlines(True),fromfile='PF037R4/'+k,tofile='PF037R5/'+k))
+ files['CHANGES.diff']=''.join(diff).encode()
+-files['SOURCE_DELTA.json']=encode(dict(schema='deltalog.PF037R4-pin-only-source-delta/v037',protected_unchanged=list(math),files=delta,default_enabled=False,NPU=False,qualification=False))
+-inventory=dict(schema='deltalog.PF037R4-transport-inventory/v037',remote_root=REMOTE,files=[dict(relative=k,**ref(REMOTE+'/'+k,b))for k,b in sorted(files.items())],source_manifest_bound=False,NPU=False,qualification=False)
+-delivery=dict(schema='deltalog.PF037R4-byte-exact-delivery/v037',remote_root=REMOTE,files=[dict(relative=k,**ref(REMOTE+'/'+k,b),base64=base64.b64encode(b).decode())for k,b in sorted(files.items())],prepared_only=True,NPU=False,qualification=False)
++files['SOURCE_DELTA.json']=encode(dict(schema='deltalog.PF037R5-pin-only-source-delta/v037',protected_unchanged=list(math),files=delta,default_enabled=False,NPU=False,qualification=False))
++inventory=dict(schema='deltalog.PF037R5-transport-inventory/v037',remote_root=REMOTE,files=[dict(relative=k,**ref(REMOTE+'/'+k,b))for k,b in sorted(files.items())],source_manifest_bound=False,NPU=False,qualification=False)
++delivery=dict(schema='deltalog.PF037R5-byte-exact-delivery/v037',remote_root=REMOTE,files=[dict(relative=k,**ref(REMOTE+'/'+k,b),base64=base64.b64encode(b).decode())for k,b in sorted(files.items())],prepared_only=True,NPU=False,qualification=False)
+ new={'CHANGES.diff':files['CHANGES.diff'],'SOURCE_DELTA.json':files['SOURCE_DELTA.json'],'SEALED_FILES.json':encode(inventory),'DELIVERY.json':encode(delivery)}
+ print('*** Begin Patch')
+ for k,b in new.items():
+--- PF037R4/test_receiver.py
++++ PF037R5/test_receiver.py
+@@ -6,6 +6,16 @@
+ s=importlib.util.spec_from_file_location('_receiver_software037',P/'receivers/model_smoke_receipt.py');R=importlib.util.module_from_spec(s);s.loader.exec_module(R)
+ def need(v,m):
+  if not v:raise ValueError(m)
++def source_identity(config,commands,substrate,validate,pair):
++ root='/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/deltalog-production-screen-PF037R5'
++ need(commands['remote_root']==root,'actual PF R5 command root')
++ need(config['validation_output_root']=='/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-production-validation-PF037R5-MAIN-001','actual PF R5 validation output')
++ owners=[n.value.value for n in ast.walk(ast.parse(substrate))if isinstance(n,ast.Assign)and isinstance(n.value,ast.Constant)and any(isinstance(t,ast.Attribute)and ast.unparse(t)=='S.OWNER'for t in n.targets)]
++ need(owners==['dl-production-screen-PF037R5'],'actual PF R5 owner assignment, not doc/help')
++ need("startswith('run-dl-production-validation-PF037R5-')"in validate and "startswith('run-dl-production-screen-PF037R5-')"in pair,'actual PF R5 host output guards')
++ rows=[x for x in commands['steps']if x['stage']=='one matched sync screen'];need(len(rows)==1,'one actual paired command')
++ args=rows[0]['argv'];need(args[args.index('--output')+1]=='/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-production-screen-PF037R5-MAIN-001','actual PF R5 paired output')
++ return True
+ def fixture():
+  sr={'label':'source'};m=dict(root='/softwareMODEL036',output_root='/software-only/output')
+  plan=dict(model_diagnostic_source_ref=sr,model_smoke_owner_ref=dict(path=str(Path(m['output_root'])/'RESULT.json'),label='owner'),model_smoke_terminal_ref={'label':'terminal'},qualification_ref={'label':'true-owner035-required-in-real-execution'})
+@@ -21,7 +31,7 @@
+  def run_receipt(self,C,plan,m):
+   with patch.object(R,'admit_bridge',return_value=(m,{'software-only':True})):return R.consume(C,plan)
+  def test_software_receipt_never_claims_model_or_perf(self):
+-  C,p,m,o=fixture();v=self.run_receipt(C,p,m);self.assertEqual(v['schema'],'deltalog.actualMODEL036R4-model-diagnostic-smoke/v037-repair4');self.assertFalse(v['performance_ready']);self.assertFalse(v['model_numeric_qualified'])
++  C,p,m,o=fixture();v=self.run_receipt(C,p,m);self.assertEqual(v['schema'],'deltalog.actualMODEL036R5-model-diagnostic-smoke/v037-repair5');self.assertFalse(v['performance_ready']);self.assertFalse(v['model_numeric_qualified'])
+  def test_failed_or_unreleased_model_owner_rejected(self):
+   for key,value in(('primary','failed'),('all_created_containers_release_verified',False)):
+    C,p,m,o=fixture();o['owner'][key]=value
+@@ -56,5 +66,11 @@
+   receipt=min(n for n,f in calls if f=='api.consume');write=min(n for n,f in calls if f=='out.open');self.assertLess(receipt,write)
+   self.assertIn("m['model_smoke_plan']",text);self.assertIn('actual035160 plus realMODEL036',text)
+  def test_final_pins_match_new_contract_and_no_failed_recovery_alias(self):
+-  pins=json.loads((P/'receivers/DOMAIN_PINS.json').read_bytes());self.assertEqual(pins['model036_template']['sha256'],'052239ec40730ecd83a097f1fb42737a39a0aaf8fb47b075ae0b45b09f0a8c37');self.assertEqual(pins['reviewed_domain_template_ref']['sha256'],'e9243ee9acc0f066421dc7e3b11285533a8df3c8478830afe40be6e25f18dd49')
++  pins=json.loads((P/'receivers/DOMAIN_PINS.json').read_bytes());self.assertEqual(pins['model036_template']['sha256'],'82cc86940c1cd77a533415d809649f73847b552926bd1b2504730172c8377470');self.assertEqual(pins['reviewed_domain_template_ref']['sha256'],'e9243ee9acc0f066421dc7e3b11285533a8df3c8478830afe40be6e25f18dd49')
+   self.assertEqual(pins['reviewed_domain_files']['domain_consumer.py']['sha256'],'6896942c7ffa586204738b336bd7997026a3c58ea1adea126da847977ece150c');self.assertNotIn('recovery', (P/'screen_admission.py').read_text().lower())
++  config=json.loads((P/'CONFIGURATION_TEMPLATE.json').read_bytes());commands=json.loads((P/'COMMANDS.json').read_bytes());substrate=(P/'owned_substrate.py').read_text();validate=(P/'host_validate.py').read_text();pair=(P/'host_pair.py').read_text()
++  self.assertTrue(source_identity(config,commands,substrate,validate,pair))
++  for old in('PF037R2','PF037R4'):
++   bad=copy.deepcopy(config);bad['validation_output_root']=bad['validation_output_root'].replace('PF037R5',old)
++   with self.assertRaisesRegex(ValueError,'validation output'):source_identity(bad,commands,substrate,validate,pair)
++   with self.assertRaisesRegex(ValueError,'owner assignment'):source_identity(config,commands,substrate.replace("S.OWNER='dl-production-screen-PF037R5'","S.OWNER='dl-production-screen-"+old+"'"),validate,pair)

@@ -1,0 +1,72 @@
+{
+  "schema": "deltalog.new-reference-typed-commands/v035",
+  "default_enabled": false,
+  "NPU_executed": false,
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair4/SOURCE_TEMPLATE.json",
+    "bytes": 27796,
+    "sha256": "e9243ee9acc0f066421dc7e3b11285533a8df3c8478830afe40be6e25f18dd49"
+  },
+  "bind": {
+    "command": "/usr/bin/python3",
+    "args": [
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair4/run031.py",
+      "--execute",
+      "--phase",
+      "bind",
+      "--template-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair4/SOURCE_TEMPLATE.json\",\"bytes\":27796,\"sha256\":\"e9243ee9acc0f066421dc7e3b11285533a8df3c8478830afe40be6e25f18dd49\"}",
+      "--composite-source-ref",
+      "{\"bytes\":162171,\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/BOUND_SOURCE.json\",\"sha256\":\"b5f4c0798f2fab7fb3c706666c38b6eab7318fa6a55e40191dd419bb6aaacb6c\"}",
+      "--composite-cpu-owner-ref",
+      "{\"bytes\":1372,\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-composite022-cpu-new48h-MAIN-20261015-001/RESULT.json\",\"sha256\":\"9d6740da1d95f281aab6da1f459e1540a798652af695ee5ec6922e35d4be6c61\"}"
+    ]
+  },
+  "stages": [
+    "sourceaudit",
+    "cpu",
+    "numeric16",
+    "numeric160"
+  ],
+  "stage_template": {
+    "command": "/usr/bin/python3",
+    "args": [
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair4/run031.py",
+      "--execute",
+      "--phase",
+      "ACTUAL_STAGE",
+      "--template-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair4/SOURCE_TEMPLATE.json\",\"bytes\":27796,\"sha256\":\"e9243ee9acc0f066421dc7e3b11285533a8df3c8478830afe40be6e25f18dd49\"}",
+      "--host-cpu",
+      "ACTUAL_HOST_CPU",
+      "--guest-cpu",
+      "ACTUAL_GUEST_CPU",
+      "--output",
+      "NEW_ABSENT_STAGE_OUTPUT"
+    ]
+  },
+  "numeric_args": [
+    "--cpu-owner-ref",
+    "ACTUAL035_RELEASED_CPU_OWNER_REF_JSON"
+  ],
+  "numeric160_extra": [
+    "--smoke-owner-ref",
+    "ACTUAL035_RELEASED_NUMERIC16_OWNER_REF_JSON"
+  ],
+  "output_examples": [
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035repair4-cpu-new48h-MAIN-20261015-001",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035repair4-numeric16-new48h-MAIN-20261015-001",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035repair4-numeric160-new48h-MAIN-20261015-001"
+  ],
+  "fixed_cutoff": 1792135097,
+  "old031_failed16_not_admissible": true,
+  "model_qualification": false,
+  "performance_qualification": false,
+  "sameimage_CPU_controls": "Before torch: actual current source domain.static_proof checks every fixed PIN/file/probe/library and links receipt; existing actual guest frontdoor+process/tree controls retained. Local57 PASS; actual sameimage pending MAIN.",
+  "original_failed160_preserved": true,
+  "original_R3_numeric16_failed_preserved": true
+}
