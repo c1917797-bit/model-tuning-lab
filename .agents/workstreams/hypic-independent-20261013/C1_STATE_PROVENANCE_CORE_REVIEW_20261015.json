@@ -1,0 +1,68 @@
+{
+  "schema": "hypic-core-state-provenance-review/v1",
+  "reference": {
+    "root": "/cache/cch/hypic_vllm_ascend-hotproof-20261008",
+    "commit": "4429e35177979c874bf053ab29789e4773f39b22",
+    "file": "hypic_vllm_ascend/patches/gdn.py",
+    "sha256": "72d58fdf03a4317ee4493ac475cd4b059ae3ed7f9138243446737a860537623d",
+    "source_observations": [
+      {
+        "lines": [
+          1141,
+          1172
+        ],
+        "finding": "two operator passes compute zero_finals and identity-seeded transitions"
+      },
+      {
+        "lines": [
+          1211,
+          1245
+        ],
+        "finding": "live rows and cached rows advance h_batch through affine T@H+S; SSM cache receives h_batch"
+      },
+      {
+        "lines": [
+          1247,
+          1254
+        ],
+        "finding": "third operator pass produces seeded output with output_final_state=False; its terminal is not persisted"
+      },
+      {
+        "lines": [
+          732,
+          1362
+        ],
+        "finding": "no shadow/allclose/atol/rtol text in selected reference core; this is a scoped source observation, not proof absence of external test harnesses"
+      }
+    ]
+  },
+  "independent": {
+    "checkpoint": "2b1a63703d7dfc728cd39884de08ad82d0fff600",
+    "file": "independent_c1_packed_backend.py",
+    "finding": "R10/R11 math uses first pass actual incoming prefix state; cached body composes prefix terminal; second seeded output pass returns terminal that becomes private final state. It is not the same finite-precision execution sequence as reference3pass.",
+    "history": "Earlier R9 had affine packed design, but failed source-specific numerical canary; do not blindly restore it or treat later changes as proven fixes."
+  },
+  "gate_scope": {
+    "frozen_atol": 0.01,
+    "frozen_rtol": 0.003,
+    "meaning": "New implementation's same-input packed-versus-serialized full-private diagnostic, not PIC-versus-native task quality, not a historical successful-case gate demonstrated by the scoped core source.",
+    "decision": "Keep frozen experiment unchanged; failure does not reject paper or imply old reference would pass identical shadow. Need actual failing-head evidence, then falsifiable change/newcontract."
+  },
+  "actual_capture_regression": {
+    "operation": "exec-00000000000007fc",
+    "exit": 0,
+    "root": "/cache/cch/hypic-independent-20261013/c1-first-divergence-r2",
+    "result": "R13 auditor reads immutable prior actual head0 capture; selected_failed_point null expected legacy policy. No new device run/rootcause."
+  },
+  "source_review_operations": [
+    "exec-00000000000007fe",
+    "exec-00000000000007ff"
+  ],
+  "constraints": {
+    "reference_code_executed": false,
+    "reference_algorithm_copied": false,
+    "device_run": false,
+    "tolerance_changed": false
+  },
+  "publication": "Local-only pending explicit publication authority; no bypass after security rejection."
+}

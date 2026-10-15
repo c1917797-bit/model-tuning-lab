@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+COREreview07fe/07ff verified original4429e35 gdn SHA72d58f...: ref persists
+h_batch from live+cached affineT@H+S (1211-1245), seededoutput thirdpass disables
+output_final_state (1247-1254). CurrentR10/R11 uses actual-prefix firstpass and
+seeded secondpass terminal. Same formulas doNOTmean identical BF16 operation order.
+Ref selectedcore732-1362 has no shadow/allclose/atol/rtol markers; doNOTclaim
+historicalsuccess passed our added full-private sameinputstate diagnostic. Also
+doNOTrelax frozen gate or reject paper: captureactualfailinghead, then falsifiable
+repair/newcontract. R9earlieraffine design alreadyfailed, no blindrestore.
+07fc currentR13auditor backward replay immutable actualR12r2 capture PASS;
+legacyhead0 selectedpointnull expected, not newdevice/rootcause. Review report
+C1_STATE_PROVENANCE_CORE_REVIEW_20261015.json. No copied/importedoldcode.
+
 LATEST R13 runtime/audit wiring ready OFFLINE, no device start. Explicit
 c1_first_divergence_head_policy=max_state_residual, defaulthead0/defaultprobeoff.
 Actualallheadclones bounded256MiB, firsthotonly, failureselectsactualguardargmax;
