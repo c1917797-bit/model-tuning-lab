@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT full40 R7nativebatch controller exec-000000000000062d,
+originalma a6109/tpcforcedirect via available AWMCPrU connector;checkpoint4229dad3.
+062c11:56:45UTC101bindings/originalc360controller/newroot/physical0-3/portsidle
+PASS. Raw/cache/cch/hypic-independent-20261013/formal-performance-g3-nativebatch-r1.
+Protocoloriginal40/c16/32768/fixed1024/2B2A/PDCoff/eager/freshcontainerdefault
+compilecache; NOcachecopy/privateprimer/profiler. Bothenabled+disabled16 gates
+independentlypassed. Poll same062d/root;neverrestartwhilelive/unclear and no
+101boundsourceedits. Terminal full40transport/timing/hot/nativebatchshadow/
+source/physicalPID/isolation/exactrelease beforedecision. FreshG1 required
+for pairedclaim; oldnative onlyscreenreference. Fullquality/lifecycle/Skills
+unfinished;deadline2026-10-15T19:04:09UTC unchanged.
+
+
 LATEST061b terminalexit0;0628 independent103sources/16hot/4worker explicit
 nativebatchfalse/no batch+shadowmarkers/225clean/physicalNSpid/exact07b3c605...
 release PASS. R7_NATIVE_BATCH_DISABLED_R1_TERMINAL_AUDIT.json retainsrawSHA.
