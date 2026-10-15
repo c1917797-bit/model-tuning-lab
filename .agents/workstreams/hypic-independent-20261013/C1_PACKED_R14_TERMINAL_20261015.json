@@ -1,0 +1,167 @@
+{
+  "schema": "hypic-r14-bounded-terminal/v1",
+  "controller": "exec-0000000000000838",
+  "independent_audit": "exec-0000000000000857",
+  "prefix_audit": {
+    "operation": "exec-000000000000084e",
+    "verified": true,
+    "routes": 5376,
+    "recurrent_routes": 1344,
+    "chunk_routes": 4032
+  },
+  "regression": {
+    "operation": "exec-0000000000000852",
+    "tests": 476,
+    "passed": true
+  },
+  "source_checkpoint": "79ca26334e8d53355599de16d0ed6f0128552dec",
+  "post_run_audit_checkpoint": "c9e717fcd075addb48d05b6325906296eab1e709",
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-short-prefix-aligned-r1",
+  "audit": {
+    "terminal_evidence_valid": true,
+    "live_release_verified": true,
+    "enabled": true,
+    "source_bindings": 132,
+    "manifest_sha256": "384c1b20dc6e8b52af18b61bc4a5347dcb693df646fba0ec9530531b62be6b4d",
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 16,
+      "covered": [
+        "cmpl-b33800b7812707fe",
+        "cmpl-8dabc5370f8aa5c2",
+        "cmpl-815f35c9e043957d",
+        "cmpl-9e9c543d86f42066",
+        "cmpl-8dd6ea70cf872840",
+        "cmpl-9af2957df60ce940",
+        "cmpl-888bb55940b64d24",
+        "cmpl-b4fa198c157ed91c",
+        "cmpl-b5f574be8586a609",
+        "cmpl-9f7d707d1f04080a",
+        "cmpl-a667ee2926fec5ea",
+        "cmpl-b360183de34b0cc0",
+        "cmpl-867d9050b9565ad8",
+        "cmpl-bd2d586b1e5fee9a",
+        "cmpl-ac48669934bb0a93",
+        "cmpl-8c8f203f8f3b7334"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 57,
+        "1": 58,
+        "2": 59,
+        "3": 60
+      },
+      "scope": "diagnostic16 same-step all-rank/all-layer coverage only; never formal full40 acceptance"
+    },
+    "native_batch": {
+      "native_decode_batch_verified": true,
+      "workers": {
+        "0": 57,
+        "1": 58,
+        "2": 59,
+        "3": 60
+      },
+      "multirow_shadow_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      },
+      "batch_calls": 2496,
+      "native_rows": 17088,
+      "scope": "source-bound runtime numerical-control and deferred-commit receipts; no independent tensor dump, whole-model quality, transport, physical or performance claim"
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 57,
+          "host_pid": 4192402,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 58,
+          "host_pid": 4192403,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 59,
+          "host_pid": 4192404,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 60,
+          "host_pid": 4192405,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "isolation_samples": 216,
+    "shadow_groups": 384,
+    "max_scaled": 0.0015243508387356997,
+    "elapsed_median_seconds": 242.8786427150044,
+    "raw_sha256": {
+      "result.json": "6e305412c2837e628be253b6b62d28bc193d21887230ff17b211332fbd37c6a0",
+      "events.jsonl": "62953baddf93bc322ac3fa31943c750a2263ea32e6f5e535bb42bb91f25c2376",
+      "compiled-cache-unit.json": "23ab63f4e1902986db9e26f6abec2214018c8b52c741941f8a7f24a4877e6ff8",
+      "release.json": "ee9f0fe2e6c0463290444b7e0327245d434e10ac0dd89ed70e827b7e67ec00ad"
+    },
+    "scope": "bounded16 fixed64 R14 packed/source/hot/shadow/isolation/release; no formal performance or task-quality acceptance",
+    "packed": {
+      "packed_c1_verified": true,
+      "workers": {
+        "0": 57,
+        "1": 58,
+        "2": 59,
+        "3": 60
+      },
+      "requests": 16,
+      "packed_groups": 2688,
+      "shadow_requests": 960,
+      "multi_hot_shadow_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      },
+      "scope": "source-bound packed call-stage/serial-shadow/private precommit receipts; raw tensors, physical mapping, transport, release, performance and task quality separate"
+    },
+    "post_run_identity_adapter": {
+      "mapping": {
+        "cmpl-b33800b7812707fe": "cmpl-b33800b7812707fe-0-8833935e",
+        "cmpl-8dabc5370f8aa5c2": "cmpl-8dabc5370f8aa5c2-0-863d0344",
+        "cmpl-815f35c9e043957d": "cmpl-815f35c9e043957d-0-b1b5fd07",
+        "cmpl-9e9c543d86f42066": "cmpl-9e9c543d86f42066-0-89a3f29c",
+        "cmpl-8dd6ea70cf872840": "cmpl-8dd6ea70cf872840-0-9986ba23",
+        "cmpl-9af2957df60ce940": "cmpl-9af2957df60ce940-0-84d1b039",
+        "cmpl-888bb55940b64d24": "cmpl-888bb55940b64d24-0-840ef610",
+        "cmpl-b4fa198c157ed91c": "cmpl-b4fa198c157ed91c-0-b120ca78",
+        "cmpl-b5f574be8586a609": "cmpl-b5f574be8586a609-0-a8f19466",
+        "cmpl-9f7d707d1f04080a": "cmpl-9f7d707d1f04080a-0-8bb344b6",
+        "cmpl-a667ee2926fec5ea": "cmpl-a667ee2926fec5ea-0-b6d512d7",
+        "cmpl-b360183de34b0cc0": "cmpl-b360183de34b0cc0-0-bfc6aade",
+        "cmpl-867d9050b9565ad8": "cmpl-867d9050b9565ad8-0-acbd5da8",
+        "cmpl-bd2d586b1e5fee9a": "cmpl-bd2d586b1e5fee9a-0-923de69f",
+        "cmpl-ac48669934bb0a93": "cmpl-ac48669934bb0a93-0-8863e4a9",
+        "cmpl-8c8f203f8f3b7334": "cmpl-8c8f203f8f3b7334-0-af42bd14"
+      },
+      "http_count": 16,
+      "runtime_count": 16,
+      "original_failed_operation": "exec-000000000000084d",
+      "frozen_sources_and_raw_unchanged": true,
+      "source_sha256": {
+        "audit_c1_http_identity.py": "3dcf39e29d3855f9d5854f006abded482ff81c3fc0acb5494dc2cb8fa1367c64",
+        "audit_c1_packed_http_terminal.py": "919267813d36835e6ed5501cfec12e5911ee460fc13d875c6084eb6eb85c4070"
+      }
+    }
+  },
+  "conclusion": "ACCEPT_BOUNDED_INTEGRATED_NUMERICAL_CANARY_ONLY",
+  "not_claimed": [
+    "formal speedup",
+    "task quality",
+    "PDC coexistence",
+    "whole HYPIC acceptance",
+    "29 Skill functional acceptance"
+  ],
+  "next": "Freeze same-source diagnostic-free performance/PDC and lifecycle protocol; preserve all R14 source/raw. Do not reuse diagnostic timing as performance. No new device launch after2026-10-15T19:04:09Z."
+}
