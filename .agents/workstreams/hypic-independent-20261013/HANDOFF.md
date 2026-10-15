@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST056c terminalexit0;0581 independent16/16fourrank48/16 hot/source97,
+229clean isolation/explicitphysical0-3/exact8ec5df36...release PASS.
+Cache48completeNPUgroups/258files/6019122bytes, includesGDN kernels.
+COMPILED_CACHE_SEED_R1_TERMINAL_AUDIT.json retains exactSHA/scope.
+Seed latency median314.814s for16/c16/32768/64; NOT formal performance.
+Original reuse-r1 plan WITHDRAWN BEFORE RUN: directRW seed mount would mutate
+immutable raw evidence. Never execute COMPILED_CACHE_REUSE_R1_CONTRACT.json.
+Successor reuse-r2 copies audited cache into NEW rawroot/compiled-cache;
+same stable /compilation-cache paths, original seed never writable-mounted.
+All97seed bindings unchanged; only2 reviewed copy-infrastructure files added.
+Freeze/test99bindings/freshphysical0-3+ports/newroot before reuse-r2 launch.
+Deadline2026-10-15T19:04:09UTC unchanged; originalregression retained.
+
 CURRENT compiled-cache seed diagnostic exec-000000000000056c, freshma a6109
 forcedirect,checkpoint6af57031,rawroot
 /cache/cch/hypic-independent-20261013/compiled-cache-seed-r1.

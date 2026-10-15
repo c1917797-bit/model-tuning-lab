@@ -1,0 +1,118 @@
+{
+  "seed_terminal_audit_valid": true,
+  "source_bindings": 97,
+  "responses": 16,
+  "hot": {
+    "accepted_hot_coverage": true,
+    "denominator": 16,
+    "covered": [
+      "cmpl-8c2d82c9466af1a1",
+      "cmpl-91f3eb928d44bccb",
+      "cmpl-b7e6600d3d604704",
+      "cmpl-a0381ae3a5b52193",
+      "cmpl-8ab3d776a946e96a",
+      "cmpl-8ec07f93003f468c",
+      "cmpl-b6bacdb16138faea",
+      "cmpl-aed4235b65915ee3",
+      "cmpl-9aea42a89579a357",
+      "cmpl-be329de5ce827052",
+      "cmpl-8ae5202f12262f28",
+      "cmpl-b3877f02e917dba8",
+      "cmpl-93aec837103f5a4c",
+      "cmpl-86ace6e09815a670",
+      "cmpl-924e68c9f0c7961c",
+      "cmpl-a98c5e8005533589"
+    ],
+    "missing": [],
+    "worker_pids": {
+      "0": 58,
+      "1": 59,
+      "2": 60,
+      "3": 61
+    },
+    "scope": "diagnostic16 same-step all-rank/all-layer coverage only; never formal full40 acceptance"
+  },
+  "physical": {
+    "ranks": {
+      "0": {
+        "inner_pid": 58,
+        "host_pid": 3799154,
+        "physical_npu": 0
+      },
+      "1": {
+        "inner_pid": 59,
+        "host_pid": 3799155,
+        "physical_npu": 1
+      },
+      "2": {
+        "inner_pid": 60,
+        "host_pid": 3799156,
+        "physical_npu": 2
+      },
+      "3": {
+        "inner_pid": 61,
+        "host_pid": 3799157,
+        "physical_npu": 3
+      }
+    },
+    "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+  },
+  "activation": {
+    "barrier_activation_verified": true,
+    "workers": {
+      "0": 58,
+      "1": 59,
+      "2": 60,
+      "3": 61
+    },
+    "scope": "installation identity joined to supplied hot worker identities; hot execution/physical/numerical/performance audits separate"
+  },
+  "clean_samples": 229,
+  "cache": {
+    "groups": 48,
+    "files": 258,
+    "bytes": 6019122,
+    "sha256": "5bdaf8ded21044ba23959a688428d5db71578e9a373ae91e76d8bc7dc326ec30",
+    "kernel_names": [
+      "_clear_ssm_states_kernel",
+      "_compute_slot_mapping_kernel",
+      "_layer_norm_fwd_1pass_kernel_npu",
+      "chunk_local_cumsum_scalar_kernel",
+      "chunk_scaled_dot_kkt_fwd_kernel",
+      "l2norm_fwd_kernel2",
+      "l2norm_fwd_kernel2_loop",
+      "merge_16x16_to_64x64_inverse_kernel",
+      "recompute_w_u_fwd_kernel",
+      "solve_tril_16x16_kernel",
+      "split_qkv_rmsnorm_mrope_kernel"
+    ],
+    "gdn_related_names": [
+      "chunk_local_cumsum_scalar_kernel",
+      "chunk_scaled_dot_kkt_fwd_kernel",
+      "l2norm_fwd_kernel2",
+      "l2norm_fwd_kernel2_loop",
+      "recompute_w_u_fwd_kernel",
+      "solve_tril_16x16_kernel"
+    ]
+  },
+  "latency_seconds": {
+    "median": 314.8140842149878,
+    "min": 254.39631209999789,
+    "max": 337.75538290000986
+  },
+  "actual_release": true,
+  "live_processes": [],
+  "raw_sha256": {
+    "result.json": "c03497f5ea3aec7958a723448a3fb0fdd8057ba8ee5dbac416f0fcc3451665fc",
+    "events.jsonl": "c8e09657d89ae4d357b633e6306cd7bc6166425d8375566b4e31b617f7170728",
+    "compiled-cache-unit.json": "2caf18599eac4b1ca7e0c9bc0be93a805dcab4392826ac35f53cfb4e48818950",
+    "compiled-cache-inventory.json": "69eb154f32569f21abd3691c4fd74509e8f44d51ce8fe1c43aea678c0cab5028",
+    "release.json": "f00ca37288e5358d5befbeb4c54d65ed386b67acdb74e54485b264fe9e6feb67"
+  },
+  "scope": "unprofiled16 seed transport/source/hot/artifact/isolation/release only; no compiler cause, cache-hit, formal performance or quality acceptance",
+  "operations": {
+    "controller": "056c",
+    "independent_audit": "0581"
+  },
+  "checkpoint": "6af57031"
+}
