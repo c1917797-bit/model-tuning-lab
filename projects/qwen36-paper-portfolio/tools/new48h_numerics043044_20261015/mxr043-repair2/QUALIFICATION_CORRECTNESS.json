@@ -1,0 +1,45 @@
+{
+  "schema": "mxr.observerless-qualification/v1",
+  "mode": "correctness",
+  "plugin_source_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/SOURCE_MANIFEST.json",
+    "bytes": 16278,
+    "sha256": "3ccb0dcec3d67043f9736cc3266bef7b320b99d48facf791376519811d72b9f2"
+  },
+  "event_numeric_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-NEW48H_053_NPU_001/physical6/numeric/RESULT.json",
+    "bytes": 2116,
+    "sha256": "91cf2b49724681a4c4a095c5ed3d6ee8e2570f8f88c5bb046790d6edfb2c021e"
+  },
+  "physical": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "lengths": [
+    129
+  ],
+  "prefixes": null,
+  "pool_bytes": 536870912,
+  "pool_entries": 2,
+  "source_pins": {
+    "vllm_ascend.ops.gdn": "d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816",
+    "vllm_ascend.ops.triton.fla.chunk": "6f93b9face32999c93976fccaeb2d6a9d8dc85c8c41d3d26d92e1820f62d7ca5",
+    "vllm_ascend.ops.triton.fla.solve_tril": "2d8cd5d3bd365fa5894c7ee0cddc106d1d2b34dd3f3e05f4dbf15e8010d89fc0",
+    "vllm_ascend.ops.gdn_attn_builder": "42cc0284b57193112b8a8ad19704aa3401f02294f0c36333c307d748f462fe16"
+  },
+  "prerequisite_source_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-gdn-shadow-bridge-v1-050/prerequisite.py",
+    "bytes": 12719,
+    "sha256": "d25609d1c121015bc8b9eeda1295ad484a658fd09010a73d01a1890b001ffa20"
+  },
+  "prerequisite_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_MXR039_PREREQUISITE_043_001.json",
+    "bytes": 136215,
+    "sha256": "f620ae4bc10577465bff7fbb3af67ce424f2cca7c09805aa13f5f55dfce525f4"
+  },
+  "full_numeric_ref": null,
+  "template_not_runtime_receipt": false,
+  "scope": "Permission to attempt correctness only; no fullGDN/performance PASS"
+}

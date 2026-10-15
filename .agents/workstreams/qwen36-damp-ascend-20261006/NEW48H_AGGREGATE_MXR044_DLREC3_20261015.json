@@ -1,0 +1,80 @@
+{
+  "schema": "ascend.MAIN-aggregate-phase-admission/v1",
+  "observed_utc": "2026-10-15T21:05:06Z",
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+    "bytes": 3591,
+    "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+  },
+  "physical_allowed": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_physical": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "no_foreign_stop": true,
+  "observed_affinity": [
+    0,
+    1,
+    2,
+    3,
+    144,
+    145,
+    166
+  ],
+  "jobs": [
+    {
+      "id": "MXR044",
+      "operation": "exec-0000000000000934",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/SOURCE_MANIFEST.json",
+        "bytes": 5170,
+        "sha256": "d100bb49caa60744858c4d9c03cfc1eb28ad00e2742d77357395f3a7de941df0"
+      },
+      "scope": "physical4 numeric then released Devices[] independent; no timing",
+      "host_cpu": 0,
+      "guest_cpu": 1,
+      "guest_GiB": 8,
+      "host_GiB": 0.5,
+      "disk_GiB": 4
+    },
+    {
+      "id": "DL_RECOVERY3",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/SOURCE_MANIFEST.json",
+        "bytes": 4837587,
+        "sha256": "0aeecfea43e5f02bea6cda385e146474db45613e4790e738e0dbdef2dc313786"
+      },
+      "scope": "planned Devices[] saved-sidecar diagnostic only",
+      "host_cpu": 166,
+      "guest_cpu": 145,
+      "guest_GiB": 8,
+      "host_GiB": 0.5,
+      "disk_initial_floor_GiB": 1
+    }
+  ],
+  "summed_ordinary_RAM_GiB": 17,
+  "shared_RAM_reserve_GiB": 8,
+  "minimum_MemAvailable_GiB": 25,
+  "reserve_cpus": [
+    2,
+    3
+  ],
+  "sum_job_cpu": 4,
+  "shared_cpu_reserve": 2,
+  "required_cpu_capacity": 6,
+  "observed_capacity": 7,
+  "unassigned_cpu": 144,
+  "cache_disk_required_GiB": 5,
+  "observed_MemAvailable_kB": 80069512,
+  "observed_cache_available_bytes": 16529178624,
+  "timing_overlap_allowed": false,
+  "actual_whole_window_utilization": "unmeasured",
+  "source_audit_not_device_qualification": true
+}

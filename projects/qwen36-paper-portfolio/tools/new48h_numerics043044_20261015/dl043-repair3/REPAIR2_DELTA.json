@@ -1,0 +1,21 @@
+{
+  "NPU": false,
+  "new_audit_sha256": "7acf91b7901f8829afdae6fb48791607683ac969f222369f23bd93f5d4742d62",
+  "numerical_delta": "expected output overflow still requires original finite state error<=7.92e-7",
+  "old_audit_sha256": "d85fb9110fc1eeb134483879b24fdc110958a6bc8bbfda4871b0c28fe862b7db",
+  "unchanged_source_SHA256": {
+    "consume.py": "4c2c290181cee3d8c41dcac11fcc1d5dfd5d939c90d171fcf028950494e8a2c4",
+    "consume_increment.py": "6350f0ee18f29fcd3e2848f8af18ce005e5e41191d44a98a32123a30727aaaf9",
+    "direct_round.py": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d",
+    "flush_increment.py": "1ab2346e32170e679e708056625cabe47df3a3859c7e89a4239192e23d49ec31",
+    "npu_controls.py": "de172eda5336660c89f673113e149effe2db9e1896d40697707ae9c767d71375",
+    "oracle.py": "cd395a05dbfcb21f1104d617afb1fab6f80374016585e9096ca24d85c2cae97a",
+    "per_request_increment.py": "fe139727a01704bedd844c42d4162de986d6b6f9538a05709db1c06e3f95db02",
+    "precast.py": "4f1ca4d1243c90c663db2702010ecef8f76805a4259d107fb1be44648f35695d",
+    "producer.py": "67c1dbe15d4006e1a356346a2686f7af2354459c55ffa9ffa602bc82c772c64c",
+    "qwen36_deltalog_fresh/native_fixture.py": "91214d022bcee34431fc881e89f4289ece135010a2358e9980b894f77a18c31b",
+    "qwen36_deltalog_fresh/primitives.py": "bc88725f4443ef97886d71dfeb6105a1fc8f5bf762b164fafead81b7b7bce05b",
+    "qwen36_deltalog_fresh/provider.py": "55851946ff81b2d8a12c303444d17df3608464af0782e38d6ae7ce3fb9985289",
+    "sidecar_capture.py": "86770d0b2aacc4e799000de7f23fd31379bc72a4f68cdae78ce4fc6a22550e14"
+  }
+}

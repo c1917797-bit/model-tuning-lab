@@ -1,0 +1,192 @@
+{
+  "schema": "mxr.observerless-source/v1",
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044",
+  "default_enabled": false,
+  "prepared_only": true,
+  "window": {
+    "start": 1791962297,
+    "cutoff": 1792135097
+  },
+  "files": {
+    "admission.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/admission.py",
+      "bytes": 10073,
+      "sha256": "bba58583a731957935db1332fae368a724463648831ef1f9b29f66b0373fe36a"
+    },
+    "block_refine.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/block_refine.py",
+      "bytes": 6610,
+      "sha256": "5ed736e76e1550908bb62b633dd911eca60617381ca3e329b1c25e751fb4860d"
+    },
+    "common_precision.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/common_precision.py",
+      "bytes": 3862,
+      "sha256": "f2f090ebc9b6745cca97562ab07dff2df4b591577d0ecd6004f156e1ebd85326"
+    },
+    "eager_receiver.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/eager_receiver.py",
+      "bytes": 2840,
+      "sha256": "f2dbd043fb4559bdcb707b81d92cabb04ee5a19036323acb48fe61dd2c4a5d59"
+    },
+    "event_backend.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/event_backend.py",
+      "bytes": 1859,
+      "sha256": "e9d4cc6f68fc86b05e9089691df5a3ed5287ee0d72a0a236e9a1611ef07e4c3d"
+    },
+    "legacy_refine.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/legacy_refine.py",
+      "bytes": 5574,
+      "sha256": "d8e62cd25132d96417dc402c6f053db88c40cfa79b67de3f3316bf9dfdea2306"
+    },
+    "lifetime.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/lifetime.py",
+      "bytes": 5595,
+      "sha256": "788051954cf7883974aa87df625e73365aa50a7ce66827d63e082cbe72f672a9"
+    },
+    "metadata_association.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/metadata_association.py",
+      "bytes": 2136,
+      "sha256": "e088caf87cffd37ba156fa98fcc89d55190834bdfebaaaa2c0a745cdc1035ee9"
+    },
+    "metadata_certificate.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/metadata_certificate.py",
+      "bytes": 2254,
+      "sha256": "23f5acd0f5ecadcaa5615995d769187847578d630699f3cd8ce5252ae2c68a54"
+    },
+    "observerless_install.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/observerless_install.py",
+      "bytes": 10185,
+      "sha256": "ce5c9d81942c5f86c3afa9f07b28415240e068b415703e0010d7cd0dd5bad4d2"
+    },
+    "plan_cli.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/plan_cli.py",
+      "bytes": 657,
+      "sha256": "7c4131516cdf9177324c1714b8b1098dba3765f8092d801dc42ce45f1b173eb7"
+    },
+    "production_binding.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/production_binding.py",
+      "bytes": 3735,
+      "sha256": "0fe8b6df3cfd1102314783b72db23bae7e56839b871878c1600190115769d849"
+    },
+    "qualification_probe.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/qualification_probe.py",
+      "bytes": 7685,
+      "sha256": "93f1aa31633c5e7e3888695698bb12958cd691c018f0924a2502ec40ebe0ca8e"
+    },
+    "test_block.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/test_block.py",
+      "bytes": 3462,
+      "sha256": "fd198b1f06c04b9e00e3a2ae2109066d9cc2cc54d5db7876c296379e031e2663"
+    },
+    "test_eager_receiver.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/test_eager_receiver.py",
+      "bytes": 1003,
+      "sha256": "619e32786936b3f9698b4ac828c4b2bb470f74f27a6578c3802cb8a72fd4aeb1"
+    },
+    "test_metadata_association.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/test_metadata_association.py",
+      "bytes": 2528,
+      "sha256": "6f52d58a4cb62d9a0209dfae23aa9d4f06a67bfa534a9d99ed223c38232c68f6"
+    },
+    "test_production_binding.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/test_production_binding.py",
+      "bytes": 2529,
+      "sha256": "af0f9eb78805d090e141cfbbdc885f4a6491b411edc886b6eda1c9f8600e10d3"
+    },
+    "test_wiring.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/test_wiring.py",
+      "bytes": 4031,
+      "sha256": "2d9b5b15a4ecb63f9ea930ba910b0cd328aa5c1ffc24a5d2a469d5a17ba5187a"
+    },
+    "worker_receipt.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/worker_receipt.py",
+      "bytes": 1262,
+      "sha256": "6991dba6d3a7e3ec8081c10db5c6192c6a1293dd4ffd3786423f883aadd43f03"
+    },
+    "mxr_block_refinement044/__init__.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/mxr_block_refinement044/__init__.py",
+      "bytes": 582,
+      "sha256": "d6f29a578396cf8bd6e44d2f36c620ca63847b22f0cb7e4e49a27d25e9dd3e4d"
+    },
+    "mxr_block_refinement044-0.0.1.dist-info/entry_points.txt": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/mxr_block_refinement044-0.0.1.dist-info/entry_points.txt",
+      "bytes": 82,
+      "sha256": "f0e3986387ca3d23e4338b5e451d514adee2567df93598c8f44c51fe3a2b4491"
+    },
+    "mxr_block_refinement044-0.0.1.dist-info/METADATA": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/mxr_block_refinement044-0.0.1.dist-info/METADATA",
+      "bytes": 67,
+      "sha256": "d4e9db43e0757a75c3e73ed862e6133f9626d0e87762a6947bd9936cf8d1c5a8"
+    },
+    "mxr_common_precision044/__init__.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/mxr_common_precision044/__init__.py",
+      "bytes": 80,
+      "sha256": "bd65b7e1f0f73544a3b68c764467d2b0e05e65ad3bbf1fc2521cca45ce2541ba"
+    },
+    "mxr_common_precision044-0.0.1.dist-info/entry_points.txt": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/mxr_common_precision044-0.0.1.dist-info/entry_points.txt",
+      "bytes": 82,
+      "sha256": "272546e93ee4a39e8c7b5fed39a4b5821640965ed0c2d455f4195584c17241bf"
+    },
+    "mxr_common_precision044-0.0.1.dist-info/METADATA": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/mxr_common_precision044-0.0.1.dist-info/METADATA",
+      "bytes": 67,
+      "sha256": "4ee75447484bfb30776d1f7d0d14ea0102e16f58bcf781fbcb38c3a8a0753bde"
+    }
+  },
+  "actual042_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/SOURCE_MANIFEST.json",
+    "bytes": 15593,
+    "sha256": "cf39ca19254a30a82844dd88754da596b33339e33eb7adb60e0b78ae443ecbcb"
+  },
+  "actual042_owner": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-working-domain042-NPU_001/RESULT.json",
+    "bytes": 413354,
+    "sha256": "6f8d32119bd2c084f0791d33ad49857bec11e15de27e1dce511f8ccd951d0d7f"
+  },
+  "original_metrics": {
+    "bytes": 10097,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/consume_capture.py",
+    "sha256": "7c31e87b409ef095e5789a2bc1b71a987a69dc237789c125ad749a69fecec6c3"
+  },
+  "budgets": {
+    "child_seconds": 900,
+    "consumer_seconds": 600,
+    "cleanup_seconds": 90,
+    "whole_seconds": 2400,
+    "guest_GiB": 8,
+    "host_GiB": 0.5,
+    "reserve_GiB": 8,
+    "evidence_cap_MiB": 1280,
+    "disk_GiB": 4,
+    "pool_bytes": 536870912,
+    "pool_entries": 2
+  },
+  "NPU_ready": false,
+  "model_ready": false,
+  "performance_ready": false,
+  "task_ready": false,
+  "owned_host_implemented": false,
+  "actual_sameimage_CPU": null,
+  "actual_NPU": null,
+  "actual_qualification": null,
+  "remaining": [
+    "existing Owned child/body and CPU receiver ABI thin adapter absent",
+    "sameimage CPU preflight absent",
+    "longest/varlen operator numerical proof absent",
+    "actual long/mixed fullGDN and metadata lifecycle absent",
+    "formal source-specific admission still old005 (reject new044)",
+    "original donor Docker/cache40.5GiB initial reserve NOT solved"
+  ],
+  "mechanism": {
+    "official037_launches_per_call": 1,
+    "correction": "X1=X0+X0*(I-(I+A32)*X0)",
+    "max_tokens": 40960,
+    "max_sequences": 16,
+    "block_chunks": 64,
+    "HF32": "OFF both dense and candidate",
+    "graph": false,
+    "PCP": 1
+  },
+  "scope": "source-only operator/runtime adaptation; tiled real A is NOT long fullmodel evidence"
+}

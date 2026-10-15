@@ -49,3 +49,6 @@ graph tests, and the final whole-model performance and task gates.
 
 Evidence and limitations: [actual binding and numerical-baseline case](
 ../../../../docs/knowledge-base/ascend-infra/cases/runtime-binding-and-single-factor-evidence-20261015.md).
+For subnormal failures, inspect actual operand/output bits and absolute error as well as relative error. Per-product FP32 rounding can impose a relative floor even when conversion, state and guards are correct. Distinguish this from flush-to-zero using immutable raw and an independent rounding model. An arithmetic-order repair is a new candidate and must retain overflow/cancellation tests; a CPU prediction cannot qualify its NPU implementation.
+
+Persist each independent predicate and its raw identity before an aggregate assertion can terminate the consumer. A successful diagnostic owner proves complete inspection, not numerical qualification; failed boundary rows still block admission. Recover existing complete raw rather than repeating NPU execution merely to recover an omitted verdict.

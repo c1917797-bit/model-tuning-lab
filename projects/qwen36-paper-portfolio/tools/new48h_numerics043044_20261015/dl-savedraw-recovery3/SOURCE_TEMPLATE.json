@@ -1,0 +1,115 @@
+{
+  "NPU": false,
+  "actual_CPU": false,
+  "files": {
+    "HANDOFF.md": {
+      "bytes": 2218,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/HANDOFF.md",
+      "sha256": "431ddb66473c9877e0d598bc914a10f718d8984d898d7ebf8e8b5fd5da307e28"
+    },
+    "bind_recovery.py": {
+      "bytes": 8206,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/bind_recovery.py",
+      "sha256": "54d84344c1e6961a7df0b16ce776c11b28fb87db35f574cc6e931125b639b694"
+    },
+    "bridge_io.py": {
+      "bytes": 1356,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/bridge_io.py",
+      "sha256": "45b287bf7b4cf0ad50d44329455c5db8d2e9f9862501fe0ccab070ce6c1a2d05"
+    },
+    "diagnose.py": {
+      "bytes": 5128,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/diagnose.py",
+      "sha256": "e2a749354609699666bd7cb784df10a17431c4493a7d5678f9b973649dc32f6b"
+    },
+    "entry.py": {
+      "bytes": 5148,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/entry.py",
+      "sha256": "662a0faeaa29626351ea44e7955ee5a93924ec4ead2244f1de93c3e4862638a2"
+    },
+    "host.py": {
+      "bytes": 22156,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/host.py",
+      "sha256": "d13717830c50e5182c80a307d946ffb3f94c69a3564637c65a59f16c6ed3cecc"
+    },
+    "provenance.py": {
+      "bytes": 2552,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/provenance.py",
+      "sha256": "eace176aaf1166cf89225d26121a8e3f331390bdf078523523ea774b93b53657"
+    },
+    "raw_closure043.py": {
+      "bytes": 1372,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/raw_closure043.py",
+      "sha256": "276cdbc1e6f15f49390fec9890958cfc6e0d3930c7e26d29425387d3d052632a"
+    },
+    "run_recovery.py": {
+      "bytes": 1831,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/run_recovery.py",
+      "sha256": "4e06ec8980a6abbd55ef60712d2b9553db584e50e28be5b38ca88a4346a98ab3"
+    },
+    "scope_adapter.py": {
+      "bytes": 11522,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/scope_adapter.py",
+      "sha256": "432f5cc1613ef5faf43aca11e68c17c3957919d45978cdff04003b82598a5157"
+    },
+    "seal.py": {
+      "bytes": 1812,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/seal.py",
+      "sha256": "2832f76df8acb5733288e16764428c195eff69abe55f3e7b60ddd269e44c9516"
+    },
+    "terminal_fence.py": {
+      "bytes": 7340,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/terminal_fence.py",
+      "sha256": "270dfd8a14e27f779ff447a15b260c0b76a614d681659bab0d8eb939a60e443b"
+    },
+    "test_cold_cli.py": {
+      "bytes": 1274,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/test_cold_cli.py",
+      "sha256": "bcc5327c41e6760bc9427815f08fe0cf1599fcd8f02c3355a616286bd2423a9d"
+    },
+    "test_empty_top_exit.py": {
+      "bytes": 3089,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/test_empty_top_exit.py",
+      "sha256": "bc3c3dd398b69222a99090acc1735a7d0614f51f61d920c198cb0b221cf2344c"
+    },
+    "test_identity_schema.py": {
+      "bytes": 2935,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/test_identity_schema.py",
+      "sha256": "5396644e240cf06f90d6c09c355a6635da83b2004bbbe2cdcf1f8d5b60b20492"
+    },
+    "test_provenance.py": {
+      "bytes": 2387,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/test_provenance.py",
+      "sha256": "b0f5f0b664199dda91fec3156f4937e33c73e93349f2aa8f30df55df8af529b5"
+    },
+    "test_raw_metadata.py": {
+      "bytes": 1285,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/test_raw_metadata.py",
+      "sha256": "c29d404e87324b7a7937436198334361fa6a0b29fce4d437038f0c0c092928ac"
+    },
+    "test_sidecar_entry.py": {
+      "bytes": 2726,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/test_sidecar_entry.py",
+      "sha256": "62f16dee4c210148844c72f91b4bac4e7b5fa0bd802df845c21f69f96578408d"
+    },
+    "test_streamed.py": {
+      "bytes": 1850,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/test_streamed.py",
+      "sha256": "ec81254c720c6ae84124d114672b200ddce7bc5242ecb26f8dac7aeef1439b6a"
+    },
+    "test_terminal_fence.py": {
+      "bytes": 4649,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/test_terminal_fence.py",
+      "sha256": "435e5a7af8f08319ae4f9e8285e48e6419bf267c40ed108104a66f06784e5506"
+    },
+    "top_child_diagnostic.py": {
+      "bytes": 771,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/top_child_diagnostic.py",
+      "sha256": "103f062fcd02316e0aba85a33778a0595d43b092b93d2c9551173766bae5188f"
+    }
+  },
+  "original_host_FAILURE_unchanged": true,
+  "prepared_only": true,
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3",
+  "schema": "deltalog.saved043R3-recovery-preparation/v1"
+}

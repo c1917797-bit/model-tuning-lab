@@ -1,0 +1,103 @@
+{
+  "schema": "mxr043.source-only-model-attempt-commands/v1",
+  "READY": false,
+  "actual042_owner": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-working-domain042-NPU_001/RESULT.json",
+    "bytes": 413354,
+    "sha256": "6f8d32119bd2c084f0791d33ad49857bec11e15de27e1dce511f8ccd951d0d7f"
+  },
+  "actual_bound_source": null,
+  "actual_model": null,
+  "template": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/SOURCE_TEMPLATE.json",
+    "bytes": 66713,
+    "sha256": "aafcd6cd792363a4580923f50855b110259d530ce757620193e6a793f57b17d5"
+  },
+  "bind_argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/build_source.py",
+    "--execute",
+    "--template-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/SOURCE_TEMPLATE.json\",\"bytes\":66713,\"sha256\":\"aafcd6cd792363a4580923f50855b110259d530ce757620193e6a793f57b17d5\"}",
+    "--actual042-owner-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-working-domain042-NPU_001/RESULT.json\",\"bytes\":413354,\"sha256\":\"6f8d32119bd2c084f0791d33ad49857bec11e15de27e1dce511f8ccd951d0d7f\"}"
+  ],
+  "sourceaudit_argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/host_ticket.py",
+    "--source-audit",
+    "--source-sha256",
+    "ACTUAL_BOUND_SOURCE_SHA256",
+    "--prerequisite-ref",
+    "{\"bytes\":136215,\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_MXR039_PREREQUISITE_043_001.json\",\"sha256\":\"f620ae4bc10577465bff7fbb3af67ce424f2cca7c09805aa13f5f55dfce525f4\"}"
+  ],
+  "model_CPU_then_TP4_then_CPU_argv": [
+    "/usr/bin/env",
+    "MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1",
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/host_ticket.py",
+    "--execute",
+    "--source-sha256",
+    "ACTUAL_BOUND_SOURCE_SHA256",
+    "--prerequisite-ref",
+    "{\"bytes\":136215,\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_MXR039_PREREQUISITE_043_001.json\",\"sha256\":\"f620ae4bc10577465bff7fbb3af67ce424f2cca7c09805aa13f5f55dfce525f4\"}"
+  ],
+  "output": "/opt/host/vnf/austinov/run-mxr-working-domain-model043-repair2-main-NEW48H_001",
+  "budget": {
+    "CPU_initial_GiB": 16.5,
+    "model_initial_GiB": 56.5,
+    "live_GiB": 9,
+    "phase_seconds": 2700,
+    "cleanup_seconds": 270,
+    "perworker_raw_MiB": 768,
+    "total_output_GiB": 4,
+    "model_guest_GiB": 48,
+    "host_GiB": 0.5,
+    "reserve_GiB": 8
+  },
+  "cutoff": 1792135097,
+  "common_precision": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/common_precision.py",
+      "bytes": 534,
+      "sha256": "8e05234e84a5cb8d68f77e194858ac9044a6252bcb18ee0d8e36baeee12f262e"
+    },
+    "both_dense_and_candidate_required_for_future_pair": true,
+    "actual_dense_arm_executed": false
+  },
+  "note": "Original socket scanner unchanged. Only TMPDIR restored to original owned alias/adakv-results; other caches nested/readonlyroot/logs unchanged. Mandatory sameimage Linux AF_UNIX scan->consume with nested rejection before canary/model. Windows37PASS/1Linuxskip is not hardware qualification. Preserve043R1FAILED; MAIN only.",
+  "disk_gate": {
+    "helper": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/external_output_policy.py",
+      "bytes": 7175,
+      "sha256": "f85f745cb9362d69e70cfd35a9c894d97fc7069297d3694c8b8c57107126191f"
+    },
+    "explicit_env": "MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1",
+    "output_initial_GiB": 40.5,
+    "output_workspace_GiB": 32,
+    "output_live_reserve_GiB": 8.5,
+    "Docker_reserve_GiB": 8.5,
+    "DockerRootDir": "/cache/docker",
+    "ReadOnlyRootfs": true,
+    "LogConfig": {
+      "Type": "json-file",
+      "Config": {
+        "max-size": "16m",
+        "max-file": "2"
+      }
+    },
+    "added_tmpfs": false,
+    "all_RW_binds": "original exact owned leaf aliases only",
+    "actual_sameimage_CPU": null,
+    "actual_CANN_canary": null,
+    "resource_admitted": false,
+    "TMPDIR": "/adakv-results",
+    "actual_Linux_AF_UNIX_controls_required": true
+  }
+}

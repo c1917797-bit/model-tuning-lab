@@ -1,0 +1,51 @@
+{
+  "commands": {
+    "bind": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/run_recovery.py",
+      "--execute",
+      "--template-ref",
+      "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/SOURCE_TEMPLATE.json\", \"bytes\": 6177, \"sha256\": \"84602023dd5b7b589912e1618c5c0eeb6316edd35e4ae208b0c250b1469428e5\"}",
+      "--phase",
+      "bind"
+    ],
+    "cpu": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/run_recovery.py",
+      "--execute",
+      "--template-ref",
+      "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/SOURCE_TEMPLATE.json\", \"bytes\": 6177, \"sha256\": \"84602023dd5b7b589912e1618c5c0eeb6316edd35e4ae208b0c250b1469428e5\"}",
+      "--phase",
+      "cpu",
+      "--host-cpu",
+      "MAIN_FRESH_HOST_CPU",
+      "--guest-cpu",
+      "MAIN_FRESH_GUEST_CPU"
+    ],
+    "sourceaudit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/run_recovery.py",
+      "--execute",
+      "--template-ref",
+      "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/SOURCE_TEMPLATE.json\", \"bytes\": 6177, \"sha256\": \"84602023dd5b7b589912e1618c5c0eeb6316edd35e4ae208b0c250b1469428e5\"}",
+      "--phase",
+      "sourceaudit",
+      "--host-cpu",
+      "MAIN_FRESH_HOST_CPU",
+      "--guest-cpu",
+      "MAIN_FRESH_GUEST_CPU"
+    ]
+  },
+  "parameter_note": "CPU IDs from MAIN fresh resources; no NPU commands",
+  "template": {
+    "bytes": 6177,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog043r3-sidecar-cpu-recovery-new48h-v1-001-repair3/SOURCE_TEMPLATE.json",
+    "sha256": "84602023dd5b7b589912e1618c5c0eeb6316edd35e4ae208b0c250b1469428e5"
+  }
+}

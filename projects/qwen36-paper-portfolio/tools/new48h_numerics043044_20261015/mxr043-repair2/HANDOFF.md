@@ -1,0 +1,11 @@
+# MXR043repair2 — original owned TMPDIR socket contract
+SOURCE ONLY; defaultOFF; no actual same-image CPU/CANN/model run for R2.
+Original043R1 operation0913 FAILED remains unchanged. Its realCPU19+4+8/EROFS30 and CANNcanary/parser passed; model startup failed only output socket-scope scan. MAIN read stopped-retained run and found3 canonicalUUID4 sockets at candidate/.runtime/tmp/bfbdd88a-3485-40bd-8170-567eb5e60394,205456c7-c5ba-4860-8448-3b868ab737e7,a80ce78e-e89f-4551-aa75-8a79ec919d5a (eachsize0). Allcreatedcontainers released, secondary[]. These are predecessor observations, NOT R2 result.
+
+Actual011 model_contract.output_scan allows only direct packet/cpu-preflight and packet/candidate socket parents. Original output_budget16355/44e5ccfdad173e6b9eebc025260e489893d672c316c6aac3f8bf68a5e03c16ad additionally requires parent.parent==packetroot, canonicalUUID4, stableinode/stat/heldparent/twofences/source-qualified IPC and exactbytes charging. Scanner unchanged.
+
+ONLY helper computation change: TMPDIR=/adakv-results, original exact ownedRW alias. All other HOME/XDG/Torch/Triton/HF/vLLM cache variables remain .runtime/... . No container/tmp/root RW, no extra bind/tmpfs, no socket-tree broadening. Originalreadonlyroot/loglimits/source/CPU/RAM/disk/FD/device/cleanup/time/math guard remain; stageoutput32+8.5GiB and Docker8.5GiB unchanged.
+
+ActualLinux IPC regression is mandatory in same-image Devices[] CPU software before canary/weights. ipc_controls.run('/adakv-results') creates realAF_UNIX UUID4 under a fresh owned testtree stage, originalscan->originalconsume; nested .runtime/tmp and invalidbasename must retain originalrejection; allcreatedsockets closed/unlinked by exactpaths. Never opens/connects in scanner. Proof saved IPC_CONTROLS.json and embedded actual_IPC_controls, hostrequires allfourtrue. Windows local38tests=37PASS/1explicitLinuxskip, no Linuxqualification claimed. Default-I-B hostremainsOFF.
+
+API/helper7175/f85f745cb9362d69e70cfd35a9c894d97fc7069297d3694c8b8c57107126191f install(S,Owned,base,root,safety_ref) unchanged. Installs AFTER cap48+stage_resources, BEFORE make. Original043R1 template65939/9a8832fc78ee7e08388b9ef322dda382cdedf51eb68c8a594a87b23ba81284af preserved. Newownsource/container/outputR2, fixedcutoff1792135097. OnlyMAIN deploy/bind/CPU/canary/TP4dispatch. No performance/model/task claim.

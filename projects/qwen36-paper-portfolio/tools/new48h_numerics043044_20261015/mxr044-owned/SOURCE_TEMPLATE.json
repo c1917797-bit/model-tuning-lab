@@ -1,0 +1,113 @@
+{
+  "component044_source": {
+    "bytes": 9183,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/SOURCE_MANIFEST.json",
+    "sha256": "f87ee946b055d511280eced9882fd8dd9127bf8f683b7b2993b5c51331a3dd0f"
+  },
+  "component_budgets": {
+    "child_seconds": 900,
+    "cleanup_seconds": 90,
+    "consumer_seconds": 600,
+    "disk_GiB": 4,
+    "evidence_cap_MiB": 1280,
+    "guest_GiB": 8,
+    "host_GiB": 0.5,
+    "pool_bytes": 536870912,
+    "pool_entries": 2,
+    "reserve_GiB": 8,
+    "whole_seconds": 2400
+  },
+  "default_enabled": false,
+  "files": {
+    "HANDOFF.md": {
+      "bytes": 4204,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/HANDOFF.md",
+      "sha256": "216ae475ba885071ecb88cd03580bca0a1e6476db2e8e16fa7f9e26f1345b50d"
+    },
+    "OWNER_REUSE.diff": {
+      "bytes": 11324,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/OWNER_REUSE.diff",
+      "sha256": "4c9236be0f87fd2f90fbdc06696e3dea3cb2c26e5e7f9b059274fca21d97132a"
+    },
+    "bind.py": {
+      "bytes": 1635,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/bind.py",
+      "sha256": "9f7b6be0443f39884833abed3d5747434b48594491460fb93281eac7176c11de"
+    },
+    "common.py": {
+      "bytes": 1308,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/common.py",
+      "sha256": "cf2dc4172e10d3c3293b2b010751515b6454b54c3789c82de0d496d2163dd5c7"
+    },
+    "consume.py": {
+      "bytes": 2204,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/consume.py",
+      "sha256": "9cb3dea96d1d97e9974fd83b62644dadafe769f86e5fcfef2a36d29f0d9efa99"
+    },
+    "cpu_preflight.py": {
+      "bytes": 2083,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/cpu_preflight.py",
+      "sha256": "cdebb28e2e44022943ca8ba7aa7516c92e0c4dde83e9258aba9723ea6987b3b0"
+    },
+    "environment.py": {
+      "bytes": 327,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/environment.py",
+      "sha256": "ba5b39a78b0579c913bfd271dc4ce05d409f2792ded59840a35c10878df1d661"
+    },
+    "handshake_poll.py": {
+      "bytes": 720,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/handshake_poll.py",
+      "sha256": "20a4d18d50f55ecb10e02527576b76b89e01c0ab99d0f778e9d37c7deeccbb5a"
+    },
+    "mainhost.py": {
+      "bytes": 7697,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/mainhost.py",
+      "sha256": "1f56f5cd293cc6c280160beb0fcaa87ea96a17b0dfce6590d409e2d0a8503bf7"
+    },
+    "prepare_owner.py": {
+      "bytes": 2146,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/prepare_owner.py",
+      "sha256": "f86e8a0255d2947bacb6f92432deb324d853eae71f80a64949fe73dceddf4d5b"
+    },
+    "prepare_transport.py": {
+      "bytes": 3659,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/prepare_transport.py",
+      "sha256": "e1d857191cc6f91f0827e203e1fd4c765345e76115871ea798f9f6fa7c663f75"
+    },
+    "probe_contract.py": {
+      "bytes": 769,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/probe_contract.py",
+      "sha256": "cf35bff3c642aa0239a961113e24af369f6187f678e6e57c73a3fb3ddbc3b6be"
+    },
+    "replay.py": {
+      "bytes": 4610,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/replay.py",
+      "sha256": "95cd479a48cc2c5304e174af8613bd0aae4423ec64a87be646e91a7f71875909"
+    },
+    "software_controls.py": {
+      "bytes": 2235,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/software_controls.py",
+      "sha256": "ec546645dbda0ceec7d4ab2063857d989c61ca91535a52f9234e358e4d8681d2"
+    },
+    "test_interface.py": {
+      "bytes": 6702,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/test_interface.py",
+      "sha256": "f5771de209ffc0815448b3938d6d7b7c65b7328e8a20c5dcf49d15a7d607d857"
+    }
+  },
+  "model_ready": false,
+  "owned042_source": {
+    "bytes": 15593,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/SOURCE_MANIFEST.json",
+    "sha256": "cf39ca19254a30a82844dd88754da596b33339e33eb7adb60e0b78ae443ecbcb"
+  },
+  "performance_ready": false,
+  "prepared_only": true,
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044",
+  "schema": "mxr.block-refinement-owned-source/v044",
+  "scope": "ninecase operator numeric only; original042 Controller/Joint/DEVICE-SMI-ARM/cleanup reused",
+  "window": {
+    "cutoff": 1792135097,
+    "start": 1791962297
+  }
+}
