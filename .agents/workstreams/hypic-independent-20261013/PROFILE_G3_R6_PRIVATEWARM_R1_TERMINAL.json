@@ -1,0 +1,126 @@
+{
+  "terminal_transport_source_isolation": true,
+  "source_bindings": 96,
+  "isolation_samples": 275,
+  "phases": {
+    "private_warmup": {
+      "hot": {
+        "accepted_hot_coverage": true,
+        "denominator": 16,
+        "covered": [
+          "cmpl-80d6d3a94f3f9b07",
+          "cmpl-8dadf095246d7a85",
+          "cmpl-b2bc104b03baa7aa",
+          "cmpl-b3ab008befcfd360",
+          "cmpl-8a7f47de91200fee",
+          "cmpl-8d4c19ca6cb38dae",
+          "cmpl-94728820c3e8be7c",
+          "cmpl-adee805f843efca6",
+          "cmpl-a188b05518e79b8e",
+          "cmpl-a586efba5e227ccd",
+          "cmpl-90c9389adcab1c57",
+          "cmpl-b78cbe92a1fb7083",
+          "cmpl-bce4e22157f28c53",
+          "cmpl-ba3e1795350fcba5",
+          "cmpl-ad15905011298297",
+          "cmpl-8339339ea35b877a"
+        ],
+        "missing": [],
+        "worker_pids": {
+          "0": 59,
+          "1": 60,
+          "2": 61,
+          "3": 62
+        },
+        "scope": "diagnostic16 same-step all-rank/all-layer coverage only; never formal full40 acceptance"
+      },
+      "elapsed_median_s": 305.72283660501125,
+      "elapsed_min_s": 246.31756210999447,
+      "elapsed_max_s": 328.5442190199974
+    },
+    "profiled": {
+      "hot": {
+        "accepted_hot_coverage": true,
+        "denominator": 16,
+        "covered": [
+          "cmpl-91f993d1d077f340",
+          "cmpl-a8ec8a5319bce0d1",
+          "cmpl-ab10e17e6e4dff1e",
+          "cmpl-a2d236d938734438",
+          "cmpl-870c41068706a7df",
+          "cmpl-baa1cd56ae5a6297",
+          "cmpl-91618fe8140b3d7a",
+          "cmpl-aadf05384007eaac",
+          "cmpl-9be0e295f0c7f92e",
+          "cmpl-82d4f9d1417f7940",
+          "cmpl-b9c8de5fd74a2bf7",
+          "cmpl-bf8e1e5d87b83416",
+          "cmpl-943bbfa9593cc978",
+          "cmpl-ac052735fa219df0",
+          "cmpl-8d211e116d8edfa5",
+          "cmpl-a1cfb3dfcdef0b70"
+        ],
+        "missing": [],
+        "worker_pids": {
+          "0": 59,
+          "1": 60,
+          "2": 61,
+          "3": 62
+        },
+        "scope": "diagnostic16 same-step all-rank/all-layer coverage only; never formal full40 acceptance"
+      },
+      "elapsed_median_s": 178.01306686998578,
+      "elapsed_min_s": 140.897854609997,
+      "elapsed_max_s": 195.78340928000398
+    }
+  },
+  "physical": {
+    "ranks": {
+      "0": {
+        "inner_pid": 59,
+        "host_pid": 3302725,
+        "physical_npu": 0
+      },
+      "1": {
+        "inner_pid": 60,
+        "host_pid": 3302726,
+        "physical_npu": 1
+      },
+      "2": {
+        "inner_pid": 61,
+        "host_pid": 3302727,
+        "physical_npu": 2
+      },
+      "3": {
+        "inner_pid": 62,
+        "host_pid": 3302728,
+        "physical_npu": 3
+      }
+    },
+    "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+  },
+  "activation": {
+    "barrier_activation_verified": true,
+    "workers": {
+      "0": 59,
+      "1": 60,
+      "2": 61,
+      "3": 62
+    },
+    "scope": "installation identity joined to supplied hot worker identities; hot execution/physical/numerical/performance audits separate"
+  },
+  "physical_now": [],
+  "utc": "2026-10-15T09:15:53.138831+00:00",
+  "raw_sha256": {
+    "result.json": "0f90a3ab814c501c90e24b0a3e173e81aa1040dbc837df5265aee22175972a86",
+    "events.jsonl": "2e24c5df53b6eabff8db0e577e6c867054a0930f1df952dba38e85ea565b4526",
+    "profile-unit.json": "c32b85908cfeaaf857df7a0b244b028ceb207f62b7290dfb8953e9f91d9bd663",
+    "release.json": "a84668c8b2814f2a475d08445d25f815f70f4fe3a9e35c97b0dd7a245cb72837"
+  },
+  "scope": "unprofiled warmup vs profiled second pass latency confounded; not formal performance/quality or compiler root-cause proof",
+  "controller": "exec-0000000000000529",
+  "audit_operation": "exec-000000000000053d",
+  "actual_container_port_check": "exec-000000000000053e",
+  "parser_operation": "exec-000000000000053c",
+  "raw_root": "/cache/cch/hypic-independent-20261013/profile-g3-r6-privatewarm-r1"
+}

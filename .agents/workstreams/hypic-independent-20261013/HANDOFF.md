@@ -1,5 +1,19 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST0529 terminalexit0:16privatewarmup+16profiled requests,275clean samples.
+053d independently verifies both16/16 fourrank48/16 hot,96bindings,explicit
+physicalrank/PID map, R6activation; physical0-3empty09:15:53UTC.
+053e exact339e36c8...CID absent/8233free. No live own inference service.
+PROFILE_G3_R6_PRIVATEWARM_R1_TERMINAL.json preserves rawSHA and audit scope.
+Warmup median305.72s vs profiled second median178.01s is CONFOUNDED by
+profiling/cache/schedule differences; not formal service gain or compiler proof.
+CURRENT053c offline4rank parser on originalma a6109, manager-only/no compute
+devices, same proven image/max4parser/cpuset112-119/newcopy:
+/cache/cch/hypic-independent-20261013/profile-g3-r6-privatewarm-r1-analysis-r1.
+Poll exact053c; no duplicate. Compare actual function counts/shapes/slow-call
+distribution to cold0511/051a before selecting treatment. No algorithm change.
+Deadline2026-10-15T19:04:09UTC; fullmatrix/quality/lifecycle/Skills incomplete.
+
 CURRENT same-process private-shape warm diagnostic exec-0000000000000529,
 originalma a6109 forcedirect,checkpointb1fd434c. New immutable rawroot
 /cache/cch/hypic-independent-20261013/profile-g3-r6-privatewarm-r1.
