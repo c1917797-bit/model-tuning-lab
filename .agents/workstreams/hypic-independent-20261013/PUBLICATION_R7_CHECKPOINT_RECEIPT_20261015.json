@@ -1,0 +1,19 @@
+{
+  "schema": "hypic-publication-receipt/v1",
+  "state": "checkpoint-live-verified",
+  "branch": "work/hypic-independent-20261013",
+  "published_commit": "3e50ed3f25939b9b22ef928521089fce1da81eb1",
+  "previous_remote": "bf71afe1ecc6e11d2a6b023995e89bb1c93ab9be",
+  "remote_main": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+  "main_unchanged": true,
+  "normal_fast_forward_push": true,
+  "source_transport": "exact original Git pack via desktop relay, no algorithm implementation on desktop",
+  "objects_verified": 1874,
+  "changed_paths": 412,
+  "pack_operation": "0637",
+  "pack_sha256": "2b7971efbc999d65aa13054eaad96c45e2e45362cc9ea9790a7e5028c5688b9e",
+  "perobject_verification": "git index-pack --strict; verify-pack exact oid set; batch-read every oid/type and recompute framed SHA1; originalcommit/head/base/path/FF checks retained",
+  "observed_remote_refs": "live ls-remote after push: workbranch3e50ed3f and main23ec33d7",
+  "scope": "work branch checkpoint including R7 enabled canary audit and terminal tools; NOT main integration, wholeHYPIC acceptance, deployment, or all29Skills",
+  "newer_local_commits": "disabled terminal report/full40 tracking and current publication receipt remain newer local work; do not claim HEAD synced"
+}

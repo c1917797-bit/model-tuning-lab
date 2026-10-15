@@ -195,11 +195,12 @@
     ]
   },
   "publication": {
-    "state": "latest-local-checkpoint-not-published-TLS-failure",
-    "published_commit": "bf71afe1ecc6e11d2a6b023995e89bb1c93ab9be",
-    "receipt": "PUBLICATION_RECEIPT.json",
+    "state": "checkpoint-live-verified-newer-local-work-pending",
+    "published_commit": "3e50ed3f25939b9b22ef928521089fce1da81eb1",
+    "receipt": "PUBLICATION_R7_CHECKPOINT_RECEIPT_20261015.json",
     "original_commit_preserved": true,
-    "local_checkpoint": "b0c20d098d3c77c47b23bae82948d44045112929"
+    "local_checkpoint": "c8b08b58",
+    "note": "Published checkpoint only; disabled audit/full40 tracking and receipt newer locally. Do not claim HEAD or main synced."
   },
   "math_reference": {
     "state": "cpu-reference-passed",

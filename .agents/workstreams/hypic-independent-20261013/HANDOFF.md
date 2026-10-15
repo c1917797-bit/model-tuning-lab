@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+PUBLICATION RECOVERED: desktop originalGitpack0637 (1874objects/412paths)
+importperobjecttype/SHA1/packSHA+exactoidset verified. NormalFF push and live
+ls-remote confirm remote workbranch3e50ed3f25939b9b22ef928521089fce1da81eb1;
+main stays23ec33d7d692bb77d17fb5b81aabacf57adad5c7. This checkpoint includes
+enabledR7Canary audit/terminal tools, NOT newerdisabledreport/full40results;
+HEADstillnewerlocal. Receipt PUBLICATION_R7_CHECKPOINT_RECEIPT_20261015.json.
+Old0625/0626 transport failures remain historical; no hostGitHub retry.
+0631 full40 actualCID658126c9...Env/Mounts: /probeRO, /scratchRW, NOexternal
+compilecache/noTRITON_CACHE_DIR override.0635 physical0-3 liveownedPIDs862507-10,
+no foreign; fourhooks installed.062d full40 stillonlylivecontroller.
+
+
 CURRENT full40 R7nativebatch controller exec-000000000000062d,
 originalma a6109/tpcforcedirect via available AWMCPrU connector;checkpoint4229dad3.
 062c11:56:45UTC101bindings/originalc360controller/newroot/physical0-3/portsidle
