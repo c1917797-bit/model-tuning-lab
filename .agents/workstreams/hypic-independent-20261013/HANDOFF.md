@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT official-profiler G3 R6 diagnostic controller exec-00000000000004d1,
+freshma a6109 forcedirect,checkpoint52699bda. Rawroot
+/cache/cch/hypic-independent-20261013/profile-g3-r6-r1.
+04d0 all95bindings/controller/newroot/physical0-3/8233/HCCL PASS08:11:13UTC.
+17focusedCPUcontrols04ccPASS. Built-in Level1/PipeUtilization, max12plus
+native boundary worker iterations, first16 frozen32768 inputs/output64/c16.
+Same2B+2A warmups, R6 inference files unchanged. NOT formal performance/quality.
+Poll exact04d1/root;live/unknown neverrestart/edit mountedsource.
+Require actual四worker trace completeness/kernel/operator/API/timeline and
+mechanism/source/continuousisolation/exact own release before attribution.
+Deadline2026-10-15T19:04:09UTC unchanged; no other card tasks touched.
+
 LATEST R6/046a terminal exit0:40success,615clean isolation,94source bindings.
 Independent04ac full40 timing/source/release receipts PASS;04ae all40 same-step
 fourrank48/16 body-skip plus R6 activation and explicit NSpid physical join PASS.
