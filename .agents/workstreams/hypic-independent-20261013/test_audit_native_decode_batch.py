@@ -1,6 +1,7 @@
 import unittest
 from copy import deepcopy
 from audit_native_decode_batch import audit_native_decode_batch
+from audit_native_decode_batch import audit_native_decode_disabled
 class AuditTests(unittest.TestCase):
     def events(self):
         xs=[]
@@ -36,4 +37,13 @@ class AuditTests(unittest.TestCase):
     def test_nonfinite_metrics(self):
         xs=self.events();next(x for x in xs if x["event"]=="native_decode_batch_shadow_checked")["metrics"][0]["max_scaled"]=float("nan")
         with self.assertRaises(ValueError):self.audit(xs)
+
+    def test_disabled_positive_and_marker_negative(self):
+        xs=[dict(event='compact_hypic_hooks_installed',pid=i+10,manifest_sha256='off',native_decode_batch=False,default_disabled=True) for i in range(4)]
+        workers={i:i+10 for i in range(4)}
+        self.assertTrue(audit_native_decode_disabled(xs,workers,manifest_sha256='off')['native_decode_disabled_verified'])
+        for marker in ('native_decode_batch_completed','native_decode_batch_shadow_checked'):
+            with self.assertRaises(ValueError):audit_native_decode_disabled(xs+[{'event':marker}],workers,manifest_sha256='off')
+        xs[0]['native_decode_batch']=True
+        with self.assertRaises(ValueError):audit_native_decode_disabled(xs,workers,manifest_sha256='off')
 if __name__=="__main__":unittest.main()

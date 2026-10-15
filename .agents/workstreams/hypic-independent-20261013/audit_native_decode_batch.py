@@ -2,6 +2,19 @@
 import math
 from collections import defaultdict
 
+def audit_native_decode_disabled(events,worker_pids,*,manifest_sha256):
+    if set(worker_pids)!=set(range(4)) or len(set(worker_pids.values()))!=4:
+        raise ValueError('four independently audited hot workers required')
+    if any(x.get('event') in ('native_decode_batch_completed','native_decode_batch_shadow_checked') for x in events):
+        raise ValueError('native batch execution marker in disabled control')
+    installs=[x for x in events if x.get('event')=='compact_hypic_hooks_installed']
+    if len(installs)!=4 or {x.get('pid') for x in installs}!=set(worker_pids.values()):
+        raise ValueError('four disabled-control activations required')
+    if any(x.get('manifest_sha256')!=manifest_sha256 or x.get('native_decode_batch') is not False or x.get('default_disabled') is not True for x in installs):
+        raise ValueError('explicit source-bound disabled route missing')
+    return {'native_decode_disabled_verified':True,'workers':worker_pids,
+            'scope':'native-batch switch and execution-marker absence only; HTTP/HYPIC hot/physical/release separate'}
+
 def audit_native_decode_batch(events,worker_pids,*,manifest_sha256):
     if set(worker_pids)!=set(range(4)) or len(set(worker_pids.values()))!=4:
         raise ValueError("four independently audited hot-worker PIDs required")

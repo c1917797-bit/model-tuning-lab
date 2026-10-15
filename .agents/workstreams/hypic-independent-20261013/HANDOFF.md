@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+While05falive: disablednativebatch prospectivecontrol frozen, NOTstarted.
+060d checks only inferenceconfig native_decode_batch true->false; same runtime,
+model/protocol/deadline, freshowncache/newroot; enabled101/disabled103bindings.
+060a5auditor tests PASS including forbiddenmarker presence. Contracts
+NATIVE_DECODE_BATCH_DISABLED_R1_CONTRACT.json/newoffmanifest must NOTlaunch
+until enabled all4rank48multirowshadow+16hot/source/isolation/exactrelease PASS.
+060c11:32:16UTC fourunscoredwarmups completed;192linear/64KV public receipts,
+firstprivatehot receipts present; no failedshadow, devicecanary stillrunning.
+This is progress, not terminalnumerical/fullquality/performance acceptance.
+
+
 While05falive:0601 independentnativebatch receipt auditor4tests PASS,
 including7mutation controls/missinglayer/nonfinite. Newaudit_native_decode_batch
 joins all48multirowshadow layers/rank to actualone-row nativecommit receipts;
