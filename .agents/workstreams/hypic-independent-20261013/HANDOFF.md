@@ -1,5 +1,22 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT R14 short-prefix canonical terminal exec-0000000000000838 RUNNING
+originalma a6109/tpcforcedirect. Source79ca2633 published/liveverified/mainunchanged;
+0837fresh17:43:10UTC132sources/0-3empty/8233+HCCLidle/newrootabsent PASS.
+0839exactCID9606ea9f9f914291dca3ed7452ad00ea56afae5fbbac59ba32992b17f390064f
+officialimage/ONLYphysical0-3,/probeRO/newowncacheRW. No numerical outcome yet.
+Rawc1-short-prefix-aligned-r1 immutable; poll SAME0838/root, live/unknownNEVER
+restart or edit132boundsources. Save actualliveNSpid/cgroup workerproof whenready.
+Terminal iffailed: sharedpy311 audit_c1_stage_runtime.py --raw-root
+/cache/cch/hypic-independent-20261013/c1-short-prefix-aligned-r1 --manifest-sha256
+384c1b20dc6e8b52af18b61bc4a5347dcb693df646fba0ec9530531b62be6b4d.
+If16complete: audit_c1_packed_terminal.py --contract
+C1_SHORT_PREFIX_ALIGNED_R1_CONTRACT.json --live-release PLUS independent
+audit_c1_short_prefix.audit_prefix_routes(required_layers=contract48layers).
+Always independent source/isolation/NSpid/exactrelease. No perf/qualityclaim.
+Disk16GiBfree sufficient for emptyseedcache2GiBceiling+boundedraw; no filescleaned.
+Scope/deadline19:04:09UTC unchanged. C1_SHORT_PREFIX_ALIGNED_R1_LIVE_LAUNCH.json.
+
 R14 canonical short-prefix<=64 actual-terminal policy implemented DEFAULT OFF.
 Own existing recurrence from actualrawq/k/v/g/beta/H, terminal feeds cachedbody+
 suffix; no-suffix state provenance repaired after targeted082a CPUfailure; test
