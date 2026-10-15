@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST07a3 TERMINALexit1/R12captureINCOMPLETE/noartifact.07b5 independent126sources/
+174clean/exact97922c91removed/no8233listener/physical0-3empty PASS.0/16success.
+Observedrank0/2/3 layer0step10 state fails; output+convpass/zero failedgroupwrites.
+Raw failure samegroup has2packedhot +5native1 rows (native_decode_batch_completed),
+so make_probe len(plans)==2/leased==all-layout predicate rejects actual7-entry
+batch. This explains missingcapture only, numericalcauseUNKNOWN. No liveNPUjob.
+NEXT mixed-selector repair plan frozen: ignore empty-chain native1 for selecting
+2activehot; capturefirstHOTrequest/head0 only; keep12000rows/64MiB/32records.
+Explicit selection receipts/mixed7entryCPUregression, newr2root/bindings/publish/
+freshadmission before one successor. No algorithm/tolerance change. Oldrawimmutable.
+Fullscope/deadline19:04:09UTC unchanged. C1_PACKED_R12_TERMINAL_20261015.json.
+
 CURRENT R12 FIRST-DIVERGENCE exec-00000000000007a3 RUNNING originalma a6109/direct.
 Checkpoint4ecc4486 published/liveverified;07a2 16:06:50UTC126bindings/newroot/
 physical0-3empty/8233+HCCLidle PASS.07a4 actual ownedCID97922c91236ec83ea062a30b0950f0538dc7c91558a921fa36f9bd978a07961d

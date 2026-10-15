@@ -1,0 +1,199 @@
+{
+  "schema": "hypic-r12-diagnostic-terminal/v1",
+  "controller": "exec-00000000000007a3",
+  "checkpoint": "4ecc4486efbefc41c9d46a80affef095df3fa8d9",
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-first-divergence-r1",
+  "decision": "NUMERICAL_FAILED_CAPTURE_INCOMPLETE",
+  "audit_operation": "exec-00000000000007b5",
+  "audit": {
+    "source_bindings_unchanged": 126,
+    "isolation_clean": 174,
+    "exact_own_removed": true,
+    "port_free": true,
+    "physical0_3_empty": true,
+    "results": 16,
+    "successful": 0,
+    "failed_shadow_groups": 3,
+    "failed": [
+      {
+        "rank": 0,
+        "step": 10,
+        "layer": "language_model.model.layers.0.linear_attn",
+        "request_id": "cmpl-9ca8d9b9bb77462b-0-9a54be2b",
+        "metrics": [
+          {
+            "max_abs": 0.015625,
+            "max_scaled": 0.9680542349815369,
+            "passed": true,
+            "rms": 0.00010308811033610255,
+            "tensor": "output"
+          },
+          {
+            "max_abs": 0.09327459335327148,
+            "max_scaled": 3.6075799465179443,
+            "passed": false,
+            "rms": 0.000558060419280082,
+            "tensor": "state"
+          },
+          {
+            "max_abs": 0,
+            "max_scaled": 0,
+            "passed": true,
+            "rms": 0,
+            "tensor": "conv"
+          }
+        ],
+        "group_requests": [
+          "cmpl-9ca8d9b9bb77462b-0-9a54be2b",
+          "cmpl-a74c8a608138c2b2-0-bfb35f3c"
+        ]
+      },
+      {
+        "rank": 3,
+        "step": 10,
+        "layer": "language_model.model.layers.0.linear_attn",
+        "request_id": "cmpl-9ca8d9b9bb77462b-0-9a54be2b",
+        "metrics": [
+          {
+            "max_abs": 0.0078125,
+            "max_scaled": 0.598802387714386,
+            "passed": true,
+            "rms": 0.00004586858267430216,
+            "tensor": "output"
+          },
+          {
+            "max_abs": 0.06191730499267578,
+            "max_scaled": 2.575883150100708,
+            "passed": false,
+            "rms": 0.0004717301344498992,
+            "tensor": "state"
+          },
+          {
+            "max_abs": 0,
+            "max_scaled": 0,
+            "passed": true,
+            "rms": 0,
+            "tensor": "conv"
+          }
+        ],
+        "group_requests": [
+          "cmpl-9ca8d9b9bb77462b-0-9a54be2b",
+          "cmpl-a74c8a608138c2b2-0-bfb35f3c"
+        ]
+      },
+      {
+        "rank": 2,
+        "step": 10,
+        "layer": "language_model.model.layers.0.linear_attn",
+        "request_id": "cmpl-9ca8d9b9bb77462b-0-9a54be2b",
+        "metrics": [
+          {
+            "max_abs": 0.0078125,
+            "max_scaled": 0.5810575485229492,
+            "passed": true,
+            "rms": 0.000022715457816957496,
+            "tensor": "output"
+          },
+          {
+            "max_abs": 0.06314849853515625,
+            "max_scaled": 2.5434887409210205,
+            "passed": false,
+            "rms": 0.00054851797176525,
+            "tensor": "state"
+          },
+          {
+            "max_abs": 0,
+            "max_scaled": 0,
+            "passed": true,
+            "rms": 0,
+            "tensor": "conv"
+          }
+        ],
+        "group_requests": [
+          "cmpl-9ca8d9b9bb77462b-0-9a54be2b",
+          "cmpl-a74c8a608138c2b2-0-bfb35f3c"
+        ]
+      }
+    ],
+    "actual_commits_in_failed_layer_step": 0,
+    "sha256": {
+      "result.json": "74ceeafdfb50703d401d843d6ed8b005a3ef1a19cafed60ad2096913422e253c",
+      "events.jsonl": "b1c032219cdab6b48d335f50fe7f109363bfd49cfaa21d1b6ef53cdd9d380ce6",
+      "compiled-cache-unit.json": "768d69012453539675fc08b4fb77f217a1f3362f2afae3b31a5939cbdb0f1563",
+      "release.json": "365cba5897ee7b90544f5596067bc84b87b3f526c97401b3f73aa9d3eeba7e31",
+      "service.log": "0e74f01c01dffff44e6e305157fd645d701c05823703132aa41418a81d1c9156"
+    }
+  },
+  "eligibility_evidence_operation": "exec-00000000000007b7",
+  "eligibility_evidence": "{\"actual_slot_commit\": \"deferred\", \"event\": \"native_decode_batch_completed\", \"layer\": \"language_model.model.layers.0.linear_attn\", \"manifest_sha256\": \"661e3cae1efae30fbb37a899a1250344e6547754a1907c088e153327cda01507\", \"pid\": 59, \"private_buffers\": true, \"rank\": 0, \"requests\": [\"cmpl-acf32db347e3021a-0-848fd449\", \"cmpl-bac88048ceb135b5-0-b97a683f\", \"cmpl-9b6a2be1c40c6490-0-83caef1c\", \"cmpl-90e24135d5b83171-0-902d8fe2\", \"cmpl-ad7d21f1225706a9-0-bec5f170\"], \"rows\": 5, \"slots\": [69, 94, 119, 128, 154], \"step\": 10}\n",
+  "physical_namespace_proof": {
+    "sample_utc": "2026-10-15T16:10:45.121554+00:00",
+    "physical_namespace_proof": [
+      {
+        "physical": 0,
+        "host_pid": 3253208,
+        "status": [
+          "Name:\tVLLM::Worker_TP",
+          "NSpid:\t3253208\t59"
+        ],
+        "exact_owned_cgroup": true
+      },
+      {
+        "physical": 1,
+        "host_pid": 3253209,
+        "status": [
+          "Name:\tVLLM::Worker_TP",
+          "NSpid:\t3253209\t60"
+        ],
+        "exact_owned_cgroup": true
+      },
+      {
+        "physical": 2,
+        "host_pid": 3253210,
+        "status": [
+          "Name:\tVLLM::Worker_TP",
+          "NSpid:\t3253210\t61"
+        ],
+        "exact_owned_cgroup": true
+      },
+      {
+        "physical": 3,
+        "host_pid": 3253211,
+        "status": [
+          "Name:\tVLLM::Worker_TP",
+          "NSpid:\t3253211\t62"
+        ],
+        "exact_owned_cgroup": true
+      }
+    ],
+    "installs": [
+      {
+        "pid": 59,
+        "manifest_sha256": "661e3cae1efae30fbb37a899a1250344e6547754a1907c088e153327cda01507",
+        "c1_first_divergence": true
+      },
+      {
+        "pid": 62,
+        "manifest_sha256": "661e3cae1efae30fbb37a899a1250344e6547754a1907c088e153327cda01507",
+        "c1_first_divergence": true
+      },
+      {
+        "pid": 61,
+        "manifest_sha256": "661e3cae1efae30fbb37a899a1250344e6547754a1907c088e153327cda01507",
+        "c1_first_divergence": true
+      },
+      {
+        "pid": 60,
+        "manifest_sha256": "661e3cae1efae30fbb37a899a1250344e6547754a1907c088e153327cda01507",
+        "c1_first_divergence": true
+      }
+    ],
+    "foreign": []
+  },
+  "capture_directories": [],
+  "capture_receipts": 0,
+  "diagnosis": "make_probe requires len(plans)==2 and leased identities equal all layout requests. Raw failure rank0/layer0/step10 also has native_decode_batch_completed with5 native1 request IDs/slots, plus2 packed hot request IDs. Therefore real batch has7entries and selector cannot activate. This explains missing samples, not the numerical state error.",
+  "next": "Repair observational selection to ignore excluded native1 entries while retaining exactly2 active hot windows requests, firsthotrequest/head0 only,12000 live rows/32records/64MiB. Add explicit eligible/ineligible selection receipt and mixed-native1 regression. Unchanged math, no unchanged rerun; new rawroot r2/newbindings/publishedcheckpoint/freshadmission.",
+  "deadline": "2026-10-15T19:04:09Z",
+  "goal_complete": false
+}
