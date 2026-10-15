@@ -1,0 +1,90 @@
+{
+  "schema": "hypic-host-integration/v1",
+  "decision": "default-off-candidate-not-admitted-to-device-before-critical-path-budget",
+  "planned_checkpoint_live_verified": "cd35ff88bd5bc60906aa222046fdd0fbe1a48cd5",
+  "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+  "full_regression": {
+    "args": [
+      "-B",
+      "-c",
+      "import os,unittest;os.sched_setaffinity(0,sorted(os.sched_getaffinity(0))[:8]);suite=unittest.defaultTestLoader.discover('.',pattern='test_*.py');r=unittest.TextTestRunner(verbosity=1).run(suite);raise SystemExit(not r.wasSuccessful())"
+    ],
+    "cancelled": false,
+    "command": "/cache/cch/python-envs/model-tuning-lab-py311/bin/python",
+    "cwd": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013",
+    "durationMs": 16294,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-0000000000000689",
+    "lane": "job",
+    "state": "completed",
+    "stderr": "...................................................................................................................................................................................................................................................................................................................................................................................................\n----------------------------------------------------------------------\nRan 387 tests in 13.509s\n\nOK\n",
+    "stdout": "",
+    "timedOut": false
+  },
+  "focused": {
+    "args": [
+      "-B",
+      "-m",
+      "unittest",
+      "-v",
+      "test_independent_c1_completion"
+    ],
+    "cancelled": false,
+    "command": "/cache/cch/python-envs/model-tuning-lab-py311/bin/python",
+    "cwd": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/",
+    "durationMs": 2723,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-000000000000067e",
+    "lane": "job",
+    "state": "completed",
+    "stderr": "test_handoff_matches_dense_state_without_body_outputs (test_independent_compact_linear.CompactLinearTests.test_handoff_matches_dense_state_without_body_outputs) ... ok\ntest_live_failure_leaves_public_and_native_inputs_untouched (test_independent_compact_linear.CompactLinearTests.test_live_failure_leaves_public_and_native_inputs_untouched) ... ok\ntest_no_suffix_still_commits_body_transition (test_independent_compact_linear.CompactLinearTests.test_no_suffix_still_commits_body_transition) ... ok\ntest_hook_collects_all_then_commit_and_uninstall (test_independent_c1_completion.CompletionControls.test_hook_collects_all_then_commit_and_uninstall) ... ok\ntest_hook_default_serial_path_unchanged (test_independent_c1_completion.CompletionControls.test_hook_default_serial_path_unchanged) ... ok\ntest_hook_late_failure_no_actual_writes (test_independent_c1_completion.CompletionControls.test_hook_late_failure_no_actual_writes) ... ok\ntest_hook_nonfinite_no_actual_writes (test_independent_c1_completion.CompletionControls.test_hook_nonfinite_no_actual_writes) ... ok\ntest_route_default_off_explicit_and_ambiguous (test_independent_c1_completion.CompletionControls.test_route_default_off_explicit_and_ambiguous) ... ok\ntest_same_compact_math_deferred_finite (test_independent_c1_completion.CompletionControls.test_same_compact_math_deferred_finite) ... ok\ntest_shadow_failure_not_accepted (test_independent_c1_completion.CompletionControls.test_shadow_failure_not_accepted) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.102s\n\nOK\n",
+    "stdout": "",
+    "timedOut": false
+  },
+  "audit_controls": {
+    "args": [
+      "-B",
+      "-m",
+      "unittest",
+      "-v",
+      "test_audit_c1_layer_completion"
+    ],
+    "cancelled": false,
+    "command": "/cache/cch/python-envs/model-tuning-lab-py311/bin/python",
+    "cwd": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/",
+    "durationMs": 212,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-0000000000000688",
+    "lane": "job",
+    "state": "completed",
+    "stderr": "test_complete_join (test_audit_c1_layer_completion.AuditControls.test_complete_join) ... ok\ntest_disabled_requires_absence_and_explicit_flags (test_audit_c1_layer_completion.AuditControls.test_disabled_requires_absence_and_explicit_flags) ... ok\ntest_mutations_fail_closed (test_audit_c1_layer_completion.AuditControls.test_mutations_fail_closed) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.135s\n\nOK\n",
+    "stdout": "",
+    "timedOut": false
+  },
+  "first_regression_failure": {
+    "args": [
+      "-B",
+      "-c",
+      "import os,unittest;os.sched_setaffinity(0,sorted(os.sched_getaffinity(0))[:8]);suite=unittest.defaultTestLoader.discover('.',pattern='test_*.py');r=unittest.TextTestRunner(verbosity=1).run(suite);raise SystemExit(not r.wasSuccessful())"
+    ],
+    "cancelled": false,
+    "command": "/cache/cch/python-envs/model-tuning-lab-py311/bin/python",
+    "cwd": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013",
+    "durationMs": 13973,
+    "error": "exit code",
+    "exitCode": 1,
+    "id": "exec-000000000000067f",
+    "lane": "job",
+    "state": "completed",
+    "stderr": "...............E...................................................................................................................................................................................................................................................................................................................................................................................\n======================================================================\nERROR: test_offline_positive_does_not_claim_current_release (test_audit_native_decode_terminal.TerminalTests.test_offline_positive_does_not_claim_current_release)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/test_audit_native_decode_terminal.py\", line 9, in test_offline_positive_does_not_claim_current_release\n    result=audit_terminal(CONTRACT)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/audit_native_decode_terminal.py\", line 35, in audit_terminal\n    require(hashlib.sha256((base/name).read_bytes()).hexdigest()==digest,\"source drift: \"+name)\n  File \"/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/audit_native_decode_terminal.py\", line 9, in require\n    if not value:raise ValueError(message)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: source drift: independent_compact_activation.py\n\n----------------------------------------------------------------------\nRan 387 tests in 11.391s\n\nFAILED (errors=1)\n",
+    "stdout": "",
+    "timedOut": false
+  },
+  "repair": "Historical terminal fixture reads Git bytes from raw launch commit and verifies original source SHA; production auditor and raw unchanged. Removed imported TestCase duplication, 387 unique discovered tests final.",
+  "mechanism": "Queue same-stream private C1 boundaries, one all-request finite precommit, unchanged final actual-cache commit barrier. Flags default false. Canary-only serialized shadow not formal performance treatment.",
+  "limits": "CPU/fake-native hook controls; no actual NPU validation, no full service gain, no quality or29functional acceptance",
+  "next": "Native official profile control for existing HYPIC profiler attribution; no new algorithm/GDN device task."
+}

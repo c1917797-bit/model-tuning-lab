@@ -64,7 +64,8 @@ def pack_native_decode(rows, projected, b, a, conv_cache, state_cache):
         b.index_select(0,offsets),a.index_select(0,offsets),
         conv,state,starts,lengths)
 
-def unpack_native_decode(packed, output, value_major_state, conv):
+def unpack_native_decode(packed, output, value_major_state, conv, *, finite_check=None):
+    if finite_check is not None and not callable(finite_check):raise ValueError('finite callback required')
     n=len(packed.rows)
     if output.ndim!=3 or output.shape[0]!=n:
         raise ValueError("decode output layout")
@@ -74,8 +75,10 @@ def unpack_native_decode(packed, output, value_major_state, conv):
         raise ValueError("value dimensions mismatch")
     if any(x.device!=packed.projected.device for x in (output,value_major_state,conv)):
         raise ValueError("final devices mismatch")
-    if not all(bool(torch.isfinite(x).all()) for x in (output,value_major_state,conv)):
-        raise ValueError("nonfinite private decode")
+    if finite_check is None:
+        if not all(bool(torch.isfinite(x).all()) for x in (output,value_major_state,conv)):
+            raise ValueError("nonfinite private decode")
+    else:finite_check(output,value_major_state,conv)
     return {row.request_id:(output[i].clone(),
             value_major_state[i].transpose(-1,-2).contiguous().clone(),
             conv[i].clone()) for i,row in enumerate(packed.rows)}

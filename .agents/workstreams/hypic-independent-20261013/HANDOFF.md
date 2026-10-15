@@ -1,5 +1,19 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST0689 full387CPUtests PASS; C1completion same-stream/private finite gate
+integrated DEFAULTFALSE, final nativecommitbarrier and leases unchanged.
+Canary-only serializedshadow defaultfalse;192layer/rank groups required ifrun.
+0688 three independentauditor controls PASS with9mutations.067f oldrawfixture
+failure preserved; fixture now verifies launchGit source bytes, auditor/rawunchanged.
+Device NOTadmitted for this smallcandidate: no nonoverlapped servicebudget.
+R8 prospectivecontract mustNOTlaunch without admission decision. Next nativeG1
+boundedprofile control original16/c16/32768/64/12iterations, unchanged official
+image, original2B2A warmups, NO algorithm/runner/scheduler patch mount.
+PROFILE_G1_NATIVE_R1_CONTRACT.json prepared; freshsource/physical/port gate first.
+Old R7 manifests stale aftersourcechange. No ownedlivejob. cd35ff88 published
+liveverified; main23ec33d7 unchanged, integration newerlocal only.
+Deadline19:04:09UTC unchanged. Fullquality/lifecycle/matrix/29functional unfinished.
+
 Latest0672 five CPU controls PASS for unwired LayerFiniteGuard: one scalar
 decision across12 private tensors, NaN/Inf abort before mock cachecommit,
 bounded coverage, retained latest values, single-use and unchanged inputs.

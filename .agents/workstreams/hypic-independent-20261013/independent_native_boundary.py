@@ -5,11 +5,12 @@ def private_conv_buffer(incoming_conv,projected):
         raise ValueError("conv/input device mismatch")
     return incoming_conv.detach().to(projected.dtype).clone().unsqueeze(0).contiguous()
 
-def make_boundary_runner(layer,projected,b,a,incoming_conv,*,return_conv=False):
+def make_boundary_runner(layer,projected,b,a,incoming_conv,*,return_conv=False,synchronize=True):
     """Caller passes ONLY the current request's live boundary, not public body.
     Official primitive calls are unchanged; conv/SSM input caches stay private.
     Must execute inside the real forward context on the request's device.
     """
+    if type(synchronize) is not bool:raise ValueError("explicit boundary synchronization boolean required")
     from pathlib import Path
     import hashlib,inspect
     from vllm.model_executor.layers.mamba.gdn.qwen_gdn_linear_attn import QwenGatedDeltaNetAttention
@@ -38,7 +39,7 @@ def make_boundary_runner(layer,projected,b,a,incoming_conv,*,return_conv=False):
             initial_state_mode_opt=torch.ones(1,dtype=torch.bool,device=projected.device),
             num_accepted_tokens_opt=None,activation_mode=1 if layer.activation else 0,
             pad_slot_id=-1,run_mode=0)
-        torch.npu.synchronize()
+        if synchronize:torch.npu.synchronize()
         q,k,v=layer.rearrange_mixed_qkv(conv_output)
         g,beta=DeviceOperator.fused_gdn_gating(layer.A_log,a,b,layer.dt_bias)
         if length<=64:
@@ -51,7 +52,7 @@ def make_boundary_runner(layer,projected,b,a,incoming_conv,*,return_conv=False):
                 q=q,k=k,v=v,g=g,beta=beta,initial_state=initial_state.unsqueeze(0).contiguous(),
                 output_final_state=True,cu_seqlens=starts,prebuilt_meta=meta,
                 head_first=False,use_qk_l2norm_in_kernel=True)
-        torch.npu.synchronize()
+        if synchronize:torch.npu.synchronize()
         if state is None:raise ValueError("native boundary final state missing")
         if return_conv:return output[0],state[0],conv_state[0].clone()
         return output[0],state[0]

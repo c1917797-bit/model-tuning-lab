@@ -5,7 +5,7 @@ from independent_hybrid_material import validate_material
 
 
 def execute_compact_linear(material,expected,plan,initial_state,incoming_conv,
-                           *,run_live):
+                           *,run_live,finite_check=None):
     """run_live consumes offsets in the COMPACT hidden/projected row stream.
 
     Prefix and seam run first. Cached T/S then advances the recurrent state
@@ -13,6 +13,8 @@ def execute_compact_linear(material,expected,plan,initial_state,incoming_conv,
     Public body hidden/core outputs are never accessed or materialized here.
     Native slot writes are deferred to the caller after complete validation.
     """
+    if finite_check is not None and not callable(finite_check):
+        raise ValueError('finite callback required')
     validate_material(material.identity,expected)
     if plan.rank!=expected.rank or plan.tokens_sha256!=expected.tokens_sha256:
         raise ValueError("compact request/material rank or token identity mismatch")
@@ -45,17 +47,21 @@ def execute_compact_linear(material,expected,plan,initial_state,incoming_conv,
     output=torch.cat(pieces,dim=0)
     if output.shape[0]!=len(plan.retained_offsets):
         raise ValueError("retained row count mismatch")
-    if not all(torch.isfinite(t).all().item() for t in (output,state,tail)):
-        raise ValueError("nonfinite compact C1 result")
+    if finite_check is None:
+        if not all(torch.isfinite(t).all().item() for t in (output,state,tail)):
+            raise ValueError("nonfinite compact C1 result")
+    else:finite_check(output,state,tail)
     return output,state,tail
 
 
-def execute_native_linear_plan(plan,initial_state,incoming_conv,*,run_live):
+def execute_native_linear_plan(plan,initial_state,incoming_conv,*,run_live,finite_check=None):
     """Keep native-entry live computation; never acquire/apply public material.
 
     Operates on private state copies so the batch caller can prepare every
     request before committing any actual state slot.
     """
+    if finite_check is not None and not callable(finite_check):
+        raise ValueError('finite callback required')
     from independent_mixed_query_plan import NativeQueryPlan
     if not isinstance(plan,NativeQueryPlan) or plan.skipped_tokens!=0:
         raise ValueError('native mixed entry required')
@@ -66,6 +72,8 @@ def execute_native_linear_plan(plan,initial_state,incoming_conv,*,run_live):
     wanted=(plan.scheduled_tokens,initial_state.shape[0],initial_state.shape[-1])
     if output.shape!=wanted or state.shape!=initial_state.shape or tail.shape!=incoming_conv.shape:
         raise ValueError('native mixed output/state layout mismatch')
-    if not all(torch.isfinite(t).all().item() for t in (output,state,tail)):
-        raise ValueError('nonfinite native mixed result')
+    if finite_check is None:
+        if not all(torch.isfinite(t).all().item() for t in (output,state,tail)):
+            raise ValueError('nonfinite native mixed result')
+    else:finite_check(output,state,tail)
     return output,state,tail

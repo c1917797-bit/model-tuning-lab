@@ -17,7 +17,7 @@ def shadow_metrics(actual,expected):
     return {"max_abs":float(delta.max()),"rms":float(delta.square().mean().sqrt()),
             "max_scaled":float((delta/allowed).max()),"passed":bool((delta<=allowed).all())}
 
-def prepare_native_decode(layer,plans,associations,mixed_qkv,b,a,metadata,*,shadowed,emit):
+def prepare_native_decode(layer,plans,associations,mixed_qkv,b,a,metadata,*,shadowed,emit,finite_check=None):
     offset=0;rows=[];chosen=[]
     for plan,assoc in zip(plans,associations):
         if isinstance(plan,NativeQueryPlan) and plan.scheduled_tokens==1:
@@ -33,7 +33,8 @@ def prepare_native_decode(layer,plans,associations,mixed_qkv,b,a,metadata,*,shad
         raise ValueError("live native SSM-index metadata absent")
     conv_cache,state_cache=layer.kv_cache[:2]
     packed=pack_native_decode(rows,mixed_qkv,b,a,conv_cache,state_cache)
-    result=run_private_native_decode(layer,packed,ssm_index_dtype=indices.dtype)
+    kwargs={} if finite_check is None else {'finite_check':finite_check}
+    result=run_private_native_decode(layer,packed,ssm_index_dtype=indices.dtype,**kwargs)
     # Outer compact hook commits a row span [1, heads, value_dim], not a bare row.
     result={key:(output.unsqueeze(0),state,conv)
             for key,(output,state,conv) in result.items()}

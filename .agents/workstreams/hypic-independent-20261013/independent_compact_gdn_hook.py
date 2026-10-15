@@ -5,9 +5,13 @@ from pathlib import Path
 import hashlib,inspect
 
 
-def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=False):
+def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=False,
+                        layer_completion=False,layer_shadow=False):
     if not enabled:return lambda:None
     if type(native_decode_batch) is not bool:raise ValueError('native decode batch boolean required')
+    if type(layer_completion) is not bool or type(layer_shadow) is not bool:
+        raise ValueError('C1 completion/shadow booleans required')
+    if layer_shadow and not layer_completion:raise ValueError('C1 shadow requires treatment')
     if not callable(emit):raise ValueError('compact evidence sink required')
     import torch
     from vllm.forward_context import get_forward_context
@@ -24,7 +28,7 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
     if not isinstance(stage.compact_store,CompactLinearMaterialPool):
         raise ValueError('compact CPU material store required')
     original=cls._forward_core
-    shadowed=set()
+    shadowed=set();c1_shadowed=set()
     if hashlib.sha256(Path(inspect.getfile(inspect.unwrap(original))).read_bytes()).hexdigest()!='d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816':
         raise ValueError('official GDN source drift')
     if getattr(original,'_independent_private_owned',False) or getattr(original,'_independent_compact_gdn_owned',False):
@@ -50,11 +54,15 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
         if any(x.shape[0]!=total for x in (mixed_qkv,b,a,core_attn_out)):
             raise ValueError('compact GDN projected row coverage mismatch')
         conv_cache,state_cache=self.kv_cache[:2];prepared=[];offset=0
-        batched={}
+        batched={};finite_guard=None;finite_kwargs={}
+        if layer_completion:
+            from independent_layer_finite_guard import LayerFiniteGuard
+            finite_guard=LayerFiniteGuard()
+            finite_kwargs={'finite_check':finite_guard.collect}
         if native_decode_batch:
             from independent_native_decode_prepare import prepare_native_decode
             batched=prepare_native_decode(self,plans,associations,mixed_qkv,b,a,
-                raw[self.prefix],shadowed=shadowed,emit=emit)
+                raw[self.prefix],shadowed=shadowed,emit=emit,**finite_kwargs)
         with ExitStack() as leases:
             for plan,assoc in zip(plans,associations):
                 is_native=isinstance(plan,NativeQueryPlan)
@@ -67,17 +75,28 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
                 state=state_cache[slot].transpose(-1,-2).contiguous().clone()
                 tail=conv_cache[slot].clone()
                 if not assoc.has_initial_state:state.zero_();tail.zero_()
-                base=offset
+                base=offset;initial_tail=tail
                 def live(lo,hi,incoming,conv):
                     span=slice(base+lo,base+hi)
                     return make_boundary_runner(self,mixed_qkv[span],b[span],a[span],conv,
-                                                return_conv=True)(incoming)
+                                                return_conv=True,synchronize=not layer_completion)(incoming)
                 if plan.request_id in batched:
                     output,final,tail=batched[plan.request_id]
                 elif is_native:
-                    output,final,tail=execute_native_linear_plan(plan,state,tail,run_live=live)
+                    output,final,tail=execute_native_linear_plan(plan,state,tail,run_live=live,**finite_kwargs)
                 else:
-                    output,final,tail=execute_compact_linear(material,expected,plan,state,tail,run_live=live)
+                    output,final,tail=execute_compact_linear(material,expected,plan,state,tail,run_live=live,**finite_kwargs)
+                if (layer_shadow and not is_native and self.prefix not in c1_shadowed
+                        and plan.body_start>stage.boundary):
+                    from independent_c1_completion_shadow import verify_completion_shadow
+                    def serial_live(lo,hi,incoming,conv):
+                        span=slice(base+lo,base+hi)
+                        return make_boundary_runner(self,mixed_qkv[span],b[span],a[span],conv,
+                            return_conv=True,synchronize=True)(incoming)
+                    reference=execute_compact_linear(material,expected,plan,state,initial_tail,
+                                                      run_live=serial_live)
+                    verify_completion_shadow((output,final,tail),reference,plan,self.prefix,emit)
+                    c1_shadowed.add(self.prefix)
                 native=final.transpose(-1,-2).contiguous()
                 end=offset+len(plan.retained_offsets)
                 if native.shape!=state_cache[slot].shape or tail.shape!=conv_cache[slot].shape or output.shape!=core_attn_out[offset:end].shape:
@@ -85,6 +104,12 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
                 prepared.append((plan,slot,generation,offset,end,output,native,tail));offset=end
             if CURRENT_COMPACT_MODEL.get() is not selected or CURRENT_REQUEST_SLICES.get() is not requests:
                 raise RuntimeError('request context changed before compact commit')
+            if finite_guard is not None:
+                covered=finite_guard.validate()
+                emit({'event':'c1_layer_precommit_validated','rank':plans[0].rank,
+                      'step':plans[0].step,'layer':self.prefix,'tensors':covered,
+                      'requests':[p.request_id for p in plans],
+                      'finite':True,'actual_slot_commit':'not_started'})
             # Every request is prepared before the first native state write.
             for plan,slot,generation,start,end,output,native,tail in prepared:
                 state_cache[slot].copy_(native.to(state_cache.dtype))

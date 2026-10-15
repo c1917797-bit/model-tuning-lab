@@ -19,7 +19,7 @@ def official_backends(layer):
             torch.ops._C_ascend.npu_recurrent_gated_delta_rule,
             l2norm_fwd,DeviceOperator.fused_gdn_gating)
 
-def run_private_native_decode(layer,packed,*,ssm_index_dtype,backends=None):
+def run_private_native_decode(layer,packed,*,ssm_index_dtype,backends=None,finite_check=None):
     """No real cache tensor is passed. Index dtype comes from live metadata."""
     if ssm_index_dtype not in (torch.int32,torch.int64):
         raise ValueError("native state-index dtype required")
@@ -48,4 +48,4 @@ def run_private_native_decode(layer,packed,*,ssm_index_dtype,backends=None):
         value=v.squeeze(0),g=g.squeeze(0),beta=beta.squeeze(0),state=state,
         scale=k.shape[-1]**-.5,actual_seq_lengths=packed.actual_seq_lengths,
         ssm_state_indices=torch.arange(n,dtype=ssm_index_dtype,device=device))
-    return unpack_native_decode(packed,output,state,conv)
+    return unpack_native_decode(packed,output,state,conv,finite_check=finite_check)
