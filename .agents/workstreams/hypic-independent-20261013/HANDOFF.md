@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+While062dlive:0643 sixCPU qualityevidencepolicy controls PASS. Draft
+independent_quality_evidence_policy.py defaultfull unchanged; optinquality-hot
+retains ALL381 C1/C2hot/publicgeneration+eviction/progress/shadows/errors,
+explicitlycounts omitted nonhot diagnostics and retains sampledshadowcommits.
+NOTwired/imported; no current101runtimebinding change or newNPUtask.
+QUALITY_EVIDENCE_POLICY_DRAFT_20261015.md recordsremainingcatalogfactory/
+request1024/poolbatch8/budgetcanary/full381 gates; not qualityacceptance.
+
+
 PUBLICATION RECOVERED: desktop originalGitpack0637 (1874objects/412paths)
 importperobjecttype/SHA1/packSHA+exactoidset verified. NormalFF push and live
 ls-remote confirm remote workbranch3e50ed3f25939b9b22ef928521089fce1da81eb1;
