@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST04fc parser terminalexit0;051e validates all4 fullJSON traces (~1.27GB each),
+46-column kernels256835/rank, operator/API tables, matchedrank/PID57-60.
+0525 diagnostic16/16 fourrank48/16 hot coverage, explicit physical join and
+R6 activation PASS.0524 six tests preserve strict formal40 vs diagnostic16.
+PROFILE_G3_R6_R1_PARSED_AUDIT.json stores scope; no live owned NPU/parser job.
+0511 allrank host-self ChunkGatedDeltaRuleFunction148.7-150.6s;051a rank0
+median2.375ms but27slowcalls>1s,top32~145.15s. Cold/initialization hypothesis,
+NOT proven compiler root cause. PROFILE_G3_R6_COLD_ATTRIBUTION.json retains data.
+Prospective warm control e398b189 +051f8CPUtests PASS: same16c16/32768/64
+private warmup before official profiling, no algorithm source change.
+Freeze/check96bindings/newroot/actualphysical0-3+ports before warm launch.
+Old full40 regression preserved; no repeat matrix/quality acceptance yet.
+
 CURRENT offline parser successor exec-00000000000004fc on originalma a6109.
 New copy/cache/cch/hypic-independent-20261013/profile-g3-r6-r1-analysis-r2.
 Same image/cpuset112-119/max4, only /dev/davinci_manager (NO compute devices).

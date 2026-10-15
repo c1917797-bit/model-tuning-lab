@@ -1,0 +1,208 @@
+{
+  "schema": "hypic-fourrank-profile-acceptance/v1",
+  "parser_operation": "exec-00000000000004fc",
+  "artifact_validation": "exec-000000000000051e",
+  "hot_physical_validation": "exec-0000000000000525",
+  "tests": "exec-0000000000000524",
+  "fourrank_parsed_artifacts_valid": true,
+  "ranks": {
+    "0": {
+      "pid": 57,
+      "tables": {
+        "kernel_details.csv": {
+          "rows": 256835,
+          "columns": 46
+        },
+        "operator_details.csv": {
+          "rows": 2328414,
+          "columns": 9
+        },
+        "op_statistic.csv": {
+          "rows": 65,
+          "columns": 9
+        },
+        "api_statistic.csv": {
+          "rows": 189,
+          "columns": 9
+        }
+      },
+      "json_events": 6840303,
+      "trace_bytes": 1274612044,
+      "cpu_pid_events": 2328414,
+      "categories": {
+        "cpu_op": 2328414,
+        "dequeue": 288804,
+        "async_task_queue": 577608,
+        "enqueue": 288804,
+        "null": 2206351,
+        "HostToDevice": 575952,
+        "async_npu": 574370
+      }
+    },
+    "1": {
+      "pid": 58,
+      "tables": {
+        "kernel_details.csv": {
+          "rows": 256835,
+          "columns": 46
+        },
+        "operator_details.csv": {
+          "rows": 2328436,
+          "columns": 9
+        },
+        "op_statistic.csv": {
+          "rows": 65,
+          "columns": 9
+        },
+        "api_statistic.csv": {
+          "rows": 189,
+          "columns": 9
+        }
+      },
+      "json_events": 6840167,
+      "trace_bytes": 1272900694,
+      "cpu_pid_events": 2328436,
+      "categories": {
+        "cpu_op": 2328436,
+        "dequeue": 288804,
+        "async_task_queue": 577608,
+        "enqueue": 288804,
+        "null": 2206171,
+        "HostToDevice": 575952,
+        "async_npu": 574392
+      }
+    },
+    "2": {
+      "pid": 59,
+      "tables": {
+        "kernel_details.csv": {
+          "rows": 256835,
+          "columns": 46
+        },
+        "operator_details.csv": {
+          "rows": 2328436,
+          "columns": 9
+        },
+        "op_statistic.csv": {
+          "rows": 65,
+          "columns": 9
+        },
+        "api_statistic.csv": {
+          "rows": 189,
+          "columns": 9
+        }
+      },
+      "json_events": 6840212,
+      "trace_bytes": 1273224896,
+      "cpu_pid_events": 2328436,
+      "categories": {
+        "cpu_op": 2328436,
+        "dequeue": 288804,
+        "async_task_queue": 577608,
+        "enqueue": 288804,
+        "null": 2206216,
+        "HostToDevice": 575952,
+        "async_npu": 574392
+      }
+    },
+    "3": {
+      "pid": 60,
+      "tables": {
+        "kernel_details.csv": {
+          "rows": 256835,
+          "columns": 46
+        },
+        "operator_details.csv": {
+          "rows": 2328436,
+          "columns": 9
+        },
+        "op_statistic.csv": {
+          "rows": 65,
+          "columns": 9
+        },
+        "api_statistic.csv": {
+          "rows": 189,
+          "columns": 9
+        }
+      },
+      "json_events": 6840368,
+      "trace_bytes": 1272929293,
+      "cpu_pid_events": 2328436,
+      "categories": {
+        "cpu_op": 2328436,
+        "dequeue": 288804,
+        "async_task_queue": 577608,
+        "enqueue": 288804,
+        "null": 2206372,
+        "HostToDevice": 575952,
+        "async_npu": 574392
+      }
+    }
+  },
+  "scope": "Fourrank parsed JSON/tables joined to same16 actual hot workers and explicit physical0-3 identities; diagnostic only, not formal speed or numerical/quality acceptance",
+  "hot": {
+    "accepted_hot_coverage": true,
+    "denominator": 16,
+    "covered": [
+      "cmpl-9266470689421c2b",
+      "cmpl-a03172171f3ec377",
+      "cmpl-950f264d4590785c",
+      "cmpl-b54e423d40640cc6",
+      "cmpl-91b282dd0e5056d3",
+      "cmpl-b1adccfe61e9afce",
+      "cmpl-bd6d72d81e1c3265",
+      "cmpl-8d88144adc1ed75a",
+      "cmpl-bda34e9c0d7efae8",
+      "cmpl-a69c3b9319211eae",
+      "cmpl-8b17edeea5f16120",
+      "cmpl-a595438a14dc7026",
+      "cmpl-be9ad7945b27a8e6",
+      "cmpl-a0b65d87b021a07b",
+      "cmpl-9cc8485b7978fa1b",
+      "cmpl-be2553c4d5144026"
+    ],
+    "missing": [],
+    "worker_pids": {
+      "0": 57,
+      "1": 58,
+      "2": 59,
+      "3": 60
+    },
+    "scope": "diagnostic16 same-step all-rank/all-layer coverage only; never formal full40 acceptance"
+  },
+  "physical": {
+    "ranks": {
+      "0": {
+        "inner_pid": 57,
+        "host_pid": 2825358,
+        "physical_npu": 0
+      },
+      "1": {
+        "inner_pid": 58,
+        "host_pid": 2825361,
+        "physical_npu": 1
+      },
+      "2": {
+        "inner_pid": 59,
+        "host_pid": 2825362,
+        "physical_npu": 2
+      },
+      "3": {
+        "inner_pid": 60,
+        "host_pid": 2825363,
+        "physical_npu": 3
+      }
+    },
+    "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+  },
+  "activation": {
+    "barrier_activation_verified": true,
+    "workers": {
+      "0": 57,
+      "1": 58,
+      "2": 59,
+      "3": 60
+    },
+    "scope": "installation identity joined to supplied hot worker identities; hot execution/physical/numerical/performance audits separate"
+  }
+}

@@ -2,9 +2,17 @@
 from collections import defaultdict
 
 def audit_full40_hot(events, response_ids, *, manifest_sha256):
+    return _audit_hot(events,response_ids,manifest_sha256=manifest_sha256,expected_count=40)
+
+def audit_profile16_hot(events, response_ids, *, manifest_sha256):
+    result=_audit_hot(events,response_ids,manifest_sha256=manifest_sha256,expected_count=16)
+    result["scope"]="diagnostic16 same-step all-rank/all-layer coverage only; never formal full40 acceptance"
+    return result
+
+def _audit_hot(events, response_ids, *, manifest_sha256, expected_count):
     response_ids=tuple(response_ids)
-    if len(response_ids)!=40 or len(set(response_ids))!=40 or any(not x for x in response_ids):
-        raise ValueError("exact40 unique HTTP response IDs required")
+    if len(response_ids)!=expected_count or len(set(response_ids))!=expected_count or any(not x for x in response_ids):
+        raise ValueError("exact"+str(expected_count)+" unique HTTP response IDs required")
     relevant={"compact_public_state_published","compact_public_kv_published",
         "compact_gdn_body_composed","compact_c2_queries_completed",
         "compact_model_rows_completed","native_request_progress"}
@@ -63,7 +71,7 @@ def audit_full40_hot(events, response_ids, *, manifest_sha256):
                     raise ValueError("nonfinite or missing state proof")
         if len(set(steps))!=1:valid=False
         (covered if valid else missing).append(api_id)
-    return {"accepted_hot_coverage":len(covered)==40,"denominator":40,
+    return {"accepted_hot_coverage":len(covered)==expected_count,"denominator":expected_count,
         "covered":covered,"missing":missing,
         "worker_pids":{rank:next(iter(xs)) for rank,xs in pids.items()},
         "scope":"full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"}

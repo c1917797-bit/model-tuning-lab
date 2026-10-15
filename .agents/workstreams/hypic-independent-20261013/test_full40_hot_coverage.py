@@ -26,6 +26,20 @@ class Full40(unittest.TestCase):
         for field,value in [("manifest_sha256","wrong"),("skipped_body_queries",1),("retained_rows",1),("pid",999)]:
             e=copy.deepcopy(self.events);e[-1][field]=value
             with self.subTest(field=field),self.assertRaises(ValueError):audit_full40_hot(e,self.ids,manifest_sha256="f")
+    def test_profile16_is_explicitly_separate(self):
+        from audit_full40_hot_coverage import audit_profile16_hot
+        result=audit_profile16_hot(self.events,self.ids[:16],manifest_sha256="f")
+        self.assertTrue(result["accepted_hot_coverage"])
+        self.assertEqual(result["denominator"],16)
+        self.assertIn("never formal full40",result["scope"])
+        with self.assertRaises(ValueError):audit_full40_hot(self.events,self.ids[:16],manifest_sha256="f")
+    def test_profile16_missing_layer_not_hidden(self):
+        from audit_full40_hot_coverage import audit_profile16_hot
+        e=[x for x in self.events if not (x.get("request_id")==self.ids[15]+"-internal" and x.get("rank")==3 and x.get("event")=="compact_c2_queries_completed")]
+        result=audit_profile16_hot(e,self.ids[:16],manifest_sha256="f")
+        self.assertFalse(result["accepted_hot_coverage"])
+        self.assertEqual(result["denominator"],16)
+        self.assertIn(self.ids[15],result["missing"])
     def test_no_partial_denominator(self):
         with self.assertRaises(ValueError):audit_full40_hot(self.events,self.ids[:-1],manifest_sha256="f")
 if __name__=="__main__":unittest.main()
