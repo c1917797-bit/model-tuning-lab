@@ -1,0 +1,514 @@
+{
+  "schema": "hypic-cold-shape-hypothesis/v1",
+  "decision": "INCONCLUSIVE_INITIALIZATION_OR_COMPILATION_HYPOTHESIS",
+  "controller": "exec-00000000000004d1",
+  "offline_parser": "exec-00000000000004fc",
+  "aggregate_operation": "exec-0000000000000511",
+  "distribution_operation": "exec-000000000000051a",
+  "analysis_root": "/cache/cch/hypic-independent-20261013/profile-g3-r6-r1-analysis-r2",
+  "same_source": "R6 default-off explicit C2barrier;94inference bindings unchanged",
+  "ranks": {
+    "rank0_57_20261015081748164_ascend_pt": {
+      "rows": 2328414,
+      "top_host_self": [
+        {
+          "name": "ChunkGatedDeltaRuleFunction",
+          "calls": 1536,
+          "host_self_s": 148.73924942999972,
+          "host_total_s": 151.01034216000005
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "calls": 576,
+          "host_self_s": 30.425779610000017,
+          "host_total_s": 213.2402377500001
+        },
+        {
+          "name": "aten::copy_",
+          "calls": 180896,
+          "host_self_s": 27.534868740000427,
+          "host_total_s": 28.705885109999787
+        },
+        {
+          "name": "vllm::unified_attention_with_output",
+          "calls": 192,
+          "host_self_s": 23.17928982,
+          "host_total_s": 29.541148330000013
+        },
+        {
+          "name": "empty_tensor",
+          "calls": 298946,
+          "host_self_s": 1.9964558900000167,
+          "host_total_s": 1.9964558900000167
+        },
+        {
+          "name": "aclnnInplaceCopy",
+          "calls": 106754,
+          "host_self_s": 1.071845089999999,
+          "host_total_s": 1.071845089999999
+        },
+        {
+          "name": "aten::_local_scalar_dense",
+          "calls": 24506,
+          "host_self_s": 0.9548921199999998,
+          "host_total_s": 0.9548921199999998
+        },
+        {
+          "name": "aten::empty_strided",
+          "calls": 143689,
+          "host_self_s": 0.9385293699999936,
+          "host_total_s": 1.3536308500000374
+        },
+        {
+          "name": "aten::as_strided",
+          "calls": 265816,
+          "host_self_s": 0.8614716799999953,
+          "host_total_s": 0.8614716799999953
+        },
+        {
+          "name": "_C_ascend::npu_causal_conv1d_custom",
+          "calls": 4128,
+          "host_self_s": 0.5347173199999993,
+          "host_total_s": 0.6704527400000003
+        },
+        {
+          "name": "aten::mul",
+          "calls": 36888,
+          "host_self_s": 0.40980432,
+          "host_total_s": 0.9160892799999993
+        },
+        {
+          "name": "aten::_to_copy",
+          "calls": 102925,
+          "host_self_s": 0.3815472599999979,
+          "host_total_s": 24.56341741000027
+        },
+        {
+          "name": "aten::clone",
+          "calls": 61667,
+          "host_self_s": 0.2740616300000002,
+          "host_total_s": 5.631340729999969
+        },
+        {
+          "name": "aten::select",
+          "calls": 74306,
+          "host_self_s": 0.26957686999999825,
+          "host_total_s": 0.521540620000001
+        },
+        {
+          "name": "aten::add",
+          "calls": 24204,
+          "host_self_s": 0.25598138999999875,
+          "host_total_s": 0.5599660799999987
+        }
+      ],
+      "stage": [
+        {
+          "Device_id": "0",
+          "Step": "",
+          "Computing": "22134376.524001323",
+          "Communication(Not Overlapped)": "12758784.851999994",
+          "Overlapped": "0.0",
+          "Communication": "12758784.851999994",
+          "Free": "218942287.39605647",
+          "Stage": "253835448.75",
+          "Bubble": "0",
+          "Communication(Not Overlapped and Exclude Receive)": "12758784.851999994",
+          "Preparing": "7837.75"
+        }
+      ]
+    },
+    "rank1_58_20261015081748163_ascend_pt": {
+      "rows": 2328436,
+      "top_host_self": [
+        {
+          "name": "ChunkGatedDeltaRuleFunction",
+          "calls": 1536,
+          "host_self_s": 149.24383144,
+          "host_total_s": 151.52386058000022
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "calls": 576,
+          "host_self_s": 30.659562079999994,
+          "host_total_s": 213.5017358000003
+        },
+        {
+          "name": "aten::copy_",
+          "calls": 180896,
+          "host_self_s": 26.981327080000252,
+          "host_total_s": 28.168019879999683
+        },
+        {
+          "name": "vllm::unified_attention_with_output",
+          "calls": 192,
+          "host_self_s": 23.31049757,
+          "host_total_s": 29.56927677999998
+        },
+        {
+          "name": "empty_tensor",
+          "calls": 298946,
+          "host_self_s": 2.036140239999934,
+          "host_total_s": 2.036140239999934
+        },
+        {
+          "name": "aclnnInplaceCopy",
+          "calls": 106754,
+          "host_self_s": 1.086272980000004,
+          "host_total_s": 1.086272980000004
+        },
+        {
+          "name": "aten::empty_strided",
+          "calls": 143689,
+          "host_self_s": 0.9450972799999939,
+          "host_total_s": 1.3649634899999865
+        },
+        {
+          "name": "aten::_local_scalar_dense",
+          "calls": 24506,
+          "host_self_s": 0.9391432700000049,
+          "host_total_s": 0.9391432700000049
+        },
+        {
+          "name": "aten::as_strided",
+          "calls": 265816,
+          "host_self_s": 0.8539983000000041,
+          "host_total_s": 0.8539983000000041
+        },
+        {
+          "name": "_C_ascend::npu_causal_conv1d_custom",
+          "calls": 4128,
+          "host_self_s": 0.5236854099999999,
+          "host_total_s": 0.6615556800000033
+        },
+        {
+          "name": "aten::mul",
+          "calls": 36888,
+          "host_self_s": 0.41198472999999936,
+          "host_total_s": 0.9287188299999986
+        },
+        {
+          "name": "aten::_to_copy",
+          "calls": 102925,
+          "host_self_s": 0.3643227700000007,
+          "host_total_s": 24.083721150000173
+        },
+        {
+          "name": "aten::select",
+          "calls": 74306,
+          "host_self_s": 0.26660320999999726,
+          "host_total_s": 0.515558819999998
+        },
+        {
+          "name": "aten::clone",
+          "calls": 61667,
+          "host_self_s": 0.26210405000000137,
+          "host_total_s": 5.556951050000035
+        },
+        {
+          "name": "aclnnMul",
+          "calls": 32460,
+          "host_self_s": 0.2543451299999999,
+          "host_total_s": 0.2543451299999999
+        }
+      ],
+      "stage": [
+        {
+          "Device_id": "1",
+          "Step": "",
+          "Computing": "22139743.52000309",
+          "Communication(Not Overlapped)": "11462771.019999994",
+          "Overlapped": "0.0",
+          "Communication": "11462771.019999994",
+          "Free": "220231469.68005627",
+          "Stage": "253833984.25",
+          "Bubble": "0",
+          "Communication(Not Overlapped and Exclude Receive)": "11462771.019999994",
+          "Preparing": "7621.0"
+        }
+      ]
+    },
+    "rank2_59_20261015081748163_ascend_pt": {
+      "rows": 2328436,
+      "top_host_self": [
+        {
+          "name": "ChunkGatedDeltaRuleFunction",
+          "calls": 1536,
+          "host_self_s": 150.63714543,
+          "host_total_s": 152.93910587
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "calls": 576,
+          "host_self_s": 30.56873081000001,
+          "host_total_s": 213.84199956999987
+        },
+        {
+          "name": "aten::copy_",
+          "calls": 180896,
+          "host_self_s": 25.883095510000107,
+          "host_total_s": 27.076277690000456
+        },
+        {
+          "name": "vllm::unified_attention_with_output",
+          "calls": 192,
+          "host_self_s": 23.099716459999996,
+          "host_total_s": 29.204239680000004
+        },
+        {
+          "name": "empty_tensor",
+          "calls": 298946,
+          "host_self_s": 2.008421059999977,
+          "host_total_s": 2.008421059999977
+        },
+        {
+          "name": "aclnnInplaceCopy",
+          "calls": 106754,
+          "host_self_s": 1.0924977499999906,
+          "host_total_s": 1.0924977499999906
+        },
+        {
+          "name": "aten::empty_strided",
+          "calls": 143689,
+          "host_self_s": 0.9446107400000078,
+          "host_total_s": 1.357295250000009
+        },
+        {
+          "name": "aten::_local_scalar_dense",
+          "calls": 24506,
+          "host_self_s": 0.9173766200000013,
+          "host_total_s": 0.9173766200000013
+        },
+        {
+          "name": "aten::as_strided",
+          "calls": 265816,
+          "host_self_s": 0.836167120000004,
+          "host_total_s": 0.836167120000004
+        },
+        {
+          "name": "_C_ascend::npu_causal_conv1d_custom",
+          "calls": 4128,
+          "host_self_s": 0.53500735,
+          "host_total_s": 0.6739172299999979
+        },
+        {
+          "name": "aten::mul",
+          "calls": 36888,
+          "host_self_s": 0.4119360699999989,
+          "host_total_s": 0.9172965200000007
+        },
+        {
+          "name": "aten::_to_copy",
+          "calls": 102925,
+          "host_self_s": 0.37085066999999117,
+          "host_total_s": 23.067672520000077
+        },
+        {
+          "name": "aten::clone",
+          "calls": 61667,
+          "host_self_s": 0.27538773000000255,
+          "host_total_s": 5.477705219999985
+        },
+        {
+          "name": "aten::select",
+          "calls": 74306,
+          "host_self_s": 0.2677419199999959,
+          "host_total_s": 0.5121609999999974
+        },
+        {
+          "name": "aten::add",
+          "calls": 24204,
+          "host_self_s": 0.256357870000001,
+          "host_total_s": 0.5586448700000013
+        }
+      ],
+      "stage": [
+        {
+          "Device_id": "2",
+          "Step": "",
+          "Computing": "22124269.600003354",
+          "Communication(Not Overlapped)": "10258097.600000003",
+          "Overlapped": "0.0",
+          "Communication": "10258097.600000003",
+          "Free": "221447976.94004512",
+          "Stage": "253830344.0",
+          "Bubble": "0",
+          "Communication(Not Overlapped and Exclude Receive)": "10258097.600000003",
+          "Preparing": "7854.75"
+        }
+      ]
+    },
+    "rank3_60_20261015081748163_ascend_pt": {
+      "rows": 2328436,
+      "top_host_self": [
+        {
+          "name": "ChunkGatedDeltaRuleFunction",
+          "calls": 1536,
+          "host_self_s": 150.54748310999992,
+          "host_total_s": 152.83271676000007
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "calls": 576,
+          "host_self_s": 30.242730510000015,
+          "host_total_s": 213.18772424000014
+        },
+        {
+          "name": "aten::copy_",
+          "calls": 180896,
+          "host_self_s": 25.79653014000009,
+          "host_total_s": 26.973391600000173
+        },
+        {
+          "name": "vllm::unified_attention_with_output",
+          "calls": 192,
+          "host_self_s": 23.202351460000013,
+          "host_total_s": 29.44345403000001
+        },
+        {
+          "name": "empty_tensor",
+          "calls": 298946,
+          "host_self_s": 2.023705460000003,
+          "host_total_s": 2.023705460000003
+        },
+        {
+          "name": "aclnnInplaceCopy",
+          "calls": 106754,
+          "host_self_s": 1.0773662800000088,
+          "host_total_s": 1.0773662800000088
+        },
+        {
+          "name": "aten::empty_strided",
+          "calls": 143689,
+          "host_self_s": 0.9436892599999975,
+          "host_total_s": 1.3578974100000112
+        },
+        {
+          "name": "aten::_local_scalar_dense",
+          "calls": 24506,
+          "host_self_s": 0.9140672099999932,
+          "host_total_s": 0.9140672099999932
+        },
+        {
+          "name": "aten::as_strided",
+          "calls": 265816,
+          "host_self_s": 0.8415405599999821,
+          "host_total_s": 0.8415405599999821
+        },
+        {
+          "name": "_C_ascend::npu_causal_conv1d_custom",
+          "calls": 4128,
+          "host_self_s": 0.52550723,
+          "host_total_s": 0.6622344400000002
+        },
+        {
+          "name": "aten::mul",
+          "calls": 36888,
+          "host_self_s": 0.4179583600000033,
+          "host_total_s": 0.935072659999995
+        },
+        {
+          "name": "aten::_to_copy",
+          "calls": 102925,
+          "host_self_s": 0.37578484999999856,
+          "host_total_s": 22.923485409999877
+        },
+        {
+          "name": "aten::clone",
+          "calls": 61667,
+          "host_self_s": 0.2712543700000015,
+          "host_total_s": 5.544459360000037
+        },
+        {
+          "name": "aten::select",
+          "calls": 74306,
+          "host_self_s": 0.2688280599999995,
+          "host_total_s": 0.5150820400000098
+        },
+        {
+          "name": "aten::add",
+          "calls": 24204,
+          "host_self_s": 0.25506440000000113,
+          "host_total_s": 0.5584552300000003
+        }
+      ],
+      "stage": [
+        {
+          "Device_id": "3",
+          "Step": "",
+          "Computing": "22135998.48000313",
+          "Communication(Not Overlapped)": "11381733.02",
+          "Overlapped": "0.0",
+          "Communication": "11381733.02",
+          "Free": "220312626.3800575",
+          "Stage": "253830357.75",
+          "Bubble": "0",
+          "Communication(Not Overlapped and Exclude Receive)": "11381733.02",
+          "Preparing": "7558.75"
+        }
+      ]
+    }
+  },
+  "rank0_chunk_distribution": {
+    "calls": 1536,
+    "median_s": 0.002375475,
+    "p95_s": 0.00257443,
+    "max_s": 5.74342739,
+    "calls_above_100ms": 27,
+    "calls_above_1s": 27,
+    "top32_sum_s": 145.15450926999998,
+    "top48_sum_s": 145.19732646999995,
+    "top16_s": [
+      5.74342739,
+      5.68048985,
+      5.63020085,
+      5.600054269999999,
+      5.59324591,
+      5.57013357,
+      5.56704995,
+      5.55576041,
+      5.54734308,
+      5.45818711,
+      5.4345633,
+      5.42344084,
+      5.41166673,
+      5.40008916,
+      5.39141384,
+      5.38503143
+    ],
+    "first24_in_csv_order_s": [
+      4.761050849999999,
+      4.81555569,
+      0.00259301,
+      0.00232038,
+      0.0025234899999999998,
+      0.00226552,
+      0.00260289,
+      0.00234101,
+      0.00248817,
+      0.0023353899999999997,
+      0.00246199,
+      0.00233565,
+      0.00257422,
+      0.00233264,
+      0.00249626,
+      0.0023313400000000003,
+      0.00270235,
+      0.0023532199999999996,
+      0.0027367,
+      0.00236769,
+      0.00247148,
+      0.0023093899999999997,
+      0.00247444,
+      0.0023398200000000003
+    ]
+  },
+  "interpretation": "27 of1536 calls account for most host self time; source supports a first-shape/initialization hypothesis, not yet a proven compiler root cause",
+  "limitations": [
+    "CSV order is not independently established chronological first-use order",
+    "Profiled times cannot substitute for uninstrumented service benchmark",
+    "Operator host self time is not automatically removable critical-path time",
+    "No warmed private-shape control yet; no quality acceptance"
+  ],
+  "next_test": "Same-process same16 c16/32768/64 private-shape warmup then bounded native profiling, preserving cold failure and reporting diagnostic separately"
+}
