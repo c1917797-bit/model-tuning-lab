@@ -1,0 +1,15 @@
+{
+  "schema": "hypic-pdc-original-audit-failure/v1",
+  "controller": "exec-000000000000086a",
+  "controller_valid": true,
+  "responses": 16,
+  "isolation_samples": 219,
+  "released": true,
+  "audit_operation": "exec-000000000000087b",
+  "audit_exit": 1,
+  "error": "actual source-bound1536 scheduler block proof missing",
+  "diagnostic_operation": "exec-000000000000087d",
+  "reason": "conditional cap event absent for some requests despite actual all16/all4 first computed7680; observer assumption requires correction, original verdict retained",
+  "scope": "not original PDC gate acceptance",
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-short-prefix-pdc-r1"
+}
