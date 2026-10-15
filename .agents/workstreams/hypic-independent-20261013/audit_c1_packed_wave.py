@@ -3,7 +3,11 @@ import math
 from collections import defaultdict
 
 def audit_packed_c1(events,workers,*,manifest_sha256,linear_layers,requests,enabled=True,
-                    skipped_body_tokens=16376):
+                    skipped_body_tokens=16376,state_passes=3,seed_mode=None):
+    if type(state_passes)is not int or state_passes not in (2,3):
+        raise ValueError('frozen state-pass count required')
+    if state_passes==2 and seed_mode!='actual_prefix_terminal':
+        raise ValueError('two-pass route requires actual prefix seed mode')
     layers=set(linear_layers);wanted=set(requests)
     if (set(workers)!=set(range(4)) or len(set(workers.values()))!=4
             or len(layers)!=48 or not wanted or len(wanted)!=len(requests)):
@@ -55,7 +59,8 @@ def audit_packed_c1(events,workers,*,manifest_sha256,linear_layers,requests,enab
             if (type(n)is not int or not len(group)<=n<=2*len(group)
                     or type(tokens)is not int or not n<=tokens<=40960
                     or type(e.get("shared_wy_preparations"))is not int or e["shared_wy_preparations"]!=1
-                    or type(e.get("state_passes"))is not int or e["state_passes"]!=3
+                    or type(e.get("state_passes"))is not int or e["state_passes"]!=state_passes
+                    or seed_mode is not None and e.get('seed_mode')!=seed_mode
                     or e.get("actual_slot_commit")!="not_started"):
                 raise ValueError("complete packed preparation geometry/call stages required")
             prepared[key]=(index,e,group)

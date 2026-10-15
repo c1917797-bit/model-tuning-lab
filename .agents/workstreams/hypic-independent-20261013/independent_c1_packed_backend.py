@@ -2,8 +2,7 @@
 import hashlib,inspect
 from pathlib import Path
 import torch
-from independent_c1_reference import SegmentAffine
-from independent_c1_packed_wave import propagate_window_seeds
+from independent_c1_prefix_seeds import prefix_initial_seeds,suffix_seeds_from_terminals
 from independent_c1_window_pack import pack_windows
 from independent_c1_shared_wy import prepare_shared_wy
 from independent_c1_packed_metadata import PackedMetadataCache
@@ -54,9 +53,11 @@ def run_packed_c1(layer,layout,projected,b,a,initial_states,incoming_conv,materi
                            tp_size=layer.tp_size,device=device)
     shared=prepare_shared_wy(q,k,v,g,beta,meta=meta,native=native,
                             state_op=state_op,output_op=output_op)
-    t,s=shared.affine_maps()
-    maps=tuple(SegmentAffine(t[i],s[i]) for i in range(n))
-    seeds,_=propagate_window_seeds(layout,initial_states,maps,cached)
+    initial_seeds=prefix_initial_seeds(layout,initial_states)
+    # Use actual incoming H, not a zero/identity-derived approximation of a
+    # finite-precision native live-prefix kernel. Dummy suffix states are zero.
+    _,_,prefix_terminals=shared.state(initial_seeds.clone())
+    seeds=suffix_seeds_from_terminals(layout,initial_seeds,prefix_terminals,cached)
     output,terminal=shared.render(seeds)
     wanted=(1,layout.packed_tokens,initial_states.shape[1],initial_states.shape[-1])
     if tuple(output.shape)!=wanted or terminal.shape!=(n,*initial_states.shape[1:]):

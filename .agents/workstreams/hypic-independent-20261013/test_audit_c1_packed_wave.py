@@ -65,4 +65,14 @@ class PackedAuditTests(unittest.TestCase):
         e.append({"event":"c1_packed_wave_prepared"})
         with self.assertRaises(ValueError):self.run_audit(e,w,l,enabled=False)
 
+    def test_two_pass_requires_frozen_seed_mode(self):
+        e,w,l=self.fixture()
+        for x in e:
+            if x['event']=='c1_packed_wave_prepared':
+                x.update(state_passes=2,seed_mode='actual_prefix_terminal')
+        self.assertTrue(self.run_audit(e,w,l,state_passes=2,seed_mode='actual_prefix_terminal')['packed_c1_verified'])
+        with self.assertRaises(ValueError):self.run_audit(e,w,l,state_passes=2)
+        e[5]['seed_mode']='affine_live'
+        with self.assertRaises(ValueError):self.run_audit(e,w,l,state_passes=2,seed_mode='actual_prefix_terminal')
+
 if __name__=="__main__":unittest.main()

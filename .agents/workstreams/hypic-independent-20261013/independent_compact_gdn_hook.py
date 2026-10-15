@@ -141,7 +141,8 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
                 emit({'event':'c1_packed_wave_prepared','rank':plans[0].rank,'step':plans[0].step,
                     'layer':self.prefix,'requests':list(packed),'windows':len(packed_layout.windows),
                     'packed_tokens':packed_layout.packed_tokens,'shared_wy_preparations':1,
-                    'state_passes':3,'actual_slot_commit':'not_started'})
+                    'state_passes':2,'seed_mode':'actual_prefix_terminal',
+                    'actual_slot_commit':'not_started'})
             if CURRENT_COMPACT_MODEL.get() is not selected or CURRENT_REQUEST_SLICES.get() is not requests:
                 raise RuntimeError('request context changed before compact commit')
             if finite_guard is not None:

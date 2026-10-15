@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST R10 implemented defaultoff: firstpackedH uses actual incoming prefix
+states, cachedT/S composes actual prefixterminal, second packedH/output pass;
+no live identity/T approximation. Conv/sharedWY/C2/materialleases/native1 and
+.01/.003 shadows unchanged.0718 focused22/071a full413CPUtests PASS,
+including nonlinearBF16rounding/nonzero-state counterexample and full private
+backend oracle. This does NOT prove actual NPU rootcause/fix.
+New config/manifest/contract C1_PACKED_SEEDED_PREFIX_R1_CONTRACT.json,
+120contract/119manifest bindings. NOTlaunched until static/publish/fresh
+direct/physical0-3/ports/newroot admission. No ownedNPUjob after R9release.
+R9raw immutable, oldR9control notadmitted. No staleR9/R8/R7 launch.
+Deadline19:04:09UTC/fullmatrix/quality/lifecycle/29functional unchanged.
+
 LATEST06f7 TERMINALexit1,NUMERICAL_CANARY_FAILED_NOT_PROMOTED.0707 independent
 118source/173clean/exact132e8354 removal/8233free/physical0-3empty PASS.
 0of16 successful responses. Failed state shadows ranks0/1/2 layer0 step9,

@@ -54,7 +54,7 @@ class PackedBackendTests(unittest.TestCase):
             with self.assertRaises(ValueError):c.get(starts,total_value_heads=48,tp_size=4,device="cpu")
         c.clear();self.assertFalse(c.entries)
 
-    def test_full_private_backend_against_serial_recurrence(self):
+    def full_private_backend_case(self,round_state=False):
         from independent_c1_reference import serial_dense_oracle
         for no_suffix in (False,True):
             plans,associations,layout,initial,cached,data,maps=self.fixture(no_suffix)
@@ -100,6 +100,7 @@ class PackedBackendTests(unittest.TestCase):
                         decay=kw["g"][0,:,token].exp()
                         h[row]=serial_dense_oracle(key[None],value[None],
                             torch.full((1,k.shape[1]),.1),decay[None],h[row])
+                        if round_state:h[row]=h[row].to(torch.bfloat16).float()
                         states[0,:,token]=h[row]
                 return states,u,h
             def output_op(q,k,v,history,scale,**kw):
@@ -131,14 +132,18 @@ class PackedBackendTests(unittest.TestCase):
                         for token in range(len(values)):
                             h=serial_dense_oracle(k[:,token],v[:,token].float(),
                                 torch.full((1,2),.1),torch.full((1,2),-.03).exp(),h)
+                            if round_state:h=h.to(torch.bfloat16).float()
                             ys.append((q[0,token].unsqueeze(-1)*h).sum(-2)*5**-.5)
                 actual=result[layout.request_ids[row]]
                 torch.testing.assert_close(actual[0].float(),torch.stack(ys).to(torch.bfloat16).float(),atol=.002,rtol=.003)
                 torch.testing.assert_close(actual[1],h,atol=2e-5,rtol=.002)
                 torch.testing.assert_close(actual[2].float(),c.float(),atol=.001,rtol=.002)
             self.assertEqual(calls["conv"],1);self.assertEqual(calls["metadata"],1)
-            self.assertEqual(calls["wy"],1);self.assertEqual(calls["state"],3)
+            self.assertEqual(calls["wy"],1);self.assertEqual(calls["state"],2)
             self.assertEqual(calls["output"],1)
             for got,old in zip((x,tail,ct["shared"],initial),before):self.assertTrue(torch.equal(got,old))
+
+    def test_full_private_backend_against_serial_recurrence(self):self.full_private_backend_case()
+    def test_nonzero_rounding_backend_against_serial(self):self.full_private_backend_case(round_state=True)
 
 if __name__=="__main__":unittest.main()

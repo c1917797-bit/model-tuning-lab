@@ -1,0 +1,24 @@
+{
+  "schema": "hypic-r10-host-readiness/v1",
+  "implementation": "actual-prefix-state/sharedWY/two-pass output",
+  "focused": {
+    "operation": "exec-0000000000000718",
+    "tests": 22,
+    "passed": true
+  },
+  "full": {
+    "operation": "exec-000000000000071a",
+    "tests": 413,
+    "passed": true
+  },
+  "numerical_counterexample": "nonlinear BF16-rounding simulator with nonzero incoming states falsifies generic live affine reconstruction; new route matches serialized oracle. This is a possible mechanism, not a diagnosis proven for real NPU.",
+  "unchanged_thresholds": {
+    "atol": 0.01,
+    "rtol": 0.003
+  },
+  "r9_failure": "C1_PACKED_CANARY_R1_FAILURE_AUDIT.json",
+  "source_bindings": 120,
+  "manifest_sha256": "de58f45a40cfc078c9e80c260d1b5d1ffd266e1090b1391f6ff7dc531186a5e7",
+  "device_run": false,
+  "remaining": "source/contract static check, publish checkpoint, fresh direct/physical0-3/ports/newroot before integrated R10 run; full numerical/disabled/performance/quality/lifecycle not accepted"
+}

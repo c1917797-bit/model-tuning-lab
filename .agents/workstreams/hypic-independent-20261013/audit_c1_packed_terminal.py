@@ -26,7 +26,8 @@ def audit_packed_terminal(contract_path,*,live_release=False):
     digest=hashlib.sha256(manifest_path.read_bytes()).hexdigest()
     packed=audit_packed_c1(events,workers,manifest_sha256=digest,
         linear_layers=expected['linear_layers'],requests=[x['response']['id'] for x in results],
-        enabled=flag,skipped_body_tokens=c['independent_acceptance']['skipped_body_rows'])
+        enabled=flag,skipped_body_tokens=c['independent_acceptance']['skipped_body_rows'],
+        state_passes=expected.get('state_passes',3),seed_mode=expected.get('seed_mode'))
     if not flag:
         report['serial_completion']=audit_c1_completion(events,workers,
             manifest_sha256=digest,enabled=True,require_shadow=True)
