@@ -54,7 +54,7 @@ class PackedBackendTests(unittest.TestCase):
             with self.assertRaises(ValueError):c.get(starts,total_value_heads=48,tp_size=4,device="cpu")
         c.clear();self.assertFalse(c.entries)
 
-    def full_private_backend_case(self,round_state=False):
+    def full_private_backend_case(self,round_state=False,canonical=False):
         from independent_c1_reference import serial_dense_oracle
         for no_suffix in (False,True):
             plans,associations,layout,initial,cached,data,maps=self.fixture(no_suffix)
@@ -123,9 +123,12 @@ class PackedBackendTests(unittest.TestCase):
                 num_v_heads=8,tp_size=4)
             before=[v.clone() for v in (x,tail,ct["shared"],initial)]
             geometry=[]
+            routes=[]
+            policy_kwargs=dict(short_prefix_policy="canonical_recurrent_le64",
+                prefix_route_observer=routes.append) if canonical else {}
             result=run_packed_c1(layer,layout,x,b,a,initial,tail,material,backends=(
                 native,conv_op,gating,state_op,output_op,PackedMetadataCache(metadata)),
-                geometry_observer=geometry.append)
+                geometry_observer=geometry.append,**policy_kwargs)
             self.assertEqual(geometry,[dict(key_heads=1,query_heads=1,value_heads=2,
                 wy_heads=2,gate_heads=2,key_width=5,value_width=3,head_layout="native_grouped")])
             for row,chain in enumerate(layout.chains):
@@ -139,12 +142,20 @@ class PackedBackendTests(unittest.TestCase):
                         window=layout.windows[key]
                         values=x[window.source_start:window.source_end]
                         y,c=convolution(values,c);q,k,v=rearrange(y)
+                        original_q,original_k=q,k
+                        before_window=h.clone()
                         q=q.repeat_interleave(2,2).float();k=k.repeat_interleave(2,2).float()
                         for token in range(len(values)):
                             h=serial_dense_oracle(k[:,token],v[:,token].float(),
                                 torch.full((1,2),.1),torch.full((1,2),-.03).exp(),h)
                             if round_state:h=h.to(torch.bfloat16).float()
                             ys.append((q[0,token].unsqueeze(-1)*h).sum(-2)*5**-.5)
+                        if canonical and chain[0]==("live",key) and len(values)<=64:
+                            from independent_recurrent_boundary import recurrent_boundary
+                            _,canonical_state=recurrent_boundary(original_q,original_k,v,
+                                torch.full((1,len(values),2),-.03),
+                                torch.full((1,len(values),2),.1),before_window[None])
+                            h=canonical_state[0]
                 actual=result[layout.request_ids[row]]
                 torch.testing.assert_close(actual[0].float(),torch.stack(ys).to(torch.bfloat16).float(),atol=.002,rtol=.003)
                 torch.testing.assert_close(actual[1],h,atol=2e-5,rtol=.002)
@@ -152,9 +163,14 @@ class PackedBackendTests(unittest.TestCase):
             self.assertEqual(calls["conv"],1);self.assertEqual(calls["metadata"],1)
             self.assertEqual(calls["wy"],1);self.assertEqual(calls["state"],2)
             self.assertEqual(calls["output"],1)
+            if canonical:
+                self.assertEqual(len(routes),sum(bool(c) and c[0][0]=="live" for c in layout.chains))
+                self.assertTrue(all(r["policy"]=="canonical_recurrent_le64" for r in routes))
             for got,old in zip((x,tail,ct["shared"],initial),before):self.assertTrue(torch.equal(got,old))
 
     def test_full_private_backend_against_serial_recurrence(self):self.full_private_backend_case()
     def test_nonzero_rounding_backend_against_serial(self):self.full_private_backend_case(round_state=True)
+    def test_canonical_prefix_terminal_actually_feeds_cached_body_and_suffix(self):
+        self.full_private_backend_case(canonical=True)
 
 if __name__=="__main__":unittest.main()

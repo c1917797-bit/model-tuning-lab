@@ -64,9 +64,19 @@ class C1StageProbe:
         if self.deferred is not None:self.deferred.add(**kwargs,tensors=tensors)
         else:self.capture.add(**kwargs,tensors=sampled_head(stage,tensors,0))
 
+    def packed_recurrent_inputs(self,job,q,k,v,g,beta,initial,branch):
+        w=self.layout.windows[job];rid=w.request_id
+        if rid not in self.jobs:return
+        if job!=self.jobs[rid][0] or branch!="independent_recurrent_le64":
+            raise ValueError("actual recurrent prefix job required")
+        self.add("packed",rid,"inputs","prefix",dict(q=q[0],k=k[0],v=v[0],
+            g=g[0],beta=beta[0],initial=initial[0]))
+        self.branches[("packed",rid,"prefix")]=branch
+
     def packed_inputs(self,shared,v,g,beta,initial,seeds):
         for rid,jobs in self.jobs.items():
             for pos,j in enumerate(jobs):
+                if pos==0 and ("packed",rid,"prefix") in self.branches:continue
                 w=self.layout.windows[j];span=slice(w.packed_start,w.packed_end)
                 # These are the actual head-first BF16 Q/K passed to kernels;
                 # V/log-g/beta are original inputs, not WY-produced U.

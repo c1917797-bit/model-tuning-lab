@@ -88,6 +88,24 @@ class RuntimeStageAuditTests(unittest.TestCase):
             self.assertEqual(len(report['fp64_captured_input_references']),4)
             self.assertTrue(all(x['within_frozen_tolerance'] for x in report['internal_state_checks']))
             self.assertIsNone(report["tensor_audit"]["first_observed_divergence"])
+
+    def test_canonical_prefix_capture_requires_actual_producing_route(self):
+        with tempfile.TemporaryDirectory() as temp:
+            events,raw=self.fixture(temp,residual=True)
+            for install in events[:4]:
+                install["c1_short_prefix_terminal_policy"]="canonical_recurrent_le64"
+            events[-1]["branches"][0]["branch"]="independent_recurrent_le64"
+            common={k:events[-1][k] for k in ("rank","pid","step","layer","manifest_sha256")}
+            routes=[dict(common,event="c1_prefix_terminal_route",request_id=rid,job=j,
+                window="prefix",source_start=0,source_end=2,packed_start=10*j,packed_end=10*j+2,
+                rows=2,branch="independent_recurrent_le64",policy="canonical_recurrent_le64",
+                actual_slot_commit="not_started") for rid,j in (("r",0),("other",2))]
+            events[6:6]=routes
+            report=audit_runtime_capture(events,raw,manifest_sha256="a"*64)
+            self.assertTrue(report["prefix_route_audit"]["verified"])
+            routes[0].update(source_end=3,packed_end=3,rows=3)
+            with self.assertRaises(ValueError):
+                audit_runtime_capture(events,raw,manifest_sha256="a"*64)
     def test_identity_and_generation_mutations(self):
         changes=[lambda e:e[-1].update(pid=999),lambda e:e[-1].update(step=10),
             lambda e:e[-1].update(manifest_sha256="c"*64),

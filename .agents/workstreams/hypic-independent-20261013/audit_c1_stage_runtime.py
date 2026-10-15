@@ -156,6 +156,22 @@ def audit_runtime_capture(events,host_raw,*,manifest_sha256):
                 if meta["shape"]!=shape:raise ValueError("sampled state/output/conv geometry")
     branches=e.get("branches",[])
     if len(branches)!=4:raise ValueError("four actual branch receipts required")
+    prefix_policy=installs[0].get("c1_short_prefix_terminal_policy","chunk64")
+    if any(x.get("c1_short_prefix_terminal_policy","chunk64")!=prefix_policy for x in installs):
+        raise ValueError("worker prefix-terminal policy mismatch")
+    prefix_route_audit=None
+    if prefix_policy=="canonical_recurrent_le64":
+        from audit_c1_short_prefix import audit_prefix_routes
+        prefix_route_audit=audit_prefix_routes(events,manifest_sha256=manifest_sha256)
+        candidates=[x for x in events[:index] if x.get("event")=="c1_prefix_terminal_route"
+            and (x.get("rank"),x.get("pid"),x.get("step"),x.get("layer"),x.get("request_id"))==
+                (0,e["pid"],e["step"],LAYER,rid)]
+        record=records[("packed","inputs","prefix")]
+        if (len(candidates)!=1 or
+                (candidates[0]["source_start"],candidates[0]["source_end"])!=
+                    (record["source_start"],record["source_end"])):
+            raise ValueError("sampled prefix inputs lack exact producing terminal route")
+    elif prefix_policy!="chunk64":raise ValueError("unknown actual prefix terminal policy")
     seen=set()
     for branch in branches:
         key=(branch.get("side"),branch.get("window"))
@@ -164,6 +180,8 @@ def audit_runtime_capture(events,host_raw,*,manifest_sha256):
         seen.add(key)
         expected=("official_chunk64" if key[0]=="packed" or lengths[key]>64
                   else "independent_recurrent_le64")
+        if prefix_policy=="canonical_recurrent_le64" and key==("packed","prefix") and lengths[key]<=64:
+            expected="independent_recurrent_le64"
         if branch.get("branch")!=expected:raise ValueError("actual kernel branch mismatch")
 
     if e.get("records")!=len(m["records"]) or e.get("payload_bytes")!=m["payload_bytes"]:
@@ -218,7 +236,7 @@ def audit_runtime_capture(events,host_raw,*,manifest_sha256):
                 scope="independent captured-input FP64 math reference; not BF16 bitwise requirement"))
     return dict(capture_link_verified=True,identity=identity,coordinates=coordinates,
                 internal_state_checks=internal,fp64_captured_input_references=oracles,
-                selected_failed_point=selected_point,
+                selected_failed_point=selected_point,prefix_route_audit=prefix_route_audit,
                 tensor_audit=generic,scope="source-bound sampled selected-head failed-request diagnostic only; full run, physical isolation/release, quality and performance separate")
 
 if __name__=='__main__':

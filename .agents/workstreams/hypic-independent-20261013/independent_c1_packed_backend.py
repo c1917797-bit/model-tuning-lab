@@ -25,8 +25,11 @@ def source_verified_backend(layer):
         torch.ops._C_ascend.chunk_fwd_o,PackedMetadataCache(builder))
 
 def run_packed_c1(layer,layout,projected,b,a,initial_states,incoming_conv,materials,
-                  *,backends,finite_check=None,geometry_observer=None,stage_probe=None):
+                  *,backends,finite_check=None,geometry_observer=None,stage_probe=None,
+                  short_prefix_policy="chunk64",prefix_route_observer=None):
     """Return only private tensors. Caller owns leases and all-request commit."""
+    if short_prefix_policy not in ("chunk64","canonical_recurrent_le64"):
+        raise ValueError("explicit short-prefix policy required")
     native,conv_op,gating,state_op,output_op,metadata_cache=backends
     cached={key:body.affine for key,body in materials.items()}
     tails={key:body.conv_tail for key,body in materials.items()}
@@ -60,6 +63,13 @@ def run_packed_c1(layer,layout,projected,b,a,initial_states,incoming_conv,materi
     # Use actual incoming H, not a zero/identity-derived approximation of a
     # finite-precision native live-prefix kernel. Dummy suffix states are zero.
     _,_,prefix_terminals=shared.state(initial_seeds.clone())
+    if short_prefix_policy=="canonical_recurrent_le64":
+        from independent_c1_short_prefix import align_short_prefix_terminals
+        observer=stage_probe.packed_recurrent_inputs if stage_probe is not None else None
+        prefix_terminals,routes=align_short_prefix_terminals(layout,q,k,v,g,beta,
+            initial_seeds,prefix_terminals,input_observer=observer)
+        if prefix_route_observer is not None:
+            for route in routes:prefix_route_observer(route)
     seeds=suffix_seeds_from_terminals(layout,initial_seeds,prefix_terminals,cached)
     if stage_probe is not None:
         stage_probe.packed_inputs(shared,v,g,beta,initial_seeds,seeds)
@@ -74,6 +84,12 @@ def run_packed_c1(layer,layout,projected,b,a,initial_states,incoming_conv,materi
         jobs=[key for kind,key in chain if kind=='live'];last=jobs[-1]
         pieces=[output[0,layout.windows[j].packed_start:layout.windows[j].packed_end] for j in jobs]
         state=terminal[last];tail=conv[last].clone()
+        if (short_prefix_policy=="canonical_recurrent_le64" and chain[0][0]=="live"
+                and last==jobs[0]
+                and layout.windows[last].packed_end-layout.windows[last].packed_start<=64):
+            # With no live suffix, the real carried terminal is the aligned
+            # prefix state, not the separate packed prefix-output rendering.
+            state=prefix_terminals[last]
         if chain[-1][0]=='cached':
             body=materials[chain[-1][1]]
             state=body.affine.transition@state+body.affine.zero_state

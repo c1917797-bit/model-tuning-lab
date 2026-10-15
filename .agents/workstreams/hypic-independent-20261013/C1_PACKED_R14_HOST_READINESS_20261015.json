@@ -1,0 +1,39 @@
+{
+  "schema": "hypic-r14-host-readiness/v1",
+  "plan_checkpoint": "e029ab98f9c4a1dcadc5b94e9380d7f256e43745",
+  "scope": "host-side intervention/observer/auditor readiness; not NPU/rootcause/performance/quality acceptance",
+  "full_regression": {
+    "operation": "exec-000000000000082c",
+    "tests": 474,
+    "exit": 0
+  },
+  "retained_negative": {
+    "operation": "exec-000000000000082a",
+    "tests": 474,
+    "failures": 1,
+    "test": "canonical_prefix_terminal_actually_feeds_cached_body_and_suffix",
+    "max_abs": 0.366929292678833,
+    "cause": "No-live-suffix path used packed render terminal instead of aligned short-prefix terminal. Corrected producer state selection; original assertion retained."
+  },
+  "static": {
+    "operation": "exec-0000000000000830",
+    "contract_bindings": 132,
+    "manifest_bindings": 131,
+    "newroot_absent": true
+  },
+  "manifest_sha256": "384c1b20dc6e8b52af18b61bc4a5347dcb693df646fba0ec9530531b62be6b4d",
+  "contract": "C1_SHORT_PREFIX_ALIGNED_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-short-prefix-aligned-r1",
+  "default_policy": "chunk64",
+  "candidate_policy": "canonical_recurrent_le64",
+  "unchanged": [
+    ".01/.003 guard",
+    "long-prefix/suffix operator branches",
+    "shared WY",
+    "cached T@H+S",
+    "C2",
+    "material leases",
+    "16/c16/32768/fixed64/2B2A protocol"
+  ],
+  "device_started": false
+}

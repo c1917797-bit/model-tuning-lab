@@ -7,7 +7,8 @@ from independent_hybrid_material import validate_material
 from independent_c1_packed_backend import run_packed_c1,source_verified_backend
 
 def prepare_packed_layer(layer,stage,plans,associations,projected,b,a,leases,
-                         backend_state,*,finite_check=None,probe_factory=None):
+                         backend_state,*,finite_check=None,probe_factory=None,
+                         short_prefix_policy="chunk64",prefix_route_observer=None):
     layout=build_wave_layout(plans,associations)
     conv_cache,state_cache=layer.kv_cache[:2]
     states=[];tails=[];leased={};materials={};identities={}
@@ -40,6 +41,9 @@ def prepare_packed_layer(layer,stage,plans,associations,projected,b,a,leases,
         backend_state['probe']=probe
         leases.callback(probe.discard)
     probe_kwargs={'stage_probe':probe} if probe is not None else {}
+    if short_prefix_policy!="chunk64":
+        probe_kwargs.update(short_prefix_policy=short_prefix_policy,
+                            prefix_route_observer=prefix_route_observer)
     result=run_packed_c1(layer,layout,projected,b,a,torch.stack(states),torch.stack(tails),
                          materials,backends=backend_state['official'],finite_check=finite_check,
                          geometry_observer=lambda geometry:backend_state.update(geometry=geometry),

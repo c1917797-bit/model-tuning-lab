@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+R14 canonical short-prefix<=64 actual-terminal policy implemented DEFAULT OFF.
+Own existing recurrence from actualrawq/k/v/g/beta/H, terminal feeds cachedbody+
+suffix; no-suffix state provenance repaired after targeted082a CPUfailure; test
+assertion retained. Observer captures producing recurrence actualnormalizedinputs,
+not chunkstand-in. Actualroute perrank/layer/request/source/packedcoords emitted;
+independent routeaudit joins exact subsequentprivategroups; sampled capture link
+requires exact producing prefixroute. Generichead0label corrected toselectedhead.
+474fullCPU082cPASS;0830static132contract/131manifest/newrootabsentPASS. No newNPUrun.
+C1_SHORT_PREFIX_ALIGNED_R1_CONTRACT.json and c1-short-prefix-aligned-r1 frozen.
+Commit/publish/freshdirect+physical0-3+8233/HCCL/source admission beforeONErun.
+No .01/.003 relaxation, no oldalgorithmcode, all R13rawimmutable/deadline19:04:09UTC.
+
 LATEST080c TERMINALexit1/R13numericFAIL but actualfailedhead captureVALID081c.
 129sources/169clean/exactcd5072d9release/physical0-3empty/8233no listener081bPASS.
 0/16success; failedgroupszeroactualwrites. Head7/key2/step9/coord31,17 independently

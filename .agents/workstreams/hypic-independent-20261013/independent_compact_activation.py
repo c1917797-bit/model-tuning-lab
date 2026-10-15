@@ -43,6 +43,9 @@ def c1_install_route(config):
     completion=config.pop('c1_layer_completion_barrier',False)
     shadow=config.pop('c1_layer_shadow_validation',False)
     packed=config.pop('c1_packed_wave',False)
+    prefix_policy=config.pop('c1_short_prefix_terminal_policy','chunk64')
+    if prefix_policy not in ('chunk64','canonical_recurrent_le64') or prefix_policy!='chunk64' and not packed:
+        raise ValueError('canonical short prefix requires explicit packed C1')
     probe=config.pop('c1_first_divergence',False)
     head_policy=config.pop('c1_first_divergence_head_policy','head0')
     if head_policy not in ('head0','max_state_residual') or head_policy!='head0' and not probe:
@@ -59,10 +62,12 @@ def c1_install_route(config):
     def install(stage,*,enabled=False,emit=None):
         return install_compact_gdn(stage,enabled=enabled,emit=emit,native_decode_batch=native_batch,
             layer_completion=completion,layer_shadow=shadow,packed_wave=packed,
-            first_divergence=probe,first_divergence_head_policy=head_policy)
+            first_divergence=probe,first_divergence_head_policy=head_policy,
+            short_prefix_policy=prefix_policy)
     install.c1_layer_completion_barrier=completion
     install.c1_layer_shadow_validation=shadow
     install.c1_packed_wave=packed
+    install.c1_short_prefix_terminal_policy=prefix_policy
     install.c1_first_divergence=probe
     install.c1_first_divergence_head_policy=head_policy
     return config,install,native_batch
@@ -116,6 +121,7 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
               'c1_layer_shadow_validation':install_compact_gdn.c1_layer_shadow_validation,
               'c1_packed_wave':install_compact_gdn.c1_packed_wave,
               'c1_first_divergence':install_compact_gdn.c1_first_divergence,
+              'c1_short_prefix_terminal_policy':install_compact_gdn.c1_short_prefix_terminal_policy,
               'c1_first_divergence_head_policy':install_compact_gdn.c1_first_divergence_head_policy,
               'scope':'installation; real request proof pending'})
     except BaseException:

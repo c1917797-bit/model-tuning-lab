@@ -83,4 +83,34 @@ class ResidualProbeTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             c1_install_route({"c1_first_divergence_head_policy":"max_state_residual"})
 
+    def test_actual_recurrent_prefix_inputs_replace_not_duplicate_chunk_sample(self):
+        with tempfile.TemporaryDirectory() as temp:
+            p=self.probe(temp)
+            q=torch.full((1,2,12,128),2.,dtype=torch.bfloat16)
+            p.packed_recurrent_inputs(0,q,q,torch.ones_like(q),torch.zeros(1,2,12),
+                torch.ones(1,2,12),torch.zeros(1,12,128,128),"independent_recurrent_le64")
+            shared=SimpleNamespace(q=torch.ones(1,4,10,128),k=torch.ones(1,4,10,128))
+            states=torch.zeros(4,12,128,128)
+            p.packed_inputs(shared,torch.ones(1,10,12,128),torch.zeros(1,10,12),
+                torch.ones(1,10,12),states,states)
+            self.assertEqual(len(p.deferred.records),2)
+            self.assertTrue(torch.equal(p.deferred.records[0]["tensors"]["q"],q[0]))
+            self.assertEqual(p.branches[("packed","a","prefix")],"independent_recurrent_le64")
+            p.discard()
+
+    def test_canonical_prefix_route_defaultoff_and_explicit(self):
+        _,fn,_=c1_install_route({})
+        self.assertEqual(fn.c1_short_prefix_terminal_policy,"chunk64")
+        config=dict(native_decode_batch=True,c1_layer_completion_barrier=True,
+            c1_layer_shadow_validation=True,c1_packed_wave=True,
+            c1_short_prefix_terminal_policy="canonical_recurrent_le64")
+        rest,fn,_=c1_install_route(config)
+        self.assertEqual(rest,{})
+        self.assertEqual(fn.c1_short_prefix_terminal_policy,"canonical_recurrent_le64")
+        for value in (None,1,"other"):
+            with self.assertRaises(ValueError):
+                c1_install_route({**config,"c1_short_prefix_terminal_policy":value})
+        with self.assertRaises(ValueError):
+            c1_install_route({"c1_short_prefix_terminal_policy":"canonical_recurrent_le64"})
+
 if __name__=="__main__":unittest.main()

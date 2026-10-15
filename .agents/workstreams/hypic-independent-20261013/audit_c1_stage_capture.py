@@ -109,4 +109,4 @@ def audit_capture(root,*,expected_identity,manifest_sha256,atol=.01,rtol=.003):
     nonidentical=[p for p in pairs if not p['exact_equal']]
     return dict(sampled_pairs=len(pairs),first_observed_divergence=failures[0] if failures else None,
         first_nonidentical_sample=nonidentical[0] if nonidentical else None,
-        comparisons=pairs,scope="same-coordinate head0 samples only; not full tensors, task quality or native/PIC semantic equivalence")
+        comparisons=pairs,scope="same-coordinate selected-head samples only; not full tensors, task quality or native/PIC semantic equivalence")
