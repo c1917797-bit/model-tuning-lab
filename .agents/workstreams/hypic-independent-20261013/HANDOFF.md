@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT R12r2 exec-00000000000007ca RUNNING originalma a6109/tpcforcedirect.
+Checkpoint057d683d published/liveverified;07c9 16:27:23UTC127bindings/newroot/
+physical0-3empty/8233+HCCLidle PASS. Actual ownedCID9866d11399a7cf1a0d42d440f083023c940bdd261fc27664cabe262ec26b608b
+officialimage/ONLYphysical0-3,/probeRO/newowncacheRW. No numeric/capture proofyet.
+Raw/cache/cch/hypic-independent-20261013/c1-first-divergence-r2 immutable.
+Poll SAME07ca/root; running/unknown NEVERrestart or edit127boundsources.
+Terminal independent source/isolation/NSpid/exactrelease then sharedpy311
+python -B audit_c1_stage_runtime.py --raw-root RAW --manifest-sha256
+b6880bb158c6d7e3b07d964a7604055b5ba5ad327b8c5718ad98b50cb0bec0db.
+Check explicit selector receipts, diagnosticcapture not HYPIC acceptance.
+R12r1 incomplete rawretained; fullscope/deadline19:04:09UTC unchanged.
+
 LATEST R12r2 mixed-selector repair DEFAULTOFF implemented. Empty-chain native1
 maycoexist with2activehot; firstHOT/head0 only, notfirstbatchentry. Coordinates
 onlyhotgroup; selection emits eligible/reason/entrycounts/actualexcluded IDs;

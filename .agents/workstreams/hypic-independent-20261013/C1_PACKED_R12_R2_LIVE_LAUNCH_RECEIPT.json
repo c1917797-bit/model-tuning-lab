@@ -1,0 +1,106 @@
+{
+  "schema": "hypic-r12-r2-live-launch/v1",
+  "controller": "exec-00000000000007ca",
+  "peer": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "route": "tpc force_direct peer_direct",
+  "checkpoint": "057d683dc17a38be03d006693af30364cb00436c",
+  "published_live_verified": true,
+  "preflight_operation": "exec-00000000000007c9",
+  "preflight": {
+    "admission_passed": true,
+    "utc": "2026-10-15T16:27:23.394919+00:00",
+    "hostname": "Euler",
+    "arch": "aarch64",
+    "source_bindings": 127,
+    "physical0_3_processes": [],
+    "ports_idle": true,
+    "newroot_absent": true,
+    "checkpoint": "057d683dc17a38be03d006693af30364cb00436c",
+    "cache_free_bytes": 56362242048,
+    "memory": {
+      "MemAvailable": "81336356 kB",
+      "Hugetlb": "2009071616 kB"
+    },
+    "compute_started": false
+  },
+  "container": {
+    "cid": "9866d11399a7cf1a0d42d440f083023c940bdd261fc27664cabe262ec26b608b",
+    "running": true,
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "devices": [
+      "/dev/davinci0",
+      "/dev/davinci1",
+      "/dev/davinci2",
+      "/dev/davinci3",
+      "/dev/davinci_manager",
+      "/dev/hisi_hdc",
+      "/dev/devmm_svm"
+    ],
+    "mounts": [
+      {
+        "Source": "/usr/local/Ascend/driver",
+        "Destination": "/usr/local/Ascend/driver",
+        "Mode": "ro",
+        "RW": false
+      },
+      {
+        "Source": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013",
+        "Destination": "/probe",
+        "Mode": "ro",
+        "RW": false
+      },
+      {
+        "Source": "/cache/efim/Qwen3.6-27B",
+        "Destination": "/model",
+        "Mode": "ro",
+        "RW": false
+      },
+      {
+        "Source": "/usr/local/dcmi",
+        "Destination": "/usr/local/dcmi",
+        "Mode": "ro",
+        "RW": false
+      },
+      {
+        "Source": "/usr/local/Ascend/firmware",
+        "Destination": "/usr/local/Ascend/firmware",
+        "Mode": "ro",
+        "RW": false
+      },
+      {
+        "Source": "/cache/cch/hypic-independent-20261013/formal-token-streams-r1/tokens.json",
+        "Destination": "/inputs/tokens.json",
+        "Mode": "ro",
+        "RW": false
+      },
+      {
+        "Source": "/cache/cch/hypic-independent-20261013/c1-first-divergence-r2/compiled-cache",
+        "Destination": "/compilation-cache",
+        "Mode": "rw",
+        "RW": true
+      },
+      {
+        "Source": "/cache/cch/hypic-independent-20261013/c1-first-divergence-r2",
+        "Destination": "/scratch",
+        "Mode": "rw",
+        "RW": true
+      },
+      {
+        "Source": "/etc/ascend_install.info",
+        "Destination": "/etc/ascend_install.info",
+        "Mode": "ro",
+        "RW": false
+      }
+    ],
+    "labels": {
+      "model-tuning-lab.phase": "native-smoke",
+      "model-tuning-lab.task": "hypic-independent-20261013",
+      "org.opencontainers.image.version": "22.04"
+    }
+  },
+  "contract": "C1_FIRST_DIVERGENCE_R2_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-first-divergence-r2",
+  "manifest_sha256": "b6880bb158c6d7e3b07d964a7604055b5ba5ad327b8c5718ad98b50cb0bec0db",
+  "state": "RUNNING_NOT_ACCEPTED",
+  "deadline": "2026-10-15T19:04:09Z"
+}
