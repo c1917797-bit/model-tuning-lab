@@ -6,9 +6,12 @@ import hashlib,inspect
 
 
 def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=False,
-                        layer_completion=False,layer_shadow=False,packed_wave=False):
+                        layer_completion=False,layer_shadow=False,packed_wave=False,
+                        first_divergence=False):
     if not enabled:return lambda:None
     if type(packed_wave) is not bool:raise ValueError('explicit packed C1 boolean required')
+    if type(first_divergence)is not bool or first_divergence and not packed_wave:
+        raise ValueError('explicit stage probe requires packed C1 canary')
     if packed_wave and not (native_decode_batch and layer_completion and layer_shadow):
         raise ValueError('packed C1 canary requires native1 batch, finite gate and shadow')
     if type(native_decode_batch) is not bool:raise ValueError('native decode batch boolean required')
@@ -68,10 +71,17 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
                 raw[self.prefix],shadowed=shadowed,emit=emit,**finite_kwargs)
         with ExitStack() as leases:
             packed={};packed_materials={};packed_layout=None
+            probe=None;probe_kwargs={}
+            if first_divergence:
+                from independent_c1_stage_probe import make_probe
+                probe_kwargs={'probe_factory':lambda layer,layout,plans,leased:
+                    make_probe(layer,layout,plans,leased,emit)}
             if packed_wave:
                 from independent_c1_packed_prepare import prepare_packed_layer
                 packed,packed_materials,packed_layout=prepare_packed_layer(
-                    self,stage,plans,associations,mixed_qkv,b,a,leases,packed_backend,**finite_kwargs)
+                    self,stage,plans,associations,mixed_qkv,b,a,leases,packed_backend,
+                    **finite_kwargs,**probe_kwargs)
+                probe=packed_backend.pop('probe',None)
             hot_count=sum(not isinstance(p,NativeQueryPlan) for p in plans if p.request_id in packed)
             packed_shadow_key=(self.prefix,min(2,hot_count),len(packed)>1)
             check_packed_shadow=bool(packed) and packed_shadow_key not in packed_shadowed
@@ -106,11 +116,22 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
                     from independent_native_decode_prepare import shadow_metrics
                     def packed_serial_live(lo,hi,incoming,conv):
                         span=slice(base+lo,base+hi)
-                        return make_boundary_runner(self,mixed_qkv[span],b[span],a[span],conv,
-                            return_conv=True,synchronize=True)(incoming)
+                        observer_kwargs={}
+                        if probe is not None:
+                            observer_kwargs={'input_observer':lambda **values:probe.serial_inputs(
+                                plan.request_id,lo,hi,**values)}
+                        result=make_boundary_runner(self,mixed_qkv[span],b[span],a[span],conv,
+                            return_conv=True,synchronize=True,**observer_kwargs)(incoming)
+                        if probe is not None:probe.serial_terminal(plan.request_id,lo,hi,result[1])
+                        return result
+                    stage_kwargs={}
+                    if probe is not None:
+                        stage_kwargs={'stage_observer':lambda kind,state:probe.serial_state(
+                            plan.request_id,kind,state,material)}
                     reference=(execute_native_linear_plan(plan,state,initial_tail,run_live=packed_serial_live)
                         if is_native else execute_compact_linear(material,expected,plan,state,initial_tail,
-                                                                run_live=packed_serial_live))
+                                                                run_live=packed_serial_live,**stage_kwargs))
+                    if probe is not None:probe.final('serial',plan.request_id,reference)
                     metrics=[dict(shadow_metrics(x,y),tensor=label) for label,x,y in
                         zip(('output','state','conv'),(output,final,tail),reference)]
                     passed=all(m['passed'] for m in metrics)
@@ -119,7 +140,13 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
                         'passed':passed,'group_requests':list(packed),'private_buffers':True,
                         'atol':.01,'rtol':.003,
                         'actual_slot_commit':'not_started'})
-                    if not passed:raise ValueError('packed C1 full private shadow failed')
+                    if not passed:
+                        if probe is not None:
+                            receipt=probe.seal(plan.request_id)
+                            emit(dict(receipt,event='c1_first_divergence_capture',
+                                rank=plan.rank,step=plan.step,layer=self.prefix,
+                                request_id=plan.request_id,actual_slot_commit='not_started'))
+                        raise ValueError('packed C1 full private shadow failed')
                 if (layer_shadow and not packed_wave and not is_native and self.prefix not in c1_shadowed
                         and plan.body_start>stage.boundary):
                     from independent_c1_completion_shadow import verify_completion_shadow

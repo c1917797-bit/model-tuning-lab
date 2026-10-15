@@ -1,0 +1,52 @@
+{
+  "schema": "hypic-r12-wiring/v1",
+  "state": "HOST_WIRING_PASSED_NOT_DEVICE_ADMITTED",
+  "focused": {
+    "operation": "exec-000000000000078a",
+    "tests": 19,
+    "exit": 0
+  },
+  "full": {
+    "operation": "exec-000000000000078b",
+    "tests": 434,
+    "exit": 0
+  },
+  "structure": {
+    "operation": "exec-000000000000078c",
+    "skills": 29,
+    "scope": "structure only"
+  },
+  "runtime_switch": "c1_first_divergence",
+  "default": false,
+  "math_changes": false,
+  "npu_run": false,
+  "observed_interfaces": [
+    "Actual shared-WY normalized BF16 Q/K/originalV/gates/private incoming seed",
+    "Actual first H prefix terminal/cache-composed seed/final H/output/conv",
+    "Official chunk actual Q/K normalization result via temporary thread-filtered owned wrapper",
+    "Short recurrent actual normalized Q/K before token loop",
+    "Serialized actual prefix/cachecomposition/suffixseed/final"
+  ],
+  "selection": {
+    "rank": 0,
+    "layer": "language_model.model.layers.0.linear_attn",
+    "sampled_heads": {
+      "query": 0,
+      "key": 0,
+      "value": 0
+    },
+    "required_group": "two hot requests, two live windows each",
+    "max_group_live_rows": 12000,
+    "selected_requests": "first request only; other failed request is explicit incomplete evidence",
+    "max_records": 32,
+    "max_bytes": 67108864
+  },
+  "proof_limits": [
+    "Synthetic 128dimension paired fixture; not actual NPU tensors or rootcause",
+    "Independent runtime identity/generation/branch/receipt join remains",
+    "New source-bound manifest/config/contract and live observer proof remain",
+    "All prior runtime manifests stale after source edits",
+    "No full performance/quality/lifecycle/Skill functional acceptance"
+  ],
+  "deadline": "2026-10-15T19:04:09Z"
+}

@@ -61,6 +61,8 @@ def enable():
                         view=view[n:]
                     os.fsync(fd);count+=1;size+=len(data)
             try:
+                emit.source_manifest_sha256=hashlib.sha256(manifest_path.read_bytes()).hexdigest()
+                emit.stage_capture_root=str(raw)
                 from independent_compact_activation import activate_compact_hypic
                 _stop=activate_compact_hypic(config,enabled=True,emit=emit,
                                            request_progress_limit=limits["max_requests"])

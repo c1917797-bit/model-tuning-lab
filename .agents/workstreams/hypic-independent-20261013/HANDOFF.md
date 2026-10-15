@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST R12 boundary wiring DEFAULTFALSE c1_first_divergence; source/loader
+switch/owned normalized-QK observer (thread-filtered/restored on exception),
+short recurrent actualnorm input callback, packed prefix/cache/suffix/final and
+serialized paired stages connected. Failed shadow seals CPU samples BEFORE
+throw/actual cache writes; leases discard passed/exception buffers. R11 math
+and .01/.003 unchanged.078a19focused/078b434full CPU PASS;078c29structure/diff PASS.
+Selection rank0/layer0/head0, first request of2hot/2windows each,group<=12000live
+rows to honor64MiB/32records. Otherfailedrequest => explicitincomplete/noartifact.
+NOT actualNPUcapture/rootcause; no NPUjob. Next independent runtime receiptjoin
+source/PID/request/step/currentgeneration/window/branch/head then new package/
+contract/publish/freshadmission. ALL old manifests stale; never launch them.
+Report C1_PACKED_R12_WIRING_HOST_20261015.json. Deadline19:04:09UTC unchanged.
+
 LATEST R12 offline capture/auditor modules implemented, NOTwired to runtime.
 0778 tenfocused controls PASS; independent sampledheadFP64 reference added;
 077a full426CPUregressions PASS;077b structure29/diff PASS (not29functional).

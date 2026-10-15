@@ -5,7 +5,7 @@ from independent_hybrid_material import validate_material
 
 
 def execute_compact_linear(material,expected,plan,initial_state,incoming_conv,
-                           *,run_live,finite_check=None):
+                           *,run_live,finite_check=None,stage_observer=None):
     """run_live consumes offsets in the COMPACT hidden/projected row stream.
 
     Prefix and seam run first. Cached T/S then advances the recurrent state
@@ -34,7 +34,9 @@ def execute_compact_linear(material,expected,plan,initial_state,incoming_conv,
     for i,w in enumerate(plan.windows):
         if i:
             state=apply_segment(material.affine,state)
+            if stage_observer is not None:stage_observer("cached_composition",state)
             tail=material.conv_tail.clone()
+            if stage_observer is not None:stage_observer("suffix_seed",state)
         output,state,tail=run_live(w.compact_start,w.compact_end,state,tail)
         wanted=(w.compact_end-w.compact_start,initial_state.shape[0],initial_state.shape[-1])
         if (output.shape!=wanted or state.shape!=initial_state.shape

@@ -1,0 +1,138 @@
+"""Default-off adapters observing actual packed/serialized private C1 stages."""
+import hashlib,os,threading
+from contextlib import contextmanager
+from pathlib import Path
+from independent_c1_stage_capture import FirstDivergenceCapture,LAYER
+
+@contextmanager
+def observe_chunk_norm(module,callback):
+    """Temporary owned in-memory observer; original arithmetic/output untouched."""
+    original=module.l2norm_fwd
+    if getattr(original,"_c1_stage_observer",False):raise RuntimeError("normalization observer conflict")
+    seen=[]
+    owner_thread=threading.get_ident()
+    def wrapped(value,*args,**kwargs):
+        result=original(value,*args,**kwargs)
+        if threading.get_ident()!=owner_thread:return result
+        seen.append(result)
+        if len(seen)>2:raise ValueError("unexpected official normalization call count")
+        if len(seen)==2:callback(*seen)
+        return result
+    wrapped._c1_stage_observer=True;module.l2norm_fwd=wrapped
+    try:
+        yield
+        if len(seen)!=2:raise ValueError("missing actual official Q/K normalization")
+    finally:
+        if module.l2norm_fwd is not wrapped:raise RuntimeError("normalization observer ownership changed")
+        module.l2norm_fwd=original
+
+class C1StageProbe:
+    def __init__(self,layout,plans,leased,*,manifest_sha256,root):
+        self.layout=layout;self.plans={p.request_id:p for p in plans}
+        self.root=Path(root);self.sealed=False
+        selected=layout.request_ids[:1]
+        identity=dict(rank=layout.rank,pid=os.getpid(),layer=LAYER,step=layout.step,
+            manifest_sha256=manifest_sha256,requests=list(selected),
+            generations={rid:leased[rid][1] for rid in selected},
+            head_indices=dict(query=0,key=0,value=0),key_width=128,value_width=128)
+        self.capture=FirstDivergenceCapture(identity)
+        self.jobs={}
+        for rid,chain in zip(layout.request_ids,layout.chains):
+            if rid not in selected:continue
+            jobs=[key for kind,key in chain if kind=="live"]
+            if len(jobs)!=2:raise ValueError("two actual live windows required for stage probe")
+            self.jobs[rid]=jobs
+        self.branches={}
+        self.coordinates={rid:dict(slot=layout.state_slots[i],has_initial=layout.has_initial[i],
+            body_start=self.plans[rid].body_start,body_end=self.plans[rid].body_end)
+            for i,rid in enumerate(layout.request_ids)}
+
+    def add(self,side,rid,stage,window,tensors):
+        if window=="body":
+            lo,hi=self.plans[rid].body_start,self.plans[rid].body_end
+        else:
+            job=self.layout.windows[self.jobs[rid][0 if window=="prefix" else 1]]
+            lo,hi=job.source_start,job.source_end
+        self.capture.add(side=side,request_id=rid,stage=stage,window=window,
+                         source_start=lo,source_end=hi,tensors=tensors)
+
+    def packed_inputs(self,shared,v,g,beta,initial,seeds):
+        for rid,jobs in self.jobs.items():
+            for pos,j in enumerate(jobs):
+                w=self.layout.windows[j];span=slice(w.packed_start,w.packed_end)
+                # These are the actual head-first BF16 Q/K passed to kernels;
+                # V/log-g/beta are original inputs, not WY-produced U.
+                self.add("packed",rid,"inputs","prefix" if pos==0 else "suffix",
+                    dict(q=shared.q[0,0,span],k=shared.k[0,0,span],v=v[0,span,0],
+                         g=g[0,span,0],beta=beta[0,span,0],
+                         initial=(initial if pos==0 else seeds)[j,0]))
+                self.branches[("packed",rid,"prefix" if pos==0 else "suffix")]="official_chunk64"
+
+    def packed_states(self,prefix_terminals,seeds,materials):
+        for rid,jobs in self.jobs.items():
+            body=materials[self.plans[rid].tokens_sha256]
+            self.add("packed",rid,"prefix_terminal","prefix",dict(state=prefix_terminals[jobs[0],0]))
+            self.add("packed",rid,"cached_composition","body",dict(
+                transition=body.affine.transition[0],zero_state=body.affine.zero_state[0],
+                state=seeds[jobs[1],0]))
+            self.add("packed",rid,"suffix_seed","suffix",dict(state=seeds[jobs[1],0]))
+
+    def serial_inputs(self,rid,lo,hi,q,k,v,g,beta,initial,branch):
+        if rid not in self.jobs:return
+        base=self.layout.windows[self.jobs[rid][0]].source_start
+        w=self.layout.windows[self.jobs[rid][0]]
+        window="prefix" if (lo,hi)==(0,w.source_end-w.source_start) else "suffix"
+        expected=self.layout.windows[self.jobs[rid][0 if window=="prefix" else 1]]
+        if (base+lo,base+hi)!=(expected.source_start,expected.source_end):
+            raise ValueError("actual serialized/source window mismatch")
+        self.add("serial",rid,"inputs",window,dict(q=q[0,:,0],k=k[0,:,0],v=v[0,:,0],
+            g=g[0,:,0],beta=beta[0,:,0],initial=initial[0,0]))
+        self.branches[("serial",rid,window)]=branch
+
+    def serial_terminal(self,rid,lo,hi,state):
+        if rid not in self.jobs:return
+        w=self.layout.windows[self.jobs[rid][0]]
+        if (lo,hi)==(0,w.source_end-w.source_start):
+            self.add("serial",rid,"prefix_terminal","prefix",dict(state=state[0]))
+
+    def serial_state(self,rid,kind,state,material):
+        if rid not in self.jobs:return
+        if kind=="cached_composition":
+            self.add("serial",rid,kind,"body",dict(transition=material.affine.transition[0],
+                zero_state=material.affine.zero_state[0],state=state[0]))
+        elif kind=="suffix_seed":self.add("serial",rid,kind,"suffix",dict(state=state[0]))
+        else:raise ValueError("unknown actual serialized state stage")
+
+    def final(self,side,rid,result):
+        if rid not in self.jobs:return
+        output,state,conv=result;w=self.layout.windows[self.jobs[rid][1]]
+        self.add(side,rid,"final","suffix",dict(output=output[-(w.source_end-w.source_start):,0],
+                                              state=state[0],conv=conv))
+
+    def seal(self,failed_request_id):
+        if failed_request_id not in self.jobs:
+            self.discard()
+            return dict(complete=False,reason="failed request outside selected first request")
+        # All selected requests must have actual paired data; a missing pair
+        # remains explicit incomplete evidence for the independent audit.
+        receipt=self.capture.seal_failure(self.root,failed_request_id=failed_request_id)
+        self.sealed=True
+        return dict(receipt,branches=[dict(side=k[0],request_id=k[1],window=k[2],branch=v)
+            for k,v in self.branches.items()],coordinates=self.coordinates,
+            scope="actual head0 samples; full-group completeness requires independent audit")
+
+    def discard(self):
+        if not self.capture.closed:self.capture.discard()
+
+def make_probe(layer,layout,plans,leased,emit):
+    # At most 12000 live rows keeps two-sided Q/K/V/output plus state samples
+    # below the frozen64MiB bound. Ineligible failed groups are NOT diagnosed.
+    if (layer.prefix!=LAYER or layout.rank!=0 or len(plans)!=2
+            or set(leased)!=set(layout.request_ids) or layout.packed_tokens>12000
+            or any(len([j for kind,j in chain if kind=="live"])!=2 for chain in layout.chains)):
+        return None
+    manifest=getattr(emit,"source_manifest_sha256",None)
+    raw=getattr(emit,"stage_capture_root",None)
+    if not manifest or not raw:raise ValueError("source-bound diagnostic sink required")
+    return C1StageProbe(layout,plans,leased,manifest_sha256=manifest,
+        root=Path(raw)/("c1-stage-rank0-step"+str(layout.step)))

@@ -5,7 +5,8 @@ def private_conv_buffer(incoming_conv,projected):
         raise ValueError("conv/input device mismatch")
     return incoming_conv.detach().to(projected.dtype).clone().unsqueeze(0).contiguous()
 
-def make_boundary_runner(layer,projected,b,a,incoming_conv,*,return_conv=False,synchronize=True):
+def make_boundary_runner(layer,projected,b,a,incoming_conv,*,return_conv=False,synchronize=True,
+                         input_observer=None):
     """Caller passes ONLY the current request's live boundary, not public body.
     Official primitive calls are unchanged; conv/SSM input caches stay private.
     Must execute inside the real forward context on the request's device.
@@ -44,14 +45,25 @@ def make_boundary_runner(layer,projected,b,a,incoming_conv,*,return_conv=False,s
         g,beta=DeviceOperator.fused_gdn_gating(layer.A_log,a,b,layer.dt_bias)
         if length<=64:
             from independent_recurrent_boundary import recurrent_boundary
-            output,state=recurrent_boundary(q,k,v,g,beta,initial_state.unsqueeze(0).contiguous())
+            observer_kwargs={'input_observer':input_observer} if input_observer is not None else {}
+            output,state=recurrent_boundary(q,k,v,g,beta,initial_state.unsqueeze(0).contiguous(),
+                                            **observer_kwargs)
         else:
             from independent_boundary_metadata import build_boundary_metadata
             meta=build_boundary_metadata(layer,length,projected.device)
-            output,state=chunk_gated_delta_rule(
-                q=q,k=k,v=v,g=g,beta=beta,initial_state=initial_state.unsqueeze(0).contiguous(),
-                output_final_state=True,cu_seqlens=starts,prebuilt_meta=meta,
-                head_first=False,use_qk_l2norm_in_kernel=True)
+            from contextlib import nullcontext
+            scope=nullcontext()
+            if input_observer is not None:
+                import vllm_ascend.ops.triton.fla.chunk as native
+                from independent_c1_stage_probe import observe_chunk_norm
+                scope=observe_chunk_norm(native,lambda nq,nk:input_observer(
+                    q=nq,k=nk,v=v,g=g,beta=beta,initial=initial_state.unsqueeze(0),
+                    branch="official_chunk64"))
+            with scope:
+                output,state=chunk_gated_delta_rule(
+                    q=q,k=k,v=v,g=g,beta=beta,initial_state=initial_state.unsqueeze(0).contiguous(),
+                    output_final_state=True,cu_seqlens=starts,prebuilt_meta=meta,
+                    head_first=False,use_qk_l2norm_in_kernel=True)
         if synchronize:torch.npu.synchronize()
         if state is None:raise ValueError("native boundary final state missing")
         if return_conv:return output[0],state[0],conv_state[0].clone()

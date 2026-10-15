@@ -25,7 +25,7 @@ def source_verified_backend(layer):
         torch.ops._C_ascend.chunk_fwd_o,PackedMetadataCache(builder))
 
 def run_packed_c1(layer,layout,projected,b,a,initial_states,incoming_conv,materials,
-                  *,backends,finite_check=None,geometry_observer=None):
+                  *,backends,finite_check=None,geometry_observer=None,stage_probe=None):
     """Return only private tensors. Caller owns leases and all-request commit."""
     native,conv_op,gating,state_op,output_op,metadata_cache=backends
     cached={key:body.affine for key,body in materials.items()}
@@ -61,6 +61,9 @@ def run_packed_c1(layer,layout,projected,b,a,initial_states,incoming_conv,materi
     # finite-precision native live-prefix kernel. Dummy suffix states are zero.
     _,_,prefix_terminals=shared.state(initial_seeds.clone())
     seeds=suffix_seeds_from_terminals(layout,initial_seeds,prefix_terminals,cached)
+    if stage_probe is not None:
+        stage_probe.packed_inputs(shared,v,g,beta,initial_seeds,seeds)
+        stage_probe.packed_states(prefix_terminals,seeds,materials)
     output,terminal=shared.render(seeds)
     wanted=(1,layout.packed_tokens,initial_states.shape[1],initial_states.shape[-1])
     if tuple(output.shape)!=wanted or terminal.shape!=(n,*initial_states.shape[1:]):
@@ -81,4 +84,5 @@ def run_packed_c1(layer,layout,projected,b,a,initial_states,incoming_conv,materi
                 raise ValueError("nonfinite packed private output")
         else:finite_check(y,state,tail)
         result[layout.request_ids[row]]=(y,state,tail)
+        if stage_probe is not None:stage_probe.final("packed",layout.request_ids[row],(y,state,tail))
     return result

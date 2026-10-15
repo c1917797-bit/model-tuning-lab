@@ -47,7 +47,7 @@ class CompletionControls(unittest.TestCase):
             self.assertFalse(events and events[-1]["passed"])
 
     def hook_case(self,completion=True,fail_second=False,nonfinite=False,packed=False,
-                  fail_shadow=False,fail_preparation=False):
+                  fail_shadow=False,fail_preparation=False,probe=False,fail_capture=False):
         from independent_compact_gdn_hook import install_compact_gdn
         from independent_compact_material_pool import CompactLinearMaterialPool
         from independent_compact_model_hook import CURRENT_COMPACT_MODEL
@@ -62,7 +62,16 @@ class CompletionControls(unittest.TestCase):
         requests=tuple(SimpleNamespace(request_id=p.request_id,rank=p.rank,step=p.step,
             token_start=p.token_start,scheduled_tokens=p.scheduled_tokens) for p in plans)
         assoc=tuple(SimpleNamespace(state_slot=i,has_initial_state=True) for i in range(2))
-        events=[];sync=[];spans=[];core=torch.zeros(4,2,3)
+        events=[];sync=[];spans=[];core=torch.zeros(4,2,3);probe_closed=[]
+        class FakeProbe:
+            def discard(self):probe_closed.append(True)
+            def serial_inputs(self,*args,**kw):pass
+            def serial_terminal(self,*args,**kw):pass
+            def serial_state(self,*args,**kw):pass
+            def final(self,*args,**kw):pass
+            def seal(self,rid):
+                if fail_capture:raise ValueError("capture write failure")
+                return {"complete":True}
         def emit(event):
             if event["event"]=="c1_layer_precommit_validated":
                 self.assertEqual(float(layer.kv_cache[1].abs().sum()),0)
@@ -78,6 +87,9 @@ class CompletionControls(unittest.TestCase):
             return run
         def packed_prepare(layer,stage,plans,associations,mixed_qkv,b,a,leases,backend_state,**kw):
             if fail_preparation:raise RuntimeError('packed preparation failure')
+            if probe:
+                backend_state['probe']=FakeProbe()
+                leases.callback(backend_state['probe'].discard)
             results={}
             for row,plan in enumerate(plans):
                 out=torch.ones(2,2,3)*(2 if fail_shadow and row==1 else 1)
@@ -102,7 +114,8 @@ class CompletionControls(unittest.TestCase):
             stack.enter_context(patch("independent_c1_packed_prepare.prepare_packed_layer",packed_prepare))
             stack.enter_context(patch.object(torch,"npu",SimpleNamespace(synchronize=lambda:sync.append("commit")),create=True))
             stop=install_compact_gdn(stage,enabled=True,emit=emit,layer_completion=completion,
-                native_decode_batch=packed,layer_shadow=packed,packed_wave=packed)
+                native_decode_batch=packed,layer_shadow=packed,packed_wave=packed,
+                first_divergence=probe)
             token=CURRENT_COMPACT_MODEL.set(SimpleNamespace(plans=plans))
             token2=CURRENT_REQUEST_SLICES.set(requests)
             try:
@@ -123,6 +136,7 @@ class CompletionControls(unittest.TestCase):
             finally:
                 CURRENT_REQUEST_SLICES.reset(token2);CURRENT_COMPACT_MODEL.reset(token);stop()
             self.assertIs(Layer._forward_core,original)
+            if probe:self.assertTrue(probe_closed)
 
     def test_hook_collects_all_then_commit_and_uninstall(self):self.hook_case()
     def test_hook_late_failure_no_actual_writes(self):self.hook_case(fail_second=True)
@@ -131,6 +145,22 @@ class CompletionControls(unittest.TestCase):
     def test_packed_hook_shadow_all_then_commit(self):self.hook_case(packed=True)
     def test_packed_hook_late_shadow_failure_zero_writes(self):self.hook_case(packed=True,fail_shadow=True)
     def test_packed_hook_preparation_failure_zero_writes(self):self.hook_case(packed=True,fail_preparation=True)
+    def test_probe_shadow_failure_no_writes_and_closed(self):
+        self.hook_case(packed=True,fail_shadow=True,probe=True)
+    def test_probe_write_failure_no_writes_and_closed(self):
+        self.hook_case(packed=True,fail_shadow=True,probe=True,fail_capture=True)
+    def test_probe_route_default_and_strict(self):
+        _,install,_=c1_install_route({})
+        self.assertFalse(install.c1_first_divergence)
+        config=dict(c1_packed_wave=True,native_decode_batch=True,
+            c1_layer_completion_barrier=True,c1_layer_shadow_validation=True,
+            c1_first_divergence=True)
+        remaining,install,_=c1_install_route(config)
+        self.assertEqual(remaining,{})
+        self.assertTrue(install.c1_first_divergence)
+        for invalid in (1,None,"true"):
+            with self.assertRaises(ValueError):c1_install_route({**config,"c1_first_divergence":invalid})
+        with self.assertRaises(ValueError):c1_install_route({"c1_first_divergence":True})
 
     def test_packed_route_requires_explicit_controls(self):
         cfg,install,_=c1_install_route({'c1_packed_wave':True,'native_decode_batch':True,
