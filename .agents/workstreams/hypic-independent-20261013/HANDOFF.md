@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST profiler04d1 terminalexit0:16responses/221clean/95bindings.
+Independent04ee full16 transport/source/isolation and physical0-3empty PASS;
+04eb exact1d09fc0e...CID absent/8233free. No live owned NPU service.
+All4 native daemon workers stopped capture but automatic parsing rejected by
+torch_npu daemon restriction. Raw2.469GB retained unchanged, NOT recollected.
+CURRENT offline CPU-only parser exec-00000000000004ea on originalma a6109:
+copied rawprofile into /cache/cch/hypic-independent-20261013/profile-g3-r6-r1-analysis-r1,
+same pinnedimage/no device mappings/networknone/cpuset112-119/max4parser processes.
+Poll exact04ea; no duplicateparser or newNPUtask. Validate fourrank complete
+CSV/timeline+hot identities before bottleneck claims. PROFILE_G3_R6_R1_TERMINAL.json.
+Current deadline2026-10-15T19:04:09UTC; full objective remains unfinished.
+
 CURRENT official-profiler G3 R6 diagnostic controller exec-00000000000004d1,
 freshma a6109 forcedirect,checkpoint52699bda. Rawroot
 /cache/cch/hypic-independent-20261013/profile-g3-r6-r1.

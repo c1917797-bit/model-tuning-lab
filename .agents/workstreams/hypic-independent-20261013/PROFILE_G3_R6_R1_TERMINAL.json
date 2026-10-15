@@ -1,0 +1,21 @@
+{
+  "terminal_transport_source_isolation_verified": true,
+  "source_bindings": 95,
+  "requests": 16,
+  "isolation": 221,
+  "physical_now": [],
+  "utc": "2026-10-15T08:26:13.980579+00:00",
+  "raw_sha256": {
+    "result.json": "a36cd89f3a5bb603ce0125ffd92c4a5cc8b23940470117f968ae87ed7e9f5fe3",
+    "events.jsonl": "3f822c67f88c5dcceb62598c173b1eae8da22d230ed726081785b21c812c0d80",
+    "profile-unit.json": "095fbd021f685440055a87c9635d8a95332120d51d5d0526d05a5ab7fb0cf0f0",
+    "release.json": "29d93df2e84c54b539fe03e76882479b02dbd45447654231cd898a1b945212c7"
+  },
+  "scope": "hot/timeline/kernel proof separate; no performance or quality acceptance",
+  "operation": "exec-00000000000004ee",
+  "controller": "exec-00000000000004d1",
+  "actual_container_port_check": "exec-00000000000004eb",
+  "offline_parser": "exec-00000000000004ea",
+  "analysis_root": "/cache/cch/hypic-independent-20261013/profile-g3-r6-r1-analysis-r1",
+  "daemon_auto_parse_rejected": true
+}
