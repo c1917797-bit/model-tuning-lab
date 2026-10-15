@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT R7 integratednative1 batch controller exec-00000000000005fa,
+originalma a6109 forcedirect,checkpointbbcea9ad.05f7 preflight101bindings,
+newroot/physical0-3/8233/HCCLidle PASS11:24:41UTC. Manifest5e334fad5e922fde...
+Raw/cache/cch/hypic-independent-20261013/native-decode-batch-canary-r1.
+No cachecopy/reuse/profiler; same16c16/32768/64 plus2B2A, defaultoffnativebatch
+flagtrue onlyprospectiveR7. Mandatoryfullprivateoutput/state/convshadow first
+singleton andmultirow perlayer/rank. Poll samehandle/root, NEVERrestartwhen
+running/unclear or edit101boundsources. Terminalall16fourrank48/16hot,
+48layer multirowshadow all4rank/source/continuousphysical/NSpid/exactrelease.
+Do not accept speed/taskquality from this boundedcontrol. Deadline19:04:09UTC.
+
+
 R7 native1 batch candidate:05ef11focused and05f2full348CPUtests PASS.
 Defaultfalse flag native_decode_batch; newR7 manifest/config/contract frozen.
 Private packed native conv/recurrent backend, full-path shadow firstsingleton
