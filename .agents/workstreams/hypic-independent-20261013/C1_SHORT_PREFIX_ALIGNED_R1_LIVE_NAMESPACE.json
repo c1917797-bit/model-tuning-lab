@@ -1,0 +1,74 @@
+{
+  "schema": "hypic-r14-live-namespace/v1",
+  "operation": "exec-000000000000083f",
+  "container_id": "9606ea9f9f914291dca3ed7452ad00ea56afae5fbbac59ba32992b17f390064f",
+  "proof": {
+    "sample_utc": "2026-10-15T17:46:47.130420+00:00",
+    "physical_namespace_proof": [
+      {
+        "physical": 0,
+        "host_pid": 4192402,
+        "status": [
+          "Name:\tVLLM::Worker_TP",
+          "NSpid:\t4192402\t57"
+        ],
+        "exact_owned_cgroup": true
+      },
+      {
+        "physical": 1,
+        "host_pid": 4192403,
+        "status": [
+          "Name:\tVLLM::Worker_TP",
+          "NSpid:\t4192403\t58"
+        ],
+        "exact_owned_cgroup": true
+      },
+      {
+        "physical": 2,
+        "host_pid": 4192404,
+        "status": [
+          "Name:\tVLLM::Worker_TP",
+          "NSpid:\t4192404\t59"
+        ],
+        "exact_owned_cgroup": true
+      },
+      {
+        "physical": 3,
+        "host_pid": 4192405,
+        "status": [
+          "Name:\tVLLM::Worker_TP",
+          "NSpid:\t4192405\t60"
+        ],
+        "exact_owned_cgroup": true
+      }
+    ],
+    "installs": [
+      {
+        "pid": 58,
+        "manifest_sha256": "384c1b20dc6e8b52af18b61bc4a5347dcb693df646fba0ec9530531b62be6b4d",
+        "c1_first_divergence": true,
+        "c1_short_prefix_terminal_policy": "canonical_recurrent_le64"
+      },
+      {
+        "pid": 57,
+        "manifest_sha256": "384c1b20dc6e8b52af18b61bc4a5347dcb693df646fba0ec9530531b62be6b4d",
+        "c1_first_divergence": true,
+        "c1_short_prefix_terminal_policy": "canonical_recurrent_le64"
+      },
+      {
+        "pid": 59,
+        "manifest_sha256": "384c1b20dc6e8b52af18b61bc4a5347dcb693df646fba0ec9530531b62be6b4d",
+        "c1_first_divergence": true,
+        "c1_short_prefix_terminal_policy": "canonical_recurrent_le64"
+      },
+      {
+        "pid": 60,
+        "manifest_sha256": "384c1b20dc6e8b52af18b61bc4a5347dcb693df646fba0ec9530531b62be6b4d",
+        "c1_first_divergence": true,
+        "c1_short_prefix_terminal_policy": "canonical_recurrent_le64"
+      }
+    ],
+    "foreign": []
+  },
+  "scope": "Actual physical/hostPID/container NSpid/cgroup activation join; TP rank awaits independent rank-bearing request receipts."
+}
