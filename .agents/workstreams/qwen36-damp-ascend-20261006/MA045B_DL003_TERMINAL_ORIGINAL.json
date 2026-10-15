@@ -1,0 +1,103 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": "exit code",
+  "found": true,
+  "kind": "exec",
+  "ok": false,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "-I",
+          "-B",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-lifecycle-kernel-new48h-v1-003/host.py",
+          "--execute",
+          "--owner-ref",
+          "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-lifecycle-kernel-new48h-v1-003/SOURCE_MANIFEST.json\",\"bytes\":7193,\"sha256\":\"759e8072c6e81a5b4f6ed6976389306205392a010fd69e0cd70ff0b4a09b5672\"}",
+          "--target-source-ref",
+          "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-lifecycle-kernel-new48h-v1-003/SOURCE_MANIFEST.json\",\"bytes\":7193,\"sha256\":\"759e8072c6e81a5b4f6ed6976389306205392a010fd69e0cd70ff0b4a09b5672\"}",
+          "--authority-ref",
+          "{\"path\":\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json\",\"bytes\":3591,\"sha256\":\"71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99\"}",
+          "--stage",
+          "numeric",
+          "--physical-device",
+          "5",
+          "--cpu-preflight-ref",
+          "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dllifecycle003-cpu-new48h-MAIN-20261015-001/native/result/STAGE_RESULT.json\",\"bytes\":1498,\"sha256\":\"3f5290bb3cc7191cb8b70f56d2632b56e376543834b1011b565eee70b86c4a2c\"}",
+          "--output",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dllifecycle003-numeric-new48h-MAIN-20261015-001",
+          "--host-cpu",
+          "166",
+          "--guest-cpu",
+          "0"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/python3",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 88491,
+        "error": "exit code",
+        "exitCode": 3,
+        "id": "exec-000000000000045b",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "MAIN_DLLIFECYCLE002_OWNER {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dllifecycle003-numeric-new48h-MAIN-20261015-001/RESULT.json\", \"bytes\": 1598, \"sha256\": \"ba8961f225ac4c86779bbcbaee10bd92227c23343af88a3d22576dda8b30605e\"}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 399,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 399,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 399
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 398,
+        "routeLookupMs": 0,
+        "totalMs": 398
+      }
+    },
+    "traceId": "edccaf14-87b9-4c1a-ad69-a7970cc83129"
+  },
+  "operationId": "exec-000000000000045b",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": false,
+  "terminal": true
+}
