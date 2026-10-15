@@ -1,5 +1,20 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT originalfull40/c16/32768/fixed1024 compiled-cache screen
+exec-00000000000005a0, freshma a6109 forcedirect,checkpoint538aa7c8.
+Rawroot/cache/cch/hypic-independent-20261013/formal-performance-g3-compiledcache-screen-r1.
+059f10:24:05UTC source101/originalnativecontroller c360a9d1.../seed59groups
+/newroot/physical0-3/8233/HCCLidle PASS.059b28CPUcontrols PASS,059e29structurePASS.
+Explicitminimalwrapper stages ownedcacheCOPY, no inference/nativecontroller
+sourcechange, no profiler/privateprimer. Onlyoriginal2B+2A unscoredwarmups.
+Partial16-shape cache may miss remaining24 shapes; misses staymeasured.
+Poll exact05a0/root;running/unclear neverrestart or editboundsource.
+Terminal originalfull40 timing/source94 +wrapper101/cacheprovenance/seedunchanged,
+all40fourrank48/16/physical/isolation/exactrelease requireindependentaudits.
+This is fail-fast screen, notfinal3roundmatrix/quality/native-superiorityclaim.
+Deadline2026-10-15T19:04:09UTC unchanged; fullobjective incomplete.
+
+
 LATEST0589 terminalexit0;0595 independent16/16fourrank48/16/source99,
 165clean isolation/explicitphysical0-3/activation/exactrelease PASS.
 All258seed files samehash+mtime, originalseedunchanged;55newfiles/59groups.
