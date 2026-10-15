@@ -1,30 +1,29 @@
 {
   "schema": "ascend.new48h.live-handoff/v1",
-  "as_of_utc": "2026-10-15T10:51:00Z",
+  "as_of_utc": "2026-10-15T11:20:00Z",
   "cutoff_utc": "2026-10-16T07:18:17Z",
   "goal_active": true,
   "final_acceptance": false,
   "active_MAIN_job": {
-    "operation_id": "exec-00000000000005bf",
-    "status": "running_last_operation_poll",
+    "operation_id": "exec-00000000000005ed",
+    "status": "running_last_launch",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-saved-frame-owned-v1-019/SOURCE_MANIFEST.json",
-      "bytes": 7134,
-      "sha256": "043c6099ba42623056d6deab859b8736a77e49265d3cbf3bc545f3c15a41110c"
+      "bytes": 11131,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-direct-oracle-holdout-new48h-v1-013/SOURCE_MANIFEST.json",
+      "sha256": "733135477779a876d5a5adab90e9d6c97a57f743303ceffe01d18ec864bb0f93"
     },
     "physical": [
-      4
+      5
     ],
     "logical": [
       0
     ],
-    "scope": "Saved real model-layer normalized input/state replay native and candidate, three selected frames x3; no model load/performance/qualification",
-    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-saved-frame019-NEW48H_NPU_001",
-    "phase_seconds": 2400,
-    "cleanup_seconds": 90,
-    "actual_device_stage": "pending current device proof; handle running does not prove NPU compute",
-    "exclusive_TP4": false,
-    "poll_only_existing_handle": true
+    "scope": "New frozen unseen-seed direct CPU64-to-BF16 operational oracle; B16x4 smoke, B1x160+B16x160 lifecycle then separate Devices[] independent consumer. Not fullGDN/model/performance.",
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-direct-oracle013-numeric-new48h-MAIN-20261015-001",
+    "phase_seconds": 2880,
+    "cleanup_seconds": 180,
+    "poll_only_existing_handle": true,
+    "actual_device_stage": "pending fresh device receipt; running control handle alone is not NPU execution"
   },
   "resource_admission": {
     "launch_operation": "exec-0000000000000555",
@@ -97,31 +96,51 @@
       "reason": "requires successful true short numerical gates, current016002 failed; no long activation"
     },
     "accuracy007": {
-      "status": "deployed_render_only_8files_no_run",
+      "status": "ACTUAL_FAILED_CPU_IMPORT_POLICY",
       "source": {
         "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/accuracy-render-only-owned-new48h-v1-007/SOURCE_MANIFEST.json",
         "bytes": 13280,
         "sha256": "d3805a5e6b6044a27f0f0138767f8357397d50377d21693db0800ab5efd043ba"
       },
       "Devices": [],
-      "requires": "MAIN fresh CPU cohort after019 release; actual real tokenizer rendering and independent consumption, not task score"
+      "requires": "MAIN fresh CPU cohort after019 release; actual real tokenizer rendering and independent consumption, not task score",
+      "reason": "007 audit hook prohibits CPU torch imported by real tokenizer stack; no task score. Cleanup stopped retained errors[]."
     },
     "accuracy006": {
       "status": "local_full_shard_and_merge_prepared_no_full_run",
       "execution_template_sha256": "96ba4cb76bba53db7c7f4ebbef2c4d9a5dabcd0eb81c8e91a324631279d83d4d",
       "actual_model_accuracy": false,
       "requirements": "actual no-thinking rendered input, paired source-qualified smoke/cost, frozen full ID catalog, exact input reused both arms, real sandbox/decoder and full merger"
+    },
+    "accuracy008": {
+      "status": "deployed_not_executed",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/accuracy-render-only-owned-new48h-v1-008/SOURCE_MANIFEST.json",
+        "bytes": 15000,
+        "sha256": "18aab42dfe69b9af3ee767569e7d8443349a81abda2d16ad57da960b92149e19"
+      },
+      "scope": "Allow CPU torch only; retain NPU backend/runtime/device prohibitions and actual unchanged006 full renderer. Fresh cohort/actual sameimage cold probe mandatory."
+    },
+    "DL003_service": {
+      "status": "local_prepared_not_deployed",
+      "source_sha256": "a1b68602951c36068a8dbeda5445d7ef995294ad055bd05fb73bd308edc317e9",
+      "scope": "Actual Qwen copied target binding, B010 namespace, strict pending013 complete evidence, layout pointer/stride identity, eager/none/PDCoff diagnostic only. Not timing qualified."
+    },
+    "DL005_bridge": {
+      "status": "local_prepared_not_deployed",
+      "source_sha256": "2eaa784d2bd0adc52cd1c9ece63ca2a77ecf67834cef1da8fbf95389a0480657",
+      "scope": "Actual B010/013 binding, original mixed/slot/copy fixture plus reachable step5 zero reset. Existing native-peer/CPU64 gates retained; not qualified by013 alone."
     }
   },
   "parallel_preparation": {
-    "gdn_paper_reassessment": "019 actual owned singlecard saved-frame discriminating replay, source+controller binding in progress",
-    "accuracy_input_repair": "B010 savedraw CPU64/rounding-cell diagnostic actual-owned CPU entry preparation",
-    "ge_fullgdn_ready": "006 real full-shard/merge generative2048 accuracy entry preparation"
+    "gdn_paper_reassessment": "022 CPU-only actual020 savedraw recovery after observed incorrect Devices[] visibility",
+    "accuracy_input_repair": "Explicit independent MXR native-preserving contract, exact dyadic anchors/negatives and frozen saved-layer holdout; no old-gate relabel",
+    "ge_fullgdn_ready": "004 true existing cap48 Owned TP4 model diagnostic entry/CLI for003, exact real013 receipt binder, no new controller"
   },
   "git": {
     "branch": "work/qwen36-damp-ascend-20261006",
     "last_confirmed_remote_commit": "09c4bb11",
-    "new_local_commit": "e112f4092d2bdbac8930360ccac325aec1479144",
+    "new_local_commit": "e007f435e92f44d47753e78e410bcd1c41bfa936",
     "new_push_operation": "exec-0000000000000560",
     "new_push_exit": 128,
     "new_push_error": "could not read Username for https://github.com: No such device or address",
@@ -151,29 +170,28 @@
     "no_new_HugeTLB_release": true,
     "no_foreign_stop": true,
     "continuous_utilization": "UNMEASURED",
-    "latest_protected_observation": "05be fresh NPU0-3 PIDs4142404-4142407 active; do not touch. NPU4-7 idle at admission; MemAvailable60847756kB. This is not a current all-window occupancy claim."
+    "latest_protected_observation": "05d2 actual all0-7 no NPU process,4-7 HBM2865-2868MiB; point-in-time only, not current or whole-window idle claim. 0-3 remain protected even when idle."
   },
   "current_MAIN_job": {
-    "operation_id": "exec-00000000000005bf",
-    "status": "running_last_operation_poll",
+    "operation_id": "exec-00000000000005ed",
+    "status": "running_last_launch",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-saved-frame-owned-v1-019/SOURCE_MANIFEST.json",
-      "bytes": 7134,
-      "sha256": "043c6099ba42623056d6deab859b8736a77e49265d3cbf3bc545f3c15a41110c"
+      "bytes": 11131,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-direct-oracle-holdout-new48h-v1-013/SOURCE_MANIFEST.json",
+      "sha256": "733135477779a876d5a5adab90e9d6c97a57f743303ceffe01d18ec864bb0f93"
     },
     "physical": [
-      4
+      5
     ],
     "logical": [
       0
     ],
-    "scope": "Saved real model-layer normalized input/state replay native and candidate, three selected frames x3; no model load/performance/qualification",
-    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-saved-frame019-NEW48H_NPU_001",
-    "phase_seconds": 2400,
-    "cleanup_seconds": 90,
-    "actual_device_stage": "pending current device proof; handle running does not prove NPU compute",
-    "exclusive_TP4": false,
-    "poll_only_existing_handle": true
+    "scope": "New frozen unseen-seed direct CPU64-to-BF16 operational oracle; B16x4 smoke, B1x160+B16x160 lifecycle then separate Devices[] independent consumer. Not fullGDN/model/performance.",
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-direct-oracle013-numeric-new48h-MAIN-20261015-001",
+    "phase_seconds": 2880,
+    "cleanup_seconds": 180,
+    "poll_only_existing_handle": true,
+    "actual_device_stage": "pending fresh device receipt; running control handle alone is not NPU execution"
   },
   "historical_MXR007": {
     "operation_id": "exec-00000000000004cd",
@@ -373,6 +391,53 @@
       "original_gate_pass": false,
       "dominant_cell": "same real B010 [9,9,15], candidate closer to CPU64 than native; signed midpoint margin -6.692260938e-10; does not establish complete lifecycle or exact-real nearest output",
       "stopped_retained": true
+    },
+    "MXR019_NPU": {
+      "status": "FAILED_ADAPTATION",
+      "operation": "exec-00000000000005bf",
+      "reason": "Inherited actual ownership helper accepts matrix/canary, not replay. No actual numerical rows. Original019 retained; source020 repairs exact child label with real helper controls.",
+      "release": true
+    },
+    "MXR020": {
+      "status": "NPU_RAW_COMPLETE_CPU_CONSUMER_FAILED",
+      "operation": "exec-00000000000005d7",
+      "owner": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-saved-frame020-NEW48H_NPU_001/RESULT.json",
+        "bytes": 406078,
+        "sha256": "40db8b677dac2c05b12f9316f1a361bb3fcd28f88b069824785904cc065422f2"
+      },
+      "probe": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-saved-frame020-NEW48H_NPU_001/physical4/numeric/PROBE.json",
+        "bytes": 6233,
+        "sha256": "da0a6a410894adb47b6d76b1f90526a07ec99cbb8333a0adc6a62a8ba287b8c9"
+      },
+      "actual_NPU": true,
+      "physical": [
+        4
+      ],
+      "saved_real_frames": 3,
+      "repeats": 3,
+      "candidate_hits": 9,
+      "primary": "CPU consumer rejects wrong ASCEND_RT_VISIBLE_DEVICES=0 in Devices[]; actual raw unchanged",
+      "secondary": [],
+      "released": true,
+      "numerical_qualification": false,
+      "next": "New022 CPU-only recovery of unchanged020 raw and original independent consumer, no NPU replay"
+    },
+    "DL013_CPU": {
+      "status": "PASS_CPU_ONLY",
+      "operation": "exec-00000000000005e9",
+      "source": {
+        "bytes": 11131,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-direct-oracle-holdout-new48h-v1-013/SOURCE_MANIFEST.json",
+        "sha256": "733135477779a876d5a5adab90e9d6c97a57f743303ceffe01d18ec864bb0f93"
+      },
+      "owner": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-direct-oracle013-cpu-new48h-MAIN-20261015-001/RESULT.json",
+        "bytes": 1329,
+        "sha256": "b48a9488ee63c079888b5f1262d38e0077d59eeafc25b0c0a8ffb2a235fae6e7"
+      },
+      "scope": "Actual sameimage CPU64 oracle/direct integer BF16 RNE controls/actual B010 Meta and mapped DSO; no NPU performance or task proof"
     }
   },
   "historical_MXR013": {
