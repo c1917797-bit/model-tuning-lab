@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+While0726live: R10 DISABLED prospective config/manifest/contract frozen,
+072f static122bindings/same source/onlyc1_packed_waveFalse/newroot absent PASS.
+NOTSTARTED, requires0726 enabled full independentauditPASS/exactrelease then
+fresh admission. Do not use staleR9 disabledcontract. Active120bytesunchanged.
+0731 15:02:24UTC4warmups done/public192linear+64KV markers/fourtrue installs;
+16private diagnostic requests beginning, no shadow failure observed yet,
+150clean isolation snapshots. Same0726 stilllive; no acceptance yet.
+C1_PACKED_R10_DISABLED_PROSPECTIVE_20261015.json records offlineonlyscope.
+
 CURRENT R10 actual-prefix controller exec-0000000000000726 RUNNING on original
 ma a6109 forcedirect; checkpoint9a395daf published/liveverified,main unchanged.
 Raw/cache/cch/hypic-independent-20261013/c1-packed-seededprefix-r1 immutable.

@@ -1,0 +1,15 @@
+{
+  "schema": "hypic-r10-disabled-prospective/v1",
+  "operation": "exec-000000000000072f",
+  "proof": {
+    "disabled_source_bindings": 122,
+    "only_flag_changed": true,
+    "enabled_sources_unchanged": true,
+    "disabled_root_absent": true,
+    "device_started": false
+  },
+  "state": "PREPARED_NOT_STARTED",
+  "prerequisite": "R10 enabled0726 full independent audit PASS and exact resource release; fresh direct/physical0-3/ports/newroot before run",
+  "source_change": "Only new config/manifest/contract files; active120 source bytes unchanged; only c1_packed_wave boolean differs",
+  "no_device_work": true
+}
