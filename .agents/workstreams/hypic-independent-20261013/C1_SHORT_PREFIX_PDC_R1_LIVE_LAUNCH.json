@@ -1,0 +1,26 @@
+{
+  "operation": "exec-000000000000086a",
+  "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "checkpoint": "1ee971926c24d90de30621175fa24721d2d9ca66",
+  "contract": "C1_SHORT_PREFIX_PDC_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-short-prefix-pdc-r1",
+  "admission": {
+    "admission_passed": true,
+    "utc": "2026-10-15T18:12:21.013924+00:00",
+    "hostname": "Euler",
+    "arch": "aarch64",
+    "source_bindings": 132,
+    "physical0_3_processes": [],
+    "ports_idle": true,
+    "newroot_absent": true,
+    "checkpoint": "1ee971926c24d90de30621175fa24721d2d9ca66",
+    "cache_free_bytes": 17082880000,
+    "memory": {
+      "MemAvailable": "81495356 kB",
+      "Hugetlb": "2009071616 kB"
+    },
+    "compute_started": false
+  },
+  "state": "running-no-outcome",
+  "scope": "same-source PDC bounded coexistence only"
+}
