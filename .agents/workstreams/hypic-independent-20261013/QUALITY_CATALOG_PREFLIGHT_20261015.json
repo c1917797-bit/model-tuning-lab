@@ -1,0 +1,64 @@
+{
+  "schema": "hypic-quality-catalog-preflight/v1",
+  "state": "offline only, draft not activated",
+  "failure_reproduction": "05aa",
+  "catalog_membership_operation": "05b0",
+  "catalog_selection": {
+    "selected": 127,
+    "valid": true,
+    "failures": [],
+    "seconds": 10.88496060000034,
+    "inputs_sha256": "2f61c72fe1d8b3cb7f468e670674764e89a471da8ea229d07f3c87dff3d013c0",
+    "catalog_sha256": "fb13827a063b32df1131e17bf4b29ea008380d55ab0a2e7debe8a845e30ed792",
+    "capacity_estimate": {
+      "kv_BF16_keys_values_and_int64_positions_per_max_segment_bytes": 270400512,
+      "batch8_KV_bytes": 2163204096,
+      "proposed_batch8_KV_capacity_bytes": 2684354560,
+      "linear_FP32_T_S_per_max_segment_bytes": 75497472,
+      "batch8_T_S_bytes": 603979776,
+      "proposed_linear_capacity_bytes": 805306368,
+      "conv_and_actual_pool_metadata_still_require_exact_byte_validation": true
+    },
+    "scope": "CPU catalog selection and source/model-derived capacity estimate; not runtime pool retention or NPU acceptance"
+  },
+  "host_controls": {
+    "operation": "05b4",
+    "tests": 22,
+    "scope": "11 new catalog admission/index/factory controls plus11 existing catalog controls"
+  },
+  "capacity_meta_control": {
+    "operation": "05b9",
+    "old512MiB_two_full_KV_segments_retained_layers": 31,
+    "required_layers": 32,
+    "proposed_batch8_KV_used_bytes": 2163204096,
+    "proposed_batch8_linear_with_FP32_conv_bytes": 615776256,
+    "proposed_KV_capacity_bytes": 2684354560,
+    "proposed_linear_capacity_bytes": 805306368,
+    "scope": "actual PublicPool byte accounting/eviction on meta tensors, not allocated memory or real device retention"
+  },
+  "prospective_limits": {
+    "scored_requests": 381,
+    "max_request_ledger": 1024,
+    "catalog_segments": 126,
+    "max_retained_material_records": 4096,
+    "max_material_key_generation_records": 65536,
+    "all_catalog_rank_layer_keys": 32256,
+    "batch_samples": 8,
+    "ordering": "retain original repetition-major3 full127 order; sameproducer/requestorder both arms",
+    "generation": "nonthinkingmax1024/naturalEOS, no retries, same frozen inputs and scorer"
+  },
+  "missing_before_quality_launch": [
+    "wire new catalog callback factory into a prospective source-bound scheduler/worker loader AFTER current05a0 terminal; old public-token route stays unchanged",
+    "freeze new catalog manifest/config with actual capacity and finite receipt budget",
+    "prove native/candidate same-ruler tokeninputs with a bounded realcatalog canary",
+    "measure mixed-native evidence counts under quality workload; current100000-event ceiling must not be silently exceeded or truncated",
+    "fresh0-3/ports/memory/writepaths admission and exactrelease audits"
+  ],
+  "runtime_frozen_current": "05a0 source101/originalnativecontroller unchanged; new module not imported by live package",
+  "claims_denied": [
+    "381quality acceptance",
+    "real pool retention",
+    "new catalog scheduler device activation",
+    "Paper-to-Ascend or29Skills functional completion"
+  ]
+}

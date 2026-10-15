@@ -1,5 +1,19 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+OFFLINE QUALITY PREP while05a0 stayslive:05aa reproduces currentcatalog
+scheduler KeyError(public_tokens), request129 ledger ceiling and5000transition
+history ceiling. New independent_catalog_scheduler_admission.py is DRAFTONLY,
+not wired/imported by frozenruntime.05b4:22CPUcontrols PASS (11new+11catalog).
+05b0 real127inputs allselectexactfrozen126catalogsegment atstart20; noambiguity.
+05b9 PublicPool meta-accounting:old512MiB retains31/32layers for2maxKVsegments.
+Proposedbatch8 capacitieslinear768MiB/KV2560MiB coveractualmodelshapesincluding
+positions/conservativeFP32convtail; not allocated or realNPUretention proof.
+QUALITY_CATALOG_PREFLIGHT_20261015.json listsremainingwiring/canary/budgetgates.
+Keep originalrepetition-major127x3/naturalEOS1024/orderidenticaltwoarms;
+do notlaunch full381 onoldsingle-public scheduler/128requesthistory.
+Current05a0 remainsonlylivecontroller; no boundsourcechange.
+
+
 CURRENT originalfull40/c16/32768/fixed1024 compiled-cache screen
 exec-00000000000005a0, freshma a6109 forcedirect,checkpoint538aa7c8.
 Rawroot/cache/cch/hypic-independent-20261013/formal-performance-g3-compiledcache-screen-r1.

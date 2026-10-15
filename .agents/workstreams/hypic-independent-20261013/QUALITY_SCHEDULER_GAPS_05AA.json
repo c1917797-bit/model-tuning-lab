@@ -1,0 +1,62 @@
+{
+  "catalog_loader": {
+    "type": "KeyError",
+    "message": "'public_tokens'"
+  },
+  "request_limit": {
+    "request_ordinal": 129,
+    "type": "ValueError",
+    "message": "scheduler request identity bound exceeded"
+  },
+  "material_history_limit": {
+    "transitions": 5000,
+    "type": "ValueError",
+    "message": "material transition evidence bound exceeded"
+  },
+  "actual_public_shapes": {
+    "compact_public_state_published": {
+      "event": "compact_public_state_published",
+      "generation": 1,
+      "key": "5e5266cdac2ce8c937526bea1a994c86d2eccf26f17dcd64d89461776fa32dde",
+      "layer": "language_model.model.layers.0.linear_attn",
+      "manifest_sha256": "05da84414fec604cb744f8aac0f447af46ea9958cce2fb80be3814446fb15cb5",
+      "pid": 58,
+      "pool": "linear",
+      "rank": 3,
+      "tokens_sha256": "c61741928a4d8a8e43134c8132086ce1350620ddd69f432ae9109b4b90a40945",
+      "transition_shape": [
+        12,
+        128,
+        128
+      ],
+      "zero_state_shape": [
+        12,
+        128,
+        128
+      ]
+    },
+    "compact_public_kv_published": {
+      "body_tokens": 16376,
+      "chunked": true,
+      "event": "compact_public_kv_published",
+      "generation": 1,
+      "key": "bb1123b30a5adf2d7986e99969b58174f7acaddc92175307a100a34af47278c6",
+      "layer": "language_model.model.layers.3.self_attn.attn",
+      "manifest_sha256": "05da84414fec604cb744f8aac0f447af46ea9958cce2fb80be3814446fb15cb5",
+      "pid": 58,
+      "pool": "kv",
+      "producer_request_id": "cmpl-a510b8d802e614e3-0-acb47b38",
+      "rank": 3,
+      "tokens_sha256": "c61741928a4d8a8e43134c8132086ce1350620ddd69f432ae9109b4b90a40945"
+    }
+  },
+  "source_sha256": {
+    "independent_pic_scheduler_loader.py": "2724d5db0d144522240dcf1c9591d69071f4ddd6d5d59a325826bdf879340539",
+    "independent_pic_scheduler_admission.py": "83d6ca2efd5bdd98a26138d57370a301577401eb4adb31ccbce69d7a102588a9",
+    "independent_quality_workload.py": "f4b3473d5e4daa6d59cf73689ea44ef0cd071c5941512030ec30dedfc05b3b9b",
+    "independent_quality_schedule.py": "91d87ae6e084217f39d0421b1d054926335eda6cdc00b42721e5fb20a7593531"
+  },
+  "scope": "CPU source-path failure reproduction only; no frozen runtime edit or new NPU work",
+  "operation": "exec-00000000000005aa",
+  "decision": "Do not launch full381 with current single-public scheduler or128request/4096history ceilings. Prepare a separate unactivated catalog callback and retained-state reader; frozen live performance files unchanged."
+}
