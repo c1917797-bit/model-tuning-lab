@@ -1,5 +1,11 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+0815 actual17:18:44UTC physical0-3 hostPIDs3903905-3903908 -> containerNSpid57-60,
+all exactcd5072d9cgroups; four matching sourcebound residual-policy installs.
+Foreignempty. ProofC1_FAILED_HEAD_R1_LIVE_NAMESPACE_PROOF.json saved BEFOREexit.
+DoNOTinferTPrankfromcardnumber; join later rankbearing requestreceipts.080c live,
+no request/captureoutcome yet; samehandle/root only.
+
 CURRENT R13 actualfailedhead controller exec-000000000000080c RUNNING originalma
 a6109/tpcforcedirect. Latest human explicitly authorized ongoing regressionpassed
 diagnosticcheckpoint publishing:148bb402 normalFF/liveverified, mainunchanged;

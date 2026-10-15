@@ -1,0 +1,74 @@
+{
+  "schema": "hypic-r13-live-namespace/v1",
+  "operation": "exec-0000000000000815",
+  "container_id": "cd5072d90b32292ea3888169f7966502aad2a6eaeb77b6af20cf2248975a700f",
+  "proof": {
+    "sample_utc": "2026-10-15T17:18:44.413833+00:00",
+    "physical_namespace_proof": [
+      {
+        "physical": 0,
+        "host_pid": 3903905,
+        "status": [
+          "Name:\tVLLM::Worker_TP",
+          "NSpid:\t3903905\t57"
+        ],
+        "exact_owned_cgroup": true
+      },
+      {
+        "physical": 1,
+        "host_pid": 3903906,
+        "status": [
+          "Name:\tVLLM::Worker_TP",
+          "NSpid:\t3903906\t58"
+        ],
+        "exact_owned_cgroup": true
+      },
+      {
+        "physical": 2,
+        "host_pid": 3903907,
+        "status": [
+          "Name:\tVLLM::Worker_TP",
+          "NSpid:\t3903907\t59"
+        ],
+        "exact_owned_cgroup": true
+      },
+      {
+        "physical": 3,
+        "host_pid": 3903908,
+        "status": [
+          "Name:\tVLLM::Worker_TP",
+          "NSpid:\t3903908\t60"
+        ],
+        "exact_owned_cgroup": true
+      }
+    ],
+    "installs": [
+      {
+        "pid": 58,
+        "manifest_sha256": "01e7d69cbc63166e5232e47ea44a60ce426c92c42156d8aadee33d496b12f6f6",
+        "c1_first_divergence": true,
+        "c1_first_divergence_head_policy": "max_state_residual"
+      },
+      {
+        "pid": 57,
+        "manifest_sha256": "01e7d69cbc63166e5232e47ea44a60ce426c92c42156d8aadee33d496b12f6f6",
+        "c1_first_divergence": true,
+        "c1_first_divergence_head_policy": "max_state_residual"
+      },
+      {
+        "pid": 59,
+        "manifest_sha256": "01e7d69cbc63166e5232e47ea44a60ce426c92c42156d8aadee33d496b12f6f6",
+        "c1_first_divergence": true,
+        "c1_first_divergence_head_policy": "max_state_residual"
+      },
+      {
+        "pid": 60,
+        "manifest_sha256": "01e7d69cbc63166e5232e47ea44a60ce426c92c42156d8aadee33d496b12f6f6",
+        "c1_first_divergence": true,
+        "c1_first_divergence_head_policy": "max_state_residual"
+      }
+    ],
+    "foreign": []
+  },
+  "scope": "Actual physical-card/hostPID/container NSpid/cgroup and activation join; TP rank mapping awaits rank-bearing request receipts, not inferred from card number."
+}
