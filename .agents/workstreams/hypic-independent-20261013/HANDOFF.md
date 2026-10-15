@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST05fa terminalexit0;0618 independent101sources/16of16fourrank48C1+16C2
+hot/explicitNSpidphysical0-3/231clean/exactf75a9f1a...release PASS.
+All384singleton+multirowshadow checks PASS;48multirowlayers/rank,
+maxscaledresidual0.000381389429 versus frozenlimit1.2496batchedcalls cover
+16896native rows across4ranks. Median310.866s diagnostic NOTformalperformance.
+R7_NATIVE_BATCH_CANARY_R1_TERMINAL_AUDIT.json storesrawSHA/scope. No ownedlive
+service after0618. Nextsame-source disabledcontrol freshadmission; onlythen
+full40nativebatchscreen. Boundedsuccess NOTfullquality/lifecycle/wholegoal.
+
+
 0610 partial live proof:384 firstsingleton+multirow shadow groups PASS,
 all48linear layers across4ranks; no failedshadow. This is bounded nativebackend
 consistency, not fullcanaryterminal/quality/performance. 05fa stillrunning.

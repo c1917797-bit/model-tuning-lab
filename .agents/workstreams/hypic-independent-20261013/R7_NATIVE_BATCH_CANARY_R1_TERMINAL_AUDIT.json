@@ -1,0 +1,96 @@
+{
+  "terminal_canary_accepted": true,
+  "source_bindings": 101,
+  "hot": {
+    "accepted_hot_coverage": true,
+    "denominator": 16,
+    "covered": [
+      "cmpl-810f17460d3be149",
+      "cmpl-b0c123c12e91e6db",
+      "cmpl-92d356b3c932edba",
+      "cmpl-83774a128fa32066",
+      "cmpl-a49e9664689bbc3e",
+      "cmpl-ae40c5a508775122",
+      "cmpl-aea6a385eb8990bc",
+      "cmpl-89f7b945b0285068",
+      "cmpl-ada82dc1848b83d1",
+      "cmpl-a674b9b50c70ae11",
+      "cmpl-97eeeb7b3ae34f3e",
+      "cmpl-a9bbd87f9e778333",
+      "cmpl-90bd9a9f7e64deb5",
+      "cmpl-8c7390cdc3c10dbc",
+      "cmpl-8c41b38ee44dfa99",
+      "cmpl-a27550d66093f82e"
+    ],
+    "missing": [],
+    "worker_pids": {
+      "0": 57,
+      "1": 58,
+      "2": 59,
+      "3": 60
+    },
+    "scope": "diagnostic16 same-step all-rank/all-layer coverage only; never formal full40 acceptance"
+  },
+  "native_batch": {
+    "native_decode_batch_verified": true,
+    "workers": {
+      "0": 57,
+      "1": 58,
+      "2": 59,
+      "3": 60
+    },
+    "multirow_shadow_layers": {
+      "0": 48,
+      "1": 48,
+      "2": 48,
+      "3": 48
+    },
+    "batch_calls": 2496,
+    "native_rows": 16896,
+    "scope": "source-bound runtime numerical-control and deferred-commit receipts; no independent tensor dump, whole-model quality, transport, physical or performance claim"
+  },
+  "physical": {
+    "ranks": {
+      "0": {
+        "inner_pid": 57,
+        "host_pid": 513795,
+        "physical_npu": 0
+      },
+      "1": {
+        "inner_pid": 58,
+        "host_pid": 513796,
+        "physical_npu": 1
+      },
+      "2": {
+        "inner_pid": 59,
+        "host_pid": 513797,
+        "physical_npu": 2
+      },
+      "3": {
+        "inner_pid": 60,
+        "host_pid": 513798,
+        "physical_npu": 3
+      }
+    },
+    "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+  },
+  "isolation_samples": 231,
+  "source_manifest": "5e334fad5e922fde10a9760b888188a353662f34206b50dc32b36a1b3fc0285e",
+  "exact_container_absent": true,
+  "fresh_physical": [],
+  "port_bind_free": true,
+  "shadow_groups": 384,
+  "max_scaled": 0.00038138942909426987,
+  "elapsed_median_seconds": 310.86615167499986,
+  "raw_sha256": {
+    "result.json": "04f554bdfc0be480c3f49775f096ffb35a8493b3417294b06a72b1a46e8a3192",
+    "events.jsonl": "0779f4b12c6b01839fde45cc1a5dfdef6bb0131a73562d7502d904880a4454dc",
+    "compiled-cache-unit.json": "341c38b832c856b23178ef5393d2ccfc18283ce62a0b77b92ad124a4e87085a4",
+    "release.json": "34c519d9793787ac3b3cc6af300cb72e74cb253cbf8f4d5ce6bcecc38903ec2b"
+  },
+  "scope": "bounded integrated16 same-source native1 batching plus independent oldone-row full-path shadow; not formal performance/fullquality/lifecycle/goal completion",
+  "operation": "exec-0000000000000618",
+  "controller": "exec-00000000000005fa",
+  "state": "bounded-integrated-canary-passed",
+  "next": "same-source native_decode_batch disabled control then full40 fail-fast only after independent disabled gate"
+}
