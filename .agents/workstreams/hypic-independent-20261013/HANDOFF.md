@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST06cb six CPU tests PASS: independent packed affine wave plus shared-WY
+adapter. WY/cumsum/KKT/solve once, three state passes reuse prepared buffers;
+transition zero-value width K explicitly differs from real V in ABI control.
+Mocked primitives only; NOT official NPU numerics/runtime integration.
+Packed conv/metadata/source-bound loader/private shadow and admission remain.
+No new compute device job. Native CPU parser container absent/no process/noCSV
+in06c6; do NOT accept parsing or rerun model. Original raw unchanged retained;
+recover original parser operation output before a new bounded parsing contract.
+Report C1_PACKED_SHARED_WY_HOST_20261015.json. Deadline19:04:09UTC unchanged.
+
 LATEST nativeG1profile raw terminal16of16/167clean/exact923d993c release;
 independent06b2 source8/fourrankrawcapture/NSpidphysical PASS, parserpending.
 0695 handleexpired AFTERterminal; raw result authoritative, neverrerun root.

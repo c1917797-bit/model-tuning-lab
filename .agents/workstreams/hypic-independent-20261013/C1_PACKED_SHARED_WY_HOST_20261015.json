@@ -1,0 +1,25 @@
+{
+  "schema": "hypic-packed-c1-host/v1",
+  "operation": "exec-00000000000006cb",
+  "tests": 6,
+  "passed": true,
+  "scope": [
+    "independent packed affine dependency propagation versus FP64 serial oracle",
+    "shared official-ABI preparation call count and three state-pass layout with mocked primitives"
+  ],
+  "not_proven": [
+    "real official NPU numerical equivalence",
+    "runtime hook integration",
+    "convolution window packing",
+    "source-bound loader and rollback",
+    "performance and task quality"
+  ],
+  "source_read": "Unchanged official image /vllm-workspace/vllm-ascend/vllm_ascend/ops/triton/fla/chunk.py in06c9; no old HYPIC source copied/imported/mounted.",
+  "parser": {
+    "root": "/cache/cch/hypic-independent-20261013/profile-g1-native-r1-analysis-r1",
+    "last_probe": "exec-00000000000006c6",
+    "state": "container absent, no parser process, no CSV found; no accepted parsed output; original raw retained; recover original operation logs before successor"
+  },
+  "next": "Implement packed convolution/metadata and source-bound official backend, full private serial shadows before device admission.",
+  "device_started": false
+}
