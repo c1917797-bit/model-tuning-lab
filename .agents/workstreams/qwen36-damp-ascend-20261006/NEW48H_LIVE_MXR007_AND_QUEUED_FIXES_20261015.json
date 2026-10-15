@@ -1,26 +1,30 @@
 {
   "schema": "ascend.new48h.live-handoff/v1",
-  "as_of_utc": "2026-10-15T09:42:00Z",
+  "as_of_utc": "2026-10-15T10:51:00Z",
   "cutoff_utc": "2026-10-16T07:18:17Z",
   "goal_active": true,
   "final_acceptance": false,
   "active_MAIN_job": {
-    "operation_id": "exec-0000000000000555",
-    "status": "running_last_verified",
-    "last_verified_operation": "exec-0000000000000556",
+    "operation_id": "exec-00000000000005bf",
+    "status": "running_last_operation_poll",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-ownership-observation-v1-013/SOURCE_MANIFEST.json",
-      "bytes": 48982,
-      "sha256": "04f047579db683c07313da9a7ff346e78731af9077d74abc94ae4df9244dd704"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-saved-frame-owned-v1-019/SOURCE_MANIFEST.json",
+      "bytes": 7134,
+      "sha256": "043c6099ba42623056d6deab859b8736a77e49265d3cbf3bc545f3c15a41110c"
     },
-    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-ownership-observation-main-NEW48H_013_001",
-    "scope": "Actual short129 TP4 all48 GDN numerics; not performance or task accuracy",
-    "phase_seconds": 2700,
-    "cleanup_seconds": 270,
-    "exclusive_TP4": true,
-    "poll_only_existing_handle": true,
-    "restart_on_timeout": false,
-    "ownership_call_chain": "actual OWNERSHIP_OBSERVER_CHAIN.json present with MRO/closure/H bindings true; not numeric PASS"
+    "physical": [
+      4
+    ],
+    "logical": [
+      0
+    ],
+    "scope": "Saved real model-layer normalized input/state replay native and candidate, three selected frames x3; no model load/performance/qualification",
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-saved-frame019-NEW48H_NPU_001",
+    "phase_seconds": 2400,
+    "cleanup_seconds": 90,
+    "actual_device_stage": "pending current device proof; handle running does not prove NPU compute",
+    "exclusive_TP4": false,
+    "poll_only_existing_handle": true
   },
   "resource_admission": {
     "launch_operation": "exec-0000000000000555",
@@ -50,7 +54,7 @@
   "queued": {
     "MXR012": {
       "local": "C:/Users/Huawei/AppData/Local/Temp/mxr-long-cap48-atomic-new48h-20261015-012",
-      "status": "prepared_not_deployed",
+      "status": "superseded_by_prepared014_same_math_and_observer_fix",
       "requires": "actual successful013 short refs+source review/binding, CPU, separate opt224.5GiB fresh free, all4release",
       "phase_seconds": 7200
     },
@@ -76,24 +80,56 @@
       "status": "prepared_not_run",
       "source_sha256": "5f575c0c0230fa079ba451b88b9ef495d64a757bd477b843b38ec2601944d131",
       "requires": "actual candidate qualification and tasksmoke coverage; no model scores"
+    },
+    "MXR014": {
+      "status": "local_prepared_not_deployed_not_qualified",
+      "template_sha256": "45ebf9ecb2b2780d3ccd3e11054475ded2b0bbbb10d9f6ea9740e3ec6b8349ea",
+      "requires": "actual successful short independent recovery gate plus reviewed terminal adapter; original013 failed terminal cannot pass original strictshort"
+    },
+    "MXR069": {
+      "status": "deployed_exact47_AST_only_not_executed",
+      "source_sha256": "d66da122939f2b577b84fafc639fa4f20401001e027f75f6ba6c1fc897763753",
+      "reason": "full-entry missing reference import fixed, but 067 reveals same unchanged numeric failure, do not rerun before causal evidence"
+    },
+    "MXR017": {
+      "status": "local_prepared_NOT_QUALIFIED",
+      "template_sha256": "0a965e62195aa70ae683b52d612b70191283fb4e7369e165e6ec2c2eb7685674",
+      "reason": "requires successful true short numerical gates, current016002 failed; no long activation"
+    },
+    "accuracy007": {
+      "status": "deployed_render_only_8files_no_run",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/accuracy-render-only-owned-new48h-v1-007/SOURCE_MANIFEST.json",
+        "bytes": 13280,
+        "sha256": "d3805a5e6b6044a27f0f0138767f8357397d50377d21693db0800ab5efd043ba"
+      },
+      "Devices": [],
+      "requires": "MAIN fresh CPU cohort after019 release; actual real tokenizer rendering and independent consumption, not task score"
+    },
+    "accuracy006": {
+      "status": "local_full_shard_and_merge_prepared_no_full_run",
+      "execution_template_sha256": "96ba4cb76bba53db7c7f4ebbef2c4d9a5dabcd0eb81c8e91a324631279d83d4d",
+      "actual_model_accuracy": false,
+      "requirements": "actual no-thinking rendered input, paired source-qualified smoke/cost, frozen full ID catalog, exact input reused both arms, real sandbox/decoder and full merger"
     }
   },
   "parallel_preparation": {
-    "accuracy_input_repair": "064 actual empty-proof/DEVICE handshake causal audit and bounded local successor",
-    "ge_fullgdn_ready": "DL B009 actual kernel pipeline/algorithm review",
-    "gdn_paper_reassessment": "012 actual executable downstream interface review"
+    "gdn_paper_reassessment": "019 actual owned singlecard saved-frame discriminating replay, source+controller binding in progress",
+    "accuracy_input_repair": "B010 savedraw CPU64/rounding-cell diagnostic actual-owned CPU entry preparation",
+    "ge_fullgdn_ready": "006 real full-shard/merge generative2048 accuracy entry preparation"
   },
   "git": {
     "branch": "work/qwen36-damp-ascend-20261006",
     "last_confirmed_remote_commit": "09c4bb11",
-    "new_local_commit": "f5730ecf",
-    "new_push_operation": "exec-00000000000004cf",
+    "new_local_commit": "e112f4092d2bdbac8930360ccac325aec1479144",
+    "new_push_operation": "exec-0000000000000560",
     "new_push_exit": 128,
-    "new_push_error": "Operation too slow. Less than1byte/sec last15s",
-    "new_commit_remote_confirmation": false
+    "new_push_error": "could not read Username for https://github.com: No such device or address",
+    "new_commit_remote_confirmation": false,
+    "actual_credential_helper_configured": false
   },
   "missing": [
-    "Actual013 short numerical PASS",
+    "Actual complete short gate with independently validated numerical contract; original016 failed not relabelled",
     "Actual012 long/state and relevant lifecycle PASS",
     "Actual qualified original-task shape coverage, not all fallback",
     "Unprofiled fixed1024 matched wholemodel screening and 3pairs >=10%",
@@ -114,25 +150,30 @@
     ],
     "no_new_HugeTLB_release": true,
     "no_foreign_stop": true,
-    "continuous_utilization": "UNMEASURED"
+    "continuous_utilization": "UNMEASURED",
+    "latest_protected_observation": "05be fresh NPU0-3 PIDs4142404-4142407 active; do not touch. NPU4-7 idle at admission; MemAvailable60847756kB. This is not a current all-window occupancy claim."
   },
   "current_MAIN_job": {
-    "operation_id": "exec-0000000000000555",
-    "status": "running_last_verified",
-    "last_verified_operation": "exec-0000000000000556",
+    "operation_id": "exec-00000000000005bf",
+    "status": "running_last_operation_poll",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-ownership-observation-v1-013/SOURCE_MANIFEST.json",
-      "bytes": 48982,
-      "sha256": "04f047579db683c07313da9a7ff346e78731af9077d74abc94ae4df9244dd704"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-saved-frame-owned-v1-019/SOURCE_MANIFEST.json",
+      "bytes": 7134,
+      "sha256": "043c6099ba42623056d6deab859b8736a77e49265d3cbf3bc545f3c15a41110c"
     },
-    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-ownership-observation-main-NEW48H_013_001",
-    "scope": "Actual short129 TP4 all48 GDN numerics; not performance or task accuracy",
-    "phase_seconds": 2700,
-    "cleanup_seconds": 270,
-    "exclusive_TP4": true,
-    "poll_only_existing_handle": true,
-    "restart_on_timeout": false,
-    "ownership_call_chain": "actual OWNERSHIP_OBSERVER_CHAIN.json present with MRO/closure/H bindings true; not numeric PASS"
+    "physical": [
+      4
+    ],
+    "logical": [
+      0
+    ],
+    "scope": "Saved real model-layer normalized input/state replay native and candidate, three selected frames x3; no model load/performance/qualification",
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-saved-frame019-NEW48H_NPU_001",
+    "phase_seconds": 2400,
+    "cleanup_seconds": 90,
+    "actual_device_stage": "pending current device proof; handle running does not prove NPU compute",
+    "exclusive_TP4": false,
+    "poll_only_existing_handle": true
   },
   "historical_MXR007": {
     "operation_id": "exec-00000000000004cd",
@@ -228,6 +269,141 @@
       "independent_consumer_failed": true,
       "all_owned_released": true,
       "scope": "Native-style reduction-only hypothesis did not fix frozen native-peer output gate; full160 not executed. Not paper-wide no-go."
+    },
+    "MXR016002": {
+      "status": "NUMERIC_FAILED",
+      "operation": "exec-000000000000058e",
+      "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr013-cpu-recovery016-002-new48h-MAIN-20261015-002",
+      "rank0": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr013-cpu-recovery016-002-new48h-MAIN-20261015-002/cpu-preflight/producer/recovery/rank-0/BRIDGE_RESULT.json",
+        "bytes": 65353,
+        "sha256": "2c34b9b80b4653eb8344aefcf73f472fce8f6a30023b444dbc88f31698c96465"
+      },
+      "rows": 48,
+      "output_fail": 45,
+      "state_fail": 47,
+      "solve_fail": 0,
+      "classification": "UNKNOWN_CAUSE pending same-input native baseline; not paper rejection",
+      "remaining_ranks": "not_consumed_due_original_failfast",
+      "release": "CID3d8ce2... stopped Pid0 noExec OOMfalse actual0598"
+    },
+    "MXR067": {
+      "status": "NUMERIC_FAILED",
+      "operation": "exec-0000000000000599",
+      "owner": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-NEW48H_067_SMOKE_001/RESULT.json",
+        "bytes": 351437,
+        "sha256": "12b6207f3bbe2561d116b9e5b016a69a99307e7041232c08c770b20dd66b2e20"
+      },
+      "consumer": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-NEW48H_067_SMOKE_001/physical6/numeric/CONSUMED.json",
+        "bytes": 26582,
+        "sha256": "d4bc2ddeb0eb0cad796fdb7c4db5dbd0c96e38fa8741bec0f355059b4715b858"
+      },
+      "actual_NPU": true,
+      "physical": [
+        6
+      ],
+      "actual_solver_blocks": 20,
+      "native_import": true,
+      "rows": 9,
+      "peer_gates_all_pass": true,
+      "native_CPU64_gates_all_fail": true,
+      "candidate_CPU64_gates_all_fail": true,
+      "numeric_promotion": false,
+      "primary": "complete independent CPU output/state consumer: unchanged .002/.02/.999 gates",
+      "classification": "Native BF16 baseline also fails strict FP64 gate on tested synthetic cases; actual model-frame cause still UNKNOWN",
+      "release": "CID62eb1d35280e663a5397ff1fe9e133c4560559b3792f8a6f21727dd5c01bde94 stopped/Pid0/noExec/OOMfalse actual05a9; original errors[]"
+    },
+    "DL_B010": {
+      "status": "FAILED_WITH_NUMERIC_NEGATIVE",
+      "operation": "exec-0000000000000587",
+      "build_and_Meta_pass": true,
+      "NPU": true,
+      "physical": [
+        5
+      ],
+      "producer": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-numeric-new48h-MAIN-20261015-001/numeric/result/RESULT.json",
+      "owner_primary": "protected ownership observation incomplete",
+      "independent_consumer": false,
+      "B16_step3_native_peer_output": 0.003105590062111801,
+      "frozen_output_gate": 0.00303,
+      "state_CPU64": 3.88239826068591e-8,
+      "state_gate": 7.92e-7,
+      "scope": "key-projection organization hypothesis did not fix same peer gate; actual B010 rounding-cell diagnosis pending. Original005 diagnosis not transferable by equal error."
+    },
+    "MXR019_CPU": {
+      "operation": "exec-00000000000005b8",
+      "exit": 0,
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-saved-frame-owned-v1-019/SOURCE_MANIFEST.json",
+        "bytes": 7134,
+        "sha256": "043c6099ba42623056d6deab859b8736a77e49265d3cbf3bc545f3c15a41110c"
+      },
+      "owner": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-saved-frame019-NEW48H_CPU_001/RESULT.json",
+        "bytes": 404712,
+        "sha256": "c3f53e41e44a08c19b7a50d320adc926e0ba15a14f634a04385eb78d9657d98b"
+      },
+      "Devices": [],
+      "release": "e2224456ab8ac36e7aba06ac32f76c2def9c330d9179a362c7cc9d620208364a stopped Pid0 noExec OOMfalse actual05be",
+      "initial_source_failure": "05b1 missing frozen065 dependency; deployed exactoriginal065 source only, sourceaudit05b7 passed. No NPU rerun.",
+      "NPU": false
+    },
+    "DL011": {
+      "status": "DIAGNOSTIC_COMPLETE_NOT_NUMERIC_PASS",
+      "operation": "exec-00000000000005af",
+      "exit": 0,
+      "source": {
+        "bytes": 19261,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-B010-readout-diagnostic-new48h-v1-011/SOURCE_MANIFEST.json",
+        "sha256": "2184201baf9036e587e5baae4b1c9108fbd379c57acd3f7493e8fa6c7b8c371c"
+      },
+      "owner": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlB010-readout011-diagnostic-new48h-MAIN-20261015-001/RESULT.json",
+        "bytes": 1393,
+        "sha256": "3c4c11b11f7cbe98932984bc551739409acd143bdff77cef9a40c025fe538268"
+      },
+      "diagnosis": {
+        "bytes": 24428,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlB010-readout011-diagnostic-new48h-MAIN-20261015-001/native/result/DIAGNOSIS.json",
+        "sha256": "4a4590c96a4f1ffe3b5c0eb816142c95142f9524f2166a98b84452e3b9097217"
+      },
+      "NPU": false,
+      "original_gate_pass": false,
+      "dominant_cell": "same real B010 [9,9,15], candidate closer to CPU64 than native; signed midpoint margin -6.692260938e-10; does not establish complete lifecycle or exact-real nearest output",
+      "stopped_retained": true
     }
+  },
+  "historical_MXR013": {
+    "operation_id": "exec-0000000000000555",
+    "status": "historical_terminal_failed",
+    "last_verified_operation": "exec-0000000000000556",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-ownership-observation-v1-013/SOURCE_MANIFEST.json",
+      "bytes": 48982,
+      "sha256": "04f047579db683c07313da9a7ff346e78731af9077d74abc94ae4df9244dd704"
+    },
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-ownership-observation-main-NEW48H_013_001",
+    "scope": "Actual short captured all4 loaded workers; independent consumer failed before numerical judgment due -I prefix_binding import. Original FAILED retained.",
+    "phase_seconds": 2700,
+    "cleanup_seconds": 270,
+    "exclusive_TP4": false,
+    "poll_only_existing_handle": false,
+    "restart_on_timeout": false,
+    "ownership_call_chain": "actual OWNERSHIP_OBSERVER_CHAIN.json present with MRO/closure/H bindings true; not numeric PASS",
+    "owner_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-ownership-observation-main-NEW48H_013_001/RESULT.json",
+      "bytes": 15291,
+      "sha256": "ce4e046a3cd0b596d896236edbcd3f8543c2487d683299dd16ccee20df8ff4be"
+    },
+    "release_verified": {
+      "all_created_containers_release_verified": true,
+      "independent_candidate_stopped": true,
+      "Pid": 0,
+      "ExecIDs": null,
+      "OOMKilled": false
+    },
+    "exact_candidate_cid": "3412fa2dbeef04f1d6336a5500a24fa1ac1672ac10e0e691a234b15073d651bd"
   }
 }

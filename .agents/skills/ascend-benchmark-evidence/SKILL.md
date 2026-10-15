@@ -19,7 +19,9 @@ real improvement.
 2. Declare the primary metric and thresholds before running the candidate.
 3. Run correctness gates first: load success, output validity, numerical or
    task-quality tolerance, deterministic checks where applicable, and expected
-   NPU execution.
+   NPU execution. When native and higher-precision oracle results disagree,
+   apply [independent numerical truth and native baselines](references/numerical-oracle-and-native-baseline.md)
+   before assigning the failure or revising the numerical contract.
 4. Measure baseline and candidate with the same commands and controlled order.
    Use explicit warmups, multiple measured repetitions, and report dispersion.
 5. Separate these evidence classes:
