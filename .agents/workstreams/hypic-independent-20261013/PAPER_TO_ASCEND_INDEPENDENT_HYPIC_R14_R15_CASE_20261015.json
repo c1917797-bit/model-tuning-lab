@@ -1,0 +1,132 @@
+{
+  "schema": "paper-to-ascend-independent-hypic-case/v1",
+  "status": "PARTIAL_BOUNDED_VERIFIED_NOT_FULL_FUNCTIONAL_ACCEPTANCE",
+  "paper_revision": "2607.01299v2",
+  "identity": "independent single-instance adapted C1/C2 port; C3 explicitly excluded by human scope, not whole-paper result reproduction",
+  "scope": {
+    "model": "Qwen3.6-27B / Qwen3_5ForConditionalGeneration",
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tp": 4,
+    "reuse_old_algorithm_code": false,
+    "official_image_unchanged": true,
+    "training_or_quantization": false
+  },
+  "skill_mapping": [
+    {
+      "skill": "paper-to-ascend",
+      "requirements": [
+        "method-chain versus backend separation",
+        "bounded decision scope",
+        "constraint feasibility"
+      ],
+      "evidence": [
+        "C1_PACKED_R14_TERMINAL_20261015.json",
+        "C1_PACKED_R14_PDC_TERMINAL_20261015.json"
+      ],
+      "proved": "integrated C1/C2 mechanism and bounded numerical controls; architecture48linear/16full",
+      "unproved": "full formal performance and naturalEOS taskquality; no overall paper adoption"
+    },
+    {
+      "skill": "ascend-canary-implementation",
+      "requirements": [
+        "one falsifiable implementation repair",
+        "actual mutable-state/private precommit control"
+      ],
+      "proved": "canonical short-prefix recurrence terminal actually feeds cached composition; R13 failure retained, R14 16/16 independent audit0857 passed without tolerance relaxation",
+      "unproved": "general all-input model equivalence or finalquality"
+    },
+    {
+      "skill": "ascend-benchmark-evidence",
+      "requirements": [
+        "exact denominator",
+        "actual fourworker hot proof",
+        "independent observational join"
+      ],
+      "proved": "16 exact HTTP/runtime bijection; fourrank48C1/16C2; original ID and conditional-cap audit failures retained",
+      "lesson": "A conditional instrumentation event is not a universal mechanism invariant. Audit actual first runner computed prefix and immutable per-request PIC geometry, preserve original frozen FAIL and identify revised observational decision explicitly."
+    },
+    {
+      "skill": "chicaihong01-host-maintenance",
+      "requirements": [
+        "fresh direct route",
+        "physical to namespace identity",
+        "continuous isolation",
+        "exact own release"
+      ],
+      "proved": "R14 216 and PDC219 clean isolation samples; actual PID/cgroup/NSpid; exact owned containers removed",
+      "unproved": "future occupancy; every successor must freshly admit"
+    },
+    {
+      "skill": "runtime-monkeypatch-delivery",
+      "requirements": [
+        "default disabled",
+        "source-bound removable hooks",
+        "separate numerical versus timed execution"
+      ],
+      "proved": "R15 explicit defaultOFF performance switch leaves canary shadow mandatory,496CPU host regression,141bindings",
+      "unproved": "R15 real timed path terminal; disabled/uninstall/restart lifecycle"
+    },
+    {
+      "skill": "ascend-model-quality-evaluation",
+      "requirements": [
+        "same ruler and full paired denominator"
+      ],
+      "proved": "protocol only: latest human nonthinking1024/thinking2048 naturalEOS, same arms",
+      "unproved": "full127x3 paired quality in this independent campaign; do not import oldR19 verdict as new evidence"
+    }
+  ],
+  "evidence": {
+    "C1_PACKED_R14_TERMINAL_20261015.json": {
+      "sha256": "6ee5e2d3a3454b15a364c43eee27d92396cb800a2f6ad741a02f31020f926efc"
+    },
+    "C1_PACKED_R14_PDC_TERMINAL_20261015.json": {
+      "sha256": "19501e81c52925eaf35a2c98a03441554d24fe73cfc15ff2e5f3e4b125e7e613"
+    },
+    "C1_PDC_ORIGINAL_AUDIT_FAILURE_20261015.json": {
+      "sha256": "3f9d806d8d45ac51c5a1385dac24574fdb51e12f81bcbec3e8f1ba27ca159080"
+    },
+    "C1_PACKED_R15_HOST_READINESS_20261015.json": {
+      "sha256": "15d6271677c13642a69a47d82c87c1ca190f8dcc78218f07cb2b9d54f5fc3818"
+    },
+    "FORMAL_R15_G3_R1_LIVE_NAMESPACE.json": {
+      "sha256": "7d30a9d609d10000f9e5caa3b79b5fa38db9db21a862c0505274d29fe7cfd837"
+    }
+  },
+  "negative_results": [
+    {
+      "operation": "exec-000000000000080c",
+      "scope": "R13 actual failed-head numeric path",
+      "verdict": "failed",
+      "lesson": "same equations do not imply same BF16 batching/branch order"
+    },
+    {
+      "operation": "exec-000000000000084d",
+      "scope": "post-run HTTP/runtime string identity audit",
+      "verdict": "failed-retained; separate strict bijection correction"
+    },
+    {
+      "operation": "exec-000000000000087b",
+      "scope": "required conditionalcap event for every request",
+      "verdict": "failed-retained; revised actual-hit proof0887 separately labelled"
+    }
+  ],
+  "live_not_accepted": {
+    "operation": "exec-000000000000089b",
+    "phase": "R15G3/R1 full40 fixed1024",
+    "state": "RUNNING_NO_TERMINAL_RESULT",
+    "no_new_claims": true
+  },
+  "remaining": [
+    "all12 matched formal phases",
+    "full127x3 naturalEOS quality",
+    "disabled/uninstall/restart lifecycle",
+    "29 archived Skill functional acceptance",
+    "authorized serial main integration"
+  ],
+  "publication": "work branch only; remote live verify required, main unchanged"
+}
