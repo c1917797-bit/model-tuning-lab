@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST nativeG1profile raw terminal16of16/167clean/exact923d993c release;
+independent06b2 source8/fourrankrawcapture/NSpidphysical PASS, parserpending.
+0695 handleexpired AFTERterminal; raw result authoritative, neverrerun root.
+No ownedliveNPUjob. Humancorrects successfulroute also910B; do NOTblame910C.
+Readonly3ad0967/4429e35 corecomparison: packed sharedWY+batchedstate/depth
+composition/materialstaging/C2phasebatching vs own serialperrequestwindows.
+Core formula sameT@H+S, costcausality stillrequiresprofile. Prioritychanges
+to independent C1 packed-wave reconstruction, NOT synchronization-only.
+C1_PACKED_WAVE_RECONSTRUCTION_PLAN_20261015.md freezesCPU/backend/oracle gates.
+069e intervalunion8ranktraces: cold86-87percent/warm73-74percentuncovered;
+gaps NOT compiler/CPUrootcause or removable wallbudget. FourCPUcontrols pass.
+No oldcodecopied/imported/mounted. Fullscope/deadline19:04:09UTC unchanged.
+
 CURRENT nativeG1profile controller exec-0000000000000695 confirmedrunning
 on originalma a6109 forcedirect; checkpointb4c00fa3, exact ownedCID
 923d993cace531391214a2edb1f18e193e48ba0a870cf418dbf8f32e70fd212a.

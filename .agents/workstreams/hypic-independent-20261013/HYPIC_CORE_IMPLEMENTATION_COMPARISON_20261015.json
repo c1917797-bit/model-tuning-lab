@@ -1,0 +1,1219 @@
+{
+  "schema": "hypic-core-readonly-comparison/v1",
+  "reference_root": "/cache/cch/hypic_vllm_ascend-hotproof-20261008",
+  "original_commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
+  "hotproof_commit": "4429e35177979c874bf053ab29789e4773f39b22",
+  "independent_checkpoint": "b4c00fa37638cdc3d7eaf2af5f7bf121455d2625",
+  "human_correction": "Successful route also runs910B; attachment910C is not exclusive baseline and not an explanation.",
+  "reference_files": [
+    {
+      "path": "hypic_vllm_ascend/patches/gdn.py",
+      "lines": 1850,
+      "sha256": "72d58fdf03a4317ee4493ac475cd4b059ae3ed7f9138243446737a860537623d",
+      "functions": [
+        {
+          "name": "_next_power_of_two",
+          "line": 58,
+          "end": 60
+        },
+        {
+          "name": "_required_gdn_shape",
+          "line": 63,
+          "end": 73
+        },
+        {
+          "name": "_validate_gdn_grouped_head_geometry",
+          "line": 76,
+          "end": 115
+        },
+        {
+          "name": "_validate_gdn_wy_geometry",
+          "line": 118,
+          "end": 138
+        },
+        {
+          "name": "_get_gdn_kernel_metadata",
+          "line": 141,
+          "end": 179
+        },
+        {
+          "name": "_prepare_gdn_wy",
+          "line": 182,
+          "end": 223
+        },
+        {
+          "name": "_validate_ascendc_gdn_h_inputs",
+          "line": 226,
+          "end": 310
+        },
+        {
+          "name": "_ascendc_gdn_h",
+          "line": 313,
+          "end": 348
+        },
+        {
+          "name": "_rows_cover_tokens",
+          "line": 351,
+          "end": 357
+        },
+        {
+          "name": "_cached_gdn_indices",
+          "line": 360,
+          "end": 371
+        },
+        {
+          "name": "_materialization_for",
+          "line": 374,
+          "end": 378
+        },
+        {
+          "name": "_flat_range",
+          "line": 381,
+          "end": 396
+        },
+        {
+          "name": "_get_gdn_structural_plan",
+          "line": 399,
+          "end": 554
+        },
+        {
+          "name": "_conv_tail_from_tokens",
+          "line": 557,
+          "end": 570
+        },
+        {
+          "name": "_mixed_native_decode_scope",
+          "line": 573,
+          "end": 630
+        },
+        {
+          "name": "_scoped_gdn_prefills",
+          "line": 634,
+          "end": 645
+        },
+        {
+          "name": "_run_native_mixed_decode",
+          "line": 648,
+          "end": 729
+        },
+        {
+          "name": "_position_independent_gdn_core",
+          "line": 732,
+          "end": 1362
+        },
+        {
+          "name": "_shape_tuple",
+          "line": 1365,
+          "end": 1369
+        },
+        {
+          "name": "_validate_gdn_material_shapes",
+          "line": 1372,
+          "end": 1393
+        },
+        {
+          "name": "_prefix_hit_entry",
+          "line": 1396,
+          "end": 1418
+        },
+        {
+          "name": "_cacheable_exact_prefix_segments",
+          "line": 1421,
+          "end": 1430
+        },
+        {
+          "name": "_runtime_prefix_hash",
+          "line": 1433,
+          "end": 1437
+        },
+        {
+          "name": "_get_gdn_metadata",
+          "line": 1440,
+          "end": 1447
+        },
+        {
+          "name": "_prefill_row_for_req",
+          "line": 1450,
+          "end": 1463
+        },
+        {
+          "name": "_prefill_state_indices",
+          "line": 1466,
+          "end": 1474
+        },
+        {
+          "name": "_restore_prefix_state",
+          "line": 1477,
+          "end": 1671
+        },
+        {
+          "name": "_store_prefix_state",
+          "line": 1674,
+          "end": 1711
+        },
+        {
+          "name": "_patch_gdn_class",
+          "line": 1714,
+          "end": 1786
+        },
+        {
+          "name": "_apply_gdn_patches",
+          "line": 1789,
+          "end": 1797
+        },
+        {
+          "name": "_apply_qwen_target_patch",
+          "line": 1800,
+          "end": 1810
+        },
+        {
+          "name": "install_gdn_patches",
+          "line": 1813,
+          "end": 1850
+        },
+        {
+          "name": "forward_core_with_hypic",
+          "line": 1731,
+          "end": 1780
+        },
+        {
+          "name": "callback",
+          "line": 1824,
+          "end": 1829
+        },
+        {
+          "name": "qwen_callback",
+          "line": 1840,
+          "end": 1844
+        }
+      ]
+    },
+    {
+      "path": "hypic_vllm_ascend/patches/runner.py",
+      "lines": 1241,
+      "sha256": "474d13eb7e6ba2842afaeb234ccd773ba59f37773e3d0d991442b6eabf48cb81",
+      "functions": [
+        {
+          "name": "_runtime_incompatibilities",
+          "line": 37,
+          "end": 68
+        },
+        {
+          "name": "_validate_position_independent_cache_mode",
+          "line": 71,
+          "end": 112
+        },
+        {
+          "name": "_sequence_parallel_enabled",
+          "line": 115,
+          "end": 123
+        },
+        {
+          "name": "_is_language_decoder_layer",
+          "line": 126,
+          "end": 141
+        },
+        {
+          "name": "_expected_material_layers",
+          "line": 144,
+          "end": 169
+        },
+        {
+          "name": "_failed_report",
+          "line": 172,
+          "end": 204
+        },
+        {
+          "name": "_report_has_events",
+          "line": 207,
+          "end": 219
+        },
+        {
+          "name": "_validate_hot_path_report",
+          "line": 222,
+          "end": 267
+        },
+        {
+          "name": "_validate_worker_prefix_layout",
+          "line": 270,
+          "end": 362
+        },
+        {
+          "name": "_compact_scheduler_output",
+          "line": 365,
+          "end": 453
+        },
+        {
+          "name": "_rewrite_position_independent_inputs",
+          "line": 456,
+          "end": 566
+        },
+        {
+          "name": "_worker_prefill_request_ids",
+          "line": 569,
+          "end": 591
+        },
+        {
+          "name": "_validate_materialization_provenance",
+          "line": 594,
+          "end": 624
+        },
+        {
+          "name": "_materialization_consensus_input",
+          "line": 627,
+          "end": 646
+        },
+        {
+          "name": "_apply_materialization_consensus",
+          "line": 649,
+          "end": 694
+        },
+        {
+          "name": "_sync_report_across_tp",
+          "line": 697,
+          "end": 736
+        },
+        {
+          "name": "_attach_materialization_report",
+          "line": 739,
+          "end": 755
+        },
+        {
+          "name": "_defer_materialization_report",
+          "line": 758,
+          "end": 770
+        },
+        {
+          "name": "_input_batch_request_ids",
+          "line": 773,
+          "end": 778
+        },
+        {
+          "name": "_validated_worker_request_ids",
+          "line": 781,
+          "end": 800
+        },
+        {
+          "name": "_apply_runner_patches",
+          "line": 863,
+          "end": 1219
+        },
+        {
+          "name": "install_runner_patches",
+          "line": 1222,
+          "end": 1241
+        },
+        {
+          "name": "clone_with",
+          "line": 390,
+          "end": 396
+        },
+        {
+          "name": "__init__",
+          "line": 804,
+          "end": 812
+        },
+        {
+          "name": "create_module",
+          "line": 814,
+          "end": 818
+        },
+        {
+          "name": "exec_module",
+          "line": 820,
+          "end": 823
+        },
+        {
+          "name": "__init__",
+          "line": 827,
+          "end": 830
+        },
+        {
+          "name": "install",
+          "line": 832,
+          "end": 842
+        },
+        {
+          "name": "uninstall",
+          "line": 844,
+          "end": 851
+        },
+        {
+          "name": "find_spec",
+          "line": 853,
+          "end": 860
+        },
+        {
+          "name": "callback",
+          "line": 1236,
+          "end": 1237
+        },
+        {
+          "name": "init_with_hypic",
+          "line": 873,
+          "end": 948
+        },
+        {
+          "name": "execute_with_hypic",
+          "line": 956,
+          "end": 1099
+        },
+        {
+          "name": "update_states_with_hypic",
+          "line": 1107,
+          "end": 1113
+        },
+        {
+          "name": "update_after_execute_with_hypic",
+          "line": 1125,
+          "end": 1143
+        },
+        {
+          "name": "sample_tokens_with_hypic",
+          "line": 1151,
+          "end": 1156
+        },
+        {
+          "name": "prepare_inputs_with_hypic",
+          "line": 1164,
+          "end": 1214
+        }
+      ]
+    },
+    {
+      "path": "hypic_vllm_ascend/patches/scheduler.py",
+      "lines": 1871,
+      "sha256": "c19155be244b0fdca6cb97bf1a3c475568bfb1635e36512568d59735c241c55f",
+      "functions": [
+        {
+          "name": "_queue_head",
+          "line": 47,
+          "end": 60
+        },
+        {
+          "name": "_queue_remove_requests",
+          "line": 63,
+          "end": 76
+        },
+        {
+          "name": "_queue_prepend_requests",
+          "line": 79,
+          "end": 101
+        },
+        {
+          "name": "_waiting_requests",
+          "line": 104,
+          "end": 125
+        },
+        {
+          "name": "_request_id_list",
+          "line": 128,
+          "end": 133
+        },
+        {
+          "name": "_cached_req_computed_map",
+          "line": 136,
+          "end": 149
+        },
+        {
+          "name": "_computed_tokens",
+          "line": 152,
+          "end": 159
+        },
+        {
+          "name": "_scheduled_computed_map",
+          "line": 162,
+          "end": 163
+        },
+        {
+          "name": "_is_full_attention_group",
+          "line": 166,
+          "end": 175
+        },
+        {
+          "name": "_full_attention_group_layout",
+          "line": 178,
+          "end": 213
+        },
+        {
+          "name": "_infer_block_size",
+          "line": 216,
+          "end": 217
+        },
+        {
+          "name": "_candidate_prefix_end_for_tokens",
+          "line": 220,
+          "end": 231
+        },
+        {
+          "name": "_candidate_prefix_ends_for_request",
+          "line": 234,
+          "end": 263
+        },
+        {
+          "name": "_build_exact_prefix_plan",
+          "line": 266,
+          "end": 327
+        },
+        {
+          "name": "_request_can_replay",
+          "line": 330,
+          "end": 345
+        },
+        {
+          "name": "_request_prefix_hash",
+          "line": 348,
+          "end": 361
+        },
+        {
+          "name": "_request_prefix_hashes",
+          "line": 364,
+          "end": 384
+        },
+        {
+          "name": "_token_ids_for_request",
+          "line": 387,
+          "end": 402
+        },
+        {
+          "name": "_observe_request_prefix_candidates",
+          "line": 405,
+          "end": 504
+        },
+        {
+          "name": "_prune_request_fingerprint_cache",
+          "line": 507,
+          "end": 573
+        },
+        {
+          "name": "_maybe_prune_request_fingerprint_cache",
+          "line": 576,
+          "end": 581
+        },
+        {
+          "name": "_record_segment_source",
+          "line": 584,
+          "end": 607
+        },
+        {
+          "name": "_preobserve_waiting_prefixes",
+          "line": 610,
+          "end": 698
+        },
+        {
+          "name": "_alignment_token_budget",
+          "line": 701,
+          "end": 719
+        },
+        {
+          "name": "_pending_prefix_hash",
+          "line": 722,
+          "end": 746
+        },
+        {
+          "name": "_hold_pending_prefix_waiters",
+          "line": 749,
+          "end": 787
+        },
+        {
+          "name": "_hold_alignment_duplicates",
+          "line": 790,
+          "end": 837
+        },
+        {
+          "name": "_restore_pending_prefix_waiters",
+          "line": 840,
+          "end": 850
+        },
+        {
+          "name": "_expire_stale_materializations",
+          "line": 853,
+          "end": 883
+        },
+        {
+          "name": "_advance_ready_waiting_prefixes",
+          "line": 886,
+          "end": 954
+        },
+        {
+          "name": "_rollback_unscheduled_prefix_advances",
+          "line": 957,
+          "end": 990
+        },
+        {
+          "name": "_block_group_lengths",
+          "line": 993,
+          "end": 1005
+        },
+        {
+          "name": "_validate_advanced_block_coverage",
+          "line": 1008,
+          "end": 1073
+        },
+        {
+          "name": "_reset_prefix_advances_after_error",
+          "line": 1076,
+          "end": 1089
+        },
+        {
+          "name": "_record_prefix_observation",
+          "line": 1092,
+          "end": 1124
+        },
+        {
+          "name": "_materialization_report_from_output",
+          "line": 1127,
+          "end": 1141
+        },
+        {
+          "name": "_apply_materialization_report",
+          "line": 1144,
+          "end": 1272
+        },
+        {
+          "name": "_runtime_plan_snapshots",
+          "line": 1275,
+          "end": 1337
+        },
+        {
+          "name": "_patch_add_request_method",
+          "line": 1340,
+          "end": 1394
+        },
+        {
+          "name": "_patch_schedule_method",
+          "line": 1397,
+          "end": 1665
+        },
+        {
+          "name": "_patch_update_from_output_method",
+          "line": 1668,
+          "end": 1702
+        },
+        {
+          "name": "_patch_scheduler_init_method",
+          "line": 1705,
+          "end": 1777
+        },
+        {
+          "name": "install_scheduler_patches",
+          "line": 1780,
+          "end": 1871
+        },
+        {
+          "name": "collect",
+          "line": 768,
+          "end": 785
+        },
+        {
+          "name": "collect",
+          "line": 806,
+          "end": 835
+        },
+        {
+          "name": "add_request_once_with_hypic",
+          "line": 1350,
+          "end": 1379
+        },
+        {
+          "name": "add_request_with_hypic",
+          "line": 1381,
+          "end": 1389
+        },
+        {
+          "name": "schedule_once_with_hypic",
+          "line": 1405,
+          "end": 1647
+        },
+        {
+          "name": "schedule_with_hypic",
+          "line": 1649,
+          "end": 1660
+        },
+        {
+          "name": "update_from_output_with_hypic",
+          "line": 1676,
+          "end": 1697
+        },
+        {
+          "name": "init_with_hypic",
+          "line": 1720,
+          "end": 1772
+        }
+      ]
+    },
+    {
+      "path": "hypic_vllm_ascend/patches/attention.py",
+      "lines": 1674,
+      "sha256": "0e13fbf953f40d3e6103fc7e4b1858755d8992d108d8b1763659aa29fb502876",
+      "functions": [
+        {
+          "name": "_merge_attention_rows",
+          "line": 48,
+          "end": 71
+        },
+        {
+          "name": "_rows_cover_identity",
+          "line": 74,
+          "end": 82
+        },
+        {
+          "name": "_register_qwen_rope_geometry",
+          "line": 88,
+          "end": 164
+        },
+        {
+          "name": "_patch_qwen_attention_class",
+          "line": 167,
+          "end": 182
+        },
+        {
+          "name": "_split_consecutive",
+          "line": 185,
+          "end": 197
+        },
+        {
+          "name": "_apply_neox_rotary",
+          "line": 200,
+          "end": 216
+        },
+        {
+          "name": "_anchor_rope",
+          "line": 219,
+          "end": 258
+        },
+        {
+          "name": "_position_independent_attention_rows",
+          "line": 261,
+          "end": 356
+        },
+        {
+          "name": "_position_independent_attention_metadata",
+          "line": 359,
+          "end": 424
+        },
+        {
+          "name": "_shape_tuple",
+          "line": 427,
+          "end": 431
+        },
+        {
+          "name": "_batch_ranges",
+          "line": 434,
+          "end": 440
+        },
+        {
+          "name": "_validate_kv_material_shapes",
+          "line": 443,
+          "end": 477
+        },
+        {
+          "name": "_resolve_kv_cache_layout",
+          "line": 480,
+          "end": 589
+        },
+        {
+          "name": "_kv_cache_block_size",
+          "line": 592,
+          "end": 610
+        },
+        {
+          "name": "_prefix_hit_entry",
+          "line": 613,
+          "end": 635
+        },
+        {
+          "name": "_cacheable_prefix_segments",
+          "line": 638,
+          "end": 645
+        },
+        {
+          "name": "_runtime_prefix_hash",
+          "line": 648,
+          "end": 652
+        },
+        {
+          "name": "_slot_mapping_for_range",
+          "line": 655,
+          "end": 706
+        },
+        {
+          "name": "_ensure_kv_cache",
+          "line": 709,
+          "end": 717
+        },
+        {
+          "name": "_repair_prefix_kv",
+          "line": 720,
+          "end": 957
+        },
+        {
+          "name": "_repair_position_independent_kv",
+          "line": 960,
+          "end": 1264
+        },
+        {
+          "name": "_store_position_independent_kv",
+          "line": 1267,
+          "end": 1315
+        },
+        {
+          "name": "_store_prefix_kv",
+          "line": 1318,
+          "end": 1361
+        },
+        {
+          "name": "_row_index_tensor",
+          "line": 1364,
+          "end": 1372
+        },
+        {
+          "name": "_forward_position_independent_attention",
+          "line": 1375,
+          "end": 1503
+        },
+        {
+          "name": "_patch_impl_class",
+          "line": 1506,
+          "end": 1605
+        },
+        {
+          "name": "_apply_attention_patches",
+          "line": 1608,
+          "end": 1614
+        },
+        {
+          "name": "_apply_qwen_attention_patch",
+          "line": 1617,
+          "end": 1633
+        },
+        {
+          "name": "install_attention_patches",
+          "line": 1636,
+          "end": 1674
+        },
+        {
+          "name": "length",
+          "line": 44,
+          "end": 45
+        },
+        {
+          "name": "init_with_hypic_rope",
+          "line": 175,
+          "end": 177
+        },
+        {
+          "name": "forward_with_hypic",
+          "line": 1511,
+          "end": 1601
+        },
+        {
+          "name": "callback",
+          "line": 1653,
+          "end": 1654
+        }
+      ]
+    },
+    {
+      "path": "hypic_vllm_ascend/transition.py",
+      "lines": 44,
+      "sha256": "401f03dd1a2b8495d76c4b54ca545b5375e38da8b1b7af9be3e282238205eb2d",
+      "functions": [
+        {
+          "name": "compose_state",
+          "line": 21,
+          "end": 32
+        },
+        {
+          "name": "compose_state_torch",
+          "line": 35,
+          "end": 44
+        },
+        {
+          "name": "__matmul__",
+          "line": 11,
+          "end": 11
+        },
+        {
+          "name": "to",
+          "line": 12,
+          "end": 12
+        }
+      ]
+    },
+    {
+      "path": "hypic_vllm_ascend/material.py",
+      "lines": 791,
+      "sha256": "cd677063af4e296be00d12ae9f148fc384cdf4f29b376170f89cd56eb5cf6f68",
+      "functions": [
+        {
+          "name": "_tensor_nbytes",
+          "line": 23,
+          "end": 29
+        },
+        {
+          "name": "as_dict",
+          "line": 62,
+          "end": 79
+        },
+        {
+          "name": "__init__",
+          "line": 83,
+          "end": 111
+        },
+        {
+          "name": "bytes_used",
+          "line": 114,
+          "end": 115
+        },
+        {
+          "name": "segment_count",
+          "line": 118,
+          "end": 119
+        },
+        {
+          "name": "gdn_npu_bytes_used",
+          "line": 122,
+          "end": 136
+        },
+        {
+          "name": "configure",
+          "line": 138,
+          "end": 190
+        },
+        {
+          "name": "begin_step",
+          "line": 192,
+          "end": 216
+        },
+        {
+          "name": "abort_step",
+          "line": 218,
+          "end": 221
+        },
+        {
+          "name": "reject",
+          "line": 223,
+          "end": 225
+        },
+        {
+          "name": "finish_step",
+          "line": 227,
+          "end": 314
+        },
+        {
+          "name": "record_full_attn_repair",
+          "line": 316,
+          "end": 317
+        },
+        {
+          "name": "record_gdn_restore",
+          "line": 319,
+          "end": 320
+        },
+        {
+          "name": "record_rope_relocation",
+          "line": 322,
+          "end": 323
+        },
+        {
+          "name": "record_seam_tokens",
+          "line": 325,
+          "end": 326
+        },
+        {
+          "name": "record_gdn_transition_compose",
+          "line": 328,
+          "end": 329
+        },
+        {
+          "name": "record_replay_bytes",
+          "line": 331,
+          "end": 332
+        },
+        {
+          "name": "ensure_replay_capacity",
+          "line": 334,
+          "end": 348
+        },
+        {
+          "name": "get",
+          "line": 350,
+          "end": 354
+        },
+        {
+          "name": "remove",
+          "line": 356,
+          "end": 357
+        },
+        {
+          "name": "_device_free_bytes",
+          "line": 359,
+          "end": 372
+        },
+        {
+          "name": "_fail",
+          "line": 374,
+          "end": 386
+        },
+        {
+          "name": "_can_add",
+          "line": 388,
+          "end": 415
+        },
+        {
+          "name": "_can_project_kind",
+          "line": 417,
+          "end": 476
+        },
+        {
+          "name": "_evict_until_fits",
+          "line": 478,
+          "end": 498
+        },
+        {
+          "name": "_get_or_create",
+          "line": 500,
+          "end": 506
+        },
+        {
+          "name": "_can_pin_cpu_material",
+          "line": 508,
+          "end": 531
+        },
+        {
+          "name": "_copy_to_cpu",
+          "line": 533,
+          "end": 556
+        },
+        {
+          "name": "_tensor_device_type",
+          "line": 559,
+          "end": 564
+        },
+        {
+          "name": "_clone_for_storage",
+          "line": 566,
+          "end": 579
+        },
+        {
+          "name": "_select_gdn_storage_device",
+          "line": 581,
+          "end": 647
+        },
+        {
+          "name": "put_full_kv",
+          "line": 649,
+          "end": 685
+        },
+        {
+          "name": "put_gdn_state",
+          "line": 687,
+          "end": 780
+        },
+        {
+          "name": "has_full_kv",
+          "line": 782,
+          "end": 784
+        },
+        {
+          "name": "has_gdn_state",
+          "line": 786,
+          "end": 788
+        }
+      ]
+    },
+    {
+      "path": "hypic_vllm_ascend/hotpath.py",
+      "lines": 177,
+      "sha256": "9dd705ae0e609037f36f7ce37794b69ca5523e536b86e4b751d6a57faf579bff",
+      "functions": [
+        {
+          "name": "flatten_ranges",
+          "line": 24,
+          "end": 28
+        },
+        {
+          "name": "_longest_hit_prefix_end",
+          "line": 31,
+          "end": 38
+        },
+        {
+          "name": "_longest_hit_prefix_entries",
+          "line": 41,
+          "end": 55
+        },
+        {
+          "name": "_has_position_safe_hits",
+          "line": 58,
+          "end": 67
+        },
+        {
+          "name": "_materialized_prefix_is_ready",
+          "line": 70,
+          "end": 93
+        },
+        {
+          "name": "build_prefill_rewrite",
+          "line": 96,
+          "end": 177
+        },
+        {
+          "name": "enabled",
+          "line": 20,
+          "end": 21
+        }
+      ]
+    },
+    {
+      "path": "hypic_vllm_ascend/runtime.py",
+      "lines": 236,
+      "sha256": "c1aef4523f7d2149b4736c7d786169466d6546a5cdd3cb394168523da1fa649a",
+      "functions": [
+        {
+          "name": "attach_batch_plan",
+          "line": 148,
+          "end": 149
+        },
+        {
+          "name": "get_batch_plan",
+          "line": 152,
+          "end": 153
+        },
+        {
+          "name": "get_or_create_runtime_state",
+          "line": 156,
+          "end": 161
+        },
+        {
+          "name": "scheduled_token_map",
+          "line": 164,
+          "end": 174
+        },
+        {
+          "name": "_as_list",
+          "line": 177,
+          "end": 184
+        },
+        {
+          "name": "scheduled_computed_token_map",
+          "line": 187,
+          "end": 214
+        },
+        {
+          "name": "request_ids_from_scheduler_output",
+          "line": 217,
+          "end": 236
+        },
+        {
+          "name": "missing",
+          "line": 66,
+          "end": 67
+        },
+        {
+          "name": "has_work",
+          "line": 83,
+          "end": 84
+        },
+        {
+          "name": "missing_features",
+          "line": 87,
+          "end": 88
+        },
+        {
+          "name": "next_step",
+          "line": 143,
+          "end": 145
+        },
+        {
+          "name": "append",
+          "line": 221,
+          "end": 225
+        }
+      ]
+    },
+    {
+      "path": "hypic_vllm_ascend/graph.py",
+      "lines": 57,
+      "sha256": "587d58e0481f1791e5a47ad45574dd9b32ea301c3c8ee3e064a09c96c02f23f2",
+      "functions": [
+        {
+          "name": "normalize_graph_mode",
+          "line": 17,
+          "end": 23
+        },
+        {
+          "name": "assess_graph_mode",
+          "line": 26,
+          "end": 57
+        }
+      ]
+    },
+    {
+      "path": "hypic_vllm_ascend/metadata.py",
+      "lines": 134,
+      "sha256": "3ed07eb9269a8ddf9bbb167c6dd316b876577791053827ff4a315a4eb87bf465",
+      "functions": [
+        {
+          "name": "has_cache_hit",
+          "line": 114,
+          "end": 115
+        },
+        {
+          "name": "cacheable_miss_segments",
+          "line": 118,
+          "end": 124
+        },
+        {
+          "name": "materialization_hashes",
+          "line": 127,
+          "end": 128
+        },
+        {
+          "name": "entry_for",
+          "line": 130,
+          "end": 134
+        }
+      ]
+    }
+  ],
+  "differences": [
+    {
+      "area": "C1 live execution",
+      "reference": "packed multiwindow/multirequest; shared WY and3state passes; depth-wise batched affine composition",
+      "ours": "perrequest prefix -> cachedT/S -> suffix; full chunk wrapper repeatedly called",
+      "classification": "structural missing parallelism/reuse; cost contribution pending native profile analysis"
+    },
+    {
+      "area": "metadata",
+      "reference": "context caches row ranges/head/device across layers",
+      "ours": "perboundary native metadata builds and source revalidation",
+      "classification": "observed source difference"
+    },
+    {
+      "area": "materials",
+      "reference": "NPU auto residency and perbatch stagedsegment tensors shared",
+      "ours": "CPU-resident private acquisitions transfer perrequest",
+      "classification": "observed source difference, transfer cost unmeasured"
+    },
+    {
+      "area": "C2",
+      "reference": "aggregate local/global phase rows, zero-copyglobalcase",
+      "ours": "perrequest/perwindow backendcalls despite R6layerbarrier",
+      "classification": "observed source difference"
+    },
+    {
+      "area": "pruning",
+      "reference": "worker scheduler physical-token view before input preparation",
+      "ours": "model-entry gather and restored full output placeholders",
+      "classification": "observed architecture difference; no actual retained-row mechanism denial"
+    },
+    {
+      "area": "math",
+      "reference": "actualGDN core T@H+S key-major",
+      "ours": "T@H+S key-major",
+      "classification": "no demonstrated formula direction defect; task quality still unproven"
+    }
+  ],
+  "policy": "Ideas only; no old code copied/imported/mounted. Source comparison is not runtime causal proof."
+}

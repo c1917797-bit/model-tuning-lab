@@ -1,0 +1,74 @@
+{
+  "terminal_receipts_valid": true,
+  "source_bindings": 8,
+  "requests": 16,
+  "profile_roots": [
+    {
+      "rank": 0,
+      "pid": 58,
+      "root": "/cache/cch/hypic-independent-20261013/profile-g1-native-r1/profile/rank0_58_20261015131948690_ascend_pt",
+      "files": 112,
+      "bytes": 100993615,
+      "raw_cann_files": 108
+    },
+    {
+      "rank": 1,
+      "pid": 59,
+      "root": "/cache/cch/hypic-independent-20261013/profile-g1-native-r1/profile/rank1_59_20261015131948690_ascend_pt",
+      "files": 112,
+      "bytes": 101003910,
+      "raw_cann_files": 108
+    },
+    {
+      "rank": 2,
+      "pid": 60,
+      "root": "/cache/cch/hypic-independent-20261013/profile-g1-native-r1/profile/rank2_60_20261015131948690_ascend_pt",
+      "files": 112,
+      "bytes": 100996610,
+      "raw_cann_files": 108
+    },
+    {
+      "rank": 3,
+      "pid": 61,
+      "root": "/cache/cch/hypic-independent-20261013/profile-g1-native-r1/profile/rank3_61_20261015131948690_ascend_pt",
+      "files": 112,
+      "bytes": 100998750,
+      "raw_cann_files": 108
+    }
+  ],
+  "physical": {
+    "ranks": {
+      "0": {
+        "inner_pid": 58,
+        "host_pid": 1612610,
+        "physical_npu": 0
+      },
+      "1": {
+        "inner_pid": 59,
+        "host_pid": 1612611,
+        "physical_npu": 1
+      },
+      "2": {
+        "inner_pid": 60,
+        "host_pid": 1612612,
+        "physical_npu": 2
+      },
+      "3": {
+        "inner_pid": 61,
+        "host_pid": 1612613,
+        "physical_npu": 3
+      }
+    },
+    "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+  },
+  "isolation_samples": 167,
+  "released": true,
+  "raw_sha256": {
+    "result.json": "755294b28eff059cee232714f41edb320705e2852f8382c64e0c7955ce9895b5",
+    "events.jsonl": "697a622b317ab4409935203caf675d013b0ff783f4d9c0927a61e469ea74e72f",
+    "profile-unit.json": "4c8c14da8de41cc25f17c79926238468912a98961c7e11c0e0f008f2b6ab6459",
+    "release.json": "d34bf8c0c87709cca2414f9516b3bab23af71bcb0af909da79f9bb4bd749bfa7",
+    "launch.json": "a6cfce514cffe48a0f49981d35db5c9f61fa74426c2adabb76bb5b24fd89b753"
+  },
+  "scope": "native official diagnostic transport/source/4rank raw capture/physical/isolation/release; parser completeness/causality and formal performance separate"
+}

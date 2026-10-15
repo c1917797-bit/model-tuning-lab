@@ -1,0 +1,1484 @@
+{
+  "schema": "kernel-interval-diagnostic/v1",
+  "operation": "exec-000000000000069e",
+  "tests": {
+    "args": [
+      "-B",
+      "-m",
+      "unittest",
+      "-v",
+      "test_independent_profile_timeline"
+    ],
+    "cancelled": false,
+    "command": "python3",
+    "cwd": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/",
+    "durationMs": 98,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-000000000000069d",
+    "lane": "job",
+    "state": "completed",
+    "stderr": "test_invalid_row_not_silently_dropped (test_independent_profile_timeline.TimelineTests) ... ok\ntest_large_epoch_precision_and_overlap (test_independent_profile_timeline.TimelineTests) ... ok\ntest_row_ceiling (test_independent_profile_timeline.TimelineTests) ... ok\ntest_union_overlap_adjacent_and_duplicate (test_independent_profile_timeline.TimelineTests) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.004s\n\nOK\n",
+    "stdout": "",
+    "timedOut": false
+  },
+  "ranks": [
+    {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r6-r1-analysis-r2/rank0_57_20261015081748164_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+      "sha256": "dc68737d030e35411fdd17fd0d10d13e60c8c6b39442c1aea8b1d912f9d49eb4",
+      "kernel_rows": 256835,
+      "absolute_origin_us": "1792052268378336.268",
+      "kernel_envelope_us": 253832021.743,
+      "all_kernel_union_us": 34893209.60900392,
+      "uncovered_envelope_us": 218938812.13399607,
+      "uncovered_fraction": 0.8625342485577623,
+      "communication_exclusive_us": 12846693.607999958,
+      "largest_uncovered_gaps_us": [
+        6778542.395000011,
+        5741279.431000024,
+        5678572.277999997,
+        5627989.106999993,
+        5597933.44599998,
+        5591208.693000004,
+        5566726.142999999,
+        5564701.903000005,
+        5553742.083999991,
+        5545324.215999991,
+        5456165.05400002,
+        5432494.700999975,
+        5421370.67899999,
+        5409663.804999977,
+        5398096.413999975,
+        5389370.339000002,
+        5382945.430999994,
+        5382391.959999997,
+        5373477.462000005,
+        5333474.702999994
+      ],
+      "types": [
+        {
+          "type": "hcom_allReduce_",
+          "communication_name_match": true,
+          "calls": 3096,
+          "summed_us": 25512386.525999732,
+          "union_us": 12756193.262999866
+        },
+        {
+          "type": "MatMulV3",
+          "communication_name_match": false,
+          "calls": 2560,
+          "summed_us": 10541024.853000198,
+          "union_us": 10541024.853000198
+        },
+        {
+          "type": "FusedInferAttentionScore",
+          "communication_name_match": false,
+          "calls": 1376,
+          "summed_us": 2032515.7070000302,
+          "union_us": 2032515.7070000302
+        },
+        {
+          "type": "AddRmsNormBias",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 1745345.0329999756,
+          "union_us": 1745345.0329999756
+        },
+        {
+          "type": "Transpose",
+          "communication_name_match": false,
+          "calls": 29531,
+          "summed_us": 913500.6120021656,
+          "union_us": 913500.6120021656
+        },
+        {
+          "type": "ChunkGatedDeltaRuleFwdH",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 864236.7049998753,
+          "union_us": 864236.7049998753
+        },
+        {
+          "type": "recompute_w_u_fwd_kernel",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 667327.106000171,
+          "union_us": 667327.106000171
+        },
+        {
+          "type": "TensorMove",
+          "communication_name_match": false,
+          "calls": 15467,
+          "summed_us": 642165.8300027336,
+          "union_us": 642165.8300027336
+        },
+        {
+          "type": "merge_16x16_to_64x64_inverse_kernel",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 545629.9549998157,
+          "union_us": 545629.9549998157
+        },
+        {
+          "type": "SwiGlu",
+          "communication_name_match": false,
+          "calls": 768,
+          "summed_us": 534176.0440000314,
+          "union_us": 534176.0440000314
+        },
+        {
+          "type": "ChunkFwdO",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 384052.9880003957,
+          "union_us": 384052.9880003957
+        },
+        {
+          "type": "Slice",
+          "communication_name_match": false,
+          "calls": 9698,
+          "summed_us": 367729.260001083,
+          "union_us": 367729.260001083
+        },
+        {
+          "type": "CausalConv1d",
+          "communication_name_match": false,
+          "calls": 4128,
+          "summed_us": 274501.26900101523,
+          "union_us": 274501.26900101523
+        },
+        {
+          "type": "ScatterUpdate",
+          "communication_name_match": false,
+          "calls": 394,
+          "summed_us": 238663.95000000298,
+          "union_us": 238663.95000000298
+        },
+        {
+          "type": "MatMulV2",
+          "communication_name_match": false,
+          "calls": 1100,
+          "summed_us": 229636.11899990632,
+          "union_us": 229636.11899990632
+        },
+        {
+          "type": "Mul",
+          "communication_name_match": false,
+          "calls": 36888,
+          "summed_us": 224989.18999734177,
+          "union_us": 224989.18999734177
+        },
+        {
+          "type": "solve_tril_16x16_kernel",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 190390.51600045525,
+          "union_us": 190390.51600045525
+        },
+        {
+          "type": "ConcatD",
+          "communication_name_match": false,
+          "calls": 4800,
+          "summed_us": 170755.82899961495,
+          "union_us": 170755.82899961495
+        },
+        {
+          "type": "_layer_norm_fwd_1pass_kernel_npu",
+          "communication_name_match": false,
+          "calls": 576,
+          "summed_us": 170578.27899992839,
+          "union_us": 170578.27899992839
+        },
+        {
+          "type": "ZerosLike",
+          "communication_name_match": false,
+          "calls": 10378,
+          "summed_us": 168694.3570000935,
+          "union_us": 168694.3570000935
+        }
+      ],
+      "limits": [
+        "Kernel union is not critical-path removable cost.",
+        "Gaps may include CPU/compile/driver/synchronization/instrumentation or incomplete capture; no root cause from gaps alone.",
+        "Communication name matching is a screening classifier, not collective ownership/causality.",
+        "Never sum ranks or group unions; overlapping work counted once only in all_kernel_union_us.",
+        "Profiled64-token timing is not formal1024 service performance."
+      ]
+    },
+    {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r6-r1-analysis-r2/rank1_58_20261015081748163_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+      "sha256": "331197f27c31846a5e797f61eae2b9634609e5a93d719bdae723dbafd6f0bec6",
+      "kernel_rows": 256835,
+      "absolute_origin_us": "1792052268378326.100",
+      "kernel_envelope_us": 253829085.79999998,
+      "all_kernel_union_us": 33602514.53999773,
+      "uncovered_envelope_us": 220226571.26000226,
+      "uncovered_fraction": 0.8676175567741113,
+      "communication_exclusive_us": 11549852.659999348,
+      "largest_uncovered_gaps_us": [
+        7104564.539999992,
+        5813548.739999995,
+        5737598.679999977,
+        5661707.540000021,
+        5627057.939999998,
+        5620789.659999996,
+        5599458.75999999,
+        5574811.039999992,
+        5567851.5,
+        5566702.61999999,
+        5562871.76000002,
+        5547689.939999968,
+        5542527.0599999875,
+        5468032.599999994,
+        5427877.5,
+        5422209.159999996,
+        5400529.400000006,
+        5345820.359999999,
+        5345725.699999999,
+        5304790.079999998
+      ],
+      "types": [
+        {
+          "type": "hcom_allReduce_",
+          "communication_name_match": true,
+          "calls": 3096,
+          "summed_us": 22921466.80000031,
+          "union_us": 11460733.400000155
+        },
+        {
+          "type": "MatMulV3",
+          "communication_name_match": false,
+          "calls": 2560,
+          "summed_us": 10540282.560000163,
+          "union_us": 10540282.560000163
+        },
+        {
+          "type": "FusedInferAttentionScore",
+          "communication_name_match": false,
+          "calls": 1376,
+          "summed_us": 2031598.2000001054,
+          "union_us": 2031598.2000001054
+        },
+        {
+          "type": "AddRmsNormBias",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 1740418.1999998726,
+          "union_us": 1740418.1999998726
+        },
+        {
+          "type": "Transpose",
+          "communication_name_match": false,
+          "calls": 29531,
+          "summed_us": 910165.0799983481,
+          "union_us": 910165.0799983481
+        },
+        {
+          "type": "ChunkGatedDeltaRuleFwdH",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 868280.5800001426,
+          "union_us": 868280.5800001426
+        },
+        {
+          "type": "recompute_w_u_fwd_kernel",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 668278.5800003251,
+          "union_us": 668278.5800003251
+        },
+        {
+          "type": "TensorMove",
+          "communication_name_match": false,
+          "calls": 15467,
+          "summed_us": 640868.8600016694,
+          "union_us": 640868.8600016694
+        },
+        {
+          "type": "merge_16x16_to_64x64_inverse_kernel",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 550528.9599998714,
+          "union_us": 550528.9599998714
+        },
+        {
+          "type": "SwiGlu",
+          "communication_name_match": false,
+          "calls": 768,
+          "summed_us": 533588.2800000496,
+          "union_us": 533588.2800000496
+        },
+        {
+          "type": "ChunkFwdO",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 384987.6999997571,
+          "union_us": 384987.6999997571
+        },
+        {
+          "type": "Slice",
+          "communication_name_match": false,
+          "calls": 9698,
+          "summed_us": 368140.7199996469,
+          "union_us": 368140.7199996469
+        },
+        {
+          "type": "CausalConv1d",
+          "communication_name_match": false,
+          "calls": 4128,
+          "summed_us": 275033.6200002713,
+          "union_us": 275033.6200002713
+        },
+        {
+          "type": "ScatterUpdate",
+          "communication_name_match": false,
+          "calls": 394,
+          "summed_us": 238566.04000017792,
+          "union_us": 238566.04000017792
+        },
+        {
+          "type": "MatMulV2",
+          "communication_name_match": false,
+          "calls": 1100,
+          "summed_us": 228948.15999994197,
+          "union_us": 228948.15999994197
+        },
+        {
+          "type": "Mul",
+          "communication_name_match": false,
+          "calls": 36888,
+          "summed_us": 221086.1999934172,
+          "union_us": 221086.1999934172
+        },
+        {
+          "type": "solve_tril_16x16_kernel",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 189911.09999967366,
+          "union_us": 189911.09999967366
+        },
+        {
+          "type": "ConcatD",
+          "communication_name_match": false,
+          "calls": 4800,
+          "summed_us": 171447.5399999263,
+          "union_us": 171447.5399999263
+        },
+        {
+          "type": "_layer_norm_fwd_1pass_kernel_npu",
+          "communication_name_match": false,
+          "calls": 576,
+          "summed_us": 170572.4199999813,
+          "union_us": 170572.4199999813
+        },
+        {
+          "type": "ZerosLike",
+          "communication_name_match": false,
+          "calls": 10378,
+          "summed_us": 163552.78000052657,
+          "union_us": 163552.78000052657
+        }
+      ],
+      "limits": [
+        "Kernel union is not critical-path removable cost.",
+        "Gaps may include CPU/compile/driver/synchronization/instrumentation or incomplete capture; no root cause from gaps alone.",
+        "Communication name matching is a screening classifier, not collective ownership/causality.",
+        "Never sum ranks or group unions; overlapping work counted once only in all_kernel_union_us.",
+        "Profiled64-token timing is not formal1024 service performance."
+      ]
+    },
+    {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r6-r1-analysis-r2/rank2_59_20261015081748163_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+      "sha256": "ca4c45de7d7e4c11fe661fb46bcf87dc58c7f0ec97dc8ae09953a3596ae3a806",
+      "kernel_rows": 256835,
+      "absolute_origin_us": "1792052268378349.680",
+      "kernel_envelope_us": 253826928.14000002,
+      "all_kernel_union_us": 32382367.199993514,
+      "uncovered_envelope_us": 221444560.9400065,
+      "uncovered_fraction": 0.8724234365625195,
+      "communication_exclusive_us": 10344251.559998095,
+      "largest_uncovered_gaps_us": [
+        7060115.24000001,
+        5816917.720000014,
+        5766862.139999986,
+        5744794.920000017,
+        5721320,
+        5705395.300000042,
+        5638399.079999983,
+        5631049.74000001,
+        5624866.840000004,
+        5618218.840000004,
+        5589298.340000004,
+        5587639.879999995,
+        5571818.939999983,
+        5561436.879999995,
+        5554316.580000013,
+        5535101.399999976,
+        5521025.420000002,
+        5472143.239999995,
+        5447111.659999996,
+        5354393.019999996
+      ],
+      "types": [
+        {
+          "type": "MatMulV3",
+          "communication_name_match": false,
+          "calls": 2560,
+          "summed_us": 10539127.459999684,
+          "union_us": 10539127.459999684
+        },
+        {
+          "type": "hcom_allReduce_",
+          "communication_name_match": true,
+          "calls": 3096,
+          "summed_us": 20512813.19999932,
+          "union_us": 10256406.59999966
+        },
+        {
+          "type": "FusedInferAttentionScore",
+          "communication_name_match": false,
+          "calls": 1376,
+          "summed_us": 2021082.0599999838,
+          "union_us": 2021082.0599999838
+        },
+        {
+          "type": "AddRmsNormBias",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 1744584.140000306,
+          "union_us": 1744584.140000306
+        },
+        {
+          "type": "Transpose",
+          "communication_name_match": false,
+          "calls": 29531,
+          "summed_us": 902655.219998953,
+          "union_us": 902655.219998953
+        },
+        {
+          "type": "ChunkGatedDeltaRuleFwdH",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 868638.4400002379,
+          "union_us": 868638.4400002379
+        },
+        {
+          "type": "recompute_w_u_fwd_kernel",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 669514.9599999702,
+          "union_us": 669514.9599999702
+        },
+        {
+          "type": "TensorMove",
+          "communication_name_match": false,
+          "calls": 15467,
+          "summed_us": 640577.3399986151,
+          "union_us": 640577.3399986151
+        },
+        {
+          "type": "merge_16x16_to_64x64_inverse_kernel",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 550854.1600000346,
+          "union_us": 550854.1600000346
+        },
+        {
+          "type": "SwiGlu",
+          "communication_name_match": false,
+          "calls": 768,
+          "summed_us": 532720.4799999297,
+          "union_us": 532720.4799999297
+        },
+        {
+          "type": "ChunkFwdO",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 387157.2599998582,
+          "union_us": 387157.2599998582
+        },
+        {
+          "type": "Slice",
+          "communication_name_match": false,
+          "calls": 9698,
+          "summed_us": 368301.08000134164,
+          "union_us": 368301.08000134164
+        },
+        {
+          "type": "CausalConv1d",
+          "communication_name_match": false,
+          "calls": 4128,
+          "summed_us": 271882.23999966535,
+          "union_us": 271882.23999966535
+        },
+        {
+          "type": "ScatterUpdate",
+          "communication_name_match": false,
+          "calls": 394,
+          "summed_us": 238567.65999992564,
+          "union_us": 238567.65999992564
+        },
+        {
+          "type": "Mul",
+          "communication_name_match": false,
+          "calls": 36888,
+          "summed_us": 229543.97999909037,
+          "union_us": 229543.97999909037
+        },
+        {
+          "type": "MatMulV2",
+          "communication_name_match": false,
+          "calls": 1100,
+          "summed_us": 229432.8799996765,
+          "union_us": 229432.8799996765
+        },
+        {
+          "type": "solve_tril_16x16_kernel",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 190658.41999954265,
+          "union_us": 190658.41999954265
+        },
+        {
+          "type": "ConcatD",
+          "communication_name_match": false,
+          "calls": 4800,
+          "summed_us": 170660.3799994107,
+          "union_us": 170660.3799994107
+        },
+        {
+          "type": "_layer_norm_fwd_1pass_kernel_npu",
+          "communication_name_match": false,
+          "calls": 576,
+          "summed_us": 170604.56000001729,
+          "union_us": 170604.56000001729
+        },
+        {
+          "type": "ZerosLike",
+          "communication_name_match": false,
+          "calls": 10378,
+          "summed_us": 163723.48000099434,
+          "union_us": 163723.48000099434
+        }
+      ],
+      "limits": [
+        "Kernel union is not critical-path removable cost.",
+        "Gaps may include CPU/compile/driver/synchronization/instrumentation or incomplete capture; no root cause from gaps alone.",
+        "Communication name matching is a screening classifier, not collective ownership/causality.",
+        "Never sum ranks or group unions; overlapping work counted once only in all_kernel_union_us.",
+        "Profiled64-token timing is not formal1024 service performance."
+      ]
+    },
+    {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r6-r1-analysis-r2/rank3_60_20261015081748163_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+      "sha256": "58137c0db012441f59c4fa492e6386d623b5df6c82945824912c21173961cb95",
+      "kernel_rows": 256835,
+      "absolute_origin_us": "1792052268378326.875",
+      "kernel_envelope_us": 253826954.64000002,
+      "all_kernel_union_us": 33517731.50000924,
+      "uncovered_envelope_us": 220309223.13999078,
+      "uncovered_fraction": 0.8679504643328875,
+      "communication_exclusive_us": 11469236.219999898,
+      "largest_uncovered_gaps_us": [
+        6837838.100000024,
+        5901418.580000013,
+        5858540.300000012,
+        5748298.600000024,
+        5725812.839999989,
+        5623645.420000017,
+        5607722.920000017,
+        5563033.020000011,
+        5553324.600000024,
+        5536219.539999992,
+        5532606.679999992,
+        5521611.119999997,
+        5521048.359999999,
+        5498873.699999988,
+        5477003.700000003,
+        5458134.099999994,
+        5453519.400000006,
+        5453360.160000011,
+        5361333.100000009,
+        5312421.559999995
+      ],
+      "types": [
+        {
+          "type": "hcom_allReduce_",
+          "communication_name_match": true,
+          "calls": 3096,
+          "summed_us": 22758291.159999073,
+          "union_us": 11379145.579999536
+        },
+        {
+          "type": "MatMulV3",
+          "communication_name_match": false,
+          "calls": 2560,
+          "summed_us": 10532789.140000474,
+          "union_us": 10532789.140000474
+        },
+        {
+          "type": "FusedInferAttentionScore",
+          "communication_name_match": false,
+          "calls": 1376,
+          "summed_us": 2025837.64000017,
+          "union_us": 2025837.64000017
+        },
+        {
+          "type": "AddRmsNormBias",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 1741790.2999996562,
+          "union_us": 1741790.2999996562
+        },
+        {
+          "type": "Transpose",
+          "communication_name_match": false,
+          "calls": 29531,
+          "summed_us": 901326.7600008326,
+          "union_us": 901326.7600008326
+        },
+        {
+          "type": "ChunkGatedDeltaRuleFwdH",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 872798.0599998776,
+          "union_us": 872798.0599998776
+        },
+        {
+          "type": "recompute_w_u_fwd_kernel",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 672917.2399999816,
+          "union_us": 672917.2399999816
+        },
+        {
+          "type": "TensorMove",
+          "communication_name_match": false,
+          "calls": 15467,
+          "summed_us": 642829.6200008107,
+          "union_us": 642829.6200008107
+        },
+        {
+          "type": "merge_16x16_to_64x64_inverse_kernel",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 551266.580000286,
+          "union_us": 551266.580000286
+        },
+        {
+          "type": "SwiGlu",
+          "communication_name_match": false,
+          "calls": 768,
+          "summed_us": 532989.0400000848,
+          "union_us": 532989.0400000848
+        },
+        {
+          "type": "ChunkFwdO",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 384943.4200001117,
+          "union_us": 384943.4200001117
+        },
+        {
+          "type": "Slice",
+          "communication_name_match": false,
+          "calls": 9698,
+          "summed_us": 368065.75999996613,
+          "union_us": 368065.75999996613
+        },
+        {
+          "type": "CausalConv1d",
+          "communication_name_match": false,
+          "calls": 4128,
+          "summed_us": 271566.32000016264,
+          "union_us": 271566.32000016264
+        },
+        {
+          "type": "ScatterUpdate",
+          "communication_name_match": false,
+          "calls": 394,
+          "summed_us": 238455.9799999185,
+          "union_us": 238455.9799999185
+        },
+        {
+          "type": "Mul",
+          "communication_name_match": false,
+          "calls": 36888,
+          "summed_us": 230031.22000126174,
+          "union_us": 230031.22000126174
+        },
+        {
+          "type": "MatMulV2",
+          "communication_name_match": false,
+          "calls": 1100,
+          "summed_us": 229366.0400003051,
+          "union_us": 229366.0400003051
+        },
+        {
+          "type": "solve_tril_16x16_kernel",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 191272.5600000415,
+          "union_us": 191272.5600000415
+        },
+        {
+          "type": "ConcatD",
+          "communication_name_match": false,
+          "calls": 4800,
+          "summed_us": 170832.30000022735,
+          "union_us": 170832.30000022735
+        },
+        {
+          "type": "_layer_norm_fwd_1pass_kernel_npu",
+          "communication_name_match": false,
+          "calls": 576,
+          "summed_us": 170538.8400001377,
+          "union_us": 170538.8400001377
+        },
+        {
+          "type": "ZerosLike",
+          "communication_name_match": false,
+          "calls": 10378,
+          "summed_us": 167016.1800004222,
+          "union_us": 167016.1800004222
+        }
+      ],
+      "limits": [
+        "Kernel union is not critical-path removable cost.",
+        "Gaps may include CPU/compile/driver/synchronization/instrumentation or incomplete capture; no root cause from gaps alone.",
+        "Communication name matching is a screening classifier, not collective ownership/causality.",
+        "Never sum ranks or group unions; overlapping work counted once only in all_kernel_union_us.",
+        "Profiled64-token timing is not formal1024 service performance."
+      ]
+    },
+    {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r6-privatewarm-r1-analysis-r1/rank0_59_20261015091112107_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+      "sha256": "44b8ed9ff18c3af2256192fda731972a64519a71eb8b54382f9e64d2b1440272",
+      "kernel_rows": 282315,
+      "absolute_origin_us": "1792055472425235.062",
+      "kernel_envelope_us": 121040674.11199999,
+      "all_kernel_union_us": 32174658.04000499,
+      "uncovered_envelope_us": 88866016.07199499,
+      "uncovered_fraction": 0.7341830894775626,
+      "communication_exclusive_us": 10022494.234999225,
+      "largest_uncovered_gaps_us": [
+        5567658.261000007,
+        5508797.145000011,
+        5503258.515000001,
+        5459329.257000007,
+        5369691.627000004,
+        516014.56999999285,
+        506282.71599999815,
+        463434.26000000536,
+        334432.78199999034,
+        304397.70199999213,
+        276139.87699998915,
+        274807.99099999666,
+        266220.8190000057,
+        263971.7340000123,
+        252730.54999999702,
+        230725.7899999991,
+        221930.4149999991,
+        208464.06599999964,
+        183359.36299999058,
+        183023.93700000644
+      ],
+      "types": [
+        {
+          "type": "MatMulV3",
+          "communication_name_match": false,
+          "calls": 2560,
+          "summed_us": 10541945.730000142,
+          "union_us": 10541945.730000142
+        },
+        {
+          "type": "hcom_allReduce_",
+          "communication_name_match": true,
+          "calls": 3096,
+          "summed_us": 19861360.40200019,
+          "union_us": 9930680.201000094
+        },
+        {
+          "type": "FusedInferAttentionScore",
+          "communication_name_match": false,
+          "calls": 1408,
+          "summed_us": 2028009.7190000468,
+          "union_us": 2028009.7190000468
+        },
+        {
+          "type": "AddRmsNormBias",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 1743916.605999933,
+          "union_us": 1743916.605999933
+        },
+        {
+          "type": "Transpose",
+          "communication_name_match": false,
+          "calls": 29195,
+          "summed_us": 920908.5360013066,
+          "union_us": 920908.5360013066
+        },
+        {
+          "type": "ChunkGatedDeltaRuleFwdH",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 866420.6930000102,
+          "union_us": 866420.6930000102
+        },
+        {
+          "type": "recompute_w_u_fwd_kernel",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 668007.9299997939,
+          "union_us": 668007.9299997939
+        },
+        {
+          "type": "TensorMove",
+          "communication_name_match": false,
+          "calls": 15786,
+          "summed_us": 652541.7189991024,
+          "union_us": 652541.7189991024
+        },
+        {
+          "type": "merge_16x16_to_64x64_inverse_kernel",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 547200.8380000066,
+          "union_us": 547200.8380000066
+        },
+        {
+          "type": "SwiGlu",
+          "communication_name_match": false,
+          "calls": 768,
+          "summed_us": 531241.4180000259,
+          "union_us": 531241.4180000259
+        },
+        {
+          "type": "ChunkFwdO",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 383806.07600017934,
+          "union_us": 383806.07600017934
+        },
+        {
+          "type": "Slice",
+          "communication_name_match": false,
+          "calls": 9748,
+          "summed_us": 379231.6350000509,
+          "union_us": 379231.6350000509
+        },
+        {
+          "type": "Mul",
+          "communication_name_match": false,
+          "calls": 48792,
+          "summed_us": 274789.30800045095,
+          "union_us": 274789.30800045095
+        },
+        {
+          "type": "CausalConv1d",
+          "communication_name_match": false,
+          "calls": 4224,
+          "summed_us": 274523.93099978345,
+          "union_us": 274523.93099978345
+        },
+        {
+          "type": "ScatterUpdate",
+          "communication_name_match": false,
+          "calls": 394,
+          "summed_us": 234356.6430000394,
+          "union_us": 234356.6430000394
+        },
+        {
+          "type": "MatMulV2",
+          "communication_name_match": false,
+          "calls": 1100,
+          "summed_us": 227421.75899997263,
+          "union_us": 227421.75899997263
+        },
+        {
+          "type": "solve_tril_16x16_kernel",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 183158.29999996384,
+          "union_us": 183158.29999996384
+        },
+        {
+          "type": "ConcatD",
+          "communication_name_match": false,
+          "calls": 4848,
+          "summed_us": 179542.52600008802,
+          "union_us": 179542.52600008802
+        },
+        {
+          "type": "_layer_norm_fwd_1pass_kernel_npu",
+          "communication_name_match": false,
+          "calls": 576,
+          "summed_us": 170920.33799998843,
+          "union_us": 170920.33799998843
+        },
+        {
+          "type": "ZerosLike",
+          "communication_name_match": false,
+          "calls": 10330,
+          "summed_us": 162033.05200029386,
+          "union_us": 162033.05200029386
+        }
+      ],
+      "limits": [
+        "Kernel union is not critical-path removable cost.",
+        "Gaps may include CPU/compile/driver/synchronization/instrumentation or incomplete capture; no root cause from gaps alone.",
+        "Communication name matching is a screening classifier, not collective ownership/causality.",
+        "Never sum ranks or group unions; overlapping work counted once only in all_kernel_union_us.",
+        "Profiled64-token timing is not formal1024 service performance."
+      ]
+    },
+    {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r6-privatewarm-r1-analysis-r1/rank1_60_20261015091112106_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+      "sha256": "975e5a07213415cea23c0eb747a2fe5651792cd4a55a77fec5d93949f70ea1db",
+      "kernel_rows": 282315,
+      "absolute_origin_us": "1792055472424120.980",
+      "kernel_envelope_us": 121039364.76,
+      "all_kernel_union_us": 31624057.619996488,
+      "uncovered_envelope_us": 89415307.14000352,
+      "uncovered_fraction": 0.7387291507791578,
+      "communication_exclusive_us": 9433874.45999983,
+      "largest_uncovered_gaps_us": [
+        5711826.719999984,
+        5590455.18,
+        5552779.259999998,
+        5383138.259999998,
+        5355101.180000007,
+        515079.87999999523,
+        507738.8399999961,
+        459582.5000000149,
+        342595.46000000834,
+        306823.25999999046,
+        293236.3400000036,
+        279788.1799999997,
+        277441.5199999958,
+        270941.4799999893,
+        259051.89999999106,
+        250387.6400000006,
+        239895.6000000015,
+        226479.30000000447,
+        195026.8200000003,
+        194265.2199999988
+      ],
+      "types": [
+        {
+          "type": "MatMulV3",
+          "communication_name_match": false,
+          "calls": 2560,
+          "summed_us": 10543043.119999882,
+          "union_us": 10543043.119999882
+        },
+        {
+          "type": "hcom_allReduce_",
+          "communication_name_match": true,
+          "calls": 3096,
+          "summed_us": 18685053.15999983,
+          "union_us": 9342526.579999914
+        },
+        {
+          "type": "FusedInferAttentionScore",
+          "communication_name_match": false,
+          "calls": 1408,
+          "summed_us": 2028743.4799999297,
+          "union_us": 2028743.4799999297
+        },
+        {
+          "type": "AddRmsNormBias",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 1741035.5200001032,
+          "union_us": 1741035.5200001032
+        },
+        {
+          "type": "Transpose",
+          "communication_name_match": false,
+          "calls": 29195,
+          "summed_us": 919802.5199996463,
+          "union_us": 919802.5199996463
+        },
+        {
+          "type": "ChunkGatedDeltaRuleFwdH",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 875516.0000000434,
+          "union_us": 875516.0000000434
+        },
+        {
+          "type": "recompute_w_u_fwd_kernel",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 672876.4000000516,
+          "union_us": 672876.4000000516
+        },
+        {
+          "type": "TensorMove",
+          "communication_name_match": false,
+          "calls": 15786,
+          "summed_us": 653344.1000002822,
+          "union_us": 653344.1000002822
+        },
+        {
+          "type": "merge_16x16_to_64x64_inverse_kernel",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 552168.0800000184,
+          "union_us": 552168.0800000184
+        },
+        {
+          "type": "SwiGlu",
+          "communication_name_match": false,
+          "calls": 768,
+          "summed_us": 531944.8200000878,
+          "union_us": 531944.8200000878
+        },
+        {
+          "type": "ChunkFwdO",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 385674.3600000936,
+          "union_us": 385674.3600000936
+        },
+        {
+          "type": "Slice",
+          "communication_name_match": false,
+          "calls": 9748,
+          "summed_us": 380121.6000000137,
+          "union_us": 380121.6000000137
+        },
+        {
+          "type": "CausalConv1d",
+          "communication_name_match": false,
+          "calls": 4224,
+          "summed_us": 274398.08000004024,
+          "union_us": 274398.08000004024
+        },
+        {
+          "type": "Mul",
+          "communication_name_match": false,
+          "calls": 48792,
+          "summed_us": 272614.97999868274,
+          "union_us": 272614.97999868274
+        },
+        {
+          "type": "ScatterUpdate",
+          "communication_name_match": false,
+          "calls": 394,
+          "summed_us": 234374.15999990853,
+          "union_us": 234374.15999990853
+        },
+        {
+          "type": "MatMulV2",
+          "communication_name_match": false,
+          "calls": 1100,
+          "summed_us": 227594.08000000817,
+          "union_us": 227594.08000000817
+        },
+        {
+          "type": "solve_tril_16x16_kernel",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 184353.76000008988,
+          "union_us": 184353.76000008988
+        },
+        {
+          "type": "ConcatD",
+          "communication_name_match": false,
+          "calls": 4848,
+          "summed_us": 180194.91999986203,
+          "union_us": 180194.91999986203
+        },
+        {
+          "type": "_layer_norm_fwd_1pass_kernel_npu",
+          "communication_name_match": false,
+          "calls": 576,
+          "summed_us": 170822.84000006015,
+          "union_us": 170822.84000006015
+        },
+        {
+          "type": "ZerosLike",
+          "communication_name_match": false,
+          "calls": 10330,
+          "summed_us": 162276.23999939888,
+          "union_us": 162276.23999939888
+        }
+      ],
+      "limits": [
+        "Kernel union is not critical-path removable cost.",
+        "Gaps may include CPU/compile/driver/synchronization/instrumentation or incomplete capture; no root cause from gaps alone.",
+        "Communication name matching is a screening classifier, not collective ownership/causality.",
+        "Never sum ranks or group unions; overlapping work counted once only in all_kernel_union_us.",
+        "Profiled64-token timing is not formal1024 service performance."
+      ]
+    },
+    {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r6-privatewarm-r1-analysis-r1/rank2_61_20261015091112107_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+      "sha256": "403de333e01600b42b2e26346a391fbd059ff252bdcf542135091d178953b3f1",
+      "kernel_rows": 282315,
+      "absolute_origin_us": "1792055472423957.660",
+      "kernel_envelope_us": 121039528.72,
+      "all_kernel_union_us": 31695654.200000748,
+      "uncovered_envelope_us": 89343874.51999925,
+      "uncovered_fraction": 0.7381379906615292,
+      "communication_exclusive_us": 9531275.780000024,
+      "largest_uncovered_gaps_us": [
+        5806556.339999996,
+        5581439.080000006,
+        5495210.359999999,
+        5474508.960000001,
+        5430156.140000001,
+        516185.3600000143,
+        499055.7199999988,
+        463509.17999999225,
+        351549.3400000036,
+        318248.200000003,
+        292893.89999999106,
+        278780.67999999225,
+        272493.7199999988,
+        265169.95999999344,
+        255019.5,
+        254584.48000000417,
+        236628.16000000387,
+        233216.0799999982,
+        193233.90000000596,
+        188583.43999999762
+      ],
+      "types": [
+        {
+          "type": "MatMulV3",
+          "communication_name_match": false,
+          "calls": 2560,
+          "summed_us": 10537757.079999834,
+          "union_us": 10537757.079999834
+        },
+        {
+          "type": "hcom_allReduce_",
+          "communication_name_match": true,
+          "calls": 3096,
+          "summed_us": 18880150.080000207,
+          "union_us": 9440075.040000103
+        },
+        {
+          "type": "FusedInferAttentionScore",
+          "communication_name_match": false,
+          "calls": 1408,
+          "summed_us": 2017341.9199999147,
+          "union_us": 2017341.9199999147
+        },
+        {
+          "type": "AddRmsNormBias",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 1741931.880000128,
+          "union_us": 1741931.880000128
+        },
+        {
+          "type": "Transpose",
+          "communication_name_match": false,
+          "calls": 29195,
+          "summed_us": 919735.3400002108,
+          "union_us": 919735.3400002108
+        },
+        {
+          "type": "ChunkGatedDeltaRuleFwdH",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 869926.8400001735,
+          "union_us": 869926.8400001735
+        },
+        {
+          "type": "recompute_w_u_fwd_kernel",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 673455.2600000774,
+          "union_us": 673455.2600000774
+        },
+        {
+          "type": "TensorMove",
+          "communication_name_match": false,
+          "calls": 15786,
+          "summed_us": 652728.6599993005,
+          "union_us": 652728.6599993005
+        },
+        {
+          "type": "merge_16x16_to_64x64_inverse_kernel",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 551883.479999736,
+          "union_us": 551883.479999736
+        },
+        {
+          "type": "SwiGlu",
+          "communication_name_match": false,
+          "calls": 768,
+          "summed_us": 532489.1399998602,
+          "union_us": 532489.1399998602
+        },
+        {
+          "type": "ChunkFwdO",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 385594.0599999307,
+          "union_us": 385594.0599999307
+        },
+        {
+          "type": "Slice",
+          "communication_name_match": false,
+          "calls": 9748,
+          "summed_us": 379772.42000019585,
+          "union_us": 379772.42000019585
+        },
+        {
+          "type": "Mul",
+          "communication_name_match": false,
+          "calls": 48792,
+          "summed_us": 276238.85999958415,
+          "union_us": 276238.85999958415
+        },
+        {
+          "type": "CausalConv1d",
+          "communication_name_match": false,
+          "calls": 4224,
+          "summed_us": 273921.89999997127,
+          "union_us": 273921.89999997127
+        },
+        {
+          "type": "ScatterUpdate",
+          "communication_name_match": false,
+          "calls": 394,
+          "summed_us": 234363.5599999755,
+          "union_us": 234363.5599999755
+        },
+        {
+          "type": "MatMulV2",
+          "communication_name_match": false,
+          "calls": 1100,
+          "summed_us": 227206.58000026637,
+          "union_us": 227206.58000026637
+        },
+        {
+          "type": "solve_tril_16x16_kernel",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 183152.5600001366,
+          "union_us": 183152.5600001366
+        },
+        {
+          "type": "ConcatD",
+          "communication_name_match": false,
+          "calls": 4848,
+          "summed_us": 179814.00000037946,
+          "union_us": 179814.00000037946
+        },
+        {
+          "type": "_layer_norm_fwd_1pass_kernel_npu",
+          "communication_name_match": false,
+          "calls": 576,
+          "summed_us": 170583.45999992895,
+          "union_us": 170583.45999992895
+        },
+        {
+          "type": "ZerosLike",
+          "communication_name_match": false,
+          "calls": 10330,
+          "summed_us": 161975.38000026462,
+          "union_us": 161975.38000026462
+        }
+      ],
+      "limits": [
+        "Kernel union is not critical-path removable cost.",
+        "Gaps may include CPU/compile/driver/synchronization/instrumentation or incomplete capture; no root cause from gaps alone.",
+        "Communication name matching is a screening classifier, not collective ownership/causality.",
+        "Never sum ranks or group unions; overlapping work counted once only in all_kernel_union_us.",
+        "Profiled64-token timing is not formal1024 service performance."
+      ]
+    },
+    {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r6-privatewarm-r1-analysis-r1/rank3_62_20261015091112106_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+      "sha256": "35228c7bc96ea5ca9a5b31f79d576406339be6fdc42ac2ed185c9bef7efaaf8f",
+      "kernel_rows": 282315,
+      "absolute_origin_us": "1792055472424090.180",
+      "kernel_envelope_us": 121043528.97999999,
+      "all_kernel_union_us": 30972303.35999713,
+      "uncovered_envelope_us": 90071225.62000287,
+      "uncovered_fraction": 0.7441226010098014,
+      "communication_exclusive_us": 8811910.54000036,
+      "largest_uncovered_gaps_us": [
+        5796681.579999998,
+        5771833,
+        5548685.74000001,
+        5434832.980000004,
+        5432286.420000002,
+        512975.9999999851,
+        504102.1400000006,
+        461068.23999999464,
+        343319.62000000477,
+        311023.7800000012,
+        281332.4200000018,
+        278719.8599999994,
+        277125.39999999106,
+        260551.93999999762,
+        260157.5799999982,
+        253350.67999999225,
+        238191.5399999991,
+        225637.58000000566,
+        188627.90000000596,
+        187378.40000000596
+      ],
+      "types": [
+        {
+          "type": "MatMulV3",
+          "communication_name_match": false,
+          "calls": 2560,
+          "summed_us": 10532187.740000123,
+          "union_us": 10532187.740000123
+        },
+        {
+          "type": "hcom_allReduce_",
+          "communication_name_match": true,
+          "calls": 3096,
+          "summed_us": 17444647.160000227,
+          "union_us": 8722323.580000114
+        },
+        {
+          "type": "FusedInferAttentionScore",
+          "communication_name_match": false,
+          "calls": 1408,
+          "summed_us": 2015040.319999909,
+          "union_us": 2015040.319999909
+        },
+        {
+          "type": "AddRmsNormBias",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 1743572.3399999856,
+          "union_us": 1743572.3399999856
+        },
+        {
+          "type": "Transpose",
+          "communication_name_match": false,
+          "calls": 29195,
+          "summed_us": 918136.7999994867,
+          "union_us": 918136.7999994867
+        },
+        {
+          "type": "ChunkGatedDeltaRuleFwdH",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 873012.2400000711,
+          "union_us": 873012.2400000711
+        },
+        {
+          "type": "recompute_w_u_fwd_kernel",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 672992.0199998568,
+          "union_us": 672992.0199998568
+        },
+        {
+          "type": "TensorMove",
+          "communication_name_match": false,
+          "calls": 15786,
+          "summed_us": 654427.0999993945,
+          "union_us": 654427.0999993945
+        },
+        {
+          "type": "merge_16x16_to_64x64_inverse_kernel",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 551700.6799997967,
+          "union_us": 551700.6799997967
+        },
+        {
+          "type": "SwiGlu",
+          "communication_name_match": false,
+          "calls": 768,
+          "summed_us": 532255.7599999764,
+          "union_us": 532255.7599999764
+        },
+        {
+          "type": "ChunkFwdO",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 384003.29999999265,
+          "union_us": 384003.29999999265
+        },
+        {
+          "type": "Slice",
+          "communication_name_match": false,
+          "calls": 9748,
+          "summed_us": 379975.9400005685,
+          "union_us": 379975.9400005685
+        },
+        {
+          "type": "Mul",
+          "communication_name_match": false,
+          "calls": 48792,
+          "summed_us": 281461.4199990042,
+          "union_us": 281461.4199990042
+        },
+        {
+          "type": "CausalConv1d",
+          "communication_name_match": false,
+          "calls": 4224,
+          "summed_us": 272374.2200000725,
+          "union_us": 272374.2200000725
+        },
+        {
+          "type": "ScatterUpdate",
+          "communication_name_match": false,
+          "calls": 394,
+          "summed_us": 234330.93999990547,
+          "union_us": 234330.93999990547
+        },
+        {
+          "type": "MatMulV2",
+          "communication_name_match": false,
+          "calls": 1100,
+          "summed_us": 227383.76000000138,
+          "union_us": 227383.76000000138
+        },
+        {
+          "type": "solve_tril_16x16_kernel",
+          "communication_name_match": false,
+          "calls": 1488,
+          "summed_us": 183479.75999992498,
+          "union_us": 183479.75999992498
+        },
+        {
+          "type": "ConcatD",
+          "communication_name_match": false,
+          "calls": 4848,
+          "summed_us": 180378.73999950115,
+          "union_us": 180378.73999950115
+        },
+        {
+          "type": "_layer_norm_fwd_1pass_kernel_npu",
+          "communication_name_match": false,
+          "calls": 576,
+          "summed_us": 170733.72000002433,
+          "union_us": 170733.72000002433
+        },
+        {
+          "type": "ZerosLike",
+          "communication_name_match": false,
+          "calls": 10330,
+          "summed_us": 165340.62000052579,
+          "union_us": 165340.62000052579
+        }
+      ],
+      "limits": [
+        "Kernel union is not critical-path removable cost.",
+        "Gaps may include CPU/compile/driver/synchronization/instrumentation or incomplete capture; no root cause from gaps alone.",
+        "Communication name matching is a screening classifier, not collective ownership/causality.",
+        "Never sum ranks or group unions; overlapping work counted once only in all_kernel_union_us.",
+        "Profiled64-token timing is not formal1024 service performance."
+      ]
+    }
+  ],
+  "decision": "Large uncovered capture intervals observed; not CPU/compiler/dispatch root-cause proof. Native control raw ready, parser pending. Never sum ranks or equate gaps with removable cost."
+}
