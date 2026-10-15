@@ -1,0 +1,70 @@
+{
+  "schema": "deltalog.new-reference-typed-commands/v035",
+  "default_enabled": false,
+  "NPU_executed": false,
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair1/SOURCE_TEMPLATE.json",
+    "bytes": 25102,
+    "sha256": "750b9a5c8e14a9448a3faa8e2bf3742e2f6f44c278e202933c3fb3f0f56be4b8"
+  },
+  "bind": {
+    "command": "/usr/bin/python3",
+    "args": [
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair1/run031.py",
+      "--execute",
+      "--phase",
+      "bind",
+      "--template-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair1/SOURCE_TEMPLATE.json\",\"bytes\":25102,\"sha256\":\"750b9a5c8e14a9448a3faa8e2bf3742e2f6f44c278e202933c3fb3f0f56be4b8\"}",
+      "--composite-source-ref",
+      "{\"bytes\":162171,\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/BOUND_SOURCE.json\",\"sha256\":\"b5f4c0798f2fab7fb3c706666c38b6eab7318fa6a55e40191dd419bb6aaacb6c\"}",
+      "--composite-cpu-owner-ref",
+      "{\"bytes\":1372,\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-composite022-cpu-new48h-MAIN-20261015-001/RESULT.json\",\"sha256\":\"9d6740da1d95f281aab6da1f459e1540a798652af695ee5ec6922e35d4be6c61\"}"
+    ]
+  },
+  "stages": [
+    "sourceaudit",
+    "cpu",
+    "numeric16",
+    "numeric160"
+  ],
+  "stage_template": {
+    "command": "/usr/bin/python3",
+    "args": [
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair1/run031.py",
+      "--execute",
+      "--phase",
+      "ACTUAL_STAGE",
+      "--template-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair1/SOURCE_TEMPLATE.json\",\"bytes\":25102,\"sha256\":\"750b9a5c8e14a9448a3faa8e2bf3742e2f6f44c278e202933c3fb3f0f56be4b8\"}",
+      "--host-cpu",
+      "ACTUAL_HOST_CPU",
+      "--guest-cpu",
+      "ACTUAL_GUEST_CPU",
+      "--output",
+      "NEW_ABSENT_STAGE_OUTPUT"
+    ]
+  },
+  "numeric_args": [
+    "--cpu-owner-ref",
+    "ACTUAL035_RELEASED_CPU_OWNER_REF_JSON"
+  ],
+  "numeric160_extra": [
+    "--smoke-owner-ref",
+    "ACTUAL035_RELEASED_NUMERIC16_OWNER_REF_JSON"
+  ],
+  "output_examples": [
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035repair1-cpu-new48h-MAIN-20261015-001",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035repair1-numeric16-new48h-MAIN-20261015-001",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035repair1-numeric160-new48h-MAIN-20261015-001"
+  ],
+  "fixed_cutoff": 1792135097,
+  "old031_failed16_not_admissible": true,
+  "model_qualification": false,
+  "performance_qualification": false,
+  "sameimage_CPU_controls": "Existing cpu stage runs real_process_controls.py --execute with8 actual Linux CPU children and terminal-fence negative suite; actual execution still pending"
+}

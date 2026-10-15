@@ -1,0 +1,149 @@
+{
+  "schema": "deltalog.new48h-reference-domain-and-controller-stage/v1",
+  "as_of_utc": "2026-10-15T16:51:07Z",
+  "goal_achieved": false,
+  "deadline_utc": "2026-10-16T07:18:17Z",
+  "model": "/cache/efim/Qwen3.6-27B",
+  "physical_scope": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "evidence_scope": "actual fresh NPU raw independently consumed; no successful16 owner/no160/no model/performance/task results",
+  "actual035_original": {
+    "owner": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035-numeric16-new48h-MAIN-20261015-001/RESULT.json",
+      "bytes": 1262,
+      "sha256": "8c04507f23c33e5f76c40895437a48ca9a62133f7ec46596ac9b3a1c08dba9cf"
+    },
+    "status": "failed protected observer during bound-init exit",
+    "producer": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035-numeric16-new48h-MAIN-20261015-001/numeric/result/RESULT.json",
+      "bytes": 28816,
+      "sha256": "9b6773213442afbf3fa9bc2f47a50ed71a5f765f08a8d7a43811eeeeee679e27"
+    },
+    "old_fail_preserved": true
+  },
+  "actual038_independent_recovery": {
+    "owner": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl035-savedraw038-cpu-new48h-MAIN-20261015-001/RESULT.json",
+      "bytes": 1347,
+      "sha256": "83d80cbdbe8b7e93b4a63e907501278a471895527f651e5a5e2d693573403c83"
+    },
+    "domain": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl035-savedraw038-cpu-new48h-MAIN-20261015-001/native/result/DOMAIN035.json",
+      "bytes": 142924,
+      "sha256": "8ad18964b6ecbae482c40e2530582494dbf3bb5b9ad5ac08940be82d4af9fa9a"
+    },
+    "records": 40,
+    "mixed": 32,
+    "independent_requests": 272,
+    "peer_requests": 304,
+    "all_rows_pass": true,
+    "all_requests_pass": true,
+    "max_independent_state": 8.944495060367364e-8,
+    "max_independent_RNE_output": 0.001091703056768559,
+    "max_peer_state": 1.8577291414110612e-7,
+    "max_peer_output": 0.001091703056768559,
+    "unchanged_native_runtime": true,
+    "transition_all": true,
+    "failures": [],
+    "missing": [],
+    "output_domain": "independent CPU64 operational recurrence -> exact013 integer direct BF16 RNE; original unrounded metrics and FAIL retained",
+    "state_limit": 7.92e-7,
+    "output_limit": 0.00303,
+    "owner16_qualified": false,
+    "full160_qualified": false,
+    "model_ready": false
+  },
+  "actual035repair1": {
+    "template": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair1/SOURCE_TEMPLATE.json",
+      "bytes": 25102,
+      "sha256": "750b9a5c8e14a9448a3faa8e2bf3742e2f6f44c278e202933c3fb3f0f56be4b8"
+    },
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair1/SOURCE_MANIFEST.json",
+      "bytes": 23797,
+      "sha256": "f062df0da7765914be7693f3f34efaad1cfa9dbf4d86c30af06334fcecf116b4"
+    },
+    "cpu_owner": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035r1-cpu-new48h-MAIN-20261015-001/RESULT.json",
+      "bytes": 1395,
+      "sha256": "693b93e3436a042b9af01a9ccce09daaee68408f72e22498d817502bb718209a"
+    },
+    "same_image_cpu_actual": true,
+    "real_short_processes": 8,
+    "actual_NPU16_owner": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035r1-numeric16-new48h-MAIN-20261015-001/RESULT.json",
+      "bytes": 1277,
+      "sha256": "80e5cb5385f5d124614700e41fae2fa76613b96a6776909216b5b5d3d73d0695"
+    },
+    "status": "failed during compiler parent+child departure; no producer RESULT",
+    "cleanup_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035r1-numeric16-new48h-MAIN-20261015-001/numeric/cleanup-verdict.json",
+      "bytes": 246,
+      "sha256": "f2fa02b76481263f425b929c5993ee06f91d6c8ec225783fb2a0118848ec86bd"
+    },
+    "resource_release_verified": true,
+    "exact_cid": "523b228cf99b11f62d5af4e5abd744c4116f4a6bba684da3f5a0240b093b2449",
+    "error": "original Docker-top parent must already be proven owned",
+    "causal_evidence": [
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035r1-numeric16-new48h-MAIN-20261015-001/top-child-departure-1792082689548074120.json",
+        "bytes": 231,
+        "sha256": "239def3e105653b083d61befefcaa342d844d3eaa51fd1b902b68fb051699de1"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035r1-numeric16-new48h-MAIN-20261015-001/top-child-departure-1792082689630187730.json",
+        "bytes": 466,
+        "sha256": "f2882cf3d1f6834eaae1e8b879fc77034ebaf507d84b89a7ffe2d832dbd0a34e"
+      },
+      {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035r1-numeric16-new48h-MAIN-20261015-001/top-child-departure-1792082689630593990.json",
+        "bytes": 231,
+        "sha256": "685a8849ef2adf006325837a810c4d218ea5e6b8de0b73e22e2114fa3cb1285d"
+      }
+    ],
+    "attribution": "controller code adaptation, not algorithm failure; original init-exit fence was not reached"
+  },
+  "model036repair1": {
+    "source_only": true,
+    "template": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-model-directRNE-smoke-v1-MODEL036-repair1/SOURCE_TEMPLATE.json",
+      "bytes": 91564,
+      "sha256": "ec5e2e68ac9479ac09a286701b407923e091ffdf887765b9722996eb271e1fa8"
+    },
+    "actual_local_tests": 45,
+    "independent_actual_source_controls": 16,
+    "repairs": [
+      "exact013 CPU64 -> BF16 RNE output reference",
+      "fixed source scale128**-.5",
+      "actual prefill-slot to compact0 join",
+      "all finite metrics before Python max; active restored-before NaN rejected"
+    ],
+    "model_run": false
+  },
+  "next": "035-repair2 same-original-top tree anchors for strictly confirmed departed parents; preserve live/protected boundaries; review, same-image CPU, new16 then160; bind model successor only after actual160 owner",
+  "source_archive": {
+    "audit_only": true,
+    "not_relocatable_runtime_delivery": true,
+    "contains_no_raw_tensors_or_datasets": true,
+    "original_absolute_pins_retained": true
+  },
+  "git": {
+    "branch": "work/qwen36-damp-ascend-20261006",
+    "pre_stage_HEAD": "88ea1871f90ca8052399bbfb7c24ccf94f05e75a",
+    "remote_push_confirmed": false,
+    "known_constraint": "HTTPS credential helper unavailable; no unchanged failing push retry"
+  },
+  "formal_performance": false,
+  "task_accuracy": false
+}
