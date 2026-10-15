@@ -1,5 +1,19 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT cache-copy reuse-r2 controller exec-0000000000000589, freshma a6109
+forcedirect,checkpoint30ca1acf,rawroot
+/cache/cch/hypic-independent-20261013/compiled-cache-reuse-r2.
+0588 at10:06:54UTC all99bindings/newroot/seed48groupsdigest/physical0-3
+and8233/HCCLidle PASS.0583 total21CPUcontrols PASS; structure29PASS0586.
+All97seed sourcebindings unchanged; only2reviewed copy-infrastructure additions.
+No profiler/privateprimer or prompt/KV/publicstate transfer; same16c16/32768/64.
+Seedcache copiedbyte-identically toNEWrawroot/compiled-cache; originalseed
+neverwritablemounted. Poll exact0589/root;running/unclear neverrestart/editboundsource.
+Terminal compare independenthot/source/physical/isolation/release/cachebefore
+and originalseedunchanged before any formal performance claim or matrix.
+Deadline2026-10-15T19:04:09UTC unchanged; fullobjective incomplete.
+
+
 LATEST056c terminalexit0;0581 independent16/16fourrank48/16 hot/source97,
 229clean isolation/explicitphysical0-3/exact8ec5df36...release PASS.
 Cache48completeNPUgroups/258files/6019122bytes, includesGDN kernels.
