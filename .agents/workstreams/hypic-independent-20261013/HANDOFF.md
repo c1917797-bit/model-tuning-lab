@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT same-process private-shape warm diagnostic exec-0000000000000529,
+originalma a6109 forcedirect,checkpointb1fd434c. New immutable rawroot
+/cache/cch/hypic-independent-20261013/profile-g3-r6-privatewarm-r1.
+0528 at08:58:48UTC all96bindings/controller/newroot/physical0-3/8233/HCCL PASS.
+Same27B TP4, R6 inference unchanged; firstsame16c16/32768/64 private warmup,
+then bounded official profiling ofsame16. Allwarmups unscored/failures retained.
+8protocoltests051fPASS, contract PROFILE_G3_R6_PRIVATEWARM_R1_CONTRACT.json.
+Poll exact0529/root;live/unclear neverrestart/edit boundsource. Terminal
+source/actualhot/trace/physical/isolation/exactrelease and cold-vs-warm
+actual-call distribution required; no formal performance/quality claim.
+Deadline2026-10-15T19:04:09UTC unchanged.
+
 LATEST04fc parser terminalexit0;051e validates all4 fullJSON traces (~1.27GB each),
 46-column kernels256835/rank, operator/API tables, matchedrank/PID57-60.
 0525 diagnostic16/16 fourrank48/16 hot coverage, explicit physical join and
