@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST0726 TERMINALexit1,0/16success;R10NOTPROMOTED.0737 independent120source/
+169clean/exactf1d5d9a7release/8233free/physical0-3empty PASS. Failed observed
+rank0/layer0/step9 state maxscaled13.151957(maxabs.431776),outputPASS/.97371,
+convexact;no actual commits in failed group. R9/R10requests differ; no causal
+magnitude comparison. Actual-prefix fix insufficient,not proven rootcause.
+No ownedNPUjob. R10 disabled prospective NOTadmitted (enabled prerequisiteFAIL).
+0739 officialWY/KKT explicitly supports keyHg!=valueH; own hot adapter adds
+unneeded Q/K repeat. Next R11 preserve native4key/12value ABI only, retain
+R10two-pass/.01/.003/C2/conv/material/commit. CPU+runtimehead receipts/audit,
+new package/contract/publishedcheckpoint/freshadmission before integratedrun.
+If stillfails, ONE bounded actual-stage capture, not further blindflagchanges.
+R10raw immutable; failure report/R11plan retained. Deadline19:04:09UTC unchanged.
+
 While0726live: R10 DISABLED prospective config/manifest/contract frozen,
 072f static122bindings/same source/onlyc1_packed_waveFalse/newroot absent PASS.
 NOTSTARTED, requires0726 enabled full independentauditPASS/exactrelease then
