@@ -1,5 +1,19 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT compiled-cache seed diagnostic exec-000000000000056c, freshma a6109
+forcedirect,checkpoint6af57031,rawroot
+/cache/cch/hypic-independent-20261013/compiled-cache-seed-r1.
+056b09:50:13UTC all97bindings/newroot/physical0-3/8233/HCCLidle PASS.
+0569 nineCPUstorage/protocol controls PASS; officialFileCacheManager import0561
+and crossprocess-hit/missing-child controls0563PASS with no compute devices.
+SameR6 math/metadata; no profiler/privateprimer, only2B+2A then16c16/32768/64.
+OfficialTRITON_CACHE_DIR=/compilation-cache points to freshownattemptcache.
+Poll exact056c/root; running/unclear neverrestart or edit bound source.
+Before reuse: independent16/16fourrank48/16hot,source/physical/isolation/exact
+release and actualcachegroups/binaries/provenance required. Emptycache rejects
+hypothesis, no reuse. No prompt/KV/publicstate transfer, no formal speed claim.
+Deadline2026-10-15T19:04:09UTC unchanged; fullobjective still incomplete.
+
 LATEST053c/0540/0541 terminal: fourrank warm traces validated, parsedPID59-62
 joins053d explicit physical0-3/fourworker hot proof. Chunk>1s27to5/rank,
 host-self149-151sto31-32s; calls1536to1488 differ. Firstshape/init hypothesis
