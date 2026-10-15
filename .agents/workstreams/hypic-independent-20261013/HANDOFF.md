@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+RENEWED HUMAN WINDOW2026-10-15 07:04:09–19:04:09UTC,
+Moscow10:04:09–22:04:09. Explicit 从现在起继续跑12小时 overrides prior
+expired deadline. New heartbeat hypic-12 active every10min,delete atdeadline.
+No device stage yet resumed. Freshma a6109 direct identity verified.
+Continue independent C1/C2 on27B physical0-3 singleTP4 only.
+PriorG1/G3round1 regression remains; draft C2 layerbarrier23CPUtests0451
+passed, not in frozenmanifest,not NPUproof. Freeze successor contract and
+source before bounded integrated gate; don't retry oldroots or oldcontracts.
+10matrixunits/fullquality/lifecycle/Skill functional acceptance still missing.
+
 DEADLINE CLOSEOUT19:03:48UTC:automation hypic deleted. No new device starts.
 0450 at19:04:01 confirms both exactownedCIDs absent,physical0-3 no processes,
 8233free. Full objective NOT complete. Matrix2/12 measured (G1/G3round1),
