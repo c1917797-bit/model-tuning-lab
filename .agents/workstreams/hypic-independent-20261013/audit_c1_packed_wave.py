@@ -3,7 +3,7 @@ import math
 from collections import defaultdict
 
 def audit_packed_c1(events,workers,*,manifest_sha256,linear_layers,requests,enabled=True,
-                    skipped_body_tokens=16376,state_passes=3,seed_mode=None):
+                    skipped_body_tokens=16376,state_passes=3,seed_mode=None,head_geometry=None):
     if type(state_passes)is not int or state_passes not in (2,3):
         raise ValueError('frozen state-pass count required')
     if state_passes==2 and seed_mode!='actual_prefix_terminal':
@@ -54,6 +54,12 @@ def audit_packed_c1(events,workers,*,manifest_sha256,linear_layers,requests,enab
         key=(rank,e["step"],layer)
         if kind=="c1_packed_wave_prepared":
             group=members(e.get("requests"))
+            if head_geometry is not None:
+                actual=e.get('head_geometry')
+                if (not isinstance(actual,dict) or set(actual)!=set(head_geometry)
+                        or any(type(actual[k])is not type(v) or actual[k]!=v
+                               for k,v in head_geometry.items())):
+                    raise ValueError('source-bound native grouped head geometry required')
             if key in prepared:raise ValueError("duplicate packed preparation")
             n=e.get("windows");tokens=e.get("packed_tokens")
             if (type(n)is not int or not len(group)<=n<=2*len(group)

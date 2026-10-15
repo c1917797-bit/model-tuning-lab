@@ -25,7 +25,7 @@ def source_verified_backend(layer):
         torch.ops._C_ascend.chunk_fwd_o,PackedMetadataCache(builder))
 
 def run_packed_c1(layer,layout,projected,b,a,initial_states,incoming_conv,materials,
-                  *,backends,finite_check=None):
+                  *,backends,finite_check=None,geometry_observer=None):
     """Return only private tensors. Caller owns leases and all-request commit."""
     native,conv_op,gating,state_op,output_op,metadata_cache=backends
     cached={key:body.affine for key,body in materials.items()}
@@ -43,16 +43,19 @@ def run_packed_c1(layer,layout,projected,b,a,initial_states,incoming_conv,materi
         pad_slot_id=-1,run_mode=0)
     q,k,v=layer.rearrange_mixed_qkv(conv_output)
     g,beta=gating(layer.A_log,packed.a,packed.b,layer.dt_bias)
-    if q.shape!=k.shape or v.shape[2]%k.shape[2]:
+    if (q.ndim!=4 or q.shape!=k.shape or v.ndim!=4 or k.shape[2]<=0
+            or v.shape[2]<=0 or v.shape[2]%k.shape[2]):
         raise ValueError("integral grouped key/value heads required")
-    factor=v.shape[2]//k.shape[2]
-    if factor!=1:
-        q=q.repeat_interleave(factor,dim=2)
-        k=k.repeat_interleave(factor,dim=2)
     meta=metadata_cache.get(packed.host_starts,total_value_heads=layer.num_v_heads,
                            tp_size=layer.tp_size,device=device)
     shared=prepare_shared_wy(q,k,v,g,beta,meta=meta,native=native,
                             state_op=state_op,output_op=output_op)
+    if geometry_observer is not None:
+        geometry_observer(dict(key_heads=int(shared.k.shape[1]),
+            query_heads=int(shared.q.shape[1]),value_heads=int(shared.u.shape[1]),
+            wy_heads=int(shared.w.shape[1]),gate_heads=int(shared.g.shape[1]),
+            key_width=int(shared.k.shape[-1]),value_width=int(shared.u.shape[-1]),
+            head_layout="native_grouped"))
     initial_seeds=prefix_initial_seeds(layout,initial_states)
     # Use actual incoming H, not a zero/identity-derived approximation of a
     # finite-precision native live-prefix kernel. Dummy suffix states are zero.

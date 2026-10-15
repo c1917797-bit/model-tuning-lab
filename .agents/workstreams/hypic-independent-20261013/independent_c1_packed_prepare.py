@@ -33,6 +33,8 @@ def prepare_packed_layer(layer,stage,plans,associations,projected,b,a,leases,
     if not layout.windows:return {},leased,layout
     if 'official' not in backend_state:
         backend_state['official']=source_verified_backend(layer)
+    backend_state.pop('geometry',None)
     result=run_packed_c1(layer,layout,projected,b,a,torch.stack(states),torch.stack(tails),
-                         materials,backends=backend_state['official'],finite_check=finite_check)
+                         materials,backends=backend_state['official'],finite_check=finite_check,
+                         geometry_observer=lambda geometry:backend_state.update(geometry=geometry))
     return result,leased,layout

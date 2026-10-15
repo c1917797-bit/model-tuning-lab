@@ -65,6 +65,21 @@ class PackedAuditTests(unittest.TestCase):
         e.append({"event":"c1_packed_wave_prepared"})
         with self.assertRaises(ValueError):self.run_audit(e,w,l,enabled=False)
 
+    def test_native_grouped_geometry_and_mutations(self):
+        original,w,l=self.fixture()
+        geometry=dict(key_heads=4,query_heads=4,value_heads=12,wy_heads=12,
+            gate_heads=12,key_width=128,value_width=128,head_layout='native_grouped')
+        for x in original:
+            if x['event']=='c1_packed_wave_prepared':x['head_geometry']=geometry.copy()
+        self.assertTrue(self.run_audit(original,w,l,head_geometry=geometry)['packed_c1_verified'])
+        for key,value in [('key_heads',12),('query_heads',12),('value_heads',4),
+                ('wy_heads',4),('gate_heads',4),('key_width',64),('value_width',64),
+                ('head_layout','expanded'),('key_heads',4.0)]:
+            e=copy.deepcopy(original);e[5]['head_geometry'][key]=value
+            with self.assertRaises(ValueError):self.run_audit(e,w,l,head_geometry=geometry)
+        e=copy.deepcopy(original);del e[5]['head_geometry']
+        with self.assertRaises(ValueError):self.run_audit(e,w,l,head_geometry=geometry)
+
     def test_two_pass_requires_frozen_seed_mode(self):
         e,w,l=self.fixture()
         for x in e:

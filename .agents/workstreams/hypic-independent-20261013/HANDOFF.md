@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST R11 nativeGQA implementation DEFAULTOFF: own Q/K replication removed;
+sharedWY preserves4key/12value native grouping; actual backend head geometry
+emitted per layer/request-step and strict independent auditor rejects drift.
+0747 full415CPUtests PASS (nonzero/BF16rounding/unequalK-V/grouped ABI/negative
+geometry/receipttamper);074b static121contract/120manifest PASS/newrootabsent;
+074c structure29/diff PASS. CPU mocks NOT officialNPU numerical acceptance.
+New C1_PACKED_NATIVE_GQA_R1_CONTRACT.json and FORMAL_COMPACT_MANIFEST_R11_NATIVE_GQA.json.
+No live ownedNPUjob/newdevice experiment yet. Commit/publish then fresh
+ma/direct/actual0-3/8233/HCCL/source/newroot admission before exact integratedrun.
+Keep R10actual-prefix2passes/C2/conv/material/native1/privatecommit/.01/.003.
+If stillfails, bounded same-request/rank/layer actual-stage capture, not guesses.
+All oldraw immutable; R9/R10disabled NOTadmitted. Deadline19:04:09UTC unchanged.
+
 LATEST0726 TERMINALexit1,0/16success;R10NOTPROMOTED.0737 independent120source/
 169clean/exactf1d5d9a7release/8233free/physical0-3empty PASS. Failed observed
 rank0/layer0/step9 state maxscaled13.151957(maxabs.431776),outputPASS/.97371,

@@ -44,6 +44,44 @@ class SharedWYTests(unittest.TestCase):
         self.assertEqual(seen[0][3]['cu_seqlens'],(0,2,7))
         self.assertTrue(all(not x[3]['transpose_state_layout'] for x in seen))
 
+    def test_native_tp4_grouped_head_abi(self):
+        seen={}
+        def kkt(**kw):
+            seen['kkt']=(kw['k'].shape,kw['beta'].shape)
+            return kw['k']
+        def wy(**kw):
+            seen['wy']=(kw['k'].shape,kw['v'].shape)
+            return kw['k'].repeat_interleave(3,2),kw['v']
+        native=SimpleNamespace(l2norm_fwd=lambda x:x,
+            chunk_local_cumsum=lambda x,**kw:x,chunk_scaled_dot_kkt_fwd=kkt,
+            solve_tril=lambda **kw:kw['A'],recompute_w_u_fwd=wy)
+        q=torch.ones(1,7,4,128,dtype=torch.bfloat16)
+        v=torch.ones(1,7,12,96,dtype=torch.bfloat16)
+        g=torch.zeros(1,7,12)
+        meta=SimpleNamespace(cu_seqlens_host=(0,2,7),chunk_indices_chunk64_host=(),
+            block_indices_cumsum=None,chunk_indices_chunk64=None,chunk_indices_large_block=None)
+        def state(k,w,u,**kw):
+            self.assertEqual(k.shape,(1,4,7,128))
+            self.assertEqual(w.shape,(1,12,7,128))
+            self.assertEqual(u.shape,(1,12,7,96))
+            self.assertEqual(kw['initial_state'].shape,(2,12,128,96))
+            return None,u,kw['initial_state'].clone()
+        def output(q,k,v,h,scale,**kw):
+            self.assertEqual(q.shape,(1,4,7,128));return v
+        shared=prepare_shared_wy(q,q.clone(),v,g,g,meta=meta,native=native,
+                                state_op=state,output_op=output)
+        out,final=shared.render(torch.zeros(2,12,128,96))
+        self.assertEqual(out.shape,(1,7,12,96))
+        self.assertEqual(final.shape,(2,12,128,96))
+        self.assertEqual(seen['kkt'],(q.shape,g.shape))
+        self.assertEqual(seen['wy'],(q.shape,v.shape))
+        # Malformed grouping/gates must fail before any official primitive.
+        for bad_v,bad_g in ((v[:,:,:11],g[:,:,:11]),(v,g[:,:,:4]),
+                            (v[:,:6],g[:,:6]),(v[:,:,:0],g[:,:,:0])):
+            with self.assertRaises(ValueError):
+                prepare_shared_wy(q,q,bad_v,bad_g,bad_g,meta=meta,native=None,
+                                  state_op=None,output_op=None)
+
     def test_geometry_rejects_before_primitives(self):
         q=torch.zeros(1,7,2,3,dtype=torch.bfloat16);v=torch.zeros(1,7,2,5,dtype=torch.bfloat16)
         g=torch.zeros(1,7,2)

@@ -89,9 +89,14 @@ class PackedBackendTests(unittest.TestCase):
                 chunk_local_cumsum=counted("cumsum",lambda z,**kw:z),
                 chunk_scaled_dot_kkt_fwd=counted("kkt",lambda **kw:kw["k"]),
                 solve_tril=counted("solve",lambda **kw:kw["A"]),
-                recompute_w_u_fwd=counted("wy",lambda **kw:(kw["k"],kw["v"])))
+                recompute_w_u_fwd=counted("wy",lambda **kw:(
+                    kw["k"].repeat_interleave(kw["v"].shape[2]//kw["k"].shape[2],2),kw["v"])))
             def state_op(k,w,u,**kw):
                 calls["state"]+=1
+                self.assertEqual(k.shape[1],1)
+                self.assertEqual(w.shape[1],2)
+                # Mathematical expansion is confined to the fake official op.
+                k=k.repeat_interleave(u.shape[1]//k.shape[1],1)
                 starts=kw["cu_seqlens"];h=kw["initial_state"].clone()
                 states=torch.empty(1,k.shape[1],k.shape[2],k.shape[3],u.shape[-1])
                 for row,(lo,hi) in enumerate(zip(starts,starts[1:])):
@@ -105,6 +110,8 @@ class PackedBackendTests(unittest.TestCase):
                 return states,u,h
             def output_op(q,k,v,history,scale,**kw):
                 calls["output"]+=1
+                self.assertEqual(q.shape[1],1)
+                q=q.repeat_interleave(v.shape[1]//q.shape[1],1)
                 return (q.float().unsqueeze(-1)*history).sum(-2)*scale
             def metadata(builder,starts,device):
                 calls["metadata"]+=1
@@ -115,8 +122,12 @@ class PackedBackendTests(unittest.TestCase):
                 activation=False,rearrange_mixed_qkv=rearrange,A_log=None,dt_bias=None,
                 num_v_heads=8,tp_size=4)
             before=[v.clone() for v in (x,tail,ct["shared"],initial)]
+            geometry=[]
             result=run_packed_c1(layer,layout,x,b,a,initial,tail,material,backends=(
-                native,conv_op,gating,state_op,output_op,PackedMetadataCache(metadata)))
+                native,conv_op,gating,state_op,output_op,PackedMetadataCache(metadata)),
+                geometry_observer=geometry.append)
+            self.assertEqual(geometry,[dict(key_heads=1,query_heads=1,value_heads=2,
+                wy_heads=2,gate_heads=2,key_width=5,value_width=3,head_layout="native_grouped")])
             for row,chain in enumerate(layout.chains):
                 if not chain:continue
                 h=initial[row].clone() if layout.has_initial[row] else torch.zeros_like(initial[row])

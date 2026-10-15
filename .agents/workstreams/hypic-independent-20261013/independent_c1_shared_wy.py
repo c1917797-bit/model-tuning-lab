@@ -1,7 +1,7 @@
 """Independent packed C1 shared-algebra adapter; no activation or cache writes.
 
 The caller supplies source-verified unchanged official primitives and complete
-nonempty-window metadata. Grouped heads must be expanded before this boundary.
+nonempty-window metadata. Preserve native grouped Q/K and value heads.
 This module is not a device admission or runtime loader.
 """
 from dataclasses import dataclass
@@ -52,8 +52,10 @@ def prepare_shared_wy(q,k,v,g,beta,*,meta,native,state_op,output_op,scale=None):
     """Prepare all packed windows once; no whole-chunk wrapper recursion."""
     if q.ndim!=4 or q.shape!=k.shape or q.shape[0]!=1:
         raise ValueError("packed [1,token,head,key] Q/K required")
-    if v.ndim!=4 or v.shape[:3]!=k.shape[:3] or g.shape!=k.shape[:3] or beta.shape!=g.shape:
-        raise ValueError("expanded equal-head packed geometry required")
+    if (v.ndim!=4 or v.shape[:2]!=k.shape[:2] or k.shape[2]<=0
+            or v.shape[2]<=0 or v.shape[2]%k.shape[2]
+            or g.shape!=v.shape[:3] or beta.shape!=g.shape):
+        raise ValueError("integral native grouped key/value head geometry required")
     if q.dtype!=k.dtype or k.dtype!=v.dtype or k.dtype!=torch.bfloat16:
         raise ValueError("official BF16 packed ABI required")
     if any(x.device!=k.device for x in (q,v,g,beta)):

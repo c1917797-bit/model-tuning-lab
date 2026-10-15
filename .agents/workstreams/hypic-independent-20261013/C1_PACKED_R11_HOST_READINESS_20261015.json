@@ -1,0 +1,31 @@
+{
+  "schema": "hypic-stage-evidence/v1",
+  "stage": "R11 native grouped-head implementation",
+  "state": "CPU_PASSED_DEVICE_NOT_ADMITTED",
+  "full_cpu_operation": "exec-0000000000000747",
+  "tests": 415,
+  "focused_operation": "exec-0000000000000744",
+  "focused_tests": 6,
+  "manifest_sha256": "c6246a15184912ba746146470fcb01deb3d4394907af58b26abbd597a1ba4816",
+  "contract": "C1_PACKED_NATIVE_GQA_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-packed-nativegqa-r1",
+  "changes": [
+    "No manual Q/K head replication",
+    "Grouped-head shared WY ABI and positive4/12 unequalKVwidth control",
+    "Full private backend serial recurrence including BF16 rounding",
+    "Actual backend head geometry receipt and independent tamper rejection"
+  ],
+  "unchanged": [
+    "actual-prefix two passes",
+    "conv/material/C2/native1",
+    "shadow atol .01 rtol .003",
+    "default-off route/private all-request commit"
+  ],
+  "limitations": [
+    "CPU mocks are not official NPU numerical proof",
+    "R9/R10 failed; disabled controls not admitted",
+    "Need source validation, coherent commit/publication and fresh physical admission",
+    "If R11 fails, bounded exact-stage probe, not blind variants"
+  ],
+  "deadline_utc": "2026-10-15T19:04:09Z"
+}
