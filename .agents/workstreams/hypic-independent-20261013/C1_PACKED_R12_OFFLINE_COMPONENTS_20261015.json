@@ -1,0 +1,45 @@
+{
+  "schema": "hypic-r12-offline-components/v1",
+  "state": "CPU_COMPONENTS_ONLY_NOT_DEVICE_ADMITTED",
+  "files": [
+    "independent_c1_stage_capture.py",
+    "audit_c1_stage_capture.py",
+    "test_independent_c1_stage_capture.py"
+  ],
+  "focused": {
+    "operation": "exec-0000000000000778",
+    "tests": 10,
+    "exit": 0
+  },
+  "full": {
+    "operation": "exec-000000000000077a",
+    "tests": 426,
+    "exit": 0
+  },
+  "structure": {
+    "operation": "exec-000000000000077b",
+    "skills": 29,
+    "meaning": "structure only, not functional acceptance"
+  },
+  "implemented": [
+    "Explicit default-off factory",
+    "Per-call independent detached CPU FP32 clone; before-copy byte bound",
+    "One selected rank0/layer0 group <=2 requests, <=32 records, <=64MiB",
+    "Exclusive no-pickle NPY plus fsync/SHA sealed manifest",
+    "Independent paired source-coordinate/shape/file/bound/finite/tamper audit and first observed stage residual",
+    "Independent sampled-head FP64 recurrence",
+    "Passed-call discard, immutable input snapshots, negative controls"
+  ],
+  "not_implemented": [
+    "Real boundary observer wiring and exact source-bound head selection",
+    "Runtime manifest/loader switch and owned observer teardown",
+    "Exact kernel branch/producer-generation/slot/window completeness receipts",
+    "Real device capture or rootcause conclusion",
+    "Device rollback/failure ordering integration tests",
+    "Full performance/paired quality/lifecycle/29Skill functionality"
+  ],
+  "no_active_runtime_change": true,
+  "no_device_run": true,
+  "next": "Wire actual packed/serialized C1 boundaries without altering R11 math. Preserve exact per-window coordinates and record actual prefix/cachecomposition/suffix/final before failure; positive actual128 dimensions, rollback tests, new manifest/contract/publication/admission before one integrated probe.",
+  "deadline": "2026-10-15T19:04:09Z"
+}
