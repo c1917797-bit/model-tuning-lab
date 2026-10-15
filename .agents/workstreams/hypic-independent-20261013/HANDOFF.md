@@ -11,7 +11,10 @@ Existing R8/R7 manifests STALE. Next packed independent receipts audit and new
 source-bound package/Canary contract/admission, not blind matrix. Native raw
 parser has no accepted CSV; recover failure before bounded offline successor.
 C1_PACKED_INTEGRATION_HOST_20261015.json records remaining gates/fullscope.
-Deadline19:04:09UTC unchanged. Latest remote43e265f7, newer code local pending.
+Deadline19:04:09UTC unchanged. Packed implementation ca0f5c07 now published
+by originalGitobject relay/normalFF/live ls-remote; main23ec33d7 unchanged.
+PUBLICATION_PACKED_C1_RECEIPT_20261015.json records scope; this receipt is
+newer local metadata, not another device/functionality acceptance.
 
 LATEST06cb six CPU tests PASS: independent packed affine wave plus shared-WY
 adapter. WY/cumsum/KKT/solve once, three state passes reuse prepared buffers;

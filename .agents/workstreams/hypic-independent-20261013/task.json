@@ -196,11 +196,11 @@
   },
   "publication": {
     "state": "checkpoint-live-verified-newer-local-integration-pending",
-    "published_commit": "cd35ff88bd5bc60906aa222046fdd0fbe1a48cd5",
-    "receipt": "PUBLICATION_R7_CHECKPOINT_RECEIPT_20261015.json",
+    "published_commit": "ca0f5c0750f9934518cbf473381dbe640f916ee5",
+    "receipt": "PUBLICATION_PACKED_C1_RECEIPT_20261015.json",
     "original_commit_preserved": true,
-    "local_checkpoint": "c8b08b58",
-    "note": "Desktop normalFF and live ls-remote verified cd35ff88; main23ec33d7 unchanged. Current C1 completion integration newer locally; not published/accepted."
+    "local_checkpoint": "ca0f5c0750f9934518cbf473381dbe640f916ee5",
+    "note": "Desktop original objects, normalFF and live ls-remote verified ca0f5c07; main23ec33d7 unchanged. Defaultoff packed C1 integration/405CPU tests, NOT device or performance acceptance. This publication receipt metadata is newer locally."
   },
   "math_reference": {
     "state": "cpu-reference-passed",
