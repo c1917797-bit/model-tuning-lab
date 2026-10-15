@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST05dc: five CPU native decode packing controls PASS. New
+independent_native_decode_pack.py owns gathered projected/gates/conv/value-major
+state buffers, zeroes no-initial rows privately, separates cumulative conv starts
+from recurrent [0,1,...,1] lengths, validates ownership and finite unpacking.
+Unequal key/value dimensions and mutation controls cover transpose/alias errors.
+NOT imported by runtime, no NPU run or batched backend numerical proof yet.
+Next pinned official backend adapter and independent shadow oracle, then single
+default-off C1 hook route; preserve hot C1/C2 and deferred actual-slot commit.
+No owned live NPU job; 05da snapshot physical0-3 empty/8233 not listening.
+Deadline2026-10-15T19:04:09UTC unchanged; full goal incomplete.
+
+
 LATEST05a0 terminalexit0,05d0 independentaudit PASS:40/40fourrank48/16,
 94runtime+101compiledsourcebindings,555cleanisolations,seedunchanged,exact
 release/physical0-3empty. TPOT439.812857ms/TTFTP95499238.198ms.
