@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+0610 partial live proof:384 firstsingleton+multirow shadow groups PASS,
+all48linear layers across4ranks; no failedshadow. This is bounded nativebackend
+consistency, not fullcanaryterminal/quality/performance. 05fa stillrunning.
+Prospective FORMAL_PERFORMANCE_G3_NATIVE_BATCH_R1_CONTRACT.json prepared only:
+requires enabled16 and disabled16 full independentaudits/release before launch.
+Original c360 nativecontroller/full40/c16/32768/fixed1024/eager/PDCoff/coldnew
+container, no cachecopy/privateprimer/profiler. Oldnative comparison screening
+only; fresh sameidentity G1 required for pairedclaim. No matrix after failedscreen.
+
+
 While05falive: disablednativebatch prospectivecontrol frozen, NOTstarted.
 060d checks only inferenceconfig native_decode_batch true->false; same runtime,
 model/protocol/deadline, freshowncache/newroot; enabled101/disabled103bindings.
