@@ -1,0 +1,30 @@
+{
+  "schema": "hypic-packed-c1-admission-readiness/v1",
+  "tests": {
+    "full_operation": "exec-00000000000006f2",
+    "count": 408,
+    "passed": true,
+    "auditor_and_hook_operation": "exec-00000000000006e5",
+    "auditor_tests": 3,
+    "negative_mutations": 18
+  },
+  "static_package": {
+    "operation": "exec-00000000000006f3",
+    "manifest_bindings": 117,
+    "contract_bindings": 118,
+    "valid": true,
+    "newroot_absent": true
+  },
+  "official_cpu_probe": {
+    "operation": "exec-00000000000006e6",
+    "passed": false,
+    "reason": "Triton get_arch requires compute device context; manager-only no-compute probe did not reach metadata; not algorithm failure proof"
+  },
+  "candidate": "independent C1 packed multiwindow shared-WY",
+  "contract": "C1_PACKED_WAVE_CANARY_R1_CONTRACT.json",
+  "manifest": "FORMAL_COMPACT_MANIFEST_R9_PACKED_C1.json",
+  "manifest_sha256": "6e17d2721c2eb4a386bc9aff5efeb65bc67251b376fd51b792ad8e470fd1f094",
+  "admission": "conditional: publish checkpoint and fresh direct physical0-3/ports/newroot checks mandatory",
+  "device_run": false,
+  "claims": "host gates only; fourrank actual numerical/transport/source/isolation/release still pending; no service win,quality,main or29Skill functional completion"
+}

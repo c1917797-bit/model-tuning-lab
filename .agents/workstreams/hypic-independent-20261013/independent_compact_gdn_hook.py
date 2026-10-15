@@ -72,7 +72,8 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
                 from independent_c1_packed_prepare import prepare_packed_layer
                 packed,packed_materials,packed_layout=prepare_packed_layer(
                     self,stage,plans,associations,mixed_qkv,b,a,leases,packed_backend,**finite_kwargs)
-            packed_shadow_key=(self.prefix,len(packed)>1)
+            hot_count=sum(not isinstance(p,NativeQueryPlan) for p in plans if p.request_id in packed)
+            packed_shadow_key=(self.prefix,min(2,hot_count),len(packed)>1)
             check_packed_shadow=bool(packed) and packed_shadow_key not in packed_shadowed
             for plan,assoc in zip(plans,associations):
                 is_native=isinstance(plan,NativeQueryPlan)
@@ -116,6 +117,7 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
                     emit({'event':'c1_packed_wave_shadow_checked','request_id':plan.request_id,
                         'rank':plan.rank,'step':plan.step,'layer':self.prefix,'metrics':metrics,
                         'passed':passed,'group_requests':list(packed),'private_buffers':True,
+                        'atol':.01,'rtol':.003,
                         'actual_slot_commit':'not_started'})
                     if not passed:raise ValueError('packed C1 full private shadow failed')
                 if (layer_shadow and not packed_wave and not is_native and self.prefix not in c1_shadowed

@@ -1,0 +1,13 @@
+{
+  "operation": "exec-00000000000006e6",
+  "exit_code": 1,
+  "compute_devices_mapped": false,
+  "manager_mapped": true,
+  "failure": "Triton Ascend get_arch/SocVersion at official model FLA module import; device lookup cannot complete with no compute nodes",
+  "scope": "CPU-only import did not reach metadata function; no algorithm or NPU numeric result; no auto-retry with cards",
+  "source_inspection_operations": [
+    "exec-00000000000006c9",
+    "exec-00000000000006ce",
+    "exec-00000000000006d0"
+  ]
+}

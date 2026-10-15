@@ -1,5 +1,20 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST R9 package/static06f3 PASS:117manifest/118contract exactbindings;
+408CPU regressions06f2 PASS. New independent packed auditor3controls and
+18mutations; exact expected48layer names derived from modelconfig and raw
+prefix map; current producer generation/step/PID/request/finite ordering joined.
+CPU-only official import06e6 failed atTriton get_arch with NOcompute mappings;
+not official metadata/numerical proof. Captured failure, no model rerun.
+R9 contract C1_PACKED_WAVE_CANARY_R1_CONTRACT.json is NOTlaunched yet.
+After publish/freshforcedirect/physical0-3+portsidle/newroot, run one exact
+integrated16c16/32768/64 mechanism+numerical Canary, no latency/quality claim.
+Terminal audit audit_c1_packed_terminal.py joins full16/4rank48/16hot,
+native1 control, packed multi-hot shadows/currentgeneration/precommit,
+actualNSpid physical/continuousisolation/exactrelease. No staleR8/R7 launch.
+Ledger names subsequent screen; critical-path service benefit still unproved.
+Deadline19:04:09UTC unchanged; fullmatrix/quality/lifecycle/29functional missing.
+
 LATEST06da full405 unique CPU regressions PASS; packed C1 convolution,
 metadata cache, shared-WY backend, unique body lease and defaultFALSE runtime
 route now integrated.06d8 focused20 and06d9 realCPU lease/reset control PASS.
