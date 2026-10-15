@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+While05falive:0601 independentnativebatch receipt auditor4tests PASS,
+including7mutation controls/missinglayer/nonfinite. Newaudit_native_decode_batch
+joins all48multirowshadow layers/rank to actualone-row nativecommit receipts;
+doesNOT claim independentrawtensorrecompute/quality/performance. Frozen101
+runtime sources untouched.05fd liveexactCIDf75a9f1a...Env/Mounts receipt retained
+inR7_NATIVE_BATCH_LIVE_LAUNCH_RECEIPT.json;physical0-3only,/probeRO,newcacheRW.
+Poll05fa/originalpeer only; no duplicate or boundsourceedits while live.
+
+
 CURRENT R7 integratednative1 batch controller exec-00000000000005fa,
 originalma a6109 forcedirect,checkpointbbcea9ad.05f7 preflight101bindings,
 newroot/physical0-3/8233/HCCLidle PASS11:24:41UTC. Manifest5e334fad5e922fde...

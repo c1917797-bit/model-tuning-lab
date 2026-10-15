@@ -1,0 +1,73 @@
+{
+  "cid": "f75a9f1af2f3666e86d9c59ab6c97aa98267bf3e19f2849619f2a3559718a54e",
+  "running": true,
+  "pid": 495421,
+  "env": [
+    "INDEPENDENT_COMPACT_MANIFEST=/probe/FORMAL_COMPACT_MANIFEST_R7_NATIVE_BATCH.json",
+    "INDEPENDENT_CACHE_DIAGNOSTIC=1",
+    "PYTHONPATH=/probe/compact_bootstrap:/probe:/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:/usr/local/Ascend/ascend-toolkit/latest/opp/built-in/op_impl/ai_core/tbe:/usr/local/Ascend/cann-9.1.0/python/site-packages:/usr/local/Ascend/cann-9.1.0/opp/built-in/op_impl/ai_core/tbe:",
+    "INDEPENDENT_COMPACT_HYPIC=1",
+    "INDEPENDENT_DIAGNOSTIC_ROOT=/scratch/diagnostics",
+    "TRITON_CACHE_DIR=/compilation-cache",
+    "INDEPENDENT_DIAGNOSTIC_BATCHES=2",
+    "INDEPENDENT_COMPACT_RAW=/scratch/diagnostics",
+    "ASCEND_RT_VISIBLE_DEVICES=0,1,2,3"
+  ],
+  "devices": [
+    {
+      "PathOnHost": "/dev/davinci0",
+      "PathInContainer": "/dev/davinci0",
+      "CgroupPermissions": "rwm"
+    },
+    {
+      "PathOnHost": "/dev/davinci1",
+      "PathInContainer": "/dev/davinci1",
+      "CgroupPermissions": "rwm"
+    },
+    {
+      "PathOnHost": "/dev/davinci2",
+      "PathInContainer": "/dev/davinci2",
+      "CgroupPermissions": "rwm"
+    },
+    {
+      "PathOnHost": "/dev/davinci3",
+      "PathInContainer": "/dev/davinci3",
+      "CgroupPermissions": "rwm"
+    },
+    {
+      "PathOnHost": "/dev/davinci_manager",
+      "PathInContainer": "/dev/davinci_manager",
+      "CgroupPermissions": "rwm"
+    },
+    {
+      "PathOnHost": "/dev/hisi_hdc",
+      "PathInContainer": "/dev/hisi_hdc",
+      "CgroupPermissions": "rwm"
+    },
+    {
+      "PathOnHost": "/dev/devmm_svm",
+      "PathInContainer": "/dev/devmm_svm",
+      "CgroupPermissions": "rwm"
+    }
+  ],
+  "mounts": [
+    {
+      "source": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013",
+      "destination": "/probe",
+      "rw": false
+    },
+    {
+      "source": "/cache/cch/hypic-independent-20261013/native-decode-batch-canary-r1",
+      "destination": "/scratch",
+      "rw": true
+    },
+    {
+      "source": "/cache/cch/hypic-independent-20261013/native-decode-batch-canary-r1/compiled-cache",
+      "destination": "/compilation-cache",
+      "rw": true
+    }
+  ],
+  "operation": "exec-00000000000005fd",
+  "observed_utc": "2026-10-15T11:26:21Z",
+  "scope": "live exact owned Docker Env/Mounts/physical declarations; active compute/hot and release separate"
+}
