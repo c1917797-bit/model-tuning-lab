@@ -1,5 +1,19 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST AUTHORIZATION EXPIRED2026-10-15T19:04:09UTC. NO NEW DEVICE STARTS.
+089b TERMINALexit1/1391359ms/deadlineguard:18of40successful1024,40journalrecords
+include22failed. R15matrix0/12valid,1interrupted,11notstarted; old2valid phases
+belongoldsource, NEVERmerge. No speedup/quality/fullHYPIC acceptance.
+08c7 independent141source/387clean/exact4450removed/physical0-3empty/8233strictbind
+PASS.08c4 earlierbind failedTIME-WAIT only,08c6 no listener; unchangedgate passes
+onceexpired. No externalprocess/portchanges. No liveownNPUjob. hypic-12 DELETED;
+otherautomations untouched. ReportINDEPENDENT_HYPIC_12H_CLOSEOUT_20261015.json.
+R14bounded16numerical0857/PDCobservational0887 acceptedonlytheirscope;original
+087bfrozenfailure preserved.496CPU/R15sourceworkbranch only, mainunchanged.
+Full12matrix/natural127x3quality/lifecycle/Paper-to-Ascend/29functional incomplete.
+Need renewed human device authorization before a NEW immutable successor; oldraw
+formal-r15-g3-r1 NEVERrerun/reuse. Keep overallgoal incomplete, no mainpromotion.
+
 LATEST R15 G3/R1 FORMAL exec-000000000000089b RUNNING originalma a6109/tpcforcedirect.
 Source35159d41 published/liveverified/mainunchanged;089a fresh18:40:56UTC141bindings/
 0-3empty/8233+HCCLidle/newrootabsent PASS,~16GiBcachefree. Exactrawformal-r15-g3-r1.

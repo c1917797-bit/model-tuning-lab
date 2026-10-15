@@ -118,15 +118,18 @@
   "live_not_accepted": {
     "operation": "exec-000000000000089b",
     "phase": "R15G3/R1 full40 fixed1024",
-    "state": "RUNNING_NO_TERMINAL_RESULT",
+    "state": "TERMINAL_INVALID_DEADLINE_INTERRUPTED",
+    "successful": 18,
+    "required": 40,
     "no_new_claims": true
   },
   "remaining": [
-    "all12 matched formal phases",
-    "full127x3 naturalEOS quality",
-    "disabled/uninstall/restart lifecycle",
-    "29 archived Skill functional acceptance",
-    "authorized serial main integration"
+    "all12 R15 full40 matched formal phases and independent per-arm PDC audit",
+    "full127x3 each-arm naturalEOS paired quality, nonthinking1024/thinking2048",
+    "disable/uninstall/restart lifecycle plus exact release",
+    "Paper-to-Ascend end-to-end functional acceptance",
+    "all29 archived Skill functional acceptance",
+    "authorized serialized integration/main verification"
   ],
   "publication": "work branch only; remote live verify required, main unchanged"
 }

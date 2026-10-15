@@ -1,0 +1,135 @@
+{
+  "schema": "hypic-independent-12h-closeout/v1",
+  "deadline_utc": "2026-10-15T19:04:09Z",
+  "closed_utc": "2026-10-15T19:07:49Z",
+  "overall_goal_complete": false,
+  "controller": "exec-000000000000089b",
+  "controller_terminal_exit": 1,
+  "controller_duration_ms": 1391359,
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-r15-g3-r1",
+  "source_checkpoint": "35159d417f22699f15e4c6b025bfe478b5bc3bc5",
+  "formal_phase_verdict": "INVALID_DEADLINE_INTERRUPTED_18_OF_40_SUCCESSFUL",
+  "formal_matrix": {
+    "version": "R15",
+    "required": 12,
+    "valid_complete": 0,
+    "interrupted": 1,
+    "not_started": 11,
+    "old_version_results_not_merged": true
+  },
+  "independent_release_audit": {
+    "operation": "exec-00000000000008c7",
+    "exit_code": 0,
+    "report": {
+      "phase_valid": false,
+      "result_error": {
+        "type": "RuntimeError",
+        "message": "formal measured request failure"
+      },
+      "guard_errors": [
+        {
+          "type": "TimeoutError",
+          "message": "Frozen execution deadline reached",
+          "raw": null
+        }
+      ],
+      "source_bindings_unchanged": 141,
+      "isolation_clean": 387,
+      "exact_own_removed": true,
+      "physical0_3_empty": true,
+      "port_free": true,
+      "completed_journal_records": 40,
+      "successful_fixed1024_records": 18,
+      "required_records": 40,
+      "reported_controller_responses": 40,
+      "note": "journal partials retained even when controller assignment never returned; no partial aggregate speed acceptance",
+      "mechanism_event_counts": {
+        "compact_hypic_hooks_installed": 4,
+        "native_request_progress": 216,
+        "compact_public_state_published": 192,
+        "compact_public_kv_published": 64,
+        "c1_prefix_terminal_route": 9416,
+        "c1_packed_wave_prepared": 5000,
+        "c1_layer_precommit_validated": 5000,
+        "compact_gdn_body_composed": 5576,
+        "compact_c2_queries_completed": 1856,
+        "compact_model_rows_completed": 104,
+        "native_decode_batch_completed": 4812,
+        "mixed_native_gdn_completed": 43280,
+        "mixed_native_c2_completed": 14400
+      },
+      "deadline_interrupts": [
+        {
+          "event": "deadline_interrupt_owned_stop",
+          "container_id": "4450aef651532a0b67b25035090993d0cea814294bccf5852342a543674f8176"
+        }
+      ],
+      "raw_sha256": {
+        "result.json": "7216ff1c34393a82c66bd7908f06241d11c866a72e11400f7987422466c8688c",
+        "release.json": "f990856eae8fbe523797bd6964d72882576db874a2f4074733dd16d6b17c2769",
+        "events.jsonl": "5e41b6a3f070c852743871ad75e6bb43f11410e58e03dd15d4116ae78386d7ac",
+        "isolation.json": "a7588fd8a48bb63b47d7638f689029a0108f487f2e132291de480eef53b7f499",
+        "responses.json": "fbdb59f3a19f3176f76c22895d34daaebab80c1c809c02cc0f70466d8d578ee7",
+        "service.log": "49e9dfbe835cd3e76df74fe94cf18d20b651856b4bd5a02cd2071903431fa69e"
+      },
+      "scope": "terminal provenance/source/continuous physical isolation/actual diagnostic-free switches/exact release; not full40 timing, quality, all12 matrix or overall success"
+    }
+  },
+  "initial_release_probe": {
+    "operation": "exec-00000000000008c4",
+    "exit_code": 1,
+    "reason": "strict bind failed while TIME-WAIT sockets remained",
+    "followup": "08c6 proved no listeners, onlyTIME-WAIT; unchanged strict bind passed08c7 after expiration; no port or process mutation"
+  },
+  "bounded_results": [
+    {
+      "gate": "R14 integrated numerical C1/C2",
+      "audit": "exec-0000000000000857",
+      "requests": 16,
+      "output_tokens": 64,
+      "verdict": "ACCEPT_BOUNDED_ONLY"
+    },
+    {
+      "gate": "R14 nativePDC plus C1/C2",
+      "audit": "exec-0000000000000887",
+      "requests": 16,
+      "output_tokens": 64,
+      "verdict": "REVISED_OBSERVATIONAL_ACCEPTANCE",
+      "original_failed_gate": "087b preserved; per-request conditionalcap event observer assumption corrected transparently"
+    },
+    {
+      "gate": "R15 host regression",
+      "operation": "exec-0000000000000893",
+      "tests": 496,
+      "verdict": "CPU_ONLY"
+    },
+    {
+      "gate": "Skill evidence mapping",
+      "checkpoint": "10165fe2e5c8ea9700ad635702b259d8b5556d1e",
+      "mapped_skills": 6,
+      "verdict": "PARTIAL_NOT_FULL_FUNCTIONAL_ACCEPTANCE"
+    }
+  ],
+  "remaining_requirements": [
+    "all12 R15 full40 matched formal phases and independent per-arm PDC audit",
+    "full127x3 each-arm naturalEOS paired quality, nonthinking1024/thinking2048",
+    "disable/uninstall/restart lifecycle plus exact release",
+    "Paper-to-Ascend end-to-end functional acceptance",
+    "all29 archived Skill functional acceptance",
+    "authorized serialized integration/main verification"
+  ],
+  "no_claims": [
+    "speedup or regression from18partial records",
+    "final task quality",
+    "full paper reproduction",
+    "main synchronized",
+    "29Skill all effective"
+  ],
+  "automation": {
+    "id": "hypic-12",
+    "state": "deleted_at_deadline",
+    "other_automations_untouched": true
+  },
+  "next_authority": "Device authorization expired. No new device starts without renewed human authorization. If resumed, use new immutable root/contract; do not rerun or overwrite interrupted raw root.",
+  "safe_tree": "Default-off timed mode/source-bound package remains on work branch only; no deployment or main promotion."
+}
