@@ -1,0 +1,233 @@
+{
+  "schema": "ascend.new48h.live-handoff/v1",
+  "as_of_utc": "2026-10-15T09:42:00Z",
+  "cutoff_utc": "2026-10-16T07:18:17Z",
+  "goal_active": true,
+  "final_acceptance": false,
+  "active_MAIN_job": {
+    "operation_id": "exec-0000000000000555",
+    "status": "running_last_verified",
+    "last_verified_operation": "exec-0000000000000556",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-ownership-observation-v1-013/SOURCE_MANIFEST.json",
+      "bytes": 48982,
+      "sha256": "04f047579db683c07313da9a7ff346e78731af9077d74abc94ae4df9244dd704"
+    },
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-ownership-observation-main-NEW48H_013_001",
+    "scope": "Actual short129 TP4 all48 GDN numerics; not performance or task accuracy",
+    "phase_seconds": 2700,
+    "cleanup_seconds": 270,
+    "exclusive_TP4": true,
+    "poll_only_existing_handle": true,
+    "restart_on_timeout": false,
+    "ownership_call_chain": "actual OWNERSHIP_OBSERVER_CHAIN.json present with MRO/closure/H bindings true; not numeric PASS"
+  },
+  "resource_admission": {
+    "launch_operation": "exec-0000000000000555",
+    "old_owned_CIDs_released": [
+      "71ed368727fa4c1d31f6f4146a94a277eac82e5373a11b26622a7f80f80a25cf",
+      "572d093979ed72ec14cc939e1d9f047ed9dfd841c5fa00582455b96eddfad3f5"
+    ],
+    "model_floor_GiB": 56.5,
+    "model_cap_GiB": 48,
+    "CPU_floor_GiB": 16.5,
+    "reserve_GiB": 8,
+    "fresh_source_audit": "0553 exit0 46bytes/AST 718refs 28inverse",
+    "all4_exclusive": true,
+    "physical_allowed": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "queued": {
+    "MXR012": {
+      "local": "C:/Users/Huawei/AppData/Local/Temp/mxr-long-cap48-atomic-new48h-20261015-012",
+      "status": "prepared_not_deployed",
+      "requires": "actual successful013 short refs+source review/binding, CPU, separate opt224.5GiB fresh free, all4release",
+      "phase_seconds": 7200
+    },
+    "DL_B009": {
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-key-projection-B-new48h-20261015-009",
+      "status": "prepared_not_deployed",
+      "requires": "MAIN and independent kernel review, actual build/Meta/full NPU before service",
+      "mechanism": "fused per-value-head key projections; not author code or fully shared ReplayPrep"
+    },
+    "MXR065": {
+      "local": "C:/Users/Huawei/AppData/Local/Temp/mxr-shape-family-single6-new48h-20261015-065",
+      "status": "prepared_not_ready",
+      "source_sha256": "8974179ea9ff3f1dda9c2c132a4dc26fd466ed66cafea049918844db3f494f32",
+      "requires": "064 proven handshake repair+new immutable owner source then true sameimage/smoke/full396. No structural promotion from absent solver-block observation."
+    },
+    "MXR006": {
+      "status": "prepared_explicit_only",
+      "source_sha256": "0ed36dab7b338201013bcf1cc45e58325ccffa4754c686c33694d94ea856e287",
+      "production_family_promotion": false,
+      "task_allfallback_risk": "Actual author prompts max3139 whereas old005 domain32768/40960; task-only candidate hits mandatory, warmup excluded"
+    },
+    "accuracy004": {
+      "status": "prepared_not_run",
+      "source_sha256": "5f575c0c0230fa079ba451b88b9ef495d64a757bd477b843b38ec2601944d131",
+      "requires": "actual candidate qualification and tasksmoke coverage; no model scores"
+    }
+  },
+  "parallel_preparation": {
+    "accuracy_input_repair": "064 actual empty-proof/DEVICE handshake causal audit and bounded local successor",
+    "ge_fullgdn_ready": "DL B009 actual kernel pipeline/algorithm review",
+    "gdn_paper_reassessment": "012 actual executable downstream interface review"
+  },
+  "git": {
+    "branch": "work/qwen36-damp-ascend-20261006",
+    "last_confirmed_remote_commit": "09c4bb11",
+    "new_local_commit": "f5730ecf",
+    "new_push_operation": "exec-00000000000004cf",
+    "new_push_exit": 128,
+    "new_push_error": "Operation too slow. Less than1byte/sec last15s",
+    "new_commit_remote_confirmation": false
+  },
+  "missing": [
+    "Actual013 short numerical PASS",
+    "Actual012 long/state and relevant lifecycle PASS",
+    "Actual qualified original-task shape coverage, not all fallback",
+    "Unprofiled fixed1024 matched wholemodel screening and 3pairs >=10%",
+    "Actual GSM8K/HumanEval/MMLU smoke then full <=1% loss"
+  ],
+  "safety": {
+    "physical_allowed": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "no_new_HugeTLB_release": true,
+    "no_foreign_stop": true,
+    "continuous_utilization": "UNMEASURED"
+  },
+  "current_MAIN_job": {
+    "operation_id": "exec-0000000000000555",
+    "status": "running_last_verified",
+    "last_verified_operation": "exec-0000000000000556",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-ownership-observation-v1-013/SOURCE_MANIFEST.json",
+      "bytes": 48982,
+      "sha256": "04f047579db683c07313da9a7ff346e78731af9077d74abc94ae4df9244dd704"
+    },
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-ownership-observation-main-NEW48H_013_001",
+    "scope": "Actual short129 TP4 all48 GDN numerics; not performance or task accuracy",
+    "phase_seconds": 2700,
+    "cleanup_seconds": 270,
+    "exclusive_TP4": true,
+    "poll_only_existing_handle": true,
+    "restart_on_timeout": false,
+    "ownership_call_chain": "actual OWNERSHIP_OBSERVER_CHAIN.json present with MRO/closure/H bindings true; not numeric PASS"
+  },
+  "historical_MXR007": {
+    "operation_id": "exec-00000000000004cd",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-owned-correctness-v1-007/SOURCE_MANIFEST.json",
+      "bytes": 38732,
+      "sha256": "12188b5933e38d1f8ad644c5f7e5b05fe1084ef54d93f7d15040599ee40f3d89"
+    },
+    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-observerless-owned-correctness-main-NEW48H_007_001",
+    "scope": "007 original64GiB capped TP4/129token/48GDN short numerical once; no performance/task claim",
+    "latest_verified": "Actual all4 model weights loaded, warmup stopped by real prefix context missing in worker.py79. No full numerical result. Original owner preserved.",
+    "container": {
+      "cid": "2f090ff72ee7a1b76d2b0cb459f4ef06aa3b2885f5e0e555e2ba04989f7c1d24",
+      "name": "mxr-once007-candidate",
+      "owner": "mxr-observerless-once-correctness007",
+      "memory_bytes": 68719476736,
+      "physical": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "logical": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "phase_seconds": 2700,
+    "cleanup_seconds": 270,
+    "exclusive_TP4": false,
+    "poll_only_existing_handle": false,
+    "restart_on_timeout": false,
+    "status": "terminal_failed",
+    "release_verified": {
+      "operation": "exec-00000000000004e5",
+      "running": false,
+      "pid": 0,
+      "exec_ids": null,
+      "oom": false
+    },
+    "owner_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-observerless-owned-correctness-main-NEW48H_007_001/RESULT.json",
+      "bytes": 4055,
+      "sha256": "7b7ddc173199a635ca07ce73333540e59275f73f6416775584e80d78499c039d"
+    }
+  },
+  "stage_results": {
+    "MXR010": {
+      "status": "FAILED",
+      "owner": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-qwen-core-binding-main-NEW48H_010_001/RESULT.json",
+        "bytes": 3881,
+        "sha256": "2c000ca7499a1139d912fb25eab62024ff5e4cc1ba93e87c8655846c860ac7f8"
+      },
+      "numeric_result": false,
+      "classification": "UNKNOWN_CAUSE: actual extra physical5 PID3229636 historical cgroup/start/exe unavailable; confirmed observer-order defect lost pre-guard diagnostics. No paper rejection.",
+      "release": "independently stopped Pid0 noExec OOMfalse 052b; does not rewrite original cleanup failure"
+    },
+    "GE064": {
+      "status": "FAILED",
+      "operation_missing": "0535 no longer in operation backend; actual saved terminal owner authoritative",
+      "owner": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-NEW48H_064_NPU_001/RESULT.json",
+        "bytes": 353777,
+        "sha256": "495a818e3313ff2a07613c95e7ea20d9c5f1b883c88c254799a22ad7e3def29e"
+      },
+      "numeric_result": false,
+      "primary": "actual precise PID/start/cgroup/argv ownership",
+      "release": true,
+      "classification": "ADAPTATION_IMPLEMENTATION: DEVICE receipt published after empty SMI observation; handshake checked stale empty proof. Minimal successor pending independent review; no numeric or bootstrap hypothesis conclusion."
+    },
+    "DL_A007": {
+      "status": "NUMERIC_FAILED",
+      "build_pass": true,
+      "Meta_pass": true,
+      "physical": 5,
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-reduce-A-new48h-v1-007/BOUND_NUMERIC_SOURCE.json",
+        "bytes": 7174,
+        "sha256": "64dd5cfb6f172c0e863183cc204413d03f807a11db7fca8df302df78c86b7da2"
+      },
+      "owner": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlnative-reduce007-numeric-new48h-MAIN-20261015-001/RESULT.json",
+        "bytes": 1614,
+        "sha256": "caed6149e7a8fcec31d2e2eac15d194001051c0959de9d0165ca04bef8ebaa41"
+      },
+      "B16_step3_output_relative": 0.003105590062111801,
+      "output_gate": 0.00303,
+      "state_relative": 3.864163302108374e-8,
+      "state_gate": 7.92e-7,
+      "independent_consumer_failed": true,
+      "all_owned_released": true,
+      "scope": "Native-style reduction-only hypothesis did not fix frozen native-peer output gate; full160 not executed. Not paper-wide no-go."
+    }
+  }
+}
