@@ -1,0 +1,429 @@
+{
+  "schema": "hypic-candidate-entry/v1",
+  "candidate": "C1-layer-precommit-completion",
+  "checkpoint": "4fb6676b",
+  "state": "host-helper-only-not-runtime-candidate",
+  "primary_metric": "weighted TPOT original40/c16/32768/fixed1024",
+  "latest_r7_ms": 441.9815987353487,
+  "historical_native_ms": 284.11462358545026,
+  "required_reduction_to_historical_native": 0.3571799722015726,
+  "profile_api_probe": "exec-0000000000000667",
+  "measurements": [
+    {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r6-r1-analysis-r2/rank0_57_20261015081748164_ascend_pt/ASCEND_PROFILER_OUTPUT/api_statistic.csv",
+      "sync_api_seconds": 25.425493869999997,
+      "rows": [
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeDeviceWithTimeout",
+          "Time(us)": "3643259.3",
+          "Count": "8705",
+          "Avg(us)": "418.525",
+          "Min(us)": "24.23",
+          "Max(us)": "252682.66",
+          "Variance": "9492830.602"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeEvent",
+          "Time(us)": "748899.62",
+          "Count": "24",
+          "Avg(us)": "31204.151",
+          "Min(us)": "4.07",
+          "Max(us)": "279127.72",
+          "Variance": "5172919541.871"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeStream",
+          "Time(us)": "20782371.45",
+          "Count": "13328",
+          "Avg(us)": "1559.302",
+          "Min(us)": "2.21",
+          "Max(us)": "973737.22",
+          "Variance": "284185540.077"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeStreamWithTimeout",
+          "Time(us)": "250963.5",
+          "Count": "20016",
+          "Avg(us)": "12.538",
+          "Min(us)": "1.71",
+          "Max(us)": "535.54",
+          "Variance": "501.926"
+        }
+      ]
+    },
+    {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r6-r1-analysis-r2/rank1_58_20261015081748163_ascend_pt/ASCEND_PROFILER_OUTPUT/api_statistic.csv",
+      "sync_api_seconds": 23.89327565,
+      "rows": [
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeDeviceWithTimeout",
+          "Time(us)": "3364141.56",
+          "Count": "8705",
+          "Avg(us)": "386.461",
+          "Min(us)": "22.74",
+          "Max(us)": "12527.21",
+          "Variance": "2172397.803"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeEvent",
+          "Time(us)": "125.99",
+          "Count": "12",
+          "Avg(us)": "10.499",
+          "Min(us)": "6.33",
+          "Max(us)": "29.25",
+          "Variance": "35.87"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeStream",
+          "Time(us)": "20285644.11",
+          "Count": "13328",
+          "Avg(us)": "1522.032",
+          "Min(us)": "2.31",
+          "Max(us)": "944866.49",
+          "Variance": "224170546.832"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeStreamWithTimeout",
+          "Time(us)": "243363.99",
+          "Count": "20016",
+          "Avg(us)": "12.158",
+          "Min(us)": "1.8",
+          "Max(us)": "432.57",
+          "Variance": "481.324"
+        }
+      ]
+    },
+    {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r6-r1-analysis-r2/rank2_59_20261015081748163_ascend_pt/ASCEND_PROFILER_OUTPUT/api_statistic.csv",
+      "sync_api_seconds": 22.98269964,
+      "rows": [
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeDeviceWithTimeout",
+          "Time(us)": "3352613.24",
+          "Count": "8705",
+          "Avg(us)": "385.137",
+          "Min(us)": "22.28",
+          "Max(us)": "16439.91",
+          "Variance": "2175187.348"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeEvent",
+          "Time(us)": "99.94",
+          "Count": "12",
+          "Avg(us)": "8.328",
+          "Min(us)": "4.73",
+          "Max(us)": "12.84",
+          "Variance": "3.493"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeStream",
+          "Time(us)": "19387469.76",
+          "Count": "13328",
+          "Avg(us)": "1454.642",
+          "Min(us)": "2.01",
+          "Max(us)": "1045102.5",
+          "Variance": "170007791.973"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeStreamWithTimeout",
+          "Time(us)": "242516.7",
+          "Count": "20016",
+          "Avg(us)": "12.116",
+          "Min(us)": "1.62",
+          "Max(us)": "438.97",
+          "Variance": "493.86"
+        }
+      ]
+    },
+    {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r6-r1-analysis-r2/rank3_60_20261015081748163_ascend_pt/ASCEND_PROFILER_OUTPUT/api_statistic.csv",
+      "sync_api_seconds": 23.26929357,
+      "rows": [
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeDeviceWithTimeout",
+          "Time(us)": "3785957.1",
+          "Count": "8705",
+          "Avg(us)": "434.918",
+          "Min(us)": "18.56",
+          "Max(us)": "413612.08",
+          "Variance": "21779605.444"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeEvent",
+          "Time(us)": "87.92",
+          "Count": "12",
+          "Avg(us)": "7.327",
+          "Min(us)": "4.13",
+          "Max(us)": "13.15",
+          "Variance": "5.631"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeStream",
+          "Time(us)": "19238455.26",
+          "Count": "13328",
+          "Avg(us)": "1443.462",
+          "Min(us)": "2.07",
+          "Max(us)": "802438.97",
+          "Variance": "146048755.074"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeStreamWithTimeout",
+          "Time(us)": "244793.29",
+          "Count": "20016",
+          "Avg(us)": "12.23",
+          "Min(us)": "1.78",
+          "Max(us)": "367.91",
+          "Variance": "490.546"
+        }
+      ]
+    },
+    {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r6-privatewarm-r1-analysis-r1/rank0_59_20261015091112107_ascend_pt/ASCEND_PROFILER_OUTPUT/api_statistic.csv",
+      "sync_api_seconds": 22.341795790000003,
+      "rows": [
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeDeviceWithTimeout",
+          "Time(us)": "3314719.26",
+          "Count": "8897",
+          "Avg(us)": "372.566",
+          "Min(us)": "24.23",
+          "Max(us)": "42790.26",
+          "Variance": "2165827.177"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeEvent",
+          "Time(us)": "302791.29",
+          "Count": "24",
+          "Avg(us)": "12616.304",
+          "Min(us)": "6.5",
+          "Max(us)": "43831.54",
+          "Variance": "222666711.926"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeStream",
+          "Time(us)": "18482303.12",
+          "Count": "13518",
+          "Avg(us)": "1367.237",
+          "Min(us)": "2.06",
+          "Max(us)": "470507.05",
+          "Variance": "71510593.961"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeStreamWithTimeout",
+          "Time(us)": "241982.12",
+          "Count": "20282",
+          "Avg(us)": "11.931",
+          "Min(us)": "1.7",
+          "Max(us)": "359.1",
+          "Variance": "455.36"
+        }
+      ]
+    },
+    {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r6-privatewarm-r1-analysis-r1/rank1_60_20261015091112106_ascend_pt/ASCEND_PROFILER_OUTPUT/api_statistic.csv",
+      "sync_api_seconds": 21.589511920000003,
+      "rows": [
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeDeviceWithTimeout",
+          "Time(us)": "3353911.45",
+          "Count": "8897",
+          "Avg(us)": "376.971",
+          "Min(us)": "24.23",
+          "Max(us)": "43770.99",
+          "Variance": "2195297.281"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeEvent",
+          "Time(us)": "96.56",
+          "Count": "12",
+          "Avg(us)": "8.047",
+          "Min(us)": "6.93",
+          "Max(us)": "10.62",
+          "Variance": "1.25"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeStream",
+          "Time(us)": "17992762.72",
+          "Count": "13518",
+          "Avg(us)": "1331.023",
+          "Min(us)": "2",
+          "Max(us)": "446653.87",
+          "Variance": "64482366.932"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeStreamWithTimeout",
+          "Time(us)": "242741.19",
+          "Count": "20282",
+          "Avg(us)": "11.968",
+          "Min(us)": "1.63",
+          "Max(us)": "341.87",
+          "Variance": "470.943"
+        }
+      ]
+    },
+    {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r6-privatewarm-r1-analysis-r1/rank2_61_20261015091112107_ascend_pt/ASCEND_PROFILER_OUTPUT/api_statistic.csv",
+      "sync_api_seconds": 21.76310356,
+      "rows": [
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeDeviceWithTimeout",
+          "Time(us)": "3319841.08",
+          "Count": "8897",
+          "Avg(us)": "373.142",
+          "Min(us)": "22.86",
+          "Max(us)": "17676.49",
+          "Variance": "1997529.536"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeEvent",
+          "Time(us)": "103.45",
+          "Count": "12",
+          "Avg(us)": "8.621",
+          "Min(us)": "6.11",
+          "Max(us)": "13.97",
+          "Variance": "4.125"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeStream",
+          "Time(us)": "18208084.64",
+          "Count": "13518",
+          "Avg(us)": "1346.951",
+          "Min(us)": "2.04",
+          "Max(us)": "334761.36",
+          "Variance": "57442788.712"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeStreamWithTimeout",
+          "Time(us)": "235074.39",
+          "Count": "20282",
+          "Avg(us)": "11.59",
+          "Min(us)": "1.53",
+          "Max(us)": "342.71",
+          "Variance": "463.948"
+        }
+      ]
+    },
+    {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r6-privatewarm-r1-analysis-r1/rank3_62_20261015091112106_ascend_pt/ASCEND_PROFILER_OUTPUT/api_statistic.csv",
+      "sync_api_seconds": 21.33691848,
+      "rows": [
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeDeviceWithTimeout",
+          "Time(us)": "3288913.02",
+          "Count": "8897",
+          "Avg(us)": "369.665",
+          "Min(us)": "25.97",
+          "Max(us)": "12547.82",
+          "Variance": "1948893.561"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeEvent",
+          "Time(us)": "134.82",
+          "Count": "12",
+          "Avg(us)": "11.235",
+          "Min(us)": "5.43",
+          "Max(us)": "41.45",
+          "Variance": "85.14"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeStream",
+          "Time(us)": "17804955.1",
+          "Count": "13518",
+          "Avg(us)": "1317.129",
+          "Min(us)": "2.08",
+          "Max(us)": "417769.37",
+          "Variance": "55400097.975"
+        },
+        {
+          "Device_id": "host",
+          "Level": "acl",
+          "API Name": "aclrtSynchronizeStreamWithTimeout",
+          "Time(us)": "242915.54",
+          "Count": "20282",
+          "Avg(us)": "11.977",
+          "Min(us)": "1.96",
+          "Max(us)": "347.8",
+          "Variance": "443.338"
+        }
+      ]
+    }
+  ],
+  "interpretation": [
+    "API aggregates are per rank, not additive across ranks and not non-overlapped wall time.",
+    "All-sync elimination ceiling in profiled slices is only 21-25 seconds/rank; actual removable cost is lower because waits include necessary compute.",
+    "Profile slices are R6/64token diagnostics, not R7 formal1024. No validated end-to-end percentage bound or attribution to C1 alone.",
+    "Reject synchronization-only as a promised route to service acceptance; do not launch full matrix from this evidence."
+  ],
+  "source_census": {
+    "native_boundary": "2 explicit device synchronizations per run_live; hot plan one or two windows",
+    "terminal_finite": "3 scalar decisions per hot/native request; native1 batch also 3 before return",
+    "existing_commit": "one final device synchronize after actual cache writes, must remain"
+  },
+  "named_successor": "C1 same-stream layer preparation plus one precommit decision; requires exact source-bound default-off integration, full-path serialized shadow, measured nonoverlapped phase attribution before promotion",
+  "helper_scope": "collect terminal PRIVATE output/state/conv references; one scalar finite decision before any native writes. No runtime imports, no NPU launch, no math/cache/identity/lease changes.",
+  "next_gate": "integrate one default-off mechanism preserving final cache-commit barrier; CPU order/nonfinite controls, source package and independent all-rank canary required",
+  "rollback": "helper not imported by runtime; existing101 source manifests untouched",
+  "deadline_utc": "2026-10-15T19:04:09Z"
+}
