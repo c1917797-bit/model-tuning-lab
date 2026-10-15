@@ -1,0 +1,38 @@
+{
+  "schema": "hypic-r15-host-readiness/v1",
+  "state": "HOST_TESTED_NOT_NPU_VALIDATED",
+  "regression": {
+    "operation": "exec-0000000000000893",
+    "tests": 496,
+    "passed": true
+  },
+  "static": {
+    "operation": "exec-0000000000000892",
+    "contracts": 12,
+    "source_bindings": 141,
+    "safety_AST_unchanged": true
+  },
+  "route_check": "exec-0000000000000894",
+  "manifest_sha256": "f28eca11c2f372d906a45455a3faf1e0a4d6268ed09b5fae24403737b7dd1bb7",
+  "controller": "formal_r15_tp4.py",
+  "controller_delta": "reviewed native controller plus exact owned /scratch/compiled-cache TRITON_CACHE_DIR, official image unchanged; no diagnostic controller masquerading as formal",
+  "mode_delta": "explicit defaultOFF performance mode disables serialized C1/native shadow and stage capture only; packed formula/private finite guard/actual slot order/short-prefix policy preserved; existing canary still requires shadow",
+  "prior_numerical": "R14 0857 and PDC0887 separate frozen source checkpoints; no whole-model quality claim",
+  "order": [
+    "G3/R1",
+    "G1/R1",
+    "G2/R1",
+    "G4/R1",
+    "G4/R2",
+    "G2/R2",
+    "G1/R2",
+    "G3/R2",
+    "G3/R3",
+    "G1/R3",
+    "G2/R3",
+    "G4/R3"
+  ],
+  "reason_first_G3": "first validate newly timed treatment full40 before spending remaining window on matched baseline; no comparison until both same-source arms independently valid",
+  "deadline": "2026-10-15T19:04:09Z",
+  "incomplete_scope": "all12 matrix,full127x3 natural quality and lifecycle still required; deadline cannot silently reduce these"
+}

@@ -8,7 +8,7 @@ import hashlib,inspect
 def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=False,
                         layer_completion=False,layer_shadow=False,packed_wave=False,
                         first_divergence=False,first_divergence_head_policy="head0",
-                        short_prefix_policy="chunk64"):
+                        short_prefix_policy="chunk64",performance_mode=False):
     if not enabled:return lambda:None
     if type(packed_wave) is not bool:raise ValueError('explicit packed C1 boolean required')
     if type(first_divergence)is not bool or first_divergence and not packed_wave:
@@ -18,8 +18,9 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
         raise ValueError("residual head policy requires explicit stage probe")
     if short_prefix_policy not in ("chunk64","canonical_recurrent_le64") or short_prefix_policy!="chunk64" and not packed_wave:
         raise ValueError("canonical short prefix requires explicit packed C1")
-    if packed_wave and not (native_decode_batch and layer_completion and layer_shadow):
-        raise ValueError('packed C1 canary requires native1 batch, finite gate and shadow')
+    from independent_c1_execution_mode import validate_c1_mode
+    validate_c1_mode(packed=packed_wave,native=native_decode_batch,completion=layer_completion,
+                     shadow=layer_shadow,probe=first_divergence,performance=performance_mode)
     if type(native_decode_batch) is not bool:raise ValueError('native decode batch boolean required')
     if type(layer_completion) is not bool or type(layer_shadow) is not bool:
         raise ValueError('C1 completion/shadow booleans required')
@@ -74,7 +75,8 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
         if native_decode_batch:
             from independent_native_decode_prepare import prepare_native_decode
             batched=prepare_native_decode(self,plans,associations,mixed_qkv,b,a,
-                raw[self.prefix],shadowed=shadowed,emit=emit,**finite_kwargs)
+                raw[self.prefix],shadowed=shadowed,emit=emit,
+                validate_shadow=not performance_mode,**finite_kwargs)
         with ExitStack() as leases:
             packed={};packed_materials={};packed_layout=None
             probe=None;probe_kwargs={}
@@ -95,7 +97,7 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
                 probe=packed_backend.pop('probe',None)
             hot_count=sum(not isinstance(p,NativeQueryPlan) for p in plans if p.request_id in packed)
             packed_shadow_key=(self.prefix,min(2,hot_count),len(packed)>1)
-            check_packed_shadow=bool(packed) and packed_shadow_key not in packed_shadowed
+            check_packed_shadow=layer_shadow and bool(packed) and packed_shadow_key not in packed_shadowed
             for plan,assoc in zip(plans,associations):
                 is_native=isinstance(plan,NativeQueryPlan)
                 generation=None;material=None

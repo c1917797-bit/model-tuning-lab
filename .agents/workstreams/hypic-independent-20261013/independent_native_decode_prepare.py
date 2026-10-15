@@ -17,7 +17,8 @@ def shadow_metrics(actual,expected):
     return {"max_abs":float(delta.max()),"rms":float(delta.square().mean().sqrt()),
             "max_scaled":float((delta/allowed).max()),"passed":bool((delta<=allowed).all())}
 
-def prepare_native_decode(layer,plans,associations,mixed_qkv,b,a,metadata,*,shadowed,emit,finite_check=None):
+def prepare_native_decode(layer,plans,associations,mixed_qkv,b,a,metadata,*,shadowed,emit,finite_check=None,validate_shadow=True):
+    if type(validate_shadow)is not bool:raise ValueError('explicit native shadow boolean required')
     offset=0;rows=[];chosen=[]
     for plan,assoc in zip(plans,associations):
         if isinstance(plan,NativeQueryPlan) and plan.scheduled_tokens==1:
@@ -40,7 +41,7 @@ def prepare_native_decode(layer,plans,associations,mixed_qkv,b,a,metadata,*,shad
             for key,(output,state,conv) in result.items()}
     # Validate each layer's first singleton AND first multi-request group.
     shadow_key=(layer.prefix,len(rows)>1)
-    if shadow_key not in shadowed:
+    if validate_shadow and shadow_key not in shadowed:
         from independent_native_boundary import make_boundary_runner
         metrics=[]
         for i,row in enumerate(rows):

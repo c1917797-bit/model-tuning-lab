@@ -43,6 +43,7 @@ def c1_install_route(config):
     completion=config.pop('c1_layer_completion_barrier',False)
     shadow=config.pop('c1_layer_shadow_validation',False)
     packed=config.pop('c1_packed_wave',False)
+    performance=config.pop('c1_performance_mode',False)
     prefix_policy=config.pop('c1_short_prefix_terminal_policy','chunk64')
     if prefix_policy not in ('chunk64','canonical_recurrent_le64') or prefix_policy!='chunk64' and not packed:
         raise ValueError('canonical short prefix requires explicit packed C1')
@@ -53,8 +54,9 @@ def c1_install_route(config):
     if type(probe)is not bool or probe and not packed:
         raise ValueError('explicit diagnostic stage switch requires packed C1')
     if type(packed) is not bool:raise ValueError('explicit packed C1 boolean required')
-    if packed and not (native_batch and completion and shadow):
-        raise ValueError('packed C1 canary requires native1 batch, completion and shadow')
+    from independent_c1_execution_mode import validate_c1_mode
+    validate_c1_mode(packed=packed,native=native_batch,completion=completion,
+                     shadow=shadow,probe=probe,performance=performance)
     if type(completion) is not bool or type(shadow) is not bool:
         raise ValueError('explicit C1 completion/shadow booleans required')
     if shadow and not completion:raise ValueError('C1 shadow requires completion treatment')
@@ -63,10 +65,11 @@ def c1_install_route(config):
         return install_compact_gdn(stage,enabled=enabled,emit=emit,native_decode_batch=native_batch,
             layer_completion=completion,layer_shadow=shadow,packed_wave=packed,
             first_divergence=probe,first_divergence_head_policy=head_policy,
-            short_prefix_policy=prefix_policy)
+            short_prefix_policy=prefix_policy,performance_mode=performance)
     install.c1_layer_completion_barrier=completion
     install.c1_layer_shadow_validation=shadow
     install.c1_packed_wave=packed
+    install.c1_performance_mode=performance
     install.c1_short_prefix_terminal_policy=prefix_policy
     install.c1_first_divergence=probe
     install.c1_first_divergence_head_policy=head_policy
@@ -120,6 +123,7 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
               'c1_layer_completion_barrier':install_compact_gdn.c1_layer_completion_barrier,
               'c1_layer_shadow_validation':install_compact_gdn.c1_layer_shadow_validation,
               'c1_packed_wave':install_compact_gdn.c1_packed_wave,
+              'c1_performance_mode':install_compact_gdn.c1_performance_mode,
               'c1_first_divergence':install_compact_gdn.c1_first_divergence,
               'c1_short_prefix_terminal_policy':install_compact_gdn.c1_short_prefix_terminal_policy,
               'c1_first_divergence_head_policy':install_compact_gdn.c1_first_divergence_head_policy,
