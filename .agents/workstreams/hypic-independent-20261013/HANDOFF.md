@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST0838 TERMINALexit0/valid16/216clean/own9606release.084d independent base
+audit succeeds but packedcoverage FAIL due HTTP IDs vs suffixed worker IDs.
+084f exactAPIintersection0, strictbijective16map +every16*4*48records confirmed.
+No numericalfailure observed. DoNOTdeclare fullacceptance yet.084e frozenprefix
+audit STILLrunning exacthandle; doNOTduplicate. Add postrun ID adapter ONLY,
+leave ALL132boundsources/rawcontract unchanged; unchanged packedauditor gets
+strictmappedworkerIDs, all other checks unchanged. Retain084dfailure and bind
+newadapterhash. PlanC1_PACKED_R14_HTTP_ID_AUDIT_PLAN_20261015.md beforecode.
+No newNPUjob/retry. Fullscope/deadline19:04:09UTC unchanged.
+
 083f actual17:46:47UTC physical0-3 hostPIDs4192402-4192405 -> containerNSpid57-60,
 all exact9606ea9fcgroups/four matching sourcebound canonical-prefix-policy installs.
 Foreignempty. SavedC1_SHORT_PREFIX_ALIGNED_R1_LIVE_NAMESPACE.json BEFOREexit;
