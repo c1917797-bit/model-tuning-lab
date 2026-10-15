@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+While061blive:0620 eight terminal/batch audit controls PASS. New
+audit_native_decode_terminal.py --contract NAME [--live-release] separates
+historicalreceipt acceptance from freshphysicalrelease. Offline replay of05fa
+does notclaim currentcardsidle while061bruns. Frozen103runtimebytes untouched.
+061f actualdisabledCID07b3c605...Env/Mounts/device receipt retained.
+Desktop Git sandbox read failedgetaddrinfo; one approvedoutside-sandbox read
+verified remote stillbf71afe1... . HostTLS not retried. Preparing normalbranch
+checkpoint relay only, NOTmain/deployment/fullgoal acceptance.
+
+
 CURRENT same-source nativebatch DISABLED control exec-000000000000061b,
 originalma a6109 forcedirect,checkpointac21e489.061a11:40:32UTC103bindings,
 newroot/physical0-3/8233/HCCLidle PASS. Manifest7bac8e205fccda0e...
