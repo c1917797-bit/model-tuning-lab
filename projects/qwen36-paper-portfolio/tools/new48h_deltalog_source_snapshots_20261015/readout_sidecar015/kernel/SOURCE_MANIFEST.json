@@ -1,0 +1,47 @@
+{
+  "schema": "deltalog-readout-sidecar-source/v015",
+  "files": [
+    {
+      "path": "build_pair.py",
+      "bytes": 4490,
+      "sha256": "9e05aec8a326025e0df780283f0d457ba6fcbb48c06182ba84073130e3c00bab"
+    },
+    {
+      "path": "readout_sidecar_v015/CMakeLists.txt",
+      "bytes": 5033,
+      "sha256": "758565d13ea64ee4a5329df0b3cb396c0c21c928908a894e36a976dcf128195d"
+    },
+    {
+      "path": "readout_sidecar_v015/op_extension/ops.h",
+      "bytes": 730,
+      "sha256": "e9b1642326a2307a2ae3919462ea1ae8778b4cf2083c05d9dc5aa6650e13569a"
+    },
+    {
+      "path": "readout_sidecar_v015/op_extension/qwen36_gdn_deltalog_decode_readout_sidecar_v015_torch.cpp",
+      "bytes": 9115,
+      "sha256": "00301976fea374bae168eec75d619137d7e78e87b166d988b0945deaa8a64256"
+    },
+    {
+      "path": "readout_sidecar_v015/op_extension/register.cpp",
+      "bytes": 1317,
+      "sha256": "4b91c06c476f55cc13f3b1e329715c4a735040e7b8e768999ba0bd6a3a68760e"
+    },
+    {
+      "path": "readout_sidecar_v015/op_kernel/qwen36_gdn_deltalog_decode_readout_sidecar_v015_kernel.asc",
+      "bytes": 1096,
+      "sha256": "8c8dc733e567b6645f4b7c0625af270325096d7b5008358dc6ad40611e1bf1a3"
+    },
+    {
+      "path": "readout_sidecar_v015/op_kernel/qwen36_gdn_deltalog_decode_readout_sidecar_v015_tiling.h",
+      "bytes": 396,
+      "sha256": "0881cfc0de23758205c7a739d9d6a921fedcafb62a3dec1cc3aa552788153a46"
+    },
+    {
+      "path": "readout_sidecar_v015/op_kernel/qwen36_gdn_deltalog_decode_readout_sidecar_v015.h",
+      "bytes": 24132,
+      "sha256": "9c164c112e275ca09cec0e6baa6392758549fef25b361bef439b4ec07bf1907a"
+    }
+  ],
+  "default_enabled": false,
+  "origin": "B010 exact mathematical source plus independent debugFP32 sidecar only; no DSO artifact yet"
+}

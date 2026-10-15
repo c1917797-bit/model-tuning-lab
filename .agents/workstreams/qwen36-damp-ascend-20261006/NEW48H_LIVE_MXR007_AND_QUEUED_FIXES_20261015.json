@@ -1,42 +1,21 @@
 {
   "schema": "ascend.new48h.live-handoff/v1",
-  "as_of_utc": "2026-10-15T11:20:00Z",
+  "as_of_utc": "2026-10-15T14:02:00Z",
   "cutoff_utc": "2026-10-16T07:18:17Z",
   "goal_active": true,
   "final_acceptance": false,
   "active_MAIN_job": {
-    "operation_id": "exec-00000000000005ed",
-    "status": "running_last_launch",
+    "operation_id": "exec-00000000000006d7",
+    "status": "last_observed_running_CPU_preflight_not_NPU",
     "source": {
-      "bytes": 11131,
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-direct-oracle-holdout-new48h-v1-013/SOURCE_MANIFEST.json",
-      "sha256": "733135477779a876d5a5adab90e9d6c97a57f743303ceffe01d18ec864bb0f93"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-originalA-residual-savedframe-v1-027-LF1/SOURCE_MANIFEST.json",
+      "bytes": 11621,
+      "sha256": "9fad189b3f8d7b746f7491e1c17c2768d7c27246d3b61016272b0bb48bbe641a"
     },
-    "physical": [
-      5
-    ],
-    "logical": [
-      0
-    ],
-    "scope": "New frozen unseen-seed direct CPU64-to-BF16 operational oracle; B16x4 smoke, B1x160+B16x160 lifecycle then separate Devices[] independent consumer. Not fullGDN/model/performance.",
-    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-direct-oracle013-numeric-new48h-MAIN-20261015-001",
-    "phase_seconds": 2880,
-    "cleanup_seconds": 180,
-    "poll_only_existing_handle": true,
-    "actual_device_stage": "pending fresh device receipt; running control handle alone is not NPU execution"
+    "physical": [],
+    "scope": "actual same-image precision API/CLI/selection; no numerical/model/performance promotion"
   },
   "resource_admission": {
-    "launch_operation": "exec-0000000000000555",
-    "old_owned_CIDs_released": [
-      "71ed368727fa4c1d31f6f4146a94a277eac82e5373a11b26622a7f80f80a25cf",
-      "572d093979ed72ec14cc939e1d9f047ed9dfd841c5fa00582455b96eddfad3f5"
-    ],
-    "model_floor_GiB": 56.5,
-    "model_cap_GiB": 48,
-    "CPU_floor_GiB": 16.5,
-    "reserve_GiB": 8,
-    "fresh_source_audit": "0553 exit0 46bytes/AST 718refs 28inverse",
-    "all4_exclusive": true,
     "physical_allowed": [
       4,
       5,
@@ -48,7 +27,11 @@
       1,
       2,
       3
-    ]
+    ],
+    "current_NPU_job": null,
+    "point_in_time_admission_operation": "exec-00000000000006c1",
+    "latest_owned_release": "06c3 020repair2 NPU4 and postrelease CPU consumed PASS, both cleanup errors[]; 06d1 composite022 CPU complete/released errors[]",
+    "current_scheduling": "MXR027-LF1 actual CPU preflight; DL024repair2 known transitive mount source repair before image/NPU; no current owned NPU workload; no continuous-utilization claim"
   },
   "queued": {
     "MXR012": {
@@ -113,7 +96,7 @@
       "requirements": "actual no-thinking rendered input, paired source-qualified smoke/cost, frozen full ID catalog, exact input reused both arms, real sandbox/decoder and full merger"
     },
     "accuracy008": {
-      "status": "deployed_not_executed",
+      "status": "historical_failed",
       "source": {
         "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/accuracy-render-only-owned-new48h-v1-008/SOURCE_MANIFEST.json",
         "bytes": 15000,
@@ -130,17 +113,102 @@
       "status": "local_prepared_not_deployed",
       "source_sha256": "2eaa784d2bd0adc52cd1c9ece63ca2a77ecf67834cef1da8fbf95389a0480657",
       "scope": "Actual B010/013 binding, original mixed/slot/copy fixture plus reachable step5 zero reset. Existing native-peer/CPU64 gates retained; not qualified by013 alone."
+    },
+    "accuracy010": {
+      "status": "actual_failed_HumanEval0_official_template_trim_boundary_contract",
+      "source": {
+        "bytes": 18805,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/accuracy-render-only-owned-new48h-v1-010/SOURCE_MANIFEST.json",
+        "sha256": "21559a72196c1be7f3ffee62cbc7844c300a5f16e01e7397ce9070cf9310d2ab"
+      },
+      "scope": "Explicit return_dict=False and actual API source receipts; original inputs/template/content/scorer unchanged. Must execute fresh Devices[] full15525 rendering and independent consumption.",
+      "operation": "exec-0000000000000699"
+    },
+    "DL019": {
+      "status": "actual_original_numeric325_and_strict324_complete_original137_guard_supplied_by020repair2",
+      "operation": "exec-000000000000066d",
+      "strict_pass": false,
+      "scope": "original strict false retained; composite022 performs actual same-input raw join rather than relabel019"
+    },
+    "DL017_service": {
+      "status": "local_prepared_not_admitted",
+      "scope": "Diagnostic TP4 trueQwen binding only, requires actual valid full016 receipts plus pending stricter audit. Per-token D2H disqualifies formal timing."
+    },
+    "DL018_production": {
+      "status": "source_driven_preparation_not_ready",
+      "scope": "Actual builder/Common have no CPU blocktable mirror; true runner commit->Common CPU blocktable origin under source audit. Cannot inventCPU IDs or simply delete guards."
+    },
+    "DL020_repair2": {
+      "status": "actual_NPU4_single137_and_independent_guard_PASS_released",
+      "operation": "exec-00000000000006c3",
+      "owner": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl137-guard020-physical4-repair2-numeric-new48h-MAIN-20261015-001/RESULT.json",
+        "bytes": 1636,
+        "sha256": "f1a4828f8abd3d91a789c3c4f262143cf0cb90b71899c4ea8e333e74d69f797f"
+      },
+      "scope": "One original137 frame only; previous324 not rerun; full bridge/runtime graph/model not qualified"
+    },
+    "DL022": {
+      "status": "actual_controlled_CPU_component_certificate_PASS_released",
+      "operation": "exec-00000000000006d1",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/BOUND_SOURCE.json",
+        "bytes": 162171,
+        "sha256": "b5f4c0798f2fab7fb3c706666c38b6eab7318fa6a55e40191dd419bb6aaacb6c"
+      },
+      "owner": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-composite022-cpu-new48h-MAIN-20261015-001/RESULT.json",
+        "bytes": 1372,
+        "sha256": "9d6740da1d95f281aab6da1f459e1540a798652af695ee5ec6922e35d4be6c61"
+      },
+      "certificate": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-composite022-cpu-new48h-MAIN-20261015-001/native/result/CERTIFICATE.json",
+        "bytes": 44169,
+        "sha256": "2a5a51ecd51727d86a574a05380e869cdb9fc12cc2974df5b7724d3ca432afd5"
+      },
+      "strict325_composed": true,
+      "model_ready": false,
+      "graph": false
+    },
+    "DL023_repair1": {
+      "status": "MAIN11tests_PASS_not_deployed",
+      "template_sha256": "b002f6417ce6181cae95ece22e32c5528ebaa764746cb2229543fb5e414cb8d6",
+      "requires": "actual024 native bridge and actual full model dispatch/lifecycle; known old023 keyword and pin defects preserved"
+    },
+    "DL024_repair1": {
+      "status": "deployed_not_run_transitive022_mfiles_mount_gap_found_before_CPU",
+      "requires": "minimal024repair2 mount closure and software/actual sameimage then16/160"
+    },
+    "accuracy011": {
+      "status": "actual_template_HumanEval0_reproduced_local22tests_not_deployed",
+      "source_sha256": "b751a9656ab827aa55f2e10e3c5a9ba68bdf3d65316faba4c3365c6699fd0e2a",
+      "requires": "actual sameimage render15525 plus independent consumption; no scores"
+    },
+    "accuracy013": {
+      "status": "local24tests_prepared_not_ready",
+      "requires": "actual022, latest024repair2 full160 and023 model binding, no-thinking/max2048normalEOS generative MMLU protocol explicit; sameimage constructor pending"
+    },
+    "MXR027_LF1": {
+      "operation_id": "exec-00000000000006d7",
+      "status": "last_observed_running_CPU_preflight_not_NPU",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-originalA-residual-savedframe-v1-027-LF1/SOURCE_MANIFEST.json",
+        "bytes": 11621,
+        "sha256": "9fad189b3f8d7b746f7491e1c17c2768d7c27246d3b61016272b0bb48bbe641a"
+      },
+      "physical": [],
+      "scope": "actual same-image precision API/CLI/selection; no numerical/model/performance promotion"
     }
   },
   "parallel_preparation": {
-    "gdn_paper_reassessment": "022 CPU-only actual020 savedraw recovery after observed incorrect Devices[] visibility",
-    "accuracy_input_repair": "Explicit independent MXR native-preserving contract, exact dyadic anchors/negatives and frozen saved-layer holdout; no old-gate relabel",
-    "ge_fullgdn_ready": "004 true existing cap48 Owned TP4 model diagnostic entry/CLI for003, exact real013 receipt binder, no new controller"
+    "gdn_paper_reassessment": "024repair2 real022files mount-closure repair",
+    "accuracy_input_repair": "013 actual DL task owner integration delivered24tests; new024pin awaits finalreview",
+    "ge_fullgdn_ready": "027LF1 delivered11tests; actual sameimage now MAIN"
   },
   "git": {
     "branch": "work/qwen36-damp-ascend-20261006",
     "last_confirmed_remote_commit": "09c4bb11",
-    "new_local_commit": "e007f435e92f44d47753e78e410bcd1c41bfa936",
+    "new_local_commit": "c37a4c8759056991f65528d6ad8c6adfd3865a26",
     "new_push_operation": "exec-0000000000000560",
     "new_push_exit": 128,
     "new_push_error": "could not read Username for https://github.com: No such device or address",
@@ -148,11 +216,11 @@
     "actual_credential_helper_configured": false
   },
   "missing": [
-    "Actual complete short gate with independently validated numerical contract; original016 failed not relabelled",
-    "Actual012 long/state and relevant lifecycle PASS",
-    "Actual qualified original-task shape coverage, not all fallback",
-    "Unprofiled fixed1024 matched wholemodel screening and 3pairs >=10%",
-    "Actual GSM8K/HumanEval/MMLU smoke then full <=1% loss"
+    "Actual complete native prefill/decode/copy lifecycle bridge16 then160 under022 qualification",
+    "Actual full model/plugin all4x48 and runtime slot/metadata/final-forward numerical/graph qualification",
+    "Profiler-off same common config fixed1024 matched screen then3pairs >=10%",
+    "Actual GSM8K/HumanEval/MMLU no-thinking/max2048normalEOS smoke and full <=1% per latest frozen objective",
+    "Normal push of coherent working-branch commits; last actual HTTPS push blocked by missing credentials"
   ],
   "safety": {
     "physical_allowed": [
@@ -170,28 +238,18 @@
     "no_new_HugeTLB_release": true,
     "no_foreign_stop": true,
     "continuous_utilization": "UNMEASURED",
-    "latest_protected_observation": "05d2 actual all0-7 no NPU process,4-7 HBM2865-2868MiB; point-in-time only, not current or whole-window idle claim. 0-3 remain protected even when idle."
+    "latest_protected_observation": "06c1 13:44UTC point snapshot all0-7 no compute; current declarations not occupation; actual020repair2 own-only cleanup verified. No foreign stop/no extra hugepage release."
   },
   "current_MAIN_job": {
-    "operation_id": "exec-00000000000005ed",
-    "status": "running_last_launch",
+    "operation_id": "exec-00000000000006d7",
+    "status": "last_observed_running_CPU_preflight_not_NPU",
     "source": {
-      "bytes": 11131,
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-direct-oracle-holdout-new48h-v1-013/SOURCE_MANIFEST.json",
-      "sha256": "733135477779a876d5a5adab90e9d6c97a57f743303ceffe01d18ec864bb0f93"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-originalA-residual-savedframe-v1-027-LF1/SOURCE_MANIFEST.json",
+      "bytes": 11621,
+      "sha256": "9fad189b3f8d7b746f7491e1c17c2768d7c27246d3b61016272b0bb48bbe641a"
     },
-    "physical": [
-      5
-    ],
-    "logical": [
-      0
-    ],
-    "scope": "New frozen unseen-seed direct CPU64-to-BF16 operational oracle; B16x4 smoke, B1x160+B16x160 lifecycle then separate Devices[] independent consumer. Not fullGDN/model/performance.",
-    "output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-direct-oracle013-numeric-new48h-MAIN-20261015-001",
-    "phase_seconds": 2880,
-    "cleanup_seconds": 180,
-    "poll_only_existing_handle": true,
-    "actual_device_stage": "pending fresh device receipt; running control handle alone is not NPU execution"
+    "physical": [],
+    "scope": "actual same-image precision API/CLI/selection; no numerical/model/performance promotion"
   },
   "historical_MXR007": {
     "operation_id": "exec-00000000000004cd",
@@ -438,6 +496,131 @@
         "sha256": "b48a9488ee63c079888b5f1262d38e0077d59eeafc25b0c0a8ffb2a235fae6e7"
       },
       "scope": "Actual sameimage CPU64 oracle/direct integer BF16 RNE controls/actual B010 Meta and mapped DSO; no NPU performance or task proof"
+    },
+    "DL013_NPU": {
+      "operation": "exec-00000000000005ed",
+      "status": "NUMERIC_FAILED",
+      "records": 302,
+      "batch16_first_failure": 137,
+      "output_point_error": 0.0030864197530864196,
+      "limit": 0.00303,
+      "state_relative_l2": 8.638618832272069e-8,
+      "independent_failure": true,
+      "released": true
+    },
+    "MXR022": {
+      "operation": "exec-0000000000000600",
+      "status": "DIAGNOSTIC_COMPLETE_PEER_FAILURE_CONFIRMED",
+      "attribution": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-saved020-recovery022-new48h-MAIN-20261015-001/cpu-preflight/producer/ATTRIBUTION.json",
+        "bytes": 31236,
+        "sha256": "67c8ffb46c9f448bfd1a679184370f9cd76ffd4eddf927f3065c37c79c0d55a6"
+      },
+      "scope": "Current candidate has additional real model-frame peer errors; native also fails parts of original CPU64 contract. Native-preserving021/023 not admitted."
+    },
+    "MXR025": {
+      "operation": "exec-0000000000000622",
+      "status": "DIAGNOSTIC_COMPLETE_NOT_NUMERIC_PASS",
+      "attribution": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-saved-frame025-NPU_001/cpu-consumer/ATTRIBUTION.json",
+        "bytes": 128898,
+        "sha256": "f7bbe6e077c955850fca6534409b7ac9958d39b6328911304f4e25d986da3bc8"
+      },
+      "candidate_peer_B": 0.0008518449509226394,
+      "candidate_peer_WY_w": 0.0027613275261581614,
+      "candidate_peer_WY_u": 0.0035691016328998995,
+      "candidate_peer_out": 0.004246367827878269,
+      "scope": "Three arms use same A/downstream kernels. First observed difference at BF16 solveB, first peer threshold breach at WY. Exact CPU64 inverse cast intervention also fails old full recurrence gates, so solver-only fix not automatic qualification."
+    },
+    "MXR026": {
+      "operation": "exec-000000000000064b",
+      "status": "CPU_ATTRIBUTION_COMPLETE",
+      "owner": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-input-rounding026-new48h-MAIN-20261015-001/RESULT.json",
+        "bytes": 2773,
+        "sha256": "26ce98871d29e8cbb8f88c72b0142846b5a99c6800609589f165a8020531eb7c"
+      },
+      "attribution": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-input-rounding026-new48h-MAIN-20261015-001/cpu-preflight/producer/ATTRIBUTION.json",
+        "bytes": 598170,
+        "sha256": "ee92e9d330b94bf6f100ca7163ec87484fa00c3e4e377e218cb5a681bbaea41c"
+      },
+      "negative_controls": 9,
+      "candidate_vs_A16_inverse_BF16": 0.0002888666202028651,
+      "candidate_vs_A32_inverse_BF16": 0.000851842386603646,
+      "native_vs_A32_inverse_BF16": 0.0000014461693585586043,
+      "scope": "A32->FP16 input loss is real; current compensated source has no original-A32 residual input. Remaining internal precision not isolated; no new kernel or numerical promotion."
+    },
+    "DL015_BUILD": {
+      "operation": "exec-000000000000062f",
+      "status": "ACTUAL_BUILD_PASS_NOT_NUMERIC",
+      "owner": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-readout-sidecar015-build-new48h-MAIN-20261015-001/RESULT.json",
+        "bytes": 2828,
+        "sha256": "37a82db3b25e15e08131476e56d6a2106dd0042855be43af18d6c808532b2c22"
+      },
+      "build": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-readout-sidecar015-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/RESULT.json",
+        "bytes": 5266,
+        "sha256": "718a977cd947f610e41db1d5cb5284f4ef0ce36e55a30c94c96f96b3dd013f1d"
+      },
+      "debug_library_sha256": "0d3400929262a16f6485cebc3fcf7e683fbff335af193df4754875091b915e2c",
+      "production_library_unchanged": true
+    },
+    "DL016_CPU": {
+      "operation": "exec-000000000000063e",
+      "status": "ACTUAL_CPU_META_PASS",
+      "owner": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-cpu-new48h-MAIN-20261015-001/RESULT.json",
+        "bytes": 1335,
+        "sha256": "0e81b2b330adcbef55495dd3732136ce1c6930f40c04339b78aee823757d1e6f"
+      },
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-precast-empirical-new48h-v1-016/BOUND_NUMERIC_SOURCE.json",
+        "bytes": 53261,
+        "sha256": "7d61ca178c78ee8d883d608d644931c555fe44b3ad36c5cdbfea71bb464a7045"
+      }
+    },
+    "DL016_NPU001": {
+      "operation": "exec-0000000000000641",
+      "status": "RESOURCE_INTERFERENCE_FAILURE_NOT_NUMERIC_VERDICT",
+      "owner_sha256": "594064f179939c5cedd6fb0c66e2a92440100d1ded90973c87e83ea1aa707d12",
+      "foreign_actual_SMI": "12:08:52Z physical5 ownPID962488/python3 and extraPID961100/python106MiB; prior native0-3 workers862507-10 protected",
+      "foreign_identity": "961100 departed before later /proc read; historical cgroup/owner unknown, not invented",
+      "cleanup": "ownCIDstoppedretained/Pid0/OOMfalse; original resource-release error preserved. ExtraPIDlaterabsent064d; freshidle0651 permitted one new002 trial, no foreign process stopped."
+    },
+    "DL016_NPU002": {
+      "operation_id": "exec-0000000000000652",
+      "status": "terminal_failed_independent_consumer_missing_RO_CPU_Meta_mount",
+      "owner": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-numeric-new48h-MAIN-20261015-002/RESULT.json",
+        "bytes": 1419,
+        "sha256": "9d31eb6afd3a489511360850e88041c2cf082c522b11e8ca1fdcc0b76f6caee7"
+      },
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-precast-empirical-new48h-v1-016/BOUND_NUMERIC_SOURCE.json",
+        "bytes": 53261,
+        "sha256": "7d61ca178c78ee8d883d608d644931c555fe44b3ad36c5cdbfea71bb464a7045"
+      },
+      "physical": [
+        5
+      ],
+      "logical": [
+        0
+      ],
+      "producer_324_plus_original137_pass": true,
+      "independent_pass": false,
+      "scope": "Actual precast FP32 empirical tested-domain only; original013 and failed016 owners unchanged. CPU-only recovery019 must consume unchanged raw. Missing regression137 guard/pointer receipts require supplementary one-frame evidence; no model/performance/task qualification."
+    },
+    "accuracy008": {
+      "operation": "exec-0000000000000608",
+      "status": "CPU_IMPORT_POLICY_FAILED",
+      "cause": "Actual Torch optional Triton helper catches ImportError, but old audit raised ValueError; repaired in009, not a model failure."
+    },
+    "accuracy009": {
+      "operation": "exec-0000000000000639",
+      "status": "CPU_CALLER_API_FAILED",
+      "cause": "Actual Transformers5.5.4 apply_chat_template default return_dict=True. Original renderer expected list without explicitly requesting it; minimal010 explicitFalse prepared, source unchanged images."
     }
   },
   "historical_MXR013": {
@@ -470,5 +653,36 @@
       "OOMKilled": false
     },
     "exact_candidate_cid": "3412fa2dbeef04f1d6336a5500a24fa1ac1672ac10e0e691a234b15073d651bd"
+  },
+  "historical_model_resource_admission": {
+    "launch_operation": "exec-0000000000000555",
+    "old_owned_CIDs_released": [
+      "71ed368727fa4c1d31f6f4146a94a277eac82e5373a11b26622a7f80f80a25cf",
+      "572d093979ed72ec14cc939e1d9f047ed9dfd841c5fa00582455b96eddfad3f5"
+    ],
+    "model_floor_GiB": 56.5,
+    "model_cap_GiB": 48,
+    "CPU_floor_GiB": 16.5,
+    "reserve_GiB": 8,
+    "fresh_source_audit": "0553 exit0 46bytes/AST 718refs 28inverse",
+    "all4_exclusive": true,
+    "physical_allowed": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "source_snapshots": {
+    "path": "projects/qwen36-paper-portfolio/tools/new48h_deltalog_source_snapshots_20261015",
+    "files": 34,
+    "actual_byte_exact_verification": "exec-000000000000065c exit0 all34match after apply_patch timeout; mutation was not repeated",
+    "production_release": false
   }
 }

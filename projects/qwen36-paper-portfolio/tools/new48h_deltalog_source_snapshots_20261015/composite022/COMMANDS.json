@@ -1,0 +1,12 @@
+{
+  "schema": "deltalog.composite-prepared-commands/v022",
+  "ready_for_qualification": false,
+  "missing": ["successful repaired physical4 guard actual owner Ref", "MAIN-reviewed repaired guard template Ref", "actual022 owned CPU execution and certificate"],
+  "bind": ["/usr/bin/python3", "-I", "-B", "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/bind.py", "--execute", "--template-sha256", "ACTUAL_DEPLOYED_SOURCE_TEMPLATE_SHA", "--guard-owner-ref", "ACTUAL_REPAIRED_GUARD_OWNER_REF3", "--reviewed-guard-template-ref", "MAIN_REVIEWED_REPAIRED_GUARD_TEMPLATE_REF3", "--output", "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/BOUND_SOURCE.json"],
+  "audit": ["/usr/bin/python3", "-I", "-B", "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/host.py", "--source-audit-only", "--owner-ref", "ACTUAL_BOUND022_REF3", "--target-source-ref", "SAME_ACTUAL_BOUND022_REF3", "--authority-ref", "FROZEN_NEW48H_AUTHORITY_REF3", "--stage", "cpu", "--host-cpu", "FRESH_HOST_CPU", "--guest-cpu", "FRESH_DISTINCT_GUEST_CPU", "--output", "FRESH_NONEXISTENT_RUN022_ROOT"],
+  "cpu": ["/usr/bin/python3", "-I", "-B", "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/host.py", "--execute", "--owner-ref", "ACTUAL_BOUND022_REF3", "--target-source-ref", "SAME_ACTUAL_BOUND022_REF3", "--authority-ref", "FROZEN_NEW48H_AUTHORITY_REF3", "--stage", "cpu", "--host-cpu", "FRESH_HOST_CPU", "--guest-cpu", "FRESH_DISTINCT_GUEST_CPU", "--output", "SAME_FRESH_NONEXISTENT_RUN022_ROOT"],
+  "consumer_api": "admit_receipt(ACTUAL_BOUND022_REF3, ACTUAL_RUN022_RESULT_REF3)",
+  "unresolved_placeholders_are_not_executable_authority": true,
+  "NPU": false,
+  "new_resource_controller": false
+}

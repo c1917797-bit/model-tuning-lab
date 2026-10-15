@@ -1,0 +1,80 @@
+{
+  "NPU": false,
+  "base_source_sha256": "0278e763414c3740d031f67c4b59093fde78cd6607b61846396ded115fc89228",
+  "logical": 0,
+  "math_changed": false,
+  "physical": 4,
+  "rows": [
+    {
+      "exact_inverse": true,
+      "file": "bind_source.py",
+      "unchanged": false
+    },
+    {
+      "exact_inverse": true,
+      "file": "consumer.py",
+      "unchanged": true
+    },
+    {
+      "exact_inverse": true,
+      "file": "direct_round.py",
+      "unchanged": true
+    },
+    {
+      "exact_inverse": true,
+      "file": "entry.py",
+      "unchanged": true
+    },
+    {
+      "exact_inverse": true,
+      "file": "host.py",
+      "unchanged": false
+    },
+    {
+      "exact_inverse": true,
+      "file": "io_contract.py",
+      "unchanged": false
+    },
+    {
+      "exact_inverse": true,
+      "file": "oracle.py",
+      "unchanged": true
+    },
+    {
+      "exact_inverse": true,
+      "file": "precast.py",
+      "unchanged": true
+    },
+    {
+      "exact_inverse": true,
+      "file": "producer.py",
+      "unchanged": false
+    },
+    {
+      "exact_inverse": true,
+      "file": "regression.py",
+      "unchanged": true
+    },
+    {
+      "exact_inverse": true,
+      "file": "run_stage.py",
+      "unchanged": false
+    },
+    {
+      "exact_inverse": true,
+      "file": "scenarios.py",
+      "unchanged": true
+    },
+    {
+      "exact_inverse": true,
+      "file": "scope_adapter.py",
+      "unchanged": false
+    },
+    {
+      "exact_inverse": true,
+      "file": "test_controls.py",
+      "unchanged": true
+    }
+  ],
+  "schema": "deltalog.physical4-resource-only-inverse/v1"
+}

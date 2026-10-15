@@ -1,0 +1,350 @@
+{
+  "owner": {
+    "NPU": false,
+    "authority": {
+      "bytes": 3591,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+      "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+    },
+    "diagnostic_complete": true,
+    "diagnostic_only": true,
+    "elapsed_seconds": 249.55022361999727,
+    "full_gdn_qualified": false,
+    "independent_consumer": null,
+    "lifecycle_gate_pass": false,
+    "model_ready": false,
+    "phase_seconds": 720,
+    "physical": [],
+    "primary": null,
+    "resource_admitted": true,
+    "result": {
+      "bytes": 1919,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-raw-bitwise019-new48h-MAIN-20261015-001/native/result/STAGE_RESULT.json",
+      "sha256": "45b68d089a6c61bfd0320982acbbee937311e61663d0d03a65f5800038558e35"
+    },
+    "schema": "deltalog.readout-diagnostic-owned-host/v005",
+    "secondary": [],
+    "source": {
+      "bytes": 147701,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-raw-bitwise-audit-v019/BOUND_SOURCE.json",
+      "sha256": "3622d9d1b427d2a5421716f41e621b3c1ab27d5eaec1424d8589e6258365abe0"
+    },
+    "stage": "cpu",
+    "stopped_retained": true,
+    "target_source": {
+      "bytes": 147701,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-raw-bitwise-audit-v019/BOUND_SOURCE.json",
+      "sha256": "3622d9d1b427d2a5421716f41e621b3c1ab27d5eaec1424d8589e6258365abe0"
+    }
+  },
+  "stage": {
+    "NPU": false,
+    "admissions": {
+      "authority": {
+        "bytes": 3591,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+        "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+      },
+      "meta": {
+        "bytes": 3352,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlpair007-cpu-new48h-MAIN-20261014-001/native/result/STAGE_RESULT.json",
+        "sha256": "d38c3bcfc09cd1c969803a21c10e4e7b3c0582bf4775b61d4b78c19fd0c5252b"
+      },
+      "numeric": {
+        "bytes": 1544,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlpair007-numeric-new48h-MAIN-20261014-001/RESULT.json",
+        "sha256": "14a327bde2ac2186016c1a740595b2fe50ea3be405be9428cf3616c8c0f0cc96"
+      }
+    },
+    "audit": {
+      "bytes": 288856,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-raw-bitwise019-new48h-MAIN-20261015-001/native/result/AUDIT.json",
+      "sha256": "f5a78e6e1beca9b56f0604ea2cd6cdb47e479804a201f0ba267cf17784245b9c"
+    },
+    "audit_complete": true,
+    "authority": {
+      "bytes": 3591,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+      "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+    },
+    "model_ready": false,
+    "old002_failure_unchanged": true,
+    "original016_independent_consumer": {
+      "bytes": 650163,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-raw-bitwise019-new48h-MAIN-20261015-001/native/result/INDEPENDENT016.json",
+      "sha256": "035e81b8b950094811b043db9f0dbc83d82e48b818e7f0ea5cf88cd9edf4aae3"
+    },
+    "original016_numerical_pass": true,
+    "pass_gate": true,
+    "schema": "deltalog.raw-bitwise-audit-CPU/v019",
+    "source": {
+      "bytes": 147701,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-raw-bitwise-audit-v019/BOUND_SOURCE.json",
+      "sha256": "3622d9d1b427d2a5421716f41e621b3c1ab27d5eaec1424d8589e6258365abe0"
+    },
+    "strict_pass": false
+  },
+  "audit_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-raw-bitwise019-new48h-MAIN-20261015-001/native/result/AUDIT.json",
+    "bytes": 288856,
+    "sha256": "f5a78e6e1beca9b56f0604ea2cd6cdb47e479804a201f0ba267cf17784245b9c"
+  },
+  "audit_summary": {
+    "NPU": false,
+    "actual_producer": {
+      "bytes": 752959,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-numeric-new48h-MAIN-20261015-002/numeric/result/RESULT.json",
+      "sha256": "7d9899c3a1219417d7b66396e0ec5b9696098ba83529554426b188ca692cc829"
+    },
+    "complete": true,
+    "expected": 325,
+    "model_ready": false,
+    "numerical_gate_recomputed": false,
+    "qualification": false,
+    "regression": {
+      "checks": {
+        "append_base": true,
+        "debug_after": true,
+        "decay_padding": true,
+        "inactive": true,
+        "inputs": true,
+        "lambda_padding": true,
+        "length_padding": true,
+        "original_after": true,
+        "original_before": true,
+        "regression_pointers_present": false,
+        "regression_redzones_present": false,
+        "shape_dtype": true
+      },
+      "missing": [
+        "sidecar_redzones",
+        "pointers_before",
+        "pointers_after",
+        "debug_pointers_before",
+        "debug_pointers_after"
+      ],
+      "passed": false,
+      "raw": {
+        "bytes": 288777,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-numeric-new48h-MAIN-20261015-002/numeric/result/original137-regression.pt",
+        "sha256": "6b2116389afd5e01902a1d2b21ffc44dc3a02f01a54757bf16a2b669ba98d4ec"
+      }
+    },
+    "schema": "deltalog.raw-bitwise-audit/v019",
+    "source": {
+      "bytes": 147701,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-raw-bitwise-audit-v019/BOUND_SOURCE.json",
+      "sha256": "3622d9d1b427d2a5421716f41e621b3c1ab27d5eaec1424d8589e6258365abe0"
+    },
+    "strict_pass": false
+  },
+  "records": 324,
+  "failed_records": [],
+  "numerical_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-raw-bitwise019-new48h-MAIN-20261015-001/native/result/INDEPENDENT016.json",
+    "bytes": 650163,
+    "sha256": "035e81b8b950094811b043db9f0dbc83d82e48b818e7f0ea5cf88cd9edf4aae3"
+  },
+  "numerical_keys": [
+    "NPU",
+    "actual_cpu_preflight_ref",
+    "actual_debug_meta_ref",
+    "actual_result",
+    "actual_runtime_copy_qualified",
+    "expected_records",
+    "graph_qualified",
+    "missing_cases_allowed_only_after_first_kdma_failure",
+    "model_ready",
+    "observation_complete",
+    "pass_gate",
+    "raw_producer",
+    "records",
+    "regression",
+    "schema",
+    "source",
+    "statuses",
+    "validation_contract"
+  ],
+  "numerical_summary": {
+    "NPU": false,
+    "actual_cpu_preflight_ref": {
+      "bytes": 2704,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-cpu-new48h-MAIN-20261015-001/native/result/STAGE_RESULT.json",
+      "sha256": "49135d582cf23ddee83ca02ef9190bc3d15574ada5a0b5d3b0c98ec2bfe8ff02"
+    },
+    "actual_debug_meta_ref": {
+      "bytes": 1325,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-cpu-new48h-MAIN-20261015-001/native/result/DEBUG_META.json",
+      "sha256": "5c64b88fda896d75168ec0dd9af40ef76f6768052e498f1238f52225a9f04779"
+    },
+    "actual_result": {
+      "bytes": 874,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-numeric-new48h-MAIN-20261015-002/numeric/result/STAGE_RESULT.json",
+      "sha256": "16c5ab4fb446af178a26a143dfdb65baae068f69f161a0709282d76cc35f094c"
+    },
+    "actual_runtime_copy_qualified": false,
+    "expected_records": 325,
+    "graph_qualified": false,
+    "missing_cases_allowed_only_after_first_kdma_failure": false,
+    "model_ready": false,
+    "observation_complete": true,
+    "pass_gate": true,
+    "raw_producer": {
+      "bytes": 752959,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-numeric-new48h-MAIN-20261015-002/numeric/result/RESULT.json",
+      "sha256": "7d9899c3a1219417d7b66396e0ec5b9696098ba83529554426b188ca692cc829"
+    },
+    "regression": {
+      "cast_bitwise": true,
+      "finite": true,
+      "original_after_bitwise": true,
+      "original_output_bitwise": true,
+      "passed": true,
+      "peak": 1.8947486603663784e-7,
+      "per_request_worst": true,
+      "production_debug_bitwise": true,
+      "relative_l2": 1.4421968111827604e-7,
+      "requests": [
+        {
+          "passed": true,
+          "peak": 1.3634015078624635e-7,
+          "relative_l2": 1.2479501776993922e-7,
+          "request_row": 0
+        },
+        {
+          "passed": true,
+          "peak": 1.647057330882716e-7,
+          "relative_l2": 1.4057966535166133e-7,
+          "request_row": 1
+        },
+        {
+          "passed": true,
+          "peak": 1.5572042742854473e-7,
+          "relative_l2": 1.2651651561203952e-7,
+          "request_row": 2
+        },
+        {
+          "passed": true,
+          "peak": 1.407388161853344e-7,
+          "relative_l2": 1.2796972565690585e-7,
+          "request_row": 3
+        },
+        {
+          "passed": true,
+          "peak": 1.6654399290949632e-7,
+          "relative_l2": 1.1840113859300777e-7,
+          "request_row": 4
+        },
+        {
+          "passed": true,
+          "peak": 1.67174390979707e-7,
+          "relative_l2": 1.3555318618737468e-7,
+          "request_row": 5
+        },
+        {
+          "passed": true,
+          "peak": 1.6763206892232106e-7,
+          "relative_l2": 1.4421968111827604e-7,
+          "request_row": 6
+        },
+        {
+          "passed": true,
+          "peak": 1.5329978593456548e-7,
+          "relative_l2": 1.2063018823576557e-7,
+          "request_row": 7
+        },
+        {
+          "passed": true,
+          "peak": 1.304889605330796e-7,
+          "relative_l2": 1.225663340425016e-7,
+          "request_row": 8
+        },
+        {
+          "passed": true,
+          "peak": 1.483756562474714e-7,
+          "relative_l2": 1.4034536390613282e-7,
+          "request_row": 9
+        },
+        {
+          "passed": true,
+          "peak": 1.544166937833376e-7,
+          "relative_l2": 1.2754608784043768e-7,
+          "request_row": 10
+        },
+        {
+          "passed": true,
+          "peak": 1.558528273579099e-7,
+          "relative_l2": 1.3116226924223768e-7,
+          "request_row": 11
+        },
+        {
+          "passed": true,
+          "peak": 1.5422643158259924e-7,
+          "relative_l2": 1.3043816259908666e-7,
+          "request_row": 12
+        },
+        {
+          "passed": true,
+          "peak": 1.8947486603663784e-7,
+          "relative_l2": 1.3446108181874907e-7,
+          "request_row": 13
+        },
+        {
+          "passed": true,
+          "peak": 1.5560099966751436e-7,
+          "relative_l2": 1.323849411698615e-7,
+          "request_row": 14
+        },
+        {
+          "passed": true,
+          "peak": 1.6433316042571727e-7,
+          "relative_l2": 1.2902992469388987e-7,
+          "request_row": 15
+        }
+      ],
+      "state_relative_l2": 8.638618832272069e-8,
+      "whole_batch_diagnostic": {
+        "passed": true,
+        "peak": 1.573428658375408e-7,
+        "relative_l2": 1.2976426733534989e-7
+      }
+    },
+    "schema": "deltalog.independent-lifecycle-consumption/v007",
+    "statuses": {
+      "full-key_projection-B1": {
+        "complete": true,
+        "first_failure": null,
+        "steps": 160
+      },
+      "full-key_projection-B16": {
+        "complete": true,
+        "first_failure": null,
+        "steps": 160
+      },
+      "smoke-key_projection-B16": {
+        "complete": true,
+        "first_failure": null,
+        "steps": 4
+      }
+    },
+    "validation_contract": {
+      "accept_both_neighbor_cells": false,
+      "direct_RNE_actual_precast": true,
+      "empirical_not_theorem": true,
+      "old_failures_unchanged": true,
+      "old_native_peer_diagnostic": true,
+      "output_limit": 0.00303,
+      "per_request_worst": true,
+      "primary": "actualFP32 precast vs original independent wholeCPU64 recurrence",
+      "production_debug_bitwise": true,
+      "records": 325,
+      "relative_l2_limit": 0.0001220703125,
+      "rounding_margin_diagnostic_only": true,
+      "schema": "deltalog.actual-FP32-precast-empirical/v016",
+      "seed": "2610151601+batch+(10000 if phase==full else0)",
+      "state_limit": 7.92e-7,
+      "universal_Exp_bound": false,
+      "unseen_before_actual_run": true
+    }
+  }
+}

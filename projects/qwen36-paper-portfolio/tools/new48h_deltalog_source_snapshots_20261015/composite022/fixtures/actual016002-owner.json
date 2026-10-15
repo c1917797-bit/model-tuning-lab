@@ -1,0 +1,38 @@
+{
+  "NPU": true,
+  "authority": {
+    "bytes": 3591,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+    "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+  },
+  "elapsed_seconds": 336.06007423999836,
+  "full_gdn_qualified": false,
+  "independent_consumer": null,
+  "lifecycle_gate_pass": false,
+  "model_ready": false,
+  "phase_seconds": 2880,
+  "physical": [
+    5
+  ],
+  "primary": "independent consumer ValueError('actual GE child failed; preserved logs/raw')",
+  "resource_admitted": true,
+  "result": {
+    "bytes": 874,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-numeric-new48h-MAIN-20261015-002/numeric/result/STAGE_RESULT.json",
+    "sha256": "16c5ab4fb446af178a26a143dfdb65baae068f69f161a0709282d76cc35f094c"
+  },
+  "schema": "deltalog.lifecycle-actual-owned-host/v007",
+  "secondary": [],
+  "source": {
+    "bytes": 53261,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-precast-empirical-new48h-v1-016/BOUND_NUMERIC_SOURCE.json",
+    "sha256": "7d61ca178c78ee8d883d608d644931c555fe44b3ad36c5cdbfea71bb464a7045"
+  },
+  "stage": "numeric",
+  "stopped_retained": true,
+  "target_source": {
+    "bytes": 53261,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-precast-empirical-new48h-v1-016/BOUND_NUMERIC_SOURCE.json",
+    "sha256": "7d61ca178c78ee8d883d608d644931c555fe44b3ad36c5cdbfea71bb464a7045"
+  }
+}

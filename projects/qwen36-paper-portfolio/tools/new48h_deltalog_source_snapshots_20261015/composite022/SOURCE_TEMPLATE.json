@@ -1,0 +1,185 @@
+{
+  "authority_ref": {
+    "bytes": 3591,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+    "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+  },
+  "default_enabled": false,
+  "diagnostic_input_refs": [],
+  "files": {
+    "bind.py": {
+      "bytes": 2935,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/bind.py",
+      "sha256": "bf672ff20ac534fb6b9baaabc845e90584bc6b24bb9593acdb109bb45875cb0b"
+    },
+    "composite.py": {
+      "bytes": 21204,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/composite.py",
+      "sha256": "bed0ba7fd4b74455c3e28ffdb074195ce43823932043c8f02da805c03f508fc7"
+    },
+    "entry.py": {
+      "bytes": 2663,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/entry.py",
+      "sha256": "bfd0d874af3b92c5b1a9a067b2e57677b857fe8ac2156e50a4e7ac8909690626"
+    },
+    "fixtures/actual016002-error.json": {
+      "bytes": 3353,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/fixtures/actual016002-error.json",
+      "sha256": "5314c115cd237c37a5979d8b6d59c54ed4dc2a5bca02a3aed28efb91d4336d63"
+    },
+    "fixtures/actual016002-owner.json": {
+      "bytes": 1529,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/fixtures/actual016002-owner.json",
+      "sha256": "ade08190495860e9b9a71a06b6667ede01e85ddace78df4ac09440ddd5ffbf96"
+    },
+    "fixtures/actual019-summary.json": {
+      "bytes": 12392,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/fixtures/actual019-summary.json",
+      "sha256": "7e83e13d852405af13acd2f776ccec9442d063760a89ee8d0913310f45dafe86"
+    },
+    "host.py": {
+      "bytes": 1688,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/host.py",
+      "sha256": "da01c9accafc38a954e1ae4505b8bb93e14eddcf2e212b4b8399cc3697fcb067"
+    },
+    "io_contract.py": {
+      "bytes": 1671,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/io_contract.py",
+      "sha256": "a26e44158039c7e366c7ed072b4b8a7a0af0c4d5c55f9371c2a269e5a1f43285"
+    },
+    "scope_adapter.py": {
+      "bytes": 11522,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-raw-bitwise-audit-v019/scope_adapter.py",
+      "sha256": "432f5cc1613ef5faf43aca11e68c17c3957919d45978cdff04003b82598a5157"
+    },
+    "test_composite.py": {
+      "bytes": 8783,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022/test_composite.py",
+      "sha256": "21b072f1e35dd710a63a1d3844694e348b5cfe4cac3fd291097bfdce7cc27456"
+    }
+  },
+  "library_ref": {
+    "bytes": 2332672,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/key_projection-build/libqwen36_gdn_deltalog_decode_key_projection_ops.so",
+    "sha256": "298749129c8586ecea56cb6076c435631b6fbef4b4e7757636ff87a4ec09abf7"
+  },
+  "meta_ref": null,
+  "numeric_ref": null,
+  "observer_ref": {
+    "bytes": 8472,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/protected-terminal-observer-new48h-v1-002/observer.py",
+    "sha256": "a0d296fc274899009e0e7570d839adaa0f5f2a41b38d470466d1ea696a43229b"
+  },
+  "operator_schema": "qwen36_deltalog_key_projection::decode(Tensor query, Tensor key, Tensor value, Tensor g, Tensor beta, Tensor(a!) base_state, Tensor(b!) k_log, Tensor(c!) u_log, Tensor(d!) lambda_log, Tensor(e!) cumulative_decay, Tensor(f!) log_length, Tensor actual_seq_lengths, Tensor state_indices) -> Tensor",
+  "original019_host_ref": {
+    "bytes": 20506,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-raw-bitwise-audit-v019/host.py",
+    "sha256": "b1dba4093f756a8e2625760e06ee19d54e46977753eb7205f5da0f8d10d049a6"
+  },
+  "policy": {
+    "CPU016_owner": {
+      "bytes": 1335,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-cpu-new48h-MAIN-20261015-001/RESULT.json",
+      "sha256": "0e81b2b330adcbef55495dd3732136ce1c6930f40c04339b78aee823757d1e6f"
+    },
+    "audit019": {
+      "bytes": 288856,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-raw-bitwise019-new48h-MAIN-20261015-001/native/result/AUDIT.json",
+      "sha256": "f5a78e6e1beca9b56f0604ea2cd6cdb47e479804a201f0ba267cf17784245b9c"
+    },
+    "error_evidence": {
+      "bytes": 3251,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-numeric-new48h-MAIN-20261015-002/native/actual-container-logs.json",
+      "sha256": "87785293d0365152e285c7c9bcd0e9845036856632d5fed7a21076185cc0581b"
+    },
+    "guard_physical": [
+      4
+    ],
+    "guard_source": null,
+    "guard_template": null,
+    "legacy017_admission": {
+      "bytes": 8331,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-service-empirical-plugin-v1-017/qwen36_deltalog_service/admission.py",
+      "sha256": "1c47fcfd510da06d5b0c5ceacf21601163604c5c1a64e98759096a230cd4f478"
+    },
+    "numeric019": {
+      "bytes": 650163,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-raw-bitwise019-new48h-MAIN-20261015-001/native/result/INDEPENDENT016.json",
+      "sha256": "035e81b8b950094811b043db9f0dbc83d82e48b818e7f0ea5cf88cd9edf4aae3"
+    },
+    "old137_raw": {
+      "bytes": 288777,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-numeric-new48h-MAIN-20261015-002/numeric/result/original137-regression.pt",
+      "sha256": "6b2116389afd5e01902a1d2b21ffc44dc3a02f01a54757bf16a2b669ba98d4ec"
+    },
+    "original002_error_evidence_ref": {
+      "bytes": 3251,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-numeric-new48h-MAIN-20261015-002/native/actual-container-logs.json",
+      "sha256": "87785293d0365152e285c7c9bcd0e9845036856632d5fed7a21076185cc0581b"
+    },
+    "original002_exact_primary": "independent consumer ValueError('actual GE child failed; preserved logs/raw')",
+    "original002_owner": {
+      "bytes": 1419,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-numeric-new48h-MAIN-20261015-002/RESULT.json",
+      "sha256": "9d31eb6afd3a489511360850e88041c2cf082c522b11e8ca1fdcc0b76f6caee7"
+    },
+    "original002_release": {
+      "native": {
+        "bytes": 246,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-numeric-new48h-MAIN-20261015-002/native/cleanup-verdict.json",
+        "sha256": "d949bb1355246baf513c9c3d7966d6f4ac86a7a38860a2c73844ab40ade7bdc1"
+      },
+      "numeric": {
+        "bytes": 246,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-numeric-new48h-MAIN-20261015-002/numeric/cleanup-verdict.json",
+        "sha256": "ab79dd9b568bd35fd7f7e4b9f9a8755171b4fb4ff919c8ff394edc7c6f20648b"
+      }
+    },
+    "original137_raw": {
+      "bytes": 28585904,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-direct-oracle013-numeric-new48h-MAIN-20261015-001/numeric/result/full-key_projection-B16-137.pt",
+      "sha256": "8a397ca86a0574271be528e784e82f5733888d975f164872258f64ed9d4579e4"
+    },
+    "original_cpu_stage_ref": {
+      "bytes": 2704,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-cpu-new48h-MAIN-20261015-001/native/result/STAGE_RESULT.json",
+      "sha256": "49135d582cf23ddee83ca02ef9190bc3d15574ada5a0b5d3b0c98ec2bfe8ff02"
+    },
+    "owner019": {
+      "bytes": 1349,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-raw-bitwise019-new48h-MAIN-20261015-001/RESULT.json",
+      "sha256": "d2bf4e12a7b8b57414ed7bf26d3adbe75349b109fbff00e6e78c6aad70e45301"
+    },
+    "owner020": null,
+    "source016": {
+      "bytes": 53261,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-precast-empirical-new48h-v1-016/BOUND_NUMERIC_SOURCE.json",
+      "sha256": "7d61ca178c78ee8d883d608d644931c555fe44b3ad36c5cdbfea71bb464a7045"
+    },
+    "source019": {
+      "bytes": 147701,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-raw-bitwise-audit-v019/BOUND_SOURCE.json",
+      "sha256": "3622d9d1b427d2a5421716f41e621b3c1ab27d5eaec1424d8589e6258365abe0"
+    },
+    "stage019": {
+      "bytes": 1919,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-raw-bitwise019-new48h-MAIN-20261015-001/native/result/STAGE_RESULT.json",
+      "sha256": "45b68d089a6c61bfd0320982acbbee937311e61663d0d03a65f5800038558e35"
+    }
+  },
+  "prepared_only": true,
+  "resources": {
+    "cleanup_seconds": 90,
+    "guest_bytes": 8589934592,
+    "host_bytes": 536870912,
+    "ordinary_reserve_bytes": 8589934592,
+    "owner_seconds": 720
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-composite-admission-new48h-v1-022",
+  "schema": "deltalog.composite-source/v022",
+  "window": {
+    "cutoff": 1792135097,
+    "start": 1791962297
+  },
+  "serialization_note": "MAIN LF-only materialization of never-executed CRLF prepared template; production helper unchanged; original byte payload retained locally."
+}

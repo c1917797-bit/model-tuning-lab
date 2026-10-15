@@ -17,7 +17,9 @@ real improvement.
    sequence distributions, request concurrency, parallelism, seeds, dataset
    slice, framework settings, compilation or graph mode, and device binding.
 2. Declare the primary metric and thresholds before running the candidate.
-3. Run correctness gates first: load success, output validity, numerical or
+3. For recurrent-state/cache changes, use [stateful plugin code validation](references/stateful-plugin-code-validation.md)
+   to cover implementation invariants and real lifecycle bridges.
+   Run correctness gates first: load success, output validity, numerical or
    task-quality tolerance, deterministic checks where applicable, and expected
    NPU execution. When native and higher-precision oracle results disagree,
    apply [independent numerical truth and native baselines](references/numerical-oracle-and-native-baseline.md)

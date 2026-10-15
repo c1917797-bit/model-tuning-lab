@@ -1,0 +1,32 @@
+{
+  "aggregate_peak_rss_kib": 121652,
+  "argv": [
+    "/usr/bin/prlimit",
+    "--as=unlimited",
+    "--",
+    "/usr/bin/docker",
+    "logs",
+    "--timestamps",
+    "--tail",
+    "10000",
+    "740729aa8fb73bae65ea09c5c738eeb6a3041e63bd9a4afadaf121d11240877f"
+  ],
+  "child_peak_rss_kib": 46704,
+  "exit_code": 0,
+  "host_RLIMIT_AS": [
+    536870912,
+    -1
+  ],
+  "host_peak_rss_kib": 74948,
+  "observed_utc": "2026-10-15T12:25:21.059518+00:00",
+  "requested_argv": [
+    "/usr/bin/docker",
+    "logs",
+    "--timestamps",
+    "--tail",
+    "10000",
+    "740729aa8fb73bae65ea09c5c738eeb6a3041e63bd9a4afadaf121d11240877f"
+  ],
+  "stderr": "2026-10-15T12:25:19.687374280Z Traceback (most recent call last):\n2026-10-15T12:25:19.687446280Z   File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-precast-empirical-new48h-v1-016/consumer.py\", line 53, in <module>\n2026-10-15T12:25:19.687515520Z     if __name__=='__main__':raise SystemExit(main())\n2026-10-15T12:25:19.687603120Z                                              ^^^^^^\n2026-10-15T12:25:19.687627480Z   File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-precast-empirical-new48h-v1-016/consumer.py\", line 51, in main\n2026-10-15T12:25:19.687775200Z     cpu_ref=C.obj(v['plan'])['cpu_preflight'];cp=C.obj(cpu_ref);dmr=cp['debug_meta_ref'];dm=C.obj(dmr);C.need(cp['source']==sr and cp['pass_gate']is True and dm['source']==sr and dm['debug_build']==m['debug_build_ref']and dm['library']==m['debug_library']and dm['pass_gate']is True and dm['NPU']is False,'independent actual CPU/Meta predecessor')\n2026-10-15T12:25:19.687865280Z                                                  ^^^^^^^^^^^^^^\n2026-10-15T12:25:19.687874350Z   File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-precast-empirical-new48h-v1-016/io_contract.py\", line 13, in obj\n2026-10-15T12:25:19.687961550Z     def obj(r):return json.loads(checked(r).read_bytes())\n2026-10-15T12:25:19.688002100Z                                  ^^^^^^^^^^\n2026-10-15T12:25:19.688008670Z   File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-precast-empirical-new48h-v1-016/io_contract.py\", line 12, in checked\n2026-10-15T12:25:19.688096760Z     p=Path(r['path']);need(set(r)=={'path','bytes','sha256'}and p.is_absolute()and not p.is_symlink()and ref(p)==r,'exact Ref3');return p\n2026-10-15T12:25:19.688172140Z                                                                                                          ^^^^^^\n2026-10-15T12:25:19.688178430Z   File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-precast-empirical-new48h-v1-016/io_contract.py\", line 8, in ref\n2026-10-15T12:25:19.688264560Z     with p.open('rb')as f:\n2026-10-15T12:25:19.688304400Z          ^^^^^^^^^^^^\n2026-10-15T12:25:19.688309860Z   File \"/usr/local/python3.12.13/lib/python3.12/pathlib.py\", line 1013, in open\n2026-10-15T12:25:19.689258090Z     return io.open(self, mode, buffering, encoding, errors, newline)\n2026-10-15T12:25:19.689344120Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-10-15T12:25:19.689379570Z FileNotFoundError: [Errno 2] No such file or directory: '/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-precast-empirical016-cpu-new48h-MAIN-20261015-001/native/result/STAGE_RESULT.json'\n",
+  "stdout": ""
+}
