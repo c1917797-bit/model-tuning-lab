@@ -1,0 +1,675 @@
+{
+  "schema": "hypic-r13-terminal/v1",
+  "source_checkpoint": "148bb402ec0729aca002a0366a2d3fb0cc9c9399",
+  "controller": {
+    "operation": "exec-000000000000080c",
+    "exit": 1,
+    "duration_ms": 502850,
+    "outcome": "full-private numerical state gate failed; not accepted"
+  },
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-failed-head-r1",
+  "release_audit": {
+    "operation": "exec-000000000000081b",
+    "exit": 0,
+    "data": {
+      "source_bindings_unchanged": 129,
+      "isolation_clean": 169,
+      "exact_own_removed": true,
+      "port_free": true,
+      "physical0_3_empty": true,
+      "results": 16,
+      "successful": 0,
+      "failed_shadow_groups": 4,
+      "failed": [
+        {
+          "rank": 1,
+          "step": 9,
+          "layer": "language_model.model.layers.0.linear_attn",
+          "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+          "metrics": [
+            {
+              "max_abs": 0.0078125,
+              "max_scaled": 0.5730658769607544,
+              "passed": true,
+              "rms": 0.000021620844563585706,
+              "tensor": "output"
+            },
+            {
+              "max_abs": 0.030657291412353516,
+              "max_scaled": 1.4862196445465088,
+              "passed": false,
+              "rms": 0.00019299161795061082,
+              "tensor": "state"
+            },
+            {
+              "max_abs": 0,
+              "max_scaled": 0,
+              "passed": true,
+              "rms": 0,
+              "tensor": "conv"
+            }
+          ],
+          "group_requests": [
+            "cmpl-9b393568f13b06df-0-8093fe5f",
+            "cmpl-8d25df8ee8863e33-0-ad4353cd"
+          ]
+        },
+        {
+          "rank": 0,
+          "step": 9,
+          "layer": "language_model.model.layers.0.linear_attn",
+          "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+          "metrics": [
+            {
+              "max_abs": 0.015625,
+              "max_scaled": 0.9737098813056946,
+              "passed": true,
+              "rms": 0.00011109797924291342,
+              "tensor": "output"
+            },
+            {
+              "max_abs": 0.06179928779602051,
+              "max_scaled": 2.8648946285247803,
+              "passed": false,
+              "rms": 0.0006094728596508503,
+              "tensor": "state"
+            },
+            {
+              "max_abs": 0,
+              "max_scaled": 0,
+              "passed": true,
+              "rms": 0,
+              "tensor": "conv"
+            }
+          ],
+          "group_requests": [
+            "cmpl-9b393568f13b06df-0-8093fe5f",
+            "cmpl-8d25df8ee8863e33-0-ad4353cd"
+          ]
+        },
+        {
+          "rank": 2,
+          "step": 9,
+          "layer": "language_model.model.layers.0.linear_attn",
+          "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+          "metrics": [
+            {
+              "max_abs": 0.015625,
+              "max_scaled": 0.9099181294441223,
+              "passed": true,
+              "rms": 0.00003535155701683834,
+              "tensor": "output"
+            },
+            {
+              "max_abs": 0.06330180168151855,
+              "max_scaled": 3.437086582183838,
+              "passed": false,
+              "rms": 0.0006674467585980892,
+              "tensor": "state"
+            },
+            {
+              "max_abs": 0,
+              "max_scaled": 0,
+              "passed": true,
+              "rms": 0,
+              "tensor": "conv"
+            }
+          ],
+          "group_requests": [
+            "cmpl-9b393568f13b06df-0-8093fe5f",
+            "cmpl-8d25df8ee8863e33-0-ad4353cd"
+          ]
+        },
+        {
+          "rank": 3,
+          "step": 9,
+          "layer": "language_model.model.layers.0.linear_attn",
+          "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+          "metrics": [
+            {
+              "max_abs": 0.0078125,
+              "max_scaled": 0.5966587066650391,
+              "passed": true,
+              "rms": 0.00005496208177646622,
+              "tensor": "output"
+            },
+            {
+              "max_abs": 0.06161689758300781,
+              "max_scaled": 2.5731356143951416,
+              "passed": false,
+              "rms": 0.0003614829038269818,
+              "tensor": "state"
+            },
+            {
+              "max_abs": 0,
+              "max_scaled": 0,
+              "passed": true,
+              "rms": 0,
+              "tensor": "conv"
+            }
+          ],
+          "group_requests": [
+            "cmpl-9b393568f13b06df-0-8093fe5f",
+            "cmpl-8d25df8ee8863e33-0-ad4353cd"
+          ]
+        }
+      ],
+      "actual_commits_in_failed_layer_step": 0,
+      "sha256": {
+        "result.json": "3455d4b98224390c2ad069069070184269c1c35febe80074f27aa60261dbb208",
+        "events.jsonl": "b8af0813159f1900a7a361fd7f1fc1038d0af08f60056bbaf7a8c9fe2f2ae8e4",
+        "compiled-cache-unit.json": "0e53287e87272f387ef9a41f16db8a7c9a3a8804f7e253735baa8bda7167dd8b",
+        "release.json": "95b48abfe18c6583b9be3ca8d831ac531a5506bc25d708705a9f76e9cb786032",
+        "service.log": "88e2ad0fd521a57224cde2a0d3f353613108378744db114203c60a16d779146f"
+      }
+    }
+  },
+  "capture_audit": {
+    "operation": "exec-000000000000081c",
+    "exit": 0,
+    "data": {
+      "capture_link_verified": true,
+      "identity": {
+        "generations": {
+          "cmpl-9b393568f13b06df-0-8093fe5f": 1
+        },
+        "head_indices": {
+          "key": 2,
+          "query": 2,
+          "value": 7
+        },
+        "head_policy": "max_state_residual",
+        "head_selection": {
+          "atol": 0.01,
+          "key_coordinate": 31,
+          "reported_max_scaled": 2.8648946285247803,
+          "rtol": 0.003,
+          "selected_max_scaled": 2.8648946285247803,
+          "selection": "runtime full-state FP32 argmax; exported head is sampled",
+          "value_coordinate": 17,
+          "value_head": 7
+        },
+        "key_width": 128,
+        "layer": "language_model.model.layers.0.linear_attn",
+        "manifest_sha256": "01e7d69cbc63166e5232e47ea44a60ce426c92c42156d8aadee33d496b12f6f6",
+        "pid": 57,
+        "rank": 0,
+        "requests": [
+          "cmpl-9b393568f13b06df-0-8093fe5f"
+        ],
+        "step": 9,
+        "tokens_sha256": {
+          "cmpl-9b393568f13b06df-0-8093fe5f": "c61741928a4d8a8e43134c8132086ce1350620ddd69f432ae9109b4b90a40945"
+        },
+        "value_width": 128
+      },
+      "coordinates": {
+        "cmpl-8d25df8ee8863e33-0-ad4353cd": {
+          "body_end": 16384,
+          "body_start": 8,
+          "has_initial": true,
+          "slot": 166
+        },
+        "cmpl-9b393568f13b06df-0-8093fe5f": {
+          "body_end": 16384,
+          "body_start": 8,
+          "has_initial": true,
+          "slot": 136
+        }
+      },
+      "internal_state_checks": [
+        {
+          "side": "packed",
+          "stage": "cached_T_H_plus_S",
+          "max_abs": 4.756623486201761e-7,
+          "max_scaled": 0.000012449960877859195,
+          "rms": 1.4443216366495763e-8,
+          "within_frozen_tolerance": true
+        },
+        {
+          "side": "packed",
+          "stage": "suffix_seed_copy",
+          "max_abs": 0,
+          "max_scaled": 0,
+          "rms": 0,
+          "within_frozen_tolerance": true
+        },
+        {
+          "side": "packed",
+          "stage": "actual_suffix_input",
+          "max_abs": 0,
+          "max_scaled": 0,
+          "rms": 0,
+          "within_frozen_tolerance": true
+        },
+        {
+          "side": "serial",
+          "stage": "cached_T_H_plus_S",
+          "max_abs": 4.7471564990075876e-7,
+          "max_scaled": 0.000010990906064277471,
+          "rms": 1.2756039625666928e-8,
+          "within_frozen_tolerance": true
+        },
+        {
+          "side": "serial",
+          "stage": "suffix_seed_copy",
+          "max_abs": 0,
+          "max_scaled": 0,
+          "rms": 0,
+          "within_frozen_tolerance": true
+        },
+        {
+          "side": "serial",
+          "stage": "actual_suffix_input",
+          "max_abs": 0,
+          "max_scaled": 0,
+          "rms": 0,
+          "within_frozen_tolerance": true
+        }
+      ],
+      "fp64_captured_input_references": [
+        {
+          "side": "packed",
+          "window": "prefix",
+          "max_abs": 0.016802737474015395,
+          "max_scaled": 0.832571704245354,
+          "rms": 0.0005033881430096871,
+          "within_frozen_tolerance": true,
+          "scope": "independent captured-input FP64 math reference; not BF16 bitwise requirement"
+        },
+        {
+          "side": "packed",
+          "window": "suffix",
+          "max_abs": 0.8321477943888418,
+          "max_scaled": 20.039428336095025,
+          "rms": 0.021465314938062526,
+          "within_frozen_tolerance": false,
+          "scope": "independent captured-input FP64 math reference; not BF16 bitwise requirement"
+        },
+        {
+          "side": "serial",
+          "window": "prefix",
+          "max_abs": 0.0000042049519954900916,
+          "max_scaled": 0.00006841525040317889,
+          "rms": 6.338542346939093e-8,
+          "within_frozen_tolerance": true,
+          "scope": "independent captured-input FP64 math reference; not BF16 bitwise requirement"
+        },
+        {
+          "side": "serial",
+          "window": "suffix",
+          "max_abs": 0.7723905862562717,
+          "max_scaled": 20.00601167360026,
+          "rms": 0.0213648620373712,
+          "within_frozen_tolerance": false,
+          "scope": "independent captured-input FP64 math reference; not BF16 bitwise requirement"
+        }
+      ],
+      "selected_failed_point": {
+        "value_head": 7,
+        "key_coordinate": 31,
+        "value_coordinate": 17,
+        "independently_recomputed_scaled_residual": 2.8648946920062746,
+        "reported_max_scaled": 2.8648946285247803,
+        "scope": "sampled point agrees with runtime maximum; not independent global argmax"
+      },
+      "tensor_audit": {
+        "sampled_pairs": 20,
+        "first_observed_divergence": {
+          "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+          "stage": "final",
+          "window": "suffix",
+          "tensor": "state",
+          "max_abs": 0.06179928779602051,
+          "max_scaled": 2.8648946920062746,
+          "exact_equal": false,
+          "passed": false
+        },
+        "first_nonidentical_sample": {
+          "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+          "stage": "prefix_terminal",
+          "window": "prefix",
+          "tensor": "state",
+          "max_abs": 0.016802310943603516,
+          "max_scaled": 0.8325870893851706,
+          "exact_equal": false,
+          "passed": true
+        },
+        "comparisons": [
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "inputs",
+            "window": "prefix",
+            "tensor": "beta",
+            "max_abs": 0,
+            "max_scaled": 0,
+            "exact_equal": true,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "inputs",
+            "window": "prefix",
+            "tensor": "g",
+            "max_abs": 0,
+            "max_scaled": 0,
+            "exact_equal": true,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "inputs",
+            "window": "prefix",
+            "tensor": "initial",
+            "max_abs": 0,
+            "max_scaled": 0,
+            "exact_equal": true,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "inputs",
+            "window": "prefix",
+            "tensor": "k",
+            "max_abs": 0,
+            "max_scaled": 0,
+            "exact_equal": true,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "inputs",
+            "window": "prefix",
+            "tensor": "q",
+            "max_abs": 0,
+            "max_scaled": 0,
+            "exact_equal": true,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "inputs",
+            "window": "prefix",
+            "tensor": "v",
+            "max_abs": 0,
+            "max_scaled": 0,
+            "exact_equal": true,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "prefix_terminal",
+            "window": "prefix",
+            "tensor": "state",
+            "max_abs": 0.016802310943603516,
+            "max_scaled": 0.8325870893851706,
+            "exact_equal": false,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "cached_composition",
+            "window": "body",
+            "tensor": "state",
+            "max_abs": 0.0003914833068847656,
+            "max_scaled": 0.018884043452416226,
+            "exact_equal": false,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "cached_composition",
+            "window": "body",
+            "tensor": "transition",
+            "max_abs": 0,
+            "max_scaled": 0,
+            "exact_equal": true,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "cached_composition",
+            "window": "body",
+            "tensor": "zero_state",
+            "max_abs": 0,
+            "max_scaled": 0,
+            "exact_equal": true,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "suffix_seed",
+            "window": "suffix",
+            "tensor": "state",
+            "max_abs": 0.0003914833068847656,
+            "max_scaled": 0.018884043452416226,
+            "exact_equal": false,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "inputs",
+            "window": "suffix",
+            "tensor": "beta",
+            "max_abs": 0,
+            "max_scaled": 0,
+            "exact_equal": true,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "inputs",
+            "window": "suffix",
+            "tensor": "g",
+            "max_abs": 0,
+            "max_scaled": 0,
+            "exact_equal": true,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "inputs",
+            "window": "suffix",
+            "tensor": "initial",
+            "max_abs": 0.0003914833068847656,
+            "max_scaled": 0.018884043452416226,
+            "exact_equal": false,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "inputs",
+            "window": "suffix",
+            "tensor": "k",
+            "max_abs": 0,
+            "max_scaled": 0,
+            "exact_equal": true,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "inputs",
+            "window": "suffix",
+            "tensor": "q",
+            "max_abs": 0,
+            "max_scaled": 0,
+            "exact_equal": true,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "inputs",
+            "window": "suffix",
+            "tensor": "v",
+            "max_abs": 0,
+            "max_scaled": 0,
+            "exact_equal": true,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "final",
+            "window": "suffix",
+            "tensor": "conv",
+            "max_abs": 0,
+            "max_scaled": 0,
+            "exact_equal": true,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "final",
+            "window": "suffix",
+            "tensor": "output",
+            "max_abs": 0.015625,
+            "max_scaled": 0.973709834469328,
+            "exact_equal": false,
+            "passed": true
+          },
+          {
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "stage": "final",
+            "window": "suffix",
+            "tensor": "state",
+            "max_abs": 0.06179928779602051,
+            "max_scaled": 2.8648946920062746,
+            "exact_equal": false,
+            "passed": false
+          }
+        ],
+        "scope": "same-coordinate head0 samples only; not full tensors, task quality or native/PIC semantic equivalence"
+      },
+      "scope": "source-bound sampled selected-head failed-request diagnostic only; full run, physical isolation/release, quality and performance separate"
+    }
+  },
+  "capture_receipt_and_rank_join": {
+    "operation": "exec-000000000000081f",
+    "data": {
+      "capture": {
+        "actual_slot_commit": "not_started",
+        "branches": [
+          {
+            "branch": "official_chunk64",
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "side": "packed",
+            "window": "prefix"
+          },
+          {
+            "branch": "official_chunk64",
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "side": "packed",
+            "window": "suffix"
+          },
+          {
+            "branch": "independent_recurrent_le64",
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "side": "serial",
+            "window": "prefix"
+          },
+          {
+            "branch": "official_chunk64",
+            "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+            "side": "serial",
+            "window": "suffix"
+          }
+        ],
+        "capture_manifest_sha256": "2fe76804061c4ed63a1678b53e9f9189b211d65f82372ba2698fe44f7c171b96",
+        "coordinates": {
+          "cmpl-8d25df8ee8863e33-0-ad4353cd": {
+            "body_end": 16384,
+            "body_start": 8,
+            "has_initial": true,
+            "slot": 166
+          },
+          "cmpl-9b393568f13b06df-0-8093fe5f": {
+            "body_end": 16384,
+            "body_start": 8,
+            "has_initial": true,
+            "slot": 136
+          }
+        },
+        "event": "c1_first_divergence_capture",
+        "head_policy": "max_state_residual",
+        "head_selection": {
+          "atol": 0.01,
+          "key_coordinate": 31,
+          "reported_max_scaled": 2.8648946285247803,
+          "rtol": 0.003,
+          "selected_max_scaled": 2.8648946285247803,
+          "selection": "runtime full-state FP32 argmax; exported head is sampled",
+          "value_coordinate": 17,
+          "value_head": 7
+        },
+        "layer": "language_model.model.layers.0.linear_attn",
+        "manifest_sha256": "01e7d69cbc63166e5232e47ea44a60ce426c92c42156d8aadee33d496b12f6f6",
+        "payload_bytes": 20082816,
+        "pid": 57,
+        "rank": 0,
+        "records": 12,
+        "request_id": "cmpl-9b393568f13b06df-0-8093fe5f",
+        "root": "/scratch/diagnostics/c1-stage-rank0-step9",
+        "scope": "actual selected-head samples; full-group completeness requires independent audit",
+        "step": 9
+      },
+      "rank_pid_physical": [
+        {
+          "rank": 0,
+          "pid": 57,
+          "physical": 0
+        },
+        {
+          "rank": 1,
+          "pid": 58,
+          "physical": 1
+        },
+        {
+          "rank": 2,
+          "pid": 59,
+          "physical": 2
+        },
+        {
+          "rank": 3,
+          "pid": 60,
+          "physical": 3
+        }
+      ],
+      "scope": "rank-bearing source request receipts joined to previously captured actual NSpid/cgroup proof; not inferred rank"
+    }
+  },
+  "independent_delta_propagation": {
+    "operation": "exec-000000000000081e",
+    "data": {
+      "schema": "hypic-r13-independent-delta-propagation/v1",
+      "suffix_rows": 4608,
+      "seed_delta_max_abs": 0.0003914833068847656,
+      "seed_delta_frobenius": 0.0017919452588205482,
+      "homogeneous_fp64_terminal_delta_max_abs": 0.0001400672903074498,
+      "homogeneous_fp64_terminal_delta_frobenius": 0.0006454514048249995,
+      "actual_terminal_delta_max_abs": 0.06179928779602051,
+      "actual_terminal_delta_frobenius": 0.27024332978347815,
+      "key_norm2_min": 0.9965031148749404,
+      "key_norm2_max": 1.002382962291449,
+      "beta_min": 0.306640625,
+      "beta_max": 0.6953125,
+      "g_min": -0.0010292535880580544,
+      "g_max": -0.000011655170055746567,
+      "per_token_spectral_upper_max": 0.9999883448978655,
+      "scope": "Independent same-input linear delta recurrence from captured suffix keys/g/beta. It excludes finite-precision kernel rounding; no NPU rerun or global-head claim."
+    }
+  },
+  "interpretation": [
+    "Actual rank0/valuehead7 selected by runtime max and independently verified selected coordinate(31,17), not independent global argmax.",
+    "First nonidentical prefix terminal within tolerance; after cached body seed difference .000391483; suffix Q/K/V/g/beta exact, actual terminal maxabs .0617993/state scaled2.86489.",
+    "Captured-input FP64 homogeneous delta is contractive, terminal maxabs .000140067; actual difference not explained by exact linear input perturbation alone.",
+    "Packed prefix uses official_chunk64; serialized prefix8 uses independent_recurrent_le64. Branch mismatch is a concrete next causal hypothesis, not proven complete rootcause.",
+    "Observer implementation succeeded, numerical gate remains failed; zero actual cache writes in failed groups,0/16successful.",
+    "Generic comparator scope string still says head0, a stale label only; identity and measured tensor coordinates explicitlyhead7. Correct label before successor; do not rewrite immutable raw."
+  ],
+  "next": "Freeze explicit defaultoff short-prefix branch alignment, CPU controls and newsource/contract/root before ONE integrated successor. No .01/.003 relaxation or blind affine restore.",
+  "claims": {
+    "hypic_accepted": false,
+    "performance_claim": false,
+    "quality_claim": false,
+    "all_skills_functional": false
+  }
+}

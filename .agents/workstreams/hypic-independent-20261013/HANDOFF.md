@@ -1,5 +1,20 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST080c TERMINALexit1/R13numericFAIL but actualfailedhead captureVALID081c.
+129sources/169clean/exactcd5072d9release/physical0-3empty/8233no listener081bPASS.
+0/16success; failedgroupszeroactualwrites. Head7/key2/step9/coord31,17 independently
+matchesreportedmax2.8648946.12records20MB/CaptureSHA2fe76804061c4ed63a1678b53e9f9189b211d65f82372ba2698fe44f7c171b96.
+Prefixinputs exact; firstnonidenticalprefixH.0168023/scaled.8326; cacheT/Sexact,
+suffixseed.000391483; suffixinputsotherthanH exact; finalH.0617993FAIL.
+081e independentFP64delta contracts(finalmax.000140067), so exactlinear initial
+perturbation alone insufficient; nativefiniteprecision/batching rival remains.
+NEXT R14 freezecanonicalshortprefix<=64 recurrence terminal policy DEFAULT OFF;
+sameexistingownshortreference branch, actualrawinputs/H, not reuse shadowresults.
+Longprefix/suffix/sharedWY/cachemath/C2/.01/.003 unchanged. Actualroute receipts/
+observer inputs/CPUregression/newcontract/newroot/publish/freshadmission ONEtest.
+C1_PACKED_R14_SHORT_PREFIX_PLAN_20261015.md frozen BEFOREcode. Oldrawimmutable,
+no liveownedjob, fullscope/deadline19:04:09UTC unchanged.
+
 0815 actual17:18:44UTC physical0-3 hostPIDs3903905-3903908 -> containerNSpid57-60,
 all exactcd5072d9cgroups; four matching sourcebound residual-policy installs.
 Foreignempty. ProofC1_FAILED_HEAD_R1_LIVE_NAMESPACE_PROOF.json saved BEFOREexit.
