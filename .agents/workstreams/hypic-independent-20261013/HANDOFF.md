@@ -1,5 +1,23 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST05a0 terminalexit0,05d0 independentaudit PASS:40/40fourrank48/16,
+94runtime+101compiledsourcebindings,555cleanisolations,seedunchanged,exact
+release/physical0-3empty. TPOT439.812857ms/TTFTP95499238.198ms.
+CachevsowncoldR6:TPOT~2.85percent/TTFTP95~18.88percent lower, still~54.80percent
+slowerTPOTthannativecold284.1146ms. CACHE_ONLY_NOT_PROMOTED; no blindmatrix.
+05ce audit assumedpostwrapperlaunchargv; basewritesprewrapper.05d0 explicitly
+verifies frozenwrapper+newnpubinchain and records missingliveaugmented-config
+receipt. No device rerun or erasedfailure. FULL40_COMPILED_CACHE_SCREEN_TERMINAL.json.
+No ownedliveNPUjob. Nextonevariable: batch ONLY NativeQueryPlan scheduled1 rows
+throughpinnedofficialconv/recurrent primitives onPRIVATEbuffers; preserve PIC
+C1/C2 math, public material, deferredcommit andallhotproof. Ledger records
+14976native1receipts across1728layer-stepgroups; countsnotelapsedgainproof.
+CPU packing/oracle/ownership then boundedintegrated27B c16 shadow numerics+
+4rankactivation beforeperformance. Do NOT run standaloneGDN device tasks.
+Qualitycatalog22CPUcontrols/127selectiondraft remainsunwired, notqualitypass.
+Deadline2026-10-15T19:04:09UTC unchanged; entiregoal incomplete.
+
+
 OFFLINE QUALITY PREP while05a0 stayslive:05aa reproduces currentcatalog
 scheduler KeyError(public_tokens), request129 ledger ceiling and5000transition
 history ceiling. New independent_catalog_scheduler_admission.py is DRAFTONLY,

@@ -1,0 +1,143 @@
+{
+  "full40_cache_screen_valid": true,
+  "transport": {
+    "terminal_unit_valid": true,
+    "timing": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 439.81285733886887,
+      "ttft_p95_ms": 499238.19805000676,
+      "tpot_p95_ms": 479.415878056642
+    },
+    "isolation_samples": 555,
+    "source_bindings": 94,
+    "raw_sha256": {
+      "result.json": "2865f133b8d1f0c31d8ea0e37e420ce1a7ee6cf84d68d62273a750d0a4576a08",
+      "events.jsonl": "fed3ed7c26a6036a240dc6c93c4d5e44704940c5c44be198d25f8b72240cf2ec",
+      "performance-unit.json": "4380ce67b21795c659d0c549b32fa93e9bb0edb985d9ee7c8bba59df202e36f3",
+      "release.json": "d1c5b03b8b260057a73e690ea28ab58d1164343424808ce331c73589e4b9e29d"
+    },
+    "scope": "full40 transport/timing and declared source/isolation/release receipts; actual physical release and hot/PDC/quality separate"
+  },
+  "hot": {
+    "accepted_hot_coverage": true,
+    "denominator": 40,
+    "covered": [
+      "cmpl-8cd7beebf9d6e988",
+      "cmpl-a90553b385332b4c",
+      "cmpl-aacb67ec5bfb05a2",
+      "cmpl-819c127155ac568a",
+      "cmpl-9ce051b356d36d2a",
+      "cmpl-84345284717738fa",
+      "cmpl-af54e25d7f385bca",
+      "cmpl-a0e47aa9679f962b",
+      "cmpl-9202dd1c724f9206",
+      "cmpl-91b9e53531698dd0",
+      "cmpl-9e84ebbd4ec329fc",
+      "cmpl-bf5c80a83e7e72fa",
+      "cmpl-ad8edc3e0319b99a",
+      "cmpl-a498036290e9d4a5",
+      "cmpl-8d456502b1e0b990",
+      "cmpl-8a232d14a3bcbdb2",
+      "cmpl-83ea13f84df5a544",
+      "cmpl-b945fbacbc343275",
+      "cmpl-baf25ab005da016d",
+      "cmpl-87357e7bd37a5f0a",
+      "cmpl-b7d8d40da6dca9d4",
+      "cmpl-b90a81cab9dfe807",
+      "cmpl-981f95ab25a8c734",
+      "cmpl-b451a2ba8e657281",
+      "cmpl-94b21a763c9a1d6b",
+      "cmpl-827f4065ea5a73c8",
+      "cmpl-bfd6d3f474c8c7e1",
+      "cmpl-a405372e38a80007",
+      "cmpl-b9956385b050909f",
+      "cmpl-9e72cde6825ead32",
+      "cmpl-b9a4901260590954",
+      "cmpl-9663ef4d0dd35410",
+      "cmpl-87cc6d84b58ba3ca",
+      "cmpl-acc6c59429572159",
+      "cmpl-aa93a993110506c1",
+      "cmpl-b44061d1f972169a",
+      "cmpl-899a00ccdadd5b62",
+      "cmpl-a474dea9e8aa8cdd",
+      "cmpl-a4cd5cfbcc2e60f7",
+      "cmpl-bd45cf10eded937e"
+    ],
+    "missing": [],
+    "worker_pids": {
+      "0": 54,
+      "1": 55,
+      "2": 56,
+      "3": 57
+    },
+    "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+  },
+  "physical": {
+    "ranks": {
+      "0": {
+        "inner_pid": 54,
+        "host_pid": 4142404,
+        "physical_npu": 0
+      },
+      "1": {
+        "inner_pid": 55,
+        "host_pid": 4142405,
+        "physical_npu": 1
+      },
+      "2": {
+        "inner_pid": 56,
+        "host_pid": 4142406,
+        "physical_npu": 2
+      },
+      "3": {
+        "inner_pid": 57,
+        "host_pid": 4142407,
+        "physical_npu": 3
+      }
+    },
+    "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+  },
+  "activation": {
+    "barrier_activation_verified": true,
+    "workers": {
+      "0": 54,
+      "1": 55,
+      "2": 56,
+      "3": 57
+    },
+    "scope": "installation identity joined to supplied hot worker identities; hot execution/physical/numerical/performance audits separate"
+  },
+  "compiled_source_bindings": 101,
+  "cache": {
+    "before_files": 313,
+    "after_files": 363,
+    "after_groups": 69,
+    "bytes": 6909943,
+    "sha256": "5580e106ee3957d6913d2be5e152ab6cf27cc2e8a3a2f220f7674be5fb714905",
+    "original_seed_unchanged": true
+  },
+  "launch_evidence": {
+    "base_log_is_pre_wrapper": true,
+    "frozen_wrapper_and_new_npubin_chain_verified": true,
+    "live_augmented_container_config_retained": false
+  },
+  "actual_release": true,
+  "live_processes": [],
+  "scope": "single full40 cache-treatment screen only; actual per-worker cache hits, matched cached native baseline, repeated matrix, quality and deployment acceptance separate",
+  "operations": {
+    "controller": "05a0",
+    "initial_audit": "05ce pre-wrapper-argv assumption failed; preserved",
+    "corrected_independent_audit": "05d0"
+  },
+  "comparison": {
+    "own_R6_cold_TPOT_ms": 452.7188251589381,
+    "own_R6_cold_TTFT_P95_ms": 615444.2203000071,
+    "TPOT_reduction_vs_own_cold_pct": 2.850768976867324,
+    "TTFT_P95_reduction_vs_own_cold_pct": 18.881649777026766,
+    "native_cold_reference_TPOT_ms": 284.11462358545026,
+    "TPOT_slower_than_native_cold_pct": 54.801203749581305,
+    "native_comparison_scope": "screen reference only; cached native matched baseline missing, no final one-switch superiority claim"
+  },
+  "decision": "CACHE_ONLY_NOT_PROMOTED: full40 remains materially slower than native reference; do not blindly expand repeated matrix. Preserve useful startup/cache control, investigate native mixed one-token dispatch via exact supported official backend. Paper route not rejected."
+}
