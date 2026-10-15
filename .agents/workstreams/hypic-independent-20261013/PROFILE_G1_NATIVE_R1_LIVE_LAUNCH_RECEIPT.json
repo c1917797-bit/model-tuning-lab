@@ -1,0 +1,159 @@
+{
+  "schema": "native-profile-live-launch/v1",
+  "controller": "exec-0000000000000695",
+  "preflight": {
+    "utc": "2026-10-15T13:13:24.684598+00:00",
+    "snapshot": {
+      "utc": "2026-10-15T13:13:24.659577+00:00",
+      "processes": [],
+      "owners": [],
+      "foreign": [],
+      "raw": "+------------------------------------------------------------------------------------------------+\n| npu-smi 25.2.0                   Version: 25.2.0                                               |\n+---------------------------+---------------+----------------------------------------------------+\n| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|\n| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |\n+===========================+===============+====================================================+\n| 0     910B4               | OK            | 92.4        37                0    / 0             |\n| 0                         | 0000:C1:00.0  | 0           0    / 0          2872 / 32768         |\n+===========================+===============+====================================================+\n| 1     910B4               | OK            | 83.6        37                0    / 0             |\n| 0                         | 0000:C2:00.0  | 0           0    / 0          2870 / 32768         |\n+===========================+===============+====================================================+\n| 2     910B4               | OK            | 88.3        37                0    / 0             |\n| 0                         | 0000:81:00.0  | 0           0    / 0          2871 / 32768         |\n+===========================+===============+====================================================+\n| 3     910B4               | OK            | 86.9        39                0    / 0             |\n| 0                         | 0000:82:00.0  | 0           0    / 0          2867 / 32768         |\n+===========================+===============+====================================================+\n| 4     910B4               | OK            | 93.9        44                0    / 0             |\n| 0                         | 0000:01:00.0  | 0           0    / 0          2867 / 32768         |\n+===========================+===============+====================================================+\n| 5     910B4               | OK            | 102.2       41                0    / 0             |\n| 0                         | 0000:02:00.0  | 0           0    / 0          3049 / 32768         |\n+===========================+===============+====================================================+\n| 6     910B4               | OK            | 94.8        42                0    / 0             |\n| 0                         | 0000:41:00.0  | 0           0    / 0          2865 / 32768         |\n+===========================+===============+====================================================+\n| 7     910B4               | OK            | 85.8        43                0    / 0             |\n| 0                         | 0000:42:00.0  | 0           0    / 0          2865 / 32768         |\n+===========================+===============+====================================================+\n+---------------------------+---------------+----------------------------------------------------+\n| NPU     Chip              | Process id    | Process name             | Process memory(MB)      |\n+===========================+===============+====================================================+\n| No running processes found in NPU 0                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 1                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 2                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 3                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 4                                                            |\n+===========================+===============+====================================================+\n| 5       0                 | 1579398       | python                   | 180                     |\n| 5       0                 | 1546553       | python                   | 106                     |\n+===========================+===============+====================================================+\n| No running processes found in NPU 6                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 7                                                            |\n+===========================+===============+====================================================+\n"
+    },
+    "free_cache_bytes": 70341513216,
+    "meminfo": [
+      "MemTotal:       2113084888 kB",
+      "MemAvailable:   71732108 kB",
+      "Hugetlb:        2009071616 kB"
+    ],
+    "canonical": "/opt/host/vnf/austinov/model-tuning-lab",
+    "source_bindings": 8,
+    "new_raw_absent": true,
+    "port_idle": true,
+    "hostname": "Euler",
+    "uname": "Linux Euler 5.10.0-182.0.0.95.h3184.eulerosv2r13.aarch64 #1 SMP Fri Dec 5 04:54:46 UTC 2025 aarch64 aarch64 aarch64 GNU/Linux",
+    "git_head": "b4c00fa37638cdc3d7eaf2af5f7bf121455d2625",
+    "git_branch": "work/hypic-independent-20261013",
+    "worktrees": "worktree /opt/host/vnf/austinov/model-tuning-lab\nHEAD c37a4c8759056991f65528d6ad8c6adfd3865a26\nbranch refs/heads/work/qwen36-damp-ascend-20261006\n\nworktree /opt/host/vnf/austinov/worktrees/exp-20260904-qwen38-gdn-native-state-layout\nHEAD 9eed2e0e996994874ef987ee98c8cfe1127e768a\nbranch refs/heads/paper-to-ascend/drrqr-qwen38-result-not-met\n\nworktree /opt/host/vnf/austinov/worktrees/qwen35-experience-ingestion-20260909\nHEAD b29838e721d858c1c2b73d4599d9081015fc0fb7\nbranch refs/heads/work/qwen35-experience-ingestion-20260909\n\nworktree /opt/host/vnf/austinov/worktrees/qwen35-performance-delivery\nHEAD b7e3e41f11fb4487d1640d8c0ca15bb32eb86123\nbranch refs/heads/work/qwen35-performance-delivery\n\nworktree /opt/host/vnf/austinov/worktrees/qwen35-sparse-prefix-reproduction\nHEAD 97a374e95eef267d0c03f896fae37aa1ee2508c5\nbranch refs/heads/paper-to-ascend/sparse-prefix-caching-qwen38-result-mixed-not-promoted\n\nworktree /opt/host/vnf/austinov/worktrees/qwen38-nvfp4-ascend-910b4\nHEAD dc2bfdf7b28b74eac603dc1b35b9c13f000564e8\nbranch refs/heads/work/qwen38-nvfp4-ascend-910b4-20260910\n\nworktree /opt/host/vnf/austinov/worktrees/sliminfer-qwen36-ascend-piercing\nHEAD 164fb9b19985d57af44d7b43ea87a8510e091ff1\nbranch refs/heads/paper-to-ascend/sliminfer-qwen36-result-no-npu-pivoted\n\nworktree /opt/host/vnf/austinov/worktrees/tail-replay-qwen36-ascend-piercing\nHEAD 43bd4a8afa9a02a6d1ec5fc358125a3e017b88e2\nbranch refs/heads/work/tail-replay-qwen36-ascend-piercing-20260914\n\n",
+    "docker_ps": "7b103ad96c3b cannbench_align Up 27 hours\n87ab8b2137c6 Maxon4ick_vllm Up 2 days\nefc5e45e8a54 cannbench_ds Up 2 days\ne93f8e1ca42b agentgpu-910b4-qwen35-4b-v0 Up 2 days\n"
+  },
+  "live": {
+    "cid": "923d993cace531391214a2edb1f18e193e48ba0a870cf418dbf8f32e70fd212a",
+    "state": "running",
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "runtime_env": [
+      "HCCL_OP_EXPANSION_MODE=AIV",
+      "VLLM_ASCEND_ENABLE_FLASHCOMM=1",
+      "HCCL_NPU_SOCKET_PORT_RANGE=26300-26400",
+      "TMPDIR=/scratch/tmp",
+      "ASCEND_RT_VISIBLE_DEVICES=0,1,2,3",
+      "PYTHONPATH=/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:/usr/local/Ascend/ascend-toolkit/latest/opp/built-in/op_impl/ai_core/tbe:/usr/local/Ascend/cann-9.1.0/python/site-packages:/usr/local/Ascend/cann-9.1.0/opp/built-in/op_impl/ai_core/tbe:"
+    ],
+    "no_hypic_env": true,
+    "mounts": [
+      {
+        "source": "/cache/cch/hypic-independent-20261013/formal-token-streams-r1/tokens.json",
+        "destination": "/inputs/tokens.json",
+        "rw": false
+      },
+      {
+        "source": "/cache/efim/Qwen3.6-27B",
+        "destination": "/model",
+        "rw": false
+      },
+      {
+        "source": "/cache/cch/hypic-independent-20261013/profile-g1-native-r1",
+        "destination": "/scratch",
+        "rw": true
+      },
+      {
+        "source": "/usr/local/Ascend/driver",
+        "destination": "/usr/local/Ascend/driver",
+        "rw": false
+      },
+      {
+        "source": "/usr/local/Ascend/firmware",
+        "destination": "/usr/local/Ascend/firmware",
+        "rw": false
+      },
+      {
+        "source": "/usr/local/dcmi",
+        "destination": "/usr/local/dcmi",
+        "rw": false
+      },
+      {
+        "source": "/etc/ascend_install.info",
+        "destination": "/etc/ascend_install.info",
+        "rw": false
+      }
+    ],
+    "args": [
+      "serve",
+      "/model",
+      "--served-model-name",
+      "qwen3.5",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "8233",
+      "--tensor-parallel-size",
+      "4",
+      "--data-parallel-size",
+      "1",
+      "--max-model-len",
+      "40960",
+      "--max-num-batched-tokens",
+      "40960",
+      "--max-num-seqs",
+      "32",
+      "--gpu-memory-utilization",
+      "0.85",
+      "--no-enable-prefix-caching",
+      "--additional-config",
+      "{\"enable_cpu_binding\":false}",
+      "--compilation-config",
+      "{\"cudagraph_mode\":\"NONE\"}",
+      "--trust-remote-code",
+      "--async-scheduling",
+      "--enforce-eager",
+      "--profiler-config",
+      "{\"profiler\": \"torch\", \"torch_profiler_dir\": \"/scratch/profile\", \"torch_profiler_with_stack\": false, \"torch_profiler_with_memory\": false, \"ignore_frontend\": true, \"max_iterations\": 12, \"delay_iterations\": 0}"
+    ],
+    "devices": [
+      {
+        "PathOnHost": "/dev/davinci0",
+        "PathInContainer": "/dev/davinci0",
+        "CgroupPermissions": "rwm"
+      },
+      {
+        "PathOnHost": "/dev/davinci1",
+        "PathInContainer": "/dev/davinci1",
+        "CgroupPermissions": "rwm"
+      },
+      {
+        "PathOnHost": "/dev/davinci2",
+        "PathInContainer": "/dev/davinci2",
+        "CgroupPermissions": "rwm"
+      },
+      {
+        "PathOnHost": "/dev/davinci3",
+        "PathInContainer": "/dev/davinci3",
+        "CgroupPermissions": "rwm"
+      },
+      {
+        "PathOnHost": "/dev/davinci_manager",
+        "PathInContainer": "/dev/davinci_manager",
+        "CgroupPermissions": "rwm"
+      },
+      {
+        "PathOnHost": "/dev/hisi_hdc",
+        "PathInContainer": "/dev/hisi_hdc",
+        "CgroupPermissions": "rwm"
+      },
+      {
+        "PathOnHost": "/dev/devmm_svm",
+        "PathInContainer": "/dev/devmm_svm",
+        "CgroupPermissions": "rwm"
+      }
+    ],
+    "snapshot": {
+      "utc": "2026-10-15T13:15:44.108019+00:00",
+      "processes": [],
+      "owners": [],
+      "foreign": []
+    },
+    "log_tail": "cturedOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=qwen3.5, enable_prefix_caching=False, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'vllm_ascend.compilation.compiler_interface.AscendCompiler', 'custom_ops': ['all'], 'ir_enable_torch_wrap': False, 'splitting_ops': [], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [40960], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'size_asserts': False, 'alignment_asserts': False, 'scalar_asserts': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False}, 'max_cudagraph_capture_size': 0, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': True, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native']), enable_flashinfer_autotune=True, moe_backend='auto', linear_backend='auto')\n(EngineCore pid=42) INFO 10-15 13:15:43 [multiproc_executor.py:140] DP group leader: node_rank=0, node_rank_within_dp=0, master_addr=127.0.0.1, mq_connect_ip=9.15.154.131 (local), world_size=4, local_world_size=4\n"
+  },
+  "scope": "runtime Docker configuration and initializing service; not completed requests/profile/physical worker activation yet",
+  "observation_failure": "0697 output capture truncated at14000bytes; read-only0698 bounded receipt recovered; service/controller neverrestarted"
+}

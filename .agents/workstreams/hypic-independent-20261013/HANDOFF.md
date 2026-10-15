@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT nativeG1profile controller exec-0000000000000695 confirmedrunning
+on originalma a6109 forcedirect; checkpointb4c00fa3, exact ownedCID
+923d993cace531391214a2edb1f18e193e48ba0a870cf418dbf8f32e70fd212a.
+Raw/cache/cch/hypic-independent-20261013/profile-g1-native-r1 immutable.
+0693 source8/input/model/newroot/actual0-3idle/8233+HCCLfree passed13:13:24UTC.
+0698 liveDocker confirms unchanged image, ONLYphysical0-3, NO/probe mount,
+NOHYPIC/pluginenv; normalnative service initializes, no requests yet.
+Original16/c16/32768/64+2B2A/Level1Pipe12iterations attribution ONLY.
+Poll same0695/root; NEVERrestartwhilelive/unclear; no8boundsourcechanges.
+Terminal needs16transport/fourrankrawprofile/NSpidphysical/continuousisolation/
+exactownedrelease, thenCPUparse copies (daemonparsefailure notrawfailure).
+R8 C1completion candidate NOTdevice-admitted; unchangedruntime/goaldeadline.
+
 LATEST0689 full387CPUtests PASS; C1completion same-stream/private finite gate
 integrated DEFAULTFALSE, final nativecommitbarrier and leases unchanged.
 Canary-only serializedshadow defaultfalse;192layer/rank groups required ifrun.
