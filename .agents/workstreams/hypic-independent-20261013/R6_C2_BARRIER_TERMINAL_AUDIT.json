@@ -1,0 +1,110 @@
+{
+  "schema": "hypic-r6-terminal-audit/v1",
+  "controller": "exec-000000000000046a",
+  "terminal_audit": "exec-00000000000004ac",
+  "hot_activation_physical_audit": "exec-00000000000004ae",
+  "actual_release_check": "exec-00000000000004af",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-performance-g3-c2barrier-r1",
+  "source_bindings": 94,
+  "isolation_samples": 615,
+  "requests": 40,
+  "weighted_tpot_ms": 452.7188251589381,
+  "ttft_p95_ms": 615444.2203000071,
+  "baseline_tpot_ms": 284.11462358545026,
+  "prior_r5_tpot_ms": 454.35406830859347,
+  "conclusion": "MECHANISM_VERIFIED_PERFORMANCE_REGRESSION_SINGLE_UNIT",
+  "limitations": [
+    "Not full matched three-round matrix",
+    "Not quality/numerical equivalence/lifecycle/29 Skill acceptance",
+    "Single-unit delta versus R5 is insufficient to establish improvement"
+  ],
+  "hot": {
+    "accepted_hot_coverage": true,
+    "denominator": 40,
+    "covered": [
+      "cmpl-bb7f546ecdee2285",
+      "cmpl-814fa22090eff7cc",
+      "cmpl-94bd3f40943cf689",
+      "cmpl-9ac88c8d6ade8de3",
+      "cmpl-830f93626b18aca1",
+      "cmpl-a46db57bcb7ba59c",
+      "cmpl-a219524e4526d045",
+      "cmpl-807ca1193702cc20",
+      "cmpl-adbe238eb54124dc",
+      "cmpl-8ff000be0cbeb82f",
+      "cmpl-81d73214bbb4d85c",
+      "cmpl-af3ecde2ad4c7167",
+      "cmpl-a015586262144412",
+      "cmpl-9a5cba0b8c2f71dc",
+      "cmpl-a96eb8f59c273b35",
+      "cmpl-af00e6e5e81dd879",
+      "cmpl-972c2dd7ac9e64b0",
+      "cmpl-b58cfffdbd495d5a",
+      "cmpl-a4545ba86d31eea0",
+      "cmpl-a94f5c0e84f4eab7",
+      "cmpl-a6ec007fa5ceb4e1",
+      "cmpl-844cd6e5271cc197",
+      "cmpl-b64e0d9afd83bebf",
+      "cmpl-b9e6af880960e4fc",
+      "cmpl-ba6c58ddac6913e7",
+      "cmpl-9fff13a1af740ce5",
+      "cmpl-b48144bdb8da206f",
+      "cmpl-901aec1686767a1a",
+      "cmpl-8712b3f3e92a1490",
+      "cmpl-928352dcc138aace",
+      "cmpl-ae484f30458a3201",
+      "cmpl-a5b7d1be7976c868",
+      "cmpl-bafc7b15b63e366e",
+      "cmpl-89a8ce4a759ff1ab",
+      "cmpl-a2cd6a1105802312",
+      "cmpl-8bc4519f01c70131",
+      "cmpl-85be7ad044119c11",
+      "cmpl-8c5cbe00cdbdd36c",
+      "cmpl-8c2df72e9941ea80",
+      "cmpl-947f58196732b325"
+    ],
+    "missing": [],
+    "worker_pids": {
+      "0": 58,
+      "1": 59,
+      "2": 60,
+      "3": 61
+    },
+    "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+  },
+  "activation": {
+    "barrier_activation_verified": true,
+    "workers": {
+      "0": 58,
+      "1": 59,
+      "2": 60,
+      "3": 61
+    },
+    "scope": "installation identity joined to supplied hot worker identities; hot execution/physical/numerical/performance audits separate"
+  },
+  "physical": {
+    "ranks": {
+      "0": {
+        "inner_pid": 58,
+        "host_pid": 2304642,
+        "physical_npu": 0
+      },
+      "1": {
+        "inner_pid": 59,
+        "host_pid": 2304643,
+        "physical_npu": 1
+      },
+      "2": {
+        "inner_pid": 60,
+        "host_pid": 2304644,
+        "physical_npu": 2
+      },
+      "3": {
+        "inner_pid": 61,
+        "host_pid": 2304645,
+        "physical_npu": 3
+      }
+    },
+    "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+  }
+}

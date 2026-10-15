@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST R6/046a terminal exit0:40success,615clean isolation,94source bindings.
+Independent04ac full40 timing/source/release receipts PASS;04ae all40 same-step
+fourrank48/16 body-skip plus R6 activation and explicit NSpid physical join PASS.
+04af exact26fe87c7... CID absent,8233free,physical0-3 no processes.
+TPOT452.718825ms/TTFTP95 615444.2203ms: still worse than native284.114624ms.
+Only0.36percent TPOT delta vs R5 is NOT established improvement or root cause.
+R6_C2_BARRIER_TERMINAL_AUDIT.json retains audits/scopes. No owned live job.
+Next measure actual dispatch/material/synchronization costs, no unchanged rerun.
+Full matrix, pairedquality, lifecycle and Skill functional acceptance incomplete.
+Renewed deadline2026-10-15T19:04:09UTC remains authoritative.
+
 LIVE R6 C2barrier integratedfull40/c16 controller exec-000000000000046a,
 freshma a6109 forcedirect,checkpoint4344f90f. Rawroot
 /cache/cch/hypic-independent-20261013/formal-performance-g3-c2barrier-r1.
