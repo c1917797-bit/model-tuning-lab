@@ -46,7 +46,8 @@ class CompletionControls(unittest.TestCase):
                 verify_completion_shadow(actual,(torch.ones(2),)*3,p,"layer",events.append)
             self.assertFalse(events and events[-1]["passed"])
 
-    def hook_case(self,completion=True,fail_second=False,nonfinite=False):
+    def hook_case(self,completion=True,fail_second=False,nonfinite=False,packed=False,
+                  fail_shadow=False,fail_preparation=False):
         from independent_compact_gdn_hook import install_compact_gdn
         from independent_compact_material_pool import CompactLinearMaterialPool
         from independent_compact_model_hook import CURRENT_COMPACT_MODEL
@@ -75,6 +76,15 @@ class CompletionControls(unittest.TestCase):
                 if nonfinite and len(spans)==2:out[0,0,0]=float("nan")
                 return out,torch.ones_like(state),torch.ones_like(conv)
             return run
+        def packed_prepare(layer,stage,plans,associations,mixed_qkv,b,a,leases,backend_state,**kw):
+            if fail_preparation:raise RuntimeError('packed preparation failure')
+            results={}
+            for row,plan in enumerate(plans):
+                out=torch.ones(2,2,3)*(2 if fail_shadow and row==1 else 1)
+                state=torch.ones(2,5,3);tail=torch.ones(3,6)
+                kw['finite_check'](out,state,tail)
+                results[plan.request_id]=(out,state,tail)
+            return results,{},SimpleNamespace(windows=(1,2),packed_tokens=4)
         module=types.ModuleType("fake");module.QwenGatedDeltaNetAttention=Layer
         context=types.ModuleType("vllm.forward_context")
         context.get_forward_context=lambda:SimpleNamespace(attn_metadata={"l":object()})
@@ -88,12 +98,15 @@ class CompletionControls(unittest.TestCase):
             stack.enter_context(patch("independent_runtime_adapter.associate_native_mixed_linear",return_value=assoc))
             stack.enter_context(patch("independent_linear_map.validate_linear_plan_associations",side_effect=lambda p,a:a))
             stack.enter_context(patch("independent_native_boundary.make_boundary_runner",boundary))
+            stack.enter_context(patch("independent_native_decode_prepare.prepare_native_decode",return_value={}))
+            stack.enter_context(patch("independent_c1_packed_prepare.prepare_packed_layer",packed_prepare))
             stack.enter_context(patch.object(torch,"npu",SimpleNamespace(synchronize=lambda:sync.append("commit")),create=True))
-            stop=install_compact_gdn(stage,enabled=True,emit=emit,layer_completion=completion)
+            stop=install_compact_gdn(stage,enabled=True,emit=emit,layer_completion=completion,
+                native_decode_batch=packed,layer_shadow=packed,packed_wave=packed)
             token=CURRENT_COMPACT_MODEL.set(SimpleNamespace(plans=plans))
             token2=CURRENT_REQUEST_SLICES.set(requests)
             try:
-                if fail_second or nonfinite:
+                if fail_second or nonfinite or fail_shadow or fail_preparation:
                     with self.assertRaises((RuntimeError,ValueError)):
                         layer._forward_core(torch.ones(4,6),torch.ones(4,2),torch.ones(4,2),core)
                     self.assertEqual(float(core.abs().sum()),0)
@@ -105,7 +118,7 @@ class CompletionControls(unittest.TestCase):
                     layer._forward_core(torch.ones(4,6),torch.ones(4,2),torch.ones(4,2),core)
                     self.assertTrue(torch.equal(core,torch.ones_like(core)))
                     self.assertEqual(sync,["commit"])
-                    self.assertEqual(spans,[not completion]*2)
+                    self.assertEqual(spans,[True]*2 if packed else [not completion]*2)
                     self.assertEqual(sum(e["event"]=="c1_layer_precommit_validated" for e in events),int(completion))
             finally:
                 CURRENT_REQUEST_SLICES.reset(token2);CURRENT_COMPACT_MODEL.reset(token);stop()
@@ -115,6 +128,17 @@ class CompletionControls(unittest.TestCase):
     def test_hook_late_failure_no_actual_writes(self):self.hook_case(fail_second=True)
     def test_hook_nonfinite_no_actual_writes(self):self.hook_case(nonfinite=True)
     def test_hook_default_serial_path_unchanged(self):self.hook_case(completion=False)
+    def test_packed_hook_shadow_all_then_commit(self):self.hook_case(packed=True)
+    def test_packed_hook_late_shadow_failure_zero_writes(self):self.hook_case(packed=True,fail_shadow=True)
+    def test_packed_hook_preparation_failure_zero_writes(self):self.hook_case(packed=True,fail_preparation=True)
+
+    def test_packed_route_requires_explicit_controls(self):
+        cfg,install,_=c1_install_route({'c1_packed_wave':True,'native_decode_batch':True,
+            'c1_layer_completion_barrier':True,'c1_layer_shadow_validation':True})
+        self.assertTrue(install.c1_packed_wave);self.assertEqual(cfg,{})
+        for config in ({'c1_packed_wave':True},{'c1_packed_wave':1},
+                       {'c1_packed_wave':'true'},{'c1_packed_wave':None}):
+            with self.assertRaises(ValueError):c1_install_route(config)
 
 
 if __name__=="__main__":unittest.main()

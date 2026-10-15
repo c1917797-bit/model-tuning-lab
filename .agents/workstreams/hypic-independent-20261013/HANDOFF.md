@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST06da full405 unique CPU regressions PASS; packed C1 convolution,
+metadata cache, shared-WY backend, unique body lease and defaultFALSE runtime
+route now integrated.06d8 focused20 and06d9 realCPU lease/reset control PASS.
+06d3 fixture dtype failure retained/repaired without numerical tolerance change.
+All requests prepare/shadow/finite-check before actual cache writes; late
+shadow/backend failures zero-write; metadata cache cleared on owned uninstall.
+NOT real official NPU equivalence, no new device run, no performance claim.
+Existing R8/R7 manifests STALE. Next packed independent receipts audit and new
+source-bound package/Canary contract/admission, not blind matrix. Native raw
+parser has no accepted CSV; recover failure before bounded offline successor.
+C1_PACKED_INTEGRATION_HOST_20261015.json records remaining gates/fullscope.
+Deadline19:04:09UTC unchanged. Latest remote43e265f7, newer code local pending.
+
 LATEST06cb six CPU tests PASS: independent packed affine wave plus shared-WY
 adapter. WY/cumsum/KKT/solve once, three state passes reuse prepared buffers;
 transition zero-value width K explicitly differs from real V in ABI control.

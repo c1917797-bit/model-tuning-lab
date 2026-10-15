@@ -42,15 +42,20 @@ def c1_install_route(config):
     if type(native_batch) is not bool:raise ValueError('explicit native decode batch boolean required')
     completion=config.pop('c1_layer_completion_barrier',False)
     shadow=config.pop('c1_layer_shadow_validation',False)
+    packed=config.pop('c1_packed_wave',False)
+    if type(packed) is not bool:raise ValueError('explicit packed C1 boolean required')
+    if packed and not (native_batch and completion and shadow):
+        raise ValueError('packed C1 canary requires native1 batch, completion and shadow')
     if type(completion) is not bool or type(shadow) is not bool:
         raise ValueError('explicit C1 completion/shadow booleans required')
     if shadow and not completion:raise ValueError('C1 shadow requires completion treatment')
     from independent_compact_gdn_hook import install_compact_gdn
     def install(stage,*,enabled=False,emit=None):
         return install_compact_gdn(stage,enabled=enabled,emit=emit,native_decode_batch=native_batch,
-            layer_completion=completion,layer_shadow=shadow)
+            layer_completion=completion,layer_shadow=shadow,packed_wave=packed)
     install.c1_layer_completion_barrier=completion
     install.c1_layer_shadow_validation=shadow
+    install.c1_packed_wave=packed
     return config,install,native_batch
 
 def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_limit=128):
@@ -100,6 +105,7 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
               'native_decode_batch':native_batch,
               'c1_layer_completion_barrier':install_compact_gdn.c1_layer_completion_barrier,
               'c1_layer_shadow_validation':install_compact_gdn.c1_layer_shadow_validation,
+              'c1_packed_wave':install_compact_gdn.c1_packed_wave,
               'scope':'installation; real request proof pending'})
     except BaseException:
         stop();raise

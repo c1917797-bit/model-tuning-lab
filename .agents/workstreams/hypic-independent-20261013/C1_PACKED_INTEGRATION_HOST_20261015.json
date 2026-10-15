@@ -1,0 +1,47 @@
+{
+  "schema": "hypic-packed-c1-integration/v1",
+  "full_regression": {
+    "operation": "exec-00000000000006da",
+    "tests": 405,
+    "exit_code": 0
+  },
+  "focused": {
+    "operation": "exec-00000000000006d8",
+    "tests": 20,
+    "exit_code": 0
+  },
+  "leases": {
+    "operation": "exec-00000000000006d9",
+    "tests": 1,
+    "exit_code": 0
+  },
+  "prior_failure": {
+    "operation": "exec-00000000000006d3",
+    "cause": "test expected canonical no-suffix conv-tail dtype BF16 while retained canonical material FP32; compare numeric values after dtype normalization; no relaxed numerical tolerances. Removed imported TestCase duplicate discovery."
+  },
+  "implemented": [
+    "independent batch convolution window packing with canonical suffix conv state",
+    "bounded geometry/device/head metadata reuse",
+    "shared WY once plus zero/identity/seeded passes",
+    "batched T@H+S dependencies and private actual terminal-state selection",
+    "one material lease/acquisition per unique body/layer/wave",
+    "default-false c1_packed_wave runtime route; mandatory native1 batch, completion gate and serial shadows",
+    "all-request deferred commit; backend and late-shadow failures tested zero actual writes",
+    "owned metadata cache clear on uninstall"
+  ],
+  "official_source": {
+    "gdn": "d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816",
+    "chunk": "6f93b9face32999c93976fccaeb2d6a9d8dc85c8c41d3d26d92e1820f62d7ca5",
+    "metadata": "42cc0284b57193112b8a8ad19704aa3401f02294f0c36333c307d748f462fe16"
+  },
+  "limitations": [
+    "CPU tensor and mocked official-ABI tests, not NPU numerical proof",
+    "new manifest/canary contract/independent packed receipt auditor and device admission pending",
+    "canary shadow currently required; formal performance measurement protocol must explicitly resolve shadow overhead before promotion",
+    "no new NPU work; no speed or quality acceptance",
+    "native raw profiling retained; CPU parser produced no accepted tables, causal attribution pending"
+  ],
+  "next": "Freeze independent packed receipt audit and package, inspect official CPU metadata ABI, obtain admissible critical-path bound; fresh actual 0-3/port/source/newroot gate before integrated TP4 canary.",
+  "deadline": "2026-10-15T19:04:09Z",
+  "goal_complete": false
+}
