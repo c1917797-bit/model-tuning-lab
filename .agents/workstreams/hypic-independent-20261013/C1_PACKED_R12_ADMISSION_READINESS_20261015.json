@@ -1,0 +1,34 @@
+{
+  "schema": "hypic-r12-admission-readiness/v1",
+  "state": "HOST_PASSED_DEVICE_NOT_YET_ADMITTED",
+  "focused": {
+    "operation": "exec-0000000000000797",
+    "tests": 20,
+    "exit": 0
+  },
+  "full": {
+    "operation": "exec-0000000000000798",
+    "tests": 438,
+    "exit": 0
+  },
+  "source_manifest_sha256": "661e3cae1efae30fbb37a899a1250344e6547754a1907c088e153327cda01507",
+  "manifest_bindings": 125,
+  "contract_bindings": 126,
+  "contract": "C1_FIRST_DIVERGENCE_R1_CONTRACT.json",
+  "new_raw": "/cache/cch/hypic-independent-20261013/c1-first-divergence-r1",
+  "fix": "Capture file digest renamed capture_manifest_sha256 to avoid source manifest field overwrite; independently tested exact pairing and tamper/identity failures.",
+  "unchanged": "R11 mathematics and .01/.003; no active runtime default enable",
+  "limitations": [
+    "No real device capture yet",
+    "Head0 only; may not contain global worst residual",
+    "Failed request outside selected first request yields incomplete, not success",
+    "Generic full run numerical acceptance remains separate",
+    "Full performance/quality/lifecycle/29Skill functional goals unfinished"
+  ],
+  "remaining_before_device": [
+    "Static fullsource/config/newroot validation",
+    "Coherent checkpoint/publish/live remote verification",
+    "Fresh ma/direct/physical0-3/8233/HCCL/source/newroot admission"
+  ],
+  "deadline": "2026-10-15T19:04:09Z"
+}

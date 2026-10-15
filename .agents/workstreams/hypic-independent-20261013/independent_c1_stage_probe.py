@@ -34,6 +34,7 @@ class C1StageProbe:
         identity=dict(rank=layout.rank,pid=os.getpid(),layer=LAYER,step=layout.step,
             manifest_sha256=manifest_sha256,requests=list(selected),
             generations={rid:leased[rid][1] for rid in selected},
+            tokens_sha256={rid:self.plans[rid].tokens_sha256 for rid in selected},
             head_indices=dict(query=0,key=0,value=0),key_width=128,value_width=128)
         self.capture=FirstDivergenceCapture(identity)
         self.jobs={}
@@ -116,6 +117,7 @@ class C1StageProbe:
         # All selected requests must have actual paired data; a missing pair
         # remains explicit incomplete evidence for the independent audit.
         receipt=self.capture.seal_failure(self.root,failed_request_id=failed_request_id)
+        receipt['capture_manifest_sha256']=receipt.pop('manifest_sha256')
         self.sealed=True
         return dict(receipt,branches=[dict(side=k[0],request_id=k[1],window=k[2],branch=v)
             for k,v in self.branches.items()],coordinates=self.coordinates,

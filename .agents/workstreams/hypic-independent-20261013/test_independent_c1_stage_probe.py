@@ -73,7 +73,7 @@ class StageProbeTests(unittest.TestCase):
             probe.final("serial","a",result)
             identity=probe.capture.identity.copy();receipt=probe.seal("a")
             audited=audit_capture(receipt["root"],expected_identity=identity,
-                                  manifest_sha256=receipt["manifest_sha256"])
+                                  manifest_sha256=receipt["capture_manifest_sha256"])
             self.assertIsNone(audited["first_observed_divergence"])
             self.assertEqual(identity["requests"],["a"])
             self.assertTrue(torch.equal(states,before))

@@ -93,6 +93,7 @@ def audit_capture(root,*,expected_identity,manifest_sha256,atol=.01,rtol=.003):
             delta=np.abs(a[name]-b[name]);scaled=delta/(atol+rtol*np.abs(b[name]))
             pairs.append(dict(request_id=key[1],stage=key[2],window=key[3],tensor=name,
                 max_abs=float(delta.max()),max_scaled=float(scaled.max()),
+                exact_equal=bool(np.all(delta==0)),
                 passed=bool(np.all(scaled<=1))))
     if len(records)!=2*sum(k[0]=="packed" for k in records):
         raise ValueError("unpaired serial record")
@@ -100,7 +101,12 @@ def audit_capture(root,*,expected_identity,manifest_sha256,atol=.01,rtol=.003):
               for rid in expected_identity["requests"]}
     if any(set(ORDER)!=stages for stages in coverage.values()):
         raise ValueError("all five stages required per selected request")
-    pairs.sort(key=lambda p:(ORDER.index(p["stage"]),p["request_id"],p["window"],p["tensor"]))
+    def dependency_order(p):
+        if p['stage']=='inputs':return 0 if p['window']=='prefix' else 4
+        return {'prefix_terminal':1,'cached_composition':2,'suffix_seed':3,'final':5}[p['stage']]
+    pairs.sort(key=lambda p:(dependency_order(p),p["request_id"],p["window"],p["tensor"]))
     failures=[p for p in pairs if not p["passed"]]
+    nonidentical=[p for p in pairs if not p['exact_equal']]
     return dict(sampled_pairs=len(pairs),first_observed_divergence=failures[0] if failures else None,
+        first_nonidentical_sample=nonidentical[0] if nonidentical else None,
         comparisons=pairs,scope="same-coordinate head0 samples only; not full tensors, task quality or native/PIC semantic equivalence")

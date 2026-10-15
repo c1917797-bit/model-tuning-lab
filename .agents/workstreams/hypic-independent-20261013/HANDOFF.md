@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST R12 independent runtimejoin complete: source/PID/rank0/request/step/
+current publicgeneration+tokens/128head0/windows/actual branch/failed-precommit,
+sealedfiles and byteaccounting. Independent FP64 captured-input prefix/suffix
+and internal T@H+S/seedcopy residuals reported (NOT BF16bitwise requirement).
+Capture digest uses capture_manifest_sha256 to avoid loader sourcehash overwrite;
+generic comparison now dependencyordered and reports firstnonidentical separately.
+0797focused20/0798full438CPU PASS;079f126contract/125manifest static/newroot PASS.
+New C1_FIRST_DIVERGENCE_R1_CONTRACT.json/rawc1-first-divergence-r1 NOTstarted.
+Commit/publish then fresh direct/physical0-3/8233/HCCL/source/newroot admission.
+Diagnostic can preserve an expected numerical failure, not HYPIC acceptance.
+No ownedNPUjob; R11failed/disabledNOTadmitted; oldrawimmutable.19:04:09UTC unchanged.
+
 LATEST R12 boundary wiring DEFAULTFALSE c1_first_divergence; source/loader
 switch/owned normalized-QK observer (thread-filtered/restored on exception),
 short recurrent actualnorm input callback, packed prefix/cache/suffix/final and
