@@ -1,0 +1,102 @@
+{
+  "schema": "hypic-packed-canary-live-launch/v1",
+  "controller": "exec-00000000000006f7",
+  "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "route": "tpc force_direct/peer_direct",
+  "checkpoint": "fe6ca087b0629e5d80dedb13278bb37c0798cd4d",
+  "remote_live_verified": "fe6ca087b0629e5d80dedb13278bb37c0798cd4d",
+  "preflight_operation": "exec-00000000000006f6",
+  "preflight": {
+    "admission_passed": true,
+    "utc": "2026-10-15T14:28:28.117270+00:00",
+    "hostname": "Euler",
+    "arch": "aarch64",
+    "source_bindings": 118,
+    "physical0_3_processes": [],
+    "ports_idle": true,
+    "newroot_absent": true,
+    "checkpoint": "fe6ca087b0629e5d80dedb13278bb37c0798cd4d",
+    "cache_free_bytes": 66389995520,
+    "memory": {
+      "MemAvailable": "81431388 kB",
+      "Hugetlb": "2009071616 kB"
+    },
+    "compute_started": false
+  },
+  "live_probe": "exec-00000000000006f9",
+  "live": {
+    "id": "132e835449fe4e7eb92b637ae17ef0c5886497e1a12b3b346870dd816a21876b",
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "state": {
+      "Status": "running",
+      "Running": true,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 2289185,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-15T14:29:05.49349664Z",
+      "FinishedAt": "0001-01-01T00:00:00Z"
+    },
+    "devices": [
+      {
+        "PathOnHost": "/dev/davinci0",
+        "PathInContainer": "/dev/davinci0",
+        "CgroupPermissions": "rwm"
+      },
+      {
+        "PathOnHost": "/dev/davinci1",
+        "PathInContainer": "/dev/davinci1",
+        "CgroupPermissions": "rwm"
+      },
+      {
+        "PathOnHost": "/dev/davinci2",
+        "PathInContainer": "/dev/davinci2",
+        "CgroupPermissions": "rwm"
+      },
+      {
+        "PathOnHost": "/dev/davinci3",
+        "PathInContainer": "/dev/davinci3",
+        "CgroupPermissions": "rwm"
+      },
+      {
+        "PathOnHost": "/dev/davinci_manager",
+        "PathInContainer": "/dev/davinci_manager",
+        "CgroupPermissions": "rwm"
+      },
+      {
+        "PathOnHost": "/dev/hisi_hdc",
+        "PathInContainer": "/dev/hisi_hdc",
+        "CgroupPermissions": "rwm"
+      },
+      {
+        "PathOnHost": "/dev/devmm_svm",
+        "PathInContainer": "/dev/devmm_svm",
+        "CgroupPermissions": "rwm"
+      }
+    ],
+    "mounts": [
+      "/cache/cch/hypic-independent-20261013/c1-packed-wave-canary-r1:/scratch:rw",
+      "/usr/local/Ascend/driver:/usr/local/Ascend/driver:ro",
+      "/cache/cch/hypic-independent-20261013/formal-token-streams-r1/tokens.json:/inputs/tokens.json:ro",
+      "/etc/ascend_install.info:/etc/ascend_install.info:ro",
+      "/cache/cch/hypic-independent-20261013/c1-packed-wave-canary-r1/compiled-cache:/compilation-cache:rw",
+      "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013:/probe:ro",
+      "/cache/efim/Qwen3.6-27B:/model:ro",
+      "/usr/local/Ascend/firmware:/usr/local/Ascend/firmware:ro",
+      "/usr/local/dcmi:/usr/local/dcmi:ro"
+    ],
+    "selected_env": [
+      "INDEPENDENT_COMPACT_HYPIC=1",
+      "TRITON_CACHE_DIR=/compilation-cache",
+      "PYTHONPATH=/probe/compact_bootstrap:/probe:/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:/usr/local/Ascend/ascend-toolkit/latest/opp/built-in/op_impl/ai_core/tbe:/usr/local/Ascend/cann-9.1.0/python/site-packages:/usr/local/Ascend/cann-9.1.0/opp/built-in/op_impl/ai_core/tbe:",
+      "ASCEND_RT_VISIBLE_DEVICES=0,1,2,3",
+      "INDEPENDENT_COMPACT_MANIFEST=/probe/FORMAL_COMPACT_MANIFEST_R9_PACKED_C1.json",
+      "INDEPENDENT_COMPACT_RAW=/scratch/diagnostics"
+    ]
+  },
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-packed-wave-canary-r1",
+  "scope": "startup declaration only; request/numerical/physical-worker proof pending"
+}
