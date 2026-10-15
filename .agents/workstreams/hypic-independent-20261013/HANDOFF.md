@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST0589 terminalexit0;0595 independent16/16fourrank48/16/source99,
+165clean isolation/explicitphysical0-3/activation/exactrelease PASS.
+All258seed files samehash+mtime, originalseedunchanged;55newfiles/59groups.
+Same16 unprofiled median314.814to199.986s (~36.47percent lower), singlepair
+withschedulerwavevariation; NOT formalfull40TPOT/quality/compilerrootcause.
+0593 firstaudit bind EADDRINUSE retained;0594 no listener/noTCP,exactCIDabsent
+andphysical0-3empty;0595 unchangedauditor replay PASS. No service rerun.
+No owned inference. Nextreturn original40/c16/32768/fixed1024 fail-fast,
+sameR6 inference pluscacheCOPY. Avoid further smallprofiling/observer detours.
+Freeze minimalwrapper againstunchanged nativecontroller c360a9d1...;
+fairmatchedcachecondition required before native superiority claim.
+Deadline2026-10-15T19:04:09UTC unchanged; fullobjective incomplete.
+
 CURRENT cache-copy reuse-r2 controller exec-0000000000000589, freshma a6109
 forcedirect,checkpoint30ca1acf,rawroot
 /cache/cch/hypic-independent-20261013/compiled-cache-reuse-r2.

@@ -1,0 +1,148 @@
+{
+  "reuse_terminal_audit_valid": true,
+  "comparison": {
+    "seed_median_s": 314.8140842149878,
+    "reuse_median_s": 199.98554713498743,
+    "paired_latency_ratios": {
+      "0": 0.637101720666105,
+      "1": 0.5788048926097519,
+      "2": 0.624479983830563,
+      "3": 0.5467025783322982,
+      "4": 0.6675370050370827,
+      "5": 0.7322691725401899,
+      "6": 0.6357060847003627,
+      "7": 0.6341177656633346,
+      "8": 0.6364490336674979,
+      "9": 0.6377670696059532,
+      "10": 0.6340870033755834,
+      "11": 0.6361306205967087,
+      "12": 0.6553157863923733,
+      "13": 0.6539205136537729,
+      "14": 0.6551005732216194,
+      "15": 0.6447598049813569
+    },
+    "changed_or_missing_seed_files": [],
+    "seed_files_mtime_preserved": 258,
+    "seed_file_count": 258,
+    "new_file_count": 55,
+    "scope": "same16 unprofiled end-to-end diagnostic only; one fresh service each, scheduler wave variation not isolated, no full40TPOT or quality acceptance",
+    "median_reduction_percent": 36.47503172112958
+  },
+  "source_bindings": 99,
+  "responses": 16,
+  "hot": {
+    "accepted_hot_coverage": true,
+    "denominator": 16,
+    "covered": [
+      "cmpl-a6a23ae9c7897a8e",
+      "cmpl-b6b1df5a80b6f30a",
+      "cmpl-802aa27fb644f797",
+      "cmpl-82ed49456e1f0640",
+      "cmpl-b392150c6a2dfda7",
+      "cmpl-a3fe072a92b0ce46",
+      "cmpl-ae15f40fa94d54d5",
+      "cmpl-85bf395cb2002f9c",
+      "cmpl-b66c8ab1bd6ef8b2",
+      "cmpl-b4c4c0d3452943fe",
+      "cmpl-9bc2044ba33671c9",
+      "cmpl-9bb92a063a7c9912",
+      "cmpl-a9dcda86f2b90d45",
+      "cmpl-a6246d33fbe4d422",
+      "cmpl-986f18a6dd792403",
+      "cmpl-b4f67cdeb20f3669"
+    ],
+    "missing": [],
+    "worker_pids": {
+      "0": 55,
+      "1": 56,
+      "2": 57,
+      "3": 58
+    },
+    "scope": "diagnostic16 same-step all-rank/all-layer coverage only; never formal full40 acceptance"
+  },
+  "physical": {
+    "ranks": {
+      "0": {
+        "inner_pid": 55,
+        "host_pid": 3974830,
+        "physical_npu": 0
+      },
+      "1": {
+        "inner_pid": 56,
+        "host_pid": 3974831,
+        "physical_npu": 1
+      },
+      "2": {
+        "inner_pid": 57,
+        "host_pid": 3974833,
+        "physical_npu": 2
+      },
+      "3": {
+        "inner_pid": 58,
+        "host_pid": 3974838,
+        "physical_npu": 3
+      }
+    },
+    "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+  },
+  "activation": {
+    "barrier_activation_verified": true,
+    "workers": {
+      "0": 55,
+      "1": 56,
+      "2": 57,
+      "3": 58
+    },
+    "scope": "installation identity joined to supplied hot worker identities; hot execution/physical/numerical/performance audits separate"
+  },
+  "clean_samples": 165,
+  "cache": {
+    "groups": 59,
+    "files": 313,
+    "bytes": 6471551,
+    "sha256": "ae4b9be363eaa47c5d5cd5286a35020c49c436f72cc7eb5f37c3d019730b2cae",
+    "kernel_names": [
+      "_clear_ssm_states_kernel",
+      "_compute_slot_mapping_kernel",
+      "_layer_norm_fwd_1pass_kernel_npu",
+      "chunk_local_cumsum_scalar_kernel",
+      "chunk_scaled_dot_kkt_fwd_kernel",
+      "l2norm_fwd_kernel2",
+      "l2norm_fwd_kernel2_loop",
+      "merge_16x16_to_64x64_inverse_kernel",
+      "recompute_w_u_fwd_kernel",
+      "solve_tril_16x16_kernel",
+      "split_qkv_rmsnorm_mrope_kernel"
+    ],
+    "gdn_related_names": [
+      "chunk_local_cumsum_scalar_kernel",
+      "chunk_scaled_dot_kkt_fwd_kernel",
+      "l2norm_fwd_kernel2",
+      "l2norm_fwd_kernel2_loop",
+      "recompute_w_u_fwd_kernel",
+      "solve_tril_16x16_kernel"
+    ]
+  },
+  "latency_seconds": {
+    "median": 199.98554713498743,
+    "min": 162.07632817002013,
+    "max": 217.7710948100139
+  },
+  "actual_release": true,
+  "live_processes": [],
+  "raw_sha256": {
+    "result.json": "c288afa061253b199177f02c76e290d4fff766ba398331e331ccdb47a100464d",
+    "events.jsonl": "5ace2b9ff3781f75a3d66275f1a3b6716b52dfe6b139664fef39c86d163ac2f7",
+    "compiled-cache-unit.json": "d9dfb9150ef1de0e7e1180d98479d572eabd393033b2a0ada558cdd730ff1298",
+    "compiled-cache-inventory.json": "ba490815c058c9f7ff5cec39509334ea1070bd3894549fc95581551b4bc88c4a",
+    "release.json": "1a5d35e2ff92e8ab14e44c6c4ef9350fbe28d157d012cf584934c416f7d1d998"
+  },
+  "scope": "unprofiled16 copied-cache reuse transport/source/hot/artifact/isolation/release only; no compiler cause, per-worker cache-hit, formal performance or quality acceptance",
+  "operations": {
+    "controller": "0589",
+    "first_audit": "0593 failed at transient EADDRINUSE release bind",
+    "release_recheck": "0594 no listener/no TCP/physical0-3empty/exactCIDabsent",
+    "independent_audit": "0595 exact unchanged audit replay passed"
+  },
+  "decision": "Bounded cache-lifecycle hypothesis survives; move to original full40/c16/32768/fixed1024 fail-fast with sameR6 inference. No fullmatrix/quality/deployment acceptance."
+}
