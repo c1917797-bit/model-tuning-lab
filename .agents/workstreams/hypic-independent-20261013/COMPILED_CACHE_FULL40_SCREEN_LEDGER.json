@@ -1,0 +1,44 @@
+{
+  "schema": "hypic-full-protocol-cache-screen/v1",
+  "state": "prospective onefull40 unit",
+  "controller_sha256": "c360a9d1da1de4db93184da633e569adeb1b1f85073f3c3a61651b40819a23c0",
+  "launcher_sha256": "0dcbadd18816810cf33c720341cadaff1582b6436b67eaaf10be44e3503ac92a",
+  "runtime_manifest": "FORMAL_COMPACT_MANIFEST_R6_C2_BARRIER.json",
+  "runtime_source_changed": false,
+  "inputs": {
+    "path": "/cache/cch/hypic-independent-20261013/formal-token-streams-r1/tokens.json",
+    "sha256": "50f528fa8eb439c56219b0161b16bf12fb2a8fd80effab87d89d725a4cc4c72f",
+    "public_tail_tokens": 256
+  },
+  "requests": 40,
+  "concurrency": 16,
+  "outputs": 1024,
+  "warmups": "same original2B+2A only",
+  "seed": {
+    "contract": {
+      "path": "COMPILED_CACHE_REUSE_R2_CONTRACT.json",
+      "sha256": "0625eed3750e6904e3f55eb43e131255924af7b64d1be382c9d79d1871d7acdf"
+    },
+    "groups": 59,
+    "files": 313,
+    "bytes": 6471551,
+    "scope": "only first16 shapes, not completefull40coverage; anynewcompile remainsinside measuredscreen"
+  },
+  "primary_metric": "original weighted TPOT; TTFT_P95 secondary",
+  "own_cold_reference": {
+    "root": "/cache/cch/hypic-independent-20261013/formal-performance-g3-c2barrier-r1",
+    "weighted_TPOT_ms": 452.7188251589381,
+    "TTFT_P95_ms": 615444.2203000071,
+    "decision": "regression retained"
+  },
+  "bounded_evidence": {
+    "seed_median_s": 314.8140842149878,
+    "reuse_median_s": 199.98554713498743,
+    "scope": "same16 unprofiled singlepair diagnostic, not1024service claim"
+  },
+  "one_variable": "official compiled-cache lifecycle only, no math/row/metadata/receipt changes",
+  "disproof": "Full40cache/source/hot/isolation/release invalid, or measured service metrics do not improve beyond own cold screen; no automatic unchanged retry",
+  "decision_rule": "Screen is not acceptance. If still worse than native cold reference, do not blindly expand matrix; inspect residual dispatch/batching. If promising, same-protocol matched native cache baseline and repeated G1-G4 required. Never use old native cold versus new cached as final one-switch result.",
+  "rollback": "Explicitwrapper only; omitwrapper restores originalnativecontroller, exactownedcleanup unchanged; originalseed immutable",
+  "deadline": "2026-10-15T19:04:09Z"
+}
