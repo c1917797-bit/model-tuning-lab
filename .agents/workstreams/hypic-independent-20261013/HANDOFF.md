@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST07ca TERMINALexit1;127sources/172clean/exact9866d113release/no8233listener/
+physical0-3empty independently checked.07d8 capturelink/files/branches/source/
+generation/head0coords PASS:12records/20,082,816bytes. CaptureSHA4566460e80c73578821630f2aa7d84ec33e7f136e1851dd34cba65fc689a2320.
+Head0 inputs exact; firstnonidenticalprefixterminal maxabs.057739/scaled.896<1.
+Cachedcomposition/suffixinputs/finalhead0state-output-conv ALL bit-identical.
+Thus doesNOTexplain fullstate failure(rank0scaled4.283); otherheads unsampled.
+Both suffix FP64residual1.807same, not between-arm cause/bitwise requirement.
+NEXT R13 explicit residual-head observer: defer bounded private allhead snapshots
+<=256MiB withinonecall, select actual failinghead/coordinate from frozenstate
+residual, exportonehead<=64MiB/32records with independently checked grouped map/
+sampled residual vs reportedmax. NOmath/tolerance change. Plan frozenbeforecode.
+No liveownedjob; alloldrawimmutable; deadline19:04:09UTC/fullscope unchanged.
+
 CURRENT R12r2 exec-00000000000007ca RUNNING originalma a6109/tpcforcedirect.
 Checkpoint057d683d published/liveverified;07c9 16:27:23UTC127bindings/newroot/
 physical0-3empty/8233+HCCLidle PASS. Actual ownedCID9866d11399a7cf1a0d42d440f083023c940bdd261fc27664cabe262ec26b608b
