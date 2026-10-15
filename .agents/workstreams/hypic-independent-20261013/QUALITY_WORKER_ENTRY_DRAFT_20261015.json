@@ -1,0 +1,37 @@
+{
+  "schema": "hypic-quality-worker-entry-draft/v1",
+  "state": "offline-draft-not-activated",
+  "files": [
+    "independent_quality_compact_loader.py",
+    "quality_bootstrap/sitecustomize.py"
+  ],
+  "scope": "own reviewed worker loader adapted for multi-segment workload; shared R7 C1/C2/math/backend core untouched",
+  "controls": {
+    "operation": "065d",
+    "tests": 16,
+    "breakdown": "5 worker entry +5 catalog scheduler loader +6 evidence policy; mocked runtime imports/native installer, not real device lifecycle"
+  },
+  "features": [
+    "same hash-bound worker import timing",
+    "catalog scheduler with limits.max_requests propagation",
+    "explicit full or quality-hot worker evidence profile",
+    "default off",
+    "owned worker/scheduler/finder/fd uninstall and activation failure rollback",
+    "reject already-imported worker or legacy loader ownership"
+  ],
+  "not_claimed": [
+    "real NPU quality activation",
+    "actual public-pool retention",
+    "real-run event budget",
+    "full381 quality",
+    "device lifecycle/29Skill functional completion"
+  ],
+  "missing": [
+    "prospective source-bound quality config/manifest/launcher selecting quality_bootstrap, WITHOUT changing original controller/runtime files",
+    "frozen batch8 capacities and1024identity ceiling",
+    "real catalog batch mechanism/pool/budget admission gate beforecontinuing full381",
+    "paired naturalEOS botharms same1024 ruler; source/physical/isolation/release audits"
+  ],
+  "active_performance": "062d only,101 frozen sourcebindings unchanged; no new NPU run",
+  "deadline": "2026-10-15T19:04:09Z"
+}
