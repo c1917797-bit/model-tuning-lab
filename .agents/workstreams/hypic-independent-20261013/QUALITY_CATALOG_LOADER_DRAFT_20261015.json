@@ -1,0 +1,30 @@
+{
+  "schema": "hypic-quality-loader-draft/v1",
+  "state": "offline-draft-not-activated",
+  "files": [
+    "independent_catalog_scheduler_loader.py",
+    "test_independent_catalog_scheduler_loader.py"
+  ],
+  "reused_infrastructure": "own independent scheduler-loader infrastructure only; no old successful HYPIC algorithm code",
+  "new_behavior": [
+    "catalog factory with explicit bounded request limit up to4096; quality plan1024",
+    "reject already-imported scheduler or legacy loader ownership conflict",
+    "default disabled with no side effects",
+    "atomic owned-hook/finder/fd rollback on evidence-sink activation failure"
+  ],
+  "tests": {
+    "failed_operation": "064c",
+    "failure": "test mock was injected after loader captured installer; fixture timing corrected, not runtime-source relaxation",
+    "passed_operation": "0650",
+    "tests": 16,
+    "scope": "5 loader controls using fake native module/installer plus11 existing catalog admission/index controls; not actual vLLM/NPU activation"
+  },
+  "active_runtime": "062d full40 R7 remains running,101 source bytes unchanged; new loader not imported or mounted as entrypoint",
+  "missing": [
+    "worker-loader route to new scheduler loader and quality evidence policy",
+    "source-bound future quality bootstrap/config/manifest",
+    "real catalogue material retention and finite budget verification",
+    "full127x3 paired naturalEOS and independent audit"
+  ],
+  "deadline": "2026-10-15T19:04:09Z"
+}

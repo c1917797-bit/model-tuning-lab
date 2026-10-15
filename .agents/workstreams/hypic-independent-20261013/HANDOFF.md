@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+While062dlive: catalogscheduler loader draft0650 sixteenCPUcontrols PASS
+(5loader+11admission). Defaultoff/request1024/catalogfactory/legacyownership
+conflict/atomicrollback on activationevidencefailure covered withfake native
+module+installer.064c mockcapturedtooearly fixturefailure retained, notNPUbug.
+Newindependent_catalog_scheduler_loader.py is NOTwired/imported by R7.
+QUALITY_CATALOG_LOADER_DRAFT_20261015.json recordsworkerentry/manifest/real
+catalog/pool/budget/full381 remaininggates. Current101bindings untouched.
+064e12:16:13UTC 12of40measuredresponses, isolationclean,062d stillrunning.
+
+
 While062dlive:0643 sixCPU qualityevidencepolicy controls PASS. Draft
 independent_quality_evidence_policy.py defaultfull unchanged; optinquality-hot
 retains ALL381 C1/C2hot/publicgeneration+eviction/progress/shadows/errors,
