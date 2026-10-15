@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT offline parser successor exec-00000000000004fc on originalma a6109.
+New copy/cache/cch/hypic-independent-20261013/profile-g3-r6-r1-analysis-r2.
+Same image/cpuset112-119/max4, only /dev/davinci_manager (NO compute devices).
+04ea exited0 but all CANN export/view tasks failed, so output NOT accepted.
+04f6 same rank0 raw on tmpfs/no manager: Init platform by driver failed.
+04f8 same tmpfs protocol WITH manager only: exit0,04fa confirms84MB op_summary,
+37MB task_time,API/op statistics and544MB msprof timeline. Not yet torch merged
+fourrank completeness or causal performance evidence. Originalraw unchanged.
+04fc parses all4 with minimal proven manager access; poll exacthandle, no duplicate.
+No live inference service; physical0-3 last04ee empty. No algorithm changes.
+
 LATEST profiler04d1 terminalexit0:16responses/221clean/95bindings.
 Independent04ee full16 transport/source/isolation and physical0-3empty PASS;
 04eb exact1d09fc0e...CID absent/8233free. No live owned NPU service.
