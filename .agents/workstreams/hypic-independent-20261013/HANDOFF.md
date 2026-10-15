@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST R12r2 mixed-selector repair DEFAULTOFF implemented. Empty-chain native1
+maycoexist with2activehot; firstHOT/head0 only, notfirstbatchentry. Coordinates
+onlyhotgroup; selection emits eligible/reason/entrycounts/actualexcluded IDs;
+independent audit joins same-step native1 private receipt. Math/tolerance/cap
+unchanged.07bf12focused/07c1full441 CPU PASS;07c5static127contract/126manifest/
+newrootabsent PASS. New C1_FIRST_DIVERGENCE_R2_CONTRACT.json/rawc1-first-divergence-r2.
+NOTSTARTED until checkpointpublished/freshdirect/physical0-3/ports/sourceadmission.
+R12r1rawimmutable/captureincomplete, numericalcauseUNKNOWN; no liveownedjob.
+Fullscope/deadline19:04:09UTC unchanged. C1_PACKED_R12_R2_HOST_READINESS_20261015.json.
+
 LATEST07a3 TERMINALexit1/R12captureINCOMPLETE/noartifact.07b5 independent126sources/
 174clean/exact97922c91removed/no8233listener/physical0-3empty PASS.0/16success.
 Observedrank0/2/3 layer0step10 state fails; output+convpass/zero failedgroupwrites.

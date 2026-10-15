@@ -90,6 +90,35 @@ class StageProbeTests(unittest.TestCase):
             p=C1StageProbe(layout,plans,leased,manifest_sha256="a"*64,root=Path(temp)/"capture")
             self.assertFalse(p.seal("b")["complete"])
             self.assertFalse((Path(temp)/"capture").exists())
+    def test_five_native1_plus_two_hot_selects_first_hot(self):
+        layout,plans,leased,body=self.fixture()
+        native=[SimpleNamespace(request_id="n"+str(i),scheduled_tokens=1,skipped_tokens=0)
+                for i in range(5)]
+        layout.request_ids=tuple(p.request_id for p in native)+layout.request_ids
+        layout.chains=((),)*5+layout.chains
+        layout.state_slots=(0,1,2,3,4,8,9);layout.has_initial=(True,)*7
+        plans=native+plans
+        self.assertFalse(len(plans)==2 and set(leased)==set(layout.request_ids))
+        with tempfile.TemporaryDirectory() as temp:
+            events=[]
+            def emit(e):events.append(e)
+            emit.source_manifest_sha256="a"*64;emit.stage_capture_root=temp
+            probe=make_probe(SimpleNamespace(prefix="language_model.model.layers.0.linear_attn"),
+                             layout,plans,leased,emit)
+            self.assertIsNotNone(probe)
+            self.assertEqual(probe.capture.identity["requests"],["a"])
+            self.assertEqual(set(probe.coordinates),{"a","b"})
+            self.assertEqual(probe.coordinates["a"]["slot"],8)
+            self.assertTrue(events[-1]["eligible"])
+            self.assertEqual(events[-1]["total_entries"],7)
+            self.assertEqual(len(events[-1]["excluded_native_one"]),5)
+            self.assertFalse(probe.seal("n0")["complete"])
+            self.assertFalse(list(Path(temp).iterdir()))
+        native[0].scheduled_tokens=2;events=[]
+        self.assertIsNone(make_probe(SimpleNamespace(prefix="language_model.model.layers.0.linear_attn"),
+                                     layout,plans,leased,events.append))
+        self.assertEqual(events[-1]["reason"],"excluded_entry_not_native1")
+
     def test_other_thread_not_captured(self):
         module=SimpleNamespace(l2norm_fwd=lambda x:x);seen=[]
         with observe_chunk_norm(module,lambda *x:seen.append(x)):

@@ -30,7 +30,7 @@ class C1StageProbe:
     def __init__(self,layout,plans,leased,*,manifest_sha256,root):
         self.layout=layout;self.plans={p.request_id:p for p in plans}
         self.root=Path(root);self.sealed=False
-        selected=layout.request_ids[:1]
+        selected=tuple(rid for rid in layout.request_ids if rid in leased)[:1]
         identity=dict(rank=layout.rank,pid=os.getpid(),layer=LAYER,step=layout.step,
             manifest_sha256=manifest_sha256,requests=list(selected),
             generations={rid:leased[rid][1] for rid in selected},
@@ -46,7 +46,7 @@ class C1StageProbe:
         self.branches={}
         self.coordinates={rid:dict(slot=layout.state_slots[i],has_initial=layout.has_initial[i],
             body_start=self.plans[rid].body_start,body_end=self.plans[rid].body_end)
-            for i,rid in enumerate(layout.request_ids)}
+            for i,rid in enumerate(layout.request_ids) if rid in leased}
 
     def add(self,side,rid,stage,window,tensors):
         if window=="body":
@@ -129,10 +129,28 @@ class C1StageProbe:
 def make_probe(layer,layout,plans,leased,emit):
     # At most 12000 live rows keeps two-sided Q/K/V/output plus state samples
     # below the frozen64MiB bound. Ineligible failed groups are NOT diagnosed.
-    if (layer.prefix!=LAYER or layout.rank!=0 or len(plans)!=2
-            or set(leased)!=set(layout.request_ids) or layout.packed_tokens>12000
-            or any(len([j for kind,j in chain if kind=="live"])!=2 for chain in layout.chains)):
-        return None
+    if layer.prefix!=LAYER or layout.rank!=0:return None
+    hot=tuple(rid for rid in layout.request_ids if rid in leased)
+    active={rid for rid,chain in zip(layout.request_ids,layout.chains) if chain}
+    excluded=tuple(rid for rid,chain in zip(layout.request_ids,layout.chains) if not chain)
+    by_id={p.request_id:p for p in plans}
+    reason=None
+    if len(hot)!=2 or active!=set(hot):reason="requires_exactly_two_active_hot_chains"
+    elif layout.packed_tokens>12000:reason="packed_live_row_bound"
+    elif any(len([j for kind,j in chain if kind=="live"])!=2
+             for rid,chain in zip(layout.request_ids,layout.chains) if rid in hot):
+        reason="requires_two_live_windows_per_hot_request"
+    elif any(getattr(by_id[rid],"scheduled_tokens",None)!=1
+             or getattr(by_id[rid],"skipped_tokens",None)!=0 for rid in excluded):
+        reason="excluded_entry_not_native1"
+    if hot and callable(emit):
+        emit(dict(event="c1_first_divergence_selection",rank=layout.rank,step=layout.step,
+            layer=layer.prefix,total_entries=len(plans),hot_request_ids=list(hot),
+            excluded_native_one=list(excluded),active_windows=len(layout.windows),
+            packed_tokens=layout.packed_tokens,eligible=reason is None,reason=reason,
+            selected_request_id=hot[0] if reason is None else None,
+            actual_slot_commit="not_started"))
+    if reason is not None:return None
     manifest=getattr(emit,"source_manifest_sha256",None)
     raw=getattr(emit,"stage_capture_root",None)
     if not manifest or not raw:raise ValueError("source-bound diagnostic sink required")

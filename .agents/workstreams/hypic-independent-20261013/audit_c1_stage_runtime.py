@@ -33,6 +33,34 @@ def audit_runtime_capture(events,host_raw,*,manifest_sha256):
             (0,e["pid"],e["step"],LAYER,e.get("request_id")) and x.get("passed")is False]
     if len(failures)!=1:raise ValueError("exact preceding actual failed shadow required")
     failure=failures[0]
+    selections=[x for x in events[:events.index(failure)]
+        if x.get('event')=='c1_first_divergence_selection' and
+        (x.get('rank'),x.get('pid'),x.get('step'),x.get('layer'))==(0,e['pid'],e['step'],LAYER)]
+    if len(selections)!=1:raise ValueError("exact preceding selection decision required")
+    selection=selections[0];excluded=selection.get('excluded_native_one')
+    if (selection.get('eligible')is not True or selection.get('reason')is not None
+            or selection.get('manifest_sha256')!=manifest_sha256
+            or selection.get('actual_slot_commit')!='not_started'
+            or selection.get('hot_request_ids')!=failure.get('group_requests')
+            or selection.get('selected_request_id')!=e.get('request_id')
+            or selection.get('active_windows')!=4 or type(selection.get('active_windows'))is not int
+            or not isinstance(excluded,list) or len(set(excluded))!=len(excluded)
+            or set(excluded)&set(failure.get('group_requests',[]))
+            or type(selection.get('total_entries'))is not int
+            or selection['total_entries']!=2+len(excluded)
+            or type(selection.get('packed_tokens'))is not int
+            or not 4<=selection['packed_tokens']<=12000):
+        raise ValueError("frozen mixed-native1/hot selection receipt mismatch")
+    if excluded:
+        native=[x for x in events[:events.index(selection)]
+            if x.get('event')=='native_decode_batch_completed' and
+            (x.get('rank'),x.get('pid'),x.get('step'),x.get('layer'))==(0,e['pid'],e['step'],LAYER)]
+        if (len(native)!=1 or set(native[0].get('requests',[]))!=set(excluded)
+                or native[0].get('rows')!=len(excluded)
+                or native[0].get('manifest_sha256')!=manifest_sha256
+                or native[0].get('private_buffers')is not True
+                or native[0].get('actual_slot_commit')!='deferred'):
+            raise ValueError("independent native1 exclusion proof required")
     if (failure.get("manifest_sha256")!=manifest_sha256
             or failure.get("actual_slot_commit")!="not_started"
             or failure.get("private_buffers")is not True

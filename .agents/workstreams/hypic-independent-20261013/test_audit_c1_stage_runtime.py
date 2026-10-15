@@ -46,7 +46,10 @@ class RuntimeStageAuditTests(unittest.TestCase):
                      for i,rid in enumerate(("r","other"))}
         event=dict(receipt,**common,event="c1_first_divergence_capture",request_id="r",
                    actual_slot_commit="not_started",branches=branches,coordinates=coordinates)
-        return installs+[public,failure,event],raw
+        selection=dict(common,event="c1_first_divergence_selection",eligible=True,reason=None,
+            total_entries=2,hot_request_ids=["r","other"],excluded_native_one=[],
+            active_windows=4,packed_tokens=10,selected_request_id="r",actual_slot_commit="not_started")
+        return installs+[public,selection,failure,event],raw
     def test_complete_link_and_independent_head_oracle(self):
         with tempfile.TemporaryDirectory() as temp:
             events,raw=self.fixture(temp)
@@ -69,7 +72,7 @@ class RuntimeStageAuditTests(unittest.TestCase):
                 events,raw=self.fixture(temp);mutate(events)
                 with self.assertRaises(ValueError):audit_runtime_capture(events,raw,manifest_sha256="a"*64)
     def test_missing_failure_branch_and_coordinates(self):
-        changes=[lambda e:e.pop(5),lambda e:e[-1]["branches"].pop(),
+        changes=[lambda e:e.pop(6),lambda e:e[-1]["branches"].pop(),
             lambda e:e[-1]["branches"][2].update(branch="official_chunk64"),
             lambda e:e[-1]["coordinates"]["r"].update(has_initial=False),
             lambda e:e[-1]["coordinates"]["r"].update(body_end=16385),
@@ -85,6 +88,28 @@ class RuntimeStageAuditTests(unittest.TestCase):
                 events,raw=self.fixture(temp)
                 if kind=="duplicate":events.append(copy.deepcopy(events[-1]))
                 else:events.append(dict(events[-1],event=kind))
+                with self.assertRaises(ValueError):audit_runtime_capture(events,raw,manifest_sha256="a"*64)
+
+    def test_five_native1_entries_joined_and_not_sampled(self):
+        with tempfile.TemporaryDirectory() as temp:
+            events,raw=self.fixture(temp);selection=events[5]
+            names=["n"+str(i) for i in range(5)]
+            selection.update(total_entries=7,excluded_native_one=names)
+            native=dict(selection,event="native_decode_batch_completed",requests=names,
+                rows=5,slots=[5,6,7,8,9],private_buffers=True,actual_slot_commit="deferred")
+            events.insert(5,native)
+            self.assertTrue(audit_runtime_capture(events,raw,manifest_sha256="a"*64)["capture_link_verified"])
+            native["rows"]=4
+            with self.assertRaises(ValueError):audit_runtime_capture(events,raw,manifest_sha256="a"*64)
+
+    def test_selection_mutations_reject(self):
+        changes=[lambda e:e.pop(5),lambda e:e[5].update(eligible=False),
+            lambda e:e[5].update(total_entries=7),lambda e:e[5].update(selected_request_id="other"),
+            lambda e:e[5].update(hot_request_ids=["r"]),lambda e:e[5].update(active_windows=3),
+            lambda e:e[5].update(packed_tokens=12001)]
+        for mutate in changes:
+            with tempfile.TemporaryDirectory() as temp:
+                events,raw=self.fixture(temp);mutate(events)
                 with self.assertRaises(ValueError):audit_runtime_capture(events,raw,manifest_sha256="a"*64)
 
 if __name__=="__main__":unittest.main()

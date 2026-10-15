@@ -1,0 +1,26 @@
+{
+  "schema": "hypic-r12-r2-host-readiness/v1",
+  "state": "HOST_PASSED_DEVICE_NOT_YET_ADMITTED",
+  "focus": {
+    "operation": "exec-00000000000007bf",
+    "tests": 12,
+    "exit": 0
+  },
+  "full": {
+    "operation": "exec-00000000000007c1",
+    "tests": 441,
+    "exit": 0
+  },
+  "changed_premise": "R12r1 raw rank0 layer0step10 proves2hot+5native1; fix selector to ignore separately batched empty-chain native1 and select first HOT request.",
+  "math_unchanged": true,
+  "tolerances_unchanged": true,
+  "capture_bounds_unchanged": true,
+  "source_manifest_sha256": "b6880bb158c6d7e3b07d964a7604055b5ba5ad327b8c5718ad98b50cb0bec0db",
+  "source_bindings": 127,
+  "manifest_bindings": 126,
+  "new_contract": "C1_FIRST_DIVERGENCE_R2_CONTRACT.json",
+  "new_raw": "/cache/cch/hypic-independent-20261013/c1-first-divergence-r2",
+  "no_device_capture_yet": true,
+  "no_rootcause_claim": true,
+  "deadline": "2026-10-15T19:04:09Z"
+}
