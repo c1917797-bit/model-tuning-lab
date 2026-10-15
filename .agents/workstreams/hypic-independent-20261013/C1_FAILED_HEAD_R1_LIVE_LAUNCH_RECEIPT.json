@@ -1,0 +1,89 @@
+{
+  "schema": "hypic-r13-launch/v1",
+  "source_checkpoint": "148bb402ec0729aca002a0366a2d3fb0cc9c9399",
+  "controller": "exec-000000000000080c",
+  "preflight": "exec-000000000000080a",
+  "preflight_utc": "2026-10-15T17:14:17.576506+00:00",
+  "manifest_sha256": "01e7d69cbc63166e5232e47ea44a60ce426c92c42156d8aadee33d496b12f6f6",
+  "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "route": "tpc/force_direct/peer_direct",
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-failed-head-r1",
+  "container": {
+    "cid": "cd5072d90b32292ea3888169f7966502aad2a6eaeb77b6af20cf2248975a700f",
+    "running": true,
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "devices": [
+      "/dev/davinci0",
+      "/dev/davinci1",
+      "/dev/davinci2",
+      "/dev/davinci3",
+      "/dev/davinci_manager",
+      "/dev/hisi_hdc",
+      "/dev/devmm_svm"
+    ],
+    "mounts": [
+      {
+        "Source": "/cache/efim/Qwen3.6-27B",
+        "Destination": "/model",
+        "Mode": "ro",
+        "RW": false
+      },
+      {
+        "Source": "/cache/cch/hypic-independent-20261013/c1-failed-head-r1",
+        "Destination": "/scratch",
+        "Mode": "rw",
+        "RW": true
+      },
+      {
+        "Source": "/etc/ascend_install.info",
+        "Destination": "/etc/ascend_install.info",
+        "Mode": "ro",
+        "RW": false
+      },
+      {
+        "Source": "/cache/cch/hypic-independent-20261013/formal-token-streams-r1/tokens.json",
+        "Destination": "/inputs/tokens.json",
+        "Mode": "ro",
+        "RW": false
+      },
+      {
+        "Source": "/cache/cch/hypic-independent-20261013/c1-failed-head-r1/compiled-cache",
+        "Destination": "/compilation-cache",
+        "Mode": "rw",
+        "RW": true
+      },
+      {
+        "Source": "/usr/local/Ascend/driver",
+        "Destination": "/usr/local/Ascend/driver",
+        "Mode": "ro",
+        "RW": false
+      },
+      {
+        "Source": "/usr/local/Ascend/firmware",
+        "Destination": "/usr/local/Ascend/firmware",
+        "Mode": "ro",
+        "RW": false
+      },
+      {
+        "Source": "/usr/local/dcmi",
+        "Destination": "/usr/local/dcmi",
+        "Mode": "ro",
+        "RW": false
+      },
+      {
+        "Source": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013",
+        "Destination": "/probe",
+        "Mode": "ro",
+        "RW": false
+      }
+    ],
+    "labels": {
+      "model-tuning-lab.phase": "native-smoke",
+      "model-tuning-lab.task": "hypic-independent-20261013",
+      "org.opencontainers.image.version": "22.04"
+    }
+  },
+  "scope": "one bounded failed-head observation; outcome pending",
+  "deadline": "2026-10-15T19:04:09Z",
+  "publication_authority": "Human explicit ongoing diagnostic checkpoint publication to sameworkbranch, main unchanged."
+}

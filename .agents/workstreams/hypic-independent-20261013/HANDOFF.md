@@ -1,5 +1,19 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT R13 actualfailedhead controller exec-000000000000080c RUNNING originalma
+a6109/tpcforcedirect. Latest human explicitly authorized ongoing regressionpassed
+diagnosticcheckpoint publishing:148bb402 normalFF/liveverified, mainunchanged;
+this SUPERSEDES prior publicationblock below.080a17:14:17UTC129sources/newroot/
+physical0-3empty/8233+HCCLidle PASS.080e exact ownedCIDcd5072d90b32292ea3888169f7966502aad2a6eaeb77b6af20cf2248975a700f
+officialimage/ONLYphysical0-3,/probeRO/newowncacheRW verified. No numerical or
+captureoutcome yet. Poll SAME080c/rootc1-failed-head-r1; live/unknownNEVERrestart
+or edit129boundsources. Terminal independent source/isolation/NSpid/exactrelease,
+then sharedpy311 python -B audit_c1_stage_runtime.py --raw-root
+/cache/cch/hypic-independent-20261013/c1-failed-head-r1 --manifest-sha256
+01e7d69cbc63166e5232e47ea44a60ce426c92c42156d8aadee33d496b12f6f6.
+Observationvalidity is not HYPICacceptance. Alloldrawimmutable/fullscope/deadline
+19:04:09UTC unchanged. C1_FAILED_HEAD_R1_LIVE_LAUNCH_RECEIPT.json.
+
 R13preflight0802 immutableR12r2 actual geometry replay: prefix8/suffix4608,
 12records, conservativeallFP32/allhead retention164754944bytes<268435456;
 singleheadexport20082816<67108864. Actualcloneallocator guard remainsmandatory
