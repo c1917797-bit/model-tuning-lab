@@ -1,0 +1,396 @@
+{
+  "schema": "hypic-r14-pdc-terminal/v1",
+  "controller": "exec-000000000000086a",
+  "independent_audit": "exec-0000000000000887",
+  "source_checkpoint": "1ee971926c24d90de30621175fa24721d2d9ca66",
+  "post_run_audit_checkpoint": "745ed123788114f45680e2d158dc2821855eb1ce",
+  "prefix_routes": {
+    "operation": "exec-000000000000087c",
+    "verified": true,
+    "routes": 9024,
+    "recurrent_routes": 960,
+    "chunk_routes": 8064
+  },
+  "original_audit": {
+    "operation": "exec-000000000000087b",
+    "verdict": "FAIL_RETAINED",
+    "reason": "per-request conditional cap event expectation not met"
+  },
+  "revised_observation": "ACCEPT_BOUNDED_PDC_COEXISTENCE_OBSERVATIONAL",
+  "audit": {
+    "terminal_evidence_valid": true,
+    "live_release_verified": true,
+    "enabled": true,
+    "source_bindings": 132,
+    "manifest_sha256": "384c1b20dc6e8b52af18b61bc4a5347dcb693df646fba0ec9530531b62be6b4d",
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 16,
+      "covered": [
+        "cmpl-b61af2354050515f",
+        "cmpl-8d0b330b5b3a3913",
+        "cmpl-b75bcce5677be3ec",
+        "cmpl-a3cfd0f4239bbc0c",
+        "cmpl-85bf2aeb6fc75947",
+        "cmpl-8772dbe87099a19b",
+        "cmpl-a19858fa7596959d",
+        "cmpl-a9ec2163cff8ece8",
+        "cmpl-bf8d1a3a55f27955",
+        "cmpl-bab82766bf0cfdac",
+        "cmpl-94668e5c6fb13b65",
+        "cmpl-b6f7d9b7eeec5836",
+        "cmpl-a0f1d9b33436c109",
+        "cmpl-99c4775cc52b1367",
+        "cmpl-a0a6aec95b467bc2",
+        "cmpl-a60520164c6c5f8f"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 57,
+        "1": 58,
+        "2": 59,
+        "3": 60
+      },
+      "scope": "diagnostic16 same-step all-rank/all-layer coverage only; never formal full40 acceptance"
+    },
+    "native_batch": {
+      "native_decode_batch_verified": true,
+      "workers": {
+        "0": 57,
+        "1": 58,
+        "2": 59,
+        "3": 60
+      },
+      "multirow_shadow_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      },
+      "batch_calls": 1920,
+      "native_rows": 13440,
+      "scope": "source-bound runtime numerical-control and deferred-commit receipts; no independent tensor dump, whole-model quality, transport, physical or performance claim"
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 57,
+          "host_pid": 276402,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 58,
+          "host_pid": 276403,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 59,
+          "host_pid": 276404,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 60,
+          "host_pid": 276405,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "isolation_samples": 219,
+    "shadow_groups": 384,
+    "max_scaled": 0.0007626042934134603,
+    "elapsed_median_seconds": 276.586140304993,
+    "raw_sha256": {
+      "result.json": "9316b51c149ba5b70886142233fb5aab370a0aeca89381628997cf822cffdee8",
+      "events.jsonl": "da45be87f2511b6a30022e5303d2eefea0dc58c8ebb0087bb1be27c4dc8ba0c2",
+      "compiled-cache-unit.json": "598d311aa7eb859f456b85060fdd91df8c2d536812712eaf5be8284fdccef6a3",
+      "release.json": "00df8d45b7fa6b407880f78fea34d4ee85d06df3910bbcf799ecec359035c6b0"
+    },
+    "scope": "bounded16 fixed64 R14 packed/source/hot/shadow/isolation/release; no formal performance or task-quality acceptance",
+    "packed": {
+      "packed_c1_verified": true,
+      "workers": {
+        "0": 57,
+        "1": 58,
+        "2": 59,
+        "3": 60
+      },
+      "requests": 16,
+      "packed_groups": 2304,
+      "shadow_requests": 1344,
+      "multi_hot_shadow_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      },
+      "scope": "source-bound packed call-stage/serial-shadow/private precommit receipts; raw tensors, physical mapping, transport, release, performance and task quality separate"
+    },
+    "post_run_identity_adapter": {
+      "mapping": {
+        "cmpl-b61af2354050515f": "cmpl-b61af2354050515f-0-81cf0479",
+        "cmpl-8d0b330b5b3a3913": "cmpl-8d0b330b5b3a3913-0-802037fc",
+        "cmpl-b75bcce5677be3ec": "cmpl-b75bcce5677be3ec-0-96f36407",
+        "cmpl-a3cfd0f4239bbc0c": "cmpl-a3cfd0f4239bbc0c-0-8d2cfbe9",
+        "cmpl-85bf2aeb6fc75947": "cmpl-85bf2aeb6fc75947-0-b85e539b",
+        "cmpl-8772dbe87099a19b": "cmpl-8772dbe87099a19b-0-a667a025",
+        "cmpl-a19858fa7596959d": "cmpl-a19858fa7596959d-0-be5ff928",
+        "cmpl-a9ec2163cff8ece8": "cmpl-a9ec2163cff8ece8-0-892d44bf",
+        "cmpl-bf8d1a3a55f27955": "cmpl-bf8d1a3a55f27955-0-89266c0d",
+        "cmpl-bab82766bf0cfdac": "cmpl-bab82766bf0cfdac-0-80a7d31d",
+        "cmpl-94668e5c6fb13b65": "cmpl-94668e5c6fb13b65-0-982bfe10",
+        "cmpl-b6f7d9b7eeec5836": "cmpl-b6f7d9b7eeec5836-0-a21b8b71",
+        "cmpl-a0f1d9b33436c109": "cmpl-a0f1d9b33436c109-0-ad34b34f",
+        "cmpl-99c4775cc52b1367": "cmpl-99c4775cc52b1367-0-84604c0b",
+        "cmpl-a0a6aec95b467bc2": "cmpl-a0a6aec95b467bc2-0-9b1600e1",
+        "cmpl-a60520164c6c5f8f": "cmpl-a60520164c6c5f8f-0-9996722a"
+      },
+      "http_count": 16,
+      "runtime_count": 16,
+      "original_failed_operation": "exec-000000000000084d",
+      "frozen_sources_and_raw_unchanged": true,
+      "source_sha256": {
+        "audit_c1_http_identity.py": "3dcf39e29d3855f9d5854f006abded482ff81c3fc0acb5494dc2cb8fa1367c64",
+        "audit_c1_packed_http_terminal.py": "919267813d36835e6ed5501cfec12e5911ee460fc13d875c6084eb6eb85c4070"
+      }
+    },
+    "pdc": {
+      "pdc_observational_acceptance": true,
+      "requests": [
+        {
+          "request_id": "cmpl-b61af2354050515f-0-81cf0479",
+          "initial_computed_tokens": 7680,
+          "ranks": 4,
+          "worker_pids": [
+            57,
+            58,
+            59,
+            60
+          ],
+          "scope": "initial native runner prefix reuse only; not physical/material/performance acceptance",
+          "http_id": "cmpl-b61af2354050515f",
+          "pic_start": 10240
+        },
+        {
+          "request_id": "cmpl-8d0b330b5b3a3913-0-802037fc",
+          "initial_computed_tokens": 7680,
+          "ranks": 4,
+          "worker_pids": [
+            57,
+            58,
+            59,
+            60
+          ],
+          "scope": "initial native runner prefix reuse only; not physical/material/performance acceptance",
+          "http_id": "cmpl-8d0b330b5b3a3913",
+          "pic_start": 9216
+        },
+        {
+          "request_id": "cmpl-b75bcce5677be3ec-0-96f36407",
+          "initial_computed_tokens": 7680,
+          "ranks": 4,
+          "worker_pids": [
+            57,
+            58,
+            59,
+            60
+          ],
+          "scope": "initial native runner prefix reuse only; not physical/material/performance acceptance",
+          "http_id": "cmpl-b75bcce5677be3ec",
+          "pic_start": 9728
+        },
+        {
+          "request_id": "cmpl-a3cfd0f4239bbc0c-0-8d2cfbe9",
+          "initial_computed_tokens": 7680,
+          "ranks": 4,
+          "worker_pids": [
+            57,
+            58,
+            59,
+            60
+          ],
+          "scope": "initial native runner prefix reuse only; not physical/material/performance acceptance",
+          "http_id": "cmpl-a3cfd0f4239bbc0c",
+          "pic_start": 11264
+        },
+        {
+          "request_id": "cmpl-85bf2aeb6fc75947-0-b85e539b",
+          "initial_computed_tokens": 7680,
+          "ranks": 4,
+          "worker_pids": [
+            57,
+            58,
+            59,
+            60
+          ],
+          "scope": "initial native runner prefix reuse only; not physical/material/performance acceptance",
+          "http_id": "cmpl-85bf2aeb6fc75947",
+          "pic_start": 11776
+        },
+        {
+          "request_id": "cmpl-8772dbe87099a19b-0-a667a025",
+          "initial_computed_tokens": 7680,
+          "ranks": 4,
+          "worker_pids": [
+            57,
+            58,
+            59,
+            60
+          ],
+          "scope": "initial native runner prefix reuse only; not physical/material/performance acceptance",
+          "http_id": "cmpl-8772dbe87099a19b",
+          "pic_start": 10752
+        },
+        {
+          "request_id": "cmpl-a19858fa7596959d-0-be5ff928",
+          "initial_computed_tokens": 7680,
+          "ranks": 4,
+          "worker_pids": [
+            57,
+            58,
+            59,
+            60
+          ],
+          "scope": "initial native runner prefix reuse only; not physical/material/performance acceptance",
+          "http_id": "cmpl-a19858fa7596959d",
+          "pic_start": 12288
+        },
+        {
+          "request_id": "cmpl-a9ec2163cff8ece8-0-892d44bf",
+          "initial_computed_tokens": 7680,
+          "ranks": 4,
+          "worker_pids": [
+            57,
+            58,
+            59,
+            60
+          ],
+          "scope": "initial native runner prefix reuse only; not physical/material/performance acceptance",
+          "http_id": "cmpl-a9ec2163cff8ece8",
+          "pic_start": 13824
+        },
+        {
+          "request_id": "cmpl-bf8d1a3a55f27955-0-89266c0d",
+          "initial_computed_tokens": 7680,
+          "ranks": 4,
+          "worker_pids": [
+            57,
+            58,
+            59,
+            60
+          ],
+          "scope": "initial native runner prefix reuse only; not physical/material/performance acceptance",
+          "http_id": "cmpl-bf8d1a3a55f27955",
+          "pic_start": 12800
+        },
+        {
+          "request_id": "cmpl-bab82766bf0cfdac-0-80a7d31d",
+          "initial_computed_tokens": 7680,
+          "ranks": 4,
+          "worker_pids": [
+            57,
+            58,
+            59,
+            60
+          ],
+          "scope": "initial native runner prefix reuse only; not physical/material/performance acceptance",
+          "http_id": "cmpl-bab82766bf0cfdac",
+          "pic_start": 13312
+        },
+        {
+          "request_id": "cmpl-94668e5c6fb13b65-0-982bfe10",
+          "initial_computed_tokens": 7680,
+          "ranks": 4,
+          "worker_pids": [
+            57,
+            58,
+            59,
+            60
+          ],
+          "scope": "initial native runner prefix reuse only; not physical/material/performance acceptance",
+          "http_id": "cmpl-94668e5c6fb13b65",
+          "pic_start": 14336
+        },
+        {
+          "request_id": "cmpl-b6f7d9b7eeec5836-0-a21b8b71",
+          "initial_computed_tokens": 7680,
+          "ranks": 4,
+          "worker_pids": [
+            57,
+            58,
+            59,
+            60
+          ],
+          "scope": "initial native runner prefix reuse only; not physical/material/performance acceptance",
+          "http_id": "cmpl-b6f7d9b7eeec5836",
+          "pic_start": 14848
+        },
+        {
+          "request_id": "cmpl-a0f1d9b33436c109-0-ad34b34f",
+          "initial_computed_tokens": 7680,
+          "ranks": 4,
+          "worker_pids": [
+            57,
+            58,
+            59,
+            60
+          ],
+          "scope": "initial native runner prefix reuse only; not physical/material/performance acceptance",
+          "http_id": "cmpl-a0f1d9b33436c109",
+          "pic_start": 15360
+        },
+        {
+          "request_id": "cmpl-99c4775cc52b1367-0-84604c0b",
+          "initial_computed_tokens": 7680,
+          "ranks": 4,
+          "worker_pids": [
+            57,
+            58,
+            59,
+            60
+          ],
+          "scope": "initial native runner prefix reuse only; not physical/material/performance acceptance",
+          "http_id": "cmpl-99c4775cc52b1367",
+          "pic_start": 9216
+        },
+        {
+          "request_id": "cmpl-a0a6aec95b467bc2-0-9b1600e1",
+          "initial_computed_tokens": 7680,
+          "ranks": 4,
+          "worker_pids": [
+            57,
+            58,
+            59,
+            60
+          ],
+          "scope": "initial native runner prefix reuse only; not physical/material/performance acceptance",
+          "http_id": "cmpl-a0a6aec95b467bc2",
+          "pic_start": 9728
+        },
+        {
+          "request_id": "cmpl-a60520164c6c5f8f-0-9996722a",
+          "initial_computed_tokens": 7680,
+          "ranks": 4,
+          "worker_pids": [
+            57,
+            58,
+            59,
+            60
+          ],
+          "scope": "initial native runner prefix reuse only; not physical/material/performance acceptance",
+          "http_id": "cmpl-a60520164c6c5f8f",
+          "pic_start": 10240
+        }
+      ],
+      "actual_block_tokens": 1536,
+      "block_receipts": 18,
+      "requests_with_conditional_cap": 13,
+      "original_frozen_audit": "exec-000000000000087b FAIL retained",
+      "correction": "cap emits only when proposal changed; per-request hit uses actual first runner progress",
+      "scope": "revised observational PDC proof, not original incidental-event gate pass or speed/quality"
+    },
+    "pdc_auditor_sha256": "0e945ca59d0e84990d9a43e175259e5464d9590a77ad81797f818ecdc5d65ee9"
+  },
+  "scope": "16x32768/fixed64/c16 only; no formal speed/taskquality/full goal acceptance",
+  "next": "R15 diagnostic-free matched formal performance path and lifecycle/full quality remain. Existing native_tp4_smoke.py already has absolute-stop/full40 formal branch; reuse reviewed generic controller rather than unnecessary copy if source hash/admission/audit stay pinned. No live owned NPUjob. Deadline19:04:09UTC."
+}

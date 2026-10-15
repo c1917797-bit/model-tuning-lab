@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST R14 PDC TERMINAL086a exit0 valid16/219clean/exact70e5release.0887
+revised observationalaudit PASS all16/all4 actualfirstcomputed7680, block1536
+proved18conditionalreceipts/13requests; per-request PICstart from boundtokeninput.
+Original087b per-request conditionalcapgate FAIL RETAINED, separate postrun
+observer correction745ed123/485CPU published. Runtime132sources/raw unchanged.
+087c9024prefixroutes PASS. ReportC1_PACKED_R14_PDC_TERMINAL_20261015.json.
+No liveownNPUjob. R14 bounded numerical+PDCproof is NOT formal speed/taskquality.
+NEXT R15 diagnostic-free matchedperformance: reviewed native_tp4_smoke.py already
+supports formal40 and absolute stop, so prefer reuse over unnecessarycontrollercopy;
+explicit defaultOFF performance-mode removes shadow/probe only, preserves algorithm/
+finite/private/source/hot/isolation/release; don't relax existing canary mode.
+Deadline19:04:09UTC unchanged. Full12matrix/quality/lifecycle/29functional incomplete.
+
 LATEST R14 PDC coexistence exec-000000000000086a RUNNING originalma a6109/tpc
 force_direct.1ee97192 published/mainunchanged;0869fresh18:12:21UTC132sources,
 0-3empty/8233+HCCLidle/newrootabsent PASS. Rawc1-short-prefix-pdc-r1 immutable;
