@@ -1,0 +1,70 @@
+{
+  "operation": "exec-00000000000008a3",
+  "container_id": "4450aef651532a0b67b25035090993d0cea814294bccf5852342a543674f8176",
+  "source_checkpoint": "35159d417f22699f15e4c6b025bfe478b5bc3bc5",
+  "proof": {
+    "sample_utc": "2026-10-15T18:44:30.131905+00:00",
+    "physical_namespace_proof": [
+      {
+        "physical": 0,
+        "host_pid": 553467,
+        "status": [
+          "Name:\tVLLM::Worker_TP",
+          "NSpid:\t553467\t57"
+        ],
+        "exact_owned_cgroup": true
+      },
+      {
+        "physical": 1,
+        "host_pid": 553468,
+        "status": [
+          "Name:\tVLLM::Worker_TP",
+          "NSpid:\t553468\t58"
+        ],
+        "exact_owned_cgroup": true
+      },
+      {
+        "physical": 2,
+        "host_pid": 553469,
+        "status": [
+          "Name:\tVLLM::Worker_TP",
+          "NSpid:\t553469\t59"
+        ],
+        "exact_owned_cgroup": true
+      },
+      {
+        "physical": 3,
+        "host_pid": 553470,
+        "status": [
+          "Name:\tVLLM::Worker_TP",
+          "NSpid:\t553470\t60"
+        ],
+        "exact_owned_cgroup": true
+      }
+    ],
+    "installs": [
+      {
+        "pid": 58,
+        "manifest_sha256": "f28eca11c2f372d906a45455a3faf1e0a4d6268ed09b5fae24403737b7dd1bb7",
+        "c1_first_divergence": false
+      },
+      {
+        "pid": 57,
+        "manifest_sha256": "f28eca11c2f372d906a45455a3faf1e0a4d6268ed09b5fae24403737b7dd1bb7",
+        "c1_first_divergence": false
+      },
+      {
+        "pid": 59,
+        "manifest_sha256": "f28eca11c2f372d906a45455a3faf1e0a4d6268ed09b5fae24403737b7dd1bb7",
+        "c1_first_divergence": false
+      },
+      {
+        "pid": 60,
+        "manifest_sha256": "f28eca11c2f372d906a45455a3faf1e0a4d6268ed09b5fae24403737b7dd1bb7",
+        "c1_first_divergence": false
+      }
+    ],
+    "foreign": []
+  },
+  "scope": "actual live physical0-3 PID/cgroup/NSpid; TP rank from subsequent rank-bearing request receipts, not inferred from physical index"
+}
