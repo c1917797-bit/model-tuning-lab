@@ -1,0 +1,99 @@
+{
+  "schema": "hypic-r13-capture-budget-replay/v1",
+  "capture_sha256": "4566460e80c73578821630f2aa7d84ec33e7f136e1851dd34cba65fc689a2320",
+  "records": 12,
+  "single_head_export_bytes": 20082816,
+  "retained_fp32_upper_bytes": 164754944,
+  "retained_limit_bytes": 268435456,
+  "remaining_bytes": 103680512,
+  "details": [
+    {
+      "side": "packed",
+      "stage": "inputs",
+      "window": "prefix",
+      "rows": 8,
+      "fp32_allhead_upper_bytes": 869120
+    },
+    {
+      "side": "packed",
+      "stage": "inputs",
+      "window": "suffix",
+      "rows": 4608,
+      "fp32_allhead_upper_bytes": 48414720
+    },
+    {
+      "side": "packed",
+      "stage": "prefix_terminal",
+      "window": "prefix",
+      "rows": 8,
+      "fp32_allhead_upper_bytes": 786432
+    },
+    {
+      "side": "packed",
+      "stage": "cached_composition",
+      "window": "body",
+      "rows": 16376,
+      "fp32_allhead_upper_bytes": 2359296
+    },
+    {
+      "side": "packed",
+      "stage": "suffix_seed",
+      "window": "suffix",
+      "rows": 4608,
+      "fp32_allhead_upper_bytes": 786432
+    },
+    {
+      "side": "packed",
+      "stage": "final",
+      "window": "suffix",
+      "rows": 4608,
+      "fp32_allhead_upper_bytes": 29128704
+    },
+    {
+      "side": "serial",
+      "stage": "inputs",
+      "window": "prefix",
+      "rows": 8,
+      "fp32_allhead_upper_bytes": 934656
+    },
+    {
+      "side": "serial",
+      "stage": "prefix_terminal",
+      "window": "prefix",
+      "rows": 8,
+      "fp32_allhead_upper_bytes": 786432
+    },
+    {
+      "side": "serial",
+      "stage": "cached_composition",
+      "window": "body",
+      "rows": 16376,
+      "fp32_allhead_upper_bytes": 2359296
+    },
+    {
+      "side": "serial",
+      "stage": "suffix_seed",
+      "window": "suffix",
+      "rows": 4608,
+      "fp32_allhead_upper_bytes": 786432
+    },
+    {
+      "side": "serial",
+      "stage": "inputs",
+      "window": "suffix",
+      "rows": 4608,
+      "fp32_allhead_upper_bytes": 48414720
+    },
+    {
+      "side": "serial",
+      "stage": "final",
+      "window": "suffix",
+      "rows": 4608,
+      "fp32_allhead_upper_bytes": 29128704
+    }
+  ],
+  "scope": "Known R12r2 actual selected-request geometry only; assumes retained floating dtype <=FP32 per pinned source. Future layouts still obey preallocation cap; not NPU capture or peak total-device-memory proof.",
+  "operation": "exec-0000000000000802",
+  "device_run": false,
+  "publication_dependency": "ascend-inference-tuning-loop Stage Checkpoints requires commit+push; R13 plan also explicitly publish-before-device. Await specific authorization after safety rejection; no workaround."
+}

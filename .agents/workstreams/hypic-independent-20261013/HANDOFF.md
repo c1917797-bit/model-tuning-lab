@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+R13preflight0802 immutableR12r2 actual geometry replay: prefix8/suffix4608,
+12records, conservativeallFP32/allhead retention164754944bytes<268435456;
+singleheadexport20082816<67108864. Actualcloneallocator guard remainsmandatory
+for changed futurelayouts; not totaldevicepeak or newNPUproof. Audit07fc oldcapture
+backwardcompatibility PASS. Stagepush requirement explicitly rechecked in
+ascend-inference-tuning-loop and R13frozenplan: cannot silentlydrop publication
+dependency after securityrejection. Await alreadyasked explicit approval; no
+newpush/deviceworkaround. This blocks nextdevice stage, not goalcompletion.
+No liveowneddevicejob; deadline19:04:09UTC unchanged.
+
 COREreview07fe/07ff verified original4429e35 gdn SHA72d58f...: ref persists
 h_batch from live+cached affineT@H+S (1211-1245), seededoutput thirdpass disables
 output_final_state (1247-1254). CurrentR10/R11 uses actual-prefix firstpass and
