@@ -1,0 +1,144 @@
+{
+  "schema": "hypic-packed-c1-failed-canary/v1",
+  "controller": "exec-00000000000006f7",
+  "checkpoint": "fe6ca087b0629e5d80dedb13278bb37c0798cd4d",
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-packed-wave-canary-r1",
+  "decision": "NUMERICAL_CANARY_FAILED_NOT_PROMOTED",
+  "audit_operation": "exec-0000000000000707",
+  "audit": {
+    "source_bindings_unchanged": 118,
+    "isolation_clean": 173,
+    "exact_own_removed": true,
+    "port_free": true,
+    "physical0_3_empty": true,
+    "results": 16,
+    "successful": 0,
+    "failed_shadow_groups": 3,
+    "failed": [
+      {
+        "rank": 0,
+        "step": 9,
+        "layer": "language_model.model.layers.0.linear_attn",
+        "request_id": "cmpl-9b7f3ff4e4bea2aa-0-a3d98d17",
+        "metrics": [
+          {
+            "max_abs": 0.0078125,
+            "max_scaled": 0.6009615063667297,
+            "passed": true,
+            "rms": 0.00003369356636540033,
+            "tensor": "output"
+          },
+          {
+            "max_abs": 0.05862617492675781,
+            "max_scaled": 2.2860398292541504,
+            "passed": false,
+            "rms": 0.0003435423714108765,
+            "tensor": "state"
+          },
+          {
+            "max_abs": 0,
+            "max_scaled": 0,
+            "passed": true,
+            "rms": 0,
+            "tensor": "conv"
+          }
+        ],
+        "group_requests": [
+          "cmpl-9b7f3ff4e4bea2aa-0-a3d98d17",
+          "cmpl-88ca57d312c1b1f7-0-9a7d66a2"
+        ]
+      },
+      {
+        "rank": 1,
+        "step": 9,
+        "layer": "language_model.model.layers.0.linear_attn",
+        "request_id": "cmpl-9b7f3ff4e4bea2aa-0-a3d98d17",
+        "metrics": [
+          {
+            "max_abs": 0.0078125,
+            "max_scaled": 0.6009615063667297,
+            "passed": true,
+            "rms": 0.00004917303522233851,
+            "tensor": "output"
+          },
+          {
+            "max_abs": 0.12280082702636719,
+            "max_scaled": 5.814412593841553,
+            "passed": false,
+            "rms": 0.0005373627645894885,
+            "tensor": "state"
+          },
+          {
+            "max_abs": 0,
+            "max_scaled": 0,
+            "passed": true,
+            "rms": 0,
+            "tensor": "conv"
+          }
+        ],
+        "group_requests": [
+          "cmpl-9b7f3ff4e4bea2aa-0-a3d98d17",
+          "cmpl-88ca57d312c1b1f7-0-9a7d66a2"
+        ]
+      },
+      {
+        "rank": 2,
+        "step": 9,
+        "layer": "language_model.model.layers.0.linear_attn",
+        "request_id": "cmpl-9b7f3ff4e4bea2aa-0-a3d98d17",
+        "metrics": [
+          {
+            "max_abs": 0.0078125,
+            "max_scaled": 0.598802387714386,
+            "passed": true,
+            "rms": 0.000032790609111543745,
+            "tensor": "output"
+          },
+          {
+            "max_abs": 0.06430864334106445,
+            "max_scaled": 3.598289966583252,
+            "passed": false,
+            "rms": 0.0007049693376757205,
+            "tensor": "state"
+          },
+          {
+            "max_abs": 0,
+            "max_scaled": 0,
+            "passed": true,
+            "rms": 0,
+            "tensor": "conv"
+          }
+        ],
+        "group_requests": [
+          "cmpl-9b7f3ff4e4bea2aa-0-a3d98d17",
+          "cmpl-88ca57d312c1b1f7-0-9a7d66a2"
+        ]
+      }
+    ],
+    "actual_commits_in_failed_layer_step": 0,
+    "sha256": {
+      "result.json": "9f3ea7b329ad4bef7a9e7602d6d828d0a82d90b0b327d886b98c1501bcc2c588",
+      "events.jsonl": "dbeebab7872b1f2e97d13f9af52699684085d998feabc022afe15ad58839c568",
+      "compiled-cache-unit.json": "a34da980901073e99b642eca36b7c0763843b5fb1fd89881167b53074cb26f9f",
+      "release.json": "f6040682c17f356092a3028451c978a61d59d2ea7fcf72d1b55f0e03512b09be",
+      "service.log": "ffba5b23288d85096bcc6a90b68136b47f699fe15eb7c170181eab6ac00c171b"
+    }
+  },
+  "request_context_operation": "exec-000000000000070c",
+  "context": {
+    "step": 9,
+    "first_failed_request": {
+      "computed_tokens": 10240,
+      "scheduled_tokens": 22528
+    },
+    "other_group_request": {
+      "computed_tokens": 11776,
+      "scheduled_tokens": 18428
+    },
+    "interpretation": "failure occurs in chunk continuation with nonzero incoming state; output/conv passed, state failed; not a proven root cause"
+  },
+  "root_cause_status": "unproven; investigate additional live-prefix affine reconstruction under finite-precision chunk kernels, not hardware or external interference",
+  "successor": "R10 seeded-prefix dependency: shared WY once; first packed state pass uses actual incoming prefix states; compose cached body on actual prefix terminals; second seeded packed output pass. No live-window identity/T reconstruction needed for one cached body with at most two live windows.",
+  "guardrail": "No tolerance relaxation, no old root reuse, no unchanged rerun. Current disabled draft prerequisite failed; do not start it. New CPU rounding/continuation counterexample and package/contract/admission before any successor device run.",
+  "goal_complete": false
+}

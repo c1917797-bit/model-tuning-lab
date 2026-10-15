@@ -1,5 +1,19 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST06f7 TERMINALexit1,NUMERICAL_CANARY_FAILED_NOT_PROMOTED.0707 independent
+118source/173clean/exact132e8354 removal/8233free/physical0-3empty PASS.
+0of16 successful responses. Failed state shadows ranks0/1/2 layer0 step9,
+maxscaled2.286/5.814/3.598; output+conv PASS, no actual writes in failed groups.
+070c continuation context computed10240/scheduled22528 and11776/18428.
+Rootimmutable; no unchangedretry/tolerance relaxation. R9 disabled draft NOT
+admitted because enabled prerequisite failed. No owned live NPUjob.
+Next R10 seeded-prefix: actual incoming H first packed pass, cachedT/S on actual
+prefix terminal, second packed output pass; avoid unneeded live identity/T
+approximation. Hypothesis not proven rootcause. CPU nonlinear-rounding/nonzero
+continuation oracle then newsource/auditor/contract/admission. Preserve C2,
+conv/material/privatecommit/0-3only/fullscope/deadline19:04:09UTC.
+C1_PACKED_CANARY_R1_FAILURE_AUDIT.json and R10 successor plan record evidence.
+
 CURRENT R9 packed-C1 controller exec-00000000000006f7 RUNNING on original
 ma a6109 forcedirect; checkpointfe6ca087 published/liveverified. Rawroot
 /cache/cch/hypic-independent-20261013/c1-packed-wave-canary-r1 immutable.
