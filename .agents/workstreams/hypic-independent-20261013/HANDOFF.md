@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT R11 nativeGQA exec-0000000000000751 RUNNING originalma a6109/tpcdirect.
+Checkpointc07bb19c published/liveverified;0750 15:24:49UTC121bindings/newroot/
+physical0-3empty/8233+HCCLidle PASS.0753 exact ownedCID94f077ab93f8abd1c1fc0e14fb1b30550415f292f936a8db4c83853c6b75a430
+officialimage/ONLYphysical0-3 and ownrawRW,/probeRO. Rawc1-packed-nativegqa-r1
+immutable. Poll SAME0751/root; live/unknown NEVERrestart or edit121bound sources.
+Terminal audit_c1_packed_terminal.py --contract C1_PACKED_NATIVE_GQA_R1_CONTRACT.json
+--live-release: full16/fourrank48C1+16C2/native1/shadow/actual4key12valuegeometry/
+source/currentgeneration/physicalPID/isolation/exactrelease. Not yet acceptance.
+If stillfails, ONE bounded actual-stage probe, no blindhead/tolerance variants.
+Deadline19:04:09UTC/fullmatrix/quality/lifecycle/29functional unchanged.
+
 LATEST R11 nativeGQA implementation DEFAULTOFF: own Q/K replication removed;
 sharedWY preserves4key/12value native grouping; actual backend head geometry
 emitted per layer/request-step and strict independent auditor rejects drift.
