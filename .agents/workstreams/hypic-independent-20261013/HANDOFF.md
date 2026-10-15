@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST R15 G3/R1 FORMAL exec-000000000000089b RUNNING originalma a6109/tpcforcedirect.
+Source35159d41 published/liveverified/mainunchanged;089a fresh18:40:56UTC141bindings/
+0-3empty/8233+HCCLidle/newrootabsent PASS,~16GiBcachefree. Exactrawformal-r15-g3-r1.
+Controllerformal_r15_tp4.py reviewednative lifecycle unchangedAST, onlyownedTriton
+cache env/path added to avoid root100%; no cachecopy/quantization. Explicit defaultOFF
+timedmode disables C1/native serializedshadows+stageprobe only; formula/privatefinite/
+commitorder/shortprefix unchanged. Existingcanarymandatoryshadow remains.496CPU0893,
+12contractsstatic0892,route0894PASS. No NPU outcome or speedup/qualityclaim yet.
+PollSAME089b/save actual livePID/NSpid/cgroup; no edit141frozenfiles/restart.
+Terminal python3 -B audit_r15_terminal.py --contract FORMAL_R15_G3_R1_CONTRACT.json
+--live-release. Then ifvalid/released/fresh/time nextG1R1, orderR15readiness.
+Deadline19:04:09UTC unchanged; preserve/releaseatdeadline, don'tshrinkmatrixclaim.
+
 LATEST R14 PDC TERMINAL086a exit0 valid16/219clean/exact70e5release.0887
 revised observationalaudit PASS all16/all4 actualfirstcomputed7680, block1536
 proved18conditionalreceipts/13requests; per-request PICstart from boundtokeninput.

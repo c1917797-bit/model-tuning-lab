@@ -1,0 +1,25 @@
+{
+  "operation": "exec-000000000000089b",
+  "source_checkpoint": "35159d417f22699f15e4c6b025bfe478b5bc3bc5",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-r15-g3-r1",
+  "contract": "FORMAL_R15_G3_R1_CONTRACT.json",
+  "admission": {
+    "admission_passed": true,
+    "utc": "2026-10-15T18:40:56.892726+00:00",
+    "hostname": "Euler",
+    "arch": "aarch64",
+    "source_bindings": 141,
+    "physical0_3_processes": [],
+    "ports_idle": true,
+    "newroot_absent": true,
+    "checkpoint": "35159d417f22699f15e4c6b025bfe478b5bc3bc5",
+    "cache_free_bytes": 17047842816,
+    "memory": {
+      "MemAvailable": "81497136 kB",
+      "Hugetlb": "2009071616 kB"
+    },
+    "compute_started": false
+  },
+  "state": "running-no-outcome",
+  "scope": "formal40 timed treatment, not comparison or quality"
+}
