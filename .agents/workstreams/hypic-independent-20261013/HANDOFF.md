@@ -1,5 +1,19 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT R10 actual-prefix controller exec-0000000000000726 RUNNING on original
+ma a6109 forcedirect; checkpoint9a395daf published/liveverified,main unchanged.
+Raw/cache/cch/hypic-independent-20261013/c1-packed-seededprefix-r1 immutable.
+0725 14:54:57UTC120bindings/newroot/actual0-3empty/8233+HCCLidle PASS.
+0728 actual ownedCIDf1d5d9a7977f2e470f215c94da92c142f163646094805c55ca8900839a9517c7,
+officialimage/physical0-3only,/probeRO/newowncacheRW. No numeric/request proofyet.
+Poll SAME0726/root,live/unknown NEVERrestart or edit120bound sources.
+Terminal audit audit_c1_packed_terminal.py --contract
+C1_PACKED_SEEDED_PREFIX_R1_CONTRACT.json --live-release; requires2passes and
+actual_prefix_terminal plus original full16/fourrank/hot/shadow/physical/release.
+OldR9failed raw and gate unchanged; no diagnostic latency/quality claims.
+Guard/deadline19:04:09UTC/fullmatrix/quality/lifecycle/29functional unchanged.
+C1_PACKED_R10_LIVE_LAUNCH_RECEIPT.json retains exact start; metadata newerlocal.
+
 LATEST R10 implemented defaultoff: firstpackedH uses actual incoming prefix
 states, cachedT/S composes actual prefixterminal, second packedH/output pass;
 no live identity/T approximation. Conv/sharedWY/C2/materialleases/native1 and
