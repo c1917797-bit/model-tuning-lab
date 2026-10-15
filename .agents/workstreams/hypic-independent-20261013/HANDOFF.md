@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LIVE R6 C2barrier integratedfull40/c16 controller exec-000000000000046a,
+freshma a6109 forcedirect,checkpoint4344f90f. Rawroot
+/cache/cch/hypic-independent-20261013/formal-performance-g3-c2barrier-r1.
+0468 all94bindings/controller/newroot/physical0-3/8233/HCCLidle PASS.
+0466 focused26hosttests PASS. NewR6 config explicit c2_layer_completion_barrier
+true;defaultfalse leaves old implementation. Only C2 layer completion barrier
+changed,math/backendwindows/receipts retained. ActualNPU/benefit unproven.
+Poll exact046a/root;live/unknown neverrestart/editboundsource. Require full40
+all4rank48/16 hot/source/physical/cleanisolation/exactrelease terminal audit.
+Deadline2026-10-15T19:04:09UTC unchanged;oldroots/results immutable.
+
 RENEWED HUMAN WINDOW2026-10-15 07:04:09–19:04:09UTC,
 Moscow10:04:09–22:04:09. Explicit 从现在起继续跑12小时 overrides prior
 expired deadline. New heartbeat hypic-12 active every10min,delete atdeadline.
