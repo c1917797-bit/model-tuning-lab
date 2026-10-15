@@ -1,0 +1,34 @@
+{
+  "schema": "hypic-r13-host-component/v1",
+  "scope": "offline deferred capture helper only; not wired, not numerical rootcause or NPU acceptance",
+  "baseline_commit": "642b9d431f918fdb03c8068f2b623cdb0c3669b8",
+  "focused": {
+    "operation": "exec-00000000000007e3",
+    "tests": 13,
+    "exit": 0
+  },
+  "full": {
+    "operation": "exec-00000000000007e6",
+    "tests": 454,
+    "exit": 0,
+    "cwd": "workstream"
+  },
+  "negative_run": {
+    "operation": "exec-00000000000007e5",
+    "tests": 443,
+    "errors": 2,
+    "cause": "Wrong repository-root cwd left two relative contract files unresolved; corrected to documented workstream cwd without editing those tests/contracts."
+  },
+  "structure": {
+    "operation": "exec-00000000000007e4",
+    "skills": 29,
+    "scope": "structure only, not functional"
+  },
+  "bounds": {
+    "retained_bytes": 268435456,
+    "records": 32,
+    "cpu_export_bytes": 67108864
+  },
+  "algorithm_changes": false,
+  "device_started": false
+}

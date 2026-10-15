@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+
+LATEST R13 deferred actual-head helper implemented, NOTwired into runtime.
+13focused07e3 and454fullCPU07e6 PASS (workstreamcwd).07e5 wrongrootcwd failed
+2relativecontractfixtures; no fixture/contract edit, corrected invocation passes.
+32records/256MiB retained beforeallocation, owned detachedclones, grouped native/
+expandedhead mapping, exactfrozenFP32argmax, pass/error/flush cleanup. Defaultoff.
+Existing runtime/probe/algorithm unchanged; no newNPUjob, no rootcauseclaim.
+NEXT wire explicit residualhead policy/probe/failedshadow and independent selected
+coordinate-vs-reportedmax audit, then newboundpackage/contract/publish/admission.
+Fullscope/deadline19:04:09UTC unchanged; R12r2rawimmutable/head0inconclusive.
+
 LATEST07ca TERMINALexit1;127sources/172clean/exact9866d113release/no8233listener/
 physical0-3empty independently checked.07d8 capturelink/files/branches/source/
 generation/head0coords PASS:12records/20,082,816bytes. CaptureSHA4566460e80c73578821630f2aa7d84ec33e7f136e1851dd34cba65fc689a2320.
