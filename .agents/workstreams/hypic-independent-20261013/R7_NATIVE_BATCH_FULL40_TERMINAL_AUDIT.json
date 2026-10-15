@@ -1,0 +1,142 @@
+{
+  "full40_terminal_valid": true,
+  "transport": {
+    "terminal_unit_valid": true,
+    "timing": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 441.9815987353487,
+      "ttft_p95_ms": 628317.9275000002,
+      "tpot_p95_ms": 524.8572113574141
+    },
+    "isolation_samples": 610,
+    "source_bindings": 101,
+    "raw_sha256": {
+      "result.json": "ad5fbc049d91f7cb5904ab8e3263f7e51c38593f4ba7bc82d1370caf26488115",
+      "events.jsonl": "561e07130dc854e278580f8e8c646f3b505721015117b1f06a615eee2b8a8c65",
+      "performance-unit.json": "2eadd6df9b521bbd38b494977d26f812341dd5b9143481f3e02d30601d4a660b",
+      "release.json": "9930bb58839748879280351b465ea77c0b7444dd171b8f4e8a36655a6d1c0b3c"
+    },
+    "scope": "full40 transport/timing and declared source/isolation/release receipts; actual physical release and hot/PDC/quality separate"
+  },
+  "hot": {
+    "accepted_hot_coverage": true,
+    "denominator": 40,
+    "covered": [
+      "cmpl-9ff0e514f4337445",
+      "cmpl-a0d5a809570af2d3",
+      "cmpl-bccbcf8943aa0671",
+      "cmpl-96d0b70b7feebbb3",
+      "cmpl-853ad83e50c0f61c",
+      "cmpl-82dc7e26e1e80592",
+      "cmpl-9a9adff650d1afda",
+      "cmpl-83b4c9ea9a5cba44",
+      "cmpl-a0335b63c973989f",
+      "cmpl-a1b7952d3b0fb827",
+      "cmpl-acdb80d7765e9a0c",
+      "cmpl-97d4ce9e66b7997e",
+      "cmpl-b0d1c35ad9cb0841",
+      "cmpl-accc178327b88e7c",
+      "cmpl-8f966bdf3cde4069",
+      "cmpl-81d3489ef969d3f9",
+      "cmpl-8ec70d5fbcebc6b9",
+      "cmpl-8e3873da3e8cfcc1",
+      "cmpl-a72481c1a36f514b",
+      "cmpl-a813f47ba803bfab",
+      "cmpl-8a0628a9a9a9314c",
+      "cmpl-a154a257b0334f62",
+      "cmpl-b44eb4b19539e951",
+      "cmpl-b111f3dfde757d04",
+      "cmpl-9ce92810c42363f4",
+      "cmpl-92b460ca2a8dcd75",
+      "cmpl-baa0da7476734914",
+      "cmpl-ba8f6af743ba2746",
+      "cmpl-8d8697bd01ce9d27",
+      "cmpl-b4e322e6eab73ad8",
+      "cmpl-95e87deb2df6c344",
+      "cmpl-ba2c1c471aa4100d",
+      "cmpl-87ecf249bbf2ccdc",
+      "cmpl-b629263cd9089554",
+      "cmpl-a1bfc11b1dc3fe9e",
+      "cmpl-99e7dda06c54882b",
+      "cmpl-b4c6276fa45d1133",
+      "cmpl-a587c7f7e45029b5",
+      "cmpl-b107ab331b2da585",
+      "cmpl-acdd0f7f5ef17f8b"
+    ],
+    "missing": [],
+    "worker_pids": {
+      "0": 59,
+      "1": 60,
+      "2": 61,
+      "3": 62
+    },
+    "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+  },
+  "native_batch": {
+    "native_decode_batch_verified": true,
+    "workers": {
+      "0": 59,
+      "1": 60,
+      "2": 61,
+      "3": 62
+    },
+    "multirow_shadow_layers": {
+      "0": 48,
+      "1": 48,
+      "2": 48,
+      "3": 48
+    },
+    "batch_calls": 6912,
+    "native_rows": 60480,
+    "scope": "source-bound runtime numerical-control and deferred-commit receipts; no independent tensor dump, whole-model quality, transport, physical or performance claim"
+  },
+  "physical": {
+    "ranks": {
+      "0": {
+        "inner_pid": 59,
+        "host_pid": 862507,
+        "physical_npu": 0
+      },
+      "1": {
+        "inner_pid": 60,
+        "host_pid": 862508,
+        "physical_npu": 1
+      },
+      "2": {
+        "inner_pid": 61,
+        "host_pid": 862509,
+        "physical_npu": 2
+      },
+      "3": {
+        "inner_pid": 62,
+        "host_pid": 862510,
+        "physical_npu": 3
+      }
+    },
+    "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+  },
+  "shadow_groups": 384,
+  "max_scaled": 0.0001279685238841921,
+  "manifest_sha256": "5e334fad5e922fde10a9760b888188a353662f34206b50dc32b36a1b3fc0285e",
+  "exact_container_absent": true,
+  "fresh_physical": [],
+  "port_bind_free": true,
+  "scope": "full40 same-source transport/timing/hot/native-batch numerical-control/physical/isolation/exactrelease; not repeated matrix or taskquality acceptance",
+  "controller": "exec-000000000000062d",
+  "independent_audit": "exec-0000000000000662",
+  "state": "mechanism-passed-performance-screen-not-promoted",
+  "comparison": {
+    "scope": "screening references, NOT fresh same-identity paired or repeated claim",
+    "r6_cold_tpot_ms": 452.7188251589381,
+    "r6_tpot_delta_percent": -2.3717207738864876,
+    "historical_native_tpot_ms": 284.11462358545026,
+    "native_tpot_delta_percent": 55.56453700188311,
+    "r6_ttft_p95_ms": 615444.2203000071,
+    "r6_ttft_delta_percent": 2.0917748148999715
+  },
+  "decision": "Do not expand unchanged full matrix. Native1 call grouping works and full-path shadow passes, but no demonstrated service speed win. This does not reject HYPIC paper or change any previous quality outcome.",
+  "next": "Read exact C1 live prefix/suffix executor and layer completion/source maps, quantify remaining barriers/window dispatch; one disabled-default integrated candidate only, same-source/private-state math/oracle and fresh admission. No standaloneGDN or unchanged rerun.",
+  "quality": "not run; full381 and lifecycle/29Skills remain",
+  "deadline": "2026-10-15T19:04:09Z"
+}
