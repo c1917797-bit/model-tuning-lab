@@ -1,0 +1,24 @@
+{
+  "GE_class_same_except_consumer_schema": true,
+  "NPU": false,
+  "base_host": {
+    "bytes": 21614,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-regression137-guard-new48h-v1-020-physical4-repair2/host.py",
+    "sha256": "7dcb9ba06533b5e54ecaa669a799f8ed3b6027016eae5e529315ce8e9ae8f00a"
+  },
+  "changes": [
+    "OWNER identity",
+    "040 exact source/raw/DSO closure",
+    "consumer schema",
+    "diagnostic-only output flags/no numerical qualification"
+  ],
+  "resource_controller_changed": false,
+  "schema": "deltalog040-existing-owned-reuse/v040",
+  "unchanged_functions": [
+    "base_lane",
+    "inspect_owned",
+    "sha",
+    "checked",
+    "load_host"
+  ]
+}

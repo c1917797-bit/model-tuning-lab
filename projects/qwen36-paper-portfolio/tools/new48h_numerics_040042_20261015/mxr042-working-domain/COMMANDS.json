@@ -1,0 +1,65 @@
+{
+  "schema": "mxr.working-domain042-commands/v1",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/SOURCE_MANIFEST.json",
+    "bytes": 15593,
+    "sha256": "cf39ca19254a30a82844dd88754da596b33339e33eb7adb60e0b78ae443ecbcb"
+  },
+  "READY": false,
+  "default_enabled": false,
+  "canonical_host_cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+  "environment": {
+    "MXR_SAVED_FRAME_HOST_ENABLE": "1"
+  },
+  "sourceaudit_argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/mainhost.py",
+    "--source-audit-only",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/SOURCE_MANIFEST.json\",\"bytes\":15593,\"sha256\":\"cf39ca19254a30a82844dd88754da596b33339e33eb7adb60e0b78ae443ecbcb\"}"
+  ],
+  "CPU_argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/mainhost.py",
+    "--execute",
+    "--cpu-preflight",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/SOURCE_MANIFEST.json\",\"bytes\":15593,\"sha256\":\"cf39ca19254a30a82844dd88754da596b33339e33eb7adb60e0b78ae443ecbcb\"}",
+    "--output",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-working-domain042-CPU_001"
+  ],
+  "NPU_then_CPU_argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/mainhost.py",
+    "--execute",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/SOURCE_MANIFEST.json\",\"bytes\":15593,\"sha256\":\"cf39ca19254a30a82844dd88754da596b33339e33eb7adb60e0b78ae443ecbcb\"}",
+    "--cpu-preflight-ref",
+    "ACTUAL_SAME_SOURCE_CPU_OWNER_REF_JSON",
+    "--output",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-working-domain042-NPU_001"
+  ],
+  "budget": {
+    "CPU_consumer_seconds": 600,
+    "NPU_child_seconds": 900,
+    "cleanup_seconds": 90,
+    "evidence_MiB": 256,
+    "guest_GiB": 8,
+    "host_GiB": 0.5,
+    "phase_seconds": 2400,
+    "reserve_GiB": 8,
+    "setup_seconds": 810,
+    "unchanged_original_disk_GiB": 4
+  },
+  "cutoff": 1792135097,
+  "actual_sameimage_CPU": null,
+  "actual_NPU": null,
+  "actual_domain_acceptance": null,
+  "note": "Source-only; symbolic CPU Ref must be replaced with actual same-source successful owned CPU receipt; no model/perf/task admission. No autorun. MAIN must confirm physical4 idle and external workload scope. Existing Owned controller unchanged."
+}

@@ -1,0 +1,421 @@
+{
+  "CPU_total": 4,
+  "NPU": false,
+  "actual_INPUTS_ref": null,
+  "actual_SDK_event_source_verified": true,
+  "actual_SDK_runtime_verified": false,
+  "actual_build_result": null,
+  "actual_cohort_ref": null,
+  "actual_failure_context": {
+    "autoload": "0",
+    "input_ref": null,
+    "operation": "exec-00000000000000d3",
+    "second_no_backend_line": 25,
+    "torch_imported": true,
+    "torch_npu_imported": false,
+    "triton_imported": true
+  },
+  "actual_same660": null,
+  "actual_same_image": null,
+  "authority": {
+    "bytes": 3591,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+    "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+  },
+  "base_source": {
+    "bytes": 12385,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/SOURCE_MANIFEST.json",
+    "sha256": "7aa51f300fbe7f92d35ab8903e82c54fb272754e20c9da345ddfec8b9db4679c"
+  },
+  "build_host_refs": [
+    {
+      "bytes": 1694,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/B010_ORIGINAL_SOURCE.json",
+      "sha256": "daff32d3c90765ef72896ba9c29398759e5f18c64fff353b1e3d220948d4741b"
+    },
+    {
+      "bytes": 3046,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/SOURCE_MANIFEST.json",
+      "sha256": "dbff45f351dfb9d593a5fadd8cd0df63f6adfcc67b09b13eda3afcd6b8b9d0a7"
+    },
+    {
+      "bytes": 4498,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/build_pair.py",
+      "sha256": "e30680f5047eb79575eb175350ffd498adb33144ba2c73359f697a61323fc224"
+    },
+    {
+      "bytes": 4979,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042/CMakeLists.txt",
+      "sha256": "b8c6aa9fa03d5ad9a8656d077e29e5cad587a0554103b1e9c25e8b68465f6bd7"
+    },
+    {
+      "bytes": 677,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042/op_extension/ops.h",
+      "sha256": "dec0c5eca4759ea14bcfae0e600c34216d8c4a28ae321d5a71e0d645f653639b"
+    },
+    {
+      "bytes": 8217,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042/op_extension/qwen36_gdn_deltalog_decode_readout_mac042_torch.cpp",
+      "sha256": "bf4233428903b3f110f26a2c62545d0ee940ea89b64d2a7937a69d73f11b6956"
+    },
+    {
+      "bytes": 1233,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042/op_extension/register.cpp",
+      "sha256": "e7566ac555c7506631f2853728737b3f419962de75e7de0cea64ec873ea74247"
+    },
+    {
+      "bytes": 23577,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042.h",
+      "sha256": "bd2d5d53b985f257d27d26ec505bafa82643c835236986303086413e3f9b9b07"
+    },
+    {
+      "bytes": 1035,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042_kernel.asc",
+      "sha256": "132dff97125e2a9077ea1ad3c201d454328b002e90be36746095a3ca84898686"
+    },
+    {
+      "bytes": 374,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042_tiling.h",
+      "sha256": "324627e797656be115408f6404b9e359b623a2f177b097d5f7f1d95059a84296"
+    },
+    {
+      "bytes": 5033,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042_debug/CMakeLists.txt",
+      "sha256": "f682894bbe1a1ab30dc05cec8a7f92d9be5cd44e52506c6e08b416c491740b01"
+    },
+    {
+      "bytes": 730,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042_debug/op_extension/ops.h",
+      "sha256": "bce6a72d8a6b02f5e3c69a4b7c340ebd695de38fee85b40d7baf9133cc711366"
+    },
+    {
+      "bytes": 9115,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042_debug/op_extension/qwen36_gdn_deltalog_decode_readout_mac042_debug_torch.cpp",
+      "sha256": "665e1e2372e75ecb25de4b55ae92ffea4e5d806c877be773f10d94d99fb446a1"
+    },
+    {
+      "bytes": 1317,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042_debug/op_extension/register.cpp",
+      "sha256": "9823ccfb5cdb0555dc1ed1427b2e75f7f216fc30fb173451cb445fc5dfc4c149"
+    },
+    {
+      "bytes": 24315,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042_debug/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042_debug.h",
+      "sha256": "41b72e24b66d2a77c71901083034523eb934433d2679dfb00218aa29994b3a67"
+    },
+    {
+      "bytes": 1096,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042_debug/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042_debug_kernel.asc",
+      "sha256": "ea46058835891f0c6ba11e42bba058fa71d3e2f642262506f242078a7b92de6f"
+    },
+    {
+      "bytes": 396,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042_debug/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042_debug_tiling.h",
+      "sha256": "0a2dad8c114a7b9c9cc947027b9e74fafb20ca35834c098008b7a3571d61c4d9"
+    },
+    {
+      "bytes": 4482,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/originals/build010.py",
+      "sha256": "a18480fcd03a0f9e4d31ab765bcf2992ed43b56a6b88b7d8e180c380e10dea3a"
+    },
+    {
+      "bytes": 4490,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/originals/build015.py",
+      "sha256": "9e05aec8a326025e0df780283f0d457ba6fcbb48c06182ba84073130e3c00bab"
+    },
+    {
+      "bytes": 3248,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/originals/inverse015.py",
+      "sha256": "8321c03a5723a5c664960afcf1bb38a33f0e989f169bf004e36e08f326a82ba0"
+    },
+    {
+      "bytes": 2838,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/verify_inverse.py",
+      "sha256": "d017487ce67d3baa83fbfb5df81175daf92af64ad6c810750c16ee888b13fb7a"
+    }
+  ],
+  "build_script_ref": {
+    "bytes": 4498,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/build_pair.py",
+    "sha256": "e30680f5047eb79575eb175350ffd498adb33144ba2c73359f697a61323fc224"
+  },
+  "build_source_manifest": {
+    "bytes": 3046,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/SOURCE_MANIFEST.json",
+    "sha256": "dbff45f351dfb9d593a5fadd8cd0df63f6adfcc67b09b13eda3afcd6b8b9d0a7"
+  },
+  "cache_bytes": 536870912,
+  "child_cap_seconds": 810,
+  "cleanup_seconds": 90,
+  "cmake_image_ref": {
+    "bytes": 20331448,
+    "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/cmake/data/bin/cmake",
+    "sha256": "9b31714718a5fa96fa7eac9a17c4fcda45448e30305e1e7c435df6aa07f25f06"
+  },
+  "cohort_compatibility": "main-fixed-disjoint-diagnostic-v1",
+  "cohort_policy": {
+    "bytes": 800,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/POLICY_SOURCE.json",
+    "sha256": "c4eb15b872dc212f3a616eb2a43e875b7d39e2e8b91d122ad12de400c523e809"
+  },
+  "cohort_runtime": {
+    "bytes": 9836,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/cohort_runtime.py",
+    "sha256": "f7df120d3cf8e6cfc9faa406ea091bb0efbba8b1afa5cf1a9b620bce4649adbb"
+  },
+  "controller_adapter": {
+    "bytes": 6035,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/controller_adapter.py",
+    "sha256": "6e0dbb47a8fc2935e1de792096deae517b39c76f75c354a6b95369addfcdc370"
+  },
+  "coordinator": "MAIN",
+  "cutoff": 1792135097,
+  "default_enabled": false,
+  "delta": "042 one finalreadout MAC, no prior numeric qualification",
+  "dependencies": [
+    {
+      "bytes": 3591,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+      "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+    },
+    {
+      "bytes": 12385,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/SOURCE_MANIFEST.json",
+      "sha256": "7aa51f300fbe7f92d35ab8903e82c54fb272754e20c9da345ddfec8b9db4679c"
+    },
+    {
+      "bytes": 15994,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-004/binding.py",
+      "sha256": "ff6ff3a3a7fdf186dd8481b0e28e980ee631163cf0cb3c85246ccc9b471beeb3"
+    },
+    {
+      "bytes": 16480,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/once_contract.py",
+      "sha256": "7789d63886da0ebe9420b0f56b584c81eae9e50ab561dbf64940df37eb31aa6a"
+    },
+    {
+      "bytes": 29763,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/host_once.py",
+      "sha256": "6414c912b216f3896a21e7b321717b604c4be7db21220ed034a798da460a0be8"
+    },
+    {
+      "bytes": 6865,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/safety_lifecycle.py",
+      "sha256": "4bbd492809c9ba1922fd3885b101f8cc6fe187884703c21e4a2d44acd1444b75"
+    },
+    {
+      "bytes": 3401,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-004/inspect_store.py",
+      "sha256": "d533a19c72d2be25791dcb0906d0c66ff7eb42ff29dca9d4657eb823c8464a48"
+    },
+    {
+      "bytes": 800,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/POLICY_SOURCE.json",
+      "sha256": "c4eb15b872dc212f3a616eb2a43e875b7d39e2e8b91d122ad12de400c523e809"
+    },
+    {
+      "bytes": 9836,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/cohort_runtime.py",
+      "sha256": "f7df120d3cf8e6cfc9faa406ea091bb0efbba8b1afa5cf1a9b620bce4649adbb"
+    },
+    {
+      "bytes": 6035,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/controller_adapter.py",
+      "sha256": "6e0dbb47a8fc2935e1de792096deae517b39c76f75c354a6b95369addfcdc370"
+    },
+    {
+      "bytes": 818,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/window.py",
+      "sha256": "39e4a15b729c7d7bf9f56d0e4ca9987d1252630efead77e389312e72b04494a3"
+    },
+    {
+      "bytes": 6194,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R118/skvq-writer-native-v1-003/idle_policy.py",
+      "sha256": "1988d3843b340a06b0c402b96886ea7a6feb8bab573f67fb8c74512bcca33616"
+    },
+    {
+      "bytes": 16355,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv030-fa-physical-layout-observation-v6-user72h-20261010/output_budget.py",
+      "sha256": "44e5ccfdad173e6b9eebc025260e489893d672c316c6aac3f8bf68a5e03c16ad"
+    },
+    {
+      "bytes": 8472,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/protected-terminal-observer-new48h-v1-002/observer.py",
+      "sha256": "a0d296fc274899009e0e7570d839adaa0f5f2a41b38d470466d1ea696a43229b"
+    },
+    {
+      "bytes": 10024,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/cohort_policy.py",
+      "sha256": "0cf5efcce2a8281d781ec4351c95e9556a5ee05f9b1ba5dcd3f41160820b2c94"
+    },
+    {
+      "bytes": 33743,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+      "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86"
+    }
+  ],
+  "devices": [],
+  "donor_contract": {
+    "bytes": 16480,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/once_contract.py",
+    "sha256": "7789d63886da0ebe9420b0f56b584c81eae9e50ab561dbf64940df37eb31aa6a"
+  },
+  "donor_host": {
+    "bytes": 29763,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/host_once.py",
+    "sha256": "6414c912b216f3896a21e7b321717b604c4be7db21220ed034a798da460a0be8"
+  },
+  "donor_safety": {
+    "bytes": 6865,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/safety_lifecycle.py",
+    "sha256": "4bbd492809c9ba1922fd3885b101f8cc6fe187884703c21e4a2d44acd1444b75"
+  },
+  "evidence_bytes": 268435456,
+  "files": {
+    "bind_cohort.py": {
+      "bytes": 11584,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/build_owner/bind_cohort.py",
+      "sha256": "c0d4d67a091aed6968b37cde19887ebbf7bcac282445aa567f0b614ebad4bcc7"
+    },
+    "cache_scan.py": {
+      "bytes": 4277,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cache_scan.py",
+      "sha256": "79dc8de88d84120f80f7b88763b0811f8463daefd94eb455e57bcb0aadc509a2"
+    },
+    "guest.py": {
+      "bytes": 4787,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/build_owner/guest.py",
+      "sha256": "3f6a52a761bd9126ff9ff9d43da967256e4e0dcd2d63681f41bef7c668ff2548"
+    },
+    "host.py": {
+      "bytes": 8538,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/build_owner/host.py",
+      "sha256": "c2f9f05d7eb71a8e2d0e93e094ec690cdca662cf379494aca7f48961239b4446"
+    },
+    "test_owner.py": {
+      "bytes": 1135,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/build_owner/test_owner.py",
+      "sha256": "e7378dea11e368d966cb5b400eea9047c017eb0e3653dbc38a67754b7bbb5afb"
+    }
+  },
+  "guest_bytes": 8589934592,
+  "historical_failure_refs": {
+    "historical_results_immutable": true,
+    "input003_operation": "exec-00000000000000d3",
+    "input004_counterexample": "INPUT004_REVIEW.md"
+  },
+  "host_bytes": 536870912,
+  "idle_helper": {
+    "bytes": 33743,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+    "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86"
+  },
+  "idle_policy": {
+    "bytes": 6194,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R118/skvq-writer-native-v1-003/idle_policy.py",
+    "sha256": "1988d3843b340a06b0c402b96886ea7a6feb8bab573f67fb8c74512bcca33616"
+  },
+  "image_cpu_dependency_sources": [
+    {
+      "bytes": 1509,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/triton/runtime/driver.py",
+      "sha256": "559fbcf375eb8bbd51ef694707abac2292e8de018b6d92640252cfddec164a97"
+    },
+    {
+      "bytes": 49380,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/triton/backends/ascend/driver.py",
+      "sha256": "b39118053062f3fc6d7f1047f8c9eb229de47a2b6106d8119cc7087f5b38818e"
+    },
+    {
+      "bytes": 106868,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch/__init__.py",
+      "sha256": "51c90fe34a7cf869517d1bab4cd114498790e169ec668f1a154c35ec64117a5e"
+    }
+  ],
+  "image_refs": [
+    {
+      "bytes": 20331448,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/cmake/data/bin/cmake",
+      "sha256": "9b31714718a5fa96fa7eac9a17c4fcda45448e30305e1e7c435df6aa07f25f06"
+    }
+  ],
+  "inspect_store": {
+    "bytes": 3401,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-004/inspect_store.py",
+    "sha256": "d533a19c72d2be25791dcb0906d0c66ff7eb42ff29dca9d4657eb823c8464a48"
+  },
+  "local_actual_tests": {
+    "actual_same660": null,
+    "class_controls": 5,
+    "legacy_controls": 10,
+    "new_binding_controls": 7
+  },
+  "logical": 0,
+  "mechanical_verifier": {
+    "bytes": 2838,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/verify_inverse.py",
+    "sha256": "d017487ce67d3baa83fbfb5df81175daf92af64ad6c810750c16ee888b13fb7a"
+  },
+  "model_ready": false,
+  "owner_binding": {
+    "bytes": 15994,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-004/binding.py",
+    "sha256": "ff6ff3a3a7fdf186dd8481b0e28e980ee631163cf0cb3c85246ccc9b471beeb3"
+  },
+  "performance_ready": false,
+  "phase_seconds": 900,
+  "physical_allowed": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "previous_failed_owner_source": {
+    "bytes": 20444,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-kdma-owned-build-new48h-v1-005/SOURCE_MANIFEST.json",
+    "sha256": "59fe291f68c603f7c7ab1b9fd2ba4df616c91acdf013f3dee93805c48bbb07fc"
+  },
+  "prior_pass_inherited": false,
+  "production_install_executed": false,
+  "protected_observer": {
+    "bytes": 8472,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/protected-terminal-observer-new48h-v1-002/observer.py",
+    "sha256": "a0d296fc274899009e0e7570d839adaa0f5f2a41b38d470466d1ea696a43229b"
+  },
+  "ready": false,
+  "reserve_bytes": 8589934592,
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/build_owner",
+  "schema": "deltalog.owned-kdma-build-source/v1",
+  "stage": "CPU-two-DSO-one-readout-MAC-build-only",
+  "start_epoch": 1791962297,
+  "supersedes_source_ref": {
+    "bytes": 15713,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/latest-task-input-CPU-owner-v1-004/SOURCE_MANIFEST.json",
+    "sha256": "20e3ee764cae3ab0b5b59feaa4c8c89fc89ed748b49e4c23e672b2e3a39ca0c2"
+  },
+  "task_ready": false,
+  "validation_change": {
+    "allow_real_CPU_dependency_modules": [
+      "torch",
+      "triton"
+    ],
+    "forbid": [
+      "TorchNPU/vLLM/NPUlauncher import",
+      "all original Ascend driver function/method bodies; only exact source-pinned three top-level class-definition code objects allowed",
+      "original LazyProxy initialization",
+      "Torch device backend autoload/registration",
+      "device runtime ctypes dlopen",
+      "driver active/default replacement or _obj not None",
+      "NPUUtils instance",
+      "device/control FD/node",
+      "loaded device runtime libraries"
+    ],
+    "proof_mandatory": "host consume_safety consumes exact safety/input Ref3 and inactive checkpoints before stop receipt; full INPUTS rows remain original reader identity."
+  },
+  "weights_read": false,
+  "window": {
+    "bytes": 818,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/window.py",
+    "sha256": "39e4a15b729c7d7bf9f56d0e4ca9987d1252630efead77e389312e72b04494a3"
+  }
+}

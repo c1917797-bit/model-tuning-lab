@@ -1,0 +1,362 @@
+{
+  "actual016_source_ref": {
+    "bytes": 53261,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-precast-empirical-new48h-v1-016/BOUND_NUMERIC_SOURCE.json",
+    "sha256": "7d61ca178c78ee8d883d608d644931c555fe44b3ad36c5cdbfea71bb464a7045"
+  },
+  "actual035_source_ref": {
+    "bytes": 26248,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair4/SOURCE_MANIFEST.json",
+    "sha256": "e5566351d02b04792b871f67092876f69b7fb58bbc81c36d21360fb328ec6524"
+  },
+  "authority_ref": {
+    "bytes": 3591,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+    "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+  },
+  "baseline_ref": {
+    "bytes": 2332672,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/key_projection-build/libqwen36_gdn_deltalog_decode_key_projection_ops.so",
+    "sha256": "298749129c8586ecea56cb6076c435631b6fbef4b4e7757636ff87a4ec09abf7"
+  },
+  "build_owner_ref": null,
+  "build_owner_source_ref": {
+    "bytes": 19737,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/build_owner/SOURCE_MANIFEST.json",
+    "sha256": "f0548415ed6c0a5f092463ff3f236d8ca415d99ab3e7de354ca9e9036ecf675a"
+  },
+  "debug_build_ref": null,
+  "debug_kernel_source_ref": {
+    "bytes": 3046,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/SOURCE_MANIFEST.json",
+    "sha256": "dbff45f351dfb9d593a5fadd8cd0df63f6adfcc67b09b13eda3afcd6b8b9d0a7"
+  },
+  "debug_library": null,
+  "default_enabled": false,
+  "dependencies": [
+    {
+      "bytes": 16179,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair4/qwen36_deltalog_fresh/native_fixture.py",
+      "sha256": "a19e49b0295e03df4b5771910932e59018d4353623f2edd27a5e7d8a1b2a46e6"
+    },
+    {
+      "bytes": 53261,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-precast-empirical-new48h-v1-016/BOUND_NUMERIC_SOURCE.json",
+      "sha256": "7d61ca178c78ee8d883d608d644931c555fe44b3ad36c5cdbfea71bb464a7045"
+    },
+    {
+      "bytes": 151267875,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035r4-numeric160-new48h-MAIN-20261015-001/numeric/result/mixed-B16-080.pt",
+      "sha256": "6057c3726a57f778116e8dd1ff7eef6e2aed9c7d4c4213f286c21d18be58171b"
+    },
+    {
+      "bytes": 1673,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035r4-numeric160-new48h-MAIN-20261015-001/RESULT.json",
+      "sha256": "825cfa7ac6246ebb839192e39898d405dedd9ab71746dea2b6874e0f23ce8fc9"
+    },
+    {
+      "bytes": 26248,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair4/SOURCE_MANIFEST.json",
+      "sha256": "e5566351d02b04792b871f67092876f69b7fb58bbc81c36d21360fb328ec6524"
+    },
+    {
+      "bytes": 2332672,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/key_projection-build/libqwen36_gdn_deltalog_decode_key_projection_ops.so",
+      "sha256": "298749129c8586ecea56cb6076c435631b6fbef4b4e7757636ff87a4ec09abf7"
+    },
+    {
+      "bytes": 5266,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-readout-sidecar015-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/RESULT.json",
+      "sha256": "718a977cd947f610e41db1d5cb5284f4ef0ce36e55a30c94c96f96b3dd013f1d"
+    },
+    {
+      "bytes": 2347032,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-readout-sidecar015-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/readout_sidecar_v015-build/libqwen36_gdn_deltalog_decode_readout_sidecar_v015_ops.so",
+      "sha256": "0d3400929262a16f6485cebc3fcf7e683fbff335af193df4754875091b915e2c"
+    },
+    {
+      "bytes": 1766,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/kernel/SOURCE_MANIFEST.json",
+      "sha256": "29ba4bf5221bcfeb1597b162ed11e071ce4e57ea18215a9fd1cfb14f3ffafc2f"
+    },
+    {
+      "bytes": 1694,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-key-projection-B-new48h-v1-010/kernel/SOURCE_MANIFEST.json",
+      "sha256": "56a46e89869929f6c1a43b8e0d0870c7b2bb0429c6446499ab67d63b5e243161"
+    },
+    {
+      "bytes": 5191,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/RESULT.json",
+      "sha256": "29b86fcadb62e9b25c320f164254074a1c43f06a560843d3c89d4f3c9e73222b"
+    },
+    {
+      "bytes": 3591,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+      "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+    },
+    {
+      "bytes": 8472,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/protected-terminal-observer-new48h-v1-002/observer.py",
+      "sha256": "a0d296fc274899009e0e7570d839adaa0f5f2a41b38d470466d1ea696a43229b"
+    },
+    {
+      "bytes": 2838,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/verify_inverse.py",
+      "sha256": "d017487ce67d3baa83fbfb5df81175daf92af64ad6c810750c16ee888b13fb7a"
+    },
+    {
+      "bytes": 3046,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/SOURCE_MANIFEST.json",
+      "sha256": "dbff45f351dfb9d593a5fadd8cd0df63f6adfcc67b09b13eda3afcd6b8b9d0a7"
+    },
+    {
+      "bytes": 19737,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/build_owner/SOURCE_MANIFEST.json",
+      "sha256": "f0548415ed6c0a5f092463ff3f236d8ca415d99ab3e7de354ca9e9036ecf675a"
+    },
+    {
+      "bytes": 1694,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/B010_ORIGINAL_SOURCE.json",
+      "sha256": "daff32d3c90765ef72896ba9c29398759e5f18c64fff353b1e3d220948d4741b"
+    },
+    {
+      "bytes": 3046,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/SOURCE_MANIFEST.json",
+      "sha256": "dbff45f351dfb9d593a5fadd8cd0df63f6adfcc67b09b13eda3afcd6b8b9d0a7"
+    },
+    {
+      "bytes": 4498,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/build_pair.py",
+      "sha256": "e30680f5047eb79575eb175350ffd498adb33144ba2c73359f697a61323fc224"
+    },
+    {
+      "bytes": 4979,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042/CMakeLists.txt",
+      "sha256": "b8c6aa9fa03d5ad9a8656d077e29e5cad587a0554103b1e9c25e8b68465f6bd7"
+    },
+    {
+      "bytes": 677,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042/op_extension/ops.h",
+      "sha256": "dec0c5eca4759ea14bcfae0e600c34216d8c4a28ae321d5a71e0d645f653639b"
+    },
+    {
+      "bytes": 8217,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042/op_extension/qwen36_gdn_deltalog_decode_readout_mac042_torch.cpp",
+      "sha256": "bf4233428903b3f110f26a2c62545d0ee940ea89b64d2a7937a69d73f11b6956"
+    },
+    {
+      "bytes": 1233,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042/op_extension/register.cpp",
+      "sha256": "e7566ac555c7506631f2853728737b3f419962de75e7de0cea64ec873ea74247"
+    },
+    {
+      "bytes": 23577,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042.h",
+      "sha256": "bd2d5d53b985f257d27d26ec505bafa82643c835236986303086413e3f9b9b07"
+    },
+    {
+      "bytes": 1035,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042_kernel.asc",
+      "sha256": "132dff97125e2a9077ea1ad3c201d454328b002e90be36746095a3ca84898686"
+    },
+    {
+      "bytes": 374,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042_tiling.h",
+      "sha256": "324627e797656be115408f6404b9e359b623a2f177b097d5f7f1d95059a84296"
+    },
+    {
+      "bytes": 5033,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042_debug/CMakeLists.txt",
+      "sha256": "f682894bbe1a1ab30dc05cec8a7f92d9be5cd44e52506c6e08b416c491740b01"
+    },
+    {
+      "bytes": 730,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042_debug/op_extension/ops.h",
+      "sha256": "bce6a72d8a6b02f5e3c69a4b7c340ebd695de38fee85b40d7baf9133cc711366"
+    },
+    {
+      "bytes": 9115,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042_debug/op_extension/qwen36_gdn_deltalog_decode_readout_mac042_debug_torch.cpp",
+      "sha256": "665e1e2372e75ecb25de4b55ae92ffea4e5d806c877be773f10d94d99fb446a1"
+    },
+    {
+      "bytes": 1317,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042_debug/op_extension/register.cpp",
+      "sha256": "9823ccfb5cdb0555dc1ed1427b2e75f7f216fc30fb173451cb445fc5dfc4c149"
+    },
+    {
+      "bytes": 24315,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042_debug/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042_debug.h",
+      "sha256": "41b72e24b66d2a77c71901083034523eb934433d2679dfb00218aa29994b3a67"
+    },
+    {
+      "bytes": 1096,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042_debug/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042_debug_kernel.asc",
+      "sha256": "ea46058835891f0c6ba11e42bba058fa71d3e2f642262506f242078a7b92de6f"
+    },
+    {
+      "bytes": 396,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/readout_mac042_debug/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042_debug_tiling.h",
+      "sha256": "0a2dad8c114a7b9c9cc947027b9e74fafb20ca35834c098008b7a3571d61c4d9"
+    },
+    {
+      "bytes": 4482,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/originals/build010.py",
+      "sha256": "a18480fcd03a0f9e4d31ab765bcf2992ed43b56a6b88b7d8e180c380e10dea3a"
+    },
+    {
+      "bytes": 4490,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/originals/build015.py",
+      "sha256": "9e05aec8a326025e0df780283f0d457ba6fcbb48c06182ba84073130e3c00bab"
+    },
+    {
+      "bytes": 3248,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/originals/inverse015.py",
+      "sha256": "8321c03a5723a5c664960afcf1bb38a33f0e989f169bf004e36e08f326a82ba0"
+    },
+    {
+      "bytes": 2838,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/verify_inverse.py",
+      "sha256": "d017487ce67d3baa83fbfb5df81175daf92af64ad6c810750c16ee888b13fb7a"
+    }
+  ],
+  "diagnostic040": true,
+  "failed160_owner_ref": {
+    "bytes": 1673,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035r4-numeric160-new48h-MAIN-20261015-001/RESULT.json",
+    "sha256": "825cfa7ac6246ebb839192e39898d405dedd9ab71746dea2b6874e0f23ce8fc9"
+  },
+  "files": {
+    "HOST_DELTA.diff": {
+      "bytes": 5075,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame/HOST_DELTA.diff",
+      "sha256": "26ae1a12bdd7717fe7050f8f3848e4da6f9709f0999a18ca7c12f80c8bc89ef3"
+    },
+    "OWNER_REUSE.json": {
+      "bytes": 698,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame/OWNER_REUSE.json",
+      "sha256": "a1f2f7a6b738f7c0bdb060467caca58a9d353a0262322819b68a28fec8561f78"
+    },
+    "consumer.py": {
+      "bytes": 4907,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame/consumer.py",
+      "sha256": "85c5b078e6e53749516bac7d62dbf2fa45a0f5775b73db275e03f276484d1620"
+    },
+    "direct_round.py": {
+      "bytes": 3378,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame/direct_round.py",
+      "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d"
+    },
+    "entry.py": {
+      "bytes": 4289,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame/entry.py",
+      "sha256": "06ea13bc75fb1c393c67de9d15045a59b94b64ca0f2bdfa8c4091489f6a6db9b"
+    },
+    "frame.py": {
+      "bytes": 3219,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame/frame.py",
+      "sha256": "3f0029a04c91f11cc63f41ed8c10708c2d2aabb48efbaabd0b7aca509f32f301"
+    },
+    "host.py": {
+      "bytes": 20850,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame/host.py",
+      "sha256": "7c4d535ac36541f6e0d932560c1586d7f275cfebf7d6ada4cfea98e70cc0bbef"
+    },
+    "io_contract.py": {
+      "bytes": 3268,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame/io_contract.py",
+      "sha256": "dd59edbdf55fdf6d33c786cd0be009d244c57350041a0025f2eb61cb6fa44b65"
+    },
+    "oracle.py": {
+      "bytes": 3407,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame/oracle.py",
+      "sha256": "cd395a05dbfcb21f1104d617afb1fab6f80374016585e9096ca24d85c2cae97a"
+    },
+    "producer.py": {
+      "bytes": 4467,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame/producer.py",
+      "sha256": "8cc5de1659ab7994e2199b0f8bacfb29268c92d7cc7c52e3cdb58c6a9fa1d1a5"
+    },
+    "run_stage.py": {
+      "bytes": 2031,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame/run_stage.py",
+      "sha256": "303f8251cac761c1bb37dbce99882d8d994ed2a028e0820d1abe565f0a49a827"
+    },
+    "scope_adapter.py": {
+      "bytes": 11522,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame/scope_adapter.py",
+      "sha256": "a9f510a683a3cad1b22161107c2d5e6beaeab6f6df50612fbc92b939e5a64cc2"
+    },
+    "test_controls.py": {
+      "bytes": 4433,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame/test_controls.py",
+      "sha256": "a33bf741e2c9f35b7e9dcc21b9fa828affca94d3bbfd26f428b7fe66f350e2fc"
+    }
+  },
+  "fixture_source_ref": {
+    "bytes": 16179,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair4/qwen36_deltalog_fresh/native_fixture.py",
+    "sha256": "a19e49b0295e03df4b5771910932e59018d4353623f2edd27a5e7d8a1b2a46e6"
+  },
+  "inverse_ref": {
+    "bytes": 2838,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/verify_inverse.py",
+    "sha256": "d017487ce67d3baa83fbfb5df81175daf92af64ad6c810750c16ee888b13fb7a"
+  },
+  "meta_ref": null,
+  "model_ready": false,
+  "new_build_ref": null,
+  "new_kernel_source_ref": {
+    "bytes": 3046,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/kernel/SOURCE_MANIFEST.json",
+    "sha256": "dbff45f351dfb9d593a5fadd8cd0df63f6adfcc67b09b13eda3afcd6b8b9d0a7"
+  },
+  "numeric_ref": null,
+  "observer_ref": {
+    "bytes": 8472,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/protected-terminal-observer-new48h-v1-002/observer.py",
+    "sha256": "a0d296fc274899009e0e7570d839adaa0f5f2a41b38d470466d1ea696a43229b"
+  },
+  "original_kernel_source_ref": {
+    "bytes": 1694,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-key-projection-B-new48h-v1-010/kernel/SOURCE_MANIFEST.json",
+    "sha256": "56a46e89869929f6c1a43b8e0d0870c7b2bb0429c6446499ab67d63b5e243161"
+  },
+  "outputs": {
+    "cpu": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-readout042-frame-cpu-new48h-MAIN-20261015-001",
+    "numeric": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-readout042-frame-numeric-new48h-MAIN-20261015-001"
+  },
+  "pending": [
+    "MAIN sourceaudit",
+    "actual sameimage CPU/Meta14",
+    "actual owned singleton4 whole16 transparency",
+    "actual independent CPU precast/RNE diagnosis and exact release"
+  ],
+  "prepared_only": true,
+  "production_ref": null,
+  "qualification": false,
+  "repair1": true,
+  "resources": {
+    "cleanup_seconds": 90,
+    "consumer_seconds": 600,
+    "cpu_owner_seconds": 720,
+    "guest_bytes": 8589934592,
+    "host_bytes": 536870912,
+    "numeric_consumer_owner_seconds": 2880,
+    "numeric_seconds": 1800,
+    "ordinary_reserve_bytes": 8589934592,
+    "raw_cap_bytes": 1073741824
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame",
+  "saved_raw_ref": {
+    "bytes": 151267875,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035r4-numeric160-new48h-MAIN-20261015-001/numeric/result/mixed-B16-080.pt",
+    "sha256": "6057c3726a57f778116e8dd1ff7eef6e2aed9c7d4c4213f286c21d18be58171b"
+  },
+  "schema": "deltalog.lifecycle-kernel-source/v007",
+  "software_cases": 12,
+  "window": {
+    "cutoff": 1792135097,
+    "start": 1791962297
+  }
+}

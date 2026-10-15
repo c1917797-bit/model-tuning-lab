@@ -1,0 +1,33 @@
+{
+  "NPU": false,
+  "budgets_changed": false,
+  "capture_fields": [
+    "base",
+    "k_log",
+    "u_log",
+    "lambda_log",
+    "decay",
+    "length",
+    "conv"
+  ],
+  "cause": "native fixture seven-field capture ABI; no operator was executed",
+  "math_changed": false,
+  "old_cpu_failure": {
+    "bytes": 1196,
+    "sha256": "eb4d50a73ff87613fea4ebb1c8ca18649dda5edfdd6fd14b3cb2399aade6050d"
+  },
+  "old_source": {
+    "bytes": 15820,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-single-frame-sidecar-new48h-v1-040/SOURCE_MANIFEST.json",
+    "sha256": "42e388d4530a0dfb9281e8d51dbae3b07d8b2c522fb369a1cd82c9fb86f7c415"
+  },
+  "operator_fields": [
+    "base",
+    "k_log",
+    "u_log",
+    "lambda_log",
+    "decay",
+    "length"
+  ],
+  "schema": "deltalog040-seven-field-capture-repair/v1"
+}

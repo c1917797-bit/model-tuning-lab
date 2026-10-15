@@ -1,0 +1,34 @@
+{
+  "actual_new_component_qualification": null,
+  "blocking_edges": [
+    "provider.source_admission must consume actual042 build/inverse/frame receipts rather than old022 B010 claim",
+    "C.LIBRARY_SHA and C.NAMESPACE require actual new production DSO",
+    "035 domain PINNED source hashes + anchor exact seed and producer seed must change together in independent successor",
+    "host output boundary must be exact per-run opt paths above, not broad /opt allow",
+    "MODEL/PF actual new production source and library Ref require both successful full matrices; not template futurePASS"
+  ],
+  "default_enabled": false,
+  "disk_reserve_bytes": 1073741824,
+  "fixed_cutoff": 1792135097,
+  "input": "035R4 full B1/B16 mixed nativecore+flush/copy, 16 smoke then160, same geometry and direct-integerRNE reference",
+  "output_parent": "/opt/host/vnf/austinov/deltalog042-evidence",
+  "qualified": false,
+  "raw_cap_bytes_per_run": 34359738368,
+  "schema": "deltalog042-next-full-matrix-preregistration/v1",
+  "seeds": [
+    260815535,
+    260815542
+  ],
+  "seeds_role": [
+    "original full160 regression",
+    "unseen independent holdout full160"
+  ],
+  "separate_new_roots": [
+    "run-original-seed-160-001",
+    "run-holdout-seed-160-001"
+  ],
+  "thresholds": {
+    "per_request_output": 0.00303,
+    "state_l2": 7.92e-07
+  }
+}

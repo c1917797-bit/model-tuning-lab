@@ -1,0 +1,29 @@
+{
+  "schema": "mxr042.local-software-only/v1",
+  "command": [
+    "python",
+    "-I",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "C:/Users/Huawei/AppData/Local/Temp/mxr-working-domain-heldout-new48h-042",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "tests": 23,
+  "passed": 23,
+  "failed": 0,
+  "NPU": false,
+  "same_image": false,
+  "qualified": false,
+  "initial_failed_development_controls": {
+    "reason": "new consumer syntax and cardinality fixture mismatch",
+    "preserved_in_tool_transcript": true,
+    "resolved": true
+  },
+  "default_OFF_CLIs_tested": true,
+  "actual_torch_CPU_properties_tested": true
+}

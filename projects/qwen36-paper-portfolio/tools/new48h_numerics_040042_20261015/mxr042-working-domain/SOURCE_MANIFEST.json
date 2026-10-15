@@ -1,0 +1,333 @@
+{
+  "READY": false,
+  "actual_NPU": null,
+  "actual_owned_execution": null,
+  "actual_plan": null,
+  "actual_sameimage_CPU": null,
+  "actual_selection": null,
+  "authority_ref": {
+    "bytes": 3591,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+    "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+  },
+  "budgets": {
+    "CPU_consumer_seconds": 600,
+    "NPU_child_seconds": 900,
+    "cleanup_seconds": 90,
+    "evidence_MiB": 256,
+    "guest_GiB": 8,
+    "host_GiB": 0.5,
+    "phase_seconds": 2400,
+    "reserve_GiB": 8,
+    "setup_seconds": 810,
+    "unchanged_original_disk_GiB": 4
+  },
+  "causal026_evidence": {
+    "attribution": {
+      "bytes": 598170,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-input-rounding026-new48h-MAIN-20261015-001/cpu-preflight/producer/ATTRIBUTION.json",
+      "sha256": "ee92e9d330b94bf6f100ca7163ec87484fa00c3e4e377e218cb5a681bbaea41c"
+    },
+    "owner": {
+      "bytes": 2773,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-input-rounding026-new48h-MAIN-20261015-001/RESULT.json",
+      "sha256": "26ce98871d29e8cbb8f88c72b0142846b5a99c6800609589f165a8020531eb7c"
+    }
+  },
+  "default_enabled": false,
+  "delta": "new reference contract canonical source-rounded workingDAG; actual037 original-A32 residual computation unchanged; ideal original FAIL/metrics retained; fixed real16/40 plus separate native initial-state witness",
+  "dispatch": {
+    "default_enabled": false,
+    "logical": 0,
+    "physical": 4,
+    "serial_after067_release": true
+  },
+  "failure019_retained": {
+    "bytes": 404550,
+    "numerical_qualified": false,
+    "operation": "05bf",
+    "sha256": "8e886afd5289b0c620d01ea2835559a1534e26ca77cb172b25e273b32658512b"
+  },
+  "files": {
+    "boundary_oracle.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/boundary_oracle.py",
+      "bytes": 4691,
+      "sha256": "7fd2e64783f4516a99f116dc66502ff8e6b6d5591f7a1076e7ed1e6cfa9a408a"
+    },
+    "closure.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/closure.py",
+      "bytes": 1911,
+      "sha256": "1d5142cdaef7fc1dd92db0efa4ad32f8968e0b7605317a4a56b1bb4d7bda43be"
+    },
+    "consume.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/consume.py",
+      "bytes": 7941,
+      "sha256": "06b3da8212378a02a414c6ad0c53b7035754a9650c72d02e57fdb6f5cae504e7"
+    },
+    "cpu_preflight.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/cpu_preflight.py",
+      "bytes": 3632,
+      "sha256": "9ea7c3095c0caadd49322161288cb68059533389ff81c8d9a1716224165492bc"
+    },
+    "HANDOFF.md": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/HANDOFF.md",
+      "bytes": 2415,
+      "sha256": "42a1f9e041897ba98e8cb7af36117a1e350f11eef8a1c406db4dca05fb71cf01"
+    },
+    "handshake_poll.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/handshake_poll.py",
+      "bytes": 720,
+      "sha256": "20a4d18d50f55ecb10e02527576b76b89e01c0ab99d0f778e9d37c7deeccbb5a"
+    },
+    "lifecycle_integration.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/lifecycle_integration.py",
+      "bytes": 1505,
+      "sha256": "f4e357d7ccda232ac6d063460a3cca85e5dbdb8e5d11ddbf1b83ac1c50daef70"
+    },
+    "mainhost.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/mainhost.py",
+      "bytes": 10373,
+      "sha256": "3440a8a210d37a6ff0f6cb8e0cd51aba45883179c13be0a49b393fd3b03285aa"
+    },
+    "physical_environment.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/physical_environment.py",
+      "bytes": 3291,
+      "sha256": "8e251ba2a35c555d379439d65fe190620d50647a05dd7c9dd5e25679f121dfbf"
+    },
+    "precision_probe.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/precision_probe.py",
+      "bytes": 996,
+      "sha256": "1854050cb8028255bd0361b27b359d6f997feaa543b32c348afeba3cf434708a"
+    },
+    "PREREGISTER.md": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/PREREGISTER.md",
+      "bytes": 4212,
+      "sha256": "25fd1d9211e6bdf24499e402595c8aa07d69691754f5c4c4ec8eae98349607ce"
+    },
+    "probe_contract.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/probe_contract.py",
+      "bytes": 476,
+      "sha256": "434a8947e7372ef67a9527a2779c16272e60577168c232c1152245481576efe3"
+    },
+    "refine.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/refine.py",
+      "bytes": 5574,
+      "sha256": "d8e62cd25132d96417dc402c6f053db88c40cfa79b67de3f3316bf9dfdea2306"
+    },
+    "replay.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/replay.py",
+      "bytes": 10891,
+      "sha256": "a415c6d3e07c95958f273a93c16008c8cfc35acc5b0015a77b26134218d88016"
+    },
+    "select_frames.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/select_frames.py",
+      "bytes": 3006,
+      "sha256": "834c97406bbef3dbd995e68c8fb8a0e03acefc8d563f35cf38f0acd602df0ba0"
+    },
+    "source_proof.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/source_proof.py",
+      "bytes": 1376,
+      "sha256": "ab6c1eb27e73fde8c2283bfcb2c68680f95a2408362ee2974e4bb2b50b7adea4"
+    },
+    "test_boundary_oracle.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/test_boundary_oracle.py",
+      "bytes": 4123,
+      "sha256": "59b08b10da3b6ab04fd40492b2832f1a3d2ceb9634d7130fc0a2973bb235115b"
+    },
+    "test_cli.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/test_cli.py",
+      "bytes": 724,
+      "sha256": "a60c94bc9baf59457b8d44c4ae9e1365281d138320895e9c90c34abec5fc2996"
+    },
+    "test_domain.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/test_domain.py",
+      "bytes": 1582,
+      "sha256": "7a35ca4a58a689b961d2258b4bd25d13cb9b4a7b80e6cccaf3b03e45d2bea3a2"
+    },
+    "test_owned_interface.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/test_owned_interface.py",
+      "bytes": 1462,
+      "sha256": "9ec9cb3bd9058f9fa8bc580d45fbccf2545177ddcac168f5932423ac1bee0ea9"
+    },
+    "test_refine.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042/test_refine.py",
+      "bytes": 3665,
+      "sha256": "7319e5ef525fdeffac9e849ccf74bba3801e151c9af0825c9266af84f4fec5d1"
+    }
+  },
+  "new_information": {
+    "real_layers": [
+      16,
+      40
+    ],
+    "heldout_scope": "not used for027/041 calibration, not globally unseen",
+    "real_frames": 2,
+    "calibration_rows": 1,
+    "repeats": 3,
+    "raw_rows": 9,
+    "fullGDN_executions": 36,
+    "arms": [
+      "native",
+      "candidate",
+      "a32_refined",
+      "cpu64_cast"
+    ],
+    "native_initial_witness": "FP32 1.003, zero updates, must empirically return BF16 1.0 workingstate",
+    "original_limits_unchanged": true,
+    "default_enabled": false
+  },
+  "original_contract": {
+    "bytes": 16480,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/once_contract.py",
+    "sha256": "7789d63886da0ebe9420b0f56b584c81eae9e50ab561dbf64940df37eb31aa6a"
+  },
+  "original_lifecycle": {
+    "bytes": 6865,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/safety_lifecycle.py",
+    "sha256": "4bbd492809c9ba1922fd3885b101f8cc6fe187884703c21e4a2d44acd1444b75"
+  },
+  "original_metrics": {
+    "bytes": 10097,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/consume_capture.py",
+    "sha256": "7c31e87b409ef095e5789a2bc1b71a987a69dc237789c125ad749a69fecec6c3"
+  },
+  "original_report": {
+    "bytes": 65353,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr013-cpu-recovery016-002-new48h-MAIN-20261015-002/cpu-preflight/producer/recovery/rank-0/BRIDGE_RESULT.json",
+    "sha256": "2c34b9b80b4653eb8344aefcf73f472fce8f6a30023b444dbc88f31698c96465"
+  },
+  "outputs": {
+    "cpu": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-working-domain042-CPU_001",
+    "numeric": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-working-domain042-NPU_001"
+  },
+  "owned_donor": {
+    "bytes": 16029,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-shape-family-single6-v1-069/SOURCE_MANIFEST.json",
+    "sha256": "d66da122939f2b577b84fafc639fa4f20401001e027f75f6ba6c1fc897763753"
+  },
+  "prerequisite_ref": {
+    "bytes": 136215,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_MXR039_PREREQUISITE_043_001.json",
+    "sha256": "f620ae4bc10577465bff7fbb3af67ce424f2cca7c09805aa13f5f55dfce525f4"
+  },
+  "reused": {
+    "early_vendor.py": {
+      "bytes": 3317,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-shape-family-single6-v1-065/early_vendor.py",
+      "sha256": "2cd8b8df3030e3f15acfef311ca5331ae9bd6f576ac5760a7e747c46d92354c8"
+    },
+    "event_backend.py": {
+      "bytes": 1859,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-shape-family-single6-v1-065/event_backend.py",
+      "sha256": "e9d4cc6f68fc86b05e9089691df5a3ed5287ee0d72a0a236e9a1611ef07e4c3d"
+    },
+    "lifetime.py": {
+      "bytes": 5595,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-shape-family-single6-v1-065/lifetime.py",
+      "sha256": "788051954cf7883974aa87df625e73365aa50a7ce66827d63e082cbe72f672a9"
+    },
+    "native_bootstrap.py": {
+      "bytes": 2179,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-shape-family-single6-v1-065/native_bootstrap.py",
+      "sha256": "b09b7bf9cb626896d5500c5c7e30fa552699e5302ee3ac6eaa5b426923c39111"
+    },
+    "safe_eager.py": {
+      "bytes": 1790,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-shape-family-single6-v1-065/safe_eager.py",
+      "sha256": "54033cf3837c8c53bf37506e65caf849c1cea187c4f345b4c2d060b5fbf0c5a9"
+    }
+  },
+  "reused_source": {
+    "bytes": 10091,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-shape-family-single6-v1-065/SOURCE_MANIFEST.json",
+    "sha256": "8974179ea9ff3f1dda9c2c132a4dc26fd466ed66cafea049918844db3f494f32"
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-working-domain-heldout-new48h-v1-042",
+  "schema": "mxr.saved-frame-attribution-source/v042",
+  "scope": "SOURCE ONLY: new empirical working-DAG calibration and two real heldout frames. Old ideal failures retained. No model qualification.",
+  "status": "SOURCE_PREPARED_NOT_NPU_QUALIFIED",
+  "window": {
+    "cutoff": 1792135097,
+    "start": 1791962297
+  },
+  "native_source_refs": [
+    {
+      "path": "/cache/austinov/src/vllm-ascend/vllm_ascend/ops/triton/fla/wy_fast.py",
+      "bytes": 4307,
+      "sha256": "51e23f0876d91ae09b32ae70aa03318b2440b7bd3ba029c0d9838869359597ef"
+    },
+    {
+      "path": "/cache/austinov/src/vllm-ascend/vllm_ascend/ops/triton/fla/cumsum.py",
+      "bytes": 4937,
+      "sha256": "af45679800aa2c49f8587194f6744e3d9c7cabe7658eef9ec37f0a665a70c47d"
+    },
+    {
+      "path": "/cache/austinov/src/vllm-ascend/vllm_ascend/ops/triton/fla/chunk_delta_h.py",
+      "bytes": 8227,
+      "sha256": "8093eb89e75e3d29c56469e4874eb5bef593074e29b8953720a575ea9b552ef2"
+    },
+    {
+      "path": "/cache/austinov/src/vllm-ascend/vllm_ascend/ops/triton/fla/chunk_o.py",
+      "bytes": 4689,
+      "sha256": "a11dcbeed3ed1c3eb0a15d7ae68c794b996b364e5706c7b2b0b2626c40671534"
+    },
+    {
+      "path": "/cache/austinov/src/vllm-ascend/vllm_ascend/ops/triton/fla/l2norm.py",
+      "bytes": 2299,
+      "sha256": "07657e33f2240cf39e8dec9991d00022181b43946a8c1497c6c236bf4c230126"
+    },
+    {
+      "path": "/cache/austinov/src/vllm-ascend/csrc/moe/chunk_gated_delta_rule_fwd_h/op_kernel/arch22/epilogue/block/block_epilogue_gdn_fwdh_vnew.hpp",
+      "bytes": 13131,
+      "sha256": "267d7815021d812421fec3851897ee06dd6680cce4a13f27279ed72ac8b3f63b"
+    },
+    {
+      "path": "/cache/austinov/src/vllm-ascend/csrc/moe/chunk_gated_delta_rule_fwd_h/op_kernel/arch22/epilogue/block/block_epilogue_gdn_fwdh_update.hpp",
+      "bytes": 7967,
+      "sha256": "8d59d19537be6c998d2fdc7957ffbebd9a35091f2c92ab5a495018ced4c9bcef"
+    },
+    {
+      "path": "/cache/austinov/src/vllm-ascend/csrc/moe/chunk_fwd_o/op_kernel/arch22/epilogue/block/block_epilogue_gdn_fwdo_qkmask.hpp",
+      "bytes": 25219,
+      "sha256": "38690232c66bfcd87d39adb0bf74e4be8d5f5e83c3f9eeecd1c6e974088e0124"
+    },
+    {
+      "path": "/cache/austinov/src/vllm-ascend/csrc/moe/chunk_fwd_o/op_kernel/arch22/epilogue/block/block_epilogue_gdn_fwdo_output.hpp",
+      "bytes": 22273,
+      "sha256": "4a95403b2d9fa27194f86cdfb52b0b0d7e28ee565367cfbd7dc1b842c17c9271"
+    },
+    {
+      "path": "/cache/austinov/src/vllm-ascend/csrc/moe/chunk_gated_delta_rule_fwd_h/op_kernel/chunk_gated_delta_rule_fwd_h.cpp",
+      "bytes": 4779,
+      "sha256": "c883cd9067a4eea2b8b441ecc27857ab865e86c29d301c3f2d305702fdb95f05"
+    },
+    {
+      "path": "/cache/austinov/src/vllm-ascend/csrc/moe/chunk_gated_delta_rule_fwd_h/op_kernel/arch22/gemm/kernel/gdn_fwd_h_kernel.hpp",
+      "bytes": 21210,
+      "sha256": "83a07e6602e81822f8da2f47d4a25fce8beb5ffb5646f402ea6fd3c9d642463e"
+    },
+    {
+      "path": "/cache/austinov/src/vllm-ascend/csrc/moe/chunk_fwd_o/op_kernel/chunk_fwd_o.cpp",
+      "bytes": 2867,
+      "sha256": "fafaed10d6550c651c2233a8ec630223138b64848e154f930c72793427fa11e1"
+    },
+    {
+      "path": "/cache/austinov/src/vllm-ascend/vllm_ascend/ops/triton/fla/chunk.py",
+      "bytes": 16312,
+      "sha256": "6f93b9face32999c93976fccaeb2d6a9d8dc85c8c41d3d26d92e1820f62d7ca5"
+    }
+  ],
+  "native_source_to_DSO_qualified": false,
+  "heldout_real_RAWs": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-ownership-observation-main-NEW48H_013_001/candidate/model/capture/worker-427/frame-012/RAW.pt",
+      "bytes": 4697578,
+      "sha256": "2973b7c3491ffc835d682450b4480730d43566e2d58f33b98b70622ad9c4e652"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-ownership-observation-main-NEW48H_013_001/candidate/model/capture/worker-427/frame-030/RAW.pt",
+      "bytes": 4697578,
+      "sha256": "f8617b62309a216f87f0e20287c76ce00d7abe49f17ca0ad60f02e778e695259"
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "binder": {
+    "args": [
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/build_owner/bind_cohort.py",
+      "--execute",
+      "--self-sha256",
+      "c0d4d67a091aed6968b37cde19887ebbf7bcac282445aa567f0b614ebad4bcc7",
+      "--owner-source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/build_owner/SOURCE_MANIFEST.json\",\"bytes\":19737,\"sha256\":\"f0548415ed6c0a5f092463ff3f236d8ca415d99ab3e7de354ca9e9036ecf675a\"}",
+      "--run-id",
+      "dl-readout-mac042-build",
+      "--output-root",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-readout-mac042-build-new48h-MAIN-20261015-001",
+      "--cohort-output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/COHORT-dl-readout-mac042-build-new48h-MAIN-20261015-001.json"
+    ],
+    "command": "/usr/bin/prlimit"
+  },
+  "build_result_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-readout-mac042-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/RESULT.json",
+  "compile": {
+    "args": [
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/build_owner/host.py",
+      "--execute",
+      "--source",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/build_owner/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "f0548415ed6c0a5f092463ff3f236d8ca415d99ab3e7de354ca9e9036ecf675a",
+      "--cohort",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/COHORT-dl-readout-mac042-build-new48h-MAIN-20261015-001.json",
+      "--cohort-sha256",
+      "ACTUAL042_COHORT_SHA256",
+      "--run-id",
+      "dl-readout-mac042-build",
+      "--physical",
+      "4",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-readout-mac042-build-new48h-MAIN-20261015-001"
+    ],
+    "command": "/usr/bin/prlimit"
+  },
+  "default_enabled": false,
+  "frame_bind": {
+    "args": [
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/bind_frame.py",
+      "--execute",
+      "--build-owner-ref",
+      "ACTUAL042_COMPLETED_CPU_BUILD_OWNER_REF_JSON"
+    ],
+    "command": "/usr/bin/python3"
+  },
+  "frame_stages": {
+    "audit": {
+      "args": [
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame/run_stage.py",
+        "--execute",
+        "--source-sha256",
+        "ACTUAL_BOUND042_FRAME_SOURCE_SHA256",
+        "--stage",
+        "audit",
+        "--host-cpu",
+        "MAIN_FRESH_HOST_CPU",
+        "--guest-cpu",
+        "MAIN_FRESH_GUEST_CPU"
+      ],
+      "command": "/usr/bin/python3"
+    },
+    "cpu": {
+      "args": [
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame/run_stage.py",
+        "--execute",
+        "--source-sha256",
+        "ACTUAL_BOUND042_FRAME_SOURCE_SHA256",
+        "--stage",
+        "cpu",
+        "--host-cpu",
+        "MAIN_FRESH_HOST_CPU",
+        "--guest-cpu",
+        "MAIN_FRESH_GUEST_CPU"
+      ],
+      "command": "/usr/bin/python3"
+    },
+    "numeric": {
+      "args": [
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/frame/run_stage.py",
+        "--execute",
+        "--source-sha256",
+        "ACTUAL_BOUND042_FRAME_SOURCE_SHA256",
+        "--stage",
+        "numeric",
+        "--host-cpu",
+        "MAIN_FRESH_HOST_CPU",
+        "--guest-cpu",
+        "MAIN_FRESH_GUEST_CPU"
+      ],
+      "command": "/usr/bin/python3"
+    }
+  },
+  "full160_ready": false,
+  "next_full160_contract": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/HOLDOUT_REQUIREMENTS.json",
+  "schema": "deltalog.sidecar015-main-commands/v1",
+  "source_audit": {
+    "args": [
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/build_owner/host.py",
+      "--source-audit-only",
+      "--source",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-mac-new48h-v1-042/build_owner/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "f0548415ed6c0a5f092463ff3f236d8ca415d99ab3e7de354ca9e9036ecf675a",
+      "--cohort",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/COHORT-dl-readout-mac042-build-new48h-MAIN-20261015-001.json",
+      "--cohort-sha256",
+      "ACTUAL042_COHORT_SHA256",
+      "--run-id",
+      "dl-readout-mac042-build",
+      "--physical",
+      "4",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-readout-mac042-build-new48h-MAIN-20261015-001"
+    ],
+    "command": "/usr/bin/prlimit"
+  },
+  "warnings": [
+    "Do not invent debug library/Meta/inputRefs",
+    "No NPU child without complete actualOwned/ARM admission",
+    "Diagnostic conditioned actualbefore is NOT originalideal fullhistory",
+    "Build only can be dispatched by existing owner after actualcohort/sourceaudit"
+  ]
+}

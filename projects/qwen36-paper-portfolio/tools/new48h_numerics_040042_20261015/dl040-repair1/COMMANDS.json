@@ -1,0 +1,69 @@
+{
+  "NPU_executed": false,
+  "cutoff_epoch": 1792135097,
+  "diagnostic_only": true,
+  "next": "MAIN reviews exact SOURCE SHA; actual Devices[] CPU owner first, then same-source singleton frame+secondCPU consumer; no automatic dispatch",
+  "outputs": {
+    "cpu": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-frame040repair1-cpu-new48h-MAIN-20261015-001",
+    "numeric": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-frame040repair1-numeric-new48h-MAIN-20261015-001"
+  },
+  "physical": [
+    4
+  ],
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-single-frame-sidecar-new48h-v1-040-repair1",
+  "schema": "deltalog.single-frame-sidecar-commands/v040",
+  "source_sha256": "MAIN_REVIEWED040_SOURCE_SHA256",
+  "stages": {
+    "audit": {
+      "args": [
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-single-frame-sidecar-new48h-v1-040-repair1/run_stage.py",
+        "--execute",
+        "--source-sha256",
+        "MAIN_REVIEWED040_SOURCE_SHA256",
+        "--stage",
+        "audit",
+        "--host-cpu",
+        "MAIN_FRESH_HOST_CPU",
+        "--guest-cpu",
+        "MAIN_FRESH_GUEST_CPU"
+      ],
+      "command": "/usr/bin/python3"
+    },
+    "cpu": {
+      "args": [
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-single-frame-sidecar-new48h-v1-040-repair1/run_stage.py",
+        "--execute",
+        "--source-sha256",
+        "MAIN_REVIEWED040_SOURCE_SHA256",
+        "--stage",
+        "cpu",
+        "--host-cpu",
+        "MAIN_FRESH_HOST_CPU",
+        "--guest-cpu",
+        "MAIN_FRESH_GUEST_CPU"
+      ],
+      "command": "/usr/bin/python3"
+    },
+    "numeric": {
+      "args": [
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-single-frame-sidecar-new48h-v1-040-repair1/run_stage.py",
+        "--execute",
+        "--source-sha256",
+        "MAIN_REVIEWED040_SOURCE_SHA256",
+        "--stage",
+        "numeric",
+        "--host-cpu",
+        "MAIN_FRESH_HOST_CPU",
+        "--guest-cpu",
+        "MAIN_FRESH_GUEST_CPU"
+      ],
+      "command": "/usr/bin/python3"
+    }
+  }
+}

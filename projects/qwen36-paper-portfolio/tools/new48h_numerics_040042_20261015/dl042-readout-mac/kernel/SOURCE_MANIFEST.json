@@ -1,0 +1,83 @@
+{
+  "NPU": false,
+  "default_enabled": false,
+  "files": [
+    {
+      "bytes": 4498,
+      "path": "build_pair.py",
+      "sha256": "e30680f5047eb79575eb175350ffd498adb33144ba2c73359f697a61323fc224"
+    },
+    {
+      "bytes": 4979,
+      "path": "readout_mac042/CMakeLists.txt",
+      "sha256": "b8c6aa9fa03d5ad9a8656d077e29e5cad587a0554103b1e9c25e8b68465f6bd7"
+    },
+    {
+      "bytes": 677,
+      "path": "readout_mac042/op_extension/ops.h",
+      "sha256": "dec0c5eca4759ea14bcfae0e600c34216d8c4a28ae321d5a71e0d645f653639b"
+    },
+    {
+      "bytes": 8217,
+      "path": "readout_mac042/op_extension/qwen36_gdn_deltalog_decode_readout_mac042_torch.cpp",
+      "sha256": "bf4233428903b3f110f26a2c62545d0ee940ea89b64d2a7937a69d73f11b6956"
+    },
+    {
+      "bytes": 1233,
+      "path": "readout_mac042/op_extension/register.cpp",
+      "sha256": "e7566ac555c7506631f2853728737b3f419962de75e7de0cea64ec873ea74247"
+    },
+    {
+      "bytes": 23577,
+      "path": "readout_mac042/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042.h",
+      "sha256": "bd2d5d53b985f257d27d26ec505bafa82643c835236986303086413e3f9b9b07"
+    },
+    {
+      "bytes": 1035,
+      "path": "readout_mac042/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042_kernel.asc",
+      "sha256": "132dff97125e2a9077ea1ad3c201d454328b002e90be36746095a3ca84898686"
+    },
+    {
+      "bytes": 374,
+      "path": "readout_mac042/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042_tiling.h",
+      "sha256": "324627e797656be115408f6404b9e359b623a2f177b097d5f7f1d95059a84296"
+    },
+    {
+      "bytes": 5033,
+      "path": "readout_mac042_debug/CMakeLists.txt",
+      "sha256": "f682894bbe1a1ab30dc05cec8a7f92d9be5cd44e52506c6e08b416c491740b01"
+    },
+    {
+      "bytes": 730,
+      "path": "readout_mac042_debug/op_extension/ops.h",
+      "sha256": "bce6a72d8a6b02f5e3c69a4b7c340ebd695de38fee85b40d7baf9133cc711366"
+    },
+    {
+      "bytes": 9115,
+      "path": "readout_mac042_debug/op_extension/qwen36_gdn_deltalog_decode_readout_mac042_debug_torch.cpp",
+      "sha256": "665e1e2372e75ecb25de4b55ae92ffea4e5d806c877be773f10d94d99fb446a1"
+    },
+    {
+      "bytes": 1317,
+      "path": "readout_mac042_debug/op_extension/register.cpp",
+      "sha256": "9823ccfb5cdb0555dc1ed1427b2e75f7f216fc30fb173451cb445fc5dfc4c149"
+    },
+    {
+      "bytes": 24315,
+      "path": "readout_mac042_debug/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042_debug.h",
+      "sha256": "41b72e24b66d2a77c71901083034523eb934433d2679dfb00218aa29994b3a67"
+    },
+    {
+      "bytes": 1096,
+      "path": "readout_mac042_debug/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042_debug_kernel.asc",
+      "sha256": "ea46058835891f0c6ba11e42bba058fa71d3e2f642262506f242078a7b92de6f"
+    },
+    {
+      "bytes": 396,
+      "path": "readout_mac042_debug/op_kernel/qwen36_gdn_deltalog_decode_readout_mac042_debug_tiling.h",
+      "sha256": "0a2dad8c114a7b9c9cc947027b9e74fafb20ca35834c098008b7a3571d61c4d9"
+    }
+  ],
+  "numeric_qualified": false,
+  "schema": "deltalog-readout-mac-source/v042"
+}
