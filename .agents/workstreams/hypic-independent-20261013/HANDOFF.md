@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT same-source nativebatch DISABLED control exec-000000000000061b,
+originalma a6109 forcedirect,checkpointac21e489.061a11:40:32UTC103bindings,
+newroot/physical0-3/8233/HCCLidle PASS. Manifest7bac8e205fccda0e...
+Raw/cache/cch/hypic-independent-20261013/native-decode-batch-disabled-r1.
+Only inferenceflag native_decode_batch false; allR7runtimebytesunchanged,
+HYPIC C1/C2 stillon/PDCoff, same16c16/32768/64/2B2A/newowncoldcache.
+Poll exact061b/root;neverrestartwhilelive/unclear or editboundruntime.
+Terminal16hot/explicitfalse4worker/no batch+shadowmarkers/source/physical/
+continuousisolation/exactrelease required before full40R7screen. Deadlineunchanged.
+
+
 LATEST05fa terminalexit0;0618 independent101sources/16of16fourrank48C1+16C2
 hot/explicitNSpidphysical0-3/231clean/exactf75a9f1a...release PASS.
 All384singleton+multirowshadow checks PASS;48multirowlayers/rank,
