@@ -1,5 +1,12 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+While0751live: R11 disabled prospective config/manifest/contract frozen075f,
+122bindings/same source and identity/onlyc1_packed_waveFalse/newrootabsent PASS.
+NOTADMITTED/NOTSTARTED until enabled0751 full independent acceptance+exactrelease,
+then fresh direct/physical/source/ports/newroot admission. Bound121runtimebytes
+unchanged.0761 15:29:41UTC113clean isolations/fourtrueinstalls/no shadowfailure
+yet; model startup/warmups not full numerical proof. Poll same0751.
+
 CURRENT R11 nativeGQA exec-0000000000000751 RUNNING originalma a6109/tpcdirect.
 Checkpointc07bb19c published/liveverified;0750 15:24:49UTC121bindings/newroot/
 physical0-3empty/8233+HCCLidle PASS.0753 exact ownedCID94f077ab93f8abd1c1fc0e14fb1b30550415f292f936a8db4c83853c6b75a430

@@ -1,0 +1,19 @@
+{
+  "schema": "hypic-prospective-control/v1",
+  "state": "NOT_ADMITTED_ENABLED_GATE_REQUIRED",
+  "enabled_controller": "exec-0000000000000751",
+  "enabled_contract": "C1_PACKED_NATIVE_GQA_R1_CONTRACT.json",
+  "disabled_contract": "C1_PACKED_NATIVE_GQA_DISABLED_R1_CONTRACT.json",
+  "static_operation": "exec-000000000000075f",
+  "contract_bindings": 122,
+  "manifest_bindings": 121,
+  "only_runtime_config_difference": "c1_packed_wave false",
+  "current_enabled121source_bytes": "unchanged",
+  "device_started": false,
+  "prerequisites": [
+    "Enabled full independent terminal audit PASS",
+    "Exact owned enabled release",
+    "Fresh direct/source/physical0-3/port/newroot admission"
+  ],
+  "deadline": "2026-10-15T19:04:09Z"
+}
