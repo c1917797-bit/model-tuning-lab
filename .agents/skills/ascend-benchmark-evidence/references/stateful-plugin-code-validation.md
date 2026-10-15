@@ -61,3 +61,8 @@ CPU-only consumers or repeatedly reopening all raw tensors.
 Concrete evidence, failures and limitations are in the [2026-10-15 case](
 ../../../../docs/knowledge-base/ascend-infra/cases/runtime-binding-and-single-factor-evidence-20261015.md).
 These gates do not replace whole-model matched performance and task accuracy.
+
+For native-prefill/recurrent precision boundaries, verification-only streamed
+raw checks and non-atomic compiler-child observation, see the
+[native-boundary and saved-raw recovery supplement](
+../../../../docs/knowledge-base/ascend-infra/cases/native-boundary-and-savedraw-recovery-20261015.md).

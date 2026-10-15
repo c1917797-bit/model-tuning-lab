@@ -1,20 +1,10 @@
 {
   "schema": "ascend.new48h.live-handoff/v1",
-  "as_of_utc": "2026-10-15T14:02:00Z",
+  "as_of_utc": "2026-10-15T16:09:00Z",
   "cutoff_utc": "2026-10-16T07:18:17Z",
   "goal_active": true,
   "final_acceptance": false,
-  "active_MAIN_job": {
-    "operation_id": "exec-00000000000006d7",
-    "status": "last_observed_running_CPU_preflight_not_NPU",
-    "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-originalA-residual-savedframe-v1-027-LF1/SOURCE_MANIFEST.json",
-      "bytes": 11621,
-      "sha256": "9fad189b3f8d7b746f7491e1c17c2768d7c27246d3b61016272b0bb48bbe641a"
-    },
-    "physical": [],
-    "scope": "actual same-image precision API/CLI/selection; no numerical/model/performance promotion"
-  },
+  "active_MAIN_job": null,
   "resource_admission": {
     "physical_allowed": [
       4,
@@ -29,9 +19,9 @@
       3
     ],
     "current_NPU_job": null,
-    "point_in_time_admission_operation": "exec-00000000000006c1",
-    "latest_owned_release": "06c3 020repair2 NPU4 and postrelease CPU consumed PASS, both cleanup errors[]; 06d1 composite022 CPU complete/released errors[]",
-    "current_scheduling": "MXR027-LF1 actual CPU preflight; DL024repair2 known transitive mount source repair before image/NPU; no current owned NPU workload; no continuous-utilization claim"
+    "point_in_time_admission_operation": "exec-0000000000000790",
+    "latest_owned_release": "076b 031 actual NPU5 producer40 complete but ownership-controller FAILED; actual numeric cleanup released. 0791 031repair1 CPU and 079e 034 savedraw CPU both terminal and stopped-retained; no NPU new launch.",
+    "current_scheduling": "034 complete savedraw diagnostic; 035 precision-domain+ABI repair in local preparation. Cards idle at last0790 snapshot, continuous utilization UNMEASURED. No redundant NPU retry while CPU root-cause evidence is available."
   },
   "queued": {
     "MXR012": {
@@ -171,49 +161,74 @@
       "graph": false
     },
     "DL023_repair1": {
-      "status": "MAIN11tests_PASS_not_deployed",
-      "template_sha256": "b002f6417ce6181cae95ece22e32c5528ebaa764746cb2229543fb5e414cb8d6",
-      "requires": "actual024 native bridge and actual full model dispatch/lifecycle; known old023 keyword and pin defects preserved"
+      "status": "deployed_byte_AST_LF_defaultOFF_pass_MAIN11tests_bound_actual022",
+      "operation": "exec-0000000000000795",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-service-composite-plugin-v1-023-repair1/SOURCE_MANIFEST.json",
+        "bytes": 9490,
+        "sha256": "7f4856cf1a8bfc6bfab599327051e3acc6040f401cc53e1816568ee64ef5fd5a"
+      },
+      "requires": "new source-reviewed domain/ABI bridge qualification and actual all4x48 diagnostic model smoke; not numeric/model/performance qualified"
     },
     "DL024_repair1": {
       "status": "deployed_not_run_transitive022_mfiles_mount_gap_found_before_CPU",
       "requires": "minimal024repair2 mount closure and software/actual sameimage then16/160"
     },
     "accuracy011": {
-      "status": "actual_template_HumanEval0_reproduced_local22tests_not_deployed",
-      "source_sha256": "b751a9656ab827aa55f2e10e3c5a9ba68bdf3d65316faba4c3365c6699fd0e2a",
-      "requires": "actual sameimage render15525 plus independent consumption; no scores"
+      "status": "actual_devices_empty_full15525_rendered_independently_consumed_PASS_no_scores",
+      "consumption": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-accuracy-render011-new48h-MAIN-20261015-001/CONSUMPTION.json",
+        "bytes": 1404,
+        "sha256": "3dd18409e6df01774d2a9190db8d27f1284e14a56c4fd51825303c2da171fd93"
+      },
+      "requires": "actual model qualification and paired smoke/full scoring"
     },
     "accuracy013": {
       "status": "local24tests_prepared_not_ready",
       "requires": "actual022, latest024repair2 full160 and023 model binding, no-thinking/max2048normalEOS generative MMLU protocol explicit; sameimage constructor pending"
     },
     "MXR027_LF1": {
-      "operation_id": "exec-00000000000006d7",
-      "status": "last_observed_running_CPU_preflight_not_NPU",
-      "source": {
-        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-originalA-residual-savedframe-v1-027-LF1/SOURCE_MANIFEST.json",
-        "bytes": 11621,
-        "sha256": "9fad189b3f8d7b746f7491e1c17c2768d7c27246d3b61016272b0bb48bbe641a"
+      "status": "actual_NPU_diagnostic_complete_original_ideal_gate_false",
+      "operation": "exec-00000000000006db",
+      "attribution": {
+        "sha256": "9186fd1a1f1bca4e916ab16df17c04ee1d01be4a8f2e9c327f70d623d21f8124",
+        "bytes": 176334
       },
-      "physical": [],
-      "scope": "actual same-image precision API/CLI/selection; no numerical/model/performance promotion"
+      "scope": "Source exact path must be rechecked before artifact consumption; FP32 residual solve improves ~195x vs A32 reference but unchanged-native and candidate full prefill both fail ideal CPU64 gate. No numerical/performance promotion."
+    },
+    "DL035": {
+      "status": "local_preparation_pending_MAIN_review_no_NPU",
+      "purpose": "new operational BF16-output reference with unchanged .00303 per-request limit, CPU64 state7.92e-7 unchanged; source-proved sequence ABI fix and new held-out seed. Retain031/033 FAIL. No future PASS."
+    },
+    "DL032_repair1": {
+      "status": "local_prepared_source_only_not_bound_not_executed",
+      "requires": "current031 original full160/domain failure blocks; explicit new035 receipt API must be reviewed, not falsified old owner success."
+    },
+    "DL_PF033": {
+      "status": "local_prepared_not_deployed_not_qualified",
+      "local": "C:/Users/Huawei/AppData/Local/Temp/deltalog-performance-screen-new48h-20261015-033",
+      "scope": "No-timing diagnostic removed from independent production-screen adapter; sticky finite health changed policy needs actual NPU tests. Reuses025 owner. Strict predecessor gates remain. Same sync/eager/PDCoff D/C screen cannot imply win over optimized async dense."
+    },
+    "accuracy014": {
+      "status": "local_prepared_not_deployed_not_qualified",
+      "requires": "actual model smoke receipt + actual011 renderer; smoke before full. No answers/scores."
     }
   },
   "parallel_preparation": {
-    "gdn_paper_reassessment": "024repair2 real022files mount-closure repair",
-    "accuracy_input_repair": "013 actual DL task owner integration delivered24tests; new024pin awaits finalreview",
-    "ge_fullgdn_ready": "027LF1 delivered11tests; actual sameimage now MAIN"
+    "gdn_paper_reassessment": "035 minimal new-reference/ABI contract plus held-out seed; preparer only",
+    "accuracy_input_repair": "independent numerical contract and negative-control review; sidecar fallback source reviewed",
+    "ge_fullgdn_ready": "PF033 local source-only complete, awaiting predecessor qualification; not running"
   },
   "git": {
     "branch": "work/qwen36-damp-ascend-20261006",
     "last_confirmed_remote_commit": "09c4bb11",
-    "new_local_commit": "c37a4c8759056991f65528d6ad8c6adfd3865a26",
     "new_push_operation": "exec-0000000000000560",
     "new_push_exit": 128,
     "new_push_error": "could not read Username for https://github.com: No such device or address",
     "new_commit_remote_confirmation": false,
-    "actual_credential_helper_configured": false
+    "actual_credential_helper_configured": false,
+    "pre_stage_HEAD": "c206e96ae331a86a3939e43886a9ca098e7f76f4",
+    "current_checkpoint": "Resolve with git log -1 --format=%H -- NEW48H_DL031_SAVEDRAW_DOMAIN_ATTRIBUTION_20261015.json; no self-hash embedded"
   },
   "missing": [
     "Actual complete native prefill/decode/copy lifecycle bridge16 then160 under022 qualification",
@@ -238,19 +253,9 @@
     "no_new_HugeTLB_release": true,
     "no_foreign_stop": true,
     "continuous_utilization": "UNMEASURED",
-    "latest_protected_observation": "06c1 13:44UTC point snapshot all0-7 no compute; current declarations not occupation; actual020repair2 own-only cleanup verified. No foreign stop/no extra hugepage release."
+    "latest_protected_observation": "0790 point snapshot: all0–7 no compute, AICore0, HBM2865–2872MiB. No foreign stop, no new hugepage release. No continuous utilization claim."
   },
-  "current_MAIN_job": {
-    "operation_id": "exec-00000000000006d7",
-    "status": "last_observed_running_CPU_preflight_not_NPU",
-    "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-originalA-residual-savedframe-v1-027-LF1/SOURCE_MANIFEST.json",
-      "bytes": 11621,
-      "sha256": "9fad189b3f8d7b746f7491e1c17c2768d7c27246d3b61016272b0bb48bbe641a"
-    },
-    "physical": [],
-    "scope": "actual same-image precision API/CLI/selection; no numerical/model/performance promotion"
-  },
+  "current_MAIN_job": null,
   "historical_MXR007": {
     "operation_id": "exec-00000000000004cd",
     "source": {
@@ -621,6 +626,58 @@
       "operation": "exec-0000000000000639",
       "status": "CPU_CALLER_API_FAILED",
       "cause": "Actual Transformers5.5.4 apply_chat_template default return_dict=True. Original renderer expected list without explicitly requesting it; minimal010 explicitFalse prepared, source unchanged images."
+    },
+    "DL031_033": {
+      "status": "NPU_RAW_COMPLETE_HOST_FAILED_SAVEDRAW_DOMAIN_FAILED",
+      "producer": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge031-numeric16-new48h-MAIN-20261015-001/numeric/result/RESULT.json",
+        "bytes": 28837,
+        "sha256": "31e925f8e44eecb8f81bedd8fadd648d71451445cc1dce49a1bdf4847152fa43"
+      },
+      "owner": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge031-numeric16-new48h-MAIN-20261015-001/RESULT.json",
+        "bytes": 1262,
+        "sha256": "3619892d38137212e75def6ada43aaccd959c0b101d698b989b95e363530a575"
+      },
+      "domain": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl031-savedraw033-cpu-new48h-MAIN-20261015-001/native/result/DOMAIN030.json",
+        "bytes": 67743,
+        "sha256": "81a053b4bd4b896e6fac12af457bce36ab787d5c0cd5bb2930d487ca432f6e3b"
+      },
+      "scope": "24/40 diagnostic rows pass,16 B16 rows fail first gate; ownership failure historical first proc frame absent => cause beyond controller rejection UNKNOWN. Preserve old owners."
+    },
+    "DL034": {
+      "status": "ACTUAL_SAVEDRAW_DIAGNOSIS_COMPLETE_NOT_NUMERIC_QUALIFICATION",
+      "operation": "exec-000000000000079e",
+      "owner": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl031-savedraw034-cpu-new48h-MAIN-20261015-001/RESULT.json",
+        "bytes": 1343,
+        "sha256": "97470d43da106d504de76fb84f1eeff38478442b485a74d3ad244e8b736c7dea"
+      },
+      "diagnosis": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl031-savedraw034-cpu-new48h-MAIN-20261015-001/native/result/DIAGNOSIS.json",
+        "bytes": 472599,
+        "sha256": "2c25405bb5db2255807fbda1a9b944647f816f47f52158fc781c431426aa36d1"
+      },
+      "summary": {
+        "rows": 32,
+        "requests": 272,
+        "old_output_failures": 31,
+        "old_state_failures": 0,
+        "sequence_all": true,
+        "max_candidate_RNE": 0.001037344398340249,
+        "max_native_RNE": 0.0011574074074074073,
+        "max_peer": 0.0011574074074074073,
+        "max_state_l2": 8.900758710940515e-8,
+        "max_native_state_l2": 1.7215437523632087e-7,
+        "all_bad_dominant_same": true,
+        "all_bad_peak_is_floor": true,
+        "bitwise_RNE_requests": 236
+      },
+      "classification": "VERIFICATION_CONTRACT_DEFECT: native sequence lengths [0]+ones vs checker cumulative; 31 uncast-output failures have peak exactly direct-RNE BF16 floor and dominant candidate/native/RNE same. Not all outputs bitwise RNE. New preregistered contract and unseen NPU remain required.",
+      "NPU_reexecuted": false,
+      "model_ready": false,
+      "performance_ready": false
     }
   },
   "historical_MXR013": {
