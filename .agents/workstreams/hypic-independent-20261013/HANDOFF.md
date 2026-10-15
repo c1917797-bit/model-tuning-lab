@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT R12 FIRST-DIVERGENCE exec-00000000000007a3 RUNNING originalma a6109/direct.
+Checkpoint4ecc4486 published/liveverified;07a2 16:06:50UTC126bindings/newroot/
+physical0-3empty/8233+HCCLidle PASS.07a4 actual ownedCID97922c91236ec83ea062a30b0950f0538dc7c91558a921fa36f9bd978a07961d
+officialimage/ONLYphysical0-3,/probeRO/newowncacheRW. No currentcapture/numericproof.
+Raw/cache/cch/hypic-independent-20261013/c1-first-divergence-r1 immutable.
+Poll SAME07a3/root; live/unknown NEVERrestart or edit126boundsources.
+Terminal independent source/physicalNSpid/isolation/exactrelease audit, then
+sharedpy311 python -B audit_c1_stage_runtime.py --raw-root RAW --manifest-sha256
+661e3cae1efae30fbb37a899a1250344e6547754a1907c088e153327cda01507.
+Expected numerical failure staysfailed; validhead0capture is diagnosis only,
+not HYPIC/performance/quality acceptance. Missingcapture=>explicitincomplete.
+R11raw/disabledinadmission retained; fullscope/deadline19:04:09UTC unchanged.
+
 LATEST R12 independent runtimejoin complete: source/PID/rank0/request/step/
 current publicgeneration+tokens/128head0/windows/actual branch/failed-precommit,
 sealedfiles and byteaccounting. Independent FP64 captured-input prefix/suffix
