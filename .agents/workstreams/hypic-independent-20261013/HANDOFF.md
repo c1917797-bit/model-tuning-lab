@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST0751 TERMINALexit1;R11nativeGQA NOTPROMOTED,0/16success.0770 independent
+121source/177clean/exact94f077ab absence/8233NOlistener/physical0-3empty PASS.
+076e bind initially TIME_WAIT;076f confirms no listener, not external service.
+Observedfailedrank0/1/2 layer0step9 state scaled1.958/2.490/5.624; output+conv
+PASS. Failed groups had ZERO actual commits/finite gates. Geometry768receipts
+all4key/12value native, but not full16gate. No ownedliveNPUjob; R11disabled NOT
+admitted. Newroot/oldraw immutable, no unchangedretry or tolerance relaxation.
+NEXT R12 bounded same-request/rank0/layer0 stage capture + independentfirst
+divergence; plan frozen before code, no more blindvariants. Capture onlyhead0,
+64MiB/32records/firstfailedgroup, defaultdisabled/exclusivewriter/hashsealed.
+Fullmatrix/quality/lifecycle/29functional remain; deadline19:04:09UTC unchanged.
+
 While0751live: R11 disabled prospective config/manifest/contract frozen075f,
 122bindings/same source and identity/onlyc1_packed_waveFalse/newrootabsent PASS.
 NOTADMITTED/NOTSTARTED until enabled0751 full independent acceptance+exactrelease,

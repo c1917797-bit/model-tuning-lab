@@ -1,0 +1,135 @@
+{
+  "schema": "hypic-r11-failed-canary/v1",
+  "controller": "exec-0000000000000751",
+  "checkpoint": "c07bb19c71812f29cde05037b1b35da1f4291a4a",
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-packed-nativegqa-r1",
+  "decision": "NUMERICAL_CANARY_FAILED_NOT_PROMOTED",
+  "audit_operation": "exec-0000000000000770",
+  "audit": {
+    "source_bindings_unchanged": 121,
+    "isolation_clean": 177,
+    "exact_own_removed": true,
+    "port_free": true,
+    "physical0_3_empty": true,
+    "results": 16,
+    "successful": 0,
+    "failed_shadow_groups": 3,
+    "failed": [
+      {
+        "rank": 0,
+        "step": 9,
+        "layer": "language_model.model.layers.0.linear_attn",
+        "request_id": "cmpl-b2ec26f657ebd5f9-0-9aaeca85",
+        "metrics": [
+          {
+            "max_abs": 0.0078125,
+            "max_scaled": 0.5966587066650391,
+            "passed": true,
+            "rms": 0.00007014547009021044,
+            "tensor": "output"
+          },
+          {
+            "max_abs": 0.061176300048828125,
+            "max_scaled": 1.9577796459197998,
+            "passed": false,
+            "rms": 0.00026724033523350954,
+            "tensor": "state"
+          },
+          {
+            "max_abs": 0,
+            "max_scaled": 0,
+            "passed": true,
+            "rms": 0,
+            "tensor": "conv"
+          }
+        ],
+        "group_requests": [
+          "cmpl-b2ec26f657ebd5f9-0-9aaeca85",
+          "cmpl-af08259dcc163343-0-bf5c694a"
+        ]
+      },
+      {
+        "rank": 2,
+        "step": 9,
+        "layer": "language_model.model.layers.0.linear_attn",
+        "request_id": "cmpl-b2ec26f657ebd5f9-0-9aaeca85",
+        "metrics": [
+          {
+            "max_abs": 0.015625,
+            "max_scaled": 0.9000899791717529,
+            "passed": true,
+            "rms": 0.00006262906390475109,
+            "tensor": "output"
+          },
+          {
+            "max_abs": 0.12418437004089355,
+            "max_scaled": 5.623594760894775,
+            "passed": false,
+            "rms": 0.0008078420651145279,
+            "tensor": "state"
+          },
+          {
+            "max_abs": 0,
+            "max_scaled": 0,
+            "passed": true,
+            "rms": 0,
+            "tensor": "conv"
+          }
+        ],
+        "group_requests": [
+          "cmpl-b2ec26f657ebd5f9-0-9aaeca85",
+          "cmpl-af08259dcc163343-0-bf5c694a"
+        ]
+      },
+      {
+        "rank": 1,
+        "step": 9,
+        "layer": "language_model.model.layers.0.linear_attn",
+        "request_id": "cmpl-b2ec26f657ebd5f9-0-9aaeca85",
+        "metrics": [
+          {
+            "max_abs": 0.0078125,
+            "max_scaled": 0.599880039691925,
+            "passed": true,
+            "rms": 0.000058611418353393674,
+            "tensor": "output"
+          },
+          {
+            "max_abs": 0.06354808807373047,
+            "max_scaled": 2.4901883602142334,
+            "passed": false,
+            "rms": 0.00036340279621072114,
+            "tensor": "state"
+          },
+          {
+            "max_abs": 0,
+            "max_scaled": 0,
+            "passed": true,
+            "rms": 0,
+            "tensor": "conv"
+          }
+        ],
+        "group_requests": [
+          "cmpl-b2ec26f657ebd5f9-0-9aaeca85",
+          "cmpl-af08259dcc163343-0-bf5c694a"
+        ]
+      }
+    ],
+    "actual_commits_in_failed_layer_step": 0,
+    "sha256": {
+      "result.json": "4bee6bcd33cc356e6865d993c01b92f2434b6bc64edea6ec427ebcd1b41e6bc1",
+      "events.jsonl": "3f0b73a1d8c85fb8a24c2a565c9e87fc3755581b61656ce30ec93c5e9db7c8a1",
+      "compiled-cache-unit.json": "e342ba115912d0c6258fb3b3060b681d397900c34ec8abc1b45c599a2c5a4450",
+      "release.json": "bbfdf397d18cb579cee580e7ad328dfc945e288b30e0d1cc200ffb6303ac2394",
+      "service.log": "212c78cab47bc37cff174e32c1bb56a4ce247a46d058a817e87b07cef9185cd5"
+    }
+  },
+  "initial_audit": "076e bind failed due TIME_WAIT;076f proved no8233listener,0770 independently checked listener absence/exactCIDabsent/physical0-3empty. New starts still require original fresh bind gate.",
+  "actual_head_geometry": {
+    "{\"gate_heads\": 12, \"head_layout\": \"native_grouped\", \"key_heads\": 4, \"key_width\": 128, \"query_heads\": 4, \"value_heads\": 12, \"value_width\": 128, \"wy_heads\": 12}": 768
+  },
+  "conclusion": "Native grouped head ABI did not eliminate state shadow failure. Outputs and conv passed observed failed rows; no actual commits in failed rank-step-layer groups. Different requests/schedules prohibit causal residual-magnitude comparison. No task-quality or hardware-route rejection.",
+  "disabled_control": "R11 disabled prospective NOT_ADMITTED because enabled failed; never run unchanged.",
+  "next": "Bounded same-request/rank/layer stage capture and independent first-divergence audit. No more blind ABI/state-pass/tolerance changes.",
+  "goal_complete": false
+}
