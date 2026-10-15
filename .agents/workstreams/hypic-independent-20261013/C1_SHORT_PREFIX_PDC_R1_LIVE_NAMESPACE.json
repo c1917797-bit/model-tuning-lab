@@ -1,0 +1,70 @@
+{
+  "operation": "exec-0000000000000870",
+  "container_id": "70e5c0de936b9db692041513360de0b8949db4895772e1a4913daea6ef20ad58",
+  "source_checkpoint": "1ee971926c24d90de30621175fa24721d2d9ca66",
+  "proof": {
+    "sample_utc": "2026-10-15T18:15:14.335316+00:00",
+    "physical_namespace_proof": [
+      {
+        "physical": 0,
+        "host_pid": 276402,
+        "status": [
+          "Name:\tVLLM::Worker",
+          "NSpid:\t276402\t57"
+        ],
+        "exact_owned_cgroup": true
+      },
+      {
+        "physical": 1,
+        "host_pid": 276403,
+        "status": [
+          "Name:\tVLLM::Worker",
+          "NSpid:\t276403\t58"
+        ],
+        "exact_owned_cgroup": true
+      },
+      {
+        "physical": 2,
+        "host_pid": 276404,
+        "status": [
+          "Name:\tVLLM::Worker",
+          "NSpid:\t276404\t59"
+        ],
+        "exact_owned_cgroup": true
+      },
+      {
+        "physical": 3,
+        "host_pid": 276405,
+        "status": [
+          "Name:\tVLLM::Worker",
+          "NSpid:\t276405\t60"
+        ],
+        "exact_owned_cgroup": true
+      }
+    ],
+    "installs": [
+      {
+        "pid": 58,
+        "manifest_sha256": "384c1b20dc6e8b52af18b61bc4a5347dcb693df646fba0ec9530531b62be6b4d",
+        "c1_first_divergence": true
+      },
+      {
+        "pid": 57,
+        "manifest_sha256": "384c1b20dc6e8b52af18b61bc4a5347dcb693df646fba0ec9530531b62be6b4d",
+        "c1_first_divergence": true
+      },
+      {
+        "pid": 59,
+        "manifest_sha256": "384c1b20dc6e8b52af18b61bc4a5347dcb693df646fba0ec9530531b62be6b4d",
+        "c1_first_divergence": true
+      },
+      {
+        "pid": 60,
+        "manifest_sha256": "384c1b20dc6e8b52af18b61bc4a5347dcb693df646fba0ec9530531b62be6b4d",
+        "c1_first_divergence": true
+      }
+    ],
+    "foreign": []
+  },
+  "scope": "actual live PID/cgroup/NSpid physical0-3 only; rank joined separately through runtime receipts"
+}
