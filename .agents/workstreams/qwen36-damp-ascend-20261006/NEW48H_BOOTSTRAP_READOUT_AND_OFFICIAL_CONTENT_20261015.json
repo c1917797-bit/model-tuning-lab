@@ -1,0 +1,159 @@
+{
+  "schema": "ascend.new48h.causal-stage/v1",
+  "as_of_utc": "2026-10-15T08:00:00Z",
+  "cutoff_utc": "2026-10-16T07:18:17Z",
+  "goal_acceptance": false,
+  "model": "/cache/efim/Qwen3.6-27B",
+  "model_architecture": "Qwen3_5 48GDN+16FA",
+  "deltalog": {
+    "original004_numerical_gate_pass": false,
+    "diagnostic_NPU": false,
+    "diagnostic_actual_complete": true,
+    "owner": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlreadout005-diagnostic-new48h-MAIN-20261015-001/RESULT.json",
+      "bytes": 1379,
+      "sha256": "af34af8de544f75dfb016e3d3cf82ae74cc0458a96d257f51b14b515c4abb554"
+    },
+    "diagnosis": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlreadout005-diagnostic-new48h-MAIN-20261015-001/native/result/DIAGNOSIS.json",
+      "bytes": 29190,
+      "sha256": "d9415cbe67980405673af8623060c8bbd2c36f5e728c6a87a894f2131545ef4b"
+    },
+    "observed": {
+      "baseline_kdma_output_and_state_equal": true,
+      "first_B16_fault_step": 3,
+      "max_peer_output_relative_peak": 0.003105590062111801,
+      "original_output_limit": 0.00303,
+      "largest_difference_BF16_ULP": 1,
+      "largest_difference_index": [
+        9,
+        9,
+        15
+      ],
+      "candidate": -0.005462646484375,
+      "native": -0.00543212890625,
+      "independent_FP64": -0.005447388364538594
+    },
+    "interpretation": "State/readout FP32 ordering and BF16 midpoint supported as a hypothesis, not compiled-ISA proof. No gate waived; no model/performance qualification.",
+    "next": "New named native-batched-reduction candidate A preparation only; original failure retained."
+  },
+  "good_enough": {
+    "cpu060": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-NEW48H_060_CPU_001/RESULT.json",
+      "bytes": 350461,
+      "sha256": "1d58f91a543b30037c905c51cab4936f004d8cba276e7c2c26973a82793eee52"
+    },
+    "numeric060": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-NEW48H_060_NPU_001/RESULT.json",
+      "bytes": 350894,
+      "sha256": "103a13832989c701e01ccf5ef29968440a2144afd5dc964465babfc9b90eabda"
+    },
+    "failure060": "ADAPTATION_IMPLEMENTATION: device_op-first circular package import; no numerical case.",
+    "cpu061": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-NEW48H_061_CPU_001/RESULT.json",
+      "bytes": 351295,
+      "sha256": "37643b3dee93f0edbf1375faef65d2377a565ff77b66109e82981bfcb0bee367"
+    },
+    "numeric061": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-NEW48H_061_NPU_001/RESULT.json",
+      "bytes": 351727,
+      "sha256": "c4c57d57a66ee9766340827e0f04b71f46c97a98e029d1da8a2310f0714e1015"
+    },
+    "actual_native_import061": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-NEW48H_061_NPU_001/physical6/numeric/NATIVE_IMPORT.json",
+      "bytes": 576,
+      "sha256": "055b80e89e211348690909731a2a8c80ef3e8dd76724fc79f80f80c5a2f91d9f"
+    },
+    "probe061": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-NEW48H_061_NPU_001/physical6/numeric/PROBE.json",
+      "bytes": 3886,
+      "sha256": "67c152a3f635c62c3513b51c6daf690a8b5104fca3488fa75c1fea6996e3b588"
+    },
+    "failure061": "ADAPTATION_IMPLEMENTATION: native package import repaired; missing real Triton device-properties initialization at native l2norm before any solve/raw case. No method verdict.",
+    "release061": {
+      "cid": "7124ec41b3344d37c458926fd9c02746760daebaba2bb2c367848ad9c4f69555",
+      "stopped": true,
+      "retained": true,
+      "Pid": 0,
+      "ExecIDs": null,
+      "OOMKilled": false,
+      "physical": [
+        6
+      ]
+    },
+    "next": "Independent062 real init_device_properties_triton bootstrap repair preparation; do not rerun061 unchanged."
+  },
+  "accuracy": {
+    "official_content_pass": true,
+    "model_accuracy_pass": false,
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/accuracy-official-content-audit-new48h-v1-004/SOURCE_MANIFEST.json",
+      "bytes": 51993,
+      "sha256": "d8a88420007f273b73da8e63121a257519d8266b04701a3324136afef382dd19"
+    },
+    "owner": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-accuracy-content004-new48h-MAIN-20261015-001/RESULT.json",
+      "bytes": 2826,
+      "sha256": "1781abe9c199a9f7e7d5cd527951f88ef1be8b09209e477b272913bf8080485f"
+    },
+    "consumption": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-accuracy-content004-new48h-MAIN-20261015-001/CONSUMPTION.json",
+      "bytes": 1487,
+      "sha256": "62aa8dad183b023f3edd6e544f0334ccc67be14c4a6dbb10f5d221a53712c545"
+    },
+    "counts": {
+      "GSM8K": 1319,
+      "HumanEval": 164,
+      "MMLU": 14042
+    },
+    "cause": "REFERENCE_OR_TEST: literal csv.reader None differs from unchanged author pandas3.0.5 default NA semantics; full official-source content comparison passed without input rewrite.",
+    "release": {
+      "cid": "c8b90746b3093885cfd74467aa6c2b379e5cebfa03234aa44641a428bcbce697",
+      "stopped": true,
+      "retained": true,
+      "Pid": 0,
+      "ExecIDs": null,
+      "OOMKilled": false,
+      "Devices": []
+    },
+    "protocol": "GSM8K/HumanEval generation max2048/noThinking/normalEOS; MMLU original four-choice next-token likelihood max1, not free generation. No scores produced."
+  },
+  "resources": {
+    "physical_authority": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "TP4_007_floor_bytes": 78383153152,
+    "last_ordinary_MemAvailable_KiB": 61973740,
+    "TP4_007_admitted": false,
+    "next": "Separate MEM48 capped canary based on verified lazy tensor loading; original007 resource contract unchanged; actual peak/fit not yet proven.",
+    "weights": {
+      "safetensors_files": 15,
+      "total_file_bytes": 55563006400,
+      "max_shard_file_bytes": 3995081848
+    },
+    "continuous_30min_utilization": "UNMEASURED",
+    "hugetlb_release32GiB": "SPENT"
+  },
+  "git": {
+    "prior_stage_commit": "09c4bb11",
+    "prior_normal_push_confirmed": true,
+    "branch": "work/qwen36-damp-ascend-20261006",
+    "remote": "https://github.com/c1917797-bit/model-tuning-lab.git"
+  },
+  "next_priority": [
+    "Repair normal worker-equivalent bootstrap and run complete GE short fullGDN matrix.",
+    "Run separately reviewed capped whole-model canary if fresh resource admission succeeds.",
+    "Resolve DL native readout ordering with independently named single-factor candidate; preserve gates.",
+    "After relevant qualification, use existing unprofiled whole-request pair, not operator sums.",
+    "Final smoke/full task scores remain missing."
+  ]
+}

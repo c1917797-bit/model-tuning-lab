@@ -11,6 +11,7 @@
 | 学习别人如何把论文迁移到真实 Ascend | [迁移工程案例](paper-to-ascend-engineering-cases.md) | 论文不变量、硬件适配边界、真实模型闭环、可复用接口与证据限制 |
 | 判断收益、设计实验 | [性能与因果验证](performance-and-causal-validation.md) | 工作负载、可辨别对照、预算、结论边界 |
 | 类似失败再次出现 | [实测因果案例](cases/CASES.md) | 已证实事实、尚缺证据、下一次鉴别实验 |
+| 独立 probe 启动失败、BF16 读出分歧、官方内容审计误报 | [10月15日实测反例](cases/bootstrap-readout-and-official-content-20261015.md) | 正常 worker 初始化链、独立参考归因与真实解析器语义；禁止跳过整模型验收 |
 | 核实外部论断和版本 | [来源索引](sources.md) | 一手来源、版本范围、实际部署身份 |
 
 每次只读取当前决策需要的模块，不把全库作为固定提示词。维护者入口是 `ascend-inference-tuning-loop`；授权、截止、资源和验收以当前实验合同为准，本库不授予新权限。
