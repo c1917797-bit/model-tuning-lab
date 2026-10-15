@@ -25,16 +25,27 @@ def verify_model_source(cls):
             raise ValueError('official hybrid model source drift')
 
 
+def c2_install_route(config):
+    config=dict(config)
+    layer_barrier=config.pop("c2_layer_completion_barrier",False)
+    if type(layer_barrier) is not bool:
+        raise ValueError("explicit C2 layer barrier boolean required")
+    if layer_barrier:
+        from experimental_c2_layer_barrier import install_compact_c2
+    else:
+        from independent_compact_c2_hook import install_compact_c2
+    return config,install_compact_c2,layer_barrier
+
 def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_limit=128):
     if not enabled:return lambda:None
     if not callable(emit):raise ValueError('activation evidence sink required')
+    config,install_compact_c2,layer_barrier=c2_install_route(config)
     # Official ops registration precedes runtime imports; never patch source files.
     import vllm_ascend.ops
     from vllm.model_executor.models.qwen3_5 import Qwen3_5Model
     from independent_compact_stage import CompactCanonicalStage
     from independent_compact_runtime_snapshot import activate_compact_runner
     from independent_compact_gdn_hook import install_compact_gdn
-    from independent_compact_c2_hook import install_compact_c2
     from independent_compact_model_hook import install_compact_model
     if "public_segments" in config:
         from independent_catalog_stage import CatalogCompactStage
@@ -68,7 +79,8 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
     try:
         import os
         emit({'event':'compact_hypic_hooks_installed','pid':os.getpid(),
-              'default_disabled':True,'scope':'installation; real request proof pending'})
+              'default_disabled':True,'c2_layer_completion_barrier':layer_barrier,
+              'scope':'installation; real request proof pending'})
     except BaseException:
         stop();raise
     return stop
