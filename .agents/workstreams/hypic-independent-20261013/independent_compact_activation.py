@@ -36,16 +36,25 @@ def c2_install_route(config):
         from independent_compact_c2_hook import install_compact_c2
     return config,install_compact_c2,layer_barrier
 
+def c1_install_route(config):
+    config=dict(config)
+    native_batch=config.pop('native_decode_batch',False)
+    if type(native_batch) is not bool:raise ValueError('explicit native decode batch boolean required')
+    from independent_compact_gdn_hook import install_compact_gdn
+    def install(stage,*,enabled=False,emit=None):
+        return install_compact_gdn(stage,enabled=enabled,emit=emit,native_decode_batch=native_batch)
+    return config,install,native_batch
+
 def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_limit=128):
     if not enabled:return lambda:None
     if not callable(emit):raise ValueError('activation evidence sink required')
     config,install_compact_c2,layer_barrier=c2_install_route(config)
+    config,install_compact_gdn,native_batch=c1_install_route(config)
     # Official ops registration precedes runtime imports; never patch source files.
     import vllm_ascend.ops
     from vllm.model_executor.models.qwen3_5 import Qwen3_5Model
     from independent_compact_stage import CompactCanonicalStage
     from independent_compact_runtime_snapshot import activate_compact_runner
-    from independent_compact_gdn_hook import install_compact_gdn
     from independent_compact_model_hook import install_compact_model
     if "public_segments" in config:
         from independent_catalog_stage import CatalogCompactStage
@@ -80,6 +89,7 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
         import os
         emit({'event':'compact_hypic_hooks_installed','pid':os.getpid(),
               'default_disabled':True,'c2_layer_completion_barrier':layer_barrier,
+              'native_decode_batch':native_batch,
               'scope':'installation; real request proof pending'})
     except BaseException:
         stop();raise

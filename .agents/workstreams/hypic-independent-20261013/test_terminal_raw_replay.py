@@ -1,6 +1,7 @@
 """Offline immutable G3 raw replay and fail-closed negative controls."""
 import json
 import unittest
+import hashlib,subprocess
 from pathlib import Path
 from unittest.mock import patch
 from audit_formal_terminal_unit import audit_unit
@@ -8,8 +9,33 @@ from audit_formal_terminal_unit import audit_unit
 RAW="/cache/cch/hypic-independent-20261013/formal-performance-g3-r2"
 CONTRACT="FORMAL_PERFORMANCE_G3_R2_CONTRACT.json"
 REAL_READ=Path.read_text
+REAL_BYTES=Path.read_bytes
 
 class TerminalRawReplay(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        # Replay immutable historical bytes from their actual launch commit,
+        # not the evolving candidate tree. Never rewrite original raw evidence.
+        launch=json.loads(REAL_READ(Path(RAW)/'launch.json'))
+        commit=launch['git_commit']
+        contract=json.loads(REAL_READ(Path(CONTRACT)))
+        expected=dict(contract['cache_diagnostic']['source_sha256'])
+        expected['native_tp4_smoke.py']=contract['controller_sha256']
+        prefix='.agents/workstreams/hypic-independent-20261013/'
+        cls.archived={}
+        for name,digest in expected.items():
+            data=subprocess.check_output(['git','show',commit+':'+prefix+name])
+            if hashlib.sha256(data).hexdigest()!=digest:
+                raise ValueError('historical launch/source digest mismatch: '+name)
+            cls.archived[name]=data
+
+    def setUp(self):
+        archived=self.archived
+        def historical(path):
+            return archived[str(path)] if str(path) in archived else REAL_BYTES(path)
+        self.source_patch=patch.object(Path,'read_bytes',historical)
+        self.source_patch.start();self.addCleanup(self.source_patch.stop)
+
     def test_positive_full40(self):
         result=audit_unit(RAW,CONTRACT)
         self.assertTrue(result["terminal_unit_valid"])
@@ -47,4 +73,3 @@ class TerminalRawReplay(unittest.TestCase):
         self.reject_mutation("release.json",lambda x:x.update(port_free=False))
 
 if __name__=="__main__":unittest.main()
-

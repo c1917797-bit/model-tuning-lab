@@ -1,0 +1,58 @@
+{
+  "schema": "hypic-native-decode-candidate/v1",
+  "state": "canary-ready-pending-live-admission",
+  "variable": "batch only NativeQueryPlan scheduled_tokens=1 through pinned ordinary native conv/recurrent primitives on private buffers; C1/C2 math and deferred real slot commit unchanged",
+  "tests": {
+    "focused": "05ef 11 PASS",
+    "full": "05f2 348 PASS",
+    "retained_failures": [
+      "05ee output span shape mismatch; repaired explicit token axis",
+      "05f0 historical positive replay used evolving candidate bytes; repaired tests to verified original launch Git bytes; auditor and raw unchanged"
+    ]
+  },
+  "official_source": {
+    "gdn_sha256": "d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816",
+    "metadata_sha256": "42cc0284b57193112b8a8ad19704aa3401f02294f0c36333c307d748f462fe16",
+    "source_operations": [
+      "05df",
+      "05e1",
+      "05e4",
+      "05e5",
+      "05ea"
+    ],
+    "no_compute_device_mounts": true
+  },
+  "shadow": {
+    "output_state_conv": "full tensors on first singleton and first multi-row group per layer/rank, same initial private inputs",
+    "atol": 0.01,
+    "rtol": 0.003,
+    "tolerance_source": "pinned official backend test uses atol1e-2/rtol3e-3; finite required here, unlike equal_nan in upstream test",
+    "not_task_quality": true
+  },
+  "device": {
+    "new_root": "/cache/cch/hypic-independent-20261013/native-decode-batch-canary-r1",
+    "contract": "NATIVE_DECODE_BATCH_CANARY_R1_CONTRACT.json",
+    "controller": "unchanged cache_reuse_tp4_diagnostic.py f86e3f... reviewed ownership/deadline control; fresh own compile directory, no cache reuse",
+    "requests": 16,
+    "concurrency": 16,
+    "input": 32768,
+    "output": 64,
+    "warmups": "same2B+2A",
+    "profiling": false,
+    "terminal_required": [
+      "all16 fourrank48C1/16C2 hot",
+      "48 linear layers all4rank successful multi-request shadow",
+      "native batch groups real rows/slots/request provenance",
+      "all runtime bindings",
+      "continuous physical0-3 isolation/NSpid map",
+      "exact own resource release"
+    ]
+  },
+  "not_claimed": [
+    "NPU correctness",
+    "formal speedup",
+    "paired quality",
+    "full objective completion"
+  ],
+  "deadline": "2026-10-15T19:04:09Z"
+}

@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+R7 native1 batch candidate:05ef11focused and05f2full348CPUtests PASS.
+Defaultfalse flag native_decode_batch; newR7 manifest/config/contract frozen.
+Private packed native conv/recurrent backend, full-path shadow firstsingleton
+andfirstmultirow perlayer/rank. Officialbackendtol atol.01/rtol.003 frozen;
+finite required, not taskquality.05ee shapeerror repaired;05f0 oldraw test now
+replays exact launchGit bytes, auditor/rawunchanged. Newreport retainsfailures.
+Next freshphysical0-3/8233/HCCL/newroot/sourcecheck and integrated16c16/32768/64
+using unchanged cache_reuse_tp4_diagnostic.py with freshowncache/no reuse.
+NATIVE_DECODE_BATCH_CANARY_R1_CONTRACT.json; no newNPUrun yet. Requireall4rank
+48layer successfulmultirow shadow and16/16hot/isolation/source/exactrelease.
+No furthercandidate sourceedits once live. Deadline19:04:09UTC unchanged.
+
+
 LATEST05dc: five CPU native decode packing controls PASS. New
 independent_native_decode_pack.py owns gathered projected/gates/conv/value-major
 state buffers, zeroes no-initial rows privately, separates cumulative conv starts

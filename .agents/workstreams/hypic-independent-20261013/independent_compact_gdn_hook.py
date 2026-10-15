@@ -5,8 +5,9 @@ from pathlib import Path
 import hashlib,inspect
 
 
-def install_compact_gdn(stage,*,enabled=False,emit=None):
+def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=False):
     if not enabled:return lambda:None
+    if type(native_decode_batch) is not bool:raise ValueError('native decode batch boolean required')
     if not callable(emit):raise ValueError('compact evidence sink required')
     import torch
     from vllm.forward_context import get_forward_context
@@ -23,6 +24,7 @@ def install_compact_gdn(stage,*,enabled=False,emit=None):
     if not isinstance(stage.compact_store,CompactLinearMaterialPool):
         raise ValueError('compact CPU material store required')
     original=cls._forward_core
+    shadowed=set()
     if hashlib.sha256(Path(inspect.getfile(inspect.unwrap(original))).read_bytes()).hexdigest()!='d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816':
         raise ValueError('official GDN source drift')
     if getattr(original,'_independent_private_owned',False) or getattr(original,'_independent_compact_gdn_owned',False):
@@ -48,6 +50,11 @@ def install_compact_gdn(stage,*,enabled=False,emit=None):
         if any(x.shape[0]!=total for x in (mixed_qkv,b,a,core_attn_out)):
             raise ValueError('compact GDN projected row coverage mismatch')
         conv_cache,state_cache=self.kv_cache[:2];prepared=[];offset=0
+        batched={}
+        if native_decode_batch:
+            from independent_native_decode_prepare import prepare_native_decode
+            batched=prepare_native_decode(self,plans,associations,mixed_qkv,b,a,
+                raw[self.prefix],shadowed=shadowed,emit=emit)
         with ExitStack() as leases:
             for plan,assoc in zip(plans,associations):
                 is_native=isinstance(plan,NativeQueryPlan)
@@ -65,7 +72,9 @@ def install_compact_gdn(stage,*,enabled=False,emit=None):
                     span=slice(base+lo,base+hi)
                     return make_boundary_runner(self,mixed_qkv[span],b[span],a[span],conv,
                                                 return_conv=True)(incoming)
-                if is_native:
+                if plan.request_id in batched:
+                    output,final,tail=batched[plan.request_id]
+                elif is_native:
                     output,final,tail=execute_native_linear_plan(plan,state,tail,run_live=live)
                 else:
                     output,final,tail=execute_compact_linear(material,expected,plan,state,tail,run_live=live)
