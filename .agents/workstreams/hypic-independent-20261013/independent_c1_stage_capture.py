@@ -84,7 +84,7 @@ class FirstDivergenceCapture:
             raise ValueError("absolute existing non-symlink capture parent required")
         root.mkdir(mode=0o700,exist_ok=False)
         manifest=dict(schema="hypic-first-divergence/v1",identity=self.identity,
-            failed_request_id=failed_request_id,sampling="declared head0 only; not full tensor equivalence",
+            failed_request_id=failed_request_id,sampling="declared selected head only; not full tensor equivalence",
             max_bytes=self.max_bytes,max_records=self.max_records,payload_bytes=self.bytes,records=[])
         for i,record in enumerate(self.records):
             meta={k:v for k,v in record.items() if k!="tensors"};meta["tensors"]={}

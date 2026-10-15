@@ -47,7 +47,8 @@ class CompletionControls(unittest.TestCase):
             self.assertFalse(events and events[-1]["passed"])
 
     def hook_case(self,completion=True,fail_second=False,nonfinite=False,packed=False,
-                  fail_shadow=False,fail_preparation=False,probe=False,fail_capture=False):
+                  fail_shadow=False,fail_preparation=False,probe=False,fail_capture=False,
+                  residual_policy=False):
         from independent_compact_gdn_hook import install_compact_gdn
         from independent_compact_material_pool import CompactLinearMaterialPool
         from independent_compact_model_hook import CURRENT_COMPACT_MODEL
@@ -69,7 +70,12 @@ class CompletionControls(unittest.TestCase):
             def serial_terminal(self,*args,**kw):pass
             def serial_state(self,*args,**kw):pass
             def final(self,*args,**kw):pass
-            def seal(self,rid):
+            def seal(self,rid,**values):
+                if residual_policy:
+                    if set(values)!={"actual_state","reference_state","reported_max"}:
+                        raise AssertionError("actual failed state/max not passed to observer")
+                    if values["actual_state"].shape!=values["reference_state"].shape:
+                        raise AssertionError("state pair shape drift")
                 if fail_capture:raise ValueError("capture write failure")
                 return {"complete":True}
         def emit(event):
@@ -115,7 +121,8 @@ class CompletionControls(unittest.TestCase):
             stack.enter_context(patch.object(torch,"npu",SimpleNamespace(synchronize=lambda:sync.append("commit")),create=True))
             stop=install_compact_gdn(stage,enabled=True,emit=emit,layer_completion=completion,
                 native_decode_batch=packed,layer_shadow=packed,packed_wave=packed,
-                first_divergence=probe)
+                first_divergence=probe,
+                first_divergence_head_policy="max_state_residual" if residual_policy else "head0")
             token=CURRENT_COMPACT_MODEL.set(SimpleNamespace(plans=plans))
             token2=CURRENT_REQUEST_SLICES.set(requests)
             try:
@@ -149,6 +156,10 @@ class CompletionControls(unittest.TestCase):
         self.hook_case(packed=True,fail_shadow=True,probe=True)
     def test_probe_write_failure_no_writes_and_closed(self):
         self.hook_case(packed=True,fail_shadow=True,probe=True,fail_capture=True)
+    def test_residual_observer_gets_actual_pair_before_zero_writes(self):
+        self.hook_case(packed=True,fail_shadow=True,probe=True,residual_policy=True)
+    def test_residual_observer_seal_failure_releases_without_writes(self):
+        self.hook_case(packed=True,fail_shadow=True,probe=True,residual_policy=True,fail_capture=True)
     def test_probe_route_default_and_strict(self):
         _,install,_=c1_install_route({})
         self.assertFalse(install.c1_first_divergence)

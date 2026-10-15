@@ -1,4 +1,4 @@
-"""Independent link of sealed head0 samples to actual failed runtime receipts."""
+"""Independent link of one selected-head sample to actual failed receipts."""
 import json,re,math
 from pathlib import Path
 from audit_c1_stage_capture import audit_capture
@@ -89,11 +89,22 @@ def audit_runtime_capture(events,host_raw,*,manifest_sha256):
             identity.get("manifest_sha256"),identity.get("requests"))!=(
             0,e["pid"],e["step"],LAYER,manifest_sha256,[rid]):
         raise ValueError("exact sampled request/source/worker/step identity required")
-    if (identity.get("head_indices")!={"key":0,"query":0,"value":0}
-            or identity.get("key_width")!=128 or identity.get("value_width")!=128
+    policy=identity.get("head_policy","head0")
+    heads=identity.get("head_indices",{})
+    if policy=="head0":
+        if heads!={"key":0,"query":0,"value":0}:raise ValueError("legacy head0 required")
+    elif policy=="max_state_residual":
+        vh=heads.get("value")
+        if (type(vh)is not int or not 0<=vh<12
+                or heads!={"query":vh//3,"key":vh//3,"value":vh}
+                or e.get("head_policy")!=policy
+                or any(x.get("c1_first_divergence_head_policy")!=policy for x in installs)):
+            raise ValueError("explicit residual policy and canonical4/12 grouped-head mapping required")
+    else:raise ValueError("unknown sampled head policy")
+    if (identity.get("key_width")!=128 or identity.get("value_width")!=128
             or identity.get("generations")!={rid:public.get("generation")}
             or rid not in failure["group_requests"]):
-        raise ValueError("head0 width/current producer generation/group mismatch")
+        raise ValueError("selected head width/current producer generation/group mismatch")
     coordinates=e.get("coordinates",{});c=coordinates.get(rid,{})
     if (set(coordinates)!=set(failure["group_requests"])
             or type(c.get("slot"))is not int or c["slot"]<0
@@ -105,7 +116,7 @@ def audit_runtime_capture(events,host_raw,*,manifest_sha256):
     if (type(public.get("generation"))is not int or public["generation"]<1
             or identity.get("tokens_sha256")!={rid:public.get("tokens_sha256")}
             or not re.fullmatch("[0-9a-f]{64}",public.get("tokens_sha256",""))
-            or any(type(v)is not int or v!=0 for v in identity["head_indices"].values())):
+            or any(type(v)is not int for v in heads.values())):
         raise ValueError("exact token/generation/head association required")
     metrics={x.get("tensor"):x for x in failure.get("metrics",[])}
     if (set(metrics)!={"output","state","conv"} or metrics["state"].get("passed")is not False
@@ -166,6 +177,27 @@ def audit_runtime_capture(events,host_raw,*,manifest_sha256):
         d=np.abs(actual-reference);scaled=d/(.01+.003*np.abs(reference))
         return dict(max_abs=float(d.max()),max_scaled=float(scaled.max()),
                     rms=float(np.sqrt(np.mean(d*d))),within_frozen_tolerance=bool(np.all(scaled<=1)))
+    selected_point=None
+    if policy=="max_state_residual":
+        selected=identity.get("head_selection",{})
+        if selected!=e.get("head_selection"):
+            raise ValueError("sealed/runtime head selection mismatch")
+        ki=selected.get("key_coordinate");vi=selected.get("value_coordinate")
+        maximum=metrics["state"]["max_scaled"]
+        if (type(ki)is not int or type(vi)is not int or not 0<=ki<128 or not 0<=vi<128
+                or selected.get("value_head")!=heads["value"]
+                or (selected.get("atol"),selected.get("rtol"))!=(.01,.003)
+                or selected.get("reported_max_scaled")!=maximum
+                or selected.get("selected_max_scaled")!=maximum):
+            raise ValueError("exact failed-head coordinate and reported maximum required")
+        actual=tensor("packed","final","suffix","state")
+        reference=tensor("serial","final","suffix","state")
+        point=float(abs(actual[ki,vi]-reference[ki,vi])/(.01+.003*abs(reference[ki,vi])))
+        if point<=1 or not math.isclose(point,maximum,rel_tol=2e-6,abs_tol=2e-6):
+            raise ValueError("independent sampled coordinate does not match reported failed maximum")
+        selected_point=dict(value_head=heads["value"],key_coordinate=ki,value_coordinate=vi,
+            independently_recomputed_scaled_residual=point,reported_max_scaled=maximum,
+            scope="sampled point agrees with runtime maximum; not independent global argmax")
     internal=[];oracles=[]
     for side in ("packed","serial"):
         prefix=tensor(side,"prefix_terminal","prefix","state")
@@ -186,7 +218,8 @@ def audit_runtime_capture(events,host_raw,*,manifest_sha256):
                 scope="independent captured-input FP64 math reference; not BF16 bitwise requirement"))
     return dict(capture_link_verified=True,identity=identity,coordinates=coordinates,
                 internal_state_checks=internal,fp64_captured_input_references=oracles,
-                tensor_audit=generic,scope="source-bound sampled head0 failed-request diagnostic only; full run, physical isolation/release, quality and performance separate")
+                selected_failed_point=selected_point,
+                tensor_audit=generic,scope="source-bound sampled selected-head failed-request diagnostic only; full run, physical isolation/release, quality and performance separate")
 
 if __name__=='__main__':
     import argparse

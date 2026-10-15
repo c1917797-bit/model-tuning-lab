@@ -1,5 +1,17 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST R13 runtime/audit wiring ready OFFLINE, no device start. Explicit
+c1_first_divergence_head_policy=max_state_residual, defaulthead0/defaultprobeoff.
+Actualallheadclones bounded256MiB, firsthotonly, failureselectsactualguardargmax;
+exportsonehead64MiB/32records; source-bound selectedcoords and independentpoint
+residual match2e-6rtol/atol. Globalargmax not independently claimed from sample.
+462CPU07f0 PASS; its laterstructurewrongcwd failedmissingAGENTS, corrected07f3
+rootstructure29/diff PASS.07f5 static129contract/128manifest/newrootabsent PASS.
+C1_FAILED_HEAD_R1_CONTRACT.json rawc1-failed-head-r1 NOTSTARTED. Math/.01/.003
+unchanged. Need explicit publicationapproval after prior securityrejection,
+checkpoint/liveverify then freshma/direct/physical0-3/8233/HCCL/sourceadmission.
+No bypass/repeatedpush. R12r2rawimmutable/fullscope/deadline19:04:09UTC retained.
+
 Publication: component checkpoint d1e6776aa932b44b626ed4ce32df2c9961ec9e11
 is LOCAL ONLY. Desktop object relay import verified original objects/main unchanged.
 Network push failed getaddrinfo thread; escalated push then rejected by security

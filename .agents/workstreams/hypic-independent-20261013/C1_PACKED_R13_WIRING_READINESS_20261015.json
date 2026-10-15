@@ -1,0 +1,36 @@
+{
+  "schema": "hypic-r13-wiring-readiness/v1",
+  "scope": "host-side wiring and package only; not NPU capture, rootcause, algorithm/quality/performance acceptance",
+  "full_regression": {
+    "operation": "exec-00000000000007f0",
+    "tests": 462,
+    "tests_passed": true,
+    "combined_exit": 1,
+    "post_test_structure_failure": "validate-mst invoked with workstream cwd; needs repository root"
+  },
+  "structure_corrected": {
+    "operation": "exec-00000000000007f3",
+    "exit": 0,
+    "skills": 29,
+    "scope": "structure not functional"
+  },
+  "static": {
+    "operation": "exec-00000000000007f5",
+    "contract_bindings": 129,
+    "manifest_bindings": 128,
+    "newroot_absent": true,
+    "device_run": false
+  },
+  "manifest_sha256": "01e7d69cbc63166e5232e47ea44a60ce426c92c42156d8aadee33d496b12f6f6",
+  "contract": "C1_FAILED_HEAD_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-failed-head-r1",
+  "changes": "defaultoff explicit residual-head observation policy; all-head ephemeral clone<=256MiB, CPUexport onehead<=64MiB/32records, no algorithm/tolerance modifications",
+  "remaining": [
+    "explicit remote-publication authority after safety rejection",
+    "checkpoint/live remote verification",
+    "fresh physical/direct/port/source admission",
+    "actual integrated failed-head capture and independent runtime/physical/release audit",
+    "mechanism rootcause/fix then full performance/quality/lifecycle"
+  ],
+  "publication": "No further push attempted after rejection. Last verifiedremote642b9d43; main unchanged."
+}

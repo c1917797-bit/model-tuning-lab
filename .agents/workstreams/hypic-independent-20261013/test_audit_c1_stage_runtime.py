@@ -5,12 +5,17 @@ from independent_c1_stage_capture import FirstDivergenceCapture
 from audit_c1_stage_runtime import audit_runtime_capture
 
 class RuntimeStageAuditTests(unittest.TestCase):
-    def fixture(self,temp):
+    def fixture(self,temp,*,residual=False,key_head=2,point=(3,7),claimed_max=5.,final_value=.05):
         raw=Path(temp);(raw/"diagnostics").mkdir()
         identity=dict(rank=0,pid=123,step=9,layer="language_model.model.layers.0.linear_attn",
             manifest_sha256="a"*64,requests=["r"],generations={"r":3},
             tokens_sha256={"r":"b"*64},head_indices=dict(query=0,key=0,value=0),
             key_width=128,value_width=128)
+        selected=dict(value_head=8,key_coordinate=point[0],value_coordinate=point[1],
+            reported_max_scaled=claimed_max,selected_max_scaled=claimed_max,atol=.01,rtol=.003,
+            selection="runtime full-state FP32 argmax; exported head is sampled")
+        if residual:identity.update(head_policy="max_state_residual",
+            head_indices=dict(query=key_head,key=key_head,value=8),head_selection=selected)
         capture=FirstDivergenceCapture(identity)
         for side in ("packed","serial"):
             for window,lo,hi in (("prefix",0,2),("suffix",2,5)):
@@ -25,7 +30,9 @@ class RuntimeStageAuditTests(unittest.TestCase):
                 tensors={"state":torch.zeros(128,128)}
                 if stage=="cached_composition":
                     tensors.update(transition=torch.zeros(128,128),zero_state=torch.zeros(128,128))
-                if stage=="final":tensors.update(output=torch.zeros(3,128),conv=torch.zeros(3,2560))
+                if stage=="final":
+                    tensors.update(output=torch.zeros(3,128),conv=torch.zeros(3,2560))
+                    if residual and side=="packed":tensors["state"][3,7]=final_value
                 capture.add(side=side,request_id="r",stage=stage,window=window,
                     source_start=lo,source_end=hi,tensors=tensors)
         receipt=capture.seal_failure(raw/"diagnostics"/"c1-stage-rank0-step9",failed_request_id="r")
@@ -49,7 +56,30 @@ class RuntimeStageAuditTests(unittest.TestCase):
         selection=dict(common,event="c1_first_divergence_selection",eligible=True,reason=None,
             total_entries=2,hot_request_ids=["r","other"],excluded_native_one=[],
             active_windows=4,packed_tokens=10,selected_request_id="r",actual_slot_commit="not_started")
+        if residual:
+            for install in installs:install["c1_first_divergence_head_policy"]="max_state_residual"
+            event.update(head_policy="max_state_residual",head_selection=selected)
+            failure["metrics"][1]["max_scaled"]=claimed_max
         return installs+[public,selection,failure,event],raw
+    def test_selected_failed_head_point_independent_audit(self):
+        with tempfile.TemporaryDirectory() as temp:
+            events,raw=self.fixture(temp,residual=True)
+            report=audit_runtime_capture(events,raw,manifest_sha256="a"*64)
+            self.assertEqual(report["selected_failed_point"]["value_head"],8)
+            self.assertGreater(report["selected_failed_point"]["independently_recomputed_scaled_residual"],1)
+    def test_selected_head_mapping_point_and_maximum_mutations(self):
+        for kwargs in (dict(key_head=1),dict(point=(4,7)),dict(claimed_max=6.),
+                       dict(final_value=.005)):
+            with tempfile.TemporaryDirectory() as temp:
+                events,raw=self.fixture(temp,residual=True,**kwargs)
+                with self.assertRaises(ValueError):
+                    audit_runtime_capture(events,raw,manifest_sha256="a"*64)
+        with tempfile.TemporaryDirectory() as temp:
+            events,raw=self.fixture(temp,residual=True)
+            events[0].pop("c1_first_divergence_head_policy")
+            with self.assertRaises(ValueError):
+                audit_runtime_capture(events,raw,manifest_sha256="a"*64)
+
     def test_complete_link_and_independent_head_oracle(self):
         with tempfile.TemporaryDirectory() as temp:
             events,raw=self.fixture(temp)

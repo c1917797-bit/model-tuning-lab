@@ -7,11 +7,14 @@ import hashlib,inspect
 
 def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=False,
                         layer_completion=False,layer_shadow=False,packed_wave=False,
-                        first_divergence=False):
+                        first_divergence=False,first_divergence_head_policy="head0"):
     if not enabled:return lambda:None
     if type(packed_wave) is not bool:raise ValueError('explicit packed C1 boolean required')
     if type(first_divergence)is not bool or first_divergence and not packed_wave:
         raise ValueError('explicit stage probe requires packed C1 canary')
+    if (first_divergence_head_policy not in ("head0","max_state_residual")
+            or first_divergence_head_policy!="head0" and not first_divergence):
+        raise ValueError("residual head policy requires explicit stage probe")
     if packed_wave and not (native_decode_batch and layer_completion and layer_shadow):
         raise ValueError('packed C1 canary requires native1 batch, finite gate and shadow')
     if type(native_decode_batch) is not bool:raise ValueError('native decode batch boolean required')
@@ -75,7 +78,7 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
             if first_divergence:
                 from independent_c1_stage_probe import make_probe
                 probe_kwargs={'probe_factory':lambda layer,layout,plans,leased:
-                    make_probe(layer,layout,plans,leased,emit)}
+                    make_probe(layer,layout,plans,leased,emit,head_policy=first_divergence_head_policy)}
             if packed_wave:
                 from independent_c1_packed_prepare import prepare_packed_layer
                 packed,packed_materials,packed_layout=prepare_packed_layer(
@@ -142,7 +145,10 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
                         'actual_slot_commit':'not_started'})
                     if not passed:
                         if probe is not None:
-                            receipt=probe.seal(plan.request_id)
+                            receipt=(probe.seal(plan.request_id,actual_state=final,
+                                reference_state=reference[1],reported_max=metrics[1]["max_scaled"])
+                                if first_divergence_head_policy=="max_state_residual"
+                                else probe.seal(plan.request_id))
                             emit(dict(receipt,event='c1_first_divergence_capture',
                                 rank=plan.rank,step=plan.step,layer=self.prefix,
                                 request_id=plan.request_id,actual_slot_commit='not_started'))
