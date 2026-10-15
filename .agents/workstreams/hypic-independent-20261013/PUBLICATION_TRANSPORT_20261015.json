@@ -1,0 +1,31 @@
+{
+  "schema": "hypic-publication-attempt/v1",
+  "state": "not-published",
+  "last_verified_remote": "bf71afe1ecc6e11d2a6b023995e89bb1c93ab9be",
+  "prepared_checkpoint": "3e50ed3f25939b9b22ef928521089fce1da81eb1",
+  "scope": "work/hypic-independent-20261013 only; main unchanged; not deployment or whole-goal acceptance",
+  "desktop_probe": {
+    "sandbox": "getaddrinfo thread failed to start",
+    "approved_outside_sandbox": "live ls-remote succeeded"
+  },
+  "host_direct_github": "unchanged known TLS/network failure; not retried",
+  "export_metadata": {
+    "operation": "0624",
+    "objects": 1874,
+    "raw_bytes": 14198380
+  },
+  "transport_attempts": [
+    {
+      "operation": "0625",
+      "result": "large operation stdout read failed MCP network Connection failed; no object import"
+    },
+    {
+      "operation": "0626",
+      "result": "compressed operation stdout read interrupted after prolonged pending response; export itself read-only; no object import"
+    }
+  ],
+  "desktop_helper": "optional bounded gzip envelope decoder added, retains perobject type/SHA1, original commit IDs, expected head/base, main unchanged and FF-only checks; old objects.json not overwritten",
+  "no_push_attempted": true,
+  "no_remote_ref_change": true,
+  "next": "use bounded small chunks for transport after device gates; do not repeat unchanged large reads or host push"
+}

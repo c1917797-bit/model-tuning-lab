@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST061b terminalexit0;0628 independent103sources/16hot/4worker explicit
+nativebatchfalse/no batch+shadowmarkers/225clean/physicalNSpid/exact07b3c605...
+release PASS. R7_NATIVE_BATCH_DISABLED_R1_TERMINAL_AUDIT.json retainsrawSHA.
+Median322.252s vs enabled310.866s is singlebounded64token diagnostic, NOTformal
+speedclaim. No ownedlivejob. Nextfull40R7screen freshadmission.
+AWMCPendpoint404 recovered via AWMCPrU SAME originalma a6109/exact0628;
+fresh topo direct tpc proves no host/node switch or experiment rerun.
+Publication large-read attempts0625/0626 notimported/pushed; remote onlyverified
+bf71afe1... . PUBLICATION_TRANSPORT_20261015.json preserves failures.
+
+
 While061blive:0620 eight terminal/batch audit controls PASS. New
 audit_native_decode_terminal.py --contract NAME [--live-release] separates
 historicalreceipt acceptance from freshphysicalrelease. Offline replay of05fa

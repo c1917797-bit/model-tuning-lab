@@ -1,0 +1,86 @@
+{
+  "terminal_evidence_valid": true,
+  "live_release_verified": true,
+  "enabled": false,
+  "source_bindings": 103,
+  "manifest_sha256": "7bac8e205fccda0e6203a60b508db38ca4359e03f49680fd68dd5f73237c9dc2",
+  "hot": {
+    "accepted_hot_coverage": true,
+    "denominator": 16,
+    "covered": [
+      "cmpl-86c91cc5a5718d9c",
+      "cmpl-a2b2bce338c10207",
+      "cmpl-9e40c847000fa9bc",
+      "cmpl-bd2a8b6c44e115d8",
+      "cmpl-926c049c7b3e21b4",
+      "cmpl-88bb1b4febc42292",
+      "cmpl-af115c77dd7bacd7",
+      "cmpl-87f2938ef3296cf5",
+      "cmpl-b73dc55dd502806b",
+      "cmpl-b8d2c62c85eba6b3",
+      "cmpl-8865fa3e305838c9",
+      "cmpl-a65e261e6bd28cc9",
+      "cmpl-95e143c0df42d46b",
+      "cmpl-b59c41f2bc79ba87",
+      "cmpl-917e4334f33dd57f",
+      "cmpl-8f7c5c1b08ff2c84"
+    ],
+    "missing": [],
+    "worker_pids": {
+      "0": 60,
+      "1": 61,
+      "2": 62,
+      "3": 63
+    },
+    "scope": "diagnostic16 same-step all-rank/all-layer coverage only; never formal full40 acceptance"
+  },
+  "native_batch": {
+    "native_decode_disabled_verified": true,
+    "workers": {
+      "0": 60,
+      "1": 61,
+      "2": 62,
+      "3": 63
+    },
+    "scope": "native-batch switch and execution-marker absence only; HTTP/HYPIC hot/physical/release separate"
+  },
+  "physical": {
+    "ranks": {
+      "0": {
+        "inner_pid": 60,
+        "host_pid": 680637,
+        "physical_npu": 0
+      },
+      "1": {
+        "inner_pid": 61,
+        "host_pid": 680638,
+        "physical_npu": 1
+      },
+      "2": {
+        "inner_pid": 62,
+        "host_pid": 680639,
+        "physical_npu": 2
+      },
+      "3": {
+        "inner_pid": 63,
+        "host_pid": 680640,
+        "physical_npu": 3
+      }
+    },
+    "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+  },
+  "isolation_samples": 225,
+  "shadow_groups": 0,
+  "max_scaled": null,
+  "elapsed_median_seconds": 322.25226404500427,
+  "raw_sha256": {
+    "result.json": "a5d73cd46c589235f8d122765c74c012793cc281dad52d75389aa9f5ad820e08",
+    "events.jsonl": "57d0a26622a50cad8ce66793c77fa47ec8b73bc86c76af113d5c3a7d71068d66",
+    "compiled-cache-unit.json": "e33f3651dba9a3d564e84550f74f3d97b2ff68c6158c1a175bad7980e2085887",
+    "release.json": "d43dbf5e113bccaf9ceeb7a0fac176f0ae675ca3476c86ec10b48fd28cf85157"
+  },
+  "scope": "bounded16 source/hot/native switch/numerical-control/isolation/release receipts; fresh physical release ONLY when live_release_verified; not formal performance/quality/goal completion",
+  "operation": "exec-0000000000000628",
+  "controller": "exec-000000000000061b",
+  "connector_recovery": "awmcp endpoint404; awmcpru read SAME originalma peer/exact operation; freshdirecttpc topologyproved; no rerun"
+}
