@@ -1,0 +1,492 @@
+{
+  "schema": "hypic-profile-control-audit/v1",
+  "scope": "Same-process private-shape warm diagnostic only; not formal performance, quality or compiler causality proof",
+  "operations": {
+    "inference": "0529",
+    "hot_physical": "053d",
+    "release": "053e",
+    "parser": "053c",
+    "aggregate": "0540",
+    "artifact_validation": "0541",
+    "image_env": "0558"
+  },
+  "raw_root": "/cache/cch/hypic-independent-20261013/profile-g3-r6-privatewarm-r1",
+  "analysis_root": "/cache/cch/hypic-independent-20261013/profile-g3-r6-privatewarm-r1-analysis-r1",
+  "parsed": {
+    "fourrank_parsed_artifacts_valid": true,
+    "ranks": {
+      "0": {
+        "pid": 59,
+        "tables": {
+          "kernel_details.csv": {
+            "rows": 282315,
+            "columns": 46
+          },
+          "operator_details.csv": {
+            "rows": 2490899,
+            "columns": 9
+          },
+          "op_statistic.csv": {
+            "rows": 64,
+            "columns": 9
+          },
+          "api_statistic.csv": {
+            "rows": 112,
+            "columns": 9
+          }
+        },
+        "json_events": 7391124,
+        "trace_bytes": 1375684320,
+        "cpu_pid_events": 2490899,
+        "categories": {
+          "cpu_op": 2490899,
+          "dequeue": 314677,
+          "async_task_queue": 629354,
+          "enqueue": 314677,
+          "null": 2386459,
+          "HostToDevice": 628320,
+          "async_npu": 626738
+        }
+      },
+      "1": {
+        "pid": 60,
+        "tables": {
+          "kernel_details.csv": {
+            "rows": 282315,
+            "columns": 46
+          },
+          "operator_details.csv": {
+            "rows": 2490921,
+            "columns": 9
+          },
+          "op_statistic.csv": {
+            "rows": 64,
+            "columns": 9
+          },
+          "api_statistic.csv": {
+            "rows": 112,
+            "columns": 9
+          }
+        },
+        "json_events": 7391185,
+        "trace_bytes": 1374349946,
+        "cpu_pid_events": 2490921,
+        "categories": {
+          "cpu_op": 2490921,
+          "dequeue": 314681,
+          "async_task_queue": 629362,
+          "enqueue": 314681,
+          "null": 2386460,
+          "HostToDevice": 628320,
+          "async_npu": 626760
+        }
+      },
+      "2": {
+        "pid": 61,
+        "tables": {
+          "kernel_details.csv": {
+            "rows": 282315,
+            "columns": 46
+          },
+          "operator_details.csv": {
+            "rows": 2490921,
+            "columns": 9
+          },
+          "op_statistic.csv": {
+            "rows": 64,
+            "columns": 9
+          },
+          "api_statistic.csv": {
+            "rows": 112,
+            "columns": 9
+          }
+        },
+        "json_events": 7391125,
+        "trace_bytes": 1373912829,
+        "cpu_pid_events": 2490921,
+        "categories": {
+          "cpu_op": 2490921,
+          "dequeue": 314672,
+          "async_task_queue": 629344,
+          "enqueue": 314672,
+          "null": 2386436,
+          "HostToDevice": 628320,
+          "async_npu": 626760
+        }
+      },
+      "3": {
+        "pid": 62,
+        "tables": {
+          "kernel_details.csv": {
+            "rows": 282315,
+            "columns": 46
+          },
+          "operator_details.csv": {
+            "rows": 2490921,
+            "columns": 9
+          },
+          "op_statistic.csv": {
+            "rows": 64,
+            "columns": 9
+          },
+          "api_statistic.csv": {
+            "rows": 112,
+            "columns": 9
+          }
+        },
+        "json_events": 7391203,
+        "trace_bytes": 1373947773,
+        "cpu_pid_events": 2490921,
+        "categories": {
+          "cpu_op": 2490921,
+          "dequeue": 314683,
+          "async_task_queue": 629366,
+          "enqueue": 314683,
+          "null": 2386470,
+          "HostToDevice": 628320,
+          "async_npu": 626760
+        }
+      }
+    },
+    "scope": "JSON/table completeness and declared rank/PID metadata only; hot/physical/causal attribution separate"
+  },
+  "aggregate": {
+    "scope": "warm profiled same-source same-shape control, not formal performance acceptance",
+    "ranks": {
+      "rank0_59_20261015091112107_ascend_pt": {
+        "operator_rows": 2490899,
+        "kernel_rows": 282315,
+        "kernel_columns": 46,
+        "chunk": {
+          "calls": 1488,
+          "median_s": 0.002452185,
+          "p95_s": 0.00263844,
+          "max_s": 5.56981483,
+          "slow_above_1s": 5,
+          "top32_sum_s": 27.517263290000013,
+          "host_self_sum_s": 31.083650589999994
+        },
+        "top_host_self": [
+          {
+            "name": "ChunkGatedDeltaRuleFunction",
+            "calls": 1488,
+            "self_s": 31.083650589999994
+          },
+          {
+            "name": "vllm::unified_attention_with_output",
+            "calls": 192,
+            "self_s": 26.09173736999999
+          },
+          {
+            "name": "aten::copy_",
+            "calls": 184209,
+            "self_s": 25.42176289000039
+          },
+          {
+            "name": "vllm::qwen_gdn_attention_core",
+            "calls": 576,
+            "self_s": 16.07792484000001
+          },
+          {
+            "name": "empty_tensor",
+            "calls": 324776,
+            "self_s": 2.390159530000036
+          },
+          {
+            "name": "aclnnInplaceCopy",
+            "calls": 110018,
+            "self_s": 1.2430038799999712
+          },
+          {
+            "name": "aten::empty_strided",
+            "calls": 146999,
+            "self_s": 1.0853216799999823
+          },
+          {
+            "name": "aten::as_strided",
+            "calls": 300268,
+            "self_s": 1.0844591299999866
+          }
+        ],
+        "stage": [
+          {
+            "Device_id": "0",
+            "Step": "",
+            "Computing": "22241547.502001014",
+            "Communication(Not Overlapped)": "9933060.528999966",
+            "Overlapped": "0.0",
+            "Communication": "9933060.528999966",
+            "Free": "88868337.88699438",
+            "Stage": "121042946.0",
+            "Bubble": "0",
+            "Communication(Not Overlapped and Exclude Receive)": "9933060.528999966",
+            "Preparing": "6886.5"
+          }
+        ]
+      },
+      "rank1_60_20261015091112106_ascend_pt": {
+        "operator_rows": 2490921,
+        "kernel_rows": 282315,
+        "kernel_columns": 46,
+        "chunk": {
+          "calls": 1488,
+          "median_s": 0.00243228,
+          "p95_s": 0.0026187199999999997,
+          "max_s": 5.71409794,
+          "slow_above_1s": 5,
+          "top32_sum_s": 27.71783360000001,
+          "host_self_sum_s": 31.26547416999995
+        },
+        "top_host_self": [
+          {
+            "name": "ChunkGatedDeltaRuleFunction",
+            "calls": 1488,
+            "self_s": 31.26547416999995
+          },
+          {
+            "name": "vllm::unified_attention_with_output",
+            "calls": 192,
+            "self_s": 26.431737000000002
+          },
+          {
+            "name": "aten::copy_",
+            "calls": 184209,
+            "self_s": 24.870302420000947
+          },
+          {
+            "name": "vllm::qwen_gdn_attention_core",
+            "calls": 576,
+            "self_s": 16.168184119999996
+          },
+          {
+            "name": "empty_tensor",
+            "calls": 324776,
+            "self_s": 2.339301589999948
+          },
+          {
+            "name": "aclnnInplaceCopy",
+            "calls": 110018,
+            "self_s": 1.2488829600000066
+          },
+          {
+            "name": "aten::as_strided",
+            "calls": 300268,
+            "self_s": 1.0680397899999838
+          },
+          {
+            "name": "aten::empty_strided",
+            "calls": 146999,
+            "self_s": 1.0563434399999985
+          }
+        ],
+        "stage": [
+          {
+            "Device_id": "1",
+            "Step": "",
+            "Computing": "22279211.10000467",
+            "Communication(Not Overlapped)": "9344846.520000014",
+            "Overlapped": "0.0",
+            "Communication": "9344846.520000014",
+            "Free": "89417235.47999449",
+            "Stage": "121041293.0",
+            "Bubble": "0",
+            "Communication(Not Overlapped and Exclude Receive)": "9344846.520000014",
+            "Preparing": "6596.75"
+          }
+        ]
+      },
+      "rank2_61_20261015091112107_ascend_pt": {
+        "operator_rows": 2490921,
+        "kernel_rows": 282315,
+        "kernel_columns": 46,
+        "chunk": {
+          "calls": 1488,
+          "median_s": 0.00244119,
+          "p95_s": 0.0026326599999999998,
+          "max_s": 5.80877384,
+          "slow_above_1s": 5,
+          "top32_sum_s": 27.904532829999994,
+          "host_self_sum_s": 31.456037800000008
+        },
+        "top_host_self": [
+          {
+            "name": "ChunkGatedDeltaRuleFunction",
+            "calls": 1488,
+            "self_s": 31.456037800000008
+          },
+          {
+            "name": "vllm::unified_attention_with_output",
+            "calls": 192,
+            "self_s": 26.386585289999996
+          },
+          {
+            "name": "aten::copy_",
+            "calls": 184209,
+            "self_s": 25.162185020000432
+          },
+          {
+            "name": "vllm::qwen_gdn_attention_core",
+            "calls": 576,
+            "self_s": 16.270905549999977
+          },
+          {
+            "name": "empty_tensor",
+            "calls": 324776,
+            "self_s": 2.2464510200000025
+          },
+          {
+            "name": "aclnnInplaceCopy",
+            "calls": 110018,
+            "self_s": 1.1808526500000005
+          },
+          {
+            "name": "aten::empty_strided",
+            "calls": 146999,
+            "self_s": 1.0871442799999842
+          },
+          {
+            "name": "aten::as_strided",
+            "calls": 300268,
+            "self_s": 0.9876375899999507
+          }
+        ],
+        "stage": [
+          {
+            "Device_id": "2",
+            "Step": "",
+            "Computing": "22253200.94000286",
+            "Communication(Not Overlapped)": "9442453.259999992",
+            "Overlapped": "0.0",
+            "Communication": "9442453.259999992",
+            "Free": "89345657.35999598",
+            "Stage": "121041311.5",
+            "Bubble": "0",
+            "Communication(Not Overlapped and Exclude Receive)": "9442453.259999992",
+            "Preparing": "6452.75"
+          }
+        ]
+      },
+      "rank3_62_20261015091112106_ascend_pt": {
+        "operator_rows": 2490921,
+        "kernel_rows": 282315,
+        "kernel_columns": 46,
+        "chunk": {
+          "calls": 1488,
+          "median_s": 0.0024582349999999996,
+          "p95_s": 0.00264525,
+          "max_s": 5.79884362,
+          "slow_above_1s": 5,
+          "top32_sum_s": 28.09730069000001,
+          "host_self_sum_s": 31.67561796999998
+        },
+        "top_host_self": [
+          {
+            "name": "ChunkGatedDeltaRuleFunction",
+            "calls": 1488,
+            "self_s": 31.67561796999998
+          },
+          {
+            "name": "vllm::unified_attention_with_output",
+            "calls": 192,
+            "self_s": 26.36647928
+          },
+          {
+            "name": "aten::copy_",
+            "calls": 184209,
+            "self_s": 24.826116270000313
+          },
+          {
+            "name": "vllm::qwen_gdn_attention_core",
+            "calls": 576,
+            "self_s": 16.253980459999994
+          },
+          {
+            "name": "empty_tensor",
+            "calls": 324776,
+            "self_s": 2.2280814399999858
+          },
+          {
+            "name": "aclnnInplaceCopy",
+            "calls": 110018,
+            "self_s": 1.2306990100000124
+          },
+          {
+            "name": "aten::empty_strided",
+            "calls": 146999,
+            "self_s": 1.0446031799999833
+          },
+          {
+            "name": "aten::as_strided",
+            "calls": 300268,
+            "self_s": 1.0058693099999805
+          }
+        ],
+        "stage": [
+          {
+            "Device_id": "3",
+            "Step": "",
+            "Computing": "22248833.320003495",
+            "Communication(Not Overlapped)": "8723470.040000005",
+            "Overlapped": "0.0",
+            "Communication": "8723470.040000005",
+            "Free": "90074656.77999924",
+            "Stage": "121046960.25",
+            "Bubble": "0",
+            "Communication(Not Overlapped and Exclude Receive)": "8723470.040000005",
+            "Preparing": "6654.75"
+          }
+        ]
+      }
+    }
+  },
+  "physical_join": {
+    "rank0": {
+      "inner_pid": 59,
+      "host_pid": 3302725,
+      "physical_npu": 0
+    },
+    "rank1": {
+      "inner_pid": 60,
+      "host_pid": 3302726,
+      "physical_npu": 1
+    },
+    "rank2": {
+      "inner_pid": 61,
+      "host_pid": 3302727,
+      "physical_npu": 2
+    },
+    "rank3": {
+      "inner_pid": 62,
+      "host_pid": 3302728,
+      "physical_npu": 3
+    }
+  },
+  "comparison": {
+    "cold_chunk_calls_per_rank": 1536,
+    "warm_chunk_calls_per_rank": 1488,
+    "cold_slow_above_1s_per_rank": 27,
+    "warm_slow_above_1s_per_rank": 5,
+    "cold_chunk_host_self_seconds_range": [
+      148.739,
+      150.637
+    ],
+    "warm_chunk_host_self_seconds_range": [
+      31.08365,
+      31.67562
+    ],
+    "interpretation": "Supports first-shape/initialization hypothesis; different actual call counts and profiling windows prevent equivalence or end-to-end speed claim",
+    "formal_regression_retained": true
+  },
+  "image_environment": {
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "selected_flags_unset": [
+      "TRITON_ALWAYS_COMPILE",
+      "TRITON_CACHE_DIR",
+      "TRITON_CACHE_MANAGER",
+      "TRITON_HOME",
+      "VLLM_CACHE_ROOT"
+    ],
+    "limitation": "Image config only, not worker effective environment"
+  },
+  "next_action": "053c/0540/0541 terminal: all4 warm traces valid, Chunk slow>1s27to5/rank; callmix1536to1488 differs, NOT compiler or formal speed proof. 0558 exact image selected Triton/cache flags unset; child worker environment remains unproven. Inspect official runtime cache activation and freeze one bounded persistent compiled-cache control before any fresh device launch. Original full40 regression retained. Deadline2026-10-15T19:04:09Z."
+}

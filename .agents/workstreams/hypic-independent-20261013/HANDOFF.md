@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST053c/0540/0541 terminal: fourrank warm traces validated, parsedPID59-62
+joins053d explicit physical0-3/fourworker hot proof. Chunk>1s27to5/rank,
+host-self149-151sto31-32s; calls1536to1488 differ. Firstshape/init hypothesis
+supported, NOT compiler causality or formal service gain. Original full40
+regression retained. No owned inference/parser running. 0558 image selected
+Triton/cache flags unset; actual child cache path/hits still unproven.
+Next inspect official cache seam and freeze ONE bounded prospective control;
+no hidden privateprompt warmup, no reclassifying old performance failure.
+PROFILE_G3_R6_PRIVATEWARM_PARSED_AUDIT.json preserves scope and identities.
+Deadline2026-10-15T19:04:09UTC unchanged; full objective incomplete.
+
 LATEST0529 terminalexit0:16privatewarmup+16profiled requests,275clean samples.
 053d independently verifies both16/16 fourrank48/16 hot,96bindings,explicit
 physicalrank/PID map, R6activation; physical0-3empty09:15:53UTC.
