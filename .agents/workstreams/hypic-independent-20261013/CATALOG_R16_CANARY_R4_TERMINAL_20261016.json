@@ -1,0 +1,90 @@
+{
+  "schema": "hypic-independent-terminal/v1",
+  "classification": "BOUNDED_CATALOG_CANARY_ACCEPTED",
+  "contract": "QUALITY_R16_CATALOG_CANARY_R4_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/catalog-quality-r16-canary-r4",
+  "source_checkpoint": "4790b799de321b6ad28493272452100fee39535e",
+  "controller": {
+    "launch_response": "direct_route_failed timeout; actualPID recovered; never restarted",
+    "pid": 1249903,
+    "terminal": "result valid true/controller absent"
+  },
+  "independent_audit_operation": "exec-0000000000000bce",
+  "audit": {
+    "bounded_catalog_canary_valid": true,
+    "cohort": {
+      "accepted_canary_cohort": true,
+      "private_responses": 17,
+      "unscored_producers": 17,
+      "rebuild_index": 48,
+      "initial_api": "cmpl-a938a188d423ea2b",
+      "rebuild_api": "cmpl-9cdbd267a47fc922",
+      "segment_sha256": "e0368b5b11e408ac8f3545bd7fad37bd9f4c95ff7ceb2d1f3ea0ad9f4461a81e",
+      "scope": "frozen diagnostic cohort/response journal only; source/hot-generation/eviction/physical/release separate; not127x3"
+    },
+    "hot": {
+      "accepted_catalog_hot_coverage": true,
+      "denominator": 17,
+      "worker_pids": {
+        "0": 57,
+        "1": 58,
+        "2": 59,
+        "3": 60
+      },
+      "generation_links": 4352,
+      "evictions_observed": 1692,
+      "scope": "catalog segment/generation/same-step four-rank48/16 model pruning only; transport/scoring/physical/release separate",
+      "covered_count": 17
+    },
+    "rebuild": {
+      "accepted_rebuild_chain": true,
+      "ranks": 4,
+      "scope": "selected segment initial hot -> actual eviction -> new generation -> rebuilt hot; transport/complete17/physical/release audited separately",
+      "transition_count": 256
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 57,
+          "host_pid": 1265340,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 58,
+          "host_pid": 1265341,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 59,
+          "host_pid": 1265342,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 60,
+          "host_pid": 1265343,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "source_bindings": 159,
+    "isolation_samples": 414,
+    "live_release_verified": true,
+    "scope": "17 diagnostic requests and real catalog eviction/rebuild; NOT full127x3 quality, matched speed, or lifecycle acceptance"
+  },
+  "raw_sha256": {
+    "result.json": "8881a009a1c3bbd2dc193c08d2b548b1b2c5d9297d25964d5665ffd276af4ae9",
+    "responses.json": "c66d1fcbc8746437dd0ec94325620a690c987ab8c4e303f08ceb9eecb1e74cdb",
+    "isolation.json": "5eec04ecb9f4fd2e3ab1a35ed36a7eab39cc3e1b9aff2cdc1b4dcdd58f7f6bef",
+    "release.json": "8aff7c4fe1fa2912346baaa5e801b2c4b34cd93646bf83ba1ca6fe327c5f815e",
+    "events.jsonl": "608131ea1dca52b1c6f4958a2242ce0604d9862dcb1a55a416ab48ea21e97b61",
+    "service.log": "f20ef6d33908ad864d46fe46dc67315bb7a2dcea8ca766a36dd0087f24d4b2f0",
+    "catalog-canary-unit.json": "361e8844a4584335c2229ff27dda014822ea9a6bb13a7cb4a97ece871963058d"
+  },
+  "response_container_type": "list",
+  "response_finish_counts": {
+    "stop": 15,
+    "length": 2
+  },
+  "next": "Matched R16G1 attempt3 requires fresh actual resource admission; no quality/speed/lifecycle promotion."
+}

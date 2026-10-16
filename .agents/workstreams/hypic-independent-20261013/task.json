@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "catalog-R4-actually-live-launch-response-timeout",
+  "execution_state": "catalog-R4-bounded-accepted-await-matched-baseline",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "OwnedR4 controller PID1249903 LIVE;29clean isolation samples at12:34:46UTC; initialization, no terminal or acceptance yet."
+    "state": "NoownedR4container/process; independentlive release0bce verified; future launch fresh actual admission required"
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Track exact originalpeer/PID1249903 and R4 rawroot; no restart/second device while live or unclear; terminal independent audit R4 --live-release. Same17 gates. DeadlineOct17T06:48:09Z.",
+  "next_action": "Freshma/direct/147source/image/model/input/newroot/physical0-3andports admission then launch prepared matched R16G1 attempt3 once. PriorR4accepted, oldfailedroots immutable. Fullquality bindings still stale at oldloader; no full381launch before rebind and performance gate.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,15 +215,16 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "LIVE exactPID1249903 confirmed0b93; launch response timed out without exec handle; DO NOT RESTART",
+    "state": "TERMINAL R4 valid; independent0bce accepted17/17 fourrank/realrebuild/source159/414clean/exactrelease",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
     "controller_pid": 1249903,
     "raw_root": "/cache/cch/hypic-independent-20261013/catalog-quality-r16-canary-r4",
     "contract": "QUALITY_R16_CATALOG_CANARY_R4_CONTRACT.json",
     "checkpoint": "4790b799de321b6ad28493272452100fee39535e",
-    "last_live_probe": "exec-0000000000000b93",
-    "last_live_utc": "2026-10-16T12:34:46.430989+00:00"
+    "last_live_probe": "exec-0000000000000bce",
+    "last_live_utc": "2026-10-16T12:34:46.430989+00:00",
+    "terminal_report": "CATALOG_R16_CANARY_R4_TERMINAL_20261016.json"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -276,10 +277,11 @@
     "report": "FORMAL_R16_20261016_G3_R1_TERMINAL.json"
   },
   "catalog_canary": {
-    "state": "R4 LIVE bounded17 sinkrepair verification; R3 diagnosticfailure/R2external immutable",
+    "state": "R4 bounded17 independently accepted; not fullquality/speed/lifecycle",
     "contract": "QUALITY_R16_CATALOG_CANARY_R4_CONTRACT.json",
     "device_run": true,
-    "accepted": false
+    "accepted": true,
+    "terminal_report": "CATALOG_R16_CANARY_R4_TERMINAL_20261016.json"
   },
   "resource_observation": {
     "operation": "exec-0000000000000b5a",
@@ -326,7 +328,7 @@
     ]
   },
   "quality_sink_repair": {
-    "state": "HOSTONLY6focused/837CPU PASS;actualrepaireddeviceproofmissing",
+    "state": "R4 actual eligiblepath completed;17/17 fourrank mechanism accepted;837CPU plus boundedNPU, notfullquality",
     "report": "QUALITY_STAGE_SINK_REPAIR_HOST_READINESS_20261016.json",
     "new_loader_sha256": "bc49867c07d9b7f0e450ee927992b638b97ce051bd80632e55846575aea7a73e"
   },
