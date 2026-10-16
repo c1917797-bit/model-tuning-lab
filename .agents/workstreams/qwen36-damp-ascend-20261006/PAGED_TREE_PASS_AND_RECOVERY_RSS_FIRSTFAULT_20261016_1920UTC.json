@@ -1,0 +1,103 @@
+{
+  "schema": "ascend.paper-portfolio.actual-paged-repair-and-consumer-resource-failure/v1",
+  "observed_utc": "2026-10-16 19:22:21 UTC",
+  "cutoff_utc": "2026-10-17T07:02:13Z",
+  "branch": "work/qwen36-damp-ascend-20261006",
+  "previous_pushed_checkpoint": "89b9d1bb758d926842bb5dfb1996f40227b1d481",
+  "BOLE": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/SOURCE_MANIFEST.json",
+      "bytes": 25737,
+      "sha256": "fdafbb8872ad9da1ff8150ddafa1e66acae3a80e05aa2b62bb04202da6e33faa"
+    },
+    "actual_chain": "exec-0000000000000dfb exit0",
+    "independent_MAIN_audit": "exec-0000000000000e03 exit0",
+    "independent": {
+      "path": "/opt/host/vnf/austinov/run-bole-paged-tree118trepair1-MAIN-20261016-001/paged/consumer/ATTRIBUTION.json",
+      "bytes": 9116,
+      "sha256": "4996b5d1c32555b9e2aaeb908660c8b4f75508ac3e157ef2f75c0067a9d60d1f"
+    },
+    "actual_eight_cases_pass": true,
+    "scope": "B1 root+two sibling branches; lengths 0/127/128/131; sparse modes0/1; BF16 Q3,Hq6,Hkv1,D256; block128; full padded mask",
+    "peak_abs_output_error": 0.0007012410050634965,
+    "other_checks": [
+      "independent CPU64 and CPU32 sequential ancestor paths",
+      "actual native operands before/after bits, shape/stride/dtype and scalar kwargs",
+      "accepted-path scatter and all inactive cache bytes",
+      "scratch prefix/nodes/padding",
+      "request owner publication"
+    ],
+    "runtime_boundary": "actual CANN9.1 BNSD+BnNBsD passed, original TND+D256 eight-call failure preserved",
+    "all_three_freshly_reopened_released": true,
+    "exact_CIDs": [
+      "ab27237767e7f4cd32963bfbef0fc83aafdf812086084108d3d7873ec4400978",
+      "aaab6224bbb526721100c49ffc0895900623b039dc3a4d2a188aef8270038e41",
+      "94ca47fd9aafa57886f738a07c16a017e515609e2781822deb4eb1cf9e1a4c95"
+    ],
+    "physical_NPU": 4,
+    "container_logical_NPU": 0,
+    "model_ready": false,
+    "remaining": [
+      "actual tree MTP/runner scheduling and node provenance",
+      "48GDN/16FA source-bound whole-model object context",
+      "post-RoPE actual projected FA inputs",
+      "combined conv/GDN/pagedKV exactly-once acceptance publication",
+      "TP4 agreement and cloned native AR reference",
+      "paired performance and final task accuracy"
+    ]
+  },
+  "DeltaLog": {
+    "actual_recovery_operation": "exec-0000000000000dec",
+    "terminal_exit": 3,
+    "owner": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-anchor-recovery127repair2-MAIN-20261016-NEW24H-001/RESULT.json",
+      "bytes": 1195,
+      "sha256": "a6a7da8ecd050196f373826d22fd1b158e1f130ff5b2491cdad5f22773221b8b"
+    },
+    "actual_primary": "ValueError('aggregate actual host+child peak RSS exceeds256MiB')",
+    "secondary": [],
+    "stopped_retained": true,
+    "elapsed_seconds": 523.2260744699743,
+    "result": null,
+    "CPU_guest_created": false,
+    "numerical_consumption_started": false,
+    "original160_raw_unchanged": true,
+    "actual_metadata": {
+      "manifest_bytes": 42689810,
+      "readset_refs": 135520,
+      "unique_parents": 81,
+      "observed_live_host_RSS_KiB": 244680,
+      "exact_failed_aggregate_sample": "not retained; do not invent one"
+    },
+    "cause": {
+      "class": "ENVIRONMENT_OR_SCHEDULING",
+      "proved": "actual legacy aggregate256MiB RSS predicate refused before guest creation",
+      "source_supported_repair": "streamed SHA-bound repeated readset/index; avoid duplicated giant JSON and Path result list materialization",
+      "refuted": "large unique-parent quadratic frontier; actual only81 parents",
+      "not_implied": "guest8GiB OOM, NPU numeric failure or paper no-go"
+    },
+    "next": "independent127repair3 in preparation, unchanged256/512/8GiB budgets, 585.611s math child and all681 inputs; new128 successor required before actual101 model",
+    "old127R2_and_128": "immutable; do not run again unchanged"
+  },
+  "CURRENT": "parallel device-free127R3 source-closure repair and actual101 successor integration; BOLE real model hooks in parallel",
+  "NEXT": "actual bounded127R3 CPU recovery, then new typed128 receiver ->101 real model gate ->106/122 pair; no skipped gates",
+  "ready_NPU_successors_at_snapshot": 0,
+  "reason_for_idle": "no gate-qualified device successor; no external-occupation claim or dummy load",
+  "continuous_utilization": "unmeasured; exact stage times only",
+  "physical_only": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "new_accepted_technique": false,
+  "formal_E2E_gain": null,
+  "task_accuracy": null,
+  "HYPIC": "historical only"
+}

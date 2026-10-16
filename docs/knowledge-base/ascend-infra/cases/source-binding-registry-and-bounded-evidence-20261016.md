@@ -620,3 +620,38 @@ in RECOVERY_AND_LAYOUT_HANDOFF_20261016_1905UTC.json. Deadline and final model/
 performance/task requirements are unchanged. Legacy global owned-CID exclusion
 still prevents claiming disjoint admission or continuous four-card utilization;
 CPU preparation and source deliveries are not NPU compute.
+
+## 2026-10-16: repaired paged-tree NPU PASS and retained precreate RSS refusal
+
+BOLE118tR1 now actually passed all eight new native BNSD+PA+D256 cases and
+their released independent CPU consumer, followed by MAIN0e03 exact source/
+owner/report re-opening and fresh three-CID stop verification. Maximum absolute
+output error was0.0007012410050634965. Both sparse modes passed the independent
+sequential ancestor paths, actual native operand bits/layout/kwargs, full padded
+mask, accepted-path scatter, untouched cache and owner publication. This repairs
+the proved installed TND-layout incompatibility; it does NOT supply BOLE model,
+tree scheduler, TP4 publication, performance or task evidence. Missing model
+integration is an engineering gap, not a paper-wide negative. Preserve old118t.
+
+DeltaLog consumer-only127R2 actually failed before creating its guest:
+aggregate actual host+child peak RSS exceeds256MiB, elapsed523.226s, no numerical
+result and no cleanup secondary. The old681 raw artifacts remain unchanged.
+Do not confuse a512MiB address-space reservation or8GiB guest cap with this
+separate256MiB sampled aggregate host/CLI ceiling. Source binding expanded
+135520 Ref entries into42.69MB and materialized them repeatedly; an actual
+pre-refusal live host sample showed244680KiB RSS. The exact failing aggregate
+sample was not retained, so do not invent a273MiB measurement. Only81 distinct
+parents were observed, refuting a large-parent quadratic-frontier explanation.
+
+Repair metadata representation, not the numeric limit: source-bound JSONL index,
+bounded deduplication, small manifests and a repeatably streamable full readset.
+Every required verification and full independent mathematics remains required.
+A one-shot generator is not sufficient where closure, mount construction and
+final verification iterate repeatedly. Test actual-scale metadata and real
+host-plus-child peak cost before another experiment; do not repeat the same
+failed source, increase budgets or blame the algorithm. The independentR3 and
+new recovery-to-model receiver remain preparation, not recovered PASS.
+
+Exact evidence, unchanged cutoff, actual BOLE scope, failed recovery and remaining
+model/performance/task edges are in
+PAGED_TREE_PASS_AND_RECOVERY_RSS_FIRSTFAULT_20261016_1920UTC.json.
