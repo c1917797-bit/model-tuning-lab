@@ -1,0 +1,85 @@
+{
+  "debug_namespace": "qwen36_deltalog_split_scale_sidecar_v051",
+  "default_enabled": false,
+  "files": [
+    {
+      "bytes": 4504,
+      "path": "build_pair.py",
+      "sha256": "6c4d63ab0f3045382aa03b4dc6f829df5b459b6aa538fca2f0002befd56d7d4e"
+    },
+    {
+      "bytes": 5069,
+      "path": "split_scale_sidecar_v051/CMakeLists.txt",
+      "sha256": "59967418e894926cdddf076df371d20df1ec0efbd619a3d42f46d3f539578562"
+    },
+    {
+      "bytes": 742,
+      "path": "split_scale_sidecar_v051/op_extension/ops.h",
+      "sha256": "dacfbb001b98cfc12e5cd187f9d843fd967ffa82099ceded576acbe17c9ebc51"
+    },
+    {
+      "bytes": 9145,
+      "path": "split_scale_sidecar_v051/op_extension/qwen36_gdn_deltalog_decode_split_scale_sidecar_v051_torch.cpp",
+      "sha256": "78a5ba05bbd51809e0c48ae0011553bd749c2a3ec46663df9fd544e7d2215c50"
+    },
+    {
+      "bytes": 1341,
+      "path": "split_scale_sidecar_v051/op_extension/register.cpp",
+      "sha256": "79272778560218505b1287ff68e90355067b65da4b9dcfc0d92e3bca32805de1"
+    },
+    {
+      "bytes": 24397,
+      "path": "split_scale_sidecar_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_sidecar_v051.h",
+      "sha256": "02810093ff5ccdec9f70c25690f2c50ddfd154f7381cc593b2e3e4eeef45023c"
+    },
+    {
+      "bytes": 1111,
+      "path": "split_scale_sidecar_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_sidecar_v051_kernel.asc",
+      "sha256": "fcaef82f55d65333728a9f979d4562ea5c7593073bb879ad418727ed115a20c0"
+    },
+    {
+      "bytes": 410,
+      "path": "split_scale_sidecar_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_sidecar_v051_tiling.h",
+      "sha256": "ad8ac04c234b0df0ffe87c883c811cd745f572ae7953cf14ed75f7fd4d83f56d"
+    },
+    {
+      "bytes": 4997,
+      "path": "split_scale_v051/CMakeLists.txt",
+      "sha256": "b65e1894de88f3e4729c99cff13a21dd089e1a5f3fec7e2c11b6e377bc370ebf"
+    },
+    {
+      "bytes": 683,
+      "path": "split_scale_v051/op_extension/ops.h",
+      "sha256": "5c1ceaff4abce0fb9cd5d1a4a68575d840200246d77a7f25b01e650465d8053b"
+    },
+    {
+      "bytes": 8229,
+      "path": "split_scale_v051/op_extension/qwen36_gdn_deltalog_decode_split_scale_v051_torch.cpp",
+      "sha256": "8e64b5ba56cb93da1fa4c1ffc9d26ef739a36901a3d859eebbf29bc7ff0ceacb"
+    },
+    {
+      "bytes": 1245,
+      "path": "split_scale_v051/op_extension/register.cpp",
+      "sha256": "f27aa80e363e1e229f753bb4d845af42f85f430cee70602fd20e33fda18ab8bb"
+    },
+    {
+      "bytes": 23649,
+      "path": "split_scale_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_v051.h",
+      "sha256": "d8e3561772c0de2b18e7c0639a6387e172dd3fb632b1eacf15db3f7fd46e6adc"
+    },
+    {
+      "bytes": 1042,
+      "path": "split_scale_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_v051_kernel.asc",
+      "sha256": "38e89d18cc2a1b59d52132d3ff1bc8d646f2c64bba3c52f58359d3406937bc9b"
+    },
+    {
+      "bytes": 380,
+      "path": "split_scale_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_v051_tiling.h",
+      "sha256": "3fe85dd0ad8672b31514bde9acaac6f75225da2a290319edcb8161a465601aa1"
+    }
+  ],
+  "numeric_qualified": false,
+  "production_namespace": "qwen36_deltalog_split_scale_v051",
+  "schema": "deltalog-split-scale-source/v051",
+  "source_only": true
+}

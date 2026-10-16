@@ -1,0 +1,47 @@
+{
+  "schema": "deltalog-key-projection-source/v010",
+  "files": [
+    {
+      "sha256": "a18480fcd03a0f9e4d31ab765bcf2992ed43b56a6b88b7d8e180c380e10dea3a",
+      "bytes": 4482,
+      "path": "build_pair.py"
+    },
+    {
+      "sha256": "bbaab80d23f4c12041e8af698e43a90fece04ab858ea881d9fa8930efaa41b11",
+      "bytes": 4979,
+      "path": "key_projection/CMakeLists.txt"
+    },
+    {
+      "sha256": "1a83f60f09433417a7c9a2320b18dc849ffed2ba3436682362c859940ac6b532",
+      "bytes": 677,
+      "path": "key_projection/op_extension/ops.h"
+    },
+    {
+      "sha256": "8aea5aff887fb8efb5acf657f863200f34e6cd474d3f8e70abab08bfc645dda5",
+      "bytes": 8217,
+      "path": "key_projection/op_extension/qwen36_gdn_deltalog_decode_key_projection_torch.cpp"
+    },
+    {
+      "sha256": "bd2a280f67823174151f765cf8dfae8aad43dfcc74278ec542d1d661a63b7af0",
+      "bytes": 1233,
+      "path": "key_projection/op_extension/register.cpp"
+    },
+    {
+      "sha256": "e36fbd3fc09a554c49f88de6e3620633ee2c7db3dea6b8064891f9e789ecf896",
+      "bytes": 1035,
+      "path": "key_projection/op_kernel/qwen36_gdn_deltalog_decode_key_projection_kernel.asc"
+    },
+    {
+      "sha256": "0002d12314d4a91b8b27e7c65ccf3f8d719f05c90c8883347037b07edff41db4",
+      "bytes": 374,
+      "path": "key_projection/op_kernel/qwen36_gdn_deltalog_decode_key_projection_tiling.h"
+    },
+    {
+      "sha256": "fa91f8ebbbf7505c1d1f4fdf8736986be9c8fa8d654cfb60445eb538af13d7b1",
+      "bytes": 23394,
+      "path": "key_projection/op_kernel/qwen36_gdn_deltalog_decode_key_projection.h"
+    }
+  ],
+  "default_enabled": false,
+  "origin": "A007 namespaced skeleton; append evaluation organization only; no library artifact yet"
+}

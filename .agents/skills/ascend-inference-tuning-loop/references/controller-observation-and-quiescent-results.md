@@ -161,3 +161,14 @@ destination coverage in a separate successor before taking a device lease.
 Do not use the success consumer to relabel a failed prerequisite.
 
 [Actual errors, minimal repair and pending gates](../../../workstreams/qwen36-damp-ascend-20261006/NATIVE_FREE_RETIREMENT_AND_MOUNT_CLOSURE_20261009.md).
+
+## Check output parents before creating result leaves
+
+A new output leaf being absent does not prove its required parent exists. Test
+read-only ancestry, existing authorized parents, filesystem identity and the
+combined disk reservation before inherited mkdir. Preserve a failed empty root;
+use a new run identity after correcting the proved preparation defect. Inspect
+all transitive time gates before calling a short phase executable near cutoff;
+a shorter local lease does not override a longer shared admission guard.
+
+[Actual MXR050 entry failure, DeltaLog051 compile and scope](../../../../docs/knowledge-base/ascend-infra/cases/split-scale-and-long-entry-20261016.md).

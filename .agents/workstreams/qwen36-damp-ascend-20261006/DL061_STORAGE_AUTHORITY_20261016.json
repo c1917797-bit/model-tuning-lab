@@ -1,0 +1,26 @@
+{
+  "schema": "ascend.paper-experiment.storage-authority/v1",
+  "authorization_event": "Direct user reply in this thread; exact event timestamp not independently measured",
+  "authorization_source": "Direct user reply: allow limited directory and capacity use",
+  "output_root": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061",
+  "max_total_bytes": 85899345920,
+  "min_free_bytes": 107374182400,
+  "current_authority_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "bytes": 3481,
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "boundaries": [
+    "Create only the named independent experiment directory",
+    "Do not delete or rewrite old evidence",
+    "Do not modify, stop, or start services",
+    "No mount, driver, firmware, or HugeTLB changes",
+    "Application monitoring is not a kernel-enforced disk quota"
+  ],
+  "precreation_check_required": [
+    "Fresh physical filesystem free bytes",
+    "No symlink in output ancestry",
+    "kubelet load/active state and existing contents",
+    "Abort if actual service or filesystem ownership conflicts emerge"
+  ]
+}

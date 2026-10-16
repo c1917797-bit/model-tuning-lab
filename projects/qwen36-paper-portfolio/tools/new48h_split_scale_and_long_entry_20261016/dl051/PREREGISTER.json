@@ -1,0 +1,28 @@
+{
+  "schema": "deltalog.split-scale-preregister/v051",
+  "default_enabled": false,
+  "seed_base": 2610165101,
+  "window_cutoff": 1792135097,
+  "primary_output_peak_limit": 0.00303,
+  "primary_output_relative_L2_limit": 0.0001220703125,
+  "state_relative_L2_limit": 0.000000792,
+  "reference": "unchanged independent CPU64 operational recurrence; actual FP32 sidecar empirical per-request + exact BF16 cast; uncast/native point diagnostics retained",
+  "production_debug": "13-arg/14-arg new namespace pair, every input/state/output bitwise and sidecar guards required; six-state bitwise against original B010 on identical input/initial state",
+  "phases": [
+    "actual Devices[] pair build then same-source dual Meta B1/B16",
+    "all original7 boundary controls including original saved subnormal exact-input replay",
+    "new finite-final-intermediate-overflow readout base1e37 q1 k0 v0 g0 beta0",
+    "new normalized-BF16-query finite-final-overflow-risk base1e38 q0.08837890625 k0 v0 g0 beta0",
+    "positive/negative cancellation permutations and distinct vStart0/64 values/4queryheads12valueheads",
+    "append lengths0 and6 and merge7, same raw/reference/production-debug transparency",
+    "original real137 failure and B16step80 request10 complete raw frame, no selected-cell-only qualification",
+    "unseen seed2610165101 full B1/B16 numeric16 with mixed/prefill/copy/deadflush/slot lifecycle",
+    "same-source numeric160 before any actual4x48 model diagnostic smoke"
+  ],
+  "original_expected_overflow": "base3e38 q1 final itself nonfinite; original explicit finite-rejection contract unchanged",
+  "fallback": "C++ exported ABI fixes D128 and 1.0f/sqrt(float(128)); no scale argument. Kernel tiling scale unequal to exact expected FP32 0.088388346135616302490234375 follows original early-query-scale path, no final rescale",
+  "qualified": false,
+  "performance_claim": false,
+  "model_ready": false,
+  "pending": "actual build/Meta; bounded existing numeric-owner adapter and actual producer/consumer evidence; no epsilon changes or old failure upgrades"
+}

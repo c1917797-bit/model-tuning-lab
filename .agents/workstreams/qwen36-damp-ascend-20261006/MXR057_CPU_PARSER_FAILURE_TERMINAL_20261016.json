@@ -1,0 +1,91 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": "exit code",
+  "found": true,
+  "kind": "exec",
+  "ok": false,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1",
+          "/usr/bin/python3",
+          "-I",
+          "-B",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-057/host_ticket.py",
+          "--execute",
+          "--source-sha256",
+          "fa32d3b3526735fa45a5f1b0d0dde8a3d5a3b557320ae213bc794e67e6b8ac2f",
+          "--prerequisite-ref",
+          "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_MXR039_PREREQUISITE_043_001.json\",\"bytes\":136215,\"sha256\":\"f620ae4bc10577465bff7fbb3af67ce424f2cca7c09805aa13f5f55dfce525f4\"}"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/env",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 81119,
+        "error": "exit code",
+        "exitCode": 1,
+        "id": "exec-0000000000000986",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "Traceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-057/host_ticket.py\", line 153, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-057/host_ticket.py\", line 152, in main\n    return h.main(['--execute','--source-sha256',a.source_sha256])\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 434, in main\n    if __name__ == \"__main__\":\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-057/host_ticket.py\", line 150, in bounded_raw_run\n    return run(*args,**kwargs)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 404, in run\n    return 0\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 276, in run\n    child(cpu, c, \"native-parser\", [str(DEPLOY / \"guest_probe.py\"), \"--execute\", \"--mode\", \"cpu\",\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 201, in child\n    return c.write(ctl.out / (label + \"-CHILD.json\"), dict(argv=command, host_pid=process.pid, exit_code=process.returncode,\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 46, in need\n    raise ValueError(why)\nValueError: original child failure retained: native-parser\n",
+        "stdout": "",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 425,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 425,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 425
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 424,
+        "routeLookupMs": 0,
+        "totalMs": 424
+      }
+    },
+    "traceId": "cd99b8ef-95d4-4a15-98a7-eaf331fc7d6b"
+  },
+  "operationId": "exec-0000000000000986",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": false,
+  "terminal": true
+}

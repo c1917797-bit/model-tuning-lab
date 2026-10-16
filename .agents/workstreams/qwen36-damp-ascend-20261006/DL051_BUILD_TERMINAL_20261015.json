@@ -1,0 +1,101 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "--as=536870912:unlimited",
+          "--",
+          "/usr/bin/python3",
+          "-B",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/build_owner/host.py",
+          "--execute",
+          "--source",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/build_owner/SOURCE_MANIFEST.json",
+          "--source-sha256",
+          "d596a1b8cfac0dc84001243e9de48cd86a38c5c6d1d46509fbe0284dcde9dc59",
+          "--cohort",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/COHORT-dl-split-scale051-build-new48h-MAIN-20261015-001.json",
+          "--cohort-sha256",
+          "e08529832f4ccc7dd326b7117df8bc8dcbf7098ec3289ebfa6684ab385f1bf1a",
+          "--run-id",
+          "dl-split-scale051-build",
+          "--physical",
+          "4",
+          "--output",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/prlimit",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 306522,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-000000000000094b",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "MAIN_KDMA_OWNED_BUILD {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/RESULT.json\", \"sha256\": \"a85dcb9f905601ed232ebc8bd56f3650ac759074113001de2f2bc5cd2ec34c66\", \"bytes\": 2806}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 346,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 346,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 346
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 346,
+        "routeLookupMs": 0,
+        "totalMs": 346
+      }
+    },
+    "traceId": "e3a7c199-ea59-44cf-a0dd-9ce8e995841b"
+  },
+  "operationId": "exec-000000000000094b",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}

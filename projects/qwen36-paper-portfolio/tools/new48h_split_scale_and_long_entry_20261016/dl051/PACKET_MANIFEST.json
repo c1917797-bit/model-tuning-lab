@@ -1,0 +1,184 @@
+{
+  "Meta_pass": false,
+  "NPU": false,
+  "build_source": {
+    "bytes": 3246,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/SOURCE_MANIFEST.json",
+    "sha256": "f9b17e97b99a840e4fff639e20b359a67c517b3e47b6e7348cc87755b400fdaa"
+  },
+  "compiled": false,
+  "cutoff": 1792135097,
+  "default_enabled": false,
+  "files": {
+    "B010_ORIGINAL_SOURCE.json": {
+      "bytes": 1694,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/B010_ORIGINAL_SOURCE.json",
+      "sha256": "56a46e89869929f6c1a43b8e0d0870c7b2bb0429c6446499ab67d63b5e243161"
+    },
+    "BASE_COMMANDS.json": {
+      "bytes": 5798,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/BASE_COMMANDS.json",
+      "sha256": "f5672df4743b7919b6f08b48b206a683b02faab43433a90c9f1c4ddc05e04b21"
+    },
+    "BASE_OWNER_TEMPLATE.json": {
+      "bytes": 16948,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/BASE_OWNER_TEMPLATE.json",
+      "sha256": "86dd6f4dea5f8af1e4df0fa378f1c7226306a0cebb511938b97d09d750bddbf5"
+    },
+    "COMMANDS.json": {
+      "bytes": 4335,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/COMMANDS.json",
+      "sha256": "2a5be0cbf0e19793def243ae0a9fbc7223032533a18c1de5a3fddc52df25d4c4"
+    },
+    "HANDOFF.md": {
+      "bytes": 3226,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/HANDOFF.md",
+      "sha256": "a23162657366fce85242aa8ef07d7c1ee7e9066d7b9981fd8f896b30cde9472b"
+    },
+    "PREREGISTER.json": {
+      "bytes": 2074,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/PREREGISTER.json",
+      "sha256": "91aa3ed70b4c7a2af23832c6826bfcf82328a6a743e511f9a5e28f6489b8003e"
+    },
+    "build_owner/SOURCE_MANIFEST.json": {
+      "bytes": 19471,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/build_owner/SOURCE_MANIFEST.json",
+      "sha256": "d596a1b8cfac0dc84001243e9de48cd86a38c5c6d1d46509fbe0284dcde9dc59"
+    },
+    "build_owner/bind_cohort.py": {
+      "bytes": 11584,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/build_owner/bind_cohort.py",
+      "sha256": "c0d4d67a091aed6968b37cde19887ebbf7bcac282445aa567f0b614ebad4bcc7"
+    },
+    "build_owner/guest.py": {
+      "bytes": 4793,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/build_owner/guest.py",
+      "sha256": "843d92100e09127b22a992f340282abc14f80beeb83ca7a4187b1c3a9edcb3a6"
+    },
+    "build_owner/host.py": {
+      "bytes": 8544,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/build_owner/host.py",
+      "sha256": "ad0e8f5cf26847b1dec140d35e8750160efe6c2168912539ab7ee71e23c62f98"
+    },
+    "build_owner/test_owner.py": {
+      "bytes": 1135,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/build_owner/test_owner.py",
+      "sha256": "e7378dea11e368d966cb5b400eea9047c017eb0e3653dbc38a67754b7bbb5afb"
+    },
+    "kernel/SOURCE_MANIFEST.json": {
+      "bytes": 3246,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/SOURCE_MANIFEST.json",
+      "sha256": "f9b17e97b99a840e4fff639e20b359a67c517b3e47b6e7348cc87755b400fdaa"
+    },
+    "kernel/build_pair.py": {
+      "bytes": 4504,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/build_pair.py",
+      "sha256": "6c4d63ab0f3045382aa03b4dc6f829df5b459b6aa538fca2f0002befd56d7d4e"
+    },
+    "kernel/split_scale_sidecar_v051/CMakeLists.txt": {
+      "bytes": 5069,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/split_scale_sidecar_v051/CMakeLists.txt",
+      "sha256": "59967418e894926cdddf076df371d20df1ec0efbd619a3d42f46d3f539578562"
+    },
+    "kernel/split_scale_sidecar_v051/op_extension/ops.h": {
+      "bytes": 742,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/split_scale_sidecar_v051/op_extension/ops.h",
+      "sha256": "dacfbb001b98cfc12e5cd187f9d843fd967ffa82099ceded576acbe17c9ebc51"
+    },
+    "kernel/split_scale_sidecar_v051/op_extension/qwen36_gdn_deltalog_decode_split_scale_sidecar_v051_torch.cpp": {
+      "bytes": 9145,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/split_scale_sidecar_v051/op_extension/qwen36_gdn_deltalog_decode_split_scale_sidecar_v051_torch.cpp",
+      "sha256": "78a5ba05bbd51809e0c48ae0011553bd749c2a3ec46663df9fd544e7d2215c50"
+    },
+    "kernel/split_scale_sidecar_v051/op_extension/register.cpp": {
+      "bytes": 1341,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/split_scale_sidecar_v051/op_extension/register.cpp",
+      "sha256": "79272778560218505b1287ff68e90355067b65da4b9dcfc0d92e3bca32805de1"
+    },
+    "kernel/split_scale_sidecar_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_sidecar_v051.h": {
+      "bytes": 24397,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/split_scale_sidecar_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_sidecar_v051.h",
+      "sha256": "02810093ff5ccdec9f70c25690f2c50ddfd154f7381cc593b2e3e4eeef45023c"
+    },
+    "kernel/split_scale_sidecar_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_sidecar_v051_kernel.asc": {
+      "bytes": 1111,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/split_scale_sidecar_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_sidecar_v051_kernel.asc",
+      "sha256": "fcaef82f55d65333728a9f979d4562ea5c7593073bb879ad418727ed115a20c0"
+    },
+    "kernel/split_scale_sidecar_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_sidecar_v051_tiling.h": {
+      "bytes": 410,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/split_scale_sidecar_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_sidecar_v051_tiling.h",
+      "sha256": "ad8ac04c234b0df0ffe87c883c811cd745f572ae7953cf14ed75f7fd4d83f56d"
+    },
+    "kernel/split_scale_v051/CMakeLists.txt": {
+      "bytes": 4997,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/split_scale_v051/CMakeLists.txt",
+      "sha256": "b65e1894de88f3e4729c99cff13a21dd089e1a5f3fec7e2c11b6e377bc370ebf"
+    },
+    "kernel/split_scale_v051/op_extension/ops.h": {
+      "bytes": 683,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/split_scale_v051/op_extension/ops.h",
+      "sha256": "5c1ceaff4abce0fb9cd5d1a4a68575d840200246d77a7f25b01e650465d8053b"
+    },
+    "kernel/split_scale_v051/op_extension/qwen36_gdn_deltalog_decode_split_scale_v051_torch.cpp": {
+      "bytes": 8229,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/split_scale_v051/op_extension/qwen36_gdn_deltalog_decode_split_scale_v051_torch.cpp",
+      "sha256": "8e64b5ba56cb93da1fa4c1ffc9d26ef739a36901a3d859eebbf29bc7ff0ceacb"
+    },
+    "kernel/split_scale_v051/op_extension/register.cpp": {
+      "bytes": 1245,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/split_scale_v051/op_extension/register.cpp",
+      "sha256": "f27aa80e363e1e229f753bb4d845af42f85f430cee70602fd20e33fda18ab8bb"
+    },
+    "kernel/split_scale_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_v051.h": {
+      "bytes": 23649,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/split_scale_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_v051.h",
+      "sha256": "d8e3561772c0de2b18e7c0639a6387e172dd3fb632b1eacf15db3f7fd46e6adc"
+    },
+    "kernel/split_scale_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_v051_kernel.asc": {
+      "bytes": 1042,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/split_scale_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_v051_kernel.asc",
+      "sha256": "38e89d18cc2a1b59d52132d3ff1bc8d646f2c64bba3c52f58359d3406937bc9b"
+    },
+    "kernel/split_scale_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_v051_tiling.h": {
+      "bytes": 380,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/split_scale_v051/op_kernel/qwen36_gdn_deltalog_decode_split_scale_v051_tiling.h",
+      "sha256": "3fe85dd0ad8672b31514bde9acaac6f75225da2a290319edcb8161a465601aa1"
+    },
+    "meta_abi.py": {
+      "bytes": 2892,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/meta_abi.py",
+      "sha256": "0b6cf587d7c341448dcf591b082684d238df44fc1449b006711f14018e1deb3a"
+    },
+    "seal.py": {
+      "bytes": 4797,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/seal.py",
+      "sha256": "e3f3171dfc79a333f1c11b7cbbaa96228da0cae36a9957c24659ce004aa929d0"
+    },
+    "sidecar_inverse015.py": {
+      "bytes": 3248,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/sidecar_inverse015.py",
+      "sha256": "8321c03a5723a5c664960afcf1bb38a33f0e989f169bf004e36e08f326a82ba0"
+    },
+    "test_packet.py": {
+      "bytes": 3118,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/test_packet.py",
+      "sha256": "1387fa96fb1201229732446ee6b1585d626151dafc8908f38f81b7ebcb28c93d"
+    },
+    "verify_inverse.py": {
+      "bytes": 2297,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/verify_inverse.py",
+      "sha256": "0a529eafb898dc8486037ae468d0d1596ff70d65935a2fbe1748665a1e08ab96"
+    }
+  },
+  "model_ready": false,
+  "numeric_qualified": false,
+  "owner": {
+    "bytes": 19471,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/build_owner/SOURCE_MANIFEST.json",
+    "sha256": "d596a1b8cfac0dc84001243e9de48cd86a38c5c6d1d46509fbe0284dcde9dc59"
+  },
+  "prepared_only": true,
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051",
+  "schema": "deltalog.split-scale-source-packet/v051"
+}

@@ -1,0 +1,89 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": "exit code",
+  "found": true,
+  "kind": "exec",
+  "ok": false,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "-I",
+          "-B",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new48h-v1-050/host_ticket.py",
+          "--execute",
+          "--source-sha256",
+          "772efcc28bba8c991d2e1f4ea75114a39f6b693b860d013bde5edb0b30cd02e3",
+          "--prerequisite-ref",
+          "{\"bytes\":136215,\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_MXR039_PREREQUISITE_043_001.json\",\"sha256\":\"f620ae4bc10577465bff7fbb3af67ce424f2cca7c09805aa13f5f55dfce525f4\"}"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/python3",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 798,
+        "error": "exit code",
+        "exitCode": 1,
+        "id": "exec-0000000000000956",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "Traceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new48h-v1-050/host_ticket.py\", line 149, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new48h-v1-050/host_ticket.py\", line 148, in main\n    return h.main(['--execute','--source-sha256',a.source_sha256])\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 434, in main\n    if __name__ == \"__main__\":\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new48h-v1-050/host_ticket.py\", line 144, in bounded_raw_run\n    raw=leaf('raw_filesystem.py');note=raw.prepare(h.OUT)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new48h-v1-050/raw_filesystem.py\", line 28, in prepare\n    ancestry(PARENT);need(PARENT.is_dir()and not RAW.exists(),'MAIN existing authorized parent; fresh raw root only')\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new48h-v1-050/raw_filesystem.py\", line 8, in need\n    if not v:raise ValueError(s)\nValueError: MAIN existing authorized parent; fresh raw root only\n",
+        "stdout": "",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 501,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 501,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 501
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 500,
+        "routeLookupMs": 0,
+        "totalMs": 500
+      }
+    },
+    "traceId": "42850be7-9876-4cd3-90c8-13b86bcfa90e"
+  },
+  "operationId": "exec-0000000000000956",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": false,
+  "terminal": true
+}

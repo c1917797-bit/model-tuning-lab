@@ -1,0 +1,131 @@
+{
+  "schema": "deltalog.sidecar015-main-commands/v1",
+  "packet": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/PACKET_MANIFEST.json",
+    "bytes": 8394,
+    "sha256": "51140295581a88fa928c1f427cf947b7ba310236af4e1e068ab94f28bb9cef8c"
+  },
+  "default_enabled": false,
+  "binder": {
+    "command": "/usr/bin/prlimit",
+    "args": [
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/build_owner/bind_cohort.py",
+      "--execute",
+      "--self-sha256",
+      "c0d4d67a091aed6968b37cde19887ebbf7bcac282445aa567f0b614ebad4bcc7",
+      "--owner-source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/build_owner/SOURCE_MANIFEST.json\",\"bytes\":16948,\"sha256\":\"86dd6f4dea5f8af1e4df0fa378f1c7226306a0cebb511938b97d09d750bddbf5\"}",
+      "--run-id",
+      "dl-readout-sidecar015-build",
+      "--output-root",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-readout-sidecar015-build-new48h-MAIN-20261015-001",
+      "--cohort-output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/COHORT-dl-readout-sidecar015-build-new48h-MAIN-20261015-001.json"
+    ]
+  },
+  "source_audit": {
+    "command": "/usr/bin/prlimit",
+    "args": [
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/build_owner/host.py",
+      "--source-audit-only",
+      "--source",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/build_owner/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "86dd6f4dea5f8af1e4df0fa378f1c7226306a0cebb511938b97d09d750bddbf5",
+      "--cohort",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/COHORT-dl-readout-sidecar015-build-new48h-MAIN-20261015-001.json",
+      "--cohort-sha256",
+      "ACTUAL_NEW_COHORT_SHA256",
+      "--run-id",
+      "dl-readout-sidecar015-build",
+      "--physical",
+      "4",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-readout-sidecar015-build-new48h-MAIN-20261015-001"
+    ]
+  },
+  "compile": {
+    "command": "/usr/bin/prlimit",
+    "args": [
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/build_owner/host.py",
+      "--execute",
+      "--source",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/build_owner/SOURCE_MANIFEST.json",
+      "--source-sha256",
+      "86dd6f4dea5f8af1e4df0fa378f1c7226306a0cebb511938b97d09d750bddbf5",
+      "--cohort",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/COHORT-dl-readout-sidecar015-build-new48h-MAIN-20261015-001.json",
+      "--cohort-sha256",
+      "ACTUAL_NEW_COHORT_SHA256",
+      "--run-id",
+      "dl-readout-sidecar015-build",
+      "--physical",
+      "4",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-readout-sidecar015-build-new48h-MAIN-20261015-001"
+    ]
+  },
+  "build_result_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-readout-sidecar015-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/RESULT.json",
+  "numeric_child_seam": {
+    "dispatch_allowed": false,
+    "reason": "existing single5 Owned binding+actualMeta+rawbefore closure still required; command is guest entry, not owner",
+    "env": {
+      "DL_READOUT_SIDECAR_V015_ENABLE": "1",
+      "TORCH_DEVICE_BACKEND_AUTOLOAD": "0",
+      "ASCEND_RT_VISIBLE_DEVICES": "0"
+    },
+    "argv": [
+      "/usr/local/python3.12.13/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/compare_step.py",
+      "--execute",
+      "--source-ref",
+      "ACTUAL_PACKET_REF_JSON",
+      "--input-ref",
+      "ACTUAL_ORIGINAL013_FAIL137_RAW_REF_JSON",
+      "--production-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlkey-projection010-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/key_projection-build/libqwen36_gdn_deltalog_decode_key_projection_ops.so\",\"bytes\":2332672,\"sha256\":\"298749129c8586ecea56cb6076c435631b6fbef4b4e7757636ff87a4ec09abf7\"}",
+      "--debug-build-ref",
+      "ACTUAL_SOURCE_MATCHED_DEBUG_BUILD_RESULT_REF_JSON",
+      "--plan-ref",
+      "ACTUAL_EXISTING_SINGLE5_OWNED_PLAN_REF_JSON",
+      "--output",
+      "ACTUAL_NEW_OWNED_NUMERIC_LEAF"
+    ]
+  },
+  "CPU_consumer_argv": [
+    "/usr/local/python3.12.13/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/consume_step.py",
+    "--execute",
+    "--raw-ref",
+    "ACTUAL_SIDECAR_RAW_REF_JSON",
+    "--oracle-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-direct-oracle-holdout-new48h-v1-013/oracle.py\",\"bytes\":3845,\"sha256\":\"ff3608c55fe750d1c1ff25f96de9fea996c802c7307179e0f1316bca13a47acf\"}",
+    "--direct-round-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-direct-oracle-holdout-new48h-v1-013/direct_round.py\",\"bytes\":3378,\"sha256\":\"60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d\"}",
+    "--output",
+    "ACTUAL_NEW_OWNED_CPU_RESULT_PATH"
+  ],
+  "warnings": [
+    "Do not invent debug library/Meta/inputRefs",
+    "No NPU child without complete actualOwned/ARM admission",
+    "Diagnostic conditioned actualbefore is NOT originalideal fullhistory",
+    "Build only can be dispatched by existing owner after actualcohort/sourceaudit"
+  ]
+}

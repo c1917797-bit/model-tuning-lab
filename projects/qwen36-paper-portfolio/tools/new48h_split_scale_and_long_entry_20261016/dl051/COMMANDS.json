@@ -1,0 +1,99 @@
+{
+  "Meta_child_only": [
+    "python",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/meta_abi.py",
+    "--execute",
+    "--build-ref",
+    "ACTUAL_PASSED_BUILD_REF_JSON",
+    "--source-ref",
+    "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/SOURCE_MANIFEST.json\", \"bytes\": 3246, \"sha256\": \"f9b17e97b99a840e4fff639e20b359a67c517b3e47b6e7348cc87755b400fdaa\"}",
+    "--output",
+    "ACTUAL_NEW_OWNED_CPU_META_JSON"
+  ],
+  "NPU_dispatch_allowed": false,
+  "build_result_path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/RESULT.json",
+  "commands": {
+    "binder": {
+      "args": [
+        "--as=536870912:unlimited",
+        "--",
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/build_owner/bind_cohort.py",
+        "--execute",
+        "--self-sha256",
+        "c0d4d67a091aed6968b37cde19887ebbf7bcac282445aa567f0b614ebad4bcc7",
+        "--owner-source-ref",
+        "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/build_owner/SOURCE_MANIFEST.json\", \"bytes\": 19471, \"sha256\": \"d596a1b8cfac0dc84001243e9de48cd86a38c5c6d1d46509fbe0284dcde9dc59\"}",
+        "--run-id",
+        "dl-split-scale051-build",
+        "--output-root",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001",
+        "--cohort-output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/COHORT-dl-split-scale051-build-new48h-MAIN-20261015-001.json"
+      ],
+      "command": "/usr/bin/prlimit"
+    },
+    "compile": {
+      "args": [
+        "--as=536870912:unlimited",
+        "--",
+        "/usr/bin/python3",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/build_owner/host.py",
+        "--execute",
+        "--source",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/build_owner/SOURCE_MANIFEST.json",
+        "--source-sha256",
+        "d596a1b8cfac0dc84001243e9de48cd86a38c5c6d1d46509fbe0284dcde9dc59",
+        "--cohort",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/COHORT-dl-split-scale051-build-new48h-MAIN-20261015-001.json",
+        "--cohort-sha256",
+        "ACTUAL_NEW_COHORT_SHA256",
+        "--run-id",
+        "dl-split-scale051-build",
+        "--physical",
+        "4",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001"
+      ],
+      "command": "/usr/bin/prlimit"
+    },
+    "source_audit": {
+      "args": [
+        "--as=536870912:unlimited",
+        "--",
+        "/usr/bin/python3",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/build_owner/host.py",
+        "--source-audit-only",
+        "--source",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/build_owner/SOURCE_MANIFEST.json",
+        "--source-sha256",
+        "d596a1b8cfac0dc84001243e9de48cd86a38c5c6d1d46509fbe0284dcde9dc59",
+        "--cohort",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/COHORT-dl-split-scale051-build-new48h-MAIN-20261015-001.json",
+        "--cohort-sha256",
+        "ACTUAL_NEW_COHORT_SHA256",
+        "--run-id",
+        "dl-split-scale051-build",
+        "--physical",
+        "4",
+        "--output",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001"
+      ],
+      "command": "/usr/bin/prlimit"
+    }
+  },
+  "default_enabled": false,
+  "owner_source": {
+    "bytes": 19471,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/build_owner/SOURCE_MANIFEST.json",
+    "sha256": "d596a1b8cfac0dc84001243e9de48cd86a38c5c6d1d46509fbe0284dcde9dc59"
+  },
+  "reason": "actual pair build/Meta/numerical owned receiver and preregistered complete gates pending; no future library refs",
+  "schema": "deltalog.split-scale-build-main-commands/v051"
+}

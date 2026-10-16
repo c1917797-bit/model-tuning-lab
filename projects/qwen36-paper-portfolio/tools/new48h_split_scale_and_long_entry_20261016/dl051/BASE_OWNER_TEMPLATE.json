@@ -1,0 +1,371 @@
+{
+  "schema": "deltalog.owned-kdma-build-source/v1",
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/build_owner",
+  "default_enabled": false,
+  "ready": false,
+  "start_epoch": 1791962297,
+  "cutoff": 1792135097,
+  "stage": "CPU-debug-readout-sidecar-build-only",
+  "files": {
+    "cache_scan.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_mxr_resume_audit/R156/kivi-inactive-atomic-value-v1-001/cache_scan.py",
+      "bytes": 4277,
+      "sha256": "79dc8de88d84120f80f7b88763b0811f8463daefd94eb455e57bcb0aadc509a2"
+    },
+    "bind_cohort.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/build_owner/bind_cohort.py",
+      "bytes": 11584,
+      "sha256": "c0d4d67a091aed6968b37cde19887ebbf7bcac282445aa567f0b614ebad4bcc7"
+    },
+    "guest.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/build_owner/guest.py",
+      "bytes": 4772,
+      "sha256": "f61aa161a7149d3e5bfd167ff60c3d10ef3344c1a762b9f37dafa55057271495"
+    },
+    "host.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/build_owner/host.py",
+      "bytes": 8521,
+      "sha256": "15c8bddca1db0f0f04f69865357914cc4962a82b9b16f093e78ce7893a035c86"
+    },
+    "test_owner.py": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/build_owner/test_owner.py",
+      "bytes": 1135,
+      "sha256": "e7378dea11e368d966cb5b400eea9047c017eb0e3653dbc38a67754b7bbb5afb"
+    }
+  },
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+    "bytes": 3591,
+    "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+  },
+  "base_source": {
+    "bytes": 12385,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/SOURCE_MANIFEST.json",
+    "sha256": "7aa51f300fbe7f92d35ab8903e82c54fb272754e20c9da345ddfec8b9db4679c"
+  },
+  "owner_binding": {
+    "bytes": 15994,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-004/binding.py",
+    "sha256": "ff6ff3a3a7fdf186dd8481b0e28e980ee631163cf0cb3c85246ccc9b471beeb3"
+  },
+  "donor_contract": {
+    "bytes": 16480,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/once_contract.py",
+    "sha256": "7789d63886da0ebe9420b0f56b584c81eae9e50ab561dbf64940df37eb31aa6a"
+  },
+  "donor_host": {
+    "bytes": 29763,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/host_once.py",
+    "sha256": "6414c912b216f3896a21e7b321717b604c4be7db21220ed034a798da460a0be8"
+  },
+  "donor_safety": {
+    "bytes": 6865,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/safety_lifecycle.py",
+    "sha256": "4bbd492809c9ba1922fd3885b101f8cc6fe187884703c21e4a2d44acd1444b75"
+  },
+  "inspect_store": {
+    "bytes": 3401,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-004/inspect_store.py",
+    "sha256": "d533a19c72d2be25791dcb0906d0c66ff7eb42ff29dca9d4657eb823c8464a48"
+  },
+  "cohort_policy": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/POLICY_SOURCE.json",
+    "bytes": 800,
+    "sha256": "c4eb15b872dc212f3a616eb2a43e875b7d39e2e8b91d122ad12de400c523e809"
+  },
+  "cohort_runtime": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/cohort_runtime.py",
+    "bytes": 9836,
+    "sha256": "f7df120d3cf8e6cfc9faa406ea091bb0efbba8b1afa5cf1a9b620bce4649adbb"
+  },
+  "controller_adapter": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/controller_adapter.py",
+    "bytes": 6035,
+    "sha256": "6e0dbb47a8fc2935e1de792096deae517b39c76f75c354a6b95369addfcdc370"
+  },
+  "window": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/window.py",
+    "bytes": 818,
+    "sha256": "39e4a15b729c7d7bf9f56d0e4ca9987d1252630efead77e389312e72b04494a3"
+  },
+  "idle_policy": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R118/skvq-writer-native-v1-003/idle_policy.py",
+    "bytes": 6194,
+    "sha256": "1988d3843b340a06b0c402b96886ea7a6feb8bab573f67fb8c74512bcca33616"
+  },
+  "idle_helper": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+    "bytes": 33743,
+    "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86"
+  },
+  "phase_seconds": 900,
+  "cleanup_seconds": 90,
+  "guest_bytes": 8589934592,
+  "host_bytes": 536870912,
+  "reserve_bytes": 8589934592,
+  "evidence_bytes": 268435456,
+  "cache_bytes": 536870912,
+  "CPU_total": 4,
+  "physical_allowed": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "logical": 0,
+  "prior_pass_inherited": false,
+  "model_ready": false,
+  "performance_ready": false,
+  "task_ready": false,
+  "dependencies": [
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+      "bytes": 3591,
+      "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+    },
+    {
+      "bytes": 12385,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/SOURCE_MANIFEST.json",
+      "sha256": "7aa51f300fbe7f92d35ab8903e82c54fb272754e20c9da345ddfec8b9db4679c"
+    },
+    {
+      "bytes": 15994,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-004/binding.py",
+      "sha256": "ff6ff3a3a7fdf186dd8481b0e28e980ee631163cf0cb3c85246ccc9b471beeb3"
+    },
+    {
+      "bytes": 16480,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/once_contract.py",
+      "sha256": "7789d63886da0ebe9420b0f56b584c81eae9e50ab561dbf64940df37eb31aa6a"
+    },
+    {
+      "bytes": 29763,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/host_once.py",
+      "sha256": "6414c912b216f3896a21e7b321717b604c4be7db21220ed034a798da460a0be8"
+    },
+    {
+      "bytes": 6865,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/safety_lifecycle.py",
+      "sha256": "4bbd492809c9ba1922fd3885b101f8cc6fe187884703c21e4a2d44acd1444b75"
+    },
+    {
+      "bytes": 3401,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-fia-packed-fullD256-single4-owner-v1-004/inspect_store.py",
+      "sha256": "d533a19c72d2be25791dcb0906d0c66ff7eb42ff29dca9d4657eb823c8464a48"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/POLICY_SOURCE.json",
+      "bytes": 800,
+      "sha256": "c4eb15b872dc212f3a616eb2a43e875b7d39e2e8b91d122ad12de400c523e809"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/cohort_runtime.py",
+      "bytes": 9836,
+      "sha256": "f7df120d3cf8e6cfc9faa406ea091bb0efbba8b1afa5cf1a9b620bce4649adbb"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/controller_adapter.py",
+      "bytes": 6035,
+      "sha256": "6e0dbb47a8fc2935e1de792096deae517b39c76f75c354a6b95369addfcdc370"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/window.py",
+      "bytes": 818,
+      "sha256": "39e4a15b729c7d7bf9f56d0e4ca9987d1252630efead77e389312e72b04494a3"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R118/skvq-writer-native-v1-003/idle_policy.py",
+      "bytes": 6194,
+      "sha256": "1988d3843b340a06b0c402b96886ea7a6feb8bab573f67fb8c74512bcca33616"
+    },
+    {
+      "bytes": 16355,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv030-fa-physical-layout-observation-v6-user72h-20261010/output_budget.py",
+      "sha256": "44e5ccfdad173e6b9eebc025260e489893d672c316c6aac3f8bf68a5e03c16ad"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/protected-terminal-observer-new48h-v1-002/observer.py",
+      "bytes": 8472,
+      "sha256": "a0d296fc274899009e0e7570d839adaa0f5f2a41b38d470466d1ea696a43229b"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/latest-task-input-cpu-new48h-v1-006/cohort_policy.py",
+      "bytes": 10024,
+      "sha256": "0cf5efcce2a8281d781ec4351c95e9556a5ee05f9b1ba5dcd3f41160820b2c94"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+      "bytes": 33743,
+      "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86"
+    }
+  ],
+  "protected_observer": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/protected-terminal-observer-new48h-v1-002/observer.py",
+    "bytes": 8472,
+    "sha256": "a0d296fc274899009e0e7570d839adaa0f5f2a41b38d470466d1ea696a43229b"
+  },
+  "cohort_compatibility": "main-fixed-disjoint-diagnostic-v1",
+  "weights_read": false,
+  "devices": [],
+  "NPU": false,
+  "actual_same_image": null,
+  "actual_INPUTS_ref": null,
+  "supersedes_source_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R156/latest-task-input-CPU-owner-v1-004/SOURCE_MANIFEST.json",
+    "bytes": 15713,
+    "sha256": "20e3ee764cae3ab0b5b59feaa4c8c89fc89ed748b49e4c23e672b2e3a39ca0c2"
+  },
+  "delta": "B010 exact source + pre-Cast read-onlyFP32 sidecar; new namespace only; diagnostic noqualification",
+  "local_actual_tests": {
+    "legacy_controls": 10,
+    "class_controls": 5,
+    "new_binding_controls": 7,
+    "actual_same660": null
+  },
+  "actual_failure_context": {
+    "operation": "exec-00000000000000d3",
+    "second_no_backend_line": 25,
+    "torch_imported": true,
+    "triton_imported": true,
+    "torch_npu_imported": false,
+    "autoload": "0",
+    "input_ref": null
+  },
+  "image_cpu_dependency_sources": [
+    {
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/triton/runtime/driver.py",
+      "bytes": 1509,
+      "sha256": "559fbcf375eb8bbd51ef694707abac2292e8de018b6d92640252cfddec164a97"
+    },
+    {
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/triton/backends/ascend/driver.py",
+      "bytes": 49380,
+      "sha256": "b39118053062f3fc6d7f1047f8c9eb229de47a2b6106d8119cc7087f5b38818e"
+    },
+    {
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch/__init__.py",
+      "bytes": 106868,
+      "sha256": "51c90fe34a7cf869517d1bab4cd114498790e169ec668f1a154c35ec64117a5e"
+    }
+  ],
+  "validation_change": {
+    "allow_real_CPU_dependency_modules": [
+      "torch",
+      "triton"
+    ],
+    "forbid": [
+      "TorchNPU/vLLM/NPUlauncher import",
+      "all original Ascend driver function/method bodies; only exact source-pinned three top-level class-definition code objects allowed",
+      "original LazyProxy initialization",
+      "Torch device backend autoload/registration",
+      "device runtime ctypes dlopen",
+      "driver active/default replacement or _obj not None",
+      "NPUUtils instance",
+      "device/control FD/node",
+      "loaded device runtime libraries"
+    ],
+    "proof_mandatory": "host consume_safety consumes exact safety/input Ref3 and inactive checkpoints before stop receipt; full INPUTS rows remain original reader identity."
+  },
+  "historical_failure_refs": {
+    "input003_operation": "exec-00000000000000d3",
+    "input004_counterexample": "INPUT004_REVIEW.md",
+    "historical_results_immutable": true
+  },
+  "actual_same660": null,
+  "production_install_executed": false,
+  "child_cap_seconds": 810,
+  "build_source_manifest": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/kernel/SOURCE_MANIFEST.json",
+    "bytes": 1766,
+    "sha256": "29ba4bf5221bcfeb1597b162ed11e071ce4e57ea18215a9fd1cfb14f3ffafc2f"
+  },
+  "build_host_refs": [
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/B010_ORIGINAL_SOURCE.json",
+      "bytes": 1694,
+      "sha256": "56a46e89869929f6c1a43b8e0d0870c7b2bb0429c6446499ab67d63b5e243161"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/verify_inverse.py",
+      "bytes": 3248,
+      "sha256": "8321c03a5723a5c664960afcf1bb38a33f0e989f169bf004e36e08f326a82ba0"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/kernel/build_pair.py",
+      "bytes": 4490,
+      "sha256": "9e05aec8a326025e0df780283f0d457ba6fcbb48c06182ba84073130e3c00bab"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/kernel/SOURCE_MANIFEST.json",
+      "bytes": 1766,
+      "sha256": "29ba4bf5221bcfeb1597b162ed11e071ce4e57ea18215a9fd1cfb14f3ffafc2f"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/kernel/readout_sidecar_v015/CMakeLists.txt",
+      "bytes": 5033,
+      "sha256": "758565d13ea64ee4a5329df0b3cb396c0c21c928908a894e36a976dcf128195d"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/kernel/readout_sidecar_v015/op_extension/ops.h",
+      "bytes": 730,
+      "sha256": "e9b1642326a2307a2ae3919462ea1ae8778b4cf2083c05d9dc5aa6650e13569a"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/kernel/readout_sidecar_v015/op_extension/qwen36_gdn_deltalog_decode_readout_sidecar_v015_torch.cpp",
+      "bytes": 9115,
+      "sha256": "00301976fea374bae168eec75d619137d7e78e87b166d988b0945deaa8a64256"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/kernel/readout_sidecar_v015/op_extension/register.cpp",
+      "bytes": 1317,
+      "sha256": "4b91c06c476f55cc13f3b1e329715c4a735040e7b8e768999ba0bd6a3a68760e"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/kernel/readout_sidecar_v015/op_kernel/qwen36_gdn_deltalog_decode_readout_sidecar_v015_kernel.asc",
+      "bytes": 1096,
+      "sha256": "8c8dc733e567b6645f4b7c0625af270325096d7b5008358dc6ad40611e1bf1a3"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/kernel/readout_sidecar_v015/op_kernel/qwen36_gdn_deltalog_decode_readout_sidecar_v015_tiling.h",
+      "bytes": 396,
+      "sha256": "0881cfc0de23758205c7a739d9d6a921fedcafb62a3dec1cc3aa552788153a46"
+    },
+    {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/kernel/readout_sidecar_v015/op_kernel/qwen36_gdn_deltalog_decode_readout_sidecar_v015.h",
+      "bytes": 24132,
+      "sha256": "9c164c112e275ca09cec0e6baa6392758549fef25b361bef439b4ec07bf1907a"
+    }
+  ],
+  "build_script_ref": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/kernel/build_pair.py",
+    "bytes": 4490,
+    "sha256": "9e05aec8a326025e0df780283f0d457ba6fcbb48c06182ba84073130e3c00bab"
+  },
+  "cmake_image_ref": {
+    "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/cmake/data/bin/cmake",
+    "bytes": 20331448,
+    "sha256": "9b31714718a5fa96fa7eac9a17c4fcda45448e30305e1e7c435df6aa07f25f06"
+  },
+  "image_refs": [
+    {
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/cmake/data/bin/cmake",
+      "bytes": 20331448,
+      "sha256": "9b31714718a5fa96fa7eac9a17c4fcda45448e30305e1e7c435df6aa07f25f06"
+    }
+  ],
+  "actual_cohort_ref": null,
+  "actual_build_result": null,
+  "coordinator": "MAIN",
+  "actual_SDK_event_source_verified": true,
+  "actual_SDK_runtime_verified": false,
+  "previous_failed_owner_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-kdma-owned-build-new48h-v1-005/SOURCE_MANIFEST.json",
+    "bytes": 20444,
+    "sha256": "59fe291f68c603f7c7ab1b9fd2ba4df616c91acdf013f3dee93805c48bbb07fc"
+  },
+  "mechanical_verifier": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-readout-sidecar-v015/verify_inverse.py",
+    "bytes": 3248,
+    "sha256": "8321c03a5723a5c664960afcf1bb38a33f0e989f169bf004e36e08f326a82ba0"
+  }
+}
