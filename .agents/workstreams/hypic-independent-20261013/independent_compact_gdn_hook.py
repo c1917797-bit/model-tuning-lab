@@ -9,8 +9,10 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
                         layer_completion=False,layer_shadow=False,packed_wave=False,
                         first_divergence=False,first_divergence_head_policy="head0",
                         short_prefix_policy="chunk64",performance_mode=False,
-                        partitioned_render=False):
+                        partitioned_render=False,lazy_initial_snapshot=False):
     if not enabled:return lambda:None
+    if type(lazy_initial_snapshot)is not bool or lazy_initial_snapshot and not packed_wave:
+        raise ValueError('lazy initial snapshot requires explicit packed C1')
     if type(packed_wave) is not bool:raise ValueError('explicit packed C1 boolean required')
     if type(partitioned_render)is not bool or partitioned_render and not packed_wave:
         raise ValueError('partitioned render requires explicit packed C1')
@@ -70,6 +72,7 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
         if any(x.shape[0]!=total for x in (mixed_qkv,b,a,core_attn_out)):
             raise ValueError('compact GDN projected row coverage mismatch')
         conv_cache,state_cache=self.kv_cache[:2];prepared=[];offset=0
+        skipped_initial_snapshots=set()
         batched={};finite_guard=None;finite_kwargs={}
         if layer_completion:
             from independent_layer_finite_guard import LayerFiniteGuard
@@ -113,9 +116,18 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
                         generation,material=leases.enter_context(
                             stage.compact_store.acquire_private(expected,device=mixed_qkv.device))
                 slot=assoc.state_slot
-                state=state_cache[slot].transpose(-1,-2).contiguous().clone()
-                tail=conv_cache[slot].clone()
-                if not assoc.has_initial_state:state.zero_();tail.zero_()
+                if lazy_initial_snapshot:
+                    from independent_prepared_initial_snapshot import initial_snapshot
+                    snapshot=initial_snapshot(state_cache,conv_cache,slot,
+                        has_initial_state=assoc.has_initial_state,
+                        prepared_result=plan.request_id in batched or plan.request_id in packed,
+                        serial_shadow=check_packed_shadow and plan.request_id in packed)
+                    state,tail=(None,None) if snapshot is None else snapshot
+                    if snapshot is None:skipped_initial_snapshots.add(plan.request_id)
+                else:
+                    state=state_cache[slot].transpose(-1,-2).contiguous().clone()
+                    tail=conv_cache[slot].clone()
+                    if not assoc.has_initial_state:state.zero_();tail.zero_()
                 base=offset;initial_tail=tail
                 def live(lo,hi,incoming,conv):
                     span=slice(base+lo,base+hi)
@@ -214,7 +226,8 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
                                else 'compact_gdn_body_composed'),'request_id':plan.request_id,
                     'rank':plan.rank,'step':plan.step,'layer':self.prefix,'slot':slot,
                     'generation':generation,'retained_rows':end-start,
-                    'skipped_body_tokens':plan.skipped_tokens,'finite':True})
+                    'skipped_body_tokens':plan.skipped_tokens,'finite':True,
+                    'initial_snapshot_skipped':plan.request_id in skipped_initial_snapshots})
         return None
     wrapped._independent_compact_gdn_owned=True;cls._forward_core=wrapped
     def stop():

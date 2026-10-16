@@ -1,0 +1,23 @@
+{
+  "scope": "default-off runtime wiring; no new device proof",
+  "flag": "c1_lazy_initial_snapshot",
+  "default": false,
+  "requires": "packedC1",
+  "targeted": {
+    "operation": "exec-0000000000000e55",
+    "tests": 13,
+    "passed": true
+  },
+  "full": {
+    "operation": "exec-0000000000000e56",
+    "tests": 945,
+    "passed": true
+  },
+  "actual_proof_fields": [
+    "installation c1_lazy_initial_snapshot",
+    "per-request completed initial_snapshot_skipped"
+  ],
+  "preserved": "finite precommit, owned-slot commits, completion barrier, all serial shadows and fallback initial snapshots",
+  "old_contracts": "all previous runtime source bindings stale after this checkpoint; immutable roots retained, never rerun",
+  "next": "new numerical Canary contract/source closure/new root, independent skip-receipt audit plus existing C1/C2/numerical/source/isolation/release; then matched speed"
+}
