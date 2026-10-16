@@ -1,3 +1,18 @@
+# CURRENT baseline attempt2 live — supersedes prior no-owned-job
+
+0a93 fresh10:03:40UTC directma admissionPASS: physical0-3empty,8233/HCCLfree,
+147unchangedbindings/image/model/input/newroot. Publishedcheckpointf4e44f844.
+Exactma controller exec-0000000000000a94 running, raw
+/cache/cch/hypic-independent-20261013/formal-r16-20261016-g1-r1-attempt2.
+Onlynewraw/container/replacementmetadata, samefull40/c16protocol. Old0a5c
+36/40foreigninterruption remainsrejected/immutable; no pairedspeedclaim yet.
+Poll exact0a94/root; never restart running/unclear or edit147boundfiles.
+Terminal audit_r16_performance.py --contract FORMAL_R16_20261016_G1_R1_ATTEMPT2_CONTRACT.json --live-release.
+CatalogR2package159bindings/static0a90PASS and679CPUcodecontrols;
+QUALITY_R16_CATALOG_CANARY_R2_CONTRACT.json NOTlaunched, no paralleldevice.
+R1catalogNEVERlaunched/stale; independentmemberships repair preserved79e97ea.
+Human24h deadline2026-10-17T06:48:09Z unchanged. Longgoal incomplete.
+
 # LATEST R16 G1/R1 rejected — supersedes live0a5c
 
 0a5c terminalexit1 after foreignNPU0PID4090714 appeared09:57:36UTC.
