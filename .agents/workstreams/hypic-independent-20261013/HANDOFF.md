@@ -1,4 +1,16 @@
-# CURRENT R18 R2 NUMERICAL CANARY LIVE; NO TERMINAL
+# CURRENT R18 R2 TERMINAL BOUNDED NUMERIC/PARTITION ACCEPTED; NO SPEED CLAIM
+
+0dd8 exit0; independent0de6 PASS2private fullrequests,allfour48C1/16C2,
+384 actualpartition groups/384 completedreceipts/192 serialnumericshadows,
+169sources/222cleanisolation/explicitphysicalPIDjoins/liveexactrelease.
+Report C1_PARTITIONED_R18_CANARY_R2_TERMINAL_20261016.json contains12rawhashes.
+Generic nested hot.scope full40 wording is corrected: actualdenominator2, NOT40.
+No owned modeljob. R1 rejection retained. Next publishterminal and freeze matching
+R18G3/G1 full40 performance firstpair (onlytimedshadow/probeoff,actualpartition
+counts required), freshactualadmission; no oldcontracts/rootreuse. Full12matrix,
+381/arm naturalEOS quality,lifecycle,Paper-to-Ascend/29functional notcomplete.
+
+# HISTORICAL R18 R2 LIVE; SUPERSEDED ABOVE
 
 Exact ma exec-0000000000000dd8 started18:47UTC from published20993444.
 Admission0dd7 validates169source/161runtime/image/model/input/actual0-3empty/8233+

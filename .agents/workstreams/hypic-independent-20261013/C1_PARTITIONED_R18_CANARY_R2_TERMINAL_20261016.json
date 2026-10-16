@@ -1,0 +1,148 @@
+{
+  "schema": "hypic-r18-r2-terminal/v1",
+  "accepted_bounded": true,
+  "full_goal_accepted": false,
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-partitioned-r18-canary-r2",
+  "controller": "exec-0000000000000dd8",
+  "checkpoint": "20993444ee90325fab74e2cadd8b94e3cb2c5932",
+  "independent_audit": "exec-0000000000000de6",
+  "audit": {
+    "bounded_canary_valid": true,
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 2,
+      "covered": [
+        "cmpl-87bafb9db4696902",
+        "cmpl-875694fde6f929ad"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 58,
+        "1": 59,
+        "2": 60,
+        "3": 61
+      },
+      "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+    },
+    "probe": {
+      "0": {
+        "original_thread_cpu_ns": 28169740,
+        "prefill_only_thread_cpu_ns": 59490,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "1": {
+        "original_thread_cpu_ns": 27422970,
+        "prefill_only_thread_cpu_ns": 75360,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "2": {
+        "original_thread_cpu_ns": 28834460,
+        "prefill_only_thread_cpu_ns": 60690,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "3": {
+        "original_thread_cpu_ns": 29102460,
+        "prefill_only_thread_cpu_ns": 62550,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      }
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 58,
+          "host_pid": 22487,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 59,
+          "host_pid": 22488,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 60,
+          "host_pid": 22489,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 61,
+          "host_pid": 22490,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "source_bindings": 169,
+    "isolation_samples": 222,
+    "live_release_verified": true,
+    "scope": "two-request actual partition/shadow/source/physical/isolation/release; no formal speed/fullquality/lifecycle",
+    "partition": {
+      "groups": 384,
+      "completed_receipts": 384,
+      "numeric_shadows": 192,
+      "four_rank_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      },
+      "sampled_numeric_not_full_quality": true
+    }
+  },
+  "raw_sha256": {
+    "result.json": "17c21b84771cc9faa9b444759550ce32ff956baf5d56cfc6059ae9ed2e1f3d45",
+    "events.jsonl": "bbeb894b88b93fe7200029cd1f200328e37cbbebedb526569022497dcca66988",
+    "responses.json": "ea3a06c473445fe5b49013400cf29860131885972e927c48d0316db685db8253",
+    "isolation.json": "1692d798a48932ec6c7f5ceeca36e40e0eb9f1a75f9defee4bc56df1e0a41550",
+    "release.json": "a3c4fcef1a95fb83713cb88e6a2735edb0e0346975d63efae8fb751d03e3d8a7",
+    "service-start.json": "4a217b84ac67a375a9a61ca7bbfc9261bf115762b66cb99b696cca9e8cb99a2c",
+    "preflight.json": "d2db5b8d11cdc8ddb6d6f7115b1a85c92518128fc122aa487142fbe26f87dff3",
+    "launch.json": "4c433f3c768eb39ddf2e3d2ccd7f398bcfa7536f54024e1aea2dedbccef69aeb",
+    "diagnostics/compact-worker-58.jsonl": "dc8c9e571e949e4063e61413c04a97b2170f1fa87f40a15347fabaeab87d8570",
+    "diagnostics/compact-worker-59.jsonl": "9a9ef2d1a9eb6f1d86e60e554a1d39fd3cdb3893d3f63e002d6a1f1964d353e1",
+    "diagnostics/compact-worker-60.jsonl": "5b6e8345281b8b2c82e94cf293be5f7ed7bbf07dc5f953ba5018e0a6dbc448c0",
+    "diagnostics/compact-worker-61.jsonl": "fcdae02d75714567f7dd5d1b8edd2e045aa19333dceec7bbd7656fd10cd738f3"
+  },
+  "scope_correction": "nested generic hot.scope says full40, but actual denominator is exactly2 private requests, not40",
+  "limits": [
+    "bounded real partition/serial shadow only",
+    "not formal speed or native-versus-PIC full model equality",
+    "not381/arm quality or lifecycle",
+    "R1 rejected and preserved"
+  ]
+}
