@@ -1,0 +1,20 @@
+{
+  "schema": "hypic-snapshot-canary-launch/v1",
+  "checkpoint": "d0a2a9c51dec534c58ab05f704da58d2b057ccae",
+  "controller": "exec-00000000000009ff",
+  "peer": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "connector": "awmcp",
+  "admission_operation": "exec-00000000000009fe",
+  "admission_utc": "2026-10-16T08:38:15.242581+00:00",
+  "contract": "SNAPSHOT_R16_CANARY_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/snapshot-r16-canary-r1",
+  "cid": "50441f0d12b1a1f1dd89051fac5a11e4bdf8c3cfa46a305054cd0787ca11d9cf",
+  "latest_readonly": {
+    "operation": "exec-0000000000000a01",
+    "utc": "2026-10-16T08:39:49.342309+00:00",
+    "running": true,
+    "state": "API startup; physical workers not yet observed",
+    "responses": 0
+  },
+  "rules": "Poll same09ff. No145source edits or restart while running/unknown. Terminal independent audit required; launch is not acceptance."
+}

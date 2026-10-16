@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT R16 snapshot Canary LIVE: exact exec-00000000000009ff on ma
+lgw_a6109c51076a4a2c9d2674ca5a8704a0 via primaryawmcp, checkpointd0a2a9c5.
+09fe08:38:15UTC fresh0-3empty/portsfree/145sources/image/model/input/newrootPASS.
+Raw /cache/cch/hypic-independent-20261013/snapshot-r16-canary-r1 immutable.
+Poll exacthandle; unknown/running NEVER restart or edit145boundfiles.
+Terminal independent audit_prompt_snapshot_canary.py --contract
+SNAPSHOT_R16_CANARY_R1_CONTRACT.json --live-release; no formal speed/quality claim.
+
 R16 snapshot Canary READY NOT STARTED. Contract SNAPSHOT_R16_CANARY_R1_CONTRACT.json,
 raw /cache/cch/hypic-independent-20261013/snapshot-r16-canary-r1 (must not exist).
 formal_r15_tp4.py unchanged controller; new145source map/config/manifest.
