@@ -1,0 +1,28 @@
+{
+  "schema": "hypic-prospective-contracts/v1",
+  "operation": "exec-0000000000000ac2",
+  "exit": 0,
+  "baseline_contract": "QUALITY_R16_FULL_BASELINE_R1_CONTRACT.json",
+  "hypic_contract": "QUALITY_R16_FULL_HYPIC_R1_CONTRACT.json",
+  "source_bindings": 163,
+  "shared_sources": true,
+  "shared_inputs_ruler_warmuporder": true,
+  "scored_perarm": 381,
+  "unscored_producers_perarm": 381,
+  "total_perarm": 762,
+  "request_ledger_limit": 1024,
+  "manifest_sha256": "480a77bd670d449ec0e4353cd0c662d662dc3a5c944fb40a231a76909b53cffc",
+  "code_regression": {
+    "operation": "exec-0000000000000aba",
+    "tests": 713,
+    "exit": 0
+  },
+  "device_run": false,
+  "prerequisites": [
+    "realR2catalogCanary independentacceptance stillmissing",
+    "actualstablephysical0-3/ports/source/newroot admission",
+    "no parallelownedjob",
+    "fixedOct17T06:48:09Zstop"
+  ],
+  "scope": "Preparation only. Neitherqualityarmstarted, no actualqualitychange oracceptance. Baseline algorithmoff;HYPIC independentC1/C2on, bothPDCoff. Thinking2048separate ifselected."
+}
