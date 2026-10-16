@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "formal-r16-g1-r1-running",
+  "execution_state": "formal-r16-baseline-external-interruption",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "0a55/0a57 exact CID absent,physical0-3empty and strict8233bindPASS; future launch must freshly recheck."
+    "state": "OwnCIDabsent/8233bindfree, physical0-3empty09:59:11UTC snapshot only; foreigncannbench_ds may return, must freshlyadmit."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll exact ma0a5c and rawroot; terminal independently audit_r16_performance.py --contract FORMAL_R16_20261016_G1_R1_CONTRACT.json --live-release. Compare same-source R16 pair only. Full quality/lifecycle still missing.",
+  "next_action": "Preserve rejectedbaseline36/40; finish R2catalog package rebinding after auditedmembership repair. No ownedlivejob. Need same-source replacementbaseline newcontract/root and freshidle admission, not oldroot rerun. Stable external-free window needed for reliable completion.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,13 +215,13 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "RUNNING; no restart while running or terminal unclear",
+    "state": "TERMINAL0a5c exit1; foreigncannbench_ds; exact own container absent",
     "last_operation": "exec-0000000000000a5c",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
     "raw_root": "/cache/cch/hypic-independent-20261013/formal-r16-20261016-g1-r1",
-    "checkpoint": "e0c1769a1e71c6d18672df37f7a1514e1e7e3538",
-    "contract": "FORMAL_R16_20261016_G1_R1_CONTRACT.json"
+    "contract": "FORMAL_R16_20261016_G1_R1_CONTRACT.json",
+    "terminal_report": "FORMAL_R16_20261016_G1_R1_TERMINAL.json"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -268,8 +268,8 @@
     "valid_phases": [
       "G3/R1"
     ],
-    "running": "G1/R1",
-    "next": "G1/R1 same-source fresh baseline",
+    "running": null,
+    "next": "same-source fresh baseline replacement pending separately frozen contract/root; no pairedgain",
     "remaining_not_started": 11,
     "report": "FORMAL_R16_20261016_G3_R1_TERMINAL.json"
   }

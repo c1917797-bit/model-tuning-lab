@@ -1,3 +1,15 @@
+# LATEST R16 G1/R1 rejected — supersedes live0a5c
+
+0a5c terminalexit1 after foreignNPU0PID4090714 appeared09:57:36UTC.
+Independent0a89 identifies exactforeignCIDefc5e45e... as /cannbench_ds.
+36/40successful,390isolation samples;0a8a independentaudit rejects terminal.
+ExactownCIDac442900... absent,8233bindfree,0-3empty09:59:11UTC snapshot;
+external untouched. Raw formal-r16-20261016-g1-r1 immutable, never rerun.
+No ownedlivejob. R16G3/R1 valid, matrix1/12; no pairedspeed conclusion.
+R1catalogCanary NEVERlaunched and stale after membershipauditrepair;
+next finish R2package binding. New baseline attempt needs newcontract/root,
+same147sources/protocol and freshactualidle/direct admission; no oldbaseline reuse.
+
 # CURRENT R16 G1/R1 live — supersedes prior baseline-next
 
 2026-10-16 09:34UTC fresh0a5b admission: physical0-3empty,8233/HCCLfree,

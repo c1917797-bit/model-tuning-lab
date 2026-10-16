@@ -1,0 +1,71 @@
+{
+  "schema": "hypic-performance-terminal/v1",
+  "controller": "exec-0000000000000a5c",
+  "contract": "FORMAL_R16_20261016_G1_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-r16-20261016-g1-r1",
+  "state": "REJECTED_EXTERNAL_INTERRUPTION",
+  "controller_exit": 1,
+  "successful": 36,
+  "total": 40,
+  "isolation_samples": 390,
+  "foreign": {
+    "foreign_first_utc": "2026-10-16T09:57:36.863615+00:00",
+    "foreign": [
+      {
+        "npu": 0,
+        "pid": 4090714,
+        "nspid": [
+          4090714,
+          842937
+        ]
+      }
+    ],
+    "foreign_container": {
+      "Id": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+      "Name": "/cannbench_ds",
+      "State": {
+        "Status": "running",
+        "Running": true,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 88128,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-13T09:19:46.65067124Z",
+        "FinishedAt": "2026-10-13T09:14:39.62076852Z"
+      },
+      "labels": {
+        "org.opencontainers.image.version": "22.04"
+      }
+    },
+    "requests": 40,
+    "valid": false,
+    "result_counts": {
+      "total": 40,
+      "ok": 36
+    },
+    "raw_sha256": {
+      "result.json": "ca3e2aca5b4437dcc859f3e413d2afa7d3a33d3ea2e3837b24f0d7c097e127bb",
+      "events.jsonl": "6e3f2d6c0acc6879693e5305aa14febcc0274b8dee68de4aceb0e3b1aa528488",
+      "performance-unit.json": "5b18c07fe9adc7b1c01e0785ff2c4bbddd6180e79f88d4b349b1b723abb0df2f",
+      "release.json": "a43b3d56cf52729e539121a25d501e588bb3a2fb47fa4bbf95a53408e34af6af"
+    },
+    "own_absence": {
+      "exit": 1,
+      "stdout": "[]\n",
+      "stderr": "Error: No such object: ac44290031c8b31af156e0b8939fe45d7cd1cdf6c01230300cc80aa3a53e8ac0\n"
+    },
+    "now_physical": [],
+    "now_utc": "2026-10-16T09:59:11.123373+00:00",
+    "port_bind_free": true
+  },
+  "independent_audit": {
+    "operation": "exec-0000000000000a8a",
+    "exit": 1,
+    "reason": "successful exact terminal required"
+  },
+  "source_note": "147 baseline source bindings were independently verified unchanged at0a7b; this report does not reclassify interrupted performance as valid",
+  "conclusion": "No matched R16 speed claim. G3/R1 remainsvalid1/12. External unchanged; exactownCIDabsence verified. Old raw root immutable; any continuation needs separately frozen new contract/root and freshactualidle/directsource admission."
+}
