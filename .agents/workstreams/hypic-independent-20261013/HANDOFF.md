@@ -1,5 +1,27 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENTG1/R1 exec-00000000000009a6 RUNNING originalma a6109/tpcforcedirect.
+Rawformal-r15-20261016-g1-r1;contractFORMAL_R15_20261016_G1_R1_CONTRACT.json.
+c77af31f published/liveverified;09a5fresh07:43:51UTC141sources/0-3empty/ports/
+model/image/input/newrootPASS. PollSAME09a6, no restart/edit141. Terminaloriginal
+audit_r15_terminal.py --contract FORMAL_R15_20261016_G1_R1_CONTRACT.json --live-release.
+
+G3/R1 0967 TERMINALexit0,40/40;09a1 independentPASS141source/567clean/40HTTPIDs/
+all40fourworker48C1/16C2/7104packedgroups/actualphysicaljoin/exact079fremoved.
+TPOTweighted413.7713ms,TTFTP95518966.27ms; no freshG1comparisonyet, NOTspeedup.
+099d initialstrictbindFAILretained;09a0 laternoTCPentries/listener+strictbindPASS,
+noportmutation, initialTCPcause notproven; unchangedfullaudit09a1PASS. Report
+FORMAL_R15_20261016_G3_R1_TERMINAL.json. Newmatrix1/12valid,G1running,10unstarted.
+
+0999 CPUcore0 outside service112-191: currentfullprompt snapshot12x32768
+median109.68ms/engineprepare on HOST Python. Sourcefreeze_native_runner callsit
+everyprepare includingdecode; actualruntimecriticalpath benefit NOTyetattributed.
+No treatment/source changed. CPU8initial0996invalidaffinity retained;0997fresh
+allowedCPU0 chosen. FirstcompareG1/G3 beforeany R16candidate; do notpoolversions.
+Qualitysource review0990 datahashes unchanged; catalogworker/scheduler already
+implemented, bootstrap/controller selection and realcapacitycanary stillmissing.
+SeeQUALITY_R15_RESUME_SOURCE_REVIEW_20261016.json; noqualityacceptance.
+
 NativePDC aggregate observer implemented separateHOSTONLY/defaultno-run wrapper.
 097d37targetedcontrolsPASS (20nativecounter+17full40PDC); no deviceproofyet.
 OfficialmetricsloggeractualSHAce2a0535...0977; engine0/modelqwen3.5 metrics0978.

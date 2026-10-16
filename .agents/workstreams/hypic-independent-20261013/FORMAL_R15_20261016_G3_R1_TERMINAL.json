@@ -1,0 +1,193 @@
+{
+  "schema": "formal-r15-g3-r1-terminal/v1",
+  "controller": "exec-0000000000000967",
+  "controller_exit": 0,
+  "code_checkpoint": "6baedec535bc60f5218e8ef5450e6abcaec4c14d",
+  "contract": "FORMAL_R15_20261016_G3_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-r15-20261016-g3-r1",
+  "independent_audit": {
+    "operation": "exec-00000000000009a1",
+    "exit": 0,
+    "report": {
+      "terminal_unit_valid": true,
+      "timing": {
+        "requests": 40,
+        "unique_ids": 40,
+        "weighted_tpot_ms": 413.7713166972646,
+        "ttft_p95_ms": 518966.267759999,
+        "tpot_p95_ms": 438.590763632817
+      },
+      "isolation_samples": 567,
+      "source_bindings": 141,
+      "raw_sha256": {
+        "result.json": "6baa55a26d8a22e3be39606b72d389de9db8c9b9566e339acac8c3d62742f03b",
+        "events.jsonl": "3ff71e7ac7d74042b347e773cea1024d7609d917789c52ed78a3dcf6e3d596d6",
+        "performance-unit.json": "d757eab1f0d13db43c7e64ace3ef32747fd2866edeef5d99a8865fff2812e095",
+        "release.json": "5ea849076f9f25a1da646b091c36c3e5f2ebd71657f370920cbd52a62b5e6c74"
+      },
+      "scope": "one full40 timed phase only; all12 matched phases and full quality/lifecycle still required",
+      "packed": {
+        "packed_performance_receipts_verified": true,
+        "workers": {
+          "0": 59,
+          "1": 60,
+          "2": 61,
+          "3": 62
+        },
+        "requests": 40,
+        "packed_groups": 7104,
+        "shadow_requests": 0,
+        "multi_hot_shadow_layers": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 0
+        },
+        "scope": "timed packed call-stage/private finite precommit receipts; no numerical shadow equivalence or task quality claim"
+      },
+      "physical": {
+        "ranks": {
+          "0": {
+            "inner_pid": 59,
+            "host_pid": 2775467,
+            "physical_npu": 0
+          },
+          "1": {
+            "inner_pid": 60,
+            "host_pid": 2775468,
+            "physical_npu": 1
+          },
+          "2": {
+            "inner_pid": 61,
+            "host_pid": 2775469,
+            "physical_npu": 2
+          },
+          "3": {
+            "inner_pid": 62,
+            "host_pid": 2775470,
+            "physical_npu": 3
+          }
+        },
+        "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+      },
+      "hot": {
+        "accepted_hot_coverage": true,
+        "denominator": 40,
+        "covered": [
+          "cmpl-877ca19d47e2890a",
+          "cmpl-aece590c1cd6e340",
+          "cmpl-846c10fec15223ce",
+          "cmpl-91fe16b86b253c04",
+          "cmpl-b73a478c037fd2e5",
+          "cmpl-b4422114fe39b960",
+          "cmpl-9c8f97f34a3bea81",
+          "cmpl-9dc0e99ffd41a17e",
+          "cmpl-9b4c63ae4e1efcc0",
+          "cmpl-89cf1c944108d4a3",
+          "cmpl-88f079773637117d",
+          "cmpl-873c3b01d348472e",
+          "cmpl-9fbdf49e6e8ecd7d",
+          "cmpl-b5b669f9c50251e3",
+          "cmpl-aa041462a033eb9e",
+          "cmpl-9977be6b36f5bbaf",
+          "cmpl-9dd9b366f43ed4c8",
+          "cmpl-b3f382d6fd150198",
+          "cmpl-9411fd17ef561ddf",
+          "cmpl-900f884c2e8039c8",
+          "cmpl-9c33bfd018858978",
+          "cmpl-bd667e73db0607ad",
+          "cmpl-a7c8715550111ca8",
+          "cmpl-8d20a7f67c41d8f1",
+          "cmpl-a558fc88bea73959",
+          "cmpl-9b718d04fc0a6793",
+          "cmpl-8edf26c633b564cc",
+          "cmpl-9614da2da782e68a",
+          "cmpl-8968bb292499c8c0",
+          "cmpl-ac1c3d156eae0904",
+          "cmpl-9dab707f45f74615",
+          "cmpl-b91fdff944838a8a",
+          "cmpl-85301bbc3be674ae",
+          "cmpl-aa21ef4b1503c568",
+          "cmpl-9e4256426749400f",
+          "cmpl-be3015c138a0aa7e",
+          "cmpl-8b2d285d17739027",
+          "cmpl-8840550c0e0f9044",
+          "cmpl-b782edf3b81df7b1",
+          "cmpl-bf94a49938e3f40b"
+        ],
+        "missing": [],
+        "worker_pids": {
+          "0": 59,
+          "1": 60,
+          "2": 61,
+          "3": 62
+        },
+        "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+      },
+      "request_map": {
+        "cmpl-877ca19d47e2890a": "cmpl-877ca19d47e2890a-0-9365017e",
+        "cmpl-aece590c1cd6e340": "cmpl-aece590c1cd6e340-0-94d3256c",
+        "cmpl-846c10fec15223ce": "cmpl-846c10fec15223ce-0-bb3cc86d",
+        "cmpl-91fe16b86b253c04": "cmpl-91fe16b86b253c04-0-b041f132",
+        "cmpl-b73a478c037fd2e5": "cmpl-b73a478c037fd2e5-0-98343116",
+        "cmpl-b4422114fe39b960": "cmpl-b4422114fe39b960-0-a1d0bb5f",
+        "cmpl-9c8f97f34a3bea81": "cmpl-9c8f97f34a3bea81-0-b8290528",
+        "cmpl-9dc0e99ffd41a17e": "cmpl-9dc0e99ffd41a17e-0-ae0ecc2f",
+        "cmpl-9b4c63ae4e1efcc0": "cmpl-9b4c63ae4e1efcc0-0-be45dd64",
+        "cmpl-89cf1c944108d4a3": "cmpl-89cf1c944108d4a3-0-8026f590",
+        "cmpl-88f079773637117d": "cmpl-88f079773637117d-0-9136d86c",
+        "cmpl-873c3b01d348472e": "cmpl-873c3b01d348472e-0-ac3e6325",
+        "cmpl-9fbdf49e6e8ecd7d": "cmpl-9fbdf49e6e8ecd7d-0-bc191da0",
+        "cmpl-b5b669f9c50251e3": "cmpl-b5b669f9c50251e3-0-9a7213c9",
+        "cmpl-aa041462a033eb9e": "cmpl-aa041462a033eb9e-0-8baaebc3",
+        "cmpl-9977be6b36f5bbaf": "cmpl-9977be6b36f5bbaf-0-9ab74636",
+        "cmpl-9dd9b366f43ed4c8": "cmpl-9dd9b366f43ed4c8-0-9266967e",
+        "cmpl-b3f382d6fd150198": "cmpl-b3f382d6fd150198-0-8f9ce36a",
+        "cmpl-9411fd17ef561ddf": "cmpl-9411fd17ef561ddf-0-bb834790",
+        "cmpl-900f884c2e8039c8": "cmpl-900f884c2e8039c8-0-a5ada2d1",
+        "cmpl-9c33bfd018858978": "cmpl-9c33bfd018858978-0-88f83654",
+        "cmpl-bd667e73db0607ad": "cmpl-bd667e73db0607ad-0-93e0dcc1",
+        "cmpl-a7c8715550111ca8": "cmpl-a7c8715550111ca8-0-8a7df801",
+        "cmpl-8d20a7f67c41d8f1": "cmpl-8d20a7f67c41d8f1-0-96fed913",
+        "cmpl-a558fc88bea73959": "cmpl-a558fc88bea73959-0-8c535428",
+        "cmpl-9b718d04fc0a6793": "cmpl-9b718d04fc0a6793-0-956e018f",
+        "cmpl-8edf26c633b564cc": "cmpl-8edf26c633b564cc-0-a8f4fe56",
+        "cmpl-9614da2da782e68a": "cmpl-9614da2da782e68a-0-a16827c2",
+        "cmpl-8968bb292499c8c0": "cmpl-8968bb292499c8c0-0-81c89449",
+        "cmpl-ac1c3d156eae0904": "cmpl-ac1c3d156eae0904-0-8f8c5a4b",
+        "cmpl-9dab707f45f74615": "cmpl-9dab707f45f74615-0-8f40b69e",
+        "cmpl-b91fdff944838a8a": "cmpl-b91fdff944838a8a-0-8f8eca75",
+        "cmpl-85301bbc3be674ae": "cmpl-85301bbc3be674ae-0-94909742",
+        "cmpl-aa21ef4b1503c568": "cmpl-aa21ef4b1503c568-0-b3434129",
+        "cmpl-9e4256426749400f": "cmpl-9e4256426749400f-0-b3e31b98",
+        "cmpl-be3015c138a0aa7e": "cmpl-be3015c138a0aa7e-0-b3b72e62",
+        "cmpl-8b2d285d17739027": "cmpl-8b2d285d17739027-0-85999981",
+        "cmpl-8840550c0e0f9044": "cmpl-8840550c0e0f9044-0-b112ba05",
+        "cmpl-b782edf3b81df7b1": "cmpl-b782edf3b81df7b1-0-acfff4ec",
+        "cmpl-bf94a49938e3f40b": "cmpl-bf94a49938e3f40b-0-a47ae256"
+      },
+      "live_release_verified": true
+    }
+  },
+  "initial_live_release_audit": {
+    "operation": "exec-000000000000099d",
+    "exit": 1,
+    "error": "strict port bind EADDRINUSE after other checks; retained unchangedgate failure"
+  },
+  "fresh_followup": {
+    "operation": "exec-00000000000009a0",
+    "listeners": 0,
+    "connections": 0,
+    "strict_bind": true,
+    "owned_container_absent": true,
+    "note": "Observed later port-free state; no port mutation/source change; precise initial transient TCP cause not proven"
+  },
+  "matrix": {
+    "valid": 1,
+    "total": 12,
+    "running": "G1/R1 exact09a6",
+    "not_started": 10
+  },
+  "decision": "one valid timed/mechanism phase; not optimization acceptance until matched G1 and full progression/quality/lifecycle",
+  "next": "Do not rerun oldroot; G1running prevents repeating G3 live-release checks now"
+}

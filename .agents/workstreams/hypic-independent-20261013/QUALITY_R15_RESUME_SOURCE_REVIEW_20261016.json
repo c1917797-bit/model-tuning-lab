@@ -1,0 +1,29 @@
+{
+  "schema": "quality-r15-resume-source-review/v1",
+  "source_checkpoint": "c77af31f8e944aa603f9af7ad68cc5e5eba98be7",
+  "inputs": {
+    "operation": "exec-0000000000000990",
+    "path": "/cache/cch/hypic-independent-20261013/quality-token-streams-r3/inputs.json",
+    "sha256": "2f61c72fe1d8b3cb7f468e670674764e89a471da8ea229d07f3c87dff3d013c0",
+    "bytes": 13090169
+  },
+  "catalog": {
+    "path": "/cache/cch/hypic-independent-20261013/quality-token-streams-r3/catalog.json",
+    "sha256": "fb13827a063b32df1131e17bf4b29ea008380d55ab0a2e7debe8a845e30ed792",
+    "bytes": 8820011
+  },
+  "source_findings": [
+    "Catalog scheduler factory, retained-generation reader and defaultoff qualityworker entry ALREADY IMPLEMENTED; do not recreate them",
+    "Current formal_r15_tp4 bootstrap hardselects compact_bootstrap for anycompactmanifest; fullquality needs separatelybound quality_bootstrap entry",
+    "CompactLinearMaterialPool explicitly copies T/S/conv CPU; PublicChunkKV builds CPU tensors. Proposed largepublicpool budget is ordinary hostRAM, not unproven extraNPUallocation",
+    "Draft batch8 linear768MiB/KV2560MiB perrank passes previousmeta accounting only; actualretention/generation/evidencebudget needs realcatalog canary",
+    "Currentinputgeneration nonthinking1024/naturalEOS/127x3 perarm; botharms samebatch/producers/scorer; oldothercapresults notpoolable"
+  ],
+  "remaining": [
+    "freeze currentR15-core qualityconfig/manifest and explicitquality-bootstrap controller",
+    "source-bound bounded realcatalog pool/hotcoveragecanary afterperformanceviability",
+    "fullpaired381 eacharm independent per-ID hot/score/source/isolation/release",
+    "applicable GSM8K scope/executor and lifecycle remainunclosed"
+  ],
+  "scope": "source/data readiness review only, no NPU quality or pool acceptance"
+}

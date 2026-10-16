@@ -1,0 +1,21 @@
+{
+  "source_sha256": "d15ca77aa3a84f16b0de944c8250c39188b01bfb2d48bd307324bdf41a1546e2",
+  "actual_frozen_tokens": 32768,
+  "requests_per_snapshot": 12,
+  "tokens_copied_per_snapshot": 393216,
+  "repeats_ms_per_snapshot": [
+    112.53076900029555,
+    108.83002099872101,
+    111.27196100133006,
+    109.67870799941011,
+    108.49091099807993
+  ],
+  "median_ms_per_snapshot": 109.67870799941011,
+  "cpu_affinity": [
+    0
+  ],
+  "prior_cpu8_attempt": "0996 failed before Python due disallowedaffinity;0997 fresh allowed0-3 outside service112-191",
+  "scope": "CPU current function cost only, not service gain or attribution proof; no NPU workload or runtime mutation",
+  "operation": "exec-0000000000000999",
+  "decision": "unactivated diagnostic hypothesis only; first compare G1/G3; per-step fullprompt copy candidate opportunity not actual service wall-time attribution"
+}
