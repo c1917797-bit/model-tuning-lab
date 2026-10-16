@@ -1,0 +1,23 @@
+{
+  "schema": "hypic-r16-screen-host-readiness/v1",
+  "prerequisite": "09ff terminal and independent snapshot Canary audit PASS, then fresh device admission",
+  "targeted_audit": {
+    "operation": "exec-0000000000000a09",
+    "tests": 8,
+    "exit": 0
+  },
+  "static": {
+    "operation": "exec-0000000000000a0b",
+    "common_source_bindings": 147,
+    "live145unchanged": true,
+    "two_new_roots_absent": true
+  },
+  "contracts": [
+    "FORMAL_R16_20261016_G3_R1_CONTRACT.json",
+    "FORMAL_R16_20261016_G1_R1_CONTRACT.json"
+  ],
+  "auditor": "audit_r16_performance.py",
+  "device_run": false,
+  "no_old_baseline_reuse": true,
+  "full_goal_accepted": false
+}

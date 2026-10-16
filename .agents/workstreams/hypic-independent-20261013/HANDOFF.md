@@ -1,5 +1,11 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Next R16 full40 G3/R1 then freshG1/R1 PREPARED NOT STARTED; requires09ff
+independent Canary PASS plus fresh resource admission. Config probe0/performance
+true/snapshottrue, same147source map botharms; no R15 baseline reuse.8audit controls
+0a09/147binding checks0a0b PASS; all live145files unchanged. R16_MATCHED_SCREEN_HOST_READINESS_20261016.json.
+Terminal use audit_r16_performance.py; firstpair is screen, not full12/quality acceptance.
+
 CURRENT R16 snapshot Canary LIVE: exact exec-00000000000009ff on ma
 lgw_a6109c51076a4a2c9d2674ca5a8704a0 via primaryawmcp, checkpointd0a2a9c5.
 09fe08:38:15UTC fresh0-3empty/portsfree/145sources/image/model/input/newrootPASS.
