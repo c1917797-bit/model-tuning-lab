@@ -1,3 +1,16 @@
+# LATEST delivery164 contracts and catalogR3 preparation
+
+LIFECYCLE_DELIVERY_R16_*_R1_CONTRACTs freeze same164sources/newcontroller and
+standardadapter;0b5d sourceclosure/config-onlyCLI/officialimage defaultunset+0
+startup checksPASS withoutdevices/network/model. No lifecycle NPUrun; M3/M4/M5
+prerequisites unchanged. Old147/159/163/156bindings retained; do notedit.
+0b5a terminal13empty snapshots12:00:14–12:03:27UTC/193s,noallocation/reservation.
+QUALITY_R16_CATALOG_CANARY_R3_CONTRACT.json preparednewroot catalog-quality-r16-canary-r3,
+same159sources/17boundedprotocol. Resourcepremise changedafterpriorlongNPU3occupancy;
+freshdirect/actualidle/ports/source/image/input/newrootadmission STILLrequired.
+Noownedjob/observer now. R2failure/rootimmutable; neverreuseorblindrerun.
+Latesthuman deadlineOct17T06:48:09Z;fullgoalactive/incomplete.
+
 # CURRENT readonly0b5a live and delivery lifecycle wiring HOSTONLY
 
 0b5a is readonly600s observer/180sampledidlecondition,noallocation/reservation.

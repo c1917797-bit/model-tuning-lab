@@ -1,0 +1,46 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "standard-delivery lifecycle164 source closure",
+  "static": {
+    "operation": "exec-0000000000000b5d",
+    "exit": 0,
+    "result": {
+      "source_closure": [
+        {
+          "stage": "disabled",
+          "sources": 164,
+          "raw_absent": true,
+          "configuration_only": true
+        },
+        {
+          "stage": "enabled",
+          "sources": 164,
+          "raw_absent": true,
+          "configuration_only": true
+        },
+        {
+          "stage": "uninstalled",
+          "sources": 164,
+          "raw_absent": true,
+          "configuration_only": true
+        }
+      ],
+      "shared_maps": true,
+      "wrapper_runtime_manifest_join": true,
+      "official_image_disabled_controls": [
+        null,
+        "0"
+      ],
+      "device_mapping": [],
+      "model_loaded": false,
+      "scope": "HOST/configuration and no-device official-image disabled startup only"
+    }
+  },
+  "scope": "Host/config-only/no-device official-image defaultdisabled controls; no real lifecycle proof",
+  "prerequisites": "M3catalog/M4matchedperformance/M5pairedquality still required before lifecycle",
+  "contracts": [
+    "LIFECYCLE_DELIVERY_R16_DISABLED_R1_CONTRACT.json",
+    "LIFECYCLE_DELIVERY_R16_ENABLED_R1_CONTRACT.json",
+    "LIFECYCLE_DELIVERY_R16_UNINSTALLED_R1_CONTRACT.json"
+  ]
+}

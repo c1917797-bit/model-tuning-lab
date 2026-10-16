@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "readonly-resource-observer-and-delivery-freeze-preparation",
+  "execution_state": "catalog-R3-prepared-after-new-idle-observation",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll exact readonly0b5a onma; noownedNPUjob. Freeze successor delivery lifecycle source bindings/contracts without touchingold147/159/163/156. R2catalogfailureimmutable; newdeviceattemptneedsnewcontract/rootandresourcepremise,neverblindrerun. LatestdeadlineOct17T06:48:09Z.",
+  "next_action": "Freshdirect/source159/image/model/inputcatalog/newroot/actualphysical0-3+ports admission then ONE QUALITY_R16_CATALOG_CANARY_R3_CONTRACT.json if trulyidle.0b5a13empty/193s ischangedresourcepremise/notreservation;R2failureimmutable. Nootherdevicejob. Newdeliverylifecycle164boundcontracts prospective after M3/M4/M5;do notskipgates.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -196,10 +196,10 @@
     ]
   },
   "publication": {
-    "state": "1b6a6a8 liveverified;deliverywiring checkpoint pending",
-    "published_commit": "1b6a6a884d13d5949b7d6dec71a1a3be243259db",
+    "state": "e50aa9a liveverified;delivery164contracts/R3 preparation checkpoint pending",
+    "published_commit": "e50aa9ab794fac0cf4c6960223a6af0945a01d39",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "note": "No NPU or fullgoal acceptance."
+    "note": "No NPUlifecycle/finalgoal acceptance."
   },
   "math_reference": {
     "state": "cpu-reference-passed",
@@ -283,7 +283,8 @@
   },
   "resource_observation": {
     "operation": "exec-0000000000000b5a",
-    "state": "RUNNING readonly600s/180sampledidlecondition;noallocation/reservation"
+    "state": "TERMINALexit0;13empty snapshots/193sampledidleseconds;noreservation",
+    "report": "RESOURCE_OBSERVATION_0B5A_20261016.json"
   },
   "lifecycle_preparation": {
     "controller": "lifecycle_r16_tp4.py",
@@ -304,12 +305,12 @@
     ]
   },
   "delivery_adapter": {
-    "state": "DRAFT_HOSTONLY successorcontroller/audits/13focused0b57+836CPU0b58PASS;nofrozennewcontracts/NPUrun",
+    "state": "SOURCEBOUND_PROSPECTIVE164files/static0b5dPASS;defaultdisabled officialimage no-device checksPASS;noNPUlifecycle",
     "source_checkpoint": "112c3e5961a03ea18295636d8497d53324e991f8",
     "report": "DELIVERY_LIFECYCLE_WIRING_HOST_READINESS_20261016.json",
     "remaining": [
-      "Freeze new explicit delivery lifecycle stage contracts with complete source closure (old156 unchanged)",
-      "All missing device performance/quality/lifecycle gates"
+      "All missing device performance/quality/lifecycle gates",
+      "Fresh actual admission before any future lifecycle stage"
     ],
     "image_attestation": {
       "operation": "exec-0000000000000b4b",
@@ -317,6 +318,11 @@
       "cann_toolkit_install_version": "9.1.0",
       "runner_source_unchanged": true,
       "device_runtime_verified": false
-    }
+    },
+    "contracts": [
+      "LIFECYCLE_DELIVERY_R16_DISABLED_R1_CONTRACT.json",
+      "LIFECYCLE_DELIVERY_R16_ENABLED_R1_CONTRACT.json",
+      "LIFECYCLE_DELIVERY_R16_UNINSTALLED_R1_CONTRACT.json"
+    ]
   }
 }
