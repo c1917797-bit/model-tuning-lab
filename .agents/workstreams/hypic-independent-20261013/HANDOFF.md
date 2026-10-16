@@ -1,3 +1,14 @@
+# CURRENT R16 G1/R1 ATTEMPT3 LIVE — R4 accepted/released
+
+Exactma exec-0000000000000bd4 RUNNING; raw /cache/cch/hypic-independent-20261013/formal-r16-20261016-g1-r1-attempt3.
+Sourcecheckpointf7422ca published/liveverified.0bd3fresh13:01:47UTC direct admission
+PASS:147sameG3sources/image/model/tokenartifact/newroot/physical0-3empty/8233+HCCLfree.
+Poll SAMEhandle/root;neverrestart whilelive/unclear;no edit147boundfiles/seconddevicejob.
+Terminal audit_r16_performance.py --contract FORMAL_R16_20261016_G1_R1_ATTEMPT3_CONTRACT.json --live-release.
+R4bounded17accepted0bce/414clean/exactrelease;notfullquality/speed/lifecycle.
+OldG1attempt1/2externalfailures immutable;matchedspeed notyetdecided.
+HumanstopOct17T06:48:09Z unchanged;fullgoalactive/incomplete.
+
 # LATEST R4 BOUNDED17 INDEPENDENTLY ACCEPTED
 
 17public/17private completed; independent0bce exit0 accepts17/17 same-step fourrank
