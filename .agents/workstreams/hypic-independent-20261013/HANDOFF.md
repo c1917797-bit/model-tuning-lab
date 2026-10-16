@@ -1,4 +1,16 @@
-# CURRENT R18 R2 REPAIR919CPU PASS; NEW CONTRACT PREPARED, NOT STARTED
+# CURRENT R18 R2 NUMERICAL CANARY LIVE; NO TERMINAL
+
+Exact ma exec-0000000000000dd8 started18:47UTC from published20993444.
+Admission0dd7 validates169source/161runtime/image/model/input/actual0-3empty/8233+
+HCCLfree/newroot. Contract C1_PARTITIONED_R18_CANARY_R2_CONTRACT.json.
+Raw /cache/cch/hypic-independent-20261013/c1-partitioned-r18-canary-r2.
+Poll samepeer/handle/root; neverrestart running/unclear and no169bound edits.
+Terminal audit_c1_partitioned_canary.py --contract C1_PARTITIONED_R18_CANARY_R2_CONTRACT.json
+--live-release. Actual partition visit counts/numericshadow/allfour48C1+16C2/source/
+physical/continuousisolation/exactrelease required. Not speed/quality/lifecycle.
+R1 remainsrejected, no oldroot reuse. Cutoff2026-10-17T06:48:09Z.
+
+# HISTORICAL R18 R2 HOST READINESS
 
 0dd0 complete919CPU PASS including formerlyfailing actual-hook option combination.
 Repair merges probe_factory instead of replacing partitioned_render options.
