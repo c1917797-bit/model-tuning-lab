@@ -1,4 +1,16 @@
-# CURRENT R17 NATIVE FULL40 LIVE; ASYNC/BLOCKING VALID, NO HYPIC GAIN CLAIM
+# CURRENT R17 THREE-ARM FIRST SCREEN TERMINAL; WHOLE HYPIC NEGATIVE
+
+Native0d7f exit0; independent0d9d PASS40/40,159sources,435clean isolation,
+algorithm absent, explicit physical0-3 mapping and live exact release.
+TPOT282.320370ms,TTFTP95343657.499470ms. Async vs native +9.354675% TPOT,
++16.288034% TTFTP95; blocking vs native +10.743989%/+19.080093%.
+Report R17_THREE_ARM_FIRST_SCREEN_20261016.json. All old roots immutable.
+No owned model job. Do not expand unchanged negative R17 into repeated matrix.
+Next one source-backed integration-cost repair, independently gated; no full quality,
+lifecycle, overall optimization or29-functional acceptance yet. Deadline remains
+2026-10-17T06:48:09Z under latest human24h authority.
+
+# HISTORICAL R17 NATIVE FULL40 LIVE; SUPERSEDED ABOVE
 
 LIVE ma exec-0000000000000d7f started17:38UTC, contract
 FORMAL_R17_TRANSFER_NATIVE_R1_CONTRACT.json, checkpoint2fb63459alreadyremoteverified.

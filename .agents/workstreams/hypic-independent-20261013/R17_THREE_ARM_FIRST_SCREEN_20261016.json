@@ -1,0 +1,66 @@
+{
+  "schema": "hypic-r17-three-arm-first-screen/v1",
+  "date": "2026-10-16",
+  "scope": "single-round same-protocol full40; not three-round optimization or quality acceptance",
+  "native": {
+    "controller": "exec-0000000000000d7f",
+    "independent_audit": "exec-0000000000000d9d",
+    "terminal_unit_valid": true,
+    "timing": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 282.3203701599127,
+      "ttft_p95_ms": 343657.4994699913,
+      "tpot_p95_ms": 294.50559207032256
+    },
+    "isolation_samples": 435,
+    "source_bindings": 159,
+    "raw_sha256": {
+      "result.json": "c791bc5d39adbd5abba439dc26835e4c6e5406823140863d54af2dd8308526f8",
+      "events.jsonl": "67eef51aab8db52e161be297bc875b544473ee0380c8979fe211f603f2c46fa5",
+      "performance-unit.json": "8abb25602cf8c12494c44198ec8dd84838defbe798e4e318bc99878d761a7978",
+      "release.json": "f3fca24a141127589250343ed9e1c4ae3e1c9d5f29c999880e0091e794887326"
+    },
+    "scope": "one same-protocol R17 full40 arm; attribution/repetitions/quality/lifecycle separate",
+    "live_release_verified": true,
+    "snapshot_timed_policy_verified": true,
+    "transfer_treatment": "native",
+    "timed_transfer_policy_verified": true
+  },
+  "blocking": {
+    "report": "R17_TRANSFER_BLOCKING_R1_TERMINAL_AUDIT_20261016.json",
+    "weighted_tpot_ms": 312.6528401716329,
+    "ttft_p95_ms": 409227.669039974,
+    "tpot_p95_ms": 331.9116839160188
+  },
+  "async": {
+    "report": "R17_TRANSFER_ASYNC_R1_TERMINAL_AUDIT_20261016.json",
+    "weighted_tpot_ms": 308.7305232846703,
+    "ttft_p95_ms": 399632.5505899731,
+    "tpot_p95_ms": 327.6113742968505
+  },
+  "delta": {
+    "tpot": {
+      "async_vs_native_percent": 9.354675013283064,
+      "blocking_vs_native_percent": 10.743989176034008
+    },
+    "ttft": {
+      "async_vs_native_percent": 16.288034221953485,
+      "blocking_vs_native_percent": 19.08009272927518
+    },
+    "p95": {
+      "async_vs_native_percent": 11.241138748436018,
+      "blocking_vs_native_percent": 12.70131802345007
+    }
+  },
+  "decision": "NEGATIVE_FIRST_SCREEN_DO_NOT_EXPAND_UNCHANGED",
+  "next": "Review one evidenced integration overhead; new default-off hypothesis and numerical controls before successor NPU contract. Keep all old roots immutable.",
+  "source_observation": "C1 run_packed_c1 invokes shared.state over all packed windows for prefix terminals; shared.render invokes shared.state again. Dependency of live prefix on cached composition is necessary; redundant portions and removable cost not yet experimentally established.",
+  "remaining": [
+    "G1-G4 three matched rounds with accepted speed",
+    "127x3 per-arm naturalEOS paired quality",
+    "disable/uninstall/restart lifecycle",
+    "Paper-to-Ascend and29 Skill full functional acceptance"
+  ],
+  "full_goal_complete": false
+}

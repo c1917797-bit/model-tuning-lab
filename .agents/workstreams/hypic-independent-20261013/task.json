@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R17-transfer-native-full40-running",
+  "execution_state": "R17-three-arm-first-screen-negative",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "Own native full40 d7f/CID5e0a493d... physical0-3 TP4/8233; algorithm package not enabled. Continuous isolation/exact controller cleanup; no159bound edits or restart while live."
+    "state": "Native0d7f terminal; independent0d9d verifies exact own release. No owned model job."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll exact ma0d7f/root; running/unclear neverrestart. Terminal audit_r17_transfer_performance.py --contract FORMAL_R17_TRANSFER_NATIVE_R1_CONTRACT.json --live-release; require40valid,source159,algorithmmarkersabsent,physical/isolation/exactrelease. Compare all3 same-protocol arms after independentnative validity. Async/blocking single-round TPOT-1.2545%,TTFTP95-2.3447% small/not robust; do not call HYPICsuccess. Ifwhole directionnegative do notexpandunchanged; investigate evidenced source cost withnew contract. Remaining full12matrix/381-perarm quality/lifecycle/29functional incomplete.",
+  "next_action": "Review one evidenced integration overhead; new default-off hypothesis and numerical controls before successor NPU contract. Keep all old roots immutable. Full12 matrix/381 per-arm quality/lifecycle remain incomplete. No unchanged R17 expansion.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,7 +215,7 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "RUNNING exact controller/service-start confirmed; no terminal",
+    "state": "TERMINAL_VALID_INDEPENDENT_AUDIT",
     "operation": "exec-0000000000000d7f",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
@@ -224,7 +224,8 @@
     "checkpoint": "2fb63459ac1e31800788f29175e0d87db04ee9b2",
     "admission_operation": "exec-0000000000000d7d",
     "owned_container": "5e0a493d96c38dcc4f2d02f69f420b2dc955da761d9742c694a332429692c3b7",
-    "transfer_treatment": "native"
+    "transfer_treatment": "native",
+    "independent_audit": "exec-0000000000000d9d"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -345,13 +346,14 @@
     "independent_audit": "exec-0000000000000d1d"
   },
   "current_r17_transfer_attribution": {
-    "state": "blocking/R1 and async/R1 valid; native/R1 running",
+    "state": "all three first-screen arms independently valid; whole HYPIC negative",
     "plan": "R17_TRANSFER_ATTRIBUTION_PLAN_20261016.json",
     "valid_phases": [
       "blocking/R1",
-      "async/R1"
+      "async/R1",
+      "native/R1"
     ],
-    "running": "native/R1",
+    "running": null,
     "remaining_not_started": [],
     "scope": "extra blocking diagnosis not an accepted G1-G4 matrix slot",
     "blocking_report": "R17_TRANSFER_BLOCKING_R1_TERMINAL_AUDIT_20261016.json",
@@ -360,6 +362,7 @@
       "weighted_tpot_ms": -1.2545278286323516,
       "ttft_p95_ms": -2.3446895642492875,
       "tpot_p95_ms": -1.2956186321709453
-    }
+    },
+    "decision_report": "R17_THREE_ARM_FIRST_SCREEN_20261016.json"
   }
 }
