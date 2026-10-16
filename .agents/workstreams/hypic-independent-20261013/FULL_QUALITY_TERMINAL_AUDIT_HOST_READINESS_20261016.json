@@ -1,0 +1,30 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "audit_full_quality_terminal.py",
+  "focused": {
+    "operation": "exec-0000000000000aaa",
+    "tests": 29,
+    "exit": 0,
+    "scope": "9terminalrecord+14cohort+6paircontrols"
+  },
+  "regression": {
+    "operation": "exec-0000000000000aab",
+    "tests": 706,
+    "exit": 0
+  },
+  "features": [
+    "full381 terminal/cohort/journal/rescoring",
+    "sameinput catalog membership andgenerationpolicy",
+    "source-bound controller andpackage",
+    "HYPIC381same-stepfourrank48/16hot andpolicy/activation",
+    "nativebaseline treatmentabsence andphysicalownercgroupcoverage withoutinventedrankassignment",
+    "continuousisolation/exactCIDrelease/optionalstrictlivecheck"
+  ],
+  "limitations": [
+    "No actual full381qualityrawroot exists",
+    "Newterminal9controls test pure record boundary, not full raw-directory integration",
+    "Thinking2048needs separateprotocol; this auditor explicitlynonthinking1024",
+    "Pairedquality acceptance NOT_DECIDED, notdeploymentpermission"
+  ],
+  "next": "Host-only full raw-directory composition and full-quality twoarm contracts; catalogR2deviceCanary remainsfirst realqualityruntimegate. Resourceobserver0aa1live, externalstablewindow coordinationpending. No ownedNPUjob."
+}
