@@ -1,3 +1,12 @@
+# LATEST readonly0ace terminal — no owned job or observer
+
+0aceexit0,38samples10:43:21–10:53:19UTC,intermittentphysical0/1/2PIDs;
+no180ssampledidle,noreservation/noallocation. Preserve RESOURCE_OBSERVATION_0ACE_20261016.json.
+Do notinferallPIDownersfromthisPID-onlyobservation. NoCanarylaunch.
+ContinueofflineM6audit/packagepreparation;R2catalogCanary remainsnextdevice
+onlyafterfreshdirect/source/actualidle/newrootadmission. Stablewindowcoordination
+pending; noforeignstop/modification,4-7prohibited. DeadlineOct17T06:48:09Z.
+
 # CURRENT readonly0ace observer and boundedM3priority
 
 0ace confirmedlive;readonly/noNPUallocation/noreservation. Noownedmodeljob.
