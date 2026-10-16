@@ -1,5 +1,16 @@
 # CURRENT R17 C1 ASYNC MATERIAL HOST-READY; NO NPU CLAIM
 
+LIVE overrides preparation text:ma exec-0000000000000d00 launched16:15UTC,
+checkpoint61bc4e2a alreadyremoteverified; admission0cff156source/image/model/input/
+physical0-3empty/8233+HCCLfree/newroot/cache10.3GiB PASS.
+Raw /cache/cch/hypic-independent-20261013/c1-async-material-r17-canary-r1.
+ExactownCID3b67067f96f5938190cc23cae8a400b9ae78a3611323cc73d5e64068332a7e0b
+declares onlyphysical0-3. Terminalnotobserved. Pollsame d00/root; neverrestart
+because timeout/handle expiry; do notedit156boundsourcefiles whilelive.
+Terminal: audit_c1_async_material.py --contract C1_ASYNC_MATERIAL_R17_CANARY_R1_CONTRACT.json
+--live-release. Fullcopybytes ofobservedleases +48/16fourrank +source/physical/
+continuousisolation/exactrelease required. No speed/fullquality/lifecycle claim.
+
 LATEST copy-oracle checkpoint d4513d81:883 hosttests0cf8 PASS, full-byte audit joins
 rank/PID/source/step/layer/generation andpublicgeneration to every completed hot C1.
 New R17CONTROL/PERFORMANCE differ only c1_async_material_transfer; COPY_CANARY adds

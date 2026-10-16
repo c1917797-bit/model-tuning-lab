@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R17-C1-async-material-host-ready-NPU-unverified",
+  "execution_state": "R17-C1-async-material-copy-canary-running",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "No owned modeljob or live parser. Native parser590ae29b exited0; fourrank artifact audit0ce0 passed. No restart."
+    "state": "Own bounded TP4 copy Canary d00 running in exactCID3b67067f... mappingsphysical0-3only. Continuous controller isolation guard; foreign tasks untouched."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Freeze new R17 disabled/enabled source-bound packages and bounded exact-copy plus integrated fourworker numerical/ownership audit before performance. c1_async_material_transfer is defaultfalse, only primary new treatment; current frozen R16 manifests stale after 3 runtime source changes and MUST NOT launch. Existing R16 c2_layer_completion_barrier=true is held unchanged, not new bundled treatment. 869 complete host tests0ceb,29structure0cec passed. No NPU activation/benefit claim. Keep sink component unactivated. Fullmatrix/quality/lifecycle incomplete.",
+  "next_action": "Poll exact ma exec-0000000000000d00 and immutable c1-async-material-r17-canary-r1 root; running/unclear never restart or change 156 bound sources. Terminal independently audit audit_c1_async_material.py --contract C1_ASYNC_MATERIAL_R17_CANARY_R1_CONTRACT.json --live-release, every completed private C1 hot receipt must join full-byte same rank/PID/source/step/layer/generation copy evidence and public generation. No speed/fullquality/lifecycle claim. Only after valid numerical/mechanism/source/physical/isolation/release result freeze matched transfer control/performance failfast.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -196,10 +196,10 @@
     ]
   },
   "publication": {
-    "state": "4790b799 liveverified R4contract; mainunchanged",
-    "published_commit": "4790b799de321b6ad28493272452100fee39535e",
+    "state": "61bc4e2a liveverified workbranch diagnostics/contracts; no NPU acceptance, main unchanged",
+    "published_commit": "61bc4e2a53dc5371a9dee926a418da9f66db885e",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "note": "Scope-labelled diagnostic contract; not NPU acceptance."
+    "note": "883 hosttests and frozen bounded transfer-oracle contract; not speed,quality,29functional or integration acceptance"
   },
   "math_reference": {
     "state": "cpu-reference-passed",
@@ -215,14 +215,15 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL raw0cae/source149/physical/isolation201/release accepted; parser590ae29b exited0; independent fourrank parsed artifacts0ce0 accepted. No owned live modeljob.",
-    "operation": "exec-0000000000000cae",
+    "state": "RUNNING confirmed exact controller and own service-start; terminal not observed",
+    "operation": "exec-0000000000000d00",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "contract": "PROFILE_G1_R16_EARLYMIXED_R1_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/profile-g1-r16-earlymixed-r1",
-    "checkpoint": "70a2bab927e693c508e6d1bbe90ab864f5ef053c",
-    "admission_operation": "exec-0000000000000cac"
+    "contract": "C1_ASYNC_MATERIAL_R17_CANARY_R1_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/c1-async-material-r17-canary-r1",
+    "checkpoint": "61bc4e2a53dc5371a9dee926a418da9f66db885e",
+    "admission_operation": "exec-0000000000000cff",
+    "owned_container": "3b67067f96f5938190cc23cae8a400b9ae78a3611323cc73d5e64068332a7e0b"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
