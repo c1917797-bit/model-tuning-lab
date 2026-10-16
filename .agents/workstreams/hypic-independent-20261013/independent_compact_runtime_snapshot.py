@@ -70,10 +70,13 @@ def capture_compact_runtime(runner,requests):
 
 
 def activate_compact_runner(*,enabled=False,allow_mixed=False,emit=None,request_limit=128,
-                            prefill_prompt_snapshot=False):
+                            prefill_prompt_snapshot=False,prompt_snapshot_probe_batches=0):
     if not enabled:return lambda:None
     if type(prefill_prompt_snapshot)is not bool:
         raise ValueError("explicit prefill prompt snapshot boolean required")
+    if (type(prompt_snapshot_probe_batches)is not int or not 0<=prompt_snapshot_probe_batches<=2
+            or prompt_snapshot_probe_batches and (not prefill_prompt_snapshot or not callable(emit))):
+        raise ValueError("bounded opt-in snapshot diagnostic requires treatment/evidence sink")
     import vllm_ascend.ops
     from vllm_ascend.worker.model_runner_v1 import NPUModelRunner
     from independent_runtime_adapter import freeze_native_runner,verify_runner
@@ -90,8 +93,23 @@ def activate_compact_runner(*,enabled=False,allow_mixed=False,emit=None,request_
         if not allow_mixed and any(r.scheduled_tokens<=1 for r in requests):return
         if allow_mixed and all(r.scheduled_tokens<=1 for r in requests):return
         CURRENT_RUNTIME_SNAPSHOT.set(capture_compact_runtime(runner,requests))
+    probe_seen=0
     def freeze(runner,args,kwargs):
+        nonlocal probe_seen
+        probe=None
+        if probe_seen<prompt_snapshot_probe_batches:
+            ids=tuple(runner.input_batch.req_ids)
+            scheduled=args[1] if len(args)>1 else kwargs["num_scheduled_tokens"]
+            counts=tuple(int(x) for x in scheduled[:len(ids)])
+            computed=runner.input_batch.num_computed_tokens_cpu
+            eligible=any(runner.requests[rid].prompt_token_ids is not None
+                and not runner.requests[rid].mm_features
+                and int(computed[i])>=len(runner.requests[rid].prompt_token_ids)
+                for i,rid in enumerate(ids))
+            if ids and counts and all(x==1 for x in counts) and eligible:
+                probe_seen+=1;probe=emit
         return freeze_native_runner(runner,args,kwargs,
-                                    prefill_prompt_snapshot=prefill_prompt_snapshot)
+                                    prefill_prompt_snapshot=prefill_prompt_snapshot,
+                                    prompt_snapshot_probe=probe)
     return install_runner_context(NPUModelRunner,freeze,enabled=True,
                                   verify_source=verify_runner,after_prepare=capture)

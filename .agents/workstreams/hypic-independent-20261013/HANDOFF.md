@@ -1,5 +1,12 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Newest host-only probe: explicit prompt_snapshot_probe_batches default0/max2 per
+worker; only completed single-token decode batches consume budget. Compare original
+and prefill-only snapshots on same metadata, alternate order, retain prefill equality,
+emit rank/step/request IDs and threadCPU/wall times without token content.583CPU09ee
+PASS. No new device run. PROMPT_SNAPSHOT_PROBE_HOST_READINESS_20261016.json.
+Need independent four-rank receipt audit and fresh source-bound Canary package next.
+
 Latest prospective successor: prefill_prompt_snapshot boolean wired defaultfalse
 through activation->runner->freeze_native_runner; installation receipt records switch.
 Only completed single-token decode omits repeated prompt copy; prefill unchanged.

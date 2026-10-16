@@ -1,0 +1,26 @@
+{
+  "schema": "hypic-snapshot-opportunity-host-readiness/v1",
+  "tests": {
+    "operation": "exec-00000000000009ee",
+    "count": 583,
+    "exit": 0
+  },
+  "probe": {
+    "default_batches": 0,
+    "max_batches_per_worker": 2,
+    "thread_clock": "thread_time_ns",
+    "wall_clock": "perf_counter_ns",
+    "order": "alternating original/optimized",
+    "tokens_logged": false,
+    "scope": "same-metadata actual runner callback when opted in; host tests only so far"
+  },
+  "production_snapshot_switch_default": false,
+  "new_device_run": false,
+  "remaining": [
+    "strict independent four-rank/step/source probe audit",
+    "new config/manifest/contract/immutable raw root",
+    "bounded same-shape integrated correctness and actual worker opportunity",
+    "matched successor performance then full quality/lifecycle"
+  ],
+  "old_manifest_launch_allowed": false
+}

@@ -75,7 +75,8 @@ def verify_runner(cls):
         raise ValueError("official runner source drift")
     if list(inspect.signature(cls._prepare_inputs).parameters)!=['self','scheduler_output','num_scheduled_tokens']:
         raise ValueError("prepare ABI drift")
-def freeze_native_runner(runner,args,kwargs,*,prefill_prompt_snapshot=False):
+def freeze_native_runner(runner,args,kwargs,*,prefill_prompt_snapshot=False,
+                         prompt_snapshot_probe=None):
     if type(prefill_prompt_snapshot)is not bool:
         raise ValueError("explicit prefill prompt snapshot boolean required")
     from vllm.distributed import get_tp_group
@@ -86,7 +87,14 @@ def freeze_native_runner(runner,args,kwargs,*,prefill_prompt_snapshot=False):
     scheduled=tuple(int(x) for x in scheduled[:n])
     computed=tuple(int(x) for x in runner.input_batch.num_computed_tokens_cpu[:n])
     from independent_prompt_snapshot import freeze_prompt_tokens
-    if prefill_prompt_snapshot:
+    probe_event=None
+    if prompt_snapshot_probe is not None:
+        if not prefill_prompt_snapshot or not callable(prompt_snapshot_probe):
+            raise ValueError("snapshot probe requires explicit enabled treatment")
+        from independent_prompt_snapshot_probe import measure_prompt_snapshot
+        prompts,probe_event=measure_prompt_snapshot(ids,runner.requests,computed,scheduled,
+            reverse=bool(steps.get(runner,0)%2))
+    elif prefill_prompt_snapshot:
         from independent_prefill_prompt_snapshot import freeze_prefill_prompt_tokens
         prompts=freeze_prefill_prompt_tokens(ids,runner.requests,computed_tokens=computed,
             scheduled_tokens=scheduled,enabled=True)
@@ -96,6 +104,8 @@ def freeze_native_runner(runner,args,kwargs,*,prefill_prompt_snapshot=False):
     boundaries=tuple(int(x) for x in runner.query_start_loc.cpu[:n+1].tolist())
     with lock:
         step=steps.get(runner,0)+1;steps[runner]=step
+    if probe_event is not None:
+        prompt_snapshot_probe(dict(probe_event,rank=group.rank_in_group,step=step))
     return freeze_request_slices(ids,computed,scheduled,boundaries,rank=group.rank_in_group,step=step)
 def activate_context(*,enabled=False):
     if not enabled:return lambda:None
