@@ -1,0 +1,378 @@
+{
+  "schema": "hypic-profile-rank-screen/v1",
+  "rank0": {
+    "rank": 0,
+    "timeline": {
+      "path": "/cache/cch/hypic-independent-20261013/profile-g3-r16-privatewarm-r1-analysis-r2/rank0_58_20261016135336980_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+      "sha256": "34b3bd9ce7f4cb1835b0018b37703a36ebd32f6fd697db756ff9539d82df7252",
+      "kernel_rows": 23016,
+      "absolute_origin_us": "1792158817147985.720",
+      "kernel_envelope_us": 3603032.949,
+      "all_kernel_union_us": 3596712.658000003,
+      "uncovered_envelope_us": 6320.2909999969415,
+      "uncovered_fraction": 0.0017541585351727356,
+      "communication_exclusive_us": 3118679.2409999995,
+      "largest_uncovered_gaps_us": [
+        52.861,
+        52.14100000006147,
+        51.66099999984726,
+        51.600999999791384,
+        51.56099999998696,
+        51.34099999978207,
+        50.90100000053644,
+        50.86100000049919,
+        50.82099999953061,
+        50.58099999977276,
+        50.50099999993108,
+        50.161000000021886,
+        30.819999999832362,
+        18.74099999992177,
+        18.721000000019558,
+        18.46099999989383,
+        18.320999999996275,
+        18.300000000279397,
+        18.299999999813735,
+        18.28000000002794
+      ],
+      "types": [
+        {
+          "type": "hcom_allReduce_",
+          "communication_name_match": true,
+          "calls": 3096,
+          "summed_us": 6221710.571999971,
+          "union_us": 3110855.2859999994
+        },
+        {
+          "type": "MatMulV2",
+          "communication_name_match": false,
+          "calls": 3660,
+          "summed_us": 261887.07499999396,
+          "union_us": 261887.07499999396
+        },
+        {
+          "type": "FusedInferAttentionScore",
+          "communication_name_match": false,
+          "calls": 192,
+          "summed_us": 109981.7839999992,
+          "union_us": 109981.7839999992
+        },
+        {
+          "type": "RecurrentGatedDeltaRule",
+          "communication_name_match": false,
+          "calls": 576,
+          "summed_us": 23680.3469999971,
+          "union_us": 23680.3469999971
+        },
+        {
+          "type": "CausalConv1d",
+          "communication_name_match": false,
+          "calls": 576,
+          "summed_us": 10873.601999999024,
+          "union_us": 10873.601999999024
+        },
+        {
+          "type": "Transpose",
+          "communication_name_match": false,
+          "calls": 588,
+          "summed_us": 10870.459999999468,
+          "union_us": 10870.459999999468
+        },
+        {
+          "type": "Slice",
+          "communication_name_match": false,
+          "calls": 4416,
+          "summed_us": 10007.236000043282,
+          "union_us": 10007.236000043282
+        },
+        {
+          "type": "ConcatD",
+          "communication_name_match": false,
+          "calls": 576,
+          "summed_us": 8229.551999996329,
+          "union_us": 8229.551999996329
+        },
+        {
+          "type": "hcom_allGather_",
+          "communication_name_match": true,
+          "calls": 24,
+          "summed_us": 15647.909999999916,
+          "union_us": 7823.954999999958
+        },
+        {
+          "type": "AddRmsNormBias",
+          "communication_name_match": false,
+          "calls": 1536,
+          "summed_us": 7277.390000001731,
+          "union_us": 7277.390000001731
+        },
+        {
+          "type": "SwiGlu",
+          "communication_name_match": false,
+          "calls": 768,
+          "summed_us": 5239.250000001339,
+          "union_us": 5239.250000001339
+        },
+        {
+          "type": "Add",
+          "communication_name_match": false,
+          "calls": 1944,
+          "summed_us": 4036.946000015319,
+          "union_us": 4036.946000015319
+        },
+        {
+          "type": "FusedGdnGating",
+          "communication_name_match": false,
+          "calls": 576,
+          "summed_us": 3903.0959999977495,
+          "union_us": 3903.0959999977495
+        },
+        {
+          "type": "Index",
+          "communication_name_match": false,
+          "calls": 216,
+          "summed_us": 3472.9850000003808,
+          "union_us": 3472.9850000003808
+        },
+        {
+          "type": "_layer_norm_fwd_1pass_kernel_npu",
+          "communication_name_match": false,
+          "calls": 576,
+          "summed_us": 3147.4489999916404,
+          "union_us": 3147.4489999916404
+        },
+        {
+          "type": "l2norm_fwd_kernel2",
+          "communication_name_match": false,
+          "calls": 1152,
+          "summed_us": 2615.379000001005,
+          "union_us": 2615.379000001005
+        },
+        {
+          "type": "IndexCheck",
+          "communication_name_match": false,
+          "calls": 216,
+          "summed_us": 2308.045999998196,
+          "union_us": 2308.045999998196
+        },
+        {
+          "type": "ZerosLike",
+          "communication_name_match": false,
+          "calls": 576,
+          "summed_us": 2263.418999989284,
+          "union_us": 2263.418999989284
+        },
+        {
+          "type": "split_qkv_rmsnorm_mrope_kernel",
+          "communication_name_match": false,
+          "calls": 192,
+          "summed_us": 1655.6360000007262,
+          "union_us": 1655.6360000007262
+        },
+        {
+          "type": "_compute_slot_mapping_kernel",
+          "communication_name_match": false,
+          "calls": 12,
+          "summed_us": 1598.6329999998952,
+          "union_us": 1598.6329999998952
+        }
+      ],
+      "limits": [
+        "Kernel union is not critical-path removable cost.",
+        "Gaps may include CPU/compile/driver/synchronization/instrumentation or incomplete capture; no root cause from gaps alone.",
+        "Communication name matching is a screening classifier, not collective ownership/causality.",
+        "Never sum ranks or group unions; overlapping work counted once only in all_kernel_union_us.",
+        "Profiled64-token timing is not formal1024 service performance."
+      ]
+    },
+    "top_host_self": [
+      {
+        "name": "vllm::qwen_gdn_attention_core",
+        "calls": 576,
+        "self_us": 503898.1899999996,
+        "inclusive_us": 976470.6000000007
+      },
+      {
+        "name": "empty_tensor",
+        "calls": 27684,
+        "self_us": 216924.0300000009,
+        "inclusive_us": 216924.0300000009
+      },
+      {
+        "name": "LayerNormFn",
+        "calls": 576,
+        "self_us": 210267.15999999983,
+        "inclusive_us": 252291.11999999973
+      },
+      {
+        "name": "aten::copy_",
+        "calls": 6348,
+        "self_us": 149218.3300000001,
+        "inclusive_us": 202187.1300000001
+      },
+      {
+        "name": "c10d::allreduce_",
+        "calls": 1548,
+        "self_us": 115346.37999999998,
+        "inclusive_us": 166049.2899999999
+      },
+      {
+        "name": "vllm::all_reduce",
+        "calls": 1548,
+        "self_us": 108081.3599999999,
+        "inclusive_us": 284750.9
+      },
+      {
+        "name": "_C_ascend::npu_causal_conv1d_custom",
+        "calls": 576,
+        "self_us": 76294.56000000004,
+        "inclusive_us": 94894.52000000006
+      },
+      {
+        "name": "_C_ascend::npu_add_rms_norm_bias",
+        "calls": 1536,
+        "self_us": 71383.70999999992,
+        "inclusive_us": 142930.69999999975
+      },
+      {
+        "name": "aten::as_strided",
+        "calls": 18540,
+        "self_us": 70968.30999999991,
+        "inclusive_us": 70968.30999999991
+      },
+      {
+        "name": "aten::matmul",
+        "calls": 3660,
+        "self_us": 69950.94999999988,
+        "inclusive_us": 152765.21000000022
+      },
+      {
+        "name": "vllm::unquantized_gemm",
+        "calls": 3648,
+        "self_us": 68080.68000000008,
+        "inclusive_us": 291506.0500000003
+      },
+      {
+        "name": "vllm::triton_split_qkv_rmsnorm_mrope",
+        "calls": 192,
+        "self_us": 66986.79000000001,
+        "inclusive_us": 77649.82999999999
+      },
+      {
+        "name": "aten::view",
+        "calls": 10224,
+        "self_us": 56966.009999999995,
+        "inclusive_us": 56966.009999999995
+      },
+      {
+        "name": "vllm::unified_attention_with_output",
+        "calls": 192,
+        "self_us": 51330.56000000002,
+        "inclusive_us": 130007.34000000001
+      },
+      {
+        "name": "aclnnInplaceCopy",
+        "calls": 5892,
+        "self_us": 51123.19999999985,
+        "inclusive_us": 51123.19999999985
+      },
+      {
+        "name": "aclnnMatmul",
+        "calls": 3660,
+        "self_us": 42342.94999999992,
+        "inclusive_us": 42342.94999999992
+      },
+      {
+        "name": "aten::add",
+        "calls": 1956,
+        "self_us": 41713.73999999995,
+        "inclusive_us": 92323.03000000007
+      },
+      {
+        "name": "npu::npu_swiglu",
+        "calls": 768,
+        "self_us": 38863.039999999906,
+        "inclusive_us": 53161.39999999999
+      }
+    ],
+    "kernel_types": {
+      "Fill": 36,
+      "IndexCheck": 216,
+      "Index": 216,
+      "Cast": 684,
+      "Add": 1944,
+      "_compute_slot_mapping_kernel": 12,
+      "Sub": 132,
+      "GreaterEqual": 12,
+      "Less": 12,
+      "LogicalAnd": 12,
+      "Mul": 216,
+      "LogicalNot": 12,
+      "GatherV2": 12,
+      "MaskedFill": 12,
+      "hcom_allReduce_": 3096,
+      "GemmaRmsNorm": 12,
+      "MatMulV2": 3660,
+      "Slice": 4416,
+      "ZerosLike": 576,
+      "Transpose": 588,
+      "CausalConv1d": 576,
+      "ConcatD": 576,
+      "FusedGdnGating": 576,
+      "l2norm_fwd_kernel2": 1152,
+      "RecurrentGatedDeltaRule": 576,
+      "_layer_norm_fwd_1pass_kernel_npu": 576,
+      "AddRmsNormBias": 1536,
+      "SwiGlu": 768,
+      "split_qkv_rmsnorm_mrope_kernel": 192,
+      "ReshapeAndCacheNdKernel": 192,
+      "FusedInferAttentionScore": 192,
+      "Sigmoid": 192,
+      "hcom_allGather_": 24,
+      "ArgMaxV2": 12
+    },
+    "shape_examples": {
+      "RecurrentGatedDeltaRule": [
+        {
+          "name": "aclnnRecurrentGatedDeltaRule_RecurrentGatedDeltaRule_RecurrentGatedDeltaRule",
+          "input_shapes": "\"12,4,128;12,4,128;12,12,128;12,12;321,12,128,128;13;12;12,12\"",
+          "duration_us": "38.320"
+        },
+        {
+          "name": "aclnnRecurrentGatedDeltaRule_RecurrentGatedDeltaRule_RecurrentGatedDeltaRule",
+          "input_shapes": "\"12,4,128;12,4,128;12,12,128;12,12;321,12,128,128;13;12;12,12\"",
+          "duration_us": "44.001"
+        }
+      ],
+      "FusedInferAttentionScore": [
+        {
+          "name": "FusedInferAttentionScore",
+          "input_shapes": "\"12,6,256;3852,128,256;3852,128,256;;2048,2048;12;12;;;;;;;;12,324;;;;;;;;;;;;;;;;\"",
+          "duration_us": "578.132"
+        },
+        {
+          "name": "FusedInferAttentionScore",
+          "input_shapes": "\"12,6,256;3852,128,256;3852,128,256;;2048,2048;12;12;;;;;;;;12,324;;;;;;;;;;;;;;;;\"",
+          "duration_us": "577.752"
+        }
+      ]
+    },
+    "phase_scope": "576 recurrent GDN and192 attention calls consistent with12x48/16 decode. Need fourrank and actual trace step correspondence; not formal speed attribution."
+  },
+  "rank0_parser": {
+    "cid": "b719ee798fd30f6dfda4f375f14e5794285d3f3e36c107a4d7add506df01e599",
+    "terminal_exit": 0,
+    "compute_devices": [],
+    "manager_query_only": true
+  },
+  "remaining_parser": {
+    "cid": "fa108cccd65705f442d9a522d22f1644f139da526fc0227c9e32f15bf3019f96",
+    "ranks": [
+      1,
+      2,
+      3
+    ],
+    "analysis_root": "/cache/cch/hypic-independent-20261013/profile-g3-r16-privatewarm-r1-analysis-r2"
+  },
+  "interpretation": "Rank0 is bounded recurrent decode at batch12, not prefill. Communication exclusive union dominates this window but may include cross-rank/host waiting; cannot identify HYPIC regression root cause without other ranks/comparator. No ChunkGatedDeltaRule in this window; do not use old R6 cold-prefill conclusions.",
+  "full_goal_complete": false
+}

@@ -1,4 +1,16 @@
-# CURRENT R16 PROFILE TERMINAL AUDITED; OFFLINE PARSER LIVE
+# CURRENT R16 RANK0 DECODE PARSED; OTHER THREE RANKS PARSER LIVE
+
+87a1c616 terminalaudit checkpoint published/liveverified; mainunchanged23ec33d7.
+No-deviceparser r2 exited0 but allCANNexportsfailed (decorator swallows errors).
+Direct0c44 msprofexit255: Init platform by driver failed. Not algorithm failure.
+Manager-only/no compute devices parser r3 rank0 successfully exported valid tables.
+PROFILE_R16_RANK0_DECODE_SCREEN_20261016.json:23016kernel/183804host rows,
+576recurrent/192attention=12decode steps/batch12, not prefill. Comm exclusive3.119s
+of3.603s kernel envelope; waiting possible, NOT rootcause/removabletime proof.
+Remaining rank1-3 parser exactCIDfa108cccd65705f442d9a522d22f1644f139da526fc0227c9e32f15bf3019f96
+launched after rank0 terminal. Poll exactCID, no duplicate; analysis-r2 only/rawuntouched.
+Next verify fourrank tables/trace, crossrank alignment before one bounded treatment.
+Previous parser/live headings below superseded; no speed/quality acceptance.
 
 0c1c terminalexit0; independent0c3f source149/hot16/physicaljoin/isolation220 PASS.
 See PROFILE_R16_PRIVATEWARM_TERMINAL_AUDIT_20261016.json for scope/hashes.
