@@ -1,0 +1,28 @@
+{
+  "scope": "source-backed redundancy and unactivated CPU helper; no NPU speed evidence",
+  "prior": "R18_FIRST_PAIR_DECISION_20261016.json",
+  "source": "independent_compact_gdn_hook.py",
+  "finding": "per-plan state_cache transpose/contiguous/clone and conv clone happen even when output/final/tail already prepared by packed or batched route and serial shadow is disabled",
+  "raw_occurrences": {
+    "packed": 12288,
+    "native_batch": 60480,
+    "total": 72768,
+    "operation": "exec-0000000000000e4f"
+  },
+  "candidate": "independent_prepared_initial_snapshot.py",
+  "runtime_wired": false,
+  "tests": {
+    "targeted": "exec-0000000000000e4e",
+    "count": 6,
+    "passed": true,
+    "full_regression": "exec-0000000000000e50",
+    "full_state": "PASS938"
+  },
+  "preserved": [
+    "serial shadows still receive independent initial snapshots",
+    "fallback path unchanged",
+    "private clones avoid native-cache alias",
+    "finite/commit/source/ownership/completion gates not removed"
+  ],
+  "next": "Full regression then explicit default-off actual-hook wiring and option-combination tests; new source contract and bounded actual numeric validation before speed"
+}
