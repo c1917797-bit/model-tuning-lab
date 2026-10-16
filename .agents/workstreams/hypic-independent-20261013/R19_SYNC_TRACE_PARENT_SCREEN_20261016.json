@@ -1,0 +1,566 @@
+{
+  "schema": "hypic-sync-parent-screen/v1",
+  "operation": "exec-0000000000000f8e",
+  "scope": "G3 rank0 twelve longest exact aclrtSynchronizeStream events; CPU and ACL use different profiler process lanes, matched by worker thread and enclosing time, not same synthetic pid",
+  "samples": [
+    {
+      "sync_us": 41245.99,
+      "ts": "1792190509513562.240",
+      "ancestors": [
+        {
+          "name": "aten::copy_",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 41329.43,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::_to_copy",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 41348.78,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::to",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 41354.41,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 91315.33,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        }
+      ]
+    },
+    {
+      "sync_us": 38645.67,
+      "ts": "1792190515198873.150",
+      "ancestors": [
+        {
+          "name": "aten::copy_",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 38730.28,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::_to_copy",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 38747.08,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::to",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 38752.15,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 89377.86,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        }
+      ]
+    },
+    {
+      "sync_us": 37917.57,
+      "ts": "1792190511138703.660",
+      "ancestors": [
+        {
+          "name": "aten::copy_",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37993.96,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::_to_copy",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 38010.8,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::to",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 38016.76,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 88745.77,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        }
+      ]
+    },
+    {
+      "sync_us": 37851.14,
+      "ts": "1792190514796411.360",
+      "ancestors": [
+        {
+          "name": "aten::copy_",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37931.68,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::_to_copy",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37951.37,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::to",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37957.71,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 88762.2,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        }
+      ]
+    },
+    {
+      "sync_us": 37794.72,
+      "ts": "1792190511545244.730",
+      "ancestors": [
+        {
+          "name": "aten::copy_",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37878.21,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::_to_copy",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37897.03,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::to",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37903.53,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 88305.28,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        }
+      ]
+    },
+    {
+      "sync_us": 37733.25,
+      "ts": "1792190512540108.650",
+      "ancestors": [
+        {
+          "name": "aten::copy_",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37801.99,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::_to_copy",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37821.09,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::to",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37826.4,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 88106,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        }
+      ]
+    },
+    {
+      "sync_us": 37724.74,
+      "ts": "1792190511230475.520",
+      "ancestors": [
+        {
+          "name": "aten::copy_",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37782.11,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::_to_copy",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37797.22,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::to",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37802.14,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 87372.07,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        }
+      ]
+    },
+    {
+      "sync_us": 37602.37,
+      "ts": "1792190509608085.900",
+      "ancestors": [
+        {
+          "name": "aten::copy_",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37663.3,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::_to_copy",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37680.18,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::to",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37686.25,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 86667.45,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        }
+      ]
+    },
+    {
+      "sync_us": 37590.31,
+      "ts": "1792190514888276.330",
+      "ancestors": [
+        {
+          "name": "aten::copy_",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37661.51,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::_to_copy",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37686.01,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::to",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37692.32,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 87685.65,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        }
+      ]
+    },
+    {
+      "sync_us": 37565.9,
+      "ts": "1792190511949191.180",
+      "ancestors": [
+        {
+          "name": "aten::copy_",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37649.09,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::_to_copy",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37667.09,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::to",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37673.48,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 90421.02,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        }
+      ]
+    },
+    {
+      "sync_us": 37499.05,
+      "ts": "1792190512132610.850",
+      "ancestors": [
+        {
+          "name": "aten::copy_",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37564,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::_to_copy",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37580.64,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::to",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37586.34,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 86762.03,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        }
+      ]
+    },
+    {
+      "sync_us": 37334.8,
+      "ts": "1792190514389274.540",
+      "ancestors": [
+        {
+          "name": "aten::copy_",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37419.04,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::_to_copy",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37434.18,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "aten::to",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 37438.62,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "pid": 60,
+          "cat": "cpu_op",
+          "dur": 87803.98,
+          "args": {
+            "Sequence number": -1,
+            "Fwd thread id": 0
+          }
+        }
+      ]
+    }
+  ],
+  "finding": "All12 sampled longest stream synchronizations are enclosed by aten::copy_ -> aten::_to_copy -> aten::to -> vllm::qwen_gdn_attention_core; observed sync durations37.3–41.2ms.",
+  "limits": [
+    "Temporal nesting does not identify exact Python source line or transfer direction",
+    "Rank0 sample only; not full fourrank attribution",
+    "Do not sum nested times; do not remove correctness barriers based on this screen"
+  ],
+  "next": "Map actual GDN to/cpu transfer sites and material ownership; choose bounded copy-path repair with preserved finite and commit gates."
+}

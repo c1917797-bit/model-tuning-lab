@@ -1,4 +1,21 @@
-# CURRENT R19 G1 CAPTURE AUDITED; CPU PARSER LIVE
+# CURRENT R20 METADATA SOURCE ATTRIBUTION; NO OWNED DEVICE JOB
+
+G1 CPU parser11986bb5 exited0; independent0f84 accepts allfour tables/traces
+and PID58/59/60/61 joins. R19_MATCHED_PROFILE_ATTRIBUTION_SCREEN_20261016.json
+committed435e995a (not yet published). G1/G3 captured mixed batches differ;
+do not infer same-batch critical-path gain. R19 whole-service negative unchanged.
+0f8e sampled12 longest G3rank0 stream synchronizations inside to/_to_copy/copy_
+within GDN; source adapter repeats3pure/6mixed metadata D2H reads perlayer.
+Officialrunner0f99 lines3258-3269 proves same attentiongroup metadata sharing.
+Defaultoff independent_step_metadata_cache has8mocktests0f91 andrealTorch0f9a
+mutation controlsPASS, but inference tensors have no version and safelyfallback.
+HelperNOT integrated; cannotclaim speedgain. Next implement source-bound
+per-forward/group immutable snapshot, validate step/tensor/layout/slot identity,
+then focusedregression/newcontract/boundedNPUcanary. No blind barrierremoval.
+Pending diagnostic/source reports andhelper mustbe validated/committed/published.
+Latest authorizationcutoff2026-10-17T06:48:09Z. Fullgoalunfinished.
+
+# HISTORICAL R19 G1 CAPTURE AUDITED; CPU PARSER LIVE
 
 0f61terminalexit0;independent0f74 accepts196sources/16profile+16warmresponses/
 191cleanisolation/algorithmabsent/explicitphysicalrankPIDjoins/liveexactrelease.

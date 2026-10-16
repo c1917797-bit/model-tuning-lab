@@ -1,0 +1,16 @@
+{
+  "schema": "hypic-sync-source-map/v1",
+  "evidence_operations": [
+    "exec-0000000000000f8e"
+  ],
+  "source": "independent_runtime_adapter.py",
+  "finding": "associate_native_mixed_linear performs six detach().cpu().tolist() metadata transfers on every GDN layer entry; associate_native_linear performs three. These transfers occur inside profiled qwen_gdn_attention_core and are consistent with sampled to/_to_copy/copy_ enclosing synchronizations.",
+  "confidence": "source-backed candidate; exact sync-to-Python-line attribution not proved",
+  "repair_requirement": "Freeze immutable association metadata once per actual runner step where native metadata identity is shared; retain layer-specific capacity/slot validation. Never cache across steps, metadata mutation or different tensor identities. Do not remove finite validation or state commit/lifetime barriers.",
+  "next_tests": [
+    "Prove actual official metadata sharing and lifetime from pinned builder source",
+    "Negative controls for different step, tensor identity/version, mixed layout and slot capacity",
+    "Bounded fourrank source-bound canary then matched formal first pair"
+  ],
+  "scope": "No runtime change or device run in this checkpoint; overall speed remains rejected"
+}

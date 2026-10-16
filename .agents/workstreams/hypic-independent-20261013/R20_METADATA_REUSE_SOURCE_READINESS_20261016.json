@@ -1,0 +1,12 @@
+{
+  "schema": "hypic-metadata-reuse-source/v1",
+  "runner_probe": "exec-0000000000000f99",
+  "builder_probe": "exec-0000000000000f95",
+  "official_runner_lines": "3258–3269: attn_metadata_dict[layer_name] = attn_metadata_i; layers within same attention group share metadata",
+  "builder_lines": "856–893 constructs and attaches per-build metadata; graph buffers may be reused across steps",
+  "helper_test_operation": "exec-0000000000000f91",
+  "helper_tests": 8,
+  "status": "HOST_COMPONENT_ONLY_NOT_SERVICE_INTEGRATED",
+  "critical_limit": "Inference tensors may have no version counter; current helper safely falls back and may deliver zero gain. Do not turn this fallback into unverified identity-only reuse.",
+  "next": "Freeze snapshots at a source-bound per-forward/group boundary with explicit metadata ownership/lifetime proof, or use verified CPU builder metadata; maintain all layer-specific association and capacity validation."
+}
