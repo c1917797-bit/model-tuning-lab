@@ -1,0 +1,23 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "test_full_quality_treatment_composition.py",
+  "focused": {
+    "operation": "exec-0000000000000ab9",
+    "tests": 3,
+    "exit": 0
+  },
+  "regression": {
+    "operation": "exec-0000000000000aba",
+    "tests": 713,
+    "exit": 0
+  },
+  "scope": "Synthetic full381 treatment raw-directory composition. Scorer andphysicalchecker mocked; noNPU/modelquality proof.",
+  "mechanism_links": 97536,
+  "proofs": [
+    "source/contract/catalog/cohort/journal/hot mechanism composition connects",
+    "381 requests eachfourworkers48linear/16KV",
+    "missingonehotlayer rejected",
+    "wronggeneration rejected"
+  ],
+  "remaining": "ActualR2catalogCanary/full381eacharm/same-sourceperformance/lifecycle/Paper-to-Ascendfunctionalacceptance. No ownNPUjob; need stablewindow, no blindtransient-idle launch."
+}
