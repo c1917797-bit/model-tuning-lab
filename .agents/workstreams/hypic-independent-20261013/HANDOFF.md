@@ -1,4 +1,15 @@
-# CURRENT R19 THREE ARMS VALID; WHOLE HYPIC NEGATIVE
+# CURRENT R19 G3 BOUNDED EARLYMIXED PROFILE LIVE
+
+ma exact exec-0000000000000f22 launched22:31UTC from liveverified26575380.
+Admission0f21:196sources/181runtime/image/model/input/physical0-3empty/8233+HCCLfree/newroot.
+Raw /cache/cch/hypic-independent-20261013/profile-g3-r19-earlymixed-r1.
+Officialprofiler tools rechecked no-device0f20; historicalcannbotpathmissing0f1d.
+Sameprocess c16/32768/64 privatewarm then boundedprofilemax2 iterations/delay0;
+notformal40x1024 orquality. Poll exactpeer/handle/root; no restartlive/unclear or196boundchanges.
+Terminal source/request/fourrankmechanism/physical/isolation/exactrelease plusactualtrace
+completeness audit required; onlyvalid thenfreshmatchingG1. Cutoff2026-10-17T06:48:09Z.
+
+# HISTORICAL R19 THREE ARMS VALID; WHOLE HYPIC NEGATIVE
 
 Native0edaexit0;independent0f0a PASS40/40/194sources/425clean/liveexactrelease.
 TPOT280.910592ms,TTFTP95344663.165980ms. R19_THREE_ARM_FIRST_SCREEN_20261016.json.
