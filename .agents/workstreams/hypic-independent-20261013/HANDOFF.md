@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST09ff TERMINAL exit0;0a16 independent snapshotCanary audit exit0.
+3responses: public16640/1 +2private32768/1024;2/2 same-step fourrank48C1/16C2,
+8actualprobe rows,145sources,227clean isolation and exact own release verified.
+Raw snapshot-r16-canary-r1 immutable. SNAPSHOT_R16_CANARY_R1_TERMINAL.json.
+Probe order both original-first atsteps3/5, NOT counterbalanced/E2Espeed proof;
+nested hot scope text says full40 generically but actualdenominator is2 only.
+Next freshadmission R16 G3/R1 full40 probe0, then freshsame-sourceG1/R1.
+Prepared contracts atb8de3f53; no R15 timing reuse. No ownedlivejob currently.
+
 Next R16 full40 G3/R1 then freshG1/R1 PREPARED NOT STARTED; requires09ff
 independent Canary PASS plus fresh resource admission. Config probe0/performance
 true/snapshottrue, same147source map botharms; no R15 baseline reuse.8audit controls

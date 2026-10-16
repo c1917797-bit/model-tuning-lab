@@ -1,0 +1,131 @@
+{
+  "schema": "hypic-snapshot-r16-canary-terminal/v1",
+  "controller": "exec-00000000000009ff",
+  "controller_exit": 0,
+  "audit_operation": "exec-0000000000000a16",
+  "audit_exit": 0,
+  "contract": "SNAPSHOT_R16_CANARY_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/snapshot-r16-canary-r1",
+  "audit": {
+    "bounded_canary_valid": true,
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 2,
+      "covered": [
+        "cmpl-b01b2fafb3e80532",
+        "cmpl-ace28ec2efa41b7f"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 60,
+        "1": 61,
+        "2": 62,
+        "3": 63
+      },
+      "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+    },
+    "probe": {
+      "0": {
+        "original_thread_cpu_ns": 27808010,
+        "prefill_only_thread_cpu_ns": 65900,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "1": {
+        "original_thread_cpu_ns": 28287500,
+        "prefill_only_thread_cpu_ns": 58660,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "2": {
+        "original_thread_cpu_ns": 28031510,
+        "prefill_only_thread_cpu_ns": 57640,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "3": {
+        "original_thread_cpu_ns": 28961420,
+        "prefill_only_thread_cpu_ns": 67440,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      }
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 60,
+          "host_pid": 3487759,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 61,
+          "host_pid": 3487760,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 62,
+          "host_pid": 3487761,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 63,
+          "host_pid": 3487762,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "source_bindings": 145,
+    "isolation_samples": 227,
+    "live_release_verified": true,
+    "scope": "two-request integrated mechanism and prepare-thread opportunity only; no formal speed, full quality or lifecycle acceptance"
+  },
+  "raw_sha256": {
+    "result.json": "c4b7620a642f3581d555fa45f509567d878a23dcd4cad773b8a952342c0b617b",
+    "events.jsonl": "410fc222907c37c586eea8750ab9f2526a7decf75864c12377d08e0ab26df3ce",
+    "responses.json": "d8cec955a943465e29354c743671e8cea7e1beba42b68226cd4dae9801e6726e",
+    "isolation.json": "2f8b3d4f5a6ebce2b4b46c759ae93255a66587531a5c55a381ea77cf379fa08e",
+    "release.json": "dc24d7fa0aead7ac15b239a0aba42b3541f527a80bedb1961896057138badeb9",
+    "service-start.json": "8af931c7c29195a4dd3222cefcfae965ce340a6dc08c9d3da685ef0775c59943"
+  },
+  "limitations": [
+    "bounded2 private requests only, not full40",
+    "probe steps3/5 both original-first; not counterbalanced or unbiased E2E timing",
+    "hot nested scope text says full40 generically, but actual audited denominator is2",
+    "no full quality or lifecycle acceptance"
+  ],
+  "next": "Prepared R16 G3/R1 then freshG1/R1 full40 with probe0; fresh physical admission before each",
+  "full_goal_accepted": false
+}

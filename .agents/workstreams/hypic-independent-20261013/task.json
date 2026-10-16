@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "snapshot-r16-canary-r1-running",
+  "execution_state": "snapshot-r16-canary-accepted-ready-for-matched-screen",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "09fe fresh08:38:15UTC physical0-3empty/portsfree/145sources/newroot/image/model/inputPASS. Own09ff launched; exact live tracking only."
+    "state": "0a16 verified exact ownedCID absent,physical0-3empty,8233bindfree; future launch must recheck."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll exact09ff on originalma via awmcp; inspect immutable raw root and actual namespace. No145boundsource edits or restart. Terminal audit_prompt_snapshot_canary.py --contract SNAPSHOT_R16_CANARY_R1_CONTRACT.json --live-release. Not formal performance/quality.",
+  "next_action": "Fresh direct idle admission then launch FORMAL_R16_20261016_G3_R1_CONTRACT.json using unchanged formal_r15_tp4.py --run. Probe0 timed mode. Terminal audit_r16_performance.py --contract ... --live-release. Then fresh same-source G1/R1, no R15 timing reuse.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,13 +215,14 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "RUNNING exact09ff; never restart while running/unknown",
+    "state": "TERMINAL09ff exit0;0a16 independent audit exit0; exact own release verified",
     "last_operation": "exec-00000000000009ff",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
     "raw_root": "/cache/cch/hypic-independent-20261013/snapshot-r16-canary-r1",
     "checkpoint": "d0a2a9c51dec534c58ab05f704da58d2b057ccae",
-    "contract": "SNAPSHOT_R16_CANARY_R1_CONTRACT.json"
+    "contract": "SNAPSHOT_R16_CANARY_R1_CONTRACT.json",
+    "terminal_report": "SNAPSHOT_R16_CANARY_R1_TERMINAL.json"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -256,5 +257,10 @@
       0.017921999096870422
     ],
     "scope": "localCPUcost only; firstG1pair and runtimeadmission required"
+  },
+  "snapshot_canary": {
+    "report": "SNAPSHOT_R16_CANARY_R1_TERMINAL.json",
+    "accepted_bounded": true,
+    "full_quality": false
   }
 }
