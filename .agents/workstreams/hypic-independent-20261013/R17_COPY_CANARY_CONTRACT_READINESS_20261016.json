@@ -1,0 +1,13 @@
+{
+  "schema": "hypic-r17-copy-canary-contract-readiness/v1",
+  "state": "ready-for-fresh-admission-not-device-accepted",
+  "implementation_checkpoint": "d4513d817a7792544fa17112b6cb9eb85e3ea76c",
+  "contract": "C1_ASYNC_MATERIAL_R17_CANARY_R1_CONTRACT.json",
+  "static_operation": "exec-0000000000000cfc",
+  "source_bindings": 156,
+  "host_tests": 883,
+  "host_test_operation": "exec-0000000000000cf8",
+  "scope": "one producer and two32768-token private1024 completions; only0-3 singleTP4; full-byte copy oracle in real C1 path; not speed,fullquality,lifecycle",
+  "next_gate": "fresh physical/source/image/port/newroot admission then exact-owned controller; independently audit full-copy same-lease joins plus fourworker48/16/source/continuousisolation/physicalPID/release",
+  "old_r16_launches": "invalid on current worktree; raw immutable"
+}

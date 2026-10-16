@@ -1,5 +1,15 @@
 # CURRENT R17 C1 ASYNC MATERIAL HOST-READY; NO NPU CLAIM
 
+LATEST copy-oracle checkpoint d4513d81:883 hosttests0cf8 PASS, full-byte audit joins
+rank/PID/source/step/layer/generation andpublicgeneration to every completed hot C1.
+New R17CONTROL/PERFORMANCE differ only c1_async_material_transfer; COPY_CANARY adds
+only diagnosticfull-byte verification. Static0cfc validates156sourcebindings/newroot.
+C1_ASYNC_MATERIAL_R17_CANARY_R1_CONTRACT.json:one producer,two32768/private1024,
+physical0-3singleTP4, fixed deadline2026-10-17T06:48:09Z. NOT launched yet.
+No new independentGDN task, no oldroot reuse, no speed/quality acceptance.
+Next freshactualresource/image/sourceadmission then exact controllerformal_r15_tp4.
+Audit with audit_c1_async_material.py --contract ... --live-release afterterminal.
+
 R16 native parser590ae29b exited0; fourrank artifact audit0ce0 passed, report
 PROFILE_R16_EARLYMIXED_COMPARISON_20261016.json. Botharms two ArgMax iterations,
 native~4.574s vs HYPIC~10.335s; treatment kernel mix differs, not kernel-matched speed.
