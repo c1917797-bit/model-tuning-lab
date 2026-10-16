@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "external-resource-contention-offline-progress",
+  "execution_state": "offline-lifecycle-prep-resource-observation",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "No ownedliveNPUcontroller/observer. Coordinateactualstable0-3window; avoidthirdblindtransientidle initialization. Continue fullquality raw-directory audit composition/twoarm contracts and lifecycle preparation. R2catalogprospective159sourcepackagevalid; newdevicefreshdirect/actualidle/ports/source/newroot required. DeadlineOct17T06:48:09Z.",
+  "next_action": "Poll exactreadonly0ace; ifsampled180sidle, freshdirect/source159/image/model/catalog/newroot/actual0-3+portsadmission maystart frozenR2catalogM3Canary,notformalquality. Newpriorityplanexplicit. NoownedNPUjob. FullM4performancebeforeformalM5quality;M6controllerdraft.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -280,8 +280,13 @@
     "device_run": false
   },
   "resource_observation": {
-    "operation": "exec-0000000000000aa1",
-    "state": "TERMINALexit0;38samples/10busy;no180s_sampledidle;noallocation",
-    "report": "RESOURCE_OBSERVATION_0AA1_20261016.json"
+    "operation": "exec-0000000000000ace",
+    "state": "RUNNINGreadonlyboundedobserver;notallocation/reservation",
+    "previous_report": "RESOURCE_OBSERVATION_0AA1_20261016.json"
+  },
+  "lifecycle_preparation": {
+    "controller": "lifecycle_r16_tp4.py",
+    "state": "HOSTONLY13focused/726regressionPASS;noNPUrun",
+    "report": "LIFECYCLE_CONTROLLER_HOST_READINESS_20261016.json"
   }
 }

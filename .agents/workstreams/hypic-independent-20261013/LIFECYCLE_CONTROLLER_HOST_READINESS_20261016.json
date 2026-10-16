@@ -1,0 +1,29 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "separate lifecycle_r16_tp4.py + independent_lifecycle_policy.py",
+  "focused": {
+    "operation": "exec-0000000000000ad1",
+    "tests": 13,
+    "exit": 0
+  },
+  "regression": {
+    "operation": "exec-0000000000000ad3",
+    "tests": 726,
+    "exit": 0
+  },
+  "scope": "HOST ONLY. No lifecycleNPUrun,stagecontracts/manifestauditorstillpending.",
+  "declared_controller_changes": [
+    "explicitstage/sourcepreflight",
+    "bounded public1/private64tokens lifecycle payloads",
+    "compact switch1/0",
+    "servicehost127.0.0.1",
+    "additional32token nonthinking2+2semantic request withrawreceipt"
+  ],
+  "guard_parity": "ASTinverse of explicitspans equalsreviewedformal_r15controller exceptdocstring/defaultcontract;originalownership/isolation/deadline/cleanup retained",
+  "not_claimed": [
+    "formalperformance/quality replaced",
+    "hotinprocessuninstall",
+    "actualdisable/uninstall/restart/release accepted"
+  ],
+  "resource_observer": "exec-0000000000000ace live;noownedNPUjob"
+}

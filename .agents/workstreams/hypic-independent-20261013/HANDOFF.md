@@ -1,3 +1,14 @@
+# CURRENT readonly0ace observer and boundedM3priority
+
+0ace confirmedlive;readonly/noNPUallocation/noreservation. Noownedmodeljob.
+Nextdevicepriorityplan NEXT_DEVICE_M3_PRIORITY_20261016.md supersedesbaseline-first
+onlyfor alreadyfrozenR2bounded17catalog M3mechanismCanary. Not formalquality.
+Ifsampled180sidle, freshma/hostdevelopment/direct/source159/image/model/catalog/
+newroot/actual0-3andportsadmissionstillrequired. Foreignuntouched,4-7prohibited.
+M4completeperformancebeforeM5formalquality unchanged;no gatewaiver.
+Lifecyclecontrollerdraft13focused0ad1/726CPU0ad3PASS,ASTguardsunchanged;
+no actualdisable/uninstall/restart acceptance. Stagecontracts/auditorstillmissing.
+
 # LATEST readonly observation terminal — no device job
 
 0aa1exit0:38sampledphysical0-3snapshots10:12:48–10:22:45UTC,
