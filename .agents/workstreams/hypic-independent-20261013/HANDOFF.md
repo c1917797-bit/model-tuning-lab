@@ -1,4 +1,11 @@
-# CURRENT R16 INTEGRATED PROFILE LIVE
+# CURRENT R16 PROFILE TERMINAL AUDITED; OFFLINE PARSER LIVE
+
+0c1c terminalexit0; independent0c3f source149/hot16/physicaljoin/isolation220 PASS.
+See PROFILE_R16_PRIVATEWARM_TERMINAL_AUDIT_20261016.json for scope/hashes.
+Parser CID3733444d7065de5c540350a6cfd6d9c6fb32e90a8de9c766240e661e0c7d83bb
+confirmedrunning rank0/CPU0/no devices. Poll exactcontainer; do not duplicate.
+Raw untouched; analysis-r1 copy. Verify allfourrank tables/phase before attribution.
+Following0c1c livewording is historical/superseded. No optimization acceptance.
 
 Exactma exec-0000000000000c1c RUNNING;raw /cache/cch/hypic-independent-20261013/profile-g3-r16-privatewarm-r1.
 Checkpoint7ce9b301 published/liveverified.0c1b admissionPASS source149/currentimage/

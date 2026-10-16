@@ -1,0 +1,98 @@
+{
+  "schema": "hypic-profile-terminal-audit/v1",
+  "contract": "PROFILE_G3_R16_PRIVATEWARM_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/profile-g3-r16-privatewarm-r1",
+  "controller": "exec-0000000000000c1c",
+  "independent_audit": "exec-0000000000000c3f",
+  "evidence": {
+    "source_bindings": 149,
+    "responses": 16,
+    "private_warmup": 16,
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 16,
+      "covered": [
+        "cmpl-9951632d7919c78b",
+        "cmpl-9b4b9a3db942ff7b",
+        "cmpl-8dde37cd1bb4216c",
+        "cmpl-b4fd34e91ded1d3b",
+        "cmpl-8b7f8962b6a75d92",
+        "cmpl-984540c70047dbc4",
+        "cmpl-955854b99d7686d6",
+        "cmpl-a7c0e459d89c9657",
+        "cmpl-afadf93b8f3cad43",
+        "cmpl-b50fb6d30b52d90b",
+        "cmpl-b5bc661fa9236a3a",
+        "cmpl-8878ee5db1f7fbb5",
+        "cmpl-92a40ac848b4a37b",
+        "cmpl-935ee25a65218ae5",
+        "cmpl-9f1152483c7e8b88",
+        "cmpl-b54b710d8776b893"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 58,
+        "1": 59,
+        "2": 60,
+        "3": 61
+      },
+      "scope": "diagnostic16 same-step all-rank/all-layer coverage only; never formal full40 acceptance"
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 58,
+          "host_pid": 1814057,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 59,
+          "host_pid": 1814058,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 60,
+          "host_pid": 1814059,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 61,
+          "host_pid": 1814060,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "isolation": 220,
+    "events": {
+      "preflight": 1,
+      "isolation": 220,
+      "warmup": 4,
+      "profile-private-warmup": 16,
+      "profile-start": 1,
+      "profile-response": 16,
+      "profile-stop": 1,
+      "terminal": 1
+    },
+    "raw_sha256": {
+      "result.json": "102b81af4a81a9b237980e53c7a421dcb4965386d9e64c1f988b1a1df853664c",
+      "profile-unit.json": "a4a1585e767c15d1be7b8794b64474cf02ab26ee37fc8fc170811bd82fa2306b",
+      "events.jsonl": "1259d1106f684565209b826c3113f9dbcf23df05e47637749a1f2f3b41a69781",
+      "release.json": "fe16926b1190e7ef5f58dc4208c930d7ee0a3ae22c1c5f03c4d238437e3437a7"
+    }
+  },
+  "release_scope": "Recorded exact owned removal/port empty/final physical empty; not a fresh resource reservation.",
+  "parser": {
+    "failed_import": "exec-0000000000000c38 missing libascend_hal.so",
+    "lost_handle": "exec-0000000000000c3b not_found; no matching process or parsed tables at recovery",
+    "import_probe": "exec-0000000000000c3d passed with read-only driver library mount",
+    "current_container": "3733444d7065de5c540350a6cfd6d9c6fb32e90a8de9c766240e661e0c7d83bb",
+    "launch": "exec-0000000000000c3e",
+    "state": "running confirmed actual Docker PID2076931, rank0 synchronous parse",
+    "physical_devices": [],
+    "cpu": "0",
+    "analysis_root": "/cache/cch/hypic-independent-20261013/profile-g3-r16-privatewarm-r1-analysis-r1"
+  },
+  "scope": "Bounded diagnostic only. No formal speed/quality acceptance; no bottleneck attribution until parsed artifacts and captured phase verified.",
+  "next": "Poll exact parser container; never duplicate live parse. Verify four-rank tables/trace completeness, classify observed prefill/decode, then opportunity-bounded treatment. Retain R16 negative first performance pair."
+}
