@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT0967 RUNNING originalma a6109/tpc force_direct; NEW rawformal-r15-20261016-g3-r1.
+6baedec5 plan/contract published/liveverified, mainunchanged.0966 fresh07:05UTC
+141sources/input/model/image/physical0-3empty/8233+HCCLstrictbind/newrootPASS.
+Poll SAME0967/root, running/unknownNEVERrestart or edit141bindings. CaptureliveNSpid.
+Terminal audit_r15_terminal.py --contract FORMAL_R15_20261016_G3_R1_CONTRACT.json
+--live-release. Fixedstop2026-10-17T06:48:09Z. hypic-24ACTIVE10min. OldrootINVALID
+18/40 remainsimmutable; no newperformance or quality acceptance yet.
+
 LATEST HUMAN RENEWAL2026-10-16: continue24h from06:48:09UTC, fixedend
 2026-10-17T06:48:09Z / Moscow09:48:09. This supersedes old expiry BELOW,
 not old outcomes. hypic-24 ACTIVE10min. Fresh095d HEADab4cf2cc clean, physical0-3

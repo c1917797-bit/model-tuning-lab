@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "resumed-24h-readiness",
+  "execution_state": "formal-r15-renewed-g3-r1-running",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "Fresh095d2026-10-16 physical0-3 no processes,8233 no listener; revalidate before actual launch. No new device stage started in renewal metadata."
+    "state": "OWN controller0967 running on physical0-3; beforelaunch0966 all141/input/model/image/0-3empty/ports/newroot admissionPASS. Continuous isolation controller; no touchingforeign."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Human renewed24h on2026-10-16. Freeze new immutable successor contracts/roots and full40 PDC audit readiness; do not reuse interrupted formal-r15-g3-r1 or redo unchanged accepted canaries. Recheck source, disk, physical0-3 and ports before each launch.",
+  "next_action": "Poll same0967/originalma/raw; save actual live namespace proof; terminal audit_r15_terminal.py --contract FORMAL_R15_20261016_G3_R1_CONTRACT.json --live-release. No mutation of141boundfiles. New full40PDCauditor required beforeG2/G4.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -196,8 +196,8 @@
     ]
   },
   "publication": {
-    "state": "previous-closeout-live-verified; renewal metadata not yet published",
-    "published_commit": "ab4cf2cc68308962684fb506cebf100154585e86",
+    "state": "live-verified-planned-checkpoint; launchmetadata newerlocal",
+    "published_commit": "6baedec535bc60f5218e8ef5450e6abcaec4c14d",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
     "note": "Main unchanged. Renewed authority does not imply final acceptance."
   },
@@ -215,12 +215,13 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL deadline19:04:09UTC:089b exit1,18/40successful fixed1024;40journalrecords include22failures.387clean/141sources unchanged/exact4450release/0-3empty/8233strictbind08c7PASS. No liveownNPUjob.",
-    "last_operation": "exec-00000000000008c7",
+    "state": "RUNNING exact0967; never restart while live/unknown; new immutable successor",
+    "last_operation": "exec-0000000000000967",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcpru",
-    "raw_root": "/cache/cch/hypic-independent-20261013/formal-r15-g3-r1",
-    "checkpoint": "35159d417f22699f15e4c6b025bfe478b5bc3bc5"
+    "raw_root": "/cache/cch/hypic-independent-20261013/formal-r15-20261016-g3-r1",
+    "checkpoint": "6baedec535bc60f5218e8ef5450e6abcaec4c14d",
+    "contract": "FORMAL_R15_20261016_G3_R1_CONTRACT.json"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
