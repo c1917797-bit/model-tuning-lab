@@ -1,0 +1,312 @@
+{
+  "schema": "hypic-c1-copy-localization/v1",
+  "failed_analysis_operation": "exec-0000000000000ccb timestampstr/float TypeError; raw unchanged",
+  "corrected_analysis_operation": "exec-0000000000000ccf",
+  "observed": {
+    "largest_copy_calls": [
+      {
+        "ts": "1792163347235670.710",
+        "dur": 41384.47,
+        "args": {
+          "Sequence number": -1,
+          "Fwd thread id": 0
+        },
+        "parents": [
+          {
+            "name": "aten::_to_copy",
+            "dur": 41407.48
+          },
+          {
+            "name": "aten::to",
+            "dur": 41414.57
+          },
+          {
+            "name": "vllm::qwen_gdn_attention_core",
+            "dur": 79333.02
+          }
+        ]
+      },
+      {
+        "ts": "1792163348188878.940",
+        "dur": 39930.94,
+        "args": {
+          "Sequence number": -1,
+          "Fwd thread id": 0
+        },
+        "parents": [
+          {
+            "name": "aten::_to_copy",
+            "dur": 39954.08
+          },
+          {
+            "name": "aten::to",
+            "dur": 39959.23
+          },
+          {
+            "name": "vllm::qwen_gdn_attention_core",
+            "dur": 78306.51
+          }
+        ]
+      },
+      {
+        "ts": "1792163346777894.060",
+        "dur": 39512.57,
+        "args": {
+          "Sequence number": -1,
+          "Fwd thread id": 0
+        },
+        "parents": [
+          {
+            "name": "aten::_to_copy",
+            "dur": 39532.65
+          },
+          {
+            "name": "aten::to",
+            "dur": 39536.46
+          },
+          {
+            "name": "vllm::qwen_gdn_attention_core",
+            "dur": 77409.16
+          }
+        ]
+      },
+      {
+        "ts": "1792163352037619.100",
+        "dur": 39456.65,
+        "args": {
+          "Sequence number": -1,
+          "Fwd thread id": 0
+        },
+        "parents": [
+          {
+            "name": "aten::_to_copy",
+            "dur": 39481.08
+          },
+          {
+            "name": "aten::to",
+            "dur": 39485.16
+          },
+          {
+            "name": "vllm::qwen_gdn_attention_core",
+            "dur": 78446.37
+          }
+        ]
+      },
+      {
+        "ts": "1792163348932017.520",
+        "dur": 39302.3,
+        "args": {
+          "Sequence number": -1,
+          "Fwd thread id": 0
+        },
+        "parents": [
+          {
+            "name": "aten::_to_copy",
+            "dur": 39326.09
+          },
+          {
+            "name": "aten::to",
+            "dur": 39333.72
+          },
+          {
+            "name": "vllm::qwen_gdn_attention_core",
+            "dur": 77734.27
+          }
+        ]
+      },
+      {
+        "ts": "1792163347450901.470",
+        "dur": 39259.48,
+        "args": {
+          "Sequence number": -1,
+          "Fwd thread id": 0
+        },
+        "parents": [
+          {
+            "name": "aten::_to_copy",
+            "dur": 39280.73
+          },
+          {
+            "name": "aten::to",
+            "dur": 39287.75
+          },
+          {
+            "name": "vllm::qwen_gdn_attention_core",
+            "dur": 77530.26
+          }
+        ]
+      },
+      {
+        "ts": "1792163351290824.430",
+        "dur": 38740.35,
+        "args": {
+          "Sequence number": -1,
+          "Fwd thread id": 0
+        },
+        "parents": [
+          {
+            "name": "aten::_to_copy",
+            "dur": 38759.21
+          },
+          {
+            "name": "aten::to",
+            "dur": 38763.38
+          },
+          {
+            "name": "vllm::qwen_gdn_attention_core",
+            "dur": 77881.31
+          }
+        ]
+      },
+      {
+        "ts": "1792163348559668.610",
+        "dur": 38715.3,
+        "args": {
+          "Sequence number": -1,
+          "Fwd thread id": 0
+        },
+        "parents": [
+          {
+            "name": "aten::_to_copy",
+            "dur": 38736.37
+          },
+          {
+            "name": "aten::to",
+            "dur": 38742.87
+          },
+          {
+            "name": "vllm::qwen_gdn_attention_core",
+            "dur": 77141.54
+          }
+        ]
+      },
+      {
+        "ts": "1792163347819806.620",
+        "dur": 38195.24,
+        "args": {
+          "Sequence number": -1,
+          "Fwd thread id": 0
+        },
+        "parents": [
+          {
+            "name": "aten::_to_copy",
+            "dur": 38215.3
+          },
+          {
+            "name": "aten::to",
+            "dur": 38222.07
+          },
+          {
+            "name": "vllm::qwen_gdn_attention_core",
+            "dur": 76651.4
+          }
+        ]
+      },
+      {
+        "ts": "1792163352412122.840",
+        "dur": 37923.65,
+        "args": {
+          "Sequence number": -1,
+          "Fwd thread id": 0
+        },
+        "parents": [
+          {
+            "name": "aten::_to_copy",
+            "dur": 37938.66
+          },
+          {
+            "name": "aten::to",
+            "dur": 37942.7
+          },
+          {
+            "name": "vllm::qwen_gdn_attention_core",
+            "dur": 76942.24
+          }
+        ]
+      }
+    ],
+    "memcpy_names": {
+      "acl_memcpy_host_to_device": 84,
+      "acl_memcpy_device_to_host": 2,
+      "Dequeue@acl_memcpy_host_to_device": 84,
+      "Dequeue@acl_memcpy_device_to_host": 2,
+      "Enqueue@acl_memcpy_host_to_device": 84,
+      "Enqueue@acl_memcpy_device_to_host": 2,
+      "MEMCPY_ASYNC": 1307,
+      "AscendCL@aclrtMemcpyAsync": 1359,
+      "AscendCL@aclrtMemcpy": 1882,
+      "AscendCL@aclrtMemcpyAsyncWithCondition": 2
+    },
+    "memcpy_examples": [
+      {
+        "ph": "X",
+        "name": "acl_memcpy_host_to_device",
+        "pid": 58,
+        "tid": 58,
+        "ts": "1792163342489867.220",
+        "dur": 27.27,
+        "cat": "cpu_op",
+        "args": {
+          "Sequence number": -1,
+          "Fwd thread id": 0
+        }
+      },
+      {
+        "ph": "X",
+        "name": "acl_memcpy_host_to_device",
+        "pid": 58,
+        "tid": 58,
+        "ts": "1792163342490000.970",
+        "dur": 13.55,
+        "cat": "cpu_op",
+        "args": {
+          "Sequence number": -1,
+          "Fwd thread id": 0
+        }
+      },
+      {
+        "ph": "X",
+        "name": "acl_memcpy_host_to_device",
+        "pid": 58,
+        "tid": 58,
+        "ts": "1792163342490120.390",
+        "dur": 10.85,
+        "cat": "cpu_op",
+        "args": {
+          "Sequence number": -1,
+          "Fwd thread id": 0
+        }
+      },
+      {
+        "ph": "X",
+        "name": "acl_memcpy_host_to_device",
+        "pid": 58,
+        "tid": 58,
+        "ts": "1792163342490224.970",
+        "dur": 9.61,
+        "cat": "cpu_op",
+        "args": {
+          "Sequence number": -1,
+          "Fwd thread id": 0
+        }
+      }
+    ]
+  },
+  "source_mapping": {
+    "independent_compact_material_pool_py": {
+      "sha256": "0a49677f2fd297aa07623ee7754316764f0a405317b0da6df807b78f7ea9ba01",
+      "finding": "Canonical T/S/conv-tail stored CPU. acquire_private clones parentCPU material then calls .to(device=device) for each field without non_blocking; parent lease remains active through yield."
+    },
+    "independent_public_pool_py": {
+      "sha256": "296284a65199bf63d55aff32503ead7206292cb1f525dd281186e0d5c8c55190",
+      "finding": "Public/consumer isolation via per-lease clones and pins. Any transfer treatment must retain CPU source lifetime and exact generation/ownership."
+    },
+    "independent_c1_packed_prepare_py": {
+      "sha256": "c5da3e923636c8604a571ec5a17baf7447e8513c08e7104246c5c708b8785ac2",
+      "finding": "Material acquired once per unique body/layer inside caller ExitStack, retained until layer consumer completes."
+    }
+  },
+  "interpretation": "Largest copy calls are aten::to/_to_copy under actual qwen_gdn_attention_core, ~38-41ms each. Does not identify every exact Python call, transfer direction, or removable walltime; CPU-material blocking-transfer path is a concrete falsifiable candidate, not established rootcause.",
+  "candidate_decision": "After nativeallrank earlymixed comparison, prefer smallest single C1 transfer-scheduling treatment if supported: explicit opt-in non_blocking copies, pinned CPU-private lease retained until recorded copy stream completes (including exception), direct bounded actual-copy equality and fourworker mechanism audit. Keep C2 and evidence sink policy unchanged for attribution. Do not bundle unactivated sink component or invent bandwidth/kernel rewrite.",
+  "scope": "Diagnostic source/local timeline localization; not implemented/accepted NPU transfer treatment or optimization success"
+}

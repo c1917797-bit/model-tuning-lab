@@ -1,5 +1,13 @@
 # CURRENT R16 NATIVE EARLYMIXED LIVE + G3 CPU PARSER
 
+Copyparent analysis0ccb TypeError(str/float) fixed inread-only0ccf:largestcopy38-41ms under
+aten::to/_to_copy/qwen_gdn_attention_core. PROFILE_R16_C1_COPY_LOCALIZATION_20261016.json.
+SourceCompactLinearMaterialPool clones CPU T/S/conv-tail thenblocking.to(device) eachlease.
+Thisisfalsifiabletarget,notproven exactcall/direction/removabletime. After nativeallrank
+comparison considerONEopt-in C1async-transfer treatment, preserve CPUlease untilcopy-stream
+fence evenexception, boundedactual-copy equality/4worker/correctness gates. Keep C2/sink
+policy unchanged forattribution. Unactivatedsink component remainspartial/notprimarybydefault.
+
 LATEST supersedes liveheading:0cae handleexpired,butrawterminalvalid recovered(no restart),
 independent source149/16warm+16profile/physicaljoin/isolation201/exactrecordedreleasePASS;
 see PROFILE_G1_R16_EARLYMIXED_TERMINAL_AUDIT_20261016.json. No owned modeljob.

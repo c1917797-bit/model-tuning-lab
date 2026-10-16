@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R16-both-earlymixed-terminal-native-offline-parse",
+  "execution_state": "R16-earlymixed-fourrank-comparison-complete-next-single-material-treatment",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "No owned modeljob.0cae rawterminalvalid,source149/physical/isolation201/release independently accepted; handleexpired,neverrestarted. Native CPUparser590ae29b... no compute devices."
+    "state": "No owned modeljob or live parser. Native parser590ae29b exited0; fourrank artifact audit0ce0 passed. No restart."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll nativeearlymixed parserCID590ae29b59d174db751ddab5bf709c6311668080adeee8e96511987d9ea562d1; auditall4/actualphase. G3allrank0cb4valid,~10.335s two-step; nativefirst-rank4.575s preliminary. copy_parent CPUaudit0ccb locates4.3s aten::copy_ hostself (caninclude waits). Choose one evidenced material treatment, not onlyIO. Sinkcomponent19CPUtests0cbe/29structurePASS,unactivated/current149unchanged. Native0cae raw/source/physical/isolation201/releaseauditPASS; no restartneeded. Fullmatrix/quality/lifecycle incomplete.",
+  "next_action": "Native0ce0 and HYPIC0cb4 fourrank earlymixed artifact audits complete. See PROFILE_R16_EARLYMIXED_COMPARISON_20261016.json and PROFILE_R16_C1_COPY_LOCALIZATION_20261016.json. Two observed model iterations each; native~4.574s vs HYPIC~10.335s, but treatment kernel mix differs. Implement/test one opt-in C1 transfer treatment preserving private-source lifetime and exception-safe completion; do not bundle unactivated evidence sink or C2 barrier. Freeze new source/config/contract before bounded NPU validation. Fullmatrix, quality, lifecycle incomplete.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,7 +215,7 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL raw0cae valid; handleexpired/recoveredwithoutrestart. Independent source149/16warm+16profile/physical/isolation201/releasePASS. OnlynativeCPUparser590ae29b... andcopy_parentaudit0ccb; no owned modeljob.",
+    "state": "TERMINAL raw0cae/source149/physical/isolation201/release accepted; parser590ae29b exited0; independent fourrank parsed artifacts0ce0 accepted. No owned live modeljob.",
     "operation": "exec-0000000000000cae",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",

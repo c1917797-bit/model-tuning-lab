@@ -1,0 +1,702 @@
+{
+  "schema": "hypic-earlymixed-comparison/v1",
+  "native_audit": "exec-0000000000000ce0",
+  "hypic_audit": "exec-0000000000000cb4",
+  "scope": "Same frozen diagnostic workload, two observed model iterations, not formal speed acceptance. Actual query/segment work differs by treatment.",
+  "ranks": {
+    "0": {
+      "native": {
+        "directory": "rank0_59_20261016152707180_ascend_pt",
+        "tables": {
+          "operator_details.csv": {
+            "rows": 38793,
+            "columns": 9
+          },
+          "kernel_details.csv": {
+            "rows": 5188,
+            "columns": 46
+          },
+          "op_statistic.csv": {
+            "rows": 46,
+            "columns": 9
+          },
+          "api_statistic.csv": {
+            "rows": 83,
+            "columns": 9
+          }
+        },
+        "trace_events": 140192,
+        "trace_bytes": 26417656,
+        "trace_categories": {
+          "cpu_op": 38793,
+          "dequeue": 6593,
+          "async_task_queue": 13186,
+          "enqueue": 6593,
+          "None": 49077,
+          "HostToDevice": 13106,
+          "async_npu": 12844
+        },
+        "steps": [],
+        "kernel_types": {
+          "RecurrentGatedDeltaRule": 48,
+          "FusedInferAttentionScore": 32,
+          "hcom_allReduce_": 516,
+          "ChunkGatedDeltaRuleFwdH": 48,
+          "chunk_scaled_dot_kkt_fwd_kernel": 48,
+          "ChunkFwdO": 48,
+          "ArgMaxV2": 2,
+          "IsFinite": 0,
+          "ReduceAll": 0
+        },
+        "timeline": {
+          "path": "/cache/cch/hypic-independent-20261013/profile-g1-r16-earlymixed-r1-analysis-r1/rank0_59_20261016152707180_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+          "sha256": "fb970853a17c72309e41707a1328198b02685aa1620b73b4deeb23d36cf3bd5b",
+          "kernel_rows": 5188,
+          "absolute_origin_us": "1792164427448923.958",
+          "kernel_envelope_us": 4573742.023999999,
+          "all_kernel_union_us": 4558350.935000022,
+          "uncovered_envelope_us": 15391.088999977335,
+          "uncovered_fraction": 0.0033650977512975134,
+          "communication_exclusive_us": 1112893.9870000067,
+          "types": [
+            {
+              "type": "MatMulV3",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 1690505.9680000045,
+              "union_us": 1690505.9680000045
+            },
+            {
+              "type": "hcom_allReduce_",
+              "communication_name_match": true,
+              "calls": 516,
+              "summed_us": 2225701.7720000143,
+              "union_us": 1112850.8860000072
+            },
+            {
+              "type": "FusedInferAttentionScore",
+              "communication_name_match": false,
+              "calls": 32,
+              "summed_us": 401477.06200000097,
+              "union_us": 401477.06200000097
+            },
+            {
+              "type": "AddRmsNormBias",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 284916.03299999377,
+              "union_us": 284916.03299999377
+            }
+          ]
+        }
+      },
+      "hypic": {
+        "directory": "rank0_58_20261016150902037_ascend_pt",
+        "tables": {
+          "operator_details.csv": {
+            "rows": 102255,
+            "columns": 9
+          },
+          "kernel_details.csv": {
+            "rows": 13327,
+            "columns": 46
+          },
+          "op_statistic.csv": {
+            "rows": 59,
+            "columns": 9
+          },
+          "api_statistic.csv": {
+            "rows": 93,
+            "columns": 9
+          }
+        },
+        "trace_events": 351810,
+        "trace_bytes": 66164864,
+        "trace_categories": {
+          "cpu_op": 102255,
+          "dequeue": 16103,
+          "async_task_queue": 32206,
+          "enqueue": 16103,
+          "None": 122089,
+          "HostToDevice": 31658,
+          "async_npu": 31396
+        },
+        "steps": [],
+        "kernel_types": {
+          "RecurrentGatedDeltaRule": 48,
+          "FusedInferAttentionScore": 96,
+          "hcom_allReduce_": 516,
+          "ChunkGatedDeltaRuleFwdH": 192,
+          "chunk_scaled_dot_kkt_fwd_kernel": 96,
+          "ChunkFwdO": 96,
+          "ArgMaxV2": 2,
+          "IsFinite": 640,
+          "ReduceAll": 736
+        },
+        "timeline": {
+          "path": "/cache/cch/hypic-independent-20261013/profile-g3-r16-earlymixed-r1-analysis-r1/rank0_58_20261016150902037_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+          "sha256": "c31ee097a57d1fda995d9d3aab1584cf906d967f1817ef1db7179cc53bc46389",
+          "kernel_rows": 13327,
+          "absolute_origin_us": "1792163342491785.041",
+          "kernel_envelope_us": 10334669.006000001,
+          "all_kernel_union_us": 5923357.117000004,
+          "uncovered_envelope_us": 4411311.888999997,
+          "uncovered_fraction": 0.42684597701570515,
+          "communication_exclusive_us": 1469144.39000001,
+          "types": [
+            {
+              "type": "MatMulV3",
+              "communication_name_match": false,
+              "calls": 512,
+              "summed_us": 2184362.4369999934,
+              "union_us": 2184362.4369999934
+            },
+            {
+              "type": "hcom_allReduce_",
+              "communication_name_match": true,
+              "calls": 516,
+              "summed_us": 2924466.786000006,
+              "union_us": 1462233.393000003
+            },
+            {
+              "type": "FusedInferAttentionScore",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 410836.3479999968,
+              "union_us": 410836.3479999968
+            },
+            {
+              "type": "AddRmsNormBias",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 361961.61599999346,
+              "union_us": 361961.61599999346
+            }
+          ]
+        }
+      }
+    },
+    "1": {
+      "native": {
+        "directory": "rank1_60_20261016152707179_ascend_pt",
+        "tables": {
+          "operator_details.csv": {
+            "rows": 38795,
+            "columns": 9
+          },
+          "kernel_details.csv": {
+            "rows": 5188,
+            "columns": 46
+          },
+          "op_statistic.csv": {
+            "rows": 46,
+            "columns": 9
+          },
+          "api_statistic.csv": {
+            "rows": 83,
+            "columns": 9
+          }
+        },
+        "trace_events": 140191,
+        "trace_bytes": 26413884,
+        "trace_categories": {
+          "cpu_op": 38795,
+          "dequeue": 6593,
+          "async_task_queue": 13186,
+          "enqueue": 6593,
+          "None": 49072,
+          "HostToDevice": 13106,
+          "async_npu": 12846
+        },
+        "steps": [],
+        "kernel_types": {
+          "RecurrentGatedDeltaRule": 48,
+          "FusedInferAttentionScore": 32,
+          "hcom_allReduce_": 516,
+          "ChunkGatedDeltaRuleFwdH": 48,
+          "chunk_scaled_dot_kkt_fwd_kernel": 48,
+          "ChunkFwdO": 48,
+          "ArgMaxV2": 2,
+          "IsFinite": 0,
+          "ReduceAll": 0
+        },
+        "timeline": {
+          "path": "/cache/cch/hypic-independent-20261013/profile-g1-r16-earlymixed-r1-analysis-r1/rank1_60_20261016152707179_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+          "sha256": "dd7065b57baa15f9129bc84041665d1e8ce4ca3b6549136bd4c1354a02e415bf",
+          "kernel_rows": 5188,
+          "absolute_origin_us": "1792164427449145.060",
+          "kernel_envelope_us": 4573420.199999999,
+          "all_kernel_union_us": 4557176.179999985,
+          "uncovered_envelope_us": 16244.020000014454,
+          "uncovered_fraction": 0.003551831952816069,
+          "communication_exclusive_us": 1111377.280000003,
+          "types": [
+            {
+              "type": "MatMulV3",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 1693757.320000003,
+              "union_us": 1693757.320000003
+            },
+            {
+              "type": "hcom_allReduce_",
+              "communication_name_match": true,
+              "calls": 516,
+              "summed_us": 2222662.840000006,
+              "union_us": 1111331.420000003
+            },
+            {
+              "type": "FusedInferAttentionScore",
+              "communication_name_match": false,
+              "calls": 32,
+              "summed_us": 398849.6599999973,
+              "union_us": 398849.6599999973
+            },
+            {
+              "type": "AddRmsNormBias",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 283240.17999999603,
+              "union_us": 283240.17999999603
+            }
+          ]
+        }
+      },
+      "hypic": {
+        "directory": "rank1_59_20261016150902037_ascend_pt",
+        "tables": {
+          "operator_details.csv": {
+            "rows": 102257,
+            "columns": 9
+          },
+          "kernel_details.csv": {
+            "rows": 13327,
+            "columns": 46
+          },
+          "op_statistic.csv": {
+            "rows": 59,
+            "columns": 9
+          },
+          "api_statistic.csv": {
+            "rows": 93,
+            "columns": 9
+          }
+        },
+        "trace_events": 351802,
+        "trace_bytes": 66054803,
+        "trace_categories": {
+          "cpu_op": 102257,
+          "dequeue": 16102,
+          "async_task_queue": 32204,
+          "enqueue": 16102,
+          "None": 122081,
+          "HostToDevice": 31658,
+          "async_npu": 31398
+        },
+        "steps": [],
+        "kernel_types": {
+          "RecurrentGatedDeltaRule": 48,
+          "FusedInferAttentionScore": 96,
+          "hcom_allReduce_": 516,
+          "ChunkGatedDeltaRuleFwdH": 192,
+          "chunk_scaled_dot_kkt_fwd_kernel": 96,
+          "ChunkFwdO": 96,
+          "ArgMaxV2": 2,
+          "IsFinite": 640,
+          "ReduceAll": 736
+        },
+        "timeline": {
+          "path": "/cache/cch/hypic-independent-20261013/profile-g3-r16-earlymixed-r1-analysis-r1/rank1_59_20261016150902037_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+          "sha256": "bb1ed39875678bcdf8dd3fd97a1cf897fd6477f39af40a3d2402c45452046aba",
+          "kernel_rows": 13327,
+          "absolute_origin_us": "1792163342491718.470",
+          "kernel_envelope_us": 10334521.940000001,
+          "all_kernel_union_us": 5908366.540000002,
+          "uncovered_envelope_us": 4426155.399999999,
+          "uncovered_fraction": 0.42828835486511135,
+          "communication_exclusive_us": 1450332.0599999977,
+          "types": [
+            {
+              "type": "MatMulV3",
+              "communication_name_match": false,
+              "calls": 512,
+              "summed_us": 2183866.259999999,
+              "union_us": 2183866.259999999
+            },
+            {
+              "type": "hcom_allReduce_",
+              "communication_name_match": true,
+              "calls": 516,
+              "summed_us": 2886702.680000014,
+              "union_us": 1443351.340000007
+            },
+            {
+              "type": "FusedInferAttentionScore",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 410002.08000000333,
+              "union_us": 410002.08000000333
+            },
+            {
+              "type": "AddRmsNormBias",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 361174.82000000484,
+              "union_us": 361174.82000000484
+            }
+          ]
+        }
+      }
+    },
+    "2": {
+      "native": {
+        "directory": "rank2_61_20261016152707179_ascend_pt",
+        "tables": {
+          "operator_details.csv": {
+            "rows": 38795,
+            "columns": 9
+          },
+          "kernel_details.csv": {
+            "rows": 5188,
+            "columns": 46
+          },
+          "op_statistic.csv": {
+            "rows": 46,
+            "columns": 9
+          },
+          "api_statistic.csv": {
+            "rows": 83,
+            "columns": 9
+          }
+        },
+        "trace_events": 140183,
+        "trace_bytes": 26388710,
+        "trace_categories": {
+          "cpu_op": 38795,
+          "dequeue": 6593,
+          "async_task_queue": 13186,
+          "enqueue": 6593,
+          "None": 49064,
+          "HostToDevice": 13106,
+          "async_npu": 12846
+        },
+        "steps": [],
+        "kernel_types": {
+          "RecurrentGatedDeltaRule": 48,
+          "FusedInferAttentionScore": 32,
+          "hcom_allReduce_": 516,
+          "ChunkGatedDeltaRuleFwdH": 48,
+          "chunk_scaled_dot_kkt_fwd_kernel": 48,
+          "ChunkFwdO": 48,
+          "ArgMaxV2": 2,
+          "IsFinite": 0,
+          "ReduceAll": 0
+        },
+        "timeline": {
+          "path": "/cache/cch/hypic-independent-20261013/profile-g1-r16-earlymixed-r1-analysis-r1/rank2_61_20261016152707179_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+          "sha256": "82cf24d1a0fa590d3e91659eeb554d6fb320b58fb2a28e345d72e23601cf3533",
+          "kernel_rows": 5188,
+          "absolute_origin_us": "1792164427448976.215",
+          "kernel_envelope_us": 4573592.74,
+          "all_kernel_union_us": 4557377.7199999755,
+          "uncovered_envelope_us": 16215.020000024699,
+          "uncovered_fraction": 0.0035453572108006927,
+          "communication_exclusive_us": 1111522.679999996,
+          "types": [
+            {
+              "type": "MatMulV3",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 1692443.9600000037,
+              "union_us": 1692443.9600000037
+            },
+            {
+              "type": "hcom_allReduce_",
+              "communication_name_match": true,
+              "calls": 516,
+              "summed_us": 2222943.519999992,
+              "union_us": 1111471.759999996
+            },
+            {
+              "type": "FusedInferAttentionScore",
+              "communication_name_match": false,
+              "calls": 32,
+              "summed_us": 400537.5199999972,
+              "union_us": 400537.5199999972
+            },
+            {
+              "type": "AddRmsNormBias",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 283437.27999999153,
+              "union_us": 283437.27999999153
+            }
+          ]
+        }
+      },
+      "hypic": {
+        "directory": "rank2_60_20261016150902036_ascend_pt",
+        "tables": {
+          "operator_details.csv": {
+            "rows": 102257,
+            "columns": 9
+          },
+          "kernel_details.csv": {
+            "rows": 13327,
+            "columns": 46
+          },
+          "op_statistic.csv": {
+            "rows": 59,
+            "columns": 9
+          },
+          "api_statistic.csv": {
+            "rows": 93,
+            "columns": 9
+          }
+        },
+        "trace_events": 351806,
+        "trace_bytes": 66072499,
+        "trace_categories": {
+          "cpu_op": 102257,
+          "dequeue": 16103,
+          "async_task_queue": 32206,
+          "enqueue": 16103,
+          "None": 122081,
+          "HostToDevice": 31658,
+          "async_npu": 31398
+        },
+        "steps": [],
+        "kernel_types": {
+          "RecurrentGatedDeltaRule": 48,
+          "FusedInferAttentionScore": 96,
+          "hcom_allReduce_": 516,
+          "ChunkGatedDeltaRuleFwdH": 192,
+          "chunk_scaled_dot_kkt_fwd_kernel": 96,
+          "ChunkFwdO": 96,
+          "ArgMaxV2": 2,
+          "IsFinite": 640,
+          "ReduceAll": 736
+        },
+        "timeline": {
+          "path": "/cache/cch/hypic-independent-20261013/profile-g3-r16-earlymixed-r1-analysis-r1/rank2_60_20261016150902036_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+          "sha256": "baf8c6ccafaad75ea32e4679728e5bae3181c86323e3620ea31f2b2c2cec2fcb",
+          "kernel_rows": 13327,
+          "absolute_origin_us": "1792163342491671.905",
+          "kernel_envelope_us": 10334563.34,
+          "all_kernel_union_us": 5981301.580000004,
+          "uncovered_envelope_us": 4353261.759999996,
+          "uncovered_fraction": 0.42123325551169305,
+          "communication_exclusive_us": 1526125.399999993,
+          "types": [
+            {
+              "type": "MatMulV3",
+              "communication_name_match": false,
+              "calls": 512,
+              "summed_us": 2182828.680000009,
+              "union_us": 2182828.680000009
+            },
+            {
+              "type": "hcom_allReduce_",
+              "communication_name_match": true,
+              "calls": 516,
+              "summed_us": 3038436.0799999996,
+              "union_us": 1519218.0399999998
+            },
+            {
+              "type": "FusedInferAttentionScore",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 409092.45999999705,
+              "union_us": 409092.45999999705
+            },
+            {
+              "type": "AddRmsNormBias",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 361375.58000000054,
+              "union_us": 361375.58000000054
+            }
+          ]
+        }
+      }
+    },
+    "3": {
+      "native": {
+        "directory": "rank3_62_20261016152707179_ascend_pt",
+        "tables": {
+          "operator_details.csv": {
+            "rows": 38795,
+            "columns": 9
+          },
+          "kernel_details.csv": {
+            "rows": 5188,
+            "columns": 46
+          },
+          "op_statistic.csv": {
+            "rows": 46,
+            "columns": 9
+          },
+          "api_statistic.csv": {
+            "rows": 83,
+            "columns": 9
+          }
+        },
+        "trace_events": 140184,
+        "trace_bytes": 26392199,
+        "trace_categories": {
+          "cpu_op": 38795,
+          "dequeue": 6592,
+          "async_task_queue": 13184,
+          "enqueue": 6592,
+          "None": 49069,
+          "HostToDevice": 13106,
+          "async_npu": 12846
+        },
+        "steps": [],
+        "kernel_types": {
+          "RecurrentGatedDeltaRule": 48,
+          "FusedInferAttentionScore": 32,
+          "hcom_allReduce_": 516,
+          "ChunkGatedDeltaRuleFwdH": 48,
+          "chunk_scaled_dot_kkt_fwd_kernel": 48,
+          "ChunkFwdO": 48,
+          "ArgMaxV2": 2,
+          "IsFinite": 0,
+          "ReduceAll": 0
+        },
+        "timeline": {
+          "path": "/cache/cch/hypic-independent-20261013/profile-g1-r16-earlymixed-r1-analysis-r1/rank3_62_20261016152707179_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+          "sha256": "bc44cd30ed1ef05ab7708f3e08c14f9b763213d564fd6c4756debf442cdd8f83",
+          "kernel_rows": 5188,
+          "absolute_origin_us": "1792164427448851.740",
+          "kernel_envelope_us": 4573718.46,
+          "all_kernel_union_us": 4558314.279999972,
+          "uncovered_envelope_us": 15404.180000027642,
+          "uncovered_fraction": 0.0033679773109662812,
+          "communication_exclusive_us": 1109978.479999994,
+          "types": [
+            {
+              "type": "MatMulV3",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 1691403.2000000007,
+              "union_us": 1691403.2000000007
+            },
+            {
+              "type": "hcom_allReduce_",
+              "communication_name_match": true,
+              "calls": 516,
+              "summed_us": 2219900.159999989,
+              "union_us": 1109950.0799999945
+            },
+            {
+              "type": "FusedInferAttentionScore",
+              "communication_name_match": false,
+              "calls": 32,
+              "summed_us": 400865.4999999994,
+              "union_us": 400865.4999999994
+            },
+            {
+              "type": "AddRmsNormBias",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 284624.4599999931,
+              "union_us": 284624.4599999931
+            }
+          ]
+        }
+      },
+      "hypic": {
+        "directory": "rank3_61_20261016150902036_ascend_pt",
+        "tables": {
+          "operator_details.csv": {
+            "rows": 102257,
+            "columns": 9
+          },
+          "kernel_details.csv": {
+            "rows": 13327,
+            "columns": 46
+          },
+          "op_statistic.csv": {
+            "rows": 59,
+            "columns": 9
+          },
+          "api_statistic.csv": {
+            "rows": 93,
+            "columns": 9
+          }
+        },
+        "trace_events": 351803,
+        "trace_bytes": 66067216,
+        "trace_categories": {
+          "cpu_op": 102257,
+          "dequeue": 16102,
+          "async_task_queue": 32204,
+          "enqueue": 16102,
+          "None": 122082,
+          "HostToDevice": 31658,
+          "async_npu": 31398
+        },
+        "steps": [],
+        "kernel_types": {
+          "RecurrentGatedDeltaRule": 48,
+          "FusedInferAttentionScore": 96,
+          "hcom_allReduce_": 516,
+          "ChunkGatedDeltaRuleFwdH": 192,
+          "chunk_scaled_dot_kkt_fwd_kernel": 96,
+          "ChunkFwdO": 96,
+          "ArgMaxV2": 2,
+          "IsFinite": 640,
+          "ReduceAll": 736
+        },
+        "timeline": {
+          "path": "/cache/cch/hypic-independent-20261013/profile-g3-r16-earlymixed-r1-analysis-r1/rank3_61_20261016150902036_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+          "sha256": "e7c27343566260da83394bdc0dd02c595bd2f084a444d1502afc143465d3207d",
+          "kernel_rows": 13327,
+          "absolute_origin_us": "1792163342490935.880",
+          "kernel_envelope_us": 10335298.42,
+          "all_kernel_union_us": 5993050.619999973,
+          "uncovered_envelope_us": 4342247.800000027,
+          "uncovered_fraction": 0.4201376315943886,
+          "communication_exclusive_us": 1538624.2599999895,
+          "types": [
+            {
+              "type": "MatMulV3",
+              "communication_name_match": false,
+              "calls": 512,
+              "summed_us": 2182073.2999999896,
+              "union_us": 2182073.2999999896
+            },
+            {
+              "type": "hcom_allReduce_",
+              "communication_name_match": true,
+              "calls": 516,
+              "summed_us": 3063484.7999999854,
+              "union_us": 1531742.3999999927
+            },
+            {
+              "type": "FusedInferAttentionScore",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 408162.0000000007,
+              "union_us": 408162.0000000007
+            },
+            {
+              "type": "AddRmsNormBias",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 361566.70000000065,
+              "union_us": 361566.70000000065
+            }
+          ]
+        }
+      }
+    }
+  },
+  "decision": "Both arms have two ArgMax iterations and recurrent plus chunk prefill work. HYPIC adds substantial host waiting/copy and extra chunk/render kernels. Test one material transfer change only; do not activate evidence sink simultaneously.",
+  "limits": [
+    "Profiler operator self time includes waits; not removable cost.",
+    "Different chunk and attention call counts reflect treatment paths, not matched kernel workload.",
+    "Full40 performance, paired quality and lifecycle remain incomplete."
+  ]
+}
