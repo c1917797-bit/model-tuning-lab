@@ -1,0 +1,93 @@
+{
+  "schema": "hypic-r17-copy-canary-terminal-audit/v1",
+  "controller": "exec-0000000000000d00",
+  "controller_exit_code": 0,
+  "independent_audit_operation": "exec-0000000000000d1d",
+  "independent_audit_exit_code": 0,
+  "contract": "C1_ASYNC_MATERIAL_R17_CANARY_R1_CONTRACT.json",
+  "checkpoint": "61bc4e2a53dc5371a9dee926a418da9f66db885e",
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-async-material-r17-canary-r1",
+  "audit": {
+    "bounded_canary_valid": true,
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 2,
+      "covered": [
+        "cmpl-ab43cbe3eea20a39",
+        "cmpl-926ab3cc57d8adb8"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 59,
+        "1": 60,
+        "2": 61,
+        "3": 62
+      },
+      "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+    },
+    "transfers": {
+      "all_completed_hot_receipts_joined": true,
+      "matched_hot_receipts": 384,
+      "copy_leases": 384,
+      "per_rank_completed_hot": {
+        "0": 96,
+        "1": 96,
+        "2": 96,
+        "3": 96
+      },
+      "scope": "full bytes for observed C1 material leases, not algorithm numerical equivalence or task quality"
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 59,
+          "host_pid": 3059390,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 60,
+          "host_pid": 3059391,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 61,
+          "host_pid": 3059392,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 62,
+          "host_pid": 3059393,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "source_bindings": 156,
+    "isolation_samples": 223,
+    "live_release_verified": true,
+    "scope": "two-request integrated mechanism and exact material-copy bytes only; no formal speed, full quality or lifecycle acceptance"
+  },
+  "raw_sha256": {
+    "result.json": "f3bc2005852d63a8d54c7f772672daadc64e4e7766d9e8a620d0596966ef9b0e",
+    "responses.json": "e3ff7b3bbf53a60b65c98caa3f5e72933bfabc2d6566916e8ba05d2c0383f451",
+    "events.jsonl": "45a66cfe0ac70021f1ae94856f44060a160954b1531848962a0ca5969671e856",
+    "isolation.json": "9c8c6d6edb885898e359fdb0be3cef00c0f3bd9bcab896b849bc857f1d56eb20",
+    "release.json": "a02ea005d5be35a6f545d80e7873742ea2cadaec9f5d05251f4a036556c9ea84",
+    "service-start.json": "19d48e9dcd222daee34796ec151a172e19b24f412990f4af9696e645a8c7d214",
+    "service.log": "10dd7c0fa8e66e48f99d8374a40d570684e6310f475974899cb0c773f0c09e9e",
+    "diagnostics/compact-worker-59.jsonl": "40070f3ee9364f050851daeff37e0481d629f2faf1726387040f5ff257274992",
+    "diagnostics/compact-worker-60.jsonl": "c0563f0232a4e3c27eb14596423854a4515c4ab06928ca919f4b6f3e2937aa53",
+    "diagnostics/compact-worker-61.jsonl": "2dc781aef4fc6cc7ffd829a4bff52015a12e158a4ae073661bf08bf1ffcd4d13",
+    "diagnostics/compact-worker-62.jsonl": "ac40489c5ef3e9249f702f50f51f056ad616bfe4a9468fb6827bfdceaaebacc5"
+  },
+  "allowed_claim": "Bounded real TP4 C1 async private-material copies and two-request48/16 mechanism/source/physical/isolation/release passed",
+  "forbidden_claims": [
+    "HYPIC speedup",
+    "algorithm bitwise equivalence",
+    "381-per-arm task quality",
+    "lifecycle acceptance",
+    "29Skill functional acceptance"
+  ],
+  "scope_note": "Nested hot.scope text is inherited from generic full40 auditor; actual denominator is2 and covered contains exactly2. No full40 claim from this Canary.",
+  "next": "R17_TRANSFER_ATTRIBUTION_PLAN_20261016.json; fresh actual admission then blocking/async/native full40 arms; numeric-copy verification disabled during timings"
+}

@@ -1,5 +1,17 @@
 # CURRENT R17 C1 ASYNC MATERIAL HOST-READY; NO NPU CLAIM
 
+TERMINAL supersedes live d00 text:exit0; independent0d1d PASS full two-request
+fourrank48C1/16C2,384copyleases/fullbytes/samePID-rank-step-layer-generation joins,
+156sources/223clean isolation/explicitNSpidphysicaljoins/live exactCID+portrelease.
+R17_COPY_CANARY_R1_TERMINAL_AUDIT_20261016.json preservesrawhashes. Oldrootimmutable.
+No owned modeljob. Thisis bounded copy/mechanism proof, NOT speed/quality/lifecycle.
+Prepared159-bound blocking/async/native full40 R1contracts and independenttimed
+audit4hostcontrols0d10/static0d1a pass. Allnewfiles unbound to completed d00;
+its156runtimebindings unchanged. Plan R17_TRANSFER_ATTRIBUTION_PLAN_20261016.json.
+Next freshactualadmission then FORMAL_R17_TRANSFER_BLOCKING_R1_CONTRACT.json,
+audit_r17_transfer_performance.py --live-release. Only proceed when priorvalid,
+one controller atatime; no copy/probe verification overhead in timedarms.
+
 LIVE overrides preparation text:ma exec-0000000000000d00 launched16:15UTC,
 checkpoint61bc4e2a alreadyremoteverified; admission0cff156source/image/model/input/
 physical0-3empty/8233+HCCLfree/newroot/cache10.3GiB PASS.

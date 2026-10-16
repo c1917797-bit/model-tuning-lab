@@ -1,0 +1,42 @@
+{
+  "schema": "hypic-transfer-attribution-plan/v1",
+  "state": "prospective-pending-copy-canary-independent-acceptance",
+  "prerequisite": {
+    "controller": "exec-0000000000000d00",
+    "contract": "C1_ASYNC_MATERIAL_R17_CANARY_R1_CONTRACT.json",
+    "audit": "audit_c1_async_material.py --contract C1_ASYNC_MATERIAL_R17_CANARY_R1_CONTRACT.json --live-release",
+    "required": "complete valid requests; every completed C1 hot layer joins full-byte same-lease proof; source/fourworker/physical/continuousisolation/exactrelease valid"
+  },
+  "order": [
+    "FORMAL_R17_TRANSFER_BLOCKING_R1_CONTRACT.json",
+    "FORMAL_R17_TRANSFER_ASYNC_R1_CONTRACT.json",
+    "FORMAL_R17_TRANSFER_NATIVE_R1_CONTRACT.json"
+  ],
+  "protocol": {
+    "input_tokens": 32768,
+    "output_tokens": 1024,
+    "requests": 40,
+    "concurrency": 16,
+    "warmups": "same2B+2A",
+    "pdc": false,
+    "retries": 0,
+    "thinking": false,
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tp": 4
+  },
+  "attribution": "blocking vs async isolates the new transfer switch; async vs native tests whole HYPIC direction. Blocking extra arm is diagnosis, not a G1-G4 matrix slot.",
+  "audit": "audit_r17_transfer_performance.py; exact bool activation flags and no full-copy verification/probe events in timing",
+  "progression": "Independent valid per-arm evidence first; negative first-screen direction remains rejection/qualification and forbids unchanged full-matrix expansion. Do not lower workload or weaken coverage for green results. If direction is supported, continue the requested G1-G4 three-round paired evidence and quality/lifecycle gates.",
+  "limits": [
+    "Prepared contract is not a launched or accepted stage",
+    "No speed conclusion from numeric Canary",
+    "No R16 speed reuse as same-source R17 result",
+    "Original full goal remains incomplete"
+  ],
+  "deadline_utc": "2026-10-17T06:48:09Z"
+}
