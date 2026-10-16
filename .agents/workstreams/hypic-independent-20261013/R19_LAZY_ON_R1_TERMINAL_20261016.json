@@ -1,0 +1,183 @@
+{
+  "controller": "exec-0000000000000e89",
+  "independent_audit": "exec-0000000000000eab",
+  "initial_audit": "exec-0000000000000ea9",
+  "release_note": "Initial strictbind EADDRINUSE;0eaa confirmedexactCIDabsent/physical0-3empty andTCP TIME-WAIT; natural45s wait then unchanged audit same rawpassed, no modelrerun",
+  "report": {
+    "terminal_unit_valid": true,
+    "timing": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 308.44726573193526,
+      "ttft_p95_ms": 406617.52066999907,
+      "tpot_p95_ms": 328.7582754199434
+    },
+    "isolation_samples": 478,
+    "source_bindings": 194,
+    "raw_sha256": {
+      "result.json": "4fea4d03986e3ed2be22cf63322d98fc526863718882559408ebe9c077522168",
+      "events.jsonl": "bf5edbb3b218e697ea7e8fb4a6b574b4108e875bf33acbe94e0a766b70dae16c",
+      "performance-unit.json": "4ab8722e8c0ee1a68b3a3b0b4756d3141551a044ffd532158896c1fd87955ff3",
+      "release.json": "0488af92033d091af9391bf83810cc38205da08de1607c3f3ca2857856956268"
+    },
+    "scope": "one same-source R19 timed arm; paired speed/fullquality/lifecycle separately",
+    "packed": {
+      "packed_performance_receipts_verified": true,
+      "workers": {
+        "0": 59,
+        "1": 60,
+        "2": 61,
+        "3": 62
+      },
+      "requests": 40,
+      "packed_groups": 7104,
+      "shadow_requests": 0,
+      "multi_hot_shadow_layers": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "scope": "timed packed call-stage/private finite precommit receipts; no numerical shadow equivalence or task quality claim"
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 59,
+          "host_pid": 923067,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 60,
+          "host_pid": 923068,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 61,
+          "host_pid": 923070,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 62,
+          "host_pid": 923073,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 40,
+      "covered": [
+        "cmpl-bc30ce40117599d9",
+        "cmpl-8604ee55cbfb81c5",
+        "cmpl-9b69b262a35f786b",
+        "cmpl-8231d34c96278019",
+        "cmpl-b2c29250ad3a325c",
+        "cmpl-8b5894694a3191ac",
+        "cmpl-afe4e36e6ef176f9",
+        "cmpl-b98e652d1f16c5a0",
+        "cmpl-b6a206bbbec974c0",
+        "cmpl-80e3ec97b599eeef",
+        "cmpl-aed52f5c739dd3e5",
+        "cmpl-988cdfc3452fe60f",
+        "cmpl-bae14dff8c031689",
+        "cmpl-9a010062b9e067e6",
+        "cmpl-b0b57d930190bc84",
+        "cmpl-88fa9e66495e226e",
+        "cmpl-83543b49cb5cbd77",
+        "cmpl-a360d370965667f7",
+        "cmpl-b900a3d245346f59",
+        "cmpl-86fb619b13b0944e",
+        "cmpl-8c112a1f09f8a0d3",
+        "cmpl-8f22ffd07868ce5b",
+        "cmpl-87b38d9b54fc8417",
+        "cmpl-89516313b4ed7d48",
+        "cmpl-b0f6c3ef412aa84b",
+        "cmpl-aa9de9508169e744",
+        "cmpl-905e4e12f3ee3850",
+        "cmpl-b0fcf0043c4cf1f6",
+        "cmpl-804e0d18a16a4fee",
+        "cmpl-991c5ad12df95b7c",
+        "cmpl-bf0086e6145572fa",
+        "cmpl-8590b634d4df206c",
+        "cmpl-af1469135acf3fe1",
+        "cmpl-a73a89181a0a5e91",
+        "cmpl-955616ac979b7d68",
+        "cmpl-8c5a9dcc16135a69",
+        "cmpl-9b8de7dfb67bc560",
+        "cmpl-bcf2e685e18ee2e5",
+        "cmpl-80a60cdc6415754c",
+        "cmpl-90ad6cacb55cb964"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 59,
+        "1": 60,
+        "2": 61,
+        "3": 62
+      },
+      "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+    },
+    "request_map": {
+      "cmpl-bc30ce40117599d9": "cmpl-bc30ce40117599d9-0-af091e58",
+      "cmpl-8604ee55cbfb81c5": "cmpl-8604ee55cbfb81c5-0-b28a3bf2",
+      "cmpl-9b69b262a35f786b": "cmpl-9b69b262a35f786b-0-b974640b",
+      "cmpl-8231d34c96278019": "cmpl-8231d34c96278019-0-8219e713",
+      "cmpl-b2c29250ad3a325c": "cmpl-b2c29250ad3a325c-0-9fd97041",
+      "cmpl-8b5894694a3191ac": "cmpl-8b5894694a3191ac-0-b518bc2e",
+      "cmpl-afe4e36e6ef176f9": "cmpl-afe4e36e6ef176f9-0-9638e4f5",
+      "cmpl-b98e652d1f16c5a0": "cmpl-b98e652d1f16c5a0-0-91b8a897",
+      "cmpl-b6a206bbbec974c0": "cmpl-b6a206bbbec974c0-0-b1473c76",
+      "cmpl-80e3ec97b599eeef": "cmpl-80e3ec97b599eeef-0-8a1616a2",
+      "cmpl-aed52f5c739dd3e5": "cmpl-aed52f5c739dd3e5-0-a3579754",
+      "cmpl-988cdfc3452fe60f": "cmpl-988cdfc3452fe60f-0-8f4f3e5c",
+      "cmpl-bae14dff8c031689": "cmpl-bae14dff8c031689-0-aa59ab37",
+      "cmpl-9a010062b9e067e6": "cmpl-9a010062b9e067e6-0-b1ea7931",
+      "cmpl-b0b57d930190bc84": "cmpl-b0b57d930190bc84-0-ae5e077d",
+      "cmpl-88fa9e66495e226e": "cmpl-88fa9e66495e226e-0-a1ee3a6c",
+      "cmpl-83543b49cb5cbd77": "cmpl-83543b49cb5cbd77-0-ab960097",
+      "cmpl-a360d370965667f7": "cmpl-a360d370965667f7-0-b77d2f69",
+      "cmpl-b900a3d245346f59": "cmpl-b900a3d245346f59-0-b2114907",
+      "cmpl-86fb619b13b0944e": "cmpl-86fb619b13b0944e-0-aadfc033",
+      "cmpl-8c112a1f09f8a0d3": "cmpl-8c112a1f09f8a0d3-0-afdf193d",
+      "cmpl-8f22ffd07868ce5b": "cmpl-8f22ffd07868ce5b-0-a6bb458f",
+      "cmpl-87b38d9b54fc8417": "cmpl-87b38d9b54fc8417-0-ad214d69",
+      "cmpl-89516313b4ed7d48": "cmpl-89516313b4ed7d48-0-a71ac30f",
+      "cmpl-b0f6c3ef412aa84b": "cmpl-b0f6c3ef412aa84b-0-9dca6dc4",
+      "cmpl-aa9de9508169e744": "cmpl-aa9de9508169e744-0-b3ec1bd1",
+      "cmpl-905e4e12f3ee3850": "cmpl-905e4e12f3ee3850-0-bf0fdbd7",
+      "cmpl-b0fcf0043c4cf1f6": "cmpl-b0fcf0043c4cf1f6-0-959ae742",
+      "cmpl-804e0d18a16a4fee": "cmpl-804e0d18a16a4fee-0-b1e867e8",
+      "cmpl-991c5ad12df95b7c": "cmpl-991c5ad12df95b7c-0-bb5acc00",
+      "cmpl-bf0086e6145572fa": "cmpl-bf0086e6145572fa-0-93c3d545",
+      "cmpl-8590b634d4df206c": "cmpl-8590b634d4df206c-0-a3224afa",
+      "cmpl-af1469135acf3fe1": "cmpl-af1469135acf3fe1-0-bd8ce1c7",
+      "cmpl-a73a89181a0a5e91": "cmpl-a73a89181a0a5e91-0-ab5447d9",
+      "cmpl-955616ac979b7d68": "cmpl-955616ac979b7d68-0-b1211f63",
+      "cmpl-8c5a9dcc16135a69": "cmpl-8c5a9dcc16135a69-0-8952dce1",
+      "cmpl-9b8de7dfb67bc560": "cmpl-9b8de7dfb67bc560-0-9efa94b1",
+      "cmpl-bcf2e685e18ee2e5": "cmpl-bcf2e685e18ee2e5-0-9146e8bc",
+      "cmpl-80a60cdc6415754c": "cmpl-80a60cdc6415754c-0-89159e5f",
+      "cmpl-90ad6cacb55cb964": "cmpl-90ad6cacb55cb964-0-a6aa9cdc"
+    },
+    "live_release_verified": true,
+    "partition": {
+      "enabled": true,
+      "groups": 7104,
+      "completed": 7680,
+      "workers": {
+        "0": 59,
+        "1": 60,
+        "2": 61,
+        "3": 62
+      }
+    },
+    "lazy": {
+      "lazy": true,
+      "completed_receipts": 71424
+    }
+  },
+  "decision": "VALID_ONE_ARM_NOT_PAIRED_GAIN",
+  "next": "Freshadmission FORMAL_R19_LAZY_OFF_R1_CONTRACT.json thennative perplan"
+}

@@ -1,4 +1,14 @@
-# CURRENT R19 LAZY ON FULL40 LIVE
+# CURRENT R19 LAZY ON FULL40 TERMINAL VALID; OFF NEXT
+
+0e89exit0;independent0eab PASS40/40/allfour48C1+16C2/7104partitiongroups/
+71424prepared receipts/194sources/478cleanisolation/explicitphysical/liveexactrelease.
+TPOT308.447266ms,TTFTP95406617.520670ms. R19_LAZY_ON_R1_TERMINAL_20261016.json.
+Initial0ea9strictbindfailed;0eaa confirmedTIME-WAIT/exactCIDabsent/physicalempty;
+natural45swait unchangedauditpassed. No modelrerun. No ownedmodeljob.
+Next publish thenfreshactualadmission FORMAL_R19_LAZY_OFF_R1_CONTRACT.json,
+validthenNATIVE; no pairedgainclaim untilmatchingarms audited. Fullgoal incomplete.
+
+# HISTORICAL R19 LAZY ON FULL40 LIVE
 
 ma exact exec-0000000000000e89 launched20:48UTC from liveverified2efe4db5.
 Admission0e88 proves194sources/181runtime/image/model/input/0-3empty/8233+HCCLfree/
