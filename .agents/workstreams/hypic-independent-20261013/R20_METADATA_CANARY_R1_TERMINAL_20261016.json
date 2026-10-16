@@ -1,0 +1,181 @@
+{
+  "schema": "hypic-r20-canary-terminal/v1",
+  "controller": "exec-0000000000000fbb",
+  "controller_exit": 0,
+  "raw_root": "/cache/cch/hypic-independent-20261013/metadata-r20-canary-r1",
+  "raw_sha256": {
+    "result.json": "b5a6ac589033d1f2e3da10c8526d02d1781833352f7a74cc1278210d271f81cd",
+    "events.jsonl": "42bc86f7f1cb0ffb72be648474b1f99425d8da04562d36b22f9d800bb9c2c4fb",
+    "release.json": "a7d3980e0605f569389e802da12068fc6961eab1890f728fd0580f3a8a7156cf"
+  },
+  "frozen_audit": {
+    "operation": "exec-0000000000000fdf",
+    "exit": 1,
+    "reason": "incorrect single-metadata-group maximum6reads assumption; unchanged auditor retained"
+  },
+  "successor_audit": {
+    "operation": "exec-0000000000000fe0",
+    "exit": 0,
+    "report": {
+      "bounded_canary_valid": true,
+      "hot": {
+        "accepted_hot_coverage": true,
+        "denominator": 2,
+        "covered": [
+          "cmpl-b327d5874568ec01",
+          "cmpl-a35c9126ced1cff1"
+        ],
+        "missing": [],
+        "worker_pids": {
+          "0": 60,
+          "1": 61,
+          "2": 62,
+          "3": 63
+        },
+        "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+      },
+      "probe": {
+        "0": {
+          "original_thread_cpu_ns": 28015930,
+          "prefill_only_thread_cpu_ns": 64190,
+          "steps": [
+            3,
+            5
+          ],
+          "orders": [
+            [
+              "original",
+              "prefill_only"
+            ]
+          ]
+        },
+        "1": {
+          "original_thread_cpu_ns": 27836690,
+          "prefill_only_thread_cpu_ns": 73390,
+          "steps": [
+            3,
+            5
+          ],
+          "orders": [
+            [
+              "original",
+              "prefill_only"
+            ]
+          ]
+        },
+        "2": {
+          "original_thread_cpu_ns": 28561020,
+          "prefill_only_thread_cpu_ns": 66790,
+          "steps": [
+            3,
+            5
+          ],
+          "orders": [
+            [
+              "original",
+              "prefill_only"
+            ]
+          ]
+        },
+        "3": {
+          "original_thread_cpu_ns": 31180770,
+          "prefill_only_thread_cpu_ns": 63480,
+          "steps": [
+            3,
+            5
+          ],
+          "orders": [
+            [
+              "original",
+              "prefill_only"
+            ]
+          ]
+        }
+      },
+      "physical": {
+        "ranks": {
+          "0": {
+            "inner_pid": 60,
+            "host_pid": 2186649,
+            "physical_npu": 0
+          },
+          "1": {
+            "inner_pid": 61,
+            "host_pid": 2186650,
+            "physical_npu": 1
+          },
+          "2": {
+            "inner_pid": 62,
+            "host_pid": 2186651,
+            "physical_npu": 2
+          },
+          "3": {
+            "inner_pid": 63,
+            "host_pid": 2186652,
+            "physical_npu": 3
+          }
+        },
+        "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+      },
+      "source_bindings": 190,
+      "isolation_samples": 224,
+      "live_release_verified": true,
+      "scope": "bounded numeric and actual metadata reuse; not speed/full quality",
+      "partition": {
+        "groups": 384,
+        "completed_receipts": 384,
+        "numeric_shadows": 192,
+        "four_rank_layers": {
+          "0": 48,
+          "1": 48,
+          "2": 48,
+          "3": 48
+        },
+        "sampled_numeric_not_full_quality": true
+      },
+      "lazy_snapshot": {
+        "receipts": 384,
+        "skipped_layers": {
+          "0": 48,
+          "1": 48,
+          "2": 48,
+          "3": 48
+        },
+        "retained_shadow_layers": {
+          "0": 48,
+          "1": 48,
+          "2": 48,
+          "3": 48
+        }
+      },
+      "metadata_snapshot": {
+        "forwards": 8,
+        "request_ids": {
+          "0": [
+            "cmpl-a35c9126ced1cff1-0-b5d90548",
+            "cmpl-b327d5874568ec01-0-a21f23f1"
+          ],
+          "1": [
+            "cmpl-a35c9126ced1cff1-0-b5d90548",
+            "cmpl-b327d5874568ec01-0-a21f23f1"
+          ],
+          "2": [
+            "cmpl-a35c9126ced1cff1-0-b5d90548",
+            "cmpl-b327d5874568ec01-0-a21f23f1"
+          ],
+          "3": [
+            "cmpl-a35c9126ced1cff1-0-b5d90548",
+            "cmpl-b327d5874568ec01-0-a21f23f1"
+          ]
+        }
+      }
+    },
+    "scope": "post-run independently versioned read-conservation audit; original result not rewritten"
+  },
+  "limits": [
+    "Only2private1024 requests,192 serial numerical shadows; not381quality",
+    "No performance acceptance; R19 whole-HYPIC negative remains",
+    "Metadata object/group identities not emitted; reuse counters do not prove fulltensor equivalence"
+  ],
+  "next": "Freeze same-source R20G3/G1 first performance pair with timedshadows/probesoff, verify whole-service gain before expanding fullmatrix"
+}

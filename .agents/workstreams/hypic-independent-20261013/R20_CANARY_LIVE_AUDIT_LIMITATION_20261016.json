@@ -1,0 +1,27 @@
+{
+  "schema": "hypic-r20-live-audit-limitation/v1",
+  "controller": "exec-0000000000000fbb",
+  "state": "RUNNING",
+  "contract": "METADATA_R20_CANARY_R1_CONTRACT.json",
+  "frozen_auditor": "audit_r20_metadata_canary.py",
+  "observations": {
+    "all_four_workers": true,
+    "pure_forward": {
+      "reads": 9,
+      "hits": 135,
+      "total": 144
+    },
+    "mixed_forward": {
+      "reads": 18,
+      "hits": 270,
+      "total": 288
+    }
+  },
+  "defect": "Frozen metadata auditor assumes <=6 unique reads per forward, but this assumes a single metadata object across all48 GDN layers. Official runner only guarantees sharing inside each attention group, not globally.",
+  "handling": "Do not edit190bound sources or old raw root whilelive. Original audit will retain its result. Any successor audit must be separately versioned and justify association-call conservation3or6 fields times48layers, exactidentity/allfour coverage, not merely increase upper limit to observedcount.",
+  "limits": [
+    "Actual association metadata group identities not emitted in this run",
+    "No final numeric/release or speed acceptance yet"
+  ],
+  "next": "Wait exactcontroller terminal; run frozen audit and preserve failure if any; independently check immutable numerical/source/isolation/release evidence and separately version corrected reuse audit."
+}

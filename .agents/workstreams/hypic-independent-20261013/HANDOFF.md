@@ -1,4 +1,16 @@
-# CURRENT R20 METADATA NUMERIC CANARY LIVE
+# CURRENT R20 METADATA CANARY TERMINAL BOUNDED ACCEPTED
+
+0fbbexit0;224cleanisolation/3responses/exactCIDremoved/physical0-3empty/8233free.
+Frozenaudit0fdfexit1 retained:wrong single-group<=6reads assumption.
+Separatelyversioned auditv2 7controls0fdcPASS;0fe0 accepts2private same-step
+fourrank48C1/16C2,384partitionreceipts,192numericshadows,8forwardreuse receipts,
+190sourcebindings/explicitPIDphysical/liveexactrelease. Originalrawunchanged.
+R20_METADATA_CANARY_R1_TERMINAL_20261016.json preservesrawSHA/bothauditresults.
+Noowneddevicejob. Next freeze same-sourceR20G3/G1 timed firstpair (shadow/probeoff),
+verifywhole-service gain before expandingunchangedmatrix. Noquality/speedclaim.
+Fullgoalunfinished;deadline2026-10-17T06:48:09Z.
+
+# HISTORICAL R20 METADATA NUMERIC CANARY LIVE
 
 Checkpoint353019c03af33bf32551dd7043cb020c46d562b1 published/liveverified;
 main23ec33d7 unchanged. Final983CPU0fad PASS;190source/169runtime0fae PASS.

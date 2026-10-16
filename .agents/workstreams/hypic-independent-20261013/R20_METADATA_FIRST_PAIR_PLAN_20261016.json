@@ -1,0 +1,39 @@
+{
+  "schema": "hypic-r20-first-pair-plan/v1",
+  "order": [
+    "G3/R1",
+    "G1/R1"
+  ],
+  "contracts": [
+    "FORMAL_R20_METADATA_G3_R1_CONTRACT.json",
+    "FORMAL_R20_METADATA_G1_R1_CONTRACT.json"
+  ],
+  "prerequisite": "R20_METADATA_CANARY_R1_TERMINAL_20261016.json; frozenaudit0fdf rejected wronggroupbound, independentlyversioned0fe0 accepts boundednumeric/reuse/source/isolation/release",
+  "protocol": {
+    "input_tokens": 32768,
+    "shared_native_prefix": 8192,
+    "pic_segment": 16384,
+    "output_tokens": 1024,
+    "ignore_eos": true,
+    "requests": 40,
+    "concurrency": 16,
+    "warmups": "2B+2A",
+    "retries": 0,
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tp": 4
+  },
+  "acceptance": "Independent full40 actualsame-step allfour48C1/16C2/source/physical/isolation/release; R20 actualmetadata readconservation/reuse. Compare whole-service weightedTPOT/TTFTP95, not justcomponentgain.",
+  "decision_policy": "If whole-HYPIC remains slower, preserve negative and diagnose one evidencedremainingcost; do not spend unchangedfullmatrix. If firstpair beneficial, complete G1-G4 x3 plus full pairedquality/lifecycle; firstpairnotfinalacceptance.",
+  "deadline": "2026-10-17T06:48:09Z",
+  "limits": [
+    "No speedclaim before botharms valid",
+    "No change to earlierR19negative",
+    "Native successor configbinding is not active HYPIC"
+  ],
+  "runtime_change": "Forward-scoped source-bound native metadata snapshots only; finite/math/ownedcommit/lifetime safeguards unchanged."
+}
