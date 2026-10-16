@@ -1,5 +1,16 @@
 # CURRENT R17 C1 ASYNC MATERIAL HOST-READY; NO NPU CLAIM
 
+LIVE performance attribution:ma exec-0000000000000d23 started16:30UTC,
+first BLOCKING full40 R1 contract FORMAL_R17_TRANSFER_BLOCKING_R1_CONTRACT.json,
+raw /cache/cch/hypic-independent-20261013/formal-r17-transfer-blocking-r1.
+Sourcecheckpointa74fd1fb remoteverified; admission0d22 proves159sources/input/image/
+freshphysical0-3empty/8233+HCCLfree/newroot and replaysacceptedcopyCanaryliveaudit.
+ExactownCID92cf2e69635f5f06aecc283f1a367d703dc30b7e1fa45fbd3284c618dc243057,
+only0-3singleTP4. Pollsamehandle/root; no159boundsourceedits or restart whilelive.
+Terminal audit_r17_transfer_performance.py --contract FORMAL_R17_TRANSFER_BLOCKING_R1_CONTRACT.json
+--live-release. Priorvalid+freshadmission beforeASYNC thenNATIVEfull40arms.
+Localcopyincrement andwholeHYPICdirection separate; thisisnotalready a speedwin.
+
 TERMINAL supersedes live d00 text:exit0; independent0d1d PASS full two-request
 fourrank48C1/16C2,384copyleases/fullbytes/samePID-rank-step-layer-generation joins,
 156sources/223clean isolation/explicitNSpidphysicaljoins/live exactCID+portrelease.
