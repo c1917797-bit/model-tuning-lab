@@ -1,0 +1,54 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "three-directory composition and prospective lifecycle contracts",
+  "targeted": {
+    "operation": "exec-0000000000000b28",
+    "tests": 26,
+    "scope": "6whole-sequence-directorycontrols+20single-stagecontrols",
+    "exit": 0
+  },
+  "regression": {
+    "operation": "exec-0000000000000b2a",
+    "tests": 815,
+    "exit": 0
+  },
+  "static_contracts": {
+    "operation": "exec-0000000000000b32",
+    "result": {
+      "static_contracts": [
+        {
+          "stage": "disabled",
+          "sources": 156,
+          "root_absent": true,
+          "controller_configuration_only": true
+        },
+        {
+          "stage": "enabled",
+          "sources": 156,
+          "root_absent": true,
+          "controller_configuration_only": true
+        },
+        {
+          "stage": "uninstalled",
+          "sources": 156,
+          "root_absent": true,
+          "controller_configuration_only": true
+        }
+      ],
+      "default_disabled_controls": [
+        null,
+        "0"
+      ],
+      "manifest_sha256": "2454e8630ddf0ddd8051e5967a4eb74327a4948726dcd73813e4587a13c8f76b",
+      "scope": "HOSTONLY configuration and disabled launcher; no NPU or standard delivery validator acceptance"
+    }
+  },
+  "manifest": "LIFECYCLE_COMPACT_MANIFEST_R16.json",
+  "config": "LIFECYCLE_COMPACT_CONFIG_R16.json",
+  "scope": "HOSTONLY fixtures use generatedraw records/source stub;onlypayloadloader mocked. No device workload or NPU acceptance.",
+  "remaining": [
+    "Standarddeliverymanifest/wrapper/validator (compactruntime manifest is not standard delivery manifest)",
+    "Required preceding performance/quality progression",
+    "Actual lifecycle stages/independent fullaudit"
+  ]
+}

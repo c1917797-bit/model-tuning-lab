@@ -5,6 +5,24 @@ from audit_lifecycle_terminal import audit,audit_terminal_records
 import test_audit_lifecycle_startup_controls as startup_fixture
 import test_audit_lifecycle_requests as request_fixture
 
+def write_hot_fixture(base,raw,sources,mutate_hot=lambda e:None):
+    manifest={"source_sha256":copy.deepcopy(sources)}
+    mp=base/"m.json";mp.write_text(json.dumps(manifest));mh=hashlib.sha256(mp.read_bytes()).hexdigest()
+    diag=raw/"diagnostics";diag.mkdir();events=[]
+    for rank in range(4):
+        pid=50+rank;common=dict(rank=rank,pid=pid,manifest_sha256=mh)
+        events.append(dict(common,event="compact_hypic_hooks_installed"))
+        for layer in range(48):events.append(dict(common,event="compact_public_state_published",layer="gdn"+str(layer)))
+        for layer in range(16):events.append(dict(common,event="compact_public_kv_published",layer="kv"+str(layer)))
+        for i in (1,2):
+            rid="r"+str(i)+"-runtime";step=i+2
+            events.append(dict(common,event="native_request_progress",request_id=rid,step=step,scheduled_tokens=32768))
+            events.append(dict(common,event="compact_model_rows_completed",request_ids=[rid],step=step,original_rows=32768,retained_rows=16392))
+            for layer in range(48):events.append(dict(common,event="compact_gdn_body_composed",request_id=rid,step=step,layer="gdn"+str(layer),skipped_body_tokens=16376,retained_rows=16392,finite=True))
+            for layer in range(16):events.append(dict(common,event="compact_c2_queries_completed",request_id=rid,step=step,layer="kv"+str(layer),skipped_body_queries=16376,retained_rows=16392))
+    mutate_hot(events)
+    for rank in range(4):(diag/("compact-worker-"+str(rank)+".jsonl")).write_text("".join(json.dumps(e)+"\n"for e in events if e["rank"]==rank))
+
 def fixture(stage="disabled"):
     controls,c,samples,start,launch=startup_fixture.Tests().fixture(stage)
     c.update(physical_npus=[0,1,2,3],tp=4,image="image",enable_prefix_caching=False,enable_thinking=False,enforce_eager=True,completion=True,lifecycle_private_output_tokens=64,max_output_tokens=64,formal_token_artifact={"path":"/unused","sha256":"x"},port=8233)
@@ -60,23 +78,7 @@ class DirectoryComposition(unittest.TestCase):
             for name,obj in {"result.json":result,"responses.json":records,"isolation.json":samples,"service-start.json":start,"release.json":release,"launch.json":launch,"lifecycle-semantic.json":semantic,"lifecycle-worker-controls.json":controls}.items():(raw/name).write_text(json.dumps(obj))
             (raw/"events.jsonl").write_text("".join(json.dumps(e)+"\n"for e in journal))
             cp=base/"contract.json";cp.write_text(json.dumps(c))
-            if with_hot:
-                manifest={"source_sha256":copy.deepcopy(sources)}
-                mp=base/"m.json";mp.write_text(json.dumps(manifest));mh=hashlib.sha256(mp.read_bytes()).hexdigest()
-                diag=raw/"diagnostics";diag.mkdir();events=[]
-                for rank in range(4):
-                    pid=50+rank;common=dict(rank=rank,pid=pid,manifest_sha256=mh)
-                    events.append(dict(common,event="compact_hypic_hooks_installed"))
-                    for layer in range(48):events.append(dict(common,event="compact_public_state_published",layer="gdn"+str(layer)))
-                    for layer in range(16):events.append(dict(common,event="compact_public_kv_published",layer="kv"+str(layer)))
-                    for i in (1,2):
-                        rid="r"+str(i)+"-runtime";step=i+2
-                        events.append(dict(common,event="native_request_progress",request_id=rid,step=step,scheduled_tokens=32768))
-                        events.append(dict(common,event="compact_model_rows_completed",request_ids=[rid],step=step,original_rows=32768,retained_rows=16392))
-                        for layer in range(48):events.append(dict(common,event="compact_gdn_body_composed",request_id=rid,step=step,layer="gdn"+str(layer),skipped_body_tokens=16376,retained_rows=16392,finite=True))
-                        for layer in range(16):events.append(dict(common,event="compact_c2_queries_completed",request_id=rid,step=step,layer="kv"+str(layer),skipped_body_queries=16376,retained_rows=16392))
-                mutate_hot(events)
-                for rank in range(4):(diag/("compact-worker-"+str(rank)+".jsonl")).write_text("".join(json.dumps(e)+"\n"for e in events if e["rank"]==rank))
+            if with_hot:write_hot_fixture(base,raw,sources,mutate_hot)
             with patch("audit_lifecycle_terminal.lifecycle_payloads",return_value=payloads):return audit(cp)
     def test_disabled_directory(self):self.assertTrue(self.run_fixture()["lifecycle_stage_audited"])
     def test_uninstalled_directory(self):self.assertEqual(self.run_fixture("uninstalled")["stage"],"uninstalled")

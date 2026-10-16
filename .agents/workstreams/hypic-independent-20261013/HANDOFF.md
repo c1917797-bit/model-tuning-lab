@@ -1,3 +1,15 @@
+# LATEST prospective lifecycle contracts and three-directory composition
+
+26focused0b28/815CPU0b2aPASS; actual three-directory source/request/worker/hot/
+physical/isolation/release/chronology auditors composed on syntheticfixtures only.
+LIFECYCLE_COMPACT_CONFIG/MANIFEST_R16 and3LIFECYCLE_R16_*_R1_CONTRACTs frozen
+same156sources;0b32 static/threeconfiguration-onlyCLI/defaultunset+0loaderPASS.
+No lifecycle NPUrun or rawroot. Standarddeliverywrapper/MANIFEST/validator stillmissing;
+compactmanifest is NOTgeneric deliverymanifest. Required M3/M4/M5gates unchanged.
+See LIFECYCLE_CONTRACTS_R16_PLAN.md andreadinessreceipt. Noowneddevicejob/observer;
+lastsnapshot0b25 NPU3foreign647529/743094. R2failureimmutable; no blindretry.
+DeadlineOct17T06:48:09Z;fullgoalactive/incomplete.
+
 # LATEST lifecycle sequence HOSTONLY readiness
 
 audit_lifecycle_sequence.py now independently joins disabled/enabled/uninstalled

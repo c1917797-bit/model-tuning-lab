@@ -196,10 +196,10 @@
     ]
   },
   "publication": {
-    "state": "e3d7429 liveverified;sequenceaudit checkpoint pending",
-    "published_commit": "e3d74291f6992e0d5368956434d8ca511245ec00",
+    "state": "df1ce2f liveverified;contracts/readiness pending",
+    "published_commit": "df1ce2f98c822bb1b24674ed629ba185071ccc7b",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "note": "No NPU or full acceptance claim."
+    "note": "No NPU, quality, lifecycle or29functional acceptance."
   },
   "math_reference": {
     "state": "cpu-reference-passed",
@@ -288,16 +288,20 @@
   },
   "lifecycle_preparation": {
     "controller": "lifecycle_r16_tp4.py",
-    "state": "HOSTONLY single-stage plus sequenceaudits implemented;809CPU0b1dPASS;no actual lifecycle run",
+    "state": "HOSTONLY three-directorycomposition/815CPU0b2aPASS;prospective3contracts156bindings/static0b32PASS;noNPUrun",
     "reports": [
-      "LIFECYCLE_TERMINAL_HOST_READINESS_20261016.json",
-      "LIFECYCLE_ENABLED_COMPOSITION_HOST_READINESS_20261016.json",
-      "LIFECYCLE_SEQUENCE_HOST_READINESS_20261016.json"
+      "LIFECYCLE_SEQUENCE_HOST_READINESS_20261016.json",
+      "LIFECYCLE_CONTRACTS_READINESS_20261016.json"
+    ],
+    "contracts": [
+      "LIFECYCLE_R16_DISABLED_R1_CONTRACT.json",
+      "LIFECYCLE_R16_ENABLED_R1_CONTRACT.json",
+      "LIFECYCLE_R16_UNINSTALLED_R1_CONTRACT.json"
     ],
     "remaining": [
-      "three-directory composition",
-      "frozen package/stagecontracts",
-      "actual lifecycle after progression gates"
+      "Standarddeliverymanifest/wrapper/validator (compactruntime manifest is not standard delivery manifest)",
+      "Required preceding performance/quality progression",
+      "Actual lifecycle stages/independent fullaudit"
     ]
   }
 }
