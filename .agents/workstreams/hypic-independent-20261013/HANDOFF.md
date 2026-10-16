@@ -1,4 +1,14 @@
-# CURRENT R16 NATIVE PROFILE TERMINAL AUDITED; OFFLINE PARSER
+# CURRENT R16 DECODE COMPARATOR AUDITED; EARLYMIXED PREPARED
+
+Nativeparser terminalexit0;0c82 all4rank23,016kernels/validtrace, actualshape audit matches
+G3batch12 recurrentGDN/attention. Combinedspan G1 3.554946498s/G3 3.603035139s(+1.353%).
+Arrival medians1547.485/1556.85us; bothrankwaiting, NOT HYPIC bandwidth/GDNrootcause.
+PROFILE_R16_DECODE_COMPARISON_20261016.json scoped evidence; formal8.61%/15.34%negative stays.
+New G3/G1 EARLYMIXED_R1 contracts same149sources/staticconfigPASS;delay0/max2 may3steps,
+sameprivatewarm16x64. No algorithm change/newmodeljob yet. Publish checkpointthenfresh
+direct/source/physical0-3/8233+HCCL/newroot admission for G3actualprefill/mixed capture.
+No standaloneGDN or blanketcommunicationfix. Fullgoal/incomplete/deadlineOct17T06:48:09Z.
+Previous parserlive text is historical/superseded.
 
 0c69 terminalexit0, independent0c78 source149/16privatewarm+16profile32768x64/
 194clean isolation/officialrankPIDphysicaljoin/exactownedreleasePASS.

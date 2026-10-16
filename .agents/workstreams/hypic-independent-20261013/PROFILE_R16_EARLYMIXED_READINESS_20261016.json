@@ -1,0 +1,37 @@
+{
+  "configuration_valid": true,
+  "sources": 149,
+  "matched_keys": [
+    "controller_sha256",
+    "image",
+    "model",
+    "model_config_sha256",
+    "physical_npus",
+    "tp",
+    "port",
+    "hccl_ports",
+    "cpu_set",
+    "formal_token_artifact",
+    "profile_diagnostic",
+    "private_shape_warmup",
+    "enable_prefix_caching",
+    "enforce_eager",
+    "absolute_stop_utc"
+  ],
+  "profile_spec": {
+    "requests": 16,
+    "output_tokens": 64,
+    "max_iterations": 2,
+    "delay_iterations": 0
+  },
+  "roots_absent": true,
+  "device_run": false,
+  "algorithm_changed": false,
+  "operation": "exec-0000000000000c86",
+  "decision": "Bounded steadydecode comparator inconclusive for formal regression; no standalone GDN/HCCL treatment. Next paired earlymixed profile toobserve actual C1/C2 active path. New contract only/no algorithm source change.",
+  "contracts": [
+    "PROFILE_G3_R16_EARLYMIXED_R1_CONTRACT.json",
+    "PROFILE_G1_R16_EARLYMIXED_R1_CONTRACT.json"
+  ],
+  "launch_state": "not started; publication/fresh direct actual resource admission still required"
+}
