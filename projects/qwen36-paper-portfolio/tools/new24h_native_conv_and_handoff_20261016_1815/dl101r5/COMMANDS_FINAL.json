@@ -1,0 +1,68 @@
+{
+  "actual088160_required": true,
+  "aggregate_actual_I": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair5",
+    "-p",
+    "test_*.py"
+  ],
+  "commands": {
+    "bind": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair5/bind_source.py",
+      "--execute",
+      "--template-sha256",
+      "d657d8e9140f765d402b0619fd9d9589c8ed0479b9c860a1cf5400710b510a8d",
+      "--bridge-source-ref",
+      "ACTUAL088R6REPAIR2_BOUND_REF_REQUIRED",
+      "--bridge-owner-ref",
+      "ACTUAL088R6REPAIR2_RELEASED160_REF_REQUIRED",
+      "--component-cpu-owner-ref",
+      "ACTUAL088R6REPAIR2_SAME_SOURCE_CPU_REF_REQUIRED"
+    ],
+    "coldOFF": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair5/host_ticket.py"
+    ],
+    "execute": [
+      "/usr/bin/env",
+      "MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair5/host_ticket.py",
+      "--execute",
+      "--source-ref",
+      "ACTUAL101R5_BOUND_REF_REQUIRED"
+    ],
+    "sourceaudit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair5/host_ticket.py",
+      "--source-audit",
+      "--source-ref",
+      "ACTUAL101R5_BOUND_REF_REQUIRED"
+    ]
+  },
+  "default_enabled": false,
+  "schema": "deltalog.real-worker-typed-commands/v101",
+  "software_cases": 89,
+  "template": {
+    "bytes": 205705,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair5/SOURCE_TEMPLATE.json",
+    "sha256": "d657d8e9140f765d402b0619fd9d9589c8ed0479b9c860a1cf5400710b510a8d"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "bind": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-production-new24h-v1-106-repair5/bind106.py",
+    "--execute",
+    "--template-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-production-new24h-v1-106-repair5/SOURCE_TEMPLATE.json\",\"bytes\":32361,\"sha256\":\"a9584b52567148522c01f3a4b697485a74ca225bfc1f00b2dbd4382d55b7a06c\"}",
+    "--model-source-ref",
+    "ACTUAL_BOUND101R5_SOURCE_REQUIRED",
+    "--model-owner-ref",
+    "ACTUAL_RELEASED101R5_OWNER_REQUIRED"
+  ],
+  "caller_API": {
+    "common": "common106.apply_precision(torch) on BOTH arms before plugins",
+    "environment": "qualification106.environment(sr,qref,owned_receipt_root,enabled)",
+    "qualify": "qualification106.qualify(qref,sr)",
+    "readset": "qualification106.readset(sr)+[qref]",
+    "shape": "common106.check_shape(prompt_tokens=actual,sequences=actual)",
+    "snapshots": "snapshot_owner106.snapshot(c,ctl,root,stage) outsidetiming",
+    "startup_and_terminal": "live106.validate_snapshot(value,sr,qref,minimum_candidate=requiredactualcount)"
+  },
+  "execution": false,
+  "missing_actual": "actual088R6REPAIR2same-sourceCPU160 and actual101R5complete-model-release; no old PASS substituted",
+  "software": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-production-new24h-v1-106-repair5",
+    "-p",
+    "test*.py"
+  ],
+  "software_cases": 11,
+  "template": {
+    "bytes": 32361,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-production-new24h-v1-106-repair5/SOURCE_TEMPLATE.json",
+    "sha256": "a9584b52567148522c01f3a4b697485a74ca225bfc1f00b2dbd4382d55b7a06c"
+  }
+}

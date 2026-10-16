@@ -1,0 +1,68 @@
+{
+  "actual_R1_remote_directory_exists": false,
+  "current_file_dependency": false,
+  "files": {
+    "capture088.py": {
+      "bytes": 3473,
+      "sha256": "2754b44e49c511c3ec39d308c63f4de460427686b5a944c4e5e5c4f9f599338f"
+    },
+    "collection_policy.py": {
+      "bytes": 3235,
+      "sha256": "d370e39fbbd90d94fefa5761d7a27e607ee82d2919a6f284e81180a6bbb5d6d3"
+    },
+    "consumer088.py": {
+      "bytes": 3192,
+      "sha256": "2fd35e886d2882f57f0b72beeeaf9f8768adc21763cf9c5a8669d13ef81bc290"
+    },
+    "direct_round.py": {
+      "bytes": 3378,
+      "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d"
+    },
+    "oracle.py": {
+      "bytes": 3407,
+      "sha256": "cd395a05dbfcb21f1104d617afb1fab6f80374016585e9096ca24d85c2cae97a"
+    },
+    "precast.py": {
+      "bytes": 5831,
+      "sha256": "4f1ca4d1243c90c663db2702010ecef8f76805a4259d107fb1be44648f35695d"
+    },
+    "preregister.py": {
+      "bytes": 1328,
+      "sha256": "145293a6efb154a619daa38ca1ec0dd747ee4c2bf275df515856e335dcfcb0e2"
+    },
+    "producer.py": {
+      "bytes": 10678,
+      "sha256": "045059e6f0e2eae39cdb2f2df5c4962ceffc58830b9a7d7b864f9c823972eb2f"
+    },
+    "qwen36_deltalog_fresh/native_fixture.py": {
+      "bytes": 17017,
+      "sha256": "cb619cbd39e67245f644f50e798120d7d946e30cadb889f9f38e24a2adb6b2bd"
+    },
+    "qwen36_deltalog_fresh/primitives.py": {
+      "bytes": 11059,
+      "sha256": "bc88725f4443ef97886d71dfeb6105a1fc8f5bf762b164fafead81b7b7bce05b"
+    },
+    "qwen36_deltalog_fresh/provider.py": {
+      "bytes": 7940,
+      "sha256": "bf31ceb56dc9c6a46377a2cd2c34b505782ad6ed9bbdfbe6f776abc9ece04fb6"
+    },
+    "qwen36_deltalog_fresh/runtime_helpers.py": {
+      "bytes": 10046,
+      "sha256": "5fcd586ca26b4ef8daa1723d32ad206dcebd527c1b0484bfc2656f5ccb1b20d5"
+    },
+    "raw_codec.py": {
+      "bytes": 3592,
+      "sha256": "4eb6bb0d5488cd1dfc3f2cb6c0f063d11b83ce07dbf594010c1d7554d844cd0e"
+    },
+    "run_consumer088.py": {
+      "bytes": 7119,
+      "sha256": "3822ea42c24ccd788eb858fc8a7e948d4e2a8c10824802ae261c74055fc6e898"
+    }
+  },
+  "historical_template_ref": {
+    "bytes": 58078,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair1/SOURCE_TEMPLATE.json",
+    "sha256": "182213f96e1a3f97a8318ae7f3e7b9c79e56a64aa354796bce6ffbb603ebe122"
+  },
+  "schema": "deltalog.historical-not-deployed-R1-content-fingerprints/v088-repair6-repair1"
+}

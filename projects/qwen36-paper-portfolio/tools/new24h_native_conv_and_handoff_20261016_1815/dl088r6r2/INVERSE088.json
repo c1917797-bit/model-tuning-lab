@@ -1,0 +1,114 @@
+[
+  {
+    "appended_exact": "\n# New validation-only wrapper; no graph claim and no arithmetic replacement.\n_eager_original088=mixed_case\ndef mixed_case(*args,**kwargs):\n import inspect,capture088\n bound=inspect.signature(_eager_original088).bind(*args,**kwargs);bound.apply_defaults();v=bound.arguments\n if v['mode']!='eager':raise ValueError('graph-safe replay collection not yet implemented; do not relabel eager')\n if v['captures']is None:raise ValueError('new complete raw required')\n restore=capture088.install_flush(v['torch'],v['legacy'],v['captures'])\n try:return _eager_original088(*args,**kwargs)\n finally:restore()\n",
+    "candidate": {
+      "bytes": 17017,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088/qwen36_deltalog_fresh/native_fixture.py",
+      "sha256": "cb619cbd39e67245f644f50e798120d7d946e30cadb889f9f38e24a2adb6b2bd"
+    },
+    "edits": [
+      {
+        "new": "if captures is not None:\n            import capture088\n            c088=capture088.native_controls(torch,original_chunk,args,kwargs,value,E030,gdn,chunk)\n            captures.setdefault(\"prefill\",[]).append(dict(inputs=raw,output=value[0].cpu(),final_state=value[1].cpu(),same_initial088=c088))",
+        "old": "if captures is not None:captures.setdefault(\"prefill\",[]).append(dict(inputs=raw,output=value[0].cpu(),final_state=value[1].cpu()))"
+      },
+      {
+        "new": "manual_seed(2610168801+batch)",
+        "old": "manual_seed(2610165101+batch)"
+      }
+    ],
+    "file": "qwen36_deltalog_fresh/native_fixture.py",
+    "original": {
+      "bytes": 16257,
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\deltalog-split-scale-numeric-new24h-20261016-069-repair1\\qwen36_deltalog_fresh\\native_fixture.py",
+      "sha256": "e557b34be77e9e1ea85e4663df879228425eb8931b2aa162eb9e9d156b46aaff"
+    }
+  },
+  {
+    "appended_exact": "",
+    "candidate": {
+      "bytes": 3235,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088/collection_policy.py",
+      "sha256": "d370e39fbbd90d94fefa5761d7a27e607ee82d2919a6f284e81180a6bbb5d6d3"
+    },
+    "edits": [
+      {
+        "new": "POLICY=dict(schema='deltalog.cross-history-native-deferred-collection/v088',cross_history_native_state_diagnostic_only=True",
+        "old": "POLICY=dict(schema='deltalog.BF16-point-deferred-collection/v043-repair3'"
+      },
+      {
+        "new": "if not all(row[n]for n in FLAGS):return True\n deferred_state=diagnostics is not None and getattr(diagnostics,'defer_cross_history_native_state088',False)is True\n if state_error>state_limit and not deferred_state:return True",
+        "old": "if state_error>state_limit or not all(row[n]for n in FLAGS):return True"
+      }
+    ],
+    "file": "collection_policy.py",
+    "original": {
+      "bytes": 3033,
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\deltalog-split-scale-numeric-new24h-20261016-069-repair1\\collection_policy.py",
+      "sha256": "dd56142010c28a839408dd6ae1bc6c61496f19bb4e3c3171547bd2a32568ce5b"
+    }
+  },
+  {
+    "appended_exact": "",
+    "candidate": {
+      "bytes": 10678,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088/producer.py",
+      "sha256": "045059e6f0e2eae39cdb2f2df5c4962ceffc58830b9a7d7b864f9c823972eb2f"
+    },
+    "edits": [
+      {
+        "new": "defer_BF16_point_gate=True\n  defer_cross_history_native_state088=True",
+        "old": "defer_BF16_point_gate=True"
+      }
+    ],
+    "file": "producer.py",
+    "original": {
+      "bytes": 10635,
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\deltalog-split-scale-numeric-new24h-20261016-069-repair1\\producer.py",
+      "sha256": "b980694f5999ec58770aee5fed30159304e98772d2a85e5bac0a82d7b3cd2eb7"
+    }
+  },
+  {
+    "appended_exact": "",
+    "candidate": {
+      "bytes": 7162,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088/qwen36_deltalog_fresh/capture_evidence.py",
+      "sha256": "660531236581028829a538e5ac71f9fc7af9640d3c8d2146fd7a473547d40c44"
+    },
+    "edits": [
+      {
+        "new": "seed=2610168801+batch",
+        "old": "seed=2610165101+batch"
+      }
+    ],
+    "file": "qwen36_deltalog_fresh/capture_evidence.py",
+    "original": {
+      "bytes": 7162,
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\deltalog-split-scale-numeric-new24h-20261016-069-repair1\\qwen36_deltalog_fresh\\capture_evidence.py",
+      "sha256": "fcfc3cfd3f7eec20f40977550d014ffb2cca87b81f40444d11f95d0af1f0510d"
+    }
+  },
+  {
+    "appended_exact": "",
+    "candidate": {
+      "bytes": 30581,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088/domain_consumer.py",
+      "sha256": "138e711c5665011ae61634e90bec9b12e572e63e61d5c4117f1003c9a85b0ea4"
+    },
+    "edits": [
+      {
+        "new": "anchor['seed']==2610168801+batch",
+        "old": "anchor['seed']==2610165101+batch"
+      },
+      {
+        "new": "manual_seed(2610168801+batch)",
+        "old": "manual_seed(2610165101+batch)"
+      }
+    ],
+    "file": "domain_consumer.py",
+    "original": {
+      "bytes": 30581,
+      "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\deltalog-split-scale-numeric-new24h-20261016-069-repair1\\domain_consumer.py",
+      "sha256": "3ec5e2783091c00bee9629db492f2954be9605ea8cf9819dfae9f60630daf3ba"
+    }
+  }
+]

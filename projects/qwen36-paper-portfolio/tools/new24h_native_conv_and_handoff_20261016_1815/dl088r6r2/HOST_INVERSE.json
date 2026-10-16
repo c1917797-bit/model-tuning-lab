@@ -1,0 +1,54 @@
+{
+  "inverse_exact": true,
+  "original_sha256": "c652da128e5d277ee529a3a25dd5454a9e49a4fa75b841a060c818e8c6016582",
+  "changes": [
+    [
+      "OWNER='deltalog-diagnostic-bridge-new48h-MAIN-031-repair1'",
+      "OWNER='deltalog-deadpayload-bridge-new48h-MAIN-024-repair3'"
+    ],
+    [
+      "def validate_ref_streamed(r):\n    need(type(r)is dict and set(r)=={'path','bytes','sha256'},'strict actual Ref3')\n    p=Path(r['path']);need(p.is_absolute()and p.is_file()and not any(x.is_symlink()for x in(p,*p.parents)),'ordinary stable input');before=p.stat()\n    need(before.st_size==r['bytes']and sha(p)==r['sha256'],'whole streamed actual source/input')\n    after=p.stat();need((before.st_dev,before.st_ino,before.st_size,before.st_mtime_ns)==(after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns),'input changed during streamed verification')\n    return p\ndef checked(r):\n    return validate_ref_streamed(r).read_bytes()\n",
+      "def checked(r):\n    need(type(r)is dict and set(r)=={'path','bytes','sha256'},'strict actual Ref3')\n    p=Path(r['path']);need(p.is_absolute()and p.is_file()and not p.is_symlink()and p.stat().st_size==r['bytes']and sha(p)==r['sha256'],'whole actual source/input');return p.read_bytes()\n"
+    ],
+    [
+      " refs.append(m['native_chunk_host_ref'])\n for f in refs:validate_ref_streamed(f)",
+      " for f in refs:checked(f)"
+    ],
+    [
+      "[validate_ref_streamed(r)for r in refs]",
+      "[checked(r)for r in refs]"
+    ],
+    [
+      "    for r in refs:validate_ref_streamed(r)",
+      "    for r in refs:checked(r)"
+    ],
+    [
+      "    adapter=load(m['files']['scope_adapter.py'],'_lifecycle003_scoped_original002')\n    topguard=load(m['files']['top_guard.py'],'_dl031_topguard')\n    patch=load(m['files']['patch_scope.py'],'_dl031_private_scope_patch')\n    patch.install(adapter,topguard)",
+      "    adapter=load(m['files']['scope_adapter.py'],'_lifecycle003_scoped_original002')"
+    ],
+    [
+      "        smoke=json.loads(a.smoke_ref);v=obj(smoke);gate=load(m['files']['preregister.py'],'_dl031_preregister');gate.admit_smoke(v,sr,obj(v['independent_consumer']));refs.extend([smoke,v['independent_consumer']])",
+      "        smoke=json.loads(a.smoke_ref);v=obj(smoke);need(v['schema']=='deltalog.fresh-bridge-owned-host/v5'and v['target_source']==sr and v['steps']==16 and v['bridge_primitive_gate_pass']is True and v['stopped_retained']is True and v['primary']is None and not v['secondary'],'actual same-source complete16 smoke/release before160');refs.extend([smoke,v['independent_consumer']]);need(obj(v['independent_consumer'])['pass_gate']is True,'independent16 smoke')"
+    ],
+    [
+      "str(root/'consume_pair.py'),'--execute','--source-ref'",
+      "str(root/'consume.py'),'--execute','--source-ref'"
+    ],
+    [
+      "need(v['schema']=='deltalog.diagnostic-consumption/v031'and v['actual_result']==self.numeric_ref,'independent strict then domain consumption identity')",
+      "need(v['schema']=='deltalog.fresh-bridge-consumption/v5'and v['actual_result']==self.numeric_ref,'independent original FP64 consumption identity')"
+    ],
+    [
+      "schema='deltalog.diagnostic-owned-host/v031',source=owner",
+      "schema='deltalog.fresh-bridge-owned-host/v5',source=owner"
+    ],
+    [
+      "bridge_primitive_gate_pass=False,diagnostic_capture_complete=a.stage=='numeric'and primary is None and not secondary and consumed is not None and obj(consumed)['diagnostic_capture_complete']is True",
+      "bridge_primitive_gate_pass=a.stage=='numeric'and primary is None and not secondary and consumed is not None and obj(consumed)['pass_gate']is True"
+    ],
+    [
+      "    if a.stage=='numeric'and consumed is not None and obj(consumed)['diagnostic_capture_complete']is False:v['primary']='independent diagnostic capture incomplete';primary=v['primary']",
+      "    if a.stage=='numeric'and consumed is not None and obj(consumed)['pass_gate']is False:v['primary']='independently confirmed lifecycle candidate failure';primary=v['primary']"
+    ]
+  ]
+}

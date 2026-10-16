@@ -1,0 +1,157 @@
+{
+  "actual121_bind_capture_validate_seal_operation": "0d20",
+  "actual121_numerical_qualification": false,
+  "actual121seal_required": true,
+  "actualR5_sourceaudit_pending": true,
+  "actual_R5_numerical_PASS": false,
+  "all_prior_data_retained": true,
+  "capture_output_exact": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence088R6repair2-MAIN-001/OVERLAY088R6.json",
+  "capture_overlay": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/capture_overlay088r6.py",
+    "--execute",
+    "--template-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_TEMPLATE.json\",\"bytes\":70479,\"sha256\":\"ea0d4d756025ac203f12f1c0265e5bc679eb652f04508c000cd16b47aa404b89\"}"
+  ],
+  "commands": {
+    "bind": {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/run052.py",
+        "--execute",
+        "--template-ref",
+        "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_TEMPLATE.json\",\"bytes\":70479,\"sha256\":\"ea0d4d756025ac203f12f1c0265e5bc679eb652f04508c000cd16b47aa404b89\"}",
+        "--phase",
+        "bind",
+        "--original035-source-ref",
+        "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair4/SOURCE_MANIFEST.json\",\"bytes\":26248,\"sha256\":\"e5566351d02b04792b871f67092876f69b7fb58bbc81c36d21360fb328ec6524\"}",
+        "--build-ref",
+        "{\"bytes\":8847,\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/RESULT.json\",\"sha256\":\"3010d9b0a73d2f7b62b6294c8c01fa68176f1e911bee4b43ca7b1ac72bf00a68\"}",
+        "--storage-authority-ref",
+        "{\"path\":\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/DL061_STORAGE_AUTHORITY_20261016.json\",\"bytes\":1213,\"sha256\":\"3b58d42555147db06874fa4db36ada8b95474af4f3153fc89b73e4b7779d6f6c\"}",
+        "--storage-seal-evidence-ref",
+        "{\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence121-MAIN-001/EVIDENCE121.json\",\"bytes\":7329,\"sha256\":\"44bcabef7286307cfa2d7ceb05213a877c34001c2534aebc8bb2630d2ddcfbd6\"}",
+        "--storage-r5-overlay-ref",
+        "REQUIRED_ACTUAL_OVERLAY088R6_REF3"
+      ],
+      "executable_now": false,
+      "reason": "MAIN source review, actual read-only R5 overlay capture, binding, resource lease; no future numerical PASS"
+    },
+    "cpu": {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/run052.py",
+        "--execute",
+        "--template-ref",
+        "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_TEMPLATE.json\",\"bytes\":70479,\"sha256\":\"ea0d4d756025ac203f12f1c0265e5bc679eb652f04508c000cd16b47aa404b89\"}",
+        "--phase",
+        "cpu",
+        "--host-cpu",
+        "166",
+        "--guest-cpu",
+        "0"
+      ],
+      "executable_now": false,
+      "reason": "MAIN source review, actual read-only R5 overlay capture, binding, resource lease; no future numerical PASS"
+    },
+    "numeric16": {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/run052.py",
+        "--execute",
+        "--template-ref",
+        "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_TEMPLATE.json\",\"bytes\":70479,\"sha256\":\"ea0d4d756025ac203f12f1c0265e5bc679eb652f04508c000cd16b47aa404b89\"}",
+        "--phase",
+        "numeric16",
+        "--host-cpu",
+        "166",
+        "--guest-cpu",
+        "0",
+        "--cpu-owner-ref",
+        "ACTUAL_SAME088R6_CPU_OWNER_REF3"
+      ],
+      "executable_now": false,
+      "reason": "MAIN source review, actual read-only R5 overlay capture, binding, resource lease; no future numerical PASS"
+    },
+    "numeric160": {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/run052.py",
+        "--execute",
+        "--template-ref",
+        "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_TEMPLATE.json\",\"bytes\":70479,\"sha256\":\"ea0d4d756025ac203f12f1c0265e5bc679eb652f04508c000cd16b47aa404b89\"}",
+        "--phase",
+        "numeric160",
+        "--host-cpu",
+        "166",
+        "--guest-cpu",
+        "0",
+        "--cpu-owner-ref",
+        "ACTUAL_SAME088R6_CPU_OWNER_REF3",
+        "--smoke-owner-ref",
+        "ACTUAL_SAME088R6_NUMERIC16_OWNER_REF3"
+      ],
+      "executable_now": false,
+      "reason": "MAIN source review, actual read-only R5 overlay capture, binding, resource lease; no future numerical PASS"
+    },
+    "sourceaudit": {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/run052.py",
+        "--execute",
+        "--template-ref",
+        "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_TEMPLATE.json\",\"bytes\":70479,\"sha256\":\"ea0d4d756025ac203f12f1c0265e5bc679eb652f04508c000cd16b47aa404b89\"}",
+        "--phase",
+        "sourceaudit",
+        "--host-cpu",
+        "166",
+        "--guest-cpu",
+        "0"
+      ],
+      "executable_now": false,
+      "reason": "MAIN source review, actual read-only R5 overlay capture, binding, resource lease; no future numerical PASS"
+    }
+  },
+  "full_actual_readset_audit_pending": true,
+  "generator_executes": false,
+  "graph_supported": false,
+  "historical093seal8_not_active119": {
+    "bytes": 1992,
+    "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/STORAGE_LEDGER061.8.json",
+    "sha256": "15c32c1633fc206b695998f47babe4e255fc8d992cc27d5c87b0798c8cb6e6fe"
+  },
+  "original_deadline_unchanged": true,
+  "protocol_math_changes": false,
+  "qualification": false,
+  "seal_creation_prohibited": true,
+  "software": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/aggregate088r6.py"
+  ],
+  "storage_controls": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/test_storage088r5.py"
+  ],
+  "storage_new_commitment_GiB": 67,
+  "template_ref": {
+    "bytes": 70479,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_TEMPLATE.json",
+    "sha256": "ea0d4d756025ac203f12f1c0265e5bc679eb652f04508c000cd16b47aa404b89"
+  }
+}

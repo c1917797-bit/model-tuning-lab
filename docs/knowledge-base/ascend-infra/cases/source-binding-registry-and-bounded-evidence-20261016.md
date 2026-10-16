@@ -520,3 +520,56 @@ Current DeltaLog production remains2048/C1; variable-length task prompts and
 high-concurrency gains require real supported adapters and independent gates.
 No new valid model pair or final task result exists at this checkpoint. Exact
 Refs and CURRENT/NEXT are in RUNTIME_HANDSHAKE_20261016_1745UTC.json.
+
+## 2026-10-16 18:30 UTC: actual convolution, operational domains and causal controls
+
+BOLE118c completed12 actual native SD-convolution calls on physical4: B1/B16,
+activation0/1, three changed-input steps, nonzero initial history and odd state
+slots. The independent CPU-double chronology consumer passed all12 and full
+state/inactive bits; maximum absolute output error was0.00011980218344632976.
+All three exact owned guests were independently re-opened stopped/Pid0/noExec/
+noOOM. This qualifies the tested convolution primitive, NOT BOLE tree attention,
+accepted-path cache publication, a model or performance.118t is a separate eight
+paged-TND case domain, now byte-verified and source-bound. Its host-only suite
+probe failed because host Python lacks torch; preserve that wrong-interpreter
+probe and run the declared same-image CPU stage, never install into the host or
+claim that the source audit proves image/device readiness.
+
+DeltaLog R6repair2 passed45 actual Linux controls and completed same-image CPU
+and16-step capture/independent consumption, with actual released cleanup. Its
+new domain PASS is explicitly local: CPU64 one-step recurrence from captured
+before, actual FP32-to-BF16 RNE, guards, immutable inputs and production/debug
+bits; flush has an independent CPU64 gate, while prefill repeats the untouched
+native control from the same real materialized initial state. The original
+strict first B1/step0 FAIL remains: decode BF16 versus uncast CPU64 peak
+0.0030743712 exceeds0.00303; native-prefill ideal-CPU64 output/state also fail.
+Whole candidate/native output matches, state peer error is4.2473e-8, and byte
+checks pass. These facts do not establish a candidate-only decode defect or
+prove that the BF16 discrepancy is exactly the rounding floor.
+
+The independent cumulative-history metrics are reported but only checked finite,
+not against a cumulative-error limit. Thus neither local-domain PASS nor the
+fixed pass_gate/complete_proof=False receipt may be described as whole-history
+mathematical correctness. Actual160 is still running on its original handle;
+its complete operational matrix can at most admit the separately gated101
+real-model diagnostic, not performance/task acceptance. Do not retrospectively
+expand a tolerance or lend PASS from the old failed strict consumer.
+
+MXR120A4 actually ran Devices[] on three immutable saved cases. CPU64cast equals
+direct integer-RNE in the first layer0 chunk, disproving double rounding for
+that specific divergence. Candidate and common-reference state errors strongly
+cancel (cosine about-0.615); separate vector interventions, not sums of norms,
+are needed. Layer4 is common-reconstruction dominated while layer1 control stays
+bitwise aligned. X3 is a new bounded correction candidate, not an assumed fix.
+Its unlaunched source metadata must honestly say four arms, originalX2 four
+FP32 bmm/group versus X3 six; stale donor metadata is not a new algorithm fact.
+
+Keep source binding, actual native execution, local operational correctness,
+whole-history/model correctness, paired timing and task quality separate.
+A declared command is not a ready resource-admitted node. Legacy owners still
+reject any other owned guest, so disjoint-card declarations alone cannot prove
+parallel admission or gapless utilization. Never bypass their guards or launch
+dummy loads; prepare reviewed successors and improve actual shared budgeting.
+Exact source/result/release Refs and CURRENT/NEXT are recorded in
+NATIVE_CONV_OPERATIONAL_DOMAIN_AND_HANDOFF_20261016_1830UTC.json. No new E2E or
+task acceptance exists.

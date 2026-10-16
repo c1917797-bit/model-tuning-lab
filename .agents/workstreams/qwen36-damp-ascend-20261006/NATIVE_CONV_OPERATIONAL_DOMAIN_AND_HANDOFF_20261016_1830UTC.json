@@ -1,0 +1,230 @@
+{
+  "schema": "ascend.paper-portfolio.native-conv-and-operational-domain/v1",
+  "captured_utc": "2026-10-16T18:26:00Z",
+  "authority": ".agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+  "cutoff_utc": "2026-10-17T07:02:13Z",
+  "goal_achieved": false,
+  "new_accepted_techniques": 0,
+  "source_archive": "projects/qwen36-paper-portfolio/tools/new24h_native_conv_and_handoff_20261016_1815",
+  "deltalog": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_MANIFEST.json",
+      "bytes": 67429,
+      "sha256": "871c8e32831ee3eebacd43a084e4416bb14d6d06cd9f5ee08017ba459f287cd8"
+    },
+    "software_actual_linux_controls": 45,
+    "actual_results": {
+      "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json": {
+        "ref": {
+          "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json",
+          "bytes": 1426,
+          "sha256": "1ea2eeff549bb8fb036f0b313e57503a87896302be4836f68dba5641e0e4e35f"
+        },
+        "summary": {
+          "schema": "deltalog.diagnostic-owned-host/v035",
+          "primary": null,
+          "secondary": [],
+          "elapsed_seconds": 361.10742236999795,
+          "diagnostic_capture_complete": false,
+          "model_ready": false,
+          "stopped_retained": true
+        }
+      },
+      "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair6-repair2-001/native/cleanup-verdict.json": {
+        "ref": {
+          "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair6-repair2-001/native/cleanup-verdict.json",
+          "bytes": 246,
+          "sha256": "ba9c3c2be3d436570d8b20d57ce25d83d2533d98909d9698b5e6c783bd086b6e"
+        },
+        "summary": {
+          "resource_release_verified": true,
+          "errors": [],
+          "cid": "fd1a057c10a9075c2e3026c17b6e66408c928b4d600da991a9b97390238c5e8b"
+        }
+      },
+      "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json": {
+        "ref": {
+          "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json",
+          "bytes": 1667,
+          "sha256": "7b10472808da9c409dca97e4f36ff577cf4d090db95c90b556d0bf680f4d25fe"
+        },
+        "summary": {
+          "schema": "deltalog.diagnostic-owned-host/v035",
+          "primary": null,
+          "secondary": [],
+          "elapsed_seconds": 675.7688766799984,
+          "diagnostic_capture_complete": true,
+          "model_ready": false,
+          "stopped_retained": true
+        }
+      },
+      "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair6-repair2-001/numeric/result/RESULT.json": {
+        "ref": {
+          "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair6-repair2-001/numeric/result/RESULT.json",
+          "bytes": 61572,
+          "sha256": "de8d496dec21744b08787d95ab33ce77efbbadfd31fb7b54c0b048ccef836648"
+        },
+        "summary": {
+          "schema": "deltalog.actual-fresh-bridge/v5",
+          "primary": null,
+          "elapsed_seconds": 167.09401280002203
+        }
+      },
+      "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair6-repair2-001/native/INDEPENDENT.json": {
+        "ref": {
+          "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair6-repair2-001/native/INDEPENDENT.json",
+          "bytes": 4421,
+          "sha256": "e7ac3e627bdba3918cc4632b22adf315cbbcae2071babadeea6a1abede1f606f"
+        },
+        "summary": {
+          "schema": "deltalog.eager-component-operational-consumption/v088",
+          "diagnostic_capture_complete": true,
+          "domain_checks_pass": true,
+          "pass_gate": false,
+          "complete_proof": false,
+          "model_ready": false,
+          "performance_ready": false
+        }
+      },
+      "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair6-repair2-001/numeric/cleanup-verdict.json": {
+        "ref": {
+          "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair6-repair2-001/numeric/cleanup-verdict.json",
+          "bytes": 246,
+          "sha256": "eda493f6eca68a203f512b70ffb3669dd3d0e2d41c80e8edfc261890fa22f48a"
+        },
+        "summary": {
+          "resource_release_verified": true,
+          "errors": [],
+          "cid": "12cd8ce564f540b096eb3023e1fd4c9db2b5ffb07cdd43423a6bbef5ab6d1103"
+        }
+      },
+      "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair6-repair2-001/native/cleanup-verdict.json": {
+        "ref": {
+          "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair6-repair2-001/native/cleanup-verdict.json",
+          "bytes": 246,
+          "sha256": "1c7b4edcc11ed79a200296d157f218917a65886f5e6512ce0a63b927f8035528"
+        },
+        "summary": {
+          "resource_release_verified": true,
+          "errors": [],
+          "cid": "d7e316abd86de078c2dcde86bc524f7c784166b235f41eb9239e3394d2e46fee"
+        }
+      }
+    },
+    "n16_scope": {
+      "local_operational_domain_pass": true,
+      "old_strict_pass": false,
+      "complete_proof": false,
+      "model_ready": false,
+      "performance_ready": false,
+      "strict_first_mixed": {
+        "batch": 1,
+        "step": 0,
+        "decode_output_vs_uncast_CPU64_peak": 0.0030743712147321984,
+        "decode_state_error": 4.0029420662999936e-9,
+        "native_prefill_output_vs_CPU64": 0.003937089812300624,
+        "native_prefill_state_vs_CPU64": 0.0023174649437497025,
+        "whole_output_peer_error": 0,
+        "whole_state_peer_error": 4.247335456705264e-8,
+        "all_bitwise_guards": true
+      },
+      "contract": "local CPU64 recurrence from captured before; prefill same materialized initial native repeat; independent whole-history metrics reported finite, NOT bounded or qualified"
+    },
+    "n160": {
+      "operation": "exec-0000000000000d96",
+      "last_confirmed_state": "running",
+      "result": "pending; do not restart or borrow 16-step PASS"
+    },
+    "successors_deployed": {
+      "real_worker_101R5": "byte-verified83 runtime files, unbound pending actual160",
+      "production_106R5": "byte-verified28 runtime files; supported2048/C1 only",
+      "pair_122R2": "byte-verified29 runtime files; health->smallpair->conditional40req screen; unbound"
+    },
+    "next": "consume actual160 and exact released sources; bind101 for diagnostic model validation only if its own prerequisite consumer passes; never promote directly to timing"
+  },
+  "bole": {
+    "conv_118c": {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-native-conv-calibration-owned-new24h-v1-118-001/SOURCE_MANIFEST.json",
+        "bytes": 20510,
+        "sha256": "82b39cbfa73e6f78e2a48c7760fbeba33e84b911b0fa036f710728bc46e4c982"
+      },
+      "native_owner": {
+        "path": "/opt/host/vnf/austinov/run-bole-native-conv-calibration118-MAIN-20261016-001/mask/numeric/RESULT.json",
+        "bytes": 1707,
+        "sha256": "7d176f42e2879b182af497dc769b7aa0cfc4204378fa2b2ef9e839d65d1f6b07"
+      },
+      "consumer": {
+        "path": "/opt/host/vnf/austinov/run-bole-native-conv-calibration118-MAIN-20261016-001/mask/consumer/ATTRIBUTION.json",
+        "bytes": 8221,
+        "sha256": "9f8e09a43c3cf4cb6158d6559b8471b57867012f2b433d9d108c85e23f5a72b7"
+      },
+      "actual_operation": "exec-0000000000000d85",
+      "independent_release_operation": "exec-0000000000000d90",
+      "rows": 12,
+      "pass": true,
+      "full_SD_state_bitwise": true,
+      "max_abs": 0.00011980218344632976,
+      "actual_physical": 4,
+      "limitations": [
+        "no tree or accepted-token model proof",
+        "prefault kwargs/alias evidence incomplete"
+      ],
+      "model_ready": false
+    },
+    "paged_118t": {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-001/SOURCE_MANIFEST.json",
+        "bytes": 24750,
+        "sha256": "e75f5c515b84b4b706b80bfcf3d9ba43921e4576308ad8fe0dfc76a6f7f2ed07"
+      },
+      "deployment": "57 files byte verified; actual bind and source audit completed",
+      "wrapper_operation": "exec-0000000000000daf",
+      "wrapper_exit": 1,
+      "primary": "host software-suite probe used Python without torch; retained; no sameimage/NPU claim",
+      "next": "actual sameimage Devices[] CPU owner after global owned lease release, then actual paged TND eight-case NPU gate",
+      "qualified": false
+    }
+  },
+  "mxr": {
+    "analysis4_report": {
+      "path": "/opt/host/vnf/austinov/run-mxr-prefill120analysis4-CPU-MAIN-NEW24H_001/ANALYSIS120A4.json",
+      "bytes": 1202428,
+      "sha256": "1b3d241a1534357c4b5a2d2f993b5f36c688d94a5fdad6ed11948256ed413f1e"
+    },
+    "operation": "exec-0000000000000d93",
+    "release_verified": "exec-0000000000000d98",
+    "Devices": [],
+    "findings": [
+      "layer0 actual first chunk CPU64cast equals directRNE; candidate B514 differing cells max7.62939453125e-6, native186 max5.960464477539063e-8",
+      "layer0 candidate and common-reference error vectors strongly cancel, cosine -0.6151508; norms alone cannot prove cause",
+      "layer4 common reconstruction dominates; layer1 control remains bitwise aligned"
+    ],
+    "next": "125 X2-anchor/X3/native/directRNE real saved-frame gate; source metadata repair in preparation, no new native execution",
+    "model_ready": false
+  },
+  "schedule": {
+    "MAIN_device_admission": true,
+    "protected_physical": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "authorized_physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "concurrent_preparation": true,
+    "controller_limitation": "legacy owners reject every other qwen36.owner CID; no unreviewed bypass; aggregate shared-concurrency compatibility pending",
+    "latest_snapshot_utc": "2026-10-16T18:18:48Z",
+    "latest_actual_npu5_pid": 3963868,
+    "all_four_gapless_claim": false,
+    "continuous_utilization": "unmeasured"
+  },
+  "final_e2e_perf": "not yet valid",
+  "final_task_accuracy": "not run; no new result",
+  "failure_preservation": true
+}

@@ -1,0 +1,62 @@
+{
+  "actual_A3_owner_ref": {
+    "bytes": 1048,
+    "path": "/opt/host/vnf/austinov/run-mxr-prefill120analysis3repair2-CPU-MAIN-NEW24H_001/RESULT.json",
+    "sha256": "2d6856a47aca6647beaa006ede21daf71cc6124df8590999485eda4a2dc848ac"
+  },
+  "actual_A3_report_ref": {
+    "bytes": 1194040,
+    "path": "/opt/host/vnf/austinov/run-mxr-prefill120analysis3repair2-CPU-MAIN-NEW24H_001/COUNTERFACTUAL120A3.json",
+    "sha256": "c4295712575774f430df82435405b7965b3dc617b5db532a5aa5e0a9f7e41cea"
+  },
+  "actual_A3_source_ref": {
+    "bytes": 10418,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-owned120-analysis3-repair2/SOURCE_MANIFEST.json",
+    "sha256": "1a5faa725cd1b4c44d541a9790874c4a25d7afa86072012fc323bd092ff5d2ef"
+  },
+  "actual_stage_ref": {
+    "bytes": 5414,
+    "path": "/opt/host/vnf/austinov/run-mxr-prefill120repair2-npu-MAIN-NEW24H_001/numeric/result/STAGE_RESULT.json",
+    "sha256": "7f75510c0da848a1b50ac6c92af56ecdfc7cb46240040265ae8ae716b29fef26"
+  },
+  "budgets": {
+    "child_seconds": 600,
+    "cleanup_seconds": 90,
+    "guest_bytes": 8589934592,
+    "host_bytes": 536870912,
+    "new_raw_bytes": 0,
+    "output_bytes": 2097152,
+    "reserve_bytes": 8589934592
+  },
+  "counterfactual_source_ref": {
+    "bytes": 3011,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-cpu120-analysis3/SOURCE_MANIFEST.json",
+    "sha256": "33c5a65b5a646d66938409cf91167d96744eb9888411dda05ac63f0bec4b0618"
+  },
+  "default_enabled": false,
+  "files": {
+    "direct_rne.py": {
+      "bytes": 937,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-cpu120-analysis4/direct_rne.py",
+      "sha256": "202f0cec73edc7667fac735df199470fa288e800f8e6344413df5a47efde109a"
+    },
+    "reader.py": {
+      "bytes": 8523,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-cpu120-analysis4/reader.py",
+      "sha256": "4ef5f945356e11c9dc67ba7d12e02a0aaf9d5b3cbdcf385e7712b040d23afa7b"
+    },
+    "test_analysis4.py": {
+      "bytes": 5245,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-cpu120-analysis4/test_analysis4.py",
+      "sha256": "d461c85d538a1432feb030370e51399b4b68308979a6144b4cf3b8376128defe"
+    }
+  },
+  "owner_module_ref": {
+    "bytes": 20258,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-cpu120-analysis4-owned/owned_analysis.py",
+    "sha256": "3fd51acfd956cd973ca1ea2724482602bd9626e44bf05b540580264b35fb1167"
+  },
+  "qualification": false,
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-cpu120-analysis4",
+  "schema": "mxr.fixed-actual-A-G-CPU-source/v120-analysis4"
+}

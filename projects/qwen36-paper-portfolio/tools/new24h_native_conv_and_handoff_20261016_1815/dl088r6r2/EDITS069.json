@@ -1,0 +1,72 @@
+{
+  "assemble.py": [
+    [
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069"
+    ]
+  ],
+  "bind052.py": [
+    [
+      "p.add_argument('--storage-authority-ref');a=p.parse_args()",
+      "p.add_argument('--storage-authority-ref');p.add_argument('--storage-seal-evidence-ref');a=p.parse_args()"
+    ],
+    [
+      "C.write(P/'SOURCE_MANIFEST.json',m)",
+      "evidence_ref=json.loads(a.storage_seal_evidence_ref);import sealed_storage069 as seal069\n m['storage_seal_evidence_ref']=evidence_ref;m['storage_seal_generation_ref']=seal069.seal_generation(evidence_ref,Path(m['exact_output_root']),storage_ref,tr)\n C.write(P/'SOURCE_MANIFEST.json',m)"
+    ]
+  ],
+  "host.py": [
+    [
+      "deltalog-split-scale-numeric-new24h-MAIN-061",
+      "deltalog-split-scale-numeric-new24h-MAIN-069"
+    ],
+    [
+      "storage.reserve(out.parent,out,a.stage,obj,m['storage_authority_ref'])",
+      "seal=load(m['files']['sealed_storage069.py'],'_069_closed_storage');seal.install(storage,m['storage_seal_evidence_ref'],m['storage_authority_ref'],m['prepared_template']);storage.reserve(out.parent,out,a.stage,obj,m['storage_authority_ref'])"
+    ],
+    [
+      "for r in refs:validate_ref_streamed(r)\n    v=dict",
+      "for r in refs:validate_ref_streamed(r)\n    seal.final_verify(m['storage_seal_evidence_ref'])\n    v=dict"
+    ],
+    [
+      "refs.append(m['storage_authority_ref'])",
+      "refs.append(m['storage_authority_ref']);refs.append(m['storage_seal_evidence_ref'])\n seal_evidence=obj(m['storage_seal_evidence_ref'])\n def seal_refs(v):\n  if type(v)is dict:\n   if set(v)=={'path','bytes','sha256'}:refs.append(v)\n   else:\n    for x in v.values():seal_refs(x)\n  elif type(v)is list:\n   for x in v:seal_refs(x)\n seal_refs(seal_evidence)"
+    ]
+  ],
+  "inverse061.py": [
+    [
+      "def undo(name,text):\n",
+      "def undo(name,text):\n from inverse069 import undo as back069\n text=back069(name,text)\n"
+    ]
+  ],
+  "prepare056.py": [
+    [
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069"
+    ]
+  ],
+  "run052.py": [
+    [
+      "p.add_argument('--storage-authority-ref');a=p.parse_args()",
+      "p.add_argument('--storage-authority-ref');p.add_argument('--storage-seal-evidence-ref');a=p.parse_args()"
+    ],
+    [
+      "'--storage-authority-ref',a.storage_authority_ref]",
+      "'--storage-authority-ref',a.storage_authority_ref,'--storage-seal-evidence-ref',a.storage_seal_evidence_ref]"
+    ],
+    [
+      "run-'+a.phase+'-MAIN-20261016-NEW24H-001",
+      "run-'+a.phase+'-MAIN-20261016-NEW24H-069-001"
+    ]
+  ],
+  "storage061.py": [
+    [
+      "int(p.name.split('.')[1]));p=generations[-1]if generations else None",
+      "int(p.name.split('.')[1]));p=generations[-1]if generations else None"
+    ],
+    [
+      "generation=root/('STORAGE_LEDGER061.%d.json'%len(ledger['reservations']))",
+      "generation=root/('STORAGE_LEDGER061.%d.json'%(max([int(x.name.split('.')[1])for x in root.glob('STORAGE_LEDGER061.*.json')],default=0)+1))\n  need('_seal_context'in globals(),'explicit069 seal context before reservation')\n  import sealed_storage069 as seal069\n  ledger.update(previous_ledger_ref=seal069.ref(p),storage069_template_ref=_seal_context['template_ref'],sealed_evidence_ref=_seal_context['evidence_ref'])"
+    ]
+  ]
+}

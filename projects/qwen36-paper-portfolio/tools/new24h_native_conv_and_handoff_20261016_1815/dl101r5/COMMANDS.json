@@ -1,0 +1,71 @@
+{
+  "ACC049_receiver_updated": false,
+  "Docker_reserve_GiB": 8.5,
+  "PF033_receiver_updated": false,
+  "PF037_receiver_updated": false,
+  "PF048_receiver_updated": false,
+  "accuracy014_receiver_updated": false,
+  "binding": {
+    "args": [
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair5/bind_source.py",
+      "--execute",
+      "--template-sha256",
+      "FINAL_TEMPLATE_SHA256_SET_BY_SEAL",
+      "--bridge-source-ref",
+      "ACTUAL_BOUND_FINAL052_SOURCE_REF_JSON",
+      "--bridge-owner-ref",
+      "ACTUAL_SAME_SOURCE052_FULL160_OWNER_REF_JSON",
+      "--component-cpu-owner-ref",
+      "ACTUAL_SAME_SOURCE052_CPU_OWNER_REF_JSON"
+    ],
+    "command": "/usr/bin/python3"
+  },
+  "cleanup_seconds": 270,
+  "execute": {
+    "args": [
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair5/host_ticket.py",
+      "--execute",
+      "--source-ref",
+      "ACTUAL_BOUND_MODEL101_REF_JSON"
+    ],
+    "command": "/usr/bin/prlimit",
+    "environment": {
+      "MXR_DL_EXTERNAL_OUTPUT008_ENABLE": "1"
+    }
+  },
+  "external_output_enable": "MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1",
+  "missing_actual": [
+    "actual088R2 same-source CPU+Meta and160/release",
+    "actual101 sameimage complete controls",
+    "actual4x48worker and selected independent tensor diagnostics"
+  ],
+  "model_guest_GiB": 48,
+  "model_numeric_qualified": false,
+  "opt_reserve_GiB": 8.5,
+  "opt_workspace_GiB": 32,
+  "output": "/opt/host/vnf/austinov/run-deltalog-MODEL101R5-main-NEW24H_MODEL101R5_001",
+  "output_GiB": 4,
+  "prepared_only": true,
+  "ready": false,
+  "sameimage_CPU_pending": true,
+  "schema": "deltalog.split-scale-model-owned-commands/v053",
+  "scope": "SOURCE ONLY:069R1 real160 pending; 2048 IDs x2,10 outputs each,all4x48; C16 pending",
+  "sourceaudit": {
+    "args": [
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair5/host_ticket.py",
+      "--source-audit",
+      "--source-ref",
+      "ACTUAL_BOUND_MODEL101_REF_JSON"
+    ],
+    "command": "/usr/bin/python3"
+  },
+  "whole_seconds": 2700
+}

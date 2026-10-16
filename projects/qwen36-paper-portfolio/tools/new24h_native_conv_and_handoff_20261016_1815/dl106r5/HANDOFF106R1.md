@@ -1,0 +1,13 @@
+# 106R1 exact model source intake
+
+Source-only successor; no actual component160/model/production receipts have been supplied or promoted. Newroot lowbit/deltalog-production-new24h-v1-106-repair1, same source/worker/qualification schemas v106, same entrypoint/package/environment API. There is no new controller. Bind emits only newroot/SOURCE_MANIFEST.json and newroot/QUALIFICATION106.json exclusively; both must be absent.
+
+Only qualification106.MODEL_TEMPLATE changes to final101R1185787/12d3e10a...; dependencies use its complete actual83file inventory, not old101. test106's Windows donor path follows101R1; one new test module adds actual model_gate old101/pending101R1 rejection and source/API protection. Original nine tests retain the full software fixture checks for160component,240selectedmodeltensor rows,4worker retirement,slotreuse,finiteflush/stickyhealth and13args. All hot runtime modules and live/snapshot/common/sampling ABI stay exact106 bytes.
+
+Actual gate remains:088R3 same-source CPU+Meta/160 released+328rows/351sidecars/13controls ->101R1 real4x48 model/two2048requests/nine-decode independent tensors+all4retirement/slotreuse/release ->new106R1 bind. Missing or failed evidence refuses before publication; prepared templates never suffice. Published QUALIFICATION106.json is re-opened and exactly recomputed by qualify(qref,sr). Old actual PASS cannot be relabelled same-source.
+
+Caller API unchanged: qualification106.consume(sr),qualify(qref,sr),readset(sr),environment(sr,qref,owned_receipt_root,enabled); snapshot_owner106.snapshot(c,ctl,root,stage); live106.validate_snapshot and stickyhealth. Both dense and candidate call common106.apply_precision before plugins. Candidate adds only the same production EP; performance hot path has no sidecar/raw/CPUoracle/per-tokenD2H. Existing performance owner must bind this exact new source+qualification and full readset rather than hardcode old106 source pins. No actual pair is run here.
+
+Scope unchanged:TP4/PCP1,eager/sync,HF32OFF,prefixOFF/PDCoff,2048prefill,C1,9decode/two10-output model witness. No claim of C16,varlen tasks,normalEOS arithmetic count,graph or fulltask accuracy. Actual frozen task prompts200/417/3151 require a separate actual shape-family witness; this receiver does not truncate or allfallback them. User task<=1% is not a tensor tolerance.
+
+Use COMMANDS106R1.json canonical typed bind/software commands. Main must provide actual101R1 bound source/owner Ref3. This preparation has no run output or lease; MAIN's existing owned pair handles resources/lifecycle and fixed cutoff1792220533 remains unchanged.

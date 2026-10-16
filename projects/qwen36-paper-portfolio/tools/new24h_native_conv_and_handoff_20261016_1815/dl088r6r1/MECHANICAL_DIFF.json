@@ -1,0 +1,42 @@
+{
+  "NPU": false,
+  "all_old_files_preserved": true,
+  "identity_only_or_identical": [
+    "bind_composite.py",
+    "bridge_io.py",
+    "COMMANDS.json",
+    "consume.py",
+    "consume_increment.py",
+    "dependencies/primitives021.py",
+    "fixtures/022-source-file-readset.json",
+    "flush_increment.py",
+    "HANDOFF.md",
+    "host.py",
+    "oracle.py",
+    "preflight.py",
+    "qualification.py",
+    "qwen36_deltalog_fresh/__init__.py",
+    "qwen36_deltalog_fresh/contract.py",
+    "qwen36_deltalog_fresh/native_fixture.py",
+    "qwen36_deltalog_fresh/primitives.py",
+    "qwen36_deltalog_fresh/provider.py",
+    "qwen36_deltalog_fresh/runtime_helpers.py",
+    "qwen36_deltalog_fresh/transform.py",
+    "qwen36_deltalog_fresh-1.0.0.dist-info/entry_points.txt",
+    "qwen36_deltalog_fresh-1.0.0.dist-info/METADATA",
+    "REPAIR2_SCOPE.md",
+    "REPAIR_SCOPE.md",
+    "scope_adapter.py",
+    "test_handshake.py",
+    "test_increment.py",
+    "test_mount_closure.py",
+    "test_owned_contract.py"
+  ],
+  "mathematics_unchanged": true,
+  "schema": "deltalog.copy-bootstrap-mechanical-inverse/v1",
+  "targeted_diffs": {
+    "entry.py": "--- repair2-after-identity\n+++ repair3\n@@ -17,7 +17,14 @@\n   z=torch.zeros((1,4,128),dtype=torch.bfloat16);C.need(torch.equal(S.normalized(torch,z),z),'eps zero input finite')\n   x=torch.full((1,4,128),1e-5,dtype=torch.bfloat16);actual=S.normalized(torch,x);expected=(x.float()/((x.float().square().sum(-1,keepdim=True)+1e-6).sqrt())).to(x.dtype)\n   C.need(torch.equal(actual,expected)and not torch.equal(actual,torch.nn.functional.normalize(x.float(),dim=-1).to(x.dtype)),'independent eps boundary differs from F.normalize')\n-  C.need(out.parent.is_dir()and not out.exists(),'new CPU leaf');out.mkdir();C.write(out/'STAGE_RESULT.json',dict(schema='deltalog.fresh-bridge-stage/v5',source=sr,authority=ar,lifecycle=lr,pass_gate=True,NPU=False,model_ready=False,boundary=boundary));return 0\n+  C.need(out.parent.is_dir()and not out.exists(),'new CPU leaf');out.mkdir()\n+  import subprocess\n+  actual=subprocess.run([sys.executable,'-I','-B',str(P/'copy_bootstrap_probe.py'),'--execute','--output',str(out)],capture_output=True,text=True,timeout=120)\n+  C.write(out/'COPY_IMPORT_CPU.json',dict(argv=[sys.executable,'-I','-B',str(P/'copy_bootstrap_probe.py'),'--execute','--output',str(out)],returncode=actual.returncode,stdout=actual.stdout,stderr=actual.stderr))\n+  C.need(actual.returncode==0,'actual same-image Devices[] official copy import; no allocation')\n+  lines=[x for x in actual.stdout.splitlines(keepends=True)if x.startswith('MAIN_DL_COPY_IMPORT ')];C.need(len(lines)==1 and lines[0].endswith('\\n'),'one complete actual copy import marker')\n+  imported=json.loads(lines[0][len('MAIN_DL_COPY_IMPORT '):]);C.need(imported['Devices']==[] and imported['NPU']is False and imported['copy_executed']is False,'actual CPU import scope')\n+  C.write(out/'STAGE_RESULT.json',dict(schema='deltalog.fresh-bridge-stage/v5',source=sr,authority=ar,lifecycle=lr,pass_gate=True,NPU=False,model_ready=False,boundary=boundary,actual_copy_import=C.ref(out/'COPY_IMPORT_CPU.json')));return 0\n  cpu=C.obj(json.loads(a.cpu_preflight_ref));C.need(cpu['source']==sr and cpu['lifecycle']==lr and cpu['pass_gate']is True and cpu['NPU']is False,'actual same-source CPU preflight')\n  child=C.load(m['files']['producer.py'],'actual_mixed_copy_producer');old=sys.argv;sys.argv=[str(P/'producer.py'),'--execute','--source-ref',a.source_ref,'--authority-ref',a.authority_ref,'--lifecycle-ref',a.lifecycle_ref,'--plan-ref',a.plan_ref,'--output',a.output,'--steps',str(a.steps)]\n  try:code=child.main()\n",
+    "producer.py": "--- repair2-after-identity\n+++ repair3\n@@ -17,6 +17,7 @@\n  import vllm_ascend.ops.gdn as gdn\n  from vllm.v1.worker import mamba_utils as mu\n  from qwen36_deltalog_fresh import provider as V,primitives as L,runtime_helpers as H,native_fixture as F\n+ import copy_bootstrap as COPY\n  torch.set_num_threads(1);torch_npu.npu.set_compile_mode(jit_compile=False);torch.npu.set_device(0);init_device_properties_triton()\n  admission=V.configure(sr,lr,explicit=True);h=C.load(m['probe_ref'],'frozen_inputs_native');R=C.load(m['files']['oracle.py'],'independent_scalar_oracle')\n  canary=(torch.tensor([1.,2.],device='npu:0')+3).cpu().tolist();C.need(canary==[4.,5.]and torch.npu.device_count()==1 and os.environ.get('ASCEND_RT_VISIBLE_DEVICES')=='0','actualsingleton')\n@@ -34,7 +35,9 @@\n   with path.open('xb')as f:torch.save(value,f)\n   rr=C.ref(path);used+=rr['bytes'];return rr\n  def emit(name,**fields):events.append(dict(event=name,fields=fields,scope='actual-native-PCP1-TP4-local-geometry-not-serving',time_ns=time.time_ns()))\n+ native_copy=COPY.install(mu,out,execute=True)\n  V.install_fixture(torch,gdn,mu,emit)\n+ COPY.marker(out,'delta-wrapper-installed',native_copy=native_copy)\n  I=C.load(m['files']['flush_increment.py'],'actual021_increment')\n  class FlushSink:\n   def append(self,value):\n@@ -51,6 +54,7 @@\n   def __init__(self,n,dtype):self.cpu=torch.zeros(n,dtype=dtype);self.np=self.cpu.numpy();self.gpu=torch.zeros(n,dtype=dtype,device='npu:0')\n   def copy_to_gpu(self,n):self.gpu[:n].copy_(self.cpu[:n]);return self.gpu[:n]\n  def copy_case(batch,length):\n+  COPY.marker(out,'copy-before-B%d-L%d'%(batch,length),batch=batch,length=length)\n   slots=2*batch+4;gen=torch.Generator().manual_seed(20261015000+batch*10+length);initial=(torch.randn((slots,12,128,128),generator=gen)*.005).float();state=h.allocate_state(initial);conv=(torch.randn((slots,3,2560),generator=gen)*.01).bfloat16().npu();layer=SimpleNamespace(prefix='bridge.copy.B'+str(batch),kv_cache=[conv,state['base']],_qwen36_deltalog_aux={**state,'base_ptr':state['base'].untyped_storage().data_ptr(),'slots':slots});ids=torch.arange(batch,dtype=torch.int32,device='npu:0');seq=torch.arange(batch+1,dtype=torch.int32,device='npu:0')\n   for step in range(length):\n    inp=h.make_inputs(batch,slots,step,gen);inp['indices']=ids;V._route(torch,L,layer,query=inp['query'],key=inp['key'],value=inp['value'],g=inp['g'],beta=inp['beta'],state=state['base'],scale=128**-.5,actual_seq_lengths=seq,ssm_state_indices=ids);torch.npu.synchronize()\n@@ -59,6 +63,7 @@\n    d=batch+s;pairs.append((s,d));req=SimpleNamespace(block_ids=([s,d],),req_id='bridge-fork-'+str(s));mu.collect_mamba_copy_meta(b,cfg,(mu.get_conv_copy_spec,mu.get_temporal_copy_spec),[0],0,1,0,req,{layer.prefix:layer})\n   descriptor=dict(src=b.src_ptrs.cpu[:b.offset].clone(),dst=b.dst_ptrs.cpu[:b.offset].clone(),sizes=b.sizes.cpu[:b.offset].clone(),offset=b.offset);mu.do_mamba_copy_block(b);torch.npu.synchronize();after={k:v.cpu()for k,v in state.items()};after_conv=conv.cpu();proof=all(torch.equal(before[k][s],after[k][d])and torch.equal(before[k][s],after[k][s])for k in state for s,d in pairs)and all(torch.equal(before_conv[s],after_conv[d])and torch.equal(before_conv[s],after_conv[s])for s,d in pairs)\n   rr=save('copy-B%d-L%d.pt'%(batch,length),dict(before=before,after=after,before_conv=before_conv,after_conv=after_conv,pairs=pairs,descriptors=descriptor,layer=layer.prefix,initial=initial));records.append(dict(kind='copy',batch=batch,length=length,raw=rr,producer_bitwise=proof,actual_descriptors=b.offset));C.need(proof and b.offset==7*batch,'actual nativecopy fullaux/conv proof')\n+  COPY.marker(out,'copy-after-B%d-L%d'%(batch,length),raw=rr,bitwise=proof,descriptors=b.offset)\n  try:\n   with F.native_pcp_context(torch):\n    for batch in(1,16):\n@@ -68,7 +73,9 @@\n       inp=h.make_inputs(batch,slots,0,gen);inp['indices']=ids;V._route(torch,L,layer,query=inp['query'],key=inp['key'],value=inp['value'],g=inp['g'],beta=inp['beta'],state=st['base'],scale=128**-.5,actual_seq_lengths=torch.arange(batch+1,dtype=torch.int32,device='npu:0'),ssm_state_indices=ids)\n      L._flush_slots(torch,layer,layer._qwen36_deltalog_aux,ids,'explicit-zero-or-partial')\n    for batch in(1,16):\n+    COPY.marker(out,'mixed-before-B%d'%batch,batch=batch,steps=a.steps)\n     captures={};d=Diagnostics(batch,captures);F.mixed_case(torch,gdn,L,h,logical,batch,'eager',m['config_ref']['path'],steps=a.steps,diagnostics=d,captures=captures)\n+    COPY.marker(out,'mixed-after-B%d'%batch,batch=batch,steps=a.steps)\n    for batch in(1,16):\n     for length in(1,7):copy_case(batch,length)\n  except BaseException as e:primary=repr(e)\n"
+  },
+  "thresholds_unchanged": true
+}
