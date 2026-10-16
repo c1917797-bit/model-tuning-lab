@@ -1,4 +1,14 @@
-# CURRENT R19 G3 CAPTURE AUDITED; CPU PARSER TRACKING
+# CURRENT R19 G3 PARSED FOURRANK VALID; MATCHED G1 NEXT
+
+Parser7e09ad99terminalexit0. Independent0f5a accepts allfour nonemptykernel/operator/
+opstat/apistat tables plusvalidJSONtraces. PROFILE_G3_R19_EARLYMIXED_PARSED_AUDIT_20261016.json.
+Actual2ArgMax/96chunkWY/48recurrent indicates mixedprefill, notpuredecode.
+Envelope~10.87s/uncovered43-44% not removablecost/rootcause. Noownedmodel/liveparser.
+Next publish thenfresh PROFILE_G1_R19_EARLYMIXED_R1_CONTRACT.json admission;
+same196sources/protocol/currentruntime, originalrawimmutable. No causalclaim yet.
+Cutoff2026-10-17T06:48:09Z. Fullgoalunfinished.
+
+# HISTORICAL R19 G3 CAPTURE AUDITED; CPU PARSER TRACKING
 
 0f22terminalexit0;independent0f46 accepts196sources/16profile+16warmupresponses/
 16of16fourrank48C1+16C2/228cleanisolation/explicitphysical/liveexactrelease.
