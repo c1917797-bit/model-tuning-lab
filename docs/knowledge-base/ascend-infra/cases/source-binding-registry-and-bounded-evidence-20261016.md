@@ -248,3 +248,41 @@ MXR_THREE_ARM_ACTUAL_20261016_1137UTC.json in the active workstream. Native-only
 2K/16K fixed1024 opportunity measurement is a separate pending diagnostic,
 not candidate performance or task acceptance. Continuous utilization remains
 unmeasured; do not claim four-card no-gap use from job snapshots.
+
+## Decode-graph gate and deployment-layout regression (12:19UTC)
+
+Actual095 completed B1/B16 with16 changing-input decode graph replays each.
+Independent CPU consumption passed all32 rows, maximum state relative L2
+9.486863797469401e-8 against unchanged7.92e-7. All six recurrent storage fields,
+output/debug equality and slot/metadata invariants were checked. Full mixed
+prefill/flush graph,160-step trajectory, whole-model performance and task
+accuracy remain unqualified. Source archive and exact receipts are recorded
+in GRAPH_STORAGE_AND_PREFLIGHT_20261016_1219UTC.json.
+
+Actual093 closure sealed the existing six completed phase trees into immutable
+storage ledger8. It did not enlarge the80GiB authorization or100GiB free reserve,
+and it did not grant mathematical correctness. A successor must consume the
+existing seal; it must not invoke the historical seal creator again.
+
+097 same-image CPU preflight then caught a real preparation defect before NPU:
+two interface tests assumed the preparer's flat local directory, while the
+deployed guest and owner roots are separate. Fifteen guard controls passed;
+two of eight math/interface controls raised FileNotFoundError. Keep the failed
+owner and stderr.097-repair1 consumes the already verified owned.files Ref3s,
+with actual disjoint-directory CPU-entry regression and missing/hash-negative
+controls. Compute guest, numerical consumer and two-residual arithmetic bytes
+are unchanged. Actual same-image/NPU repair results remain pending here.
+
+The maintainer already required real aggregate and deployed-source closure
+checks. This was an implementation/compliance gap, not missing permission or
+proof that adding more rules makes the code correct. Test the actual delivered
+layout, exact isolated-interpreter flags, producer/consumer schemas and argument
+builders before a resource lease. A local helper PASS cannot certify a different
+filesystem layout or a later live stage. Preserve failures and repair only the
+proved seam; never lower arithmetic thresholds to compensate.
+
+Native-only090R2 separately reached a real server, but its client requested one
+warmup while the canonical benchmark parser requires at least two.090R3 tests
+the actual parser and command builder with two warmups, retains child exit and
+stderr before a generic barrier failure, and passed actual sourceaudit. Its
+model diagnostic was running at this snapshot, not a performance gain.

@@ -1,0 +1,100 @@
+{
+  "schema": "ascend.graph-storage-source-stage/v1",
+  "observed_utc": "2026-10-16T12:19:12Z",
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "bytes": 3481,
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "final_acceptance": false,
+  "performance_gain": null,
+  "task_accuracy": null,
+  "storage093": {
+    "actual_seal_operation": "exec-0000000000000b43",
+    "seal_ref": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/STORAGE_LEDGER061.8.json",
+      "bytes": 1992,
+      "sha256": "15c32c1633fc206b695998f47babe4e255fc8d992cc27d5c87b0798c8cb6e6fe"
+    },
+    "evidence_ref": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence093-MAIN-001/EVIDENCE093.json",
+      "bytes": 8586,
+      "sha256": "4a8b900e24289b8c8c85421ce394474a75da95a15ddf198943f6203a681269f9"
+    },
+    "closed_prior_phases": 6,
+    "no_new_capacity": true
+  },
+  "graph095": {
+    "operation": "exec-0000000000000b4c",
+    "actual_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-graph-owned-new24h-v1-095/SOURCE_MANIFEST.json",
+      "bytes": 9422,
+      "sha256": "65edb61fb0e96d46993cc92bf32c9955bfad805169d424aac43377b8ca9c4489"
+    },
+    "independent": {
+      "path": "/opt/host/vnf/austinov/run-dlgraph095-MAIN-20261016-001/consumer/ATTRIBUTION.json",
+      "bytes": 64630,
+      "sha256": "8b9b540e7732e67dc8705162fc7a8275b3de4dafd6fce0c48b08f7166432baa4"
+    },
+    "pass_gate": true,
+    "batches": [
+      1,
+      16
+    ],
+    "replays_per_batch": 16,
+    "max_state_relative_l2": 9.486863797469401e-8,
+    "state_limit": 7.92e-7,
+    "full_mixed_graph_qualified": false,
+    "whole_model_qualified": false,
+    "all_three_owned_containers_independently_stopped": "exec-0000000000000b53"
+  },
+  "mxr097": {
+    "operation": "exec-0000000000000b68",
+    "result": "failed_same_image_CPU_before_NPU",
+    "first_fault": "Two tests assumed flat local guest/owned layout; actual paths split.",
+    "owner": {
+      "path": "/opt/host/vnf/austinov/run-mxr-two-residual097-preflight-MAIN-20261016-001/RESULT.json",
+      "bytes": 819,
+      "sha256": "e70e07b3857f9f6c9539406ef8eda9eaf69e6e627fa252fe5d7813ea92f7c461"
+    },
+    "stderr": {
+      "path": "/opt/host/vnf/austinov/run-mxr-two-residual097-preflight-MAIN-20261016-001/child.stderr",
+      "bytes": 6492,
+      "sha256": "aec4df7bb1676d485c6d1862a0794e7c9413a10615ccd032b2eab2d08889eb9a"
+    },
+    "devices": [],
+    "stopped_retained": true,
+    "numerical_result": false,
+    "paper_rejected": false
+  },
+  "mxr097_repair1": {
+    "actual_remote_deployed_and_20_files_verified": true,
+    "source_audit_operation": "exec-0000000000000b79",
+    "source_audit_exit": 0,
+    "same_image_CPU": "pending",
+    "NPU": "pending",
+    "math_variant_bytes_unchanged": true,
+    "split_layout_software": "15 guard + 8 math/interface passed; real frame extraction boundary intercepted locally, not extraction PASS"
+  },
+  "CURRENT": {
+    "id": "090R3",
+    "operation": "exec-0000000000000b6c",
+    "state_at_observation": "running",
+    "scope": "native-only 2K/16K C1 fixed1024 diagnostic; no candidate comparison",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair3/SOURCE_MANIFEST.json",
+      "bytes": 8074,
+      "sha256": "f3913f0fe17033aed0ce50aae1c5175d97caf6a2dfabf4a80c0e65ff3e32ff54"
+    },
+    "output": "/opt/host/vnf/austinov/run-dense-e2e090repair3-MAIN-NEW24H_001",
+    "actual_model_load": "all15 shards, four ranks; not a measured performance result"
+  },
+  "NEXT": [
+    "097R1 real same-image preflight after exclusive owned release, NPU two-residual saved-frame, independent consumer",
+    "098R1 new holdout all-four-rank correctness only if actual097R1 original gates and improvement pass",
+    "088R2 actual sameinitial eager16->160 using existing sealed storage8",
+    "099 full-mixed graph and101 real worker integration remain prepared/pending"
+  ],
+  "utilization_30min": "unmeasured; no continuous no-gap claim",
+  "archive": "projects/qwen36-paper-portfolio/tools/new24h_graph_storage_20261016"
+}

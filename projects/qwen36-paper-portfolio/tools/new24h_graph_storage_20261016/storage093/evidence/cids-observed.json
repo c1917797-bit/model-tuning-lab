@@ -1,0 +1,204 @@
+[
+  {
+    "actual_created_containers": [
+      {
+        "ExecIDs": null,
+        "cid": "d18c0b2a72c94acc19d6905d26b4dd56a9957c91dd171c601bf42e70a69473b5",
+        "create_ref": {
+          "bytes": 12471,
+          "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-069-repair1-001/native/create-receipt.json",
+          "sha256": "dc44461f1484e4f98354307320020cfa5ff768e98840f8ccc0a7185ca76a99ca"
+        },
+        "devices": [],
+        "labels": {
+          "deltalog-fresh-bridge.owner-source-sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21",
+          "org.opencontainers.image.version": "22.04",
+          "qwen36.owner": "deltalog-split-scale-numeric-new24h-MAIN-069-repair1",
+          "qwen36.stage": "native"
+        },
+        "state": {
+          "Dead": false,
+          "Error": "",
+          "ExitCode": 0,
+          "FinishedAt": "2026-10-16T09:16:33.99976884Z",
+          "OOMKilled": false,
+          "Paused": false,
+          "Pid": 0,
+          "Restarting": false,
+          "Running": false,
+          "StartedAt": "2026-10-16T09:15:11.24405918Z",
+          "Status": "exited"
+        }
+      }
+    ],
+    "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-069-repair1-001"
+  },
+  {
+    "actual_created_containers": [
+      {
+        "ExecIDs": null,
+        "cid": "3ad8b0e22b0476b0d36f296fec930387022ad7ca14e5b207560a573bb4a6da32",
+        "create_ref": {
+          "bytes": 12515,
+          "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-069-repair1-001/native/create-receipt.json",
+          "sha256": "36b70e612d4ad4907fc3c38ccb6b585ee7baade79eb22b045f41b5046965c928"
+        },
+        "devices": [],
+        "labels": {
+          "deltalog-fresh-bridge.owner-source-sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21",
+          "org.opencontainers.image.version": "22.04",
+          "qwen36.owner": "deltalog-split-scale-numeric-new24h-MAIN-069-repair1",
+          "qwen36.stage": "native"
+        },
+        "state": {
+          "Dead": false,
+          "Error": "",
+          "ExitCode": 0,
+          "FinishedAt": "2026-10-16T09:24:45.52382211Z",
+          "OOMKilled": false,
+          "Paused": false,
+          "Pid": 0,
+          "Restarting": false,
+          "Running": false,
+          "StartedAt": "2026-10-16T09:22:54.62238551Z",
+          "Status": "exited"
+        }
+      },
+      {
+        "ExecIDs": null,
+        "cid": "83f11b18404864b9f2d93083ad72466bad2513dcc469de2cdacdeafe0b32ed34",
+        "create_ref": {
+          "bytes": 14319,
+          "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-069-repair1-001/numeric/create-receipt.json",
+          "sha256": "95304a63aedcfbaf22fee0189c788d0610dc6b56d8fdb43df0ac6d131a416493"
+        },
+        "devices": [
+          {
+            "CgroupPermissions": "rwm",
+            "PathInContainer": "/dev/davinci0",
+            "PathOnHost": "/dev/davinci5"
+          },
+          {
+            "CgroupPermissions": "rwm",
+            "PathInContainer": "/dev/davinci_manager",
+            "PathOnHost": "/dev/davinci_manager"
+          },
+          {
+            "CgroupPermissions": "rwm",
+            "PathInContainer": "/dev/devmm_svm",
+            "PathOnHost": "/dev/devmm_svm"
+          },
+          {
+            "CgroupPermissions": "rwm",
+            "PathInContainer": "/dev/hisi_hdc",
+            "PathOnHost": "/dev/hisi_hdc"
+          }
+        ],
+        "labels": {
+          "deltalog-fresh-bridge.owner-source-sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21",
+          "org.opencontainers.image.version": "22.04",
+          "qwen36.owner": "deltalog-split-scale-numeric-new24h-MAIN-069-repair1",
+          "qwen36.stage": "numeric"
+        },
+        "state": {
+          "Dead": false,
+          "Error": "",
+          "ExitCode": 0,
+          "FinishedAt": "2026-10-16T09:22:46.36892328Z",
+          "OOMKilled": false,
+          "Paused": false,
+          "Pid": 0,
+          "Restarting": false,
+          "Running": false,
+          "StartedAt": "2026-10-16T09:20:06.08166424Z",
+          "Status": "exited"
+        }
+      }
+    ],
+    "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-069-repair1-001"
+  },
+  {
+    "actual_created_containers": [
+      {
+        "ExecIDs": null,
+        "cid": "337f3b695e881874b23f1c173eaed46fe3994c7bb41db9c6c64cb86cdf60e642",
+        "create_ref": {
+          "bytes": 12529,
+          "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001/native/create-receipt.json",
+          "sha256": "0503c3113d62765bc443d8e2a3b0208f6545c4e26d242760763c8b4aceb3afb4"
+        },
+        "devices": [],
+        "labels": {
+          "deltalog-fresh-bridge.owner-source-sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21",
+          "org.opencontainers.image.version": "22.04",
+          "qwen36.owner": "deltalog-split-scale-numeric-new24h-MAIN-069-repair1",
+          "qwen36.stage": "native"
+        },
+        "state": {
+          "Dead": false,
+          "Error": "",
+          "ExitCode": 1,
+          "FinishedAt": "2026-10-16T09:30:06.15455535Z",
+          "OOMKilled": false,
+          "Paused": false,
+          "Pid": 0,
+          "Restarting": false,
+          "Running": false,
+          "StartedAt": "2026-10-16T09:30:05.84398255Z",
+          "Status": "exited"
+        }
+      },
+      {
+        "ExecIDs": null,
+        "cid": "c840b0455fe2e58b1a56ad3c4f36d75254c40a9ca338d1a4110ccf715f724e91",
+        "create_ref": {
+          "bytes": 14329,
+          "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001/numeric/create-receipt.json",
+          "sha256": "b117127a3d64ba0e94daeb6801097115d4ca62026fd8c7749f8dd5bfaeba63a4"
+        },
+        "devices": [
+          {
+            "CgroupPermissions": "rwm",
+            "PathInContainer": "/dev/davinci0",
+            "PathOnHost": "/dev/davinci5"
+          },
+          {
+            "CgroupPermissions": "rwm",
+            "PathInContainer": "/dev/davinci_manager",
+            "PathOnHost": "/dev/davinci_manager"
+          },
+          {
+            "CgroupPermissions": "rwm",
+            "PathInContainer": "/dev/devmm_svm",
+            "PathOnHost": "/dev/devmm_svm"
+          },
+          {
+            "CgroupPermissions": "rwm",
+            "PathInContainer": "/dev/hisi_hdc",
+            "PathOnHost": "/dev/hisi_hdc"
+          }
+        ],
+        "labels": {
+          "deltalog-fresh-bridge.owner-source-sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21",
+          "org.opencontainers.image.version": "22.04",
+          "qwen36.owner": "deltalog-split-scale-numeric-new24h-MAIN-069-repair1",
+          "qwen36.stage": "numeric"
+        },
+        "state": {
+          "Dead": false,
+          "Error": "",
+          "ExitCode": 0,
+          "FinishedAt": "2026-10-16T09:29:51.82338347Z",
+          "OOMKilled": false,
+          "Paused": false,
+          "Pid": 0,
+          "Restarting": false,
+          "Running": false,
+          "StartedAt": "2026-10-16T09:27:27.19889245Z",
+          "Status": "exited"
+        }
+      }
+    ],
+    "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001"
+  }
+]

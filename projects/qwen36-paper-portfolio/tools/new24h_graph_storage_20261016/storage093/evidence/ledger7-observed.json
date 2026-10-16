@@ -1,0 +1,63 @@
+{
+  "latest_ref": {
+    "bytes": 2005,
+    "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/STORAGE_LEDGER061.7.json",
+    "sha256": "cf2771c6dd1f4621e3ee597207a1b87f02111eb2ac2567fb9a89c143c8d0055c"
+  },
+  "ledger": {
+    "authority_ref": {
+      "bytes": 1213,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/DL061_STORAGE_AUTHORITY_20261016.json",
+      "sha256": "3b58d42555147db06874fa4db36ada8b95474af4f3153fc89b73e4b7779d6f6c"
+    },
+    "previous_ledger_ref": {
+      "bytes": 1838,
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/STORAGE_LEDGER061.6.json",
+      "sha256": "90a73ab6c85d02e1b92c57e356dee303969814cd8167593f0599fc481a85cf3f"
+    },
+    "reservations": [
+      {
+        "budget_bytes": 1073741824,
+        "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-001",
+        "stage": "cpu"
+      },
+      {
+        "budget_bytes": 35433480192,
+        "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-001",
+        "stage": "numeric"
+      },
+      {
+        "budget_bytes": 1073741824,
+        "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-recovery066-MAIN-20261016-NEW24H-001",
+        "stage": "cpu"
+      },
+      {
+        "budget_bytes": 1073741824,
+        "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-069-repair1-001",
+        "stage": "cpu"
+      },
+      {
+        "budget_bytes": 35433480192,
+        "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-069-repair1-001",
+        "stage": "numeric"
+      },
+      {
+        "budget_bytes": 35433480192,
+        "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001",
+        "stage": "numeric"
+      }
+    ],
+    "root": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061",
+    "schema": "deltalog.storage-reservations/v061",
+    "sealed_evidence_ref": {
+      "bytes": 6070,
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence069-MAIN-002/EVIDENCE069.json",
+      "sha256": "eab70137ec0763daa93dbd525f28a08b6ed4ac6ae83299c095c8c8162bbc82fc"
+    },
+    "storage069_template_ref": {
+      "bytes": 55180,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_TEMPLATE.json",
+      "sha256": "9d446cb308dbb88eb3f63056ebef855dfa1489b0ac561f7b7b91efcd0d784ae2"
+    }
+  }
+}

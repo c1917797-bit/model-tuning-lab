@@ -1,0 +1,215 @@
+[
+  {
+    "operationId": "exec-0000000000000a40",
+    "snapshot": {
+      "action": "verify_operation_id",
+      "canonicalDownloadUrl": null,
+      "canonicalUrl": null,
+      "dataPlane": null,
+      "downloadUrls": null,
+      "error": {
+        "action": "verify_operation_id",
+        "code": "operation_not_found",
+        "message": "operation id was not found on the selected peer or storage backend",
+        "retryable": false
+      },
+      "found": false,
+      "kind": "exec",
+      "ok": false,
+      "operation": {
+        "channel": "control",
+        "fallbackUsed": false,
+        "gatewayInstanceId": "tpc-rgw-01",
+        "logicalGatewayId": "tpc",
+        "ok": true,
+        "result": {
+          "found": false,
+          "ok": true
+        },
+        "rgwHttp": "http://agentweb:17888",
+        "rgwRouting": {
+          "attemptErrors": [],
+          "strategy": "peer-hot3-with-command-retry"
+        },
+        "routeDecision": "peer_direct",
+        "sessionId": null,
+        "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "targetRole": "upstream",
+        "timings": {
+          "awmcp": {
+            "attemptCount": 1,
+            "rgwRequestMs": 1121,
+            "rgwResponseDecodeMs": 0,
+            "rgwResponseHeadersMs": 1121,
+            "routeCacheHit": true,
+            "routeLookupMode": "command-cache",
+            "routeLookupMs": 0,
+            "totalMs": 1121
+          },
+          "rgw": {
+            "dispatchMs": 0,
+            "journalMs": 0,
+            "peerRoundTripMs": 1120,
+            "routeLookupMs": 0,
+            "totalMs": 1120
+          }
+        },
+        "traceId": "fff809b3-fafc-4ce1-9e00-ef94a6fd84ff"
+      },
+      "operationId": "exec-0000000000000a40",
+      "phase": "not_found",
+      "previewUrls": null,
+      "progress": null,
+      "publicUrl": null,
+      "publicationId": null,
+      "result": null,
+      "retryable": false,
+      "schema": "agentweb.operation/v1",
+      "status": "not_found",
+      "succeeded": false,
+      "terminal": true
+    }
+  },
+  {
+    "operationId": "exec-0000000000000a49",
+    "snapshot": {
+      "action": "verify_operation_id",
+      "canonicalDownloadUrl": null,
+      "canonicalUrl": null,
+      "dataPlane": null,
+      "downloadUrls": null,
+      "error": {
+        "action": "verify_operation_id",
+        "code": "operation_not_found",
+        "message": "operation id was not found on the selected peer or storage backend",
+        "retryable": false
+      },
+      "found": false,
+      "kind": "exec",
+      "ok": false,
+      "operation": {
+        "channel": "control",
+        "fallbackUsed": false,
+        "gatewayInstanceId": "tpc-rgw-01",
+        "logicalGatewayId": "tpc",
+        "ok": true,
+        "result": {
+          "found": false,
+          "ok": true
+        },
+        "rgwHttp": "http://agentweb:17888",
+        "rgwRouting": {
+          "attemptErrors": [],
+          "strategy": "peer-hot3-with-command-retry"
+        },
+        "routeDecision": "peer_direct",
+        "sessionId": null,
+        "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "targetRole": "upstream",
+        "timings": {
+          "awmcp": {
+            "attemptCount": 1,
+            "rgwRequestMs": 476,
+            "rgwResponseDecodeMs": 0,
+            "rgwResponseHeadersMs": 476,
+            "routeCacheHit": true,
+            "routeLookupMode": "command-cache",
+            "routeLookupMs": 0,
+            "totalMs": 476
+          },
+          "rgw": {
+            "dispatchMs": 0,
+            "journalMs": 0,
+            "peerRoundTripMs": 476,
+            "routeLookupMs": 0,
+            "totalMs": 476
+          }
+        },
+        "traceId": "f9872bc4-50c3-47ab-9e4a-53c8518ea675"
+      },
+      "operationId": "exec-0000000000000a49",
+      "phase": "not_found",
+      "previewUrls": null,
+      "progress": null,
+      "publicUrl": null,
+      "publicationId": null,
+      "result": null,
+      "retryable": false,
+      "schema": "agentweb.operation/v1",
+      "status": "not_found",
+      "succeeded": false,
+      "terminal": true
+    }
+  },
+  {
+    "operationId": "exec-0000000000000a58",
+    "snapshot": {
+      "action": "verify_operation_id",
+      "canonicalDownloadUrl": null,
+      "canonicalUrl": null,
+      "dataPlane": null,
+      "downloadUrls": null,
+      "error": {
+        "action": "verify_operation_id",
+        "code": "operation_not_found",
+        "message": "operation id was not found on the selected peer or storage backend",
+        "retryable": false
+      },
+      "found": false,
+      "kind": "exec",
+      "ok": false,
+      "operation": {
+        "channel": "control",
+        "fallbackUsed": false,
+        "gatewayInstanceId": "tpc-rgw-01",
+        "logicalGatewayId": "tpc",
+        "ok": true,
+        "result": {
+          "found": false,
+          "ok": true
+        },
+        "rgwHttp": "http://agentweb:17888",
+        "rgwRouting": {
+          "attemptErrors": [],
+          "strategy": "peer-hot3-with-command-retry"
+        },
+        "routeDecision": "peer_direct",
+        "sessionId": null,
+        "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "targetRole": "upstream",
+        "timings": {
+          "awmcp": {
+            "attemptCount": 1,
+            "rgwRequestMs": 432,
+            "rgwResponseDecodeMs": 0,
+            "rgwResponseHeadersMs": 432,
+            "routeCacheHit": true,
+            "routeLookupMode": "command-cache",
+            "routeLookupMs": 0,
+            "totalMs": 432
+          },
+          "rgw": {
+            "dispatchMs": 0,
+            "journalMs": 0,
+            "peerRoundTripMs": 432,
+            "routeLookupMs": 0,
+            "totalMs": 432
+          }
+        },
+        "traceId": "b8c94e38-0286-4bef-a9b9-093d09ef7c1c"
+      },
+      "operationId": "exec-0000000000000a58",
+      "phase": "not_found",
+      "previewUrls": null,
+      "progress": null,
+      "publicUrl": null,
+      "publicationId": null,
+      "result": null,
+      "retryable": false,
+      "schema": "agentweb.operation/v1",
+      "status": "not_found",
+      "succeeded": false,
+      "terminal": true
+    }
+  }
+]

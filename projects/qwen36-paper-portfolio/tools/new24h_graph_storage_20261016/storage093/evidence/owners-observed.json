@@ -1,0 +1,154 @@
+[
+  {
+    "actual_bytes": 196966,
+    "files": 22,
+    "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-069-repair1-001",
+    "owner": {
+      "NPU": false,
+      "authority": {
+        "bytes": 3481,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+        "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+      },
+      "bridge_primitive_gate_pass": false,
+      "diagnostic_capture_complete": false,
+      "elapsed_seconds": 111.97778857001686,
+      "full_gdn_qualified": false,
+      "independent_consumer": null,
+      "model_ready": false,
+      "phase_seconds": 720,
+      "physical": [],
+      "primary": null,
+      "resource_admitted": true,
+      "result": {
+        "bytes": 5231,
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-069-repair1-001/native/result/STAGE_RESULT.json",
+        "sha256": "cdc6cc7b89e5720176fc7f6274f7d411958549cb408ee565839cb8c9268d780f"
+      },
+      "schema": "deltalog.diagnostic-owned-host/v035",
+      "secondary": [],
+      "source": {
+        "bytes": 52969,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json",
+        "sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21"
+      },
+      "stage": "cpu",
+      "steps": 16,
+      "stopped_retained": true,
+      "target_source": {
+        "bytes": 52969,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json",
+        "sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21"
+      }
+    },
+    "owner_ref": {
+      "bytes": 1386,
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json",
+      "sha256": "54e38927342aa9c4e443cbde798768e46a421afc3fb1ba7c8e220aa3842ed3cd"
+    }
+  },
+  {
+    "actual_bytes": 1130509823,
+    "files": 16582,
+    "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-069-repair1-001",
+    "owner": {
+      "NPU": true,
+      "authority": {
+        "bytes": 3481,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+        "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+      },
+      "bridge_primitive_gate_pass": false,
+      "diagnostic_capture_complete": true,
+      "elapsed_seconds": 312.65007931002765,
+      "full_gdn_qualified": false,
+      "independent_consumer": {
+        "bytes": 4687,
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-069-repair1-001/native/INDEPENDENT.json",
+        "sha256": "84394d6b50001976240d920f257fa78ba5405c92b3aeff86d454eb8a8ebb455a"
+      },
+      "model_ready": false,
+      "phase_seconds": 2880,
+      "physical": [
+        5
+      ],
+      "primary": null,
+      "resource_admitted": true,
+      "result": {
+        "bytes": 60267,
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-069-repair1-001/numeric/result/RESULT.json",
+        "sha256": "8e7f12ea5ba05d3d9216fc4b6a2a7673887df7f746d76d6f84a53721ba33b8c5"
+      },
+      "schema": "deltalog.diagnostic-owned-host/v035",
+      "secondary": [],
+      "source": {
+        "bytes": 52969,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json",
+        "sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21"
+      },
+      "stage": "numeric",
+      "steps": 16,
+      "stopped_retained": true,
+      "target_source": {
+        "bytes": 52969,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json",
+        "sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21"
+      }
+    },
+    "owner_ref": {
+      "bytes": 1620,
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json",
+      "sha256": "e98523737a3b87244625bb1a9241a8d92fb6695d0b5f059751e4a9a7b441a8f9"
+    }
+  },
+  {
+    "actual_bytes": 841648994,
+    "files": 27076,
+    "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001",
+    "owner": {
+      "NPU": true,
+      "authority": {
+        "bytes": 3481,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+        "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+      },
+      "bridge_primitive_gate_pass": false,
+      "diagnostic_capture_complete": false,
+      "elapsed_seconds": 207.657655899995,
+      "full_gdn_qualified": false,
+      "independent_consumer": null,
+      "model_ready": false,
+      "phase_seconds": 2880,
+      "physical": [
+        5
+      ],
+      "primary": "independent consumer ValueError('actual GE child failed; preserved logs/raw')",
+      "resource_admitted": true,
+      "result": {
+        "bytes": 100542,
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001/numeric/result/RESULT.json",
+        "sha256": "4a5b125780618a6020e2d2bf619be1e4258dbafd9b7699bfe52aabc16fa12caa"
+      },
+      "schema": "deltalog.diagnostic-owned-host/v035",
+      "secondary": [],
+      "source": {
+        "bytes": 52969,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json",
+        "sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21"
+      },
+      "stage": "numeric",
+      "steps": 160,
+      "stopped_retained": true,
+      "target_source": {
+        "bytes": 52969,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json",
+        "sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21"
+      }
+    },
+    "owner_ref": {
+      "bytes": 1469,
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json",
+      "sha256": "412680c3460d4921f32edd3a0cf467186f8639d16e07ee0a1b5e89cdfed513e1"
+    }
+  }
+]
