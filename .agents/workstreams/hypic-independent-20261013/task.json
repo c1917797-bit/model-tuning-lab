@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "catalog-R3-diagnostic-failure-repair-hostvalidated",
+  "execution_state": "catalog-R4-actually-live-launch-response-timeout",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "NoownedNPUjob;0b7b12:19:33UTC0-3empty/exactCIDabsent/8233free snapshotonly."
+    "state": "OwnedR4 controller PID1249903 LIVE;29clean isolation samples at12:34:46UTC; initialization, no terminal or acceptance yet."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Freeze newsource-bound catalogR4 manifest/contract/root with same17 protocol and all unchanged numerical/coverage gates;old159/163contracts NOT launchable. Freshdirect/actualresourceadmission beforeoneboundeddeviceverification of2line sinkfix. No baseline/lifecycle expansion beforecatalogacceptance;neverrerunoldroots. DeadlineOct17T06:48:09Z.",
+  "next_action": "Track exact originalpeer/PID1249903 and R4 rawroot; no restart/second device while live or unclear; terminal independent audit R4 --live-release. Same17 gates. DeadlineOct17T06:48:09Z.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -196,10 +196,10 @@
     ]
   },
   "publication": {
-    "state": "51232ce liveverified;R3failure/narrowrepaircheckpoint pending",
-    "published_commit": "51232ce5775d8c2974f25c57d69e656f89b89875",
+    "state": "4790b799 liveverified R4contract; mainunchanged",
+    "published_commit": "4790b799de321b6ad28493272452100fee39535e",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "note": "No repaired NPU or quality/full-goal acceptance."
+    "note": "Scope-labelled diagnostic contract; not NPU acceptance."
   },
   "math_reference": {
     "state": "cpu-reference-passed",
@@ -215,14 +215,15 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL0b67exit1;8public success/8privateHTTP500;diagnostic sink attrs missing;172clean/exactownrelease",
-    "last_operation": "exec-0000000000000b67",
+    "state": "LIVE exactPID1249903 confirmed0b93; launch response timed out without exec handle; DO NOT RESTART",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "raw_root": "/cache/cch/hypic-independent-20261013/catalog-quality-r16-canary-r3",
-    "contract": "QUALITY_R16_CATALOG_CANARY_R3_CONTRACT.json",
-    "checkpoint": "03a14fdde6287a16eef3d28386ad9516a99180f9",
-    "terminal_report": "CATALOG_R16_CANARY_R3_TERMINAL_20261016.json"
+    "controller_pid": 1249903,
+    "raw_root": "/cache/cch/hypic-independent-20261013/catalog-quality-r16-canary-r4",
+    "contract": "QUALITY_R16_CATALOG_CANARY_R4_CONTRACT.json",
+    "checkpoint": "4790b799de321b6ad28493272452100fee39535e",
+    "last_live_probe": "exec-0000000000000b93",
+    "last_live_utc": "2026-10-16T12:34:46.430989+00:00"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -275,11 +276,10 @@
     "report": "FORMAL_R16_20261016_G3_R1_TERMINAL.json"
   },
   "catalog_canary": {
-    "state": "R3 FAILEDdiagnosticwire;R2externalfailure;bothrootsimmutable",
-    "contract": "QUALITY_R16_CATALOG_CANARY_R3_CONTRACT.json",
+    "state": "R4 LIVE bounded17 sinkrepair verification; R3 diagnosticfailure/R2external immutable",
+    "contract": "QUALITY_R16_CATALOG_CANARY_R4_CONTRACT.json",
     "device_run": true,
-    "accepted": false,
-    "source_binding_state": "Historical old159 now stale at independent_quality_compact_loader.py after explicit2line repair; source retained in03a14fd"
+    "accepted": false
   },
   "resource_observation": {
     "operation": "exec-0000000000000b5a",

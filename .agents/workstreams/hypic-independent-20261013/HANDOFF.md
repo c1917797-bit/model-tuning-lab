@@ -1,3 +1,18 @@
+# LATEST R4 ACTUALLY LIVE — launch response timeout, DO NOT RESTART
+
+R4 source checkpoint4790b799de321b6ad28493272452100fee39535e published/liveverified;
+main23ec33d unchanged. Contract159/static0b8aPASS; fresh0b8f12:32:52UTC
+physical0-3empty/8233+HCCLfree/source/image/model/input/newroot admissionPASS.
+Single launch returned direct_route_failed timeout WITHOUT exec handle, but
+0b92 actualpgrep proves PID1249903 exact formal_quality_r16_tp4.py R4 --run LIVE.
+Raw /cache/cch/hypic-independent-20261013/catalog-quality-r16-canary-r4 exists;
+events preflight12:33:37/isolation through12:33:47 confirms execution side effects.
+No retry/restart/seconddevicejob; recover exact operation handle if available,
+otherwise track exactPID/rawroot until authoritative terminal. Originalpeer ma
+lgw_a6109c51076a4a2c9d2674ca5a8704a0. R3 failure/root immutable. Same17 gates.
+Terminal audit_catalog_canary_terminal.py --contract QUALITY_R16_CATALOG_CANARY_R4_CONTRACT.json --live-release.
+Do not edit159bound files during run; fullgoal active/incomplete, deadlineOct17T06:48:09Z.
+
 # LATEST R3 FAILED diagnostic sink wiring; narrow repair HOSTONLY
 
 0b67terminalexit1,172clean isolation/8publicresponses+8privateHTTP500 retainedjournal;
