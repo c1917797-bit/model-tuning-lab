@@ -1,4 +1,12 @@
-# CURRENT R16 NATIVE PROFILE COMPARATOR LIVE
+# CURRENT R16 NATIVE PROFILE TERMINAL AUDITED; OFFLINE PARSER
+
+0c69 terminalexit0, independent0c78 source149/16privatewarm+16profile32768x64/
+194clean isolation/officialrankPIDphysicaljoin/exactownedreleasePASS.
+No HYPIC package mount. PROFILE_G1_R16_TERMINAL_AUDIT_20261016.json rawhashes/scope.
+Manager-only offlineparser CID1ce6ea56b88ee450f124029d5a4c12239858f5d3c0d2c055a955319f0ca09ad2
+launched CPU0/no compute devices; analysis-r1 copy/rawuntouched. Verify live/terminal;
+neverduplicate. Validate4rank outputs/actualphase/batch then compareG3 before attribution.
+No modeljob/live0c69 below superseded. Negativeformalpair unchanged/deadlineunchanged.
 
 Exactma exec-0000000000000c69 RUNNING;raw /cache/cch/hypic-independent-20261013/profile-g1-r16-privatewarm-r1.
 87ff1a00 published/liveverified/mainunchanged.0c68fresh14:34:14UTC physical0-3empty,

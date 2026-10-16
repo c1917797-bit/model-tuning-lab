@@ -1,0 +1,75 @@
+{
+  "schema": "hypic-native-profile-terminal-audit/v1",
+  "controller": "exec-0000000000000c69",
+  "audit": "exec-0000000000000c78",
+  "contract": "PROFILE_G1_R16_PRIVATEWARM_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/profile-g1-r16-privatewarm-r1",
+  "evidence": {
+    "terminal_valid": true,
+    "responses": 16,
+    "private_warmup": 16,
+    "sources": 149,
+    "isolation": 194,
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 59,
+          "host_pid": 2216369,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 60,
+          "host_pid": 2216370,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 61,
+          "host_pid": 2216371,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 62,
+          "host_pid": 2216372,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "runtime_hypic_mounted": false,
+    "release": {
+      "owned_container": "d380ca91b907a2d352252fb24fa400ef3fa34f558e4f1bf5d18d53d690724057",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    },
+    "profile_rank_directories": [
+      "rank2_61_20261016144356406_ascend_pt",
+      "rank1_60_20261016144356517_ascend_pt",
+      "rank0_59_20261016144356647_ascend_pt",
+      "rank3_62_20261016144356406_ascend_pt"
+    ],
+    "raw_sha256": {
+      "result.json": "49b2f8e87cde1f55997c45b8c071b474f812b518994f7ab08c8c39eda1c0cd99",
+      "profile-unit.json": "29de21145e4f903dca78b9cd97497859ad567fbaca1bb0da435770aeee8880d6",
+      "events.jsonl": "f891c83c2ae8c4d3fb2f01fc6f9a3c7d1979319f4d032ecf5f0c6fc955e96169",
+      "release.json": "97390231786787e12ec6804b1b247618a64bc00a4a1074ebda569f1f6fd8de65",
+      "service.log": "2ba9cfc01c295c46b60afe577a7c2d5364a5a65ac4f535345c619e2e0f28e066"
+    },
+    "scope": "Diagnostic native comparator only, no formal1024performance/quality claim; release based on terminal captured evidence."
+  },
+  "parser": {
+    "cid": "1ce6ea56b88ee450f124029d5a4c12239858f5d3c0d2c055a955319f0ca09ad2",
+    "analysis_root": "/cache/cch/hypic-independent-20261013/profile-g1-r16-privatewarm-r1-analysis-r1",
+    "devices": [
+      "/dev/davinci_manager"
+    ],
+    "compute_devices": [],
+    "cpu": "0",
+    "state": "launched; inspect actual state before claiming live/complete"
+  },
+  "limits": [
+    "No formal performance/quality acceptance",
+    "Compare observed actual phase/batch before attributing G3 regression",
+    "Do not sum operator durations across overlapping streams/ranks"
+  ]
+}
