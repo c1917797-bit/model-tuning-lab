@@ -1,4 +1,18 @@
-# CURRENT R20 METADATA CANARY TERMINAL BOUNDED ACCEPTED
+# CURRENT R20 G3 FULL40 PERFORMANCE LIVE
+
+Published/liveverifieda06c71ab899e18453acb2a64f32784b90100e31a;mainunchanged.
+Freshma force_direct admission0ff2 at23:49:26UTC proves200source/183runtime/
+image/model/token/physical0-3empty/8233HCCLfree/newroot/cache9.17GB.
+Exactcontroller exec-0000000000000ff4 onma lgw_a6109c51076a4a2c9d2674ca5a8704a0.
+Contract FORMAL_R20_METADATA_G3_R1_CONTRACT.json;raw
+/cache/cch/hypic-independent-20261013/formal-r20-metadata-g3-r1.
+Poll exacthandle/root; no restartlive/unclear or200boundchanges.
+Terminal audit_r20_metadata_performance.py --contract FORMAL_R20_METADATA_G3_R1_CONTRACT.json
+--live-release; validonlythen freshG1 admission. Fixed1024/full40/c16/2B2Awarm;
+timedshadow/probeoff,finite/ownership/commitguardretained. Notquality.
+Initialread-onlyadmissiondirecttimeout wasnotlaunch;retry0ff2 valid. Fullgoalunfinished.
+
+# HISTORICAL R20 METADATA CANARY TERMINAL BOUNDED ACCEPTED
 
 0fbbexit0;224cleanisolation/3responses/exactCIDremoved/physical0-3empty/8233free.
 Frozenaudit0fdfexit1 retained:wrong single-group<=6reads assumption.

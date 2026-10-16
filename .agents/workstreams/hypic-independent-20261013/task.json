@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R20-metadata-canary-terminal-bounded-accepted",
+  "execution_state": "R20-G3-full40-performance-live",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -215,15 +215,15 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL_BOUNDED_ACCEPTED",
-    "operation": "exec-0000000000000fbb",
+    "state": "RUNNING",
+    "operation": "exec-0000000000000ff4",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "contract": "METADATA_R20_CANARY_R1_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/metadata-r20-canary-r1",
-    "checkpoint": "353019c03af33bf32551dd7043cb020c46d562b1",
-    "admission_operation": "exec-0000000000000fba",
-    "independent_audit": "exec-0000000000000fe0; original0fdf failure retained"
+    "contract": "FORMAL_R20_METADATA_G3_R1_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/formal-r20-metadata-g3-r1",
+    "checkpoint": "a06c71ab899e18453acb2a64f32784b90100e31a",
+    "admission_operation": "exec-0000000000000ff2",
+    "independent_audit": null
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
