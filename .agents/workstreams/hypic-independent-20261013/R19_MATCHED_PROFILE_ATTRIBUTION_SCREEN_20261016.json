@@ -1,0 +1,3390 @@
+{
+  "schema": "hypic-r19-profile-pair-screen/v1",
+  "g1_parsed_audit_operation": "exec-0000000000000f84",
+  "g1_artifacts": {
+    "fourrank_artifacts_valid": true,
+    "ranks": {
+      "0": {
+        "directory": "rank0_58_20261016230517471_ascend_pt",
+        "inner_pid": 58,
+        "tables": {
+          "kernel_details.csv": {
+            "rows": 7461,
+            "columns": 46,
+            "sha256": "07bfec0c64b4aada98d1da9a0f5abed5940f4f043a81175c18be324ba0548680"
+          },
+          "operator_details.csv": {
+            "rows": 53184,
+            "columns": 9,
+            "sha256": "1f114197296e64824a0ffd4e9bad5cddc227a7fd8f61ecf31bdc2683f61201fc"
+          },
+          "op_statistic.csv": {
+            "rows": 46,
+            "columns": 9,
+            "sha256": "3568268cfb4d381e70fa8b3419f75e79898678fe2da8ae73315b5f134cdaf49c"
+          },
+          "api_statistic.csv": {
+            "rows": 78,
+            "columns": 9,
+            "sha256": "4029d40a95dafbe36d585f9ee065b413e5f0b81a74e6d02d51a4121cc165b590"
+          }
+        },
+        "trace_events": 187537,
+        "trace_bytes": 35225805,
+        "kernel_types": {
+          "Fill": 18,
+          "IndexCheck": 228,
+          "Index": 132,
+          "Cast": 408,
+          "Add": 324,
+          "_compute_slot_mapping_kernel": 2,
+          "Sub": 22,
+          "Greater": 6,
+          "GreaterEqual": 2,
+          "Less": 2,
+          "LogicalAnd": 2,
+          "Mul": 36,
+          "LogicalNot": 2,
+          "GatherV2": 2,
+          "MaskedFill": 2,
+          "hcom_allReduce_": 516,
+          "TensorMove": 290,
+          "GemmaRmsNorm": 2,
+          "MatMulV3": 512,
+          "MatMulV2": 98,
+          "Slice": 736,
+          "ZerosLike": 384,
+          "Transpose": 1441,
+          "CausalConv1d": 96,
+          "ConcatD": 192,
+          "FusedGdnGating": 96,
+          "_clear_ssm_states_kernel": 96,
+          "l2norm_fwd_kernel2_loop": 192,
+          "chunk_local_cumsum_scalar_kernel": 96,
+          "chunk_scaled_dot_kkt_fwd_kernel": 96,
+          "solve_tril_16x16_kernel": 96,
+          "merge_16x16_to_64x64_inverse_kernel": 96,
+          "recompute_w_u_fwd_kernel": 96,
+          "ChunkGatedDeltaRuleFwdH": 96,
+          "ChunkFwdO": 96,
+          "BroadcastTo": 96,
+          "IndexPutV2": 96,
+          "_layer_norm_fwd_1pass_kernel_npu": 96,
+          "AddRmsNormBias": 256,
+          "SwiGlu": 128,
+          "split_qkv_rmsnorm_mrope_kernel": 32,
+          "ReshapeAndCacheNdKernel": 32,
+          "FusedInferAttentionScore": 32,
+          "Sigmoid": 32,
+          "hcom_allGather_": 4,
+          "ArgMaxV2": 2,
+          "l2norm_fwd_kernel2": 96,
+          "RecurrentGatedDeltaRule": 48
+        },
+        "timeline": {
+          "path": "/cache/cch/hypic-independent-20261013/profile-g1-r19-earlymixed-r1-analysis-r1/rank0_58_20261016230517471_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+          "sha256": "07bfec0c64b4aada98d1da9a0f5abed5940f4f043a81175c18be324ba0548680",
+          "kernel_rows": 7461,
+          "absolute_origin_us": "1792191917672191.651",
+          "kernel_envelope_us": 9141777.033,
+          "all_kernel_union_us": 9107667.581000015,
+          "uncovered_envelope_us": 34109.45199998468,
+          "uncovered_fraction": 0.0037311621008537326,
+          "communication_exclusive_us": 2228227.418999996,
+          "largest_uncovered_gaps_us": [
+            2436.288999999999,
+            2387.268,
+            2352.6669999994338,
+            2135.9419999998063,
+            2132.6220000004396,
+            2004.5400000000373,
+            1749.6350000000002,
+            1384.9670000000006,
+            1343.7870000000003,
+            1302.4259999999776,
+            1292.1459999997169,
+            1268.5650000000023,
+            1120.3820000000014,
+            1036.2209999999995,
+            875.098,
+            775.7960000000894,
+            719.0749999999999,
+            626.6730000004172,
+            555.4110000000001,
+            528.0300000002608
+          ],
+          "types": [
+            {
+              "type": "MatMulV3",
+              "communication_name_match": false,
+              "calls": 512,
+              "summed_us": 3406841.269000003,
+              "union_us": 3406841.269000003
+            },
+            {
+              "type": "hcom_allReduce_",
+              "communication_name_match": true,
+              "calls": 516,
+              "summed_us": 4456376.395999996,
+              "union_us": 2228188.197999998
+            },
+            {
+              "type": "FusedInferAttentionScore",
+              "communication_name_match": false,
+              "calls": 32,
+              "summed_us": 800403.5489999973,
+              "union_us": 800403.5489999973
+            },
+            {
+              "type": "AddRmsNormBias",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 569114.2289999975,
+              "union_us": 569114.2289999975
+            },
+            {
+              "type": "ChunkGatedDeltaRuleFwdH",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 278450.08599999896,
+              "union_us": 278450.08599999896
+            },
+            {
+              "type": "Transpose",
+              "communication_name_match": false,
+              "calls": 1441,
+              "summed_us": 222097.5470000004,
+              "union_us": 222097.5470000004
+            },
+            {
+              "type": "recompute_w_u_fwd_kernel",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 210123.80000000144,
+              "union_us": 210123.80000000144
+            },
+            {
+              "type": "TensorMove",
+              "communication_name_match": false,
+              "calls": 290,
+              "summed_us": 193726.6810000021,
+              "union_us": 193726.6810000021
+            },
+            {
+              "type": "SwiGlu",
+              "communication_name_match": false,
+              "calls": 128,
+              "summed_us": 181462.83200000296,
+              "union_us": 181462.83200000296
+            },
+            {
+              "type": "merge_16x16_to_64x64_inverse_kernel",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 174395.22500000332,
+              "union_us": 174395.22500000332
+            },
+            {
+              "type": "Slice",
+              "communication_name_match": false,
+              "calls": 736,
+              "summed_us": 145096.9639999952,
+              "union_us": 145096.9639999952
+            },
+            {
+              "type": "ChunkFwdO",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 118641.50299999738,
+              "union_us": 118641.50299999738
+            },
+            {
+              "type": "CausalConv1d",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 71921.77900000269,
+              "union_us": 71921.77900000269
+            },
+            {
+              "type": "solve_tril_16x16_kernel",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 68668.33500000095,
+              "union_us": 68668.33500000095
+            },
+            {
+              "type": "ConcatD",
+              "communication_name_match": false,
+              "calls": 192,
+              "summed_us": 64010.440000005015,
+              "union_us": 64010.440000005015
+            },
+            {
+              "type": "_layer_norm_fwd_1pass_kernel_npu",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 59348.9500000025,
+              "union_us": 59348.9500000025
+            },
+            {
+              "type": "MatMulV2",
+              "communication_name_match": false,
+              "calls": 98,
+              "summed_us": 55966.60199999865,
+              "union_us": 55966.60199999865
+            },
+            {
+              "type": "split_qkv_rmsnorm_mrope_kernel",
+              "communication_name_match": false,
+              "calls": 32,
+              "summed_us": 53751.55400000111,
+              "union_us": 53751.55400000111
+            },
+            {
+              "type": "ZerosLike",
+              "communication_name_match": false,
+              "calls": 384,
+              "summed_us": 45078.28699999827,
+              "union_us": 45078.28699999827
+            },
+            {
+              "type": "chunk_scaled_dot_kkt_fwd_kernel",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 38802.017000000735,
+              "union_us": 38802.017000000735
+            }
+          ],
+          "limits": [
+            "Kernel union is not critical-path removable cost.",
+            "Gaps may include CPU/compile/driver/synchronization/instrumentation or incomplete capture; no root cause from gaps alone.",
+            "Communication name matching is a screening classifier, not collective ownership/causality.",
+            "Never sum ranks or group unions; overlapping work counted once only in all_kernel_union_us.",
+            "Profiled64-token timing is not formal1024 service performance."
+          ]
+        }
+      },
+      "1": {
+        "directory": "rank1_59_20261016230517470_ascend_pt",
+        "inner_pid": 59,
+        "tables": {
+          "kernel_details.csv": {
+            "rows": 7461,
+            "columns": 46,
+            "sha256": "0f5a39ede1e499846fe336ae0213e846bd78ce40a2941dfe9cd5e13989937949"
+          },
+          "operator_details.csv": {
+            "rows": 53186,
+            "columns": 9,
+            "sha256": "11abcdc33b30eecf6e04fa2ac5c779086cf6f4e3a10a83bc932c642314548354"
+          },
+          "op_statistic.csv": {
+            "rows": 46,
+            "columns": 9,
+            "sha256": "b9dd31bab787028393957bfffb57d7e7777c37c8690850272da55667e8f92d96"
+          },
+          "api_statistic.csv": {
+            "rows": 78,
+            "columns": 9,
+            "sha256": "7849e91b93ac61a73356a7d473fd4cae95cc5628fda6ed4ddc55a5f22e0d708f"
+          }
+        },
+        "trace_events": 187558,
+        "trace_bytes": 35174469,
+        "kernel_types": {
+          "Fill": 18,
+          "IndexCheck": 228,
+          "Index": 132,
+          "Cast": 408,
+          "Add": 324,
+          "_compute_slot_mapping_kernel": 2,
+          "Sub": 22,
+          "Greater": 6,
+          "GreaterEqual": 2,
+          "Less": 2,
+          "LogicalAnd": 2,
+          "Mul": 36,
+          "LogicalNot": 2,
+          "GatherV2": 2,
+          "MaskedFill": 2,
+          "hcom_allReduce_": 516,
+          "TensorMove": 290,
+          "GemmaRmsNorm": 2,
+          "MatMulV3": 512,
+          "MatMulV2": 98,
+          "Slice": 736,
+          "ZerosLike": 384,
+          "Transpose": 1441,
+          "CausalConv1d": 96,
+          "ConcatD": 192,
+          "FusedGdnGating": 96,
+          "_clear_ssm_states_kernel": 96,
+          "l2norm_fwd_kernel2_loop": 192,
+          "chunk_local_cumsum_scalar_kernel": 96,
+          "chunk_scaled_dot_kkt_fwd_kernel": 96,
+          "solve_tril_16x16_kernel": 96,
+          "merge_16x16_to_64x64_inverse_kernel": 96,
+          "recompute_w_u_fwd_kernel": 96,
+          "ChunkGatedDeltaRuleFwdH": 96,
+          "ChunkFwdO": 96,
+          "BroadcastTo": 96,
+          "IndexPutV2": 96,
+          "_layer_norm_fwd_1pass_kernel_npu": 96,
+          "AddRmsNormBias": 256,
+          "SwiGlu": 128,
+          "split_qkv_rmsnorm_mrope_kernel": 32,
+          "ReshapeAndCacheNdKernel": 32,
+          "FusedInferAttentionScore": 32,
+          "Sigmoid": 32,
+          "hcom_allGather_": 4,
+          "ArgMaxV2": 2,
+          "l2norm_fwd_kernel2": 96,
+          "RecurrentGatedDeltaRule": 48
+        },
+        "timeline": {
+          "path": "/cache/cch/hypic-independent-20261013/profile-g1-r19-earlymixed-r1-analysis-r1/rank1_59_20261016230517470_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+          "sha256": "0f5a39ede1e499846fe336ae0213e846bd78ce40a2941dfe9cd5e13989937949",
+          "kernel_rows": 7461,
+          "absolute_origin_us": "1792191917672190.935",
+          "kernel_envelope_us": 9141589,
+          "all_kernel_union_us": 9107210.839999996,
+          "uncovered_envelope_us": 34378.160000003874,
+          "uncovered_fraction": 0.0037606328615302958,
+          "communication_exclusive_us": 2213084.2800000003,
+          "largest_uncovered_gaps_us": [
+            2624.9000000000015,
+            2598.3199999999997,
+            2345.9199999999255,
+            2231.140000000596,
+            1924.3799999998882,
+            1871.6800000006333,
+            1696.1799999999985,
+            1314.9599999999991,
+            1312.08,
+            1283.0600000005215,
+            1279.0600000000013,
+            1270.8600000003353,
+            1158.9599999999991,
+            1129.1399999999994,
+            1070.9400000004098,
+            903.5000000000009,
+            719.8000000000001,
+            690.4200000008568,
+            602.5999999996275,
+            524.3400000000001
+          ],
+          "types": [
+            {
+              "type": "MatMulV3",
+              "communication_name_match": false,
+              "calls": 512,
+              "summed_us": 3415713.3199999956,
+              "union_us": 3415713.3199999956
+            },
+            {
+              "type": "hcom_allReduce_",
+              "communication_name_match": true,
+              "calls": 516,
+              "summed_us": 4426027.559999999,
+              "union_us": 2213013.7799999993
+            },
+            {
+              "type": "FusedInferAttentionScore",
+              "communication_name_match": false,
+              "calls": 32,
+              "summed_us": 804045.5000000002,
+              "union_us": 804045.5000000002
+            },
+            {
+              "type": "AddRmsNormBias",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 565279.6999999958,
+              "union_us": 565279.6999999958
+            },
+            {
+              "type": "ChunkGatedDeltaRuleFwdH",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 280390.48000000004,
+              "union_us": 280390.48000000004
+            },
+            {
+              "type": "Transpose",
+              "communication_name_match": false,
+              "calls": 1441,
+              "summed_us": 222316.39999999854,
+              "union_us": 222316.39999999854
+            },
+            {
+              "type": "recompute_w_u_fwd_kernel",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 211762.97999999748,
+              "union_us": 211762.97999999748
+            },
+            {
+              "type": "TensorMove",
+              "communication_name_match": false,
+              "calls": 290,
+              "summed_us": 192024.86000000234,
+              "union_us": 192024.86000000234
+            },
+            {
+              "type": "SwiGlu",
+              "communication_name_match": false,
+              "calls": 128,
+              "summed_us": 180921.10000000228,
+              "union_us": 180921.10000000228
+            },
+            {
+              "type": "merge_16x16_to_64x64_inverse_kernel",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 175015.4400000047,
+              "union_us": 175015.4400000047
+            },
+            {
+              "type": "Slice",
+              "communication_name_match": false,
+              "calls": 736,
+              "summed_us": 145039.63999999984,
+              "union_us": 145039.63999999984
+            },
+            {
+              "type": "ChunkFwdO",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 119222.50000000208,
+              "union_us": 119222.50000000208
+            },
+            {
+              "type": "CausalConv1d",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 71832.82000000143,
+              "union_us": 71832.82000000143
+            },
+            {
+              "type": "solve_tril_16x16_kernel",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 68435.67999999636,
+              "union_us": 68435.67999999636
+            },
+            {
+              "type": "ConcatD",
+              "communication_name_match": false,
+              "calls": 192,
+              "summed_us": 64209.719999994115,
+              "union_us": 64209.719999994115
+            },
+            {
+              "type": "_layer_norm_fwd_1pass_kernel_npu",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 59499.960000001825,
+              "union_us": 59499.960000001825
+            },
+            {
+              "type": "MatMulV2",
+              "communication_name_match": false,
+              "calls": 98,
+              "summed_us": 56016.09999999911,
+              "union_us": 56016.09999999911
+            },
+            {
+              "type": "split_qkv_rmsnorm_mrope_kernel",
+              "communication_name_match": false,
+              "calls": 32,
+              "summed_us": 53754.719999995636,
+              "union_us": 53754.719999995636
+            },
+            {
+              "type": "ZerosLike",
+              "communication_name_match": false,
+              "calls": 384,
+              "summed_us": 45544.37999999719,
+              "union_us": 45544.37999999719
+            },
+            {
+              "type": "chunk_scaled_dot_kkt_fwd_kernel",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 39053.140000000094,
+              "union_us": 39053.140000000094
+            }
+          ],
+          "limits": [
+            "Kernel union is not critical-path removable cost.",
+            "Gaps may include CPU/compile/driver/synchronization/instrumentation or incomplete capture; no root cause from gaps alone.",
+            "Communication name matching is a screening classifier, not collective ownership/causality.",
+            "Never sum ranks or group unions; overlapping work counted once only in all_kernel_union_us.",
+            "Profiled64-token timing is not formal1024 service performance."
+          ]
+        }
+      },
+      "2": {
+        "directory": "rank2_60_20261016230517470_ascend_pt",
+        "inner_pid": 60,
+        "tables": {
+          "kernel_details.csv": {
+            "rows": 7461,
+            "columns": 46,
+            "sha256": "4220da8c4815573f270c408ac3aa31472615a15fc9aeccb4da0468481f140794"
+          },
+          "operator_details.csv": {
+            "rows": 53186,
+            "columns": 9,
+            "sha256": "2fe884ca312b705fa8edb6f0ddc436ed8609e35709ec0bda6d4aaaea4bb08e72"
+          },
+          "op_statistic.csv": {
+            "rows": 46,
+            "columns": 9,
+            "sha256": "25dc92fb676b88448b95f5e8da11687ebe6d7ff5469cefb593c3d07e6c140f5f"
+          },
+          "api_statistic.csv": {
+            "rows": 78,
+            "columns": 9,
+            "sha256": "622adee8860fc5019b8c6d242985b23dc7165184d86dfe606b68cce1ee4a287a"
+          }
+        },
+        "trace_events": 187662,
+        "trace_bytes": 35210240,
+        "kernel_types": {
+          "Fill": 18,
+          "IndexCheck": 228,
+          "Index": 132,
+          "Cast": 408,
+          "Add": 324,
+          "_compute_slot_mapping_kernel": 2,
+          "Sub": 22,
+          "Greater": 6,
+          "GreaterEqual": 2,
+          "Less": 2,
+          "LogicalAnd": 2,
+          "Mul": 36,
+          "LogicalNot": 2,
+          "GatherV2": 2,
+          "MaskedFill": 2,
+          "hcom_allReduce_": 516,
+          "TensorMove": 290,
+          "GemmaRmsNorm": 2,
+          "MatMulV3": 512,
+          "MatMulV2": 98,
+          "Slice": 736,
+          "ZerosLike": 384,
+          "Transpose": 1441,
+          "CausalConv1d": 96,
+          "ConcatD": 192,
+          "FusedGdnGating": 96,
+          "_clear_ssm_states_kernel": 96,
+          "l2norm_fwd_kernel2_loop": 192,
+          "chunk_local_cumsum_scalar_kernel": 96,
+          "chunk_scaled_dot_kkt_fwd_kernel": 96,
+          "solve_tril_16x16_kernel": 96,
+          "merge_16x16_to_64x64_inverse_kernel": 96,
+          "recompute_w_u_fwd_kernel": 96,
+          "ChunkGatedDeltaRuleFwdH": 96,
+          "ChunkFwdO": 96,
+          "BroadcastTo": 96,
+          "IndexPutV2": 96,
+          "_layer_norm_fwd_1pass_kernel_npu": 96,
+          "AddRmsNormBias": 256,
+          "SwiGlu": 128,
+          "split_qkv_rmsnorm_mrope_kernel": 32,
+          "ReshapeAndCacheNdKernel": 32,
+          "FusedInferAttentionScore": 32,
+          "Sigmoid": 32,
+          "hcom_allGather_": 4,
+          "ArgMaxV2": 2,
+          "l2norm_fwd_kernel2": 96,
+          "RecurrentGatedDeltaRule": 48
+        },
+        "timeline": {
+          "path": "/cache/cch/hypic-independent-20261013/profile-g1-r19-earlymixed-r1-analysis-r1/rank2_60_20261016230517470_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+          "sha256": "4220da8c4815573f270c408ac3aa31472615a15fc9aeccb4da0468481f140794",
+          "kernel_rows": 7461,
+          "absolute_origin_us": "1792191917671466.330",
+          "kernel_envelope_us": 9142315.86,
+          "all_kernel_union_us": 9111181.31999996,
+          "uncovered_envelope_us": 31134.540000040084,
+          "uncovered_fraction": 0.0034055419301647367,
+          "communication_exclusive_us": 2230467.439999995,
+          "largest_uncovered_gaps_us": [
+            2586.179999999702,
+            2144.5800000000745,
+            1970.1200000000008,
+            1964,
+            1896.879999998957,
+            1639.6800000006333,
+            1563.0800000000745,
+            1497.0599999995902,
+            1472.1399999999994,
+            1269.6800000000003,
+            1260.8799999999992,
+            1141.0599999999977,
+            962.0599999999995,
+            902.2600000000002,
+            679.5600000000004,
+            669.2800000002608,
+            594.640000000596,
+            530.7800000000001,
+            509.339999999851,
+            490.98000000044703
+          ],
+          "types": [
+            {
+              "type": "MatMulV3",
+              "communication_name_match": false,
+              "calls": 512,
+              "summed_us": 3411982.719999991,
+              "union_us": 3411982.719999991
+            },
+            {
+              "type": "hcom_allReduce_",
+              "communication_name_match": true,
+              "calls": 516,
+              "summed_us": 4460773.279999991,
+              "union_us": 2230386.6399999955
+            },
+            {
+              "type": "FusedInferAttentionScore",
+              "communication_name_match": false,
+              "calls": 32,
+              "summed_us": 793564.2200000018,
+              "union_us": 793564.2200000018
+            },
+            {
+              "type": "AddRmsNormBias",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 567063.8000000009,
+              "union_us": 567063.8000000009
+            },
+            {
+              "type": "ChunkGatedDeltaRuleFwdH",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 279691.14000000106,
+              "union_us": 279691.14000000106
+            },
+            {
+              "type": "Transpose",
+              "communication_name_match": false,
+              "calls": 1441,
+              "summed_us": 222070.47999999562,
+              "union_us": 222070.47999999562
+            },
+            {
+              "type": "recompute_w_u_fwd_kernel",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 212009.17999999848,
+              "union_us": 212009.17999999848
+            },
+            {
+              "type": "TensorMove",
+              "communication_name_match": false,
+              "calls": 290,
+              "summed_us": 192528.69999999506,
+              "union_us": 192528.69999999506
+            },
+            {
+              "type": "SwiGlu",
+              "communication_name_match": false,
+              "calls": 128,
+              "summed_us": 180992.48000000117,
+              "union_us": 180992.48000000117
+            },
+            {
+              "type": "merge_16x16_to_64x64_inverse_kernel",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 175141.96000000014,
+              "union_us": 175141.96000000014
+            },
+            {
+              "type": "Slice",
+              "communication_name_match": false,
+              "calls": 736,
+              "summed_us": 145170.4399999944,
+              "union_us": 145170.4399999944
+            },
+            {
+              "type": "ChunkFwdO",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 119032.49999999866,
+              "union_us": 119032.49999999866
+            },
+            {
+              "type": "CausalConv1d",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 71586.92000000102,
+              "union_us": 71586.92000000102
+            },
+            {
+              "type": "solve_tril_16x16_kernel",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 68509.68000000203,
+              "union_us": 68509.68000000203
+            },
+            {
+              "type": "ConcatD",
+              "communication_name_match": false,
+              "calls": 192,
+              "summed_us": 64131.24000000295,
+              "union_us": 64131.24000000295
+            },
+            {
+              "type": "_layer_norm_fwd_1pass_kernel_npu",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 59497.15999999645,
+              "union_us": 59497.15999999645
+            },
+            {
+              "type": "MatMulV2",
+              "communication_name_match": false,
+              "calls": 98,
+              "summed_us": 56008.9600000026,
+              "union_us": 56008.9600000026
+            },
+            {
+              "type": "split_qkv_rmsnorm_mrope_kernel",
+              "communication_name_match": false,
+              "calls": 32,
+              "summed_us": 53512.06000000029,
+              "union_us": 53512.06000000029
+            },
+            {
+              "type": "ZerosLike",
+              "communication_name_match": false,
+              "calls": 384,
+              "summed_us": 45138.51999998723,
+              "union_us": 45138.51999998723
+            },
+            {
+              "type": "chunk_scaled_dot_kkt_fwd_kernel",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 39002.359999997054,
+              "union_us": 39002.359999997054
+            }
+          ],
+          "limits": [
+            "Kernel union is not critical-path removable cost.",
+            "Gaps may include CPU/compile/driver/synchronization/instrumentation or incomplete capture; no root cause from gaps alone.",
+            "Communication name matching is a screening classifier, not collective ownership/causality.",
+            "Never sum ranks or group unions; overlapping work counted once only in all_kernel_union_us.",
+            "Profiled64-token timing is not formal1024 service performance."
+          ]
+        }
+      },
+      "3": {
+        "directory": "rank3_61_20261016230517470_ascend_pt",
+        "inner_pid": 61,
+        "tables": {
+          "kernel_details.csv": {
+            "rows": 7461,
+            "columns": 46,
+            "sha256": "847d98cb7e32d8e65bbd18cb1a84cfd358811d4aca21e1220fd9cb97f9d80af1"
+          },
+          "operator_details.csv": {
+            "rows": 53186,
+            "columns": 9,
+            "sha256": "7a6009aefe4b2678185c04c1201c46b2a2a9ab3de08f84d3065989dc46bc5966"
+          },
+          "op_statistic.csv": {
+            "rows": 46,
+            "columns": 9,
+            "sha256": "e34eabff7e87aedc312d25379bfa797016368ebe2b375a8157f42c1ba90d3034"
+          },
+          "api_statistic.csv": {
+            "rows": 78,
+            "columns": 9,
+            "sha256": "d4a3888fe81976b1ffac9eb27373498b87bbf6466adbb6da9c3530ab33dc8e10"
+          }
+        },
+        "trace_events": 187616,
+        "trace_bytes": 35196025,
+        "kernel_types": {
+          "Fill": 18,
+          "IndexCheck": 228,
+          "Index": 132,
+          "Cast": 408,
+          "Add": 324,
+          "_compute_slot_mapping_kernel": 2,
+          "Sub": 22,
+          "Greater": 6,
+          "GreaterEqual": 2,
+          "Less": 2,
+          "LogicalAnd": 2,
+          "Mul": 36,
+          "LogicalNot": 2,
+          "GatherV2": 2,
+          "MaskedFill": 2,
+          "hcom_allReduce_": 516,
+          "TensorMove": 290,
+          "GemmaRmsNorm": 2,
+          "MatMulV3": 512,
+          "MatMulV2": 98,
+          "Slice": 736,
+          "ZerosLike": 384,
+          "Transpose": 1441,
+          "CausalConv1d": 96,
+          "ConcatD": 192,
+          "FusedGdnGating": 96,
+          "_clear_ssm_states_kernel": 96,
+          "l2norm_fwd_kernel2_loop": 192,
+          "chunk_local_cumsum_scalar_kernel": 96,
+          "chunk_scaled_dot_kkt_fwd_kernel": 96,
+          "solve_tril_16x16_kernel": 96,
+          "merge_16x16_to_64x64_inverse_kernel": 96,
+          "recompute_w_u_fwd_kernel": 96,
+          "ChunkGatedDeltaRuleFwdH": 96,
+          "ChunkFwdO": 96,
+          "BroadcastTo": 96,
+          "IndexPutV2": 96,
+          "_layer_norm_fwd_1pass_kernel_npu": 96,
+          "AddRmsNormBias": 256,
+          "SwiGlu": 128,
+          "split_qkv_rmsnorm_mrope_kernel": 32,
+          "ReshapeAndCacheNdKernel": 32,
+          "FusedInferAttentionScore": 32,
+          "Sigmoid": 32,
+          "hcom_allGather_": 4,
+          "ArgMaxV2": 2,
+          "l2norm_fwd_kernel2": 96,
+          "RecurrentGatedDeltaRule": 48
+        },
+        "timeline": {
+          "path": "/cache/cch/hypic-independent-20261013/profile-g1-r19-earlymixed-r1-analysis-r1/rank3_61_20261016230517470_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+          "sha256": "847d98cb7e32d8e65bbd18cb1a84cfd358811d4aca21e1220fd9cb97f9d80af1",
+          "kernel_rows": 7461,
+          "absolute_origin_us": "1792191917671462.465",
+          "kernel_envelope_us": 9142313.139999999,
+          "all_kernel_union_us": 9111206.280000012,
+          "uncovered_envelope_us": 31106.859999986365,
+          "uncovered_fraction": 0.0034025152632199567,
+          "communication_exclusive_us": 2227131.599999995,
+          "largest_uncovered_gaps_us": [
+            2372.160000000149,
+            2107.9799999999996,
+            2004.980000000447,
+            1994.1399999996647,
+            1974.5000000000018,
+            1835.019999999553,
+            1595.04,
+            1323.160000000149,
+            1321,
+            1289.3400000000001,
+            1270.7000000000007,
+            1126.420000000002,
+            1002.8000000000011,
+            907.880000000001,
+            758.160000000149,
+            719.8,
+            603.4400000004098,
+            580.8600000000006,
+            506.4199999999255,
+            488.78000000026077
+          ],
+          "types": [
+            {
+              "type": "MatMulV3",
+              "communication_name_match": false,
+              "calls": 512,
+              "summed_us": 3405835.8199999947,
+              "union_us": 3405835.8199999947
+            },
+            {
+              "type": "hcom_allReduce_",
+              "communication_name_match": true,
+              "calls": 516,
+              "summed_us": 4454140.559999992,
+              "union_us": 2227070.279999996
+            },
+            {
+              "type": "FusedInferAttentionScore",
+              "communication_name_match": false,
+              "calls": 32,
+              "summed_us": 800580.7599999988,
+              "union_us": 800580.7599999988
+            },
+            {
+              "type": "AddRmsNormBias",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 569369.1799999971,
+              "union_us": 569369.1799999971
+            },
+            {
+              "type": "ChunkGatedDeltaRuleFwdH",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 279479.16000000125,
+              "union_us": 279479.16000000125
+            },
+            {
+              "type": "Transpose",
+              "communication_name_match": false,
+              "calls": 1441,
+              "summed_us": 221975.98000001197,
+              "union_us": 221975.98000001197
+            },
+            {
+              "type": "recompute_w_u_fwd_kernel",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 211799.37999999832,
+              "union_us": 211799.37999999832
+            },
+            {
+              "type": "TensorMove",
+              "communication_name_match": false,
+              "calls": 290,
+              "summed_us": 193634.68000000098,
+              "union_us": 193634.68000000098
+            },
+            {
+              "type": "SwiGlu",
+              "communication_name_match": false,
+              "calls": 128,
+              "summed_us": 180824.98000000365,
+              "union_us": 180824.98000000365
+            },
+            {
+              "type": "merge_16x16_to_64x64_inverse_kernel",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 175299.67999999996,
+              "union_us": 175299.67999999996
+            },
+            {
+              "type": "Slice",
+              "communication_name_match": false,
+              "calls": 736,
+              "summed_us": 145095.76000000344,
+              "union_us": 145095.76000000344
+            },
+            {
+              "type": "ChunkFwdO",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 119081.68000000119,
+              "union_us": 119081.68000000119
+            },
+            {
+              "type": "CausalConv1d",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 71759.15999999696,
+              "union_us": 71759.15999999696
+            },
+            {
+              "type": "solve_tril_16x16_kernel",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 68361.18000000087,
+              "union_us": 68361.18000000087
+            },
+            {
+              "type": "ConcatD",
+              "communication_name_match": false,
+              "calls": 192,
+              "summed_us": 64158.54000000204,
+              "union_us": 64158.54000000204
+            },
+            {
+              "type": "_layer_norm_fwd_1pass_kernel_npu",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 59425.059999997866,
+              "union_us": 59425.059999997866
+            },
+            {
+              "type": "MatMulV2",
+              "communication_name_match": false,
+              "calls": 98,
+              "summed_us": 56023.78000000565,
+              "union_us": 56023.78000000565
+            },
+            {
+              "type": "split_qkv_rmsnorm_mrope_kernel",
+              "communication_name_match": false,
+              "calls": 32,
+              "summed_us": 53461.239999998565,
+              "union_us": 53461.239999998565
+            },
+            {
+              "type": "ZerosLike",
+              "communication_name_match": false,
+              "calls": 384,
+              "summed_us": 44925.93999999506,
+              "union_us": 44925.93999999506
+            },
+            {
+              "type": "chunk_scaled_dot_kkt_fwd_kernel",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 38875.399999997666,
+              "union_us": 38875.399999997666
+            }
+          ],
+          "limits": [
+            "Kernel union is not critical-path removable cost.",
+            "Gaps may include CPU/compile/driver/synchronization/instrumentation or incomplete capture; no root cause from gaps alone.",
+            "Communication name matching is a screening classifier, not collective ownership/causality.",
+            "Never sum ranks or group unions; overlapping work counted once only in all_kernel_union_us.",
+            "Profiled64-token timing is not formal1024 service performance."
+          ]
+        }
+      }
+    },
+    "limits": [
+      "Profile64 diagnostic not formal1024 speed orquality",
+      "Actual phase classification and same-source native comparator still required",
+      "Kernel summed durations are not removable wall time"
+    ]
+  },
+  "comparison_operation": "exec-0000000000000f87",
+  "comparison": {
+    "g1": {
+      "rank0": {
+        "top_host_self_us": [
+          [
+            "aten::copy_",
+            [
+              2957,
+              4096017.400000011
+            ]
+          ],
+          [
+            "ChunkGatedDeltaRuleFunction",
+            [
+              96,
+              230149.64999999997
+            ]
+          ],
+          [
+            "vllm::qwen_gdn_attention_core",
+            [
+              96,
+              103821.99
+            ]
+          ],
+          [
+            "empty_tensor",
+            [
+              8126,
+              69053.0799999998
+            ]
+          ],
+          [
+            "LayerNormFn",
+            [
+              96,
+              36730.38999999999
+            ]
+          ],
+          [
+            "aten::as_strided",
+            [
+              5209,
+              21215.170000000013
+            ]
+          ],
+          [
+            "aclnnInplaceCopy",
+            [
+              2612,
+              20663.49999999998
+            ]
+          ],
+          [
+            "vllm::all_reduce",
+            [
+              258,
+              19112.750000000007
+            ]
+          ],
+          [
+            "c10d::allreduce_",
+            [
+              258,
+              17490.840000000007
+            ]
+          ],
+          [
+            "aten::matmul",
+            [
+              610,
+              15669.270000000004
+            ]
+          ],
+          [
+            "aten::_index_put_impl_",
+            [
+              96,
+              14793.779999999999
+            ]
+          ],
+          [
+            "_C_ascend::npu_add_rms_norm_bias",
+            [
+              256,
+              13973.560000000005
+            ]
+          ],
+          [
+            "aten::empty_strided",
+            [
+              1475,
+              13863.909999999974
+            ]
+          ],
+          [
+            "_C_ascend::npu_causal_conv1d_custom",
+            [
+              96,
+              13859.209999999994
+            ]
+          ],
+          [
+            "aten::view",
+            [
+              2462,
+              12922.699999999984
+            ]
+          ]
+        ],
+        "top_api_us": [
+          [
+            "aclrtSynchronizeEvent",
+            [
+              4,
+              5147056.55
+            ]
+          ],
+          [
+            "launch",
+            [
+              7201,
+              3310275.8
+            ]
+          ],
+          [
+            "aclrtLaunchKernelWithHostArgs",
+            [
+              6175,
+              3030915.75
+            ]
+          ],
+          [
+            "aclrtMemcpyAsync",
+            [
+              88,
+              2629465.75
+            ]
+          ],
+          [
+            "aclrtSynchronizeDeviceWithTimeout",
+            [
+              1,
+              2485829.07
+            ]
+          ],
+          [
+            "aclnnInplaceCopy",
+            [
+              2612,
+              1405266.08
+            ]
+          ],
+          [
+            "aclnnMatmul",
+            [
+              610,
+              322418.12
+            ]
+          ],
+          [
+            "aclnnIndexPutImpl",
+            [
+              96,
+              298464.02
+            ]
+          ],
+          [
+            "aclnnInplaceZero",
+            [
+              384,
+              290118.82
+            ]
+          ],
+          [
+            "aclnnIndex",
+            [
+              132,
+              210851.83
+            ]
+          ],
+          [
+            "aclnnChunkGatedDeltaRuleFwdH",
+            [
+              96,
+              156050.17
+            ]
+          ],
+          [
+            "aclnnCat",
+            [
+              192,
+              127715.94
+            ]
+          ]
+        ],
+        "shapes": [
+          [
+            "MatMulV3",
+            "\"32768,5120;4096,5120\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,32768,128;1,12,32768,128;1,12,32768,128;1,12,32768;1,12,128,128;2;1024\"",
+            96
+          ],
+          [
+            "MatMulV3",
+            "\"32768,1536;5120,1536\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32768,5120;8704,5120\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32768,4352;5120,4352\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32768,5120;3584,5120\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"32768,6,256;32768,1,256;32768,1,256;;2048,2048;1;1;;;;;;;;;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "ArgMaxV2",
+            "\"1,248320;\"",
+            1
+          ],
+          [
+            "MatMulV3",
+            "\"32769,5120;4096,5120\"",
+            48
+          ],
+          [
+            "MatMulV3",
+            "\"32769,1536;5120,1536\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32769,5120;8704,5120\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32769,4352;5120,4352\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32769,5120;3584,5120\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"32769,6,256;3852,128,256;3852,128,256;;2048,2048;2;2;;;;;;;;2,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "ArgMaxV2",
+            "\"2,248320;\"",
+            1
+          ]
+        ]
+      },
+      "rank1": {
+        "top_host_self_us": [
+          [
+            "aten::copy_",
+            [
+              2957,
+              4094051.29
+            ]
+          ],
+          [
+            "ChunkGatedDeltaRuleFunction",
+            [
+              96,
+              227388.43999999992
+            ]
+          ],
+          [
+            "vllm::qwen_gdn_attention_core",
+            [
+              96,
+              104094.79000000004
+            ]
+          ],
+          [
+            "empty_tensor",
+            [
+              8126,
+              65846.6399999999
+            ]
+          ],
+          [
+            "LayerNormFn",
+            [
+              96,
+              36648.49000000002
+            ]
+          ],
+          [
+            "aten::as_strided",
+            [
+              5209,
+              20461.43999999999
+            ]
+          ],
+          [
+            "aclnnInplaceCopy",
+            [
+              2612,
+              19410.650000000016
+            ]
+          ],
+          [
+            "vllm::all_reduce",
+            [
+              258,
+              18559.520000000008
+            ]
+          ],
+          [
+            "c10d::allreduce_",
+            [
+              258,
+              16506.390000000014
+            ]
+          ],
+          [
+            "aten::matmul",
+            [
+              610,
+              15435.86
+            ]
+          ],
+          [
+            "vllm::triton_split_qkv_rmsnorm_mrope",
+            [
+              32,
+              15224.839999999998
+            ]
+          ],
+          [
+            "aten::_index_put_impl_",
+            [
+              96,
+              14992.179999999998
+            ]
+          ],
+          [
+            "_C_ascend::npu_causal_conv1d_custom",
+            [
+              96,
+              14249.329999999994
+            ]
+          ],
+          [
+            "_C_ascend::npu_add_rms_norm_bias",
+            [
+              256,
+              13851.240000000003
+            ]
+          ],
+          [
+            "aten::empty_strided",
+            [
+              1475,
+              13753.709999999972
+            ]
+          ]
+        ],
+        "top_api_us": [
+          [
+            "launch",
+            [
+              7201,
+              3312196.66
+            ]
+          ],
+          [
+            "aclrtLaunchKernelWithHostArgs",
+            [
+              6175,
+              3031942.96
+            ]
+          ],
+          [
+            "aclrtMemcpyAsync",
+            [
+              88,
+              2629143.18
+            ]
+          ],
+          [
+            "aclrtSynchronizeDeviceWithTimeout",
+            [
+              1,
+              2485898.46
+            ]
+          ],
+          [
+            "aclnnInplaceCopy",
+            [
+              2612,
+              1406649.51
+            ]
+          ],
+          [
+            "aclnnMatmul",
+            [
+              610,
+              322246.87
+            ]
+          ],
+          [
+            "aclnnIndexPutImpl",
+            [
+              96,
+              298319.33
+            ]
+          ],
+          [
+            "aclnnInplaceZero",
+            [
+              384,
+              289821.25
+            ]
+          ],
+          [
+            "aclnnIndex",
+            [
+              132,
+              210858.89
+            ]
+          ],
+          [
+            "aclnnChunkGatedDeltaRuleFwdH",
+            [
+              96,
+              153994.62
+            ]
+          ],
+          [
+            "aclnnCat",
+            [
+              192,
+              129360.05
+            ]
+          ],
+          [
+            "aclnnAdds",
+            [
+              320,
+              117718.51
+            ]
+          ]
+        ],
+        "shapes": [
+          [
+            "MatMulV3",
+            "\"32768,5120;4096,5120\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,32768,128;1,12,32768,128;1,12,32768,128;1,12,32768;1,12,128,128;2;1024\"",
+            96
+          ],
+          [
+            "MatMulV3",
+            "\"32768,1536;5120,1536\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32768,5120;8704,5120\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32768,4352;5120,4352\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32768,5120;3584,5120\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"32768,6,256;32768,1,256;32768,1,256;;2048,2048;1;1;;;;;;;;;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "ArgMaxV2",
+            "\"1,248320;\"",
+            1
+          ],
+          [
+            "MatMulV3",
+            "\"32769,5120;4096,5120\"",
+            48
+          ],
+          [
+            "MatMulV3",
+            "\"32769,1536;5120,1536\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32769,5120;8704,5120\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32769,4352;5120,4352\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32769,5120;3584,5120\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"32769,6,256;3852,128,256;3852,128,256;;2048,2048;2;2;;;;;;;;2,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "ArgMaxV2",
+            "\"2,248320;\"",
+            1
+          ]
+        ]
+      },
+      "rank2": {
+        "top_host_self_us": [
+          [
+            "aten::copy_",
+            [
+              2957,
+              4129657.5700000026
+            ]
+          ],
+          [
+            "ChunkGatedDeltaRuleFunction",
+            [
+              96,
+              227017.71999999986
+            ]
+          ],
+          [
+            "vllm::qwen_gdn_attention_core",
+            [
+              96,
+              104119.03000000003
+            ]
+          ],
+          [
+            "empty_tensor",
+            [
+              8126,
+              67321.48000000008
+            ]
+          ],
+          [
+            "LayerNormFn",
+            [
+              96,
+              36741.529999999984
+            ]
+          ],
+          [
+            "aten::as_strided",
+            [
+              5209,
+              21046.050000000043
+            ]
+          ],
+          [
+            "vllm::all_reduce",
+            [
+              258,
+              18827.290000000008
+            ]
+          ],
+          [
+            "aclnnInplaceCopy",
+            [
+              2612,
+              18403.210000000014
+            ]
+          ],
+          [
+            "c10d::allreduce_",
+            [
+              258,
+              16689.600000000006
+            ]
+          ],
+          [
+            "aten::matmul",
+            [
+              610,
+              15218.799999999994
+            ]
+          ],
+          [
+            "aten::_index_put_impl_",
+            [
+              96,
+              14238.290000000003
+            ]
+          ],
+          [
+            "_C_ascend::npu_causal_conv1d_custom",
+            [
+              96,
+              13532.259999999997
+            ]
+          ],
+          [
+            "aten::empty_strided",
+            [
+              1475,
+              13502.55
+            ]
+          ],
+          [
+            "aten::view",
+            [
+              2462,
+              13283.700000000006
+            ]
+          ],
+          [
+            "_C_ascend::npu_add_rms_norm_bias",
+            [
+              256,
+              13171.419999999993
+            ]
+          ]
+        ],
+        "top_api_us": [
+          [
+            "launch",
+            [
+              7201,
+              3334705.41
+            ]
+          ],
+          [
+            "aclrtLaunchKernelWithHostArgs",
+            [
+              6175,
+              3053386.26
+            ]
+          ],
+          [
+            "aclrtMemcpyAsync",
+            [
+              88,
+              2629918.46
+            ]
+          ],
+          [
+            "aclrtSynchronizeDeviceWithTimeout",
+            [
+              1,
+              2485949.77
+            ]
+          ],
+          [
+            "aclnnInplaceCopy",
+            [
+              2612,
+              1416489.8
+            ]
+          ],
+          [
+            "aclnnMatmul",
+            [
+              610,
+              315594.2
+            ]
+          ],
+          [
+            "aclnnIndexPutImpl",
+            [
+              96,
+              310054.43
+            ]
+          ],
+          [
+            "aclnnInplaceZero",
+            [
+              384,
+              292887.05
+            ]
+          ],
+          [
+            "aclnnIndex",
+            [
+              132,
+              211197.56
+            ]
+          ],
+          [
+            "aclnnChunkGatedDeltaRuleFwdH",
+            [
+              96,
+              160337.81
+            ]
+          ],
+          [
+            "aclnnCat",
+            [
+              192,
+              125836.51
+            ]
+          ],
+          [
+            "aclnnAdds",
+            [
+              320,
+              115809.17
+            ]
+          ]
+        ],
+        "shapes": [
+          [
+            "MatMulV3",
+            "\"32768,5120;4096,5120\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,32768,128;1,12,32768,128;1,12,32768,128;1,12,32768;1,12,128,128;2;1024\"",
+            96
+          ],
+          [
+            "MatMulV3",
+            "\"32768,1536;5120,1536\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32768,5120;8704,5120\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32768,4352;5120,4352\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32768,5120;3584,5120\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"32768,6,256;32768,1,256;32768,1,256;;2048,2048;1;1;;;;;;;;;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "ArgMaxV2",
+            "\"1,248320;\"",
+            1
+          ],
+          [
+            "MatMulV3",
+            "\"32769,5120;4096,5120\"",
+            48
+          ],
+          [
+            "MatMulV3",
+            "\"32769,1536;5120,1536\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32769,5120;8704,5120\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32769,4352;5120,4352\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32769,5120;3584,5120\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"32769,6,256;3852,128,256;3852,128,256;;2048,2048;2;2;;;;;;;;2,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "ArgMaxV2",
+            "\"2,248320;\"",
+            1
+          ]
+        ]
+      },
+      "rank3": {
+        "top_host_self_us": [
+          [
+            "aten::copy_",
+            [
+              2957,
+              4127250.6500000013
+            ]
+          ],
+          [
+            "ChunkGatedDeltaRuleFunction",
+            [
+              96,
+              221497.84000000008
+            ]
+          ],
+          [
+            "vllm::qwen_gdn_attention_core",
+            [
+              96,
+              101336.45
+            ]
+          ],
+          [
+            "empty_tensor",
+            [
+              8126,
+              67986.34999999986
+            ]
+          ],
+          [
+            "LayerNormFn",
+            [
+              96,
+              35450.97000000001
+            ]
+          ],
+          [
+            "aten::as_strided",
+            [
+              5209,
+              20285.279999999984
+            ]
+          ],
+          [
+            "aclnnInplaceCopy",
+            [
+              2612,
+              18666.780000000006
+            ]
+          ],
+          [
+            "vllm::all_reduce",
+            [
+              258,
+              18198.54
+            ]
+          ],
+          [
+            "c10d::allreduce_",
+            [
+              258,
+              17195.18000000001
+            ]
+          ],
+          [
+            "aten::matmul",
+            [
+              610,
+              14921.519999999995
+            ]
+          ],
+          [
+            "aten::_index_put_impl_",
+            [
+              96,
+              14761.289999999999
+            ]
+          ],
+          [
+            "_C_ascend::npu_causal_conv1d_custom",
+            [
+              96,
+              13574.460000000005
+            ]
+          ],
+          [
+            "aten::empty_strided",
+            [
+              1475,
+              13527.160000000002
+            ]
+          ],
+          [
+            "_C_ascend::npu_add_rms_norm_bias",
+            [
+              256,
+              13127.849999999993
+            ]
+          ],
+          [
+            "aten::view",
+            [
+              2462,
+              12639.18999999998
+            ]
+          ]
+        ],
+        "top_api_us": [
+          [
+            "launch",
+            [
+              7201,
+              3346508.41
+            ]
+          ],
+          [
+            "aclrtLaunchKernelWithHostArgs",
+            [
+              6175,
+              3066449.94
+            ]
+          ],
+          [
+            "aclrtMemcpyAsync",
+            [
+              88,
+              2629699.21
+            ]
+          ],
+          [
+            "aclrtSynchronizeDeviceWithTimeout",
+            [
+              1,
+              2485898.62
+            ]
+          ],
+          [
+            "aclnnInplaceCopy",
+            [
+              2612,
+              1417169.44
+            ]
+          ],
+          [
+            "aclnnMatmul",
+            [
+              610,
+              322030.6
+            ]
+          ],
+          [
+            "aclnnIndexPutImpl",
+            [
+              96,
+              309242.18
+            ]
+          ],
+          [
+            "aclnnInplaceZero",
+            [
+              384,
+              292478.77
+            ]
+          ],
+          [
+            "aclnnIndex",
+            [
+              132,
+              211983.12
+            ]
+          ],
+          [
+            "aclnnChunkGatedDeltaRuleFwdH",
+            [
+              96,
+              159003.8
+            ]
+          ],
+          [
+            "aclnnCat",
+            [
+              192,
+              129990.32
+            ]
+          ],
+          [
+            "aclnnAdds",
+            [
+              320,
+              117871.03
+            ]
+          ]
+        ],
+        "shapes": [
+          [
+            "MatMulV3",
+            "\"32768,5120;4096,5120\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,32768,128;1,12,32768,128;1,12,32768,128;1,12,32768;1,12,128,128;2;1024\"",
+            96
+          ],
+          [
+            "MatMulV3",
+            "\"32768,1536;5120,1536\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32768,5120;8704,5120\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32768,4352;5120,4352\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32768,5120;3584,5120\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"32768,6,256;32768,1,256;32768,1,256;;2048,2048;1;1;;;;;;;;;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "ArgMaxV2",
+            "\"1,248320;\"",
+            1
+          ],
+          [
+            "MatMulV3",
+            "\"32769,5120;4096,5120\"",
+            48
+          ],
+          [
+            "MatMulV3",
+            "\"32769,1536;5120,1536\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32769,5120;8704,5120\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32769,4352;5120,4352\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"32769,5120;3584,5120\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"32769,6,256;3852,128,256;3852,128,256;;2048,2048;2;2;;;;;;;;2,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "ArgMaxV2",
+            "\"2,248320;\"",
+            1
+          ]
+        ]
+      }
+    },
+    "g3": {
+      "rank0": {
+        "top_host_self_us": [
+          [
+            "aten::copy_",
+            [
+              8530,
+              4493063.319999977
+            ]
+          ],
+          [
+            "vllm::qwen_gdn_attention_core",
+            [
+              96,
+              2520596.0700000008
+            ]
+          ],
+          [
+            "vllm::unified_attention_with_output",
+            [
+              32,
+              2416791.5899999994
+            ]
+          ],
+          [
+            "empty_tensor",
+            [
+              18162,
+              145232.01000000018
+            ]
+          ],
+          [
+            "aten::empty_strided",
+            [
+              6231,
+              64479.69000000016
+            ]
+          ],
+          [
+            "aclnnInplaceCopy",
+            [
+              5284,
+              53328.77000000004
+            ]
+          ],
+          [
+            "LayerNormFn",
+            [
+              96,
+              41266.32999999999
+            ]
+          ],
+          [
+            "aten::index_select",
+            [
+              2070,
+              38341.60000000002
+            ]
+          ],
+          [
+            "aten::as_strided",
+            [
+              8761,
+              35738.75999999996
+            ]
+          ],
+          [
+            "aten::index_copy_",
+            [
+              642,
+              30438.06000000001
+            ]
+          ],
+          [
+            "aten::_local_scalar_dense",
+            [
+              707,
+              26170.110000000015
+            ]
+          ],
+          [
+            "_C_ascend::chunk_gated_delta_rule_fwd_h",
+            [
+              192,
+              24639.579999999998
+            ]
+          ],
+          [
+            "aten::empty",
+            [
+              5303,
+              23478.530000000017
+            ]
+          ],
+          [
+            "vllm::all_reduce",
+            [
+              258,
+              22030.180000000004
+            ]
+          ],
+          [
+            "c10d::allreduce_",
+            [
+              258,
+              20710.47000000001
+            ]
+          ]
+        ],
+        "top_api_us": [
+          [
+            "aclrtSynchronizeStream",
+            [
+              2006,
+              3675172.56
+            ]
+          ],
+          [
+            "aclrtSynchronizeDeviceWithTimeout",
+            [
+              129,
+              408779.31
+            ]
+          ],
+          [
+            "launch",
+            [
+              15851,
+              199360.3
+            ]
+          ],
+          [
+            "aclrtMemcpy",
+            [
+              2266,
+              163640.14
+            ]
+          ],
+          [
+            "aclrtLaunchKernelWithHostArgs",
+            [
+              14857,
+              114882.59
+            ]
+          ],
+          [
+            "aclnnInplaceCopy",
+            [
+              5284,
+              87839.42
+            ]
+          ],
+          [
+            "aclrtMemcpyAsync",
+            [
+              1485,
+              65553.9
+            ]
+          ],
+          [
+            "aclrtSynchronizeEvent",
+            [
+              100,
+              50782.09
+            ]
+          ],
+          [
+            "aclnnInplaceIndexCopy",
+            [
+              642,
+              40838.3
+            ]
+          ],
+          [
+            "aclnnIndexSelect",
+            [
+              2068,
+              34333.93
+            ]
+          ],
+          [
+            "hcom_allReduce_",
+            [
+              258,
+              33544.72
+            ]
+          ],
+          [
+            "aclnnInplaceCopyGetWorkspaceSize",
+            [
+              1203,
+              25462.58
+            ]
+          ]
+        ],
+        "shapes": [
+          [
+            "MatMulV3",
+            "\"16392,5120;4096,5120\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,10760,128;1,12,10760,128;1,12,10760,128;1,12,10760;1,12,128,128;2;338\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,5632,128;1,12,5632,128;1,12,5632,128;1,12,5632;1,12,128,128;2;176\"",
+            48
+          ],
+          [
+            "MatMulV3",
+            "\"16392,1536;5120,1536\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"16392,5120;8704,5120\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"16392,4352;5120,4352\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"16392,5120;3584,5120\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"10760,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"5632,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "ArgMaxV2",
+            "\"1,248320;\"",
+            1
+          ],
+          [
+            "MatMulV3",
+            "\"24584,5120;4096,5120\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,18439,128;1,12,18439,128;1,12,18439,128;1,12,18439;2,12,128,128;3;578\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,6144,128;1,12,6144,128;1,12,6144,128;1,12,6144;1,12,128,128;2;192\"",
+            48
+          ],
+          [
+            "MatMulV3",
+            "\"24584,1536;5120,1536\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"24584,5120;8704,5120\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"24584,4352;5120,4352\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"24584,5120;3584,5120\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"1,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"10248,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"6144,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"8191,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "ArgMaxV2",
+            "\"3,248320;\"",
+            1
+          ]
+        ]
+      },
+      "rank1": {
+        "top_host_self_us": [
+          [
+            "aten::copy_",
+            [
+              8530,
+              4433142.749999999
+            ]
+          ],
+          [
+            "vllm::qwen_gdn_attention_core",
+            [
+              96,
+              2545606.78
+            ]
+          ],
+          [
+            "vllm::unified_attention_with_output",
+            [
+              32,
+              2442874.3899999997
+            ]
+          ],
+          [
+            "empty_tensor",
+            [
+              18162,
+              148668.19000000026
+            ]
+          ],
+          [
+            "aten::empty_strided",
+            [
+              6231,
+              65025.799999999785
+            ]
+          ],
+          [
+            "aclnnInplaceCopy",
+            [
+              5284,
+              55087.87000000009
+            ]
+          ],
+          [
+            "LayerNormFn",
+            [
+              96,
+              40848.31000000001
+            ]
+          ],
+          [
+            "aten::index_select",
+            [
+              2070,
+              37614.549999999996
+            ]
+          ],
+          [
+            "aten::as_strided",
+            [
+              8761,
+              36760.52000000002
+            ]
+          ],
+          [
+            "aten::index_copy_",
+            [
+              642,
+              29729.249999999996
+            ]
+          ],
+          [
+            "aten::_local_scalar_dense",
+            [
+              707,
+              25439.24000000003
+            ]
+          ],
+          [
+            "_C_ascend::chunk_gated_delta_rule_fwd_h",
+            [
+              192,
+              24256.48
+            ]
+          ],
+          [
+            "aten::empty",
+            [
+              5303,
+              23981.470000000034
+            ]
+          ],
+          [
+            "aten::clone",
+            [
+              4317,
+              22224.16000000003
+            ]
+          ],
+          [
+            "vllm::all_reduce",
+            [
+              258,
+              22181.03999999999
+            ]
+          ]
+        ],
+        "top_api_us": [
+          [
+            "aclrtSynchronizeStream",
+            [
+              2006,
+              3660589.73
+            ]
+          ],
+          [
+            "aclrtSynchronizeDeviceWithTimeout",
+            [
+              129,
+              405576.82
+            ]
+          ],
+          [
+            "launch",
+            [
+              15851,
+              189306.05
+            ]
+          ],
+          [
+            "aclrtMemcpy",
+            [
+              2266,
+              160970.47
+            ]
+          ],
+          [
+            "aclrtLaunchKernelWithHostArgs",
+            [
+              14857,
+              109295.57
+            ]
+          ],
+          [
+            "aclnnInplaceCopy",
+            [
+              5284,
+              84018.13
+            ]
+          ],
+          [
+            "aclrtMemcpyAsync",
+            [
+              1485,
+              65030.14
+            ]
+          ],
+          [
+            "aclnnInplaceIndexCopy",
+            [
+              642,
+              41393.91
+            ]
+          ],
+          [
+            "aclnnIndexSelect",
+            [
+              2068,
+              32305.14
+            ]
+          ],
+          [
+            "hcom_allReduce_",
+            [
+              258,
+              32275.52
+            ]
+          ],
+          [
+            "aclnnInplaceCopyGetWorkspaceSize",
+            [
+              1203,
+              25538.15
+            ]
+          ],
+          [
+            "aclnnChunkGatedDeltaRuleFwdH",
+            [
+              192,
+              17049.41
+            ]
+          ]
+        ],
+        "shapes": [
+          [
+            "MatMulV3",
+            "\"16392,5120;4096,5120\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,10760,128;1,12,10760,128;1,12,10760,128;1,12,10760;1,12,128,128;2;338\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,5632,128;1,12,5632,128;1,12,5632,128;1,12,5632;1,12,128,128;2;176\"",
+            48
+          ],
+          [
+            "MatMulV3",
+            "\"16392,1536;5120,1536\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"16392,5120;8704,5120\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"16392,4352;5120,4352\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"16392,5120;3584,5120\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"10760,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"5632,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "ArgMaxV2",
+            "\"1,248320;\"",
+            1
+          ],
+          [
+            "MatMulV3",
+            "\"24584,5120;4096,5120\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,18439,128;1,12,18439,128;1,12,18439,128;1,12,18439;2,12,128,128;3;578\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,6144,128;1,12,6144,128;1,12,6144,128;1,12,6144;1,12,128,128;2;192\"",
+            48
+          ],
+          [
+            "MatMulV3",
+            "\"24584,1536;5120,1536\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"24584,5120;8704,5120\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"24584,4352;5120,4352\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"24584,5120;3584,5120\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"1,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"10248,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"6144,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"8191,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "ArgMaxV2",
+            "\"3,248320;\"",
+            1
+          ]
+        ]
+      },
+      "rank2": {
+        "top_host_self_us": [
+          [
+            "aten::copy_",
+            [
+              8530,
+              4476389.819999991
+            ]
+          ],
+          [
+            "vllm::qwen_gdn_attention_core",
+            [
+              96,
+              2535746.56
+            ]
+          ],
+          [
+            "vllm::unified_attention_with_output",
+            [
+              32,
+              2429600.39
+            ]
+          ],
+          [
+            "empty_tensor",
+            [
+              18162,
+              144254.70000000007
+            ]
+          ],
+          [
+            "aten::empty_strided",
+            [
+              6231,
+              64202.30000000002
+            ]
+          ],
+          [
+            "aclnnInplaceCopy",
+            [
+              5284,
+              52963.96999999997
+            ]
+          ],
+          [
+            "LayerNormFn",
+            [
+              96,
+              41911.480000000025
+            ]
+          ],
+          [
+            "aten::index_select",
+            [
+              2070,
+              36864.460000000036
+            ]
+          ],
+          [
+            "aten::as_strided",
+            [
+              8761,
+              35921.06000000009
+            ]
+          ],
+          [
+            "aten::index_copy_",
+            [
+              642,
+              29031.729999999978
+            ]
+          ],
+          [
+            "aten::_local_scalar_dense",
+            [
+              707,
+              24339.49999999997
+            ]
+          ],
+          [
+            "aten::empty",
+            [
+              5303,
+              24174.55999999999
+            ]
+          ],
+          [
+            "_C_ascend::chunk_gated_delta_rule_fwd_h",
+            [
+              192,
+              23447.09
+            ]
+          ],
+          [
+            "vllm::all_reduce",
+            [
+              258,
+              21908.22
+            ]
+          ],
+          [
+            "c10d::allreduce_",
+            [
+              258,
+              21724.649999999987
+            ]
+          ]
+        ],
+        "top_api_us": [
+          [
+            "aclrtSynchronizeStream",
+            [
+              2006,
+              3693675.09
+            ]
+          ],
+          [
+            "aclrtSynchronizeDeviceWithTimeout",
+            [
+              129,
+              405960.79
+            ]
+          ],
+          [
+            "launch",
+            [
+              15851,
+              189206.43
+            ]
+          ],
+          [
+            "aclrtMemcpy",
+            [
+              2266,
+              159158.1
+            ]
+          ],
+          [
+            "aclrtLaunchKernelWithHostArgs",
+            [
+              14857,
+              107664.48
+            ]
+          ],
+          [
+            "aclnnInplaceCopy",
+            [
+              5284,
+              79898.01
+            ]
+          ],
+          [
+            "aclrtMemcpyAsync",
+            [
+              1485,
+              61069.99
+            ]
+          ],
+          [
+            "aclnnInplaceIndexCopy",
+            [
+              642,
+              37870.79
+            ]
+          ],
+          [
+            "hcom_allReduce_",
+            [
+              258,
+              35833.22
+            ]
+          ],
+          [
+            "aclnnIndexSelect",
+            [
+              2068,
+              30331.67
+            ]
+          ],
+          [
+            "aclnnInplaceCopyGetWorkspaceSize",
+            [
+              1203,
+              25293.38
+            ]
+          ],
+          [
+            "aclnnChunkGatedDeltaRuleFwdH",
+            [
+              192,
+              16427.71
+            ]
+          ]
+        ],
+        "shapes": [
+          [
+            "MatMulV3",
+            "\"16392,5120;4096,5120\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,10760,128;1,12,10760,128;1,12,10760,128;1,12,10760;1,12,128,128;2;338\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,5632,128;1,12,5632,128;1,12,5632,128;1,12,5632;1,12,128,128;2;176\"",
+            48
+          ],
+          [
+            "MatMulV3",
+            "\"16392,1536;5120,1536\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"16392,5120;8704,5120\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"16392,4352;5120,4352\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"16392,5120;3584,5120\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"10760,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"5632,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "ArgMaxV2",
+            "\"1,248320;\"",
+            1
+          ],
+          [
+            "MatMulV3",
+            "\"24584,5120;4096,5120\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,18439,128;1,12,18439,128;1,12,18439,128;1,12,18439;2,12,128,128;3;578\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,6144,128;1,12,6144,128;1,12,6144,128;1,12,6144;1,12,128,128;2;192\"",
+            48
+          ],
+          [
+            "MatMulV3",
+            "\"24584,1536;5120,1536\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"24584,5120;8704,5120\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"24584,4352;5120,4352\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"24584,5120;3584,5120\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"1,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"10248,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"6144,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"8191,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "ArgMaxV2",
+            "\"3,248320;\"",
+            1
+          ]
+        ]
+      },
+      "rank3": {
+        "top_host_self_us": [
+          [
+            "aten::copy_",
+            [
+              8530,
+              4432855.570000009
+            ]
+          ],
+          [
+            "vllm::qwen_gdn_attention_core",
+            [
+              96,
+              2545731.0700000008
+            ]
+          ],
+          [
+            "vllm::unified_attention_with_output",
+            [
+              32,
+              2450078.9499999993
+            ]
+          ],
+          [
+            "empty_tensor",
+            [
+              18162,
+              147764.63000000105
+            ]
+          ],
+          [
+            "aten::empty_strided",
+            [
+              6231,
+              64472.87999999985
+            ]
+          ],
+          [
+            "aclnnInplaceCopy",
+            [
+              5284,
+              52757.43000000007
+            ]
+          ],
+          [
+            "LayerNormFn",
+            [
+              96,
+              42381.78000000002
+            ]
+          ],
+          [
+            "aten::index_select",
+            [
+              2070,
+              38272.59999999996
+            ]
+          ],
+          [
+            "aten::as_strided",
+            [
+              8761,
+              36397.93999999992
+            ]
+          ],
+          [
+            "aten::index_copy_",
+            [
+              642,
+              29006.639999999985
+            ]
+          ],
+          [
+            "aten::_local_scalar_dense",
+            [
+              707,
+              24131.199999999997
+            ]
+          ],
+          [
+            "aten::empty",
+            [
+              5303,
+              23960.410000000014
+            ]
+          ],
+          [
+            "_C_ascend::chunk_gated_delta_rule_fwd_h",
+            [
+              192,
+              22981.919999999987
+            ]
+          ],
+          [
+            "c10d::allreduce_",
+            [
+              258,
+              22198.139999999985
+            ]
+          ],
+          [
+            "vllm::all_reduce",
+            [
+              258,
+              22096.44999999999
+            ]
+          ]
+        ],
+        "top_api_us": [
+          [
+            "aclrtSynchronizeStream",
+            [
+              2006,
+              3701186.48
+            ]
+          ],
+          [
+            "aclrtSynchronizeDeviceWithTimeout",
+            [
+              129,
+              403218.94
+            ]
+          ],
+          [
+            "launch",
+            [
+              15851,
+              189549.27
+            ]
+          ],
+          [
+            "aclrtMemcpy",
+            [
+              2266,
+              160893.23
+            ]
+          ],
+          [
+            "aclrtLaunchKernelWithHostArgs",
+            [
+              14857,
+              108106.13
+            ]
+          ],
+          [
+            "aclnnInplaceCopy",
+            [
+              5284,
+              77268.47
+            ]
+          ],
+          [
+            "aclrtMemcpyAsync",
+            [
+              1485,
+              59318.65
+            ]
+          ],
+          [
+            "aclnnInplaceIndexCopy",
+            [
+              642,
+              37878.75
+            ]
+          ],
+          [
+            "hcom_allReduce_",
+            [
+              258,
+              35504.76
+            ]
+          ],
+          [
+            "aclnnIndexSelect",
+            [
+              2068,
+              29387.22
+            ]
+          ],
+          [
+            "aclnnInplaceCopyGetWorkspaceSize",
+            [
+              1203,
+              24611.36
+            ]
+          ],
+          [
+            "aclnnChunkGatedDeltaRuleFwdH",
+            [
+              192,
+              15514.21
+            ]
+          ]
+        ],
+        "shapes": [
+          [
+            "MatMulV3",
+            "\"16392,5120;4096,5120\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,10760,128;1,12,10760,128;1,12,10760,128;1,12,10760;1,12,128,128;2;338\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,5632,128;1,12,5632,128;1,12,5632,128;1,12,5632;1,12,128,128;2;176\"",
+            48
+          ],
+          [
+            "MatMulV3",
+            "\"16392,1536;5120,1536\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"16392,5120;8704,5120\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"16392,4352;5120,4352\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"16392,5120;3584,5120\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"10760,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"5632,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "ArgMaxV2",
+            "\"1,248320;\"",
+            1
+          ],
+          [
+            "MatMulV3",
+            "\"24584,5120;4096,5120\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,18439,128;1,12,18439,128;1,12,18439,128;1,12,18439;2,12,128,128;3;578\"",
+            48
+          ],
+          [
+            "ChunkGatedDeltaRuleFwdH",
+            "\"1,4,6144,128;1,12,6144,128;1,12,6144,128;1,12,6144;1,12,128,128;2;192\"",
+            48
+          ],
+          [
+            "MatMulV3",
+            "\"24584,1536;5120,1536\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"24584,5120;8704,5120\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"24584,4352;5120,4352\"",
+            64
+          ],
+          [
+            "MatMulV3",
+            "\"24584,5120;3584,5120\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"1,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"10248,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"6144,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "FusedInferAttentionScore",
+            "\"8191,6,256;3852,128,256;3852,128,256;;2048,2048;1;1;;;;;;;;1,324;;;;;;;;;;;;;;;;\"",
+            16
+          ],
+          [
+            "ArgMaxV2",
+            "\"3,248320;\"",
+            1
+          ]
+        ]
+      }
+    }
+  },
+  "decision": "SOURCE_ATTRIBUTION_REQUIRED_NOT_CAUSAL_SPEED_CLAIM",
+  "findings": [
+    "All four G1 parsed tables/traces valid; inner PID58/59/60/61 matches independently captured physical worker mapping.",
+    "G1 sampled ArgMax batch sizes1 then2; G3 sizes1 then3. Same request protocol does not prove matched captured scheduler batches.",
+    "G3 actual MatMul row sizes16392/24584 versus native32768/32769 prove selected compact compute shapes, not whole service speed success.",
+    "G3 each rank2006 aclrtSynchronizeStream calls and129 device synchronize calls; native device synchronize1. Host API durations and kernel gaps are attribution leads, not removable critical path cost.",
+    "Keep R19 formal whole-service negative conclusion unchanged. Trace sync callers before one bounded repair; preserve finite/lifetime/owned commit guards."
+  ],
+  "limits": [
+    "64-token bounded profiler not formal1024 benchmark or381/arm quality",
+    "Do not sum rank costs or treat API inclusive times as additive",
+    "Full matrix quality lifecycle and Skill functional acceptance remain incomplete"
+  ]
+}
