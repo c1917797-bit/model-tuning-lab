@@ -40,10 +40,22 @@ def audit(contract_path,*,live_release=False):
     if cfg.get("c1_performance_mode",False)is not False or cfg.get("c1_layer_shadow_validation")is not True or cfg.get("c1_first_divergence")is not True:
         raise ValueError("bounded diagnostic correctness shadows required")
     spec=c["quality_workload"];inputs=read_bound(spec["inputs"]);catalog=read_bound(spec["catalog"])
+    from independent_segment_catalog import SegmentCatalog
+    from independent_catalog_quality_canary import catalog_canary_plan
+    if inputs.get("schema")!="hypic-quality-inputs/v1" or catalog.get("schema")!="hypic-public-catalog/v1":
+        raise ValueError("frozen input/catalog schema mismatch")
+    rows=inputs["requests"];plan=catalog_canary_plan(rows)
+    if spec.get("batch_samples")!=8 or spec.get("canary_indexes")!=list(plan["initial_indexes"]):
+        raise ValueError("contract diagnostic cohort mismatch")
+    stage=SegmentCatalog(catalog["public_segments"])
+    for row in rows:
+        segment=row["segment"]
+        if tuple(row["token_ids"][segment["start"]:segment["end"]])!=stage.tokens(segment["tokens_sha256"]):
+            raise ValueError("independent selected segment membership mismatch")
     if inputs.get("generation")!={"max_tokens":1024,"temperature":0,"seed":0,"ignore_eos":False,"enable_thinking":False} or inputs.get("repetitions")!=3:
         raise ValueError("frozen naturalEOS ruler mismatch")
     a=cfg.get("public_catalog_artifact",{})
-    if a.get("sha256")!=spec["catalog"]["sha256"]:raise ValueError("runtime/diagnostic catalog mismatch")
+    if a.get("sha256")!=spec["catalog"]["sha256"] or a.get("segments")!=len(stage.entries):raise ValueError("runtime/diagnostic catalog mismatch")
     result=json.loads((raw/"result.json").read_text());records=json.loads((raw/"responses.json").read_text())
     journal=[json.loads(x)for x in (raw/"events.jsonl").read_text().splitlines()]
     samples=json.loads((raw/"isolation.json").read_text());start=json.loads((raw/"service-start.json").read_text());release=json.loads((raw/"release.json").read_text())

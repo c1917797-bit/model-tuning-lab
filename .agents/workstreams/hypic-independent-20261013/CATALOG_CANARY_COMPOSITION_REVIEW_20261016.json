@@ -1,0 +1,31 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "scope": "Synthetic full raw-directory auditor composition. Physical-worker checker mocked; no real NPU/namespace proof.",
+  "initial_composition": {
+    "operation": "exec-0000000000000a7f",
+    "tests": 2,
+    "exit": 0,
+    "finding": "Independent catalog membership/count and contract selection should be revalidated beyond hash binding."
+  },
+  "repair": {
+    "auditor_sha256": "511c8ee10c81a59dfaddba8834005cd96b2be0f387c0f8f2fbba18541e89df98",
+    "changes": [
+      "explicit input/catalog schemas",
+      "all127 selected-segment membership against immutable catalog",
+      "frozen batch8 and exact16 selection",
+      "runtime catalog count agreement"
+    ],
+    "focused": "0a80 two composition controlsPASS; final regression includes additional rehashed-input/selection-drift rejection controls"
+  },
+  "regression": {
+    "operation": "exec-0000000000000a81",
+    "tests": 679,
+    "exit": 0
+  },
+  "superseded_package": {
+    "contract": "QUALITY_R16_CATALOG_CANARY_R1_CONTRACT.json",
+    "state": "NEVER LAUNCHED; source binding now stale after auditor repair; DO NOT RUN",
+    "raw_root": "/cache/cch/hypic-independent-20261013/catalog-quality-r16-canary-r1"
+  },
+  "next": "Create R2 manifest/contract with repaired auditor checkpoint and fresh rawroot; static-check package. Exactma0a5c baseline still live; never parallel device launch."
+}
