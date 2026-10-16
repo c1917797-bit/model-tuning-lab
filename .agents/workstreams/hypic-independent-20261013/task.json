@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "incomplete-device-authorization-expired",
+  "execution_state": "resumed-24h-readiness",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "No liveownNPUjob. Exact4450container removed; physical0-3empty/8233bind independentlyPASS08c7. No newdevice after19:04:09UTC."
+    "state": "Fresh095d2026-10-16 physical0-3 no processes,8233 no listener; revalidate before actual launch. No new device stage started in renewal metadata."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,15 +158,15 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Device authorization expired. No new device starts without renewed human authorization. If resumed, use new immutable root/contract; do not rerun or overwrite interrupted raw root.",
+  "next_action": "Human renewed24h on2026-10-16. Freeze new immutable successor contracts/roots and full40 PDC audit readiness; do not reuse interrupted formal-r15-g3-r1 or redo unchanged accepted canaries. Recheck source, disk, physical0-3 and ports before each launch.",
   "overnight": {
     "timezone": "Europe/Moscow",
-    "end_local": "2026-10-15T22:04:09+03:00",
-    "end_utc": "2026-10-15T19:04:09Z",
+    "end_local": "2026-10-17T09:48:09+03:00",
+    "end_utc": "2026-10-17T06:48:09Z",
     "followup_minutes": 10,
-    "latest_human_override": "Human explicitly said 从现在起继续跑12小时 on2026-10-15. Fresh clock07:04:09UTC sets fixed end19:04:09UTC. SingleTP4,27B,physical0-3; distributedC3/dualTP2 excluded. Automatic followup hypic-12.",
+    "latest_human_override": "Human said 继续穿刺24小时 on2026-10-16; fresh start06:48:09UTC. Same27B physical0-3 TP4 independentC1/C2; no distributedC3/dualTP2.",
     "at_deadline": "Stop new device stages, retain and release exact owned services according to controller, report actual completion; keep unfinished goal active.",
-    "followup_state": "hypic-12 deleted afterdeadline"
+    "followup_state": "hypic-24 ACTIVE every10minutes; fixedstop2026-10-17T06:48:09Z"
   },
   "workload": {
     "source": "User-supplied successful-case attachment",
@@ -196,10 +196,10 @@
     ]
   },
   "publication": {
-    "state": "last-live-verified-case-checkpoint-closeout-newer-local",
-    "published_commit": "10165fe2e5c8ea9700ad635702b259d8b5556d1e",
+    "state": "previous-closeout-live-verified; renewal metadata not yet published",
+    "published_commit": "ab4cf2cc68308962684fb506cebf100154585e86",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "note": "Deadlinecloseout newerlocal; no final goal acceptance."
+    "note": "Main unchanged. Renewed authority does not imply final acceptance."
   },
   "math_reference": {
     "state": "cpu-reference-passed",
