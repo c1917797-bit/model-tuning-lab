@@ -1,3 +1,13 @@
+# CURRENT R19 OFF FULL40 INDEPENDENT VALID; NATIVE NEXT
+
+0eb1exit0;independent0ed0 accepts40/40/allfour48C1+16C2/7104partitiongroups/
+72192preparedreceipts/194sources/496cleanisolation/physicalPIDjoins/liveexactrelease.
+TPOT326.299895ms,TTFTP95417775.565740ms. R19_LAZY_OFF_R1_TERMINAL_20261016.json.
+ONvsOFF singlepair TPOT-5.471234%/TTFTP95-2.670823%; componentdirection only,
+not repeatedrobustness orwholeHYPICgain. No ownedmodeljob. Publish thenfreshadmission
+FORMAL_R19_LAZY_NATIVE_R1_CONTRACT.json; no oldrootreuse/194bound changes.
+Cutoff2026-10-17T06:48:09Z. Fullmatrix/quality/lifecycle/29functional incomplete.
+
 # CURRENT R19 LAZY OFF FULL40 LIVE
 
 ma exact exec-0000000000000eb1 launched21:24UTC from f4a566e9.
