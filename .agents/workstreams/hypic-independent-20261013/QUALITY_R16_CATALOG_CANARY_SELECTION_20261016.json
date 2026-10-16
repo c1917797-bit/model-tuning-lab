@@ -1,0 +1,161 @@
+{
+  "schema": "hypic-catalog-canary-selection/v1",
+  "operation": "exec-0000000000000a4e",
+  "inputs_sha256": "2f61c72fe1d8b3cb7f468e670674764e89a471da8ea229d07f3c87dff3d013c0",
+  "catalog_sha256": "fb13827a063b32df1131e17bf4b29ea008380d55ab0a2e7debe8a845e30ed792",
+  "plan": {
+    "initial_indexes": [
+      48,
+      0,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      10,
+      11,
+      12,
+      14,
+      16,
+      17,
+      20,
+      21
+    ],
+    "batches": [
+      [
+        48,
+        0,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8
+      ],
+      [
+        10,
+        11,
+        12,
+        14,
+        16,
+        17,
+        20,
+        21
+      ]
+    ],
+    "rebuild_candidates": [
+      48,
+      0,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8
+    ],
+    "private_requests": 17
+  },
+  "selected_metadata": [
+    {
+      "index": 48,
+      "input_tokens": 39642,
+      "segment_tokens": 16384,
+      "segment_sha256": "e0368b5b11e408ac8f3545bd7fad37bd9f4c95ff7ceb2d1f3ea0ad9f4461a81e"
+    },
+    {
+      "index": 0,
+      "input_tokens": 24616,
+      "segment_tokens": 16384,
+      "segment_sha256": "cd55c9bf917cc314d183596f1c6acd0242043eb777746f597f11cde55e512967"
+    },
+    {
+      "index": 2,
+      "input_tokens": 25351,
+      "segment_tokens": 16384,
+      "segment_sha256": "35b04066341bedc43af096884b63ba11fab8639ed60af09e9f4b761feb14f06f"
+    },
+    {
+      "index": 3,
+      "input_tokens": 20277,
+      "segment_tokens": 16384,
+      "segment_sha256": "c45d6cecd83991e0425f4297a52b249ae79f01609e5aa04bb306f51410dfea67"
+    },
+    {
+      "index": 4,
+      "input_tokens": 22924,
+      "segment_tokens": 16384,
+      "segment_sha256": "157716593fc3a71d75aef6aa8041527249051476c24fff51866e4e5888f4d039"
+    },
+    {
+      "index": 5,
+      "input_tokens": 31048,
+      "segment_tokens": 16384,
+      "segment_sha256": "624c82258e941421d92c9757da15442a47a03934415a5901beae7909340c00f1"
+    },
+    {
+      "index": 7,
+      "input_tokens": 24078,
+      "segment_tokens": 16384,
+      "segment_sha256": "871df05f9698724fbd333a6b4b9654662b39782b08e1ed4ac0179d37935fdd68"
+    },
+    {
+      "index": 8,
+      "input_tokens": 27585,
+      "segment_tokens": 16384,
+      "segment_sha256": "270b60696bb0f720edecc27d097ea3dbef703a83c5fa07140b654ae35616d3ab"
+    },
+    {
+      "index": 10,
+      "input_tokens": 20478,
+      "segment_tokens": 16384,
+      "segment_sha256": "282003499bb65fcc0159105c603b8b4901e12522194b44ec3dfbbe69a1dee461"
+    },
+    {
+      "index": 11,
+      "input_tokens": 29295,
+      "segment_tokens": 16384,
+      "segment_sha256": "e0344a292387c23b65a1aceb2e3304781fc0edf495959c0f13e01f5ffeb57556"
+    },
+    {
+      "index": 12,
+      "input_tokens": 18031,
+      "segment_tokens": 16384,
+      "segment_sha256": "eb674bdba7ac75ab34be26e42910e23176dc40f3c9053afb22a72c7426b2e629"
+    },
+    {
+      "index": 14,
+      "input_tokens": 36863,
+      "segment_tokens": 16384,
+      "segment_sha256": "caa9c3f485fa2a7f10c4ee0ad5751ec5c7aeac0331f356da831ff9f0b515b678"
+    },
+    {
+      "index": 16,
+      "input_tokens": 19182,
+      "segment_tokens": 16384,
+      "segment_sha256": "cba0b791a63571271878c2ef166c6e721425347bf0f9ee7fca7e96326695e8fb"
+    },
+    {
+      "index": 17,
+      "input_tokens": 18328,
+      "segment_tokens": 16384,
+      "segment_sha256": "79b9627d0691662216e3cc17366b95296a0a2edf322b1bb3756a382b71b8c4f6"
+    },
+    {
+      "index": 20,
+      "input_tokens": 27508,
+      "segment_tokens": 16384,
+      "segment_sha256": "ef1877fc9243f3e23fd339f3a4d2a26ba4bb342902e2fe36060fae0d96c76036"
+    },
+    {
+      "index": 21,
+      "input_tokens": 32700,
+      "segment_tokens": 16384,
+      "segment_sha256": "ca9e82c6b7c01de86357c8ff19d3e5f8df73ae64106c982daf5999e619b42d9f"
+    }
+  ],
+  "max_batch_kv_bytes_per_rank": 2147483648,
+  "total_selected_kv_bytes_per_rank": 4294967296,
+  "prospective_only": true,
+  "scope": "Frozen prospective metadata selection, no NPU retention/eviction/quality proof"
+}

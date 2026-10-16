@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CatalogCanary executor HOST ONLY implemented17private(8+8+actualnonready rebuild1),
+17unscoredproducers; originalfull381 executor unchanged.10controls0a4c/634CPU0a4fPASS.
+Frozen127input selection0a4e initialindices[48,0,2,3,4,5,7,8,10,11,12,14,16,17,20,21],
+each8KV2GiB,total16KV4GiB vsproposed2.5GiB. No actual retention/eviction proof yet.
+CATALOG_CANARY_EXECUTOR_READINESS_20261016.json lists controller/callback/audit/package
+missing gates. FutureCanarymode plan published in QUALITY_R16_CATALOG_CANARY_PROTOCOL_20261016.md.
+Current0a20 remains sole liveNPUphase; no147source edits or second launch.
+
 Catalog quality hot auditor added unbound/newfile: exact segment->published pool
 generation->non-evicted live material->private same-step4rank48/16->actual model prune.
 14controls0a36/624CPU0a3bPASS. Actual prior2request R16 replay0a39PASS512links,

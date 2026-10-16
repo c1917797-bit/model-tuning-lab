@@ -1,0 +1,27 @@
+{
+  "schema": "hypic-catalog-canary-executor-readiness/v1",
+  "focused": {
+    "operation": "exec-0000000000000a4c",
+    "tests": 10,
+    "exit": 0
+  },
+  "full": {
+    "operation": "exec-0000000000000a4f",
+    "tests": 634,
+    "exit": 0
+  },
+  "selection_operation": "exec-0000000000000a4e",
+  "selection": "QUALITY_R16_CATALOG_CANARY_SELECTION_20261016.json",
+  "protocol": "QUALITY_R16_CATALOG_CANARY_PROTOCOL_20261016.md",
+  "scope": "Host-only unactivated17-response diagnostic executor and frozen selection; callback mocks are not actual eviction/rebuild proof",
+  "same_generation_ruler": "nonthinking1024 naturalEOS/temp0/seed0/retry0",
+  "remaining": [
+    "exclusive controller/bootstrap canary mode",
+    "source-bound actual nonready material selection callback",
+    "quality config/manifest/newroot contract",
+    "independent eviction/newgeneration/full response/source/physical/release terminal audit",
+    "real catalog Canary then full381 eacharm"
+  ],
+  "device_run": false,
+  "full_quality_accepted": false
+}
