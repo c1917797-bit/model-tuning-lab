@@ -1,0 +1,69 @@
+{
+  "schema": "hypic-native-earlymixed-terminal-audit/v1",
+  "controller": "exec-0000000000000cae",
+  "controller_handle_state": "not_found on later poll; immutable raw terminal plus exact container absence recovered, never restarted",
+  "contract": "PROFILE_G1_R16_EARLYMIXED_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/profile-g1-r16-earlymixed-r1",
+  "audit_operation": "exec-0000000000000cc5",
+  "evidence": {
+    "terminal_valid": true,
+    "responses": 16,
+    "private_warmup": 16,
+    "sources": 149,
+    "isolation": 201,
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 59,
+          "host_pid": 2583554,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 60,
+          "host_pid": 2583555,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 61,
+          "host_pid": 2583556,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 62,
+          "host_pid": 2583557,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "runtime_hypic_mounted": false,
+    "release": {
+      "owned_container": "12e28947e1d89358c93640a212f18e28b07f424056b99496a7b93eb1d1a70f67",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    },
+    "profile_rank_directories": [
+      "rank3_62_20261016152707179_ascend_pt",
+      "rank2_61_20261016152707179_ascend_pt",
+      "rank0_59_20261016152707180_ascend_pt",
+      "rank1_60_20261016152707179_ascend_pt"
+    ],
+    "raw_sha256": {
+      "result.json": "13cfc3eb6f4da24c1fd5012ddcfaa375f6f00a1be97fe138326dd9190200c365",
+      "profile-unit.json": "bc2c007dc210eb5e46946119e4fd97d7acd5ca8cd4c2bb4ccf0856eca1a255af",
+      "events.jsonl": "4bd91d6469247ddcf71744b69dcb65fe5ce21e013ea057064fda7879805e0f0a",
+      "release.json": "d01266f1373fca7d8b1c492bbc559468d55dbc676fd5fa3ae6a0a1e026756de5",
+      "service.log": "aebb612311ea0c76f9b5ff496c4bb7c1e609b4e5498bfc5a632ef3a78e18e1ce"
+    },
+    "scope": "Diagnostic native comparator only, no formal1024performance/quality claim; release based on terminal captured evidence."
+  },
+  "parser": {
+    "cid": "590ae29b59d174db751ddab5bf709c6311668080adeee8e96511987d9ea562d1",
+    "analysis_root": "/cache/cch/hypic-independent-20261013/profile-g1-r16-earlymixed-r1-analysis-r1",
+    "compute_devices": [],
+    "cpu": "0",
+    "state": "running lastverified; rank0stage4.57528775seconds, actualphase/batch/allrank comparison pending"
+  },
+  "scope": "Bounded diagnostic only; not formal performance/quality or recovered controller exitcode claim. Raw resultvalid/source149/physical/isolation201/recordedrelease independently verified."
+}

@@ -1,5 +1,15 @@
 # CURRENT R16 NATIVE EARLYMIXED LIVE + G3 CPU PARSER
 
+LATEST supersedes liveheading:0cae handleexpired,butrawterminalvalid recovered(no restart),
+independent source149/16warm+16profile/physicaljoin/isolation201/exactrecordedreleasePASS;
+see PROFILE_G1_R16_EARLYMIXED_TERMINAL_AUDIT_20261016.json. No owned modeljob.
+Nativeofflineparser CID590ae29b59d174db751ddab5bf709c6311668080adeee8e96511987d9ea562d1
+onCPU0/manager-only/no compute mapping;rank0stage4.575s vsG3~10.335s,two-stepcomparison
+stillrequiresall4/actualphase/callmix. CPUcopy_parentaudit exact0ccb pending;G3copy_self~4.3s
+mayincludeGPUwait. Choosecriticalpath-supported treatment; don't blindlyoptimizesinkonly.
+Unactivatedsink19CPUtests/29structure0cbePASS/current149unchanged,checkpointb39f49a.
+No runtimewiring/NPUcandidateacceptance. Oldformalnegativepair/quality/lifecycle unchanged.
+
 G3CPUparser all4validated0cb4 (see PROFILE_G3_R16_EARLYMIXED_PARSED_AUDIT_20261016.json),
 13327kernels/rank,actual2step prefill/mixed. copy_ hostself4.27-4.30s mayinclude waits;
 native0cae stilllive. Candidate selection mustconsider copy/sync, not onlyevidenceIO.
