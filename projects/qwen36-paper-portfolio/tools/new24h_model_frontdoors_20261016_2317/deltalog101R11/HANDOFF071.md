@@ -1,0 +1,9 @@
+# MODEL058 revision2 (source-only, canonical new handoff)
+
+Supersedes inherited preparation notes, not old failures/results. Source pins exact069-repair1 TEMPLATE55180/9d446cb308dbb88eb3f63056ebef855dfa1489b0ac561f7b7b91efcd0d784ae2 and all141 actualfiles (139 original plus2 runtime snapshots). No actual160 result is supplied. The same typed328/351/13control/CPU+dualMeta gates remain.
+
+Old actual client source used16 and129 input IDs. New client sends two2048-ID requests, ten fixed output IDs each; strict SSE/token usage verifies2048+10. There are nine recurrent transitions per request, actual fourworkers/all48 dispatch, selected independent tensor/state capture and retirement joins remain. Source math and selected-state thresholds are unchanged. HF32 matmul+conv OFF is explicit at plugin registration and witnessed at first real core; this is the same required policy as PF071. Original runtime inverse removes only the precision setup/witness and restores exact023repair1 bytes.
+
+Local full85tests passed, one realLinux AF_UNIX test skipped onWindows (must execute in sameimage CPU). No sameimage/model/NPU qualification from those tests. 2K C16 packed/mixed geometry is not qualified by sequential two-request smoke;16K model geometry also pending. Existing2700s/cleanup270/cap48/4GiB raw budget unchanged. No deployment/performance/task/graph/PDC claim.
+
+COPY_MAP071.json supplies known old-source Ref candidates subject to fresh remote hashing; RELATIVE_PATCHES contains everyfile fallback. Deploy only delivery files, not copied obsolete local delivery metadata. COMMANDS_EXEC071.json is delivery-only with the final template hash resolved; source-bound COMMANDS.json uses a deliberate FINAL_TEMPLATE_SHA256_SET_BY_SEAL placeholder to avoid a self-hash cycle. Actual future result Ref placeholders remain mandatory and must never be fabricated.

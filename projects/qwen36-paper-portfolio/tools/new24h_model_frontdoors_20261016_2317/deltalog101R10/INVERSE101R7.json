@@ -1,0 +1,174 @@
+{
+  "mathematical_files_unchanged": [
+    "HANDOFF.md",
+    "HANDOFF058.md",
+    "HANDOFF071.md",
+    "HANDOFF101.md",
+    "RESOURCE_PREPARATION.json",
+    "RESOURCE_WIRING.md",
+    "WIP_NEXT_EDGE.md",
+    "actual_loader/safety_host.py",
+    "client.py",
+    "consume_trajectory.py",
+    "deltalog_service025_trace-0.0.25.dist-info/METADATA",
+    "deltalog_service025_trace-0.0.25.dist-info/entry_points.txt",
+    "dependencies/completion_serving_v023.py",
+    "dependencies/direct_round013.py",
+    "dependencies/engine_serving_v023.py",
+    "dependencies/identity_capture.py",
+    "dependencies/identity_oracle.py",
+    "dependencies/input_processor_v023.py",
+    "dependencies/numeric_oracle.py",
+    "dependencies/old_test_domain_admission.py",
+    "direct_round.py",
+    "domain_qualification.py",
+    "entry.py",
+    "external_output_policy.py",
+    "finalize_resource.py",
+    "host_ticket.py",
+    "identity_events.py",
+    "ipc_controls.py",
+    "ipc_receipt.py",
+    "packet_predecessor.py",
+    "plugin/qwen36_deltalog_service-0.0.23.dist-info/METADATA",
+    "plugin/qwen36_deltalog_service-0.0.23.dist-info/entry_points.txt",
+    "plugin/qwen36_deltalog_service/__init__.py",
+    "plugin/qwen36_deltalog_service/admission.py",
+    "plugin/qwen36_deltalog_service/binding.py",
+    "plugin/qwen36_deltalog_service/build_meta051.py",
+    "plugin/qwen36_deltalog_service/builder_mirror.py",
+    "plugin/qwen36_deltalog_service/contract.py",
+    "plugin/qwen36_deltalog_service/cpu_metadata.py",
+    "plugin/qwen36_deltalog_service/integration.py",
+    "plugin/qwen36_deltalog_service/layout_controls.py",
+    "plugin/qwen36_deltalog_service/primitives.py",
+    "plugin/qwen36_deltalog_service/runtime.py",
+    "plugin/qwen36_deltalog_service/runtime_helpers.py",
+    "plugin/qwen36_deltalog_service/transform.py",
+    "precast.py",
+    "prepare053.py",
+    "probe.py",
+    "raw_codec.py",
+    "request_identity.py",
+    "sidecar_audit.py",
+    "sidecar_capture.py",
+    "stage_resources.py",
+    "tensor_consumer.py",
+    "tensor_observer.py",
+    "test_actual017_binding.py",
+    "test_assignment.py",
+    "test_direct_model_reference.py",
+    "test_external_output.py",
+    "test_geometry058r2.py",
+    "test_ipc_receipt.py",
+    "test_ipc_tmpdir.py",
+    "test_isolated058.py",
+    "test_model_precast.py",
+    "test_overlay.py",
+    "test_predecessor101r1.py",
+    "test_resource_binding.py",
+    "test_source_identity.py",
+    "test_tensor_controls.py",
+    "test_window058.py",
+    "test_worker101_layout.py",
+    "trace_plugin.py",
+    "window_overlay.py"
+  ],
+  "other_edits": {
+    "bind_source.py": [
+      [
+        "for k in('admission_mode','reviewed_domain_template_ref'",
+        "for k in('short_model_diagnostic_scope','admission_mode','reviewed_domain_template_ref'"
+      ]
+    ],
+    "consume.py": [
+      [
+        "out=dict(schema='deltalog.model-selected-tensor-independent-consumption/v026',source=sr",
+        "out=dict(schema='deltalog.model-selected-tensor-independent-consumption/v026',component_prior_scope=m['short_model_diagnostic_scope'],long_history_160_qualified=False,production_admitted=False,source=sr"
+      ]
+    ],
+    "owner_overlay.py": [
+      [
+        "def model_gate(m):\n if",
+        "def model_gate(m):\n need(m.get('admission_mode')=='actual052-split-scale-diagnostic-only'and m.get('short_model_diagnostic_scope',{}).get('schema')=='deltalog.actual16-to-nine-decode-model-diagnostic/v101-repair7','only independently preregistered16-to-nine-decode diagnostic route')\n if"
+      ]
+    ],
+    "run_owned.py": [
+      [
+        "  result.update(schema='deltalog.actual-owned-dispatch-smoke/v025',source=sr",
+        "  if state['cleanup_spent']>h.CLEANUP_TOTAL or time.monotonic()>state['end']or time.time()>=h.CUTOFF:secondary.append('post-source-fence original cleanup/phase/cutoff exceeded')\n  result.update(schema='deltalog.actual-owned-dispatch-smoke/v025',component_prior_scope='actual16-to-nine-decode-model-diagnostic/v101-repair7',long_history_160_qualified=False,production_admitted=False,source=sr"
+      ]
+    ],
+    "test_domain_admission.py": [
+      [
+        "D=load(P/'plugin/qwen36_deltalog_service/split_qualification.py'",
+        "D=load(P/'dependencies/original_split_reader101.py'"
+      ]
+    ],
+    "test_split_cold.py": [
+      [
+        "original=(P.parent/'deltalog-service-composite-new48h-20261015-023-repair1/qwen36_deltalog_service/runtime.py').read_text(encoding='utf8')",
+        "original=(P/'dependencies/runtime023_baseline.py').read_text(encoding='utf8')"
+      ],
+      [
+        "'len(sides)==351',\"o['steps']==160\"",
+        "'len(sides)==63',\"o['steps']==16\""
+      ]
+    ]
+  },
+  "parent_template": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair5/SOURCE_TEMPLATE.json",
+  "reader_edits": [
+    [
+      " N(m.get('prepared_only')is False",
+      " N(m.get('short_model_diagnostic_scope')==SHORT_SCOPE,'explicit new16-only model diagnostic; no160 certificate')\n N(m.get('bridge024_source_ref')==ACTUAL['source']and m.get('bridge024_owner_ref')==ACTUAL['owner']and m.get('component_cpu_owner_ref')==ACTUAL['cpu_owner'],'exact actual16/source/CPU predecessor ticket')\n N(m.get('prepared_only')is False"
+    ],
+    [
+      "o['steps']==160",
+      "o['steps']==16"
+    ],
+    [
+      "p['steps']==160",
+      "p['steps']==16"
+    ],
+    [
+      "d['steps']==160",
+      "d['steps']==16"
+    ],
+    [
+      "len(rows)==328",
+      "len(rows)==40"
+    ],
+    [
+      "len(sides)==351",
+      "len(sides)==63"
+    ],
+    [
+      "})==351",
+      "})==63"
+    ],
+    [
+      "len(p['actual_mixed_sidecar_records'])==320",
+      "len(p['actual_mixed_sidecar_records'])==32"
+    ],
+    [
+      "list(range(160))",
+      "list(range(16))"
+    ],
+    [
+      "schema='deltalog.eager-component-to-model-diagnostic/v101'",
+      "schema='deltalog.actual16-to-model-diagnostic-admission/v101-repair7',admission_scope=SHORT_SCOPE,long_history_160_qualified=False,production_admitted=False"
+    ]
+  ],
+  "typed_scope": {
+    "component_steps": 16,
+    "long_history_160_qualified": false,
+    "max_sequences": 1,
+    "model_decode_steps": 9,
+    "model_requests": 2,
+    "performance_ready": false,
+    "production_admitted": false,
+    "prompt_tokens": 2048,
+    "schema": "deltalog.actual16-to-nine-decode-model-diagnostic/v101-repair7",
+    "task_ready": false
+  }
+}

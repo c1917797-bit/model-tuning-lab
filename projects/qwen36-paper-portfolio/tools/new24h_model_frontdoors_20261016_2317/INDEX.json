@@ -1,0 +1,35 @@
+{
+  "schema": "ascend.exact-model-frontdoor-source-archive/v1",
+  "artifacts": [
+    {
+      "directory": "deltalog101R10",
+      "files": 98,
+      "bytes": 1029902,
+      "actual_source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair10-short16-diagnostic-20261017-001/SOURCE_MANIFEST.json",
+        "bytes": 197573,
+        "sha256": "e9a6c84436862bd7d76063ecb617dd75386a2f545ffd217bd63aabb5204c8f71"
+      },
+      "status": "actual model failed at arena registration;101 software pass only"
+    },
+    {
+      "directory": "deltalog101R11",
+      "files": 100,
+      "bytes": 1041399,
+      "actual_source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair11-arena-observation-20261017-001/SOURCE_MANIFEST.json",
+        "bytes": 198447,
+        "sha256": "b7c4a89a06932f3267c72a15769ee2b5c3baef4240084cd75a280e8b855bafa9"
+      },
+      "status": "owned observability experiment running at checkpoint; original guard unchanged"
+    }
+  ],
+  "original_paths_embedded": true,
+  "all_copies_byte_exact": true,
+  "raw_tensor_data_in_archive": false,
+  "DSO_weights_in_archive": false,
+  "production_qualified": false,
+  "paired_performance": false,
+  "task_accuracy": false,
+  "conditional_extension_used": 0
+}

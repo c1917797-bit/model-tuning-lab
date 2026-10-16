@@ -1,0 +1,139 @@
+{
+  "schema": "ascend.actual-model-frontdoor-successor/v1",
+  "recorded_at_UTC": "2026-10-16 22:39:03 UTC",
+  "repository": "/opt/host/vnf/austinov/model-tuning-lab",
+  "branch": "work/qwen36-damp-ascend-20261006",
+  "authority": {
+    "current_cutoff_UTC": "2026-10-17 07:02:13 UTC",
+    "conditional_extension_hours": 24,
+    "extension_used": false,
+    "absolute_extension_cutoff_UTC": "2026-10-18 07:02:13 UTC",
+    "trigger": "actual whole-model correctness plus valid same-stack fixed1024 profileOFF paired screen >=10% and evidence-backed feasible completion plan; code/software/canary alone insufficient"
+  },
+  "deltalog101R9": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair9-short16-diagnostic-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 195980,
+      "sha256": "2ab718f203977a931ae63ad3dc8d0b98a82d24cddfc3ebf1d0b3a1f43f8ea2c7"
+    },
+    "operation": "exec-0000000000000f13",
+    "owner_result": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R9-main-NEW24H_MODEL101R9_001/RESULT.json",
+      "bytes": 3822,
+      "sha256": "7759edc0111abae9a4acff05b46d71a6c2fbbd03ea0c266c5e8eebda8a1beb83"
+    },
+    "elapsed_seconds": 435.79739880998386,
+    "software": {
+      "tests": 98,
+      "passed": 98,
+      "skipped": 0,
+      "actual_Linux_IPC": true,
+      "rootfs_write_errno": 30
+    },
+    "actual_NPU": "four canaries passed; four actual isolated worker package imports/weights load/health200 passed; client failed before sending first HTTP completion",
+    "first_fault": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R9-main-NEW24H_MODEL101R9_001/candidate/DL-real-short-client.stderr",
+      "bytes": 1593,
+      "sha256": "ea9f614534f07bac63eda092539b1f0d89f0a0f066fed209100d8e86c74702ea"
+    },
+    "cause": "client C.payload resolves original003 capture_overlay.prompt_ids which permits only16/129, rejecting planned2048",
+    "attribution": "client input-contract adaptation defect, not a numerical result and not paper no-go",
+    "primary": "ValueError('original child failure retained: DL-real-short-client')",
+    "secondary": [],
+    "release": {
+      "independently_checked": true,
+      "operation": "exec-0000000000000f33",
+      "CIDs": [
+        "221de3c05c6b4251ab5eb8f76e24ff0d8f93d18b776cca8b83b1f3f68d27c4bc",
+        "70dad4558fe771cc2b98c10f48197f6d499d7fdac4f1dcc410a0e1e20ca5b3d0"
+      ],
+      "running": false,
+      "pid": 0,
+      "ExecIDs": null,
+      "OOMKilled": false,
+      "retained": true
+    },
+    "qualified": false,
+    "performance_measured": false,
+    "tasks_measured": false
+  },
+  "current": {
+    "name": "BOLE131-repair1 actual model diagnostic",
+    "operation": "exec-0000000000000f35",
+    "state": "submitted_running_not_completed",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair1/SOURCE_BOUND.json",
+      "bytes": 30895,
+      "sha256": "c02707808df2c0dc515158e48b3d6f8d288ef7ebf1fe143afe83a9ca0180d14f"
+    },
+    "source_audit": {
+      "operation": "exec-0000000000000f23",
+      "exit_code": 0,
+      "readset": 190
+    },
+    "output": "/opt/host/vnf/austinov/run-bole-model131repair1-MAIN-NEW24H_001",
+    "whole_seconds": 3600,
+    "cleanup_seconds": 180,
+    "expected": "sameimage38 controls/native parser, actual TP4 source identity,131token genuine MTP root+twochildren tree diagnostic, postrelease independent oracles",
+    "not_claimed": [
+      "scheduler publication",
+      "whole-model numerical qualification",
+      "E2E performance",
+      "task accuracy"
+    ]
+  },
+  "next": {
+    "deltalog101R10": "new source required; actual isolated client must build2048 token payload and reach loopback HTTP fixture before next model admission; original003/R9 remain immutable;2700/270 unchanged",
+    "full160_recovery": "missing complete independent retained-raw consumer; 133R1 timing plan prepared, no qualification",
+    "timing133R1": {
+      "source": {
+        "bytes": 13846,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-main-record-cost-new24h-v1-133-repair1-20261016-001/SOURCE_MANIFEST.json",
+        "sha256": "3e8722cd3c5b975ec0af43f5d01f88c5abafc6eb5300f527b6410e077cc7e8fa"
+      },
+      "selected_plan": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-main-record-cost-new24h-v1-133-repair1-20261016-001/SELECTED_PLAN.json",
+        "bytes": 7473,
+        "sha256": "a5af6b985b4ba0bc1938ed0e7b792db704d28e8ea4c22182f5fe7abd8585e791"
+      },
+      "source_audit_operation": "exec-0000000000000f2c",
+      "source_audit_exit_code": 0,
+      "executed": false,
+      "whole_seconds": 500,
+      "cleanup_seconds": 90,
+      "final_fence_reserved_seconds": 150,
+      "overlap_prohibited": "existing owned guest; do not bypass admission"
+    },
+    "publication": "BOLE durable-publication repair1 local13 controls; exact native runner callback identity P1 fixed pending independent re-review; true runner/sample/MTP refresh/learned nexttoken missing"
+  },
+  "git": {
+    "local_checkpoint": "cf2a0ebdf277b3ae0453c5f8c4bdac1a6b6c035f",
+    "push": "timeout; NOT confirmed remote",
+    "ls_remote_operation": "exec-0000000000000f15",
+    "ls_remote_outcome": "timeout; remote commit unknown; no force or duplicate commit"
+  },
+  "resources": {
+    "physical_NPUs": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protect": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "previous_release_snapshot_UTC_epoch": 1792190254.3581355,
+    "MemAvailable_kB": 62083620,
+    "protected_external_pids": [
+      1701254,
+      1701255,
+      1701256,
+      1701257
+    ],
+    "protected_external_action": "none",
+    "utilization_30min": "not measured; single snapshots do not establish continuous utilization"
+  }
+}

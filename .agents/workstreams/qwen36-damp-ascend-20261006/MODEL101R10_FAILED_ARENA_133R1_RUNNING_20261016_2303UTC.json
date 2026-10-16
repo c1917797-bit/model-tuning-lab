@@ -1,0 +1,123 @@
+{
+  "schema": "ascend.paper-portfolio.model-frontdoor-stage/v1",
+  "recorded_at_utc": "2026-10-16T23:03:25Z",
+  "scope": "Evidence checkpoint, not acceptance",
+  "authority": {
+    "original_cutoff_utc": "2026-10-17T07:02:13Z",
+    "conditional_extension": "CONDITIONAL_EXTENSION24H_AUTHORITY_20261016.json",
+    "used_extension_count": 0,
+    "condition_met": false,
+    "potential_final_cutoff_utc": "2026-10-18T07:02:13Z",
+    "resource_physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "git": {
+    "local_commit": "cf2a0ebdf277b3ae0453c5f8c4bdac1a6b6c035f",
+    "branch": "work/qwen36-damp-ascend-20261006",
+    "normal_push_operation": "exec-0000000000000f62",
+    "push_exit": 0,
+    "push_report": "b2d5b30f..cf2a0ebd",
+    "fresh_postpush_lsremote_pending": true
+  },
+  "deltalog_R10": {
+    "operation": "exec-0000000000000f54",
+    "exit": 1,
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair10-short16-diagnostic-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 197573,
+      "sha256": "e9a6c84436862bd7d76063ecb617dd75386a2f545ffd217bd63aabb5204c8f71"
+    },
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R10-main-NEW24H_MODEL101R10_001/RESULT.json",
+      "bytes": 3834,
+      "sha256": "bc9fc23a42be7ad271ac066a34c187a128e98c90f4a33a743a0d83eff2df3c7e"
+    },
+    "elapsed_seconds": 462.6664373599924,
+    "cleanup_seconds": 32.824268950033,
+    "secondary": [],
+    "same_image_software": {
+      "discovered": 101,
+      "executed": 101,
+      "passed": true
+    },
+    "actual_progress": "Actual isolated package, four NPU canaries, model server startup/health and first HTTP completion dispatch. No successful model numerical result.",
+    "first_fault": "builder_mirror.register_layers rejects registered actual layer arenas must not overlap before original native prepare and before candidate model math",
+    "parent_fault": "DL-real-short-client SSE completion/count rejection after EngineDeadError",
+    "server_stdout": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R10-main-NEW24H_MODEL101R10_001/candidate/server.stdout",
+      "bytes": 73858,
+      "sha256": "30fcbcd30f0a8e590ffba7f02b3197afe90cdf1a313364f132ebf79260a2b72c"
+    },
+    "release": {
+      "independent_operation": "exec-0000000000000f69",
+      "exit": 0,
+      "exact_cids": [
+        "33b5315071a5bb7e3757dc03139c78bd4a443f2a235ed0b48cdc0ebabf787580",
+        "fe47ea678a1921aee3229bb4c39c04cd34f31119f3f5221a5d560de1fa6283b2"
+      ],
+      "all_exited_pid0_noexec_nooom": true,
+      "physical4_to_guest0_through7_to3": true,
+      "NPU4_7_idle_snapshot_epoch": 1792191694.1049137,
+      "external0_3_running_observed_protected": true
+    }
+  },
+  "arena_attribution": {
+    "status": "Source-supported hypothesis, actual colliding operands pending",
+    "facts": [
+      "Contiguous byte-interval formula is not proved wrong",
+      "Actual native allocator shared_by aliases one raw allocation across layer names; native Mamba reshaping produces compact overlapping complete arenas",
+      "A declared shared pool does not prove live group slots or deferred logs are safe"
+    ],
+    "next": "101R11 source-controlled first-fault metadata capture, retain original fail-closed overlap guard; no blind repeated R10 or alias relaxation"
+  },
+  "cpu133R1": {
+    "operation": "exec-0000000000000f6b",
+    "state_at_checkpoint": "running",
+    "plan": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-main-record-cost-new24h-v1-133-repair1-20261016-001/SELECTED_PLAN.json",
+      "bytes": 7473,
+      "sha256": "a5af6b985b4ba0bc1938ed0e7b792db704d28e8ea4c22182f5fe7abd8585e791"
+    },
+    "output": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-mainconsumer133-repair1-MAIN-NEW24H_001",
+    "scope": "Devices[] selected 8 retained main-record cost diagnosis only, no NPU/performance/full160 qualification",
+    "budget_seconds": 500,
+    "cleanup_seconds": 90
+  },
+  "bole": {
+    "R1_actual": "op0f35 exited3 after all38 software tests, native patched-FA identity and weight load; contextlib.py provenance KeyError before tree",
+    "R1_release": "op0f4e exact both CIDs stopped/Pid0/noExec/noOOM",
+    "R2": "Local frozen prepared; only79 unchanged source leaves copied remotely op0f58;14 changed leaves not deployed, no bind or NPU. Do not run this version: new deterministic constructor/input defects caught before admission.",
+    "R3": "Source-only preparation of actual LM-head text-config and source-bound native input IDs/embedded-text ABI. Preserve native forward and all mathematical gates; original native IDs are int32, handcrafted tree IDs remain int64."
+  },
+  "production_receivers": {
+    "rejected_frozen_R7": "qualification106.join_readset referenced nonexistent model.files.model_readset101.py in actual R10",
+    "R8": "Own source-bound helper repair prepared, independently reviewed; no actual receipts or production qualification",
+    "receiver128R2": "Full160 recovered owner remains mandatory and pending; short16 model owner kept distinct",
+    "pair122R5": "Thin pin prepared, not deployed or qualified",
+    "startup_risk": "Worker/common/live qualification repeats full blob verification. Host PRE/POST certificate seam only design; no free Boolean cache or final-fence omission."
+  },
+  "acceptance": {
+    "new_technology_landed": false,
+    "whole_model_correctness": false,
+    "valid_paired_performance": false,
+    "final_task_scores": false,
+    "extension_activated": false
+  },
+  "next": [
+    "Wait only existing CPU133R1 handle; do not duplicate",
+    "Admit next genuinely ready NPU packet only after exact current guest release and fresh device/RAM/mapping checks",
+    "R11 observe native shared pool geometry without weakening guard; distinguish legitimate group slots from harmful alias",
+    "R3 actual source-complete cold frontdoor before one new NPU run",
+    "Keep all previous failures and original numerical/performance/task gates"
+  ]
+}
