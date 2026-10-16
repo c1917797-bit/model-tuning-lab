@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R16-decode-comparator-audited-earlymixed-prepared",
+  "execution_state": "R16-earlymixed-G3-profile-live",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "No owned modeljob;0c69 source149/16+16/physical/isolation194/release audited0c78. Native offlineparser exited0;4rank parsed0c82PASS. Fresh admission still required for new run."
+    "state": "Owned0c89 G3earlymixed profile live after0c88 freshsource149/physical0-3empty/portsfree/newroot/cache11.20GiB admission."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Native4rank audit0c82 plus actualshape match complete. G1/G3 decode windows3554946.498/3603035.139us (+1.353% diagnostic only), similar arrival waits; no full40regression rootcause. Publish earlymixed contracts/static149PASS then fresh admission for G3earlymixed delay0/max2 (may3boundaries), followed native sameprotocol comparator as needed; inspect actual prefill/mixed C1/C2 before one bounded fix. No algorithm changed, negative formal pair unchanged.",
+  "next_action": "Poll same exactma0c89 and rawG3earlymixed root; neverrestart live/unclear, no source149 edits/secondmodeljob. Terminal independently audit16warm+16profile/source/4rankhot/PIDphysical/isolation/exactrelease. Parse using manager-only no compute device mapping; classify actual earlyprefill/mixed and compare native frozenearlymixed contract if needed before bounded fix. Formalnegativepair/quality/lifecycle incomplete.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,14 +215,14 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL0c69/0c78 auditPASS; native parser exited0,all4rank tables/trace0c82PASS. No live model job or parser; next earlymixed contract prepared only.",
-    "operation": "exec-0000000000000c69",
+    "state": "RUNNING exact0c89 G3earlymixed profiler; no source149 edits/restart/secondmodeljob whilelive or unclear.",
+    "operation": "exec-0000000000000c89",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "contract": "PROFILE_G1_R16_PRIVATEWARM_R1_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/profile-g1-r16-privatewarm-r1",
-    "checkpoint": "87ff1a005edb9c999d2f0fa598b82f27f1b2acfd",
-    "admission_operation": "exec-0000000000000c68"
+    "contract": "PROFILE_G3_R16_EARLYMIXED_R1_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/profile-g3-r16-earlymixed-r1",
+    "checkpoint": "6110d06fdd299727abfee169692062d0a0cbe747",
+    "admission_operation": "exec-0000000000000c88"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",

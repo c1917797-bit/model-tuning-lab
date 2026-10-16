@@ -1,4 +1,13 @@
-# CURRENT R16 DECODE COMPARATOR AUDITED; EARLYMIXED PREPARED
+# CURRENT R16 G3 EARLYMIXED PROFILE LIVE
+
+Exactma exec-0000000000000c89 RUNNING;raw /cache/cch/hypic-independent-20261013/profile-g3-r16-earlymixed-r1.
+Checkpoint6110d06 published/liveverified;0c88 fresh14:58:30UTC source149/image/model/input/
+physical0-3empty/8233+HCCLfree/newroot/cache11.20GiB admissionPASS.
+Samealgorithm/sameprivatewarm16x64;delay0/max2 may3boundaries, target actualprefill/mixed.
+Poll SAMEhandle/root, no restartwhilelive/unclear/no source149 edits/secondmodeljob.
+Terminal source/hot16/physical/isolation/exactrelease audit thenmanager-only offlineparse.
+Decode comparator valid but insufficientforformalregression rootcause; no standaloneGDN.
+NativeEARLYMIXED contract preparedonly, notlaunched. Fullgoal incomplete/deadlineunchanged.
 
 Nativeparser terminalexit0;0c82 all4rank23,016kernels/validtrace, actualshape audit matches
 G3batch12 recurrentGDN/attention. Combinedspan G1 3.554946498s/G3 3.603035139s(+1.353%).
