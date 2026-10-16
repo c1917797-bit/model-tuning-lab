@@ -1,0 +1,46 @@
+{
+  "schema": "hypic-frozen-package/v1",
+  "config": "QUALITY_COMPACT_CONFIG_R16_CATALOG_CANARY.json",
+  "manifest": "QUALITY_COMPACT_MANIFEST_R16_CATALOG_CANARY.json",
+  "contract": "QUALITY_R16_CATALOG_CANARY_R1_CONTRACT.json",
+  "manifest_sha256": "4847f57715cb743929aeb5eec094bcff3f56ec909364639241cfcb5726fbd959",
+  "source_bindings": 159,
+  "static_check": {
+    "operation": "exec-0000000000000a7b",
+    "exit": 0,
+    "input_rows": 127,
+    "segments": 126,
+    "diagnostic_private": 17,
+    "default_disabled": true,
+    "live147_unchanged": true,
+    "newraw_absent": true
+  },
+  "structure": {
+    "operation": "exec-0000000000000a7c",
+    "exit": 0,
+    "skills": 29,
+    "scope": "structure only; not29functional"
+  },
+  "code_regression": {
+    "operation": "exec-0000000000000a6f",
+    "tests": 675,
+    "exit": 0
+  },
+  "scope": "Prospective diagnostic package only; no catalog device run. Requires freshma/hostdevelopment/direct physical0-3+ports admission after exact0a5c terminal, independentR16pair audit. Fullquality/lifecycle/performance matrix remain.",
+  "launch_after_admission": [
+    "python3",
+    "-B",
+    "formal_quality_r16_tp4.py",
+    "--contract",
+    "QUALITY_R16_CATALOG_CANARY_R1_CONTRACT.json",
+    "--run"
+  ],
+  "terminal_audit": [
+    "python3",
+    "-B",
+    "audit_catalog_canary_terminal.py",
+    "--contract",
+    "QUALITY_R16_CATALOG_CANARY_R1_CONTRACT.json",
+    "--live-release"
+  ]
+}
