@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R18-G3-R1-formal-performance-live",
+  "execution_state": "R18-G3-R1-independent-valid-G1-next",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "No owned modeljob; exactR2 release independently verified0de6."
+    "state": "No owned modeljob; G3 exactrelease independently0e35 valid."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll exact0e06/root; never restart live or unclear; no178 bound source edits. Terminal independent audit_r18_partition_performance.py --contract FORMAL_R18_G3_R1_CONTRACT.json --live-release. Only valid then fresh G1/R1 admission. Full goal incomplete.",
+  "next_action": "Freshactualadmission then matching FORMAL_R18_G1_R1_CONTRACT.json; no accepted matched speed result until G1 audit. R18G3 independent0e35 full40/allfour48-16/478clean/178sources/exactrelease valid.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,14 +215,15 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "RUNNING",
+    "state": "TERMINAL_VALID",
     "operation": "exec-0000000000000e06",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
     "contract": "FORMAL_R18_G3_R1_CONTRACT.json",
     "raw_root": "/cache/cch/hypic-independent-20261013/formal-r18-g3-r1",
     "checkpoint": "12660b1d7fe66e5d5952ed9ab8500a84b1ca3833",
-    "admission_operation": "exec-0000000000000e05"
+    "admission_operation": "exec-0000000000000e05",
+    "independent_audit": "exec-0000000000000e35"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -370,5 +371,15 @@
     "contract": "C1_PARTITIONED_R18_CANARY_R2_CONTRACT.json",
     "report": "C1_PARTITIONED_R18_CANARY_R2_TERMINAL_20261016.json",
     "device_started": true
+  },
+  "current_r18_matrix": {
+    "valid": 1,
+    "total": 12,
+    "valid_phases": [
+      "G3/R1"
+    ],
+    "running": null,
+    "remaining_not_started": 11,
+    "report": "R18_G3_R1_TERMINAL_AUDIT_20261016.json"
   }
 }

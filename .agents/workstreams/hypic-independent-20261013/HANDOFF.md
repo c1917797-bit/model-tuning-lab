@@ -1,4 +1,14 @@
-# CURRENT R18 G3/R1 FORMAL PERFORMANCE LIVE
+# CURRENT R18 G3/R1 TERMINAL INDEPENDENT VALID; G1 NEXT
+
+0e06 exit0 full40/40 at fixed1024. Independent0e35 accepts178sources,
+478cleanisolation,all40 same-step fourrank48C1/16C2,7104actualpartitiongroups,
+physicalPID/cgroupjoins andliveexactrelease. TPOT313.076461ms;TTFTP95415437.318890ms.
+Report R18_G3_R1_TERMINAL_AUDIT_20261016.json. No matched speedclaim.
+Initial0e33 strictbind EADDRINUSE;0e34 exactCIDabsent/TCPempty/strictfree/0-3empty,
+sameimmutable raw replaypassed0e35, no modelrerun. No owned livejob.
+Next freshadmission matching FORMAL_R18_G1_R1_CONTRACT.json, independentaudit.
+
+# HISTORICAL R18 G3/R1 FORMAL PERFORMANCE LIVE
 
 ma exact exec-0000000000000e06 launched19:15UTC from liveverified12660b1d.
 Admission0e05 proves178source/168runtime/image/model/input/actual0-3empty/8233+

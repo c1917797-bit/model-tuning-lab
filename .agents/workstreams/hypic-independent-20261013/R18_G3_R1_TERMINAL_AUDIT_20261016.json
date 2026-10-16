@@ -1,0 +1,179 @@
+{
+  "controller": "exec-0000000000000e06",
+  "independent_audit": "exec-0000000000000e35",
+  "initial_audit": "exec-0000000000000e33",
+  "initial_audit_failure": "strict8233 bind EADDRINUSE; subsequent0e34 exact container absent/TCPempty/strictbindfree/physical0-3empty; same immutable raw replay passed, no device rerun",
+  "report": {
+    "terminal_unit_valid": true,
+    "timing": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 313.07646100488284,
+      "ttft_p95_ms": 415437.3188900063,
+      "tpot_p95_ms": 337.2562250781357
+    },
+    "isolation_samples": 478,
+    "source_bindings": 178,
+    "raw_sha256": {
+      "result.json": "e46da31b50f3be459590aa1ed81eaf261db531d3fe745f568fdfe31e35b42195",
+      "events.jsonl": "5f886abed1a6e4ba839a7e3c3b13cdc5482e01f33c55095d17e989c5ef82690b",
+      "performance-unit.json": "ac3d33a0338a918ae3a99f17d814ca1003c331af2639d3e21f06bbf1d68d0a69",
+      "release.json": "90dd7bf127017e250c0ffef0e1a732b5ee26ab4906cdf205f5521601b538cadf"
+    },
+    "scope": "one R18 full40 timed arm; matched/repeated performance,fullquality,lifecycle separate",
+    "packed": {
+      "packed_performance_receipts_verified": true,
+      "workers": {
+        "0": 57,
+        "1": 58,
+        "2": 59,
+        "3": 60
+      },
+      "requests": 40,
+      "packed_groups": 7104,
+      "shadow_requests": 0,
+      "multi_hot_shadow_layers": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "scope": "timed packed call-stage/private finite precommit receipts; no numerical shadow equivalence or task quality claim"
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 57,
+          "host_pid": 237392,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 58,
+          "host_pid": 237393,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 59,
+          "host_pid": 237394,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 60,
+          "host_pid": 237395,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 40,
+      "covered": [
+        "cmpl-bf2a0f6690658162",
+        "cmpl-9e6097480d6c7222",
+        "cmpl-8fb9db78d2274b64",
+        "cmpl-b3b32702a14d59da",
+        "cmpl-97d62ebedd32c12c",
+        "cmpl-af4b364bf411ee42",
+        "cmpl-a3337f7a3a7c5437",
+        "cmpl-83d537e12f0e884b",
+        "cmpl-b7990ed1b99612a9",
+        "cmpl-962e1aa5e4746277",
+        "cmpl-8871c5e92a6e70b5",
+        "cmpl-86e0197e5ebfc520",
+        "cmpl-8c6c1d49e4d8770d",
+        "cmpl-91d70bc51e59e5ac",
+        "cmpl-81f5a8ee90ede919",
+        "cmpl-83f9dcd1da538c12",
+        "cmpl-9e6e5ea28724e9a2",
+        "cmpl-bd6e832385dc5819",
+        "cmpl-b6a30d1d52ac979a",
+        "cmpl-8b35a591cdd871f2",
+        "cmpl-9df3de089003cc2b",
+        "cmpl-ad941e5b34b0d162",
+        "cmpl-823d98d83b7aff37",
+        "cmpl-a2f034a3648e63a5",
+        "cmpl-9e6d082d22b82d70",
+        "cmpl-bbedc28b0b237a72",
+        "cmpl-bb522d332e431fdc",
+        "cmpl-b06c4bea0b64298e",
+        "cmpl-81d12fd16695e910",
+        "cmpl-9a280c1d98dc62be",
+        "cmpl-857b14049a052ff6",
+        "cmpl-b2d0eafea6079e10",
+        "cmpl-8ee5d2d8e3b40f42",
+        "cmpl-ab84f177337e7967",
+        "cmpl-a65b8572c9626604",
+        "cmpl-b30e55296181cfb1",
+        "cmpl-9a59186593b2d08d",
+        "cmpl-8ad64d8e13b61ee0",
+        "cmpl-b6274142c7efb052",
+        "cmpl-a0ee435bcdc88233"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 57,
+        "1": 58,
+        "2": 59,
+        "3": 60
+      },
+      "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+    },
+    "request_map": {
+      "cmpl-bf2a0f6690658162": "cmpl-bf2a0f6690658162-0-b9498f22",
+      "cmpl-9e6097480d6c7222": "cmpl-9e6097480d6c7222-0-9b6dd4ce",
+      "cmpl-8fb9db78d2274b64": "cmpl-8fb9db78d2274b64-0-a7560ed0",
+      "cmpl-b3b32702a14d59da": "cmpl-b3b32702a14d59da-0-b2c5aef0",
+      "cmpl-97d62ebedd32c12c": "cmpl-97d62ebedd32c12c-0-ac429996",
+      "cmpl-af4b364bf411ee42": "cmpl-af4b364bf411ee42-0-83edfc5d",
+      "cmpl-a3337f7a3a7c5437": "cmpl-a3337f7a3a7c5437-0-8da22cb0",
+      "cmpl-83d537e12f0e884b": "cmpl-83d537e12f0e884b-0-af52f121",
+      "cmpl-b7990ed1b99612a9": "cmpl-b7990ed1b99612a9-0-8e87bcc6",
+      "cmpl-962e1aa5e4746277": "cmpl-962e1aa5e4746277-0-9dc7e971",
+      "cmpl-8871c5e92a6e70b5": "cmpl-8871c5e92a6e70b5-0-a6837cd5",
+      "cmpl-86e0197e5ebfc520": "cmpl-86e0197e5ebfc520-0-b3e37321",
+      "cmpl-8c6c1d49e4d8770d": "cmpl-8c6c1d49e4d8770d-0-9234a450",
+      "cmpl-91d70bc51e59e5ac": "cmpl-91d70bc51e59e5ac-0-8d971fd4",
+      "cmpl-81f5a8ee90ede919": "cmpl-81f5a8ee90ede919-0-a4f9ab59",
+      "cmpl-83f9dcd1da538c12": "cmpl-83f9dcd1da538c12-0-b8242a94",
+      "cmpl-9e6e5ea28724e9a2": "cmpl-9e6e5ea28724e9a2-0-a1f99a74",
+      "cmpl-bd6e832385dc5819": "cmpl-bd6e832385dc5819-0-af444be4",
+      "cmpl-b6a30d1d52ac979a": "cmpl-b6a30d1d52ac979a-0-884193ea",
+      "cmpl-8b35a591cdd871f2": "cmpl-8b35a591cdd871f2-0-904fc83d",
+      "cmpl-9df3de089003cc2b": "cmpl-9df3de089003cc2b-0-bd96c211",
+      "cmpl-ad941e5b34b0d162": "cmpl-ad941e5b34b0d162-0-bf37eb07",
+      "cmpl-823d98d83b7aff37": "cmpl-823d98d83b7aff37-0-adef9e01",
+      "cmpl-a2f034a3648e63a5": "cmpl-a2f034a3648e63a5-0-a293a223",
+      "cmpl-9e6d082d22b82d70": "cmpl-9e6d082d22b82d70-0-b92252c9",
+      "cmpl-bbedc28b0b237a72": "cmpl-bbedc28b0b237a72-0-acc9a215",
+      "cmpl-bb522d332e431fdc": "cmpl-bb522d332e431fdc-0-b33c2b5e",
+      "cmpl-b06c4bea0b64298e": "cmpl-b06c4bea0b64298e-0-9abdf915",
+      "cmpl-81d12fd16695e910": "cmpl-81d12fd16695e910-0-85602bca",
+      "cmpl-9a280c1d98dc62be": "cmpl-9a280c1d98dc62be-0-8bcc5b5c",
+      "cmpl-857b14049a052ff6": "cmpl-857b14049a052ff6-0-b6acdd4e",
+      "cmpl-b2d0eafea6079e10": "cmpl-b2d0eafea6079e10-0-a43042f3",
+      "cmpl-8ee5d2d8e3b40f42": "cmpl-8ee5d2d8e3b40f42-0-be823643",
+      "cmpl-ab84f177337e7967": "cmpl-ab84f177337e7967-0-97362836",
+      "cmpl-a65b8572c9626604": "cmpl-a65b8572c9626604-0-bfbbd86a",
+      "cmpl-b30e55296181cfb1": "cmpl-b30e55296181cfb1-0-ae515ba0",
+      "cmpl-9a59186593b2d08d": "cmpl-9a59186593b2d08d-0-89e65981",
+      "cmpl-8ad64d8e13b61ee0": "cmpl-8ad64d8e13b61ee0-0-b6f7df17",
+      "cmpl-b6274142c7efb052": "cmpl-b6274142c7efb052-0-9e500e78",
+      "cmpl-a0ee435bcdc88233": "cmpl-a0ee435bcdc88233-0-a4ea45ab"
+    },
+    "live_release_verified": true,
+    "partition": {
+      "enabled": true,
+      "groups": 7104,
+      "completed": 7680,
+      "workers": {
+        "0": 57,
+        "1": 58,
+        "2": 59,
+        "3": 60
+      }
+    }
+  },
+  "decision": "VALID_ONE_ARM_NOT_MATCHED_SPEED_OR_FULL_GOAL",
+  "next": "fresh admission and matching FORMAL_R18_G1_R1_CONTRACT.json"
+}
