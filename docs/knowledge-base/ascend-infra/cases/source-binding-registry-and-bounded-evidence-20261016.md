@@ -327,3 +327,39 @@ control, not BOLE success. Public-author implementation parity remains unverifie
 No final performance or task acceptance was achieved at this checkpoint.
 Continuous four-card utilization is unmeasured; a real single-card diagnostic
 and parallel CPU preparation do not prove four-card no-gap operation.
+## Mapping closure and retained resource failures (14:38UTC checkpoint)
+
+098R3 actually failed a same-image aggregate because an old test08 still pinned
+repair1. R4 repaired that test and ran all26 actual controls, then loaded TP4
+and answered HTTP200. A separately restarted cannbench_align subsequently
+used physical5; R4 terminated with a foreign-process/UDA conflict and no
+complete FRAME/DECODE files. Its owned container was independently reopened
+stopped/Pid0/noExec/noOOM. This is resource failure, not failed mathematics.
+R5 is an identity-only new output/source experiment; actual deployed globals,
+966-ref source audit, Linux26 and same-image26 passed. Actual four tiny
+canaries, registry and parser passed; whole-model numerical result is pending
+in operation exec-0000000000000c61 at this checkpoint.
+
+BOLE112 first failed the actual CPU aggregate: prepared_template was absent
+from its readonly guest closure. R1 added only that exact Ref; actual same-image
+CPU10 and24 Meta cases then passed and the container was independently released.
+Its numeric entry failed before creating a container: the new owner declared
+physical4 but reused a physical5-only scoped_cards adapter. Keep operation0c52
+and its primary error; no NPU math ran. R2 preparation now supplies a separately
+source-bound physical4 adapter and actual donor-inspect mapping controls.
+Actual R2 same-image/NPU results are still pending.
+
+Reusable lesson: trace a relocated physical device through source-bound scope
+selection, actual create argv, actual donor inspect, host SMI/PID/namespace join,
+and guest ARM; changing only the outer physical variable is insufficient.
+Test the inherited real scope/inspect functions, including wrong-device
+rejection, before admission. Preserve protected0-3 guards and numerical
+contracts. A byte inverse proves the delta, not mapping compatibility.
+
+An automatic approval-review quota failure explicitly left one BOLE deployment
+unexecuted. MAIN retained that fact and performed only unaffected work; after
+the human reported recovery, the normal reviewed route succeeded. Never
+switch routes to evade an uncompleted approval check or count an unexecuted
+call as a running experiment. Later transport timeout on the large R5 patch
+was reconciled by reading all actual target hashes: all files had committed,
+so the mutation was not blindly repeated.

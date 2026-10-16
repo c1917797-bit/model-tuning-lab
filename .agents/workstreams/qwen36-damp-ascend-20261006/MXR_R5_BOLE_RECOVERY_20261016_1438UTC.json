@@ -1,0 +1,96 @@
+{
+  "schema": "ascend.paper-stage-checkpoint/v1",
+  "checkpoint_label": "20261016-1438UTC; actual timings are in named operation receipts",
+  "accepted_new_technique": false,
+  "cutoff_utc": "2026-10-17T07:02:13Z",
+  "authority": "NEW24H_AUTHORITY_20261016.json",
+  "physical": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "review_failure": {
+    "previous_copy": "not executed; automatic review quota failure",
+    "human_report": "approval quota restored",
+    "recovered_copy": "exec-0000000000000c4a",
+    "recovered_patch": "applied; actual binder checked full template/runtime"
+  },
+  "BOLE": {
+    "original112_CPU": "failed; missing prepared_template in RO closure, original output retained",
+    "repair1_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair1/SOURCE_SMOKE.json",
+      "bytes": 6298,
+      "sha256": "cd8f398a67353e589197b3dfda13072f5781bddf5cc0a63f5602941f29fc18e0"
+    },
+    "CPU": {
+      "operation": "exec-0000000000000c4d",
+      "owner": {
+        "path": "/opt/host/vnf/austinov/run-bole-tree112repair1-MAIN-20261016-001/smoke/cpu/RESULT.json",
+        "bytes": 801,
+        "sha256": "543eb23bdb798e4268b72cfb34f9c6530e49d1b349f0f13d45fe99d4135023c1"
+      },
+      "software_checks": 10,
+      "Meta_shapes": 24,
+      "reopen": "CID49d934f40d91fbdc1d2550a245f5c1aa9b2ae26fee7fd9adeca53c949fd51f12 exited0/Pid0/noExec/Devices[]/image660"
+    },
+    "numeric": {
+      "operation": "exec-0000000000000c52",
+      "owner": {
+        "path": "/opt/host/vnf/austinov/run-bole-tree112repair1-MAIN-20261016-001/smoke/numeric/RESULT.json",
+        "bytes": 1272,
+        "sha256": "8804fcbdd217b6b8c66abc6f96e7980e0f2faccae3483ddfff04c386bac5098a"
+      },
+      "primary": "ValueError('this immutable adapter is physical5 only')",
+      "NPU": false,
+      "container_created": false,
+      "classification": "adaptation seam; no numerical result/paper no-go"
+    },
+    "repair2": "locally prepared physical4 observer; original protected0-3 logic/math; pending actual deployment/CPU/NPU",
+    "FA116": "prepared only",
+    "treeconv118": "in preparation; actual660 mamba layer source read, native ABI pending",
+    "whole_model": false,
+    "performance": false,
+    "accuracy": false
+  },
+  "MXR": {
+    "repair4": "terminal external restarted cannbench_align NPU5 contention; all4 loaded/HTTP200 but zero raw frames; not numerical failure",
+    "repair5": {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-model-new24h-v1-098-repair5/SOURCE_MANIFEST.json",
+        "bytes": 122594,
+        "sha256": "ab24935dbac49fc0f252d10a19e9d55184e1a3705e0d4f012c75275f6a01ddd6"
+      },
+      "audit": "exec-0000000000000c5d; 966refs/33deltas/Linux26PASS",
+      "identity_only": true,
+      "operation": "exec-0000000000000c61",
+      "state": "running at checkpoint",
+      "sameimage_CPU26": true,
+      "all4_tiny_registry_parser": "candidate/CANARY.json 48096/e4a1a8b478eb61f7dd777f9fb9fdf903501d9c1a727098f028448c9c0232ec59",
+      "model_numeric": "pending",
+      "output": "/opt/host/vnf/austinov/run-mxr-two-residual-model098repair5-main-NEW24H_MXR098R5_001"
+    },
+    "performance": false,
+    "accuracy": false
+  },
+  "DeltaLog": {
+    "numeric16": "same-initial diagnostic domain PASS; original strict FAIL retained",
+    "numeric160": "terminal external5 contention; no complete producer/consumer",
+    "retry": "same-source run031 supports absent output002; ledger11 needs valid sealed completion before additional33GiB",
+    "storage": "80GiB cap/100GiB reserve unchanged; no deletion/no hugepage release"
+  },
+  "scheduling": {
+    "CURRENT": "exclusive MXR R5 TP4 correctness",
+    "NEXT": "BOLE112R2 CPU -> numeric4 -> independentCPU",
+    "BACKUP": "DL088R2 numeric160 fresh002 after lawful storage qualification",
+    "agents": "parallel108 accuracy CLI, BOLE118 treeconv, DL ledger/seal; no self-admission",
+    "window_utilization": "unmeasured; startup/source I/O is not NPU compute"
+  },
+  "boundary": "No >=10% paired performance or final task acceptance obtained. Component/CPU/canary/skill PASS does not establish acceptance."
+}
