@@ -1,0 +1,16 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "catalog-rebuild-selection",
+  "focused": {
+    "operation": "exec-0000000000000a5f",
+    "tests": 8,
+    "exit": 0
+  },
+  "regression": {
+    "operation": "exec-0000000000000a60",
+    "tests": 642,
+    "exit": 0
+  },
+  "scope": "Pure source-manifest/generation/worker-bound eviction selection. Not wired to service; no new NPU proof; full quality missing.",
+  "live_performance": "ma exec-0000000000000a5c running; 147 bound sources unchanged"
+}
