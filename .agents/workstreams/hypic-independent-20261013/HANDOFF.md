@@ -1,4 +1,13 @@
-# CURRENT R16 FOURRANK DECODE AUDITED; NATIVE COMPARATOR PREPARED
+# CURRENT R16 NATIVE PROFILE COMPARATOR LIVE
+
+Exactma exec-0000000000000c69 RUNNING;raw /cache/cch/hypic-independent-20261013/profile-g1-r16-privatewarm-r1.
+87ff1a00 published/liveverified/mainunchanged.0c68fresh14:34:14UTC physical0-3empty,
+8233+HCCLfree/source149/currentimage/model/input/newroot/cache12.22GiB PASS.
+Sameprivatewarm16x64/delay32/max12;no HYPIC package mounted. Poll SAMEhandle/root.
+No restart whilelive/unclear;no secondmodeljob. Terminal independent responses/source149/
+fourrank PIDphysical/isolation/release; parse with manager-only no compute mapping.
+Compare actualcaptured phase/batch/rankspread withG3 before attribution/treatment.
+DiagnosticNOTformalperformance/quality. DeadlineOct17T06:48:09Z unchanged.
 
 0c62 exit0:allfourrank tables/trace valid (23016kernels/rank),576recurrent/192attention,
 batch12 observed.1560logicalcollectives matched:arrival median1556.85us vsend39.438us.

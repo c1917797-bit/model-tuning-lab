@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R16-fourrank-decode-audited-native-comparator-prepared",
+  "execution_state": "R16-native-profile-comparator-live",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "Owned0c1c integrated profiler diagnostic live;0c1b freshsource149/actual0-3empty/portsfree/newroot/cache13.69GiB admission."
+    "state": "Owned0c69 native comparator live after0c68 fresh physical0-3empty/ports/source149 admission."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Fourrank parsed0c62 valid: recurrent decode batch12,1560 collective names aligned, arrival spread1.557ms median vs end39.438us; no HYPIC-specific rootcause. G1sameprotocol profile contract prepared/static149PASS; publish checkpoint then freshma/direct/physical0-3+ports/newroot/source admission before bounded native comparator. No algorithm changes on communication-name evidence alone.",
+  "next_action": "Poll exactma0c69/raw G1 profile comparator. Running/unclear never restart/edit149boundfiles/secondmodeljob. Terminal audit16privatewarm+16profile, source149, actual4rankPIDphysical/isolation/exactrelease then offlineparse manager-only(no compute devices). Compare actualphase/batch withG3; negative full40 R16pair unchanged.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,14 +215,14 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL0c1c; source149/hot16/physical/isolation220 audit0c3fPASS. Offline parser remainingrank1-3 exactCIDfa108cccd65705f442d9a522d22f1644f139da526fc0227c9e32f15bf3019f96; rank0 parsed, no compute devices.",
-    "operation": "exec-0000000000000c1c",
+    "state": "RUNNING exact0c69 native G1 profiler comparator; no HYPIC algorithm mount. Poll exact handle/raw; no restart whilelive/unclear.",
+    "operation": "exec-0000000000000c69",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "contract": "PROFILE_G3_R16_PRIVATEWARM_R1_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/profile-g3-r16-privatewarm-r1",
-    "checkpoint": "7ce9b301dd9b597b5bd80ac7be76d6c8ccd64ed3",
-    "admission_operation": "exec-0000000000000c1b"
+    "contract": "PROFILE_G1_R16_PRIVATEWARM_R1_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/profile-g1-r16-privatewarm-r1",
+    "checkpoint": "87ff1a005edb9c999d2f0fa598b82f27f1b2acfd",
+    "admission_operation": "exec-0000000000000c68"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
