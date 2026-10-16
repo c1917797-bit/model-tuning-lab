@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R18-G3-R1-independent-valid-G1-next",
+  "execution_state": "R18-G1-R1-live-G3-valid",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "No owned modeljob; G3 exactrelease independently0e35 valid."
+    "state": "G1 exactcontroller0e3d running; physical0-3 TP4 only."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Freshactualadmission then matching FORMAL_R18_G1_R1_CONTRACT.json; no accepted matched speed result until G1 audit. R18G3 independent0e35 full40/allfour48-16/478clean/178sources/exactrelease valid.",
+  "next_action": "Poll exact0e3d/root; never restart live/unclear or edit178boundsources. Terminal audit_r18_partition_performance.py --contract FORMAL_R18_G1_R1_CONTRACT.json --live-release. Compare firstpair only aftervalid; no fullgoal acceptance.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,15 +215,14 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL_VALID",
-    "operation": "exec-0000000000000e06",
+    "state": "RUNNING",
+    "operation": "exec-0000000000000e3d",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "contract": "FORMAL_R18_G3_R1_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/formal-r18-g3-r1",
-    "checkpoint": "12660b1d7fe66e5d5952ed9ab8500a84b1ca3833",
-    "admission_operation": "exec-0000000000000e05",
-    "independent_audit": "exec-0000000000000e35"
+    "contract": "FORMAL_R18_G1_R1_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/formal-r18-g1-r1",
+    "checkpoint": "de0cbc9018926443ea376465259980fe310c72f1",
+    "admission_operation": "exec-0000000000000e3c"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -378,7 +377,7 @@
     "valid_phases": [
       "G3/R1"
     ],
-    "running": null,
+    "running": "G1/R1",
     "remaining_not_started": 11,
     "report": "R18_G3_R1_TERMINAL_AUDIT_20261016.json"
   }

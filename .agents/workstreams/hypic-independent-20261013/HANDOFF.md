@@ -1,4 +1,14 @@
-# CURRENT R18 G3/R1 TERMINAL INDEPENDENT VALID; G1 NEXT
+# CURRENT R18 G1/R1 LIVE; G3 INDEPENDENT VALID
+
+ma exact exec-0000000000000e3d launched19:48UTC from liveverifiedde0cbc90.
+Admission0e3c proves178source/168runtime/image/model/input/0-3empty/8233+HCCLfree/
+newroot. Raw /cache/cch/hypic-independent-20261013/formal-r18-g1-r1.
+Officialnative noalgorithm package, same full40 protocol. Pollsamehandle/root;
+no restart live/unclear/no178bound edits. Terminal audit_r18_partition_performance.py
+--contract FORMAL_R18_G1_R1_CONTRACT.json --live-release. Compareonlyaftervalid.
+G3 full40 independentlyvalid0e35; no matchedspeedclaim yet. Fullgoal incomplete.
+
+# R18 G3/R1 TERMINAL INDEPENDENT VALID
 
 0e06 exit0 full40/40 at fixed1024. Independent0e35 accepts178sources,
 478cleanisolation,all40 same-step fourrank48C1/16C2,7104actualpartitiongroups,
