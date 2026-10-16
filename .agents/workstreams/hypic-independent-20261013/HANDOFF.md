@@ -1,4 +1,12 @@
-# CURRENT R16 RANK0 DECODE PARSED; OTHER THREE RANKS PARSER LIVE
+# CURRENT R16 FOURRANK DECODE AUDITED; NATIVE COMPARATOR PREPARED
+
+0c62 exit0:allfourrank tables/trace valid (23016kernels/rank),576recurrent/192attention,
+batch12 observed.1560logicalcollectives matched:arrival median1556.85us vsend39.438us.
+Consistent rankwaiting, not bandwidth/algorithm rootcause. Native samephase missing.
+PROFILE_R16_FOURRANK_DECODE_AUDIT_20261016.json preserves hashes/counts/limits.
+PROFILE_G1_R16_PRIVATEWARM_R1_CONTRACT.json static149/sameprotocol/newrootPASS;
+G1 no algorithm package mount. Publish thenfresh source/physical0-3/port admission.
+No newmodeljob started. Negativefirstpair retained. Oldparserlive text superseded.
 
 87a1c616 terminalaudit checkpoint published/liveverified; mainunchanged23ec33d7.
 No-deviceparser r2 exited0 but allCANNexportsfailed (decorator swallows errors).
