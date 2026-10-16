@@ -1,4 +1,15 @@
-# CURRENT R19 TIMED ON/OFF/NATIVE HOST READY; NOT STARTED
+# CURRENT R19 LAZY ON FULL40 LIVE
+
+ma exact exec-0000000000000e89 launched20:48UTC from liveverified2efe4db5.
+Admission0e88 proves194sources/181runtime/image/model/input/0-3empty/8233+HCCLfree/
+newroot andimmutableR19Canary rawSHA. Raw
+/cache/cch/hypic-independent-20261013/formal-r19-lazy-on-r1.
+Poll samepeer/handle/root; no restart live/unclear/no194bound edits.
+Terminal audit_r19_lazy_performance.py --contract FORMAL_R19_LAZY_ON_R1_CONTRACT.json
+--live-release. Only valid then fresh OFF thenNATIVE admission. No partialspeedclaim.
+R19boundedCanary0e79accepted; fullgoalunfinished. Cutoff2026-10-17T06:48:09Z.
+
+# HISTORICAL R19 TIMED HOST READY
 
 959CPU0e80 PASS; static0e81194identicalsources/181runtime/allnewrootsabsent PASS.
 R19_LAZY_PERFORMANCE_PLAN_20261016.json freezes on->off->native full40 firstscreens.
