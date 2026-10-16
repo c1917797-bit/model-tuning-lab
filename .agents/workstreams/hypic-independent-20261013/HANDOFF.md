@@ -1,4 +1,15 @@
-# CURRENT R19 OFF FULL40 INDEPENDENT VALID; NATIVE NEXT
+# CURRENT R19 SAME-SOURCE NATIVE FULL40 LIVE
+
+ma exact exec-0000000000000eda launched21:58UTC from liveverified38a0a207.
+Admission0ed9:194sources/181runtime/image/model/input/physical0-3empty/8233+HCCLfree/newroot.
+Raw /cache/cch/hypic-independent-20261013/formal-r19-lazy-native-r1.
+Official native G1 HYPIC/PDCoff; same protocol. Poll exactpeer/handle/root;
+no restart live/unclear or194bound changes. Terminal audit_r19_lazy_performance.py
+--contract FORMAL_R19_LAZY_NATIVE_R1_CONTRACT.json --live-release.
+Only valid then wholeHYPIC comparison; ON/OFF alone not whole optimization acceptance.
+Cutoff2026-10-17T06:48:09Z. Fullgoal incomplete.
+
+# HISTORICAL R19 OFF FULL40 INDEPENDENT VALID
 
 0eb1exit0;independent0ed0 accepts40/40/allfour48C1+16C2/7104partitiongroups/
 72192preparedreceipts/194sources/496cleanisolation/physicalPIDjoins/liveexactrelease.
