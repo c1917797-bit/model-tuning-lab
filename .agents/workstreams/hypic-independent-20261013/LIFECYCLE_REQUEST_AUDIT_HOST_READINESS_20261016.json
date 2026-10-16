@@ -1,0 +1,20 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "audit_lifecycle_requests.py",
+  "regression": {
+    "operation": "exec-0000000000000afb",
+    "tests": 770,
+    "exit": 0
+  },
+  "targeted_controls": 18,
+  "scope": "Synthetic response/journal fixtures only, no model outputs or device acceptance",
+  "features": [
+    "Exact frozen three-request payload and usage association",
+    "Unique completed request IDs and durable response journal",
+    "Independent nonthinking native semantic control and collision/bound checks"
+  ],
+  "remaining": [
+    "Full stage terminal/composite audit and frozen lifecycle source contracts",
+    "Real lifecycle run after performance/quality progression gates"
+  ]
+}

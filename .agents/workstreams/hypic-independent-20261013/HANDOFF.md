@@ -1,3 +1,14 @@
+# LATEST readonly0ae9 terminal and lifecycle host audits
+
+0ae9exit0,38samples11:02:29–11:12:25UTC;intermittentphysical0/3PIDs,
+no180ssampledidle,noallocation/reservation. PreserveRESOURCE_OBSERVATION_0AE9_20261016.json.
+PID-only observations do not prove all owners. Noownedmodeljob/observer now.
+R2catalog remainsnextdevice M3 priority afterfreshdirect/source159/actualidle/ports/newrootadmission.
+Startupaudit e09355e published/liveverified752CPU;requestauditor18newcontrols/full770CPU0afbPASS,
+HOSTONLY. Real lifecycle stage contracts/compositeaudit and NPUacceptance remainmissing.
+Continueoffline audit composition;no blind thirdbaseline,foreignuntouched/4-7prohibited.
+Latesthuman deadlineOct17T06:48:09Z;fullgoal remainsactive/incomplete.
+
 # LATEST readonly0ace terminal — no owned job or observer
 
 0aceexit0,38samples10:43:21–10:53:19UTC,intermittentphysical0/1/2PIDs;
