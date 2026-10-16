@@ -1,0 +1,84 @@
+{
+  "schema": "hypic-r16-matched-first-pair/v1",
+  "classification": "NEGATIVE_SCREEN_DO_NOT_EXPAND_UNCHANGED",
+  "source": "Exact published original Git contract maps plus G1 live independentaudit0c03 and published G3 independentaudit0a57; one matched round.",
+  "baseline": {
+    "contract": "FORMAL_R16_20261016_G1_R1_ATTEMPT3_CONTRACT.json",
+    "controller": "exec-0000000000000bd4",
+    "audit": "exec-0000000000000c03",
+    "report": {
+      "terminal_unit_valid": true,
+      "timing": {
+        "requests": 40,
+        "unique_ids": 40,
+        "weighted_tpot_ms": 285.688053213623,
+        "ttft_p95_ms": 349761.5655399859,
+        "tpot_p95_ms": 298.85779427735315
+      },
+      "isolation_samples": 437,
+      "source_bindings": 147,
+      "raw_sha256": {
+        "result.json": "5dfefdb8ef4fa0caa846080eb78d7c434e044e4e39ec231d8f5de6dda656d6d6",
+        "events.jsonl": "3f3b01932990d0b0b6825d9474c4e3992a63c521c325f2ceaababd5863099e11",
+        "performance-unit.json": "9b01a7aa0ca211d1a10dd58ae643700e622e5e26315193ef8e20062843fc91e0",
+        "release.json": "36022dc8b156c82d7e255c0e423593a2baff252ba10c0105a4fd8b5a3e2cc470"
+      },
+      "scope": "one successor full40 timed phase; matched pair/three rounds/full quality/lifecycle remain separate",
+      "live_release_verified": true,
+      "snapshot_timed_policy_verified": true
+    }
+  },
+  "candidate": {
+    "contract": "FORMAL_R16_20261016_G3_R1_CONTRACT.json",
+    "audit": "exec-0000000000000a57",
+    "timing": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 310.2862041384285,
+      "ttft_p95_ms": 403417.0608900022,
+      "tpot_p95_ms": 331.38974004882016
+    },
+    "raw_sha256": {
+      "result.json": "5cce5aa42e441b86204ecd4b7358cf5cf713295fa69595db2a7c973b96b666b8",
+      "events.jsonl": "edf31255b35c14dd702157a153a3220f15f33b868a503dbe1cce9335e44b9811",
+      "performance-unit.json": "a2bf7aec4bca682b2708732aba5047d1425e3984316cd14ce7cceab72ef6ccc5",
+      "release.json": "4452223174851404881a51733a1252f16614f510e18240cfbe5204d27d1146df"
+    },
+    "hot_coverage": 40
+  },
+  "matched": {
+    "source_bindings": 147,
+    "protocol_fields": [
+      "image",
+      "model",
+      "model_config_sha256",
+      "physical_npus",
+      "tp",
+      "port",
+      "hccl_ports",
+      "cpu_set",
+      "max_output_tokens",
+      "enable_thinking",
+      "formal_performance",
+      "formal_quality",
+      "enforce_eager",
+      "completion",
+      "formal_token_artifact",
+      "performance_round",
+      "absolute_stop_utc"
+    ]
+  },
+  "regression_percent": {
+    "weighted_tpot_ms": 8.61014335325121,
+    "ttft_p95_ms": 15.340592173751055,
+    "tpot_p95_ms": 10.88542657892868
+  },
+  "limitations": [
+    "One round only, not3round or12matrix",
+    "No newfullquality/lifecycle/29Skill acceptance",
+    "Do not pool withR15 oroldHYPIC",
+    "Rootcause not attributed bytimings; bound actualintegrated prefill/decode profile next"
+  ],
+  "release_note": "Initial0bff strictbind EADDRINUSE preserved;0c03 recheck exit0 with exactcontainer absence, physicalempty and strictbindfree; no gateweakening.",
+  "next": "Integrated bounded profiler attribution, not unchanged matrix expansion"
+}

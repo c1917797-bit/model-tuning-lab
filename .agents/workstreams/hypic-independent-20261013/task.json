@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R16-G1-attempt3-live-after-R4-acceptance",
+  "execution_state": "R16-first-matched-pair-negative-needs-attribution",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "OwnedG1attempt3 controller0bd4 running; fresh13:01:47UTC empty0-3/ports/source147 admission; continuousguard/exactcleanup."
+    "state": "Noownedcontroller/NPUjob; exact0bd4 terminal and0c03 owncontainer absence/physical0-3empty/strictportfree verified. Futureactions fresh admission."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll exactma0bd4/rawroot; terminal independent audit_r16_performance.py --contract FORMAL_R16_20261016_G1_R1_ATTEMPT3_CONTRACT.json --live-release. Do not restart while live/unclear or edit147boundfiles. Pair with existingR16G3 only after validterminal; negative screen means diagnose not blindlyexpand.",
+  "next_action": "Bound real integrated prefill/decode attribution. Check actualcaller/callcounts for native_decode_backend repeated sourceSHA, privateclone/packing/finitechecks, modelrow sync; hypotheses only until measured. Re-prove pinnedcontainer profiler inventory before newbounded0-3capture. Do not run unchanged fullmatrix/fullquality/lifecycle. Preserve negativepair and oldroots.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,7 +215,7 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "RUNNING exactcontroller0bd4; no restart while live/unclear",
+    "state": "TERMINAL exact0bd4 exit0;40responses/437clean/source147;0c03 live-releasePASS after0bff strictbind transientfailure",
     "operation": "exec-0000000000000bd4",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
@@ -223,7 +223,8 @@
     "raw_root": "/cache/cch/hypic-independent-20261013/formal-r16-20261016-g1-r1-attempt3",
     "checkpoint": "f7422ca2510341a5a2423aec5de713f82fd0020a",
     "admission_operation": "exec-0000000000000bd3",
-    "admission_utc": "2026-10-16T13:01:47.400853+00:00"
+    "admission_utc": "2026-10-16T13:01:47.400853+00:00",
+    "terminal_report": "FORMAL_R16_20261016_FIRST_PAIR_DECISION.json"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -265,15 +266,16 @@
     "full_quality": false
   },
   "current_r16_matrix": {
-    "valid": 1,
+    "valid": 2,
     "total": 12,
     "valid_phases": [
-      "G3/R1"
+      "G3/R1",
+      "G1/R1 attempt3"
     ],
-    "running": "G1/R1 attempt3 exact0bd4",
-    "next": "same-source fresh baseline replacement pending separately frozen contract/root; no pairedgain",
-    "remaining_not_started": 11,
-    "report": "FORMAL_R16_20261016_G3_R1_TERMINAL.json"
+    "running": null,
+    "next": "Negative firstscreen; do not expand same R16 unchanged. Attribute integrated prefill/decode overhead then one bounded material treatment.",
+    "remaining_not_started": 10,
+    "report": "FORMAL_R16_20261016_FIRST_PAIR_DECISION.json"
   },
   "catalog_canary": {
     "state": "R4 bounded17 independently accepted; not fullquality/speed/lifecycle",
@@ -331,5 +333,5 @@
     "report": "QUALITY_STAGE_SINK_REPAIR_HOST_READINESS_20261016.json",
     "new_loader_sha256": "bc49867c07d9b7f0e450ee927992b638b97ce051bd80632e55846575aea7a73e"
   },
-  "quality_bindings_state": "Oldcatalog159/fullquality163 historical/stale after sinkrepair;mustfreeze new manifest/contracts/root beforelaunch. Performance147/lifecycle156/delivery164 unchanged."
+  "quality_bindings_state": "Prospective R2fullquality163 sourcebindings fixed/static0bdbPASS; oldR1 historical. No fullquality device acceptance; performancegate unchanged."
 }

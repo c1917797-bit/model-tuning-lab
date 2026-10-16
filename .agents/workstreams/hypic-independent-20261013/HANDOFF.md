@@ -1,3 +1,18 @@
+# LATEST R16 FIRST MATCHED PAIR NEGATIVE — no owned livejob
+
+G1exact0bd4 terminalexit0/full40/437clean/source147.0bff firstliveaudit strictbind
+EADDRINUSE retained;0c03 recheckexit0 exactCIDabsent/physicalempty/strict8233free.
+G1 TPOT285.688053ms/TTFTP95349761.565540ms vs G3 TPOT310.286204ms/
+TTFTP95403417.060890ms: regress8.610%/15.341%.Same147maps/protocol fromoriginal
+publishedGit verified. Matrix2/12;not optimization accepted/not paper rejected.
+FORMAL_R16_20261016_FIRST_PAIR_DECISION.json preserves audits/hashes/limits.
+Do not expand unchangedmatrix. Next actualintegrated prefill/decode attribution:
+native_decode_backend repeated sourceSHA/privateclones/packing and modelrow sync
+are SOURCEHYPOTHESES only, no measured rootcause. Reprove actualcaller/callcounts,
+pinnedcontainer profiler inventory/criticalpath before one materialtreatment.
+ma/mb/mc brieflymissing;ma restored/directstatus proven. No blindoldpeerrestart.
+FullqualityR2prospective/noactual381;deadlineOct17T06:48:09Z unchanged.
+
 # LATEST prospective fullquality R2 bindings repaired HOSTONLY
 
 QUALITY_COMPACT_MANIFEST_R16_FULL_R2 + BASELINE/HYPIC_R2_CONTRACTs now bind
