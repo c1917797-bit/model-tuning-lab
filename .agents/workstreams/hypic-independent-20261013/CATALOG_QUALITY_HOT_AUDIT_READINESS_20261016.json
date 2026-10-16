@@ -1,0 +1,41 @@
+{
+  "schema": "hypic-catalog-hot-audit-readiness/v1",
+  "focused": {
+    "operation": "exec-0000000000000a36",
+    "tests": 14,
+    "exit": 0,
+    "includes": "synthetic381-response cohort and missing/stale/evicted/wrong-generation/segment/step/source/PID/layer/pruning rejection"
+  },
+  "full": {
+    "operation": "exec-0000000000000a3b",
+    "tests": 624,
+    "exit": 0
+  },
+  "real_replay": {
+    "operation": "exec-0000000000000a39",
+    "report": {
+      "accepted_catalog_hot_coverage": true,
+      "denominator": 2,
+      "covered_runtime_ids": [
+        "cmpl-ace28ec2efa41b7f-0-89bbbe34",
+        "cmpl-b01b2fafb3e80532-0-8a13961b"
+      ],
+      "worker_pids": {
+        "0": 60,
+        "1": 61,
+        "2": 62,
+        "3": 63
+      },
+      "generation_links": 512,
+      "evictions_observed": 0,
+      "scope": "catalog segment/generation/same-step four-rank48/16 model pruning only; transport/scoring/physical/release separate"
+    },
+    "scope": "Prior immutable single-segment two-request R16 NPU evidence only; zero observed evictions; not actual multi-catalog or381quality"
+  },
+  "next": [
+    "bounded real multiple-segment capacity/eviction/rebuild workload and controller mode",
+    "full quality terminal wrapper joining381 sample/repetition/score/response/source/physical/release plus catalog hot proof"
+  ],
+  "new_device_run": false,
+  "full_goal_accepted": false
+}

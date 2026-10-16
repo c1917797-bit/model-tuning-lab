@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Catalog quality hot auditor added unbound/newfile: exact segment->published pool
+generation->non-evicted live material->private same-step4rank48/16->actual model prune.
+14controls0a36/624CPU0a3bPASS. Actual prior2request R16 replay0a39PASS512links,
+zeroevictions/singleB only; NOT real multi-catalog or381quality. CATALOG_QUALITY_HOT_AUDIT_READINESS_20261016.json.
+Current0a20 full40 stilllive;0a3e journal counts4warmup+14measured,325isolation/no
+terminal then. Never restart or edit147boundfiles. Next bounded catalog workload and
+full-quality terminal association remain missing; existing381 executor unchanged.
+
 0a2f09:03:20UTC liveR16G3 exactCIDa7f2ef... owner host3620211-14 -> inner59-62 ->
 physical0-3, foreignempty. Saved live namespace receipt; not terminal acceptance.
 Quality0a30 fresh frozen127/126 inputs: publiclength10160-16384; maxinput39642.
