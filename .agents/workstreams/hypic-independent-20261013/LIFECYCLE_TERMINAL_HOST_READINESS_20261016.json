@@ -1,0 +1,21 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "audit_lifecycle_terminal.py",
+  "focused": {
+    "operation": "exec-0000000000000b02",
+    "tests": 15,
+    "exit": 0
+  },
+  "regression": {
+    "operation": "exec-0000000000000b03",
+    "tests": 785,
+    "exit": 0
+  },
+  "retained_failure": {
+    "operation": "exec-0000000000000b01",
+    "error": "missing worker evidence hit missing manifest first; duplicate imported test classes were discovered",
+    "repair": "check four worker paths first; module-only fixture imports"
+  },
+  "scope": "Pure synthetic lifecycle terminal and disabled/uninstalled directory composition only. Enabled positive directory composition, real lifecycle and three-state audit still missing",
+  "next": "Freeze and test full enabled directory/composite lifecycle, then actual stages after progression gates. Current next device is R2 catalog M3, not lifecycle."
+}
