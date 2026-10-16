@@ -1,0 +1,193 @@
+{
+  "schema": "hypic-r16-full40-terminal/v1",
+  "controller": "exec-0000000000000a20",
+  "controller_exit": 0,
+  "contract": "FORMAL_R16_20261016_G3_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-r16-20261016-g3-r1",
+  "checkpoint": "eab2de9f1365a350fcabe2abfbd4e4689a33f85c",
+  "first_audit": {
+    "operation": "exec-0000000000000a54",
+    "exit": 1,
+    "reason": "strict port8233 bind EADDRINUSE; do not attribute cause without evidence"
+  },
+  "read_only_release_change": {
+    "operation": "exec-0000000000000a55",
+    "inspect_exit": 1,
+    "inspect_stdout": "[]\n",
+    "inspect_stderr": "Error: No such object: a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n",
+    "physical0_3": [],
+    "utc": "2026-10-16T09:26:06.974122+00:00",
+    "tcp": "",
+    "listeners": "",
+    "strict_bind_free": true
+  },
+  "final_audit": {
+    "operation": "exec-0000000000000a57",
+    "exit": 0,
+    "report": {
+      "terminal_unit_valid": true,
+      "timing": {
+        "requests": 40,
+        "unique_ids": 40,
+        "weighted_tpot_ms": 310.2862041384285,
+        "ttft_p95_ms": 403417.0608900022,
+        "tpot_p95_ms": 331.38974004882016
+      },
+      "isolation_samples": 477,
+      "source_bindings": 147,
+      "raw_sha256": {
+        "result.json": "5cce5aa42e441b86204ecd4b7358cf5cf713295fa69595db2a7c973b96b666b8",
+        "events.jsonl": "edf31255b35c14dd702157a153a3220f15f33b868a503dbe1cce9335e44b9811",
+        "performance-unit.json": "a2bf7aec4bca682b2708732aba5047d1425e3984316cd14ce7cceab72ef6ccc5",
+        "release.json": "4452223174851404881a51733a1252f16614f510e18240cfbe5204d27d1146df"
+      },
+      "scope": "one successor full40 timed phase; matched pair/three rounds/full quality/lifecycle remain separate",
+      "packed": {
+        "packed_performance_receipts_verified": true,
+        "workers": {
+          "0": 59,
+          "1": 60,
+          "2": 61,
+          "3": 62
+        },
+        "requests": 40,
+        "packed_groups": 7104,
+        "shadow_requests": 0,
+        "multi_hot_shadow_layers": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 0
+        },
+        "scope": "timed packed call-stage/private finite precommit receipts; no numerical shadow equivalence or task quality claim"
+      },
+      "physical": {
+        "ranks": {
+          "0": {
+            "inner_pid": 59,
+            "host_pid": 3620211,
+            "physical_npu": 0
+          },
+          "1": {
+            "inner_pid": 60,
+            "host_pid": 3620212,
+            "physical_npu": 1
+          },
+          "2": {
+            "inner_pid": 61,
+            "host_pid": 3620213,
+            "physical_npu": 2
+          },
+          "3": {
+            "inner_pid": 62,
+            "host_pid": 3620214,
+            "physical_npu": 3
+          }
+        },
+        "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+      },
+      "hot": {
+        "accepted_hot_coverage": true,
+        "denominator": 40,
+        "covered": [
+          "cmpl-a4c1da54184390c3",
+          "cmpl-a9d06e18bb54f86d",
+          "cmpl-a4f44f8a9385606d",
+          "cmpl-928196c710b02f3b",
+          "cmpl-ac33a7e73f45802f",
+          "cmpl-b8bf1ea9cf8a711f",
+          "cmpl-9952ce2bebded9c9",
+          "cmpl-b31c4ff0d8519e3d",
+          "cmpl-9ff4784d3588ae58",
+          "cmpl-8bd8b211b929c6ae",
+          "cmpl-9ad73ea61802c55f",
+          "cmpl-a05f53d9a9c45496",
+          "cmpl-8dcc54cbc12be6e2",
+          "cmpl-8b46996a79a4e284",
+          "cmpl-93a8f3e3dca5486e",
+          "cmpl-bbf715f5dd56a000",
+          "cmpl-aa18e0b87b7a5fd4",
+          "cmpl-8d4a023bce0d5b21",
+          "cmpl-b3ec8be511bd1c72",
+          "cmpl-a2a2564fe01eaa19",
+          "cmpl-b60611a506677518",
+          "cmpl-944cbd8c36650008",
+          "cmpl-85bbb893e8742b26",
+          "cmpl-97c625bea0d182c5",
+          "cmpl-867606f5911eddb5",
+          "cmpl-898ddf8ae20f8d97",
+          "cmpl-9914ca07b4383ae5",
+          "cmpl-ac8614a3a34033e4",
+          "cmpl-b24c77dc773cf13b",
+          "cmpl-a200e5102f69b9f4",
+          "cmpl-82f68c119b04d16c",
+          "cmpl-8c47d5b0e5a4ea46",
+          "cmpl-8e82a1a79045e4b0",
+          "cmpl-814571dfe3265132",
+          "cmpl-88b5fdec86c0b74c",
+          "cmpl-b685b418b4a0b37a",
+          "cmpl-9cc2efe33f4779ce",
+          "cmpl-98137f337806337f",
+          "cmpl-8525351b544bd4b2",
+          "cmpl-ae850589f12eda85"
+        ],
+        "missing": [],
+        "worker_pids": {
+          "0": 59,
+          "1": 60,
+          "2": 61,
+          "3": 62
+        },
+        "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+      },
+      "request_map": {
+        "cmpl-a4c1da54184390c3": "cmpl-a4c1da54184390c3-0-9d5058c7",
+        "cmpl-a9d06e18bb54f86d": "cmpl-a9d06e18bb54f86d-0-968f286e",
+        "cmpl-a4f44f8a9385606d": "cmpl-a4f44f8a9385606d-0-bf32997a",
+        "cmpl-928196c710b02f3b": "cmpl-928196c710b02f3b-0-ad20a89d",
+        "cmpl-ac33a7e73f45802f": "cmpl-ac33a7e73f45802f-0-83edbf13",
+        "cmpl-b8bf1ea9cf8a711f": "cmpl-b8bf1ea9cf8a711f-0-846c2216",
+        "cmpl-9952ce2bebded9c9": "cmpl-9952ce2bebded9c9-0-b02ac7be",
+        "cmpl-b31c4ff0d8519e3d": "cmpl-b31c4ff0d8519e3d-0-bd2a628f",
+        "cmpl-9ff4784d3588ae58": "cmpl-9ff4784d3588ae58-0-bf5bebfb",
+        "cmpl-8bd8b211b929c6ae": "cmpl-8bd8b211b929c6ae-0-acb053dd",
+        "cmpl-9ad73ea61802c55f": "cmpl-9ad73ea61802c55f-0-963802dc",
+        "cmpl-a05f53d9a9c45496": "cmpl-a05f53d9a9c45496-0-a0dc8394",
+        "cmpl-8dcc54cbc12be6e2": "cmpl-8dcc54cbc12be6e2-0-9fe4272d",
+        "cmpl-8b46996a79a4e284": "cmpl-8b46996a79a4e284-0-8ca765a0",
+        "cmpl-93a8f3e3dca5486e": "cmpl-93a8f3e3dca5486e-0-a0da54e5",
+        "cmpl-bbf715f5dd56a000": "cmpl-bbf715f5dd56a000-0-8457effc",
+        "cmpl-aa18e0b87b7a5fd4": "cmpl-aa18e0b87b7a5fd4-0-be9d0344",
+        "cmpl-8d4a023bce0d5b21": "cmpl-8d4a023bce0d5b21-0-ad91af48",
+        "cmpl-b3ec8be511bd1c72": "cmpl-b3ec8be511bd1c72-0-9e9ec334",
+        "cmpl-a2a2564fe01eaa19": "cmpl-a2a2564fe01eaa19-0-a9874b85",
+        "cmpl-b60611a506677518": "cmpl-b60611a506677518-0-820427c1",
+        "cmpl-944cbd8c36650008": "cmpl-944cbd8c36650008-0-9268be92",
+        "cmpl-85bbb893e8742b26": "cmpl-85bbb893e8742b26-0-b57af7fb",
+        "cmpl-97c625bea0d182c5": "cmpl-97c625bea0d182c5-0-b2302108",
+        "cmpl-867606f5911eddb5": "cmpl-867606f5911eddb5-0-a7890a5e",
+        "cmpl-898ddf8ae20f8d97": "cmpl-898ddf8ae20f8d97-0-a52aa4dd",
+        "cmpl-9914ca07b4383ae5": "cmpl-9914ca07b4383ae5-0-a55a6db5",
+        "cmpl-ac8614a3a34033e4": "cmpl-ac8614a3a34033e4-0-b2c2e3e2",
+        "cmpl-b24c77dc773cf13b": "cmpl-b24c77dc773cf13b-0-90cb36f4",
+        "cmpl-a200e5102f69b9f4": "cmpl-a200e5102f69b9f4-0-a62b71d3",
+        "cmpl-82f68c119b04d16c": "cmpl-82f68c119b04d16c-0-b437f090",
+        "cmpl-8c47d5b0e5a4ea46": "cmpl-8c47d5b0e5a4ea46-0-948fc51f",
+        "cmpl-8e82a1a79045e4b0": "cmpl-8e82a1a79045e4b0-0-a9b80af5",
+        "cmpl-814571dfe3265132": "cmpl-814571dfe3265132-0-b2de9094",
+        "cmpl-88b5fdec86c0b74c": "cmpl-88b5fdec86c0b74c-0-89fb2b01",
+        "cmpl-b685b418b4a0b37a": "cmpl-b685b418b4a0b37a-0-9579fa17",
+        "cmpl-9cc2efe33f4779ce": "cmpl-9cc2efe33f4779ce-0-a4e4c9b6",
+        "cmpl-98137f337806337f": "cmpl-98137f337806337f-0-8c910fa9",
+        "cmpl-8525351b544bd4b2": "cmpl-8525351b544bd4b2-0-850418ec",
+        "cmpl-ae850589f12eda85": "cmpl-ae850589f12eda85-0-af33385d"
+      },
+      "live_release_verified": true,
+      "snapshot_timed_policy_verified": true
+    }
+  },
+  "optimization_accepted": false,
+  "quality_accepted": false,
+  "full_goal_accepted": false,
+  "next": "Fresh same-source R16 G1/R1; no R15 timing reuse or speedup claim before matched pair"
+}

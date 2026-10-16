@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+LATEST R16G3/R1 exact0a20 TERMINAL exit0:40/40,477clean isolation,147sources,
+40/40 fourrank48C1/16C2,7104packedgroups,probe0 verified. Firstaudit0a54exit1
+onlystrict8233bindEADDRINUSE retained;0a55 later CIDabsent/physicalempty/noTCP/no
+listener/strictbindPASS, causeunproven. Final fullaudit0a57exit0 with live release.
+TPOT310.2862ms,TTFTP95403417.06ms; one arm ONLY, no paired speedup claim.
+FORMAL_R16_20261016_G3_R1_TERMINAL.json. Matrix1/12; no liveownedjob currently.
+Nextfreshadmission same-source FORMAL_R16_20261016_G1_R1_CONTRACT.json, then
+audit_r16_performance.py --contract ... --live-release. No R15 timing reuse.
+
 CatalogCanary executor HOST ONLY implemented17private(8+8+actualnonready rebuild1),
 17unscoredproducers; originalfull381 executor unchanged.10controls0a4c/634CPU0a4fPASS.
 Frozen127input selection0a4e initialindices[48,0,2,3,4,5,7,8,10,11,12,14,16,17,20,21],
