@@ -1,0 +1,35 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "audit_lifecycle_startup_controls.py",
+  "regression": {
+    "operation": "exec-0000000000000aee",
+    "tests": 752,
+    "exit": 0
+  },
+  "focused": {
+    "operation": "exec-0000000000000aec",
+    "tests": 15,
+    "exit": 0,
+    "note": "Final strict namespace control included in full 752 regression"
+  },
+  "source_sha256": {
+    "audit_lifecycle_startup_controls.py": "f5903784c79118f7ca0338e78cd468623e7c8707d5d6ad4330bb70597b052aa8",
+    "test_audit_lifecycle_startup_controls.py": "5225d80e5db2a5a621f4b3299871498e99e2058114ceb4b48d934209305c6e94"
+  },
+  "scope": "Synthetic host controls only; no real lifecycle or NPU acceptance",
+  "features": [
+    "Independent exact four-worker physical/PID/namespace/cgroup join",
+    "Stage-specific disabled/enabled/uninstalled launch and worker controls",
+    "Loopback-only service; developer RPC remains disabled",
+    "Reject startup package/path residue or namespace drift"
+  ],
+  "remaining": [
+    "Freeze stage source-bound contracts and full independent terminal/composite audit",
+    "Actual disable/uninstall/restart semantics and exact release after progression gates"
+  ],
+  "resource_observer": {
+    "operation": "exec-0000000000000ae9",
+    "state": "running as of 11:08 UTC; readonly no allocation/reservation"
+  },
+  "deadline": "2026-10-17T06:48:09Z"
+}
