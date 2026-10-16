@@ -693,3 +693,68 @@ admission remains required. Prepared128/101 receivers cannot borrow a failed
 The user conditionally authorized one24h extension. Its separate workstream
 record is not activated: no new valid whole-model pair exists. Original clocks,
 performance/task gates and all failed evidence remain unchanged.
+
+## 2026-10-16 22:13 UTC: measured evidence cost and real-model source seams
+
+Actual130R1 completed all27 retained sidecar measurements with no row/audit
+errors in21.07076861s: hydration18.24487961s versus audit2.70203337s,
+53,904 application blob opens and2,505,448,800 application read bytes. These
+are application reads under uncontrolled filesystem cache, NOT physical disk
+traffic. Main-record64-step math/cumulative ledger cost is not included.
+Its parent FAILED because the complete final source/storage fence inherited
+the container cleanup90 alarm; independent quiescence does not relabel that
+parent. A successor separates cleanup from final verification inside the same
+original500-second total. The unexecuted133R1 also fixes a proved nested-meter
+reset/active-state error; inclusive parent and child timings must not be added.
+
+Actual101R7 passed94 of95 Linux same-image controls, with one missing-file
+error before NPU admission: INVERSE101R7.json existed on the preparer's machine
+but was absent from the declared source and delivery. Both source-byte audits
+and local95 tests had missed this implicit file. Preserve the failed owner
+and its stopped retained CPU container.101R8 adds the exact inverse to source,
+byte payload and RO mounts, then reconstructs and tests only declared files.
+AST own-read analysis catches this resolved dependency but lists seven unresolved
+dynamic read sites; it is NOT a general proof of every possible filesystem read.
+Genuine same-image95, IPC/EROFS and actual model gates are still required.
+
+A new explicitly typed16-to-nine-decode diagnostic edge may consume the actual
+40-row/63-sidecar local16 domain to expose real2K/C1 worker seams. It is NOT a
+replacement160 certificate, a promotion of the old strict FAIL, or production/
+performance/task admission. The original numerical consumer/arithmetic/thresholds
+remain unchanged; old106/122 consumers must reject this new diagnostic source.
+
+Actual BOLE131 passed34 same-image controls, real native parser/MTP metadata,
+and all four tiny NPU canaries. Real workers then rejected callable source
+identity at worker_entry.discover -> code_source(obj.forward,qwen_next_ref),
+before HTTP/tree execution. Preserve both native stderr and the parent's generic
+startup failure. The specific callable ownership/wrapper cause is not yet proved;
+inspect the actual installed method/decorator chain, never disable its identity
+gate or blame the tree algorithm. All81 delivered files were verified before
+and after the run. Both exact owned CIDs are stopped/Pid0/noExec/noOOM;
+exit137 from stopping retained init is not an OOM or numerical verdict.
+
+The next source-bound actual model diagnostic is101R8. BOLE requires a narrow
+new source repair;133R1 and127R4 remain preparation with explicit missing
+dependencies/budget evidence. No new model performance or task-quality result
+exists, no30-minute utilization percentage is inferred, and the one conditional
+24h extension remains unused. Exact source/results, CURRENT/NEXT/BACKUP and
+source-only recovery archive are in
+MODEL_DIAGNOSTICS_AND_DELIVERY_CLOSURE_20261016_2213UTC.json.
+
+The subsequent actual101R8 gate passed all95 Linux controls, genuine AF_UNIX,
+EROFS30 and four parser canaries, then FAILED before model construction in its
+new real isolated entry. trace_plugin could not import qwen36_deltalog_service:
+the parser probe had inserted the plugin path explicitly, while the actual
+entry relied on PYTHONPATH ignored by Python-I. Keep the failed187.470s owner
+and both released exact CIDs. Repair the source-pinned package bootstrap in
+that real fresh interpreter and its actual children, not the numerical gate
+or interpreter isolation. This repeats a known bootstrap lesson: test the
+actual aggregate entry-to-first-import edge, not an already prepared process.
+
+Readonly inspection of the immutable installed BOLE worker patch shows a real
+Qwen3NextAttention.forward replacement in patch_qwen3_5.py. A successor must
+bind that exact installed function and registration chain and record mismatch
+operands; a generic model source or arbitrary inspect.unwrap is not proof.
+The last two frontdoor failures are implementation defects, not evidence of
+paper-wide performance impossibility. No current NPU job remains at this
+checkpoint; two independent narrow repairs are being prepared.

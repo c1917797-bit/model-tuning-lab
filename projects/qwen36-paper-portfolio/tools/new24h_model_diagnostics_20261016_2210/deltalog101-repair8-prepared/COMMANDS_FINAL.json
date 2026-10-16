@@ -1,0 +1,72 @@
+{
+  "actual160_qualification": false,
+  "actual16_required": true,
+  "aggregate_actual_I": {
+    "args": [
+      "-I",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001",
+      "-p",
+      "test_*.py"
+    ],
+    "command": "/usr/local/python3.12.13/bin/python3",
+    "requires": "MAIN admitted sameimage Devices[]"
+  },
+  "cleanup_seconds": 270,
+  "commands": {
+    "bind": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/bind_source.py",
+      "--execute",
+      "--template-sha256",
+      "92c5bc1be67872b19c0734e755b4c937e9b23d0626e4e8dc1e1ba8957a6b3f8e",
+      "--bridge-source-ref",
+      "{\"bytes\":67429,\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_MANIFEST.json\",\"sha256\":\"871c8e32831ee3eebacd43a084e4416bb14d6d06cd9f5ee08017ba459f287cd8\"}",
+      "--bridge-owner-ref",
+      "{\"bytes\":1667,\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json\",\"sha256\":\"7b10472808da9c409dca97e4f36ff577cf4d090db95c90b556d0bf680f4d25fe\"}",
+      "--component-cpu-owner-ref",
+      "{\"bytes\":1426,\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json\",\"sha256\":\"1ea2eeff549bb8fb036f0b313e57503a87896302be4836f68dba5641e0e4e35f\"}"
+    ],
+    "execute": [
+      "/usr/bin/env",
+      "MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/host_ticket.py",
+      "--execute",
+      "--source-ref",
+      {
+        "required_actual_ref3": "actual101R8 bound source"
+      }
+    ],
+    "sourceaudit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/host_ticket.py",
+      "--source-audit",
+      "--source-ref",
+      {
+        "required_actual_ref3": "actual101R8 bound source"
+      }
+    ]
+  },
+  "output": "/opt/host/vnf/austinov/run-deltalog-MODEL101R8-main-NEW24H_MODEL101R8_001",
+  "schema": "deltalog.short16-model-diagnostic-commands/v101-repair7",
+  "software_cases": 95,
+  "template": {
+    "bytes": 213056,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/SOURCE_TEMPLATE.json",
+    "sha256": "92c5bc1be67872b19c0734e755b4c937e9b23d0626e4e8dc1e1ba8957a6b3f8e"
+  },
+  "whole_seconds": 2700
+}

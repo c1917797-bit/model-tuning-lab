@@ -1,0 +1,2136 @@
+{
+  "schema": "ascend.source-recovery-archive/v1",
+  "root": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_model_diagnostics_20261016_2210",
+  "items": [
+    {
+      "dest": "deltalog101-repair7-failed/COMMANDS.json",
+      "source": {
+        "bytes": 2955,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/COMMANDS.json",
+        "sha256": "84fb9957a55dded0a4754565e2ac45957bd529ee955ea3f5286c8daf68a17034"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/HANDOFF.md",
+      "source": {
+        "bytes": 2075,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/HANDOFF.md",
+        "sha256": "1fafa85a87b33831afaf01621001d0a58ddef167c861b4a6fb8d9f4ec5804dbb"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/HANDOFF058.md",
+      "source": {
+        "bytes": 1810,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/HANDOFF058.md",
+        "sha256": "86aa5473921b0a9ce379780312d13d8f57fe3a80dac6be751c1341cae5c2a13f"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/HANDOFF071.md",
+      "source": {
+        "bytes": 1862,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/HANDOFF071.md",
+        "sha256": "f0b34c18aab5c25d840e5f346e814c99fd56f1830b5222f340d8ea4249ed786c"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/HANDOFF101.md",
+      "source": {
+        "bytes": 2826,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/HANDOFF101.md",
+        "sha256": "19ad519bfa06182b42d2b8c00fb538151e71d6e9b8953d429779c55445fef342"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/HANDOFF101R7.md",
+      "source": {
+        "bytes": 3156,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/HANDOFF101R7.md",
+        "sha256": "912892acc314600d0e8fd518ab9df08d1fce043da894d134abd8c7bc2fc928d5"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/RESOURCE_PREPARATION.json",
+      "source": {
+        "bytes": 502,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/RESOURCE_PREPARATION.json",
+        "sha256": "4b648ab9630ef56cc7cffc1a21d711985758d779eec377cdcb15f0c6cc20ab86"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/RESOURCE_WIRING.md",
+      "source": {
+        "bytes": 2288,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/RESOURCE_WIRING.md",
+        "sha256": "8ad58c0d31abb3b1a457b616dc786e747d542333c7d57eb1f6d03438810a59e1"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/WIP_NEXT_EDGE.md",
+      "source": {
+        "bytes": 2175,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/WIP_NEXT_EDGE.md",
+        "sha256": "fbbd83a353b8174391afa3ea820d61f5968f9ec8177dc11580580d02f26d52f8"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/actual_loader/safety_host.py",
+      "source": {
+        "bytes": 22569,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/actual_loader/safety_host.py",
+        "sha256": "8c83e08318b530c4d022b91bbacd34b12121b3380e1a14d32262c9a3875f6fa7"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/bind_source.py",
+      "source": {
+        "bytes": 4247,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/bind_source.py",
+        "sha256": "0dad2932dbe3e010fc98419204654013723c87dd5c703928ae5dbdc9a5179619"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/client.py",
+      "source": {
+        "bytes": 3116,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/client.py",
+        "sha256": "ab285b2e31c6bdcd88f54590943170df1cc32c50b77b355b8e84b4df89bb0793"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/consume.py",
+      "source": {
+        "bytes": 7540,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/consume.py",
+        "sha256": "ff7aff2d81923361dc2049066b581ca47c051dc9f0918ca03b346bd3a96c7f17"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/consume_trajectory.py",
+      "source": {
+        "bytes": 2577,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/consume_trajectory.py",
+        "sha256": "0477a3fe95f826b1a9b2b011f81234302be66166c2a7ae4f3b978abd846c3f94"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/deltalog_service025_trace-0.0.25.dist-info/METADATA",
+      "source": {
+        "bytes": 70,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/deltalog_service025_trace-0.0.25.dist-info/METADATA",
+        "sha256": "6d316a0174cbc859517c8ea332d9613773c90d34b6f9a483592c78018ccb8a04"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/deltalog_service025_trace-0.0.25.dist-info/entry_points.txt",
+      "source": {
+        "bytes": 73,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/deltalog_service025_trace-0.0.25.dist-info/entry_points.txt",
+        "sha256": "6e001b5797b3f5c6457c650dd9be4574a4b07a61a91c8589baca40a07f8148d2"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/dependencies/completion_serving_v023.py",
+      "source": {
+        "bytes": 27822,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/dependencies/completion_serving_v023.py",
+        "sha256": "c67bff55fa29c5f89000c3afdc9c7c66305612b13a8a1d85976e5872cee086d7"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/dependencies/direct_round013.py",
+      "source": {
+        "bytes": 3378,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/dependencies/direct_round013.py",
+        "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/dependencies/engine_serving_v023.py",
+      "source": {
+        "bytes": 17103,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/dependencies/engine_serving_v023.py",
+        "sha256": "38b242a091b2b4502a58b7d9b8a274ac17611b383fecc30e9b714f5da9c8dc75"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/dependencies/identity_capture.py",
+      "source": {
+        "bytes": 3681,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/dependencies/identity_capture.py",
+        "sha256": "1cfb4c995917c5d89868102e6bd8b4c6d68fe1f59881186be6e7831ff0ccaec5"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/dependencies/identity_oracle.py",
+      "source": {
+        "bytes": 9305,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/dependencies/identity_oracle.py",
+        "sha256": "f288191487869fe752fea8713742bff2e6245c30d9ed790243b8868520f0e333"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/dependencies/input_processor_v023.py",
+      "source": {
+        "bytes": 20815,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/dependencies/input_processor_v023.py",
+        "sha256": "c5673988c0f7cfec268220e3f044e718702c015a4f236c020937cfd40a793f15"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/dependencies/numeric_oracle.py",
+      "source": {
+        "bytes": 3407,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/dependencies/numeric_oracle.py",
+        "sha256": "cd395a05dbfcb21f1104d617afb1fab6f80374016585e9096ca24d85c2cae97a"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/dependencies/old_test_domain_admission.py",
+      "source": {
+        "bytes": 11258,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/dependencies/old_test_domain_admission.py",
+        "sha256": "12613eabb44c7997c2c0d31357bf10221d96f45e591b2ca92664dd372291f736"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/dependencies/original_split_reader101.py",
+      "source": {
+        "bytes": 7269,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/dependencies/original_split_reader101.py",
+        "sha256": "accf5eebae971e4a0a961e3dceae7550d4f816647153c955deb368e8ad0b4397"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/dependencies/runtime023_baseline.py",
+      "source": {
+        "bytes": 8832,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/dependencies/runtime023_baseline.py",
+        "sha256": "096c8f9abed09328c01e069403e8e5511765b0c0c315b665e58dd8fb9e3c8cc3"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/direct_round.py",
+      "source": {
+        "bytes": 3378,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/direct_round.py",
+        "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/domain_qualification.py",
+      "source": {
+        "bytes": 1438,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/domain_qualification.py",
+        "sha256": "f465cdefc931ef2267ee5c986b36498dc7cd5c25b9805cfd37a3da1f46589aed"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/entry.py",
+      "source": {
+        "bytes": 3537,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/entry.py",
+        "sha256": "2f52126d20a585d97b178bb3869441f384d9308d8d480239c09d5c90f0ea7a0e"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/external_output_policy.py",
+      "source": {
+        "bytes": 7175,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/external_output_policy.py",
+        "sha256": "f85f745cb9362d69e70cfd35a9c894d97fc7069297d3694c8b8c57107126191f"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/finalize_resource.py",
+      "source": {
+        "bytes": 1374,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/finalize_resource.py",
+        "sha256": "76d47bdf05698fea18c5abb741404f0006e39789670eb9cb60cba7ea3f46c761"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/host_ticket.py",
+      "source": {
+        "bytes": 3951,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/host_ticket.py",
+        "sha256": "e6e1ca6d73cbed8db53f861dd89aec33c04df7caf23c292ea7b9934fa07ca4f8"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/identity_events.py",
+      "source": {
+        "bytes": 4581,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/identity_events.py",
+        "sha256": "8f6869aa17e0a41a3c5024000758f1bbb01bc65f8616a8fee94c222a7d6e0db7"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/ipc_controls.py",
+      "source": {
+        "bytes": 2962,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/ipc_controls.py",
+        "sha256": "6f815ee70eee276f2a5c8f6ffd7d3ba82e754eb9aac55ee7d5408100241037a2"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/ipc_receipt.py",
+      "source": {
+        "bytes": 1252,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/ipc_receipt.py",
+        "sha256": "77f0411b6905e5b89f4d7cffe0a76d4c33c392f07eae9ef7c9d37d8c6f7186fd"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/owner_overlay.py",
+      "source": {
+        "bytes": 5027,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/owner_overlay.py",
+        "sha256": "8760eda37daf7ddb7006d3393d8aed57f7d312fcd35849a9ef711dd9eae4a55a"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/packet_contract.py",
+      "source": {
+        "bytes": 428,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/packet_contract.py",
+        "sha256": "d81f93856b28c01ca8278d63a923066272b93e9beba0e2c7c51481fd20913ef9"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/packet_predecessor.py",
+      "source": {
+        "bytes": 46895,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/packet_predecessor.py",
+        "sha256": "f22c5d6b57bab0d57140c6d3d2b7f10b4e64bd64cb6b918c5e8dec5a3d218b14"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/SOURCE_TEMPLATE.json",
+      "source": {
+        "bytes": 60604,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/SOURCE_TEMPLATE.json",
+        "sha256": "2210ed41b93c4c212b95240d0f181cb9dd730c8fdf4ec8058f7c8e707a6a0f45"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/qwen36_deltalog_service-0.0.23.dist-info/METADATA",
+      "source": {
+        "bytes": 68,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service-0.0.23.dist-info/METADATA",
+        "sha256": "856c754964c8de01019aec547f1845ab767aa4c8b24082277417ed736343de21"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/qwen36_deltalog_service-0.0.23.dist-info/entry_points.txt",
+      "source": {
+        "bytes": 85,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service-0.0.23.dist-info/entry_points.txt",
+        "sha256": "33a1359e96a5107181b97794f556d1a5f7c24134bd32616e4061cd8902b5d9d4"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/qwen36_deltalog_service/__init__.py",
+      "source": {
+        "bytes": 95,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/__init__.py",
+        "sha256": "91b02f25a6773cda37a89105faa28488b80f1683f93761752d237d1ae589e805"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/qwen36_deltalog_service/admission.py",
+      "source": {
+        "bytes": 3281,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/admission.py",
+        "sha256": "8f1afde20703d52b5eca487baf002cb6905928abacf9e1e00196fda82a0d4f15"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/qwen36_deltalog_service/binding.py",
+      "source": {
+        "bytes": 2845,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/binding.py",
+        "sha256": "8eab3843ccf2edfddce36ff21868bdc55148e6770db59d3028c5fdda9832c1e8"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/qwen36_deltalog_service/build_meta051.py",
+      "source": {
+        "bytes": 12326,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/build_meta051.py",
+        "sha256": "c5b3a2e821dfa0ef18e843fa9cb9a2222719d9c88f8d8902c40be61eb51d69e6"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/qwen36_deltalog_service/builder_mirror.py",
+      "source": {
+        "bytes": 15543,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/builder_mirror.py",
+        "sha256": "32dedd1fae3f93e6dd8a9b6a3d23229448b30b022b9c3182b931e5f7c1f76677"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/qwen36_deltalog_service/contract.py",
+      "source": {
+        "bytes": 1280,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/contract.py",
+        "sha256": "d0a9709593a72413cb08a073bbf2248ce59424aee534ec85042b5e525765ad48"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/qwen36_deltalog_service/cpu_metadata.py",
+      "source": {
+        "bytes": 1918,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/cpu_metadata.py",
+        "sha256": "71db61ff77c055bdac6259a6d57b0f6f7a7dbea411b2d933dac22261a36ea120"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/qwen36_deltalog_service/integration.py",
+      "source": {
+        "bytes": 3108,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/integration.py",
+        "sha256": "ea3cf3a0ae961a52945351778de51ea24169f6fc4f35bff5bb7c1b824bd4f3bf"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/qwen36_deltalog_service/layout_controls.py",
+      "source": {
+        "bytes": 2671,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/layout_controls.py",
+        "sha256": "a8a372e95b74d10c675475a1a3b365fc0019d4b58c8ced4bd2c1e84178506579"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/qwen36_deltalog_service/primitives.py",
+      "source": {
+        "bytes": 11828,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/primitives.py",
+        "sha256": "1b9a2e53ce137f319ca5939be6e21fa293735edd363cdc37f7b438626e985470"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/qwen36_deltalog_service/runtime.py",
+      "source": {
+        "bytes": 9359,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/runtime.py",
+        "sha256": "785a9ae27c98178daa9e9a56071560cec3a2e717a41a968872311093db603316"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/qwen36_deltalog_service/runtime_helpers.py",
+      "source": {
+        "bytes": 9313,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/runtime_helpers.py",
+        "sha256": "913fa9514bc0509babaf81565ab46fa4b746967e7c0deb7d06849f4d42672465"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/qwen36_deltalog_service/split_qualification.py",
+      "source": {
+        "bytes": 8736,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/split_qualification.py",
+        "sha256": "7681e7e46e516afc5cca0e29968dff24aec27fc6f6fb3a5ce183275cd0c91900"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/qwen36_deltalog_service/transform.py",
+      "source": {
+        "bytes": 2683,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/transform.py",
+        "sha256": "b9230fde5a7a45db8fe69af9c1acc7104b7082da81c022a76f594c0c389a899f"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/precast.py",
+      "source": {
+        "bytes": 5831,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/precast.py",
+        "sha256": "4f1ca4d1243c90c663db2702010ecef8f76805a4259d107fb1be44648f35695d"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/prepare053.py",
+      "source": {
+        "bytes": 4658,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/prepare053.py",
+        "sha256": "1f586944afa2851e1c44d458b672a2e78983990735192d58f3a55355767343ba"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/probe.py",
+      "source": {
+        "bytes": 5793,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/probe.py",
+        "sha256": "cded953864b0189c83dbfa3f6b4238e99eac0359b8d3491fe6c4f1c9ae9e76f5"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/raw_codec.py",
+      "source": {
+        "bytes": 3592,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/raw_codec.py",
+        "sha256": "4eb6bb0d5488cd1dfc3f2cb6c0f063d11b83ce07dbf594010c1d7554d844cd0e"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/request_identity.py",
+      "source": {
+        "bytes": 2065,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/request_identity.py",
+        "sha256": "dd7fa44f39b97016a3c09c2fd7fb2822f8f431bc33dec08a325e003c69c1c2b4"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/run_owned.py",
+      "source": {
+        "bytes": 6912,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/run_owned.py",
+        "sha256": "6cf04dd0ccf490b58ca4c27a4f153391c3824bb53f808e48d8ddaac3a147c13e"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/sidecar_audit.py",
+      "source": {
+        "bytes": 2429,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/sidecar_audit.py",
+        "sha256": "7acf91b7901f8829afdae6fb48791607683ac969f222369f23bd93f5d4742d62"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/sidecar_capture.py",
+      "source": {
+        "bytes": 3500,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/sidecar_capture.py",
+        "sha256": "237617e6c90e9084a65349e439b0c17e5cfe3517d6722c588de99077d5a85c10"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/stage_resources.py",
+      "source": {
+        "bytes": 3553,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/stage_resources.py",
+        "sha256": "f86ae63589f3ed36c8df6c452a7b7bde0ae5c85a1067582c64852b10953a4ff2"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/tensor_consumer.py",
+      "source": {
+        "bytes": 13736,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/tensor_consumer.py",
+        "sha256": "08dd5b74dc2feefc2582658378cf934d298933f0fa61d511c53cd60c72b5fe0d"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/tensor_observer.py",
+      "source": {
+        "bytes": 7733,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/tensor_observer.py",
+        "sha256": "66c6a2c9f54ff3eff2e3854db698bd3797420ed9c170aefcec758a8b1d93f553"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_actual017_binding.py",
+      "source": {
+        "bytes": 4090,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_actual017_binding.py",
+        "sha256": "24b46650043a1d2540fe9f0d27b0d815525d35283a019bc1d95caea50dc3ffb1"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_assignment.py",
+      "source": {
+        "bytes": 3064,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_assignment.py",
+        "sha256": "4903d6470e8773e7b79bb25128fd84b4d5aefae81d650d5625e1fe00102181ee"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_direct_model_reference.py",
+      "source": {
+        "bytes": 4967,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_direct_model_reference.py",
+        "sha256": "7d6a23797190e2c668dedb0e2f8ba68503bb7646933b1f48cfc0bfc002b5e0f4"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_domain_admission.py",
+      "source": {
+        "bytes": 5920,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_domain_admission.py",
+        "sha256": "8dc45906ed01c748aec1782236c4692048c48ad66b879653b1942c2d4d827a46"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_external_output.py",
+      "source": {
+        "bytes": 5256,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_external_output.py",
+        "sha256": "f0cc71ce904a15cc751305150a2e47a184dbfdfb4b8e74314e0b0c99cbfd3bd7"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_geometry058r2.py",
+      "source": {
+        "bytes": 1499,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_geometry058r2.py",
+        "sha256": "523fd07f1d9cf6c3f3a5c353314c9d23609f77e88615d195baf274affea6d241"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_ipc_receipt.py",
+      "source": {
+        "bytes": 2544,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_ipc_receipt.py",
+        "sha256": "7567bb6afc0d242b31fca0a7796778957a9ba83d9e80be0de66fd3d2b355de97"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_ipc_tmpdir.py",
+      "source": {
+        "bytes": 1226,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_ipc_tmpdir.py",
+        "sha256": "e3d8c1c58d81a344b1ba0d4fd4b29e60b2a01be85dfb24aeea828d08a240b753"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_isolated058.py",
+      "source": {
+        "bytes": 677,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_isolated058.py",
+        "sha256": "d499f043dc7acbc266374d2f8b3b162c1d2be61f1141f7266acd735d7bbe92a7"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_model_precast.py",
+      "source": {
+        "bytes": 5966,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_model_precast.py",
+        "sha256": "105fd27f1a73fc80dd2612b0817151ae6c631b0008971e459ffad82014b6ffd8"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_overlay.py",
+      "source": {
+        "bytes": 7676,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_overlay.py",
+        "sha256": "0a2d934da003d74a3949975d89bb975d85c03e418ec1aad95d874295395f59cd"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_predecessor101r1.py",
+      "source": {
+        "bytes": 1924,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_predecessor101r1.py",
+        "sha256": "d1ee1680a023557a1fa377d715e02282dde36f297187e200802c55a6518d9f52"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_resource_binding.py",
+      "source": {
+        "bytes": 1161,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_resource_binding.py",
+        "sha256": "2db06858e71ac83b017e85f9b30b0a06a58e2fcc9efc6fb2cf69a32e88bc4859"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_short16_101r7.py",
+      "source": {
+        "bytes": 5901,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_short16_101r7.py",
+        "sha256": "d132cab8c90a8757910f4a13ac81eafd5db00d46329dd7a08d4bcd94cf364eca"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_source_identity.py",
+      "source": {
+        "bytes": 2435,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_source_identity.py",
+        "sha256": "3ed0965f0cc9f2f87742f58ed6bcb0cee182e79826f572d23a75f8bc20ea546e"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_split_cold.py",
+      "source": {
+        "bytes": 3651,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_split_cold.py",
+        "sha256": "e25d4686164014ea2d9ca976b2c794b35c41b4bccfe36a87b0caac1f47732590"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_tensor_controls.py",
+      "source": {
+        "bytes": 3199,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_tensor_controls.py",
+        "sha256": "01dff209abf09025f80ee87ff6a219ef427bf990af2dfae6cb1aa4ed3d033d52"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_window058.py",
+      "source": {
+        "bytes": 1015,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_window058.py",
+        "sha256": "cd72627a6685c294ea32a3b20851fc1c2cce80b7dc33dec861dcd3dd296a84f4"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/test_worker101_layout.py",
+      "source": {
+        "bytes": 2044,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/test_worker101_layout.py",
+        "sha256": "c427c81651cdd378843270a78db1d178d518a501127db9689c4908d3417639d2"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/trace_plugin.py",
+      "source": {
+        "bytes": 2380,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/trace_plugin.py",
+        "sha256": "fa392583e9cba96936d8907e12b16fbc370aed091d0fb79b7eebd79d17e37ada"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/window_overlay.py",
+      "source": {
+        "bytes": 1419,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/window_overlay.py",
+        "sha256": "9c4bf534c0483f2f12fc2673dbb56fb4110da9d2fa2f17d2d7e670f22179a6b7"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/SOURCE_TEMPLATE.json",
+      "source": {
+        "bytes": 212138,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/SOURCE_TEMPLATE.json",
+        "sha256": "05821d5cd382bb1ec9e29fa500ada541c534c636679fcedd7c7d5f5558222c56"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/SOURCE_MANIFEST.json",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/SOURCE_MANIFEST.json",
+        "bytes": 194298,
+        "sha256": "b893877f2fdc3283e272000535829d3340d7af668a763a639ca045f79e7b761b"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/plugin/SOURCE_MANIFEST.json",
+      "source": {
+        "bytes": 58621,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/plugin/SOURCE_MANIFEST.json",
+        "sha256": "e0fe45ce6f8966ba42a3303d7d91ece64029837aba4fb0a46e985c41f157db29"
+      }
+    },
+    {
+      "dest": "deltalog101-repair7-failed/COMMANDS_FINAL.json",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/COMMANDS_FINAL.json",
+        "bytes": 3008,
+        "sha256": "4d6518ebfeb3df8e513a670178cd98a21e9db137ccde761f3b9e589ccb3d39da"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/COMMANDS.json",
+      "source": {
+        "bytes": 2955,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/COMMANDS.json",
+        "sha256": "d3aeca15544ce4ed3fefb292cd34ec83b126ba2a983119ef8b838280afdbb046"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/HANDOFF.md",
+      "source": {
+        "bytes": 2075,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/HANDOFF.md",
+        "sha256": "1fafa85a87b33831afaf01621001d0a58ddef167c861b4a6fb8d9f4ec5804dbb"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/HANDOFF058.md",
+      "source": {
+        "bytes": 1810,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/HANDOFF058.md",
+        "sha256": "86aa5473921b0a9ce379780312d13d8f57fe3a80dac6be751c1341cae5c2a13f"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/HANDOFF071.md",
+      "source": {
+        "bytes": 1862,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/HANDOFF071.md",
+        "sha256": "f0b34c18aab5c25d840e5f346e814c99fd56f1830b5222f340d8ea4249ed786c"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/HANDOFF101.md",
+      "source": {
+        "bytes": 2826,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/HANDOFF101.md",
+        "sha256": "19ad519bfa06182b42d2b8c00fb538151e71d6e9b8953d429779c55445fef342"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/HANDOFF101R7.md",
+      "source": {
+        "bytes": 3156,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/HANDOFF101R7.md",
+        "sha256": "b5c9575c994b0f18df7006eb0bbf93e4bbd22601ff73785ca2fd5b8c2e320318"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/INVERSE101R7.json",
+      "source": {
+        "bytes": 6407,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/INVERSE101R7.json",
+        "sha256": "f86994c6bd768e684a093752262ffd655db2ddc91debb46987ba4ca9313c01de"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/RESOURCE_PREPARATION.json",
+      "source": {
+        "bytes": 502,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/RESOURCE_PREPARATION.json",
+        "sha256": "4b648ab9630ef56cc7cffc1a21d711985758d779eec377cdcb15f0c6cc20ab86"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/RESOURCE_WIRING.md",
+      "source": {
+        "bytes": 2288,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/RESOURCE_WIRING.md",
+        "sha256": "8ad58c0d31abb3b1a457b616dc786e747d542333c7d57eb1f6d03438810a59e1"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/WIP_NEXT_EDGE.md",
+      "source": {
+        "bytes": 2175,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/WIP_NEXT_EDGE.md",
+        "sha256": "fbbd83a353b8174391afa3ea820d61f5968f9ec8177dc11580580d02f26d52f8"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/actual_loader/safety_host.py",
+      "source": {
+        "bytes": 22569,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/actual_loader/safety_host.py",
+        "sha256": "8c83e08318b530c4d022b91bbacd34b12121b3380e1a14d32262c9a3875f6fa7"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/bind_source.py",
+      "source": {
+        "bytes": 4247,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/bind_source.py",
+        "sha256": "0dad2932dbe3e010fc98419204654013723c87dd5c703928ae5dbdc9a5179619"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/client.py",
+      "source": {
+        "bytes": 3116,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/client.py",
+        "sha256": "ab285b2e31c6bdcd88f54590943170df1cc32c50b77b355b8e84b4df89bb0793"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/consume.py",
+      "source": {
+        "bytes": 7540,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/consume.py",
+        "sha256": "ff7aff2d81923361dc2049066b581ca47c051dc9f0918ca03b346bd3a96c7f17"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/consume_trajectory.py",
+      "source": {
+        "bytes": 2577,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/consume_trajectory.py",
+        "sha256": "0477a3fe95f826b1a9b2b011f81234302be66166c2a7ae4f3b978abd846c3f94"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/deltalog_service025_trace-0.0.25.dist-info/METADATA",
+      "source": {
+        "bytes": 70,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/deltalog_service025_trace-0.0.25.dist-info/METADATA",
+        "sha256": "6d316a0174cbc859517c8ea332d9613773c90d34b6f9a483592c78018ccb8a04"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/deltalog_service025_trace-0.0.25.dist-info/entry_points.txt",
+      "source": {
+        "bytes": 73,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/deltalog_service025_trace-0.0.25.dist-info/entry_points.txt",
+        "sha256": "6e001b5797b3f5c6457c650dd9be4574a4b07a61a91c8589baca40a07f8148d2"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/dependencies/completion_serving_v023.py",
+      "source": {
+        "bytes": 27822,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/dependencies/completion_serving_v023.py",
+        "sha256": "c67bff55fa29c5f89000c3afdc9c7c66305612b13a8a1d85976e5872cee086d7"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/dependencies/direct_round013.py",
+      "source": {
+        "bytes": 3378,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/dependencies/direct_round013.py",
+        "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/dependencies/engine_serving_v023.py",
+      "source": {
+        "bytes": 17103,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/dependencies/engine_serving_v023.py",
+        "sha256": "38b242a091b2b4502a58b7d9b8a274ac17611b383fecc30e9b714f5da9c8dc75"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/dependencies/identity_capture.py",
+      "source": {
+        "bytes": 3681,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/dependencies/identity_capture.py",
+        "sha256": "1cfb4c995917c5d89868102e6bd8b4c6d68fe1f59881186be6e7831ff0ccaec5"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/dependencies/identity_oracle.py",
+      "source": {
+        "bytes": 9305,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/dependencies/identity_oracle.py",
+        "sha256": "f288191487869fe752fea8713742bff2e6245c30d9ed790243b8868520f0e333"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/dependencies/input_processor_v023.py",
+      "source": {
+        "bytes": 20815,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/dependencies/input_processor_v023.py",
+        "sha256": "c5673988c0f7cfec268220e3f044e718702c015a4f236c020937cfd40a793f15"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/dependencies/numeric_oracle.py",
+      "source": {
+        "bytes": 3407,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/dependencies/numeric_oracle.py",
+        "sha256": "cd395a05dbfcb21f1104d617afb1fab6f80374016585e9096ca24d85c2cae97a"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/dependencies/old_test_domain_admission.py",
+      "source": {
+        "bytes": 11258,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/dependencies/old_test_domain_admission.py",
+        "sha256": "12613eabb44c7997c2c0d31357bf10221d96f45e591b2ca92664dd372291f736"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/dependencies/original_split_reader101.py",
+      "source": {
+        "bytes": 7269,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/dependencies/original_split_reader101.py",
+        "sha256": "accf5eebae971e4a0a961e3dceae7550d4f816647153c955deb368e8ad0b4397"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/dependencies/runtime023_baseline.py",
+      "source": {
+        "bytes": 8832,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/dependencies/runtime023_baseline.py",
+        "sha256": "096c8f9abed09328c01e069403e8e5511765b0c0c315b665e58dd8fb9e3c8cc3"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/direct_round.py",
+      "source": {
+        "bytes": 3378,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/direct_round.py",
+        "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/domain_qualification.py",
+      "source": {
+        "bytes": 1438,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/domain_qualification.py",
+        "sha256": "f465cdefc931ef2267ee5c986b36498dc7cd5c25b9805cfd37a3da1f46589aed"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/entry.py",
+      "source": {
+        "bytes": 3537,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/entry.py",
+        "sha256": "2f52126d20a585d97b178bb3869441f384d9308d8d480239c09d5c90f0ea7a0e"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/external_output_policy.py",
+      "source": {
+        "bytes": 7175,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/external_output_policy.py",
+        "sha256": "f85f745cb9362d69e70cfd35a9c894d97fc7069297d3694c8b8c57107126191f"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/finalize_resource.py",
+      "source": {
+        "bytes": 1374,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/finalize_resource.py",
+        "sha256": "76d47bdf05698fea18c5abb741404f0006e39789670eb9cb60cba7ea3f46c761"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/host_ticket.py",
+      "source": {
+        "bytes": 3951,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/host_ticket.py",
+        "sha256": "e6e1ca6d73cbed8db53f861dd89aec33c04df7caf23c292ea7b9934fa07ca4f8"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/identity_events.py",
+      "source": {
+        "bytes": 4581,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/identity_events.py",
+        "sha256": "8f6869aa17e0a41a3c5024000758f1bbb01bc65f8616a8fee94c222a7d6e0db7"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/ipc_controls.py",
+      "source": {
+        "bytes": 2962,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/ipc_controls.py",
+        "sha256": "6f815ee70eee276f2a5c8f6ffd7d3ba82e754eb9aac55ee7d5408100241037a2"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/ipc_receipt.py",
+      "source": {
+        "bytes": 1252,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/ipc_receipt.py",
+        "sha256": "77f0411b6905e5b89f4d7cffe0a76d4c33c392f07eae9ef7c9d37d8c6f7186fd"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/owner_overlay.py",
+      "source": {
+        "bytes": 5027,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/owner_overlay.py",
+        "sha256": "8760eda37daf7ddb7006d3393d8aed57f7d312fcd35849a9ef711dd9eae4a55a"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/packet_contract.py",
+      "source": {
+        "bytes": 428,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/packet_contract.py",
+        "sha256": "b5f45bc7e534238354e78ba3df6ca195ca1ba52953657b52b1e215ec8f053a87"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/packet_predecessor.py",
+      "source": {
+        "bytes": 46895,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/packet_predecessor.py",
+        "sha256": "f22c5d6b57bab0d57140c6d3d2b7f10b4e64bd64cb6b918c5e8dec5a3d218b14"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/SOURCE_TEMPLATE.json",
+      "source": {
+        "bytes": 60604,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/SOURCE_TEMPLATE.json",
+        "sha256": "bced13bc855ce4015f7e7d853fed7c1c2ecd30e0e6ca5cff0566afaeac066a50"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/qwen36_deltalog_service-0.0.23.dist-info/METADATA",
+      "source": {
+        "bytes": 68,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service-0.0.23.dist-info/METADATA",
+        "sha256": "856c754964c8de01019aec547f1845ab767aa4c8b24082277417ed736343de21"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/qwen36_deltalog_service-0.0.23.dist-info/entry_points.txt",
+      "source": {
+        "bytes": 85,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service-0.0.23.dist-info/entry_points.txt",
+        "sha256": "33a1359e96a5107181b97794f556d1a5f7c24134bd32616e4061cd8902b5d9d4"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/qwen36_deltalog_service/__init__.py",
+      "source": {
+        "bytes": 95,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/__init__.py",
+        "sha256": "91b02f25a6773cda37a89105faa28488b80f1683f93761752d237d1ae589e805"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/qwen36_deltalog_service/admission.py",
+      "source": {
+        "bytes": 3281,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/admission.py",
+        "sha256": "8f1afde20703d52b5eca487baf002cb6905928abacf9e1e00196fda82a0d4f15"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/qwen36_deltalog_service/binding.py",
+      "source": {
+        "bytes": 2845,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/binding.py",
+        "sha256": "8eab3843ccf2edfddce36ff21868bdc55148e6770db59d3028c5fdda9832c1e8"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/qwen36_deltalog_service/build_meta051.py",
+      "source": {
+        "bytes": 12326,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/build_meta051.py",
+        "sha256": "c5b3a2e821dfa0ef18e843fa9cb9a2222719d9c88f8d8902c40be61eb51d69e6"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/qwen36_deltalog_service/builder_mirror.py",
+      "source": {
+        "bytes": 15543,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/builder_mirror.py",
+        "sha256": "32dedd1fae3f93e6dd8a9b6a3d23229448b30b022b9c3182b931e5f7c1f76677"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/qwen36_deltalog_service/contract.py",
+      "source": {
+        "bytes": 1280,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/contract.py",
+        "sha256": "d0a9709593a72413cb08a073bbf2248ce59424aee534ec85042b5e525765ad48"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/qwen36_deltalog_service/cpu_metadata.py",
+      "source": {
+        "bytes": 1918,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/cpu_metadata.py",
+        "sha256": "71db61ff77c055bdac6259a6d57b0f6f7a7dbea411b2d933dac22261a36ea120"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/qwen36_deltalog_service/integration.py",
+      "source": {
+        "bytes": 3108,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/integration.py",
+        "sha256": "ea3cf3a0ae961a52945351778de51ea24169f6fc4f35bff5bb7c1b824bd4f3bf"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/qwen36_deltalog_service/layout_controls.py",
+      "source": {
+        "bytes": 2671,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/layout_controls.py",
+        "sha256": "a8a372e95b74d10c675475a1a3b365fc0019d4b58c8ced4bd2c1e84178506579"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/qwen36_deltalog_service/primitives.py",
+      "source": {
+        "bytes": 11828,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/primitives.py",
+        "sha256": "1b9a2e53ce137f319ca5939be6e21fa293735edd363cdc37f7b438626e985470"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/qwen36_deltalog_service/runtime.py",
+      "source": {
+        "bytes": 9359,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/runtime.py",
+        "sha256": "785a9ae27c98178daa9e9a56071560cec3a2e717a41a968872311093db603316"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/qwen36_deltalog_service/runtime_helpers.py",
+      "source": {
+        "bytes": 9313,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/runtime_helpers.py",
+        "sha256": "913fa9514bc0509babaf81565ab46fa4b746967e7c0deb7d06849f4d42672465"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/qwen36_deltalog_service/split_qualification.py",
+      "source": {
+        "bytes": 8736,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/split_qualification.py",
+        "sha256": "7681e7e46e516afc5cca0e29968dff24aec27fc6f6fb3a5ce183275cd0c91900"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/qwen36_deltalog_service/transform.py",
+      "source": {
+        "bytes": 2683,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/qwen36_deltalog_service/transform.py",
+        "sha256": "b9230fde5a7a45db8fe69af9c1acc7104b7082da81c022a76f594c0c389a899f"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/precast.py",
+      "source": {
+        "bytes": 5831,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/precast.py",
+        "sha256": "4f1ca4d1243c90c663db2702010ecef8f76805a4259d107fb1be44648f35695d"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/prepare053.py",
+      "source": {
+        "bytes": 4658,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/prepare053.py",
+        "sha256": "1f586944afa2851e1c44d458b672a2e78983990735192d58f3a55355767343ba"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/probe.py",
+      "source": {
+        "bytes": 5916,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/probe.py",
+        "sha256": "596635cd30a102098626d7ca12678bda40cabb859bd749d043d1eb47f7b7aae2"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/raw_codec.py",
+      "source": {
+        "bytes": 3592,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/raw_codec.py",
+        "sha256": "4eb6bb0d5488cd1dfc3f2cb6c0f063d11b83ce07dbf594010c1d7554d844cd0e"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/readset_guard101r8.py",
+      "source": {
+        "bytes": 3032,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/readset_guard101r8.py",
+        "sha256": "a7506a4417a58827d21bf19e71a17e16194bfafa639a86968e49ba65f6dcc880"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/request_identity.py",
+      "source": {
+        "bytes": 2065,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/request_identity.py",
+        "sha256": "dd7fa44f39b97016a3c09c2fd7fb2822f8f431bc33dec08a325e003c69c1c2b4"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/run_owned.py",
+      "source": {
+        "bytes": 6912,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/run_owned.py",
+        "sha256": "6cf04dd0ccf490b58ca4c27a4f153391c3824bb53f808e48d8ddaac3a147c13e"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/sidecar_audit.py",
+      "source": {
+        "bytes": 2429,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/sidecar_audit.py",
+        "sha256": "7acf91b7901f8829afdae6fb48791607683ac969f222369f23bd93f5d4742d62"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/sidecar_capture.py",
+      "source": {
+        "bytes": 3500,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/sidecar_capture.py",
+        "sha256": "237617e6c90e9084a65349e439b0c17e5cfe3517d6722c588de99077d5a85c10"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/stage_resources.py",
+      "source": {
+        "bytes": 3553,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/stage_resources.py",
+        "sha256": "f86ae63589f3ed36c8df6c452a7b7bde0ae5c85a1067582c64852b10953a4ff2"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/tensor_consumer.py",
+      "source": {
+        "bytes": 13736,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/tensor_consumer.py",
+        "sha256": "08dd5b74dc2feefc2582658378cf934d298933f0fa61d511c53cd60c72b5fe0d"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/tensor_observer.py",
+      "source": {
+        "bytes": 7733,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/tensor_observer.py",
+        "sha256": "66c6a2c9f54ff3eff2e3854db698bd3797420ed9c170aefcec758a8b1d93f553"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_actual017_binding.py",
+      "source": {
+        "bytes": 4090,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_actual017_binding.py",
+        "sha256": "24b46650043a1d2540fe9f0d27b0d815525d35283a019bc1d95caea50dc3ffb1"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_assignment.py",
+      "source": {
+        "bytes": 3064,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_assignment.py",
+        "sha256": "4903d6470e8773e7b79bb25128fd84b4d5aefae81d650d5625e1fe00102181ee"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_direct_model_reference.py",
+      "source": {
+        "bytes": 4967,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_direct_model_reference.py",
+        "sha256": "7d6a23797190e2c668dedb0e2f8ba68503bb7646933b1f48cfc0bfc002b5e0f4"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_domain_admission.py",
+      "source": {
+        "bytes": 5920,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_domain_admission.py",
+        "sha256": "8dc45906ed01c748aec1782236c4692048c48ad66b879653b1942c2d4d827a46"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_external_output.py",
+      "source": {
+        "bytes": 5256,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_external_output.py",
+        "sha256": "f0cc71ce904a15cc751305150a2e47a184dbfdfb4b8e74314e0b0c99cbfd3bd7"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_geometry058r2.py",
+      "source": {
+        "bytes": 1499,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_geometry058r2.py",
+        "sha256": "523fd07f1d9cf6c3f3a5c353314c9d23609f77e88615d195baf274affea6d241"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_ipc_receipt.py",
+      "source": {
+        "bytes": 2544,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_ipc_receipt.py",
+        "sha256": "7567bb6afc0d242b31fca0a7796778957a9ba83d9e80be0de66fd3d2b355de97"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_ipc_tmpdir.py",
+      "source": {
+        "bytes": 1226,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_ipc_tmpdir.py",
+        "sha256": "e3d8c1c58d81a344b1ba0d4fd4b29e60b2a01be85dfb24aeea828d08a240b753"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_isolated058.py",
+      "source": {
+        "bytes": 677,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_isolated058.py",
+        "sha256": "d499f043dc7acbc266374d2f8b3b162c1d2be61f1141f7266acd735d7bbe92a7"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_model_precast.py",
+      "source": {
+        "bytes": 5966,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_model_precast.py",
+        "sha256": "105fd27f1a73fc80dd2612b0817151ae6c631b0008971e459ffad82014b6ffd8"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_overlay.py",
+      "source": {
+        "bytes": 7676,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_overlay.py",
+        "sha256": "0a2d934da003d74a3949975d89bb975d85c03e418ec1aad95d874295395f59cd"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_predecessor101r1.py",
+      "source": {
+        "bytes": 1924,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_predecessor101r1.py",
+        "sha256": "d1ee1680a023557a1fa377d715e02282dde36f297187e200802c55a6518d9f52"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_resource_binding.py",
+      "source": {
+        "bytes": 1161,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_resource_binding.py",
+        "sha256": "2db06858e71ac83b017e85f9b30b0a06a58e2fcc9efc6fb2cf69a32e88bc4859"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_short16_101r7.py",
+      "source": {
+        "bytes": 5901,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_short16_101r7.py",
+        "sha256": "8794018d357097c7756481beabace9b5fad20a3c824e78b3448db9fd28d293a5"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_source_identity.py",
+      "source": {
+        "bytes": 2435,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_source_identity.py",
+        "sha256": "3ed0965f0cc9f2f87742f58ed6bcb0cee182e79826f572d23a75f8bc20ea546e"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_split_cold.py",
+      "source": {
+        "bytes": 3651,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_split_cold.py",
+        "sha256": "e25d4686164014ea2d9ca976b2c794b35c41b4bccfe36a87b0caac1f47732590"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_tensor_controls.py",
+      "source": {
+        "bytes": 3199,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_tensor_controls.py",
+        "sha256": "01dff209abf09025f80ee87ff6a219ef427bf990af2dfae6cb1aa4ed3d033d52"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_window058.py",
+      "source": {
+        "bytes": 1015,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_window058.py",
+        "sha256": "cd72627a6685c294ea32a3b20851fc1c2cce80b7dc33dec861dcd3dd296a84f4"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/test_worker101_layout.py",
+      "source": {
+        "bytes": 2044,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/test_worker101_layout.py",
+        "sha256": "c427c81651cdd378843270a78db1d178d518a501127db9689c4908d3417639d2"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/trace_plugin.py",
+      "source": {
+        "bytes": 2380,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/trace_plugin.py",
+        "sha256": "fa392583e9cba96936d8907e12b16fbc370aed091d0fb79b7eebd79d17e37ada"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/window_overlay.py",
+      "source": {
+        "bytes": 1419,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/window_overlay.py",
+        "sha256": "9c4bf534c0483f2f12fc2673dbb56fb4110da9d2fa2f17d2d7e670f22179a6b7"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/SOURCE_TEMPLATE.json",
+      "source": {
+        "bytes": 213056,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/SOURCE_TEMPLATE.json",
+        "sha256": "92c5bc1be67872b19c0734e755b4c937e9b23d0626e4e8dc1e1ba8957a6b3f8e"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/SOURCE_MANIFEST.json",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/SOURCE_MANIFEST.json",
+        "bytes": 195142,
+        "sha256": "cd88e9d72dc3b4ee9ecef7cb2124df9619259bfe3a95a9f99f700d66f00932e0"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/plugin/SOURCE_MANIFEST.json",
+      "source": {
+        "bytes": 58621,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/plugin/SOURCE_MANIFEST.json",
+        "sha256": "435aa37c572f42e0da4f20231fbdd1f31a1f9ae1a768359d38325d09194170ed"
+      }
+    },
+    {
+      "dest": "deltalog101-repair8-prepared/COMMANDS_FINAL.json",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/COMMANDS_FINAL.json",
+        "bytes": 3008,
+        "sha256": "ffa6501416a429fd7e54aeb990b28cae8cbd78bac96a3d2ce9b99cd16cb72184"
+      }
+    },
+    {
+      "dest": "bole131-attempted/COMMANDS.json",
+      "source": {
+        "bytes": 2614,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/COMMANDS.json",
+        "sha256": "354666b0519fdd6b83f377af9580755f711d3fb5503310f02de14d9baced8a6c"
+      }
+    },
+    {
+      "dest": "bole131-attempted/HANDOFF.md",
+      "source": {
+        "bytes": 8587,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/HANDOFF.md",
+        "sha256": "6a8cab0771e0bf2e237f88717ff08ee2f7c2462bf60d2c743eafd7d99e4e8f6d"
+      }
+    },
+    {
+      "dest": "bole131-attempted/HANDOFF131.md",
+      "source": {
+        "bytes": 4276,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/HANDOFF131.md",
+        "sha256": "a3a7b884bac0657aaa90b40d6884f6aaf09f05465856a7fddfed99e8c32e6622"
+      }
+    },
+    {
+      "dest": "bole131-attempted/OWNER_DERIVATION.json",
+      "source": {
+        "bytes": 1677,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/OWNER_DERIVATION.json",
+        "sha256": "a722941b90d126a98b7c34a30efb484986096754184b02dbd9c0b9f95dad41a0"
+      }
+    },
+    {
+      "dest": "bole131-attempted/SOURCE.json",
+      "source": {
+        "bytes": 29610,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/SOURCE.json",
+        "sha256": "a57664a54ed09395cc8c29dffe43049f074c1bb4940085dcbf497cf488fabdbb"
+      }
+    },
+    {
+      "dest": "bole131-attempted/SOURCE_TEMPLATE.json",
+      "source": {
+        "bytes": 29610,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/SOURCE_TEMPLATE.json",
+        "sha256": "a57664a54ed09395cc8c29dffe43049f074c1bb4940085dcbf497cf488fabdbb"
+      }
+    },
+    {
+      "dest": "bole131-attempted/acceptance.py",
+      "source": {
+        "bytes": 4345,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/acceptance.py",
+        "sha256": "300e0037f05be9a6d99b7f567175b21838e2eab3a9c55f5a8b2ff96996f820f3"
+      }
+    },
+    {
+      "dest": "bole131-attempted/adapter.py",
+      "source": {
+        "bytes": 8622,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/adapter.py",
+        "sha256": "37369161fbadad74e0f727c62e769069277d6f2696f7a8b2d88d67e92d93dc59"
+      }
+    },
+    {
+      "dest": "bole131-attempted/bind_model.py",
+      "source": {
+        "bytes": 2549,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/bind_model.py",
+        "sha256": "84386638d53a16da07d902a4eabd5825e7b3f01e652745866393007809deb679"
+      }
+    },
+    {
+      "dest": "bole131-attempted/bole_mtp_load_receipt111-0.0.0.dist-info/METADATA",
+      "source": {
+        "bytes": 141,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/bole_mtp_load_receipt111-0.0.0.dist-info/METADATA",
+        "sha256": "6a8c77d0f35734fcc705d81440d09c87aeaa3a0a3e090537d6d29d8b4aa60250"
+      }
+    },
+    {
+      "dest": "bole131-attempted/bole_mtp_load_receipt111-0.0.0.dist-info/entry_points.txt",
+      "source": {
+        "bytes": 75,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/bole_mtp_load_receipt111-0.0.0.dist-info/entry_points.txt",
+        "sha256": "9e2ebc6630d8b44ea5fa5001ffc671bc0efbff71507877fb04e73b7b77d4b0b1"
+      }
+    },
+    {
+      "dest": "bole131-attempted/bole_three_node131-0.0.1.dist-info/METADATA",
+      "source": {
+        "bytes": 62,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/bole_three_node131-0.0.1.dist-info/METADATA",
+        "sha256": "8add79195d7a85ce65b5c3bbad2b8ff996f00228073524e29f7f957605aacf81"
+      }
+    },
+    {
+      "dest": "bole131-attempted/bole_three_node131-0.0.1.dist-info/entry_points.txt",
+      "source": {
+        "bytes": 70,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/bole_three_node131-0.0.1.dist-info/entry_points.txt",
+        "sha256": "144fb60e520ec9e2a0ba468a831f467be8810d1c42d1e61fd072984d34582f04"
+      }
+    },
+    {
+      "dest": "bole131-attempted/cache_registry.py",
+      "source": {
+        "bytes": 6155,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/cache_registry.py",
+        "sha256": "d65deb7b60baf13c25960f34d3273c890d6541aa257556829d69f86d6ca2c562"
+      }
+    },
+    {
+      "dest": "bole131-attempted/cap48_provider.py",
+      "source": {
+        "bytes": 2056,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/cap48_provider.py",
+        "sha256": "0f7ea41e49bf0a0cdd4ed9d255e5b5b900471e66af4180f34d5c07aa5edc19a2"
+      }
+    },
+    {
+      "dest": "bole131-attempted/component_gate.py",
+      "source": {
+        "bytes": 4020,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/component_gate.py",
+        "sha256": "95891a343d1c0c12fc2372d6e21ecdc8aec2a541c1c76c273b9386c0445ae366"
+      }
+    },
+    {
+      "dest": "bole131-attempted/consume_model.py",
+      "source": {
+        "bytes": 8221,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/consume_model.py",
+        "sha256": "c11e926ae159a633c3d894cfb0beea9912c731591c9f08fb67ee7acd2d64ecf7"
+      }
+    },
+    {
+      "dest": "bole131-attempted/context_adapter.py",
+      "source": {
+        "bytes": 2636,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/context_adapter.py",
+        "sha256": "dc9d645b6e266395c84f99a7a7f0dc028253b626ddb2fb3bd631701b6821058d"
+      }
+    },
+    {
+      "dest": "bole131-attempted/contract090.py",
+      "source": {
+        "bytes": 2392,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/contract090.py",
+        "sha256": "8a33df66a1b69856f7e886a47373e16237f0f886095606913c14194a32c5bf58"
+      }
+    },
+    {
+      "dest": "bole131-attempted/core112.py",
+      "source": {
+        "bytes": 1443,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/core112.py",
+        "sha256": "b7e3f3a91889e98c54195a0c5f5eb2a4c6cdf8fc9c667ece26d7250b3e6eebe7"
+      }
+    },
+    {
+      "dest": "bole131-attempted/dense_opportunity090-0.0.1.dist-info/METADATA",
+      "source": {
+        "bytes": 64,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/dense_opportunity090-0.0.1.dist-info/METADATA",
+        "sha256": "d5c6e21fba0d2b10debc99cfe31476e9011db280182ec25999c7e02329b9aa17"
+      }
+    },
+    {
+      "dest": "bole131-attempted/dense_opportunity090-0.0.1.dist-info/entry_points.txt",
+      "source": {
+        "bytes": 76,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/dense_opportunity090-0.0.1.dist-info/entry_points.txt",
+        "sha256": "c1c6c21cdbf0979d1a4df4b241169b5238bb96e90dc034b34c7b7ab784870495"
+      }
+    },
+    {
+      "dest": "bole131-attempted/dense_opportunity090/__init__.py",
+      "source": {
+        "bytes": 83,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/dense_opportunity090/__init__.py",
+        "sha256": "2ffb6c54db98773cc5e866d739c6e235c08927774d6d3f2bc14b6c9eedd375a3"
+      }
+    },
+    {
+      "dest": "bole131-attempted/dependencies/original005_server_entry.py",
+      "source": {
+        "bytes": 2379,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/dependencies/original005_server_entry.py",
+        "sha256": "ac0931cb9f17a93ae923c7cbfd1a92e757d376a417c1ed910b134f984216d080"
+      }
+    },
+    {
+      "dest": "bole131-attempted/diagnostic_export.py",
+      "source": {
+        "bytes": 1890,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/diagnostic_export.py",
+        "sha256": "40c1f90f44e33ab452b813e92a0095d39a3cdc57561fddb74838a283ed032013"
+      }
+    },
+    {
+      "dest": "bole131-attempted/entry.py",
+      "source": {
+        "bytes": 1649,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/entry.py",
+        "sha256": "2fa5440524249450487c1bfc054173f4f79857afc0f7c3a28060881e9fd4f31c"
+      }
+    },
+    {
+      "dest": "bole131-attempted/evidence/ascend_attention.py",
+      "source": {
+        "bytes": 88246,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/evidence/ascend_attention.py",
+        "sha256": "80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390"
+      }
+    },
+    {
+      "dest": "bole131-attempted/evidence/ascend_forward_context.py",
+      "source": {
+        "bytes": 16616,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/evidence/ascend_forward_context.py",
+        "sha256": "4e77f78996b95f36feba36af7ccd7c1ab4e73ac340d30731acb44c8b92c5ac22"
+      }
+    },
+    {
+      "dest": "bole131-attempted/evidence/attention.py",
+      "source": {
+        "bytes": 31208,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/evidence/attention.py",
+        "sha256": "06f49836a73d058c6d38f826bc6c794c3b7ae9751d12d71dfff9e5c2dbdbcd28"
+      }
+    },
+    {
+      "dest": "bole131-attempted/evidence/block_table.py",
+      "source": {
+        "bytes": 20289,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/evidence/block_table.py",
+        "sha256": "8f77809c12af3bd9d56974edbbe5c792995f2620aadfe62411806f2e68d2ef0a"
+      }
+    },
+    {
+      "dest": "bole131-attempted/evidence/forward_context.py",
+      "source": {
+        "bytes": 13434,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/evidence/forward_context.py",
+        "sha256": "1c6fa51e9a02a120fed5e7357afb1190516cbdfefd1c644dfcd860603f1527c5"
+      }
+    },
+    {
+      "dest": "bole131-attempted/evidence/gdn.py",
+      "source": {
+        "bytes": 21887,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/evidence/gdn.py",
+        "sha256": "d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816"
+      }
+    },
+    {
+      "dest": "bole131-attempted/evidence/mtp.py",
+      "source": {
+        "bytes": 17170,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/evidence/mtp.py",
+        "sha256": "99c19c38107a3cade90aa5a0f86396f6a25b2defcf8a538fbed521f7567eb743"
+      }
+    },
+    {
+      "dest": "bole131-attempted/evidence/original114_host090.py",
+      "source": {
+        "bytes": 8848,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/evidence/original114_host090.py",
+        "sha256": "4a61e6bd79c1a0097235eb8eaedc2fe930036d4ba01b67a92f6324b62accf0d2"
+      }
+    },
+    {
+      "dest": "bole131-attempted/evidence/original114_owned_substrate.py",
+      "source": {
+        "bytes": 3448,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/evidence/original114_owned_substrate.py",
+        "sha256": "38f99e7a46e1a374826cf5a53c4d729af01d7623a3f487dd47f0acbc679b7431"
+      }
+    },
+    {
+      "dest": "bole131-attempted/evidence/proposer.py",
+      "source": {
+        "bytes": 105077,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/evidence/proposer.py",
+        "sha256": "4a90532c5c3667d9eb4fec666bf03c65a2f1c92cd402f731b644ef8fa2ed82ab"
+      }
+    },
+    {
+      "dest": "bole131-attempted/evidence/qwen3_5.py",
+      "source": {
+        "bytes": 29662,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/evidence/qwen3_5.py",
+        "sha256": "04f3de5372973770d71c5c05f2e8a5e221ec52b62cca7a1e302d9201b61b8adc"
+      }
+    },
+    {
+      "dest": "bole131-attempted/evidence/qwen3_next.py",
+      "source": {
+        "bytes": 30278,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/evidence/qwen3_next.py",
+        "sha256": "8d614ce262ab9340585f9a2ad4ab117228f076e3672fcb5f04930ff0a38223ae"
+      }
+    },
+    {
+      "dest": "bole131-attempted/evidence/runner.py",
+      "source": {
+        "bytes": 258160,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/evidence/runner.py",
+        "sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968"
+      }
+    },
+    {
+      "dest": "bole131-attempted/evidence/worker.py",
+      "source": {
+        "bytes": 48290,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/evidence/worker.py",
+        "sha256": "c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3"
+      }
+    },
+    {
+      "dest": "bole131-attempted/external025.py",
+      "source": {
+        "bytes": 5198,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/external025.py",
+        "sha256": "8b65bbd0518a81b194459e087dd6a6003dcfbb07151940c031aaec31d29e3c62"
+      }
+    },
+    {
+      "dest": "bole131-attempted/guest_canary.py",
+      "source": {
+        "bytes": 945,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/guest_canary.py",
+        "sha256": "4d19f8a4782a112a0300228e950715175cd4274fe0324af58258e00db2c72114"
+      }
+    },
+    {
+      "dest": "bole131-attempted/host090.py",
+      "source": {
+        "bytes": 9878,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/host090.py",
+        "sha256": "29da9e5bce1861261065676b1342ce1cfd2b8374177de0923884b7ad4a422b67"
+      }
+    },
+    {
+      "dest": "bole131-attempted/identity_capture.py",
+      "source": {
+        "bytes": 3681,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/identity_capture.py",
+        "sha256": "1cfb4c995917c5d89868102e6bd8b4c6d68fe1f59881186be6e7831ff0ccaec5"
+      }
+    },
+    {
+      "dest": "bole131-attempted/identity_journal.py",
+      "source": {
+        "bytes": 1323,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/identity_journal.py",
+        "sha256": "08ecf58d2b4c79961e5a88da9b7663ed75884af048034121471fbad2c874c04c"
+      }
+    },
+    {
+      "dest": "bole131-attempted/identity_oracle.py",
+      "source": {
+        "bytes": 9305,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/identity_oracle.py",
+        "sha256": "f288191487869fe752fea8713742bff2e6245c30d9ed790243b8868520f0e333"
+      }
+    },
+    {
+      "dest": "bole131-attempted/identity_owner.py",
+      "source": {
+        "bytes": 2067,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/identity_owner.py",
+        "sha256": "32c41c2a119aa7065d9eb72a5d752e977348b3980e2a880abb2f75df2cca64e4"
+      }
+    },
+    {
+      "dest": "bole131-attempted/independent_model.py",
+      "source": {
+        "bytes": 12237,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/independent_model.py",
+        "sha256": "79a74489a67037f4d5e7d5941874566b2e0dacbbb53926be6f6ce864607e3784"
+      }
+    },
+    {
+      "dest": "bole131-attempted/load_consumer114.py",
+      "source": {
+        "bytes": 1833,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/load_consumer114.py",
+        "sha256": "966c0ecc851521983d926a067b2744bfd0a1a9ecfcca24cbbb4ed9d62968e32f"
+      }
+    },
+    {
+      "dest": "bole131-attempted/load_receipt111.py",
+      "source": {
+        "bytes": 3015,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/load_receipt111.py",
+        "sha256": "5a369d51e31ada72c4d33aa36780775d55720312426112f92046973f439f0d54"
+      }
+    },
+    {
+      "dest": "bole131-attempted/model_entry.py",
+      "source": {
+        "bytes": 26115,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/model_entry.py",
+        "sha256": "33e24812c3df9222f4d82f34fc854842557b02f5fa8b67b9cde78d2ddf6b9241"
+      }
+    },
+    {
+      "dest": "bole131-attempted/model_smoke.py",
+      "source": {
+        "bytes": 12040,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/model_smoke.py",
+        "sha256": "c5c5f9f7b310eeb343a2dd7a40520966a2740412c1c70cdaabe7da25615f429b"
+      }
+    },
+    {
+      "dest": "bole131-attempted/mtp_entry.py",
+      "source": {
+        "bytes": 4447,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/mtp_entry.py",
+        "sha256": "bfd30c13f152a695b3c1a98ea46065391869eb26094b973e9ff392c4ebeb5679"
+      }
+    },
+    {
+      "dest": "bole131-attempted/native_logits.py",
+      "source": {
+        "bytes": 1436,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/native_logits.py",
+        "sha256": "dbbfa0d5dddd6bfed5b72a97fe00c03e92e1f754ff42cba92d3562e1d0d14b80"
+      }
+    },
+    {
+      "dest": "bole131-attempted/native_receipt090.py",
+      "source": {
+        "bytes": 3171,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/native_receipt090.py",
+        "sha256": "6c450ecb8bb47610361e163d51ae6028ea61e359a5a581bee3cfb87770fb760f"
+      }
+    },
+    {
+      "dest": "bole131-attempted/native_seams.py",
+      "source": {
+        "bytes": 4398,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/native_seams.py",
+        "sha256": "bd2b719468fe60d5e6884fa36297aed19fc18519ba292133b51daddf0353f2d2"
+      }
+    },
+    {
+      "dest": "bole131-attempted/oracle112.py",
+      "source": {
+        "bytes": 774,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/oracle112.py",
+        "sha256": "6ba6709289ee37cf54c13faf0bff43f361f06276049774bc3b1cd58456aa3a70"
+      }
+    },
+    {
+      "dest": "bole131-attempted/owned_create.py",
+      "source": {
+        "bytes": 2122,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/owned_create.py",
+        "sha256": "f6df587ee2913a62b7f70193d57896381f713f6c039151b4db3f16c4baafa7f6"
+      }
+    },
+    {
+      "dest": "bole131-attempted/owned_substrate.py",
+      "source": {
+        "bytes": 3448,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/owned_substrate.py",
+        "sha256": "e57589a2eb1bc0b6e0892e110505d538059426545442b0a4b67bc31b0a3472b1"
+      }
+    },
+    {
+      "dest": "bole131-attempted/predecessor118t.py",
+      "source": {
+        "bytes": 2050,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/predecessor118t.py",
+        "sha256": "6a600cb931745d41cca7f6057400a37d1874f5ac9bdb18f7e970d72a53a9964a"
+      }
+    },
+    {
+      "dest": "bole131-attempted/prefill_tail.py",
+      "source": {
+        "bytes": 7499,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/prefill_tail.py",
+        "sha256": "93c662cdba98827f865ff6e3c6e217982bc8c4f296d06564620b4887cc4c0452"
+      }
+    },
+    {
+      "dest": "bole131-attempted/preflight114.py",
+      "source": {
+        "bytes": 4795,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/preflight114.py",
+        "sha256": "141881ab905fd24b248236c206ad68f859e9fc3952c2e197930bed1d066f15a4"
+      }
+    },
+    {
+      "dest": "bole131-attempted/registration118.py",
+      "source": {
+        "bytes": 1796,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/registration118.py",
+        "sha256": "6e8466f79321ad4a5fb093d0f647b203ed9f00835a5cbf4d4f789f170f396868"
+      }
+    },
+    {
+      "dest": "bole131-attempted/server090.py",
+      "source": {
+        "bytes": 2104,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/server090.py",
+        "sha256": "e906cd7b6b3ce675a9ca9f1b47e53ae87535775623e4a1483e14917dd131cc5c"
+      }
+    },
+    {
+      "dest": "bole131-attempted/smoke_client.py",
+      "source": {
+        "bytes": 2730,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/smoke_client.py",
+        "sha256": "d00a8a86843e6a8dce9eeacb33b98893df2a5016311f7f2b4fcfb2335217cc8b"
+      }
+    },
+    {
+      "dest": "bole131-attempted/snapshot_publication.py",
+      "source": {
+        "bytes": 997,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/snapshot_publication.py",
+        "sha256": "0a137ab0a12a97854054233c2958407bb1df8afea9e6c397b281be37d388656d"
+      }
+    },
+    {
+      "dest": "bole131-attempted/sourceio.py",
+      "source": {
+        "bytes": 1037,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/sourceio.py",
+        "sha256": "332c4bec18d5e82a19bf807b96397b76a7d95f4dae168b881379cabfc3a8d78d"
+      }
+    },
+    {
+      "dest": "bole131-attempted/test_cache_registry.py",
+      "source": {
+        "bytes": 4995,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/test_cache_registry.py",
+        "sha256": "f29b10b315821850ac895ec637b81e8e22098e918bc28c4e624013c9c98ded57"
+      }
+    },
+    {
+      "dest": "bole131-attempted/test_declared_layout.py",
+      "source": {
+        "bytes": 1322,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/test_declared_layout.py",
+        "sha256": "8383a9165fd0fb334c23988055447b831981d8763c637f439089d227bc7f66bb"
+      }
+    },
+    {
+      "dest": "bole131-attempted/test_model_entry.py",
+      "source": {
+        "bytes": 8982,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/test_model_entry.py",
+        "sha256": "72084fcda73cb707e56d1148f107def25a9a4fe3ae1da9eb1f088b8191013807"
+      }
+    },
+    {
+      "dest": "bole131-attempted/test_mtp_entry.py",
+      "source": {
+        "bytes": 2607,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/test_mtp_entry.py",
+        "sha256": "d27968644cdad941cedd7dd7cd221e767bbcf2d3c669c48658ca3577a9577d49"
+      }
+    },
+    {
+      "dest": "bole131-attempted/test_native_seams.py",
+      "source": {
+        "bytes": 2474,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/test_native_seams.py",
+        "sha256": "65a5016014e31d89613e3d0a70b8e6eea90597d92ddea0c9940004598aa3d6c8"
+      }
+    },
+    {
+      "dest": "bole131-attempted/test_prefill_tail.py",
+      "source": {
+        "bytes": 4893,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/test_prefill_tail.py",
+        "sha256": "d0b9424e04fb11b8d8fa376c408bd2d8ef22433903612f6fb638c86abd1ba5d9"
+      }
+    },
+    {
+      "dest": "bole131-attempted/test_tp_consensus.py",
+      "source": {
+        "bytes": 2566,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/test_tp_consensus.py",
+        "sha256": "829a9a8177d6fc141d122c7c0fe3db1fa2331e5ffa3cd8838b46aa6f3fea9a6e"
+      }
+    },
+    {
+      "dest": "bole131-attempted/test_whole_frontdoor.py",
+      "source": {
+        "bytes": 7484,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/test_whole_frontdoor.py",
+        "sha256": "167518f89e948347b0089fbd25a2d633c1f9d8f500f4537965980112b249f3a8"
+      }
+    },
+    {
+      "dest": "bole131-attempted/tp_consensus.py",
+      "source": {
+        "bytes": 5470,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/tp_consensus.py",
+        "sha256": "962208173deed21a566f315d1b8e9e3f6e137300fc842e62121a15c4c552a83a"
+      }
+    },
+    {
+      "dest": "bole131-attempted/tree_metadata111.py",
+      "source": {
+        "bytes": 3566,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/tree_metadata111.py",
+        "sha256": "404b278921479f9d8ce27a55901866369019be69ae49f3e46671a5c2267ca443"
+      }
+    },
+    {
+      "dest": "bole131-attempted/treeconv118.py",
+      "source": {
+        "bytes": 7759,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/treeconv118.py",
+        "sha256": "4f2f2f58d3ad403fce48352bd0b3a3f14946e3046fc66de2a48a8b0b01e4771a"
+      }
+    },
+    {
+      "dest": "bole131-attempted/worker_bootstrap.py",
+      "source": {
+        "bytes": 4032,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/worker_bootstrap.py",
+        "sha256": "7b7495f0d0e8d76c181a53d9d30572f3eb79559438fe4d97011505760423cf15"
+      }
+    },
+    {
+      "dest": "bole131-attempted/worker_entry.py",
+      "source": {
+        "bytes": 5531,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/worker_entry.py",
+        "sha256": "7028ee454a0a328cde57ffe36dfe92e759b614e6c15f7c0838cff2a41494a027"
+      }
+    },
+    {
+      "dest": "bole131-attempted/worker_snapshot_owner.py",
+      "source": {
+        "bytes": 2299,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/worker_snapshot_owner.py",
+        "sha256": "bc0894c9aded1994dc0cf796537fd707d04d1c69174df5aa2d76cc90b1602bd2"
+      }
+    },
+    {
+      "dest": "bole131-attempted/SOURCE_BOUND.json",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/SOURCE_BOUND.json",
+        "bytes": 27983,
+        "sha256": "c69a2389ea4a869bfb2b1c48f977aed91ff0e1b20b773e1165cdba820475fc69"
+      }
+    }
+  ],
+  "only_source": true,
+  "raw_results_excluded": true
+}

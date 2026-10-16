@@ -1,0 +1,407 @@
+{
+  "schema": "ascend.model-diagnostics-stage/v1",
+  "recorded_at_utc": "2026-10-16T22:13:29Z",
+  "goal_achieved": false,
+  "previous_checkpoint": "b2d5b30f8db2c9cdee8e2b99e9d0434c918a3136",
+  "authority": {
+    "original_cutoff_utc": "2026-10-17T07:02:13Z",
+    "conditional_extension_file": "CONDITIONAL_EXTENSION24H_AUTHORITY_20261016.json",
+    "extension_activated": false,
+    "extension_used_count": 0,
+    "acceptance_unchanged": true
+  },
+  "actual": {
+    "retained_frame_timing130R1": {
+      "diagnostic": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-consumer130r1-MAIN-NEW24H_001/DIAGNOSTIC130.json",
+        "bytes": 62339,
+        "sha256": "a013f977b72cddd2fcf0848b248681b43ff27084b3285ad5d9cde8f660458dca"
+      },
+      "completed": 27,
+      "diagnostic_elapsed_seconds": 21.07076861,
+      "hydration_seconds": 18.2448796101,
+      "audit_seconds": 2.70203337,
+      "application_blob_opens": 53904,
+      "application_read_bytes": 2505448800,
+      "physical_disk_bytes_measured": false,
+      "parent_status": "FAILED final fence hit cleanup90 alarm",
+      "not_complete160_or_model_qualification": true
+    },
+    "deltalog101R7": {
+      "operation": "exec-0000000000000ed8",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair7-short16-diagnostic-20261016-001/SOURCE_MANIFEST.json",
+        "bytes": 194298,
+        "sha256": "b893877f2fdc3283e272000535829d3340d7af668a763a639ca045f79e7b761b"
+      },
+      "status": "FAILED_DEVICEFREE_PREFLIGHT",
+      "result": {
+        "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R7-main-NEW24H_MODEL101R7_001/RESULT.json",
+        "bytes": 2385,
+        "sha256": "45e469928d169e5ef534b58b986cf9dbee9eba6c803917bbd72f97c13a343dd4"
+      },
+      "stderr": {
+        "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R7-main-NEW24H_MODEL101R7_001/cpu-preflight/DL-cold-source.stderr",
+        "bytes": 14197,
+        "sha256": "9715c6468626650f4a79da97a157f2d51bcada7c280d99387af9ebfddbcfc7b1"
+      },
+      "cleanup": {
+        "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R7-main-NEW24H_MODEL101R7_001/cpu-preflight/cleanup.json",
+        "bytes": 1385,
+        "sha256": "c840856c3848481b06fb8811c339705906f33533b169c14ce4f491b38f6db1e2"
+      },
+      "software_passed": 94,
+      "software_errors": 1,
+      "software_skipped": 0,
+      "first_fault": "test_short16_101r7.py57 INVERSE101R7.json absent from source/delivery closure",
+      "NPU_stage_executed": false,
+      "elapsed_seconds": 84.6577977600391,
+      "secondary": [],
+      "container_released": true,
+      "old_failure_preserved": true
+    },
+    "bole131": {
+      "operation": "exec-0000000000000ee5",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131/SOURCE_BOUND.json",
+        "bytes": 27983,
+        "sha256": "c69a2389ea4a869bfb2b1c48f977aed91ff0e1b20b773e1165cdba820475fc69"
+      },
+      "status": "FAILED_WORKER_SOURCE_IDENTITY_BEFORE_HTTP",
+      "result": {
+        "path": "/opt/host/vnf/austinov/run-bole-model131-MAIN-NEW24H_001/RESULT.json",
+        "bytes": 68746,
+        "sha256": "f972339cf79b62c15d76a8160bceafc4998030b0248f6310c68bdf3db360f77d"
+      },
+      "server_stdout": {
+        "path": "/opt/host/vnf/austinov/run-bole-model131-MAIN-NEW24H_001/dense/server.stdout",
+        "bytes": 42446,
+        "sha256": "699643184eab8dc1956bc1e96818930d59052d659c9aa5aefda7f70626f155fa"
+      },
+      "server_stderr": {
+        "path": "/opt/host/vnf/austinov/run-bole-model131-MAIN-NEW24H_001/dense/server.stderr",
+        "bytes": 15544,
+        "sha256": "e3808dbaa2451c7b6dc20a5dc2cb0c0dcb9687e9e51763f9841e33cb52a83e07"
+      },
+      "software_controls": 34,
+      "software_all_passed": true,
+      "actual_devicefree_parser_pass": true,
+      "actual_four_canaries_pass": true,
+      "predecessor_refs": {
+        "gdn": {
+          "source": {
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/SOURCE_FULL.json",
+            "bytes": 8529,
+            "sha256": "afac28e6e3214e243c75a2beb7c218fa43b182bce002e3be9c6b9661c7f011d2"
+          },
+          "numeric_owner": {
+            "path": "/opt/host/vnf/austinov/run-bole-tree112repair4-MAIN-20261016-001/full/numeric/RESULT.json",
+            "bytes": 1430,
+            "sha256": "6c407a7c974329df34eb1a1edbfa9dbf60058fbeea850c42fbddebe16d352ead"
+          },
+          "consumer_owner": {
+            "path": "/opt/host/vnf/austinov/run-bole-tree112repair4-MAIN-20261016-001/full/consumer/RESULT.json",
+            "bytes": 1198,
+            "sha256": "8e857dab9cc7a80fdc8258513aee725e44a2c12f617ed0219a4d0a605c234d06"
+          }
+        },
+        "paged": {
+          "source": {
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/SOURCE_MANIFEST.json",
+            "bytes": 25737,
+            "sha256": "fdafbb8872ad9da1ff8150ddafa1e66acae3a80e05aa2b62bb04202da6e33faa"
+          },
+          "numeric_owner": {
+            "path": "/opt/host/vnf/austinov/run-bole-paged-tree118trepair1-MAIN-20261016-001/paged/numeric/RESULT.json",
+            "bytes": 1684,
+            "sha256": "e7d9250ab7ab6add24aa53be4cae153ec3400a186cc96ae3e5fd5567aa9b0299"
+          },
+          "consumer_owner": {
+            "path": "/opt/host/vnf/austinov/run-bole-paged-tree118trepair1-MAIN-20261016-001/paged/consumer/RESULT.json",
+            "bytes": 1233,
+            "sha256": "ba072952bba74c59ed23e5f28a9dfd216d1169157fa3d60be269b72506d88363"
+          }
+        }
+      },
+      "prerequisite_receipts": [
+        {
+          "path": "/opt/host/vnf/austinov/run-bole-model131-MAIN-NEW24H_001/cpu-preflight/CPU.json",
+          "bytes": 5420,
+          "sha256": "f48291d43d4f106ab8771c1d1faf6a3a6ac8a31bf936880fe93412e87007e3bb"
+        },
+        {
+          "path": "/opt/host/vnf/austinov/run-bole-model131-MAIN-NEW24H_001/cpu-preflight/SOFTWARE.stderr",
+          "bytes": 133,
+          "sha256": "1df6027f7eb01bbb0ab23020e797e05f9589a26ece6f3445a01c83312d3498ef"
+        },
+        {
+          "path": "/opt/host/vnf/austinov/run-bole-model131-MAIN-NEW24H_001/dense/CANARY.json",
+          "bytes": 285,
+          "sha256": "9e0ba3a77afa932c494e299c0cf1ab74c8f6a77f63683f8b67014eec24f006ea"
+        }
+      ],
+      "elapsed_seconds": 416.5036682100035,
+      "first_fault": "worker_entry.discover code_source(C,obj.forward,qwen_next_ref) rejected actual callable source",
+      "root_cause_category": "ADAPTATION_SOURCE_BINDING unresolved callable ownership/wrapper",
+      "no_tree_or_scheduler_or_numerical_or_performance_result": true,
+      "containers_quiescent": [
+        {
+          "stage": "cpu-preflight",
+          "cid": "72004daaffb7b737c72e8052ecaad5c2307e9ae923432201d62a93ee77552200",
+          "status": "exited",
+          "pid": 0,
+          "exit": 137,
+          "OOM": false,
+          "devices": [],
+          "cleanup": {
+            "stopped": true,
+            "retained": true,
+            "errors": []
+          }
+        },
+        {
+          "stage": "dense",
+          "cid": "cf8ea28b8d4371db410da9ce7093bf9f1dba52ecf097bc5ea8f4c67b620a7769",
+          "status": "exited",
+          "pid": 0,
+          "exit": 137,
+          "OOM": false,
+          "devices": [
+            {
+              "PathOnHost": "/dev/davinci4",
+              "PathInContainer": "/dev/davinci0",
+              "CgroupPermissions": "rwm"
+            },
+            {
+              "PathOnHost": "/dev/davinci5",
+              "PathInContainer": "/dev/davinci1",
+              "CgroupPermissions": "rwm"
+            },
+            {
+              "PathOnHost": "/dev/davinci6",
+              "PathInContainer": "/dev/davinci2",
+              "CgroupPermissions": "rwm"
+            },
+            {
+              "PathOnHost": "/dev/davinci7",
+              "PathInContainer": "/dev/davinci3",
+              "CgroupPermissions": "rwm"
+            },
+            {
+              "PathOnHost": "/dev/davinci_manager",
+              "PathInContainer": "/dev/davinci_manager",
+              "CgroupPermissions": "rwm"
+            },
+            {
+              "PathOnHost": "/dev/devmm_svm",
+              "PathInContainer": "/dev/devmm_svm",
+              "CgroupPermissions": "rwm"
+            },
+            {
+              "PathOnHost": "/dev/hisi_hdc",
+              "PathInContainer": "/dev/hisi_hdc",
+              "CgroupPermissions": "rwm"
+            }
+          ],
+          "cleanup": {
+            "stopped": true,
+            "retained": true,
+            "errors": []
+          }
+        }
+      ],
+      "no_unchanged_retry": true,
+      "new_readonly_source_fact": "Actual installed patch/worker/__init__.py imports patch_qwen3_5 on910B, which assigns Qwen3NextAttention.forward=AscendQwen3NextAttention.forward; new receiver must prove actual callable identity rather than generic-source assumption or arbitrary unwrap"
+    },
+    "deltalog101R8": {
+      "operation": "exec-0000000000000ef8",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair8-short16-diagnostic-20261016-001/SOURCE_MANIFEST.json",
+        "bytes": 195142,
+        "sha256": "cd88e9d72dc3b4ee9ecef7cb2124df9619259bfe3a95a9f99f700d66f00932e0"
+      },
+      "status": "FAILED_REAL_ISOLATED_SERVER_IMPORT_BEFORE_MODEL",
+      "result": {
+        "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R8-main-NEW24H_MODEL101R8_001/RESULT.json",
+        "bytes": 3144,
+        "sha256": "b8d0964eb1e8390f3bb1e92d63aa921a47961f69b68eab7e7b568b0728a0b8c7"
+      },
+      "cpu": {
+        "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R8-main-NEW24H_MODEL101R8_001/cpu-preflight/CPU.json",
+        "bytes": 13946,
+        "sha256": "3e91da9a9179dcbd40c466a00f2f94b86062515d04c1b9a5dabe28477756eced"
+      },
+      "canary": {
+        "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R8-main-NEW24H_MODEL101R8_001/candidate/CANARY.json",
+        "bytes": 1433,
+        "sha256": "fd42abbab1eeb32d6045fa55bf61f34302cd7d87a10e116e2dfff3fbaa0b699c"
+      },
+      "server_stderr": {
+        "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R8-main-NEW24H_MODEL101R8_001/candidate/server.stderr",
+        "bytes": 2242,
+        "sha256": "8d7114e5eb634bc6a67a0dda2c59dff3707d557bd8e5ef592520f075bff92568"
+      },
+      "server_stdout": {
+        "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R8-main-NEW24H_MODEL101R8_001/candidate/server.stdout",
+        "bytes": 673,
+        "sha256": "918e3e8fcf330166060f2efc2151614dc92ba2be8a832396dedc980950c499f5"
+      },
+      "software_passed": 95,
+      "software_errors": 0,
+      "software_skipped": 0,
+      "actual_IPC_AF_UNIX": true,
+      "actual_EROFS": 30,
+      "actual_four_canaries_and_plugin_parser_pass": true,
+      "elapsed_seconds": 187.46986420999747,
+      "secondary": [],
+      "first_fault": "real entry.py -I process: trace_plugin import qwen36_deltalog_service ModuleNotFoundError; PYTHONPATH does not populate -I sys.path",
+      "category": "ADAPTATION_FRESH_INTERPRETER_BOOTSTRAP",
+      "no_HTTP_or_model_numeric_or_performance_result": true,
+      "independent_quiescent_containers": [
+        {
+          "cid": "08ae4f01f1fc1a180a55efefdfbc49930cfe0a478272650c730f163c4d6daf5c",
+          "status": "exited",
+          "Pid": 0,
+          "ExecIDs": null,
+          "OOM": false,
+          "devices": []
+        },
+        {
+          "cid": "f91290e2c60e0447ea225b37ad9ed47bccc2b0225f51c564e2918f9f3e979daa",
+          "status": "exited",
+          "Pid": 0,
+          "ExecIDs": null,
+          "OOM": false,
+          "devices": [
+            {
+              "PathOnHost": "/dev/davinci4",
+              "PathInContainer": "/dev/davinci0",
+              "CgroupPermissions": "rwm"
+            },
+            {
+              "PathOnHost": "/dev/davinci5",
+              "PathInContainer": "/dev/davinci1",
+              "CgroupPermissions": "rwm"
+            },
+            {
+              "PathOnHost": "/dev/davinci6",
+              "PathInContainer": "/dev/davinci2",
+              "CgroupPermissions": "rwm"
+            },
+            {
+              "PathOnHost": "/dev/davinci7",
+              "PathInContainer": "/dev/davinci3",
+              "CgroupPermissions": "rwm"
+            },
+            {
+              "PathOnHost": "/dev/davinci_manager",
+              "PathInContainer": "/dev/davinci_manager",
+              "CgroupPermissions": "rwm"
+            },
+            {
+              "PathOnHost": "/dev/devmm_svm",
+              "PathInContainer": "/dev/devmm_svm",
+              "CgroupPermissions": "rwm"
+            },
+            {
+              "PathOnHost": "/dev/hisi_hdc",
+              "PathInContainer": "/dev/hisi_hdc",
+              "CgroupPermissions": "rwm"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "queue": {
+    "CURRENT": {
+      "paper": "DeltaLog",
+      "node": "101-repair9 exact isolated-entry bootstrap repair",
+      "owner": "accuracy_input_repair",
+      "status_at_checkpoint": "PREPARING; no live experiment",
+      "old101R8_failure_preserved": true,
+      "must_require": [
+        "exact source-verified paths inserted before API/plugin registration in real fresh -I interpreter",
+        "original math/thresholds/95 controls retained plus relevant new negative controls",
+        "byte-exact declared-only deployment and Linux sameimage",
+        "fresh MAIN resource admission"
+      ],
+      "exclusive_physical_devices_when_launched": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "NEXT": {
+      "paper": "BOLE",
+      "node": "repair only proved worker callable source binding",
+      "owner": "gdn_paper_reassessment",
+      "status": "PREPARING strict installed Ascend FA callable source repair; old131 frozen",
+      "must_require": [
+        "source-proved actual callable/wrapper ownership",
+        "sameimage regression/new unique output",
+        "fresh resource admission after CURRENT release"
+      ],
+      "scheduler_publication_still_pending": true
+    },
+    "BACKUP": {
+      "paper": "DeltaLog",
+      "node": "133-repair1 retained main-frame CPU cost diagnostic",
+      "status": "SOURCE_REVIEWED_NOT_DEPLOYED_NOT_READY",
+      "local_source": "C:/Users/Huawei/AppData/Local/Temp/deltalog-main-record-cost-new24h-v1-133-repair1-20261016-001",
+      "source_bytes": 13846,
+      "source_sha256": "3e8722cd3c5b975ec0af43f5d01f88c5abafc6eb5300f527b6410e077cc7e8fa",
+      "missing": [
+        "old133/raw_closure043.py exact declared dependency delivery",
+        "target byte validation/bind/source audit",
+        "fresh sole-owner admission"
+      ],
+      "source_only_tests": 26,
+      "whole_seconds": 500,
+      "cleanup_seconds": 90,
+      "final_fence_reserved_seconds": 150,
+      "full160_or585_qualification": false
+    },
+    "full_recovery127R4": {
+      "status": "SOURCE_PREPARED_BLOCKED_ON_MEASURED_COMPLETE_BUDGET_PROFILE",
+      "no_unchanged585_retry": true
+    }
+  },
+  "resources": {
+    "physical_allowed": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "fresh_snapshot_utc": "2026-10-16T22:18:57Z",
+    "mem_available_kB": 61056472,
+    "ordinary_initial_model_floor_GiB": 56.5,
+    "hugepage_release_32GiB": "SPENT",
+    "continuous_30min_utilization": "UNMEASURED",
+    "legacy_controllers_global_owned_exclusion": true,
+    "no_dummy_occupancy": true,
+    "current_owned_experiments": [],
+    "idle_cause": "Two real-model frontdoor adaptation defects; no current ready NPU successor. Preparers repairing distinct exact seams; no dummy load."
+  },
+  "archive": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_model_diagnostics_20261016_2210",
+    "source_files": 266,
+    "source_bytes": 3044309,
+    "raw_data_in_git": false
+  },
+  "acceptance": {
+    "whole_model_gain_or_task_results": false,
+    "HYPIC": "historical exemplar only",
+    "performance": "same-stack paired;fixed1024;profilingOFF;three repeats;>=10%;TTFT+TPOT",
+    "tasks": "GSM8K/HumanEval/MMLU;thinkOFF;max2048;normalEOS;smoke then full;report pp+relative <=1%"
+  },
+  "finalized_at_utc": "2026-10-16T22:19:26Z"
+}
