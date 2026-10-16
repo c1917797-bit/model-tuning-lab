@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "formal-r16-g3-r1-accepted-baseline-next",
+  "execution_state": "formal-r16-g1-r1-running",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Fresh direct/physical/source147/newroot/image/model/input admission then launch FORMAL_R16_20261016_G1_R1_CONTRACT.json --run using formal_r15_tp4.py. Terminal audit_r16_performance.py --contract ... --live-release. G3/R1 accepted but no paired gain yet.",
+  "next_action": "Poll exact ma0a5c and rawroot; terminal independently audit_r16_performance.py --contract FORMAL_R16_20261016_G1_R1_CONTRACT.json --live-release. Compare same-source R16 pair only. Full quality/lifecycle still missing.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,14 +215,13 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL0a20 exit0; independent0a57 exit0; exact own release verified",
-    "last_operation": "exec-0000000000000a20",
+    "state": "RUNNING; no restart while running or terminal unclear",
+    "last_operation": "exec-0000000000000a5c",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "raw_root": "/cache/cch/hypic-independent-20261013/formal-r16-20261016-g3-r1",
-    "checkpoint": "eab2de9f1365a350fcabe2abfbd4e4689a33f85c",
-    "contract": "FORMAL_R16_20261016_G3_R1_CONTRACT.json",
-    "terminal_report": "FORMAL_R16_20261016_G3_R1_TERMINAL.json"
+    "raw_root": "/cache/cch/hypic-independent-20261013/formal-r16-20261016-g1-r1",
+    "checkpoint": "e0c1769a1e71c6d18672df37f7a1514e1e7e3538",
+    "contract": "FORMAL_R16_20261016_G1_R1_CONTRACT.json"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -269,7 +268,7 @@
     "valid_phases": [
       "G3/R1"
     ],
-    "running": null,
+    "running": "G1/R1",
     "next": "G1/R1 same-source fresh baseline",
     "remaining_not_started": 11,
     "report": "FORMAL_R16_20261016_G3_R1_TERMINAL.json"

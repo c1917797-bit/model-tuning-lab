@@ -1,3 +1,14 @@
+# CURRENT R16 G1/R1 live — supersedes prior baseline-next
+
+2026-10-16 09:34UTC fresh0a5b admission: physical0-3empty,8233/HCCLfree,
+147sources/model/image/input bound,newroot absent. Host checkpoint e0c1769a.
+Controller ma exec-0000000000000a5c running, raw
+/cache/cch/hypic-independent-20261013/formal-r16-20261016-g1-r1.
+Poll exact handle/originalpeer; running/unclear never restart or edit147boundfiles.
+Terminal audit_r16_performance.py --contract FORMAL_R16_20261016_G1_R1_CONTRACT.json --live-release.
+R16G3 first40 accepted; no paired gain yet. Newmatrix1/12; quality/lifecycle missing.
+Human24h renewal until2026-10-17T06:48:09Z; hypic-24 followup remains active.
+Published terminal e0c1769a live-ref verified; main23ec33d7 unchanged.
 # Independent HYPIC algorithm reconstruction — current handoff
 
 LATEST R16G3/R1 exact0a20 TERMINAL exit0:40/40,477clean isolation,147sources,
