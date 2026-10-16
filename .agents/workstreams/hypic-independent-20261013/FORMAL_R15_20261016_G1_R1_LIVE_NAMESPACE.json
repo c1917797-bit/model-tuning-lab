@@ -1,0 +1,91 @@
+{
+  "schema": "formal-live-namespace/v1",
+  "operation": "exec-00000000000009ad",
+  "controller": "exec-00000000000009a6",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-r15-20261016-g1-r1",
+  "service": {
+    "container_id": "a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058",
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "devices": [
+      "/dev/davinci0",
+      "/dev/davinci1",
+      "/dev/davinci2",
+      "/dev/davinci3"
+    ],
+    "labels": {
+      "model-tuning-lab.phase": "native-smoke",
+      "model-tuning-lab.task": "hypic-independent-20261013",
+      "org.opencontainers.image.version": "22.04"
+    }
+  },
+  "snapshot": {
+    "utc": "2026-10-16T07:47:53.576657+00:00",
+    "processes": [
+      [
+        0,
+        3062910
+      ],
+      [
+        1,
+        3062911
+      ],
+      [
+        2,
+        3062912
+      ],
+      [
+        3,
+        3062913
+      ]
+    ],
+    "owners": [
+      {
+        "npu": 0,
+        "pid": 3062910,
+        "cgroup": "13:blkio:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n12:freezer:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n11:memory:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n10:perf_event:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n9:rdma:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n8:pids:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n7:cpuset:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n6:net_cls,net_prio:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n5:hugetlb:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n4:devices:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n3:files:/\n2:cpu,cpuacct:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n1:name=systemd:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n",
+        "ownership_status": "owned-cgroup",
+        "nspid": [
+          3062910,
+          57
+        ],
+        "owned": true
+      },
+      {
+        "npu": 1,
+        "pid": 3062911,
+        "cgroup": "13:blkio:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n12:freezer:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n11:memory:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n10:perf_event:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n9:rdma:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n8:pids:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n7:cpuset:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n6:net_cls,net_prio:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n5:hugetlb:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n4:devices:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n3:files:/\n2:cpu,cpuacct:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n1:name=systemd:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n",
+        "ownership_status": "owned-cgroup",
+        "nspid": [
+          3062911,
+          58
+        ],
+        "owned": true
+      },
+      {
+        "npu": 2,
+        "pid": 3062912,
+        "cgroup": "13:blkio:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n12:freezer:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n11:memory:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n10:perf_event:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n9:rdma:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n8:pids:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n7:cpuset:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n6:net_cls,net_prio:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n5:hugetlb:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n4:devices:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n3:files:/\n2:cpu,cpuacct:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n1:name=systemd:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n",
+        "ownership_status": "owned-cgroup",
+        "nspid": [
+          3062912,
+          59
+        ],
+        "owned": true
+      },
+      {
+        "npu": 3,
+        "pid": 3062913,
+        "cgroup": "13:blkio:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n12:freezer:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n11:memory:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n10:perf_event:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n9:rdma:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n8:pids:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n7:cpuset:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n6:net_cls,net_prio:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n5:hugetlb:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n4:devices:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n3:files:/\n2:cpu,cpuacct:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n1:name=systemd:/docker/a05dc0ee40cb18a6829f95fc1492aae10ee515e0bb9070bdde2c7b9cd4c94058\n",
+        "ownership_status": "owned-cgroup",
+        "nspid": [
+          3062913,
+          60
+        ],
+        "owned": true
+      }
+    ],
+    "foreign": [],
+    "raw": "+------------------------------------------------------------------------------------------------+\n| npu-smi 25.2.0                   Version: 25.2.0                                               |\n+---------------------------+---------------+----------------------------------------------------+\n| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|\n| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |\n+===========================+===============+====================================================+\n| 0     910B4               | OK            | 191.9       44                0    / 0             |\n| 0                         | 0000:C1:00.0  | 59          0    / 0          21842/ 32768         |\n+===========================+===============+====================================================+\n| 1     910B4               | OK            | 175.5       42                0    / 0             |\n| 0                         | 0000:C2:00.0  | 51          0    / 0          21840/ 32768         |\n+===========================+===============+====================================================+\n| 2     910B4               | OK            | 176.9       44                0    / 0             |\n| 0                         | 0000:81:00.0  | 55          0    / 0          21841/ 32768         |\n+===========================+===============+====================================================+\n| 3     910B4               | OK            | 181.2       45                0    / 0             |\n| 0                         | 0000:82:00.0  | 57          0    / 0          21838/ 32768         |\n+===========================+===============+====================================================+\n| 4     910B4               | OK            | 93.5        43                0    / 0             |\n| 0                         | 0000:01:00.0  | 0           0    / 0          2868 / 32768         |\n+===========================+===============+====================================================+\n| 5     910B4               | OK            | 96.3        42                0    / 0             |\n| 0                         | 0000:02:00.0  | 0           0    / 0          2868 / 32768         |\n+===========================+===============+====================================================+\n| 6     910B4               | OK            | 95.2        43                0    / 0             |\n| 0                         | 0000:41:00.0  | 0           0    / 0          2866 / 32768         |\n+===========================+===============+====================================================+\n| 7     910B4               | OK            | 85.9        43                0    / 0             |\n| 0                         | 0000:42:00.0  | 0           0    / 0          2865 / 32768         |\n+===========================+===============+====================================================+\n+---------------------------+---------------+----------------------------------------------------+\n| NPU     Chip              | Process id    | Process name             | Process memory(MB)      |\n+===========================+===============+====================================================+\n| 0       0                 | 3062910       | VLLMWorker_TP            | 19022                   |\n+===========================+===============+====================================================+\n| 1       0                 | 3062911       | VLLMWorker_TP            | 19022                   |\n+===========================+===============+====================================================+\n| 2       0                 | 3062912       | VLLMWorker_TP            | 19022                   |\n+===========================+===============+====================================================+\n| 3       0                 | 3062913       | VLLMWorker_TP            | 19022                   |\n+===========================+===============+====================================================+\n| No running processes found in NPU 4                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 5                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 6                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 7                                                            |\n+===========================+===============+====================================================+\n"
+  },
+  "scope": "actual physical0-3 PID/NSpid/cgroup only; TP ranks independently visible in worker logs; source/isolation/full40 separate"
+}
