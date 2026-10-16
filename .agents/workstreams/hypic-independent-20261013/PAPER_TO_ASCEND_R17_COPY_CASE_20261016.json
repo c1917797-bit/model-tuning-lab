@@ -1,0 +1,137 @@
+{
+  "schema": "mst-hypic-skill-functional-case/v1",
+  "case_id": "hypic-independent-r17-c1-copy-20261016",
+  "classification": "partial-functional-evidence",
+  "report_state": "progress-not-final",
+  "scope": {
+    "paper_revision": "2607.01299v2",
+    "algorithm_identity": "Independent adapted single-instance C1/C2 port; not full paper-exact reproduction",
+    "excluded_by_human": [
+      "distributed C3",
+      "dual TP2",
+      "old HYPIC treatment code",
+      "physical NPU4-7 compute"
+    ],
+    "implementation_checkpoint": "d4513d817a7792544fa17112b6cb9eb85e3ea76c",
+    "frozen_contract_checkpoint": "61bc4e2a53dc5371a9dee926a418da9f66db885e",
+    "model": "Qwen3.6-27B named checkpoint; actual Qwen3_5ForConditionalGeneration BF16",
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "cpu_set": "112-191",
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tp": 4,
+    "port": 8233,
+    "generation": "fixed1024 ignoreEOS diagnostic; not naturalEOS task quality"
+  },
+  "skill_blobs": {
+    "paper-to-ascend": "ad455c2d22d64eaff61384c23c39bd4693d15636",
+    "paper-to-ascend-reporting": "7902b3f9c96ebd6b77a35b328333ad3834fe4a9f",
+    "runtime-monkeypatch-delivery": "5ac9f8b07d8e092dcba7e1b0cfd5423469534666",
+    "ascend-benchmark-evidence": "03ade79d697e974891410ea95f0ce54a8160b8c6",
+    "chicaihong01-host-maintenance": "4f226c75f5cf92c16b02524e7666c941dd147afb"
+  },
+  "evidence_categories": {
+    "current_measured": {
+      "controller": "exec-0000000000000d00",
+      "independent_audit": "exec-0000000000000d1d",
+      "report": "R17_COPY_CANARY_R1_TERMINAL_AUDIT_20261016.json",
+      "denominator": {
+        "producer_requests": 1,
+        "private_requests": 2,
+        "private_prompt_tokens": 32768,
+        "private_output_tokens": 1024,
+        "copy_leases": 384,
+        "workers": 4,
+        "c1_layers_per_request_rank": 48,
+        "c2_layers_per_request_rank": 16,
+        "isolation_samples": 223
+      },
+      "copy_shapes": {
+        "transition": [
+          12,
+          128,
+          128
+        ],
+        "zero_state": [
+          12,
+          128,
+          128
+        ],
+        "conv_tail": [
+          3,
+          2560
+        ]
+      },
+      "raw_sha256": {
+        "result.json": "f3bc2005852d63a8d54c7f772672daadc64e4e7766d9e8a620d0596966ef9b0e",
+        "responses.json": "e3ff7b3bbf53a60b65c98caa3f5e72933bfabc2d6566916e8ba05d2c0383f451",
+        "events.jsonl": "45a66cfe0ac70021f1ae94856f44060a160954b1531848962a0ca5969671e856",
+        "isolation.json": "9c8c6d6edb885898e359fdb0be3cef00c0f3bd9bcab896b849bc857f1d56eb20",
+        "release.json": "a02ea005d5be35a6f545d80e7873742ea2cadaec9f5d05251f4a036556c9ea84",
+        "service-start.json": "19d48e9dcd222daee34796ec151a172e19b24f412990f4af9696e645a8c7d214",
+        "service.log": "10dd7c0fa8e66e48f99d8374a40d570684e6310f475974899cb0c773f0c09e9e",
+        "diagnostics/compact-worker-59.jsonl": "40070f3ee9364f050851daeff37e0481d629f2faf1726387040f5ff257274992",
+        "diagnostics/compact-worker-60.jsonl": "c0563f0232a4e3c27eb14596423854a4515c4ab06928ca919f4b6f3e2937aa53",
+        "diagnostics/compact-worker-61.jsonl": "2dc781aef4fc6cc7ffd829a4bff52015a12e158a4ae073661bf08bf1ffcd4d13",
+        "diagnostics/compact-worker-62.jsonl": "ac40489c5ef3e9249f702f50f51f056ad616bfe4a9468fb6827bfdceaaebacc5"
+      }
+    },
+    "prior_implementation_reference": {
+      "report": "FORMAL_R16_20261016_FIRST_PAIR_DECISION.json",
+      "decision": "negative first screen; not a same-source R17 result"
+    },
+    "paper_claim": "No paper speed or accuracy number is imported into current measured results.",
+    "colleague_reference": "Workflow/design reference only; no successful HYPIC treatment code imported and no historical result used as current measurement.",
+    "interpretation": "Actual same-lease full-byte copy proof closes only this transfer correctness gate, not whole algorithm quality or service benefit."
+  },
+  "method_chain": {
+    "covered": [
+      "C1 private compact-material source lifetime",
+      "full T/S/conv-tail transfer-byte comparison",
+      "same request/rank/PID/source/step/layer/generation evidence join",
+      "two-request real C1/C2 body skip",
+      "continuous physical isolation and exact owned release"
+    ],
+    "remaining": [
+      "same-source R17 service performance attribution and full G1-G4 three rounds",
+      "381-per-arm reference-backed naturalEOS quality",
+      "disabled-package real-request control",
+      "uninstall/restart lifecycle",
+      "complete Paper-to-Ascend and29Skill functional acceptance"
+    ]
+  },
+  "commands": {
+    "working_directory": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013",
+    "historical_launch_do_not_rerun_old_root": "python3 -B formal_r15_tp4.py --contract C1_ASYNC_MATERIAL_R17_CANARY_R1_CONTRACT.json --run",
+    "read_only_audit": "python3 -B audit_c1_async_material.py --contract C1_ASYNC_MATERIAL_R17_CANARY_R1_CONTRACT.json --live-release",
+    "live_audit_precondition": "Requires actual physical0-3 idle; current separately owned full40 service must finish naturally first. Never stop another stage to replay old live-release checks.",
+    "recovery": "Track active_attempt from task.json and exact controller/raw root. Never restart an unclear run or reuse an old raw root.",
+    "released_canary_container": "3b67067f96f5938190cc23cae8a400b9ae78a3611323cc73d5e64068332a7e0b",
+    "safe_stop": "No action for released Canary. Current full40 controller owns its own separately identified container and cleanup."
+  },
+  "skill_exercise": {
+    "paper_to_ascend": "Partial: source seam, independent bounded implementation, numerical copy and integrated mechanisms exercised; service benefit/quality/full chain incomplete.",
+    "reporting": "Partial: current/prior/paper/interpretation separated, exact commands/counts/raw hashes and forbidden claims retained; no final report.",
+    "runtime_monkeypatch_delivery": "Partial: default-off source/config and fourworker enabled markers, actual transfer/full-byte canary and single-stage release. Real global-disabled/uninstall/restart/fullperformance/quality gates incomplete.",
+    "benchmark_evidence": "Partial: scoped denominator, source/physical/request identity and independent audit. Full40 blocked-copy control currently running; no new speed numbers.",
+    "host_maintenance": "Bounded exercised: fresh ma/direct route/source/image/model/actual0-3/port/newroot admission and explicit PID/cgroup physical joins. Future admissions still require revalidation."
+  },
+  "failure_boundaries": [
+    "CPU exception/partialcopy/eventfailure/quarantine controls passed host tests, not real NPU fault injection.",
+    "Generic nested hot.scope wording mentions full40, but actual accepted denominator here is2; outer independent report forbids full40 inference.",
+    "Full-copy bit equality is not equality between native full-context and PIC attention contexts.",
+    "No averaging of profiler host self time or collective rank sums into removable service gain."
+  ],
+  "decisions": {
+    "copy_correctness": "accepted-bounded",
+    "two_request_mechanism": "accepted-bounded",
+    "performance": "not-yet-measured-for-R17",
+    "task_quality": "not-measured-for-R17",
+    "adoption": "not-ready",
+    "all29_functional": "incomplete"
+  }
+}
