@@ -1,0 +1,29 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "audit_full_quality_cohort.py",
+  "focused": {
+    "operation": "exec-0000000000000a9c",
+    "tests": 14,
+    "exit": 0
+  },
+  "regression": {
+    "operation": "exec-0000000000000a9e",
+    "tests": 693,
+    "exit": 0
+  },
+  "scope": "Synthetic full381 cohort and independent scoring callback only; no actual fullquality NPU results.",
+  "proofs": [
+    "127unique frozen samples × repetitions1..3 =381",
+    "unique actualAPI IDs/outputhashes/nohiddenretry",
+    "independentrescore againstfrozenreference; storedprediction/correct/aggregate agreement",
+    "sameorderedunscored publicmaterial producers and exactbatchcompletion",
+    "naturalEOS/maxlength1024 finish reasons retained; truncatedcounts explicit"
+  ],
+  "nonclaims": [
+    "does not require losslessPIC quality",
+    "does not decide acceptablepairedqualitymargin",
+    "does not replace source/generationhot/physical/isolation/release acceptance",
+    "not newmodelquality or29Skillfunctional evidence"
+  ],
+  "next": "Combine with existing381cataloghot audit and source/physical/release wrapper, freeze same-ruler twoarmqualitycontracts after actual R2catalogCanary acceptance. Stable0-3window coordination pending; no ownedNPUjob."
+}
