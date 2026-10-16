@@ -1,3 +1,15 @@
+# LATEST readonly observation terminal — no device job
+
+0aa1exit0:38sampledphysical0-3snapshots10:12:48–10:22:45UTC,
+10busy samples with intermittentNPU0/3PIDs; longestempty sampledspan112.847s.
+No180ssampledidle/reservation/deviceallocation. Do not attributeallPIDs to
+cannbench_ds:observerloggedPIDpairs only; prior0a5c/0a94 attributionseparate.
+0ab2fresh10:24:19UTCsnapshotempty,notstablewindoworreservationproof.
+Noownedlivejob/observer. Continueofflinefullquality/lifecyclepreparation;
+confirmedstablewindowcoordinationpending,avoidblind27Binitializationloop.
+Fullqualityauditcode4942b227published706CPUregression;noactual381arm.
+R2catalog159bindingsfrozenprospective,notNPUaccepted. Mainunchanged.
+
 # LATEST attempt2 external interruption — no owned live job
 
 0a94 terminalexit1,0modelrequests,57isolation samples. Firstforeign10:06:15UTC
