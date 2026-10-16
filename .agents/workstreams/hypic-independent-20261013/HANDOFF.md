@@ -1,4 +1,19 @@
-# CURRENT R20 FORWARD METADATA CANDIDATE HOST VALIDATION
+# CURRENT R20 METADATA NUMERIC CANARY LIVE
+
+Checkpoint353019c03af33bf32551dd7043cb020c46d562b1 published/liveverified;
+main23ec33d7 unchanged. Final983CPU0fad PASS;190source/169runtime0fae PASS.
+Fresh ma direct admission0fba at23:31:34UTC proves source/image/model/input/
+physical0-3empty/8233+HCCLfree/newroot/cache9.27GB. Exactcontroller
+exec-0000000000000fbb onma lgw_a6109c51076a4a2c9d2674ca5a8704a0 live.
+Contract METADATA_R20_CANARY_R1_CONTRACT.json;raw
+/cache/cch/hypic-independent-20261013/metadata-r20-canary-r1.
+Poll exacthandle/raw; neverrestart live/unclear or change190boundfiles.
+Terminal audit_r20_metadata_canary.py --contract METADATA_R20_CANARY_R1_CONTRACT.json
+--live-release; require unchangednumeric/ownership/fourrankmechanism plusactual
+metadatareuse/source/continuousphysicalisolation/exactrelease. Not speed/fullquality.
+Deadline2026-10-17T06:48:09Z. Fullgoalunfinished.
+
+# HISTORICAL R20 FORWARD METADATA CANDIDATE HOST VALIDATION
 
 New defaultoff forward_metadata_snapshot wired activation->model forward scope->
 GDN association reader; per-forward reads/hits included in completed model receipt.

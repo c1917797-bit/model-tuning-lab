@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R20-forward-metadata-candidate-host-validation",
+  "execution_state": "R20-metadata-numeric-canary-live",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "No ownedmodelcompute; CPU0manager-onlyparser11986bb5/no compute mapping."
+    "state": "R20 ownedTP4 canary0fbb initializing; exactCID64d590155e4b1e781547b887dfbd941bacde46404eb0c12c7b561b4bc988f80f mapsphysical0-3 only; continuouscontrollerisolation."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll final CPU regression0fad;190contract/169runtime hashes0fae and29structure0faf passed. Save/publish checkpoint then fresh actual resource admission for METADATA_R20_CANARY_R1_CONTRACT.json. No device run or performance gain yet; oldR19 negative retained.",
+  "next_action": "Poll exact ma controller0fbb/raw metadata-r20-canary-r1; no restartlive/unclear or190bound changes. Terminal independent audit_r20_metadata_canary.py --contract METADATA_R20_CANARY_R1_CONTRACT.json --live-release. OldR19 whole-speed negative retained; no new gain claim.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,15 +215,15 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL_CAPTURE_VALID",
-    "operation": "exec-0000000000000f61",
+    "state": "RUNNING",
+    "operation": "exec-0000000000000fbb",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "contract": "PROFILE_G1_R19_EARLYMIXED_R1_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/profile-g1-r19-earlymixed-r1",
-    "checkpoint": "c9cceb3a5e931e95df60ad35ed4506ec5f3e371d",
-    "admission_operation": "exec-0000000000000f60",
-    "independent_audit": "exec-0000000000000f74"
+    "contract": "METADATA_R20_CANARY_R1_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/metadata-r20-canary-r1",
+    "checkpoint": "353019c03af33bf32551dd7043cb020c46d562b1",
+    "admission_operation": "exec-0000000000000fba",
+    "independent_audit": null
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
