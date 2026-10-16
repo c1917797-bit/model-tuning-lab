@@ -1,0 +1,114 @@
+{
+  "schema": "hypic-r16-evidence-io-screen/v1",
+  "operation": "exec-0000000000000c96",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-r16-20261016-g3-r1",
+  "observed": {
+    "workers": {
+      "compact-worker-59.jsonl": {
+        "events": 32086,
+        "bytes": 13535595,
+        "counts": {
+          "compact_hypic_hooks_installed": 1,
+          "native_request_progress": 64,
+          "compact_public_state_published": 48,
+          "compact_public_kv_published": 16,
+          "c1_prefix_terminal_route": 2832,
+          "c1_packed_wave_prepared": 1776,
+          "c1_layer_precommit_validated": 1776,
+          "compact_gdn_body_composed": 1920,
+          "compact_c2_queries_completed": 640,
+          "compact_model_rows_completed": 37,
+          "native_decode_batch_completed": 1728,
+          "mixed_native_gdn_completed": 15936,
+          "mixed_native_c2_completed": 5312
+        }
+      },
+      "compact-worker-62.jsonl": {
+        "events": 32086,
+        "bytes": 13535595,
+        "counts": {
+          "compact_hypic_hooks_installed": 1,
+          "native_request_progress": 64,
+          "compact_public_state_published": 48,
+          "compact_public_kv_published": 16,
+          "c1_prefix_terminal_route": 2832,
+          "c1_packed_wave_prepared": 1776,
+          "c1_layer_precommit_validated": 1776,
+          "compact_gdn_body_composed": 1920,
+          "compact_c2_queries_completed": 640,
+          "compact_model_rows_completed": 37,
+          "native_decode_batch_completed": 1728,
+          "mixed_native_gdn_completed": 15936,
+          "mixed_native_c2_completed": 5312
+        }
+      },
+      "compact-worker-61.jsonl": {
+        "events": 32086,
+        "bytes": 13535595,
+        "counts": {
+          "compact_hypic_hooks_installed": 1,
+          "native_request_progress": 64,
+          "compact_public_state_published": 48,
+          "compact_public_kv_published": 16,
+          "c1_prefix_terminal_route": 2832,
+          "c1_packed_wave_prepared": 1776,
+          "c1_layer_precommit_validated": 1776,
+          "compact_gdn_body_composed": 1920,
+          "compact_c2_queries_completed": 640,
+          "compact_model_rows_completed": 37,
+          "native_decode_batch_completed": 1728,
+          "mixed_native_gdn_completed": 15936,
+          "mixed_native_c2_completed": 5312
+        }
+      },
+      "compact-worker-60.jsonl": {
+        "events": 32086,
+        "bytes": 13535595,
+        "counts": {
+          "compact_hypic_hooks_installed": 1,
+          "native_request_progress": 64,
+          "compact_public_state_published": 48,
+          "compact_public_kv_published": 16,
+          "c1_prefix_terminal_route": 2832,
+          "c1_packed_wave_prepared": 1776,
+          "c1_layer_precommit_validated": 1776,
+          "compact_gdn_body_composed": 1920,
+          "compact_c2_queries_completed": 640,
+          "compact_model_rows_completed": 37,
+          "native_decode_batch_completed": 1728,
+          "mixed_native_gdn_completed": 15936,
+          "mixed_native_c2_completed": 5312
+        }
+      }
+    },
+    "manifest_bytes": 15803,
+    "scope": "Observed event count plus source mapping to per-event manifest read/hash/write/fsync; no measured duration, no rootcause claim."
+  },
+  "source": {
+    "file": "independent_compact_loader.py",
+    "sha256": "68f85ad6544bbff8c90da0c091c6ae87ac0823b56b9b00b804cb4f7bd8c79c84",
+    "path": "enable.Loader.exec_module.emit",
+    "per_event": [
+      "read manifest bytes",
+      "SHA256 manifest",
+      "JSON serialization",
+      "locked os.write",
+      "os.fsync"
+    ]
+  },
+  "derived": {
+    "events_per_rank": 32086,
+    "total_events_four_ranks": 128344,
+    "manifest_read_bytes_per_rank": 507055058,
+    "manifest_read_bytes_four_ranks": 2028220232,
+    "fsync_calls_per_rank": 32086
+  },
+  "decision": "Material hypothesis only; event count does not prove latency or critical path. Do not change bound source while0c89 live. After terminal, bounded CPU0/cache filesystem replay of existing event samples may screen actual sink cost, then compare earlyprefill/mixed trace before proposing one treatment.",
+  "preserved_requirements": [
+    "All per-request fourrank C1/C2 proof records remain required",
+    "No denominator reduction",
+    "No weakening isolation/ownership/resource release",
+    "Original frozen R16 source/raw/negative result immutable"
+  ],
+  "scope": "Offline source/event-volume inspection, not NPU correctness, end-to-end speed or a deployed fix"
+}
