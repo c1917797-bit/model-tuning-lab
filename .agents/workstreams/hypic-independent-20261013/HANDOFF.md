@@ -1,4 +1,14 @@
-# CURRENT R19 LAZY SNAPSHOT CANARY LIVE
+# CURRENT R19 CANARY TERMINAL BOUNDED ACCEPTED; SPEED PENDING
+
+0e65 exit0; independent0e79 PASS2private complete requests/allfour48C1+16C2,
+384partition/completedreceipts,192numericshadows, eachrank48skip+48shadowretained
+layers,185sources/226cleanisolation/explicitphysicalPIDjoins/liveexactrelease.
+R19_LAZY_CANARY_R1_TERMINAL_20261016.json retains rawSHA; genericnestedfull40
+wording corrected toactualdenominator2. No ownedmodeljob. Not speed/381quality.
+Next same-source timed lazy-on/off firstpair andindependentactualskip/generation/
+finite/source/isolation/releaseaudit; oldrootsimmutable. Fullgoal incomplete.
+
+# HISTORICAL R19 CANARY LIVE
 
 ma exact exec-0000000000000e65 launched20:30UTC from liveverifiedf69c7d2f.
 Admission0e64 proves185sources/167runtime/image/model/input/0-3empty/8233+HCCLfree/

@@ -1,0 +1,155 @@
+{
+  "controller": "exec-0000000000000e65",
+  "independent_audit": "exec-0000000000000e79",
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-lazy-r19-canary-r1",
+  "raw_sha256": {
+    "result.json": "57d0ce5b92bb567e003d41d050d05648c44fd929bd121f1ec8d11f5135abe712",
+    "events.jsonl": "b57d686dfd54076f384d2d941e8ac84101ac95a36ad4d78d709717054ae95fc5",
+    "service.log": "75b0928ebea7728937bc2286416c23a0b0f5bba0caea8f7311a27f33b4fcd9d7",
+    "launch.json": "347876b855ebb5726943bdf49b33ce495b7ec0a50ffc7912cdb7dfaf4e61b562",
+    "responses.json": "a6831bc44cabaf4f0499f3764cbc2491fdfd950fd03e6169068bf4cde871cfa1",
+    "preflight.json": "56aefc0c1fd1d082334656749264c9af855490d846c05f2b8bff69c4f5590954",
+    "service-start.json": "c9ef404e2ef500127f4200834bba5243bb1c1f39e6b3d5b3250056ad492af3ac",
+    "isolation.json": "8402c446a2be5937a58418c3066948584aca7ce451ddcae68719af5b11828a6b",
+    "release.json": "aa1dbc5bf231da644262de16d16b56550efa6178856282256af50602a24e807d",
+    "diagnostics/compact-worker-58.jsonl": "4fa4d577fe4640eaa5612b1ffabd37e9b16c48b43b59575afbce71ba57e1bbb4",
+    "diagnostics/compact-worker-59.jsonl": "dae2862f116f8cb8956ef13f185d2df96e3bbbe63249a69f9b071165ed5f1bf8",
+    "diagnostics/compact-worker-61.jsonl": "432348d79190c08ebb6d7b617a3aa79c2c295491edc8f4cd900a8ca0ac7860a6",
+    "diagnostics/compact-worker-60.jsonl": "30a4b8063510b1a312f6ec8ecf668b1174b881b2f2ff6758a56287af2119f41f"
+  },
+  "report": {
+    "bounded_canary_valid": true,
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 2,
+      "covered": [
+        "cmpl-add9b843f50d335a",
+        "cmpl-b16a76328b9d47c0"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 58,
+        "1": 59,
+        "2": 60,
+        "3": 61
+      },
+      "scope": "two private request denominator only; inherited generic full40 wording corrected, not40"
+    },
+    "probe": {
+      "0": {
+        "original_thread_cpu_ns": 27824150,
+        "prefill_only_thread_cpu_ns": 67100,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "1": {
+        "original_thread_cpu_ns": 35820090,
+        "prefill_only_thread_cpu_ns": 65300,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "2": {
+        "original_thread_cpu_ns": 28307090,
+        "prefill_only_thread_cpu_ns": 61080,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "3": {
+        "original_thread_cpu_ns": 27080160,
+        "prefill_only_thread_cpu_ns": 65330,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      }
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 58,
+          "host_pid": 784819,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 59,
+          "host_pid": 784824,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 60,
+          "host_pid": 784826,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 61,
+          "host_pid": 784829,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "source_bindings": 185,
+    "isolation_samples": 226,
+    "live_release_verified": true,
+    "scope": "two-request bounded numeric/actualskip/source/isolation/release; not speed/fullquality",
+    "partition": {
+      "groups": 384,
+      "completed_receipts": 384,
+      "numeric_shadows": 192,
+      "four_rank_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      },
+      "sampled_numeric_not_full_quality": true
+    },
+    "lazy_snapshot": {
+      "receipts": 384,
+      "skipped_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      },
+      "retained_shadow_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      }
+    }
+  },
+  "decision": "BOUNDED_NUMERIC_ACTUAL_SKIP_ACCEPTED_NOT_SPEED_FULLQUALITY_LIFECYCLE",
+  "next": "Freeze same-source timed lazy-on/off pair (diagnostic off; finite/ownership unchanged); current fullG1-G4x3 and381quality/lifecycle incomplete"
+}
