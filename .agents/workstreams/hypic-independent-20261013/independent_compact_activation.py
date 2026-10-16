@@ -75,9 +75,17 @@ def c1_install_route(config):
     install.c1_first_divergence_head_policy=head_policy
     return config,install,native_batch
 
+def snapshot_install_route(config):
+    config=dict(config)
+    enabled=config.pop("prefill_prompt_snapshot",False)
+    if type(enabled)is not bool:
+        raise ValueError("explicit prefill prompt snapshot boolean required")
+    return config,enabled
+
 def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_limit=128):
     if not enabled:return lambda:None
     if not callable(emit):raise ValueError('activation evidence sink required')
+    config,prefill_prompt_snapshot=snapshot_install_route(config)
     config,install_compact_c2,layer_barrier=c2_install_route(config)
     config,install_compact_gdn,native_batch=c1_install_route(config)
     # Official ops registration precedes runtime imports; never patch source files.
@@ -109,7 +117,8 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
               'zero_state_shape':list(material.affine.zero_state.shape)})
     stop=install_owned_chain((
         lambda:activate_compact_runner(enabled=True,allow_mixed=stage.enable_mixed,emit=emit,
-                                      request_limit=request_progress_limit),
+                                      request_limit=request_progress_limit,
+                                      prefill_prompt_snapshot=prefill_prompt_snapshot),
         lambda:stage.install_producer(enabled=True,publish=publish),
         lambda:install_compact_gdn(stage,enabled=True,emit=emit),
         lambda:install_compact_c2(stage,enabled=True,emit=emit),
@@ -120,6 +129,7 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
         emit({'event':'compact_hypic_hooks_installed','pid':os.getpid(),
               'default_disabled':True,'c2_layer_completion_barrier':layer_barrier,
               'native_decode_batch':native_batch,
+              'prefill_prompt_snapshot':prefill_prompt_snapshot,
               'c1_layer_completion_barrier':install_compact_gdn.c1_layer_completion_barrier,
               'c1_layer_shadow_validation':install_compact_gdn.c1_layer_shadow_validation,
               'c1_packed_wave':install_compact_gdn.c1_packed_wave,

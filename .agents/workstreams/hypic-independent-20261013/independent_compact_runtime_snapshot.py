@@ -69,8 +69,11 @@ def capture_compact_runtime(runner,requests):
                                   prompt_logprobs=bool(runner.num_prompt_logprobs))
 
 
-def activate_compact_runner(*,enabled=False,allow_mixed=False,emit=None,request_limit=128):
+def activate_compact_runner(*,enabled=False,allow_mixed=False,emit=None,request_limit=128,
+                            prefill_prompt_snapshot=False):
     if not enabled:return lambda:None
+    if type(prefill_prompt_snapshot)is not bool:
+        raise ValueError("explicit prefill prompt snapshot boolean required")
     import vllm_ascend.ops
     from vllm_ascend.worker.model_runner_v1 import NPUModelRunner
     from independent_runtime_adapter import freeze_native_runner,verify_runner
@@ -87,5 +90,8 @@ def activate_compact_runner(*,enabled=False,allow_mixed=False,emit=None,request_
         if not allow_mixed and any(r.scheduled_tokens<=1 for r in requests):return
         if allow_mixed and all(r.scheduled_tokens<=1 for r in requests):return
         CURRENT_RUNTIME_SNAPSHOT.set(capture_compact_runtime(runner,requests))
-    return install_runner_context(NPUModelRunner,freeze_native_runner,enabled=True,
+    def freeze(runner,args,kwargs):
+        return freeze_native_runner(runner,args,kwargs,
+                                    prefill_prompt_snapshot=prefill_prompt_snapshot)
+    return install_runner_context(NPUModelRunner,freeze,enabled=True,
                                   verify_source=verify_runner,after_prepare=capture)

@@ -1,0 +1,26 @@
+{
+  "schema": "hypic-prefill-snapshot-runtime-readiness/v1",
+  "plan_checkpoint": "4a0138fae2a2438130001a2e490602d94aac701b",
+  "default_enabled": false,
+  "source_changes": [
+    "independent_runtime_adapter.py",
+    "independent_compact_runtime_snapshot.py",
+    "independent_compact_activation.py"
+  ],
+  "tests": {
+    "full_before_two_additional_tests": {
+      "operation": "exec-00000000000009e6",
+      "tests": 575,
+      "exit": 0
+    },
+    "final_focused": {
+      "operation": "exec-00000000000009ea",
+      "tests": 12,
+      "exit": 0
+    }
+  },
+  "scope": "CPU mocked runtime wiring only; no actual worker opportunity, NPU correctness, serving speed or quality proof",
+  "manifest_status": "All prior source bindings are now historical and must not launch current files. Freeze successor manifest/config/contracts/new raw root before device admission.",
+  "next": "Implement bounded actual-worker snapshot opportunity receipt and independent audit, then same-size four-rank correctness Canary; no R15 matrix expansion.",
+  "full_goal_accepted": false
+}

@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Latest prospective successor: prefill_prompt_snapshot boolean wired defaultfalse
+through activation->runner->freeze_native_runner; installation receipt records switch.
+Only completed single-token decode omits repeated prompt copy; prefill unchanged.
+575CPU09e6 and final12focused09ea PASS. No actual worker opportunity/NPU run yet.
+PREFILL_PROMPT_SNAPSHOT_RUNTIME_READINESS_20261016.json. ALL old source manifests
+now historical/stale: never launch current files with R15 contracts. Next bounded
+source-bound actual-worker cost receipt/audit and same-size correctness Canary.
+
 Latest terminal overrides all older live text:09a6 G1 exit0;09da independent audit
 exit0,40/40,435clean samples,141bindings and exact owned release verified.
 Fresh matched R15 pair: G1 TPOT287.7751ms/TTFTP95355946.39ms versus

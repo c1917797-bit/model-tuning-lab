@@ -75,7 +75,9 @@ def verify_runner(cls):
         raise ValueError("official runner source drift")
     if list(inspect.signature(cls._prepare_inputs).parameters)!=['self','scheduler_output','num_scheduled_tokens']:
         raise ValueError("prepare ABI drift")
-def freeze_native_runner(runner,args,kwargs):
+def freeze_native_runner(runner,args,kwargs,*,prefill_prompt_snapshot=False):
+    if type(prefill_prompt_snapshot)is not bool:
+        raise ValueError("explicit prefill prompt snapshot boolean required")
     from vllm.distributed import get_tp_group
     group=get_tp_group()
     if group.world_size!=4:raise ValueError("this27B campaign requires TP4")
@@ -84,7 +86,13 @@ def freeze_native_runner(runner,args,kwargs):
     scheduled=tuple(int(x) for x in scheduled[:n])
     computed=tuple(int(x) for x in runner.input_batch.num_computed_tokens_cpu[:n])
     from independent_prompt_snapshot import freeze_prompt_tokens
-    CURRENT_PROMPT_TOKENS.set(freeze_prompt_tokens(ids,runner.requests))
+    if prefill_prompt_snapshot:
+        from independent_prefill_prompt_snapshot import freeze_prefill_prompt_tokens
+        prompts=freeze_prefill_prompt_tokens(ids,runner.requests,computed_tokens=computed,
+            scheduled_tokens=scheduled,enabled=True)
+    else:
+        prompts=freeze_prompt_tokens(ids,runner.requests)
+    CURRENT_PROMPT_TOKENS.set(prompts)
     boundaries=tuple(int(x) for x in runner.query_start_loc.cpu[:n+1].tolist())
     with lock:
         step=steps.get(runner,0)+1;steps[runner]=step
