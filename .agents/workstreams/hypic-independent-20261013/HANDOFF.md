@@ -1,4 +1,17 @@
-# CURRENT R18 FIRST PAIR VALID BUT NEGATIVE
+# CURRENT R19 LAZY SNAPSHOT CANARY HOST READY; NOT STARTED
+
+951 fullCPU0e5c PASS; static0e5d185source/167runtime/newrootabsence PASS.
+Defaultoff c1_lazy_initial_snapshot skips only alreadyprepared nonshadow initials;
+serialshadows andfallback retainprivateinitials; finite/commit/barriers unchanged.
+Contract C1_LAZY_R19_CANARY_R1_CONTRACT.json; raw
+/cache/cch/hypic-independent-20261013/c1-lazy-r19-canary-r1 notstarted.
+New audit_r19_lazy_snapshot_canary.py retainsR18 numeric/partition/source/isolation/
+release gates andrequires eachrank48layers bothactualskip andserialshadowretention.
+6negativecontrols0e5a PASS. All previous runtime sourcecontracts now stale; do not
+rerun oldroots. No ownedmodeljob. Next publish/freshadmission thenboundedCanary.
+R18 same-sourcefirstpair remainsnegative; fullgoal incomplete.
+
+# R18 FIRST PAIR VALID BUT NEGATIVE
 
 G1 exact0e3d terminal;independent0e49 PASS40/40,178sources,431cleanisolation,
 algorithmabsent andliveexactrelease. TPOT281.094047ms,TTFTP95347186.313790ms.

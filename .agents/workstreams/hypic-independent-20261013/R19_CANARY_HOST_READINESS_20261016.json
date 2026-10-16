@@ -1,0 +1,22 @@
+{
+  "scope": "host-readiness only; no R19 NPU run",
+  "regression": {
+    "operation": "exec-0000000000000e5c",
+    "tests": 951,
+    "passed": true
+  },
+  "static": {
+    "operation": "exec-0000000000000e5d",
+    "sources": 185,
+    "runtime": 167,
+    "new_root_absent": true
+  },
+  "audit_controls": {
+    "operation": "exec-0000000000000e5a",
+    "tests": 6,
+    "passed": true
+  },
+  "contract": "C1_LAZY_R19_CANARY_R1_CONTRACT.json",
+  "audit": "audit_r19_lazy_snapshot_canary.py",
+  "next": "fresh source/physical0-3/8233/direct admission after published checkpoint, then new boundedCanary"
+}
