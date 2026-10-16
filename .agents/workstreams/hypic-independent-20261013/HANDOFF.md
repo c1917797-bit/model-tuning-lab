@@ -1,4 +1,19 @@
-# CURRENT R20 METADATA SOURCE ATTRIBUTION; NO OWNED DEVICE JOB
+# CURRENT R20 FORWARD METADATA CANDIDATE HOST VALIDATION
+
+New defaultoff forward_metadata_snapshot wired activation->model forward scope->
+GDN association reader; per-forward reads/hits included in completed model receipt.
+Explicit snapshots handle inference tensors only under source-bound within-forward
+metadata immutability; never survive forward or bypass perlayer slot/finite checks.
+0fa6 full977CPU passed before newaudit;0faa24focused controls passed.
+Final fullregression0fad running;0fae190contract/169runtime hashes/newrootabsence
+PASS;0faf29structurePASS. New METADATA_R20_CANARY_R1_CONTRACT.json/raw
+/cache/cch/hypic-independent-20261013/metadata-r20-canary-r1 notstarted.
+audit_r20_metadata_canary.py wraps unchanged R19 numeric/physical/isolation/release
+andrequiresfourrank source/PID-bound actualreuse receipts. Finishregression,
+commit/publish then freshactualadmission before anydevice run. NoownedNPUjob.
+Fullgoalunfinished;deadline2026-10-17T06:48:09Z.
+
+# HISTORICAL R20 METADATA SOURCE ATTRIBUTION; NO OWNED DEVICE JOB
 
 G1 CPU parser11986bb5 exited0; independent0f84 accepts allfour tables/traces
 and PID58/59/60/61 joins. R19_MATCHED_PROFILE_ATTRIBUTION_SCREEN_20261016.json

@@ -91,10 +91,18 @@ def snapshot_install_route(config):
         raise ValueError("explicit prefill prompt snapshot boolean required")
     return config,enabled
 
+def metadata_snapshot_install_route(config):
+    config=dict(config)
+    enabled=config.pop("forward_metadata_snapshot",False)
+    if type(enabled)is not bool:
+        raise ValueError("explicit forward metadata snapshot boolean required")
+    return config,enabled
+
 def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_limit=128):
     if not enabled:return lambda:None
     if not callable(emit):raise ValueError('activation evidence sink required')
     config,prefill_prompt_snapshot=snapshot_install_route(config)
+    config,forward_metadata_snapshot=metadata_snapshot_install_route(config)
     snapshot_probe_batches=config.pop("prompt_snapshot_probe_batches",0)
     if (type(snapshot_probe_batches)is not int or not 0<=snapshot_probe_batches<=2
             or snapshot_probe_batches and not prefill_prompt_snapshot):
@@ -148,7 +156,8 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
         lambda:install_compact_gdn(stage,enabled=True,emit=emit),
         lambda:install_compact_c2(stage,enabled=True,emit=emit),
         lambda:install_compact_model(Qwen3_5Model,enabled=True,
-            verify_source=verify_model_source,select=stage.select_compact,emit=emit)))
+            verify_source=verify_model_source,select=stage.select_compact,emit=emit,
+            metadata_snapshot=forward_metadata_snapshot)))
     try:
         import os
         emit({'event':'compact_hypic_hooks_installed','pid':os.getpid(),
@@ -157,6 +166,7 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
               'c1_async_material_transfer':stage.compact_store.async_material_transfer,
               'c1_async_material_verify':stage.compact_store.verify_async_transfer,
               'prefill_prompt_snapshot':prefill_prompt_snapshot,
+              'forward_metadata_snapshot':forward_metadata_snapshot,
               'prompt_snapshot_probe_batches':snapshot_probe_batches,
               'c1_layer_completion_barrier':install_compact_gdn.c1_layer_completion_barrier,
               'c1_layer_shadow_validation':install_compact_gdn.c1_layer_shadow_validation,

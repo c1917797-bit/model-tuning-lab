@@ -5,6 +5,7 @@ from independent_request_map import freeze_request_slices
 from independent_runner_context import install_runner_context,CURRENT_PROMPT_TOKENS
 from independent_cache_map import freeze_cache_slices
 from independent_linear_map import freeze_prefill_linear_slices
+from independent_step_metadata_cache import association_cpu_list
 BLOCK_TABLE_SHA256="8f77809c12af3bd9d56974edbbe5c792995f2620aadfe62411806f2e68d2ef0a"
 RUNNER_SHA256="94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968"
 steps=weakref.WeakKeyDictionary();lock=threading.Lock()
@@ -26,9 +27,9 @@ def associate_native_linear(layer,requests,metadata):
     if conv.shape[0]!=state.shape[0]:
         raise ValueError("conv/SSM slot capacity mismatch")
     return freeze_prefill_linear_slices(
-        requests,metadata.prefill_query_start_loc.detach().cpu().tolist(),
-        metadata.prefill_state_indices.detach().cpu().tolist(),
-        metadata.prefill_has_initial_state.detach().cpu().tolist(),
+        requests,association_cpu_list(metadata,'prefill_query_start_loc',requests),
+        association_cpu_list(metadata,'prefill_state_indices',requests),
+        association_cpu_list(metadata,'prefill_has_initial_state',requests),
         state_capacity=state.shape[0],
         speculative=metadata.spec_sequence_masks is not None,
         num_decodes=metadata.num_decodes)
@@ -54,17 +55,16 @@ def associate_native_mixed_linear(layer,requests,metadata):
         raise ValueError('mixed association requires native prefill tail')
     conv,state=layer.kv_cache[:2]
     if conv.shape[0]!=state.shape[0]:raise ValueError('mixed conv/state capacity drift')
-    def cpu(value):
-        if value is None:raise ValueError('mixed metadata tensor missing')
-        return value.detach().cpu().tolist()
+    def cpu(field):
+        return association_cpu_list(metadata,field,requests)
     return freeze_mixed_linear_slices(requests,
-        cpu(metadata.non_spec_query_start_loc),cpu(metadata.non_spec_state_indices_tensor),
-        cpu(metadata.has_initial_state),state_capacity=state.shape[0],
+        cpu('non_spec_query_start_loc'),cpu('non_spec_state_indices_tensor'),
+        cpu('has_initial_state'),state_capacity=state.shape[0],
         num_decodes=metadata.num_decodes,num_prefills=metadata.num_prefills,
         num_decode_tokens=metadata.num_decode_tokens,
-        prefill_query_start=cpu(metadata.prefill_query_start_loc),
-        prefill_state_indices=cpu(metadata.prefill_state_indices),
-        prefill_has_initial=cpu(metadata.prefill_has_initial_state),
+        prefill_query_start=cpu('prefill_query_start_loc'),
+        prefill_state_indices=cpu('prefill_state_indices'),
+        prefill_has_initial=cpu('prefill_has_initial_state'),
         speculative=metadata.spec_sequence_masks is not None)
 
 def verify_runner(cls):

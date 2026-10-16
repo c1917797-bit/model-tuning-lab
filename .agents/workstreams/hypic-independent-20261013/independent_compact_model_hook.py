@@ -20,8 +20,10 @@ class CompactModelSelection:
 
 
 def install_compact_model(model_class,*,enabled=False,verify_source=None,
-                          select=None,emit=None):
+                          select=None,emit=None,metadata_snapshot=False):
     if not enabled:return lambda:None
+    if type(metadata_snapshot) is not bool:
+        raise ValueError('explicit metadata snapshot boolean required')
     if not all(callable(x) for x in (verify_source,select,emit)):
         raise ValueError('source verifier, complete selection and evidence sink required')
     verify_source(model_class)
@@ -74,8 +76,13 @@ def install_compact_model(model_class,*,enabled=False,verify_source=None,
         if compact_ids is None and compact_embeds is None:
             raise ValueError('model input absent')
         token=CURRENT_COMPACT_MODEL.set(selection)
+        metadata_evidence=None
         try:
             with ExitStack() as resources:
+                if metadata_snapshot:
+                    from independent_step_metadata_cache import forward_snapshot_scope
+                    metadata_evidence=resources.enter_context(forward_snapshot_scope(
+                        tuple((p.request_id,p.rank,p.step) for p in plans),enabled=True))
                 if selection.material_guard is not None:
                     resources.enter_context(selection.material_guard)
                 output=original(self,compact_ids,positions.index_select(-1,index),None,compact_embeds)
@@ -88,6 +95,9 @@ def install_compact_model(model_class,*,enabled=False,verify_source=None,
             emit({'event':'compact_model_rows_completed','rank':plans[0].rank,
                   'step':plans[0].step,'original_rows':total,'retained_rows':len(rows),
                   'sampled_rows':list(samples),'request_ids':[p.request_id for p in plans],
+                  'forward_metadata_snapshot':metadata_snapshot,
+                  'metadata_snapshot_reads':metadata_evidence.reads if metadata_evidence is not None else 0,
+                  'metadata_snapshot_hits':metadata_evidence.hits if metadata_evidence is not None else 0,
                   'scope':'model row pruning; layer mechanism proof required separately'})
             return restored
         finally:CURRENT_COMPACT_MODEL.reset(token)
