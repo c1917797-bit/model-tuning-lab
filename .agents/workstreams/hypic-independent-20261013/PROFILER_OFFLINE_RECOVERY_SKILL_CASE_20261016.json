@@ -1,0 +1,98 @@
+{
+  "schema": "mst-skill-evidence-case/v1",
+  "case_id": "hypic-r16-offline-profiler-recovery-20261016",
+  "related_skills": [
+    "ascend-cannbot-profiler",
+    "ascend-benchmark-evidence",
+    "paper-to-ascend"
+  ],
+  "scope": "Bounded official-image offline parser recovery and artifact verification, not HYPIC optimization/quality acceptance or whole-Skill functional acceptance",
+  "environment": {
+    "host": "chicaihong01",
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "physical_compute_devices_for_parsing": [],
+    "host_cpu": "0",
+    "raw_capture_physical_devices": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "failures": [
+    {
+      "operation": "exec-0000000000000c38",
+      "phase": "torch_npu import",
+      "observed": "ImportError libascend_hal.so absent",
+      "result": "No export; raw untouched"
+    },
+    {
+      "operation": "exec-0000000000000c3b",
+      "phase": "control operation retention",
+      "observed": "not_found; subsequently no matching process/no parsed tables",
+      "result": "Do not infer success or restart a device run"
+    },
+    {
+      "operation": "exec-0000000000000c44",
+      "phase": "CANN export",
+      "observed": "msprof exit255: Init platform by driver faild!",
+      "result": "Driver platform initialization failure, not model algorithm failure"
+    },
+    {
+      "container": "3733444d7065de5c540350a6cfd6d9c6fb32e90a8de9c766240e661e0c7d83bb",
+      "phase": "torch_npu analyse return",
+      "observed": "Process exit0/PARSER_RETURNED but CANNExportParser and downstream tasks failed/all4 no kernel tables",
+      "result": "Exit0 alone is not parsed evidence"
+    }
+  ],
+  "working_envelope": {
+    "image_unchanged": true,
+    "network": "none",
+    "root_filesystem": "read-only; writable bounded tmpfs /tmp and /root",
+    "mounts_readonly": [
+      "/usr/local/Ascend/driver",
+      "/usr/local/Ascend/firmware",
+      "/usr/local/dcmi",
+      "/etc/ascend_install.info"
+    ],
+    "driver_library_search_paths": [
+      "/usr/local/Ascend/driver/lib64/driver",
+      "/usr/local/Ascend/driver/lib64/common",
+      "/usr/local/dcmi",
+      "/usr/local/Ascend/ascend-toolkit/latest/lib64",
+      "/usr/local/Ascend/cann-9.1.0/lib64"
+    ],
+    "devices": [
+      "/dev/davinci_manager"
+    ],
+    "compute_device_mapping": [],
+    "max_process_number": 1,
+    "cpu_affinity": "0",
+    "memory_limit": "16g",
+    "raw_tree": "retained immutable; copied to new analysis root",
+    "caveat": "Several metadata mounts and manager access were added together. Working envelope is verified; manager-only single-factor causality is NOT established."
+  },
+  "verified_evidence": [
+    {
+      "operation": "exec-0000000000000c62",
+      "receipt": "PROFILE_R16_FOURRANK_DECODE_AUDIT_20261016.json",
+      "scope": "G3 all4 nonempty kernel/operator/statistic tables and valid JSON trace; kernel CSV hashes and explicit physical PID join from separate capture audit"
+    },
+    {
+      "operation": "exec-0000000000000c82",
+      "receipt": "PROFILE_R16_DECODE_COMPARISON_20261016.json",
+      "scope": "G1 all4 parsed artifacts, actual matching recurrent/attention shapes; separate0c78 source149/physical/isolation194/ownedrelease"
+    }
+  ],
+  "reusable_rules": [
+    "Keep capture validity, parser exit status, parsed artifact completeness and causal attribution as separate claims.",
+    "A control-plane timeout/missing handle is not a device failure; inspect exact retained process/container/root.",
+    "Before parsing retained data, verify pinned-image import libraries/platform access; do not start another model job to compensate.",
+    "Use no compute device mapping for the tested offline parse route; management interface does not imply compute card occupancy.",
+    "Assert all4 nonempty tables/trace/rank identity and check logs even when analyse exits0.",
+    "Classify actual captured phase/shapes; recurrent decode cannot stand in for prefill C1/C2 attribution.",
+    "Communication intervals can include rank waiting; never rank-sum or use name-duration alone as removable cost."
+  ],
+  "integration_state": "Evidence mapped in workstream only. Maintainer Skill source/promotion unchanged; full Paper-to-Ascend and29functional gates incomplete.",
+  "current_device_job": "exec-0000000000000c89 G3earlymixed live; this case recording creates no device work"
+}
