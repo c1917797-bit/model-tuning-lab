@@ -1,5 +1,14 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+PDCfull40 postrun auditor NEW standalonefiles ready:0972 17CPUcontrolsPASS,
+0973 all141livebounds unchanged/29structure/diffPASS. No realG4orG2acceptance.
+FORMAL_FULL40_PDC_HOST_READINESS_20261016.json binds3auditfiles; prospectiveG4
+must include pdc_observer_audit and use audit_formal_pdc_terminal.py. G2native-only
+needs official actualhit observer; defaultSSE omits cacheddetails096e, do not
+misclassifyG4receiptsasG2. NewG1contract readyONLYafter0967valid/audit/release.
+0967stillRUNNING; livephysical2775467-70 -> NSpid59-62 exact079f506b CID;
+do not inferTP rankfromphysicalcard; use actualrankreceiptsat independentaudit.
+
 CURRENT0967 RUNNING originalma a6109/tpc force_direct; NEW rawformal-r15-20261016-g3-r1.
 6baedec5 plan/contract published/liveverified, mainunchanged.0966 fresh07:05UTC
 141sources/input/model/image/physical0-3empty/8233+HCCLstrictbind/newrootPASS.

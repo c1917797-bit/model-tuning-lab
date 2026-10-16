@@ -1,0 +1,37 @@
+{
+  "schema": "formal-full40-pdc-host-readiness/v1",
+  "plan_checkpoint": "41fcdea42592d08f23b7f9a456ed79123f8f9bc6",
+  "tests": {
+    "operation": "exec-0000000000000972",
+    "count": 17,
+    "status": "PASS",
+    "scope": "synthetic full40 initial reuse/input/geometry/worker/source negativecontrols; no new NPU acceptance"
+  },
+  "source_checks": {
+    "operation": "exec-0000000000000973",
+    "live_bindings": 141,
+    "unchanged": true,
+    "structure_skills": 29,
+    "diff_check": "PASS"
+  },
+  "pdc_observer_audit": {
+    "audit_formal_full40_pdc.py": "e008946d642778800f50095a4a6f610af4bc4eeef317ca1f9f1c383f87dfcd49",
+    "audit_formal_pdc_terminal.py": "d5be022bc5c8ebd684a4953b9e74336311929109a8bca28d2f36ec436749a6aa",
+    "independent_pdc_progress_audit.py": "f1cb74b475b5e06373631a5b5777f4c06014926ba3df0addcbdff6f5d6f188f8"
+  },
+  "entrypoint": "python3 -B audit_formal_pdc_terminal.py --contract NEW_G4_CONTRACT.json --live-release",
+  "admission": "Must prospectively bind these3 audit sources in G4 contract.pdc_observer_audit; currentliveG3 unchanged; no priorresult rewritten",
+  "not_accepted": [
+    "G2 native-only actualhit observation stillneedsfreeze",
+    "Full40 real G4 PDC proof notrun",
+    "Full performance matrix",
+    "Quality/lifecycle",
+    "29 functional acceptance"
+  ],
+  "live": {
+    "controller": "exec-0000000000000967",
+    "raw": "/cache/cch/hypic-independent-20261013/formal-r15-20261016-g3-r1",
+    "physical_proof": "FORMAL_R15_20261016_G3_R1_LIVE_NAMESPACE.json"
+  },
+  "next_control": "FORMAL_R15_20261016_G1_R1_CONTRACT.json; only after0967 independent valid/released"
+}
