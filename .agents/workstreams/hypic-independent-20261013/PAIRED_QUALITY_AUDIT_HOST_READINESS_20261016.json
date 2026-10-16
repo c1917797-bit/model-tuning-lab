@@ -1,0 +1,24 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "audit_quality_pair.py",
+  "focused": {
+    "operation": "exec-0000000000000aa2",
+    "tests": 6,
+    "exit": 0
+  },
+  "regression": {
+    "operation": "exec-0000000000000aa4",
+    "tests": 697,
+    "exit": 0
+  },
+  "scope": "Synthetic paired127x3 rescoring only; no actual newmodelquality results.",
+  "semantics": [
+    "samefull381denominator eacharm",
+    "roundwise wins/losses/ties andexactchangedcase IDs",
+    "per-sample three-round majority summaries",
+    "truncationdelta explicit",
+    "quality_acceptance NOT_DECIDED, no inventedlossless threshold",
+    "arm-scoped IDs may overlap acrossseparate services; no artificialcross-armunique gate"
+  ],
+  "next": "Combine source/protocol/hot/physical/release terminal audit before evaluatingactualpairedquality. ExistingR2catalogpackage unaffected; resource-only observer0aa1 running; no ownedNPUjob."
+}

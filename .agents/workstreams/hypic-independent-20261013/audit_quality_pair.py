@@ -1,43 +1,31 @@
-"""Independent all-response score replay; never overrides mechanism evidence."""
-import hashlib
-
-def audit_arm(rows,inputs,score):
-    if len(inputs)!=127 or [x["index"] for x in inputs]!=list(range(127)):
-        raise ValueError("full input denominator required")
-    expected={(r,i) for r in range(1,4) for i in range(127)}
-    keys=[(x["repetition"],x["index"]) for x in rows]
-    if len(rows)!=381 or set(keys)!=expected or len(set(keys))!=381:
-        raise ValueError("full unique381 response denominator required")
-    ids=set();correct=0;failed=0;truncated=0
-    for row in rows:
-        source=inputs[row["index"]]
-        if row["sample_id"]!=source["sample_id"] or row["segment_sha256"]!=source["segment"]["tokens_sha256"]:
-            raise ValueError("sample/segment identity mismatch")
-        if row.get("attempts")!=1 or row.get("retries")!=0:
-            raise ValueError("declared retry protocol mismatch")
-        if not row["ok"]:
-            failed+=1
-            if row.get("correct") is not False or not row.get("error"):
-                raise ValueError("failure record concealed")
-            continue
-        rid=row.get("request_id")
-        if not isinstance(rid,str) or not rid or rid in ids:raise ValueError("duplicate/missing service request identity")
-        ids.add(rid)
-        text=row["response_text"]
-        if hashlib.sha256(text.encode()).hexdigest()!=row["response_sha256"]:
-            raise ValueError("response hash drift")
-        prediction,accepted=score("longbenchv2",text,source["reference"])
-        if row["prediction"]!=prediction or row["correct"]!=bool(accepted):
-            raise ValueError("score replay mismatch")
-        finish=row["finish_reason"];count=row["completion_tokens"]
-        if finish not in ("stop","length") or type(count) is not int or not 0<=count<=1024:
-            raise ValueError("quality generation evidence invalid")
-        if row.get("truncated")!=(finish=="length"):raise ValueError("truncation record mismatch")
-        correct+=bool(accepted);truncated+=finish=="length"
-    return {"requests":381,"successful":len(ids),"failed":failed,"correct":correct,
-        "accuracy_all_requests_pct":100*correct/381,"truncated":truncated}
-
-def audit_pair(baseline,candidate,inputs,score):
-    a=audit_arm(baseline,inputs,score);b=audit_arm(candidate,inputs,score)
-    return {"baseline":a,"candidate":b,"delta_pp":b["accuracy_all_requests_pct"]-a["accuracy_all_requests_pct"],
-        "scope":"full score/response identity replay only; source/isolation/hot-path/quality decision independently required"}
+"""Descriptive full paired quality, no invented lossless acceptance threshold."""
+from audit_full_quality_cohort import audit_full_quality_cohort
+def audit_quality_pair(rows,baseline_unit,baseline_journal,hypic_unit,hypic_journal,*,score,batch_samples=8):
+    baseline=audit_full_quality_cohort(rows,baseline_unit,baseline_journal,score=score,batch_samples=batch_samples)
+    hypic=audit_full_quality_cohort(rows,hypic_unit,hypic_journal,score=score,batch_samples=batch_samples)
+    b={(x["repetition"],x["index"]):x for x in baseline_unit["results"]}
+    h={(x["repetition"],x["index"]):x for x in hypic_unit["results"]}
+    rounds=[];changes=[]
+    for repetition in (1,2,3):
+        wins=losses=ties=bc=hc=0
+        for index in range(127):
+            key=(repetition,index);before=b[key];after=h[key]
+            delta=int(after["correct"])-int(before["correct"])
+            bc+=before["correct"];hc+=after["correct"]
+            wins+=delta>0;losses+=delta<0;ties+=delta==0
+            if delta:changes.append({"repetition":repetition,"index":index,"sample_id":rows[index]["sample_id"],
+                "baseline_correct":before["correct"],"hypic_correct":after["correct"],
+                "baseline_request_id":before["request_id"],"hypic_request_id":after["request_id"]})
+        rounds.append({"repetition":repetition,"requests":127,"baseline_correct":bc,"hypic_correct":hc,
+            "wins":wins,"losses":losses,"ties":ties,"delta_pp":100*(hc-bc)/127})
+    majorities=[]
+    for index,row in enumerate(rows):
+        bc=sum(b[(r,index)]["correct"] for r in (1,2,3));hc=sum(h[(r,index)]["correct"]for r in (1,2,3))
+        majorities.append({"index":index,"sample_id":row["sample_id"],"baseline_correct_rounds":bc,
+            "hypic_correct_rounds":hc,"baseline_majority":bc>=2,"hypic_majority":hc>=2})
+    return {"complete_paired_cohort":True,"requests_per_arm":381,"baseline":baseline,"hypic":hypic,
+        "correct_delta":hypic["correct"]-baseline["correct"],
+        "accuracy_delta_pp":100*(hypic["correct"]-baseline["correct"])/381,
+        "truncation_delta":hypic["truncated"]-baseline["truncated"],"rounds":rounds,"changed_cases":changes,
+        "sample_majorities":majorities,"quality_acceptance":"NOT_DECIDED",
+        "scope":"descriptive exact127x3 paired rescoring only; no lossless requirement and no task-quality/deployment approval; same-source/protocol/mechanism/isolation/release require independent terminal audits"}
