@@ -1,0 +1,128 @@
+{
+  "bind127.py": [
+    [
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair4",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5"
+    ],
+    [
+      " t=H.obj(tr);H.need(str(P)==ROOT and tr['path']==ROOT+'/SOURCE_TEMPLATE.json'and t['root']==ROOT and t['bound']is False,'exact deployed pending template')",
+      " t=H.obj(tr);H.need(str(P)==ROOT and tr['path']==ROOT+'/SOURCE_TEMPLATE.json'and t['root']==ROOT and t['bound']is False,'exact deployed pending template')\n H.need(budget_ref==t['files']['BUDGET_PROFILE127R5.json']and budget==t['cpu_budget_profile'],'exact source-owned new operational profile, not arbitrary measured PASS')"
+    ]
+  ],
+  "clock127r4.py": [
+    [
+      "CPU-only whole720 / cleanup90 / original child ceiling. No new budget.",
+      "Independent R5 whole3600 / cleanup90 / maximum child2700; no completion guarantee."
+    ],
+    [
+      "WHOLE=720.;CLEANUP=90.;CHILD=585.6111058300012",
+      "WHOLE=3600.;CLEANUP=90.;CHILD=2700.;FINAL=300.;PRE=420.;MARGIN=90."
+    ],
+    [
+      "'deltalog.measured-CPU-recovery-profile/v127-repair4'",
+      "'deltalog.registered-CPU-recovery-profile/v127-repair5'"
+    ],
+    [
+      "if p['cleanup_reserve_seconds']!=CLEANUP or p['predicted_child_seconds']>CHILD:raise ValueError('unchanged child/cleanup ceilings')",
+      "if p['cleanup_reserve_seconds']!=CLEANUP or p['predicted_child_seconds']!=CHILD or p['final_fence_reserve_seconds']!=FINAL or p['safety_margin_seconds']!=MARGIN:raise ValueError('exact new operational registration')"
+    ],
+    [
+      "measured complete recovery does not fit remaining whole720",
+      "registered full child allowance does not fit remaining whole3600"
+    ],
+    [
+      "whole CPU720 deadline including source fences",
+      "whole CPU3600 deadline including source fences"
+    ],
+    [
+      "if left<p['predicted_child_seconds']:raise ValueError('registered full child allowance does not fit remaining whole3600')",
+      "if left<=0:raise ValueError('no child time remains inside whole3600 and all reserves')"
+    ]
+  ],
+  "entry.py": [
+    [
+      " # Keep even the original residual 585.611s sub-budget. Do not add the saved\n # strict child's 4.389s back to the domain consumer or extend the fixed cutoff.",
+      " # R5 is a separate measured-cost registration, never a rewrite of old585 failure."
+    ],
+    [
+      "left=min(V.TIMEOUT,hostcap,CLOCK.child_cap(deadline,profile),1792220533-time.time()-90);C.need(left>0,'original585.611/whole720/final/cleanup90/fixedcut')",
+      "left=min(CLOCK.CHILD,hostcap,CLOCK.child_cap(deadline,profile),1792220533-time.time()-CLOCK.FINAL-CLOCK.CLEANUP-CLOCK.MARGIN);C.need(left>0,'new2700/whole3600/final300/cleanup90/fixedcut')"
+    ],
+    [
+      "deltalog.single-read-audit-reuse-CPU-recovery/v127-repair4",
+      "deltalog.single-read-audit-reuse-CPU-recovery/v127-repair5"
+    ]
+  ],
+  "entry127.py": [
+    [
+      "from audit_transform127r4 import transform,Memo",
+      "from timing_transform127r5 import transform\nfrom audit_transform127r4 import Memo"
+    ],
+    [
+      "deltalog.single-read-audit-reuse-consumer-diagnostic/v127-repair4",
+      "deltalog.single-read-audit-reuse-consumer-diagnostic/v127-repair5"
+    ]
+  ],
+  "host.py": [
+    [
+      "OWNER='deltalog-anchor-consumer-recovery-new24h-MAIN-127-repair4'",
+      "OWNER='deltalog-anchor-consumer-recovery-new24h-MAIN-127-repair5'"
+    ],
+    [
+      "a.lease_seconds=720 if a.stage=='cpu'else 2880",
+      "a.lease_seconds=CLOCK.WHOLE if a.stage=='cpu'else 2880"
+    ],
+    [
+      "cap=CLOCK.child_cap(_WHOLE_DEADLINE,budget)",
+      "need(time.monotonic()-started<=CLOCK.PRE,'whole prechecks exceed registered420; no create')\n            cap=CLOCK.child_cap(_WHOLE_DEADLINE,budget)"
+    ],
+    [
+      "childout=self.create(stage);end=time.monotonic()+(600 if stage=='native'else 1800);bound=None",
+      "childout=self.create(stage);end=min(time.monotonic()+CLOCK.CHILD,_WHOLE_DEADLINE-CLOCK.FINAL-CLOCK.CLEANUP-CLOCK.MARGIN);bound=None"
+    ],
+    [
+      "reader_contract='single-read-audit-reuse/v127-repair4'",
+      "reader_contract='single-read-audit-reuse-budget/v127-repair5'"
+    ],
+    [
+      "whole_seconds=720,cleanup_seconds=90,original_child_ceiling=585.6111058300012",
+      "whole_seconds=3600,cleanup_seconds=90,original_child_ceiling=585.6111058300012,registered_child_ceiling=2700"
+    ],
+    [
+      "    p.add_argument('--owner-ref',required=True)",
+      "    p.add_argument('--whole-start',type=float,required=True);p.add_argument('--owner-ref',required=True)"
+    ],
+    [
+      "    owner,sr,ar=[json.loads(v)for v in(a.owner_ref,a.target_source_ref,a.authority_ref)];om=obj(owner)",
+      "    need(0<=time.monotonic()-a.whole_start<=CLOCK.PRE,'actual wrapper precheck clock within420/no future start');started=a.whole_start;_WHOLE_DEADLINE=started+CLOCK.WHOLE\n    owner,sr,ar=[json.loads(v)for v in(a.owner_ref,a.target_source_ref,a.authority_ref)];om=obj(owner)"
+    ]
+  ],
+  "run_recovery.py": [
+    [
+      "run-anchor-recovery127repair4-MAIN",
+      "run-anchor-recovery127repair5-MAIN"
+    ],
+    [
+      "import argparse,json,subprocess,sys",
+      "import argparse,json,subprocess,sys,time"
+    ],
+    [
+      "def main():",
+      "def main():\n whole_start=time.monotonic()"
+    ],
+    [
+      "'--owner-ref',json.dumps(sr)",
+      "'--whole-start',str(whole_start),'--owner-ref',json.dumps(sr)"
+    ]
+  ],
+  "window056.py": [
+    [
+      "CUT-2880",
+      "CUT-3600"
+    ],
+    [
+      "fixed new24h/unchanged whole owner2880 budget",
+      "fixed new24h/new registered whole3600 budget"
+    ]
+  ]
+}

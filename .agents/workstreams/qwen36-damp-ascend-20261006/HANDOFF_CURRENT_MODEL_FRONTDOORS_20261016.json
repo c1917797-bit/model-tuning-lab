@@ -1,49 +1,73 @@
 {
   "schema": "ascend.current-model-frontdoor-handoff/v1",
-  "recorded_at_utc": "2026-10-16T23:19:10Z",
+  "recorded_at_utc": "2026-10-16T23:44:00Z",
   "authority_file": "CONDITIONAL_EXTENSION24H_AUTHORITY_20261016.json",
   "original_cutoff_utc": "2026-10-17T07:02:13Z",
   "extension_used": 0,
   "extension_condition_met": false,
   "new_nonHYPIC_accepted_technology": false,
   "current_owner": {
-    "operation": "exec-0000000000000f81",
-    "state": "running",
+    "operation": "exec-0000000000000fd3",
+    "state": "running_at_last_poll",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair11-arena-observation-20261017-001/SOURCE_MANIFEST.json",
-      "bytes": 198447,
-      "sha256": "b7c4a89a06932f3267c72a15769ee2b5c3baef4240084cd75a280e8b855bafa9"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/SOURCE_MANIFEST.json",
+      "bytes": 45113,
+      "sha256": "20851c35a33ed27dc7688f23e716e91d32d8270224a1ac359dce0a9f70ff3cf3"
     },
-    "output": "/opt/host/vnf/austinov/run-deltalog-MODEL101R11-main-NEW24H_MODEL101R11_001",
-    "scope": "Observability-only before unchanged original arena guard; metadata is before native prepare/commit, not an active-slot proof or numerical pass",
+    "output": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-anchor-recovery127repair5-MAIN-20261016-NEW24H-001",
+    "scope": "Independent CPU-only retained160 mathematical recovery, Devices[]; whole3600/child2700 maximum dynamically capped, cleanup90/final300/margin90. No NPU/model/performance promotion.",
     "MAIN_only_admission": true
   },
   "next_NPU": {
-    "paper": "BOLE",
-    "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair4/SOURCE_BOUND.json",
-      "bytes": 36068,
-      "sha256": "69ecb83f2695f1ab3ad975873dd121d76fa5ec4beaeac158770664367435bfe9"
+    "primary": "DeltaLog R12 native-only postprepare all64 cache/GPU-index/format observation, SOURCE_ONLY preparing; no DL math/registration and unconditional stop before real request model forward. Await exact reviewed/bound source and current CPU owner's real release.",
+    "alternative": {
+      "paper": "BOLE131R5 first-host-fault telemetry, same frozen math/safety",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair5/SOURCE_BOUND.json",
+        "bytes": 37227,
+        "sha256": "14ca4fe97b5173eb37332a351576bb1e79bbf7da109b488d093ade486dbc1e6a"
+      },
+      "sourceaudit_operation": "exec-0000000000000fda",
+      "sourceaudit_exit": 0,
+      "readset": 211,
+      "output": "/opt/host/vnf/austinov/run-bole-model131repair5-MAIN-NEW24H_001",
+      "actual_sameimage54_pending": true,
+      "NPU_executed": false
     },
-    "sourceaudit_operation": "exec-0000000000000f8d",
-    "sourceaudit_exit": 0,
-    "readset": 208,
-    "commands": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair4/COMMANDS.json",
-    "output": "/opt/host/vnf/austinov/run-bole-model131repair4-MAIN-NEW24H_001",
-    "readiness": "Source deployed/bound/audited and independently reviewed, actual same-image51/real model still pending",
-    "admit_only_after": "Exact R11 owned CPU/model release, fresh physical4-7/RAM/mapping/no-output-overwrite checks; no controller relabeling or hidden shared admission"
+    "admit_only_after": "Current exact CPU CID terminal/release and fresh physical4-7/RAM/CPU/disk/mapping/no-output-overwrite checks; do not relabel or silently permit concurrent owned guests."
   },
   "last_model_result": {
     "ref": {
-      "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R10-main-NEW24H_MODEL101R10_001/RESULT.json",
-      "bytes": 3834,
-      "sha256": "bc9fc23a42be7ad271ac066a34c187a128e98c90f4a33a743a0d83eff2df3c7e"
+      "path": "/opt/host/vnf/austinov/run-bole-model131repair4-MAIN-NEW24H_001/RESULT.json",
+      "bytes": 79726,
+      "sha256": "786daa581f417efae37bc946464bfecab78e2b367ce35f73a5c9a0bf727eb248"
     },
-    "status": "failed",
-    "first_fault": "registered actual layer arenas must not overlap",
-    "actual_math_qualified": false,
-    "exact_release_operation": "exec-0000000000000f69",
-    "both_exact_CIDs_stopped_noExec_noOOM": true
+    "operation": "exec-0000000000000fa1",
+    "exit": 3,
+    "status": "failed_before_candidate_math",
+    "primary": "FileNotFoundError(2, 'No such file or directory')",
+    "root_exact_filename_and_traceback_unavailable": true,
+    "elapsed_seconds": 437.1003499900107,
+    "cleanup_seconds": 35.19394864002243,
+    "secondary": [],
+    "sameimage_software_cases_passed": 51,
+    "four_card_canaries_passed": true,
+    "all4_native_weights_loaded_GB": 13.6633,
+    "HTTP_health_passed": false,
+    "MTP_load_or_client_reached": false,
+    "numerical_model_qualified": false,
+    "independent_release_operation": "exec-0000000000000fc6",
+    "CPU_CID": "f7faeee4e497a1754698facfe4a9f4a21868dd4ccf6120bb9b4dc79bc37c26bf",
+    "model_CID": "5aa0b054eeebb836326ba26b1e091a7e20242e02d77a54f877b853d156154a76",
+    "both_exact_CIDs_stopped_noExec_noOOM": true,
+    "first_fault_frontier": {
+      "operation": "exec-0000000000000fca",
+      "last_raw": "/opt/host/vnf/austinov/run-bole-model131repair4-MAIN-NEW24H_001/dense/observation-raw-1792193439121033560.json",
+      "raw_count": 95,
+      "complete_count": 94,
+      "last_health_connection_refused": true,
+      "interpretation": "Startup observer path is implicated by incomplete final observation; exact missing /proc path/race NOT proved. No ss-path diagnosis and no paper no-go."
+    }
   },
   "selected_CPU_cost": {
     "owner": {
@@ -73,16 +97,18 @@
     "cost_caution": "child_scope includes final fence; nested phases inclusive/nonadditive; actual cache state uncontrolled; selected estimate not full-run guarantee"
   },
   "parallel_preparation": {
-    "accuracy_input_repair": "One new127R5 full160 CPU recovery, separately frozen3600/2700/90/final300/pre420/margin90 operational budgets from real130+133 timing. No launch, no old deadline reset/no reduced coverage. Original127R4 unchanged, no585 retry.",
-    "gdn_paper_reassessment": "Prepared per-layer physical binding protocol for BOLE, no runtime integration/qualification; actual MTP8 group and GPU slot facts still pending",
-    "ge_fullgdn_ready": "Independent R4 review no new definiteP1; original registry exact. R11 layer_idx source gap closed by actual GDN base.py35",
-    "constraints": "No numerical pass, whole-model paired performance or final task scores. No controller compatibility for concurrent owned guests has been admitted."
+    "accuracy_input_repair": "R12 native-only committed actual64 views/indices/ND-format capture; original DL guard/math unchanged. No repeated Windows110 suite to chase sandbox-only HTTP/fixture restrictions; 6 focused pass, actual same-image110 remains required.",
+    "gdn_paper_reassessment": "Exact current-image override/shared-pool and max_memory formulas audited/3+3 AST controls; no physical-capacity or RAM pass. New128R3 typed receiver prep for actually pending127R5 report; cannot fabricate future Ref/promotion.",
+    "ge_fullgdn_ready": "BOLE131R5 observability source delivered/bound/audited, not NPU run. Next-generation compatible CPU/NPU admission proposal only; do not change currently frozen running127R5 controller.",
+    "constraints": "No new whole-model numerical PASS, paired performance or final task scores. Current controllers have no approved concurrent owned-guest compatibility protocol."
   },
   "git": {
-    "last_normal_pushed": "cf2a0ebdf277b3ae0453c5f8c4bdac1a6b6c035f",
-    "push_operation": "exec-0000000000000f62",
-    "archive_path": "projects/qwen36-paper-portfolio/tools/new24h_model_frontdoors_20261016_2317",
-    "archive_sources_only_not_acceptance": true
+    "last_normal_pushed": "464cab365bba5e8a0cc7e0c4cc793e4cc2445b35",
+    "remote_tip_verified_operation": "exec-0000000000000fa2",
+    "archive_path": "projects/qwen36-paper-portfolio/tools/new24h_recovery_frontdoors_20261016_2340",
+    "archive_exact_source_files": 147,
+    "archive_bytes": 2086991,
+    "archive_source_only_not_acceptance": true
   },
   "physical_scope": [
     4,
@@ -96,5 +122,39 @@
     2,
     3
   ],
-  "snapshot_not_window_utilization": true
+  "snapshot_not_window_utilization": true,
+  "previous_DL_R11": {
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R11-main-NEW24H_MODEL101R11_001/RESULT.json",
+      "bytes": 3835,
+      "sha256": "28bd22ae2f9e118af198467436fe3d27a35cba85393365091197e65ae8cad623"
+    },
+    "operation": "exec-0000000000000f81",
+    "exit": 1,
+    "all4_metadata_capture": true,
+    "original_arena_guard_unchanged_failed": true,
+    "actual_shared_pool_geometry": true,
+    "actual_committed_GPU_active_footprint_proof": false,
+    "release_operation": "exec-0000000000000f9c",
+    "released": true
+  },
+  "card_snapshot": {
+    "operation": "exec-0000000000000fc9",
+    "physical4_7_no_PIDs": true,
+    "AICore": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "HBM_MiB": [
+      2866,
+      2868,
+      2865,
+      2865
+    ],
+    "protected0_3_external_workers_not_touched": true,
+    "window_utilization": "not measured; snapshot only",
+    "CPU_recovery_is_not_NPU_utilization": true
+  }
 }

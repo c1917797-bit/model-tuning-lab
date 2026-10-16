@@ -1,0 +1,248 @@
+{
+  "actual_fault_evidence_ref": {
+    "bytes": 15353,
+    "path": "/opt/host/vnf/austinov/run-dl088r6r2-consumer-fault-evidence-MAIN-20261016-001/ACTUAL_EVIDENCE.json",
+    "sha256": "cc4ea59d1c90f43f0513585dc731aa53380598dd287646434a742eb8d2d5b81e"
+  },
+  "bound": false,
+  "cpu_budget_profile": {
+    "cleanup_reserve_seconds": 90,
+    "final_fence_reserve_seconds": 300,
+    "measurement_ref": {
+      "bytes": 68497,
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-mainconsumer133-repair1-MAIN-NEW24H_001/DIAGNOSTIC133.json",
+      "sha256": "2e2a02e757c606a5f2b8388317fcc0c9b46d63e11d8281c5cbbd0b8c3cc6d537"
+    },
+    "predicted_child_seconds": 2700,
+    "safety_margin_seconds": 90,
+    "schema": "deltalog.registered-CPU-recovery-profile/v127-repair5"
+  },
+  "default_enabled": false,
+  "execution_scope": "one independent CPU-only whole3600/child2700 retainedraw recovery; actual result pending",
+  "expected_records": 328,
+  "expected_sidecars": 351,
+  "external_refs": [
+    {
+      "bytes": 22357,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog061-runtime-source-recovery-new24h-v1-066/host.py",
+      "sha256": "215203ddec66632f0d4b07425aafd9e5b9f9a2d0e00fcb73f947231090e14fa2"
+    },
+    {
+      "bytes": 68497,
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-mainconsumer133-repair1-MAIN-NEW24H_001/DIAGNOSTIC133.json",
+      "sha256": "2e2a02e757c606a5f2b8388317fcc0c9b46d63e11d8281c5cbbd0b8c3cc6d537"
+    },
+    {
+      "bytes": 62339,
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-consumer130r1-MAIN-NEW24H_001/DIAGNOSTIC130.json",
+      "sha256": "a013f977b72cddd2fcf0848b248681b43ff27084b3285ad5d9cde8f660458dca"
+    }
+  ],
+  "files": {
+    "ARM_SEAM127.md": {
+      "bytes": 1160,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/ARM_SEAM127.md",
+      "sha256": "ecee425de1b414af992253feac8de2f3ade1ec73b8ddb151b6f2965885558909"
+    },
+    "BUDGET_PROFILE127R5.json": {
+      "bytes": 469,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/BUDGET_PROFILE127R5.json",
+      "sha256": "75a6a546b7652e51d78424385c908f284f5e44f3e1ed0c6e6db8e51da302075c"
+    },
+    "EDITS127R4.json": {
+      "bytes": 7917,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/EDITS127R4.json",
+      "sha256": "0ac33d3265d53b5a4139b3ca527777ff871625b9903b1b300d7596baf24e365c"
+    },
+    "EDITS127R5.json": {
+      "bytes": 5708,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/EDITS127R5.json",
+      "sha256": "eccde1dcfdc119b18970af1d8f39ffceb8a66ca9f20ccfa44801af77170bed45"
+    },
+    "FAULT_FIXTURE127.json": {
+      "bytes": 19568,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/FAULT_FIXTURE127.json",
+      "sha256": "128b8c1fa3d347d3a78adf07a86fccff94c56f2252e68f8a4b9033a8c199eba7"
+    },
+    "FROZEN_TEST_INPUTS127R4.json": {
+      "bytes": 190452,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/FROZEN_TEST_INPUTS127R4.json",
+      "sha256": "93a785dc3a2051725162aa73bbe95e0eea42159ad6d064fbd9065fa82dfd1963"
+    },
+    "HANDOFF127R1.md": {
+      "bytes": 3564,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/HANDOFF127R1.md",
+      "sha256": "01e6763db92580d3a53a54257d2c760fca702445ef743d9133ed6eeb7f43b346"
+    },
+    "HANDOFF127R3.md": {
+      "bytes": 1765,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/HANDOFF127R3.md",
+      "sha256": "08469cf1bd921f8957879bdde387c00522c0dea9b70b12277b8456e6e4cd3494"
+    },
+    "HANDOFF127R4.md": {
+      "bytes": 6717,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/HANDOFF127R4.md",
+      "sha256": "a318cf9fae82663cbaad7833de936cc40e2795abf38200c8a6562a1a4d1ad71e"
+    },
+    "HANDOFF127R5.md": {
+      "bytes": 2058,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/HANDOFF127R5.md",
+      "sha256": "f27abd482ba2c9d2c3acd19ce8c9d978adb7944802612211d78561accb98090c"
+    },
+    "HOST_EDITS127.json": {
+      "bytes": 2233,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/HOST_EDITS127.json",
+      "sha256": "b3e37e0f73f5ed37c262e4692fcc85bc22a21192111ed3a21b99f61e58c3ecb2"
+    },
+    "PARENT_FILES127R5.json": {
+      "bytes": 1814,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/PARENT_FILES127R5.json",
+      "sha256": "26628c2445987ecd51831643588f3980458ece1637eea986539a5796a88d7e9f"
+    },
+    "anchor_transform127.py": {
+      "bytes": 1256,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/anchor_transform127.py",
+      "sha256": "19175b5db6cd8d35ebad2f862d54a012fba0621d03545d60f1a092c7399bd436"
+    },
+    "audit_transform127r4.py": {
+      "bytes": 3397,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/audit_transform127r4.py",
+      "sha256": "45adbd6c81298338775139c98972457f8653fb45bafa7032a1d8615ffd0f444d"
+    },
+    "bind127.py": {
+      "bytes": 6461,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/bind127.py",
+      "sha256": "eb91899e256d0d45d26e6be3ba5b09f3e63429af717a8578c715f61ab0d62da8"
+    },
+    "bridge_io.py": {
+      "bytes": 1205,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/bridge_io.py",
+      "sha256": "d62b550decb1b2f8d6735dc386ba5e4969c828685416289671cc175316af5331"
+    },
+    "clock127r4.py": {
+      "bytes": 1557,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/clock127r4.py",
+      "sha256": "e546d52d16f1aa81561024b216f70e23aeac91b64480ab9fe4b4451c24060341"
+    },
+    "clock_profile131.py": {
+      "bytes": 1376,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/clock_profile131.py",
+      "sha256": "d5d6f837c3c1d39d483b4a56a9cc4469a35c21bf51eb5399bcfb4fce4cfe084c"
+    },
+    "codec_transform130.py": {
+      "bytes": 3302,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/codec_transform130.py",
+      "sha256": "c26483801d9dbf3661c9c03b1683eb060f82d668ee98675ab9b113b84c342406"
+    },
+    "entry.py": {
+      "bytes": 4517,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/entry.py",
+      "sha256": "d513536798df10b2d11d4f587bc10ff442199bb457d523d30d347470bc61d998"
+    },
+    "entry127.py": {
+      "bytes": 4156,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/entry127.py",
+      "sha256": "47ef67ecfa84a1361a36759a336661400f157c24a533edaee2fddf277eb39049"
+    },
+    "host.py": {
+      "bytes": 24064,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/host.py",
+      "sha256": "f3141b926f1816711709f7b4f33561ad9937c4dfd4b7f89dd6e08eddf86611ed"
+    },
+    "memory_pressure127.py": {
+      "bytes": 4072,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/memory_pressure127.py",
+      "sha256": "ad043d011408ef72cbd64a7d3f79ec0f819f539b377a1a2ca5ca0b9e55dd09b9"
+    },
+    "previous_reader127r4.py": {
+      "bytes": 1992,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/previous_reader127r4.py",
+      "sha256": "aed48c9a12903bc62d3169bf47b4d9b5981d92ccb4c82c5c8e3d152f96f3a1ee"
+    },
+    "provenance127.py": {
+      "bytes": 6135,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/provenance127.py",
+      "sha256": "1919320473f232c52d656553f022ffcce6b4ff6e55482f8fc2c88eb975f680cf"
+    },
+    "raw_closure043.py": {
+      "bytes": 1372,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/raw_closure043.py",
+      "sha256": "276cdbc1e6f15f49390fec9890958cfc6e0d3930c7e26d29425387d3d052632a"
+    },
+    "readset127.py": {
+      "bytes": 5775,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/readset127.py",
+      "sha256": "758c1146cb45f30e95bdfdb913d3ed7d807a4e64c27a666c54659b47ce2128ad"
+    },
+    "run_recovery.py": {
+      "bytes": 1739,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/run_recovery.py",
+      "sha256": "cb19f466b6b37692a9fdc5f57c4e84ce1f8bf5c252d310c48a8ead9d01eecf85"
+    },
+    "runtime127.py": {
+      "bytes": 1599,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/runtime127.py",
+      "sha256": "8df3a28bc7a1f1fe4fa407ca8a17e9c955ff1938b0057817c2cba3084bb4f276"
+    },
+    "scope_adapter.py": {
+      "bytes": 11522,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/scope_adapter.py",
+      "sha256": "432f5cc1613ef5faf43aca11e68c17c3957919d45978cdff04003b82598a5157"
+    },
+    "software127r4.py": {
+      "bytes": 986,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/software127r4.py",
+      "sha256": "dc639bf319f044570ab050512a20812c5e66281cb7899eb07b8b661862b62074"
+    },
+    "test_anchor127.py": {
+      "bytes": 3362,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/test_anchor127.py",
+      "sha256": "15730bc7e2389ca50e3b774c31ec35091382a69d6cc9316c49a3195d425921be"
+    },
+    "test_budget127r5.py": {
+      "bytes": 3346,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/test_budget127r5.py",
+      "sha256": "4453864d65a315bb6e66a9362853bf53d420580e412107eb3eca15243fc56e15"
+    },
+    "test_profile127r4.py": {
+      "bytes": 9275,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/test_profile127r4.py",
+      "sha256": "b63c82b765f0425073fb6c44068c3e2c1fa76f415c5d4fd427cf40797ce66e43"
+    },
+    "test_readset127.py": {
+      "bytes": 3213,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/test_readset127.py",
+      "sha256": "fbfa96d7d361e66a40695a345c08fd4c5b6b7445f4444cbeee715a219afe6a88"
+    },
+    "test_recovery127.py": {
+      "bytes": 8119,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/test_recovery127.py",
+      "sha256": "8bdf3daaf5b741e23d744ecd4ec2b1eeee0f4c05fa4eb77be7d9d1e1e46999e4"
+    },
+    "timing_transform127r5.py": {
+      "bytes": 664,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/timing_transform127r5.py",
+      "sha256": "04e683c8fb7232f406adc04cd42734676c593e118f2742f785c050d3431c9687"
+    },
+    "window056.py": {
+      "bytes": 772,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/window056.py",
+      "sha256": "7efdee62d571c53edd469496c60fadff8bc44bd16d74bca1a9ea7152c0858699"
+    }
+  },
+  "model_ready": false,
+  "original_timeout_seconds": 585.6111058300012,
+  "performance_ready": false,
+  "prepared_only": true,
+  "producer_source_ref": {
+    "bytes": 67429,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_MANIFEST.json",
+    "sha256": "871c8e32831ee3eebacd43a084e4416bb14d6d06cd9f5ee08017ba459f287cd8"
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5",
+  "schema": "deltalog.anchor-consumer-recovery-preparation/v127-repair5",
+  "window": {
+    "cutoff": 1792220533,
+    "start": 1792134133
+  }
+}

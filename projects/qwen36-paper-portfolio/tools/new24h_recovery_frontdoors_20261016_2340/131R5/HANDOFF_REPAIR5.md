@@ -1,0 +1,3 @@
+# First host fault evidence only
+
+Original R4 failure is retained. This new default-OFF identity adds the first host exception traceback, errno, filename/filename2 and current phase/substep, exclusively flushed and fsynced before original final cleanup. It never retries, resumes, changes safety predicates or alters model arithmetic. Any evidence-write failure is secondary and cleanup still runs. All original3600/180 budgets, resources, source/data gates and software remain. New aggregate54=old51+3 focused controls; old51 not rerun locally. Windows cannot prove directory fsync; real Linux focused execution remains required. Actual frontier is pending MAIN and no NPU execution is authorized.

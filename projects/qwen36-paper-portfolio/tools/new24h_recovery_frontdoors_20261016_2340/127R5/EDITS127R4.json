@@ -1,0 +1,148 @@
+{
+  "bind127.py": [
+    [
+      "def bind(tr):",
+      "def bind(tr,budget_ref=None):\n import clock127r4 as CLOCK\n H.need(budget_ref is not None,'pending actual measured complete-workload budget profile')\n budget=H.obj(budget_ref);CLOCK.profile({'cpu_budget_profile':budget});H.obj(budget['measurement_ref'])"
+    ],
+    [
+      " for ref in t['external_refs']:add(ref)",
+      " for ref in t['external_refs']:add(ref)\n add(budget_ref);add(budget['measurement_ref'])"
+    ],
+    [
+      " sys.path.insert(0,str(Path(r['source']['path']).parent))",
+      " import previous_reader127r4 as PR\n prior_reader=PR.validate(H.obj,r['source'])\n for prior in PR.REFS.values():add(prior)\n sys.path.insert(0,str(Path(r['source']['path']).parent))"
+    ],
+    [
+      "result=dict(m,root=ROOT",
+      "result=dict(m,previous_reader_failure=prior_reader,cpu_budget_profile=budget,cpu_budget_profile_ref=budget_ref,root=ROOT"
+    ],
+    [
+      "ap.add_argument('--template-ref',required=True);a=ap.parse_args()",
+      "ap.add_argument('--template-ref',required=True);ap.add_argument('--budget-profile-ref');a=ap.parse_args()"
+    ],
+    [
+      "return bind(json.loads(a.template_ref))",
+      "return bind(json.loads(a.template_ref),json.loads(a.budget_profile_ref)if a.budget_profile_ref else None)"
+    ]
+  ],
+  "entry.py": [
+    [
+      "import bridge_io as C,provenance127 as V",
+      "import bridge_io as C,provenance127 as V,clock127r4 as CLOCK"
+    ],
+    [
+      " left=min(V.TIMEOUT,590-(time.monotonic()-start),1792220533-time.time()-90);C.need(left>0,'original590/585.611 +cleanup90/fixedcut')",
+      " profile=CLOCK.profile(m);deadline=float(os.environ['RECOVERY127R4_DEADLINE']);hostcap=float(os.environ['RECOVERY127R4_CHILD_CAP'])\n left=min(V.TIMEOUT,hostcap,CLOCK.child_cap(deadline,profile),1792220533-time.time()-90);C.need(left>0,'original585.611/whole720/final/cleanup90/fixedcut')"
+    ],
+    [
+      "schema='deltalog.anchor-consumer-CPU-recovery/v127'",
+      "schema='deltalog.single-read-audit-reuse-CPU-recovery/v127-repair4'"
+    ]
+  ],
+  "entry127.py": [
+    [
+      "from anchor_transform127 import transform",
+      "from audit_transform127r4 import transform,Memo\nimport codec_transform130"
+    ],
+    [
+      "data=checked(m['files']['run_consumer088.py']);text,_=transform(data)",
+      "data=checked(m['files']['run_consumer088.py']);text=transform(data)"
+    ],
+    [
+      " import torch,raw_codec\n raw_codec.install(torch)",
+      " import torch\n codec_transform130.install(torch,m['files']['raw_codec.py'],lambda r:Path(r['path']) if checked(r) else None)"
+    ],
+    [
+      " namespace={'__name__':'anchor_recovery127','__file__':target}",
+      " namespace={'__name__':'anchor_recovery127','__file__':target,'_memo_factory127r4':Memo}"
+    ],
+    [
+      "schema='deltalog.anchor-consumer-diagnostic/v127'",
+      "schema='deltalog.single-read-audit-reuse-consumer-diagnostic/v127-repair4'"
+    ],
+    [
+      "  producer_source=ps,producer=pr,preserved_original_strict=st,",
+      "  producer_source=ps,producer=pr,preserved_original_strict=st,reader_contract='single-open130 + completed-invocation-audit131; same original mathematical gates',"
+    ]
+  ],
+  "host.py": [
+    [
+      "from pathlib import Path",
+      "from pathlib import Path\nimport clock127r4 as CLOCK\n_WHOLE_DEADLINE=None"
+    ],
+    [
+      "    with Path(p).open('rb')as f:\n        for b in iter(lambda:f.read(1048576),b''):h.update(b)",
+      "    with Path(p).open('rb')as f:\n        for b in iter(lambda:f.read(1048576),b''):\n            if _WHOLE_DEADLINE is not None:CLOCK.remaining(_WHOLE_DEADLINE)\n            h.update(b)"
+    ],
+    [
+      "    raw=checked(PIPE);tree=ast.parse(raw);names={'Lane'}",
+      "    import clock_profile131\n    raw=checked(PIPE);tree=ast.parse(clock_profile131.transform(raw));names={'Lane'}"
+    ],
+    [
+      "    started=time.monotonic();p=argparse.ArgumentParser",
+      "    global _WHOLE_DEADLINE\n    started=time.monotonic();_WHOLE_DEADLINE=started+CLOCK.WHOLE;p=argparse.ArgumentParser"
+    ],
+    [
+      "    for r in refs:validate_ref_streamed(r)\n    need(ar",
+      "    # runtime.target_closure already completed this SAME full readset fence.\n    CLOCK.remaining(_WHOLE_DEADLINE)\n    need(ar"
+    ],
+    [
+      "    a.stop_after_numerics=True",
+      "    budget=CLOCK.profile(m);checked(budget['measurement_ref'])\n    a.stop_after_numerics=True"
+    ],
+    [
+      "        original_init(self,*args);self._adapter_module=module",
+      "        original_init(self,*args);self.lease_deadline=_WHOLE_DEADLINE-budget['final_fence_reserve_seconds'];self._adapter_module=module"
+    ],
+    [
+      "        def run(self,argv,timeout=60):\n            if",
+      "        def run(self,argv,timeout=60):\n            timeout=min(timeout,CLOCK.remaining(_WHOLE_DEADLINE-budget['final_fence_reserve_seconds']))\n            if"
+    ],
+    [
+      "        def cleanup(self):\n            self.cleanup_until=time.monotonic()+90",
+      "        def call(self,argv,timeout=60,ok=True):\n            if getattr(self,'cleanup_until',None)is not None:\n                result=self.run(argv,timeout);need(not ok or result['exit_code']==0,'cleanup command failed: '+json.dumps(result));return result\n            return super().call(argv,timeout,ok)\n        def cleanup(self):\n            self.cleanup_until=min(time.monotonic()+90,_WHOLE_DEADLINE-budget['final_fence_reserve_seconds'])"
+    ],
+    [
+      "            env={'OMP_NUM_THREADS'",
+      "            cap=CLOCK.child_cap(_WHOLE_DEADLINE,budget)\n            env={'RECOVERY127R4_DEADLINE':str(_WHOLE_DEADLINE),'RECOVERY127R4_CHILD_CAP':str(cap),'OMP_NUM_THREADS'"
+    ],
+    [
+      "    for r in refs:validate_ref_streamed(r)\n    seal.final_verify(m['storage_seal_evidence_ref'])",
+      "    complete_final_fence=False\n    try:\n        for r in refs:validate_ref_streamed(r)\n        CLOCK.remaining(_WHOLE_DEADLINE);seal.final_verify(m['storage_seal_evidence_ref']);CLOCK.remaining(_WHOLE_DEADLINE);complete_final_fence=True\n    except BaseException as exc:\n        if primary is None:primary='final complete source/data/storage fence '+repr(exc)\n        else:secondary.append('final complete source/data/storage fence '+repr(exc))"
+    ],
+    [
+      "v=dict(schema='deltalog.fresh-bridge-owned-host/v5',source=owner",
+      "v=dict(schema='deltalog.fresh-bridge-owned-host/v5',reader_contract='single-read-audit-reuse/v127-repair4',reader_source=owner,producer_source=m['original_source_ref'],complete_final_fence=complete_final_fence,cpu_budget_profile_ref=m['cpu_budget_profile_ref'],whole_seconds=720,cleanup_seconds=90,original_child_ceiling=585.6111058300012,source=owner"
+    ]
+  ],
+  "run_recovery.py": [
+    [
+      "ap.add_argument('--host-cpu',type=int)",
+      "ap.add_argument('--budget-profile-ref');ap.add_argument('--host-cpu',type=int)"
+    ],
+    [
+      "import bind127;return bind127.bind(tr)",
+      "import bind127;return bind127.bind(tr,json.loads(a.budget_profile_ref)if a.budget_profile_ref else None)"
+    ]
+  ],
+  "runtime127.py": [
+    [
+      " return S,seal",
+      " return S,seal"
+    ]
+  ],
+  "test_recovery127.py": [
+    [
+      "  for old,new in reversed(edits['edits']):",
+      "  r4=json.loads((P/'EDITS127R4.json').read_bytes())\n  for before,after in reversed(r4['host.py']):\n   self.assertEqual(text.count(after),1);text=text.replace(after,before,1)\n  text=text.replace('127-repair4','127-repair3').replace('127repair4','127repair3')\n  for old,new in reversed(edits['edits']):"
+    ],
+    [
+      "self.assertIn('left=min(V.TIMEOUT,590-',text)",
+      "self.assertIn('left=min(V.TIMEOUT,hostcap,CLOCK.child_cap(deadline,profile)',text)"
+    ],
+    [
+      "for name in ('entry127.py','anchor_transform127.py'):",
+      "for name in ('entry127.py','anchor_transform127.py','audit_transform127r4.py','codec_transform130.py'):"
+    ]
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "donor": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog061-runtime-source-recovery-new24h-v1-066/host.py",
+    "bytes": 22357,
+    "sha256": "215203ddec66632f0d4b07425aafd9e5b9f9a2d0e00fcb73f947231090e14fa2"
+  },
+  "edits": [
+    [
+      "OWNER='deltalog061-source-recovery-new24h-MAIN-066'",
+      "OWNER='deltalog-anchor-consumer-recovery-new24h-MAIN-127-repair3'"
+    ],
+    [
+      "def target_closure(sr):\n m=obj(sr);root=Path(m['root']);C=load(m['files']['bridge_io.py'],'_actual_bridge_contract')\n need(C.source(sr)==m,'actual bridge source');refs=[sr,*m['files'].values(),m['probe_ref'],m['library_ref'],m['config_ref'],m['observer_ref'],m['lifecycle_source_ref']]\n refs.extend([m['composite_api_ref'],m['composite_source_ref'],m['composite_cpu_owner_ref'],m['flush021_ref']])\n refs.extend(C.obj(m['composite_source_ref'])['files'].values())\n refs.extend(m['recovery_refs'])\n for f in refs:validate_ref_streamed(f)\n return root,m,C,refs,root\n",
+      "def target_closure(sr):\n import runtime127\n return runtime127.target_closure(sr)\n"
+    ],
+    [
+      "out=a.output;storage=load(m['files']['storage061.py'],'_066_storage');storage.reserve(out.parent,out,'cpu',obj,m['storage_authority_ref']);out.mkdir();lane=GE(a,root);primary=None;secondary=[];result_ref=None;consumed=None",
+      "out=a.output;import runtime127;storage,seal=runtime127.storage(m);storage.reserve(out.parent,out,'cpu',obj,m['storage_authority_ref']);out.mkdir();lane=GE(a,root);primary=None;secondary=[];result_ref=None;consumed=None"
+    ],
+    [
+      "    for r in refs:validate_ref_streamed(r)\n    v=dict(schema=",
+      "    for r in refs:validate_ref_streamed(r)\n    seal.final_verify(m['storage_seal_evidence_ref'])\n    v=dict(schema="
+    ],
+    [
+      "    lr=json.loads(a.lifecycle_ref);need(lr==m['lifecycle_source_ref'],'same actual022 historical component only');[validate_ref_streamed(r)for r in refs];need(ar['sha256']==AUTH_SHA,'same human authority')",
+      "    lr=json.loads(a.lifecycle_ref);need(lr==m['lifecycle_source_ref'],'same actual022 historical component only')\n    for r in refs:validate_ref_streamed(r)\n    need(ar['sha256']==AUTH_SHA,'same human authority')"
+    ]
+  ]
+}
