@@ -1,0 +1,19 @@
+{
+  "schema": "hypic-r18-first-pair/v1",
+  "order": [
+    "G3/R1",
+    "G1/R1"
+  ],
+  "scope": "firstpair not three-round/fullgoal",
+  "numeric_prerequisite": "C1_PARTITIONED_R18_CANARY_R2_TERMINAL_20261016.json",
+  "input_tokens": 32768,
+  "public_segment_tokens": 16384,
+  "native_prefix_tokens": 8192,
+  "output_tokens": 1024,
+  "requests_per_arm": 40,
+  "concurrency": 16,
+  "warmups": "2B+2A",
+  "source_bindings": 178,
+  "on_negative": "Do not expand unchanged;preserve evidence and repair actual cost",
+  "remaining": "G1-G4x3,381perarmquality,lifecycle,Skills"
+}

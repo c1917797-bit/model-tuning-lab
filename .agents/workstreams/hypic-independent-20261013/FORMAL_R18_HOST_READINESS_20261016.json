@@ -1,0 +1,25 @@
+{
+  "scope": "host-only formal first-pair readiness; no performance device run started",
+  "regression": {
+    "operation": "exec-0000000000000df6",
+    "tests": 932,
+    "exit_code": 0
+  },
+  "static": {
+    "operation": "exec-0000000000000df7",
+    "source_bindings": 178,
+    "runtime_bindings": 168,
+    "identical_source_closures": true,
+    "new_roots_absent": true
+  },
+  "prerequisite": {
+    "bounded_npu_audit": "exec-0000000000000de6",
+    "not_formal_performance": true
+  },
+  "next": [
+    "Record and publish coherent checkpoint",
+    "Fresh physical0-3/port/source/direct admission",
+    "G3/R1 then independent audit then fresh G1/R1 admission"
+  ],
+  "full_goal_complete": false
+}

@@ -1,4 +1,14 @@
-# CURRENT R18 R2 TERMINAL BOUNDED NUMERIC/PARTITION ACCEPTED; NO SPEED CLAIM
+# CURRENT R18 FORMAL FIRST PAIR HOST READY; NO DEVICE START
+
+932 CPU regressions0df6 PASS; static0df7 proves identical178source/168runtime
+closures, protocol identity and absent new roots. FORMAL_R18_HOST_READINESS_20261016.json.
+New timed audit retains finite/generation/owned-slot/order/full40/fourrank gates
+while accepting actual partition dispatch1or2 with each live row visited once.
+Next commit/publish readiness then fresh admission FORMAL_R18_G3_R1_CONTRACT.json,
+independent audit_r18_partition_performance.py --live-release; only valid then G1/R1.
+No owned modeljob. Full goal incomplete. Cutoff2026-10-17T06:48:09Z.
+
+# R18 R2 TERMINAL BOUNDED NUMERIC/PARTITION ACCEPTED; NO SPEED CLAIM
 
 0dd8 exit0; independent0de6 PASS2private fullrequests,allfour48C1/16C2,
 384 actualpartition groups/384 completedreceipts/192 serialnumericshadows,
