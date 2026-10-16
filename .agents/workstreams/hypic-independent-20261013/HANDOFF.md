@@ -1,3 +1,14 @@
+# CURRENT R18 G3/R1 FORMAL PERFORMANCE LIVE
+
+ma exact exec-0000000000000e06 launched19:15UTC from liveverified12660b1d.
+Admission0e05 proves178source/168runtime/image/model/input/actual0-3empty/8233+
+HCCLfree/newroot. Raw /cache/cch/hypic-independent-20261013/formal-r18-g3-r1.
+Poll samepeer/handle/root, never restart running/unclear or edit178boundsources.
+Terminal audit_r18_partition_performance.py --contract FORMAL_R18_G3_R1_CONTRACT.json
+--live-release; only independently valid then freshG1/R1 admission. Not speedclaim.
+0e04 was check-only/device_run=false, no root created; actualrun only0e06.
+Fullquality/lifecycle/G1-G4x3/Skills incomplete. Cutoff2026-10-17T06:48:09Z.
+
 # CURRENT R18 FORMAL FIRST PAIR HOST READY; NO DEVICE START
 
 932 CPU regressions0df6 PASS; static0df7 proves identical178source/168runtime
