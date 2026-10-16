@@ -1,5 +1,12 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+0a2f09:03:20UTC liveR16G3 exactCIDa7f2ef... owner host3620211-14 -> inner59-62 ->
+physical0-3, foreignempty. Saved live namespace receipt; not terminal acceptance.
+Quality0a30 fresh frozen127/126 inputs: publiclength10160-16384; maxinput39642.
+Worst orderedbatch8 and top8distinct KV bytes perrank2147483648 vs proposed2684354560.
+QUALITY_R16_BATCH8_BYTE_ACCOUNTING_20261016.json: byte math only, not actual retention,
+eviction, peak hostRAM or HBM proof. Need bounded catalog run after configuration freeze.
+
 Quality bootstrap gap now wired HOST ONLY: new formal_quality_r16_tp4.py and
 pure independent_quality_bootstrap_route choose existing quality catalog loader.
 Generic controller AST parity preserved except declared startup seam/defaultcontract.

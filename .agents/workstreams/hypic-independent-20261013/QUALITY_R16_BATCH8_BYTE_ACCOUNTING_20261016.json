@@ -1,0 +1,20 @@
+{
+  "schema": "hypic-quality-material-byte-accounting/v1",
+  "operation": "exec-0000000000000a30",
+  "samples": 127,
+  "unique_segments": 126,
+  "max_input": 39642,
+  "public_length_min": 10160,
+  "public_length_max": 16384,
+  "max_batch8": {
+    "start": 56,
+    "segments": 8,
+    "public_tokens_sum": 131072,
+    "kv_bytes_local_tp4": 2147483648
+  },
+  "top8_distinct_kv_bytes_local_tp4": 2147483648,
+  "kv_budget_proposed": 2684354560,
+  "assumption": "actuallocalKV1head/256dim/2K_V/BF16/16full layers; host pool bytes only, linear and temporary allocations separate",
+  "scope": "Hash-verified full frozen inputs and inferred BF16 KV storage bytes; no actual retention/eviction/host peak/NPU HBM proof; linear states and temporary buffers separate",
+  "full_quality_accepted": false
+}

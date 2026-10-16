@@ -1,0 +1,57 @@
+{
+  "schema": "hypic-live-namespace/v1",
+  "operation": "exec-0000000000000a2f",
+  "utc": "2026-10-16T09:03:20.602387+00:00",
+  "cid": "a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f",
+  "owners": [
+    {
+      "npu": 0,
+      "pid": 3620211,
+      "cgroup": "13:blkio:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n12:freezer:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n11:memory:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n10:perf_event:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n9:rdma:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n8:pids:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n7:cpuset:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n6:net_cls,net_prio:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n5:hugetlb:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n4:devices:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n3:files:/\n2:cpu,cpuacct:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n1:name=systemd:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n",
+      "ownership_status": "owned-cgroup",
+      "nspid": [
+        3620211,
+        59
+      ],
+      "owned": true
+    },
+    {
+      "npu": 1,
+      "pid": 3620212,
+      "cgroup": "13:blkio:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n12:freezer:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n11:memory:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n10:perf_event:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n9:rdma:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n8:pids:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n7:cpuset:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n6:net_cls,net_prio:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n5:hugetlb:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n4:devices:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n3:files:/\n2:cpu,cpuacct:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n1:name=systemd:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n",
+      "ownership_status": "owned-cgroup",
+      "nspid": [
+        3620212,
+        60
+      ],
+      "owned": true
+    },
+    {
+      "npu": 2,
+      "pid": 3620213,
+      "cgroup": "13:blkio:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n12:freezer:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n11:memory:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n10:perf_event:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n9:rdma:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n8:pids:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n7:cpuset:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n6:net_cls,net_prio:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n5:hugetlb:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n4:devices:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n3:files:/\n2:cpu,cpuacct:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n1:name=systemd:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n",
+      "ownership_status": "owned-cgroup",
+      "nspid": [
+        3620213,
+        61
+      ],
+      "owned": true
+    },
+    {
+      "npu": 3,
+      "pid": 3620214,
+      "cgroup": "13:blkio:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n12:freezer:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n11:memory:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n10:perf_event:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n9:rdma:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n8:pids:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n7:cpuset:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n6:net_cls,net_prio:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n5:hugetlb:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n4:devices:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n3:files:/\n2:cpu,cpuacct:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n1:name=systemd:/docker/a7f2ef681b54d6b7a6f30e50ef7273f5f9b77c8def548e5fe009aa0398f5891f\n",
+      "ownership_status": "owned-cgroup",
+      "nspid": [
+        3620214,
+        62
+      ],
+      "owned": true
+    }
+  ],
+  "foreign": [],
+  "measured": 0,
+  "warmups": 0,
+  "terminal": null,
+  "scope": "Current exact CID cgroup/NSpid physical0-3 observation only, not terminal isolation/release or performance acceptance"
+}
