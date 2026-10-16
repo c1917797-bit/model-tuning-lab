@@ -1,0 +1,86 @@
+{
+  "schema": "hypic-profiler-preparation/v1",
+  "classification": "CONFIGURATION_ONLY_NOT_DEVICE_ATTRIBUTION",
+  "contract": "PROFILE_G3_R16_PRIVATEWARM_R1_CONTRACT.json",
+  "static_operation": "exec-0000000000000c17",
+  "source_bindings": 149,
+  "algorithm_sources_unchanged": 147,
+  "official_image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "no_device_inventory_operations": [
+    "exec-0000000000000c10",
+    "exec-0000000000000c12"
+  ],
+  "inventory": {
+    "tools": {
+      "msprof": "/usr/local/Ascend/ascend-toolkit/latest/bin/msprof",
+      "asys": "/usr/local/Ascend/cann-9.1.0/tools/ascend_system_advisor/asys/asys"
+    },
+    "sources": [],
+    "vllm-ascend": "0.23.0",
+    "vllm": "0.23.0+empty",
+    "torch-npu": "2.10.0.post4"
+  },
+  "profiler_sources": [
+    {
+      "path": "/vllm-workspace/vllm-ascend/vllm_ascend/profiling_config.py",
+      "sha256": "1c6b953defd32b54a238829b29cae7b4470fe4b7a1820bbcfdac25d537e917d7",
+      "lines": []
+    },
+    {
+      "path": "/vllm-workspace/vllm-ascend/vllm_ascend/core/scheduler_profiling_chunk.py",
+      "sha256": "5a0ececbca52802dbcf1f5b82449d0cea0fcda1da20b0b1c48c0f5ff448d0d9c",
+      "lines": []
+    },
+    {
+      "path": "/vllm-workspace/vllm-ascend/vllm_ascend/core/profiling_chunk_predictor.py",
+      "sha256": "07521ea9b7c9b8237dbb017375b9470331366e46ebb9d94b4c24815c5e5aa58d",
+      "lines": []
+    },
+    {
+      "path": "/vllm-workspace/vllm-ascend/vllm_ascend/profiler/torch_npu_profiler.py",
+      "sha256": "0c9ffcaf695a9b1fcb44a51bdd92e69f763a7c5be64a8efbd498d6536b9e09e5",
+      "lines": [
+        "class TorchNPUProfilerWrapper(WorkerProfiler):",
+        "profiler_level=torch_npu.profiler.ProfilerLevel.Level1,",
+        "aic_metrics=torch_npu.profiler.AiCMetrics.PipeUtilization,"
+      ]
+    },
+    {
+      "path": "/vllm-workspace/vllm-ascend/vllm_ascend/patch/platform/patch_profiling_chunk.py",
+      "sha256": "bcf8867531cecb425a016f43df156cef25fc7a3d9b98ff14b00a43112c777580",
+      "lines": []
+    },
+    {
+      "path": "/vllm-workspace/vllm/vllm/profiler/layerwise_profile.py",
+      "sha256": "dfb0042ba15c95d483bf93d11ffce8f847a2f20633fe5fa0af8b232707b8f91e",
+      "lines": []
+    },
+    {
+      "path": "/vllm-workspace/vllm/vllm/config/profiler.py",
+      "sha256": "981161215276d72564567d368d05d086621c831b2d1da79c8a8cff6963b5a305",
+      "lines": [
+        "delay_iterations: int = Field(default=0, ge=0)",
+        "max_iterations: int = Field(default=0, ge=0)",
+        "has_delay_or_limit = self.delay_iterations > 0 or self.max_iterations > 0",
+        "\"Using 'torch' profiler with delay_iterations or max_iterations \""
+      ]
+    }
+  ],
+  "capture": {
+    "requests": 16,
+    "output_tokens": 64,
+    "max_iterations": 12,
+    "delay_iterations": 32
+  },
+  "hypothesis_scope": "native_decode helper only within CURRENT_COMPACT_MODEL selected/mixed path; not all decode steps. Actual runtime callcounts/wallcriticalpath stillmissing.",
+  "no_new_device_run": true,
+  "required_before_launch": [
+    "freshma/direct/host-development",
+    "source149/image/model/input/newroot binding",
+    "actualphysical0-3 and8233/HCCLidle",
+    "cache free>5GiB",
+    "negative pair immutable hashes",
+    "independent terminal/source/hot/physical/release and tracecompleteness audits"
+  ],
+  "acceptance": "Diagnostic only; no formal speed/quality/lifecycle promotion."
+}

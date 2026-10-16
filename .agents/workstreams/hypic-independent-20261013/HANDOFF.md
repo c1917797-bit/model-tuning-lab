@@ -1,3 +1,17 @@
+# LATEST R16 integrated profiler contract PREPARED only
+
+PROFILE_G3_R16_PRIVATEWARM_R1_CONTRACT.json uses unchanged147R16sources plus
+existingwarmprofilemodule/controller149bindings. Static exec-0000000000000c17 (source149/config/newroot)
+PASS;exactoperation inreadinessreceipt authoritative. No newalgorithm/diagcomponent.
+Officialimage no-device/read-only/networknone/CPU0 inventory0c10+0c12 confirms
+msprof/asys and TorchNPUProfilerWrapper0c9ffcaf... Level1/PipeUtilization unchanged.
+NativeDecodehelper caller onlyselectedcompact/mixedpath;not all decode. Its hash/
+clone/packing andmodelrowsync remain hypotheses, no measuredrootcause.
+Next freshma/direct/source149/image/model/input/actual0-3+ports/newroot admission,
+then one bounded integrated sameprocessprivatewarm16x64 capture delay32/max12
+(may13boundaries). Classifyobservedprefill/decode,not assumedpuredecode.
+No NPU capture launched; no ownedjob. DeadlineOct17T06:48:09Z; fullgoal incomplete.
+
 # LATEST R16 FIRST MATCHED PAIR NEGATIVE — no owned livejob
 
 G1exact0bd4 terminalexit0/full40/437clean/source147.0bff firstliveaudit strictbind
