@@ -1,0 +1,331 @@
+{
+  "schema": "ascend.actual-stage-checkpoint/v1",
+  "scope": "diagnostic recovery, source binding, same-image Meta; no final acceptance",
+  "authority": {
+    "schema": "ascend.paper-portfolio.new24h-authority/v1",
+    "authority_source": "Direct human user: 再穿刺24小时",
+    "start_utc": "2026-10-16T07:02:13Z",
+    "cutoff_utc": "2026-10-17T07:02:13Z",
+    "start_epoch": 1792134133,
+    "cutoff_epoch": 1792220533,
+    "timezone": "Europe/Moscow",
+    "start_local": "2026-10-16T10:02:13+03:00",
+    "cutoff_local": "2026-10-17T10:02:13+03:00",
+    "hours": 24,
+    "previous_authority": "NEW48H_AUTHORITY_20261014.json",
+    "historical_sources_outputs_cutoffs_immutable": true,
+    "new_source_tickets_require_current_authority": true,
+    "model": {
+      "path": "/cache/efim/Qwen3.6-27B",
+      "config_bytes": 4308,
+      "config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+      "model_type": "qwen3_5",
+      "gdn_layers": 48,
+      "full_attention_layers": 16,
+      "weights_full_identity": "retain original checkpoint manifest; config hash alone is not full weights hash"
+    },
+    "hardware": {
+      "physical_npus": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "protected_npus": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "hugepage_release_32GiB": "SPENT"
+    },
+    "delivery": {
+      "plugin_monkeypatch": true,
+      "explicit_optin": true,
+      "training": false,
+      "distillation": false,
+      "original_runtime_image_changes": false,
+      "hypic": "historical exemplar excluded from new success"
+    },
+    "acceptance": {
+      "throughput_gain_min": 0.1,
+      "performance_output_tokens": 1024,
+      "formal_paired_rounds": 3,
+      "same_stack_input_concurrency_common_optimizations": true,
+      "profile_off": true,
+      "report": [
+        "TTFT",
+        "TPOT"
+      ],
+      "accuracy": [
+        "GSM8K",
+        "HumanEval",
+        "MMLU"
+      ],
+      "thinking": false,
+      "max_tokens": 2048,
+      "normal_EOS": true,
+      "smoke_before_full": true,
+      "max_user_loss_percent": 1,
+      "loss_interpretation": "report percentage-point and relative loss separately; conservatively both <=1 until clarified",
+      "composition": "numerically qualified components permitted; require measured D/A/B/A+B and combined task validation"
+    },
+    "milestones": [
+      {
+        "by_hours": 3,
+        "deliver": "actual repaired-library Meta and numerical gate; known first faults repaired or discriminating evidence, not source-only readiness"
+      },
+      {
+        "by_hours": 6,
+        "deliver": "actual fullmodel gate or bounded evidence-backed repair and remaining acceptance budget audit"
+      },
+      {
+        "by_hours": 10,
+        "deliver": "valid fixed1024 paired E2E screen; retain correct repeatable subtarget gains only as measured components"
+      },
+      {
+        "by_hours": 16,
+        "deliver": "promising candidate three matched pairs; task smoke consumed and full evaluations admitted by measured remaining budget"
+      },
+      {
+        "by_hours": 24,
+        "deliver": "independent final performance/task acceptance audit; unmet remains unmet; no automatic extension"
+      }
+    ],
+    "schedule": {
+      "parallel_preparation_agents": 3,
+      "MAIN_owns_device_admission": true,
+      "compatible_disjoint_numerics": true,
+      "aggregate_resource_budget_required": true,
+      "TP4_formal_timing_exclusive": true,
+      "dummy_occupancy": false,
+      "periodic_audit_minutes": 30,
+      "continuous_utilization_requires_continuous_evidence": true
+    },
+    "success_guaranteed": false,
+    "current_accepted_new_technique": false,
+    "previous_window_acceptance": "not_achieved; old source/output/cutoff and failed results retained",
+    "automatic_extension": false
+  },
+  "capture_evidence": {
+    "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence069-MAIN-002/EVIDENCE069.json",
+    "bytes": 6070,
+    "sha256": "eab70137ec0763daa93dbd525f28a08b6ed4ac6ae83299c095c8c8162bbc82fc"
+  },
+  "bound_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json",
+    "bytes": 52969,
+    "sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21"
+  },
+  "cpu_owner": {
+    "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json",
+    "bytes": 1386,
+    "sha256": "54e38927342aa9c4e443cbde798768e46a421afc3fb1ba7c8e220aa3842ed3cd"
+  },
+  "cpu_stage": {
+    "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-069-repair1-001/native/result/STAGE_RESULT.json",
+    "bytes": 5231,
+    "sha256": "cdc6cc7b89e5720176fc7f6274f7d411958549cb408ee565839cb8c9268d780f"
+  },
+  "NPU16": {
+    "operationId": "exec-0000000000000a49",
+    "status": "dispatched; terminal outcome not recorded here"
+  },
+  "acceptance": {
+    "model": false,
+    "performance": false,
+    "accuracy": false
+  },
+  "observations": [
+    {
+      "action": null,
+      "canonicalDownloadUrl": null,
+      "canonicalUrl": null,
+      "dataPlane": null,
+      "downloadUrls": null,
+      "error": null,
+      "found": true,
+      "kind": "exec",
+      "ok": true,
+      "operation": {
+        "channel": "control",
+        "fallbackUsed": false,
+        "gatewayInstanceId": "tpc-rgw-01",
+        "logicalGatewayId": "tpc",
+        "ok": true,
+        "result": {
+          "found": true,
+          "lane": "job",
+          "ok": true,
+          "record": {
+            "args": [
+              "-I",
+              "-B",
+              "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/run052.py",
+              "--execute",
+              "--template-ref",
+              "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_TEMPLATE.json\",\"bytes\":55180,\"sha256\":\"9d446cb308dbb88eb3f63056ebef855dfa1489b0ac561f7b7b91efcd0d784ae2\"}",
+              "--phase",
+              "bind",
+              "--original035-source-ref",
+              "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair4/SOURCE_MANIFEST.json\",\"bytes\":26248,\"sha256\":\"e5566351d02b04792b871f67092876f69b7fb58bbc81c36d21360fb328ec6524\"}",
+              "--build-ref",
+              "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/RESULT.json\",\"bytes\":8847,\"sha256\":\"3010d9b0a73d2f7b62b6294c8c01fa68176f1e911bee4b43ca7b1ac72bf00a68\"}",
+              "--storage-authority-ref",
+              "{\"path\":\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/DL061_STORAGE_AUTHORITY_20261016.json\",\"bytes\":1213,\"sha256\":\"3b58d42555147db06874fa4db36ada8b95474af4f3153fc89b73e4b7779d6f6c\"}",
+              "--storage-seal-evidence-ref",
+              "{\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence069-MAIN-002/EVIDENCE069.json\",\"bytes\":6070,\"sha256\":\"eab70137ec0763daa93dbd525f28a08b6ed4ac6ae83299c095c8c8162bbc82fc\"}"
+            ],
+            "cancelled": false,
+            "command": "/usr/bin/python3",
+            "cwd": null,
+            "durationMs": 8806,
+            "error": null,
+            "exitCode": 0,
+            "id": "exec-0000000000000a35",
+            "lane": "job",
+            "state": "completed",
+            "stderr": "",
+            "stdout": "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json\", \"bytes\": 52969, \"sha256\": \"b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21\"}\n",
+            "timedOut": false
+          },
+          "state": "completed"
+        },
+        "rgwHttp": "http://agentweb:17888",
+        "rgwRouting": {
+          "attemptErrors": [],
+          "strategy": "peer-hot3-with-command-retry"
+        },
+        "routeDecision": "peer_direct",
+        "sessionId": null,
+        "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "targetRole": "upstream",
+        "timings": {
+          "awmcp": {
+            "attemptCount": 1,
+            "rgwRequestMs": 422,
+            "rgwResponseDecodeMs": 0,
+            "rgwResponseHeadersMs": 422,
+            "routeCacheHit": true,
+            "routeLookupMode": "command-cache",
+            "routeLookupMs": 0,
+            "totalMs": 422
+          },
+          "rgw": {
+            "dispatchMs": 0,
+            "journalMs": 0,
+            "peerRoundTripMs": 421,
+            "routeLookupMs": 0,
+            "totalMs": 421
+          }
+        },
+        "traceId": "72f8be87-c716-48eb-8b87-7162723cf3f8"
+      },
+      "operationId": "exec-0000000000000a35",
+      "phase": "completed",
+      "previewUrls": null,
+      "progress": null,
+      "publicUrl": null,
+      "publicationId": null,
+      "result": null,
+      "retryable": false,
+      "schema": "agentweb.operation/v1",
+      "status": "completed",
+      "succeeded": true,
+      "terminal": true
+    },
+    {
+      "action": null,
+      "canonicalDownloadUrl": null,
+      "canonicalUrl": null,
+      "dataPlane": null,
+      "downloadUrls": null,
+      "error": null,
+      "found": true,
+      "kind": "exec",
+      "ok": true,
+      "operation": {
+        "channel": "control",
+        "fallbackUsed": false,
+        "gatewayInstanceId": "tpc-rgw-01",
+        "logicalGatewayId": "tpc",
+        "ok": true,
+        "result": {
+          "found": true,
+          "lane": "job",
+          "ok": true,
+          "record": {
+            "args": [
+              "-I",
+              "-B",
+              "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/run052.py",
+              "--execute",
+              "--template-ref",
+              "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_TEMPLATE.json\",\"bytes\":55180,\"sha256\":\"9d446cb308dbb88eb3f63056ebef855dfa1489b0ac561f7b7b91efcd0d784ae2\"}",
+              "--phase",
+              "cpu",
+              "--host-cpu",
+              "166",
+              "--guest-cpu",
+              "0"
+            ],
+            "cancelled": false,
+            "command": "/usr/bin/python3",
+            "cwd": null,
+            "durationMs": 112245,
+            "error": null,
+            "exitCode": 0,
+            "id": "exec-0000000000000a40",
+            "lane": "job",
+            "state": "completed",
+            "stderr": "",
+            "stdout": "MAIN_DLLIFECYCLE002_OWNER {\"path\": \"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json\", \"bytes\": 1386, \"sha256\": \"54e38927342aa9c4e443cbde798768e46a421afc3fb1ba7c8e220aa3842ed3cd\"}\n",
+            "timedOut": false
+          },
+          "state": "completed"
+        },
+        "rgwHttp": "http://agentweb:17888",
+        "rgwRouting": {
+          "attemptErrors": [],
+          "strategy": "peer-hot3-with-command-retry"
+        },
+        "routeDecision": "peer_direct",
+        "sessionId": null,
+        "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+        "targetRole": "upstream",
+        "timings": {
+          "awmcp": {
+            "attemptCount": 1,
+            "rgwRequestMs": 415,
+            "rgwResponseDecodeMs": 0,
+            "rgwResponseHeadersMs": 415,
+            "routeCacheHit": true,
+            "routeLookupMode": "command-cache",
+            "routeLookupMs": 0,
+            "totalMs": 415
+          },
+          "rgw": {
+            "dispatchMs": 0,
+            "journalMs": 0,
+            "peerRoundTripMs": 414,
+            "routeLookupMs": 0,
+            "totalMs": 414
+          }
+        },
+        "traceId": "2b483d5c-0b76-41e0-9733-83bb7bbecea6"
+      },
+      "operationId": "exec-0000000000000a40",
+      "phase": "completed",
+      "previewUrls": null,
+      "progress": null,
+      "publicUrl": null,
+      "publicationId": null,
+      "result": null,
+      "retryable": false,
+      "schema": "agentweb.operation/v1",
+      "status": "completed",
+      "succeeded": true,
+      "terminal": true
+    }
+  ]
+}

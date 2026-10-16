@@ -1,0 +1,59 @@
+{
+  "Docker_reserve_GiB": 8.5,
+  "READY": false,
+  "authority_cutoff": 1792220533,
+  "bind": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/bind_source.py",
+    "--execute",
+    "--template-ref",
+    "EXACT_REVIEWED_047_TEMPLATE_REF_JSON",
+    "--prerequisite-plan-ref",
+    "EXACT_SIX_ACTUAL_044_AND_043R2_REF_PLAN_JSON"
+  ],
+  "cleanup_seconds": 270,
+  "control_output": "/opt/host/vnf/austinov/run-mxr-block-long-model065-main-NEW24H_MXR065_001",
+  "execute": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/host_ticket.py",
+    "--execute",
+    "--source-sha256",
+    "ACTUAL_BOUND047_SHA",
+    "--prerequisite-ref",
+    "ACTUAL039_PREREQUISITE_REF_JSON"
+  ],
+  "execute_environment": {
+    "MXR_DL_EXTERNAL_OUTPUT008_ENABLE": "1"
+  },
+  "model_Ram_floor_GiB": 56.5,
+  "opt_initial_free_GiB": 227.5,
+  "phase_seconds": 7200,
+  "qualification_granted": false,
+  "raw_parent_preflight": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/raw_filesystem.py",
+    "--preflight",
+    "--control-output",
+    "/opt/host/vnf/austinov/run-mxr-block-long-model065-main-NEW24H_MXR065_001"
+  ],
+  "raw_parent_preflight_writes": false,
+  "raw_root": "/opt/host/vnf/austinov/qwen36-paper-results-new48h/run-mxr-block-long065-NEW24H_MXR065_001",
+  "schema": "mxr.block-long047-explicit-pending-commands/v1",
+  "sourceaudit": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/host_ticket.py",
+    "--source-audit",
+    "--source-sha256",
+    "ACTUAL_BOUND047_SHA",
+    "--prerequisite-ref",
+    "ACTUAL039_PREREQUISITE_REF_JSON"
+  ]
+}

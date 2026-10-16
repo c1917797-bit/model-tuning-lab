@@ -1,0 +1,2654 @@
+{
+  "destination_policy": "MAIN verifies resolved under exact repository subtree; create missing parents; absent or byte-exact only; never overwrite differing existing artifact",
+  "destination_root": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016",
+  "excludes": [
+    "external dependency closure not owned by these packages",
+    "DSO",
+    "raw tensor/blob data",
+    "large logs",
+    "future BOUND manifests/results"
+  ],
+  "execution": false,
+  "git": false,
+  "groups": [
+    {
+      "archive_files": 134,
+      "archive_only": true,
+      "executable_alias": false,
+      "reviewed_preparation_template": {
+        "bytes": 51755,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/SOURCE_TEMPLATE.json",
+        "sha256": "71872350283fadb53c4de17d8fcd7ff915ecea1d038c02d6c85e691145d7c32a"
+      },
+      "rows": [
+        {
+          "destination": {
+            "bytes": 8847,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/ACTUAL051_BUILD.json",
+            "sha256": "3010d9b0a73d2f7b62b6294c8c01fa68176f1e911bee4b43ca7b1ac72bf00a68"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "ACTUAL051_BUILD.json",
+          "source": {
+            "bytes": 8847,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/ACTUAL051_BUILD.json",
+            "sha256": "3010d9b0a73d2f7b62b6294c8c01fa68176f1e911bee4b43ca7b1ac72bf00a68"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 15576,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/BASELINE035.json",
+            "sha256": "6254cb3d9ac8e6e7306f7226dbd5a71517949b0356445af633a6ede87a6bba6e"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "BASELINE035.json",
+          "source": {
+            "bytes": 15576,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/BASELINE035.json",
+            "sha256": "6254cb3d9ac8e6e7306f7226dbd5a71517949b0356445af633a6ede87a6bba6e"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 5732,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/COLLECTION_REPAIR3_INVERSE.json",
+            "sha256": "7cd6b50ef6182d37f1ebc7d80ffcf346bd8c354821d48c7195a51cb6f608dfb8"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "COLLECTION_REPAIR3_INVERSE.json",
+          "source": {
+            "bytes": 5732,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/COLLECTION_REPAIR3_INVERSE.json",
+            "sha256": "7cd6b50ef6182d37f1ebc7d80ffcf346bd8c354821d48c7195a51cb6f608dfb8"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 996,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/DELTA035.json",
+            "sha256": "b386e93e8eeef5e0a305e9ece9c29e5517d189cd2b0b1db8ad8552c79cecb5d5"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "DELTA035.json",
+          "source": {
+            "bytes": 996,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/DELTA035.json",
+            "sha256": "b386e93e8eeef5e0a305e9ece9c29e5517d189cd2b0b1db8ad8552c79cecb5d5"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 8532,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/DELTA043.json",
+            "sha256": "ee3397c2cafd59ef39fb32d896ccb9899a67a2e1c7c13735baf4722783f9a16e"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "DELTA043.json",
+          "source": {
+            "bytes": 8532,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/DELTA043.json",
+            "sha256": "ee3397c2cafd59ef39fb32d896ccb9899a67a2e1c7c13735baf4722783f9a16e"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1852,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/DOMAIN_REPAIR4.md",
+            "sha256": "642d5dc41a81162b3cc7a8ed13c9fccc9c0f5a6db5e5a05781140f49622c318d"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "DOMAIN_REPAIR4.md",
+          "source": {
+            "bytes": 1852,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/DOMAIN_REPAIR4.md",
+            "sha256": "642d5dc41a81162b3cc7a8ed13c9fccc9c0f5a6db5e5a05781140f49622c318d"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 9107,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/EDITS052.json",
+            "sha256": "109c428e46df589e101f132f54d2da0664b5a37a4b4dd2098b0bb144af2dbae8"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "EDITS052.json",
+          "source": {
+            "bytes": 9107,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/EDITS052.json",
+            "sha256": "109c428e46df589e101f132f54d2da0664b5a37a4b4dd2098b0bb144af2dbae8"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3080,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/EDITS056.json",
+            "sha256": "47dbaae8c3e512dd0fdc2258aebeacd85ad47e7bd94e71eab81d5e0eebea35be"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "EDITS056.json",
+          "source": {
+            "bytes": 3080,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/EDITS056.json",
+            "sha256": "47dbaae8c3e512dd0fdc2258aebeacd85ad47e7bd94e71eab81d5e0eebea35be"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 4096,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/EDITS061.json",
+            "sha256": "0b16d7c8e8edd9f2e119deec7792b6f5790be71f1c5fa94bc57b9db775c073df"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "EDITS061.json",
+          "source": {
+            "bytes": 4096,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/EDITS061.json",
+            "sha256": "0b16d7c8e8edd9f2e119deec7792b6f5790be71f1c5fa94bc57b9db775c073df"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1326,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/GUEST_REPAIR3.md",
+            "sha256": "3a4af9c77635cf485441e14c6d56f85b51d348d5f86a9842950107bf499f9307"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "GUEST_REPAIR3.md",
+          "source": {
+            "bytes": 1326,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/GUEST_REPAIR3.md",
+            "sha256": "3a4af9c77635cf485441e14c6d56f85b51d348d5f86a9842950107bf499f9307"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2467,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/HANDOFF.md",
+            "sha256": "a1c44b14f3098129f3e882933c53e50c632b4101e45d33fffe3c2e108fe6b51d"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "HANDOFF.md",
+          "source": {
+            "bytes": 2467,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/HANDOFF.md",
+            "sha256": "a1c44b14f3098129f3e882933c53e50c632b4101e45d33fffe3c2e108fe6b51d"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3851,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/HANDOFF031.md",
+            "sha256": "80c82fc74195988e952d03cdce00a089d417b1d949e185a6684126ab6df4eec6"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "HANDOFF031.md",
+          "source": {
+            "bytes": 3851,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/HANDOFF031.md",
+            "sha256": "80c82fc74195988e952d03cdce00a089d417b1d949e185a6684126ab6df4eec6"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 7796,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/HANDOFF043.md",
+            "sha256": "cffbc3a9acbc92b5f934bd4b5227969def6f0412c4e4140b4253142200f8c845"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "HANDOFF043.md",
+          "source": {
+            "bytes": 7796,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/HANDOFF043.md",
+            "sha256": "cffbc3a9acbc92b5f934bd4b5227969def6f0412c4e4140b4253142200f8c845"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2823,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/HANDOFF043_REPAIR3.md",
+            "sha256": "6962e76d30ff667275f4e28a5dfa98661b8d8a15cea61c69c7872e95ca6da913"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "HANDOFF043_REPAIR3.md",
+          "source": {
+            "bytes": 2823,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/HANDOFF043_REPAIR3.md",
+            "sha256": "6962e76d30ff667275f4e28a5dfa98661b8d8a15cea61c69c7872e95ca6da913"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2475,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/HANDOFF052.md",
+            "sha256": "752589fede81a8d893e2650f3d0bb135a750d9a150959bcb1c5fd29120a8ebb5"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "HANDOFF052.md",
+          "source": {
+            "bytes": 2475,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/HANDOFF052.md",
+            "sha256": "752589fede81a8d893e2650f3d0bb135a750d9a150959bcb1c5fd29120a8ebb5"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2158,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/HANDOFF056.md",
+            "sha256": "b26b2a12bbb3383f469ba5fee539ea83582f9a5697d0fb4ffeeb079d9c8deb40"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "HANDOFF056.md",
+          "source": {
+            "bytes": 2158,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/HANDOFF056.md",
+            "sha256": "b26b2a12bbb3383f469ba5fee539ea83582f9a5697d0fb4ffeeb079d9c8deb40"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 7526,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/HOST_DELTA035R1.json",
+            "sha256": "c64aa66a0025ee9f6e94adb14139e3f36c0ce5e284fc58fb9290ef396768f548"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "HOST_DELTA035R1.json",
+          "source": {
+            "bytes": 7526,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/HOST_DELTA035R1.json",
+            "sha256": "c64aa66a0025ee9f6e94adb14139e3f36c0ce5e284fc58fb9290ef396768f548"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 4034,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/HOST_INVERSE.json",
+            "sha256": "2203bc059b11897274fcaf03ca49ff04bf7bacb60084126e129ba006df8dee6c"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "HOST_INVERSE.json",
+          "source": {
+            "bytes": 4034,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/HOST_INVERSE.json",
+            "sha256": "2203bc059b11897274fcaf03ca49ff04bf7bacb60084126e129ba006df8dee6c"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 8389,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/MECHANICAL_DIFF.json",
+            "sha256": "f4a3ae29c3d76b2fb3bba1279e859e143c894a1611fb149c784f5aca15cbb9ca"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "MECHANICAL_DIFF.json",
+          "source": {
+            "bytes": 8389,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/MECHANICAL_DIFF.json",
+            "sha256": "f4a3ae29c3d76b2fb3bba1279e859e143c894a1611fb149c784f5aca15cbb9ca"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3481,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/NEW24H_AUTHORITY.json",
+            "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "NEW24H_AUTHORITY.json",
+          "source": {
+            "bytes": 3481,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/NEW24H_AUTHORITY.json",
+            "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1783,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/OBSERVER_REPAIR1.md",
+            "sha256": "005ded5d477368102e116c034f9f3dea1c64472cd8f94a3687f490beab2fd116"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "OBSERVER_REPAIR1.md",
+          "source": {
+            "bytes": 1783,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/OBSERVER_REPAIR1.md",
+            "sha256": "005ded5d477368102e116c034f9f3dea1c64472cd8f94a3687f490beab2fd116"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1372,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/OLD022_OWNER.json",
+            "sha256": "9d6740da1d95f281aab6da1f459e1540a798652af695ee5ec6922e35d4be6c61"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "OLD022_OWNER.json",
+          "source": {
+            "bytes": 1372,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/OLD022_OWNER.json",
+            "sha256": "9d6740da1d95f281aab6da1f459e1540a798652af695ee5ec6922e35d4be6c61"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 162171,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/OLD022_SOURCE.json",
+            "sha256": "b5f4c0798f2fab7fb3c706666c38b6eab7318fa6a55e40191dd419bb6aaacb6c"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "OLD022_SOURCE.json",
+          "source": {
+            "bytes": 162171,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/OLD022_SOURCE.json",
+            "sha256": "b5f4c0798f2fab7fb3c706666c38b6eab7318fa6a55e40191dd419bb6aaacb6c"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3591,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/OLD48H_AUTHORITY.json",
+            "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "OLD48H_AUTHORITY.json",
+          "source": {
+            "bytes": 3591,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/OLD48H_AUTHORITY.json",
+            "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3047,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/PREREGISTER035.md",
+            "sha256": "e73578a451cc89a178ecbbd72fc0e336a1d78a0f43b9e37a55333cde3a420612"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "PREREGISTER035.md",
+          "source": {
+            "bytes": 3047,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/PREREGISTER035.md",
+            "sha256": "e73578a451cc89a178ecbbd72fc0e336a1d78a0f43b9e37a55333cde3a420612"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 51545,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/REGRESSION_INPUTS.json",
+            "sha256": "3d24eabdd0ecdc0f76c2d8eb414a3436bd25f9f06f407db0f9751016c3ab2ed1"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "REGRESSION_INPUTS.json",
+          "source": {
+            "bytes": 51545,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/REGRESSION_INPUTS.json",
+            "sha256": "3d24eabdd0ecdc0f76c2d8eb414a3436bd25f9f06f407db0f9751016c3ab2ed1"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1580,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/REPAIR2_DELTA.json",
+            "sha256": "fb9386d99fe2981cf57cf74d32ebeacb8cccb693eb8f7ff323608e0343877fdb"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "REPAIR2_DELTA.json",
+          "source": {
+            "bytes": 1580,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/REPAIR2_DELTA.json",
+            "sha256": "fb9386d99fe2981cf57cf74d32ebeacb8cccb693eb8f7ff323608e0343877fdb"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1503,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/REPAIR2_SCOPE.md",
+            "sha256": "b27af53bec31e532ba067eb4a80dacb820a510b419165e5933e09d32e9fb893b"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "REPAIR2_SCOPE.md",
+          "source": {
+            "bytes": 1503,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/REPAIR2_SCOPE.md",
+            "sha256": "b27af53bec31e532ba067eb4a80dacb820a510b419165e5933e09d32e9fb893b"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2332,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/REPAIR3_SCOPE.md",
+            "sha256": "6fa66f15398679707186726a289f023b1bc4b2c1c6874aea9a22872e91c75e53"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "REPAIR3_SCOPE.md",
+          "source": {
+            "bytes": 2332,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/REPAIR3_SCOPE.md",
+            "sha256": "6fa66f15398679707186726a289f023b1bc4b2c1c6874aea9a22872e91c75e53"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1652,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/REPAIR_SCOPE.md",
+            "sha256": "cfa710e4186e9f52c8a556ef5feae5d0dd9f6ce708cc44d2a0a8a2fc40751683"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "REPAIR_SCOPE.md",
+          "source": {
+            "bytes": 1652,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/REPAIR_SCOPE.md",
+            "sha256": "cfa710e4186e9f52c8a556ef5feae5d0dd9f6ce708cc44d2a0a8a2fc40751683"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2740,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/TERMINAL_REPAIR1.md",
+            "sha256": "14aa4047fedad480065b648424228b531e7097f2aa1ccba20c663d9058dc45a9"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "TERMINAL_REPAIR1.md",
+          "source": {
+            "bytes": 2740,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/TERMINAL_REPAIR1.md",
+            "sha256": "14aa4047fedad480065b648424228b531e7097f2aa1ccba20c663d9058dc45a9"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2323,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/TREE_REPAIR2.md",
+            "sha256": "095a1611853a78bf9282ad442992fc2c9254b32df7367f7c57b03b20dfc6c5b2"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "TREE_REPAIR2.md",
+          "source": {
+            "bytes": 2323,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/TREE_REPAIR2.md",
+            "sha256": "095a1611853a78bf9282ad442992fc2c9254b32df7367f7c57b03b20dfc6c5b2"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 10860,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/assemble.py",
+            "sha256": "eb96d93478fb09ac22090dc46e88e43f0078d5744793c790b7b8c853f3eb1636"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "assemble.py",
+          "source": {
+            "bytes": 10860,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/assemble.py",
+            "sha256": "eb96d93478fb09ac22090dc46e88e43f0078d5744793c790b7b8c853f3eb1636"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 13435,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/assemble052.py",
+            "sha256": "b7cb1259a9d49500002526b15d9dd3c90c32c04beae726764d543e618fa3f0c0"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "assemble052.py",
+          "source": {
+            "bytes": 13435,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/assemble052.py",
+            "sha256": "b7cb1259a9d49500002526b15d9dd3c90c32c04beae726764d543e618fa3f0c0"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2159,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/bind052.py",
+            "sha256": "5b3e0dd2ef317efc06c85be92ccf7d475a4e863c9a8c359a07134f0c241d27cb"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "bind052.py",
+          "source": {
+            "bytes": 2159,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/bind052.py",
+            "sha256": "5b3e0dd2ef317efc06c85be92ccf7d475a4e863c9a8c359a07134f0c241d27cb"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1407,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/bind_composite.py",
+            "sha256": "12bf9526b8ce16527b40d15c5b43486020d653d1015d4b3f34b24eb52c4beff4"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "bind_composite.py",
+          "source": {
+            "bytes": 1407,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/bind_composite.py",
+            "sha256": "12bf9526b8ce16527b40d15c5b43486020d653d1015d4b3f34b24eb52c4beff4"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1205,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/bridge_io.py",
+            "sha256": "d62b550decb1b2f8d6735dc386ba5e4969c828685416289671cc175316af5331"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "bridge_io.py",
+          "source": {
+            "bytes": 1205,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/bridge_io.py",
+            "sha256": "d62b550decb1b2f8d6735dc386ba5e4969c828685416289671cc175316af5331"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3033,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/collection_policy.py",
+            "sha256": "dd56142010c28a839408dd6ae1bc6c61496f19bb4e3c3171547bd2a32568ce5b"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "collection_policy.py",
+          "source": {
+            "bytes": 3033,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/collection_policy.py",
+            "sha256": "dd56142010c28a839408dd6ae1bc6c61496f19bb4e3c3171547bd2a32568ce5b"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 6869,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/consume.py",
+            "sha256": "4c2c290181cee3d8c41dcac11fcc1d5dfd5d939c90d171fcf028950494e8a2c4"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "consume.py",
+          "source": {
+            "bytes": 6869,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/consume.py",
+            "sha256": "4c2c290181cee3d8c41dcac11fcc1d5dfd5d939c90d171fcf028950494e8a2c4"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1925,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/consume_increment.py",
+            "sha256": "6350f0ee18f29fcd3e2848f8af18ce005e5e41191d44a98a32123a30727aaaf9"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "consume_increment.py",
+          "source": {
+            "bytes": 1925,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/consume_increment.py",
+            "sha256": "6350f0ee18f29fcd3e2848f8af18ce005e5e41191d44a98a32123a30727aaaf9"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2842,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/consume_pair.py",
+            "sha256": "b836592ea26cd41845c3b7f6f83556656a4a2b94481fdd6e9987ed12cec04689"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "consume_pair.py",
+          "source": {
+            "bytes": 2842,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/consume_pair.py",
+            "sha256": "b836592ea26cd41845c3b7f6f83556656a4a2b94481fdd6e9987ed12cec04689"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3075,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/copy_bootstrap.py",
+            "sha256": "e23101c320bad777ec33845728eb48cb328cbd1bf48cce97a23660173594e12b"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "copy_bootstrap.py",
+          "source": {
+            "bytes": 3075,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/copy_bootstrap.py",
+            "sha256": "e23101c320bad777ec33845728eb48cb328cbd1bf48cce97a23660173594e12b"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 990,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/copy_bootstrap_probe.py",
+            "sha256": "971ea9fc3b57b6142b93bec74eb74baeea661e560dd3fd19d6141f689e5330b9"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "copy_bootstrap_probe.py",
+          "source": {
+            "bytes": 990,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/copy_bootstrap_probe.py",
+            "sha256": "971ea9fc3b57b6142b93bec74eb74baeea661e560dd3fd19d6141f689e5330b9"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1089,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/dependencies/native_ascend_batch_memcpy.py",
+            "sha256": "c434b023102d1804eec0eb63b6d62b0f9343cb831e6ef82f6151efcdf96c5965"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "dependencies/native_ascend_batch_memcpy.py",
+          "source": {
+            "bytes": 1089,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/dependencies/native_ascend_batch_memcpy.py",
+            "sha256": "c434b023102d1804eec0eb63b6d62b0f9343cb831e6ef82f6151efcdf96c5965"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 12252,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/dependencies/native_patch_mamba_utils.py",
+            "sha256": "a8862c3509f698c05cdeba5aa408a28e506349eff97801b28161569b8e3c9778"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "dependencies/native_patch_mamba_utils.py",
+          "source": {
+            "bytes": 12252,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/dependencies/native_patch_mamba_utils.py",
+            "sha256": "a8862c3509f698c05cdeba5aa408a28e506349eff97801b28161569b8e3c9778"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 21204,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/dependencies/old022_composite.py",
+            "sha256": "bed0ba7fd4b74455c3e28ffdb074195ce43823932043c8f02da805c03f508fc7"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "dependencies/old022_composite.py",
+          "source": {
+            "bytes": 21204,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/dependencies/old022_composite.py",
+            "sha256": "bed0ba7fd4b74455c3e28ffdb074195ce43823932043c8f02da805c03f508fc7"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 11828,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/dependencies/primitives021.py",
+            "sha256": "1b9a2e53ce137f319ca5939be6e21fa293735edd363cdc37f7b438626e985470"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "dependencies/primitives021.py",
+          "source": {
+            "bytes": 11828,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/dependencies/primitives021.py",
+            "sha256": "1b9a2e53ce137f319ca5939be6e21fa293735edd363cdc37f7b438626e985470"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3378,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/direct_round.py",
+            "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "direct_round.py",
+          "source": {
+            "bytes": 3378,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/direct_round.py",
+            "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 30581,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/domain_consumer.py",
+            "sha256": "3ec5e2783091c00bee9629db492f2954be9605ea8cf9819dfae9f60630daf3ba"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "domain_consumer.py",
+          "source": {
+            "bytes": 30581,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/domain_consumer.py",
+            "sha256": "3ec5e2783091c00bee9629db492f2954be9605ea8cf9819dfae9f60630daf3ba"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1351,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/domain_entry.py",
+            "sha256": "cf684853789608641fcd20245d67ee2b7316c9a15168fb22f6d07d633a0ecd70"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "domain_entry.py",
+          "source": {
+            "bytes": 1351,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/domain_entry.py",
+            "sha256": "cf684853789608641fcd20245d67ee2b7316c9a15168fb22f6d07d633a0ecd70"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 6594,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/entry.py",
+            "sha256": "041b13ead37f9bdd715daa58487d2c8645195e12a28f82633076de97d3d832dc"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "entry.py",
+          "source": {
+            "bytes": 6594,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/entry.py",
+            "sha256": "041b13ead37f9bdd715daa58487d2c8645195e12a28f82633076de97d3d832dc"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2953,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/fixtures/022-source-file-readset.json",
+            "sha256": "45e219dcac64ce462d52ace63213644565bcfefbc9ac9572c626b81a51ccd05d"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "fixtures/022-source-file-readset.json",
+          "source": {
+            "bytes": 2953,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/fixtures/022-source-file-readset.json",
+            "sha256": "45e219dcac64ce462d52ace63213644565bcfefbc9ac9572c626b81a51ccd05d"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2855,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/fixtures043/consume_pair.py",
+            "sha256": "9e881ffd04970192ff356362ec73d75f72962c8556de71f9dd5216b26ea1a39f"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "fixtures043/consume_pair.py",
+          "source": {
+            "bytes": 2855,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/fixtures043/consume_pair.py",
+            "sha256": "9e881ffd04970192ff356362ec73d75f72962c8556de71f9dd5216b26ea1a39f"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 26029,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/fixtures043/domain_consumer.py",
+            "sha256": "6896942c7ffa586204738b336bd7997026a3c58ea1adea126da847977ece150c"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "fixtures043/domain_consumer.py",
+          "source": {
+            "bytes": 26029,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/fixtures043/domain_consumer.py",
+            "sha256": "6896942c7ffa586204738b336bd7997026a3c58ea1adea126da847977ece150c"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 5516,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/fixtures043/entry.py",
+            "sha256": "f568698f8648e7bc7ec8551834c6a730cd33217d4b1eac3ec710e8c07dd9498e"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "fixtures043/entry.py",
+          "source": {
+            "bytes": 5516,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/fixtures043/entry.py",
+            "sha256": "f568698f8648e7bc7ec8551834c6a730cd33217d4b1eac3ec710e8c07dd9498e"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 23425,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/fixtures043/host.py",
+            "sha256": "0e4b37face82478ee15e36b620df9b5ba56d1af27d36a8ca4707555b440079a0"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "fixtures043/host.py",
+          "source": {
+            "bytes": 23425,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/fixtures043/host.py",
+            "sha256": "0e4b37face82478ee15e36b620df9b5ba56d1af27d36a8ca4707555b440079a0"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1339,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/fixtures043/preregister.py",
+            "sha256": "8bbb2056c7044f6422543b2e8530e147584bec61da3bd1fe013da441da4ec28d"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "fixtures043/preregister.py",
+          "source": {
+            "bytes": 1339,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/fixtures043/preregister.py",
+            "sha256": "8bbb2056c7044f6422543b2e8530e147584bec61da3bd1fe013da441da4ec28d"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 9813,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/fixtures043/producer.py",
+            "sha256": "028e1c8cebe3b756023d54a301b3f1524c148c0eccadbd9e0bfed6d4ce558e94"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "fixtures043/producer.py",
+          "source": {
+            "bytes": 9813,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/fixtures043/producer.py",
+            "sha256": "028e1c8cebe3b756023d54a301b3f1524c148c0eccadbd9e0bfed6d4ce558e94"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 7161,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/fixtures043/qwen36_deltalog_fresh/capture_evidence.py",
+            "sha256": "a9a8c6c0f65e147ecbfe3245f000ed9a2170f4320387ef2889433aebd26a6b64"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "fixtures043/qwen36_deltalog_fresh/capture_evidence.py",
+          "source": {
+            "bytes": 7161,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/fixtures043/qwen36_deltalog_fresh/capture_evidence.py",
+            "sha256": "a9a8c6c0f65e147ecbfe3245f000ed9a2170f4320387ef2889433aebd26a6b64"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 16179,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/fixtures043/qwen36_deltalog_fresh/native_fixture.py",
+            "sha256": "a19e49b0295e03df4b5771910932e59018d4353623f2edd27a5e7d8a1b2a46e6"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "fixtures043/qwen36_deltalog_fresh/native_fixture.py",
+          "source": {
+            "bytes": 16179,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/fixtures043/qwen36_deltalog_fresh/native_fixture.py",
+            "sha256": "a19e49b0295e03df4b5771910932e59018d4353623f2edd27a5e7d8a1b2a46e6"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 4059,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/fixtures043/test_031.py",
+            "sha256": "552a161a9944dab12bc6b573d822c74322759cd60a74e4b636ed38c7cb48b249"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "fixtures043/test_031.py",
+          "source": {
+            "bytes": 4059,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/fixtures043/test_031.py",
+            "sha256": "552a161a9944dab12bc6b573d822c74322759cd60a74e4b636ed38c7cb48b249"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3822,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/fixtures043/test_035.py",
+            "sha256": "5f7668ff37901aeb691dbf065f2ae44b4a7c3b9a31b0edb2f011263c07e45bef"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "fixtures043/test_035.py",
+          "source": {
+            "bytes": 3822,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/fixtures043/test_035.py",
+            "sha256": "5f7668ff37901aeb691dbf065f2ae44b4a7c3b9a31b0edb2f011263c07e45bef"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 4523,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/fixtures043/test_producer_frontdoor.py",
+            "sha256": "567c221ca60b99d471b5a8395f129e7daa605eb6e93447d8f6a45b73021766bb"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "fixtures043/test_producer_frontdoor.py",
+          "source": {
+            "bytes": 4523,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/fixtures043/test_producer_frontdoor.py",
+            "sha256": "567c221ca60b99d471b5a8395f129e7daa605eb6e93447d8f6a45b73021766bb"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2888,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/fixtures_repair3/consume_pair.py",
+            "sha256": "3560b9f554e8bb0ae76efb6c910a16c596c1041fa208d27ee7be9850359d9eb4"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "fixtures_repair3/consume_pair.py",
+          "source": {
+            "bytes": 2888,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/fixtures_repair3/consume_pair.py",
+            "sha256": "3560b9f554e8bb0ae76efb6c910a16c596c1041fa208d27ee7be9850359d9eb4"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 5777,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/fixtures_repair3/entry.py",
+            "sha256": "ba411f9a9bacf8e9001e1e5a5b778758b1a1d2a7e7c2072fcb6857839ad48e66"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "fixtures_repair3/entry.py",
+          "source": {
+            "bytes": 5777,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/fixtures_repair3/entry.py",
+            "sha256": "ba411f9a9bacf8e9001e1e5a5b778758b1a1d2a7e7c2072fcb6857839ad48e66"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 10328,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/fixtures_repair3/producer.py",
+            "sha256": "67c1dbe15d4006e1a356346a2686f7af2354459c55ffa9ffa602bc82c772c64c"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "fixtures_repair3/producer.py",
+          "source": {
+            "bytes": 10328,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/fixtures_repair3/producer.py",
+            "sha256": "67c1dbe15d4006e1a356346a2686f7af2354459c55ffa9ffa602bc82c772c64c"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 16341,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/fixtures_repair3/qwen36_deltalog_fresh/native_fixture.py",
+            "sha256": "91214d022bcee34431fc881e89f4289ece135010a2358e9980b894f77a18c31b"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "fixtures_repair3/qwen36_deltalog_fresh/native_fixture.py",
+          "source": {
+            "bytes": 16341,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/fixtures_repair3/qwen36_deltalog_fresh/native_fixture.py",
+            "sha256": "91214d022bcee34431fc881e89f4289ece135010a2358e9980b894f77a18c31b"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2299,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/flush_increment.py",
+            "sha256": "1ab2346e32170e679e708056625cabe47df3a3859c7e89a4239192e23d49ec31"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "flush_increment.py",
+          "source": {
+            "bytes": 2299,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/flush_increment.py",
+            "sha256": "1ab2346e32170e679e708056625cabe47df3a3859c7e89a4239192e23d49ec31"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2276,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/historical022056.py",
+            "sha256": "6c4aafda1e357a66883cac4c787671a58b533743eb4844f8e7168e0050d4af10"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "historical022056.py",
+          "source": {
+            "bytes": 2276,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/historical022056.py",
+            "sha256": "6c4aafda1e357a66883cac4c787671a58b533743eb4844f8e7168e0050d4af10"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 23952,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/host.py",
+            "sha256": "3cc7f91cf22eff1bc01d73637a121a91695494162b53ae6ffa514f4e5e5d2aed"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "host.py",
+          "source": {
+            "bytes": 23952,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/host.py",
+            "sha256": "3cc7f91cf22eff1bc01d73637a121a91695494162b53ae6ffa514f4e5e5d2aed"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 644,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/inverse043.py",
+            "sha256": "58e52c3b8531f1468570c55fd603cd9ca568704f2e5d6d2297206a6413a83c12"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "inverse043.py",
+          "source": {
+            "bytes": 644,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/inverse043.py",
+            "sha256": "58e52c3b8531f1468570c55fd603cd9ca568704f2e5d6d2297206a6413a83c12"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 401,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/inverse052.py",
+            "sha256": "82ee483f5e460a0a5df0e0780f8f65b5b5742644338027125b8a620a8dc6296f"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "inverse052.py",
+          "source": {
+            "bytes": 401,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/inverse052.py",
+            "sha256": "82ee483f5e460a0a5df0e0780f8f65b5b5742644338027125b8a620a8dc6296f"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 505,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/inverse056.py",
+            "sha256": "13acae68e18fd41b9a0d3fba3552e2e93ef291164fe58ab31fa9b4bf02c2f0ca"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "inverse056.py",
+          "source": {
+            "bytes": 505,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/inverse056.py",
+            "sha256": "13acae68e18fd41b9a0d3fba3552e2e93ef291164fe58ab31fa9b4bf02c2f0ca"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 345,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/inverse061.py",
+            "sha256": "9eebc98a237e6dfc9ee29e6573bd1cb0fb9c6c172993ee7a4ef1827b9145b16b"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "inverse061.py",
+          "source": {
+            "bytes": 345,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/inverse061.py",
+            "sha256": "9eebc98a237e6dfc9ee29e6573bd1cb0fb9c6c172993ee7a4ef1827b9145b16b"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 967,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/inverse_repair3.py",
+            "sha256": "00c6b0a8ad4facc6dbc93b3da2d10e8c18bdf1066dae6d80c26a25b0be94b72d"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "inverse_repair3.py",
+          "source": {
+            "bytes": 967,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/inverse_repair3.py",
+            "sha256": "00c6b0a8ad4facc6dbc93b3da2d10e8c18bdf1066dae6d80c26a25b0be94b72d"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 391,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/meta043.py",
+            "sha256": "6b58dd81ce938785d893870d18f8f5d907a32dfd64b2a47316119ecc8d2a7c9c"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "meta043.py",
+          "source": {
+            "bytes": 391,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/meta043.py",
+            "sha256": "6b58dd81ce938785d893870d18f8f5d907a32dfd64b2a47316119ecc8d2a7c9c"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2892,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/meta051.py",
+            "sha256": "0b6cf587d7c341448dcf591b082684d238df44fc1449b006711f14018e1deb3a"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "meta051.py",
+          "source": {
+            "bytes": 2892,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/meta051.py",
+            "sha256": "0b6cf587d7c341448dcf591b082684d238df44fc1449b006711f14018e1deb3a"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1759,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/npu_controls.py",
+            "sha256": "eba0dfcf403eeb12317c9f81ee9149e13a66bce1669fa8ff774b9c391d62d05b"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "npu_controls.py",
+          "source": {
+            "bytes": 1759,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/npu_controls.py",
+            "sha256": "eba0dfcf403eeb12317c9f81ee9149e13a66bce1669fa8ff774b9c391d62d05b"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3407,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/oracle.py",
+            "sha256": "cd395a05dbfcb21f1104d617afb1fab6f80374016585e9096ca24d85c2cae97a"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "oracle.py",
+          "source": {
+            "bytes": 3407,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/oracle.py",
+            "sha256": "cd395a05dbfcb21f1104d617afb1fab6f80374016585e9096ca24d85c2cae97a"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2422,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/patch_scope.py",
+            "sha256": "932d1c97ec8123aab4dff43b339d886a47e4f5e9e1676f65be9ec94341e0d9cc"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "patch_scope.py",
+          "source": {
+            "bytes": 2422,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/patch_scope.py",
+            "sha256": "932d1c97ec8123aab4dff43b339d886a47e4f5e9e1676f65be9ec94341e0d9cc"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2782,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/per_request_increment.py",
+            "sha256": "fe139727a01704bedd844c42d4162de986d6b6f9538a05709db1c06e3f95db02"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "per_request_increment.py",
+          "source": {
+            "bytes": 2782,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/per_request_increment.py",
+            "sha256": "fe139727a01704bedd844c42d4162de986d6b6f9538a05709db1c06e3f95db02"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 5831,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/precast.py",
+            "sha256": "4f1ca4d1243c90c663db2702010ecef8f76805a4259d107fb1be44648f35695d"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "precast.py",
+          "source": {
+            "bytes": 5831,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/precast.py",
+            "sha256": "4f1ca4d1243c90c663db2702010ecef8f76805a4259d107fb1be44648f35695d"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1806,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/preflight.py",
+            "sha256": "0f82ad5e0e1f9f32b03445d1480d6179060d6eb3b35af2c4466e1227ff154c93"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "preflight.py",
+          "source": {
+            "bytes": 1806,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/preflight.py",
+            "sha256": "0f82ad5e0e1f9f32b03445d1480d6179060d6eb3b35af2c4466e1227ff154c93"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 8421,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/prepare056.py",
+            "sha256": "13088ff0429c8b46e0474cd91b9c4ce13cd0833a9d736687f7f4180ef3d9304d"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "prepare056.py",
+          "source": {
+            "bytes": 8421,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/prepare056.py",
+            "sha256": "13088ff0429c8b46e0474cd91b9c4ce13cd0833a9d736687f7f4180ef3d9304d"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 4766,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/prepare_transport.py",
+            "sha256": "c9457972d6461d2d9926d0a4f8df93457dbc81b6772fa4bfad261f908d9dc31e"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "prepare_transport.py",
+          "source": {
+            "bytes": 4766,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/prepare_transport.py",
+            "sha256": "c9457972d6461d2d9926d0a4f8df93457dbc81b6772fa4bfad261f908d9dc31e"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1316,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/preregister.py",
+            "sha256": "5090c4bffc014a17798361622b3b5b018b95c19195d5a807dc9450fbe02d9f4c"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "preregister.py",
+          "source": {
+            "bytes": 1316,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/preregister.py",
+            "sha256": "5090c4bffc014a17798361622b3b5b018b95c19195d5a807dc9450fbe02d9f4c"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 10635,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/producer.py",
+            "sha256": "b980694f5999ec58770aee5fed30159304e98772d2a85e5bac0a82d7b3cd2eb7"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "producer.py",
+          "source": {
+            "bytes": 10635,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/producer.py",
+            "sha256": "b980694f5999ec58770aee5fed30159304e98772d2a85e5bac0a82d7b3cd2eb7"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1457,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/qualification.py",
+            "sha256": "fb650e89815133771dd56dbd746b2d3ac57b610d9d6777e6b5882833319b1dd6"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "qualification.py",
+          "source": {
+            "bytes": 1457,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/qualification.py",
+            "sha256": "fb650e89815133771dd56dbd746b2d3ac57b610d9d6777e6b5882833319b1dd6"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 138,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/qwen36_deltalog_fresh/__init__.py",
+            "sha256": "c00b0067e9fc8ee7f8449b4c4d6e5f8855800e21ffcaa8d666cdbc341c6d182f"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "qwen36_deltalog_fresh/__init__.py",
+          "source": {
+            "bytes": 138,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/qwen36_deltalog_fresh/__init__.py",
+            "sha256": "c00b0067e9fc8ee7f8449b4c4d6e5f8855800e21ffcaa8d666cdbc341c6d182f"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 7162,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/qwen36_deltalog_fresh/capture_evidence.py",
+            "sha256": "fcfc3cfd3f7eec20f40977550d014ffb2cca87b81f40444d11f95d0af1f0510d"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "qwen36_deltalog_fresh/capture_evidence.py",
+          "source": {
+            "bytes": 7162,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/qwen36_deltalog_fresh/capture_evidence.py",
+            "sha256": "fcfc3cfd3f7eec20f40977550d014ffb2cca87b81f40444d11f95d0af1f0510d"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1290,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/qwen36_deltalog_fresh/contract.py",
+            "sha256": "cbe54de9c6994a68e4f372514fd715b8318b49d6673b5bd564344994efa41799"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "qwen36_deltalog_fresh/contract.py",
+          "source": {
+            "bytes": 1290,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/qwen36_deltalog_fresh/contract.py",
+            "sha256": "cbe54de9c6994a68e4f372514fd715b8318b49d6673b5bd564344994efa41799"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 16257,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/qwen36_deltalog_fresh/native_fixture.py",
+            "sha256": "e557b34be77e9e1ea85e4663df879228425eb8931b2aa162eb9e9d156b46aaff"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "qwen36_deltalog_fresh/native_fixture.py",
+          "source": {
+            "bytes": 16257,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/qwen36_deltalog_fresh/native_fixture.py",
+            "sha256": "e557b34be77e9e1ea85e4663df879228425eb8931b2aa162eb9e9d156b46aaff"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 11059,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/qwen36_deltalog_fresh/primitives.py",
+            "sha256": "bc88725f4443ef97886d71dfeb6105a1fc8f5bf762b164fafead81b7b7bce05b"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "qwen36_deltalog_fresh/primitives.py",
+          "source": {
+            "bytes": 11059,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/qwen36_deltalog_fresh/primitives.py",
+            "sha256": "bc88725f4443ef97886d71dfeb6105a1fc8f5bf762b164fafead81b7b7bce05b"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 7940,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/qwen36_deltalog_fresh/provider.py",
+            "sha256": "bf31ceb56dc9c6a46377a2cd2c34b505782ad6ed9bbdfbe6f776abc9ece04fb6"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "qwen36_deltalog_fresh/provider.py",
+          "source": {
+            "bytes": 7940,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/qwen36_deltalog_fresh/provider.py",
+            "sha256": "bf31ceb56dc9c6a46377a2cd2c34b505782ad6ed9bbdfbe6f776abc9ece04fb6"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 10046,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/qwen36_deltalog_fresh/runtime_helpers.py",
+            "sha256": "5fcd586ca26b4ef8daa1723d32ad206dcebd527c1b0484bfc2656f5ccb1b20d5"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "qwen36_deltalog_fresh/runtime_helpers.py",
+          "source": {
+            "bytes": 10046,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/qwen36_deltalog_fresh/runtime_helpers.py",
+            "sha256": "5fcd586ca26b4ef8daa1723d32ad206dcebd527c1b0484bfc2656f5ccb1b20d5"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2683,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/qwen36_deltalog_fresh/transform.py",
+            "sha256": "b9230fde5a7a45db8fe69af9c1acc7104b7082da81c022a76f594c0c389a899f"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "qwen36_deltalog_fresh/transform.py",
+          "source": {
+            "bytes": 2683,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/qwen36_deltalog_fresh/transform.py",
+            "sha256": "b9230fde5a7a45db8fe69af9c1acc7104b7082da81c022a76f594c0c389a899f"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3592,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/raw_codec.py",
+            "sha256": "4eb6bb0d5488cd1dfc3f2cb6c0f063d11b83ce07dbf594010c1d7554d844cd0e"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "raw_codec.py",
+          "source": {
+            "bytes": 3592,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/raw_codec.py",
+            "sha256": "4eb6bb0d5488cd1dfc3f2cb6c0f063d11b83ce07dbf594010c1d7554d844cd0e"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 542,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/raw_reader_entry.py",
+            "sha256": "934813c5adc1216d074380193384c1db3c03f22a210934bda718fda5b4347e7a"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "raw_reader_entry.py",
+          "source": {
+            "bytes": 542,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/raw_reader_entry.py",
+            "sha256": "934813c5adc1216d074380193384c1db3c03f22a210934bda718fda5b4347e7a"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 4230,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/real_process_controls.py",
+            "sha256": "f3e9dab366dce2345c5f3c622621683b567d7a47e3abbee53d99ebcf4da6b81d"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "real_process_controls.py",
+          "source": {
+            "bytes": 4230,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/real_process_controls.py",
+            "sha256": "f3e9dab366dce2345c5f3c622621683b567d7a47e3abbee53d99ebcf4da6b81d"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1764,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/regression052.py",
+            "sha256": "c9c8118614cdd27c38a1806407b2d7633033edbe8ce4984688189aa22ba97d7b"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "regression052.py",
+          "source": {
+            "bytes": 1764,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/regression052.py",
+            "sha256": "c9c8118614cdd27c38a1806407b2d7633033edbe8ce4984688189aa22ba97d7b"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2639,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/run031.py",
+            "sha256": "504545a831ab903cc7bfcafe917ec01f8230c2eec5bc000cfb6fd7e897ec09af"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "run031.py",
+          "source": {
+            "bytes": 2639,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/run031.py",
+            "sha256": "504545a831ab903cc7bfcafe917ec01f8230c2eec5bc000cfb6fd7e897ec09af"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2093,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/run043.py",
+            "sha256": "647603c6db8a84a53285efc9c984929342ad6a65540a0a47b97753738672cb99"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "run043.py",
+          "source": {
+            "bytes": 2093,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/run043.py",
+            "sha256": "647603c6db8a84a53285efc9c984929342ad6a65540a0a47b97753738672cb99"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1734,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/run052.py",
+            "sha256": "da74918f7a0b2a0862f83f003ad0e0eae18a2232fd2e1fa04bdac8a85a9e48a5"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "run052.py",
+          "source": {
+            "bytes": 1734,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/run052.py",
+            "sha256": "da74918f7a0b2a0862f83f003ad0e0eae18a2232fd2e1fa04bdac8a85a9e48a5"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 11522,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/scope_adapter.py",
+            "sha256": "432f5cc1613ef5faf43aca11e68c17c3957919d45978cdff04003b82598a5157"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "scope_adapter.py",
+          "source": {
+            "bytes": 11522,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/scope_adapter.py",
+            "sha256": "432f5cc1613ef5faf43aca11e68c17c3957919d45978cdff04003b82598a5157"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1987,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/seal043.py",
+            "sha256": "84c2f8ef3a687f66f396ba2cf3e0004943018165677f2cb7246d73a94e98526e"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "seal043.py",
+          "source": {
+            "bytes": 1987,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/seal043.py",
+            "sha256": "84c2f8ef3a687f66f396ba2cf3e0004943018165677f2cb7246d73a94e98526e"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2429,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/sidecar_audit.py",
+            "sha256": "7acf91b7901f8829afdae6fb48791607683ac969f222369f23bd93f5d4742d62"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "sidecar_audit.py",
+          "source": {
+            "bytes": 2429,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/sidecar_audit.py",
+            "sha256": "7acf91b7901f8829afdae6fb48791607683ac969f222369f23bd93f5d4742d62"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3500,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/sidecar_capture.py",
+            "sha256": "237617e6c90e9084a65349e439b0c17e5cfe3517d6722c588de99077d5a85c10"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "sidecar_capture.py",
+          "source": {
+            "bytes": 3500,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/sidecar_capture.py",
+            "sha256": "237617e6c90e9084a65349e439b0c17e5cfe3517d6722c588de99077d5a85c10"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1100,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/sidecar_receipt052.py",
+            "sha256": "7a32371de99bae742353dcd17d6a912e68941018ec133a521de5fa9d2b77af49"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "sidecar_receipt052.py",
+          "source": {
+            "bytes": 1100,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/sidecar_receipt052.py",
+            "sha256": "7a32371de99bae742353dcd17d6a912e68941018ec133a521de5fa9d2b77af49"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1242,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/split_build052.py",
+            "sha256": "c6b8c75cfe5000946194c132b5bc677ed97176041210df6ac1b4c990f3cfc811"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "split_build052.py",
+          "source": {
+            "bytes": 1242,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/split_build052.py",
+            "sha256": "c6b8c75cfe5000946194c132b5bc677ed97176041210df6ac1b4c990f3cfc811"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 5202,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/storage061.py",
+            "sha256": "3ff255afba8912d8890c81f1b0d451e3c5947650d9e5ce5fbf0b253381c5a9a7"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "storage061.py",
+          "source": {
+            "bytes": 5202,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/storage061.py",
+            "sha256": "3ff255afba8912d8890c81f1b0d451e3c5947650d9e5ce5fbf0b253381c5a9a7"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 7341,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/terminal_fence.py",
+            "sha256": "a7cd5f0130dabd1d8a8a57e321e4a6597ac61c77a39736b1d55f4e17368011db"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "terminal_fence.py",
+          "source": {
+            "bytes": 7341,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/terminal_fence.py",
+            "sha256": "a7cd5f0130dabd1d8a8a57e321e4a6597ac61c77a39736b1d55f4e17368011db"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3665,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_031.py",
+            "sha256": "7a8ae45d1e2fde39428103046d61cdc993fbc9c8de0a4e4970f074edbc7761cf"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_031.py",
+          "source": {
+            "bytes": 3665,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_031.py",
+            "sha256": "7a8ae45d1e2fde39428103046d61cdc993fbc9c8de0a4e4970f074edbc7761cf"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3905,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_035.py",
+            "sha256": "bf8faab8f1d443fa99fbedae55e976897bba70c7eb7fc9e26f5c7da44614a2b2"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_035.py",
+          "source": {
+            "bytes": 3905,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_035.py",
+            "sha256": "bf8faab8f1d443fa99fbedae55e976897bba70c7eb7fc9e26f5c7da44614a2b2"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 6215,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_043.py",
+            "sha256": "706cb20edbe2154c5376d8d56860b73eeb96df0a8ace5d469db38db84b76eead"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_043.py",
+          "source": {
+            "bytes": 6215,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_043.py",
+            "sha256": "706cb20edbe2154c5376d8d56860b73eeb96df0a8ace5d469db38db84b76eead"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 9246,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_052.py",
+            "sha256": "a196947c88f9cb5e0a3b64546e4babe3e66fed401772a8f02c32b2ce9ff882b0"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_052.py",
+          "source": {
+            "bytes": 9246,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_052.py",
+            "sha256": "a196947c88f9cb5e0a3b64546e4babe3e66fed401772a8f02c32b2ce9ff882b0"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3326,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_056.py",
+            "sha256": "c02d32cc6debb2af7d288e516b21cbd00747926660dfb8f12d89bc8dade12878"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_056.py",
+          "source": {
+            "bytes": 3326,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_056.py",
+            "sha256": "c02d32cc6debb2af7d288e516b21cbd00747926660dfb8f12d89bc8dade12878"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 6753,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_aggregate_controls.py",
+            "sha256": "fa3cc07c367833e3e3b9f110d99c12f6cb0ae3856d2cc4e91741c237ed62f06f"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_aggregate_controls.py",
+          "source": {
+            "bytes": 6753,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_aggregate_controls.py",
+            "sha256": "fa3cc07c367833e3e3b9f110d99c12f6cb0ae3856d2cc4e91741c237ed62f06f"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 7757,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_collection_contract.py",
+            "sha256": "1920e37b4ab8dd0a12b1ca3f6acd69f732ba75b1fd58c7afd927973d03db6e2b"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_collection_contract.py",
+          "source": {
+            "bytes": 7757,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_collection_contract.py",
+            "sha256": "1920e37b4ab8dd0a12b1ca3f6acd69f732ba75b1fd58c7afd927973d03db6e2b"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3910,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_collector_abi.py",
+            "sha256": "d5c410e292bc783e312d74acbce771c9d8e7a58b2d62995bbaebfdc229025a00"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_collector_abi.py",
+          "source": {
+            "bytes": 3910,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_collector_abi.py",
+            "sha256": "d5c410e292bc783e312d74acbce771c9d8e7a58b2d62995bbaebfdc229025a00"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2799,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_copy_bootstrap.py",
+            "sha256": "7c380319b91234bcb7c6ce42454712dff4e4df8b00b62f53bfeaf8b9ba64dbc3"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_copy_bootstrap.py",
+          "source": {
+            "bytes": 2799,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_copy_bootstrap.py",
+            "sha256": "7c380319b91234bcb7c6ce42454712dff4e4df8b00b62f53bfeaf8b9ba64dbc3"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3046,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_domain_frontdoor.py",
+            "sha256": "df958f9f15a8f5c81767ae827297fb1d1d42abb4c706d53ee88b93148365ca58"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_domain_frontdoor.py",
+          "source": {
+            "bytes": 3046,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_domain_frontdoor.py",
+            "sha256": "df958f9f15a8f5c81767ae827297fb1d1d42abb4c706d53ee88b93148365ca58"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 4118,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_handshake.py",
+            "sha256": "d77fc71420134d8e43b014f61469fbf9737ad398cb971abb9e8e5cf92e73d238"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_handshake.py",
+          "source": {
+            "bytes": 4118,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_handshake.py",
+            "sha256": "d77fc71420134d8e43b014f61469fbf9737ad398cb971abb9e8e5cf92e73d238"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1096,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_increment.py",
+            "sha256": "7ed3045d629af1bc6c2a56164406572930f7ee6cad1bd693275c26227764533a"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_increment.py",
+          "source": {
+            "bytes": 1096,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_increment.py",
+            "sha256": "7ed3045d629af1bc6c2a56164406572930f7ee6cad1bd693275c26227764533a"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3470,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_mount_closure.py",
+            "sha256": "8d4439e1baccfcd45c9ae0518e872712f88999d77c83c1be673de62008e39caa"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_mount_closure.py",
+          "source": {
+            "bytes": 3470,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_mount_closure.py",
+            "sha256": "8d4439e1baccfcd45c9ae0518e872712f88999d77c83c1be673de62008e39caa"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3699,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_observer_repair1.py",
+            "sha256": "7dad528f91ba3cae65166fe49938dd73ad817f6a5d100b6f7af561b8b8de1d5d"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_observer_repair1.py",
+          "source": {
+            "bytes": 3699,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_observer_repair1.py",
+            "sha256": "7dad528f91ba3cae65166fe49938dd73ad817f6a5d100b6f7af561b8b8de1d5d"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3134,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_owned_contract.py",
+            "sha256": "fde5242f7fc46b943fcbca04055430bdd28c5417d6889c53513d402d9744e506"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_owned_contract.py",
+          "source": {
+            "bytes": 3134,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_owned_contract.py",
+            "sha256": "fde5242f7fc46b943fcbca04055430bdd28c5417d6889c53513d402d9744e506"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3900,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_producer_frontdoor.py",
+            "sha256": "e6fd2ab5adbdc713af8f8c05147643f83634fc2a89d12c0678503e76ac15ad63"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_producer_frontdoor.py",
+          "source": {
+            "bytes": 3900,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_producer_frontdoor.py",
+            "sha256": "e6fd2ab5adbdc713af8f8c05147643f83634fc2a89d12c0678503e76ac15ad63"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2876,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_storage061.py",
+            "sha256": "93b69e2793cd22cad57940e2886298a163a506bfe5c94cc16b9359cff8732759"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_storage061.py",
+          "source": {
+            "bytes": 2876,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_storage061.py",
+            "sha256": "93b69e2793cd22cad57940e2886298a163a506bfe5c94cc16b9359cff8732759"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 4650,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_terminal_fence.py",
+            "sha256": "5adede4babdfebe48863ef117b79107044f77a3d5f6518f098819445d2ad1e68"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_terminal_fence.py",
+          "source": {
+            "bytes": 4650,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_terminal_fence.py",
+            "sha256": "5adede4babdfebe48863ef117b79107044f77a3d5f6518f098819445d2ad1e68"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3178,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/test_tree_anchor.py",
+            "sha256": "f593fa96ced9811c4fb7dfc998ae5f4523864a1ae9ce4ae35f6625f5ae647c5d"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_tree_anchor.py",
+          "source": {
+            "bytes": 3178,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/test_tree_anchor.py",
+            "sha256": "f593fa96ced9811c4fb7dfc998ae5f4523864a1ae9ce4ae35f6625f5ae647c5d"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 5332,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/top_guard.py",
+            "sha256": "78f830fbc54dfccf434b457d2fc7d1a545c06b8c15f4cb9a3e39261d8bf2eee0"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "top_guard.py",
+          "source": {
+            "bytes": 5332,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/top_guard.py",
+            "sha256": "78f830fbc54dfccf434b457d2fc7d1a545c06b8c15f4cb9a3e39261d8bf2eee0"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1585,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/verify_repair2.py",
+            "sha256": "315588710001b2b06256c8896fa7bd8eb0b23ad8e8fa4230cb3224426c567f30"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "verify_repair2.py",
+          "source": {
+            "bytes": 1585,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/verify_repair2.py",
+            "sha256": "315588710001b2b06256c8896fa7bd8eb0b23ad8e8fa4230cb3224426c567f30"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 773,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/window056.py",
+            "sha256": "9d8f7265a84259e7b4ac7380a76723339ec39973fd35e8d9ede9beaf575a0aff"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "window056.py",
+          "source": {
+            "bytes": 773,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/window056.py",
+            "sha256": "9d8f7265a84259e7b4ac7380a76723339ec39973fd35e8d9ede9beaf575a0aff"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 51755,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/dl061/SOURCE_TEMPLATE.json",
+            "sha256": "71872350283fadb53c4de17d8fcd7ff915ecea1d038c02d6c85e691145d7c32a"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "SOURCE_TEMPLATE.json",
+          "source": {
+            "bytes": 51755,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061/SOURCE_TEMPLATE.json",
+            "sha256": "71872350283fadb53c4de17d8fcd7ff915ecea1d038c02d6c85e691145d7c32a"
+          }
+        }
+      ],
+      "scope": "dl061",
+      "source_files": 133,
+      "total_bytes": 945822
+    },
+    {
+      "archive_files": 52,
+      "archive_only": true,
+      "executable_alias": false,
+      "reviewed_preparation_template": {
+        "bytes": 60034,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/SOURCE_TEMPLATE.json",
+        "sha256": "f48538adfd661464861a0702fd3ec0dcf1b2ab1235bf25d1c29050131ea5f379"
+      },
+      "rows": [
+        {
+          "destination": {
+            "bytes": 1880,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/COMMANDS.json",
+            "sha256": "d652dfa7b4ddbbb8ae9b729f4fd05f49f9960ed945fdb5df23ee46ddc34cf85c"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "COMMANDS.json",
+          "source": {
+            "bytes": 1880,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/COMMANDS.json",
+            "sha256": "d652dfa7b4ddbbb8ae9b729f4fd05f49f9960ed945fdb5df23ee46ddc34cf85c"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 14081,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/DERIVED_config_cpu.py",
+            "sha256": "1d88a3ac2a4ce44c82ef87bc332e1e8f4637940bac3ca9f5c2973668200f7c8f"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "DERIVED_config_cpu.py",
+          "source": {
+            "bytes": 14081,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/DERIVED_config_cpu.py",
+            "sha256": "1d88a3ac2a4ce44c82ef87bc332e1e8f4637940bac3ca9f5c2973668200f7c8f"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 16354,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/DERIVED_output_budget.py",
+            "sha256": "c602b3bea2218c6b17f6c7155eff368227e25e24b8293a99004981133533aab2"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "DERIVED_output_budget.py",
+          "source": {
+            "bytes": 16354,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/DERIVED_output_budget.py",
+            "sha256": "c602b3bea2218c6b17f6c7155eff368227e25e24b8293a99004981133533aab2"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 20210,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/PLATFORM_SOURCES.json",
+            "sha256": "36cbf88ed2942f286d4ee2e2d3f6326a6fc6c5c8fbcccd20d87051b9f967aea3"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "PLATFORM_SOURCES.json",
+          "source": {
+            "bytes": 20210,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/PLATFORM_SOURCES.json",
+            "sha256": "36cbf88ed2942f286d4ee2e2d3f6326a6fc6c5c8fbcccd20d87051b9f967aea3"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 23142,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/PREDECESSOR_PINS.json",
+            "sha256": "e31c0a1005277fc971d9a4794c7cbde6342d274a9dc7384f68087281eb407921"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "PREDECESSOR_PINS.json",
+          "source": {
+            "bytes": 23142,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/PREDECESSOR_PINS.json",
+            "sha256": "e31c0a1005277fc971d9a4794c7cbde6342d274a9dc7384f68087281eb407921"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1883,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/QUALIFICATION_CORRECTNESS.json",
+            "sha256": "857631c7e7a6567ff2ecb119dbe5f439a0b928cfe5f9694cdefbe95494f4a95f"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "QUALIFICATION_CORRECTNESS.json",
+          "source": {
+            "bytes": 1883,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/QUALIFICATION_CORRECTNESS.json",
+            "sha256": "857631c7e7a6567ff2ecb119dbe5f439a0b928cfe5f9694cdefbe95494f4a95f"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 14081,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/actual011/config_cpu.py",
+            "sha256": "c082d535f9bd29a4e828ff98796560ea915d86cf132034d0da7df39c2aca6349"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "actual011/config_cpu.py",
+          "source": {
+            "bytes": 14081,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/actual011/config_cpu.py",
+            "sha256": "c082d535f9bd29a4e828ff98796560ea915d86cf132034d0da7df39c2aca6349"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 16355,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/actual011/output_budget.py",
+            "sha256": "44e5ccfdad173e6b9eebc025260e489893d672c316c6aac3f8bf68a5e03c16ad"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "actual011/output_budget.py",
+          "source": {
+            "bytes": 16355,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/actual011/output_budget.py",
+            "sha256": "44e5ccfdad173e6b9eebc025260e489893d672c316c6aac3f8bf68a5e03c16ad"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 22569,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/actual011/safety_host.py",
+            "sha256": "8c83e08318b530c4d022b91bbacd34b12121b3380e1a14d32262c9a3875f6fa7"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "actual011/safety_host.py",
+          "source": {
+            "bytes": 22569,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/actual011/safety_host.py",
+            "sha256": "8c83e08318b530c4d022b91bbacd34b12121b3380e1a14d32262c9a3875f6fa7"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 9483,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/actual011/server_entry.py",
+            "sha256": "be314a47a6c440960632d3fa88d18f4ff1b80c02356dd8a5fc45c321a7164e9f"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "actual011/server_entry.py",
+          "source": {
+            "bytes": 9483,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/actual011/server_entry.py",
+            "sha256": "be314a47a6c440960632d3fa88d18f4ff1b80c02356dd8a5fc45c321a7164e9f"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 6903,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/admission047.py",
+            "sha256": "b716bc1c7b47d920b5398df7610d9dba80c48075efa6671a9f721dfe6f485c0a"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "admission047.py",
+          "source": {
+            "bytes": 6903,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/admission047.py",
+            "sha256": "b716bc1c7b47d920b5398df7610d9dba80c48075efa6671a9f721dfe6f485c0a"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 5843,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/atomic/barrier.py",
+            "sha256": "d83260db427eb50b916fe6347ea79cfd9b4f7990763d3b5cbdb3796003610966"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "atomic/barrier.py",
+          "source": {
+            "bytes": 5843,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/atomic/barrier.py",
+            "sha256": "d83260db427eb50b916fe6347ea79cfd9b4f7990763d3b5cbdb3796003610966"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2399,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/atomic/client.py",
+            "sha256": "4eb00467b57533f54f2e4b159290504dbacf210e0575e1eb878118993867b810"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "atomic/client.py",
+          "source": {
+            "bytes": 2399,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/atomic/client.py",
+            "sha256": "4eb00467b57533f54f2e4b159290504dbacf210e0575e1eb878118993867b810"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3481,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/authority/NEW24H_AUTHORITY_20261016.json",
+            "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "authority/NEW24H_AUTHORITY_20261016.json",
+          "source": {
+            "bytes": 3481,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/authority/NEW24H_AUTHORITY_20261016.json",
+            "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1023,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/authority_contract.py",
+            "sha256": "02127c9b6228ada4e2f85047d1d449ffc852651200d701948c6ecf328e880876"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "authority_contract.py",
+          "source": {
+            "bytes": 1023,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/authority_contract.py",
+            "sha256": "02127c9b6228ada4e2f85047d1d449ffc852651200d701948c6ecf328e880876"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 9940,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/baseline048/entry.py",
+            "sha256": "99fd5d43e9e987ad48ccbbf8bbaab6c075711ee240d9cee5b6480b203c8d6774"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "baseline048/entry.py",
+          "source": {
+            "bytes": 9940,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/baseline048/entry.py",
+            "sha256": "99fd5d43e9e987ad48ccbbf8bbaab6c075711ee240d9cee5b6480b203c8d6774"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1966,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/bind_source.py",
+            "sha256": "80c767d8499d07324313038c1cdc93589b626ae3f455abd9cd7c455d1da71d4f"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "bind_source.py",
+          "source": {
+            "bytes": 1966,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/bind_source.py",
+            "sha256": "80c767d8499d07324313038c1cdc93589b626ae3f455abd9cd7c455d1da71d4f"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2197,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/binding_consumer.py",
+            "sha256": "9f10317e2575f589732512912a476355c4fefff2b2b4e01571142222b1eb92a3"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "binding_consumer.py",
+          "source": {
+            "bytes": 2197,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/binding_consumer.py",
+            "sha256": "9f10317e2575f589732512912a476355c4fefff2b2b4e01571142222b1eb92a3"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 4691,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/boundary_oracle.py",
+            "sha256": "7fd2e64783f4516a99f116dc66502ff8e6b6d5591f7a1076e7ed1e6cfa9a408a"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "boundary_oracle.py",
+          "source": {
+            "bytes": 4691,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/boundary_oracle.py",
+            "sha256": "7fd2e64783f4516a99f116dc66502ff8e6b6d5591f7a1076e7ed1e6cfa9a408a"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2056,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/cap48_provider.py",
+            "sha256": "0f7ea41e49bf0a0cdd4ed9d255e5b5b900471e66af4180f34d5c07aa5edc19a2"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "cap48_provider.py",
+          "source": {
+            "bytes": 2056,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/cap48_provider.py",
+            "sha256": "0f7ea41e49bf0a0cdd4ed9d255e5b5b900471e66af4180f34d5c07aa5edc19a2"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 732,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/combined_budget.py",
+            "sha256": "e1ba24d70233336f44cbccbaec0fff49c2687dd61c939475b99a0ce06effa3ac"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "combined_budget.py",
+          "source": {
+            "bytes": 732,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/combined_budget.py",
+            "sha256": "e1ba24d70233336f44cbccbaec0fff49c2687dd61c939475b99a0ce06effa3ac"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 10044,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/consume.py",
+            "sha256": "54af4cbc64565e8f4622e949040c641fcd0af8afae353c69c00b4fdf125846cc"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "consume.py",
+          "source": {
+            "bytes": 10044,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/consume.py",
+            "sha256": "54af4cbc64565e8f4622e949040c641fcd0af8afae353c69c00b4fdf125846cc"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1387,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/disk_contract.py",
+            "sha256": "b528c1566fd65073d23f0b8647f8fabec26953a30d5887222302a441c7e8955c"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "disk_contract.py",
+          "source": {
+            "bytes": 1387,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/disk_contract.py",
+            "sha256": "b528c1566fd65073d23f0b8647f8fabec26953a30d5887222302a441c7e8955c"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 10156,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/entry.py",
+            "sha256": "e29a1b4d7df9db4bb8b51e59bb087763118c1db5baac7c5c23af7d26e0b6f238"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "entry.py",
+          "source": {
+            "bytes": 10156,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/entry.py",
+            "sha256": "e29a1b4d7df9db4bb8b51e59bb087763118c1db5baac7c5c23af7d26e0b6f238"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 5276,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/entry_cold_controls.py",
+            "sha256": "01fe102466ae4ab7a255da863195ec437a6612fd07a404923d460d25852c1a4e"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "entry_cold_controls.py",
+          "source": {
+            "bytes": 5276,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/entry_cold_controls.py",
+            "sha256": "01fe102466ae4ab7a255da863195ec437a6612fd07a404923d460d25852c1a4e"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2766,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/evidence/MXR043R2_TERMINAL_20261015.json",
+            "sha256": "2f22245163089883fd6b54954b09804a228796a04afc01683e4b1476ff9f8eab"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "evidence/MXR043R2_TERMINAL_20261015.json",
+          "source": {
+            "bytes": 2766,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/evidence/MXR043R2_TERMINAL_20261015.json",
+            "sha256": "2f22245163089883fd6b54954b09804a228796a04afc01683e4b1476ff9f8eab"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3032,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/evidence/MXR044_TERMINAL_20261015.json",
+            "sha256": "223d010aaa64f14f82ad52a050eac46812e367e7175c04b4364dcad3a5f0ec40"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "evidence/MXR044_TERMINAL_20261015.json",
+          "source": {
+            "bytes": 3032,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/evidence/MXR044_TERMINAL_20261015.json",
+            "sha256": "223d010aaa64f14f82ad52a050eac46812e367e7175c04b4364dcad3a5f0ec40"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 8106,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/external_output_policy.py",
+            "sha256": "73b89aa7b0966816c68923bdda1ca2d3c70a36934e3eeeec6d0793d6a5057f10"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "external_output_policy.py",
+          "source": {
+            "bytes": 8106,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/external_output_policy.py",
+            "sha256": "73b89aa7b0966816c68923bdda1ca2d3c70a36934e3eeeec6d0793d6a5057f10"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 17125,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/host_ticket.py",
+            "sha256": "e320b6c5993008dd1eeac533db1dee4713f68575a16e5a2094154e06504383c0"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "host_ticket.py",
+          "source": {
+            "bytes": 17125,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/host_ticket.py",
+            "sha256": "e320b6c5993008dd1eeac533db1dee4713f68575a16e5a2094154e06504383c0"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2236,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/independent_block_reference.py",
+            "sha256": "c4e40566810ddaacd69404f835b828c08fc46ef17a75435a487c35b56dd2ef7e"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "independent_block_reference.py",
+          "source": {
+            "bytes": 2236,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/independent_block_reference.py",
+            "sha256": "c4e40566810ddaacd69404f835b828c08fc46ef17a75435a487c35b56dd2ef7e"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1596,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/independent_reference.py",
+            "sha256": "c0717d6e2385822d569be611995290294a603c8f49dbf14478a72a29bf1711a9"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "independent_reference.py",
+          "source": {
+            "bytes": 1596,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/independent_reference.py",
+            "sha256": "c0717d6e2385822d569be611995290294a603c8f49dbf14478a72a29bf1711a9"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2962,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/ipc_controls.py",
+            "sha256": "6f815ee70eee276f2a5c8f6ffd7d3ba82e754eb9aac55ee7d5408100241037a2"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "ipc_controls.py",
+          "source": {
+            "bytes": 2962,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/ipc_controls.py",
+            "sha256": "6f815ee70eee276f2a5c8f6ffd7d3ba82e754eb9aac55ee7d5408100241037a2"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3318,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/long_client.py",
+            "sha256": "b50e9cbccaa17d24df86c86942f642850d22b7c5dcdcb112ee2db5d739c24cbe"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "long_client.py",
+          "source": {
+            "bytes": 3318,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/long_client.py",
+            "sha256": "b50e9cbccaa17d24df86c86942f642850d22b7c5dcdcb112ee2db5d739c24cbe"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3214,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/lossless_raw.py",
+            "sha256": "8bd51ca033cd39847c6206dd5094ea15ceccc61d44fe520d013416e51fa5b6c4"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "lossless_raw.py",
+          "source": {
+            "bytes": 3214,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/lossless_raw.py",
+            "sha256": "8bd51ca033cd39847c6206dd5094ea15ceccc61d44fe520d013416e51fa5b6c4"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3574,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/memory_observer.py",
+            "sha256": "4adb02fc2a906b54dfd6d16bdfd76fbb6a3a1811309a6a19a98a280a2b2b2dc1"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "memory_observer.py",
+          "source": {
+            "bytes": 3574,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/memory_observer.py",
+            "sha256": "4adb02fc2a906b54dfd6d16bdfd76fbb6a3a1811309a6a19a98a280a2b2b2dc1"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 140,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/mxr_diag16_gdn_shadow-0.0.1.dist-info/METADATA",
+            "sha256": "c318e1462a91aa1f74651ed25ffd9543cff3dd34b1ed3ade741b89d82e17498d"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "mxr_diag16_gdn_shadow-0.0.1.dist-info/METADATA",
+          "source": {
+            "bytes": 140,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/mxr_diag16_gdn_shadow-0.0.1.dist-info/METADATA",
+            "sha256": "c318e1462a91aa1f74651ed25ffd9543cff3dd34b1ed3ade741b89d82e17498d"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 78,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/mxr_diag16_gdn_shadow-0.0.1.dist-info/entry_points.txt",
+            "sha256": "93e018f547dc077c8b1fa0741164a018d7d3ce516c7e34ab200872cac0e52f03"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "mxr_diag16_gdn_shadow-0.0.1.dist-info/entry_points.txt",
+          "source": {
+            "bytes": 78,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/mxr_diag16_gdn_shadow-0.0.1.dist-info/entry_points.txt",
+            "sha256": "93e018f547dc077c8b1fa0741164a018d7d3ce516c7e34ab200872cac0e52f03"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 584,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/mxr_diag16_gdn_shadow/__init__.py",
+            "sha256": "1c39080dd05bdbd0004d33ba7ebe82cf8bbd3b4ba9ed8678018a151b5c9060df"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "mxr_diag16_gdn_shadow/__init__.py",
+          "source": {
+            "bytes": 584,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/mxr_diag16_gdn_shadow/__init__.py",
+            "sha256": "1c39080dd05bdbd0004d33ba7ebe82cf8bbd3b4ba9ed8678018a151b5c9060df"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3010,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/ownership_observation.py",
+            "sha256": "a6840189c26febec9e48bfd3fa37676fbe420cd5719f3cdf58959e4a0760224c"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "ownership_observation.py",
+          "source": {
+            "bytes": 3010,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/ownership_observation.py",
+            "sha256": "a6840189c26febec9e48bfd3fa37676fbe420cd5719f3cdf58959e4a0760224c"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 13387,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/parser_probe.py",
+            "sha256": "1955f582c34bd85d459b763f2aef904602432afca4793500317e736fd383b375"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "parser_probe.py",
+          "source": {
+            "bytes": 13387,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/parser_probe.py",
+            "sha256": "1955f582c34bd85d459b763f2aef904602432afca4793500317e736fd383b375"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2256,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/plugin_discovery.py",
+            "sha256": "046955e8270076fb0a684cc6c632ecc06b0c4a73cd84fe17b0b3303441c87cd7"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "plugin_discovery.py",
+          "source": {
+            "bytes": 2256,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/plugin_discovery.py",
+            "sha256": "046955e8270076fb0a684cc6c632ecc06b0c4a73cd84fe17b0b3303441c87cd7"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 12719,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/prerequisite.py",
+            "sha256": "d25609d1c121015bc8b9eeda1295ad484a658fd09010a73d01a1890b001ffa20"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "prerequisite.py",
+          "source": {
+            "bytes": 12719,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/prerequisite.py",
+            "sha256": "d25609d1c121015bc8b9eeda1295ad484a658fd09010a73d01a1890b001ffa20"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 4361,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/raw_filesystem.py",
+            "sha256": "2779eb3811366d65e35610b600ade8319f87f466a273f5148e391ad9fa98ec59"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "raw_filesystem.py",
+          "source": {
+            "bytes": 4361,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/raw_filesystem.py",
+            "sha256": "2779eb3811366d65e35610b600ade8319f87f466a273f5148e391ad9fa98ec59"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 2647,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/software.py",
+            "sha256": "a2a60fb54010f1ef54d56e7c902ea31d802a173d3391e2fe9a10a8759f0ea230"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "software.py",
+          "source": {
+            "bytes": 2647,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/software.py",
+            "sha256": "a2a60fb54010f1ef54d56e7c902ea31d802a173d3391e2fe9a10a8759f0ea230"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 78,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/software_contract.py",
+            "sha256": "3f9b7cc8753313051255891c5c601d143689b52e99d45263feb44cf94ed7f265"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "software_contract.py",
+          "source": {
+            "bytes": 78,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/software_contract.py",
+            "sha256": "3f9b7cc8753313051255891c5c601d143689b52e99d45263feb44cf94ed7f265"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 3452,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/stage_resources.py",
+            "sha256": "ee45ae8bbf121f16fb8ee02a7c3ff263d5ad5f93d155cc0d0c8113360fd60769"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "stage_resources.py",
+          "source": {
+            "bytes": 3452,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/stage_resources.py",
+            "sha256": "ee45ae8bbf121f16fb8ee02a7c3ff263d5ad5f93d155cc0d0c8113360fd60769"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1475,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/test_block_reference.py",
+            "sha256": "58266194de6c14addd3d589384b87732cac18098f230b80ccf2a1fc21a9841b9"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_block_reference.py",
+          "source": {
+            "bytes": 1475,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/test_block_reference.py",
+            "sha256": "58266194de6c14addd3d589384b87732cac18098f230b80ccf2a1fc21a9841b9"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 21481,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/test_contract.py",
+            "sha256": "4f5ca8b2a6c7c11188076b6589300b561524e3932138a321c3e68534866ba936"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_contract.py",
+          "source": {
+            "bytes": 21481,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/test_contract.py",
+            "sha256": "4f5ca8b2a6c7c11188076b6589300b561524e3932138a321c3e68534866ba936"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1923,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/test_lossless_raw.py",
+            "sha256": "a8ff1368ae920d54f94628da20a66102cf7cb57d2d1763bfe618e826cbf43de3"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_lossless_raw.py",
+          "source": {
+            "bytes": 1923,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/test_lossless_raw.py",
+            "sha256": "a8ff1368ae920d54f94628da20a66102cf7cb57d2d1763bfe618e826cbf43de3"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 1097,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/test_raw_filesystem.py",
+            "sha256": "effb71f7d2937b00254469eea8886d3bd382ddb7128ea280fa08e9bd938e430b"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "test_raw_filesystem.py",
+          "source": {
+            "bytes": 1097,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/test_raw_filesystem.py",
+            "sha256": "effb71f7d2937b00254469eea8886d3bd382ddb7128ea280fa08e9bd938e430b"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 11134,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/worker.py",
+            "sha256": "67559b0e97b3f0cad16325803f6f03f7878a40082a031a3c663aaffa398cd358"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "worker.py",
+          "source": {
+            "bytes": 11134,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/worker.py",
+            "sha256": "67559b0e97b3f0cad16325803f6f03f7878a40082a031a3c663aaffa398cd358"
+          }
+        },
+        {
+          "destination": {
+            "bytes": 60034,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_numerics_and_model_entry_20261016/mxr065/SOURCE_TEMPLATE.json",
+            "sha256": "f48538adfd661464861a0702fd3ec0dcf1b2ab1235bf25d1c29050131ea5f379"
+          },
+          "operation": "same-peer-native-copy-after-fresh-absent-or-byte-exact-read",
+          "relative_path": "SOURCE_TEMPLATE.json",
+          "source": {
+            "bytes": 60034,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/SOURCE_TEMPLATE.json",
+            "sha256": "f48538adfd661464861a0702fd3ec0dcf1b2ab1235bf25d1c29050131ea5f379"
+          }
+        }
+      ],
+      "scope": "mxr065",
+      "source_files": 51,
+      "total_bytes": 395917
+    }
+  ],
+  "includes": [
+    "frozen own source files",
+    "frozen preparation template"
+  ],
+  "schema": "ascend.source-only-repository-copy-map/v1"
+}

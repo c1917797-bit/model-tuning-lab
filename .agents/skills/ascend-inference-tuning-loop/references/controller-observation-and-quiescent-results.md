@@ -172,3 +172,23 @@ all transitive time gates before calling a short phase executable near cutoff;
 a shorter local lease does not override a longer shared admission guard.
 
 [Actual MXR050 entry failure, DeltaLog051 compile and scope](../../../../docs/knowledge-base/ascend-infra/cases/split-scale-and-long-entry-20261016.md).
+
+## Test real report semantics and plugin lifecycle
+
+Use actual failed and successful report shapes in source-bound handoff tests.
+A terminal nonzero-exit operation can have wrapper ok=False while its process
+is completed; validate transport, exact command/owner, terminal state and the
+expected exit separately. Do not require a failed historical phase to have
+succeeded in order to preserve its quiescent evidence.
+
+General-plugin registration can run in architecture-inspection subprocesses
+before native operators or model instances exist. Keep registration distinct
+from actual worker installation and prove the real first-instance dispatch.
+A same-image cold plugin check is not model or numerical acceptance.
+
+Preregister evidence coverage and the complete storage budget before dispatch.
+A bounded smoke can precede larger workload validation without inheriting its
+qualification. If input lengths change, freeze a new workload and recheck
+consumers; fixed output length does not prescribe prompt length.
+
+[Actual source-binding recovery, registry failure and bounded-evidence decisions](../../../../docs/knowledge-base/ascend-infra/cases/source-binding-registry-and-bounded-evidence-20261016.md).

@@ -1,0 +1,98 @@
+{
+  "schema": "ascend.actual-operation-terminal-observation/v1",
+  "origin": "Preserved actual operation_get terminal response; CPU-only recovery not an NPU rerun",
+  "operation_snapshot": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-I",
+            "-B",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog061-runtime-source-recovery-new24h-v1-066/run_recovery.py",
+            "--execute",
+            "--phase",
+            "cpu",
+            "--template-ref",
+            "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog061-runtime-source-recovery-new24h-v1-066/SOURCE_TEMPLATE.json\", \"bytes\": 4806, \"sha256\": \"80773d05b8b1b70791c85cf5d9491828596fefdc7efce7c795dd3e5bcac669fc\"}",
+            "--host-cpu",
+            "166",
+            "--guest-cpu",
+            "0"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": null,
+          "durationMs": 132096,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-00000000000009f1",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "MAIN_DLLIFECYCLE002_OWNER {\"path\": \"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-recovery066-MAIN-20261016-NEW24H-001/RESULT.json\", \"bytes\": 1345, \"sha256\": \"99a69829fee6dbbe04aa96301e7ebd18e93c70c988840aacb049b4812306c67e\"}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 1332,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 1332,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 1332
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 1332,
+          "routeLookupMs": 0,
+          "totalMs": 1332
+        }
+      },
+      "traceId": "7f85db9b-171c-4b19-887c-d8e3344b7b72"
+    },
+    "operationId": "exec-00000000000009f1",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "completion_is_not_algorithm_acceptance": true
+}

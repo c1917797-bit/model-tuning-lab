@@ -1,0 +1,96 @@
+{
+  "schema": "ascend.actual-operation-terminal-observation/v1",
+  "origin": "Preserved actual operation_get response observed before backend operation-history expiry; not a fresh process snapshot",
+  "operation_snapshot": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": "exit code",
+    "found": true,
+    "kind": "exec",
+    "ok": false,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1",
+            "/usr/bin/python3",
+            "-I",
+            "-B",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/host_ticket.py",
+            "--execute",
+            "--source-sha256",
+            "55d83f448875937ad86bafe00e1bb6697b681a21643ec187a58b838c2d113955",
+            "--prerequisite-ref",
+            "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_MXR039_PREREQUISITE_043_001.json\",\"bytes\":136215,\"sha256\":\"f620ae4bc10577465bff7fbb3af67ce424f2cca7c09805aa13f5f55dfce525f4\"}"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/env",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 218598,
+          "error": "exit code",
+          "exitCode": 1,
+          "id": "exec-00000000000009d2",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "Traceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/host_ticket.py\", line 153, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/host_ticket.py\", line 152, in main\n    return h.main(['--execute','--source-sha256',a.source_sha256])\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 434, in main\n    if __name__ == \"__main__\":\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-065/host_ticket.py\", line 150, in bounded_raw_run\n    return run(*args,**kwargs)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 404, in run\n    return 0\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 308, in run\n    health = [c.PY, \"-I\", \"-B\", \"-c\", \"import urllib.request; assert urllib.request.urlopen('http://127.0.0.1:8252/health',timeout=2).status==200\"]\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 46, in need\n    raise ValueError(why)\nValueError: native server startup bounded/failed\n",
+          "stdout": "",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "https://agentweb-tpc.ru.yxsbase.win",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 573,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 573,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 573
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 419,
+          "routeLookupMs": 0,
+          "totalMs": 419
+        }
+      },
+      "traceId": "311fb562-0df3-455f-8f4f-e35884b9e0b1"
+    },
+    "operationId": "exec-00000000000009d2",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": false,
+    "terminal": true
+  },
+  "completion_is_not_algorithm_acceptance": true
+}

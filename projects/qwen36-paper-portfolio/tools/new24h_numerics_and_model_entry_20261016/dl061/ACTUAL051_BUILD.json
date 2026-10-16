@@ -1,0 +1,176 @@
+{
+  "schema": "deltalog-split-scale-actual-build/v051",
+  "source_manifest": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/SOURCE_MANIFEST.json",
+    "bytes": 3246,
+    "sha256": "f9b17e97b99a840e4fff639e20b359a67c517b3e47b6e7348cc87755b400fdaa"
+  },
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+    "bytes": 3591,
+    "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/usr/local/python3.12.13/lib/python3.12/site-packages/cmake/data/bin/cmake",
+        "--version"
+      ],
+      "exit_code": 0,
+      "error": null,
+      "stdout": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/cmake-version.stdout",
+        "bytes": 90,
+        "sha256": "9e2032657b821ca15fdf749298148b08afc4d86fe8a6f709a8459318fa1c018f"
+      },
+      "stderr": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/cmake-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/usr/local/python3.12.13/lib/python3.12/site-packages/cmake/data/bin/cmake",
+        "-S",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/split_scale_v051",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_v051-build",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DASCEND_CANN_PACKAGE_PATH=/usr/local/Ascend/cann-9.1.0",
+        "-DASCEND_COMPUTE_UNIT=ascend910b",
+        "-DENABLE_COPY_KERNEL_SRC_TO_ASCENDC=FALSE",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DPython3_EXECUTABLE=/usr/local/python3.12.13/bin/python3"
+      ],
+      "exit_code": 0,
+      "error": null,
+      "stdout": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_v051-configure.stdout",
+        "bytes": 1127,
+        "sha256": "ff43f8db508143474c385bf41927a8d4a580bb02874218ad3726d5cf6eac91cd"
+      },
+      "stderr": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_v051-configure.stderr",
+        "bytes": 512,
+        "sha256": "2c9b07fbbee38e48b337b6cb49d4bfc32aef127cde7c91927bcce5a095e34883"
+      }
+    },
+    {
+      "argv": [
+        "/usr/local/python3.12.13/lib/python3.12/site-packages/cmake/data/bin/cmake",
+        "--build",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_v051-build",
+        "--parallel",
+        "1",
+        "--verbose"
+      ],
+      "exit_code": 0,
+      "error": null,
+      "stdout": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_v051-build.stdout",
+        "bytes": 7920,
+        "sha256": "d778f2fe6ef154def5e7f8e619959ff3949766e90113919c4acf28c9238ec62b"
+      },
+      "stderr": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_v051-build.stderr",
+        "bytes": 20267,
+        "sha256": "24300215939dc4307d7e45def3fe8f7044e4a370232094fa1fd72e99033fe1f5"
+      }
+    },
+    {
+      "argv": [
+        "/usr/local/python3.12.13/lib/python3.12/site-packages/cmake/data/bin/cmake",
+        "-S",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-new48h-v1-051/kernel/split_scale_sidecar_v051",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_sidecar_v051-build",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DASCEND_CANN_PACKAGE_PATH=/usr/local/Ascend/cann-9.1.0",
+        "-DASCEND_COMPUTE_UNIT=ascend910b",
+        "-DENABLE_COPY_KERNEL_SRC_TO_ASCENDC=FALSE",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DPython3_EXECUTABLE=/usr/local/python3.12.13/bin/python3"
+      ],
+      "exit_code": 0,
+      "error": null,
+      "stdout": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_sidecar_v051-configure.stdout",
+        "bytes": 1143,
+        "sha256": "85524ecacb392714df09f5a351f90bd9e9f34897798f9af3cde5a5a59cf16c95"
+      },
+      "stderr": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_sidecar_v051-configure.stderr",
+        "bytes": 512,
+        "sha256": "2c9b07fbbee38e48b337b6cb49d4bfc32aef127cde7c91927bcce5a095e34883"
+      }
+    },
+    {
+      "argv": [
+        "/usr/local/python3.12.13/lib/python3.12/site-packages/cmake/data/bin/cmake",
+        "--build",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_sidecar_v051-build",
+        "--parallel",
+        "1",
+        "--verbose"
+      ],
+      "exit_code": 0,
+      "error": null,
+      "stdout": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_sidecar_v051-build.stdout",
+        "bytes": 8344,
+        "sha256": "a822c651e07cb9ed6f990c52b3b7335b81a2099eb59131182c3c53ee0f98915e"
+      },
+      "stderr": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_sidecar_v051-build.stderr",
+        "bytes": 21402,
+        "sha256": "08532be3bd4c381365d17317a473354a457b5aacdc72c17225e0aea2c09fd460"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "arm": "split_scale_v051",
+      "library": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_v051-build/libqwen36_gdn_deltalog_decode_split_scale_v051_ops.so",
+        "bytes": 2349464,
+        "sha256": "6490d16d57d4e43c4d7b75e23d6ac872172461e8868b6843c781da99b0f32041"
+      },
+      "cache": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_v051-build/CMakeCache.txt",
+        "bytes": 19185,
+        "sha256": "31c7017e99049d9ef6f7cdaccc2e0b7778e2b87f919c15e622ef1928096687df"
+      },
+      "compile_commands": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_v051-build/compile_commands.json",
+        "bytes": 1362,
+        "sha256": "307f94cbb2c2c1be5b2fd2fbe9bc5ddebae8d205077055c0a0a3e2a4dec5208f"
+      }
+    },
+    {
+      "arm": "split_scale_sidecar_v051",
+      "library": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_sidecar_v051-build/libqwen36_gdn_deltalog_decode_split_scale_sidecar_v051_ops.so",
+        "bytes": 2351736,
+        "sha256": "3e2713c5fbee5d3cec1c3dc589d431396c8abf76acb5fd070ae6b9c6a4ad2009"
+      },
+      "cache": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_sidecar_v051-build/CMakeCache.txt",
+        "bytes": 19265,
+        "sha256": "5e71cb980b01af5e7069673c88f8fd8075ca55fc7de9e38e020f48f2b5500c9a"
+      },
+      "compile_commands": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dl-split-scale051-build-new48h-MAIN-20261015-001/cpu-preflight/producer/build/split_scale_sidecar_v051-build/compile_commands.json",
+        "bytes": 1426,
+        "sha256": "50a947e657cd4f6fe0875f2002b1ba8c0400bc0a10b21a772d28a8abcadfc757"
+      }
+    }
+  ],
+  "primary": null,
+  "elapsed_seconds": 285.17711684000096,
+  "Devices": [],
+  "NPU": false,
+  "numeric_qualified": false,
+  "model_ready": false,
+  "original_a369_source_identity_verified": false
+}

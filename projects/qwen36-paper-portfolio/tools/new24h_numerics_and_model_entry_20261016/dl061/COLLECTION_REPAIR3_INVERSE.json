@@ -1,0 +1,62 @@
+{
+  "baseline_sha256": {
+    "consume_pair.py": "3560b9f554e8bb0ae76efb6c910a16c596c1041fa208d27ee7be9850359d9eb4",
+    "entry.py": "ba411f9a9bacf8e9001e1e5a5b778758b1a1d2a7e7c2072fcb6857839ad48e66",
+    "producer.py": "67c1dbe15d4006e1a356346a2686f7af2354459c55ffa9ffa602bc82c772c64c",
+    "qwen36_deltalog_fresh/native_fixture.py": "91214d022bcee34431fc881e89f4289ece135010a2358e9980b894f77a18c31b"
+  },
+  "edits": {
+    "consume_pair.py": [
+      [
+        " C.need(producer['source']==sr and producer['primary']is None and producer['steps']in(16,160),'actual completed producer')\n",
+        " import collection_policy\n collection_policy.require_complete(C,producer,sr)\n"
+      ]
+    ],
+    "entry.py": [
+      [
+        "",
+        "  collection=subprocess.run([sys.executable,'-I','-B',str(P/'test_collection_contract.py'),'-v'],capture_output=True,text=True,timeout=30)\n  C.need(collection.returncode==0,'actual native_fixture predicate/producer Diagnostics/independent pair controls: '+collection.stderr)\n"
+      ],
+      [
+        "",
+        "  C.write(out/'COLLECTION_CONTRACT_CONTROLS.json',dict(source=sr,returncode=collection.returncode,stdout=collection.stdout,stderr=collection.stderr,software_contracts_pass=True,NPU=False,numeric_qualified=False))\n"
+      ],
+      [
+        "  C.write(out/'STAGE_RESULT.json',dict(schema='deltalog.fresh-bridge-stage/v5',source=sr,authority=ar,lifecycle=lr,pass_gate=True,NPU=False,model_ready=False,boundary=boundary,actual_precast_meta=actual_meta043,actual_copy_import=C.ref(out/'COPY_IMPORT_CPU.json'),actual_domain_static_proof=C.ref(out/'DOMAIN_STATIC_PROOF.json'),actual_guest_frontdoor_controls=C.ref(out/'GUEST_FRONTDOOR_CONTROLS.json'),actual_terminal_process_controls=C.ref(out/'REAL_PROCESS_CONTROLS.json')));return 0\n",
+        "  C.write(out/'STAGE_RESULT.json',dict(schema='deltalog.fresh-bridge-stage/v5',source=sr,authority=ar,lifecycle=lr,pass_gate=True,NPU=False,model_ready=False,boundary=boundary,actual_precast_meta=actual_meta043,actual_copy_import=C.ref(out/'COPY_IMPORT_CPU.json'),actual_domain_static_proof=C.ref(out/'DOMAIN_STATIC_PROOF.json'),actual_guest_frontdoor_controls=C.ref(out/'GUEST_FRONTDOOR_CONTROLS.json'),actual_collection_contract_controls=C.ref(out/'COLLECTION_CONTRACT_CONTROLS.json'),actual_terminal_process_controls=C.ref(out/'REAL_PROCESS_CONTROLS.json')));return 0\n"
+      ],
+      [
+        "",
+        " collected=C.obj(cpu['actual_collection_contract_controls']);C.need(collected['source']==sr and collected['software_contracts_pass']is True and collected['NPU']is False,'same-source actual collection-vs-independent-consumer controls before NPU')\n"
+      ]
+    ],
+    "producer.py": [
+      [
+        "",
+        "  defer_BF16_point_gate=True\n"
+      ],
+      [
+        "   C.need(time.monotonic()-start<1800 and time.monotonic()-self.started<(600 if self.batch==1 else 1200),'numeric bounded1800/B1-600/B16-1200');value=snapshot();value['captures']=dict(self.captures);value['norms']=norms;rr=save('mixed-B%d-%03d.pt'%(self.batch,step),value);self.last=rr;records.append(dict(kind='mixed',batch=self.batch,step=step,raw=rr,producer_state_error=state_error,producer_output_error=output_error))\n",
+        "   C.need(time.monotonic()-start<1800 and time.monotonic()-self.started<(600 if self.batch==1 else 1200),'numeric bounded1800/B1-600/B16-1200');value=snapshot();value['captures']=dict(self.captures);value['norms']=norms;rr=save('mixed-B%d-%03d.pt'%(self.batch,step),value);self.last=rr;records.append(dict(kind='mixed',batch=self.batch,step=step,raw=rr,producer_state_error=state_error,producer_output_error=output_error,producer_old_BF16_point_pass=output_error<=R.OUTPUT_LIMIT,producer_old_BF16_point_diagnostic_only=True))\n"
+      ],
+      [
+        " finally:C.write(out/'RESULT.json',dict(schema='deltalog.actual-fresh-bridge/v5',source=sr,authority=ar,lifecycle=lr,plan=pr,steps=a.steps,records=records,actual_sidecar_records=sidecar.records,actual_mixed_sidecar_records=sidecar.mixed_records,boundary_controls=boundary_controls,events=events,primary=primary,admission=admission,raw_bytes=used,NPU=True,fullmodel=False,graph=False,copy_factory_qualified=False,scope='native-full-GDN-core-and-native-descriptor-copy-single-NPU-TP4local',elapsed_seconds=time.monotonic()-start))\n",
+        " finally:C.write(out/'RESULT.json',dict(schema='deltalog.actual-fresh-bridge/v5',source=sr,authority=ar,lifecycle=lr,plan=pr,steps=a.steps,records=records,actual_sidecar_records=sidecar.records,actual_mixed_sidecar_records=sidecar.mixed_records,boundary_controls=boundary_controls,events=events,primary=primary,admission=admission,raw_bytes=used,NPU=True,fullmodel=False,graph=False,copy_factory_qualified=False,collection_policy=__import__('collection_policy').POLICY,scope='native-full-GDN-core-and-native-descriptor-copy-single-NPU-TP4local',elapsed_seconds=time.monotonic()-start))\n"
+      ]
+    ],
+    "qwen36_deltalog_fresh/native_fixture.py": [
+      [
+        "",
+        "from collection_policy import reject as collection_reject\n"
+      ],
+      [
+        "            if output_error>OUTPUT_LIMIT or state_error>STATE_LIMIT or not all(row[n] for n in\n                (\"finite\",\"untouched_bitwise\",\"pointers_stable\",\"inputs_unchanged\",\"copy_source_unchanged\",\"owner_isolated\",\"redzones_unchanged\")):\n",
+        "            if collection_reject(output_error,state_error,row,diagnostics,OUTPUT_LIMIT,STATE_LIMIT):\n"
+      ]
+    ]
+  },
+  "math_and_inputs_changed": false,
+  "old_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-mixed-precast-new48h-v1-043-repair2",
+  "schema": "deltalog.collection-only-repair3-inverse/v043",
+  "state_output_limits_changed": false
+}
