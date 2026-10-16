@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "catalog-R3-prepared-after-new-idle-observation",
+  "execution_state": "catalog-M3-r3-live",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "Noownedjob;0b0b freshNPU3foreignPID647529/661466;exactownedCIDabsent/portfree."
+    "state": "OwnedR3catalog0b67 live after0b65 actual0-3empty/ports/source159 admission;oneowneddevicejob,continuousguard."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Freshdirect/source159/image/model/inputcatalog/newroot/actualphysical0-3+ports admission then ONE QUALITY_R16_CATALOG_CANARY_R3_CONTRACT.json if trulyidle.0b5a13empty/193s ischangedresourcepremise/notreservation;R2failureimmutable. Nootherdevicejob. Newdeliverylifecycle164boundcontracts prospective after M3/M4/M5;do notskipgates.",
+  "next_action": "Poll SAMEma0b67 and immutable catalog-quality-r16-canary-r3;running/unclear neverrestart or edit159boundfiles. Terminal audit_catalog_canary_terminal.py --contract QUALITY_R16_CATALOG_CANARY_R3_CONTRACT.json --live-release. Delivery164contracts remainprospective afterM3/M4/M5. LatesthumanstopOct17T06:48:09Z.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -196,10 +196,10 @@
     ]
   },
   "publication": {
-    "state": "e50aa9a liveverified;delivery164contracts/R3 preparation checkpoint pending",
-    "published_commit": "e50aa9ab794fac0cf4c6960223a6af0945a01d39",
+    "state": "03a14fd liveverified;R3runningmetadata pending",
+    "published_commit": "03a14fdde6287a16eef3d28386ad9516a99180f9",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "note": "No NPUlifecycle/finalgoal acceptance."
+    "note": "No catalog accept/lifecycle/fullgoal acceptance."
   },
   "math_reference": {
     "state": "cpu-reference-passed",
@@ -215,14 +215,13 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL0b07exit1;0requests;foreigncannbench_dsNPU3;exact ownrelease independently verified",
-    "last_operation": "exec-0000000000000b07",
+    "state": "RUNNING; terminal unknown, never restart",
+    "last_operation": "exec-0000000000000b67",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "raw_root": "/cache/cch/hypic-independent-20261013/catalog-quality-r16-canary-r2",
-    "contract": "QUALITY_R16_CATALOG_CANARY_R2_CONTRACT.json",
-    "checkpoint": "1c2e1af8d012bba4eec0f316074cc8dc0cc8ec67",
-    "terminal_report": "CATALOG_R16_CANARY_R2_TERMINAL_20261016.json"
+    "raw_root": "/cache/cch/hypic-independent-20261013/catalog-quality-r16-canary-r3",
+    "contract": "QUALITY_R16_CATALOG_CANARY_R3_CONTRACT.json",
+    "checkpoint": "03a14fdde6287a16eef3d28386ad9516a99180f9"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -275,8 +274,8 @@
     "report": "FORMAL_R16_20261016_G3_R1_TERMINAL.json"
   },
   "catalog_canary": {
-    "state": "R2 rejected externalinterruption0requests;notmechanismfailure",
-    "contract": "QUALITY_R16_CATALOG_CANARY_R2_CONTRACT.json",
+    "state": "R3 RUNNING0b67;R2externalfailureimmutable",
+    "contract": "QUALITY_R16_CATALOG_CANARY_R3_CONTRACT.json",
     "manifest_sha256": "bddd3488a1ad27e7e44748d503963b77931fc3dcd1b66f0e425d2ea994f110bb",
     "device_run": true,
     "accepted": false

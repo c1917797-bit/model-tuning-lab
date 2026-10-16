@@ -1,3 +1,15 @@
+# CURRENT R3 catalog M3 LIVE — overrides prior no-job preparation
+
+Exactma exec-0000000000000b67 RUNNING; raw /cache/cch/hypic-independent-20261013/catalog-quality-r16-canary-r3.
+Checkpoint03a14fd published/liveverified;0b65fresh12:07:10UTC source159/image/model/
+inputcatalog/newroot/physical0-3empty/8233+HCCLfreePASS;priorCanaryimmutableauditPASS.
+0b5a193sampledidle notreservation; continuousforeignguard/exactowncleanup mandatory.
+Poll SAMEhandle/root; no restart while running/unclear or edit159boundfiles.
+Terminal audit_catalog_canary_terminal.py --contract QUALITY_R16_CATALOG_CANARY_R3_CONTRACT.json --live-release.
+Samebounded17protocol, no quality/speed/lifecycleacceptance. R2failureimmutable.
+Delivery164stagecontracts remainprospective afterM3/M4/M5;no seconddevicejob.
+Human24hstopOct17T06:48:09Z unchanged,4-7prohibited/foreignuntouched/fullgoalactive.
+
 # LATEST delivery164 contracts and catalogR3 preparation
 
 LIFECYCLE_DELIVERY_R16_*_R1_CONTRACTs freeze same164sources/newcontroller and
