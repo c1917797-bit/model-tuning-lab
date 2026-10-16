@@ -1,0 +1,12 @@
+{
+  "schema": "hypic-device-launch/v1",
+  "operation": "exec-0000000000000b07",
+  "admission_operation": "exec-0000000000000b06",
+  "admission": "{\"admission\": true, \"utc\": \"2026-10-16T11:20:05.334311+00:00\", \"physical0_3\": [], \"sources\": 159, \"ports_free\": true, \"new_root\": true, \"head\": \"1c2e1af8d012bba4eec0f316074cc8dc0cc8ec67\"}\nPRIOR_CANARY_IMMUTABLE_PASS\n",
+  "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "checkpoint": "1c2e1af8d012bba4eec0f316074cc8dc0cc8ec67",
+  "contract": "QUALITY_R16_CATALOG_CANARY_R2_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/catalog-quality-r16-canary-r2",
+  "scope": "Bounded M3 catalog17 only, not full quality or performance",
+  "terminal": "unknown; poll same exact handle/root"
+}

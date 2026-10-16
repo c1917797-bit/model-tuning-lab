@@ -1,3 +1,14 @@
+# CURRENT R2 catalog M3 LIVE — overrides prior no-job state
+
+Exactma exec-0000000000000b07 RUNNING; raw /cache/cch/hypic-independent-20261013/catalog-quality-r16-canary-r2.
+Checkpoint1c2e1af8 published/liveverified;0aff13sampledempty/193seconds notreservation;
+fresh0b06 11:20:05UTC source159/image/model/inputcatalog/newroot/actual0-3empty/8233+HCCLfreePASS.
+Poll SAMEhandle/root; neverrestart running/unclear, neveredit159boundfiles.
+FrozenR2contract17private/17producer8+8+rebuild1; no fullquality/speed claim.
+Terminal audit_catalog_canary_terminal.py --contract QUALITY_R16_CATALOG_CANARY_R2_CONTRACT.json --live-release.
+Lifecycleterminal15controls0b02/785CPU0b03PASSHOSTONLY;0b01failure retained.
+DeadlineOct17T06:48:09Z;foreignuntouched/4-7prohibited/oneowneddevicejob.
+
 # LATEST readonly0ae9 terminal and lifecycle host audits
 
 0ae9exit0,38samples11:02:29–11:12:25UTC;intermittentphysical0/3PIDs,
