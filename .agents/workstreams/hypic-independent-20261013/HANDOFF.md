@@ -1,3 +1,13 @@
+# CURRENT R3 live; same-source baseline successor prepared only
+
+Exact0b67 stillrunning; no restart/edit159boundfiles/seconddevicejob.
+FORMAL_R16_20261016_G1_R1_ATTEMPT3_CONTRACT.json addsnewrawroot only,
+same147sources/currentR16G3protocol;static0b6ePASS/configuration-only/noNPU.
+OldG1attempt1/2 rootsimmutable. RequiresR3independentacceptance/exactrelease
+andfreshdirect/source/image/input/actual0-3+ports/newrootadmission beforelaunch.
+Not a newmeasurement orspeed claim.0b6b priorliveprobe initialization/45samples,
+foreignempty/no responses then. Latesthuman deadlineOct17T06:48:09Z.
+
 # CURRENT R3 catalog M3 LIVE — overrides prior no-job preparation
 
 Exactma exec-0000000000000b67 RUNNING; raw /cache/cch/hypic-independent-20261013/catalog-quality-r16-canary-r3.

@@ -1,0 +1,18 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "R16 G1/R1 baseline attempt3 prospective contract",
+  "operation": "exec-0000000000000b6e",
+  "exit": 0,
+  "source_bindings": 147,
+  "matched_to": "FORMAL_R16_20261016_G3_R1_CONTRACT.json",
+  "contract": "FORMAL_R16_20261016_G1_R1_ATTEMPT3_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-r16-20261016-g1-r1-attempt3",
+  "raw_absent": true,
+  "device_run": false,
+  "scope": "Configuration-only check; no new speed result. Prior two interrupted roots immutable.",
+  "prerequisites": [
+    "R3 exact0b67 terminal independently accepted and exactownedrelease",
+    "Fresh route/source/model/image/input/physical0-3/port/newroot admission",
+    "No other owned device controller"
+  ]
+}
