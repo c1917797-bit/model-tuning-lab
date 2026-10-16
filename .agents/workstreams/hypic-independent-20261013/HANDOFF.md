@@ -1,5 +1,14 @@
 # CURRENT R17 ASYNC FULL40 LIVE; BLOCKING VALID, NO SPEEDUP CLAIM
 
+TERMINAL asyncd54:40/40success; independent0d78valid159sources/all40fourrank48C1+
+16C2/7104packedgroups/474cleanisolation/physicalPIDjoins/liveexactrelease.
+R17_TRANSFER_ASYNC_R1_TERMINAL_AUDIT_20261016.json. TPOT308.730523ms,
+TTFTP95399632.550590ms. Singlepair vsblocking:TPOT-1.254528%,TTFTP95-2.344690%;
+small directiononly, no repeatedrobustness/native gain/wholeHYPICacceptance.
+Initial0d75 strictbindfailed;0d76 explicitlyobservedTIME-WAIT withoutlistener;
+naturalwait then0d77 strictfree, same raw0d78auditpassed. No source/portpolicychange.
+No ownedmodeljob. Next freshactualadmission thenFORMAL_R17_TRANSFER_NATIVE_R1_CONTRACT.json.
+
 LIVE ma exec-0000000000000d54 started17:04UTC, contract
 FORMAL_R17_TRANSFER_ASYNC_R1_CONTRACT.json, sourcecheckpoint61782a82remoteverified.
 Admissionexec-0000000000000d52 proves159sources/model/image/input/actual0-3empty/8233+HCCLfree/

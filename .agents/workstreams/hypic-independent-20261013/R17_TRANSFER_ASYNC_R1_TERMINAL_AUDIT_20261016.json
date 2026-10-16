@@ -1,0 +1,202 @@
+{
+  "schema": "hypic-r17-transfer-terminal-audit/v1",
+  "arm": "async",
+  "round": 1,
+  "controller": "exec-0000000000000d54",
+  "controller_exit_code": 0,
+  "checkpoint": "61782a8278eccc3a700cbf0b49bc0ef28ac84d70",
+  "contract": "FORMAL_R17_TRANSFER_ASYNC_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-r17-transfer-async-r1",
+  "independent_audit": "exec-0000000000000d78",
+  "audit": {
+    "terminal_unit_valid": true,
+    "timing": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 308.7305232846703,
+      "ttft_p95_ms": 399632.5505899731,
+      "tpot_p95_ms": 327.6113742968505
+    },
+    "isolation_samples": 474,
+    "source_bindings": 159,
+    "raw_sha256": {
+      "result.json": "a674886613300ed96e9f9d3f9e9366d7672542b97a481e375ae8b27d2c4825a7",
+      "events.jsonl": "49dfb0ccd851d7c6c4496d15604874cee3d50d4e19746340edeefa983e47c717",
+      "performance-unit.json": "f10c270d89d6c9271392c5f2a215e303ed13737e59aa074abfe281fd23db2e4a",
+      "release.json": "681543fa034053692c11ab15a5ba933fb359423000b513442a1c2019fa44ee62"
+    },
+    "scope": "one same-protocol R17 full40 arm; attribution/repetitions/quality/lifecycle separate",
+    "packed": {
+      "packed_performance_receipts_verified": true,
+      "workers": {
+        "0": 59,
+        "1": 60,
+        "2": 61,
+        "3": 62
+      },
+      "requests": 40,
+      "packed_groups": 7104,
+      "shadow_requests": 0,
+      "multi_hot_shadow_layers": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "scope": "timed packed call-stage/private finite precommit receipts; no numerical shadow equivalence or task quality claim"
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 59,
+          "host_pid": 3440886,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 60,
+          "host_pid": 3440887,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 61,
+          "host_pid": 3440888,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 62,
+          "host_pid": 3440889,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 40,
+      "covered": [
+        "cmpl-a3d5349088f25eba",
+        "cmpl-b2575b39ac5c5686",
+        "cmpl-9c36d1673c5d46c0",
+        "cmpl-aa11c367bc5f6be2",
+        "cmpl-b16eb463203cf1a8",
+        "cmpl-ad415afd43d23be5",
+        "cmpl-9d6bb3a23aff725c",
+        "cmpl-b5adcf4a17b39442",
+        "cmpl-82ab86dbb140ab8a",
+        "cmpl-a3efa730c898ec99",
+        "cmpl-9a1f7e69f52e0066",
+        "cmpl-8d118136114c7fdb",
+        "cmpl-8ef8a7d90d784297",
+        "cmpl-91fb484ac211f285",
+        "cmpl-ac3406b8b1a26a90",
+        "cmpl-bfe4dffb30a20955",
+        "cmpl-b382ee01c0dc7ac7",
+        "cmpl-be2114af5367db73",
+        "cmpl-a3d3c3fae4580646",
+        "cmpl-b22b2c8e34a9f536",
+        "cmpl-ba7bf2932c702eef",
+        "cmpl-8b8147b3e8a1d71e",
+        "cmpl-b0365767c4134f99",
+        "cmpl-9f37130864518253",
+        "cmpl-b48fe6d13b3037e3",
+        "cmpl-9b59adf094a5ff72",
+        "cmpl-a069905cd1623930",
+        "cmpl-b9cc6d09347d53e1",
+        "cmpl-b71bbbf3ce28719a",
+        "cmpl-b8d7ae8ecbf3f9cc",
+        "cmpl-8aa9c0cb74ded8a7",
+        "cmpl-9e17df1e179b1d60",
+        "cmpl-b7e9736e7f291a19",
+        "cmpl-8037ca02fc6cdf60",
+        "cmpl-9cb0e88f63b3ae39",
+        "cmpl-9dd36c084c4c62dc",
+        "cmpl-bf22e194cf671b10",
+        "cmpl-a010c0b477a3de79",
+        "cmpl-b6614065b78d7545",
+        "cmpl-80c433c13592b0dc"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 59,
+        "1": 60,
+        "2": 61,
+        "3": 62
+      },
+      "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+    },
+    "request_map": {
+      "cmpl-a3d5349088f25eba": "cmpl-a3d5349088f25eba-0-9c52703d",
+      "cmpl-b2575b39ac5c5686": "cmpl-b2575b39ac5c5686-0-b9f8677c",
+      "cmpl-9c36d1673c5d46c0": "cmpl-9c36d1673c5d46c0-0-b3f908f6",
+      "cmpl-aa11c367bc5f6be2": "cmpl-aa11c367bc5f6be2-0-947286fc",
+      "cmpl-b16eb463203cf1a8": "cmpl-b16eb463203cf1a8-0-b178bf56",
+      "cmpl-ad415afd43d23be5": "cmpl-ad415afd43d23be5-0-b82972ea",
+      "cmpl-9d6bb3a23aff725c": "cmpl-9d6bb3a23aff725c-0-9743cdea",
+      "cmpl-b5adcf4a17b39442": "cmpl-b5adcf4a17b39442-0-bdad2825",
+      "cmpl-82ab86dbb140ab8a": "cmpl-82ab86dbb140ab8a-0-aec7ec4c",
+      "cmpl-a3efa730c898ec99": "cmpl-a3efa730c898ec99-0-87b1380d",
+      "cmpl-9a1f7e69f52e0066": "cmpl-9a1f7e69f52e0066-0-8b43587d",
+      "cmpl-8d118136114c7fdb": "cmpl-8d118136114c7fdb-0-ac76db9d",
+      "cmpl-8ef8a7d90d784297": "cmpl-8ef8a7d90d784297-0-b50a8306",
+      "cmpl-91fb484ac211f285": "cmpl-91fb484ac211f285-0-bcdf7720",
+      "cmpl-ac3406b8b1a26a90": "cmpl-ac3406b8b1a26a90-0-8c0a728e",
+      "cmpl-bfe4dffb30a20955": "cmpl-bfe4dffb30a20955-0-8ebc6dfc",
+      "cmpl-b382ee01c0dc7ac7": "cmpl-b382ee01c0dc7ac7-0-b3695172",
+      "cmpl-be2114af5367db73": "cmpl-be2114af5367db73-0-81ed4dcf",
+      "cmpl-a3d3c3fae4580646": "cmpl-a3d3c3fae4580646-0-a021f7b2",
+      "cmpl-b22b2c8e34a9f536": "cmpl-b22b2c8e34a9f536-0-948291f7",
+      "cmpl-ba7bf2932c702eef": "cmpl-ba7bf2932c702eef-0-926a6053",
+      "cmpl-8b8147b3e8a1d71e": "cmpl-8b8147b3e8a1d71e-0-86459363",
+      "cmpl-b0365767c4134f99": "cmpl-b0365767c4134f99-0-810bf77c",
+      "cmpl-9f37130864518253": "cmpl-9f37130864518253-0-b58519c6",
+      "cmpl-b48fe6d13b3037e3": "cmpl-b48fe6d13b3037e3-0-ad241c6d",
+      "cmpl-9b59adf094a5ff72": "cmpl-9b59adf094a5ff72-0-a11e545b",
+      "cmpl-a069905cd1623930": "cmpl-a069905cd1623930-0-89599ef8",
+      "cmpl-b9cc6d09347d53e1": "cmpl-b9cc6d09347d53e1-0-b72db5e9",
+      "cmpl-b71bbbf3ce28719a": "cmpl-b71bbbf3ce28719a-0-9ac1ba7d",
+      "cmpl-b8d7ae8ecbf3f9cc": "cmpl-b8d7ae8ecbf3f9cc-0-b0863281",
+      "cmpl-8aa9c0cb74ded8a7": "cmpl-8aa9c0cb74ded8a7-0-a8fc9cae",
+      "cmpl-9e17df1e179b1d60": "cmpl-9e17df1e179b1d60-0-b66e5ef2",
+      "cmpl-b7e9736e7f291a19": "cmpl-b7e9736e7f291a19-0-a6b91649",
+      "cmpl-8037ca02fc6cdf60": "cmpl-8037ca02fc6cdf60-0-950d9ef3",
+      "cmpl-9cb0e88f63b3ae39": "cmpl-9cb0e88f63b3ae39-0-9064b9b1",
+      "cmpl-9dd36c084c4c62dc": "cmpl-9dd36c084c4c62dc-0-9f29c042",
+      "cmpl-bf22e194cf671b10": "cmpl-bf22e194cf671b10-0-ac6f1b21",
+      "cmpl-a010c0b477a3de79": "cmpl-a010c0b477a3de79-0-ad24a1b6",
+      "cmpl-b6614065b78d7545": "cmpl-b6614065b78d7545-0-8cce02d3",
+      "cmpl-80c433c13592b0dc": "cmpl-80c433c13592b0dc-0-9260bad3"
+    },
+    "live_release_verified": true,
+    "snapshot_timed_policy_verified": true,
+    "transfer_treatment": "async",
+    "timed_transfer_policy_verified": true
+  },
+  "prior_audit_failure": {
+    "operation": "exec-0000000000000d75",
+    "exit_code": 1,
+    "error": "strict8233bindEADDRINUSE",
+    "state_operation": "exec-0000000000000d76",
+    "observed": "No listener; four TCP TIME-WAIT entries and strictbindbusy",
+    "recheck": "exec-0000000000000d77",
+    "recheck_observed": "listener/TCP empty, strictbindfree; no network mutation",
+    "recovery": "Same immutable raw replay0d78passed after natural state change; no device rerun"
+  },
+  "single_pair_comparison": {
+    "blocking_report": "R17_TRANSFER_BLOCKING_R1_TERMINAL_AUDIT_20261016.json",
+    "relative_change_percent": {
+      "weighted_tpot_ms": -1.2545278286323516,
+      "ttft_p95_ms": -2.3446895642492875,
+      "tpot_p95_ms": -1.2956186321709453
+    },
+    "formula": "(async-blocking)/blocking*100; negative is lower latency",
+    "interpretation": "small single-round direction only; no significance/repeated robustness/native HYPIC gain established"
+  },
+  "decision": "valid async one-arm evidence; complete native reference before whole-method direction, no optimization acceptance",
+  "remaining": [
+    "native/R1",
+    "required matched repeated G1-G4 performance if progression valid",
+    "381-perarm quality",
+    "lifecycle",
+    "complete29functional"
+  ]
+}
