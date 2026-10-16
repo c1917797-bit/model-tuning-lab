@@ -1,0 +1,118 @@
+{
+  "schema": "hypic-lifecycle-official-source-review/v1",
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "operations": {
+    "initial_pythonpath_scan": "exec-0000000000000ac6",
+    "resolved_import_spec": "exec-0000000000000ac7",
+    "registration": "exec-0000000000000aca"
+  },
+  "source": {
+    "roots": [
+      "/vllm-workspace/vllm/vllm"
+    ],
+    "sources": [
+      {
+        "path": "/vllm-workspace/vllm/vllm/entrypoints/llm.py",
+        "sha256": "fd28c3f53740d196689ac97ca566bd23879d082b3e9c7eb9ca20f0a88caf6e7e",
+        "contexts": [
+          {
+            "line": 383,
+            "text": "                \"renderer thread pool is only consumed by the async \"\n                \"renderer path used by `vllm serve` / `AsyncLLM`, so this \"\n                \"setting has no effect here.\",\n                self.model_config.renderer_num_workers,\n            )\n\n        PoolingOfflineMixin.__init__(self)\n\n        # Cache for __repr__ to avoid repeated collective_rpc calls\n        self._cached_repr: str | None = None\n\n    @classmethod\n    def from_engine_args(cls, engine_args: EngineArgs) -> \"LLM\":\n        \"\"\"Create an LLM instance from EngineArgs.\"\"\"\n        return cls(**vars(engine_args))\n\n    def get_tokenizer(self) -> TokenizerLike:\n        return self.llm_engine.get_tokenizer()\n\n    def get_world_size(self, include_dp: bool = True) -> int:\n        \"\"\"Get the world size from the parallel config.\n\n        Args:\n            include_dp: If True (default), returns the world size including\n                data parallelism (TP * PP * DP). If False, returns the world\n                size without data parallelism (TP * PP).\n\n        Returns:"
+          },
+          {
+            "line": 571,
+            "text": "        Returns:\n            A list of output objects for all completed requests.\n        \"\"\"\n        if output_type is None:\n            output_type = (RequestOutput, PoolingRequestOutput)\n\n        return self._run_engine(output_type, use_tqdm=use_tqdm)\n\n    def collective_rpc(\n        self,\n        method: str | Callable[..., _R],\n        timeout: float | None = None,\n        args: tuple = (),\n        kwargs: dict[str, Any] | None = None,\n    ) -> list[_R]:\n        \"\"\"\n        Execute an RPC call on all workers.\n\n        Args:\n            method: Name of the worker method to execute, or a callable that\n                is serialized and sent to all workers to execute.\n\n                If the method is a callable, it should accept an additional\n                `self` argument, in addition to the arguments passed in `args`\n                and `kwargs`. The `self` argument will be the worker object.\n            timeout: Maximum time in seconds to wait for execution. Raises a\n                [`TimeoutError`][] on timeout. `None` means wait indefinitely.\n            args: Positional arguments to pass to the worker method."
+          },
+          {
+            "line": 601,
+            "text": "        Returns:\n            A list containing the results from each worker.\n\n        Note:\n            It is recommended to use this API to only pass control messages,\n            and set up data-plane communication to pass data.\n        \"\"\"\n\n        return self.llm_engine.collective_rpc(method, timeout, args, kwargs)\n\n    def apply_model(self, func: Callable[[nn.Module], _R]) -> list[_R]:\n        \"\"\"\n        Run a function directly on the model inside each worker,\n        returning the result for each of them.\n\n        !!! warning\n            To reduce the overhead of data transfer, avoid returning large\n            arrays or tensors from this method. If you must return them,\n            make sure you move them to CPU first to avoid taking up additional\n            VRAM!\n        \"\"\"\n        return self.llm_engine.apply_model(func)\n\n    def chat(\n        self,\n        messages: list[ChatCompletionMessageParam]\n        | Sequence[list[ChatCompletionMessageParam]],\n        sampling_params: SamplingParams | Sequence[SamplingParams] | None = None,"
+          },
+          {
+            "line": 872,
+            "text": "\n        Args:\n            request: Weight transfer initialization request with backend-specific info\n        \"\"\"\n        init_info_dict = (\n            request[\"init_info\"] if isinstance(request, dict) else request.init_info\n        )\n\n        self.llm_engine.collective_rpc(\n            \"init_weight_transfer_engine\", kwargs={\"init_info\": init_info_dict}\n        )\n\n    def start_weight_update(self, is_checkpoint_format: bool = True) -> None:\n        \"\"\"Start a new weight update.\"\"\"\n        self.llm_engine.collective_rpc(\n            \"start_weight_update\",\n            kwargs={\"is_checkpoint_format\": is_checkpoint_format},\n        )\n\n    def update_weights(self, request: WeightTransferUpdateRequest | dict) -> None:\n        \"\"\"\n        Update the weights of the model.\n\n        Args:\n            request: Weight update request with backend-specific update info\n        \"\"\"\n        update_info_dict = (\n            request[\"update_info\"] if isinstance(request, dict) else request.update_info"
+          },
+          {
+            "line": 878,
+            "text": "        )\n\n        self.llm_engine.collective_rpc(\n            \"init_weight_transfer_engine\", kwargs={\"init_info\": init_info_dict}\n        )\n\n    def start_weight_update(self, is_checkpoint_format: bool = True) -> None:\n        \"\"\"Start a new weight update.\"\"\"\n        self.llm_engine.collective_rpc(\n            \"start_weight_update\",\n            kwargs={\"is_checkpoint_format\": is_checkpoint_format},\n        )\n\n    def update_weights(self, request: WeightTransferUpdateRequest | dict) -> None:\n        \"\"\"\n        Update the weights of the model.\n\n        Args:\n            request: Weight update request with backend-specific update info\n        \"\"\"\n        update_info_dict = (\n            request[\"update_info\"] if isinstance(request, dict) else request.update_info\n        )\n\n        self.llm_engine.collective_rpc(\n            \"update_weights\", kwargs={\"update_info\": update_info_dict}\n        )\n"
+          },
+          {
+            "line": 894,
+            "text": "\n        Args:\n            request: Weight update request with backend-specific update info\n        \"\"\"\n        update_info_dict = (\n            request[\"update_info\"] if isinstance(request, dict) else request.update_info\n        )\n\n        self.llm_engine.collective_rpc(\n            \"update_weights\", kwargs={\"update_info\": update_info_dict}\n        )\n\n    def finish_weight_update(self) -> None:\n        \"\"\"Finish the current weight update.\"\"\"\n        self.llm_engine.collective_rpc(\"finish_weight_update\")\n\n    def __repr__(self) -> str:\n        \"\"\"Return a transformers-style hierarchical view of the model.\"\"\"\n        # Cache the result to avoid repeated collective_rpc calls\n        if self._cached_repr is None:\n            results = self.llm_engine.collective_rpc(\"get_model_inspection\")\n            # In distributed settings, we get results from all workers\n            # Just return the first one (they should all be the same)\n            if results:\n                self._cached_repr = results[0]\n            else:\n                self._cached_repr = f\"LLM(model={self.model_config.model!r})\"\n        return self._cached_repr"
+          },
+          {
+            "line": 900,
+            "text": "        )\n\n        self.llm_engine.collective_rpc(\n            \"update_weights\", kwargs={\"update_info\": update_info_dict}\n        )\n\n    def finish_weight_update(self) -> None:\n        \"\"\"Finish the current weight update.\"\"\"\n        self.llm_engine.collective_rpc(\"finish_weight_update\")\n\n    def __repr__(self) -> str:\n        \"\"\"Return a transformers-style hierarchical view of the model.\"\"\"\n        # Cache the result to avoid repeated collective_rpc calls\n        if self._cached_repr is None:\n            results = self.llm_engine.collective_rpc(\"get_model_inspection\")\n            # In distributed settings, we get results from all workers\n            # Just return the first one (they should all be the same)\n            if results:\n                self._cached_repr = results[0]\n            else:\n                self._cached_repr = f\"LLM(model={self.model_config.model!r})\"\n        return self._cached_repr"
+          },
+          {
+            "line": 904,
+            "text": "        )\n\n    def finish_weight_update(self) -> None:\n        \"\"\"Finish the current weight update.\"\"\"\n        self.llm_engine.collective_rpc(\"finish_weight_update\")\n\n    def __repr__(self) -> str:\n        \"\"\"Return a transformers-style hierarchical view of the model.\"\"\"\n        # Cache the result to avoid repeated collective_rpc calls\n        if self._cached_repr is None:\n            results = self.llm_engine.collective_rpc(\"get_model_inspection\")\n            # In distributed settings, we get results from all workers\n            # Just return the first one (they should all be the same)\n            if results:\n                self._cached_repr = results[0]\n            else:\n                self._cached_repr = f\"LLM(model={self.model_config.model!r})\"\n        return self._cached_repr"
+          },
+          {
+            "line": 906,
+            "text": "    def finish_weight_update(self) -> None:\n        \"\"\"Finish the current weight update.\"\"\"\n        self.llm_engine.collective_rpc(\"finish_weight_update\")\n\n    def __repr__(self) -> str:\n        \"\"\"Return a transformers-style hierarchical view of the model.\"\"\"\n        # Cache the result to avoid repeated collective_rpc calls\n        if self._cached_repr is None:\n            results = self.llm_engine.collective_rpc(\"get_model_inspection\")\n            # In distributed settings, we get results from all workers\n            # Just return the first one (they should all be the same)\n            if results:\n                self._cached_repr = results[0]\n            else:\n                self._cached_repr = f\"LLM(model={self.model_config.model!r})\"\n        return self._cached_repr"
+          }
+        ]
+      },
+      {
+        "path": "/vllm-workspace/vllm/vllm/entrypoints/serve/dev/rpc/api_router.py",
+        "sha256": "02b3ac71867b333548b15cb5d8382877d587b211c4ef80fdd881712ab523d107",
+        "contexts": [
+          {
+            "line": 23,
+            "text": "\nrouter = APIRouter()\n\n\ndef engine_client(request: Request) -> EngineClient:\n    return request.app.state.engine_client\n\n\n@router.post(\"/collective_rpc\")\nasync def collective_rpc(raw_request: Request):\n    try:\n        body = await raw_request.json()\n    except json.JSONDecodeError as e:\n        raise HTTPException(\n            status_code=HTTPStatus.BAD_REQUEST.value,\n            detail=f\"JSON decode error: {e}\",\n        ) from e\n    method = body.get(\"method\")\n    if method is None:\n        raise HTTPException(\n            status_code=HTTPStatus.BAD_REQUEST.value,\n            detail=\"Missing 'method' in request body\",\n        )\n    # For security reason, only serialized string args/kwargs are passed.\n    # User-defined `method` is responsible for deserialization if needed.\n    args: list[str] = body.get(\"args\", [])\n    kwargs: dict[str, str] = body.get(\"kwargs\", {})\n    timeout: float | None = body.get(\"timeout\")"
+          },
+          {
+            "line": 24,
+            "text": "router = APIRouter()\n\n\ndef engine_client(request: Request) -> EngineClient:\n    return request.app.state.engine_client\n\n\n@router.post(\"/collective_rpc\")\nasync def collective_rpc(raw_request: Request):\n    try:\n        body = await raw_request.json()\n    except json.JSONDecodeError as e:\n        raise HTTPException(\n            status_code=HTTPStatus.BAD_REQUEST.value,\n            detail=f\"JSON decode error: {e}\",\n        ) from e\n    method = body.get(\"method\")\n    if method is None:\n        raise HTTPException(\n            status_code=HTTPStatus.BAD_REQUEST.value,\n            detail=\"Missing 'method' in request body\",\n        )\n    # For security reason, only serialized string args/kwargs are passed.\n    # User-defined `method` is responsible for deserialization if needed.\n    args: list[str] = body.get(\"args\", [])\n    kwargs: dict[str, str] = body.get(\"kwargs\", {})\n    timeout: float | None = body.get(\"timeout\")\n    results = await engine_client(raw_request).collective_rpc("
+          },
+          {
+            "line": 43,
+            "text": "            status_code=HTTPStatus.BAD_REQUEST.value,\n            detail=\"Missing 'method' in request body\",\n        )\n    # For security reason, only serialized string args/kwargs are passed.\n    # User-defined `method` is responsible for deserialization if needed.\n    args: list[str] = body.get(\"args\", [])\n    kwargs: dict[str, str] = body.get(\"kwargs\", {})\n    timeout: float | None = body.get(\"timeout\")\n    results = await engine_client(raw_request).collective_rpc(\n        method=method, timeout=timeout, args=tuple(args), kwargs=kwargs\n    )\n    if results is None:\n        return Response(status_code=200)\n    response: list[Any] = []\n    for result in results:\n        if result is None or isinstance(result, dict | list):\n            response.append(result)\n        else:\n            response.append(str(result))\n    return JSONResponse(content={\"results\": response})\n\n\ndef attach_router(app: FastAPI):\n    app.include_router(router)"
+          }
+        ]
+      }
+    ],
+    "device_mounted": false,
+    "model_started": false
+  },
+  "registration": {
+    "device_mounted": false,
+    "model_started": false,
+    "registration": [
+      {
+        "path": "/vllm-workspace/vllm/vllm/entrypoints/openai/cli_args.py",
+        "sha256": "b10da703f00977dcbbd379f6e0898087a8036693258c4d0c066a2a99b19b0334",
+        "contexts": [
+          {
+            "line": 152,
+            "text": "    Requires `--enable-log-requests`. As with `--enable-log-requests`,\n    information is only logged at INFO level at maximum.\"\"\"\n    enable_log_deltas: bool = True\n    \"\"\"If set to False, output deltas will not be logged. Relevant only if \n    --enable-log-outputs is set.\n    \"\"\"\n    log_error_stack: bool = envs.VLLM_SERVER_DEV_MODE\n    \"\"\"If set to True, log the stack trace of error responses\"\"\"\n    tokens_only: bool = False\n    \"\"\"\n    If set to True, only enable the Tokens In<>Out endpoint.\n    This is intended for use in a Disaggregated Everything setup.\n    \"\"\"\n    fingerprint_mode: Literal[\"full\", \"hash\", \"custom\", \"none\"] = \"full\"\n    \"\"\"Controls the ``system_fingerprint`` field on responses.\n\n    - ``full`` (default): ``vllm-<version>[-<parallelism>]-<hash8>``. Encodes\n      server version, non-trivial parallelism degrees (tp/pp/dp/ep), and an\n      8-char config hash.\n    - ``hash``: ``vllm-<version>-<hash8>``. Parallelism stripped."
+          }
+        ]
+      },
+      {
+        "path": "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py",
+        "sha256": "6d8df133280618a1afffa9d03e4655af011f2f94ced0f90c15f7fc8b0afc538f",
+        "contexts": [
+          {
+            "line": 197,
+            "text": "    from vllm.entrypoints.serve.sagemaker.api_router import (\n        attach_router as register_sagemaker_api_router,\n    )\n\n    register_sagemaker_api_router(app, supported_tasks, model_config)\n\n    if envs.VLLM_SERVER_DEV_MODE:\n        from vllm.entrypoints.serve import register_vllm_dev_api_routers\n\n        register_vllm_dev_api_routers(app)\n\n    if \"generate\" in supported_tasks:\n        from vllm.entrypoints.generate.api_router import (\n            register_generate_api_routers,\n        )\n\n        register_generate_api_routers(app)\n\n        from vllm.entrypoints.serve.disagg.api_router import (\n            attach_router as attach_disagg_router,"
+          }
+        ]
+      },
+      {
+        "path": "/vllm-workspace/vllm/vllm/entrypoints/serve/__init__.py",
+        "sha256": "3384dadaaab680ce506cbc8377960f2e8599ebd9dc616987f3fc7d8fc9780d86",
+        "contexts": [
+          {
+            "line": 49,
+            "text": "    attach_cache_router(app)\n\n    from .dev.rlhf.api_router import attach_router as attach_rlhf_router\n\n    attach_rlhf_router(app)\n\n    from .dev.rpc.api_router import attach_router as attach_rpc_router\n\n    attach_rpc_router(app)\n\n    from .dev.server_info.api_router import (\n        attach_router as attach_server_info_router,\n    )\n\n    attach_server_info_router(app)\n\n    from .dev.sleep.api_router import attach_router as attach_sleep_router\n\n    attach_sleep_router(app)"
+          }
+        ]
+      }
+    ]
+  },
+  "device_allocation": false,
+  "model_started": false,
+  "decision": "Do not enableVLLM_SERVER_DEV_MODE. collective_rpcexists butregistersdevelopmentroutes; lifecycle canbeverified throughdefaultoffswitch andownedcontainerstop/restart withpackageunmounted. No newadminsurface needed.",
+  "scope": "Officialimage readonlysource review only; no actual uninstall/restart validation."
+}
