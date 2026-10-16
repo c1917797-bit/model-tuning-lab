@@ -1,3 +1,16 @@
+# LATEST attempt2 external interruption — no owned live job
+
+0a94 terminalexit1,0modelrequests,57isolation samples. Firstforeign10:06:15UTC
+NPU0PID4162634;0a99 independently maps it to exact /cannbench_ds CIDefc5e45e...
+All147sources unchanged;ownCID0316d114...absent/8233strictbindfree.
+10:07:17UTCphysical0stillforeignoccupied;external untouched. Raw attempt2immutable.
+Both baselineattempts rejected; R16G3valid1/12, no pairedgain/quality claim.
+Do not immediately repeat identical transient-idle initialization. Human asked
+for confirmedstable>=30min window; no newauthority needed for previouslyauthorized
+scope, but actualforeignoccupancy blocks launch. Continue offlinefullquality/
+lifecycle preparation;R2catalogpackagefrozen159bindings,notdeviceaccepted.
+Human24hstop2026-10-17T06:48:09Z unchanged;fullgoalactive/incomplete.
+
 # CURRENT baseline attempt2 live — supersedes prior no-owned-job
 
 0a93 fresh10:03:40UTC directma admissionPASS: physical0-3empty,8233/HCCLfree,

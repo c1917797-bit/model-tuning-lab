@@ -1,0 +1,69 @@
+{
+  "schema": "hypic-performance-terminal/v1",
+  "controller": "exec-0000000000000a94",
+  "contract": "FORMAL_R16_20261016_G1_R1_ATTEMPT2_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-r16-20261016-g1-r1-attempt2",
+  "state": "REJECTED_EXTERNAL_INTERRUPTION",
+  "independent_evidence_operation": "exec-0000000000000a99",
+  "evidence": {
+    "result": {
+      "valid": false,
+      "error": {
+        "type": "RuntimeError",
+        "message": "Isolation guard failed: [{'type': 'RuntimeError', 'message': 'Foreign physical process detected', 'raw': None}]"
+      },
+      "guard_errors": [
+        {
+          "type": "RuntimeError",
+          "message": "Foreign physical process detected",
+          "raw": null
+        }
+      ],
+      "isolation_samples": 57,
+      "responses": 0,
+      "worker_pids": [],
+      "physical_devices_seen": [],
+      "release": {
+        "owned_container": "0316d11448d6f0915760a48c09ad18c61e891ff95ee97fdb3141450cabc94759",
+        "removed": true,
+        "port_free": true,
+        "final_physical_processes": [
+          [
+            0,
+            4162634
+          ]
+        ]
+      }
+    },
+    "first_foreign_utc": "2026-10-16T10:06:15.657122+00:00",
+    "foreign": [
+      {
+        "npu": 0,
+        "pid": 4162634,
+        "cid": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+        "name": "/cannbench_ds",
+        "state": "running"
+      }
+    ],
+    "raw_sha256": {
+      "result.json": "558deec0c10965631ae37fbf3cfe65cd43bd5d0eabeb4470dc71496464625644",
+      "events.jsonl": "a8b54be124b786c43934d3fd110dce3a2bd1e7a5353b7ec8a3862f8eb0622487",
+      "release.json": "32028121c8b43b6706c56435e6ff57ea78797fea085f84e9638333445f1ba621"
+    },
+    "sources147_unchanged": true,
+    "own_absence": {
+      "exit": 1,
+      "stdout": "[]\n",
+      "stderr": "Error: No such object: 0316d11448d6f0915760a48c09ad18c61e891ff95ee97fdb3141450cabc94759\n"
+    },
+    "now_utc": "2026-10-16T10:07:17.961538+00:00",
+    "now_physical": [
+      [
+        0,
+        4162634
+      ]
+    ],
+    "port_bind_free": true
+  },
+  "conclusion": "0requests;57isolation samples. No model or performance claim. All147sourcesunchanged, exactownCIDabsence and8233strictbindverified; physical0stillforeigncannbench_ds. External untouched. Do not immediately repeat identical transient-idle initialization; coordinate confirmedstablewindow while offline gates continue. Longgoalactive."
+}
