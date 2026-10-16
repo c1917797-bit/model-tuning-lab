@@ -1,0 +1,26 @@
+{
+  "domain": {
+    "bytes": 1438,
+    "sha256": "f465cdefc931ef2267ee5c986b36498dc7cd5c25b9805cfd37a3da1f46589aed",
+    "original_closure": "def closure(m):\n refs=[m['split_qualification_api_ref'],m['bridge024_source_ref'],m['bridge024_owner_ref'],m['reviewed_domain_template_ref'],m['component_cpu_owner_ref'],m['production_build_ref'],m['split_kernel_source_ref'],m['library_ref'],m['debug_library']]\n owner=C.obj(m['bridge024_owner_ref']);prod=C.obj(owner['result']);pair=C.obj(owner['independent_consumer']);cpu=C.obj(m['component_cpu_owner_ref'])\n refs.extend([owner['result'],owner['independent_consumer'],prod['plan'],cpu['result'],pair['original_strict_consumer'],pair['domain_consumer']])\n refs.extend(pair['initial_anchor_refs'].values())\n refs.extend(C.obj(m['bridge024_source_ref'])['files'].values())\n return refs\n",
+    "replacement_closure": "def closure(m):\n return api(m).closure(C,m)\n"
+  },
+  "binder": {
+    "bytes": 4216,
+    "sha256": "1e118115d0d4b5b2ae3afb3aee91363df8d6d519a16faec3ebb33161e527ee09",
+    "edits": [
+      [
+        "for k in('bridge-source-ref','bridge-owner-ref','component-cpu-owner-ref'):",
+        "for k in('bridge-source-ref','bridge-owner-ref','component-cpu-owner-ref','recovery-model-plan-ref','recovery-receiver-source-ref'):"
+      ],
+      [
+        " pt=P/'plugin/SOURCE_TEMPLATE.json';",
+        " O.need(a.recovery_model_plan_ref is not None and a.recovery_receiver_source_ref is not None,'actual recovery input/reader source pending')\n m.update(recovery_model_plan_ref=json.loads(a.recovery_model_plan_ref),recovery_receiver_source_ref=json.loads(a.recovery_receiver_source_ref))\n pt=P/'plugin/SOURCE_TEMPLATE.json';"
+      ],
+      [
+        " for k in('admission_mode','reviewed_domain_template_ref','reviewed_domain_files','bridge024_source_ref','bridge024_owner_ref','component_cpu_owner_ref','production_build_ref','debug_build_ref','split_kernel_source_ref','debug_kernel_source_ref','library_ref','debug_library','composite_source_ref','composite_cpu_owner_ref'):",
+        " for k in('recovery_model_plan_ref','recovery_receiver_source_ref','admission_mode','reviewed_domain_template_ref','reviewed_domain_files','bridge024_source_ref','bridge024_owner_ref','component_cpu_owner_ref','production_build_ref','debug_build_ref','split_kernel_source_ref','debug_kernel_source_ref','library_ref','debug_library','composite_source_ref','composite_cpu_owner_ref'):"
+      ]
+    ]
+  }
+}

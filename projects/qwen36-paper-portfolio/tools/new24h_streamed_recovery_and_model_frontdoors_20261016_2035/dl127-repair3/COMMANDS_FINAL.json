@@ -1,0 +1,75 @@
+{
+  "bind": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair3/run_recovery.py",
+    "--execute",
+    "--template-ref",
+    "{\"bytes\": 7483, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair3/SOURCE_TEMPLATE.json\", \"sha256\": \"eaea9b7e041b6e3b37a032e84c31a06eed8c66ce40119764a61a2c7af46332fd\"}",
+    "--phase",
+    "bind"
+  ],
+  "cpu": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair3/run_recovery.py",
+    "--execute",
+    "--template-ref",
+    "{\"bytes\": 7483, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair3/SOURCE_TEMPLATE.json\", \"sha256\": \"eaea9b7e041b6e3b37a032e84c31a06eed8c66ce40119764a61a2c7af46332fd\"}",
+    "--phase",
+    "cpu",
+    "--host-cpu",
+    "166",
+    "--guest-cpu",
+    "0"
+  ],
+  "metadata_pressure": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair3/memory_pressure127.py",
+    "--entries",
+    "135520"
+  ],
+  "prerequisite": "MAIN fresh lease/idle/protected/80GiBcommitment/100GiBfree and exact fresh output before CPU; no 101 admission",
+  "software": {
+    "argv": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair3",
+      "-p",
+      "test*.py"
+    ],
+    "environment": {
+      "SOURCE127_DONOR_HOST": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog061-runtime-source-recovery-new24h-v1-066/host.py",
+      "SOURCE127_ORIGINAL": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/run_consumer088.py"
+    }
+  },
+  "sourceaudit": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair3/run_recovery.py",
+    "--execute",
+    "--template-ref",
+    "{\"bytes\": 7483, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair3/SOURCE_TEMPLATE.json\", \"sha256\": \"eaea9b7e041b6e3b37a032e84c31a06eed8c66ce40119764a61a2c7af46332fd\"}",
+    "--phase",
+    "sourceaudit",
+    "--host-cpu",
+    "166",
+    "--guest-cpu",
+    "0"
+  ],
+  "template": {
+    "bytes": 7483,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair3/SOURCE_TEMPLATE.json",
+    "sha256": "eaea9b7e041b6e3b37a032e84c31a06eed8c66ce40119764a61a2c7af46332fd"
+  }
+}

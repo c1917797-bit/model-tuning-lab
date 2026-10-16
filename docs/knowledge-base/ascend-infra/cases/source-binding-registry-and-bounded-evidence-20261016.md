@@ -655,3 +655,41 @@ new recovery-to-model receiver remain preparation, not recovered PASS.
 Exact evidence, unchanged cutoff, actual BOLE scope, failed recovery and remaining
 model/performance/task edges are in
 PAGED_TREE_PASS_AND_RECOVERY_RSS_FIRSTFAULT_20261016_1920UTC.json.
+
+
+## 2026-10-16: streamed readset fixes RSS, not mathematical timeout
+
+Actual127R3 passed23 host controls and an actual-scale synthetic readset probe
+with18,358,272-byte peak metadata RSS. Its actual38304-byte SOURCE binds135503
+indexed Refs and82 parents; complete data SHA checks and all681 original raw inputs
+remain required. The original R2 failure is retained. The new guest really started
+under an observed237312KiB aggregate host+child peak, below256MiB. Synthetic
+representation PASS is not numerical correctness or whole-model qualification.
+
+The actual independent child still timed out at585.6111058300012s. CHILD127 and
+timestamped container logs prove this first fault; the later owner records1250.109s
+and a reserve-clock/cleanup error. Preserve both. Fresh exact-CID inspection proved
+exited1/Pid0/noExec/noOOM/Devices[]; it does not rewrite the old failed release flag.
+No DOMAIN result or complete160-row mathematical verdict exists.
+
+Read the executed callgraph before assigning causality. The original Lane class
+is compiled into a namespace containing the current explicit cutoff: an old
+calendar leak is not proved. Ordinary calls reserve180 of the720-second lease,
+where the declared cleanup is90. Full pre/post source scans also cost real time.
+Source shows repeated raw blob hash/read passes and671 sidecar hydration/audit
+calls; these are hypotheses for runtime cost, not measured hotspot fractions.
+Run a bounded same-image Devices[] actual-frame timing discriminator before a
+minimal new codec/clock repair. Keep all math, frames, numerical thresholds,
+source fences and original budgets; no unchanged full retry or cached PASS.
+
+MAIN also attempted the model software suite with host Python3.9, which lacks
+torch and the guest TMPDIR. Preserve that wrong-environment failure. It is not an
+image regression and does not justify installing torch on the host. The genuine
+source audit separately found16 missing original017 dependencies, now restored
+missing-only with exact pinned bytes. Real same-image100-test plus IPC/EROFS
+admission remains required. Prepared128/101 receivers cannot borrow a failed
+127R3 result; a changed recovery needs its own explicit typed successor source.
+
+The user conditionally authorized one24h extension. Its separate workstream
+record is not activated: no new valid whole-model pair exists. Original clocks,
+performance/task gates and all failed evidence remain unchanged.

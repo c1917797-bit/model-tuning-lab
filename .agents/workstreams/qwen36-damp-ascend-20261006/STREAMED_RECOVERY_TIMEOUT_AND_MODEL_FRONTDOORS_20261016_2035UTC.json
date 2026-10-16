@@ -1,0 +1,136 @@
+{
+  "schema": "ascend.paper-portfolio.actual-streamed-recovery-timeout/v1",
+  "observed_utc": "2026-10-16T20:32:21.539466+00:00",
+  "previous_pushed_checkpoint": "c888048e8cfa06493f31228a0581e42112f72664",
+  "cutoff_utc": "2026-10-17T07:02:13Z",
+  "conditional_extension_authority": "CONDITIONAL_EXTENSION24H_AUTHORITY_20261016.json",
+  "extension_activated": false,
+  "archive": "projects/qwen36-paper-portfolio/tools/new24h_streamed_recovery_and_model_frontdoors_20261016_2035",
+  "DeltaLog": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair3/SOURCE_MANIFEST.json",
+      "bytes": 38304,
+      "sha256": "3875d7db6b641b8d934454a827a775c5e34d6eaf4185eba8485c31742a884e88"
+    },
+    "readset": {
+      "indexed_refs": 135503,
+      "total_refs": 135528,
+      "parents": 82,
+      "index_bytes": 41850019,
+      "index_sha256": "373622f0d5e20dcf840ed0a2d6690b8e80a7d99ba46600fe9b2ef6e72d3b5990",
+      "not_in_git": true
+    },
+    "actual_preflights": {
+      "software_tests_passed": 23,
+      "synthetic_metadata_peak_bytes": 18358272,
+      "synthetic_not_actual_math": true,
+      "bind_seconds": 267.919,
+      "sourceaudit_seconds": 131.815
+    },
+    "actual_owner_ref": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-anchor-recovery127repair3-MAIN-20261016-NEW24H-001/RESULT.json",
+      "bytes": 1381,
+      "sha256": "e837b54fd0c9b5fe89d3c6afa16425e1e4b969d0a6b6bd794fc490a20a3bf700"
+    },
+    "actual_child_ref": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-anchor-recovery127repair3-MAIN-20261016-NEW24H-001/native/result/CHILD127.json",
+      "bytes": 3028,
+      "sha256": "537b1cfdc8e1d4419aae61455bb3eafeaad9a4f854355a3810b6cc0621f3c61c"
+    },
+    "actual_log_ref": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-anchor-recovery127repair3-MAIN-20261016-NEW24H-001/native/actual-container-logs.json",
+      "bytes": 3956,
+      "sha256": "db80f532e397b2ab36f32c3d3807c58c7df8334f7e2bf54f5ae83cf4e207fbc2"
+    },
+    "actual_cleanup_ref": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-anchor-recovery127repair3-MAIN-20261016-NEW24H-001/native/cleanup-verdict.json",
+      "bytes": 356,
+      "sha256": "c253037a3574065ac8221ed6386f227a6fa75862ed57d10ae219b0e73a91b2df"
+    },
+    "first_child_fault": "TimeoutExpired after585.6111058300012 seconds",
+    "math_verdict": null,
+    "all_160_rows_consumed_unproven": true,
+    "parent_primary": "new48h authority cutoff/cleanup reserve exhausted",
+    "parent_elapsed_seconds": 1250.1086728500086,
+    "old_failed_release_flag_preserved": true,
+    "actual_observed_aggregate_host_child_peak_KiB": 237312,
+    "aggregate_limit_KiB": 262144,
+    "fresh_owned_guest_reopen": {
+      "observed_utc": "2026-10-16T20:32:21.539466+00:00",
+      "CID": "f1baf59e491b5d2ef1720d66b3f5289b5bd955acd616293d0144acb04be8d9f4",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 1,
+        "Error": "",
+        "StartedAt": "2026-10-16T19:53:39.09901518Z",
+        "FinishedAt": "2026-10-16T20:03:25.32136194Z"
+      },
+      "ExecIDs": null,
+      "Devices": [],
+      "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
+    },
+    "fresh_quiescence_not_retroactive_parent_PASS": true,
+    "attribution": {
+      "proved": [
+        "streamed readset eliminated pre-create aggregate256MiB refusal for this execution",
+        "mathematical child still timed out",
+        "ordinary Lane.call reserves180 of720 seconds while declared cleanup90 differs"
+      ],
+      "source_supported_hypotheses": [
+        "raw_codec hashes each tensor blob then reads it again",
+        "671 sidecar hydration/audit calls include320 repeated mixed sidecars",
+        "full readset/source checks dominate some host overhead"
+      ],
+      "not_measured": [
+        "per-stage hydration/audit wall/CPU/I/O fractions",
+        "last complete mathematical row before timeout"
+      ],
+      "refuted": [
+        "automatic old calendar cutoff leak; Lane class receives current explicit cutoff"
+      ],
+      "not_implied": [
+        "paper numerical failure",
+        "guest8GiB OOM",
+        "valid whole-model performance"
+      ]
+    },
+    "dependent_sources": {
+      "receiver128R1": "15 host controls passed; cannot bind because actual127R3 failed",
+      "model101R6": "source-only deployed; actual qualified predecessor absent; no NPU model run"
+    },
+    "actual_MAIN_environment_error": {
+      "receipt": {
+        "path": "/opt/host/vnf/austinov/run-dl101r6-preflight-MAIN-20261016-001/SOFTWARE_RECEIPT.json",
+        "bytes": 38526,
+        "sha256": "0b7042668c57d00d5d7b4d8fd02fa3ef89c7b6badd1db28c2938b9f8c5907226"
+      },
+      "cause": "host3.9 lacks torch and actual guest TMPDIR; this is not same-image regression or paper failure",
+      "restored_original017_sources": 16,
+      "restoration": "exact missing-only original bytes; no replacement runtime or image edits",
+      "same_image_aggregate": "100 tests plus actual IPC/EROFS remain pending"
+    },
+    "next": "130 bounded same-image Devices[] actual-sample timing, independent minimal codec/clock repair, then fresh full160 consumer and new typed downstream source pins only if qualified"
+  },
+  "BOLE": {
+    "actual_components": "72 GDN rows,12 conv cases,eight paged-tree cases passed within their recorded domains",
+    "real_model": "TP4 48GDN/16FA/MTP node path and actual cache staging/restore in preparation, not run",
+    "scheduler_committed": false,
+    "model_ready": false
+  },
+  "CURRENT": "DeltaLog measured diagnostic preparation; BOLE actual model integration; exact source archive/checkpoint concurrent",
+  "NEXT": "source-reviewed bounded actual CPU timing -> evidence-backed recovery successor; independently finish actual BOLE model entry",
+  "ready_NPU_successors": 0,
+  "current_MAIN_NPU_job": false,
+  "resource_snapshot": "0e62 actual SMI showed NPU4-7 no processes,AICore0,HBM2865-2868MiB; fresh admission mandatory before load",
+  "continuous_utilization": "unmeasured; no no-gap claim",
+  "formal_E2E_gain": null,
+  "task_accuracy": null,
+  "new_accepted_technique": false,
+  "HYPIC": "historical exemplar only"
+}

@@ -1,0 +1,51 @@
+{
+  "bind_actual_recovery_input": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-recovered-model-receiver-new24h-v1-128-repair1/bind128.py",
+    "--execute",
+    "--receiver-source-ref",
+    "{\"bytes\": 5480, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-recovered-model-receiver-new24h-v1-128-repair1/SOURCE_TEMPLATE.json\", \"sha256\": \"e7906c6310ebcb5fbe08e0d54d55640a622d795f80459c7fdde36cfd4f63ef7b\"}",
+    "--recovery-owner-ref",
+    "REQUIRED_ACTUAL_RECOVERY_OWNER_REF3",
+    "--recovery-cleanup-ref",
+    "REQUIRED_ACTUAL_RECOVERY_CLEANUP_REF3",
+    "--recovery-inspect-ref",
+    "REQUIRED_ACTUAL_RECOVERY_INSPECT_REF3",
+    "--component-cpu-owner-ref",
+    "REQUIRED_ACTUAL_COMPONENT_CPU_OWNER_REF3",
+    "--output",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RECOVERY_COMPONENT_INPUT128R1_MAIN_001.json"
+  ],
+  "model_overlay_extra_arguments": [
+    "--recovery-model-plan-ref",
+    "ACTUAL_REF3_OF_/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RECOVERY_COMPONENT_INPUT128R1_MAIN_001.json",
+    "--recovery-receiver-source-ref",
+    "{\"bytes\": 5480, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-recovered-model-receiver-new24h-v1-128-repair1/SOURCE_TEMPLATE.json\", \"sha256\": \"e7906c6310ebcb5fbe08e0d54d55640a622d795f80459c7fdde36cfd4f63ef7b\"}"
+  ],
+  "receiver_source_ref": {
+    "bytes": 5480,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-recovered-model-receiver-new24h-v1-128-repair1/SOURCE_TEMPLATE.json",
+    "sha256": "e7906c6310ebcb5fbe08e0d54d55640a622d795f80459c7fdde36cfd4f63ef7b"
+  },
+  "software": {
+    "argv": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-recovered-model-receiver-new24h-v1-128-repair1",
+      "-p",
+      "test*.py"
+    ],
+    "environment": {
+      "SOURCE128_MODEL_PREDECESSOR": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair5",
+      "SOURCE128_RECOVERY_PREDECESSOR": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair3"
+    }
+  },
+  "status": "actual recovery refs pending; no model owner/source bound"
+}

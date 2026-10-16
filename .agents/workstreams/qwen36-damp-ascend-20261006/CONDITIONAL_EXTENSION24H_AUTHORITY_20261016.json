@@ -1,0 +1,50 @@
+{
+  "schema": "ascend.paper-portfolio.conditional-extension-authority/v1",
+  "authority_source": "Direct human user: 如果有本质进展，可以延期一次24小时",
+  "recorded_at_utc": "2026-10-16T20:30:00Z",
+  "previous_authority": "NEW24H_AUTHORITY_20261016.json",
+  "original_cutoff_utc": "2026-10-17T07:02:13Z",
+  "extension_hours": 24,
+  "maximum_extension_count": 1,
+  "used_extension_count": 0,
+  "state": "authorized_conditionally_not_activated",
+  "condition_currently_met": false,
+  "potential_final_cutoff_utc": "2026-10-18T07:02:13Z",
+  "activation_requires": [
+    "An auditable actual whole-model NPU correctness pass with the real opt-in plugin and original independent numerical/state gates",
+    "A valid same-stack/input/concurrency/common-optimization fixed-1024-output profile-off dense/candidate whole-model paired screen demonstrating >=10% throughput gain; a measured combined candidate may qualify, an arithmetic sum of separate gains may not",
+    "An explicit admission record citing immutable source/results, original deadline, single extension consumption and a measured feasible remaining repeatability/task-accuracy plan"
+  ],
+  "non_qualifying_progress": [
+    "prepared code or documentation",
+    "software-only tests",
+    "single operator or sample pass",
+    "microbenchmark speedup",
+    "repaired infrastructure without a valid whole-model screen",
+    "hypothetical performance or task estimates"
+  ],
+  "acceptance_unchanged": true,
+  "old_sources_outputs_deadlines_immutable": true,
+  "deadline_not_reset_at_activation": true,
+  "original_cutoff_effective_until_activation": true,
+  "no_silent_runtime_source_clock_mutation": true,
+  "resource_scope": {
+    "physical_npus": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "hugepage_32GiB_release": "SPENT",
+    "existing_storage_memory_cleanup_limits_unchanged": true
+  },
+  "current_evidence_status": "No valid new whole-model performance or final task-accuracy results. BOLE component NPU passes and DeltaLog recovery repairs do not activate this extension.",
+  "on_unmet_condition_at_original_cutoff": "Retain evidence and report acceptance unmet; do not consume extension or launch post-cutoff experiments under old authority.",
+  "further_extension_authorized": false
+}

@@ -1,0 +1,34 @@
+{
+  "original_bytes": 7269,
+  "original_sha256": "accf5eebae971e4a0a961e3dceae7550d4f816647153c955deb368e8ad0b4397",
+  "edits": [
+    [
+      " o=C.obj(m['bridge024_owner_ref'])\n N(o['source']==o['target_source']==sr and o['schema']=='deltalog.diagnostic-owned-host/v035'and o['stage']=='numeric'and o['steps']==160 and o['physical']==[5]and o['NPU']is True,'actual same-source160 owner')\n N(o['primary']is None and o['secondary']==[]and o['stopped_retained']is True and o['resource_admitted']is True and o['diagnostic_capture_complete']is True,'actual owned complete release')\n N(o['bridge_primitive_gate_pass']is False and o['model_ready']is False,'not component promotion')\n p=C.obj(o['result']);r=C.obj(o['independent_consumer']);META.C=C;META.actual_build_meta(m,s,p)\n",
+      " o,p,r,proof=RECOVERY(C,m)\n META.C=C;META.actual_build_meta(m,s,p)\n"
+    ],
+    [
+      " N(r['schema']=='deltalog.eager-component-operational-consumption/v088'and r['source']==sr and r['actual_result']==r['producer']==o['result'],'actual088 consumer join')",
+      " N(r['schema']=='deltalog.anchor-consumer-CPU-recovery/v127'and r['source']==proof['consumer_source']and r['producer_source']==sr and r['actual_original_producer']==o['result'],'actual distinct recovered domain/producer join')"
+    ],
+    [
+      " N(all(r[k]is True for k in('diagnostic_capture_complete','domain_checks_pass','observation_complete'))and all(r[k]is False for k in('pass_gate','complete_proof','model_ready','performance_ready','NPU_reexecuted')),'complete bounded component only')",
+      " N(r['pass_gate']is True and all(r[k]is True for k in('diagnostic_capture_complete','domain_checks_pass','old_failure_unchanged'))and all(r[k]is False for k in('NPU','NPU_reexecuted','model_ready','model_admitted','performance_ready')),'actual recovery CPU gate only; old owner remains failed')"
+    ],
+    [
+      " old=C.obj(r['original_strict_consumer']);N(old['schema']=='deltalog.fresh-bridge-consumption/v5'and type(old['pass_gate'])is bool and old['source']==sr and old['producer']==o['result']and r['original_strict_result_preserved']==dict(pass_gate=old['pass_gate'],primary=old['primary']),'old strict failure retained')",
+      " old=C.obj(r['preserved_original_strict']);N(old['schema']=='deltalog.fresh-bridge-consumption/v5'and old['pass_gate']is False and old['source']==sr and old['producer']==o['result']and old['primary']==\"ValueError('independent raw numerical/bitwise gate')\",'exact original strict FAIL preserved')"
+    ],
+    [
+      " d=C.obj(r['domain_consumer']);N(d['schema']=='deltalog.eager-component-operational-report/v088'and d['source']==sr and d['producer']==o['result']and d['steps']==160,'actual088 domain')",
+      " d=C.obj(r['domain']);N(d['schema']=='deltalog.eager-component-operational-report/v088'and d['source']==sr and d['producer']==o['result']and d['steps']==160,'actual recovered088 domain, not relabelled old pair')"
+    ],
+    [
+      " N(d['validation_contract']==r['validation_contract']==CONTRACT and d['anchors']==r['initial_anchor_refs']and set(d['anchors'])=={'1','16'},'both independent new anchors')",
+      " N(d['validation_contract']==CONTRACT and set(d['anchors'])=={'1','16'},'same original contract/both independent anchors')"
+    ],
+    [
+      " return dict(schema='deltalog.eager-component-to-model-diagnostic/v101',source=sr,owner=m['bridge024_owner_ref'],consumer=o['independent_consumer'],domain=r['domain_consumer'],original_strict=r['original_strict_consumer'],validation_contract=CONTRACT,library=m['library_ref'],debug_library=m['debug_library'],actual_NPU=True,diagnostic_smoke_admitted=True,model_ready=False,model_numeric_qualified=False,performance_ready=False,task_ready=False,graph=False,PDC=False)",
+      " return dict(schema='deltalog.recovered-component-to-model-diagnostic/v128',source=sr,original_failed_owner=m['bridge024_owner_ref'],recovery_owner=proof['recovery_owner'],consumer_source=proof['consumer_source'],consumer=proof['stage_ref'],domain=r['domain'],original_strict=r['preserved_original_strict'],current_reader_source=proof['receiver_source'],validation_contract=CONTRACT,library=m['library_ref'],debug_library=m['debug_library'],actual_NPU=True,diagnostic_smoke_admitted=True,model_ready=False,model_numeric_qualified=False,performance_ready=False,task_ready=False,graph=False,PDC=False)"
+    ]
+  ]
+}
