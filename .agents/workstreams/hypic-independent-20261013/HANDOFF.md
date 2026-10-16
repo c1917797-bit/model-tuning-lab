@@ -1,4 +1,15 @@
-# CURRENT R18 G1/R1 LIVE; G3 INDEPENDENT VALID
+# CURRENT R18 FIRST PAIR VALID BUT NEGATIVE
+
+G1 exact0e3d terminal;independent0e49 PASS40/40,178sources,431cleanisolation,
+algorithmabsent andliveexactrelease. TPOT281.094047ms,TTFTP95347186.313790ms.
+G3 independent0e35 TPOT313.076461ms,TTFTP95415437.318890ms.
+Same-sourcefirstpair G3vsG1 TPOT+11.377834%,TTFTP95+19.658322%,TPOTP95+14.808164%.
+R18_FIRST_PAIR_DECISION_20261016.json retains bothrawhashes/audits. No ownedjob.
+Do not expand unchangednegative matrix. Next source-backed costattribution andone
+boundedrepair, unchanged numerical/finite/ownership/isolationgates. Fullquality,
+lifecycle/G1-G4x3/29functional remainunfinished. Cutoff2026-10-17T06:48:09Z.
+
+# HISTORICAL R18 G1/R1 LIVE; G3 INDEPENDENT VALID
 
 ma exact exec-0000000000000e3d launched19:48UTC from liveverifiedde0cbc90.
 Admission0e3c proves178source/168runtime/image/model/input/0-3empty/8233+HCCLfree/
