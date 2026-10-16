@@ -1,0 +1,87 @@
+{
+  "schema": "hypic-terminal-attempt/v1",
+  "operation": "exec-0000000000000b07",
+  "raw_root": "/cache/cch/hypic-independent-20261013/catalog-quality-r16-canary-r2",
+  "contract": "QUALITY_R16_CATALOG_CANARY_R2_CONTRACT.json",
+  "checkpoint": "1c2e1af8d012bba4eec0f316074cc8dc0cc8ec67",
+  "classification": "EXTERNAL_RESOURCE_INTERRUPTION",
+  "result": {
+    "valid": false,
+    "error": {
+      "type": "RuntimeError",
+      "message": "Foreign physical process detected"
+    },
+    "guard_errors": [],
+    "isolation_samples": 69,
+    "responses": 0,
+    "worker_pids": [
+      651951,
+      651952,
+      651953,
+      651954
+    ],
+    "physical_devices_seen": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "release": {
+      "owned_container": "dcaa943a38bce3edac599333a8ccb02ad3ea0275da162e242bfe302d850ad2df",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": [
+        [
+          3,
+          647529
+        ],
+        [
+          3,
+          661466
+        ]
+      ]
+    }
+  },
+  "first_foreign": {
+    "utc": "2026-10-16T11:23:14.179532+00:00",
+    "npu": 3,
+    "host_pid": 647529,
+    "nspid": [
+      647529,
+      927941
+    ],
+    "cgroup_container": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+    "container_name": "/cannbench_ds",
+    "state_at_independent_inspection": "running"
+  },
+  "independent_inspection": {
+    "operation": "exec-0000000000000b0b",
+    "source159_unchanged": true,
+    "exact_owned_absent": true,
+    "port_free": true,
+    "fresh_physical0_3": [
+      [
+        3,
+        647529
+      ],
+      [
+        3,
+        661466
+      ]
+    ]
+  },
+  "independent_terminal_audit": {
+    "operation": "exec-0000000000000b0c",
+    "exit": 1,
+    "rejection": "complete successful17 terminal required"
+  },
+  "raw_sha256": {
+    "result.json": "dd1acfe42d8f04a2b869160ce7cfacea7c354838b6e404b7f9b02d50790814fc",
+    "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "isolation.json": "93cdf62ad0800fb882ac3c54ff14c8eee850472cbc6a91c0cd73044beb0788c8",
+    "release.json": "caf02f5f7d5334a1fd0fc0b8b971d20e85869048fbb1023aaa8af8cef75a9d7b",
+    "events.jsonl": "40f4a36c88236f678c412a79740c0be58f36794d6e045d208eac1463a1a0fd2b"
+  },
+  "scope": "0requests; not mechanism, quality or speed outcome. External tasks untouched. Old raw root immutable, never reuse.",
+  "next": "No blind immediate R3 startup. Resource scheduling must permit uninterrupted 27B initialization and bounded17 workload; prepare new root/contract only after safe admission. Offline lifecycle auditing may continue."
+}

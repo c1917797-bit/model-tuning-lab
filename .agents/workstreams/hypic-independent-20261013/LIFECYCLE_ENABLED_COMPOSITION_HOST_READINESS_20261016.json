@@ -1,0 +1,25 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "lifecycle enabled directory audit composition",
+  "focused": {
+    "operation": "exec-0000000000000b0a",
+    "tests": 20,
+    "exit": 0
+  },
+  "regression": {
+    "operation": "exec-0000000000000b0e",
+    "tests": 790,
+    "exit": 0
+  },
+  "scope": "Synthetic raw directory only; real C1/C2 four-rank/physical audit functions execute on generated fixtures. Input payload loader mocked. No real NPU/lifecycle acceptance.",
+  "controls": [
+    "Enabled two-request four-rank48C1/16C2 plus physical namespace association",
+    "Missing layer/nonfinite/manifest/namespace drift rejected",
+    "Disabled/uninstalled directory and request/control drift tests retained"
+  ],
+  "remaining": [
+    "Three-stage combined audit and frozen lifecycle contracts/package",
+    "Actual lifecycle after preceding progression gates"
+  ],
+  "unchanged_device_sources": "159-bound R2 package unchanged; attempt externally interrupted"
+}

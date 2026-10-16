@@ -46,7 +46,7 @@ class Records(unittest.TestCase):
     def test_duplicate_terminal(self):self.reject(lambda c,r,j,s,start,rel:j.append(copy.deepcopy(j[-1])))
 
 class DirectoryComposition(unittest.TestCase):
-    def run_fixture(self,stage="disabled",mutate=lambda a:None):
+    def run_fixture(self,stage="disabled",mutate=lambda a:None,with_hot=False,mutate_hot=lambda e:None):
         with tempfile.TemporaryDirectory()as td:
             base=Path(td);raw=base/"raw";raw.mkdir()
             a=fixture(stage);c,result,journal,samples,start,release,records,semantic,controls,launch,payloads=a
@@ -60,6 +60,23 @@ class DirectoryComposition(unittest.TestCase):
             for name,obj in {"result.json":result,"responses.json":records,"isolation.json":samples,"service-start.json":start,"release.json":release,"launch.json":launch,"lifecycle-semantic.json":semantic,"lifecycle-worker-controls.json":controls}.items():(raw/name).write_text(json.dumps(obj))
             (raw/"events.jsonl").write_text("".join(json.dumps(e)+"\n"for e in journal))
             cp=base/"contract.json";cp.write_text(json.dumps(c))
+            if with_hot:
+                manifest={"source_sha256":copy.deepcopy(sources)}
+                mp=base/"m.json";mp.write_text(json.dumps(manifest));mh=hashlib.sha256(mp.read_bytes()).hexdigest()
+                diag=raw/"diagnostics";diag.mkdir();events=[]
+                for rank in range(4):
+                    pid=50+rank;common=dict(rank=rank,pid=pid,manifest_sha256=mh)
+                    events.append(dict(common,event="compact_hypic_hooks_installed"))
+                    for layer in range(48):events.append(dict(common,event="compact_public_state_published",layer="gdn"+str(layer)))
+                    for layer in range(16):events.append(dict(common,event="compact_public_kv_published",layer="kv"+str(layer)))
+                    for i in (1,2):
+                        rid="r"+str(i)+"-runtime";step=i+2
+                        events.append(dict(common,event="native_request_progress",request_id=rid,step=step,scheduled_tokens=32768))
+                        events.append(dict(common,event="compact_model_rows_completed",request_ids=[rid],step=step,original_rows=32768,retained_rows=16392))
+                        for layer in range(48):events.append(dict(common,event="compact_gdn_body_composed",request_id=rid,step=step,layer="gdn"+str(layer),skipped_body_tokens=16376,retained_rows=16392,finite=True))
+                        for layer in range(16):events.append(dict(common,event="compact_c2_queries_completed",request_id=rid,step=step,layer="kv"+str(layer),skipped_body_queries=16376,retained_rows=16392))
+                mutate_hot(events)
+                for rank in range(4):(diag/("compact-worker-"+str(rank)+".jsonl")).write_text("".join(json.dumps(e)+"\n"for e in events if e["rank"]==rank))
             with patch("audit_lifecycle_terminal.lifecycle_payloads",return_value=payloads):return audit(cp)
     def test_disabled_directory(self):self.assertTrue(self.run_fixture()["lifecycle_stage_audited"])
     def test_uninstalled_directory(self):self.assertEqual(self.run_fixture("uninstalled")["stage"],"uninstalled")
@@ -69,4 +86,21 @@ class DirectoryComposition(unittest.TestCase):
         with self.assertRaises(ValueError):self.run_fixture(mutate=lambda a:a[6][0]["payload"]["prompt"].append(99))
     def test_controls_tamper(self):
         with self.assertRaises(ValueError):self.run_fixture(mutate=lambda a:a[8]["workers"][0]["controls"].update(INDEPENDENT_COMPACT_HYPIC="1"))
+    def test_enabled_directory_actual_audit_composition(self):
+        r=self.run_fixture("enabled",with_hot=True)
+        self.assertEqual(len(r["hot"]["covered"]),2);self.assertEqual(len(r["physical"]["ranks"]),4)
+    def test_enabled_directory_missing_layer(self):
+        def mutate(e):e.remove(next(x for x in e if x["event"]=="compact_gdn_body_composed"))
+        with self.assertRaises(ValueError):self.run_fixture("enabled",with_hot=True,mutate_hot=mutate)
+    def test_enabled_directory_nonfinite(self):
+        def mutate(e):next(x for x in e if x["event"]=="compact_gdn_body_composed")["finite"]=False
+        with self.assertRaises(ValueError):self.run_fixture("enabled",with_hot=True,mutate_hot=mutate)
+    def test_enabled_directory_manifest_drift(self):
+        def mutate(e):e[0]["manifest_sha256"]="wrong"
+        with self.assertRaises(ValueError):self.run_fixture("enabled",with_hot=True,mutate_hot=mutate)
+    def test_enabled_directory_namespace_drift(self):
+        def mutate(e):
+            for x in e:
+                if x["rank"]==0:x["pid"]=999
+        with self.assertRaises(ValueError):self.run_fixture("enabled",with_hot=True,mutate_hot=mutate)
 if __name__=="__main__":unittest.main()

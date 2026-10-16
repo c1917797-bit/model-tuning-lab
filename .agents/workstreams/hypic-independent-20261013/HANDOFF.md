@@ -1,3 +1,15 @@
+# LATEST R2 catalog EXTERNAL INTERRUPTION — no owned live job
+
+Exact0b07terminalexit1,0requests/69isolation;firstforeign11:23:14UTC NPU3PID647529.
+Independent0b0b maps exactcgroupCIDefc5e45e... to /cannbench_ds running;
+source159unchanged/exactownCIDdcaa943a...absent/8233free. FreshNPU3stillforeign.
+0b0c independently rejects incomplete17terminal. Rawcatalog-quality-r16-canary-r2
+immutable;0requests not algorithm/quality/speed failure. Noownedjob/observer.
+CATALOG_R16_CANARY_R2_TERMINAL_20261016.json preserves hashes and attribution.
+Do not blindrestart/reuseoldroot. Coordinate realstable0-3window, meanwhile
+continueusefuloffline lifecyclecompositeaudit/package prep. Foreignuntouched/4-7prohibited.
+Latesthuman deadlineOct17T06:48:09Z;fullgoalactive/incomplete.
+
 # CURRENT R2 catalog M3 LIVE — overrides prior no-job state
 
 Exactma exec-0000000000000b07 RUNNING; raw /cache/cch/hypic-independent-20261013/catalog-quality-r16-canary-r2.
