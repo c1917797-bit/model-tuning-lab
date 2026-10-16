@@ -1,0 +1,27 @@
+{
+  "scope": "three-arm first-screen attribution, not replacement for G1-G4x3/fullquality/lifecycle",
+  "order": [
+    "on",
+    "off",
+    "native"
+  ],
+  "contracts": [
+    "FORMAL_R19_LAZY_ON_R1_CONTRACT.json",
+    "FORMAL_R19_LAZY_OFF_R1_CONTRACT.json",
+    "FORMAL_R19_LAZY_NATIVE_R1_CONTRACT.json"
+  ],
+  "source_bindings": 194,
+  "runtime_bindings": 181,
+  "regression": {
+    "operation": "exec-0000000000000e80",
+    "tests": 959,
+    "passed": true
+  },
+  "static": "exec-0000000000000e81",
+  "numerical_prerequisite": "exec-0000000000000e79",
+  "audit": "audit_r19_lazy_performance.py --contract CONTRACT --live-release",
+  "policy": "one controller; prior terminal independentlyvalid plus freshphysical0-3/8233/HCCL/source/direct admission before next; no retries/rootreuse/gate weakening",
+  "timing": "same32768/16384PIC/8192prefix/fixed1024/c16/full40/twoB+twoA warmups/retry0; timedshadow/probeoff only; all finite/ownership/completion retained",
+  "stop": "2026-10-17T06:48:09Z",
+  "claims": "on-vs-off incremental snapshot effect separate from on-vs-native wholeHYPIC; no acceptance from singlearm"
+}

@@ -1,4 +1,14 @@
-# CURRENT R19 CANARY TERMINAL BOUNDED ACCEPTED; SPEED PENDING
+# CURRENT R19 TIMED ON/OFF/NATIVE HOST READY; NOT STARTED
+
+959CPU0e80 PASS; static0e81194identicalsources/181runtime/allnewrootsabsent PASS.
+R19_LAZY_PERFORMANCE_PLAN_20261016.json freezes on->off->native full40 firstscreens.
+Only lazyflag differs on/off; wholeHYPIC vsnative separate. Timed shadow/probeoff
+but finite/generation/slot/completion/source/isolation/release retained.
+audit_r19_lazy_performance.py joins actualprepared groups so native-prefill fallback
+must retaininitials, not falselymarkedskip. No ownedmodeljob. Next publishcheckpoint
+andfreshactualadmission FORMAL_R19_LAZY_ON_R1_CONTRACT.json. Fullgoal incomplete.
+
+# R19 CANARY TERMINAL BOUNDED ACCEPTED
 
 0e65 exit0; independent0e79 PASS2private complete requests/allfour48C1+16C2,
 384partition/completedreceipts,192numericshadows, eachrank48skip+48shadowretained
