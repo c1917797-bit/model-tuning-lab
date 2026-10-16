@@ -1,4 +1,15 @@
-# CURRENT R19 LAZY SNAPSHOT CANARY HOST READY; NOT STARTED
+# CURRENT R19 LAZY SNAPSHOT CANARY LIVE
+
+ma exact exec-0000000000000e65 launched20:30UTC from liveverifiedf69c7d2f.
+Admission0e64 proves185sources/167runtime/image/model/input/0-3empty/8233+HCCLfree/
+newroot. Raw /cache/cch/hypic-independent-20261013/c1-lazy-r19-canary-r1.
+Poll samepeer/handle/root; neverrestart live/unclear/no185boundfileedits.
+Terminal audit_r19_lazy_snapshot_canary.py --contract C1_LAZY_R19_CANARY_R1_CONTRACT.json
+--live-release; requires actualskip ANDserialshadowretention/all48/fourrank plus
+unchanged numeric/partition/source/physical/isolation/exactrelease. Not speedclaim.
+R18 matchednegative retained; fullgoal incomplete. Cutoff2026-10-17T06:48:09Z.
+
+# HISTORICAL R19 CANARY HOST READY
 
 951 fullCPU0e5c PASS; static0e5d185source/167runtime/newrootabsence PASS.
 Defaultoff c1_lazy_initial_snapshot skips only alreadyprepared nonshadow initials;

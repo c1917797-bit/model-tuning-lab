@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R18-firstpair-valid-negative-source-attribution-next",
+  "execution_state": "R19-lazy-snapshot-Canary-live",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "No ownedmodeljob; G1 liveexactrelease audit0e49 valid."
+    "state": "ExactR19controller0e65 live;physical0-3 TP4 only."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "R18 same-sourcefirstpair negative TPOT+11.377834%,TTFTP95+19.658322%; do not expand unchanged. Source-backed wholeintegration-cost attribution and bounded repair while preserving finite/source/isolation/numerical gates; fullquality/lifecycle/G1-G4x3/Skills remain.",
+  "next_action": "Poll exact0e65/root; no restart whilelive/unclear/no185boundsource edits. Terminal audit_r19_lazy_snapshot_canary.py --contract C1_LAZY_R19_CANARY_R1_CONTRACT.json --live-release; actual fourrank skip+retainedshadow48layers/source/partition/numeric/isolation/release required. R18 speednegativeunchanged; fullgoalunfinished.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -197,9 +197,9 @@
   },
   "publication": {
     "state": "liveverified",
-    "published_commit": "12660b1d7fe66e5d5952ed9ab8500a84b1ca3833",
+    "published_commit": "f69c7d2ff4d7f9654c1dc62a53eed56983782e31",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "note": "R18 bounded numerics/readiness only; no R18 speed result"
+    "scope": "diagnosticcheckpoint notNPUacceptance"
   },
   "math_reference": {
     "state": "cpu-reference-passed",
@@ -215,15 +215,14 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL_VALID",
-    "operation": "exec-0000000000000e3d",
+    "state": "RUNNING",
+    "operation": "exec-0000000000000e65",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "contract": "FORMAL_R18_G1_R1_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/formal-r18-g1-r1",
-    "checkpoint": "de0cbc9018926443ea376465259980fe310c72f1",
-    "admission_operation": "exec-0000000000000e3c",
-    "independent_audit": "exec-0000000000000e49"
+    "contract": "C1_LAZY_R19_CANARY_R1_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/c1-lazy-r19-canary-r1",
+    "checkpoint": "f69c7d2ff4d7f9654c1dc62a53eed56983782e31",
+    "admission_operation": "exec-0000000000000e64"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
