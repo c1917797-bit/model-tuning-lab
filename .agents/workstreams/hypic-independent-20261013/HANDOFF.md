@@ -1,3 +1,14 @@
+# CURRENT R16 INTEGRATED PROFILE LIVE
+
+Exactma exec-0000000000000c1c RUNNING;raw /cache/cch/hypic-independent-20261013/profile-g3-r16-privatewarm-r1.
+Checkpoint7ce9b301 published/liveverified.0c1b admissionPASS source149/currentimage/
+model/input/newroot/physical0-3empty/8233+HCCLfree/cache13.69GiB. Algorithm147 unchanged.
+PollSAMEhandle/root;neverrestart live/unclear/no edit149boundfiles/seconddevicejob.
+Actualprivatewarm16x64 thenofficialbounded delayed32/max12 profile;notformalspeed.
+Terminal independent source/mechanism/physical/isolation/exactrelease plus4rank
+trace/table completeness audit; classifyobservedprefill/decode beforeattribution.
+NegativeR16pair retained; no rootcause yet. HumanstopOct17T06:48:09Z unchanged.
+
 # LATEST R16 integrated profiler contract PREPARED only
 
 PROFILE_G3_R16_PRIVATEWARM_R1_CONTRACT.json uses unchanged147R16sources plus
