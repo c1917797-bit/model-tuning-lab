@@ -104,6 +104,17 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
     else:stage=CompactCanonicalStage(**config)
     from independent_runner_context import CURRENT_REQUEST_SLICES
     from independent_linear_material_pool import identity_key
+    def transferred(identity,generation,metrics):
+        requests=CURRENT_REQUEST_SLICES.get()
+        if (not requests or {r.rank for r in requests}!={identity.rank}
+                or len({r.step for r in requests})!=1):
+            raise ValueError('material transfer audit request/rank/step context required')
+        emit({'event':'c1_private_material_transfer_verified','rank':identity.rank,
+            'step':requests[0].step,'request_ids':[r.request_id for r in requests],
+            'layer':identity.layer,'generation':generation,
+            'tokens_sha256':identity.tokens_sha256,'metrics':metrics,
+            'full_transfer_bytes_compared':True,'actual_slot_commit':'not_started'})
+    stage.compact_store.on_transfer_verified=transferred
     def evicted(pool,event):
         requests=CURRENT_REQUEST_SLICES.get()
         if not requests or len({r.rank for r in requests})!=1:
@@ -135,6 +146,7 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
               'default_disabled':True,'c2_layer_completion_barrier':layer_barrier,
               'native_decode_batch':native_batch,
               'c1_async_material_transfer':stage.compact_store.async_material_transfer,
+              'c1_async_material_verify':stage.compact_store.verify_async_transfer,
               'prefill_prompt_snapshot':prefill_prompt_snapshot,
               'prompt_snapshot_probe_batches':snapshot_probe_batches,
               'c1_layer_completion_barrier':install_compact_gdn.c1_layer_completion_barrier,

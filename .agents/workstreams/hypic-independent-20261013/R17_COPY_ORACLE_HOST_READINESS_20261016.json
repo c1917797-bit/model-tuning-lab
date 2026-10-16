@@ -1,0 +1,26 @@
+{
+  "schema": "hypic-r17-copy-oracle-readiness/v1",
+  "state": "partial-component",
+  "regression": {
+    "operation": "exec-0000000000000cf8",
+    "tests": 883,
+    "exit_code": 0
+  },
+  "runtime_verification": "c1_async_material_verify requires explicit asynchronous transfer; every actual lease compares all T/S/conv-tail bytes on CPU before algorithm use, emits exact rank/step/layer/generation and request cohort. Diagnostic only, disabled for speed.",
+  "independent_audit": "audit_c1_async_material.py independently joins completed private C1 events to same-source/PID/rank/step/layer/generation copy and public-generation receipts. Existing full fourworker48C1/16C2, immutable requests, source/isolation/physical/release audits retained.",
+  "negative_controls": [
+    "last-element corruption",
+    "signed-zero byte mismatch",
+    "dtype/shape/key changes",
+    "sampled byte denominator",
+    "missing generation/copy/rank",
+    "wrong step/source/PID/request",
+    "duplicate copy receipt"
+  ],
+  "limits": [
+    "No real NPU copy result yet",
+    "Byte equality of these material transfers is not algorithm numerical equivalence or task quality",
+    "New source-bound contracts required before launch",
+    "G1-G4 full speed,381-per-arm quality,lifecycle,29functional remain incomplete"
+  ]
+}

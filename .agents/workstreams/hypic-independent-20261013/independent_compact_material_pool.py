@@ -14,6 +14,27 @@ class CompactLinearBody:
     conv_tail: object
 
 
+def audit_private_material_copy(expected,actual,*,require_npu=True):
+    """Full byte comparison of this lease only; not an algorithm quality oracle."""
+    import torch
+    if set(expected)!=set(actual) or set(expected)!={'transition','zero_state','conv_tail'}:
+        raise ValueError('material copy audit key mismatch')
+    metrics=[]
+    for key in sorted(expected):
+        source=expected[key];target=actual[key]
+        if (source.device.type!='cpu' or require_npu and target.device.type!='npu'
+                or source.shape!=target.shape or source.dtype!=target.dtype
+                or source.layout!=torch.strided or target.layout!=torch.strided):
+            raise ValueError('material copy audit identity/layout mismatch')
+        copied=target.detach().to('cpu').contiguous()
+        reference=source.detach().contiguous()
+        if not torch.equal(reference.view(torch.uint8),copied.view(torch.uint8)):
+            raise ValueError('private material copy byte mismatch: '+key)
+        metrics.append({'tensor':key,'shape':list(source.shape),'dtype':str(source.dtype),
+            'bytes':source.numel()*source.element_size(),'all_bytes_equal':True})
+    return metrics
+
+
 def _npu_runtime():
     import torch
     return torch.npu
@@ -64,11 +85,15 @@ def transfer_private_material(data,*,device,asynchronous=False,quarantine=None):
 
 
 class CompactLinearMaterialPool:
-    def __init__(self,capacity_bytes,*,async_material_transfer=False):
+    def __init__(self,capacity_bytes,*,async_material_transfer=False,verify_async_transfer=False):
         if type(async_material_transfer) is not bool:
             raise ValueError('explicit asynchronous material transfer boolean required')
+        if type(verify_async_transfer)is not bool or verify_async_transfer and not async_material_transfer:
+            raise ValueError('material transfer verification requires explicit async transfer')
         self.pool=PublicPool(capacity_bytes)
         self.async_material_transfer=async_material_transfer
+        self.verify_async_transfer=verify_async_transfer
+        self.on_transfer_verified=None
         self._quarantined_transfers=[]
     def publish(self,material):
         i=material.identity;validate_material(i,i)
@@ -84,9 +109,14 @@ class CompactLinearMaterialPool:
     def acquire_private(self,identity,*,device):
         if self._quarantined_transfers:
             raise RuntimeError('material pool blocked after unknown copy completion')
+        if self.verify_async_transfer and not callable(self.on_transfer_verified):
+            raise ValueError('material copy audit evidence sink required')
         with self.pool.acquire_private(identity_key(identity)) as (generation,data):
             with transfer_private_material(data,device=device,
                     asynchronous=self.async_material_transfer,
                     quarantine=self._quarantined_transfers) as private:
+                if self.verify_async_transfer:
+                    metrics=audit_private_material_copy(data,private)
+                    self.on_transfer_verified(identity,generation,metrics)
                 yield generation,CompactLinearBody(identity,
                     SegmentAffine(private['transition'],private['zero_state']),private['conv_tail'])
