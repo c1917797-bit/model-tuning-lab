@@ -1,0 +1,196 @@
+{
+  "FP32_bmm_per_group": 4,
+  "NPU_executed": false,
+  "READY": false,
+  "actual037_prerequisite": {
+    "bytes": 136215,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_MXR039_PREREQUISITE_043_001.json",
+    "sha256": "f620ae4bc10577465bff7fbb3af67ce424f2cca7c09805aa13f5f55dfce525f4"
+  },
+  "actual_NPU": false,
+  "actual_X2_B_output_state_bitwise_required": true,
+  "actual_sameimage_CPU": false,
+  "algorithm_delta": false,
+  "algorithm_source_ref": {
+    "bytes": 7835,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-new24h-v1-097-repair1/SOURCE_MANIFEST.json",
+    "sha256": "17cc6553ed5c498f5db7cc66175f0e1867fbff7ef3263f263b3d7725aefe06e5"
+  },
+  "arms": [
+    "saved_candidate",
+    "native",
+    "cpu64_cast"
+  ],
+  "authority_ref": {
+    "bytes": 3481,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "bootstrap_source": {
+    "bytes": 4589,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/SOURCE_MANIFEST.json",
+    "sha256": "2e05b80a5453a4d49b27d860d31be6e8a49bc1293ea8fc57e9b0f61b515f4010"
+  },
+  "budgets": {
+    "CPU_seconds": 600,
+    "NPU_whole_seconds": 900,
+    "cleanup_seconds": 90,
+    "guest_bytes": 8589934592,
+    "guest_seconds": 600,
+    "host_bytes": 536870912,
+    "output_bytes": 1073741824,
+    "raw_bytes": 805306368,
+    "reserve_bytes": 8589934592
+  },
+  "candidate_anchor": "full original output/state bytes before other arms",
+  "cases": [
+    {
+      "case_id": "rank0-layer0",
+      "expected_saved_gate": false,
+      "pid": 441,
+      "prefix": "language_model.model.layers.0.linear_attn",
+      "rank": 0,
+      "raw": {
+        "bytes": 32142009,
+        "path": "/opt/host/vnf/austinov/run-mxr-two-residual-model098repair5-main-NEW24H_MXR098R5_001/candidate/model/capture/worker-441/raw/frame-000/RAW.pt",
+        "sha256": "91149ee9342891352198f88c8cd24598b33762e87ff519e85a62db0eda584107"
+      },
+      "raw_sidecar": {
+        "bytes": 5944,
+        "path": "/opt/host/vnf/austinov/run-mxr-two-residual-model098repair5-main-NEW24H_MXR098R5_001/candidate/model/capture/worker-441/raw/frame-000/RAW.STORAGE.json",
+        "sha256": "aeb3bd457d9005e1f7ff72d43e590fe02dfd11b477ad6d9e331c12c9135be7dc"
+      }
+    },
+    {
+      "case_id": "rank0-layer4",
+      "expected_saved_gate": false,
+      "pid": 441,
+      "prefix": "language_model.model.layers.4.linear_attn",
+      "rank": 0,
+      "raw": {
+        "bytes": 32142009,
+        "path": "/opt/host/vnf/austinov/run-mxr-two-residual-model098repair5-main-NEW24H_MXR098R5_001/candidate/model/capture/worker-441/raw/frame-003/RAW.pt",
+        "sha256": "94932948f9b0aaf69cbc220fd6347ed582428870a0cfdf3251483ced40d9d766"
+      },
+      "raw_sidecar": {
+        "bytes": 5944,
+        "path": "/opt/host/vnf/austinov/run-mxr-two-residual-model098repair5-main-NEW24H_MXR098R5_001/candidate/model/capture/worker-441/raw/frame-003/RAW.STORAGE.json",
+        "sha256": "5e444098d0a8ddded0fdeb321da5760af173fc4b27b9ace69f6fe2a54b7ded07"
+      }
+    },
+    {
+      "case_id": "rank0-layer1-control",
+      "expected_saved_gate": true,
+      "pid": 441,
+      "prefix": "language_model.model.layers.1.linear_attn",
+      "rank": 0,
+      "raw": {
+        "bytes": 32142009,
+        "path": "/opt/host/vnf/austinov/run-mxr-two-residual-model098repair5-main-NEW24H_MXR098R5_001/candidate/model/capture/worker-441/raw/frame-001/RAW.pt",
+        "sha256": "c7fce1a0d5de0df4384d65f9148caee04f0f9d75f357e625dee8566bf71607bd"
+      },
+      "raw_sidecar": {
+        "bytes": 5944,
+        "path": "/opt/host/vnf/austinov/run-mxr-two-residual-model098repair5-main-NEW24H_MXR098R5_001/candidate/model/capture/worker-441/raw/frame-001/RAW.STORAGE.json",
+        "sha256": "2c4594434a934b75b3cc9c6143bbf8091a3715557612e123bc18f43426367a35"
+      }
+    }
+  ],
+  "common_precision": {
+    "bytes": 3862,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/common_precision.py",
+    "sha256": "f2f090ebc9b6745cca97562ab07dff2df4b591577d0ecd6004f156e1ebd85326"
+  },
+  "component044": {
+    "bytes": 9183,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/SOURCE_MANIFEST.json",
+    "sha256": "f87ee946b055d511280eced9882fd8dd9127bf8f683b7b2993b5c51331a3dd0f"
+  },
+  "default_enabled": false,
+  "files": {
+    "consume.py": {
+      "bytes": 6792,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-new24h-v1-120-repair2/consume.py",
+      "sha256": "9b4ef94ee8607d7cc2cea7e1824811a6f0f05de48ffb6e1d1c205bc822317faf"
+    },
+    "guest_core.py": {
+      "bytes": 21963,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-new24h-v1-120-repair2/guest_core.py",
+      "sha256": "0508d9f07f70481c8a50ee44fa37eff811911b16c01ec13baae55572bc54aef1"
+    },
+    "test_contract.py": {
+      "bytes": 6746,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-new24h-v1-120-repair2/test_contract.py",
+      "sha256": "1c8517b3d00933f3f2cdd7991c9ac089eac79c28fcfce30cfe8afb19206610e7"
+    },
+    "test_roundtrip120.py": {
+      "bytes": 3820,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-new24h-v1-120-repair2/test_roundtrip120.py",
+      "sha256": "dc020de7cb02c59e65a8a3dd9a12ce8ba4ed74b4734e5476fff183a3e1fd4ea5"
+    }
+  },
+  "frame_report_ref": {
+    "bytes": 1175290,
+    "path": "/opt/host/vnf/austinov/run-mxr-two-residual-model098repair5-main-NEW24H_MXR098R5_001/cpu-consumer/rank-0/BRIDGE_RESULT.json",
+    "sha256": "4085c440a183708669508aa3bd26a785bd4d22b768aa1c90418ce8822c1e12bb"
+  },
+  "intermediate_Hend_FP32_API_available": false,
+  "native_H_layout_source": {
+    "bytes": 21210,
+    "path": "/cache/austinov/src/vllm-ascend/csrc/moe/chunk_gated_delta_rule_fwd_h/op_kernel/arch22/gemm/kernel/gdn_fwd_h_kernel.hpp",
+    "sha256": "83a07e6602e81822f8da2f47d4a25fce8beb5ffb5646f402ea6fd3c9d642463e"
+  },
+  "original_R5_failure_preserved": true,
+  "original_metrics": {
+    "bytes": 10097,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/consume_capture.py",
+    "sha256": "7c31e87b409ef095e5789a2bc1b71a987a69dc237789c125ad749a69fecec6c3"
+  },
+  "original_working_oracle": {
+    "bytes": 4691,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-model-new24h-v1-098-repair5/boundary_oracle.py",
+    "sha256": "7fd2e64783f4516a99f116dc66502ff8e6b6d5591f7a1076e7ed1e6cfa9a408a"
+  },
+  "owner_adapter_ready": true,
+  "prepared_only": true,
+  "qualified": false,
+  "raw": {
+    "bytes": 32142009,
+    "path": "/opt/host/vnf/austinov/run-mxr-two-residual-model098repair5-main-NEW24H_MXR098R5_001/candidate/model/capture/worker-441/raw/frame-000/RAW.pt",
+    "sha256": "91149ee9342891352198f88c8cd24598b33762e87ff519e85a62db0eda584107"
+  },
+  "raw_per_case_cap_bytes": 268435456,
+  "raw_total_cap_bytes": 805306368,
+  "remaining": [
+    "actual Devices[]38 controls and all three saved frames decoded",
+    "actual NPU5 exact X2 bitwise anchors and native arms",
+    "actual independent Devices[] attribution; no qualification"
+  ],
+  "repeats": 1,
+  "retained_model_source": {
+    "bytes": 122594,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-model-new24h-v1-098-repair5/SOURCE_MANIFEST.json",
+    "sha256": "ab24935dbac49fc0f252d10a19e9d55184e1a3705e0d4f012c75275f6a01ddd6"
+  },
+  "retained_template_ref": {
+    "bytes": 115269,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-model-new24h-v1-098-repair5/SOURCE_TEMPLATE.json",
+    "sha256": "873b1b9cb7110b9fb5b9f765993f3b2d4dc3b56ebffe709a62e5881f1fe1afb0"
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-new24h-v1-120-repair2",
+  "runtime_factory_repair": {
+    "arithmetic_changed": false,
+    "construct_once_in_main": true,
+    "explicit_runtime_each_frame": true,
+    "old_failed_source_preserved": true,
+    "original_namespace_guard_preserved": true
+  },
+  "schema": "mxr.r5-prefill-counterfactual-source/v120",
+  "scope": "two R5 failed frames; actual X2 reproduction then native and inv(actualA) cast; optional actual passing control",
+  "software_cases": 38,
+  "variant_ref": {
+    "bytes": 7165,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-new24h-v1-097-repair1/two_residual097.py",
+    "sha256": "58b68fe106356d5fc608ac09a29728fb45a0aba07e970deabfbb2f87ae63aceb"
+  }
+}

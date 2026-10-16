@@ -1,0 +1,70 @@
+{
+  "actual_abi_ref": null,
+  "actual_support_not_yet_observed": true,
+  "default_enabled": false,
+  "existing_owner_adaptation_pending": true,
+  "files": {
+    "abi115.py": {
+      "bytes": 1738,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-new24h-v1-115/abi115.py",
+      "sha256": "a74a48e1d9186e885aa94797db8323852baff6b10103372fcd9747f143cf1edb"
+    },
+    "consume115.py": {
+      "bytes": 1883,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-new24h-v1-115/consume115.py",
+      "sha256": "86e4bc3edcb701c47c24d988503afbed120e90d1b425f35977c02ce745092b8e"
+    },
+    "evidence/cann91_fia_v3.h": {
+      "bytes": 4091,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-new24h-v1-115/evidence/cann91_fia_v3.h",
+      "sha256": "14ebd6d631fa2de39688a69be339a5bf7ac9b84cbfc00592f29387a4e0b8eb9f"
+    },
+    "probe115.py": {
+      "bytes": 4735,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-new24h-v1-115/probe115.py",
+      "sha256": "6b86607862d1d8c76805394acff0397e4b5d5af5230871f513ae4db685a348f1"
+    },
+    "test115.py": {
+      "bytes": 3517,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-new24h-v1-115/test115.py",
+      "sha256": "f713f25d3ddf3d759a0313d5f5efa47bd71ad68be540b4c452826102002033e4"
+    },
+    "tree_fa115.py": {
+      "bytes": 3539,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-new24h-v1-115/tree_fa115.py",
+      "sha256": "9de3a6c05bd64aa135d9a4dc32b65aeeb1770374ba4084a01a4cbf5d422253bd"
+    }
+  },
+  "geometry": {
+    "D": 256,
+    "KV_heads": 1,
+    "batches": [
+      1,
+      16
+    ],
+    "layout": "BNSD",
+    "model_worker_sharding_actual": false,
+    "query_heads": 6,
+    "query_nodes": 7
+  },
+  "guest_seconds": 120,
+  "header_ref": {
+    "bytes": 4091,
+    "path": "/usr/local/Ascend/cann-9.1.0/include/aclnnop/aclnn_fused_infer_attention_score_v3.h",
+    "sha256": "14ebd6d631fa2de39688a69be339a5bf7ac9b84cbfc00592f29387a4e0b8eb9f"
+  },
+  "mask_dtype": "torch.bool",
+  "mask_polarity": "True/1 forbids",
+  "model_ready": false,
+  "modes": [
+    1,
+    0
+  ],
+  "performance_ready": false,
+  "prepared_only": true,
+  "raw_cap": 67108864,
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-new24h-v1-115",
+  "schema": "bole.FIA-source/v115",
+  "source_config_attribution": "MAIN actual checkpoint24Q/4KV/D256, TP4 division is inferred not loaded proof",
+  "whole_cap": 134217728
+}

@@ -1,0 +1,42 @@
+{
+  "commands": {
+    "audit": [
+      "/usr/bin/env",
+      "TORCH_DEVICE_BACKEND_AUTOLOAD=0",
+      "ASCEND_RT_VISIBLE_DEVICES=",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis2-recovery-new24h-v1/recover.py",
+      "--source-audit",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis2-recovery-new24h-v1/SOURCE_MANIFEST.json\",\"bytes\":3795,\"sha256\":\"100f3c565b48e66946d3a6aa18bad143d2c47e3e849b425d6cd43579a65c9e00\"}",
+      "--evidence-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis2-recovery-new24h-v1/EVIDENCE_PLAN.json\",\"bytes\":1968,\"sha256\":\"46aa829547bd43df2bd25aa6a68da2982438ba5928354661fe5974e103112b1c\"}"
+    ],
+    "recover": [
+      "/usr/bin/env",
+      "TORCH_DEVICE_BACKEND_AUTOLOAD=0",
+      "ASCEND_RT_VISIBLE_DEVICES=",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis2-recovery-new24h-v1/recover.py",
+      "--execute",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis2-recovery-new24h-v1/SOURCE_MANIFEST.json\",\"bytes\":3795,\"sha256\":\"100f3c565b48e66946d3a6aa18bad143d2c47e3e849b425d6cd43579a65c9e00\"}",
+      "--evidence-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis2-recovery-new24h-v1/EVIDENCE_PLAN.json\",\"bytes\":1968,\"sha256\":\"46aa829547bd43df2bd25aa6a68da2982438ba5928354661fe5974e103112b1c\"}",
+      "--output",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-prefill120-analysis2-recovery-MAIN-NEW24H_001/RECOVERY.json"
+    ]
+  },
+  "no_analysis_or_NPU_rerun": true,
+  "only_MAIN_execution": true,
+  "qualification": false,
+  "source": {
+    "bytes": 3795,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis2-recovery-new24h-v1/SOURCE_MANIFEST.json",
+    "sha256": "100f3c565b48e66946d3a6aa18bad143d2c47e3e849b425d6cd43579a65c9e00"
+  }
+}

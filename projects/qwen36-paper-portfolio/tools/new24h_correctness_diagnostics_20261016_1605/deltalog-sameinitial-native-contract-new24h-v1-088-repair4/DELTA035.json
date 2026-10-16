@@ -1,0 +1,18 @@
+{
+  "baseline_template": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-031-repair1/SOURCE_TEMPLATE.json",
+  "runtime_algorithm_changed": false,
+  "production_DSO_changed": false,
+  "controller_changed": "OWNER/schema identity only; same release/observer/resource bodies",
+  "seed_only_files": [
+    "native_fixture.py",
+    "capture_evidence.py",
+    "domain_consumer.py"
+  ],
+  "new_reference": "CPU64 operational recurrence -> direct integer BF16 RNE; same perrequest .00303",
+  "state_limit": 7.92e-7,
+  "original_strict_unchanged": true,
+  "ABI": "native individual lengths [0]+ones",
+  "new_schema": "v035",
+  "future032_required_change": "New immutable consumer branch must pin exact035 template+files, require actual same-source numeric160 owner/releases/consumer validation_contract v035. Original032 must reject035.",
+  "tests": "39 unittest discover PASS; peer independent 7 controls PASS external evidence; sameimageCPU/NPU pending"
+}

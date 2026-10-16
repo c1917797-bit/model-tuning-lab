@@ -1,0 +1,411 @@
+{
+  "latest_ledger": {
+    "ref": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/STORAGE_LEDGER061.14.json",
+      "bytes": 2800,
+      "sha256": "a332cf4fb73f311d51db7b9c414a35f850c7192055200db57738086220bc0487"
+    },
+    "content": {
+      "authority_ref": {
+        "bytes": 1213,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/DL061_STORAGE_AUTHORITY_20261016.json",
+        "sha256": "3b58d42555147db06874fa4db36ada8b95474af4f3153fc89b73e4b7779d6f6c"
+      },
+      "previous_ledger_ref": {
+        "bytes": 2634,
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/STORAGE_LEDGER061.13.json",
+        "sha256": "4764cdc7b386496b5bf952391304ccf1341dac02b49ee6a64af8bf8407b90799"
+      },
+      "reservations": [
+        {
+          "budget_bytes": 1073741824,
+          "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-001",
+          "stage": "cpu"
+        },
+        {
+          "budget_bytes": 35433480192,
+          "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-001",
+          "stage": "numeric"
+        },
+        {
+          "budget_bytes": 1073741824,
+          "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-recovery066-MAIN-20261016-NEW24H-001",
+          "stage": "cpu"
+        },
+        {
+          "budget_bytes": 1073741824,
+          "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-069-repair1-001",
+          "stage": "cpu"
+        },
+        {
+          "budget_bytes": 35433480192,
+          "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-069-repair1-001",
+          "stage": "numeric"
+        },
+        {
+          "budget_bytes": 35433480192,
+          "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001",
+          "stage": "numeric"
+        },
+        {
+          "budget_bytes": 1073741824,
+          "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair2-001",
+          "stage": "cpu"
+        },
+        {
+          "budget_bytes": 35433480192,
+          "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair2-001",
+          "stage": "numeric"
+        },
+        {
+          "budget_bytes": 35433480192,
+          "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair2-001",
+          "stage": "numeric"
+        },
+        {
+          "budget_bytes": 1073741824,
+          "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair4-001",
+          "stage": "cpu"
+        },
+        {
+          "budget_bytes": 35433480192,
+          "leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair4-001",
+          "stage": "numeric"
+        }
+      ],
+      "root": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061",
+      "schema": "deltalog.storage-reservations/v061",
+      "sealed_evidence_ref": {
+        "bytes": 8663,
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence119-MAIN-001/EVIDENCE119.json",
+        "sha256": "9c3955a2f4d112f54bfa188037b1336fc5b7cefe654561c00f72f103d8eb06d3"
+      },
+      "storage069_template_ref": {
+        "bytes": 937,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-119/SOURCE_MANIFEST.json",
+        "sha256": "aa574e91699c6b5bca8cfac66abab893a00a03bb5ef4eb87f851d73bc15faed6"
+      }
+    }
+  },
+  "phase_refs": [
+    {
+      "phase": "cpu",
+      "relative_path": "RESULT.json",
+      "ref": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair4-001/RESULT.json",
+        "bytes": 1402,
+        "sha256": "2f78b93a98214c265ec0507b436e82a3b1a5cab82acec10a668adbe05a65fde4"
+      },
+      "projection": {
+        "NPU": false,
+        "authority": {
+          "bytes": 3481,
+          "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+          "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+        },
+        "bridge_primitive_gate_pass": false,
+        "diagnostic_capture_complete": false,
+        "elapsed_seconds": 333.53386689996114,
+        "full_gdn_qualified": false,
+        "independent_consumer": null,
+        "model_ready": false,
+        "phase_seconds": 720,
+        "physical": [],
+        "primary": null,
+        "resource_admitted": true,
+        "result": {
+          "bytes": 5239,
+          "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair4-001/native/result/STAGE_RESULT.json",
+          "sha256": "cd22a595adc00323a6acb33fce6eb6c0b4b81e87df4764ccddbb6dd9d58095a8"
+        },
+        "schema": "deltalog.diagnostic-owned-host/v035",
+        "secondary": [],
+        "source": {
+          "bytes": 58489,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair4/SOURCE_MANIFEST.json",
+          "sha256": "6a65d090c8c102e5842438fea5b15a8782853510e8d9fc859e2f5e3d59da2669"
+        },
+        "stage": "cpu",
+        "steps": 16,
+        "stopped_retained": true,
+        "target_source": {
+          "bytes": 58489,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair4/SOURCE_MANIFEST.json",
+          "sha256": "6a65d090c8c102e5842438fea5b15a8782853510e8d9fc859e2f5e3d59da2669"
+        }
+      }
+    },
+    {
+      "phase": "cpu",
+      "relative_path": "native/create-receipt.json",
+      "ref": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair4-001/native/create-receipt.json",
+        "bytes": 13915,
+        "sha256": "a678637a2de83784a3695ee52f84aa3e48c6b9c197b8800e1b9b8c30c050095c"
+      },
+      "projection": {
+        "keys": [
+          "aggregate_peak_rss_kib",
+          "argv",
+          "child_peak_rss_kib",
+          "exit_code",
+          "host_RLIMIT_AS",
+          "host_peak_rss_kib",
+          "observed_utc",
+          "requested_argv",
+          "stderr",
+          "stdout"
+        ],
+        "State": null
+      }
+    },
+    {
+      "phase": "cpu",
+      "relative_path": "native/cleanup-before-inspect.json",
+      "ref": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair4-001/native/cleanup-before-inspect.json",
+        "bytes": 34819,
+        "sha256": "63a43e305aa1f4650b9e5fac27ae928d9804f830908d0fafc092734c6c5130b4"
+      },
+      "projection": {
+        "keys": [
+          "aggregate_peak_rss_kib",
+          "argv",
+          "child_peak_rss_kib",
+          "exit_code",
+          "host_RLIMIT_AS",
+          "host_peak_rss_kib",
+          "observed_utc",
+          "requested_argv",
+          "stderr",
+          "stdout"
+        ],
+        "State": null
+      }
+    },
+    {
+      "phase": "cpu",
+      "relative_path": "native/cleanup-after-inspect.json",
+      "ref": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair4-001/native/cleanup-after-inspect.json",
+        "bytes": 34819,
+        "sha256": "4735d0f534af7a92f63a3d473264006b965c865a7b65a3eb7f5c77d4e99aeaae"
+      },
+      "projection": {
+        "keys": [
+          "aggregate_peak_rss_kib",
+          "argv",
+          "child_peak_rss_kib",
+          "exit_code",
+          "host_RLIMIT_AS",
+          "host_peak_rss_kib",
+          "observed_utc",
+          "requested_argv",
+          "stderr",
+          "stdout"
+        ],
+        "State": null
+      }
+    },
+    {
+      "phase": "cpu",
+      "relative_path": "native/cleanup-verdict.json",
+      "ref": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair4-001/native/cleanup-verdict.json",
+        "bytes": 246,
+        "sha256": "d52ae721dc655a0cb9783e14e82e80f02554dcc768267a53d1e85e4ecafbf633"
+      },
+      "projection": {
+        "cid": "f5192b1320ae75b022b68f0eccd0b987aacb2b40c07da205b6113a8987275e9c",
+        "errors": [],
+        "resource_release_verified": true,
+        "retained": true,
+        "rm_authorized": false,
+        "secondary_guard_cleanup": [],
+        "stopped": true,
+        "unresolved_active_cid": null
+      }
+    },
+    {
+      "phase": "numeric16",
+      "relative_path": "RESULT.json",
+      "ref": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair4-001/RESULT.json",
+        "bytes": 1402,
+        "sha256": "ab4140c1dc8b1f7be63c7e5aba18e01852aa94c506052e5cc06dc9c6e84af355"
+      },
+      "projection": {
+        "NPU": true,
+        "authority": {
+          "bytes": 3481,
+          "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+          "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+        },
+        "bridge_primitive_gate_pass": false,
+        "diagnostic_capture_complete": false,
+        "elapsed_seconds": 454.250362700026,
+        "full_gdn_qualified": false,
+        "independent_consumer": null,
+        "model_ready": false,
+        "phase_seconds": 2880,
+        "physical": [
+          5
+        ],
+        "primary": "ValueError('foreign physical4..7 process/cgroup')",
+        "resource_admitted": true,
+        "result": null,
+        "schema": "deltalog.diagnostic-owned-host/v035",
+        "secondary": [
+          "cleanup ValueError('owned cleanup/resource release failed: [{\\'operation\\': \\'resource-release\\', \\'error\\': \"ValueError(\\'unowned physical compute must be idle\\')\"}]')"
+        ],
+        "source": {
+          "bytes": 58489,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair4/SOURCE_MANIFEST.json",
+          "sha256": "6a65d090c8c102e5842438fea5b15a8782853510e8d9fc859e2f5e3d59da2669"
+        },
+        "stage": "numeric",
+        "steps": 16,
+        "stopped_retained": true,
+        "target_source": {
+          "bytes": 58489,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair4/SOURCE_MANIFEST.json",
+          "sha256": "6a65d090c8c102e5842438fea5b15a8782853510e8d9fc859e2f5e3d59da2669"
+        }
+      }
+    },
+    {
+      "phase": "numeric16",
+      "relative_path": "numeric/create-receipt.json",
+      "ref": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair4-001/numeric/create-receipt.json",
+        "bytes": 15763,
+        "sha256": "234986da44314240ef9d0ad711f9dd11610b5d0b7521d40d239b39a97243876d"
+      },
+      "projection": {
+        "keys": [
+          "aggregate_peak_rss_kib",
+          "argv",
+          "child_peak_rss_kib",
+          "exit_code",
+          "host_RLIMIT_AS",
+          "host_peak_rss_kib",
+          "observed_utc",
+          "requested_argv",
+          "stderr",
+          "stdout"
+        ],
+        "State": null
+      }
+    },
+    {
+      "phase": "numeric16",
+      "relative_path": "numeric/cleanup-before-inspect.json",
+      "ref": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair4-001/numeric/cleanup-before-inspect.json",
+        "bytes": 37915,
+        "sha256": "e3655b769cbad2758bad200ba2ba6a7e9b730ad358335835630f6995b37047e6"
+      },
+      "projection": {
+        "keys": [
+          "aggregate_peak_rss_kib",
+          "argv",
+          "child_peak_rss_kib",
+          "exit_code",
+          "host_RLIMIT_AS",
+          "host_peak_rss_kib",
+          "observed_utc",
+          "requested_argv",
+          "stderr",
+          "stdout"
+        ],
+        "State": null
+      }
+    },
+    {
+      "phase": "numeric16",
+      "relative_path": "numeric/cleanup-after-inspect.json",
+      "ref": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair4-001/numeric/cleanup-after-inspect.json",
+        "bytes": 37856,
+        "sha256": "619672f8fa6bba38b04d749d8df98b98e0dbfcd9c20e60f534323a540ee0c61c"
+      },
+      "projection": {
+        "keys": [
+          "aggregate_peak_rss_kib",
+          "argv",
+          "child_peak_rss_kib",
+          "exit_code",
+          "host_RLIMIT_AS",
+          "host_peak_rss_kib",
+          "observed_utc",
+          "requested_argv",
+          "stderr",
+          "stdout"
+        ],
+        "State": null
+      }
+    },
+    {
+      "phase": "numeric16",
+      "relative_path": "numeric/cleanup-verdict.json",
+      "ref": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair4-001/numeric/cleanup-verdict.json",
+        "bytes": 344,
+        "sha256": "09640931083be1f9b3b67c50942779dd992c47acbc25281e41529ac7529f51f1"
+      },
+      "projection": {
+        "cid": "04dc705025559c166055ce4866abdbd81582d686d9b44500ada3fdd20569204f",
+        "errors": [
+          {
+            "error": "ValueError('unowned physical compute must be idle')",
+            "operation": "resource-release"
+          }
+        ],
+        "resource_release_verified": false,
+        "retained": true,
+        "rm_authorized": false,
+        "secondary_guard_cleanup": [],
+        "stopped": true,
+        "unresolved_active_cid": null
+      }
+    }
+  ],
+  "actual_stopped": [
+    {
+      "cid": "f5192b1320ae75b022b68f0eccd0b987aacb2b40c07da205b6113a8987275e9c",
+      "state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-16T15:59:59.39655424Z",
+        "FinishedAt": "2026-10-16T16:01:22.97301567Z"
+      },
+      "exec_ids": null,
+      "pid": 0
+    },
+    {
+      "cid": "04dc705025559c166055ce4866abdbd81582d686d9b44500ada3fdd20569204f",
+      "state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 137,
+        "Error": "",
+        "StartedAt": "2026-10-16T16:06:28.81526816Z",
+        "FinishedAt": "2026-10-16T16:09:02.82061759Z"
+      },
+      "exec_ids": null,
+      "pid": 0
+    }
+  ]
+}

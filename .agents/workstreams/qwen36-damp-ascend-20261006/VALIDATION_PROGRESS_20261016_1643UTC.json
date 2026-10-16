@@ -1,0 +1,162 @@
+{
+  "schema": "ascend.paper-portfolio.correctness-progress/v1",
+  "observed_utc": "2026-10-16T16:43:12Z",
+  "prior_checkpoint": "VALIDATION_PROGRESS_20261016_1605UTC.json",
+  "authority": "NEW24H_AUTHORITY_20261016.json",
+  "final_goal_accepted": false,
+  "performance_accepted": false,
+  "task_accuracy_accepted": false,
+  "authorized_physical": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_physical": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "BOLE": {
+    "GDN_component": "112R4 independent72/72 passed; see prior checkpoint",
+    "tree_FIA": {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair6/SOURCE_MANIFEST.json",
+        "bytes": 13071,
+        "sha256": "d68db36a5c9003ab5a805883e248a392c6e8b527ec21ccb058cf2d0ffe183269"
+      },
+      "operation": "exec-0000000000000d2d",
+      "all_stages_exit0": true,
+      "physical": [
+        4
+      ],
+      "cases": 6,
+      "passed": 6,
+      "mask_modes": [
+        0,
+        1
+      ],
+      "independent_FP32_and_FP64_allclose_passed": true,
+      "max_relative_L2_FP64": 0.0020889997344453845,
+      "attribution": {
+        "path": "/opt/host/vnf/austinov/run-bole-tree-fa116repair6-MAIN-20261016-001/mask/consumer/ATTRIBUTION.json",
+        "bytes": 4927,
+        "sha256": "c615568464faf2bbdc867dd82c1d4c898d54a3f89016abdf139ac8718ca0bd47"
+      },
+      "numeric_owner": {
+        "path": "/opt/host/vnf/austinov/run-bole-tree-fa116repair6-MAIN-20261016-001/mask/numeric/RESULT.json",
+        "bytes": 1664,
+        "sha256": "8dc1d97d11d0a89087f8a670e3ec88e129ae676fe4393e4a7e67e18c712fe0fd"
+      },
+      "consumer_owner": {
+        "path": "/opt/host/vnf/austinov/run-bole-tree-fa116repair6-MAIN-20261016-001/mask/consumer/RESULT.json",
+        "bytes": 1214,
+        "sha256": "ee93e20208d478d67a5a1ca7c540a2d75ec685c816722b6cc9b149bc35d99696"
+      },
+      "release": {
+        "path": "/opt/host/vnf/austinov/run-bole-tree-fa116repair6-MAIN-20261016-001/mask/numeric/numeric/cleanup-verdict.json",
+        "bytes": 246,
+        "sha256": "e54d27f3433e17e57865bae76619258bafc0cfac24cd5868e43b394787641a79"
+      },
+      "not_covered": [
+        "actual native conv ABI/calibration",
+        "packed TND paged KV",
+        "joint KV/conv/GDN commit",
+        "graph",
+        "TP4 model scheduler",
+        "E2E performance",
+        "task accuracy"
+      ]
+    },
+    "preserved_failures": {
+      "R3": "CPU mandatory GDN import required HAL; real FIA ABI already present, unrelated conv dependency split, not a paper failure",
+      "R4": "CPU passed, ticket lacked exact guest-host ABI alias mapping",
+      "R5": "CPU software fixture under actual /adakv-results TMPDIR triggered overbroad startswith selector; exact alias discriminator fixed in R6"
+    }
+  },
+  "MXR": {
+    "R5_state_failures": "25/192 unchanged",
+    "analysis_operation": "exec-0000000000000d0f",
+    "original_analysis_parent": "FAIL exact separate analysis/software receipt join; child exited0",
+    "analysis": {
+      "path": "/opt/host/vnf/austinov/run-mxr-prefill120analysis1-CPU-MAIN-NEW24H_001/ANALYSIS120A1.json",
+      "bytes": 4323534,
+      "sha256": "f0948390c6621b83682225c1f8d5408a2fbf2e4810a2df1331a341d981fe394e"
+    },
+    "transport_recovery_operation": "exec-0000000000000d28",
+    "transport_recovery_exit0": true,
+    "original_parent_failure_retained": true,
+    "reference_validity_resolved": false,
+    "layer4_common_denominator_error_components": {
+      "candidate-native": 0.00012201504091811124,
+      "native-CPU64cast": 0.00006599890291675505,
+      "CPU64cast-working": 0.0026272855272933752
+    },
+    "interpretation": "norms do not add; actual A/G and native WY/H shared boundaries remain to be separated; no blind X3 or threshold relaxation",
+    "next": "bounded independent actualG/actualA CPU counterfactual preparation"
+  },
+  "DeltaLog": {
+    "R4_cpu_Meta": "passed",
+    "R4_numeric16": {
+      "operation": "exec-0000000000000ce2",
+      "outcome": "resource/ownership observation failure; NOT numeric failure",
+      "physical": [
+        5
+      ],
+      "primary": "foreign physical4..7 process/cgroup",
+      "observed_foreign_PIDs": [
+        2974551,
+        2987870
+      ],
+      "producer_complete": false,
+      "owner_source_unchanged": true,
+      "old_failure_and_cleanup_flags_retained": true,
+      "own_CID_stopped_freshly_verified": true,
+      "unidentified_foreign_processes_not_signalled": true
+    },
+    "storage121": {
+      "operation": "exec-0000000000000d20",
+      "exit0": true,
+      "closed_phases": 11,
+      "plan": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/PLAN_STORAGE121_MAIN_001.json",
+        "bytes": 5113,
+        "sha256": "53c39b74af92178a13852e70791bef93fd1ecc767c31da25d8600551b7ddc3ae"
+      },
+      "evidence": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence121-MAIN-001/EVIDENCE121.json",
+        "bytes": 7329,
+        "sha256": "44bcabef7286307cfa2d7ceb05213a877c34001c2534aebc8bb2630d2ddcfbd6"
+      },
+      "generation": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/STORAGE_LEDGER061.15.json",
+        "bytes": 2802,
+        "sha256": "153d35ff3e896987be52e01d3cc8ca6918d29a9b22fdc50bd59a161174ba5583"
+      },
+      "numeric_qualification": false
+    },
+    "R5": {
+      "template": {
+        "bytes": 62770,
+        "sha256": "f3f12ddc4e3f0b255b5f38f7e8f731bc3f29d8b161d9f96db8a1c923e5b390e8"
+      },
+      "operation": "exec-0000000000000d38",
+      "status_at_checkpoint": "running, sequence bind -> sourceaudit -> CPU ->16 ->160; prerequisites enforced",
+      "new_numerical_pass_not_yet_claimed": true,
+      "pre_admission_metadata_POSIX_correction_preserved": true
+    }
+  },
+  "scheduling": {
+    "four_cards_no_gap": false,
+    "continuous_30minute_utilization": "unmeasured",
+    "legacy_global_owner_fences_preserved": true,
+    "only_claimed_current_operation": "exec-0000000000000d38",
+    "latest_fresh_snapshot": "0d31 found physical4-7 no processes and idle HBM; protected0-3 external TP4 remained untouched"
+  },
+  "source_archives": [
+    "projects/qwen36-paper-portfolio/tools/new24h_112r4_119_20261016",
+    "projects/qwen36-paper-portfolio/tools/new24h_correctness_diagnostics_20261016_1605"
+  ],
+  "unrelated_dirty_and_untracked_files_preserved": true
+}

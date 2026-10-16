@@ -1,0 +1,80 @@
+{
+  "NPU": false,
+  "actual_CID": "ccfc6ad42d8f1852ec2925f97bcf9d1584b004f3336aabebccb61df471089f9d",
+  "actual_parent_output_root": "/opt/host/vnf/austinov/run-mxr-prefill120analysis1-CPU-MAIN-NEW24H_001",
+  "actual_record_refs": {
+    "analysis": {
+      "bytes": 4323534,
+      "path": "/opt/host/vnf/austinov/run-mxr-prefill120analysis1-CPU-MAIN-NEW24H_001/ANALYSIS120A1.json",
+      "sha256": "f0948390c6621b83682225c1f8d5408a2fbf2e4810a2df1331a341d981fe394e"
+    },
+    "cid": {
+      "bytes": 135,
+      "path": "/opt/host/vnf/austinov/run-mxr-prefill120analysis1-CPU-MAIN-NEW24H_001/CID.json",
+      "sha256": "15a84385d3aa2006179293af3c605d1cf162500214a270385ee898723df1b854"
+    },
+    "create": {
+      "bytes": 304321,
+      "path": "/opt/host/vnf/austinov/run-mxr-prefill120analysis1-CPU-MAIN-NEW24H_001/CREATE_ARGV.json",
+      "sha256": "03638fe8c999dae02bd9efa5e5b8ff2d292f977fc272a4e41f258b055b983b3b"
+    },
+    "inspect": {
+      "bytes": 698329,
+      "path": "/opt/host/vnf/austinov/run-mxr-prefill120analysis1-CPU-MAIN-NEW24H_001/FINAL_INSPECT.json",
+      "sha256": "fe152bcd928cde73fde62ca149f46676649e5e37f86e54dd28ca5a84772fd20c"
+    },
+    "parent": {
+      "bytes": 1125,
+      "path": "/opt/host/vnf/austinov/run-mxr-prefill120analysis1-CPU-MAIN-NEW24H_001/RESULT.json",
+      "sha256": "5052da0a6f6390465535d19371f9552c94f01ff274d361129ef598b3ac91f3af"
+    },
+    "receipt": {
+      "bytes": 1289,
+      "path": "/opt/host/vnf/austinov/run-mxr-prefill120analysis1-CPU-MAIN-NEW24H_001/ANALYSIS_RECEIPT.json",
+      "sha256": "1d20f4c01914aeaddbad2eba03903d03c26b6711bc7b9fc3c8dc7dfede754b94"
+    },
+    "software": {
+      "bytes": 318,
+      "path": "/opt/host/vnf/austinov/run-mxr-prefill120analysis1-CPU-MAIN-NEW24H_001/SOFTWARE_CONTROLS.json",
+      "sha256": "5fbfaa1b5e189c1ccfd70feec447ad6009bfba38b05eda649a53a7ec45746f94"
+    }
+  },
+  "budgets": {
+    "CPU_seconds": 60,
+    "host_bytes": 536870912,
+    "input_bytes_max": 8388608,
+    "output_bytes": 65536
+  },
+  "default_enabled": false,
+  "expected_original_primary": "ValueError('actual separate analysis and software receipt exact byte/source join')",
+  "files": {
+    "recover.py": {
+      "bytes": 9824,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis2-recovery-new24h-v1/recover.py",
+      "sha256": "fd01d9e299abcc265d4f4927f37317ab7f6d3f734add966746a11eac35667408"
+    },
+    "test_recover.py": {
+      "bytes": 6834,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis2-recovery-new24h-v1/test_recover.py",
+      "sha256": "ce53a52a2f9eeaf4eaa48e440aea0e8ff3353ab9a7986611ceec222c008dc3b7"
+    }
+  },
+  "no_original_mutation": true,
+  "no_recompute": true,
+  "original_analysis_source_ref": {
+    "bytes": 2049,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-cpu-analysis120-analysis1/SOURCE_MANIFEST.json",
+    "sha256": "2aa03ec57f22b6dbac432c32f1b182a7057403337d9fe88e6790fa5b1aeec352"
+  },
+  "original_owner_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis-owned-new24h-v1-120-analysis1",
+  "original_owner_source_ref": {
+    "bytes": 9094,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis-owned-new24h-v1-120-analysis1/SOURCE_MANIFEST.json",
+    "sha256": "347b822e44dc2aec3aff0c1f7f5b29e545a1a4b75ef787a59b5be8632c37840f"
+  },
+  "original_parent_remains_FAILED": true,
+  "qualification": false,
+  "recovery_output_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-prefill120-analysis2-recovery-MAIN-NEW24H_001",
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis2-recovery-new24h-v1",
+  "schema": "mxr.analysis-recovery-source/v120-analysis2"
+}

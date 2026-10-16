@@ -1,0 +1,31 @@
+{
+  "CPU_only": true,
+  "actual_inputs_pending": true,
+  "command": [
+    "/usr/local/python3.12.13/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-cpu-analysis120-analysis1/analyze.py",
+    "--execute",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-cpu-analysis120-analysis1/SOURCE_MANIFEST.json\",\"bytes\":2049,\"sha256\":\"2aa03ec57f22b6dbac432c32f1b182a7057403337d9fe88e6790fa5b1aeec352\"}",
+    "--stage-ref",
+    "<ACTUAL_COMPLETE_120R2_STAGE_REF3>",
+    "--output",
+    "<FRESH_EXISTING_CPU_OWNED_RW_DIRECTORY>/ANALYSIS120A1.json"
+  ],
+  "interpreter_rule": "Exact guest Python from sealed120R2 owned/owned_cpu120.py PY, not host Torch.",
+  "optional_repeat": [
+    "--repeat-stage-ref",
+    "<SECOND_ACTUAL_COMPLETE_SAME_SOURCE_STAGE_REF3>"
+  ],
+  "output_cap": 16777216,
+  "qualification": false,
+  "readset_rule": "Original120R2 G.readset plus extension4files/source; actualstage and its9 arm raw Ref3 read-only; no broad root writable",
+  "resource_owner": "Reuse existing120 Devices[] owner; no new launcher/controller",
+  "source": {
+    "bytes": 2049,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-cpu-analysis120-analysis1/SOURCE_MANIFEST.json",
+    "sha256": "2aa03ec57f22b6dbac432c32f1b182a7057403337d9fe88e6790fa5b1aeec352"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "MAIN_only": true,
+  "NPU": false,
+  "commands": {
+    "CPU": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis-owned-new24h-v1-120-analysis1/owned_analysis.py",
+      "--execute",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis-owned-new24h-v1-120-analysis1/SOURCE_MANIFEST.json\",\"bytes\":9094,\"sha256\":\"347b822e44dc2aec3aff0c1f7f5b29e545a1a4b75ef787a59b5be8632c37840f\"}",
+      "--stage-ref",
+      "{\"path\":\"/opt/host/vnf/austinov/run-mxr-prefill120repair2-npu-MAIN-NEW24H_001/numeric/result/STAGE_RESULT.json\",\"bytes\":5414,\"sha256\":\"7f75510c0da848a1b50ac6c92af56ecdfc7cb46240040265ae8ae716b29fef26\"}",
+      "--host-cpu",
+      "HOST_CPU",
+      "--guest-cpu",
+      "GUEST_CPU",
+      "--output",
+      "/opt/host/vnf/austinov/run-mxr-prefill120analysis1-CPU-MAIN-NEW24H_001"
+    ],
+    "sourceaudit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis-owned-new24h-v1-120-analysis1/owned_analysis.py",
+      "--source-audit",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis-owned-new24h-v1-120-analysis1/SOURCE_MANIFEST.json\",\"bytes\":9094,\"sha256\":\"347b822e44dc2aec3aff0c1f7f5b29e545a1a4b75ef787a59b5be8632c37840f\"}",
+      "--stage-ref",
+      "{\"path\":\"/opt/host/vnf/austinov/run-mxr-prefill120repair2-npu-MAIN-NEW24H_001/numeric/result/STAGE_RESULT.json\",\"bytes\":5414,\"sha256\":\"7f75510c0da848a1b50ac6c92af56ecdfc7cb46240040265ae8ae716b29fef26\"}"
+    ]
+  },
+  "qualified": false,
+  "source": {
+    "bytes": 9094,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-analysis-owned-new24h-v1-120-analysis1/SOURCE_MANIFEST.json",
+    "sha256": "347b822e44dc2aec3aff0c1f7f5b29e545a1a4b75ef787a59b5be8632c37840f"
+  },
+  "source_only": true
+}

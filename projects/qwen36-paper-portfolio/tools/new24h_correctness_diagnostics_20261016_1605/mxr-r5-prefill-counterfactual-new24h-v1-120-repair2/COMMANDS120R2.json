@@ -1,0 +1,100 @@
+{
+  "MAIN_only": true,
+  "commands": {
+    "NPU": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-owned-new24h-v1-120-repair2/owner120.py",
+      "--execute",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-owned-new24h-v1-120-repair2/SOURCE_MANIFEST.json\",\"bytes\":6784,\"sha256\":\"462a49df142db3d0bcf3790837104de3207bc49cb4595f10821158f8c45f5443\"}",
+      "--host-cpu",
+      "HOST_CPU",
+      "--guest-cpu",
+      "GUEST_CPU",
+      "--output",
+      "/opt/host/vnf/austinov/run-mxr-prefill120repair2-npu-MAIN-NEW24H_001"
+    ],
+    "consume_sourceaudit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-owned-new24h-v1-120-repair2/owned_cpu120.py",
+      "--source-audit",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-owned-new24h-v1-120-repair2/SOURCE_MANIFEST.json\",\"bytes\":6784,\"sha256\":\"462a49df142db3d0bcf3790837104de3207bc49cb4595f10821158f8c45f5443\"}",
+      "--stage-ref",
+      "EXACT_ACTUAL120_STAGE_REF3"
+    ],
+    "independent": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-owned-new24h-v1-120-repair2/owned_cpu120.py",
+      "--execute",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-owned-new24h-v1-120-repair2/SOURCE_MANIFEST.json\",\"bytes\":6784,\"sha256\":\"462a49df142db3d0bcf3790837104de3207bc49cb4595f10821158f8c45f5443\"}",
+      "--host-cpu",
+      "HOST_CPU",
+      "--guest-cpu",
+      "GUEST_CPU",
+      "--stage-ref",
+      "EXACT_ACTUAL120_STAGE_REF3",
+      "--output",
+      "/opt/host/vnf/austinov/run-mxr-prefill120repair2-consume-MAIN-NEW24H_001"
+    ],
+    "preflight": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-owned-new24h-v1-120-repair2/owned_cpu120.py",
+      "--execute",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-owned-new24h-v1-120-repair2/SOURCE_MANIFEST.json\",\"bytes\":6784,\"sha256\":\"462a49df142db3d0bcf3790837104de3207bc49cb4595f10821158f8c45f5443\"}",
+      "--host-cpu",
+      "HOST_CPU",
+      "--guest-cpu",
+      "GUEST_CPU",
+      "--output",
+      "/opt/host/vnf/austinov/run-mxr-prefill120repair2-preflight-MAIN-NEW24H_001"
+    ],
+    "preflight_sourceaudit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-owned-new24h-v1-120-repair2/owned_cpu120.py",
+      "--source-audit",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-owned-new24h-v1-120-repair2/SOURCE_MANIFEST.json\",\"bytes\":6784,\"sha256\":\"462a49df142db3d0bcf3790837104de3207bc49cb4595f10821158f8c45f5443\"}"
+    ],
+    "sourceaudit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-owned-new24h-v1-120-repair2/owner120.py",
+      "--source-audit",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-owned-new24h-v1-120-repair2/SOURCE_MANIFEST.json\",\"bytes\":6784,\"sha256\":\"462a49df142db3d0bcf3790837104de3207bc49cb4595f10821158f8c45f5443\"}"
+    ]
+  },
+  "guest_source": {
+    "bytes": 8827,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-new24h-v1-120-repair2/SOURCE_MANIFEST.json",
+    "sha256": "e2df58e982dc73d8fa57c5f33334c2ffce76670d52add26aa373b7440b7fa363"
+  },
+  "qualified": false,
+  "schema": "mxr.r5-prefill-counterfactual-commands/v120",
+  "sequence": [
+    "sourceaudit",
+    "preflight",
+    "NPU",
+    "independent"
+  ],
+  "source": {
+    "bytes": 6784,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-owned-new24h-v1-120-repair2/SOURCE_MANIFEST.json",
+    "sha256": "462a49df142db3d0bcf3790837104de3207bc49cb4595f10821158f8c45f5443"
+  },
+  "source_only": true
+}

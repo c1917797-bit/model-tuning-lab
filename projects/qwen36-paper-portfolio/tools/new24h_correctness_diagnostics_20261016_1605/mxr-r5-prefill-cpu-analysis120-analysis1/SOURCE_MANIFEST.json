@@ -1,0 +1,47 @@
+{
+  "NPU": false,
+  "actual_inputs_pending": true,
+  "budgets": {
+    "child_seconds": 600,
+    "cleanup_seconds": 90,
+    "guest_bytes": 8589934592,
+    "host_bytes": 536870912,
+    "input_three_arm_bytes_cap": 805306368,
+    "new_NPU_raw_bytes": 0,
+    "output_bytes": 16777216,
+    "reserve_bytes": 8589934592
+  },
+  "default_enabled": false,
+  "files": {
+    "SOFTWARE_FIXTURE_SOURCES.json": {
+      "bytes": 9719,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-cpu-analysis120-analysis1/SOFTWARE_FIXTURE_SOURCES.json",
+      "sha256": "86857b3fa3506a98e112f63cf7bedd131e541db48f9da129ec75c7451e68fc33"
+    },
+    "analyze.py": {
+      "bytes": 14663,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-cpu-analysis120-analysis1/analyze.py",
+      "sha256": "4ff182a18f6a933c7b6c1f86e5717b32230a790f63e755a8251611338f83d482"
+    },
+    "direct_round.py": {
+      "bytes": 3378,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-cpu-analysis120-analysis1/direct_round.py",
+      "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d"
+    },
+    "test_analysis.py": {
+      "bytes": 8590,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-cpu-analysis120-analysis1/test_analysis.py",
+      "sha256": "684e5990fa5bacbe6f7d673a2c0607f5b15e9984b50a79e3052a92a47d1ca9ce"
+    }
+  },
+  "no_new_owner": true,
+  "original_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-new24h-v1-120-repair2",
+  "original_source_ref": {
+    "bytes": 8827,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-new24h-v1-120-repair2/SOURCE_MANIFEST.json",
+    "sha256": "e2df58e982dc73d8fa57c5f33334c2ffce76670d52add26aa373b7440b7fa363"
+  },
+  "qualification": false,
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-cpu-analysis120-analysis1",
+  "schema": "mxr.prefill-cpu-analysis-source/v120-analysis1"
+}

@@ -1,0 +1,64 @@
+{
+  "bind": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-121/sealed121.py",
+    "--execute",
+    "--mode",
+    "bind",
+    "--source-ref",
+    "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-121/SOURCE_MANIFEST.json\", \"bytes\": 2003, \"sha256\": \"311f70dfa8fdf683a2ab5efed747890c9ed40b3afc492494ff118a37a2213a2a\"}",
+    "--target-source-ref",
+    "ACTUAL_BOUND088R4_SOURCE_REF3",
+    "--output",
+    "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/PLAN_STORAGE121_MAIN_001.json"
+  ],
+  "capture": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-121/sealed121.py",
+    "--execute",
+    "--mode",
+    "capture",
+    "--source-ref",
+    "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-121/SOURCE_MANIFEST.json\", \"bytes\": 2003, \"sha256\": \"311f70dfa8fdf683a2ab5efed747890c9ed40b3afc492494ff118a37a2213a2a\"}",
+    "--plan-ref",
+    "ACTUAL_BIND_PLAN_REF3"
+  ],
+  "execution_by_MAIN_only": true,
+  "numeric_qualification": false,
+  "schema": "deltalog.closed-storage-commands/v121",
+  "seal": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-121/sealed121.py",
+    "--execute",
+    "--mode",
+    "seal",
+    "--source-ref",
+    "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-121/SOURCE_MANIFEST.json\", \"bytes\": 2003, \"sha256\": \"311f70dfa8fdf683a2ab5efed747890c9ed40b3afc492494ff118a37a2213a2a\"}",
+    "--evidence-ref",
+    "ACTUAL_CAPTURE_EVIDENCE_REF3"
+  ],
+  "source": {
+    "bytes": 2003,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-121/SOURCE_MANIFEST.json",
+    "sha256": "311f70dfa8fdf683a2ab5efed747890c9ed40b3afc492494ff118a37a2213a2a"
+  },
+  "validate": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-121/sealed121.py",
+    "--execute",
+    "--mode",
+    "validate",
+    "--source-ref",
+    "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-121/SOURCE_MANIFEST.json\", \"bytes\": 2003, \"sha256\": \"311f70dfa8fdf683a2ab5efed747890c9ed40b3afc492494ff118a37a2213a2a\"}",
+    "--evidence-ref",
+    "ACTUAL_CAPTURE_EVIDENCE_REF3"
+  ]
+}

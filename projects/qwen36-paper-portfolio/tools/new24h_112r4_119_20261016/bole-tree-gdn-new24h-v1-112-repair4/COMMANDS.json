@@ -1,0 +1,98 @@
+{
+  "actual_controller_suite_in_owned_CPU": true,
+  "aggregate_local_readonly": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4",
+    "-p",
+    "test*.py"
+  ],
+  "execute_authorized_here": false,
+  "logical": 0,
+  "mapping_suite_in_owned_CPU": true,
+  "physical": 4,
+  "prefix": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/run112.py",
+    "--execute"
+  ],
+  "required_MAIN_created_parents": [
+    "/opt/host/vnf/austinov/run-bole-tree112repair4-MAIN-20261016-001/smoke",
+    "/opt/host/vnf/austinov/run-bole-tree112repair4-MAIN-20261016-001/full"
+  ],
+  "reviewed_template_required": {
+    "bytes": 8034,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/SOURCE_TEMPLATE.json",
+    "sha256": "d65e72d203bee43d3f2457373e4376f757fdcfa7bc9cdbebb92ec2fb57a20075"
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4",
+  "schema": "bole.typed-commands/v112",
+  "software_count": 17,
+  "stages": {
+    "bind-full": [
+      "--stage",
+      "bind",
+      "--profile",
+      "full",
+      "--reviewed-template-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/SOURCE_TEMPLATE.json\",\"bytes\":8034,\"sha256\":\"d65e72d203bee43d3f2457373e4376f757fdcfa7bc9cdbebb92ec2fb57a20075\"}",
+      "--smoke-consumer-owner-ref",
+      "<actual released smoke consumer RESULT Ref3 JSON>"
+    ],
+    "bind-smoke": [
+      "--stage",
+      "bind",
+      "--profile",
+      "smoke",
+      "--reviewed-template-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/SOURCE_TEMPLATE.json\",\"bytes\":8034,\"sha256\":\"d65e72d203bee43d3f2457373e4376f757fdcfa7bc9cdbebb92ec2fb57a20075\"}"
+    ],
+    "consumer": [
+      "--stage",
+      "consumer",
+      "--source-ref",
+      "<actual bound source Ref3 JSON>",
+      "--numeric-owner-ref",
+      "<actual released same-source NPU RESULT Ref3 JSON>",
+      "--host-cpu",
+      "<MAIN actual CPU ID>",
+      "--guest-cpu",
+      "<MAIN distinct CPU ID>"
+    ],
+    "cpu": [
+      "--stage",
+      "cpu",
+      "--source-ref",
+      "<actual bound source Ref3 JSON>",
+      "--host-cpu",
+      "<MAIN actual CPU ID>",
+      "--guest-cpu",
+      "<MAIN distinct CPU ID>"
+    ],
+    "numeric": [
+      "--stage",
+      "numeric",
+      "--source-ref",
+      "<actual bound source Ref3 JSON>",
+      "--cpu-owner-ref",
+      "<actual released same-source CPU RESULT Ref3 JSON>",
+      "--host-cpu",
+      "<MAIN actual CPU ID>",
+      "--guest-cpu",
+      "<MAIN distinct CPU ID>"
+    ],
+    "sourceaudit": [
+      "--stage",
+      "sourceaudit",
+      "--source-ref",
+      "<actual bound SOURCE_SMOKE or SOURCE_FULL Ref3 JSON>"
+    ]
+  }
+}

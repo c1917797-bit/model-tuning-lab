@@ -1,0 +1,45 @@
+{
+  "actual_baseline_ledger_ref": {
+    "bytes": 2800,
+    "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/STORAGE_LEDGER061.14.json",
+    "sha256": "a332cf4fb73f311d51db7b9c414a35f850c7192055200db57738086220bc0487"
+  },
+  "baseline_binding": "exact fresh observed highest14, refuse any subsequent generation before seal",
+  "default_enabled": false,
+  "files": {
+    "ACTUAL_CLOSURE_INPUT.json": {
+      "bytes": 14901,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-121/ACTUAL_CLOSURE_INPUT.json",
+      "sha256": "b6704669067b82c1324acb3b0c6397459305965d7fc616ea3e3564d71e2316fd"
+    },
+    "canonical119.py": {
+      "bytes": 10337,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-121/canonical119.py",
+      "sha256": "090f81382a911b5df26159d874ee5c5bd97a51f7244f409e5615a1e2a5ba644e"
+    },
+    "sealed121.py": {
+      "bytes": 11841,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-121/sealed121.py",
+      "sha256": "fb020958c5a8835a3b60e612aef4e0b3a93de2a4dad646bb7ac402af2fabdd19"
+    },
+    "test121.py": {
+      "bytes": 3384,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-121/test121.py",
+      "sha256": "5a2d62de4966d78c7db8e6a54a819782213cae60854c4921c80bbbb8be34b857"
+    }
+  },
+  "max_total_bytes": 85899345920,
+  "min_free_bytes": 107374182400,
+  "numerical_qualification": false,
+  "prior_source": {
+    "bytes": 937,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-119/SOURCE_MANIFEST.json",
+    "sha256": "aa574e91699c6b5bca8cfac66abab893a00a03bb5ef4eb87f851d73bc15faed6"
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-121",
+  "schema": "deltalog.closed-storage-source/v121",
+  "window": {
+    "cutoff": 1792220533,
+    "start": 1792134133
+  }
+}

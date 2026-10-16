@@ -1,0 +1,104 @@
+{
+  "assemble.py": [
+    [
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-056",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061"
+    ],
+    [
+      "/opt/host/vnf/austinov/deltalog-split-scale-numeric-new24h-056",
+      "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061"
+    ]
+  ],
+  "bind052.py": [
+    [
+      "p.add_argument('--build-ref');a=p.parse_args()",
+      "p.add_argument('--build-ref');p.add_argument('--storage-authority-ref');a=p.parse_args()"
+    ],
+    [
+      "for r in m['files'].values():C.checked(r)",
+      "for r in m['files'].values():C.checked(r)\n storage_ref=json.loads(a.storage_authority_ref);__import__('storage061').authority(storage_ref,C.obj);m['storage_authority_ref']=storage_ref"
+    ]
+  ],
+  "host.py": [
+    [
+      "/opt/host/vnf/austinov/deltalog-split-scale-numeric-new24h-056",
+      "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061"
+    ],
+    [
+      "deltalog-split-scale-numeric-new24h-MAIN-056",
+      "deltalog-split-scale-numeric-new24h-MAIN-061"
+    ],
+    [
+      "refs.extend([m['composite_api_ref']",
+      "refs.append(m['storage_authority_ref'])\n refs.extend([m['composite_api_ref']"
+    ],
+    [
+      "out=a.output;out.mkdir();lane=GE(a,root)",
+      "out=a.output;storage=load(m['files']['storage061.py'],'_storage061');storage.reserve(out.parent,out,a.stage,obj,m['storage_authority_ref']);out.mkdir();lane=GE(a,root)"
+    ],
+    [
+      "r,x=self.inspect(self.active)\n                if stage",
+      "storage.check(a.output.parent)\n                r,x=self.inspect(self.active)\n                if stage"
+    ],
+    [
+      "self.stage=stage;self.secondary=[];self.output=a.output/stage",
+      "storage.check(a.output.parent)\n            self.stage=stage;self.secondary=[];self.output=a.output/stage"
+    ]
+  ],
+  "inverse056.py": [
+    [
+      "def undo(name,text):\n",
+      "def undo(name,text):\n from inverse061 import undo as back061\n text=back061(name,text)\n"
+    ]
+  ],
+  "prepare056.py": [
+    [
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-056",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-061"
+    ],
+    [
+      "/opt/host/vnf/austinov/deltalog-split-scale-numeric-new24h-056",
+      "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061"
+    ],
+    [
+      "deltalog-split-scale-numeric-new24h-MAIN-056",
+      "deltalog-split-scale-numeric-new24h-MAIN-061"
+    ]
+  ],
+  "run043.py": [
+    [
+      "/opt/host/vnf/austinov/deltalog-split-scale-numeric-new24h-056",
+      "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061"
+    ]
+  ],
+  "run052.py": [
+    [
+      "/opt/host/vnf/austinov/deltalog-split-scale-numeric-new24h-056",
+      "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061"
+    ],
+    [
+      "p.add_argument('--'+n)\n a=p.parse_args()",
+      "p.add_argument('--'+n)\n p.add_argument('--storage-authority-ref');a=p.parse_args()"
+    ],
+    [
+      "'--build-ref',a.build_ref]",
+      "'--build-ref',a.build_ref,'--storage-authority-ref',a.storage_authority_ref]"
+    ]
+  ],
+  "test_handshake.py": [
+    [
+      "spec=importlib.util.spec_from_file_location('actual_terminal'",
+      "import storage061 as actual_storage\n   storage=types.SimpleNamespace(check=lambda root:actual_storage.check(root,free=actual_storage.FREE))\n   spec=importlib.util.spec_from_file_location('actual_terminal'"
+    ],
+    [
+      "terminal=terminal,a=types.SimpleNamespace(physical_device=5)",
+      "terminal=terminal,storage=storage,a=types.SimpleNamespace(physical_device=5,output=output/'phase')"
+    ]
+  ],
+  "test_mount_closure.py": [
+    [
+      "external=composite['source']",
+      "external=composite['source']\n  manifest['storage_authority_ref']=dict(path='/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/DL061_STORAGE_AUTHORITY_20261016.json',bytes=1213,sha256='3b58d42555147db06874fa4db36ada8b95474af4f3153fc89b73e4b7779d6f6c')"
+    ]
+  ]
+}

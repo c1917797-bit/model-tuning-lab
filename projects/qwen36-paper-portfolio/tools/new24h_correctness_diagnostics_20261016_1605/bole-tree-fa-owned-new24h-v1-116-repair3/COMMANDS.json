@@ -1,0 +1,149 @@
+{
+  "NPU_authorized": false,
+  "bound_source_pending": true,
+  "output_root": "/opt/host/vnf/austinov/run-bole-tree-fa116repair3-MAIN-20261016-001/mask",
+  "parent_creation": "MAIN must separately admit filesystem and create this exact ordinary parent, no broad mount",
+  "required_existing_parent": "/opt/host/vnf/austinov/run-bole-tree-fa116repair3-MAIN-20261016-001/mask",
+  "schema": "bole.typed-stages/v116",
+  "stages": [
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair3/run116.py",
+        "--execute",
+        "--stage",
+        "bind",
+        "--reviewed-template-ref",
+        "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair3/SOURCE_TEMPLATE.json\",\"bytes\":13498,\"sha256\":\"78b70e14db32696eb142c0364378eb2241311880ec6be3e9859652b862202202\"}"
+      ],
+      "stage": "bind"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair3/run116.py",
+        "--execute",
+        "--stage",
+        "sourceaudit",
+        "--source-ref",
+        "<ACTUAL_BOUND_SOURCE_REF_JSON>"
+      ],
+      "entry": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair3/run116.py",
+      "requires": [
+        "actual_bound_source_ref"
+      ],
+      "stage": "sourceaudit"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair3/run116.py",
+        "--execute",
+        "--stage",
+        "cpu",
+        "--source-ref",
+        "<ACTUAL_BOUND_SOURCE_REF_JSON>",
+        "--host-cpu",
+        "<MAIN_HOST_CPU>",
+        "--guest-cpu",
+        "<MAIN_GUEST_CPU>"
+      ],
+      "entry": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair3/run116.py",
+      "requires": [
+        "actual_bound_source_ref",
+        "MAIN_host_cpu",
+        "MAIN_guest_cpu"
+      ],
+      "stage": "cpu"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair3/run116.py",
+        "--execute",
+        "--stage",
+        "ticket",
+        "--source-ref",
+        "<ACTUAL_BOUND_SOURCE_REF_JSON>",
+        "--cpu-owner-ref",
+        "<ACTUAL_RELEASED_CPU_OWNER_REF_JSON>"
+      ],
+      "entry": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair3/run116.py",
+      "requires": [
+        "actual_bound_source_ref",
+        "actual_released_CPU_owner_ref"
+      ],
+      "stage": "ticket"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair3/run116.py",
+        "--execute",
+        "--stage",
+        "numeric",
+        "--source-ref",
+        "<ACTUAL_BOUND_SOURCE_REF_JSON>",
+        "--host-cpu",
+        "<MAIN_HOST_CPU>",
+        "--guest-cpu",
+        "<MAIN_GUEST_CPU>",
+        "--cpu-owner-ref",
+        "<ACTUAL_RELEASED_CPU_OWNER_REF_JSON>",
+        "--abi-ticket-ref",
+        "<ACTUAL_ABI_TICKET_REF_JSON>"
+      ],
+      "entry": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair3/run116.py",
+      "requires": [
+        "actual_bound_source_ref",
+        "actual_released_CPU_owner_ref",
+        "actual_ABI_ticket_ref",
+        "MAIN_host_cpu",
+        "MAIN_guest_cpu"
+      ],
+      "stage": "numeric"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair3/run116.py",
+        "--execute",
+        "--stage",
+        "consumer",
+        "--source-ref",
+        "<ACTUAL_BOUND_SOURCE_REF_JSON>",
+        "--host-cpu",
+        "<MAIN_HOST_CPU>",
+        "--guest-cpu",
+        "<MAIN_GUEST_CPU>",
+        "--numeric-owner-ref",
+        "<ACTUAL_RELEASED_NUMERIC_OWNER_REF_JSON>"
+      ],
+      "entry": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair3/run116.py",
+      "requires": [
+        "actual_bound_source_ref",
+        "actual_released_NPU_owner_ref",
+        "MAIN_host_cpu",
+        "MAIN_guest_cpu"
+      ],
+      "stage": "consumer"
+    }
+  ],
+  "template": {
+    "bytes": 13498,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair3/SOURCE_TEMPLATE.json",
+    "sha256": "78b70e14db32696eb142c0364378eb2241311880ec6be3e9859652b862202202"
+  }
+}

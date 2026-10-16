@@ -363,3 +363,113 @@ switch routes to evade an uncompleted approval check or count an unexecuted
 call as a running experiment. Later transport timeout on the large R5 patch
 was reconciled by reading all actual target hashes: all files had committed,
 so the mutation was not blindly repeated.
+
+## 2026-10-16 checkpoint: numerical scope, transport bytes, and typed dependencies
+
+BOLE tree-GDN112R4 completed its actual full eager component gate: 72/72 rows
+passed independent CPU-double comparison, max output relative-L2
+1.2513252618498079e-7 and state relative-L2 9.058046145669613e-8.
+This does not qualify a complete BOLE model, tree attention, convolution,
+scheduler acceptance, joint cache commit, graph, performance, or task scores.
+The exact evidence and subsequent failures are indexed in
+`.agents/workstreams/qwen36-damp-ascend-20261006/VALIDATION_PROGRESS_20261016_1605UTC.json`.
+
+MXR098R5 remains a failed full-model working-state gate (25/192 failures).
+120R2 replayed three saved actual frames through candidate, original native
+inverse, and independent CPU64-inverse-cast paths; independent Devices[]
+consumption proved the candidate B/output/state bitwise anchor. Both failure
+frames also fail the unchanged working-state reference for native and
+CPU64-cast. Therefore an inverse-only cause is insufficiently supported.
+The candidate can still have additional error. Do not infer that the reference
+is invalid, that native is mathematical truth, or that more inverse iterations
+will repair the state. Compare actual versus reconstructed A/G, inverse
+residuals, B rounding cells, and W/U/H propagation; preserve old failures and
+require independent evidence plus held-out NPU validation for any corrected
+reference contract. Original R5 solve/output/decode success is not full-model
+state success.
+
+The120R2 NPU parent remained FAIL: its already-bound own init exited between
+Docker inspect and Docker top, and the protected-ownership observer rejected
+retiring init. Its complete raw child and a separately released independent
+consumer support numerical diagnosis only. Child exit0 or later stopped CID
+does not retrospectively fill the missing observation or turn parent FAIL into
+PASS. Report scientific results and operational parent status separately.
+
+Two BOLE preparation defects had distinct proved causes.116R1's patch used
+the Windows default cp1252 decoder on UTF8 text containing NBSP; emitted bytes
+did not match the frozen manifest.116R2's actual installed header hash was
+correct, but CANN's include directory was a symlink. Reusable controls:
+explicit UTF8 throughout; reconstruct every patch payload and verify exact
+bytes/SHA before deployment; independently inspect installed alias and canonical
+path; bind the measured ordinary canonical path and retain no-symlink checks.
+A copied display header with an extra LF is not the installed header identity.
+
+DeltaLog119 sealed retained historical storage without numerical promotion.
+The original088R3 recursive Ref walker traversed20,135 provenance objects,
+including historical supersedes/inverses and guest-only installed paths.
+Thirteen missing host paths and eleven relative inventories were not evidence
+that the current runtime lacked required inputs. The replacement readset follows
+the unchanged119/093/069 validators' actual helper, evidence-phase, receipt, tree,
+authority and ledger reads;79 actual required host references passed byte/hash
+checking. Historical/guest provenance remains whole-file hash-bound metadata,
+not guessed host mounts. Unknown required schemas, missing required fields,
+relative required paths, and changed container hashes still fail. Avoid replacing
+a typed dependency graph with either arbitrary recursive traversal or broad
+ignore/allowmissing rules.
+
+The new same-source088R4 CPU/Meta stage completed, but its16/160 NPU gates and
+downstream model/performance/task status require actual new results. A storage
+seal, source audit, or Meta registration never lends numerical qualification.
+
+Existing BOLE CPU and DeltaLog controllers both inspect all running
+qwen36.owner labels; independent output locks are not a joint resource lease.
+Do not start them together by relabelling or deleting guards. Compatible
+concurrency requires explicit summed RAM/CPU/device/output budgets and mutually
+compatible admission/continuous guards. A single idle/busy snapshot does not
+prove a30-minute utilization window; no four-card no-gap claim is made.
+
+Large control calls may time out after a mutation began. Reconcile actual
+target bytes/existing operation handles before retrying. A wrapper syntax or
+CPU-affinity error before owner admission is an orchestration failure, not a
+paper numerical failure; prefer reviewed exact stage argv and let the owner
+assign its own host/guest affinity. Preserve each failed operation.
+## 2026-10-16 16:43 UTC: exact namespace joins and real source-context controls
+
+BOLE116R6 completed actual CPU ABI, typed ticket, physical NPU4 six-call FIA
+matrix and an independent Devices[] consumer. All6 rows passed both unchanged
+FP32 and FP64 comparisons; mask modes0/1 are supported only on this tested
+matrix. Combined with112R4's72/72 tree-GDN component result, this advances
+component correctness, not packed paged-KV, convolution, joint commit, TP4 model,
+E2E throughput or task acceptance. Exact results are indexed in
+VALIDATION_PROGRESS_20261016_1643UTC.json; no new technique is accepted yet.
+
+Three concrete preparation faults were repaired without changing algorithm gates.
+An unrelated conv-ABI collector imported GDN and queried HAL inside Devices[],
+so that hardware-dependent dependency was kept pending outside FIA CPU admission.
+A later ticket compared guest /adakv-results with host paths as though Ref.path
+were namespace-independent. Resolve only the exact advertised file through the
+actual stopped container's sole RW bind, same CID/source/image, exit0/noExec,
+Devices[] and exact bytes/SHA. Do not broadly replace path prefixes or accept
+arbitrary filenames. The broad startswith discriminator then misclassified unit
+fixtures under the real guest TMPDIR; the final regression exercises the exact
+absolute alias and nearby TMPDIR paths plus real isolated ticket entrypoints.
+Windows mock success cannot establish Linux container path semantics.
+
+MXR120-analysis1 produced a complete4,323,534-byte three-case diagnostic, but its
+parent rejected the same guest/host Ref join. A separate source-bound recovery
+verified all seven original records, exact original create flags/RW alias,
+child exit0,22 controls and all3x384 tileheads. It references the original report
+without copying or rewriting it; the old parent remains FAILED. Numerical
+qualification and reference validity remain unresolved. Save valid completed
+child evidence and repair the demonstrated consumer predicate rather than
+rerunning NPU data or reclassifying the failed parent as PASS.
+
+DeltaLog088R4's16-step capture was interrupted by actual foreign physical5
+processes; no complete producer remained. This is a resource execution failure,
+not a numerical or paper no-go.121 independently sealed all11 retained phases
+at ledger15 while preserving original exit137 and cleanup-false evidence, under
+unchanged80GiB total/100GiB free limits. The new source must still pass its own
+CPU/16/160 gates. Pre-admission command and metadata export also checks all
+cross-platform Ref paths explicitly as POSIX; never serialize host Path objects
+as target-host paths. Neither storage release nor transport recovery lends
+numerical, performance or task qualification.

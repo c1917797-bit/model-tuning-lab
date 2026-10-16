@@ -1,0 +1,601 @@
+{
+  "schema": "ascend.paper-portfolio.correctness-progress/v1",
+  "observed_utc": "2026-10-16T16:05:00Z",
+  "time_is_checkpoint_label_not_continuous_utilization_sample": true,
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "bytes": 3481,
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "goal_accepted": false,
+  "model_performance_accuracy_accepted": false,
+  "protected_physical_devices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "authorized_physical_devices": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "BOLE": {
+    "paper": "BOLE",
+    "component": "tree GDN eager",
+    "source_revision": "112R4",
+    "operation": "exec-0000000000000cab",
+    "independent_projection_operation": "exec-0000000000000cb0",
+    "cases": 72,
+    "all_passed": true,
+    "output_relative_L2_max": 1.2513252618498079e-7,
+    "state_relative_L2_max": 9.058046145669613e-8,
+    "attribution": {
+      "path": "/opt/host/vnf/austinov/run-bole-tree112repair4-MAIN-20261016-001/full/consumer/ATTRIBUTION.json",
+      "bytes": 66365,
+      "sha256": "7156f3db672f73cfd76fa872fd98834aa34723046539eabc1acce8bd0fba9232"
+    },
+    "scope_exclusions": [
+      "graph",
+      "full model",
+      "scheduler tree acceptance",
+      "joint KV/conv/GDN commit",
+      "performance",
+      "task accuracy"
+    ],
+    "tree_FA_116R1": {
+      "operation": "exec-0000000000000cc0",
+      "outcome": "pre-start exact file checksum failure",
+      "cause": "Windows cp1252 default decoded UTF8 NBSP; source patch roundtrip did not match source manifest",
+      "NPU": false
+    },
+    "tree_FA_116R2": {
+      "operation": "exec-0000000000000cd7",
+      "outcome": "CPU ABI boundary failed, native torch import and whole software suite had passed",
+      "failure": {
+        "path": "/opt/host/vnf/austinov/run-bole-tree-fa116repair2-MAIN-20261016-001/mask/cpu/preflight/FAILURE.json",
+        "bytes": 1407,
+        "sha256": "47c17c59c97f70162d68f27ba0730b608e7db223ba12b864c2bbc31972e8814b"
+      },
+      "NPU": false,
+      "cause": "actual CANN include is symlink to aarch64-linux/include; strict ordinary-path check rejected alias",
+      "canonical_header_proved_by_operations": [
+        "exec-0000000000000cda",
+        "exec-0000000000000cdb",
+        "exec-0000000000000ce4"
+      ],
+      "next": "116R3 binds exact canonical ordinary header path; CPU actual ABI then FIA NPU gate pending"
+    }
+  },
+  "MXR": {
+    "model_R5": {
+      "outcome": "FAIL",
+      "state_failed": 25,
+      "state_total": 192,
+      "solve_and_output_passed": 192,
+      "decode_passed": 1728
+    },
+    "R2_diagnostic": {
+      "NPU_operation": "exec-0000000000000cc9",
+      "NPU_parent_outcome": "FAIL protected ownership observation incomplete",
+      "cause": "owned init exited between Docker inspect and top; do not infer external0-3 ownership interference",
+      "parent_failure_retained": true,
+      "stage": {
+        "path": "/opt/host/vnf/austinov/run-mxr-prefill120repair2-npu-MAIN-NEW24H_001/numeric/result/STAGE_RESULT.json",
+        "bytes": 5414,
+        "sha256": "7f75510c0da848a1b50ac6c92af56ecdfc7cb46240040265ae8ae716b29fef26"
+      },
+      "independent_consumer_operation": "exec-0000000000000cd5",
+      "independent_owner": {
+        "bytes": 1040,
+        "path": "/opt/host/vnf/austinov/run-mxr-prefill120repair2-consume-MAIN-NEW24H_001/RESULT.json",
+        "sha256": "c75c33a3a379375ded92aea03d7fde7d374129b2e0ed4aaf8dfc6bb6b6822a81"
+      },
+      "independent_report": {
+        "bytes": 267094,
+        "path": "/opt/host/vnf/austinov/run-mxr-prefill120repair2-consume-MAIN-NEW24H_001/ATTRIBUTION.json",
+        "sha256": "ea397ef48eae027adf218e88ce408cbe502daa080c3b7e9324332914b087a594"
+      },
+      "candidate_B_output_state_bitwise_anchor": true,
+      "cases": [
+        {
+          "case_id": "rank0-layer0",
+          "final_state": {
+            "native_vs_cpu64_cast": {
+              "bitwise": false,
+              "changed_bytes": 32938,
+              "max_abs": 0.04560279846191406,
+              "relative_l2": 0.0007408014914676231
+            },
+            "saved_candidate_vs_cpu64_cast": {
+              "bitwise": false,
+              "changed_bytes": 41619,
+              "max_abs": 0.05151653289794922,
+              "relative_l2": 0.0012310716983395572
+            },
+            "saved_candidate_vs_native": {
+              "bitwise": false,
+              "changed_bytes": 53894,
+              "max_abs": 0.05364227294921875,
+              "relative_l2": 0.0013798818008386449
+            }
+          },
+          "first_differing_chunk": {
+            "native_vs_cpu64_cast": {
+              "A": null,
+              "B": 0,
+              "G": null,
+              "Hentry": 2,
+              "U": 1,
+              "Vnew": 1,
+              "W": 1,
+              "output": 2
+            },
+            "saved_candidate_vs_cpu64_cast": {
+              "A": null,
+              "B": 0,
+              "G": null,
+              "Hentry": 2,
+              "U": 1,
+              "Vnew": 1,
+              "W": 0,
+              "output": 2
+            },
+            "saved_candidate_vs_native": {
+              "A": null,
+              "B": 0,
+              "G": null,
+              "Hentry": 3,
+              "U": 2,
+              "Vnew": 2,
+              "W": 0,
+              "output": 2
+            }
+          },
+          "working": {
+            "cpu64_cast": {
+              "output": {
+                "finite": true,
+                "frob_relative": 0.0012137337837879536,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.015625,
+                "mean_abs": 0.0000021608845747474008,
+                "pass": true,
+                "r2": 0.9999985157304129,
+                "rmse_over_mean_ref_abs": 0.013693507356549395
+              },
+              "state": {
+                "finite": true,
+                "frob_relative": 0.0017953778862903568,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.11944770812988281,
+                "mean_abs": 0.000020170292277804073,
+                "pass": false,
+                "r2": 0.9999967752999582,
+                "rmse_over_mean_ref_abs": 0.025637801489957146
+              }
+            },
+            "native": {
+              "output": {
+                "finite": true,
+                "frob_relative": 0.0011970323596506623,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.015625,
+                "mean_abs": 0.000002044477089688737,
+                "pass": true,
+                "r2": 0.9999985562975627,
+                "rmse_over_mean_ref_abs": 0.01350507964913641
+              },
+              "state": {
+                "finite": true,
+                "frob_relative": 0.0018381099987345184,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.12763595581054688,
+                "mean_abs": 0.000019851011980686598,
+                "pass": false,
+                "r2": 0.999996619969845,
+                "rmse_over_mean_ref_abs": 0.02624801142094493
+              }
+            },
+            "saved_candidate": {
+              "output": {
+                "finite": true,
+                "frob_relative": 0.001232271803410023,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.015625,
+                "mean_abs": 0.0000022643890794922343,
+                "pass": true,
+                "r2": 0.999998470044039,
+                "rmse_over_mean_ref_abs": 0.013902655780578935
+              },
+              "state": {
+                "finite": true,
+                "frob_relative": 0.0014159343893094857,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.11944770812988281,
+                "mean_abs": 0.00001365174893511156,
+                "pass": false,
+                "r2": 0.9999979943098605,
+                "rmse_over_mean_ref_abs": 0.020219389507423965
+              }
+            }
+          }
+        },
+        {
+          "case_id": "rank0-layer4",
+          "final_state": {
+            "native_vs_cpu64_cast": {
+              "bitwise": false,
+              "changed_bytes": 1150,
+              "max_abs": 0.000033892691135406494,
+              "relative_l2": 0.00006598017197640794
+            },
+            "saved_candidate_vs_cpu64_cast": {
+              "bitwise": false,
+              "changed_bytes": 3534,
+              "max_abs": 0.000034017954021692276,
+              "relative_l2": 0.0001377676972506725
+            },
+            "saved_candidate_vs_native": {
+              "bitwise": false,
+              "changed_bytes": 3199,
+              "max_abs": 0.000034017954021692276,
+              "relative_l2": 0.00012198040508835745
+            }
+          },
+          "first_differing_chunk": {
+            "native_vs_cpu64_cast": {
+              "A": null,
+              "B": 0,
+              "G": null,
+              "Hentry": 20,
+              "U": 6,
+              "Vnew": 4,
+              "W": 0,
+              "output": 4
+            },
+            "saved_candidate_vs_cpu64_cast": {
+              "A": null,
+              "B": 0,
+              "G": null,
+              "Hentry": 2,
+              "U": 1,
+              "Vnew": 1,
+              "W": 0,
+              "output": 1
+            },
+            "saved_candidate_vs_native": {
+              "A": null,
+              "B": 0,
+              "G": null,
+              "Hentry": 2,
+              "U": 1,
+              "Vnew": 1,
+              "W": 0,
+              "output": 1
+            }
+          },
+          "working": {
+            "cpu64_cast": {
+              "output": {
+                "finite": true,
+                "frob_relative": 0.0011764504960085156,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.00006103515625,
+                "mean_abs": 9.943599128795852e-9,
+                "pass": true,
+                "r2": 0.9999986132744378,
+                "rmse_over_mean_ref_abs": 0.007312990818012325
+              },
+              "state": {
+                "finite": true,
+                "frob_relative": 0.0026272855272933752,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.0019366443157196045,
+                "mean_abs": 1.4635452892750467e-7,
+                "pass": false,
+                "r2": 0.9999930971490125,
+                "rmse_over_mean_ref_abs": 0.016120963687292517
+              }
+            },
+            "native": {
+              "output": {
+                "finite": true,
+                "frob_relative": 0.0011763532490134442,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.00006103515625,
+                "mean_abs": 9.911951777389702e-9,
+                "pass": true,
+                "r2": 0.9999986135036857,
+                "rmse_over_mean_ref_abs": 0.007312386316263676
+              },
+              "state": {
+                "finite": true,
+                "frob_relative": 0.002626504562898295,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.0019366443157196045,
+                "mean_abs": 1.4401167575215246e-7,
+                "pass": false,
+                "r2": 0.9999931012521673,
+                "rmse_over_mean_ref_abs": 0.016116171707690995
+              }
+            },
+            "saved_candidate": {
+              "output": {
+                "finite": true,
+                "frob_relative": 0.0011746674553838854,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.00006103515625,
+                "mean_abs": 9.655348631250782e-9,
+                "pass": true,
+                "r2": 0.9999986174747238,
+                "rmse_over_mean_ref_abs": 0.007301907172962828
+              },
+              "state": {
+                "finite": true,
+                "frob_relative": 0.002626698529604688,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.0019366443157196045,
+                "mean_abs": 1.443042769222975e-7,
+                "pass": false,
+                "r2": 0.9999931002331881,
+                "rmse_over_mean_ref_abs": 0.016117361882949016
+              }
+            }
+          }
+        },
+        {
+          "case_id": "rank0-layer1-control",
+          "final_state": {
+            "native_vs_cpu64_cast": {
+              "bitwise": false,
+              "changed_bytes": 19904,
+              "max_abs": 0.00032238662242889404,
+              "relative_l2": 0.0006865664689210934
+            },
+            "saved_candidate_vs_cpu64_cast": {
+              "bitwise": true,
+              "changed_bytes": 0,
+              "max_abs": 0,
+              "relative_l2": 0
+            },
+            "saved_candidate_vs_native": {
+              "bitwise": false,
+              "changed_bytes": 19904,
+              "max_abs": 0.00032238662242889404,
+              "relative_l2": 0.0006865409419575097
+            }
+          },
+          "first_differing_chunk": {
+            "native_vs_cpu64_cast": {
+              "A": null,
+              "B": 0,
+              "G": null,
+              "Hentry": 3,
+              "U": 2,
+              "Vnew": 2,
+              "W": 0,
+              "output": 2
+            },
+            "saved_candidate_vs_cpu64_cast": {
+              "A": null,
+              "B": 0,
+              "G": null,
+              "Hentry": 4,
+              "U": 3,
+              "Vnew": 3,
+              "W": 0,
+              "output": 3
+            },
+            "saved_candidate_vs_native": {
+              "A": null,
+              "B": 0,
+              "G": null,
+              "Hentry": 3,
+              "U": 2,
+              "Vnew": 2,
+              "W": 0,
+              "output": 2
+            }
+          },
+          "working": {
+            "cpu64_cast": {
+              "output": {
+                "finite": true,
+                "frob_relative": 0.00010909426599603238,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.00006103515625,
+                "mean_abs": 9.01903196657422e-10,
+                "pass": true,
+                "r2": 0.9999999880898839,
+                "rmse_over_mean_ref_abs": 0.0005745312293156284
+              },
+              "state": {
+                "finite": true,
+                "frob_relative": 0.0001555439466317346,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.000029584276489913464,
+                "mean_abs": 2.2036731691979372e-8,
+                "pass": true,
+                "r2": 0.9999999758043409,
+                "rmse_over_mean_ref_abs": 0.000646964708991014
+              }
+            },
+            "native": {
+              "output": {
+                "finite": true,
+                "frob_relative": 0.00029511891909144035,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.00006103515625,
+                "mean_abs": 6.018650456346188e-9,
+                "pass": true,
+                "r2": 0.9999999128422019,
+                "rmse_over_mean_ref_abs": 0.0015542066655095438
+              },
+              "state": {
+                "finite": true,
+                "frob_relative": 0.0006998680133275027,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.00032238662242889404,
+                "mean_abs": 1.0680387789706856e-7,
+                "pass": true,
+                "r2": 0.9999995101495409,
+                "rmse_over_mean_ref_abs": 0.0029110094952558485
+              }
+            },
+            "saved_candidate": {
+              "output": {
+                "finite": true,
+                "frob_relative": 0.0001091098145086547,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.00006103515625,
+                "mean_abs": 9.031160042895225e-10,
+                "pass": true,
+                "r2": 0.9999999880864887,
+                "rmse_over_mean_ref_abs": 0.0005746131136015655
+              },
+              "state": {
+                "finite": true,
+                "frob_relative": 0.0001555439466317346,
+                "limits": {
+                  "frob_relative": 0.002,
+                  "r2_min": 0.999,
+                  "rmse_over_mean_ref_abs": 0.02
+                },
+                "max_abs": 0.000029584276489913464,
+                "mean_abs": 2.2036731691979372e-8,
+                "pass": true,
+                "r2": 0.9999999758043409,
+                "rmse_over_mean_ref_abs": 0.000646964708991014
+              }
+            }
+          }
+        }
+      ],
+      "qualification": false,
+      "performance": false,
+      "task": false,
+      "next": "source-bound CPU analysis of actual A/G versus working reference and B/W/U/H boundaries; no blind X3 or threshold relaxation"
+    }
+  },
+  "DeltaLog": {
+    "storage_seal_operation": "exec-0000000000000c9d",
+    "storage_seal12": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/STORAGE_LEDGER061.12.json",
+      "bytes": 2480,
+      "sha256": "c6c3300a6124cab62aa943430413a87cf7403e8f6170c92e31fa528e87a59ca9"
+    },
+    "typed_readset_operation": "exec-0000000000000cd9",
+    "typed_actual_required_host_refs": 79,
+    "failed_generic_recursive_provenance_scan": {
+      "absolute_refs": 20135,
+      "missing": 13,
+      "relative_containers": 11,
+      "not_execution_dependency_graph": true
+    },
+    "R4_template": {
+      "bytes": 61165,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair4/SOURCE_TEMPLATE.json",
+      "sha256": "4df881560dcb8fbb978da5d893315e5f48223ad7eab832de4decea286fc14a70"
+    },
+    "R4_bound_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair4/SOURCE_MANIFEST.json",
+      "bytes": 58489,
+      "sha256": "6a65d090c8c102e5842438fea5b15a8782853510e8d9fc859e2f5e3d59da2669"
+    },
+    "actual_CPU_stage": {
+      "observation_operation": "exec-0000000000000ced",
+      "primary": null,
+      "secondary": [],
+      "stopped_retained": true,
+      "elapsed_seconds": 333.53386689996114,
+      "NPU": false,
+      "actual_Meta_pass": true,
+      "numerical_qualification": false
+    },
+    "active_operation_at_checkpoint": "exec-0000000000000ce2",
+    "sequence": "CPU -> numeric16 -> numeric160, each next phase only on actual prior success",
+    "next": "consume complete same-source16 before160; model101R2 and production106R2 require actual new certificates",
+    "full_model": false,
+    "performance": false,
+    "task": false
+  },
+  "scheduling": {
+    "continuous_30min_utilization": "unmeasured",
+    "four_cards_no_gap": false,
+    "legacy_global_qwen_owner_fence": "BOLE CPU and DL phases not compatible; no label/guard bypass",
+    "unknown_copy_timeout": "reconciled via actual149 target files before patch; no blind restart"
+  },
+  "source_archive": "projects/qwen36-paper-portfolio/tools/new24h_correctness_diagnostics_20261016_1605",
+  "prior_source_archive": "projects/qwen36-paper-portfolio/tools/new24h_112r4_119_20261016",
+  "unrelated_dirty_handoff_preserved": true
+}

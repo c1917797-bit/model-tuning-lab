@@ -1,0 +1,275 @@
+{
+  "actual_FIA_work_seconds": 120,
+  "actual_abi_ref": null,
+  "authority_ref": {
+    "bytes": 3481,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "cann_helper_ref": {
+    "bytes": 4503,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-d8-fp32-model-boundary-r87-v1-011/cann_python.py",
+    "sha256": "cee927f1107fe6714e86ab1dceecafeff800980a00b8df9fcc47ff6831ba5104"
+  },
+  "cleanup_seconds": 90,
+  "composition112R4_original_ref": {
+    "bytes": 1945,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/patch_scope112.py",
+    "sha256": "a666bf5c001698f20f5f72368cc64834ef1b67b261dc495312bd0842347c3b34"
+  },
+  "composition112R4_template_ref": {
+    "bytes": 8034,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/evidence/SOURCE_TEMPLATE112R4.json",
+    "sha256": "d65e72d203bee43d3f2457373e4376f757fdcfa7bc9cdbebb92ec2fb57a20075"
+  },
+  "conv_ABI_collection_scope": "pending hardware-dependent normal GDN import; no conv qualification from FIA CPU",
+  "default_enabled": false,
+  "dependencies": {
+    "cpu": {
+      "bytes": 5043,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/deltalog-v7-20261014-001/cpu_capacity.py",
+      "sha256": "992cfcb419eabbf69902f9358c703815c268d3f99b00ae9e410a291d374d456d"
+    },
+    "host": {
+      "bytes": 33743,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+      "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86"
+    },
+    "old": {
+      "bytes": 16517,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py",
+      "sha256": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc"
+    },
+    "pipeline": {
+      "bytes": 40280,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/deltalog-v7-20261014-001/pipeline.py",
+      "sha256": "1df9ce6cac75b68e0f8781c40a2445887a00494941c9cde9488abafe735ab07c"
+    }
+  },
+  "donor": {
+    "bytes": 14382,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/owned_cpu.py",
+    "sha256": "b137dd6c69b20bd0a79d8f87cd2edb36d09951c7a64bc0a821919d28671b9e75"
+  },
+  "donor_host": {
+    "bytes": 24497,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/host.py",
+    "sha256": "16146338e86c893925469b5207db8a172805dc9d897a71c812ca1d445ddad13f"
+  },
+  "donor_source": {
+    "bytes": 52969,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json",
+    "sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21"
+  },
+  "files": {
+    "abi115.py": {
+      "bytes": 1738,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/abi115.py",
+      "sha256": "a74a48e1d9186e885aa94797db8323852baff6b10103372fcd9747f143cf1edb"
+    },
+    "abi116.py": {
+      "bytes": 2679,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/abi116.py",
+      "sha256": "35c8e74621f67cfec676d1265b8f7fe2d949825d7443ee39a92c081a68e25b54"
+    },
+    "bind116.py": {
+      "bytes": 920,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/bind116.py",
+      "sha256": "a818284d8a9a760caf44257e05ce6bbb8dcf8a0dac3e3dfaf7ab97df13c2590a"
+    },
+    "collect_conv_abi.py": {
+      "bytes": 3777,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/collect_conv_abi.py",
+      "sha256": "8da3741f10084327a76e5000733edbd3c95ec5ef5d2fed1a883e30b43d9e98fd"
+    },
+    "common116.py": {
+      "bytes": 1540,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/common116.py",
+      "sha256": "951535b58522e75635f3997cf50a40519e191cbf9c025fb5f19d7c9d5133ca90"
+    },
+    "consume115.py": {
+      "bytes": 1883,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/consume115.py",
+      "sha256": "86e4bc3edcb701c47c24d988503afbed120e90d1b425f35977c02ce745092b8e"
+    },
+    "consume116.py": {
+      "bytes": 2602,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/consume116.py",
+      "sha256": "93da89f06be250ced0ab44254e2ce4968adb370b5fb3d6de8b4e9ddf64c29e10"
+    },
+    "cpu116.py": {
+      "bytes": 3862,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/cpu116.py",
+      "sha256": "0a202f55f48975b74158fa8b226cb24cdcf8a2f161cadc2c8fea02ada484ea86"
+    },
+    "evidence/SOURCE_TEMPLATE112R1.json": {
+      "bytes": 6687,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/evidence/SOURCE_TEMPLATE112R1.json",
+      "sha256": "c2a64af4effbb27fc048c12e811f3990bdc0b203ef18d5212042e591e7021ed3"
+    },
+    "evidence/SOURCE_TEMPLATE112R2.json": {
+      "bytes": 7220,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/evidence/SOURCE_TEMPLATE112R2.json",
+      "sha256": "1ec342277b5591f7c2661608523d8abfbf5138771360799580d1faae52f9f9ff"
+    },
+    "evidence/SOURCE_TEMPLATE112R4.json": {
+      "bytes": 8034,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/evidence/SOURCE_TEMPLATE112R4.json",
+      "sha256": "d65e72d203bee43d3f2457373e4376f757fdcfa7bc9cdbebb92ec2fb57a20075"
+    },
+    "evidence/SOURCE_TEMPLATE115.json": {
+      "bytes": 2546,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/evidence/SOURCE_TEMPLATE115.json",
+      "sha256": "5584c814bf07f71e38fbb6ecde1918d787381a5f7645c882242ce3a6107d5235"
+    },
+    "evidence/SOURCE_TEMPLATE116.json": {
+      "bytes": 10725,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/evidence/SOURCE_TEMPLATE116.json",
+      "sha256": "679492fb8917c6917c83b3aaaaf2d2f7bcbd88963fe3a35b434aae1a08b563cc"
+    },
+    "evidence/cann91_fia_v3.h": {
+      "bytes": 4092,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/evidence/cann91_fia_v3.h",
+      "sha256": "9a81016fd92bd20dd91a35b1dbf2078242b5141a590dc59f77a62a52308afc0b"
+    },
+    "guest116.py": {
+      "bytes": 4260,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/guest116.py",
+      "sha256": "87b769c4e4912c173e2442785c503fe5ca227421725058ed731bbf199338dab7"
+    },
+    "owned_cpu116.py": {
+      "bytes": 16330,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/owned_cpu116.py",
+      "sha256": "61946bda3087f400af608db9b2cbb0977c5bd8ac7a6a36cb33d42a012b59b14a"
+    },
+    "owner116.py": {
+      "bytes": 16557,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/owner116.py",
+      "sha256": "27ac183f7671b0a747afa8d2a0508863dd7174c56fee948e5bd661f08d74909b"
+    },
+    "patch_scope112.py": {
+      "bytes": 1945,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/patch_scope112.py",
+      "sha256": "a666bf5c001698f20f5f72368cc64834ef1b67b261dc495312bd0842347c3b34"
+    },
+    "probe115.py": {
+      "bytes": 4735,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/probe115.py",
+      "sha256": "6b86607862d1d8c76805394acff0397e4b5d5af5230871f513ae4db685a348f1"
+    },
+    "probe116.py": {
+      "bytes": 4615,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/probe116.py",
+      "sha256": "6f23da31671bd058ed030ac438e4046d4da5cda8adcfb90506ef6ec3a8e9e433"
+    },
+    "reference116.py": {
+      "bytes": 885,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/reference116.py",
+      "sha256": "721d0d39b9d0f55e42c821af5a0500af103cefde36b374b9a338fa3c7f592c76"
+    },
+    "regression/old_owner116.py": {
+      "bytes": 16455,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/regression/old_owner116.py",
+      "sha256": "7bf1dc472b3a2d0f17a2044535ef442000d319f5753fdb83ad2adced81e70fea"
+    },
+    "run116.py": {
+      "bytes": 2790,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/run116.py",
+      "sha256": "7d37c342f06a70d651ecde58048bffee3cb000159d6faf10f2868f00e54441bb"
+    },
+    "scope_adapter112.py": {
+      "bytes": 11522,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/scope_adapter112.py",
+      "sha256": "a9f510a683a3cad1b22161107c2d5e6beaeab6f6df50612fbc92b939e5a64cc2"
+    },
+    "suite116.py": {
+      "bytes": 793,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/suite116.py",
+      "sha256": "0bb66b5ea1444e846d84a4437f5bbe21f9b83319d830901da5d7210e6b7e8d72"
+    },
+    "test115.py": {
+      "bytes": 3517,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/test115.py",
+      "sha256": "f713f25d3ddf3d759a0313d5f5efa47bd71ad68be540b4c452826102002033e4"
+    },
+    "test116.py": {
+      "bytes": 8801,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/test116.py",
+      "sha256": "c1d92d460d0840eea2a181e130eb9514eddc37fd35a1df9bab6361a87646d7bd"
+    },
+    "test_alias116r5.py": {
+      "bytes": 3832,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/test_alias116r5.py",
+      "sha256": "ffb2ce46d31aa897e34f0902a95bb8001279770484674f94737d08fbc2901fa1"
+    },
+    "test_controller116r1.py": {
+      "bytes": 3097,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/test_controller116r1.py",
+      "sha256": "5b433ce4e69f119661949cf01ec410272b89c2742854f787336e6e47dbf9e230"
+    },
+    "test_conv_hook116r3.py": {
+      "bytes": 1547,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/test_conv_hook116r3.py",
+      "sha256": "b482b7b3267bb8a2b9ed19ae1a1b6a8626dada19396c009fc588bf2313fbec3e"
+    },
+    "ticket116.py": {
+      "bytes": 2580,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/ticket116.py",
+      "sha256": "1af18ae70e0e2991081c98167425aa648b941b2355bac53e0d4f97b841f5dc64"
+    },
+    "ticket_alias116r5.py": {
+      "bytes": 1905,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/ticket_alias116r5.py",
+      "sha256": "9922096e18d589952f0bfeaeb745cbe4165379a2fc0c2de84217fe889abd5d08"
+    },
+    "top_guard116.py": {
+      "bytes": 7775,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/top_guard116.py",
+      "sha256": "04ef8acc591f52363947c605f6faa2a0bce4d16492a0e907db8719fc322764dd"
+    },
+    "tree_fa115.py": {
+      "bytes": 3539,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/tree_fa115.py",
+      "sha256": "9de3a6c05bd64aa135d9a4dc32b65aeeb1770374ba4084a01a4cbf5d422253bd"
+    }
+  },
+  "guest_seconds": 600,
+  "header_ref": {
+    "bytes": 4091,
+    "path": "/usr/local/Ascend/cann-9.1.0/aarch64-linux/include/aclnnop/aclnn_fused_infer_attention_score_v3.h",
+    "sha256": "14ebd6d631fa2de39688a69be339a5bf7ac9b84cbfc00592f29387a4e0b8eb9f"
+  },
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "mapping112R2_helper_original_ref": {
+    "bytes": 11522,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair2/scope_adapter112.py",
+    "sha256": "a9f510a683a3cad1b22161107c2d5e6beaeab6f6df50612fbc92b939e5a64cc2"
+  },
+  "mapping112R2_template_ref": {
+    "bytes": 7220,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/evidence/SOURCE_TEMPLATE112R2.json",
+    "sha256": "1ec342277b5591f7c2661608523d8abfbf5138771360799580d1faae52f9f9ff"
+  },
+  "model_ready": false,
+  "ordinary_ram_floor": 17716740096,
+  "output_root": "/opt/host/vnf/austinov/run-bole-tree-fa116repair5-MAIN-20261016-001",
+  "performance_ready": false,
+  "prepared_only": true,
+  "profile": null,
+  "raw_FIA_cap": 67108864,
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5",
+  "schema": "bole.tree-fa-owned-source/v116",
+  "source112R1_template_ref": {
+    "bytes": 6687,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/evidence/SOURCE_TEMPLATE112R1.json",
+    "sha256": "c2a64af4effbb27fc048c12e811f3990bdc0b203ef18d5212042e591e7021ed3"
+  },
+  "source115_template_ref": {
+    "bytes": 2546,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-fa-owned-new24h-v1-116-repair5/evidence/SOURCE_TEMPLATE115.json",
+    "sha256": "5584c814bf07f71e38fbb6ecde1918d787381a5f7645c882242ce3a6107d5235"
+  },
+  "whole_CPU_seconds": 1000,
+  "whole_NPU_seconds": 900,
+  "whole_output_cap": 1073741824
+}

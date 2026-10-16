@@ -1,0 +1,40 @@
+{
+  "capture": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-119/sealed119.py",
+    "--execute",
+    "--mode",
+    "capture",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-119/SOURCE_MANIFEST.json\",\"bytes\":937,\"sha256\":\"aa574e91699c6b5bca8cfac66abab893a00a03bb5ef4eb87f851d73bc15faed6\"}"
+  ],
+  "seal": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-119/sealed119.py",
+    "--execute",
+    "--mode",
+    "seal",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-119/SOURCE_MANIFEST.json\",\"bytes\":937,\"sha256\":\"aa574e91699c6b5bca8cfac66abab893a00a03bb5ef4eb87f851d73bc15faed6\"}",
+    "--evidence-ref",
+    "ACTUAL_CAPTURED119_REF3"
+  ],
+  "seal_pending": "MAIN review required; old088R2 runtime rejects new119 ledger. Do not seal until minimal reviewed088 storage receiver successor is ready.",
+  "validate": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-119/sealed119.py",
+    "--execute",
+    "--mode",
+    "validate",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-storage-new24h-v1-119/SOURCE_MANIFEST.json\",\"bytes\":937,\"sha256\":\"aa574e91699c6b5bca8cfac66abab893a00a03bb5ef4eb87f851d73bc15faed6\"}",
+    "--evidence-ref",
+    "ACTUAL_CAPTURED119_REF3"
+  ]
+}
