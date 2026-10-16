@@ -1,0 +1,21 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "classification": "CONFIGURATION_ONLY_NOT_DEVICE_ACCEPTANCE",
+  "operation": "exec-0000000000000bdb",
+  "manifest": "QUALITY_COMPACT_MANIFEST_R16_FULL_R2.json",
+  "manifest_sha256": "f16999b252fe4b6447a173be42a8fb767b22e6c9faa033c64d7a02634cedadc5",
+  "contracts": [
+    "QUALITY_R16_FULL_BASELINE_R2_CONTRACT.json",
+    "QUALITY_R16_FULL_HYPIC_R2_CONTRACT.json"
+  ],
+  "source_bindings": 163,
+  "actual_repaired_bounded_prerequisite": "CATALOG_R16_CANARY_R4_TERMINAL_20261016.json",
+  "unchanged": [
+    "127samples x3=381 scored perarm",
+    "381 unscored producers perarm",
+    "nonthinking max1024 naturalEOS/retry0/same scorer",
+    "same frozen inputs/catalog/image/model/physical0-3TP4",
+    "fullperformance progression prerequisite"
+  ],
+  "scope": "Prepared only; oldR1 contracts retained/historical. No new381arm started. Current exactG1 controller0bd4 runs; noseconddevicejob."
+}

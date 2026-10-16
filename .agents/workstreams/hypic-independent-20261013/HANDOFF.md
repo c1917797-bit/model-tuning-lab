@@ -1,3 +1,12 @@
+# LATEST prospective fullquality R2 bindings repaired HOSTONLY
+
+QUALITY_COMPACT_MANIFEST_R16_FULL_R2 + BASELINE/HYPIC_R2_CONTRACTs now bind
+repairedqualityloader,163sources each.0bdb allhashes/config-onlyCLI/newrootsPASS;
+same127x3/381scored+381producers/max1024naturalEOS/retry0/scorer unchanged.
+R4bounded17 accepted prerequisite; fullperformance gate unchanged. No fullquality
+device run. OldR1contracts retained/historical. FULL_QUALITY_R2_REBIND_READINESS_20261016.json.
+G1exact0bd4 confirmed running; neverrestart/seconddevicejob/edit147boundfiles.
+
 # CURRENT R16 G1/R1 ATTEMPT3 LIVE — R4 accepted/released
 
 Exactma exec-0000000000000bd4 RUNNING; raw /cache/cch/hypic-independent-20261013/formal-r16-20261016-g1-r1-attempt3.
