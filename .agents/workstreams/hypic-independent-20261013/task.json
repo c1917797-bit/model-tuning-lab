@@ -196,10 +196,10 @@
     ]
   },
   "publication": {
-    "state": "Liveverified8f90091;terminalmetadata pending checkpoint",
-    "published_commit": "8f900910eb19633f5d101fc63121580369ecc54a",
+    "state": "e3d7429 liveverified;sequenceaudit checkpoint pending",
+    "published_commit": "e3d74291f6992e0d5368956434d8ca511245ec00",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "note": "No catalog acceptance or lifecycle device acceptance yet."
+    "note": "No NPU or full acceptance claim."
   },
   "math_reference": {
     "state": "cpu-reference-passed",
@@ -288,10 +288,16 @@
   },
   "lifecycle_preparation": {
     "controller": "lifecycle_r16_tp4.py",
-    "state": "HOSTONLY startupaudit752/requestaudit770regressionPASS;noNPUrun",
+    "state": "HOSTONLY single-stage plus sequenceaudits implemented;809CPU0b1dPASS;no actual lifecycle run",
     "reports": [
-      "LIFECYCLE_STARTUP_AUDIT_HOST_READINESS_20261016.json",
-      "LIFECYCLE_REQUEST_AUDIT_HOST_READINESS_20261016.json"
+      "LIFECYCLE_TERMINAL_HOST_READINESS_20261016.json",
+      "LIFECYCLE_ENABLED_COMPOSITION_HOST_READINESS_20261016.json",
+      "LIFECYCLE_SEQUENCE_HOST_READINESS_20261016.json"
+    ],
+    "remaining": [
+      "three-directory composition",
+      "frozen package/stagecontracts",
+      "actual lifecycle after progression gates"
     ]
   }
 }

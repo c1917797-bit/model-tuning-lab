@@ -1,3 +1,15 @@
+# LATEST lifecycle sequence HOSTONLY readiness
+
+audit_lifecycle_sequence.py now independently joins disabled/enabled/uninstalled
+single-stage audits, sameimage/model/source/input/protocol, distinctCIDs/rawroots,
+UTC release-before-nextpreflight chronology. lifecyclecontroller addsreleaseUTC only;
+ASTinverse keeps originalownership/guard/cleanup unchanged.32controls0b1c/809CPU0b1dPASS.
+0b1e proves old147/159/163frozenmaps unchanged. Syntheticrecords only; fullthree-directory
+composition/stagecontracts/packagefreeze/actual lifecycle remainmissing. No M6acceptance.
+Noownedmodeljob/observer;0b14 NPU3foreign647529/661466. R2externalfailureimmutable.
+Continue meaningfulofflinepreparation while stablewindow pending; no blindrestart.
+DeadlineOct17T06:48:09Z;fullgoalactive/incomplete.
+
 # LATEST R2 catalog EXTERNAL INTERRUPTION — no owned live job
 
 Exact0b07terminalexit1,0requests/69isolation;firstforeign11:23:14UTC NPU3PID647529.

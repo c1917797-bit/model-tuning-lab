@@ -429,6 +429,7 @@ def run_contract(contract):
         except OSError:pass
         final=snapshot()
         release["final_physical_processes"]=final["processes"]
+        release["utc"]=final["utc"]
         write(raw,"responses.json",responses)
         write(raw,"isolation.json",samples)
         write(raw,"release.json",release)
