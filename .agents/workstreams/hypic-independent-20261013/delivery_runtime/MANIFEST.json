@@ -5,10 +5,16 @@
   "source_contract": {
     "image_digest": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
     "framework_version": "vLLM0.23.0+empty / vLLM-Ascend0.23.0",
-    "cann_version": "NOT_FRESHLY_ATTESTED; required before promotion",
+    "cann_version": "9.1.0 (pinned-image toolkit install metadata only; active device runtime separately verified)",
     "live_module": "vllm_ascend.worker.model_runner_v1",
     "live_object": "NPUModelRunner._prepare_inputs",
-    "source_sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968"
+    "source_sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968",
+    "cann_metadata": {
+      "path": "/usr/local/Ascend/cann-9.1.0/aarch64-linux/ascend_toolkit_install.info",
+      "sha256": "a9b17ef608ebeb70ade09cde1c12a545eb5e8f3e5312f6806ca0d368b0464848",
+      "inner_version": "V100R001C11SPC001B243",
+      "operation": "exec-0000000000000b4b"
+    }
   },
   "treatment": {
     "switch": "INDEPENDENT_COMPACT_HYPIC",

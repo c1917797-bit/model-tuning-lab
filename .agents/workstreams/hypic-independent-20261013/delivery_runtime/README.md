@@ -25,5 +25,6 @@ Do not silently alter old156/159/147source bindings or reuse existing raw roots.
 
 MANIFEST.evidence.commit names the tested adapter source checkpoint112c3e5961a03ea18295636d8497d53324e991f8;
 wrapper code digests must match that exact checkpoint and the validator rerun.
-CANN version is explicitly not freshly attested; do not
-replace that with a guess. No devRPC/admin surface added, no NPU use here.
+Read-only pinned image probe0b4b identifies CANN Toolkit9.1.0 from hashed install
+metadata and confirms the runner source digest. Active device ABI/numerics remain
+separate; this was no-device/no-network/no-model inspection. No devRPC/admin surface added.

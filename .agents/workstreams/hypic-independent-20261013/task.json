@@ -196,10 +196,10 @@
     ]
   },
   "publication": {
-    "state": "c16ad91 liveverified;adapter source+binding checkpoints pending publication",
-    "published_commit": "c16ad91c9f7e7187080b23b30daf1a93744a0348",
+    "state": "17e6d85 liveverified;image metadata checkpoint pending",
+    "published_commit": "17e6d85fd78d89eed42aa9b0458299a1384aef33",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "note": "No NPU, finaldelivery or29functional acceptance."
+    "note": "Pinned image metadata only, not active device ABI/numerics acceptance."
   },
   "math_reference": {
     "state": "cpu-reference-passed",
@@ -310,8 +310,14 @@
     "report": "DELIVERY_ADAPTER_CHECKPOINT_BINDING_20261016.json",
     "remaining": [
       "Successor lifecycle controller/startup audit and source-bound contracts for delivery_runtime path",
-      "Fresh actual CANN attestation before promotion",
       "All missing device performance/quality/lifecycle gates"
-    ]
+    ],
+    "image_attestation": {
+      "operation": "exec-0000000000000b4b",
+      "report": "DELIVERY_IMAGE_SOURCE_ATTESTATION_20261016.json",
+      "cann_toolkit_install_version": "9.1.0",
+      "runner_source_unchanged": true,
+      "device_runtime_verified": false
+    }
   }
 }

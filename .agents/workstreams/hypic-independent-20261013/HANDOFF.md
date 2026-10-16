@@ -1,3 +1,14 @@
+# LATEST pinned image source metadata attestation
+
+Readonly/no-device/no-network/no-model officialimage probe0b4bexit0:
+CANNtoolkitinstallmetadata9.1.0/innerV100R001C11SPC001B243,metadataSHAa9b17ef6...;
+runnerSHA94d75dbe... unchanged;vLLM0.23.0+empty/Ascend0.23.0/torch2.10.0+cpu/npu2.10.0.post4.
+DELIVERY_IMAGE_SOURCE_ATTESTATION_20261016.json preserves exactpaths/hashes.
+StandardmanifestCANNfield nowmetadata-backed, NOTactiveNPUruntime/ABI/numericalproof.
+Metadata-only validator0b4ePASS; testedadaptercode112c3e59 unchanged. Nextnew
+delivery servicewiring/contracts stillmissing;old156/159/147bindings untouched.
+NoownedNPUjob/observer;fullgoalactive/incomplete,deadlineOct17T06:48:09Z.
+
 # LATEST standard delivery adapter DRAFT/HOSTONLY
 
 delivery_runtime uses reviewedgeneric template workflow, NOT oldHYPICcode.
