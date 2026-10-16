@@ -1,5 +1,12 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Quality bootstrap gap now wired HOST ONLY: new formal_quality_r16_tp4.py and
+pure independent_quality_bootstrap_route choose existing quality catalog loader.
+Generic controller AST parity preserved except declared startup seam/defaultcontract.
+9focused0a26/610fullCPU0a28 PASS;0a29 all live147sources unchanged. No quality NPU
+run or contract yet. QUALITY_R16_BOOTSTRAP_HOST_READINESS_20261016.json lists gaps.
+Current exact0a20 performance controller continues unchanged; do not duplicate.
+
 CURRENT R16 G3/R1 FULL40 LIVE exactexec-0000000000000a20 on originalma viaawmcp.
 Checkpoint eab2de9f;0a1f08:55:05UTC fresh0-3empty/portsfree/147sources/newroot/
 image/model/input/priorCanary hashesPASS. Raw formal-r16-20261016-g3-r1 immutable.
