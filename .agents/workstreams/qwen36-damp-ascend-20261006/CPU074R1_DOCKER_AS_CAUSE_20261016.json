@@ -1,0 +1,92 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-c\",\n          \"import subprocess,resource,json\\nd=['/usr/bin/docker','ps','--no-trunc','--filter','label=qwen36.owner','--format','{{.ID}}']\\nsoft,hard=resource.getrlimit(resource.RLIMIT_AS);assert hard==resource.RLIM_INFINITY;resource.setrlimit(resource.RLIMIT_AS,(512*1024**2,hard))\\nfor cmd in [d,['/usr/bin/prlimit','--as=unlimited','--']+d]:\\n r=subprocess.run(cmd,capture_output=True,text=True,timeout=20);print(json.dumps(dict(command=cmd,exit=r.returncode,stdout=r.stdout[:2000],stderr=r.stderr[:5000])),flush=True)\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": null,\n        \"durationMs\": 101,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-0000000000000a8f\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"command\\\": [\\\"/usr/bin/docker\\\", \\\"ps\\\", \\\"--no-trunc\\\", \\\"--filter\\\", \\\"label=qwen36.owner\\\", \\\"--format\\\", \\\"{{.ID}}\\\"], \\\"exit\\\": 2, \\\"stdout\\\": \\\"\\\", \\\"stderr\\\": \\\"fatal error: failed to reserve page summary memory\\\\n\\\\nruntime stack:\\\\nruntime.throw({0x23e6cb?, 0x4fb4ac?})\\\\n\\\\t/usr/local/go/src/runtime/panic.go:1047 +0x40 fp=0xffffdf08a880 sp=0xffffdf08a850 pc=0x502260\\\\nruntime.(*pageAlloc).sysInit(0x27a0170)\\\\n\\\\t/usr/local/go/src/runtime/mpagealloc_64bit.go:82 +0x188 fp=0xffffdf08a910 sp=0xffffdf08a880 pc=0x4f80c8\\\\nruntime.(*pageAlloc).init(0x27a0170, 0x27a0160, 0x0?)\\\\n\\\\t/usr/local/go/src/runtime/mpagealloc.go:324 +0x88 fp=0xffffdf08a940 sp=0xffffdf08a910 pc=0x4f6338\\\\nruntime.(*mheap).init(0x27a0160)\\\\n\\\\t/usr/local/go/src/runtime/mheap.go:729 +0x140 fp=0xffffdf08a980 sp=0xffffdf08a940 pc=0x4f3450\\\\nruntime.mallocinit()\\\\n\\\\t/usr/local/go/src/runtime/malloc.go:407 +0x90 fp=0xffffdf08a9b0 sp=0xffffdf08a980 pc=0x4d7930\\\\nruntime.schedinit()\\\\n\\\\t/usr/local/go/src/runtime/proc.go:693 +0xa0 fp=0xffffdf08aa10 sp=0xffffdf08a9b0 pc=0x5059f0\\\\nruntime.rt0_go()\\\\n\\\\t/usr/local/go/src/runtime/asm_arm64.s:86 +0xa8 fp=0xffffdf08aa40 sp=0xffffdf08aa10 pc=0x530698\\\\n\\\"}\\n{\\\"command\\\": [\\\"/usr/bin/prlimit\\\", \\\"--as=unlimited\\\", \\\"--\\\", \\\"/usr/bin/docker\\\", \\\"ps\\\", \\\"--no-trunc\\\", \\\"--filter\\\", \\\"label=qwen36.owner\\\", \\\"--format\\\", \\\"{{.ID}}\\\"], \\\"exit\\\": 0, \\\"stdout\\\": \\\"\\\", \\\"stderr\\\": \\\"\\\"}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 426,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 426,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 426\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 426,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 426\n      }\n    },\n    \"traceId\": \"1f8607f7-bd28-4926-a8c2-f20aac089e7e\"\n  },\n  \"operationId\": \"exec-0000000000000a8f\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-c",
+            "import subprocess,resource,json\nd=['/usr/bin/docker','ps','--no-trunc','--filter','label=qwen36.owner','--format','{{.ID}}']\nsoft,hard=resource.getrlimit(resource.RLIMIT_AS);assert hard==resource.RLIM_INFINITY;resource.setrlimit(resource.RLIMIT_AS,(512*1024**2,hard))\nfor cmd in [d,['/usr/bin/prlimit','--as=unlimited','--']+d]:\n r=subprocess.run(cmd,capture_output=True,text=True,timeout=20);print(json.dumps(dict(command=cmd,exit=r.returncode,stdout=r.stdout[:2000],stderr=r.stderr[:5000])),flush=True)\n"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": null,
+          "durationMs": 101,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000000a8f",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "{\"command\": [\"/usr/bin/docker\", \"ps\", \"--no-trunc\", \"--filter\", \"label=qwen36.owner\", \"--format\", \"{{.ID}}\"], \"exit\": 2, \"stdout\": \"\", \"stderr\": \"fatal error: failed to reserve page summary memory\\n\\nruntime stack:\\nruntime.throw({0x23e6cb?, 0x4fb4ac?})\\n\\t/usr/local/go/src/runtime/panic.go:1047 +0x40 fp=0xffffdf08a880 sp=0xffffdf08a850 pc=0x502260\\nruntime.(*pageAlloc).sysInit(0x27a0170)\\n\\t/usr/local/go/src/runtime/mpagealloc_64bit.go:82 +0x188 fp=0xffffdf08a910 sp=0xffffdf08a880 pc=0x4f80c8\\nruntime.(*pageAlloc).init(0x27a0170, 0x27a0160, 0x0?)\\n\\t/usr/local/go/src/runtime/mpagealloc.go:324 +0x88 fp=0xffffdf08a940 sp=0xffffdf08a910 pc=0x4f6338\\nruntime.(*mheap).init(0x27a0160)\\n\\t/usr/local/go/src/runtime/mheap.go:729 +0x140 fp=0xffffdf08a980 sp=0xffffdf08a940 pc=0x4f3450\\nruntime.mallocinit()\\n\\t/usr/local/go/src/runtime/malloc.go:407 +0x90 fp=0xffffdf08a9b0 sp=0xffffdf08a980 pc=0x4d7930\\nruntime.schedinit()\\n\\t/usr/local/go/src/runtime/proc.go:693 +0xa0 fp=0xffffdf08aa10 sp=0xffffdf08a9b0 pc=0x5059f0\\nruntime.rt0_go()\\n\\t/usr/local/go/src/runtime/asm_arm64.s:86 +0xa8 fp=0xffffdf08aa40 sp=0xffffdf08aa10 pc=0x530698\\n\"}\n{\"command\": [\"/usr/bin/prlimit\", \"--as=unlimited\", \"--\", \"/usr/bin/docker\", \"ps\", \"--no-trunc\", \"--filter\", \"label=qwen36.owner\", \"--format\", \"{{.ID}}\"], \"exit\": 0, \"stdout\": \"\", \"stderr\": \"\"}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 426,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 426,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 426
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 426,
+          "routeLookupMs": 0,
+          "totalMs": 426
+        }
+      },
+      "traceId": "1f8607f7-bd28-4926-a8c2-f20aac089e7e"
+    },
+    "operationId": "exec-0000000000000a8f",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}

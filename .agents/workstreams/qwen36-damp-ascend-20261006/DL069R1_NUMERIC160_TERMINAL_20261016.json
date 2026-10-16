@@ -1,0 +1,92 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": \"exit code\",\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": false,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-c\",\n          \"import subprocess,re,os,json\\ns=subprocess.check_output(['/usr/local/sbin/npu-smi','info'],text=True);r=[]\\nfor l in s.splitlines():\\n m=re.match(r'\\\\|\\\\s*([0-7])\\\\s+0\\\\s*\\\\|\\\\s*([0-9]+)\\\\s+\\\\|',l)\\n if m:r.append((int(m[1]),int(m[2])))\\nprint('FRESH_PHYSICAL_PROCESSES',json.dumps(r),flush=True)\\nassert not any(c==5 for c,p in r),'physical5 occupied; no experiment started'\\nos.execv('/usr/bin/python3',[\\\"/usr/bin/python3\\\",\\\"-I\\\",\\\"-B\\\",\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/run052.py\\\",\\\"--execute\\\",\\\"--template-ref\\\",\\\"{\\\\\\\"path\\\\\\\":\\\\\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_TEMPLATE.json\\\\\\\",\\\\\\\"bytes\\\\\\\":55180,\\\\\\\"sha256\\\\\\\":\\\\\\\"9d446cb308dbb88eb3f63056ebef855dfa1489b0ac561f7b7b91efcd0d784ae2\\\\\\\"}\\\",\\\"--phase\\\",\\\"numeric160\\\",\\\"--host-cpu\\\",\\\"166\\\",\\\"--guest-cpu\\\",\\\"0\\\",\\\"--cpu-owner-ref\\\",\\\"{\\\\\\\"path\\\\\\\":\\\\\\\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json\\\\\\\",\\\\\\\"bytes\\\\\\\":1386,\\\\\\\"sha256\\\\\\\":\\\\\\\"54e38927342aa9c4e443cbde798768e46a421afc3fb1ba7c8e220aa3842ed3cd\\\\\\\"}\\\",\\\"--smoke-owner-ref\\\",\\\"{\\\\\\\"path\\\\\\\":\\\\\\\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json\\\\\\\",\\\\\\\"bytes\\\\\\\":1620,\\\\\\\"sha256\\\\\\\":\\\\\\\"e98523737a3b87244625bb1a9241a8d92fb6695d0b5f059751e4a9a7b441a8f9\\\\\\\"}\\\"])\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": null,\n        \"durationMs\": 209038,\n        \"error\": \"exit code\",\n        \"exitCode\": 3,\n        \"id\": \"exec-0000000000000a58\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"FRESH_PHYSICAL_PROCESSES []\\nMAIN_DLLIFECYCLE002_OWNER {\\\"path\\\": \\\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json\\\", \\\"bytes\\\": 1469, \\\"sha256\\\": \\\"412680c3460d4921f32edd3a0cf467186f8639d16e07ee0a1b5e89cdfed513e1\\\"}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 423,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 423,\n        \"routeCacheHit\": false,\n        \"routeLookupMode\": \"topology-direct-hot3\",\n        \"routeLookupMs\": 1378,\n        \"totalMs\": 1802\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 423,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 423\n      }\n    },\n    \"traceId\": \"2d20e1b7-eb8d-4b24-bee1-a0052bbbd689\"\n  },\n  \"operationId\": \"exec-0000000000000a58\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": false,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": "exit code",
+    "found": true,
+    "kind": "exec",
+    "ok": false,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-c",
+            "import subprocess,re,os,json\ns=subprocess.check_output(['/usr/local/sbin/npu-smi','info'],text=True);r=[]\nfor l in s.splitlines():\n m=re.match(r'\\|\\s*([0-7])\\s+0\\s*\\|\\s*([0-9]+)\\s+\\|',l)\n if m:r.append((int(m[1]),int(m[2])))\nprint('FRESH_PHYSICAL_PROCESSES',json.dumps(r),flush=True)\nassert not any(c==5 for c,p in r),'physical5 occupied; no experiment started'\nos.execv('/usr/bin/python3',[\"/usr/bin/python3\",\"-I\",\"-B\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/run052.py\",\"--execute\",\"--template-ref\",\"{\\\"path\\\":\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_TEMPLATE.json\\\",\\\"bytes\\\":55180,\\\"sha256\\\":\\\"9d446cb308dbb88eb3f63056ebef855dfa1489b0ac561f7b7b91efcd0d784ae2\\\"}\",\"--phase\",\"numeric160\",\"--host-cpu\",\"166\",\"--guest-cpu\",\"0\",\"--cpu-owner-ref\",\"{\\\"path\\\":\\\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json\\\",\\\"bytes\\\":1386,\\\"sha256\\\":\\\"54e38927342aa9c4e443cbde798768e46a421afc3fb1ba7c8e220aa3842ed3cd\\\"}\",\"--smoke-owner-ref\",\"{\\\"path\\\":\\\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json\\\",\\\"bytes\\\":1620,\\\"sha256\\\":\\\"e98523737a3b87244625bb1a9241a8d92fb6695d0b5f059751e4a9a7b441a8f9\\\"}\"])"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": null,
+          "durationMs": 209038,
+          "error": "exit code",
+          "exitCode": 3,
+          "id": "exec-0000000000000a58",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "FRESH_PHYSICAL_PROCESSES []\nMAIN_DLLIFECYCLE002_OWNER {\"path\": \"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json\", \"bytes\": 1469, \"sha256\": \"412680c3460d4921f32edd3a0cf467186f8639d16e07ee0a1b5e89cdfed513e1\"}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 423,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 423,
+          "routeCacheHit": false,
+          "routeLookupMode": "topology-direct-hot3",
+          "routeLookupMs": 1378,
+          "totalMs": 1802
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 423,
+          "routeLookupMs": 0,
+          "totalMs": 423
+        }
+      },
+      "traceId": "2d20e1b7-eb8d-4b24-bee1-a0052bbbd689"
+    },
+    "operationId": "exec-0000000000000a58",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": false,
+    "terminal": true
+  },
+  "isError": false
+}

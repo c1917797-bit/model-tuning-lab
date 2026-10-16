@@ -1,0 +1,37 @@
+{
+  "execute": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/owned_cpu.py",
+    "--execute",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/SOURCE_MANIFEST.json\",\"bytes\":3219,\"sha256\":\"f55e503338704ddcc91f4d4357936a4d5fb76a57edde2b42090aea07437cb529\"}",
+    "--host-cpu",
+    "MAIN_ACTUAL_HOST_CPU",
+    "--guest-cpu",
+    "MAIN_ACTUAL_DISTINCT_GUEST_CPU",
+    "--output",
+    "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-drift074repair2-MAIN-20261016-001"
+  ],
+  "guest_python": "/usr/local/python3.12.13/bin/python3",
+  "host_budget_unchanged": "512MiB softAS, original unlimited hard; only exact Docker client prlimit ASunlimited",
+  "no_parallel_owned_container": true,
+  "qualification": false,
+  "requires_MAIN_review": true,
+  "schema": "deltalog.retained-CPU074-commands/v1",
+  "source": {
+    "bytes": 3219,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/SOURCE_MANIFEST.json",
+    "sha256": "f55e503338704ddcc91f4d4357936a4d5fb76a57edde2b42090aea07437cb529"
+  },
+  "sourceaudit": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/owned_cpu.py",
+    "--source-audit",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/SOURCE_MANIFEST.json\",\"bytes\":3219,\"sha256\":\"f55e503338704ddcc91f4d4357936a4d5fb76a57edde2b42090aea07437cb529\"}"
+  ]
+}

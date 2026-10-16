@@ -1,0 +1,28 @@
+{
+  "schema": "mxr.actual-readonly-historical-cgroup-peak-query/v073",
+  "operation_id": "exec-0000000000000a4a",
+  "routeDecision": "peer_direct",
+  "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "record": {
+    "args": [
+      "-I",
+      "-B",
+      "-c",
+      "import pathlib,json,hashlib; root=pathlib.Path('/opt/host/vnf/austinov/run-mxr-working-domain-model043-repair2-main-NEW48H_001/candidate'); rows=[]\nfor p in sorted(root.glob('CGROUP-MEMORY-*.json')):\n b=p.read_bytes(); v=json.loads(b); c=v.get('counters',{}); peak=c.get('memory.max_usage_in_bytes',c.get('memory.peak')); current=c.get('memory.usage_in_bytes',c.get('memory.current')); limit=c.get('memory.limit_in_bytes',c.get('memory.max'))\n if peak is not None: rows.append(dict(path=str(p),bytes=len(b),sha256=hashlib.sha256(b).hexdigest(),cid=v.get('cid'),stage=v.get('stage'),peak=int(peak),current=int(current)if current is not None else None,limit=int(limit)if limit not in(None,'max')else limit,failcnt=c.get('memory.failcnt'),oom=c.get('memory.oom_control'),version=v.get('cgroup_version'),init_inspect=v.get('init_inspect')))\nprint(json.dumps(dict(root=str(root),observations=len(rows),peak=max(rows,key=lambda r:r['peak'])if rows else None,last=rows[-1]if rows else None,beforestop=[r for r in rows if r['stage']=='before-stop']),sort_keys=True))"
+    ],
+    "cancelled": false,
+    "command": "/usr/bin/python3",
+    "cwd": null,
+    "durationMs": 95,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-0000000000000a4a",
+    "lane": "process",
+    "state": "completed",
+    "stderr": "",
+    "stdout": "{\"beforestop\": [{\"bytes\": 1931, \"cid\": \"8f719a088f81d501e2a33cd6cf4050851168ba4420b5931e1602d60b991b05d9\", \"current\": 16882024448, \"failcnt\": \"0\", \"init_inspect\": {\"path\": \"/opt/host/vnf/austinov/run-mxr-working-domain-model043-repair2-main-NEW48H_001/candidate/inspect-1792097246806145390.json\", \"sha256\": \"ea0b74d6d16bcdaf68b18030318e6ddd85bd7f8f1fdb4a1de795d98c12694eec\"}, \"limit\": 51539607552, \"oom\": \"oom_kill_disable 0\\nunder_oom 0\\noom_kill 0\\noom_kill_local 0\", \"path\": \"/opt/host/vnf/austinov/run-mxr-working-domain-model043-repair2-main-NEW48H_001/candidate/CGROUP-MEMORY-before-stop-1792097246826922900.json\", \"peak\": 16895430656, \"sha256\": \"8395d345bf5ed253fed06a76c695680caa48ae06c54c294ec4c4b34658ed90a6\", \"stage\": \"before-stop\", \"version\": \"v1\"}], \"last\": {\"bytes\": 1939, \"cid\": \"8f719a088f81d501e2a33cd6cf4050851168ba4420b5931e1602d60b991b05d9\", \"current\": 16895037440, \"failcnt\": \"0\", \"init_inspect\": {\"path\": \"/opt/host/vnf/austinov/run-mxr-working-domain-model043-repair2-main-NEW48H_001/candidate/inspect-1792097243875820500.json\", \"sha256\": \"3e30992df74c1b9e4b61162032e44ef045fb98dbe376c24028a10bcdd9a3af4d\"}, \"limit\": 51539607552, \"oom\": \"oom_kill_disable 0\\nunder_oom 0\\noom_kill 0\\noom_kill_local 0\", \"path\": \"/opt/host/vnf/austinov/run-mxr-working-domain-model043-repair2-main-NEW48H_001/candidate/CGROUP-MEMORY-warmup-arm-capture-1792097243879553470.json\", \"peak\": 16895315968, \"sha256\": \"d3dc187c841ab8fdd0281c192963c6eea12ad35480fae73c7a096ca38db62dc1\", \"stage\": \"warmup-arm-capture\", \"version\": \"v1\"}, \"observations\": 131, \"peak\": {\"bytes\": 1943, \"cid\": \"8f719a088f81d501e2a33cd6cf4050851168ba4420b5931e1602d60b991b05d9\", \"current\": 16882024448, \"failcnt\": \"0\", \"init_inspect\": {\"path\": \"/opt/host/vnf/austinov/run-mxr-working-domain-model043-repair2-main-NEW48H_001/candidate/inspect-1792097246806145390.json\", \"sha256\": \"ea0b74d6d16bcdaf68b18030318e6ddd85bd7f8f1fdb4a1de795d98c12694eec\"}, \"limit\": 51539607552, \"oom\": \"oom_kill_disable 0\\nunder_oom 0\\noom_kill 0\\noom_kill_local 0\", \"path\": \"/opt/host/vnf/austinov/run-mxr-working-domain-model043-repair2-main-NEW48H_001/candidate/CGROUP-MEMORY-actual-frame-produced-1792097246809860170.json\", \"peak\": 16895430656, \"sha256\": \"075bdfcba5cf7331eeab36a2794d47a538d79e482549dc250d5354dc1dcc84a0\", \"stage\": \"actual-frame-produced\", \"version\": \"v1\"}, \"root\": \"/opt/host/vnf/austinov/run-mxr-working-domain-model043-repair2-main-NEW48H_001/candidate\"}\n",
+    "timedOut": false
+  },
+  "new_model_run": false,
+  "NPU": false
+}

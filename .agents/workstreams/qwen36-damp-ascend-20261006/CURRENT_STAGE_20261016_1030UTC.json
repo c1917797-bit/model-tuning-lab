@@ -1,0 +1,110 @@
+{
+  "schema": "ascend.new24h.stage-transition/v1",
+  "observed_utc": "2026-10-16 10:29:43 UTC",
+  "previous_checkpoint": "ACTUAL_STAGE_CHECKPOINT_20261016_1013UTC.json",
+  "authority": {
+    "bytes": 3481,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "goal_achieved": false,
+  "DeltaLog": {
+    "diagnostic_owner": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-drift074repair2-MAIN-20261016-001/RESULT.json",
+      "bytes": 1060,
+      "sha256": "8080e230dadb25c87d92f610e0e93ab2eaf279fab52a71bf98da3453f0d8f117"
+    },
+    "diagnostic_result": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-drift074repair2-MAIN-20261016-001/DIAGNOSIS074.json",
+      "bytes": 231657,
+      "sha256": "c01e2993a59805703a7cc98b67d11df89fb84656c9ad89d3984901db76c8ff1d"
+    },
+    "operation": "exec-0000000000000a9b",
+    "terminal_exit": 0,
+    "rows": 91,
+    "resource_release_verified": true,
+    "scope": "CPU analysis of retained real-NPU failure; no new NPU matrix and no qualification",
+    "maximum": {
+      "candidate_vs_native": {
+        "step": 90,
+        "finite": true,
+        "peak": 0.0000089282120414647,
+        "relative_l2": 8.515666478130072e-7
+      },
+      "candidate_vs_cumulative_CPU64": {
+        "step": 63,
+        "finite": true,
+        "peak": 0.0032888746391893696,
+        "relative_l2": 0.002158872181143717
+      },
+      "native_vs_cumulative_CPU64": {
+        "step": 63,
+        "finite": true,
+        "peak": 0.0032888746391893696,
+        "relative_l2": 0.0021588722514158357
+      },
+      "prefill_initial_vs_independent_ledger": {
+        "step": 60,
+        "finite": true,
+        "peak": 0.0029580309374730974,
+        "relative_l2": 0.00234070338922557
+      },
+      "prefill_candidate_vs_native": {
+        "step": 90,
+        "finite": true,
+        "peak": 0.0000089282120414647,
+        "relative_l2": 0.0000012190327792116628
+      },
+      "prefill_candidate_vs_CPU64": {
+        "step": 59,
+        "finite": true,
+        "peak": 0.0029580309374730974,
+        "relative_l2": 0.0023407033892255727
+      },
+      "prefill_native_vs_CPU64": {
+        "step": 59,
+        "finite": true,
+        "peak": 0.0029580309374730974,
+        "relative_l2": 0.0023407033892255727
+      }
+    },
+    "first_failure_preserved": "exec-0000000000000a58",
+    "next": "step89->90 initial-state join and native-prefill same-input/two-initial-state intervention; do not adjust threshold from observed failure"
+  },
+  "MXR": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/SOURCE_MANIFEST.json",
+      "bytes": 111072,
+      "sha256": "8d0608cd3fe3814359fc8141a39afe4b14baa77290d20fd8e57e73bcab4799ab"
+    },
+    "operation": "exec-0000000000000ab1",
+    "observed_state": "running",
+    "CPU_checks": 18,
+    "actual_four_tiny_and_N1_registry_pass": true,
+    "registry_child_ref": {
+      "path": "/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair6-main-NEW24H_MXR073R6_001/candidate/N1_REGISTRY_CHILD.json",
+      "bytes": 1591,
+      "sha256": "ac2a740d80ef54088b1e027fb2cd79c3b1a7f71f01c67b5675c74962482313c2"
+    },
+    "model_service_startup_observed": true,
+    "model_numeric_gate_pass": false,
+    "performance": false,
+    "accuracy": false,
+    "previous_failed_owner": {
+      "path": "/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair5-main-NEW24H_MXR073R5_001/RESULT.json",
+      "bytes": 3270,
+      "sha256": "9275ee77459bb18227e57240e9ea6d60573f79ad3c67b0eeb0b7c27ff8583c97"
+    }
+  },
+  "NEXT": "Complete actual TP4 2K 48-layer nine-step correctness; only then bind matched production screen to the actual successful source/owner/terminal. Independent raw-drift diagnostic preparation continues.",
+  "BACKUP": "Native-prefill counterfactual guest being prepared; not READY",
+  "input_profiles": {
+    "current_correctness": 2048,
+    "planned_performance": [
+      2048,
+      16384
+    ],
+    "performance_output": 1024
+  },
+  "continuous_utilization": "unmeasured"
+}

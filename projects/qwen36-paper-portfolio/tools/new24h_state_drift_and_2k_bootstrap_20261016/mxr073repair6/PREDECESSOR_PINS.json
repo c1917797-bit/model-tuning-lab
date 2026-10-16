@@ -1,0 +1,383 @@
+{
+  "case_names": [
+    "real16-short129",
+    "real40-short129",
+    "long32768-B1",
+    "long40960-B2",
+    "long40960-B16",
+    "tail-family-0",
+    "tail-family-1",
+    "tail-family-2",
+    "tail-family-3"
+  ],
+  "component044": {
+    "bytes": 9183,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/SOURCE_MANIFEST.json",
+    "sha256": "f87ee946b055d511280eced9882fd8dd9127bf8f683b7b2993b5c51331a3dd0f"
+  },
+  "owned044": {
+    "files": {
+      "HANDOFF.md": {
+        "bytes": 4204,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/HANDOFF.md",
+        "sha256": "216ae475ba885071ecb88cd03580bca0a1e6476db2e8e16fa7f9e26f1345b50d"
+      },
+      "OWNER_REUSE.diff": {
+        "bytes": 11324,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/OWNER_REUSE.diff",
+        "sha256": "4c9236be0f87fd2f90fbdc06696e3dea3cb2c26e5e7f9b059274fca21d97132a"
+      },
+      "bind.py": {
+        "bytes": 1635,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/bind.py",
+        "sha256": "9f7b6be0443f39884833abed3d5747434b48594491460fb93281eac7176c11de"
+      },
+      "common.py": {
+        "bytes": 1308,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/common.py",
+        "sha256": "cf2dc4172e10d3c3293b2b010751515b6454b54c3789c82de0d496d2163dd5c7"
+      },
+      "consume.py": {
+        "bytes": 2204,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/consume.py",
+        "sha256": "9cb3dea96d1d97e9974fd83b62644dadafe769f86e5fcfef2a36d29f0d9efa99"
+      },
+      "cpu_preflight.py": {
+        "bytes": 2083,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/cpu_preflight.py",
+        "sha256": "cdebb28e2e44022943ca8ba7aa7516c92e0c4dde83e9258aba9723ea6987b3b0"
+      },
+      "environment.py": {
+        "bytes": 327,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/environment.py",
+        "sha256": "ba5b39a78b0579c913bfd271dc4ce05d409f2792ded59840a35c10878df1d661"
+      },
+      "handshake_poll.py": {
+        "bytes": 720,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/handshake_poll.py",
+        "sha256": "20a4d18d50f55ecb10e02527576b76b89e01c0ab99d0f778e9d37c7deeccbb5a"
+      },
+      "mainhost.py": {
+        "bytes": 7697,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/mainhost.py",
+        "sha256": "1f56f5cd293cc6c280160beb0fcaa87ea96a17b0dfce6590d409e2d0a8503bf7"
+      },
+      "prepare_owner.py": {
+        "bytes": 2146,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/prepare_owner.py",
+        "sha256": "f86e8a0255d2947bacb6f92432deb324d853eae71f80a64949fe73dceddf4d5b"
+      },
+      "prepare_transport.py": {
+        "bytes": 3659,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/prepare_transport.py",
+        "sha256": "e1d857191cc6f91f0827e203e1fd4c765345e76115871ea798f9f6fa7c663f75"
+      },
+      "probe_contract.py": {
+        "bytes": 769,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/probe_contract.py",
+        "sha256": "cf35bff3c642aa0239a961113e24af369f6187f678e6e57c73a3fb3ddbc3b6be"
+      },
+      "replay.py": {
+        "bytes": 4610,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/replay.py",
+        "sha256": "95cd479a48cc2c5304e174af8613bd0aae4423ec64a87be646e91a7f71875909"
+      },
+      "software_controls.py": {
+        "bytes": 2235,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/software_controls.py",
+        "sha256": "ec546645dbda0ceec7d4ab2063857d989c61ca91535a52f9234e358e4d8681d2"
+      },
+      "test_interface.py": {
+        "bytes": 6702,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/test_interface.py",
+        "sha256": "f5771de209ffc0815448b3938d6d7b7c65b7328e8a20c5dcf49d15a7d607d857"
+      }
+    },
+    "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044",
+    "template": {
+      "bytes": 5172,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/SOURCE_TEMPLATE.json",
+      "sha256": "bf7bd504e650bb99d776ab36ba903065440f1e379b44daed61a09aa3f9d6ab53"
+    }
+  },
+  "short043": {
+    "files": {
+      "ACTUAL_HEADER_INVENTORY.json": {
+        "bytes": 5191,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/ACTUAL_HEADER_INVENTORY.json",
+        "sha256": "d9895793d897a8e03f9349a99b0eb4404719adc006f71f74082aa6f5fcaaa0b2"
+      },
+      "ACTUAL_LOADER_SOURCES.json": {
+        "bytes": 1258,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/ACTUAL_LOADER_SOURCES.json",
+        "sha256": "f58b9017b95e47ada8ffffec0300e0145dc41ad8066910197c5c27b5600c4b75"
+      },
+      "PLATFORM_SOURCES.json": {
+        "bytes": 20210,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/PLATFORM_SOURCES.json",
+        "sha256": "36cbf88ed2942f286d4ee2e2d3f6326a6fc6c5c8fbcccd20d87051b9f967aea3"
+      },
+      "QUALIFICATION_CORRECTNESS.json": {
+        "bytes": 1902,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/QUALIFICATION_CORRECTNESS.json",
+        "sha256": "c722d3c0f335f172826ad6d29afef627eff5f939780f2807e43bd8ab636239f3"
+      },
+      "actual011/config_cpu.py": {
+        "bytes": 14081,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/actual011/config_cpu.py",
+        "sha256": "c082d535f9bd29a4e828ff98796560ea915d86cf132034d0da7df39c2aca6349"
+      },
+      "actual011/server_entry.py": {
+        "bytes": 9483,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/actual011/server_entry.py",
+        "sha256": "be314a47a6c440960632d3fa88d18f4ff1b80c02356dd8a5fc45c321a7164e9f"
+      },
+      "actual_binding/gdn.py": {
+        "bytes": 21887,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/actual_binding/gdn.py",
+        "sha256": "d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816"
+      },
+      "actual_binding/patch_qwen3_5.py": {
+        "bytes": 8743,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/actual_binding/patch_qwen3_5.py",
+        "sha256": "21fc9a2064f9b490ffcf3d61bacc8ddb67806a4c7490895a33128e65438838d3"
+      },
+      "actual_binding/qwen_gdn_linear_attn.py": {
+        "bytes": 68663,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/actual_binding/qwen_gdn_linear_attn.py",
+        "sha256": "885c56f5e3584ab60bb4ce4b42cf8259e5e92c86ba13aa6128e6ed7a2a20d2b0"
+      },
+      "actual_loader/base_loader.py": {
+        "bytes": 3651,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/actual_loader/base_loader.py",
+        "sha256": "0632e9db1988d77db65e1b5ab5eb79e9254d8191ab45e4d772573d5cf3649aa1"
+      },
+      "actual_loader/default_loader.py": {
+        "bytes": 17104,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/actual_loader/default_loader.py",
+        "sha256": "15ea6e9b70ff1ac725cf2533755e6763e3840a93a6a7322fac737f2e44ea2d5e"
+      },
+      "actual_loader/load.py": {
+        "bytes": 6951,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/actual_loader/load.py",
+        "sha256": "010c666cf1e4209d0d5edc539db2b458d48ee453296582213ec6e587f8c47a60"
+      },
+      "actual_loader/safety_host.py": {
+        "bytes": 22569,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/actual_loader/safety_host.py",
+        "sha256": "8c83e08318b530c4d022b91bbacd34b12121b3380e1a14d32262c9a3875f6fa7"
+      },
+      "actual_loader/utils.py": {
+        "bytes": 11140,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/actual_loader/utils.py",
+        "sha256": "55b03cc8443e66f482340790a42b16fa3be4df692eb9db42e0103f52e266dc80"
+      },
+      "actual_loader/weight_utils.py": {
+        "bytes": 62286,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/actual_loader/weight_utils.py",
+        "sha256": "49dcddfa0da0daba52c93007e1acbee2be2ae8f2c5f61287126c7b792c970c5c"
+      },
+      "admit042.py": {
+        "bytes": 3633,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/admit042.py",
+        "sha256": "5ecea884180fb04bdf4f9de4c3c895406319f94e9215bf99bb51102f55ef5d5f"
+      },
+      "audit_local.py": {
+        "bytes": 1770,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/audit_local.py",
+        "sha256": "b7c696590afe12c4afb5efe835f2a63182e8db30203a40b1455dddfd651b5bc5"
+      },
+      "boundary_oracle.py": {
+        "bytes": 4691,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/boundary_oracle.py",
+        "sha256": "7fd2e64783f4516a99f116dc66502ff8e6b6d5591f7a1076e7ed1e6cfa9a408a"
+      },
+      "build_source.py": {
+        "bytes": 1957,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/build_source.py",
+        "sha256": "8fa4d42a9a2db49d0b58db4d6b497b2aa4b41dbdc412a873061e614425119833"
+      },
+      "cap48_provider.py": {
+        "bytes": 2056,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/cap48_provider.py",
+        "sha256": "0f7ea41e49bf0a0cdd4ed9d255e5b5b900471e66af4180f34d5c07aa5edc19a2"
+      },
+      "common_precision.py": {
+        "bytes": 534,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/common_precision.py",
+        "sha256": "8e05234e84a5cb8d68f77e194858ac9044a6252bcb18ee0d8e36baeee12f262e"
+      },
+      "consume.py": {
+        "bytes": 7451,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/consume.py",
+        "sha256": "d6eb3102e3e8db6dc308e4e4013c16d82ddd9f16b3095ef20070cc5f1c8865c7"
+      },
+      "entry.py": {
+        "bytes": 8075,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/entry.py",
+        "sha256": "b32acd54fc3292760e0d24b1d6d585b297f757a46591738239ded1ffe41de652"
+      },
+      "external_output_policy.py": {
+        "bytes": 7175,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/external_output_policy.py",
+        "sha256": "f85f745cb9362d69e70cfd35a9c894d97fc7069297d3694c8b8c57107126191f"
+      },
+      "guard_evidence/actual010_RESULT.json": {
+        "bytes": 3881,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/guard_evidence/actual010_RESULT.json",
+        "sha256": "2c000ca7499a1139d912fb25eab62024ff5e4cc1ba93e87c8655846c860ac7f8"
+      },
+      "guard_evidence/actual010_complete_085533.json": {
+        "bytes": 19559,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/guard_evidence/actual010_complete_085533.json",
+        "sha256": "041d32692c06ffcf4fd4260f0b39a3ff31d274e581af353a9a9bab48320dd563"
+      },
+      "guard_evidence/actual010_raw_085537.json": {
+        "bytes": 5440,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/guard_evidence/actual010_raw_085537.json",
+        "sha256": "b0ba75f0190e33e965f3bc1c484407895883bf4044918a7143177a44db3a9a52"
+      },
+      "guard_test_inputs/actual_helper.py": {
+        "bytes": 40202,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/guard_test_inputs/actual_helper.py",
+        "sha256": "4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20"
+      },
+      "guard_test_inputs/actual_safety.py": {
+        "bytes": 22569,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/guard_test_inputs/actual_safety.py",
+        "sha256": "8c83e08318b530c4d022b91bbacd34b12121b3380e1a14d32262c9a3875f6fa7"
+      },
+      "host_ticket.py": {
+        "bytes": 14898,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/host_ticket.py",
+        "sha256": "08398f1dbcce3dd4c018bc12c9d12a430b8292141ff9dc09e35385cdd3ad8660"
+      },
+      "independent_reference.py": {
+        "bytes": 1596,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/independent_reference.py",
+        "sha256": "c0717d6e2385822d569be611995290294a603c8f49dbf14478a72a29bf1711a9"
+      },
+      "ipc_controls.py": {
+        "bytes": 2962,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/ipc_controls.py",
+        "sha256": "6f815ee70eee276f2a5c8f6ffd7d3ba82e754eb9aac55ee7d5408100241037a2"
+      },
+      "memory_observer.py": {
+        "bytes": 3574,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/memory_observer.py",
+        "sha256": "4adb02fc2a906b54dfd6d16bdfd76fbb6a3a1811309a6a19a98a280a2b2b2dc1"
+      },
+      "mxr_diag16_gdn_shadow-0.0.1.dist-info/METADATA": {
+        "bytes": 140,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/mxr_diag16_gdn_shadow-0.0.1.dist-info/METADATA",
+        "sha256": "c318e1462a91aa1f74651ed25ffd9543cff3dd34b1ed3ade741b89d82e17498d"
+      },
+      "mxr_diag16_gdn_shadow-0.0.1.dist-info/entry_points.txt": {
+        "bytes": 78,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/mxr_diag16_gdn_shadow-0.0.1.dist-info/entry_points.txt",
+        "sha256": "93e018f547dc077c8b1fa0741164a018d7d3ce516c7e34ab200872cac0e52f03"
+      },
+      "mxr_diag16_gdn_shadow/__init__.py": {
+        "bytes": 584,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/mxr_diag16_gdn_shadow/__init__.py",
+        "sha256": "1c39080dd05bdbd0004d33ba7ebe82cf8bbd3b4ba9ed8678018a151b5c9060df"
+      },
+      "ownership_observation.py": {
+        "bytes": 4268,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/ownership_observation.py",
+        "sha256": "47ab8c9385128abdc1806d50379bcea931c7fc3f3a5db29e03abd99f42017c2d"
+      },
+      "parser_probe.py": {
+        "bytes": 11476,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/parser_probe.py",
+        "sha256": "9e1cca3a41cea80c4825420dfe3a0c5f18073b7984853076975483d27d5e1028"
+      },
+      "prefix_binding.py": {
+        "bytes": 5811,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/prefix_binding.py",
+        "sha256": "96c345308723ebf32e6817b2289466aaca6ca964897abf97fa23941da6ac8d8d"
+      },
+      "prerequisite.py": {
+        "bytes": 12719,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/prerequisite.py",
+        "sha256": "d25609d1c121015bc8b9eeda1295ad484a658fd09010a73d01a1890b001ffa20"
+      },
+      "refine.py": {
+        "bytes": 5574,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/refine.py",
+        "sha256": "d8e62cd25132d96417dc402c6f053db88c40cfa79b67de3f3316bf9dfdea2306"
+      },
+      "software.py": {
+        "bytes": 4600,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/software.py",
+        "sha256": "c961bb65c540a2602fc3384f4034c4ca6da47b484493103cc1a452d274fddda8"
+      },
+      "stage_resources.py": {
+        "bytes": 3553,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/stage_resources.py",
+        "sha256": "f86ae63589f3ed36c8df6c452a7b7bde0ae5c85a1067582c64852b10953a4ff2"
+      },
+      "test_043.py": {
+        "bytes": 4040,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/test_043.py",
+        "sha256": "6b89ac9e5ab838d51bb4bf52d23bc671d7736155391ee8b0f56df4c77c406270"
+      },
+      "test_contract.py": {
+        "bytes": 2072,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/test_contract.py",
+        "sha256": "06f6287eae4c0a4acc1e8bc248141b5095e95911538f326618471de265e31c95"
+      },
+      "test_disk_relocation.py": {
+        "bytes": 3103,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/test_disk_relocation.py",
+        "sha256": "d5438beb0a2877f76ccee0038e866dca19a81f7f5a466c98d28d1975d4b1638d"
+      },
+      "test_external_output.py": {
+        "bytes": 5256,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/test_external_output.py",
+        "sha256": "f0cc71ce904a15cc751305150a2e47a184dbfdfb4b8e74314e0b0c99cbfd3bd7"
+      },
+      "test_ipc_tmpdir.py": {
+        "bytes": 1226,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/test_ipc_tmpdir.py",
+        "sha256": "e3d8c1c58d81a344b1ba0d4fd4b29e60b2a01be85dfb24aeea828d08a240b753"
+      },
+      "test_ownership_order.py": {
+        "bytes": 5042,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/test_ownership_order.py",
+        "sha256": "29dde865e09fbc74afa001ff9f149abe93281eccc4e22b60c7215b853bcd962c"
+      },
+      "test_pair_cap_provider.py": {
+        "bytes": 1504,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/test_pair_cap_provider.py",
+        "sha256": "f17cb31c0d33ab5bde029fc05fd0628ca27bcadebcdc503c8651ed53817ab61e"
+      },
+      "test_prefix_binding.py": {
+        "bytes": 5055,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/test_prefix_binding.py",
+        "sha256": "a1ef30c0c08ea00220355d551a5ea81411ef95bb81426354136bf293b2695c59"
+      },
+      "test_reference.py": {
+        "bytes": 1216,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/test_reference.py",
+        "sha256": "618fe6a932e7bdabfa44faf5787a47578943e8de3d7d78ceeef16f57e34f133d"
+      },
+      "test_source_cap48.py": {
+        "bytes": 2877,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/test_source_cap48.py",
+        "sha256": "495d73636eb8630c8cf3bf89ce9bf6c73c3a88c80d1b7e051da28fcc76302e68"
+      },
+      "worker.py": {
+        "bytes": 8630,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/worker.py",
+        "sha256": "bc332bf05afe30f9b5dbb1fc623e2af2dc4c731f534df931341a96f106c34b39"
+      }
+    },
+    "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2",
+    "template": {
+      "bytes": 66713,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/SOURCE_TEMPLATE.json",
+      "sha256": "aafcd6cd792363a4580923f50855b110259d530ce757620193e6a793f57b17d5"
+    }
+  }
+}

@@ -1,0 +1,676 @@
+{
+  "ref": {
+    "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-drift074repair2-MAIN-20261016-001/DIAGNOSIS074.json",
+    "bytes": 231657,
+    "sha256": "c01e2993a59805703a7cc98b67d11df89fb84656c9ad89d3984901db76c8ff1d"
+  },
+  "primary": null,
+  "rows": 91,
+  "elapsed": 76.04123572999379,
+  "scope": "diagnostic only; cumulative ledger uses saved candidate post-convolution operands, original CPU32 normalization boundary and independent CPU64 recurrence; not exact-real normalization nor proof of native transformed operands",
+  "maximum": {
+    "candidate_vs_native": {
+      "step": 90,
+      "finite": true,
+      "peak": 0.0000089282120414647,
+      "relative_l2": 8.515666478130072e-7
+    },
+    "candidate_vs_cumulative_CPU64": {
+      "step": 63,
+      "finite": true,
+      "peak": 0.0032888746391893696,
+      "relative_l2": 0.002158872181143717
+    },
+    "native_vs_cumulative_CPU64": {
+      "step": 63,
+      "finite": true,
+      "peak": 0.0032888746391893696,
+      "relative_l2": 0.0021588722514158357
+    },
+    "prefill_initial_vs_independent_ledger": {
+      "step": 60,
+      "finite": true,
+      "peak": 0.0029580309374730974,
+      "relative_l2": 0.00234070338922557
+    },
+    "prefill_candidate_vs_native": {
+      "step": 90,
+      "finite": true,
+      "peak": 0.0000089282120414647,
+      "relative_l2": 0.0000012190327792116628
+    },
+    "prefill_candidate_vs_CPU64": {
+      "step": 59,
+      "finite": true,
+      "peak": 0.0029580309374730974,
+      "relative_l2": 0.0023407033892255727
+    },
+    "prefill_native_vs_CPU64": {
+      "step": 59,
+      "finite": true,
+      "peak": 0.0029580309374730974,
+      "relative_l2": 0.0023407033892255727
+    }
+  },
+  "selected": [
+    {
+      "step": 0,
+      "candidate_vs_native": {
+        "finite": true,
+        "peak": 9.397487995522619e-8,
+        "relative_l2": 4.107441893843206e-8
+      },
+      "candidate_vs_cumulative_CPU64": {
+        "finite": true,
+        "peak": 0.0006765277303556027,
+        "relative_l2": 0.00022636290055260685
+      },
+      "native_vs_cumulative_CPU64": {
+        "finite": true,
+        "peak": 0.0006765277303556027,
+        "relative_l2": 0.00022636290421636224
+      },
+      "prefill_initial_vs_independent_ledger": {
+        "finite": true,
+        "peak": 0,
+        "relative_l2": 0
+      },
+      "prefill_candidate_vs_native": {
+        "finite": true,
+        "peak": 0,
+        "relative_l2": 0
+      },
+      "prefill_candidate_vs_CPU64": {
+        "finite": true,
+        "peak": 0.0021902551894491494,
+        "relative_l2": 0.00229720796274335
+      },
+      "prefill_native_vs_CPU64": {
+        "finite": true,
+        "peak": 0.0021902551894491494,
+        "relative_l2": 0.00229720796274335
+      },
+      "decode": [
+        {
+          "candidate_before_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0,
+            "relative_l2": 0
+          },
+          "candidate_vs_conditioned_CPU64": {
+            "finite": true,
+            "peak": 1.1999762113180799e-8,
+            "relative_l2": 3.954352156263099e-9
+          },
+          "candidate_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 1.1999762113180799e-8,
+            "relative_l2": 3.954352156263099e-9
+          },
+          "candidate_vs_native": {
+            "finite": true,
+            "peak": 9.397487995522619e-8,
+            "relative_l2": 4.1275302426725605e-8
+          },
+          "native_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 9.518183711478817e-8,
+            "relative_l2": 4.111662467852812e-8
+          },
+          "native_vs_own_previous_CPU64": null,
+          "precast_vs_conditioned_CPU64": {
+            "finite": true,
+            "peak": 1.086085916966048e-7,
+            "relative_l2": 9.203363076054183e-8
+          },
+          "precast_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 1.086085916966048e-7,
+            "relative_l2": 9.203363076054183e-8
+          },
+          "slot": 0
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "candidate_vs_native": {
+        "finite": true,
+        "peak": 3.843519735763893e-7,
+        "relative_l2": 1.291058133466711e-7
+      },
+      "candidate_vs_cumulative_CPU64": {
+        "finite": true,
+        "peak": 0.003183682098080679,
+        "relative_l2": 0.0006021455088892834
+      },
+      "native_vs_cumulative_CPU64": {
+        "finite": true,
+        "peak": 0.003183682098080679,
+        "relative_l2": 0.0006021455132718561
+      },
+      "prefill_initial_vs_independent_ledger": {
+        "finite": true,
+        "peak": 0.003088570251896409,
+        "relative_l2": 0.0022721561783519044
+      },
+      "prefill_candidate_vs_native": {
+        "finite": true,
+        "peak": 0,
+        "relative_l2": 0
+      },
+      "prefill_candidate_vs_CPU64": {
+        "finite": true,
+        "peak": 0.0038481009733639954,
+        "relative_l2": 0.0022284923886872593
+      },
+      "prefill_native_vs_CPU64": {
+        "finite": true,
+        "peak": 0.0038481009733639954,
+        "relative_l2": 0.0022284923886872593
+      },
+      "decode": [
+        {
+          "candidate_before_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 1.969729318678352e-7,
+            "relative_l2": 9.669564635319857e-8
+          },
+          "candidate_vs_conditioned_CPU64": {
+            "finite": true,
+            "peak": 2.7442776998721316e-8,
+            "relative_l2": 6.2146880829637905e-9
+          },
+          "candidate_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 1.9558724623080852e-7,
+            "relative_l2": 9.61127127419132e-8
+          },
+          "candidate_vs_native": {
+            "finite": true,
+            "peak": 3.843519735763893e-7,
+            "relative_l2": 1.340942601426312e-7
+          },
+          "native_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 3.3767841390027093e-7,
+            "relative_l2": 1.22193425265974e-7
+          },
+          "native_vs_own_previous_CPU64": {
+            "output": {
+              "finite": true,
+              "peak": 0.001970263098405912,
+              "relative_l2": 0.0016783828026259017
+            },
+            "state": {
+              "finite": true,
+              "peak": 8.270019748303324e-8,
+              "relative_l2": 4.0414469249670486e-8
+            }
+          },
+          "precast_vs_conditioned_CPU64": {
+            "finite": true,
+            "peak": 1.556506091502699e-7,
+            "relative_l2": 9.338560284305161e-8
+          },
+          "precast_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 2.5257384632597864e-7,
+            "relative_l2": 1.3207682049009163e-7
+          },
+          "slot": 0
+        }
+      ]
+    },
+    {
+      "step": 9,
+      "candidate_vs_native": {
+        "finite": true,
+        "peak": 6.506137188418429e-7,
+        "relative_l2": 3.351258242454909e-8
+      },
+      "candidate_vs_cumulative_CPU64": {
+        "finite": true,
+        "peak": 0.0031723589902947187,
+        "relative_l2": 0.002142109337829518
+      },
+      "native_vs_cumulative_CPU64": {
+        "finite": true,
+        "peak": 0.0031723334195404374,
+        "relative_l2": 0.002142108970391512
+      },
+      "prefill_initial_vs_independent_ledger": {
+        "finite": true,
+        "peak": 2.0986838786135946e-7,
+        "relative_l2": 1.0722711770181558e-7
+      },
+      "prefill_candidate_vs_native": {
+        "finite": true,
+        "peak": 7.126834293483058e-7,
+        "relative_l2": 2.12438502606831e-8
+      },
+      "prefill_candidate_vs_CPU64": {
+        "finite": true,
+        "peak": 0.003413291849831593,
+        "relative_l2": 0.0023058443675603273
+      },
+      "prefill_native_vs_CPU64": {
+        "finite": true,
+        "peak": 0.003413291849831593,
+        "relative_l2": 0.0023058443393665
+      },
+      "decode": [
+        {
+          "candidate_before_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.0038481009733639954,
+            "relative_l2": 0.0022284923886872593
+          },
+          "candidate_vs_conditioned_CPU64": {
+            "finite": true,
+            "peak": 4.4285160242300955e-8,
+            "relative_l2": 1.6313454968401173e-8
+          },
+          "candidate_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.0031723589902947187,
+            "relative_l2": 0.001959858867816889
+          },
+          "candidate_vs_native": {
+            "finite": true,
+            "peak": 7.664555442352668e-8,
+            "relative_l2": 4.2574410958564945e-8
+          },
+          "native_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.0031723334195404374,
+            "relative_l2": 0.0019598580880108643
+          },
+          "native_vs_own_previous_CPU64": {
+            "output": {
+              "finite": true,
+              "peak": 0.002240609016376306,
+              "relative_l2": 0.0016239747254077745
+            },
+            "state": {
+              "finite": true,
+              "peak": 7.528645554735943e-8,
+              "relative_l2": 4.417076486861632e-8
+            }
+          },
+          "precast_vs_conditioned_CPU64": {
+            "finite": true,
+            "peak": 1.348183994034354e-7,
+            "relative_l2": 8.360307419022511e-8
+          },
+          "precast_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.0030536599318517696,
+            "relative_l2": 0.0021508531829225385
+          },
+          "slot": 1
+        }
+      ]
+    },
+    {
+      "step": 72,
+      "candidate_vs_native": {
+        "finite": true,
+        "peak": 4.2264535637274667e-7,
+        "relative_l2": 3.181735636843722e-8
+      },
+      "candidate_vs_cumulative_CPU64": {
+        "finite": true,
+        "peak": 0.0034978896571573807,
+        "relative_l2": 0.0021499945953127775
+      },
+      "native_vs_cumulative_CPU64": {
+        "finite": true,
+        "peak": 0.00349790534041646,
+        "relative_l2": 0.002149994498497771
+      },
+      "prefill_initial_vs_independent_ledger": {
+        "finite": true,
+        "peak": 0.0011276950249799358,
+        "relative_l2": 0.0006788289843602047
+      },
+      "prefill_candidate_vs_native": {
+        "finite": true,
+        "peak": 4.2264535637274667e-7,
+        "relative_l2": 1.3782874736648303e-8
+      },
+      "prefill_candidate_vs_CPU64": {
+        "finite": true,
+        "peak": 0.002488556109295544,
+        "relative_l2": 0.0023085257483294254
+      },
+      "prefill_native_vs_CPU64": {
+        "finite": true,
+        "peak": 0.002488556109295544,
+        "relative_l2": 0.0023085257725184057
+      },
+      "decode": [
+        {
+          "candidate_before_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.004257487337552375,
+            "relative_l2": 0.002241877393337348
+          },
+          "candidate_vs_conditioned_CPU64": {
+            "finite": true,
+            "peak": 3.921269106622969e-8,
+            "relative_l2": 1.7564579318936982e-8
+          },
+          "candidate_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.004216134743551153,
+            "relative_l2": 0.0019726981521749074
+          },
+          "candidate_vs_native": {
+            "finite": true,
+            "peak": 8.079300747908138e-8,
+            "relative_l2": 4.3161368362345074e-8
+          },
+          "native_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.0042161536471587505,
+            "relative_l2": 0.0019726979082679732
+          },
+          "native_vs_own_previous_CPU64": {
+            "output": {
+              "finite": true,
+              "peak": 0.0026429346796044305,
+              "relative_l2": 0.0016398330178507908
+            },
+            "state": {
+              "finite": true,
+              "peak": 8.097182360367171e-8,
+              "relative_l2": 4.446500524951514e-8
+            }
+          },
+          "precast_vs_conditioned_CPU64": {
+            "finite": true,
+            "peak": 8.910144151072183e-8,
+            "relative_l2": 8.76883767881564e-8
+          },
+          "precast_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.002714644779598617,
+            "relative_l2": 0.0017774696721626515
+          },
+          "slot": 0
+        }
+      ]
+    },
+    {
+      "step": 73,
+      "candidate_vs_native": {
+        "finite": true,
+        "peak": 4.341354518503121e-8,
+        "relative_l2": 3.816962636946802e-8
+      },
+      "candidate_vs_cumulative_CPU64": {
+        "finite": true,
+        "peak": 0.0017089506390199198,
+        "relative_l2": 0.0020278052181649177
+      },
+      "native_vs_cumulative_CPU64": {
+        "finite": true,
+        "peak": 0.0017089506390199198,
+        "relative_l2": 0.0020278050872717147
+      },
+      "prefill_initial_vs_independent_ledger": {
+        "finite": true,
+        "peak": 0,
+        "relative_l2": 0
+      },
+      "prefill_candidate_vs_native": {
+        "finite": true,
+        "peak": 0,
+        "relative_l2": 0
+      },
+      "prefill_candidate_vs_CPU64": {
+        "finite": true,
+        "peak": 0.0017089506390199198,
+        "relative_l2": 0.002283356171457826
+      },
+      "prefill_native_vs_CPU64": {
+        "finite": true,
+        "peak": 0.0017089506390199198,
+        "relative_l2": 0.002283356171457826
+      },
+      "decode": [
+        {
+          "candidate_before_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.004216134743551153,
+            "relative_l2": 0.0019726981521749074
+          },
+          "candidate_vs_conditioned_CPU64": {
+            "finite": true,
+            "peak": 3.265098102210095e-8,
+            "relative_l2": 1.8479511444021428e-8
+          },
+          "candidate_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.0028632925472100485,
+            "relative_l2": 0.0017272387612484125
+          },
+          "candidate_vs_native": {
+            "finite": true,
+            "peak": 7.365317298877832e-8,
+            "relative_l2": 5.431235822824289e-8
+          },
+          "native_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.0028632967064842986,
+            "relative_l2": 0.0017272384501523699
+          },
+          "native_vs_own_previous_CPU64": {
+            "output": {
+              "finite": true,
+              "peak": 0.0021695252697536724,
+              "relative_l2": 0.0016324049964443325
+            },
+            "state": {
+              "finite": true,
+              "peak": 4.883245506788774e-8,
+              "relative_l2": 4.205218109327688e-8
+            }
+          },
+          "precast_vs_conditioned_CPU64": {
+            "finite": true,
+            "peak": 1.0469326339257446e-7,
+            "relative_l2": 8.558001711917453e-8
+          },
+          "precast_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.0024893673328552197,
+            "relative_l2": 0.001738779683183329
+          },
+          "slot": 0
+        }
+      ]
+    },
+    {
+      "step": 89,
+      "candidate_vs_native": {
+        "finite": true,
+        "peak": 1.04540197013347e-7,
+        "relative_l2": 6.545989490465798e-8
+      },
+      "candidate_vs_cumulative_CPU64": {
+        "finite": true,
+        "peak": 0.00257320713085717,
+        "relative_l2": 0.0017021756800414262
+      },
+      "native_vs_cumulative_CPU64": {
+        "finite": true,
+        "peak": 0.00257320713085717,
+        "relative_l2": 0.001702175643546931
+      },
+      "prefill_initial_vs_independent_ledger": {
+        "finite": true,
+        "peak": 0.0018579523395317265,
+        "relative_l2": 0.002268920598529723
+      },
+      "prefill_candidate_vs_native": {
+        "finite": true,
+        "peak": 0,
+        "relative_l2": 0
+      },
+      "prefill_candidate_vs_CPU64": {
+        "finite": true,
+        "peak": 0.0031428445649531733,
+        "relative_l2": 0.002285707983336997
+      },
+      "prefill_native_vs_CPU64": {
+        "finite": true,
+        "peak": 0.0031428445649531733,
+        "relative_l2": 0.002285707983336997
+      },
+      "decode": [
+        {
+          "candidate_before_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.0008906123814634784,
+            "relative_l2": 0.0007957824517274902
+          },
+          "candidate_vs_conditioned_CPU64": {
+            "finite": true,
+            "peak": 3.938978771064844e-8,
+            "relative_l2": 1.7611943009119578e-8
+          },
+          "candidate_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.0006473077149041688,
+            "relative_l2": 0.0006993991552160731
+          },
+          "candidate_vs_native": {
+            "finite": true,
+            "peak": 1.04540197013347e-7,
+            "relative_l2": 9.337879547670948e-8
+          },
+          "native_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.0006473249008914926,
+            "relative_l2": 0.0006993989744791139
+          },
+          "native_vs_own_previous_CPU64": {
+            "output": {
+              "finite": true,
+              "peak": 0.0023082923708895044,
+              "relative_l2": 0.0016756009289660737
+            },
+            "state": {
+              "finite": true,
+              "peak": 6.800379834027837e-8,
+              "relative_l2": 4.387117777078084e-8
+            }
+          },
+          "precast_vs_conditioned_CPU64": {
+            "finite": true,
+            "peak": 9.650452886727918e-8,
+            "relative_l2": 8.958558781120994e-8
+          },
+          "precast_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.0008399214341226479,
+            "relative_l2": 0.0007780187147828908
+          },
+          "slot": 1
+        }
+      ]
+    },
+    {
+      "step": 90,
+      "candidate_vs_native": {
+        "finite": true,
+        "peak": 0.0000089282120414647,
+        "relative_l2": 8.515666478130072e-7
+      },
+      "candidate_vs_cumulative_CPU64": {
+        "finite": true,
+        "peak": 0.002545011438147411,
+        "relative_l2": 0.0021215629924739867
+      },
+      "native_vs_cumulative_CPU64": {
+        "finite": true,
+        "peak": 0.00254498188149001,
+        "relative_l2": 0.0021215637845389016
+      },
+      "prefill_initial_vs_independent_ledger": {
+        "finite": true,
+        "peak": 0.0006473085335025522,
+        "relative_l2": 0.0006993994061124057
+      },
+      "prefill_candidate_vs_native": {
+        "finite": true,
+        "peak": 0.0000089282120414647,
+        "relative_l2": 0.0000012190327792116628
+      },
+      "prefill_candidate_vs_CPU64": {
+        "finite": true,
+        "peak": 0.0024008201860321932,
+        "relative_l2": 0.002240578066516825
+      },
+      "prefill_native_vs_CPU64": {
+        "finite": true,
+        "peak": 0.0024008201860321932,
+        "relative_l2": 0.0022405796508189325
+      },
+      "decode": [
+        {
+          "candidate_before_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.0031428445649531733,
+            "relative_l2": 0.002285707983336997
+          },
+          "candidate_vs_conditioned_CPU64": {
+            "finite": true,
+            "peak": 3.3706930703870406e-8,
+            "relative_l2": 1.7644370319580903e-8
+          },
+          "candidate_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.0029686261039737235,
+            "relative_l2": 0.002001905130803405
+          },
+          "candidate_vs_native": {
+            "finite": true,
+            "peak": 8.54850203740091e-8,
+            "relative_l2": 4.560793751962874e-8
+          },
+          "native_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.002968591627639593,
+            "relative_l2": 0.0020019050827564146
+          },
+          "native_vs_own_previous_CPU64": {
+            "output": {
+              "finite": true,
+              "peak": 0.0032280034062373603,
+              "relative_l2": 0.0017598267266463543
+            },
+            "state": {
+              "finite": true,
+              "peak": 9.25991731836561e-8,
+              "relative_l2": 4.722403227374429e-8
+            }
+          },
+          "precast_vs_conditioned_CPU64": {
+            "finite": true,
+            "peak": 1.4202598963060747e-7,
+            "relative_l2": 8.862635279859485e-8
+          },
+          "precast_vs_cumulative_CPU64": {
+            "finite": true,
+            "peak": 0.0027131121879718943,
+            "relative_l2": 0.001992360160702
+          },
+          "slot": 0
+        }
+      ]
+    }
+  ]
+}

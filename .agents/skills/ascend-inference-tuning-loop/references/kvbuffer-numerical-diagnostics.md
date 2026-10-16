@@ -182,3 +182,25 @@ dense performance, and final task tests under the unchanged experiment contract.
   failed at that mismatch after all four exact release checks; preserve its
   exit1 and use a new READ-ONLY schema-corrected audit. No stop should be repeated.
   See H8_FULL_V4_MOUNT_FAILURE_20261007.md.
+
+- Scope a recurrent consistency constant to its original numerical domain.
+  A threshold inherited from a single FP32 update is not automatically an error
+  theorem for a mixed BF16-prefill/FP32-decode trajectory. Preserve the old
+  failure; inspect the failing state segment and actual slot/flush join before
+  changing arithmetic. Similar candidate/native CPU64 error norms do not prove
+  equal error vectors. A native same-input/two-initial-state intervention and
+  source-derived working-boundary oracle are needed before revising a contract.
+- Reproduce native initialization in each isolated interpreter. In the pinned
+  stack a real GDN registry import queries hardware, so retain static CPU
+  checks but run the actual registry gate only after admitted device canaries
+  and before weights. Python -I ignores PYTHONPATH; a subprocess also does not
+  inherit the parent's sys.path. Reuse and verify the pinned CANN/pyACL bootstrap
+  inside that child, rather than mocking hardware/ACL or editing the image.
+- Preserve child-runtime launch conventions when reusing a small owner.
+  A Python512MiB virtual-address cap propagated into Go Docker caused an actual
+  startup failure. The exact Docker-only unlimited-AS wrapper fixed that client
+  while preserving parent RAM, container limits and the aggregate resource
+  ledger. Save actual requested/executed argv and stderr before generic
+  ownership predicates can hide the first fault. See the knowledge-base case
+  source-binding-registry-and-bounded-evidence-20261016.md for bounded evidence;
+  none of these repairs grants an NPU numerical, model or speedup certificate.

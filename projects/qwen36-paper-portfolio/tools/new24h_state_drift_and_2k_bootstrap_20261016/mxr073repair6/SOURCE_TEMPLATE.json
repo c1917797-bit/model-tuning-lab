@@ -1,0 +1,1767 @@
+{
+  "NPU_ready": false,
+  "READY": false,
+  "actual_core_binding_ref": null,
+  "actual_long_NPU_executed": false,
+  "actual_resource_status": "New evidence-backed RAM-constrained trial: guest32GiB+host.5GiB+reserve8GiB=40.5GiB; CPU8GiB unchanged; cgroup32GiB no-swap hard cap. Historical peak15.735GiB+full new12GiB payload is a planning estimate, not new2K upper-bound proof; OOM must fail and persist. opt32GiB/output12GiB unchanged.",
+  "actual_short_admission": null,
+  "archive_not_required_for_run": true,
+  "atomic_packed_actual_execution_pending": true,
+  "atomic_packed_successor_pending": false,
+  "atomic_prefill": {
+    "actual_packed_gate_still_required": true,
+    "enabled_only_for_numerical": true,
+    "native_keep_pause": true,
+    "real_two_ADD_before_resume": true
+  },
+  "authority_ref": {
+    "bytes": 3481,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "authority_sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28",
+  "baseline067_source": {
+    "bytes": 61259,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/SOURCE_TEMPLATE.json",
+    "sha256": "8d122f0db6b297fca593e4359d96b0d214c81da206a81f32514320ae538fe2d8"
+  },
+  "baseline068_source": {
+    "bytes": 70875,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/SOURCE_TEMPLATE.json",
+    "sha256": "a31e990a6bff64c8efcd556bfdb7282179ad6f56d8f1dd67d949951230ee37c5"
+  },
+  "baseline072_original_preparation_identity": {
+    "bytes": 83573,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-lazy-model-new24h-v1-072/SOURCE_TEMPLATE.json",
+    "sha256": "34151ee2d326c2fb47048e9d2164b203e54a86cf202710602b51d6e3ab7d42da"
+  },
+  "baseline072_source": {
+    "bytes": 83573,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/evidence/SOURCE_TEMPLATE072.json",
+    "sha256": "34151ee2d326c2fb47048e9d2164b203e54a86cf202710602b51d6e3ab7d42da"
+  },
+  "bootstrap_short043_is_not044_numeric": true,
+  "budgets": {
+    "CPU_initial_GiB": 16.5,
+    "Docker_reserve_GiB": 8.5,
+    "cleanup_seconds": 270,
+    "live_GiB": 8.5,
+    "model_initial_GiB": 40.5,
+    "one_total_output_ledger": true,
+    "opt_initial_GiB": 32,
+    "ordinary_model_guest_GiB": 32,
+    "perworker_raw_charge_GiB": 3,
+    "phase_seconds": 5400,
+    "total_output_GiB": 12
+  },
+  "cap48_resource": {
+    "CPU_floor_GiB": 16.5,
+    "create_inspect_same_safety_global": true,
+    "enable_multithread_load": false,
+    "guest_CPU_GiB": 8,
+    "guest_model_GiB": 32,
+    "historical_basename_only": true,
+    "host_GiB": 0.5,
+    "load_format": "safetensors",
+    "model_floor_GiB": 40.5,
+    "reserve_GiB": 8,
+    "strategy": "lazy"
+  },
+  "cutoff_epoch": 1792220533,
+  "default_enabled": false,
+  "dependencies": [
+    {
+      "bytes": 5822,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/SOURCE_MANIFEST.json",
+      "sha256": "f88e44fe7f7fa6b61ef6d5043a3a335a565dc59a6dac57acf5d24ff18779fc4e"
+    },
+    {
+      "bytes": 1233,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/CANDIDATE_B_SOURCE_NOTE.md",
+      "sha256": "890815ec224b37f614acf63cdea7d9cc5e1e84ad3a68c0db628e334b82ef9b26"
+    },
+    {
+      "bytes": 2988,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/cold_entry.py",
+      "sha256": "8831d957d8489b0f45cf06641cb3ec71b1dd7025c8687c4d419e361237400fdf"
+    },
+    {
+      "bytes": 10097,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/consume_capture.py",
+      "sha256": "7c31e87b409ef095e5789a2bc1b71a987a69dc237789c125ad749a69fecec6c3"
+    },
+    {
+      "bytes": 5242,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/consume_gdn_shadow.py",
+      "sha256": "ff12ca8913558f13b780ad5afc3238d441c68ed7f5db5d36ea32e4324f873c38"
+    },
+    {
+      "bytes": 11797,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/MAIN_PACKET.md",
+      "sha256": "7c62a465e52c9a2f23cdf9415a3e582ed58bd3873dc43281e124eeb888bb4964"
+    },
+    {
+      "bytes": 696,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/mxr_capture/__init__.py",
+      "sha256": "fc88883b50b7a76279ad253e40dd435fa3ee997d8b2ed8e905533249fcb17e77"
+    },
+    {
+      "bytes": 10903,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/mxr_capture/capture.py",
+      "sha256": "92f5d918532ab110e084db3c245b971bfa40ce6eaa6046215ed66927d6daae97"
+    },
+    {
+      "bytes": 11484,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/mxr_capture/model.py",
+      "sha256": "d5a44163ceb972f443861ebd887937c70ed51f756066de44c55419697b2acf0b"
+    },
+    {
+      "bytes": 5633,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/mxr_capture/solve.py",
+      "sha256": "0285bd2aacaf89936658556cc21bac83b4c023e6995782686fcb9c9c5cfe2a5d"
+    },
+    {
+      "bytes": 123,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/mxr_source_bound_capture-0.0.1.dist-info/entry_points.txt",
+      "sha256": "d9bd1e1fb974272fa40724a509a747771acca22ec6bc3caa686ef89df4fdad84"
+    },
+    {
+      "bytes": 159,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/mxr_source_bound_capture-0.0.1.dist-info/METADATA",
+      "sha256": "3a72df9b2295da857de482c479af72505c7c56d1c51a9763a857a9034f3f0baf"
+    },
+    {
+      "bytes": 456,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/pyproject.toml",
+      "sha256": "adef7fdc651b1495268b60e900edfe3d3dec75a81a28aa555ec6c9998b1323da"
+    },
+    {
+      "bytes": 6265,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/replay_mxr.py",
+      "sha256": "26a355b993eaa1e9dbfc399118749c47afa36f23b73fa13820146b4ff080175e"
+    },
+    {
+      "bytes": 6953,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/test_capture_packet.py",
+      "sha256": "04d3e5e4432ecb75780e847d8b38907a4398dd39129f5f8980f80dc8ae385aff"
+    },
+    {
+      "bytes": 3496,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/test_shadow_packet.py",
+      "sha256": "6d8a71772ff457ada60585a97437bbd02514b4f49d18e8c2523dde704ec1b50d"
+    },
+    {
+      "bytes": 4366,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-launch-20261013-003/SOURCE_MANIFEST.json",
+      "sha256": "55e10903d731759b84d3cee3d54d4aa63a4c219aa1b30dd94e4ad923b2d5eacd"
+    },
+    {
+      "bytes": 4648,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-launch-20261013-003/capture_client.py",
+      "sha256": "a1d942331600392ab19cf0c04108def0e0607215dc9c86a406a8fff052dc3c05"
+    },
+    {
+      "bytes": 6707,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-launch-20261013-003/capture_overlay.py",
+      "sha256": "848e180ac7612a69996a901ae68e3858825bf0878bbb0653708d55c37e4a234f"
+    },
+    {
+      "bytes": 3585,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-launch-20261013-003/extract_observed_sources.py",
+      "sha256": "85993c200f6fab64e0a6f58902b3f1e55ea0002c6c969b08cc5b3b483074398d"
+    },
+    {
+      "bytes": 8309,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-launch-20261013-003/guest_capture_entry.py",
+      "sha256": "37c951e1ae2f4b650d93d414b930f9dd83a05913a68b213edfdd8143c2d70cd0"
+    },
+    {
+      "bytes": 10576,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-launch-20261013-003/MAIN_LAUNCH_PACKET.md",
+      "sha256": "ddae109cbb57af775295deab0e18aad8bb60d170b568fa964489253f38935ca2"
+    },
+    {
+      "bytes": 4380,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-launch-20261013-003/test_capture_launch.py",
+      "sha256": "f3ebd3620facd4252b520fbba21ce9d712a902c77b9ee8b35d2501cd0a3e4569"
+    },
+    {
+      "bytes": 9091,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/SOURCE_MANIFEST.json",
+      "sha256": "ff9d15a844ce60769f0e40c9dca9a6d05ca0b0eb9ca89ead22afd4ae5d86e380"
+    },
+    {
+      "bytes": 3188,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/guest_probe.py",
+      "sha256": "161c878a6ee31f5bbea2df815a82e0f4ca6f0a3ea00348b78a1afbf68856e4ae"
+    },
+    {
+      "bytes": 25508,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py",
+      "sha256": "c1a26afb164af8fcf4b88fef24a524c2c890be772f56f136b5edc5006b1ff066"
+    },
+    {
+      "bytes": 2387,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/native_worker_receipt.py",
+      "sha256": "f4c7ab50976240bd1edc6e72215997db8e548f1de453e70abae845b697de04c6"
+    },
+    {
+      "bytes": 6606,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/protected_snapshot_policy.py",
+      "sha256": "02651e6be47a82d009844d3ce7cb5999c254e41e194829e01b5358c9eca6d3b1"
+    },
+    {
+      "bytes": 764,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/server_boot.py",
+      "sha256": "44c265cef1690c60379d280c636a0f02e11f2b93339439f80e3ce55d407545ca"
+    },
+    {
+      "bytes": 9138,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/test_host_ticket.py",
+      "sha256": "095edfc5069c2f807959e66f66d32c819ae260bd50dd4834c989253ee94cbca8"
+    },
+    {
+      "bytes": 6809,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/test_snapshot_policy.py",
+      "sha256": "1d133bdff3dda8e07c6b0a68c9397f725952c9cf2c894ec65d9d36fa9b03b0ea"
+    },
+    {
+      "bytes": 82,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/mxr_native_worker_receipt-0.0.1.dist-info/entry_points.txt",
+      "sha256": "d6d89092f54960e12e260cbf6cf87d8ebc194dd08a05beba677951f532ffe19c"
+    },
+    {
+      "bytes": 134,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/mxr_native_worker_receipt-0.0.1.dist-info/METADATA",
+      "sha256": "3268f9ef45d934bb0f781b0c44aa0fd627227f8bffc76ee3a2c911c553e548b8"
+    },
+    {
+      "bytes": 7201,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-d8-fp32-model-boundary-r87-v1-011/model_contract.py",
+      "sha256": "529f2c017aca438c6f3638ebfdbd3ddae4d30ce9521b0da0146e83ee4fac74ee"
+    },
+    {
+      "bytes": 22569,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-d8-fp32-model-boundary-r87-v1-011/safety_host.py",
+      "sha256": "8c83e08318b530c4d022b91bbacd34b12121b3380e1a14d32262c9a3875f6fa7"
+    },
+    {
+      "bytes": 9483,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-d8-fp32-model-boundary-r87-v1-011/server_entry.py",
+      "sha256": "be314a47a6c440960632d3fa88d18f4ff1b80c02356dd8a5fc45c321a7164e9f"
+    },
+    {
+      "bytes": 14081,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-d8-fp32-model-boundary-r87-v1-011/config_cpu.py",
+      "sha256": "c082d535f9bd29a4e828ff98796560ea915d86cf132034d0da7df39c2aca6349"
+    },
+    {
+      "bytes": 4503,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-d8-fp32-model-boundary-r87-v1-011/cann_python.py",
+      "sha256": "cee927f1107fe6714e86ab1dceecafeff800980a00b8df9fcc47ff6831ba5104"
+    },
+    {
+      "bytes": 40202,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py",
+      "sha256": "4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20"
+    },
+    {
+      "bytes": 33743,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+      "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86"
+    },
+    {
+      "bytes": 16517,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py",
+      "sha256": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc"
+    },
+    {
+      "bytes": 9234,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-016/once_contract.py",
+      "sha256": "a7e446d79c58672bb77cafaf3968ee4dbbdd70a2b86afcd350065b69338f45bb"
+    },
+    {
+      "bytes": 6865,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-015/safety_lifecycle.py",
+      "sha256": "4bbd492809c9ba1922fd3885b101f8cc6fe187884703c21e4a2d44acd1444b75"
+    },
+    {
+      "bytes": 16355,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/recurrent/adakv030-fa-physical-layout-observation-v6-user72h-20261010/output_budget.py",
+      "sha256": "44e5ccfdad173e6b9eebc025260e489893d672c316c6aac3f8bf68a5e03c16ad"
+    },
+    {
+      "bytes": 6194,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_adakv_current_prepare/R118/skvq-writer-native-v1-003/idle_policy.py",
+      "sha256": "1988d3843b340a06b0c402b96886ea7a6feb8bab573f67fb8c74512bcca33616"
+    },
+    {
+      "bytes": 17260,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-defect-v1-037/SOURCE_MANIFEST.json",
+      "sha256": "a5642a92dfe0635b9ff7c84944935ea9cd88264061676b984efce10e37ffdb88"
+    },
+    {
+      "bytes": 5319,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-diag16-numeric-binding-v1-039/SOURCE_MANIFEST.json",
+      "sha256": "9269c6c4732bf7800f209fd350b50642d232e75fae7b1919284e147f44eac08f"
+    },
+    {
+      "bytes": 294133,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-y16-single5-owned-main-R156_039_001/RESULT.json",
+      "sha256": "5e126fd1412764ac47197cd99144f451417b92e0f6dde940e1f10ecbe623d03b"
+    },
+    {
+      "bytes": 242693,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-y16-single5-owned-main-R156_039_001/physical5/numeric/RESULT.json",
+      "sha256": "8b36505fe8b27a2468e1a98142745a98cbaf1abb2dc4b760274ce739ff9efcf4"
+    },
+    {
+      "bytes": 327253,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-y16-build-owned-main-R156_038_001/cpu/build/BUILD.json",
+      "sha256": "16a9e165cad0bff4f70817446facae514727e7f54d65509f3fc96e4f3b6b2b7a"
+    },
+    {
+      "bytes": 6878,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-y16-single5-owned-main-R156_039_001/MAIN_ORIGINAL_OPERATION.json",
+      "sha256": "a654e585202512c1daa0d76e212131ee3715e9c29a34fc5265e14f307c13597f"
+    },
+    {
+      "bytes": 11330,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr-y16-serial-single5-numeric-owner-v1-031/host.py",
+      "sha256": "63687e5c1ba0ed33b3adc14e16cc767817a3384edde392d8c319a60a990858f4"
+    },
+    {
+      "bytes": 3591,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+      "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+    },
+    {
+      "bytes": 20401,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-gdn-shadow-bridge-v1-042/SOURCE_MANIFEST.json",
+      "sha256": "dcd55dd923ca28dd3922c96a7123cd6c72920cfe945136efa6a4b6c47d90e386"
+    },
+    {
+      "bytes": 6275,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R162_protected_observer/observer.py",
+      "sha256": "fafdb2685481d3e1c77dad977156cf3ed4838e515d6c3a4a4d4042751f0c216f"
+    },
+    {
+      "bytes": 22468,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-gdn-shadow-bridge-v1-043/SOURCE_MANIFEST.json",
+      "sha256": "436c14817d25f6a1475cd4833e14288f5cfb6ad9e3ebde44aae0f33e8cde2f92"
+    },
+    {
+      "bytes": 6211,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-gdn-shadow-bridge-v1-043/entry.py",
+      "sha256": "d6868dff8154f2f9fc2ce8d0c9f12920eafbe1e025af6a9576cbaa3b17136745"
+    },
+    {
+      "bytes": 9447,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr-y16-device-free-build-owner-v1-030/host.py",
+      "sha256": "9afe435ff2c1c18c22b33b56398777f3ab1d37a3e3223bfd8c944c99232cd136"
+    },
+    {
+      "bytes": 4749,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr-y16-device-free-build-owner-v1-030/SOURCE_MANIFEST.json",
+      "sha256": "165353afb16e64f2a17c70d4eb76d3ce69b679beccb001f396f64dd5622e238a"
+    },
+    {
+      "bytes": 27398,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-gdn-shadow-bridge-v1-044/SOURCE_MANIFEST.json",
+      "sha256": "69e7d6a6dfe337aa2ed4d77758a92d5ce6bac2888b4f979c9e81d16802d6bf24"
+    },
+    {
+      "bytes": 29911,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R156/mxr-gdn-shadow-bridge-v1-045/SOURCE_MANIFEST.json",
+      "sha256": "abef3793c418f0e287223e72102b5410b7cd51f9c1b6e86d2977e63dba8d5488"
+    },
+    {
+      "bytes": 6063,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R87/adakv-power2-single4-owner-v1-001/SOURCE_MANIFEST.json",
+      "sha256": "af60de6c07ea2d6134854417d19eb5f66ae7ba4c59e82c92276721cfd1ca03db"
+    },
+    {
+      "bytes": 16480,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/once_contract.py",
+      "sha256": "7789d63886da0ebe9420b0f56b584c81eae9e50ab561dbf64940df37eb31aa6a"
+    },
+    {
+      "bytes": 29763,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/host_once.py",
+      "sha256": "6414c912b216f3896a21e7b321717b604c4be7db21220ed034a798da460a0be8"
+    },
+    {
+      "bytes": 3416,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr022-device-free-software-v1-023/SOURCE_MANIFEST.json",
+      "sha256": "73003c1688c1334b5e6d64925d3279130b6b6104dd30071c9bff2d1719b60c41"
+    },
+    {
+      "bytes": 3712,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R87/adakv-power2-single4-owner-v1-001/adapter.py",
+      "sha256": "22d8728512adab0aa7e5e181bdde46bcc372524536f7cd89bf2ce7aeab1da8b4"
+    },
+    {
+      "bytes": 14000,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/R118/mxr-y16-compensated-v1-028/SOURCE_MANIFEST.json",
+      "sha256": "5e135350214f2efb7b5bb29adb23ebe666e88404c6ddb0b1925e839a3462cf12"
+    },
+    {
+      "bytes": 4276,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-packed-three-kernel-singlecard-host-d8-v1-001/cache_scan.py",
+      "sha256": "cdfa76f28949c320ac6a23d23dda0ac666844dfa9d381a5fe56619f6fe5721be"
+    },
+    {
+      "bytes": 2116,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-NEW48H_053_NPU_001/physical6/numeric/RESULT.json",
+      "sha256": "91cf2b49724681a4c4a095c5ed3d6ee8e2570f8f88c5bb046790d6edfb2c021e"
+    },
+    {
+      "bytes": 16278,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/SOURCE_MANIFEST.json",
+      "sha256": "3ccb0dcec3d67043f9736cc3266bef7b320b99d48facf791376519811d72b9f2"
+    },
+    {
+      "bytes": 1427,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/cpu_preflight.py",
+      "sha256": "64e5c79cc1056c5dc4cb1efc0d398750d3ee543b2a8b185710879360c45d4d98"
+    },
+    {
+      "bytes": 2835,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/eager_receiver.py",
+      "sha256": "7266be105302b81db5d777b23d122f6769b2d84f16a5bb5263a4d20b746c0e04"
+    },
+    {
+      "bytes": 1861,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/event_backend.py",
+      "sha256": "2f221bf10b33003167f0d8d15896d3eec96e561b29bdd461457d484ce3ea5b68"
+    },
+    {
+      "bytes": 945,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/guest_canary.py",
+      "sha256": "4d19f8a4782a112a0300228e950715175cd4274fe0324af58258e00db2c72114"
+    },
+    {
+      "bytes": 5301,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/HANDOFF.md",
+      "sha256": "f6be6b36b4de77e593500cfcc73d6b599b7f52e5b276c81a588f4dad8d209df8"
+    },
+    {
+      "bytes": 10592,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/host_pair.py",
+      "sha256": "d686571db8bd5d8df039542900658a3ea25a0ffabc7163b5fcddf53b7cb55a32"
+    },
+    {
+      "bytes": 5597,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/lifetime.py",
+      "sha256": "bf2bdfd3e1bd50dcbe64013b4fe59a84e68c232fa7ca71f031207bbea9e2d6de"
+    },
+    {
+      "bytes": 2138,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/metadata_association.py",
+      "sha256": "685f4104929733117cce09d48e0e16e8e232b09e625451367d9fb1f42439ffed"
+    },
+    {
+      "bytes": 2181,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/metadata_certificate.py",
+      "sha256": "5b6de16bda481a9af76200a8c8d3c8ded0a827ebcbff284ccdec29be5f519973"
+    },
+    {
+      "bytes": 70,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/mxr_observerless-0.0.1.dist-info/entry_points.txt",
+      "sha256": "80313696433316edc29489ca7ff47026bbe905d8b1dc1dd54377a328ecb16c8c"
+    },
+    {
+      "bytes": 62,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/mxr_observerless-0.0.1.dist-info/METADATA",
+      "sha256": "afb070e3384770c88c8b1312b0cb81abfdf506755c25d70411fb7df6c138f389"
+    },
+    {
+      "bytes": 244,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/mxr_observerless/__init__.py",
+      "sha256": "58b0c59ab85a8f6f0189d25b0032f361c92bdae473e24387544bb9079140f96e"
+    },
+    {
+      "bytes": 9586,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/observerless_install.py",
+      "sha256": "a2d7e79d197bab52a9476adf6ddf7dbcb92f04c387efab7387a4ad88fda0ded2"
+    },
+    {
+      "bytes": 2122,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/owned_create.py",
+      "sha256": "f6df587ee2913a62b7f70193d57896381f713f6c039151b4db3f16c4baafa7f6"
+    },
+    {
+      "bytes": 1440,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/owned_gate.py",
+      "sha256": "36eb0a7fbc773e8e81141f47f7c44fb798967737fd3dd9ffce31a8e0fc0237e9"
+    },
+    {
+      "bytes": 3115,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/owned_substrate.py",
+      "sha256": "71d97b2f7c26a80802f56040f29928b59acae0b468c25f2250517cff539980cb"
+    },
+    {
+      "bytes": 3595,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/pair_consume.py",
+      "sha256": "64519e799dfcf223625308e0a33b8fa0d0df053f95bc458a8c4ec0b3b2985e2e"
+    },
+    {
+      "bytes": 2215,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/paired_driver.py",
+      "sha256": "df5f453810c6f057bef0f258664bd8b3bb7ea135f558e2694e34eceb73a2821c"
+    },
+    {
+      "bytes": 1583,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/QUALIFICATION_TEMPLATE.json",
+      "sha256": "73ab13ba95f20e15d962c7adbbbbcfc5095df4f65a51ddd814c75a104f731e72"
+    },
+    {
+      "bytes": 1706,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/RUN_CONTRACT.json",
+      "sha256": "7f86065da2826e8ea0d7c9f470ada1de9737827b41f030430b2452e262f2de83"
+    },
+    {
+      "bytes": 1792,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/safe_eager.py",
+      "sha256": "4f11112a1f145438b7b60fc2c40b66552533bfa93b10bcb14455cf1f4fd447e9"
+    },
+    {
+      "bytes": 2070,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/server_entry.py",
+      "sha256": "9caf18c876dce4b19fbcd1a4246a73b190fc8fe3086e359400009a82117e85dc"
+    },
+    {
+      "bytes": 1554,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/source_audit.py",
+      "sha256": "d04fb548ac732875f3d525acf992de91e325a9eb867c1efebe8836fb68292509"
+    },
+    {
+      "bytes": 767,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/test_driver_actual_cli.py",
+      "sha256": "dab3b1da19d9bbf49dfd17a967a7238dda1f3d719fd34acd68c71f817fa4b202"
+    },
+    {
+      "bytes": 1005,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/test_eager_receiver.py",
+      "sha256": "a0c892596d81f2b38d8f281c4670c2adc3c2c072cbc406176472f95c3bd9cb6c"
+    },
+    {
+      "bytes": 801,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/test_event_dependency_contract.py",
+      "sha256": "96ca314ffcccaae1789372dd5193c58f2b1d9c182955885f7f41dfcae3f9514e"
+    },
+    {
+      "bytes": 1089,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/test_exact_argv.py",
+      "sha256": "e657e895e363099bcf84c83295aa647f41aba21a43105c950f2b4f214e8248ee"
+    },
+    {
+      "bytes": 2531,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/test_metadata_association.py",
+      "sha256": "681146c17c5963111dbb93fac8409ad8de9830f9a232a404e6943b315a6a4e90"
+    },
+    {
+      "bytes": 618,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/test_metadata_certificate.py",
+      "sha256": "a2314b05c6a0250bec2bdd19fbc79e747f7e72ec187b5daac1dd70087fb187fb"
+    },
+    {
+      "bytes": 545,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/test_owned_substrate.py",
+      "sha256": "5428c678596f70c8e8c20cdc19a16b952fa7d82745901ed2b99e84a5a80c055f"
+    },
+    {
+      "bytes": 834,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/test_pair_consume.py",
+      "sha256": "26892c637b745f955a8ea1468e08672651fb3236e4f3eb99aeeeb76dcbd830f1"
+    },
+    {
+      "bytes": 674,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/test_pair_owner_default.py",
+      "sha256": "03a0c0dbca91b81393950c326c2f8742a6997a1dd37081d10533c99379eb6509"
+    },
+    {
+      "bytes": 486,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/test_plugin_recursive.py",
+      "sha256": "c52e26152724d6b9bfafc21155dd7d64bad28832dd1f74bf2cecd7e6cf1794db"
+    },
+    {
+      "bytes": 812,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/test_server_entry.py",
+      "sha256": "617de9ced7dc8eabde64facfebcd782c1219d1fce317a7b73bdda5f46c10a9aa"
+    },
+    {
+      "bytes": 923,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/test_whole_contract.py",
+      "sha256": "1b1b072cec0f077dd30d8ee3aa56df61d152f44a6d87e0d30533185d5daeb147"
+    },
+    {
+      "bytes": 349,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/test_worker_receipt.py",
+      "sha256": "b5fdbd41dbb2ef8ae3966c3c977a37887b96fddfd932b32e07a2bbf6a6d4503d"
+    },
+    {
+      "bytes": 7946,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/whole_consume.py",
+      "sha256": "49055673af3b04d655435a3e31189cae1f1b6046f7f7d82c993f74f1eff783fa"
+    },
+    {
+      "bytes": 1264,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/worker_receipt.py",
+      "sha256": "7dcf044076ed835c60e81e9f2c29900c361c783da4ff19031c33caf50a607f90"
+    },
+    {
+      "bytes": 2299,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-observerless-gdn-e2e-v1-004/worker_snapshot_owner.py",
+      "sha256": "bc0894c9aded1994dc0cf796537fd707d04d1c69174df5aa2d76cc90b1602bd2"
+    },
+    {
+      "bytes": 5813,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/actual-input-inventory-v1-001/MAIN-original-checkpoint-fullhash-20261008-001/ACTUAL_MODEL_MANIFEST.json",
+      "sha256": "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c"
+    },
+    {
+      "bytes": 6865,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-016/safety_lifecycle.py",
+      "sha256": "4bbd492809c9ba1922fd3885b101f8cc6fe187884703c21e4a2d44acd1444b75"
+    },
+    {
+      "bytes": 19787,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-native-serial-once-v1-016/SOURCE_MANIFEST.json",
+      "sha256": "201ad2395f3f2213cd8e8d5c5486d6d1f94633615b94f279c42a33db3e2e757d"
+    },
+    {
+      "bytes": 18170,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/host_once.py",
+      "sha256": "36844e41895b95e810b54ecae32994a96b21258ae8ad8d88fccaac19f035cf8c"
+    },
+    {
+      "bytes": 22338,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/safety_host.py",
+      "sha256": "20bda52a1c3fbc75db47104cbd4759faf91da1f39032d4730160983f7b9c0c30"
+    },
+    {
+      "bytes": 13660,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/model_contract.py",
+      "sha256": "82243c277890aef7c24ea5eb5fbfa0658b314a39c01d7b2a7ddf34b2bf363e9f"
+    },
+    {
+      "bytes": 49810,
+      "path": "/cache/cch/hypic_vllm_ascend-v0.8.5/tools/benchmark_shared_prefix.py",
+      "sha256": "cba2b1b463a1e436c818722d92147d93f8396b8d64f8da6582d7e67d2cb45822"
+    },
+    {
+      "bytes": 12719,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-gdn-shadow-bridge-v1-050/prerequisite.py",
+      "sha256": "d25609d1c121015bc8b9eeda1295ad484a658fd09010a73d01a1890b001ffa20"
+    },
+    {
+      "bytes": 136215,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_MXR039_PREREQUISITE_043_001.json",
+      "sha256": "f620ae4bc10577465bff7fbb3af67ce424f2cca7c09805aa13f5f55dfce525f4"
+    },
+    {
+      "bytes": 8472,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/protected-terminal-observer-new48h-v1-002/observer.py",
+      "sha256": "a0d296fc274899009e0e7570d839adaa0f5f2a41b38d470466d1ea696a43229b"
+    },
+    {
+      "bytes": 3481,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+      "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+    },
+    {
+      "bytes": 9183,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/SOURCE_MANIFEST.json",
+      "sha256": "f87ee946b055d511280eced9882fd8dd9127bf8f683b7b2993b5c51331a3dd0f"
+    },
+    {
+      "bytes": 10073,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/admission.py",
+      "sha256": "bba58583a731957935db1332fae368a724463648831ef1f9b29f66b0373fe36a"
+    },
+    {
+      "bytes": 6610,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/block_refine.py",
+      "sha256": "5ed736e76e1550908bb62b633dd911eca60617381ca3e329b1c25e751fb4860d"
+    },
+    {
+      "bytes": 3862,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/common_precision.py",
+      "sha256": "f2f090ebc9b6745cca97562ab07dff2df4b591577d0ecd6004f156e1ebd85326"
+    },
+    {
+      "bytes": 2840,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/eager_receiver.py",
+      "sha256": "f2dbd043fb4559bdcb707b81d92cabb04ee5a19036323acb48fe61dd2c4a5d59"
+    },
+    {
+      "bytes": 1859,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/event_backend.py",
+      "sha256": "e9d4cc6f68fc86b05e9089691df5a3ed5287ee0d72a0a236e9a1611ef07e4c3d"
+    },
+    {
+      "bytes": 5574,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/legacy_refine.py",
+      "sha256": "d8e62cd25132d96417dc402c6f053db88c40cfa79b67de3f3316bf9dfdea2306"
+    },
+    {
+      "bytes": 5595,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/lifetime.py",
+      "sha256": "788051954cf7883974aa87df625e73365aa50a7ce66827d63e082cbe72f672a9"
+    },
+    {
+      "bytes": 2136,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/metadata_association.py",
+      "sha256": "e088caf87cffd37ba156fa98fcc89d55190834bdfebaaaa2c0a745cdc1035ee9"
+    },
+    {
+      "bytes": 2254,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/metadata_certificate.py",
+      "sha256": "23f5acd0f5ecadcaa5615995d769187847578d630699f3cd8ce5252ae2c68a54"
+    },
+    {
+      "bytes": 10185,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/observerless_install.py",
+      "sha256": "ce5c9d81942c5f86c3afa9f07b28415240e068b415703e0010d7cd0dd5bad4d2"
+    },
+    {
+      "bytes": 657,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/plan_cli.py",
+      "sha256": "7c4131516cdf9177324c1714b8b1098dba3765f8092d801dc42ce45f1b173eb7"
+    },
+    {
+      "bytes": 3735,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/production_binding.py",
+      "sha256": "0fe8b6df3cfd1102314783b72db23bae7e56839b871878c1600190115769d849"
+    },
+    {
+      "bytes": 7685,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/qualification_probe.py",
+      "sha256": "93f1aa31633c5e7e3888695698bb12958cd691c018f0924a2502ec40ebe0ca8e"
+    },
+    {
+      "bytes": 3462,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/test_block.py",
+      "sha256": "fd198b1f06c04b9e00e3a2ae2109066d9cc2cc54d5db7876c296379e031e2663"
+    },
+    {
+      "bytes": 1003,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/test_eager_receiver.py",
+      "sha256": "619e32786936b3f9698b4ac828c4b2bb470f74f27a6578c3802cb8a72fd4aeb1"
+    },
+    {
+      "bytes": 2528,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/test_metadata_association.py",
+      "sha256": "6f52d58a4cb62d9a0209dfae23aa9d4f06a67bfa534a9d99ed223c38232c68f6"
+    },
+    {
+      "bytes": 2529,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/test_production_binding.py",
+      "sha256": "af0f9eb78805d090e141cfbbdc885f4a6491b411edc886b6eda1c9f8600e10d3"
+    },
+    {
+      "bytes": 4031,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/test_wiring.py",
+      "sha256": "2d9b5b15a4ecb63f9ea930ba910b0cd328aa5c1ffc24a5d2a469d5a17ba5187a"
+    },
+    {
+      "bytes": 1262,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/worker_receipt.py",
+      "sha256": "6991dba6d3a7e3ec8081c10db5c6192c6a1293dd4ffd3786423f883aadd43f03"
+    },
+    {
+      "bytes": 582,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/mxr_block_refinement044/__init__.py",
+      "sha256": "d6f29a578396cf8bd6e44d2f36c620ca63847b22f0cb7e4e49a27d25e9dd3e4d"
+    },
+    {
+      "bytes": 82,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/mxr_block_refinement044-0.0.1.dist-info/entry_points.txt",
+      "sha256": "f0e3986387ca3d23e4338b5e451d514adee2567df93598c8f44c51fe3a2b4491"
+    },
+    {
+      "bytes": 67,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/mxr_block_refinement044-0.0.1.dist-info/METADATA",
+      "sha256": "d4e9db43e0757a75c3e73ed862e6133f9626d0e87762a6947bd9936cf8d1c5a8"
+    },
+    {
+      "bytes": 80,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/mxr_common_precision044/__init__.py",
+      "sha256": "bd65b7e1f0f73544a3b68c764467d2b0e05e65ad3bbf1fc2521cca45ce2541ba"
+    },
+    {
+      "bytes": 82,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/mxr_common_precision044-0.0.1.dist-info/entry_points.txt",
+      "sha256": "272546e93ee4a39e8c7b5fed39a4b5821640965ed0c2d455f4195584c17241bf"
+    },
+    {
+      "bytes": 67,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/mxr_common_precision044-0.0.1.dist-info/METADATA",
+      "sha256": "4ee75447484bfb30776d1f7d0d14ea0102e16f58bcf781fbcb38c3a8a0753bde"
+    },
+    {
+      "bytes": 5172,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/SOURCE_TEMPLATE.json",
+      "sha256": "bf7bd504e650bb99d776ab36ba903065440f1e379b44daed61a09aa3f9d6ab53"
+    },
+    {
+      "bytes": 66713,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/SOURCE_TEMPLATE.json",
+      "sha256": "aafcd6cd792363a4580923f50855b110259d530ce757620193e6a793f57b17d5"
+    },
+    {
+      "bytes": 1880,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/COMMANDS.json",
+      "sha256": "f76a22d0d4ad075d26283480859b1440275c3c2b0138630af98a9020c321de7f"
+    },
+    {
+      "bytes": 14081,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/DERIVED_config_cpu.py",
+      "sha256": "1d88a3ac2a4ce44c82ef87bc332e1e8f4637940bac3ca9f5c2973668200f7c8f"
+    },
+    {
+      "bytes": 16354,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/DERIVED_output_budget.py",
+      "sha256": "c602b3bea2218c6b17f6c7155eff368227e25e24b8293a99004981133533aab2"
+    },
+    {
+      "bytes": 20210,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/PLATFORM_SOURCES.json",
+      "sha256": "36cbf88ed2942f286d4ee2e2d3f6326a6fc6c5c8fbcccd20d87051b9f967aea3"
+    },
+    {
+      "bytes": 23142,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/PREDECESSOR_PINS.json",
+      "sha256": "e31c0a1005277fc971d9a4794c7cbde6342d274a9dc7384f68087281eb407921"
+    },
+    {
+      "bytes": 1883,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/QUALIFICATION_CORRECTNESS.json",
+      "sha256": "857631c7e7a6567ff2ecb119dbe5f439a0b928cfe5f9694cdefbe95494f4a95f"
+    },
+    {
+      "bytes": 14081,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/actual011/config_cpu.py",
+      "sha256": "c082d535f9bd29a4e828ff98796560ea915d86cf132034d0da7df39c2aca6349"
+    },
+    {
+      "bytes": 16355,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/actual011/output_budget.py",
+      "sha256": "44e5ccfdad173e6b9eebc025260e489893d672c316c6aac3f8bf68a5e03c16ad"
+    },
+    {
+      "bytes": 22569,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/actual011/safety_host.py",
+      "sha256": "8c83e08318b530c4d022b91bbacd34b12121b3380e1a14d32262c9a3875f6fa7"
+    },
+    {
+      "bytes": 9483,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/actual011/server_entry.py",
+      "sha256": "be314a47a6c440960632d3fa88d18f4ff1b80c02356dd8a5fc45c321a7164e9f"
+    },
+    {
+      "bytes": 6903,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/admission047.py",
+      "sha256": "b716bc1c7b47d920b5398df7610d9dba80c48075efa6671a9f721dfe6f485c0a"
+    },
+    {
+      "bytes": 5843,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/atomic/barrier.py",
+      "sha256": "d83260db427eb50b916fe6347ea79cfd9b4f7990763d3b5cbdb3796003610966"
+    },
+    {
+      "bytes": 2399,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/atomic/client.py",
+      "sha256": "4eb00467b57533f54f2e4b159290504dbacf210e0575e1eb878118993867b810"
+    },
+    {
+      "bytes": 3481,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/authority/NEW24H_AUTHORITY_20261016.json",
+      "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+    },
+    {
+      "bytes": 1023,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/authority_contract.py",
+      "sha256": "02127c9b6228ada4e2f85047d1d449ffc852651200d701948c6ecf328e880876"
+    },
+    {
+      "bytes": 9940,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/baseline048/entry.py",
+      "sha256": "99fd5d43e9e987ad48ccbbf8bbaab6c075711ee240d9cee5b6480b203c8d6774"
+    },
+    {
+      "bytes": 1966,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/bind_source.py",
+      "sha256": "80c767d8499d07324313038c1cdc93589b626ae3f455abd9cd7c455d1da71d4f"
+    },
+    {
+      "bytes": 2197,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/binding_consumer.py",
+      "sha256": "9f10317e2575f589732512912a476355c4fefff2b2b4e01571142222b1eb92a3"
+    },
+    {
+      "bytes": 4691,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/boundary_oracle.py",
+      "sha256": "7fd2e64783f4516a99f116dc66502ff8e6b6d5591f7a1076e7ed1e6cfa9a408a"
+    },
+    {
+      "bytes": 2056,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/cap48_provider.py",
+      "sha256": "0f7ea41e49bf0a0cdd4ed9d255e5b5b900471e66af4180f34d5c07aa5edc19a2"
+    },
+    {
+      "bytes": 732,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/combined_budget.py",
+      "sha256": "e1ba24d70233336f44cbccbaec0fff49c2687dd61c939475b99a0ce06effa3ac"
+    },
+    {
+      "bytes": 11065,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/consume.py",
+      "sha256": "5422bb92ca7daf891f8d1cd2ba8fc7d00610928af2cbdb3d46147e294924a358"
+    },
+    {
+      "bytes": 6745,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/deferred_registry.py",
+      "sha256": "ca1f32dcabb464085efab481c4467371f543b2e81cc775c9668402db1b452984"
+    },
+    {
+      "bytes": 1387,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/disk_contract.py",
+      "sha256": "b528c1566fd65073d23f0b8647f8fabec26953a30d5887222302a441c7e8955c"
+    },
+    {
+      "bytes": 10156,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/entry.py",
+      "sha256": "e29a1b4d7df9db4bb8b51e59bb087763118c1db5baac7c5c23af7d26e0b6f238"
+    },
+    {
+      "bytes": 5276,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/entry_cold_controls.py",
+      "sha256": "01fe102466ae4ab7a255da863195ec437a6612fd07a404923d460d25852c1a4e"
+    },
+    {
+      "bytes": 2766,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/evidence/MXR043R2_TERMINAL_20261015.json",
+      "sha256": "2f22245163089883fd6b54954b09804a228796a04afc01683e4b1476ff9f8eab"
+    },
+    {
+      "bytes": 3032,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/evidence/MXR044_TERMINAL_20261015.json",
+      "sha256": "223d010aaa64f14f82ad52a050eac46812e367e7175c04b4364dcad3a5f0ec40"
+    },
+    {
+      "bytes": 8106,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/external_output_policy.py",
+      "sha256": "08771bcdf6c4a9f625440f3a03086d3343cf57f543da8ab1e50530c045d166c4"
+    },
+    {
+      "bytes": 17125,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/host_ticket.py",
+      "sha256": "34c33a4a98423759bcff304a85d607d45870d850ccd8a2c74c48d320a282d91d"
+    },
+    {
+      "bytes": 2236,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/independent_block_reference.py",
+      "sha256": "c4e40566810ddaacd69404f835b828c08fc46ef17a75435a487c35b56dd2ef7e"
+    },
+    {
+      "bytes": 1596,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/independent_reference.py",
+      "sha256": "c0717d6e2385822d569be611995290294a603c8f49dbf14478a72a29bf1711a9"
+    },
+    {
+      "bytes": 2962,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/ipc_controls.py",
+      "sha256": "6f815ee70eee276f2a5c8f6ffd7d3ba82e754eb9aac55ee7d5408100241037a2"
+    },
+    {
+      "bytes": 3318,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/long_client.py",
+      "sha256": "b50e9cbccaa17d24df86c86942f642850d22b7c5dcdcb112ee2db5d739c24cbe"
+    },
+    {
+      "bytes": 3214,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/lossless_raw.py",
+      "sha256": "8bd51ca033cd39847c6206dd5094ea15ceccc61d44fe520d013416e51fa5b6c4"
+    },
+    {
+      "bytes": 3574,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/memory_observer.py",
+      "sha256": "4adb02fc2a906b54dfd6d16bdfd76fbb6a3a1811309a6a19a98a280a2b2b2dc1"
+    },
+    {
+      "bytes": 140,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/mxr_diag16_gdn_shadow-0.0.1.dist-info/METADATA",
+      "sha256": "c318e1462a91aa1f74651ed25ffd9543cff3dd34b1ed3ade741b89d82e17498d"
+    },
+    {
+      "bytes": 78,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/mxr_diag16_gdn_shadow-0.0.1.dist-info/entry_points.txt",
+      "sha256": "93e018f547dc077c8b1fa0741164a018d7d3ce516c7e34ab200872cac0e52f03"
+    },
+    {
+      "bytes": 584,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/mxr_diag16_gdn_shadow/__init__.py",
+      "sha256": "1c39080dd05bdbd0004d33ba7ebe82cf8bbd3b4ba9ed8678018a151b5c9060df"
+    },
+    {
+      "bytes": 3010,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/ownership_observation.py",
+      "sha256": "a6840189c26febec9e48bfd3fa37676fbe420cd5719f3cdf58959e4a0760224c"
+    },
+    {
+      "bytes": 13997,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/parser_probe.py",
+      "sha256": "2bbf991634ca37ff7ea7611f06eb735aabbc56a3749d8fa4065dc2d5d9b2cddc"
+    },
+    {
+      "bytes": 2256,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/plugin_discovery.py",
+      "sha256": "046955e8270076fb0a684cc6c632ecc06b0c4a73cd84fe17b0b3303441c87cd7"
+    },
+    {
+      "bytes": 12719,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/prerequisite.py",
+      "sha256": "d25609d1c121015bc8b9eeda1295ad484a658fd09010a73d01a1890b001ffa20"
+    },
+    {
+      "bytes": 4361,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/raw_filesystem.py",
+      "sha256": "52c3cd95af1273200e8e5ca6f98f6fdc072d7e22aa05f112eb533ef54dc87228"
+    },
+    {
+      "bytes": 3639,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/registry_child_probe.py",
+      "sha256": "bd43d7b2a522af508a24e21b26a77b41ccc86a71cd523109de2fb8a284ba3c86"
+    },
+    {
+      "bytes": 2647,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/software.py",
+      "sha256": "a2a60fb54010f1ef54d56e7c902ea31d802a173d3391e2fe9a10a8759f0ea230"
+    },
+    {
+      "bytes": 78,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/software_contract.py",
+      "sha256": "3f9b7cc8753313051255891c5c601d143689b52e99d45263feb44cf94ed7f265"
+    },
+    {
+      "bytes": 3452,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/stage_resources.py",
+      "sha256": "ee45ae8bbf121f16fb8ee02a7c3ff263d5ad5f93d155cc0d0c8113360fd60769"
+    },
+    {
+      "bytes": 1475,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/test_block_reference.py",
+      "sha256": "58266194de6c14addd3d589384b87732cac18098f230b80ccf2a1fc21a9841b9"
+    },
+    {
+      "bytes": 22032,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/test_contract.py",
+      "sha256": "44b938c54d96937b6dd32a2be6aabf74a47198ef1c0b58b0694e50b340ca1e6f"
+    },
+    {
+      "bytes": 1923,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/test_lossless_raw.py",
+      "sha256": "a8ff1368ae920d54f94628da20a66102cf7cb57d2d1763bfe618e826cbf43de3"
+    },
+    {
+      "bytes": 1097,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/test_raw_filesystem.py",
+      "sha256": "effb71f7d2937b00254469eea8886d3bd382ddb7128ea280fa08e9bd938e430b"
+    },
+    {
+      "bytes": 11419,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/worker.py",
+      "sha256": "423cf59efad6adab7a346cb370a6ddfa84ad0b37b5898e6cda5496dfb273452d"
+    },
+    {
+      "bytes": 61259,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-long-model-new24h-v1-067/SOURCE_TEMPLATE.json",
+      "sha256": "8d122f0db6b297fca593e4359d96b0d214c81da206a81f32514320ae538fe2d8"
+    },
+    {
+      "bytes": 14081,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/DERIVED_config_cpu.py",
+      "sha256": "1d88a3ac2a4ce44c82ef87bc332e1e8f4637940bac3ca9f5c2973668200f7c8f"
+    },
+    {
+      "bytes": 16354,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/DERIVED_output_budget.py",
+      "sha256": "c602b3bea2218c6b17f6c7155eff368227e25e24b8293a99004981133533aab2"
+    },
+    {
+      "bytes": 20210,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/PLATFORM_SOURCES.json",
+      "sha256": "36cbf88ed2942f286d4ee2e2d3f6326a6fc6c5c8fbcccd20d87051b9f967aea3"
+    },
+    {
+      "bytes": 23142,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/PREDECESSOR_PINS.json",
+      "sha256": "e31c0a1005277fc971d9a4794c7cbde6342d274a9dc7384f68087281eb407921"
+    },
+    {
+      "bytes": 1888,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/QUALIFICATION_CORRECTNESS.json",
+      "sha256": "1b06fa4624c8be8c40421fe24217c211846ed8974bfe074b8ea1576a3f543318"
+    },
+    {
+      "bytes": 14081,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/actual011/config_cpu.py",
+      "sha256": "c082d535f9bd29a4e828ff98796560ea915d86cf132034d0da7df39c2aca6349"
+    },
+    {
+      "bytes": 16355,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/actual011/output_budget.py",
+      "sha256": "44e5ccfdad173e6b9eebc025260e489893d672c316c6aac3f8bf68a5e03c16ad"
+    },
+    {
+      "bytes": 22569,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/actual011/safety_host.py",
+      "sha256": "8c83e08318b530c4d022b91bbacd34b12121b3380e1a14d32262c9a3875f6fa7"
+    },
+    {
+      "bytes": 9483,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/actual011/server_entry.py",
+      "sha256": "be314a47a6c440960632d3fa88d18f4ff1b80c02356dd8a5fc45c321a7164e9f"
+    },
+    {
+      "bytes": 6903,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/admission047.py",
+      "sha256": "b716bc1c7b47d920b5398df7610d9dba80c48075efa6671a9f721dfe6f485c0a"
+    },
+    {
+      "bytes": 5843,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/atomic/barrier.py",
+      "sha256": "d83260db427eb50b916fe6347ea79cfd9b4f7990763d3b5cbdb3796003610966"
+    },
+    {
+      "bytes": 2399,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/atomic/client.py",
+      "sha256": "4eb00467b57533f54f2e4b159290504dbacf210e0575e1eb878118993867b810"
+    },
+    {
+      "bytes": 3481,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/authority/NEW24H_AUTHORITY_20261016.json",
+      "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+    },
+    {
+      "bytes": 1023,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/authority_contract.py",
+      "sha256": "02127c9b6228ada4e2f85047d1d449ffc852651200d701948c6ecf328e880876"
+    },
+    {
+      "bytes": 9940,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/baseline048/entry.py",
+      "sha256": "99fd5d43e9e987ad48ccbbf8bbaab6c075711ee240d9cee5b6480b203c8d6774"
+    },
+    {
+      "bytes": 1966,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/bind_source.py",
+      "sha256": "80c767d8499d07324313038c1cdc93589b626ae3f455abd9cd7c455d1da71d4f"
+    },
+    {
+      "bytes": 2197,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/binding_consumer.py",
+      "sha256": "9f10317e2575f589732512912a476355c4fefff2b2b4e01571142222b1eb92a3"
+    },
+    {
+      "bytes": 4691,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/boundary_oracle.py",
+      "sha256": "7fd2e64783f4516a99f116dc66502ff8e6b6d5591f7a1076e7ed1e6cfa9a408a"
+    },
+    {
+      "bytes": 2056,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/cap48_provider.py",
+      "sha256": "0f7ea41e49bf0a0cdd4ed9d255e5b5b900471e66af4180f34d5c07aa5edc19a2"
+    },
+    {
+      "bytes": 8413,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/consume.py",
+      "sha256": "1fe4c38581f419b2624f9c6bc38d52226bf895f099cf0467ccdc6fa2a05fbe04"
+    },
+    {
+      "bytes": 6745,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/deferred_registry.py",
+      "sha256": "ca1f32dcabb464085efab481c4467371f543b2e81cc775c9668402db1b452984"
+    },
+    {
+      "bytes": 9519,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/entry.py",
+      "sha256": "ef38fd5f48b6ab38b67394454a8ea35eb92d41667ebdc4974bd9b2674d3a32a7"
+    },
+    {
+      "bytes": 5276,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/entry_cold_controls.py",
+      "sha256": "01fe102466ae4ab7a255da863195ec437a6612fd07a404923d460d25852c1a4e"
+    },
+    {
+      "bytes": 2766,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/evidence/MXR043R2_TERMINAL_20261015.json",
+      "sha256": "2f22245163089883fd6b54954b09804a228796a04afc01683e4b1476ff9f8eab"
+    },
+    {
+      "bytes": 3032,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/evidence/MXR044_TERMINAL_20261015.json",
+      "sha256": "223d010aaa64f14f82ad52a050eac46812e367e7175c04b4364dcad3a5f0ec40"
+    },
+    {
+      "bytes": 7174,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/external_output_policy.py",
+      "sha256": "9ee9f6fd88e15af3729c76dabcc6c9ae6185063007d7dabcfa41f311085c4a8e"
+    },
+    {
+      "bytes": 16110,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/host_ticket.py",
+      "sha256": "f44d52ca76d1052f038b2da455513b9c8641d3976ab97d3df9fee8a7696d1c78"
+    },
+    {
+      "bytes": 2236,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/independent_block_reference.py",
+      "sha256": "c4e40566810ddaacd69404f835b828c08fc46ef17a75435a487c35b56dd2ef7e"
+    },
+    {
+      "bytes": 1596,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/independent_reference.py",
+      "sha256": "c0717d6e2385822d569be611995290294a603c8f49dbf14478a72a29bf1711a9"
+    },
+    {
+      "bytes": 3214,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/lossless_raw.py",
+      "sha256": "8bd51ca033cd39847c6206dd5094ea15ceccc61d44fe520d013416e51fa5b6c4"
+    },
+    {
+      "bytes": 3574,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/memory_observer.py",
+      "sha256": "4adb02fc2a906b54dfd6d16bdfd76fbb6a3a1811309a6a19a98a280a2b2b2dc1"
+    },
+    {
+      "bytes": 140,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/mxr_diag16_gdn_shadow-0.0.1.dist-info/METADATA",
+      "sha256": "c318e1462a91aa1f74651ed25ffd9543cff3dd34b1ed3ade741b89d82e17498d"
+    },
+    {
+      "bytes": 78,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/mxr_diag16_gdn_shadow-0.0.1.dist-info/entry_points.txt",
+      "sha256": "93e018f547dc077c8b1fa0741164a018d7d3ce516c7e34ab200872cac0e52f03"
+    },
+    {
+      "bytes": 584,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/mxr_diag16_gdn_shadow/__init__.py",
+      "sha256": "1c39080dd05bdbd0004d33ba7ebe82cf8bbd3b4ba9ed8678018a151b5c9060df"
+    },
+    {
+      "bytes": 3010,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/ownership_observation.py",
+      "sha256": "a6840189c26febec9e48bfd3fa37676fbe420cd5719f3cdf58959e4a0760224c"
+    },
+    {
+      "bytes": 13997,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/parser_probe.py",
+      "sha256": "2bbf991634ca37ff7ea7611f06eb735aabbc56a3749d8fa4065dc2d5d9b2cddc"
+    },
+    {
+      "bytes": 2256,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/plugin_discovery.py",
+      "sha256": "046955e8270076fb0a684cc6c632ecc06b0c4a73cd84fe17b0b3303441c87cd7"
+    },
+    {
+      "bytes": 12719,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/prerequisite.py",
+      "sha256": "d25609d1c121015bc8b9eeda1295ad484a658fd09010a73d01a1890b001ffa20"
+    },
+    {
+      "bytes": 3639,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/registry_child_probe.py",
+      "sha256": "bd43d7b2a522af508a24e21b26a77b41ccc86a71cd523109de2fb8a284ba3c86"
+    },
+    {
+      "bytes": 2136,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/small_disk_contract.py",
+      "sha256": "8876358c6eccebed22982f4f96233e5deeb7b96a55aa843227782a8126501f2a"
+    },
+    {
+      "bytes": 2647,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/software.py",
+      "sha256": "a2a60fb54010f1ef54d56e7c902ea31d802a173d3391e2fe9a10a8759f0ea230"
+    },
+    {
+      "bytes": 17,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/software_contract.py",
+      "sha256": "1d1757d6c5019a261849197c2351b98c47559e84971f6aed9b0047291a070694"
+    },
+    {
+      "bytes": 3452,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/stage_resources.py",
+      "sha256": "ee45ae8bbf121f16fb8ee02a7c3ff263d5ad5f93d155cc0d0c8113360fd60769"
+    },
+    {
+      "bytes": 1475,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/test_block_reference.py",
+      "sha256": "58266194de6c14addd3d589384b87732cac18098f230b80ccf2a1fc21a9841b9"
+    },
+    {
+      "bytes": 4602,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/test_contract.py",
+      "sha256": "bdba554c4a19653f36a8bc14f8ea5b40e0c784bb1790a40b1e85cfed0af3700d"
+    },
+    {
+      "bytes": 1923,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/test_lossless_raw.py",
+      "sha256": "a8ff1368ae920d54f94628da20a66102cf7cb57d2d1763bfe618e826cbf43de3"
+    },
+    {
+      "bytes": 9596,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/worker.py",
+      "sha256": "4938a66662c4d1de89db25db358e7634f2d1f38e1c6bc309b7572489487e25df"
+    },
+    {
+      "bytes": 70875,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-short-lazy-model-new24h-v1-068/SOURCE_TEMPLATE.json",
+      "sha256": "a31e990a6bff64c8efcd556bfdb7282179ad6f56d8f1dd67d949951230ee37c5"
+    },
+    {
+      "bytes": 1931,
+      "path": "/opt/host/vnf/austinov/run-mxr-working-domain-model043-repair2-main-NEW48H_001/candidate/CGROUP-MEMORY-before-stop-1792097246826922900.json",
+      "sha256": "8395d345bf5ed253fed06a76c695680caa48ae06c54c294ec4c4b34658ed90a6"
+    }
+  ],
+  "files": {
+    "DERIVED_config_cpu.py": {
+      "bytes": 14070,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/DERIVED_config_cpu.py",
+      "sha256": "9ebfd10ca905d0aec30dd53561cfbd3892399f8550a7f6c636c66567181809df"
+    },
+    "DERIVED_output_budget.py": {
+      "bytes": 16355,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/DERIVED_output_budget.py",
+      "sha256": "358f1e70e9e2af4b1a82629901c7d38b8f2f3f7d010a925f1a3538c7c4c358ed"
+    },
+    "PLATFORM_SOURCES.json": {
+      "bytes": 20210,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/PLATFORM_SOURCES.json",
+      "sha256": "36cbf88ed2942f286d4ee2e2d3f6326a6fc6c5c8fbcccd20d87051b9f967aea3"
+    },
+    "PREDECESSOR_PINS.json": {
+      "bytes": 23142,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/PREDECESSOR_PINS.json",
+      "sha256": "e31c0a1005277fc971d9a4794c7cbde6342d274a9dc7384f68087281eb407921"
+    },
+    "QUALIFICATION_CORRECTNESS.json": {
+      "bytes": 1897,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/QUALIFICATION_CORRECTNESS.json",
+      "sha256": "65f82da41b9e7d1de814566755c36499b3edb0ca079b276aed6e29a51612b62f"
+    },
+    "actual011/config_cpu.py": {
+      "bytes": 14081,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/actual011/config_cpu.py",
+      "sha256": "c082d535f9bd29a4e828ff98796560ea915d86cf132034d0da7df39c2aca6349"
+    },
+    "actual011/output_budget.py": {
+      "bytes": 16355,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/actual011/output_budget.py",
+      "sha256": "44e5ccfdad173e6b9eebc025260e489893d672c316c6aac3f8bf68a5e03c16ad"
+    },
+    "actual011/safety_host.py": {
+      "bytes": 22569,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/actual011/safety_host.py",
+      "sha256": "8c83e08318b530c4d022b91bbacd34b12121b3380e1a14d32262c9a3875f6fa7"
+    },
+    "actual011/server_entry.py": {
+      "bytes": 9483,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/actual011/server_entry.py",
+      "sha256": "be314a47a6c440960632d3fa88d18f4ff1b80c02356dd8a5fc45c321a7164e9f"
+    },
+    "admission047.py": {
+      "bytes": 6903,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/admission047.py",
+      "sha256": "b716bc1c7b47d920b5398df7610d9dba80c48075efa6671a9f721dfe6f485c0a"
+    },
+    "atomic/barrier.py": {
+      "bytes": 5843,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/atomic/barrier.py",
+      "sha256": "d83260db427eb50b916fe6347ea79cfd9b4f7990763d3b5cbdb3796003610966"
+    },
+    "atomic/client.py": {
+      "bytes": 2399,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/atomic/client.py",
+      "sha256": "4eb00467b57533f54f2e4b159290504dbacf210e0575e1eb878118993867b810"
+    },
+    "authority/NEW24H_AUTHORITY_20261016.json": {
+      "bytes": 3481,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/authority/NEW24H_AUTHORITY_20261016.json",
+      "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+    },
+    "authority_contract.py": {
+      "bytes": 1023,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/authority_contract.py",
+      "sha256": "02127c9b6228ada4e2f85047d1d449ffc852651200d701948c6ecf328e880876"
+    },
+    "baseline048/entry.py": {
+      "bytes": 9940,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/baseline048/entry.py",
+      "sha256": "99fd5d43e9e987ad48ccbbf8bbaab6c075711ee240d9cee5b6480b203c8d6774"
+    },
+    "bind_source.py": {
+      "bytes": 1966,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/bind_source.py",
+      "sha256": "80c767d8499d07324313038c1cdc93589b626ae3f455abd9cd7c455d1da71d4f"
+    },
+    "binding_consumer.py": {
+      "bytes": 2197,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/binding_consumer.py",
+      "sha256": "9f10317e2575f589732512912a476355c4fefff2b2b4e01571142222b1eb92a3"
+    },
+    "boundary_oracle.py": {
+      "bytes": 4691,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/boundary_oracle.py",
+      "sha256": "7fd2e64783f4516a99f116dc66502ff8e6b6d5591f7a1076e7ed1e6cfa9a408a"
+    },
+    "cap48_provider.py": {
+      "bytes": 2239,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/cap48_provider.py",
+      "sha256": "39d8a3b5ad6164e1fc452263b02888a0482fd30348a9c969c958456861102749"
+    },
+    "consume.py": {
+      "bytes": 11102,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/consume.py",
+      "sha256": "f14cf71f0d7ad986de324ec5a93a70773129c55d1c1d53567e1c6ed794d54ff5"
+    },
+    "decode_coverage072.py": {
+      "bytes": 568,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/decode_coverage072.py",
+      "sha256": "32072792300454bb5223d515c0954e2e11393174774e5a48f21ca11e83d5716b"
+    },
+    "deferred_registry.py": {
+      "bytes": 6745,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/deferred_registry.py",
+      "sha256": "ca1f32dcabb464085efab481c4467371f543b2e81cc775c9668402db1b452984"
+    },
+    "entry.py": {
+      "bytes": 10422,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/entry.py",
+      "sha256": "9a2bd34363364f5fea08805c6c9401ad0cf431324c7b4a0f4ec4f679793844a2"
+    },
+    "entry_cold_controls.py": {
+      "bytes": 6111,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/entry_cold_controls.py",
+      "sha256": "d3ef8fa758e5bb4d1740049b1fe7ae972d9e4fbb3622ac23786b493da6d8ae79"
+    },
+    "evidence/MXR043R2_TERMINAL_20261015.json": {
+      "bytes": 2766,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/evidence/MXR043R2_TERMINAL_20261015.json",
+      "sha256": "2f22245163089883fd6b54954b09804a228796a04afc01683e4b1476ff9f8eab"
+    },
+    "evidence/MXR044_TERMINAL_20261015.json": {
+      "bytes": 3032,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/evidence/MXR044_TERMINAL_20261015.json",
+      "sha256": "223d010aaa64f14f82ad52a050eac46812e367e7175c04b4364dcad3a5f0ec40"
+    },
+    "evidence/RAM043_BEFORE_STOP.json": {
+      "bytes": 1931,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/evidence/RAM043_BEFORE_STOP.json",
+      "sha256": "8395d345bf5ed253fed06a76c695680caa48ae06c54c294ec4c4b34658ed90a6"
+    },
+    "evidence/RAM_QUERY_ACTUAL_0a4a.json": {
+      "bytes": 4260,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/evidence/RAM_QUERY_ACTUAL_0a4a.json",
+      "sha256": "49b1fc18c1b5c93fef734bd4cfd3a70946c8d8641733f9da349c6eae2816f34a"
+    },
+    "evidence/SOURCE_TEMPLATE067.json": {
+      "bytes": 61259,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/evidence/SOURCE_TEMPLATE067.json",
+      "sha256": "8d122f0db6b297fca593e4359d96b0d214c81da206a81f32514320ae538fe2d8"
+    },
+    "evidence/SOURCE_TEMPLATE072.json": {
+      "bytes": 83573,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/evidence/SOURCE_TEMPLATE072.json",
+      "sha256": "34151ee2d326c2fb47048e9d2164b203e54a86cf202710602b51d6e3ab7d42da"
+    },
+    "external_output_policy.py": {
+      "bytes": 7175,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/external_output_policy.py",
+      "sha256": "90e61d66964e38806d9ff4656250cbf6a9ab4dc0c66a37c9e166ad452e8996e3"
+    },
+    "host_ticket.py": {
+      "bytes": 19048,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/host_ticket.py",
+      "sha256": "cc5d511796dca7f3954c101066c1dd5605329cff75226e69d7fdd1ca6f7de222"
+    },
+    "independent_block_reference.py": {
+      "bytes": 2236,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/independent_block_reference.py",
+      "sha256": "c4e40566810ddaacd69404f835b828c08fc46ef17a75435a487c35b56dd2ef7e"
+    },
+    "independent_reference.py": {
+      "bytes": 1596,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/independent_reference.py",
+      "sha256": "c0717d6e2385822d569be611995290294a603c8f49dbf14478a72a29bf1711a9"
+    },
+    "ipc_controls.py": {
+      "bytes": 2962,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/ipc_controls.py",
+      "sha256": "6f815ee70eee276f2a5c8f6ffd7d3ba82e754eb9aac55ee7d5408100241037a2"
+    },
+    "lossless_raw.py": {
+      "bytes": 3214,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/lossless_raw.py",
+      "sha256": "8bd51ca033cd39847c6206dd5094ea15ceccc61d44fe520d013416e51fa5b6c4"
+    },
+    "memory_observer.py": {
+      "bytes": 4949,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/memory_observer.py",
+      "sha256": "bfb78bc0c693be12fc65bc047a457e579d32166562d99b882454c8a8a2fe11f5"
+    },
+    "mxr_diag16_gdn_shadow-0.0.1.dist-info/METADATA": {
+      "bytes": 140,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/mxr_diag16_gdn_shadow-0.0.1.dist-info/METADATA",
+      "sha256": "c318e1462a91aa1f74651ed25ffd9543cff3dd34b1ed3ade741b89d82e17498d"
+    },
+    "mxr_diag16_gdn_shadow-0.0.1.dist-info/entry_points.txt": {
+      "bytes": 78,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/mxr_diag16_gdn_shadow-0.0.1.dist-info/entry_points.txt",
+      "sha256": "93e018f547dc077c8b1fa0741164a018d7d3ce516c7e34ab200872cac0e52f03"
+    },
+    "mxr_diag16_gdn_shadow/__init__.py": {
+      "bytes": 584,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/mxr_diag16_gdn_shadow/__init__.py",
+      "sha256": "1c39080dd05bdbd0004d33ba7ebe82cf8bbd3b4ba9ed8678018a151b5c9060df"
+    },
+    "ownership_observation.py": {
+      "bytes": 3010,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/ownership_observation.py",
+      "sha256": "a6840189c26febec9e48bfd3fa37676fbe420cd5719f3cdf58959e4a0760224c"
+    },
+    "parser_probe.py": {
+      "bytes": 14280,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/parser_probe.py",
+      "sha256": "e8bec33766ba140338d7b517c9d957a232bd25a5c3899759641f83fb7a5dd5a1"
+    },
+    "plugin_discovery.py": {
+      "bytes": 2256,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/plugin_discovery.py",
+      "sha256": "046955e8270076fb0a684cc6c632ecc06b0c4a73cd84fe17b0b3303441c87cd7"
+    },
+    "prerequisite.py": {
+      "bytes": 12719,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/prerequisite.py",
+      "sha256": "d25609d1c121015bc8b9eeda1295ad484a658fd09010a73d01a1890b001ffa20"
+    },
+    "registry_child_probe.py": {
+      "bytes": 4442,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/registry_child_probe.py",
+      "sha256": "9ec416d1ae74ae6e556ea38c420e06ff41edbd6fd6f8172fcf80305d7657cf7c"
+    },
+    "resource_budget073.py": {
+      "bytes": 719,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/resource_budget073.py",
+      "sha256": "f823b03e4577b772ae1c7726dca67093e05bd3f428300f2a4b778b494002ba76"
+    },
+    "resource_controls073.py": {
+      "bytes": 3500,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/resource_controls073.py",
+      "sha256": "e45601f8659a7ab5c9e23f349b82e9f8e7b2f4eb22d34c28f99ce8759f1223a4"
+    },
+    "small_disk_contract.py": {
+      "bytes": 2151,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/small_disk_contract.py",
+      "sha256": "ae17f610eb00296f48cad8e190b74440faec9ce85f14b5bbba42b5519b18d3f9"
+    },
+    "software.py": {
+      "bytes": 3857,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/software.py",
+      "sha256": "b51e2c241bb673c48250349321bc3af6e49d4fd38bd8206116ae4aa551625374"
+    },
+    "software_contract.py": {
+      "bytes": 18,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/software_contract.py",
+      "sha256": "845ac0ef2827f59b9dda07e563a10da5c14c9c9567c6a45c2799af10317defb8"
+    },
+    "stage_resources.py": {
+      "bytes": 3532,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/stage_resources.py",
+      "sha256": "ddf18b8c057a0a028404dc4fe7ab662a3ea3b2ccec90da49ed63003b954e2971"
+    },
+    "tensor_budget072.py": {
+      "bytes": 1607,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/tensor_budget072.py",
+      "sha256": "413559530e153ae89cb33c61e5625c067dbb31f96feeddf12053298919ee13f9"
+    },
+    "test_block_reference.py": {
+      "bytes": 1475,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/test_block_reference.py",
+      "sha256": "58266194de6c14addd3d589384b87732cac18098f230b80ccf2a1fc21a9841b9"
+    },
+    "test_contract.py": {
+      "bytes": 19965,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/test_contract.py",
+      "sha256": "fd97fb3f5485bbc4d7016feb1e586a63205c00328fb984dfa7a4977789e91fa7"
+    },
+    "test_lossless_raw.py": {
+      "bytes": 1923,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/test_lossless_raw.py",
+      "sha256": "a8ff1368ae920d54f94628da20a66102cf7cb57d2d1763bfe618e826cbf43de3"
+    },
+    "worker.py": {
+      "bytes": 11974,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/worker.py",
+      "sha256": "d1dae2205a940b2e4b094267619353389b2944073f3f08bf2ba41b09e62a75b5"
+    }
+  },
+  "historical_authority_ref": {
+    "bytes": 3591,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json",
+    "sha256": "71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99"
+  },
+  "historical_memory_evidence_ref": {
+    "bytes": 1931,
+    "path": "/opt/host/vnf/austinov/run-mxr-working-domain-model043-repair2-main-NEW48H_001/candidate/CGROUP-MEMORY-before-stop-1792097246826922900.json",
+    "sha256": "8395d345bf5ed253fed06a76c695680caa48ae06c54c294ec4c4b34658ed90a6"
+  },
+  "historical_windows_immutable": true,
+  "independent_new24h_window": true,
+  "local_software": {
+    "CPU_actual_general_plugins_probe_pending": false,
+    "NPU": false,
+    "actual_N1_general_plugins_probe_pending": true,
+    "actual_targeted_pass": true,
+    "actual_targeted_tests": 18,
+    "sameimage": false
+  },
+  "mandatory_unfinished_gates": [
+    "MAIN fresh ordinaryRAM40.5GiB and opt32GiB plus original8.5GiB reserve admission",
+    "actual sameimage18controls/real general-plugin child only after admitted N1 all4 tiny/IPC/EROFS",
+    "actual4x48 exact2048 prefill plus4x48x9native decode/bitwise slot continuity/independent output-state-inverse consumers",
+    "same-final-production C16 geometry and fixed1024 paired performance and task accuracy not granted"
+  ],
+  "memory_observer_repair": "Live cgroup directory, parseable exact limit and required counters hard required; cleanup existing cgroup missing limit adds secondary fault but never blocks stop; departed cgroup retained as missing-not-zero evidence.",
+  "model_RAM_GiB": 40.5,
+  "new_prerequisites": null,
+  "no_automatic_long_successor": true,
+  "non_runtime_archive_members": [
+    "HANDOFF.md"
+  ],
+  "output_root": "/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair6-main-NEW24H_MXR073R6_001",
+  "owned_host_implemented": true,
+  "ownership_observation_refs": {
+    "helper": {
+      "bytes": 40202,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/short_horizon_h8_gate_v4/host_run.py",
+      "sha256": "4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20"
+    },
+    "safety": {
+      "bytes": 22569,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-d8-fp32-model-boundary-r87-v1-011/safety_host.py",
+      "sha256": "8c83e08318b530c4d022b91bbacd34b12121b3380e1a14d32262c9a3875f6fa7"
+    }
+  },
+  "pending_actual": [
+    "MAIN fresh ordinaryRAM40.5GiB and opt32GiB plus original8.5GiB reserve admission",
+    "actual sameimage18controls/real general-plugin child only after admitted N1 all4 tiny/IPC/EROFS",
+    "actual4x48 exact2048 prefill plus4x48x9native decode/bitwise slot continuity/independent output-state-inverse consumers",
+    "same-final-production C16 geometry and fixed1024 paired performance and task accuracy not granted"
+  ],
+  "performance_ready": false,
+  "plugin_source": {
+    "bytes": 9183,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/SOURCE_MANIFEST.json",
+    "sha256": "f87ee946b055d511280eced9882fd8dd9127bf8f683b7b2993b5c51331a3dd0f"
+  },
+  "raw_total_cap_GiB": 12,
+  "reference_contract": "mxr.independent-canonical-working-storage/v043",
+  "registered_server_scalars": {
+    "actual_parser_and_effective_config_must_match": true,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 2048,
+    "max_num_seqs": 1
+  },
+  "registry_boundary": {
+    "CPU": "source/complete-argv/static discovery only; actual registry pending",
+    "N1": "after real all4 tiny, real registry child must succeed before parser/weights",
+    "hardware_mock": false,
+    "removed_gate": false
+  },
+  "required_binding": {
+    "bytes": 5811,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/prefix_binding.py",
+    "sha256": "96c345308723ebf32e6817b2289466aaca6ca964897abf97fa23941da6ac8d8d"
+  },
+  "required_short_predecessor": {
+    "binding_required": {
+      "bytes": 5811,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/prefix_binding.py",
+      "sha256": "96c345308723ebf32e6817b2289466aaca6ca964897abf97fa23941da6ac8d8d"
+    },
+    "condition": "actual successful043R2 real129/cap48/lazy bootstrap, explicitly NOT044 mathematics; additionally actual044 ninecase three-repeat independent success required",
+    "result": null,
+    "source": null,
+    "terminal": null
+  },
+  "resource_trial073": {
+    "CPU_guest_GiB": 8,
+    "OOM_is_hard_failure": true,
+    "historical_peak_bytes": 16895430656,
+    "host_GiB": 0.5,
+    "incremental_trial_headroom_bytes": 4579405824,
+    "model_guest_GiB": 32,
+    "model_initial_GiB": 40.5,
+    "new2K_peak_proved": false,
+    "new_complete_output_cap_bytes": 12884901888,
+    "protected_0_3_unchanged": true,
+    "reserve_GiB": 8
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6",
+  "runtime_identity": {
+    "container_prefix": "mxr-2k073r6-",
+    "owner": "NEW24H_MXR073R6_001",
+    "run_id": "NEW24H_MXR073R6_001"
+  },
+  "sameimage_executed": false,
+  "schema": "mxr.diag16.full-gdn-frame-bridge-source/v1",
+  "small_smoke_scope": {
+    "actual067_lazy_first_core": true,
+    "actual_native_decode_steps_required": 9,
+    "all4_workers": true,
+    "graph": false,
+    "layers_per_worker": 48,
+    "logits": false,
+    "long": false,
+    "new_controller": false,
+    "original003_client_mechanical_successor": true,
+    "output_tokens": 10,
+    "performance": false,
+    "request_reset_reuse": false,
+    "slot_continuity": true,
+    "task": false,
+    "tokens": 2048,
+    "warmup_tokens": 16,
+    "whole044_math_unchanged": true
+  },
+  "software_cases": 18,
+  "source_reference_repair": "test08 baseline math reads exact source-pinned067 template and fileRefs; source closure includes all external references; local standalone snapshots source-hash checked, no ambient dirname guess.",
+  "source_template": true,
+  "stage": "short2048",
+  "start_epoch": 1792134133,
+  "task_ready": false,
+  "tensor_byte_budget": {
+    "D": 128,
+    "Hq": 4,
+    "Hv": 12,
+    "all_tensor_logical_bound": 10767403008,
+    "cache_log_fit_guaranteed": false,
+    "decode_logical_bound": 1643616,
+    "decode_steps": 9,
+    "important": "Logical tensor bound assumes enforced actual BF16 Hq4/Hv12/D128 and FP32 selected cache states; <=64KiB metadata per record. Full persisted raw/control12GiB hardcap remains authoritative; serialization/cache/log fit not guaranteed.",
+    "layers": 48,
+    "no_dedup_savings_assumed": true,
+    "prefill_logical_bound": 41287680,
+    "ranks": 4,
+    "raw_and_control_cap": 12884901888,
+    "tokens": 2048
+  },
+  "tokens": 2048,
+  "window": {
+    "cutoff": 1792220533,
+    "start": 1792134133
+  }
+}

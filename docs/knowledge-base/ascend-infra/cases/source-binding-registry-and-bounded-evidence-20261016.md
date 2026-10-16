@@ -106,3 +106,61 @@ thinkOFF/max2048/normalEOS. HistoricalHYPIC is not a new result.
 External-process handling retained no-action refusals when the exact PID/start
 departed or scope validation failed. No external signal or container stop has
 been proved successful here. Recheck fresh ownership; never target stale PIDs.
+
+## Actual numerical and bootstrap attribution (later checkpoint)
+
+The earlier pending NPU16 observation is now terminal: operation0a49 passed the
+diagnostic40-row/63-sidecar domain. It does not grant model or performance
+qualification. The subsequent NPU160 operation0a58 failed at B1/eager mixed
+step90: whole-state relative L2=8.515666478e-7 exceeded its frozen7.92e-7.
+Keep that failure; no paper-wide conclusion follows.
+
+CPU074 repair2 independently consumed the original91 retained frames in the
+same immutable image, Devices[], with no NPU rerun. Operation0a9b exited0;
+DIAGNOSIS074.json is231657bytes,
+c01e2993a59805703a7cc98b67d11df89fb84656c9ad89d3984901db76c8ff1d.
+At step90 the decode candidate/native state difference was4.56e-8, whereas
+the prefill state difference was1.219e-6. Candidate and native cumulative
+CPU64 error norms were both about.00212. Similar norms do not prove identical
+error vectors, nor a wrong native implementation. The CPU64 ledger uses saved
+candidate post-convolution operands; it is not an independently captured
+native-input trajectory or the exact BF16 working DAG. Next intervention:
+reopen the step89->90 slot/flush join and compare native prefill from both
+actual initial states, with common-input and deterministic replay controls.
+Do not tune the old threshold to fit the observed failure.
+
+The 2K model preparation exposed real deployment defects, not paper failures:
+a guessed historical source directory, an omitted own IPC leaf, and an
+environment method initialized only in the later guest role. Retain073R1-R3
+failures and test the actual aggregate and subprocess paths.
+
+073R4 then demonstrated a phase-contract error: real GDN plugin registration
+imports the Ascend Triton driver and queries architecture. Devices[] cannot
+satisfy that runtime dependency. 073R5 kept CPU source/argv/static checks,
+explicitly marked real registration pending, and moved the unchanged real
+registration into admitted N1 after four actual tiny canaries and before model
+weights. The host must consume the real child receipt; pending is not PASS.
+
+073R5's four tiny computations passed, but its isolated registry subprocess
+failed to import acl. Python -I ignores environment PYTHONPATH and a fresh
+subprocess does not inherit its parent's sys.path. 073R6 reuses the original
+source-pinned guest installed_cann helper inside that child: fixed CANN root,
+ENV and extension identities, direct and active spec equality, explicit
+sys.path insertion. No image edit, pip install or fake ACL module is needed.
+Operation0ab1 has passed actual N1 registration/parser and started the service;
+full2K/48-layer/nine-decode numerical and E2E results remain pending.
+
+CPU074R1 also failed before creating output because host512MiB soft address
+space propagated into Go Docker. Actual read-only probe0a8f reproduced
+Docker exit2 (failed to reserve page summary memory); the exact Docker-only
+prlimit --as=unlimited wrapper exited0. Repair2 applies that wrapper to all
+Docker metadata/create/attach/stop clients, keeps the host and container RAM
+budgets unchanged, and retains actual argv/exit/stdout/stderr. A parent virtual
+address cap is not a total Docker-client RSS budget.
+
+The maintainer already required genuine aggregate checks and correct
+static/device phase separation. These failures are compliance/implementation
+gaps, not a reason to add another scheduling framework or claim that more
+rules alone fixed execution. Reuse the native bootstrap sequence and verify
+it in every real interpreter context. Exact refs, terminals and CURRENT/NEXT
+are in CURRENT_STAGE_20261016_1030UTC.json in the active workstream.

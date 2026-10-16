@@ -1,0 +1,135 @@
+{
+  "schema": "ascend.actual-diagnostic-milestone/v1",
+  "same_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json",
+    "bytes": 52969,
+    "sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21"
+  },
+  "cpu_owner": {
+    "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json",
+    "bytes": 1386,
+    "sha256": "54e38927342aa9c4e443cbde798768e46a421afc3fb1ba7c8e220aa3842ed3cd"
+  },
+  "numeric16_owner": {
+    "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json",
+    "bytes": 1620,
+    "sha256": "e98523737a3b87244625bb1a9241a8d92fb6695d0b5f059751e4a9a7b441a8f9"
+  },
+  "operation_snapshot": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-c",
+            "import subprocess,re,os,sys,json\ns=subprocess.check_output(['/usr/local/sbin/npu-smi','info'],text=True)\nrows=[]\nfor l in s.splitlines():\n m=re.match(r'\\|\\s*([0-7])\\s+0\\s*\\|\\s*([0-9]+)\\s+\\|',l)\n if m:rows.append((int(m[1]),int(m[2])))\nprint('FRESH_PHYSICAL_PROCESSES',json.dumps(rows),flush=True)\nassert not any(c==5 for c,p in rows),'physical5 foreign busy; no experiment started'\nos.execv('/usr/bin/python3',[\"/usr/bin/python3\",\"-I\",\"-B\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/run052.py\",\"--execute\",\"--template-ref\",\"{\\\"path\\\":\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_TEMPLATE.json\\\",\\\"bytes\\\":55180,\\\"sha256\\\":\\\"9d446cb308dbb88eb3f63056ebef855dfa1489b0ac561f7b7b91efcd0d784ae2\\\"}\",\"--phase\",\"numeric16\",\"--host-cpu\",\"166\",\"--guest-cpu\",\"0\",\"--cpu-owner-ref\",\"{\\\"path\\\":\\\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json\\\",\\\"bytes\\\":1386,\\\"sha256\\\":\\\"54e38927342aa9c4e443cbde798768e46a421afc3fb1ba7c8e220aa3842ed3cd\\\"}\"])"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": null,
+          "durationMs": 314057,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000000a49",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "FRESH_PHYSICAL_PROCESSES [[0, 3620211], [1, 3620212], [2, 3620213], [3, 3620214]]\nMAIN_DLLIFECYCLE002_OWNER {\"path\": \"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json\", \"bytes\": 1620, \"sha256\": \"e98523737a3b87244625bb1a9241a8d92fb6695d0b5f059751e4a9a7b441a8f9\"}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 422,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 422,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 422
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 422,
+          "routeLookupMs": 0,
+          "totalMs": 422
+        }
+      },
+      "traceId": "a6cba9c7-b0c6-4cbb-a999-cf8279d98828"
+    },
+    "operationId": "exec-0000000000000a49",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "numeric16": {
+    "domain_rows": 40,
+    "sidecars": 63,
+    "domain_checks_pass": true,
+    "failures": [],
+    "missing_evidence": [],
+    "scope": "NPU diagnostic native-full-GDN-core and descriptor copy; not final model qualification",
+    "original_strict_pass": false,
+    "complete_proof": false,
+    "elapsed_seconds": 312.65007931002765,
+    "released_stopped_retained": true
+  },
+  "next": {
+    "operationId": "exec-0000000000000a58",
+    "phase": "numeric160",
+    "status": "live observed; outcome pending",
+    "physical": [
+      5
+    ],
+    "source_unchanged": true,
+    "output": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001"
+  },
+  "queue": {
+    "CURRENT": "DeltaLog069R1 actual160; wait same live handle, no restart",
+    "NEXT": "MXR073 resource-constrained2K fullmodel after reviewed bytes/deployment/sourceaudit and physical4-7 release",
+    "BACKUP": "DeltaLog058R2 model then PF071 2K-C1; requires actual160 and other formal numeric gates",
+    "TP4_exclusive": true,
+    "all4card_continuous_utilization": "unmeasured; current numeric uses only physical5"
+  },
+  "acceptance": {
+    "model": false,
+    "paired_performance": false,
+    "task_accuracy": false
+  }
+}

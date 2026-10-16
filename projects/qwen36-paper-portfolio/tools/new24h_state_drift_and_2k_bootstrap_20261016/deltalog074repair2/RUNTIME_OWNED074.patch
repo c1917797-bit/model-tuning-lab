@@ -1,0 +1,66 @@
+--- 074R1/owned_cpu.py
++++ 074R2/owned_cpu.py
+@@ -2,13 +2,13 @@
+ import argparse,hashlib,importlib.util,json,os,shutil,stat,subprocess,sys,time
+ from pathlib import Path
+ HERE=Path(__file__).resolve().parent
+-ROOT=Path('/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair1')
++ROOT=Path('/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2')
+ OUTROOT=Path('/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061')
+ IMAGE='sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1'
+ PY='/usr/local/python3.12.13/bin/python3';DOCKER='/usr/bin/docker';GIB=2**30;START=1792134133;CUT=1792220533
+ SOURCE=dict(path='/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json',bytes=52969,sha256='b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21')
+ PRODUCER=dict(path='/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001/numeric/result/RESULT.json',bytes=100542,sha256='4a5b125780618a6020e2d2bf619be1e4258dbafd9b7699bfe52aabc16fa12caa')
+-OWNER='deltalog-retained-drift-CPU074R1';CAP=GIB
++OWNER='deltalog-retained-drift-CPU074R2';CAP=GIB
+ def need(v,s):
+  if not v:raise ValueError(s)
+ def ref(p):
+@@ -24,6 +24,11 @@
+  s=importlib.util.spec_from_file_location(n,checked(r));m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
+ def write(p,v):
+  with Path(p).open('x',encoding='utf8',newline='\n')as f:json.dump(v,f,sort_keys=True,allow_nan=False);f.write('\n')
++def docker_argv(args):
++ # Host retains512MiB softAS. Only the actual Go Docker client is exec'd under
++ # unlimitedAS (the parent hardlimit is independently required unlimited).
++ need(type(args)is list and args and args[0]==DOCKER,'only exact absolute Docker child may receive AS wrapper')
++ return ['/usr/bin/prlimit','--as=unlimited','--',*args]
+ def output_scan(p):
+  total=0;dev=p.stat().st_dev
+  for root,dirs,files in os.walk(p,followlinks=False):
+@@ -59,7 +64,7 @@
+  need(own['files']['owned_cpu.py']==ref(__file__),'actual own launcher source');m,refs=closure(SOURCE)
+  authority=obj(own['authority_ref']);need(authority['schema']=='ascend.paper-portfolio.new24h-authority/v1'and authority['start_epoch']==START and authority['cutoff_epoch']==CUT,'exact actual24h authority unchanged')
+  if a.source_audit:print(json.dumps(dict(source=ar,readset=refs,resources_admitted=False,NPU=False)));return 0
+- need(sys.platform=='linux'and a.execute and START<=time.time()<CUT-1000,'fixed24h/whole1000s fit');need(a.output.parent==OUTROOT and a.output.name.startswith('run-drift074repair1-')and not a.output.exists()and all(not q.is_symlink()for q in(OUTROOT,*OUTROOT.parents)),'one new authorized leaf')
++ need(sys.platform=='linux'and a.execute and START<=time.time()<CUT-1000,'fixed24h/whole1000s fit');need(a.output.parent==OUTROOT and a.output.name.startswith('run-drift074repair2-')and not a.output.exists()and all(not q.is_symlink()for q in(OUTROOT,*OUTROOT.parents)),'one new authorized leaf')
+  affinity=os.sched_getaffinity(0);need(a.host_cpu in affinity and a.guest_cpu in affinity and a.host_cpu!=a.guest_cpu,'real disjoint inherited CPU assignments')
+  import fcntl,resource,signal
+  whole_start=time.monotonic()
+@@ -67,7 +72,15 @@
+  signal.signal(signal.SIGTERM,interrupted);signal.signal(signal.SIGALRM,interrupted);signal.alarm(1000)
+  os.sched_setaffinity(0,{a.host_cpu});soft,hard=resource.getrlimit(resource.RLIMIT_AS);need(hard==resource.RLIM_INFINITY,'host soft512MiB preserves original hard');resource.setrlimit(resource.RLIMIT_AS,(GIB//2,hard))
+  def run(args,timeout=20):
+-  x=subprocess.run(args,stdin=subprocess.DEVNULL,capture_output=True,text=True,timeout=timeout);need(len(x.stdout.encode())+len(x.stderr.encode())<=2**20,'bounded Docker metadata');return x
++  argv=docker_argv(args);called=time.monotonic()
++  x=subprocess.run(argv,stdin=subprocess.DEVNULL,capture_output=True,text=True,timeout=timeout)
++  need(len(x.stdout.encode())+len(x.stderr.encode())<=2**20,'bounded Docker metadata')
++  receipt=dict(schema='deltalog.actual-Docker-client-call/v074R2',requested_argv=args,actual_argv=argv,exit_code=x.returncode,stdout=x.stdout,stderr=x.stderr,elapsed=time.monotonic()-called)
++  # BEFORE output admission there is intentionally no writable leaf. Preserve
++  # failure in the original operation stderr instead of masking Go diagnostics.
++  if a.output.is_dir():write(a.output/('DOCKER-CALL-%d.json'%time.time_ns()),receipt)
++  if x.returncode:print('MAIN_DOCKER_CLIENT_FAILURE '+json.dumps(receipt,sort_keys=True,allow_nan=False),file=sys.stderr,flush=True)
++  return x
+  def no_overlap(exclude=None):
+   x=run([DOCKER,'ps','--no-trunc','--filter','label=qwen36.owner','--format','{{.ID}}']);need(x.returncode==0,'complete live owned list');ids=set(x.stdout.split());need(not(ids-({exclude}if exclude else set())),'no blind shared RAM/CPU overlap with any existing owned task')
+  no_overlap();mem=dict(v.split(':',1)for v in Path('/proc/meminfo').read_text().splitlines());need(int(mem['MemAvailable'].split()[0])*1024>=16.5*GIB,'8guest+.5host+8reserve ordinary RAM')
+@@ -88,7 +101,8 @@
+    need(time.monotonic()-whole_start<900,'whole preparation leaves cleanup reserve before create')
+    argv=create_argv(a.guest_cpu,mounts,env,name,child);write(a.output/'CREATE_ARGV.json',argv);z=run(argv);write(a.output/'CREATE.json',dict(exit=z.returncode,stdout=z.stdout,stderr=z.stderr));need(z.returncode==0,'create success');cid=z.stdout.strip();need(len(cid)==64 and all(v in'0123456789abcdef'for v in cid),'created exact CID');write(a.output/'CID.json',dict(cid=cid,name=name));inspect()
+    with(a.output/'child.stdout').open('xb')as out,(a.output/'child.stderr').open('xb')as err:
+-    attach=subprocess.Popen([DOCKER,'start','--attach',cid],stdin=subprocess.DEVNULL,stdout=out,stderr=err)
++    attach_argv=docker_argv([DOCKER,'start','--attach',cid]);write(a.output/'ATTACH_ARGV.json',dict(requested_argv=[DOCKER,'start','--attach',cid],actual_argv=attach_argv))
++    attach=subprocess.Popen(attach_argv,stdin=subprocess.DEVNULL,stdout=out,stderr=err)
+     while attach.poll()is None:
+      need(time.monotonic()-start<600 and time.monotonic()-whole_start<900 and time.time()<CUT-100,'child600s/whole1000s incl cleanup90/fixed cutoff');no_overlap(cid);output_scan(a.output);storage.check();x=inspect();write(a.output/('inspect-%d.json'%time.time_ns()),x);time.sleep(1)
+     need(attach.returncode==0,'actual child exit0')

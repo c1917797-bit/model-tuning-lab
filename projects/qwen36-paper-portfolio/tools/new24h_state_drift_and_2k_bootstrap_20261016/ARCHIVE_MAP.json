@@ -1,0 +1,551 @@
+{
+  "schema": "ascend.byte-exact-absolute-runtime-source-archive/v1",
+  "root": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016",
+  "relocation_is_not_execution_proof": true,
+  "copies": [
+    {
+      "source": {
+        "bytes": 14070,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/DERIVED_config_cpu.py",
+        "sha256": "9ebfd10ca905d0aec30dd53561cfbd3892399f8550a7f6c636c66567181809df"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/DERIVED_config_cpu.py"
+    },
+    {
+      "source": {
+        "bytes": 16355,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/DERIVED_output_budget.py",
+        "sha256": "358f1e70e9e2af4b1a82629901c7d38b8f2f3f7d010a925f1a3538c7c4c358ed"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/DERIVED_output_budget.py"
+    },
+    {
+      "source": {
+        "bytes": 20210,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/PLATFORM_SOURCES.json",
+        "sha256": "36cbf88ed2942f286d4ee2e2d3f6326a6fc6c5c8fbcccd20d87051b9f967aea3"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/PLATFORM_SOURCES.json"
+    },
+    {
+      "source": {
+        "bytes": 23142,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/PREDECESSOR_PINS.json",
+        "sha256": "e31c0a1005277fc971d9a4794c7cbde6342d274a9dc7384f68087281eb407921"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/PREDECESSOR_PINS.json"
+    },
+    {
+      "source": {
+        "bytes": 1897,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/QUALIFICATION_CORRECTNESS.json",
+        "sha256": "65f82da41b9e7d1de814566755c36499b3edb0ca079b276aed6e29a51612b62f"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/QUALIFICATION_CORRECTNESS.json"
+    },
+    {
+      "source": {
+        "bytes": 14081,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/actual011/config_cpu.py",
+        "sha256": "c082d535f9bd29a4e828ff98796560ea915d86cf132034d0da7df39c2aca6349"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/actual011/config_cpu.py"
+    },
+    {
+      "source": {
+        "bytes": 16355,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/actual011/output_budget.py",
+        "sha256": "44e5ccfdad173e6b9eebc025260e489893d672c316c6aac3f8bf68a5e03c16ad"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/actual011/output_budget.py"
+    },
+    {
+      "source": {
+        "bytes": 22569,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/actual011/safety_host.py",
+        "sha256": "8c83e08318b530c4d022b91bbacd34b12121b3380e1a14d32262c9a3875f6fa7"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/actual011/safety_host.py"
+    },
+    {
+      "source": {
+        "bytes": 9483,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/actual011/server_entry.py",
+        "sha256": "be314a47a6c440960632d3fa88d18f4ff1b80c02356dd8a5fc45c321a7164e9f"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/actual011/server_entry.py"
+    },
+    {
+      "source": {
+        "bytes": 6903,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/admission047.py",
+        "sha256": "b716bc1c7b47d920b5398df7610d9dba80c48075efa6671a9f721dfe6f485c0a"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/admission047.py"
+    },
+    {
+      "source": {
+        "bytes": 5843,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/atomic/barrier.py",
+        "sha256": "d83260db427eb50b916fe6347ea79cfd9b4f7990763d3b5cbdb3796003610966"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/atomic/barrier.py"
+    },
+    {
+      "source": {
+        "bytes": 2399,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/atomic/client.py",
+        "sha256": "4eb00467b57533f54f2e4b159290504dbacf210e0575e1eb878118993867b810"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/atomic/client.py"
+    },
+    {
+      "source": {
+        "bytes": 3481,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/authority/NEW24H_AUTHORITY_20261016.json",
+        "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/authority/NEW24H_AUTHORITY_20261016.json"
+    },
+    {
+      "source": {
+        "bytes": 1023,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/authority_contract.py",
+        "sha256": "02127c9b6228ada4e2f85047d1d449ffc852651200d701948c6ecf328e880876"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/authority_contract.py"
+    },
+    {
+      "source": {
+        "bytes": 9940,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/baseline048/entry.py",
+        "sha256": "99fd5d43e9e987ad48ccbbf8bbaab6c075711ee240d9cee5b6480b203c8d6774"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/baseline048/entry.py"
+    },
+    {
+      "source": {
+        "bytes": 1966,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/bind_source.py",
+        "sha256": "80c767d8499d07324313038c1cdc93589b626ae3f455abd9cd7c455d1da71d4f"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/bind_source.py"
+    },
+    {
+      "source": {
+        "bytes": 2197,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/binding_consumer.py",
+        "sha256": "9f10317e2575f589732512912a476355c4fefff2b2b4e01571142222b1eb92a3"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/binding_consumer.py"
+    },
+    {
+      "source": {
+        "bytes": 4691,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/boundary_oracle.py",
+        "sha256": "7fd2e64783f4516a99f116dc66502ff8e6b6d5591f7a1076e7ed1e6cfa9a408a"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/boundary_oracle.py"
+    },
+    {
+      "source": {
+        "bytes": 2239,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/cap48_provider.py",
+        "sha256": "39d8a3b5ad6164e1fc452263b02888a0482fd30348a9c969c958456861102749"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/cap48_provider.py"
+    },
+    {
+      "source": {
+        "bytes": 11102,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/consume.py",
+        "sha256": "f14cf71f0d7ad986de324ec5a93a70773129c55d1c1d53567e1c6ed794d54ff5"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/consume.py"
+    },
+    {
+      "source": {
+        "bytes": 568,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/decode_coverage072.py",
+        "sha256": "32072792300454bb5223d515c0954e2e11393174774e5a48f21ca11e83d5716b"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/decode_coverage072.py"
+    },
+    {
+      "source": {
+        "bytes": 6745,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/deferred_registry.py",
+        "sha256": "ca1f32dcabb464085efab481c4467371f543b2e81cc775c9668402db1b452984"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/deferred_registry.py"
+    },
+    {
+      "source": {
+        "bytes": 10422,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/entry.py",
+        "sha256": "9a2bd34363364f5fea08805c6c9401ad0cf431324c7b4a0f4ec4f679793844a2"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/entry.py"
+    },
+    {
+      "source": {
+        "bytes": 6111,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/entry_cold_controls.py",
+        "sha256": "d3ef8fa758e5bb4d1740049b1fe7ae972d9e4fbb3622ac23786b493da6d8ae79"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/entry_cold_controls.py"
+    },
+    {
+      "source": {
+        "bytes": 2766,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/evidence/MXR043R2_TERMINAL_20261015.json",
+        "sha256": "2f22245163089883fd6b54954b09804a228796a04afc01683e4b1476ff9f8eab"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/evidence/MXR043R2_TERMINAL_20261015.json"
+    },
+    {
+      "source": {
+        "bytes": 3032,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/evidence/MXR044_TERMINAL_20261015.json",
+        "sha256": "223d010aaa64f14f82ad52a050eac46812e367e7175c04b4364dcad3a5f0ec40"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/evidence/MXR044_TERMINAL_20261015.json"
+    },
+    {
+      "source": {
+        "bytes": 1931,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/evidence/RAM043_BEFORE_STOP.json",
+        "sha256": "8395d345bf5ed253fed06a76c695680caa48ae06c54c294ec4c4b34658ed90a6"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/evidence/RAM043_BEFORE_STOP.json"
+    },
+    {
+      "source": {
+        "bytes": 4260,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/evidence/RAM_QUERY_ACTUAL_0a4a.json",
+        "sha256": "49b1fc18c1b5c93fef734bd4cfd3a70946c8d8641733f9da349c6eae2816f34a"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/evidence/RAM_QUERY_ACTUAL_0a4a.json"
+    },
+    {
+      "source": {
+        "bytes": 61259,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/evidence/SOURCE_TEMPLATE067.json",
+        "sha256": "8d122f0db6b297fca593e4359d96b0d214c81da206a81f32514320ae538fe2d8"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/evidence/SOURCE_TEMPLATE067.json"
+    },
+    {
+      "source": {
+        "bytes": 83573,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/evidence/SOURCE_TEMPLATE072.json",
+        "sha256": "34151ee2d326c2fb47048e9d2164b203e54a86cf202710602b51d6e3ab7d42da"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/evidence/SOURCE_TEMPLATE072.json"
+    },
+    {
+      "source": {
+        "bytes": 7175,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/external_output_policy.py",
+        "sha256": "90e61d66964e38806d9ff4656250cbf6a9ab4dc0c66a37c9e166ad452e8996e3"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/external_output_policy.py"
+    },
+    {
+      "source": {
+        "bytes": 19048,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/host_ticket.py",
+        "sha256": "cc5d511796dca7f3954c101066c1dd5605329cff75226e69d7fdd1ca6f7de222"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/host_ticket.py"
+    },
+    {
+      "source": {
+        "bytes": 2236,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/independent_block_reference.py",
+        "sha256": "c4e40566810ddaacd69404f835b828c08fc46ef17a75435a487c35b56dd2ef7e"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/independent_block_reference.py"
+    },
+    {
+      "source": {
+        "bytes": 1596,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/independent_reference.py",
+        "sha256": "c0717d6e2385822d569be611995290294a603c8f49dbf14478a72a29bf1711a9"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/independent_reference.py"
+    },
+    {
+      "source": {
+        "bytes": 2962,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/ipc_controls.py",
+        "sha256": "6f815ee70eee276f2a5c8f6ffd7d3ba82e754eb9aac55ee7d5408100241037a2"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/ipc_controls.py"
+    },
+    {
+      "source": {
+        "bytes": 3214,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/lossless_raw.py",
+        "sha256": "8bd51ca033cd39847c6206dd5094ea15ceccc61d44fe520d013416e51fa5b6c4"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/lossless_raw.py"
+    },
+    {
+      "source": {
+        "bytes": 4949,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/memory_observer.py",
+        "sha256": "bfb78bc0c693be12fc65bc047a457e579d32166562d99b882454c8a8a2fe11f5"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/memory_observer.py"
+    },
+    {
+      "source": {
+        "bytes": 140,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/mxr_diag16_gdn_shadow-0.0.1.dist-info/METADATA",
+        "sha256": "c318e1462a91aa1f74651ed25ffd9543cff3dd34b1ed3ade741b89d82e17498d"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/mxr_diag16_gdn_shadow-0.0.1.dist-info/METADATA"
+    },
+    {
+      "source": {
+        "bytes": 78,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/mxr_diag16_gdn_shadow-0.0.1.dist-info/entry_points.txt",
+        "sha256": "93e018f547dc077c8b1fa0741164a018d7d3ce516c7e34ab200872cac0e52f03"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/mxr_diag16_gdn_shadow-0.0.1.dist-info/entry_points.txt"
+    },
+    {
+      "source": {
+        "bytes": 584,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/mxr_diag16_gdn_shadow/__init__.py",
+        "sha256": "1c39080dd05bdbd0004d33ba7ebe82cf8bbd3b4ba9ed8678018a151b5c9060df"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/mxr_diag16_gdn_shadow/__init__.py"
+    },
+    {
+      "source": {
+        "bytes": 3010,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/ownership_observation.py",
+        "sha256": "a6840189c26febec9e48bfd3fa37676fbe420cd5719f3cdf58959e4a0760224c"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/ownership_observation.py"
+    },
+    {
+      "source": {
+        "bytes": 14280,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/parser_probe.py",
+        "sha256": "e8bec33766ba140338d7b517c9d957a232bd25a5c3899759641f83fb7a5dd5a1"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/parser_probe.py"
+    },
+    {
+      "source": {
+        "bytes": 2256,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/plugin_discovery.py",
+        "sha256": "046955e8270076fb0a684cc6c632ecc06b0c4a73cd84fe17b0b3303441c87cd7"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/plugin_discovery.py"
+    },
+    {
+      "source": {
+        "bytes": 12719,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/prerequisite.py",
+        "sha256": "d25609d1c121015bc8b9eeda1295ad484a658fd09010a73d01a1890b001ffa20"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/prerequisite.py"
+    },
+    {
+      "source": {
+        "bytes": 4442,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/registry_child_probe.py",
+        "sha256": "9ec416d1ae74ae6e556ea38c420e06ff41edbd6fd6f8172fcf80305d7657cf7c"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/registry_child_probe.py"
+    },
+    {
+      "source": {
+        "bytes": 719,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/resource_budget073.py",
+        "sha256": "f823b03e4577b772ae1c7726dca67093e05bd3f428300f2a4b778b494002ba76"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/resource_budget073.py"
+    },
+    {
+      "source": {
+        "bytes": 3500,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/resource_controls073.py",
+        "sha256": "e45601f8659a7ab5c9e23f349b82e9f8e7b2f4eb22d34c28f99ce8759f1223a4"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/resource_controls073.py"
+    },
+    {
+      "source": {
+        "bytes": 2151,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/small_disk_contract.py",
+        "sha256": "ae17f610eb00296f48cad8e190b74440faec9ce85f14b5bbba42b5519b18d3f9"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/small_disk_contract.py"
+    },
+    {
+      "source": {
+        "bytes": 3857,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/software.py",
+        "sha256": "b51e2c241bb673c48250349321bc3af6e49d4fd38bd8206116ae4aa551625374"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/software.py"
+    },
+    {
+      "source": {
+        "bytes": 18,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/software_contract.py",
+        "sha256": "845ac0ef2827f59b9dda07e563a10da5c14c9c9567c6a45c2799af10317defb8"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/software_contract.py"
+    },
+    {
+      "source": {
+        "bytes": 3532,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/stage_resources.py",
+        "sha256": "ddf18b8c057a0a028404dc4fe7ab662a3ea3b2ccec90da49ed63003b954e2971"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/stage_resources.py"
+    },
+    {
+      "source": {
+        "bytes": 1607,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/tensor_budget072.py",
+        "sha256": "413559530e153ae89cb33c61e5625c067dbb31f96feeddf12053298919ee13f9"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/tensor_budget072.py"
+    },
+    {
+      "source": {
+        "bytes": 1475,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/test_block_reference.py",
+        "sha256": "58266194de6c14addd3d589384b87732cac18098f230b80ccf2a1fc21a9841b9"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/test_block_reference.py"
+    },
+    {
+      "source": {
+        "bytes": 19965,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/test_contract.py",
+        "sha256": "fd97fb3f5485bbc4d7016feb1e586a63205c00328fb984dfa7a4977789e91fa7"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/test_contract.py"
+    },
+    {
+      "source": {
+        "bytes": 1923,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/test_lossless_raw.py",
+        "sha256": "a8ff1368ae920d54f94628da20a66102cf7cb57d2d1763bfe618e826cbf43de3"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/test_lossless_raw.py"
+    },
+    {
+      "source": {
+        "bytes": 11974,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/worker.py",
+        "sha256": "d1dae2205a940b2e4b094267619353389b2944073f3f08bf2ba41b09e62a75b5"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/worker.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/SOURCE_MANIFEST.json",
+        "bytes": 111072,
+        "sha256": "8d0608cd3fe3814359fc8141a39afe4b14baa77290d20fd8e57e73bcab4799ab"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/SOURCE_MANIFEST.json"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/SOURCE_TEMPLATE.json",
+        "bytes": 88818,
+        "sha256": "2e44d5f4f5fa4e8904705e4a68b7a501407ecbed52afa230591a8211a5b5f299"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/SOURCE_TEMPLATE.json"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/COMMANDS.json",
+        "bytes": 1843,
+        "sha256": "b1b8fda745579748cf80afafbad6f3d07b9303405b1d67c60c99ad17b0d67bf8"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/mxr073repair6/COMMANDS.json"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/COMMANDS_OWNED074.json",
+        "bytes": 1717,
+        "sha256": "d791a07e72ba70d9a988886b176bea2602affb58fa99bb10f474fef1716bbd5c"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/deltalog074repair2/COMMANDS_OWNED074.json"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/HANDOFF_REPAIR2.md",
+        "bytes": 1566,
+        "sha256": "796e6f251532e8dc8a58376767711dcbcf236b9207724f28b7f33d74d57c8ad9"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/deltalog074repair2/HANDOFF_REPAIR2.md"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/RUNTIME_OWNED074.patch",
+        "bytes": 6569,
+        "sha256": "a0d26d3d5b49acbdf626e6bd139ba6b548215912d9be6634f8c3ed4b8890ac9a"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/deltalog074repair2/RUNTIME_OWNED074.patch"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/SOURCE_MANIFEST.json",
+        "bytes": 3219,
+        "sha256": "f55e503338704ddcc91f4d4357936a4d5fb76a57edde2b42090aea07437cb529"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/deltalog074repair2/SOURCE_MANIFEST.json"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/cpu_entry.py",
+        "bytes": 1427,
+        "sha256": "00439bf728079e8a2f6011c3408b0fafe87e03d1a0379b25dbfb49243389e4a9"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/deltalog074repair2/cpu_entry.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/diagnose.py",
+        "bytes": 6060,
+        "sha256": "115dba86aca9903f6888d11696e7cb9ee52bdea48d3ac72339efa111499246fe"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/deltalog074repair2/diagnose.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/owned_cpu.py",
+        "bytes": 13786,
+        "sha256": "838260ab45b8160c696b3ce272c185866c6a8fdd5fd443ec917990c0ec5fa9b8"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/deltalog074repair2/owned_cpu.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/prepare_repair2.py",
+        "bytes": 2828,
+        "sha256": "9c1efe67538549567436d06c7f5e8d248ded5b0d84be64d6580da5f1a6ae7b74"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/deltalog074repair2/prepare_repair2.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/test_owner074.py",
+        "bytes": 4247,
+        "sha256": "7944a586f17065d73b99c5f1d6796186ca8ad8c36d4603191d132f9dfa352b38"
+      },
+      "target": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_state_drift_and_2k_bootstrap_20261016/deltalog074repair2/test_owner074.py"
+    }
+  ]
+}

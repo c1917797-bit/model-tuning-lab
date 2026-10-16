@@ -1,0 +1,190 @@
+{
+  "schema": "ascend.new24h.actual-stage-checkpoint/v1",
+  "observed_utc": "2026-10-16 10:11:50 UTC",
+  "authority": {
+    "bytes": 3481,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "scope": "Qwen3.6-27B; physical NPU4-7 only; old 48h closed unmet",
+  "previous_milestone": "DL069R1_NUMERIC16_ACTUAL_20261016.json",
+  "supersedes_previous_pending_160_status": true,
+  "DeltaLog": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json",
+      "bytes": 52969,
+      "sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21"
+    },
+    "numeric16": {
+      "owner": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json",
+        "bytes": 1620,
+        "sha256": "e98523737a3b87244625bb1a9241a8d92fb6695d0b5f059751e4a9a7b441a8f9"
+      },
+      "diagnostic_domain_rows": 40,
+      "sidecars": 63,
+      "scope": "diagnostic domain pass only; not full model/performance qualification"
+    },
+    "numeric160": {
+      "operation": "exec-0000000000000a58",
+      "exit": 3,
+      "owner": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001/RESULT.json",
+        "bytes": 1469,
+        "sha256": "412680c3460d4921f32edd3a0cf467186f8639d16e07ee0a1b5e89cdfed513e1"
+      },
+      "producer": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001/numeric/result/RESULT.json",
+        "bytes": 100542,
+        "sha256": "4a5b125780618a6020e2d2bf619be1e4258dbafd9b7699bfe52aabc16fa12caa"
+      },
+      "first_fault": {
+        "mode": "eager",
+        "batch": 1,
+        "kind": "mixed-prefill-decode",
+        "step": 90,
+        "state_relative_l2": 8.515666478130439e-7,
+        "frozen_limit": 7.92e-7
+      },
+      "conclusion": "current implementation failed frozen native-state consistency; no 160-step full matrix, no paper-wide no-go"
+    },
+    "diagnosis074": {
+      "failed": "exec-0000000000000a8d",
+      "cause_probe": "exec-0000000000000a8f",
+      "cause": "host512MiB AS inherited by Go Docker: exit2 failed to reserve page summary memory; exact Docker-only prlimit wrapper exit0",
+      "successor_source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/SOURCE_MANIFEST.json",
+        "bytes": 3219,
+        "sha256": "f55e503338704ddcc91f4d4357936a4d5fb76a57edde2b42090aea07437cb529"
+      },
+      "operation": "exec-0000000000000a9b",
+      "observed_state": "running",
+      "actual_CPU_runtime": true,
+      "NPU_reexecuted": false,
+      "qualification": false
+    }
+  },
+  "MXR": {
+    "owners": [
+      {
+        "ref": {
+          "path": "/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair1-main-NEW24H_MXR073R1_001/RESULT.json",
+          "bytes": 1911,
+          "sha256": "c8437775d8d358521e20f0a61495c2e224d38c1247e9fb40a0ddca8d7233502a"
+        },
+        "status": "failed",
+        "release": true,
+        "primary": "ValueError('original child failure retained: cold-off')",
+        "secondary": [],
+        "source": {
+          "bytes": 109911,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair1/SOURCE_MANIFEST.json",
+          "sha256": "6dc59bcd8ea615a26c34d80fd2e1d5f139f0e3d9c6594ff986839d21153d0138"
+        }
+      },
+      {
+        "ref": {
+          "path": "/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair2-main-NEW24H_MXR073R2_001/RESULT.json",
+          "bytes": 1912,
+          "sha256": "526ba92d72382103b3de7747e80faf4d66077264e8c23e86e267bdd01e73c5cf"
+        },
+        "status": "failed",
+        "release": true,
+        "primary": "ValueError('original child failure retained: cold-off')",
+        "secondary": [],
+        "source": {
+          "bytes": 110439,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair2/SOURCE_MANIFEST.json",
+          "sha256": "4d6f0b8578cd92bf4f96f2745b782bbc8641a844eb73394b6bb9e112e0ed7ff5"
+        }
+      },
+      {
+        "ref": {
+          "path": "/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair3-main-NEW24H_MXR073R3_001/RESULT.json",
+          "bytes": 1930,
+          "sha256": "00aa100757993721422f761f9382c0dde77f1a93f3a6811cf267f98a8b9df282"
+        },
+        "status": "failed",
+        "release": true,
+        "primary": "ValueError('original child failure retained: native-parser')",
+        "secondary": [],
+        "source": {
+          "bytes": 110704,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair3/SOURCE_MANIFEST.json",
+          "sha256": "455b70aaf4bd51c61a99a302510f0ebf78b46f996a32dd176b66d1d223cf8346"
+        }
+      },
+      {
+        "ref": {
+          "path": "/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair4-main-NEW24H_MXR073R4_001/RESULT.json",
+          "bytes": 1931,
+          "sha256": "ae5d7af2835e1647c202aa6dd87edb1de9f5a0d6d651e25709fa99cf5bf325ed"
+        },
+        "status": "failed",
+        "release": true,
+        "primary": "ValueError('original child failure retained: native-parser')",
+        "secondary": [],
+        "source": {
+          "bytes": 110704,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair4/SOURCE_MANIFEST.json",
+          "sha256": "360636757f98e9592abcb7b050a7567f2e267f0e6798aeaeb90f69747c164414"
+        }
+      }
+    ],
+    "actual_operations": {
+      "repair1": "exec-0000000000000a66",
+      "repair2": "exec-0000000000000a70",
+      "repair3": "exec-0000000000000a84",
+      "repair4": "exec-0000000000000a96"
+    },
+    "failure_attribution": [
+      "R1 test source path omitted actual -v1-",
+      "R2 missing own IPC source leaf",
+      "R3 overlay original environment alias bound only after CPU entry used it",
+      "R4 real registry plugin imports Ascend Triton architecture query; cannot execute without mapped hardware"
+    ],
+    "repair4_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair4/SOURCE_MANIFEST.json",
+      "bytes": 110704,
+      "sha256": "360636757f98e9592abcb7b050a7567f2e267f0e6798aeaeb90f69747c164414"
+    },
+    "repair4_software": {
+      "actual_cases": 16,
+      "IPC": true,
+      "rootfs_EROFS": true
+    },
+    "next": "R5 moves real registry check to admitted N1 after four tiny canaries and before weights, not removal/mock",
+    "input_tokens": 2048,
+    "correctness_output_tokens": 10,
+    "performance_fixed_output_tokens": 1024,
+    "model2K_executed": false
+  },
+  "accuracy_assets": {
+    "fresh_verification_operations": [
+      "exec-0000000000000a79",
+      "exec-0000000000000a86"
+    ],
+    "rendered_counts": {
+      "GSM8K": 1319,
+      "HumanEval": 164,
+      "MMLU": 14042
+    },
+    "official_HumanEval_package_and_gzip": true,
+    "GSM_scorer": true,
+    "mmlu063_scorer_not_deployed": true,
+    "actual_sameimage_decoder": false,
+    "actual_HumanEval_isolation": false,
+    "task_scores_available": false
+  },
+  "utilization": {
+    "continuous_30min_window": "unmeasured",
+    "latest_work": "necessary CPU compatibility/diagnostic stages; not NPU performance",
+    "no_false_full_utilization_claim": true
+  },
+  "acceptance": {
+    "throughput10percent": false,
+    "three_pairs": false,
+    "task_accuracy": false,
+    "goal_achieved": false
+  }
+}

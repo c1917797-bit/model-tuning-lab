@@ -1,0 +1,52 @@
+{
+  "CPU_consumer_seconds": 900,
+  "HTTP_seconds": 300,
+  "actual_NPU_executed": false,
+  "bind": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/bind_source.py",
+    "--execute",
+    "--template-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/SOURCE_TEMPLATE.json\",\"bytes\":88818,\"sha256\":\"2e44d5f4f5fa4e8904705e4a68b7a501407ecbed52afa230591a8211a5b5f299\"}",
+    "--prerequisite-plan-ref",
+    "EXACT_HISTORICAL_044_AND_043R2_SIXREF_PLAN"
+  ],
+  "cleanup_seconds": 270,
+  "client_seconds": 900,
+  "default_enabled": false,
+  "execute": [
+    "/usr/bin/env",
+    "MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1",
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/host_ticket.py",
+    "--execute",
+    "--source-sha256",
+    "ACTUAL_BOUND073R6_SHA",
+    "--prerequisite-ref",
+    "ACTUAL039_PREREQUISITE_REF3"
+  ],
+  "model_RAM_GiB": 40.5,
+  "no_automatic_long_successor": true,
+  "opt_initial_free_GiB": 32,
+  "output": "/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair6-main-NEW24H_MXR073R6_001",
+  "phase_seconds": 5400,
+  "qualification_granted": false,
+  "raw_and_control_cap_GiB": 12,
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6",
+  "schema": "mxr.exact2K-memory32-trial-pending/v073",
+  "sourceaudit": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/host_ticket.py",
+    "--source-audit",
+    "--source-sha256",
+    "ACTUAL_BOUND073R6_SHA",
+    "--prerequisite-ref",
+    "ACTUAL039_PREREQUISITE_REF3"
+  ]
+}

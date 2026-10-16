@@ -1,0 +1,93 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-c\",\n          \"import pathlib,json,hashlib,subprocess,sys,os\\nsr=json.loads(sys.argv[1]);p=pathlib.Path(sr['path']);b=p.read_bytes();assert (len(b),hashlib.sha256(b).hexdigest())==(sr['bytes'],sr['sha256'])\\nm=json.loads(b)\\nfor v in m['files'].values():\\n b=pathlib.Path(v['path']).read_bytes();assert (len(b),hashlib.sha256(b).hexdigest())==(v['bytes'],v['sha256'])\\nd=['/usr/bin/prlimit','--as=unlimited','--','/usr/bin/docker'];x=json.loads(subprocess.check_output(d+['inspect','8bffacedbfdb3454d510a6218cb0d181b8fb3a3d0c3d5db0fce13422c3a210d7'],text=True))[0];assert x['State']['Running']is False and x['State']['Pid']==0 and not x.get('ExecIDs')\\nprint('R4_RELEASE_VERIFIED',flush=True)\\nsubprocess.run(['/usr/bin/python3','-I','-B',str(p.parent/'owned_cpu.py'),'--source-audit','--source-ref',sys.argv[1]],check=True)\\nargs=['/usr/bin/python3','-I','-B',str(p.parent/'owned_cpu.py'),'--execute','--source-ref',sys.argv[1],'--host-cpu','166','--guest-cpu','0','--output','/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-drift074repair2-MAIN-20261016-001'];os.execve(args[0],args,dict(os.environ))\\n\",\n          \"{\\\"path\\\":\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/SOURCE_MANIFEST.json\\\",\\\"bytes\\\":3219,\\\"sha256\\\":\\\"f55e503338704ddcc91f4d4357936a4d5fb76a57edde2b42090aea07437cb529\\\"}\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": null,\n        \"durationMs\": 127110,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-0000000000000a9b\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"R4_RELEASE_VERIFIED\\n{\\\"source\\\": {\\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/SOURCE_MANIFEST.json\\\", \\\"bytes\\\": 3219, \\\"sha256\\\": \\\"f55e503338704ddcc91f4d4357936a4d5fb76a57edde2b42090aea07437cb529\\\"}, \\\"readset\\\": [{\\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json\\\", \\\"bytes\\\": 52969, \\\"sha256\\\": \\\"b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21\\\"}, {\\\"path\\\": \\\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001/numeric/result/RESULT.json\\\", \\\"bytes\\\": 100542, \\\"sha256\\\": \\\"4a5b125780618a6020e2d2bf619be1e4258dbafd9b7699bfe52aabc16fa12caa\\\"}, {\\\"bytes\\\": 3407, \\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/oracle.py\\\", \\\"sha256\\\": \\\"cd395a05dbfcb21f1104d617afb1fab6f80374016585e9096ca24d85c2cae97a\\\"}, {\\\"bytes\\\": 3592, \\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/raw_codec.py\\\", \\\"sha256\\\": \\\"4eb6bb0d5488cd1dfc3f2cb6c0f063d11b83ce07dbf594010c1d7554d844cd0e\\\"}, {\\\"bytes\\\": 6869, \\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/consume.py\\\", \\\"sha256\\\": \\\"4c2c290181cee3d8c41dcac11fcc1d5dfd5d939c90d171fcf028950494e8a2c4\\\"}, {\\\"bytes\\\": 1205, \\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/bridge_io.py\\\", \\\"sha256\\\": \\\"d62b550decb1b2f8d6735dc386ba5e4969c828685416289671cc175316af5331\\\"}, {\\\"bytes\\\": 5543, \\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/storage061.py\\\", \\\"sha256\\\": \\\"ca8c1ee593cb94825736dca93f28834c720bb8baccaa3c65adcfa3f4c956161c\\\"}, {\\\"bytes\\\": 10617, \\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/sealed_storage069.py\\\", \\\"sha256\\\": \\\"897999182145efb9088855c2059a94d9ae0fcc28e6666d842fec65013aef9304\\\"}, {\\\"bytes\\\": 773, \\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/window056.py\\\", \\\"sha256\\\": \\\"9d8f7265a84259e7b4ac7380a76723339ec39973fd35e8d9ede9beaf575a0aff\\\"}], \\\"resources_admitted\\\": false, \\\"NPU\\\": false}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 412,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 412,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 412\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 411,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 411\n      }\n    },\n    \"traceId\": \"a323534d-bc83-4aaf-9d27-b36ba7932c20\"\n  },\n  \"operationId\": \"exec-0000000000000a9b\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": null,
+    "found": true,
+    "kind": "exec",
+    "ok": true,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "-c",
+            "import pathlib,json,hashlib,subprocess,sys,os\nsr=json.loads(sys.argv[1]);p=pathlib.Path(sr['path']);b=p.read_bytes();assert (len(b),hashlib.sha256(b).hexdigest())==(sr['bytes'],sr['sha256'])\nm=json.loads(b)\nfor v in m['files'].values():\n b=pathlib.Path(v['path']).read_bytes();assert (len(b),hashlib.sha256(b).hexdigest())==(v['bytes'],v['sha256'])\nd=['/usr/bin/prlimit','--as=unlimited','--','/usr/bin/docker'];x=json.loads(subprocess.check_output(d+['inspect','8bffacedbfdb3454d510a6218cb0d181b8fb3a3d0c3d5db0fce13422c3a210d7'],text=True))[0];assert x['State']['Running']is False and x['State']['Pid']==0 and not x.get('ExecIDs')\nprint('R4_RELEASE_VERIFIED',flush=True)\nsubprocess.run(['/usr/bin/python3','-I','-B',str(p.parent/'owned_cpu.py'),'--source-audit','--source-ref',sys.argv[1]],check=True)\nargs=['/usr/bin/python3','-I','-B',str(p.parent/'owned_cpu.py'),'--execute','--source-ref',sys.argv[1],'--host-cpu','166','--guest-cpu','0','--output','/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-drift074repair2-MAIN-20261016-001'];os.execve(args[0],args,dict(os.environ))\n",
+            "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/SOURCE_MANIFEST.json\",\"bytes\":3219,\"sha256\":\"f55e503338704ddcc91f4d4357936a4d5fb76a57edde2b42090aea07437cb529\"}"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/python3",
+          "cwd": null,
+          "durationMs": 127110,
+          "error": null,
+          "exitCode": 0,
+          "id": "exec-0000000000000a9b",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "R4_RELEASE_VERIFIED\n{\"source\": {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/SOURCE_MANIFEST.json\", \"bytes\": 3219, \"sha256\": \"f55e503338704ddcc91f4d4357936a4d5fb76a57edde2b42090aea07437cb529\"}, \"readset\": [{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json\", \"bytes\": 52969, \"sha256\": \"b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21\"}, {\"path\": \"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001/numeric/result/RESULT.json\", \"bytes\": 100542, \"sha256\": \"4a5b125780618a6020e2d2bf619be1e4258dbafd9b7699bfe52aabc16fa12caa\"}, {\"bytes\": 3407, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/oracle.py\", \"sha256\": \"cd395a05dbfcb21f1104d617afb1fab6f80374016585e9096ca24d85c2cae97a\"}, {\"bytes\": 3592, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/raw_codec.py\", \"sha256\": \"4eb6bb0d5488cd1dfc3f2cb6c0f063d11b83ce07dbf594010c1d7554d844cd0e\"}, {\"bytes\": 6869, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/consume.py\", \"sha256\": \"4c2c290181cee3d8c41dcac11fcc1d5dfd5d939c90d171fcf028950494e8a2c4\"}, {\"bytes\": 1205, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/bridge_io.py\", \"sha256\": \"d62b550decb1b2f8d6735dc386ba5e4969c828685416289671cc175316af5331\"}, {\"bytes\": 5543, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/storage061.py\", \"sha256\": \"ca8c1ee593cb94825736dca93f28834c720bb8baccaa3c65adcfa3f4c956161c\"}, {\"bytes\": 10617, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/sealed_storage069.py\", \"sha256\": \"897999182145efb9088855c2059a94d9ae0fcc28e6666d842fec65013aef9304\"}, {\"bytes\": 773, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/window056.py\", \"sha256\": \"9d8f7265a84259e7b4ac7380a76723339ec39973fd35e8d9ede9beaf575a0aff\"}], \"resources_admitted\": false, \"NPU\": false}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 412,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 412,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 412
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 411,
+          "routeLookupMs": 0,
+          "totalMs": 411
+        }
+      },
+      "traceId": "a323534d-bc83-4aaf-9d27-b36ba7932c20"
+    },
+    "operationId": "exec-0000000000000a9b",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": true,
+    "terminal": true
+  },
+  "isError": false
+}

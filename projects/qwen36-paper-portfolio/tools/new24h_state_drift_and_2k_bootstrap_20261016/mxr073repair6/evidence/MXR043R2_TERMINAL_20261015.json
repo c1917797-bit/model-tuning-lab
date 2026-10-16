@@ -1,0 +1,91 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1",
+          "/usr/bin/python3",
+          "-I",
+          "-B",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/mxr-working-domain-model-new48h-v1-043-repair2/host_ticket.py",
+          "--execute",
+          "--source-sha256",
+          "aba2ee727ab910f775028ec1ec9745b3fd06b57da133a14b059ff905badb7595",
+          "--prerequisite-ref",
+          "{\"bytes\":136215,\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_MXR039_PREREQUISITE_043_001.json\",\"sha256\":\"f620ae4bc10577465bff7fbb3af67ce424f2cca7c09805aa13f5f55dfce525f4\"}"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/env",
+        "cwd": null,
+        "durationMs": 613836,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000920",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"result\": \"/opt/host/vnf/austinov/run-mxr-working-domain-model043-repair2-main-NEW48H_001/RESULT.json\", \"status\": \"ACTUAL004_ONCE_SHORT48_CONSUMED_NOT_MODEL\"}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "https://agentweb-tpc.yxsbase.win",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 931,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 931,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 931
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 348,
+        "routeLookupMs": 0,
+        "totalMs": 348
+      }
+    },
+    "traceId": "ed6cd3cd-439f-4edf-abed-eea539599773"
+  },
+  "operationId": "exec-0000000000000920",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}

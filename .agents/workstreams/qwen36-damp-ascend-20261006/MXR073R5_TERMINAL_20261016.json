@@ -1,0 +1,100 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": \"exit code\",\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": false,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1\",\n          \"/usr/bin/python3\",\n          \"-I\",\n          \"-B\",\n          \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair5/host_ticket.py\",\n          \"--execute\",\n          \"--source-sha256\",\n          \"3b2b7988254d15dd2100ccad97fd0aae0c8179c70724072cc00f2e3bb88b8eed\",\n          \"--prerequisite-ref\",\n          \"{\\\"path\\\":\\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_MXR039_PREREQUISITE_043_001.json\\\",\\\"bytes\\\":136215,\\\"sha256\\\":\\\"f620ae4bc10577465bff7fbb3af67ce424f2cca7c09805aa13f5f55dfce525f4\\\"}\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/env\",\n        \"cwd\": \"/opt/host/vnf/austinov/model-tuning-lab\",\n        \"durationMs\": 135926,\n        \"error\": \"exit code\",\n        \"exitCode\": 1,\n        \"id\": \"exec-0000000000000aa8\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"Traceback (most recent call last):\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair5/host_ticket.py\\\", line 157, in <module>\\n    if __name__=='__main__':raise SystemExit(main())\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair5/host_ticket.py\\\", line 156, in main\\n    return h.main(['--execute','--source-sha256',a.source_sha256])\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\\\", line 434, in main\\n    if __name__ == \\\"__main__\\\":\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\\\", line 404, in run\\n    return 0\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\\\", line 287, in run\\n    canary = c.obj(c.ref(ctl.out / \\\"CANARY.json\\\"))\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\\\", line 201, in child\\n    return c.write(ctl.out / (label + \\\"-CHILD.json\\\"), dict(argv=command, host_pid=process.pid, exit_code=process.returncode,\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\\\", line 46, in need\\n    raise ValueError(why)\\nValueError: original child failure retained: all4-canary\\n\",\n        \"stdout\": \"\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 413,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 413,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 413\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 413,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 413\n      }\n    },\n    \"traceId\": \"dad8bf51-c136-48d3-9bbe-3c73b34f1989\"\n  },\n  \"operationId\": \"exec-0000000000000aa8\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": false,\n  \"terminal\": true\n}"
+    }
+  ],
+  "structuredContent": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": "exit code",
+    "found": true,
+    "kind": "exec",
+    "ok": false,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1",
+            "/usr/bin/python3",
+            "-I",
+            "-B",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair5/host_ticket.py",
+            "--execute",
+            "--source-sha256",
+            "3b2b7988254d15dd2100ccad97fd0aae0c8179c70724072cc00f2e3bb88b8eed",
+            "--prerequisite-ref",
+            "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/MAIN_MXR039_PREREQUISITE_043_001.json\",\"bytes\":136215,\"sha256\":\"f620ae4bc10577465bff7fbb3af67ce424f2cca7c09805aa13f5f55dfce525f4\"}"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/env",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 135926,
+          "error": "exit code",
+          "exitCode": 1,
+          "id": "exec-0000000000000aa8",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "Traceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair5/host_ticket.py\", line 157, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair5/host_ticket.py\", line 156, in main\n    return h.main(['--execute','--source-sha256',a.source_sha256])\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 434, in main\n    if __name__ == \"__main__\":\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 404, in run\n    return 0\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 287, in run\n    canary = c.obj(c.ref(ctl.out / \"CANARY.json\"))\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 201, in child\n    return c.write(ctl.out / (label + \"-CHILD.json\"), dict(argv=command, host_pid=process.pid, exit_code=process.returncode,\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 46, in need\n    raise ValueError(why)\nValueError: original child failure retained: all4-canary\n",
+          "stdout": "",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 413,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 413,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 413
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 413,
+          "routeLookupMs": 0,
+          "totalMs": 413
+        }
+      },
+      "traceId": "dad8bf51-c136-48d3-9bbe-3c73b34f1989"
+    },
+    "operationId": "exec-0000000000000aa8",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": false,
+    "terminal": true
+  },
+  "isError": false
+}

@@ -1,0 +1,91 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "-I",
+          "-B",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/mainhost.py",
+          "--source-ref",
+          "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-owned-new48h-v1-044/SOURCE_MANIFEST.json\",\"bytes\":5170,\"sha256\":\"d100bb49caa60744858c4d9c03cfc1eb28ad00e2742d77357395f3a7de941df0\"}",
+          "--execute",
+          "--cpu-preflight-ref",
+          "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-block-refinement044-CPU_001/RESULT.json\",\"bytes\":432543,\"sha256\":\"81eb3115573cbcf2cbc651b55cd9e4242b81f3f5a40ab578b2e182ac7584f47e\"}",
+          "--output",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-block-refinement044-NPU_001"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/python3",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 444209,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-0000000000000934",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "MAIN_MXR_SAVED020 {\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-block-refinement044-NPU_001/RESULT.json\", \"sha256\": \"ee087fdaa81cdf59d51ac83d149e32247df4a5f51b88dbc5a89977bf51604704\", \"bytes\": 433277}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 344,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 344,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 344
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 344,
+        "routeLookupMs": 0,
+        "totalMs": 344
+      }
+    },
+    "traceId": "291d92cf-c409-46f9-877e-90440a0f6a35"
+  },
+  "operationId": "exec-0000000000000934",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}
