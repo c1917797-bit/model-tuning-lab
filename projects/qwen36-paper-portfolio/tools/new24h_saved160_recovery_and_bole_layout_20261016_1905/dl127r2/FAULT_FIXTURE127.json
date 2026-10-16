@@ -1,0 +1,386 @@
+{
+  "bundle": {
+    "inspect": {
+      "consumer": {
+        "projection": {
+          "ExecIDs": null,
+          "devices": [],
+          "id": "3457a8dd4e431927148bbd2e06f715d350ac2f353d99461cdc5f6863cff4fae2",
+          "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+          "observed_utc": "2026-10-16T18:42:40Z",
+          "owner": "deltalog-split-scale-numeric-new24h-MAIN-069-repair1",
+          "schema": "deltalog.actual-quiescent-container-inspection/v1",
+          "source_sha256": "871c8e32831ee3eebacd43a084e4416bb14d6d06cd9f5ee08017ba459f287cd8",
+          "state": {
+            "Dead": false,
+            "Error": "",
+            "ExitCode": 1,
+            "FinishedAt": "2026-10-16T18:37:28.07194617Z",
+            "OOMKilled": false,
+            "Paused": false,
+            "Pid": 0,
+            "Restarting": false,
+            "Running": false,
+            "StartedAt": "2026-10-16T18:27:37.52680023Z",
+            "Status": "exited"
+          }
+        },
+        "ref": {
+          "bytes": 697,
+          "path": "/opt/host/vnf/austinov/run-dl088r6r2-consumer-fault-evidence-MAIN-20261016-001/consumer-inspect.json",
+          "sha256": "376d7145953a4155a05ad0f03e5be378152d67adb893840f4b97af812e84a8d3"
+        }
+      },
+      "numeric": {
+        "projection": {
+          "ExecIDs": null,
+          "devices": [
+            {
+              "CgroupPermissions": "rwm",
+              "PathInContainer": "/dev/davinci0",
+              "PathOnHost": "/dev/davinci5"
+            },
+            {
+              "CgroupPermissions": "rwm",
+              "PathInContainer": "/dev/davinci_manager",
+              "PathOnHost": "/dev/davinci_manager"
+            },
+            {
+              "CgroupPermissions": "rwm",
+              "PathInContainer": "/dev/devmm_svm",
+              "PathOnHost": "/dev/devmm_svm"
+            },
+            {
+              "CgroupPermissions": "rwm",
+              "PathInContainer": "/dev/hisi_hdc",
+              "PathOnHost": "/dev/hisi_hdc"
+            }
+          ],
+          "id": "04b83ff30be859ad047756173355633c01cf430a6a35ed00824aea6a7a6e6155",
+          "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+          "observed_utc": "2026-10-16T18:42:40Z",
+          "owner": "deltalog-split-scale-numeric-new24h-MAIN-069-repair1",
+          "schema": "deltalog.actual-quiescent-container-inspection/v1",
+          "source_sha256": "871c8e32831ee3eebacd43a084e4416bb14d6d06cd9f5ee08017ba459f287cd8",
+          "state": {
+            "Dead": false,
+            "Error": "",
+            "ExitCode": 0,
+            "FinishedAt": "2026-10-16T18:25:58.34896504Z",
+            "OOMKilled": false,
+            "Paused": false,
+            "Pid": 0,
+            "Restarting": false,
+            "Running": false,
+            "StartedAt": "2026-10-16T18:15:42.66692281Z",
+            "Status": "exited"
+          }
+        },
+        "ref": {
+          "bytes": 1099,
+          "path": "/opt/host/vnf/austinov/run-dl088r6r2-consumer-fault-evidence-MAIN-20261016-001/numeric-inspect.json",
+          "sha256": "d42922a4ba3d43e9eda4e6ff5dbda09664786cc39dadbe090556844327a877a1"
+        }
+      }
+    },
+    "refs": {
+      "consumer_cleanup": {
+        "bytes": 246,
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/native/cleanup-verdict.json",
+        "sha256": "2a837a246b37b79c7a21c8e6d1a75837993553c3cd4291f02ae26482ef8a5508"
+      },
+      "first_child": {
+        "bytes": 1002,
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/native/CHILD-01-consume.json",
+        "sha256": "0a9f82138e34364b5006c2cc2c0dfb0f2f1efb2edcbcc2e424a1a8302d51e064"
+      },
+      "logs": {
+        "bytes": 3984,
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/native/actual-container-logs.json",
+        "sha256": "66959fe40baa9643282dc9ab4d008348da8a2d5d8a71918e6dd81e69de178668"
+      },
+      "numeric_cleanup": {
+        "bytes": 246,
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/numeric/cleanup-verdict.json",
+        "sha256": "34326b7c8e3d3631f3638ad066e1a8eb98c363d09eb9191646a39ea40910f831"
+      },
+      "owner": {
+        "bytes": 1511,
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json",
+        "sha256": "c336a6b4b9f071e349147fe71037651fd628388246dd973d7be342381a45f908"
+      },
+      "producer": {
+        "bytes": 347970,
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/numeric/result/RESULT.json",
+        "sha256": "4267cee56e85a860585bda723383b9c85d497cb51f0d183b938f23ab461c1f20"
+      },
+      "source": {
+        "bytes": 67429,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_MANIFEST.json",
+        "sha256": "871c8e32831ee3eebacd43a084e4416bb14d6d06cd9f5ee08017ba459f287cd8"
+      },
+      "strict": {
+        "bytes": 3777,
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/native/ORIGINAL_INDEPENDENT.json",
+        "sha256": "f8716bf2350c264998a829ac99d7823bffc881009d1b6b96b5f36ff52ef84162"
+      }
+    },
+    "schema": "deltalog.actual160-consumer-fault-readonly-evidence/v1",
+    "small_documents": {
+      "consumer_cleanup": {
+        "cid": "3457a8dd4e431927148bbd2e06f715d350ac2f353d99461cdc5f6863cff4fae2",
+        "errors": [],
+        "resource_release_verified": true,
+        "retained": true,
+        "rm_authorized": false,
+        "secondary_guard_cleanup": [],
+        "stopped": true,
+        "unresolved_active_cid": null
+      },
+      "first_child": {
+        "argv": [
+          "/usr/local/python3.12.13/bin/python3",
+          "-I",
+          "-B",
+          "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/raw_reader_entry.py",
+          "--script",
+          "consume.py",
+          "--execute",
+          "--source-ref",
+          "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_MANIFEST.json\", \"bytes\": 67429, \"sha256\": \"871c8e32831ee3eebacd43a084e4416bb14d6d06cd9f5ee08017ba459f287cd8\"}",
+          "--producer-ref",
+          "{\"bytes\": 347970, \"path\": \"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/numeric/result/RESULT.json\", \"sha256\": \"4267cee56e85a860585bda723383b9c85d497cb51f0d183b938f23ab461c1f20\"}",
+          "--output",
+          "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/native/ORIGINAL_INDEPENDENT.json"
+        ],
+        "returncode": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "logs": {
+        "aggregate_peak_rss_kib": 296856,
+        "argv": [
+          "/usr/bin/prlimit",
+          "--as=unlimited",
+          "--",
+          "/usr/bin/docker",
+          "logs",
+          "--timestamps",
+          "--tail",
+          "10000",
+          "3457a8dd4e431927148bbd2e06f715d350ac2f353d99461cdc5f6863cff4fae2"
+        ],
+        "child_peak_rss_kib": 148428,
+        "exit_code": 0,
+        "host_RLIMIT_AS": [
+          536870912,
+          -1
+        ],
+        "host_peak_rss_kib": 148428,
+        "observed_utc": "2026-10-16T18:38:15.592767+00:00",
+        "requested_argv": [
+          "/usr/bin/docker",
+          "logs",
+          "--timestamps",
+          "--tail",
+          "10000",
+          "3457a8dd4e431927148bbd2e06f715d350ac2f353d99461cdc5f6863cff4fae2"
+        ],
+        "stderr": "2026-10-16T18:37:28.049252010Z Traceback (most recent call last):\n2026-10-16T18:37:28.049319150Z   File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/consume_pair.py\", line 31, in <module>\n2026-10-16T18:37:28.049456790Z     if __name__=='__main__':raise SystemExit(main())\n2026-10-16T18:37:28.049538320Z                                              ^^^^^^\n2026-10-16T18:37:28.049545830Z   File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/consume_pair.py\", line 24, in main\n2026-10-16T18:37:28.049658360Z     child('run_consumer088.py',['--output',str(domain)]);d=C.obj(C.ref(domain))\n2026-10-16T18:37:28.049739800Z     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-10-16T18:37:28.049747500Z   File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/consume_pair.py\", line 19, in child\n2026-10-16T18:37:28.049834010Z     r=subprocess.run(argv,capture_output=True,text=True,timeout=left);receipt=dict(argv=argv,returncode=r.returncode,stdout=r.stdout,stderr=r.stderr);commands.append(receipt)\n2026-10-16T18:37:28.049911580Z       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-10-16T18:37:28.049918220Z   File \"/usr/local/python3.12.13/lib/python3.12/subprocess.py\", line 550, in run\n2026-10-16T18:37:28.050833140Z     stdout, stderr = process.communicate(input, timeout=timeout)\n2026-10-16T18:37:28.050901330Z                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-10-16T18:37:28.050906380Z   File \"/usr/local/python3.12.13/lib/python3.12/subprocess.py\", line 1209, in communicate\n2026-10-16T18:37:28.051438930Z     stdout, stderr = self._communicate(input, endtime, timeout)\n2026-10-16T18:37:28.051491590Z                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n2026-10-16T18:37:28.051507880Z   File \"/usr/local/python3.12.13/lib/python3.12/subprocess.py\", line 2116, in _communicate\n2026-10-16T18:37:28.052334690Z     self._check_timeout(endtime, orig_timeout, stdout, stderr)\n2026-10-16T18:37:28.052378010Z   File \"/usr/local/python3.12.13/lib/python3.12/subprocess.py\", line 1253, in _check_timeout\n2026-10-16T18:37:28.052894350Z     raise TimeoutExpired(\n2026-10-16T18:37:28.052963810Z subprocess.TimeoutExpired: Command '['/usr/local/python3.12.13/bin/python3', '-I', '-B', '/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/raw_reader_entry.py', '--script', 'run_consumer088.py', '--execute', '--source-ref', '{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_MANIFEST.json\", \"bytes\": 67429, \"sha256\": \"871c8e32831ee3eebacd43a084e4416bb14d6d06cd9f5ee08017ba459f287cd8\"}', '--producer-ref', '{\"bytes\": 347970, \"path\": \"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/numeric/result/RESULT.json\", \"sha256\": \"4267cee56e85a860585bda723383b9c85d497cb51f0d183b938f23ab461c1f20\"}', '--output', '/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/native/DOMAIN088.json']' timed out after 585.6111058300012 seconds\n",
+        "stdout": ""
+      },
+      "numeric_cleanup": {
+        "cid": "04b83ff30be859ad047756173355633c01cf430a6a35ed00824aea6a7a6e6155",
+        "errors": [],
+        "resource_release_verified": true,
+        "retained": true,
+        "rm_authorized": false,
+        "secondary_guard_cleanup": [],
+        "stopped": true,
+        "unresolved_active_cid": null
+      },
+      "owner": {
+        "NPU": true,
+        "authority": {
+          "bytes": 3481,
+          "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+          "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+        },
+        "bridge_primitive_gate_pass": false,
+        "diagnostic_capture_complete": false,
+        "elapsed_seconds": 1670.5774413399631,
+        "full_gdn_qualified": false,
+        "independent_consumer": null,
+        "model_ready": false,
+        "phase_seconds": 2880,
+        "physical": [
+          5
+        ],
+        "primary": "independent consumer ValueError('actual GE child failed; preserved logs/raw')",
+        "resource_admitted": true,
+        "result": {
+          "bytes": 347970,
+          "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/numeric/result/RESULT.json",
+          "sha256": "4267cee56e85a860585bda723383b9c85d497cb51f0d183b938f23ab461c1f20"
+        },
+        "schema": "deltalog.diagnostic-owned-host/v035",
+        "secondary": [],
+        "source": {
+          "bytes": 67429,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_MANIFEST.json",
+          "sha256": "871c8e32831ee3eebacd43a084e4416bb14d6d06cd9f5ee08017ba459f287cd8"
+        },
+        "stage": "numeric",
+        "steps": 160,
+        "stopped_retained": true,
+        "target_source": {
+          "bytes": 67429,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_MANIFEST.json",
+          "sha256": "871c8e32831ee3eebacd43a084e4416bb14d6d06cd9f5ee08017ba459f287cd8"
+        }
+      },
+      "strict": {
+        "NPU_reexecuted": false,
+        "actual_native_copy_primitive_qualified": false,
+        "actual_native_copy_qualified": false,
+        "actual_prefill_CPU64_qualified": false,
+        "actual_result": {
+          "bytes": 347970,
+          "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/numeric/result/RESULT.json",
+          "sha256": "4267cee56e85a860585bda723383b9c85d497cb51f0d183b938f23ab461c1f20"
+        },
+        "copy_factory_qualified": false,
+        "graph": false,
+        "model_ready": false,
+        "observation_complete": true,
+        "pass_gate": false,
+        "primary": "ValueError('independent raw numerical/bitwise gate')",
+        "producer": {
+          "bytes": 347970,
+          "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/numeric/result/RESULT.json",
+          "sha256": "4267cee56e85a860585bda723383b9c85d497cb51f0d183b938f23ab461c1f20"
+        },
+        "rows": [
+          {
+            "identity": {
+              "batch": 1,
+              "kind": "dead_flush"
+            },
+            "independent": {
+              "foreign_unchanged": true,
+              "length0": true,
+              "partial_live": false,
+              "state_error": 0
+            },
+            "raw": {
+              "bytes": 24813,
+              "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/numeric/result/dead-flush-000.pt",
+              "sha256": "b2d271867a4a12e46e6ca84e98d1dc772864bc3a36fa553cf10f370b4c24987b"
+            }
+          },
+          {
+            "identity": {
+              "batch": 1,
+              "kind": "dead_flush"
+            },
+            "independent": {
+              "foreign_unchanged": true,
+              "length0": false,
+              "partial_live": true,
+              "state_error": 3.756831436274296e-08
+            },
+            "raw": {
+              "bytes": 24813,
+              "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/numeric/result/dead-flush-001.pt",
+              "sha256": "60170e59dae1023e6ea3e1f22dc8e1a87a7fe2cb79895cadce191dba721762f7"
+            }
+          },
+          {
+            "identity": {
+              "batch": 16,
+              "kind": "dead_flush"
+            },
+            "independent": {
+              "foreign_unchanged": true,
+              "length0": true,
+              "partial_live": false,
+              "state_error": 0
+            },
+            "raw": {
+              "bytes": 141229,
+              "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/numeric/result/dead-flush-002.pt",
+              "sha256": "6536f65ee4d0967473ccf23c245c05cfb4db6ff5f62c600dab8ab236a792f393"
+            }
+          },
+          {
+            "identity": {
+              "batch": 16,
+              "kind": "dead_flush"
+            },
+            "independent": {
+              "foreign_unchanged": true,
+              "length0": false,
+              "partial_live": true,
+              "state_error": 3.8596945128184305e-08
+            },
+            "raw": {
+              "bytes": 141229,
+              "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/numeric/result/dead-flush-003.pt",
+              "sha256": "91d0894516c4edee9261ed4b3bb3592aefcf8954759432167d6804b196e6f629"
+            }
+          },
+          {
+            "identity": {
+              "batch": 1,
+              "kind": "mixed",
+              "producer_old_BF16_point_diagnostic_only": true,
+              "producer_old_BF16_point_pass": true,
+              "producer_output_error": 0,
+              "producer_state_error": 4.2473354567054226e-08,
+              "step": 0
+            },
+            "independent": {
+              "conv_bitwise": true,
+              "decode": [
+                {
+                  "output_error": 0.0030743712147321984,
+                  "state_error": 4.0029420662999936e-09
+                }
+              ],
+              "guard_bitwise": true,
+              "inputs_bitwise": true,
+              "output_error": 0,
+              "pointers_bitwise": true,
+              "prefill": [
+                {
+                  "output_error": 0.003937089812300624,
+                  "state_error": 0.0023174649437497025
+                }
+              ],
+              "prefill_aux_reset_bitwise": true,
+              "state_error": 4.247335456705264e-08,
+              "untouched_bitwise": true
+            },
+            "raw": {
+              "bytes": 288429,
+              "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/numeric/result/mixed-B1-000.pt",
+              "sha256": "9af4ffed27ea5d7ef9baf488d48fa1cd4cae9b6e0d63c28cca2107c54691ba12"
+            }
+          }
+        ],
+        "schema": "deltalog.fresh-bridge-consumption/v5",
+        "source": {
+          "bytes": 67429,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_MANIFEST.json",
+          "sha256": "871c8e32831ee3eebacd43a084e4416bb14d6d06cd9f5ee08017ba459f287cd8"
+        }
+      }
+    },
+    "utc": "2026-10-16T18:42:40Z"
+  },
+  "bundle_ref": {
+    "bytes": 15353,
+    "path": "/opt/host/vnf/austinov/run-dl088r6r2-consumer-fault-evidence-MAIN-20261016-001/ACTUAL_EVIDENCE.json",
+    "sha256": "cc4ea59d1c90f43f0513585dc731aa53380598dd287646434a742eb8d2d5b81e"
+  }
+}

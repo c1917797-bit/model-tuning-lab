@@ -1,0 +1,149 @@
+{
+  "actual081_owner_source": {
+    "bytes": 16408,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-owned-new24h-v1-081/owner081.py",
+    "sha256": "52f15613bb42ecfb23672be1ae4ba9211652da03d034233f49a8a1551912faae"
+  },
+  "actual_NPU": false,
+  "actual_failure_refs": [
+    {
+      "bytes": 1515,
+      "path": "/opt/host/vnf/austinov/run-mxr-prefill084-npu-MAIN-20261016-001/top-child-departure-1792148857753890680.json",
+      "sha256": "8fc4b0c669142e7ec5203674b8471ff2e4b18ff59c27379db1510d28d9326cb9"
+    },
+    {
+      "bytes": 52153,
+      "path": "/opt/host/vnf/austinov/run-mxr-prefill084-npu-MAIN-20261016-001/protected-ownership-1792148857774710100.json",
+      "sha256": "da0d9827ac5a47c5e86a9c1d75e4d815c2c652e537f57e7fa05eaee284366f0d"
+    }
+  ],
+  "actual_sameimage_CPU": false,
+  "authority_ref": {
+    "bytes": 3481,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "cpu_mount_repair": {
+    "algorithm_changed": false,
+    "budgets_changed": false,
+    "explicit_donor_host_RO": true,
+    "guest_byteidentical": true,
+    "original_failure_retained": true,
+    "shared_original069_controller_closure": true,
+    "thresholds_changed": false
+  },
+  "default_enabled": false,
+  "dependencies": {
+    "cpu": {
+      "bytes": 5043,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/deltalog-v7-20261014-001/cpu_capacity.py",
+      "sha256": "992cfcb419eabbf69902f9358c703815c268d3f99b00ae9e410a291d374d456d"
+    },
+    "host": {
+      "bytes": 33743,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+      "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86"
+    },
+    "old": {
+      "bytes": 16517,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py",
+      "sha256": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc"
+    },
+    "pipeline": {
+      "bytes": 40280,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/deltalog-v7-20261014-001/pipeline.py",
+      "sha256": "1df9ce6cac75b68e0f8781c40a2445887a00494941c9cde9488abafe735ab07c"
+    }
+  },
+  "donor": {
+    "bytes": 14382,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/owned_cpu.py",
+    "sha256": "b137dd6c69b20bd0a79d8f87cd2edb36d09951c7a64bc0a821919d28671b9e75"
+  },
+  "donor_host": {
+    "bytes": 24497,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/host.py",
+    "sha256": "16146338e86c893925469b5207db8a172805dc9d897a71c812ca1d445ddad13f"
+  },
+  "files": {
+    "cpu_entry120.py": {
+      "bytes": 3296,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/cpu_entry120.py",
+      "sha256": "3e4a20917b882fa7e765aec704f57028009ff0416b95345f69efa26071e4648b"
+    },
+    "evidence/ACTUAL_PROTECTED_OWNERSHIP.json": {
+      "bytes": 52153,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/evidence/ACTUAL_PROTECTED_OWNERSHIP.json",
+      "sha256": "da0d9827ac5a47c5e86a9c1d75e4d815c2c652e537f57e7fa05eaee284366f0d"
+    },
+    "evidence/FIRST_TRANSITION.json": {
+      "bytes": 1515,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/evidence/FIRST_TRANSITION.json",
+      "sha256": "8fc4b0c669142e7ec5203674b8471ff2e4b18ff59c27379db1510d28d9326cb9"
+    },
+    "owned_cpu120.py": {
+      "bytes": 16160,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/owned_cpu120.py",
+      "sha256": "d159e841da16994095a9e5db9fc625f46fdfebc94f2ad557b577d8799b692a2a"
+    },
+    "owner120.py": {
+      "bytes": 16324,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/owner120.py",
+      "sha256": "2d62572c76864e2fa8eff3b4c89aaed861e12aa7434aaec4b47418f0bed55ecf"
+    },
+    "test_guard092.py": {
+      "bytes": 4217,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/test_guard092.py",
+      "sha256": "fb536d16a2aaaadee19c0180164b5773458e38b1723e0857b2072342a11b1e01"
+    },
+    "test_owner120.py": {
+      "bytes": 6517,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/test_owner120.py",
+      "sha256": "fca40a5ae08c3f6c334606c72fda6bc36d75fadd77374ff81c43c26a837239d5"
+    },
+    "top_guard092.py": {
+      "bytes": 7775,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/top_guard092.py",
+      "sha256": "04ef8acc591f52363947c605f6faa2a0bce4d16492a0e907db8719fc322764dd"
+    }
+  },
+  "guard_control_cases": 15,
+  "guest_source": {
+    "bytes": 10540,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125/SOURCE_MANIFEST.json",
+    "sha256": "5d58239b6fa814dbbd616aad75df51d407d0b1075515fbadf964ba8c37e72417"
+  },
+  "logical": 0,
+  "output_policy": {
+    "DL_ledger_used": false,
+    "automatic_cleanup": false,
+    "exclusive_new_leaf": true,
+    "old_roots_unchanged": true,
+    "parent": "/opt/host/vnf/austinov",
+    "prefix": "run-mxr-third-residual125-"
+  },
+  "physical": 5,
+  "predecessor_failed_source": {
+    "bytes": 4577,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-086/SOURCE_MANIFEST.json",
+    "sha256": "4e538895161fed511db843d4acc873204117163c04a3e0a881cc585c16781dc0"
+  },
+  "qualified": false,
+  "resource": {
+    "CPUwhole_seconds": 1000,
+    "NPUwhole_seconds": 900,
+    "child_seconds": 600,
+    "cleanup_seconds": 90,
+    "guest_bytes": 8589934592,
+    "host_bytes": 536870912,
+    "initial_RAM_bytes": 17716740096,
+    "initial_disk_bytes": 34359738368,
+    "live_disk_reserve_bytes": 9126805504,
+    "output_cap_bytes": 1073741824,
+    "reserve_bytes": 8589934592
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned",
+  "schema": "mxr.r5-prefill-counterfactual-owned-source/v120",
+  "software_cases": 38,
+  "whole_qualification": false
+}

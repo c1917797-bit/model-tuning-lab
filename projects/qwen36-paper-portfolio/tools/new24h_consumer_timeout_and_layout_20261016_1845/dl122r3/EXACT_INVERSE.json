@@ -1,0 +1,37 @@
+{
+  "context_delta": "one source-bound common106.apply_precision before health; HF32/deterministic facts before/after health/load; both-arm receipt join; no deterministic setting changes",
+  "metadata_only_output_identity": {
+    "new": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-production-pair-new24h-v1-122-repair3",
+    "old": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-production-pair-new24h-v1-122-repair2"
+  },
+  "numerical_replay_For_Try_AST_exact": true,
+  "prior_template": {
+    "bytes": 20854,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-production-pair-new24h-v1-122-repair2/SOURCE_TEMPLATE.json",
+    "sha256": "3a493058ccf02c324c83f7cbe4d13e11471ca21d02ad827e484493f71e4e6cd8"
+  },
+  "resource_window_workload_unchanged": true,
+  "shared106_all_files_unchanged": true,
+  "untouched_bytes": [
+    "bind122.py",
+    "cap48_provider.py",
+    "cpu_preflight.py",
+    "dependencies/benchmark_shared_prefix.py",
+    "dependencies/original005_server_entry.py",
+    "dependencies/original025_host_once.py",
+    "dependencies/original025_model_contract.py",
+    "dependencies/original025_safety_host.py",
+    "dependencies/publication_common.py",
+    "dl_pair_policy122-0.0.122.dist-info/METADATA",
+    "dl_pair_policy122-0.0.122.dist-info/entry_points.txt",
+    "guest_canary.py",
+    "owned_create.py",
+    "owned_substrate.py",
+    "pair_consume.py",
+    "pair_metrics122.py",
+    "paired_driver.py",
+    "server_entry.py",
+    "snapshot_publication.py",
+    "source_audit.py"
+  ]
+}

@@ -1,0 +1,542 @@
+{
+  "actual_118c": {
+    "capture": {
+      "bytes": 9843,
+      "path": "/opt/host/vnf/austinov/run-bole-native-conv-calibration118-MAIN-20261016-001/mask/numeric/numeric/result/conv/STAGE_RESULT.json",
+      "sha256": "673b5cdb02f78c24352bae8b927f18db9c2957e7642a1a6bc28ff4483e01392b"
+    },
+    "consumer": {
+      "bytes": 8221,
+      "path": "/opt/host/vnf/austinov/run-bole-native-conv-calibration118-MAIN-20261016-001/mask/consumer/ATTRIBUTION.json",
+      "sha256": "9f8e09a43c3cf4cb6158d6559b8471b57867012f2b433d9d108c85e23f5a72b7"
+    },
+    "consumer_owner": {
+      "bytes": 1254,
+      "path": "/opt/host/vnf/austinov/run-bole-native-conv-calibration118-MAIN-20261016-001/mask/consumer/RESULT.json",
+      "sha256": "143a6dcec375074e56bde2c29bae553c2fad8b82a6c4c271bfc9604f27d4d364"
+    },
+    "numeric_owner": {
+      "bytes": 1707,
+      "path": "/opt/host/vnf/austinov/run-bole-native-conv-calibration118-MAIN-20261016-001/mask/numeric/RESULT.json",
+      "sha256": "7d176f42e2879b182af497dc769b7aa0cfc4204378fa2b2ef9e839d65d1f6b07"
+    },
+    "source": {
+      "bytes": 20510,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-native-conv-calibration-owned-new24h-v1-118-001/SOURCE_MANIFEST.json",
+      "sha256": "82b39cbfa73e6f78e2a48c7760fbeba33e84b911b0fa036f710728bc46e4c982"
+    },
+    "stage": {
+      "bytes": 1494,
+      "path": "/opt/host/vnf/austinov/run-bole-native-conv-calibration118-MAIN-20261016-001/mask/numeric/numeric/result/STAGE_RESULT.json",
+      "sha256": "680f14e89be6a9f2c99ce2c82db01a278e8b59d88cd286e7c3da69fa8024304e"
+    }
+  },
+  "actual_FIA_work_seconds": 560,
+  "actual_abi_ref": null,
+  "authority_ref": {
+    "bytes": 3481,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "calibration_readset": [
+    {
+      "bytes": 16788,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-native-conv-abi-owned-new24h-v1-118-repair1/SOURCE_TEMPLATE.json",
+      "sha256": "1ac45860576c21aa178006ea4a4bcd6ddf4c39899f81c68cbc51a9e9d0b87393"
+    },
+    {
+      "bytes": 15498,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-native-conv-abi-owned-new24h-v1-118-repair1/SOURCE_MANIFEST.json",
+      "sha256": "25f7304b43e7cc0e58ac366915ae1c1b4207928a510d34524a0ec53784881a39"
+    },
+    {
+      "bytes": 1697,
+      "path": "/opt/host/vnf/austinov/run-bole-native-conv-abi118repair1-MAIN-20261016-001/mask/numeric/RESULT.json",
+      "sha256": "ca922daf549b27acfddc40247c70910c0b89b3f41fbe52c0b154ba7969344d53"
+    },
+    {
+      "bytes": 1491,
+      "path": "/opt/host/vnf/austinov/run-bole-native-conv-abi118repair1-MAIN-20261016-001/mask/numeric/numeric/result/STAGE_RESULT.json",
+      "sha256": "84c7b380de2cd220fbbc11427cc435889c84f6e4704217457df26cc9797ecde5"
+    },
+    {
+      "bytes": 4219,
+      "path": "/opt/host/vnf/austinov/run-bole-native-conv-abi118repair1-MAIN-20261016-001/mask/numeric/numeric/result/ACTUAL_DEVICE_CONV_ABI.json",
+      "sha256": "c68ec52dff3bda1162c891b26ac9d6fd8673aacff5c74c72f575ffcd3805dbf6"
+    },
+    {
+      "bytes": 1246,
+      "path": "/opt/host/vnf/austinov/run-bole-native-conv-abi118repair1-MAIN-20261016-001/mask/consumer/RESULT.json",
+      "sha256": "10467a7844177c07441e4067ffa42bcbe78677579ca5cb86293445cdf6d4f83f"
+    },
+    {
+      "bytes": 1592,
+      "path": "/opt/host/vnf/austinov/run-bole-native-conv-abi118repair1-MAIN-20261016-001/mask/consumer/ATTRIBUTION.json",
+      "sha256": "767eba4f9f02b901fdb81eb2517e96874a12c5641270341c462d1287a338f03b"
+    },
+    {
+      "bytes": 3493,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-installed-conv660-kernel-MAIN-20261016-001/op_host/causal_conv1d_def.cpp",
+      "sha256": "8bb47bb6be57184a94d2d220194e96aad8d9b6e5c43ee531d94d24ebfe6b90b7"
+    },
+    {
+      "bytes": 46361,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-installed-conv660-kernel-MAIN-20261016-001/op_kernel/causal_conv1d.h",
+      "sha256": "83af972763a708fce1b723106dcd243260fb3302c947d3a59ed34a868c6e0bf3"
+    },
+    {
+      "bytes": 4418,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-installed-conv660-kernel-MAIN-20261016-001/op_kernel/causal_conv1d_update.h",
+      "sha256": "1678810248bb470ac87769804ee8bd2b8682010184ae05b02d89b74f11e3f2ac"
+    },
+    {
+      "bytes": 2742,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-installed-conv660-kernel-MAIN-20261016-001/op_kernel/causal_conv1d.cpp",
+      "sha256": "3001e398478b3f532510b1b130e9ab2a97d9c12ec367437e49ed8f97fb7afb7b"
+    },
+    {
+      "bytes": 20510,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-native-conv-calibration-owned-new24h-v1-118-001/SOURCE_MANIFEST.json",
+      "sha256": "82b39cbfa73e6f78e2a48c7760fbeba33e84b911b0fa036f710728bc46e4c982"
+    },
+    {
+      "bytes": 1707,
+      "path": "/opt/host/vnf/austinov/run-bole-native-conv-calibration118-MAIN-20261016-001/mask/numeric/RESULT.json",
+      "sha256": "7d176f42e2879b182af497dc769b7aa0cfc4204378fa2b2ef9e839d65d1f6b07"
+    },
+    {
+      "bytes": 1494,
+      "path": "/opt/host/vnf/austinov/run-bole-native-conv-calibration118-MAIN-20261016-001/mask/numeric/numeric/result/STAGE_RESULT.json",
+      "sha256": "680f14e89be6a9f2c99ce2c82db01a278e8b59d88cd286e7c3da69fa8024304e"
+    },
+    {
+      "bytes": 9843,
+      "path": "/opt/host/vnf/austinov/run-bole-native-conv-calibration118-MAIN-20261016-001/mask/numeric/numeric/result/conv/STAGE_RESULT.json",
+      "sha256": "673b5cdb02f78c24352bae8b927f18db9c2957e7642a1a6bc28ff4483e01392b"
+    },
+    {
+      "bytes": 1254,
+      "path": "/opt/host/vnf/austinov/run-bole-native-conv-calibration118-MAIN-20261016-001/mask/consumer/RESULT.json",
+      "sha256": "143a6dcec375074e56bde2c29bae553c2fad8b82a6c4c271bfc9604f27d4d364"
+    },
+    {
+      "bytes": 8221,
+      "path": "/opt/host/vnf/austinov/run-bole-native-conv-calibration118-MAIN-20261016-001/mask/consumer/ATTRIBUTION.json",
+      "sha256": "9f8e09a43c3cf4cb6158d6559b8471b57867012f2b433d9d108c85e23f5a72b7"
+    }
+  ],
+  "cann_helper_ref": {
+    "bytes": 4503,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-d8-fp32-model-boundary-r87-v1-011/cann_python.py",
+    "sha256": "cee927f1107fe6714e86ab1dceecafeff800980a00b8df9fcc47ff6831ba5104"
+  },
+  "cleanup_seconds": 90,
+  "component_scope": "B1 root+two siblings, BNSD paged BnNBsD real D256 eight captures; no model qualification",
+  "composition112R4_original_ref": {
+    "bytes": 1945,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/patch_scope112.py",
+    "sha256": "a666bf5c001698f20f5f72368cc64834ef1b67b261dc495312bd0842347c3b34"
+  },
+  "composition112R4_template_ref": {
+    "bytes": 8034,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/evidence/SOURCE_TEMPLATE112R4.json",
+    "sha256": "d65e72d203bee43d3f2457373e4376f757fdcfa7bc9cdbebb92ec2fb57a20075"
+  },
+  "conv_ABI_collection_scope": "pending hardware-dependent normal GDN import; no conv qualification from FIA CPU",
+  "conv_gdn_ref": {
+    "bytes": 21887,
+    "path": "/vllm-workspace/vllm-ascend/vllm_ascend/ops/gdn.py",
+    "sha256": "d6ec29919268178f5bf6e70e689c1d273d04b1cb1d84dc94efa7bbbc35490816"
+  },
+  "default_enabled": false,
+  "dependencies": {
+    "cpu": {
+      "bytes": 5043,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/deltalog-v7-20261014-001/cpu_capacity.py",
+      "sha256": "992cfcb419eabbf69902f9358c703815c268d3f99b00ae9e410a291d374d456d"
+    },
+    "host": {
+      "bytes": 33743,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+      "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86"
+    },
+    "old": {
+      "bytes": 16517,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py",
+      "sha256": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc"
+    },
+    "pipeline": {
+      "bytes": 40280,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/deltalog-v7-20261014-001/pipeline.py",
+      "sha256": "1df9ce6cac75b68e0f8781c40a2445887a00494941c9cde9488abafe735ab07c"
+    }
+  },
+  "donor": {
+    "bytes": 14382,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/owned_cpu.py",
+    "sha256": "b137dd6c69b20bd0a79d8f87cd2edb36d09951c7a64bc0a821919d28671b9e75"
+  },
+  "donor_host": {
+    "bytes": 24497,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/host.py",
+    "sha256": "16146338e86c893925469b5207db8a172805dc9d897a71c812ca1d445ddad13f"
+  },
+  "donor_source": {
+    "bytes": 52969,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json",
+    "sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21"
+  },
+  "files": {
+    "abi115.py": {
+      "bytes": 1738,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/abi115.py",
+      "sha256": "a74a48e1d9186e885aa94797db8323852baff6b10103372fcd9747f143cf1edb"
+    },
+    "abi116.py": {
+      "bytes": 2679,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/abi116.py",
+      "sha256": "35c8e74621f67cfec676d1265b8f7fe2d949825d7443ee39a92c081a68e25b54"
+    },
+    "abi_device118.py": {
+      "bytes": 1820,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/abi_device118.py",
+      "sha256": "f0ffe67b424fb2fb4a7468bb304814ca661af52077a208f3b7c1df607cf55259"
+    },
+    "adapter.py": {
+      "bytes": 8622,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/adapter.py",
+      "sha256": "37369161fbadad74e0f727c62e769069277d6f2696f7a8b2d88d67e92d93dc59"
+    },
+    "bind116.py": {
+      "bytes": 971,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/bind116.py",
+      "sha256": "64108eaa3987566710655c76dea1463efab9b757de9049f387af0c0d9890ff5e"
+    },
+    "calibrate_conv118.py": {
+      "bytes": 5601,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/calibrate_conv118.py",
+      "sha256": "46d6d8e84d717f24b9ffcaf561649dc7b54c3a5b25102c3aa1b952c2b50367ed"
+    },
+    "calibration_pipeline118.py": {
+      "bytes": 3734,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/calibration_pipeline118.py",
+      "sha256": "e70e8f5b416a4e6a69584d048880bf5372b3f1904a901de941e3296f7b2d5396"
+    },
+    "collect_conv_abi.py": {
+      "bytes": 3777,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/collect_conv_abi.py",
+      "sha256": "8da3741f10084327a76e5000733edbd3c95ec5ef5d2fed1a883e30b43d9e98fd"
+    },
+    "common116.py": {
+      "bytes": 1541,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/common116.py",
+      "sha256": "c0d57b6c6355a01d076f6e6a4670b7d1520b390753ea4fdc8cb5cc8f386e7e1e"
+    },
+    "consume.py": {
+      "bytes": 6476,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/consume.py",
+      "sha256": "62c0584743e61af6efb2c52e61500787c7b3db2964d7e4e466336e5a7d42be4a"
+    },
+    "consume115.py": {
+      "bytes": 1883,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/consume115.py",
+      "sha256": "86e4bc3edcb701c47c24d988503afbed120e90d1b425f35977c02ce745092b8e"
+    },
+    "consume116.py": {
+      "bytes": 1277,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/consume116.py",
+      "sha256": "bb8268b7871c57399db411e774b59ad82a78e2bcca60d866d9402cf21a96a351"
+    },
+    "cpu116.py": {
+      "bytes": 3863,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/cpu116.py",
+      "sha256": "4ef95310e79b6f8cad333ddb08a54d65e2b6ed0543fbb7b67a4984cda1e73e3c"
+    },
+    "device_receipt_conv118.py": {
+      "bytes": 2492,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/device_receipt_conv118.py",
+      "sha256": "6b78647af2f507f20e5583a6f1ef3a90d96a0c5f62ce2a27cc90a7e17e402d7f"
+    },
+    "evidence/SOURCE_TEMPLATE112R1.json": {
+      "bytes": 6687,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/evidence/SOURCE_TEMPLATE112R1.json",
+      "sha256": "c2a64af4effbb27fc048c12e811f3990bdc0b203ef18d5212042e591e7021ed3"
+    },
+    "evidence/SOURCE_TEMPLATE112R2.json": {
+      "bytes": 7220,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/evidence/SOURCE_TEMPLATE112R2.json",
+      "sha256": "1ec342277b5591f7c2661608523d8abfbf5138771360799580d1faae52f9f9ff"
+    },
+    "evidence/SOURCE_TEMPLATE112R4.json": {
+      "bytes": 8034,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/evidence/SOURCE_TEMPLATE112R4.json",
+      "sha256": "d65e72d203bee43d3f2457373e4376f757fdcfa7bc9cdbebb92ec2fb57a20075"
+    },
+    "evidence/SOURCE_TEMPLATE115.json": {
+      "bytes": 2546,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/evidence/SOURCE_TEMPLATE115.json",
+      "sha256": "5584c814bf07f71e38fbb6ecde1918d787381a5f7645c882242ce3a6107d5235"
+    },
+    "evidence/SOURCE_TEMPLATE116.json": {
+      "bytes": 10725,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/evidence/SOURCE_TEMPLATE116.json",
+      "sha256": "679492fb8917c6917c83b3aaaaf2d2f7bcbd88963fe3a35b434aae1a08b563cc"
+    },
+    "evidence/ascend_attention.py": {
+      "bytes": 88246,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/evidence/ascend_attention.py",
+      "sha256": "80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390"
+    },
+    "evidence/cann91_fia_v3.h": {
+      "bytes": 4092,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/evidence/cann91_fia_v3.h",
+      "sha256": "9a81016fd92bd20dd91a35b1dbf2078242b5141a590dc59f77a62a52308afc0b"
+    },
+    "evidence/registration-platform.py": {
+      "bytes": 62514,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/evidence/registration-platform.py",
+      "sha256": "30c75952f784c4d047d7202dd7f68c8fc7c22bb975853a5048fb51ffcbe1f2a8"
+    },
+    "evidence/registration-utils.py": {
+      "bytes": 67646,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/evidence/registration-utils.py",
+      "sha256": "575b45d684eabdb7ac3195d33de48bd5f3233081f78886c08be92a4a2fd2fc02"
+    },
+    "evidence/registration-worker.py": {
+      "bytes": 48290,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/evidence/registration-worker.py",
+      "sha256": "c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3"
+    },
+    "guest116.py": {
+      "bytes": 4198,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/guest116.py",
+      "sha256": "6c9fcddeea8840d482e36871144f0b7dbe8d539a9319ea23f9a34d3c01d51cf3"
+    },
+    "historical/SOURCE_TEMPLATE118t.json": {
+      "bytes": 27166,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/historical/SOURCE_TEMPLATE118t.json",
+      "sha256": "01413a95b27110d6e49e3b7f567faea51bdb35c136a46bb9dfea9f5020ea683f"
+    },
+    "kernel_contract118.py": {
+      "bytes": 1104,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/kernel_contract118.py",
+      "sha256": "606978e1436f7833bc79034de520a719bf149ab9fe6700b7ee25086989c58da4"
+    },
+    "owned_cpu116.py": {
+      "bytes": 16387,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/owned_cpu116.py",
+      "sha256": "6159466bc6347ab6f28c18537cc9dcc6fee37db0bb288e94652b32e6c8288812"
+    },
+    "owner116.py": {
+      "bytes": 16858,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/owner116.py",
+      "sha256": "a5bf934cd7e749aa3b630da2039969a2d8e3cce52d4c0756a52e73299edc543d"
+    },
+    "patch_scope112.py": {
+      "bytes": 1945,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/patch_scope112.py",
+      "sha256": "a666bf5c001698f20f5f72368cc64834ef1b67b261dc495312bd0842347c3b34"
+    },
+    "pipeline118t.py": {
+      "bytes": 1097,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/pipeline118t.py",
+      "sha256": "14a3b8fbf70e9c4b35d7e5430052fbb7100c6325e0e6123f26cbc83302898dc9"
+    },
+    "predecessor118t.py": {
+      "bytes": 2050,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/predecessor118t.py",
+      "sha256": "6a600cb931745d41cca7f6057400a37d1874f5ac9bdb18f7e970d72a53a9964a"
+    },
+    "probe115.py": {
+      "bytes": 4735,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/probe115.py",
+      "sha256": "6b86607862d1d8c76805394acff0397e4b5d5af5230871f513ae4db685a348f1"
+    },
+    "probe116.py": {
+      "bytes": 4615,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/probe116.py",
+      "sha256": "6f23da31671bd058ed030ac438e4046d4da5cda8adcfb90506ef6ec3a8e9e433"
+    },
+    "reference.py": {
+      "bytes": 2172,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/reference.py",
+      "sha256": "6f4e76cfa8faf8898c4b6fbbf7dd18f5b96077a820bc0e81dac8b06d1b408669"
+    },
+    "reference116.py": {
+      "bytes": 885,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/reference116.py",
+      "sha256": "721d0d39b9d0f55e42c821af5a0500af103cefde36b374b9a338fa3c7f592c76"
+    },
+    "registration118.py": {
+      "bytes": 1796,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/registration118.py",
+      "sha256": "6e8466f79321ad4a5fb093d0f647b203ed9f00835a5cbf4d4f789f170f396868"
+    },
+    "regression/old_owner116.py": {
+      "bytes": 16455,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/regression/old_owner116.py",
+      "sha256": "7bf1dc472b3a2d0f17a2044535ef442000d319f5753fdb83ad2adced81e70fea"
+    },
+    "run116.py": {
+      "bytes": 2790,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/run116.py",
+      "sha256": "7d37c342f06a70d651ecde58048bffee3cb000159d6faf10f2868f00e54441bb"
+    },
+    "run_component.py": {
+      "bytes": 4647,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/run_component.py",
+      "sha256": "cf598869273de136121192ca0b710861fb68e6654f172769471e913a2d651bc0"
+    },
+    "scope_adapter112.py": {
+      "bytes": 11522,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/scope_adapter112.py",
+      "sha256": "a9f510a683a3cad1b22161107c2d5e6beaeab6f6df50612fbc92b939e5a64cc2"
+    },
+    "suite116.py": {
+      "bytes": 836,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/suite116.py",
+      "sha256": "61d793d19a235e3170ade44fab0051b2291dd2907911b194857ea5921831551a"
+    },
+    "test115.py": {
+      "bytes": 3517,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/test115.py",
+      "sha256": "f713f25d3ddf3d759a0313d5f5efa47bd71ad68be540b4c452826102002033e4"
+    },
+    "test116.py": {
+      "bytes": 8856,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/test116.py",
+      "sha256": "8442177dc197f36d17c679d77d4b8758c613d12eb3cebafcb5261fdebd5c9f5d"
+    },
+    "test_alias116r5.py": {
+      "bytes": 4613,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/test_alias116r5.py",
+      "sha256": "5121339e15b584a30096e59584d7a14f20fede3e22a547ef6d53863fa844aac0"
+    },
+    "test_calibration118.py": {
+      "bytes": 3900,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/test_calibration118.py",
+      "sha256": "6eaf4aec5d542409d20d469022ccaa54840dba4cf9870b86ed2ad03b39ffc4d6"
+    },
+    "test_component.py": {
+      "bytes": 9047,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/test_component.py",
+      "sha256": "f4524fbeb12280395fdfa92ef59dbe4d1659374980b2fbe5928e423ab5824de0"
+    },
+    "test_controller116r1.py": {
+      "bytes": 3097,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/test_controller116r1.py",
+      "sha256": "5b433ce4e69f119661949cf01ec410272b89c2742854f787336e6e47dbf9e230"
+    },
+    "test_conv_hook116r3.py": {
+      "bytes": 1547,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/test_conv_hook116r3.py",
+      "sha256": "b482b7b3267bb8a2b9ed19ae1a1b6a8626dada19396c009fc588bf2313fbec3e"
+    },
+    "test_device118.py": {
+      "bytes": 1912,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/test_device118.py",
+      "sha256": "d567d496ed962d6645c5ad26606ebbe2395c5ee115338e26c548c7dfa5cd624f"
+    },
+    "test_layout118tr1.py": {
+      "bytes": 3605,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/test_layout118tr1.py",
+      "sha256": "0020b2a4d2e15c3de8dad740fc7a7db12ebe3bfc6d0fab2f1311dd01d786447a"
+    },
+    "test_owned118t.py": {
+      "bytes": 4464,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/test_owned118t.py",
+      "sha256": "45d70b00f1c695e39ea848e8cfc8b9fb409059693c6bcf7c8cc312855750336d"
+    },
+    "test_registration118r1.py": {
+      "bytes": 1851,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/test_registration118r1.py",
+      "sha256": "edee958d9144479aa327c20a1a7ea85fb7a714a08769af22e57066c691e465bc"
+    },
+    "ticket116.py": {
+      "bytes": 2601,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/ticket116.py",
+      "sha256": "2f4ab52765a14d7cb9d9729f2675c5985006f16cf697838035196adae5a959a5"
+    },
+    "ticket_alias116r5.py": {
+      "bytes": 1909,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/ticket_alias116r5.py",
+      "sha256": "37c0a8f6a30694a976c60aab582bf8f452f8b9f89e5805bce384f74c5a9f1dfb"
+    },
+    "top_guard116.py": {
+      "bytes": 7775,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/top_guard116.py",
+      "sha256": "04ef8acc591f52363947c605f6faa2a0bce4d16492a0e907db8719fc322764dd"
+    },
+    "tree_fa115.py": {
+      "bytes": 3539,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/tree_fa115.py",
+      "sha256": "9de3a6c05bd64aa135d9a4dc32b65aeeb1770374ba4084a01a4cbf5d422253bd"
+    }
+  },
+  "guest_seconds": 600,
+  "header_ref": {
+    "bytes": 4091,
+    "path": "/usr/local/Ascend/cann-9.1.0/aarch64-linux/include/aclnnop/aclnn_fused_infer_attention_score_v3.h",
+    "sha256": "14ebd6d631fa2de39688a69be339a5bf7ac9b84cbfc00592f29387a4e0b8eb9f"
+  },
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "layout_repair": {
+    "actual_paged_BNSD_pass": false,
+    "mask": "[1,1,3,pages*128], padding forbidden",
+    "old_failure_preserved": true,
+    "paged_KV": "BnNBsD [pages,1,128,256]",
+    "query": "BNSD [1,6,3,256]"
+  },
+  "mapping112R2_helper_original_ref": {
+    "bytes": 11522,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair2/scope_adapter112.py",
+    "sha256": "a9f510a683a3cad1b22161107c2d5e6beaeab6f6df50612fbc92b939e5a64cc2"
+  },
+  "mapping112R2_template_ref": {
+    "bytes": 7220,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/evidence/SOURCE_TEMPLATE112R2.json",
+    "sha256": "1ec342277b5591f7c2661608523d8abfbf5138771360799580d1faae52f9f9ff"
+  },
+  "model_ready": false,
+  "observed_consumer_owner_ref": {
+    "bytes": 1246,
+    "path": "/opt/host/vnf/austinov/run-bole-native-conv-abi118repair1-MAIN-20261016-001/mask/consumer/RESULT.json",
+    "sha256": "10467a7844177c07441e4067ffa42bcbe78677579ca5cb86293445cdf6d4f83f"
+  },
+  "observed_device_abi_ref": {
+    "bytes": 4219,
+    "path": "/opt/host/vnf/austinov/run-bole-native-conv-abi118repair1-MAIN-20261016-001/mask/numeric/numeric/result/ACTUAL_DEVICE_CONV_ABI.json",
+    "sha256": "c68ec52dff3bda1162c891b26ac9d6fd8673aacff5c74c72f575ffcd3805dbf6"
+  },
+  "observed_device_owner_ref": {
+    "bytes": 1697,
+    "path": "/opt/host/vnf/austinov/run-bole-native-conv-abi118repair1-MAIN-20261016-001/mask/numeric/RESULT.json",
+    "sha256": "ca922daf549b27acfddc40247c70910c0b89b3f41fbe52c0b154ba7969344d53"
+  },
+  "observed_template_ref": {
+    "bytes": 16788,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-native-conv-abi-owned-new24h-v1-118-repair1/SOURCE_TEMPLATE.json",
+    "sha256": "1ac45860576c21aa178006ea4a4bcd6ddf4c39899f81c68cbc51a9e9d0b87393"
+  },
+  "ordinary_ram_floor": 17716740096,
+  "output_root": "/opt/host/vnf/austinov/run-bole-paged-tree118trepair1-MAIN-20261016-001",
+  "performance_ready": false,
+  "prepared_only": true,
+  "profile": null,
+  "raw_FIA_cap": 67108864,
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1",
+  "schema": "bole.tree-fa-owned-source/v118t",
+  "source112R1_template_ref": {
+    "bytes": 6687,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/evidence/SOURCE_TEMPLATE112R1.json",
+    "sha256": "c2a64af4effbb27fc048c12e811f3990bdc0b203ef18d5212042e591e7021ed3"
+  },
+  "source115_template_ref": {
+    "bytes": 2546,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/evidence/SOURCE_TEMPLATE115.json",
+    "sha256": "5584c814bf07f71e38fbb6ecde1918d787381a5f7645c882242ce3a6107d5235"
+  },
+  "whole_CPU_seconds": 1000,
+  "whole_NPU_seconds": 900,
+  "whole_output_cap": 1073741824
+}

@@ -1,0 +1,60 @@
+"""Bind the one actual TimeoutExpired producer. No workload launch."""
+import argparse,json,sys
+from pathlib import Path
+P=Path(__file__).resolve().parent;sys.path.insert(0,str(P))
+import host as H,provenance127 as V,raw_closure043 as RAW
+ROOT='/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair2'
+EVIDENCE=dict(path='/opt/host/vnf/austinov/run-dl088r6r2-consumer-fault-evidence-MAIN-20261016-001/ACTUAL_EVIDENCE.json',bytes=15353,sha256='cc4ea59d1c90f43f0513585dc731aa53380598dd287646434a742eb8d2d5b81e')
+def bind(tr):
+ t=H.obj(tr);H.need(str(P)==ROOT and tr['path']==ROOT+'/SOURCE_TEMPLATE.json'and t['root']==ROOT and t['bound']is False,'exact deployed pending template')
+ for r in t['files'].values():H.validate_ref_streamed(r)
+ e=H.obj(EVIDENCE);m,prod=V.validate(e,H.obj);r=e['refs'];refs={}
+ def add(ref):
+  H.need(ref['path']not in refs or refs[ref['path']]==ref,'unique exactRef identity')
+  if ref['path']not in refs:H.validate_ref_streamed(ref);refs[ref['path']]=ref
+  return Path(ref['path'])
+ for ref in [tr,EVIDENCE,*r.values(),*[x['ref']for x in e['inspect'].values()]]:add(ref)
+ for ref in t['external_refs']:add(ref)
+ sys.path.insert(0,str(Path(r['source']['path']).parent))
+ oldhost=H.load(m['files']['host.py'],'_127_original_host');_,_,_,closure,_=oldhost.target_closure(r['source'])
+ for ref in closure:add(ref)
+ # The full original storage continuation readset, not generic historical JSON.
+ b=H.load(m['files']['storage_bridge088r6.py'],'_127_storage_readset')
+ oldC=H.load(m['files']['bridge_io.py'],'_127_original_contract')
+ policy=H.load(m['files']['collection_policy.py'],'_127_original_collection_policy');policy.require_complete(oldC,prod,r['source'])
+ for ref in b.readset(oldC,m):add(ref)
+ parent=Path(r['producer']['path']).parent
+ pending=[x['raw']for x in prod['records']]+prod['actual_sidecar_records'];seen=set()
+ def raw_metadata_refs(v):
+  if type(v)is dict:
+   if set(v)=={'path','bytes','sha256'}:
+    q=Path(v['path'])
+    # Captured runtime source identities are evidence, not host files. The
+    # original consumer verifies those via its exact runtime-source mapping.
+    if q.parent==parent and q.suffix=='.pt':pending.append(v)
+   else:
+    for value in v.values():raw_metadata_refs(value)
+  elif type(v)in(list,tuple):
+   for value in v:raw_metadata_refs(value)
+ while pending:
+  ref=pending.pop();H.need(Path(ref['path']).parent==parent,'only exact original raw-parent data')
+  if ref['path']in seen:H.need(refs[ref['path']]==ref,'one exact raw identity');continue
+  seen.add(ref['path']);add(ref);raw_metadata_refs(RAW.metadata(ref,add))
+  for blob in RAW.closure(ref,add):add(blob)
+ arm=H.ref(parent.parent/'ACTUAL_OWNER.json');add(arm);a=H.obj(arm);cid=e['small_documents']['numeric_cleanup']['cid']
+ plan_ref=H.ref(parent.parent/'PLAN.json');add(plan_ref);device_ref=H.ref(parent/'DEVICE.json');add(device_ref);handshake_ref=H.ref(parent/'MAIN_ARM.json');add(handshake_ref)
+ plan=H.obj(plan_ref);add(plan['cpu_preflight']);V.arm(a,H.obj(device_ref),H.obj(handshake_ref),plan_ref,plan,prod,m,cid)
+ result=dict(m,root=ROOT,files=t['files'],prepared_template=tr,prepared_only=False,bound=True,
+  consumer_contract_schema='deltalog.anchor-consumer-source/v127',producer_source=r['source'],
+  original_source_ref=r['source'],original_producer_ref=r['producer'],original_failed_owner_ref=r['owner'],
+  original_strict_ref=r['strict'],actual_fault_evidence_ref=EVIDENCE,original_arm_ref=arm,original_plan_ref=plan_ref,original_device_ref=device_ref,original_handshake_ref=handshake_ref,
+  recovery_refs=list(refs.values()),storage_accounting_policy_source_ref=r['source'],
+  original_timeout_seconds=V.TIMEOUT,allowed_fault='exact-original-domain-TimeoutExpired-shared590',
+  execution_scope='CPU-only anchors-only independent operational recovery; old owner FAIL retained',
+  default_enabled=False,model_ready=False,performance_ready=False)
+ H.write(P/'SOURCE_MANIFEST.json',result);print(json.dumps(H.ref(P/'SOURCE_MANIFEST.json')));return 0
+def main():
+ ap=argparse.ArgumentParser(allow_abbrev=False);ap.add_argument('--execute',action='store_true');ap.add_argument('--template-ref',required=True);a=ap.parse_args()
+ if not a.execute:print('disabled');return 0
+ return bind(json.loads(a.template_ref))
+if __name__=='__main__':raise SystemExit(main())

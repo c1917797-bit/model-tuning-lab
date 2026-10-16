@@ -1,0 +1,100 @@
+{
+  "MAIN_only": true,
+  "commands": {
+    "NPU": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/owner120.py",
+      "--execute",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/SOURCE_MANIFEST.json\",\"bytes\":7804,\"sha256\":\"2ceffee95e499d3ae3dfd5828164255e07e57b29710d4ec2edab245bf9e0e95b\"}",
+      "--host-cpu",
+      "HOST_CPU",
+      "--guest-cpu",
+      "GUEST_CPU",
+      "--output",
+      "/opt/host/vnf/austinov/run-mxr-third-residual125-npu-MAIN-NEW24H_001"
+    ],
+    "consume_sourceaudit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/owned_cpu120.py",
+      "--source-audit",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/SOURCE_MANIFEST.json\",\"bytes\":7804,\"sha256\":\"2ceffee95e499d3ae3dfd5828164255e07e57b29710d4ec2edab245bf9e0e95b\"}",
+      "--stage-ref",
+      "EXACT_ACTUAL125_STAGE_REF3"
+    ],
+    "independent": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/owned_cpu120.py",
+      "--execute",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/SOURCE_MANIFEST.json\",\"bytes\":7804,\"sha256\":\"2ceffee95e499d3ae3dfd5828164255e07e57b29710d4ec2edab245bf9e0e95b\"}",
+      "--host-cpu",
+      "HOST_CPU",
+      "--guest-cpu",
+      "GUEST_CPU",
+      "--stage-ref",
+      "EXACT_ACTUAL125_STAGE_REF3",
+      "--output",
+      "/opt/host/vnf/austinov/run-mxr-third-residual125-consume-MAIN-NEW24H_001"
+    ],
+    "preflight": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/owned_cpu120.py",
+      "--execute",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/SOURCE_MANIFEST.json\",\"bytes\":7804,\"sha256\":\"2ceffee95e499d3ae3dfd5828164255e07e57b29710d4ec2edab245bf9e0e95b\"}",
+      "--host-cpu",
+      "HOST_CPU",
+      "--guest-cpu",
+      "GUEST_CPU",
+      "--output",
+      "/opt/host/vnf/austinov/run-mxr-third-residual125-preflight-MAIN-NEW24H_001"
+    ],
+    "preflight_sourceaudit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/owned_cpu120.py",
+      "--source-audit",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/SOURCE_MANIFEST.json\",\"bytes\":7804,\"sha256\":\"2ceffee95e499d3ae3dfd5828164255e07e57b29710d4ec2edab245bf9e0e95b\"}"
+    ],
+    "sourceaudit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/owner120.py",
+      "--source-audit",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/SOURCE_MANIFEST.json\",\"bytes\":7804,\"sha256\":\"2ceffee95e499d3ae3dfd5828164255e07e57b29710d4ec2edab245bf9e0e95b\"}"
+    ]
+  },
+  "guest_source": {
+    "bytes": 12124,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125/SOURCE_MANIFEST.json",
+    "sha256": "54d59869ff0b7b623925d89e07fdb2ff9e13eb26e626aef8cb73f2e24903a515"
+  },
+  "qualified": false,
+  "schema": "mxr.r5-prefill-counterfactual-commands/v120",
+  "sequence": [
+    "sourceaudit",
+    "preflight",
+    "NPU",
+    "independent"
+  ],
+  "source": {
+    "bytes": 7804,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125-owned/SOURCE_MANIFEST.json",
+    "sha256": "2ceffee95e499d3ae3dfd5828164255e07e57b29710d4ec2edab245bf9e0e95b"
+  },
+  "source_only": true
+}

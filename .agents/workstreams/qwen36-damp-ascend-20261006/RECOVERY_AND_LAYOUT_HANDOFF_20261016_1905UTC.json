@@ -1,0 +1,146 @@
+{
+  "schema": "ascend.paper-portfolio.recovery-layout-and-causal-handoff/v1",
+  "observed_utc": "2026-10-16 19:07:11 UTC",
+  "branch": "work/qwen36-damp-ascend-20261006",
+  "last_verified_pushed_commit": "7815fc6c39d72f77130a40341cbd2ccc53358aec",
+  "authority_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "bytes": 3481,
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "cutoff_utc": "2026-10-17T07:02:13Z",
+  "goal_accepted": false,
+  "HYPIC": "historical exemplar only",
+  "formal_performance": null,
+  "final_tasks": null,
+  "previous_pending_snapshot": "NATIVE_CONV_OPERATIONAL_DOMAIN_AND_HANDOFF_20261016_1830UTC.json (historical, not current live state)",
+  "DeltaLog": {
+    "original160_owner": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json",
+      "bytes": 1511,
+      "sha256": "c336a6b4b9f071e349147fe71037651fd628388246dd973d7be342381a45f908"
+    },
+    "actual_fault_evidence": {
+      "path": "/opt/host/vnf/austinov/run-dl088r6r2-consumer-fault-evidence-MAIN-20261016-001/ACTUAL_EVIDENCE.json",
+      "bytes": 15353,
+      "sha256": "cc4ea59d1c90f43f0513585dc731aa53380598dd287646434a742eb8d2d5b81e"
+    },
+    "producer_completed": {
+      "steps": 160,
+      "main_records": 328,
+      "sidecar_records": 351,
+      "anchors": 2,
+      "raw_pt": 681,
+      "NPU_elapsed_seconds": 609.6857,
+      "source_unchanged": true
+    },
+    "original_primary": "independent consumer ValueError('actual GE child failed; preserved logs/raw')",
+    "actual_first_fault": "run_consumer088.py subprocess.TimeoutExpired after 585.6111058300012 seconds",
+    "original_domain_and_independent_missing": true,
+    "old_strict": "FAIL retained; no cumulative-history mathematical PASS",
+    "cause": "REFERENCE_OR_TEST / repeated PID-only full anchor hydration; exact actual timeout confirmed; optimization benefit not yet measured",
+    "next_recovery": {
+      "source_template": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair2/SOURCE_TEMPLATE.json",
+        "bytes": 6361,
+        "sha256": "189df0b0a3f3435d434d658955736fd6ac6b0e9e3664d3f6d863609f8b30f07d"
+      },
+      "bound_source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair2/SOURCE_MANIFEST.json",
+        "bytes": 42689810,
+        "sha256": "f9809bb0e93b046352a7966eda4e2776c1e5a7fd67dba81a4d88584001eb1cbb"
+      },
+      "actual_byte_exact": 20,
+      "actual_host_controls": 17,
+      "actual_bind_sourceaudit_operation": "exec-0000000000000de3",
+      "bind_and_sourceaudit_exit": 0,
+      "bind_audit_elapsed_seconds": 222.208,
+      "actual_cpu_operation": "exec-0000000000000dec",
+      "last_observed_operation_state": "running",
+      "NPU_reexecution": false,
+      "changed_math_or_thresholds": false,
+      "timeout_seconds_unchanged": 585.6111058300012,
+      "output": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-anchor-recovery127repair2-MAIN-20261016-NEW24H-001",
+      "storage_reservation_GiB": 1,
+      "guest_host_reserve_GiB": [
+        8,
+        0.5,
+        8
+      ],
+      "new_result_qualifies_old_owner": false
+    },
+    "downstream": "new 128 explicit failed-owner/recovered-consumer receiver in preparation; old101R5 still rejects new owner; model/performance admission not implied",
+    "domain_pending": "variable-length124R1 and real batch16 model127 source-only; actual installed pause/resume APIs identified, queue-barrier successor in preparation",
+    "production122R3": "actual34 source bytes +14 host controls; real health/pair not run"
+  },
+  "BOLE": {
+    "original118t": "all eight calls failed installed CANN tiling TND+D256 before independent mathematics; old failure retained; no paper-wide no-go",
+    "targeted_repair": "BNSD Q[1,6,3,256], paged BnNBsD, complete physical-capacity mask forbids padding; original D256/eight cases/paths/oracles/thresholds unchanged",
+    "bound_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/SOURCE_MANIFEST.json",
+      "bytes": 25737,
+      "sha256": "fdafbb8872ad9da1ff8150ddafa1e66acae3a80e05aa2b62bb04202da6e33faa"
+    },
+    "actual59_byte_verify_bind_sourceaudit": "exec-0000000000000dea exit0",
+    "current_stage": "queued for actual same-image CPU -> ticket -> physical4/logical0 eight NPU cases -> released independent consumer; not yet run",
+    "safety": "old owner/controller and guest600/whole900/cleanup90 unchanged; old118c12 native conv PASS only its exact primitive",
+    "model_gap": "no completed real-model BOLE installer/collector/consumer; targeted real-worker seam preparation ongoing"
+  },
+  "MXR": {
+    "actual_operation": "exec-0000000000000dd5 exit0 (diagnostic, not qualification)",
+    "independent_report": {
+      "path": "/opt/host/vnf/austinov/run-mxr-third-residual125-consume-MAIN-NEW24H_001/ATTRIBUTION.json",
+      "bytes": 523494,
+      "sha256": "cfc8e0615c0442b3b8ad8dcbfd68f4f4365a0e5250baabdafc35c8a20cf4857f"
+    },
+    "actual_complete_readback_and_all_three_release": "exec-0000000000000de5 exit0; all exited0/Pid0/noExec/noOOM",
+    "state_metrics": {
+      "layer0": {
+        "X2_frob": 0.0014159343893094857,
+        "X2_rmse_over_mean": 0.020219389507423965,
+        "X3_frob": 0.0016425671731894462,
+        "X3_rmse_over_mean": 0.02345568108069072,
+        "X2_pass": false,
+        "X3_pass": false
+      },
+      "layer4": {
+        "X2_frob": 0.002626698529604688,
+        "X3_frob": 0.0026267697969885005,
+        "X2_pass": false,
+        "X3_pass": false
+      },
+      "layer1_control": {
+        "X2_pass": true,
+        "X3_pass": true
+      }
+    },
+    "result": "X3 reduced mismatched BF16 inverse cells but did not repair either failed state gate; all three cases' outputs pass; native/direct-RNE common controls fail the two original state gates too",
+    "decision": "stop this X3 correction per preregistration; no blind X4 and no paper-wide rejection; mathematical/native/common-reference distinction unresolved"
+  },
+  "scheduling": {
+    "CURRENT": "DeltaLog 127R2 actual Devices[] saved160 consumer recovery",
+    "NEXT": "BOLE118tR1 fresh actual CPU/ticket/NPU/consumer after verified recovery release",
+    "BACKUP": "typed128 -> real101/106 -> precision122R3 production diagnostic/pair, all require real predecessor gates",
+    "active_preparation_agents": 3,
+    "physical_NPUs": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected_NPUs": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "legacy_global_owned_CID_exclusion": true,
+    "shared_concurrent_controller_admission_not_built": true,
+    "continuous_utilization": "unmeasured; no zero-idle claim; CPU-only recovery does not occupy NPUs"
+  },
+  "source_only_archives": [
+    "projects/qwen36-paper-portfolio/tools/new24h_consumer_timeout_and_layout_20261016_1845 (54 exact source files)",
+    "projects/qwen36-paper-portfolio/tools/new24h_saved160_recovery_and_bole_layout_20261016_1905 (79 exact source files)"
+  ],
+  "no_raw_tensors_or_model_weights_in_git": true
+}

@@ -573,3 +573,50 @@ dummy loads; prepare reviewed successors and improve actual shared budgeting.
 Exact source/result/release Refs and CURRENT/NEXT are recorded in
 NATIVE_CONV_OPERATIONAL_DOMAIN_AND_HANDOFF_20261016_1830UTC.json. No new E2E or
 task acceptance exists.
+
+## 2026-10-16: saved160 timeout recovery, paged layout and disproved X3 repair
+
+The actual160 DeltaLog producer completed328 main records,351 sidecars and two
+anchors; its original independent domain child timed out after585.6111058300012s.
+The original failed owner, strict FAIL, logs and both stopped/released CIDs are
+preserved. A source audit found960 extra full-anchor hydrations used only for
+PID metadata. A new consumer caches only copied JSON PID metadata after the
+complete original anchor verification; its body is exactly reversible to the
+pinned7119-byte consumer. No tensor/blob cache, arithmetic, thresholds, row
+coverage or timeout is changed. The actual target20-file byte check,17 host
+controls, actual original-fault binding and full135520-Ref source audit passed.
+Actual same-image recovery0dec is running at this checkpoint, not a claimed
+mathematical PASS. Its new typed envelope cannot pretend the original160 owner
+succeeded or pass unchanged101 admission; a reviewed recovery receiver remains
+a separate edge. Reuse complete saved raw rather than spend NPU time recapturing
+because a consumer failed. Record source-verification cost too: bind/sourceaudit
+took222.208s and generated42.69MB of external metadata, not model throughput.
+
+BOLE118t's eight native calls all failed the installed TND/D256 tiling domain
+before independent mathematics. This is a concrete adapter boundary, not a
+paper-wide negative.118tR1 changes only the actual layout to BNSD and PA
+BnNBsD, retaining D256, the exact tree/path cases and independent references.
+The full physical-page mask forbids padding; independent consumption rebuilds
+every actual call operand from original CPU pages and checks shape/stride/dtype,
+scalar arguments and before/after bytes. Master documentation is a candidate
+support hypothesis, not proof of installed9.1 support. Actual59-file verification,
+bind and source audit passed; its new same-image/NPU/consumer stages are queued,
+not borrowed from the older contiguous attention or12-call convolution PASS.
+Actual full-model BOLE binding still needs implementation.
+
+MXR125R1 completed its new NPU experiment and independent four-arm diagnostic
+on two saved failed cases and one passing control. X3 reduced BF16 inverse-cell
+mismatches but made the working state errors worse: layer0 relative Frob
+0.0014159344 ->0.0016425672, and layer4 0.0026266985 ->0.0026267698.
+Both still fail; the control still passes. Native and direct-RNE common controls
+also fail those two state gates. Per preregistration stop this X3 correction,
+not blindly add X4. A better intermediate inverse is not proof of better
+reconstructed state; native failure does not authorize relaxing the gate or
+rejecting the paper. All three diagnostic guests were independently re-opened
+stopped/Pid0/noExec/noOOM. No performance or task qualification follows.
+
+Exact original/new source, failed owner, report and CURRENT/NEXT identities are
+in RECOVERY_AND_LAYOUT_HANDOFF_20261016_1905UTC.json. Deadline and final model/
+performance/task requirements are unchanged. Legacy global owned-CID exclusion
+still prevents claiming disjoint admission or continuous four-card utilization;
+CPU preparation and source deliveries are not NPU compute.
