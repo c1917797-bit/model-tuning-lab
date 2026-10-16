@@ -1,5 +1,14 @@
 # CURRENT R17 C1 ASYNC MATERIAL HOST-READY; NO NPU CLAIM
 
+TERMINAL blockingd23:40/40success; independent0d4d accepts159sources/fourrank48C1+
+16C2all40hot/7104packedgroups/479cleanisolation/physicalPIDjoins/liveexactrelease.
+R17_TRANSFER_BLOCKING_R1_TERMINAL_AUDIT_20261016.json. TPOT312.652840ms,
+TTFTP95409227.669040ms; onearmonly, NOTgainclaim.
+Initialaudit0d4b failedstrict8233bindEADDRINUSE; fresh0d4c listener/TCPempty and
+strictbindfree; sameimmutable rawreplay0d4dpassed. No rerun/NPU restart or gatechange.
+No ownedmodeljob. Next freshactualadmission thenFORMAL_R17_TRANSFER_ASYNC_R1_CONTRACT.json,
+followedaudit_r17_transfer_performance.py --live-release. NativeR1 aftervalidasync.
+
 LIVE performance attribution:ma exec-0000000000000d23 started16:30UTC,
 first BLOCKING full40 R1 contract FORMAL_R17_TRANSFER_BLOCKING_R1_CONTRACT.json,
 raw /cache/cch/hypic-independent-20261013/formal-r17-transfer-blocking-r1.

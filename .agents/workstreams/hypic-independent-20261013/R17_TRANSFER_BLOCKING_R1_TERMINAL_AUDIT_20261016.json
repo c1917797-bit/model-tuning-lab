@@ -1,0 +1,191 @@
+{
+  "schema": "hypic-r17-transfer-terminal-audit/v1",
+  "arm": "blocking",
+  "round": 1,
+  "controller": "exec-0000000000000d23",
+  "controller_exit_code": 0,
+  "checkpoint": "a74fd1fb1294fbfb34516c835c035855e59e946a",
+  "contract": "FORMAL_R17_TRANSFER_BLOCKING_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-r17-transfer-blocking-r1",
+  "independent_audit": "exec-0000000000000d4d",
+  "audit": {
+    "terminal_unit_valid": true,
+    "timing": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 312.6528401716329,
+      "ttft_p95_ms": 409227.669039974,
+      "tpot_p95_ms": 331.9116839160188
+    },
+    "isolation_samples": 479,
+    "source_bindings": 159,
+    "raw_sha256": {
+      "result.json": "c6ebf59d503d083bc680a7f11962242302e2c7c500be7b2c18721967ed4ba328",
+      "events.jsonl": "bc10e431b7cb181e54f247323020e217b1115333b2cc669752efdc6661be5e79",
+      "performance-unit.json": "ef4b5af7123c89af92f59a5a0240302b27c4c1893c6199046ebe84817c2e964f",
+      "release.json": "a2edcd312e57b2bac22206c5d7bc3ed6999f57dd95a0fb6ada73c0205e683f2e"
+    },
+    "scope": "one same-protocol R17 full40 arm; attribution/repetitions/quality/lifecycle separate",
+    "packed": {
+      "packed_performance_receipts_verified": true,
+      "workers": {
+        "0": 59,
+        "1": 60,
+        "2": 61,
+        "3": 62
+      },
+      "requests": 40,
+      "packed_groups": 7104,
+      "shadow_requests": 0,
+      "multi_hot_shadow_layers": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "scope": "timed packed call-stage/private finite precommit receipts; no numerical shadow equivalence or task quality claim"
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 59,
+          "host_pid": 3188594,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 60,
+          "host_pid": 3188595,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 61,
+          "host_pid": 3188596,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 62,
+          "host_pid": 3188597,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 40,
+      "covered": [
+        "cmpl-84305366161ade0e",
+        "cmpl-aea33537d937adaa",
+        "cmpl-ac2634254cd20f74",
+        "cmpl-993b5be225a7eab8",
+        "cmpl-93f34eda8e41d4cd",
+        "cmpl-988d20c086f84781",
+        "cmpl-80cbbab60dd7c4ca",
+        "cmpl-9c873df662952716",
+        "cmpl-bae89727dda0610c",
+        "cmpl-87f80798c9f22c98",
+        "cmpl-8f0da6bcaf57e67f",
+        "cmpl-a772c5ead2417b67",
+        "cmpl-97bc865560288250",
+        "cmpl-95021e118dba3996",
+        "cmpl-9c16a850156eb778",
+        "cmpl-9ede62b0f81d6339",
+        "cmpl-865d0162ff7fb488",
+        "cmpl-86c00245d03efc22",
+        "cmpl-b90793853fbef451",
+        "cmpl-bcd27bb344034bf0",
+        "cmpl-8092e5a923a87d7b",
+        "cmpl-94e2ed7536262548",
+        "cmpl-b48ba2717126aeca",
+        "cmpl-9c5fdd2b5aa93bb3",
+        "cmpl-99a1222fad441edd",
+        "cmpl-9bc2e8e72fa11a53",
+        "cmpl-971e48159ee85224",
+        "cmpl-adcef11f56cde36a",
+        "cmpl-98bcf69a56c3aa55",
+        "cmpl-863a9c290fbd58f1",
+        "cmpl-a6520c6f238867ef",
+        "cmpl-83e88a88bc609e15",
+        "cmpl-a9d4a269dedca5a4",
+        "cmpl-ab032e270968ba0e",
+        "cmpl-a2823c7e44860455",
+        "cmpl-bdbbc55475bdb06e",
+        "cmpl-bcf0314f730e7f39",
+        "cmpl-8d912780f01f68f2",
+        "cmpl-a0e86a1e50cbf38e",
+        "cmpl-a92cee681c6c8417"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 59,
+        "1": 60,
+        "2": 61,
+        "3": 62
+      },
+      "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+    },
+    "request_map": {
+      "cmpl-84305366161ade0e": "cmpl-84305366161ade0e-0-a9089e86",
+      "cmpl-aea33537d937adaa": "cmpl-aea33537d937adaa-0-8c958dd9",
+      "cmpl-ac2634254cd20f74": "cmpl-ac2634254cd20f74-0-b557c94d",
+      "cmpl-993b5be225a7eab8": "cmpl-993b5be225a7eab8-0-80246d0d",
+      "cmpl-93f34eda8e41d4cd": "cmpl-93f34eda8e41d4cd-0-9f76651c",
+      "cmpl-988d20c086f84781": "cmpl-988d20c086f84781-0-a38b57ae",
+      "cmpl-80cbbab60dd7c4ca": "cmpl-80cbbab60dd7c4ca-0-917f5ff8",
+      "cmpl-9c873df662952716": "cmpl-9c873df662952716-0-865a1825",
+      "cmpl-bae89727dda0610c": "cmpl-bae89727dda0610c-0-84651961",
+      "cmpl-87f80798c9f22c98": "cmpl-87f80798c9f22c98-0-a9c1c49f",
+      "cmpl-8f0da6bcaf57e67f": "cmpl-8f0da6bcaf57e67f-0-b24ad469",
+      "cmpl-a772c5ead2417b67": "cmpl-a772c5ead2417b67-0-a4a36866",
+      "cmpl-97bc865560288250": "cmpl-97bc865560288250-0-98247b9f",
+      "cmpl-95021e118dba3996": "cmpl-95021e118dba3996-0-ba9f1b75",
+      "cmpl-9c16a850156eb778": "cmpl-9c16a850156eb778-0-9e3c72c8",
+      "cmpl-9ede62b0f81d6339": "cmpl-9ede62b0f81d6339-0-a230dc1f",
+      "cmpl-865d0162ff7fb488": "cmpl-865d0162ff7fb488-0-9bb033c2",
+      "cmpl-86c00245d03efc22": "cmpl-86c00245d03efc22-0-94224008",
+      "cmpl-b90793853fbef451": "cmpl-b90793853fbef451-0-a6491d04",
+      "cmpl-bcd27bb344034bf0": "cmpl-bcd27bb344034bf0-0-8324f5ec",
+      "cmpl-8092e5a923a87d7b": "cmpl-8092e5a923a87d7b-0-910b2473",
+      "cmpl-94e2ed7536262548": "cmpl-94e2ed7536262548-0-a251e64d",
+      "cmpl-b48ba2717126aeca": "cmpl-b48ba2717126aeca-0-929eb20a",
+      "cmpl-9c5fdd2b5aa93bb3": "cmpl-9c5fdd2b5aa93bb3-0-a0666661",
+      "cmpl-99a1222fad441edd": "cmpl-99a1222fad441edd-0-a26d2511",
+      "cmpl-9bc2e8e72fa11a53": "cmpl-9bc2e8e72fa11a53-0-8c32d48f",
+      "cmpl-971e48159ee85224": "cmpl-971e48159ee85224-0-921cda14",
+      "cmpl-adcef11f56cde36a": "cmpl-adcef11f56cde36a-0-a8d36731",
+      "cmpl-98bcf69a56c3aa55": "cmpl-98bcf69a56c3aa55-0-bb1e9f91",
+      "cmpl-863a9c290fbd58f1": "cmpl-863a9c290fbd58f1-0-b7d9d05b",
+      "cmpl-a6520c6f238867ef": "cmpl-a6520c6f238867ef-0-8109c1c9",
+      "cmpl-83e88a88bc609e15": "cmpl-83e88a88bc609e15-0-9e61fbd7",
+      "cmpl-a9d4a269dedca5a4": "cmpl-a9d4a269dedca5a4-0-8c7a92c8",
+      "cmpl-ab032e270968ba0e": "cmpl-ab032e270968ba0e-0-b14959fc",
+      "cmpl-a2823c7e44860455": "cmpl-a2823c7e44860455-0-a0a73c47",
+      "cmpl-bdbbc55475bdb06e": "cmpl-bdbbc55475bdb06e-0-b79c5e95",
+      "cmpl-bcf0314f730e7f39": "cmpl-bcf0314f730e7f39-0-8f204468",
+      "cmpl-8d912780f01f68f2": "cmpl-8d912780f01f68f2-0-a3999dfb",
+      "cmpl-a0e86a1e50cbf38e": "cmpl-a0e86a1e50cbf38e-0-9262b389",
+      "cmpl-a92cee681c6c8417": "cmpl-a92cee681c6c8417-0-a82939c8"
+    },
+    "live_release_verified": true,
+    "snapshot_timed_policy_verified": true,
+    "transfer_treatment": "blocking",
+    "timed_transfer_policy_verified": true
+  },
+  "prior_audit_failure": {
+    "operation": "exec-0000000000000d4b",
+    "exit_code": 1,
+    "error": "OSError [Errno98] Address already in use during strict8233 bind; no inference about root cause",
+    "fresh_state_operation": "exec-0000000000000d4c",
+    "fresh_state": "listener empty,TCP empty,strictbindfree true; no mutation or NPU rerun",
+    "recovery": "Same immutable raw replayed independently after observed state change;0d4d exit0"
+  },
+  "decision": "valid one-arm timing and mechanism; no gain or overall acceptance claim until matched async/native and repetitions",
+  "remaining": [
+    "async/R1",
+    "native/R1",
+    "requested G1-G4 three-round matrix if progression valid",
+    "381-perarm naturalEOS quality",
+    "lifecycle",
+    "completeSkillfunctionalacceptance"
+  ]
+}
