@@ -64,6 +64,7 @@ class PartitionTests(unittest.TestCase):
         self.assertTrue(torch.equal(final,result.terminal))
         self.assertEqual(result.state_window_visits,len(layout.windows))
         self.assertEqual(result.state_token_visits,layout.packed_tokens)
+        self.assertEqual(result.state_dispatches,1+int(any(len(c)==3 for c in layout.chains)))
         self.assertEqual(sum(x[0][-1] for x in calls),layout.packed_tokens)
         self.assertTrue(torch.equal(initial,initial_before))
         self.assertTrue(torch.equal(shared.u,u_before))
@@ -101,5 +102,18 @@ class PartitionTests(unittest.TestCase):
             def get(self,*a,**kw):return NS(cu_seqlens_host=(0,999),chunk_indices_chunk64_host=())
         with self.assertRaises(ValueError):
             render_partitioned(s,l,i,m,metadata_cache=Bad(),total_value_heads=8,tp_size=4)
+    def test_route_defaults_disabled_and_consumes_flag(self):
+        from independent_compact_activation import c1_install_route
+        config,install,_=c1_install_route({})
+        self.assertFalse(install.c1_partitioned_render)
+        config,install,_=c1_install_route(dict(c1_packed_wave=True,native_decode_batch=True,
+            c1_layer_completion_barrier=True,c1_performance_mode=True,c1_partitioned_render=True))
+        self.assertTrue(install.c1_partitioned_render)
+        self.assertNotIn("c1_partitioned_render",config)
+    def test_route_rejects_nonboolean_and_unpacked(self):
+        from independent_compact_activation import c1_install_route
+        for value in (True,1,"true",None):
+            with self.subTest(value=value),self.assertRaises(ValueError):
+                c1_install_route(dict(c1_partitioned_render=value))
 
 if __name__=="__main__":unittest.main()

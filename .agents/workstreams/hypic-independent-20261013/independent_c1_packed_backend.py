@@ -26,10 +26,13 @@ def source_verified_backend(layer):
 
 def run_packed_c1(layer,layout,projected,b,a,initial_states,incoming_conv,materials,
                   *,backends,finite_check=None,geometry_observer=None,stage_probe=None,
-                  short_prefix_policy="chunk64",prefix_route_observer=None):
+                  short_prefix_policy="chunk64",prefix_route_observer=None,
+                  partitioned_render=False,partition_observer=None):
     """Return only private tensors. Caller owns leases and all-request commit."""
     if short_prefix_policy not in ("chunk64","canonical_recurrent_le64"):
         raise ValueError("explicit short-prefix policy required")
+    if type(partitioned_render)is not bool:
+        raise ValueError("explicit partitioned render boolean required")
     native,conv_op,gating,state_op,output_op,metadata_cache=backends
     cached={key:body.affine for key,body in materials.items()}
     tails={key:body.conv_tail for key,body in materials.items()}
@@ -62,19 +65,34 @@ def run_packed_c1(layer,layout,projected,b,a,initial_states,incoming_conv,materi
     initial_seeds=prefix_initial_seeds(layout,initial_states)
     # Use actual incoming H, not a zero/identity-derived approximation of a
     # finite-precision native live-prefix kernel. Dummy suffix states are zero.
-    _,_,prefix_terminals=shared.state(initial_seeds.clone())
-    if short_prefix_policy=="canonical_recurrent_le64":
+    def align_prefix(initial,terminals):
+        if short_prefix_policy!="canonical_recurrent_le64":return terminals
         from independent_c1_short_prefix import align_short_prefix_terminals
         observer=stage_probe.packed_recurrent_inputs if stage_probe is not None else None
-        prefix_terminals,routes=align_short_prefix_terminals(layout,q,k,v,g,beta,
-            initial_seeds,prefix_terminals,input_observer=observer)
+        terminals,routes=align_short_prefix_terminals(layout,q,k,v,g,beta,
+            initial,terminals,input_observer=observer)
         if prefix_route_observer is not None:
             for route in routes:prefix_route_observer(route)
-    seeds=suffix_seeds_from_terminals(layout,initial_seeds,prefix_terminals,cached)
+        return terminals
+    if partitioned_render:
+        from experimental_c1_partitioned_render import render_partitioned
+        rendered=render_partitioned(shared,layout,initial_states,cached,
+            metadata_cache=metadata_cache,total_value_heads=layer.num_v_heads,
+            tp_size=layer.tp_size,align_prefix=align_prefix if short_prefix_policy!="chunk64" else None)
+        prefix_terminals,seeds=rendered.prefix_terminals,rendered.seeds
+        output,terminal=rendered.output,rendered.terminal
+        if partition_observer is not None:
+            partition_observer(dict(state_window_visits=rendered.state_window_visits,
+                state_token_visits=rendered.state_token_visits,
+                state_dispatches=rendered.state_dispatches))
+    else:
+        _,_,prefix_terminals=shared.state(initial_seeds.clone())
+        prefix_terminals=align_prefix(initial_seeds,prefix_terminals)
+        seeds=suffix_seeds_from_terminals(layout,initial_seeds,prefix_terminals,cached)
     if stage_probe is not None:
         stage_probe.packed_inputs(shared,v,g,beta,initial_seeds,seeds)
         stage_probe.packed_states(prefix_terminals,seeds,materials)
-    output,terminal=shared.render(seeds)
+    if not partitioned_render:output,terminal=shared.render(seeds)
     wanted=(1,layout.packed_tokens,initial_states.shape[1],initial_states.shape[-1])
     if tuple(output.shape)!=wanted or terminal.shape!=(n,*initial_states.shape[1:]):
         raise ValueError("packed official output/state coverage mismatch")

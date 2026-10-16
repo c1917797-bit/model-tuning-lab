@@ -8,9 +8,12 @@ import hashlib,inspect
 def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=False,
                         layer_completion=False,layer_shadow=False,packed_wave=False,
                         first_divergence=False,first_divergence_head_policy="head0",
-                        short_prefix_policy="chunk64",performance_mode=False):
+                        short_prefix_policy="chunk64",performance_mode=False,
+                        partitioned_render=False):
     if not enabled:return lambda:None
     if type(packed_wave) is not bool:raise ValueError('explicit packed C1 boolean required')
+    if type(partitioned_render)is not bool or partitioned_render and not packed_wave:
+        raise ValueError('partitioned render requires explicit packed C1')
     if type(first_divergence)is not bool or first_divergence and not packed_wave:
         raise ValueError('explicit stage probe requires packed C1 canary')
     if (first_divergence_head_policy not in ("head0","max_state_residual")
@@ -80,6 +83,7 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
         with ExitStack() as leases:
             packed={};packed_materials={};packed_layout=None
             probe=None;probe_kwargs={}
+            if partitioned_render:probe_kwargs['partitioned_render']=True
             if first_divergence:
                 from independent_c1_stage_probe import make_probe
                 probe_kwargs={'probe_factory':lambda layer,layout,plans,leased:
@@ -184,7 +188,11 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
                 emit({'event':'c1_packed_wave_prepared','rank':plans[0].rank,'step':plans[0].step,
                     'layer':self.prefix,'requests':list(packed),'windows':len(packed_layout.windows),
                     'packed_tokens':packed_layout.packed_tokens,'shared_wy_preparations':1,
-                    'state_passes':2,'seed_mode':'actual_prefix_terminal',
+                    'state_passes':packed_backend.get('partition_stats',{}).get('state_dispatches',2),
+                    'seed_mode':'actual_prefix_terminal',
+                    'state_schedule':'partitioned' if partitioned_render else 'whole_pack_twice',
+                    'state_window_visits':packed_backend.get('partition_stats',{}).get('state_window_visits',2*len(packed_layout.windows)),
+                    'state_token_visits':packed_backend.get('partition_stats',{}).get('state_token_visits',2*packed_layout.packed_tokens),
                     'head_geometry':packed_backend.get('geometry'),
                     'actual_slot_commit':'not_started'})
             if CURRENT_COMPACT_MODEL.get() is not selected or CURRENT_REQUEST_SLICES.get() is not requests:

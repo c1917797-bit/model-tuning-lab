@@ -1,4 +1,19 @@
-# CURRENT R18 PARTITIONED C1 HOST PROTOTYPE; NOT ACTIVATED
+# CURRENT R18 PARTITIONED C1 WIRED DEFAULT-OFF;916 CPU PASS; NO NPU RUN
+
+Defaultfalse c1_partitioned_render wired activation/GDN/prepare/backend; actual
+partition visit/dispatch receipts distinguish prefix-only1 vs prefix+suffix2 calls,
+each live window/token once. Original default path retained. Independent audit
+joins exact worker/source/request/step/layer plus unchanged fullprivate serial
+output/state/conv residuals.916CPU0db2 PASS; static0db5 validates166source/159runtime
+bindings and absent newroot. Contract C1_PARTITIONED_R18_CANARY_R1_CONTRACT.json;
+audit_c1_partitioned_canary.py --contract ... --live-release after actual terminal.
+Raw /cache/cch/hypic-independent-20261013/c1-partitioned-r18-canary-r1 NOT started.
+Next publish checkpoint, fresh host-maintenance/direct/source/image/model/actual0-3
+and8233 admission, then bounded same2request correctness Canary, not performance.
+All old contracts source-stale, roots immutable. No owned model job; fixed cutoff
+2026-10-17T06:48:09Z. Full goal incomplete; R17firstscreen remainsnegative.
+
+# HISTORICAL R18 HOST PROTOTYPE BEFORE WIRING
 
 New experimental_c1_partitioned_render.py prepares prefix/suffix views of shared WY,
 renders each live window once, retains actual prefix-to-cached-to-suffix dependency

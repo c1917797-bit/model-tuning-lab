@@ -16,6 +16,7 @@ class PartitionedRender:
     seeds: object
     state_window_visits: int
     state_token_visits: int
+    state_dispatches: int
 
 def _select(shared,jobs,metadata_cache,*,total_value_heads,tp_size):
     starts=[0]; tokens=[]
@@ -57,9 +58,9 @@ def render_partitioned(shared,layout,initial_states,cached_maps,*,metadata_cache
     if len(set(prefix+suffix))!=n or set(prefix+suffix)!=set(range(n)):
         raise ValueError("each live window exactly once required")
     terminal=initial.clone();prefix_terms=initial.clone()
-    output=None;visits=0;token_visits=0
+    output=None;visits=0;token_visits=0;dispatches=0
     def render(jobs,seeds):
-        nonlocal output,visits,token_visits
+        nonlocal output,visits,token_visits,dispatches
         if not jobs:return
         selected,index=_select(shared,jobs,metadata_cache,
             total_value_heads=total_value_heads,tp_size=tp_size)
@@ -72,6 +73,7 @@ def render_partitioned(shared,layout,initial_states,cached_maps,*,metadata_cache
         output.index_copy_(1,index,y)
         terminal.index_copy_(0,ji,h)
         visits+=len(jobs);token_visits+=index.numel()
+        dispatches+=1
     render(prefix,initial)
     pi=torch.tensor(prefix,dtype=torch.long,device=initial.device)
     prefix_terms.index_copy_(0,pi,terminal.index_select(0,pi))
@@ -98,4 +100,4 @@ def render_partitioned(shared,layout,initial_states,cached_maps,*,metadata_cache
             j=live[0]
             if len(live)==1 and shared.starts[j+1]-shared.starts[j]<=64:
                 terminal[j].copy_(prefix_terms[j])
-    return PartitionedRender(output,terminal,prefix_terms,seeds,visits,token_visits)
+    return PartitionedRender(output,terminal,prefix_terms,seeds,visits,token_visits,dispatches)

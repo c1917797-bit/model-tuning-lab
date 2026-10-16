@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R17-three-arm-first-screen-negative",
+  "execution_state": "R18-partitioned-host-ready-not-device-started",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Review one evidenced integration overhead; new default-off hypothesis and numerical controls before successor NPU contract. Keep all old roots immutable. Full12 matrix/381 per-arm quality/lifecycle remain incomplete. No unchanged R17 expansion.",
+  "next_action": "Publish916CPU-tested R18 wiring checkpoint; freshly load maintenance/resolve ma/host-development/direct and verify166sources,image/model,actual0-3/8233/newroot, then bounded C1_PARTITIONED_R18_CANARY_R1_CONTRACT.json. No stale R17 launch. Terminal independent audit_c1_partitioned_canary.py --live-release. Fullmatrix/quality/lifecycle remain incomplete.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -364,5 +364,14 @@
       "tpot_p95_ms": -1.2956186321709453
     },
     "decision_report": "R17_THREE_ARM_FIRST_SCREEN_20261016.json"
+  },
+  "r18_partitioned": {
+    "state": "HOST_ONLY_WIRED_DEFAULT_OFF",
+    "regression_operation": "exec-0000000000000db2",
+    "tests": 916,
+    "static_operation": "exec-0000000000000db5",
+    "contract": "C1_PARTITIONED_R18_CANARY_R1_CONTRACT.json",
+    "report": "C1_PARTITIONED_R18_WIRING_READINESS_20261016.json",
+    "device_started": false
   }
 }

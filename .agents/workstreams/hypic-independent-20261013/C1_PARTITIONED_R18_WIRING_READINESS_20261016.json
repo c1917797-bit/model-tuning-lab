@@ -1,0 +1,28 @@
+{
+  "schema": "hypic-r18-partition-wiring-readiness/v1",
+  "state": "HOST_REGRESSION_PASSED_NOT_NPU_VALIDATED",
+  "regression": {
+    "operation": "exec-0000000000000db2",
+    "tests": 916,
+    "exit": 0
+  },
+  "static": {
+    "operation": "exec-0000000000000db5",
+    "source_bindings": 166,
+    "runtime_bindings": 159,
+    "new_root_absent": true
+  },
+  "default_off_flag": "c1_partitioned_render",
+  "count_policy": "prefix-only state_dispatches1;prefix+suffix2;each window/token once, not two whole-pack passes",
+  "numerical": "existing private serial output/state/conv shadow atol0.01 rtol0.003 retained; actual device batching not yet validated",
+  "contract": "C1_PARTITIONED_R18_CANARY_R1_CONTRACT.json",
+  "auditor": "audit_c1_partitioned_canary.py",
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-partitioned-r18-canary-r1",
+  "device_started": false,
+  "remaining": [
+    "fresh route/physical0-3/8233/model/source/image admission",
+    "real four-rank partition and serial shadow proof",
+    "independent source/isolation/exactrelease audit",
+    "matched formal speed,381/arm quality,lifecycle,Skills"
+  ]
+}

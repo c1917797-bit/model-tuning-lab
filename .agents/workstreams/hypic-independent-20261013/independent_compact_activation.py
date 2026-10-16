@@ -43,6 +43,9 @@ def c1_install_route(config):
     completion=config.pop('c1_layer_completion_barrier',False)
     shadow=config.pop('c1_layer_shadow_validation',False)
     packed=config.pop('c1_packed_wave',False)
+    partitioned=config.pop('c1_partitioned_render',False)
+    if type(partitioned)is not bool or partitioned and not packed:
+        raise ValueError('partitioned render requires explicit packed C1')
     performance=config.pop('c1_performance_mode',False)
     prefix_policy=config.pop('c1_short_prefix_terminal_policy','chunk64')
     if prefix_policy not in ('chunk64','canonical_recurrent_le64') or prefix_policy!='chunk64' and not packed:
@@ -65,10 +68,12 @@ def c1_install_route(config):
         return install_compact_gdn(stage,enabled=enabled,emit=emit,native_decode_batch=native_batch,
             layer_completion=completion,layer_shadow=shadow,packed_wave=packed,
             first_divergence=probe,first_divergence_head_policy=head_policy,
-            short_prefix_policy=prefix_policy,performance_mode=performance)
+            short_prefix_policy=prefix_policy,performance_mode=performance,
+            partitioned_render=partitioned)
     install.c1_layer_completion_barrier=completion
     install.c1_layer_shadow_validation=shadow
     install.c1_packed_wave=packed
+    install.c1_partitioned_render=partitioned
     install.c1_performance_mode=performance
     install.c1_short_prefix_terminal_policy=prefix_policy
     install.c1_first_divergence=probe
@@ -152,6 +157,7 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
               'c1_layer_completion_barrier':install_compact_gdn.c1_layer_completion_barrier,
               'c1_layer_shadow_validation':install_compact_gdn.c1_layer_shadow_validation,
               'c1_packed_wave':install_compact_gdn.c1_packed_wave,
+              'c1_partitioned_render':install_compact_gdn.c1_partitioned_render,
               'c1_performance_mode':install_compact_gdn.c1_performance_mode,
               'c1_first_divergence':install_compact_gdn.c1_first_divergence,
               'c1_short_prefix_terminal_policy':install_compact_gdn.c1_short_prefix_terminal_policy,

@@ -54,7 +54,7 @@ class PackedBackendTests(unittest.TestCase):
             with self.assertRaises(ValueError):c.get(starts,total_value_heads=48,tp_size=4,device="cpu")
         c.clear();self.assertFalse(c.entries)
 
-    def full_private_backend_case(self,round_state=False,canonical=False):
+    def full_private_backend_case(self,round_state=False,canonical=False,partitioned=False):
         from independent_c1_reference import serial_dense_oracle
         for no_suffix in (False,True):
             plans,associations,layout,initial,cached,data,maps=self.fixture(no_suffix)
@@ -93,6 +93,7 @@ class PackedBackendTests(unittest.TestCase):
                     kw["k"].repeat_interleave(kw["v"].shape[2]//kw["k"].shape[2],2),kw["v"])))
             def state_op(k,w,u,**kw):
                 calls["state"]+=1
+                calls["state_tokens"]+=k.shape[2]
                 self.assertEqual(k.shape[1],1)
                 self.assertEqual(w.shape[1],2)
                 # Mathematical expansion is confined to the fake official op.
@@ -126,6 +127,8 @@ class PackedBackendTests(unittest.TestCase):
             routes=[]
             policy_kwargs=dict(short_prefix_policy="canonical_recurrent_le64",
                 prefix_route_observer=routes.append) if canonical else {}
+            stats=[]
+            if partitioned:policy_kwargs.update(partitioned_render=True,partition_observer=stats.append)
             result=run_packed_c1(layer,layout,x,b,a,initial,tail,material,backends=(
                 native,conv_op,gating,state_op,output_op,PackedMetadataCache(metadata)),
                 geometry_observer=geometry.append,**policy_kwargs)
@@ -160,9 +163,20 @@ class PackedBackendTests(unittest.TestCase):
                 torch.testing.assert_close(actual[0].float(),torch.stack(ys).to(torch.bfloat16).float(),atol=.002,rtol=.003)
                 torch.testing.assert_close(actual[1],h,atol=2e-5,rtol=.002)
                 torch.testing.assert_close(actual[2].float(),c.float(),atol=.001,rtol=.002)
-            self.assertEqual(calls["conv"],1);self.assertEqual(calls["metadata"],1)
-            self.assertEqual(calls["wy"],1);self.assertEqual(calls["state"],2)
-            self.assertEqual(calls["output"],1)
+            self.assertEqual(calls["conv"],1)
+            self.assertEqual(calls["wy"],1)
+            if partitioned:
+                groups=1+int(any(len(c)==3 for c in layout.chains))
+                self.assertEqual(calls["state"],groups)
+                self.assertEqual(calls["output"],groups)
+                self.assertEqual(calls["state_tokens"],layout.packed_tokens)
+                self.assertEqual(stats,[dict(state_window_visits=len(layout.windows),
+                    state_token_visits=layout.packed_tokens,state_dispatches=groups)])
+            else:
+                self.assertEqual(calls["metadata"],1)
+                self.assertEqual(calls["state"],2)
+                self.assertEqual(calls["output"],1)
+                self.assertEqual(calls["state_tokens"],2*layout.packed_tokens)
             if canonical:
                 self.assertEqual(len(routes),sum(bool(c) and c[0][0]=="live" for c in layout.chains))
                 self.assertTrue(all(r["policy"]=="canonical_recurrent_le64" for r in routes))
@@ -172,5 +186,11 @@ class PackedBackendTests(unittest.TestCase):
     def test_nonzero_rounding_backend_against_serial(self):self.full_private_backend_case(round_state=True)
     def test_canonical_prefix_terminal_actually_feeds_cached_body_and_suffix(self):
         self.full_private_backend_case(canonical=True)
+    def test_partitioned_backend_against_serial(self):
+        self.full_private_backend_case(partitioned=True)
+    def test_partitioned_rounding_backend_against_serial(self):
+        self.full_private_backend_case(round_state=True,partitioned=True)
+    def test_partitioned_canonical_prefix_actually_feeds_suffix(self):
+        self.full_private_backend_case(canonical=True,partitioned=True)
 
 if __name__=="__main__":unittest.main()
