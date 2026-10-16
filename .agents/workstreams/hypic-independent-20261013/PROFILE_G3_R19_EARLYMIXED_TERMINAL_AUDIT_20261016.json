@@ -1,0 +1,109 @@
+{
+  "schema": "hypic-earlymixed-profile-terminal-audit/v1",
+  "controller": "exec-0000000000000f22",
+  "audit_operation": "exec-0000000000000f46",
+  "contract": "PROFILE_G3_R19_EARLYMIXED_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/profile-g3-r19-earlymixed-r1",
+  "evidence": {
+    "source_bindings": 196,
+    "responses": 16,
+    "private_warmup": 16,
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 16,
+      "covered": [
+        "cmpl-9c00caff6f5d5a46",
+        "cmpl-970edd77c9ee8bc1",
+        "cmpl-95cd6fe960b29be3",
+        "cmpl-908b993b4f0d4209",
+        "cmpl-8991b8304b88292a",
+        "cmpl-a8cdda0f06c62f6b",
+        "cmpl-816c3c60c208d426",
+        "cmpl-a4fc144d7c300968",
+        "cmpl-8742ab380dbbf528",
+        "cmpl-a371b8bdb67cff5b",
+        "cmpl-83c12e0a75b064a4",
+        "cmpl-89c6c0ea53369385",
+        "cmpl-a9805dbc3eee95b9",
+        "cmpl-95bce0fe2a01c556",
+        "cmpl-ac3d3f2e70716f6d",
+        "cmpl-b695d1bf43fa1210"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 60,
+        "1": 61,
+        "2": 62,
+        "3": 63
+      },
+      "scope": "diagnostic16 same-step all-rank/all-layer coverage only; never formal full40 acceptance"
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 60,
+          "host_pid": 1701254,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 61,
+          "host_pid": 1701255,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 62,
+          "host_pid": 1701256,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 63,
+          "host_pid": 1701257,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "isolation": 228,
+    "events": {
+      "preflight": 1,
+      "isolation": 228,
+      "warmup": 4,
+      "profile-private-warmup": 16,
+      "profile-start": 1,
+      "profile-response": 16,
+      "profile-stop": 1,
+      "terminal": 1
+    },
+    "partition": {
+      "enabled": true,
+      "groups": 5376,
+      "completed": 6144,
+      "workers": {
+        "0": 60,
+        "1": 61,
+        "2": 62,
+        "3": 63
+      }
+    },
+    "lazy": {
+      "lazy": true,
+      "completed_receipts": 45312
+    },
+    "raw_sha256": {
+      "result.json": "ec5bd82ba39f37e6d1932d8dd4977522b8a47cc900a55938e404818cd91ee152",
+      "profile-unit.json": "a06ccff18d7a88cc8c5e02ad8e827e24b269cf0e768a37175a37168ab2b30596",
+      "events.jsonl": "e1b655f27eae62dca79182d57f4cec82953f9ee34e573ee884824e620a2ea951",
+      "release.json": "f9badad513e054ef3b9fc712ac9b00600fd83f1fe9e66597bfe02563ea7e9b47"
+    },
+    "profile_file_count": 320,
+    "profile_files": [],
+    "live_release_verified": true,
+    "scope": "capture/source/mechanism/isolation/release audit; profiler parsing/completeness not yet accepted; not formal speed orquality"
+  },
+  "parser": {
+    "capture_audit": "exec-0000000000000f46",
+    "parser_cid": "7e09ad99b1ab0a420a3a8a6c1389a9b543997de638e45e503326c55974ef4d94",
+    "analysis_root": "/cache/cch/hypic-independent-20261013/profile-g3-r19-earlymixed-r1-analysis-r1",
+    "scope": "capture accepted; parsedcompleteness/causality pending"
+  }
+}

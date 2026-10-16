@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R19-G3-bounded-profile-running",
+  "execution_state": "R19-G3-profile-capture-valid-parser-running",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "Owned G3R19profile exact0f22; no othercontroller."
+    "state": "No owned model computejob; CPU0manager-onlyparser7e09ad99 no compute mapping."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll exact ma0f22/raw; no196boundchanges/restart. Terminal audit source/16warmed+16profile requests/fourrank actualmechanism/physical/isolation/exactrelease and profiler completeness. Onlyvalid then matchedG1 newadmission; profile64 notformal1024 orquality.",
+  "next_action": "Inspect exactparserCID7e09ad99/live or terminal; no duplicateparser/oldroot reuse. Audit fourranknonemptytables/traces and classifyactualphase before matchingG1.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,14 +215,15 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "RUNNING",
+    "state": "TERMINAL_CAPTURE_VALID",
     "operation": "exec-0000000000000f22",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
     "contract": "PROFILE_G3_R19_EARLYMIXED_R1_CONTRACT.json",
     "raw_root": "/cache/cch/hypic-independent-20261013/profile-g3-r19-earlymixed-r1",
     "checkpoint": "265753806c6cf102a7d9c48fd660885eeb52bee8",
-    "admission_operation": "exec-0000000000000f21"
+    "admission_operation": "exec-0000000000000f21",
+    "independent_audit": "exec-0000000000000f46"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -402,5 +403,11 @@
     "off_report": "R19_LAZY_OFF_R1_TERMINAL_20261016.json",
     "native_report": "R19_LAZY_NATIVE_R1_TERMINAL_20261016.json",
     "decision_report": "R19_THREE_ARM_FIRST_SCREEN_20261016.json"
+  },
+  "profile_r19": {
+    "capture_audit": "exec-0000000000000f46",
+    "parser_cid": "7e09ad99b1ab0a420a3a8a6c1389a9b543997de638e45e503326c55974ef4d94",
+    "analysis_root": "/cache/cch/hypic-independent-20261013/profile-g3-r19-earlymixed-r1-analysis-r1",
+    "scope": "capture accepted; parsedcompleteness/causality pending"
   }
 }

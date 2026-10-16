@@ -1,4 +1,16 @@
-# CURRENT R19 G3 BOUNDED EARLYMIXED PROFILE LIVE
+# CURRENT R19 G3 CAPTURE AUDITED; CPU PARSER TRACKING
+
+0f22terminalexit0;independent0f46 accepts196sources/16profile+16warmupresponses/
+16of16fourrank48C1+16C2/228cleanisolation/explicitphysical/liveexactrelease.
+PROFILE_G3_R19_EARLYMIXED_TERMINAL_AUDIT_20261016.json recordsrawhashes.
+No ownedmodelcomputejob. Parser exactCID7e09ad99b1ab0a420a3a8a6c1389a9b543997de638e45e503326c55974ef4d94
+launched0f4b;CPU0/manager-only/no compute mapping, newanalysisroot
+/cache/cch/hypic-independent-20261013/profile-g3-r19-earlymixed-r1-analysis-r1.
+Poll exactcontainer/actualoutputs; no duplicateparser/rawoverwrite. Parsedfourrank
+tables/traces/actualphase completeness pending; no kernelrootcause yet.
+Onlyvalid thenfreshmatchingG1 admission. Cutoff2026-10-17T06:48:09Z.
+
+# HISTORICAL R19 G3 BOUNDED EARLYMIXED PROFILE LIVE
 
 ma exact exec-0000000000000f22 launched22:31UTC from liveverified26575380.
 Admission0f21:196sources/181runtime/image/model/input/physical0-3empty/8233+HCCLfree/newroot.
