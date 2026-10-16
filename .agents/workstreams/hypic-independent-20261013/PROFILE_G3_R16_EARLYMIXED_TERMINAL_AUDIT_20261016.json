@@ -1,0 +1,93 @@
+{
+  "schema": "hypic-earlymixed-profile-terminal-audit/v1",
+  "controller": "exec-0000000000000c89",
+  "audit_operation": "exec-0000000000000ca2",
+  "contract": "PROFILE_G3_R16_EARLYMIXED_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/profile-g3-r16-earlymixed-r1",
+  "evidence": {
+    "source_bindings": 149,
+    "responses": 16,
+    "private_warmup": 16,
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 16,
+      "covered": [
+        "cmpl-bc68221a4b92b28e",
+        "cmpl-b44bc35f32a32c81",
+        "cmpl-94656743567f0efd",
+        "cmpl-b8d7b0269f2bdc23",
+        "cmpl-9b8d3bc545f4776e",
+        "cmpl-b73a64a7999f7791",
+        "cmpl-913c35797c5ccd75",
+        "cmpl-90b4008a6bada8f3",
+        "cmpl-a5588b9b510e48fb",
+        "cmpl-88a3070c65816ca7",
+        "cmpl-af72a9a115fb562d",
+        "cmpl-87a15683ea6d4af1",
+        "cmpl-8ce97dcaa3e8bf84",
+        "cmpl-ad6fae92c8f9221f",
+        "cmpl-a0c1f959db5916c3",
+        "cmpl-85d398597ebd1f03"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 58,
+        "1": 59,
+        "2": 60,
+        "3": 61
+      },
+      "scope": "diagnostic16 same-step all-rank/all-layer coverage only; never formal full40 acceptance"
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 58,
+          "host_pid": 2415222,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 59,
+          "host_pid": 2415223,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 60,
+          "host_pid": 2415224,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 61,
+          "host_pid": 2415225,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "isolation": 232,
+    "events": {
+      "preflight": 1,
+      "isolation": 232,
+      "warmup": 4,
+      "profile-private-warmup": 16,
+      "profile-start": 1,
+      "profile-response": 16,
+      "profile-stop": 1,
+      "terminal": 1
+    },
+    "raw_sha256": {
+      "result.json": "ec9181285b7914a016868d41245d8f899cafdc0516c361dd06d37cc6636b4d92",
+      "profile-unit.json": "3c235622e238ab2edcb3d9176eea4f2a0db6d5c44d772668e2c897dd070565ce",
+      "events.jsonl": "26e6daca0e7323b6018c9ca794cd2ec54b7b0d50bb6d96f9b6b2937c2dfcb1c9",
+      "release.json": "5be5fe1b48b831a12b1a0ae249a0d9f6d48958ec0bfbc57941eecb3ed4ee244e"
+    }
+  },
+  "parser": {
+    "cid": "015f5e1c98a3b7b23099cdb1633f8780de527966a990c9fa0ce20fb52165a257",
+    "analysis_root": "/cache/cch/hypic-independent-20261013/profile-g3-r16-earlymixed-r1-analysis-r1",
+    "compute_devices": [],
+    "manager_query": true,
+    "cpu": "0",
+    "state": "launched; verify actual live state before wait"
+  },
+  "scope": "Capture/source/mechanism/physical/isolation/recordedrelease valid; phase and parsed artifacts not yet audited. Not formal performance/quality."
+}

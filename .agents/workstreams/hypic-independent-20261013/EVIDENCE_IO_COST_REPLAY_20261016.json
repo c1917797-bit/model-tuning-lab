@@ -1,0 +1,74 @@
+{
+  "schema": "hypic-evidence-io-cost/v1",
+  "results": [
+    {
+      "trial": 0,
+      "mode": "original",
+      "events": 256,
+      "fsync_calls": 256,
+      "elapsed_ms": 198.87383,
+      "event_median_ms": 0.755645,
+      "event_p95_ms": 0.91788,
+      "sha256": "a32f5bd044b1a658fc9ea87e18e9a108db2347be3251c9c350f05473834ed615"
+    },
+    {
+      "trial": 0,
+      "mode": "cached_hash",
+      "events": 256,
+      "fsync_calls": 256,
+      "elapsed_ms": 180.27501,
+      "event_median_ms": 0.680085,
+      "event_p95_ms": 0.8511,
+      "sha256": "a32f5bd044b1a658fc9ea87e18e9a108db2347be3251c9c350f05473834ed615"
+    },
+    {
+      "trial": 0,
+      "mode": "step_fsync64",
+      "events": 256,
+      "fsync_calls": 4,
+      "elapsed_ms": 11.31579,
+      "event_median_ms": 0.024485,
+      "event_p95_ms": 0.03538,
+      "sha256": "a32f5bd044b1a658fc9ea87e18e9a108db2347be3251c9c350f05473834ed615"
+    },
+    {
+      "trial": 1,
+      "mode": "step_fsync64",
+      "events": 256,
+      "fsync_calls": 4,
+      "elapsed_ms": 11.35592,
+      "event_median_ms": 0.02438,
+      "event_p95_ms": 0.03629,
+      "sha256": "a32f5bd044b1a658fc9ea87e18e9a108db2347be3251c9c350f05473834ed615"
+    },
+    {
+      "trial": 1,
+      "mode": "cached_hash",
+      "events": 256,
+      "fsync_calls": 256,
+      "elapsed_ms": 179.75178,
+      "event_median_ms": 0.68867,
+      "event_p95_ms": 0.85147,
+      "sha256": "a32f5bd044b1a658fc9ea87e18e9a108db2347be3251c9c350f05473834ed615"
+    },
+    {
+      "trial": 1,
+      "mode": "original",
+      "events": 256,
+      "fsync_calls": 256,
+      "elapsed_ms": 203.07729,
+      "event_median_ms": 0.74739,
+      "event_p95_ms": 0.99775,
+      "sha256": "a32f5bd044b1a658fc9ea87e18e9a108db2347be3251c9c350f05473834ed615"
+    }
+  ],
+  "samples": 256,
+  "orders": "counterbalanced2trials",
+  "raw_root": "/cache/cch/hypic-independent-20261013/evidence-io-cost-r1",
+  "compute_devices": [],
+  "scope": "Single CPU0/cache filesystem replay only. No model job running. Exact same event bytes. Not E2E, durability policy change or deployable treatment. No extrapolated wall-time causality.",
+  "operation": "exec-0000000000000ca4",
+  "source_loader_sha256": "68f85ad6544bbff8c90da0c091c6ae87ac0823b56b9b00b804cb4f7bd8c79c84",
+  "observed_events_per_rank": 32086,
+  "decision": "Per-eventfsync dominates this bounded replay; cachedSHA alone only removes small part. Potential treatment must retain every record/source identity/limits and define real request-step durability fence, flush on success/failure/uninstall. Arbitrary64-event groups here are microbenchmark only, NOT production step boundaries or identical crash-durability proof. No runtime source changed; do not claim E2Espeed or causal formalregression explanation."
+}

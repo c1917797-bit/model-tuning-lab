@@ -1,4 +1,16 @@
-# CURRENT R16 G3 EARLYMIXED PROFILE LIVE
+# CURRENT R16 G3 EARLYMIXED TERMINAL AUDITED; PARSER LAUNCHED
+
+0c89 terminalexit0;independent source149/hot16/16warm+16profile/physicaljoin/isolation232/
+recordedexactreleasePASS. PROFILE_G3_R16_EARLYMIXED_TERMINAL_AUDIT_20261016.json hashes.
+ParserCID015f5e1c98a3b7b23099cdb1633f8780de527966a990c9fa0ce20fb52165a257 launched
+CPU0/manager-only/no compute mapping, analysis-r1 copy/rawuntouched. Verify live/terminal,
+all4tables/trace andactualphase. Nativeearlymixed contract notlaunched. No modeljob.
+0ca4 bounded IOreplay completed BEFOREparser:256same-byte records/2counterbalanced
+trials original199-203ms, cachedSHA180ms,group64fsync11ms. Everyrankfull40has32086events.
+EVIDENCE_IO_COST_REPLAY_20261016.json is micro-only;group64 NOT modelstepdurability/
+productionfix/E2Espeed. Source149 unchanged. Needactualprefill criticalpath thenbounded
+realstep-fence treatment with sameproof/limits/failclosed ifsupported. Originalnegativepair stays.
+Below0c89live text historical/superseded; fullgoal incomplete/deadlineunchanged.
 
 Exactma exec-0000000000000c89 RUNNING;raw /cache/cch/hypic-independent-20261013/profile-g3-r16-earlymixed-r1.
 Checkpoint6110d06 published/liveverified;0c88 fresh14:58:30UTC source149/image/model/input/
