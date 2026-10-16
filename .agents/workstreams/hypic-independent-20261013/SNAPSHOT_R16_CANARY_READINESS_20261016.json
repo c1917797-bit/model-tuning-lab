@@ -1,0 +1,19 @@
+{
+  "schema": "hypic-snapshot-canary-readiness/v1",
+  "full_cpu": {
+    "operation": "exec-00000000000009f4",
+    "tests": 593,
+    "exit": 0
+  },
+  "final_focused": {
+    "operation": "exec-00000000000009f9",
+    "tests": 10,
+    "exit": 0
+  },
+  "contract": "SNAPSHOT_R16_CANARY_R1_CONTRACT.json",
+  "auditor": "audit_prompt_snapshot_canary.py",
+  "protocol": "1 public16640/1 then concurrent2 private32768/1024; nonformal; original correctness shadows retained; max2 probes/rank",
+  "prior_connector_error": "awmcpru endpoint404; primary awmcp freshly resolves same ma and proves peer_direct; patch presence checked before further work",
+  "device_run": false,
+  "full_goal_accepted": false
+}

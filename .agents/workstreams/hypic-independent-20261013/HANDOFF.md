@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+R16 snapshot Canary READY NOT STARTED. Contract SNAPSHOT_R16_CANARY_R1_CONTRACT.json,
+raw /cache/cch/hypic-independent-20261013/snapshot-r16-canary-r1 (must not exist).
+formal_r15_tp4.py unchanged controller; new145source map/config/manifest.
+1public16640/1 then concurrent2private32768/1024, R14 correctness shadows retained,
+snapshot switchtrue/probe2, no formal performance/quality.593CPU09f4+10final09f9PASS.
+Use primary awmcp after awmcpru404, fresh ma direct proof/host-development required.
+Terminal audit_prompt_snapshot_canary.py --contract ... --live-release.
+
 Newest host-only probe: explicit prompt_snapshot_probe_batches default0/max2 per
 worker; only completed single-token decode batches consume budget. Compare original
 and prefill-only snapshots on same metadata, alternate order, retain prefill equality,

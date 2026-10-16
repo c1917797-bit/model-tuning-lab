@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "formal-r15-renewed-first-pair-negative-successor-required",
+  "execution_state": "snapshot-r16-canary-ready-not-started",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "First matched pair negative: TPOT+43.7829%, TTFTP95+45.7990%. Retain R15 roots; no remaining R15 matrix expansion. Freeze separately source-bound default-off prompt snapshot integration, prove actual worker opportunity and bounded correctness before successor performance. Full quality/lifecycle/29functional still missing.",
+  "next_action": "Fresh direct/idle/source/image/model/input admission then launch only SNAPSHOT_R16_CANARY_R1_CONTRACT.json via formal_r15_tp4.py --run. New bounded nonformal2private32K/1024 snapshot correctness/opportunity; poll exact handle, no restart. Terminal audit_prompt_snapshot_canary.py --contract ... --live-release. R15 pair rejected and no further R15 matrix.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,13 +215,11 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL09a6 exit0; independent09da exit0 and live release verified; first matched pair negative. No live owned device stage.",
-    "last_operation": "exec-00000000000009a6",
+    "state": "READY_NOT_STARTED",
+    "contract": "SNAPSHOT_R16_CANARY_R1_CONTRACT.json",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
-    "connector": "awmcpru",
-    "raw_root": "/cache/cch/hypic-independent-20261013/formal-r15-20261016-g1-r1",
-    "checkpoint": "c77af31f8e944aa603f9af7ad68cc5e5eba98be7",
-    "contract": "FORMAL_R15_20261016_G1_R1_CONTRACT.json"
+    "connector": "awmcp",
+    "raw_root": "/cache/cch/hypic-independent-20261013/snapshot-r16-canary-r1"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -248,7 +246,7 @@
     "report": "FORMAL_R15_20261016_FIRST_PAIR_DECISION.json"
   },
   "prompt_snapshot_component": {
-    "state": "unactivated; defaultoff; no live141 edits",
+    "state": "defaultoff runtime integration/probe hostvalidated; new R16 Canary frozen, no device run yet",
     "report": "PREFILL_PROMPT_SNAPSHOT_HOST_READINESS_20261016.json",
     "tests": "17targeted09b3/550CPU09b7PASS",
     "image_component_cost_ms": [
