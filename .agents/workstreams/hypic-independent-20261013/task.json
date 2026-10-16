@@ -245,5 +245,15 @@
     "running": "G1/R1",
     "remaining_not_started": 10,
     "report": "FORMAL_R15_20261016_G3_R1_TERMINAL.json"
+  },
+  "prompt_snapshot_component": {
+    "state": "unactivated; defaultoff; no live141 edits",
+    "report": "PREFILL_PROMPT_SNAPSHOT_HOST_READINESS_20261016.json",
+    "tests": "17targeted09b3/550CPU09b7PASS",
+    "image_component_cost_ms": [
+      118.40083299903199,
+      0.017921999096870422
+    ],
+    "scope": "localCPUcost only; firstG1pair and runtimeadmission required"
   }
 }

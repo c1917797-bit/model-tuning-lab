@@ -1,0 +1,115 @@
+{
+  "schema": "prefill-prompt-snapshot-host-readiness/v1",
+  "state": "UNACTIVATED component; live G1 unaffected",
+  "plan_checkpoint": "e6a321e760949b779e77f85a532fbce08351e057",
+  "targeted": {
+    "operation": "exec-00000000000009b3",
+    "tests": 17,
+    "status": "PASS"
+  },
+  "full_regression": {
+    "operation": "exec-00000000000009b7",
+    "tests": 550,
+    "status": "PASS",
+    "scope": "CPU unit discovery, not550 unique functional/Skill gates"
+  },
+  "host_bench": {
+    "operation": "exec-00000000000009b5",
+    "report": {
+      "python": "3.9.9 (main, Dec  3 2025, 09:05:37) \n[GCC 10.3.1]",
+      "cpu_affinity": [
+        0
+      ],
+      "component_ms": {
+        "False": {
+          "repeats_ms": [
+            111.58234600152355,
+            110.48076899896841,
+            108.97192200063728,
+            112.98662899935152,
+            110.74664699845016
+          ],
+          "median_ms": 110.74664699845016
+        },
+        "True": {
+          "repeats_ms": [
+            0.2753799984930083,
+            0.0265670008957386,
+            0.026246998459100723,
+            0.02616099955048412,
+            0.02619400038383901
+          ],
+          "median_ms": 0.026246998459100723
+        }
+      },
+      "requests": 12,
+      "tokens_per_prompt": 32768,
+      "scope": "host-only component timing; helper unactivated; decode omission only and no NPU/service speed/equivalence claim"
+    }
+  },
+  "pinned_image_bench": {
+    "operation": "exec-00000000000009bb",
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "report": {
+      "python": "3.12.13 (main, Aug  3 2026, 03:44:26) [GCC 11.4.0]",
+      "npu_devices": [],
+      "cpu_affinity": [
+        0
+      ],
+      "source_sha256": "c46a13dd456f12ba764b1c1e22f3d05d6bd0349c924b3cef0b3809d8c4b9f2ee",
+      "original_source_sha256": "d15ca77aa3a84f16b0de944c8250c39188b01bfb2d48bd307324bdf41a1546e2",
+      "requests": 12,
+      "tokens_per_prompt": 32768,
+      "component": {
+        "False": {
+          "wall_ms": [
+            118.69070800021291,
+            118.40083299903199,
+            117.54668299981859,
+            120.75321000011172,
+            116.1773350002477
+          ],
+          "cpu_ms": [
+            118.14085300000002,
+            117.953904,
+            117.07488800000002,
+            120.25555999999997,
+            115.70613100000006
+          ],
+          "median_wall_ms": 118.40083299903199,
+          "median_cpu_ms": 117.953904
+        },
+        "True": {
+          "wall_ms": [
+            0.26251900126226246,
+            0.01834699942264706,
+            0.017921999096870422,
+            0.017576999380253255,
+            0.017645000480115414
+          ],
+          "cpu_ms": [
+            0.26151900000002115,
+            0.018431999999979354,
+            0.017970000000033792,
+            0.01761999999994046,
+            0.01770400000005168
+          ],
+          "median_wall_ms": 0.017921999096870422,
+          "median_cpu_ms": 0.017970000000033792
+        }
+      },
+      "scope": "pinned officialimage Python, CPUonly/runc/networknone/read-only; no actual serviceprofiling, no NPU or servicegainclaim"
+    }
+  },
+  "opportunity": {
+    "local_wall_ms": 118.38291099993512,
+    "unit": "one12request/32768prompt snapshot",
+    "not": "Do not multiply by4parallelranks or label this non-overlapped service gain; no actual workercriticalpath proof yet"
+  },
+  "changed_files": [
+    "independent_prefill_prompt_snapshot.py",
+    "test_independent_prefill_prompt_snapshot.py"
+  ],
+  "runtime_binding": "NOT imported/activated; original141 sourcebindings unchanged",
+  "next": "CompleteG1/independent audit/firstpair; only if needed quantify workercriticalpath then freeze defaultoff integration/canary/newsource/newroots beforeNPU"
+}

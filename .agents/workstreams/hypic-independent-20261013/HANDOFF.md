@@ -1,5 +1,16 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Promptsnapshot component UNACTIVATED/defaultoff:17targeted09b3/550CPU09b7PASS.
+Officialimage3.12 CPU-only09bb (runc/networknone/readonly/NOdavinci devices/CPU0
+outside service112-191):12x32768 fullsnapshot median118.4008ms ->0.017922ms
+for completednative1 prompt omission. HOST3.9 paired09b5 110.7466->0.026247ms.
+This is LOCAL CPUcost only, not workercriticalpath/E2E/NPUgain; no factor4sum.
+Helper preservesoriginalsnapshot for allprefill/lastprompttoken/publicproducer/
+multi-token/unsupported; no stalegeneration caching. No current141edit/import.
+PREFILL_PROMPT_SNAPSHOT_HOST_READINESS_20261016.json. Await G1realpair before
+any newruntime integration; freeze defaultoff canary/newmanifest/newroot after
+09a6terminal/release if admitted. Puredecode alreadyoriginalGDN, no redundantGDNtask.
+
 CURRENTG1/R1 exec-00000000000009a6 RUNNING originalma a6109/tpcforcedirect.
 Rawformal-r15-20261016-g1-r1;contractFORMAL_R15_20261016_G1_R1_CONTRACT.json.
 c77af31f published/liveverified;09a5fresh07:43:51UTC141sources/0-3empty/ports/
