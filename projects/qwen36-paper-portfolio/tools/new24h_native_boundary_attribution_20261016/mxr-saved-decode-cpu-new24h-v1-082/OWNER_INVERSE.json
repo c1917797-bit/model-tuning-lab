@@ -1,0 +1,73 @@
+{
+  "changes": [
+    {
+      "new": "HERE=Path(__file__).resolve().parent;sys.path.insert(0,str(HERE))",
+      "old": "HERE=Path(__file__).resolve().parent"
+    },
+    {
+      "new": "ROOT=Path('/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082')",
+      "old": "ROOT=Path('/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2')"
+    },
+    {
+      "new": "SOURCE={'path': '/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/SOURCE_MANIFEST.json', 'bytes': 111072, 'sha256': '8d0608cd3fe3814359fc8141a39afe4b14baa77290d20fd8e57e73bcab4799ab'}\nPRODUCER={'path': '/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair6-main-NEW24H_MXR073R6_001/cpu-consumer/rank-0/BRIDGE_RESULT.json', 'bytes': 551214, 'sha256': '05e92014d4576e16f37c0d1f3016c4885816cbe5e4cf9c0c7859604714714126'}\nSTORAGE_SOURCE=dict(path='/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json',bytes=52969,sha256='b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21')\n",
+      "old": "SOURCE=dict(path='/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json',bytes=52969,sha256='b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21')\nPRODUCER=dict(path='/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001/numeric/result/RESULT.json',bytes=100542,sha256='4a5b125780618a6020e2d2bf619be1e4258dbafd9b7699bfe52aabc16fa12caa')\n"
+    },
+    {
+      "new": "OWNER='mxr-retained-decode-CPU082';CAP=GIB",
+      "old": "OWNER='deltalog-retained-drift-CPU074R2';CAP=GIB"
+    },
+    {
+      "new": "def closure(sr):\n mx=obj(sr);need(sr==SOURCE,'exact actual073R6 source')\n old=obj(STORAGE_SOURCE);need(old['prepared_only']is False,'actual069 ledger owner')\n refs=[sr,PRODUCER,STORAGE_SOURCE,*[mx['files'][n]for n in('independent_block_reference.py','lossless_raw.py')],*[old['files'][n]for n in('storage061.py','sealed_storage069.py','window056.py')]]\n from diagnose import ORIGINAL\n refs.append(ORIGINAL)\n report=obj(PRODUCER);need(report['capture_source']==sr,'actual rank0 result source')\n for r in refs:checked(r)\n return old,refs\n",
+      "old": "def closure(sr):\n m=obj(sr);need(sr==SOURCE and m['prepared_only']is False,'exact actual069R1 bound source')\n refs=[sr,PRODUCER,*[m['files'][n]for n in('oracle.py','raw_codec.py','consume.py','bridge_io.py','storage061.py','sealed_storage069.py','window056.py')]]\n for r in refs:checked(r)\n need(obj(PRODUCER)['source']==sr,'failed producer source exact join')\n return m,refs"
+    },
+    {
+      "new": "own['schema']=='mxr.retained-native-decode-owned-source/v082'",
+      "old": "own['schema']=='deltalog.retained-state-drift-owned-source/v074'"
+    },
+    {
+      "new": "a.output.name.startswith('run-mxr-decode082-')",
+      "old": "a.output.name.startswith('run-drift074repair2-')"
+    },
+    {
+      "new": "str(Path(STORAGE_SOURCE['path']).parent)",
+      "old": "str(Path(SOURCE['path']).parent)"
+    },
+    {
+      "new": "for n in('diagnose.py','cpu_entry.py','direct_round.py')",
+      "old": "for n in('diagnose.py','cpu_entry.py')"
+    },
+    {
+      "new": "for r in refs:mounts[str(checked(r))]=(r['path'],False)",
+      "old": "for n in('oracle.py','raw_codec.py','consume.py','bridge_io.py'):r=m['files'][n];mounts[str(checked(r))]=(r['path'],False)"
+    },
+    {
+      "new": "from diagnose import WORKER\n  rawroot=str(Path(WORKER)/'raw')",
+      "old": "rawroot=str(Path(PRODUCER['path']).parent)"
+    },
+    {
+      "new": "'--output','/adakv-results/DIAGNOSIS082.json'",
+      "old": "'--source-ref',json.dumps(SOURCE,separators=(',',':')),'--producer-ref',json.dumps(PRODUCER,separators=(',',':')),'--output','/adakv-results/DIAGNOSIS074.json'"
+    },
+    {
+      "new": "name='mxr-decode082-'",
+      "old": "name='dl-drift074-'"
+    },
+    {
+      "new": "a.output/'DIAGNOSIS082.json'",
+      "old": "a.output/'DIAGNOSIS074.json'"
+    },
+    {
+      "new": "d['report']==PRODUCER",
+      "old": "d['producer']==PRODUCER"
+    },
+    {
+      "new": "len(d['rows'])==34 and d['coverage_count']==432",
+      "old": "len(d['rows'])==91"
+    }
+  ],
+  "donor": {
+    "bytes": 13786,
+    "path": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\deltalog-state-drift-cpu-new24h-20261016-074-repair2\\owned_cpu.py",
+    "sha256": "838260ab45b8160c696b3ce272c185866c6a8fdd5fd443ec917990c0ec5fa9b8"
+  }
+}

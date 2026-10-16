@@ -1,0 +1,72 @@
+{
+  "NPU": false,
+  "actual_sameimage": false,
+  "authority_ref": {
+    "bytes": 3481,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "default_enabled": false,
+  "donor": {
+    "bytes": 13786,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/owned_cpu.py",
+    "sha256": "838260ab45b8160c696b3ce272c185866c6a8fdd5fd443ec917990c0ec5fa9b8"
+  },
+  "files": {
+    "DONOR_DIFF.patch": {
+      "bytes": 9031,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/DONOR_DIFF.patch",
+      "sha256": "4af196236c21a0595a5783386131b6163268933fb26fb7002e6a4a0fa7d6f7b0"
+    },
+    "HANDOFF.md": {
+      "bytes": 2187,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/HANDOFF.md",
+      "sha256": "72bd03ab0b7eab206e3c6bb5413777232271d5f3c035e75a07804b53e17a857e"
+    },
+    "cpu_entry.py": {
+      "bytes": 4549,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/cpu_entry.py",
+      "sha256": "894feece80cca9e73f01ca2573f0051f70c857411606b844f0b3057c7b6ab2c0"
+    },
+    "owned_cpu.py": {
+      "bytes": 14382,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/owned_cpu.py",
+      "sha256": "b137dd6c69b20bd0a79d8f87cd2edb36d09951c7a64bc0a821919d28671b9e75"
+    },
+    "seal083.py": {
+      "bytes": 2655,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/seal083.py",
+      "sha256": "bc59f26de98a25647b87eaeb64ba507c2ec6ef1ee19c8a64a1520b1cc3ba4b41"
+    },
+    "test_preflight083.py": {
+      "bytes": 2493,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/test_preflight083.py",
+      "sha256": "7131f4a43c03cc5030f3514ce84866e5c45052f70abdbf80d58eee09adf09c4d"
+    }
+  },
+  "guest_source": {
+    "bytes": 4589,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/SOURCE_MANIFEST.json",
+    "sha256": "2e05b80a5453a4d49b27d860d31be6e8a49bc1293ea8fc57e9b0f61b515f4010"
+  },
+  "qualification": false,
+  "resource": {
+    "Devices": [],
+    "child_seconds": 600,
+    "cleanup_seconds": 90,
+    "free_after_full_allocation_GiB": 100,
+    "guest_cpu": 1,
+    "guest_memory_GiB": 8,
+    "host_memory_GiB": 0.5,
+    "initial_memory_GiB": 16.5,
+    "network": "none",
+    "output_cap_bytes": 1073741824,
+    "reserve_GiB": 8,
+    "sealed_ledger_advanced": false,
+    "shared_total_GiB": 80,
+    "untracked_allocation_bytes": 1073741824,
+    "whole_seconds": 1000
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083",
+  "schema": "deltalog.native-prefill-cpu-source/v083"
+}

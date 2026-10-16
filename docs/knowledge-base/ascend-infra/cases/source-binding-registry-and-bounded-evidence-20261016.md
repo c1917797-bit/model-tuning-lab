@@ -164,3 +164,46 @@ gaps, not a reason to add another scheduling framework or claim that more
 rules alone fixed execution. Reuse the native bootstrap sequence and verify
 it in every real interpreter context. Exact refs, terminals and CURRENT/NEXT
 are in CURRENT_STAGE_20261016_1030UTC.json in the active workstream.
+
+## Real 2K model and same-initial native interventions (11:00UTC checkpoint)
+
+073R6 operation0ab1 is now terminal FAILED after actual TP4 model execution,
+not another registry failure. Rank0 consumed48 prefill and432 decode rows:
+all48 solves passed; five prefill states failed (layers0/21/37/53/56), and34
+native decode outputs failed the uncast CPU64 comparator. Other-rank raw is
+retained but those consumers were not run. Never promote a local solve PASS
+to complete GDN correctness or blame an unmodified decode on MXR automatically.
+
+Saved-raw Devices[] diagnostic082 consumed all34 failed decode rows under the
+unchanged original metrics, separately reporting exact integer binary64-to-BF16
+RNE. Of52224 output cells only4 differed from that reference; maximum relative
+actual-to-RNE error was2.758e-5. The original uncast comparison includes a BF16
+rounding floor up to.0034022. This proves a relevant ABI/reference-domain issue;
+it does not retroactively pass073R6, fix its five prefill failures, qualify unseen
+inputs or establish task accuracy. A corrected contract must be independently
+frozen with negative controls and affected complete coverage.
+
+DeltaLog CPU076 verified the actual89->90 slot/flush/input/returned-state joins.
+Then same-image Devices[]083 verified the exact native079 source and raw extract
+before device admission. Actual physical5 intervention081/079 made six calls to
+the original native chunk with identical captured operands and two actual FP32
+initial states. Same-initial repeats and clones were bitwise deterministic.
+SC reproduced the old candidate output/state bitwise; SN reproduced the old
+native final state bitwise. Only changing initial state changed19 actual BF16
+gmH cells and reproduced the original1.219032779e-6 prefill state discrepancy.
+The independent CPU64 two-initial propagation predicted only2.217e-11 here.
+
+This isolates native working-boundary sensitivity for this saved turn; it is not
+a complete ideal-FP64 theorem, a binary-source proof or a full trajectory PASS.
+Original baseline transformed operands were not independently captured, so keep
+that limitation explicit even though its final state was reproduced exactly.
+Do not enlarge7.92e-7 to fit the failure. Choose a source-justified adaptation
+repair or a separately preregistered component-operational contract, preserving
+independent changed-decode/flush checks and all old failures. Neither path may
+skip new state/lifecycle/graph holdout, matched performance or task acceptance.
+
+The completed intervention was stopped and retained with independently reopened
+exit0/Pid0/noExecIDs/noOOM. No protected0-3 workload was changed. This stage
+reused saved inputs and established causal device evidence without reloading the
+model or manufacturing occupancy. Exact references and next entries are in
+NUMERIC_BOUNDARY_CAUSAL_CHECKPOINT_20261016_1100UTC.json in the active workstream.

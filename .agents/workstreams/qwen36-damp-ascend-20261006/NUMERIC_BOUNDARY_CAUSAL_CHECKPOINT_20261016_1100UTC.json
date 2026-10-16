@@ -1,0 +1,176 @@
+{
+  "schema": "ascend.numeric-boundary-causal-checkpoint/v1",
+  "observed_utc": "2026-10-16T10:59:43Z",
+  "goal_active": true,
+  "accepted_new_technique": false,
+  "performance_accepted": false,
+  "task_accuracy_run": false,
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "bytes": 3481,
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "previous_goal_turn": "status-only answer; this continuation revalidated live sources and completed new diagnostics",
+  "mxr073R6": {
+    "operation": "exec-0000000000000ab1",
+    "exit_code": 1,
+    "owner": {
+      "path": "/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair6-main-NEW24H_MXR073R6_001/RESULT.json",
+      "bytes": 14705,
+      "sha256": "3ea1178e925e1b566262ef2d8051925e273741b5af39a4de8135078c30d3e470"
+    },
+    "rank0": {
+      "path": "/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair6-main-NEW24H_MXR073R6_001/cpu-consumer/rank-0/BRIDGE_RESULT.json",
+      "bytes": 551214,
+      "sha256": "05e92014d4576e16f37c0d1f3016c4885816cbe5e4cf9c0c7859604714714126"
+    },
+    "actual_input_tokens": 2048,
+    "output_cap": 10,
+    "performance_fixed1024": false,
+    "prefill_rows": 48,
+    "prefill_failed": 5,
+    "failed_layers": [
+      0,
+      21,
+      37,
+      53,
+      56
+    ],
+    "solve_pass": 48,
+    "decode_rows": 432,
+    "decode_failed": 34,
+    "other_ranks": "actual captures retained; CPU consumer stopped after rank0 failure, not numerically qualified",
+    "cause": "prefill unresolved; native decode output was compared to uncast CPU64 despite BF16 ABI",
+    "decision": "DIAGNOSE; no performance/16K admission; old failure immutable",
+    "release": "independent actual inspect 0acf: candidate and CPU child stopped, Pid0, no ExecIDs, no OOM"
+  },
+  "deltalog076": {
+    "operation": "exec-0000000000000ad6",
+    "exit": 0,
+    "owner": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-prefill076-MAIN-20261016-001/RESULT.json",
+      "bytes": 1057,
+      "sha256": "b6cfc398fd4303552f21d947d37da592c685a0ac327d2cc8b222a5157d08b68d"
+    },
+    "diagnosis": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-prefill076-MAIN-20261016-001/DIAGNOSIS076.json",
+      "bytes": 20473,
+      "sha256": "2d237c751636a4ed1253e2f56ea7d70b01764105aed945ace96c0a9e4e8f9f1c"
+    },
+    "primary": null,
+    "slot_flush_joins": true,
+    "actual_native_counter_continuity": true,
+    "initial_relative_difference": 9.003045787392317e-8,
+    "actual_final_relative_difference": 0.0000012190327792116628,
+    "same_operands_CPU64_two_initial_final_difference": 2.2169506893822963e-11,
+    "qualification": false,
+    "NPU_reexecuted": false,
+    "release_reopened": true
+  },
+  "mxr082": {
+    "operation": "exec-0000000000000ada",
+    "exit": 0,
+    "owner": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-mxr-decode082-MAIN-20261016-001/RESULT.json",
+      "bytes": 1033,
+      "sha256": "21097e90a0147c281d2516dc5f724e9da4890f7e9f12ba3808197d3ee6241fd8"
+    },
+    "diagnosis": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-mxr-decode082-MAIN-20261016-001/DIAGNOSIS082.json",
+      "bytes": 87474,
+      "sha256": "a59ed8cee5050e50fc448577ef741bce6bd12a7727cb44b65e53791fdf94e711"
+    },
+    "coverage": 432,
+    "selected_failed_rows": 34,
+    "actual_cells": 52224,
+    "not_equal_independent_direct_BF16_RNE": 4,
+    "max_actual_vs_RNE_relative": 0.000027579733016627938,
+    "max_BF16_rounding_floor_relative": 0.003402204126354313,
+    "double_round_cells": 0,
+    "old_failure_unchanged": true,
+    "qualification": false,
+    "NPU_reexecuted": false,
+    "release_reopened": true
+  },
+  "deltalog083": {
+    "operation": "exec-0000000000000ade",
+    "exit": 0,
+    "owner": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-prefill083-MAIN-20261016-001/RESULT.json",
+      "bytes": 1067,
+      "sha256": "7cd2ebc9fa7854bc9a7d37b610c4b978fe9d3a849f732c0c17e24d476bc82b6d"
+    },
+    "preflight": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-prefill083-MAIN-20261016-001/PREFLIGHT083.json",
+      "bytes": 6427,
+      "sha256": "1843bd78d0a6b7c8299cb9dab8a60f07dca0eed1c105be017c1e6b5852fd403d"
+    },
+    "Devices": [],
+    "bootstrap_invoked": false,
+    "actual_same_image_extract": true,
+    "release_reopened": true
+  },
+  "deltalog081": {
+    "operation": "exec-0000000000000ae0",
+    "exit": 0,
+    "owner": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-native081-MAIN-20261016-001/RESULT.json",
+      "bytes": 1740,
+      "sha256": "45de1bb7a2d0fdb6bce7d4ef246f8c253257c2319eea609a8aa0ed94ce2f50d9"
+    },
+    "stage": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-native081-MAIN-20261016-001/numeric/result/STAGE_RESULT.json",
+      "bytes": 66439,
+      "sha256": "a17e62cb429e5f5dba72c57a5594b7b62f7353025191accf3bd612c4a32de28b"
+    },
+    "cleanup": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-native081-MAIN-20261016-001/numeric/cleanup-verdict.json",
+      "bytes": 246,
+      "sha256": "5715d01d344fe9e1c42f246055d9e3a022a39a45c4a7651612fbc172a520ac5b"
+    },
+    "physical": 5,
+    "logical": 0,
+    "actual_host_pid": 431246,
+    "container_id": "d7c6ed4b71ac6e7dad00f73d83e705c978c242c1b3417fede5caee86ace4f457",
+    "native_calls": 6,
+    "same_initial_repeats_bitwise": true,
+    "SC_replays_original_candidate_output_state_bitwise": true,
+    "SN_replays_original_native_final_state_bitwise": true,
+    "SC_vs_SN_actual_gmH_changed_cells": 19,
+    "SC_vs_SN_state_relative": 0.0000012190327792116643,
+    "SC_vs_SN_output_relative": 0.000005377018391754766,
+    "attribution": "changing only exact initial_state in the same original native chunk reproduces this saved-frame discrepancy; original native postconv operands were not independently captured",
+    "not_claimed": [
+      "full160 gate",
+      "independent exact real-number native kernel",
+      "source-to-device-binary attribution",
+      "model/performance/task success"
+    ],
+    "release_reopened": true,
+    "original_160_failure_unchanged": true
+  },
+  "schedule": {
+    "CURRENT": "next MXR084 three-arm source/owned review; no load launched until actual image preflight passes",
+    "NEXT": "DeltaLog088 new component operational contract/real same-initial native control preparation; original limits/failed outputs unchanged",
+    "BACKUP": "MXR085 independent BF16 decode ABI consumer and unseen holdout preregistration; source-only",
+    "parallel_agents": 3,
+    "latest_exact_card_observation": "phys5 native081 from 10:54:57 to10:56:37 UTC, all owned stopped at independent reopen; no zero-idle claim",
+    "past30min_continuous_utilization": "unmeasured; source/CPU diagnostics do not count as NPU compute",
+    "new_NPU_arithmetic_unchanged_retries": false
+  },
+  "git_previous_stage": {
+    "commit": "dfb826d4f5fdc53342ce1e77cfcc1a634fec6ff1",
+    "operation": "exec-0000000000000ac9",
+    "normal_push_success": true,
+    "remote_branch": "work/qwen36-damp-ascend-20261006",
+    "remote_ref_verified": true
+  },
+  "remaining": [
+    "MXR prefill cause and complete affected NPU/whole gate",
+    "DeltaLog new contract/source and complete affected fresh NPU gate",
+    "real matched fixed1024 model performance",
+    "three matched pairs if promising",
+    "GSM8K/HumanEval/MMLU smoke then full <=1%",
+    "migration/optin plugin delivery audit"
+  ]
+}

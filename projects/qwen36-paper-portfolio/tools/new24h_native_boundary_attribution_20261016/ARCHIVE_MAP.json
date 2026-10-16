@@ -1,0 +1,336 @@
+{
+  "schema": "ascend.byte-exact-source-archive/v1",
+  "root": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016",
+  "scope": "076/079/081/082/083 frozen source only; original absolute runtime references preserved, not standalone relocation",
+  "qualification": false,
+  "entries": [
+    {
+      "ref": {
+        "bytes": 2914,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/HANDOFF076.md",
+        "sha256": "f5aadd99c3a9d68c97a7cf1895a5b5214fc255728c42a3dd2887621d2cc73db7"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-prefill-boundary-cpu-new24h-v1-076/HANDOFF076.md"
+    },
+    {
+      "ref": {
+        "bytes": 1427,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/cpu_entry.py",
+        "sha256": "00439bf728079e8a2f6011c3408b0fafe87e03d1a0379b25dbfb49243389e4a9"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-prefill-boundary-cpu-new24h-v1-076/cpu_entry.py"
+    },
+    {
+      "ref": {
+        "bytes": 11014,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/diagnose.py",
+        "sha256": "ece0ab3d374d43fcefc7d27c23eb17406570674c235df99f3cbadb439571ca7c"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-prefill-boundary-cpu-new24h-v1-076/diagnose.py"
+    },
+    {
+      "ref": {
+        "bytes": 13865,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/owned_cpu.py",
+        "sha256": "091c3e2202c27a1d7e5c6af145a7545c9c80feffa80c62b3e14ed6e7bc1aa5cc"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-prefill-boundary-cpu-new24h-v1-076/owned_cpu.py"
+    },
+    {
+      "ref": {
+        "bytes": 2701,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/test_boundary076.py",
+        "sha256": "b0e73e61afd347a9f466fceec9a9722da108a6b50c0e6c9c4922cbf1d23619f0"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-prefill-boundary-cpu-new24h-v1-076/test_boundary076.py"
+    },
+    {
+      "ref": {
+        "bytes": 4247,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/test_owner074.py",
+        "sha256": "7944a586f17065d73b99c5f1d6796186ca8ad8c36d4603191d132f9dfa352b38"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-prefill-boundary-cpu-new24h-v1-076/test_owner074.py"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/SOURCE_MANIFEST.json",
+        "bytes": 3996,
+        "sha256": "ce400a621afec2e2e48cddcefba0c78e5f5418cda1844fa6393f7647d732f78f"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-prefill-boundary-cpu-new24h-v1-076/SOURCE_MANIFEST.json"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/COMMANDS076.json",
+        "bytes": 1503,
+        "sha256": "04a34b320370c7e2f9d2de6e97d6bcaa71bcb676f40dd2d346a73e2b68c09d7f"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-prefill-boundary-cpu-new24h-v1-076/COMMANDS076.json"
+    },
+    {
+      "ref": {
+        "bytes": 1666,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/COMMANDS082.json",
+        "sha256": "a9028ec51cb60a3016e54194fcbece059c2781f0eb83ea5314cb7c452204cfb9"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/mxr-saved-decode-cpu-new24h-v1-082/COMMANDS082.json"
+    },
+    {
+      "ref": {
+        "bytes": 4585,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/OWNER_INVERSE.json",
+        "sha256": "96995a9f9f0982310e3b592b26302128dd460330d7b00e636bb53ddb72bc522c"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/mxr-saved-decode-cpu-new24h-v1-082/OWNER_INVERSE.json"
+    },
+    {
+      "ref": {
+        "bytes": 2608,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/SOURCE_MANIFEST.json",
+        "sha256": "0d83606a6f47d53ed9a77375b5273e4cd4750f9131cd80cfa98b4944f8d85123"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/mxr-saved-decode-cpu-new24h-v1-082/SOURCE_MANIFEST.json"
+    },
+    {
+      "ref": {
+        "bytes": 1427,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/cpu_entry.py",
+        "sha256": "00439bf728079e8a2f6011c3408b0fafe87e03d1a0379b25dbfb49243389e4a9"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/mxr-saved-decode-cpu-new24h-v1-082/cpu_entry.py"
+    },
+    {
+      "ref": {
+        "bytes": 5413,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/diagnose.py",
+        "sha256": "e51a66e9342b1f4d9474501bf6270df0a18925bdf105959ee0a3795afe2579b8"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/mxr-saved-decode-cpu-new24h-v1-082/diagnose.py"
+    },
+    {
+      "ref": {
+        "bytes": 3378,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/direct_round.py",
+        "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/mxr-saved-decode-cpu-new24h-v1-082/direct_round.py"
+    },
+    {
+      "ref": {
+        "bytes": 14083,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/owned_cpu.py",
+        "sha256": "c72aa53037cfa905629e494b6284884e7035b9c8f05d181113fe89f6e7f8bdba"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/mxr-saved-decode-cpu-new24h-v1-082/owned_cpu.py"
+    },
+    {
+      "ref": {
+        "bytes": 1971,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/test_software082.py",
+        "sha256": "755b47367168eedb55a2b2d4afacd3031069ad6d48bba32565c57147546ff965"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/mxr-saved-decode-cpu-new24h-v1-082/test_software082.py"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/ACTUAL_VENDOR_CONFIG_PROOF.json",
+        "bytes": 20563,
+        "sha256": "b73910d317c3253d2b5d2e6d9740b2b3ac8e8bda1c99f6e80743e5d37fb70f5b"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-counterfactual-new24h-v1-079/ACTUAL_VENDOR_CONFIG_PROOF.json"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/COMMANDS.json",
+        "bytes": 1913,
+        "sha256": "71a5a9cb829093db3da0337187d6a4abddd6c89d47e1907def7e8691274e93e5"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-counterfactual-new24h-v1-079/COMMANDS.json"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/HANDOFF.md",
+        "bytes": 4928,
+        "sha256": "db7b8a2d4e122a2f105e939b915443ffeafe039613892aea19bddfae31150e9b"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-counterfactual-new24h-v1-079/HANDOFF.md"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/PLAN_TEMPLATE.json",
+        "bytes": 927,
+        "sha256": "f6ef8a4e75159b520bf90381efa4864cf2790f4457e216f22ca843e5f22037e4"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-counterfactual-new24h-v1-079/PLAN_TEMPLATE.json"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/SOURCE_MANIFEST.json",
+        "bytes": 4589,
+        "sha256": "2e05b80a5453a4d49b27d860d31be6e8a49bc1293ea8fc57e9b0f61b515f4010"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-counterfactual-new24h-v1-079/SOURCE_MANIFEST.json"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/device_dispatch.py",
+        "bytes": 1566,
+        "sha256": "9b5846866cf8e0975a59d2274a17567fe7b1a2e64ef310c2ce72cf3d1d257e20"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-counterfactual-new24h-v1-079/device_dispatch.py"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/early_vendor.py",
+        "bytes": 3317,
+        "sha256": "2cd8b8df3030e3f15acfef311ca5331ae9bd6f576ac5760a7e747c46d92354c8"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-counterfactual-new24h-v1-079/early_vendor.py"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/guest_core.py",
+        "bytes": 17955,
+        "sha256": "f742281a3e07c41341885639afa712a4b22f39c35a229839b2dee624b4f6d267"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-counterfactual-new24h-v1-079/guest_core.py"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/native_bootstrap.py",
+        "bytes": 2179,
+        "sha256": "b09b7bf9cb626896d5500c5c7e30fa552699e5302ee3ac6eaa5b426923c39111"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-counterfactual-new24h-v1-079/native_bootstrap.py"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/seal079.py",
+        "bytes": 3630,
+        "sha256": "b57cb0cf1971c5268d74403cf64b5e8fb6b26ce8cb5274ea5f415e0c49ded319"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-counterfactual-new24h-v1-079/seal079.py"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/test_guest079.py",
+        "bytes": 3721,
+        "sha256": "eba9d8f840651473426a13e374a4e601e20eda51ff76801b5d97a34475b56581"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-counterfactual-new24h-v1-079/test_guest079.py"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-owned-new24h-v1-081/COMMANDS.json",
+        "bytes": 1657,
+        "sha256": "2fbe54dc3db7337770116b37f47a235a419afa6da2aea6554762b4ee11a5fc85"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-owned-new24h-v1-081/COMMANDS.json"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-owned-new24h-v1-081/HANDOFF.md",
+        "bytes": 3589,
+        "sha256": "004e94a0779f33dbe0feac73a103127950f3aeec42a3ddb5c12d45bb708a8c5a"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-owned-new24h-v1-081/HANDOFF.md"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-owned-new24h-v1-081/SOURCE_MANIFEST.json",
+        "bytes": 3450,
+        "sha256": "7fe16d8be8322857ce578674761dde2c7672c11244da27df82514c983fdfdcd5"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-owned-new24h-v1-081/SOURCE_MANIFEST.json"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-owned-new24h-v1-081/owner081.py",
+        "bytes": 16408,
+        "sha256": "52f15613bb42ecfb23672be1ae4ba9211652da03d034233f49a8a1551912faae"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-owned-new24h-v1-081/owner081.py"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-owned-new24h-v1-081/seal081.py",
+        "bytes": 3819,
+        "sha256": "dffa12093b17281517c661b76672356cc7f60f01c03b1fc1f39974d2d1e0a390"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-owned-new24h-v1-081/seal081.py"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-owned-new24h-v1-081/test_owner081.py",
+        "bytes": 5042,
+        "sha256": "38d5890b82d8c630bd4550d5945d12a0d393449ac214400474085757b9ba056d"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-owned-new24h-v1-081/test_owner081.py"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/COMMANDS.json",
+        "bytes": 1638,
+        "sha256": "bd20e82b5e791c8ece2f597fdecfb2307f363816ef6d64d49b299fea1e7aea5e"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-cpu-preflight-new24h-v1-083/COMMANDS.json"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/DONOR_DIFF.patch",
+        "bytes": 9031,
+        "sha256": "4af196236c21a0595a5783386131b6163268933fb26fb7002e6a4a0fa7d6f7b0"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-cpu-preflight-new24h-v1-083/DONOR_DIFF.patch"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/HANDOFF.md",
+        "bytes": 2187,
+        "sha256": "72bd03ab0b7eab206e3c6bb5413777232271d5f3c035e75a07804b53e17a857e"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-cpu-preflight-new24h-v1-083/HANDOFF.md"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/SOURCE_MANIFEST.json",
+        "bytes": 3143,
+        "sha256": "3a86874b47c2c34147b52f252f367b63fc1f46b83422e35dc6df6beb1d5a162f"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-cpu-preflight-new24h-v1-083/SOURCE_MANIFEST.json"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/cpu_entry.py",
+        "bytes": 4549,
+        "sha256": "894feece80cca9e73f01ca2573f0051f70c857411606b844f0b3057c7b6ab2c0"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-cpu-preflight-new24h-v1-083/cpu_entry.py"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/owned_cpu.py",
+        "bytes": 14382,
+        "sha256": "b137dd6c69b20bd0a79d8f87cd2edb36d09951c7a64bc0a821919d28671b9e75"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-cpu-preflight-new24h-v1-083/owned_cpu.py"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/seal083.py",
+        "bytes": 2655,
+        "sha256": "bc59f26de98a25647b87eaeb64ba507c2ec6ef1ee19c8a64a1520b1cc3ba4b41"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-cpu-preflight-new24h-v1-083/seal083.py"
+    },
+    {
+      "ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/test_preflight083.py",
+        "bytes": 2493,
+        "sha256": "7131f4a43c03cc5030f3514ce84866e5c45052f70abdbf80d58eee09adf09c4d"
+      },
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_native_boundary_attribution_20261016/deltalog-native-prefill-cpu-preflight-new24h-v1-083/test_preflight083.py"
+    }
+  ]
+}

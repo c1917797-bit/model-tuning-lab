@@ -1,0 +1,35 @@
+{
+  "NPU": false,
+  "actual_replay_pending": true,
+  "execute": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/owned_cpu.py",
+    "--execute",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/SOURCE_MANIFEST.json\",\"bytes\":3996,\"sha256\":\"ce400a621afec2e2e48cddcefba0c78e5f5418cda1844fa6393f7647d732f78f\"}",
+    "--host-cpu",
+    "MAIN_ACTUAL_HOST_CPU",
+    "--guest-cpu",
+    "MAIN_ACTUAL_DISTINCT_GUEST_CPU",
+    "--output",
+    "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-prefill076-MAIN-20261016-001"
+  ],
+  "qualified": false,
+  "schema": "deltalog.retained-two-frame076-command/v1",
+  "source": {
+    "bytes": 3996,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/SOURCE_MANIFEST.json",
+    "sha256": "ce400a621afec2e2e48cddcefba0c78e5f5418cda1844fa6393f7647d732f78f"
+  },
+  "sourceaudit": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/owned_cpu.py",
+    "--source-audit",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/SOURCE_MANIFEST.json\",\"bytes\":3996,\"sha256\":\"ce400a621afec2e2e48cddcefba0c78e5f5418cda1844fa6393f7647d732f78f\"}"
+  ]
+}

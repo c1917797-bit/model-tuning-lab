@@ -1,0 +1,60 @@
+{
+  "NPU": false,
+  "authority_ref": {
+    "bytes": 3481,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "default_enabled": false,
+  "files": {
+    "cpu_entry.py": {
+      "bytes": 1427,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/cpu_entry.py",
+      "sha256": "00439bf728079e8a2f6011c3408b0fafe87e03d1a0379b25dbfb49243389e4a9"
+    },
+    "diagnose.py": {
+      "bytes": 5413,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/diagnose.py",
+      "sha256": "e51a66e9342b1f4d9474501bf6270df0a18925bdf105959ee0a3795afe2579b8"
+    },
+    "direct_round.py": {
+      "bytes": 3378,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/direct_round.py",
+      "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d"
+    },
+    "owned_cpu.py": {
+      "bytes": 14083,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/owned_cpu.py",
+      "sha256": "c72aa53037cfa905629e494b6284884e7035b9c8f05d181113fe89f6e7f8bdba"
+    },
+    "test_software082.py": {
+      "bytes": 1971,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/test_software082.py",
+      "sha256": "755b47367168eedb55a2b2d4afacd3031069ad6d48bba32565c57147546ff965"
+    }
+  },
+  "qualified": false,
+  "report": {
+    "bytes": 551214,
+    "path": "/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair6-main-NEW24H_MXR073R6_001/cpu-consumer/rank-0/BRIDGE_RESULT.json",
+    "sha256": "05e92014d4576e16f37c0d1f3016c4885816cbe5e4cf9c0c7859604714714126"
+  },
+  "resource": {
+    "Devices": [],
+    "child_seconds": 600,
+    "cleanup_seconds": 90,
+    "guest_GiB": 8,
+    "host_GiB": 0.5,
+    "output_GiB": 1,
+    "reserve_GiB": 8,
+    "whole_seconds": 1000
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082",
+  "schema": "mxr.retained-native-decode-owned-source/v082",
+  "source": {
+    "bytes": 111072,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/SOURCE_MANIFEST.json",
+    "sha256": "8d0608cd3fe3814359fc8141a39afe4b14baa77290d20fd8e57e73bcab4799ab"
+  },
+  "storage_source": "unchanged actual069R1 only for existing80GiB/100GiB ledger/lock, separate from MXR inputsource"
+}

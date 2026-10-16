@@ -1,0 +1,94 @@
+{
+  "NPU": false,
+  "actual_executed": false,
+  "actual_local_tests": 7,
+  "actual_sameimage": false,
+  "authority_ref": {
+    "bytes": 3481,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "default_enabled": false,
+  "diagnostic_schema": "deltalog.step89-90-prefill-boundary-diagnosis/v076",
+  "files": {
+    "HANDOFF076.md": {
+      "bytes": 2914,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/HANDOFF076.md",
+      "sha256": "f5aadd99c3a9d68c97a7cf1895a5b5214fc255728c42a3dd2887621d2cc73db7"
+    },
+    "cpu_entry.py": {
+      "bytes": 1427,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/cpu_entry.py",
+      "sha256": "00439bf728079e8a2f6011c3408b0fafe87e03d1a0379b25dbfb49243389e4a9"
+    },
+    "diagnose.py": {
+      "bytes": 11014,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/diagnose.py",
+      "sha256": "ece0ab3d374d43fcefc7d27c23eb17406570674c235df99f3cbadb439571ca7c"
+    },
+    "owned_cpu.py": {
+      "bytes": 13865,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/owned_cpu.py",
+      "sha256": "091c3e2202c27a1d7e5c6af145a7545c9c80feffa80c62b3e14ed6e7bc1aa5cc"
+    },
+    "test_boundary076.py": {
+      "bytes": 2701,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/test_boundary076.py",
+      "sha256": "b0e73e61afd347a9f466fceec9a9722da108a6b50c0e6c9c4922cbf1d23619f0"
+    },
+    "test_owner074.py": {
+      "bytes": 4247,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076/test_owner074.py",
+      "sha256": "7944a586f17065d73b99c5f1d6796186ca8ad8c36d4603191d132f9dfa352b38"
+    }
+  },
+  "owned_controller_provenance": {
+    "actual074repair2_owner": {
+      "bytes": 13786,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/owned_cpu.py",
+      "sha256": "838260ab45b8160c696b3ce272c185866c6a8fdd5fd443ec917990c0ec5fa9b8"
+    },
+    "actual074repair2_source": {
+      "bytes": 3219,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair2/SOURCE_MANIFEST.json",
+      "sha256": "f55e503338704ddcc91f4d4357936a4d5fb76a57edde2b42090aea07437cb529"
+    },
+    "resource_changes": false,
+    "whole_byte_inverse": true
+  },
+  "qualification": false,
+  "repair": {
+    "old_source": {
+      "bytes": 2476,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-state-drift-cpu-new24h-v1-074-repair1/SOURCE_MANIFEST.json",
+      "sha256": "b0dc5aad14047ae0f5dbdb9eaa3c546c3723ee086de42c05728631b224a838f0"
+    },
+    "original_R1_failure_unchanged": true,
+    "sameimage_executed": false,
+    "scope": "Docker-client-only-AS wrapper and original-error preservation; no host budget increase"
+  },
+  "resource": {
+    "Devices": [],
+    "child_seconds": 600,
+    "cleanup_seconds": 90,
+    "free_after_full_allocation_GiB": 100,
+    "guest_cpu": 1,
+    "guest_memory_GiB": 8,
+    "host_memory_GiB": 0.5,
+    "initial_memory_GiB": 16.5,
+    "network": "none",
+    "output_cap_bytes": 1073741824,
+    "reserve_GiB": 8,
+    "sealed_ledger_advanced": false,
+    "shared_total_GiB": 80,
+    "untracked_allocation_bytes": 1073741824,
+    "whole_seconds": 1000
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-prefill-boundary-cpu-new24h-v1-076",
+  "schema": "deltalog.retained-state-drift-owned-source/v074",
+  "scope": "two old retained B1 steps89/90, no new NPU or gate change",
+  "window": {
+    "cutoff_epoch": 1792220533,
+    "start_epoch": 1792134133
+  }
+}

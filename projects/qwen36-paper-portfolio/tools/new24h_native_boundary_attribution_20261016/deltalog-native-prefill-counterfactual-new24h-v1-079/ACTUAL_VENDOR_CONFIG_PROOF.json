@@ -1,0 +1,510 @@
+{
+  "schema": "ge.actual-stopped-image-vendor-json-proof/v1",
+  "operation": "MA0510",
+  "stoppedCID": "2f090ff72ee7a1b76d2b0cb459f4ef06aa3b2885f5e0e555e2ba04989f7c1d24",
+  "NPU": false,
+  "binary_info": {
+    "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_impl/ai_core/tbe/kernel/config/ascend910b/binary_info_config.json",
+    "bytes": 140383,
+    "sha256": "20d81b306dffd134ee7480bae0bde723ade4866816ca1160d994204117fe7771"
+  },
+  "target": {
+    "dynamicRankSupport": true,
+    "simplifiedKeyMode": 0,
+    "optionalInputMode": "gen_placeholder",
+    "optionalOutputMode": "gen_placeholder",
+    "params": {
+      "inputs": [
+        {
+          "name": "k",
+          "index": 0,
+          "paramType": "required",
+          "formatMode": "static_nd_agnostic"
+        },
+        {
+          "name": "w",
+          "index": 1,
+          "paramType": "required",
+          "formatMode": "static_nd_agnostic"
+        },
+        {
+          "name": "u",
+          "index": 2,
+          "paramType": "required",
+          "formatMode": "static_nd_agnostic"
+        },
+        {
+          "name": "g",
+          "index": 3,
+          "paramType": "required",
+          "formatMode": "static_nd_agnostic"
+        },
+        {
+          "name": "inital_state",
+          "index": 4,
+          "paramType": "optional",
+          "formatMode": "static_nd_agnostic"
+        },
+        {
+          "name": "cu_seqlens",
+          "index": 5,
+          "paramType": "optional",
+          "formatMode": "static_nd_agnostic"
+        },
+        {
+          "name": "chunk_indices",
+          "index": 6,
+          "paramType": "optional",
+          "formatMode": "static_nd_agnostic"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "h",
+          "index": 0,
+          "paramType": "required",
+          "formatMode": "static_nd_agnostic"
+        },
+        {
+          "name": "v_new",
+          "index": 1,
+          "paramType": "required",
+          "formatMode": "static_nd_agnostic"
+        },
+        {
+          "name": "final_state",
+          "index": 2,
+          "paramType": "required",
+          "formatMode": "static_nd_agnostic"
+        }
+      ],
+      "attrs": [
+        {
+          "name": "output_final_state"
+        },
+        {
+          "name": "chunk_size"
+        },
+        {
+          "name": "inital_state_stride0"
+        }
+      ]
+    },
+    "binaryList": [
+      {
+        "coreType": 0,
+        "simplifiedKey": [
+          "ChunkGatedDeltaRuleFwdH/d=0,p=1/1,2/1,2/1,2/1,2/1,2/1,2/1,2",
+          "ChunkGatedDeltaRuleFwdH/d=0,p=0/1,2/1,2/1,2/1,2/1,2/1,2/1,2",
+          "ChunkGatedDeltaRuleFwdH/d=1,p=1/1,2/1,2/1,2/1,2/1,2/1,2/1,2",
+          "ChunkGatedDeltaRuleFwdH/d=1,p=0/1,2/1,2/1,2/1,2/1,2/1,2/1,2"
+        ],
+        "multiKernelType": 1,
+        "binPath": "ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_0c6d721f948d07280ddb3f78c8ee264f.o",
+        "jsonPath": "ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_0c6d721f948d07280ddb3f78c8ee264f.json"
+      },
+      {
+        "coreType": 0,
+        "simplifiedKey": [
+          "ChunkGatedDeltaRuleFwdH/d=0,p=1/27,2/27,2/27,2/27,2/27,2/27,2/0,2",
+          "ChunkGatedDeltaRuleFwdH/d=0,p=0/27,2/27,2/27,2/27,2/27,2/27,2/0,2",
+          "ChunkGatedDeltaRuleFwdH/d=1,p=1/27,2/27,2/27,2/27,2/27,2/27,2/0,2",
+          "ChunkGatedDeltaRuleFwdH/d=1,p=0/27,2/27,2/27,2/27,2/27,2/27,2/0,2"
+        ],
+        "multiKernelType": 1,
+        "binPath": "ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_17f9487b3624265312502db640f0e3cb.o",
+        "jsonPath": "ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_17f9487b3624265312502db640f0e3cb.json"
+      },
+      {
+        "coreType": 0,
+        "simplifiedKey": [
+          "ChunkGatedDeltaRuleFwdH/d=0,p=1/1,2/1,2/1,2/0,2/1,2/1,2/0,2",
+          "ChunkGatedDeltaRuleFwdH/d=0,p=0/1,2/1,2/1,2/0,2/1,2/1,2/0,2",
+          "ChunkGatedDeltaRuleFwdH/d=1,p=1/1,2/1,2/1,2/0,2/1,2/1,2/0,2",
+          "ChunkGatedDeltaRuleFwdH/d=1,p=0/1,2/1,2/1,2/0,2/1,2/1,2/0,2"
+        ],
+        "multiKernelType": 1,
+        "binPath": "ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_7de42a0daa64bba8f188684b09dbd9e6.o",
+        "jsonPath": "ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_7de42a0daa64bba8f188684b09dbd9e6.json"
+      },
+      {
+        "coreType": 0,
+        "simplifiedKey": [
+          "ChunkGatedDeltaRuleFwdH/d=0,p=1/27,2/27,2/27,2/0,2/27,2/27,2/27,2",
+          "ChunkGatedDeltaRuleFwdH/d=0,p=0/27,2/27,2/27,2/0,2/27,2/27,2/27,2",
+          "ChunkGatedDeltaRuleFwdH/d=1,p=1/27,2/27,2/27,2/0,2/27,2/27,2/27,2",
+          "ChunkGatedDeltaRuleFwdH/d=1,p=0/27,2/27,2/27,2/0,2/27,2/27,2/27,2"
+        ],
+        "multiKernelType": 1,
+        "binPath": "ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_7e558339de2b775a637749a2f058423b.o",
+        "jsonPath": "ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_7e558339de2b775a637749a2f058423b.json"
+      },
+      {
+        "coreType": 0,
+        "simplifiedKey": [
+          "ChunkGatedDeltaRuleFwdH/d=0,p=1/1,2/1,2/1,2/0,2/1,2/1,2/1,2",
+          "ChunkGatedDeltaRuleFwdH/d=0,p=0/1,2/1,2/1,2/0,2/1,2/1,2/1,2",
+          "ChunkGatedDeltaRuleFwdH/d=1,p=1/1,2/1,2/1,2/0,2/1,2/1,2/1,2",
+          "ChunkGatedDeltaRuleFwdH/d=1,p=0/1,2/1,2/1,2/0,2/1,2/1,2/1,2"
+        ],
+        "multiKernelType": 1,
+        "binPath": "ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_c90ea72048d28d09e09d67b3c1510fd4.o",
+        "jsonPath": "ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_c90ea72048d28d09e09d67b3c1510fd4.json"
+      },
+      {
+        "coreType": 0,
+        "simplifiedKey": [
+          "ChunkGatedDeltaRuleFwdH/d=0,p=1/27,2/27,2/27,2/27,2/27,2/27,2/27,2",
+          "ChunkGatedDeltaRuleFwdH/d=0,p=0/27,2/27,2/27,2/27,2/27,2/27,2/27,2",
+          "ChunkGatedDeltaRuleFwdH/d=1,p=1/27,2/27,2/27,2/27,2/27,2/27,2/27,2",
+          "ChunkGatedDeltaRuleFwdH/d=1,p=0/27,2/27,2/27,2/27,2/27,2/27,2/27,2"
+        ],
+        "multiKernelType": 1,
+        "binPath": "ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_d0451c0b964d491017d89040847e9615.o",
+        "jsonPath": "ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_d0451c0b964d491017d89040847e9615.json"
+      },
+      {
+        "coreType": 0,
+        "simplifiedKey": [
+          "ChunkGatedDeltaRuleFwdH/d=0,p=1/27,2/27,2/27,2/0,2/27,2/27,2/0,2",
+          "ChunkGatedDeltaRuleFwdH/d=0,p=0/27,2/27,2/27,2/0,2/27,2/27,2/0,2",
+          "ChunkGatedDeltaRuleFwdH/d=1,p=1/27,2/27,2/27,2/0,2/27,2/27,2/0,2",
+          "ChunkGatedDeltaRuleFwdH/d=1,p=0/27,2/27,2/27,2/0,2/27,2/27,2/0,2"
+        ],
+        "multiKernelType": 1,
+        "binPath": "ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_da7b8be16b2775c80bb697533cd61607.o",
+        "jsonPath": "ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_da7b8be16b2775c80bb697533cd61607.json"
+      },
+      {
+        "coreType": 0,
+        "simplifiedKey": [
+          "ChunkGatedDeltaRuleFwdH/d=0,p=1/1,2/1,2/1,2/1,2/1,2/1,2/0,2",
+          "ChunkGatedDeltaRuleFwdH/d=0,p=0/1,2/1,2/1,2/1,2/1,2/1,2/0,2",
+          "ChunkGatedDeltaRuleFwdH/d=1,p=1/1,2/1,2/1,2/1,2/1,2/1,2/0,2",
+          "ChunkGatedDeltaRuleFwdH/d=1,p=0/1,2/1,2/1,2/1,2/1,2/1,2/0,2"
+        ],
+        "multiKernelType": 1,
+        "binPath": "ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_e0b93aa62ba111fcf82ba1c4780d7ea1.o",
+        "jsonPath": "ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_e0b93aa62ba111fcf82ba1c4780d7ea1.json"
+      }
+    ]
+  },
+  "kernel_jsons": [
+    {
+      "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_impl/ai_core/tbe/kernel/ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_0c6d721f948d07280ddb3f78c8ee264f.json",
+      "bytes": 3960,
+      "sha256": "52947be198b53dfe84ac55afb92b2c468dc8093c26c28055e3aefb30e6610373",
+      "binFileName": "ChunkGatedDeltaRuleFwdH_0c6d721f948d07280ddb3f78c8ee264f",
+      "binary_expected_sha256": "c13ec44c48c0962d78f31fd6108dff1328616f8db33dbf74ce9bc999a3b77cd7",
+      "opMode": "dynamic",
+      "inputs": [
+        {
+          "name": "k",
+          "dtype": "float16"
+        },
+        {
+          "name": "w",
+          "dtype": "float16"
+        },
+        {
+          "name": "u",
+          "dtype": "float16"
+        },
+        {
+          "name": "g",
+          "dtype": "float16"
+        },
+        {
+          "name": "inital_state",
+          "dtype": "float16"
+        },
+        {
+          "name": "cu_seqlens",
+          "dtype": "int64"
+        },
+        {
+          "name": "chunk_indices",
+          "dtype": "int64"
+        }
+      ]
+    },
+    {
+      "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_impl/ai_core/tbe/kernel/ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_17f9487b3624265312502db640f0e3cb.json",
+      "bytes": 3990,
+      "sha256": "80dee6da54b1496b23ae980ad0698a9edf9b33e8cf94f445af9d1577f0ecbf80",
+      "binFileName": "ChunkGatedDeltaRuleFwdH_17f9487b3624265312502db640f0e3cb",
+      "binary_expected_sha256": "ee4a9b7821c2866827b40ea4a8ddf83b35014e6533f5926e83338807e7388921",
+      "opMode": "dynamic",
+      "inputs": [
+        {
+          "name": "k",
+          "dtype": "bfloat16"
+        },
+        {
+          "name": "w",
+          "dtype": "bfloat16"
+        },
+        {
+          "name": "u",
+          "dtype": "bfloat16"
+        },
+        {
+          "name": "g",
+          "dtype": "bfloat16"
+        },
+        {
+          "name": "inital_state",
+          "dtype": "float32"
+        },
+        {
+          "name": "cu_seqlens",
+          "dtype": "int64"
+        },
+        {
+          "name": "chunk_indices",
+          "dtype": "int64"
+        }
+      ]
+    },
+    {
+      "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_impl/ai_core/tbe/kernel/ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_7de42a0daa64bba8f188684b09dbd9e6.json",
+      "bytes": 3960,
+      "sha256": "c902c7b8555bf291de1b9538e24a9c4bfda2e61d6a6f6a5ffd793941c5275f20",
+      "binFileName": "ChunkGatedDeltaRuleFwdH_7de42a0daa64bba8f188684b09dbd9e6",
+      "binary_expected_sha256": "77971fb68859fccc5e9e2acc3dda8b40f18c7f284468d22532bbd56aa99e86c4",
+      "opMode": "dynamic",
+      "inputs": [
+        {
+          "name": "k",
+          "dtype": "float16"
+        },
+        {
+          "name": "w",
+          "dtype": "float16"
+        },
+        {
+          "name": "u",
+          "dtype": "float16"
+        },
+        {
+          "name": "g",
+          "dtype": "float32"
+        },
+        {
+          "name": "inital_state",
+          "dtype": "float32"
+        },
+        {
+          "name": "cu_seqlens",
+          "dtype": "int64"
+        },
+        {
+          "name": "chunk_indices",
+          "dtype": "int64"
+        }
+      ]
+    },
+    {
+      "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_impl/ai_core/tbe/kernel/ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_7e558339de2b775a637749a2f058423b.json",
+      "bytes": 3991,
+      "sha256": "ee4ad915d476079405c05f36522262884787effdd9f3d8323e323d16a34d6f0e",
+      "binFileName": "ChunkGatedDeltaRuleFwdH_7e558339de2b775a637749a2f058423b",
+      "binary_expected_sha256": "b924383169f9bf704b84058eebc36fd6cadbeaaddea3ce20a3cdb020f2666952",
+      "opMode": "dynamic",
+      "inputs": [
+        {
+          "name": "k",
+          "dtype": "bfloat16"
+        },
+        {
+          "name": "w",
+          "dtype": "bfloat16"
+        },
+        {
+          "name": "u",
+          "dtype": "bfloat16"
+        },
+        {
+          "name": "g",
+          "dtype": "float32"
+        },
+        {
+          "name": "inital_state",
+          "dtype": "bfloat16"
+        },
+        {
+          "name": "cu_seqlens",
+          "dtype": "int64"
+        },
+        {
+          "name": "chunk_indices",
+          "dtype": "int64"
+        }
+      ]
+    },
+    {
+      "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_impl/ai_core/tbe/kernel/ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_c90ea72048d28d09e09d67b3c1510fd4.json",
+      "bytes": 3960,
+      "sha256": "45b7df46f4403b0737f2d0e83cf92e99dfeae159212052ffa2ed441c06fd32d3",
+      "binFileName": "ChunkGatedDeltaRuleFwdH_c90ea72048d28d09e09d67b3c1510fd4",
+      "binary_expected_sha256": "a5b4158ef4df69176046a105f44a2c9ac028ba8569d8eed29cc1e32ff901564a",
+      "opMode": "dynamic",
+      "inputs": [
+        {
+          "name": "k",
+          "dtype": "float16"
+        },
+        {
+          "name": "w",
+          "dtype": "float16"
+        },
+        {
+          "name": "u",
+          "dtype": "float16"
+        },
+        {
+          "name": "g",
+          "dtype": "float32"
+        },
+        {
+          "name": "inital_state",
+          "dtype": "float16"
+        },
+        {
+          "name": "cu_seqlens",
+          "dtype": "int64"
+        },
+        {
+          "name": "chunk_indices",
+          "dtype": "int64"
+        }
+      ]
+    },
+    {
+      "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_impl/ai_core/tbe/kernel/ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_d0451c0b964d491017d89040847e9615.json",
+      "bytes": 3996,
+      "sha256": "19138ff91c9f70f2ad4df29cf6c4d8de028e4e30f63fc8ead9b8107ac42aee01",
+      "binFileName": "ChunkGatedDeltaRuleFwdH_d0451c0b964d491017d89040847e9615",
+      "binary_expected_sha256": "a422fcb603b19475d5fdeb60ba2e5fa96370c87e48e427a7e1044219b33fd0b8",
+      "opMode": "dynamic",
+      "inputs": [
+        {
+          "name": "k",
+          "dtype": "bfloat16"
+        },
+        {
+          "name": "w",
+          "dtype": "bfloat16"
+        },
+        {
+          "name": "u",
+          "dtype": "bfloat16"
+        },
+        {
+          "name": "g",
+          "dtype": "bfloat16"
+        },
+        {
+          "name": "inital_state",
+          "dtype": "bfloat16"
+        },
+        {
+          "name": "cu_seqlens",
+          "dtype": "int64"
+        },
+        {
+          "name": "chunk_indices",
+          "dtype": "int64"
+        }
+      ]
+    },
+    {
+      "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_impl/ai_core/tbe/kernel/ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_da7b8be16b2775c80bb697533cd61607.json",
+      "bytes": 3985,
+      "sha256": "c72a97fde96412f72d3353f4e598f1aa0c1335c40d51a57e93659d34f542da55",
+      "binFileName": "ChunkGatedDeltaRuleFwdH_da7b8be16b2775c80bb697533cd61607",
+      "binary_expected_sha256": "0c673c0c29875e661fc292ed7343fd78fba349565ef36a8bbece158d2fed7448",
+      "opMode": "dynamic",
+      "inputs": [
+        {
+          "name": "k",
+          "dtype": "bfloat16"
+        },
+        {
+          "name": "w",
+          "dtype": "bfloat16"
+        },
+        {
+          "name": "u",
+          "dtype": "bfloat16"
+        },
+        {
+          "name": "g",
+          "dtype": "float32"
+        },
+        {
+          "name": "inital_state",
+          "dtype": "float32"
+        },
+        {
+          "name": "cu_seqlens",
+          "dtype": "int64"
+        },
+        {
+          "name": "chunk_indices",
+          "dtype": "int64"
+        }
+      ]
+    },
+    {
+      "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_impl/ai_core/tbe/kernel/ascend910b/chunk_gated_delta_rule_fwd_h/ChunkGatedDeltaRuleFwdH_e0b93aa62ba111fcf82ba1c4780d7ea1.json",
+      "bytes": 3960,
+      "sha256": "a77dc4d1d3ec8beb23e4f364b2bdcc3001cf71cb59231d1dd1e41ddb30ea63d8",
+      "binFileName": "ChunkGatedDeltaRuleFwdH_e0b93aa62ba111fcf82ba1c4780d7ea1",
+      "binary_expected_sha256": "a304150a350f3c33581e57ea5187b8f7477d3b0dd7929ab0bfd21c5bd86355fa",
+      "opMode": "dynamic",
+      "inputs": [
+        {
+          "name": "k",
+          "dtype": "float16"
+        },
+        {
+          "name": "w",
+          "dtype": "float16"
+        },
+        {
+          "name": "u",
+          "dtype": "float16"
+        },
+        {
+          "name": "g",
+          "dtype": "float16"
+        },
+        {
+          "name": "inital_state",
+          "dtype": "float32"
+        },
+        {
+          "name": "cu_seqlens",
+          "dtype": "int64"
+        },
+        {
+          "name": "chunk_indices",
+          "dtype": "int64"
+        }
+      ]
+    }
+  ],
+  "utils": {
+    "path": "/vllm-workspace/vllm-ascend/vllm_ascend/utils.py",
+    "bytes": 67646,
+    "sha256": "575b45d684eabdb7ac3195d33de48bd5f3233081f78886c08be92a4a2fd2fc02"
+  },
+  "utils_snippets": [
+    "_CUSTOM_OP_ENABLED = None",
+    "_CUSTOM_OP_VENDOR_DIR = \"custom_transformer\"",
+    "_CUSTOM_OP_BASE_DIR = (\n    os.path.dirname(__file__) if os.path.isabs(__file__) else os.path.abspath(os.path.dirname(__file__))\n)",
+    "def bootstrap_custom_op_env(*, include_vendor_lib: bool = False) -> None:\n    vendor_path = os.path.join(_CUSTOM_OP_BASE_DIR, \"_cann_ops_custom\", \"vendors\", _CUSTOM_OP_VENDOR_DIR)\n    if not os.path.exists(vendor_path):\n        return\n    _prepend_env_path(\"ASCEND_CUSTOM_OPP_PATH\", vendor_path)\n\n    if include_vendor_lib:\n        vendor_lib_path = os.path.join(vendor_path, \"op_api\", \"lib\")\n        if os.path.exists(vendor_lib_path):\n            _prepend_env_path(\"LD_LIBRARY_PATH\", vendor_lib_path)",
+    "def enable_custom_op():\n    \"\"\"\n    Enable lazy init for vllm_ascend_C to avoid early initialization of CANN's RTS component.\n    Ensure that ASCEND_RT_VISIBLE_DEVICES can be dynamically modified before torch.npu.set_device().\n    \"\"\"\n    import vllm.envs as envs\n\n    global _CUSTOM_OP_ENABLED\n\n    if _CUSTOM_OP_ENABLED is not None:\n        return _CUSTOM_OP_ENABLED\n\n    # There are some customed operators which aren't implemented\n    # with batch invariant in vllm-ascend, we need to disable them.\n    # FIXME(linfeng): Currently custom op compilation and execution are partially available\n    # in ASCEND950 chip, we temporarily disable all custom ops. Please refer to\n    # https://github.com/vllm-project/vllm-ascend/issues/7157 for latest update about custom op.\n    if envs.VLLM_BATCH_INVARIANT or get_ascend_device_type() == AscendDeviceType.A5:\n        _CUSTOM_OP_ENABLED = False\n        return _CUSTOM_OP_ENABLED\n\n    try:\n        if not torch.compiler.is_compiling():\n            bootstrap_custom_op_env()\n        # isort: off\n        # register custom ops into torch_library here\n        import vllm_ascend.vllm_ascend_C  # type: ignore  # noqa: F401\n\n        # register the meta implementation for custom kernel if necessary\n        import vllm_ascend.meta_registration  # type: ignore  # noqa: F401\n\n        # isort: on\n        _CUSTOM_OP_ENABLED = True\n    except ImportError as e:\n        # Prefer the extension's rpath for vendor op_api loading. Only fall back\n        # to mutating LD_LIBRARY_PATH when the import proves it is still needed.\n        if (not torch.compiler.is_compiling()) and \"libcust_opapi.so\" in str(e):\n            try:\n                bootstrap_custom_op_env(include_vendor_lib=True)\n                import vllm_ascend.meta_registration  # type: ignore  # noqa: F401\n                import vllm_ascend.vllm_ascend_C  # type: ignore  # noqa: F401\n\n                _CUSTOM_OP_ENABLED = True\n            except ImportError:\n                _CUSTOM_OP_ENABLED = False\n                logger.warning(\n                    \"Failed to register custom ops, all custom ops will be disabled. \"\n                    \"The custom ops library might not be installed or the environment is not configured correctly. \"\n                    \"Please check the custom ops installation and environment variables.\"\n                )\n        else:\n            _CUSTOM_OP_ENABLED = False\n            logger.warning(\n                \"Failed to register custom ops, all custom ops will be disabled. \"\n                \"error=%s. \"\n                \"The custom ops library might not be installed or the environment is not configured correctly. \"\n                \"Please check the custom ops installation and environment variables.\",\n                e,\n            )\n    return _CUSTOM_OP_ENABLED"
+  ]
+}

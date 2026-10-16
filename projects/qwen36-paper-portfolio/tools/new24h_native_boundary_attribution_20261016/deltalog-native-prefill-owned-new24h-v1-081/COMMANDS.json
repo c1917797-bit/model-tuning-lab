@@ -1,0 +1,40 @@
+{
+  "MAIN_only": true,
+  "default_off": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-owned-new24h-v1-081/owner081.py"
+  ],
+  "execute": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-owned-new24h-v1-081/owner081.py",
+    "--execute",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-owned-new24h-v1-081/SOURCE_MANIFEST.json\",\"bytes\":3450,\"sha256\":\"7fe16d8be8322857ce578674761dde2c7672c11244da27df82514c983fdfdcd5\"}",
+    "--host-cpu",
+    "MAIN_ACTUAL_HOST_CPU",
+    "--guest-cpu",
+    "MAIN_ACTUAL_DISJOINT_GUEST_CPU",
+    "--output",
+    "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-native081-MAIN-20261016-001"
+  ],
+  "qualified": false,
+  "schema": "deltalog.native-prefill-owned-commands/v081",
+  "source": {
+    "bytes": 3450,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-owned-new24h-v1-081/SOURCE_MANIFEST.json",
+    "sha256": "7fe16d8be8322857ce578674761dde2c7672c11244da27df82514c983fdfdcd5"
+  },
+  "source_audit": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-owned-new24h-v1-081/owner081.py",
+    "--source-audit",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-owned-new24h-v1-081/SOURCE_MANIFEST.json\",\"bytes\":3450,\"sha256\":\"7fe16d8be8322857ce578674761dde2c7672c11244da27df82514c983fdfdcd5\"}"
+  ]
+}

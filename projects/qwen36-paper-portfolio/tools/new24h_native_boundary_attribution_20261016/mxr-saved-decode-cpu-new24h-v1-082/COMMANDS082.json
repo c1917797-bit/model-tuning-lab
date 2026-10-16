@@ -1,0 +1,42 @@
+{
+  "NPU": false,
+  "execute": [
+    "/usr/bin/prlimit",
+    "--as=536870912:unlimited",
+    "--",
+    "/usr/bin/python3",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/owned_cpu.py",
+    "--execute",
+    "--source-ref",
+    "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/SOURCE_MANIFEST.json\", \"bytes\": 2608, \"sha256\": \"0d83606a6f47d53ed9a77375b5273e4cd4750f9131cd80cfa98b4944f8d85123\"}",
+    "--host-cpu",
+    "MAIN_FRESH_HOST_CPU",
+    "--guest-cpu",
+    "MAIN_FRESH_GUEST_CPU",
+    "--output",
+    "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-mxr-decode082-MAIN-001"
+  ],
+  "not_ready_until": [
+    "MAIN code audit/deploy exactsource and fresh resource ledger",
+    "new output absent",
+    "no_overlap with any other owned task as inherited074R2 policy"
+  ],
+  "qualification": false,
+  "source": {
+    "bytes": 2608,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/SOURCE_MANIFEST.json",
+    "sha256": "0d83606a6f47d53ed9a77375b5273e4cd4750f9131cd80cfa98b4944f8d85123"
+  },
+  "sourceaudit": [
+    "/usr/bin/prlimit",
+    "--as=536870912:unlimited",
+    "--",
+    "/usr/bin/python3",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/owned_cpu.py",
+    "--source-audit",
+    "--source-ref",
+    "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-saved-decode-cpu-new24h-v1-082/SOURCE_MANIFEST.json\", \"bytes\": 2608, \"sha256\": \"0d83606a6f47d53ed9a77375b5273e4cd4750f9131cd80cfa98b4944f8d85123\"}"
+  ]
+}

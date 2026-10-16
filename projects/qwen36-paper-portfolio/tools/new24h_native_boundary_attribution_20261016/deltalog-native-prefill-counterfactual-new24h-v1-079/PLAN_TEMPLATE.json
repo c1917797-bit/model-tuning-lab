@@ -1,0 +1,21 @@
+{
+  "logical": 0,
+  "physical": null,
+  "producer": {
+    "bytes": 100542,
+    "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001/numeric/result/RESULT.json",
+    "sha256": "4a5b125780618a6020e2d2bf619be1e4258dbafd9b7699bfe52aabc16fa12caa"
+  },
+  "qualification": false,
+  "retained_source": {
+    "bytes": 52969,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json",
+    "sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21"
+  },
+  "schema": "deltalog.native-prefill-counterfactual-plan/v079",
+  "source": {
+    "bytes": 4589,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/SOURCE_MANIFEST.json",
+    "sha256": "2e05b80a5453a4d49b27d860d31be6e8a49bc1293ea8fc57e9b0f61b515f4010"
+  }
+}

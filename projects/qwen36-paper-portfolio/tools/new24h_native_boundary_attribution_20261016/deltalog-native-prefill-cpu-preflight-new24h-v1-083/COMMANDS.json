@@ -1,0 +1,39 @@
+{
+  "NPU": false,
+  "actual_sameimage": false,
+  "default_off": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/owned_cpu.py"
+  ],
+  "execute": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/owned_cpu.py",
+    "--execute",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/SOURCE_MANIFEST.json\",\"bytes\":3143,\"sha256\":\"3a86874b47c2c34147b52f252f367b63fc1f46b83422e35dc6df6beb1d5a162f\"}",
+    "--host-cpu",
+    "MAIN_HOST_CPU",
+    "--guest-cpu",
+    "MAIN_DISJOINT_GUEST_CPU",
+    "--output",
+    "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-prefill083-MAIN-20261016-001"
+  ],
+  "source": {
+    "bytes": 3143,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/SOURCE_MANIFEST.json",
+    "sha256": "3a86874b47c2c34147b52f252f367b63fc1f46b83422e35dc6df6beb1d5a162f"
+  },
+  "source_audit": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/owned_cpu.py",
+    "--source-audit",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/SOURCE_MANIFEST.json\",\"bytes\":3143,\"sha256\":\"3a86874b47c2c34147b52f252f367b63fc1f46b83422e35dc6df6beb1d5a162f\"}"
+  ]
+}

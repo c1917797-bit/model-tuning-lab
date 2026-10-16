@@ -1,0 +1,40 @@
+{
+  "NPU_executed": false,
+  "default_enabled": false,
+  "guest": [
+    "/usr/local/python3.12.13/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/guest_core.py",
+    "--execute",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/SOURCE_MANIFEST.json\",\"bytes\":4589,\"sha256\":\"2e05b80a5453a4d49b27d860d31be6e8a49bc1293ea8fc57e9b0f61b515f4010\"}",
+    "--plan-ref",
+    "ACTUAL_MAIN_SOURCEBOUND_SINGLETON_PLAN_REF3",
+    "--output",
+    "ACTUAL_OWNED_LEAF/numeric/result"
+  ],
+  "must_prepend_vendor_before_Python": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer",
+  "must_run_only_in_MAIN_existing_owned_singleton": true,
+  "pending": [
+    "same-image source/CANN/native import checks",
+    "actual MAIN-owned host binding and exact physical/PID/ARM proof",
+    "actual six-call NPU counterfactual and independent result reopen"
+  ],
+  "qualified": false,
+  "schema": "deltalog.native-prefill-counterfactual-commands/v079",
+  "source": {
+    "bytes": 4589,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/SOURCE_MANIFEST.json",
+    "sha256": "2e05b80a5453a4d49b27d860d31be6e8a49bc1293ea8fc57e9b0f61b515f4010"
+  },
+  "sourceaudit": [
+    "/usr/local/python3.12.13/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/guest_core.py",
+    "--source-audit",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/SOURCE_MANIFEST.json\",\"bytes\":4589,\"sha256\":\"2e05b80a5453a4d49b27d860d31be6e8a49bc1293ea8fc57e9b0f61b515f4010\"}"
+  ]
+}

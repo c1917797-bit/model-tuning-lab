@@ -1,0 +1,111 @@
+{
+  "NPU_executed": false,
+  "READY": false,
+  "actual_gmH_observation": true,
+  "authority_ref": {
+    "bytes": 3481,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "calls": [
+    "SC-repeat0",
+    "SN-repeat0",
+    "SC-repeat1",
+    "SN-repeat1",
+    "SC-common-control0",
+    "SC-common-control1"
+  ],
+  "cann_helper_ref": {
+    "bytes": 4503,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-d8-fp32-model-boundary-r87-v1-011/cann_python.py",
+    "sha256": "cee927f1107fe6714e86ab1dceecafeff800980a00b8df9fcc47ff6831ba5104"
+  },
+  "default_enabled": false,
+  "files": {
+    "ACTUAL_VENDOR_CONFIG_PROOF.json": {
+      "bytes": 20563,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/ACTUAL_VENDOR_CONFIG_PROOF.json",
+      "sha256": "b73910d317c3253d2b5d2e6d9740b2b3ac8e8bda1c99f6e80743e5d37fb70f5b"
+    },
+    "HANDOFF.md": {
+      "bytes": 4928,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/HANDOFF.md",
+      "sha256": "db7b8a2d4e122a2f105e939b915443ffeafe039613892aea19bddfae31150e9b"
+    },
+    "device_dispatch.py": {
+      "bytes": 1566,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/device_dispatch.py",
+      "sha256": "9b5846866cf8e0975a59d2274a17567fe7b1a2e64ef310c2ce72cf3d1d257e20"
+    },
+    "early_vendor.py": {
+      "bytes": 3317,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/early_vendor.py",
+      "sha256": "2cd8b8df3030e3f15acfef311ca5331ae9bd6f576ac5760a7e747c46d92354c8"
+    },
+    "guest_core.py": {
+      "bytes": 17955,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/guest_core.py",
+      "sha256": "f742281a3e07c41341885639afa712a4b22f39c35a229839b2dee624b4f6d267"
+    },
+    "native_bootstrap.py": {
+      "bytes": 2179,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/native_bootstrap.py",
+      "sha256": "b09b7bf9cb626896d5500c5c7e30fa552699e5302ee3ac6eaa5b426923c39111"
+    },
+    "seal079.py": {
+      "bytes": 3630,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/seal079.py",
+      "sha256": "b57cb0cf1971c5268d74403cf64b5e8fb6b26ce8cb5274ea5f415e0c49ded319"
+    },
+    "test_guest079.py": {
+      "bytes": 3721,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/test_guest079.py",
+      "sha256": "eba9d8f840651473426a13e374a4e601e20eda51ff76801b5d97a34475b56581"
+    }
+  },
+  "local_software_controls": {
+    "NPU": false,
+    "passed": 7,
+    "sameimage": false
+  },
+  "qualified": false,
+  "resource_contract": {
+    "ARM_seconds": 30,
+    "cleanup_seconds": 90,
+    "guest_GiB": 8,
+    "guest_seconds": 600,
+    "host_GiB": 0.5,
+    "logical": 0,
+    "physical": null,
+    "raw_cap_bytes": 268435456,
+    "reserve_GiB": 8,
+    "whole_output_bytes": 1073741824,
+    "whole_seconds": 900
+  },
+  "retained_failed_producer": {
+    "bytes": 100542,
+    "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric160-MAIN-20261016-NEW24H-069-repair1-001/numeric/result/RESULT.json",
+    "sha256": "4a5b125780618a6020e2d2bf619be1e4258dbafd9b7699bfe52aabc16fa12caa"
+  },
+  "retained_source": {
+    "bytes": 52969,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json",
+    "sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21"
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079",
+  "schema": "deltalog.native-prefill-counterfactual-source/v079",
+  "selection": {
+    "batch": 1,
+    "decode_slot": 0,
+    "initial_state_C": "exact current captured initial N,H,K,V",
+    "initial_state_N": "previous native slot1 transposed N,H,K,V",
+    "other_operands": "same captured candidate postconv operands, not historical native-baseline operands",
+    "prefill_slot": 1,
+    "steps": [
+      89,
+      90
+    ]
+  },
+  "source_only": true,
+  "source_to_binary_identity_proved": false
+}
