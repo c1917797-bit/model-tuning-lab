@@ -1,4 +1,15 @@
-# CURRENT R19 SAME-SOURCE NATIVE FULL40 LIVE
+# CURRENT R19 THREE ARMS VALID; WHOLE HYPIC NEGATIVE
+
+Native0edaexit0;independent0f0a PASS40/40/194sources/425clean/liveexactrelease.
+TPOT280.910592ms,TTFTP95344663.165980ms. R19_THREE_ARM_FIRST_SCREEN_20261016.json.
+ONvsOFF TPOT-5.471234%/TTFTP95-2.670823%, but ONvsnative TPOT+9.802647%/
+TTFTP95+17.975334%. Componentgain does not prove wholeoptimization success.
+No ownedmodeljob. Preserve immutable roots; do not expand unchangednegative matrix.
+Next source-backed remainingintegrationcost attribution andone boundedrepair,
+unchanged numeric/finite/ownership/isolation gates. Fullquality/lifecycle/29functional
+remainunfinished. Cutoff2026-10-17T06:48:09Z.
+
+# HISTORICAL R19 SAME-SOURCE NATIVE FULL40 LIVE
 
 ma exact exec-0000000000000eda launched21:58UTC from liveverified38a0a207.
 Admission0ed9:194sources/181runtime/image/model/input/physical0-3empty/8233+HCCLfree/newroot.

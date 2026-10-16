@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R19-lazy-NATIVE-running",
+  "execution_state": "R19-three-arm-valid-whole-negative",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "Owned R19NATIVE exact0eda running; no duplicate launch."
+    "state": "No ownedmodeljob; native liveexactrelease0f0a verified."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll exact ma0eda/raw NATIVE; terminal audit_r19_lazy_performance.py --contract FORMAL_R19_LAZY_NATIVE_R1_CONTRACT.json --live-release. No194bound changes/restart. Whole comparison only after independent validity.",
+  "next_action": "R19 three arms independently valid, wholeHYPIC TPOT+9.802647%/TTFTP95+17.975334% vsnative; do not expand unchanged negative matrix. Attribute remaining integrated overhead using source/raw; one bounded repair. Fullquality/lifecycle/29functional unfinished.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,14 +215,15 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "RUNNING",
+    "state": "TERMINAL_VALID",
     "operation": "exec-0000000000000eda",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
     "contract": "FORMAL_R19_LAZY_NATIVE_R1_CONTRACT.json",
     "raw_root": "/cache/cch/hypic-independent-20261013/formal-r19-lazy-native-r1",
     "checkpoint": "38a0a20716900f601c9be5c290acd3d489fe7e6f",
-    "admission_operation": "exec-0000000000000ed9"
+    "admission_operation": "exec-0000000000000ed9",
+    "independent_audit": "exec-0000000000000f0a"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -393,13 +394,14 @@
   "r19_attribution": {
     "valid": [
       "on/R1",
-      "off/R1"
-    ],
-    "running": "native/R1",
-    "remaining": [
+      "off/R1",
       "native/R1"
     ],
+    "running": null,
+    "remaining": [],
     "on_report": "R19_LAZY_ON_R1_TERMINAL_20261016.json",
-    "off_report": "R19_LAZY_OFF_R1_TERMINAL_20261016.json"
+    "off_report": "R19_LAZY_OFF_R1_TERMINAL_20261016.json",
+    "native_report": "R19_LAZY_NATIVE_R1_TERMINAL_20261016.json",
+    "decision_report": "R19_THREE_ARM_FIRST_SCREEN_20261016.json"
   }
 }

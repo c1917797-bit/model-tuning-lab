@@ -1,0 +1,38 @@
+{
+  "schema": "hypic-r19-terminal/v1",
+  "contract": "FORMAL_R19_LAZY_NATIVE_R1_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-r19-lazy-native-r1",
+  "controller": "exec-0000000000000eda",
+  "independent_audit": "exec-0000000000000f0a",
+  "report": {
+    "terminal_unit_valid": true,
+    "timing": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 280.91059160718004,
+      "ttft_p95_ms": 344663.1659800187,
+      "tpot_p95_ms": 293.85156028320125
+    },
+    "isolation_samples": 425,
+    "source_bindings": 194,
+    "raw_sha256": {
+      "result.json": "b030e1a2e3bffc4ca5fa27fff256e1838abdecfd64ad378d0bf6eae75adfff5e",
+      "events.jsonl": "de13499f340b6d18507cd32ecf5374af9303136bad8da2d60c699642e3bc1ebc",
+      "performance-unit.json": "07fe6c37f36b5de29571988c26a9eae15b7049ec9c07833f03c5161fe5275433",
+      "release.json": "7f6b6d597929854e1023c3955c3ca2b4f0230b64558b33eba4ce02693790dd45"
+    },
+    "scope": "one same-source R19 timed arm; paired speed/fullquality/lifecycle separately",
+    "live_release_verified": true,
+    "partition": {
+      "enabled": false,
+      "groups": 0,
+      "completed": 0
+    }
+  },
+  "raw_sha256": {
+    "result.json": "b030e1a2e3bffc4ca5fa27fff256e1838abdecfd64ad378d0bf6eae75adfff5e",
+    "events.jsonl": "de13499f340b6d18507cd32ecf5374af9303136bad8da2d60c699642e3bc1ebc",
+    "performance-unit.json": "07fe6c37f36b5de29571988c26a9eae15b7049ec9c07833f03c5161fe5275433",
+    "release.json": "7f6b6d597929854e1023c3955c3ca2b4f0230b64558b33eba4ce02693790dd45"
+  }
+}

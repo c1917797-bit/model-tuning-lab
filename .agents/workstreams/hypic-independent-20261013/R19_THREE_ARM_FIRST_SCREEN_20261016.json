@@ -1,0 +1,36 @@
+{
+  "schema": "hypic-three-arm-first-screen/v1",
+  "decision": "NEGATIVE_WHOLE_HYPIC_DO_NOT_EXPAND_UNCHANGED",
+  "scope": "one same-source full40 per arm; component on/off attribution and whole native comparison; not three-round matrix/fullquality/lifecycle",
+  "source_bindings": 194,
+  "arms": {
+    "on": {
+      "weighted_tpot_ms": 308.44726573193526,
+      "ttft_p95_ms": 406617.52066999907,
+      "report": "R19_LAZY_ON_R1_TERMINAL_20261016.json"
+    },
+    "off": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 326.2998950615284,
+      "ttft_p95_ms": 417775.5657400121,
+      "tpot_p95_ms": 346.3207991503623,
+      "report": "R19_LAZY_OFF_R1_TERMINAL_20261016.json"
+    },
+    "native": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 280.91059160718004,
+      "ttft_p95_ms": 344663.1659800187,
+      "tpot_p95_ms": 293.85156028320125,
+      "report": "R19_LAZY_NATIVE_R1_TERMINAL_20261016.json"
+    }
+  },
+  "deltas_percent": {
+    "on_vs_off_tpot": -5.47123354919461,
+    "on_vs_off_ttft": -2.670822801771233,
+    "on_vs_native_tpot": 9.802647158018862,
+    "on_vs_native_ttft": 17.975333834649486
+  },
+  "next": "Source-backed remaining integrated overhead attribution; preserve mechanism/numerical/ownership/isolation gates. Full G1-G4x3,381/arm naturalEOSquality,lifecycle,29functional remain."
+}
