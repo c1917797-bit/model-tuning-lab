@@ -1,0 +1,27 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "delivery_runtime draft adapter",
+  "focused": {
+    "operation": "exec-0000000000000b3f",
+    "tests": 8,
+    "exit": 0
+  },
+  "regression": {
+    "operation": "exec-0000000000000b41",
+    "tests": 823,
+    "exit": 0
+  },
+  "standard_package_validator": {
+    "operation": "exec-0000000000000b40",
+    "exit": 0,
+    "scope": "structure and patch digest, not full semantic/device acceptance"
+  },
+  "scope": "Enabled success uses fake loader; no real worker/framework/NPU activation. Frozen lifecycleR1 still compact_bootstrap, not this adapter.",
+  "remaining": [
+    "Rebind evidence.commit to exact tested adapter checkpoint",
+    "Successor lifecycle source/controller/startup audit wiring and new contracts",
+    "Fresh actual CANN attestation before promotion",
+    "Actual prior gates and lifecycle device run"
+  ],
+  "authority": "Only work/hypic-independent-20261013; no main/deployment claim"
+}
