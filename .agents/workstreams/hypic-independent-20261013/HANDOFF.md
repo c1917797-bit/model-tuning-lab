@@ -1,5 +1,15 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+NativePDC aggregate observer implemented separateHOSTONLY/defaultno-run wrapper.
+097d37targetedcontrolsPASS (20nativecounter+17full40PDC); no deviceproofyet.
+OfficialmetricsloggeractualSHAce2a0535...0977; engine0/modelqwen3.5 metrics0978.
+Pre4warmups/post44success counters around ORIGINAL full40 invocation; NO polling
+inside measuredclient, no algorithm/image/flags change. Claimaggregatehits ONLY.
+NewG2/G4R1contracts bind3observerfiles; launchformal_pdc_metrics_tp4.py, terminal
+audit_native_pdc_metrics_terminal.py --live-release; G4alsoall40/fourrankPICproof.
+G1/G3original entrypoint unchanged. NewreportFORMAL_NATIVE_PDC_HOST_READINESS_20261016.json.
+0967stilllive07:24UTC12/40success0fail323clean;141bounds untouched.
+
 PDCfull40 postrun auditor NEW standalonefiles ready:0972 17CPUcontrolsPASS,
 0973 all141livebounds unchanged/29structure/diffPASS. No realG4orG2acceptance.
 FORMAL_FULL40_PDC_HOST_READINESS_20261016.json binds3auditfiles; prospectiveG4

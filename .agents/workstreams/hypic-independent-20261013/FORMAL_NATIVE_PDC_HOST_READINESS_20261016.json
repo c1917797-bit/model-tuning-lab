@@ -1,0 +1,42 @@
+{
+  "schema": "native-pdc-counter-host-readiness/v1",
+  "plan_checkpoint": "8eb97b5fe1cf15a998a5a71840b573b233ec5802",
+  "tests": {
+    "operation": "exec-000000000000097d",
+    "count": 37,
+    "status": "PASS",
+    "scope": "20new nativecounter/wrappercontrols plus17 prior full40 PDCcontrols; not NPU/full29 functional"
+  },
+  "observer": {
+    "official_logger_sha256": "ce2a0535d2b2b69e4368f34b692dac081be764e8d0eadab4f791b1afdcf43df4",
+    "source_sha256": {
+      "native_pdc_metrics.py": "e0caf276b1a38f1c36f14fcd6ed7de83475678f8ad60e7fe5517515e1c1c97e4",
+      "formal_pdc_metrics_tp4.py": "ee69de72d54383074f4d09e9a8b280dd7b23458e178e7bada6019305f28b32a4",
+      "audit_native_pdc_metrics_terminal.py": "084ce24f959d9271f3cb75607ba6bede4284ae350deba0845578a0004f271b1a"
+    },
+    "claim": "aggregate actual native cache hits among40measured, not per-request; before4/after44 successes, outside request timing",
+    "entrypoint": "formal_pdc_metrics_tp4.py",
+    "terminal_audit": "audit_native_pdc_metrics_terminal.py"
+  },
+  "prospective_contracts": [
+    "FORMAL_R15_20261016_G2_R1_CONTRACT.json",
+    "FORMAL_R15_20261016_G4_R1_CONTRACT.json"
+  ],
+  "launch": "python3 -B formal_pdc_metrics_tp4.py --contract NEW_CONTRACT.json --run",
+  "audit": "python3 -B audit_native_pdc_metrics_terminal.py --contract NEW_CONTRACT.json --live-release",
+  "current_live": "0967 G3 uses original unchanged141files/controller; new files not imported",
+  "not_accepted": [
+    "No real nativecounter observer run yet",
+    "No G2/G4 full40 terminal proof yet",
+    "Full matched12matrix/quality/lifecycle/Paper-to-Ascend/29functional incomplete"
+  ],
+  "static_check": {
+    "operation": "exec-0000000000000982",
+    "status": "PASS",
+    "scope": "source141unchanged, G2/G4 newhash/contract/newrootabsence, PythonAST, --run guardedbranch,29structure,diff; wrapper notinvoked"
+  },
+  "safety_review": {
+    "configuration_cli": "Rejected while0967 live as potentialseconddevice launch; no wrapper invoked or seconddevice started",
+    "resolution": "No indirect execution; pure static AST/hash alternative0982 passed. Real wrapper admission waits previous terminal+release+freshresources."
+  }
+}
