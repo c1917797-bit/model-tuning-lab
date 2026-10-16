@@ -1,0 +1,701 @@
+{
+  "schema": "hypic-r16-earlymixed-parsed-audit/v1",
+  "operation": "exec-0000000000000cb4",
+  "raw_root": "/cache/cch/hypic-independent-20261013/profile-g3-r16-earlymixed-r1",
+  "analysis_root": "/cache/cch/hypic-independent-20261013/profile-g3-r16-earlymixed-r1-analysis-r1",
+  "parsed": {
+    "fourrank_artifacts_valid": true,
+    "ranks": {
+      "0": {
+        "directory": "rank0_58_20261016150902037_ascend_pt",
+        "tables": {
+          "operator_details.csv": {
+            "rows": 102255,
+            "columns": 9
+          },
+          "kernel_details.csv": {
+            "rows": 13327,
+            "columns": 46
+          },
+          "op_statistic.csv": {
+            "rows": 59,
+            "columns": 9
+          },
+          "api_statistic.csv": {
+            "rows": 93,
+            "columns": 9
+          }
+        },
+        "trace_events": 351810,
+        "trace_bytes": 66164864,
+        "trace_categories": {
+          "cpu_op": 102255,
+          "dequeue": 16103,
+          "async_task_queue": 32206,
+          "enqueue": 16103,
+          "None": 122089,
+          "HostToDevice": 31658,
+          "async_npu": 31396
+        },
+        "steps": [],
+        "kernel_types": {
+          "RecurrentGatedDeltaRule": 48,
+          "FusedInferAttentionScore": 96,
+          "hcom_allReduce_": 516,
+          "ChunkGatedDeltaRuleFwdH": 192,
+          "chunk_scaled_dot_kkt_fwd_kernel": 96,
+          "ChunkFwdO": 96,
+          "ArgMaxV2": 2,
+          "IsFinite": 640,
+          "ReduceAll": 736
+        },
+        "timeline": {
+          "path": "/cache/cch/hypic-independent-20261013/profile-g3-r16-earlymixed-r1-analysis-r1/rank0_58_20261016150902037_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+          "sha256": "c31ee097a57d1fda995d9d3aab1584cf906d967f1817ef1db7179cc53bc46389",
+          "kernel_rows": 13327,
+          "absolute_origin_us": "1792163342491785.041",
+          "kernel_envelope_us": 10334669.006000001,
+          "all_kernel_union_us": 5923357.117000004,
+          "uncovered_envelope_us": 4411311.888999997,
+          "uncovered_fraction": 0.42684597701570515,
+          "communication_exclusive_us": 1469144.39000001,
+          "types": [
+            {
+              "type": "MatMulV3",
+              "communication_name_match": false,
+              "calls": 512,
+              "summed_us": 2184362.4369999934,
+              "union_us": 2184362.4369999934
+            },
+            {
+              "type": "hcom_allReduce_",
+              "communication_name_match": true,
+              "calls": 516,
+              "summed_us": 2924466.786000006,
+              "union_us": 1462233.393000003
+            },
+            {
+              "type": "FusedInferAttentionScore",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 410836.3479999968,
+              "union_us": 410836.3479999968
+            },
+            {
+              "type": "AddRmsNormBias",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 361961.61599999346,
+              "union_us": 361961.61599999346
+            }
+          ]
+        }
+      },
+      "1": {
+        "directory": "rank1_59_20261016150902037_ascend_pt",
+        "tables": {
+          "operator_details.csv": {
+            "rows": 102257,
+            "columns": 9
+          },
+          "kernel_details.csv": {
+            "rows": 13327,
+            "columns": 46
+          },
+          "op_statistic.csv": {
+            "rows": 59,
+            "columns": 9
+          },
+          "api_statistic.csv": {
+            "rows": 93,
+            "columns": 9
+          }
+        },
+        "trace_events": 351802,
+        "trace_bytes": 66054803,
+        "trace_categories": {
+          "cpu_op": 102257,
+          "dequeue": 16102,
+          "async_task_queue": 32204,
+          "enqueue": 16102,
+          "None": 122081,
+          "HostToDevice": 31658,
+          "async_npu": 31398
+        },
+        "steps": [],
+        "kernel_types": {
+          "RecurrentGatedDeltaRule": 48,
+          "FusedInferAttentionScore": 96,
+          "hcom_allReduce_": 516,
+          "ChunkGatedDeltaRuleFwdH": 192,
+          "chunk_scaled_dot_kkt_fwd_kernel": 96,
+          "ChunkFwdO": 96,
+          "ArgMaxV2": 2,
+          "IsFinite": 640,
+          "ReduceAll": 736
+        },
+        "timeline": {
+          "path": "/cache/cch/hypic-independent-20261013/profile-g3-r16-earlymixed-r1-analysis-r1/rank1_59_20261016150902037_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+          "sha256": "bb1ed39875678bcdf8dd3fd97a1cf897fd6477f39af40a3d2402c45452046aba",
+          "kernel_rows": 13327,
+          "absolute_origin_us": "1792163342491718.470",
+          "kernel_envelope_us": 10334521.940000001,
+          "all_kernel_union_us": 5908366.540000002,
+          "uncovered_envelope_us": 4426155.399999999,
+          "uncovered_fraction": 0.42828835486511135,
+          "communication_exclusive_us": 1450332.0599999977,
+          "types": [
+            {
+              "type": "MatMulV3",
+              "communication_name_match": false,
+              "calls": 512,
+              "summed_us": 2183866.259999999,
+              "union_us": 2183866.259999999
+            },
+            {
+              "type": "hcom_allReduce_",
+              "communication_name_match": true,
+              "calls": 516,
+              "summed_us": 2886702.680000014,
+              "union_us": 1443351.340000007
+            },
+            {
+              "type": "FusedInferAttentionScore",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 410002.08000000333,
+              "union_us": 410002.08000000333
+            },
+            {
+              "type": "AddRmsNormBias",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 361174.82000000484,
+              "union_us": 361174.82000000484
+            }
+          ]
+        }
+      },
+      "2": {
+        "directory": "rank2_60_20261016150902036_ascend_pt",
+        "tables": {
+          "operator_details.csv": {
+            "rows": 102257,
+            "columns": 9
+          },
+          "kernel_details.csv": {
+            "rows": 13327,
+            "columns": 46
+          },
+          "op_statistic.csv": {
+            "rows": 59,
+            "columns": 9
+          },
+          "api_statistic.csv": {
+            "rows": 93,
+            "columns": 9
+          }
+        },
+        "trace_events": 351806,
+        "trace_bytes": 66072499,
+        "trace_categories": {
+          "cpu_op": 102257,
+          "dequeue": 16103,
+          "async_task_queue": 32206,
+          "enqueue": 16103,
+          "None": 122081,
+          "HostToDevice": 31658,
+          "async_npu": 31398
+        },
+        "steps": [],
+        "kernel_types": {
+          "RecurrentGatedDeltaRule": 48,
+          "FusedInferAttentionScore": 96,
+          "hcom_allReduce_": 516,
+          "ChunkGatedDeltaRuleFwdH": 192,
+          "chunk_scaled_dot_kkt_fwd_kernel": 96,
+          "ChunkFwdO": 96,
+          "ArgMaxV2": 2,
+          "IsFinite": 640,
+          "ReduceAll": 736
+        },
+        "timeline": {
+          "path": "/cache/cch/hypic-independent-20261013/profile-g3-r16-earlymixed-r1-analysis-r1/rank2_60_20261016150902036_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+          "sha256": "baf8c6ccafaad75ea32e4679728e5bae3181c86323e3620ea31f2b2c2cec2fcb",
+          "kernel_rows": 13327,
+          "absolute_origin_us": "1792163342491671.905",
+          "kernel_envelope_us": 10334563.34,
+          "all_kernel_union_us": 5981301.580000004,
+          "uncovered_envelope_us": 4353261.759999996,
+          "uncovered_fraction": 0.42123325551169305,
+          "communication_exclusive_us": 1526125.399999993,
+          "types": [
+            {
+              "type": "MatMulV3",
+              "communication_name_match": false,
+              "calls": 512,
+              "summed_us": 2182828.680000009,
+              "union_us": 2182828.680000009
+            },
+            {
+              "type": "hcom_allReduce_",
+              "communication_name_match": true,
+              "calls": 516,
+              "summed_us": 3038436.0799999996,
+              "union_us": 1519218.0399999998
+            },
+            {
+              "type": "FusedInferAttentionScore",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 409092.45999999705,
+              "union_us": 409092.45999999705
+            },
+            {
+              "type": "AddRmsNormBias",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 361375.58000000054,
+              "union_us": 361375.58000000054
+            }
+          ]
+        }
+      },
+      "3": {
+        "directory": "rank3_61_20261016150902036_ascend_pt",
+        "tables": {
+          "operator_details.csv": {
+            "rows": 102257,
+            "columns": 9
+          },
+          "kernel_details.csv": {
+            "rows": 13327,
+            "columns": 46
+          },
+          "op_statistic.csv": {
+            "rows": 59,
+            "columns": 9
+          },
+          "api_statistic.csv": {
+            "rows": 93,
+            "columns": 9
+          }
+        },
+        "trace_events": 351803,
+        "trace_bytes": 66067216,
+        "trace_categories": {
+          "cpu_op": 102257,
+          "dequeue": 16102,
+          "async_task_queue": 32204,
+          "enqueue": 16102,
+          "None": 122082,
+          "HostToDevice": 31658,
+          "async_npu": 31398
+        },
+        "steps": [],
+        "kernel_types": {
+          "RecurrentGatedDeltaRule": 48,
+          "FusedInferAttentionScore": 96,
+          "hcom_allReduce_": 516,
+          "ChunkGatedDeltaRuleFwdH": 192,
+          "chunk_scaled_dot_kkt_fwd_kernel": 96,
+          "ChunkFwdO": 96,
+          "ArgMaxV2": 2,
+          "IsFinite": 640,
+          "ReduceAll": 736
+        },
+        "timeline": {
+          "path": "/cache/cch/hypic-independent-20261013/profile-g3-r16-earlymixed-r1-analysis-r1/rank3_61_20261016150902036_ascend_pt/ASCEND_PROFILER_OUTPUT/kernel_details.csv",
+          "sha256": "e7c27343566260da83394bdc0dd02c595bd2f084a444d1502afc143465d3207d",
+          "kernel_rows": 13327,
+          "absolute_origin_us": "1792163342490935.880",
+          "kernel_envelope_us": 10335298.42,
+          "all_kernel_union_us": 5993050.619999973,
+          "uncovered_envelope_us": 4342247.800000027,
+          "uncovered_fraction": 0.4201376315943886,
+          "communication_exclusive_us": 1538624.2599999895,
+          "types": [
+            {
+              "type": "MatMulV3",
+              "communication_name_match": false,
+              "calls": 512,
+              "summed_us": 2182073.2999999896,
+              "union_us": 2182073.2999999896
+            },
+            {
+              "type": "hcom_allReduce_",
+              "communication_name_match": true,
+              "calls": 516,
+              "summed_us": 3063484.7999999854,
+              "union_us": 1531742.3999999927
+            },
+            {
+              "type": "FusedInferAttentionScore",
+              "communication_name_match": false,
+              "calls": 96,
+              "summed_us": 408162.0000000007,
+              "union_us": 408162.0000000007
+            },
+            {
+              "type": "AddRmsNormBias",
+              "communication_name_match": false,
+              "calls": 256,
+              "summed_us": 361566.70000000065,
+              "union_us": 361566.70000000065
+            }
+          ]
+        }
+      }
+    },
+    "logical_collectives_matched": 260,
+    "collective_start_spread": {
+      "count": 260,
+      "median_us": 261.0955,
+      "p95_us": 4632.314,
+      "max_us": 10851.565
+    },
+    "collective_end_spread": {
+      "count": 260,
+      "median_us": 93.0895,
+      "p95_us": 206.52,
+      "max_us": 220.266
+    },
+    "limits": [
+      "Cross-rank clock alignment assumed common raw host clock; arrival/end spread not causal attribution.",
+      "No baseline same-phase trace yet; no HYPIC-specific rootcause.",
+      "Profile64 token diagnostic not formal1024 performance."
+    ]
+  },
+  "operator_screen": {
+    "rank0_58_20261016150902037_ascend_pt": {
+      "top_self": [
+        {
+          "name": "aten::copy_",
+          "calls": 7766,
+          "self_us": 4293789.059999999,
+          "inclusive_us": 4353553.629999993
+        },
+        {
+          "name": "vllm::unified_attention_with_output",
+          "calls": 32,
+          "self_us": 2414598.7699999996,
+          "inclusive_us": 3395194.6100000003
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "calls": 96,
+          "self_us": 2312855.329999999,
+          "inclusive_us": 6217017.29
+        },
+        {
+          "name": "empty_tensor",
+          "calls": 15636,
+          "self_us": 125901.90000000031,
+          "inclusive_us": 125901.90000000031
+        },
+        {
+          "name": "aclnnInplaceCopy",
+          "calls": 5284,
+          "self_us": 58531.57999999994,
+          "inclusive_us": 58531.57999999994
+        },
+        {
+          "name": "aten::empty_strided",
+          "calls": 5374,
+          "self_us": 55436.69000000017,
+          "inclusive_us": 78575.39000000022
+        },
+        {
+          "name": "LayerNormFn",
+          "calls": 96,
+          "self_us": 41309.38,
+          "inclusive_us": 48937.40999999999
+        },
+        {
+          "name": "aten::as_strided",
+          "calls": 9124,
+          "self_us": 36654.60000000002,
+          "inclusive_us": 36654.60000000002
+        },
+        {
+          "name": "_C_ascend::chunk_gated_delta_rule_fwd_h",
+          "calls": 192,
+          "self_us": 24959.919999999995,
+          "inclusive_us": 44499.01999999999
+        },
+        {
+          "name": "vllm::all_reduce",
+          "calls": 258,
+          "self_us": 22045.89,
+          "inclusive_us": 56060.04000000002
+        },
+        {
+          "name": "c10d::allreduce_",
+          "calls": 258,
+          "self_us": 22018.91000000001,
+          "inclusive_us": 31944.140000000003
+        },
+        {
+          "name": "_C_ascend::npu_causal_conv1d_custom",
+          "calls": 144,
+          "self_us": 21153.31000000001,
+          "inclusive_us": 26197.58999999999
+        }
+      ],
+      "chunk": {
+        "calls": 0,
+        "median_us": null,
+        "max_us": null,
+        "above_1second": 0
+      }
+    },
+    "rank1_59_20261016150902037_ascend_pt": {
+      "top_self": [
+        {
+          "name": "aten::copy_",
+          "calls": 7766,
+          "self_us": 4273168.399999995,
+          "inclusive_us": 4329479.78
+        },
+        {
+          "name": "vllm::unified_attention_with_output",
+          "calls": 32,
+          "self_us": 2454804.12,
+          "inclusive_us": 3417980.41
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "calls": 96,
+          "self_us": 2326230.0500000007,
+          "inclusive_us": 6205937.540000001
+        },
+        {
+          "name": "empty_tensor",
+          "calls": 15636,
+          "self_us": 122819.22999999963,
+          "inclusive_us": 122819.22999999963
+        },
+        {
+          "name": "aclnnInplaceCopy",
+          "calls": 5284,
+          "self_us": 55144.14999999985,
+          "inclusive_us": 55144.14999999985
+        },
+        {
+          "name": "aten::empty_strided",
+          "calls": 5374,
+          "self_us": 53802.84999999993,
+          "inclusive_us": 76081.19000000013
+        },
+        {
+          "name": "LayerNormFn",
+          "calls": 96,
+          "self_us": 40875.660000000025,
+          "inclusive_us": 48452.09
+        },
+        {
+          "name": "aten::as_strided",
+          "calls": 9124,
+          "self_us": 36162.360000000044,
+          "inclusive_us": 36162.360000000044
+        },
+        {
+          "name": "_C_ascend::chunk_gated_delta_rule_fwd_h",
+          "calls": 192,
+          "self_us": 25854.260000000017,
+          "inclusive_us": 45103.49
+        },
+        {
+          "name": "vllm::all_reduce",
+          "calls": 258,
+          "self_us": 21780.529999999984,
+          "inclusive_us": 54411.51000000002
+        },
+        {
+          "name": "_C_ascend::npu_causal_conv1d_custom",
+          "calls": 144,
+          "self_us": 20613.070000000003,
+          "inclusive_us": 25372.929999999993
+        },
+        {
+          "name": "c10d::allreduce_",
+          "calls": 258,
+          "self_us": 20461.679999999993,
+          "inclusive_us": 30746.419999999984
+        }
+      ],
+      "chunk": {
+        "calls": 0,
+        "median_us": null,
+        "max_us": null,
+        "above_1second": 0
+      }
+    },
+    "rank2_60_20261016150902036_ascend_pt": {
+      "top_self": [
+        {
+          "name": "aten::copy_",
+          "calls": 7766,
+          "self_us": 4272646.050000015,
+          "inclusive_us": 4331295.390000013
+        },
+        {
+          "name": "vllm::unified_attention_with_output",
+          "calls": 32,
+          "self_us": 2405180.18,
+          "inclusive_us": 3332511.7399999993
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "calls": 96,
+          "self_us": 2333478.0500000003,
+          "inclusive_us": 6288173.35
+        },
+        {
+          "name": "empty_tensor",
+          "calls": 15636,
+          "self_us": 126576.62000000011,
+          "inclusive_us": 126576.62000000011
+        },
+        {
+          "name": "aten::empty_strided",
+          "calls": 5374,
+          "self_us": 80535.82999999991,
+          "inclusive_us": 103956.8299999998
+        },
+        {
+          "name": "aclnnInplaceCopy",
+          "calls": 5284,
+          "self_us": 57445.56999999998,
+          "inclusive_us": 57445.56999999998
+        },
+        {
+          "name": "LayerNormFn",
+          "calls": 96,
+          "self_us": 40563.34000000002,
+          "inclusive_us": 48334.84000000001
+        },
+        {
+          "name": "aten::as_strided",
+          "calls": 9124,
+          "self_us": 38183.609999999855,
+          "inclusive_us": 38183.609999999855
+        },
+        {
+          "name": "_C_ascend::chunk_gated_delta_rule_fwd_h",
+          "calls": 192,
+          "self_us": 25060.329999999994,
+          "inclusive_us": 44621.7
+        },
+        {
+          "name": "vllm::all_reduce",
+          "calls": 258,
+          "self_us": 21142.210000000003,
+          "inclusive_us": 53774.219999999965
+        },
+        {
+          "name": "aten::clone",
+          "calls": 4317,
+          "self_us": 20421.319999999927,
+          "inclusive_us": 649349.3399999986
+        },
+        {
+          "name": "c10d::allreduce_",
+          "calls": 258,
+          "self_us": 20279.67000000001,
+          "inclusive_us": 30723.11000000001
+        }
+      ],
+      "chunk": {
+        "calls": 0,
+        "median_us": null,
+        "max_us": null,
+        "above_1second": 0
+      }
+    },
+    "rank3_61_20261016150902036_ascend_pt": {
+      "top_self": [
+        {
+          "name": "aten::copy_",
+          "calls": 7766,
+          "self_us": 4294909.660000005,
+          "inclusive_us": 4353708.440000016
+        },
+        {
+          "name": "vllm::unified_attention_with_output",
+          "calls": 32,
+          "self_us": 2393598.3799999994,
+          "inclusive_us": 3341393.2600000002
+        },
+        {
+          "name": "vllm::qwen_gdn_attention_core",
+          "calls": 96,
+          "self_us": 2301023.62,
+          "inclusive_us": 6271176.180000001
+        },
+        {
+          "name": "empty_tensor",
+          "calls": 15636,
+          "self_us": 126922.68999999932,
+          "inclusive_us": 126922.68999999932
+        },
+        {
+          "name": "aten::empty_strided",
+          "calls": 5374,
+          "self_us": 60188.26000000003,
+          "inclusive_us": 83448.17000000013
+        },
+        {
+          "name": "aclnnInplaceCopy",
+          "calls": 5284,
+          "self_us": 57437.44999999974,
+          "inclusive_us": 57437.44999999974
+        },
+        {
+          "name": "LayerNormFn",
+          "calls": 96,
+          "self_us": 42163.50999999998,
+          "inclusive_us": 49935.31999999998
+        },
+        {
+          "name": "aten::empty",
+          "calls": 4368,
+          "self_us": 40961.32000000001,
+          "inclusive_us": 72661.4900000001
+        },
+        {
+          "name": "aten::as_strided",
+          "calls": 9124,
+          "self_us": 37733.469999999994,
+          "inclusive_us": 37733.469999999994
+        },
+        {
+          "name": "_C_ascend::chunk_gated_delta_rule_fwd_h",
+          "calls": 192,
+          "self_us": 24961.68,
+          "inclusive_us": 44838.50999999999
+        },
+        {
+          "name": "vllm::all_reduce",
+          "calls": 258,
+          "self_us": 22711.90999999999,
+          "inclusive_us": 56330.41
+        },
+        {
+          "name": "_C_ascend::npu_causal_conv1d_custom",
+          "calls": 144,
+          "self_us": 22215.939999999995,
+          "inclusive_us": 27205.510000000013
+        }
+      ],
+      "chunk": {
+        "calls": 0,
+        "median_us": null,
+        "max_us": null,
+        "above_1second": 0
+      }
+    }
+  },
+  "interpretation": "All4 rank tables/trace valid,2ArgMax/96chunk WY/48recurrent indicate actualprefill/mixed, not12-step decode. aten::copy_ hostself4.27-4.30s/rank in~10.335s envelopes; this may include device waiting. No rootcause from inclusive/summed durations alone; nativeearlymixed comparator currently live.",
+  "scope": "Diagnostic causal localization only, not formal1024 speed or quality acceptance"
+}

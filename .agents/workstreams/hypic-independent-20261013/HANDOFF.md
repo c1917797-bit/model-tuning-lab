@@ -1,5 +1,13 @@
 # CURRENT R16 NATIVE EARLYMIXED LIVE + G3 CPU PARSER
 
+G3CPUparser all4validated0cb4 (see PROFILE_G3_R16_EARLYMIXED_PARSED_AUDIT_20261016.json),
+13327kernels/rank,actual2step prefill/mixed. copy_ hostself4.27-4.30s mayinclude waits;
+native0cae stilllive. Candidate selection mustconsider copy/sync, not onlyevidenceIO.
+Unactivated independent_evidence_step_sink.py has19actualfile/negativecontrolsPASS0cbe,
+source149unchanged/29structurePASS. Explicitowned model-step fence,defaultper-event;
+no runtimewiring/NPUproof. R17_EVIDENCE_STEP_SINK_HOST_READINESS_20261016.json limitations.
+Do NOT edit current149 until0cae terminal/audit; newmodule is notcurrentmanifest.
+
 Exactma exec-0000000000000cae RUNNING;raw /cache/cch/hypic-independent-20261013/profile-g1-r16-earlymixed-r1.
 Checkpoint70a2bab published/liveverified;0cacfresh15:18:18UTC source149/image/model/input/
 physical0-3empty/8233+HCCLfree/newroot/cache10.69GiB PASS. Onlyone modeljob;noHYPICmount.

@@ -1,0 +1,37 @@
+{
+  "schema": "hypic-partial-component/v1",
+  "component": "independent_evidence_step_sink.py",
+  "validation_operation": "exec-0000000000000cbe",
+  "validation": {
+    "focused_tests": 19,
+    "source149_unchanged": true,
+    "structure": true,
+    "runtime_activated": false,
+    "source_hashes": {
+      "independent_evidence_step_sink.py": "d4449b98a0b17f87248a1b57f461cc6c94fcdf53eb2b9dd3fd2d288a8f70aa2e",
+      "test_independent_evidence_step_sink.py": "e975faf4705a4cc996ce4666d625be2020fbd97bf24d65b3144e1b0fa4d92548"
+    }
+  },
+  "status": "unactivated CPU-only component; not in current149 manifest and not imported by serving",
+  "primary_treatment": "Prospective replace per-event durability with explicit owned model-step fence, without dropping/reordering/changing event records",
+  "policy": {
+    "default": "per_event",
+    "candidate": "model_step only under explicit contextmanager; outside-step events immediately durable",
+    "failure": "Write/sync/serialization/bounds fail closed; exception step flushes prior records",
+    "ownership": "Reject nested/foreign-thread fences and close during active step; close idempotent"
+  },
+  "remaining": [
+    "Wait for current0cae terminal/source149 audit before modifying bound runtime files",
+    "Nativeearlymixed parsed comparison and opportunity decision",
+    "Connect explicit model-step context to verified runner execute boundary, not arbitrary64-event groups",
+    "Source-bound manifest/config/one treatment and uninstall/close/failclosed wiring tests",
+    "Full regression and bounded actual4worker numerical/mechanism/isolation/release NPU control",
+    "Matched formal performance then paired quality and lifecycle"
+  ],
+  "limitations": [
+    "Standalone sink receives a verified manifest digest from caller; it does not verify framework source itself",
+    "Actual NPU/runtime activation and production durability are unproven",
+    "19 CPU tests and29 structural checks are not29 functional Skill acceptances"
+  ],
+  "decision": "Keep unactivated; candidate selection remains evidence-driven, especially observed copy/synchronization cost in actualprefill."
+}
