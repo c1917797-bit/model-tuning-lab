@@ -1,3 +1,13 @@
+# CURRENT R19 LAZY OFF FULL40 LIVE
+
+ma exact exec-0000000000000eb1 launched21:24UTC from f4a566e9.
+Admission0eb0:194sources/181runtime/image/model/input/physical0-3empty/8233+HCCLfree/newroot.
+Raw /cache/cch/hypic-independent-20261013/formal-r19-lazy-off-r1.
+Only lazyflagfalse vs ON; partitiontrue, timedshadow/probeoff. Poll samepeer/handle/raw;
+no restart live/unclear or194bound edits. Terminal audit_r19_lazy_performance.py
+--contract FORMAL_R19_LAZY_OFF_R1_CONTRACT.json --live-release. Onlyvalid thenfreshNATIVE.
+ON independentlyvalid0eab; no pairedgainclaim. Cutoff2026-10-17T06:48:09Z.
+
 # CURRENT R19 LAZY ON FULL40 TERMINAL VALID; OFF NEXT
 
 0e89exit0;independent0eab PASS40/40/allfour48C1+16C2/7104partitiongroups/

@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R19-lazy-on-valid-OFF-next",
+  "execution_state": "R19-lazy-OFF-running",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "No ownedmodeljob; ON exactrelease independently0eabvalid."
+    "state": "Owned R19OFF exactcontroller0eb1 running; no duplicate launch."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "R19ONfull40 independently0eab valid; freshadmission OFF thenNATIVE. No pairedgainclaim. No194boundchanges/rootreuse. Plan R19_LAZY_PERFORMANCE_PLAN_20261016.json; audit_r19_lazy_performance.py --live-release.",
+  "next_action": "Poll exact ma0eb1/raw OFF; no restart or194bound changes. Terminal audit_r19_lazy_performance.py --contract FORMAL_R19_LAZY_OFF_R1_CONTRACT.json --live-release; onlyvalid thenfresh NATIVE admission.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,15 +215,14 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL_VALID",
-    "operation": "exec-0000000000000e89",
+    "state": "RUNNING",
+    "operation": "exec-0000000000000eb1",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "contract": "FORMAL_R19_LAZY_ON_R1_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/formal-r19-lazy-on-r1",
-    "checkpoint": "2efe4db5ca004607c05ddd3f57d87612678347eb",
-    "admission_operation": "exec-0000000000000e88",
-    "independent_audit": "exec-0000000000000eab"
+    "contract": "FORMAL_R19_LAZY_OFF_R1_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/formal-r19-lazy-off-r1",
+    "checkpoint": "f4a566e9c3f8ba1ffd539c66c887f16d7f946444",
+    "admission_operation": "exec-0000000000000eb0"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -395,7 +394,7 @@
     "valid": [
       "on/R1"
     ],
-    "running": null,
+    "running": "off/R1",
     "remaining": [
       "off/R1",
       "native/R1"
