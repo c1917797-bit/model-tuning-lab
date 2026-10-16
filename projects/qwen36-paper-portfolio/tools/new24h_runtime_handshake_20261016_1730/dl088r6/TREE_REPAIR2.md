@@ -1,0 +1,11 @@
+# Same-original-top retired ancestry anchors
+
+035R1 failed in compilation before producer RESULT existed: a strictly confirmed departed parent was omitted from ancestry anchors, then its independently departed child was rejected. The R1 init terminal-fence was not involved. Original R1 failure/cleanup stay unchanged.
+
+Only patch_scope AFTER changes: compute a validated bounded unique original Docker-top tree rooted at the original exact inspected init, process parents before children, and keep a per-call parent_anchors set. classify returning None already means its original three independent absent proc observations plus fresh top exclusion have passed; that PID is added ONLY to this snapshot's ancestry anchor set. It is never appended to live owned proofs, never granted FD/resource/signal/release credit, and never retained into the next observation. The original same-parent strict child absence checks run for every child separately. Original init/NPU/protected forbidden retirement, unknown/cycle/reuse/live-unreadable/foreign-live failures remain hard.
+
+top_guard.py only adds tree_order; existing snapshot/confirm/classify/_confirm_lane bytes unchanged. host.py, terminal_fence.py, entry.py, all producer/fixture/math/domain/oracle/reference/threshold/seed bytes are exact R1. New source/root/template isolate identity; host registered OWNER string remains original R1 but source-sha label and actual manifest distinguish experiments exactly. No new controller/resource policy.
+
+Existing same-image CPU entry invokes revised real_process_controls: eight real short-child lifetimes plus four actual parent/grandchild families. Each parent waits/reaps its child naturally, original /proc parent/start lineage is saved, both actual absences are verified, and the actual source confirm function checks each departed PID independently. These CPU /proc trees are explicitly not Docker-top/NPU proof. Policy suites include duplicate/cycle/unknown/forbidden/live-foreign/unreadable/reuse negatives; authored or local software PASS does not replace actual same-image CPU or new16 integration.
+
+No 038 recovery-to16 admission is added. MAIN must actual same-source CPU, new16 owner+consumer, then160; all prior failed owners retained, model/perf/task remain unqualified. Fixed cutoff and original budgets unchanged.

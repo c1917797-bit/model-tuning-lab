@@ -1,0 +1,171 @@
+{
+  "authority_ref": {
+    "bytes": 3481,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "cann_helper_ref": {
+    "bytes": 4503,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-d8-fp32-model-boundary-r87-v1-011/cann_python.py",
+    "sha256": "cee927f1107fe6714e86ab1dceecafeff800980a00b8df9fcc47ff6831ba5104"
+  },
+  "cleanup_seconds": 90,
+  "default_enabled": false,
+  "dependencies": {
+    "cpu": {
+      "bytes": 5043,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/deltalog-v7-20261014-001/cpu_capacity.py",
+      "sha256": "992cfcb419eabbf69902f9358c703815c268d3f99b00ae9e410a291d374d456d"
+    },
+    "host": {
+      "bytes": 33743,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+      "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86"
+    },
+    "old": {
+      "bytes": 16517,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py",
+      "sha256": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc"
+    },
+    "pipeline": {
+      "bytes": 40280,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/deltalog-v7-20261014-001/pipeline.py",
+      "sha256": "1df9ce6cac75b68e0f8781c40a2445887a00494941c9cde9488abafe735ab07c"
+    }
+  },
+  "donor": {
+    "bytes": 14382,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/owned_cpu.py",
+    "sha256": "b137dd6c69b20bd0a79d8f87cd2edb36d09951c7a64bc0a821919d28671b9e75"
+  },
+  "donor_host": {
+    "bytes": 24497,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/host.py",
+    "sha256": "16146338e86c893925469b5207db8a172805dc9d897a71c812ca1d445ddad13f"
+  },
+  "donor_source": {
+    "bytes": 52969,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json",
+    "sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21"
+  },
+  "empirical_FP32_gates": {
+    "peak_abs": 2e-05,
+    "peak_relative": 0.0002,
+    "state_output_relative_l2": 0.0002
+  },
+  "files": {
+    "bind112.py": {
+      "bytes": 2587,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/bind112.py",
+      "sha256": "224b08afde0e59870f67db155ab07a96ba5cd64d8ff44942faa78531dd47510f"
+    },
+    "common112.py": {
+      "bytes": 1499,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/common112.py",
+      "sha256": "6158e629147ccad65a6d785d84fd6dc7b00c55e91808eb808b296123c1a1865d"
+    },
+    "consume112.py": {
+      "bytes": 5655,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/consume112.py",
+      "sha256": "c86d511478fdd0c40d807f8b4a28f9847103c4a188304d9f6370871c15dac131"
+    },
+    "core112.py": {
+      "bytes": 1443,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/core112.py",
+      "sha256": "b7e3f3a91889e98c54195a0c5f5eb2a4c6cdf8fc9c667ece26d7250b3e6eebe7"
+    },
+    "cpu112.py": {
+      "bytes": 3061,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/cpu112.py",
+      "sha256": "f961937ecab316703e194efc6d0eb9c6a39c21e9ace08798beab5223cbc71c58"
+    },
+    "guest112.py": {
+      "bytes": 6045,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/guest112.py",
+      "sha256": "2be3b2062df7227034eb36fb46a4e990f8f6ebc51192964d8e02f148c90e2a3d"
+    },
+    "independent110.py": {
+      "bytes": 4180,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/independent110.py",
+      "sha256": "e1e41204b8aec2dcdeb1c08d7802c15d73ea272a6586af08cc67e591c5f20153"
+    },
+    "oracle112.py": {
+      "bytes": 774,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/oracle112.py",
+      "sha256": "6ba6709289ee37cf54c13faf0bff43f361f06276049774bc3b1cd58456aa3a70"
+    },
+    "owned_cpu112.py": {
+      "bytes": 16185,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/owned_cpu112.py",
+      "sha256": "1ffabe6f63ce727ce4df95994c086139432706c77c896051a0aa2f9501599f74"
+    },
+    "owner112.py": {
+      "bytes": 16269,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/owner112.py",
+      "sha256": "c70e66f7cc51c7b3fe065fd8c62d52fb2d5215eb1109b319d80006e2b8e4cd93"
+    },
+    "patch_scope112.py": {
+      "bytes": 1945,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/patch_scope112.py",
+      "sha256": "a666bf5c001698f20f5f72368cc64834ef1b67b261dc495312bd0842347c3b34"
+    },
+    "recipe112.py": {
+      "bytes": 1962,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/recipe112.py",
+      "sha256": "d093c7a18776d63a97ce97fcb6c00efbc82fce11c96aaeab27c564e99b5a777a"
+    },
+    "regression/old_owner112.py": {
+      "bytes": 16179,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/regression/old_owner112.py",
+      "sha256": "41162a4bcc70d2075f0ceb79b33d3962096933ab62380f29f0c7b1196df25379"
+    },
+    "run112.py": {
+      "bytes": 2768,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/run112.py",
+      "sha256": "217588f6ba055cf000c991f9f9a909fc887502257c03efbd417a0e908f7139f4"
+    },
+    "scope_adapter112.py": {
+      "bytes": 11522,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/scope_adapter112.py",
+      "sha256": "a9f510a683a3cad1b22161107c2d5e6beaeab6f6df50612fbc92b939e5a64cc2"
+    },
+    "test112.py": {
+      "bytes": 9817,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/test112.py",
+      "sha256": "bc1d61152c4b8a8691c3c68e0035bebe90e83d2cd688dfa46b9fcc980d3c7e7a"
+    },
+    "test_controller112r4.py": {
+      "bytes": 3097,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/test_controller112r4.py",
+      "sha256": "1f7fb5252803ff258f3d453a9676abc6546ff0e3a80e0d9a11ebb84a6d3c91a7"
+    },
+    "test_mapping112r2.py": {
+      "bytes": 3467,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/test_mapping112r2.py",
+      "sha256": "fdadc056666f6dce452595dee7feea126b3fef371fc5ae48b2aab54595294b57"
+    },
+    "top_guard112.py": {
+      "bytes": 7775,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4/top_guard112.py",
+      "sha256": "04ef8acc591f52363947c605f6faa2a0bce4d16492a0e907db8719fc322764dd"
+    }
+  },
+  "guest_ram_bytes": 8589934592,
+  "guest_seconds": 600,
+  "logical": 0,
+  "model_ready": false,
+  "official_author_code": false,
+  "ordinary_ram_floor": 17716740096,
+  "output_root": "/opt/host/vnf/austinov/run-bole-tree112repair4-MAIN-20261016-001",
+  "performance_ready": false,
+  "physical": 4,
+  "prepared_only": true,
+  "profile": null,
+  "raw_cap": 805306368,
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-tree-gdn-new24h-v1-112-repair4",
+  "schema": "bole.tree-gdn-source/v112",
+  "task_ready": false,
+  "whole_CPU_seconds": 1000,
+  "whole_NPU_seconds": 900,
+  "whole_output_cap": 1073741824
+}

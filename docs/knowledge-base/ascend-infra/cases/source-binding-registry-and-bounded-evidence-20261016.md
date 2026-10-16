@@ -473,3 +473,50 @@ CPU/16/160 gates. Pre-admission command and metadata export also checks all
 cross-platform Ref paths explicitly as POSIX; never serialize host Path objects
 as target-host paths. Neither storage release nor transport recovery lends
 numerical, performance or task qualification.
+
+## 2026-10-16 17:45 UTC: first-fault timing, actual registration, reference interventions
+
+Actual DeltaLog088R5 N16 stopped before numerical capture. The retained child
+failed its original ARM30 wait; the next host observation was blocked by the
+unchanged full storage.check, measured39.261s (install53.524s). A later terminal
+success fence hid this earlier exit in the parent message. Keep both first
+child error and parent failure. R6 moves the same readonly predicate off the
+ARM critical path, locks failures sticky, and retains final full verification;
+it does not relax physical PID/namespace/SMI ownership or any numerical gate.
+R6's actual Linux40 aggregate then failed four historical fixture-path reads,
+not mathematics. R6repair1 declares the exact actual R2/R5 Ref dependencies,
+retains original R1 content fingerprints as explicitly historical/nondeployed,
+and passed all42 actual Linux controls. Operation0d81 captured the real R5
+closed-phase overlay and bound a new source; no new CPU/NPU gate is implied.
+A subsequent source audit found cleanup could permit a fresh39s background
+scan after cleanup began. A minimal successor must request stop before cleanup
+and join the current scan within the same original90s deadline; never extend
+the clock, discard sticky failures or mutate the already bound source.
+
+BOLE118 initially failed because normal GDN import did not register the custom
+C extension. Actual installed utils.enable_custom_op performs the required
+bootstrap and native/meta imports.118R1 reused that exact function after MAIN
+ARM, recorded actual mapped extension/opapi bytes, captured the full dispatcher
+overload family and passed its independent released consumer (0d65). This is
+ABI/registration evidence only: no conv call or model qualification occurred.
+The separate12-call SD chronology experiment0d85 was dispatched at this
+checkpoint; its actual terminal and independent numerical outcome are pending.
+Its prefault evidence does not prove complete kwargs or pointer-alias behavior.
+
+MXR120A3's actual Devices[] report0d5e makes controlled actualA/G interventions
+on three saved cases without changing the NPU candidate or old gate. ActualA
+removes a common reconstruction discrepancy for layer4, while layer0 candidate
+and native still fail the frozen state criteria. This neither repairs the
+candidate nor proves an invalid reference in general. Positive-g/safe-exp clamp
+differences are absent on these cases. Next localize first B/WU/H divergence
+and separate common-reference and candidate error vectors under one denominator;
+do not use sums of norms or repeated inverse corrections as causal proof.
+
+Reusable rule: module import, dispatcher registration, actual kernel execution,
+component correctness and whole-model acceptance are separate gates. A source
+manifest or CPU test count never substitutes for the next gate. Preserve exact
+frozen-source bytes in the recovery archive, including mixed vendor line endings.
+Current DeltaLog production remains2048/C1; variable-length task prompts and
+high-concurrency gains require real supported adapters and independent gates.
+No new valid model pair or final task result exists at this checkpoint. Exact
+Refs and CURRENT/NEXT are in RUNTIME_HANDSHAKE_20261016_1745UTC.json.

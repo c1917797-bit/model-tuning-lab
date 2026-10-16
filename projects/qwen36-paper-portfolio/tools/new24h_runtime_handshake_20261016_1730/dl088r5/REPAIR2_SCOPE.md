@@ -1,0 +1,7 @@
+Repair2 adds only strict transitive022 source.files to host.target_closure before existing complete Ref3 checks and original minimal parent RO mount construction. No broad /cache, /cache/cch or lowbit mount is added. Repair1 handshake, numerical gates, raw budget, cleanup and deadline stay unchanged.
+
+Actual022 BOUND files snapshot is MAIN's real a_fs_read projection: source162171B/b5f4c0798f2fab7fb3c706666c38b6eab7318fa6a55e40191dd419bb6aaacb6c. Test executes actual target_closure and actual GE.create parent/minimization/RO dictionary AST with these ten real fileRefs, including external019 scope_adapter.py. Counterexample omitting thoseRefs fails coverage; new readset covers every path RO without broad mounts. Local snapshot is source inventory evidence, not independent verification of remote file bytes or actual container mounts. MAIN sourceaudit reopens exact full source and files; actual inspect still verifies RO destinations.
+
+MAIN reports actual022 CPU composed gate succeeded with owner1372B/9d6740da1d95f281aab6da1f459e1540a798652af695ee5ec6922e35d4be6c61. This new024 template still requires explicit actual022 binding and its own sameimage CPU/native16/full160/independent passes. Historical019 strictFalse remains unchanged. Do not interpret old HANDOFF current020-failed sentence as latest state; it described original024 preparation before022 existed.
+
+15 software tests pass; no NPU or containers executed by this agent. Original024 and024repair1 remain immutable and unrun.

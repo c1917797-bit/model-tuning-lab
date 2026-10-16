@@ -1,0 +1,185 @@
+{
+  "base": "C:\\Users\\Huawei\\AppData\\Local\\Temp\\deltalog-diagnostic-bridge-owned-new48h-20261015-035-repair4",
+  "old_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-diagnostic-bridge-owned-new48h-v1-035-repair4",
+  "new_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-mixed-precast-new48h-v1-043-repair3",
+  "edits": {
+    "producer.py": [
+      [
+        "admission=V.configure(sr,lr,explicit=True);h=",
+        "admission=V.configure(sr,lr,explicit=True);import sidecar_capture;sidecar=sidecar_capture.install(torch,V,m,C.checked);h="
+      ],
+      [
+        "def save(name,value):\n  nonlocal used",
+        "import raw_codec\n store=raw_codec.Store(torch,out,m['resources']['raw_cap_bytes'])\n def save(name,value):\n  nonlocal used\n  rr=store.write(out/name,value);used=store.used;return rr\n def legacy_save_unused(name,value):\n  nonlocal used"
+      ],
+      [
+        "def emit(name,**fields):",
+        "sidecar.sink=save\n def emit(name,**fields):"
+      ],
+      [
+        "steps=a.steps,records=records,events=events",
+        "steps=a.steps,records=records,actual_sidecar_records=sidecar.records,actual_mixed_sidecar_records=sidecar.mixed_records,boundary_controls=boundary_controls,events=events"
+      ],
+      [
+        "try:\n  with F.native_pcp_context(torch):",
+        "boundary_controls=[]\n try:\n  import npu_controls\n  boundary_controls=npu_controls.run(torch,h,sidecar)\n  with F.native_pcp_context(torch):"
+      ],
+      [
+        "value030=snapshot030();value030['initial_anchor_ref']=self.initial_anchor_ref;return value030",
+        "value030=snapshot030();value030['initial_anchor_ref']=self.initial_anchor_ref;return value030"
+      ]
+    ],
+    "qwen36_deltalog_fresh/native_fixture.py": [
+      [
+        "260815535",
+        "2610154301"
+      ],
+      [
+        "value=_route(torch,legacy,*args,**kwargs)",
+        "value=_route(torch,legacy,*args,**kwargs)"
+      ],
+      [
+        "if captures is not None:captures.setdefault(\"decode\",[]).append(dict(before=before,inputs=args_cpu,output=value.cpu()))",
+        "if captures is not None:\n            from . import provider as _provider043\n            actual_sidecar043=_provider043._OP.take(\"mixed\")\n            captures.setdefault(\"decode\",[]).append(dict(before=before,inputs=args_cpu,output=value.cpu(),actual_sidecar043=actual_sidecar043))"
+      ]
+    ],
+    "qwen36_deltalog_fresh/capture_evidence.py": [
+      [
+        "260815535",
+        "2610154301"
+      ]
+    ],
+    "domain_consumer.py": [
+      [
+        "260815535",
+        "2610154301"
+      ],
+      [
+        "def per_request_metrics(torch,R,raw,D):",
+        "def original_per_request_metrics(torch,R,raw,D):"
+      ],
+      [
+        "row['request_pass']=bounded(row,R);rows.append(row)",
+        "row['request_pass']=bounded(row,R);row['_independent_truth043']=o;rows.append(row)"
+      ],
+      [
+        "need(bounded(metrics,R), 'original whole-core native peer gates; uncast decode metrics retained diagnostic')",
+        "need(math.isfinite(metrics['state_error']) and metrics['state_error']<=R.STATE_LIMIT, 'unchanged native peer state gate; old output point gate diagnostic')"
+      ],
+      [
+        "'per-request direct-RNE decode/state and original native-peer gates'",
+        "'new preregistered actual precast and original state/byte gates'"
+      ],
+      [
+        "records=producer['records']; seen=set()",
+        "records=producer['records']; seen=set()\n import sidecar_audit,precast\n controls=producer['boundary_controls'];need([x['case']for x in controls]==['normal','tiny','subnormal','positive-zero','negative-zero','cancellation','overflow'],'all real NPU numeric boundary controls')\n overflow={x['raw']['path']for x in controls if x['case']=='overflow'}\n mixed043={x['path']for x in producer['actual_mixed_sidecar_records']};need(len(mixed043)==2*producer['steps'],'one actual sidecar per mixed call')\n all043=producer['actual_sidecar_records'];need(len(all043)==2*producer['steps']+25 and len({x['path']for x in all043})==len(all043),'all unique actual calls: mixed + 2 partial flush + 16 copy warmups + 7 controls')\n need(mixed043|{x['raw']['path']for x in controls} <= {x['path']for x in all043},'actual mixed/boundary raw membership')\n sidecar_rows=[]\n for rr043 in all043:\n  av043=torch.load(checked(rr043),map_location='cpu',weights_only=False)\n  audit043=sidecar_audit.audit(torch,R,precast,av043,overflow=rr043['path']in overflow,numeric=rr043['path']not in mixed043)\n  sidecar_rows.append(dict(raw=rr043,**audit043))\n need(sidecar_rows and all(x['passed']for x in sidecar_rows),'all actual production/debug/precast call predicates')"
+      ],
+      [
+        "static_source=proof,rows=rows,failures=errors",
+        "static_source=proof,rows=rows,actual_sidecar_rows=sidecar_rows,boundary_controls=controls,failures=errors"
+      ],
+      [
+        "row['per_request']=per_request_metrics(torch,R,raw,D)",
+        "need(raw['captures']['decode'][0]['actual_sidecar043']in producer['actual_mixed_sidecar_records'],'exact mixed capture membership in actual paired call ledger')\n    row['per_request']=per_request_metrics(torch,R,raw,D)"
+      ],
+      [
+        "schema='deltalog.independent-CPU64-operational-recurrence-direct-integer-BF16-RNE/v035'",
+        "schema='deltalog.actual-FP32-precast-per-request-empirical/v043',precast_peak=.00303,precast_relative_L2=2**-13"
+      ]
+    ],
+    "consume_pair.py": [
+      [
+        "argv=[sys.executable,'-I','-B',str(P/script)",
+        "argv=[sys.executable,'-I','-B',str(P/'raw_reader_entry.py'),'--script',script"
+      ],
+      [
+        "DOMAIN035.json",
+        "DOMAIN043.json"
+      ],
+      [
+        "deltalog.diagnostic-consumption/v035",
+        "deltalog.diagnostic-consumption/v043"
+      ]
+    ],
+    "host.py": [
+      [
+        "deltalog.diagnostic-consumption/v035",
+        "deltalog.diagnostic-consumption/v043"
+      ],
+      [
+        "OWNER='deltalog-diagnostic-bridge-new48h-MAIN-035-repair1'",
+        "OWNER='deltalog-mixed-precast-new48h-MAIN-043-repair3'"
+      ],
+      [
+        "refs.extend([m['composite_api_ref']",
+        "refs.extend([m['debug_library'],m['debug_build_ref'],m['debug_kernel_source_ref']])\n refs.extend([m['composite_api_ref']"
+      ],
+      [
+        "a.output.resolve().is_relative_to(Path('/cache/cch'))",
+        "a.output.resolve().parent==Path('/opt/host/vnf/austinov/deltalog-mixed-precast-new48h-043-repair3').resolve()"
+      ]
+    ],
+    "preregister.py": [
+      [
+        "deltalog.diagnostic-consumption/v035",
+        "deltalog.diagnostic-consumption/v043"
+      ],
+      [
+        "deltalog.independent-CPU64-operational-recurrence-direct-integer-BF16-RNE/v035",
+        "deltalog.actual-FP32-precast-per-request-empirical/v043"
+      ]
+    ],
+    "entry.py": [
+      [
+        "R=C.load(m['files']['oracle.py']",
+        "import meta043\n  actual_meta043=meta043.run(torch,m,C)\n  R=C.load(m['files']['oracle.py']"
+      ],
+      [
+        "boundary=boundary,actual_copy_import=",
+        "boundary=boundary,actual_precast_meta=actual_meta043,actual_copy_import="
+      ],
+      [
+        "C.need(C.obj(cpu['actual_terminal_process_controls'])",
+        "C.need(cpu['actual_precast_meta']['pass_gate']is True and cpu['actual_precast_meta']['debug_library']==m['debug_library'],'same-source debug actual Meta prior to NPU')\n C.need(C.obj(cpu['actual_terminal_process_controls'])"
+      ]
+    ],
+    "test_031.py": [
+      [
+        "deltalog.diagnostic-consumption/v035",
+        "deltalog.diagnostic-consumption/v043"
+      ],
+      [
+        "deltalog.independent-CPU64-operational-recurrence-direct-integer-BF16-RNE/v035",
+        "deltalog.actual-FP32-precast-per-request-empirical/v043"
+      ]
+    ],
+    "test_producer_frontdoor.py": [
+      [
+        "deltalog.diagnostic-consumption/v035",
+        "deltalog.diagnostic-consumption/v043"
+      ],
+      [
+        "deltalog.independent-CPU64-operational-recurrence-direct-integer-BF16-RNE/v035",
+        "deltalog.actual-FP32-precast-per-request-empirical/v043"
+      ]
+    ],
+    "test_035.py": [
+      [
+        "C.per_request_metrics(",
+        "C.original_per_request_metrics("
+      ],
+      [
+        "260815535",
+        "2610154301"
+      ],
+      [
+        "deltalog.diagnostic-consumption/v035",
+        "deltalog.diagnostic-consumption/v043"
+      ],
+      [
+        "direct-integer-BF16-RNE/v035",
+        "actual-FP32-precast-per-request-empirical/v043"
+      ]
+    ]
+  }
+}

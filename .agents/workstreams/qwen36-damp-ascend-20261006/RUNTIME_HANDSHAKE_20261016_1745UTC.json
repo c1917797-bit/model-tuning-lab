@@ -1,0 +1,118 @@
+{
+  "schema": "ascend.runtime-handshake-and-numerical-attribution-checkpoint/v1",
+  "timestamp_utc": "2026-10-16T17:45:00Z",
+  "branch": "work/qwen36-damp-ascend-20261006",
+  "accepted_new_technique": false,
+  "model": "/cache/efim/Qwen3.6-27B",
+  "authority": "NEW24H_AUTHORITY_20261016.json",
+  "cutoff_utc": "2026-10-17T07:02:13Z",
+  "source_archive": "projects/qwen36-paper-portfolio/tools/new24h_runtime_handshake_20261016_1730",
+  "source_archive_operation": {
+    "id": "exec-0000000000000d72",
+    "exit_code": 0
+  },
+  "deltalog": {
+    "r5_operation": "exec-0000000000000d38",
+    "r5_numeric16_failed_before_math": true,
+    "first_child_error": "ValueError: owned ARM30",
+    "actual_cause": "serial full storage check about39.261s delayed fresh physical ownership sampling beyond ARM30; later natural-success fence masked earlier child exit",
+    "storage_install_seconds": 53.524,
+    "storage_check_seconds": 39.261342,
+    "r6_original_linux_controls": {
+      "operation": "exec-0000000000000d6b",
+      "tests": 40,
+      "errors": 4,
+      "capture_started": false,
+      "cause": "three historical tests guessed Windows neighbor paths rather than declared canonical Linux Refs"
+    },
+    "r6repair1": {
+      "operation": "exec-0000000000000d81",
+      "exit_code": 0,
+      "linux_tests": 42,
+      "linux_pass": 42,
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair1/SOURCE_MANIFEST.json",
+        "bytes": 67138,
+        "sha256": "2a622c556463e3a4cf6353ba5f3004f7337d53b9cf0461e121308217eae933c1"
+      },
+      "actual_overlay": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence088R6-MAIN-001/OVERLAY088R6.json",
+        "bytes": 5218,
+        "sha256": "3385bf76d5b44ade8f4d305d0ea7ca85c2d9fefd8edbe9695a1ab4fedf8250d7"
+      },
+      "CPU_NPU16_NPU160_pass": false,
+      "known_pending_repair": "request background storage stop before original cleanup, then join within same90-second deadline; no algorithm or threshold change"
+    },
+    "next": "freeze minimal cleanup-order successor, actual same-imageCPU then16 and conditional160; independently prepare actual model/production/pair consumers",
+    "current_production_domain": "2048 input andC1 only; no high-concurrency or variable-length task qualification"
+  },
+  "bole": {
+    "tree_gdn_passed_rows": 72,
+    "tree_fia_passed_rows": 6,
+    "abi118r1": {
+      "operation": "exec-0000000000000d65",
+      "exit_code": 0,
+      "operator_executed": false,
+      "calibration_pending": true,
+      "actual_device_abi": {
+        "path": "/opt/host/vnf/austinov/run-bole-native-conv-abi118repair1-MAIN-20261016-001/mask/numeric/numeric/result/ACTUAL_DEVICE_CONV_ABI.json",
+        "bytes": 4219,
+        "sha256": "c68ec52dff3bda1162c891b26ac9d6fd8673aacff5c74c72f575ffcd3805dbf6"
+      }
+    },
+    "registration_cause": "normal GDN import did not register actual vllm_ascend_C; reused original enable_custom_op and recorded actual extension/opapi maps",
+    "conv12": {
+      "operation": "exec-0000000000000d85",
+      "status": "dispatched_pending_actual_terminal",
+      "scope": "B1/B16 two activations three SD/no-spec steps, full cache bitwise and independentCPUdouble",
+      "not_model_qualification": true
+    },
+    "next": "actual paged prefix and branch scratch TND ancestor-mask integration, then joint accepted-path commit; BNSD gate does not qualify this path"
+  },
+  "mxr": {
+    "full_model098r5_state_failures": 25,
+    "total_prefill_states": 192,
+    "analysis3": {
+      "operation": "exec-0000000000000d5e",
+      "exit_code": 0,
+      "NPU": false,
+      "report": {
+        "path": "/opt/host/vnf/austinov/run-mxr-prefill120analysis3repair2-CPU-MAIN-NEW24H_001/COUNTERFACTUAL120A3.json",
+        "bytes": 1194040,
+        "sha256": "c4295712575774f430df82435405b7965b3dc617b5db532a5aa5e0a9f7e41cea"
+      },
+      "conclusions": [
+        "actualA intervention removes common reference discrepancy on saved layer4, not a candidate repair PASS",
+        "saved layer0 candidate/native still fail unchanged state gate under actualA/G; cause not yet isolated",
+        "positive-g/safe-exp clamp distinction absent in these three actual cases"
+      ]
+    },
+    "next": "source-reviewed saved-raw directRNE and first B/WU/H propagation diagnostic; no extra inverse iteration without evidence"
+  },
+  "performance": {
+    "new_valid_model_pairs": 0,
+    "formal_three_pairs": false,
+    "task_accuracy": false
+  },
+  "utilization": {
+    "continuous_window_measured": false,
+    "four_card_gapless_proven": false,
+    "controllers": "all qwen36.owner tasks serialized until compatible joint budget/controller exists"
+  },
+  "boundary": {
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "hugepage_release_32GiB": "SPENT",
+    "old_failures_preserved": true
+  }
+}

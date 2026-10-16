@@ -1,0 +1,90 @@
+{
+  "assemble.py": [
+    [
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new48h-v1-052",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-056"
+    ],
+    [
+      "deltalog-split-scale-numeric-new48h-052",
+      "deltalog-split-scale-numeric-new24h-056"
+    ]
+  ],
+  "bind052.py": [
+    [
+      "receipt=api.admit_receipt(old['composite_source_ref'],old['composite_cpu_owner_ref'])",
+      "receipt=__import__('historical022056').admit(m['composite_api_ref'],old['composite_source_ref'],old['composite_cpu_owner_ref'])"
+    ],
+    [
+      "tr=json.loads(a.template_ref);C.need(",
+      "C.window(__import__('window056').AUTH)\n tr=json.loads(a.template_ref);C.need("
+    ]
+  ],
+  "bridge_io.py": [
+    [
+      " a=obj(r);need(r['sha256']=='71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99'and a['cutoff_epoch']==1792135097 and 1791962297<=time.time()<1792135097-2880,'fixed authority/whole owner2880 budget')",
+      " from window056 import require_current\n require_current(r,obj)"
+    ]
+  ],
+  "host.py": [
+    [
+      "deltalog-split-scale-numeric-new48h-052",
+      "deltalog-split-scale-numeric-new24h-056"
+    ],
+    [
+      "deltalog-split-scale-numeric-new48h-MAIN-052",
+      "deltalog-split-scale-numeric-new24h-MAIN-056"
+    ],
+    [
+      "START,CUT=1791962297,1792135097",
+      "START,CUT=1792134133,1792220533"
+    ],
+    [
+      "AUTH_SHA='71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99'",
+      "AUTH_SHA='e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28'"
+    ]
+  ],
+  "inverse_repair3.py": [
+    [
+      " from inverse052 import undo as undo052",
+      " from inverse056 import undo as undo056\n text=undo056(name,text)\n from inverse052 import undo as undo052"
+    ]
+  ],
+  "qwen36_deltalog_fresh/provider.py": [
+    [
+      "{'start':1791962297,'cutoff':1792135097}or not 1791962297<=time.time()<1792135097",
+      "{'start':1792134133,'cutoff':1792220533}or not 1792134133<=time.time()<1792220533"
+    ],
+    [
+      " life=v.admit_receipt(m['composite_source_ref'],lifecycle_ref)",
+      " from historical022056 import admit as historical_admit\n life=historical_admit(api,m['composite_source_ref'],lifecycle_ref)"
+    ]
+  ],
+  "run031.py": [
+    [
+      "AUTH=dict(path='/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW48H_AUTHORITY_20261014.json',bytes=3591,sha256='71211e77fc870a8c94a7f80424925e38e1e092b9374d3a6a1066960ea74fbf99')",
+      "from window056 import AUTH"
+    ]
+  ],
+  "run043.py": [
+    [
+      "deltalog-split-scale-numeric-new48h-052",
+      "deltalog-split-scale-numeric-new24h-056"
+    ]
+  ],
+  "run052.py": [
+    [
+      "deltalog-split-scale-numeric-new48h-052",
+      "deltalog-split-scale-numeric-new24h-056"
+    ],
+    [
+      "run-'+a.phase+'-MAIN-20261016-001",
+      "run-'+a.phase+'-MAIN-20261016-NEW24H-001"
+    ]
+  ],
+  "test_031.py": [
+    [
+      "from inverse052 import undo",
+      "from inverse056 import through052 as undo"
+    ]
+  ]
+}

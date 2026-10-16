@@ -1,0 +1,13 @@
+# 035-repair1: bound-init terminal fence only
+
+Original035 NPU16 produced40raw but its owner remains FAILED.038 independent savedraw recovery passed the new035 domain without rewriting original strict FAIL or owner. This successor does not reuse038 as16 admission: new same-sourceCPU, new16 integration and new160 remain mandatory.
+
+Maintainer reference read completely: ascend-inference-tuning-loop/references/controller-observation-and-quiescent-results.md. Process disappearance is not RSS zero; unknown/live/permission/reuse remain failures. Only natural stopped writers permit stable result references.
+
+Original wait_ge inspected Running then called observe before handling Stopped; protected observer separately inspected Running and encountered its bound init during exit. top_guard correctly refuses retiring init. No top_guard/scope/observer policy is changed here. host mechanical delta is isolated in HOST_DELTA035R1.json: OWNER only, exact helper import, wait_ge only. entry CPU-only delta runs real short-process controls and requires its receipt before NPU.
+
+Normal already-Stopped path requires prior actual ARM binding, exact naturallyExit0/Pid0/noExec/noOOM, full active-CID postexit observe(require_idle=True), noown NPU processes and second stable exact State. Exception path additionally requires this iteration's newly saved exact original protected exception and exact first init frame matching bound hostPID/start plus prior inspect init. Actual stat/stat_after must retain same start but vsize/RSS0, empty cmdline, root cgroup; missing/unknown/other errors refuse. A no-signal natural wait is bounded2s and original stage deadline, records each fresh inspect, requires same live init until true terminal. No retrospective natural-exit claim for old035 (original07c6 was stillRunning before owncleanup).
+
+After natural stop, stage/producer Ref bytes are rechecked quiescent. Any failed fence saves original+secondary and raises the original exception; live/foreign/reuse/nonzero/OOM/exec/unreadable conditions cannot be converted to success. Active remains exact CID throughout; complete protected0–3 ancestry/FD/mapping and selected5 idle/card overlap checks run normally. No timeout, RAM, CPU, raw cap, math, seed, domain or threshold change.
+
+real_process_controls.py is a defaultOFF actual Linux Devices[] CPU entry:8 real short-lived/reaped children, actual /proc start IDs, no signal on success, plus full policy negative tests. It is wired into the existing same-image CPU stage, not a new owner. Authored software is not execution: local policy tests pass, actual same-image process controls and new16/160 NPU integration remain pending MAIN. No fakeGPU test or final model/performance/task qualification.

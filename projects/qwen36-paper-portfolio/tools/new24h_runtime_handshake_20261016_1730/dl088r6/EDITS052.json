@@ -1,0 +1,226 @@
+{
+  "assemble.py": [
+    [
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-mixed-precast-new48h-v1-043-repair3",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new48h-v1-052"
+    ],
+    [
+      "deltalog-mixed-precast-new48h-043-repair3",
+      "deltalog-split-scale-numeric-new48h-052"
+    ],
+    [
+      "2610154301",
+      "2610165101"
+    ]
+  ],
+  "collection_policy.py": [
+    [
+      "len(side)==2*steps+25",
+      "len(side)==2*steps+31"
+    ],
+    [
+      "'cancellation','overflow'],'all7 actual boundary controls retained'",
+      "'cancellation','overflow','finite-final-normalized-query','finite-final-unscaled-query','cancellation-permuted','gqa-vtile-witness','original-B16-step80','original-B16-step137'],'all13 actual boundary controls retained'"
+    ]
+  ],
+  "domain_consumer.py": [
+    [
+      "2610154301",
+      "2610165101"
+    ],
+    [
+      "'cancellation','overflow'],'all real NPU numeric boundary controls'",
+      "'cancellation','overflow','finite-final-normalized-query','finite-final-unscaled-query','cancellation-permuted','gqa-vtile-witness','original-B16-step80','original-B16-step137'],'all real NPU numeric boundary controls'"
+    ],
+    [
+      "len(all043)==2*producer['steps']+25",
+      "len(all043)==2*producer['steps']+31"
+    ],
+    [
+      "  audit043=sidecar_audit.audit(",
+      "  if rr043['path'] in {x['raw']['path']for x in controls if x['case'].startswith('original-B16-')}:\n   import regression052,bridge_io\n   regression052.audit(torch,m,bridge_io,next(x for x in controls if x['raw']==rr043),av043)\n  audit043=sidecar_audit.audit("
+    ],
+    [
+      " for rr043 in all043:\n  av043=torch.load(checked(rr043),map_location='cpu',weights_only=False)\n  if rr043['path'] in {x['raw']['path']for x in controls if x['case'].startswith('original-B16-')}:\n   import regression052,bridge_io\n   regression052.audit(torch,m,bridge_io,next(x for x in controls if x['raw']==rr043),av043)\n  audit043=sidecar_audit.audit(torch,R,precast,av043,overflow=rr043['path']in overflow,numeric=rr043['path']not in mixed043)\n  sidecar_rows.append(dict(raw=rr043,**audit043))",
+      " from sidecar_receipt052 import one as persist_actual_sidecar\n for index043,rr043 in enumerate(all043):\n  sidecar_rows.append(persist_actual_sidecar(torch,R,precast,rr043,source_ref,producer_ref,m,output,index043,mixed043,overflow,controls,checked))"
+    ]
+  ],
+  "host.py": [
+    [
+      "deltalog-mixed-precast-new48h-043-repair3",
+      "deltalog-split-scale-numeric-new48h-052"
+    ],
+    [
+      "OWNER='deltalog-mixed-precast-new48h-MAIN-043-repair3'",
+      "OWNER='deltalog-split-scale-numeric-new48h-MAIN-052'"
+    ],
+    [
+      "refs.extend([m['debug_library'],m['debug_build_ref'],m['debug_kernel_source_ref']])",
+      "refs.extend([m['debug_library'],m['debug_build_ref'],m['debug_kernel_source_ref'],m['split_kernel_source_ref'],m['firstfault_ref'],m['state_predecessor_library_ref'],m['regression137_raw_ref'],*m['regression137_secondary_refs']])"
+    ]
+  ],
+  "inverse_repair3.py": [
+    [
+      "def undo(name,text):",
+      "def undo(name,text):\n from inverse052 import undo as undo052\n text=undo052(name,text)"
+    ]
+  ],
+  "npu_controls.py": [
+    [
+      "'cancellation','overflow')",
+      "'cancellation','overflow','finite-final-normalized-query','finite-final-unscaled-query','cancellation-permuted','gqa-vtile-witness')"
+    ],
+    [
+      "elif name=='negative-zero':base[0].fill_(-0.)",
+      "elif name=='negative-zero':base[0].fill_(-0.)\n  elif name=='finite-final-normalized-query':base[0].fill_(1e38)\n  elif name=='finite-final-unscaled-query':base[0].fill_(1e37)\n  elif name=='cancellation-permuted':base[0,:,:,:64]=.125;base[0,:,:,64:]=-.125\n  elif name=='gqa-vtile-witness':\n   for head in range(12):base[0,head,:64,:]=(head+1)*.0001;base[0,head,64:,:]=-(head+1)*.0002"
+    ],
+    [
+      "  capture(q,k,v,g,beta,",
+      "  if name=='finite-final-normalized-query':q.fill_(128**-.5)\n  capture(q,k,v,g,beta,"
+    ],
+    [
+      "  capture(q,k,v,g,beta,",
+      "  if name=='gqa-vtile-witness':\n   for head in range(4):q[0,head].fill_(head+1)\n  capture(q,k,v,g,beta,"
+    ]
+  ],
+  "prepare_transport.py": [
+    [
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-mixed-precast-new48h-v1-043-repair3",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new48h-v1-052"
+    ],
+    [
+      "deltalog-mixed-precast-new48h-043-repair3",
+      "deltalog-split-scale-numeric-new48h-052"
+    ]
+  ],
+  "producer.py": [
+    [
+      "boundary_controls=npu_controls.run(torch,h,sidecar)",
+      "boundary_controls=npu_controls.run(torch,h,sidecar)\n  from regression052 import run as replay_firstfault\n  boundary_controls.extend(replay_firstfault(torch,sidecar,m,C))"
+    ]
+  ],
+  "qwen36_deltalog_fresh/capture_evidence.py": [
+    [
+      "2610154301",
+      "2610165101"
+    ]
+  ],
+  "qwen36_deltalog_fresh/contract.py": [
+    [
+      "NAMESPACE='qwen36_deltalog_key_projection'",
+      "NAMESPACE='qwen36_deltalog_split_scale_v051'"
+    ],
+    [
+      "LIBRARY_SHA='298749129c8586ecea56cb6076c435631b6fbef4b4e7757636ff87a4ec09abf7'",
+      "LIBRARY_SHA=None # Set only after exact actual051 build admission; never an old B010 certificate."
+    ]
+  ],
+  "qwen36_deltalog_fresh/native_fixture.py": [
+    [
+      "2610154301",
+      "2610165101"
+    ]
+  ],
+  "qwen36_deltalog_fresh/provider.py": [
+    [
+      "life['library']!=m['library_ref']",
+      "life['library']!=m['state_predecessor_library_ref']"
+    ],
+    [
+      "return m,life",
+      "from split_build052 import admit\n admit(m,_obj,_ref)\n return m,life"
+    ],
+    [
+      "lib=m['library_ref'];C.require_digest(lib['path'],C.LIBRARY_SHA)",
+      "lib=m['library_ref'];C.require_digest(lib['path'],lib['sha256']);C.LIBRARY_SHA=lib['sha256']"
+    ]
+  ],
+  "run043.py": [
+    [
+      "deltalog-mixed-precast-new48h-043-repair3",
+      "deltalog-split-scale-numeric-new48h-052"
+    ]
+  ],
+  "sidecar_capture.py": [
+    [
+      "namespace='qwen36_deltalog_readout_sidecar_v015'",
+      "namespace='qwen36_deltalog_split_scale_sidecar_v051'"
+    ]
+  ],
+  "test_031.py": [
+    [
+      "self.assertEqual(hashlib.sha256((P/n).read_bytes()).hexdigest(),m['files'][n]['sha256'])",
+      "from inverse052 import undo\n   self.assertEqual(hashlib.sha256(undo(n,(P/n).read_text(encoding='utf8')).encode()).hexdigest(),m['files'][n]['sha256'])"
+    ]
+  ],
+  "test_035.py": [
+    [
+      "2610154301",
+      "2610165101"
+    ]
+  ],
+  "test_043.py": [
+    [
+      "2610154301",
+      "2610165101"
+    ]
+  ],
+  "test_aggregate_controls.py": [
+    [
+      "from pathlib import Path",
+      "from pathlib import Path\nfrom unittest.mock import patch"
+    ],
+    [
+      "scope=dict(vars(C));exec(",
+      "scope=dict(vars(C),m={'software_aggregate_only':True});exec("
+    ],
+    [
+      "body.append(ast.Return(ast.Name('sidecar_rows',ast.Load())))",
+      "body.insert(0,ast.parse(\"output=producer['_software_output']\").body[0]);body.append(ast.Return(ast.Name('sidecar_rows',ast.Load())))"
+    ],
+    [
+      "scope=dict(vars(C),m={'software_aggregate_only':True})",
+      "scope=dict(vars(C),m={'software_aggregate_only':True},source_ref={'software-only':True},producer_ref={'software-only':True})"
+    ],
+    [
+      "class Aggregate(unittest.TestCase):",
+      "class Aggregate(unittest.TestCase):\n def setUp(self):\n  self.regression_patch=patch('regression052.audit',side_effect=lambda t,m,c,row,side: row['software_fixture']is True);self.regression_patch.start()\n def tearDown(self):self.regression_patch.stop()"
+    ],
+    [
+      "  for j in range(50):",
+      "  for case in('original-B16-step80','original-B16-step137'):\n   capture(*[x.clone()for x in normal]);controls.append(dict(case=case,raw=capture.take(),software_fixture=True))\n  for j in range(50):"
+    ],
+    [
+      "p=dict(records=[],steps=16,",
+      "p=dict(_software_output=str(root/'DOMAIN.json'),records=[],steps=16,"
+    ],
+    [
+      "self.assertEqual(len(rows),57)",
+      "self.assertEqual(len(rows),63)"
+    ],
+    [
+      "set(npu_controls.CASES)",
+      "set(npu_controls.CASES)|{'original-B16-step80','original-B16-step137'}"
+    ],
+    [
+      "(base[s,h]@q[j,h//3].float())*(128**-.5)",
+      "(base[s,h]@(q[j,h//3].float()*2**-4))*((128**-.5)*16)"
+    ]
+  ],
+  "test_collection_contract.py": [
+    [
+      "range(2*steps+25)",
+      "range(2*steps+31)"
+    ],
+    [
+      "'cancellation','overflow'))])",
+      "'cancellation','overflow','finite-final-normalized-query','finite-final-unscaled-query','cancellation-permuted','gqa-vtile-witness','original-B16-step80','original-B16-step137'))])"
+    ]
+  ],
+  "test_mount_closure.py": [
+    [
+      "manifest.update(composite_source_ref=external,composite_cpu_owner_ref=external,lifecycle_source_ref=external)",
+      "manifest.update(composite_source_ref=external,composite_cpu_owner_ref=external,lifecycle_source_ref=external,library_ref=external,debug_library=external,debug_build_ref=external,debug_kernel_source_ref=external)"
+    ]
+  ]
+}

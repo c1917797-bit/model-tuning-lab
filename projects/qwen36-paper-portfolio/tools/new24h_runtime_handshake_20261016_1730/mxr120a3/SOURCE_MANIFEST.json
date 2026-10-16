@@ -1,0 +1,71 @@
+{
+  "NPU": false,
+  "actual_analysis_ref": {
+    "bytes": 4323534,
+    "path": "/opt/host/vnf/austinov/run-mxr-prefill120analysis1-CPU-MAIN-NEW24H_001/ANALYSIS120A1.json",
+    "sha256": "f0948390c6621b83682225c1f8d5408a2fbf2e4810a2df1331a341d981fe394e"
+  },
+  "actual_stage_ref": {
+    "bytes": 5414,
+    "path": "/opt/host/vnf/austinov/run-mxr-prefill120repair2-npu-MAIN-NEW24H_001/numeric/result/STAGE_RESULT.json",
+    "sha256": "7f75510c0da848a1b50ac6c92af56ecdfc7cb46240040265ae8ae716b29fef26"
+  },
+  "analysis_source_ref": {
+    "bytes": 2049,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-cpu-analysis120-analysis1/SOURCE_MANIFEST.json",
+    "sha256": "2aa03ec57f22b6dbac432c32f1b182a7057403337d9fe88e6790fa5b1aeec352"
+  },
+  "budgets": {
+    "child_seconds": 600,
+    "cleanup_seconds": 90,
+    "guest_bytes": 8589934592,
+    "host_bytes": 536870912,
+    "new_raw_bytes": 0,
+    "output_bytes": 2097152,
+    "reserve_bytes": 8589934592
+  },
+  "default_enabled": false,
+  "files": {
+    "MATH_INVERSE.json": {
+      "bytes": 706,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-cpu120-analysis3/MATH_INVERSE.json",
+      "sha256": "16fdc40108bea03440c5df464e6aaee645240bfeaf76d3ccdf675f97ee4bcb0f"
+    },
+    "counterfactual.py": {
+      "bytes": 10691,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-cpu120-analysis3/counterfactual.py",
+      "sha256": "106643edd7277f7daa16f5364ee88cc00e773cbb8d01d37d5ff5373c3cb847ea"
+    },
+    "reference_inputs.py": {
+      "bytes": 4880,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-cpu120-analysis3/reference_inputs.py",
+      "sha256": "69b0d027c9831381ab69c007dfcb20e8e42f785ac6a215d9250845fb3d901db8"
+    },
+    "test_counterfactual.py": {
+      "bytes": 5699,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-cpu120-analysis3/test_counterfactual.py",
+      "sha256": "5c7969898f6d7d53f73b7c49692622f4f45dfe9c8a1709e3f3f193abc665b237"
+    }
+  },
+  "guest_source_ref": {
+    "bytes": 8827,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-new24h-v1-120-repair2/SOURCE_MANIFEST.json",
+    "sha256": "e2df58e982dc73d8fa57c5f33334c2ffce76670d52add26aa373b7440b7fa363"
+  },
+  "no_gates_changed": true,
+  "original_reference_ref": {
+    "bytes": 4691,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-model-new24h-v1-098-repair5/boundary_oracle.py",
+    "sha256": "7fd2e64783f4516a99f116dc66502ff8e6b6d5591f7a1076e7ed1e6cfa9a408a"
+  },
+  "qualification": false,
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r5-prefill-counterfactual-cpu120-analysis3",
+  "schema": "mxr.counterfactual-source/v120-analysis3",
+  "software_cases": 6,
+  "variants": [
+    "baseline",
+    "actual_G_only",
+    "actual_A_only",
+    "actual_A_and_G"
+  ]
+}
