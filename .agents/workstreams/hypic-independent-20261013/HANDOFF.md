@@ -1,4 +1,15 @@
-# CURRENT R18 PARTITIONED C1 WIRED DEFAULT-OFF;916 CPU PASS; NO NPU RUN
+# CURRENT R18 NUMERICAL CANARY LIVE; NO TERMINAL
+
+Exact ma exec-0000000000000dbe started18:30UTC from published9cd46d68.
+Admission0dbd proves166sources/159runtime/image/model/input/actual0-3empty/8233+
+HCCLfree/newroot. Contract C1_PARTITIONED_R18_CANARY_R1_CONTRACT.json.
+Raw /cache/cch/hypic-independent-20261013/c1-partitioned-r18-canary-r1.
+Poll samepeer/handle/raw; neverrestart whilelive/unclear, no166bound source edits.
+Terminal audit_c1_partitioned_canary.py --contract C1_PARTITIONED_R18_CANARY_R1_CONTRACT.json
+--live-release. Actual allfour48/16,unchanged serial numerical residuals,one row/window
+visit,source/physical/isolation/exactrelease required. NOT speed/quality/lifecycle.
+
+# HISTORICAL R18 WIRED HOST READINESS
 
 Defaultfalse c1_partitioned_render wired activation/GDN/prepare/backend; actual
 partition visit/dispatch receipts distinguish prefix-only1 vs prefix+suffix2 calls,
