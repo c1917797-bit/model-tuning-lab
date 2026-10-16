@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "external-interrupted-catalog-offline-preparation",
+  "execution_state": "readonly-resource-observer-and-delivery-freeze-preparation",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Noownedmodeljob/observer. R2terminal0b07externalcannbench_dsNPU3,0requests;independent0b0bsource159/releasePASS,0b0creject. Preserve raw R2neverreuse. No blind R3startup; await actualstablewindow coordination while completing independentlifecycle composite audit/packagepreparation. Fullgoalactive,deadlineOct17T06:48:09Z.",
+  "next_action": "Poll exact readonly0b5a onma; noownedNPUjob. Freeze successor delivery lifecycle source bindings/contracts without touchingold147/159/163/156. R2catalogfailureimmutable; newdeviceattemptneedsnewcontract/rootandresourcepremise,neverblindrerun. LatestdeadlineOct17T06:48:09Z.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -196,10 +196,10 @@
     ]
   },
   "publication": {
-    "state": "17e6d85 liveverified;image metadata checkpoint pending",
-    "published_commit": "17e6d85fd78d89eed42aa9b0458299a1384aef33",
+    "state": "1b6a6a8 liveverified;deliverywiring checkpoint pending",
+    "published_commit": "1b6a6a884d13d5949b7d6dec71a1a3be243259db",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "note": "Pinned image metadata only, not active device ABI/numerics acceptance."
+    "note": "No NPU or fullgoal acceptance."
   },
   "math_reference": {
     "state": "cpu-reference-passed",
@@ -282,9 +282,8 @@
     "accepted": false
   },
   "resource_observation": {
-    "operation": "exec-0000000000000aff",
-    "state": "TERMINALexit0;13empty snapshots/193sampledidleseconds;noreservation",
-    "report": "RESOURCE_OBSERVATION_0AFF_20261016.json"
+    "operation": "exec-0000000000000b5a",
+    "state": "RUNNING readonly600s/180sampledidlecondition;noallocation/reservation"
   },
   "lifecycle_preparation": {
     "controller": "lifecycle_r16_tp4.py",
@@ -305,11 +304,11 @@
     ]
   },
   "delivery_adapter": {
-    "state": "DRAFT_HOSTONLY823CPU0b41/8subprocess0b3f/standardvalidator0b40+0b47PASS;notservicewired",
+    "state": "DRAFT_HOSTONLY successorcontroller/audits/13focused0b57+836CPU0b58PASS;nofrozennewcontracts/NPUrun",
     "source_checkpoint": "112c3e5961a03ea18295636d8497d53324e991f8",
-    "report": "DELIVERY_ADAPTER_CHECKPOINT_BINDING_20261016.json",
+    "report": "DELIVERY_LIFECYCLE_WIRING_HOST_READINESS_20261016.json",
     "remaining": [
-      "Successor lifecycle controller/startup audit and source-bound contracts for delivery_runtime path",
+      "Freeze new explicit delivery lifecycle stage contracts with complete source closure (old156 unchanged)",
       "All missing device performance/quality/lifecycle gates"
     ],
     "image_attestation": {

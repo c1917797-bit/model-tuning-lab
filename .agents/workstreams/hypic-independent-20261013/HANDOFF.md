@@ -1,3 +1,15 @@
+# CURRENT readonly0b5a live and delivery lifecycle wiring HOSTONLY
+
+0b5a is readonly600s observer/180sampledidlecondition,noallocation/reservation.
+NoownedNPUjob. Latest0b59 snapshot11:58:48UTCempty onlynotleaseproof.
+Newlifecycle_delivery_r16_tp4.py +audit_delivery_lifecycle_{startup_controls,terminal,sequence}
+use delivery_runtime bootstrap andrequireexplicitdelivery_adapter=true.13controls0b57/
+836CPU0b58PASS;ASTinverse proves onlydeclaredentry/identityspanschanged,guardsunchanged.
+0b56fixturemockoldmodulefailure retained/repaired.0b59old147/159/163/156mapsunchanged.
+Generateddirectories only; newdelivery sourceboundcontracts stillmissing, noNPUservice
+activationacceptance. PollSAMEobserver;freezefuturecontracts/offlinewhilewaiting.
+R2catalog externalfailureimmutable/no blindrerun;deadlineOct17T06:48:09Z.
+
 # LATEST pinned image source metadata attestation
 
 Readonly/no-device/no-network/no-model officialimage probe0b4bexit0:
