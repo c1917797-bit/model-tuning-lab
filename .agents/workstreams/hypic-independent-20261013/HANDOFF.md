@@ -1,4 +1,15 @@
-# CURRENT R16 G3 EARLYMIXED TERMINAL AUDITED; PARSER LAUNCHED
+# CURRENT R16 NATIVE EARLYMIXED LIVE + G3 CPU PARSER
+
+Exactma exec-0000000000000cae RUNNING;raw /cache/cch/hypic-independent-20261013/profile-g1-r16-earlymixed-r1.
+Checkpoint70a2bab published/liveverified;0cacfresh15:18:18UTC source149/image/model/input/
+physical0-3empty/8233+HCCLfree/newroot/cache10.69GiB PASS. Onlyone modeljob;noHYPICmount.
+G3CPUparser exactCID015f5e1c98a3b7b23099cdb1633f8780de527966a990c9fa0ce20fb52165a257
+stillseparateCPU0/manager-only/no compute mapping. Rank0done13327kernels:actualprefill/mixed
+(96chunk-WY,192FwdH,48recurrent),not puredecode. Needall4parse/criticalpath/nativecomparison.
+Poll SAME0cae/root;neverrestart live/unclear/no source149 edits/secondmodeljob. Terminal
+native16warm+16profile/source149/PIDphysical/isolation/exactreleaseaudit thenofflineparse.
+IOmicro0ca4 keepsallrecords:per-eventfsync199-203ms/256 vsSHAcache180 vs64group11;
+NOT E2E or validmodelstep durability. No runtimecodechangeyet. Formalnegativepair stays.
 
 0c89 terminalexit0;independent source149/hot16/16warm+16profile/physicaljoin/isolation232/
 recordedexactreleasePASS. PROFILE_G3_R16_EARLYMIXED_TERMINAL_AUDIT_20261016.json hashes.

@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R16-earlymixed-terminal-audited-offline-parser",
+  "execution_state": "R16-native-earlymixed-live-G3-offline-parsing",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "0c89 terminalexit0; independent source149/hot16/PIDphysical/isolation232/recorded releasePASS. No owned modeljob; manager-only offline parser015f5e1c... launched/no compute devices."
+    "state": "Owned0cae nativeG1earlymixed live after0cac fresh15:18:18UTC source149/actual0-3empty/portsfree/newroot/cache10.69GiB admission. G3parser manager-only/no compute mapping onCPU0."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "0c89 earlymixed capture terminal/auditPASS. Poll exact parserCID015f5e1c98a3b7b23099cdb1633f8780de527966a990c9fa0ce20fb52165a257, verify tables/trace/actualphase.0ca4 bounded CPU0 same-byte IO replay:original199-203ms/256 vsSHAcached180ms vsfsync64groups11ms; notE2E/notproductiondurability. Inspect actualprefill/mixed criticalpath before one bounded sink/model treatment. Nativeearlymixed contract prepared/notlaunched; no runtime edits yet. Fullformal matrix/quality/lifecycle incomplete.",
+  "next_action": "Poll exactma0cae nativeearlymixed/raw; no restart/edit149boundfiles/secondmodeljob whilelive or unclear. G3earlymixed parser exactCID015f5e1c98a3b7b23099cdb1633f8780de527966a990c9fa0ce20fb52165a257 onCPU0:rank0done13327kernels with96chunk-WY/192FwdH/48recurrent => actualprefill/mixed observed. Validateall4/criticalpath, compare nativeactualphase afterterminalaudit.0ca4 IOreplay material hypothesis notE2E; arbitrary64flush notproductionstepfence. No runtime change yet; fullformalquality/lifecycle remain.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,14 +215,14 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL0c89 exit0; independent source149/16warm+16profile/hot16/physical/isolation232/releasePASS. Offline parser exactCID015f5e1c98a3b7b23099cdb1633f8780de527966a990c9fa0ce20fb52165a257 launched; verify live before wait.",
-    "operation": "exec-0000000000000c89",
+    "state": "RUNNING exact0cae G1earlymixed native comparator; G3offlineparser015f5e1c... separately onCPU0/no compute mapping. No source149 edit/restart/secondmodeljob.",
+    "operation": "exec-0000000000000cae",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "contract": "PROFILE_G3_R16_EARLYMIXED_R1_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/profile-g3-r16-earlymixed-r1",
-    "checkpoint": "6110d06fdd299727abfee169692062d0a0cbe747",
-    "admission_operation": "exec-0000000000000c88"
+    "contract": "PROFILE_G1_R16_EARLYMIXED_R1_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/profile-g1-r16-earlymixed-r1",
+    "checkpoint": "70a2bab927e693c508e6d1bbe90ab864f5ef053c",
+    "admission_operation": "exec-0000000000000cac"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
