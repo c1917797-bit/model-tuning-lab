@@ -1,5 +1,13 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+CURRENT R16 G3/R1 FULL40 LIVE exactexec-0000000000000a20 on originalma viaawmcp.
+Checkpoint eab2de9f;0a1f08:55:05UTC fresh0-3empty/portsfree/147sources/newroot/
+image/model/input/priorCanary hashesPASS. Raw formal-r16-20261016-g3-r1 immutable.
+Same40/c16/32768/16384/fixed1024; snapshottrue/probe0/performance mode.
+Running/unknown never restart or edit147boundfiles. Terminal audit_r16_performance.py
+--contract FORMAL_R16_20261016_G3_R1_CONTRACT.json --live-release. Then freshG1/R1;
+no oldR15baseline reuse. Full12/quality/lifecycle/29functional remain incomplete.
+
 LATEST09ff TERMINAL exit0;0a16 independent snapshotCanary audit exit0.
 3responses: public16640/1 +2private32768/1024;2/2 same-step fourrank48C1/16C2,
 8actualprobe rows,145sources,227clean isolation and exact own release verified.
