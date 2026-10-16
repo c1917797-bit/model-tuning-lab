@@ -1,0 +1,47 @@
+{
+  "schema": "hypic-c1-partitioned-host-readiness/v1",
+  "state": "HOST_ONLY_UNACTIVATED",
+  "hypothesis": "Prepared per-window WY permits prefix output/state once, cached T@H+S seam composition, then suffix output/state once instead of two whole-packed state passes.",
+  "files": [
+    "experimental_c1_partitioned_render.py",
+    "test_experimental_c1_partitioned_render.py"
+  ],
+  "regression": {
+    "operation": "exec-0000000000000da5",
+    "tests": 898,
+    "exit": 0
+  },
+  "targeted": {
+    "initial_operation": "exec-0000000000000da2",
+    "initial_tests": 8,
+    "latest_test_methods": 11,
+    "coverage": [
+      "prefix/suffix/native interleave",
+      "cached tail without suffix",
+      "short-prefix alignment feeds suffix and carried terminal",
+      "reject changed suffix alignment",
+      "geometry/duplicate ownership/metadata rejection",
+      "1,63,64,65,127,128,129 token boundaries",
+      "17 seeded geometries"
+    ]
+  },
+  "unchanged": [
+    "No runtime activation or config flag wired",
+    "No frozen R17 algorithm source edited",
+    "No official image modification",
+    "No NPU work started"
+  ],
+  "limits": [
+    "CPU recurrence/ABI controls use mocked official primitives; actual NPU metadata/kernels and changed batching not validated",
+    "Additional gather/repacking and two output dispatch overhead unmeasured",
+    "Canonical short-prefix recurrent alignment retained; not all-tensor/task quality equality",
+    "Finite checking, private commit, completion and rollback remain caller responsibilities"
+  ],
+  "next": [
+    "Wire explicit defaultfalse option through existing packed backend/stage/activation",
+    "Full regression and source-bound numerical Canary contract",
+    "Fresh route/physical0-3/port admission before any NPU run",
+    "Independent all-four-worker same-step numerical/ownership/isolation/release audit before matched performance"
+  ],
+  "full_goal_complete": false
+}

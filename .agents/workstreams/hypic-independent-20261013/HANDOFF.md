@@ -1,4 +1,15 @@
-# CURRENT R17 THREE-ARM FIRST SCREEN TERMINAL; WHOLE HYPIC NEGATIVE
+# CURRENT R18 PARTITIONED C1 HOST PROTOTYPE; NOT ACTIVATED
+
+New experimental_c1_partitioned_render.py prepares prefix/suffix views of shared WY,
+renders each live window once, retains actual prefix-to-cached-to-suffix dependency
+and canonical short-prefix terminal alignment.11 targeted methods plus898 complete
+CPU regressions0da5 PASS (initial8 controls0da2). Mock primitives only, not NPU proof.
+Report C1_PARTITIONED_R18_HOST_READINESS_20261016.json. Runtime unmodified/unactivated;
+next explicit defaultfalse backend/stage/activation wiring, then independently gated
+actual numeric Canary. Additional gather/metadata/output dispatch cost unmeasured.
+No owned model job; full performance/quality/lifecycle/29functional incomplete.
+
+# R17 THREE-ARM FIRST SCREEN TERMINAL; WHOLE HYPIC NEGATIVE
 
 Native0d7f exit0; independent0d9d PASS40/40,159sources,435clean isolation,
 algorithm absent, explicit physical0-3 mapping and live exact release.
