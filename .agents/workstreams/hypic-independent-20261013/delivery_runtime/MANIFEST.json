@@ -39,8 +39,8 @@
   "evidence": {
     "experiment_id": "hypic-independent-20261013/lifecycle-r16",
     "branch": "work/hypic-independent-20261013",
-    "commit": "c16ad91c9f7e7187080b23b30daf1a93744a0348",
-    "checkpoint_role": "Reviewed runtime base; exact adapter checkpoint binding pending tested adapter commit",
+    "commit": "112c3e5961a03ea18295636d8497d53324e991f8",
+    "checkpoint_role": "Exact tested adapter source checkpoint; current manifest metadata rebinding does not change wrapper code",
     "scope": "Draft host-only adapter, not connected to frozen service contracts or NPU-verified"
   },
   "runtime_manifest_file": "LIFECYCLE_COMPACT_MANIFEST_R16.json",

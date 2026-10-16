@@ -23,7 +23,7 @@ use a separately reviewed successor controller/manifest/contracts, preserve
 ownership/guard/cleanup AST invariants, and prove exact worker startup path.
 Do not silently alter old156/159/147source bindings or reuse existing raw roots.
 
-MANIFEST.evidence.commit currently names the reviewed runtime-base checkpoint;
-after this adapter code is committed, rebind it to that exact source checkpoint
-and rerun validator. CANN version is explicitly not freshly attested; do not
+MANIFEST.evidence.commit names the tested adapter source checkpoint112c3e5961a03ea18295636d8497d53324e991f8;
+wrapper code digests must match that exact checkpoint and the validator rerun.
+CANN version is explicitly not freshly attested; do not
 replace that with a guess. No devRPC/admin surface added, no NPU use here.

@@ -1,0 +1,27 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "delivery adapter checkpoint binding",
+  "source_checkpoint": "112c3e5961a03ea18295636d8497d53324e991f8",
+  "verification": {
+    "operation": "exec-0000000000000b47",
+    "exact_code_bytes_match": true,
+    "standard_validator_exit": 0,
+    "frozen_maps_unchanged": [
+      147,
+      159,
+      163,
+      156
+    ]
+  },
+  "regression": {
+    "operation": "exec-0000000000000b41",
+    "tests": 823,
+    "exit": 0
+  },
+  "scope": "Draft standard package structure and host/subprocess controls only; enabled positive uses fake loader, actual service not wired",
+  "remaining": [
+    "Successor lifecycle controller/startup audit and source-bound contracts for delivery_runtime path",
+    "Fresh actual CANN attestation before promotion",
+    "All missing device performance/quality/lifecycle gates"
+  ]
+}

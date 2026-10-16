@@ -1,3 +1,15 @@
+# LATEST standard delivery adapter DRAFT/HOSTONLY
+
+delivery_runtime uses reviewedgeneric template workflow, NOT oldHYPICcode.
+SingleINDEPENDENT_COMPACT_HYPICswitch/defaultdisabled; sourcebinding/failclosed78;
+IMPORT_HOOK_READY marker is NOTrank/layer activationproof.8subprocess0b3f/823CPU0b41PASS;
+standardvalidator0b40+0b47PASS; actualwrapperbytes matchsourcecheckpoint112c3e5961a03ea18295636d8497d53324e991f8.
+0b47 old147/159/163/156frozenmaps unchanged. NOTservicewired: currentLIFECYCLE_R1
+stillcompact_bootstrap; successorcontroller/startup audit/newcontracts required.
+CANNversion explicitlynotfreshlyattested, donotguess. No actualNPUorM6acceptance.
+Noownedjob/observer;last0b3a NPU3foreign779075/795947. PreserveR2failure/no blindretry.
+DeadlineOct17T06:48:09Z;fullgoalactive/incomplete.
+
 # LATEST prospective lifecycle contracts and three-directory composition
 
 26focused0b28/815CPU0b2aPASS; actual three-directory source/request/worker/hot/

@@ -196,10 +196,10 @@
     ]
   },
   "publication": {
-    "state": "df1ce2f liveverified;contracts/readiness pending",
-    "published_commit": "df1ce2f98c822bb1b24674ed629ba185071ccc7b",
+    "state": "c16ad91 liveverified;adapter source+binding checkpoints pending publication",
+    "published_commit": "c16ad91c9f7e7187080b23b30daf1a93744a0348",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "note": "No NPU, quality, lifecycle or29functional acceptance."
+    "note": "No NPU, finaldelivery or29functional acceptance."
   },
   "math_reference": {
     "state": "cpu-reference-passed",
@@ -299,9 +299,19 @@
       "LIFECYCLE_R16_UNINSTALLED_R1_CONTRACT.json"
     ],
     "remaining": [
-      "Standarddeliverymanifest/wrapper/validator (compactruntime manifest is not standard delivery manifest)",
+      "Delivery adapter-to-service wiring and separately frozen successor contracts (old156 unchanged)",
       "Required preceding performance/quality progression",
       "Actual lifecycle stages/independent fullaudit"
+    ]
+  },
+  "delivery_adapter": {
+    "state": "DRAFT_HOSTONLY823CPU0b41/8subprocess0b3f/standardvalidator0b40+0b47PASS;notservicewired",
+    "source_checkpoint": "112c3e5961a03ea18295636d8497d53324e991f8",
+    "report": "DELIVERY_ADAPTER_CHECKPOINT_BINDING_20261016.json",
+    "remaining": [
+      "Successor lifecycle controller/startup audit and source-bound contracts for delivery_runtime path",
+      "Fresh actual CANN attestation before promotion",
+      "All missing device performance/quality/lifecycle gates"
     ]
   }
 }
