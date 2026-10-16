@@ -1,0 +1,197 @@
+{
+  "schema": "paper-to-ascend-independent-hypic-case/v1",
+  "status": "PARTIAL_BOUNDED_VERIFIED_NOT_FULL_FUNCTIONAL_ACCEPTANCE",
+  "paper_revision": "2607.01299v2",
+  "identity": "independent single-instance adapted C1/C2 port; C3 explicitly excluded by human scope, not whole-paper result reproduction",
+  "scope": {
+    "model": "Qwen3.6-27B / Qwen3_5ForConditionalGeneration",
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tp": 4,
+    "reuse_old_algorithm_code": false,
+    "official_image_unchanged": true,
+    "training_or_quantization": false
+  },
+  "skill_mapping": [
+    {
+      "skill": "paper-to-ascend",
+      "requirements": [
+        "method-chain versus backend separation",
+        "bounded decision scope",
+        "constraint feasibility"
+      ],
+      "evidence": [
+        "C1_PACKED_R14_TERMINAL_20261015.json",
+        "C1_PACKED_R14_PDC_TERMINAL_20261015.json",
+        "FORMAL_R15_20261016_G3_R1_TERMINAL.json"
+      ],
+      "proved": "integrated C1/C2 mechanism and bounded numerical controls; architecture48linear/16full",
+      "unproved": "full formal performance and naturalEOS taskquality; no overall paper adoption"
+    },
+    {
+      "skill": "ascend-canary-implementation",
+      "requirements": [
+        "one falsifiable implementation repair",
+        "actual mutable-state/private precommit control"
+      ],
+      "proved": "canonical short-prefix recurrence terminal actually feeds cached composition; R13 failure retained, R14 16/16 independent audit0857 passed without tolerance relaxation",
+      "unproved": "general all-input model equivalence or finalquality"
+    },
+    {
+      "skill": "ascend-benchmark-evidence",
+      "requirements": [
+        "exact denominator",
+        "actual fourworker hot proof",
+        "independent observational join"
+      ],
+      "proved": "16 exact HTTP/runtime bijection; fourrank48C1/16C2; original ID and conditional-cap audit failures retained; renewed full40 exact indices/40HTTPIDs/fourrank48C1+16C2 same-step; independent09a1 timing/source/567clean/exactrelease passed",
+      "lesson": "A conditional instrumentation event is not a universal mechanism invariant. Audit actual first runner computed prefix and immutable per-request PIC geometry, preserve original frozen FAIL and identify revised observational decision explicitly.",
+      "unproved": "matchedG1comparison, all12 repeated phases, realG2/G4 nativecounter observation",
+      "evidence": [
+        "FORMAL_R15_20261016_G3_R1_TERMINAL.json",
+        "FORMAL_R15_20261016_G3_R1_CONTRACT.json"
+      ]
+    },
+    {
+      "skill": "chicaihong01-host-maintenance",
+      "requirements": [
+        "fresh direct route",
+        "physical to namespace identity",
+        "continuous isolation",
+        "exact own release"
+      ],
+      "proved": "R14 216 and PDC219 clean isolation samples; actual PID/cgroup/NSpid; exact owned containers removed; renewedG3 567clean,actual host2775467-70/NSpid59-62,exact079f release09a1",
+      "unproved": "future occupancy; every successor must freshly admit",
+      "evidence": [
+        "FORMAL_R15_20261016_G3_R1_LIVE_NAMESPACE.json",
+        "FORMAL_R15_20261016_G3_R1_TERMINAL.json"
+      ]
+    },
+    {
+      "skill": "runtime-monkeypatch-delivery",
+      "requirements": [
+        "default disabled",
+        "source-bound removable hooks",
+        "separate numerical versus timed execution"
+      ],
+      "proved": "R15 explicit defaultOFF performance switch leaves canary shadow mandatory,496CPU host regression,141bindings; full40 timed path terminal0967/independent09a1 valid, no numericalshadow events",
+      "unproved": "full repeatedperformance/quality and actual disabled/uninstall/restart lifecycle"
+    },
+    {
+      "skill": "ascend-model-quality-evaluation",
+      "requirements": [
+        "same ruler and full paired denominator"
+      ],
+      "proved": "protocol only: latest human nonthinking1024/thinking2048 naturalEOS, same arms",
+      "unproved": "full127x3 paired quality in this independent campaign; do not import oldR19 verdict as new evidence"
+    }
+  ],
+  "evidence": {
+    "C1_PACKED_R14_TERMINAL_20261015.json": {
+      "sha256": "6ee5e2d3a3454b15a364c43eee27d92396cb800a2f6ad741a02f31020f926efc"
+    },
+    "C1_PACKED_R14_PDC_TERMINAL_20261015.json": {
+      "sha256": "19501e81c52925eaf35a2c98a03441554d24fe73cfc15ff2e5f3e4b125e7e613"
+    },
+    "C1_PDC_ORIGINAL_AUDIT_FAILURE_20261015.json": {
+      "sha256": "3f9d806d8d45ac51c5a1385dac24574fdb51e12f81bcbec3e8f1ba27ca159080"
+    },
+    "C1_PACKED_R15_HOST_READINESS_20261015.json": {
+      "sha256": "15d6271677c13642a69a47d82c87c1ca190f8dcc78218f07cb2b9d54f5fc3818"
+    },
+    "FORMAL_R15_G3_R1_LIVE_NAMESPACE.json": {
+      "sha256": "7d30a9d609d10000f9e5caa3b79b5fa38db9db21a862c0505274d29fe7cfd837"
+    },
+    "FORMAL_R15_20261016_G3_R1_TERMINAL.json": {
+      "sha256": "384c81ed31e93897c0dd8e8b5838da1ac3317822e73cb9c4a18917016edcbf8a"
+    },
+    "FORMAL_R15_20261016_G3_R1_CONTRACT.json": {
+      "sha256": "98d0d340f93354ab39c2bf6337aa66a3af310167a54659b223c81309f0897b16"
+    },
+    "FORMAL_R15_20261016_G3_R1_LIVE_NAMESPACE.json": {
+      "sha256": "c4fba1f53bf2d39b72fb017454c23c0cf0c0cca37a109d92bef874a7e5491b2a"
+    },
+    "FORMAL_NATIVE_PDC_HOST_READINESS_20261016.json": {
+      "sha256": "777d4de14dedf7bd33d13d95c2eb8ea0fa350d5d1f83fca85d45022880226541"
+    },
+    "PREFILL_PROMPT_SNAPSHOT_HOST_READINESS_20261016.json": {
+      "sha256": "7a2e57ac459e91a2a3c3d5bfedcd8e99b3fb47439fb21cecd6c1642e3c14d2bb"
+    }
+  },
+  "negative_results": [
+    {
+      "operation": "exec-000000000000080c",
+      "scope": "R13 actual failed-head numeric path",
+      "verdict": "failed",
+      "lesson": "same equations do not imply same BF16 batching/branch order"
+    },
+    {
+      "operation": "exec-000000000000084d",
+      "scope": "post-run HTTP/runtime string identity audit",
+      "verdict": "failed-retained; separate strict bijection correction"
+    },
+    {
+      "operation": "exec-000000000000087b",
+      "scope": "required conditionalcap event for every request",
+      "verdict": "failed-retained; revised actual-hit proof0887 separately labelled"
+    },
+    {
+      "operation": "exec-000000000000099d",
+      "scope": "firstG3 terminal live strictportbind",
+      "verdict": "failed-retained; later09a0 noTCP/listener and strictbindPASS,unchangedaudit09a1PASS;initialTCPcause notproven"
+    }
+  ],
+  "live_not_accepted": {
+    "operation": "exec-000000000000089b",
+    "phase": "R15G3/R1 full40 fixed1024",
+    "state": "TERMINAL_INVALID_DEADLINE_INTERRUPTED",
+    "successful": 18,
+    "required": 40,
+    "no_new_claims": true
+  },
+  "remaining": [
+    "all12 same-source matched formal phases; currently1valid, no matched speedup established",
+    "full127x3 each-arm naturalEOS paired quality, nonthinking1024/thinking2048",
+    "disable/uninstall/restart lifecycle plus exact release",
+    "Paper-to-Ascend end-to-end functional acceptance",
+    "all29 archived Skill functional acceptance",
+    "authorized serialized integration/main verification"
+  ],
+  "publication": "work branch only; remote live verify required, main unchanged",
+  "full_goal_accepted": false,
+  "skill_sources": {
+    "paper-to-ascend": "226e55397776a0df904cef9ac660800df979465369b383c34ccbab1366420b95",
+    "ascend-canary-implementation": "e6cf7657d07147f6e368d043767c99058e8a872a7d82780c30b6f04b1e2d80fd",
+    "ascend-benchmark-evidence": "848dc04b69e07d68ead1072c23ca8754578901a591d250c813dba5f22d3c33cf",
+    "chicaihong01-host-maintenance": "8d8e7070d76af3becab77fbdf095740dfc38f98dfbabc8534eb9b03caf13c3d8",
+    "runtime-monkeypatch-delivery": "a59a64526d13636ae0ccee5a31edb899e7e9964403de6be3c4c8dc29a51e18da",
+    "ascend-model-quality-evaluation": "b9f33fed6d0432d601aa4fe3e55b9681cc092827ff9ec87e0b671e5432d61b4c"
+  },
+  "new_valid_phase": {
+    "name": "renewed20261016 G3/R1",
+    "requests": 40,
+    "summary": "FORMAL_R15_20261016_G3_R1_TERMINAL.json",
+    "contract": "FORMAL_R15_20261016_G3_R1_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/formal-r15-20261016-g3-r1",
+    "audit": "exec-00000000000009a1",
+    "independent_audit_exit": 0,
+    "optimization_accepted": false,
+    "quality_accepted": false,
+    "lifecycle_accepted": false,
+    "scope": "one full40 timed/source/allfourrank48C1+16C2/isolation/release phase; not a matched speedup or fullSkill acceptance"
+  },
+  "current_matrix": {
+    "valid": 1,
+    "total": 12,
+    "running": "G1/R1 exact09a6",
+    "not_started": 10
+  },
+  "preparatory_components": {
+    "native_pdc": "37CPU controls, prospective G2/G4 wrappers/contracts; no real nativecounter device proof",
+    "prompt_snapshot": "17targeted and550CPU regressions plus pinnedimageCPUonly localcost; helper NOTwired into service"
+  }
+}

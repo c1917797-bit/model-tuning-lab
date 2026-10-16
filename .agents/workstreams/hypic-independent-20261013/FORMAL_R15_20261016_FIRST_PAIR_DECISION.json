@@ -1,0 +1,40 @@
+{
+  "schema": "hypic-renewed-first-pair/v1",
+  "date": "2026-10-16",
+  "baseline": {
+    "terminal_unit_valid": true,
+    "timing": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 287.775058769771,
+      "ttft_p95_ms": 355946.3873700006,
+      "tpot_p95_ms": 300.261656601549
+    },
+    "isolation_samples": 435,
+    "source_bindings": 141,
+    "raw_sha256": {
+      "result.json": "ea27730e33ee861d294ba005e636a21bb7e975a0382ea51927e6a224aef42741",
+      "events.jsonl": "4b351232b34a1917352e6de94832808022634aae806a27aa71939f56f8c6ddfe",
+      "performance-unit.json": "e7753f9c1917392e883cbd4314f0e0326241374d9a3acbd55a3ba1b95076ebba",
+      "release.json": "9e829b2a41f372514147c14df7da0e5a314377f9c11af32ac4268f145b0cd182"
+    },
+    "scope": "one full40 timed phase only; all12 matched phases and full quality/lifecycle still required",
+    "live_release_verified": true
+  },
+  "candidate": {
+    "report": "FORMAL_R15_20261016_G3_R1_TERMINAL.json",
+    "weighted_tpot_ms": 413.7713166972646,
+    "ttft_p95_ms": 518966.267759999
+  },
+  "delta_percent": {
+    "weighted_tpot": 43.78289712323349,
+    "ttft_p95": 45.798998437520844
+  },
+  "decision": "REJECT_CURRENT_PERFORMANCE_IMPLEMENTATION_BEFORE_MATRIX_EXPANSION",
+  "source_manifest_unchanged": true,
+  "remaining_matrix": 10,
+  "quality_accepted": false,
+  "lifecycle_accepted": false,
+  "algorithm_route_rejected": false,
+  "next": "Retain immutable R15 roots. Test the default-off prefill-only prompt snapshot integration in a separately bound successor; actual worker critical-path opportunity and integrated correctness remain unproven."
+}

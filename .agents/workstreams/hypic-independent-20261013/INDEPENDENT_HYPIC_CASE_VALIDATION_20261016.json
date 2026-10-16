@@ -1,0 +1,27 @@
+{
+  "schema": "hypic-skill-case-validation/v1",
+  "focused": {
+    "operation": "exec-00000000000009d6",
+    "tests": 15,
+    "exit": 0
+  },
+  "full": {
+    "operation": "exec-00000000000009dc",
+    "tests": 565,
+    "exit": 0
+  },
+  "actual_replay": {
+    "operation": "exec-00000000000009d5",
+    "cwd": "repository root",
+    "evidence_files": 10,
+    "skills": 6,
+    "raw_phase_replay": true,
+    "scope": "G3 one bounded full40 evidence chain; historical release, no current occupancy or full functional acceptance"
+  },
+  "retained_failure": {
+    "operation": "exec-00000000000009d4",
+    "reason": "Bound auditor assumes case cwd; root invocation failed before correction",
+    "repair": "Child auditor receives explicit case cwd; no --run or --live-release"
+  },
+  "full_goal_accepted": false
+}

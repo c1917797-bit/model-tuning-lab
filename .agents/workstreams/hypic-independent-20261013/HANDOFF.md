@@ -1,5 +1,18 @@
 # Independent HYPIC algorithm reconstruction — current handoff
 
+Latest terminal overrides all older live text:09a6 G1 exit0;09da independent audit
+exit0,40/40,435clean samples,141bindings and exact owned release verified.
+Fresh matched R15 pair: G1 TPOT287.7751ms/TTFTP95355946.39ms versus
+G3 413.7713ms/518966.27ms: +43.7829%/+45.7990%. Current performance
+implementation rejected before remaining10phase expansion; paper route not rejected.
+FORMAL_R15_20261016_FIRST_PAIR_DECISION.json retains exact G1 raw hashes.
+No owned live device controller. Next separately freeze defaultoff prefill-snapshot
+integration and actual worker opportunity/correctness; do not silently pool versions.
+New case validator root-cwd failure09d4 preserved; explicit child cwd repair replay09d5
+passes10evidence docs/6Skill bindings/rawG3.15focused09d6+565fullCPU09dc PASS.
+Case remains bounded partial, not quality/lifecycle/29fullfunctional acceptance.
+
+
 Promptsnapshot component UNACTIVATED/defaultoff:17targeted09b3/550CPU09b7PASS.
 Officialimage3.12 CPU-only09bb (runc/networknone/readonly/NOdavinci devices/CPU0
 outside service112-191):12x32768 fullsnapshot median118.4008ms ->0.017922ms
