@@ -1,0 +1,28 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "test_full_quality_terminal_composition.py",
+  "focused": {
+    "operation": "exec-0000000000000ab5",
+    "tests": 4,
+    "exit": 0
+  },
+  "regression": {
+    "operation": "exec-0000000000000ab7",
+    "tests": 710,
+    "exit": 0
+  },
+  "scope": "Synthetic full381 raw-directory nativebaseline auditor composition, mock scorer, synthetic ownership records, no actualNPU/servicequality.",
+  "proofs": [
+    "source/contract/input/catalog binding andfull381journal connect",
+    "nativebaseline treatmentactivation rejected",
+    "source drift rejected",
+    "rehash-onlyselectedsegment tampering independently rejected"
+  ],
+  "remaining": [
+    "candidatefull381whole-directorycomposition",
+    "realcatalogR2Canary",
+    "actualpairedfull381arms",
+    "allsource/protocol/performance/lifecyclefinalgates"
+  ],
+  "resource": "No ownedNPUjob.0aa1observerterminal38samples/10busy,no180ssampledidle. Stablewindowcoordinationpending; do notrepeattransientidleinitialization."
+}
