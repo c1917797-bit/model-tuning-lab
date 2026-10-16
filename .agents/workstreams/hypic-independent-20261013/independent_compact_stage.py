@@ -39,13 +39,15 @@ def pin_complete_material(linear_pool,kv_pool,linear_keys,kv_keys):
 class CompactCanonicalStage(CanonicalPublicStage):
     def __init__(self,*,model_identity,code_identity,public_tokens,
                  capacity_bytes,boundary_tokens=8,kv_capacity_bytes=536870912,
-                 enable_mixed=False,allow_public_tail=False,allow_public_chunks=False):
+                 enable_mixed=False,allow_public_tail=False,allow_public_chunks=False,
+                 c1_async_material_transfer=False):
         if type(enable_mixed) is not bool:raise ValueError('explicit mixed boolean required')
         self.enable_mixed=enable_mixed
         super().__init__(model_identity=model_identity,code_identity=code_identity,
             public_tokens=public_tokens,capacity_bytes=capacity_bytes,boundary_tokens=boundary_tokens,
             allow_public_tail=allow_public_tail,allow_public_chunks=allow_public_chunks)
-        self.compact_store=CompactLinearMaterialPool(capacity_bytes)
+        self.compact_store=CompactLinearMaterialPool(capacity_bytes,
+            async_material_transfer=c1_async_material_transfer)
         self.store=self.compact_store
         self.compact_kv_store=PublicPool(kv_capacity_bytes)
     def layer_inventory(self,model):

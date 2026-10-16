@@ -1,4 +1,20 @@
-# CURRENT R16 NATIVE EARLYMIXED LIVE + G3 CPU PARSER
+# CURRENT R17 C1 ASYNC MATERIAL HOST-READY; NO NPU CLAIM
+
+R16 native parser590ae29b exited0; fourrank artifact audit0ce0 passed, report
+PROFILE_R16_EARLYMIXED_COMPARISON_20261016.json. Botharms two ArgMax iterations,
+native~4.574s vs HYPIC~10.335s; treatment kernel mix differs, not kernel-matched speed.
+New c1_async_material_transfer defaultfalse is wired pool/stage/activation marker.
+It retains private CPU sources until exact copy-stream completion, including exceptions;
+unknown completion quarantines references and blocks future pool leases.
+869 complete host tests0ceb,29structure/diffcheck0cec PASS. No new NPU run.
+Existing R16 config C2 layer barrier is already true; preserve unchanged in A/B.
+Evidence-step sink remains unactivated. No math, ownership or quality ruler changes.
+ALL old R16 source bindings are stale after three runtime edits: do not launch them.
+Next freeze new source-bound disabled/enabled contract, prove actual NPU copy equality
+and integrated fourworker/source/physical/release before same-protocol failfast.
+Full performance matrix,381-perarm quality,lifecycle and29functional remain incomplete.
+
+# Historical R16 earlymixed tracking (superseded)
 
 Copyparent analysis0ccb TypeError(str/float) fixed inread-only0ccf:largestcopy38-41ms under
 aten::to/_to_copy/qwen_gdn_attention_core. PROFILE_R16_C1_COPY_LOCALIZATION_20261016.json.

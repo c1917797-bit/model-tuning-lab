@@ -134,6 +134,7 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
         emit({'event':'compact_hypic_hooks_installed','pid':os.getpid(),
               'default_disabled':True,'c2_layer_completion_barrier':layer_barrier,
               'native_decode_batch':native_batch,
+              'c1_async_material_transfer':stage.compact_store.async_material_transfer,
               'prefill_prompt_snapshot':prefill_prompt_snapshot,
               'prompt_snapshot_probe_batches':snapshot_probe_batches,
               'c1_layer_completion_barrier':install_compact_gdn.c1_layer_completion_barrier,

@@ -1,0 +1,46 @@
+{
+  "schema": "hypic-c1-async-material-host-readiness/v1",
+  "state": "partial-component",
+  "primary_treatment": "C1 private compact-material nonblocking NPU transfer with completion-fenced CPU source lifetime",
+  "default_enabled": false,
+  "config_flag": "c1_async_material_transfer",
+  "targeted_first_operation": "exec-0000000000000ce7",
+  "targeted_first_tests": 13,
+  "complete_final_regression": {
+    "operation": "exec-0000000000000ceb",
+    "tests": 869,
+    "exit_code": 0,
+    "scope": "All test_*.py workstream host tests, not NPU behavior"
+  },
+  "structure": {
+    "operation": "exec-0000000000000cec",
+    "skills": 29,
+    "scope": "structure only"
+  },
+  "sources": {
+    "independent_compact_material_pool.py": "85e1f8aa3feffbc6a20e9e9eb4816313d830bf1cec474fcbcb27695a07bd513a",
+    "independent_compact_stage.py": "0ae194b5d4da9796df4631d82460b8eb863cdd732c340b0bccc2ad0632f2fb25",
+    "independent_compact_activation.py": "96300e1d549e79c8e48e5aabe29b4f81338d1f137109f5d6920c60f1962e1cf4",
+    "test_independent_c1_async_material.py": "340da590d0ac53892812e9f5013c608ae527575e8f69b6ed5eadbb6472702edf"
+  },
+  "safety": [
+    "Default blocking copy path keeps original to(device) calls and does not import NPU runtime.",
+    "Enabled path records completion event on exact copy stream; CPU private lease remains through event fence even when consumer raises.",
+    "Partial transfer/record failures fence stream before releasing sources.",
+    "If both event and stream completion fail, retain source/destination/event/stream references and block future pool leases.",
+    "No production math, private ownership, C2 policy, evidence sink or quality denominator changed."
+  ],
+  "existing_c2_policy": "R16 config already has c2_layer_completion_barrier=true; retain unchanged in prospective A/B. Historical summary saying it was unactivated is stale.",
+  "remaining": [
+    "Pinned-image actual Event/stream API and exact-copy numerical validation at TP4 local material shapes.",
+    "New config/manifests/contracts bound to current runtime sources; old R16 launch bindings invalid.",
+    "Actual fourworker activation/mechanism/source/physical isolation/exact release audit.",
+    "Same-protocol failfast and successful full performance/quality/lifecycle gates."
+  ],
+  "claims_forbidden": [
+    "NPU correctness or speedup",
+    "HYPIC end-to-end accepted",
+    "main integrated",
+    "29 Skills functionally accepted"
+  ]
+}
