@@ -1,4 +1,14 @@
-# CURRENT R19 G3 PARSED FOURRANK VALID; MATCHED G1 NEXT
+# CURRENT R19 MATCHED G1 BOUNDED PROFILE LIVE
+
+ma exact exec-0000000000000f61 launched22:57UTC from liveverifiedc9cceb3a.
+Admission0f60 proves196sources/181runtime/image/model/input/physical0-3empty/8233+HCCLfree/newroot.
+Raw /cache/cch/hypic-independent-20261013/profile-g1-r19-earlymixed-r1.
+Same officialimage/16privatewarm+16profile/32768input/64output/max2delay0, HYPIC/PDCoff.
+Poll exactpeer/handle/root; no restartlive/unclear or196bound changes.
+Terminal capture/source/physical/isolation/exactrelease andfourrankparsedartifacts
+required before G3samephasecomparison. Notformal1024 speed/quality. Cutoff2026-10-17T06:48:09Z.
+
+# HISTORICAL R19 G3 PARSED FOURRANK VALID; MATCHED G1 NEXT
 
 Parser7e09ad99terminalexit0. Independent0f5a accepts allfour nonemptykernel/operator/
 opstat/apistat tables plusvalidJSONtraces. PROFILE_G3_R19_EARLYMIXED_PARSED_AUDIT_20261016.json.
