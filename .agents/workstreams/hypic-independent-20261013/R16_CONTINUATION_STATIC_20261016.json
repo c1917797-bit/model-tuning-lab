@@ -1,0 +1,27 @@
+{
+  "schema": "hypic-static-continuation/v1",
+  "operation": "exec-0000000000000a90",
+  "exit": 0,
+  "quality_R2": {
+    "sources": 159,
+    "catalog": 126,
+    "private_diagnostic": 17,
+    "manifest_sha256": "bddd3488a1ad27e7e44748d503963b77931fc3dcd1b66f0e425d2ea994f110bb",
+    "default_disabled": true,
+    "device": false
+  },
+  "replacement_baseline": {
+    "sources": 147,
+    "protocol_identical": true,
+    "allowed_changes": [
+      "raw_root",
+      "container_name",
+      "purpose",
+      "replacement_attempt"
+    ],
+    "newroot_absent": true,
+    "device": false
+  },
+  "prerequisite": "Freshma/hostdevelopment/direct physical0-3+ports/source/image/input admission; no parallel ownedcontroller. Prior36/40unit remains rejected and immutable.",
+  "deadline": "2026-10-17T06:48:09Z"
+}
