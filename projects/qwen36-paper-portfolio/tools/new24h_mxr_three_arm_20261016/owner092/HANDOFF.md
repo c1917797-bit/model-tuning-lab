@@ -1,0 +1,11 @@
+# MXR092: bounded original Docker-top child departure
+
+Default OFF; MAIN-only. Original086 NPU failure remains FAILED/no arithmetic verdict. Frozen084 guest/source/all three-arm math remain byte-identical. This is a resource-observation repair, not numerical qualification.
+
+Actual first535517 was present/R, parent535486, start26610773, root-only cgroups, empty cmdline and zero virtual/RSS stat values. It was not proved zombie. Exact protected snapshot shows original complete parent chain535517→535486→535460→525713; parent anchors were proven owned by original PID/start/cgroup/argv gates. Two actual input fixtures are pinned; no historical source/result is changed.
+
+Only confirm may wait up to2 seconds, clipped to remaining whole deadline, for a known original non-init/non-protected/non-bound-NPU child. Present observations must preserve PID/start/PPID and be exact-own-cgroup or the exact root/emptyVM transition. Partial/error, foreign cgroup, PID reuse/reappearance, persistent presence, unknown parent remain refusal. Success still requires two consecutive fullymissing, fresh Docker-top absent, final fullymissing. Original snapshot/classify/tree_order/FD/protected device checks are AST-identical. No PID is signalled or granted release authority by this helper.
+
+CPU→NPU→CPU are separate bounded MAIN runs. New CPU entry first executes15 realhelper software cases from actual saved fixtures, then unchanged084 mounted-frame extraction. Local controls are not same-image/hardware evidence. MAIN must inspect actual CPU RESULT and PREFLIGHT092 receipt before NPU. CPU owner remains Devices[],8GiB,netnone,RO root,sole1GiB RW; host.5GiB plus8GiB reserve. Physical5 NPU owner keeps original069/081 SMIPID/ARM/release and CPU isolation. Freshopt32GiB/live8.5GiB/cap1GiB/600child/90cleanup unchanged. No DL ledger or automatic cleanup. Output leaves are unique092, original086 root/partial raw are retained.
+
+Review top_guard092.py, owner092.py, owned_cpu092.py, cpu_entry092.py and actual fixtures. COMMANDS.json is typed; substitute actual disjoint allowed HOST_CPU/GUEST_CPU and postNPU stage Ref only. No actual CPU container or NPU has run092 yet. Completion of084 remains diagnostic only, never model/performance acceptance.

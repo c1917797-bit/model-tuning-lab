@@ -1,0 +1,38 @@
+{
+  "NPU_executed": false,
+  "READY": false,
+  "default_off": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/host090.py"
+  ],
+  "execute": [
+    "/usr/bin/env",
+    "DENSE_OPPORTUNITY090_MAIN_ENABLE=1",
+    "DENSE090_EXTERNAL_OUTPUT_ENABLE=1",
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/host090.py",
+    "--execute",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/SOURCE_MANIFEST.json\",\"bytes\":8074,\"sha256\":\"71dd76627a4eaabf87bc33c2165f7e94a48725a2aa4bdcd7c2b928ac05e53bfc\"}",
+    "--output",
+    "/opt/host/vnf/austinov/run-dense-e2e090repair2-MAIN-NEW24H_001"
+  ],
+  "source": {
+    "bytes": 8074,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/SOURCE_MANIFEST.json",
+    "sha256": "71dd76627a4eaabf87bc33c2165f7e94a48725a2aa4bdcd7c2b928ac05e53bfc"
+  },
+  "source_audit": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/host090.py",
+    "--source-audit",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/SOURCE_MANIFEST.json\",\"bytes\":8074,\"sha256\":\"71dd76627a4eaabf87bc33c2165f7e94a48725a2aa4bdcd7c2b928ac05e53bfc\"}"
+  ]
+}

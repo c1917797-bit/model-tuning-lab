@@ -1,0 +1,106 @@
+{
+  "actual_NPU": false,
+  "actual_sameimage": false,
+  "coldCLI": 6,
+  "existing_owner_controls": 10,
+  "guard_cases": 15,
+  "reports": [
+    {
+      "argv": [
+        "C:\\Users\\Huawei\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\Huawei\\AppData\\Local\\Temp\\mxr-prefill-three-arm-owned-new24h-092\\test_guard092.py"
+      ],
+      "exit": 0,
+      "stderr": "test_actual_R_transition_eventually_missing (__main__.Controls) ... ok\ntest_actual_complete_original_parent_chain (__main__.Controls) ... ok\ntest_complete_tree_unknown_cycle_refused (__main__.Controls) ... ok\ntest_deadline_never_extended (__main__.Controls) ... ok\ntest_final_reappearance_refused (__main__.Controls) ... ok\ntest_foreign_cgroup_refused (__main__.Controls) ... ok\ntest_fresh_top_present_refused (__main__.Controls) ... ok\ntest_init_refused (__main__.Controls) ... ok\ntest_live_nonempty_root_refused (__main__.Controls) ... ok\ntest_missing_then_present_refused (__main__.Controls) ... ok\ntest_partial_error_refused (__main__.Controls) ... ok\ntest_persistent_present_refused (__main__.Controls) ... ok\ntest_protected_refused (__main__.Controls) ... ok\ntest_start_tick_reuse_refused (__main__.Controls) ... ok\ntest_unknown_parent_refused (__main__.Controls) ... ok\n\n----------------------------------------------------------------------\nRan 15 tests in 0.006s\n\nOK\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\Huawei\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\Huawei\\AppData\\Local\\Temp\\mxr-prefill-three-arm-owned-new24h-092\\test_owner092.py"
+      ],
+      "exit": 0,
+      "stderr": "..........\n----------------------------------------------------------------------\nRan 10 tests in 0.586s\n\nOK\n",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "C:\\Users\\Huawei\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\Huawei\\AppData\\Local\\Temp\\mxr-prefill-three-arm-owned-new24h-092\\cpu_entry092.py"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "{\"enabled\":false,\"NPU\":false}\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\Huawei\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\Huawei\\AppData\\Local\\Temp\\mxr-prefill-three-arm-owned-new24h-092\\cpu_entry092.py",
+        "--help"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "usage: cpu_entry092.py [-h] [--execute] [--source-ref SOURCE_REF]\n                       [--output OUTPUT]\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --execute\n  --source-ref SOURCE_REF\n  --output OUTPUT\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\Huawei\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\Huawei\\AppData\\Local\\Temp\\mxr-prefill-three-arm-owned-new24h-092\\owner092.py"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "{\"enabled\":false,\"NPU\":false}\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\Huawei\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\Huawei\\AppData\\Local\\Temp\\mxr-prefill-three-arm-owned-new24h-092\\owner092.py",
+        "--help"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "usage: owner092.py [-h] [--execute] [--source-audit] [--source-ref SOURCE_REF]\n                   [--host-cpu HOST_CPU] [--guest-cpu GUEST_CPU]\n                   [--output OUTPUT]\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --execute\n  --source-audit\n  --source-ref SOURCE_REF\n  --host-cpu HOST_CPU\n  --guest-cpu GUEST_CPU\n  --output OUTPUT\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\Huawei\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\Huawei\\AppData\\Local\\Temp\\mxr-prefill-three-arm-owned-new24h-092\\owned_cpu092.py"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "{\"enabled\":false,\"NPU\":false}\n"
+    },
+    {
+      "argv": [
+        "C:\\Users\\Huawei\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+        "-I",
+        "-B",
+        "C:\\Users\\Huawei\\AppData\\Local\\Temp\\mxr-prefill-three-arm-owned-new24h-092\\owned_cpu092.py",
+        "--help"
+      ],
+      "exit": 0,
+      "stderr": "",
+      "stdout": "usage: owned_cpu092.py [-h] [--execute] [--source-audit]\n                       [--source-ref SOURCE_REF] [--host-cpu HOST_CPU]\n                       [--guest-cpu GUEST_CPU] [--output OUTPUT]\n                       [--stage-ref STAGE_REF]\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --execute\n  --source-audit\n  --source-ref SOURCE_REF\n  --host-cpu HOST_CPU\n  --guest-cpu GUEST_CPU\n  --output OUTPUT\n  --stage-ref STAGE_REF\n"
+    }
+  ],
+  "unchanged_guard_functions": [
+    "snapshot",
+    "tree_order",
+    "classify",
+    "need"
+  ]
+}

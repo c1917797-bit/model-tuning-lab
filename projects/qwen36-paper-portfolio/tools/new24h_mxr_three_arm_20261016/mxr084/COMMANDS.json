@@ -1,0 +1,54 @@
+{
+  "CPU_consume": [
+    "/usr/local/python3.12.13/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/consume.py",
+    "--execute",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/SOURCE_MANIFEST.json\",\"bytes\":4798,\"sha256\":\"404397263ea740681fbb3b87d075e313d9027ed0fb43fb6c3f573d2d439be5b1\"}",
+    "--stage-ref",
+    "<EXACT_ACTUAL_STAGE_REF_JSON>",
+    "--output",
+    "<MAIN_EXCLUSIVE_CPU_LEAF>/ATTRIBUTION.json"
+  ],
+  "CPU_preflight": [
+    "/usr/local/python3.12.13/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/guest_core.py",
+    "--cpu-preflight",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/SOURCE_MANIFEST.json\",\"bytes\":4798,\"sha256\":\"404397263ea740681fbb3b87d075e313d9027ed0fb43fb6c3f573d2d439be5b1\"}",
+    "--output",
+    "<MAIN_EXCLUSIVE_CPU_LEAF>/result"
+  ],
+  "NPU_guest": [
+    "/usr/local/python3.12.13/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/guest_core.py",
+    "--execute",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/SOURCE_MANIFEST.json\",\"bytes\":4798,\"sha256\":\"404397263ea740681fbb3b87d075e313d9027ed0fb43fb6c3f573d2d439be5b1\"}",
+    "--plan-ref",
+    "<EXACT_MAIN_PLAN_REF_JSON>",
+    "--output",
+    "<MAIN_EXCLUSIVE_NPU_LEAF>/result"
+  ],
+  "owner_adapter_pending": true,
+  "source": {
+    "bytes": 4798,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/SOURCE_MANIFEST.json",
+    "sha256": "404397263ea740681fbb3b87d075e313d9027ed0fb43fb6c3f573d2d439be5b1"
+  },
+  "source_audit": [
+    "/usr/local/python3.12.13/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/guest_core.py",
+    "--source-audit",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/SOURCE_MANIFEST.json\",\"bytes\":4798,\"sha256\":\"404397263ea740681fbb3b87d075e313d9027ed0fb43fb6c3f573d2d439be5b1\"}"
+  ]
+}

@@ -1,0 +1,456 @@
+{
+  "schema": "ascend.source-archive-map/v1",
+  "scope": "byte-exact reviewed diagnostic sources; original absolute runtime source Refs retained; not standalone qualification",
+  "files": [
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/guest_core.py",
+        "bytes": 16775,
+        "sha256": "461b5b3e03c1f1fb359839a069ffe2aa64f5e1b33556e210b5f9845dd9612c81"
+      },
+      "relative": "mxr084/guest_core.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/mxr084/guest_core.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/consume.py",
+        "bytes": 4878,
+        "sha256": "bcd16384130123bd36fc9636f386545743b5552b03a712f97253bb0cc7e777fc"
+      },
+      "relative": "mxr084/consume.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/mxr084/consume.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/test_contract.py",
+        "bytes": 2773,
+        "sha256": "145ae97b62af4b8a0457a7a078f5473245afcfec741f70267ff92df772f3dea3"
+      },
+      "relative": "mxr084/test_contract.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/mxr084/test_contract.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/HANDOFF.md",
+        "bytes": 5226,
+        "sha256": "f54f2a2b647db986d55970857433f0226810761c63e06f99bbae6b73592847e6"
+      },
+      "relative": "mxr084/HANDOFF.md",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/mxr084/HANDOFF.md"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/inputs/RAW.STORAGE.json",
+        "bytes": 5944,
+        "sha256": "2a205cdeaacfb75051838167ed0f743d76efb77e82363293e68ac261c9368c73"
+      },
+      "relative": "mxr084/inputs/RAW.STORAGE.json",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/mxr084/inputs/RAW.STORAGE.json"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/SOURCE_MANIFEST.json",
+        "bytes": 4798,
+        "sha256": "404397263ea740681fbb3b87d075e313d9027ed0fb43fb6c3f573d2d439be5b1"
+      },
+      "relative": "mxr084/SOURCE_MANIFEST.json",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/mxr084/SOURCE_MANIFEST.json"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/COMMANDS.json",
+        "bytes": 2410,
+        "sha256": "f2257ce35b9fc11e46041c14ace004715db1fcb2763791f00904aa6c9360cf32"
+      },
+      "relative": "mxr084/COMMANDS.json",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/mxr084/COMMANDS.json"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-086/owner086.py",
+        "bytes": 15915,
+        "sha256": "b0a35fa629c130618314b9504b25d666eff1707494ba5109177069284ad984a5"
+      },
+      "relative": "owner086/owner086.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner086/owner086.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-086/owned_cpu086.py",
+        "bytes": 15341,
+        "sha256": "1799faa48ac6843440da2d7475989dd0305be19a31ca96335e63fe70301e5e6e"
+      },
+      "relative": "owner086/owned_cpu086.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner086/owned_cpu086.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-086/test_owner086.py",
+        "bytes": 6064,
+        "sha256": "66473c00415bdfb8032960688e01d9851a07c55539542296f066efe84e17f5eb"
+      },
+      "relative": "owner086/test_owner086.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner086/test_owner086.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-086/HANDOFF.md",
+        "bytes": 4494,
+        "sha256": "80c2c20f2981f10f68d90d9ad2ee5fbdc39086f4c4ea1bdda952da95e8d372df"
+      },
+      "relative": "owner086/HANDOFF.md",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner086/HANDOFF.md"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-086/DONOR_DIFF.patch",
+        "bytes": 31697,
+        "sha256": "d002c2b72a819b0f6e7d4b07750cdf755b294dab92cafd897cd8a184692ff204"
+      },
+      "relative": "owner086/DONOR_DIFF.patch",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner086/DONOR_DIFF.patch"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-086/SOURCE_MANIFEST.json",
+        "bytes": 4577,
+        "sha256": "4e538895161fed511db843d4acc873204117163c04a3e0a881cc585c16781dc0"
+      },
+      "relative": "owner086/SOURCE_MANIFEST.json",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner086/SOURCE_MANIFEST.json"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-086/COMMANDS.json",
+        "bytes": 4152,
+        "sha256": "d413dc0e6ccc4884a4443927d3c1c95491ba42013e12258273caa31aee252073"
+      },
+      "relative": "owner086/COMMANDS.json",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner086/COMMANDS.json"
+    },
+    {
+      "source": {
+        "bytes": 15936,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/owner092.py",
+        "sha256": "dfae0e99d3c7109b8fc0f8fdbc0640b8f5f969bed8934f0de4408e133d1b596f"
+      },
+      "relative": "owner092/owner092.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner092/owner092.py"
+    },
+    {
+      "source": {
+        "bytes": 15604,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/owned_cpu092.py",
+        "sha256": "7597922b238e386ef4915b128437b22fcb3f00b442829c3788e0aba6928b5ccf"
+      },
+      "relative": "owner092/owned_cpu092.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner092/owned_cpu092.py"
+    },
+    {
+      "source": {
+        "bytes": 7775,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/top_guard092.py",
+        "sha256": "04ef8acc591f52363947c605f6faa2a0bce4d16492a0e907db8719fc322764dd"
+      },
+      "relative": "owner092/top_guard092.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner092/top_guard092.py"
+    },
+    {
+      "source": {
+        "bytes": 4217,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/test_guard092.py",
+        "sha256": "fb536d16a2aaaadee19c0180164b5773458e38b1723e0857b2072342a11b1e01"
+      },
+      "relative": "owner092/test_guard092.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner092/test_guard092.py"
+    },
+    {
+      "source": {
+        "bytes": 6064,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/test_owner092.py",
+        "sha256": "ab0ac2c6b718afece350af8f96d06334d97edfb3c48da6d0d03bac514822f0e3"
+      },
+      "relative": "owner092/test_owner092.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner092/test_owner092.py"
+    },
+    {
+      "source": {
+        "bytes": 2702,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/cpu_entry092.py",
+        "sha256": "42261466d696f622c81b018102a50e4930a0e21e234e9f410c4a4d40fcb59e22"
+      },
+      "relative": "owner092/cpu_entry092.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner092/cpu_entry092.py"
+    },
+    {
+      "source": {
+        "bytes": 2253,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/HANDOFF.md",
+        "sha256": "ab56561b12b529f172fbe9e5c911ce536840e6e06f9278695b0ccad866928a82"
+      },
+      "relative": "owner092/HANDOFF.md",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner092/HANDOFF.md"
+    },
+    {
+      "source": {
+        "bytes": 6012,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/CHANGES.diff",
+        "sha256": "dc15e2bdf38ec6f1638695165c5459e82b4e9036cc2ac5d4f7daba3d9caa3f08"
+      },
+      "relative": "owner092/CHANGES.diff",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner092/CHANGES.diff"
+    },
+    {
+      "source": {
+        "bytes": 5129,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/LOCAL_SOFTWARE.json",
+        "sha256": "37b3605437d0192f61ac3f5ad827f5a9bc7d124906f6a6a80eaa915f340d2ab7"
+      },
+      "relative": "owner092/LOCAL_SOFTWARE.json",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner092/LOCAL_SOFTWARE.json"
+    },
+    {
+      "source": {
+        "bytes": 1515,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/evidence/FIRST_TRANSITION.json",
+        "sha256": "8fc4b0c669142e7ec5203674b8471ff2e4b18ff59c27379db1510d28d9326cb9"
+      },
+      "relative": "owner092/evidence/FIRST_TRANSITION.json",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner092/evidence/FIRST_TRANSITION.json"
+    },
+    {
+      "source": {
+        "bytes": 52153,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/evidence/ACTUAL_PROTECTED_OWNERSHIP.json",
+        "sha256": "da0d9827ac5a47c5e86a9c1d75e4d815c2c652e537f57e7fa05eaee284366f0d"
+      },
+      "relative": "owner092/evidence/ACTUAL_PROTECTED_OWNERSHIP.json",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner092/evidence/ACTUAL_PROTECTED_OWNERSHIP.json"
+    },
+    {
+      "source": {
+        "bytes": 7056,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/SOURCE_MANIFEST.json",
+        "sha256": "33db2dd0d97c4882d39b024d5a616540e86ada2745b4249880a2eff36233b40f"
+      },
+      "relative": "owner092/SOURCE_MANIFEST.json",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner092/SOURCE_MANIFEST.json"
+    },
+    {
+      "source": {
+        "bytes": 4164,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/COMMANDS.json",
+        "sha256": "65dbc5a9fd075d41ae658922b458233966b3b534aa2d6bc6301705f0aba298d3"
+      },
+      "relative": "owner092/COMMANDS.json",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/owner092/COMMANDS.json"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/COMMANDS090.json",
+        "bytes": 1573,
+        "sha256": "27449497ea80b2123151e7022f71d064e78471ddb88d631c889cc301df489051"
+      },
+      "relative": "dense090-repair2/COMMANDS090.json",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/COMMANDS090.json"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/HANDOFF090.md",
+        "bytes": 4220,
+        "sha256": "9253b4d4c82c6a0257355f3d9093febbfa5dfc0dc267882d751a2f20bd33b872"
+      },
+      "relative": "dense090-repair2/HANDOFF090.md",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/HANDOFF090.md"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/SOURCE_MANIFEST.json",
+        "bytes": 8074,
+        "sha256": "71dd76627a4eaabf87bc33c2165f7e94a48725a2aa4bdcd7c2b928ac05e53bfc"
+      },
+      "relative": "dense090-repair2/SOURCE_MANIFEST.json",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/SOURCE_MANIFEST.json"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/cap48_provider.py",
+        "bytes": 2056,
+        "sha256": "0f7ea41e49bf0a0cdd4ed9d255e5b5b900471e66af4180f34d5c07aa5edc19a2"
+      },
+      "relative": "dense090-repair2/cap48_provider.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/cap48_provider.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/client090.py",
+        "bytes": 3313,
+        "sha256": "154d445a6da7bf30c39f4bf4afb45107517a7aa28400172eb081f361b7256113"
+      },
+      "relative": "dense090-repair2/client090.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/client090.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/consume090.py",
+        "bytes": 4941,
+        "sha256": "a479b174217888ec917a356f7feb9a3f787a606c4aa6cc5d2a85a7b7d32b6fce"
+      },
+      "relative": "dense090-repair2/consume090.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/consume090.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/contract090.py",
+        "bytes": 3045,
+        "sha256": "b81f9ba74c214afe14061560704e36fd925e8e22d62e3122c914bc998a4e35d4"
+      },
+      "relative": "dense090-repair2/contract090.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/contract090.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/dense_opportunity090-0.0.1.dist-info/METADATA",
+        "bytes": 64,
+        "sha256": "d5c6e21fba0d2b10debc99cfe31476e9011db280182ec25999c7e02329b9aa17"
+      },
+      "relative": "dense090-repair2/dense_opportunity090-0.0.1.dist-info/METADATA",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/dense_opportunity090-0.0.1.dist-info/METADATA"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/dense_opportunity090-0.0.1.dist-info/entry_points.txt",
+        "bytes": 76,
+        "sha256": "c1c6c21cdbf0979d1a4df4b241169b5238bb96e90dc034b34c7b7ab784870495"
+      },
+      "relative": "dense090-repair2/dense_opportunity090-0.0.1.dist-info/entry_points.txt",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/dense_opportunity090-0.0.1.dist-info/entry_points.txt"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/dense_opportunity090/__init__.py",
+        "bytes": 83,
+        "sha256": "2ffb6c54db98773cc5e866d739c6e235c08927774d6d3f2bc14b6c9eedd375a3"
+      },
+      "relative": "dense090-repair2/dense_opportunity090/__init__.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/dense_opportunity090/__init__.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/dependencies/original005_server_entry.py",
+        "bytes": 2379,
+        "sha256": "ac0931cb9f17a93ae923c7cbfd1a92e757d376a417c1ed910b134f984216d080"
+      },
+      "relative": "dense090-repair2/dependencies/original005_server_entry.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/dependencies/original005_server_entry.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/external025.py",
+        "bytes": 5199,
+        "sha256": "9c0431b414ba2554a7a868d0b7c82526e62dc9068a89d9d2f3b05d0ca19e7e0c"
+      },
+      "relative": "dense090-repair2/external025.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/external025.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/guest_canary.py",
+        "bytes": 945,
+        "sha256": "4d19f8a4782a112a0300228e950715175cd4274fe0324af58258e00db2c72114"
+      },
+      "relative": "dense090-repair2/guest_canary.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/guest_canary.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/host090.py",
+        "bytes": 7483,
+        "sha256": "14353f5a7b101dedbd31f614f0a88895b396ad88000a333334ecde74478f2d15"
+      },
+      "relative": "dense090-repair2/host090.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/host090.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/native_receipt090.py",
+        "bytes": 3171,
+        "sha256": "6c450ecb8bb47610361e163d51ae6028ea61e359a5a581bee3cfb87770fb760f"
+      },
+      "relative": "dense090-repair2/native_receipt090.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/native_receipt090.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/owned_create.py",
+        "bytes": 2122,
+        "sha256": "f6df587ee2913a62b7f70193d57896381f713f6c039151b4db3f16c4baafa7f6"
+      },
+      "relative": "dense090-repair2/owned_create.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/owned_create.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/owned_substrate.py",
+        "bytes": 3234,
+        "sha256": "88ecf97d83f5027a00ce23a429d57a0abc84b12ef25e89969a13d935ed46d6b2"
+      },
+      "relative": "dense090-repair2/owned_substrate.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/owned_substrate.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/preflight090.py",
+        "bytes": 1652,
+        "sha256": "2f138fc64d4d9b894dc4f2563fc2ec0880e977bb7d262673e67c441d076dd4f0"
+      },
+      "relative": "dense090-repair2/preflight090.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/preflight090.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/seal090.py",
+        "bytes": 3167,
+        "sha256": "0701616cedd205874a0317325f1489ad5676d8fbd68b7d2b2ae188157478ab5b"
+      },
+      "relative": "dense090-repair2/seal090.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/seal090.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/server090.py",
+        "bytes": 1363,
+        "sha256": "b0b4acba8f6173c6a282ea9f2f894c319bf7a1b7440b2cd69e6197fa4e69fa69"
+      },
+      "relative": "dense090-repair2/server090.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/server090.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/snapshot_publication.py",
+        "bytes": 997,
+        "sha256": "0a137ab0a12a97854054233c2958407bb1df8afea9e6c397b281be37d388656d"
+      },
+      "relative": "dense090-repair2/snapshot_publication.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/snapshot_publication.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/test_090.py",
+        "bytes": 3972,
+        "sha256": "dda646cf6d30a7ca2c091f182ffd99c95d5e1b049b34ab438dcf116781789b30"
+      },
+      "relative": "dense090-repair2/test_090.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/test_090.py"
+    },
+    {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/worker_snapshot_owner.py",
+        "bytes": 2299,
+        "sha256": "bc0894c9aded1994dc0cf796537fd707d04d1c69174df5aa2d76cc90b1602bd2"
+      },
+      "relative": "dense090-repair2/worker_snapshot_owner.py",
+      "destination": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_mxr_three_arm_20261016/dense090-repair2/worker_snapshot_owner.py"
+    }
+  ]
+}

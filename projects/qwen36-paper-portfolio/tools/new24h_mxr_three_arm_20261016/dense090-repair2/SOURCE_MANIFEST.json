@@ -1,0 +1,174 @@
+{
+  "READY": false,
+  "actual_executed": false,
+  "authority_ref": {
+    "bytes": 3481,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "candidate_qualification": false,
+  "common": {
+    "HF32": false,
+    "async_scheduling": false,
+    "eager": true,
+    "mamba_cache_mode": "none",
+    "prefix_cache": false,
+    "profiling": false
+  },
+  "concurrency": 1,
+  "default_enabled": false,
+  "dependencies": [
+    {
+      "bytes": 3481,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+      "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+    },
+    {
+      "bytes": 49810,
+      "path": "/cache/cch/hypic_vllm_ascend-v0.8.5/tools/benchmark_shared_prefix.py",
+      "sha256": "cba2b1b463a1e436c818722d92147d93f8396b8d64f8da6582d7e67d2cb45822"
+    },
+    {
+      "bytes": 13660,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/model_contract.py",
+      "sha256": "82243c277890aef7c24ea5eb5fbfa0658b314a39c01d7b2a7ddf34b2bf363e9f"
+    },
+    {
+      "bytes": 22338,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/safety_host.py",
+      "sha256": "20bda52a1c3fbc75db47104cbd4759faf91da1f39032d4730160983f7b9c0c30"
+    },
+    {
+      "bytes": 18170,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/host_once.py",
+      "sha256": "36844e41895b95e810b54ecae32994a96b21258ae8ad8d88fccaac19f035cf8c"
+    }
+  ],
+  "files": {
+    "HANDOFF090.md": {
+      "bytes": 4220,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/HANDOFF090.md",
+      "sha256": "9253b4d4c82c6a0257355f3d9093febbfa5dfc0dc267882d751a2f20bd33b872"
+    },
+    "cap48_provider.py": {
+      "bytes": 2056,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/cap48_provider.py",
+      "sha256": "0f7ea41e49bf0a0cdd4ed9d255e5b5b900471e66af4180f34d5c07aa5edc19a2"
+    },
+    "client090.py": {
+      "bytes": 3313,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/client090.py",
+      "sha256": "154d445a6da7bf30c39f4bf4afb45107517a7aa28400172eb081f361b7256113"
+    },
+    "consume090.py": {
+      "bytes": 4941,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/consume090.py",
+      "sha256": "a479b174217888ec917a356f7feb9a3f787a606c4aa6cc5d2a85a7b7d32b6fce"
+    },
+    "contract090.py": {
+      "bytes": 3045,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/contract090.py",
+      "sha256": "b81f9ba74c214afe14061560704e36fd925e8e22d62e3122c914bc998a4e35d4"
+    },
+    "dense_opportunity090-0.0.1.dist-info/METADATA": {
+      "bytes": 64,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/dense_opportunity090-0.0.1.dist-info/METADATA",
+      "sha256": "d5c6e21fba0d2b10debc99cfe31476e9011db280182ec25999c7e02329b9aa17"
+    },
+    "dense_opportunity090-0.0.1.dist-info/entry_points.txt": {
+      "bytes": 76,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/dense_opportunity090-0.0.1.dist-info/entry_points.txt",
+      "sha256": "c1c6c21cdbf0979d1a4df4b241169b5238bb96e90dc034b34c7b7ab784870495"
+    },
+    "dense_opportunity090/__init__.py": {
+      "bytes": 83,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/dense_opportunity090/__init__.py",
+      "sha256": "2ffb6c54db98773cc5e866d739c6e235c08927774d6d3f2bc14b6c9eedd375a3"
+    },
+    "dependencies/original005_server_entry.py": {
+      "bytes": 2379,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/dependencies/original005_server_entry.py",
+      "sha256": "ac0931cb9f17a93ae923c7cbfd1a92e757d376a417c1ed910b134f984216d080"
+    },
+    "external025.py": {
+      "bytes": 5199,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/external025.py",
+      "sha256": "9c0431b414ba2554a7a868d0b7c82526e62dc9068a89d9d2f3b05d0ca19e7e0c"
+    },
+    "guest_canary.py": {
+      "bytes": 945,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/guest_canary.py",
+      "sha256": "4d19f8a4782a112a0300228e950715175cd4274fe0324af58258e00db2c72114"
+    },
+    "host090.py": {
+      "bytes": 7483,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/host090.py",
+      "sha256": "14353f5a7b101dedbd31f614f0a88895b396ad88000a333334ecde74478f2d15"
+    },
+    "native_receipt090.py": {
+      "bytes": 3171,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/native_receipt090.py",
+      "sha256": "6c450ecb8bb47610361e163d51ae6028ea61e359a5a581bee3cfb87770fb760f"
+    },
+    "owned_create.py": {
+      "bytes": 2122,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/owned_create.py",
+      "sha256": "f6df587ee2913a62b7f70193d57896381f713f6c039151b4db3f16c4baafa7f6"
+    },
+    "owned_substrate.py": {
+      "bytes": 3234,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/owned_substrate.py",
+      "sha256": "88ecf97d83f5027a00ce23a429d57a0abc84b12ef25e89969a13d935ed46d6b2"
+    },
+    "preflight090.py": {
+      "bytes": 1652,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/preflight090.py",
+      "sha256": "2f138fc64d4d9b894dc4f2563fc2ec0880e977bb7d262673e67c441d076dd4f0"
+    },
+    "seal090.py": {
+      "bytes": 3167,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/seal090.py",
+      "sha256": "0701616cedd205874a0317325f1489ad5676d8fbd68b7d2b2ae188157478ab5b"
+    },
+    "server090.py": {
+      "bytes": 1363,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/server090.py",
+      "sha256": "b0b4acba8f6173c6a282ea9f2f894c319bf7a1b7440b2cd69e6197fa4e69fa69"
+    },
+    "snapshot_publication.py": {
+      "bytes": 997,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/snapshot_publication.py",
+      "sha256": "0a137ab0a12a97854054233c2958407bb1df8afea9e6c397b281be37d388656d"
+    },
+    "test_090.py": {
+      "bytes": 3972,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/test_090.py",
+      "sha256": "dda646cf6d30a7ca2c091f182ffd99c95d5e1b049b34ab438dcf116781789b30"
+    },
+    "worker_snapshot_owner.py": {
+      "bytes": 2299,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/worker_snapshot_owner.py",
+      "sha256": "bc0894c9aded1994dc0cf796537fd707d04d1c69174df5aa2d76cc90b1602bd2"
+    }
+  },
+  "measured_requests": 1,
+  "output_tokens": 1024,
+  "profiles": [
+    2048,
+    16384
+  ],
+  "resources": {
+    "Docker_reserve_GiB": 8.5,
+    "RAMreserve_GiB": 8,
+    "guest_CPU_GiB": 8,
+    "guest_model_GiB": 48,
+    "host_GiB": 0.5,
+    "initial_RAM_GiB": 56.5,
+    "opt_initial_GiB": 40.5,
+    "shared_cleanup_seconds": 180,
+    "whole_seconds": 3600
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2",
+  "schema": "dense.e2e-opportunity-source/v090",
+  "warmup_requests": 1
+}

@@ -1,0 +1,97 @@
+{
+  "MAIN_only": true,
+  "commands": {
+    "NPU_execute": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/owner092.py",
+      "--execute",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/SOURCE_MANIFEST.json\",\"bytes\":7056,\"sha256\":\"33db2dd0d97c4882d39b024d5a616540e86ada2745b4249880a2eff36233b40f\"}",
+      "--host-cpu",
+      "<HOST_CPU>",
+      "--guest-cpu",
+      "<GUEST_CPU>",
+      "--output",
+      "/opt/host/vnf/austinov/run-mxr-prefill084-092-npu-MAIN-20261016-001"
+    ],
+    "NPU_source_audit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/owner092.py",
+      "--source-audit",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/SOURCE_MANIFEST.json\",\"bytes\":7056,\"sha256\":\"33db2dd0d97c4882d39b024d5a616540e86ada2745b4249880a2eff36233b40f\"}"
+    ],
+    "consume_execute": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/owned_cpu092.py",
+      "--execute",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/SOURCE_MANIFEST.json\",\"bytes\":7056,\"sha256\":\"33db2dd0d97c4882d39b024d5a616540e86ada2745b4249880a2eff36233b40f\"}",
+      "--stage-ref",
+      "<EXACT_ACTUAL_084_STAGE_REF_JSON>",
+      "--host-cpu",
+      "<HOST_CPU>",
+      "--guest-cpu",
+      "<GUEST_CPU>",
+      "--output",
+      "/opt/host/vnf/austinov/run-mxr-prefill084-092-consume-MAIN-20261016-001"
+    ],
+    "consume_source_audit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/owned_cpu092.py",
+      "--source-audit",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/SOURCE_MANIFEST.json\",\"bytes\":7056,\"sha256\":\"33db2dd0d97c4882d39b024d5a616540e86ada2745b4249880a2eff36233b40f\"}",
+      "--stage-ref",
+      "<EXACT_ACTUAL_084_STAGE_REF_JSON>"
+    ],
+    "preflight_execute": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/owned_cpu092.py",
+      "--execute",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/SOURCE_MANIFEST.json\",\"bytes\":7056,\"sha256\":\"33db2dd0d97c4882d39b024d5a616540e86ada2745b4249880a2eff36233b40f\"}",
+      "--host-cpu",
+      "<HOST_CPU>",
+      "--guest-cpu",
+      "<GUEST_CPU>",
+      "--output",
+      "/opt/host/vnf/austinov/run-mxr-prefill084-092-preflight-MAIN-20261016-001"
+    ],
+    "preflight_source_audit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/owned_cpu092.py",
+      "--source-audit",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/SOURCE_MANIFEST.json\",\"bytes\":7056,\"sha256\":\"33db2dd0d97c4882d39b024d5a616540e86ada2745b4249880a2eff36233b40f\"}"
+    ]
+  },
+  "guest_source": {
+    "bytes": 4798,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/SOURCE_MANIFEST.json",
+    "sha256": "404397263ea740681fbb3b87d075e313d9027ed0fb43fb6c3f573d2d439be5b1"
+  },
+  "qualified": false,
+  "sequence": [
+    "preflight",
+    "NPU",
+    "consume"
+  ],
+  "source": {
+    "bytes": 7056,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/SOURCE_MANIFEST.json",
+    "sha256": "33db2dd0d97c4882d39b024d5a616540e86ada2745b4249880a2eff36233b40f"
+  }
+}

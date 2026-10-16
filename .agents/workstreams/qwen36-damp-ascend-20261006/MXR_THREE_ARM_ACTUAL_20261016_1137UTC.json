@@ -1,0 +1,335 @@
+{
+  "schema": "ascend.mxr-three-arm-checkpoint/v1",
+  "observed_utc": "2026-10-16T11:37:25Z",
+  "authority": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+  "old_R6_failure_retained": true,
+  "old086_observer_failure_retained": true,
+  "NPU092": {
+    "operation": "exec-0000000000000b13",
+    "exit": 0,
+    "source": {
+      "bytes": 7056,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/SOURCE_MANIFEST.json",
+      "sha256": "33db2dd0d97c4882d39b024d5a616540e86ada2745b4249880a2eff36233b40f"
+    },
+    "artifacts": [
+      {
+        "ref": {
+          "path": "/opt/host/vnf/austinov/run-mxr-prefill084-092-npu-MAIN-20261016-001/RESULT.json",
+          "bytes": 1699,
+          "sha256": "5c654ef615b3fef8b5a883a4c79ce6f22ff2d45119504631d2625a4d453462db"
+        },
+        "value": {
+          "NPU": true,
+          "NPU_requested": true,
+          "authority": {
+            "bytes": 3481,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+            "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+          },
+          "elapsed": 87.98374143999536,
+          "guest_source": {
+            "bytes": 4798,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/SOURCE_MANIFEST.json",
+            "sha256": "404397263ea740681fbb3b87d075e313d9027ed0fb43fb6c3f573d2d439be5b1"
+          },
+          "logical": 0,
+          "old_failures_unchanged": true,
+          "physical": [
+            5
+          ],
+          "primary": null,
+          "qualified": false,
+          "raw": {
+            "bytes": 32140793,
+            "path": "/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair6-main-NEW24H_MXR073R6_001/candidate/model/capture/worker-425/raw/frame-000/RAW.pt",
+            "sha256": "394b22b1a1f511f0402446e9d45ba27268d2c0f7c263f12986d87d7fdc83e89b"
+          },
+          "result": {
+            "bytes": 2138,
+            "path": "/opt/host/vnf/austinov/run-mxr-prefill084-092-npu-MAIN-20261016-001/numeric/result/STAGE_RESULT.json",
+            "sha256": "264f47e595de8ba71150a30a44ed9cf40e53b840ee5f36f46cf0e95d2535cc41"
+          },
+          "retained_source": {
+            "bytes": 111072,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/SOURCE_MANIFEST.json",
+            "sha256": "8d0608cd3fe3814359fc8141a39afe4b14baa77290d20fd8e57e73bcab4799ab"
+          },
+          "schema": "mxr.prefill-three-arm-owned/v092",
+          "secondary": [],
+          "source": {
+            "bytes": 7056,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/SOURCE_MANIFEST.json",
+            "sha256": "33db2dd0d97c4882d39b024d5a616540e86ada2745b4249880a2eff36233b40f"
+          },
+          "stopped_retained": true,
+          "used_bytes": 150114018
+        }
+      },
+      {
+        "ref": {
+          "path": "/opt/host/vnf/austinov/run-mxr-prefill084-092-npu-MAIN-20261016-001/numeric/result/STAGE_RESULT.json",
+          "bytes": 2138,
+          "sha256": "264f47e595de8ba71150a30a44ed9cf40e53b840ee5f36f46cf0e95d2535cc41"
+        },
+        "value": {
+          "NPU": true,
+          "authority": {
+            "bytes": 3481,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+            "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+          },
+          "elapsed": 76.06154199998127,
+          "old_failures_unchanged": true,
+          "plan": {
+            "bytes": 581,
+            "path": "/opt/host/vnf/austinov/run-mxr-prefill084-092-npu-MAIN-20261016-001/numeric/PLAN.json",
+            "sha256": "a522b4cf4084438670ab6f3ba813c26c12f1ec6ac49e8b4309cf4d6da272d876"
+          },
+          "primary": null,
+          "qualified": false,
+          "raw": {
+            "bytes": 32140793,
+            "path": "/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair6-main-NEW24H_MXR073R6_001/candidate/model/capture/worker-425/raw/frame-000/RAW.pt",
+            "sha256": "394b22b1a1f511f0402446e9d45ba27268d2c0f7c263f12986d87d7fdc83e89b"
+          },
+          "result": {
+            "API_observed": [
+              "A32",
+              "G32",
+              "B_BF16",
+              "W_BF16",
+              "U_BF16",
+              "Hentry_BF16_all32",
+              "Vnew_BF16",
+              "Hend_final_FP32"
+            ],
+            "candidate_anchor_bitwise": true,
+            "intermediate_Hend_FP32_API_available": false,
+            "intermediate_Hnext_BF16_observed": true,
+            "raw_bytes": 146585551,
+            "rows": [
+              {
+                "arm": "saved_candidate",
+                "raw": {
+                  "bytes": 48861509,
+                  "path": "/opt/host/vnf/austinov/run-mxr-prefill084-092-npu-MAIN-20261016-001/numeric/result/saved_candidate.pt",
+                  "sha256": "297bad21c0ad1947f622dc3082bc5eedc0387b9101dab54091737f2359667125"
+                }
+              },
+              {
+                "arm": "native",
+                "raw": {
+                  "bytes": 48861509,
+                  "path": "/opt/host/vnf/austinov/run-mxr-prefill084-092-npu-MAIN-20261016-001/numeric/result/native.pt",
+                  "sha256": "83dace8cc426577448706f8011ed3c715b79d7fc8a4e5826febd19d5e785fd08"
+                }
+              },
+              {
+                "arm": "cpu64_cast",
+                "raw": {
+                  "bytes": 48862533,
+                  "path": "/opt/host/vnf/austinov/run-mxr-prefill084-092-npu-MAIN-20261016-001/numeric/result/cpu64_cast.pt",
+                  "sha256": "d6202749a7bc9ee2543fe703a39a597f890b2fc84b1fdcb9494255c255b36d60"
+                }
+              }
+            ],
+            "same_actual_A_G": true,
+            "whole_correctness_qualified": false
+          },
+          "schema": "mxr.prefill-three-arm-stage/v084",
+          "source": {
+            "bytes": 4798,
+            "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/SOURCE_MANIFEST.json",
+            "sha256": "404397263ea740681fbb3b87d075e313d9027ed0fb43fb6c3f573d2d439be5b1"
+          }
+        }
+      },
+      {
+        "missing": "/opt/host/vnf/austinov/run-mxr-prefill084-092-npu-MAIN-20261016-001/numeric/cleanup.json"
+      },
+      {
+        "independent_release": true,
+        "cid": "ae5dc6fd49aade3f68a32c3478a6d149efa9202333907496aae4824ecaffe58d",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-16T11:27:08.0851749Z",
+          "FinishedAt": "2026-10-16T11:28:30.31248944Z"
+        },
+        "devices": [
+          {
+            "PathOnHost": "/dev/davinci5",
+            "PathInContainer": "/dev/davinci0",
+            "CgroupPermissions": "rwm"
+          },
+          {
+            "PathOnHost": "/dev/davinci_manager",
+            "PathInContainer": "/dev/davinci_manager",
+            "CgroupPermissions": "rwm"
+          },
+          {
+            "PathOnHost": "/dev/devmm_svm",
+            "PathInContainer": "/dev/devmm_svm",
+            "CgroupPermissions": "rwm"
+          },
+          {
+            "PathOnHost": "/dev/hisi_hdc",
+            "PathInContainer": "/dev/hisi_hdc",
+            "CgroupPermissions": "rwm"
+          }
+        ]
+      }
+    ]
+  },
+  "CPU092": {
+    "operation": "exec-0000000000000b1a",
+    "exit": 0,
+    "attribution_ref": {
+      "path": "/opt/host/vnf/austinov/run-mxr-prefill084-092-consume-MAIN-20261016-001/ATTRIBUTION.json",
+      "bytes": 88298,
+      "sha256": "d0879e7d0906a4f6b45deed6f87c728997f7ffc577f48955b96e2467222c4227"
+    },
+    "independent_projection": {
+      "keys": [
+        "CPU64_inverse_residual",
+        "actual_A_only",
+        "candidate_anchor_bitwise",
+        "intermediate_Hend_FP32_API_available",
+        "old_failures_unchanged",
+        "pairs",
+        "performance",
+        "qualification",
+        "rows",
+        "schema",
+        "source",
+        "task"
+      ],
+      "summary": {
+        "actual_A_only": true,
+        "candidate_anchor_bitwise": true,
+        "intermediate_Hend_FP32_API_available": false,
+        "old_failures_unchanged": true,
+        "performance": false,
+        "qualification": false,
+        "rows": [
+          {
+            "arm": "saved_candidate",
+            "raw": {
+              "bytes": 48861509,
+              "path": "/opt/host/vnf/austinov/run-mxr-prefill084-092-npu-MAIN-20261016-001/numeric/result/saved_candidate.pt",
+              "sha256": "297bad21c0ad1947f622dc3082bc5eedc0387b9101dab54091737f2359667125"
+            }
+          },
+          {
+            "arm": "native",
+            "raw": {
+              "bytes": 48861509,
+              "path": "/opt/host/vnf/austinov/run-mxr-prefill084-092-npu-MAIN-20261016-001/numeric/result/native.pt",
+              "sha256": "83dace8cc426577448706f8011ed3c715b79d7fc8a4e5826febd19d5e785fd08"
+            }
+          },
+          {
+            "arm": "cpu64_cast",
+            "raw": {
+              "bytes": 48862533,
+              "path": "/opt/host/vnf/austinov/run-mxr-prefill084-092-npu-MAIN-20261016-001/numeric/result/cpu64_cast.pt",
+              "sha256": "d6202749a7bc9ee2543fe703a39a597f890b2fc84b1fdcb9494255c255b36d60"
+            }
+          }
+        ],
+        "schema": "mxr.prefill-three-arm-independent/v084",
+        "source": {
+          "bytes": 4798,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/SOURCE_MANIFEST.json",
+          "sha256": "404397263ea740681fbb3b87d075e313d9027ed0fb43fb6c3f573d2d439be5b1"
+        },
+        "task": false
+      },
+      "pairs": {
+        "native_vs_cpu64_cast": {
+          "final_state": {
+            "bitwise": false,
+            "changed_bytes": 25911,
+            "max_abs": 0.0008897930383682251,
+            "relative_l2": 0.000029498510855650152
+          },
+          "first_differing_chunk": {
+            "A": null,
+            "B": 0,
+            "G": null,
+            "Hentry": 1,
+            "U": 0,
+            "Vnew": 0,
+            "W": 0,
+            "output": 0
+          }
+        },
+        "saved_candidate_vs_cpu64_cast": {
+          "final_state": {
+            "bitwise": false,
+            "changed_bytes": 87450,
+            "max_abs": 0.11894416809082031,
+            "relative_l2": 0.0021101912368755573
+          },
+          "first_differing_chunk": {
+            "A": null,
+            "B": 0,
+            "G": null,
+            "Hentry": 1,
+            "U": 0,
+            "Vnew": 0,
+            "W": 0,
+            "output": 0
+          }
+        },
+        "saved_candidate_vs_native": {
+          "final_state": {
+            "bitwise": false,
+            "changed_bytes": 86708,
+            "max_abs": 0.11894416809082031,
+            "relative_l2": 0.00211012898911623
+          },
+          "first_differing_chunk": {
+            "A": null,
+            "B": 0,
+            "G": null,
+            "Hentry": 1,
+            "U": 0,
+            "Vnew": 0,
+            "W": 0,
+            "output": 0
+          }
+        }
+      }
+    }
+  },
+  "scope": "one actual failed layer0/rank0/2K frame only; not full-model numerical qualification",
+  "decision": "candidate B differs from native and CPU64cast and accumulates along shared WY/H path; targeted single extra FP32 correction diagnostic pending",
+  "CURRENT": {
+    "name": "native2K16Kfixed1024 opportunity",
+    "operation": "exec-0000000000000b27",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/dense-e2e-opportunity-new24h-v1-090-repair2/SOURCE_MANIFEST.json",
+      "bytes": 8074,
+      "sha256": "71dd76627a4eaabf87bc33c2165f7e94a48725a2aa4bdcd7c2b928ac05e53bfc"
+    },
+    "state": "running confirmed by actual operation poll; no performance result yet"
+  },
+  "NEXT": [
+    "097 one extra FP32 correction same actual frame, independent residual and BF16 readout",
+    "091 remaining three saved ranks CPU, serialized resources",
+    "088R1 DeltaLog same-initial eager plus mandatory mixed graph, requires093 quiescent storage closure"
+  ],
+  "new_accepted_technique": false,
+  "performance_gain_measured": false,
+  "task_accuracy": false,
+  "utilization_30minute_window": "unmeasured; no continuous authority for no-gap claim"
+}

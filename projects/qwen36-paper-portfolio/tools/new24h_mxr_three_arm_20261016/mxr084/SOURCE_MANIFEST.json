@@ -1,0 +1,106 @@
+{
+  "NPU_executed": false,
+  "arms": [
+    "saved_candidate",
+    "native",
+    "cpu64_cast"
+  ],
+  "authority_ref": {
+    "bytes": 3481,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "bootstrap_source": {
+    "bytes": 4589,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-counterfactual-new24h-v1-079/SOURCE_MANIFEST.json",
+    "sha256": "2e05b80a5453a4d49b27d860d31be6e8a49bc1293ea8fc57e9b0f61b515f4010"
+  },
+  "budgets": {
+    "CPU_seconds": 600,
+    "NPU_whole_seconds": 900,
+    "cleanup_seconds": 90,
+    "guest_bytes": 8589934592,
+    "guest_seconds": 600,
+    "host_bytes": 536870912,
+    "output_bytes": 1073741824,
+    "raw_bytes": 268435456,
+    "reserve_bytes": 8589934592
+  },
+  "candidate_anchor": "full original output/state bytes before other arms",
+  "common_precision": {
+    "bytes": 3862,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-block-refinement-new48h-v1-044/common_precision.py",
+    "sha256": "f2f090ebc9b6745cca97562ab07dff2df4b591577d0ecd6004f156e1ebd85326"
+  },
+  "default_enabled": false,
+  "files": {
+    "HANDOFF.md": {
+      "bytes": 5226,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/HANDOFF.md",
+      "sha256": "f54f2a2b647db986d55970857433f0226810761c63e06f99bbae6b73592847e6"
+    },
+    "consume.py": {
+      "bytes": 4878,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/consume.py",
+      "sha256": "bcd16384130123bd36fc9636f386545743b5552b03a712f97253bb0cc7e777fc"
+    },
+    "guest_core.py": {
+      "bytes": 16775,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/guest_core.py",
+      "sha256": "461b5b3e03c1f1fb359839a069ffe2aa64f5e1b33556e210b5f9845dd9612c81"
+    },
+    "inputs/RAW.STORAGE.json": {
+      "bytes": 5944,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/inputs/RAW.STORAGE.json",
+      "sha256": "2a205cdeaacfb75051838167ed0f743d76efb77e82363293e68ac261c9368c73"
+    },
+    "test_contract.py": {
+      "bytes": 2773,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084/test_contract.py",
+      "sha256": "145ae97b62af4b8a0457a7a078f5473245afcfec741f70267ff92df772f3dea3"
+    }
+  },
+  "frame_report_ref": {
+    "bytes": 551214,
+    "path": "/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair6-main-NEW24H_MXR073R6_001/cpu-consumer/rank-0/BRIDGE_RESULT.json",
+    "sha256": "05e92014d4576e16f37c0d1f3016c4885816cbe5e4cf9c0c7859604714714126"
+  },
+  "intermediate_Hend_FP32_API_available": false,
+  "native_H_layout_source": {
+    "bytes": 21210,
+    "path": "/cache/austinov/src/vllm-ascend/csrc/moe/chunk_gated_delta_rule_fwd_h/op_kernel/arch22/gemm/kernel/gdn_fwd_h_kernel.hpp",
+    "sha256": "83a07e6602e81822f8da2f47d4a25fce8beb5ffb5646f402ea6fd3c9d642463e"
+  },
+  "original_metrics": {
+    "bytes": 10097,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/consume_capture.py",
+    "sha256": "7c31e87b409ef095e5789a2bc1b71a987a69dc237789c125ad749a69fecec6c3"
+  },
+  "owner_adapter_ready": false,
+  "qualified": false,
+  "raw": {
+    "bytes": 32140793,
+    "path": "/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair6-main-NEW24H_MXR073R6_001/candidate/model/capture/worker-425/raw/frame-000/RAW.pt",
+    "sha256": "394b22b1a1f511f0402446e9d45ba27268d2c0f7c263f12986d87d7fdc83e89b"
+  },
+  "raw_sidecar": {
+    "bytes": 5944,
+    "path": "/opt/host/vnf/austinov/run-mxr-2k-memory32-model073repair6-main-NEW24H_MXR073R6_001/candidate/model/capture/worker-425/raw/frame-000/RAW.STORAGE.json",
+    "sha256": "2a205cdeaacfb75051838167ed0f743d76efb77e82363293e68ac261c9368c73"
+  },
+  "remaining": [
+    "MAIN081 thin source/plan/report/CPUreceiver adapter and independent source review",
+    "actual Devices[] mounted source/frame preflight",
+    "actual NPU anchored three-arm replay",
+    "actual Devices[] independent chain consumer"
+  ],
+  "repeats": 1,
+  "retained_model_source": {
+    "bytes": 111072,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-2k-memory32-model-new24h-v1-073-repair6/SOURCE_MANIFEST.json",
+    "sha256": "8d0608cd3fe3814359fc8141a39afe4b14baa77290d20fd8e57e73bcab4799ab"
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-new24h-v1-084",
+  "schema": "mxr.prefill-three-arm-source/v084",
+  "scope": "one saved actual2K rank0 layer0; actual normalized operands; no model reload"
+}

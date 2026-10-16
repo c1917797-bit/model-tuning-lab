@@ -207,3 +207,44 @@ exit0/Pid0/noExecIDs/noOOM. No protected0-3 workload was changed. This stage
 reused saved inputs and established causal device evidence without reloading the
 model or manufacturing occupancy. Exact references and next entries are in
 NUMERIC_BOUNDARY_CAUSAL_CHECKPOINT_20261016_1100UTC.json in the active workstream.
+
+
+## Actual three-arm MXR attribution and executable packet checks (11:37UTC)
+
+086 failed while observing its own compiler child535517. The first actual
+snapshot was present/R with stable parent/start, root-only cgroups, empty
+cmdline and zero virtual/RSS values; it was not a proved zombie or an external
+protected-card occupier.092 only adds an at-most2s, whole-deadline-clipped wait
+for that source-owned original-tree departure. Final two complete missing
+reads, fresh Docker-top absence and a last missing read remain mandatory.
+Foreign/unknown ownership, PID reuse, protected/bound/init identities and
+persistent presence still refuse. Same-image CPU controls and saved-frame
+extraction actually passed before the new NPU run.
+
+Actual092/084 physical5 three-arm execution completed in87.98s, preserving the
+old candidate output/state bitwise anchor. Independent Devices[] consumption
+finished successfully. All arms have identical actual A/G. On this real2K
+rank0/layer0 frame, candidate-versus-native final-state relative L2 is
+0.00211012898911623, while native-versus-CPU64cast is2.9498510855650152e-5.
+The actual B change precedes W/U and accumulated H-entry differences. This
+is evidence of a candidate readout/propagation issue, not solely an oracle
+false-negative. One frame is neither a complete correctness gate nor a paper
+rejection. Save X0/X1 and a single additional FP32 residual correction for a
+new discriminating experiment; do not blindly iterate or increase epsilon.
+The CPU64cast arm is an operational Torch cast, not a proved direct integer
+RNE theorem. Intermediate FP32 H-end is not exposed by the native API.
+
+Two source-preparation defects in dense090 were caught before NPU: Windows
+Path string serialization created a non-POSIX output, and Path division plus
+string addition raised TypeError in the actual client command builder. New
+R2 freezes Linux strings and tests both actual client builders as well as
+server/OFF/negative entry paths. MAIN deployment also initially dropped two
+trailing newlines in five copied source files. Preserve the failed SHA audit;
+restore byte-exact reviewed contents and rehash every payload before running.
+Transport success, helper tests and authored command lists are not readiness.
+
+Exact source recovery archive and actual terminal/attribution references:
+MXR_THREE_ARM_ACTUAL_20261016_1137UTC.json in the active workstream. Native-only
+2K/16K fixed1024 opportunity measurement is a separate pending diagnostic,
+not candidate performance or task acceptance. Continuous utilization remains
+unmeasured; do not claim four-card no-gap use from job snapshots.
