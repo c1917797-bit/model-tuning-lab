@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R18-partitioned-numerical-canary-running",
+  "execution_state": "R18-R2-repair919CPU-ready-not-started",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "Own R18 numerical Canary0dbe active; only physical0-3 TP4/8233; continuous isolation and exact cleanup. Do not edit166bound sources or restart whilelive."
+    "state": "No owned model job; exact R1 release independently verified0dce."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll exact ma0dbe/raw. Running or unclear never restart. Terminal audit_c1_partitioned_canary.py --contract C1_PARTITIONED_R18_CANARY_R1_CONTRACT.json --live-release. Require serial numerical shadows,each token/window once,allfour48C1/16C2,source/physical/isolation/exactrelease. No performance acceptance yet.",
+  "next_action": "Static169source/161runtime check and publish repairedcheckpoint; freshdirect/source/image/model/actual0-3/8233/newroot admission then only C1_PARTITIONED_R18_CANARY_R2_CONTRACT.json. R1 partition rejected, preserved immutable. No owneddevicejob. R2 has no device acceptance.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,14 +215,16 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "RUNNING exact controller",
+    "state": "TERMINAL_REJECTED_PARTITION_ACTIVATION",
     "operation": "exec-0000000000000dbe",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
     "contract": "C1_PARTITIONED_R18_CANARY_R1_CONTRACT.json",
     "raw_root": "/cache/cch/hypic-independent-20261013/c1-partitioned-r18-canary-r1",
     "checkpoint": "9cd46d68c85db03dfdb9cb2e4600d5521ce15292",
-    "admission_operation": "exec-0000000000000dbd"
+    "admission_operation": "exec-0000000000000dbd",
+    "partition_audit": "exec-0000000000000dcc",
+    "base_release_audit": "exec-0000000000000dce"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -363,12 +365,12 @@
     "decision_report": "R17_THREE_ARM_FIRST_SCREEN_20261016.json"
   },
   "r18_partitioned": {
-    "state": "HOST_ONLY_WIRED_DEFAULT_OFF",
-    "regression_operation": "exec-0000000000000db2",
-    "tests": 916,
+    "state": "R1_REJECTED_R2_HOST_READY",
+    "regression_operation": "exec-0000000000000dd0",
+    "tests": 919,
     "static_operation": "exec-0000000000000db5",
-    "contract": "C1_PARTITIONED_R18_CANARY_R1_CONTRACT.json",
+    "contract": "C1_PARTITIONED_R18_CANARY_R2_CONTRACT.json",
     "report": "C1_PARTITIONED_R18_WIRING_READINESS_20261016.json",
-    "device_started": true
+    "device_started": false
   }
 }

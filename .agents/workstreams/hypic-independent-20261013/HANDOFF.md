@@ -1,4 +1,26 @@
-# CURRENT R18 NUMERICAL CANARY LIVE; NO TERMINAL
+# CURRENT R18 R2 REPAIR919CPU PASS; NEW CONTRACT PREPARED, NOT STARTED
+
+0dd0 complete919CPU PASS including formerlyfailing actual-hook option combination.
+Repair merges probe_factory instead of replacing partitioned_render options.
+R1 remainsREJECTED_PARTITION_ACTIVATION;0dccfailure and0dcebase release preserved.
+R2 new C1_PARTITIONED_R18_CANARY_R2_CONTRACT.json169source/161runtime bindings,
+raw /cache/cch/hypic-independent-20261013/c1-partitioned-r18-canary-r2 notstarted.
+Next staticcheck and publishcheckpoint, freshdirect/source/model/image/physical0-3/
+8233 admission then onlynewR2. No source/NPU/optimization acceptance fromCPUtests.
+No owned modeljob; immutableR1 root neverreuse. Cutoff2026-10-17T06:48:09Z.
+
+# HISTORICAL R18 R1 REJECTION AND REPAIR REGRESSION
+
+0dbe exit0/3responses, but independent0dcc exit1 rejects two whole-pack visits.
+Baseaudit0dce passes166sources,225clean isolation,explicitphysical0-3 joins and
+live exact ownCID release. Failure report C1_PARTITIONED_R18_CANARY_R1_FAILURE_20261016.json.
+Actual hook option assembly regression0dc8 reproduces lostpartition flag when
+first_divergence replaces probe_kwargs. Fixed to update mapping; current complete
+CPU regression exec-0000000000000dd0 RUNNING. No owned model job. OldR1 rootimmutable;
+oldR1 sourcebindings stale afterrepair. Next regressionPASS then newR2 contract/source
+hashes/newroot and freshactualadmission. Do not rerunR1 or claimpartition/NPU success.
+
+# HISTORICAL R18 R1 LIVE; SUPERSEDED ABOVE
 
 Exact ma exec-0000000000000dbe started18:30UTC from published9cd46d68.
 Admission0dbd proves166sources/159runtime/image/model/input/actual0-3empty/8233+

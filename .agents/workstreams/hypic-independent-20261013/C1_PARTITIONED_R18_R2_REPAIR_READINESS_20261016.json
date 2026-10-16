@@ -1,0 +1,18 @@
+{
+  "schema": "hypic-r18-r2-repair/v1",
+  "state": "HOST_READY_NO_R2_NPU",
+  "failed_attempt": "C1_PARTITIONED_R18_CANARY_R1_FAILURE_20261016.json",
+  "repair": "probe_kwargs.update preserves partitioned_render when first_divergence enabled",
+  "regression": {
+    "operation": "exec-0000000000000dd0",
+    "tests": 919,
+    "exit": 0,
+    "previous_failure_operation": "exec-0000000000000dc8"
+  },
+  "source_bindings": 169,
+  "runtime_bindings": 161,
+  "contract": "C1_PARTITIONED_R18_CANARY_R2_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-partitioned-r18-canary-r2",
+  "device_started": false,
+  "full_goal_complete": false
+}

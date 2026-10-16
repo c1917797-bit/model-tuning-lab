@@ -86,8 +86,8 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
             if partitioned_render:probe_kwargs['partitioned_render']=True
             if first_divergence:
                 from independent_c1_stage_probe import make_probe
-                probe_kwargs={'probe_factory':lambda layer,layout,plans,leased:
-                    make_probe(layer,layout,plans,leased,emit,head_policy=first_divergence_head_policy)}
+                probe_kwargs.update(probe_factory=lambda layer,layout,plans,leased:
+                    make_probe(layer,layout,plans,leased,emit,head_policy=first_divergence_head_policy))
             if short_prefix_policy!="chunk64":
                 probe_kwargs.update(short_prefix_policy=short_prefix_policy,
                     prefix_route_observer=lambda route:emit(dict(route,

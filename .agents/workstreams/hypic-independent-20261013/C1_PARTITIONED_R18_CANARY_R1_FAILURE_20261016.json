@@ -1,0 +1,129 @@
+{
+  "schema": "hypic-r18-canary-r1-failure/v1",
+  "controller": "exec-0000000000000dbe",
+  "controller_exit": 0,
+  "raw_root": "/cache/cch/hypic-independent-20261013/c1-partitioned-r18-canary-r1",
+  "checkpoint": "9cd46d68c85db03dfdb9cb2e4600d5521ce15292",
+  "partition_audit": {
+    "operation": "exec-0000000000000dcc",
+    "exit": 1,
+    "error": "partition did not visit each live row once"
+  },
+  "base_audit": {
+    "operation": "exec-0000000000000dce",
+    "bounded_canary_valid": true,
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 2,
+      "covered": [
+        "cmpl-8a21bcb4a003085d",
+        "cmpl-83ed64fd1daef58a"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 59,
+        "1": 60,
+        "2": 61,
+        "3": 62
+      },
+      "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+    },
+    "probe": {
+      "0": {
+        "original_thread_cpu_ns": 29037790,
+        "prefill_only_thread_cpu_ns": 62440,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "1": {
+        "original_thread_cpu_ns": 28661110,
+        "prefill_only_thread_cpu_ns": 61500,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "2": {
+        "original_thread_cpu_ns": 27233340,
+        "prefill_only_thread_cpu_ns": 64880,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "3": {
+        "original_thread_cpu_ns": 27932580,
+        "prefill_only_thread_cpu_ns": 67910,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      }
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 59,
+          "host_pid": 4078752,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 60,
+          "host_pid": 4078754,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 61,
+          "host_pid": 4078756,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 62,
+          "host_pid": 4078758,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "source_bindings": 166,
+    "isolation_samples": 225,
+    "live_release_verified": true,
+    "scope": "two-request integrated mechanism and prepare-thread opportunity only; no formal speed, full quality or lifecycle acceptance"
+  },
+  "root_cause": "first_divergence branch replaced probe_kwargs after partitioned_render=True was added; diagnostic combination silently selected old whole-pack backend",
+  "regression_before_fix": {
+    "operation": "exec-0000000000000dc8",
+    "tests": 3,
+    "failures": 1,
+    "error": "partition_survives_stage_probe: None is not True"
+  },
+  "decision": "REJECT_PARTITION_ACTIVATION; preserve immutable root; no speed/quality/wholegoal acceptance",
+  "repair": "merge probe_factory into existing options rather than replacing mapping",
+  "next": "run regression; freeze successor config/manifest/source closure and newR2 rawroot; never reuseR1"
+}
