@@ -1,4 +1,15 @@
-# CURRENT R17 ASYNC FULL40 LIVE; BLOCKING VALID, NO SPEEDUP CLAIM
+# CURRENT R17 NATIVE FULL40 LIVE; ASYNC/BLOCKING VALID, NO HYPIC GAIN CLAIM
+
+LIVE ma exec-0000000000000d7f started17:38UTC, contract
+FORMAL_R17_TRANSFER_NATIVE_R1_CONTRACT.json, checkpoint2fb63459alreadyremoteverified.
+Admissionexec-0000000000000d7d:159source/image/model/input/actual0-3empty/8233+HCCLfree/
+newroot, priorcopyCanaryliveauditvalid andasyncrawhashesunchanged.
+Raw /cache/cch/hypic-independent-20261013/formal-r17-transfer-native-r1.
+ExactownCID5e0a493d96c38dcc4f2d02f69f420b2dc955da761d9742c694a332429692c3b7;only0-3TP4.
+Official native arm has no algorithm package enabled. Pollsamehandle/root;
+no restart or159boundfileedits whilelive. Terminalaudit_r17_transfer_performance.py
+--contract FORMAL_R17_TRANSFER_NATIVE_R1_CONTRACT.json --live-release.
+Comparethreefirstscreens onlyafterindependentvalidity; no partialtiming claim.
 
 TERMINAL asyncd54:40/40success; independent0d78valid159sources/all40fourrank48C1+
 16C2/7104packedgroups/474cleanisolation/physicalPIDjoins/liveexactrelease.
