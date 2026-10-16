@@ -1,0 +1,20 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "focused": {
+    "operation": "exec-0000000000000a69",
+    "tests": 19,
+    "exit": 0
+  },
+  "regression": {
+    "operation": "exec-0000000000000a6a",
+    "tests": 665,
+    "exit": 0
+  },
+  "components": [
+    "audit_catalog_canary_cohort: exact 17private+17unscoredproducers,8+8+1 frozen order,uniqueIDs/nohiddenretry/output hashes/end reasons/journal agreement",
+    "audit_catalog_rebuild_chain: fourrank initial-private reuse -> exact eviction -> newer same-worker publication -> rebuilt-private reuse"
+  ],
+  "scope": "HOST SYNTHETIC ONLY; combine with existing audit_catalog_hot, raw source/physical/isolation/release wrapper before device acceptance. Not full127x3 quality, not performance success.",
+  "live_baseline": "ma0a5c still running; readonly0a6b raw journal191isolation+4warmup; no duplicate launch",
+  "next": "Complete terminal wrapper and freeze default-disabled quality package/contract; wait baseline terminal and independent same-source pair before next device action."
+}
