@@ -1,0 +1,37 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "quality loader source-bound stage diagnostic sink",
+  "negative_control": {
+    "operation": "exec-0000000000000b7d",
+    "exit": 1,
+    "error": "source-bound diagnostic sink required",
+    "scope": "Real quality-loader to eligible make_probe path; C1StageProbe tensor constructor mocked"
+  },
+  "repair": "Set exact runtime manifest SHA and owned absolute stage_capture_root on emit before descriptor/activation; no algorithm, numerical tolerance, policy or scoring change",
+  "focused": {
+    "operation": "exec-0000000000000b80",
+    "tests": 6,
+    "exit": 0
+  },
+  "regression": {
+    "operation": "exec-0000000000000b81",
+    "tests": 837,
+    "exit": 0
+  },
+  "source_impact": {
+    "operation": "exec-0000000000000b82",
+    "affected_manifests": {
+      "FORMAL_R16_20261016_G3_R1_CONTRACT.json": [],
+      "QUALITY_R16_CATALOG_CANARY_R3_CONTRACT.json": [
+        "independent_quality_compact_loader.py"
+      ],
+      "QUALITY_R16_FULL_HYPIC_R1_CONTRACT.json": [
+        "independent_quality_compact_loader.py"
+      ],
+      "LIFECYCLE_R16_ENABLED_R1_CONTRACT.json": [],
+      "LIFECYCLE_DELIVERY_R16_ENABLED_R1_CONTRACT.json": []
+    },
+    "new_loader_sha256": "bc49867c07d9b7f0e450ee927992b638b97ce051bd80632e55846575aea7a73e"
+  },
+  "scope": "Host regression only; actual repaired NPU sink/17cohort still unproven; old quality159/163 manifests historical/stale until new binding"
+}

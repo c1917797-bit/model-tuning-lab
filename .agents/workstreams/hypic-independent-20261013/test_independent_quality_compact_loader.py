@@ -53,6 +53,28 @@ class QualityLoaderTests(unittest.TestCase):
                 target.enable()
                 with self.assertRaises(RuntimeError):self.load()
         self.assertEqual(stops,["scheduler"]);self.assertEqual(sys.meta_path,before)
+    def test_eligible_stage_probe_receives_bound_sink(self):
+        import independent_c1_stage_probe as probe
+        captured={};sentinel=object()
+        def activate(config,**kw):
+            emit=kw["emit"]
+            layer=types.SimpleNamespace(prefix=probe.LAYER)
+            layout=types.SimpleNamespace(rank=0,step=12,request_ids=("a","b"),
+                chains=((("live",0),("live",1)),(("live",2),("live",3))),
+                packed_tokens=100,windows=(None,)*4)
+            plans=[types.SimpleNamespace(request_id=rid,scheduled_tokens=50,skipped_tokens=0)for rid in ("a","b")]
+            with patch.object(probe,"C1StageProbe",return_value=sentinel)as ctor:
+                self.assertIs(probe.make_probe(layer,layout,plans,{"a":object(),"b":object()},emit,head_policy="head0"),sentinel)
+                captured.update(ctor.call_args.kwargs)
+            return lambda:None
+        with tempfile.TemporaryDirectory()as tmp:
+            root=Path(tmp);env=self.fixture(root)
+            expected=hashlib.sha256((root/"manifest.json").read_bytes()).hexdigest()
+            with patch.dict(os.environ,env),patch("independent_catalog_scheduler_loader.enable_scheduler",return_value=lambda:None),patch.dict(sys.modules,{"independent_compact_activation":types.SimpleNamespace(activate_compact_hypic=activate)}):
+                try:target.enable();self.load()
+                finally:target.disable()
+            self.assertEqual(captured["manifest_sha256"],expected)
+            self.assertEqual(captured["root"],root/"c1-stage-rank0-step12")
     def test_bad_profile_fails_before_hooks(self):
         before=list(sys.meta_path)
         with tempfile.TemporaryDirectory() as tmp:

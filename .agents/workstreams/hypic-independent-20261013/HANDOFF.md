@@ -1,3 +1,19 @@
+# LATEST R3 FAILED diagnostic sink wiring; narrow repair HOSTONLY
+
+0b67terminalexit1,172clean isolation/8publicresponses+8privateHTTP500 retainedjournal;
+topresponses0 does NOTmean0attempts. Eligible firstdivergence make_probe required
+emit.source_manifest_sha256/stage_capture_root; qualityloader omittedboth.0b7d
+hostreproduces SAMEerror withreal loader/probe path (tensorconstructor mocked).
+2line metadata-only fix setsboth beforeactivation;6focused0b80/837CPU0b81PASS.
+0b7b BEFOREsourcechange confirms source159unchanged/all172clean/exactownCIDabsent/
+8233free/0-3empty12:19:33UTC.0b7a independentlyrejectsincomplete17terminal.
+CATALOG_R16_CANARY_R3_TERMINAL_20261016.json preserves rawhashes/source03a14fd.
+Oldcatalog159/fullquality163 now HISTORICAL/STALE atqualityloader only; neverlaunch
+oldcontracts orreuseR3root. Performance147/lifecycle156/delivery164 remainunchanged0b82.
+NextfreezenewR4 source manifest/contract/root, SAME17/numerical/coverage protocol,
+freshdirect/actualidle/ports admission thenboundedrepairverification. No ownedjob now;
+no baseline/lifecycle expansion beforecatalogacceptance. DeadlineOct17T06:48:09Z.
+
 # CURRENT R3 live; same-source baseline successor prepared only
 
 Exact0b67 stillrunning; no restart/edit159boundfiles/seconddevicejob.

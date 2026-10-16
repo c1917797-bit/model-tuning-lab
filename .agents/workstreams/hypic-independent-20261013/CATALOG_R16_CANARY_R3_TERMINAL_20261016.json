@@ -1,0 +1,81 @@
+{
+  "schema": "hypic-terminal-attempt/v1",
+  "operation": "exec-0000000000000b67",
+  "raw_root": "/cache/cch/hypic-independent-20261013/catalog-quality-r16-canary-r3",
+  "contract": "QUALITY_R16_CATALOG_CANARY_R3_CONTRACT.json",
+  "source_checkpoint": "03a14fdde6287a16eef3d28386ad9516a99180f9",
+  "classification": "FAILED_DIAGNOSTIC_SINK_WIRING",
+  "controller_result": {
+    "valid": false,
+    "error": {
+      "type": "ValueError",
+      "message": "Canary failures retained; do not start full quality"
+    },
+    "guard_errors": [],
+    "isolation_samples": 172,
+    "responses": 0,
+    "worker_pids": [
+      1024930,
+      1024931,
+      1024932,
+      1024933
+    ],
+    "physical_devices_seen": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "release": {
+      "owned_container": "1d6b70ecb94a6b3dc78c03bb6faa5710a53a146eebebbd7fbdd40ebf6baf2ed8",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    }
+  },
+  "actual_attempts": {
+    "public_producers_success": 8,
+    "private_attempts": 8,
+    "private_http500": 8,
+    "private_success": 0,
+    "note": "Controller responses.json empty because Canary raises before returning unit; all8 failed attempts retained in events.jsonl. Not zero attempted requests."
+  },
+  "root_cause": {
+    "file": "independent_quality_compact_loader.py",
+    "missing_attributes": [
+      "emit.source_manifest_sha256",
+      "emit.stage_capture_root"
+    ],
+    "observed_at": "independent_c1_stage_probe.make_probe",
+    "error": "source-bound diagnostic sink required",
+    "reproduction": "exec-0000000000000b7d"
+  },
+  "independent_before_source_change": {
+    "operation": "exec-0000000000000b7b",
+    "source159_unchanged": true,
+    "all_isolation_clean": 172,
+    "exact_owned_absent": "1d6b70ecb94a6b3dc78c03bb6faa5710a53a146eebebbd7fbdd40ebf6baf2ed8",
+    "port_free": true,
+    "fresh_physical0_3": [],
+    "utc": "2026-10-16T12:19:33.523522+00:00",
+    "candidate_tests": [
+      "test_independent_quality_compact_loader.py"
+    ]
+  },
+  "independent_terminal_audit": {
+    "operation": "exec-0000000000000b7a",
+    "exit": 1,
+    "error": "complete successful17 terminal required"
+  },
+  "raw_sha256": {
+    "result.json": "c2ccfec2c39c578c43b95fc2d218323e476484c16c745c555354f69894e21f7d",
+    "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "isolation.json": "d0dbda720165cfd5749936e9a56400dff2218fd63e9ebf3bf8d317ab10c5d8a4",
+    "release.json": "46661dea13b5f38ff041b50f39341fad82040211a8bab40c09f5d9d6ab6c5d7e",
+    "events.jsonl": "2cb8a15f562e3f0ad381e9862d18e9357928ec055c9d2e3f13061b14bdeb0f29",
+    "service.log": "867e7da994ad50d1bcf61d21be992f7cecd918c6f6f94ce48472580f349c6043"
+  },
+  "allowed_claims": "8public producer responses,172 clean isolation samples, failure source valid before repair and exactownrelease; diagnostic wiring failure",
+  "forbidden_claims": "No accepted17cohort, no task-quality failure conclusion, no speed/lifecycle/whole-goal acceptance",
+  "next": "New source-bound R4/new root after narrow metadata repair; never reuse R3 root."
+}

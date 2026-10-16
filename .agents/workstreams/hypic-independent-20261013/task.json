@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "catalog-M3-r3-live",
+  "execution_state": "catalog-R3-diagnostic-failure-repair-hostvalidated",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "OwnedR3catalog0b67 live after0b65 actual0-3empty/ports/source159 admission;oneowneddevicejob,continuousguard."
+    "state": "NoownedNPUjob;0b7b12:19:33UTC0-3empty/exactCIDabsent/8233free snapshotonly."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll SAMEma0b67 and immutable catalog-quality-r16-canary-r3;running/unclear neverrestart or edit159boundfiles. Terminal audit_catalog_canary_terminal.py --contract QUALITY_R16_CATALOG_CANARY_R3_CONTRACT.json --live-release. Delivery164contracts remainprospective afterM3/M4/M5. LatesthumanstopOct17T06:48:09Z.",
+  "next_action": "Freeze newsource-bound catalogR4 manifest/contract/root with same17 protocol and all unchanged numerical/coverage gates;old159/163contracts NOT launchable. Freshdirect/actualresourceadmission beforeoneboundeddeviceverification of2line sinkfix. No baseline/lifecycle expansion beforecatalogacceptance;neverrerunoldroots. DeadlineOct17T06:48:09Z.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -196,10 +196,10 @@
     ]
   },
   "publication": {
-    "state": "03a14fd liveverified;R3runningmetadata pending",
-    "published_commit": "03a14fdde6287a16eef3d28386ad9516a99180f9",
+    "state": "51232ce liveverified;R3failure/narrowrepaircheckpoint pending",
+    "published_commit": "51232ce5775d8c2974f25c57d69e656f89b89875",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "note": "No catalog accept/lifecycle/fullgoal acceptance."
+    "note": "No repaired NPU or quality/full-goal acceptance."
   },
   "math_reference": {
     "state": "cpu-reference-passed",
@@ -215,13 +215,14 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "RUNNING; terminal unknown, never restart",
+    "state": "TERMINAL0b67exit1;8public success/8privateHTTP500;diagnostic sink attrs missing;172clean/exactownrelease",
     "last_operation": "exec-0000000000000b67",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
     "raw_root": "/cache/cch/hypic-independent-20261013/catalog-quality-r16-canary-r3",
     "contract": "QUALITY_R16_CATALOG_CANARY_R3_CONTRACT.json",
-    "checkpoint": "03a14fdde6287a16eef3d28386ad9516a99180f9"
+    "checkpoint": "03a14fdde6287a16eef3d28386ad9516a99180f9",
+    "terminal_report": "CATALOG_R16_CANARY_R3_TERMINAL_20261016.json"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -274,11 +275,11 @@
     "report": "FORMAL_R16_20261016_G3_R1_TERMINAL.json"
   },
   "catalog_canary": {
-    "state": "R3 RUNNING0b67;R2externalfailureimmutable",
+    "state": "R3 FAILEDdiagnosticwire;R2externalfailure;bothrootsimmutable",
     "contract": "QUALITY_R16_CATALOG_CANARY_R3_CONTRACT.json",
-    "manifest_sha256": "bddd3488a1ad27e7e44748d503963b77931fc3dcd1b66f0e425d2ea994f110bb",
     "device_run": true,
-    "accepted": false
+    "accepted": false,
+    "source_binding_state": "Historical old159 now stale at independent_quality_compact_loader.py after explicit2line repair; source retained in03a14fd"
   },
   "resource_observation": {
     "operation": "exec-0000000000000b5a",
@@ -323,5 +324,11 @@
       "LIFECYCLE_DELIVERY_R16_ENABLED_R1_CONTRACT.json",
       "LIFECYCLE_DELIVERY_R16_UNINSTALLED_R1_CONTRACT.json"
     ]
-  }
+  },
+  "quality_sink_repair": {
+    "state": "HOSTONLY6focused/837CPU PASS;actualrepaireddeviceproofmissing",
+    "report": "QUALITY_STAGE_SINK_REPAIR_HOST_READINESS_20261016.json",
+    "new_loader_sha256": "bc49867c07d9b7f0e450ee927992b638b97ce051bd80632e55846575aea7a73e"
+  },
+  "quality_bindings_state": "Oldcatalog159/fullquality163 historical/stale after sinkrepair;mustfreeze new manifest/contracts/root beforelaunch. Performance147/lifecycle156/delivery164 unchanged."
 }
