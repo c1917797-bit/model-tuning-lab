@@ -1,4 +1,16 @@
-# CURRENT R19 MATCHED G1 BOUNDED PROFILE LIVE
+# CURRENT R19 G1 CAPTURE AUDITED; CPU PARSER LIVE
+
+0f61terminalexit0;independent0f74 accepts196sources/16profile+16warmresponses/
+191cleanisolation/algorithmabsent/explicitphysicalrankPIDjoins/liveexactrelease.
+0f71strictportbindfailed; subsequentss empty, unchangedaudit0f74passed; no modelrerun.
+PROFILE_G1_R19_EARLYMIXED_TERMINAL_AUDIT_20261016.json preservesrawSHA.
+No ownedmodelcomputejob. Parser0f75 exactCID11986bb503da88036ca242afb4d44709e50f573650eac8d331e4f6792176d2b8
+CPU0/manager-only/no compute mapping; analysisroot
+/cache/cch/hypic-independent-20261013/profile-g1-r19-earlymixed-r1-analysis-r1.
+Poll exactcontainer/outputs, no duplicateparser/rawoverwrite; fourrank parsedtables/
+trace/actualphase audit required before G3samephasecomparison. Fullgoalunfinished.
+
+# HISTORICAL R19 MATCHED G1 BOUNDED PROFILE LIVE
 
 ma exact exec-0000000000000f61 launched22:57UTC from liveverifiedc9cceb3a.
 Admission0f60 proves196sources/181runtime/image/model/input/physical0-3empty/8233+HCCLfree/newroot.

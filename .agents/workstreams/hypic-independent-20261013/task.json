@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R19-G1-matched-profile-running",
+  "execution_state": "R19-G1-profile-capture-valid-parser-running",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "Owned G1profile0f61 only; no concurrentmodeljob."
+    "state": "No ownedmodelcompute; CPU0manager-onlyparser11986bb5/no compute mapping."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll exact ma0f61/raw; no restart/196boundchanges. Terminal source/16warm+16profile/physical/isolation/exactrelease audit andfourrankparsedcompleteness; only then samephaseG3comparison.",
+  "next_action": "Track exact G1parser11986bb5; allfourrank parsedtables/traces/actualphase then compare G3. No duplicateparser/rawreuse/newmodel needed.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,14 +215,15 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "RUNNING",
+    "state": "TERMINAL_CAPTURE_VALID",
     "operation": "exec-0000000000000f61",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
     "contract": "PROFILE_G1_R19_EARLYMIXED_R1_CONTRACT.json",
     "raw_root": "/cache/cch/hypic-independent-20261013/profile-g1-r19-earlymixed-r1",
     "checkpoint": "c9cceb3a5e931e95df60ad35ed4506ec5f3e371d",
-    "admission_operation": "exec-0000000000000f60"
+    "admission_operation": "exec-0000000000000f60",
+    "independent_audit": "exec-0000000000000f74"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -410,6 +411,8 @@
     "scope": "capture accepted; parsedcompleteness/causality pending",
     "parser_state": "TERMINALexit0",
     "parsed_audit": "exec-0000000000000f5a",
-    "parsed_report": "PROFILE_G3_R19_EARLYMIXED_PARSED_AUDIT_20261016.json"
+    "parsed_report": "PROFILE_G3_R19_EARLYMIXED_PARSED_AUDIT_20261016.json",
+    "g1_parser_cid": "11986bb503da88036ca242afb4d44709e50f573650eac8d331e4f6792176d2b8",
+    "g1_analysis_root": "/cache/cch/hypic-independent-20261013/profile-g1-r19-earlymixed-r1-analysis-r1"
   }
 }

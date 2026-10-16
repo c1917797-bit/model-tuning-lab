@@ -1,0 +1,59 @@
+{
+  "schema": "hypic-native-profile-terminal-audit/v1",
+  "controller": "exec-0000000000000f61",
+  "audit_operation": "exec-0000000000000f74",
+  "initial_audit": "0f71 strictportbindfailed; subsequent0f72ss empty, unchangedreplaypassed",
+  "raw_root": "/cache/cch/hypic-independent-20261013/profile-g1-r19-earlymixed-r1",
+  "evidence": {
+    "source_bindings": 196,
+    "responses": 16,
+    "private_warmup": 16,
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 58,
+          "host_pid": 1914992,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 59,
+          "host_pid": 1914993,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 60,
+          "host_pid": 1914994,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 61,
+          "host_pid": 1914995,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "isolation": 191,
+    "events": {
+      "preflight": 1,
+      "isolation": 191,
+      "warmup": 4,
+      "profile-private-warmup": 16,
+      "profile-start": 1,
+      "profile-response": 16,
+      "profile-stop": 1,
+      "terminal": 1
+    },
+    "algorithm_absent": true,
+    "raw_sha256": {
+      "result.json": "9075e4010ce4f2c67ee69ee201675d1d61db90236e7be60940b678fac0839d94",
+      "profile-unit.json": "c65e2d92e3f8279db48fa28a6a73c492d9a9d2d788453e20a47597c5b338ca6c",
+      "events.jsonl": "99aac4f8bef2ff14fd1ecdb422372edcd46f8c0b1d37a9eb6dd4c96183d40b99",
+      "release.json": "a1f8a0b773b1f6fc2ee546b32ec3085b53f77c7272763ea048b2c9bfcf28a0c7"
+    },
+    "live_release_verified": true,
+    "scope": "native capture/source/physical/isolation/release only; parsedcompleteness/phase comparison pending; not formal speed orquality"
+  },
+  "parser_cid": "11986bb503da88036ca242afb4d44709e50f573650eac8d331e4f6792176d2b8",
+  "analysis_root": "/cache/cch/hypic-independent-20261013/profile-g1-r19-earlymixed-r1-analysis-r1"
+}
