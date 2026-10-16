@@ -161,7 +161,9 @@ def run_contract(contract):
     diagnostic=contract.get("cache_diagnostic")
     formal_artifact=contract.get("formal_token_artifact")
     quality_spec=contract.get("quality_workload")
-    if contract.get("formal_quality"):
+    from independent_quality_bootstrap_route import quality_mode
+    quality_kind=quality_mode(contract)
+    if quality_kind:
         if contract.get("formal_performance") or not quality_spec or formal_artifact:
             raise ValueError("exclusive frozen quality workload required")
         from independent_quality_workload import read_bound
@@ -294,7 +296,7 @@ def run_contract(contract):
             except (urllib.error.URLError,TimeoutError):pass
             time.sleep(5)
         else:raise TimeoutError("Native health deadline")
-        if contract.get("formal_quality"):
+        if quality_kind:
             from independent_quality_workload import run_quality_workload
             from independent_quality_client import http_quality
             from independent_current_material_readiness import current_materials_ready
@@ -310,14 +312,32 @@ def run_contract(contract):
                     if current_materials_ready(worker_events,manifest_hash,digest):return
                     time.sleep(1)
                 raise TimeoutError("four-rank selected quality material readiness")
-            result_unit=run_quality_workload(quality_spec,
-                send=lambda p:http_quality(port,p,guard=require_guard,timeout=2400),
-                guard=require_guard,record=journal.append,
-                require_material_ready=quality_ready)
+            if quality_kind=="canary":
+                if not diagnostic:raise ValueError("catalog eviction Canary requires treatment")
+                from independent_catalog_quality_canary import run_catalog_canary
+                from independent_catalog_rebuild_selection import choose_evicted_rebuild
+                def choose_rebuild(candidates):
+                    require_guard();worker_events=[]
+                    for path in (raw/"diagnostics").glob("compact-worker-*.jsonl"):
+                        if path.is_symlink() or path.stat().st_size>128*1024**2:
+                            raise ValueError("bounded regular worker evidence required")
+                        data=path.read_text();complete=data[:data.rfind("\n")+1]
+                        worker_events.extend(json.loads(line) for line in complete.splitlines())
+                    manifest_hash=hashlib.sha256((HERE/diagnostic["compact_manifest"]).read_bytes()).hexdigest()
+                    return choose_evicted_rebuild(worker_events,manifest_hash,candidates)
+                result_unit=run_catalog_canary(quality_spec,
+                    send=lambda p:http_quality(port,p,guard=require_guard,timeout=2400),
+                    guard=require_guard,record=journal.append,
+                    require_material_ready=quality_ready,choose_rebuild=choose_rebuild)
+            else:
+                result_unit=run_quality_workload(quality_spec,
+                    send=lambda p:http_quality(port,p,guard=require_guard,timeout=2400),
+                    guard=require_guard,record=journal.append,
+                    require_material_ready=quality_ready)
             responses=result_unit["results"]
-            write(raw,"quality-unit.json",result_unit)
-            if result_unit["successful"]!=381:
-                raise RuntimeError("full quality request failures retained")
+            write(raw,"catalog-canary-unit.json" if quality_kind=="canary" else "quality-unit.json",result_unit)
+            if result_unit["successful"]!=(17 if quality_kind=="canary" else 381):
+                raise RuntimeError("quality request failures retained")
         elif contract.get("formal_performance"):
             if not formal_artifact:raise ValueError("formal performance artifact required")
             from independent_formal_workload import run_formal_workload

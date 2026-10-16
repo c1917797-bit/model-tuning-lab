@@ -1,0 +1,25 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "isolated catalog Canary controller wiring",
+  "focused": {
+    "operation": "exec-0000000000000a62",
+    "tests": 30,
+    "exit": 0,
+    "note": "before final pre-admission no-treatment guard"
+  },
+  "final_regression": {
+    "operation": "exec-0000000000000a63",
+    "tests": 646,
+    "exit": 0
+  },
+  "changes": [
+    "exclusive explicit formal_quality_canary mode",
+    "quality bootstrap selected for treatment",
+    "source-bound actual-eviction callback",
+    "17 unscored private responses in separate artifact; full quality remains381",
+    "baseline-less catalog Canary rejected before device admission"
+  ],
+  "parity": "AST inverse of three explicitly enumerated quality spans retains generic original controller ownership, isolation and cleanup",
+  "scope": "HOST ONLY. No frozen catalog Canary manifest/contract/terminal auditor/device acceptance yet. Existing live147 performance sources unmodified.",
+  "next": "Freeze complete catalog Canary config/manifest/contract and independent 17-request transport/hot-generation/eviction/isolation/release audit before new device run."
+}

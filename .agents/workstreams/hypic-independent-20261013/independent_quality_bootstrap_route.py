@@ -1,9 +1,17 @@
 """Pure explicit startup selection; no runtime imports or device allocation."""
+def quality_mode(contract):
+    keys=("formal_quality","formal_performance","formal_quality_canary")
+    flags=[contract.get(k,False) for k in keys]
+    if any(type(x)is not bool for x in flags) or sum(flags)>1:
+        raise ValueError("explicit exclusive quality/performance/Canary mode required")
+    if flags[2]:
+        diagnostic=contract.get("cache_diagnostic")
+        if type(diagnostic)is not dict or not isinstance(diagnostic.get("compact_manifest"),str) or not diagnostic["compact_manifest"].strip():
+            raise ValueError("catalog Canary requires explicit treatment manifest before admission")
+    return "canary" if flags[2] else "full" if flags[0] else None
+
 def select_bootstrap(contract):
-    quality=contract.get("formal_quality",False)
-    performance=contract.get("formal_performance",False)
-    if type(quality)is not bool or type(performance)is not bool or quality and performance:
-        raise ValueError("explicit nonambiguous quality/performance mode required")
+    quality=quality_mode(contract)
     diagnostic=contract.get("cache_diagnostic")
     if diagnostic is None or diagnostic=={}:return None
     if type(diagnostic)is not dict:raise ValueError("explicit diagnostic configuration required")
