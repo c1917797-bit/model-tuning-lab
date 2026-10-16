@@ -1,0 +1,86 @@
+{
+  "schema": "ascend.actual-stage-checkpoint/v1",
+  "observed_utc": "2026-10-16T13:29:00Z",
+  "authority_cutoff_utc": "2026-10-17T07:02:13Z",
+  "accepted_new_technique": false,
+  "mxr097": {
+    "scope": "saved rank0/layer0 actual2048 frame only",
+    "npu_operation": "exec-0000000000000b8e",
+    "cpu_operation": "exec-0000000000000b94",
+    "all384_traces_anchored": true,
+    "original_working_gate": true,
+    "native_peer_gate": true,
+    "cpu64cast_peer_gate": true,
+    "native_peer_state_rel_l2": 0.000039299860606595066,
+    "old_candidate_state_rel_l2": 0.00211012898911623,
+    "thresholds_unchanged": true,
+    "report": {
+      "path": "/opt/host/vnf/austinov/run-mxr-two-residual097repair1-consume-MAIN-20261016-001/ATTRIBUTION.json",
+      "bytes": 1228547,
+      "sha256": "1398d50cf762c9cca57ed423f478b66e7603b68ef12599209cf2330ea6d856eb"
+    },
+    "model_qualified": false,
+    "performance_qualified": false
+  },
+  "mxr098r1": {
+    "operation": "exec-0000000000000bb4",
+    "failure": "fresh physical5 foreign compute; no container created",
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-mxr-two-residual-model098repair1-main-NEW24H_MXR098R1_001/RESULT.json",
+      "bytes": 2101,
+      "sha256": "65a0df7a659eecd97feb3b5ae13add946bd522df877be82bdfe20c9b1faed546"
+    }
+  },
+  "mxr098r2": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-model-new24h-v1-098-repair2/SOURCE_MANIFEST.json",
+      "bytes": 121258,
+      "sha256": "8e31a89053362a747ce41f39e1df36ba05621a2e7cd4157007f24ce94a952543"
+    },
+    "sourceaudit_operation": "exec-0000000000000bf6",
+    "sourceaudit_exit": 0,
+    "executed": false,
+    "readset": 961,
+    "registered_inverse_deltas": 33,
+    "execution_review_failure": "host_ticket DEPLOY split literal and adapted DEPLOY RHS still repair1; HERE!=DEPLOY; stopped before execute",
+    "next": "new immutable R3 with actual globals/adapt cold regression; old R2 retained"
+  },
+  "deltalog088r2": {
+    "numeric16_operation": "exec-0000000000000bc9",
+    "numeric16_owner": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair2-001/RESULT.json",
+      "bytes": 1635,
+      "sha256": "27bf8c6234ec3b0f7d82e6340708768e8c3345eaba1e76fcf205b7f442138b71"
+    },
+    "domain_checks_pass": true,
+    "original_strict_gate_pass": false,
+    "complete_proof": false,
+    "numeric160_operation": "exec-0000000000000bef",
+    "numeric160_terminal_at_checkpoint": false,
+    "numeric160_is_diagnostic_only": true,
+    "model_qualified": false
+  },
+  "bole": {
+    "explicit_human_parallel_addition": true,
+    "paper": "https://arxiv.org/abs/2608.01651v1",
+    "author_public_code_verified": false,
+    "installed660_sources_captured": 14,
+    "mtp_config_registry_loader_present": true,
+    "tree_runtime_implemented": false,
+    "npu_qualified": false,
+    "source_only_cpu_reference_tests": 4,
+    "source_only_runtime_tests": 13,
+    "ordinary_mtp_is_not_bole": true
+  },
+  "utilization": {
+    "continuous_window_utilization": "unmeasured",
+    "last_actual_single_card_pid": 1652677,
+    "last_actual_single_card_physical": 5,
+    "protected_0_3_untouched": true
+  },
+  "next": [
+    "consume actual088R2 diagnostic160 without relabeling old strict FAIL",
+    "fix split-DEPLOY in new098R3 then actualTP4 fullmodel output/state",
+    "prepare BOLE112 NPU math and113 true-task-shape collector"
+  ]
+}

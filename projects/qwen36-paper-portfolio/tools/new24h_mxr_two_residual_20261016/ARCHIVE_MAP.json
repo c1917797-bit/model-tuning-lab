@@ -1,0 +1,150 @@
+{
+  "schema": "ascend.source-recovery-map/v1",
+  "entries": [
+    {
+      "source": {
+        "bytes": 2731,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-new24h-v1-097-repair1/HANDOFF.md",
+        "sha256": "80a4203ef4e046ada4a723c46002cca2d67bd4724b86716937281bb704202ef1"
+      },
+      "relative": "guest097r1/HANDOFF.md"
+    },
+    {
+      "source": {
+        "bytes": 4481,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-new24h-v1-097-repair1/MATH_DIFF.patch",
+        "sha256": "6daaa21423155ad40635cb293e675f9c6214f59bd7a08f09d13d50c58d3d1098"
+      },
+      "relative": "guest097r1/MATH_DIFF.patch"
+    },
+    {
+      "source": {
+        "bytes": 8101,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-new24h-v1-097-repair1/consume.py",
+        "sha256": "b46e04e24260a80db07c89b4215300dc8ec29a336d80d22d001fdeb3b362eb2b"
+      },
+      "relative": "guest097r1/consume.py"
+    },
+    {
+      "source": {
+        "bytes": 3378,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-new24h-v1-097-repair1/direct_round.py",
+        "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d"
+      },
+      "relative": "guest097r1/direct_round.py"
+    },
+    {
+      "source": {
+        "bytes": 18410,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-new24h-v1-097-repair1/guest_core.py",
+        "sha256": "cd6f551b6091f9bff67a163304655cefbbb0f5957c260fe9c5f43f8fa23ed42b"
+      },
+      "relative": "guest097r1/guest_core.py"
+    },
+    {
+      "source": {
+        "bytes": 6610,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-new24h-v1-097-repair1/original_block_refine.py",
+        "sha256": "5ed736e76e1550908bb62b633dd911eca60617381ca3e329b1c25e751fb4860d"
+      },
+      "relative": "guest097r1/original_block_refine.py"
+    },
+    {
+      "source": {
+        "bytes": 5262,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-new24h-v1-097-repair1/test097.py",
+        "sha256": "7cc298f7d9afe22527bc372e6c44526b9a9a8750e56c92d640dd4cb38436095b"
+      },
+      "relative": "guest097r1/test097.py"
+    },
+    {
+      "source": {
+        "bytes": 7165,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-new24h-v1-097-repair1/two_residual097.py",
+        "sha256": "58b68fe106356d5fc608ac09a29728fb45a0aba07e970deabfbb2f87ae63aceb"
+      },
+      "relative": "guest097r1/two_residual097.py"
+    },
+    {
+      "source": {
+        "bytes": 7835,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-new24h-v1-097-repair1/SOURCE_MANIFEST.json",
+        "sha256": "17cc6553ed5c498f5db7cc66175f0e1867fbff7ef3263f263b3d7725aefe06e5"
+      },
+      "relative": "guest097r1/SOURCE_MANIFEST.json"
+    },
+    {
+      "source": {
+        "bytes": 2959,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/cpu_entry097.py",
+        "sha256": "eb8ab41faa15c9631f6729c2a31b5275b0e2e06a4bc8e8ce441167b956713798"
+      },
+      "relative": "owner097r1/cpu_entry097.py"
+    },
+    {
+      "source": {
+        "bytes": 15733,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/owned_cpu097.py",
+        "sha256": "53654acda4c3ce2ea35b57bc973ccc3883c62102362191120a2ea53e0f0fc6dd"
+      },
+      "relative": "owner097r1/owned_cpu097.py"
+    },
+    {
+      "source": {
+        "bytes": 15909,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/owner097.py",
+        "sha256": "39e10ec545cc333fb783897facf159bdcdc1243b6ca98fb0de0f9b79caf0c10c"
+      },
+      "relative": "owner097r1/owner097.py"
+    },
+    {
+      "source": {
+        "bytes": 4217,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/test_guard092.py",
+        "sha256": "fb536d16a2aaaadee19c0180164b5773458e38b1723e0857b2072342a11b1e01"
+      },
+      "relative": "owner097r1/test_guard092.py"
+    },
+    {
+      "source": {
+        "bytes": 7775,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/top_guard092.py",
+        "sha256": "04ef8acc591f52363947c605f6faa2a0bce4d16492a0e907db8719fc322764dd"
+      },
+      "relative": "owner097r1/top_guard092.py"
+    },
+    {
+      "source": {
+        "bytes": 6328,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/SOURCE_MANIFEST.json",
+        "sha256": "0d08289d806ba4854b432d94d77811d3baf8e7ec3b0f55392da9e11fb21d3fa0"
+      },
+      "relative": "owner097r1/SOURCE_MANIFEST.json"
+    },
+    {
+      "source": {
+        "bytes": 4230,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/COMMANDS.json",
+        "sha256": "e7adb1374fd75afc45afe2b6714dc93d3167cdad9fe33bfd8235fc59d192a7f4"
+      },
+      "relative": "owner097r1/COMMANDS.json"
+    },
+    {
+      "source": {
+        "bytes": 2262,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/test_split_layout.py",
+        "sha256": "ae726eacce9bf4801de4e1e5db0c15e3d08cd1da4659086c651169aace0f922c"
+      },
+      "relative": "owner097r1/test_split_layout.py"
+    },
+    {
+      "source": {
+        "bytes": 1405,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/HANDOFF_REPAIR1.md",
+        "sha256": "9c949b94b1061c0cce49253c4a7a17d918098211d8fdb6422f63666f5315323d"
+      },
+      "relative": "owner097r1/HANDOFF_REPAIR1.md"
+    }
+  ],
+  "raw_evidence_in_git": false
+}

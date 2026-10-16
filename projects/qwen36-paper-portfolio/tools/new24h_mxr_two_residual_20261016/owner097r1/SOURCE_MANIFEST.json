@@ -1,0 +1,139 @@
+{
+  "actual081_owner_source": {
+    "bytes": 16408,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-owned-new24h-v1-081/owner081.py",
+    "sha256": "52f15613bb42ecfb23672be1ae4ba9211652da03d034233f49a8a1551912faae"
+  },
+  "actual_NPU": false,
+  "actual_failure_refs": [
+    {
+      "bytes": 1515,
+      "path": "/opt/host/vnf/austinov/run-mxr-prefill084-npu-MAIN-20261016-001/top-child-departure-1792148857753890680.json",
+      "sha256": "8fc4b0c669142e7ec5203674b8471ff2e4b18ff59c27379db1510d28d9326cb9"
+    },
+    {
+      "bytes": 52153,
+      "path": "/opt/host/vnf/austinov/run-mxr-prefill084-npu-MAIN-20261016-001/protected-ownership-1792148857774710100.json",
+      "sha256": "da0d9827ac5a47c5e86a9c1d75e4d815c2c652e537f57e7fa05eaee284366f0d"
+    }
+  ],
+  "actual_sameimage_CPU": false,
+  "authority_ref": {
+    "bytes": 3481,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+  },
+  "default_enabled": false,
+  "dependencies": {
+    "cpu": {
+      "bytes": 5043,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/deltalog-v7-20261014-001/cpu_capacity.py",
+      "sha256": "992cfcb419eabbf69902f9358c703815c268d3f99b00ae9e410a291d374d456d"
+    },
+    "host": {
+      "bytes": 33743,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py",
+      "sha256": "ab0296c698df00c9c3b2ce377601f6d6723adde6efb4a9e65407beca51ba5f86"
+    },
+    "old": {
+      "bytes": 16517,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/saved_step_native_order_v2/host_run.py",
+      "sha256": "86c1ca7f59c6ad5b2b4d5efb155394455a12376cf368e06f9e2e13d39b7192fc"
+    },
+    "pipeline": {
+      "bytes": 40280,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/NEW48H/deltalog-v7-20261014-001/pipeline.py",
+      "sha256": "1df9ce6cac75b68e0f8781c40a2445887a00494941c9cde9488abafe735ab07c"
+    }
+  },
+  "donor": {
+    "bytes": 14382,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-native-prefill-cpu-preflight-new24h-v1-083/owned_cpu.py",
+    "sha256": "b137dd6c69b20bd0a79d8f87cd2edb36d09951c7a64bc0a821919d28671b9e75"
+  },
+  "donor_host": {
+    "bytes": 24497,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/host.py",
+    "sha256": "16146338e86c893925469b5207db8a172805dc9d897a71c812ca1d445ddad13f"
+  },
+  "files": {
+    "cpu_entry097.py": {
+      "bytes": 2959,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/cpu_entry097.py",
+      "sha256": "eb8ab41faa15c9631f6729c2a31b5275b0e2e06a4bc8e8ce441167b956713798"
+    },
+    "evidence/ACTUAL_PROTECTED_OWNERSHIP.json": {
+      "bytes": 52153,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/evidence/ACTUAL_PROTECTED_OWNERSHIP.json",
+      "sha256": "da0d9827ac5a47c5e86a9c1d75e4d815c2c652e537f57e7fa05eaee284366f0d"
+    },
+    "evidence/FIRST_TRANSITION.json": {
+      "bytes": 1515,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/evidence/FIRST_TRANSITION.json",
+      "sha256": "8fc4b0c669142e7ec5203674b8471ff2e4b18ff59c27379db1510d28d9326cb9"
+    },
+    "owned_cpu097.py": {
+      "bytes": 15733,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/owned_cpu097.py",
+      "sha256": "53654acda4c3ce2ea35b57bc973ccc3883c62102362191120a2ea53e0f0fc6dd"
+    },
+    "owner097.py": {
+      "bytes": 15909,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/owner097.py",
+      "sha256": "39e10ec545cc333fb783897facf159bdcdc1243b6ca98fb0de0f9b79caf0c10c"
+    },
+    "test_guard092.py": {
+      "bytes": 4217,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/test_guard092.py",
+      "sha256": "fb536d16a2aaaadee19c0180164b5773458e38b1723e0857b2072342a11b1e01"
+    },
+    "top_guard092.py": {
+      "bytes": 7775,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/top_guard092.py",
+      "sha256": "04ef8acc591f52363947c605f6faa2a0bce4d16492a0e907db8719fc322764dd"
+    }
+  },
+  "guard_control_cases": 15,
+  "guest_source": {
+    "bytes": 7835,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-new24h-v1-097-repair1/SOURCE_MANIFEST.json",
+    "sha256": "17cc6553ed5c498f5db7cc66175f0e1867fbff7ef3263f263b3d7725aefe06e5"
+  },
+  "logical": 0,
+  "math_control_cases": 8,
+  "output_policy": {
+    "DL_ledger_used": false,
+    "automatic_cleanup": false,
+    "exclusive_new_leaf": true,
+    "old_roots_unchanged": true,
+    "parent": "/opt/host/vnf/austinov",
+    "prefix": "run-mxr-two-residual097repair1-"
+  },
+  "physical": 5,
+  "predecessor_failed_source": {
+    "bytes": 4577,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-086/SOURCE_MANIFEST.json",
+    "sha256": "4e538895161fed511db843d4acc873204117163c04a3e0a881cc585c16781dc0"
+  },
+  "predecessor_source": {
+    "bytes": 7056,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-prefill-three-arm-owned-new24h-v1-092/SOURCE_MANIFEST.json",
+    "sha256": "33db2dd0d97c4882d39b024d5a616540e86ada2745b4249880a2eff36233b40f"
+  },
+  "qualified": false,
+  "resource": {
+    "CPUwhole_seconds": 1000,
+    "NPUwhole_seconds": 900,
+    "child_seconds": 600,
+    "cleanup_seconds": 90,
+    "guest_bytes": 8589934592,
+    "host_bytes": 536870912,
+    "initial_RAM_bytes": 17716740096,
+    "initial_disk_bytes": 34359738368,
+    "live_disk_reserve_bytes": 9126805504,
+    "output_cap_bytes": 1073741824,
+    "reserve_bytes": 8589934592
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1",
+  "schema": "mxr.two-residual-owned-source/v097"
+}

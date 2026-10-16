@@ -1,0 +1,13 @@
+# MXR097 bounded two-residual single-frame discriminating experiment
+
+DefaultOFF; no new DSO; no model reload; no numerical/model/performance qualification. Old044/084/092/R6 source/results remain unchanged. Same actual normalized2K rank0 layer0 frame, same originalA32, shared native G/WY/H/O, commonHF32OFF. Original actual037 compensated library is reused with full actual039 source/build/readset provenance; its history is not097 PASS.
+
+Single math factor: retain FP32X1 before finalBF16, run another R2=I−(I+A32)X1, X2=X1+X1R2, then original BF16scatter. Same512MiB/2 pool, same scratch tensors/stream/event discipline; two extraFP32bmm pergroup. Production function does not importFP64/readback/synchronize. Diagnostic trace opt-in retains A32/X0/R1/X1/R2/X2 clones, counted in original pool reservation; no productiontraceclaim. Exact arithmetic E2=E1², but hardware FP32floor may prevent improvement. No guarantee of numeric success or speedup.
+
+New NPU stage first ACTUALLY recomputes original044 from original037 X0, requires fulloldB exact savedB, then complete output/state bitwise savedR6 anchor. Only then newtwo arm. IndependentCPU additionally requires the complete oldAPI A/G/B/W/U/Hentry/Vnew/Hfinal/O/state exactly equal092 oldarm before borrowing092 native/CPU64cast artifacts (not blindly rerunning). Savedprior stage/rows/A/G/input fingerprints all pinned. CPU64cast remains operationalTorch cast, not claimed exactRNE; new independent directintegerRNE separately used for B analysis.
+
+CPU consumer checks384 chunk/head traces, actual packing, X1cast==oldB/X2cast==newB, independentFP64 residuals and inverse, FP32/BF16 ULP/byte/signedzero, perchunk propagation and original .002/.02/.999 working metrics. No .002 threshold changes. Improvement ofFP32 withoutB improvement identifies cast boundary; failure to improveFP32 identifies floor. A single good frame cannot grant all-layer/holdout/service performance.
+
+MAIN only: same092 controlledDevices[] CPUfrontdoor runs15 guard+8math softwarecontrols then actualframe extraction; new singletonNPU uses sameactualDEVICE→SMI→ARM→cleanup; independentCPU consumes newstage afterward.8guest+.5host+8reserve, freshopt32GiB/live8.5GiB, wholeoutput1GiB/newraw256MiB, child600/CPUwhole1000/NPUwhole900/cleanup90 unchanged. Do not overlap an owned model blindly. No DLstorage or cleanup. Every output unique097. Actualdevice4alternative requires separateMAIN source-reviewed mapping; packet currently physical5 to reuse092 exactly.
+
+Review guest_core.py, two_residual097.py, consume.py, owner097.py, owned_cpu097.py, cpu_entry097.py, SOURCE manifests andmechanicaldiff. Localsoftware controls not sameimage/NPU evidence. All actual097 CPU/NPU results pending.

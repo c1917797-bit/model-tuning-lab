@@ -1,0 +1,97 @@
+{
+  "MAIN_only": true,
+  "commands": {
+    "NPU_execute": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/owner097.py",
+      "--execute",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/SOURCE_MANIFEST.json\",\"bytes\":6328,\"sha256\":\"0d08289d806ba4854b432d94d77811d3baf8e7ec3b0f55392da9e11fb21d3fa0\"}",
+      "--host-cpu",
+      "<HOST_CPU>",
+      "--guest-cpu",
+      "<GUEST_CPU>",
+      "--output",
+      "/opt/host/vnf/austinov/run-mxr-two-residual097repair1-npu-MAIN-20261016-001"
+    ],
+    "NPU_source_audit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/owner097.py",
+      "--source-audit",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/SOURCE_MANIFEST.json\",\"bytes\":6328,\"sha256\":\"0d08289d806ba4854b432d94d77811d3baf8e7ec3b0f55392da9e11fb21d3fa0\"}"
+    ],
+    "consume_execute": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/owned_cpu097.py",
+      "--execute",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/SOURCE_MANIFEST.json\",\"bytes\":6328,\"sha256\":\"0d08289d806ba4854b432d94d77811d3baf8e7ec3b0f55392da9e11fb21d3fa0\"}",
+      "--stage-ref",
+      "<EXACT_ACTUAL_084_STAGE_REF_JSON>",
+      "--host-cpu",
+      "<HOST_CPU>",
+      "--guest-cpu",
+      "<GUEST_CPU>",
+      "--output",
+      "/opt/host/vnf/austinov/run-mxr-two-residual097repair1-consume-MAIN-20261016-001"
+    ],
+    "consume_source_audit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/owned_cpu097.py",
+      "--source-audit",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/SOURCE_MANIFEST.json\",\"bytes\":6328,\"sha256\":\"0d08289d806ba4854b432d94d77811d3baf8e7ec3b0f55392da9e11fb21d3fa0\"}",
+      "--stage-ref",
+      "<EXACT_ACTUAL_084_STAGE_REF_JSON>"
+    ],
+    "preflight_execute": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/owned_cpu097.py",
+      "--execute",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/SOURCE_MANIFEST.json\",\"bytes\":6328,\"sha256\":\"0d08289d806ba4854b432d94d77811d3baf8e7ec3b0f55392da9e11fb21d3fa0\"}",
+      "--host-cpu",
+      "<HOST_CPU>",
+      "--guest-cpu",
+      "<GUEST_CPU>",
+      "--output",
+      "/opt/host/vnf/austinov/run-mxr-two-residual097repair1-preflight-MAIN-20261016-001"
+    ],
+    "preflight_source_audit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/owned_cpu097.py",
+      "--source-audit",
+      "--source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/SOURCE_MANIFEST.json\",\"bytes\":6328,\"sha256\":\"0d08289d806ba4854b432d94d77811d3baf8e7ec3b0f55392da9e11fb21d3fa0\"}"
+    ]
+  },
+  "guest_source": {
+    "bytes": 7835,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-new24h-v1-097-repair1/SOURCE_MANIFEST.json",
+    "sha256": "17cc6553ed5c498f5db7cc66175f0e1867fbff7ef3263f263b3d7725aefe06e5"
+  },
+  "qualified": false,
+  "sequence": [
+    "preflight",
+    "NPU",
+    "consume"
+  ],
+  "source": {
+    "bytes": 6328,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-owned-new24h-v1-097-repair1/SOURCE_MANIFEST.json",
+    "sha256": "0d08289d806ba4854b432d94d77811d3baf8e7ec3b0f55392da9e11fb21d3fa0"
+  }
+}

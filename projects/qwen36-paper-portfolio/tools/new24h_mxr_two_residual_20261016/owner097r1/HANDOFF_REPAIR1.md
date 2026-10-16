@@ -1,0 +1,7 @@
+#097 repair1: actual split-directory test readset
+
+Original097/0b68 FAIL is unchanged. Only test097 owned-file lookup now consumes the already verified own.files Ref3; cpu_entry passes that actual manifest. No undeclared sibling aliases. Eight math/interface controls and fifteen guard controls remain the actual same-image entry count. Owner root/output identities are new; compute guest, consumer and two_residual097.py are byte-identical.
+
+Local real split-layout execution: test_split_layout.py copies only each declared files collection into separate guest-v1/owned-v1 directories, verifies absence of sibling aliases, executes actual cpu_entry.main through all15guard+8math controls, then intercepts the loaded original guest.main at the actual saved-frame extraction boundary. No local actual-frame extraction is claimed. Missing owned owner097.py and altered-byte Ref both reject. Actual same-image entry does NOT intercept: original saved-frame extraction remains mandatory. No NPU/model PASS is claimed.
+
+Use COMMANDS.json actual sourceaudit then CPU-preflight then NPU then CPU-consumer as before. BYTE_EXACT_DELIVERY lists distinct guest and owned destination paths. Local repair sealer/test are delivery aids, not runtime authorization. Old flat-layout LOCAL_TESTS.json is intentionally removed from new guest manifest; inherited HANDOFF is historical context, this note is the repair scope.

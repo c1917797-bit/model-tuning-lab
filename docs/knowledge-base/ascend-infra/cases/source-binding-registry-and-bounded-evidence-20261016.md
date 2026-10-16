@@ -286,3 +286,44 @@ warmup while the canonical benchmark parser requires at least two.090R3 tests
 the actual parser and command builder with two warmups, retains child exit and
 stderr before a generic barrier failure, and passed actual sourceaudit. Its
 model diagnostic was running at this snapshot, not a performance gain.
+
+
+## Same-frame repair PASS and a caught identity defect (13:29UTC)
+
+097-repair1 actually passed same-image preflight, NPU0b8e and independent
+Devices[] consumption0b94. All384 trace anchors were consumed. The original
+working, native-peer and CPU64cast-peer gates passed without threshold changes;
+native-peer final-state relative L2 fell from0.00211012898911623 in092 to
+3.9299860606595066e-5. This proves a targeted repair on the saved rank0/layer0
+2K frame, not full-model or task qualification. The archived source leaves and
+exact report Ref3 are in MXR_REPAIR_AND_BOLE_20261016_1329UTC.json.
+
+098R1 then refused fresh physical5 foreign computation before creating any
+container. This is a resource admission failure, not failed MXR mathematics.
+The immutable R2 source bound and audited961 references/33 registered deltas.
+However, MAIN's actual host entry review found DEPLOY still used a split
+LOW/'...repair1' literal and the generated owner's DEPLOY replacement also
+pointed to repair1. HERE!=DEPLOY would deterministically reject execution.
+R2 was not executed. Its source and audit are retained; R3 must correct only
+that identity seam and test actual loaded globals plus generated-owner globals.
+A whole-byte inverse proves what changed, not that the new values are correct.
+An absolute-string-only renamer misses path fragments and dynamically emitted
+code. Sourceaudit PASS therefore cannot substitute for the execute predicate.
+
+DeltaLog088R2 actualN16 completed its new preregistered same-initial-native
+operational domain. Original independent strict FAIL, pass_gate=False and
+complete_proof=False remain unchanged. New diagnostic160 is running as0bef;
+it is not a model/performance certificate. Actual decode-graph095 remains a
+separate bounded PASS. Never union scopes merely because both jobs exited0.
+
+The human explicitly added BOLE2608.01651v1 for parallel preparation. Paper
+integration into SGLang is not proof of public upstream support. Actual660
+source shows Qwen MTP config/registry/loader infrastructure, but the existing
+Ascend proposer remains linear and the tree FA/conv/GDN/sampling/commit seams
+need adaptation. Dense-loader skipping mtp.* is normal separate-loader behavior,
+not evidence of an unsupported MTP checkpoint. Ordinary MTP is a necessary
+control, not BOLE success. Public-author implementation parity remains unverified.
+
+No final performance or task acceptance was achieved at this checkpoint.
+Continuous four-card utilization is unmeasured; a real single-card diagnostic
+and parallel CPU preparation do not prove four-card no-gap operation.

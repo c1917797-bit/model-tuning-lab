@@ -1,0 +1,146 @@
+{
+  "schema": "ascend.bole.start/v1",
+  "recorded_utc": "2026-10-16 13:02:13 UTC",
+  "human_authority": "也同时开始穿刺一下bole论文吧",
+  "paper": {
+    "id": "arXiv:2608.01651v1",
+    "title": "Bole: Efficient Tree Speculation for Hybrid-Attention Language Models",
+    "url": "https://arxiv.org/abs/2608.01651v1",
+    "fulltext": "https://arxiv.org/html/2608.01651v1",
+    "author_code_repository": "not_confirmed; paper links SGLang release/v0.5.12 as framework, not a verified Bole code release",
+    "source_parity": "pending; independently derived code must be labelled paper-derived until author parity exists",
+    "paper_drafter": "native model MTP per VI-A; no training assumption"
+  },
+  "window": {
+    "authority": ".agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+    "cutoff_utc": "2026-10-17T07:02:13Z",
+    "historical_cutoffs_immutable": true,
+    "automatic_extension": false,
+    "formal_NPU_start": null
+  },
+  "target": {
+    "model": "/cache/efim/Qwen3.6-27B",
+    "config": {
+      "path": "/cache/efim/Qwen3.6-27B/config.json",
+      "bytes": 4308,
+      "sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c"
+    },
+    "weight_index": {
+      "path": "/cache/efim/Qwen3.6-27B/model.safetensors.index.json",
+      "bytes": 112216,
+      "sha256": "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b"
+    },
+    "architecture": "Qwen3_5: 48 GDN + 16 full-attention layers",
+    "stack": "910B4 / vLLM-Ascend 0.23 / CANN9.1 / image660",
+    "mtp_config_layers": 1,
+    "mtp_index_keys": [
+      "mtp.fc.weight",
+      "mtp.layers.0.input_layernorm.weight",
+      "mtp.layers.0.mlp.down_proj.weight",
+      "mtp.layers.0.mlp.gate_proj.weight",
+      "mtp.layers.0.mlp.up_proj.weight",
+      "mtp.layers.0.post_attention_layernorm.weight",
+      "mtp.layers.0.self_attn.k_norm.weight",
+      "mtp.layers.0.self_attn.k_proj.weight",
+      "mtp.layers.0.self_attn.o_proj.weight",
+      "mtp.layers.0.self_attn.q_norm.weight",
+      "mtp.layers.0.self_attn.q_proj.weight",
+      "mtp.layers.0.self_attn.v_proj.weight",
+      "mtp.norm.weight",
+      "mtp.pre_fc_norm_embedding.weight",
+      "mtp.pre_fc_norm_hidden.weight"
+    ],
+    "mtp_tensor_load_verified": false,
+    "mtp_worker_execution_verified": false
+  },
+  "delivery": {
+    "plugin_monkeypatch": true,
+    "explicit_optin": true,
+    "default_OFF": true,
+    "training": false,
+    "distillation": false,
+    "upstream_image_model_mutation": false,
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "parallel_preparation": {
+    "math_oracle": "/root/gdn_paper_reassessment: private bole-ascend-new24h-110",
+    "runtime_and_MTP": "/root/accuracy_input_repair: private bole-vllm-ascend-seams-new24h-111",
+    "other_live_track": "/root/ge_fullgdn_ready: MXR varlen/production",
+    "MAIN": "sole resource admission, actual source review, real NPU and paired model execution"
+  },
+  "mechanism": [
+    "tree-structured exact GDN verifier, not ordinary MTP renamed",
+    "factorized recurrent-state storage with only selected accepted-path commit",
+    "tree-aware causal convolution and full-attention ancestor masking",
+    "hardware-calibrated batch-wide verification budget"
+  ],
+  "gates": [
+    {
+      "id": "B0",
+      "requires": "author/source/license and actual pinned-stack loader/tree seams; actual checkpoint MTP metadata is a lead, not loading success",
+      "status": "in_progress"
+    },
+    {
+      "id": "B1",
+      "requires": "independent sequential parent-state tree reference versus paper closed form and selected-state commit; cross-request/sibling isolation, masks, decay, normalization and negative controls",
+      "status": "preparing"
+    },
+    {
+      "id": "B2",
+      "requires": "new immutable real-NPU correctness ticket: actual shapes, independent oracle, original-state preservation, branches/commit/slots/multistep/graph as applicable; tensor tolerances preregistered before launch",
+      "status": "pending"
+    },
+    {
+      "id": "B3",
+      "requires": "actual TP4 all GDN/FA/conv/MTP worker activation, rejected branches/EOS/request lifecycle and target-greedy correctness; no all-native fallback",
+      "status": "pending"
+    },
+    {
+      "id": "B4",
+      "requires": "matched AR, ordinary-tree speculation and Bole controls using same drafter/proposal budget; fixed output1024 and profilingOFF; then three promising pairs, TTFT/TPOT",
+      "status": "pending"
+    },
+    {
+      "id": "B5",
+      "requires": "GSM8K/HumanEval/MMLU same original inputs, thinkOFF,max2048,normalEOS, smoke then full, report pp and relative loss conservatively both<=1%",
+      "status": "pending"
+    }
+  ],
+  "risk_register": [
+    {
+      "risk": "author implementation not confirmed",
+      "action": "search primary sources; retain explicit paper-derived/parity gap, not automatic paper rejection"
+    },
+    {
+      "risk": "mtp tensors may be skipped by current dense loader",
+      "action": "inspect real loader/registry/proposer and minimally adapt plugin only; no training"
+    },
+    {
+      "risk": "flattened sequence corrupts tree conv or FA ancestor semantics",
+      "action": "independent branch-aware reference, actual mask/state/commit tests"
+    },
+    {
+      "risk": "component speedup may be overwhelmed by proposer and runtime overhead",
+      "action": "matched AR/tree/Bole whole-model controls; no kernel-to-E2E extrapolation"
+    },
+    {
+      "risk": "new preparation competes with nearest qualified successor",
+      "action": "independent host preparation, MAIN ready queue and summed resources; never dummy card occupation"
+    }
+  ],
+  "status": "parallel_preparation_started",
+  "NPU_executed": false,
+  "model_ready": false,
+  "accepted": false
+}
