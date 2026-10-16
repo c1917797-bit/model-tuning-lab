@@ -1,0 +1,30 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "component": "independent_lifecycle_worker_controls.py plus lifecyclecontroller capture",
+  "focused": {
+    "operation": "exec-0000000000000ae5",
+    "tests": 23,
+    "exit": 0,
+    "scope": "10procfixturecontrols+13policy/ASTcontrols"
+  },
+  "regression": {
+    "operation": "exec-0000000000000ae6",
+    "tests": 736,
+    "exit": 0
+  },
+  "whitelist": [
+    "INDEPENDENT_COMPACT_HYPIC",
+    "INDEPENDENT_COMPACT_MANIFEST",
+    "PYTHONPATH",
+    "VLLM_SERVER_DEV_MODE"
+  ],
+  "features": [
+    "exactCID/foreignfree snapshot beforeproc reading",
+    "fourindependentphysical0-3workerPIDs andNSpid mapping",
+    "atmost64KiB environ read;onlywhitelistfieldsoutput",
+    "duplicatecontrols/exactcgroupboundary/sourceownershipreject",
+    "controller durablyrecords selectedstartupcontrols beforesemantic request"
+  ],
+  "scope": "HOST procfixture tests only; no actualdeviceworkercontrolscapture. Notdisable/uninstall/restart acceptance. No fullenvironment orcredentials stored.",
+  "next": "Independentstagecontrol/launch/terminal andthree-state rollback audit, thenfrozenlifecyclepackage/contracts. M4/M5progressiongates remain; noownedNPUjob."
+}

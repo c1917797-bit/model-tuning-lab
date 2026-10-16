@@ -396,6 +396,11 @@ def run_contract(contract):
                 assert all(r["response"]["usage"]["completion_tokens"]>0 for r in responses)
         assert len(worker_pids)>=4,"Missing physical worker evidence"
         assert physical_devices_seen==set(range(4)),"Missing physical card coverage"
+        from independent_lifecycle_worker_controls import capture_worker_controls
+        control_snapshot=snapshot(cid);retain_snapshot(control_snapshot)
+        control_record={"event":"lifecycle-worker-startup-controls","stage":stage,"container_id":cid,
+            "snapshot_utc":control_snapshot["utc"],"workers":capture_worker_controls(control_snapshot,cid)}
+        write(raw,"lifecycle-worker-controls.json",control_record);journal.append(control_record)
         from independent_lifecycle_policy import semantic_payload,check_semantic
         semantic_body=semantic_payload();require_guard()
         semantic_response=request(port,semantic_body,completion=False,timeout=120)
