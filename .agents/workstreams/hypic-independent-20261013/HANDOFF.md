@@ -1,4 +1,14 @@
-# CURRENT R21 C2 FINITE GATE HOST READY; NO DEVICE RUN
+# CURRENT R21 FINITE CANARY CONTRACT HOST READY; NO DEVICE RUN
+
+New C2_FINITE_R21_CANARY_R1_CONTRACT.json binds current source andnewraw
+/cache/cch/hypic-independent-20261013/c2-finite-r21-canary-r1 (notstarted).
+audit_r21_c2_finite_canary.py retainsR20numeric/source/ownership/physical/release
+andjoins everyhotC2completion with exactpreceding same-rank/step/layer finitegate.
+17focused10a6PASS; offlinecontrollercheck10a8PASS(device_run=false);
+1005fullCPU10aaPASS. Next commit/publishthenfreshactualadmission beforeCanary.
+No speed/fullqualityclaim. R20negative retained;fullgoalunfinished.
+
+# HISTORICAL R21 C2 FINITE GATE HOST READY; NO DEVICE RUN
 
 Defaultoff c2_layer_finite_gate aggregates relocatedK/V finitechecks before any
 cachewrite/backenddispatch; layercompletionbarrier andleasesretained.
