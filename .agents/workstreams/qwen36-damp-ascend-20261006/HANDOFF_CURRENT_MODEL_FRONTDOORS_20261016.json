@@ -1,40 +1,36 @@
 {
   "schema": "ascend.current-model-frontdoor-handoff/v1",
-  "recorded_at_utc": "2026-10-16T23:44:00Z",
+  "recorded_at_utc": "2026-10-17T00:59:51Z",
   "authority_file": "CONDITIONAL_EXTENSION24H_AUTHORITY_20261016.json",
   "original_cutoff_utc": "2026-10-17T07:02:13Z",
   "extension_used": 0,
   "extension_condition_met": false,
   "new_nonHYPIC_accepted_technology": false,
   "current_owner": {
-    "operation": "exec-0000000000000fd3",
-    "state": "running_at_last_poll",
+    "operation": "exec-00000000000010a0",
+    "paper": "BOLE131R7",
+    "state": "running_at_dispatch",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/SOURCE_MANIFEST.json",
-      "bytes": 45113,
-      "sha256": "20851c35a33ed27dc7688f23e716e91d32d8270224a1ac359dce0a9f70ff3cf3"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair7/SOURCE_BOUND.json",
+      "bytes": 39768,
+      "sha256": "a62228f481a4447a17eaa40ee2016af6fc954892e78db3eba41e24dc71bb82ef"
     },
-    "output": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-anchor-recovery127repair5-MAIN-20261016-NEW24H-001",
-    "scope": "Independent CPU-only retained160 mathematical recovery, Devices[]; whole3600/child2700 maximum dynamically capped, cleanup90/final300/margin90. No NPU/model/performance promotion.",
-    "MAIN_only_admission": true
+    "bind_operation": "exec-000000000000109b",
+    "sourceaudit_operation": "exec-000000000000109d",
+    "resource_admission_operation": "exec-000000000000109e",
+    "actual_old_R6_four_ref_smoke_operation": "exec-000000000000109f",
+    "actual_old_R6_four_ref_smoke_passed": true,
+    "output": "/opt/host/vnf/austinov/run-bole-model131repair7-MAIN-NEW24H_001",
+    "whole_seconds": 3600,
+    "cleanup_seconds": 180,
+    "actual_sameimage_cases_required": 58,
+    "purpose": "Real three-node model mechanism diagnostic; no persistent scheduler publication or whole numerical/performance qualification",
+    "qualification": false
   },
   "next_NPU": {
-    "primary": "DeltaLog R12 native-only postprepare all64 cache/GPU-index/format observation, SOURCE_ONLY preparing; no DL math/registration and unconditional stop before real request model forward. Await exact reviewed/bound source and current CPU owner's real release.",
-    "alternative": {
-      "paper": "BOLE131R5 first-host-fault telemetry, same frozen math/safety",
-      "source": {
-        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair5/SOURCE_BOUND.json",
-        "bytes": 37227,
-        "sha256": "14ca4fe97b5173eb37332a351576bb1e79bbf7da109b488d093ade486dbc1e6a"
-      },
-      "sourceaudit_operation": "exec-0000000000000fda",
-      "sourceaudit_exit": 0,
-      "readset": 211,
-      "output": "/opt/host/vnf/austinov/run-bole-model131repair5-MAIN-NEW24H_001",
-      "actual_sameimage54_pending": true,
-      "NPU_executed": false
-    },
-    "admit_only_after": "Current exact CPU CID terminal/release and fresh physical4-7/RAM/CPU/disk/mapping/no-output-overwrite checks; do not relabel or silently permit concurrent owned guests."
+    "paper": "DeltaLog101R16",
+    "status": "Preparing minimal previously proven Ascend ops.gdn-before-runner import ordering and fresh exact-service-parser CPU preflight. No boundsource or new resource permission yet.",
+    "qualification": false
   },
   "last_model_result": {
     "ref": {
@@ -97,18 +93,32 @@
     "cost_caution": "child_scope includes final fence; nested phases inclusive/nonadditive; actual cache state uncontrolled; selected estimate not full-run guarantee"
   },
   "parallel_preparation": {
-    "accuracy_input_repair": "R12 native-only committed actual64 views/indices/ND-format capture; original DL guard/math unchanged. No repeated Windows110 suite to chase sandbox-only HTTP/fixture restrictions; 6 focused pass, actual same-image110 remains required.",
-    "gdn_paper_reassessment": "Exact current-image override/shared-pool and max_memory formulas audited/3+3 AST controls; no physical-capacity or RAM pass. New128R3 typed receiver prep for actually pending127R5 report; cannot fabricate future Ref/promotion.",
-    "ge_fullgdn_ready": "BOLE131R5 observability source delivered/bound/audited, not NPU run. Next-generation compatible CPU/NPU admission proposal only; do not change currently frozen running127R5 controller.",
-    "constraints": "No new whole-model numerical PASS, paired performance or final task scores. Current controllers have no approved concurrent owned-guest compatibility protocol."
+    "accuracy_input_repair": "R7 independent all14 strict-boundary review PASS; preparing R16 real-parser parity repair rather than new import-loader. Prior CPU127R6+R15 joint audit found CPU lease noncomposable under7CPU assumptions; no concurrent CPU160 admitted.",
+    "ge_fullgdn_ready": "New minimal DeltaLog fresh/reset/retire lifecycle adapter code preparation from exact native source, retaining alias guard; no frozen runtime edits. Identified preclear flush, prefill overwrite, and zero-token-only retirement seams.",
+    "gdn_paper_reassessment": "R7 source frozen/bound/audited and actual oldR6 four-evidence conversion PASS; no math/threshold/controller originalRef2 changes. Current MAIN model diagnostic running.",
+    "constraints": "No whole-model numerical PASS, E2E performance or final task scores. No fake load or claim of uninterrupted4card utilization; protect0–3. Idle agents are not rerun merely to appear busy."
   },
   "git": {
-    "last_normal_pushed": "464cab365bba5e8a0cc7e0c4cc793e4cc2445b35",
-    "remote_tip_verified_operation": "exec-0000000000000fa2",
-    "archive_path": "projects/qwen36-paper-portfolio/tools/new24h_recovery_frontdoors_20261016_2340",
-    "archive_exact_source_files": 147,
-    "archive_bytes": 2086991,
-    "archive_source_only_not_acceptance": true
+    "local_commit": "e56d41c58818f2d6f2845f3f93b5ea38594b19b1",
+    "normal_push_operation": "exec-0000000000001006",
+    "normal_push_exit": 0,
+    "normal_push_reported_remote_transition": "464cab36..e56d41c5",
+    "protocol": "per-commandHTTP/1.1, TLSverification unchanged, noforce",
+    "archive": "projects/qwen36-paper-portfolio/tools/new24h_recovery_frontdoors_20261016_2340",
+    "earlier_TLS_failure_retained": "exec-0000000000000fea",
+    "earlier_remote_timeout_retained": "exec-0000000000000ff3",
+    "last_fresh_remote_before_retry": "exec-0000000000000ffe verified464cab36",
+    "current_handoff_uncommitted_after_stage_update": true,
+    "pending_stage_archive": "projects/qwen36-paper-portfolio/tools/new24h_model_repairs_20261017_0048",
+    "pending_archive_copies": {
+      "R15_operation": "exec-0000000000001097",
+      "R15_files": 115,
+      "R15_bytes": 1687811,
+      "R7_operation": "exec-00000000000010a1",
+      "R7_files": 117,
+      "R7_bytes": 1747347,
+      "all_byte_equal": true
+    }
   },
   "physical_scope": [
     4,
@@ -139,22 +149,264 @@
     "released": true
   },
   "card_snapshot": {
-    "operation": "exec-0000000000000fc9",
-    "physical4_7_no_PIDs": true,
-    "AICore": [
-      0,
-      0,
-      0,
-      0
-    ],
+    "operation": "exec-000000000000109e",
+    "epoch": 1792198603.8146443,
+    "physical4_7_no_PIDs_before_start": true,
     "HBM_MiB": [
-      2866,
+      2867,
       2868,
       2865,
-      2865
+      2864
     ],
-    "protected0_3_external_workers_not_touched": true,
-    "window_utilization": "not measured; snapshot only",
-    "CPU_recovery_is_not_NPU_utilization": true
+    "MemAvailable_kB": 80246208,
+    "model56_5GiB_floor_passed": true,
+    "protected0_3": "not used or stopped byMAIN; external workload naturally released",
+    "not_full_window_utilization": true
+  },
+  "last_CPU_recovery": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair5/SOURCE_MANIFEST.json",
+      "bytes": 45113,
+      "sha256": "20851c35a33ed27dc7688f23e716e91d32d8270224a1ac359dce0a9f70ff3cf3"
+    },
+    "result": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-anchor-recovery127repair5-MAIN-20261016-NEW24H-001/RESULT.json",
+      "bytes": 2193,
+      "sha256": "af4fce690f28ad93f618cdfc79b2a9ee6fd29db1f89b0ff6a344cff04aa08896"
+    },
+    "operation": "exec-0000000000000fd3",
+    "exit": 3,
+    "primary": "ValueError('whole prechecks exceed registered420; no create')",
+    "elapsed_seconds": 595.1748831500299,
+    "complete_final_fence": true,
+    "secondary": [],
+    "guest_created": false,
+    "math_executed": false,
+    "independent_noCID_release_check": "exec-0000000000000ffa",
+    "owned_CIDs": [],
+    "numeric_or_paper_failure": false,
+    "new_recovery_policy": "Prepare separately frozenR6 pre900 with same whole3600/childmax2700 dynamically capped/cleanup90/final300/margin90/cut. Never rewrite oldR5 or claim full160 validation.",
+    "next_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-anchor-consumer-recovery-new24h-v1-127-repair6/SOURCE_MANIFEST.json",
+      "bytes": 47336,
+      "sha256": "a03d45d85404a6f81b83fd2eb10cd6f0f710b3f0dd2f6a05962a4b7418f231cc"
+    },
+    "next_bind_operation": "exec-000000000000102e",
+    "next_status": "bound, sourceaudit and exclusiveCPU resource admission pending; no full160 execution"
+  },
+  "last_software_failures": [
+    {
+      "paper": "DL101R12",
+      "operation": "exec-0000000000000ffc",
+      "result": {
+        "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R12-main-NEW24H_MODEL101R12_001/RESULT.json",
+        "bytes": 2422,
+        "sha256": "7a053a5041bc448fec84b6026cdd4befe55fa94e6a135f1b105929a03fa4f76c"
+      },
+      "actual_sameimage_cases": 110,
+      "passed": 109,
+      "failed": 1,
+      "first_fault": "test_geometry058r2 still expected two requests after client changed to native-only one request",
+      "NPU_started": false,
+      "elapsed_seconds": 90.57962463999866,
+      "cleanup_seconds": 16.245684820052702,
+      "secondary": [],
+      "exact_CPU_CID": "ae1490e9fb02a7dd781f57805312773fd4cfb32c003de4e64a4d72b773b8f999",
+      "independent_release": "exec-0000000000001005",
+      "released": true,
+      "attribution": "post-final-scope-change affected old AST control omitted; not import contamination or paper failure",
+      "repair": "101R13 affects only exact scope test/identity, unchanged collector/plugin/consumer/client bytes"
+    },
+    {
+      "paper": "BOLE131R5",
+      "operation": "exec-0000000000001007",
+      "result": {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair5-MAIN-NEW24H_001/RESULT.json",
+        "bytes": 80218,
+        "sha256": "37845271b1c7e8cb94476c60028569abc1e7d00cc7d8973c470ac2545655e9bf"
+      },
+      "actual_sameimage_cases": 54,
+      "passed": 53,
+      "errors": 1,
+      "first_fault": "old whole-frontdoor inverse test delimiter expected single-line except, but new host telemetry uses multi-line except",
+      "NPU_started": false,
+      "elapsed_seconds": 25.565571629966144,
+      "cleanup_seconds": 16.287253040005453,
+      "secondary": [],
+      "exact_CPU_CID": "2e47266b3d089a2e54163917ec06c45d2f5a191f99ad72e828fdffc2b38fb54e",
+      "independent_release": "exec-0000000000001010",
+      "released": true,
+      "full_host_first_fault_receipt_saved": true,
+      "repair": "131R6 strict exact full R5→R4 telemetry inverse then original whole-body checks; do not weaken inverse"
+    }
+  ],
+  "shared_blocker": {
+    "class": "RECOVERED_EXTERNAL_STATE_CHANGE",
+    "Docker_root": "/cache/docker",
+    "observed_free_bytes": 23579803648,
+    "required_min_bytes": 9126805504,
+    "observation_operation": "exec-000000000000108b",
+    "cleanup_deleted_files": 0,
+    "cleanup_deleted_containers": 0,
+    "recovery_attribution": "Unidentified external state change; not our cleanup outcome",
+    "backup_only_failed_operations": [
+      "exec-0000000000001049",
+      "exec-0000000000001052",
+      "exec-0000000000001058"
+    ],
+    "backup_socket_inventory": "exec-0000000000001060",
+    "source_directory_scan": "exec-000000000000105d",
+    "next_cleanup": "Read-only inspect actual SKVQ014311278080000B constituents and current dependencies before any selective delete; not a resource blocker for admittedR14",
+    "continuous_idle_window": "not measured"
+  },
+  "previous_DL_R13": {
+    "operation": "exec-0000000000001014",
+    "state": "terminal_failed_environment_released",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair13-native-postprepare-footprint-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 202357,
+      "sha256": "c1a4bdbe1d2d346fdba15fbe00204169b0716b8a30d37e810e841166e8eef9cd"
+    },
+    "output": "/opt/host/vnf/austinov/run-deltalog-MODEL101R13-main-NEW24H_MODEL101R13_001",
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R13-main-NEW24H_MODEL101R13_001/RESULT.json",
+      "bytes": 4619,
+      "sha256": "7527c7adc60fdea0d5e81139eb600d124d32987411e70459e933f03ca9a81ab7"
+    },
+    "primary": "ValueError('Docker retains original8.5GiB reserve')",
+    "elapsed_seconds": 128.75379715999588,
+    "cleanup_seconds": 33.43126298999414,
+    "secondary": [],
+    "CPU_actual_sameimage_110_pass": true,
+    "model_or_candidate_math_reached": false,
+    "independent_release_operation": "exec-0000000000001019",
+    "exact_owned_CIDs_stopped_Pid0_noExec_noOOM": true,
+    "classification": "ENVIRONMENT_OR_SCHEDULING",
+    "numeric_or_paper_failure": false
+  },
+  "previous_DL_R14": {
+    "operation": "exec-0000000000001074",
+    "state": "terminal_failed_implementation_released",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair14-native-postprepare-footprint-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 202954,
+      "sha256": "292ec52ce18572ddca699612c7ecb9b7a0cc0c47762f72ae9c444294770f5cf7"
+    },
+    "sourceaudit_operation": "exec-0000000000001064",
+    "resource_admission_operation": "exec-0000000000001066",
+    "output": "/opt/host/vnf/austinov/run-deltalog-MODEL101R14-main-NEW24H_MODEL101R14_001",
+    "whole_seconds": 2700,
+    "cleanup_seconds": 32.666097669978626,
+    "purpose": "Native postprepare all64 cache geometry/committed-index/format observation only; deliberate DiagnosticStop before real request decoder or candidate math",
+    "qualification": false,
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R14-main-NEW24H_MODEL101R14_001/RESULT.json",
+      "bytes": 3537,
+      "sha256": "46670a5a63f100aefb54725cc7e04361e7d6054a892b4978665b23f73f401db6"
+    },
+    "CPU_actual_sameimage_110_pass": true,
+    "CPU_seconds": 9.145,
+    "primary": "ValueError('original child failure retained: DL-four-canary')",
+    "first_cause": "native observer exact ACL header SHA/enum predicate; embedded header decodes to13721/827d3a579902e1e81a85e0d7c5e1f0f541a5f65ab00662bac40d0e509376085a rather than pinned13720/4055d6b9d3a96face0efb5d68aafb68900a1d9c78c6a877ae21381688dd8b529; unique extra trailingLF",
+    "classification": "IMPLEMENTATION_OR_ARTIFACT_ENCODING",
+    "elapsed": 170.79151521995664,
+    "secondary": [],
+    "model_or_candidate_math_reached": false,
+    "independent_release_operation": "exec-000000000000107c",
+    "owned_CIDs": [
+      "aea3de38acc5eadfbb1685aede7b450ee667dd7590259fff218f8e058dd3646e",
+      "2104eadab7fcb0fe56a71296ffc942c5766436aa2cf554b4b33dcbb573cb220c"
+    ],
+    "released": true,
+    "repair": "New R15 only, preserve pinned exactheaderSHA/bytes and R14FAIL, add source-snapshot positive/negative software controls; no runtime strip or guard relaxation",
+    "numeric_or_paper_failure": false
+  },
+  "previous_BOLE_R6": {
+    "operation": "exec-000000000000107d",
+    "paper": "BOLE131R6",
+    "state": "terminal_failed_implementation_released",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair6/SOURCE_BOUND.json",
+      "bytes": 38214,
+      "sha256": "a151f3de035b7f281a7fb4b3ae53cd5ff820aef273c6e319a548359c48346976"
+    },
+    "sourceaudit_operation": "exec-0000000000001025",
+    "resource_admission_operation": "exec-000000000000107c",
+    "output": "/opt/host/vnf/austinov/run-bole-model131repair6-MAIN-NEW24H_001",
+    "whole_seconds": 3600,
+    "cleanup_seconds": 180,
+    "purpose": "Actual model three-node tree and native AR diagnostics with independent component comparison; not production publication or whole numerical qualification",
+    "qualification": false,
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-bole-model131repair6-MAIN-NEW24H_001/RESULT.json",
+      "bytes": 82152,
+      "sha256": "f76ea66c06649768bd260b522134583d02c97ca7a615753832fa7637113f0dcf"
+    },
+    "primary": "ValueError('exact Ref3')",
+    "first_fault_phase": "dense-startup/mtp-load-read",
+    "first_fault_path": "/opt/host/vnf/austinov/run-bole-model131repair6-MAIN-NEW24H_001/HOST-FIRST-FAULT.json",
+    "sameimage_software54_pass": true,
+    "all4_canary_pass": true,
+    "all4_weights_loaded": true,
+    "HTTP_health_passed": true,
+    "real_tree_client_reached": false,
+    "first_cause": "Original source-bound025 c.ref/c.write returns exact Ref2{path,sha256}; strict C.sourceio expects Ref3{path,bytes,sha256}. Adapter omitted across multiple boundaries.",
+    "classification": "IMPLEMENTATION_OR_EVIDENCE_ABI",
+    "elapsed": 486.01674826000817,
+    "cleanup_spent": 35.513458080007695,
+    "secondary": [],
+    "source_before_after_equal": true,
+    "unique_source_paths": 213,
+    "independent_release_operation": "exec-000000000000108b",
+    "CIDs": [
+      "ef9cd0b760c3e1e5476a77e754159bd7f8774532fe599870eeb1a6f4f9183ff7",
+      "d556a3e4d3288ea6e8244db7b1461ecfb740c374169eb478d66a51ab0aef8e12"
+    ],
+    "released": true,
+    "numerical_or_paper_failure": false
+  },
+  "previous_DL_R15": {
+    "operation": "exec-000000000000108c",
+    "paper": "DeltaLog101R15",
+    "state": "terminal_failed_implementation_released",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair15-native-postprepare-footprint-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 203809,
+      "sha256": "941a28902b7221d511670dc210f0e132e9393e03de538749630d694d3e0b19a6"
+    },
+    "bind_operation": "exec-0000000000001086",
+    "sourceaudit_operation": "exec-0000000000001088",
+    "resource_admission_operation": "exec-000000000000108b",
+    "output": "/opt/host/vnf/austinov/run-deltalog-MODEL101R15-main-NEW24H_MODEL101R15_001",
+    "whole_seconds": 2700,
+    "cleanup_seconds": 32.609321899944916,
+    "CPU_cases_required": 114,
+    "changed": "Only exact embeddedheader snapshot and affected softwarecontrols/identity; plugin/collector/consumer/probe/client/runowner exactR14",
+    "purpose": "Native postprepare all64 actual format/committed footprint observation; deliberate stop BEFORE real decoder/candidate math; not numerical/model/perf/task qualification",
+    "qualification": false,
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R15-main-NEW24H_MODEL101R15_001/RESULT.json",
+      "bytes": 3179,
+      "sha256": "eb51d7bdbb58902abab55b70cc7d418057c62d1dee5770c29c0dac29d4a36375"
+    },
+    "CPU_actual_sameimage_114_pass": true,
+    "CPU_seconds": 9.402,
+    "all4_canary_pass": true,
+    "actual_format_API_callable": true,
+    "header_original_guard_passed": true,
+    "primary": "ValueError('bounded actual DL server startup')",
+    "first_cause": "ImportError in actual service parser/general-plugin path: native observer imports NPUModelRunner before Ascend ops.gdn initialization; DeviceOperator circular import. Canary probe had different prewarmed module order.",
+    "classification": "IMPLEMENTATION_OR_STARTUP_IMPORT_ORDER",
+    "elapsed": 192.85469810996437,
+    "secondary": [],
+    "model_weights_loaded": false,
+    "real_request_reached": false,
+    "numerical_or_paper_failure": false,
+    "independent_release_operation": "exec-000000000000109e",
+    "owned_CIDs": [
+      "bc9f88606d781110d247d2c6ab5900c2d08ae86befff2e8e3693b3ebdbb4c784",
+      "cf79665394374b4e5aac6899154c0c50969be1a40bcd1aeac805f89ce4189fce"
+    ],
+    "released": true
   }
 }

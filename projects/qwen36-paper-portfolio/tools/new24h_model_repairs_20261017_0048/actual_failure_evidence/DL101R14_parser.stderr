@@ -1,0 +1,19 @@
+can not use command: npu-smi info
+[W1017 00:36:26.811455990 NPUCachingAllocator.cpp:202] Warning: The current CANN and HDK(driver) versions require processing for 32 padding size, with memory allocation. (function operator())
+`Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+Traceback (most recent call last):
+  File "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair14-native-postprepare-footprint-20261017-001/probe.py", line 60, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+                                             ^^^^^^
+  File "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair14-native-postprepare-footprint-20261017-001/probe.py", line 51, in main
+    load_general_plugins();args=proof.parse(api,native)
+    ^^^^^^^^^^^^^^^^^^^^^^
+  File "/vllm-workspace/vllm/vllm/plugins/__init__.py", line 82, in load_general_plugins
+    func()
+  File "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair14-native-postprepare-footprint-20261017-001/native_observer_plugin101r12.py", line 16, in register
+    _,layout_bytes=F.exact(m['files']['LAYOUT_SOURCE_EVIDENCE101R12.json']);layout=json.loads(layout_bytes);header=base64.b64decode(layout['acl_base_rt.h']['base64']);O.need(hashlib.sha256(header).hexdigest()==F.ACL_SHA and b'ACL_FORMAT_ND = 2' in header,'actual exact ACL enum ND2 source')
+                                                                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair14-native-postprepare-footprint-20261017-001/owner_overlay.py", line 7, in need
+    if not v:raise ValueError(m)
+             ^^^^^^^^^^^^^^^^^^^
+ValueError: actual exact ACL enum ND2 source

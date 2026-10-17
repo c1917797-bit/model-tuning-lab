@@ -1,0 +1,81 @@
+{
+  "CPU": [
+    "/usr/bin/env",
+    "BOLE_MODEL131_MAIN_ENABLE=1",
+    "DENSE090_EXTERNAL_OUTPUT_ENABLE=1",
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair7/host090.py",
+    "--execute",
+    "--cpu-only",
+    "--source-ref",
+    "<ACTUAL_SOURCE_BOUND_REF_JSON>",
+    "--output",
+    "/opt/host/vnf/austinov/run-bole-model131repair7-CPU-MAIN-NEW24H_001"
+  ],
+  "NPU_authorized": false,
+  "bind": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair7/bind_model.py",
+    "--execute",
+    "--reviewed-template-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair7/SOURCE_TEMPLATE.json\",\"bytes\":42605,\"sha256\":\"68c9d8efe92f4dec56f7af7105905c784748a5ce87ce1c8349f0091bf28f3ba7\"}",
+    "--component-refs-json",
+    "<ACTUAL_112FULL72_AND_118TR1_SOURCE_NUMERIC_OWNER_CONSUMER_OWNER_OBJECT>"
+  ],
+  "cold": [
+    [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair7/entry.py"
+    ],
+    [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair7/entry.py",
+      "--source-audit"
+    ],
+    [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair7/entry.py",
+      "--software"
+    ]
+  ],
+  "model": [
+    "/usr/bin/env",
+    "BOLE_MODEL131_MAIN_ENABLE=1",
+    "DENSE090_EXTERNAL_OUTPUT_ENABLE=1",
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair7/host090.py",
+    "--execute",
+    "--source-ref",
+    "<ACTUAL_SOURCE_BOUND_REF_JSON>",
+    "--output",
+    "/opt/host/vnf/austinov/run-bole-model131repair7-MAIN-NEW24H_001"
+  ],
+  "model_launch_available": true,
+  "qualification": false,
+  "source": {
+    "bytes": 42605,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair7/SOURCE_TEMPLATE.json",
+    "sha256": "68c9d8efe92f4dec56f7af7105905c784748a5ce87ce1c8349f0091bf28f3ba7"
+  },
+  "sourceaudit": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair7/host090.py",
+    "--source-audit",
+    "--source-ref",
+    "<ACTUAL_SOURCE_BOUND_REF_JSON>"
+  ]
+}

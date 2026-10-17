@@ -1,0 +1,37 @@
+can not use command: npu-smi info
+Traceback (most recent call last):
+  File "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair15-native-postprepare-footprint-20261017-001/entry.py", line 50, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair15-native-postprepare-footprint-20261017-001/entry.py", line 49, in main
+    return private(o).main(['--execute',*rest,'--mode','capture'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-launch-20261013-003/guest_capture_entry.py", line 112, in main
+    parsed = proof.parse(api, native)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-d8-fp32-model-boundary-r87-v1-011/config_cpu.py", line 62, in parse
+    parser = api.make_arg_parser(api.FlexibleArgumentParser(description=__doc__))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/vllm-workspace/vllm/vllm/entrypoints/openai/cli_args.py", line 382, in make_arg_parser
+    parser = AsyncEngineArgs.add_cli_args(parser)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/vllm-workspace/vllm/vllm/engine/arg_utils.py", line 2585, in add_cli_args
+    load_general_plugins()
+  File "/vllm-workspace/vllm/vllm/plugins/__init__.py", line 82, in load_general_plugins
+    func()
+  File "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair15-native-postprepare-footprint-20261017-001/native_observer_plugin101r12.py", line 10, in register
+    from vllm_ascend.worker.model_runner_v1 import NPUModelRunner as N
+  File "/vllm-workspace/vllm-ascend/vllm_ascend/worker/model_runner_v1.py", line 106, in <module>
+    from vllm_ascend.attention.attention_v1 import AscendAttentionBackend, AscendAttentionState
+  File "/vllm-workspace/vllm-ascend/vllm_ascend/attention/attention_v1.py", line 66, in <module>
+    from vllm_ascend.device.device_op import DeviceOperator
+  File "/vllm-workspace/vllm-ascend/vllm_ascend/device/device_op.py", line 32, in <module>
+    from vllm_ascend.ops.triton.fla.chunk_scaled_dot_kkt import chunk_scaled_dot_kkt_fwd_kernel
+  File "/vllm-workspace/vllm-ascend/vllm_ascend/ops/__init__.py", line 21, in <module>
+    import vllm_ascend.ops.fused_moe.fused_moe  # noqa
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/vllm-workspace/vllm-ascend/vllm_ascend/ops/fused_moe/fused_moe.py", line 41, in <module>
+    from vllm_ascend.ops.fused_moe.experts_selector import select_experts, zero_experts_compute
+  File "/vllm-workspace/vllm-ascend/vllm_ascend/ops/fused_moe/experts_selector.py", line 25, in <module>
+    from vllm_ascend.device.device_op import DeviceOperator
+ImportError: cannot import name 'DeviceOperator' from partially initialized module 'vllm_ascend.device.device_op' (most likely due to a circular import) (/vllm-workspace/vllm-ascend/vllm_ascend/device/device_op.py)

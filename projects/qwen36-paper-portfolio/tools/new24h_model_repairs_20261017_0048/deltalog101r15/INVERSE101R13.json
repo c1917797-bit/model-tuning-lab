@@ -1,0 +1,31 @@
+{
+  "controls": 110,
+  "identity_pairs": [
+    [
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair12-native-postprepare-footprint-20261017-001",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair13-native-postprepare-footprint-20261017-001"
+    ],
+    [
+      "MODEL101R12",
+      "MODEL101R13"
+    ]
+  ],
+  "math_changed": false,
+  "old_R12_failed": true,
+  "parent_template": {
+    "bytes": 220136,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair12-native-postprepare-footprint-20261017-001/SOURCE_TEMPLATE.json",
+    "sha256": "f5ff15b4dcfc8294f37a71d46f27790ad1b8086bafcb74999b69c728c5ae650a"
+  },
+  "scope_test_edits": {
+    "test_geometry058r2.py": {
+      "after": "  self.assertEqual(values,[(('native-postprepare',2048),)])\n  main=next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name=='main')\n  calls=[n for n in ast.walk(main)if isinstance(n,ast.Call)and isinstance(n.func,ast.Attribute)and isinstance(n.func.value,ast.Name)and n.func.value.id=='C'and n.func.attr=='request_once']\n  self.assertEqual(len(calls),1)\n  stop=[n for n in main.body if isinstance(n,ast.Expr)and isinstance(n.value,ast.Call)and isinstance(n.value.func,ast.Attribute)and n.value.func.attr=='need'and n.value.args and isinstance(n.value.args[0],ast.Constant)and n.value.args[0].value is False]\n  self.assertEqual(len(stop),1);self.assertGreater(stop[0].lineno,calls[0].lineno)\n  self.assertEqual(len([n for n in ast.walk(main)if isinstance(n,ast.For)]),1)",
+      "before": "  self.assertIn((('warmup',2048),('decode',2048)),values)",
+      "parent": {
+        "bytes": 1499,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair12-native-postprepare-footprint-20261017-001/test_geometry058r2.py",
+        "sha256": "523fd07f1d9cf6c3f3a5c353314c9d23609f77e88615d195baf274affea6d241"
+      }
+    }
+  }
+}
