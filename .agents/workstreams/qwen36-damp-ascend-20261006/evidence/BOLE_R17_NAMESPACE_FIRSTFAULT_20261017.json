@@ -1,0 +1,76 @@
+{
+  "schema": "ascend.bole-r17-firstfault-and-repair/v1",
+  "recorded_at_utc": "2026-10-17 10:31:49 UTC",
+  "operationId": "exec-000000000000127e",
+  "operation_exit": 3,
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001/RESULT.json",
+    "bytes": 106940,
+    "sha256": "d74973577c0df392768cc30b2a002aa3378c4f79948888e101316ab84109fada"
+  },
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair17/SOURCE_BOUND.json",
+    "bytes": 59418,
+    "sha256": "1a6a1e1b6be6afa5ca91bd2909bcdc5fe3a821b4968b5cf04f9e2b2752977552"
+  },
+  "first_fault": {
+    "cleanup_not_started": true,
+    "errno": 2,
+    "error_repr": "FileNotFoundError(2, 'No such file or directory')",
+    "error_type": "builtins.FileNotFoundError",
+    "fail_closed": true,
+    "filename": "/usr/local/python3.12.13",
+    "filename2": null,
+    "phase": {
+      "ordinal": 538,
+      "phase": "model-smoke",
+      "step": "frontend-identity"
+    },
+    "recovery_attempted": false,
+    "schema": "bole.first-host-fault/v131r5",
+    "source": {
+      "bytes": 59418,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair17/SOURCE_BOUND.json",
+      "sha256": "1a6a1e1b6be6afa5ca91bd2909bcdc5fe3a821b4968b5cf04f9e2b2752977552"
+    },
+    "traceback": "Traceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair17/host090.py\", line 72, in main\n    mark('model-smoke','frontend-identity');frontend_binding=identity_owner.frontend(c,S,ctl,assignments[0])\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair17/identity_owner.py\", line 22, in frontend\n    exe=(p/'exe').resolve(strict=True)\n  File \"/usr/lib64/python3.9/pathlib.py\", line 1140, in resolve\n    s = self._accessor.realpath(self, strict=strict)\n  File \"/usr/lib64/python3.9/posixpath.py\", line 392, in realpath\n    path, ok = _joinrealpath(filename[:0], filename, strict, {})\n  File \"/usr/lib64/python3.9/posixpath.py\", line 459, in _joinrealpath\n    path, ok = _joinrealpath(path, os.readlink(newpath), strict, seen)\n  File \"/usr/lib64/python3.9/posixpath.py\", line 436, in _joinrealpath\n    st = os.lstat(newpath)\nFileNotFoundError: [Errno 2] No such file or directory: '/usr/local/python3.12.13'\n"
+  },
+  "classification": "ADAPTATION_IMPLEMENTATION",
+  "confidence": "proved by original traceback and source",
+  "source_before_after_equal": true,
+  "secondary": [],
+  "actual_sameimage_software": {
+    "cases": 103,
+    "passed": 103,
+    "skips": 0
+  },
+  "all4_worker_snapshot_stage_reached": true,
+  "complete_raw_receipts_observed": 4,
+  "raw_bytes_each": 775440281,
+  "raw_independent_math_complete": false,
+  "frontend_live_binding_missing": true,
+  "original_failed_owner_not_relabelled": true,
+  "release": {
+    "operation": "exec-0000000000001286",
+    "fresh_exact_CIDs_stopped_noExec_noOOM": true,
+    "CPU": "440f1bc5906c6dc098f180f80dc9fe091acbd6e4536a30b1a22dc81526a269ec",
+    "model": "4f375322fccd8efdaa7d91ff85678a1dcbebbdf7f2b9d28b8f1b40bc34de0739",
+    "physical4_7_no_compute_pids": true,
+    "physical4_7_HBM_MiB": [
+      2867,
+      2868,
+      2866,
+      2866
+    ],
+    "window_utilization": "unmeasured"
+  },
+  "decision": "REPAIR_AND_SCOPED_SAVEDRAW_RECOVERY",
+  "next": [
+    "New R18 source-qualified namespace-aware frontend executable identity; preserve original PID/start/CID/argv/ns fences",
+    "New R17-pinned savedraw mathematical consumer may use complete raw+snapshots but cannot fabricate missing live frontend identity or whole qualification",
+    "MAIN DL R20repair1 readonly fullchain binder exec1287, no duplicate launches"
+  ],
+  "numeric_qualified": false,
+  "performance_gain_measured": false,
+  "task_accuracy": false
+}
