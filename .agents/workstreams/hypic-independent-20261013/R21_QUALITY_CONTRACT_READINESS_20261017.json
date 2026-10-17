@@ -1,0 +1,28 @@
+{
+  "schema": "hypic-quality-contract-readiness/v1",
+  "static_operation": "exec-00000000000010db",
+  "device_run": false,
+  "source_bindings": 208,
+  "contracts": [
+    "QUALITY_R21_CATALOG_CANARY_R1_CONTRACT.json",
+    "QUALITY_R21_FULL_HYPIC_R1_CONTRACT.json",
+    "QUALITY_R21_FULL_BASELINE_R1_CONTRACT.json"
+  ],
+  "same_core": "R21 independent C1/C2 including finite gate/partition/lazy/forward metadata; same quality manifest for catalog and full treatment",
+  "unchanged": [
+    "127x3=381 scored/arm",
+    "381 unscored producer requests/arm",
+    "nonthinking1024 naturalEOS retry0",
+    "frozen input/catalog/scorer",
+    "same27B physical0-3TP4"
+  ],
+  "prerequisites": [
+    "source-bound R21 catalogCanary full17 hot/eviction/rebuild audit before fullquality",
+    "fresh direct actual idle resource/newroot admission",
+    "no active ownedcontroller",
+    "absolute stop2026-10-17T06:48:09Z"
+  ],
+  "not_required": "Positive speed or completed12 performance matrix is not a prerequisite to measure task quality",
+  "current_live": "R21G3 controller10cc;211bound files unchanged",
+  "limits": "Configuration/source readiness only; no new quality device or model-quality acceptance"
+}

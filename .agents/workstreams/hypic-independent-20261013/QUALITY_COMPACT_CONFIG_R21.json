@@ -1,0 +1,39 @@
+{
+  "model_identity": "config69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+  "code_identity": "independent-c1c2-c2-finite-r21",
+  "capacity_bytes": 805306368,
+  "kv_capacity_bytes": 2684354560,
+  "boundary_tokens": 8,
+  "enable_mixed": true,
+  "allow_public_tail": true,
+  "allow_public_chunks": true,
+  "evidence_limits": {
+    "max_events": 100000,
+    "max_bytes": 134217728,
+    "max_requests": 1024
+  },
+  "scheduler_admission_enabled": true,
+  "c2_layer_completion_barrier": true,
+  "native_decode_batch": true,
+  "c1_layer_completion_barrier": true,
+  "c1_layer_shadow_validation": true,
+  "c1_packed_wave": true,
+  "c1_first_divergence": true,
+  "c1_first_divergence_head_policy": "max_state_residual",
+  "c1_short_prefix_terminal_policy": "canonical_recurrent_le64",
+  "prefill_prompt_snapshot": true,
+  "prompt_snapshot_probe_batches": 0,
+  "public_catalog_artifact": {
+    "path": "/inputs/catalog.json",
+    "sha256": "fb13827a063b32df1131e17bf4b29ea008380d55ab0a2e7debe8a845e30ed792",
+    "segments": 126
+  },
+  "evidence_profile": "quality-hot",
+  "c2_layer_finite_gate": true,
+  "c1_partitioned_render": true,
+  "c1_lazy_initial_snapshot": true,
+  "forward_metadata_snapshot": true,
+  "c1_async_material_transfer": true,
+  "c1_async_material_verify": false,
+  "c1_performance_mode": false
+}
