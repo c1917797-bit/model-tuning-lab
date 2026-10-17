@@ -1,0 +1,137 @@
+{
+  "schema": "hypic-r21-full-quality-failure/v1",
+  "controller": "exec-000000000000114e",
+  "controller_exit": 1,
+  "raw_root": "/cache/cch/hypic-independent-20261013/full-quality-r21-hypic-r1",
+  "independent_failure_release_audit": "exec-000000000000115a",
+  "report": {
+    "full_quality_valid": false,
+    "scored_responses": 0,
+    "required": 381,
+    "failure": "C1 precommit private shadow failed; service connection refusal secondary",
+    "failed_receipts": [
+      {
+        "actual_slot_commit": "not_started",
+        "atol": 0.01,
+        "event": "c1_packed_wave_shadow_checked",
+        "evidence_profile": "quality-hot",
+        "group_requests": [
+          "cmpl-8121d20938aa1c1f-0-a060669b",
+          "cmpl-82bf9d46b646e19a-0-abf9f12d",
+          "cmpl-a14c7e4af94ca3a7-0-a4d223f0",
+          "cmpl-8a88b73f7c09121c-0-b6691141",
+          "cmpl-80a2906563ff9eda-0-8ce23a6c"
+        ],
+        "layer": "language_model.model.layers.0.linear_attn",
+        "manifest_sha256": "ecbbe378a5ddc09c1bb3101c032fcfed94207563d4d8c374b5e20ca2647f2dfc",
+        "metrics": [
+          {
+            "max_abs": 0.03125,
+            "max_scaled": 1.4144271612167358,
+            "passed": false,
+            "rms": 0.0003528103115968406,
+            "tensor": "output"
+          },
+          {
+            "max_abs": 0.07903242111206055,
+            "max_scaled": 2.6505022048950195,
+            "passed": false,
+            "rms": 0.0006736889481544495,
+            "tensor": "state"
+          },
+          {
+            "max_abs": 0,
+            "max_scaled": 0,
+            "passed": true,
+            "rms": 0,
+            "tensor": "conv"
+          }
+        ],
+        "omitted_nonhot_counts": {},
+        "passed": false,
+        "pid": 58,
+        "private_buffers": true,
+        "rank": 0,
+        "request_id": "cmpl-80a2906563ff9eda-0-8ce23a6c",
+        "rtol": 0.003,
+        "step": 10
+      },
+      {
+        "actual_slot_commit": "not_started",
+        "atol": 0.01,
+        "event": "c1_packed_wave_shadow_checked",
+        "evidence_profile": "quality-hot",
+        "group_requests": [
+          "cmpl-8121d20938aa1c1f-0-a060669b",
+          "cmpl-82bf9d46b646e19a-0-abf9f12d",
+          "cmpl-a14c7e4af94ca3a7-0-a4d223f0",
+          "cmpl-8a88b73f7c09121c-0-b6691141",
+          "cmpl-80a2906563ff9eda-0-8ce23a6c"
+        ],
+        "layer": "language_model.model.layers.0.linear_attn",
+        "manifest_sha256": "ecbbe378a5ddc09c1bb3101c032fcfed94207563d4d8c374b5e20ca2647f2dfc",
+        "metrics": [
+          {
+            "max_abs": 0.015625,
+            "max_scaled": 0.9737098813056946,
+            "passed": true,
+            "rms": 0.0002506608725525439,
+            "tensor": "output"
+          },
+          {
+            "max_abs": 0.05710411071777344,
+            "max_scaled": 1.804153323173523,
+            "passed": false,
+            "rms": 0.000624898646492511,
+            "tensor": "state"
+          },
+          {
+            "max_abs": 0,
+            "max_scaled": 0,
+            "passed": true,
+            "rms": 0,
+            "tensor": "conv"
+          }
+        ],
+        "omitted_nonhot_counts": {},
+        "passed": false,
+        "pid": 59,
+        "private_buffers": true,
+        "rank": 1,
+        "request_id": "cmpl-80a2906563ff9eda-0-8ce23a6c",
+        "rtol": 0.003,
+        "step": 10
+      }
+    ],
+    "source_bindings": 208,
+    "clean_isolation_samples": 180,
+    "exact_cid_absent": "3abbce2aa5eaccaa8862619414eb6ba13d553c85a5f07904469787980302dd26",
+    "live_physical_empty": true,
+    "live_port_free": 8233,
+    "raw_sha256": {
+      "diagnostics/compact-scheduler-1.jsonl": "7817abae39a59a85be5a9ceeed27ec8b6769a32e16cc0e2bcdcfdd083870a553",
+      "diagnostics/compact-scheduler-20.jsonl": "5496f1cb24cc6f8d6d9c111a056e97ebb948622ee80604cc6ea98d5fb19f1a13",
+      "diagnostics/compact-scheduler-42.jsonl": "3b348e54cf919476526626f3f911cbafd92b47b91098481180cbae286c66368c",
+      "diagnostics/compact-scheduler-58.jsonl": "c11fc8fb4e57f750d526a3298e9a5c7487f4a20e5cc6df44da5782cc47d86ea9",
+      "diagnostics/compact-scheduler-59.jsonl": "6f2b3108b0ccf17c6d0ffcd8d14386eef96d8732cf7690f7780954e439a991a2",
+      "diagnostics/compact-scheduler-60.jsonl": "4a1c1efa1df5340b821384470b7fc207307401361f73736c73545dab592140e7",
+      "diagnostics/compact-scheduler-61.jsonl": "9026ace59407d26ed7c4bfc46c91c5ae94e53fe93dc108b9777c9ecfa604409a",
+      "diagnostics/compact-worker-58.jsonl": "90d7ffd07c2883546ac871fffae12af1d56480fec08fe70719b1268a767099b0",
+      "diagnostics/compact-worker-59.jsonl": "c1c71f224b101416d5921de55d97c31735c2101b9100dadb237650f3ff8216fe",
+      "diagnostics/compact-worker-60.jsonl": "e8f27721e6788f534106ddd849e39aa2ee25c83af6bf1f0e4a2a76f9fe940dec",
+      "diagnostics/compact-worker-61.jsonl": "9c45140a78d32dd365e15b3df55d0d3c921298eb4416cd7e95d236ae6baf11b8",
+      "events.jsonl": "ea3b3426cf39fe408c46aa70aa8db1e973c5c7686b16c3f47f1a7b5e6e7f0596",
+      "isolation.json": "c45a699fa95a1aec1265138aa59243a58e4e9960ba7d3a1e41a840abe33663fe",
+      "launch.json": "39d0010b2d3b373f7ec061a1bc87d1dd549e130f5a32e04cbd6408c82d32ff67",
+      "preflight.json": "39c467cc9660b10017c056aef803f62259154348a2362a460c8ae6d5a794ecee",
+      "release.json": "2984c2b0b9121f0b892980d222a22938a616fed83e3eb04d31c6ccaf0736227a",
+      "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "result.json": "0b018a13ec14f0b7b21a16531e16adc3f66a1da214f831ebb36f88d64e3d5fd2",
+      "service-start.json": "528d73f7b26d6e9a06e6ae0672e5aa2be70107b38fbee091a00bca35d2a16c80",
+      "service.log": "cdb7442c33607380b988af019e3308d3a8cde4741fb8438fed89b2a9789599b8"
+    },
+    "scope": "Failure/source/isolation/exact release audit only; NOT fullquality or numerical acceptance"
+  },
+  "next": "Inspect packed C1 shadow/reference numerical mechanism for failing same-input request; no threshold relaxation or old-root rerun",
+  "full_goal_complete": false
+}

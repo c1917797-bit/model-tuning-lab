@@ -215,7 +215,7 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "RUNNING",
+    "state": "TERMINAL_FAILED_PRECOMMIT_NUMERICAL_SHADOW",
     "operation": "exec-000000000000114e",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
@@ -223,7 +223,7 @@
     "raw_root": "/cache/cch/hypic-independent-20261013/full-quality-r21-hypic-r1",
     "checkpoint": "58e367375f0761052f54447e97cddbb9e13c2610",
     "admission_operation": "exec-000000000000114d",
-    "independent_audit": null
+    "independent_audit": "exec-000000000000115a"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -459,5 +459,18 @@
     "denominator": 17,
     "rebuild_ranks": 4,
     "isolation_samples": 398
+  },
+  "r21_full_quality_failure": {
+    "report": "R21_FULL_HYPIC_R1_FAILURE_20261017.json",
+    "scored_responses": 0,
+    "required": 381,
+    "ranks": [
+      0,
+      1
+    ],
+    "layer": 0,
+    "step": 10,
+    "released": true,
+    "quality_score_valid": false
   }
 }

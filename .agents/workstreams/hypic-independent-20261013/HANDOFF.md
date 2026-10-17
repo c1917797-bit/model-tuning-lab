@@ -1,4 +1,18 @@
-# CURRENT R21 FULL127x3 HYPIC QUALITY LIVE
+# CURRENT R21 FULL HYPIC QUALITY FAILED; NO OWNED MODEL JOB
+
+114e terminalexit1,0/381responses; URLErrorconnectionrefusedsecondary to
+worker ValueError packedC1fullprivate shadowfailed beforeactualslotcommit.
+Firstlayer0/step10/request cmpl-80a2906563ff9eda-0-8ce23a6c,rank0/1state
+maxabs0.079032/0.057104,scaled2.6505/1.8042;frozenatol0.01/rtol0.003.
+115a independentlyproves208sources/180cleanisolation/exactCIDabsent/
+physical0-3empty/8233free; rawSHA+failedreceipts in
+R21_FULL_HYPIC_R1_FAILURE_20261017.json. Notvalidtaskqualityscore.
+No thresholdrelaxation/guardremoval/nativefallback/oldrootreuse.
+Next source-backed same-input packedC1/reference diagnosis,then boundednew
+contractonlyif justified. R21catalog17passdoesnotcoverthisfailure;speednegative.
+Deadline2026-10-17T06:48:09Z;fullgoalunfinished.
+
+# HISTORICAL R21 FULL127x3 HYPIC QUALITY LIVE
 
 Freshma direct114d at02:47:41UTC proves208host/205runtime/model/image/input/
 scorer/catalogCanaryimmutable rawSHA/physical0-3empty/8233HCCLfree/newroot.
