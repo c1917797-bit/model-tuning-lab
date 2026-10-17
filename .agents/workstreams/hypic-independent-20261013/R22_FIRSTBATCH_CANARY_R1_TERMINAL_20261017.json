@@ -1,0 +1,99 @@
+{
+  "controller": "exec-0000000000001178",
+  "audit": "exec-0000000000001199",
+  "first_audit_failure": "1197 transient strict port bind;1198 exactCID absent/physical0-3empty/onlyTIME_WAIT;unchanged1199 replay passed, no model rerun",
+  "report": {
+    "bounded_catalog_canary_valid": true,
+    "cohort": {
+      "accepted_canary_cohort": true,
+      "private_responses": 17,
+      "unscored_producers": 17,
+      "rebuild_index": 0,
+      "initial_api": "cmpl-b7646dfa84aae934",
+      "rebuild_api": "cmpl-855721e57e500e68",
+      "segment_sha256": "cd55c9bf917cc314d183596f1c6acd0242043eb777746f597f11cde55e512967",
+      "scope": "frozen diagnostic cohort/response journal only; source/hot-generation/eviction/physical/release separate; not127x3"
+    },
+    "hot": {
+      "accepted_catalog_hot_coverage": true,
+      "denominator": 17,
+      "worker_pids": {
+        "0": 58,
+        "1": 59,
+        "2": 60,
+        "3": 61
+      },
+      "generation_links": 4352,
+      "evictions_observed": 1664,
+      "scope": "catalog segment/generation/same-step four-rank48/16 model pruning only; transport/scoring/physical/release separate",
+      "covered_count": 17
+    },
+    "rebuild": {
+      "accepted_rebuild_chain": true,
+      "ranks": 4,
+      "scope": "selected segment initial hot -> actual eviction -> new generation -> rebuilt hot; transport/complete17/physical/release audited separately",
+      "transition_count": 256
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 58,
+          "host_pid": 3990661,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 59,
+          "host_pid": 3990662,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 60,
+          "host_pid": 3990663,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 61,
+          "host_pid": 3990664,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "source_bindings": 221,
+    "isolation_samples": 411,
+    "live_release_verified": true,
+    "scope": "R22 first-batch regression plus bounded17 catalog mechanism; not381quality, speed, lifecycle or exact old scheduler batch reproduction",
+    "c2_finite": {
+      "layers": 704,
+      "request_layer_completions": 1088,
+      "scope": "all observed hot C2 completions have exact preceding same-layer/rank/step finite gate"
+    },
+    "c1_shadow": {
+      "observed": 1728,
+      "passed": true,
+      "atol": 0.01,
+      "rtol": 0.003,
+      "scope": "all observed frozen-policy shadows; not full tensor or task quality equivalence"
+    },
+    "short_suffix": {
+      "routes": 192,
+      "covered_ranks": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "row_counts": [
+        36
+      ],
+      "failed_sample_short_route_ranks": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "scope": "actual short suffix output/state route precedes same-rank/step/layer/request completion; not whole quality or exact prior batch reproduction"
+    }
+  },
+  "scope": "bounded17 only; row_counts36 not exact previous inferred56 geometry; full381/speed/lifecycle not accepted"
+}

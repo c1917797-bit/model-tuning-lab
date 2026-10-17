@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R21-G1-native-full40-performance-live",
+  "execution_state": "R22-full-quality-hypic-live",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll exactma1101/rawformal-r21-c2-finite-g1-r1; no restartlive/unclear/no211boundchanges. Terminal audit_r21_c2_finite_performance.py --contract FORMAL_R21_G1_R1_CONTRACT.json --live-release thenpaireddecision. Afterwards newR21catalogCanary/full381quality independentlyofspeed sign.",
+  "next_action": "Track exact119b/raw full-quality-r22-hypic-r1; no restart live/unclear, no221boundsource changes. Terminal audit_full_quality_terminal.py --contract QUALITY_R22_FULL_HYPIC_R1_CONTRACT.json --live-release. Then matching baseline381 and paired audit if authorized time remains; deadline06:48:09UTC unchanged.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -216,13 +216,13 @@
   },
   "active_attempt": {
     "state": "RUNNING",
-    "operation": "exec-0000000000001178",
+    "operation": "exec-000000000000119b",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "contract": "QUALITY_R22_FIRSTBATCH_CANARY_R1_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/short-suffix-r22-firstbatch-canary-r1",
-    "checkpoint": "ad7401950242d33f806730c9c97f860fb3a22058",
-    "admission_operation": "exec-0000000000001177",
+    "contract": "QUALITY_R22_FULL_HYPIC_R1_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/full-quality-r22-hypic-r1",
+    "checkpoint": "f408eff0b98a1ea11e1af948fd4e2947515b6fc8",
+    "admission_operation": "exec-000000000000119a",
     "independent_audit": null
   },
   "native_smoke_r1": {
@@ -482,5 +482,15 @@
     "thresholds_unchanged": true,
     "published": "ad7401950242d33f806730c9c97f860fb3a22058",
     "full_goal_complete": false
+  },
+  "r22_canary": {
+    "state": "BOUNDED17_INDEPENDENTLY_ACCEPTED",
+    "controller": "exec-0000000000001178",
+    "audit": "exec-0000000000001199",
+    "first_audit": "exec-0000000000001197",
+    "release_inspection": "exec-0000000000001198",
+    "report": "R22_FIRSTBATCH_CANARY_R1_TERMINAL_20261017.json",
+    "full_quality": false,
+    "performance": false
   }
 }
