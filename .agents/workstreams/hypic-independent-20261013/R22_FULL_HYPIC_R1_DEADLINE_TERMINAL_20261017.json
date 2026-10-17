@@ -1,0 +1,84 @@
+{
+  "scope": "Deadline failure/source/isolation/exact release audit ONLY; NOT full quality acceptance",
+  "full_quality_valid": false,
+  "controller_result": {
+    "valid": false,
+    "error": {
+      "type": "TimeoutError",
+      "message": "Frozen execution deadline reached"
+    },
+    "guard_errors": [
+      {
+        "type": "TimeoutError",
+        "message": "Frozen execution deadline reached",
+        "raw": null
+      }
+    ],
+    "isolation_samples": 2756,
+    "responses": 0,
+    "worker_pids": [
+      37689,
+      37690,
+      37691,
+      37692
+    ],
+    "physical_devices_seen": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "release": {
+      "owned_container": "345a8b813e7bda11bebe11734c743834e9629797a57f357fc50479e620085105",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    }
+  },
+  "journal_scored_responses": 215,
+  "journal_request_success": 207,
+  "finish_reasons": {
+    "stop": 121,
+    "length": 86,
+    "null": 8
+  },
+  "source_bindings": 221,
+  "clean_isolation_samples": 2756,
+  "exact_cid_absent": "345a8b813e7bda11bebe11734c743834e9629797a57f357fc50479e620085105",
+  "live_physical_empty": true,
+  "live_port_free": 8233,
+  "raw_sha256": {
+    "diagnostics/compact-scheduler-1.jsonl": "71c510a4ff169b219fb5be991e3e34fc2175c7c7b2b94bc5daf3bd203c26d0ab",
+    "diagnostics/compact-scheduler-20.jsonl": "032deaa5da21606ea46407ae972cce6012a20e15843597a344037d51ea0395bd",
+    "diagnostics/compact-scheduler-42.jsonl": "09817be502eb727e8b0d80e259ae5da437faf73df2a695a29b888bed76a33185",
+    "diagnostics/compact-scheduler-59.jsonl": "20478191b21d2eb6cba32846dfbee72591a7047272e2c8218b35cb82f373ed05",
+    "diagnostics/compact-scheduler-60.jsonl": "6c445fb17a7138611de0170be424751141516aa109febd9dd93d65de24b29167",
+    "diagnostics/compact-scheduler-61.jsonl": "ec417427f3b933dccca1cf62ad700600564dbb6baf11a1641837442f9eee7c10",
+    "diagnostics/compact-scheduler-62.jsonl": "3472065b6021b512af6ba76b5007ddfb3626c0782c7b932b7ac2768a2bf70807",
+    "diagnostics/compact-worker-59.jsonl": "1b0240087bbc8c8a044de4c84e4e199c0219511c2a49893a6c1a47ee6274ebb0",
+    "diagnostics/compact-worker-60.jsonl": "21746c3dbccc2f0ba7220aaa3d810631cc8ecb197a55ffb0591aea4caf89f628",
+    "diagnostics/compact-worker-61.jsonl": "bfd6ee216f08ee072e73ba84d6a560f104efde595243067facbaaa309063c2ca",
+    "diagnostics/compact-worker-62.jsonl": "2672e0219f95ec95c7510c69f0c9518cd06410790fe3cc00495c11cc19407672",
+    "events.jsonl": "e903eac30c902a4f54cf4a8dfe65f156f8b01522bf8645a0bcff27a8c0be75f1",
+    "isolation.json": "e0b7efbd4b11cf5a905fb9050c59bfe8acaee1f09abb3903456da891384e837c",
+    "launch.json": "5de0267c83ff7250285b2b64158e70268294506c4d35b4104915c89cf5f1ebb0",
+    "preflight.json": "44e7a8b54d7507775d0ba3b4f254a7cb4d1543095b2e84eb4f03ea502db45dc7",
+    "release.json": "ed5f955604d5dc5804ffd547248f9d0d66fbcd72d6d347da29034bd9f3cf7910",
+    "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "result.json": "71f15cd9d3c6b86eed0480f0ba75d7731fac89e789bae3484397fb9934d206f7",
+    "service-start.json": "83ce186f5eb4e3498d466855c1f26287174240faf55fa4507b332b0f5ed6f558",
+    "service.log": "3fe39f6deca9e35751cbc47b86f090cf5a7f0364a46d37033adeb3affe2aa74a"
+  },
+  "controller": "exec-000000000000119b",
+  "audit": "exec-00000000000011f3",
+  "first_audit": "exec-00000000000011f1 strict port bind failed; later ss 11f2 empty; unchanged audit replay passed",
+  "deadline": "2026-10-17T06:48:09Z",
+  "quality_acceptance": "INCOMPLETE",
+  "remaining": [
+    "full381 HYPIC",
+    "matched381 baseline and paired quality",
+    "current-source G1-G4 three repetitions",
+    "R22 lifecycle",
+    "Paper-to-Ascend and29 Skill functional acceptance"
+  ]
+}

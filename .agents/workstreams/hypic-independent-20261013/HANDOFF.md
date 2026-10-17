@@ -1,4 +1,16 @@
-# CURRENT R22 FULL QUALITY HYPIC LIVE
+# CURRENT R22 FULL QUALITY DEADLINE TERMINAL; NO OWNED MODEL JOB
+
+119b exit1 at frozen2026-10-17T06:48:09Z deadline. Journal215scored attempts:
+207request-success/8cutoff failures;121stop/86length. Controllerresponses0 and
+responses.json empty afterinterrupted collection; journal retained aspartial,
+NOT381acceptance orpairedquality. Independent11f3 PASS221sources/2756clean
+isolation/exactCID345a8b...absent/livephysical0-3empty/8233bindfree.
+First11f1portbindfailed;11f2ss empty;unchanged11f3PASS. No guardrelaxation/rerun.
+R22_FULL_HYPIC_R1_DEADLINE_TERMINAL_20261017.json preserves rawSHA.
+Nonewdevice authorization afterdeadline. Matchingbaseline notstarted.
+Fullquality/performance/R22lifecycle/29functional remainunfinished; no mainclaim.
+
+# HISTORICAL R22 FULL QUALITY HYPIC LIVE
 
 1199 independently accepts1178 bounded17: all17 fourrank48C1/16C2,4352generation
 links,1664evictions/256rebuild transitions,1728unchanged.01/.003 C1shadowsPASS,
