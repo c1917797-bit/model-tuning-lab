@@ -1,4 +1,15 @@
-# CURRENT R21 CATALOG QUALITY CANARY LIVE
+# CURRENT R21 CATALOG CANARY TERMINAL BOUNDED ACCEPTED
+
+112aexit0; independent1148 andcompactreplay1149 PASS17/17same-stepfourrank
+48C1/16C2,4352generationlinks,1692evictions,256rebuildtransitions/all4ranks,
+208sources/398cleanisolation/explicitphysicalPIDjoin/liveexactrelease.
+R21_CATALOG_CANARY_R1_TERMINAL_20261017.json preservesrawSHA.
+Noownedmodeljob. Next fresh QUALITY_R21_FULL_HYPIC_R1_CONTRACT.json
+newroot/source/input/scorer/physical0-3+portsadmission thenfull381quality;
+matchingbaseline separate. R21speednegativeunchanged;notdeployment/fullquality.
+Deadline2026-10-17T06:48:09Z;fullgoalunfinished.
+
+# HISTORICAL R21 CATALOG QUALITY CANARY LIVE
 
 Freshma direct1129 at02:20:58UTC proves208host/205runtime/model/image/input/
 scorer/G1immutable rawSHA/physical0-3empty/8233HCCLfree/newroot.

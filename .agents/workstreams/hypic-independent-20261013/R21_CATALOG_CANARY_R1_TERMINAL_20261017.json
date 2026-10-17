@@ -1,0 +1,87 @@
+{
+  "schema": "hypic-r21-catalog-canary-terminal/v1",
+  "controller": "exec-000000000000112a",
+  "controller_exit": 0,
+  "independent_audit": "exec-0000000000001148",
+  "compact_audit_replay": "exec-0000000000001149",
+  "raw_root": "/cache/cch/hypic-independent-20261013/catalog-quality-r21-canary-r1",
+  "raw_sha256": {
+    "catalog-canary-unit.json": "249adf7acbeaf1613437a92e5df523f3639240cef9afc27b69756a99c2c49e7e",
+    "events.jsonl": "232abc4c5e55fe8b78e5768d526d0f7812b619ce87f16df485a43d67f7475a6d",
+    "isolation.json": "26e3f33cab257b60866b7c0acd2466d16f789aa29dec2018d53321571ca637c8",
+    "launch.json": "a1157fa72805c4df70b8547c26dee600d56c05a72184609fc7e1d6090976f089",
+    "preflight.json": "6863ae198e882c475b8ccd1e6807b0e17af22bacc002b839441ea0a5e800881f",
+    "release.json": "700d31b35e72e712d5081676ba58f35bef6d948db8656a613404cc8fe52ce8da",
+    "responses.json": "a0ed357b9e532dac9a6fd95fb0e418792e05edcafb1fed224b4533518b2d6072",
+    "result.json": "ca043cb5ec5ae3516fdccdb7359e4bf521d7cabc51e6b510029037862287b771",
+    "service-start.json": "34ff8262cd6c99212bf0b9e661eb56ec8a73167f42e1bd9b1e3082d9433fbf95"
+  },
+  "report": {
+    "bounded_catalog_canary_valid": true,
+    "cohort": {
+      "accepted_canary_cohort": true,
+      "private_responses": 17,
+      "unscored_producers": 17,
+      "rebuild_index": 48,
+      "initial_api": "cmpl-806c8fa3c8f9b815",
+      "rebuild_api": "cmpl-b1c58a58c38f7ef7",
+      "segment_sha256": "e0368b5b11e408ac8f3545bd7fad37bd9f4c95ff7ceb2d1f3ea0ad9f4461a81e",
+      "scope": "frozen diagnostic cohort/response journal only; source/hot-generation/eviction/physical/release separate; not127x3"
+    },
+    "hot": {
+      "accepted_catalog_hot_coverage": true,
+      "denominator": 17,
+      "worker_pids": {
+        "0": 59,
+        "1": 60,
+        "2": 61,
+        "3": 62
+      },
+      "generation_links": 4352,
+      "evictions_observed": 1692,
+      "scope": "catalog segment/generation/same-step four-rank48/16 model pruning only; transport/scoring/physical/release separate",
+      "covered_count": 17
+    },
+    "rebuild": {
+      "accepted_rebuild_chain": true,
+      "ranks": 4,
+      "scope": "selected segment initial hot -> actual eviction -> new generation -> rebuilt hot; transport/complete17/physical/release audited separately",
+      "transition_count": 256
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 59,
+          "host_pid": 3544974,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 60,
+          "host_pid": 3544975,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 61,
+          "host_pid": 3544976,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 62,
+          "host_pid": 3544977,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "source_bindings": 208,
+    "isolation_samples": 398,
+    "live_release_verified": true,
+    "scope": "17 diagnostic requests and real catalog eviction/rebuild; NOT full127x3 quality, matched speed, or lifecycle acceptance"
+  },
+  "limits": [
+    "17 diagnostic requests not full127x3 task quality",
+    "Does not reverse negative R21 performance",
+    "Not lifecycle or deployment acceptance"
+  ],
+  "next": "Fresh QUALITY_R21_FULL_HYPIC_R1_CONTRACT.json then matching baseline; full goal incomplete"
+}

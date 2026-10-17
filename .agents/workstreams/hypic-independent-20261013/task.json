@@ -215,7 +215,7 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "RUNNING",
+    "state": "TERMINAL_INDEPENDENT_VALID",
     "operation": "exec-000000000000112a",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
@@ -223,7 +223,7 @@
     "raw_root": "/cache/cch/hypic-independent-20261013/catalog-quality-r21-canary-r1",
     "checkpoint": "1acf66aded778fbc6944750560f0b92b037b51dc",
     "admission_operation": "exec-0000000000001129",
-    "independent_audit": null
+    "independent_audit": "exec-0000000000001148"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -451,5 +451,13 @@
       "tpot_p95_ms": 8.63886918321175
     },
     "next": "Fresh R21 catalog Canary; full quality not blocked by speed sign"
+  },
+  "r21_catalog_canary": {
+    "state": "BOUNDED_17_ACCEPTED_NOT_FULL_QUALITY",
+    "report": "R21_CATALOG_CANARY_R1_TERMINAL_20261017.json",
+    "hot": 17,
+    "denominator": 17,
+    "rebuild_ranks": 4,
+    "isolation_samples": 398
   }
 }
