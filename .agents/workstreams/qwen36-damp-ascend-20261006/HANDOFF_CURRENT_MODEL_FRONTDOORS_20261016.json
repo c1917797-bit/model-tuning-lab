@@ -1,13 +1,13 @@
 {
   "schema": "ascend.current-model-frontdoor-handoff/v1",
-  "recorded_at_utc": "2026-10-17T07:18:03Z",
-  "authority_file": "CONDITIONAL_EXTENSION24H_AUTHORITY_20261016.json",
+  "recorded_at_utc": "2026-10-17T08:47:34Z",
+  "authority_file": "RENEW24H_AUTHORITY_20261017_084320.json",
   "original_cutoff_utc": "2026-10-17T07:02:13Z",
   "extension_used": 0,
   "extension_condition_met": false,
   "new_nonHYPIC_accepted_technology": false,
   "current_owner": null,
-  "next_NPU": "NONE admitted: original fixed24h window ended2026-10-17T07:02:13Z; new explicit bounded authority required before any run. Conditional extension unused and conditions unmet.",
+  "next_NPU": "BOLE R15 evidenced ABI Ref3/value repair with new source/output/clock under renewed authority; full real entry/software, MAIN review, sameimage then fresh4-7/resources required. DeltaLogR19 only after overlapping release.",
   "last_model_result": {
     "ref": {
       "path": "/opt/host/vnf/austinov/run-bole-model131repair4-MAIN-NEW24H_001/RESULT.json",
@@ -69,9 +69,9 @@
     "cost_caution": "child_scope includes final fence; nested phases inclusive/nonadditive; actual cache state uncontrolled; selected estimate not full-run guarantee"
   },
   "parallel_preparation": {
-    "accuracy_input_repair": "Completed/frozen source-only R18R3 and postINPUT repair1; stopped further development",
-    "gdn_paper_reassessment": "Stopped; publicationR3 retains3knownP1; R4 not implemented; noBOLE-specific fixed1024 performance qualifier",
-    "ge_fullgdn_ready": "Independent source reviews complete; no resource launches"
+    "gdn_paper_reassessment": "R15 narrow ABI Ref3/value repair frozen with94 software cases; actualNPU/whole diagnostic pending; publication stillHOLD",
+    "accuracy_input_repair": "R19 historical closed15 full read-only revalidation/new authority and renewed payload gate, no old ledger/source/result rewrite",
+    "ge_fullgdn_ready": "R15 exact enabled-chain independent review complete/no newP1; next R19/payload source review"
   },
   "git": {
     "local_commit": "690486c15b0e0bdcbb899e8c08ec310208d47081",
@@ -1294,7 +1294,15 @@
     "opt_free": 222195056640,
     "port8230_free": true
   },
-  "window_state": "EXPIRED_NO_NEW_LOAD",
+  "window_state": "ACTIVE_EXPLICIT_RENEWAL",
+  "active_authority_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+    "bytes": 3012,
+    "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+  },
+  "active_start_utc": "2026-10-17T08:43:20Z",
+  "active_cutoff_utc": "2026-10-18T08:43:20Z",
+  "previous_window_original_cutoff_preserved": true,
   "previous_BOLE_R14": {
     "operation": "exec-000000000000118f",
     "operation_journal_later_not_found": true,

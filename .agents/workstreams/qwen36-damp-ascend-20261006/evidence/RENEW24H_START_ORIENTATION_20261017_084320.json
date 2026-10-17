@@ -1,0 +1,50 @@
+{
+  "schema": "ascend.renewed24h.orientation/v1",
+  "observed_utc": "2026-10-17T08:46:28.780065+00:00",
+  "operation": "exec-0000000000001206",
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+    "bytes": 3012,
+    "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+  },
+  "canonical_root": "/opt/host/vnf/austinov/model-tuning-lab",
+  "branch": "work/qwen36-damp-ascend-20261006",
+  "HEAD": "ed4d6c23c56d88dee3933d8e4b9742ca05092b6c",
+  "physical_allowed": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "snapshot_no_NPU_processes_4_7": true,
+  "continuous_utilization": "unmeasured",
+  "CPU_affinity": [
+    0,
+    1,
+    2,
+    3,
+    144,
+    145,
+    166
+  ],
+  "Docker_free_bytes": 23105462272,
+  "opt_free_bytes": 222031556608,
+  "MemAvailable_bytes": 83397898240,
+  "SwapUsed_bytes": 0,
+  "Hugetlb_not_ordinary_RAM": 2057289334784,
+  "git_fetch": {
+    "exit": 0,
+    "stdout": "",
+    "stderr": "From https://github.com/c1917797-bit/model-tuning-lab\n   bf71afe1..d54357c7  work/hypic-independent-20261013 -> origin/work/hypic-independent-20261013\n"
+  },
+  "numeric_qualified": false,
+  "performance": false,
+  "task_accuracy": false,
+  "global_dirty_HANDOFF_and_unrelated_changes_preserved": true
+}
