@@ -1,0 +1,99 @@
+{
+  "schema": "ascend.paper-phase-checkpoint/v1",
+  "window": {
+    "start_epoch": 1792226600,
+    "cutoff_epoch": 1792313000,
+    "extended": false
+  },
+  "goal": "Non-historical-HYPIC plugin/monkeypatch full-model matched throughput >=10%; accuracy remains unverified.",
+  "good_enough": {
+    "qualification_scope": "equation-derived N3/S11 grouped implementation; synthetic short full GDN; batch1/16 x129 tokens x3 recurrent steps",
+    "official_implementation_claim": false,
+    "operation": "exec-00000000000014b8",
+    "exit_code": 0,
+    "source": {
+      "bytes": 24539,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/_draft_damp_operator_reuse/RENEW24H_20261017/ge-grouped-fullgdn-v1-004/SOURCE_MANIFEST.json",
+      "sha256": "b8ef6baf08d85c92e83ae4c014a4e812741738eea0409a2c381f1498fd106607"
+    },
+    "owner": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE004_NPU_001/RESULT.json",
+      "bytes": 540196,
+      "sha256": "e30952d24bb453aeafed6917b8655d61b011d0f48d463be4f422a1e32172be44"
+    },
+    "numeric": {
+      "bytes": 3945,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE004_NPU_001/physical6/numeric/RESULT.json",
+      "sha256": "17be93935d629ec471c97879110614d0cec60b0485f7f52758c810e77981ea6b"
+    },
+    "consumer": {
+      "bytes": 7273,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE004_NPU_001/physical6/numeric/CONSUMED.json",
+      "sha256": "60dc01833c72f288c3d0dff302174c3c7e6e22cf14c201e13745b614a34cc4b5"
+    },
+    "all_6_output_and_state_pass": true,
+    "max_output_frob_relative": 0.000040622567363277485,
+    "max_state_frob_relative": 0.00004092085844966665,
+    "lifecycle": {
+      "status": "ACTUAL_EVENT_LIFECYCLE_AND_INDEPENDENT_ORACLE",
+      "primary": null,
+      "secondary": [],
+      "elapsed_seconds": 320.61050736997277,
+      "cleanup_spent": 16.613564810017124,
+      "actual_owner": {
+        "bytes": 4281,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE004_NPU_001/physical6/ACTUAL_OWNER.json",
+        "sha256": "664aef67b0ddfd425bcfd485f787a78b5ceab07f79d8e55d754f51c46cdd53c9"
+      },
+      "numeric": {
+        "bytes": 3945,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE004_NPU_001/physical6/numeric/RESULT.json",
+        "sha256": "17be93935d629ec471c97879110614d0cec60b0485f7f52758c810e77981ea6b"
+      },
+      "child": {
+        "bytes": 163380,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE004_NPU_001/physical6/matrix-child.json",
+        "sha256": "d06655eae0cc8823665004a8b0710a6f9e4e6c4c0f3e617e51ca5dc8d95a762d"
+      },
+      "cleanup": {
+        "bytes": 1684,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE004_NPU_001/physical6/cleanup.json",
+        "sha256": "4709c0dd6ede606d30d2577af4b86edee9e06f4d96325735179046032d17ab1c"
+      }
+    },
+    "release": {
+      "container": "6e0da30a82c064f2a0041c54f17a4af1a1b7ff09d53f39d6d10c944187a526b8",
+      "stopped": true,
+      "retained": true,
+      "errors": []
+    },
+    "fresh_stopped_inspect": "exec-00000000000014bf: false 0",
+    "model": false,
+    "performance": false,
+    "accuracy": false,
+    "graph": false,
+    "next": "Bind actual GE004 evidence into the prepared 129-token first-output all4 worker smoke. Native warmup/defaultOFF must remain explicit. No performance claim from this scope."
+  },
+  "deltalog": {
+    "r28": "Preserved early sourceaudit failed at declared integration.patch extension validation, not algorithm math.",
+    "r29": "247 files deployed with exact bytes verified by exec-00000000000014c1. No bound source, same-image CPU, or NPU run yet.",
+    "blocked_before_execute": "MAIN full-file review found owner.model_closure still pins R28 model root. Partial allowed_source/EARLY.require reviews missed full CLI identity. Repair and all dependent pins in progress; do not run known failure.",
+    "mathematical_delta_since_r28": false,
+    "next": "Complete CLI sourceaudit -> actual same-image software no-skip -> exact released receipt -> model bind/CPU -> ND2 pre-weights canary -> all4 first-decode evidence -> independent consumer. Never jump to performance from ND2 allocation."
+  },
+  "scheduling": {
+    "continuous_4card_utilization": "not established; observed preparation and startup gaps remain",
+    "no_fake_load": true,
+    "protect_physical_0_3": true,
+    "observed_startup": "GE004 initial observation then main host CPU~99%, before container creation; inherited closure_mounts quadratic path traversal identified. Whole owner later succeeded in320.6105s; do not misclassify as numerical or infrastructure failure.",
+    "optimization": "Exact-equivalence ancestor-set mount computation independently tested locally; integrate only in subsequent prepared owner. Do not rerun passed GE004 numeric.",
+    "cpu_mutual_exclusion": "Existing R29 no_overlap rejects any qwen36.owner/model-tuning-lab.owner container, including device-free vs single6. Current guards retained; future narrowing requires joint CPU/RAM/disk/device admission.",
+    "ready_definition": "Actual complete CLI entry, frozen source/readset/inputs, same-image preflight, immutable command/output and resource/release contract; discovery or partial helper tests are not READY.",
+    "agent_policy": "Distinct future nodes continue during current stage; finished review is not repeated. R29 collector preparation yielded to newly proven source identity repair.",
+    "pending_agents": [
+      "DeltaLog exact identity+pin repair",
+      "independent complete-entry review",
+      "GE129 real worker/model binding and missing donor leaf packaging"
+    ]
+  }
+}
