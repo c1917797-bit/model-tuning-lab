@@ -1,0 +1,24 @@
+{
+  "schema": "hypic-r21-c2-finite-host-readiness/v1",
+  "mode": "c2_layer_finite_gate",
+  "default_enabled": false,
+  "change": "Collect all relocated K/V finite reductions per C2 layer; one scalar decision before any cache write/backend dispatch; existing layer completion barrier and material leases retained.",
+  "motivation": "Source evidence: experimental_c2_layer_barrier.py performs two scalar waits per hot request. Candidate overhead only; not attributed runtime critical path.",
+  "focused": {
+    "operation": "exec-00000000000010a2",
+    "tests": 16,
+    "exit": 0
+  },
+  "regression": {
+    "operation": "exec-00000000000010a3",
+    "tests": 998,
+    "exit": 0
+  },
+  "device_run": false,
+  "limits": [
+    "CPU doubles and guard tests are not official NPU numerical or speed acceptance",
+    "Existing manifests/contracts are stale after source edits; do not rerun old raw roots",
+    "Need separately bound Canary and source/rank/step finite receipt audit"
+  ],
+  "next": "Freeze R21 numerical Canary with c2_layer_finite_gate=true and independent precommit coverage audit; publish then fresh device admission."
+}

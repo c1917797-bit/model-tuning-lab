@@ -1,4 +1,14 @@
-# CURRENT R20 FIRST PAIR TERMINAL; WHOLE HYPIC NEGATIVE
+# CURRENT R21 C2 FINITE GATE HOST READY; NO DEVICE RUN
+
+Defaultoff c2_layer_finite_gate aggregates relocatedK/V finitechecks before any
+cachewrite/backenddispatch; layercompletionbarrier andleasesretained.
+16focused10a2 and998fullCPU10a3 PASS;29structure10a4PASS.
+R21_C2_FINITE_HOST_READINESS_20261017.json records scope. NotNPU/speedproof.
+Old manifests/contracts stale after sourcechanges; freeze newCanary/sourceclosure/
+independentprecommitreceiptaudit, publishthenfreshadmission. Noownedmodeljob.
+R20wholepairnegative unchanged. Fullgoal incomplete.
+
+# HISTORICAL R20 FIRST PAIR TERMINAL; WHOLE HYPIC NEGATIVE
 
 G1 controller1047exit0; independent108e PASS40/40,202sources,430cleanisolation,
 live exactownrelease. G1 TPOT280.548178ms/TTFTP95348314.762610ms.

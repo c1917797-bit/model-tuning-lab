@@ -28,12 +28,20 @@ def verify_model_source(cls):
 def c2_install_route(config):
     config=dict(config)
     layer_barrier=config.pop("c2_layer_completion_barrier",False)
+    finite_gate=config.pop("c2_layer_finite_gate",False)
+    if type(finite_gate)is not bool or finite_gate and not layer_barrier:
+        raise ValueError("C2 finite gate requires explicit layer barrier")
     if type(layer_barrier) is not bool:
         raise ValueError("explicit C2 layer barrier boolean required")
     if layer_barrier:
         from experimental_c2_layer_barrier import install_compact_c2
     else:
         from independent_compact_c2_hook import install_compact_c2
+    if finite_gate:
+        original_install=install_compact_c2
+        def install_compact_c2(stage,*,enabled=False,emit=None):
+            return original_install(stage,enabled=enabled,emit=emit,finite_gate=True)
+    install_compact_c2.c2_layer_finite_gate=finite_gate
     return config,install_compact_c2,layer_barrier
 
 def c1_install_route(config):
@@ -162,6 +170,7 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
         import os
         emit({'event':'compact_hypic_hooks_installed','pid':os.getpid(),
               'default_disabled':True,'c2_layer_completion_barrier':layer_barrier,
+              'c2_layer_finite_gate':install_compact_c2.c2_layer_finite_gate,
               'native_decode_batch':native_batch,
               'c1_async_material_transfer':stage.compact_store.async_material_transfer,
               'c1_async_material_verify':stage.compact_store.verify_async_transfer,

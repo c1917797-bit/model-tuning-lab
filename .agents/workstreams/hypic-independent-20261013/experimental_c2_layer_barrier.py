@@ -8,8 +8,9 @@ from pathlib import Path
 import hashlib,inspect
 
 
-def install_compact_c2(stage,*,enabled=False,emit=None):
+def install_compact_c2(stage,*,enabled=False,emit=None,finite_gate=False):
     if not enabled:return lambda:None
+    if type(finite_gate)is not bool:raise ValueError('explicit C2 finite gate boolean required')
     if not callable(emit):raise ValueError('C2 evidence sink required')
     import torch
     from vllm_ascend.attention.attention_v1 import AscendAttentionBackendImpl as cls,AscendAttentionState
@@ -80,6 +81,10 @@ def install_compact_c2(stage,*,enabled=False,emit=None):
         groups=[gid for gid,names in selected.attention_groups if layer.layer_name in names]
         if len(groups)!=1:raise ValueError('full-attention group association missing')
         group=groups[0];prepared=[];offset=0;all_slots=set()
+        guard=None;hot_requests=[]
+        if finite_gate:
+            from independent_layer_finite_guard import LayerFiniteGuard
+            guard=LayerFiniteGuard()
         mixed=any(isinstance(p,NativeQueryPlan) for p in selected.plans)
         with ExitStack() as leases:
             for plan in selected.plans:
@@ -107,7 +112,9 @@ def install_compact_c2(stage,*,enabled=False,emit=None):
                 inv=1.0/(10000000.0**(torch.arange(0,64,2,device=query.device).float()/64))
                 k=relocate_keys(data['keys'].to(query.device),data['positions'].to(query.device),positions,inv)
                 v=data['values'].to(query.device)
-                if not torch.isfinite(k).all().item() or not torch.isfinite(v).all().item():
+                if guard is not None:
+                    guard.collect(k,v);hot_requests.append(plan.request_id)
+                elif not torch.isfinite(k).all().item() or not torch.isfinite(v).all().item():
                     raise ValueError('nonfinite compact public KV')
                 metas=tuple(window_metadata(attn_metadata,w,request_row=cache.row,
                     cache_hit_state=AscendAttentionState.PrefillCacheHit,
@@ -116,6 +123,12 @@ def install_compact_c2(stage,*,enabled=False,emit=None):
             if any(t.shape[0]!=offset for t in (query,key,value,output)):
                 raise ValueError('compact C2 projected row coverage mismatch')
             if kv_cache is None or len(kv_cache)!=2:raise ValueError('native paged KV parts absent')
+            if hot_requests:
+                covered=guard.validate()
+                emit({'event':'c2_layer_precommit_validated','rank':selected.plans[0].rank,
+                    'step':selected.plans[0].step,'layer':layer.layer_name,
+                    'requests':hot_requests,'tensors':covered,'finite':True,
+                    'actual_slot_commit':'not_started'})
             from independent_layer_completion import complete_layer
             def execute(item):
                 plan,binding,generation,base,k,v,metas=item
@@ -141,4 +154,3 @@ def install_compact_c2(stage,*,enabled=False,emit=None):
         cls.forward=original
         public_chunks.clear()
     return stop
-

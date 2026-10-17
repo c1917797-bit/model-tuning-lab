@@ -16,7 +16,7 @@ from independent_hybrid_material import MaterialIdentity
 from test_independent_c2_metadata import metadata
 
 class HotBarrier(unittest.TestCase):
-    def run_case(self,bad=False):
+    def run_case(self,bad=False,finite_gate=False):
         calls=[];events=[];syncs=[];lease=[False]
         class Backend:
             num_kv_heads=1;head_size=256
@@ -47,6 +47,10 @@ class HotBarrier(unittest.TestCase):
         kv=(torch.zeros(3,4,1,256),torch.zeros(3,4,1,256))
         token=CURRENT_COMPACT_MODEL.set(selected);request_token=CURRENT_REQUEST_SLICES.set(("fixture",))
         def emit(event):
+            if event['event']=='c2_layer_precommit_validated':
+                self.assertTrue(lease[0]);self.assertEqual(syncs,[])
+                self.assertEqual(calls,[]);self.assertTrue((kv[1]==0).all())
+                self.assertEqual(event['tensors'],2);events.append(event);return
             self.assertTrue(lease[0]);self.assertEqual(syncs,["complete"]);events.append(event)
         try:
             with ExitStack() as stack:
@@ -56,7 +60,7 @@ class HotBarrier(unittest.TestCase):
                 stack.enter_context(patch("experimental_c2_layer_barrier.hashlib.sha256",
                     return_value=SimpleNamespace(hexdigest=lambda:"80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390")))
                 stack.enter_context(patch.object(torch,"npu",SimpleNamespace(synchronize=lambda:syncs.append("complete")),create=True))
-                stop=install_compact_c2(stage,enabled=True,emit=emit)
+                stop=install_compact_c2(stage,enabled=True,emit=emit,finite_gate=finite_gate)
                 try:
                     run=lambda:Backend().forward(SimpleNamespace(layer_name="layer"),q,q,q,kv,native,out)
                     if bad:
@@ -68,8 +72,8 @@ class HotBarrier(unittest.TestCase):
                         self.assertTrue(torch.equal(out[:5],q[:5]+5))
                         self.assertTrue(torch.equal(out[5:],q[5:]+12))
                         self.assertTrue((kv[1].reshape(12,1,256)[5:10]==2).all())
-                        self.assertEqual(len(events),1)
-                        self.assertEqual(events[0]["skipped_body_queries"],5)
+                        self.assertEqual(len(events),2 if finite_gate else 1)
+                        self.assertEqual(events[-1]["skipped_body_queries"],5)
                         self.assertEqual(syncs,["complete"])
                 finally:stop()
                 self.assertIs(Backend.forward,original)
@@ -78,5 +82,7 @@ class HotBarrier(unittest.TestCase):
         self.assertFalse(lease[0])
     def test_hot_kv_seam_suffix_before_single_receipt_barrier(self):self.run_case()
     def test_nonfinite_hot_material_rejected_before_backend(self):self.run_case(True)
+    def test_finite_gate_preserves_precommit_and_completion_order(self):self.run_case(finite_gate=True)
+    def test_finite_gate_rejects_nan_before_any_slot_write(self):self.run_case(True,finite_gate=True)
 
 if __name__=="__main__":unittest.main()
