@@ -1,0 +1,197 @@
+{
+  "enabled": false,
+  "new_sameimage_ABI_and_all15_controls_required": true,
+  "order": [
+    "authority_preflight",
+    "bind",
+    "sourceaudit",
+    "sourceaudit_CPU",
+    "startup",
+    "startup_failure",
+    "cpu",
+    "ticket",
+    "numeric",
+    "consumer"
+  ],
+  "prepared_only": true,
+  "qualified": false,
+  "reused_only_actual_R1_root_pair": {
+    "final_inspect": {
+      "bytes": 83110,
+      "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair1-MAIN-RENEW24H_001/factors/cpu/FINAL_INSPECT.json",
+      "sha256": "7bda398801c68be12ae60d85d3e97ba845978b87512d7ff9844e675fc8a45827"
+    },
+    "owner": {
+      "bytes": 836,
+      "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair1-MAIN-RENEW24H_001/factors/cpu/RESULT.json",
+      "sha256": "d92a457919cc8f6b8561e14e6235ff93dd1a4319b5610b4d23ece18e592792f4"
+    },
+    "root_stage": {
+      "bytes": 1112,
+      "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair1-MAIN-RENEW24H_001/factors/cpu/preflight/ROOT_PAIR_STAGE.json",
+      "sha256": "5d38a6d679ea9fdf8a42d2416b14413525cd8e7639824fcea723b8a4022dd90f"
+    },
+    "source": {
+      "bytes": 31740,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/SOURCE_MANIFEST.json",
+      "sha256": "0c9cfef77f5ecb709731d0ac08302c9c75f80ba21accc25b10274bcf3cb4d3b8"
+    },
+    "stage": {
+      "bytes": 1358,
+      "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair1-MAIN-RENEW24H_001/factors/cpu/preflight/STAGE_RESULT.json",
+      "sha256": "902fcc8815d34b04e683cd77143247db4895d8df17c940aaecf4d1216b83451c"
+    }
+  },
+  "reviewed_template": {
+    "bytes": 25175,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/SOURCE_TEMPLATE.json",
+    "sha256": "17c22303d2c928f32bd45e13be92e3ecfaf09a4ed5e9c4fad290316d6c937317"
+  },
+  "stages": {
+    "authority_preflight": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/authority_preflight.py",
+      "--execute",
+      "--authority-ref",
+      "{\"bytes\":3012,\"path\":\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json\",\"sha256\":\"cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d\"}"
+    ],
+    "bind": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/run116.py",
+      "--execute",
+      "--stage",
+      "bind",
+      "--reviewed-template-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/SOURCE_TEMPLATE.json\",\"bytes\":25175,\"sha256\":\"17c22303d2c928f32bd45e13be92e3ecfaf09a4ed5e9c4fad290316d6c937317\"}"
+    ],
+    "consumer": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/run116.py",
+      "--execute",
+      "--stage",
+      "consumer",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>",
+      "--host-cpu",
+      "<MAIN_HOST_CPU>",
+      "--guest-cpu",
+      "<MAIN_GUEST_CPU>",
+      "--numeric-owner-ref",
+      "<ACTUAL_RELEASED_NUMERIC_OWNER_REF3>"
+    ],
+    "cpu": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/run116.py",
+      "--execute",
+      "--stage",
+      "cpu",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>",
+      "--host-cpu",
+      "<MAIN_HOST_CPU>",
+      "--guest-cpu",
+      "<MAIN_GUEST_CPU>"
+    ],
+    "numeric": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/run116.py",
+      "--execute",
+      "--stage",
+      "numeric",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>",
+      "--host-cpu",
+      "<MAIN_HOST_CPU>",
+      "--guest-cpu",
+      "<MAIN_GUEST_CPU>",
+      "--cpu-owner-ref",
+      "<ACTUAL_RELEASED_CPU_OWNER_REF3>",
+      "--abi-ticket-ref",
+      "<ACTUAL_NPU_TICKET_REF3>"
+    ],
+    "software_local_sameimage_only": [
+      "/usr/local/python3.12.13/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/entry.py",
+      "--software"
+    ],
+    "sourceaudit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/run116.py",
+      "--execute",
+      "--stage",
+      "sourceaudit",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>"
+    ],
+    "sourceaudit_CPU": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/owned_cpu116.py",
+      "--source-audit",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>"
+    ],
+    "startup": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/owned_cpu116.py",
+      "--execute",
+      "--startup-smoke",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>",
+      "--host-cpu",
+      "<MAIN_HOST_CPU>",
+      "--guest-cpu",
+      "<MAIN_GUEST_CPU>",
+      "--output",
+      "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/startup"
+    ],
+    "startup_failure": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/owned_cpu116.py",
+      "--execute",
+      "--startup-smoke",
+      "--controlled-failure",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>",
+      "--host-cpu",
+      "<MAIN_HOST_CPU>",
+      "--guest-cpu",
+      "<MAIN_GUEST_CPU>",
+      "--output",
+      "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/startup-failure"
+    ],
+    "ticket": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/run116.py",
+      "--execute",
+      "--stage",
+      "ticket",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>",
+      "--cpu-owner-ref",
+      "<ACTUAL_RELEASED_CPU_OWNER_REF3>"
+    ]
+  },
+  "startup_failure_expected_owner_status": "FAIL retained, require exact release/secondary empty; never NPU ticket"
+}

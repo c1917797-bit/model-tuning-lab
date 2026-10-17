@@ -1,0 +1,305 @@
+{
+  "bind116.py": {
+    "after": {
+      "bytes": 1275,
+      "sha256": "7938d8c95dc3c26053b271403e592c682c3f8814b59b116acd368bc2471256c4"
+    },
+    "before": {
+      "bytes": 971,
+      "sha256": "64108eaa3987566710655c76dea1463efab9b757de9049f387af0c0d9890ff5e"
+    },
+    "edits": [
+      {
+        "after": "vFAfactor",
+        "before": "v118t",
+        "count": 1
+      },
+      {
+        "after": "    import decision_gate as R\n    proof=R.consume(C,m['actual_diagnostic_source'],m['actual_diagnostic_owner']);abi=R.abi_provenance(C)\n    C.need(abi['header']==m['header_ref'],'same actual canonical9.1 header, image-internal not host-mounted')\n    m['calibration_readset']=proof['readset']+abi['readset'];m['original_fia_abi_ref']=abi['abi']",
+        "before": "    import predecessor118t as R\n    R.join(C,m)"
+      },
+      {
+        "after": "m['profile']='factors'",
+        "before": "m['profile']='paged'"
+      },
+      {
+        "after": "m['output_root']+='/factors'",
+        "before": "m['output_root']+='/paged'"
+      }
+    ]
+  },
+  "common116.py": {
+    "after": {
+      "bytes": 1807,
+      "sha256": "90a6960ffa67f66e33d62e18b582aa23e431da6ce00bcd3fe10d4e388f159196"
+    },
+    "before": {
+      "bytes": 1541,
+      "sha256": "c0d57b6c6355a01d076f6e6a4670b7d1520b390753ea4fdc8cb5cc8f386e7e1e"
+    },
+    "edits": [
+      {
+        "after": "vFAfactor",
+        "before": "v118t",
+        "count": 1
+      },
+      {
+        "after": "1792226600",
+        "before": "1792134133",
+        "count": 2
+      },
+      {
+        "after": "1792313000",
+        "before": "1792220533",
+        "count": 2
+      },
+      {
+        "after": "def ref(p):\n    p=Path(p);a=p.stat();h=hashlib.sha256();n=0\n    with p.open('rb')as f:\n        for block in iter(lambda:f.read(2**20),b''):h.update(block);n+=len(block)\n    z=p.stat();need((a.st_dev,a.st_ino,a.st_size,a.st_mtime_ns)==(z.st_dev,z.st_ino,z.st_size,z.st_mtime_ns)and n==z.st_size,'stable streamed immutable read')\n    return dict(path=str(p),bytes=n,sha256=h.hexdigest())\n",
+        "before": "def ref(p):\n    p=Path(p);return dict(path=str(p),bytes=p.stat().st_size,sha256=hashlib.sha256(p.read_bytes()).hexdigest())\n"
+      }
+    ]
+  },
+  "consume116.py": {
+    "after": {
+      "bytes": 1318,
+      "sha256": "9d7a2ebb090aac5c189f9585305bb7f50962e948a19eb95a598b171ea37223d0"
+    },
+    "before": {
+      "bytes": 1277,
+      "sha256": "bb8268b7871c57399db411e774b59ad82a78e2bcca60d866d9402cf21a96a351"
+    },
+    "edits": [
+      {
+        "after": "return 0 if value['diagnostic_complete']and value['qualified']is False else 3",
+        "before": "return 0 if value['pass_gate']else 3"
+      }
+    ]
+  },
+  "controller_probe.py": {
+    "after": {
+      "bytes": 3053,
+      "sha256": "68f3d4b8fcd7876378ac7597e4a8655213215779b7feb453f3e8cc3f55e7f392"
+    },
+    "before": {
+      "bytes": 3097,
+      "sha256": "5b433ce4e69f119661949cf01ec410272b89c2742854f787336e6e47dbf9e230"
+    },
+    "edits": [
+      {
+        "after": "P/'evidence/controller069'",
+        "before": "T/'deltalog-split-scale-numeric-new24h-20261016-069-repair1'"
+      },
+      {
+        "after": "P/'evidence/controllerV7'",
+        "before": "T/'deltalog-new48h-v7-20261014-001'"
+      }
+    ]
+  },
+  "cpu116.py": {
+    "after": {
+      "bytes": 4127,
+      "sha256": "354b6302f262b7aa1089f25620e1c3cc5ef7f39acf4f5d83916ac523b82b6619"
+    },
+    "before": {
+      "bytes": 3863,
+      "sha256": "4ef95310e79b6f8cad333ddb08a54d65e2b6ed0543fbb7b67a4984cda1e73e3c"
+    },
+    "edits": [
+      {
+        "after": "vFAfactor",
+        "before": "v118t",
+        "count": 1
+      },
+      {
+        "after": "abi116.record(t,torch_npu,sr,m['header_ref'],a.output/'ACTUAL_FIA_ABI.json');actual=C.ref(a.output/'ACTUAL_FIA_ABI.json')\n        import root_pair_stage\n        root_pair=root_pair_stage.run(t,C,m,sr,a.output)\n        C.write(a.output/'ROOT_PAIR_STAGE.json',root_pair)",
+        "before": "abi116.record(t,torch_npu,sr,m['header_ref'],a.output/'ACTUAL_FIA_ABI.json');actual=C.ref(a.output/'ACTUAL_FIA_ABI.json')"
+      },
+      {
+        "after": "root_pair_stage_ref=C.ref(a.output/'ROOT_PAIR_STAGE.json')if(a.output/'ROOT_PAIR_STAGE.json').is_file()else None,software_controls=controls,actual_meta=",
+        "before": "software_controls=controls,actual_meta="
+      }
+    ]
+  },
+  "guest116.py": {
+    "after": {
+      "bytes": 4501,
+      "sha256": "8d673d81e965b638a6415676c26f9e079637a72f0a202186b024c94aa47ea71d"
+    },
+    "before": {
+      "bytes": 4198,
+      "sha256": "6c9fcddeea8840d482e36871144f0b7dbe8d539a9319ea23f9a34d3c01d51cf3"
+    },
+    "edits": [
+      {
+        "after": "vFAfactor",
+        "before": "v118t",
+        "count": 4
+      },
+      {
+        "after": "1792313000",
+        "before": "1792220533",
+        "count": 1
+      },
+      {
+        "after": "operator='actual saved-input FIA factors; no GDN import/conv'",
+        "before": "operator='device-canary; normal native GDN import and conv schema only'"
+      },
+      {
+        "after": "leaf=out/'factors'",
+        "before": "leaf=out/'paged'"
+      },
+      {
+        "after": "import factor\n factor.validate_abi(t,__import__('torch_npu'),C,C.obj(ticket['actual_abi_ref']))\n original=C.obj(m['original_fia_abi_ref']);C.need(original['schema_family']==C.obj(ticket['actual_abi_ref'])['schema_family'],'same original model dispatcher family, new actual CPU proof required')\n K.run(t,C,m,leaf,deadline)",
+        "before": "K.run(t,C,m,leaf,deadline)"
+      }
+    ]
+  },
+  "owned_cpu116.py": {
+    "after": {
+      "bytes": 16586,
+      "sha256": "74e1368c92a4d0387ad3a0ae251353614211223d34f845ba71b9fe8a61ea90f3"
+    },
+    "before": {
+      "bytes": 16387,
+      "sha256": "6159466bc6347ab6f28c18537cc9dcc6fee37db0bb288e94652b32e6c8288812"
+    },
+    "edits": [
+      {
+        "after": "vFAfactor",
+        "before": "v118t",
+        "count": 6
+      },
+      {
+        "after": "1792226600",
+        "before": "1792134133",
+        "count": 1
+      },
+      {
+        "after": "1792313000",
+        "before": "1792220533",
+        "count": 1
+      },
+      {
+        "after": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001",
+        "before": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1",
+        "count": 1
+      },
+      {
+        "after": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-MAIN-RENEW24H_001",
+        "before": "/opt/host/vnf/austinov/run-bole-paged-tree118trepair1-MAIN-20261016-001",
+        "count": 1
+      },
+      {
+        "after": "y=run([DOCKER,'ps','--no-trunc','--filter','label=model-tuning-lab.owner','--format','{{.ID}}']);need(y.returncode==0,'complete model owned list');ids|=set(y.stdout.split());need(not(ids-({exclude}if exclude else set())),'no blind shared RAM/CPU overlap with both owned labels')",
+        "before": "need(not(ids-({exclude}if exclude else set())),'no blind shared RAM/CPU overlap with any existing owned task')"
+      },
+      {
+        "after": "d['schema']=='bole.saved-FA-single-factor-independent/v1'",
+        "before": "d['schema']=='bole.paged-tree-independent/vFAfactor'"
+      },
+      {
+        "after": "d['diagnostic_complete']is True and d['qualified']is False",
+        "before": "d['pass_gate']is True and d['qualified']is False"
+      }
+    ]
+  },
+  "owner116.py": {
+    "after": {
+      "bytes": 17831,
+      "sha256": "b9a8bba4eebc02800366cfeaee74a743377129c911f4dff9d55a2ff4b4ccae3e"
+    },
+    "before": {
+      "bytes": 16858,
+      "sha256": "a5bf934cd7e749aa3b630da2039969a2d8e3cce52d4c0756a52e73299edc543d"
+    },
+    "edits": [
+      {
+        "after": "vFAfactor",
+        "before": "v118t",
+        "count": 7
+      },
+      {
+        "after": "1792226600",
+        "before": "1792134133",
+        "count": 2
+      },
+      {
+        "after": "1792313000",
+        "before": "1792220533",
+        "count": 2
+      },
+      {
+        "after": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001",
+        "before": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1",
+        "count": 1
+      },
+      {
+        "after": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-MAIN-RENEW24H_001",
+        "before": "/opt/host/vnf/austinov/run-bole-paged-tree118trepair1-MAIN-20261016-001",
+        "count": 1
+      },
+      {
+        "after": "bole-saved-FA-factor-MAIN",
+        "before": "bole-tree-MAIN-PAGED118T",
+        "count": 1
+      },
+      {
+        "after": "BOLE_SAVED_FA_FACTOR_ENABLE='1'",
+        "before": "BOLE_PAGED_TREE_ENABLE='1'"
+      },
+      {
+        "after": "def receive(v,sr,ar,pr):\n need(v['schema']=='bole.tree-stage/vFAfactor'and v['source']==sr and v['authority']==ar and v['plan']==pr and v['primary']is None and v['NPU']is True and v['qualified']is False,'actual complete same-source factor guest')\n inner=obj(v['result']);expected=[(r,l,a)for r in range(4)for l in range(3,64,4)for a in('anchor_paged_s1_i2','inner_only_paged_s1_i0','sparse_only_paged_s0_i2','storage_only_contiguous_s1_i2')]\n need(inner['schema']=='bole.saved-FA-single-factor-stage/v1'and inner['source']==sr and inner['NPU']is True and inner['qualified']is False and [(r['rank'],r['layer'],r['arm'])for r in inner['rows']]==expected,'all256 attempted calls, numeric failure remains recorded')\n for row in inner['rows']:checked(row['raw']);checked(row['before'])\n return v\n",
+        "before": "def receive(v,sr,ar,pr):\n need(v['schema']=='bole.tree-stage/vFAfactor'and v['source']==sr and v['authority']==ar and v['plan']==pr and v['primary']is None and v['NPU']is True and v['qualified']is False,'actual116 complete outer stage')\n inner=obj(v['result']);need(inner['schema']=='bole.paged-tree-stage/v1'and inner['source']==sr and inner['NPU']is True and inner['qualified']is False and [(r['case'],r['mode'])for r in inner['rows']]==[(c,m)for c in range(4)for m in(0,1)],'actual complete8 paged TND captures')\n for r in inner['rows']:\n  checked(r['raw']);checked(r['before'])\n return v\n"
+      },
+      {
+        "after": "d=load(own['donor_host'],'_081_exact069_host');d.OWNER=OWNER\n need((d.START,d.CUT)==(1792134133,1792220533),'exact old donor clock before explicit authorized renewal');d.START,d.CUT=1792226600,1792313000",
+        "before": "d=load(own['donor_host'],'_081_exact069_host');d.OWNER=OWNER"
+      },
+      {
+        "after": "'--network=none','--read-only']",
+        "before": "'--network=none']"
+      },
+      {
+        "after": "original_inspect=GE.inspect\n def inspected(self,cid):\n  value,x=original_inspect(self,cid);need(x['HostConfig']['ReadonlyRootfs']is True and x['HostConfig'].get('PidMode','')in('','private'),'strengthened readonly root/private PID');return value,x\n GE.inspect=inspected;GE.create=create;GE.wait079=wait",
+        "before": "GE.create=create;GE.wait079=wait"
+      },
+      {
+        "after": "live=self.call([d.DOCKER,'ps','--no-trunc','--filter','label=qwen36.owner','--format','{{.ID}}']);model=self.call([d.DOCKER,'ps','--no-trunc','--filter','label=model-tuning-lab.owner','--format','{{.ID}}']);need((set(live['stdout'].split())|set(model['stdout'].split()))<=({self.active}if self.active else set()),'both actual owner labels: no unaccounted CPU/RAM overlap')",
+        "before": "live=self.call([d.DOCKER,'ps','--no-trunc','--filter','label=qwen36.owner','--format','{{.ID}}']);need(set(live['stdout'].split())<=({self.active}if self.active else set()),'no unaccounted owned CPU/RAM overlap')"
+      },
+      {
+        "after": "model=lane.call([d.DOCKER,'ps','--no-trunc','--filter','label=model-tuning-lab.owner','--format','{{.ID}}']);need(not r['stdout'].strip()and not model['stdout'].strip(),'serialize with both actual owner labels')",
+        "before": "need(not r['stdout'].strip(),'serialize with every existing owned load')"
+      },
+      {
+        "after": "refs.extend([ticket_ref,tv['actual_abi_ref'],*tv['root_pair_refs']])",
+        "before": "refs.extend([ticket_ref,tv['actual_abi_ref']])"
+      }
+    ]
+  },
+  "ticket116.py": {
+    "after": {
+      "bytes": 3871,
+      "sha256": "44054f5ae841884efc494eed60b76ef46dee40e5250baeb3ba2bfd181475a82f"
+    },
+    "before": {
+      "bytes": 2601,
+      "sha256": "2f4ab52765a14d7cb9d9729f2675c5985006f16cf697838035196adae5a959a5"
+    },
+    "edits": [
+      {
+        "after": "vFAfactor",
+        "before": "v118t",
+        "count": 3
+      },
+      {
+        "after": "    from cpu_root_alias import resolve as resolve_root\n    C.need(final_inspect_ref is not None,'actual CPU guest ABI alias must have strict final-inspect proof')\n    root_ref=resolve_root(C,stage['root_pair_stage_ref'],cpu_owner_ref=cpu_owner_ref,owner=cv,final_inspect_ref=final_inspect_ref);root=C.obj(root_ref)\n    C.need(root['schema']=='bole.actual-native-root-repeat-pre-diagnostic/v1'and root['source']==sr and root['diagnostic_complete']is True and root['NPU']is False and root['operator_executed']is False and len(root['reports'])==4,'actual complete CPU-only saved-root pre-diagnostic')\n    root_refs=[root_ref,final_inspect_ref]\n    for rank,ref in enumerate(root['reports']):\n        actual_ref=resolve_root(C,ref,cpu_owner_ref=cpu_owner_ref,owner=cv,final_inspect_ref=final_inspect_ref);value=C.obj(actual_ref)\n        C.need(value['diagnostic_source']==sr and value['rank']==rank and value['NPU']is False and value['qualified']is False,'actual same-source root-repeat ranks')\n        root_refs.append(actual_ref)\n    return dict(root_pair_refs=root_refs,schema='bole.FIA-NPU-ticket/vFAfactor'",
+        "before": "    return dict(schema='bole.FIA-NPU-ticket/vFAfactor'"
+      },
+      {
+        "after": "        C.need(value['first_root_input_identical']is True and value['all_initial_cache_and_weights_identical']is True,'native root initial inputs/cache differ: repair measurement/init before FIA factors')\n        root_refs.append(actual_ref)",
+        "before": "        root_refs.append(actual_ref)"
+      }
+    ]
+  }
+}

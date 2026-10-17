@@ -1,0 +1,783 @@
+{
+  "schema": "ascend.entry-contracts-and-native-factor-evidence/v1",
+  "archive_whitespace": {"full_staged_diff_check": "EXIT2 solely one byte-preserved donor EOF blank line", "exact_archive": "projects/qwen36-paper-portfolio/tools/renewed24h_entry_contracts_20261017/bole_factors_repair2/evidence/controller069/terminal_fence.py", "original_bytes": 7341, "original_sha256": "a7cd5f0130dabd1d8a8a57e321e4a6597ac61c77a39736b1d55f4e17368011db", "do_not_normalize_immutable_source": true, "nonexception_files_diffcheck_required": true},
+  "runtime_commands_archived_separately": {"early": "dl_early_r22repair1/COMMANDS.json", "BOLE": "bole_factors_repair2/COMMANDS.json", "total_files_after_addition": 256, "bytes_after_addition": 4241182},
+  "recorded_at_utc": "2026-10-17T13:18:07Z",
+  "previous_goal_turn": "no progress: status/knowledge report only; revalidated and performed new actual stages",
+  "this_turn": "progress: deployed exact repaired sources, actual early172, BOLE real startup/error release/CPU15, real256 NPU and independent consumer, launched DL1325",
+  "authority": "../RENEW24H_AUTHORITY_20261017_084320.json",
+  "acceptance_unchanged": true,
+  "new_nonHYPIC_accepted": false,
+  "archive": {
+    "archive": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/renewed24h_entry_contracts_20261017",
+    "verified_files": 254,
+    "bytes": 4232644,
+    "retained_exact_partial_files": 56,
+    "prior1327_failure_preserved": true,
+    "correction": "allow two exact bounded source distribution METADATA files; no overwrite or runtime delta"
+  },
+  "DL": {
+    "early_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-22-repair1/SOURCE_MANIFEST.json",
+      "bytes": 2812,
+      "sha256": "7e7305f164a0fd17433c0437f8d9a4fecd44ce5fbf360aeed3f3a6d233563a34"
+    },
+    "early_template": {
+      "bytes": 2814,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-22-repair1/SOURCE_TEMPLATE.json",
+      "sha256": "a485ecaf94b54db339df535b347b89bed9f7588a01cc53fca631e0e92902f06d"
+    },
+    "model_template": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair22-repair1-20261017-001/SOURCE_TEMPLATE.json",
+      "bytes": 249107,
+      "sha256": "b9b7c916d1d4cdb4a91068c2659d905be2802736dd0f0b43bf47a97ae7d23ef2"
+    },
+    "bound": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair22-repair1-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 280513,
+      "sha256": "fe1605d6bc07185e1a37792daf3c73050b129833dbff763ff121b6a78d2585ec"
+    },
+    "deployment": {
+      "copy_timeout_receipts_preserved": true,
+      "retry_same_idempotency_no_duplicate_start": true,
+      "patches": 37,
+      "verified_payload_files": 194,
+      "operations": [
+        "1318",
+        "1319",
+        "131a",
+        "131b",
+        "1323"
+      ]
+    },
+    "early": {
+      "actual_operation": "exec-0000000000001319",
+      "independent_release_operation": "exec-000000000000131a",
+      "executed": 172,
+      "original_discovered": 174,
+      "skipped": 0,
+      "elapsed": 20.845566059986595,
+      "deferred_exact_tests": [
+        "test_actual017_binding.ActualBinding.test_real_template_original017_adapt_and_private_bind",
+        "test_overlay.Tests.test_allcold_and_actual_namespace"
+      ],
+      "full_model_suite_executed": false,
+      "full174_still_required_before_NPU": true,
+      "source_alias": "/adakv-results",
+      "memory_limit_unchanged": true,
+      "output_cap_bytes": 134217728
+    },
+    "old1310_original_failure_preserved": true,
+    "binder": {
+      "operation": "exec-000000000000131b",
+      "exit": 0,
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair22-repair1-20261017-001/SOURCE_MANIFEST.json",
+        "bytes": 280513,
+        "sha256": "fe1605d6bc07185e1a37792daf3c73050b129833dbff763ff121b6a78d2585ec"
+      }
+    },
+    "sourceaudit": {
+      "operation": "exec-0000000000001323",
+      "exit": 0
+    },
+    "actual_model": {
+      "operation": "exec-0000000000001325",
+      "last_polled_state": "running",
+      "whole_seconds": 3600,
+      "work": 2340,
+      "cleanup": 270,
+      "postverify": 900,
+      "margin": 90,
+      "output": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R22repair1-main-NEW24H_FIRSTDECODE101R22repair1_001",
+      "NPU_execution_yet_unverified": true,
+      "full174_yet_unverified": true,
+      "qualification": false
+    },
+    "next": "Observe same1325; preserve terminal first fault/release; consume actual all4 reports through pinned postinput successor only when present"
+  },
+  "BOLE": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/SOURCE_MANIFEST.json",
+      "bytes": 39192,
+      "sha256": "c8abbe5da9676ede8dca8665a8f486a9e75707794f4a1d837876f1c508581010"
+    },
+    "CPU_owner": {
+      "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/cpu/RESULT.json",
+      "bytes": 887,
+      "sha256": "c7aba224e16681171fb531a07388e3136a9aa57346233d26f2cadf69c04343b6"
+    },
+    "CPU_and_startup": {
+      "operation": "exec-000000000000131f",
+      "exit": 0,
+      "actual15_passed": true,
+      "actual15_seconds": 5.091,
+      "actual_readonly_Torch_dill_startup_passed": true,
+      "controlled_failure_exit": 3,
+      "controlled_failure_secondary": [],
+      "all_three_CPU_stages_released": true
+    },
+    "numeric_owner": {
+      "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/numeric/RESULT.json",
+      "bytes": 1717,
+      "sha256": "c91430c0b9979f5874d8964f42edd529db623dede1718ac46e7b58ea299f96e6"
+    },
+    "numeric": {
+      "operation": "exec-0000000000001320",
+      "exit": 0,
+      "owner": {
+        "NPU": true,
+        "NPU_requested": true,
+        "abi_ticket_ref": {
+          "bytes": 6539,
+          "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/NPU_TICKET.json",
+          "sha256": "aae5ab16771fe596b48c54f664587545dd50a8284476fd37e150bcbd4306cb94"
+        },
+        "authority": {
+          "bytes": 3012,
+          "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+          "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+        },
+        "donor_source": {
+          "bytes": 52969,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json",
+          "sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21"
+        },
+        "elapsed": 51.23588475998258,
+        "guest_source": {
+          "bytes": 39192,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/SOURCE_MANIFEST.json",
+          "sha256": "c8abbe5da9676ede8dca8665a8f486a9e75707794f4a1d837876f1c508581010"
+        },
+        "logical": 0,
+        "old_failures_unchanged": true,
+        "physical": [
+          4
+        ],
+        "primary": null,
+        "qualified": false,
+        "result": {
+          "bytes": 1510,
+          "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/numeric/numeric/result/STAGE_RESULT.json",
+          "sha256": "2c8aadeeab45a8f37de327e07f431f0848e8816250f5803a72e2fc37b36ea34e"
+        },
+        "schema": "bole.tree-owned/vFAfactor",
+        "secondary": [],
+        "source": {
+          "bytes": 39192,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/SOURCE_MANIFEST.json",
+          "sha256": "c8abbe5da9676ede8dca8665a8f486a9e75707794f4a1d837876f1c508581010"
+        },
+        "stopped_retained": true,
+        "used_bytes": 230214675
+      },
+      "fresh_release": {
+        "cid": "1a68611f21a9dd3c3a0a7db3a83c1b0797a91a184a802f36fc9ff7d525e46f66",
+        "State": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-17T13:09:56.54518368Z",
+          "FinishedAt": "2026-10-17T13:10:35.14358852Z"
+        },
+        "ExecIDs": null,
+        "Devices": [
+          {
+            "PathOnHost": "/dev/davinci4",
+            "PathInContainer": "/dev/davinci0",
+            "CgroupPermissions": "rwm"
+          },
+          {
+            "PathOnHost": "/dev/davinci_manager",
+            "PathInContainer": "/dev/davinci_manager",
+            "CgroupPermissions": "rwm"
+          },
+          {
+            "PathOnHost": "/dev/devmm_svm",
+            "PathInContainer": "/dev/devmm_svm",
+            "CgroupPermissions": "rwm"
+          },
+          {
+            "PathOnHost": "/dev/hisi_hdc",
+            "PathInContainer": "/dev/hisi_hdc",
+            "CgroupPermissions": "rwm"
+          }
+        ]
+      },
+      "stage": {
+        "NPU": true,
+        "abi_ticket_ref": {
+          "bytes": 6539,
+          "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/NPU_TICKET.json",
+          "sha256": "aae5ab16771fe596b48c54f664587545dd50a8284476fd37e150bcbd4306cb94"
+        },
+        "actual_abi_ref": {
+          "bytes": 5431,
+          "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/cpu/preflight/ACTUAL_FIA_ABI.json",
+          "sha256": "596c8fe9af42a73d4acfb81f4911e2ac218928c3180441f7b85b0afdbf8d9abf"
+        },
+        "authority": {
+          "bytes": 3012,
+          "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+          "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+        },
+        "plan": {
+          "bytes": 810,
+          "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/numeric/numeric/PLAN.json",
+          "sha256": "6ae0b16b6cab59ab2ec3ce6f58fd599895efa74ae695d93eb952a386ff8c98a4"
+        },
+        "primary": null,
+        "qualified": false,
+        "result": {
+          "bytes": 159608,
+          "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/numeric/numeric/result/factors/STAGE_RESULT.json",
+          "sha256": "e22bba85b9ecb9bca92089311a5ac48f8a5c380f9f6f72b98b2f04c9e461e42f"
+        },
+        "schema": "bole.tree-stage/vFAfactor",
+        "source": {
+          "bytes": 39192,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/SOURCE_MANIFEST.json",
+          "sha256": "c8abbe5da9676ede8dca8665a8f486a9e75707794f4a1d837876f1c508581010"
+        }
+      },
+      "inner_keys": [
+        "NPU",
+        "actual_abi_ref",
+        "actual_diagnostic_owner",
+        "actual_dispatch_family",
+        "model_ready",
+        "operator_calls_attempted",
+        "original_failures_unchanged",
+        "qualified",
+        "rows",
+        "schema",
+        "source"
+      ],
+      "rows": 256,
+      "firstrow": {
+        "arm": "anchor_paged_s1_i2",
+        "before": {
+          "bytes": 276377,
+          "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/numeric/numeric/result/factors/BEFORE-0-3-anchor_paged_s1_i2.pt",
+          "sha256": "053cde849b9d0593169e80ff5c734f37c6c4c9e4fca6ca6cdd79c2f27be98089"
+        },
+        "layer": 3,
+        "primary": null,
+        "rank": 0,
+        "raw": {
+          "bytes": 559362,
+          "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/numeric/numeric/result/factors/RAW-0-3-anchor_paged_s1_i2.pt",
+          "sha256": "15c4594072c600d15f330ff2ac96e68ef58db15d3908393cda1c240c3bbd04d7"
+        }
+      }
+    },
+    "consumer": {
+      "operation": "exec-0000000000001322",
+      "exit": 0,
+      "consumer_owner_ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/consumer/RESULT.json",
+        "bytes": 1310,
+        "sha256": "905a36e7f58b8ba43a6693ff2d1d99a23147850f054823393209c7d2e1921425"
+      },
+      "independent_release": {
+        "CID": "a641aaca47de48e1f316d331869c88f5af0c468d00c5cbae04e4a9a2ddb4d50c",
+        "State": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-17T13:12:09.36192071Z",
+          "FinishedAt": "2026-10-17T13:12:29.77638879Z"
+        },
+        "Devices": [],
+        "ExecIDs": null
+      },
+      "summary": {
+        "actual_capture": {
+          "bytes": 159608,
+          "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/numeric/numeric/result/factors/STAGE_RESULT.json",
+          "sha256": "e22bba85b9ecb9bca92089311a5ac48f8a5c380f9f6f72b98b2f04c9e461e42f"
+        },
+        "diagnostic_complete": true,
+        "model_ready": false,
+        "numeric_pass_not_implied": true,
+        "original_numeric_failures_unchanged": true,
+        "performance_ready": false,
+        "qualified": false,
+        "schema": "bole.saved-FA-single-factor-independent/v1",
+        "source": {
+          "bytes": 39192,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair2/SOURCE_MANIFEST.json",
+          "sha256": "c8abbe5da9676ede8dca8665a8f486a9e75707794f4a1d837876f1c508581010"
+        }
+      },
+      "row_count": 256
+    },
+    "small_refs": {
+      "cpu/preflight/STAGE_RESULT.json": {
+        "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/cpu/preflight/STAGE_RESULT.json",
+        "bytes": 7975,
+        "sha256": "1413e395ed841b7c70554a59ec5965ea1048487637613ded214327a7f13e5727"
+      },
+      "cpu/preflight/SOFTWARE_CONTROLS.json": {
+        "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/cpu/preflight/SOFTWARE_CONTROLS.json",
+        "bytes": 419,
+        "sha256": "63dedfc117c52b3271b5d8861688ae6f22b1ed2c41c024eadc66cb58bc6a8474"
+      },
+      "cpu/preflight/ACTUAL_FIA_ABI.json": {
+        "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/cpu/preflight/ACTUAL_FIA_ABI.json",
+        "bytes": 5431,
+        "sha256": "596c8fe9af42a73d4acfb81f4911e2ac218928c3180441f7b85b0afdbf8d9abf"
+      },
+      "startup/STARTUP.json": {
+        "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/startup/STARTUP.json",
+        "bytes": 1186,
+        "sha256": "ef01c50e7e0aa0481309f8d69210c41a7ab730fd90ec69e55153ce5ab2608258"
+      },
+      "startup-failure/STARTUP.json": {
+        "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/startup-failure/STARTUP.json",
+        "bytes": 1186,
+        "sha256": "2d298eb222343184a4fdb1d0fdf05f224eb46e809c05713edfc4cf02afa99ce2"
+      },
+      "numeric/numeric/ACTUAL_OWNER.json": {
+        "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/numeric/numeric/ACTUAL_OWNER.json",
+        "bytes": 2022,
+        "sha256": "b305ae740f9b16d65c4c7b39dfe38eff96ad6a824f9dcfc30d53d0a1beb774a7"
+      },
+      "numeric/numeric/PLAN.json": {
+        "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/numeric/numeric/PLAN.json",
+        "bytes": 810,
+        "sha256": "6ae0b16b6cab59ab2ec3ce6f58fd599895efa74ae695d93eb952a386ff8c98a4"
+      },
+      "consumer/ATTRIBUTION.json": {
+        "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair2-MAIN-RENEW24H_001/factors/consumer/ATTRIBUTION.json",
+        "bytes": 601499,
+        "sha256": "c5acd951672332b7dd7773650442d613d1bc35e28866e01736eac73abb4ba89b"
+      }
+    },
+    "aggregates": {
+      "arms": {
+        "anchor_paged_s1_i2": {
+          "rows": 64,
+          "exceptions": 0,
+          "input_unchanged": 64,
+          "anchor_bitwise": 64,
+          "oracle64_failed_rows": 21,
+          "oracle64_failed_elements": 52,
+          "oracle64_max_relative_l2": 0.002153842105436667,
+          "failed_rank_layers": [
+            [
+              0,
+              23
+            ],
+            [
+              0,
+              27
+            ],
+            [
+              0,
+              39
+            ],
+            [
+              0,
+              47
+            ],
+            [
+              0,
+              51
+            ],
+            [
+              0,
+              55
+            ],
+            [
+              0,
+              63
+            ],
+            [
+              1,
+              31
+            ],
+            [
+              1,
+              39
+            ],
+            [
+              1,
+              43
+            ],
+            [
+              1,
+              63
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              43
+            ],
+            [
+              2,
+              51
+            ],
+            [
+              2,
+              59
+            ],
+            [
+              3,
+              31
+            ],
+            [
+              3,
+              43
+            ],
+            [
+              3,
+              51
+            ],
+            [
+              3,
+              55
+            ],
+            [
+              3,
+              59
+            ],
+            [
+              3,
+              63
+            ]
+          ]
+        },
+        "inner_only_paged_s1_i0": {
+          "rows": 64,
+          "exceptions": 0,
+          "input_unchanged": 64,
+          "anchor_bitwise": 64,
+          "oracle64_failed_rows": 21,
+          "oracle64_failed_elements": 52,
+          "oracle64_max_relative_l2": 0.002153842105436667,
+          "failed_rank_layers": [
+            [
+              0,
+              23
+            ],
+            [
+              0,
+              27
+            ],
+            [
+              0,
+              39
+            ],
+            [
+              0,
+              47
+            ],
+            [
+              0,
+              51
+            ],
+            [
+              0,
+              55
+            ],
+            [
+              0,
+              63
+            ],
+            [
+              1,
+              31
+            ],
+            [
+              1,
+              39
+            ],
+            [
+              1,
+              43
+            ],
+            [
+              1,
+              63
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              43
+            ],
+            [
+              2,
+              51
+            ],
+            [
+              2,
+              59
+            ],
+            [
+              3,
+              31
+            ],
+            [
+              3,
+              43
+            ],
+            [
+              3,
+              51
+            ],
+            [
+              3,
+              55
+            ],
+            [
+              3,
+              59
+            ],
+            [
+              3,
+              63
+            ]
+          ]
+        },
+        "sparse_only_paged_s0_i2": {
+          "rows": 64,
+          "exceptions": 0,
+          "input_unchanged": 64,
+          "anchor_bitwise": 64,
+          "oracle64_failed_rows": 21,
+          "oracle64_failed_elements": 52,
+          "oracle64_max_relative_l2": 0.002153842105436667,
+          "failed_rank_layers": [
+            [
+              0,
+              23
+            ],
+            [
+              0,
+              27
+            ],
+            [
+              0,
+              39
+            ],
+            [
+              0,
+              47
+            ],
+            [
+              0,
+              51
+            ],
+            [
+              0,
+              55
+            ],
+            [
+              0,
+              63
+            ],
+            [
+              1,
+              31
+            ],
+            [
+              1,
+              39
+            ],
+            [
+              1,
+              43
+            ],
+            [
+              1,
+              63
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              43
+            ],
+            [
+              2,
+              51
+            ],
+            [
+              2,
+              59
+            ],
+            [
+              3,
+              31
+            ],
+            [
+              3,
+              43
+            ],
+            [
+              3,
+              51
+            ],
+            [
+              3,
+              55
+            ],
+            [
+              3,
+              59
+            ],
+            [
+              3,
+              63
+            ]
+          ]
+        },
+        "storage_only_contiguous_s1_i2": {
+          "rows": 64,
+          "exceptions": 0,
+          "input_unchanged": 64,
+          "anchor_bitwise": 64,
+          "oracle64_failed_rows": 21,
+          "oracle64_failed_elements": 52,
+          "oracle64_max_relative_l2": 0.002153842105436667,
+          "failed_rank_layers": [
+            [
+              0,
+              23
+            ],
+            [
+              0,
+              27
+            ],
+            [
+              0,
+              39
+            ],
+            [
+              0,
+              47
+            ],
+            [
+              0,
+              51
+            ],
+            [
+              0,
+              55
+            ],
+            [
+              0,
+              63
+            ],
+            [
+              1,
+              31
+            ],
+            [
+              1,
+              39
+            ],
+            [
+              1,
+              43
+            ],
+            [
+              1,
+              63
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              43
+            ],
+            [
+              2,
+              51
+            ],
+            [
+              2,
+              59
+            ],
+            [
+              3,
+              31
+            ],
+            [
+              3,
+              43
+            ],
+            [
+              3,
+              51
+            ],
+            [
+              3,
+              55
+            ],
+            [
+              3,
+              59
+            ],
+            [
+              3,
+              63
+            ]
+          ]
+        }
+      },
+      "qualified": false,
+      "model_ready": false,
+      "performance_ready": false,
+      "all256_standalone_attribution_only": true
+    },
+    "interpretation": "All4arms reproduce original saved BF16 native results bitwise64/64 and unchanged21/64 oracle failures52elements. Three toggles do not repair this domain; not a paper no-go or full-model numerical qualification. Root repeat first divergence before FA3 remains distinct. Stop repeating these options; prepare faithful immediate-clone/root-path discriminator.",
+    "model_qualified": false,
+    "performance_result": null,
+    "task_accuracy_result": null
+  },
+  "knowledge": "docs/knowledge-base/ascend-infra/cases/entrypoint-and-stage-contracts-20261017.md",
+  "control_plane_defects_preserved": {
+    "patch_wrong_root_and_absolute_header": "rejected no mutation; corrected only relative headers/root",
+    "archive1327": "failed before two exact bounded distribution METADATA;1329 identified;132a exact partial-readback then copy missing only, no overwrite",
+    "stdout_decoder": "MAIN attempted whole JSON parsing of JSONL or oversized nested report; no source/run restart, corrected bounded field projection/strict record count"
+  },
+  "physical_scope": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "window_utilization": "unmeasured; point snapshots do not prove no idle",
+  "performance_ready": false,
+  "task_ready": false
+}

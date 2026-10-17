@@ -1,0 +1,37 @@
+{
+  "metric": {
+    "actual_measurement": {
+      "bytes": 10653,
+      "path": "/opt/host/vnf/austinov/run-dl-measurement22-MAIN-RENEW24H_001/measurement/consumer/MEASUREMENT.json",
+      "sha256": "967f0b69069977f86736b964f0a8ae40e1d3d64da13faf997711b43ef8a35489"
+    },
+    "actual_owner": {
+      "bytes": 849,
+      "path": "/opt/host/vnf/austinov/run-dl-measurement22-MAIN-RENEW24H_001/measurement/consumer/RESULT.json",
+      "sha256": "ceba034c6d46d56d62d450da5534adffed589721d7a2aaaa3859a2a460ad869e"
+    },
+    "actual_parent_peak_bytes": 228315136,
+    "actual_source": {
+      "bytes": 4987,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-measurement-only-renew24h-v1-22/SOURCE_MANIFEST.json",
+      "sha256": "a74848210a3f626bb2708887d9a1d410617b6b88f52a9107b9d24954aec79a1f"
+    },
+    "child_after4MiB": {
+      "VmHWM": 17977344,
+      "ru_maxrss": 228315136
+    },
+    "child_before": {
+      "VmHWM": 13651968,
+      "ru_maxrss": 228315136
+    },
+    "currentmm_stress_bound_bytes": 134217728,
+    "original_failures_unchanged": true,
+    "schema": "deltalog.sameimage-metric-correction-evidence/v22"
+  },
+  "original_source": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair21-20261017-001/SOURCE_TEMPLATE.json",
+  "unchanged_guard": {
+    "bytes": 4056,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair21-20261017-001/readonly_binder_guard.py",
+    "sha256": "5dd585014fe395a9656c6f4392e41c9b5879c35a1271005229f821636728bd21"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "ascend.renewed24h.historical-artifact-reuse/v1",
+  "base_authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+    "bytes": 3012,
+    "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+  },
+  "interpretation_source": "Scope clarification for direct human renewed24h continuation; no added device, storage, memory, training or publication authority",
+  "start_epoch": 1792226600,
+  "cutoff_epoch": 1792313000,
+  "allowed": [
+    "Read-only full revalidation of existing exact15 closed DeltaLog leaves under their original source/capture identities",
+    "Reuse original N16 source-bound numerical evidence only at its actual scope after renewed independent source/hash/owner verification",
+    "Bind a new source-owned read-only validation function and new validation record to the renewed authority rather than changing the old capture/source/ledger",
+    "Prepare a separately frozen payload gate successor with only current-authority/time and unique source/output identity changes; original mathematics, independent references, fields and thresholds stay unchanged"
+  ],
+  "forbidden": [
+    "Overwrite or relabel any old FAIL/terminal/result/capture/authority",
+    "Run the old canonical CLI beyond its cutoff",
+    "Change legacy ledger23, recapture merely to manufacture a new timestamp, or count a source-only reader as numerical PASS",
+    "Monkeypatch time.time or bypass fresh read-only FD/maps/writer checks",
+    "Consume the old conditional extension or claim old N16 qualifies160/model/performance"
+  ],
+  "storage": {
+    "root": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061",
+    "aggregate_cap_GiB": 80,
+    "minimum_filesystem_free_GiB": 100,
+    "original_authority_kept_as_legacy_ledger_identity": true,
+    "new_model_journal_separate": true,
+    "no_new_capacity": true
+  },
+  "required_new_reader_gates": [
+    "Whole original validation-body inverse proof with exact one time-condition replacement",
+    "New authority source/hash and fresh current-time admission before and after full validation",
+    "All original fresh data/source hashes, exact stopped CID inspect, complete inventory, no-writers including FD/maps, original ledger23 and old failed-scope fields",
+    "Both binder and model Lease use that same reviewed reader, no repair of binder only"
+  ],
+  "qualification": false
+}

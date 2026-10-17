@@ -1,0 +1,47 @@
+{
+  "MAIN_create_absent_parent": "/opt/host/vnf/austinov/run-dl-R22repair1-early-software-MAIN-RENEW24H_001/software",
+  "NPU": false,
+  "bind": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-22-repair1/bind22.py",
+    "--execute",
+    "--template-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-22-repair1/SOURCE_TEMPLATE.json\",\"bytes\":2814,\"sha256\":\"a485ecaf94b54db339df535b347b89bed9f7588a01cc53fca631e0e92902f06d\"}"
+  ],
+  "execute": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-22-repair1/owner.py",
+    "--execute",
+    "--source-ref",
+    "<ACTUAL_EARLY_SOURCE_REF3>",
+    "--model-template-ref",
+    "<FINAL_R22_MODEL_TEMPLATE_REF3>",
+    "--host-cpu",
+    "<MAIN_HOST_CPU>",
+    "--guest-cpu",
+    "<MAIN_GUEST_CPU>",
+    "--output",
+    "/opt/host/vnf/austinov/run-dl-R22repair1-early-software-MAIN-RENEW24H_001/software/consumer"
+  ],
+  "model_binding_created": false,
+  "prepared_owner_source": {
+    "bytes": 2814,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-22-repair1/SOURCE_TEMPLATE.json",
+    "sha256": "a485ecaf94b54db339df535b347b89bed9f7588a01cc53fca631e0e92902f06d"
+  },
+  "sourceaudit": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-22-repair1/owner.py",
+    "--source-audit",
+    "--source-ref",
+    "<ACTUAL_EARLY_SOURCE_REF3>",
+    "--model-template-ref",
+    "<FINAL_R22_MODEL_TEMPLATE_REF3>"
+  ]
+}

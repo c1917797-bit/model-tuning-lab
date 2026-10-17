@@ -1,0 +1,57 @@
+{
+  "NPU": false,
+  "authority_ref": {
+    "bytes": 3012,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+    "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+  },
+  "default_enabled": false,
+  "donor": {
+    "bytes": 16302,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-22-repair1/DONOR_OWNER.py",
+    "sha256": "16b4861ea6610551d7796932f8e8dca30de53455819483f1c17a7568e4fc5da1"
+  },
+  "files": {
+    "DONOR_OWNER.py": {
+      "bytes": 16302,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-22-repair1/DONOR_OWNER.py",
+      "sha256": "16b4861ea6610551d7796932f8e8dca30de53455819483f1c17a7568e4fc5da1"
+    },
+    "HANDOFF.md": {
+      "bytes": 1435,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-22-repair1/HANDOFF.md",
+      "sha256": "dfef6704787f5761054eeb697a5ce977e25acda18ac6fc824b20686c6ca93eff"
+    },
+    "OWNER_EDITS.json": {
+      "bytes": 34850,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-22-repair1/OWNER_EDITS.json",
+      "sha256": "da0202242f0b452d60e4c314bfd9f551929081f4e4c7961b388224922bc224d6"
+    },
+    "bind22.py": {
+      "bytes": 877,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-22-repair1/bind22.py",
+      "sha256": "e6d698bfd4e212e025d0be6da5489749ad1c55f4d7dd228cf9987f3601349aa6"
+    },
+    "owner.py": {
+      "bytes": 17856,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-22-repair1/owner.py",
+      "sha256": "2a6bd4a209fad83eeff5252af66bc7c20d23007cc331c681c345fa5c012a0523"
+    },
+    "recover.py": {
+      "bytes": 4029,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-22-repair1/recover.py",
+      "sha256": "5e2f6239e03b07fa7be5a48e93e67e9e5aea154878215d4e2e3cbcccf77f5f36"
+    },
+    "test_early_owner.py": {
+      "bytes": 1713,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-22-repair1/test_early_owner.py",
+      "sha256": "7a56d021fe69382b0a30ea0a444de4032fcd969b017a86032a640d2453562007"
+    }
+  },
+  "output_root": "/opt/host/vnf/austinov/run-dl-R22repair1-early-software-MAIN-RENEW24H_001/software",
+  "prepared_only": true,
+  "profile": "software",
+  "qualified": false,
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-22-repair1",
+  "schema": "deltalog.prebind-software-source/v22"
+}

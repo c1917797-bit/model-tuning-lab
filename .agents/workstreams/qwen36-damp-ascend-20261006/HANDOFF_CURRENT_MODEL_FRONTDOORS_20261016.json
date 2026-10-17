@@ -73,13 +73,15 @@
     "classification": "IMPLEMENTATION_VALIDATION_MEMORY_NOT_PAPER_NOGO",
     "successor": "R20 bounded streaming validation; unchanged512MiB/full metadata/no-writer/final fullhash"
   },
-  "recorded_at_utc": "2026-10-17 12:28:00 UTC",
+  "recorded_at_utc": "2026-10-17 13:18:07 UTC",
+  "latest_entry_contracts_evidence": "evidence/ENTRY_CONTRACTS_AND_BOLE_FACTORS_20261017.json",
   "authority_file": "RENEW24H_AUTHORITY_20261017_084320.json",
   "original_cutoff_utc": "2026-10-17T07:02:13Z",
   "extension_used": 0,
   "extension_condition_met": false,
   "new_nonHYPIC_accepted_technology": false,
-  "current_owner": {
+  "current_owner": {"paper":"DeltaLog","state":"1325 running: original full174 CPU -> canary -> first real decode; actual current NPU stage not yet proved","operation":"exec-0000000000001325","source":{"path":"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair22-repair1-20261017-001/SOURCE_MANIFEST.json","bytes":280513,"sha256":"fe1605d6bc07185e1a37792daf3c73050b129833dbff763ff121b6a78d2585ec"},"stage_evidence":"evidence/ENTRY_CONTRACTS_AND_BOLE_FACTORS_20261017.json","numeric_qualified":false,"performance_qualified":false,"task_qualified":false},
+  "previous_owner_1304": {
     "paper": "DeltaLog/BOLE",
     "state": "no live MAIN container: BOLE1304 terminal pre-operator import failure and independent exact CID release verified",
     "last_operation": "exec-0000000000001304 EXIT3",
@@ -135,7 +137,7 @@
     "performance_qualified": false,
     "task_qualified": false
   },
-  "next_NPU": "Do not run consumer on1304: no raw factor calls. Source-local BOLE repair2 tempdir and cleanup-signature regression, with proof-bound reuse of successful CPU prerequisite, then fresh physical4 admission. R22 early full software next when ready; expensive15closed binder must consume actual software receipt first. No paired performance/accuracy result.",
+  "next_NPU": "Observe original1325; no overlapping TP4 job. BOLErepair2 real256calls plus independentconsumer complete; all four options same saved BF16 bits, same21/64 oracle failures. Do not repeat options; immediate-clone/root-path attribution next, not paper rejection. No paired performance/accuracy result.",
   "last_model_result": {
     "ref": {
       "path": "/opt/host/vnf/austinov/run-bole-model131repair4-MAIN-NEW24H_001/RESULT.json",
