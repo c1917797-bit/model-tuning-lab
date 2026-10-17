@@ -1,4 +1,14 @@
-# CURRENT R20 G3 FULL40 PERFORMANCE LIVE
+# CURRENT R20 G3 FULL40 INDEPENDENT VALID; G1 NEXT
+
+0ff4exit0/40responses;103eindependentPASS40/40same-stepfourrank48C1/16C2,
+148forwardmetadatareuse receipts/200sources/480cleanisolation/physicalPIDjoins/
+liveexactrelease. TPOT311.121758ms,TTFTP95408468.523980ms; notpairedgain.
+Initialaudit103bportbindfailed;ss103dempty,unchangedreplay103epassed;no rerun.
+R20_METADATA_G3_R1_TERMINAL_20261017.json preservesrawSHA. Noowneddevicejob.
+Next publishthenfresh FORMAL_R20_METADATA_G1_R1_CONTRACT.json admission/run;
+same runtime/protocol/nativeHYPIC/PDCoff. Oldrawimmutable. Fullgoalunfinished.
+
+# HISTORICAL R20 G3 FULL40 PERFORMANCE LIVE
 
 Published/liveverifieda06c71ab899e18453acb2a64f32784b90100e31a;mainunchanged.
 Freshma force_direct admission0ff2 at23:49:26UTC proves200source/183runtime/
