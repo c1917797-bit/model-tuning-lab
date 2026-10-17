@@ -1,4 +1,17 @@
-# CURRENT R20 G3 FULL40 INDEPENDENT VALID; G1 NEXT
+# CURRENT R20 G1 NATIVE FULL40 PERFORMANCE LIVE
+
+Published/liveverified56dbfd63e372bb1d3a5d45ec863a25b3ca31a101;mainunchanged.
+Freshma directadmission1046 at00:22:39UTC proves202sources/184runtime/
+image/model/input/G3immutable rawSHA/physical0-3empty/8233HCCLfree/newroot.
+Exactcontroller exec-0000000000001047 onma lgw_a6109c51076a4a2c9d2674ca5a8704a0.
+Contract FORMAL_R20_METADATA_G1_R1_CONTRACT.json;raw
+/cache/cch/hypic-independent-20261013/formal-r20-metadata-g1-r1.
+NativeHYPIC/PDCoff; sameformal1024/full40/c16 protocol. Poll exacthandle/root;
+no restartlive/unclear or202boundchanges. Terminal audit_r20_metadata_performance.py
+--contract FORMAL_R20_METADATA_G1_R1_CONTRACT.json --live-release; onlythen
+paireddecision. G3validTPOT311.121758ms notgainclaim. Fullgoalunfinished.
+
+# HISTORICAL R20 G3 FULL40 INDEPENDENT VALID; G1 NEXT
 
 0ff4exit0/40responses;103eindependentPASS40/40same-stepfourrank48C1/16C2,
 148forwardmetadatareuse receipts/200sources/480cleanisolation/physicalPIDjoins/
