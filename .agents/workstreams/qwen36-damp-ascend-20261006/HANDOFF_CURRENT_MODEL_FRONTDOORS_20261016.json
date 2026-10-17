@@ -80,32 +80,62 @@
   "extension_condition_met": false,
   "new_nonHYPIC_accepted_technology": false,
   "current_owner": {
-    "paper": "BOLE",
-    "state": "live physical4 saved-input four-arm numerical attribution; same-image10/10 and initial-root/cache/weights prerequisites passed; not whole model/performance",
-    "operation": "exec-0000000000001304",
+    "paper": "DeltaLog/BOLE",
+    "state": "no live MAIN container: BOLE1304 terminal pre-operator import failure and independent exact CID release verified",
+    "last_operation": "exec-0000000000001304 EXIT3",
+    "NPU_operator_calls": 0,
     "source": {
       "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/SOURCE_MANIFEST.json",
       "bytes": 31740,
       "sha256": "0c9cfef77f5ecb709731d0ac08302c9c75f80ba21accc25b10274bcf3cb4d3b8"
     },
-    "cpu_owner": {
-      "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair1-MAIN-RENEW24H_001/factors/cpu/RESULT.json",
-      "bytes": 836,
-      "sha256": "d92a457919cc8f6b8561e14e6235ff93dd1a4319b5610b4d23ece18e592792f4"
+    "independent_release": {
+      "CID": "d20e012f17f05ef671c9dfc65147cbcc9bb37a6aae3008a368447663d137f4ba",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 3,
+        "Error": "",
+        "StartedAt": "2026-10-17T12:29:39.6985043Z",
+        "FinishedAt": "2026-10-17T12:29:40.96459969Z"
+      },
+      "Devices": [
+        {
+          "PathOnHost": "/dev/davinci4",
+          "PathInContainer": "/dev/davinci0",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/davinci_manager",
+          "PathInContainer": "/dev/davinci_manager",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/devmm_svm",
+          "PathInContainer": "/dev/devmm_svm",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/hisi_hdc",
+          "PathInContainer": "/dev/hisi_hdc",
+          "CgroupPermissions": "rwm"
+        }
+      ],
+      "ExecIDs": null,
+      "actual_ENV_TMPDIR": [],
+      "epoch": 1792240347.6576035
     },
-    "numeric_ticket": {
-      "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair1-MAIN-RENEW24H_001/factors/NPU_TICKET.json",
-      "bytes": 2760,
-      "sha256": "f0cbf94489ee0f4e30ce8eda4a180e6d36c6b8807d8ce0d0ed80ba20278762f5"
-    },
-    "whole_seconds": 900,
-    "child_seconds": 600,
-    "cleanup_seconds": 180,
+    "next_ready_preparation": "R22 early full same-image software; BOLE repair2 exact tempdir/cleanup callback fixes",
     "numeric_qualified": false,
     "performance_qualified": false,
     "task_qualified": false
   },
-  "next_NPU": "Observe1304 actual terminal and exact physical4 release, then independent source-bound Devices[] consumer. Preserve originalR17 FA/whole-path failures; A must reproduce original BF16 anchor before repair attribution. R22 early full software remains next ready-node preparation; no TP4 while this owner is live.",
+  "next_NPU": "Do not run consumer on1304: no raw factor calls. Source-local BOLE repair2 tempdir and cleanup-signature regression, with proof-bound reuse of successful CPU prerequisite, then fresh physical4 admission. R22 early full software next when ready; expensive15closed binder must consume actual software receipt first. No paired performance/accuracy result.",
   "last_model_result": {
     "ref": {
       "path": "/opt/host/vnf/austinov/run-bole-model131repair4-MAIN-NEW24H_001/RESULT.json",

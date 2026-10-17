@@ -72,13 +72,72 @@
   },
   "actual_NPU": {
     "operation": "exec-0000000000001304",
-    "state": "live_at_record",
-    "physical": 4,
-    "guest_logical": 0,
-    "expected_arms": 4,
-    "expected_calls": 256,
-    "whole_model": false,
-    "performance": false
+    "exit_code": 3,
+    "owner": {
+      "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair1-MAIN-RENEW24H_001/factors/numeric/RESULT.json",
+      "bytes": 1766,
+      "sha256": "bca170a7ec8f7f5407d58fbcf85ab6bd1da4d427dd9d11dfc7ed56db2111fca6"
+    },
+    "owner_NPU": false,
+    "NPU_requested": true,
+    "original_primary": "ValueError('active true CID and actual ARM proof retained')",
+    "original_secondary": [
+      "cleanup ValueError('owned cleanup/resource release failed: [{\\'operation\\': \\'exact-before-inspect\\', \\'error\\': \\'TypeError(\"inspected() got an unexpected keyword argument \\\\\\'cleanup\\\\\\'\")\\'}]')"
+    ],
+    "original_stopped_retained": false,
+    "first_fault": {
+      "ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair1-MAIN-RENEW24H_001/factors/numeric/numeric/result/FAILURE.json",
+        "bytes": 4086,
+        "sha256": "2989b953f7bd1f9016fed16ba7cc5271d585916aba07428247014cf7da092ac2"
+      },
+      "text": "{\"primary\": \"FileNotFoundError(2, \\\"No usable temporary directory found in ['/tmp', '/var/tmp', '/usr/tmp', '/workspace']\\\")\", \"traceback\": \"Traceback (most recent call last):\\n  File \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/guest116.py\\\", line 29, in main\\n    import torch as t,torch_npu\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/torch/__init__.py\\\", line 2204, in <module>\\n    from torch import _VF as _VF, functional as functional  # usort: skip\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/torch/functional.py\\\", line 8, in <module>\\n    import torch.nn.functional as F\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/torch/nn/__init__.py\\\", line 8, in <module>\\n    from torch.nn.modules import *  # usort: skip # noqa: F403\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/torch/nn/modules/__init__.py\\\", line 1, in <module>\\n    from .module import Module  # usort: skip\\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/torch/nn/modules/module.py\\\", line 17, in <module>\\n    from torch.utils._python_dispatch import is_traceable_wrapper_subclass\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/torch/utils/__init__.py\\\", line 8, in <module>\\n    from torch.utils import (\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/torch/utils/data/__init__.py\\\", line 1, in <module>\\n    from torch.utils.data.dataloader import (\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/torch/utils/data/dataloader.py\\\", line 26, in <module>\\n    import torch.utils.data.graph_settings\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/torch/utils/data/graph_settings.py\\\", line 8, in <module>\\n    from torch.utils.data.datapipes.iter.sharding import (\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/torch/utils/data/datapipes/__init__.py\\\", line 1, in <module>\\n    from torch.utils.data.datapipes import dataframe as dataframe, iter as iter, map as map\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/torch/utils/data/datapipes/dataframe/__init__.py\\\", line 1, in <module>\\n    from torch.utils.data.datapipes.dataframe.dataframes import (\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/torch/utils/data/datapipes/dataframe/dataframes.py\\\", line 4, in <module>\\n    from torch.utils.data.datapipes._decorator import functional_datapipe\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/torch/utils/data/datapipes/_decorator.py\\\", line 8, in <module>\\n    from torch.utils.data.datapipes.datapipe import IterDataPipe, MapDataPipe\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/torch/utils/data/datapipes/datapipe.py\\\", line 17, in <module>\\n    dill = import_dill()\\n           ^^^^^^^^^^^^^\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/torch/utils/_import_utils.py\\\", line 30, in import_dill\\n    import dill\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/dill/__init__.py\\\", line 33, in <module>\\n    from .session import (\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/site-packages/dill/session.py\\\", line 25, in <module>\\n    TEMPDIR = pathlib.PurePath(tempfile.gettempdir())\\n                               ^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/tempfile.py\\\", line 315, in gettempdir\\n    return _os.fsdecode(_gettempdir())\\n                        ^^^^^^^^^^^^^\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/tempfile.py\\\", line 308, in _gettempdir\\n    tempdir = _get_default_tempdir()\\n              ^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/python3.12.13/lib/python3.12/tempfile.py\\\", line 223, in _get_default_tempdir\\n    raise FileNotFoundError(_errno.ENOENT,\\nFileNotFoundError: [Errno 2] No usable temporary directory found in ['/tmp', '/var/tmp', '/usr/tmp', '/workspace']\\n\"}\n"
+    },
+    "independent_actual_release": {
+      "CID": "d20e012f17f05ef671c9dfc65147cbcc9bb37a6aae3008a368447663d137f4ba",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 3,
+        "Error": "",
+        "StartedAt": "2026-10-17T12:29:39.6985043Z",
+        "FinishedAt": "2026-10-17T12:29:40.96459969Z"
+      },
+      "Devices": [
+        {
+          "PathOnHost": "/dev/davinci4",
+          "PathInContainer": "/dev/davinci0",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/davinci_manager",
+          "PathInContainer": "/dev/davinci_manager",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/devmm_svm",
+          "PathInContainer": "/dev/devmm_svm",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/hisi_hdc",
+          "PathInContainer": "/dev/hisi_hdc",
+          "CgroupPermissions": "rwm"
+        }
+      ],
+      "ExecIDs": null,
+      "actual_ENV_TMPDIR": [],
+      "epoch": 1792240347.6576035
+    },
+    "operator_calls": 0,
+    "classification": "PROVEN_ADAPTATION_ENV_AND_CLEANUP_SIGNATURE_DEFECTS_NOT_ALGORITHM_OR_NUMERICAL_FAIL",
+    "next_action": "New source/output version sets TMPDIR/HOME only inside sole RW budgeted output and tests actual import, fixes inspected cleanup callback signature without weakening original cleanup checks, and reuses proven same-image CPU math only through exact proof-consuming source-equivalence adapter.",
+    "unmodified_old_failure": true
   },
   "archive_whitespace": {
     "full_diff_check": "EXIT2 solely two byte-exact donor copies: new blank line at EOF",
@@ -101,5 +160,13 @@
     ],
     "other_staged_files_check": "required PASS before commit",
     "config_changed": false
+  },
+  "root_repeat_first_difference": {
+    "all_four_ranks": {
+      "layer": 1,
+      "field": "inputs"
+    },
+    "rank0_layer0_all_recorded_inputs_outputs_states_identical": true,
+    "interpretation": "Native root replay values begin diverging between captured layer0 output and layer1 projected inputs, before firstFA at layer3. Saved values alone do not distinguish residual/MLP/projection/alias-lifetime causes. FA local factors cannot by themselves establish whole-path repair."
   }
 }
