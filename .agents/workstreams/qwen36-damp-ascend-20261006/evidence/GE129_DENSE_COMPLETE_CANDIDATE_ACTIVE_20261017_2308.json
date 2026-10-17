@@ -1,0 +1,55 @@
+{
+  "schema": "ascend.stage-handoff/v1",
+  "observed_at": "2026-10-17T23:08:00Z",
+  "time_note": "rounded checkpoint time; not a performance timestamp",
+  "dense": {
+    "operation": "exec-00000000000014d9",
+    "exit_code": 0,
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-ge129-dense-RENEW24H-004/RESULT.json",
+      "bytes": 110074,
+      "sha256": "8ae6b006c3f8aab9d00b1754c26190f892aa3b0b80f74466ba110fa3e4336d56"
+    },
+    "consumer": {
+      "path": "/opt/host/vnf/austinov/run-ge129-dense-RENEW24H-004/cpu-consumer/CONSUMPTION.json",
+      "bytes": 2483,
+      "sha256": "86cfc586c2b3cae9e204a9259cb8654402235bff795ed70ea09f1782156cd761"
+    },
+    "primary": null,
+    "secondary": [],
+    "all_created_containers_release_verified": true,
+    "status": "actual-GE129-single-arm-only",
+    "performance_ready": false,
+    "model_numeric_qualified": false
+  },
+  "candidate": {
+    "operation": "exec-00000000000014e4",
+    "state_at_dispatch": "running",
+    "source": {
+      "bytes": 69511,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/ge129-candidate-bound-20261018-004/SOURCE_MANIFEST.json",
+      "sha256": "4ac361d73375323142868ee0492cbc897f648935bb558d553f2e9db70610eb57"
+    },
+    "output": "/opt/host/vnf/austinov/run-ge129-candidate-RENEW24H-004",
+    "instruction": "Poll existing handle, never duplicate start. CPU preflight then guarded physical4-7 model smoke; inspect actual terminal and release."
+  },
+  "preparation": {
+    "agents": [
+      "mxr_resume_ready: bind actual-frame capture/replay owner",
+      "good_enough_resume_ready: independent actual-frame review",
+      "bole_failure_nextnode: prepare matched fixed1024 performance successor"
+    ],
+    "deltalog": "R29 same-image early software and model bind passed; actual bound sourceaudit and model pending"
+  },
+  "utilization": "Not continuous: NPU release snapshot idle during result consumption/admission. No full-window no-gap claim.",
+  "limits": {
+    "cutoff_utc": "2026-10-18T08:43:20Z",
+    "physical_npus": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "formal_performance_or_accuracy_result": false
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "schema": "ascend.stage-causal-handoff/v1",
+  "observed_at": "2026-10-17T23:14:00Z",
+  "time_scope": "rounded checkpoint time, not performance timestamp",
+  "experiment": "GE129 candidate004",
+  "source": {
+    "bytes": 69511,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/ge129-candidate-bound-20261018-004/SOURCE_MANIFEST.json",
+    "sha256": "4ac361d73375323142868ee0492cbc897f648935bb558d553f2e9db70610eb57"
+  },
+  "operation": {
+    "id": "exec-00000000000014e4",
+    "state": "completed",
+    "exit_code": 1
+  },
+  "cause_class": "ADAPTATION_IMPLEMENTATION",
+  "confidence": "proved runtime import-order failure; exact repair pending",
+  "first_fault": "General plugin registration from AsyncEngineArgs.add_cli_args imports model_runner_v1 before DeviceOperator initialization, producing a circular ImportError before model/candidate arithmetic.",
+  "host_primary": "ValueError('bounded actual DL server startup')",
+  "raw_refs": [
+    {
+      "path": "/opt/host/vnf/austinov/run-ge129-candidate-RENEW24H-004/RESULT.json",
+      "bytes": 59622,
+      "sha256": "897875b61b3841f7f7c83ae647a831ea26bccb9ffea7c6824cf54a8314ebc286"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-ge129-candidate-RENEW24H-004/candidate/server.stderr",
+      "bytes": 3909,
+      "sha256": "70e84f4dbc8e062f6ea5b679d42ce7499518496a34924c94a587afb65ef8c202"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-ge129-candidate-RENEW24H-004/candidate/cleanup.json",
+      "bytes": 1282,
+      "sha256": "d8b26cdc5f22de41e9ee2552aab265d956595744784676fb9dfc06fdd1b73e1f"
+    }
+  ],
+  "fresh_owned_inspects": [
+    {
+      "cid": "7654b06e599dd329c42323000d8f67372b1567c1097f411d921485e06410d475",
+      "running": false,
+      "pid": 0,
+      "execids": null,
+      "oom": false
+    },
+    {
+      "cid": "5cdcaf484820bac7629f775b36b29347078c3e390c79aeefbff4e61a0d4018c0",
+      "running": false,
+      "pid": 0,
+      "execids": null,
+      "oom": false
+    }
+  ],
+  "decision": "REPAIR",
+  "unchanged_gates": true,
+  "no_unchanged_retry": true,
+  "scope": "Not a numerical or paper-method verdict. CPU38 and four-card arithmetic canary passed; candidate math and performance/task acceptance did not execute.",
+  "repair_owner": "good_enough_resume_ready",
+  "parallel_preparation": {
+    "mxr_resume_ready": "actual-frame capture/native replay with strong identity join and independent native callable proof",
+    "bole_failure_nextnode": "BOLE next evidenced bounded integration gap"
+  },
+  "current": {
+    "paper": "DeltaLog",
+    "sourceaudit": {
+      "operation": "exec-00000000000014e8",
+      "exit_code": 0,
+      "source_checked": true,
+      "NPU": false
+    },
+    "model_operation": "exec-00000000000014ef",
+    "launch_state": "running",
+    "model_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair29-early-fixture-gate-20261018-001/SOURCE_MANIFEST.json",
+      "bytes": 329280,
+      "sha256": "0d0f16693ed1c0fa1dcf30e842058cf89019ac6ff5b3e06eebbd21e59117a262"
+    },
+    "output": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R29fixturegate-main-NEW24H_FIRSTDECODE101R29fixturegate_001",
+    "pre_admission": "exec-00000000000014ee; idle4-7, output absent, fresh RAM/disk; original controller repeats admission before actual load",
+    "instruction": "Poll existing operation; do not duplicate. Completion is a firstdecode diagnostic, not performance/accuracy acceptance."
+  },
+  "cutoff_utc": "2026-10-18T08:43:20Z"
+}

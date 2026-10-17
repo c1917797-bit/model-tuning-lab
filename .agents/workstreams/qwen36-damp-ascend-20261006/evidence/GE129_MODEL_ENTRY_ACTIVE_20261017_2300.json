@@ -1,0 +1,105 @@
+{
+  "schema": "ascend.actual-scheduler-stage-handoff/v1",
+  "observed_utc": "2026-10-17T23:00:00Z",
+  "authority_cutoff_epoch": 1792313000,
+  "scope": "physical NPU4-7 only; no claim continuous utilization",
+  "goal_complete": false,
+  "active": {
+    "operation": "exec-00000000000014d9",
+    "mode": "GE129 dense defaultOFF full-model first-token diagnostic",
+    "source": {
+      "bytes": 68967,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/ge129-dense-bound-20261018-004/SOURCE_MANIFEST.json",
+      "sha256": "7a1e37f0aaa6d6d1ea4f42951d912551cab107998ee490ca745e52e04f69ae4f"
+    },
+    "output": "/opt/host/vnf/austinov/run-ge129-dense-RENEW24H-004",
+    "container": "3c2187e5329fd3d7955d96be74bfe687e43bb6a550f8e03ecd54d18c5d740d44",
+    "stage": "same-image38 PASS; all4 native canary/parser PASS; model server startup observed",
+    "NPU_continuous_busy": false,
+    "model_first_token_complete": false,
+    "performance_result": false,
+    "accuracy_result": false,
+    "do_not_duplicate_start": true
+  },
+  "prepared_next": {
+    "ge_candidate": {
+      "cpu_entry": [
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/ge129-candidate-bound-20261018-004/probe.py",
+        "--execute",
+        "--mode",
+        "cpu",
+        "--source-ref",
+        "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/ge129-candidate-bound-20261018-004/SOURCE_MANIFEST.json\",\"bytes\":69511,\"sha256\":\"4ac361d73375323142868ee0492cbc897f648935bb558d553f2e9db70610eb57\"}",
+        "--output",
+        "/opt/host/vnf/austinov/run-ge129-candidate-RENEW24H-004/cpu-preflight/CPU.json"
+      ],
+      "environment": {
+        "MXR_DL_EXTERNAL_OUTPUT008_ENABLE": "1"
+      },
+      "expected_software_cases": 38,
+      "mode": "candidate",
+      "owner_command": [
+        "python3",
+        "-I",
+        "-B",
+        "/cache/cch/qwen36-paper-preparation-20261007/lowbit/ge129-candidate-bound-20261018-004/host_ticket.py",
+        "--execute",
+        "--source-ref",
+        "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/ge129-candidate-bound-20261018-004/SOURCE_MANIFEST.json\",\"bytes\":69511,\"sha256\":\"4ac361d73375323142868ee0492cbc897f648935bb558d553f2e9db70610eb57\"}"
+      ],
+      "source": {
+        "bytes": 69511,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/ge129-candidate-bound-20261018-004/SOURCE_MANIFEST.json",
+        "sha256": "4ac361d73375323142868ee0492cbc897f648935bb558d553f2e9db70610eb57"
+      }
+    },
+    "requires": "Only after actual dense terminal, result consumption and exact release; fresh resource admission. Preserve failures; new evidence before retries.",
+    "deltalog": {
+      "actual_bound_source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair29-early-fixture-gate-20261018-001/SOURCE_MANIFEST.json",
+        "bytes": 329280,
+        "sha256": "0d0f16693ed1c0fa1dcf30e842058cf89019ac6ff5b3e06eebbd21e59117a262"
+      },
+      "early_software_source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-29-fixture-gate/SOURCE_MANIFEST.json",
+        "bytes": 3628,
+        "sha256": "347b8df4e2dca68329b643050008ece3e1aa9769eb9de7193f236c7f462e1160"
+      },
+      "early_owner_result": {
+        "path": "/opt/host/vnf/austinov/run-dl-R29fixturegate-early-software-MAIN-RENEW24H_001/software/consumer/RESULT.json",
+        "bytes": 883,
+        "sha256": "555df93d3d1f4e485cea717b617d8b2e0f5a8442e9554d58866ef21f1106460c"
+      },
+      "sourceaudit_pending": true,
+      "model_run_started": false,
+      "commands": {
+        "bytes": 272944,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair29-early-fixture-gate-20261018-001/SOURCE_TEMPLATE.json",
+        "sha256": "eec0adba8e078544fe6a6fcf841403412fa96b1400d3792fe6d3b9f7bb1fdbe6"
+      }
+    }
+  },
+  "deployment": {
+    "ge_operation": "exec-00000000000014d3",
+    "files_verified": 166,
+    "dense_actual_sourceaudit": "exec-00000000000014d5",
+    "candidate_actual_sourceaudit": "exec-00000000000014d6",
+    "deltalog_bind_operation": "exec-00000000000014ce"
+  },
+  "scheduling_findings": {
+    "full_model_exclusive": true,
+    "source_audit_is_not_ready_to_skip_same_image": true,
+    "host_cpu_effective": [
+      0,
+      1,
+      2,
+      3,
+      144,
+      145,
+      166
+    ],
+    "extra_mxr_cpu_overlap_not_admitted": "Model1host+4guest+2reserve uses7; extra1host+1guest needs>=9 and ancestorquota; preserve guard.",
+    "deltalog_binding_cpu_overhead": "actual process rchar20GB observed; CPU evidence hashing not NPU work",
+    "new_model_frame_gate": "Local preparation ongoing; not yet runnable owner; old GE004 synthetic component pass not full-model numerical acceptance"
+  }
+}
