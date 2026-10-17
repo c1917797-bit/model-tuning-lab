@@ -7,7 +7,8 @@
     "framework_version": "vLLM0.23.0+empty / vLLM-Ascend0.23.0",
     "cann_version": "9.1.0 (pinned-image toolkit install metadata only; active device runtime separately verified)",
     "live_module": "vllm_ascend.worker.model_runner_v1",
-    "live_object": "NPUModelRunner._prepare_inputs",
+    "live_object": "NPUModelRunner",
+    "live_member": "_prepare_inputs",
     "source_sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968",
     "cann_metadata": {
       "path": "/usr/local/Ascend/cann-9.1.0/aarch64-linux/ascend_toolkit_install.info",
@@ -45,10 +46,10 @@
   "evidence": {
     "experiment_id": "hypic-independent-20261013/lifecycle-r16",
     "branch": "work/hypic-independent-20261013",
-    "commit": "112c3e5961a03ea18295636d8497d53324e991f8",
-    "checkpoint_role": "Original adapter provenance; successor patch source hash now host-tested by1108/110a; not claimed identical to original source",
-    "scope": "R21 versioned routing host-only, runtime manifest still historical R16 pending explicit successor package; no real lifecycle acceptance"
+    "commit": "688d47657d9a7bf6027a0a9aa1f11317e0bc4b38",
+    "checkpoint_role": "Source checkpoint for versioned routing host-tested1108/110a; package metadata bound in successor",
+    "scope": "Prospective R21 lifecycle package; not real service lifecycle or deployment acceptance"
   },
-  "runtime_manifest_file": "LIFECYCLE_COMPACT_MANIFEST_R16.json",
-  "runtime_manifest_sha256": "2454e8630ddf0ddd8051e5967a4eb74327a4948726dcd73813e4587a13c8f76b"
+  "runtime_manifest_file": "LIFECYCLE_COMPACT_MANIFEST_R21.json",
+  "runtime_manifest_sha256": "bc7f09dbbf91b5c53e4b85b2f44e8e5103efc3e127204e58a20d98d33a04ea1b"
 }

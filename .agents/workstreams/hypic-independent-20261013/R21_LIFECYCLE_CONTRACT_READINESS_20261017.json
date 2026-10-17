@@ -1,0 +1,33 @@
+{
+  "schema": "hypic-r21-lifecycle-contract-readiness/v1",
+  "scope": "Host static package/contract validation only; no real NPU lifecycle acceptance",
+  "static_operation": "exec-0000000000001116",
+  "focused_operation": "exec-0000000000001118",
+  "focused_tests": 12,
+  "disabled_launcher_no_runtime_import": true,
+  "structure_diff_operation": "exec-0000000000001119",
+  "prior_adapter_regression": {
+    "operation": "exec-000000000000110a",
+    "tests": 1009
+  },
+  "corrected_metadata": {
+    "prior_failure": "exec-0000000000001113",
+    "reason": "Qualified method stored in identifier-only live_object",
+    "live_object": "NPUModelRunner",
+    "live_member": "_prepare_inputs",
+    "validator_unchanged": true
+  },
+  "package_manifest_sha256": "2f017787131feb1d9874bcfcd0b781cd1f18748723a320c7a49bf733ab8765ba",
+  "live_g1_bound_sources_unchanged": 211,
+  "device_run": false,
+  "remaining": [
+    "Fresh device admission after current G1 terminal/audit",
+    "Actual disabled/enabled/uninstalled separate restart stages",
+    "Independent physical/source/activation/semantic/release and sequence audits"
+  ],
+  "controller_cwd_probe_failure": {
+    "operation": "exec-0000000000001118",
+    "reason": "Structure script invoked outside repository root; corrected 1119 passes"
+  },
+  "full_goal_complete": false
+}
