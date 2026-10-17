@@ -44,7 +44,7 @@ def audit(contract_path,*,live_release=False):
     from independent_catalog_quality_canary import catalog_canary_plan
     if inputs.get("schema")!="hypic-quality-inputs/v1" or catalog.get("schema")!="hypic-public-catalog/v1":
         raise ValueError("frozen input/catalog schema mismatch")
-    rows=inputs["requests"];plan=catalog_canary_plan(rows)
+    rows=inputs["requests"];plan=catalog_canary_plan(rows,selection=spec.get("canary_selection","capacity"))
     if spec.get("batch_samples")!=8 or spec.get("canary_indexes")!=list(plan["initial_indexes"]):
         raise ValueError("contract diagnostic cohort mismatch")
     stage=SegmentCatalog(catalog["public_segments"])
@@ -62,7 +62,7 @@ def audit(contract_path,*,live_release=False):
     audit_terminal_records(c,result,records,journal,samples,start,release)
     unit=json.loads((raw/"catalog-canary-unit.json").read_text())
     if unit["results"]!=records:raise ValueError("unit/response artifact mismatch")
-    cohort=audit_canary_cohort(unit,journal,inputs["requests"])
+    cohort=audit_canary_cohort(unit,journal,inputs["requests"],selection=spec.get("canary_selection","capacity"))
     worker=[];paths=sorted((raw/"diagnostics").glob("compact-worker-*.jsonl"))
     if len(paths)!=4:raise ValueError("exact four worker evidence files required")
     for p in paths:

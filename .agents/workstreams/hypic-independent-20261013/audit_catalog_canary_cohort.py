@@ -1,8 +1,8 @@
 """Strict bounded17 diagnostic cohort audit, never full quality acceptance."""
 import hashlib
 from independent_catalog_quality_canary import catalog_canary_plan
-def audit_canary_cohort(unit,journal,rows):
-    plan=catalog_canary_plan(rows)
+def audit_canary_cohort(unit,journal,rows,*,selection="capacity"):
+    plan=catalog_canary_plan(rows,selection=selection)
     if unit.get("requests")!=17 or unit.get("successful")!=17 or unit.get("full_quality")is not False or unit.get("initial_indexes")!=list(plan["initial_indexes"]):
         raise ValueError("exact bounded17 diagnostic unit required")
     results=unit.get("results",[])

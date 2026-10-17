@@ -1,0 +1,67 @@
+{
+  "schema": "hypic-r22-firstbatch-canary-readiness/v1",
+  "config": "QUALITY_COMPACT_CONFIG_R22_SHORT_SUFFIX.json",
+  "manifest": "QUALITY_COMPACT_MANIFEST_R22_SHORT_SUFFIX.json",
+  "contract": "QUALITY_R22_FIRSTBATCH_CANARY_R1_CONTRACT.json",
+  "auditor": "audit_r22_short_suffix_canary.py",
+  "regression": {
+    "operation": "exec-0000000000001172",
+    "tests": 1025,
+    "passed": true
+  },
+  "audit_controls": {
+    "operation": "exec-000000000000116d",
+    "tests": 8,
+    "passed": true,
+    "additional_pid_only_install_control": "included in final1025 suite"
+  },
+  "static": {
+    "operation": "exec-0000000000001173",
+    "host_bindings": 221,
+    "runtime_bindings": 217,
+    "configuration_valid": true,
+    "new_root_absent": true,
+    "device_run": false,
+    "structure29": true
+  },
+  "selection": {
+    "mode": "first_batch_regression",
+    "initial_indexes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "private_requests": 17,
+    "first_batch_same_as_failed_full_quality": true,
+    "no_score_based_selection": true
+  },
+  "acceptance": {
+    "same_step_fourrank_C1": 48,
+    "C2": 16,
+    "actual_eviction_rebuild": true,
+    "source_pid_step_layer_short_suffix_routes_all_ranks": true,
+    "frozen_shadow_atol": 0.01,
+    "frozen_shadow_rtol": 0.003,
+    "finite_precommit_unchanged": true,
+    "exact_release": true
+  },
+  "limits": [
+    "No R22 NPU run yet",
+    "Old exact scheduler batch shape not guaranteed; report actual failed-sample short-route coverage separately",
+    "Not full381 quality, performance, lifecycle or29functional completion"
+  ],
+  "next": "Commit/publish; fresh direct/source/image/model/input/scorer/physical0-3/ports/newroot admission then sole controller"
+}

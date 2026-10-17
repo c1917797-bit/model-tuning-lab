@@ -1,4 +1,18 @@
-# CURRENT R22 SHORT SUFFIX CANDIDATE HOST READY; NO DEVICE RUN
+# CURRENT R22 FIRSTBATCH CANARY HOST FROZEN; NO DEVICE RUN
+
+QUALITY_R22_FIRSTBATCH_CANARY_R1_CONTRACT.json binds221host/217runtime;
+first8 indexes0..7 matchfailedfullqualitybatch, next8 indexes8..15, actualrebuild1.
+Defaultcapacityselection remainsunchanged; newexplicitfirst_batch_regression only.
+Independent audit_r22_short_suffix_canary.py wrapscomplete17catalog/source/
+physical/isolation/release andrequiresfourrankactualshortsuffixroute->completion,
+unchangedC1shadows/C2finitegates. InstallationPID joinsverifiedrankmap, notassumedrankfield.
+1025CPU1172PASS; static1173PASSconfig/newroot/29structure/diff; noR22deviceyet.
+R22_FIRSTBATCH_CANARY_READINESS_20261017.json recordslimits. Nextcommit/publish
+thenfreshadmission;raw /cache/cch/hypic-independent-20261013/short-suffix-r22-firstbatch-canary-r1.
+Do notclaimexactoldbatchreproduction/full381/speed/lifecycle. Noownedmodeljob.
+Deadline2026-10-17T06:48:09Z;fullgoalunfinished.
+
+# HISTORICAL R22 SHORT SUFFIX CANDIDATE HOST READY; NO DEVICE RUN
 
 R21 fullquality failure exposed serial<=64recurrent vs packed suffixchunk64 routegap.
 New defaultoff c1_short_suffix_recurrent correctsprivate shortsuffix output/state
