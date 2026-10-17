@@ -1,0 +1,46 @@
+{
+  "schema": "ascend.stage.recovered-transport-and-model-failure/v1",
+  "recorded_utc": "2026-10-17T20:45:46Z",
+  "authority_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+    "bytes": 3012,
+    "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+  },
+  "operation_journal_missing_not_restarted": true,
+  "remote_transport_restored": true,
+  "previous_R26": {
+    "status": "failed",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair26-encoded-fixture-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 322127,
+      "sha256": "14381a8001901ab55230a6bd1d76527e1424f31bf7be8305510f2a239c887167"
+    },
+    "result_path": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R26encodedfixture-main-NEW24H_FIRSTDECODE101R26encodedfixture_001/RESULT.json",
+    "first_fault": "live_adapter.py:141 actual unpacked ND2 contiguous positive view only, firstdecode Lazy.bind/register, before algorithm dispatch",
+    "classification": "ADAPTATION_LAYOUT_CONTRACT_REQUIRES_ROLE_AND_GEOMETRY_ATTRIBUTION",
+    "all4_loaded": true,
+    "primary": "ValueError('original child failure retained: DL-real-short-client')",
+    "secondary": [],
+    "release_independent_operation": "exec-000000000000143c",
+    "all_owned_stopped_Pid0_noExec_noOOM": true,
+    "model_numeric_qualified": false,
+    "performance_ready": false,
+    "task_accuracy": false
+  },
+  "current_owner": {
+    "paper": "BOLE",
+    "operation": "exec-0000000000001440",
+    "state": "RUNNING R6 projection-scope diagnostic; sourceaudit143e exit0, independent prior R26 release and fresh admission143c. Actual Linux136 and NPU model gates pending.",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/SOURCE_BOUND.json",
+      "bytes": 81841,
+      "sha256": "f3303cec9fea4c7445e81373e21cd0da5884be495b72a8847420bf4400bb92f5"
+    },
+    "output": "/opt/host/vnf/austinov/run-bole-r6-20261017-001-MAIN",
+    "numeric_qualified": false,
+    "performance_qualified": false,
+    "task_qualified": false
+  },
+  "next": "DeltaLog bounded layout attribution; no rerun without proven change; BOLE terminal/release before next TP4",
+  "no_new_accepted_technology": true
+}
