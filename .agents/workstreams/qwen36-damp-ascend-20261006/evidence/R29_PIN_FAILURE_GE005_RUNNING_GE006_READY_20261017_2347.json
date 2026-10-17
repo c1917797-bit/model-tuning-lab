@@ -1,0 +1,89 @@
+{
+  "schema": "paper-to-ascend.stage-checkpoint/v1",
+  "observed_utc": "2026-10-17T23:47:00Z",
+  "authority_cutoff_epoch": 1792313000,
+  "deltalog_r29": {
+    "operation": "exec-00000000000014ef",
+    "terminal": true,
+    "exit_code": 1,
+    "classification": "implementation-source-pin-closure failure before algorithm/model",
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R29fixturegate-main-NEW24H_FIRSTDECODE101R29fixturegate_001/RESULT.json",
+      "bytes": 64473,
+      "sha256": "f1d99afe42d364624fc6018b08ff34dfe02f54b87b050eb4c3adc0c9e7f75290"
+    },
+    "cold_terminal": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R29fixturegate-main-NEW24H_FIRSTDECODE101R29fixturegate_001/candidate/FRESH_ENTRY_PARSER_TERMINAL.json",
+      "bytes": 4516,
+      "sha256": "3a0e51f7291ac73048a8d48618b675770ffb58ca334a49c6395e7b892454919f"
+    },
+    "first_error": "lifecycle.Refusal: whole original primitives source",
+    "cold_returncode": 1,
+    "cold_timed_out": false,
+    "nd2_executed": false,
+    "fresh_release_operation": "exec-000000000000150d",
+    "containers": [
+      {
+        "id": "baeda4320580495ed9b5ca3580278f34c7a69bfa5820eea89d41b72fc7f4f194",
+        "running": false,
+        "pid": 0,
+        "exec_ids": null,
+        "oom_killed": false
+      },
+      {
+        "id": "e1fc55840080ff388c7883d5799323183ba072d135c09a7b098d5a7ae3937e6c",
+        "running": false,
+        "pid": 0,
+        "exec_ids": null,
+        "oom_killed": false
+      }
+    ],
+    "next": "R30 strict pin consistency repair and negative tests; no unchanged retry; mathematical viability remains untested here"
+  },
+  "ge005": {
+    "source": {
+      "bytes": 71675,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/ge129-candidate-bound-20261018-005/SOURCE_MANIFEST.json",
+      "sha256": "b9a0f3f70cd67869c0adb3c6420f8a3d98feae2d6570aeea01b05979f28e0b62"
+    },
+    "verified_files": 180,
+    "deployment_operation": "exec-000000000000150f",
+    "readonly_bind_operation": "exec-0000000000001511",
+    "actual_owned_operation": "exec-0000000000001512",
+    "status": "running_last_observed",
+    "result_pending": true,
+    "output": "/opt/host/vnf/austinov/run-ge129-candidate-RENEW24H-005",
+    "input_tokens": 129,
+    "output_tokens": 1,
+    "performance": false
+  },
+  "ge006": {
+    "source": {
+      "bytes": 74230,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/ge129-candidate-capture-bound-20261018-006/SOURCE_MANIFEST.json",
+      "sha256": "7d72756ae40066f4f33aecd063d5a4cea6774bcf4e88bfcfb989cb655218f8e6"
+    },
+    "verified_files": 95,
+    "deployment_operation": "exec-0000000000001514",
+    "readonly_bind_operation": "exec-0000000000001516",
+    "status": "deployed_and_host_bound_not_launched",
+    "condition": "Only after005 terminal and release and fresh resource/authority checks; inherited bootstrap must pass",
+    "next": "192 actual frames then independently reviewed numeric003 r4; complete capture is NOT numeric pass"
+  },
+  "scheduling": {
+    "active_preparation_lanes": [
+      "DeltaLog R30 payload pin repair",
+      "R30 model/early closure and independent review",
+      "GE 2k geometry/lifecycle successor"
+    ],
+    "card_window_utilization": "unmeasured; snapshots are not a continuous-window utilization proof",
+    "recent_snapshot": "1517 no NPU processes;005 owner had entered startup after CPU/canary, not proof of active model math",
+    "deployment_fix": "Completed verified partial005 via bulk native no-clobber exact copies:26 existing+154 copied;00620 create+75copy.150e E2BIG spawn failed without execution; corrected split-argument operation150f passed.",
+    "deployment_fix_corrected_operation": "exec-000000000000150f"
+  },
+  "claims": {
+    "new_technical_success": false,
+    "whole_model_performance": false,
+    "task_accuracy": false
+  }
+}
