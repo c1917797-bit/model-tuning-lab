@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "R21G1 controller1101 live; fresh211/186sourceadmission1100; physical0-3 singleTP4 continuousisolation."
+    "state": "R22 full quality HYPIC controller119b live; fresh221host/217runtime admission119a; physical0-3 singleTP4 continuous isolation, exact ownedCID345a8b813e7bda11bebe11734c743834e9629797a57f357fc50479e620085105."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -197,9 +197,9 @@
   },
   "publication": {
     "state": "liveverified",
-    "published_commit": "f69c7d2ff4d7f9654c1dc62a53eed56983782e31",
+    "published_commit": "ffa5b94f9a02af0ac6ebc00567864ce9c716fbe4",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "scope": "diagnosticcheckpoint notNPUacceptance"
+    "scope": "R22 bounded17 independent NPU acceptance and full381 live tracking only; not complete task quality/performance/lifecycle or main integration"
   },
   "math_reference": {
     "state": "cpu-reference-passed",
