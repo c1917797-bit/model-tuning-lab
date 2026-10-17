@@ -27,13 +27,16 @@ def source_verified_backend(layer):
 def run_packed_c1(layer,layout,projected,b,a,initial_states,incoming_conv,materials,
                   *,backends,finite_check=None,geometry_observer=None,stage_probe=None,
                   short_prefix_policy="chunk64",prefix_route_observer=None,
-                  partitioned_render=False,partition_observer=None):
+                  partitioned_render=False,partition_observer=None,
+                  short_suffix_recurrent=False,short_suffix_observer=None):
     """Return only private tensors. Caller owns leases and all-request commit."""
     if short_prefix_policy not in ("chunk64","canonical_recurrent_le64"):
         raise ValueError("explicit short-prefix policy required")
     if type(partitioned_render)is not bool:
         raise ValueError("explicit partitioned render boolean required")
     native,conv_op,gating,state_op,output_op,metadata_cache=backends
+    if type(short_suffix_recurrent)is not bool or short_suffix_recurrent and short_prefix_policy!='canonical_recurrent_le64':
+        raise ValueError('short suffix recurrence requires canonical boundary policy')
     cached={key:body.affine for key,body in materials.items()}
     tails={key:body.conv_tail for key,body in materials.items()}
     packed=pack_windows(layout,projected,b,a,incoming_conv,tails)
@@ -93,6 +96,11 @@ def run_packed_c1(layer,layout,projected,b,a,initial_states,incoming_conv,materi
         stage_probe.packed_inputs(shared,v,g,beta,initial_seeds,seeds)
         stage_probe.packed_states(prefix_terminals,seeds,materials)
     if not partitioned_render:output,terminal=shared.render(seeds)
+    if short_suffix_recurrent:
+        from independent_c1_short_suffix import align_short_suffixes
+        output,terminal,routes=align_short_suffixes(layout,q,k,v,g,beta,seeds,output,terminal)
+        if short_suffix_observer is not None:
+            for route in routes:short_suffix_observer(route)
     wanted=(1,layout.packed_tokens,initial_states.shape[1],initial_states.shape[-1])
     if tuple(output.shape)!=wanted or terminal.shape!=(n,*initial_states.shape[1:]):
         raise ValueError("packed official output/state coverage mismatch")

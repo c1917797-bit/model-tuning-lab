@@ -4,7 +4,7 @@ from pathlib import Path
 from types import SimpleNamespace as NS
 from unittest.mock import patch
 class PartitionProbeRoutingTests(unittest.TestCase):
-    def assembled(self,partitioned,probe,policy):
+    def assembled(self,partitioned,probe,policy,suffix=False):
         tree=ast.parse(Path(__file__).with_name("independent_compact_gdn_hook.py").read_text())
         install=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="install_compact_gdn")
         wrapped=next(n for n in install.body if isinstance(n,ast.FunctionDef) and n.name=="wrapped")
@@ -16,7 +16,7 @@ class PartitionProbeRoutingTests(unittest.TestCase):
                 if isinstance(n,ast.If) and isinstance(n.test,ast.Name) and n.test.id=="packed_wave":break
                 nodes.append(copy.deepcopy(n))
         self.assertTrue(nodes)
-        env=dict(partitioned_render=partitioned,first_divergence=probe,
+        env=dict(partitioned_render=partitioned,first_divergence=probe,short_suffix_recurrent=suffix,
             first_divergence_head_policy="max_state_residual",short_prefix_policy=policy,
             plans=[NS(rank=0,step=1)],self=NS(prefix="layer"),emit=lambda e:None)
         with patch.dict(sys.modules,{"independent_c1_stage_probe":NS(make_probe=lambda *a,**k:None)}):
@@ -31,4 +31,11 @@ class PartitionProbeRoutingTests(unittest.TestCase):
         self.assertIs(self.assembled(True,False,"chunk64").get("partitioned_render"),True)
     def test_default_disabled(self):
         self.assertNotIn("partitioned_render",self.assembled(False,True,"chunk64"))
+        self.assertNotIn("short_suffix_recurrent",self.assembled(False,True,"chunk64"))
+    def test_short_suffix_survives_partition_and_probe(self):
+        options=self.assembled(True,True,"canonical_recurrent_le64",suffix=True)
+        self.assertIs(options.get("short_suffix_recurrent"),True)
+        self.assertTrue(callable(options.get("short_suffix_observer")))
+        self.assertIs(options.get("partitioned_render"),True)
+        self.assertIn("probe_factory",options)
 if __name__=="__main__":unittest.main()

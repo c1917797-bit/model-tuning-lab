@@ -9,7 +9,7 @@ from independent_c1_packed_backend import run_packed_c1,source_verified_backend
 def prepare_packed_layer(layer,stage,plans,associations,projected,b,a,leases,
                          backend_state,*,finite_check=None,probe_factory=None,
                          short_prefix_policy="chunk64",prefix_route_observer=None,
-                         partitioned_render=False):
+                         partitioned_render=False,short_suffix_recurrent=False,short_suffix_observer=None):
     layout=build_wave_layout(plans,associations)
     conv_cache,state_cache=layer.kv_cache[:2]
     states=[];tails=[];leased={};materials={};identities={}
@@ -43,6 +43,8 @@ def prepare_packed_layer(layer,stage,plans,associations,projected,b,a,leases,
         backend_state['probe']=probe
         leases.callback(probe.discard)
     probe_kwargs={'stage_probe':probe} if probe is not None else {}
+    if short_suffix_recurrent:
+        probe_kwargs.update(short_suffix_recurrent=True,short_suffix_observer=short_suffix_observer)
     if partitioned_render:
         probe_kwargs.update(partitioned_render=True,
             partition_observer=lambda stats:backend_state.update(partition_stats=stats))

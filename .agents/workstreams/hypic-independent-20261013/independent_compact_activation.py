@@ -59,6 +59,9 @@ def c1_install_route(config):
         raise ValueError('partitioned render requires explicit packed C1')
     performance=config.pop('c1_performance_mode',False)
     prefix_policy=config.pop('c1_short_prefix_terminal_policy','chunk64')
+    short_suffix=config.pop('c1_short_suffix_recurrent',False)
+    if type(short_suffix)is not bool or short_suffix and (not packed or prefix_policy!='canonical_recurrent_le64'):
+        raise ValueError('short suffix recurrence requires packed C1 and canonical prefix policy')
     if prefix_policy not in ('chunk64','canonical_recurrent_le64') or prefix_policy!='chunk64' and not packed:
         raise ValueError('canonical short prefix requires explicit packed C1')
     probe=config.pop('c1_first_divergence',False)
@@ -80,12 +83,14 @@ def c1_install_route(config):
             layer_completion=completion,layer_shadow=shadow,packed_wave=packed,
             first_divergence=probe,first_divergence_head_policy=head_policy,
             short_prefix_policy=prefix_policy,performance_mode=performance,
-            partitioned_render=partitioned,lazy_initial_snapshot=lazy_initial)
+            partitioned_render=partitioned,lazy_initial_snapshot=lazy_initial,
+            short_suffix_recurrent=short_suffix)
     install.c1_layer_completion_barrier=completion
     install.c1_layer_shadow_validation=shadow
     install.c1_packed_wave=packed
     install.c1_partitioned_render=partitioned
     install.c1_lazy_initial_snapshot=lazy_initial
+    install.c1_short_suffix_recurrent=short_suffix
     install.c1_performance_mode=performance
     install.c1_short_prefix_terminal_policy=prefix_policy
     install.c1_first_divergence=probe
@@ -182,6 +187,7 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
               'c1_packed_wave':install_compact_gdn.c1_packed_wave,
               'c1_partitioned_render':install_compact_gdn.c1_partitioned_render,
               'c1_lazy_initial_snapshot':install_compact_gdn.c1_lazy_initial_snapshot,
+              'c1_short_suffix_recurrent':install_compact_gdn.c1_short_suffix_recurrent,
               'c1_performance_mode':install_compact_gdn.c1_performance_mode,
               'c1_first_divergence':install_compact_gdn.c1_first_divergence,
               'c1_short_prefix_terminal_policy':install_compact_gdn.c1_short_prefix_terminal_policy,

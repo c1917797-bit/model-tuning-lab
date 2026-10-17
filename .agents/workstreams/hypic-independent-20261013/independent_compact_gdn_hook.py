@@ -9,8 +9,10 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
                         layer_completion=False,layer_shadow=False,packed_wave=False,
                         first_divergence=False,first_divergence_head_policy="head0",
                         short_prefix_policy="chunk64",performance_mode=False,
-                        partitioned_render=False,lazy_initial_snapshot=False):
+                        partitioned_render=False,lazy_initial_snapshot=False,short_suffix_recurrent=False):
     if not enabled:return lambda:None
+    if type(short_suffix_recurrent)is not bool or short_suffix_recurrent and (not packed_wave or short_prefix_policy!='canonical_recurrent_le64'):
+        raise ValueError('short suffix recurrence requires packed canonical boundary execution')
     if type(lazy_initial_snapshot)is not bool or lazy_initial_snapshot and not packed_wave:
         raise ValueError('lazy initial snapshot requires explicit packed C1')
     if type(packed_wave) is not bool:raise ValueError('explicit packed C1 boolean required')
@@ -86,6 +88,11 @@ def install_compact_gdn(stage,*,enabled=False,emit=None,native_decode_batch=Fals
         with ExitStack() as leases:
             packed={};packed_materials={};packed_layout=None
             probe=None;probe_kwargs={}
+            if short_suffix_recurrent:
+                probe_kwargs.update(short_suffix_recurrent=True,
+                    short_suffix_observer=lambda route:emit(dict(route,
+                        event='c1_short_suffix_recurrent_route',rank=plans[0].rank,
+                        step=plans[0].step,layer=self.prefix,actual_slot_commit='not_started')))
             if partitioned_render:probe_kwargs['partitioned_render']=True
             if first_divergence:
                 from independent_c1_stage_probe import make_probe

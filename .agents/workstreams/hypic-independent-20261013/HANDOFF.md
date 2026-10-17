@@ -1,4 +1,18 @@
-# CURRENT R21 FULL HYPIC QUALITY FAILED; NO OWNED MODEL JOB
+# CURRENT R22 SHORT SUFFIX CANDIDATE HOST READY; NO DEVICE RUN
+
+R21 fullquality failure exposed serial<=64recurrent vs packed suffixchunk64 routegap.
+New defaultoff c1_short_suffix_recurrent correctsprivate shortsuffix output/state
+from rawpostconvQKV/g/beta/composedseed; no bodyrecompute/finiteguardrelaxation.
+24focused115fPASS; first1015CPU1161 had3ASTfixtureNameErrors, fixeddefaultplus
+coexistencetest;1016fullCPU1163PASS;29structure/diff1165PASS.
+R22_SHORT_SUFFIX_HOST_READINESS_20261017.json records scope andgeometryinference
+of56-token suffix (not devicecausalityproof). Noownedmodeljob. Old R21 source
+bindings cannotbeusedfornewruntime. Next freeze newR22 same-first-batch
+integratedCanary/independentfourrank shortsuffixroute+completion audit,thenfresh
+deviceadmission. No oldrootrerun/thresholdrelaxation. Deadline06:48:09UTC.
+Fullquality/performance/lifecycle/29functional remainunfinished.
+
+# HISTORICAL R21 FULL HYPIC QUALITY FAILED; NO OWNED MODEL JOB
 
 114e terminalexit1,0/381responses; URLErrorconnectionrefusedsecondary to
 worker ValueError packedC1fullprivate shadowfailed beforeactualslotcommit.

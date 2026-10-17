@@ -1,0 +1,49 @@
+{
+  "schema": "hypic-r22-short-suffix-host-readiness/v1",
+  "failure_report": "R21_FULL_HYPIC_R1_FAILURE_20261017.json",
+  "source_evidence": {
+    "serial": "independent_native_boundary.py routes all spans <=64 through independent_recurrent_boundary",
+    "packed": "independent_c1_packed_backend.py previously aligned only short prefix terminal; suffix output/state retained chunk64 route",
+    "geometry_inference": {
+      "scheduled_tokens": 15548,
+      "producer_segment_tokens": 15472,
+      "boundary": 8,
+      "observed_prefix_rows": 28,
+      "inferred_suffix_rows": 56,
+      "arithmetic": "15548-(15472-8)-28",
+      "limit": "Derived from frozen receipts/journal; new same-input device diagnosis still required"
+    }
+  },
+  "treatment": {
+    "flag": "c1_short_suffix_recurrent",
+    "default": false,
+    "requires": "packed C1 and canonical_recurrent_le64 prefix policy",
+    "scope": "Recompute only <=64-token live suffix output and terminal from raw post-convolution Q/K/V/g/beta and composed incoming seed; cloned private buffers only",
+    "unchanged": [
+      "cached-body C1 algebra",
+      "conv tail",
+      "long suffix route",
+      "finite and ownership guards",
+      "C2",
+      "shadow atol0.01/rtol0.003",
+      "native slot precommit protocol"
+    ]
+  },
+  "validation": {
+    "focused": "exec-000000000000115f",
+    "focused_tests": 24,
+    "first_full": "exec-0000000000001161",
+    "first_full_result": "1015 ran;3 errors from AST fixture missing new explicit default, preserved",
+    "replay": "exec-0000000000001163",
+    "replay_tests": 1016,
+    "replay_pass": true,
+    "structure": "exec-0000000000001165",
+    "structure29": true
+  },
+  "limits": [
+    "No new NPU run or proven root-cause repair yet",
+    "All old source manifests now historical/stale for new runtime; new source closure/contracts required",
+    "No full381 task quality or performance/lifecycle acceptance"
+  ],
+  "next": "Freeze R22 same-first-batch integrated catalog Canary and independent per-rank short-suffix route/completion audit, then fresh admission; preserve all R21 raw roots"
+}
