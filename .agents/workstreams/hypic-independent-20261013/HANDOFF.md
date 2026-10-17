@@ -1,4 +1,17 @@
-# CURRENT R21 FINITE CANARY CONTRACT HOST READY; NO DEVICE RUN
+# CURRENT R21 C2 FINITE CANARY LIVE
+
+Published/liveverifiedede97056761e8504d8baf4937642bb85e2c6a0f4;mainunchanged.
+Freshma force_direct10af admission proves197host/170runtimebindings/image/model/
+input/physical0-3empty/8233+HCCLfree/newroot/cache23.6GB.
+Exactma controller exec-00000000000010b0, raw
+/cache/cch/hypic-independent-20261013/c2-finite-r21-canary-r1.
+Contract C2_FINITE_R21_CANARY_R1_CONTRACT.json; pollsamepeer/handle/root,
+no restartlive/unclear or197boundchanges. Terminal audit_r21_c2_finite_canary.py
+--contract C2_FINITE_R21_CANARY_R1_CONTRACT.json --live-release.
+Retain R20negative; boundednumeric/finite receipts notspeed/fullquality.
+Fullgoalunfinished;fixedcutoff2026-10-17T06:48:09Z.
+
+# HISTORICAL R21 FINITE CANARY CONTRACT HOST READY; NO DEVICE RUN
 
 New C2_FINITE_R21_CANARY_R1_CONTRACT.json binds current source andnewraw
 /cache/cch/hypic-independent-20261013/c2-finite-r21-canary-r1 (notstarted).
