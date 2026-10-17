@@ -1,17 +1,13 @@
 {
   "schema": "ascend.current-model-frontdoor-handoff/v1",
-  "recorded_at_utc": "2026-10-17T01:46:30Z",
+  "recorded_at_utc": "2026-10-17T03:13:47Z",
   "authority_file": "CONDITIONAL_EXTENSION24H_AUTHORITY_20261016.json",
   "original_cutoff_utc": "2026-10-17T07:02:13Z",
   "extension_used": 0,
   "extension_condition_met": false,
   "new_nonHYPIC_accepted_technology": false,
   "current_owner": null,
-  "next_NPU": {
-    "paper": "DeltaLog whole-storage byte ABI then C1 first real decode numerical smoke",
-    "status": "GE sealing <=1GiB tiny byteAPI packet against reviewed120R2 physical5 owner, MAIN full source review and fresh admission pending. Full-model32GiB/80GiB budget not admitted by tiny ticket.",
-    "qualification": false
-  },
+  "next_NPU": "First actually ready of BOLE R13 exact logits ABI repair or DeltaLog R18repair1 source-classified read-only binder repair, after sourceaudit and fresh admission; neither currently admitted",
   "last_model_result": {
     "ref": {
       "path": "/opt/host/vnf/austinov/run-bole-model131repair4-MAIN-NEW24H_001/RESULT.json",
@@ -73,21 +69,22 @@
     "cost_caution": "child_scope includes final fence; nested phases inclusive/nonadditive; actual cache state uncontrolled; selected estimate not full-run guarantee"
   },
   "parallel_preparation": {
-    "accuracy_input_repair": "Actual single-publication outer wiring under control review; exact R9 success prerequisite remains FAIL/closed",
-    "gdn_paper_reassessment": "Active independent R9 actual native slot authority and cache registry failure attribution; source-supported R10 only",
-    "ge_fullgdn_ready": "R17 actual report localverified; preparing NPU byteABI and firstrealdecode all64 livegeometry/stronglifecycle/wholeinactive streaming diagnostic",
-    "constraints": "No whole-model numerical PASS, E2E performance or final task scores. No fake load or claim of uninterrupted4card utilization; protect0–3. Idle agents are not rerun merely to appear busy."
+    "accuracy_input_repair": "New R18repair1 source-only narrow canonical writer classification; real producer/FD/shared maps remain fail-closed",
+    "gdn_paper_reassessment": "R13 targeted logits ABI/source attribution plus observation; no unproved dtype cast",
+    "ge_fullgdn_ready": "Independent actual installed logits-source audit, no NPU; numerical inventory completed"
   },
   "git": {
-    "local_commit": "0eceac2da9444f969d2bfc45a6fa2ec2e153e6b6",
-    "normal_push_operation": "exec-00000000000010ad",
+    "local_commit": "690486c15b0e0bdcbb899e8c08ec310208d47081",
+    "normal_push_operation": "exec-00000000000010f4",
     "normal_push_exit": 0,
-    "normal_push_reported_remote_transition": "e56d41c5..0eceac2d",
+    "normal_push_reported_remote_transition": "verified by independent ls-remote readback690486c15b0e0bdcbb899e8c08ec310208d47081",
     "protocol": "per-commandHTTP/1.1,TLSverification unchanged,noforce",
-    "archive": "projects/qwen36-paper-portfolio/tools/new24h_model_repairs_20261017_0048",
+    "archive": "projects/qwen36-paper-portfolio/tools/new24h_native_footprint_20261017_0130",
     "current_handoff_uncommitted_after_stage_update": true,
     "pending_stage_archive": "projects/qwen36-paper-portfolio/tools/new24h_native_footprint_20261017_0130",
-    "pending_stage_source_copy_operation": "exec-00000000000010e6"
+    "pending_stage_source_copy_operation": "exec-00000000000010e6",
+    "remote_readback_operation": "exec-00000000000010f5",
+    "remote_ref_equals_local": true
   },
   "physical_scope": [
     4,
@@ -118,17 +115,29 @@
     "released": true
   },
   "card_snapshot": {
-    "operation": "exec-00000000000010ed",
-    "physical4_7_no_PIDs": true,
+    "utc": "2026-10-17T03:06:52.807327+00:00",
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "no_actual_pids": true,
+    "AICore": [
+      0,
+      0,
+      0,
+      0
+    ],
     "HBM_MiB": [
       2867,
+      2868,
       2867,
-      2866,
-      2864
+      2865
     ],
-    "MemAvailable_bytes": 62062284800,
-    "protected0_3": "external active PIDs3038824–27 observed, never touched",
-    "not_full_window_utilization": true
+    "window_utilization": "unmeasured",
+    "idle_reason": "BOLE R12 failed; next DeltaLog source/storage binding must finish before admission",
+    "note": "BOLE exact release verified; no new NPU owner launched after it. Binding CPU-only failed before source publish."
   },
   "last_CPU_recovery": {
     "source": {
@@ -551,14 +560,7 @@
     "performance": false,
     "task_accuracy": false
   },
-  "maintenance_stage": {
-    "skills_structure_operation": "exec-00000000000010e7",
-    "exit": 0,
-    "skills": 20,
-    "local_quick_validate_both_pass": true,
-    "scope": "Narrow existingcontrollerreference+paper coldimport correction+2registrytriggers, not broad policy rewrite",
-    "raw_artifacts_external": true
-  },
+  "maintenance_stage": "BOLE R12 and storage seal R2 actual failure/success boundaries archived; coherent commit pending",
   "previous_BOLE_R9": {
     "operation": "exec-00000000000010e0",
     "paper": "BOLE131R9",
@@ -636,5 +638,620 @@
     "numerical_model_qualified": false,
     "performance": false,
     "task_accuracy": false
+  },
+  "previous_DL_tiny_byte_ABI": {
+    "operation": "exec-00000000000010f9",
+    "paper": "DeltaLog tiny whole-storage byte ABI",
+    "state": "terminal_ABI_only_pass_released",
+    "source": {
+      "bytes": 3545,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-byteabi-tiny-new24h-20261017-001/owned/SOURCE_MANIFEST.json",
+      "sha256": "6baca44494a9fa528238a9fe795bc9b6867c761f8a91ee5d1aee35274cac85d9"
+    },
+    "guest_source": {
+      "bytes": 2268,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-byteabi-tiny-new24h-20261017-001/SOURCE_MANIFEST.json",
+      "sha256": "8bcf90c0489ce5ba5c74826f5033ad6392496634e763f2ac2cab8e1647ac5592"
+    },
+    "output": "/opt/host/vnf/austinov/run-dl-byteabi-MAIN-20261017-001",
+    "physical": [
+      5
+    ],
+    "logical": 0,
+    "sourceaudit_operation": "exec-00000000000010f8",
+    "sourceaudit_readset_count": 24,
+    "resource_admission": "Fresh MAIN read and original120R2/069 fail-closed controller; actual physical5/logical0 mapping/host proof ARM still owned by controller",
+    "whole_seconds": 900,
+    "child_seconds": 600,
+    "cleanup_seconds": 90,
+    "output_cap_bytes": 1073741824,
+    "qualification": false,
+    "model_correctness": false,
+    "performance": false,
+    "task_accuracy": false,
+    "exit": 0,
+    "owner": {
+      "path": "/opt/host/vnf/austinov/run-dl-byteabi-MAIN-20261017-001/RESULT.json",
+      "bytes": 1443,
+      "sha256": "9b6fcef23b1529f5461fd7856f32845cf2b426d3735422af020ec87983814689"
+    },
+    "independent_consumer": {
+      "path": "/opt/host/vnf/austinov/run-dl-byteabi-MAIN-20261017-001/INDEPENDENT_BYTE_ABI_MAIN.json",
+      "bytes": 1284,
+      "sha256": "a69d397acc1d8bde7404de41e4939f95a9a564be6c713c89417cd58f175a8b10"
+    },
+    "independent_operation": "exec-00000000000010fd",
+    "independent_inspect": {
+      "path": "/opt/host/vnf/austinov/run-dl-byteabi-MAIN-20261017-001/INDEPENDENT_FINAL_INSPECT_MAIN.json",
+      "bytes": 18094,
+      "sha256": "ac3cb184e77b6806c53971c26a0b8be93e6ee0cb5d93d776c71e415aa6f026cf"
+    },
+    "created_CID": "8ddd353266af8ee8e1d9b00d30c09f2df616594f8e515aaef17c10ac739c127a",
+    "all11_actual_sameimage_controls_pass": true,
+    "actual_NPU_byte_ABI": true,
+    "NaN_signed_zero_noncontinuous_shared_BF16_bidirectional_and_prefix_tail_negatives_pass": true,
+    "elapsed_seconds": 22.930447300022934,
+    "used_bytes": 1007644,
+    "released": true,
+    "model_qualified": false,
+    "performance_qualified": false,
+    "task_qualified": false
+  },
+  "previous_BOLE_R10": {
+    "operation": "exec-0000000000001117",
+    "paper": "BOLE131R10",
+    "state": "terminal_failed",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair10/SOURCE_BOUND.json",
+      "bytes": 44966,
+      "sha256": "63fb79e3a30bea62c43453ecbeeda60dc550f63b0eb87503d12b95b52304974d"
+    },
+    "bind_operation": "exec-0000000000001112",
+    "sourceaudit_operation": "exec-0000000000001114",
+    "output": "/opt/host/vnf/austinov/run-bole-model131repair10-MAIN-NEW24H_001",
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "logical": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "whole_seconds": 3600,
+    "cleanup_seconds": 180,
+    "qualification": false,
+    "purpose": "Necessary native per-layer physical-slot and actual Ascend FA mapping adaptation; original three-node C1 first131/num_spec8 diagnostic only; no production/publication or E2E/task result",
+    "local73_software_pass": true,
+    "actual_sameimage_or_NPU_pass": false,
+    "unused_duplicate_subdirectory_retained": "Repeated Add header prefix produced23 duplicate source files; corrected125declared file bytes verified1111; safety review rejected duplicate deletion, no bypass and no files deleted. Runtime binds only correct source refs.",
+    "owner_exit": 3,
+    "owner_primary": "ValueError('real foreign PID/UDA/start/program conflict; never canary authority')",
+    "earlier_worker_exception": {
+      "time": "2026-10-17T02:12:55Z",
+      "type": "ValueError",
+      "message": "same actually loaded native extension/opapi as calibrated ABI",
+      "underlying_DSO_difference": "unobserved; not evidence of external occupation, Ref2, numerical or paper failure"
+    },
+    "independent_release": {
+      "operation": "exec-0000000000001124",
+      "facts": {
+        "arms": {
+          "cpu-preflight": {
+            "cid": "dffbaa810e52d64423f2fd30ff7c88b7cc803dc0a2ed80a45aada2a65e2090da",
+            "cleanup_errors": [],
+            "cleanup_ref": {
+              "bytes": 10763,
+              "path": "/opt/host/vnf/austinov/run-bole-model131repair10-MAIN-NEW24H_001/cpu-preflight/cleanup.json",
+              "sha256": "18155fbabf6a98e86b91f56f8bfdc950377185148327338324d30f2fd9f6055c"
+            },
+            "execids": null,
+            "exit": 137,
+            "oom": false,
+            "owned_ref": {
+              "bytes": 25599,
+              "path": "/opt/host/vnf/austinov/run-bole-model131repair10-MAIN-NEW24H_001/cpu-preflight/OWNED.json",
+              "sha256": "85355c6638d10dcf1dea40ae408943c39300515c99d7dc30c6819cbc25a5ca5e"
+            },
+            "pid": 0,
+            "running": false,
+            "sizeRw": null,
+            "status": "exited"
+          },
+          "dense": {
+            "cid": "b44074044d69629b67711ba64064976594ef7bc425666fe2150db2997b96b6a5",
+            "cleanup_errors": [],
+            "cleanup_ref": {
+              "bytes": 10814,
+              "path": "/opt/host/vnf/austinov/run-bole-model131repair10-MAIN-NEW24H_001/dense/cleanup.json",
+              "sha256": "ce3730721acbe19fc111a3fab77b87cc3f917a9f8aaea33c2f011b9364cf3bbd"
+            },
+            "execids": null,
+            "exit": 137,
+            "oom": false,
+            "owned_ref": {
+              "bytes": 25557,
+              "path": "/opt/host/vnf/austinov/run-bole-model131repair10-MAIN-NEW24H_001/dense/OWNED.json",
+              "sha256": "2f4ce64e0029f2ff79141018d733a7bc046cdfe92c55ce28657aa391ee11b740"
+            },
+            "pid": 0,
+            "running": false,
+            "sizeRw": null,
+            "status": "exited"
+          }
+        },
+        "smi": "+------------------------------------------------------------------------------------------------+\n| npu-smi 25.2.0                   Version: 25.2.0                                               |\n+---------------------------+---------------+----------------------------------------------------+\n| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|\n| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |\n+===========================+===============+====================================================+\n| 0     910B4               | OK            | 92.7        38                0    / 0             |\n| 0                         | 0000:C1:00.0  | 0           0    / 0          2872 / 32768         |\n+===========================+===============+====================================================+\n| 1     910B4               | OK            | 83.9        37                0    / 0             |\n| 0                         | 0000:C2:00.0  | 0           0    / 0          2870 / 32768         |\n+===========================+===============+====================================================+\n| 2     910B4               | OK            | 88.9        38                0    / 0             |\n| 0                         | 0000:81:00.0  | 0           0    / 0          2871 / 32768         |\n+===========================+===============+====================================================+\n| 3     910B4               | OK            | 87.3        39                0    / 0             |\n| 0                         | 0000:82:00.0  | 0           0    / 0          2868 / 32768         |\n+===========================+===============+====================================================+\n| 4     910B4               | OK            | 94.5        44                0    / 0             |\n| 0                         | 0000:01:00.0  | 0           0    / 0          2866 / 32768         |\n+===========================+===============+====================================================+\n| 5     910B4               | OK            | 96.7        43                0    / 0             |\n| 0                         | 0000:02:00.0  | 0           0    / 0          2868 / 32768         |\n+===========================+===============+====================================================+\n| 6     910B4               | OK            | 95.3        43                0    / 0             |\n| 0                         | 0000:41:00.0  | 0           0    / 0          2865 / 32768         |\n+===========================+===============+====================================================+\n| 7     910B4               | OK            | 86.2        44                0    / 0             |\n| 0                         | 0000:42:00.0  | 0           0    / 0          2865 / 32768         |\n+===========================+===============+====================================================+\n+---------------------------+---------------+----------------------------------------------------+\n| NPU     Chip              | Process id    | Process name             | Process memory(MB)      |\n+===========================+===============+====================================================+\n| No running processes found in NPU 0                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 1                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 2                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 3                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 4                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 5                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 6                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 7                                                            |\n+===========================+===============+====================================================+\n",
+        "utc": "2026-10-17T02:18:47.626915+00:00"
+      }
+    },
+    "arithmetic_reached": false
+  },
+  "latest_storage_seal_attempt": {
+    "operation": "exec-0000000000001143",
+    "source": {
+      "bytes": 4790,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-r6-n16-n160-overlay-new24h-v1-20261017-001-repair2/SOURCE_MANIFEST.json",
+      "sha256": "4f5ed204581d5d5bdd7b2f6d88294bc9d23875099153b88dabd190cfd08dcf64"
+    },
+    "state": "original_whole600_failed_validate_timeout",
+    "controls": "13 PASS",
+    "full_prior_policy_preflight_seconds": 200.5997552999761,
+    "capture_completed_seconds": 576.3322746100021,
+    "captured_evidence": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence-R6-N16-N160-model-snapshots-MAIN-R2-001/EVIDENCE.json",
+      "bytes": 9121,
+      "sha256": "4c8698817d5cdf9b15556293bb3950b137990ad4b0c223ae03de53950f922ead"
+    },
+    "old_ledger_modified": false,
+    "capacity_admitted": false
+  },
+  "previous_BOLE_R11": {
+    "operation": "exec-0000000000001131",
+    "paper": "BOLE131R11",
+    "state": "terminal_failed",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair11/SOURCE_BOUND.json",
+      "bytes": 47144,
+      "sha256": "5a3a10460398b34b2f9323438e3492f5ec0e790272e42eb2556bb7c8fd7a8f63"
+    },
+    "bind_operation": "exec-000000000000112e",
+    "sourceaudit_admission_operation": "exec-0000000000001130",
+    "output": "/opt/host/vnf/austinov/run-bole-model131repair11-MAIN-NEW24H_001",
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "logical": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "purpose": "Persist exact actual/calibrated extension/opapi operands+full process maps before unchanged exact identity gate; then original bounded diagnostic only",
+    "NPU_correctness_passed": false,
+    "performance_passed": false,
+    "task_accuracy_passed": false,
+    "owner_exit": 3,
+    "owner_ref": {
+      "bytes": 92331,
+      "path": "/opt/host/vnf/austinov/run-bole-model131repair11-MAIN-NEW24H_001/RESULT.json",
+      "sha256": "2b24632e1841d1e8929001027c8d1406ca5f394ab202a38e98d29c33f5e2f42e"
+    },
+    "owner_primary": "ValueError('AICore/HBM idle baseline unchanged')",
+    "earlier_worker_exception": {
+      "utc": "2026-10-17T02:33:02Z",
+      "message": "same actually loaded native extension/opapi as calibrated ABI",
+      "cause": "All4 same extension/original transformer opapi; extra exact CANN batch_invariant opapi mapping. Not a numerical failure, not proof of foreign NPU ownership."
+    },
+    "all4_library_differences": [
+      {
+        "comparison": {
+          "actual_extension": {
+            "bytes": 813040,
+            "path": "/vllm-workspace/vllm-ascend/vllm_ascend/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so",
+            "sha256": "eaa9457a21a45e2cb027c1345ee670b59d10fcd6f4a8be8b0b1bf2fde1d2232a"
+          },
+          "actual_opapi": [
+            {
+              "bytes": 974520,
+              "path": "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_api/lib/libcust_opapi.so",
+              "sha256": "ff82d965a8a08bfa2862567022a04a1fd04df56d142f4393f1fb527592111069"
+            },
+            {
+              "bytes": 939320,
+              "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_api/lib/libcust_opapi.so",
+              "sha256": "b77ec1ec0c5e8b8c31f29dd6763979a7f9442a288c7812988655d273a41e2855"
+            }
+          ],
+          "calibrated_extension": {
+            "bytes": 813040,
+            "path": "/vllm-workspace/vllm-ascend/vllm_ascend/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so",
+            "sha256": "eaa9457a21a45e2cb027c1345ee670b59d10fcd6f4a8be8b0b1bf2fde1d2232a"
+          },
+          "calibrated_opapi": [
+            {
+              "bytes": 939320,
+              "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_api/lib/libcust_opapi.so",
+              "sha256": "b77ec1ec0c5e8b8c31f29dd6763979a7f9442a288c7812988655d273a41e2855"
+            }
+          ],
+          "exact_pass": false,
+          "extension_equal": true,
+          "missing_actual": [],
+          "opapi_ordered_equal": false,
+          "unexpected_actual": [
+            {
+              "bytes": 974520,
+              "path": "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_api/lib/libcust_opapi.so",
+              "sha256": "ff82d965a8a08bfa2862567022a04a1fd04df56d142f4393f1fb527592111069"
+            }
+          ]
+        },
+        "rank": 3,
+        "ref": {
+          "bytes": 666154,
+          "path": "/opt/host/vnf/austinov/run-bole-model131repair11-MAIN-NEW24H_001/dense/receipts/BOLE-NATIVE-LIBRARY-IDENTITY-RANK-3.json",
+          "sha256": "55ff4f06e0439a28d1fbd2e1f5a54819395c80c99585a0b47696045b91c758e1"
+        }
+      },
+      {
+        "comparison": {
+          "actual_extension": {
+            "bytes": 813040,
+            "path": "/vllm-workspace/vllm-ascend/vllm_ascend/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so",
+            "sha256": "eaa9457a21a45e2cb027c1345ee670b59d10fcd6f4a8be8b0b1bf2fde1d2232a"
+          },
+          "actual_opapi": [
+            {
+              "bytes": 974520,
+              "path": "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_api/lib/libcust_opapi.so",
+              "sha256": "ff82d965a8a08bfa2862567022a04a1fd04df56d142f4393f1fb527592111069"
+            },
+            {
+              "bytes": 939320,
+              "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_api/lib/libcust_opapi.so",
+              "sha256": "b77ec1ec0c5e8b8c31f29dd6763979a7f9442a288c7812988655d273a41e2855"
+            }
+          ],
+          "calibrated_extension": {
+            "bytes": 813040,
+            "path": "/vllm-workspace/vllm-ascend/vllm_ascend/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so",
+            "sha256": "eaa9457a21a45e2cb027c1345ee670b59d10fcd6f4a8be8b0b1bf2fde1d2232a"
+          },
+          "calibrated_opapi": [
+            {
+              "bytes": 939320,
+              "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_api/lib/libcust_opapi.so",
+              "sha256": "b77ec1ec0c5e8b8c31f29dd6763979a7f9442a288c7812988655d273a41e2855"
+            }
+          ],
+          "exact_pass": false,
+          "extension_equal": true,
+          "missing_actual": [],
+          "opapi_ordered_equal": false,
+          "unexpected_actual": [
+            {
+              "bytes": 974520,
+              "path": "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_api/lib/libcust_opapi.so",
+              "sha256": "ff82d965a8a08bfa2862567022a04a1fd04df56d142f4393f1fb527592111069"
+            }
+          ]
+        },
+        "rank": 1,
+        "ref": {
+          "bytes": 665954,
+          "path": "/opt/host/vnf/austinov/run-bole-model131repair11-MAIN-NEW24H_001/dense/receipts/BOLE-NATIVE-LIBRARY-IDENTITY-RANK-1.json",
+          "sha256": "7b1fa7652a256bd4432ddfafe72c8ed30d8094d22befabd078188391ca985a76"
+        }
+      },
+      {
+        "comparison": {
+          "actual_extension": {
+            "bytes": 813040,
+            "path": "/vllm-workspace/vllm-ascend/vllm_ascend/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so",
+            "sha256": "eaa9457a21a45e2cb027c1345ee670b59d10fcd6f4a8be8b0b1bf2fde1d2232a"
+          },
+          "actual_opapi": [
+            {
+              "bytes": 974520,
+              "path": "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_api/lib/libcust_opapi.so",
+              "sha256": "ff82d965a8a08bfa2862567022a04a1fd04df56d142f4393f1fb527592111069"
+            },
+            {
+              "bytes": 939320,
+              "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_api/lib/libcust_opapi.so",
+              "sha256": "b77ec1ec0c5e8b8c31f29dd6763979a7f9442a288c7812988655d273a41e2855"
+            }
+          ],
+          "calibrated_extension": {
+            "bytes": 813040,
+            "path": "/vllm-workspace/vllm-ascend/vllm_ascend/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so",
+            "sha256": "eaa9457a21a45e2cb027c1345ee670b59d10fcd6f4a8be8b0b1bf2fde1d2232a"
+          },
+          "calibrated_opapi": [
+            {
+              "bytes": 939320,
+              "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_api/lib/libcust_opapi.so",
+              "sha256": "b77ec1ec0c5e8b8c31f29dd6763979a7f9442a288c7812988655d273a41e2855"
+            }
+          ],
+          "exact_pass": false,
+          "extension_equal": true,
+          "missing_actual": [],
+          "opapi_ordered_equal": false,
+          "unexpected_actual": [
+            {
+              "bytes": 974520,
+              "path": "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_api/lib/libcust_opapi.so",
+              "sha256": "ff82d965a8a08bfa2862567022a04a1fd04df56d142f4393f1fb527592111069"
+            }
+          ]
+        },
+        "rank": 0,
+        "ref": {
+          "bytes": 666484,
+          "path": "/opt/host/vnf/austinov/run-bole-model131repair11-MAIN-NEW24H_001/dense/receipts/BOLE-NATIVE-LIBRARY-IDENTITY-RANK-0.json",
+          "sha256": "a29b0e6ab7c00740eb00cd344b4ff35eb3b7e5f502f6e1d4ceaf3283ff4104e2"
+        }
+      },
+      {
+        "comparison": {
+          "actual_extension": {
+            "bytes": 813040,
+            "path": "/vllm-workspace/vllm-ascend/vllm_ascend/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so",
+            "sha256": "eaa9457a21a45e2cb027c1345ee670b59d10fcd6f4a8be8b0b1bf2fde1d2232a"
+          },
+          "actual_opapi": [
+            {
+              "bytes": 974520,
+              "path": "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_api/lib/libcust_opapi.so",
+              "sha256": "ff82d965a8a08bfa2862567022a04a1fd04df56d142f4393f1fb527592111069"
+            },
+            {
+              "bytes": 939320,
+              "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_api/lib/libcust_opapi.so",
+              "sha256": "b77ec1ec0c5e8b8c31f29dd6763979a7f9442a288c7812988655d273a41e2855"
+            }
+          ],
+          "calibrated_extension": {
+            "bytes": 813040,
+            "path": "/vllm-workspace/vllm-ascend/vllm_ascend/vllm_ascend_C.cpython-312-aarch64-linux-gnu.so",
+            "sha256": "eaa9457a21a45e2cb027c1345ee670b59d10fcd6f4a8be8b0b1bf2fde1d2232a"
+          },
+          "calibrated_opapi": [
+            {
+              "bytes": 939320,
+              "path": "/vllm-workspace/vllm-ascend/vllm_ascend/_cann_ops_custom/vendors/custom_transformer/op_api/lib/libcust_opapi.so",
+              "sha256": "b77ec1ec0c5e8b8c31f29dd6763979a7f9442a288c7812988655d273a41e2855"
+            }
+          ],
+          "exact_pass": false,
+          "extension_equal": true,
+          "missing_actual": [],
+          "opapi_ordered_equal": false,
+          "unexpected_actual": [
+            {
+              "bytes": 974520,
+              "path": "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_api/lib/libcust_opapi.so",
+              "sha256": "ff82d965a8a08bfa2862567022a04a1fd04df56d142f4393f1fb527592111069"
+            }
+          ]
+        },
+        "rank": 2,
+        "ref": {
+          "bytes": 666044,
+          "path": "/opt/host/vnf/austinov/run-bole-model131repair11-MAIN-NEW24H_001/dense/receipts/BOLE-NATIVE-LIBRARY-IDENTITY-RANK-2.json",
+          "sha256": "e773a6ca89ea81c8c93fb021a9ec9e89065006c9af7a4f9db3a2e76ef5aec7f8"
+        }
+      }
+    ],
+    "independent_release_operation": "exec-0000000000001141",
+    "release": {
+      "cpu-preflight": {
+        "cid": "4cead4467c322264b34e27de481f2a00e0d14c0b65cf845bc9f3256628090a98",
+        "cleanup_errors": [],
+        "cleanup_ref": {
+          "bytes": 20366,
+          "path": "/opt/host/vnf/austinov/run-bole-model131repair11-MAIN-NEW24H_001/cpu-preflight/cleanup.json",
+          "sha256": "08691830a760f224634ee3df9a4f642ee39246acfe740b240787976c07f4e3c1"
+        },
+        "execids": null,
+        "owned_ref": {
+          "bytes": 25599,
+          "path": "/opt/host/vnf/austinov/run-bole-model131repair11-MAIN-NEW24H_001/cpu-preflight/OWNED.json",
+          "sha256": "44d2acd87044373e8b66d1f25a14193579ccf13a275db47434fa4a5d9b4495d0"
+        },
+        "state": {
+          "Dead": false,
+          "Error": "",
+          "ExitCode": 137,
+          "FinishedAt": "2026-10-17T02:25:17.69008965Z",
+          "OOMKilled": false,
+          "Paused": false,
+          "Pid": 0,
+          "Restarting": false,
+          "Running": false,
+          "StartedAt": "2026-10-17T02:24:07.45068221Z",
+          "Status": "exited"
+        }
+      },
+      "dense": {
+        "cid": "28abb930abf2e3287605466540f43b7a45386b7949426302a0b3ce53ec4fe222",
+        "cleanup_errors": [],
+        "cleanup_ref": {
+          "bytes": 10781,
+          "path": "/opt/host/vnf/austinov/run-bole-model131repair11-MAIN-NEW24H_001/dense/cleanup.json",
+          "sha256": "ecabbe689c44e1cb101598b83f7c27ebc1d5ca09b2d591c319f87fa169f1544f"
+        },
+        "execids": null,
+        "owned_ref": {
+          "bytes": 25557,
+          "path": "/opt/host/vnf/austinov/run-bole-model131repair11-MAIN-NEW24H_001/dense/OWNED.json",
+          "sha256": "8097f95d7ac7d3bc2686534141414522179927b28aea8b9b1b16fc47bb66644e"
+        },
+        "state": {
+          "Dead": false,
+          "Error": "",
+          "ExitCode": 137,
+          "FinishedAt": "2026-10-17T02:33:20.40892397Z",
+          "OOMKilled": false,
+          "Paused": false,
+          "Pid": 0,
+          "Restarting": false,
+          "Running": false,
+          "StartedAt": "2026-10-17T02:26:14.52106228Z",
+          "Status": "exited"
+        }
+      }
+    },
+    "source_unchanged": true
+  },
+  "latest_storage_seal_independent_validation": {
+    "operation": "exec-0000000000001147",
+    "independent_readonly_validation_pass": true,
+    "old_1143_failure_preserved": true,
+    "evidence_ref": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence-R6-N16-N160-model-snapshots-MAIN-R2-001/EVIDENCE.json",
+      "bytes": 9121,
+      "sha256": "4c8698817d5cdf9b15556293bb3950b137990ad4b0c223ae03de53950f922ead"
+    },
+    "elapsed": 287.22516023996286,
+    "numeric_qualified": false,
+    "NPU": false,
+    "result": "existing capture independently validated, original1143 FAIL retained, capture not repeated",
+    "new_model_budget_admitted": false,
+    "source": {
+      "bytes": 4790,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-r6-n16-n160-overlay-new24h-v1-20261017-001-repair2/SOURCE_MANIFEST.json",
+      "sha256": "4f5ed204581d5d5bdd7b2f6d88294bc9d23875099153b88dabd190cfd08dcf64"
+    }
+  },
+  "latest_prepared_firstdecode_payload": {
+    "source": {
+      "bytes": 15887,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-selected-firstdecode-new24h-20261017-001-repair2/SOURCE_MANIFEST.json",
+      "sha256": "850d9117399c9f749c8292b964be952569b2c59bd05e26d9a60afb653819fe8b"
+    },
+    "actual_deployed": true,
+    "software_only": true,
+    "actual_model_qualified": false,
+    "critical_fixes": [
+      "scoped tiny import namespace restored",
+      "source-proved numerical loader order",
+      "exact actual identity+alias+nested mount contract",
+      "allocated7.5x4 P30 + combined opt2 within32"
+    ],
+    "independent_byte_audit_operation": "exec-0000000000001157",
+    "independent_byte_audit_passed": true,
+    "checked_own_files": 28,
+    "resource_owner_admitted": false
+  },
+  "previous_BOLE_R12": {
+    "operation": "exec-0000000000001154",
+    "exit_code": 3,
+    "source": {
+      "bytes": 49353,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair12/SOURCE_BOUND.json",
+      "sha256": "ca3db72dca0a2bea6e69547f198c18c0781a3918c85e9071b4ba88cf87aff9bf"
+    },
+    "output": "/opt/host/vnf/austinov/run-bole-model131repair12-MAIN-NEW24H_001",
+    "elapsed_seconds": 554.5293529600021,
+    "cleanup_seconds": 32.90146854997147,
+    "owner_primary": "ValueError('AICore/HBM idle baseline unchanged')",
+    "secondary": [],
+    "first_worker_utc": "2026-10-17T03:01:28Z",
+    "first_worker_failure": "native_logits.canonical raw finite FP32 native vocabulary logits before sampler",
+    "cause_subcondition_not_yet_proven": true,
+    "four_model_calibration_abi": [
+      {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair12-MAIN-NEW24H_001/dense/receipts/CONV-MODEL-CALIBRATION-RANK-0/ABI.json",
+        "bytes": 16074,
+        "sha256": "6e4727e4328a92c25b6612478ae189b76d6f4a14f7d1b2a10bc8126d04001955"
+      },
+      {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair12-MAIN-NEW24H_001/dense/receipts/CONV-MODEL-CALIBRATION-RANK-1/ABI.json",
+        "bytes": 16074,
+        "sha256": "70781e5597f68dbb7e760f90f9b8605a677be6f4930e08fb2f765e1fd4691597"
+      },
+      {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair12-MAIN-NEW24H_001/dense/receipts/CONV-MODEL-CALIBRATION-RANK-2/ABI.json",
+        "bytes": 16074,
+        "sha256": "7befb215e481d4a87c96f28dd49dbe7b936c1dfeac157e555f5b4c2befe42390"
+      },
+      {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair12-MAIN-NEW24H_001/dense/receipts/CONV-MODEL-CALIBRATION-RANK-3/ABI.json",
+        "bytes": 16074,
+        "sha256": "14d6fbdfd2e145ab1773593ebe2cbf515291d78e49e2455c59e170ac066b917c"
+      }
+    ],
+    "each_rank_raw_files": 24,
+    "independent_calibration_consumer_pending": true,
+    "no_tree_records": true,
+    "independent_exact_release_operation": "exec-000000000000116b",
+    "independent_release": [
+      {
+        "arm": "cpu-preflight",
+        "cid": "f1b580682f3a4654ad1a44ff75e8eb3d9b360965c1e5417ba00c95b2cb83c6e5",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 137,
+          "Error": "",
+          "StartedAt": "2026-10-17T02:52:34.59448617Z",
+          "FinishedAt": "2026-10-17T02:53:45.84210877Z"
+        },
+        "execIDs": null,
+        "cleanup_errors": []
+      },
+      {
+        "arm": "dense",
+        "cid": "c9b7d3fab27851e89abd280c910d3deadbc969c7e6ab6ff6967b04f4657dfcdf",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 137,
+          "Error": "",
+          "StartedAt": "2026-10-17T02:54:52.28629418Z",
+          "FinishedAt": "2026-10-17T03:01:45.45737012Z"
+        },
+        "execIDs": null,
+        "cleanup_errors": []
+      }
+    ],
+    "NPU_snapshot_utc": "2026-10-17T03:06:52.807327+00:00",
+    "model_numeric_qualified": false,
+    "performance_passed": false,
+    "task_accuracy_passed": false
+  },
+  "previous_DL_R18_bind": {
+    "operation": "exec-000000000000116a",
+    "exit": 1,
+    "durationMs": 284892,
+    "stderr": "Traceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-new24h-v1-101-repair18-20261017-001/bind_source.py\", line 46, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-new24h-v1-101-repair18-20261017-001/bind_source.py\", line 28, in main\n    m['firstdecode_contract']['closed_readset']=F.bind_closed(O,m['firstdecode_contract'])\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-new24h-v1-101-repair18-20261017-001/firstdecode_refs.py\", line 18, in bind_closed\n    value=seal.readset(contract['closed_evidence_ref'],ss)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-r6-n16-n160-overlay-new24h-v1-20261017-001-repair2/capture_closed2.py\", line 151, in readset\n    e,proof=validate(er,sr);K,m=canonical(sr);bound=K.read(SOURCE)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-r6-n16-n160-overlay-new24h-v1-20261017-001-repair2/capture_closed2.py\", line 148, in validate\n    need(K.inspect_all()==e['states_before']==e['states_after'],'fresh exactCID independently stopped');K.no_writers();need(inventory(ROOT,OUT)==inv1,'fresh complete fullP stable throughout validation');need(latest(K)==BASE and time.time()<1792220533,'ledger/cutoff stable through final verification');return e,proof\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-r6-n16-n160-overlay-new24h-v1-20261017-001-repair2/canonical119.py#two-leaves\", line 50, in no_writers\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-r6-n16-n160-overlay-new24h-v1-20261017-001-repair2/canonical119.py#two-leaves\", line 12, in need\nValueError: original088 command still active\n",
+    "no_NPU": true,
+    "source_template": {
+      "bytes": 226639,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-new24h-v1-101-repair18-20261017-001/SOURCE_TEMPLATE.json",
+      "sha256": "87c5ed0c880f07ad03f6284ba6190e7bebc47c324dbbfac6d143467fd3b9942d"
+    },
+    "source_manifest_published": false,
+    "precise_observation": "original canonical no_writers scans retained-leaf substrings inside JSON argv; R18 bridge-owner Ref token necessarily matches",
+    "sole_process_cause_not_independently_recorded": true,
+    "no_NPU_load_started": true
   }
 }

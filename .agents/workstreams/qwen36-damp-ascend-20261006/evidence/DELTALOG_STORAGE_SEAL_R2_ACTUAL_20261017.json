@@ -1,0 +1,39 @@
+{
+  "schema": "ascend.deltalog-seal-r2-actual-stage/v1",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-r6-n16-n160-overlay-new24h-v1-20261017-001-repair2/SOURCE_MANIFEST.json",
+    "bytes": 4790,
+    "sha256": "4f5ed204581d5d5bdd7b2f6d88294bc9d23875099153b88dabd190cfd08dcf64"
+  },
+  "capture_attempt": {
+    "operation": "exec-0000000000001143",
+    "whole_seconds": 600,
+    "exit_code": 1,
+    "capture_completed": true,
+    "validation_timed_out_in_remaining_budget": true,
+    "failed_attempt_retained": true,
+    "no_capture_retry": true
+  },
+  "independent_read_only_validation": {
+    "operation": "exec-0000000000001147",
+    "independent_readonly_validation_pass": true,
+    "old_1143_failure_preserved": true,
+    "evidence_ref": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence-R6-N16-N160-model-snapshots-MAIN-R2-001/EVIDENCE.json",
+      "bytes": 9121,
+      "sha256": "4c8698817d5cdf9b15556293bb3950b137990ad4b0c223ae03de53950f922ead"
+    },
+    "elapsed": 287.22516023996286,
+    "numeric_qualified": false,
+    "NPU": false
+  },
+  "later_R18_binding_failure": {
+    "operation": "exec-000000000000116a",
+    "exit": 1,
+    "durationMs": 284892,
+    "stderr": "Traceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-new24h-v1-101-repair18-20261017-001/bind_source.py\", line 46, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-new24h-v1-101-repair18-20261017-001/bind_source.py\", line 28, in main\n    m['firstdecode_contract']['closed_readset']=F.bind_closed(O,m['firstdecode_contract'])\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-new24h-v1-101-repair18-20261017-001/firstdecode_refs.py\", line 18, in bind_closed\n    value=seal.readset(contract['closed_evidence_ref'],ss)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-r6-n16-n160-overlay-new24h-v1-20261017-001-repair2/capture_closed2.py\", line 151, in readset\n    e,proof=validate(er,sr);K,m=canonical(sr);bound=K.read(SOURCE)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-r6-n16-n160-overlay-new24h-v1-20261017-001-repair2/capture_closed2.py\", line 148, in validate\n    need(K.inspect_all()==e['states_before']==e['states_after'],'fresh exactCID independently stopped');K.no_writers();need(inventory(ROOT,OUT)==inv1,'fresh complete fullP stable throughout validation');need(latest(K)==BASE and time.time()<1792220533,'ledger/cutoff stable through final verification');return e,proof\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-r6-n16-n160-overlay-new24h-v1-20261017-001-repair2/canonical119.py#two-leaves\", line 50, in no_writers\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-r6-n16-n160-overlay-new24h-v1-20261017-001-repair2/canonical119.py#two-leaves\", line 12, in need\nValueError: original088 command still active\n",
+    "no_NPU": true
+  },
+  "numeric_qualified": false,
+  "NPU": false
+}
