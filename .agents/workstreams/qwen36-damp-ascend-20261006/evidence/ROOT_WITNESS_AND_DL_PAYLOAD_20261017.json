@@ -1,0 +1,365 @@
+{
+  "schema": "ascend.real-entry-and-immediate-boundary-stage/v1",
+  "recorded_at_utc": "2026-10-17 14:41 UTC",
+  "authority": "RENEW24H_AUTHORITY_20261017_084320.json",
+  "classification": "ACTUAL_ENTRY_PROGRESS_NOT_ACCEPTANCE",
+  "prior_goal_turn": "progress: actual1325 terminal identified reference-test mismatch; producer-consumer journal contract corrected/deployed; no algorithm rejection",
+  "DL1325": {
+    "operation": "exec-0000000000001325",
+    "exit": 1,
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R22repair1-main-NEW24H_FIRSTDECODE101R22repair1_001/RESULT.json",
+      "bytes": 31213,
+      "sha256": "f784a124c065a4ad9d44e2dc4ad8506d3ab225e85c6ebdc75df7b092d573615d"
+    },
+    "payload_software": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R22repair1-main-NEW24H_FIRSTDECODE101R22repair1_001/cpu-preflight/PAYLOAD-SOFTWARE.json",
+      "bytes": 5575,
+      "sha256": "9c96481d88ca92d2f83e9ecbd0c30da00be70b8af705134094b96f3f45e8f407"
+    },
+    "payload_cases": {
+      "total": 22,
+      "passed": 21,
+      "failed": 1,
+      "fault": "test expects stable inode/size/time while legitimate final SHA/stable identity rejection was raised"
+    },
+    "full174_executed": false,
+    "model_NPU_started": false,
+    "source_unchanged": true,
+    "secondary": [],
+    "independent_release": {
+      "operation": "exec-000000000000133b",
+      "CPU": {
+        "cid": "03aa7c4db91fa43ca71fc3f458de28a263128b599e186d8e3bd22de7b410ec80",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 137,
+          "Error": "",
+          "StartedAt": "2026-10-17T13:29:17.80195169Z",
+          "FinishedAt": "2026-10-17T13:30:01.03625042Z"
+        },
+        "ExecIDs": null,
+        "Devices": []
+      },
+      "payload_leaf": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/first-real-decode-model-snapshots-renew24h-R22repair1-20261017-001",
+        "exists": true,
+        "entries": []
+      },
+      "journal": {
+        "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/MODEL_SNAPSHOTS_LEDGER.R22repair1.json",
+        "bytes": 7751,
+        "sha256": "007f37078aef0853b87a204c2255de4cfe2ed19760a05244f5b6858ae885e3dc"
+      }
+    },
+    "repair": "new payload tests and original owner cold-loader/source handoffs in preparation, no unchanged retry"
+  },
+  "BOLE": {
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001/SOURCE_BOUND.json",
+      "bytes": 64216,
+      "sha256": "b709ae8ba74977ab7e1db27c1c597ad864b47ae3565e424db0162670947d1344"
+    },
+    "template": {
+      "bytes": 69627,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001/SOURCE_TEMPLATE.json",
+      "sha256": "e21d354ce93d1cbba2cd2a8db147861b38cae956efa7677fa5f68b574af18938"
+    },
+    "actual_deployment": {
+      "copy": 156,
+      "patch_parts": 26,
+      "delivery_SHA_AST": 178,
+      "sourceaudit_exit": 0,
+      "operation": "exec-000000000000133a"
+    },
+    "actual_sameimage": {
+      "operation": "exec-000000000000133d",
+      "result": {
+        "path": "/opt/host/vnf/austinov/run-bole-root-repeat-witness-20261017-001-CPU-MAIN-NEW24H_001/RESULT.json",
+        "bytes": 111794,
+        "sha256": "a964e1aceeddcd3ca5f0e517532b4e5b97b3d1813b270968c837460df76562be"
+      },
+      "tests": 116,
+      "passed": 116,
+      "skipped": 0,
+      "elapsed_tests_seconds": 6.392,
+      "native_parser": {
+        "bytes": 5561,
+        "path": "/opt/host/vnf/austinov/run-bole-root-repeat-witness-20261017-001-CPU-MAIN-NEW24H_001/cpu-preflight/CPU.json",
+        "sha256": "e0cc570cbeb63a807db0c38b4168e37bd96fa4e5caa6b79cad53021db9bfb5c3"
+      },
+      "weights_or_NPU": false
+    },
+    "CPU_release": {
+      "cid": "b57b8037e2068e9ea2a033a56f05650510469c4f94129b5e3aec11a3ee43c0ba",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 137,
+        "Error": "",
+        "StartedAt": "2026-10-17T13:47:45.83704726Z",
+        "FinishedAt": "2026-10-17T13:49:02.08643681Z"
+      },
+      "ExecIDs": null,
+      "Devices": []
+    },
+    "current_model": {
+      "operation": "exec-0000000000001341",
+      "state": "TERMINAL_FAIL_BEFORE_ROOT_WITNESSES",
+      "CID": "b5c11b3ecd9cb700fb21a5ac96291b3807474c26f1d276de3621ff19ab2917a5",
+      "devices": [
+        {
+          "PathOnHost": "/dev/davinci4",
+          "PathInContainer": "/dev/davinci0",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/davinci5",
+          "PathInContainer": "/dev/davinci1",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/davinci6",
+          "PathInContainer": "/dev/davinci2",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/davinci7",
+          "PathInContainer": "/dev/davinci3",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/davinci_manager",
+          "PathInContainer": "/dev/davinci_manager",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/devmm_svm",
+          "PathInContainer": "/dev/devmm_svm",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/hisi_hdc",
+          "PathInContainer": "/dev/hisi_hdc",
+          "CgroupPermissions": "rwm"
+        }
+      ],
+      "guest_memory_bytes": 34359738368,
+      "guest_NanoCpus": 4000000000,
+      "guest_cpuset": "0,1,2,3",
+      "readonly_rootfs": true,
+      "all4_tiny_canary": true,
+      "mathematical_qualified": false,
+      "performance_result": null,
+      "task_accuracy": null,
+      "result": {
+        "path": "/opt/host/vnf/austinov/run-bole-root-repeat-witness-20261017-001-MAIN-NEW24H_001/RESULT.json",
+        "bytes": 113340,
+        "sha256": "6845eebbdef77e224d84e3a7828a40a24a0c32a9d7ac0a8879decbe32f1966be"
+      },
+      "exit": 3,
+      "all4_primary": "exact active native class/receiver/code/globals/source AscendGatedDeltaNetAttention",
+      "root_witness_entered": false,
+      "all_released_verified_by": "exec-0000000000001349"
+    },
+    "scope": "Original 4 native root-left/root-right forwards and original math gates unchanged; immediate owning boundary/clone-lifetime diagnostic; tracing may perturb, unreproduced difference is inconclusive",
+    "known_copy_repair1": {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair1/SOURCE_BOUND.json",
+        "bytes": 67980,
+        "sha256": "213b2191654f62fa955b059e97367f2c9900da7383e016bab4ae4046e9146bdb"
+      },
+      "byte_AST_verified_runtime_leaves": 183,
+      "sameimage_CPU": {
+        "operation": "exec-0000000000001379",
+        "result": {
+          "path": "/opt/host/vnf/austinov/run-bole-root-repeat-witness-repair1-20261017-001-CPU-MAIN-NEW24H_001/RESULT.json",
+          "bytes": 116311,
+          "sha256": "6cf5728ee732ffccf7a92b148a342664f93d562a1f4bfbdc9dd0412e8340ddb2"
+        },
+        "total": 119,
+        "passed": 118,
+        "errors": 1,
+        "skipped": 0,
+        "source_unchanged": true,
+        "secondary": [],
+        "NPU": false,
+        "diagnosis_pending": "underlying_body code-compile difference; do not remove guard"
+      }
+    }
+  },
+  "queue": {
+    "CURRENT": "DeltaLog137d",
+    "NEXT": "BOLE discriminating3.12 identity diagnostic",
+    "BACKUP": "DeltaLog lifecycle/C16 source-only pending real firstdecode qualification"
+  },
+  "acceptance": {
+    "new_nonHYPIC": false,
+    "three_pairs_ge10percent": false,
+    "GSM8K_HumanEval_MMLU": false
+  },
+  "utilization_30min": "unmeasured; isolated snapshots do not prove no gaps",
+  "source_archive": {
+    "operation": "exec-000000000000134c",
+    "path": "projects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017",
+    "files": 188,
+    "bytes": 3017914,
+    "sha_verified": true,
+    "scope": "original witness and DL postinputR2 only; successors external retained"
+  },
+  "DL_R23": {
+    "deployment": {
+      "copy": 208,
+      "patch_parts": 44,
+      "byte_AST": 244
+    },
+    "actual_early": {
+      "owner_ref": {
+        "path": "/opt/host/vnf/austinov/run-dl-R23payloadcontract-early-software-MAIN-RENEW24H_001/software/consumer/RESULT.json",
+        "bytes": 893,
+        "sha256": "bdb212dab261ac5b256b2d8eb0da20abc44e71d7dcb3eee16fc38c1213ed9506"
+      },
+      "owner": {
+        "Devices": [],
+        "NPU": false,
+        "cid": "545135c7ee4c1b8e488d80cc92292d4c026a385caa97a3ebb6436483a9b8be5d",
+        "elapsed": 27.607172770018224,
+        "numeric_owner": null,
+        "primary": null,
+        "qualified": false,
+        "resource_release_verified": true,
+        "schema": "deltalog.prebind-software-owned/v22",
+        "secondary": [],
+        "source": {
+          "bytes": 2910,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-23-payload-contract/SOURCE_MANIFEST.json",
+          "sha256": "caafa83499eda6c7147c8600821c995794146280b417d1f22d64a6e555fcf623"
+        },
+        "stage_ref": null,
+        "stage_result": {
+          "bytes": 1285,
+          "path": "/opt/host/vnf/austinov/run-dl-R23payloadcontract-early-software-MAIN-RENEW24H_001/software/consumer/ATTRIBUTION.json",
+          "sha256": "b9f66983f2a26beb41c651132067a41a2d3443ee7158c25aba4eec2dcb6eb2cc"
+        },
+        "stopped_retained": true,
+        "used_bytes": 28460559,
+        "whole_elapsed": 28.930877150036395
+      },
+      "attribution": {
+        "Devices": [],
+        "NPU": false,
+        "model_source_created": false,
+        "model_template": {
+          "bytes": 257617,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair23-payload-contract-20261017-001/SOURCE_TEMPLATE.json",
+          "sha256": "620b0941bc85a6736348f5d95073af287ddcebbfc8fb343dd7fb91d6c045dad6"
+        },
+        "payload_source": {
+          "bytes": 18758,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-selected-firstdecode-renew24h-20261017-001-test-contract-repair1/SOURCE_MANIFEST.json",
+          "sha256": "91f89a435b47a40f25b97d3a6852e45f2fdb29909a5c70f20be9b1a91868c81c"
+        },
+        "payload_terminal_ref": {
+          "bytes": 4748,
+          "path": "/adakv-results/PAYLOAD_TERMINAL.json",
+          "sha256": "dcae2febcba4d7c00e9f90ba44d1d6e4431a3d281b14ce1a98755617c95f5cc0"
+        },
+        "primary": null,
+        "qualified": false,
+        "schema": "deltalog.prebind-software-owned-complete/v22",
+        "software_ref": {
+          "bytes": 27341,
+          "path": "/adakv-results/SOFTWARE.json",
+          "sha256": "1e0d5adb93ceed1c9d985f5ddfa7d8a1a0ca9bf6f39f99b261ef90d8ff3b2079"
+        },
+        "source": {
+          "bytes": 2910,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-23-payload-contract/SOURCE_MANIFEST.json",
+          "sha256": "caafa83499eda6c7147c8600821c995794146280b417d1f22d64a6e555fcf623"
+        }
+      },
+      "software_summary": {
+        "discovered": 176,
+        "executed": 176,
+        "original_discovered": 178,
+        "full_suite_pass": true,
+        "primary": null,
+        "skipped": 0,
+        "deferred_to_original_model_cpu": [
+          "test_actual017_binding.ActualBinding.test_real_template_original017_adapt_and_private_bind",
+          "test_overlay.Tests.test_allcold_and_actual_namespace"
+        ]
+      },
+      "payload_summary": {
+        "source": {
+          "bytes": 18758,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-selected-firstdecode-renew24h-20261017-001-test-contract-repair1/SOURCE_MANIFEST.json",
+          "sha256": "91f89a435b47a40f25b97d3a6852e45f2fdb29909a5c70f20be9b1a91868c81c"
+        },
+        "exit": 0,
+        "timed_out": false,
+        "result": {
+          "NPU": false,
+          "count": 26,
+          "passed": true,
+          "qualification": false,
+          "schema": "deltalog.firstdecode-software/v1"
+        }
+      },
+      "current_release": {
+        "cid": "545135c7ee4c1b8e488d80cc92292d4c026a385caa97a3ebb6436483a9b8be5d",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2026-10-17T14:27:26.55973344Z",
+          "FinishedAt": "2026-10-17T14:27:52.3813801Z"
+        },
+        "devices": []
+      }
+    },
+    "actual_bound": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair23-payload-contract-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 308376,
+      "sha256": "9713c05ee501880a5ca49db0e2a279a4e2362fcbf9158b0be5cb9bdd2fcd01ed"
+    },
+    "bind_operation": "exec-0000000000001354",
+    "sourceaudit_operation": "exec-000000000000137c",
+    "current": {
+      "paper": "DeltaLog",
+      "operation": "exec-000000000000137d",
+      "state": "RUNNING actual owned firstdecode after payload26/prepared176 noSkip PASS; full178/NPU gates pending",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair23-payload-contract-20261017-001/SOURCE_MANIFEST.json",
+        "bytes": 308376,
+        "sha256": "9713c05ee501880a5ca49db0e2a279a4e2362fcbf9158b0be5cb9bdd2fcd01ed"
+      },
+      "output": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R23payloadcontract-main-NEW24H_FIRSTDECODE101R23payloadcontract_001",
+      "numeric_qualified": false,
+      "performance_qualified": false,
+      "task_qualified": false
+    }
+  },
+  "control_plane_errors": {
+    "absolute_patch_header": "BOLE step1 rejected/no edit; corrected only headers with inverse and before/after hashes",
+    "read_only_transport": "2 retryable timeouts, compressed244 independent projection passed; no NPU retry",
+    "overlong_report": "first failure projection truncated; compact bounded projection recovered, no experiment rerun"
+  }
+}

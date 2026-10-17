@@ -1,0 +1,27 @@
+{
+  "after": {
+    "bytes": 11686,
+    "sha256": "9f699539826de79ea31d126acff239def9ea04999876898b4250f2973d35f2f7"
+  },
+  "before": {
+    "bytes": 11336,
+    "sha256": "a5c68a46ac6b1f90960f0fc35070eefa8f3ef1c5b8354b0426033dd23b6e7338"
+  },
+  "edits": [
+    {
+      "after": "   mark('model-smoke','rank-receipt-read');receiptroot=ctl.out/'receipts';ranks=[];calibration_readset=[]\n",
+      "before": "   mark('model-smoke','rank-receipt-read');receiptroot=ctl.out/'receipts';ranks=[]\n",
+      "count": 1
+    },
+    {
+      "after": "    import model_calibration131r12 as MC\n    MC.own_module(C,m,MC)\n    oldabi=C.obj(m['actual118c']['capture'])['actual_device_abi_ref']\n    cv=MC.validate(C,rv['model_calibration_ref'],oldabi,sr,rank)\n    calibration_readset.extend([rv['model_calibration_ref'],*cv['rows'],*cv['before']])\n",
+      "before": "",
+      "count": 1
+    },
+    {
+      "after": "   extra.extend(calibration_readset)\n",
+      "before": "",
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "contract090.py": {
+    "after": {
+      "bytes": 3522,
+      "sha256": "a46f2665b2369fcfbec12f1b56300da540aec51db25317a87952d626d701be61"
+    },
+    "before": {
+      "bytes": 2408,
+      "sha256": "ffc060df9ed089e06aac85d3532b1ba86fa95f1b1480c8e8287447e47b515050"
+    },
+    "edits": [
+      {
+        "after": "OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001'\nCPU_OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model131repair16-CPU-MAIN-NEW24H_001'\n",
+        "before": "OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model131repair15-MAIN-NEW24H_001'\nCPU_OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model131repair15-CPU-MAIN-NEW24H_001'\n"
+      },
+      {
+        "after": " need(m['cache_memory_config']==dict(gpu_memory_utilization=0.8,kv_cache_memory_bytes=None,num_gpu_blocks_override=None),'one common utilization-only memory profile')\n",
+        "before": ""
+      },
+      {
+        "after": " need(args.count('--gpu-memory-utilization')==1 and args[args.index('--gpu-memory-utilization')+1]=='0.9','exact original common cache utilization0.9')\n args[args.index('--gpu-memory-utilization')+1]='0.8'\n",
+        "before": ""
+      },
+      {
+        "after": "\n\ndef cache_memory_config(argv,m,*,args=None,engine=None):\n expected=dict(gpu_memory_utilization=0.8,kv_cache_memory_bytes=None,num_gpu_blocks_override=None)\n need(type(argv)is list and argv.count('--gpu-memory-utilization')==1,'one actual common utilization parameter')\n need(argv[argv.index('--gpu-memory-utilization')+1]=='0.8' and '--kv-cache-memory-bytes'not in argv and '--num-gpu-blocks-override'not in argv,'utilization-only change; no KVbytes/override stacking')\n need(m['cache_memory_config']==expected,'same source and actual argv cache budget')\n for value in(args,engine):\n  if value is not None:need({key:getattr(value,key)for key in expected}==expected,'actual parser and EngineArgs same common cache budget')\n return expected\n",
+        "before": ""
+      }
+    ]
+  },
+  "owned_substrate.py": {
+    "after": {
+      "bytes": 3518,
+      "sha256": "1981b995083f7298c46f2b983cc7b13b143943f93dab770dfda682b9342d835d"
+    },
+    "before": {
+      "bytes": 3518,
+      "sha256": "54cee89da256ab9f3e4ee99f816923162a93dc972e74346cad5652d46b41f78b"
+    },
+    "edits": [
+      {
+        "after": " S.PHASE=3600;S.CLEANUP=180;S.OWNER='bole-three-node131-repair16'\n",
+        "before": " S.PHASE=3600;S.CLEANUP=180;S.OWNER='bole-three-node131-repair15'\n"
+      }
+    ]
+  },
+  "preflight114.py": {
+    "after": {
+      "bytes": 4903,
+      "sha256": "dd350e30348d56f1b0ec0cf9c9ca4a794374f7574ec5797c6423bf407e12ba07"
+    },
+    "before": {
+      "bytes": 4795,
+      "sha256": "141881ab905fd24b248236c206ad68f859e9fc3952c2e197930bed1d066f15a4"
+    },
+    "edits": [
+      {
+        "after": " cache_memory=C.cache_memory_config(argv,m,args=args,engine=engine)\n",
+        "before": ""
+      },
+      {
+        "after": " return dict(schema='bole.actual-devicefree-native-MTP-parser/v114',source=sr,Devices=[],NPU=False,pass_preflight=True,native_runtime_parser_checked=True,registry_arch_enumerated=True,registry_class_imported=False,model_config_constructed=False,full_engine_config_constructed=False,weights_loaded=False,BOLE=False,argv=argv,actual_speculative_config=expected,actual_cache_memory_config=cache_memory,installed_sources=sources,actual_FIA_dispatch_schema=fia,api_source=C.ref(p),lazy_registry=dict(module=row.module_name,cls=row.class_name),checkpoint_index_ref=m['checkpoint_index_ref'],checkpoint_config_ref=m['checkpoint_config_ref'],actual_checkpoint_mtp_names=names,torch_NPU_initialized=False,next_required='original owned TP4 canary then actual ModelConfig/QwenMTP class/weights load; CPU lazy registry is not runtime class proof')\n",
+        "before": " return dict(schema='bole.actual-devicefree-native-MTP-parser/v114',source=sr,Devices=[],NPU=False,pass_preflight=True,native_runtime_parser_checked=True,registry_arch_enumerated=True,registry_class_imported=False,model_config_constructed=False,full_engine_config_constructed=False,weights_loaded=False,BOLE=False,argv=argv,actual_speculative_config=expected,installed_sources=sources,actual_FIA_dispatch_schema=fia,api_source=C.ref(p),lazy_registry=dict(module=row.module_name,cls=row.class_name),checkpoint_index_ref=m['checkpoint_index_ref'],checkpoint_config_ref=m['checkpoint_config_ref'],actual_checkpoint_mtp_names=names,torch_NPU_initialized=False,next_required='original owned TP4 canary then actual ModelConfig/QwenMTP class/weights load; CPU lazy registry is not runtime class proof')\n"
+      }
+    ]
+  },
+  "server090.py": {
+    "after": {
+      "bytes": 2163,
+      "sha256": "9c0230421cf78eb450ef0dea97b18cfb8cf8817bc4e7389012e93503456de46e"
+    },
+    "before": {
+      "bytes": 2104,
+      "sha256": "e906cd7b6b3ce675a9ca9f1b47e53ae87535775623e4a1483e14917dd131cc5c"
+    },
+    "edits": [
+      {
+        "after": " sr=json.loads(a.source_ref);m=C.source(sr)\n",
+        "before": " sr=json.loads(a.source_ref);C.source(sr)\n"
+      },
+      {
+        "after": " args=C.server_command();C.write(a.receipt_root/'SERVER_COMMAND.json',dict(source=sr,argv=args,BOLE_diagnostic=True,native_MTP=True,num_speculative_tokens=8,actual_cache_memory_config=C.cache_memory_config(args,m),scheduler_committed=False,model_ready=False))\n",
+        "before": " args=C.server_command();C.write(a.receipt_root/'SERVER_COMMAND.json',dict(source=sr,argv=args,BOLE_diagnostic=True,native_MTP=True,num_speculative_tokens=8,scheduler_committed=False,model_ready=False))\n"
+      }
+    ]
+  }
+}

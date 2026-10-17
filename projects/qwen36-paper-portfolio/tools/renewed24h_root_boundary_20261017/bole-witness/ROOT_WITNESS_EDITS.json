@@ -1,0 +1,114 @@
+{
+  "consume_model.py": {
+    "after": {
+      "bytes": 10031,
+      "sha256": "d43a8ada93bf094a5af7af7adeff21d4c507759ebf582268a6379b37fc9b6475"
+    },
+    "before": {
+      "bytes": 9701,
+      "sha256": "d52f8a122c8de32d87df730ce3a8c4de6d84d870cf754b4e66aa83592b9c6e29"
+    },
+    "edits": [
+      {
+        "after": "  import root_repeat_consumer as ROOT\n  C.need(C.ref(ROOT.__file__)==m['files']['root_repeat_consumer.py'],'exact independent root witness reader')\n  root_report=ROOT.consume(t,raw,m)\n  root_ref=C.write(out/('ROOT-REPEAT-RANK-%d.json'%expected),dict(source=sr,raw=pair['raw'],report=root_report))\n",
+        "before": ""
+      },
+      {
+        "after": "  vector_ref=C.ref(path);r=C.write(out/('RANK-%d.json'%expected),dict(source=sr,receipt=pair['receipt'],raw=pair['raw'],report=report,vectors=vector_ref,root_repeat_attribution=root_ref))\n",
+        "before": "  vector_ref=C.ref(path);r=C.write(out/('RANK-%d.json'%expected),dict(source=sr,receipt=pair['receipt'],raw=pair['raw'],report=report,vectors=vector_ref))\n"
+      }
+    ]
+  },
+  "contract090.py": {
+    "after": {
+      "bytes": 3554,
+      "sha256": "ed1280da10e721fcf315cbbae1585a84f892f0f51d4a8f27a64fa4c25f0e0eb8"
+    },
+    "before": {
+      "bytes": 3522,
+      "sha256": "89807954368d322dba4a5586ba2706cc237e0a221134360d29bf4e42d8255ec4"
+    },
+    "edits": [
+      {
+        "after": "OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-root-repeat-witness-20261017-001-MAIN-NEW24H_001'\nCPU_OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-root-repeat-witness-20261017-001-CPU-MAIN-NEW24H_001'\n",
+        "before": "OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model131repair18-MAIN-NEW24H_001'\nCPU_OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model131repair18-CPU-MAIN-NEW24H_001'\n"
+      }
+    ]
+  },
+  "entry.py": {
+    "after": {
+      "bytes": 1439,
+      "sha256": "19a76122e3f63ebc16ce4a2779ecaed6bc94be8f421195b6dd59c6be7888cfaa"
+    },
+    "before": {
+      "bytes": 1359,
+      "sha256": "005ab28fcc8aecaeb9298796c3dd970203f8ad1a1b91698a3569ba3c6ef7d955"
+    },
+    "edits": [
+      {
+        "after": " import root_repeat_witness as RW\n RW.cpu_preflight(__import__('sourceio'),m,P)\n",
+        "before": ""
+      },
+      {
+        "after": "  r=unittest.TextTestRunner().run(s);return 0 if r.wasSuccessful()and r.testsRun==116 else 3\n",
+        "before": "  r=unittest.TextTestRunner().run(s);return 0 if r.wasSuccessful()and r.testsRun==108 else 3\n"
+      }
+    ]
+  },
+  "model_smoke.py": {
+    "after": {
+      "bytes": 14584,
+      "sha256": "0bd9d2058f95419c309dd254fefdee967e1064eeccf1e19015b950c996190aa1"
+    },
+    "before": {
+      "bytes": 14329,
+      "sha256": "0918573fe6bb84c153b0c8ee5ed243473db14a45a6298d29c846e5f430b0bec0"
+    },
+    "edits": [
+      {
+        "after": "    import root_repeat_witness as RW\n    E.need(C.ref(RW.__file__)==m['files']['root_repeat_witness.py'],'exact immediate-root observer source')\n    witness=RW.Witness(torch,C,b,owner,tokens)\n    with witness:\n     native=b.sequential_native_paths(owner,tokens,current_owner=current_owner)\n",
+        "before": "    native=b.sequential_native_paths(owner,tokens,current_owner=current_owner)\n"
+      },
+      {
+        "after": "      root_repeat_witness=witness.freeze(),\n",
+        "before": ""
+      }
+    ]
+  },
+  "owned_substrate.py": {
+    "after": {
+      "bytes": 3528,
+      "sha256": "c86ace109bba5aa533172a3a7adc60d0b25b80c81edffccf5715dc65c7ac7751"
+    },
+    "before": {
+      "bytes": 3518,
+      "sha256": "697ba24e628fb6330734a2ea6444e89429d856c2e4b3d42ae7f4292250d7c5cf"
+    },
+    "edits": [
+      {
+        "after": " S.PHASE=3600;S.CLEANUP=180;S.OWNER='bole-root-repeat-witness-20261017-001'\n",
+        "before": " S.PHASE=3600;S.CLEANUP=180;S.OWNER='bole-three-node131-repair18'\n"
+      }
+    ]
+  },
+  "test_cache_budget131r16.py": {
+    "after": {
+      "bytes": 6482,
+      "sha256": "00d1f7aff857199f95672cb62a094511fbd02b635a4f20f0be89ba61445b3d09"
+    },
+    "before": {
+      "bytes": 5969,
+      "sha256": "2614bb3248e49be505a4bb3f4abf43b0cf38ee156634ea3f7de0fc3cb823c7f1"
+    },
+    "edits": [
+      {
+        "after": "   outer=json.loads((P/'ROOT_WITNESS_EDITS.json').read_bytes())\n   if n in outer:\n    d=outer[n];self.assertEqual(hashlib.sha256(text.encode()).hexdigest(),d['after']['sha256'])\n    for e in reversed(d['edits']):\n     self.assertEqual(text.count(e['after']),1);text=text.replace(e['after'],e['before'])\n    self.assertEqual(hashlib.sha256(text.encode()).hexdigest(),d['before']['sha256'])\n",
+        "before": ""
+      },
+      {
+        "after": "   if n in old['files']:\n    outer=json.loads((P/'ROOT_WITNESS_EDITS.json').read_bytes())\n    actual=outer[n]['before']if n in outer else{k:m['files'][n][k]for k in('bytes','sha256')}\n    self.assertEqual(actual,{k:old['files'][n][k]for k in('bytes','sha256')})\n",
+        "before": "   if n in old['files']:self.assertEqual({k:m['files'][n][k]for k in('bytes','sha256')},{k:old['files'][n][k]for k in('bytes','sha256')})\n"
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "ascend.coherent-stage-checkpoint-validation/v1",
+  "recorded_at_utc": "2026-10-17 14:44 UTC",
+  "maintainer_skill_tree": {
+    "count": 20,
+    "exit": 0
+  },
+  "JSON_checked": 2,
+  "archived_Python_AST": 126,
+  "full_staged_diff_check": {
+    "exit": 2,
+    "raw_diagnostics": ".agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF_CURRENT_MODEL_FRONTDOORS_20261016.json:97: trailing whitespace.\n+  }, \nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/dependencies/original005_server_entry.py:23: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/evidence/original114_owned_substrate.py:62: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/evidence/runner.py:693: trailing whitespace.\n+        # On certain devices, CPU-side all_reduce may return dirty data. \nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/evidence/runner.py:1145: trailing whitespace.\n+        \nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/evidence/runner.py:1650: trailing whitespace.\n+        with torch.npu.stream(self.valid_sampled_token_count_copy_stream): \nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/evidence/runner.py:1971: trailing whitespace.\n+       \nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/evidence/runner.py:2002: trailing whitespace.\n+            # NOTE: This branch specifically triggers a deepcopy during the prefill phase \nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/evidence/runner.py:2003: trailing whitespace.\n+            # only for PCP (Parallel Context Processing) + Multi-Modal (MM) scenarios. \nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/evidence/runner.py:2004: trailing whitespace.\n+            # It does not affect other use cases. This is a temporary workaround and \nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/evidence/runner.py:2577: trailing whitespace.\n+        \nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/evidence/runner.py:3472: trailing whitespace.\n+        \nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/evidence/runner.py:3475: trailing whitespace.\n+        \nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/evidence/runner.py:3805: trailing whitespace.\n+        \nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/guest_canary.py:18: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/model_entry.py:422: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/owned_create.py:33: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/owned_substrate.py:64: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/renewed24h_root_boundary_20261017/bole-witness/worker_snapshot_owner.py:40: new blank line at EOF.\n",
+    "own_trailing_whitespace": "fixed by apply_patch; targeted recheck required",
+    "byte_preserved_source_exceptions": "Only original donor snapshots in renewed24h_root_boundary_20261017 may retain original whitespace/EOF; do not normalize SHA-pinned evidence"
+  },
+  "original_archive": {
+    "files": 188,
+    "bytes": 3017914,
+    "operation": "exec-000000000000134c",
+    "all_exact_sha_verified": true
+  },
+  "acceptance": false,
+  "current_model_operation": "exec-000000000000137d",
+  "milestone_6h": "No matched E2E yet; at-risk; retain two current algorithm paths and original cutoff"
+}

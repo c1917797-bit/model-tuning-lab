@@ -1,0 +1,234 @@
+{
+  "after_sha256": "76fb75505fb5ea7e7acbb2034d4310cc5826cc441716910dd94250d117a863b0",
+  "before_sha256": "d65deb7b60baf13c25960f34d3273c890d6541aa257556829d69f86d6ca2c562",
+  "edits": [
+    {
+      "new": "\nimport fa_prefill131r10\nimport layer_slots131r10",
+      "new_end": 448,
+      "new_start": 399,
+      "old": ""
+    },
+    {
+      "new": "frozen=layer_slots131r10.Binding(prefix,gid,slot,runner,request_id,request,groups[gid],block,tuple(physical),m,obj,tensor_id(obj.kv_cache[0]),tensor_id(obj.kv_cache[1]),length)\n   ",
+      "new_end": 3514,
+      "new_start": 3334,
+      "old": ""
+    },
+    {
+      "new": ",physical_slot=slot,slot_binding=frozen",
+      "new_end": 3632,
+      "new_start": 3593,
+      "old": ""
+    },
+    {
+      "new": "cod",
+      "new_end": 5316,
+      "new_start": 5313,
+      "old": ""
+    },
+    {
+      "new": "_source(C,obj.impl.resha",
+      "new_end": 5341,
+      "new_start": 5317,
+      "old": "x"
+    },
+    {
+      "new": "_and_",
+      "new_end": 5348,
+      "new_start": 5343,
+      "old": ""
+    },
+    {
+      "new": "ache,refs['ascend_at",
+      "new_end": 5369,
+      "new_start": 5349,
+      "old": ""
+    },
+    {
+      "new": "nt",
+      "new_end": 5373,
+      "new_start": 5371,
+      "old": "d=[phys"
+    },
+    {
+      "new": "on'",
+      "new_end": 5377,
+      "new_start": 5374,
+      "old": "cal[p//128"
+    },
+    {
+      "new": "",
+      "new_end": 5378,
+      "new_start": 5378,
+      "old": "*128+p%128 for p in range(length"
+    },
+    {
+      "new": "",
+      "new_end": 5379,
+      "new_start": 5379,
+      "old": "]"
+    },
+    {
+      "new": "code_source(C,block.get_device_te",
+      "new_end": 5416,
+      "new_start": 5383,
+      "old": ""
+    },
+    {
+      "new": "sor,r",
+      "new_end": 5422,
+      "new_start": 5417,
+      "old": ""
+    },
+    {
+      "new": "fs['block_tabl",
+      "new_end": 5437,
+      "new_start": 5423,
+      "old": ""
+    },
+    {
+      "new": "'])\n   fa_prefill131r10.mapping(torch,block,m,forwar",
+      "new_end": 5490,
+      "new_start": 5438,
+      "old": ""
+    },
+    {
+      "new": "_context,prefix,",
+      "new_end": 5507,
+      "new_start": 5491,
+      "old": "("
+    },
+    {
+      "new": "",
+      "new_end": 5519,
+      "new_start": 5519,
+      "old": " is not None and slot_mapping[:length].cpu().tolist()==expected and\n        m.slot_mapping[:length].cpu().tolist()==expected"
+    },
+    {
+      "new": "",
+      "new_end": 5520,
+      "new_start": 5520,
+      "old": " 'every real prefill KV destination matches "
+    },
+    {
+      "new": ",",
+      "new_end": 5529,
+      "new_start": 5528,
+      "old": " p"
+    },
+    {
+      "new": "llocated,len",
+      "new_end": 5542,
+      "new_start": 5530,
+      "old": ""
+    },
+    {
+      "new": "th,r",
+      "new_end": 5547,
+      "new_start": 5543,
+      "old": ""
+    },
+    {
+      "new": "ques",
+      "new_end": 5552,
+      "new_start": 5548,
+      "old": " "
+    },
+    {
+      "new": ".",
+      "new_end": 5554,
+      "new_start": 5553,
+      "old": "a"
+    },
+    {
+      "new": "ock_ids[gid]",
+      "new_end": 5568,
+      "new_start": 5556,
+      "old": "e'"
+    },
+    {
+      "new": ">",
+      "new_end": 6021,
+      "new_start": 6020,
+      "old": "="
+    },
+    {
+      "new": "ex",
+      "new_end": 6057,
+      "new_start": 6055,
+      "old": "s"
+    },
+    {
+      "new": "ct p",
+      "new_end": 6062,
+      "new_start": 6058,
+      "old": "m"
+    },
+    {
+      "new": "r-layer",
+      "new_end": 6070,
+      "new_start": 6063,
+      "old": "48"
+    },
+    {
+      "new": "group/physical-",
+      "new_end": 6090,
+      "new_start": 6075,
+      "old": ""
+    },
+    {
+      "new": "",
+      "new_end": 6094,
+      "new_start": 6094,
+      "old": ";"
+    },
+    {
+      "new": "bindin",
+      "new_end": 6101,
+      "new_start": 6095,
+      "old": "hetero"
+    },
+    {
+      "new": "",
+      "new_end": 6102,
+      "new_start": 6102,
+      "old": "eneou"
+    },
+    {
+      "new": "",
+      "new_end": 6103,
+      "new_start": 6103,
+      "old": " slots not guessed"
+    },
+    {
+      "new": "run",
+      "new_end": 6378,
+      "new_start": 6375,
+      "old": ""
+    },
+    {
+      "new": "r.input_batch.req_id_to_inde",
+      "new_end": 6408,
+      "new_start": 6380,
+      "old": ""
+    },
+    {
+      "new": "[reques",
+      "new_end": 6416,
+      "new_start": 6409,
+      "old": ""
+    },
+    {
+      "new": "_",
+      "new_end": 6418,
+      "new_start": 6417,
+      "old": "("
+    },
+    {
+      "new": "d]",
+      "new_end": 6421,
+      "new_start": 6419,
+      "old": "ter(slots))"
+    }
+  ]
+}

@@ -73,14 +73,56 @@
     "classification": "IMPLEMENTATION_VALIDATION_MEMORY_NOT_PAPER_NOGO",
     "successor": "R20 bounded streaming validation; unchanged512MiB/full metadata/no-writer/final fullhash"
   },
-  "recorded_at_utc": "2026-10-17 13:18:07 UTC",
+  "recorded_at_utc": "2026-10-17 14:41 UTC",
   "latest_entry_contracts_evidence": "evidence/ENTRY_CONTRACTS_AND_BOLE_FACTORS_20261017.json",
   "authority_file": "RENEW24H_AUTHORITY_20261017_084320.json",
   "original_cutoff_utc": "2026-10-17T07:02:13Z",
   "extension_used": 0,
   "extension_condition_met": false,
   "new_nonHYPIC_accepted_technology": false,
-  "current_owner": {"paper":"DeltaLog","state":"1325 running: original full174 CPU -> canary -> first real decode; actual current NPU stage not yet proved","operation":"exec-0000000000001325","source":{"path":"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair22-repair1-20261017-001/SOURCE_MANIFEST.json","bytes":280513,"sha256":"fe1605d6bc07185e1a37792daf3c73050b129833dbff763ff121b6a78d2585ec"},"stage_evidence":"evidence/ENTRY_CONTRACTS_AND_BOLE_FACTORS_20261017.json","numeric_qualified":false,"performance_qualified":false,"task_qualified":false},
+  "previous_owner_1325": {"paper":"DeltaLog","state":"terminal FAILED before model/NPU: payload22 tests 21PASS/1 expected-message contract mismatch; full174 not reached","operation":"exec-0000000000001325","source":{"path":"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair22-repair1-20261017-001/SOURCE_MANIFEST.json","bytes":280513,"sha256":"fe1605d6bc07185e1a37792daf3c73050b129833dbff763ff121b6a78d2585ec"},"stage_evidence":"evidence/ENTRY_CONTRACTS_AND_BOLE_FACTORS_20261017.json","numeric_qualified":false,"performance_qualified":false,"task_qualified":false,"terminal_result":{"path":"/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R22repair1-main-NEW24H_FIRSTDECODE101R22repair1_001/RESULT.json","bytes":31213,"sha256":"f784a124c065a4ad9d44e2dc4ad8506d3ab225e85c6ebdc75df7b092d573615d"},"independent_release":"exec-000000000000133b; sole CPU stopped/Pid0/noExec/noOOM/Devices[]; P empty","classification":"REFERENCE_TEST_CONTRACT_FAILURE_NOT_PAPER_NOGO"},
+  "current_owner": {
+    "paper": "DeltaLog",
+    "operation": "exec-000000000000137d",
+    "state": "RUNNING actual owned firstdecode after payload26/prepared176 noSkip PASS; full178/NPU gates pending",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair23-payload-contract-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 308376,
+      "sha256": "9713c05ee501880a5ca49db0e2a279a4e2362fcbf9158b0be5cb9bdd2fcd01ed"
+    },
+    "output": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R23payloadcontract-main-NEW24H_FIRSTDECODE101R23payloadcontract_001",
+    "numeric_qualified": false,
+    "performance_qualified": false,
+    "task_qualified": false
+  },
+  "previous_BOLE_1341": {
+    "operation": "exec-0000000000001341",
+    "exit": 3,
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-bole-root-repeat-witness-20261017-001-MAIN-NEW24H_001/RESULT.json",
+      "bytes": 113340,
+      "sha256": "6845eebbdef77e224d84e3a7828a40a24a0c32a9d7ac0a8879decbe32f1966be"
+    },
+    "all4_primary": "exact active native class/receiver/code/globals/source AscendGatedDeltaNetAttention",
+    "classification": "known method-copy identity adaptation defect before root witnesses, not paper failure",
+    "all_released_verified_by": "exec-0000000000001349",
+    "repair1_CPU": {
+      "operation": "exec-0000000000001379",
+      "result": {
+        "path": "/opt/host/vnf/austinov/run-bole-root-repeat-witness-repair1-20261017-001-CPU-MAIN-NEW24H_001/RESULT.json",
+        "bytes": 116311,
+        "sha256": "6cf5728ee732ffccf7a92b148a342664f93d562a1f4bfbdc9dd0412e8340ddb2"
+      },
+      "total": 119,
+      "passed": 118,
+      "errors": 1,
+      "skipped": 0,
+      "source_unchanged": true,
+      "secondary": [],
+      "NPU": false,
+      "diagnosis_pending": "underlying_body code-compile difference; do not remove guard"
+    }
+  },
   "previous_owner_1304": {
     "paper": "DeltaLog/BOLE",
     "state": "no live MAIN container: BOLE1304 terminal pre-operator import failure and independent exact CID release verified",
@@ -137,7 +179,7 @@
     "performance_qualified": false,
     "task_qualified": false
   },
-  "next_NPU": "Observe original1325; no overlapping TP4 job. BOLErepair2 real256calls plus independentconsumer complete; all four options same saved BF16 bits, same21/64 oracle failures. Do not repeat options; immediate-clone/root-path attribution next, not paper rejection. No paired performance/accuracy result.",
+  "next_NPU": "Observe same137d; no overlapping TP4. BOLE repair1 sameimage119 failed underlying_body before NPU, requires discriminating3.12 code-property evidence. No unchanged retry or matched E2E/task claim.",
   "last_model_result": {
     "ref": {
       "path": "/opt/host/vnf/austinov/run-bole-model131repair4-MAIN-NEW24H_001/RESULT.json",
@@ -199,9 +241,9 @@
     "cost_caution": "child_scope includes final fence; nested phases inclusive/nonadditive; actual cache state uncontrolled; selected estimate not full-run guarantee"
   },
   "parallel_preparation": {
-    "accuracy_input_repair": "Actual continuous owner/consumer assembly in progress; required actual successful firstdecode Ref remains null/HOLD, not old R21BOUND.",
-    "gdn_paper_reassessment": "New R22 software/measurement repair and early same-image gate; new-root BOLE authority contract repair. No self-admission.",
-    "ge_fullgdn_ready": "Actual default-OFF observer-free service adapter and external full-state equivalence prep. Short-scope qualification must not authorize40x1024."
+    "accuracy": "sameimage BOLE code-identity diagnosis, original failed source retained",
+    "ge": "R23 postINPUT collector16 local controls, actual INPUT absent",
+    "gdn": "multirow epoch/reset subpieces source-only, forwarding/install/graph still HOLD"
   },
   "git": {
     "local_commit": "4ce501abb460b5aaaa9969e48a274eb6d01f5111",
@@ -1578,16 +1620,15 @@
     "do_not_treat_partial_deployment_as_ready": true
   },
   "latest_BOLE_publication": {
-    "local_FINAL": "C:/Users/Huawei/AppData/Local/Temp/bole-single-publication-model-new24h-20261017-001-repair3-r14",
-    "status": "HOLD_KNOWN_FRONTDOOR_DEFECTS",
-    "missing_actual_successful_R14_plan": true,
-    "known_P1": [
-      "server environment lacks BOLE_SINGLE_PUBLICATION_ENABLE required by Session",
-      "preflight hardexpects num_speculative_tokens8 but publication config2",
-      "SERVER_COMMAND receipt still says8 instead of actual2"
-    ],
-    "R4_implementation_not_created": true,
-    "stopped_status_local": "C:/Users/Huawei/AppData/Local/Temp/bole-publication-repair4-STOPPED-20261017-001/STATUS.json",
+    "status": "R6_SOURCE_ONLY_HOLD_ACTUAL_SUCCESSFUL_R16_PREDECESSOR_MISSING",
+    "local_FINAL": "C:/Users/Huawei/AppData/Local/Temp/bole-single-publication-model-new24h-20261017-001-repair6-r16",
+    "template": {
+      "bytes": 126982,
+      "sha256": "95fe227519f6c1fec3c2a935070ee4d78eb74d54981268a2e9d93e03e75f72b2"
+    },
+    "R3_findings_superseded_by_source_audit": true,
+    "actual129_sameimage_not_proven": true,
+    "remote_deployment_not_verified": true,
     "all_runtime_qualifications": false
   },
   "main_connection_gap": {

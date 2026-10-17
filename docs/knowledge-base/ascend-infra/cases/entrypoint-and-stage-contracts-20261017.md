@@ -37,3 +37,15 @@ SOFTWARE.json：26492字节/SHA256 c88a907ee7dcc95bcc1be572a7675bec3d56dea71794e
 7. 软件通过仅推进到相关NPU门，NPU组件通过仅推进到整模型配对，不能跳到性能/精度结论。
 
 知识库有效性看同类故障是否在昂贵阶段前被拦截，以及到整模型验收的有效进展，不看条目数和审计次数。
+
+## 方法复制不是继承；源码编译上下文也是测试输入
+
+触发：适配 monkeypatch 的类/方法身份，或以 CodeType 对比实际装载函数。
+
+实际 BOLE1341 四个 worker 在 root witness 构造时拒绝，尚未进入新观测边界；原模型加载、health、原始保存并不构成数学通过。actual patch_qwen3_5 将 AscendGatedDeltaNetAttention.forward 复制给 QwenGatedDeltaNetAttention；两类直接继承同一个基类，并非彼此继承。原 isinstance(receiver, AscendClass) 是诊断代码适配缺陷，不能归为论文失效。修复须核对确切 target/receiver、四模块来源、赋值链、globals、原函数体及无 wrapper，不以泛 unwrap 或删身份门代替；逐谓词证据须在聚合拒绝之前持久化。
+
+后继 repair1 已实际同镜像执行119项：118通过、1错误、无跳过；失败为 test_gdn_copy_identity 的 underlying_body。原来源未变，secondary为空，未进入NPU。独立本地 bundled Python3.12.14 再现，而3.9不再现：从整模块抽取部分 ClassDef 后编译，可能丢失 import 参与的编译器优化上下文，生成不同 LOAD_GLOBAL/LOAD_ATTR；不能据此判断真实装载函数被篡改。该本地反证尚不是目标3.12.13修复验收。
+
+下一次不同做法：使用完整冻结源码编译得到的函数 CodeType，再配原 globals 构造软件 fixture；保留生产函数体身份检查。分别覆盖实际赋值链、错误 receiver/source/globals/body/wrapper 和不完整编译上下文反例；在目标解释器及同镜像执行真实 aggregate 入口。测试夹具通过不授予 worker/NPU/整模型资格，原失败结果必须保留。
+
+具体证据、来源与未完成项见工作流 evidence/ROOT_WITNESS_AND_DL_PAYLOAD_20261017.json。验证本条知识看修复是否保留生产身份门且相同反例能在昂贵模型加载前拦截；修复与真实worker验证仍是待完成项。

@@ -1,0 +1,85 @@
+{
+  "CPU": [
+    "/usr/bin/env",
+    "BOLE_MODEL131_MAIN_ENABLE=1",
+    "DENSE090_EXTERNAL_OUTPUT_ENABLE=1",
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001/host090.py",
+    "--execute",
+    "--cpu-only",
+    "--source-ref",
+    "<ACTUAL_SOURCE_BOUND_REF_JSON>",
+    "--output",
+    "/opt/host/vnf/austinov/run-bole-root-repeat-witness-20261017-001-CPU-MAIN-NEW24H_001"
+  ],
+  "NPU_authorized": false,
+  "Windows_directory_fsync_actual": false,
+  "Windows_proc_namespace_actual": false,
+  "bind": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001/bind_model.py",
+    "--execute",
+    "--reviewed-template-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001/SOURCE_TEMPLATE.json\",\"bytes\":69627,\"sha256\":\"e21d354ce93d1cbba2cd2a8db147861b38cae956efa7677fa5f68b574af18938\"}",
+    "--component-refs-json",
+    "<ACTUAL_112FULL72_AND_118TR1_SOURCE_NUMERIC_OWNER_CONSUMER_OWNER_OBJECT>"
+  ],
+  "cold": [
+    [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001/entry.py"
+    ],
+    [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001/entry.py",
+      "--source-audit"
+    ],
+    [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001/entry.py",
+      "--software"
+    ]
+  ],
+  "model": [
+    "/usr/bin/env",
+    "BOLE_MODEL131_MAIN_ENABLE=1",
+    "DENSE090_EXTERNAL_OUTPUT_ENABLE=1",
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001/host090.py",
+    "--execute",
+    "--source-ref",
+    "<ACTUAL_SOURCE_BOUND_REF_JSON>",
+    "--output",
+    "/opt/host/vnf/austinov/run-bole-root-repeat-witness-20261017-001-MAIN-NEW24H_001"
+  ],
+  "model_launch_available": true,
+  "qualification": false,
+  "required_sameimage_software_cases": 116,
+  "scope": "root-repeat-immediate-boundary-attribution-only",
+  "source": {
+    "bytes": 69627,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001/SOURCE_TEMPLATE.json",
+    "sha256": "e21d354ce93d1cbba2cd2a8db147861b38cae956efa7677fa5f68b574af18938"
+  },
+  "sourceaudit": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001/host090.py",
+    "--source-audit",
+    "--source-ref",
+    "<ACTUAL_SOURCE_BOUND_REF_JSON>"
+  ]
+}
