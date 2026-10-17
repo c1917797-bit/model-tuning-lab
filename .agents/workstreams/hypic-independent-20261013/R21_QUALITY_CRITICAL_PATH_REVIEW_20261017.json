@@ -1,0 +1,36 @@
+{
+  "schema": "hypic-quality-critical-path-review/v1",
+  "input_recheck": {
+    "operation": "exec-00000000000010d4",
+    "exit": 0,
+    "samples": 127,
+    "repetitions": 3,
+    "scored_per_arm": 381,
+    "public_segments": 126,
+    "input_sha256": "2f61c72fe1d8b3cb7f468e670674764e89a471da8ea229d07f3c87dff3d013c0",
+    "catalog_sha256": "fb13827a063b32df1131e17bf4b29ea008380d55ab0a2e7debe8a845e30ed792",
+    "generation": {
+      "max_tokens": 1024,
+      "temperature": 0,
+      "seed": 0,
+      "ignore_eos": false,
+      "enable_thinking": false
+    },
+    "ruler_sha256": "9c8cf4204964220acd31adc8a3f73332374f123e1b8681a522b33eff33504cc0",
+    "device_run": false
+  },
+  "contradiction": {
+    "old_contract": "QUALITY_R16_FULL_HYPIC_R2_CONTRACT.json protocol_notes.prerequisites requires complete performance gates",
+    "existing_integration_plan": "QUALITY_R16_BOOTSTRAP_INTEGRATION_PLAN_20261016.md says selected core freeze and catalog Canary, not arbitrary extra accuracy condition",
+    "resolution": "Prospective quality contracts must require source-bound selected-core catalog coverage and actual safety admission, not positive speed or completed12 performance matrix. Speed and task quality remain separate outcomes."
+  },
+  "next": [
+    "Keep exact currentG3 controller10cc; no paralleldevicejob or211boundchanges",
+    "Prepare new catalogCanary/fullquality manifests matching frozenR21C1/C2, preserving127x3/EOS/retry0/data/scorer",
+    "After current paired performance stage, source-bound catalogCanary then full pairedquality if resource/time admissible; no unverified historicalCanary substitution"
+  ],
+  "not_completed": [
+    "No new catalogueCanary/full381arm was started",
+    "R21 performance pair/lifecycle/Skill functional acceptance remain incomplete"
+  ]
+}
