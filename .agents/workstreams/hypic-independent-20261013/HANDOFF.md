@@ -1,4 +1,18 @@
-# CURRENT R21 G3 FULL40 PERFORMANCE LIVE
+# CURRENT R21 G3 FULL40 TERMINAL INDEPENDENT VALID; G1 NEXT
+
+10ccexit0/40responses; independent10fc PASS40/40same-stepfourrank48C1/16C2,
+2368C2finitegates/2560completionjoins,211sources,468cleanisolation,
+physicalPIDjoins/liveexactrelease. TPOT303.993810ms;TTFTP95390713.633260ms.
+R21_G3_R1_TERMINAL_20261017.json preservesrawSHA andinitial10fa strictportbind
+failure;10fbactualTCPempty/exactCIDabsent/physicalempty, unchanged10fcPASS,
+no modelrerun. Specific TCPcause notestablished. Noownedmodeljob.
+Next publishthenfresh FORMAL_R21_G1_R1_CONTRACT.json admission/run;
+onlybothvalid thenwholepairdecision. No singlearm speedclaim.
+R21quality208sourcecontracts e7575a2e published/static10db only; full381notrun.
+Aftercurrentpair proceed newR21catalogCanary/fullquality independentlyofspeed
+sign, retainingall fullgoal gates. Deadline2026-10-17T06:48:09Z.
+
+# HISTORICAL R21 G3 FULL40 PERFORMANCE LIVE
 
 Published/liveverified9c36ed413239a7a485a14812d6928404b69b4629;mainunchanged.
 Freshma directadmission10ca at01:19:38UTC proves211host/186runtime/image/model/

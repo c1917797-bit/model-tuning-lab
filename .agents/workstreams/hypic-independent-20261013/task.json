@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R21-G3-full40-performance-live",
+  "execution_state": "R21-G3-independently-valid-matching-G1-next",
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -143,7 +143,7 @@
     "service_ports": [
       8233
     ],
-    "state": "R21G3 controller10cc live; fresh211/186sourceadmission10ca; physical0-3 singleTP4 continuousisolation."
+    "state": "R21G3 controller10cc terminalexit0; independent10fc verifiesexactownrelease; no ownedmodeljob."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -158,7 +158,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll exactma10cc/rawformal-r21-c2-finite-g3-r1; no restartlive/unclear/no211boundchanges. Terminal audit_r21_c2_finite_performance.py --contract FORMAL_R21_G3_R1_CONTRACT.json --live-release; onlyvalidthenfreshmatchingG1. R20negativeunchanged; no pairedspeedclaim.",
+  "next_action": "R21G3 independent10fcvalid40/40; publishthenfresh FORMAL_R21_G1_R1_CONTRACT.json admission/run. Onlybothvalid thenpaireddecision. Afterwards newR21catalogCanary/full381quality notblockedbynegative speed. Fullgoalunfinished.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -215,7 +215,7 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "RUNNING",
+    "state": "TERMINAL_VALID",
     "operation": "exec-00000000000010cc",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
@@ -223,7 +223,7 @@
     "raw_root": "/cache/cch/hypic-independent-20261013/formal-r21-c2-finite-g3-r1",
     "checkpoint": "9c36ed413239a7a485a14812d6928404b69b4629",
     "admission_operation": "exec-00000000000010ca",
-    "independent_audit": null
+    "independent_audit": "exec-00000000000010fc"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
