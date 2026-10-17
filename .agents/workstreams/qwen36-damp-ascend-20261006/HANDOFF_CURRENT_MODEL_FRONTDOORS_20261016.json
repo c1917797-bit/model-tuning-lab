@@ -1,13 +1,13 @@
 {
   "schema": "ascend.current-model-frontdoor-handoff/v1",
-  "recorded_at_utc": "2026-10-17T03:13:47Z",
+  "recorded_at_utc": "2026-10-17T07:18:03Z",
   "authority_file": "CONDITIONAL_EXTENSION24H_AUTHORITY_20261016.json",
   "original_cutoff_utc": "2026-10-17T07:02:13Z",
   "extension_used": 0,
   "extension_condition_met": false,
   "new_nonHYPIC_accepted_technology": false,
   "current_owner": null,
-  "next_NPU": "First actually ready of BOLE R13 exact logits ABI repair or DeltaLog R18repair1 source-classified read-only binder repair, after sourceaudit and fresh admission; neither currently admitted",
+  "next_NPU": "NONE admitted: original fixed24h window ended2026-10-17T07:02:13Z; new explicit bounded authority required before any run. Conditional extension unused and conditions unmet.",
   "last_model_result": {
     "ref": {
       "path": "/opt/host/vnf/austinov/run-bole-model131repair4-MAIN-NEW24H_001/RESULT.json",
@@ -69,9 +69,9 @@
     "cost_caution": "child_scope includes final fence; nested phases inclusive/nonadditive; actual cache state uncontrolled; selected estimate not full-run guarantee"
   },
   "parallel_preparation": {
-    "accuracy_input_repair": "New R18repair1 source-only narrow canonical writer classification; real producer/FD/shared maps remain fail-closed",
-    "gdn_paper_reassessment": "R13 targeted logits ABI/source attribution plus observation; no unproved dtype cast",
-    "ge_fullgdn_ready": "Independent actual installed logits-source audit, no NPU; numerical inventory completed"
+    "accuracy_input_repair": "Completed/frozen source-only R18R3 and postINPUT repair1; stopped further development",
+    "gdn_paper_reassessment": "Stopped; publicationR3 retains3knownP1; R4 not implemented; noBOLE-specific fixed1024 performance qualifier",
+    "ge_fullgdn_ready": "Independent source reviews complete; no resource launches"
   },
   "git": {
     "local_commit": "690486c15b0e0bdcbb899e8c08ec310208d47081",
@@ -81,10 +81,11 @@
     "protocol": "per-commandHTTP/1.1,TLSverification unchanged,noforce",
     "archive": "projects/qwen36-paper-portfolio/tools/new24h_native_footprint_20261017_0130",
     "current_handoff_uncommitted_after_stage_update": true,
-    "pending_stage_archive": "projects/qwen36-paper-portfolio/tools/new24h_native_footprint_20261017_0130",
-    "pending_stage_source_copy_operation": "exec-00000000000010e6",
+    "pending_stage_archive": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_bole_logits_resources_20261017_0720",
+    "pending_stage_source_copy_operation": "exec-00000000000011fe",
     "remote_readback_operation": "exec-00000000000010f5",
-    "remote_ref_equals_local": true
+    "remote_ref_equals_local": true,
+    "last_committed_and_remote_verified": "f8a574c940b9c684940ee9afd550cb3a241850ad"
   },
   "physical_scope": [
     4,
@@ -115,7 +116,7 @@
     "released": true
   },
   "card_snapshot": {
-    "utc": "2026-10-17T03:06:52.807327+00:00",
+    "utc": "2026-10-17T07:15:21.911624+00:00",
     "physical": [
       4,
       5,
@@ -123,21 +124,8 @@
       7
     ],
     "no_actual_pids": true,
-    "AICore": [
-      0,
-      0,
-      0,
-      0
-    ],
-    "HBM_MiB": [
-      2867,
-      2868,
-      2867,
-      2865
-    ],
     "window_utilization": "unmeasured",
-    "idle_reason": "BOLE R12 failed; next DeltaLog source/storage binding must finish before admission",
-    "note": "BOLE exact release verified; no new NPU owner launched after it. Binding CPU-only failed before source publish."
+    "note": "Owner completed/retainedFAIL; all exact CIDs independently inspected stopped; no late NPU launch. Protected0-3 untouched."
   },
   "last_CPU_recovery": {
     "source": {
@@ -1253,5 +1241,224 @@
     "precise_observation": "original canonical no_writers scans retained-leaf substrings inside JSON argv; R18 bridge-owner Ref token necessarily matches",
     "sole_process_cause_not_independently_recorded": true,
     "no_NPU_load_started": true
+  },
+  "previous_BOLE_R13": {
+    "operation": "exec-0000000000001185",
+    "exit": 3,
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair13/SOURCE_BOUND.json",
+      "bytes": 52944,
+      "sha256": "82425bcc2e8c21197ef4831ff559e619c286644b7ea419a4e6dc63b7159b6a1d"
+    },
+    "output": "/opt/host/vnf/austinov/run-bole-model131repair13-MAIN-NEW24H_001",
+    "primary": "ValueError('actual ordinary RAM73GiB initial/9GiB live floor; HugeTLB never additive')",
+    "elapsed": 1.5449168399791233,
+    "cleanup_spent": 0,
+    "created_container": false,
+    "NPU_math": false,
+    "classification": "ENVIRONMENT_RAM_CHANGE",
+    "effective_initial_GiB": 56.5,
+    "later_read_MemAvailable_KiB": 51124636,
+    "SwapUsed": 0,
+    "stale73_error_label_is_not_effective_floor": true,
+    "globals_capture_hypothesis_withdrawn": true,
+    "successor": "R14 actual modelcap32 with unchanged8GiB reserve/.5GiBhost; no peakfit or OOM exemption"
+  },
+  "latest_resource_admission": {
+    "operation": "exec-000000000000118e",
+    "utc": "2026-10-17T03:31:29.317150+00:00",
+    "sourceaudit": {
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair14/SOURCE_BOUND.json",
+        "bytes": 54528,
+        "sha256": "0e39213a94161981725834ec68082eb3cc022d739dea3f54d7eb5d4f08dfe6b5"
+      },
+      "readset": 257,
+      "NPU": false,
+      "resources_admitted": false,
+      "candidate_qualification": false
+    },
+    "MemAvailable": 49195335680,
+    "SwapUsed": 0,
+    "affinity": [
+      0,
+      1,
+      2,
+      3,
+      144,
+      145,
+      166
+    ],
+    "DockerRootDir": "/cache/docker",
+    "Docker_free": 23363248128,
+    "opt_free": 222195056640,
+    "port8230_free": true
+  },
+  "window_state": "EXPIRED_NO_NEW_LOAD",
+  "previous_BOLE_R14": {
+    "operation": "exec-000000000000118f",
+    "operation_journal_later_not_found": true,
+    "actual_retained_result": {
+      "path": "/opt/host/vnf/austinov/run-bole-model131repair14-MAIN-NEW24H_001/RESULT.json",
+      "bytes": 100914,
+      "sha256": "f0ba8524463a620f46c1fff41d132cc5c2b09641cb4468e928e6df16c1d9208c"
+    },
+    "actual_result_not_replaced": true,
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair14/SOURCE_BOUND.json",
+      "bytes": 54528,
+      "sha256": "0e39213a94161981725834ec68082eb3cc022d739dea3f54d7eb5d4f08dfe6b5"
+    },
+    "elapsed": 566.6995405200287,
+    "cleanup_spent": 32.860778159985784,
+    "owner_primary": "ValueError('AICore/HBM idle baseline unchanged')",
+    "secondary": [],
+    "first_worker_or_tree_primary": "ValueError('actual released CPU ABI receipt required')",
+    "all4_same_tree_primary": true,
+    "source_attribution": {"classification":"DEFINITE_REFERENCE_VERSUS_VALUE_WIRING_DEFECT","producer":"component_gate.consume returns actual_fia_abi as Ref3 stage.actual_abi_ref","caller":"model_smoke.py97-101 passes that Ref3; model_entry.py85 compares Ref3 then106 stores self.fia","leaf":"model_entry.py197 sends self.fia to adapter.native; adapter.py96-99 expects ABI value schema/operator_executed/NPU not Ref3","algorithm_numerical_failure":false,"repair_not_implemented":true},
+    "tree_files_are_partial_failure_captures_not_complete_math": true,
+    "actual_logits": {
+      "dtype": "torch.bfloat16",
+      "shape": [
+        1,
+        248320
+      ],
+      "all4_finite": true,
+      "NaN": 0,
+      "Inf": 0,
+      "raw_refs": [
+        {
+          "path": "/opt/host/vnf/austinov/run-bole-model131repair14-MAIN-NEW24H_001/dense/receipts/BOLE-LOGITS-OPERAND-RANK-0.json",
+          "bytes": 4199,
+          "sha256": "14d1fedcc0ad5fd9b8affd4f28f94923c4c01d1af7f336157df5370290f00664"
+        },
+        {
+          "path": "/opt/host/vnf/austinov/run-bole-model131repair14-MAIN-NEW24H_001/dense/receipts/BOLE-LOGITS-OPERAND-RANK-1.json",
+          "bytes": 4199,
+          "sha256": "a9f4422f4261dea7b9c84dade910370a7f4a28a3d62e3f0cfc3659117e402777"
+        },
+        {
+          "path": "/opt/host/vnf/austinov/run-bole-model131repair14-MAIN-NEW24H_001/dense/receipts/BOLE-LOGITS-OPERAND-RANK-2.json",
+          "bytes": 4199,
+          "sha256": "97bbb1d68805b0f0949712aec8fdab23476d1976d8a8b917d2dfa0ea8134cf1e"
+        },
+        {
+          "path": "/opt/host/vnf/austinov/run-bole-model131repair14-MAIN-NEW24H_001/dense/receipts/BOLE-LOGITS-OPERAND-RANK-3.json",
+          "bytes": 4199,
+          "sha256": "59d8305972c70b71ecd0041d4cede801db609ad9c0ee4b82aa7304d365843910"
+        }
+      ]
+    },
+    "native_BF16_exact_promotion_boundary_reached": true,
+    "actual_modelcap_GiB": 32,
+    "all_weights_loaded": true,
+    "HTTP_client_status": 500,
+    "independent_consumer_executed": false,
+    "numerical_qualified": false,
+    "performance_result": false,
+    "task_accuracy_result": false,
+    "class": "IMPLEMENTATION_OR_EVIDENCE_ABI_NOT_PAPER_NOGO",
+    "independent_release_operation": "exec-00000000000011fc",
+    "released": {
+      "cpu-preflight": {
+        "cid": "35c1902ec6b7e50bf87e1bfaebef9635113e7f030251530acf14273c5336ce28",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 137,
+          "Error": "",
+          "StartedAt": "2026-10-17T03:31:47.04537338Z",
+          "FinishedAt": "2026-10-17T03:33:00.28604806Z"
+        },
+        "ExecIDs": null,
+        "independently_released": true,
+        "cleanup_ref": {
+          "path": "/opt/host/vnf/austinov/run-bole-model131repair14-MAIN-NEW24H_001/cpu-preflight/cleanup.json",
+          "bytes": 10763,
+          "sha256": "2a7a01c7995afbdb2e0868351d815684cdaaa8998e96a4e275f8018772d2b8c8"
+        },
+        "errors": []
+      },
+      "dense": {
+        "cid": "a730792cc67138eb1a673e259cb7b6f27ca5b0e32f1b8c25672aaf533071411a",
+        "state": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 137,
+          "Error": "",
+          "StartedAt": "2026-10-17T03:34:04.32998333Z",
+          "FinishedAt": "2026-10-17T03:41:10.17043918Z"
+        },
+        "ExecIDs": null,
+        "independently_released": true,
+        "cleanup_ref": {
+          "path": "/opt/host/vnf/austinov/run-bole-model131repair14-MAIN-NEW24H_001/dense/cleanup.json",
+          "bytes": 10781,
+          "sha256": "5c41b928992ef72fc4cd89e9d5ea41c3261b945e9b0b53f91c06706ce4859856"
+        },
+        "errors": []
+      }
+    },
+    "all_owned_stopped_Pid0_noExec_noOOM": true,
+    "source_before_after_unchanged": true
+  },
+  "latest_DL_R18R3": {
+    "template": {
+      "bytes": 232146,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-new24h-v1-101-repair18-repair3-20261017-001/SOURCE_TEMPLATE.json",
+      "sha256": "30c3b3fd933ec3bb62fd8fdfbc4959fc4ed93c30f7d5c540eaf48bcda778423b"
+    },
+    "local_FINAL": "C:/Users/Huawei/AppData/Local/Temp/deltalog-first-real-decode-owned-new24h-101-repair18-repair3-20261017-001",
+    "source_only": true,
+    "local_software": {
+      "discovered": 145,
+      "passed": 143,
+      "Windows_HTTP_permission_failure": 1,
+      "AF_UNIX_skipped": 1,
+      "actual_Linux_required": 145,
+      "no_skip": true
+    },
+    "independent_review": "No new definite resource P1; not qualification",
+    "copied_operation": "exec-0000000000001195",
+    "exact_copied_files": 112,
+    "apply_patch_MCP_timed_out": true,
+    "independent_byteaudit_operation": "exec-00000000000011fc",
+    "missing_Add_files": 30,
+    "mismatches": 0,
+    "bound_source_published": false,
+    "NPU_launched": false,
+    "do_not_treat_partial_deployment_as_ready": true
+  },
+  "latest_BOLE_publication": {
+    "local_FINAL": "C:/Users/Huawei/AppData/Local/Temp/bole-single-publication-model-new24h-20261017-001-repair3-r14",
+    "status": "HOLD_KNOWN_FRONTDOOR_DEFECTS",
+    "missing_actual_successful_R14_plan": true,
+    "known_P1": [
+      "server environment lacks BOLE_SINGLE_PUBLICATION_ENABLE required by Session",
+      "preflight hardexpects num_speculative_tokens8 but publication config2",
+      "SERVER_COMMAND receipt still says8 instead of actual2"
+    ],
+    "R4_implementation_not_created": true,
+    "stopped_status_local": "C:/Users/Huawei/AppData/Local/Temp/bole-publication-repair4-STOPPED-20261017-001/STATUS.json",
+    "all_runtime_qualifications": false
+  },
+  "main_connection_gap": {
+    "interrupted_action": "R18R3 a_apply_patch",
+    "receipt": "MCP request timed out",
+    "last_prior_clock_approx_utc": "2026-10-17T03:36Z",
+    "first_restored_clock_utc": "2026-10-17T07:14:58Z",
+    "causal_duration_not_independently_measured": true,
+    "no_continuous_utilization_claim": true,
+    "no_retry_after_cutoff": true
   }
 }

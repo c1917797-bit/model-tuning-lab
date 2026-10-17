@@ -238,3 +238,13 @@ metadata consumer. R17's all-four-rank/all64 ND/committed-index observation does
 not authorize shared-storage alias bypass, numerical success, performance or
 task acceptance. Strong live tensor/request/slot checks and the next NPU gate
 remain required.
+
+
+## Native ABI, complete entry wiring, and deadline evidence (2026-10-17)
+
+- Never assume native model logits are FP32. Prove the active installed method, save original dtype/finite/full-vocabulary diagnostics before adaptation, and allow only a separately reviewed exact representation promotion. Keep the independent reader independent. An actual later BF16 observation does not retroactively identify an older run's unobserved failure subcondition.
+- A default-OFF entry test or an abstract fixture does not prove the enabled path. Test the complete declared CLI through parser, actual predecessor consumption/readset, server environment, real speculative config and worker Session. Check metadata receipts against that same actual argv. A required ABI receipt must reach the leaf operator with its exact typed schema and semantics, not merely exist in a top-level manifest.
+- Failure handlers may publish partial tensor files. Inspect each rank's primary failure before calling them completed computation; raw-file existence, model load and HTTP startup do not grant numerical or performance qualification.
+- Keep worker/HTTP first failures separate from later host observer failures. Residual HBM after workers exit is not evidence of foreign occupation. Preserve timestamped SMI/process/ownership evidence and require an exact released-CID check.
+- A lower actual container cap is a new resource experiment, not a relaxed reserve or a claim of universal peak fit. Create, inspect, cgroup observer, live globals and any copied resource globals must agree; OOM remains failure. Separate stale error-label captions from effective arithmetic and observed RAM changes.
+- A remote timeout is an unknown outcome until independently checked. Recover executor receipts with the same idempotency key; inspect patch bytes before retrying. Re-read UTC after every unusually long call/yield. Never reset an elapsed experiment window, manufacture card utilization, or launch a late successor because an earlier tool call was delayed.
