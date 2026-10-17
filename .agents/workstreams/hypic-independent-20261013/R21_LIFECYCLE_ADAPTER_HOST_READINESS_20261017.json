@@ -1,0 +1,28 @@
+{
+  "schema": "hypic-lifecycle-adapter-host-readiness/v1",
+  "change": "Allow only explicit versioned R16 or R21 lifecycle runtime-manifest basenames. Exact manifest environment path/runtime digest/all support source hashes retained. No arbitrary path or digest bypass.",
+  "default_enabled": false,
+  "focused": {
+    "operation": "exec-0000000000001108",
+    "tests": 25,
+    "exit": 0,
+    "scope": "subprocess fake-loader and generated lifecycle directory/AST controls only"
+  },
+  "regression": {
+    "operation": "exec-000000000000110a",
+    "tests": 1009,
+    "exit": 0
+  },
+  "live_source_check": {
+    "operation": "exec-0000000000001109",
+    "current_G1_bindings": 211,
+    "unchanged": true
+  },
+  "scope": "No lifecycle NPU run; standard delivery MANIFEST still points historical R16 until separately bound R21 package is prepared",
+  "remaining": [
+    "Freeze R21 runtime manifest and matching standard-delivery manifest/hash",
+    "Defaultoff/source/rollback/validator readiness on exact package",
+    "Three real ordered disabled/enabled/uninstalled-restart stages with independent sequence audit"
+  ],
+  "current_live": "G1 exec-0000000000001101"
+}

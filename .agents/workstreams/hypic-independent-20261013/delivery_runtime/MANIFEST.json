@@ -21,7 +21,7 @@
     "enabled_value": "1",
     "patch_file": "patch.py",
     "entrypoint": "patch:activate",
-    "patch_sha256": "ec16f07d58d9bf76f28bbe1d34d01fa278c5a137c563f74da3c92acce061a21b",
+    "patch_sha256": "c330ab16316707391c86a47bcebdfa4f86a2e1cc5d879ab4a84a0accff221b28",
     "loader_file": "sitecustomize.py",
     "loader_sha256": "aced6b0665b0504443b0baa6171d9cd1417b69cd36aebac7acce9814dc786f74",
     "launcher_file": "run_with_patch.sh",
@@ -46,8 +46,8 @@
     "experiment_id": "hypic-independent-20261013/lifecycle-r16",
     "branch": "work/hypic-independent-20261013",
     "commit": "112c3e5961a03ea18295636d8497d53324e991f8",
-    "checkpoint_role": "Exact tested adapter source checkpoint; current manifest metadata rebinding does not change wrapper code",
-    "scope": "Draft host-only adapter, not connected to frozen service contracts or NPU-verified"
+    "checkpoint_role": "Original adapter provenance; successor patch source hash now host-tested by1108/110a; not claimed identical to original source",
+    "scope": "R21 versioned routing host-only, runtime manifest still historical R16 pending explicit successor package; no real lifecycle acceptance"
   },
   "runtime_manifest_file": "LIFECYCLE_COMPACT_MANIFEST_R16.json",
   "runtime_manifest_sha256": "2454e8630ddf0ddd8051e5967a4eb74327a4948726dcd73813e4587a13c8f76b"
