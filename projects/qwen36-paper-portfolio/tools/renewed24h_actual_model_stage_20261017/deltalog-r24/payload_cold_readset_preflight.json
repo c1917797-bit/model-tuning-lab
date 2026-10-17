@@ -1,0 +1,91 @@
+{
+  "local_ancillary_snapshot": {
+    "bytes": 4587,
+    "sha256": "95cb50d9d62cde9b49074684deedb688b8fb9473ff830444729602cc7d8b11bf"
+  },
+  "payload_source": {
+    "bytes": 18758,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-selected-firstdecode-renew24h-20261017-001-test-contract-repair1/SOURCE_MANIFEST.json",
+    "sha256": "91f89a435b47a40f25b97d3a6852e45f2fdb29909a5c70f20be9b1a91868c81c"
+  },
+  "plan": {
+    "RO_exact_refs": [
+      {
+        "bytes": 13736,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair17-native-postprepare-footprint-20261017-001/tensor_consumer.py",
+        "sha256": "08dd5b74dc2feefc2582658378cf934d298933f0fa61d511c53cd60c72b5fe0d"
+      },
+      {
+        "bytes": 3407,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair17-native-postprepare-footprint-20261017-001/dependencies/numeric_oracle.py",
+        "sha256": "cd395a05dbfcb21f1104d617afb1fab6f80374016585e9096ca24d85c2cae97a"
+      },
+      {
+        "bytes": 3378,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair17-native-postprepare-footprint-20261017-001/dependencies/direct_round013.py",
+        "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d"
+      },
+      {
+        "bytes": 5831,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair17-native-postprepare-footprint-20261017-001/precast.py",
+        "sha256": "4f1ca4d1243c90c663db2702010ecef8f76805a4259d107fb1be44648f35695d"
+      },
+      {
+        "bytes": 3378,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair17-native-postprepare-footprint-20261017-001/direct_round.py",
+        "sha256": "60f64d53aae1e126f1a4de244a3cb224facc881e277386bf120d6a5b2988278d"
+      },
+      {
+        "bytes": 3481,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/NEW24H_AUTHORITY_20261016.json",
+        "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+      },
+      {
+        "bytes": 4503,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-d8-fp32-model-boundary-r87-v1-011/cann_python.py",
+        "sha256": "cee927f1107fe6714e86ab1dceecafeff800980a00b8df9fcc47ff6831ba5104"
+      }
+    ],
+    "RO_roots": [
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-selected-firstdecode-renew24h-20261017-001-test-contract-repair1",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-byteabi-tiny-new24h-20261017-001",
+      "/opt/host/vnf/austinov/run-dl-byteabi-MAIN-20261017-001"
+    ],
+    "cold_source_tiny_loader_preflight": [
+      "/usr/local/python3.12.13/bin/python3",
+      "-I",
+      "-B",
+      "-c",
+      "import sys, json\nsys.path.insert(0, '/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-selected-firstdecode-renew24h-20261017-001-test-contract-repair1')\nimport firstdecode_gate as Q, firstdecode_cli as C\nsr = {'path': '/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-selected-firstdecode-renew24h-20261017-001-test-contract-repair1/SOURCE_MANIFEST.json', 'bytes': 18758, 'sha256': '91f89a435b47a40f25b97d3a6852e45f2fdb29909a5c70f20be9b1a91868c81c'}\np = Q.source(sr)\nbefore = list(sys.path)\nQ.verify_tiny(p)\nassert sys.path == before\n(T, R) = C.numerical_modules(p)\nassert R.STATE_LIMIT == 7.92e-07 and R.OUTPUT_LIMIT == 0.00303\nassert 'torch' not in sys.modules and 'torch_npu' not in sys.modules\nQ.source(sr)\nprint(json.dumps(dict(source=sr, source_tiny_original_loader_closure=True, HAL=False, NPU=False, qualification=False)))\n"
+    ],
+    "environment": {
+      "TORCH_DEVICE_BACKEND_AUTOLOAD": "0"
+    },
+    "native_torch_sources": {
+      "contextlib": {
+        "bytes": 6402,
+        "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch/utils/_contextlib.py",
+        "sha256": "f22c21a037c4b26a431112138fa66a5108c5e9cfe4c9169e732c1d15ea7a8406"
+      },
+      "grad_mode": {
+        "bytes": 14193,
+        "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch/autograd/grad_mode.py",
+        "sha256": "ac56e9849d2e8b996e9e8fb923e28d35f564b44063eaa5e88c46d47555209804"
+      }
+    },
+    "note": "The readonly preflight imports no Torch/HAL. Mandatory26 software separately exercises CPU Torch and actual-image wrapper source joins. Resource owner and postconsumer mounts must preserve exact original paths; no host Python/no launch authorization.",
+    "only_inside_independently_admitted_Devices_empty_guest": true,
+    "software": [
+      "/usr/local/python3.12.13/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-selected-firstdecode-renew24h-20261017-001-test-contract-repair1/software.py"
+    ],
+    "source": {
+      "bytes": 18758,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-selected-firstdecode-renew24h-20261017-001-test-contract-repair1/SOURCE_MANIFEST.json",
+      "sha256": "91f89a435b47a40f25b97d3a6852e45f2fdb29909a5c70f20be9b1a91868c81c"
+    }
+  },
+  "schema": "deltalog.firstdecode-owned-cold-plan/v1"
+}

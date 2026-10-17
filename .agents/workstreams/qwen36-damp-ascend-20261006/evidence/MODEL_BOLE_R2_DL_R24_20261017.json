@@ -1,0 +1,105 @@
+{
+  "schema": "ascend.actual-model-stage/v1",
+  "recorded_at_utc": "2026-10-17T15:53:00Z",
+  "authority_ref": {
+    "bytes": 3012,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+    "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+  },
+  "acceptance": {
+    "new_nonHYPIC": false,
+    "new_valid_E2E_gain": false,
+    "task_accuracy_acceptance": false
+  },
+  "BOLE": {
+    "operation": "exec-0000000000001394",
+    "exit": 3,
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-bole-root-repeat-witness-repair2-20261017-001-MAIN-NEW24H_001/RESULT.json",
+      "bytes": 119728,
+      "sha256": "5c873313c133960af783c64f0a3e78a3d588c345cacec11bacf70d36f4c6bc2a"
+    },
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair2/SOURCE_BOUND.json",
+      "bytes": 68821,
+      "sha256": "d6547424c945c0bf2168c266f7d16e4414940f5912359ffa4926347d52378b89"
+    },
+    "actual": "TP4 actual27B loaded; two HTTP requests; all4 ranks64layers capture; GDN48 local math PASS, full FA and greedy FAIL",
+    "first_root_repeat_difference": "All4 ranks GDN0 returned output, while previous observed boundaries including out_proj input equal. Interval out_proj native call -> write, not yet hardware/kernel/algorithm causal attribution.",
+    "qualified": false,
+    "release": "139c independent exact CPU/model/consumer stopped Pid0 noExec noOOM; retained"
+  },
+  "DL_R23": {
+    "paper": "DeltaLog",
+    "operation": "exec-000000000000137d",
+    "state": "TERMINAL FAILED parent parser import ModuleNotFoundError:firstdecode_plugin; before engine/weights/NPU-model numerical gate",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair23-payload-contract-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 308376,
+      "sha256": "9713c05ee501880a5ca49db0e2a279a4e2362fcbf9158b0be5cb9bdd2fcd01ed"
+    },
+    "output": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R23payloadcontract-main-NEW24H_FIRSTDECODE101R23payloadcontract_001",
+    "numeric_qualified": false,
+    "performance_qualified": false,
+    "task_qualified": false,
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R23payloadcontract-main-NEW24H_FIRSTDECODE101R23payloadcontract_001/RESULT.json",
+      "bytes": 62348,
+      "sha256": "530c81853de725fb9d5ad1e41c900a005103843fb2a86b83fca9d4d8169d0f77"
+    },
+    "release_verified": true,
+    "original_failure_preserved": true
+  },
+  "DL_R24": {
+    "early": {
+      "operation": "exec-00000000000013a6",
+      "exit": 0,
+      "Devices": [],
+      "attribution": {
+        "path": "/opt/host/vnf/austinov/run-dl-R24parserparent-early-software-MAIN-RENEW24H_001/software/consumer/ATTRIBUTION.json",
+        "bytes": 1279,
+        "sha256": "40ef8cec8e3054ece1b391e422221c7e93bf7b85266d29c02895bdabb1631b62"
+      },
+      "release_check": "13a7 stopped Pid0 noExec noOOM"
+    },
+    "binding": {
+      "operation": "exec-00000000000013a8",
+      "exit": 0,
+      "duration_ms": 437006,
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair24-parser-parent-20261017-001/SOURCE_MANIFEST.json",
+        "bytes": 313235,
+        "sha256": "e396e342ca053afe1728ca53eeafe0dba2b75bde0b6ab18fc12a99809c371271"
+      }
+    },
+    "source_audit": {
+      "operation": "exec-00000000000013ac",
+      "exit": 0
+    },
+    "current": {
+      "paper": "DeltaLog",
+      "operation": "exec-00000000000013b0",
+      "state": "RUNNING actual R24 owned workflow; bound/sourceaudit PASS; actual parent parser and NPU/model results pending",
+      "source": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair24-parser-parent-20261017-001/SOURCE_MANIFEST.json",
+        "bytes": 313235,
+        "sha256": "e396e342ca053afe1728ca53eeafe0dba2b75bde0b6ab18fc12a99809c371271"
+      },
+      "output": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R24parserparent-main-NEW24H_FIRSTDECODE101R24parserparent_001",
+      "numeric_qualified": false,
+      "performance_qualified": false,
+      "task_qualified": false
+    },
+    "latest_prelaunch": "13af snapshot only:4–7 no NPU processes, idle HBM baseline; MemAvailable81056756KiB/swap0; prior owned CIDs stopped; new output/P absent",
+    "not_window_utilization": true
+  },
+  "source_archive": "projects/qwen36-paper-portfolio/tools/renewed24h_actual_model_stage_20261017",
+  "source_archive_copy": {
+    "operation": "exec-00000000000013b2",
+    "files": 395,
+    "bytes": 6868673,
+    "hash_verified": true,
+    "originals_unchanged": true
+  },
+  "next": "Actual R24 model outcome first. BOLE interval witness and C16 repairs are prep only; no unchanged failed rerun; no acceptance relaxation."
+}

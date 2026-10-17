@@ -1,0 +1,30 @@
+{
+  "cleanups": {
+    "candidate": {
+      "bytes": 1545,
+      "path": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R23payloadcontract-main-NEW24H_FIRSTDECODE101R23payloadcontract_001/candidate/cleanup.json",
+      "sha256": "b75da92ef9986de217236a2fbe70464981d7e00ed86280b77d40e9ebab2c127e"
+    },
+    "cpu-preflight": {
+      "bytes": 1502,
+      "path": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R23payloadcontract-main-NEW24H_FIRSTDECODE101R23payloadcontract_001/cpu-preflight/cleanup.json",
+      "sha256": "f46b62b5644c0a8e0cdbd1c7f309ecd66e24b2014ba47e6c83cedcd8817ff6cb"
+    }
+  },
+  "journal": {
+    "bytes": 9666,
+    "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/MODEL_SNAPSHOTS_LEDGER.R23payloadcontract.json",
+    "sha256": "a7a985d3326b5d26e7fea1508a64c33b74fa9378e7a510aa0d307e8058baa23c"
+  },
+  "owner": {
+    "bytes": 62348,
+    "path": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R23payloadcontract-main-NEW24H_FIRSTDECODE101R23payloadcontract_001/RESULT.json",
+    "sha256": "530c81853de725fb9d5ad1e41c900a005103843fb2a86b83fca9d4d8169d0f77"
+  },
+  "schema": "deltalog.actual-r23-terminal-readset/v1",
+  "source": {
+    "bytes": 308376,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair23-payload-contract-20261017-001/SOURCE_MANIFEST.json",
+    "sha256": "9713c05ee501880a5ca49db0e2a279a4e2362fcbf9158b0be5cb9bdd2fcd01ed"
+  }
+}

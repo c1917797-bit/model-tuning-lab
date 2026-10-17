@@ -73,7 +73,7 @@
     "classification": "IMPLEMENTATION_VALIDATION_MEMORY_NOT_PAPER_NOGO",
     "successor": "R20 bounded streaming validation; unchanged512MiB/full metadata/no-writer/final fullhash"
   },
-  "recorded_at_utc": "2026-10-17 14:41 UTC",
+  "recorded_at_utc": "2026-10-17T15:53:00Z",
   "latest_entry_contracts_evidence": "evidence/ENTRY_CONTRACTS_AND_BOLE_FACTORS_20261017.json",
   "authority_file": "RENEW24H_AUTHORITY_20261017_084320.json",
   "original_cutoff_utc": "2026-10-17T07:02:13Z",
@@ -83,14 +83,14 @@
   "previous_owner_1325": {"paper":"DeltaLog","state":"terminal FAILED before model/NPU: payload22 tests 21PASS/1 expected-message contract mismatch; full174 not reached","operation":"exec-0000000000001325","source":{"path":"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair22-repair1-20261017-001/SOURCE_MANIFEST.json","bytes":280513,"sha256":"fe1605d6bc07185e1a37792daf3c73050b129833dbff763ff121b6a78d2585ec"},"stage_evidence":"evidence/ENTRY_CONTRACTS_AND_BOLE_FACTORS_20261017.json","numeric_qualified":false,"performance_qualified":false,"task_qualified":false,"terminal_result":{"path":"/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R22repair1-main-NEW24H_FIRSTDECODE101R22repair1_001/RESULT.json","bytes":31213,"sha256":"f784a124c065a4ad9d44e2dc4ad8506d3ab225e85c6ebdc75df7b092d573615d"},"independent_release":"exec-000000000000133b; sole CPU stopped/Pid0/noExec/noOOM/Devices[]; P empty","classification":"REFERENCE_TEST_CONTRACT_FAILURE_NOT_PAPER_NOGO"},
   "current_owner": {
     "paper": "DeltaLog",
-    "operation": "exec-000000000000137d",
-    "state": "RUNNING actual owned firstdecode after payload26/prepared176 noSkip PASS; full178/NPU gates pending",
+    "operation": "exec-00000000000013b0",
+    "state": "RUNNING actual R24 owned workflow; bound/sourceaudit PASS; actual parent parser and NPU/model results pending",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair23-payload-contract-20261017-001/SOURCE_MANIFEST.json",
-      "bytes": 308376,
-      "sha256": "9713c05ee501880a5ca49db0e2a279a4e2362fcbf9158b0be5cb9bdd2fcd01ed"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair24-parser-parent-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 313235,
+      "sha256": "e396e342ca053afe1728ca53eeafe0dba2b75bde0b6ab18fc12a99809c371271"
     },
-    "output": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R23payloadcontract-main-NEW24H_FIRSTDECODE101R23payloadcontract_001",
+    "output": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R24parserparent-main-NEW24H_FIRSTDECODE101R24parserparent_001",
     "numeric_qualified": false,
     "performance_qualified": false,
     "task_qualified": false
@@ -179,7 +179,7 @@
     "performance_qualified": false,
     "task_qualified": false
   },
-  "next_NPU": "Observe same137d; no overlapping TP4. BOLE repair1 sameimage119 failed underlying_body before NPU, requires discriminating3.12 code-property evidence. No unchanged retry or matched E2E/task claim.",
+  "next_NPU": "Poll same13b0; do not restart while live. R24 actual parent parser then model gate; BOLE R3 projection witness and C16 component repair1 remain preparation only. No overlapping TP4. No new E2E/task acceptance.",
   "last_model_result": {
     "ref": {
       "path": "/opt/host/vnf/austinov/run-bole-model131repair4-MAIN-NEW24H_001/RESULT.json",
@@ -331,7 +331,29 @@
     "next_status": "bound, sourceaudit and exclusiveCPU resource admission pending; no full160 execution"
   },
   "last_software_failures": [
-    {
+{
+  "previous_DL_R23": {
+    "paper": "DeltaLog",
+    "operation": "exec-000000000000137d",
+    "state": "TERMINAL FAILED parent parser import ModuleNotFoundError:firstdecode_plugin; before engine/weights/NPU-model numerical gate",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair23-payload-contract-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 308376,
+      "sha256": "9713c05ee501880a5ca49db0e2a279a4e2362fcbf9158b0be5cb9bdd2fcd01ed"
+    },
+    "output": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R23payloadcontract-main-NEW24H_FIRSTDECODE101R23payloadcontract_001",
+    "numeric_qualified": false,
+    "performance_qualified": false,
+    "task_qualified": false,
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R23payloadcontract-main-NEW24H_FIRSTDECODE101R23payloadcontract_001/RESULT.json",
+      "bytes": 62348,
+      "sha256": "530c81853de725fb9d5ad1e41c900a005103843fb2a86b83fca9d4d8169d0f77"
+    },
+    "release_verified": true,
+    "original_failure_preserved": true
+  },
+  "latest_model_stage_evidence": "evidence/MODEL_BOLE_R2_DL_R24_20261017.json",
       "paper": "DL101R12",
       "operation": "exec-0000000000000ffc",
       "result": {

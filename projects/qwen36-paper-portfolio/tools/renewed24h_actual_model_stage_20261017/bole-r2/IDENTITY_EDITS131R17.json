@@ -1,0 +1,34 @@
+{
+  "contract090.py": {
+    "after": {
+      "bytes": 3522,
+      "sha256": "a5a8d1a4295359d060e82c0f1e185f1521ad78a983a5702f1d05b673e4505a60"
+    },
+    "before": {
+      "bytes": 3522,
+      "sha256": "a46f2665b2369fcfbec12f1b56300da540aec51db25317a87952d626d701be61"
+    },
+    "edits": [
+      {
+        "after": "OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001'\nCPU_OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model131repair17-CPU-MAIN-NEW24H_001'\n",
+        "before": "OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001'\nCPU_OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model131repair16-CPU-MAIN-NEW24H_001'\n"
+      }
+    ]
+  },
+  "owned_substrate.py": {
+    "after": {
+      "bytes": 3518,
+      "sha256": "3937c6fae7f2d34baf40dca71af3910922d78509734ba118921b1e5c82829cdc"
+    },
+    "before": {
+      "bytes": 3518,
+      "sha256": "1981b995083f7298c46f2b983cc7b13b143943f93dab770dfda682b9342d835d"
+    },
+    "edits": [
+      {
+        "after": " S.PHASE=3600;S.CLEANUP=180;S.OWNER='bole-three-node131-repair17'\n",
+        "before": " S.PHASE=3600;S.CLEANUP=180;S.OWNER='bole-three-node131-repair16'\n"
+      }
+    ]
+  }
+}
