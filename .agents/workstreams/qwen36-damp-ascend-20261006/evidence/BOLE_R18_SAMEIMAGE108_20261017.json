@@ -1,0 +1,72 @@
+{
+  "schema": "ascend.bole-r18-namespace-repair-sameimage-software/v1",
+  "operationId": "exec-00000000000012b3",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair18/SOURCE_BOUND.json",
+    "bytes": 60971,
+    "sha256": "a1d6c44a10a7fdb1e2d7256c47a8dae4de0f390fbe550f9b01e8b7a240f62dbc"
+  },
+  "actual": {
+    "owner_result": {
+      "path": "/opt/host/vnf/austinov/run-bole-model131repair18-CPU-MAIN-NEW24H_001/RESULT.json",
+      "bytes": 107098,
+      "sha256": "07ca6232698b19f1995460f29121abed1c74d43d45756d5a878a597118260f09"
+    },
+    "primary": null,
+    "secondary": [],
+    "source_unchanged": true,
+    "summary": {
+      "CPU_child": {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair18-CPU-MAIN-NEW24H_001/cpu-preflight/CPU-CHILD.json",
+        "sha256": "cbeae77f0dd570a25f5732cd6e59ad061309c8c0eb37187b63ef0c8ae7c3fca3"
+      },
+      "CPU_release": {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair18-CPU-MAIN-NEW24H_001/cpu-preflight/cleanup.json",
+        "sha256": "ac6e0c11f567183c01cb13a5c61b1fd7c594b5e9ecd33dbf67eea2d045b35990"
+      },
+      "CPU_report": {
+        "bytes": 5556,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair18-CPU-MAIN-NEW24H_001/cpu-preflight/CPU.json",
+        "sha256": "5388bd3e04d5dfb9a79f79a9b79c92ce8dc2314d42f3a0f6713e9c50a40609fa"
+      },
+      "actual_software_child": {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair18-CPU-MAIN-NEW24H_001/cpu-preflight/SOFTWARE-CHILD.json",
+        "sha256": "f49634bd2b43bb6bfc80978317d24c7b937707cd98c98a88e34d3c096c49baf9"
+      }
+    },
+    "software": {
+      "ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair18-CPU-MAIN-NEW24H_001/cpu-preflight/SOFTWARE.stderr",
+        "bytes": 208,
+        "sha256": "f611add4c1e6eae7819c592c75b0743df1e1a02c172c10b4db952cb20c034c5e"
+      },
+      "content": "............................................................................................................\n----------------------------------------------------------------------\nRan 108 tests in 5.651s\n\nOK\n"
+    },
+    "cleanup_ref": {
+      "path": "/opt/host/vnf/austinov/run-bole-model131repair18-CPU-MAIN-NEW24H_001/cpu-preflight/cleanup.json",
+      "bytes": 1253,
+      "sha256": "ac6e0c11f567183c01cb13a5c61b1fd7c594b5e9ecd33dbf67eea2d045b35990"
+    },
+    "fresh_release": {
+      "cid": "25c0494589b40045780cabeb4db05de7e65320ea5254faf8e67ab112b9f83063",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 137,
+        "Error": "",
+        "StartedAt": "2026-10-17T11:11:12.20993047Z",
+        "FinishedAt": "2026-10-17T11:12:28.48936974Z"
+      },
+      "ExecIDs": null,
+      "Devices": []
+    },
+    "model_or_numeric_qualified": false,
+    "performance_or_accuracy": false
+  },
+  "remaining": "Original R17 math FA/greedy FAIL unresolved; namespace repair does not qualify mathematics or justify identical recapture."
+}

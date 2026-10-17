@@ -1,0 +1,72 @@
+{
+  "schema": "ascend.paper-portfolio.explicit-renewed24h/v1",
+  "authority_source": "Direct human user: 再穿刺24小时; 有问题的部分请帮我尽快修复",
+  "start_utc": "2026-10-17T08:43:20Z",
+  "cutoff_utc": "2026-10-18T08:43:20Z",
+  "start_epoch": 1792226600,
+  "cutoff_epoch": 1792313000,
+  "timezone": "Europe/Moscow",
+  "start_local": "2026-10-17T11:43:20+03:00",
+  "cutoff_local": "2026-10-18T11:43:20+03:00",
+  "old_window_immutable": {
+    "original_48h_goal_unchanged": true,
+    "previous24h_cutoff_utc": "2026-10-17T07:02:13Z",
+    "conditional_extension_count_consumed": 0,
+    "not_retroactive": true
+  },
+  "objective": "At least one new nonhistorical-HYPIC paper technique, faithful opt-in monkeypatch/Ascend adaptation; real numerical/state/graph/lifecycle qualification, matched whole-model fixed1024 throughput >=10% across3pairs with TTFT/TPOT separate; GSM8K/HumanEval/MMLU thinkOFF/max2048/normalEOS smoke thenfull, loss pp and relative both<=1% conservatively",
+  "physical_npus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_npus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "main_only_device_admission": true,
+  "parallel_source_preparation": true,
+  "TP4_timing_exclusive": true,
+  "acceptance_unchanged": true,
+  "no_false_utilization": true,
+  "source_output_policy": "New source and noncovering outputs under this new authority only; old failed sources/receipts/cutoffs never edited",
+  "repair_priority": [
+    "BOLE R14 proved ABI Ref3/value handoff defect plus actual full-entry source/config/enable checks",
+    "BOLE publication known3 frontdoor defects after repaired diagnostic prerequisites",
+    "DeltaLog first real decode: renew explicit source/read-only storage authority without relabelling old numerical failures"
+  ],
+  "resource_limits": {
+    "model_container_GiB": 32,
+    "CPU_container_GiB": 8,
+    "host_process_GiB": 0.5,
+    "reserve_GiB": 8,
+    "initial_model_available_GiB": 40.5,
+    "swap_used_bytes": 0,
+    "hugepage32GiB_release": "SPENT_NO_ADDITIONAL_RELEASE",
+    "original_storage_limits_unchanged": true,
+    "OOM_is_failure": true
+  },
+  "milestones": [
+    {
+      "by_utc": "2026-10-17T10:43:20Z",
+      "gate": "Proved ABI handoff repair + actual complete enabled CLI/image checks and first relevant NPU whole diagnostic; if another defect surfaces, save firstfault and repair boundedly"
+    },
+    {
+      "by_utc": "2026-10-17T14:43:20Z",
+      "gate": "Mechanism/state correct complete model integration and matched fixed1024 single screen, or explicit evidence-based alternative ready for NPU"
+    },
+    {
+      "by_utc": "2026-10-17T22:43:20Z",
+      "gate": "Promising candidate3pairs and task smoke; keep time for final full tasks"
+    },
+    {
+      "by_utc": "2026-10-18T08:43:20Z",
+      "gate": "Full declared acceptance if proved, otherwise precise failed/inconclusive scope and reusable handoff; no automatic extension"
+    }
+  ],
+  "milestones_are_reviews_not_pass_promises": true,
+  "initial_accepted_technology": false
+}

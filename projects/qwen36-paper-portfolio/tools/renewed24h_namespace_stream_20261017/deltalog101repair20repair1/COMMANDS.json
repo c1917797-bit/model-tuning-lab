@@ -1,0 +1,52 @@
+{
+  "binding": {
+    "args": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair20-repair1-20261017-001/bind_source.py",
+      "--execute",
+      "--template-sha256",
+      "NON_EXECUTABLE_INDEX_USE_COMMANDS_FINAL_TEMPLATE_SHA256",
+      "--bridge-source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_MANIFEST.json\",\"bytes\":67429,\"sha256\":\"871c8e32831ee3eebacd43a084e4416bb14d6d06cd9f5ee08017ba459f287cd8\"}",
+      "--bridge-owner-ref",
+      "{\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json\",\"bytes\":1667,\"sha256\":\"7b10472808da9c409dca97e4f36ff577cf4d090db95c90b556d0bf680f4d25fe\"}",
+      "--component-cpu-owner-ref",
+      "{\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json\",\"bytes\":1426,\"sha256\":\"1ea2eeff549bb8fb036f0b313e57503a87896302be4836f68dba5641e0e4e35f\"}",
+      "--closed-evidence-ref",
+      "{\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence-R6-N16-N160-model-snapshots-MAIN-R2-001/EVIDENCE.json\",\"bytes\":9121,\"sha256\":\"4c8698817d5cdf9b15556293bb3950b137990ad4b0c223ae03de53950f922ead\"}"
+    ]
+  },
+  "default_execute": false,
+  "execute": {
+    "args": [
+      "/usr/bin/env",
+      "MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair20-repair1-20261017-001/host_ticket.py",
+      "--execute",
+      "--source-ref",
+      "ACTUAL_BOUND_FIRSTDECODE_R20REPAIR1_REF3"
+    ]
+  },
+  "execution_ticket": "COMMANDS_FINAL.json",
+  "not_executable": true,
+  "output": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R20R1-main-NEW24H_FIRSTDECODE101R20R1_001",
+  "schema": "deltalog.firstdecode-command-index-not-executable/v1",
+  "sourceaudit": {
+    "args": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair20-repair1-20261017-001/host_ticket.py",
+      "--source-audit",
+      "--source-ref",
+      "ACTUAL_BOUND_FIRSTDECODE_R20REPAIR1_REF3"
+    ]
+  }
+}

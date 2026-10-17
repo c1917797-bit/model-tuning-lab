@@ -1,0 +1,214 @@
+{
+  "schema": "ascend.deltalog-r20repair1-sourceclosure-firstfault/v1",
+  "recorded_utc": "2026-10-17T11:07:00Z",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair20-repair1-20261017-001/SOURCE_MANIFEST.json",
+    "bytes": 259665,
+    "sha256": "86e6dfdc1c691abf271106472095c192744f788c1b2821106624f584338f9df9"
+  },
+  "owner_operation": "exec-000000000000129a",
+  "original_terminal": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": "exit code",
+    "found": true,
+    "kind": "exec",
+    "ok": false,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1",
+            "/usr/bin/prlimit",
+            "--as=536870912:unlimited",
+            "--",
+            "/usr/bin/python3",
+            "-B",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair20-repair1-20261017-001/host_ticket.py",
+            "--execute",
+            "--source-ref",
+            "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair20-repair1-20261017-001/SOURCE_MANIFEST.json\",\"bytes\":259665,\"sha256\":\"86e6dfdc1c691abf271106472095c192744f788c1b2821106624f584338f9df9\"}"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/env",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 1296470,
+          "error": "exit code",
+          "exitCode": 1,
+          "id": "exec-000000000000129a",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "Traceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair20-repair1-20261017-001/host_ticket.py\", line 82, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair20-repair1-20261017-001/host_ticket.py\", line 81, in main\n    return h.main(['--execute','--source-sha256',sr['sha256']])\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 434, in main\n    if __name__ == \"__main__\":\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair20-repair1-20261017-001/host_ticket.py\", line 78, in <lambda>\n    if post_ref is None:h.run=lambda source_ref,started:leaf('run_owned.py').run(h,source_ref,pr,started)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair20-repair1-20261017-001/run_owned.py\", line 88, in run\n    if primary:raise primary\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair20-repair1-20261017-001/run_owned.py\", line 28, in run\n    h.child(cpu,c,'DL-cold-source',[str(h.DEPLOY/'probe.py'),'--execute','--mode','cpu','--source-ref',json.dumps(sr),'--output',str(cpu.out/'CPU.json')],150,observe=False)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair20-repair1-20261017-001/host_ticket.py\", line 70, in child\n    result=original_child(ctl,c,label,*args,**kwargs)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 201, in child\n    return c.write(ctl.out / (label + \"-CHILD.json\"), dict(argv=command, host_pid=process.pid, exit_code=process.returncode,\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py\", line 46, in need\n    raise ValueError(why)\nValueError: original child failure retained: DL-cold-source\n",
+          "stdout": "",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 399,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 399,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 399
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 398,
+          "routeLookupMs": 0,
+          "totalMs": 398
+        }
+      },
+      "traceId": "73d48ebf-41bd-43b4-94c6-ce22c3b7b6c3"
+    },
+    "operationId": "exec-000000000000129a",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": false,
+    "terminal": true
+  },
+  "original_result": {
+    "path": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R20R1-main-NEW24H_FIRSTDECODE101R20R1_001/RESULT.json",
+    "bytes": 29572,
+    "sha256": "b6166077731e1661d16b29a938932cfb80503f37a8bf6a6b6b507f1d45dd433b"
+  },
+  "observations": [
+    {
+      "utc": 1792235186.832996,
+      "release": {
+        "cid": "d91f6408599362a8e733953579b5a35730a608026f524d138c234ccee5005b96",
+        "State": {
+          "Status": "exited",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 137,
+          "Error": "",
+          "StartedAt": "2026-10-17T10:57:26.34427408Z",
+          "FinishedAt": "2026-10-17T10:57:42.54361093Z"
+        },
+        "ExecIDs": null,
+        "Devices": [],
+        "source": "86e6dfdc1c691abf271106472095c192744f788c1b2821106624f584338f9df9"
+      }
+    },
+    {
+      "MemAvailable": [
+        "MemAvailable:   80977820 kB",
+        "SwapTotal:             0 kB",
+        "SwapFree:              0 kB"
+      ],
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        144,
+        145,
+        166
+      ],
+      "free": {
+        "/cache/docker": 23083618304,
+        "/opt/host/vnf/austinov": 212368084992,
+        "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061": 182661197824
+      }
+    },
+    {
+      "DL_summary": {
+        "primary": "ValueError('original child failure retained: DL-cold-source')",
+        "secondary": [],
+        "elapsed": 1295.7241089899908,
+        "cleanup_seconds": 16.254282339999918,
+        "all_created_containers_release_verified": true,
+        "owned_containers": [
+          {
+            "cid": "d91f6408599362a8e733953579b5a35730a608026f524d138c234ccee5005b96",
+            "exact_owned_release_verified": true,
+            "stage": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R20R1-main-NEW24H_FIRSTDECODE101R20R1_001/cpu-preflight"
+          }
+        ],
+        "model_numeric_qualified": false,
+        "performance_ready": false
+      },
+      "DL_post": {
+        "actual_cap_seconds": 900,
+        "elapsed_seconds": 347.405350940011,
+        "metadata_after_hash": true,
+        "registered_cap_seconds": 900,
+        "source_after": true,
+        "storage": {
+          "closed_overlay_ref": {
+            "bytes": 9121,
+            "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence-R6-N16-N160-model-snapshots-MAIN-R2-001/EVIDENCE.json",
+            "sha256": "4c8698817d5cdf9b15556293bb3950b137990ad4b0c223ae03de53950f922ead"
+          },
+          "combined_actual_bytes": 492235,
+          "combined_cap_bytes": 34359738368,
+          "committed_bytes": 55160253920,
+          "filesystem_free_bytes": 182661197824,
+          "ledger_advanced": false,
+          "max_total_bytes": 85899345920,
+          "min_free_bytes": 107374182400,
+          "model_snapshots_reservation_ref": {
+            "bytes": 3807,
+            "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/MODEL_SNAPSHOTS_LEDGER.R20repair1.json",
+            "sha256": "aa1f760e8efbcff4c2ff421e4bd3967d5077f2bb96f2c2afc0e79c2db97bb295"
+          },
+          "root": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061",
+          "scope": "application-observed, not kernel filesystem quota",
+          "used_bytes": 16505962297
+        }
+      },
+      "firstfault": {
+        "path": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R20R1-main-NEW24H_FIRSTDECODE101R20R1_001/cpu-preflight/DL-cold-source.stderr",
+        "bytes": 1041,
+        "sha256": "4f70c546b3ddb7ce02520653a0b317109c903d3b491452701366f43bb51d0585",
+        "content": "Traceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair20-repair1-20261017-001/probe.py\", line 85, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n                                             ^^^^^^\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair20-repair1-20261017-001/probe.py\", line 25, in main\n    own_read_closure=READSET_GUARD.check(m,P)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair20-repair1-20261017-001/readset_guard101r8.py\", line 41, in check\n    if path not in declared:raise ValueError('undeclared own read '+name+':'+str(n.lineno)+' -> '+path)\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: undeclared own read test_source_identity.py:32 -> COMMANDS_FINAL.json\n"
+      }
+    }
+  ],
+  "classification": "IMPLEMENTATION_SOURCE_CLOSURE_NOT_ALGORITHM_NUMERICAL_FAILURE",
+  "model_or_NPU_executed": false,
+  "sameimage_157_pass": false,
+  "performance_result": false,
+  "task_result": false,
+  "next": {
+    "repair": "New R21 COMMANDS_SPEC plus exact COMMANDS_FINAL Ref in bound files, unchanged own-read guard and fullbind/final guards; cheap static closure precedes raw work",
+    "CPU": "BOLE R17 exact savedraw recovery; no repeated model capture",
+    "cutoff": "2026-10-18T08:43:20Z"
+  }
+}

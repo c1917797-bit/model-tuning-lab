@@ -1,0 +1,755 @@
+{
+  "schema": "ascend.bole-r17-independent-math-first-failure/v1",
+  "operationId": "exec-00000000000012ac",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/SOURCE_BOUND.json",
+    "bytes": 6694,
+    "sha256": "ff2f666c9719f7b33f71aeb11d9c9a5bf9fedd45306001b7c071ea8db30d7127"
+  },
+  "sourceaudit": "exec-00000000000012aa EXIT0; readset361",
+  "software": "exec-00000000000012a8 EXIT0 actual host10",
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-r17-math-recovery-MAIN-RENEW24H_001/math/consumer/RESULT.json",
+    "bytes": 886,
+    "sha256": "7cffabb2a921833514564ffd11c0f29f55158dd2271d0c9f839259412ded2778"
+  },
+  "attribution": {
+    "path": "/opt/host/vnf/austinov/run-bole-r17-math-recovery-MAIN-RENEW24H_001/math/consumer/ATTRIBUTION.json",
+    "bytes": 12893,
+    "sha256": "b140fabff86003e0bf2f11d0762e7c4e203c33aa6ef50b6e8adeb37a4eaeb665"
+  },
+  "summary": {
+    "ranks": [
+      {
+        "rank": 0,
+        "ref": {
+          "path": "/opt/host/vnf/austinov/run-bole-r17-math-recovery-MAIN-RENEW24H_001/math/consumer/RANK-0.json",
+          "bytes": 110060,
+          "sha256": "25939b0c51aebd3b03b4f2bb59bcc6dd4332a03bc8ea113c6e132560b5ae1c49"
+        },
+        "flags": {
+          "accepted_path_writeback_restore_pass": true,
+          "component_checks_pass": false,
+          "greedy_identity_pass": false,
+          "model_ready": false,
+          "production_ready": false,
+          "scheduler_committed": false,
+          "schema": "bole.actual-model-three-node-independent-diagnostic/v1",
+          "whole_numerical_qualified": false,
+          "whole_numerical_threshold": null
+        },
+        "counts": {
+          "gdn": 48,
+          "fa": 16
+        },
+        "failed_row_fields": [
+          "layer23/attention/double/pointwise_pass",
+          "layer23/attention/float/pointwise_pass",
+          "layer27/attention/double/pointwise_pass",
+          "layer27/attention/float/pointwise_pass",
+          "layer39/attention/double/pointwise_pass",
+          "layer39/attention/float/pointwise_pass",
+          "layer47/attention/double/pointwise_pass",
+          "layer47/attention/float/pointwise_pass",
+          "layer51/attention/double/pointwise_pass",
+          "layer51/attention/float/pointwise_pass",
+          "layer55/attention/double/pointwise_pass",
+          "layer55/attention/float/pointwise_pass",
+          "layer63/attention/double/pointwise_pass",
+          "layer63/attention/float/pointwise_pass"
+        ],
+        "failed_fa_rows": [
+          {
+            "layer": 23,
+            "attention": {
+              "double": {
+                "peak_abs": 0.01160388111952404,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.01160430908203125,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 27,
+            "attention": {
+              "double": {
+                "peak_abs": 0.02472059085620515,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.024721145629882812,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 39,
+            "attention": {
+              "double": {
+                "peak_abs": 0.008609082231856746,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.008605480194091797,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 47,
+            "attention": {
+              "double": {
+                "peak_abs": 0.04629387352281711,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.04628181457519531,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 51,
+            "attention": {
+              "double": {
+                "peak_abs": 0.02034336106484602,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.02034759521484375,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 55,
+            "attention": {
+              "double": {
+                "peak_abs": 0.015074336928583065,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.015075206756591797,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 63,
+            "attention": {
+              "double": {
+                "peak_abs": 0.0635726441533393,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.06357383728027344,
+                "pointwise_pass": false
+              }
+            }
+          }
+        ],
+        "whole_discrepancies": [
+          {
+            "argmax_equal": true,
+            "hidden": {
+              "peak_abs": 0.25,
+              "reference_l2": 116.96723424593641,
+              "relative_l2": 0.03381108352522701
+            },
+            "logits": {
+              "peak_abs": 0.328125,
+              "reference_l2": 1802.2840884123295,
+              "relative_l2": 0.015551308185053233
+            },
+            "node": 0,
+            "path": 1
+          },
+          {
+            "argmax_equal": false,
+            "hidden": {
+              "peak_abs": 3.5,
+              "reference_l2": 113.42862184358503,
+              "relative_l2": 0.47028924999504856
+            },
+            "logits": {
+              "peak_abs": 8.671875,
+              "reference_l2": 1851.0923151379034,
+              "relative_l2": 0.2049591956678337
+            },
+            "node": 1,
+            "path": 1
+          },
+          {
+            "argmax_equal": true,
+            "hidden": {
+              "peak_abs": 0.3125,
+              "reference_l2": 117.24001701503704,
+              "relative_l2": 0.0501172043187898
+            },
+            "logits": {
+              "peak_abs": 0.515625,
+              "reference_l2": 1802.687630108648,
+              "relative_l2": 0.022687342125297973
+            },
+            "node": 0,
+            "path": 2
+          },
+          {
+            "argmax_equal": true,
+            "hidden": {
+              "peak_abs": 0.375,
+              "reference_l2": 127.2731106755303,
+              "relative_l2": 0.015857777698755182
+            },
+            "logits": {
+              "peak_abs": 0.15625,
+              "reference_l2": 1258.061127538014,
+              "relative_l2": 0.012342911320302323
+            },
+            "node": 2,
+            "path": 2
+          }
+        ]
+      },
+      {
+        "rank": 1,
+        "ref": {
+          "path": "/opt/host/vnf/austinov/run-bole-r17-math-recovery-MAIN-RENEW24H_001/math/consumer/RANK-1.json",
+          "bytes": 110006,
+          "sha256": "c2da8b09d19a02a0e8d79c326a1f7aab19b61d062a2bccf6a714901e460c03f1"
+        },
+        "flags": {
+          "accepted_path_writeback_restore_pass": true,
+          "component_checks_pass": false,
+          "greedy_identity_pass": false,
+          "model_ready": false,
+          "production_ready": false,
+          "scheduler_committed": false,
+          "schema": "bole.actual-model-three-node-independent-diagnostic/v1",
+          "whole_numerical_qualified": false,
+          "whole_numerical_threshold": null
+        },
+        "counts": {
+          "gdn": 48,
+          "fa": 16
+        },
+        "failed_row_fields": [
+          "layer31/attention/double/pointwise_pass",
+          "layer31/attention/float/pointwise_pass",
+          "layer39/attention/double/pointwise_pass",
+          "layer39/attention/float/pointwise_pass",
+          "layer43/attention/double/pointwise_pass",
+          "layer43/attention/float/pointwise_pass",
+          "layer63/attention/double/pointwise_pass",
+          "layer63/attention/float/pointwise_pass"
+        ],
+        "failed_fa_rows": [
+          {
+            "layer": 31,
+            "attention": {
+              "double": {
+                "peak_abs": 0.018947459271817735,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.018950462341308594,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 39,
+            "attention": {
+              "double": {
+                "peak_abs": 0.012323856072647743,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.012320518493652344,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 43,
+            "attention": {
+              "double": {
+                "peak_abs": 0.008532633362745567,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.008532047271728516,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 63,
+            "attention": {
+              "double": {
+                "peak_abs": 0.07100085874769135,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.07100486755371094,
+                "pointwise_pass": false
+              }
+            }
+          }
+        ],
+        "whole_discrepancies": [
+          {
+            "argmax_equal": true,
+            "hidden": {
+              "peak_abs": 0.25,
+              "reference_l2": 116.96723424593641,
+              "relative_l2": 0.03381108352522701
+            },
+            "logits": {
+              "peak_abs": 0.328125,
+              "reference_l2": 1802.2840884123295,
+              "relative_l2": 0.015551308185053233
+            },
+            "node": 0,
+            "path": 1
+          },
+          {
+            "argmax_equal": false,
+            "hidden": {
+              "peak_abs": 3.5,
+              "reference_l2": 113.42862184358503,
+              "relative_l2": 0.47028924999504856
+            },
+            "logits": {
+              "peak_abs": 8.671875,
+              "reference_l2": 1851.0923151379034,
+              "relative_l2": 0.2049591956678337
+            },
+            "node": 1,
+            "path": 1
+          },
+          {
+            "argmax_equal": true,
+            "hidden": {
+              "peak_abs": 0.3125,
+              "reference_l2": 117.24001701503704,
+              "relative_l2": 0.0501172043187898
+            },
+            "logits": {
+              "peak_abs": 0.515625,
+              "reference_l2": 1802.687630108648,
+              "relative_l2": 0.022687342125297973
+            },
+            "node": 0,
+            "path": 2
+          },
+          {
+            "argmax_equal": true,
+            "hidden": {
+              "peak_abs": 0.375,
+              "reference_l2": 127.2731106755303,
+              "relative_l2": 0.015857777698755182
+            },
+            "logits": {
+              "peak_abs": 0.15625,
+              "reference_l2": 1258.061127538014,
+              "relative_l2": 0.012342911320302323
+            },
+            "node": 2,
+            "path": 2
+          }
+        ]
+      },
+      {
+        "rank": 2,
+        "ref": {
+          "path": "/opt/host/vnf/austinov/run-bole-r17-math-recovery-MAIN-RENEW24H_001/math/consumer/RANK-2.json",
+          "bytes": 110133,
+          "sha256": "e46cb4a19ec7494bc86b3b98794a152a76a8793d1bcbd1a236095eac690c52ee"
+        },
+        "flags": {
+          "accepted_path_writeback_restore_pass": true,
+          "component_checks_pass": false,
+          "greedy_identity_pass": false,
+          "model_ready": false,
+          "production_ready": false,
+          "scheduler_committed": false,
+          "schema": "bole.actual-model-three-node-independent-diagnostic/v1",
+          "whole_numerical_qualified": false,
+          "whole_numerical_threshold": null
+        },
+        "counts": {
+          "gdn": 48,
+          "fa": 16
+        },
+        "failed_row_fields": [
+          "layer3/attention/double/pointwise_pass",
+          "layer3/attention/float/pointwise_pass",
+          "layer43/attention/double/pointwise_pass",
+          "layer43/attention/float/pointwise_pass",
+          "layer51/attention/double/pointwise_pass",
+          "layer51/attention/float/pointwise_pass",
+          "layer59/attention/double/pointwise_pass",
+          "layer59/attention/float/pointwise_pass"
+        ],
+        "failed_fa_rows": [
+          {
+            "layer": 3,
+            "attention": {
+              "double": {
+                "peak_abs": 0.006983362772808643,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.00698399543762207,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 43,
+            "attention": {
+              "double": {
+                "peak_abs": 0.02029058536554551,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.02028942108154297,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 51,
+            "attention": {
+              "double": {
+                "peak_abs": 0.03071650662707981,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.030721664428710938,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 59,
+            "attention": {
+              "double": {
+                "peak_abs": 0.03342950899535424,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.03343009948730469,
+                "pointwise_pass": false
+              }
+            }
+          }
+        ],
+        "whole_discrepancies": [
+          {
+            "argmax_equal": true,
+            "hidden": {
+              "peak_abs": 0.25,
+              "reference_l2": 116.96723424593641,
+              "relative_l2": 0.03381108352522701
+            },
+            "logits": {
+              "peak_abs": 0.328125,
+              "reference_l2": 1802.2840884123295,
+              "relative_l2": 0.015551308185053233
+            },
+            "node": 0,
+            "path": 1
+          },
+          {
+            "argmax_equal": false,
+            "hidden": {
+              "peak_abs": 3.5,
+              "reference_l2": 113.42862184358503,
+              "relative_l2": 0.47028924999504856
+            },
+            "logits": {
+              "peak_abs": 8.671875,
+              "reference_l2": 1851.0923151379034,
+              "relative_l2": 0.2049591956678337
+            },
+            "node": 1,
+            "path": 1
+          },
+          {
+            "argmax_equal": true,
+            "hidden": {
+              "peak_abs": 0.3125,
+              "reference_l2": 117.24001701503704,
+              "relative_l2": 0.0501172043187898
+            },
+            "logits": {
+              "peak_abs": 0.515625,
+              "reference_l2": 1802.687630108648,
+              "relative_l2": 0.022687342125297973
+            },
+            "node": 0,
+            "path": 2
+          },
+          {
+            "argmax_equal": true,
+            "hidden": {
+              "peak_abs": 0.375,
+              "reference_l2": 127.2731106755303,
+              "relative_l2": 0.015857777698755182
+            },
+            "logits": {
+              "peak_abs": 0.15625,
+              "reference_l2": 1258.061127538014,
+              "relative_l2": 0.012342911320302323
+            },
+            "node": 2,
+            "path": 2
+          }
+        ]
+      },
+      {
+        "rank": 3,
+        "ref": {
+          "path": "/opt/host/vnf/austinov/run-bole-r17-math-recovery-MAIN-RENEW24H_001/math/consumer/RANK-3.json",
+          "bytes": 110013,
+          "sha256": "23fce9e1bfacd5a14ff49942ed1c6b1279e38b3a9a49ec3413ab65fb9cc3cfb0"
+        },
+        "flags": {
+          "accepted_path_writeback_restore_pass": true,
+          "component_checks_pass": false,
+          "greedy_identity_pass": false,
+          "model_ready": false,
+          "production_ready": false,
+          "scheduler_committed": false,
+          "schema": "bole.actual-model-three-node-independent-diagnostic/v1",
+          "whole_numerical_qualified": false,
+          "whole_numerical_threshold": null
+        },
+        "counts": {
+          "gdn": 48,
+          "fa": 16
+        },
+        "failed_row_fields": [
+          "layer31/attention/double/pointwise_pass",
+          "layer31/attention/float/pointwise_pass",
+          "layer43/attention/double/pointwise_pass",
+          "layer43/attention/float/pointwise_pass",
+          "layer51/attention/double/pointwise_pass",
+          "layer51/attention/float/pointwise_pass",
+          "layer55/attention/double/pointwise_pass",
+          "layer55/attention/float/pointwise_pass",
+          "layer59/attention/double/pointwise_pass",
+          "layer59/attention/float/pointwise_pass",
+          "layer63/attention/double/pointwise_pass",
+          "layer63/attention/float/pointwise_pass"
+        ],
+        "failed_fa_rows": [
+          {
+            "layer": 31,
+            "attention": {
+              "double": {
+                "peak_abs": 0.0407860302655223,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.040805816650390625,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 43,
+            "attention": {
+              "double": {
+                "peak_abs": 0.02213911626043874,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.022139549255371094,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 51,
+            "attention": {
+              "double": {
+                "peak_abs": 0.02981022085834617,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.029806137084960938,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 55,
+            "attention": {
+              "double": {
+                "peak_abs": 0.04469075244821141,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.044689178466796875,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 59,
+            "attention": {
+              "double": {
+                "peak_abs": 0.07019773344858038,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.07019615173339844,
+                "pointwise_pass": false
+              }
+            }
+          },
+          {
+            "layer": 63,
+            "attention": {
+              "double": {
+                "peak_abs": 0.06160621609277328,
+                "pointwise_pass": false
+              },
+              "float": {
+                "peak_abs": 0.06160926818847656,
+                "pointwise_pass": false
+              }
+            }
+          }
+        ],
+        "whole_discrepancies": [
+          {
+            "argmax_equal": true,
+            "hidden": {
+              "peak_abs": 0.25,
+              "reference_l2": 116.96723424593641,
+              "relative_l2": 0.03381108352522701
+            },
+            "logits": {
+              "peak_abs": 0.328125,
+              "reference_l2": 1802.2840884123295,
+              "relative_l2": 0.015551308185053233
+            },
+            "node": 0,
+            "path": 1
+          },
+          {
+            "argmax_equal": false,
+            "hidden": {
+              "peak_abs": 3.5,
+              "reference_l2": 113.42862184358503,
+              "relative_l2": 0.47028924999504856
+            },
+            "logits": {
+              "peak_abs": 8.671875,
+              "reference_l2": 1851.0923151379034,
+              "relative_l2": 0.2049591956678337
+            },
+            "node": 1,
+            "path": 1
+          },
+          {
+            "argmax_equal": true,
+            "hidden": {
+              "peak_abs": 0.3125,
+              "reference_l2": 117.24001701503704,
+              "relative_l2": 0.0501172043187898
+            },
+            "logits": {
+              "peak_abs": 0.515625,
+              "reference_l2": 1802.687630108648,
+              "relative_l2": 0.022687342125297973
+            },
+            "node": 0,
+            "path": 2
+          },
+          {
+            "argmax_equal": true,
+            "hidden": {
+              "peak_abs": 0.375,
+              "reference_l2": 127.2731106755303,
+              "relative_l2": 0.015857777698755182
+            },
+            "logits": {
+              "peak_abs": 0.15625,
+              "reference_l2": 1258.061127538014,
+              "relative_l2": 0.012342911320302323
+            },
+            "node": 2,
+            "path": 2
+          }
+        ]
+      }
+    ],
+    "result_ref": {
+      "path": "/opt/host/vnf/austinov/run-bole-r17-math-recovery-MAIN-RENEW24H_001/math/consumer/RESULT.json",
+      "bytes": 886,
+      "sha256": "7cffabb2a921833514564ffd11c0f29f55158dd2271d0c9f839259412ded2778"
+    },
+    "result": {
+      "Devices": [],
+      "NPU": false,
+      "cid": "c488ea87797542b7032fcb25bc23fc29e844bb839a5eaa57f739e73d237581ce",
+      "elapsed": 37.14289123995695,
+      "numeric_owner": null,
+      "primary": "ValueError('actual child exit0')",
+      "qualified": false,
+      "resource_release_verified": true,
+      "schema": "bole.r17-savedraw-math-owned/v1",
+      "secondary": [],
+      "source": {
+        "bytes": 6694,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/SOURCE_BOUND.json",
+        "sha256": "ff2f666c9719f7b33f71aeb11d9c9a5bf9fedd45306001b7c071ea8db30d7127"
+      },
+      "stage_ref": null,
+      "stage_result": {
+        "bytes": 12893,
+        "path": "/opt/host/vnf/austinov/run-bole-r17-math-recovery-MAIN-RENEW24H_001/math/consumer/ATTRIBUTION.json",
+        "sha256": "b140fabff86003e0bf2f11d0762e7c4e203c33aa6ef50b6e8adeb37a4eaeb665"
+      },
+      "stopped_retained": true,
+      "used_bytes": 1271366339,
+      "whole_elapsed": 46.499918760033324
+    },
+    "attribution_ref": {
+      "path": "/opt/host/vnf/austinov/run-bole-r17-math-recovery-MAIN-RENEW24H_001/math/consumer/ATTRIBUTION.json",
+      "bytes": 12893,
+      "sha256": "b140fabff86003e0bf2f11d0762e7c4e203c33aa6ef50b6e8adeb37a4eaeb665"
+    },
+    "fresh_released": {
+      "cid": "c488ea87797542b7032fcb25bc23fc29e844bb839a5eaa57f739e73d237581ce",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 1,
+        "Error": "",
+        "StartedAt": "2026-10-17T11:07:40.90113597Z",
+        "FinishedAt": "2026-10-17T11:08:12.89245923Z"
+      },
+      "ExecIDs": null,
+      "Devices": []
+    }
+  },
+  "classification": "NUMERICAL_GATE_FAIL_CURRENT_IMPLEMENTATION_OR_REFERENCE_UNRESOLVED",
+  "root_cause_not_yet_proven": true,
+  "paper_no_go": false,
+  "performance_legal": false,
+  "next": "Source+savedraw single-factor FA native candidate / independent oracle / masks / BF16 precision diagnosis before repeated full-model capture; R18 identity-only repair cannot solve this math failure."
+}

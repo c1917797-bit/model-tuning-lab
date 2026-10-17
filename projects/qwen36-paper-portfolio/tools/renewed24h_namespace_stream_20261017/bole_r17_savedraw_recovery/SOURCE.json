@@ -1,0 +1,137 @@
+{
+  "authority_ref": {
+    "bytes": 3012,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+    "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+  },
+  "default_enabled": false,
+  "donor": {
+    "bytes": 16403,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-native-conv-calibration-owned-new24h-v1-118-001/owned_cpu116.py",
+    "sha256": "57287570b97c030a5ff2ffd593c3f3375ca79d045c1a9395f76a40605d2f018c"
+  },
+  "files": {
+    "HANDOFF.md": {
+      "bytes": 2885,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/HANDOFF.md",
+      "sha256": "6c17656b513a73591e53d6e39200ffb6f8c38677b7c2d300267837ea9cb55e75"
+    },
+    "HANDOFF_R17.md": {
+      "bytes": 2544,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/HANDOFF_R17.md",
+      "sha256": "b01dc6d199b2076abfeb83284749e3bc1b42ce174aeb962a42ff23e3cd53e651"
+    },
+    "OWNER_EDITS.json": {
+      "bytes": 32986,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/OWNER_EDITS.json",
+      "sha256": "a05e60a669b8cce87b2e930ee97fc401cd5e8b9053eab3d36f770d6e9f42bc9e"
+    },
+    "bind.py": {
+      "bytes": 1277,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/bind.py",
+      "sha256": "d04c5ea7c76a077afcb603217864f8052c28616480eb1e8758c15e9129eb9591"
+    },
+    "entry.py": {
+      "bytes": 972,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/entry.py",
+      "sha256": "739f45a546ad838362ba61ea2158a4f1e92e6156b751de4ab68850402181d354"
+    },
+    "evidence/ACTUAL_R16_TERMINAL.json": {
+      "bytes": 3170,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/evidence/ACTUAL_R16_TERMINAL.json",
+      "sha256": "e669dc5433b326776143396ecb25b9cc3b30d2b71bfbf16d17b528fc483eef95"
+    },
+    "evidence/BOLE_R17_EVIDENCE_COMPACT.json": {
+      "bytes": 7187,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/evidence/BOLE_R17_EVIDENCE_COMPACT.json",
+      "sha256": "5142f28dddead60cb9a415facacaaec63bbb9153d24528bbaaa9fcb1d095b2ac"
+    },
+    "evidence/BOLE_R17_NAMESPACE_FIRSTFAULT_20261017.json": {
+      "bytes": 3939,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/evidence/BOLE_R17_NAMESPACE_FIRSTFAULT_20261017.json",
+      "sha256": "709260d9ac258fdef39c10e30692d3ee8b0a0ac116deaaacca29226dcddc6aa7"
+    },
+    "evidence/BOLE_R17_RELEASE_COMPACT.json": {
+      "bytes": 18977,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/evidence/BOLE_R17_RELEASE_COMPACT.json",
+      "sha256": "b7a468bf3f08475789fc9ac83932c0066a1378783b52f3de14b7394d71d10126"
+    },
+    "evidence/BOLE_R17_TERMINAL_OPERATION_FINAL.json": {
+      "bytes": 2864,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/evidence/BOLE_R17_TERMINAL_OPERATION_FINAL.json",
+      "sha256": "7e75b0ae2a9d62b08741a32fbcb6b6e2a0d89cb636955ecb36176da0e8a303ed"
+    },
+    "evidence/ORIGINAL_NATIVE_RECEIPT_R17.py": {
+      "bytes": 3171,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/evidence/ORIGINAL_NATIVE_RECEIPT_R17.py",
+      "sha256": "6c450ecb8bb47610361e163d51ae6028ea61e359a5a581bee3cfb87770fb760f"
+    },
+    "evidence/ORIGINAL_OWNED_CPU118.py": {
+      "bytes": 16403,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/evidence/ORIGINAL_OWNED_CPU118.py",
+      "sha256": "57287570b97c030a5ff2ffd593c3f3375ca79d045c1a9395f76a40605d2f018c"
+    },
+    "evidence/SMALL_METADATA_FIXTURES.json": {
+      "bytes": 388718,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/evidence/SMALL_METADATA_FIXTURES.json",
+      "sha256": "e6b0ec6bbf95e58aa818aaf122bb1ed9ffc3258db3106635f2ac6cb18e32428e"
+    },
+    "owner.py": {
+      "bytes": 15938,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/owner.py",
+      "sha256": "09e607c1804c5a3ece7247eef5161a6be358f7ad9480a244299ea912e6f1f3e3"
+    },
+    "plan.py": {
+      "bytes": 12308,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/plan.py",
+      "sha256": "ed8dcb21411c0147b14805f77ff17ada2bb3350e30a44c11873532d044032394"
+    },
+    "recover.py": {
+      "bytes": 6246,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/recover.py",
+      "sha256": "b3e3c4e7e4c59aea138b0437d8e943e06189dc57dfed5829f2d708c3ef82cf4f"
+    },
+    "recovery_io.py": {
+      "bytes": 1037,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/recovery_io.py",
+      "sha256": "332c4bec18d5e82a19bf807b96397b76a7d95f4dae168b881379cabfc3a8d78d"
+    },
+    "test_r17.py": {
+      "bytes": 5122,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/test_r17.py",
+      "sha256": "913e4e0a3c9d370394d577ca18773e1decc0d2603c137cda0b894706ae551e14"
+    },
+    "test_recovery.py": {
+      "bytes": 6649,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/test_recovery.py",
+      "sha256": "477667294d9dd9170d7d3e679a8e3def727613fefe1e87332e60b5002ea07e4e"
+    }
+  },
+  "live_frontend_binding": "missing-not-reconstructed",
+  "native_snapshots": "actual-original-durable-four-not-new-proof",
+  "original_owner_pass": false,
+  "output_root": "/opt/host/vnf/austinov/run-bole-r17-math-recovery-MAIN-RENEW24H_001/math",
+  "prepared_only": true,
+  "prepared_template": null,
+  "profile": "math",
+  "qualified": false,
+  "recovery_plan_ref": null,
+  "resources": {
+    "Devices": [],
+    "NPU": false,
+    "child_max_seconds": 810,
+    "cleanup_max_seconds": 90,
+    "guest_GiB": 8,
+    "guest_cpus": 1,
+    "host_MiB": 512,
+    "host_cpu": 166,
+    "initial_RAM_GiB": 16.5,
+    "initial_disk_floor_GiB": 13.5,
+    "live_disk_reserve_GiB": 8.5,
+    "output_GiB": 5,
+    "whole_seconds": 900
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001",
+  "schema": "bole.r17-savedraw-recovery-source/v1",
+  "software_controls": 10
+}

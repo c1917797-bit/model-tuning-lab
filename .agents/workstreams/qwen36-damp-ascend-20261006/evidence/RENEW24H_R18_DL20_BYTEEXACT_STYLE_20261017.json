@@ -1,0 +1,104 @@
+{
+  "schema": "ascend.frozen-byteexact-style-exceptions/v1",
+  "original_full_check": {
+    "argv": [
+      "/usr/bin/git",
+      "diff",
+      "--cached"
+    ],
+    "exit": 2,
+    "stdout": "projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/dependencies/original005_server_entry.py:23: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/evidence/original114_owned_substrate.py:62: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/evidence/runner.py:693: trailing whitespace.\n+        # On certain devices, CPU-side all_reduce may return dirty data. \nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/evidence/runner.py:1145: trailing whitespace.\n+        \nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/evidence/runner.py:1650: trailing whitespace.\n+        with torch.npu.stream(self.valid_sampled_token_count_copy_stream): \nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/evidence/runner.py:1971: trailing whitespace.\n+       \nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/evidence/runner.py:2002: trailing whitespace.\n+            # NOTE: This branch specifically triggers a deepcopy during the prefill phase \nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/evidence/runner.py:2003: trailing whitespace.\n+            # only for PCP (Parallel Context Processing) + Multi-Modal (MM) scenarios. \nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/evidence/runner.py:2004: trailing whitespace.\n+            # It does not affect other use cases. This is a temporary workaround and \nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/evidence/runner.py:2577: trailing whitespace.\n+        \nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/evidence/runner.py:3472: trailing whitespace.\n+        \nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/evidence/runner.py:3475: trailing whitespace.\n+        \nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/evidence/runner.py:3805: trailing whitespace.\n+        \nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/guest_canary.py:18: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/model_entry.py:422: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/owned_create.py:33: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/owned_substrate.py:64: new blank line at EOF.\nprojects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/worker_snapshot_owner.py:40: new blank line at EOF.\n",
+    "stderr": ""
+  },
+  "verified_byteexact_scoped_check": {
+    "exact_frozen_exception_files": [
+      {
+        "archive": "projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/dependencies/original005_server_entry.py",
+        "original": {
+          "bytes": 2379,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair18/dependencies/original005_server_entry.py",
+          "sha256": "ac0931cb9f17a93ae923c7cbfd1a92e757d376a417c1ed910b134f984216d080"
+        }
+      },
+      {
+        "archive": "projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/evidence/original114_owned_substrate.py",
+        "original": {
+          "bytes": 3448,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair18/evidence/original114_owned_substrate.py",
+          "sha256": "38f99e7a46e1a374826cf5a53c4d729af01d7623a3f487dd47f0acbc679b7431"
+        }
+      },
+      {
+        "archive": "projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/evidence/runner.py",
+        "original": {
+          "bytes": 258160,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair18/evidence/runner.py",
+          "sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968"
+        }
+      },
+      {
+        "archive": "projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/guest_canary.py",
+        "original": {
+          "bytes": 945,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair18/guest_canary.py",
+          "sha256": "4d19f8a4782a112a0300228e950715175cd4274fe0324af58258e00db2c72114"
+        }
+      },
+      {
+        "archive": "projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/model_entry.py",
+        "original": {
+          "bytes": 30536,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair18/model_entry.py",
+          "sha256": "7b2cd9e826e7d97e691b78edbd10e7fccdfed04fc3e17dd8fddb054b661a39f6"
+        }
+      },
+      {
+        "archive": "projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/owned_create.py",
+        "original": {
+          "bytes": 2122,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair18/owned_create.py",
+          "sha256": "f6df587ee2913a62b7f70193d57896381f713f6c039151b4db3f16c4baafa7f6"
+        }
+      },
+      {
+        "archive": "projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/owned_substrate.py",
+        "original": {
+          "bytes": 3518,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair18/owned_substrate.py",
+          "sha256": "697ba24e628fb6330734a2ea6444e89429d856c2e4b3d42ae7f4292250d7c5cf"
+        }
+      },
+      {
+        "archive": "projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/worker_snapshot_owner.py",
+        "original": {
+          "bytes": 2299,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair18/worker_snapshot_owner.py",
+          "sha256": "bc0894c9aded1994dc0cf796537fd707d04d1c69174df5aa2d76cc90b1602bd2"
+        }
+      }
+    ],
+    "authored_scoped_check": {
+      "argv": [
+        "/usr/bin/git",
+        "diff",
+        "--cached",
+        "--check",
+        "--",
+        ".",
+        ":(exclude)projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/dependencies/original005_server_entry.py",
+        ":(exclude)projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/evidence/original114_owned_substrate.py",
+        ":(exclude)projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/evidence/runner.py",
+        ":(exclude)projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/guest_canary.py",
+        ":(exclude)projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/model_entry.py",
+        ":(exclude)projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/owned_create.py",
+        ":(exclude)projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/owned_substrate.py",
+        ":(exclude)projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole131repair18/worker_snapshot_owner.py"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "full_diff_check_PASS": false
+  },
+  "reason": "Frozen installed-source provenance is preserved byte-exact; do not reformat it to conceal historical whitespace. Newly authored scoped diff PASS, full diff retained exit2."
+}

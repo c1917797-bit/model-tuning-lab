@@ -1,0 +1,87 @@
+{
+  "after_host_ref": {
+    "bytes": 11070,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair5/host090.py",
+    "sha256": "c993b1f07d68770ea3de472ce788d5c987e4479275cd4c17889b322913b7ea46"
+  },
+  "before_host_ref": {
+    "bytes": 9878,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair4/host090.py",
+    "sha256": "29da9e5bce1861261065676b1342ce1cfd2b8374177de0923884b7ad4a422b67"
+  },
+  "edits": [
+    [
+      ";import contract090 as C",
+      ";import contract090 as C\nimport fault_receipt"
+    ],
+    [
+      "before={r['path']:r['sha256']for r in readset}",
+      "before={r['path']:r['sha256']for r in readset};phase=dict(phase='setup',step='ready',ordinal=0)\n def mark(name,step):phase.update(phase=name,step=step,ordinal=phase['ordinal']+1)"
+    ],
+    [
+      "  leaf=H.fresh_leaf(a.output/role);H.outputs(leaf);(leaf/'receipts').mkdir();ctl=H.controller(S,joint)(argparse.Namespace(output_dir=leaf),start);owned.append(ctl);ctl.observe(role+'-admission',initial=True);create(c,S,ctl,sr,[*readset,*extra],'cpu-preflight'if cpu else role,P);return ctl",
+      "  mark(role,'fresh-leaf');leaf=H.fresh_leaf(a.output/role);H.outputs(leaf);(leaf/'receipts').mkdir();mark(role,'controller');ctl=H.controller(S,joint)(argparse.Namespace(output_dir=leaf),start);owned.append(ctl);mark(role,'initial-observation');ctl.observe(role+'-admission',initial=True);mark(role,'create-start-inspect');create(c,S,ctl,sr,[*readset,*extra],'cpu-preflight'if cpu else role,P);return ctl"
+    ],
+    [
+      " def child(ctl,label,args,limit):return H.child(ctl,label,args,limit,observe=ctl.expected['arm']!='cpu-preflight')",
+      " def child(ctl,label,args,limit):\n  mark(ctl.expected['arm'],'child-'+label);return H.child(ctl,label,args,limit,observe=ctl.expected['arm']!='cpu-preflight')"
+    ],
+    [
+      "  argv=c.docker_argv(ctl.cid,args);so=",
+      "  mark(ctl.expected['arm'],'spawn-'+label);argv=c.docker_argv(ctl.cid,args);so="
+    ],
+    [
+      "  r=ctl.cleanup();ctl._pair_closed=True;v=c.obj(r);",
+      "  mark(ctl.expected['arm'],'cleanup-close');r=ctl.cleanup();ctl._pair_closed=True;mark(ctl.expected['arm'],'cleanup-receipt');v=c.obj(r);"
+    ],
+    [
+      "   c.model(c.MODEL_REF);ctl=",
+      "   mark('dense','checkpoint-model');c.model(c.MODEL_REF);ctl="
+    ],
+    [
+      "    C.need(ctl.server.poll()is None and time.monotonic()<end,'one bounded native server startup');ctl.observe('dense-startup')",
+      "    mark('dense-startup','server-poll');C.need(ctl.server.poll()is None and time.monotonic()<end,'one bounded native server startup');mark('dense-startup','protected-observation');ctl.observe('dense-startup')"
+    ],
+    [
+      ";r=ctl.h.run(ctl.wrapper(argv),min(4,ctl.remaining(cap=4)));c.write(ctl.out/('health-%d.json'%time.time_ns()),r)",
+      ";mark('dense-startup','health-run');r=ctl.h.run(ctl.wrapper(argv),min(4,ctl.remaining(cap=4)));mark('dense-startup','health-receipt');c.write(ctl.out/('health-%d.json'%time.time_ns()),r)"
+    ],
+    [
+      "   load_rows=[",
+      "   mark('dense-startup','mtp-load-read');load_rows=["
+    ],
+    [
+      "   load_proof=consume_load(",
+      "   mark('dense-startup','mtp-load-consume');load_proof=consume_load("
+    ],
+    [
+      "    C.need(ctl.server.poll()is None and time.monotonic()<until,'one bounded actual model smoke client');ctl.observe('model-smoke');time.sleep(.2)",
+      "    mark('model-smoke','client-server-poll');C.need(ctl.server.poll()is None and time.monotonic()<until,'one bounded actual model smoke client');mark('model-smoke','protected-observation');ctl.observe('model-smoke');time.sleep(.2)"
+    ],
+    [
+      "   summary['actual_client_terminal']=",
+      "   mark('model-smoke','client-terminal-receipt');summary['actual_client_terminal']="
+    ],
+    [
+      "   rows,bindings=snapshot(",
+      "   mark('model-smoke','worker-snapshot');rows,bindings=snapshot("
+    ],
+    [
+      "   receiptroot=ctl.out/'receipts';ranks=[]",
+      "   mark('model-smoke','rank-receipt-read');receiptroot=ctl.out/'receipts';ranks=[]"
+    ],
+    [
+      "   frontend_binding=identity_owner.frontend(",
+      "   mark('model-smoke','frontend-identity');frontend_binding=identity_owner.frontend("
+    ],
+    [
+      "   summary['independent']=c.ref(",
+      "   mark('consumer','independent-report-read');summary['independent']=c.ref("
+    ],
+    [
+      " except BaseException as e:primary=repr(e)",
+      " except BaseException as e:\n  primary=repr(e)\n  try:summary['first_host_fault']=fault_receipt.persist(a.output,sr,e,phase)\n  except BaseException as evidence_error:joint.secondary.append('first-fault-persistence '+repr(evidence_error))"
+    ]
+  ],
+  "schema": "bole.reviewed-host-telemetry-inverse/v131r5"
+}

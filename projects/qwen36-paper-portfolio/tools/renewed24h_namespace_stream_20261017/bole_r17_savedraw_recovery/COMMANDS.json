@@ -1,0 +1,68 @@
+{
+  "bind": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/bind.py",
+    "--execute",
+    "--template-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/SOURCE_TEMPLATE.json\",\"bytes\":6912,\"sha256\":\"e1854a5b46b563eb6cb570bb7815c5d66a7246b80dc50d808056d357e13ab123\"}",
+    "--terminal-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/evidence/BOLE_R17_TERMINAL_OPERATION_FINAL.json\",\"bytes\":2864,\"sha256\":\"7e75b0ae2a9d62b08741a32fbcb6b6e2a0d89cb636955ecb36176da0e8a303ed\"}"
+  ],
+  "execute": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/owner.py",
+    "--execute",
+    "--source-ref",
+    "REQUIRED_ACTUAL_NEW_BOUND_SOURCE_REF3",
+    "--host-cpu",
+    "166",
+    "--guest-cpu",
+    "REQUIRED_DISTINCT_FRESH_GUEST_CPU",
+    "--output",
+    "/opt/host/vnf/austinov/run-bole-r17-math-recovery-MAIN-RENEW24H_001/math/consumer"
+  ],
+  "parent_must_be_fresh_precreated": "/opt/host/vnf/austinov/run-bole-r17-math-recovery-MAIN-RENEW24H_001/math",
+  "qualified": false,
+  "resources": {
+    "Devices": [],
+    "NPU": false,
+    "child_max_seconds": 810,
+    "cleanup_max_seconds": 90,
+    "guest_GiB": 8,
+    "guest_cpus": 1,
+    "host_MiB": 512,
+    "host_cpu": 166,
+    "initial_RAM_GiB": 16.5,
+    "initial_disk_floor_GiB": 13.5,
+    "live_disk_reserve_GiB": 8.5,
+    "output_GiB": 5,
+    "whole_seconds": 900
+  },
+  "schema": "bole.r17-savedraw-recovery-commands/v1",
+  "software": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/entry.py",
+    "--software"
+  ],
+  "sourceaudit": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/owner.py",
+    "--source-audit",
+    "--source-ref",
+    "REQUIRED_ACTUAL_NEW_BOUND_SOURCE_REF3"
+  ],
+  "status": "SOURCE_ONLY_BIND_AND_FRESH_CPU_ADMISSION_REQUIRED",
+  "template_ref": {
+    "bytes": 6912,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/SOURCE_TEMPLATE.json",
+    "sha256": "e1854a5b46b563eb6cb570bb7815c5d66a7246b80dc50d808056d357e13ab123"
+  }
+}

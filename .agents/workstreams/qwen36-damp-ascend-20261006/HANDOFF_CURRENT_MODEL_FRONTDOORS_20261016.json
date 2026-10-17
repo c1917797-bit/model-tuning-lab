@@ -73,30 +73,27 @@
     "classification": "IMPLEMENTATION_VALIDATION_MEMORY_NOT_PAPER_NOGO",
     "successor": "R20 bounded streaming validation; unchanged512MiB/full metadata/no-writer/final fullhash"
   },
-  "recorded_at_utc": "2026-10-17 10:31:49 UTC",
+  "recorded_at_utc": "2026-10-17 11:12:00 UTC",
   "authority_file": "RENEW24H_AUTHORITY_20261017_084320.json",
   "original_cutoff_utc": "2026-10-17T07:02:13Z",
   "extension_used": 0,
   "extension_condition_met": false,
   "new_nonHYPIC_accepted_technology": false,
   "current_owner": {
-    "paper": "DeltaLog",
-    "revision": "R20repair1",
-    "operationId": "exec-0000000000001287",
-    "state": "readonly source binder running; no device lease",
-    "phase": "actual closed15/fullchain bind after independent R17 release; real512/model still pending",
-    "template": {
-      "bytes": 240387,
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair20-repair1-20261017-001/SOURCE_TEMPLATE.json",
-      "sha256": "44cce9e384f74bb630ddf22f1b28e85b2be389d88ddf5bb16301c335775b1b4e"
+    "paper": "none",
+    "state": "all exact owners terminal and independently released",
+    "last_operation": "exec-00000000000012ac",
+    "last_phase": "BOLE R17 original savedraw independent math complete but FAIL; no NPU lease",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/SOURCE_BOUND.json",
+      "bytes": 6694,
+      "sha256": "ff2f666c9719f7b33f71aeb11d9c9a5bf9fedd45306001b7c071ea8db30d7127"
     },
-    "source": null,
-    "output": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R20R1-main-NEW24H_FIRSTDECODE101R20R1_001",
     "numeric_qualified": false,
     "performance_qualified": false,
     "task_qualified": false
   },
-  "next_NPU": "DL R20repair1 fullchain binder exec1287 now running after independently verified R17 release1286. No duplicate launch. After actual bind/sourceaudit and fresh aggregate resource checks, enter real512/sameimage157/firstdecode. BOLE R18 namespace repair and R17 savedraw math recovery prepare in parallel, no device admission. PublicationR6 remains HOLD and must not bind absent R16 success.",
+  "next_NPU": "DL R21 exact COMMANDS_SPEC/final ticket source closure cheap static repair pending; originalR20r1 EXIT1 never reached model/NPU, independently released12a7. BOLE R17 savedraw consumed4x64 layers: GDN local gates and writeback PASS, FA pointwise failed on21 rank-layer pairs and path1/node1 argmax differs. Diagnose reference/input/ABI/precision before new NPU capture; R18 namespace-only repair deployed/bound but HOLD math defect. No legal paired performance.",
   "last_model_result": {
     "ref": {
       "path": "/opt/host/vnf/austinov/run-bole-model131repair4-MAIN-NEW24H_001/RESULT.json",
@@ -158,13 +155,13 @@
     "cost_caution": "child_scope includes final fence; nested phases inclusive/nonadditive; actual cache state uncontrolled; selected estimate not full-run guarantee"
   },
   "parallel_preparation": {
-    "accuracy_input_repair": "R20repair1 exact162source deployed; matching collector6files byteexact deployed; independent cold-I alias/ref/7-key bridge check preparing",
-    "gdn_paper_reassessment": "R18 source-qualified namespace-aware frontend identity repair preparing; separate current-metadata bridge software10 only, no native qualification",
-    "ge_fullgdn_ready": "Independent R18 identity audit plus source-qualified R17 savedraw math recovery preparing; no resources"
+    "accuracy_input_repair": "Actual C1 2K two-generation nine-decode/nativeEOS forward+rolling lossless evidence WIP; no FINAL/NPU readiness",
+    "gdn_paper_reassessment": "Priority actual R17 FA savedraw failure source attribution; hold production math reuse until cause known",
+    "ge_fullgdn_ready": "New DL R21 exact command ticket typed source closure and cheap prebind static gate; preserve R20r1FAIL"
   },
   "git": {
-    "local_commit": "5ad69779b249aca1811306b803e5f6cd96324e98",
-    "normal_push_operation": "exec-0000000000001279",
+    "local_commit": "4ce501abb460b5aaaa9969e48a274eb6d01f5111",
+    "normal_push_operation": "exec-0000000000001292",
     "normal_push_exit": 0,
     "normal_push_reported_remote_transition": "ce48c2d9 -> 5ad69779; independent lsremote equals exact local5ad69779",
     "protocol": "normal specificSHA/no-force; process-only curloptResolve from actual freshDNS answer20.205.243.166; TLS certificate/domain verification unchanged; no global config",
@@ -172,9 +169,9 @@
     "current_handoff_uncommitted_after_stage_update": true,
     "pending_stage_archive": "projects/qwen36-paper-portfolio/tools/renewed24h_abi_cache_20261017",
     "pending_stage_source_copy_operation": "exec-00000000000011fe",
-    "remote_readback_operation": "exec-0000000000001279",
+    "remote_readback_operation": "exec-0000000000001297",
     "remote_ref_equals_local": true,
-    "last_committed_and_remote_verified": "5ad69779b249aca1811306b803e5f6cd96324e98"
+    "last_committed_and_remote_verified": "4ce501abb460b5aaaa9969e48a274eb6d01f5111"
   },
   "physical_scope": [
     4,
