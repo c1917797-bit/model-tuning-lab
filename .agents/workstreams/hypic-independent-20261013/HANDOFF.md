@@ -1,4 +1,19 @@
-# CURRENT R21 FIRST PAIR TERMINAL; WHOLE HYPIC NEGATIVE
+# CURRENT R21 CATALOG QUALITY CANARY LIVE
+
+Freshma direct1129 at02:20:58UTC proves208host/205runtime/model/image/input/
+scorer/G1immutable rawSHA/physical0-3empty/8233HCCLfree/newroot.
+Exactcontroller exec-000000000000112a; sourcecheckpoint1acf66aded778fbc6944750560f0b92b037b51dc.
+Contract QUALITY_R21_CATALOG_CANARY_R1_CONTRACT.json;raw
+/cache/cch/hypic-independent-20261013/catalog-quality-r21-canary-r1.
+Poll samepeer/handle/root;neverrestartlive/unclear orchange208boundsources.
+Terminal audit_catalog_canary_terminal.py --contract
+QUALITY_R21_CATALOG_CANARY_R1_CONTRACT.json --live-release.
+Require17same-stepfourrank48C1/16C2 andactualeviction/rebuild,source,physical,
+continuousisolation,exactrelease. Then full381/arm naturalEOS quality.
+R21pairedperformance negativeunchanged;speednotqualityprerequisite.
+Fixedcutoff2026-10-17T06:48:09Z;fullgoalunfinished.
+
+# HISTORICAL R21 FIRST PAIR TERMINAL; WHOLE HYPIC NEGATIVE
 
 G1 1101exit0; independent1126 PASS40/40,211sources,423cleanisolation,
 liveexactrelease. TPOT280.611652ms/TTFTP95340898.009290ms.
