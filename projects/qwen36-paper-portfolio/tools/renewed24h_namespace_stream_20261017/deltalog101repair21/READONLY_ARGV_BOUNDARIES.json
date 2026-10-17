@@ -1,0 +1,36 @@
+{
+  "FD_maps_all_PID_checks_preserved": true,
+  "binder_only": true,
+  "capture_source": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001",
+  "old_R18_116a_FAIL_preserved": true,
+  "old_R18_exact_registered_bind_argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-new24h-v1-101-repair18-20261017-001/bind_source.py",
+    "--execute",
+    "--template-sha256",
+    "87c5ed0c880f07ad03f6284ba6190e7bebc47c324dbbfac6d143467fd3b9942d",
+    "--bridge-source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_MANIFEST.json\",\"bytes\":67429,\"sha256\":\"871c8e32831ee3eebacd43a084e4416bb14d6d06cd9f5ee08017ba459f287cd8\"}",
+    "--bridge-owner-ref",
+    "{\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json\",\"bytes\":1667,\"sha256\":\"7b10472808da9c409dca97e4f36ff577cf4d090db95c90b556d0bf680f4d25fe\"}",
+    "--component-cpu-owner-ref",
+    "{\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json\",\"bytes\":1426,\"sha256\":\"1ea2eeff549bb8fb036f0b313e57503a87896302be4836f68dba5641e0e4e35f\"}",
+    "--closed-evidence-ref",
+    "{\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence-R6-N16-N160-model-snapshots-MAIN-R2-001/EVIDENCE.json\",\"bytes\":9121,\"sha256\":\"4c8698817d5cdf9b15556293bb3950b137990ad4b0c223ae03de53950f922ead\"}"
+  ],
+  "old_R18_template": {
+    "bytes": 226639,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-new24h-v1-101-repair18-20261017-001/SOURCE_TEMPLATE.json",
+    "sha256": "87c5ed0c880f07ad03f6284ba6190e7bebc47c324dbbfac6d143467fd3b9942d"
+  },
+  "original_actual008_host": {
+    "bytes": 25508,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py",
+    "sha256": "c1a26afb164af8fcf4b88fef24a524c2c890be772f56f136b5edc5006b1ff066"
+  },
+  "schema": "deltalog.readonly-binder-argv-source-boundary/v1",
+  "unknown_script_or_inline_wrapper_rejected": true,
+  "upstream_source": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/kivi-direct-d8-fp32-model-boundary-r87-v1-011"
+}

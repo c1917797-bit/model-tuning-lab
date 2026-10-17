@@ -1,0 +1,72 @@
+{
+  "cancelTool": "operation_cancel",
+  "channel": "control",
+  "fallbackUsed": false,
+  "gatewayInstanceId": "tpc-rgw-01",
+  "idempotencyKey": "R17-terminal-evidence-compact-20261017-001",
+  "logicalGatewayId": "tpc",
+  "ok": true,
+  "operationId": "exec-0000000000001288",
+  "operationKind": "exec",
+  "pollTool": "operation_get",
+  "requestDeadlineMs": 10000,
+  "result": {
+    "execId": "exec-0000000000001288",
+    "lane": "process",
+    "ok": true,
+    "record": {
+      "args": [
+        "-I",
+        "-B",
+        "-c",
+        "import pathlib,json,hashlib\np=pathlib.Path('/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001');d=json.loads((p/'RESULT.json').read_text())\nprint(json.dumps({'source_after_equal':d['source_before']==d['source_after'],'secondary':d['secondary'],'client':json.loads((p/'dense/CLIENT-TERMINAL.json').read_text()),'receipt_names':[x.name for x in (p/'dense/receipts').iterdir() if x.is_file() and (x.name.startswith(('AFTER','NATIVE','BOLE-TREE-RANK','MODEL-CAL','SNAPSHOT')))]}))\nfor x in sorted((p/'dense/receipts').glob('BOLE-TREE-RANK-*.json')):\n b=x.read_bytes();v=json.loads(b);print(json.dumps({'receipt':{'path':str(x),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()},'primary':v.get('primary'),'rank':v.get('rank'),'raw':v.get('raw'),'model_calibration_ref':v.get('model_calibration_ref')}))\n"
+      ],
+      "cancelled": false,
+      "command": "/usr/bin/python3",
+      "cwd": null,
+      "durationMs": 45,
+      "error": null,
+      "exitCode": 0,
+      "id": "exec-0000000000001288",
+      "lane": "process",
+      "state": "completed",
+      "stderr": "",
+      "stdout": "{\"source_after_equal\": true, \"secondary\": [], \"client\": {\"actual_argv\": [\"/usr/bin/docker\", \"exec\", \"4f375322fccd8efdaa7d91ff85678a1dcbebbdf7f2b9d28b8f1b40bc34de0739\", \"/bin/bash\", \"-c\", \"source /usr/local/Ascend/cann-9.1.0/set_env.sh && exec \\\"$@\\\"\", \"kvbp-diagnostic\", \"/usr/local/python3.12.13/bin/python3\", \"-B\", \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair17/smoke_client.py\", \"--execute\", \"--source-ref\", \"{\\\"path\\\": \\\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair17/SOURCE_BOUND.json\\\", \\\"bytes\\\": 59418, \\\"sha256\\\": \\\"1a6a1e1b6be6afa5ca91bd2909bcdc5fe3a821b4968b5cf04f9e2b2752977552\\\"}\", \"--output\", \"/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001/dense\"], \"exit_code\": 0, \"stderr\": {\"bytes\": 34, \"path\": \"/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001/dense/model-smoke.stderr\", \"sha256\": \"60bfc930abeb875a49ac48624c7bb868428a72483e347adc61a6e87d939ea509\"}, \"stdout\": {\"bytes\": 0, \"path\": \"/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001/dense/model-smoke.stdout\", \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}}, \"receipt_names\": [\"BOLE-TREE-RANK-0.pt\", \"BOLE-TREE-RANK-3.json\", \"BOLE-TREE-RANK-2.json\", \"BOLE-TREE-RANK-3.pt\", \"BOLE-TREE-RANK-2.pt\", \"BOLE-TREE-RANK-1.pt\", \"BOLE-TREE-RANK-1.json\", \"BOLE-TREE-RANK-0.json\"]}\n{\"receipt\": {\"path\": \"/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001/dense/receipts/BOLE-TREE-RANK-0.json\", \"bytes\": 2279, \"sha256\": \"525a3a27b69fc21f33214d132a0c4d844bc4f222af4936e54a322fb686b4f164\"}, \"primary\": null, \"rank\": 0, \"raw\": {\"bytes\": 775440281, \"path\": \"/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001/dense/receipts/BOLE-TREE-RANK-0.pt\", \"sha256\": \"488043ae754c1a95e5121a5d038c0c8b15d7374cf81f90a386ecd4c92982833c\"}, \"model_calibration_ref\": {\"bytes\": 16074, \"path\": \"/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001/dense/receipts/CONV-MODEL-CALIBRATION-RANK-0/ABI.json\", \"sha256\": \"981310f7789528b9e35c7af514a5ffee5fe3d138572697fc36162a04559ea8c2\"}}\n{\"receipt\": {\"path\": \"/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001/dense/receipts/BOLE-TREE-RANK-1.json\", \"bytes\": 2279, \"sha256\": \"01188aa7d716701e2b3cc145987bf4a4cc9d90ea8e5073b86fb8909e9e634e6c\"}, \"primary\": null, \"rank\": 1, \"raw\": {\"bytes\": 775440281, \"path\": \"/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001/dense/receipts/BOLE-TREE-RANK-1.pt\", \"sha256\": \"25c1989b760119b58163278edff5f902c4c1623c450918e2f76c0c6d3fe4be98\"}, \"model_calibration_ref\": {\"bytes\": 16074, \"path\": \"/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001/dense/receipts/CONV-MODEL-CALIBRATION-RANK-1/ABI.json\", \"sha256\": \"4104ddcaaf8f4ffe251eb721be1a2703d9c36e32b1e2a1b502895a31b99443a1\"}}\n{\"receipt\": {\"path\": \"/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001/dense/receipts/BOLE-TREE-RANK-2.json\", \"bytes\": 2279, \"sha256\": \"6b3da4c6c9bb9bbb6e0da56e9d2b22d3c3ea71f88265b6584d0a3f336f666cc8\"}, \"primary\": null, \"rank\": 2, \"raw\": {\"bytes\": 775440281, \"path\": \"/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001/dense/receipts/BOLE-TREE-RANK-2.pt\", \"sha256\": \"5182718f2dee43b19668c1aa806643f6d7e8683fd98dd4e4c0cbdb5fa00014d6\"}, \"model_calibration_ref\": {\"bytes\": 16074, \"path\": \"/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001/dense/receipts/CONV-MODEL-CALIBRATION-RANK-2/ABI.json\", \"sha256\": \"a0fe6d1319939afd93d9a9f51644228450fb92b30c03f818195c6750e4cb9804\"}}\n{\"receipt\": {\"path\": \"/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001/dense/receipts/BOLE-TREE-RANK-3.json\", \"bytes\": 2279, \"sha256\": \"bc70f469b8842f75619ed7eb07605ce96c1d6316fe8f402bdfde61396555b15f\"}, \"primary\": null, \"rank\": 3, \"raw\": {\"bytes\": 775440281, \"path\": \"/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001/dense/receipts/BOLE-TREE-RANK-3.pt\", \"sha256\": \"14e86db33451e2fbc4816b448493acf27a7ba722df0fe21c487f25978129b810\"}, \"model_calibration_ref\": {\"bytes\": 16074, \"path\": \"/opt/host/vnf/austinov/run-bole-model131repair17-MAIN-NEW24H_001/dense/receipts/CONV-MODEL-CALIBRATION-RANK-3/ABI.json\", \"sha256\": \"8eacc821a347c936ce11cc943d12c85cc5018143b4693a1f421b290bfe5f4fd9\"}}\n",
+      "timedOut": false
+    },
+    "running": false,
+    "state": "completed"
+  },
+  "rgwHttp": "http://agentweb:17888",
+  "rgwRouting": {
+    "attemptErrors": [],
+    "strategy": "peer-hot3-with-command-retry"
+  },
+  "routeDecision": "peer_direct",
+  "routeSelectionMode": "client-force-direct",
+  "selectedLogicalGatewayId": "tpc",
+  "selectedRgw": "http://agentweb:17888",
+  "sessionId": null,
+  "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "targetRole": "upstream",
+  "timings": {
+    "awmcp": {
+      "attemptCount": 1,
+      "rgwRequestMs": 453,
+      "rgwResponseDecodeMs": 0,
+      "rgwResponseHeadersMs": 453,
+      "routeCacheHit": false,
+      "routeLookupMode": "client-force-direct",
+      "routeLookupMs": 1131,
+      "totalMs": 1585
+    },
+    "rgw": {
+      "dispatchMs": 0,
+      "journalMs": 0,
+      "peerRoundTripMs": 453,
+      "routeLookupMs": 0,
+      "totalMs": 453
+    }
+  },
+  "traceId": "8947928b-b169-49de-898c-39f382b9ebbf"
+}

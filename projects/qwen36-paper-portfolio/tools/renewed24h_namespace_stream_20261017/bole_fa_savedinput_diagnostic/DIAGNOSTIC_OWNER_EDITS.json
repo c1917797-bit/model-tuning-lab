@@ -1,0 +1,36 @@
+{
+  "after": {
+    "bytes": 16006,
+    "sha256": "abaf6aebd1ff3084c138197d5a14367c676dbaf43bcaef34231710e5295c4759"
+  },
+  "donor": {
+    "bytes": 15938,
+    "sha256": "09e607c1804c5a3ece7247eef5161a6be358f7ad9480a244299ea912e6f1f3e3"
+  },
+  "edits": [
+    {
+      "after": "ROOT=Path('/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-fa-input-diagnostic-owned-renew24h-v1-001')",
+      "before": "ROOT=Path('/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001')"
+    },
+    {
+      "after": "OUTROOT=Path('/opt/host/vnf/austinov/run-bole-r17-fa-input-diagnostic-MAIN-RENEW24H_001')",
+      "before": "OUTROOT=Path('/opt/host/vnf/austinov/run-bole-r17-math-recovery-MAIN-RENEW24H_001')"
+    },
+    {
+      "after": "OWNER='bole-r17-fa-input-diagnostic'",
+      "before": "OWNER='bole-r17-savedraw-math-recovery'"
+    },
+    {
+      "after": "own['schema']=='bole.r17-fa-input-diagnostic-source/v1'",
+      "before": "own['schema']=='bole.r17-savedraw-recovery-source/v1'"
+    },
+    {
+      "after": "need(d['schema']=='bole.r17-independent-FA-input-attribution/v1'and d['source']==ar and d['diagnostic_complete']is True and d['ranks_completed']==4 and d['original_numeric_failures_unchanged']is True and d['qualified']is d['original_owner_pass']is d['lifecycle_qualified']is False and d['native_snapshot_status']=='actual-original-durable-four-not-new-proof'and d['live_frontend_binding_status']=='missing-not-reconstructed','complete saved-input diagnostic only; original numeric failures unchanged')",
+      "before": "need(d['schema']=='bole.r17-independent-savedraw-math/v1'and d['source']==ar and d['tensor_math_complete']is d['component_checks_pass']is True and d['qualified']is d['original_owner_pass']is d['lifecycle_qualified']is False and d['native_snapshot_status']=='actual-original-durable-four-not-new-proof'and d['live_frontend_binding_status']=='missing-not-reconstructed','original saved raw math only, no frontend/lifecycle/original-owner promotion')"
+    },
+    {
+      "after": "schema='bole.r17-FA-input-diagnostic-owned/v1'",
+      "before": "schema='bole.r17-savedraw-math-owned/v1'"
+    }
+  ]
+}

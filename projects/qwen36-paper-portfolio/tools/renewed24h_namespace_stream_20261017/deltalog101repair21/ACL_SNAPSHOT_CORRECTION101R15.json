@@ -1,0 +1,29 @@
+{
+  "ND_required": 2,
+  "NZ_not_accepted": 29,
+  "actual_header": {
+    "container": "2104eadab7fcb0fe56a71296ffc942c5766436aa2cf554b4b33dcbb573cb220c",
+    "operation": "107e",
+    "source_ref": {
+      "bytes": 13720,
+      "path": "/usr/local/Ascend/ascend-toolkit/latest/include/acl/acl_base_rt.h",
+      "sha256": "4055d6b9d3a96face0efb5d68aafb68900a1d9c78c6a877ae21381688dd8b529"
+    },
+    "status": "MAIN independently read stopped container single regular TAR member, exit0; operation JSON Ref not provided"
+  },
+  "exact_inverse": "remove precisely the final one LF only while producing already-fixed actual SHA; never runtime trim",
+  "native_plugin_unchanged": true,
+  "old_embedded": {
+    "bytes": 13721,
+    "path": "acl_base_rt.h",
+    "sha256": "827d3a579902e1e81a85e0d7c5e1f0f541a5f65ab00662bac40d0e509376085a"
+  },
+  "old_layout_ref": {
+    "bytes": 37830,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair14-native-postprepare-footprint-20261017-001/LAYOUT_SOURCE_EVIDENCE101R12.json",
+    "sha256": "bb4397115f0861ad71f2153356701b09804f7079b86a550e42f4c805cc135852"
+  },
+  "original_extra_LF_creation_step": "unknown; already present in pre-LAYOUT local source snapshot",
+  "qualification": false,
+  "schema": "deltalog.exact-header-snapshot-correction/v101R15"
+}

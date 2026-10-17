@@ -1,0 +1,103 @@
+{
+  "schema": "ascend.deltalog-r21-deployed-prebind/v1",
+  "recorded_at_utc": "2026-10-17T11:40:00Z",
+  "source_template": {
+    "bytes": 243191,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair21-20261017-001/SOURCE_TEMPLATE.json",
+    "sha256": "bd53c08cb9886af01c3f90940f0a1bd16bb18ef70ada7f784d4576568ab63a41"
+  },
+  "command_ticket": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair21-20261017-001/COMMANDS_FINAL.json",
+    "bytes": 7825,
+    "sha256": "345b1414b267fa4d4183bfb3e251d22b169bae0e9feb3add8b31d56c3031a075"
+  },
+  "delivery_leaves": 173,
+  "donor_exact_copy_operation": "exec-00000000000012cc",
+  "patch_parts": 44,
+  "byteexact_audit_and_cheap_operation": "exec-00000000000012cd",
+  "byteexact_and_cheap_pass": true,
+  "cheap_duration_ms": 494,
+  "cheap_NPU": false,
+  "cheap_closed_raw_reads": false,
+  "focused_initial_operation": "exec-00000000000012ce",
+  "focused_initial_result": "9 tests pass; one ModuleNotFoundError due MAIN typo test_prior_released_r20r1; not source or algorithm failure",
+  "focused_corrected_operation": "exec-00000000000012cf",
+  "focused_actual_linux_tests_passed": 13,
+  "focused_sameimage": false,
+  "binder": {
+    "operation": "exec-00000000000012d0",
+    "exit_code": 0,
+    "duration_ms": 388566,
+    "host_AS_bytes": 536870912,
+    "actual_bound_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair21-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 267633,
+      "sha256": "e5da6610109d60ae8524c08072f49f037242a096dae5ed0f72cd3c031f0b3306"
+    },
+    "NPU": false
+  },
+  "phase_registration": {
+    "cleanup_seconds": 270,
+    "cutoff_epoch": 1792313000,
+    "margin_seconds": 90,
+    "not_retroactive": true,
+    "postverify_seconds": 900,
+    "schema": "deltalog.r21-new-experiment-clock/v1",
+    "whole_seconds": 3600,
+    "work_seconds": 2340
+  },
+  "performance_qualified": false,
+  "task_qualified": false,
+  "old_failures_retained": true,
+  "sourceaudit": {
+    "operation": "exec-00000000000012d8",
+    "exit_code": 0,
+    "duration_ms": 745
+  },
+  "actual_model_owner": {
+    "operation": "exec-00000000000012da",
+    "state": "running_at_record",
+    "whole_seconds": 3600,
+    "postverify_seconds": 900,
+    "cleanup_seconds": 270,
+    "margin_seconds": 90,
+    "mode": "source/CPU/canary then actual TP4 firstdecode; no performance result"
+  },
+  "fresh_admission": {
+    "operation": "exec-00000000000012d9",
+    "epoch": 1792237564.0919466,
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "all_four_no_actual_pid": true,
+    "RAM_available_KiB": 80931504,
+    "swap_used": 0,
+    "model_cap_GiB": 32,
+    "initial_floor_GiB": 40.5,
+    "affinity": [
+      0,
+      1,
+      2,
+      3,
+      144,
+      145,
+      166
+    ],
+    "new_output_payload_journal_all_absent": true,
+    "other_containers_not_modified": true
+  },
+  "postinput": {
+    "source": {
+      "bytes": 3078,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-firstdecode-postinput-preparation-renew24h-101r21-20261017-001/SOURCE.json",
+      "sha256": "ea7651a50e1a626c56e76457874b71b74c1e70b0cc6f86aa4dbf942fb5222056"
+    },
+    "delivery_exact": 8,
+    "host_focused_tests": 10,
+    "operation": "exec-00000000000012d4",
+    "actual_collection_pending": true
+  }
+}

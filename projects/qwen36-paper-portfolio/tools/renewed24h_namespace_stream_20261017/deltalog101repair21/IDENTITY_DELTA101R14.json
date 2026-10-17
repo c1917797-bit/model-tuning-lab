@@ -1,0 +1,38 @@
+{
+  "budgets_changed": false,
+  "identity_only_leaves": [
+    "COMMANDS.json",
+    "packet_contract.py",
+    "test_short16_101r7.py"
+  ],
+  "identity_pairs": [
+    [
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair13-native-postprepare-footprint-20261017-001",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair14-native-postprepare-footprint-20261017-001"
+    ],
+    [
+      "MODEL101R13",
+      "MODEL101R14"
+    ]
+  ],
+  "math_changed": false,
+  "parent_template": {
+    "bytes": 220776,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair13-native-postprepare-footprint-20261017-001/SOURCE_TEMPLATE.json",
+    "sha256": "d46b1e48d1051c9a7c0f6f3c805510456794cbbc9e2fef40d7b01cbb8d4d7f43"
+  },
+  "preserved_historical_self_ids": [
+    "INVERSE101R13.json",
+    "HANDOFF101R7.md"
+  ],
+  "runtime_unmodified": [
+    "native_footprint101r12.py",
+    "native_observer_plugin101r12.py",
+    "consume_native101r12.py",
+    "client.py",
+    "run_owned.py",
+    "owner_overlay.py",
+    "probe.py"
+  ],
+  "software_cases": 110
+}

@@ -1,0 +1,553 @@
+{
+  "schema": "ascend.bole-fa-sameinput-numerical-attribution/v1",
+  "owner_operation": "exec-00000000000012c4",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-fa-input-diagnostic-owned-renew24h-v1-001/SOURCE_BOUND.json",
+    "bytes": 8318,
+    "sha256": "0f32a5fef0f24e4e7fa116f72dd304a6d569cc998e11c918bd664a9a3d3609cb"
+  },
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-r17-fa-input-diagnostic-MAIN-RENEW24H_001/fa/consumer/RESULT.json",
+    "bytes": 866,
+    "sha256": "2d1859d31ede464e58331359535fef3937e9c8ac29926e8e3600bc64b22266b8"
+  },
+  "attribution": {
+    "path": "/opt/host/vnf/austinov/run-bole-r17-fa-input-diagnostic-MAIN-RENEW24H_001/fa/consumer/ATTRIBUTION.json",
+    "bytes": 2307,
+    "sha256": "aa4a9b99ad5c5daf6295581db4c12f4bf9312c02aa0e4539b28e72b52f22709f"
+  },
+  "owner": {
+    "Devices": [],
+    "NPU": false,
+    "cid": "34284c2bcbef59d05d9c92694677f26a72aad8b049233539115822089f93021e",
+    "elapsed": 23.56475069996668,
+    "numeric_owner": null,
+    "primary": null,
+    "qualified": false,
+    "resource_release_verified": true,
+    "schema": "bole.r17-FA-input-diagnostic-owned/v1",
+    "secondary": [],
+    "source": {
+      "bytes": 8318,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-fa-input-diagnostic-owned-renew24h-v1-001/SOURCE_BOUND.json",
+      "sha256": "0f32a5fef0f24e4e7fa116f72dd304a6d569cc998e11c918bd664a9a3d3609cb"
+    },
+    "stage_ref": null,
+    "stage_result": {
+      "bytes": 2307,
+      "path": "/opt/host/vnf/austinov/run-bole-r17-fa-input-diagnostic-MAIN-RENEW24H_001/fa/consumer/ATTRIBUTION.json",
+      "sha256": "aa4a9b99ad5c5daf6295581db4c12f4bf9312c02aa0e4539b28e72b52f22709f"
+    },
+    "stopped_retained": true,
+    "used_bytes": 12489333,
+    "whole_elapsed": 32.977262469998095
+  },
+  "independent_release": {
+    "cid": "34284c2bcbef59d05d9c92694677f26a72aad8b049233539115822089f93021e",
+    "State": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-17T11:22:37.88516022Z",
+      "FinishedAt": "2026-10-17T11:22:57.33030485Z"
+    },
+    "ExecIDs": null,
+    "Devices": []
+  },
+  "original_rank_reports": [
+    {
+      "rank": 0,
+      "ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-r17-fa-input-diagnostic-MAIN-RENEW24H_001/fa/consumer/RANK-0.json",
+        "bytes": 277011,
+        "sha256": "bd7fdefec54223c5b5e55ed1e5d03d0b54baa75e344de48d00491ef77b2bb430"
+      },
+      "input_join_fail": [],
+      "reference_reconstruction_fail": []
+    },
+    {
+      "rank": 1,
+      "ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-r17-fa-input-diagnostic-MAIN-RENEW24H_001/fa/consumer/RANK-1.json",
+        "bytes": 276872,
+        "sha256": "bb65068d12e895edc5db53ea084ad13f4d4bbc919c98444b83d07616c6fedcf8"
+      },
+      "input_join_fail": [],
+      "reference_reconstruction_fail": []
+    },
+    {
+      "rank": 2,
+      "ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-r17-fa-input-diagnostic-MAIN-RENEW24H_001/fa/consumer/RANK-2.json",
+        "bytes": 276943,
+        "sha256": "4ed8803ff79d37fe96f9b9ad66c13bef078091c41e067b98494e3517cf7b245d"
+      },
+      "input_join_fail": [],
+      "reference_reconstruction_fail": []
+    },
+    {
+      "rank": 3,
+      "ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-r17-fa-input-diagnostic-MAIN-RENEW24H_001/fa/consumer/RANK-3.json",
+        "bytes": 277001,
+        "sha256": "5cf539e2818dec52b3c016e9cccabfc547e3ba8eef3b85dd6ea60efa8899bd20"
+      },
+      "input_join_fail": [],
+      "reference_reconstruction_fail": []
+    }
+  ],
+  "derived_counts": {
+    "candidate_layers": 64,
+    "candidate_failed_layers": 21,
+    "native_AR_calls": 256,
+    "native_AR_calls_failed": 39,
+    "all64_input_joins_pass": true,
+    "all64_reference_reconstruction_zero": true,
+    "first_native_bad": {
+      "rank": 0,
+      "layer": 47,
+      "path": 2,
+      "node": 0,
+      "metric": {
+        "elements": 1536,
+        "old_pointwise_fail_count": 1,
+        "old_pointwise_pass": false,
+        "peak_abs": 0.0198689409978261,
+        "relative_l2": 0.0017661922029055775
+      }
+    },
+    "earliest_candidate_bad": {
+      "rank": 2,
+      "layer": 3
+    }
+  },
+  "variant_metrics": {
+    "double": {
+      "layers": 64,
+      "failed_layers": 21,
+      "failed_points": 52,
+      "max_rel": 0.002153842105436667
+    },
+    "float": {
+      "layers": 64,
+      "failed_layers": 21,
+      "failed_points": 52,
+      "max_rel": 0.0021538909266581073
+    },
+    "hypothesis_BF16_QK": {
+      "layers": 64,
+      "failed_layers": 64,
+      "failed_points": 43620,
+      "max_rel": 0.009179521120352054
+    },
+    "hypothesis_BF16_QK_and_probability": {
+      "layers": 64,
+      "failed_layers": 64,
+      "failed_points": 44221,
+      "max_rel": 0.009255580463409194
+    }
+  },
+  "native_root_drift": [
+    {
+      "rank": 0,
+      "bad_root_prefix": [],
+      "first_layers": [
+        {
+          "layer": 3,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.008462231279007396,
+            0.00851410538918897
+          ],
+          "child_query": [
+            0.006065992790799201,
+            0.005814336653631294
+          ]
+        },
+        {
+          "layer": 7,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.008192433403633381,
+            0.009944543113803618
+          ],
+          "child_query": [
+            0.008210964634807654,
+            0.008225601333776327
+          ]
+        },
+        {
+          "layer": 11,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.007301046848481698,
+            0.00919330809681991
+          ],
+          "child_query": [
+            0.008010617668079614,
+            0.008182755615678794
+          ]
+        },
+        {
+          "layer": 15,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.0080638330715553,
+            0.009767320559716219
+          ],
+          "child_query": [
+            0.01047395726061674,
+            0.009235656385414095
+          ]
+        }
+      ],
+      "last_layers": [
+        {
+          "layer": 59,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.03794100597336261,
+            0.05750261535953335
+          ],
+          "child_query": [
+            0.4482186877935591,
+            0.01275517848423965
+          ]
+        },
+        {
+          "layer": 63,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.0280982006821327,
+            0.04137526829328057
+          ],
+          "child_query": [
+            0.3937414788843209,
+            0.010667863755449836
+          ]
+        }
+      ]
+    },
+    {
+      "rank": 1,
+      "bad_root_prefix": [],
+      "first_layers": [
+        {
+          "layer": 3,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.008094857917147175,
+            0.008393854036683747
+          ],
+          "child_query": [
+            0.0064344845465254975,
+            0.005971910337076229
+          ]
+        },
+        {
+          "layer": 7,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.008055351167199578,
+            0.009676002141246497
+          ],
+          "child_query": [
+            0.00796864097998712,
+            0.008276991099102862
+          ]
+        },
+        {
+          "layer": 11,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.00837823620982243,
+            0.010185971333255687
+          ],
+          "child_query": [
+            0.008156097947330111,
+            0.009510494493106914
+          ]
+        },
+        {
+          "layer": 15,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.0075174037631024595,
+            0.008592063824603988
+          ],
+          "child_query": [
+            0.010581381948407543,
+            0.007782949890106347
+          ]
+        }
+      ],
+      "last_layers": [
+        {
+          "layer": 59,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.03586233111174855,
+            0.053246149926941454
+          ],
+          "child_query": [
+            0.42241375823417554,
+            0.01065095615852558
+          ]
+        },
+        {
+          "layer": 63,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.02641715999123665,
+            0.03943873851941698
+          ],
+          "child_query": [
+            0.3979554994889654,
+            0.01210512347733508
+          ]
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "bad_root_prefix": [],
+      "first_layers": [
+        {
+          "layer": 3,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.00790453765376935,
+            0.008234088824756179
+          ],
+          "child_query": [
+            0.006066723429563475,
+            0.005528881284697383
+          ]
+        },
+        {
+          "layer": 7,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.00649404077936933,
+            0.007516148228082346
+          ],
+          "child_query": [
+            0.007579861012375932,
+            0.007314265631256639
+          ]
+        },
+        {
+          "layer": 11,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.006714342714297918,
+            0.008040418328333144
+          ],
+          "child_query": [
+            0.007621090636471744,
+            0.0075067372995627464
+          ]
+        },
+        {
+          "layer": 15,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.008594560365544736,
+            0.010123406235959084
+          ],
+          "child_query": [
+            0.011143051105410447,
+            0.00904282695961912
+          ]
+        }
+      ],
+      "last_layers": [
+        {
+          "layer": 59,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.034187220761368854,
+            0.049554680465784005
+          ],
+          "child_query": [
+            0.45517408631070794,
+            0.011425509781894196
+          ]
+        },
+        {
+          "layer": 63,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.029741240072583178,
+            0.04518555467705694
+          ],
+          "child_query": [
+            0.3799392249319034,
+            0.01335120903699431
+          ]
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "bad_root_prefix": [],
+      "first_layers": [
+        {
+          "layer": 3,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.007552170988132546,
+            0.008302041458035451
+          ],
+          "child_query": [
+            0.005355067935671472,
+            0.00482229993434171
+          ]
+        },
+        {
+          "layer": 7,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.008688554281939116,
+            0.010250895207040176
+          ],
+          "child_query": [
+            0.008373446653360681,
+            0.008576636791128075
+          ]
+        },
+        {
+          "layer": 11,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.006504046217777924,
+            0.0076797498646139686
+          ],
+          "child_query": [
+            0.007919257911996411,
+            0.008806353427532165
+          ]
+        },
+        {
+          "layer": 15,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.007943574783606246,
+            0.009620801537656062
+          ],
+          "child_query": [
+            0.010166618176963451,
+            0.007943557424113375
+          ]
+        }
+      ],
+      "last_layers": [
+        {
+          "layer": 59,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.035685120800428106,
+            0.05233036234468784
+          ],
+          "child_query": [
+            0.43795357300497945,
+            0.012550763778418995
+          ]
+        },
+        {
+          "layer": 63,
+          "root_prefix_bits": [
+            true,
+            true
+          ],
+          "root_query": [
+            0.028847521246865352,
+            0.043441151133880467
+          ],
+          "child_query": [
+            0.3650315029943839,
+            0.01160118055138562
+          ]
+        }
+      ]
+    }
+  ],
+  "conclusion": "All64 saved input/layout/mask/padding/blocktable/anchor bit joins pass; both independent CPU64 constructions coincide. Candidate21/64 fail retained. NativeAR39/256 own-input calls also fail same pointwise gate. No threshold changed or numerical/performance qualification granted. Different native root runs require independent repeat/lifetime attribution; full argmax discrepancy unresolved.",
+  "next": "Actual-saved-input NPU FIA single-factor arms after original-output reproduction; also same-root native before/input/output lifetime diagnostics. No identical full-model recapture merely for namespace repair.",
+  "software": "MAIN local cold-I14PASS; actual Devices[] diagnostic completed under original900s/8GiB/512MiB resource gates; not claimed sameimage14 aggregate."
+}

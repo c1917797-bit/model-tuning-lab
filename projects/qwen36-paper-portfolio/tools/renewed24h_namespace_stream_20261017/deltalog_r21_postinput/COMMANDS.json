@@ -1,0 +1,38 @@
+{
+  "default_execute": false,
+  "future_refs_admitted": false,
+  "postconsumer_commands": {
+    "bytes": 7825,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair21-20261017-001/COMMANDS_FINAL.json",
+    "sha256": "345b1414b267fa4d4183bfb3e251d22b169bae0e9feb3add8b31d56c3031a075"
+  },
+  "prepare": {
+    "CPU_count": 1,
+    "NPU": false,
+    "argv": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-firstdecode-postinput-preparation-renew24h-101r21-20261017-001/prepare_inputs.py",
+      "--execute",
+      "--model-source-ref",
+      "ACTUAL_BOUND_R21_SOURCE_REF3",
+      "--owner-ref",
+      "ACTUAL_TERMINAL_R21_FAILED_OWNER_REF3",
+      "--inspect-ref",
+      "ACTUAL_FRESH_R21_CANDIDATE_INSPECT_REF3"
+    ],
+    "existing_empty_control_parent": "/opt/host/vnf/austinov/run-dl-firstdecode-input-R21-MAIN-001",
+    "expected_input_path": "/opt/host/vnf/austinov/run-dl-firstdecode-input-R21-MAIN-001/INPUT.json",
+    "fresh_inspect_storage": "Actual independent evidence directory, never inside the required empty INPUT parent",
+    "suggested_external_AS_bytes": 536870912,
+    "suggested_external_wall_cap_seconds": 120
+  },
+  "schema": "deltalog.firstdecode-postinput-preparation-commands/v1",
+  "source": {
+    "bytes": 3078,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-firstdecode-postinput-preparation-renew24h-101r21-20261017-001/SOURCE.json",
+    "sha256": "ea7651a50e1a626c56e76457874b71b74c1e70b0cc6f86aa4dbf942fb5222056"
+  },
+  "status": "HOLD_MISSING_ACTUAL_R21_RECEIPTS"
+}

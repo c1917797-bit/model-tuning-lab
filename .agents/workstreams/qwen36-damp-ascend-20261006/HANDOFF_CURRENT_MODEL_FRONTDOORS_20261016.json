@@ -73,27 +73,36 @@
     "classification": "IMPLEMENTATION_VALIDATION_MEMORY_NOT_PAPER_NOGO",
     "successor": "R20 bounded streaming validation; unchanged512MiB/full metadata/no-writer/final fullhash"
   },
-  "recorded_at_utc": "2026-10-17 11:12:00 UTC",
+  "recorded_at_utc": "2026-10-17 11:48:54 UTC",
   "authority_file": "RENEW24H_AUTHORITY_20261017_084320.json",
   "original_cutoff_utc": "2026-10-17T07:02:13Z",
   "extension_used": 0,
   "extension_condition_met": false,
   "new_nonHYPIC_accepted_technology": false,
   "current_owner": {
-    "paper": "none",
-    "state": "all exact owners terminal and independently released",
-    "last_operation": "exec-00000000000012ac",
-    "last_phase": "BOLE R17 original savedraw independent math complete but FAIL; no NPU lease",
+    "paper": "DeltaLog",
+    "state": "live owned R21 workflow; initial closed-source validation then same-image170/canary/TP4 firstdecode",
+    "operation": "exec-00000000000012da",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-r17-savedraw-math-recovery-renew24h-v1-001/SOURCE_BOUND.json",
-      "bytes": 6694,
-      "sha256": "ff2f666c9719f7b33f71aeb11d9c9a5bf9fedd45306001b7c071ea8db30d7127"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair21-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 267633,
+      "sha256": "e5da6610109d60ae8524c08072f49f037242a096dae5ed0f72cd3c031f0b3306"
     },
+    "predecessors": {
+      "binder": "exec-00000000000012d0 EXIT0 388.566s",
+      "sourceaudit": "exec-00000000000012d8 EXIT0 .745s",
+      "fresh_admission": "exec-00000000000012d9"
+    },
+    "whole_seconds": 3600,
+    "work_seconds": 2340,
+    "cleanup_seconds": 270,
+    "postverify_seconds": 900,
+    "margin_seconds": 90,
     "numeric_qualified": false,
     "performance_qualified": false,
     "task_qualified": false
   },
-  "next_NPU": "DL R21 exact COMMANDS_SPEC/final ticket source closure cheap static repair pending; originalR20r1 EXIT1 never reached model/NPU, independently released12a7. BOLE R17 savedraw consumed4x64 layers: GDN local gates and writeback PASS, FA pointwise failed on21 rank-layer pairs and path1/node1 argmax differs. Diagnose reference/input/ABI/precision before new NPU capture; R18 namespace-only repair deployed/bound but HOLD math defect. No legal paired performance.",
+  "next_NPU": "R21 owned operation12da is live; no overlapping NPU or heavy raw consumer. Observe same handle; after real terminal release collect original all4 firstdecode via exact deployed R21 collector, then independent Devices[] postconsumer. BOLE factor FINAL pending. No new paired performance or task result.",
   "last_model_result": {
     "ref": {
       "path": "/opt/host/vnf/austinov/run-bole-model131repair4-MAIN-NEW24H_001/RESULT.json",
@@ -155,9 +164,9 @@
     "cost_caution": "child_scope includes final fence; nested phases inclusive/nonadditive; actual cache state uncontrolled; selected estimate not full-run guarantee"
   },
   "parallel_preparation": {
-    "accuracy_input_repair": "Actual C1 2K two-generation nine-decode/nativeEOS forward+rolling lossless evidence WIP; no FINAL/NPU readiness",
-    "gdn_paper_reassessment": "Priority actual R17 FA savedraw failure source attribution; hold production math reuse until cause known",
-    "ge_fullgdn_ready": "New DL R21 exact command ticket typed source closure and cheap prebind static gate; preserve R20r1FAIL"
+    "accuracy_input_repair": "Completing actual independent continuous owner and postconsumer assembly; three peer-reviewed source wiring defects repaired in WIP, not FINAL/qualified.",
+    "gdn_paper_reassessment": "Preparing source-closed BOLE actualsaved single-factor physical4 and native root attribution; original anchor reproduction must be explicit; no NPU self-admission.",
+    "ge_fullgdn_ready": "Completed independent continuous source interface review; now preparing actual same-config OFF/ON performance DAG and service adapter gaps. No source duplication or device use."
   },
   "git": {
     "local_commit": "4ce501abb460b5aaaa9969e48a274eb6d01f5111",
