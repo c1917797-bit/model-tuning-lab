@@ -1,0 +1,58 @@
+{
+  "schema": "hypic-r21-first-pair-decision/v1",
+  "g1": {
+    "controller": "exec-0000000000001101",
+    "independent_audit": "exec-0000000000001126",
+    "raw_root": "/cache/cch/hypic-independent-20261013/formal-r21-c2-finite-g1-r1",
+    "report": {
+      "terminal_unit_valid": true,
+      "timing": {
+        "requests": 40,
+        "unique_ids": 40,
+        "weighted_tpot_ms": 280.6116520380883,
+        "ttft_p95_ms": 340898.0092900456,
+        "tpot_p95_ms": 295.7592488964451
+      },
+      "isolation_samples": 423,
+      "source_bindings": 211,
+      "raw_sha256": {
+        "result.json": "d180045e253256e44a34a56ba4e5bc3b916c63b1ec33abdd647ed0c5e6a9e39c",
+        "events.jsonl": "57d65c42ff5f75e480f9fa072b58dc58431669e46eb1bff7a99c8ff7c5c7c7c2",
+        "performance-unit.json": "18edc2188e20797714d30af48173ba440ff81c1b691ec5436efee9a8be43580b",
+        "release.json": "d60f3dbc57a7ac7313c028aa248b314669208b221eddba263d58a27a76c9813c"
+      },
+      "scope": "one full40 R21 arm; paired/repeated performance and task quality separate",
+      "live_release_verified": true,
+      "partition": {
+        "enabled": false,
+        "groups": 0,
+        "completed": 0
+      }
+    }
+  },
+  "g3": {
+    "controller": "exec-00000000000010cc",
+    "independent_audit": "exec-00000000000010fc",
+    "report_file": "R21_G3_R1_TERMINAL_20261017.json",
+    "timing": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 303.99380981078673,
+      "ttft_p95_ms": 390713.6332600494,
+      "tpot_p95_ms": 321.30950350585863
+    }
+  },
+  "delta_percent_g3_vs_g1": {
+    "weighted_tpot_ms": 8.332568374432526,
+    "ttft_p95_ms": 14.613058044471972,
+    "tpot_p95_ms": 8.63886918321175
+  },
+  "decision": "NEGATIVE_WHOLE_HYPIC_FIRST_PAIR",
+  "limits": [
+    "One pair only; not G1-G4 three-round completion",
+    "Do not use speed sign as prerequisite for task quality",
+    "No deployment acceptance or full quality claim"
+  ],
+  "next": "New R21 catalog Canary then full127x3 per arm natural-EOS quality under frozen protocol",
+  "full_goal_complete": false
+}

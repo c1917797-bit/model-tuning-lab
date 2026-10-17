@@ -1,4 +1,16 @@
-# CURRENT R21 G1 NATIVE FULL40 PERFORMANCE LIVE
+# CURRENT R21 FIRST PAIR TERMINAL; WHOLE HYPIC NEGATIVE
+
+G1 1101exit0; independent1126 PASS40/40,211sources,423cleanisolation,
+liveexactrelease. TPOT280.611652ms/TTFTP95340898.009290ms.
+G3 independent10fc TPOT303.993810ms/TTFTP95390713.633260ms.
+R21_FIRST_PAIR_DECISION_20261017.json: G3vsG1 TPOT+8.332568%,
+TTFTP95+14.613058%. Not optimization acceptance. No ownedmodeljob.
+Next fresh R21 catalogCanary/newroot, then full381/arm naturalEOS quality;
+do not gate quality on positive speed. Latestpublished83128ce9;mainunchanged.
+R21 lifecycle package hostready1116/1118/1119, no actual lifecycle stages.
+Deadline2026-10-17T06:48:09Z;fullgoalunfinished.
+
+# HISTORICAL R21 G1 NATIVE FULL40 PERFORMANCE LIVE
 
 Published/liveverified0c565ea860ad37838e3f0bacc400df89d8ad3936;mainunchanged.
 Freshma directadmission1100 at01:51:55UTC proves211host/186runtime/image/model/

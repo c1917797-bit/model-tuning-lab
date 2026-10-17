@@ -267,9 +267,9 @@
     "input127inventory": "full frozen inputs; deterministic diagnostic16 plusactualevictedrebuild1, no score-based selection",
     "capacity": "host-resident public pools linear768MiB/KV2560MiB perrank; eachbatch KV2GiB, all16 cumulative4GiB requires actualeviction",
     "timing": "not formal performance; correctness shadows enabled, timing probes0",
-    "algorithm_manifest_sha256": "6fbfbbe1abd6eea233372d5f66f3176449fed9fc6539ef6a7a52d7a65c673bce",
+    "algorithm_manifest_sha256": "ecbbe378a5ddc09c1bb3101c032fcfed94207563d4d8c374b5e20ca2647f2dfc",
     "next": "full127x3 eacharm remains separate",
-    "supersedes": "R1 NEVERlaunched; independent auditor membership revalidation fixed in79e97ea",
+    "supersedes": "R16 R4 historical; R21 new source-bound root never launched",
     "prerequisites": [
       "R21 source-bound core boundedCanary independently accepted10c4",
       "this stage supplies prospective catalogCanary evidence; not a fullquality arm",

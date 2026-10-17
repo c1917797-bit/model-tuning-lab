@@ -215,7 +215,7 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "RUNNING",
+    "state": "TERMINAL_INDEPENDENT_VALID",
     "operation": "exec-0000000000001101",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
@@ -223,7 +223,7 @@
     "raw_root": "/cache/cch/hypic-independent-20261013/formal-r21-c2-finite-g1-r1",
     "checkpoint": "0c565ea860ad37838e3f0bacc400df89d8ad3936",
     "admission_operation": "exec-0000000000001100",
-    "independent_audit": null
+    "independent_audit": "exec-0000000000001126"
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -439,5 +439,17 @@
       "No deployment acceptance",
       "Current G1 controller1101 remains the only owned model run"
     ]
+  },
+  "r21_first_pair": {
+    "state": "NEGATIVE_WHOLE_HYPIC_FIRST_PAIR",
+    "report": "R21_FIRST_PAIR_DECISION_20261017.json",
+    "g1_tpot_ms": 280.6116520380883,
+    "g3_tpot_ms": 303.99380981078673,
+    "delta_percent": {
+      "weighted_tpot_ms": 8.332568374432526,
+      "ttft_p95_ms": 14.613058044471972,
+      "tpot_p95_ms": 8.63886918321175
+    },
+    "next": "Fresh R21 catalog Canary; full quality not blocked by speed sign"
   }
 }
