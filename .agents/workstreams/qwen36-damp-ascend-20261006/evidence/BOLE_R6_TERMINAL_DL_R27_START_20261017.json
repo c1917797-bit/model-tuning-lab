@@ -1,0 +1,96 @@
+{
+  "schema": "ascend.paper-node-progress/v1",
+  "recorded_at_utc": "2026-10-17T21:21:00Z",
+  "authority": "RENEW24H_AUTHORITY_20261017_084320.json",
+  "cutoff_utc": "2026-10-18T08:43:20Z",
+  "new_accepted_technology": false,
+  "BOLE_R6": {
+    "operation": "exec-0000000000001440",
+    "exit_code": 3,
+    "output": "/opt/host/vnf/austinov/run-bole-r6-20261017-001-MAIN",
+    "result_sha256": "60daadc9923f4487caef6cf1308f23cbdf2b84cef246f4c0c70302f52b0686f4",
+    "model_smoke_client_exit": 0,
+    "independent_FA_failed_rank_layer_cases": 22,
+    "independent_FA_total_rank_layer_cases": 64,
+    "all48_GDN_per_rank_local_math_pass": true,
+    "greedy_identity": true,
+    "qualified": false,
+    "root_repeat": {
+      "same_native_calls": [
+        0,
+        2
+      ],
+      "all4_layer0_quant_output_bitwise_equal": true,
+      "first_difference": "layer0 out_proj projection.generic_forward.output after tensor_model_parallel_all_reduce",
+      "changed_bytes": 1167,
+      "peak_abs": 0.0625,
+      "collective_root_cause_proven": false
+    },
+    "next": "Existing raw independent reference/rounding attribution; do not waive candidate-own-input FA failure based on root-repeat drift",
+    "release_verified_by": "exec-0000000000001469"
+  },
+  "DeltaLog_R27": {
+    "kind": "scalar-only pre-registration geometry diagnostic, not layout repair or numerical acceptance",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair27-geometry-observation-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 326004,
+      "sha256": "fa9f09a1c8d6cb23d2e8d2bf428b8fb3ef8ac0f5020ff177099ee382ec0cbad4"
+    },
+    "early_software": {
+      "operation": "exec-0000000000001450",
+      "exit": 0,
+      "NPU": false
+    },
+    "bind": {
+      "operation": "exec-0000000000001451",
+      "exit": 0
+    },
+    "sourceaudit": {
+      "operation": "exec-0000000000001468",
+      "exit": 0
+    },
+    "fresh_admission": {
+      "operation": "exec-0000000000001469",
+      "utc": "2026-10-17T21:20:21Z",
+      "physical": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "AICore": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "HBM_MiB": [
+        2867,
+        2868,
+        2867,
+        2867
+      ],
+      "NPU_processes": [],
+      "prior_owned_released": true,
+      "MemAvailable_bytes": 83098914816,
+      "docker_free_bytes": 22991204352,
+      "P_free_bytes": 182659723264,
+      "window_utilization": "unmeasured; point snapshot only"
+    },
+    "operation": "exec-000000000000146a",
+    "status": "running owner; actual NPU/model execution not yet proven",
+    "output": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R27geometryobservation-main-NEW24H_FIRSTDECODE101R27geometryobservation_001",
+    "numeric_qualified": false,
+    "performance_qualified": false,
+    "task_accuracy_qualified": false
+  },
+  "parallel_preparation": {
+    "active_agents": [
+      "mxr_resume_ready",
+      "good_enough_resume_ready",
+      "bole_failure_nextnode"
+    ],
+    "not_hardware_readiness": true,
+    "MAIN_only_hardware_admission": true
+  }
+}

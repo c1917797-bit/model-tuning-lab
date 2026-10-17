@@ -73,7 +73,8 @@
     "classification": "IMPLEMENTATION_VALIDATION_MEMORY_NOT_PAPER_NOGO",
     "successor": "R20 bounded streaming validation; unchanged512MiB/full metadata/no-writer/final fullhash"
   },
-  "recorded_at_utc": "2026-10-17 20:45:46 UTC",
+  "recorded_at_utc": "2026-10-17 21:21:00 UTC",
+  "latest_authoritative_stage": "evidence/BOLE_R6_TERMINAL_DL_R27_START_20261017.json",
   "latest_entry_contracts_evidence": "evidence/ENTRY_CONTRACTS_AND_BOLE_FACTORS_20261017.json",
   "authority_file": "RENEW24H_AUTHORITY_20261017_084320.json",
   "original_cutoff_utc": "2026-10-17T07:02:13Z",
@@ -120,7 +121,7 @@
     "performance_ready": false,
     "task_accuracy": false
   },
-  "current_owner": {
+  "previous_BOLE_R6_owner": {
     "paper": "BOLE",
     "operation": "exec-0000000000001440",
     "state": "RUNNING R6 projection-scope diagnostic; sourceaudit143e exit0, independent prior R26 release and fresh admission143c. Actual Linux136 and NPU model gates pending.",
@@ -218,7 +219,8 @@
     "performance_qualified": false,
     "task_qualified": false
   },
-  "next_NPU": "Await BOLE R6 diagnostic terminal and independent resource release. DeltaLog R26 failed first view registration; next bounded layout observation/repair needs concrete role/geometry evidence, no unchanged rerun.",
+  "current_owner": {"paper":"DeltaLog","operation":"exec-000000000000146a","state":"RUNNING R27 scalar geometry diagnostic owner; sourceaudit passed, actual NPU/model execution not yet proven","numeric_qualified":false,"performance_qualified":false,"task_qualified":false},
+  "next_NPU": "Poll existing146a, never duplicate. On terminal inspect actual geometry/failure and exact release. GE/MXR/BOLE prepare independently; next hardware task must be executable, not merely planned. See latest_authoritative_stage; old BOLE_R6 running snapshot is historical.",
   "last_model_result": {
     "ref": {
       "path": "/opt/host/vnf/austinov/run-bole-model131repair4-MAIN-NEW24H_001/RESULT.json",
