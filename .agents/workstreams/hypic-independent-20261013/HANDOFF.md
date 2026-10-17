@@ -1,4 +1,16 @@
-# CURRENT R21 C2 FINITE CANARY LIVE
+# CURRENT R21 FINITE CANARY TERMINAL BOUNDED ACCEPTED
+
+10b0exit0/3responses; independent10c4 PASS2private same-stepfourrank48C1/16C2,
+192numericshadows/384partitionreceipts/128C2finiteprecommit-completionjoins,
+197sources/223cleanisolation/explicitphysicalPIDjoins/liveexactrelease.
+R21_C2_FINITE_CANARY_R1_TERMINAL_20261017.json preservesrawSHA/audit;
+actualdenominator2,not inherited nested full40 wording. Noownedmodeljob.
+ProspectiveG3/G1 firstpair211host/186runtime static10b5passed; ab01abd2.
+Next publishthenfresh FORMAL_R21_G3_R1_CONTRACT.json admission/run,
+terminal audit_r21_c2_finite_performance.py --live-release, thenmatchingG1.
+Not speed/fullquality/lifecycle;R20negativeunchanged. Fullgoalunfinished.
+
+# HISTORICAL R21 C2 FINITE CANARY LIVE
 
 Published/liveverifiedede97056761e8504d8baf4937642bb85e2c6a0f4;mainunchanged.
 Freshma force_direct10af admission proves197host/170runtimebindings/image/model/

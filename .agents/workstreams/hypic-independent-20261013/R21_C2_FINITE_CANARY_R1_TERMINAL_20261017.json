@@ -1,0 +1,181 @@
+{
+  "schema": "hypic-r21-canary-terminal/v1",
+  "controller": "exec-00000000000010b0",
+  "controller_exit": 0,
+  "raw_root": "/cache/cch/hypic-independent-20261013/c2-finite-r21-canary-r1",
+  "independent_audit": "exec-00000000000010c4",
+  "raw_sha256": {
+    "result.json": "e62ee6167896375da100698b7f98d767267db50721d93e402a4b631e5c6a98d3",
+    "events.jsonl": "f5331c740d1c1e575f15fbfb74a4871d703f0aaa25905dffac36d0b40a565b35",
+    "responses.json": "dbe7a05bf3a925dd46086358b58c64063e41d4e4c078ea22479376acdfb00f94",
+    "release.json": "b48f3f06517278c250da6882f4a46c1bde54bc952395bba8a5a43bba68632a81",
+    "diagnostics/compact-worker-59.jsonl": "483cbe767ee18b72ddd231520c2892b468c0b76308aac100498aa5ef269a95cc",
+    "diagnostics/compact-worker-60.jsonl": "d0f445ea9f2a99b8ddf083d1503ea05d0f98567079c559874203f1a49733d541",
+    "diagnostics/compact-worker-61.jsonl": "b0c13546f18e35d57d7c971494e893ebb4ff2cc28950b39acd9642ab71ab9424",
+    "diagnostics/compact-worker-62.jsonl": "15ad5c45d8c534bfc0d4497583cbd9a0e458e43e2ba855e7d64d6984b3c9c1ae"
+  },
+  "report": {
+    "bounded_canary_valid": true,
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 2,
+      "covered": [
+        "cmpl-88c827bcd0f35b4e",
+        "cmpl-9531969cb7036a16"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 59,
+        "1": 60,
+        "2": 61,
+        "3": 62
+      },
+      "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+    },
+    "probe": {
+      "0": {
+        "original_thread_cpu_ns": 30233490,
+        "prefill_only_thread_cpu_ns": 70710,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "1": {
+        "original_thread_cpu_ns": 27429940,
+        "prefill_only_thread_cpu_ns": 58280,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "2": {
+        "original_thread_cpu_ns": 28458820,
+        "prefill_only_thread_cpu_ns": 70250,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "3": {
+        "original_thread_cpu_ns": 27297750,
+        "prefill_only_thread_cpu_ns": 58660,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      }
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 59,
+          "host_pid": 2916721,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 60,
+          "host_pid": 2916722,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 61,
+          "host_pid": 2916723,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 62,
+          "host_pid": 2916724,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "source_bindings": 197,
+    "isolation_samples": 223,
+    "live_release_verified": true,
+    "scope": "bounded R21 numerical/finite/ownership/source/isolation/release; not formal speed or full task quality",
+    "partition": {
+      "groups": 384,
+      "completed_receipts": 384,
+      "numeric_shadows": 192,
+      "four_rank_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      },
+      "sampled_numeric_not_full_quality": true
+    },
+    "lazy_snapshot": {
+      "receipts": 384,
+      "skipped_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      },
+      "retained_shadow_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      }
+    },
+    "metadata_snapshot": {
+      "forwards": 8,
+      "request_ids": {
+        "0": [
+          "cmpl-88c827bcd0f35b4e-0-85645f91",
+          "cmpl-9531969cb7036a16-0-8b702c39"
+        ],
+        "1": [
+          "cmpl-88c827bcd0f35b4e-0-85645f91",
+          "cmpl-9531969cb7036a16-0-8b702c39"
+        ],
+        "2": [
+          "cmpl-88c827bcd0f35b4e-0-85645f91",
+          "cmpl-9531969cb7036a16-0-8b702c39"
+        ],
+        "3": [
+          "cmpl-88c827bcd0f35b4e-0-85645f91",
+          "cmpl-9531969cb7036a16-0-8b702c39"
+        ]
+      }
+    },
+    "c2_finite": {
+      "layers": 128,
+      "request_layer_completions": 128,
+      "scope": "all observed hot C2 completions have exact preceding same-layer/rank/step finite gate"
+    }
+  },
+  "limits": [
+    "Actual private request denominator is TWO, not inherited nested hot.scope full40 wording",
+    "Not formal performance, task quality, lifecycle sequence or whole goal acceptance"
+  ],
+  "next": "Publish then fresh admission FORMAL_R21_G3_R1_CONTRACT.json; only valid then matchedG1"
+}
