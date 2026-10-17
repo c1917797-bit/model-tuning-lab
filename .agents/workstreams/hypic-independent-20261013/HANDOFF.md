@@ -1,4 +1,18 @@
-# CURRENT R21 G3 FULL40 TERMINAL INDEPENDENT VALID; G1 NEXT
+# CURRENT R21 G1 NATIVE FULL40 PERFORMANCE LIVE
+
+Published/liveverified0c565ea860ad37838e3f0bacc400df89d8ad3936;mainunchanged.
+Freshma directadmission1100 at01:51:55UTC proves211host/186runtime/image/model/
+input/G3immutable rawSHA/physical0-3empty/8233+HCCLfree/newroot/cache23.5GB.
+Exactma controller exec-0000000000001101; contract FORMAL_R21_G1_R1_CONTRACT.json;
+raw /cache/cch/hypic-independent-20261013/formal-r21-c2-finite-g1-r1.
+NativeHYPIC/PDCoff,same full40/fixed1024/c16 protocol. Pollsamepeer/handle/root;
+no restartlive/unclear or211boundchanges. Terminal audit_r21_c2_finite_performance.py
+--contract FORMAL_R21_G1_R1_CONTRACT.json --live-release; onlythenpaireddecision.
+G3valid10fc TPOT303.993810ms notsinglearmgainclaim. Afterwards source-bound
+R21catalogCanary/full381quality independentlyofspeed sign. Fullgoalunfinished.
+Deadline2026-10-17T06:48:09Z.
+
+# HISTORICAL R21 G3 FULL40 TERMINAL INDEPENDENT VALID; G1 NEXT
 
 10ccexit0/40responses; independent10fc PASS40/40same-stepfourrank48C1/16C2,
 2368C2finitegates/2560completionjoins,211sources,468cleanisolation,
