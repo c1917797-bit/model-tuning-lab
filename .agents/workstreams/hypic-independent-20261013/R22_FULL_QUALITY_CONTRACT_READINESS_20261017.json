@@ -1,0 +1,33 @@
+{
+  "schema": "hypic-r22-full-quality-contract-readiness/v1",
+  "contracts": [
+    "QUALITY_R22_FULL_HYPIC_R1_CONTRACT.json",
+    "QUALITY_R22_FULL_BASELINE_R1_CONTRACT.json"
+  ],
+  "static_operation": "exec-000000000000117c",
+  "source_bindings_per_arm": 221,
+  "same_workload": true,
+  "scored_requests_per_arm": 381,
+  "unscored_producers_per_arm": 381,
+  "generation": {
+    "thinking": false,
+    "max_tokens": 1024,
+    "natural_eos": true,
+    "temperature": 0,
+    "seed": 0,
+    "retries": 0
+  },
+  "prerequisite": {
+    "controller": "exec-0000000000001178",
+    "state": "RUNNING_NOT_ACCEPTED",
+    "required": "R22 complete bounded17 with fourrank short suffix route/completion, frozen shadow/C2 finite, real eviction/rebuild, source/physical/isolation/exact release"
+  },
+  "device_run": false,
+  "new_roots_absent": true,
+  "full_goal_complete": false,
+  "limits": [
+    "Preparation only; do not launch while1178 live or terminal unclear",
+    "Fresh actual admission required after independent Canary acceptance",
+    "Cutoff2026-10-17T06:48:09Z remains; partial is not381acceptance"
+  ]
+}
