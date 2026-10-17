@@ -1,0 +1,19 @@
+{
+  "schema": "hypic-lifecycle-source-gap/v1",
+  "classification": "SOURCE_INSPECTION_NOT_DEVICE_FAILURE",
+  "evidence": {
+    "adapter": "delivery_runtime/patch.py",
+    "fixed_guard": "manifest.runtime_manifest_file must equal LIFECYCLE_COMPACT_MANIFEST_R16.json",
+    "old_contracts": "LIFECYCLE_DELIVERY_R16_{DISABLED,ENABLED,UNINSTALLED}_R1_CONTRACT.json",
+    "current_selected_core": "R21 finite/partition/lazy/metadata"
+  },
+  "consequence": "Blind old lifecycle hash rebind cannot activate new R21 manifest; source-bound adapter/standard delivery manifest needs a versioned successor. Do not disable runtime-manifest digest, path, official-image or ownership guards.",
+  "next": [
+    "Implement smallest source-bound successor adapter routing to R21 lifecycle manifest, retaining defaultoff/fatalenabledfailure and own uninstall",
+    "Run delivery validator/defaultoff/rollback/source-drift and lifecycle AST/sequence tests",
+    "Freeze same complete source map for disabled/enabled/uninstalled; exact64 lifecycle requests and semantic control unchanged",
+    "Only fresh idle physical0-3TP4 admission, no parallelownedcontroller"
+  ],
+  "scope": "No lifecycle device stage started; no lifecycle or Skill functional acceptance",
+  "current_live": "R21 nativeG1 exec-0000000000001101; delivery paths not in its211 bound source map"
+}
