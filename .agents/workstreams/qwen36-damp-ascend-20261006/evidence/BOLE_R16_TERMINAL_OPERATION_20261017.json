@@ -1,0 +1,96 @@
+{
+  "schema": "ascend.actual-operation-terminal-observation/v1",
+  "operation_snapshot": {
+    "action": null,
+    "canonicalDownloadUrl": null,
+    "canonicalUrl": null,
+    "dataPlane": null,
+    "downloadUrls": null,
+    "error": "exit code",
+    "found": true,
+    "kind": "exec",
+    "ok": false,
+    "operation": {
+      "channel": "control",
+      "fallbackUsed": false,
+      "gatewayInstanceId": "tpc-rgw-01",
+      "logicalGatewayId": "tpc",
+      "ok": true,
+      "result": {
+        "found": true,
+        "lane": "job",
+        "ok": true,
+        "record": {
+          "args": [
+            "BOLE_MODEL131_MAIN_ENABLE=1",
+            "DENSE090_EXTERNAL_OUTPUT_ENABLE=1",
+            "/usr/bin/python3",
+            "-I",
+            "-B",
+            "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair16/host090.py",
+            "--execute",
+            "--source-ref",
+            "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair16/SOURCE_BOUND.json\",\"bytes\":57636,\"sha256\":\"fc90ecaa052c77b2a7d62ee11c3160d28b050c2193a077b9a201dc034dbfeaf5\"}",
+            "--output",
+            "/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001"
+          ],
+          "cancelled": false,
+          "command": "/usr/bin/env",
+          "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+          "durationMs": 623885,
+          "error": "exit code",
+          "exitCode": 3,
+          "id": "exec-0000000000001267",
+          "lane": "job",
+          "state": "completed",
+          "stderr": "",
+          "stdout": "MAIN_DENSE090 {\"path\": \"/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001/RESULT.json\", \"sha256\": \"2e9988a5d65d7dfe7a331a772650b2dbfb59fb8a687489e1b06844c6f45b723e\"}\n",
+          "timedOut": false
+        },
+        "state": "completed"
+      },
+      "rgwHttp": "http://agentweb:17888",
+      "rgwRouting": {
+        "attemptErrors": [],
+        "strategy": "peer-hot3-with-command-retry"
+      },
+      "routeDecision": "peer_direct",
+      "sessionId": null,
+      "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "targetRole": "upstream",
+      "timings": {
+        "awmcp": {
+          "attemptCount": 1,
+          "rgwRequestMs": 412,
+          "rgwResponseDecodeMs": 0,
+          "rgwResponseHeadersMs": 412,
+          "routeCacheHit": true,
+          "routeLookupMode": "command-cache",
+          "routeLookupMs": 0,
+          "totalMs": 412
+        },
+        "rgw": {
+          "dispatchMs": 0,
+          "journalMs": 0,
+          "peerRoundTripMs": 411,
+          "routeLookupMs": 0,
+          "totalMs": 411
+        }
+      },
+      "traceId": "08215b9b-4dca-4368-a574-e5ac72e9a69b"
+    },
+    "operationId": "exec-0000000000001267",
+    "phase": "completed",
+    "previewUrls": null,
+    "progress": null,
+    "publicUrl": null,
+    "publicationId": null,
+    "result": null,
+    "retryable": false,
+    "schema": "agentweb.operation/v1",
+    "status": "completed",
+    "succeeded": false,
+    "terminal": true
+  },
+  "recorded_at_utc": "2026-10-17T09:56:30Z"
+}

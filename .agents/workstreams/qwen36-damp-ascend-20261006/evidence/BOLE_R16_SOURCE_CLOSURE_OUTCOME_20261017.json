@@ -1,0 +1,257 @@
+{
+  "schema": "bole.r16.snapshot-source-closure-failure/v1",
+  "recorded_utc": "2026-10-17T09:54:00Z",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair16/SOURCE_BOUND.json",
+    "bytes": 57636,
+    "sha256": "fc90ecaa052c77b2a7d62ee11c3160d28b050c2193a077b9a201dc034dbfeaf5"
+  },
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001/RESULT.json",
+    "bytes": 104706,
+    "sha256": "2e9988a5d65d7dfe7a331a772650b2dbfb59fb8a687489e1b06844c6f45b723e"
+  },
+  "operationId": "exec-0000000000001267",
+  "owner_primary": "TimeoutError('all4 owned worker snapshots')",
+  "secondary": [],
+  "elapsed": 623.6188937299885,
+  "cleanup_spent": 32.856403370038606,
+  "source_before_after_equal": true,
+  "actual_sameimage_tests": 98,
+  "actual_HTTP": [
+    {
+      "label": "tree",
+      "status": 200,
+      "output_tokens": 10
+    },
+    {
+      "label": "retirement-barrier",
+      "status": 200,
+      "output_tokens": 1
+    }
+  ],
+  "raw_captures": [
+    {
+      "receipt": {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001/dense/receipts/BOLE-TREE-RANK-3.json",
+        "bytes": 2281,
+        "sha256": "718b757603682b0dde8f0ccc7f3bece5c72e8d2c2d2910eb65c741c31cdb2ede"
+      },
+      "rank": 3,
+      "pid": 4168,
+      "primary": null,
+      "raw": {
+        "bytes": 775440281,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001/dense/receipts/BOLE-TREE-RANK-3.pt",
+        "sha256": "c6fdf200c6b7ffed9bd47d6977e58756f9450ca145174662baff7e441ffa8696"
+      },
+      "model_calibration_ref": {
+        "bytes": 16074,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001/dense/receipts/CONV-MODEL-CALIBRATION-RANK-3/ABI.json",
+        "sha256": "881cdd02f73ad3eb1f55868ca7290b8fb7cfc5956d12113f3c948327b22d1077"
+      },
+      "source": {
+        "bytes": 57636,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair16/SOURCE_BOUND.json",
+        "sha256": "fc90ecaa052c77b2a7d62ee11c3160d28b050c2193a077b9a201dc034dbfeaf5"
+      }
+    },
+    {
+      "receipt": {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001/dense/receipts/BOLE-TREE-RANK-2.json",
+        "bytes": 2281,
+        "sha256": "d4416a769f990f420cf58857f1e55833b1aea32b5337462910e8ce036d88a388"
+      },
+      "rank": 2,
+      "pid": 4167,
+      "primary": null,
+      "raw": {
+        "bytes": 775440281,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001/dense/receipts/BOLE-TREE-RANK-2.pt",
+        "sha256": "c31d1eca5a45765789ab472ec953b620985b824cecd3ec781172d51a87977ff7"
+      },
+      "model_calibration_ref": {
+        "bytes": 16074,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001/dense/receipts/CONV-MODEL-CALIBRATION-RANK-2/ABI.json",
+        "sha256": "77f0bdb5d822fdca23986b04e1b99efa8cc3753445708f164947d4aedf7989b0"
+      },
+      "source": {
+        "bytes": 57636,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair16/SOURCE_BOUND.json",
+        "sha256": "fc90ecaa052c77b2a7d62ee11c3160d28b050c2193a077b9a201dc034dbfeaf5"
+      }
+    },
+    {
+      "receipt": {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001/dense/receipts/BOLE-TREE-RANK-1.json",
+        "bytes": 2281,
+        "sha256": "6d6fc371dd1fa90c577715d589dd53f366a6081834db5ca03bf38f09838f911c"
+      },
+      "rank": 1,
+      "pid": 4166,
+      "primary": null,
+      "raw": {
+        "bytes": 775440281,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001/dense/receipts/BOLE-TREE-RANK-1.pt",
+        "sha256": "3a2e408f94c6bbf83e0621e931f0762a948900de338000fbbddd9e712e690cf4"
+      },
+      "model_calibration_ref": {
+        "bytes": 16074,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001/dense/receipts/CONV-MODEL-CALIBRATION-RANK-1/ABI.json",
+        "sha256": "c5a292cd5c36c0e9e336ca6431bbdf1bdc1bc7c5bbf21d89b40ff3c502be62ba"
+      },
+      "source": {
+        "bytes": 57636,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair16/SOURCE_BOUND.json",
+        "sha256": "fc90ecaa052c77b2a7d62ee11c3160d28b050c2193a077b9a201dc034dbfeaf5"
+      }
+    },
+    {
+      "receipt": {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001/dense/receipts/BOLE-TREE-RANK-0.json",
+        "bytes": 2281,
+        "sha256": "80224060b97154d0e160afb2dbb770dbb20870ac39f711cd973b27e02f1a3b7a"
+      },
+      "rank": 0,
+      "pid": 4165,
+      "primary": null,
+      "raw": {
+        "bytes": 775440281,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001/dense/receipts/BOLE-TREE-RANK-0.pt",
+        "sha256": "8bc1da0ef45c8251eaaa2eaa83c6794223c467c1f92d4e315d1fe4a2d3fcf942"
+      },
+      "model_calibration_ref": {
+        "bytes": 16074,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001/dense/receipts/CONV-MODEL-CALIBRATION-RANK-0/ABI.json",
+        "sha256": "bf21e2f4c73f66c51f04bfe853f007f84cd3c192164275be29ce3d7d3eb4314c"
+      },
+      "source": {
+        "bytes": 57636,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair16/SOURCE_BOUND.json",
+        "sha256": "fc90ecaa052c77b2a7d62ee11c3160d28b050c2193a077b9a201dc034dbfeaf5"
+      }
+    }
+  ],
+  "actual_snapshots": 0,
+  "independent_release": [
+    {
+      "arm": "cpu-preflight",
+      "cid": "a0abb8fbaa34e9051a37ced2043c65714f1e693acc779aebd0782bd35662a64c",
+      "state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 137,
+        "Error": "",
+        "StartedAt": "2026-10-17T09:34:30.69730367Z",
+        "FinishedAt": "2026-10-17T09:35:45.94218041Z"
+      },
+      "execids": null,
+      "devices": [],
+      "privileged": false
+    },
+    {
+      "arm": "dense",
+      "cid": "664b43a880f16eaf7142b1ab19d9b6844f0298c2cb66972cc8eaa7a1c91cc2b2",
+      "state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 137,
+        "Error": "",
+        "StartedAt": "2026-10-17T09:36:39.3623019Z",
+        "FinishedAt": "2026-10-17T09:44:50.79136472Z"
+      },
+      "execids": null,
+      "devices": [
+        {
+          "PathOnHost": "/dev/davinci4",
+          "PathInContainer": "/dev/davinci0",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/davinci5",
+          "PathInContainer": "/dev/davinci1",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/davinci6",
+          "PathInContainer": "/dev/davinci2",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/davinci7",
+          "PathInContainer": "/dev/davinci3",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/davinci_manager",
+          "PathInContainer": "/dev/davinci_manager",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/devmm_svm",
+          "PathInContainer": "/dev/devmm_svm",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/hisi_hdc",
+          "PathInContainer": "/dev/hisi_hdc",
+          "CgroupPermissions": "rwm"
+        }
+      ],
+      "privileged": false
+    }
+  ],
+  "first_fault": {
+    "ref": {
+      "path": "/opt/host/vnf/austinov/run-bole-model131repair16-MAIN-NEW24H_001/HOST-FIRST-FAULT.json",
+      "bytes": 1180,
+      "sha256": "08f167e1fdfae45c2cdd4b40553faad3701ff6d18b4d4b0e5e194d2d82146520"
+    },
+    "body": {
+      "cleanup_not_started": true,
+      "errno": null,
+      "error_repr": "TimeoutError('all4 owned worker snapshots')",
+      "error_type": "builtins.TimeoutError",
+      "fail_closed": true,
+      "filename": null,
+      "filename2": null,
+      "phase": {
+        "ordinal": 568,
+        "phase": "model-smoke",
+        "step": "worker-snapshot"
+      },
+      "recovery_attempted": false,
+      "schema": "bole.first-host-fault/v131r5",
+      "source": {
+        "bytes": 57636,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair16/SOURCE_BOUND.json",
+        "sha256": "fc90ecaa052c77b2a7d62ee11c3160d28b050c2193a077b9a201dc034dbfeaf5"
+      },
+      "traceback": "Traceback (most recent call last):\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair16/host090.py\", line 53, in main\n    mark('model-smoke','worker-snapshot');rows,bindings=snapshot(c,ctl,ctl.out/'receipts','AFTER-MODEL')\n  File \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair16/worker_snapshot_owner.py\", line 25, in snapshot\n    if time.monotonic()>=until:raise TimeoutError('all4 owned worker snapshots')\nTimeoutError: all4 owned worker snapshots\n"
+    }
+  },
+  "cause": {
+    "classification": "PROVEN_PLUGIN_SOURCE_CLOSURE_DEFECT",
+    "actual_path": "native_receipt090.publish -> snapshot_publication.publish -> donor -> missing dependencies/publication_common.py",
+    "actual_trace": "dense/server.stdout WorkerTP3 2026-10-17T09:44:15Z FileNotFoundError",
+    "dependency_exists": false,
+    "paper_or_numeric_failure": false
+  },
+  "qualified": {
+    "model": false,
+    "performance": false,
+    "task": false,
+    "original_R16_owner_remains_failed": true
+  },
+  "next": "RO existing raw mathematical recovery in owned Devices[]; R17 publisher exact dependency+real cold atomic roundtrip. PublicationR6 remainsHOLD, no invented snapshots or original PASS."
+}
