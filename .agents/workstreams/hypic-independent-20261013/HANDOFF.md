@@ -1,4 +1,15 @@
-# CURRENT R20 G1 NATIVE FULL40 PERFORMANCE LIVE
+# CURRENT R20 FIRST PAIR TERMINAL; WHOLE HYPIC NEGATIVE
+
+G1 controller1047exit0; independent108e PASS40/40,202sources,430cleanisolation,
+live exactownrelease. G1 TPOT280.548178ms/TTFTP95348314.762610ms.
+G3 independent103e TPOT311.121758ms/TTFTP95408468.523980ms.
+R20_FIRST_PAIR_DECISION_20261017.json preservesG1rawSHA andbothaudits:
+G3vsG1 TPOT+10.897800%,TTFTP95+17.269943%. Not optimization acceptance.
+No ownedmodeljob. Do not expand unchangednegative matrix; next source-backed
+remainingoverhead attribution andone boundedrepair. Fullquality/lifecycle/
+G1-G4x3/Paper-to-Ascend/29functional incomplete. Deadline2026-10-17T06:48:09Z.
+
+# HISTORICAL R20 G1 NATIVE FULL40 PERFORMANCE LIVE
 
 Published/liveverified56dbfd63e372bb1d3a5d45ec863a25b3ca31a101;mainunchanged.
 Freshma directadmission1046 at00:22:39UTC proves202sources/184runtime/

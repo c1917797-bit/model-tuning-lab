@@ -1,0 +1,66 @@
+{
+  "schema": "hypic-r20-first-pair-decision/v1",
+  "g1": {
+    "controller": "exec-0000000000001047",
+    "controller_exit": 0,
+    "raw_root": "/cache/cch/hypic-independent-20261013/formal-r20-metadata-g1-r1",
+    "independent_audit": "exec-000000000000108e",
+    "report": {
+      "terminal_unit_valid": true,
+      "timing": {
+        "requests": 40,
+        "unique_ids": 40,
+        "weighted_tpot_ms": 280.5481780556647,
+        "ttft_p95_ms": 348314.7626100108,
+        "tpot_p95_ms": 292.408991406262
+      },
+      "isolation_samples": 430,
+      "source_bindings": 202,
+      "raw_sha256": {
+        "result.json": "32ab38f6daf97ec3d604273c298b78d06dc3d437409daa8c4ef9d552ef3b21f3",
+        "events.jsonl": "83dd1ad5c88690d66aad68399d6dba5407fb706039becaffa89e759307c727f7",
+        "performance-unit.json": "bf15bd6d8c6f6a2c2b55f0b3e0b1d822978a6c1b2046763c16272f9036683525",
+        "release.json": "c0608cb2b8d7abc7958af56d7dc447baaff4eef4f1c9ae9c963bc311c9ad1320"
+      },
+      "scope": "one R20 full40 timed arm; paired speed/quality/lifecycle separately",
+      "live_release_verified": true,
+      "partition": {
+        "enabled": false,
+        "groups": 0,
+        "completed": 0
+      }
+    }
+  },
+  "g3_report": "R20_METADATA_G3_R1_TERMINAL_20261017.json",
+  "g3_audit": "exec-000000000000103e",
+  "timing": {
+    "g1": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 280.5481780556647,
+      "ttft_p95_ms": 348314.7626100108,
+      "tpot_p95_ms": 292.408991406262
+    },
+    "g3": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 311.1217583505776,
+      "ttft_p95_ms": 408468.5239800019,
+      "tpot_p95_ms": 331.5452639159844
+    }
+  },
+  "delta_percent": {
+    "weighted_tpot_ms": 10.89780033746881,
+    "ttft_p95_ms": 17.269943116749854,
+    "tpot_p95_ms": 13.384086556814513
+  },
+  "decision": "NEGATIVE_WHOLE_HYPIC_DO_NOT_EXPAND_UNCHANGED",
+  "scope": "One matched R20 G1/G3 first-screen pair, not three-round matrix or task quality",
+  "next": "Attribute remaining integrated overhead and freeze one evidence-backed bounded repair; preserve raw roots and do not repeat unchanged matrix.",
+  "remaining": [
+    "G1-G4 three-round accepted performance",
+    "127x3 per-arm natural-EOS quality",
+    "disable/uninstall/restart lifecycle",
+    "Paper-to-Ascend and 29 Skill functional acceptance"
+  ]
+}
