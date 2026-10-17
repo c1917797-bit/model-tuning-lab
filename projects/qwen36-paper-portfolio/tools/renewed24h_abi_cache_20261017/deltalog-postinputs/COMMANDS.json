@@ -1,0 +1,37 @@
+{
+  "default_execute": false,
+  "future_refs_admitted": false,
+  "postconsumer_commands": {
+    "bytes": 7103,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair19-20261017-001/COMMANDS_FINAL.json",
+    "sha256": "6c00ed68cf44fc985f5486ec0030fe56aad19fdf6a50cf051a59330a8fdaacc6"
+  },
+  "prepare": {
+    "CPU_count": 1,
+    "NPU": false,
+    "argv": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-firstdecode-postinput-preparation-renew24h-101r19-20261017-001/prepare_inputs.py",
+      "--execute",
+      "--model-source-ref",
+      "ACTUAL_BOUND_R19_SOURCE_REF3",
+      "--owner-ref",
+      "ACTUAL_TERMINAL_R19_FAILED_OWNER_REF3",
+      "--inspect-ref",
+      "ACTUAL_FRESH_R19_CANDIDATE_INSPECT_REF3"
+    ],
+    "existing_empty_control_parent": "/opt/host/vnf/austinov/run-dl-firstdecode-input-R19-MAIN-001",
+    "expected_input_path": "/opt/host/vnf/austinov/run-dl-firstdecode-input-R19-MAIN-001/INPUT.json",
+    "suggested_external_AS_bytes": 536870912,
+    "suggested_external_wall_cap_seconds": 120
+  },
+  "schema": "deltalog.firstdecode-postinput-preparation-commands/v1",
+  "source": {
+    "bytes": 2129,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-firstdecode-postinput-preparation-renew24h-101r19-20261017-001/SOURCE.json",
+    "sha256": "fbd7711f7f30d55fc9c36d4e641c930933795014911ca27ee752b3477585885e"
+  },
+  "status": "HOLD_MISSING_ACTUAL_R19_RECEIPTS"
+}

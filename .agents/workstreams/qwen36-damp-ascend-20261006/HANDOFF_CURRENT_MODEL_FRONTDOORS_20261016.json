@@ -6,8 +6,41 @@
   "extension_used": 0,
   "extension_condition_met": false,
   "new_nonHYPIC_accepted_technology": false,
-  "current_owner": null,
-  "next_NPU": "BOLE R15 evidenced ABI Ref3/value repair with new source/output/clock under renewed authority; full real entry/software, MAIN review, sameimage then fresh4-7/resources required. DeltaLogR19 only after overlapping release.",
+  "current_owner": {
+    "paper": "DeltaLog",
+    "revision": "R19",
+    "operationId": "exec-000000000000125d",
+    "phase": "owned lifecycle started: new snapshot Lease fullvalidation then sameimage149/payload/canary/model firstdecode; NPU not yet observed",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair19-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 253011,
+      "sha256": "a5f9678df3c96035891b6bb0b1bf48c4c9bffc484f6d414538008d0593a98c81"
+    },
+    "output": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R19-main-NEW24H_FIRSTDECODE101R19_001",
+    "source_bind": {
+      "operationId": "exec-0000000000001255",
+      "exit_code": 0,
+      "full_closed15_revalidated": true
+    },
+    "sourceaudit": {
+      "operationId": "exec-000000000000125b",
+      "exit_code": 0
+    },
+    "actual_software149": "pending",
+    "actual_NPU": "pending",
+    "BOLE_R15_outcome": ".agents/workstreams/qwen36-damp-ascend-20261006/evidence/BOLE_R15_ABI_REPAIR_HBM_OUTCOME_20261017.json",
+    "next_BOLE_R16_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair16/SOURCE_BOUND.json",
+      "bytes": 57636,
+      "sha256": "fc90ecaa052c77b2a7d62ee11c3160d28b050c2193a077b9a201dc034dbfeaf5"
+    },
+    "active_authority": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+      "bytes": 3012,
+      "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+    }
+  },
+  "next_NPU": "DeltaLog R19 full historical closed15 readonly bind operation1255 (CPU166) must finish, then actual bound SOURCE, sameimage149/payload CPU and fresh4-7 admission before first real decode; BOLE R16 util0.8 bound/ready waits overlapping owner release. Never run heavy binder concurrently with TP4.",
   "last_model_result": {
     "ref": {
       "path": "/opt/host/vnf/austinov/run-bole-model131repair4-MAIN-NEW24H_001/RESULT.json",
@@ -74,18 +107,18 @@
     "ge_fullgdn_ready": "R15 exact enabled-chain independent review complete/no newP1; next R19/payload source review"
   },
   "git": {
-    "local_commit": "690486c15b0e0bdcbb899e8c08ec310208d47081",
-    "normal_push_operation": "exec-00000000000010f4",
+    "local_commit": "ce48c2d9b4137f82ecc4ff4134f643354cffc7dc",
+    "normal_push_operation": "exec-0000000000001208",
     "normal_push_exit": 0,
-    "normal_push_reported_remote_transition": "verified by independent ls-remote readback690486c15b0e0bdcbb899e8c08ec310208d47081",
+    "normal_push_reported_remote_transition": "independent ls-remote equals local ce48c2d9b4137f82ecc4ff4134f643354cffc7dc",
     "protocol": "per-commandHTTP/1.1,TLSverification unchanged,noforce",
     "archive": "projects/qwen36-paper-portfolio/tools/new24h_native_footprint_20261017_0130",
     "current_handoff_uncommitted_after_stage_update": true,
     "pending_stage_archive": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/new24h_bole_logits_resources_20261017_0720",
     "pending_stage_source_copy_operation": "exec-00000000000011fe",
-    "remote_readback_operation": "exec-00000000000010f5",
+    "remote_readback_operation": "exec-0000000000001208",
     "remote_ref_equals_local": true,
-    "last_committed_and_remote_verified": "f8a574c940b9c684940ee9afd550cb3a241850ad"
+    "last_committed_and_remote_verified": "ce48c2d9b4137f82ecc4ff4134f643354cffc7dc"
   },
   "physical_scope": [
     4,

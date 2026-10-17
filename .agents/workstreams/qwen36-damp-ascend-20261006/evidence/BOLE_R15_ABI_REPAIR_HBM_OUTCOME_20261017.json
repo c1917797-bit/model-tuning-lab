@@ -1,0 +1,52 @@
+{
+  "schema": "ascend.bole131r15.repair-and-resource-outcome/v1",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair15/SOURCE_BOUND.json",
+    "bytes": 56286,
+    "sha256": "a80ab40974c57faf9d40b12aa2da44f8ccdb4ad45b4c1958fc5250258ab8540c"
+  },
+  "owner": {
+    "path": "/opt/host/vnf/austinov/run-bole-model131repair15-MAIN-NEW24H_001/RESULT.json",
+    "bytes": 102979,
+    "sha256": "b1f3c0ba8dfc38d8905029f7e6eae85feeb79e9e6ea1864a161df098828b4334"
+  },
+  "operationId": "exec-000000000000120c",
+  "exit_code": 3,
+  "classification": "resource_budget_current_configuration_failed_not_paper_no_go",
+  "all4_worker_primary_null": true,
+  "each_raw_bytes": 775440281,
+  "raw_scope": "three-node whole-model diagnostic data, not independently consumed or qualified",
+  "old_FIA_ABI_error_not_reproduced": true,
+  "host_primary": "actual physical HBM reserve3GiB percard",
+  "secondary": [],
+  "elapsed_seconds": 555.8152201200137,
+  "cleanup_seconds": 35.450787239999045,
+  "source_unchanged": true,
+  "latest_HBM_MiB_physical4_7": [
+    29762,
+    29774,
+    29813,
+    29823
+  ],
+  "total_HBM_MiB": 32768,
+  "minimum_free_required_MiB": 3072,
+  "common_original_gpu_memory_utilization": 0.9,
+  "actual_KV_GiB": 11.2,
+  "model_ready": false,
+  "performance_gain_measured": false,
+  "task_accuracy": false,
+  "release": {
+    "cpu_cid": "097d91b6b0a53e4c4704eedd24052e0030df3d874feb5a0305e74f7a79bec2a8",
+    "model_cid": "cdf1e040d8e71b6d1c21ef9726755a063975797331ec0d24986911ea1ce19e09",
+    "both_stopped": true,
+    "both_noExec": true,
+    "both_noOOM": true,
+    "fresh_idle_physical": [
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "next": "R16 independently source-bound common util0.8 diagnostic; preserve original3GiB/math gates and R15 FAIL. DeltaLogR19 uses original explicit6GiB KV, do not blindly transplant util."
+}

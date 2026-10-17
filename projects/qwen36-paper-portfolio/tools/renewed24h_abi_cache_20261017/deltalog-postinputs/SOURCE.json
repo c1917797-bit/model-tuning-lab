@@ -1,0 +1,42 @@
+{
+  "actual_reports_available": false,
+  "files": {
+    "HANDOFF.md": {
+      "bytes": 2049,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-firstdecode-postinput-preparation-renew24h-101r19-20261017-001/HANDOFF.md",
+      "sha256": "95b1063ea1589f8434c476ca11e35ee79df79ee288e455e4d5da859336722741"
+    },
+    "INVERSE.json": {
+      "bytes": 12085,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-firstdecode-postinput-preparation-renew24h-101r19-20261017-001/INVERSE.json",
+      "sha256": "576cc52618992ee48e43328f019c69f4e05cca93310290b18e95d4366863ae0d"
+    },
+    "prepare_inputs.py": {
+      "bytes": 8989,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-firstdecode-postinput-preparation-renew24h-101r19-20261017-001/prepare_inputs.py",
+      "sha256": "b149a1b41774b61d7c45acb40c0cd07cb40032b270002351a45beb30e5117713"
+    },
+    "test_inputs.py": {
+      "bytes": 4888,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-firstdecode-postinput-preparation-renew24h-101r19-20261017-001/test_inputs.py",
+      "sha256": "ed4974017f18914b348741d43f52c7e2eb1ef6fbf7ef9a568d7f159034b67aeb"
+    }
+  },
+  "metadata_only": true,
+  "model_template": {
+    "bytes": 234563,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair19-20261017-001/SOURCE_TEMPLATE.json",
+    "sha256": "adca9c401d3beaa22fb560c9be9a0f8ec659bacf449f608502877dde32d1ea89"
+  },
+  "payload_source": {
+    "bytes": 17250,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-selected-firstdecode-renew24h-20261017-001/SOURCE_MANIFEST.json",
+    "sha256": "413dfbf5b8dd3444cfafc19c6ce3e1e49cbb5414fb4ee1202f91a924cb232a29"
+  },
+  "qualified": false,
+  "raw_math_executed": false,
+  "resource_owner": false,
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-firstdecode-postinput-preparation-renew24h-101r19-20261017-001",
+  "schema": "deltalog.firstdecode-postinput-preparation-source/v1",
+  "status": "HOLD_MISSING_ACTUAL_R19_RECEIPTS"
+}

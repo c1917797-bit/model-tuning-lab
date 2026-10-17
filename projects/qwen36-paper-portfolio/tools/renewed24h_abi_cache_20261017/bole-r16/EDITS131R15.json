@@ -1,0 +1,94 @@
+{
+  "bind_model.py": {
+    "after": {
+      "bytes": 2549,
+      "sha256": "8ffb988dd09f13010e464a0cad436b11654b71b631dcb067e597f40932c021d9"
+    },
+    "before": {
+      "bytes": 2549,
+      "sha256": "84386638d53a16da07d902a4eabd5825e7b3f01e652745866393007809deb679"
+    },
+    "edits": [
+      {
+        "after": " authority=C.obj(m['authority_ref']);C.need(authority['start_epoch']==1792226600 and authority['cutoff_epoch']==1792313000 and time.time()+3600<1792313000,'unchanged actual fixed window must contain whole model budget')\n",
+        "before": " authority=C.obj(m['authority_ref']);C.need(authority['start_epoch']==1792134133 and authority['cutoff_epoch']==1792220533 and time.time()+3600<1792220533,'unchanged actual fixed window must contain whole model budget')\n"
+      }
+    ]
+  },
+  "contract090.py": {
+    "after": {
+      "bytes": 2408,
+      "sha256": "ffc060df9ed089e06aac85d3532b1ba86fa95f1b1480c8e8287447e47b515050"
+    },
+    "before": {
+      "bytes": 2408,
+      "sha256": "2ecc9c2342832827150ef6e335a3ac6ecda621afc0e323f2b7d37c522f41ed8f"
+    },
+    "edits": [
+      {
+        "after": "START=1792226600;CUT=1792313000\nOUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model131repair15-MAIN-NEW24H_001'\nCPU_OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model131repair15-CPU-MAIN-NEW24H_001'\n",
+        "before": "START=1792134133;CUT=1792220533\nOUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model131repair14-MAIN-NEW24H_001'\nCPU_OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model131repair14-CPU-MAIN-NEW24H_001'\n"
+      }
+    ]
+  },
+  "model_entry.py": {
+    "after": {
+      "bytes": 30536,
+      "sha256": "7b2cd9e826e7d97e691b78edbd10e7fccdfed04fc3e17dd8fddb054b661a39f6"
+    },
+    "before": {
+      "bytes": 29614,
+      "sha256": "413fdde7d33a8c2cf27ce7dea9785b7ebe6dd4ea6f344157bdc1e8e32f4953de"
+    },
+    "edits": [
+      {
+        "after": "def resolve_fia(C,actual_ref,qualified_ref,qualified_source):\n need(type(actual_ref)is dict and set(actual_ref)=={'path','bytes','sha256'}and actual_ref==qualified_ref,'exact qualified actual paged FIA Ref3, not caller-selected ABI')\n value=C.obj(actual_ref)\n need(value.get('source')==qualified_source and value.get('schema')=='bole.actual-FIA-installed-ABI/v115'and value.get('NPU')is False and value.get('operator_executed')is False,'independently reopened exact qualified FIA ABI value/source')\n return value\n\n",
+        "before": ""
+      },
+      {
+        "after": "  self.K=core112;self.A=paged;self.torch_npu=torch_npu;self.fia_ref=actual_fia_abi;self.fia=resolve_fia(C,actual_fia_abi,self.prerequisites['components']['paged']['actual_fia_abi'],self.prerequisites['components']['paged']['source']);self.conv_abi=actual_conv_abi;self.reader=calibration_reader\n",
+        "before": "  self.K=core112;self.A=paged;self.torch_npu=torch_npu;self.fia=actual_fia_abi;self.conv_abi=actual_conv_abi;self.reader=calibration_reader\n"
+      },
+      {
+        "after": "  actual_fia=resolve_fia(self.C,self.fia_ref,self.prerequisites['components']['paged']['actual_fia_abi'],self.prerequisites['components']['paged']['source'])\n  need(actual_fia==self.fia,'same immutable actual FIA ABI value at each real adapter call')\n  out,_=self.A.native(t,self.torch_npu,trial,actual_fia,sparse_mode=1)\n",
+        "before": "  out,_=self.A.native(t,self.torch_npu,trial,self.fia,sparse_mode=1)\n"
+      }
+    ]
+  },
+  "owned_substrate.py": {
+    "after": {
+      "bytes": 3518,
+      "sha256": "54cee89da256ab9f3e4ee99f816923162a93dc972e74346cad5652d46b41f78b"
+    },
+    "before": {
+      "bytes": 3518,
+      "sha256": "6d546e222f6d421f8260cf6db330b8ed565293695c2369eb26d09d73bb692e50"
+    },
+    "edits": [
+      {
+        "after": " c.CUTOFF=1792313000;c.CUT='2026-10-18T08:43:20+00:00'\n",
+        "before": " c.CUTOFF=1792220533;c.CUT='2026-10-17T07:02:13+00:00'\n"
+      },
+      {
+        "after": " S.PHASE=3600;S.CLEANUP=180;S.OWNER='bole-three-node131-repair15'\n",
+        "before": " S.PHASE=3600;S.CLEANUP=180;S.OWNER='bole-three-node131-repair14'\n"
+      }
+    ]
+  },
+  "worker_bootstrap.py": {
+    "after": {
+      "bytes": 5096,
+      "sha256": "42af8b4ce2a5ccabe705be05f6bb248184c3d10a3668faa7d8153bb5d2ac2d72"
+    },
+    "before": {
+      "bytes": 5096,
+      "sha256": "a0fe2e4f230f7af91634afaa2a17682621c55259e0d747f62e759a673c306be7"
+    },
+    "edits": [
+      {
+        "after": " C.need(authority['start_epoch']==1792226600 and authority['cutoff_epoch']==1792313000 and\n        1792226600<=time.time()<1792313000,'actual unchanged current hardware window')\n",
+        "before": " C.need(authority['start_epoch']==1792134133 and authority['cutoff_epoch']==1792220533 and\n        1792134133<=time.time()<1792220533,'actual unchanged current hardware window')\n"
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "budget_change": false,
+  "changed_exact_literals": [
+    [
+      "sr=json.loads(a.source_ref);m=C.source(sr);readset=[sr,*m['files'].values(),*m['dependencies']]",
+      "sr=json.loads(a.source_ref);m=C.source(sr);import bind_model;readset=bind_model.readset(sr)+m['dependencies']"
+    ],
+    [
+      "DENSE_OPPORTUNITY090_MAIN_ENABLE",
+      "BOLE_MODEL131_MAIN_ENABLE"
+    ],
+    [
+      " def ctl_for(role):",
+      " def ctl_for(role,cpu=False,extra=()):"
+    ],
+    [
+      "create(c,S,ctl,sr,readset,role,P)",
+      "create(c,S,ctl,sr,[*readset,*extra],'cpu-preflight'if cpu else role,P)"
+    ],
+    [
+      "schema='bole.native-linear-MTP-baseline-owned/v114'",
+      "schema='bole.actual-three-node-model-owned/v131'"
+    ],
+    [
+      "BOLE=False,cpu_only=a.cpu_only",
+      "BOLE_diagnostic=True,model_ready=False,scheduler_committed=False,cpu_only=a.cpu_only"
+    ],
+    [
+      "cpu=ctl_for('cpu-preflight');summary['CPU_child']=child",
+      "cpu=ctl_for('cpu-preflight');summary['actual_software_child']=child(cpu,'SOFTWARE',[str(P/'entry.py'),'--software'],120);summary['CPU_child']=child"
+    ]
+  ],
+  "derived_sha256": "29da9e5bce1861261065676b1342ce1cfd2b8374177de0923884b7ad4a422b67",
+  "full_inverse_equals_original": true,
+  "new_model_block_sha256": "fc80232acc4761578b6f41c3a888667f639a747ea7574195eb348206e0667e03",
+  "original_bytes": 8848,
+  "original_profile_block_sha256": "82cc061f83d9b15a4f3c35c8e5345358fcd0ee29b9ce8e05836d9ec2077f4053",
+  "original_sha256": "4a61e6bd79c1a0097235eb8eaedc2fe930036d4ba01b67a92f6324b62accf0d2",
+  "resource_change": false,
+  "schema": "bole.actual114-owned-host-mechanical-delta/v1",
+  "source_only": true
+}

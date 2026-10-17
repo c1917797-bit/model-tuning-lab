@@ -1,0 +1,148 @@
+{
+  "all_existing_cpu_controls": 149,
+  "allocated_worker_cap_bytes": 8053063680,
+  "bind": {
+    "argv": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair19-20261017-001/bind_source.py",
+      "--execute",
+      "--template-sha256",
+      "adca9c401d3beaa22fb560c9be9a0f8ec659bacf449f608502877dde32d1ea89",
+      "--bridge-source-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_MANIFEST.json\",\"bytes\":67429,\"sha256\":\"871c8e32831ee3eebacd43a084e4416bb14d6d06cd9f5ee08017ba459f287cd8\"}",
+      "--bridge-owner-ref",
+      "{\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json\",\"bytes\":1667,\"sha256\":\"7b10472808da9c409dca97e4f36ff577cf4d090db95c90b556d0bf680f4d25fe\"}",
+      "--component-cpu-owner-ref",
+      "{\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json\",\"bytes\":1426,\"sha256\":\"1ea2eeff549bb8fb036f0b313e57503a87896302be4836f68dba5641e0e4e35f\"}",
+      "--closed-evidence-ref",
+      "{\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence-R6-N16-N160-model-snapshots-MAIN-R2-001/EVIDENCE.json\",\"bytes\":9121,\"sha256\":\"4c8698817d5cdf9b15556293bb3950b137990ad4b0c223ae03de53950f922ead\"}"
+    ]
+  },
+  "cleanup_seconds": 270,
+  "closed_source": {
+    "bytes": 4790,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-closed-r6-n16-n160-overlay-new24h-v1-20261017-001-repair2/SOURCE_MANIFEST.json",
+    "sha256": "4f5ed204581d5d5bdd7b2f6d88294bc9d23875099153b88dabd190cfd08dcf64"
+  },
+  "default_execute": false,
+  "historical_failures_unchanged": true,
+  "model": {
+    "argv": [
+      "/usr/bin/env",
+      "MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair19-20261017-001/host_ticket.py",
+      "--execute",
+      "--source-ref",
+      "ACTUAL_BOUND_FIRSTDECODE_R19_REF3"
+    ]
+  },
+  "model_RAM_GiB": 32,
+  "model_cap32_trial_fit_proven": false,
+  "model_guest_CPU_count": 4,
+  "model_initial_free_GiB": 40.5,
+  "model_output_root": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R19-main-NEW24H_FIRSTDECODE101R19_001",
+  "no_parallel_model_and_postconsumer": true,
+  "not_actual": true,
+  "opt_total_cap_bytes": 2147483648,
+  "payload_leaf": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/first-real-decode-model-snapshots-renew24h-20261017-001",
+  "payload_source": {
+    "bytes": 17250,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-selected-firstdecode-renew24h-20261017-001/SOURCE_MANIFEST.json",
+    "sha256": "413dfbf5b8dd3444cfafc19c6ce3e1e49cbb5414fb4ee1202f91a924cb232a29"
+  },
+  "payload_total_cap_bytes": 32212254720,
+  "phase_order": [
+    "work",
+    "original-owned-cleanup270/exact-release",
+    "postverify900/full-data-and-source",
+    "fresh-metadata-ctime/ledger/no-writer/CID",
+    "durable-original-failure-RESULT"
+  ],
+  "postconsumer": {
+    "CPUs": 1,
+    "Devices": [],
+    "RAM_GiB": 8,
+    "argv": [
+      "/usr/bin/env",
+      "MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair19-20261017-001/host_ticket.py",
+      "--execute",
+      "--source-ref",
+      "ACTUAL_BOUND_FIRSTDECODE_R19_REF3",
+      "--postconsume-input-ref",
+      "ACTUAL_POSTCONSUMER_INPUT_REF3"
+    ],
+    "child_formula": "min(900,whole_remaining-270-900-90,UTC_remaining-270-900-90)",
+    "child_max_seconds": 900,
+    "cleanup_seconds": 270,
+    "fresh_MemAvailable_GiB": 16.5,
+    "margin_seconds": 90,
+    "only_after_exact_model_release": true,
+    "postverify_seconds": 900,
+    "whole_seconds": 2700
+  },
+  "postconsumer_input_ticket": {
+    "exclusive_new_path": "/opt/host/vnf/austinov/run-dl-firstdecode-input-R19-MAIN-001/INPUT.json",
+    "inspect_ref": "ACTUAL_FRESH_STOPPED_MODEL_CID_INSPECT_REF3",
+    "loaded_ref": "ACTUAL_ALL4_LOADED_REF3",
+    "model_source": "ACTUAL_BOUND_FIRSTDECODE_R19_REF3",
+    "not_an_admission": true,
+    "owner_ref": "ACTUAL_FINAL_FAILED_MODEL_OWNER_REF3",
+    "payload_source": {
+      "bytes": 17250,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-selected-firstdecode-renew24h-20261017-001/SOURCE_MANIFEST.json",
+      "sha256": "413dfbf5b8dd3444cfafc19c6ce3e1e49cbb5414fb4ee1202f91a924cb232a29"
+    },
+    "reports_alias_rule": "Preserve actual guest Ref and resolve only from fresh exact CID inspect: identity control alias plus /adakv-results same root, nested /adakv-results/model/capture to exact P payload. No report rewriting.",
+    "reports_ref": "ACTUAL_ALL4_REPORTS_AND_STOP_LOGS_REF3",
+    "reports_schema": "deltalog.firstdecode-all4-report-refs/v1",
+    "schema": "deltalog.firstdecode-postconsumer-input/v1",
+    "scope_notice": "Old R18 input collector is pinned to old template and must not be used unchanged. Either MAIN creates exact seven-key actual INPUT or a separately reviewed thin source-pin successor is required.",
+    "write_only_after_actual_evidence": true
+  },
+  "postconsumer_output_root": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R19-postconsumer-main-NEW24H_FIRSTDECODE101R19_CPU_001",
+  "postverify_seconds": 900,
+  "readonly_binder_only": true,
+  "renewal_authority": {
+    "bytes": 3012,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+    "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+  },
+  "required_actual_closed_evidence_ref": {
+    "bytes": 9121,
+    "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/seal-evidence-R6-N16-N160-model-snapshots-MAIN-R2-001/EVIDENCE.json",
+    "sha256": "4c8698817d5cdf9b15556293bb3950b137990ad4b0c223ae03de53950f922ead"
+  },
+  "reserve_CPUs": 2,
+  "schema": "deltalog.firstdecode-command-ticket/v1",
+  "sourceaudit": {
+    "argv": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair19-20261017-001/host_ticket.py",
+      "--source-audit",
+      "--source-ref",
+      "ACTUAL_BOUND_FIRSTDECODE_R19_REF3"
+    ]
+  },
+  "template": {
+    "bytes": 234563,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair19-20261017-001/SOURCE_TEMPLATE.json",
+    "sha256": "adca9c401d3beaa22fb560c9be9a0f8ec659bacf449f608502877dde32d1ea89"
+  },
+  "unchanged_cutoff_epoch": 1792313000,
+  "whole_seconds": 2700
+}
