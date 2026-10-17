@@ -215,15 +215,15 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL_FAILED_PRECOMMIT_NUMERICAL_SHADOW",
-    "operation": "exec-000000000000114e",
+    "state": "RUNNING",
+    "operation": "exec-0000000000001178",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "contract": "QUALITY_R21_FULL_HYPIC_R1_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/full-quality-r21-hypic-r1",
-    "checkpoint": "58e367375f0761052f54447e97cddbb9e13c2610",
-    "admission_operation": "exec-000000000000114d",
-    "independent_audit": "exec-000000000000115a"
+    "contract": "QUALITY_R22_FIRSTBATCH_CANARY_R1_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/short-suffix-r22-firstbatch-canary-r1",
+    "checkpoint": "ad7401950242d33f806730c9c97f860fb3a22058",
+    "admission_operation": "exec-0000000000001177",
+    "independent_audit": null
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",
@@ -472,5 +472,15 @@
     "step": 10,
     "released": true,
     "quality_score_valid": false
+  },
+  "r22_short_suffix": {
+    "state": "BOUNDED_NPU_RUNNING_NOT_ACCEPTED",
+    "host_tests": 1025,
+    "host_operation": "exec-0000000000001172",
+    "readiness_report": "R22_FIRSTBATCH_CANARY_READINESS_20261017.json",
+    "default_disabled": true,
+    "thresholds_unchanged": true,
+    "published": "ad7401950242d33f806730c9c97f860fb3a22058",
+    "full_goal_complete": false
   }
 }

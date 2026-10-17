@@ -1,4 +1,21 @@
-# CURRENT R22 FIRSTBATCH CANARY HOST FROZEN; NO DEVICE RUN
+# CURRENT R22 FIRSTBATCH SHORT SUFFIX CANARY LIVE
+
+Published/liveverifiedad7401950242d33f806730c9c97f860fb3a22058;mainunchanged.
+Freshma direct1177 at03:13:34UTC proves221host/217runtime/model/image/input/
+scorer/priorfailureimmutable rawSHA/physical0-3empty/8233HCCLfree/newroot.
+Exactcontroller exec-0000000000001178, ma lgw_a6109c51076a4a2c9d2674ca5a8704a0.
+Contract QUALITY_R22_FIRSTBATCH_CANARY_R1_CONTRACT.json;raw
+/cache/cch/hypic-independent-20261013/short-suffix-r22-firstbatch-canary-r1.
+Pollsamepeer/handle/root; neverrestartlive/unclear orchange221boundsources.
+Terminal audit_r22_short_suffix_canary.py --contract
+QUALITY_R22_FIRSTBATCH_CANARY_R1_CONTRACT.json --live-release.
+Require17cohort/allfourrank48C1/16C2,actualshortsuffixroute->sameidentitycompletion,
+unchangedC1shadows/C2finite,real eviction/rebuild,source/physical/isolation/release.
+Reportactualfailedsample6short-routecoverage;donotclaimexactoldschedulergeometry.
+Then newsourceboundfull381quality/performance/lifecycle remain. R21negativeand
+fullquality0/381failure retained. Cutoff2026-10-17T06:48:09Z;fullgoalunfinished.
+
+# HISTORICAL R22 FIRSTBATCH CANARY HOST FROZEN; NO DEVICE RUN
 
 QUALITY_R22_FIRSTBATCH_CANARY_R1_CONTRACT.json binds221host/217runtime;
 first8 indexes0..7 matchfailedfullqualitybatch, next8 indexes8..15, actualrebuild1.
