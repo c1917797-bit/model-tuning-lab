@@ -1,4 +1,17 @@
-# CURRENT R21 FINITE CANARY TERMINAL BOUNDED ACCEPTED
+# CURRENT R21 G3 FULL40 PERFORMANCE LIVE
+
+Published/liveverified9c36ed413239a7a485a14812d6928404b69b4629;mainunchanged.
+Freshma directadmission10ca at01:19:38UTC proves211host/186runtime/image/model/
+input/Canaryimmutable rawSHA/physical0-3empty/8233+HCCLfree/newroot/cache23.6GB.
+Exactma controller exec-00000000000010cc; contract FORMAL_R21_G3_R1_CONTRACT.json;
+raw /cache/cch/hypic-independent-20261013/formal-r21-c2-finite-g3-r1.
+Pollsamepeer/handle/root; no restartlive/unclear or211boundchanges.
+Terminal audit_r21_c2_finite_performance.py --contract FORMAL_R21_G3_R1_CONTRACT.json
+--live-release; onlyvalidthenfreshmatchingG1. Timedshadow/probeoff;
+finite/ownership/commit/source/isolation/release retained. Notquality.
+R20negativeunchanged;fullgoalunfinished;cutoff2026-10-17T06:48:09Z.
+
+# HISTORICAL R21 FINITE CANARY TERMINAL BOUNDED ACCEPTED
 
 10b0exit0/3responses; independent10c4 PASS2private same-stepfourrank48C1/16C2,
 192numericshadows/384partitionreceipts/128C2finiteprecommit-completionjoins,
