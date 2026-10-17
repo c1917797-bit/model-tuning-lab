@@ -1,4 +1,14 @@
-# CURRENT R22 FULL QUALITY DEADLINE TERMINAL; NO OWNED MODEL JOB
+# CURRENT R23 PARTIAL-EVIDENCE HOST REPAIR; NO DEVICE AUTHORIZATION
+
+New formal_quality_r23_tp4.py retains interrupted fullquality responses from
+strictjournal, preserving executionerror/validfalse. Oldcontroller and R22raw unchanged.
+11focused tests11f8PASS (first11f7mockfixture missingcatalog.path fixed); realimmutable
+R22journal replay11f6 recovers215attempts/207request-success.11f9 exactnarrowdelta/
+oldcontrollerSHA/29structure/diffcheckPASS. R23_PARTIAL_RESPONSE_HOST_READINESS_20261017.json.
+No R23contract/manifest/device run; no quality/speed/lifecycle acceptance.
+Deviceauthorization expired06:48:09UTC; no new launches. Fullgoalunfinished.
+
+# HISTORICAL R22 FULL QUALITY DEADLINE TERMINAL; NO OWNED MODEL JOB
 
 119b exit1 at frozen2026-10-17T06:48:09Z deadline. Journal215scored attempts:
 207request-success/8cutoff failures;121stop/86length. Controllerresponses0 and

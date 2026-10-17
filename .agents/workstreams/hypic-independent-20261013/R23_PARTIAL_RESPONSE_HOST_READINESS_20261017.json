@@ -1,0 +1,28 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "scope": "Partial response retention only; no algorithm/runtime change or device run",
+  "old_attempt": "full-quality-r22-hypic-r1",
+  "old_evidence_unchanged": true,
+  "reason": "responses assigned only after full workload returns; exception bypassed assignment despite durable per-response journal",
+  "implementation": "New formal_quality_r23_tp4.py reconstructs full-quality failed-arm responses from strict append-only journal in finally; original error and valid=false preserved",
+  "tests": {
+    "focused_11": "exec-00000000000011f8 PASS",
+    "initial_mock_fixture_failure": "11f7 missing catalog.path; fixed test fixture only",
+    "real_journal_replay": "11f6:215 attempts/207 request-success",
+    "static": "11f9 oldcontroller SHA unchanged/exact narrow delta/29 structure/diffcheck PASS"
+  },
+  "old_controller_unchanged": true,
+  "new_controller_exact_narrow_delta": true,
+  "hashes": {
+    "formal_quality_r23_tp4.py": "cd9718501d8fc22e3df5d4e77de1833fee30e30f35525df7e21ad06b288a2cdd",
+    "independent_partial_quality_responses.py": "a76172d9c59f47be8656c8789fcfffb5e5a1f6746d3082d88a0d512ff9c46b8c",
+    "test_independent_partial_quality_responses.py": "54429929c09b0375b099639a155bf45ca090441c7ed8d01af8b0b6d08e063f49",
+    "test_formal_quality_r23_partial.py": "b078f493ee76108cb5cf97d451e8c285b44d90b1fe3d9f29e41c122823cf48d0"
+  },
+  "limitations": [
+    "No R23 contract or runtime manifest frozen",
+    "No R23 device run authorized or executed",
+    "No completed381 or paired quality",
+    "No speed/lifecycle/29functional acceptance"
+  ]
+}
