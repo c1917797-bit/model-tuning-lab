@@ -414,5 +414,30 @@
     "parsed_report": "PROFILE_G3_R19_EARLYMIXED_PARSED_AUDIT_20261016.json",
     "g1_parser_cid": "11986bb503da88036ca242afb4d44709e50f573650eac8d331e4f6792176d2b8",
     "g1_analysis_root": "/cache/cch/hypic-independent-20261013/profile-g1-r19-earlymixed-r1-analysis-r1"
+  },
+  "r21_lifecycle": {
+    "state": "HOST_READY_DEVICE_NOT_RUN",
+    "source_checkpoint": "83128ce9f07bccc2c51b70acbe9df69082318fdc",
+    "report": "R21_LIFECYCLE_CONTRACT_READINESS_20261017.json",
+    "static_operation": "exec-0000000000001116",
+    "focused_tests": 12,
+    "focused_operation": "exec-0000000000001118",
+    "default_disabled_no_runtime_import": true,
+    "structure_diff_operation": "exec-0000000000001119",
+    "contracts": [
+      "LIFECYCLE_DELIVERY_R21_DISABLED_R1_CONTRACT.json",
+      "LIFECYCLE_DELIVERY_R21_ENABLED_R1_CONTRACT.json",
+      "LIFECYCLE_DELIVERY_R21_UNINSTALLED_R1_CONTRACT.json"
+    ],
+    "publication": {
+      "remote_live_verified": true,
+      "branch": "work/hypic-independent-20261013",
+      "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7"
+    },
+    "limits": [
+      "No actual lifecycle NPU stages yet",
+      "No deployment acceptance",
+      "Current G1 controller1101 remains the only owned model run"
+    ]
   }
 }
