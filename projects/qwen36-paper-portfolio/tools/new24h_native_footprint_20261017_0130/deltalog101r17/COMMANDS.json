@@ -1,0 +1,71 @@
+{
+  "ACC049_receiver_updated": false,
+  "Docker_reserve_GiB": 8.5,
+  "PF033_receiver_updated": false,
+  "PF037_receiver_updated": false,
+  "PF048_receiver_updated": false,
+  "accuracy014_receiver_updated": false,
+  "binding": {
+    "args": [
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair17-native-postprepare-footprint-20261017-001/bind_source.py",
+      "--execute",
+      "--template-sha256",
+      "FINAL_TEMPLATE_SHA256_SET_BY_SEAL",
+      "--bridge-source-ref",
+      "{\"bytes\":67429,\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_MANIFEST.json\",\"sha256\":\"871c8e32831ee3eebacd43a084e4416bb14d6d06cd9f5ee08017ba459f287cd8\"}",
+      "--bridge-owner-ref",
+      "{\"bytes\":1667,\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json\",\"sha256\":\"7b10472808da9c409dca97e4f36ff577cf4d090db95c90b556d0bf680f4d25fe\"}",
+      "--component-cpu-owner-ref",
+      "{\"bytes\":1426,\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json\",\"sha256\":\"1ea2eeff549bb8fb036f0b313e57503a87896302be4836f68dba5641e0e4e35f\"}"
+    ],
+    "command": "/usr/bin/python3"
+  },
+  "cleanup_seconds": 270,
+  "execute": {
+    "args": [
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair17-native-postprepare-footprint-20261017-001/host_ticket.py",
+      "--execute",
+      "--source-ref",
+      "ACTUAL_BOUND_MODEL101_REF_JSON"
+    ],
+    "command": "/usr/bin/prlimit",
+    "environment": {
+      "MXR_DL_EXTERNAL_OUTPUT008_ENABLE": "1"
+    }
+  },
+  "external_output_enable": "MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1",
+  "missing_actual": [
+    "bind/reopen existing actual16 and CPUrefs",
+    "actual sameimage complete software controls",
+    "actual4x48worker/240tensor/assignment-retirement/reuse"
+  ],
+  "model_guest_GiB": 48,
+  "model_numeric_qualified": false,
+  "opt_reserve_GiB": 8.5,
+  "opt_workspace_GiB": 32,
+  "output": "/opt/host/vnf/austinov/run-deltalog-MODEL101R17-main-NEW24H_MODEL101R17_001",
+  "output_GiB": 4,
+  "prepared_only": true,
+  "ready": false,
+  "sameimage_CPU_pending": true,
+  "schema": "deltalog.split-scale-model-owned-commands/v053",
+  "scope": "SOURCE ONLY actual16 -> two2K/9decode model diagnosis; no160/production/performance/task",
+  "sourceaudit": {
+    "args": [
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair17-native-postprepare-footprint-20261017-001/host_ticket.py",
+      "--source-audit",
+      "--source-ref",
+      "ACTUAL_BOUND_MODEL101_REF_JSON"
+    ],
+    "command": "/usr/bin/python3"
+  },
+  "whole_seconds": 2700
+}

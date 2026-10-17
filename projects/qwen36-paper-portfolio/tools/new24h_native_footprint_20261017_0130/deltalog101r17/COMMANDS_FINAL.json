@@ -1,0 +1,119 @@
+{
+  "actual160_qualification": false,
+  "actual16_required": true,
+  "aggregate_actual_I": {
+    "args": [
+      "-I",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair17-native-postprepare-footprint-20261017-001",
+      "-p",
+      "test_*.py"
+    ],
+    "command": "/usr/local/python3.12.13/bin/python3",
+    "requires": "MAIN admitted sameimage Devices[]"
+  },
+  "arena_observation_only": true,
+  "cleanup_seconds": 270,
+  "commands": {
+    "bind": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair17-native-postprepare-footprint-20261017-001/bind_source.py",
+      "--execute",
+      "--template-sha256",
+      "8fd3b13e4fb7a78ebac2658c2b8f394c81fd3814c773e734c5907e25a53ffab3",
+      "--bridge-source-ref",
+      "{\"bytes\":67429,\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-sameinitial-native-contract-new24h-v1-088-repair6-repair2/SOURCE_MANIFEST.json\",\"sha256\":\"871c8e32831ee3eebacd43a084e4416bb14d6d06cd9f5ee08017ba459f287cd8\"}",
+      "--bridge-owner-ref",
+      "{\"bytes\":1667,\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json\",\"sha256\":\"7b10472808da9c409dca97e4f36ff577cf4d090db95c90b556d0bf680f4d25fe\"}",
+      "--component-cpu-owner-ref",
+      "{\"bytes\":1426,\"path\":\"/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair6-repair2-001/RESULT.json\",\"sha256\":\"1ea2eeff549bb8fb036f0b313e57503a87896302be4836f68dba5641e0e4e35f\"}"
+    ],
+    "execute": [
+      "/usr/bin/env",
+      "MXR_DL_EXTERNAL_OUTPUT008_ENABLE=1",
+      "/usr/bin/prlimit",
+      "--as=536870912:unlimited",
+      "--",
+      "/usr/bin/python3",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair17-native-postprepare-footprint-20261017-001/host_ticket.py",
+      "--execute",
+      "--source-ref",
+      {
+        "required_actual_ref3": "actual101R17 bound source"
+      }
+    ],
+    "sourceaudit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair17-native-postprepare-footprint-20261017-001/host_ticket.py",
+      "--source-audit",
+      "--source-ref",
+      {
+        "required_actual_ref3": "actual101R17 bound source"
+      }
+    ]
+  },
+  "consume_observation": {
+    "AS_bytes": 536870912,
+    "args": [
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair17-native-postprepare-footprint-20261017-001/consume_native101r12.py",
+      "--execute",
+      "--source-ref",
+      {
+        "required_actual_ref3": "bound R17 SOURCE_MANIFEST"
+      },
+      "--owner-ref",
+      {
+        "required_actual_ref3": "actual R17 failed diagnostic-stop owner with full release"
+      },
+      "--loaded-ref",
+      {
+        "required_actual_ref3": "actual candidate/ALL4-LOADED.json"
+      },
+      "--report-ref",
+      {
+        "required_actual_ref3": "actual rank0 NATIVE-POSTPREPARE report"
+      },
+      "--report-ref",
+      {
+        "required_actual_ref3": "actual rank1 NATIVE-POSTPREPARE report"
+      },
+      "--report-ref",
+      {
+        "required_actual_ref3": "actual rank2 NATIVE-POSTPREPARE report"
+      },
+      "--report-ref",
+      {
+        "required_actual_ref3": "actual rank3 NATIVE-POSTPREPARE report"
+      },
+      "--output",
+      "/opt/host/vnf/austinov/run-deltalog-MODEL101R17-main-NEW24H_MODEL101R17_001/NATIVE_FOOTPRINT_CONSUMPTION.json"
+    ],
+    "command": "/usr/bin/python3",
+    "host_cpu": 166,
+    "requires": "MAIN fresh host CPU166 read-only admission, AS512MiB/60s, pure stdlib no Torch/Docker/model rerun",
+    "timeout_seconds": 60
+  },
+  "expected_model_owner_status": "failed; deliberate stop preserves original owner failure; no promotion",
+  "native_observation_only": true,
+  "output": "/opt/host/vnf/austinov/run-deltalog-MODEL101R17-main-NEW24H_MODEL101R17_001",
+  "requires_changed_environment": "Fresh MAIN proof Docker free>=9126805504 and all original guards; old R13 no model",
+  "schema": "deltalog.short16-model-diagnostic-commands/v101-repair7",
+  "software_cases": 119,
+  "template": {
+    "bytes": 223652,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair17-native-postprepare-footprint-20261017-001/SOURCE_TEMPLATE.json",
+    "sha256": "8fd3b13e4fb7a78ebac2658c2b8f394c81fd3814c773e734c5907e25a53ffab3"
+  },
+  "whole_seconds": 2700
+}

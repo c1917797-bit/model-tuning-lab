@@ -192,3 +192,49 @@ qualification. If input lengths change, freeze a new workload and recheck
 consumers; fixed output length does not prescribe prompt length.
 
 [Actual source-binding recovery, registry failure and bounded-evidence decisions](../../../../docs/knowledge-base/ascend-infra/cases/source-binding-registry-and-bounded-evidence-20261016.md).
+
+## Match the cold service path before loading weights
+
+A parser exercised after canaries or prior imports can hide an enabled-plugin
+circular import. Keep default-OFF discovery in Devices[]; when the installed
+runner legitimately queries HAL, test the enabled parser in a new isolated
+process on the admitted mapping, before weights. Reproduce the actual service
+CANN setup -> torch/torch_npu -> API -> parse order, not an invented colder or
+prewarmed path. Charge the child to the existing phase deadline and preserve
+argv/stdout/stderr on TimeoutExpired before refusing. A parser PASS proves that
+startup seam only, never candidate math. R15 failed that real seam; R17's fresh
+same-image process passed it without changing numerical or resource gates.
+
+## Mutable output trees need complete bounded observation
+
+A compiler can remove a temporary directory during a legitimate output-budget
+walk. Preserve the first syscall/path/errno before cleanup; this is not a paper
+failure. If exact root-contained ENOENT is proved, a source-bound successor may
+restart the entire traversal within finite attempts and the original deadline.
+Discard the partial sum, include every observed regular file, record the race,
+and retain the unchanged byte cap/free-space floors. Permission, unknown/outside
+paths, root replacement, churn or deadline exhaustion remain hard failures.
+A completed sampled traversal is not an atomic snapshot or a peak-usage proof.
+
+Test actual host ordering too: substrate load can precede the exclusive output
+mkdir. Constructing a scanner must not inspect/create that absent root; pin its
+ordinary inode at first real observation and reject subsequent replacement.
+BOLE R7 exposed the compiler-directory race; R8's eager root pin was caught
+before deployment, and R9 adds the load -> mkdir -> first-use control. Preserve
+both failures/scopes instead of silently rewriting their source identities.
+
+## Evidence ABIs and deliberate diagnostic stops
+
+Do not loosen strict Ref3 readers to accommodate an original Ref2 producer.
+Adapt every cross-stage call boundary explicitly: reopen a quiescent ordinary
+file, derive its byte count and full hash, verify the original hash, and pass
+exact Ref3 while leaving the original producer ABI intact. Test actual child
+receipts, not only synthetic dictionaries.
+
+An intentionally stopping observer can produce complete metadata while its
+unaltered model owner exits nonzero. Preserve that failed owner and exact stop
+trace, independently prove all writers released, then allow only a separate
+metadata consumer. R17's all-four-rank/all64 ND/committed-index observation does
+not authorize shared-storage alias bypass, numerical success, performance or
+task acceptance. Strong live tensor/request/slot checks and the next NPU gate
+remain required.

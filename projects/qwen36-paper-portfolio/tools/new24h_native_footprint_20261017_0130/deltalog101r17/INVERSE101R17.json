@@ -1,0 +1,27 @@
+{
+  "actual_successful_order_source": {
+    "bytes": 9359,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair15-native-postprepare-footprint-20261017-001/plugin/qwen36_deltalog_service/runtime.py",
+    "sha256": "785a9ae27c98178daa9e9a56071560cec3a2e717a41a968872311093db603316"
+  },
+  "complete_observer_and_probe_inverse": true,
+  "deferred_loader_used": false,
+  "observer_before": {
+    "bytes": 2827,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair15-native-postprepare-footprint-20261017-001/native_observer_plugin101r12.py",
+    "sha256": "4cca14d063df5b0ed27eb60af36eb56037946226dbb75233d0ed7d7a0c44599e"
+  },
+  "parent_template": {
+    "bytes": 222368,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair15-native-postprepare-footprint-20261017-001/SOURCE_TEMPLATE.json",
+    "sha256": "ac46957469d5e5ef1e3c6d2256685ba9b59462ae83b7bcadaf13eeb75082ae41"
+  },
+  "schema": "deltalog.native-import-order-delta/v101R17",
+  "unchanged_math": [
+    "native_footprint101r12.py",
+    "consume_native101r12.py",
+    "run_owned.py",
+    "entry.py",
+    "client.py"
+  ]
+}

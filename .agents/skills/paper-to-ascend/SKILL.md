@@ -264,7 +264,9 @@ not require retraining unless retraining is explicitly in scope.
   `device_op`/`fused_moe` cycle; initialize the required Ascend ops package
   before importing the attention implementation. Append plugin paths to the
   image's original CANN `PYTHONPATH`, never replace it or hide `acl`. Validate
-  both changes with a no-device same-image import before a model launch.
+  default-OFF discovery without devices; if enabled native imports query HAL,
+  validate the fresh actual service parser on admitted devices before weights,
+  within its original phase budget. A warmed canary parser is not that check.
 - A runtime field named `layerIndex` may be populated only by an optional
   feature, not the normal attention path. Identify the live model layer from
   the layer object and record its name in a one-shot worker event. Distinguish

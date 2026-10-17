@@ -1,35 +1,15 @@
 {
   "schema": "ascend.current-model-frontdoor-handoff/v1",
-  "recorded_at_utc": "2026-10-17T00:59:51Z",
+  "recorded_at_utc": "2026-10-17T01:46:30Z",
   "authority_file": "CONDITIONAL_EXTENSION24H_AUTHORITY_20261016.json",
   "original_cutoff_utc": "2026-10-17T07:02:13Z",
   "extension_used": 0,
   "extension_condition_met": false,
   "new_nonHYPIC_accepted_technology": false,
-  "current_owner": {
-    "operation": "exec-00000000000010a0",
-    "paper": "BOLE131R7",
-    "state": "running_at_dispatch",
-    "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair7/SOURCE_BOUND.json",
-      "bytes": 39768,
-      "sha256": "a62228f481a4447a17eaa40ee2016af6fc954892e78db3eba41e24dc71bb82ef"
-    },
-    "bind_operation": "exec-000000000000109b",
-    "sourceaudit_operation": "exec-000000000000109d",
-    "resource_admission_operation": "exec-000000000000109e",
-    "actual_old_R6_four_ref_smoke_operation": "exec-000000000000109f",
-    "actual_old_R6_four_ref_smoke_passed": true,
-    "output": "/opt/host/vnf/austinov/run-bole-model131repair7-MAIN-NEW24H_001",
-    "whole_seconds": 3600,
-    "cleanup_seconds": 180,
-    "actual_sameimage_cases_required": 58,
-    "purpose": "Real three-node model mechanism diagnostic; no persistent scheduler publication or whole numerical/performance qualification",
-    "qualification": false
-  },
+  "current_owner": null,
   "next_NPU": {
-    "paper": "DeltaLog101R16",
-    "status": "Preparing minimal previously proven Ascend ops.gdn-before-runner import ordering and fresh exact-service-parser CPU preflight. No boundsource or new resource permission yet.",
+    "paper": "DeltaLog whole-storage byte ABI then C1 first real decode numerical smoke",
+    "status": "GE sealing <=1GiB tiny byteAPI packet against reviewed120R2 physical5 owner, MAIN full source review and fresh admission pending. Full-model32GiB/80GiB budget not admitted by tiny ticket.",
     "qualification": false
   },
   "last_model_result": {
@@ -93,32 +73,21 @@
     "cost_caution": "child_scope includes final fence; nested phases inclusive/nonadditive; actual cache state uncontrolled; selected estimate not full-run guarantee"
   },
   "parallel_preparation": {
-    "accuracy_input_repair": "R7 independent all14 strict-boundary review PASS; preparing R16 real-parser parity repair rather than new import-loader. Prior CPU127R6+R15 joint audit found CPU lease noncomposable under7CPU assumptions; no concurrent CPU160 admitted.",
-    "ge_fullgdn_ready": "New minimal DeltaLog fresh/reset/retire lifecycle adapter code preparation from exact native source, retaining alias guard; no frozen runtime edits. Identified preclear flush, prefill overwrite, and zero-token-only retirement seams.",
-    "gdn_paper_reassessment": "R7 source frozen/bound/audited and actual oldR6 four-evidence conversion PASS; no math/threshold/controller originalRef2 changes. Current MAIN model diagnostic running.",
+    "accuracy_input_repair": "Actual single-publication outer wiring under control review; exact R9 success prerequisite remains FAIL/closed",
+    "gdn_paper_reassessment": "Active independent R9 actual native slot authority and cache registry failure attribution; source-supported R10 only",
+    "ge_fullgdn_ready": "R17 actual report localverified; preparing NPU byteABI and firstrealdecode all64 livegeometry/stronglifecycle/wholeinactive streaming diagnostic",
     "constraints": "No whole-model numerical PASS, E2E performance or final task scores. No fake load or claim of uninterrupted4card utilization; protect0–3. Idle agents are not rerun merely to appear busy."
   },
   "git": {
-    "local_commit": "e56d41c58818f2d6f2845f3f93b5ea38594b19b1",
-    "normal_push_operation": "exec-0000000000001006",
+    "local_commit": "0eceac2da9444f969d2bfc45a6fa2ec2e153e6b6",
+    "normal_push_operation": "exec-00000000000010ad",
     "normal_push_exit": 0,
-    "normal_push_reported_remote_transition": "464cab36..e56d41c5",
-    "protocol": "per-commandHTTP/1.1, TLSverification unchanged, noforce",
-    "archive": "projects/qwen36-paper-portfolio/tools/new24h_recovery_frontdoors_20261016_2340",
-    "earlier_TLS_failure_retained": "exec-0000000000000fea",
-    "earlier_remote_timeout_retained": "exec-0000000000000ff3",
-    "last_fresh_remote_before_retry": "exec-0000000000000ffe verified464cab36",
+    "normal_push_reported_remote_transition": "e56d41c5..0eceac2d",
+    "protocol": "per-commandHTTP/1.1,TLSverification unchanged,noforce",
+    "archive": "projects/qwen36-paper-portfolio/tools/new24h_model_repairs_20261017_0048",
     "current_handoff_uncommitted_after_stage_update": true,
-    "pending_stage_archive": "projects/qwen36-paper-portfolio/tools/new24h_model_repairs_20261017_0048",
-    "pending_archive_copies": {
-      "R15_operation": "exec-0000000000001097",
-      "R15_files": 115,
-      "R15_bytes": 1687811,
-      "R7_operation": "exec-00000000000010a1",
-      "R7_files": 117,
-      "R7_bytes": 1747347,
-      "all_byte_equal": true
-    }
+    "pending_stage_archive": "projects/qwen36-paper-portfolio/tools/new24h_native_footprint_20261017_0130",
+    "pending_stage_source_copy_operation": "exec-00000000000010e6"
   },
   "physical_scope": [
     4,
@@ -149,18 +118,16 @@
     "released": true
   },
   "card_snapshot": {
-    "operation": "exec-000000000000109e",
-    "epoch": 1792198603.8146443,
-    "physical4_7_no_PIDs_before_start": true,
+    "operation": "exec-00000000000010ed",
+    "physical4_7_no_PIDs": true,
     "HBM_MiB": [
       2867,
-      2868,
-      2865,
+      2867,
+      2866,
       2864
     ],
-    "MemAvailable_kB": 80246208,
-    "model56_5GiB_floor_passed": true,
-    "protected0_3": "not used or stopped byMAIN; external workload naturally released",
+    "MemAvailable_bytes": 62062284800,
+    "protected0_3": "external active PIDs3038824–27 observed, never touched",
     "not_full_window_utilization": true
   },
   "last_CPU_recovery": {
@@ -408,5 +375,266 @@
       "cf79665394374b4e5aac6899154c0c50969be1a40bcd1aeac805f89ce4189fce"
     ],
     "released": true
+  },
+  "previous_BOLE_R7": {
+    "operation": "exec-00000000000010a0",
+    "paper": "BOLE131R7",
+    "state": "terminal_failed_implementation_released",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair7/SOURCE_BOUND.json",
+      "bytes": 39768,
+      "sha256": "a62228f481a4447a17eaa40ee2016af6fc954892e78db3eba41e24dc71bb82ef"
+    },
+    "bind_operation": "exec-000000000000109b",
+    "sourceaudit_operation": "exec-000000000000109d",
+    "resource_admission_operation": "exec-000000000000109e",
+    "actual_old_R6_four_ref_smoke_operation": "exec-000000000000109f",
+    "actual_old_R6_four_ref_smoke_passed": true,
+    "output": "/opt/host/vnf/austinov/run-bole-model131repair7-MAIN-NEW24H_001",
+    "whole_seconds": 3600,
+    "cleanup_seconds": 180,
+    "actual_sameimage_cases_required": 58,
+    "purpose": "Real three-node model mechanism diagnostic; no persistent scheduler publication or whole numerical/performance qualification",
+    "qualification": false,
+    "exit": 3,
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-bole-model131repair7-MAIN-NEW24H_001/RESULT.json",
+      "bytes": 84147,
+      "sha256": "3508ff1040b04d640e58aac5603c99718df515b31f32f1b3e9ac29973299b11a"
+    },
+    "elapsed_seconds": 420.734648009995,
+    "cleanup_spent": 35.38279699994018,
+    "secondary": [],
+    "source_before_after_equal": true,
+    "actual_software58_pass": true,
+    "all4canary_pass": true,
+    "all4weights_loaded": true,
+    "HTTP_health_passed": false,
+    "real_request_reached": false,
+    "first_fault": {
+      "path": "/opt/host/vnf/austinov/run-bole-model131repair7-MAIN-NEW24H_001/HOST-FIRST-FAULT.json",
+      "bytes": 2579,
+      "sha256": "eb4366c5653171617fc7c8ff3dbf13134bc6ca60c3583a0450cc05c7382238ba"
+    },
+    "primary": "FileNotFoundError during original025 recursive output scan; concurrently deleted dense/bishengir-compile-768c35",
+    "classification": "IMPLEMENTATION_OR_OBSERVER_TEMP_DIRECTORY_RACE",
+    "independent_release_operation": "exec-00000000000010bb",
+    "owned_CIDs": [
+      "83c8cdf1189f453be6899a898a63d82c876b7c45a5614cb4c8593453c78c57ee",
+      "e15be137515676f21d65fe2a6590b762432c57f950615dd0d99d12b45a062307"
+    ],
+    "released": true,
+    "numerical_or_paper_failure": false
+  },
+  "DL_R16_status": "NOT deployed/run: independent review rejected Devices[] fullGDN import and non-parity coldpath. R17 from actualR15 will preserve true installed_cann/torch/torch_npu/API/parse order on admitted mapping; known deterministic CPUHAL failure is not rerun.",
+  "previous_DL_R17": {
+    "operation": "exec-00000000000010c2",
+    "paper": "DeltaLog101R17",
+    "state": "completed_expected_diagnostic_stop_released",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair17-native-postprepare-footprint-20261017-001/SOURCE_MANIFEST.json",
+      "bytes": 204981,
+      "sha256": "128812a5643282fd163e6a5d82a7486e725497dd00f2a9f9c817738a8e59d00a"
+    },
+    "bind_operation": "exec-00000000000010bf",
+    "sourceaudit_operation": "exec-00000000000010c0",
+    "resource_admission_operation": "exec-00000000000010c1",
+    "output": "/opt/host/vnf/austinov/run-deltalog-MODEL101R17-main-NEW24H_MODEL101R17_001",
+    "whole_seconds": 2700,
+    "cleanup_seconds": 32.551566090027336,
+    "actual_sameimage_cases_required": 119,
+    "purpose": "Native postprepare all64/committed-index/format diagnostic. Fresh real parser after four canaries/before weights. Deliberate stop before decoder/candidate math; expected failed owner is not model qualification",
+    "qualification": false,
+    "exit": 1,
+    "owner": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R17-main-NEW24H_MODEL101R17_001/RESULT.json",
+      "bytes": 3869,
+      "sha256": "e1f8eb88dc5856d43e35bf48afdf2e9ab3f2950089363ec6b6c44cc59207566e"
+    },
+    "primary": "ValueError('original child failure retained: DL-real-short-client')",
+    "elapsed": 481.00421536003705,
+    "secondary": [],
+    "sameimage119_pass": true,
+    "fourcanary_pass": true,
+    "fresh_exact_service_parser_pass": true,
+    "all4weights_loaded": true,
+    "all4_loaded_ref": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R17-main-NEW24H_MODEL101R17_001/candidate/ALL4-LOADED.json",
+      "bytes": 9209,
+      "sha256": "fb3c150d79fd47879c839bda2f63f0054dc95f1126db6ba7f604405a37699fdf"
+    },
+    "all4reports": [
+      {
+        "ref": {
+          "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R17-main-NEW24H_MODEL101R17_001/candidate/model/capture/NATIVE-POSTPREPARE-440.json",
+          "bytes": 535106,
+          "sha256": "4784970274dee10cdfb44bf9469663394eef440397bf20c58d081a4cd8d8aadf"
+        },
+        "rank": 2,
+        "pid": 440,
+        "all64_complete": true,
+        "layers": 64,
+        "errors": [],
+        "physical_layout_valid": true,
+        "collisions": 0,
+        "pool_num_blocks": 253
+      },
+      {
+        "ref": {
+          "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R17-main-NEW24H_MODEL101R17_001/candidate/model/capture/NATIVE-POSTPREPARE-441.json",
+          "bytes": 535106,
+          "sha256": "ba9176d05108e71d69aae9c9570cfbcec05bcabca47dfac48e7a7179d56dbac3"
+        },
+        "rank": 3,
+        "pid": 441,
+        "all64_complete": true,
+        "layers": 64,
+        "errors": [],
+        "physical_layout_valid": true,
+        "collisions": 0,
+        "pool_num_blocks": 253
+      },
+      {
+        "ref": {
+          "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R17-main-NEW24H_MODEL101R17_001/candidate/model/capture/NATIVE-POSTPREPARE-438.json",
+          "bytes": 535106,
+          "sha256": "0c6dad69723f8441da068400c8b42fd1064609269776d423f04333f2c40e34d4"
+        },
+        "rank": 0,
+        "pid": 438,
+        "all64_complete": true,
+        "layers": 64,
+        "errors": [],
+        "physical_layout_valid": true,
+        "collisions": 0,
+        "pool_num_blocks": 253
+      },
+      {
+        "ref": {
+          "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R17-main-NEW24H_MODEL101R17_001/candidate/model/capture/NATIVE-POSTPREPARE-439.json",
+          "bytes": 535106,
+          "sha256": "12235c6c77964913efea67a88f5a866bee88c550660d830c1652feff6411d93a"
+        },
+        "rank": 1,
+        "pid": 439,
+        "all64_complete": true,
+        "layers": 64,
+        "errors": [],
+        "physical_layout_valid": true,
+        "collisions": 0,
+        "pool_num_blocks": 253
+      }
+    ],
+    "independent_consumer": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R17-main-NEW24H_MODEL101R17_001/NATIVE_FOOTPRINT_CONSUMPTION.json",
+      "bytes": 2957,
+      "sha256": "c32e99183935b7168b31b54ee28636a5c5ad354acb3988794a5722eecd148d5e"
+    },
+    "consumer_operation": "exec-00000000000010de",
+    "consumer_exit": 0,
+    "all4all64_metadata_complete": true,
+    "all4ND2": true,
+    "all4_selected_collisions": 0,
+    "actual_stop_trace": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-MODEL101R17-main-NEW24H_MODEL101R17_001/candidate/server.stdout",
+      "bytes": 75353,
+      "sha256": "6c9173570142fa5dfdee090d16a0df37aeb7458e6d0cfb17caa3d4bf847b10fb",
+      "marker": "DiagnosticStop",
+      "context": "paper-preparation-20261007/lowbit/deltalog-real-worker-new24h-v1-101-repair17-native-postprepare-footprint-20261017-001/native_footprint101r12.py\", line 137, in forward\r\n(Worker_TP1 pid=439) ERROR 10-17 01:24:50 [multiproc_executor.py:987]     raise DiagnosticStop('DL101R12 diagnostic stop BEFORE decoder forward; no correctness/performance qualification')\r\n(Worker_TP1 pid=439) ERROR 10-17 01:24:50 [multiproc_executor.py:987] native_footprint101r12.DiagnosticStop: DL101R12 diagnostic stop BEFORE decoder forward; no correctness/performance qualification\r\n(Worker_TP1 pid=439) ERROR 10-17 01:24:50 [multiproc_executor.py:987] Traceback (most recent call last):\r\n(Worker_TP1 pid=439) ERROR 10-17 01:24:50 [multiproc_executor.py:987]   File \"/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py\", line 982, in worker_busy_loop\r\n(Worker_TP1 pid=439) ERROR 10-17 01:24:50 [multiproc_executor.py:987]     output = func(*args, **kwargs)\r\n(Worker_"
+    },
+    "rank0_unique_storage_bytes": 6429130752,
+    "independent_release_operation": "exec-00000000000010dd",
+    "released": true,
+    "classification": "EXPECTED_DIAGNOSTIC_STOP_WITH_INDEPENDENT_METADATA_EVIDENCE",
+    "model_numerical_pass": false,
+    "alias_install_permission": false,
+    "performance": false,
+    "task_accuracy": false
+  },
+  "maintenance_stage": {
+    "skills_structure_operation": "exec-00000000000010e7",
+    "exit": 0,
+    "skills": 20,
+    "local_quick_validate_both_pass": true,
+    "scope": "Narrow existingcontrollerreference+paper coldimport correction+2registrytriggers, not broad policy rewrite",
+    "raw_artifacts_external": true
+  },
+  "previous_BOLE_R9": {
+    "operation": "exec-00000000000010e0",
+    "paper": "BOLE131R9",
+    "state": "terminal_failed_implementation_released",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-three-node-entry-new24h-v1-131-repair9/SOURCE_BOUND.json",
+      "bytes": 42030,
+      "sha256": "85146c63ef041b0411d033c9370c7f9d872b13d994ea6ef0a59f9191c7608a7f"
+    },
+    "bind_operation": "exec-00000000000010cb",
+    "sourceaudit_operation": "exec-00000000000010ce",
+    "resource_admission": "Original controller fresh fail-closed admission after independentR17release10dd and metadata consumer10de; source reviewed before dispatch",
+    "output": "/opt/host/vnf/austinov/run-bole-model131repair9-MAIN-NEW24H_001",
+    "whole_seconds": 3600,
+    "cleanup_seconds": 180,
+    "sameimage_65_pass": true,
+    "all4weights_loaded": true,
+    "progress_operation": "exec-00000000000010e8",
+    "qualification": false,
+    "purpose": "Three-node actual model diagnostic only; persistent publication/whole model numerical/performance/task still pending",
+    "exit": 3,
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-bole-model131repair9-MAIN-NEW24H_001/RESULT.json",
+      "bytes": 86869,
+      "sha256": "52b06f2de6cd680764c2ebe15598cebf8dbced9a8c6bdb9f1802cd0de3c3ed5e"
+    },
+    "elapsed_seconds": 542.53169865,
+    "cleanup_spent": 32.9806808,
+    "secondary": [],
+    "first_worker_cause": "cache_registry.py83 ValueError: every real prefill KV destination matches physical page table",
+    "first_cause_scope": "Actual C1 native prefill returned then registration guard before candidate tree/math. Generic get_attention_context slot_mapping may not be native Ascend write authority; exact backend/table source investigation pending, no guard relaxation or numerical/paper no-go.",
+    "observer_primary": "ValueError('AICore/HBM idle baseline unchanged') after model worker failure; not established root cause",
+    "raw_worker_stdout": {
+      "path": "/opt/host/vnf/austinov/run-bole-model131repair9-MAIN-NEW24H_001/dense/server.stdout",
+      "bytes": 95541,
+      "sha256": "deecfbb4b9f82b67b51770a2c6d91e71c170900d31778edcd76143907f5b390f"
+    },
+    "first_fault": {
+      "path": "/opt/host/vnf/austinov/run-bole-model131repair9-MAIN-NEW24H_001/HOST-FIRST-FAULT.json",
+      "bytes": 1687,
+      "sha256": "d615f15da56f1a4ae80ca60f17db49ce3b235c2c08aa30af10319e81e9daea51"
+    },
+    "prefill_receipts": [
+      {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair9-MAIN-NEW24H_001/dense/receipts/BOLE-PREFILL-CACHE-RANK-0.json",
+        "bytes": 71383,
+        "sha256": "a23a3408eb4e406b2dc74d7bb7bd53014c338ef203c3317037bf2a74fedb3447"
+      },
+      {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair9-MAIN-NEW24H_001/dense/receipts/BOLE-PREFILL-CACHE-RANK-1.json",
+        "bytes": 71383,
+        "sha256": "86221d230845aac8a3e9181b8cad7e6591f8a7f2c26bfc434c8b137a6eeb49a4"
+      },
+      {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair9-MAIN-NEW24H_001/dense/receipts/BOLE-PREFILL-CACHE-RANK-2.json",
+        "bytes": 71383,
+        "sha256": "855785d72cb6652d34f8ba1839065ff1cd14a1962e60706bae28c4b743e76987"
+      },
+      {
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair9-MAIN-NEW24H_001/dense/receipts/BOLE-PREFILL-CACHE-RANK-3.json",
+        "bytes": 71383,
+        "sha256": "21b51a77cc1efce9d1cbcaa104744cdee117702a842274c562c96e15cd20854e"
+      }
+    ],
+    "classification": "IMPLEMENTATION_OR_NATIVE_CACHE_REGISTRATION_ABI",
+    "real_request_reached": true,
+    "HTTP_500": true,
+    "independent_release_operation": "exec-00000000000010ed",
+    "owned_CIDs": [
+      "79c4162437dfe29587f75e3e87243de593a4c193277933f1e6315cb37c5f7718",
+      "9d8bcd0ab4bde00881f862faae3c028bb4871ae145450b6ee78941cb72c9bedd"
+    ],
+    "released": true,
+    "source_before_after_equal": true,
+    "numerical_model_qualified": false,
+    "performance": false,
+    "task_accuracy": false
   }
 }
