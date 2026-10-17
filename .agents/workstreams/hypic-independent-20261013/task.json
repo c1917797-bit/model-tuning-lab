@@ -215,15 +215,15 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL_INDEPENDENT_VALID",
-    "operation": "exec-000000000000112a",
+    "state": "RUNNING",
+    "operation": "exec-000000000000114e",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "contract": "QUALITY_R21_CATALOG_CANARY_R1_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/catalog-quality-r21-canary-r1",
-    "checkpoint": "1acf66aded778fbc6944750560f0b92b037b51dc",
-    "admission_operation": "exec-0000000000001129",
-    "independent_audit": "exec-0000000000001148"
+    "contract": "QUALITY_R21_FULL_HYPIC_R1_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/full-quality-r21-hypic-r1",
+    "checkpoint": "58e367375f0761052f54447e97cddbb9e13c2610",
+    "admission_operation": "exec-000000000000114d",
+    "independent_audit": null
   },
   "native_smoke_r1": {
     "state": "terminal-controller-parser-failure",

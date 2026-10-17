@@ -1,4 +1,21 @@
-# CURRENT R21 CATALOG CANARY TERMINAL BOUNDED ACCEPTED
+# CURRENT R21 FULL127x3 HYPIC QUALITY LIVE
+
+Freshma direct114d at02:47:41UTC proves208host/205runtime/model/image/input/
+scorer/catalogCanaryimmutable rawSHA/physical0-3empty/8233HCCLfree/newroot.
+Exactcontroller exec-000000000000114e; sourcecheckpoint58e367375f0761052f54447e97cddbb9e13c2610.
+Contract QUALITY_R21_FULL_HYPIC_R1_CONTRACT.json;raw
+/cache/cch/hypic-independent-20261013/full-quality-r21-hypic-r1.
+381scored+381unscoredproducers;nonthinkingmax1024,naturalEOS,temp0,seed0,retry0.
+Pollsamepeer/handle/root;neverrestartlive/unclear orchange208boundsources.
+Terminal audit_full_quality_terminal.py --contract
+QUALITY_R21_FULL_HYPIC_R1_CONTRACT.json --live-release.
+Requirecomplete381cohort/fourrankmechanism/source/physical/isolation/exactrelease;
+then freshmatching QUALITY_R21_FULL_BASELINE_R1_CONTRACT.json andpairedscoreaudit.
+Notfullqualityuntilbotharms/audits;R21performance negativeunchanged.
+Fixedcutoff2026-10-17T06:48:09Z;preservepartialandreleaseifdeadline,nonewlaunch.
+Fullgoalunfinished;no lifecycle/main/29functionalclaim.
+
+# HISTORICAL R21 CATALOG CANARY TERMINAL BOUNDED ACCEPTED
 
 112aexit0; independent1148 andcompactreplay1149 PASS17/17same-stepfourrank
 48C1/16C2,4352generationlinks,1692evictions,256rebuildtransitions/all4ranks,
