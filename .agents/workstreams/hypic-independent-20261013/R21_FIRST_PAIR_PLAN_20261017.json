@@ -1,0 +1,18 @@
+{
+  "schema": "hypic-r21-first-pair-plan/v1",
+  "prerequisite": "Independent R21 bounded Canary audit must pass before any timed arm",
+  "order": [
+    "FORMAL_R21_G3_R1_CONTRACT.json",
+    "FORMAL_R21_G1_R1_CONTRACT.json"
+  ],
+  "audit": "audit_r21_c2_finite_performance.py --contract CONTRACT --live-release",
+  "bindings": {
+    "host": 211,
+    "runtime": 186
+  },
+  "static_operation": "exec-00000000000010b5",
+  "device_started": false,
+  "decision": "Only both independently valid then matched whole-HYPIC comparison; if negative do not expand unchanged matrix",
+  "scope": "Prospective same-code first pair; not full12 matrix/task quality/lifecycle",
+  "active_canary": "exec-00000000000010b0"
+}

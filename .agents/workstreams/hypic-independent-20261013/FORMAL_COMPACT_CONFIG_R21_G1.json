@@ -1,0 +1,38 @@
+{
+  "model_identity": "config69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+  "code_identity": "independent-c1c2-c2-finite-r21",
+  "public_token_artifact": {
+    "path": "/inputs/tokens.json",
+    "sha256": "50f528fa8eb439c56219b0161b16bf12fb2a8fd80effab87d89d725a4cc4c72f",
+    "length": 16384
+  },
+  "capacity_bytes": 268435456,
+  "kv_capacity_bytes": 536870912,
+  "boundary_tokens": 8,
+  "enable_mixed": true,
+  "allow_public_tail": true,
+  "allow_public_chunks": true,
+  "evidence_limits": {
+    "max_events": 100000,
+    "max_bytes": 134217728,
+    "max_requests": 128
+  },
+  "scheduler_admission_enabled": true,
+  "c2_layer_completion_barrier": true,
+  "native_decode_batch": true,
+  "c1_layer_completion_barrier": true,
+  "c1_layer_shadow_validation": false,
+  "c1_packed_wave": true,
+  "c1_first_divergence": false,
+  "c1_first_divergence_head_policy": "head0",
+  "c1_short_prefix_terminal_policy": "canonical_recurrent_le64",
+  "prefill_prompt_snapshot": true,
+  "prompt_snapshot_probe_batches": 0,
+  "c1_partitioned_render": false,
+  "c1_performance_mode": true,
+  "c1_async_material_transfer": false,
+  "c1_async_material_verify": false,
+  "c1_lazy_initial_snapshot": false,
+  "forward_metadata_snapshot": false,
+  "c2_layer_finite_gate": false
+}
