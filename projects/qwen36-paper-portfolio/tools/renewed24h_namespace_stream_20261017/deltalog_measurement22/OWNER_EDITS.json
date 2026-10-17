@@ -1,0 +1,137 @@
+{
+  "before": {
+    "bytes": 16006,
+    "sha256": "abaf6aebd1ff3084c138197d5a14367c676dbaf43bcaef34231710e5295c4759"
+  },
+  "after": {
+    "bytes": 16302,
+    "sha256": "16b4861ea6610551d7796932f8e8dca30de53455819483f1c17a7568e4fc5da1"
+  },
+  "edits": [
+    {
+      "before": "bole-r17-fa-input-diagnostic-owned-renew24h-v1-001",
+      "after": "deltalog-measurement-only-renew24h-v1-22",
+      "count": 1
+    },
+    {
+      "before": "run-bole-r17-fa-input-diagnostic-MAIN-RENEW24H_001",
+      "after": "run-dl-measurement22-MAIN-RENEW24H_001",
+      "count": 1
+    },
+    {
+      "before": "OWNER='bole-r17-fa-input-diagnostic';CAP=5*GIB",
+      "after": "OWNER='deltalog-measurement22';CAP=4*2**20",
+      "count": 1
+    },
+    {
+      "before": "CANN_WRAPPER='source /usr/local/Ascend/cann-9.1.0/set_env.sh && exec \"$@\"'",
+      "after": "CANN_WRAPPER='exec \"$@\"'",
+      "count": 1
+    },
+    {
+      "before": "str(8*GIB)",
+      "after": "str(GIB)",
+      "count": 2
+    },
+    {
+      "before": "h['Memory']==h['MemorySwap']==8*GIB",
+      "after": "h['Memory']==h['MemorySwap']==GIB",
+      "count": 1
+    },
+    {
+      "before": "def closure(sr):\n m=obj(sr);need(sr==SOURCE and m['prepared_only']is False,'exact actual069 donor only, no new qualification')\n return m,[sr]\ndef guest_closure(own):\n import plan as R\n refs=[*own['files'].values(),own['authority_ref'],own['prepared_template'],own['recovery_plan_ref']]\n proof=R.consume(sys.modules[__name__],own['recovery_plan_ref']);refs.extend(proof['readset'])\n for r in refs:checked(r)\n return refs\n\n",
+      "after": "def closure(sr):\n return {},[]\ndef guest_closure(own):\n refs=[*own['files'].values(),own['authority_ref'],own['prepared_template']]\n for r in refs:checked(r)\n return refs\n\n",
+      "count": 1
+    },
+    {
+      "before": "own['schema']=='bole.r17-fa-input-diagnostic-source/v1'",
+      "after": "own['schema']=='deltalog.measurement-source/v22'",
+      "count": 1
+    },
+    {
+      "before": "whole900",
+      "after": "whole180",
+      "count": 2
+    },
+    {
+      "before": "whole1000s",
+      "after": "whole180s",
+      "count": 1
+    },
+    {
+      "before": "min(900,",
+      "after": "min(180,",
+      "count": 1
+    },
+    {
+      "before": "CUT-900",
+      "after": "CUT-180",
+      "count": 1
+    },
+    {
+      "before": "int(900-",
+      "after": "int(180-",
+      "count": 2
+    },
+    {
+      "before": "min(90,int(180-",
+      "after": "min(30,int(180-",
+      "count": 1
+    },
+    {
+      "before": "<810",
+      "after": "<90",
+      "count": 3
+    },
+    {
+      "before": "remaining810/whole180 incl cleanup90",
+      "after": "remaining90/whole180 incl cleanup30",
+      "count": 1
+    },
+    {
+      "before": "16.5*GIB",
+      "after": "9.5*GIB",
+      "count": 1
+    },
+    {
+      "before": "'8guest+.5host+8reserve ordinary RAM'",
+      "after": "'1guest+.5host+8reserve ordinary RAM'",
+      "count": 1
+    },
+    {
+      "before": "need(proof['filesystem_free_bytes']>=13.5*GIB,'fresh32GiB MXR scope admission')",
+      "after": "need(proof['filesystem_free_bytes']>=8.5*GIB+CAP,'fresh4MiB plus unchanged8.5GiB disk reserve')",
+      "count": 1
+    },
+    {
+      "before": "  need(Path('/usr/local/Ascend/driver').is_dir(),'actual original069 userspace driver path, no device nodes')\n  mounts['/usr/local/Ascend/driver']=('/usr/local/Ascend/driver',False)\n  mounts[str(a.output)]=(str(a.output),True)",
+      "after": "  mounts[str(a.output)]=(str(a.output),True)",
+      "count": 1
+    },
+    {
+      "before": "json.dumps(ar,separators=(',',':')),'--plan-ref',json.dumps(own['recovery_plan_ref'],separators=(',',':')),'--output'",
+      "after": "json.dumps(ar,separators=(',',':')),'--output'",
+      "count": 1
+    },
+    {
+      "before": "'bole-r17-recovery-cpu-'",
+      "after": "'dl-measurement22-cpu-'",
+      "count": 1
+    },
+    {
+      "before": "x=inspect();write(a.output/('inspect-%d.json'%time.time_ns()),x);time.sleep(1)",
+      "after": "x=inspect();write(a.output/('inspect-%d.json'%time.time_ns()),x)\n     device=a.output/'CHILD_IDENTITY.json'\n     if device.exists()and not(a.output/'MAIN_ARM.json').exists():\n      dv=obj(ref(device));hp=x['State']['Pid'];need(x['State']['Running']and type(hp)is int and hp>0,'actual running exact CID before arm')\n      proc=Path('/proc')/str(hp);before=(proc/'stat').read_text();start_ticks=before.rsplit(')',1)[1].split()[19];status=(proc/'status').read_text();nsp=[v for v in status.splitlines()if v.startswith('NSpid:')]\n      need(dv['source']==ar and dv['start_ticks']==start_ticks and len(nsp)==1 and int(nsp[0].split()[-1])==dv['pid']and os.readlink(proc/'ns/pid')==dv['pid_namespace'],'source/CID/host PID/start/guest namespace join')\n      need((proc/'stat').read_text().rsplit(')',1)[1].split()[19]==start_ticks,'stable host start before arm')\n      write(a.output/'HOST_CHILD_IDENTITY.json',dict(source=ar,cid=cid,host_pid=hp,guest=dv,host_stat=before,host_status=status,host_cgroup=(proc/'cgroup').read_text()))\n      write(a.output/'MAIN_ARM.json',dict(source=ar,guest_pid=dv['pid'],start_ticks=start_ticks))\n     time.sleep(.2)",
+      "count": 1
+    },
+    {
+      "before": "need(d['schema']=='bole.r17-independent-FA-input-attribution/v1'and d['source']==ar and d['diagnostic_complete']is True and d['ranks_completed']==4 and d['original_numeric_failures_unchanged']is True and d['qualified']is d['original_owner_pass']is d['lifecycle_qualified']is False and d['native_snapshot_status']=='actual-original-durable-four-not-new-proof'and d['live_frontend_binding_status']=='missing-not-reconstructed','complete saved-input diagnostic only; original numeric failures unchanged')",
+      "after": "need(d['schema']=='deltalog.measurement-only-complete/v22'and d['source']==ar and d['primary']is None and d['Devices']==[]and d['NPU']is False and d['qualified']is False and d['old_R21_failure_unchanged']is True and d['measurement_contract_changed']is False,'complete exact measurement child, no numerical qualification')",
+      "count": 1
+    },
+    {
+      "before": "schema='bole.r17-FA-input-diagnostic-owned/v1'",
+      "after": "schema='deltalog.measurement-owned/v22'",
+      "count": 1
+    }
+  ]
+}

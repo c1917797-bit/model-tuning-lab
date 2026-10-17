@@ -73,36 +73,39 @@
     "classification": "IMPLEMENTATION_VALIDATION_MEMORY_NOT_PAPER_NOGO",
     "successor": "R20 bounded streaming validation; unchanged512MiB/full metadata/no-writer/final fullhash"
   },
-  "recorded_at_utc": "2026-10-17 11:48:54 UTC",
+  "recorded_at_utc": "2026-10-17 12:28:00 UTC",
   "authority_file": "RENEW24H_AUTHORITY_20261017_084320.json",
   "original_cutoff_utc": "2026-10-17T07:02:13Z",
   "extension_used": 0,
   "extension_condition_met": false,
   "new_nonHYPIC_accepted_technology": false,
   "current_owner": {
-    "paper": "DeltaLog",
-    "state": "live owned R21 workflow; initial closed-source validation then same-image170/canary/TP4 firstdecode",
-    "operation": "exec-00000000000012da",
+    "paper": "BOLE",
+    "state": "live physical4 saved-input four-arm numerical attribution; same-image10/10 and initial-root/cache/weights prerequisites passed; not whole model/performance",
+    "operation": "exec-0000000000001304",
     "source": {
-      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair21-20261017-001/SOURCE_MANIFEST.json",
-      "bytes": 267633,
-      "sha256": "e5da6610109d60ae8524c08072f49f037242a096dae5ed0f72cd3c031f0b3306"
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/SOURCE_MANIFEST.json",
+      "bytes": 31740,
+      "sha256": "0c9cfef77f5ecb709731d0ac08302c9c75f80ba21accc25b10274bcf3cb4d3b8"
     },
-    "predecessors": {
-      "binder": "exec-00000000000012d0 EXIT0 388.566s",
-      "sourceaudit": "exec-00000000000012d8 EXIT0 .745s",
-      "fresh_admission": "exec-00000000000012d9"
+    "cpu_owner": {
+      "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair1-MAIN-RENEW24H_001/factors/cpu/RESULT.json",
+      "bytes": 836,
+      "sha256": "d92a457919cc8f6b8561e14e6235ff93dd1a4319b5610b4d23ece18e592792f4"
     },
-    "whole_seconds": 3600,
-    "work_seconds": 2340,
-    "cleanup_seconds": 270,
-    "postverify_seconds": 900,
-    "margin_seconds": 90,
+    "numeric_ticket": {
+      "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair1-MAIN-RENEW24H_001/factors/NPU_TICKET.json",
+      "bytes": 2760,
+      "sha256": "f0cbf94489ee0f4e30ce8eda4a180e6d36c6b8807d8ce0d0ed80ba20278762f5"
+    },
+    "whole_seconds": 900,
+    "child_seconds": 600,
+    "cleanup_seconds": 180,
     "numeric_qualified": false,
     "performance_qualified": false,
     "task_qualified": false
   },
-  "next_NPU": "R21 owned operation12da is live; no overlapping NPU or heavy raw consumer. Observe same handle; after real terminal release collect original all4 firstdecode via exact deployed R21 collector, then independent Devices[] postconsumer. BOLE factor FINAL pending. No new paired performance or task result.",
+  "next_NPU": "Observe1304 actual terminal and exact physical4 release, then independent source-bound Devices[] consumer. Preserve originalR17 FA/whole-path failures; A must reproduce original BF16 anchor before repair attribution. R22 early full software remains next ready-node preparation; no TP4 while this owner is live.",
   "last_model_result": {
     "ref": {
       "path": "/opt/host/vnf/austinov/run-bole-model131repair4-MAIN-NEW24H_001/RESULT.json",
@@ -164,9 +167,9 @@
     "cost_caution": "child_scope includes final fence; nested phases inclusive/nonadditive; actual cache state uncontrolled; selected estimate not full-run guarantee"
   },
   "parallel_preparation": {
-    "accuracy_input_repair": "Completing actual independent continuous owner and postconsumer assembly; three peer-reviewed source wiring defects repaired in WIP, not FINAL/qualified.",
-    "gdn_paper_reassessment": "Preparing source-closed BOLE actualsaved single-factor physical4 and native root attribution; original anchor reproduction must be explicit; no NPU self-admission.",
-    "ge_fullgdn_ready": "Completed independent continuous source interface review; now preparing actual same-config OFF/ON performance DAG and service adapter gaps. No source duplication or device use."
+    "accuracy_input_repair": "Actual continuous owner/consumer assembly in progress; required actual successful firstdecode Ref remains null/HOLD, not old R21BOUND.",
+    "gdn_paper_reassessment": "New R22 software/measurement repair and early same-image gate; new-root BOLE authority contract repair. No self-admission.",
+    "ge_fullgdn_ready": "Actual default-OFF observer-free service adapter and external full-state equivalence prep. Short-scope qualification must not authorize40x1024."
   },
   "git": {
     "local_commit": "4ce501abb460b5aaaa9969e48a274eb6d01f5111",

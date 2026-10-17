@@ -1,0 +1,106 @@
+{
+  "enabled": false,
+  "order": [
+    "bind",
+    "sourceaudit",
+    "cpu",
+    "ticket",
+    "numeric",
+    "consumer"
+  ],
+  "prepared_only": true,
+  "qualified": false,
+  "reviewed_template": {
+    "bytes": 20466,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001/SOURCE_TEMPLATE.json",
+    "sha256": "4e96fc59511fe04a3a3677d9c5ebdd5eae7324bd314a4a34da7a28db9260dc59"
+  },
+  "stages": {
+    "bind": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001/run116.py",
+      "--execute",
+      "--stage",
+      "bind",
+      "--reviewed-template-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001/SOURCE_TEMPLATE.json\",\"bytes\":20466,\"sha256\":\"4e96fc59511fe04a3a3677d9c5ebdd5eae7324bd314a4a34da7a28db9260dc59\"}"
+    ],
+    "consumer": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001/run116.py",
+      "--execute",
+      "--stage",
+      "consumer",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>",
+      "--host-cpu",
+      "<MAIN_HOST_CPU>",
+      "--guest-cpu",
+      "<MAIN_GUEST_CPU>",
+      "--numeric-owner-ref",
+      "<ACTUAL_RELEASED_NUMERIC_OWNER_REF3>"
+    ],
+    "cpu": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001/run116.py",
+      "--execute",
+      "--stage",
+      "cpu",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>",
+      "--host-cpu",
+      "<MAIN_HOST_CPU>",
+      "--guest-cpu",
+      "<MAIN_GUEST_CPU>"
+    ],
+    "numeric": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001/run116.py",
+      "--execute",
+      "--stage",
+      "numeric",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>",
+      "--host-cpu",
+      "<MAIN_HOST_CPU>",
+      "--guest-cpu",
+      "<MAIN_GUEST_CPU>",
+      "--cpu-owner-ref",
+      "<ACTUAL_RELEASED_CPU_OWNER_REF3>",
+      "--abi-ticket-ref",
+      "<ACTUAL_NPU_TICKET_REF3>"
+    ],
+    "sourceaudit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001/run116.py",
+      "--execute",
+      "--stage",
+      "sourceaudit",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>"
+    ],
+    "ticket": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001/run116.py",
+      "--execute",
+      "--stage",
+      "ticket",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>",
+      "--cpu-owner-ref",
+      "<ACTUAL_RELEASED_CPU_OWNER_REF3>"
+    ]
+  }
+}

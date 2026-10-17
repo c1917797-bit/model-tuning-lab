@@ -1,0 +1,107 @@
+{
+  "common116.py": {
+    "before": {
+      "bytes": 1807,
+      "sha256": "90a6960ffa67f66e33d62e18b582aa23e431da6ce00bcd3fe10d4e388f159196"
+    },
+    "after": {
+      "bytes": 1871,
+      "sha256": "0b19ef06f31e52bf38aee46e462d426efac1e8f3b89b81229182063b3fc043b0"
+    },
+    "edits": [
+      {
+        "before": "a['start_epoch']==1792226600",
+        "after": "a['schema']=='ascend.paper-portfolio.explicit-renewed24h/v1'and a['start_epoch']==1792226600",
+        "count": 1
+      }
+    ]
+  },
+  "entry.py": {
+    "before": {
+      "bytes": 974,
+      "sha256": "dde42b6b93cf78e42338a1c636788aa924e40e59c24e4fe1277762b3b49375b8"
+    },
+    "after": {
+      "bytes": 975,
+      "sha256": "ae0b36d22046d4dc4df3c2f4efe9896702e0b9af6dfd73271ab62358c1a55635"
+    },
+    "edits": [
+      {
+        "before": "result.testsRun==8",
+        "after": "result.testsRun==10",
+        "count": 1
+      }
+    ]
+  },
+  "owned_cpu116.py": {
+    "before": {
+      "bytes": 16586,
+      "sha256": "74e1368c92a4d0387ad3a0ae251353614211223d34f845ba71b9fe8a61ea90f3"
+    },
+    "after": {
+      "bytes": 16605,
+      "sha256": "7d8cec3d7886c97a161add6c0af094c5380e6799ac722c80fe54dcd6d0331a7f"
+    },
+    "edits": [
+      {
+        "before": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001",
+        "after": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1",
+        "count": 1
+      },
+      {
+        "before": "/run-bole-saved-fa-factor-MAIN-RENEW24H_001",
+        "after": "/run-bole-saved-fa-factor-repair1-MAIN-RENEW24H_001",
+        "count": 1
+      },
+      {
+        "before": "ascend.paper-portfolio.new24h-authority/v1",
+        "after": "ascend.paper-portfolio.explicit-renewed24h/v1",
+        "count": 1
+      }
+    ]
+  },
+  "owner116.py": {
+    "before": {
+      "bytes": 17831,
+      "sha256": "b9a8bba4eebc02800366cfeaee74a743377129c911f4dff9d55a2ff4b4ccae3e"
+    },
+    "after": {
+      "bytes": 17914,
+      "sha256": "b4c4303b326a9dcc6df802776a2648609dc96877d1aa51cd8814e01462a29658"
+    },
+    "edits": [
+      {
+        "before": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001",
+        "after": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1",
+        "count": 1
+      },
+      {
+        "before": "/run-bole-saved-fa-factor-MAIN-RENEW24H_001",
+        "after": "/run-bole-saved-fa-factor-repair1-MAIN-RENEW24H_001",
+        "count": 1
+      },
+      {
+        "before": "auth['start_epoch']==1792226600",
+        "after": "auth['schema']=='ascend.paper-portfolio.explicit-renewed24h/v1'and auth['start_epoch']==1792226600",
+        "count": 1
+      }
+    ]
+  },
+  "test_factor.py": {
+    "before": {
+      "bytes": 6620,
+      "sha256": "e6b875aa24b525a35034a6f0e3060ab1c61310517592b97a64df17ba5cd4be30"
+    },
+    "after": {
+      "bytes": 6916,
+      "sha256": "909be439d314c0907f4b1ca272471ea4f9c1dc6f3805bfc9af25619a23a37895"
+    },
+    "edits": [
+      {
+        "before": "raw=(P/name).read_bytes();self.assertEqual(hashlib.sha256(raw).hexdigest(),row['after']['sha256'])",
+        "after": "raw=(P/name).read_bytes();repair=json.loads((P/'REPAIR1_EDITS.json').read_bytes())\n   if name in repair:\n    value=raw.decode()\n    for delta in reversed(repair[name]['edits']):\n     self.assertEqual(value.count(delta['after']),delta['count']);value=value.replace(delta['after'],delta['before'])\n    raw=value.encode()\n   self.assertEqual(hashlib.sha256(raw).hexdigest(),row['after']['sha256'])",
+        "count": 1
+      }
+    ]
+  }
+}

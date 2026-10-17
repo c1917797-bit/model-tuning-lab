@@ -1,0 +1,43 @@
+{
+  "MAIN_create_absent_parent": "/opt/host/vnf/austinov/run-dl-measurement22-MAIN-RENEW24H_001/measurement",
+  "bind": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-measurement-only-renew24h-v1-22/bind22.py",
+    "--execute",
+    "--template-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-measurement-only-renew24h-v1-22/SOURCE_TEMPLATE.json\",\"bytes\":5255,\"sha256\":\"1337705a33b9635531ff8e55db232dcd2218ea4c31ff97601e1dd069e8a6bec8\"}"
+  ],
+  "execute": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-measurement-only-renew24h-v1-22/owner.py",
+    "--execute",
+    "--source-ref",
+    "<ACTUAL_BOUND_REF3>",
+    "--host-cpu",
+    "<MAIN_HOST_CPU>",
+    "--guest-cpu",
+    "<MAIN_GUEST_CPU>",
+    "--output",
+    "/opt/host/vnf/austinov/run-dl-measurement22-MAIN-RENEW24H_001/measurement/consumer"
+  ],
+  "qualified": false,
+  "sourceaudit": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-measurement-only-renew24h-v1-22/owner.py",
+    "--source-audit",
+    "--source-ref",
+    "<ACTUAL_BOUND_REF3>"
+  ],
+  "template": {
+    "bytes": 5255,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-measurement-only-renew24h-v1-22/SOURCE_TEMPLATE.json",
+    "sha256": "1337705a33b9635531ff8e55db232dcd2218ea4c31ff97601e1dd069e8a6bec8"
+  },
+  "whole180": true
+}

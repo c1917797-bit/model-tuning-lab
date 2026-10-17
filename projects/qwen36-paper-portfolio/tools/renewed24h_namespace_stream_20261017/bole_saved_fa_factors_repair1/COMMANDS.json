@@ -1,0 +1,126 @@
+{
+  "enabled": false,
+  "order": [
+    "authority_preflight",
+    "bind",
+    "sourceaudit",
+    "sourceaudit_CPU",
+    "cpu",
+    "ticket",
+    "numeric",
+    "consumer"
+  ],
+  "prepared_only": true,
+  "qualified": false,
+  "reviewed_template": {
+    "bytes": 22339,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/SOURCE_TEMPLATE.json",
+    "sha256": "03f8a9580572345310cd0092d44a7de1d66bac94b084bff12e328503bf6328c6"
+  },
+  "stages": {
+    "authority_preflight": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/authority_preflight.py",
+      "--execute",
+      "--authority-ref",
+      "{\"bytes\":3012,\"path\":\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json\",\"sha256\":\"cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d\"}"
+    ],
+    "bind": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/run116.py",
+      "--execute",
+      "--stage",
+      "bind",
+      "--reviewed-template-ref",
+      "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/SOURCE_TEMPLATE.json\",\"bytes\":22339,\"sha256\":\"03f8a9580572345310cd0092d44a7de1d66bac94b084bff12e328503bf6328c6\"}"
+    ],
+    "consumer": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/run116.py",
+      "--execute",
+      "--stage",
+      "consumer",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>",
+      "--host-cpu",
+      "<MAIN_HOST_CPU>",
+      "--guest-cpu",
+      "<MAIN_GUEST_CPU>",
+      "--numeric-owner-ref",
+      "<ACTUAL_RELEASED_NUMERIC_OWNER_REF3>"
+    ],
+    "cpu": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/run116.py",
+      "--execute",
+      "--stage",
+      "cpu",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>",
+      "--host-cpu",
+      "<MAIN_HOST_CPU>",
+      "--guest-cpu",
+      "<MAIN_GUEST_CPU>"
+    ],
+    "numeric": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/run116.py",
+      "--execute",
+      "--stage",
+      "numeric",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>",
+      "--host-cpu",
+      "<MAIN_HOST_CPU>",
+      "--guest-cpu",
+      "<MAIN_GUEST_CPU>",
+      "--cpu-owner-ref",
+      "<ACTUAL_RELEASED_CPU_OWNER_REF3>",
+      "--abi-ticket-ref",
+      "<ACTUAL_NPU_TICKET_REF3>"
+    ],
+    "sourceaudit": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/run116.py",
+      "--execute",
+      "--stage",
+      "sourceaudit",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>"
+    ],
+    "sourceaudit_CPU": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/owned_cpu116.py",
+      "--source-audit",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>"
+    ],
+    "ticket": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/run116.py",
+      "--execute",
+      "--stage",
+      "ticket",
+      "--source-ref",
+      "<ACTUAL_BOUND_SOURCE_REF3>",
+      "--cpu-owner-ref",
+      "<ACTUAL_RELEASED_CPU_OWNER_REF3>"
+    ]
+  }
+}

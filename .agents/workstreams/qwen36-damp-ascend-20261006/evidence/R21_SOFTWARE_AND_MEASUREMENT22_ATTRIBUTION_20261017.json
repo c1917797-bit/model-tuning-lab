@@ -1,0 +1,208 @@
+{
+  "schema": "ascend.R21-software-firstfault-and-measurement-attribution/v1",
+  "recorded_at_utc": "2026-10-17T12:22:00Z",
+  "authority_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+    "bytes": 3012,
+    "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+  },
+  "R21": {
+    "operation": "exec-00000000000012da",
+    "exit_code": 1,
+    "source": {
+      "bytes": 267633,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair21-20261017-001/SOURCE_MANIFEST.json",
+      "sha256": "e5da6610109d60ae8524c08072f49f037242a096dae5ed0f72cd3c031f0b3306"
+    },
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R21-main-NEW24H_FIRSTDECODE101R21_001/RESULT.json",
+      "bytes": 29961,
+      "sha256": "fb1757cc7ca4bedb1989c1ef06054eb25510a162f3fffd99a8ea40e79059195c"
+    },
+    "primary": "ValueError('original child failure retained: DL-cold-source')",
+    "secondary": [],
+    "whole_elapsed_seconds": 1321.8906396200182,
+    "same_image_software": {
+      "run": 170,
+      "passed": 168,
+      "failed": 2,
+      "skipped": 0,
+      "seconds": 18.896,
+      "stderr": {
+        "path": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R21-main-NEW24H_FIRSTDECODE101R21_001/cpu-preflight/DL-cold-source.stderr",
+        "bytes": 24229,
+        "sha256": "d06d3e2508da896acfe616b247e55581b7d66704620fe55b25637938f0983b07"
+      },
+      "failures": [
+        "Guard test globally mocked os.readlink while pathlib.resolve follows the actual Python symlink",
+        "135520-row stress used inherited ru_maxrss as current-process-mm peak; original reported376868864 versus128MiB"
+      ]
+    },
+    "sole_owned_cpu_release": {
+      "Id": "49ab87d0130890dab2382fca78a0b13d2f722853f83e23812dd0d798682c4646",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 137,
+        "Error": "",
+        "StartedAt": "2026-10-17T12:01:56.45863295Z",
+        "FinishedAt": "2026-10-17T12:02:34.67984812Z"
+      },
+      "ExecIDs": null,
+      "Devices": []
+    },
+    "journal": {
+      "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/MODEL_SNAPSHOTS_LEDGER.R21.json",
+      "bytes": 5774,
+      "sha256": "25104323f8ac7c46434a8d461d857ea2e53d5855d89de519f4588a0e9096dac7"
+    },
+    "empty_payload": {
+      "entries": [],
+      "stat": {
+        "st_dev": 64770,
+        "st_ino": 6029411,
+        "st_mode": 16832,
+        "st_nlink": 2,
+        "st_size": 4096,
+        "st_mtime_ns": 1792238008548000000,
+        "st_ctime_ns": 1792238008548000000
+      }
+    },
+    "candidate_absent": true,
+    "NPU_executed": false,
+    "classification": "SOFTWARE_REFERENCE_TEST_OR_MEASUREMENT_DEFECT_NOT_PAPER_NO_GO"
+  },
+  "measurement22": {
+    "operation": "exec-00000000000012f4",
+    "exit_code": 0,
+    "source": {
+      "bytes": 4987,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-measurement-only-renew24h-v1-22/SOURCE_MANIFEST.json",
+      "sha256": "a74848210a3f626bb2708887d9a1d410617b6b88f52a9107b9d24954aec79a1f"
+    },
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-dl-measurement22-MAIN-RENEW24H_001/measurement/consumer/RESULT.json",
+      "bytes": 849,
+      "sha256": "ceba034c6d46d56d62d450da5534adffed589721d7a2aaaa3859a2a460ad869e"
+    },
+    "attribution": {
+      "path": "/opt/host/vnf/austinov/run-dl-measurement22-MAIN-RENEW24H_001/measurement/consumer/ATTRIBUTION.json",
+      "bytes": 11087,
+      "sha256": "0a74b4117d99a731c4c6bceb28d1e0290010456adbb0ed529ca9ccfa533da41d"
+    },
+    "measurement": {
+      "path": "/opt/host/vnf/austinov/run-dl-measurement22-MAIN-RENEW24H_001/measurement/consumer/MEASUREMENT.json",
+      "bytes": 10653,
+      "sha256": "967f0b69069977f86736b964f0a8ae40e1d3d64da13faf997711b43ef8a35489"
+    },
+    "test_stderr": {
+      "path": "/opt/host/vnf/austinov/run-dl-measurement22-MAIN-RENEW24H_001/measurement/consumer/child.stderr",
+      "bytes": 612,
+      "sha256": "12a24aa199708e1f30b39c1435ef685e4eff2542f73f058431fea16af2875847"
+    },
+    "tests": {
+      "run": 3,
+      "passed": 3,
+      "skipped": 0
+    },
+    "fresh_release": {
+      "Id": "4e96a0e8de6fd95c949cd067e52d66aae6acdb76ca660660333d340ae5a309bc",
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-17T12:18:28.49669576Z",
+        "FinishedAt": "2026-10-17T12:18:29.3764228Z"
+      },
+      "Devices": []
+    },
+    "parent": {
+      "pid": 1,
+      "ppid": 0,
+      "proc_status": {
+        "VmHWM_bytes": 228315136,
+        "VmPeak_bytes": 235540480,
+        "VmRSS_bytes": 228315136,
+        "VmSize_bytes": 235540480
+      },
+      "ru_maxrss_bytes": 228315136,
+      "exe_link": "/usr/local/python3.12.13/bin/python3.12",
+      "executable_resolved": "/usr/local/python3.12.13/bin/python3.12"
+    },
+    "child_before": {
+      "pid": 7,
+      "ppid": 1,
+      "proc_status": {
+        "VmHWM_bytes": 13651968,
+        "VmPeak_bytes": 18505728,
+        "VmRSS_bytes": 13651968,
+        "VmSize_bytes": 18505728
+      },
+      "ru_maxrss_bytes": 228315136,
+      "exe_link": "/usr/local/python3.12.13/bin/python3.12",
+      "executable_resolved": "/usr/local/python3.12.13/bin/python3.12"
+    },
+    "child_after": {
+      "pid": 7,
+      "ppid": 1,
+      "proc_status": {
+        "VmHWM_bytes": 17977344,
+        "VmPeak_bytes": 22704128,
+        "VmRSS_bytes": 17977344,
+        "VmSize_bytes": 22704128
+      },
+      "ru_maxrss_bytes": 228315136,
+      "exe_link": "/usr/local/python3.12.13/bin/python3.12",
+      "executable_resolved": "/usr/local/python3.12.13/bin/python3.12"
+    },
+    "ML_imported": false,
+    "NPU": false,
+    "original_R21_failure_preserved": true,
+    "interpretation": "Actual same-image controlled parent-high fork/exec demonstrates ru_maxrss carries the parent peak while the fresh child current-mm VmHWM is low. Narrow proc/exe readlink fixture succeeds on actual Linux Python symlink.",
+    "scope_limit": "This diagnoses the metric/fixture mechanism. It does not yet prove the original135520-row stress fits128MiB under corrected current-mm measurement; rerun that exact stress and all software controls in the same image before any model launch.",
+    "unchanged_limits": {
+      "stress_current_process_peak_bytes": 134217728,
+      "host_soft_AS_bytes": 536870912
+    },
+    "numerical_qualified": false,
+    "performance_qualified": false
+  },
+  "BOLE_factor": {
+    "operation": "exec-00000000000012f2",
+    "exit_code": 1,
+    "duration_ms": 3006,
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001/SOURCE_MANIFEST.json",
+      "bytes": 29999,
+      "sha256": "702b2b3d078ded847b83adda7ac4f1d40382e4fa3de01261139a3878094c645c"
+    },
+    "primary": "authority schema predicate expected obsolete ascend.paper-portfolio.new24h-authority/v1 instead of actual ascend.paper-portfolio.explicit-renewed24h/v1",
+    "classification": "PROVEN_ADAPTATION_CONTRACT_DEFECT_BEFORE_CREATE",
+    "sourceaudit_gap": "12f1 sourceaudit passed source/readset but did not exercise the actual CPU owner's authority predicate.",
+    "successor": "New non-overwriting source/version fixes exact actual authority predicate and covers it through the real entry path; old49 files, bound manifest and original12f2 remain unchanged.",
+    "NPU_executed": false,
+    "numerical_qualified": false,
+    "performance_qualified": false
+  },
+  "next_actions": [
+    "Finish source-closed R22 with typed R21 sole-CPU/empty-payload closure; run early same-image complete software suite before expensive predecessor-data binding.",
+    "Use unchanged128MiB current-mm stress limit, record both ru_maxrss and VmHWM, preserve original170-test failure.",
+    "Repair BOLE factor real owner authority predicate under a new root; CPU root-pair identity must pass before physical4 factor test.",
+    "Continuous and observer-free service owners remain qualification-HOLD until actual firstdecode/longer workload proof; no benchmark from short-scope evidence."
+  ],
+  "accepted_new_nonHYPIC_technology": false,
+  "whole_model_speedup": null,
+  "task_accuracy": null,
+  "utilization_window": "unmeasured"
+}

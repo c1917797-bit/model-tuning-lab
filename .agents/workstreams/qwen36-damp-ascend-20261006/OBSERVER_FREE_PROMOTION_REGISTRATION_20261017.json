@@ -1,0 +1,37 @@
+{
+  "schema": "ascend.observer-free-service-promotion-registration/v1",
+  "registered_at_utc": "2026-10-17 11:58:22 UTC",
+  "scope": "New DeltaLog explicit-opt-in observer-free production-path experiment, not a modification of frozen R21/continuous numerical gates",
+  "goal_unchanged": {
+    "model": "/cache/efim/Qwen3.6-27B",
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "paired_E2E_gain_at_least": 0.1,
+    "output_tokens": 1024,
+    "final_tasks": [
+      "GSM8K",
+      "HumanEval",
+      "MMLU"
+    ],
+    "new_cutoff_epoch": 1792313000
+  },
+  "motivation": "Independent full-pool comparisons are correctness instrumentation, not mandatory permanent per-token production work. Removing them without validating the resulting exact path is forbidden; retaining multi-GiB D2H/token in an alleged fast service also cannot establish the intended deployment benefit.",
+  "requirements": [
+    "Keep all original full-byte numerical and inactive-pool results, including FAIL; no changed thresholds, missing domains or paper-wide negative inference.",
+    "Develop a distinct default-OFF explicit mode. Bind exact plugin source, installed operator DSOs/binaries/schema, model/layer/shared-pool geometry, dtype/strides/format and strong request/generation/committed-slot domain.",
+    "Before performance admission, actually execute the new mode on NPU against the already instrumented implementation/native-independent references, comparing output and complete pool/state, inactive bytes, multiple steps and relevant request retirement/slot reuse; eager-only remains explicit unless graph also validated.",
+    "Use external independent observation around the new path during qualification; do not silently replace the production algorithm with the instrumented old path and call that new-mode coverage.",
+    "Verify unchanged mathematical dispatch/core/operator code and state ownership semantics. Register any source/instrumentation difference; mismatching input/domain/layout/library identity rejects promotion.",
+    "After actual matching evidence, retain runtime identity/metadata/slot-bound/ownership guards. Benchmark no profiling/large tensor capture on both dense and candidate, same common optimizations/input/concurrency/1024 output.",
+    "Do not turn a diagnostic qualified:false into production:true, merely disable a failing guard, reuse old106 arena false predicates, invent certificates, or substitute software fixtures for real NPU evidence."
+  ],
+  "current_state": "DESIGN_PREPARATION_ONLY_NEW_PATH_AND_ACTUAL_EQUIVALENCE_PENDING",
+  "model_qualified": false,
+  "performance_ready": false,
+  "task_qualified": false,
+  "no_existing_evidence_relabelled": true
+}

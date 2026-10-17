@@ -1,0 +1,105 @@
+{
+  "schema": "ascend.BOLE-factor-authority-repair-deployment/v1",
+  "original_failed_operation": "exec-00000000000012f2",
+  "original_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001/SOURCE_MANIFEST.json",
+    "bytes": 29999,
+    "sha256": "702b2b3d078ded847b83adda7ac4f1d40382e4fa3de01261139a3878094c645c"
+  },
+  "original_failure_preserved": true,
+  "repair_source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/SOURCE_MANIFEST.json",
+    "bytes": 31740,
+    "sha256": "0c9cfef77f5ecb709731d0ac08302c9c75f80ba21accc25b10274bcf3cb4d3b8"
+  },
+  "repair_template": {
+    "bytes": 22339,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/SOURCE_TEMPLATE.json",
+    "sha256": "03f8a9580572345310cd0092d44a7de1d66bac94b084bff12e328503bf6328c6"
+  },
+  "deploy": {
+    "exact_copies": 44,
+    "applied_patches": 10,
+    "own_files": 52,
+    "archived_files": 55
+  },
+  "host_check_failure": {
+    "operation": "exec-00000000000012fa",
+    "classification": "MAIN_WRAPPER_SELECTED_TORCH_SUITE_ON_NO_TORCH_HOST",
+    "correction": "Host static checks only; full original Torch suite executes within actual same-image CPU stage. Not candidate or paper rejection."
+  },
+  "actual_audits": {
+    "operation": "exec-00000000000012fb",
+    "exit_code": 0,
+    "early_actual_authority_cli": true,
+    "CPU_owner_sourceaudit": true,
+    "numeric_owner_sourceaudit": true,
+    "sourceaudit_readsets": [
+      115,
+      112
+    ],
+    "route_timeout_recovery": "retryable observation failure, refreshed topology and identical idempotency key recovered same completed12fb; no duplicate bind"
+  },
+  "actual_cpu": {
+    "operation": "exec-00000000000012fc",
+    "exit_code": 0,
+    "owner": {
+      "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair1-MAIN-RENEW24H_001/factors/cpu/RESULT.json",
+      "bytes": 836,
+      "sha256": "d92a457919cc8f6b8561e14e6235ff93dd1a4319b5610b4d23ece18e592792f4"
+    },
+    "stage": {
+      "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair1-MAIN-RENEW24H_001/factors/cpu/preflight/STAGE_RESULT.json",
+      "bytes": 1358,
+      "sha256": "902fcc8815d34b04e683cd77143247db4895d8df17c940aaecf4d1216b83451c"
+    },
+    "software": {
+      "run": 10,
+      "passed": 10,
+      "skipped": 0,
+      "seconds": 1.563
+    },
+    "all_four_ranks_first_input_and_initial_cache_weights_identical": true,
+    "fresh_exact_release": true
+  },
+  "qualification": false,
+  "performance_result": null,
+  "task_result": null,
+  "numeric_ticket": {
+    "path": "/opt/host/vnf/austinov/run-bole-saved-fa-factor-repair1-MAIN-RENEW24H_001/factors/NPU_TICKET.json",
+    "bytes": 2760,
+    "sha256": "f0cbf94489ee0f4e30ce8eda4a180e6d36c6b8807d8ce0d0ed80ba20278762f5"
+  },
+  "actual_NPU": {
+    "operation": "exec-0000000000001304",
+    "state": "live_at_record",
+    "physical": 4,
+    "guest_logical": 0,
+    "expected_arms": 4,
+    "expected_calls": 256,
+    "whole_model": false,
+    "performance": false
+  },
+  "archive_whitespace": {
+    "full_diff_check": "EXIT2 solely two byte-exact donor copies: new blank line at EOF",
+    "preservation_reason": "Preserve immutable archived runtime source bytes and hashes; do not normalize the live or archived original to conceal warning",
+    "files": [
+      {
+        "archive": "projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole_saved_fa_factors/evidence/controller069/terminal_fence.py",
+        "source": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001/evidence/controller069/terminal_fence.py",
+        "bytes": 7341,
+        "sha256": "a7cd5f0130dabd1d8a8a57e321e4a6597ac61c77a39736b1d55f4e17368011db",
+        "trailing_blank_lines_preserved": 2
+      },
+      {
+        "archive": "projects/qwen36-paper-portfolio/tools/renewed24h_namespace_stream_20261017/bole_saved_fa_factors_repair1/evidence/controller069/terminal_fence.py",
+        "source": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-saved-fa-factor-owned-renew24h-v1-001-repair1/evidence/controller069/terminal_fence.py",
+        "bytes": 7341,
+        "sha256": "a7cd5f0130dabd1d8a8a57e321e4a6597ac61c77a39736b1d55f4e17368011db",
+        "trailing_blank_lines_preserved": 2
+      }
+    ],
+    "other_staged_files_check": "required PASS before commit",
+    "config_changed": false
+  }
+}
