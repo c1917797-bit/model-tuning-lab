@@ -1,0 +1,48 @@
+{
+  "schema": "ascend.prepared-next-node/v1",
+  "observed_utc": "2026-10-17T21:39:16Z",
+  "authority": "RENEW24H_AUTHORITY_20261017_084320.json",
+  "cutoff_epoch": 1792313000,
+  "bole_rounding": {
+    "status": "DEPLOYED_BOUND_SOURCE_AUDIT_PASS_NOT_EXECUTED",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-rounding-owner-binding-renew24h-v1-001/SOURCE_BOUND.json",
+      "bytes": 3917,
+      "sha256": "47a9af8fd83f82677970efa8c5cb1897ccbdfaa9eef5381a9be0f960c0bdc9d8"
+    },
+    "bind_operation": "exec-000000000000147e",
+    "source_audit_operation": "exec-000000000000147f",
+    "source_audit_exit": 0,
+    "Devices": [],
+    "NPU": false,
+    "qualified": false,
+    "purpose": "Independent compensated FP64 and BF16 representability attribution of original R6 FA failure frames; does not waive old failures",
+    "next": "Fresh CPU/RAM/disk and overlap admission, then original bounded owner; do not race DeltaLog phase transition"
+  },
+  "good_enough": {
+    "status": "SAME_IMAGE_SOFTWARE_53_PASS_NUMERIC_QUEUED",
+    "cpu_operation": "exec-0000000000001473",
+    "numeric_output": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE001_NPU_001",
+    "physical_npu": 6,
+    "next": "Fresh release and mapping checks, then one numeric run. Not NPU-qualified."
+  },
+  "deltalog": {
+    "operation": "exec-000000000000146a",
+    "status": "RUNNING_HOST_PREFLIGHT",
+    "pid": 354160,
+    "observed_elapsed": "18:32",
+    "owned_containers_observed": [],
+    "latest_observation_basename": "observation-1792273035276870150.json",
+    "not_terminal": true,
+    "do_not_restart": true,
+    "identified_preparation_bottleneck": "Storage snapshot check repeatedly scans historical trees and classifies each file across reservation list. Read-only code audit found 287132 historical entries; optimization being prepared separately, running source unchanged."
+  },
+  "parallel_preparation": [
+    "GE batched matrix binding to existing owner",
+    "Independent GE batch-layout review",
+    "Storage classification scan optimization preserving complete checks"
+  ],
+  "full_window_npu_utilization": "UNMEASURED",
+  "new_whole_model_performance_result": false,
+  "new_task_accuracy_result": false
+}
