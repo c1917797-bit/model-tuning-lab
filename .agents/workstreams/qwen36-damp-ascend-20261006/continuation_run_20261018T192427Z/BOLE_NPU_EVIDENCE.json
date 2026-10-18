@@ -1,0 +1,191 @@
+{
+  "schema": "papers.bole-fia-actual-NPU-evidence/v1",
+  "batch_id": "MAIN-CONTINUE-20261018T192427Z-v1",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-continue-20261018T192427Z-v1/SOURCE_MANIFEST.json",
+    "bytes": 13419,
+    "sha256": "f107bf30de46d1466d46e2189cd69058e1baf381676986472aea0a6250f76e71"
+  },
+  "operations": {
+    "NPU": "exec-0000000000001730",
+    "fresh_release": "exec-0000000000001731"
+  },
+  "result_ref": {
+    "path": "/opt/host/vnf/austinov/run-bole-fia-fixed-frame-replay-MAIN-CONTINUE-20261018T192427Z-v1/replay/numeric/RESULT.json",
+    "bytes": 2423,
+    "sha256": "2feaace8f0bf4739584a055276177bbb07c4ee7dd6884d8e637a933b967e886d"
+  },
+  "result": {
+    "NPU": true,
+    "NPU_requested": true,
+    "abi_ticket_ref": {
+      "bytes": 3738,
+      "path": "/opt/host/vnf/austinov/run-bole-fia-fixed-frame-replay-MAIN-CONTINUE-20261018T192427Z-v1/replay/ABI_TICKET.json",
+      "sha256": "6572cacaaa62d88505984e71fa1930c303844236a2b850bc971f3fb7e4b4781d"
+    },
+    "authority": {
+      "bytes": 5610,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/AUTHORITY.json",
+      "sha256": "12644bad0403760aa7e976411572251f89c021e0182184c847b3c841ab6bab52"
+    },
+    "baseline_gate_pass": true,
+    "component_owner": {
+      "bytes": 16858,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/owner116.py",
+      "sha256": "a5bf934cd7e749aa3b630da2039969a2d8e3cce52d4c0756a52e73299edc543d"
+    },
+    "component_source": {
+      "bytes": 25737,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/SOURCE_MANIFEST.json",
+      "sha256": "fdafbb8872ad9da1ff8150ddafa1e66acae3a80e05aa2b62bb04202da6e33faa"
+    },
+    "cpu_owner_ref": {
+      "bytes": 855,
+      "path": "/opt/host/vnf/austinov/run-bole-fia-fixed-frame-replay-MAIN-CONTINUE-20261018T192427Z-v1/replay/cpu/RESULT.json",
+      "sha256": "5db565adaf7b4196f6b196fda1b598c1a7d4170e9a4cfbdb3938415aa1aca407"
+    },
+    "cutoff": 1792437867,
+    "diagnostic_complete": true,
+    "donor_source": {
+      "bytes": 52969,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-split-scale-numeric-new24h-v1-069-repair1/SOURCE_MANIFEST.json",
+      "sha256": "b9cb456d960072d8e6730bb5307dcabfc83b3ad7bffd9d3476d9b92220048f21"
+    },
+    "elapsed": 35.23263106000377,
+    "intervention_executed": true,
+    "logical": 0,
+    "old_failures_unchanged": true,
+    "physical": [
+      4
+    ],
+    "primary": null,
+    "qualified": false,
+    "resource_release_verified": true,
+    "result": {
+      "bytes": 1631,
+      "path": "/opt/host/vnf/austinov/run-bole-fia-fixed-frame-replay-MAIN-CONTINUE-20261018T192427Z-v1/replay/numeric/numeric/result/STAGE_RESULT.json",
+      "sha256": "c1291c53982c12bff9ecc0e4c4819a7bba53474c54e8628e325f007181450782"
+    },
+    "schema": "bole.fia-replay-owned/v1",
+    "secondary": [],
+    "source": {
+      "bytes": 13419,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-continue-20261018T192427Z-v1/SOURCE_MANIFEST.json",
+      "sha256": "f107bf30de46d1466d46e2189cd69058e1baf381676986472aea0a6250f76e71"
+    },
+    "stopped_retained": true,
+    "used_bytes": 6761055,
+    "whole_model_qualified": false,
+    "whole_seconds": 900
+  },
+  "stage": {
+    "NPU": true,
+    "abi_ticket_ref": {
+      "bytes": 3738,
+      "path": "/opt/host/vnf/austinov/run-bole-fia-fixed-frame-replay-MAIN-CONTINUE-20261018T192427Z-v1/replay/ABI_TICKET.json",
+      "sha256": "6572cacaaa62d88505984e71fa1930c303844236a2b850bc971f3fb7e4b4781d"
+    },
+    "actual_abi_ref": {
+      "bytes": 5437,
+      "path": "/opt/host/vnf/austinov/run-bole-fia-fixed-frame-replay-MAIN-CONTINUE-20261018T192427Z-v1/replay/cpu/preflight/ACTUAL_FIA_ABI.json",
+      "sha256": "697795b6b784c872bc15e4d3f0fb928849997ff6824ad2941c44c569b4e26911"
+    },
+    "authority": {
+      "bytes": 5610,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/AUTHORITY.json",
+      "sha256": "12644bad0403760aa7e976411572251f89c021e0182184c847b3c841ab6bab52"
+    },
+    "diagnostic_complete": true,
+    "old_failures_unchanged": true,
+    "plan": {
+      "bytes": 879,
+      "path": "/opt/host/vnf/austinov/run-bole-fia-fixed-frame-replay-MAIN-CONTINUE-20261018T192427Z-v1/replay/numeric/numeric/PLAN.json",
+      "sha256": "6af27ada2d2dddda623e42318081bbc6df4c06b784c72502ab2c2799ec821d57"
+    },
+    "primary": null,
+    "qualified": false,
+    "result": {
+      "bytes": 18887,
+      "path": "/opt/host/vnf/austinov/run-bole-fia-fixed-frame-replay-MAIN-CONTINUE-20261018T192427Z-v1/replay/numeric/numeric/result/probe/PROBE.json",
+      "sha256": "4bf9ca562b8af1e0e22c2f48bc07fa3bb42284fcbd2f83e487d3b9093975aecd"
+    },
+    "schema": "bole.fia-replay-stage/v1",
+    "source": {
+      "bytes": 13419,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-continue-20261018T192427Z-v1/SOURCE_MANIFEST.json",
+      "sha256": "f107bf30de46d1466d46e2189cd69058e1baf381676986472aea0a6250f76e71"
+    }
+  },
+  "cleanup": {
+    "cid": "e3db48edb640843e28354c967885861ba2d741799df0f1c8475827c8ed4cca5f",
+    "errors": [],
+    "resource_release_verified": true,
+    "retained": true,
+    "rm_authorized": false,
+    "secondary_guard_cleanup": [],
+    "stopped": true,
+    "unresolved_active_cid": null
+  },
+  "fresh_release": {
+    "epoch": 1792352988.3141005,
+    "fresh_release": true,
+    "cid": "e3db48edb640843e28354c967885861ba2d741799df0f1c8475827c8ed4cca5f",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-18T19:44:53.1628874Z",
+      "FinishedAt": "2026-10-18T19:45:15.81823169Z"
+    },
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "Memory": 8589934592,
+    "NanoCpus": 1000000000,
+    "CpusetCpus": "145",
+    "Devices": [
+      {
+        "PathOnHost": "/dev/davinci4",
+        "PathInContainer": "/dev/davinci0",
+        "CgroupPermissions": "rwm"
+      },
+      {
+        "PathOnHost": "/dev/davinci_manager",
+        "PathInContainer": "/dev/davinci_manager",
+        "CgroupPermissions": "rwm"
+      },
+      {
+        "PathOnHost": "/dev/devmm_svm",
+        "PathInContainer": "/dev/devmm_svm",
+        "CgroupPermissions": "rwm"
+      },
+      {
+        "PathOnHost": "/dev/hisi_hdc",
+        "PathInContainer": "/dev/hisi_hdc",
+        "CgroupPermissions": "rwm"
+      }
+    ],
+    "owned_live": {
+      "qwen36.owner": [],
+      "model-tuning-lab.owner": []
+    }
+  },
+  "finding": {
+    "both_full_original_baselines_bitwise_reproduced": true,
+    "tree_words": 4608,
+    "native_words": 1536,
+    "inner_precise_2_to_0_tree_words_changed": 0,
+    "inner_precise_0_to_2_native_words_changed": 0,
+    "original_failures_unchanged": true,
+    "numerical_qualification": false,
+    "interpretation": "The sole 0/2 parameter switch does not change any output bit for these fixed complete original calls. It does not repair the original failed gate and does not identify kernel internal precision."
+  },
+  "next_candidate": "New separately frozen original-baseline then FP16-call/output-BF16 diagnostic; original mathematical gates and source input evidence preserved.",
+  "whole_model_qualified": false,
+  "performance_qualified": false,
+  "task_qualified": false
+}

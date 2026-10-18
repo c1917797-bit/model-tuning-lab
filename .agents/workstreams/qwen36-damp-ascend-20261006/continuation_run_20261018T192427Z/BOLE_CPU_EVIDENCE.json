@@ -1,0 +1,152 @@
+{
+  "schema": "papers.bole-fia-current-CPU-evidence/v1",
+  "batch_id": "MAIN-CONTINUE-20261018T192427Z-v1",
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-continue-20261018T192427Z-v1/SOURCE_MANIFEST.json",
+    "bytes": 13419,
+    "sha256": "f107bf30de46d1466d46e2189cd69058e1baf381676986472aea0a6250f76e71"
+  },
+  "operations": {
+    "binding": "exec-0000000000001729",
+    "cpu_source_audit": "exec-000000000000172b",
+    "npu_source_audit": "exec-000000000000172a",
+    "cpu": "exec-000000000000172d",
+    "cpu_fresh_release": "exec-000000000000172e",
+    "ticket": "exec-000000000000172f"
+  },
+  "cpu_receipt": {
+    "Devices": [],
+    "NPU": false,
+    "cid": "d563f94748432e6bb2afa2b802c06d953bc6442d95da0d4005f50114e95a2b66",
+    "elapsed": 39.419754680013284,
+    "numeric_owner": null,
+    "primary": null,
+    "qualified": false,
+    "resource_release_verified": true,
+    "schema": "bole.fia-replay-owned-CPU/v1",
+    "secondary": [],
+    "source": {
+      "bytes": 13419,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-continue-20261018T192427Z-v1/SOURCE_MANIFEST.json",
+      "sha256": "f107bf30de46d1466d46e2189cd69058e1baf381676986472aea0a6250f76e71"
+    },
+    "stage_ref": null,
+    "stage_result": {
+      "bytes": 1691,
+      "path": "/opt/host/vnf/austinov/run-bole-fia-fixed-frame-replay-MAIN-CONTINUE-20261018T192427Z-v1/replay/cpu/preflight/STAGE_RESULT.json",
+      "sha256": "d5c2f91ce514904c5ade77f99ac3c273052672d6126209ee0fec6c103021d3a9"
+    },
+    "stopped_retained": true,
+    "used_bytes": 4173500
+  },
+  "evidence": {
+    "cpu_result_ref": {
+      "path": "/opt/host/vnf/austinov/run-bole-fia-fixed-frame-replay-MAIN-CONTINUE-20261018T192427Z-v1/replay/cpu/RESULT.json",
+      "bytes": 855,
+      "sha256": "5db565adaf7b4196f6b196fda1b598c1a7d4170e9a4cfbdb3938415aa1aca407"
+    },
+    "epoch": 1792352641.7896345,
+    "stage": {
+      "NPU": false,
+      "actual_abi_ref": {
+        "bytes": 5437,
+        "path": "/adakv-results/preflight/ACTUAL_FIA_ABI.json",
+        "sha256": "697795b6b784c872bc15e4d3f0fb928849997ff6824ad2941c44c569b4e26911"
+      },
+      "actual_conv_abi_ref": null,
+      "actual_meta": {
+        "NPU": false,
+        "kind": "actual-installed-FIA-schema-and-fixed-saved-input-CPU-preflight",
+        "operator_executed": false,
+        "pass_gate": true
+      },
+      "authority": {
+        "bytes": 5610,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/AUTHORITY.json",
+        "sha256": "12644bad0403760aa7e976411572251f89c021e0182184c847b3c841ab6bab52"
+      },
+      "conv_abi_pending": true,
+      "conv_abi_pending_reason": "actual116R3-GDN-import-requires-HAL",
+      "input_binding_ref": {
+        "bytes": 8003,
+        "path": "/adakv-results/preflight/INPUT_BINDING.json",
+        "sha256": "cd1eeb22414f64e33762ffbbdabc99df83b4d82f0f74d7645753ee00fcd19fe9"
+      },
+      "input_preflight": {
+        "NPU": false,
+        "actual_saved_inputs_checked": true,
+        "input_binding_ref": {
+          "bytes": 8003,
+          "path": "/adakv-results/preflight/INPUT_BINDING.json",
+          "sha256": "cd1eeb22414f64e33762ffbbdabc99df83b4d82f0f74d7645753ee00fcd19fe9"
+        },
+        "original_failure_sets_reproduced": true,
+        "qualified": false
+      },
+      "primary": null,
+      "qualified": false,
+      "schema": "bole.fia-replay-CPU-stage/v1",
+      "software_controls": {
+        "bytes": 3919,
+        "path": "/adakv-results/preflight/SOFTWARE_CONTROLS.json",
+        "sha256": "68fcbd2cf067e2327d78323fd0d38d2eaae3de4c822bbd23ffea2a35b3ef8995"
+      },
+      "source": {
+        "bytes": 13419,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-continue-20261018T192427Z-v1/SOURCE_MANIFEST.json",
+        "sha256": "f107bf30de46d1466d46e2189cd69058e1baf381676986472aea0a6250f76e71"
+      }
+    },
+    "controls": {
+      "executed": 44,
+      "expected": 44,
+      "rows": [
+        {
+          "executed": 24,
+          "expected": 24,
+          "exit_code": 0,
+          "no_skip": true
+        },
+        {
+          "executed": 20,
+          "expected": 20,
+          "exit_code": 0,
+          "no_skip": true
+        }
+      ]
+    },
+    "fresh_release": {
+      "cid": "d563f94748432e6bb2afa2b802c06d953bc6442d95da0d4005f50114e95a2b66",
+      "state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-18T19:40:20.66145629Z",
+        "FinishedAt": "2026-10-18T19:40:58.55022596Z"
+      },
+      "Devices": [],
+      "Memory": 8589934592,
+      "NanoCpus": 1000000000,
+      "CpusetCpus": "145"
+    },
+    "actual_abi": {
+      "schema": "bole.actual-FIA-installed-ABI/v115",
+      "operator": "npu::npu_fused_infer_attention_score",
+      "operator_executed": false,
+      "NPU": false
+    }
+  },
+  "abi_ticket_ref": {
+    "bytes": 3738,
+    "path": "/opt/host/vnf/austinov/run-bole-fia-fixed-frame-replay-MAIN-CONTINUE-20261018T192427Z-v1/replay/ABI_TICKET.json",
+    "sha256": "6572cacaaa62d88505984e71fa1930c303844236a2b850bc971f3fb7e4b4781d"
+  },
+  "NPU_result_claimed": false,
+  "qualified": false
+}

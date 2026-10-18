@@ -1,0 +1,107 @@
+{
+  "schema": "ascend.paper-portfolio.explicit-continuation-batch/v1",
+  "batch_id": "MAIN-CONTINUE-20261018T192427Z-v1",
+  "authority_source": "Direct human user instruction in the current conversation; operational batch bounds selected by MAIN.",
+  "human_instruction": {
+    "exact_text": "请继续不停地跑和修复，一致到穿刺成功",
+    "exact_message_time_utc": null,
+    "exact_message_time_known": false,
+    "record_observed_at_utc": "2026-10-18T19:29:31Z",
+    "timestamp_note": "The observation time is the clock reading when this authority record was prepared, not an asserted timestamp of the human message."
+  },
+  "start_utc": "2026-10-18T19:24:27Z",
+  "cutoff_utc": "2026-10-19T19:24:27Z",
+  "start_epoch": 1792351467,
+  "cutoff_epoch": 1792437867,
+  "timezone": "Europe/Moscow",
+  "start_local": "2026-10-18T22:24:27+03:00",
+  "cutoff_local": "2026-10-19T22:24:27+03:00",
+  "batch_limit": {
+    "selected_by": "MAIN",
+    "duration_seconds": 86400,
+    "duration_was_explicitly_specified_by_user": false,
+    "purpose": "A finite auditable execution batch under the explicit instruction to continue running and repairing.",
+    "this_immutable_cutoff_cannot_be_extended": true,
+    "later_batch_requires_new_immutable_record_and_fresh_admission": true,
+    "continuing_user_instruction_is_not_relabelled_as_a_user_given_24h_duration": true
+  },
+  "scope": {
+    "host": "chicaihong01",
+    "target_peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "workstream": "qwen36-damp-ascend-20261006",
+    "current_execution_requires_verified_authority_ref_and_new_source": true,
+    "old_live_tickets_plans_arm_records_and_container_ids_are_not_reusable": true,
+    "backdating_execution_evidence_prohibited": true
+  },
+  "old_window_immutable": {
+    "previous_authority_ref": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+      "bytes": 3012,
+      "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+    },
+    "previous_authority_cutoff_utc": "2026-10-18T08:43:20Z",
+    "original_48h_goal_unchanged": true,
+    "not_retroactive": true,
+    "old_sources_templates_raw_receipts_results_authorities_and_cutoffs_unchanged": true,
+    "old_failure_and_not_dispatched_statuses_preserved": true
+  },
+  "objective": "At least one new nonhistorical-HYPIC paper technique, faithful opt-in monkeypatch/Ascend adaptation; real numerical/state/graph/lifecycle qualification, matched whole-model fixed1024 throughput >=10% across3pairs with TTFT/TPOT separate; GSM8K/HumanEval/MMLU thinkOFF/max2048/normalEOS smoke thenfull, loss pp and relative both<=1% conservatively",
+  "physical_npus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_npus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "main_only_device_admission": true,
+  "parallel_source_preparation": true,
+  "TP4_timing_exclusive": true,
+  "acceptance_unchanged": true,
+  "no_false_utilization": true,
+  "source_output_policy": "Use new, source-bound immutable successor code and fresh noncovering outputs for each new live attempt under this batch. Never rewrite old source, capture, receipt, result, authority or cutoff; preserve every failed, inconclusive and not-dispatched status.",
+  "read_only_historical_reuse": {
+    "scope_document_path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/REUSE_SCOPE.json",
+    "separate_scope_ref_required_in_sources_that_reuse_historical_artifacts": true,
+    "only_exact_ref3_bound_artifacts_with_fresh_complete_validation": true,
+    "historical_identity_is_not_current_execution_authority_or_qualification": true
+  },
+  "repair_priority": [
+    "BOLE fixed-frame FIA: reproduce both complete original branch baselines and original failure sets before any single-parameter 0/2 intervention; retain mismatches and diagnostic-only qualification.",
+    "DeltaLog: repair demonstrated storage-admission and consumer-accounting defects with independent source versions, complete historical seals and real first-decode evidence.",
+    "Advance only evidence-supported candidates through unchanged whole-model numerical, lifecycle, throughput and task-quality acceptance."
+  ],
+  "resource_limits": {
+    "model_container_GiB": 32,
+    "CPU_container_GiB": 8,
+    "host_process_GiB": 0.5,
+    "reserve_GiB": 8,
+    "initial_model_available_GiB": 40.5,
+    "swap_used_bytes": 0,
+    "hugepage32GiB_release": "SPENT_NO_ADDITIONAL_RELEASE",
+    "original_storage_limits_unchanged": true,
+    "OOM_is_failure": true
+  },
+  "time_budget_policy": {
+    "original_registered_whole_child_cleanup_postverify_and_margin_unchanged": true,
+    "full_registered_whole_must_fit_cutoff_at_live_entry": true,
+    "phase_shortening_to_enter_late_prohibited": true,
+    "cleanup_and_final_verification_must_fit_whole_and_cutoff": true,
+    "component_contract_does_not_replace_whole_model_contract": true
+  },
+  "admission_policy": {
+    "fresh_current_same_image_cpu_source_abi_ticket_required_where_registered": true,
+    "exact_new_source_owner_plan_and_runtime_ticket_binding_required": true,
+    "main_resource_device_storage_lock_and_owner_release_gates_unchanged": true,
+    "local_controls_and_source_bind_are_not_actual_cpu_or_npu_execution": true,
+    "no_new_resource_capacity_or_hugepage_release_granted": true,
+    "diagnostic_completion_is_not_numerical_or_model_qualification": true
+  },
+  "milestones_are_reviews_not_pass_promises": true,
+  "initial_accepted_technology": false,
+  "qualification": false
+}

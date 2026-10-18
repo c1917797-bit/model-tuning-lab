@@ -1,0 +1,41 @@
+{
+  "schema": "papers.deltalog-r39-readonly-preparation-failure/v1",
+  "batch_id": "MAIN-CONTINUE-20261018T192427Z-v1",
+  "prepare_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39.py",
+    "bytes": 34280,
+    "sha256": "23114e2d7b88a44a10b2affc140a648a9ebf63b5b573aa88d1ea5d3eea48d041"
+  },
+  "operation_id": "exec-0000000000001732",
+  "actual_record": {
+    "args": [
+      "-I",
+      "-B",
+      "-c",
+      "import hashlib,runpy,sys\nfrom pathlib import Path\nr={\"path\":\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39.py\",\"bytes\":34280,\"sha256\":\"23114e2d7b88a44a10b2affc140a648a9ebf63b5b573aa88d1ea5d3eea48d041\"}\np=Path(r['path']);b=p.read_bytes();assert len(b)==r['bytes'] and hashlib.sha256(b).hexdigest()==r['sha256']\nsys.argv=[str(p),'--receipt'];runpy.run_path(str(p),run_name='__main__')\n"
+    ],
+    "cancelled": false,
+    "command": "/usr/bin/python3",
+    "cwd": null,
+    "durationMs": 856,
+    "error": "exit code",
+    "exitCode": 1,
+    "id": "exec-0000000000001732",
+    "lane": "quick",
+    "state": "completed",
+    "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 5, in <module>\n  File \"/usr/lib64/python3.9/runpy.py\", line 268, in run_path\n    return _run_module_code(code, init_globals, run_name,\n  File \"/usr/lib64/python3.9/runpy.py\", line 97, in _run_module_code\n    _run_code(code, mod_globals, init_globals,\n  File \"/usr/lib64/python3.9/runpy.py\", line 87, in _run_code\n    exec(code, run_globals)\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39.py\", line 564, in <module>\n    raise SystemExit(main())\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39.py\", line 547, in main\n    result = prepare()\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39.py\", line 410, in prepare\n    mt['packet_contract.py'] = edit(mt['packet_contract.py'],\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39.py\", line 138, in edit\n    need(before != after and raw.count(before) == count and after not in raw,\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39.py\", line 59, in need\n    raise ValueError(reason)\nValueError: reviewed exact source seam model/packet_contract.py: deltalog-FIRSTDECODE101R38identity-\n",
+    "stdout": "",
+    "timedOut": false
+  },
+  "route": {
+    "target_peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "route_decision": "peer_direct"
+  },
+  "scope": "read-only composition, before any active source/output/controller/model creation",
+  "source_tree_created": false,
+  "CPU_container_created": false,
+  "NPU": false,
+  "qualified": false,
+  "diagnosis_inference": "The new container-prefix substring can already occur in the preceding replacement of OUTPUT. A complete IDENTITY assignment edit is needed; do not relax the generic complete inverse and exact occurrence checks.",
+  "repair_status": "independent new prepare_r39_repair1.py pending; original failed preparer is immutable"
+}

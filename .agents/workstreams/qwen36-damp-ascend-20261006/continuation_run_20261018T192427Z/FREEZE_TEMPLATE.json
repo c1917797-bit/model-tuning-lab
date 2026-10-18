@@ -1,0 +1,94 @@
+{
+  "schema": "ascend.continuation-batch.freeze-template/v1",
+  "batch_id": "MAIN-CONTINUE-20261018T192427Z-v1",
+  "status": "LOCAL_BYTES_FROZEN_REMOTE_VERIFICATION_PENDING",
+  "start_epoch": 1792351467,
+  "cutoff_epoch": 1792437867,
+  "authority_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/AUTHORITY.json",
+    "bytes": 5610,
+    "sha256": "12644bad0403760aa7e976411572251f89c021e0182184c847b3c841ab6bab52"
+  },
+  "reuse_scope_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/REUSE_SCOPE.json",
+    "bytes": 3394,
+    "sha256": "99ba96aef815229a2db96cd977f3d1fe12b46774d42bcb79e765d74bfe192259"
+  },
+  "exact_remote_parent": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z",
+  "deployed_or_dispatched": false,
+  "required_before_live_admission": [
+    "MAIN reviews these complete records and installs their exact bytes at the named ordinary, fresh paths.",
+    "Read each deployed file completely and independently confirm bytes and SHA-256 match the candidate Ref3 values.",
+    "Derive new source paths and labels; update only current authority, reuse, start/cutoff and new source identity bindings, plus independently reviewed repairs.",
+    "Regenerate each changed file Ref and prepared template; bind through the complete original source and storage gates.",
+    "Run all required same-image CPU controls and ABI/input preflight for the actual new source; create a fresh exact-source runtime ticket.",
+    "MAIN makes fresh resource/device/storage/lock/owner-release admission with the complete registered whole phase still before the new cutoff.",
+    "Run only source-bound owners and retain actual operation identity, stdout/stderr, failure, fresh final inspection and exact owned-container release evidence."
+  ],
+  "required_new_authority_fields": {
+    "schema": "ascend.paper-portfolio.explicit-continuation-batch/v1",
+    "batch_id": "MAIN-CONTINUE-20261018T192427Z-v1",
+    "start_epoch": 1792351467,
+    "cutoff_epoch": 1792437867,
+    "old_window_immutable.not_retroactive": true,
+    "resource_limits.original_storage_limits_unchanged": true,
+    "main_only_device_admission": true,
+    "physical_npus": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "acceptance_unchanged": true
+  },
+  "required_new_reuse_fields": {
+    "schema": "ascend.continuation-batch.historical-artifact-reuse/v1",
+    "batch_id": "MAIN-CONTINUE-20261018T192427Z-v1",
+    "base_authority": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/AUTHORITY.json",
+      "bytes": 5610,
+      "sha256": "12644bad0403760aa7e976411572251f89c021e0182184c847b3c841ab6bab52"
+    },
+    "start_epoch": 1792351467,
+    "cutoff_epoch": 1792437867,
+    "qualification": false,
+    "storage.original_authority_kept_as_legacy_ledger_identity": true
+  },
+  "historical_reader_inverse_anchor_to_keep": "need(latest(K)==BASE and time.time()<1792220533,'ledger/cutoff stable through final verification')",
+  "historical_ledger_ref_to_keep": {
+    "path": "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/STORAGE_LEDGER061.23.json",
+    "bytes": 4169,
+    "sha256": "7bacf26df76b47d53963fc054c91b38384716c7d9901938087f329dc288c23d0"
+  },
+  "original_execution_contracts_to_preserve": {
+    "whole_model_and_registered_consumer": {
+      "whole_seconds": 3600,
+      "cleanup_seconds": 270,
+      "postverify_seconds": 900,
+      "margin_seconds": 90,
+      "consumer_child_seconds_max": 900
+    },
+    "bole_fixed_frame_component": {
+      "whole_CPU_seconds": 1000,
+      "whole_NPU_seconds": 900,
+      "guest_seconds": 600,
+      "actual_FIA_seconds": 560,
+      "cleanup_seconds": 90,
+      "call_cleanup_reserve_seconds": 180,
+      "guest_memory_bytes": 8589934592,
+      "host_memory_bytes": 536870912,
+      "guest_cpu_count": 1,
+      "physical_device": 4,
+      "logical_device": 0
+    }
+  },
+  "records_do_not_create_success_tickets": true,
+  "old_frozen_paths_must_not_be_modified": true,
+  "any_post_freeze_change_requires_new_refs_and_new_source_binding": true
+}
