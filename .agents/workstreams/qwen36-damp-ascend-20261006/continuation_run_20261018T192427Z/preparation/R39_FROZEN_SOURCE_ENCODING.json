@@ -1,0 +1,19 @@
+{
+  "schema": "paper-continuation.frozen-source-byte-encoding/v1",
+  "original_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/bulk_copy_r39.py",
+    "bytes": 13674,
+    "sha256": "8ab2626f31e65b164ade0b3fd3b8b8798003ac11e700ba17434a018d98d1381e"
+  },
+  "encoded_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/bulk_copy_r39.py.b64",
+    "bytes": 18233,
+    "sha256": "94abc1d2a6bc6ee71cf3d2cda10980ce5c2a3e8f9b0041d67996e5ab98f7b0d2"
+  },
+  "encoding": "RFC4648 base64 with one LF",
+  "raw_working_file_retained_unmodified": true,
+  "raw_file_in_git_index": false,
+  "reason": "The frozen copier includes an extra LF at EOF. Preserve its original complete bytes and source hash; store an exact reversible encoded archive under the repository whitespace gate.",
+  "not_executable_from_git_archive": true,
+  "restore_requirement": "Decode only to an absent intended destination and verify the complete original Ref before any reuse."
+}

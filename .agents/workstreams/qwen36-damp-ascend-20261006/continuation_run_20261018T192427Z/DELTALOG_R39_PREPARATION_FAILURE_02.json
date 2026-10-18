@@ -1,0 +1,36 @@
+{
+  "schema": "deltalog.continuation.readonly-preparation-failure/v1",
+  "source_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39_repair1.py",
+    "bytes": 34816,
+    "sha256": "0e818465837dc802fa73c5d5dc14ae684eb0cb0e807166d596a644b7b1c72dd3"
+  },
+  "actual_evidence": {
+    "operation_id": "exec-0000000000001735",
+    "target_peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "route_decision": "peer_direct",
+    "record": {
+      "args": [
+        "-I",
+        "-B",
+        "-c",
+        "import hashlib,runpy,sys\nfrom pathlib import Path\nr={\"path\":\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39_repair1.py\",\"bytes\":34816,\"sha256\":\"0e818465837dc802fa73c5d5dc14ae684eb0cb0e807166d596a644b7b1c72dd3\"}\np=Path(r['path']);b=p.read_bytes();assert len(b)==r['bytes'] and hashlib.sha256(b).hexdigest()==r['sha256']\nsys.argv=[str(p),'--receipt'];runpy.run_path(str(p),run_name='__main__')\n"
+      ],
+      "cancelled": false,
+      "command": "/usr/bin/python3",
+      "cwd": null,
+      "durationMs": 1451,
+      "error": "exit code",
+      "exitCode": 1,
+      "id": "exec-0000000000001735",
+      "lane": "quick",
+      "state": "completed",
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 5, in <module>\n  File \"/usr/lib64/python3.9/runpy.py\", line 268, in run_path\n    return _run_module_code(code, init_globals, run_name,\n  File \"/usr/lib64/python3.9/runpy.py\", line 97, in _run_module_code\n    _run_code(code, mod_globals, init_globals,\n  File \"/usr/lib64/python3.9/runpy.py\", line 87, in _run_code\n    exec(code, run_globals)\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39_repair1.py\", line 574, in <module>\n    raise SystemExit(main())\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39_repair1.py\", line 557, in main\n    result = prepare()\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39_repair1.py\", line 520, in prepare\n    report = audit(G, dict(model=old_mt, early=old_et, payload=old_pt), trees, model, early, payload,\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39_repair1.py\", line 383, in audit\n    need(token.encode('utf8') not in raw, 'no old R38 active identity ' + alias + '/' + name)\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39_repair1.py\", line 62, in need\n    raise ValueError(reason)\nValueError: no old R38 active identity model/software_dependencies/early_scan_owner.py\n",
+      "stdout": "",
+      "timedOut": false
+    }
+  },
+  "preserved": true,
+  "actual_model_owner_executed": false,
+  "qualified": false
+}

@@ -1,0 +1,100 @@
+{
+  "schema": "deltalog.continuation.partial-source-and-pre-dispatch-ref-failure/v1",
+  "package_id": "264a7f04be2fd373bda72a7837a1bb944a3534afeafba447cc5ca6c9f8058e76",
+  "source_generator": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39_repair2.py",
+    "bytes": 35016,
+    "sha256": "18d542f2286cd93d7e466cddb92f6ed2d07cf94a87efc4e9514e8d955b8f02e4"
+  },
+  "transport": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/transport_r39.py",
+    "bytes": 9655,
+    "sha256": "94a8c1b008a0ef31dd88fc1d7a740e16a25bd1ba5a9c47f36639635c00ea9450"
+  },
+  "copier": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/bulk_copy_r39.py",
+    "bytes": 13674,
+    "sha256": "8ab2626f31e65b164ade0b3fd3b8b8798003ac11e700ba17434a018d98d1381e"
+  },
+  "unchanged_source_copy": {
+    "operation_id": "exec-0000000000001739",
+    "target_peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "route_decision": "peer_direct",
+    "record": {
+      "args": [
+        "-I",
+        "-B",
+        "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/bulk_copy_r39.py",
+        "--transport-ref",
+        "{\"path\":\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/transport_r39.py\",\"bytes\":9655,\"sha256\":\"94a8c1b008a0ef31dd88fc1d7a740e16a25bd1ba5a9c47f36639635c00ea9450\"}",
+        "--generator-ref",
+        "{\"path\":\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39_repair2.py\",\"bytes\":35016,\"sha256\":\"18d542f2286cd93d7e466cddb92f6ed2d07cf94a87efc4e9514e8d955b8f02e4\"}",
+        "--expected-package-id",
+        "264a7f04be2fd373bda72a7837a1bb944a3534afeafba447cc5ca6c9f8058e76",
+        "--copy"
+      ],
+      "cancelled": false,
+      "command": "python3",
+      "cwd": null,
+      "durationMs": 2629,
+      "error": null,
+      "exitCode": 0,
+      "id": "exec-0000000000001739",
+      "lane": "quick",
+      "state": "completed",
+      "stderr": "",
+      "stdout": "{\"NPU\":false,\"all_copied_refs_finally_rehashed\":true,\"all_target_file_refs_sha256\":\"78d3657b129d9aae9f6435ee55647970c724678f26faaa7f489b46002df3f8f7\",\"copy_bytes\":{\"early\":43470,\"model\":4912382,\"payload\":327473},\"copy_counts\":{\"early\":7,\"model\":247,\"payload\":32},\"exact_copy_plan_sha256\":\"0dcabd6a235dc77975c5c481476eca87025fbc7500dc6daebc7ab2b603fde845\",\"generator_ref\":{\"bytes\":35016,\"path\":\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/prepare_r39_repair2.py\",\"sha256\":\"18d542f2286cd93d7e466cddb92f6ed2d07cf94a87efc4e9514e8d955b8f02e4\"},\"mode\":\"copy\",\"model_source_created\":false,\"package_id\":\"264a7f04be2fd373bda72a7837a1bb944a3534afeafba447cc5ca6c9f8058e76\",\"pending_structured_patch_files\":{\"early\":[\"COMMANDS.json\",\"OWNER_EDITS.json\",\"SOURCE_TEMPLATE.json\",\"owner.py\",\"recover.py\"],\"model\":[\"COMMANDS.json\",\"COMMANDS_FINAL.json\",\"COMMANDS_SPEC.json\",\"CONTINUATION_PHASE_INVERSE.json\",\"PHASE_EDITS_R21.json\",\"SOURCE_TEMPLATE.json\",\"bind_source.py\",\"firstdecode_refs.py\",\"model_snapshot_budget.py\",\"owner_overlay.py\",\"packet_contract.py\",\"payload_cold_readset_preflight.json\",\"phase_budget_r21.py\",\"plugin/SOURCE_TEMPLATE.json\",\"plugin/qwen36_deltalog_service/admission.py\",\"readonly_closed_admission.py\",\"renewal_authority_snapshot.json\",\"renewal_reuse_scope_snapshot.json\",\"renewed_closed_reader101r19.py\",\"software_dependencies/early_scan_owner.py\",\"software_dependencies/early_scan_template.json\",\"software_dependencies/payload_contract_mirror/SOURCE_MANIFEST.json\",\"software_dependencies/payload_contract_mirror/firstdecode_gate.py\",\"software_dependencies/payload_contract_mirror/publication_barrier.py\",\"software_dependencies/payload_contract_mirror/renewal_authority.py\",\"software_dependencies/payload_contract_mirror/renewal_authority_snapshot.json\",\"software_dependencies/payload_contract_mirror/renewal_reuse_scope_snapshot.json\",\"software_fixtures/R24_TERMINAL/COMMANDS_FINAL.json.b64\",\"software_fixtures/owner_overlay.py.txt\",\"test_actual017_binding.py\",\"test_firstdecode_owner.py\",\"test_parser_parent_r24.py\",\"test_payload_contract_r23.py\",\"test_readonly_closed_admission.py\",\"test_window058.py\",\"window_overlay.py\"],\"payload\":[\"SOURCE_MANIFEST.json\",\"firstdecode_gate.py\",\"publication_barrier.py\",\"renewal_authority.py\",\"renewal_authority_snapshot.json\",\"renewal_reuse_scope_snapshot.json\"]},\"qualified\":false,\"read_only\":false,\"schema\":\"deltalog.r39-exact-unchanged-byte-copy/v1\",\"source_text_generated\":false,\"source_tree_copy_complete\":true,\"transport_ref\":{\"bytes\":9655,\"path\":\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261018T192427Z/preparation/transport_r39.py\",\"sha256\":\"94a8c1b008a0ef31dd88fc1d7a740e16a25bd1ba5a9c47f36639635c00ea9450\"},\"tree_roots\":{\"early\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-continuation-v1-r39-20261018T192427Z-001\",\"model\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-continuation-v1-101-r39-20261018T192427Z-001\",\"payload\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-selected-firstdecode-continuation-r39-20261018T192427Z-001\"}}\n",
+      "timedOut": false
+    }
+  },
+  "early_template_planned_ref": {
+    "bytes": 4320,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-continuation-v1-r39-20261018T192427Z-001/SOURCE_TEMPLATE.json",
+    "sha256": "c4a43c9df1d4aeb57e3a7165e7b81e44ba81e47ec4cf329aef5eeb101129728c"
+  },
+  "top_level_donor": {
+    "bytes": 16302,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-38-closed-admission-identity/DONOR_OWNER.py",
+    "sha256": "16b4861ea6610551d7796932f8e8dca30de53455819483f1c17a7568e4fc5da1"
+  },
+  "own_file_donor": {
+    "bytes": 16302,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-continuation-v1-r39-20261018T192427Z-001/DONOR_OWNER.py",
+    "sha256": "16b4861ea6610551d7796932f8e8dca30de53455819483f1c17a7568e4fc5da1"
+  },
+  "actual_existence_check": {
+    "operation_id": "exec-000000000000173b",
+    "target_peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "route_decision": "peer_direct",
+    "record": {
+      "args": [
+        "-I",
+        "-B",
+        "-c",
+        "import json,os,stat,hashlib,time\npaths=json.loads(__import__('sys').argv[1])\nout=[]\nfor name in paths:\n row={'path':name,'exists':os.path.lexists(name)}\n if row['exists']:\n  s=os.lstat(name);row.update(ordinary=stat.S_ISREG(s.st_mode),bytes=s.st_size)\n  if row['ordinary']:\n   b=open(name,'rb').read();row['sha256']=hashlib.sha256(b).hexdigest()\n out.append(row)\nprint(json.dumps({'epoch':time.time(),'paths':out},sort_keys=True))",
+        "[\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-38-closed-admission-identity/DONOR_OWNER.py\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-continuation-v1-r39-20261018T192427Z-001/DONOR_OWNER.py\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-continuation-v1-101-r39-20261018T192427Z-001/SOURCE_MANIFEST.json\",\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-continuation-v1-r39-20261018T192427Z-001/SOURCE_MANIFEST.json\",\"/opt/host/vnf/austinov/run-deltalog-CONT-R39-postconsumer-20261018T192427Z-001\"]"
+      ],
+      "cancelled": false,
+      "command": "python3",
+      "cwd": null,
+      "durationMs": 35,
+      "error": null,
+      "exitCode": 0,
+      "id": "exec-000000000000173b",
+      "lane": "quick",
+      "state": "completed",
+      "stderr": "",
+      "stdout": "{\"epoch\": 1792354094.3935363, \"paths\": [{\"exists\": false, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-38-closed-admission-identity/DONOR_OWNER.py\"}, {\"bytes\": 16302, \"exists\": true, \"ordinary\": true, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-continuation-v1-r39-20261018T192427Z-001/DONOR_OWNER.py\", \"sha256\": \"16b4861ea6610551d7796932f8e8dca30de53455819483f1c17a7568e4fc5da1\"}, {\"exists\": false, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-continuation-v1-101-r39-20261018T192427Z-001/SOURCE_MANIFEST.json\"}, {\"exists\": false, \"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-continuation-v1-r39-20261018T192427Z-001/SOURCE_MANIFEST.json\"}, {\"exists\": false, \"path\": \"/opt/host/vnf/austinov/run-deltalog-CONT-R39-postconsumer-20261018T192427Z-001\"}]}\n",
+      "timedOut": false
+    }
+  },
+  "finding": "The active top-level donor Ref points to an absent R38 file while the own-file Ref names the exact existing copied R39 donor. No early binding or execution was dispatched.",
+  "unchanged_source_copies_preserved": true,
+  "changed_source_patches_applied": 0,
+  "model_source_bound": false,
+  "early_source_bound": false,
+  "actual_early_owner_executed": false,
+  "actual_model_owner_executed": false,
+  "successor_preparation": "R40 fresh identity with donor and independent reuse-scope join",
+  "qualified": false
+}
