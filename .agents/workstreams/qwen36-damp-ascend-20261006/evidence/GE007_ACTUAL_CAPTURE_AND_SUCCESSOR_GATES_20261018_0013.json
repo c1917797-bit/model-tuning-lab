@@ -1,0 +1,67 @@
+{
+  "schema": "ascend.stage-checkpoint/v1",
+  "observed_utc": "2026-10-18T00:13:00Z",
+  "authority_cutoff_epoch": 1792313000,
+  "goal": "actual Qwen3.6-27B plugin migration; whole-model throughput >=10%; final task accuracy within latest constraint",
+  "ge007": {
+    "operation": "exec-0000000000001524",
+    "exit_code": 0,
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-ge129-candidate-capture-RENEW24H-007/RESULT.json",
+      "bytes": 111174,
+      "sha256": "858b2c75939ee295bf53fa7d7f06682af51ca6ef3fae89239bd9d43ab02b5596"
+    },
+    "scope": "actual 129 input -> first token, not numerical/performance/task acceptance",
+    "workers": 4,
+    "mechanism_calls": 192,
+    "numeric_capture_frames": 192,
+    "numeric_capture_raw_bytes": 508287168,
+    "first_token": 261,
+    "primary": null,
+    "owned_containers_release_verified": true,
+    "release_rechecked": "exec-000000000000153b",
+    "model_numeric_qualified": false,
+    "performance_ready": false
+  },
+  "ge005": {
+    "operation": "exec-0000000000001512",
+    "classification": "adapter initialization defect",
+    "cause": "WorkerBase.model_runner=None placeholder incorrectly rejected by hasattr",
+    "resolution": "GE007 permits absent/None through static lookup while verifying exact native/base source"
+  },
+  "ge006": {
+    "status": "BLOCKED_SHARED_BOOTSTRAP",
+    "executed": false
+  },
+  "numeric003": {
+    "operation": "exec-0000000000001537",
+    "status": "binding_failed_before_NPU",
+    "cause": "untyped recursive historical JSON Ref traversal attempted relative CANDIDATE_B_SOURCE_NOTE.md",
+    "input_capture_reusable": true,
+    "action": "independent typed actual consumer read-set repair numeric004, preserve old003"
+  },
+  "ge2k002": {
+    "deployment_files_verified": 72,
+    "audit_operation": "exec-0000000000001530",
+    "status": "host_binding_failed_before_container",
+    "cause": "fast binding expected direct scope closure but actual donor has intervening wrapper",
+    "action": "verify actual donor closure and exact wrapper-preserving repair003; retain numerical gates"
+  },
+  "deltalog_r30": {
+    "status": "immutable LF1 payload/model/early exact deployment in progress by dedicated agent",
+    "production_change": "correct lifecycle primitives source pin, no mathematics or threshold change",
+    "NPU": false
+  },
+  "scheduling": {
+    "whole_window_utilization": "UNMEASURED",
+    "last_TP4_stage": "finished, released",
+    "ready_means": "actual complete inputs/source/command/budget/output/predicate and actual host binding; software-only preparation is not ready",
+    "actions": [
+      "three agents preparing/reviewing/deploying independent nodes",
+      "remove artificial 2k component dependence on129 model capture",
+      "MAIN-only physical4-7 launch, no interference0-3",
+      "keep source-only deploy preparation parallel to NPU execution"
+    ],
+    "remaining_issue": "new actual host binding defects temporarily empty NPU-ready queue; do not fake load"
+  }
+}
