@@ -1,0 +1,118 @@
+{
+  "schema": "ascend.paper.stage-evidence/v1",
+  "record_checked_at": "2026-10-18 02:43:27 UTC",
+  "ge002_followup": {
+    "source_sha256": "4ff4fc3f2e387cb83d74f1e3c491a10c17e97b3e9290f71963fed0a1c08eda93",
+    "cpu_operation": "exec-0000000000001639",
+    "cpu_actual_tests_passed": 77,
+    "cpu_release_verified": true,
+    "numeric_operation": "exec-000000000000163c",
+    "numeric_status_at_record": "completed_failure",
+    "physical": 6,
+    "actual_host_pid": 2735034,
+    "no_result_claimed": false,
+    "exit_code": 1,
+    "owner_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE2KDIAG002_NPU_001/RESULT.json",
+      "bytes": 578490,
+      "sha256": "558d764a8d74fc0eff07ea5fb1cf8694ffd2301da730cdd9be8c7b6fa4b832b8"
+    },
+    "failure": "strict host JSON reader rejected NaN in consumer; finite=false native comparison needs attribution, not a qualified candidate",
+    "release_verified": true,
+    "gate_relaxed": false
+  },
+  "cutoff_epoch": 1792313000,
+  "scope": "Implementation attribution; not model performance or task accuracy",
+  "deltalog": {
+    "operation": "exec-0000000000001610",
+    "status": "failed",
+    "release_verified": true,
+    "result": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R32earlyscan-main-NEW24H_FIRSTDECODE101R32earlyscan_001/RESULT.json",
+    "source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair32-early-scan-20261018-001/SOURCE_MANIFEST.json",
+      "bytes": 341686,
+      "sha256": "c58c3b66341a62ecc706d24f4301b69f95b6be7f92416008f0af9cd82c2f84e9"
+    },
+    "failure": "live_adapter.live_epoch reads FA seq_lens through NativeReader.small default NPU device; actual v0.23 non-spec self-attention builder provides CPU Tensor",
+    "classification": "adapter ABI mismatch; not algorithm failure",
+    "next": "new source derivative with explicit CPU for this field; unchanged global Tensor/device/numeric gates; no unchanged rerun",
+    "postverify_seconds": 324.35255026997766
+  },
+  "good_enough": {
+    "operations": [
+      "exec-000000000000162e",
+      "exec-000000000000162f"
+    ],
+    "status": "same-image CPU failed before NPU",
+    "first_failure": "generated command missing MXR_EVENT_HOST_ENABLE=1; default-OFF refusal before output/container",
+    "second_failure": "native_chunk_snapshot old donor alias not included in guest typed mounts",
+    "cpu_result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE2KDIAG001_CPU_001/RESULT.json",
+      "bytes": 576832,
+      "sha256": "84e9def59b5d13f8a0f5bc14da5be0e35fd8466dcb86350e44b5d22b6d0e62b1"
+    },
+    "cleanup": {
+      "bytes": 1714,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE2KDIAG001_CPU_001/cpu/cleanup.json",
+      "sha256": "d5349362ca2d1f45f41980f4f677b22f2281c8bfd8690ac4938fff4b6a047f88"
+    },
+    "next": "new002 source with exact own snapshot leaf, shared explicit host/guest readset, commands carrying opt-in; preserve001"
+  },
+  "mxr": {
+    "operation": "exec-0000000000001630",
+    "status": "completed CPU attribution; not new NPU qualification",
+    "owner": {
+      "path": "/opt/host/vnf/austinov/run-mxr-conditional-H-20261018-001/RESULT.json",
+      "bytes": 820,
+      "sha256": "23f01f6cc95c6550eaa93aeb335f3c88abc3bddb2b4203a63eed07ac37738959"
+    },
+    "report": {
+      "bytes": 109410,
+      "path": "/opt/host/vnf/austinov/run-mxr-conditional-H-20261018-001/ATTRIBUTION.json",
+      "sha256": "ae7cd35962201515125e53ea6335a1a6f081ececc8434b173a9d7a34f0226327"
+    },
+    "primary": null,
+    "secondary": [],
+    "release_verified": true,
+    "next": "new exact-H NPU diagnostic, 3 preselected chunks13/27/9 x4 retained arms x2 native repetitions; independent canonical arithmetic not instruction-exact"
+  },
+  "scheduling": {
+    "snapshot_operation": "exec-0000000000001629",
+    "physical4_7": "no running processes at snapshot",
+    "continuous_utilization": "unmeasured",
+    "no_zero_idle_claim": true,
+    "agents": 3,
+    "lesson": "Do not equate ready local tests with same-image readiness. Source-audit visibility must equal mounted guest dependencies; required enable flags belong in executable commands.",
+    "next": "MAIN launches one admitted NPU node; agents deploy isolated source only. CPU postverification separation requires shared-resource proof before concurrency, no bypass.",
+    "concurrency_audit_correction": "Current effective singleton path has no global no_overlap. Hardcoded same physical6 and colliding automatic CPU allocation require isolated adaptation. Eight distinct cores was an overconservative audit assumption, not an established per-job reserve requirement; shared-system reserve semantics require proof before paired execution."
+  },
+  "acceptance": {
+    "performance": false,
+    "task_accuracy": false,
+    "new_technique_accepted": false
+  },
+  "mxr_exact_H": {
+    "operation": "exec-0000000000001644",
+    "status": "ACTUAL_EXACT_H_DIAGNOSTIC_NOT_QUALIFICATION",
+    "cpu_tests": 89,
+    "owner": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_MXR_EXACT_H_NPU_001/RESULT.json",
+      "bytes": 368847,
+      "sha256": "84423ed55ea6670f72dbb64e2f0fbfc4a0e119c53e225318e074bc96d60a33c5"
+    },
+    "consumer": {
+      "bytes": 29538,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_MXR_EXACT_H_NPU_001/physical6/numeric/CONSUMED.json",
+      "sha256": "b18c728e06aa309c3e55f13f80d88ecfb5581bc198059810c605a802514fc77e"
+    },
+    "rows": 12,
+    "all_canonical_output_state_pass": true,
+    "all_native_repeat_exact": true,
+    "all_observed_boundary_exact": true,
+    "qualification": false,
+    "performance": false,
+    "task_accuracy": false,
+    "release_verified": true,
+    "next": "attribute remaining full-segment cross-chunk mismatch; do not repeat completed single-chunk diagnostic"
+  }
+}
