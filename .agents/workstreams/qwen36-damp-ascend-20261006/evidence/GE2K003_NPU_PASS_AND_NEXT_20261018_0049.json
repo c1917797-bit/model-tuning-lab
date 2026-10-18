@@ -1,0 +1,104 @@
+{
+  "schema": "qwen36.paper-stage-checkpoint/v1",
+  "recorded_at_utc": "2026-10-18T00:49:00Z",
+  "authority_cutoff_epoch": 1792313000,
+  "scope": "GE 2K fullGDN synthetic component only; no whole-model performance/task acceptance",
+  "owner_result": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE2K003_NPU_001/RESULT.json",
+    "bytes": 541640,
+    "sha256": "bbb8a9b7d7614507cfa12c35e230925200e7bd31c1e9504744b2e1bc5314c172"
+  },
+  "source": {
+    "bytes": 28443,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/ge-2k-fullgdn-component-v1-003/SOURCE_MANIFEST.json",
+    "sha256": "805c214ab7d61767fa502eed794328eb2b768f68575700fc773dad1cefc9ceb1"
+  },
+  "numeric": {
+    "bytes": 4097,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE2K003_NPU_001/physical6/numeric/RESULT.json",
+    "sha256": "1593b411362aa317dad79532c763b70994c118eedf9e2d57934017f768d48a62"
+  },
+  "consumer": {
+    "bytes": 7944,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE2K003_NPU_001/physical6/numeric/CONSUMED.json",
+    "sha256": "daf1b54ce7b832668cc675bededa9c2fdd7dc3c013930654aec06e5348ea8eb1"
+  },
+  "physical": [
+    6
+  ],
+  "matrix": {
+    "batches": [
+      1,
+      2
+    ],
+    "tokens": 2048,
+    "steps_per_batch": 3,
+    "output_and_state_pass_rows": 6,
+    "max_output_frob_relative": 0.000055686335100923106,
+    "max_state_frob_relative": 0.00003944377748227893,
+    "limits": {
+      "frob_relative": 0.002,
+      "r2_min": 0.999,
+      "rmse_over_mean_ref_abs": 0.02
+    }
+  },
+  "independent_reference": "original native solve+original allGDN math with independently cloned q/k/v/g/beta and independently advancing state",
+  "owner_elapsed_seconds": 128.23608354997123,
+  "primary": null,
+  "secondary": [],
+  "release": {
+    "cid": "3f329eef213aff750e5d2dd015f5bc987abd3d7986e5c69ecc8a1fe3eb778f08",
+    "state": {
+      "Status": "exited",
+      "Running": false,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 0,
+      "ExitCode": 137,
+      "Error": "",
+      "StartedAt": "2026-10-18T00:43:10.31383493Z",
+      "FinishedAt": "2026-10-18T00:45:08.65026785Z"
+    },
+    "exec": null
+  },
+  "not_proven": [
+    "real model layer replay",
+    "2K whole-model trajectory",
+    "1024-token end-to-end speed",
+    "task accuracy",
+    "graph/lifecycle portability"
+  ],
+  "next": {
+    "deltalog_bound_source": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair30-primitives-pin-20261018-001/SOURCE_MANIFEST.json",
+      "bytes": 340931,
+      "sha256": "d19584cf0ec296e04c5045afbf9b6581d33d557e9d29fac01a465a8985c6a719"
+    },
+    "deltalog_live_operation": "exec-000000000000157e",
+    "ge_actual192_replay": "numeric004 CPU launch-mode defect; numeric005 explicit visibility repair being deployed"
+  },
+  "lessons": [
+    {
+      "evidence": "exec-0000000000001560 timed out; prior R29 bind >180s and actual full source has repeated closed-state reads",
+      "classification": "orchestration timeout, not algorithm failure",
+      "action": "preserved failure; exact no-process/no-output check then one 1200s bounded bind 156c completed; no cutoff extension"
+    },
+    {
+      "evidence": "numeric004 CPU Devices=[] but ASCEND_RT_VISIBLE_DEVICES=0; exact stopped inspect 1573",
+      "classification": "launch mode contract defect, not missing device or numerical failure",
+      "action": "new numeric005 keeps CPU-only guard and sets empty CPU visibility; native remains logical0"
+    },
+    {
+      "evidence": "2K model draft-r3 actual prompt accepts16/129, wrong 240MiB cap and activation schema mismatch",
+      "classification": "pre-NPU adaptation defects",
+      "action": "independent actual-entry regressions and r4 repairs before deployment; synthetic fixtures not NPU evidence"
+    },
+    {
+      "evidence": "GE2K003 passed after exact 030->021->scope wrapper preservation",
+      "classification": "resolved runtime adapter defect",
+      "action": "reuse verified wrapper repair; no tolerance reduction"
+    }
+  ]
+}
