@@ -1,0 +1,88 @@
+{
+  "schema": "ascend.ge2048.actual-capture-stage/v1",
+  "observed_utc": "2026-10-18T01:37:00Z",
+  "operation": "exec-00000000000015bb",
+  "operation_exit": 0,
+  "source": {
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/ge2048-candidate-capture-bound-20261018-001/SOURCE_MANIFEST.json",
+    "bytes": 98370,
+    "sha256": "2665c1fb64c96014ed046e1041556877af1d049fc98a90c6bef4a44593ff70d3"
+  },
+  "owner": {
+    "path": "/opt/host/vnf/austinov/run-ge2048-candidate-capture-RENEW24H-001/RESULT.json",
+    "bytes": 117938,
+    "sha256": "2baa81078f7b660b8591d7f8767c387799e918109a060cf64ba8ebe66179cace"
+  },
+  "consumer": {
+    "path": "/opt/host/vnf/austinov/run-ge2048-candidate-capture-RENEW24H-001/cpu-consumer/CONSUMPTION.json",
+    "bytes": 3740,
+    "sha256": "9501b256ef387a9bc2f894dbd7cb04cfcc98feab22148d7fb0fc3aaadb723a2a"
+  },
+  "arm_input": {
+    "path": "/opt/host/vnf/austinov/run-ge2048-candidate-capture-RENEW24H-001/candidate/ARM_INPUT.json",
+    "bytes": 52452,
+    "sha256": "d955b739291fb889b2931d6edf97cb1081386c4c84a0a34816ccb242fc151c18"
+  },
+  "actual": {
+    "input_tokens": 2048,
+    "output_tokens": 1,
+    "first_token": 1249,
+    "namespace_workers": [
+      496,
+      497,
+      498,
+      499
+    ],
+    "physical_npus": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "logical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "mechanism_calls": 192,
+    "full_gdn_frames": 192,
+    "raw_before_after_bytes": 3553192128,
+    "elapsed_seconds": 541.9301382999984,
+    "primary": null,
+    "secondary": [],
+    "all_created_containers_release_verified": true
+  },
+  "independent_fresh_release": {
+    "operation": "exec-00000000000015d9",
+    "three_owned_containers_stopped": true,
+    "pid_zero": true,
+    "no_exec_ids": true,
+    "no_oom": true,
+    "physical_4_7_idle_baseline": true,
+    "protected_0_3_untouched": true
+  },
+  "scope": {
+    "capture_and_dispatch": true,
+    "actual2048_native_numerical_pass": false,
+    "full_network_trajectory": false,
+    "decode1024": false,
+    "matched_performance": false,
+    "task_accuracy": false,
+    "acceptance": false
+  },
+  "next": {
+    "current": "Captured actual2k raw; awaiting independent native replay",
+    "next": "Deploy/freeze existing 6x32 native replay shards, same-image61 controls and actual numerical owners, then complete192 qualification",
+    "backup": "DeltaLog R32 early-owner scan repair pending actual deployment/preflight, not yet admitted",
+    "preparers": "GE42 complete matched performance entry; GE replay deployment then task evaluation entry; DeltaLog controller repair",
+    "no_false_utilization": true,
+    "no_claim_of_continuous_occupancy": true
+  },
+  "deadline_epoch": 1792313000,
+  "lessons": [
+    "A successful first-token capture is not a numerical PASS; preserve separate independent replay and end-to-end acceptance edges.",
+    "Completed preparation transfers to MAIN queue admission, not autonomous NPU launch; assign independent downstream work while actual predecessors run.",
+    "Retained sleeper-container exit137 after bounded own-only stop is distinct from child exit0 and OOM; verify each authority separately."
+  ]
+}
