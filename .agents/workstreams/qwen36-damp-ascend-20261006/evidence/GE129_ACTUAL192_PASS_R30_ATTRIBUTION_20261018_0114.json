@@ -1,0 +1,232 @@
+{
+  "schema": "ascend.stage-handoff/v1",
+  "recorded_utc": "2026-10-18T01:14:00Z",
+  "authority": {
+    "cutoff_epoch": 1792313000,
+    "unchanged": true
+  },
+  "stage": "GE actual129 model boundary192 NPU pass; DeltaLog R30 canary integration failure",
+  "ge005": {
+    "source": {
+      "bytes": 10955,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/ge-model129-numeric-bound-v1-005/SOURCE_MANIFEST.json",
+      "sha256": "8e491c83af17abdf5b8a50996bff04368ea5a8001dc46c4498e57c47251a8bea"
+    },
+    "owner": {
+      "bytes": 698589,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE129ACTUAL005_NPU_001/RESULT.json",
+      "sha256": "9ed75f23edc24c528d9f6b26a1e4bb4959bfdcc2c16184a28f37dd99578a3d2f"
+    },
+    "consumer": {
+      "bytes": 255041,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE129ACTUAL005_NPU_001/physical6/numeric/CONSUMED.json",
+      "sha256": "9fafac659bae468e7d33f75bd27b7d37d99ecd70c80fbb256345f6228693aedb"
+    },
+    "operations": {
+      "cpu": "exec-0000000000001592",
+      "numeric": "exec-0000000000001594",
+      "independent_report": "exec-000000000000159c",
+      "release": "exec-00000000000015a0"
+    },
+    "frames": 192,
+    "workers": 4,
+    "gdn_layers_per_worker": 48,
+    "failed_frames": 0,
+    "thresholds": {
+      "frob_relative": 0.002,
+      "rmse_over_mean_ref_abs": 0.02,
+      "r2_min": 0.999
+    },
+    "worst": {
+      "output.frob_relative": {
+        "frame": {
+          "bytes": 1185253,
+          "path": "/opt/host/vnf/austinov/run-ge129-candidate-capture-RENEW24H-007/candidate/server/capture/worker-497/NUMERIC/layer-32.pt",
+          "sha256": "9c6bef3086d36f42496811f4683bb06e52c46b7fa3ef482461ac122f47a42075"
+        },
+        "layer": 42,
+        "pid": 497,
+        "prefix": "language_model.model.layers.42.linear_attn",
+        "value": 0.00038177473438794394
+      },
+      "output.max_abs": {
+        "frame": {
+          "bytes": 1185253,
+          "path": "/opt/host/vnf/austinov/run-ge129-candidate-capture-RENEW24H-007/candidate/server/capture/worker-496/NUMERIC/layer-45.pt",
+          "sha256": "7256bdb6fb38a6b77f48bf53ed6844758f47da4da0b4099feca39809a80768c2"
+        },
+        "layer": 60,
+        "pid": 496,
+        "prefix": "language_model.model.layers.60.linear_attn",
+        "value": 0.00048828125
+      },
+      "output.mean_abs": {
+        "frame": {
+          "bytes": 1185253,
+          "path": "/opt/host/vnf/austinov/run-ge129-candidate-capture-RENEW24H-007/candidate/server/capture/worker-496/NUMERIC/layer-00.pt",
+          "sha256": "0a5a95c41f44cf1e8c28472dbf5649f3c8781dca9a07944da7186e19777e0720"
+        },
+        "layer": 0,
+        "pid": 496,
+        "prefix": "language_model.model.layers.0.linear_attn",
+        "value": 1.7099666050623245e-8
+      },
+      "output.r2": {
+        "frame": {
+          "bytes": 1185253,
+          "path": "/opt/host/vnf/austinov/run-ge129-candidate-capture-RENEW24H-007/candidate/server/capture/worker-497/NUMERIC/layer-32.pt",
+          "sha256": "9c6bef3086d36f42496811f4683bb06e52c46b7fa3ef482461ac122f47a42075"
+        },
+        "layer": 42,
+        "pid": 497,
+        "prefix": "language_model.model.layers.42.linear_attn",
+        "value": 0.9999998537700184
+      },
+      "output.rmse_over_mean_ref_abs": {
+        "frame": {
+          "bytes": 1185253,
+          "path": "/opt/host/vnf/austinov/run-ge129-candidate-capture-RENEW24H-007/candidate/server/capture/worker-497/NUMERIC/layer-32.pt",
+          "sha256": "9c6bef3086d36f42496811f4683bb06e52c46b7fa3ef482461ac122f47a42075"
+        },
+        "layer": 42,
+        "pid": 497,
+        "prefix": "language_model.model.layers.42.linear_attn",
+        "value": 0.0011546673767742193
+      },
+      "state.frob_relative": {
+        "frame": {
+          "bytes": 1185253,
+          "path": "/opt/host/vnf/austinov/run-ge129-candidate-capture-RENEW24H-007/candidate/server/capture/worker-495/NUMERIC/layer-28.pt",
+          "sha256": "e6e1ef2f173e5a2351094998e6dbb2353be067e495e0a6cce4cb5ae7456cee95"
+        },
+        "layer": 37,
+        "pid": 495,
+        "prefix": "language_model.model.layers.37.linear_attn",
+        "value": 0.0005944896085352218
+      },
+      "state.max_abs": {
+        "frame": {
+          "bytes": 1185253,
+          "path": "/opt/host/vnf/austinov/run-ge129-candidate-capture-RENEW24H-007/candidate/server/capture/worker-497/NUMERIC/layer-00.pt",
+          "sha256": "5c8dde23c6eeb8abe5fb6df537c857be35e3c77a4844121deed1bd0d40489501"
+        },
+        "layer": 0,
+        "pid": 497,
+        "prefix": "language_model.model.layers.0.linear_attn",
+        "value": 0.015584468841552734
+      },
+      "state.mean_abs": {
+        "frame": {
+          "bytes": 1185253,
+          "path": "/opt/host/vnf/austinov/run-ge129-candidate-capture-RENEW24H-007/candidate/server/capture/worker-497/NUMERIC/layer-00.pt",
+          "sha256": "5c8dde23c6eeb8abe5fb6df537c857be35e3c77a4844121deed1bd0d40489501"
+        },
+        "layer": 0,
+        "pid": 497,
+        "prefix": "language_model.model.layers.0.linear_attn",
+        "value": 2.547619344881828e-7
+      },
+      "state.r2": {
+        "frame": {
+          "bytes": 1185253,
+          "path": "/opt/host/vnf/austinov/run-ge129-candidate-capture-RENEW24H-007/candidate/server/capture/worker-495/NUMERIC/layer-28.pt",
+          "sha256": "e6e1ef2f173e5a2351094998e6dbb2353be067e495e0a6cce4cb5ae7456cee95"
+        },
+        "layer": 37,
+        "pid": 495,
+        "prefix": "language_model.model.layers.37.linear_attn",
+        "value": 0.9999996465939706
+      },
+      "state.rmse_over_mean_ref_abs": {
+        "frame": {
+          "bytes": 1185253,
+          "path": "/opt/host/vnf/austinov/run-ge129-candidate-capture-RENEW24H-007/candidate/server/capture/worker-497/NUMERIC/layer-00.pt",
+          "sha256": "5c8dde23c6eeb8abe5fb6df537c857be35e3c77a4844121deed1bd0d40489501"
+        },
+        "layer": 0,
+        "pid": 497,
+        "prefix": "language_model.model.layers.0.linear_attn",
+        "value": 0.0023678044259224074
+      }
+    },
+    "release": {
+      "cid": "a6518ff35f1986cd011ed34d6e8905bbb7e19c759360bae56069c08f89d83e37",
+      "state": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 137,
+        "Error": "",
+        "StartedAt": "2026-10-18T01:09:18.00665046Z",
+        "FinishedAt": "2026-10-18T01:11:17.72179309Z"
+      },
+      "exec_ids": null,
+      "devices": [
+        {
+          "PathOnHost": "/dev/davinci6",
+          "PathInContainer": "/dev/davinci0",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/davinci_manager",
+          "PathInContainer": "/dev/davinci_manager",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/devmm_svm",
+          "PathInContainer": "/dev/devmm_svm",
+          "CgroupPermissions": "rwm"
+        },
+        {
+          "PathOnHost": "/dev/hisi_hdc",
+          "PathInContainer": "/dev/hisi_hdc",
+          "CgroupPermissions": "rwm"
+        }
+      ],
+      "privileged": false,
+      "stopped": true,
+      "errors": []
+    },
+    "elapsed_seconds": 132.36523107998073,
+    "scope": "Native replay on same actual captured129-token GDN boundary inputs. Not complete model trajectory, cache lifecycle, performance, or task accuracy.",
+    "inherited_owner_status_is_not_scope_authority": true
+  },
+  "deltalog_r30": {
+    "result_ref": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R30primitivespin-main-NEW24H_FIRSTDECODE101R30primitivespin_001/RESULT.json",
+      "bytes": 64574,
+      "sha256": "13cb9870152e10b47ed76c3bdc23b51b57fa02776260a8b11571b5ed0348a58a"
+    },
+    "status": "failed",
+    "primary": "ValueError('original child failure retained: DL-four-canary')",
+    "all_created_containers_release_verified": true,
+    "cause": "ND2 standalone leaf omitted established native bootstrap imports. Circular import before NativeReader and before aux allocation matrix; no model algorithm executed.",
+    "classification": "adaptation_error_not_paper_no_go",
+    "next": "R31 adds native dependency import order only; retain211 original software tests plus4 regressions. Deploying new roots; original artifacts preserved. Actual same-image/NPU gates still pending."
+  },
+  "queue": {
+    "ge_2k_capture": "Bind new actual005 owner plus existingGE2K003 component result to r4 capture2048->1 owner; preparation active, notyetadmitted.",
+    "ge_2k_replay": "packets-r3:49 original coverage+12 new; await actual2k captured input, never fabricate futureRefs.",
+    "ge_42_performance": "CaptureOFF whole-model paired entry under construction; match2 warmup(output1)+40 measured(output1024); no E2E claim.",
+    "single_card_parallel": "Not yetadmitted. Existing owner fixedcard6 and independently picks overlapping CPU allocation; aggregate CPU/RAM/disk and physical map binding required before concurrent owners."
+  },
+  "acceptance": {
+    "new_technique_success": false,
+    "whole_model_throughput_10_percent": false,
+    "ttft_tpot_formal": false,
+    "gsm8k": false,
+    "humaneval": false,
+    "mmlu": false
+  },
+  "lessons": [
+    "Successful plugin capture needs independent replay before claiming numerical correctness.",
+    "Retain failure classification: import/canary failure is adaptation failure, not numerical or mechanism failure.",
+    "Ready means exact executable source/input/command/budget/judgment, not completed leaf files.",
+    "Do not claim four-card zeroidle from a single observed process; no continuous utilization evidence here.",
+    "Do not replace the existing regression suite with a smaller new suite during adaptation."
+  ]
+}
