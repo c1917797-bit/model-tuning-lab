@@ -1,0 +1,82 @@
+{
+  "schema": "mst.phase-evidence/v1",
+  "observed_utc": "2026-10-18T03:34:00Z",
+  "authority": {
+    "start_epoch": 1792226600,
+    "cut_epoch": 1792313000,
+    "extended": false
+  },
+  "accepted_new_technology": false,
+  "deltalog": {
+    "operation": "exec-0000000000001661",
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-deltalog-FIRSTDECODE101R34facpu-main-NEW24H_FIRSTDECODE101R34facpu_001/RESULT.json",
+      "bytes": 64469,
+      "sha256": "f76895dceee81347a9c9b968f682dc52670d3ea51f41915aebe1aca548ff84e8"
+    },
+    "status": "failed",
+    "primary": "original child failure retained: DL-real-short-client",
+    "elapsed_seconds": 1694.4212567700306,
+    "all_created_containers_release_verified": true,
+    "raw_capture": "48 prefill and 48 decode files in each of four rank directories; final REPORT exists for namespace PIDs 311,312,314 but missing 313",
+    "attribution": "Current harness publication race: own REPORT immediately followed by DiagnosticStop allowed the engine to stop another rank before final REPORT publication. This is not evidence of algorithm numerical failure.",
+    "next": "R36 immutable all-four report publication barrier; preserve R34 failure; new owner/source/results; collector must not accept partial R34",
+    "all4_numerical_qualification": false
+  },
+  "good_enough": {
+    "operation": "exec-000000000000168f",
+    "result": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GECOLDBUF001ORIGINAL_NPU_001/RESULT.json",
+      "bytes": 583329,
+      "sha256": "2b3d0ebac2f49682024b25dd28dc8150dde136bf8942674d8e6cedf7fa5a37c2"
+    },
+    "physical_card": 6,
+    "logical_card": 0,
+    "exit": 0,
+    "elapsed_seconds": 133.787,
+    "scope": "Two cold native GDN calls, original allocation mode with retained buffer lifetime instrumentation; same input A",
+    "observed": "A/Ad/Ai/output/state finite both calls; output and state bitwise identical between calls and retained native baseline",
+    "limitation": "Earlier native-first NaN not reproduced. Retaining allocation references changes lifetime, so this is not an untouched baseline or proof of a fix. No candidate qualification.",
+    "next": "Separately frozen poison allocation diagnostic, not a production fix",
+    "numerical_qualification": false,
+    "performance": false,
+    "task_accuracy": false
+  },
+  "mxr": {
+    "failed_operation": "exec-0000000000001684",
+    "failed_attribution": "Our diagnostic contract compared capture four-field fingerprints against three-field fingerprints. Not changed inputs or algorithm failure.",
+    "fixed_operation": "exec-0000000000001694",
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-mxr-reference-stages-20261018-002/RESULT.json",
+      "bytes": 814,
+      "sha256": "b93dbf3bb316cc42d455d25e60a65445c9efeec380bc357606daef307fccc4f0"
+    },
+    "attribution_ref": {
+      "path": "/opt/host/vnf/austinov/run-mxr-reference-stages-20261018-002/ATTRIBUTION.json",
+      "bytes": 81462,
+      "sha256": "a1f28ca95ddcbfb181751676695507bcec96f28f445c74f422b3026d4504636b"
+    },
+    "elapsed_seconds": 12.91663,
+    "scope": "Same-image CPU diagnostic of three retained real NPU frames, not a new NPU run",
+    "finding": "Actual domain has no positive g or lower-triangle G differences; safe_exp versus clamp does not explain observed mismatch. Small G/A/B rounding differences propagate to W/U. Not sufficient to relax the canonical oracle or certify candidate.",
+    "next": "Rank0 48-layer native/candidate + unchanged canonical/independent-A checks; four 12-layer bounded shards being prepared; not TP4 192-layer evidence",
+    "numerical_qualification": false
+  },
+  "scheduling": {
+    "snapshot_operation": "exec-00000000000016a5",
+    "snapshot": "No NPU processes on physical4-7, AICore 0%, HBM 2865-2869MiB baseline. Three agents actively preparing R36, GE poison, MXR bounded shards.",
+    "continuous_30min_utilization": "unmeasured",
+    "zero_idle": false,
+    "cause": "Released experiments while successor packaging/binding/consumer closure still incomplete",
+    "correction": "Prioritize complete launchable node over more leaf plans; MAIN alone admits and launches. Independent single-card jobs may overlap only with explicit disjoint device/CPU/output and aggregate memory admission. TP4 paired performance remains exclusive.",
+    "no_dummy_load": true
+  },
+  "git": {
+    "push": "Not attempted this stage: previous authentication failure unresolved; no blind retry"
+  },
+  "excluded": [
+    "No task accuracy results",
+    "No end-to-end performance gains",
+    "No new accepted paper"
+  ]
+}
