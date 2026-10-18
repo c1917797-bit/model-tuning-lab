@@ -1,0 +1,107 @@
+{
+  "NPU_executed": false,
+  "all4_gate_evaluated": false,
+  "all4_qualified": false,
+  "purpose": "historical metadata and control-accounting compatibility only",
+  "qualification": false,
+  "raw_or_math_executed": false,
+  "rows": [
+    {
+      "accounting": {
+        "allocated_worker_cap_bytes": 8053063680,
+        "control_cap_bytes": 16777216,
+        "controls_before_final_bytes": 498716,
+        "final_report_bytes": 353782,
+        "geometry_bytes": 495748,
+        "prefill_control_bytes": 2968,
+        "qualification": false
+      },
+      "geometry_bytes": 495748,
+      "geometry_sha256": "59abded66f5a0dd0ba5161bbe54b42364abbce5db83f336bcc4ae1c5aab037ca",
+      "model_source": {
+        "bytes": 340381,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair34-fa-cpu-20261018-001/SOURCE_MANIFEST.json",
+        "sha256": "e372bc072674ee9dfdf3343ed093fbc2afa322113793d227f9cf3174d9ac4eb6"
+      },
+      "namespace_pid": 311,
+      "old_control_equality": false,
+      "passed": true,
+      "qualification": false,
+      "rank": 0,
+      "raw_or_math_executed": false,
+      "report_bytes": 353782,
+      "report_sha256": "ac3ea6036b189a46c2b28ac73cba5aa8bac96fa4113488ff8bc4cfd607d22013",
+      "rows": 368,
+      "source": {
+        "bytes": 21131,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-selected-firstdecode-renew24h-20261018-001-r34-fa-cpu/SOURCE_MANIFEST.json",
+        "sha256": "b0c5c32c5bd2902d797006c13214f31f68295aabef4ccd8aa04303d8a890d560"
+      }
+    },
+    {
+      "accounting": {
+        "allocated_worker_cap_bytes": 8053063680,
+        "control_cap_bytes": 16777216,
+        "controls_before_final_bytes": 498716,
+        "final_report_bytes": 353782,
+        "geometry_bytes": 495748,
+        "prefill_control_bytes": 2968,
+        "qualification": false
+      },
+      "geometry_bytes": 495748,
+      "geometry_sha256": "abfd7a1ad107882c00ad2180e59be56c2f42da6324dbdb624fdef15f7d939f19",
+      "model_source": {
+        "bytes": 340381,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair34-fa-cpu-20261018-001/SOURCE_MANIFEST.json",
+        "sha256": "e372bc072674ee9dfdf3343ed093fbc2afa322113793d227f9cf3174d9ac4eb6"
+      },
+      "namespace_pid": 312,
+      "old_control_equality": false,
+      "passed": true,
+      "qualification": false,
+      "rank": 1,
+      "raw_or_math_executed": false,
+      "report_bytes": 353782,
+      "report_sha256": "504ca674674b082c4fa310d0274f6da46fbb4c3fc5c47b4aa6a766dcd9c3059c",
+      "rows": 368,
+      "source": {
+        "bytes": 21131,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-selected-firstdecode-renew24h-20261018-001-r34-fa-cpu/SOURCE_MANIFEST.json",
+        "sha256": "b0c5c32c5bd2902d797006c13214f31f68295aabef4ccd8aa04303d8a890d560"
+      }
+    },
+    {
+      "accounting": {
+        "allocated_worker_cap_bytes": 8053063680,
+        "control_cap_bytes": 16777216,
+        "controls_before_final_bytes": 498716,
+        "final_report_bytes": 353782,
+        "geometry_bytes": 495748,
+        "prefill_control_bytes": 2968,
+        "qualification": false
+      },
+      "geometry_bytes": 495748,
+      "geometry_sha256": "e994792775474d3c752ffaa05ef8ba3a64cdf9125898aca67946f4394a5f63d5",
+      "model_source": {
+        "bytes": 340381,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair34-fa-cpu-20261018-001/SOURCE_MANIFEST.json",
+        "sha256": "e372bc072674ee9dfdf3343ed093fbc2afa322113793d227f9cf3174d9ac4eb6"
+      },
+      "namespace_pid": 314,
+      "old_control_equality": false,
+      "passed": true,
+      "qualification": false,
+      "rank": 3,
+      "raw_or_math_executed": false,
+      "report_bytes": 353782,
+      "report_sha256": "728f65588107af46dee23755b8b6b6ecf4f3ec4fbaa8a626d9b58b3b8e65299b",
+      "rows": 368,
+      "source": {
+        "bytes": 21131,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-selected-firstdecode-renew24h-20261018-001-r34-fa-cpu/SOURCE_MANIFEST.json",
+        "sha256": "b0c5c32c5bd2902d797006c13214f31f68295aabef4ccd8aa04303d8a890d560"
+      }
+    }
+  ],
+  "schema": "deltalog.r34-geometry-consumer-metadata-fixture/v1"
+}

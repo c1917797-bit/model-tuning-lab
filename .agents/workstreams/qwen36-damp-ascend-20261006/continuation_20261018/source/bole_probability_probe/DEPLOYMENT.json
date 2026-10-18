@@ -1,0 +1,73 @@
+{
+  "bind_argv": [
+    "python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/bind.py",
+    "--execute",
+    "--template-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/SOURCE_TEMPLATE.json\",\"bytes\":4491,\"sha256\":\"9ef170ed9ad072b56ea3664781e882eb651ecf1b2668f08d9545669d2a3bb135\"}"
+  ],
+  "constraints": [
+    "MAIN review and actual current resource admission required.",
+    "Use byte-exact files; do not generate, deploy or overwrite SOURCE_BOUND.json locally.",
+    "Bind once only after verifying new source/output roots and all fixed input references.",
+    "Do not overwrite or reuse an existing output leaf.",
+    "Use original cutoff1792313000; no automatic extension.",
+    "Expected bound reference is a deterministic prediction, verify actual bind output before execution."
+  ],
+  "deployable_files": [
+    "owner.py",
+    "bind.py",
+    "plan.py",
+    "recover.py",
+    "probe.py",
+    "test_probe.py",
+    "test_binding.py",
+    "PLAN.json",
+    "PROVENANCE.json",
+    "REVIEW.md",
+    "SOURCE_TEMPLATE.json"
+  ],
+  "execute_argv_template": [
+    "python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/owner.py",
+    "--execute",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/SOURCE_BOUND.json\",\"bytes\":4286,\"sha256\":\"d81e225e55621cc132f48524ad54e411177be6078fc6eb56c60400cf934ddb89\"}",
+    "--host-cpu",
+    "<MAIN_ADMITTED_HOST_CPU>",
+    "--guest-cpu",
+    "<MAIN_ADMITTED_DISTINCT_GUEST_CPU>",
+    "--output",
+    "/opt/host/vnf/austinov/run-bole-fa-probability-quantization-MAIN-RENEW24H_001/fa/consumer"
+  ],
+  "expected_bound_ref": {
+    "bytes": 4286,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/SOURCE_BOUND.json",
+    "sha256": "d81e225e55621cc132f48524ad54e411177be6078fc6eb56c60400cf934ddb89"
+  },
+  "local_package": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/bole_probability_probe",
+  "qualified": false,
+  "remote_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001",
+  "review_helper_not_in_runtime_manifest": [
+    "DEPLOYMENT.json"
+  ],
+  "schema": "bole.fa-probability-probe-deployment-review/v1",
+  "source_audit_argv": [
+    "python3",
+    "-I",
+    "-B",
+    "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/owner.py",
+    "--source-audit",
+    "--source-ref",
+    "{\"path\":\"/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/SOURCE_BOUND.json\",\"bytes\":4286,\"sha256\":\"d81e225e55621cc132f48524ad54e411177be6078fc6eb56c60400cf934ddb89\"}"
+  ],
+  "template_ref": {
+    "bytes": 4491,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/SOURCE_TEMPLATE.json",
+    "sha256": "9ef170ed9ad072b56ea3664781e882eb651ecf1b2668f08d9545669d2a3bb135"
+  }
+}

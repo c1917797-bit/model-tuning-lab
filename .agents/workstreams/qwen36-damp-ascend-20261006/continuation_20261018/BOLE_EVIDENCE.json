@@ -1,0 +1,957 @@
+{
+  "authority_ref": {
+    "bytes": 3012,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+    "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+  },
+  "checkpoint_content_policy": {
+    "full_inspect_embedded": false,
+    "old_evidence_or_flags_modified": false,
+    "raw_payloads_embedded": false,
+    "small_refs_and_scalar_findings_only": true
+  },
+  "conclusions": {
+    "excluded_for_observed_failures": [
+      "Observed CPU64 versus independent compensated FP64 reference differences are far below every failure margin; their summation-order difference does not explain these failures.",
+      "Every failed element has a BF16 representable value within the unchanged bound; final BF16 representability alone does not force failure."
+    ],
+    "not_established": [
+      "Actual FA kernel internal precision or implementation root cause",
+      "Collective or hardware root cause",
+      "All possible BF16 probability/online-softmax implementations excluded",
+      "BOLE full model, performance or task qualification"
+    ],
+    "not_supported": [
+      "The single intervention P64 -> nearest-even BF16 -> FP64 without renormalization, with otherwise compensated QK/softmax/PV and final BF16, does not explain the selected two failure witnesses."
+    ]
+  },
+  "historical_execution_cutoff_utc": "2026-10-18T08:43:20Z",
+  "latest_observation": {
+    "operation_id": "exec-000000000000171c",
+    "host_utc": "2026-10-18T19:07:12Z",
+    "reported_by": "MAIN fresh actual read-only host observation",
+    "replay_output_root": "/opt/host/vnf/austinov/run-bole-fia-fixed-frame-replay-MAIN-RENEW24H_001/replay",
+    "replay_output_root_exists": false,
+    "cpu_result_path": "/opt/host/vnf/austinov/run-bole-fia-fixed-frame-replay-MAIN-RENEW24H_001/replay/cpu/RESULT.json",
+    "cpu_result_exists": false,
+    "numeric_result_path": "/opt/host/vnf/austinov/run-bole-fia-fixed-frame-replay-MAIN-RENEW24H_001/replay/numeric/RESULT.json",
+    "numeric_result_exists": false,
+    "checked_owned_label_lists": 2,
+    "both_owned_label_lists_empty": true,
+    "whole_host_idle_claimed": false,
+    "historical_authorization_cutoff_passed": true,
+    "operation_receipt_ref_pending": true
+  },
+  "repository_checkpoint_directory": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/",
+  "current_qualification_status": {
+    "full_model": "pending",
+    "performance": "pending",
+    "task": "pending",
+    "original_R6_FA_failures_preserved": true,
+    "new_numerical_qualification_established": false,
+    "automatic_authorization_extension": false
+  },
+  "next_experiment": {
+    "CPU_compensated_reference_used_for_qualification": false,
+    "baseline_output_elements": {
+      "native": 1536,
+      "tree": 4608
+    },
+    "baseline_values": {
+      "native": 0,
+      "tree": 2
+    },
+    "both_complete_baselines_required": true,
+    "decision_fields": [
+      "whole-output bitwise matches",
+      "absolute L2 error to original NPU output",
+      "unchanged pointwise failures and their locations",
+      "passing-control behavior",
+      "exact producer/callable/source/argument identity"
+    ],
+    "fixed_cases": [
+      {
+        "id": "tree-r1-l43-n2",
+        "key_tokens": 133,
+        "kind": "tree",
+        "label": "tree-node2",
+        "layer": 43,
+        "node": 2,
+        "original_failed_elements": 1
+      },
+      {
+        "id": "native-r1-l43-p2-n2",
+        "key_tokens": 133,
+        "kind": "native",
+        "label": "native-path2-node2",
+        "layer": 43,
+        "node": 2,
+        "original_failed_elements": 1,
+        "path": 2
+      },
+      {
+        "id": "tree-r1-l43-n0-pass-control",
+        "key_tokens": 132,
+        "kind": "tree",
+        "label": "tree-node0",
+        "layer": 43,
+        "node": 0,
+        "original_failed_elements": 0
+      }
+    ],
+    "intervention_only_argument": "inner_precise",
+    "intervention_unsupported_action": "retain actual exception; no fallback",
+    "intervention_values": {
+      "native": 2,
+      "tree": 0
+    },
+    "kernel_causality_claim_allowed": false,
+    "last_full_NPU_start_utc": "2026-10-18T08:28:20Z",
+    "local_frozen_probe_files": {
+      "PLAN.json": {
+        "bytes": 6591,
+        "remote_bound_source_ref_pending": false,
+        "sha256": "1f58be21f6175862b966b680b3b57cbc7edc1ce380f8694849c53ff4d4544d3a"
+      },
+      "plan.py": {
+        "bytes": 9674,
+        "remote_bound_source_ref_pending": false,
+        "sha256": "1d11491ef0bb06de4668ffa4dcaabf3fe3088524b1d7704794e2ea5915982b65"
+      },
+      "probe.py": {
+        "bytes": 27539,
+        "remote_bound_source_ref_pending": false,
+        "sha256": "0e78561db1667f18df737db7adccee104f9e48147bdae9c9c38938142e20d4d1"
+      },
+      "test_probe.py": {
+        "bytes": 7349,
+        "remote_bound_source_ref_pending": false,
+        "sha256": "7171b7e98ceb7698194a8f6bc0b9aeae25746a7d2edd12560e42d9e0701607b0"
+      }
+    },
+    "local_probe_controls": {
+      "Torch_or_raw_experiment_executed_locally": false,
+      "command": "python -I -B test_probe.py",
+      "executed": 20,
+      "passed": true,
+      "skipped": 0
+    },
+    "local_frozen_package_controls": {
+      "frozen_at_utc": "2026-10-18T08:15:56Z",
+      "probe_controls": 20,
+      "owner_and_ticket_controls": 24,
+      "total_controls": 44,
+      "passed": true,
+      "skipped": 0,
+      "same_image_actual_preflight_pass_claimed": false,
+      "Torch_raw_or_NPU_experiment_executed_locally": false
+    },
+    "actual_source_binding": {
+      "operation_id": "exec-000000000000171b",
+      "exit_code": 0,
+      "elapsed_seconds_approx": 4.688,
+      "full_readset": 53,
+      "source_ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/SOURCE_MANIFEST.json",
+        "bytes": 12699,
+        "sha256": "535848eb04738414f099c2d261ba372611c080577fb06c3e0ebcad01b702c5e1"
+      },
+      "source_bound": true,
+      "CPU_preflight_executed": false,
+      "NPU_replay_executed": false,
+      "qualified": false
+    },
+    "post_binding_stop": {
+      "attempted_action": "source-audit through codex_apps/awmcp.skill_run_write",
+      "tool_error": "tool call rejected because the catalog changed after codex_apps/awmcp.skill_run_write was prepared",
+      "classification": "tool_catalog_changed_before_execution",
+      "operation_id": null,
+      "remote_action_executed": false,
+      "automatic_safety_approval_rejection": false,
+      "CPU_test_failure": false,
+      "subsequent_mkdir_call_issued": false,
+      "CPU_owner_call_issued": false,
+      "NPU_owner_call_issued": false,
+      "ABI_ticket_produced": false,
+      "baseline_result_produced": false,
+      "intervention_result_produced": false
+    },
+    "model3600_contract_unchanged": true,
+    "native_reference_is_diagnostic_only": true,
+    "original_gate_replaced": false,
+    "proposed_remote_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001",
+    "status": "source_bound_actual_CPU_and_NPU_not_started_historical_window_expired",
+    "steps": [
+      "Obtain a new explicit execution window and review a new immutable successor source bound to it; retain the expired source and historical failures unchanged.",
+      "Same-source Devices[] preflight: exact source/raw/producer/report/mask/layout/scale plus original complete float/double FA gate and actual installed ABI; verify release before ticket.",
+      "After fresh independent component900 admission, actual physical4/logical0 SMI/proc/argv/MAIN_ARM, replay both original complete calls.",
+      "Require full4608/1536 BF16-word matches and fixed original1/1/0 failure/pass sets before either intervention.",
+      "Hold all original per-branch tensors/kwargs fixed and change only tree inner_precise2-to0 / native0-to2; preserve all original failures and unsupported exceptions."
+    ],
+    "whole_NPU_seconds": 900
+  },
+  "next_readonly_source_audit": {
+    "scope": "completed read-only review of original R6 source bodies and historical ABI; distinct from the unexecuted new replay runtime source-audit call",
+    "actual_abi_chain": {
+      "actual_abi": {
+        "bytes": 5425,
+        "path": "/opt/host/vnf/austinov/run-bole-paged-tree118trepair1-MAIN-20261016-001/paged/cpu/preflight/ACTUAL_FIA_ABI.json",
+        "sha256": "164f89472d6adecb55c8eeb76b23e04c774c4040dbfb8eaa3ad5d9fccd3815a2"
+      },
+      "component_source": {
+        "bytes": 25737,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-paged-tree-owned-new24h-v1-118t-repair1/SOURCE_MANIFEST.json",
+        "sha256": "fdafbb8872ad9da1ff8150ddafa1e66acae3a80e05aa2b62bb04202da6e33faa"
+      },
+      "numeric_owner": {
+        "bytes": 1684,
+        "path": "/opt/host/vnf/austinov/run-bole-paged-tree118trepair1-MAIN-20261016-001/paged/numeric/RESULT.json",
+        "sha256": "e7d9250ab7ab6add24aa53be4cae153ec3400a186cc96ae3e5fd5567aa9b0299"
+      },
+      "stage": {
+        "bytes": 1471,
+        "path": "/opt/host/vnf/austinov/run-bole-paged-tree118trepair1-MAIN-20261016-001/paged/numeric/numeric/result/STAGE_RESULT.json",
+        "sha256": "0699f81faf92726eaea2eb6ce50b4463e4fd30e23a7f494c001513ff0f8aba18"
+      }
+    },
+    "allowed_values_enumeration_found": false,
+    "cross_domain_support_requires_actual_measurement": true,
+    "inner_precise_numeric_semantics": null,
+    "installed_abi_parameter": "int inner_precise=0",
+    "native_call_located": {
+      "actual_seq_lengths": [
+        1
+      ],
+      "actual_seq_lengths_kv": [
+        133
+      ],
+      "callable": "torch_npu.npu_fused_infer_attention_score",
+      "explicitly_omitted_arguments": [
+        "atten_mask",
+        "block_table",
+        "block_size"
+      ],
+      "file_ref": {
+        "bytes": 30536,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/model_entry.py",
+        "sha256": "7b2cd9e826e7d97e691b78edbd10e7fccdfed04fc3e17dd8fddb054b661a39f6"
+      },
+      "function": "Bridge._native_fa_ar",
+      "inner_precise": 0,
+      "input_layout": "BNSD",
+      "key_value_shape": [
+        1,
+        1,
+        133,
+        256
+      ],
+      "next_tokens": 2147483647,
+      "num_heads": 6,
+      "num_key_value_heads": 1,
+      "pre_tokens": 2147483647,
+      "query_shape": [
+        1,
+        6,
+        1,
+        256
+      ],
+      "scale": 0.0625,
+      "sparse_mode": 0
+    },
+    "original_oracle": {
+      "file_ref": {
+        "bytes": 14336,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/independent_model.py",
+        "sha256": "cdffc7dcb59b744788c2b736a5607e7218a9e13595b0f6a7d10f450a4fb6ad72"
+      },
+      "function": "attention",
+      "gate_precisions": [
+        "float64",
+        "float32"
+      ],
+      "whole_function_reused_without_modification": true
+    },
+    "prefill_mapping_is_not_softmax_math": true,
+    "purpose": "Trace actual tree/native callable, arguments, dtype, layout, mask, scale, block-table and any explicit cast before proposing another numerical intervention.",
+    "remaining_own_refs": [],
+    "runtime_FA_ref": {
+      "bytes": 88246,
+      "path": "/vllm-workspace/vllm-ascend/vllm_ascend/attention/attention_v1.py",
+      "sha256": "80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390"
+    },
+    "status": "original_producers_dispatcher_and_original_CPU_gate_full_bodies_verified",
+    "tree_call_located": {
+      "block_table": [
+        [
+          0,
+          1
+        ]
+      ],
+      "block_table_dtype": "torch.int32",
+      "callable": "torch_npu.npu_fused_infer_attention_score",
+      "caller": {
+        "bytes": 30536,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/model_entry.py",
+        "sha256": "7b2cd9e826e7d97e691b78edbd10e7fccdfed04fc3e17dd8fddb054b661a39f6"
+      },
+      "file_ref": {
+        "bytes": 8622,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/adapter.py",
+        "sha256": "37369161fbadad74e0f727c62e769069277d6f2696f7a8b2d88d67e92d93dc59"
+      },
+      "full_tree_queries_required": 3,
+      "function": "native",
+      "key_value_shape": [
+        2,
+        1,
+        128,
+        256
+      ],
+      "mask_dtype": "torch.bool",
+      "mask_polarity": "True forbids",
+      "mask_shape": [
+        1,
+        1,
+        3,
+        256
+      ],
+      "paged_adapter_identity_and_complete_call_arguments_pending": false,
+      "parameters": {
+        "actual_seq_lengths": [
+          3
+        ],
+        "actual_seq_lengths_kv": [
+          134
+        ],
+        "block_size": 128,
+        "inner_precise": 2,
+        "input_layout": "BNSD",
+        "next_tokens": 2147483647,
+        "num_heads": 6,
+        "num_key_value_heads": 1,
+        "pre_tokens": 2147483647,
+        "scale": 0.0625,
+        "sparse_mode": 1
+      },
+      "query_shape": [
+        1,
+        6,
+        3,
+        256
+      ]
+    },
+    "verified_body_refs": [
+      {
+        "bytes": 30536,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/model_entry.py",
+        "sha256": "7b2cd9e826e7d97e691b78edbd10e7fccdfed04fc3e17dd8fddb054b661a39f6"
+      },
+      {
+        "bytes": 6050,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/fa_prefill131r10.py",
+        "sha256": "aebd160c887f660caa1d6d8ac5cbb9050ff6d7b78adc2b13423d900485f983e7"
+      },
+      {
+        "bytes": 4618,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/native_seams.py",
+        "sha256": "2535f814687312bae32069edb9bc37d0f32dc989b58cc21a3fb67044eccd6dd4"
+      },
+      {
+        "bytes": 8622,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/adapter.py",
+        "sha256": "37369161fbadad74e0f727c62e769069277d6f2696f7a8b2d88d67e92d93dc59"
+      },
+      {
+        "bytes": 8110,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/worker_entry.py",
+        "sha256": "3f204e1209b2abd8fbae660e629b51312cb1bec616d6a8ee399a3f2616edd427"
+      },
+      {
+        "bytes": 14631,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/model_smoke.py",
+        "sha256": "b466db880596a4b688c5010f9febd1d8744212c8863efb3438e7fe42e009eba8"
+      },
+      {
+        "bytes": 4020,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/component_gate.py",
+        "sha256": "95891a343d1c0c12fc2372d6e21ecdc8aec2a541c1c76c273b9386c0445ae366"
+      },
+      {
+        "bytes": 14336,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/independent_model.py",
+        "sha256": "cdffc7dcb59b744788c2b736a5607e7218a9e13595b0f6a7d10f450a4fb6ad72"
+      },
+      {
+        "bytes": 10031,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/consume_model.py",
+        "sha256": "d43a8ada93bf094a5af7af7adeff21d4c507759ebf582268a6379b37fc9b6475"
+      },
+      {
+        "bytes": 88246,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/evidence/ascend_attention.py",
+        "sha256": "80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390"
+      }
+    ]
+  },
+  "original_R6": {
+    "FA_failed_rank_layer_cases": 22,
+    "FA_rank_layer_cases": 64,
+    "accepted_path_writeback_restore_pass": true,
+    "component_checks_pass": false,
+    "greedy_identity_pass": true,
+    "model_ready": false,
+    "production_ready": false,
+    "rank_report_refs": [
+      {
+        "bytes": 110003,
+        "path": "/opt/host/vnf/austinov/run-bole-r6-20261017-001-MAIN/cpu-consumer/RANK-0.json",
+        "sha256": "a8213b17da0f597400367504209479dde0ca6b1474a9acf78af4e86a787684fe"
+      },
+      {
+        "bytes": 110007,
+        "path": "/opt/host/vnf/austinov/run-bole-r6-20261017-001-MAIN/cpu-consumer/RANK-1.json",
+        "sha256": "751fad500cd4d530f639bb3d35c8c07ea719c3493c798f17b02072c4f197ce32"
+      },
+      {
+        "bytes": 110083,
+        "path": "/opt/host/vnf/austinov/run-bole-r6-20261017-001-MAIN/cpu-consumer/RANK-2.json",
+        "sha256": "03d352d9856e2813b40e1fa8d3f2bcc30bfa98d39b4f32aa02ec4e2be7850e83"
+      },
+      {
+        "bytes": 109958,
+        "path": "/opt/host/vnf/austinov/run-bole-r6-20261017-001-MAIN/cpu-consumer/RANK-3.json",
+        "sha256": "32b49c026fef58890108436f3de7abbc7b5940d0bba0236e99dd8b0ad4901d21"
+      }
+    ],
+    "scheduler_committed": false,
+    "selected_rank1_raw_ref": {
+      "bytes": 776474709,
+      "path": "/opt/host/vnf/austinov/run-bole-r6-20261017-001-MAIN/dense/receipts/BOLE-TREE-RANK-1.pt",
+      "sha256": "21ab99d4a503f45f750c1926eb383b633b7ced8e9f24b767275c107da89f1c34"
+    },
+    "source_ref": {
+      "bytes": 81841,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/SOURCE_BOUND.json",
+      "sha256": "f3303cec9fea4c7445e81373e21cd0da5884be495b72a8847420bf4400bb92f5"
+    }
+  },
+  "probability_diagnostic": {
+    "NPU": false,
+    "PV_both_arms": "Python FP64 products/math.fsum",
+    "QK_and_softmax": "independent Python FP64 products/math.fsum/math.exp",
+    "all_three_L2_errors_to_actual_increased": true,
+    "all_three_bitwise_match_counts_decreased": true,
+    "attribution_ref": {
+      "bytes": 970,
+      "path": "/opt/host/vnf/austinov/run-bole-fa-probability-quantization-MAIN-RENEW24H_001/fa/consumer/ATTRIBUTION.json",
+      "sha256": "5b5d19604b670d03bdc7bd28f1a3a49abd580ae878d95932ac8331b2f0d1d4e1"
+    },
+    "case_count": 3,
+    "cases": [
+      {
+        "case": {
+          "id": "tree-r1-l43-n2",
+          "key_tokens": 133,
+          "kind": "tree",
+          "label": "tree-node2",
+          "layer": 43,
+          "node": 2,
+          "original_failed_elements": 1
+        },
+        "final_only_reference_failed_elements": 0,
+        "final_only_vs_actual": {
+          "bitwise_equal_elements": 1257,
+          "elements": 1536,
+          "l2_error": 0.05996930243842369,
+          "max_absolute_error": 0.015625
+        },
+        "intervention_changed_output_elements": 353,
+        "original_failed_elements": 1,
+        "probability_bf16_reference_failed_elements": 1,
+        "probability_bf16_reference_failed_flat_indices": [
+          1467
+        ],
+        "probability_bf16_vs_actual": {
+          "bitwise_equal_elements": 1160,
+          "elements": 1536,
+          "l2_error": 0.0755756600732461,
+          "max_absolute_error": 0.015625
+        },
+        "witness_points": [
+          {
+            "bound": 0.0015946094877081064,
+            "channel": 61,
+            "final_only_actual_error": 0.0029296875,
+            "final_only_bf16": -0.0595703125,
+            "head": 2,
+            "intervention_exact_actual_bits": false,
+            "original_actual": -0.0625,
+            "probability_bf16": -0.05810546875,
+            "probability_bf16_actual_error": 0.00439453125,
+            "reference_compensated64": -0.05946094877081063
+          }
+        ]
+      },
+      {
+        "case": {
+          "id": "native-r1-l43-p2-n2",
+          "key_tokens": 133,
+          "kind": "native",
+          "label": "native-path2-node2",
+          "layer": 43,
+          "node": 2,
+          "original_failed_elements": 1,
+          "path": 2
+        },
+        "final_only_reference_failed_elements": 0,
+        "final_only_vs_actual": {
+          "bitwise_equal_elements": 1244,
+          "elements": 1536,
+          "l2_error": 0.05956894162466028,
+          "max_absolute_error": 0.015625
+        },
+        "intervention_changed_output_elements": 321,
+        "original_failed_elements": 1,
+        "probability_bf16_reference_failed_elements": 2,
+        "probability_bf16_reference_failed_flat_indices": [
+          1208,
+          1467
+        ],
+        "probability_bf16_vs_actual": {
+          "bitwise_equal_elements": 1123,
+          "elements": 1536,
+          "l2_error": 0.07939101252286948,
+          "max_absolute_error": 0.015625
+        },
+        "witness_points": [
+          {
+            "bound": 0.0012900841203983666,
+            "channel": 61,
+            "final_only_actual_error": 0.0023193359375,
+            "final_only_bf16": -0.029052734375,
+            "head": 2,
+            "intervention_exact_actual_bits": false,
+            "original_actual": -0.0267333984375,
+            "probability_bf16": -0.0294189453125,
+            "probability_bf16_actual_error": 0.002685546875,
+            "reference_compensated64": -0.029008412039836663
+          }
+        ]
+      },
+      {
+        "case": {
+          "id": "tree-r1-l43-n0-pass-control",
+          "key_tokens": 132,
+          "kind": "tree",
+          "label": "tree-node0",
+          "layer": 43,
+          "node": 0,
+          "original_failed_elements": 0
+        },
+        "final_only_reference_failed_elements": 0,
+        "final_only_vs_actual": {
+          "bitwise_equal_elements": 1328,
+          "elements": 1536,
+          "l2_error": 0.06687441574355664,
+          "max_absolute_error": 0.015625
+        },
+        "intervention_changed_output_elements": 304,
+        "original_failed_elements": 0,
+        "probability_bf16_reference_failed_elements": 1,
+        "probability_bf16_reference_failed_flat_indices": [
+          293
+        ],
+        "probability_bf16_vs_actual": {
+          "bitwise_equal_elements": 1246,
+          "elements": 1536,
+          "l2_error": 0.084699736381898,
+          "max_absolute_error": 0.015625
+        },
+        "witness_points": []
+      }
+    ],
+    "diagnostic_complete": true,
+    "elements_per_case": 1536,
+    "final_inspect_ref": {
+      "bytes": 23502,
+      "path": "/opt/host/vnf/austinov/run-bole-fa-probability-quantization-MAIN-RENEW24H_001/fa/consumer/FINAL_INSPECT.json",
+      "sha256": "766850099164c0c1e71acce9e18081ca081d31ae799497bce5e3c237f2b03d74"
+    },
+    "final_rounding_both_arms": "nearest-even BF16",
+    "operation_id": "exec-00000000000016fb",
+    "primary": null,
+    "probe_ref": {
+      "bytes": 16408,
+      "path": "/opt/host/vnf/austinov/run-bole-fa-probability-quantization-MAIN-RENEW24H_001/fa/consumer/PROBE.json",
+      "sha256": "cdc83b676ebca404ac1db70d85df77738982d4fd1bad1bf3e07f9e980c94bd9d"
+    },
+    "qualified": false,
+    "release": {
+      "ExecIDs": null,
+      "OOMKilled": false,
+      "cid": "8ca0881c2d3fd01e8f809ed5e330b1fde3812c5b3c6b901f0af3ceffe2d23e2e",
+      "exit_code": 0,
+      "finished_at_utc": "2026-10-18T07:30:35.07097103Z",
+      "pid": 0,
+      "resource_release_verified": true,
+      "running": false,
+      "stopped_retained": true
+    },
+    "resources": {
+      "Devices": [],
+      "guest_cpu_count": 1,
+      "guest_memory_bytes": 8589934592,
+      "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+      "network_mode": "none",
+      "readonly_rootfs": true
+    },
+    "result_ref": {
+      "bytes": 876,
+      "path": "/opt/host/vnf/austinov/run-bole-fa-probability-quantization-MAIN-RENEW24H_001/fa/consumer/RESULT.json",
+      "sha256": "c503213094f825302a3eeefd1c8d646d811bed7ccdca57a174eb7b234ad45b91"
+    },
+    "same_image_controls": 12,
+    "same_image_controls_passed": true,
+    "secondary": [],
+    "simple_probability_BF16_explanation_supported": false,
+    "software_ref": {
+      "bytes": 44,
+      "path": "/opt/host/vnf/austinov/run-bole-fa-probability-quantization-MAIN-RENEW24H_001/fa/consumer/SOFTWARE.json",
+      "sha256": "7e9465a3191e0b7c67d21741fd3628a024bea6c5aebf714af736281ec786f838"
+    },
+    "sole_intervention": "P64 -> nearest-even BF16 -> FP64; no renormalization",
+    "source_ref": {
+      "bytes": 4286,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/SOURCE_BOUND.json",
+      "sha256": "d81e225e55621cc132f48524ad54e411177be6078fc6eb56c60400cf934ddb89"
+    },
+    "whole_elapsed_seconds": 13.373979189957026
+  },
+  "record_is_not_future_execution_authorization": true,
+  "record_status": "MAIN small-evidence repository checkpoint updated through actual operation171c",
+  "recorded_at_utc": "2026-10-18T07:39:28.951574+00:00",
+  "rounding_diagnostic": {
+    "NPU": false,
+    "attribution_ref": {
+      "bytes": 1524,
+      "path": "/opt/host/vnf/austinov/run-bole-fa-rounding-binding-MAIN-RENEW24H_001/fa/consumer/ATTRIBUTION.json",
+      "sha256": "1bc14dae4bfd018eddefe742b2f27d00dde69708e58dff388b3ef07839bf5326"
+    },
+    "diagnostic_complete": true,
+    "exact_original_float_double_and_new_tree_failed_case_alignment": true,
+    "final_inspect_ref": {
+      "bytes": 26447,
+      "path": "/opt/host/vnf/austinov/run-bole-fa-rounding-binding-MAIN-RENEW24H_001/fa/consumer/FINAL_INSPECT.json",
+      "sha256": "fb0fe88e947ff3ee0d71dae59dbe9051a95905ebdbb8251ad50e6435af6d9d72"
+    },
+    "native_rank_layer_cases": [
+      [
+        0,
+        31
+      ],
+      [
+        0,
+        39
+      ],
+      [
+        0,
+        47
+      ],
+      [
+        0,
+        51
+      ],
+      [
+        0,
+        59
+      ],
+      [
+        0,
+        63
+      ],
+      [
+        1,
+        23
+      ],
+      [
+        1,
+        43
+      ],
+      [
+        1,
+        51
+      ],
+      [
+        1,
+        59
+      ],
+      [
+        1,
+        63
+      ],
+      [
+        2,
+        27
+      ],
+      [
+        2,
+        31
+      ],
+      [
+        2,
+        35
+      ],
+      [
+        2,
+        39
+      ],
+      [
+        2,
+        43
+      ],
+      [
+        2,
+        47
+      ],
+      [
+        2,
+        51
+      ],
+      [
+        2,
+        55
+      ],
+      [
+        2,
+        59
+      ],
+      [
+        3,
+        15
+      ],
+      [
+        3,
+        23
+      ],
+      [
+        3,
+        39
+      ],
+      [
+        3,
+        43
+      ],
+      [
+        3,
+        47
+      ],
+      [
+        3,
+        51
+      ],
+      [
+        3,
+        55
+      ],
+      [
+        3,
+        59
+      ],
+      [
+        3,
+        63
+      ]
+    ],
+    "operation_id": "exec-00000000000016f0",
+    "primary": null,
+    "qualified": false,
+    "rank_report_refs": [
+      {
+        "bytes": 41937,
+        "path": "/opt/host/vnf/austinov/run-bole-fa-rounding-binding-MAIN-RENEW24H_001/fa/consumer/RANK-0.json",
+        "sha256": "51559373034cd2aa020bed9b14886fe9765a83b798286028f67a02db72bb5cf4"
+      },
+      {
+        "bytes": 38445,
+        "path": "/opt/host/vnf/austinov/run-bole-fa-rounding-binding-MAIN-RENEW24H_001/fa/consumer/RANK-1.json",
+        "sha256": "b70166459442dd5dd4c43f4d3fb044b71bd4b9980a5df0c20061bbf6d35d23b6"
+      },
+      {
+        "bytes": 40784,
+        "path": "/opt/host/vnf/austinov/run-bole-fa-rounding-binding-MAIN-RENEW24H_001/fa/consumer/RANK-2.json",
+        "sha256": "f96741d96ed4d76536ac2b0db05efd9707a8f24c5410c954f3ab0f82e15d34f7"
+      },
+      {
+        "bytes": 42716,
+        "path": "/opt/host/vnf/austinov/run-bole-fa-rounding-binding-MAIN-RENEW24H_001/fa/consumer/RANK-3.json",
+        "sha256": "12cd4ba0a2d4e8f9f5ef28b3d607bc70ab3bf7108baaf9c78e260fdc4f079e44"
+      }
+    ],
+    "release": {
+      "ExecIDs": null,
+      "OOMKilled": false,
+      "cid": "7646db388fbead3a7e5e451a5cdf27af81fc5c9b0840fe4e491f181e7f9836c7",
+      "exit_code": 0,
+      "finished_at_utc": "2026-10-18T06:58:22.81894048Z",
+      "pid": 0,
+      "resource_release_verified": true,
+      "running": false,
+      "stopped_retained": true
+    },
+    "resources": {
+      "Devices": [],
+      "guest_cpu_count": 1,
+      "guest_memory_bytes": 8589934592,
+      "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+      "network_mode": "none",
+      "readonly_rootfs": true
+    },
+    "result_ref": {
+      "bytes": 855,
+      "path": "/opt/host/vnf/austinov/run-bole-fa-rounding-binding-MAIN-RENEW24H_001/fa/consumer/RESULT.json",
+      "sha256": "4b262aca2d2e8237bda634b9694844494d412320ff5e4ecd1860296db7e359c0"
+    },
+    "same_image_controls": 4,
+    "same_image_controls_passed": true,
+    "secondary": [],
+    "software_ref": {
+      "bytes": 43,
+      "path": "/opt/host/vnf/austinov/run-bole-fa-rounding-binding-MAIN-RENEW24H_001/fa/consumer/SOFTWARE.json",
+      "sha256": "13b1bf8858937645e41d329eff8dce287ae5cecac9bc4649bcc0679d3019b64b"
+    },
+    "source_ref": {
+      "bytes": 3917,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-rounding-owner-binding-renew24h-v1-001/SOURCE_BOUND.json",
+      "sha256": "47a9af8fd83f82677970efa8c5cb1897ccbdfaa9eef5381a9be0f960c0bdc9d8"
+    },
+    "summary": {
+      "joint": {
+        "all_failed_points_best_BF16_pass": true,
+        "all_failed_sets_unchanged": true,
+        "blocks": 448,
+        "compared_elements": 688128,
+        "failed_blocks": 73,
+        "failed_elements": 98,
+        "intersection_failed_rank_layer_cases": 19,
+        "max_failed_point_CPU64_order_delta": 1.2490009027033011e-15,
+        "max_failed_point_best_BF16_error_over_bound": 0.13100440705316702,
+        "minimum_failed_point_gate_excess": 2.237440733026015e-06,
+        "union_failed_rank_layer_cases": 32
+      },
+      "native_own_inputs": {
+        "blocks": 256,
+        "compensated_failed_elements": 60,
+        "elements": 393216,
+        "failed_blocks": 43,
+        "failed_elements": 60,
+        "failed_rank_layer_cases": 29,
+        "failed_set_changed_blocks": 0,
+        "max_CPU64_order_delta_all_elements": 8.526512829121202e-14
+      },
+      "tree": {
+        "blocks": 192,
+        "compensated_failed_elements": 38,
+        "elements": 294912,
+        "failed_blocks": 30,
+        "failed_elements": 38,
+        "failed_rank_layer_cases": 22,
+        "failed_set_changed_blocks": 0,
+        "max_CPU64_order_delta_all_elements": 5.684341886080802e-14
+      }
+    },
+    "tree_rank_layer_cases": [
+      [
+        0,
+        31
+      ],
+      [
+        0,
+        51
+      ],
+      [
+        0,
+        59
+      ],
+      [
+        0,
+        63
+      ],
+      [
+        1,
+        23
+      ],
+      [
+        1,
+        31
+      ],
+      [
+        1,
+        43
+      ],
+      [
+        1,
+        51
+      ],
+      [
+        1,
+        63
+      ],
+      [
+        2,
+        27
+      ],
+      [
+        2,
+        39
+      ],
+      [
+        2,
+        43
+      ],
+      [
+        2,
+        51
+      ],
+      [
+        2,
+        55
+      ],
+      [
+        2,
+        59
+      ],
+      [
+        3,
+        27
+      ],
+      [
+        3,
+        31
+      ],
+      [
+        3,
+        43
+      ],
+      [
+        3,
+        51
+      ],
+      [
+        3,
+        55
+      ],
+      [
+        3,
+        59
+      ],
+      [
+        3,
+        63
+      ]
+    ],
+    "whole_elapsed_seconds": 67.50063496996881
+  },
+  "schema": "bole.actual-cpu-diagnostics-continuation/v1",
+  "source_audit_updated_at_utc": "2026-10-18T08:12:53.386736+00:00",
+  "unchanged_pointwise_bound": ".001 + .01 * abs(original CPU64 reference)"
+}

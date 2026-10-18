@@ -1,0 +1,108 @@
+{
+  "NPU": false,
+  "files": {
+    "DONOR_CPU_OWNER.py": {
+      "bytes": 16387,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/DONOR_CPU_OWNER.py",
+      "sha256": "6159466bc6347ab6f28c18537cc9dcc6fee37db0bb288e94652b32e6c8288812"
+    },
+    "DONOR_NPU_OWNER.py": {
+      "bytes": 16858,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/DONOR_NPU_OWNER.py",
+      "sha256": "a5bf934cd7e749aa3b630da2039969a2d8e3cce52d4c0756a52e73299edc543d"
+    },
+    "OWNER_REVIEW.md": {
+      "bytes": 7137,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/OWNER_REVIEW.md",
+      "sha256": "7d266f0dd6248bb0f4b870c5e4cb956d78fd2a2d0b47fa47cc9e8b0aaecd09ae"
+    },
+    "PLAN.json": {
+      "bytes": 6591,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/PLAN.json",
+      "sha256": "1f58be21f6175862b966b680b3b57cbc7edc1ce380f8694849c53ff4d4544d3a"
+    },
+    "bind.py": {
+      "bytes": 1914,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/bind.py",
+      "sha256": "286301b32df662ea85c74de62467428233f0bd95a71207ea2363ba956dff79f2"
+    },
+    "common.py": {
+      "bytes": 10847,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/common.py",
+      "sha256": "b72e29a1055a1ff78f1b7333949ac072842125d161d2e4e6c796e81fc3a2e5f4"
+    },
+    "cpu_guest.py": {
+      "bytes": 8695,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/cpu_guest.py",
+      "sha256": "bac2325f283d5b1132303785632ad82767e4c96e9d2c04681b11342983a2ee23"
+    },
+    "cpu_owner.py": {
+      "bytes": 16147,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/cpu_owner.py",
+      "sha256": "5d04728a03dc00a2cf255d843b0405cbc28d244e945847bde315e1c5abb9de83"
+    },
+    "guest.py": {
+      "bytes": 5848,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/guest.py",
+      "sha256": "a9d5d61845f3e4a43db7da71bf79d4964dd03dafa85ab84d43aed21493eb0897"
+    },
+    "owner.py": {
+      "bytes": 19705,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/owner.py",
+      "sha256": "1c21382d568295f8827afd0950a3d47bea516b37ba7fe8cf18d77416451c53f9"
+    },
+    "plan.py": {
+      "bytes": 9674,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/plan.py",
+      "sha256": "1d11491ef0bb06de4668ffa4dcaabf3fe3088524b1d7704794e2ea5915982b65"
+    },
+    "probe.py": {
+      "bytes": 27539,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/probe.py",
+      "sha256": "0e78561db1667f18df737db7adccee104f9e48147bdae9c9c38938142e20d4d1"
+    },
+    "test_owner.py": {
+      "bytes": 15738,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/test_owner.py",
+      "sha256": "60ab5281a2dbb0f584e3171d4352f6cf0513342585eb25b4a8cd6917f7c70ef7"
+    },
+    "test_probe.py": {
+      "bytes": 7349,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/test_probe.py",
+      "sha256": "7171b7e98ceb7698194a8f6bc0b9aeae25746a7d2edd12560e42d9e0701607b0"
+    },
+    "ticket.py": {
+      "bytes": 14840,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/ticket.py",
+      "sha256": "589de295c2a4f22e9f586743a6ef530ddff3be817acce84b27663749fd305ef0"
+    }
+  },
+  "local_controls": [
+    {
+      "exit_code": 0,
+      "no_skip": true,
+      "script": "test_owner.py",
+      "stderr": "test_01_exact_npu_donor (__main__.OwnerControls.test_01_exact_npu_donor) ... ok\ntest_02_exact_cpu_donor (__main__.OwnerControls.test_02_exact_cpu_donor) ... ok\ntest_03_original_resource_helpers (__main__.OwnerControls.test_03_original_resource_helpers) ... ok\ntest_04_complete_inverse_controller (__main__.OwnerControls.test_04_complete_inverse_controller) ... ok\ntest_05_device_free_create_command (__main__.OwnerControls.test_05_device_free_create_command) ... ok\ntest_06_cpu_exact_inspect_pass (__main__.OwnerControls.test_06_cpu_exact_inspect_pass) ... ok\ntest_07_cpu_memory_rejected (__main__.OwnerControls.test_07_cpu_memory_rejected) ... ok\ntest_08_cpu_npu_device_rejected (__main__.OwnerControls.test_08_cpu_npu_device_rejected) ... ok\ntest_09_foreign_cid_rejected (__main__.OwnerControls.test_09_foreign_cid_rejected) ... ok\ntest_10_wrong_cpu_rejected (__main__.OwnerControls.test_10_wrong_cpu_rejected) ... ok\ntest_11_extra_write_mount_rejected (__main__.OwnerControls.test_11_extra_write_mount_rejected) ... ok\ntest_12_oom_rejected (__main__.OwnerControls.test_12_oom_rejected) ... ok\ntest_13_full_npu_cutoff (__main__.OwnerControls.test_13_full_npu_cutoff) ... ok\ntest_14_full_cpu_cutoff (__main__.OwnerControls.test_14_full_cpu_cutoff) ... ok\ntest_15_baseline_failure_cannot_intervene (__main__.OwnerControls.test_15_baseline_failure_cannot_intervene) ... ok\ntest_16_qualification_never_promoted (__main__.OwnerControls.test_16_qualification_never_promoted) ... ok\ntest_17_docker_wrapper_only_actual_docker (__main__.OwnerControls.test_17_docker_wrapper_only_actual_docker) ... ok\ntest_18_no_duplicate_ref_identity (__main__.OwnerControls.test_18_no_duplicate_ref_identity) ... ok\ntest_19_control_skip_rejected (__main__.OwnerControls.test_19_control_skip_rejected) ... ok\ntest_20_ambiguous_control_count_rejected (__main__.OwnerControls.test_20_ambiguous_control_count_rejected) ... ok\ntest_21_exact_three_aliases_preserve_original_stage_refs (__main__.TicketControls.test_21_exact_three_aliases_preserve_original_stage_refs) ... ok\ntest_22_second_rw_and_any_nested_proof_shadow_rejected (__main__.TicketControls.test_22_second_rw_and_any_nested_proof_shadow_rejected) ... ok\ntest_23_wrong_cid_owner_source_argv_and_live_state_rejected (__main__.TicketControls.test_23_wrong_cid_owner_source_argv_and_live_state_rejected) ... ok\ntest_24_wrong_proof_paths_and_bytes_rejected_for_each_file (__main__.TicketControls.test_24_wrong_proof_paths_and_bytes_rejected_for_each_file) ... ok\n\n----------------------------------------------------------------------\nRan 24 tests in 0.158s\n\nOK\n",
+      "stdout": "",
+      "tests": 24
+    },
+    {
+      "exit_code": 0,
+      "no_skip": true,
+      "script": "test_probe.py",
+      "stderr": "....................\n----------------------------------------------------------------------\nRan 20 tests in 0.009s\n\nOK\n",
+      "stdout": "",
+      "tests": 20
+    }
+  ],
+  "qualified": false,
+  "remote_execution": false,
+  "schema": "bole.fia-replay-local-source-freeze/v1",
+  "source_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001",
+  "template": {
+    "bytes": 13813,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fia-fixed-frame-replay-renew24h-20261018-001/SOURCE_TEMPLATE.json",
+    "sha256": "88ef7fcea71a36599574868e6b6367b5f4989fbfc16637d2b80c75cdff12271d"
+  },
+  "total_controls": 44
+}

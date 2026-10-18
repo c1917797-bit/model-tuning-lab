@@ -1,0 +1,179 @@
+{
+  "atol": 0.001,
+  "both_complete_baselines_required": true,
+  "cases": [
+    {
+      "allowed_keys": 133,
+      "branch": "tree",
+      "elements": 1536,
+      "id": "tree-r1-l43-n2",
+      "label": "tree-node2",
+      "node": 2,
+      "original_failed_flat_indices": [
+        573
+      ]
+    },
+    {
+      "allowed_keys": 133,
+      "branch": "native",
+      "elements": 1536,
+      "id": "native-r1-l43-p2-n2",
+      "label": "native-path2-node2",
+      "node": 2,
+      "original_failed_flat_indices": [
+        573
+      ],
+      "path": 2
+    },
+    {
+      "allowed_keys": 132,
+      "branch": "tree",
+      "elements": 1536,
+      "id": "tree-r1-l43-n0-pass-control",
+      "label": "tree-node0",
+      "node": 0,
+      "original_failed_flat_indices": []
+    }
+  ],
+  "cutoff": 1792313000,
+  "inner_precise_numeric_semantics": null,
+  "input_readset": [
+    {
+      "bytes": 81841,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/SOURCE_BOUND.json",
+      "sha256": "f3303cec9fea4c7445e81373e21cd0da5884be495b72a8847420bf4400bb92f5"
+    },
+    {
+      "bytes": 110007,
+      "path": "/opt/host/vnf/austinov/run-bole-r6-20261017-001-MAIN/cpu-consumer/RANK-1.json",
+      "sha256": "751fad500cd4d530f639bb3d35c8c07ea719c3493c798f17b02072c4f197ce32"
+    },
+    {
+      "bytes": 2287,
+      "path": "/opt/host/vnf/austinov/run-bole-r6-20261017-001-MAIN/dense/receipts/BOLE-TREE-RANK-1.json",
+      "sha256": "2c667174e1851ab5ca762e612d34960217fff31297039b87601e0624696a64a7"
+    },
+    {
+      "bytes": 776474709,
+      "path": "/opt/host/vnf/austinov/run-bole-r6-20261017-001-MAIN/dense/receipts/BOLE-TREE-RANK-1.pt",
+      "sha256": "21ab99d4a503f45f750c1926eb383b633b7ced8e9f24b767275c107da89f1c34"
+    },
+    {
+      "bytes": 38445,
+      "path": "/opt/host/vnf/austinov/run-bole-fa-rounding-binding-MAIN-RENEW24H_001/fa/consumer/RANK-1.json",
+      "sha256": "b70166459442dd5dd4c43f4d3fb044b71bd4b9980a5df0c20061bbf6d35d23b6"
+    },
+    {
+      "bytes": 5425,
+      "path": "/opt/host/vnf/austinov/run-bole-paged-tree118trepair1-MAIN-20261016-001/paged/cpu/preflight/ACTUAL_FIA_ABI.json",
+      "sha256": "164f89472d6adecb55c8eeb76b23e04c774c4040dbfb8eaa3ad5d9fccd3815a2"
+    },
+    {
+      "bytes": 8622,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/adapter.py",
+      "sha256": "37369161fbadad74e0f727c62e769069277d6f2696f7a8b2d88d67e92d93dc59"
+    },
+    {
+      "bytes": 30536,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/model_entry.py",
+      "sha256": "7b2cd9e826e7d97e691b78edbd10e7fccdfed04fc3e17dd8fddb054b661a39f6"
+    },
+    {
+      "bytes": 14336,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/independent_model.py",
+      "sha256": "cdffc7dcb59b744788c2b736a5607e7218a9e13595b0f6a7d10f450a4fb6ad72"
+    }
+  ],
+  "layer": 43,
+  "native_full_elements": 1536,
+  "native_intervention_inner_precise": 2,
+  "native_original": {
+    "actual_seq_lengths": [
+      1
+    ],
+    "actual_seq_lengths_kv": [
+      133
+    ],
+    "inner_precise": 0,
+    "input_layout": "BNSD",
+    "next_tokens": 2147483647,
+    "num_heads": 6,
+    "num_key_value_heads": 1,
+    "pre_tokens": 2147483647,
+    "scale": 0.0625,
+    "sparse_mode": 0
+  },
+  "original_abi": {
+    "bytes": 5425,
+    "path": "/opt/host/vnf/austinov/run-bole-paged-tree118trepair1-MAIN-20261016-001/paged/cpu/preflight/ACTUAL_FIA_ABI.json",
+    "sha256": "164f89472d6adecb55c8eeb76b23e04c774c4040dbfb8eaa3ad5d9fccd3815a2"
+  },
+  "original_failures_unchanged": true,
+  "original_producers": {
+    "adapter.py": {
+      "bytes": 8622,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/adapter.py",
+      "sha256": "37369161fbadad74e0f727c62e769069277d6f2696f7a8b2d88d67e92d93dc59"
+    },
+    "independent_model.py": {
+      "bytes": 14336,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/independent_model.py",
+      "sha256": "cdffc7dcb59b744788c2b736a5607e7218a9e13595b0f6a7d10f450a4fb6ad72"
+    },
+    "model_entry.py": {
+      "bytes": 30536,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/model_entry.py",
+      "sha256": "7b2cd9e826e7d97e691b78edbd10e7fccdfed04fc3e17dd8fddb054b661a39f6"
+    }
+  },
+  "original_rank_report": {
+    "bytes": 110007,
+    "path": "/opt/host/vnf/austinov/run-bole-r6-20261017-001-MAIN/cpu-consumer/RANK-1.json",
+    "sha256": "751fad500cd4d530f639bb3d35c8c07ea719c3493c798f17b02072c4f197ce32"
+  },
+  "original_raw": {
+    "bytes": 776474709,
+    "path": "/opt/host/vnf/austinov/run-bole-r6-20261017-001-MAIN/dense/receipts/BOLE-TREE-RANK-1.pt",
+    "sha256": "21ab99d4a503f45f750c1926eb383b633b7ced8e9f24b767275c107da89f1c34"
+  },
+  "original_receipt": {
+    "bytes": 2287,
+    "path": "/opt/host/vnf/austinov/run-bole-r6-20261017-001-MAIN/dense/receipts/BOLE-TREE-RANK-1.json",
+    "sha256": "2c667174e1851ab5ca762e612d34960217fff31297039b87601e0624696a64a7"
+  },
+  "original_source": {
+    "bytes": 81841,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/SOURCE_BOUND.json",
+    "sha256": "f3303cec9fea4c7445e81373e21cd0da5884be495b72a8847420bf4400bb92f5"
+  },
+  "previous_rounding": {
+    "bytes": 38445,
+    "path": "/opt/host/vnf/austinov/run-bole-fa-rounding-binding-MAIN-RENEW24H_001/fa/consumer/RANK-1.json",
+    "sha256": "b70166459442dd5dd4c43f4d3fb044b71bd4b9980a5df0c20061bbf6d35d23b6"
+  },
+  "qualified": false,
+  "rank": 1,
+  "rtol": 0.01,
+  "schema": "bole.fia-fixed-frame-selection/v1",
+  "tree_full_elements": 4608,
+  "tree_intervention_inner_precise": 0,
+  "tree_original": {
+    "actual_seq_lengths": [
+      3
+    ],
+    "actual_seq_lengths_kv": [
+      134
+    ],
+    "block_size": 128,
+    "inner_precise": 2,
+    "input_layout": "BNSD",
+    "next_tokens": 2147483647,
+    "num_heads": 6,
+    "num_key_value_heads": 1,
+    "pre_tokens": 2147483647,
+    "scale": 0.0625,
+    "sparse_mode": 1
+  },
+  "tree_query_count": 3,
+  "whole_model_qualified": false
+}

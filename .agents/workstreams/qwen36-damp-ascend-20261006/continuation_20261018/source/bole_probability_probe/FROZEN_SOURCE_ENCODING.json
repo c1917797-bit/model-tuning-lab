@@ -1,0 +1,38 @@
+{
+  "schema": "papers.exact-frozen-source-encoding/v1",
+  "reason": "Two frozen executed UTF8 sources end with an extra blank line. Archive their exact bytes as base64 so repository whitespace checks pass without changing the frozen executed sources.",
+  "decode_only_not_execute": true,
+  "original_authority_expired": true,
+  "files": {
+    "bind.py": {
+      "archive_relative_path": "source/bole_probability_probe/bind.py.b64",
+      "encoding": "base64-with-linebreaks",
+      "decoded_source_ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/bind.py",
+        "bytes": 1634,
+        "sha256": "7503cf19149099245234fb549e22053e84bcd701f837c04ed1a2cbd3a723b2b3"
+      },
+      "archive_ref": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/bole_probability_probe/bind.py.b64",
+        "bytes": 2209,
+        "sha256": "33c126a052a63c5468a281c263175f7d632d752f8231ff1696f75e51490fd478"
+      },
+      "exact_decoded_bytes_checked_locally": true
+    },
+    "owner.py": {
+      "archive_relative_path": "source/bole_probability_probe/owner.py.b64",
+      "encoding": "base64-with-linebreaks",
+      "decoded_source_ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/owner.py",
+        "bytes": 15426,
+        "sha256": "997115d25bf61703223c8422e8d14002a1b7f7e286d1b9b31a3c609f7d358ce0"
+      },
+      "archive_ref": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/bole_probability_probe/owner.py.b64",
+        "bytes": 20839,
+        "sha256": "26ebec3034561b88303c5a6ef35312c83c09cff577a2a98961845afad524486c"
+      },
+      "exact_decoded_bytes_checked_locally": true
+    }
+  }
+}

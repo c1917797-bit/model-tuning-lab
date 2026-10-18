@@ -1,0 +1,373 @@
+{
+  "authority": {
+    "original_cutoff_epoch": 1792313000,
+    "original_cutoff_utc": "2026-10-18 08:43:20 UTC",
+    "original_latest_model_entry_utc": "2026-10-18 07:43:20 UTC",
+    "original_model_whole_seconds": 3600,
+    "status": "expired; checkpoint only; future live work requires a valid new window and an immutable successor binding"
+  },
+  "checkpoint_date": "2026-10-18",
+  "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/DELTALOG_SOURCE_INVENTORY.json",
+  "excluded": [
+    "__pycache__",
+    "raw tensors",
+    "remote generated source trees",
+    "bound manifests"
+  ],
+  "files": [
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r38_preparation/CHECKPOINT_README.md",
+      "kind": "checkpoint_readme",
+      "local_ref": {
+        "bytes": 3717,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r38_preparation/CHECKPOINT_README.md",
+        "sha256": "7cf2f5aaadf541a3369e754ed4cb7ccba9f08f14677e52681ca83ee6334eee5e"
+      },
+      "relative_path": "deltalog_r38_preparation/CHECKPOINT_README.md"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r38_preparation/R38_PREPARATION_REVIEW.md",
+      "kind": "source_or_gate_review",
+      "local_ref": {
+        "bytes": 7227,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r38_preparation/R38_PREPARATION_REVIEW.md",
+        "sha256": "e4f1f12d499b2350bda1648d9aed5c0501b25d41bb6c59f40b162f528bd754e7"
+      },
+      "relative_path": "deltalog_r38_preparation/R38_PREPARATION_REVIEW.md"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r38_preparation/bulk_copy_unchanged_r38.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 13687,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r38_preparation/bulk_copy_unchanged_r38.py",
+        "sha256": "68f47b0146d7555b43533bb87999d9a34153307d7dc288e6252748f9eefd836b"
+      },
+      "relative_path": "deltalog_r38_preparation/bulk_copy_unchanged_r38.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r38_preparation/prepare_r38.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 23738,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r38_preparation/prepare_r38.py",
+        "sha256": "ad622334b9d3d5df0c225f687f23a67c00af93ed5b1a9e185df1a9e2678d1648"
+      },
+      "relative_path": "deltalog_r38_preparation/prepare_r38.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r38_preparation/test_prepare_r38.py",
+      "kind": "pure_cpu_control_source",
+      "local_ref": {
+        "bytes": 7928,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r38_preparation/test_prepare_r38.py",
+        "sha256": "f0a37f3f384cacda5b261122047b5b4d8c4aa39efa3fda8a39597f4285085517"
+      },
+      "relative_path": "deltalog_r38_preparation/test_prepare_r38.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r38_preparation/test_transport_copy_r38.py",
+      "kind": "pure_cpu_control_source",
+      "local_ref": {
+        "bytes": 10299,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r38_preparation/test_transport_copy_r38.py",
+        "sha256": "a33905bd2e9d4e2fcecdcfdf8b189c2de12a7d15f1320c5553eaf6d56f9202d9"
+      },
+      "relative_path": "deltalog_r38_preparation/test_transport_copy_r38.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r38_preparation/transport_emit_r38.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 10404,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r38_preparation/transport_emit_r38.py",
+        "sha256": "e647bcaf960f098027a33a357a5c201892451ab3a81490b8d03cb339585f68c1"
+      },
+      "relative_path": "deltalog_r38_preparation/transport_emit_r38.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r37_preparation/ENTRY_DELTAS.json",
+      "kind": "local_preparation_provenance",
+      "local_ref": {
+        "bytes": 1428,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/ENTRY_DELTAS.json",
+        "sha256": "4d874a7b3c0c9819d1e0ea0b5d751f04cf0f2c7d92251928db16709cc2d943ac"
+      },
+      "relative_path": "deltalog_r37_preparation/ENTRY_DELTAS.json"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r37_preparation/PATCHES_LOCAL.json",
+      "kind": "local_preparation_provenance",
+      "local_ref": {
+        "bytes": 1829,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/PATCHES_LOCAL.json",
+        "sha256": "1ef5d35a8c94e39788c6df3780d46fc1a7566d6086f45259cb1fdeb96023a017"
+      },
+      "relative_path": "deltalog_r37_preparation/PATCHES_LOCAL.json"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r37_preparation/PREPARATION_REVIEW.md",
+      "kind": "source_or_gate_review",
+      "local_ref": {
+        "bytes": 7435,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/PREPARATION_REVIEW.md",
+        "sha256": "a3531de3597eb4e4b4b84fa8bc9a6085a4542a1295e24c5dad04e851f84a80f7"
+      },
+      "relative_path": "deltalog_r37_preparation/PREPARATION_REVIEW.md"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r37_preparation/TIME_GATE_REVIEW.md",
+      "kind": "source_or_gate_review",
+      "local_ref": {
+        "bytes": 7690,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/TIME_GATE_REVIEW.md",
+        "sha256": "2b592a2b6e8e4e4c4ce0c2b96639b03dd9d6f2506cafe58826fbd31426245179"
+      },
+      "relative_path": "deltalog_r37_preparation/TIME_GATE_REVIEW.md"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r37_preparation/TRANSPORT_COPY_REPAIR1_REVIEW.md",
+      "kind": "source_or_gate_review",
+      "local_ref": {
+        "bytes": 6145,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/TRANSPORT_COPY_REPAIR1_REVIEW.md",
+        "sha256": "fc19f58da961b581d04ac296b151fe23cdd730c40c5fe992ca2b0bca247dad79"
+      },
+      "relative_path": "deltalog_r37_preparation/TRANSPORT_COPY_REPAIR1_REVIEW.md"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r37_preparation/bind_source.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 5951,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/bind_source.py",
+        "sha256": "32edbdc544e6b3afc68eb25565894b29c8de6dff995676e0b56495923820e6f5"
+      },
+      "relative_path": "deltalog_r37_preparation/bind_source.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r37_preparation/bulk_copy_unchanged.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 13684,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/bulk_copy_unchanged.py",
+        "sha256": "2a8be7b726f3d5d25f144708b9682e643bc13f1dfa97b4e4a6cebd3a23bdbd30"
+      },
+      "relative_path": "deltalog_r37_preparation/bulk_copy_unchanged.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r37_preparation/firstdecode_refs.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 5271,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/firstdecode_refs.py",
+        "sha256": "b84b43978e656a3b07e9a15ad16877b2d07f6d92aabba15c00d821757b9c0368"
+      },
+      "relative_path": "deltalog_r37_preparation/firstdecode_refs.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r37_preparation/prepare_r37.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 15171,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/prepare_r37.py",
+        "sha256": "0e7ef9902cf64ae276bf748ba395e200b20ba12420904ff1d2ce3cd5e6b7b1be"
+      },
+      "relative_path": "deltalog_r37_preparation/prepare_r37.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r37_preparation/prepare_r37_repair1.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 16231,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/prepare_r37_repair1.py",
+        "sha256": "e8b9d86268e4f59bd5818dcfa6603461f6e486e960551db67b3b01a4d8708837"
+      },
+      "relative_path": "deltalog_r37_preparation/prepare_r37_repair1.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r37_preparation/readonly_closed_admission.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 13127,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/readonly_closed_admission.py",
+        "sha256": "7e6cc6c7079c6a069709528b09e2d1093e5e57db9914973177a9212030b7e1cb"
+      },
+      "relative_path": "deltalog_r37_preparation/readonly_closed_admission.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r37_preparation/test_readonly_closed_admission.py",
+      "kind": "pure_cpu_control_source",
+      "local_ref": {
+        "bytes": 7999,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/test_readonly_closed_admission.py",
+        "sha256": "54809ffe51396a5c530ba5514b12e4ba4eff1301ad9f00c1596bf4be012366fc"
+      },
+      "relative_path": "deltalog_r37_preparation/test_readonly_closed_admission.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r37_preparation/test_transport_copy_repair1.py",
+      "kind": "pure_cpu_control_source",
+      "local_ref": {
+        "bytes": 10315,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/test_transport_copy_repair1.py",
+        "sha256": "66c7a84037ca5149ae51437440936ae9b95d2a695e152d64f33fa0afe22cce2f"
+      },
+      "relative_path": "deltalog_r37_preparation/test_transport_copy_repair1.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r37_preparation/test_transport_emit.py",
+      "kind": "pure_cpu_control_source",
+      "local_ref": {
+        "bytes": 6502,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/test_transport_emit.py",
+        "sha256": "b98126012cd68f168dbe9f5ea8772a2c968ddd578a00404d60ee7ee33be226e9"
+      },
+      "relative_path": "deltalog_r37_preparation/test_transport_emit.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r37_preparation/transport_emit.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 9812,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/transport_emit.py",
+        "sha256": "4cfc473604af1ccababee9dccdd37d219560bdaaadd93db82896889c7bfd2478"
+      },
+      "relative_path": "deltalog_r37_preparation/transport_emit.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r37_preparation/transport_emit_repair1.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 9812,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/transport_emit_repair1.py",
+        "sha256": "e568fb78bbb81ae73a7a081ef1a17a623f34bda76112967e5e42877331a9e524"
+      },
+      "relative_path": "deltalog_r37_preparation/transport_emit_repair1.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_consumer/DIFF_NOTES.md",
+      "kind": "source_or_gate_review",
+      "local_ref": {
+        "bytes": 7550,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_consumer/DIFF_NOTES.md",
+        "sha256": "73941a80949df11ffe95f9e9a5dcf56ba83b29496c8d5d140646ad4d08708036"
+      },
+      "relative_path": "deltalog_consumer/DIFF_NOTES.md"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_consumer/LOCAL_CONTROLS_RESULT.json",
+      "kind": "preserved_local_control_or_nonacceptance_fixture_record",
+      "local_ref": {
+        "bytes": 2410,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_consumer/LOCAL_CONTROLS_RESULT.json",
+        "sha256": "5e0008acd6e716fa663c74e99b24505e96f57079ff76101cd6759117afef355c"
+      },
+      "relative_path": "deltalog_consumer/LOCAL_CONTROLS_RESULT.json"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_consumer/R34_METADATA_FIXTURE_RESULT.json",
+      "kind": "preserved_local_control_or_nonacceptance_fixture_record",
+      "local_ref": {
+        "bytes": 4389,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_consumer/R34_METADATA_FIXTURE_RESULT.json",
+        "sha256": "28e63f7145b94bfbc1ef1307bdea4734bf31c96047b9184988df912c3283baa5"
+      },
+      "relative_path": "deltalog_consumer/R34_METADATA_FIXTURE_RESULT.json"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_consumer/consume_rank_new.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 14533,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_consumer/consume_rank_new.py",
+        "sha256": "c140bc8ae071249da58e6f0152d376585f6e309cddb36ff95361307eeed92b7a"
+      },
+      "relative_path": "deltalog_consumer/consume_rank_new.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_consumer/consumer_cli.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 14200,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_consumer/consumer_cli.py",
+        "sha256": "3515f415c3d5ed3bac6b214fe6623405fa8ba61ba6c493d8d52e581a777fe21e"
+      },
+      "relative_path": "deltalog_consumer/consumer_cli.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_consumer/geometry_witness.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 16781,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_consumer/geometry_witness.py",
+        "sha256": "1efc750e3779e38bf37012341a1800657d5c701737e6f68144f8eaf91561a0a2"
+      },
+      "relative_path": "deltalog_consumer/geometry_witness.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_consumer/host_consumer.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 18780,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_consumer/host_consumer.py",
+        "sha256": "f9debfed8ef3b4f5924c6b1f90f8c47083214a02d9723a621ed3c80d33992aa3"
+      },
+      "relative_path": "deltalog_consumer/host_consumer.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_consumer/postconsume_entry_new.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 4944,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_consumer/postconsume_entry_new.py",
+        "sha256": "d3dc583b82bee5f0c2b1416dc9ccb5748ec9f7023874af20ad9cfc62c5c70e1f"
+      },
+      "relative_path": "deltalog_consumer/postconsume_entry_new.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_consumer/postconsume_recipe_new.py",
+      "kind": "source",
+      "local_ref": {
+        "bytes": 10599,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_consumer/postconsume_recipe_new.py",
+        "sha256": "1275d75f969d44dfaa6ef21d0daa4d0e8a0b76006ec2e6f2be315e49c3b9cbbc"
+      },
+      "relative_path": "deltalog_consumer/postconsume_recipe_new.py"
+    },
+    {
+      "checkpoint_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_consumer/test_geometry_witness.py",
+      "kind": "pure_cpu_control_source",
+      "local_ref": {
+        "bytes": 15624,
+        "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_consumer/test_geometry_witness.py",
+        "sha256": "c2d6129a27a8d2fae930c9416f47e734c9062dc7caa5b8dc4a1b5e6ec75a8706"
+      },
+      "relative_path": "deltalog_consumer/test_geometry_witness.py"
+    }
+  ],
+  "immutable_frozen_file_count": 32,
+  "immutable_frozen_total_bytes": 321495,
+  "inventory_self_excluded": true,
+  "listed_file_count": 33,
+  "listed_total_bytes": 325212,
+  "original_patches_ref": {
+    "bytes": 1885,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-r37-preparation-MAIN-renew24h-20261018-001/PATCHES.json",
+    "sha256": "0bd70da9feea656e0146853d90078fcd3e7684c6ec42551129b3738edfc18b1f"
+  },
+  "original_patches_ref_provenance": "Exact live Ref3 supplied by MAIN for the previously executed package; checkpoint sub-agent did not re-read the remote file.",
+  "qualification": {
+    "bound_source_created": false,
+    "local_test_pass_is_model_acceptance": false,
+    "new_live_execution_by_this_checkpoint": false,
+    "r34_metadata_fixture_is_all4_acceptance": false,
+    "service_or_performance_or_accuracy_qualification": false
+  },
+  "schema": "deltalog.continuation-source-checkpoint-inventory/v1",
+  "verified_existing_links": {
+    "consumer_local_controls_six_ref_byte_hash_checks": true,
+    "existing_frozen_code_modified": false,
+    "patches_local_four_ref_byte_hash_checks": true
+  }
+}

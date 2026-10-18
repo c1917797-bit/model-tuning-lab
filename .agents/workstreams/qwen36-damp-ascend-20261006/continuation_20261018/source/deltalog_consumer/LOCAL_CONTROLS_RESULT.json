@@ -1,0 +1,67 @@
+{
+  "NPU_executed": false,
+  "ast_preserved": [
+    "bits",
+    "metadata_union",
+    "compact_sidecar",
+    "unchanged_decode",
+    "complete baseline/comparison loop",
+    "complete 48-layer numerical decode loop",
+    "AliasIO",
+    "numerical_modules"
+  ],
+  "files": {
+    "DIFF_NOTES.md": {
+      "bytes": 7550,
+      "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_consumer/DIFF_NOTES.md",
+      "sha256": "73941a80949df11ffe95f9e9a5dcf56ba83b29496c8d5d140646ad4d08708036"
+    },
+    "R34_METADATA_FIXTURE_RESULT.json": {
+      "bytes": 4389,
+      "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_consumer/R34_METADATA_FIXTURE_RESULT.json",
+      "sha256": "28e63f7145b94bfbc1ef1307bdea4734bf31c96047b9184988df912c3283baa5"
+    },
+    "consume_rank_new.py": {
+      "bytes": 14533,
+      "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_consumer/consume_rank_new.py",
+      "sha256": "c140bc8ae071249da58e6f0152d376585f6e309cddb36ff95361307eeed92b7a"
+    },
+    "consumer_cli.py": {
+      "bytes": 14200,
+      "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_consumer/consumer_cli.py",
+      "sha256": "3515f415c3d5ed3bac6b214fe6623405fa8ba61ba6c493d8d52e581a777fe21e"
+    },
+    "geometry_witness.py": {
+      "bytes": 16781,
+      "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_consumer/geometry_witness.py",
+      "sha256": "1efc750e3779e38bf37012341a1800657d5c701737e6f68144f8eaf91561a0a2"
+    },
+    "test_geometry_witness.py": {
+      "bytes": 15624,
+      "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_consumer/test_geometry_witness.py",
+      "sha256": "c2d6129a27a8d2fae930c9416f47e734c9062dc7caa5b8dc4a1b5e6ec75a8706"
+    }
+  },
+  "historical_metadata_fixture": {
+    "all4_qualified": false,
+    "passed": 3,
+    "qualification": false,
+    "ranks": [
+      0,
+      1,
+      3
+    ]
+  },
+  "kind": "pure-CPU source review and metadata controls",
+  "qualification": false,
+  "raw_or_math_executed": false,
+  "schema": "deltalog.geometry-consumer-local-controls/v1",
+  "unittest": {
+    "command": "python -I model_tuning_lab_review/proposed/deltalog_consumer/test_geometry_witness.py",
+    "errors": 0,
+    "failures": 0,
+    "passed": 48,
+    "skipped": 0,
+    "tests": 48
+  }
+}

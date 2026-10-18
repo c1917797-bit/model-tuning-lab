@@ -1,0 +1,37 @@
+{
+  "early_commands_ref": {
+    "bytes": 1814,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-36-all4-publication/COMMANDS.json",
+    "sha256": "772a3a6ae815fe16dbb0537cc9b0398451c778018573f73496b489b2238193a0"
+  },
+  "files": {
+    "bind_source.py": {
+      "bytes": 5951,
+      "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/bind_source.py",
+      "sha256": "32edbdc544e6b3afc68eb25565894b29c8de6dff995676e0b56495923820e6f5"
+    },
+    "firstdecode_refs.py": {
+      "bytes": 5271,
+      "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/firstdecode_refs.py",
+      "sha256": "b84b43978e656a3b07e9a15ad16877b2d07f6d92aabba15c00d821757b9c0368"
+    },
+    "readonly_closed_admission.py": {
+      "bytes": 13127,
+      "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/readonly_closed_admission.py",
+      "sha256": "7e6cc6c7079c6a069709528b09e2d1093e5e57db9914973177a9212030b7e1cb"
+    },
+    "test_readonly_closed_admission.py": {
+      "bytes": 7999,
+      "path": "/workspace/scratch/6646d57c37ee/model_tuning_lab_review/proposed/deltalog_r37_preparation/test_readonly_closed_admission.py",
+      "sha256": "54809ffe51396a5c530ba5514b12e4ba4eff1301ad9f00c1596bf4be012366fc"
+    }
+  },
+  "new_software_cases": 12,
+  "predecessor_model_template": {
+    "bytes": 290569,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair36-all4-publication-20261018-001/SOURCE_TEMPLATE.json",
+    "sha256": "fc4fbbcd1846a247717ffaf5883ff77ade4fee045f965e78034a4b45cf881ac3"
+  },
+  "pure_cpu_controls_passed": 12,
+  "schema": "deltalog.r37-preparation-patches/v1"
+}

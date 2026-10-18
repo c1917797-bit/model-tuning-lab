@@ -1,0 +1,251 @@
+{
+  "schema": "deltalog.continuation-small-evidence-checkpoint/v1",
+  "record_status": "MAIN small-evidence repository checkpoint updated through actual read-only preparation operation171f; latest resource observation remains operation171c",
+  "recorded_date_utc": "2026-10-18",
+  "repository_checkpoint_directory": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/",
+  "latest_observation": {
+    "operation_id": "exec-000000000000171c",
+    "host_utc": "2026-10-18T19:07:12Z",
+    "reported_by": "MAIN fresh actual read-only host observation",
+    "R38_model_source_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair38-closed-admission-identity-20261018-001",
+    "R38_model_source_root_exists": false,
+    "checked_owned_label_lists": 2,
+    "both_owned_label_lists_empty": true,
+    "whole_host_idle_claimed": false,
+    "historical_authorization_cutoff_passed": true,
+    "operation_receipt_ref_pending": true
+  },
+  "current_qualification_status": {
+    "full_model": "pending",
+    "performance": "pending",
+    "task": "pending",
+    "historical_failures_preserved": true,
+    "new_numerical_qualification_established": false
+  },
+  "checkpoint_content_policy": {
+    "small_refs_and_scalars_only": true,
+    "raw_included": false,
+    "full_inspect_included": false,
+    "frozen_source_modified": false,
+    "record_is_execution_authorization": false
+  },
+  "authority_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+    "bytes": 3012,
+    "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+  },
+  "fixed_time_gates": {
+    "cutoff_epoch": 1792313000,
+    "cutoff_utc": "2026-10-18T08:43:20Z",
+    "model_whole_seconds": 3600,
+    "model_latest_entry_utc": "2026-10-18T07:43:20Z",
+    "original_main_predicate": "time.time() + PHASE <= CUTOFF",
+    "model_phase_shortened": false,
+    "automatic_extension": false,
+    "original_host_source_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-proc-snapshot-repair-20261013-008/host_ticket.py",
+      "bytes": 25508,
+      "sha256": "c1a26afb164af8fcf4b88fef24a524c2c890be772f56f136b5edc5006b1ff066"
+    }
+  },
+  "R36_bind": {
+    "operation": "exec-00000000000016f5",
+    "success": false,
+    "observed_elapsed_seconds_approx": 207.5,
+    "failure_path": ["capture_closed2.validate", "prior_policy", "storage061.check"],
+    "failure_class": "original storage admission",
+    "new_NPU_entered": false,
+    "new_model_output_created": false,
+    "operation_receipt_ref_pending": true
+  },
+  "R37_cheap": {
+    "operation": "exec-0000000000001711",
+    "passed": true,
+    "reported_count": 281,
+    "count_unit": "own_files",
+    "model_suite_executed": false,
+    "operation_receipt_ref_pending": true
+  },
+  "R37_early_bind": {
+    "operation": "exec-0000000000001712",
+    "source_created": true,
+    "source_ref": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-37-closed-admission/SOURCE_MANIFEST.json",
+      "bytes": 3678,
+      "sha256": "97075fae32d3fe0bd9a1650a4aa0e4ff8379051dc406b09888ffdf41d3b8f1a7"
+    },
+    "model_source_created_by_early_bind": false,
+    "model_qualified": false
+  },
+  "R37_actual_early": {
+    "operation": "exec-0000000000001716",
+    "operation_exit_code": 3,
+    "success": false,
+    "result_ref": {
+      "path": "/opt/host/vnf/austinov/run-dl-R37admission-early-software-MAIN-RENEW24H_001/software/consumer/RESULT.json",
+      "bytes": 703,
+      "sha256": "7c9c59343ce7613d9cd95167f68f8d3bb148a513ced34410e3b7a0593fd7aec9"
+    },
+    "first_failure_ref": {
+      "path": "/opt/host/vnf/austinov/run-dl-R37admission-early-software-MAIN-RENEW24H_001/software/consumer/FIRST_FAILURE.json",
+      "bytes": 609,
+      "sha256": "e74ee4767313704bd0ea90568fed082ec6ebb2ce23191f6aa2a61a4a56e4133a"
+    },
+    "child_stderr_ref": {
+      "path": "/opt/host/vnf/austinov/run-dl-R37admission-early-software-MAIN-RENEW24H_001/software/consumer/child.stderr",
+      "bytes": 689,
+      "sha256": "5c00962a147b873f1d4cf8fea5c83be750883cd40573f67374cd943a5bfa5403"
+    },
+    "terminal_observation_operation": "exec-0000000000001717",
+    "final_inspect_ref": {
+      "path": "/opt/host/vnf/austinov/run-dl-R37admission-early-software-MAIN-RENEW24H_001/software/consumer/FINAL_INSPECT.json",
+      "bytes": 582204,
+      "sha256": "3ce77e723cdee2d0e0eeeba4942e176db393a3f38800ea7537a68161b5384e7c"
+    },
+    "cid": "953ec2a8a3c091873fbddb0e79a28c83fa7fa94db981c52f0beb66f0b333fa95",
+    "terminal": {
+      "Running": false,
+      "Pid": 0,
+      "ExitCode": 1,
+      "OOMKilled": false,
+      "FinishedAt": "2026-10-18T08:10:58.15851638Z",
+      "resource_release_verified": true,
+      "Devices": [],
+      "Memory": 1073741824,
+      "NanoCpus": 1000000000,
+      "CpusetCpus": "145"
+    },
+    "model_suite_reached": false,
+    "payload26_reached": false,
+    "new_model_NPU_entered": false,
+    "new_model_qualified": false,
+    "new_performance_qualified": false,
+    "later_no_overlap_observation": {
+      "operation": "exec-0000000000001719",
+      "checked_owned_label_lists": 2,
+      "both_empty": true,
+      "whole_host_idle_claimed": false
+    },
+    "actual_failure": {
+      "file": "recover.py",
+      "active_MODEL_ROOT": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair36-all4-publication-20261018-001",
+      "assertion": "m['root'] == MODEL_ROOT and tr['path'] == MODEL_ROOT + '/SOURCE_TEMPLATE.json'",
+      "expected_candidate_root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair37-closed-admission-20261018-001",
+      "source_readonly_snapshot": "resume_packets/deltalog_r37_actual_recover.py",
+      "assertion_precedes": ["CHILD_IDENTITY.json", "MAIN_ARM wait", "payload26 subprocess", "prebind_software22 subprocess"],
+      "numeric_failure_inferred": false
+    }
+  },
+  "storage_analysis_from_prior_complete_scan": {
+    "fresh_scan_still_required": true,
+    "actual_all_history_bytes": 45898518779,
+    "actual_all_history_GiB": 42.746326680295,
+    "observed_filesystem_free_GiB_approx": 142.73574066,
+    "original_limit_GiB": 80,
+    "original_minimum_free_GiB": 100,
+    "original_new_model_reservation_GiB": 32,
+    "closed2_original_commitments_GiB": [33, 33],
+    "closed2_actual_sealed_payload_bytes": [1131358910, 8879581752],
+    "old_prior_policy_committed_bytes": 111049091756,
+    "adjusted_committed_with_new32_bytes": 84552810402,
+    "remaining_under80_bytes": 1346535518,
+    "R34_retained_payload_bytes_still_counted": 29385899001,
+    "new_readonly_admission_design": {
+      "helper": "readonly_closed_admission.py",
+      "verify_closed2_full_tree_before_adjustment": true,
+      "verify_stopped_owners_and_no_writers": true,
+      "reuse_original_adjusted_accounting": true,
+      "original_storage061_check_really_called": true,
+      "retain_complete_original_closed15_validation": true,
+      "old_ledger_changed": false,
+      "history_deleted_or_moved": false,
+      "limits_relaxed": false,
+      "new_runtime_lease_still_required": true,
+      "R37_actual_bind_pass_proven": false
+    }
+  },
+  "R38": {
+    "status": "archived_preparer_actual_readonly_receipt_passed_active_R38_source_trees_not_deployed_actual_CPU_and_model_not_started",
+    "actual_source_ref_pending": true,
+    "remote_source_bound": false,
+    "active_execution_source_deployed": false,
+    "actual_CPU_or_model_started": false,
+    "preparer_programs_archived_in_repository": true,
+    "local_independent_source_review_completed": true,
+    "local_independent_review_concrete_static_blocker_found": false,
+    "local_controls": {
+      "preparation_controls": 8,
+      "transport_and_copy_controls": 12,
+      "total": 20,
+      "passed": true,
+      "skipped": 0,
+      "actual_experiment_software_count_changed_by_these_controls": false
+    },
+    "local_frozen_transport_programs": {
+      "prepare_r38.py": {
+        "bytes": 23738,
+        "sha256": "ad622334b9d3d5df0c225f687f23a67c00af93ed5b1a9e185df1a9e2678d1648"
+      },
+      "transport_emit_r38.py": {
+        "bytes": 10404,
+        "sha256": "e647bcaf960f098027a33a357a5c201892451ab3a81490b8d03cb339585f68c1"
+      },
+      "bulk_copy_unchanged_r38.py": {
+        "bytes": 13687,
+        "sha256": "68f47b0146d7555b43533bb87999d9a34153307d7dc288e6252748f9eefd836b"
+      }
+    },
+    "actual_readonly_preparation": {
+      "operation_id": "exec-000000000000171f",
+      "exit_code": 0,
+      "archived_preparer_repository_directory": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/source/deltalog_r38_preparation/",
+      "entry_point": "transport_emit_r38.py --receipt",
+      "original_frozen_sources_and_actual_failed_R37_refs_reopened": true,
+      "plan_composed_in_memory": true,
+      "python_files_syntax_and_identity_checked": 193,
+      "active_stale_identity_tokens": {},
+      "planned_tree_file_counts": {
+        "model": 282,
+        "early": 12
+      },
+      "package_id": "6f56bf205070968b0bf18d5375a9e31083e9afc163a9a3b1b43b7531681f3d3d",
+      "planned_model_template_ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair38-closed-admission-identity-20261018-001/SOURCE_TEMPLATE.json",
+        "bytes": 297848,
+        "sha256": "35e5a6f3016df8d2efc474e3ffc58033a6fde9f0d37afacc95ece21d24a2bc50"
+      },
+      "planned_early_template_ref": {
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-early-software-owned-renew24h-v1-38-closed-admission-identity/SOURCE_TEMPLATE.json",
+        "bytes": 3862,
+        "sha256": "ae66b2ed2f14f491bd910b3aa3977c63bc268ce38c295fa63cc25718d242ee33"
+      },
+      "planned_template_refs_materialized_as_active_source": false,
+      "copy_or_prepare_mode_called": false,
+      "container_created": false,
+      "new_R38_model_tree_created": false,
+      "new_R38_early_tree_created": false,
+      "bound_source_created": false,
+      "actual_CPU_or_model_started": false,
+      "qualified": false,
+      "small_receipt_repository_path": ".agents/workstreams/qwen36-damp-ascend-20261006/continuation_20261018/R38_READONLY_PREPARATION.json",
+      "small_receipt_ref_to_be_recorded_by_MAIN": true
+    },
+    "preserved_actual_software_gates": {
+      "full": 255,
+      "early": 253,
+      "payload": 26,
+      "R38_same_image_early_pass_established": false,
+      "R38_actual_model_bind_pass_established": false
+    },
+    "failed_R37_predecessor_ref_roles": [
+      "model SOURCE_TEMPLATE",
+      "bound early SOURCE_MANIFEST",
+      "early SOURCE_TEMPLATE",
+      "actual failed and released early RESULT"
+    ],
+    "CPU_or_model_execution_success_claimed": false,
+    "model_success_claimed": false,
+    "implemented_local_correction": "one full MODEL_ROOT literal in actual recover, then complete early source/template and model owner/template mirror regeneration, command derivation, complete active Python identity audit; retain exact failed R37 predecessor refs",
+    "next_required_action": "new explicit execution window and reviewed immutable successor source, then complete remote source/cheap/early/software/closed15/storage/component/full-model gates; no automatic extension"
+  }
+}

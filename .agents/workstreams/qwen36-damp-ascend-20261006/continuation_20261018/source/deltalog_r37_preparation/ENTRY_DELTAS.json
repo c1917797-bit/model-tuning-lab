@@ -1,0 +1,39 @@
+[
+  {
+    "edits": [
+      {
+        "after": "def bind_closed(O,contract,readonly_guard=None,model_manifest=None):",
+        "before": "def bind_closed(O,contract,readonly_guard=None):",
+        "count": 1
+      },
+      {
+        "after": " import readonly_closed_admission as RA\n value=RA.readset(O,seal,contract,model_manifest)",
+        "before": " value=seal.readset(contract['closed_evidence_ref'],ss)",
+        "count": 1
+      }
+    ],
+    "file": "firstdecode_refs.py",
+    "predecessor": {
+      "bytes": 5217,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair36-all4-publication-20261018-001/firstdecode_refs.py",
+      "sha256": "2f6c747d262c4fc6f0afc128b8d75eaf2aed0cd049530a1b39efa444c1568a3c"
+    },
+    "whole_inverse_verified": true
+  },
+  {
+    "edits": [
+      {
+        "after": "F.bind_closed(O,m['firstdecode_contract'],readonly,model_manifest=m)",
+        "before": "F.bind_closed(O,m['firstdecode_contract'],readonly)",
+        "count": 1
+      }
+    ],
+    "file": "bind_source.py",
+    "predecessor": {
+      "bytes": 5934,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-first-real-decode-owned-renew24h-v1-101-repair36-all4-publication-20261018-001/bind_source.py",
+      "sha256": "0a6ccdd73277ea3e495c2c7e040231693ef7fbbd46efef44e38ad3b73664e180"
+    },
+    "whole_inverse_verified": true
+  }
+]

@@ -1,0 +1,99 @@
+{
+  "authority_ref": {
+    "bytes": 3012,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+    "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+  },
+  "default_enabled": false,
+  "donor": {
+    "bytes": 15895,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-rounding-owner-binding-renew24h-v1-001/owner.py",
+    "sha256": "bc72da0fb7232b5a3098f3918171de3d070a3ab2ba0bcbfc3bfdd4625ef3d562"
+  },
+  "files": {
+    "PLAN.json": {
+      "bytes": 2024,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/PLAN.json",
+      "sha256": "36aad91d99d3da1e51a01a2fa7d0e29333f4a0e592fbacc454b2c4727b37963f"
+    },
+    "PROVENANCE.json": {
+      "bytes": 3345,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/PROVENANCE.json",
+      "sha256": "afe7183ef3801f601ad011255f65ed4c0cf2de9f9b69107353fc908fd24ff446"
+    },
+    "REVIEW.md": {
+      "bytes": 5375,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/REVIEW.md",
+      "sha256": "b3e8c91d1b4ea8736bb16c87f6fc79103a05970f0bee374d4f1788bc7f4301fa"
+    },
+    "bind.py": {
+      "bytes": 1634,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/bind.py",
+      "sha256": "7503cf19149099245234fb549e22053e84bcd701f837c04ed1a2cbd3a723b2b3"
+    },
+    "owner.py": {
+      "bytes": 15426,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/owner.py",
+      "sha256": "997115d25bf61703223c8422e8d14002a1b7f7e286d1b9b31a3c609f7d358ce0"
+    },
+    "plan.py": {
+      "bytes": 3936,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/plan.py",
+      "sha256": "5798d5b0b9c955163b5e3ffc0be49834cea1461866970f8135a20b142a690a61"
+    },
+    "probe.py": {
+      "bytes": 14846,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/probe.py",
+      "sha256": "e1bb7d9f394f11e43cd01915c4f295de756dbb325de144f5c3d8ce1b94b7906a"
+    },
+    "recover.py": {
+      "bytes": 3850,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/recover.py",
+      "sha256": "414a87002e8b15cb7e7ea8c94005045afe04fda45cd8488b8135c71da04d39a0"
+    },
+    "test_binding.py": {
+      "bytes": 4741,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/test_binding.py",
+      "sha256": "78b120a55d8e955c7994b92a54667c9ac9649112749dc57dd8d51c2fa37cf931"
+    },
+    "test_probe.py": {
+      "bytes": 3670,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/test_probe.py",
+      "sha256": "e2748abb7944240b58d1bb17178ceb6c8d98e1c19faea142b9ddb81aa6a8141c"
+    }
+  },
+  "kernel_path_proven": false,
+  "lifecycle_qualified": false,
+  "original_owner_pass": false,
+  "output_root": "/opt/host/vnf/austinov/run-bole-fa-probability-quantization-MAIN-RENEW24H_001/fa",
+  "prepared_only": true,
+  "prepared_template": null,
+  "profile": "fa",
+  "qualified": false,
+  "recovery_plan_ref": {
+    "bytes": 2024,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001/PLAN.json",
+    "sha256": "36aad91d99d3da1e51a01a2fa7d0e29333f4a0e592fbacc454b2c4727b37963f"
+  },
+  "resources": {
+    "Devices": [],
+    "NPU": false,
+    "child_max_seconds": 810,
+    "cleanup_max_seconds": 90,
+    "guest_GiB": 8,
+    "guest_cpus": 1,
+    "host_MiB": 512,
+    "initial_RAM_GiB": 16.5,
+    "initial_disk_floor_GiB": 13.5,
+    "live_disk_reserve_GiB": 8.5,
+    "output_GiB": 5,
+    "overlap": "strict existing no_overlap; MAIN admission only",
+    "raw_bytes": 776474709,
+    "scalar_probe_max_MiB": 16,
+    "whole_seconds": 900
+  },
+  "root": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-probability-quantization-renew24h-20261018-001",
+  "schema": "bole.fa-probability-quantization-source/v1",
+  "software_controls_actual_image_before_raw": 12,
+  "software_controls_local": 19
+}

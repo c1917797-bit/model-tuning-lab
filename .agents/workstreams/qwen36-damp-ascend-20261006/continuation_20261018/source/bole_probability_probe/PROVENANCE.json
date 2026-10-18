@@ -1,0 +1,69 @@
+{
+  "authority": {
+    "bytes": 3012,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/RENEW24H_AUTHORITY_20261017_084320.json",
+    "sha256": "cdba34641b429a6132e7af5a6a88a93b63faf7d0834a9313a8b948e2a4907b6d"
+  },
+  "authority_extended": false,
+  "changes": [
+    "New immutable root, owner label and exact consumer-only output leaf.",
+    "One original rank1 raw and three preregistered FA layer43 blocks instead of four-rank audit.",
+    "Only intervention: P64 nearest-even BF16 rounding, widened to FP64 before math.fsum PV.",
+    "Identical final BF16 rounding, no probability renormalization, same atol/rtol.",
+    "Retain original failing identities and 1/1/0 counts against completed rounding report.",
+    "No model, NPU, kernel, scheduler, shared ledger, original source or authority mutation."
+  ],
+  "completed_previous_diagnostic": {
+    "bytes": 38445,
+    "path": "/opt/host/vnf/austinov/run-bole-fa-rounding-binding-MAIN-RENEW24H_001/fa/consumer/RANK-1.json",
+    "sha256": "b70166459442dd5dd4c43f4d3fb044b71bd4b9980a5df0c20061bbf6d35d23b6"
+  },
+  "kernel_path_proven": false,
+  "local_validation": {
+    "binding_contracts_passed": 7,
+    "container_created": false,
+    "pure_CPU_arithmetic_controls_passed": 12,
+    "raw_executed": false,
+    "remote_executed": false,
+    "torch_available": false,
+    "total_passed": 19
+  },
+  "mathematical_scope": "Explanatory precision model only; matching saved values is not proof of the real kernel path.",
+  "original_rank_report": {
+    "bytes": 110007,
+    "path": "/opt/host/vnf/austinov/run-bole-r6-20261017-001-MAIN/cpu-consumer/RANK-1.json",
+    "sha256": "751fad500cd4d530f639bb3d35c8c07ea719c3493c798f17b02072c4f197ce32"
+  },
+  "original_raw": {
+    "bytes": 776474709,
+    "path": "/opt/host/vnf/austinov/run-bole-r6-20261017-001-MAIN/dense/receipts/BOLE-TREE-RANK-1.pt",
+    "sha256": "21ab99d4a503f45f750c1926eb383b633b7ced8e9f24b767275c107da89f1c34"
+  },
+  "original_receipt": {
+    "bytes": 2287,
+    "path": "/opt/host/vnf/austinov/run-bole-r6-20261017-001-MAIN/dense/receipts/BOLE-TREE-RANK-1.json",
+    "sha256": "2c667174e1851ab5ca762e612d34960217fff31297039b87601e0624696a64a7"
+  },
+  "original_source": {
+    "bytes": 81841,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261017-001-repair6-projection-scope/SOURCE_BOUND.json",
+    "sha256": "f3303cec9fea4c7445e81373e21cd0da5884be495b72a8847420bf4400bb92f5"
+  },
+  "qualified": false,
+  "schema": "bole.fa-probability-probe-provenance/v1",
+  "source_arithmetic": {
+    "bytes": 8159,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-rounding-owner-binding-renew24h-v1-001/rounding_audit.py",
+    "sha256": "f530764a8d93ebfd7f76ae2ee97f288ab2cc41def833be108245a4bddbc60eb3"
+  },
+  "source_bind": {
+    "bytes": 1628,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-rounding-owner-binding-renew24h-v1-001/bind.py",
+    "sha256": "e808a07ae4816fad78e2764ea4371a2bdf6ed604bffe1b1b06d3ff3e9a934b6b"
+  },
+  "source_owner": {
+    "bytes": 15895,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-fa-rounding-owner-binding-renew24h-v1-001/owner.py",
+    "sha256": "bc72da0fb7232b5a3098f3918171de3d070a3ab2ba0bcbfc3bfdd4625ef3d562"
+  }
+}
