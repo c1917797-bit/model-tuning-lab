@@ -1,0 +1,105 @@
+{
+  "schema": "ascend.stage-checkpoint/v1",
+  "observed_at_epoch": 1792288347.3595724,
+  "authority_cutoff_epoch": 1792313000,
+  "scope": "Actual GE2048 first 32 boundary frames; not whole-model performance or task accuracy",
+  "ge": {
+    "operation": "exec-00000000000015f4",
+    "physical": [
+      6
+    ],
+    "owner": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE2KFRAME001_S0_NPU_001/RESULT.json",
+      "bytes": 573046,
+      "sha256": "eeb43aa9e20e4369a03be96b3ebfa5fffc3b39c2f02fc0ca7e957a54616c3a05"
+    },
+    "consumer": {
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-mxr-event-single6-owned-main-RENEW24H_GE2KFRAME001_S0_NPU_001/physical6/numeric/CONSUMED.json",
+      "bytes": 45438,
+      "sha256": "987ea250b603451711ac1ee19c63a3725155bfb124f525928c6ce592c7dafb0c"
+    },
+    "frames": 32,
+    "output_pass": 32,
+    "state_pass": 30,
+    "failed_global_indices": [
+      0,
+      28
+    ],
+    "failure_metrics": [
+      {
+        "global_index": 0,
+        "state_frob_relative": 0.0027340984782091527,
+        "state_rmse_over_mean_ref_abs": 0.03722915161022038
+      },
+      {
+        "global_index": 28,
+        "state_frob_relative": 0.0021772649367389637,
+        "state_rmse_over_mean_ref_abs": 0.007373674700321932
+      }
+    ],
+    "unchanged_limits": {
+      "frob_relative": 0.002,
+      "rmse_over_mean_ref_abs": 0.02,
+      "r2_min": 0.999
+    },
+    "status": "CURRENT_CANDIDATE_NUMERIC_GATE_FAILED",
+    "attribution": "Pending independent algorithm-versus-capture/reference audit; not evidence that paper is generally invalid",
+    "remaining_shards": "Not launched after first shard failed; no unchanged retry",
+    "performance_started": false,
+    "task_accuracy_started": false,
+    "release": {
+      "container": "1341d9ff434264b35b98b5ca77812cf8ac01b0da1765ef43a728cb04e2cedbda",
+      "stopped": true,
+      "retained": true,
+      "pid": 0,
+      "exec_ids": null,
+      "oom": false,
+      "privileged": false,
+      "physical_to_logical": {
+        "6": 0
+      },
+      "observed_operation": "exec-0000000000001604"
+    }
+  },
+  "deltalog": {
+    "early_operation": "exec-00000000000015e7",
+    "early_result": {
+      "path": "/opt/host/vnf/austinov/run-dl-R32earlyscan-early-software-MAIN-RENEW24H_001/software/consumer/RESULT.json",
+      "bytes": 881,
+      "sha256": "c1ad97c9aeabc66afe54c6a8cf3c00aefdeb8c905e8af346195abef3ca398207"
+    },
+    "early_scope": "Same-image Devices[] software only; not NPU correctness",
+    "primary": null,
+    "secondary": [],
+    "release_verified": true,
+    "bind_attempt_1": {
+      "operation": "exec-00000000000015ea",
+      "outer_timeout_seconds": 180,
+      "outcome": "executor timeout; no source published and no binder process left in fresh 15f6",
+      "attribution": "MAIN failed to inherit historical verified binding time budget; not algorithm failure"
+    },
+    "bind_attempt_2": {
+      "operation": "exec-00000000000015fc",
+      "outer_timeout_seconds": 1200,
+      "status": "running_at_checkpoint",
+      "reason": "Identical binding path previously needed longer than 269 seconds; bounded outer budget corrected, no automatic retry or cutoff extension"
+    }
+  },
+  "dispatch": {
+    "agents": "GE numerical algorithm attribution; independent capture/native-reference audit; DeltaLog successor preparation",
+    "ready_gap": "No valid GE performance admission after numerical failure; independent task blocked on actual binding",
+    "window_utilization": "not_measured",
+    "no_fake_load": true,
+    "protected_physical": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "next": [
+    "Reuse failed saved GE frames for algorithm and reference attribution; repair only identified cause in a new source version",
+    "Continue DeltaLog actual binding independently; MAIN performs fresh resource admission before any TP4 attempt",
+    "Do not launch GE performance until relevant native numerical gate passes; preserve all original failures"
+  ]
+}
