@@ -1,0 +1,68 @@
+{
+  "CPU": 145,
+  "NPU": false,
+  "actual_execution_performed": false,
+  "change": "exact bole- unit naming compatibility only; v2 input/result schemas and all remaining runtime unchanged",
+  "cleanup_seconds": 180,
+  "files": {
+    "LOCAL_CONTROLS.json": {
+      "bytes": 920,
+      "sha256": "6d26d109a75f27229ad9c3672c1ded6bbd6f548fee1e2b094484c01702af0511"
+    },
+    "POLICY_SCHEMA.md": {
+      "bytes": 2481,
+      "sha256": "be1ea8903dd7e8097484893bcee50b21e3d7db8b2d871c5aaf1c8da50e455037"
+    },
+    "README.md": {
+      "bytes": 11597,
+      "sha256": "4d21ad8f17de8773a95f4a84c01e452e0190fd4f85a1be02589565c9dc422ad7"
+    },
+    "cpu_host.py": {
+      "bytes": 19286,
+      "sha256": "c4ab2e436aaea5aa51434d04b27d7e7bd9d927ad4348862d26159eefdecf2c83"
+    },
+    "cpu_steps.py": {
+      "bytes": 5550,
+      "sha256": "b0b829f37af232630a30275630813356385e6642bf48e82b2c9e7b5d6d2188d4"
+    },
+    "he_owned.py": {
+      "bytes": 5886,
+      "sha256": "2a1a4ac808e32dfeaf3383d71a1a091ab8a01e97d360eda4f5ef16e9d5d7d200"
+    },
+    "main_quiescence.py": {
+      "bytes": 7885,
+      "sha256": "81f86daaf52696da10cf6bed8375f37bae28ad9d527c0a86f7c74b142ceebc8c"
+    },
+    "owner_common.py": {
+      "bytes": 7607,
+      "sha256": "8c16341cd73a187c2d495b064c154bba4efa61680826dbe41b95e8768f30e8b9"
+    },
+    "owner_namespace.py": {
+      "bytes": 6565,
+      "sha256": "27809ed5720984495b8dec16d9ad39b6314d7001dbdff9f33e2c30c514ac6048"
+    },
+    "prepare_owner.py": {
+      "bytes": 3993,
+      "sha256": "9bd639ef3b8724d6e3a7969dc75213decbcf12fe63f14deb3efc2f9c4a4190b1"
+    },
+    "test_owner_pure.py": {
+      "bytes": 8553,
+      "sha256": "d8bfbcea02becea441a7a25855f01d2ea4ceb14acef5ea7606662ff017fb816d"
+    },
+    "test_quiescence_pure.py": {
+      "bytes": 8351,
+      "sha256": "491992f43984638dd206a3e5dab07c221f84cb08e0605366e0b40b688813b65a"
+    }
+  },
+  "frozen_task_packet_manifest_sha256": "f687ad69fa0226fe72565e8ed356b65244a475c570259c865e6b3cf68fcda851",
+  "host_CPU": 166,
+  "local_pure_tests": 28,
+  "local_pure_tests_passed": 28,
+  "model_ready": false,
+  "original_summed_ancestor_CPU_budget": 7,
+  "original_v1_manifest_sha256": "1385803194439a1da6fb2a9bcb0ce6a5ca235c60912c8a68b28f819e70fbde9b",
+  "original_v2_manifest_sha256": "e7c7f26a5dc327619708deac6771d8658655159741fd5f16200c7ce5020fbfa6",
+  "phase_seconds": 3600,
+  "schema": "bole.task-CPU-owner-advisory-packet/v3",
+  "status": "frozen for MAIN serial review/execution; default OFF"
+}

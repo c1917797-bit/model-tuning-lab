@@ -1,0 +1,11 @@
+{
+  "schema": "bole.G2-v3-sameimage-CPU-failure/v1",
+  "result_path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v3-CPU/RESULT.json",
+  "primary": "ValueError(\"actual original child failed {'path': '/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v3-CPU/cpu-preflight/SOFTWARE-CHILD.json', 'sha256': '0016c68bbbed76649b4351c1090ea383bed466ff9bddea4ee1eb04b13896cebf'}\")",
+  "secondary": [],
+  "source_equal": true,
+  "elapsed": 74.37097703991458,
+  "reason": "service_entry parses last stdout line from successful native parent suite as JSON; actual non-JSON tail observed",
+  "NPU": false,
+  "formal_success": false
+}

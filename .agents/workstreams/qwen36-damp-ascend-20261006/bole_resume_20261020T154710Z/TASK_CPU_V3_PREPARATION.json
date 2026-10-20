@@ -1,0 +1,33 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/task_cpu_owner_repair_v3/prepare_owner.py",
+    "--prepare",
+    "--G1-source-ref",
+    "{\"bytes\": 109479, \"path\": \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/SOURCE_BOUND.json\", \"sha256\": \"010914ebe1bf5d3e6b516103e1a376e24e0a0d965ac0a3a42d7aeb19fca57677\"}",
+    "--G1-owner-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/RESULT.json\", \"bytes\": 131517, \"sha256\": \"52030a932da1f3cd2392389a2d9246925e40c2d93186b5f67d41fba8cfa1e4fc\"}",
+    "--G1-bundle-ref",
+    "{\"bytes\": 44151, \"path\": \"/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/CONSUMER_INPUTS.json\", \"sha256\": \"a5f34ccd4c5e402a7d0858cfe91552cb665468c0c4fc40a68f9db977675b549f\"}",
+    "--G1-independent-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/cpu-consumer/ATTRIBUTION.json\", \"bytes\": 12221, \"sha256\": \"8caf55b28f4a3c4108b8b932e9c664e08b3c28ea18f0bf4fc3bdf62de3538d53\"}",
+    "--authority-ref",
+    "{\"bytes\": 764, \"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MODEL_AUTHORITY.json\", \"sha256\": \"e3046914e360c6ee5c8abd6e18fcdd2f3afaa733247ad1522e9b4cde6e67dda8\"}",
+    "--rendered-inputs-ref",
+    "{\"path\": \"/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-accuracy-render011-new48h-MAIN-20261015-001/cpu-preflight/producer/rendered/RENDERED_INPUTS.json\", \"bytes\": 3512, \"sha256\": \"8a2b30b77fb1716172fb533e3875cd1038cb986e1f0da61f95a4a5ab7b31a429\"}",
+    "--packet-root",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/task_cpu_packet_v1/task_decoder_scorer",
+    "--new-root",
+    "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v3",
+    "--output-root",
+    "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v3",
+    "--main-quiescence-ref",
+    "{\"path\":\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_CPU_QUIESCENCE_POLICY_V3.json\",\"bytes\":20009,\"sha256\":\"7e3b5be666f882a2534058e2db98bfd84cca988905bcd31ac2a06a1a8e48a760\"}"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"inputs_ref\": {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v3/OWNER_INPUTS.json\", \"bytes\": 53012, \"sha256\": \"b90784c01278a1cb687ffb8dd1dd98496861f5a9fdfdeaf50c7031610c27a5d9\"}, \"resources_admitted\": false, \"model_ready\": false, \"NPU\": false}\n",
+  "stderr": "",
+  "elapsed": 0.8929376100422814
+}

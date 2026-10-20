@@ -1,0 +1,99 @@
+{
+  "schema": "bole.GDN-timing-v3-actual-audit/v1",
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn3-timing-20261020T154710Z-v3/RESULT.json",
+    "bytes": 44291,
+    "sha256": "44db06891c9820b5429fb6bbadfdde0a967ad809a1266fcdd76cbb013986598d"
+  },
+  "timing_result": {
+    "bytes": 4194,
+    "path": "/opt/host/vnf/austinov/run-bole-gdn3-timing-20261020T154710Z-v3/data/TIMING-RESULT.json",
+    "sha256": "512b699edaf9ec8c8c4540f42b2f4cd739c89936db03b7e6fa259f173439ba20"
+  },
+  "independent": {
+    "bytes": 6362,
+    "path": "/opt/host/vnf/austinov/run-bole-gdn3-timing-20261020T154710Z-v3/consumer/TIMING-INDEPENDENT.json",
+    "sha256": "5790947df889f957b2bd7c736e1dbb8bd3c6d87ee98f35a02fa070d907b45ae4"
+  },
+  "release": {
+    "bytes": 729,
+    "path": "/opt/host/vnf/austinov/run-bole-gdn3-timing-20261020T154710Z-v3/RELEASE.json",
+    "sha256": "bf9d0904ec00bca92a812743eb3f5f42092df27cd137bb6205b99b56f2bf16dc"
+  },
+  "source_equal": true,
+  "all_owned_stopped_retained": true,
+  "primary": null,
+  "secondary": [],
+  "elapsed": 254.3976603599731,
+  "independent_statistics_pass": true,
+  "statistics": {
+    "aggregate": {
+      "column_strided": {
+        "candidate_sum_mean_unit_ns": 121878895.0,
+        "component_scope_only": true,
+        "excluded_frames": 0,
+        "excluded_samples": 0,
+        "frames": 192,
+        "original_sum_mean_unit_ns": 298213987.375,
+        "ratio_original_over_candidate": 2.446805801570485
+      },
+      "contiguous": {
+        "candidate_sum_mean_unit_ns": 121993965.375,
+        "component_scope_only": true,
+        "excluded_frames": 0,
+        "excluded_samples": 0,
+        "frames": 192,
+        "original_sum_mean_unit_ns": 298375947.375,
+        "ratio_original_over_candidate": 2.445825467332056
+      }
+    },
+    "aggregate_by_order": {
+      "column_strided": {
+        "AB": {
+          "candidate_sum_mean_unit_ns": 122178293.25,
+          "component_scope_only": true,
+          "frames": 192,
+          "original_sum_mean_unit_ns": 297923500.75,
+          "ratio_original_over_candidate": 2.438432333805743,
+          "sample_pairs_per_frame": 10
+        },
+        "BA": {
+          "candidate_sum_mean_unit_ns": 121579496.75,
+          "component_scope_only": true,
+          "frames": 192,
+          "original_sum_mean_unit_ns": 298504474.0,
+          "ratio_original_over_candidate": 2.4552205098677544,
+          "sample_pairs_per_frame": 10
+        }
+      },
+      "contiguous": {
+        "AB": {
+          "candidate_sum_mean_unit_ns": 122489375.5,
+          "component_scope_only": true,
+          "frames": 192,
+          "original_sum_mean_unit_ns": 298719851.5,
+          "ratio_original_over_candidate": 2.4387409134925337,
+          "sample_pairs_per_frame": 10
+        },
+        "BA": {
+          "candidate_sum_mean_unit_ns": 121498555.25,
+          "component_scope_only": true,
+          "frames": 192,
+          "original_sum_mean_unit_ns": 298032043.25,
+          "ratio_original_over_candidate": 2.452967795680846,
+          "sample_pairs_per_frame": 10
+        }
+      }
+    },
+    "actual_frame_layouts": 384,
+    "actual_frames": 192,
+    "raw_batch_durations": 15360,
+    "raw_sample_pairs": 7680,
+    "outliers_removed": 0,
+    "speed_threshold_asserted": false
+  },
+  "numerical_replay_recomputed": false,
+  "E2E_measured": false,
+  "formal_success": false,
+  "limitation": "component warmed matched-call timing; not full model or 10percent E2E acceptance"
+}

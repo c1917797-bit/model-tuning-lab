@@ -1,0 +1,43 @@
+{
+  "AST_all_pass": true,
+  "NPU": false,
+  "actual_common_runtime_keys": 32,
+  "cold_default_help_cli_cases": 8,
+  "exit_code": 0,
+  "explicit_observer_runtime_keys": [
+    "device_op"
+  ],
+  "finite_observer_dynamic_key_sets": [
+    [
+      "gpu_input_batch",
+      "npu_input_batch",
+      "sampling_metadata",
+      "sampling_params"
+    ],
+    [
+      "base_runner",
+      "qwen35",
+      "qwen_next",
+      "runner"
+    ]
+  ],
+  "formal_success": false,
+  "host_executed": false,
+  "model_ready": false,
+  "observer_math_bytes_unchanged": true,
+  "old_map_fails_at": "native_ar_observer.py:251",
+  "prepared_only": true,
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "runtime_audited_sources": 23,
+  "runtime_closure_missing": [],
+  "runtime_closure_unresolved": [],
+  "sameimage_executed": false,
+  "schema": "bole.native-ar-runtime-closure-local-checks/v4",
+  "unchanged_runtime_sources": [
+    "ar_host_namespace.py",
+    "ar_snapshot_bindings.py",
+    "ar_sameimage_preflight.py",
+    "native_ar_host.py"
+  ],
+  "unittest_cases": 11
+}

@@ -1,0 +1,32 @@
+{
+  "CPU242_still_required": true,
+  "NPU": false,
+  "actual_host_audit_executed": false,
+  "advisory_pure_tests": 14,
+  "default_enabled": false,
+  "inventory": {
+    "README.md": {
+      "bytes": 4144,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_readset_audit_repair_v4/README.md",
+      "sha256": "3a1cb1d85b465ff30b90360596779cdd49e5c3c1236f311f3f52d47a72406359"
+    },
+    "audit_command.py": {
+      "bytes": 694,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_readset_audit_repair_v4/audit_command.py",
+      "sha256": "efbc0b66765bba87c14d5152c14e3d15ac60500ea935a8dcd74e0e9a34e854f2"
+    },
+    "audit_readset_v4.py": {
+      "bytes": 11332,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_readset_audit_repair_v4/audit_readset_v4.py",
+      "sha256": "7b1c0f3b65e0a2eaf2148c9d800683a95d6e83aa4316216e94c9a446cb6076b1"
+    },
+    "test_audit_readset_v4.py": {
+      "bytes": 10708,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_readset_audit_repair_v4/test_audit_readset_v4.py",
+      "sha256": "7ac4ac77f6849b9dbf430d9016c6e3288a602cb27df0b0b8940fb9c13ce70cee"
+    }
+  },
+  "only_source_preparation_supplement": true,
+  "prior_source_COMMANDS_runtime_oracles_controls_unchanged": true,
+  "schema": "bole.readonly-G2-v3-audit-repair-packet/v4"
+}

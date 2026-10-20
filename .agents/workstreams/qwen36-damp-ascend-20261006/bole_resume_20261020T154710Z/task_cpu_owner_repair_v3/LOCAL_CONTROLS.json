@@ -1,0 +1,27 @@
+{
+  "AST_python_files": 9,
+  "actual_generated_code_executed": false,
+  "actual_model_or_NPU_executed": false,
+  "actual_systemd_or_Docker_executed": false,
+  "actual_tokenizer_executed": false,
+  "command": "python3 -I -B -m unittest discover -s bole_service_proposals/task_cpu_owner_repair_v3 -p 'test*.py' -v",
+  "default_OFF_and_help_entrypoints": [
+    "prepare_owner.py",
+    "cpu_steps.py",
+    "cpu_host.py"
+  ],
+  "frozen_v1_manifest_sha256": "1385803194439a1da6fb2a9bcb0ce6a5ca235c60912c8a68b28f819e70fbde9b",
+  "frozen_v2_manifest_sha256": "e7c7f26a5dc327619708deac6771d8658655159741fd5f16200c7ce5020fbfa6",
+  "model_ready": false,
+  "passed": 28,
+  "pure_tests": 28,
+  "schema": "bole.task-CPU-owner-repair-local-controls/v3",
+  "task_score_produced": false,
+  "unchanged_runtime_files": [
+    "owner_namespace.py",
+    "cpu_steps.py",
+    "he_owned.py"
+  ],
+  "v1_unchanged": true,
+  "v2_unchanged": true
+}
