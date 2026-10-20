@@ -1,0 +1,127 @@
+{
+  "E2E_measured": false,
+  "NPU": false,
+  "actual_replay_audit": {
+    "bytes": 2942,
+    "path": "/workspace/scratch/6d9e7cc63b51/GDN_REPLAY_V2_AUDIT.json",
+    "sha256": "76ab5d53fe7bd2156b42803ca6e328343a74aa43226b9c5dbb6d9d50b75c516a"
+  },
+  "actual_replay_independent": {
+    "bytes": 1247867,
+    "path": "/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2/consumer/INDEPENDENT.json",
+    "sha256": "fa57d2ebf4c2e12a4927ba76aeef21af62efa1d4ef69821daaa9d98e6015772c"
+  },
+  "baseline_boot": {
+    "bytes": 1532,
+    "path": "/workspace/scratch/6d9e7cc63b51/gdn_owned_boot.py",
+    "sha256": "eccb8c3b2eb17c6f76fa69425187d9b2ff7c8076adea269d66772ddc74c5e13d"
+  },
+  "baseline_owner": {
+    "bytes": 12517,
+    "path": "/workspace/scratch/6d9e7cc63b51/gdn_owned_v2_controller.py",
+    "sha256": "18ce957ef0a8130e64d73f7c73a99536e19f283ea68e09620c6b328fd089a195"
+  },
+  "default_enabled": false,
+  "files": {
+    "INPUTS_TEMPLATE.json": {
+      "bytes": 2921,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing_owner/INPUTS_TEMPLATE.json",
+      "sha256": "90e1fe68a66e60c6680f5ecc5155941e48f159cb8b439f22b61be8e6f43aa967"
+    },
+    "LOCAL_CHECKS.json": {
+      "bytes": 751,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing_owner/LOCAL_CHECKS.json",
+      "sha256": "465fe7ec19a9a017433703cf06f3d08c22e807cb05fe648b761d1cf03e35ed7d"
+    },
+    "README.md": {
+      "bytes": 9595,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing_owner/README.md",
+      "sha256": "a8c2d0cfd63d10913ce1c3d7ff8e0841a834f524771597a9e22d00703d31bdbc"
+    },
+    "build_inputs.py": {
+      "bytes": 2718,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing_owner/build_inputs.py",
+      "sha256": "16e5c6434cd1809bae141f62b7fb980a020c91d01ff1b57b30c2b4fd5dfed596"
+    },
+    "consume_timing.py": {
+      "bytes": 21168,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing_owner/consume_timing.py",
+      "sha256": "bf36098fd554c1c889fac72b9636f90b89ce5a607579b2550700285b563c958a"
+    },
+    "test_pure.py": {
+      "bytes": 7533,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing_owner/test_pure.py",
+      "sha256": "ffa3e72508b1a27c7d3a9939e00a5f1f492d75f9eff469b7b5ef13c6bff13dbf"
+    },
+    "timing_boot.py": {
+      "bytes": 2756,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing_owner/timing_boot.py",
+      "sha256": "9c538bc01f485fc5d17ffa7c1d5da8cdf9e0343e5e88b2b0b995756c4a58701c"
+    },
+    "timing_owner.py": {
+      "bytes": 17126,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing_owner/timing_owner.py",
+      "sha256": "3e333b6559474121f8b025a7401e78c951a1dd3d9296f83c6e89b327cb804c24"
+    },
+    "timing_owner_common.py": {
+      "bytes": 14085,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing_owner/timing_owner_common.py",
+      "sha256": "b85a898405a6327c5896865ba2d7e4961e28e3399750e59d72d186cb1e80dba3"
+    }
+  },
+  "formal_success": false,
+  "frozen_timing_sources": {
+    "time_gdn.py": {
+      "bytes": 29551,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing/time_gdn.py",
+      "sha256": "42528490c2b12b6fb435056528161a034540a2075038066c3e154984a8b1ee53"
+    },
+    "timing_paths.py": {
+      "bytes": 3481,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing/timing_paths.py",
+      "sha256": "538c4d487c09cafe6f0cf0ce55bef01c25752d77a95fab32299dfae7d90fa121"
+    }
+  },
+  "host_executed": false,
+  "independent_statistics_actual_run": false,
+  "model_ready": false,
+  "prepared_only": true,
+  "runtime_container_refs": {
+    "ascend_compiler": {
+      "bytes": 53431,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/triton/backends/ascend/compiler.py",
+      "sha256": "253bdb0d9bf2d092c8c1ae40cc610b2d00c534b127f9d258e9e8e1a221934002"
+    },
+    "triton_compiled": {
+      "bytes": 18714,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/triton/compiler/compiler.py",
+      "sha256": "4e432986cb567b94d282f9a2c2f9911a6c3718337289fa936f240282a6a5d54b"
+    },
+    "triton_jit": {
+      "bytes": 36630,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/triton/runtime/jit.py",
+      "sha256": "8f170a849331e9ce75b0d2d05e0bcd6ad2f9de838bfb277e823617982d672aad"
+    }
+  },
+  "runtime_host_evidence": {
+    "ascend_compiler": {
+      "bytes": 53431,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/installed/triton_ascend_compiler.py",
+      "sha256": "253bdb0d9bf2d092c8c1ae40cc610b2d00c534b127f9d258e9e8e1a221934002"
+    },
+    "triton_compiled": {
+      "bytes": 18714,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/installed/triton_compiled.py",
+      "sha256": "4e432986cb567b94d282f9a2c2f9911a6c3718337289fa936f240282a6a5d54b"
+    },
+    "triton_jit": {
+      "bytes": 36630,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/installed/triton_jit.py",
+      "sha256": "8f170a849331e9ce75b0d2d05e0bcd6ad2f9de838bfb277e823617982d672aad"
+    }
+  },
+  "sameimage_software_executed": false,
+  "schema": "bole.gdn3-timing-owner-advisory/v1",
+  "ten_percent_E2E_claim": false,
+  "timing_complete": false
+}

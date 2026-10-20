@@ -1,0 +1,99 @@
+{
+  "schema": "bole.gdn-timing-source-resolution-repair/v2",
+  "files": {
+    "README_V2.md": {
+      "bytes": 663,
+      "sha256": "e91e94c9b0051ee00d7587d707784f6b6beb890cd8c504f8a4f884de1f34184c"
+    },
+    "gdn_timing/ADMISSION_TEMPLATE.json": {
+      "bytes": 381,
+      "sha256": "cf7c2513eb302945e3eeb2da0ba68e77ff13a40f56dd01506a6d1b7dc42b834c"
+    },
+    "gdn_timing/MANIFEST_TEMPLATE.json": {
+      "bytes": 702,
+      "sha256": "9c0928c41f5ce39fe39e84d321864e35b2359ed2bd398d85f7846594214d30f3"
+    },
+    "gdn_timing/PARENT_ADVISORY_MANIFEST.json": {
+      "bytes": 3494,
+      "sha256": "bdd11d2844433dbb1df4a4ed6fd5b42cba5512b4444a6b6e7309d08d664b6492"
+    },
+    "gdn_timing/PARENT_LOCAL_CHECKS.json": {
+      "bytes": 703,
+      "sha256": "b3b5522518df5188ff9ff32998fb38c81665b07d0f6b084da1d982650b5c8169"
+    },
+    "gdn_timing/README.md": {
+      "bytes": 7309,
+      "sha256": "d46a323a0285d8b821bd1d1cb232270fa460cb3c8f963d10a239d063a0060120"
+    },
+    "gdn_timing/check_stdlib.py": {
+      "bytes": 4350,
+      "sha256": "14d5e67493746ffdd8beedf2a979df74bab30a19d649ca3d7617e773f8cdd1e6"
+    },
+    "gdn_timing/time_gdn.py": {
+      "bytes": 30256,
+      "sha256": "babb3d4f6e2c286229ba056060e023054237ea8bc826672350cd42a7157c82ff"
+    },
+    "gdn_timing/timing_paths.py": {
+      "bytes": 3481,
+      "sha256": "538c4d487c09cafe6f0cf0ce55bef01c25752d77a95fab32299dfae7d90fa121"
+    },
+    "gdn_timing_owner/INPUTS_TEMPLATE.json": {
+      "bytes": 2921,
+      "sha256": "90e1fe68a66e60c6680f5ecc5155941e48f159cb8b439f22b61be8e6f43aa967"
+    },
+    "gdn_timing_owner/PARENT_ADVISORY_MANIFEST.json": {
+      "bytes": 5393,
+      "sha256": "d18d03e75855879401b551c18311952924ed7e30401096999466eba1f912ddf2"
+    },
+    "gdn_timing_owner/PARENT_LOCAL_CHECKS.json": {
+      "bytes": 751,
+      "sha256": "465fe7ec19a9a017433703cf06f3d08c22e807cb05fe648b761d1cf03e35ed7d"
+    },
+    "gdn_timing_owner/README.md": {
+      "bytes": 9595,
+      "sha256": "a8c2d0cfd63d10913ce1c3d7ff8e0841a834f524771597a9e22d00703d31bdbc"
+    },
+    "gdn_timing_owner/build_inputs.py": {
+      "bytes": 2718,
+      "sha256": "16e5c6434cd1809bae141f62b7fb980a020c91d01ff1b57b30c2b4fd5dfed596"
+    },
+    "gdn_timing_owner/consume_timing.py": {
+      "bytes": 21168,
+      "sha256": "bf36098fd554c1c889fac72b9636f90b89ce5a607579b2550700285b563c958a"
+    },
+    "gdn_timing_owner/test_backend_source.py": {
+      "bytes": 1773,
+      "sha256": "7d9869c102cde346947fbafc094bf72f2a12df121be7cefd42eb23d2a4330b9f"
+    },
+    "gdn_timing_owner/test_pure.py": {
+      "bytes": 7533,
+      "sha256": "ffa3e72508b1a27c7d3a9939e00a5f1f492d75f9eff469b7b5ef13c6bff13dbf"
+    },
+    "gdn_timing_owner/timing_boot.py": {
+      "bytes": 2756,
+      "sha256": "9c538bc01f485fc5d17ffa7c1d5da8cdf9e0343e5e88b2b0b995756c4a58701c"
+    },
+    "gdn_timing_owner/timing_owner.py": {
+      "bytes": 17126,
+      "sha256": "3e333b6559474121f8b025a7401e78c951a1dd3d9296f83c6e89b327cb804c24"
+    },
+    "gdn_timing_owner/timing_owner_common.py": {
+      "bytes": 14085,
+      "sha256": "a4ddf67765ba769443b198dcff5a829f08b862d88e06507bc59ce5b9a170b351"
+    },
+    "references/GDN_REPLAY_V2_AUDIT.json": {
+      "bytes": 2942,
+      "sha256": "76ab5d53fe7bd2156b42803ca6e328343a74aa43226b9c5dbb6d9d50b75c516a"
+    },
+    "references/gdn_owned_v2_controller.py": {
+      "bytes": 12517,
+      "sha256": "18ce957ef0a8130e64d73f7c73a99536e19f283ea68e09620c6b328fd089a195"
+    }
+  },
+  "parent_failure": "/opt/host/vnf/austinov/run-bole-gdn3-timing-20261020T154710Z-v1/data/FAILURE.json",
+  "math_changed": false,
+  "timing_config_changed": false,
+  "measured_paths_changed": false,
+  "actual_NPU_execution": false,
+  "formal_success": false
+}

@@ -1,0 +1,28 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v3/gdn_timing_owner/build_inputs.py",
+    "--execute",
+    "--source-dir",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v3/gdn_timing_owner",
+    "--timing-dir",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v3/gdn_timing",
+    "--baseline-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v3/references/gdn_owned_v2_controller.py\", \"bytes\": 12517, \"sha256\": \"18ce957ef0a8130e64d73f7c73a99536e19f283ea68e09620c6b328fd089a195\"}",
+    "--audit-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v3/references/GDN_REPLAY_V2_AUDIT.json\", \"bytes\": 2942, \"sha256\": \"76ab5d53fe7bd2156b42803ca6e328343a74aa43226b9c5dbb6d9d50b75c516a\"}",
+    "--runtime-host-evidence",
+    "{\"triton_jit\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/kernel_v1/evidence/triton_jit.py\", \"bytes\": 36630, \"sha256\": \"8f170a849331e9ce75b0d2d05e0bcd6ad2f9de838bfb277e823617982d672aad\"}, \"triton_compiled\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/kernel_v1/evidence/triton_compiled.py\", \"bytes\": 18714, \"sha256\": \"4e432986cb567b94d282f9a2c2f9911a6c3718337289fa936f240282a6a5d54b\"}, \"ascend_compiler\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/kernel_v1/evidence/triton_ascend_compiler.py\", \"bytes\": 53431, \"sha256\": \"253bdb0d9bf2d092c8c1ae40cc610b2d00c534b127f9d258e9e8e1a221934002\"}}",
+    "--name",
+    "bole-gdn3-timing-20261020t154710z-v3",
+    "--reader-name",
+    "bole-gdn3-timing-reader-20261020t154710z-v3",
+    "--output",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v3/INPUTS.json"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"inputs\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v3/INPUTS.json\", \"bytes\": 5287, \"sha256\": \"2b4ee50cd0abe010d9f688a1c29fa04af0814b2163d4eae223eec725e2e57222\"}, \"prepared_only\": true, \"admission_created\": false, \"NPU\": false, \"timing_complete\": false, \"formal_success\": false}\n",
+  "stderr": ""
+}

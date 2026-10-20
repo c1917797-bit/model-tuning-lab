@@ -1,0 +1,89 @@
+{
+  "NPU": false,
+  "bounded_pair_pass": false,
+  "default_enabled": false,
+  "files": {
+    "LOCAL_CHECKS.json": {
+      "bytes": 572,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v3/LOCAL_CHECKS.json",
+      "sha256": "c906868a3e86d72ea98afe1e80c54ea21a70bd37bc2fd5c785f32e5de3b69842"
+    },
+    "README.md": {
+      "bytes": 6324,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v3/README.md",
+      "sha256": "c690469c5471c37718a5c10dd4c5c45f4f36cddf896a548455e2fbd2d9d237ca"
+    },
+    "SOURCE_EDITS.json": {
+      "bytes": 33306,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v3/SOURCE_EDITS.json",
+      "sha256": "acd55ccb936f212c1884c6c045e2be790ea4c5bed5282612a4bfed9de49d2929"
+    },
+    "ar_host_namespace.py": {
+      "bytes": 4109,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v3/ar_host_namespace.py",
+      "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+    },
+    "ar_owner_common.py": {
+      "bytes": 12292,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v3/ar_owner_common.py",
+      "sha256": "704cce091af8b1a67cc91813b33a081e1cc6f04ebdb6f5b050c182ce8058b80c"
+    },
+    "ar_sameimage_preflight.py": {
+      "bytes": 6103,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v3/ar_sameimage_preflight.py",
+      "sha256": "9f9270c991fe9bf7897a2f30b97e414c1faff9a951f544febf9ef205a703eae1"
+    },
+    "ar_snapshot_bindings.py": {
+      "bytes": 2502,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v3/ar_snapshot_bindings.py",
+      "sha256": "35421924cd8fbc4d7989e0e1d70a33db61290e45187251391ddb3fbc06ec9f56"
+    },
+    "consume_pair_entry.py": {
+      "bytes": 9325,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v3/consume_pair_entry.py",
+      "sha256": "33d18abdf596757e947f9e5b93950312d7ded851dc54e6ec9cb86045040b47bf"
+    },
+    "native_ar_host.py": {
+      "bytes": 13981,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v3/native_ar_host.py",
+      "sha256": "fd551c1c6084e4920f7d8c111761cb3753948dc73aa3f28b0a8c0a031d8ed27f"
+    },
+    "prepare_native_owner.py": {
+      "bytes": 5234,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v3/prepare_native_owner.py",
+      "sha256": "04dbf464ec0d1597c86e28489981d7f72ffbd014d233fd07ee8a9da3232a8668"
+    },
+    "test_framework_map_pure.py": {
+      "bytes": 5665,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v3/test_framework_map_pure.py",
+      "sha256": "1d2950a85115b4e77b4b38b0785344511e1d89ef66ad169a4c68a5cf46b5e65d"
+    }
+  },
+  "formal_success": false,
+  "framework_catalogue_from_all_four_actual_G1_snapshots": true,
+  "framework_host_evidence_required": true,
+  "host_executed": false,
+  "host_skip_is_exact_full_Ref3_identity": true,
+  "matched_common_plugin_effects_gate_pending": true,
+  "model_ready": false,
+  "native_AR_reference_smoke_pass": false,
+  "only_modified_runtime_files": [
+    "ar_owner_common.py",
+    "prepare_native_owner.py"
+  ],
+  "prefix_skip": false,
+  "prepared_only": true,
+  "sameimage_executed": false,
+  "schema": "bole.native-ar-owner-repair-advisory/v3",
+  "unchanged_source_only_preflight": {
+    "bytes": 6103,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v3/ar_sameimage_preflight.py",
+    "sha256": "9f9270c991fe9bf7897a2f30b97e414c1faff9a951f544febf9ef205a703eae1"
+  },
+  "unknown_refs_still_fail": true,
+  "v2_advisory": {
+    "bytes": 4075,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v2/ADVISORY_MANIFEST.json",
+    "sha256": "2015e64922c30c0ca2632c7a5dd381f395ebf82d760368922e9e2a5d53b88a53"
+  }
+}

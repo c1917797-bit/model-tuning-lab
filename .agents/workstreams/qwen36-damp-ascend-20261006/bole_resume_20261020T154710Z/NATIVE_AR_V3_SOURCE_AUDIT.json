@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v3/native_ar_host.py",
+    "--source-audit",
+    "--inputs-ref",
+    "{\"path\":\"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v3/INPUTS.json\",\"bytes\":12465,\"sha256\":\"b59d95087f05e5b6ea98d171a13bb0a5f1a52604762caedf993e34e8942ed8f8\"}"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"inputs\": {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v3/INPUTS.json\", \"bytes\": 12465, \"sha256\": \"b59d95087f05e5b6ea98d171a13bb0a5f1a52604762caedf993e34e8942ed8f8\"}, \"source\": {\"bytes\": 12598, \"path\": \"/opt/host/vnf/austinov/bole-native-ar-pair-20261020T154710Z-v3/SOURCE_BOUND.json\", \"sha256\": \"7cb3cb83aa4221aadab62c6ef182f1efaf90fc3bdab79be3e542d78138178d97\"}, \"readset\": 521, \"NPU\": false, \"resources_admitted\": false}\n",
+  "stderr": ""
+}
