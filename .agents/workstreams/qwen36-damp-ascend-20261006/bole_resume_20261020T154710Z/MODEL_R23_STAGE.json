@@ -1,0 +1,36 @@
+{
+  "schema": "bole.r23-complete-diagnostic-stage/v1",
+  "source": {
+    "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r23/SOURCE_BOUND.json",
+    "bytes": 78768,
+    "sha256": "3b0843d87ced4cdfa3ee0f2ab753a1c1193e71ffdea15f64809098d8df3dac09"
+  },
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r23/RESULT.json",
+    "bytes": 113195,
+    "sha256": "96cadfbe9f3344c14a015cb9e8375a7be202614b04a2c2099ce90eb7e3f117cf"
+  },
+  "attribution": {
+    "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r23/cpu-consumer/ATTRIBUTION.json",
+    "bytes": 12299,
+    "sha256": "2f014c2d32e9d67883945f0a125762efc1f964d5b09e807f779b1f0cc68eb943"
+  },
+  "audit": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/AUDIT_R23.json",
+    "bytes": 10488,
+    "sha256": "c87c24e002f339cdfd8106b7307782417ec7d8386652dd612057b37ad51e0a7f"
+  },
+  "all64_layers_each_rank": true,
+  "original_tree_fa_frames": 64,
+  "original_tree_gdn_frames": 192,
+  "original_pointwise_native_AR_FA_frames": 256,
+  "all_original_bounds_pass": true,
+  "all4_greedy_identity": true,
+  "all128_writeback_restore_each_rank": true,
+  "whole_hidden_logit_epsilon": null,
+  "whole_tensor_qualified": false,
+  "scheduler_committed": false,
+  "formal_tasks": false,
+  "formal_performance": false,
+  "final_success": false
+}

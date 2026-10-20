@@ -1,0 +1,55 @@
+{
+  "schema": "bole.explicit-native-ar-control-delta/v1",
+  "edits": [
+    {
+      "file": "model_entry.py",
+      "before": "  out,_=self.torch_npu.npu_fused_infer_attention_score(query=q,key=k,value=v,input_layout='BNSD',num_heads=6,num_key_value_heads=1,scale=256**-.5,actual_seq_lengths=[1],actual_seq_lengths_kv=[cache['key'].shape[0]],sparse_mode=0,pre_tokens=2147483647,next_tokens=2147483647,inner_precise=0)",
+      "after": "  from ar_fp16_boundary import NativeARBoundary\n  boundary=NativeARBoundary(t,self.torch_npu,ctx.captures[b['index']],self.own_source['files']['ar_fp16_boundary.py'],self.own_source['native_ar_boundary_repair']['evidence'])\n  out,_=boundary.npu_fused_infer_attention_score(query=q,key=k,value=v,input_layout='BNSD',num_heads=6,num_key_value_heads=1,scale=256**-.5,actual_seq_lengths=[1],actual_seq_lengths_kv=[cache['key'].shape[0]],sparse_mode=0,pre_tokens=2147483647,next_tokens=2147483647,inner_precise=0)"
+    },
+    {
+      "file": "consume_model.py",
+      "before": "expected=dict(changed=int((delta!=0).sum()),elements=delta.numel(),peak_abs=float(delta.max()))",
+      "after": "cast_expected=dict(changed=int((delta!=0).sum()),elements=delta.numel(),peak_abs=float(delta.max()))"
+    },
+    {
+      "file": "consume_model.py",
+      "before": "boundary['cast'][key]==expected,",
+      "after": "boundary['cast'][key]==cast_expected,"
+    },
+    {
+      "file": "consume_model.py",
+      "before": "assigned,bindings=identity_join(sr,bundle);reports=[];rows=[];vocabulary=[];calibrations=[]",
+      "after": "assigned,bindings=identity_join(sr,bundle);reports=[];rows=[];vocabulary=[];calibrations=[];ar_reports=[]"
+    },
+    {
+      "file": "consume_model.py",
+      "before": "  report,vectors=I.consume(t,raw,oracle112)",
+      "after": "  import ar_model_consumer as AR\n  C.need(C.ref(AR.__file__)==m['files']['ar_model_consumer.py'],'exact independent AR control reader')\n  ar_report=AR.consume(t,raw,m)\n  ar_ref=C.write(out/('AR-RANK-%d.json'%expected),dict(source=sr,raw=pair['raw'],report=ar_report))\n  ar_reports.append(ar_ref)\n  report,vectors=I.consume(t,raw,oracle112)"
+    },
+    {
+      "file": "consume_model.py",
+      "before": "  diagnostic_complete=True,component_checks_pass=",
+      "after": "  native_ar_attention_qualified=all(C.obj(x)['report']['passed']for x in ar_reports),native_ar_reports=ar_reports,\n  greedy_identity_pass=all(x['greedy_identity_pass']for x in rows),\n  diagnostic_complete=True,component_checks_pass="
+    },
+    {
+      "file": "consume_model.py",
+      "before": " return result\n\n\ndef main():",
+      "after": " C.need(result['native_ar_attention_qualified'],'native AR control original pointwise bounds failed')\n C.need(result['greedy_identity_pass'],'full model greedy identity failed against FP16 native AR control')\n return result\n\n\ndef main():"
+    },
+    {
+      "file": "entry.py",
+      "before": "r.testsRun==150",
+      "after": "r.testsRun==154"
+    },
+    {
+      "file": "test_output_contract_repair4.py",
+      "before": "commands['required_sameimage_software_cases'],150",
+      "after": "commands['required_sameimage_software_cases'],154"
+    },
+    {
+      "file": "test_repair14_delta.py",
+      "before": "  self.assertEqual(actual.replace(new,old),previous_text(P/\"model_entry.py\"))",
+      "after": "  ar_new=\"  from ar_fp16_boundary import NativeARBoundary\\n  boundary=NativeARBoundary(t,self.torch_npu,ctx.captures[b['index']],self.own_source['files']['ar_fp16_boundary.py'],self.own_source['native_ar_boundary_repair']['evidence'])\\n  out,_=boundary.npu_fused_infer_attention_score(query=q,key=k,value=v,input_layout='BNSD',num_heads=6,num_key_value_heads=1,scale=256**-.5,actual_seq_lengths=[1],actual_seq_lengths_kv=[cache['key'].shape[0]],sparse_mode=0,pre_tokens=2147483647,next_tokens=2147483647,inner_precise=0)\"\n  ar_old=\"  out,_=self.torch_npu.npu_fused_infer_attention_score(query=q,key=k,value=v,input_layout='BNSD',num_heads=6,num_key_value_heads=1,scale=256**-.5,actual_seq_lengths=[1],actual_seq_lengths_kv=[cache['key'].shape[0]],sparse_mode=0,pre_tokens=2147483647,next_tokens=2147483647,inner_precise=0)\"\n  self.assertEqual(actual.count(ar_new),1)\n  self.assertEqual(actual.replace(new,old).replace(ar_new,ar_old),previous_text(P/\"model_entry.py\"))"
+    }
+  ]
+}

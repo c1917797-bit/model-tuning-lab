@@ -1,0 +1,342 @@
+{
+  "state": "diagnostic-complete",
+  "facts": {
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r23/RESULT.json",
+      "bytes": 113195,
+      "sha256": "96cadfbe9f3344c14a015cb9e8375a7be202614b04a2c2099ce90eb7e3f117cf"
+    },
+    "source": {
+      "bytes": 78768,
+      "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r23/SOURCE_BOUND.json",
+      "sha256": "3b0843d87ced4cdfa3ee0f2ab753a1c1193e71ffdea15f64809098d8df3dac09"
+    },
+    "primary": null,
+    "secondary": [],
+    "source_unchanged": true,
+    "elapsed": 625.3563951300457,
+    "cleanup_seconds": 51.34575483005028
+  },
+  "attribution": {
+    "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r23/cpu-consumer/ATTRIBUTION.json",
+    "bytes": 12299,
+    "sha256": "2f014c2d32e9d67883945f0a125762efc1f964d5b09e807f779b1f0cc68eb943"
+  },
+  "fa_frames_passed": 64,
+  "gdn_frames_passed": 192,
+  "original_component_limits_unchanged": true,
+  "greedy_smoke_identity": true,
+  "complete_selected_cache_writeback_restore": true,
+  "actual_four_rank_request_retirement": true,
+  "reports": [
+    {
+      "rank": 0,
+      "report": {
+        "bytes": 109976,
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r23/cpu-consumer/RANK-0.json",
+        "sha256": "87ea787c9d6bc79b46efd6e39a477e77d51dcc1df8e5408c27f0534e18acf486"
+      },
+      "raw": {
+        "bytes": 776504853,
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r23/dense/receipts/BOLE-TREE-RANK-0.pt",
+        "sha256": "9c967f8cc208a9720f5d81c5d0c2a58227205a1e30b9a00e002b101fc3107b22"
+      },
+      "greedy_identity_pass": true,
+      "whole_discrepancies": [
+        {
+          "argmax_equal": true,
+          "hidden": {
+            "peak_abs": 0.890625,
+            "reference_l2": 115.53147587636919,
+            "relative_l2": 0.08805515013231058
+          },
+          "logits": {
+            "peak_abs": 1.25,
+            "reference_l2": 1829.5966950228292,
+            "relative_l2": 0.04486371708596607
+          },
+          "node": 0,
+          "path": 1
+        },
+        {
+          "argmax_equal": true,
+          "hidden": {
+            "peak_abs": 5.375,
+            "reference_l2": 122.69474725449533,
+            "relative_l2": 0.6026598051256297
+          },
+          "logits": {
+            "peak_abs": 6.890625,
+            "reference_l2": 1710.4372453702679,
+            "relative_l2": 0.3529481299775699
+          },
+          "node": 1,
+          "path": 1
+        },
+        {
+          "argmax_equal": true,
+          "hidden": {
+            "peak_abs": 2.140625,
+            "reference_l2": 114.7540951232958,
+            "relative_l2": 0.22020607840226877
+          },
+          "logits": {
+            "peak_abs": 3.21875,
+            "reference_l2": 1804.6263465382701,
+            "relative_l2": 0.10216579333536772
+          },
+          "node": 0,
+          "path": 2
+        },
+        {
+          "argmax_equal": true,
+          "hidden": {
+            "peak_abs": 0.3125,
+            "reference_l2": 127.39428856768416,
+            "relative_l2": 0.026962206681285236
+          },
+          "logits": {
+            "peak_abs": 0.265625,
+            "reference_l2": 1266.514215728513,
+            "relative_l2": 0.018203993994592875
+          },
+          "node": 2,
+          "path": 2
+        }
+      ]
+    },
+    {
+      "rank": 1,
+      "report": {
+        "bytes": 109925,
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r23/cpu-consumer/RANK-1.json",
+        "sha256": "8fce250c201eaefe02decae2d16b39dc80a6ffab523f3d52a797363e21bc0d88"
+      },
+      "raw": {
+        "bytes": 776504853,
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r23/dense/receipts/BOLE-TREE-RANK-1.pt",
+        "sha256": "d1ccddd2f3c9601ef433bd2dabe7b9c9458d23b836039cf1393eed6c3118f3cc"
+      },
+      "greedy_identity_pass": true,
+      "whole_discrepancies": [
+        {
+          "argmax_equal": true,
+          "hidden": {
+            "peak_abs": 0.890625,
+            "reference_l2": 115.53147587636919,
+            "relative_l2": 0.08805515013231058
+          },
+          "logits": {
+            "peak_abs": 1.25,
+            "reference_l2": 1829.5966950228292,
+            "relative_l2": 0.04486371708596607
+          },
+          "node": 0,
+          "path": 1
+        },
+        {
+          "argmax_equal": true,
+          "hidden": {
+            "peak_abs": 5.375,
+            "reference_l2": 122.69474725449533,
+            "relative_l2": 0.6026598051256297
+          },
+          "logits": {
+            "peak_abs": 6.890625,
+            "reference_l2": 1710.4372453702679,
+            "relative_l2": 0.3529481299775699
+          },
+          "node": 1,
+          "path": 1
+        },
+        {
+          "argmax_equal": true,
+          "hidden": {
+            "peak_abs": 2.140625,
+            "reference_l2": 114.7540951232958,
+            "relative_l2": 0.22020607840226877
+          },
+          "logits": {
+            "peak_abs": 3.21875,
+            "reference_l2": 1804.6263465382701,
+            "relative_l2": 0.10216579333536772
+          },
+          "node": 0,
+          "path": 2
+        },
+        {
+          "argmax_equal": true,
+          "hidden": {
+            "peak_abs": 0.3125,
+            "reference_l2": 127.39428856768416,
+            "relative_l2": 0.026962206681285236
+          },
+          "logits": {
+            "peak_abs": 0.265625,
+            "reference_l2": 1266.514215728513,
+            "relative_l2": 0.018203993994592875
+          },
+          "node": 2,
+          "path": 2
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "report": {
+        "bytes": 110061,
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r23/cpu-consumer/RANK-2.json",
+        "sha256": "bd3a07cf7209417c4b651d894c8aa7e8b19d963cf5a9f26f57cc454c31854d83"
+      },
+      "raw": {
+        "bytes": 776504853,
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r23/dense/receipts/BOLE-TREE-RANK-2.pt",
+        "sha256": "54c1255a69d78da46511da93312a33a87b0ec03ac18da0e2b5e7a027291c763c"
+      },
+      "greedy_identity_pass": true,
+      "whole_discrepancies": [
+        {
+          "argmax_equal": true,
+          "hidden": {
+            "peak_abs": 0.890625,
+            "reference_l2": 115.53147587636919,
+            "relative_l2": 0.08805515013231058
+          },
+          "logits": {
+            "peak_abs": 1.25,
+            "reference_l2": 1829.5966950228292,
+            "relative_l2": 0.04486371708596607
+          },
+          "node": 0,
+          "path": 1
+        },
+        {
+          "argmax_equal": true,
+          "hidden": {
+            "peak_abs": 5.375,
+            "reference_l2": 122.69474725449533,
+            "relative_l2": 0.6026598051256297
+          },
+          "logits": {
+            "peak_abs": 6.890625,
+            "reference_l2": 1710.4372453702679,
+            "relative_l2": 0.3529481299775699
+          },
+          "node": 1,
+          "path": 1
+        },
+        {
+          "argmax_equal": true,
+          "hidden": {
+            "peak_abs": 2.140625,
+            "reference_l2": 114.7540951232958,
+            "relative_l2": 0.22020607840226877
+          },
+          "logits": {
+            "peak_abs": 3.21875,
+            "reference_l2": 1804.6263465382701,
+            "relative_l2": 0.10216579333536772
+          },
+          "node": 0,
+          "path": 2
+        },
+        {
+          "argmax_equal": true,
+          "hidden": {
+            "peak_abs": 0.3125,
+            "reference_l2": 127.39428856768416,
+            "relative_l2": 0.026962206681285236
+          },
+          "logits": {
+            "peak_abs": 0.265625,
+            "reference_l2": 1266.514215728513,
+            "relative_l2": 0.018203993994592875
+          },
+          "node": 2,
+          "path": 2
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "report": {
+        "bytes": 109946,
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r23/cpu-consumer/RANK-3.json",
+        "sha256": "f4e8900a3cacfc104a064413bc343df39487b531de1f05aa5d83c22ac8201ba4"
+      },
+      "raw": {
+        "bytes": 776504853,
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r23/dense/receipts/BOLE-TREE-RANK-3.pt",
+        "sha256": "316a6d7edcf4ddaa681cddab7260bb7a67b78ae54825c5bb9c47965de6542548"
+      },
+      "greedy_identity_pass": true,
+      "whole_discrepancies": [
+        {
+          "argmax_equal": true,
+          "hidden": {
+            "peak_abs": 0.890625,
+            "reference_l2": 115.53147587636919,
+            "relative_l2": 0.08805515013231058
+          },
+          "logits": {
+            "peak_abs": 1.25,
+            "reference_l2": 1829.5966950228292,
+            "relative_l2": 0.04486371708596607
+          },
+          "node": 0,
+          "path": 1
+        },
+        {
+          "argmax_equal": true,
+          "hidden": {
+            "peak_abs": 5.375,
+            "reference_l2": 122.69474725449533,
+            "relative_l2": 0.6026598051256297
+          },
+          "logits": {
+            "peak_abs": 6.890625,
+            "reference_l2": 1710.4372453702679,
+            "relative_l2": 0.3529481299775699
+          },
+          "node": 1,
+          "path": 1
+        },
+        {
+          "argmax_equal": true,
+          "hidden": {
+            "peak_abs": 2.140625,
+            "reference_l2": 114.7540951232958,
+            "relative_l2": 0.22020607840226877
+          },
+          "logits": {
+            "peak_abs": 3.21875,
+            "reference_l2": 1804.6263465382701,
+            "relative_l2": 0.10216579333536772
+          },
+          "node": 0,
+          "path": 2
+        },
+        {
+          "argmax_equal": true,
+          "hidden": {
+            "peak_abs": 0.3125,
+            "reference_l2": 127.39428856768416,
+            "relative_l2": 0.026962206681285236
+          },
+          "logits": {
+            "peak_abs": 0.265625,
+            "reference_l2": 1266.514215728513,
+            "relative_l2": 0.018203993994592875
+          },
+          "node": 2,
+          "path": 2
+        }
+      ]
+    }
+  ],
+  "whole_model_tensor_qualification": false,
+  "real_generation_scheduler_commit": false,
+  "formal_tasks": false,
+  "formal_paired_performance": false,
+  "final_success": false
+}
