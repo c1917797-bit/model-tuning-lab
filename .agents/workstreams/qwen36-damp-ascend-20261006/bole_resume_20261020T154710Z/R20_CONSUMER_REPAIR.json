@@ -1,0 +1,61 @@
+{
+  "schema": "bole.saved-r20-counter-reader-repair/v1",
+  "original": {
+    "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r20/consume_model.py",
+    "bytes": 11005,
+    "sha256": "5a00240e133c389bffe1e5cad1243fb88cde123b4094c240d2a491312d8606f8"
+  },
+  "reader": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/readers/r20_counter_r1.py",
+    "bytes": 11095,
+    "sha256": "89d2d090a994d81d53475ce934d870970198b1c212a4d0a3b3ad7b15071fa3ae"
+  },
+  "producer_source": {
+    "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r20/SOURCE_BOUND.json",
+    "bytes": 75797,
+    "sha256": "e59e37af610e87b27d21ae457c5b0795ee2c1d017c1ad4aee3ac416b6da3c0ea"
+  },
+  "edits": [
+    {
+      "before": "P=Path(__file__).resolve().parent;sys.path.insert(0,str(P))",
+      "after": "P=Path(\"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r20\");sys.path.insert(0,str(P))"
+    },
+    {
+      "before": "expected=dict(changed=int((delta!=0).sum()),elements=delta.numel(),peak_abs=float(delta.max()))",
+      "after": "cast_expected=dict(changed=int((delta!=0).sum()),elements=delta.numel(),peak_abs=float(delta.max()))"
+    },
+    {
+      "before": "boundary['cast'][key]==expected,",
+      "after": "boundary['cast'][key]==cast_expected,"
+    },
+    {
+      "before": "diagnostic_complete=True,component_checks_pass=",
+      "after": "consumer_repair_source=C.ref(__file__),diagnostic_complete=True,component_checks_pass="
+    }
+  ],
+  "unchanged_math": {
+    "independent_model.py": {
+      "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r20/independent_model.py",
+      "bytes": 14336,
+      "sha256": "cdffc7dcb59b744788c2b736a5607e7218a9e13595b0f6a7d10f450a4fb6ad72"
+    },
+    "oracle112.py": {
+      "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r20/oracle112.py",
+      "bytes": 774,
+      "sha256": "6ba6709289ee37cf54c13faf0bff43f361f06276049774bc3b1cd58456aa3a70"
+    },
+    "core112.py": {
+      "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r20/core112.py",
+      "bytes": 1443,
+      "sha256": "b7e3f3a91889e98c54195a0c5f5eb2a4c6cdf8fc9c667ece26d7250b3e6eebe7"
+    },
+    "adapter.py": {
+      "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r20/adapter.py",
+      "bytes": 8622,
+      "sha256": "37369161fbadad74e0f727c62e769069277d6f2696f7a8b2d88d67e92d93dc59"
+    }
+  },
+  "original_failure_preserved": true,
+  "numerical_thresholds_changed": false,
+  "producer_tensor_bytes_changed": false
+}

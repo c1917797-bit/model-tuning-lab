@@ -1,0 +1,4 @@
+Oct 20 17:11:30 Euler systemd[1]: Starting /usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r1.py...
+Oct 20 17:11:30 Euler systemd[1]: bole-r20-saved-consumer-r1-20261020t154710z.service: Main process exited, code=exited, status=215/CPUAFFINITY
+Oct 20 17:11:30 Euler systemd[1]: bole-r20-saved-consumer-r1-20261020t154710z.service: Failed with result 'exit-code'.
+Oct 20 17:11:30 Euler systemd[1]: Failed to start /usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r1.py.

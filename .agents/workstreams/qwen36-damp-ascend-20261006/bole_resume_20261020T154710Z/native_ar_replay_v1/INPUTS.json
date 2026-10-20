@@ -1,0 +1,36 @@
+{
+  "schema": "bole.native-ar-saved-fia-replay-inputs/v1",
+  "frames": {
+    "bytes": 41467415,
+    "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r20-CONSUMER-R3/consumer/FRAMES.pt",
+    "sha256": "a01e0af844ad3ecc9aef09ba306ca227e536194af92cf6b5911379933637a270"
+  },
+  "extraction": {
+    "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r20-CONSUMER-R3/consumer/ATTRIBUTION.json",
+    "bytes": 131240,
+    "sha256": "146ab9e10c4cd7eafc348e5e05d12c654006ac2528195e9b84987f019a38bcd3"
+  },
+  "producer": {
+    "bytes": 75797,
+    "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r20/SOURCE_BOUND.json",
+    "sha256": "e59e37af610e87b27d21ae457c5b0795ee2c1d017c1ad4aee3ac416b6da3c0ea"
+  },
+  "original_bounds": {
+    "abs": 0.001,
+    "rel": 0.01
+  },
+  "variants": [
+    "bf16-ip0",
+    "bf16-ip2",
+    "fp16-ip0",
+    "fp16-ip2"
+  ],
+  "source": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_replay_v1/replay.py",
+    "bytes": 4355,
+    "sha256": "4065cc56489c6cdca241007074761f114ace8bef2ff81cf289ee1aab7c4af1bc"
+  },
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "formal_performance": false,
+  "final_success": false
+}

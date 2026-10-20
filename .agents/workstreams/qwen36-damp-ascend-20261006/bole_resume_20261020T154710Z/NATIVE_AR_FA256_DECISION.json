@@ -1,0 +1,27 @@
+{
+  "schema": "bole.native-ar-fa256-precision-decision/v1",
+  "owner": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fia-20261020T154710Z-v1/RESULT.json",
+    "bytes": 1009,
+    "sha256": "33ac17f8651037bdd8e21a84f1a0d5aff0a4853f96ef672a16a353b5f3344492"
+  },
+  "numeric": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fia-20261020T154710Z-v1/data/RESULT.json",
+    "bytes": 287827,
+    "sha256": "db2efb1006564ff8aa7695f86598f5a7b24c4cfd92202f7095c880bff4af5370"
+  },
+  "cleanup": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fia-20261020T154710Z-v1/CLEANUP.json",
+    "bytes": 129,
+    "sha256": "917d3fd15bc3868ac8e2c75b3f921beacdfb3257bf6aaac4727e0b825bb03306"
+  },
+  "original_bitwise256": true,
+  "bf16_ip0_failed": 39,
+  "bf16_ip2_failed": 39,
+  "fp16_ip0_failed": 0,
+  "fp16_ip2_failed": 0,
+  "original_bounds_unchanged": true,
+  "decision": "new full-model variant: keep original private AR control evidence; add explicit FP16-input/BF16-output native-AR control, retaining inner_precise0 and all original arguments; independently consume all256 AR FA frames and require greedy identity",
+  "model_qualified": false,
+  "final_success": false
+}
