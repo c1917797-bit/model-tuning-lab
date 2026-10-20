@@ -1,0 +1,214 @@
+{
+  "schema": "bole.service-complete-devicefree-qualification/v1",
+  "source": {
+    "bytes": 94072,
+    "path": "/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v6/SOURCE_BOUND.json",
+    "sha256": "0893ed7249d167272608203e32faf54cc8574d32ac21686371fd051c57fb3600"
+  },
+  "owner": {
+    "path": "/opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v6-CPU/RESULT.json",
+    "bytes": 124346,
+    "sha256": "f03ae4baa82db97718514feb3b95613d1d238afe1b180b6223031ad4d258f7ae"
+  },
+  "software_stdout": {
+    "path": "/opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v6-CPU/cpu-preflight/SOFTWARE.stdout",
+    "bytes": 6080,
+    "sha256": "71369ae9660168022f148f300e2ed8b0b50c56b607c04038514620e39d180191"
+  },
+  "software_stderr": {
+    "path": "/opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v6-CPU/cpu-preflight/SOFTWARE.stderr",
+    "bytes": 26685,
+    "sha256": "26cc15a276743752b6e385cf38f8bbd86174e8f60c572512a9eeb5f1bd1c65de"
+  },
+  "native_parser": {
+    "path": "/opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v6-CPU/cpu-preflight/CPU.json",
+    "bytes": 5520,
+    "sha256": "50428f4e9f7c02c37f7f3ac414727385464e54c42e9aa8d26e376e029a7db9f4"
+  },
+  "tests": 179,
+  "all_original_and_new_tests_passed": true,
+  "actual_cli": [
+    {
+      "file": "service_entry.py",
+      "mode": [],
+      "exit_code": 0
+    },
+    {
+      "file": "service_entry.py",
+      "mode": [
+        "--help"
+      ],
+      "exit_code": 0
+    },
+    {
+      "file": "host_service.py",
+      "mode": [],
+      "exit_code": 0
+    },
+    {
+      "file": "host_service.py",
+      "mode": [
+        "--help"
+      ],
+      "exit_code": 0
+    },
+    {
+      "file": "service_client.py",
+      "mode": [],
+      "exit_code": 0
+    },
+    {
+      "file": "service_client.py",
+      "mode": [
+        "--help"
+      ],
+      "exit_code": 0
+    },
+    {
+      "file": "consume_service.py",
+      "mode": [],
+      "exit_code": 0
+    },
+    {
+      "file": "consume_service.py",
+      "mode": [
+        "--help"
+      ],
+      "exit_code": 0
+    },
+    {
+      "file": "server090.py",
+      "mode": [],
+      "exit_code": 0
+    },
+    {
+      "file": "server090.py",
+      "mode": [
+        "--help"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "complete_source_readset_checked": true,
+  "actual_HTTP_sampling_params": {
+    "n": 1,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "min_p": 0.0,
+    "repetition_penalty": 1.0,
+    "frequency_penalty": 0.0,
+    "presence_penalty": 0.0,
+    "max_tokens": 4,
+    "min_tokens": 0,
+    "ignore_eos": true,
+    "stop": [],
+    "stop_token_ids": [],
+    "bad_words": [],
+    "_bad_words_token_ids": null,
+    "logprobs": null,
+    "prompt_logprobs": null,
+    "logprob_token_ids": null,
+    "structured_outputs": null,
+    "logit_bias": null,
+    "allowed_token_ids": null,
+    "extra_args": null,
+    "thinking_token_budget": null,
+    "repetition_detection": null
+  },
+  "complete_native_sources_compiled": [
+    {
+      "source": {
+        "bytes": 48290,
+        "path": "/vllm-workspace/vllm-ascend/vllm_ascend/worker/worker.py",
+        "sha256": "c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3"
+      },
+      "cls": "NPUWorker",
+      "methods": [
+        "load_model"
+      ],
+      "full_source_compiled": true,
+      "import_executed": false
+    },
+    {
+      "source": {
+        "bytes": 258160,
+        "path": "/vllm-workspace/vllm-ascend/vllm_ascend/worker/model_runner_v1.py",
+        "sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968"
+      },
+      "cls": "NPUModelRunner",
+      "methods": [
+        "_prepare_inputs",
+        "_sample",
+        "propose_draft_token_ids",
+        "sample_tokens",
+        "_update_states"
+      ],
+      "full_source_compiled": true,
+      "import_executed": false
+    },
+    {
+      "source": {
+        "bytes": 10848,
+        "path": "/vllm-workspace/vllm-ascend/vllm_ascend/worker/npu_input_batch.py",
+        "sha256": "a4dc08a9918f07797622f8d0915785e8c7b6899e0d10d92603e1dddec218acc3"
+      },
+      "cls": "NPUInputBatch",
+      "methods": [
+        "__init__"
+      ],
+      "full_source_compiled": true,
+      "import_executed": false
+    },
+    {
+      "source": {
+        "bytes": 47598,
+        "path": "/vllm-workspace/vllm/vllm/v1/worker/gpu_input_batch.py",
+        "sha256": "caeeb20f5010d74663c45f9419237191e3c0a149f4c7aa25bc1b73b1112d67ae"
+      },
+      "cls": "InputBatch",
+      "methods": [
+        "no_thinking_budget",
+        "_make_sampling_metadata"
+      ],
+      "full_source_compiled": true,
+      "import_executed": false
+    },
+    {
+      "source": {
+        "bytes": 105077,
+        "path": "/vllm-workspace/vllm-ascend/vllm_ascend/spec_decode/llm_base_proposer.py",
+        "sha256": "4a90532c5c3667d9eb4fec666bf03c65a2f1c92cd402f731b644ef8fa2ed82ab"
+      },
+      "cls": "AscendSpecDecodeBaseProposer",
+      "methods": [
+        "_propose",
+        "set_inputs_first_pass",
+        "prepare_inputs_padded"
+      ],
+      "full_source_compiled": true,
+      "import_executed": false
+    },
+    {
+      "source": {
+        "bytes": 77668,
+        "path": "/vllm-workspace/vllm/vllm/v1/spec_decode/llm_base_proposer.py",
+        "sha256": "34921aef0e9008de808c2fb86ea5f8dd52ea3cf0bff2714b31b2a95038c4227c"
+      },
+      "cls": "SpecDecodeBaseProposer",
+      "methods": [
+        "_get_positions"
+      ],
+      "full_source_compiled": true,
+      "import_executed": false
+    }
+  ],
+  "actual_NPU_worker_imported": false,
+  "after_real_model_load_runtime_guards_mandatory": true,
+  "source_before_after_equal": true,
+  "stopped_retained": true,
+  "actual_model_executed": false,
+  "actual_scheduler_executed": false,
+  "model_ready": false,
+  "formal_success": false
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "bole.service-v5-actual-model-failure/v1",
+  "owner": {
+    "path": "/opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v5/RESULT.json",
+    "bytes": 125175,
+    "sha256": "3157485005535078dddd4d264aa24cbd404265c4276bc36f68ddd43e43f21c2f"
+  },
+  "source": {
+    "bytes": 93556,
+    "path": "/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v5/SOURCE_BOUND.json",
+    "sha256": "3baa27005a443f612dc0f30755204a1766265b76f5f78fd21be713878e7c1f4d"
+  },
+  "host_primary": "ValueError('real foreign PID/UDA/start/program conflict; never canary authority')",
+  "secondary": [],
+  "source_before_after_equal": true,
+  "worker_first_fault": "native prefill compute_logits source identity observed service target_head wrapper installed before capture; see raw retained worker receipts",
+  "repair": "v6 defers target head interception until after native prefill identity and owner registration; preserves mandatory source guard",
+  "FA_geometry_repair": "expand request physical blocks by actual ratio12 to kernel128 pages; independent before/after owner proof",
+  "model_ready": false,
+  "formal_success": false
+}

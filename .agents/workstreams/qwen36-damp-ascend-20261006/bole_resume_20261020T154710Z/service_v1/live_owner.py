@@ -35,7 +35,9 @@ class LiveOwner:
     table=runner.input_batch.block_table[binding['group']]
     obj=binding['layer'].self_attn.attn
     self.fa_registrations[id(binding)]=dict(obj=obj,group=group,table=table,
-     row=tuple(binding['table']),key=tensor_id(binding['key']),value=tensor_id(binding['value']))
+     row=tuple(binding['table']),key=tensor_id(binding['key']),value=tensor_id(binding['value']),
+     geometry=(table.blocks_per_phys_block,table.logical_block_size,table.physical_block_size,
+               table.block_size,table.use_hybrid_blocks,table.pcp_world_size,table.dcp_world_size))
     self.check_fa(binding)
  def check_request(self):
   r=self.runner;rid=self.initial.request
@@ -92,14 +94,35 @@ class LiveOwner:
        'same live native FA layer/group and CPU block table')
   table=s['table'];cpu=table.get_cpu_tensor();count=int(table.num_blocks_per_row[0])
   row=tuple(int(x)for x in cpu[0,:count].tolist())
+  ratio=table.blocks_per_phys_block
+  geometry=(ratio,table.logical_block_size,table.physical_block_size,table.block_size,
+            table.use_hybrid_blocks,table.pcp_world_size,table.dcp_world_size)
+  need(type(ratio)is int and ratio>0 and geometry==s['geometry']and
+       table.logical_block_size==table.block_size==128 and
+       table.physical_block_size==ratio*128 and type(table.use_hybrid_blocks)is bool and
+       table.pcp_world_size==table.dcp_world_size==1,'same actual native FA physical/kernel geometry')
+  physical=tuple(self.request.block_ids[group])
+  need(physical and all(type(x)is int and x>=0 for x in physical),
+       'actual strongly held request physical block allocation')
+  expanded=tuple(p*ratio+j for p in physical for j in range(ratio))if table.use_hybrid_blocks else physical
   need(cpu.device.type=='cpu'and count==len(s['row'])and row==s['row']and
-       tuple(binding['table'])==row and tuple(self.request.block_ids[group])==row,
+       tuple(binding['table'])==row and expanded==row,
        'same current allocated FA pages from actual request and CPU owner row')
   need(len(obj.kv_cache)==2 and
        tensor_id(binding['key'])==s['key']==tensor_id(obj.kv_cache[0])==tensor_id(obj.impl.key_cache)and
        tensor_id(binding['value'])==s['value']==tensor_id(obj.kv_cache[1])==tensor_id(obj.impl.value_cache),
        'actual registered FA storage remains live layer and backend cache aliases')
   return row
+ def fa_proof(self,binding):
+  row=self.check_fa(binding);table=self.fa_registrations[id(binding)]['table']
+  return dict(schema='bole.service-live-FA-owner/v1',request=self.initial.request,
+   request_object_id=id(self.request),logical_owner_slot=0,group=binding['group'],prefix=binding['prefix'],
+   table_object_id=id(table),layer_object_id=id(binding['layer'].self_attn.attn),
+   blocks_per_phys_block=table.blocks_per_phys_block,kernel_block_size=table.logical_block_size,
+   physical_block_size=table.physical_block_size,use_hybrid_blocks=table.use_hybrid_blocks,
+   pcp_world_size=table.pcp_world_size,dcp_world_size=table.dcp_world_size,
+   request_physical_blocks=tuple(self.request.block_ids[binding['group']]),CPU_table=row,
+   cache_identities=(tensor_id(binding['key']),tensor_id(binding['value'])))
  def validate(self,owner):
   need(self.current()==owner,'current exclusive owner at all-layer validation')
   for binding in self.bindings:

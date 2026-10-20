@@ -47,6 +47,7 @@ def _snap(t, bridge, owner):
             pages = tuple(b['table'][:(owner.length+2+127)//128])
             ix = t.tensor(pages, dtype=t.long, device=b['key'].device)
             fa.append(dict(layer=b['index'], physical_pages=pages,
+                ownership=bridge._bole_live.fa_proof(b),
                 key=b['key'].index_select(0, ix).detach().clone(),
                 value=b['value'].index_select(0, ix).detach().clone()))
     return gdn, fa
@@ -320,6 +321,9 @@ def install(worker, torch, torch_npu, C, *, source_ref, component_refs,
         state.live = LiveOwner(runner, bindings, owner, max_steps=3)
         SB.install_methods(bridge, state.live, C, m)
         neutral_policy(state.live.request)
+        # input_identity.capture must observe the untouched native LM head.
+        # This callback runs after that real prefill check and before its head call.
+        _patch(head, 'compute_logits', guard(target_head), state.restorers)
 
     restore_native_prefill = W.install_after_native_prefill(worker, C,
         qwen_next_ref=refs['qwen_next'], get_forward_context=get_forward_context,
@@ -644,7 +648,7 @@ def install(worker, torch, torch_npu, C, *, source_ref, component_refs,
     # Native update journal remains in the original chain and records removal
     # before our retirement callback publishes the separate bounded payload.
     for obj, name, fn in ((runner, '_prepare_inputs', prepare),
-            (inner, 'forward', inner_forward), (head, 'compute_logits', target_head),
+            (inner, 'forward', inner_forward),
             (runner, '_sample', sample), (runner, 'propose_draft_token_ids', propose_drafts),
             (drafter, 'set_inputs_first_pass', first_inputs),
             (drafter.model, 'compute_logits', mtp_logits), (drafter, '_propose', mtp),

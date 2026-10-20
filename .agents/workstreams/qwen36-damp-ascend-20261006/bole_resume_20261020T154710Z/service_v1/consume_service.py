@@ -143,6 +143,29 @@ def fa_math(t, m, row, anchor, length):
     return result
 
 
+def fa_owner(before,after,row,owner):
+    proof=before['ownership']
+    C.need(proof==after['ownership']and proof['schema']=='bole.service-live-FA-owner/v1'
+           and proof['request']==owner['request']and proof['logical_owner_slot']==owner['slot']==0,
+           'same actual live FA request, storage, table and geometry before/after native handoff')
+    ratio=proof['blocks_per_phys_block']
+    C.need(type(ratio)is int and ratio>0 and proof['kernel_block_size']==128
+           and proof['physical_block_size']==ratio*128 and type(proof['use_hybrid_blocks'])is bool
+           and proof['pcp_world_size']==proof['dcp_world_size']==1,
+           'actual native FA physical/kernel page geometry')
+    physical=proof['request_physical_blocks']
+    C.need(physical and all(type(p)is int and p>=0 for p in physical),
+           'actual native request physical block IDs')
+    expanded=[p*ratio+j for p in physical for j in range(ratio)]if proof['use_hybrid_blocks']else list(physical)
+    pages=(owner['length']+2+127)//128
+    C.need(list(proof['CPU_table'])==expanded and len(set(expanded))==len(expanded)
+           and list(before['physical_pages'])==list(after['physical_pages'])==expanded[:pages]
+           and len(before['physical_pages'])==pages
+           and proof['cache_identities']==row['actual_cache_identities'],
+           'independent complete native physical-to-kernel expansion and actual selected cache aliases')
+    return True
+
+
 def conv_math(t, row, anchor):
     initial = anchor["full_conv_slot"][0, :3]
     equal(t, row["conv_trial"]["initial"][0], initial,
@@ -283,6 +306,8 @@ def consume_step(t, m, raw, step, ordinal, stream, previous):
             for key in ("key", "value"):
                 equal(t, before_f[i][key], prev_f[i][key],
                       "next actual whole FA pages equal previous postimage")
+            C.need(before_f[i]['ownership']==prev_f[i]['ownership'],
+                   'same actual native FA physical/kernel owner across consecutive frames')
     else:
         initial = by_layer(raw["initial_prefill_GDN_observation"], GDN_LAYERS)
         for i in GDN_LAYERS:
@@ -364,6 +389,7 @@ def consume_step(t, m, raw, step, ordinal, stream, previous):
                           and metric["conv"]["state_bitwise"])
         else:
             before, after = before_f[i], after_f[i]
+            fa_owner(before,after,row,owner)
             table = list(before["physical_pages"])
             C.need(after["physical_pages"] == before["physical_pages"]
                    and list(row["actual_physical_pages"]) == table,

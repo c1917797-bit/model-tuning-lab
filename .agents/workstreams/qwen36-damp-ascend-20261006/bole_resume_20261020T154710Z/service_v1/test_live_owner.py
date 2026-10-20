@@ -35,20 +35,24 @@ class Tests(unittest.TestCase):
    elif change=='arena':b['layer'].linear_attn.kv_cache=(torch.zeros(4,11,2),torch.zeros(4,2,2))
    else:r.requests[f.owner.request]=NS()
    with self.assertRaises(ValueError):live.physical(b,f.owner)
- def fa_fixture(self):
+ def fa_fixture(self,ratio=1):
   old,b,r,s,cpu=self.fixture();rid=old.initial.request
-  page=torch.tensor([[1,3]],dtype=torch.int32)
-  table=NS(num_blocks_per_row=[2],get_cpu_tensor=lambda:page)
-  group=NS(layer_names=['fa1']);key=torch.zeros(4,128,1,2);value=torch.zeros_like(key)
+  physical=(1,3)if ratio==1 else(1,)
+  row=physical if ratio==1 else tuple(range(ratio,2*ratio))
+  page=torch.tensor([row],dtype=torch.int32)
+  table=NS(num_blocks_per_row=[len(row)],get_cpu_tensor=lambda:page,
+   blocks_per_phys_block=ratio,logical_block_size=128,physical_block_size=ratio*128,
+   block_size=128,use_hybrid_blocks=ratio!=1,pcp_world_size=1,dcp_world_size=1)
+  group=NS(layer_names=['fa1']);key=torch.zeros(32,128,1,2);value=torch.zeros_like(key)
   attn=NS(kv_cache=(key,value),impl=NS(key_cache=key,value_cache=value))
   fa=dict(index=1,kind='fa',prefix='fa1',group=1,layer=NS(self_attn=NS(attn=attn)),
-   key=key,value=value,table=(1,3))
+   key=key,value=value,table=row)
   r.kv_cache_config.kv_cache_groups.append(group);r.input_batch.block_table.append(table)
-  r.requests[rid].block_ids.append((1,3))
+  r.requests[rid].block_ids.append(physical)
   live=LiveOwner(r,[b,fa],old.initial);live.record_draft(4,(5,6))
   return live,b,fa,r,s,page
  def test_actual_fa_group_table_request_and_cache_alias_rebindings_rejected(self):
-  for change in('group','table','pages','request','kv','impl','binding'):
+  for change in('group','table','pages','request','kv','impl','binding','geometry'):
    live,b,fa,r,s,page=self.fa_fixture();f=live.make_frame(s,[3]);self.assertTrue(live.validate(f.owner))
    if change=='group':r.kv_cache_config.kv_cache_groups[1]=NS(layer_names=['fa1'])
    elif change=='table':r.input_batch.block_table[1]=NS()
@@ -56,8 +60,17 @@ class Tests(unittest.TestCase):
    elif change=='request':r.requests[f.owner.request].block_ids[1]=(2,3)
    elif change=='kv':fa['layer'].self_attn.attn.kv_cache=(torch.zeros_like(fa['key']),fa['value'])
    elif change=='impl':fa['layer'].self_attn.attn.impl.value_cache=torch.zeros_like(fa['value'])
-   else:fa['key']=torch.zeros_like(fa['key'])
+   elif change=='binding':fa['key']=torch.zeros_like(fa['key'])
+   else:r.input_batch.block_table[1].physical_block_size=256
    with self.assertRaises(ValueError):live.validate(f.owner)
+ def test_actual_twelve_kernel_pages_per_physical_block_expansion(self):
+  live,b,fa,r,s,page=self.fa_fixture(ratio=12);f=live.make_frame(s,[3])
+  self.assertTrue(live.validate(f.owner));proof=live.fa_proof(fa)
+  self.assertEqual(proof['request_physical_blocks'],(1,))
+  self.assertEqual(proof['CPU_table'],tuple(range(12,24)))
+  self.assertEqual(proof['physical_block_size'],1536)
+  r.requests[f.owner.request].block_ids[1]=(2,)
+  with self.assertRaises(ValueError):live.current()
  def test_next_native_counter_root_and_accepted_count_acknowledge_once(self):
   live,b,r,s,cpu=self.fixture();f=live.make_frame(s,[3]);p=self.publish(live,f)
   r.input_batch.num_computed_tokens_cpu[0]=133;r.input_batch.num_tokens_no_spec[0]=134
