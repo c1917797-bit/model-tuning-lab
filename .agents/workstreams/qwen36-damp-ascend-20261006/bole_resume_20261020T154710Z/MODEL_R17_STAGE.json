@@ -1,0 +1,31 @@
+{
+  "schema": "bole.model-r17-finite-owner-stage/v1",
+  "recorded_utc": "2026-10-20T16:46:20.517675+00:00",
+  "source": {
+    "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r17/SOURCE_BOUND.json",
+    "bytes": 75343,
+    "sha256": "bb7947a51d1c05466d32d968176ed3d14e8cde4a5f296b8c42cc01e173505571"
+  },
+  "snapshot_files": 219,
+  "snapshot_bytes": 3993796,
+  "unit": "bole-fa64-r17-model-20261020t154710z.service",
+  "unit_submission": {
+    "path": "/opt/host/vnf/austinov/bole-owned-units-20261020T154710Z-r17/model-SUBMITTED.json",
+    "bytes": 1892,
+    "sha256": "89579da24bd55a10284637315ef2a4a6d4d7697ed21cb2b9736fdd57fddefa3f"
+  },
+  "software": "145 tests passed",
+  "r15_gateway_owner_loss": "AgentWeb cgroup restart terminated owner; no model result produced",
+  "r15_recovery_primary": "NameError: report not defined before first request; exact owned container stopped and evidence retained",
+  "recovery_v2": "preflight-only CPU report dependency and actual four MTP receipts validated; no readmission of stopped r15",
+  "r16_cpu": "admission rejected live foreign NPU5; no foreign workload modified",
+  "r16_model": "software145 one source inverse error after SIGTERM-source addition; no model NPU started",
+  "r17_change": "removed SIGTERM source edit, original host090 byte identity restored; systemd finite independent owner",
+  "qualification": {
+    "component_fa64": true,
+    "model": false,
+    "tasks": false,
+    "performance": false,
+    "success": false
+  }
+}

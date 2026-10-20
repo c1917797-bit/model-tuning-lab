@@ -1,0 +1,22 @@
+{
+  "after": {
+    "bytes": 11336,
+    "sha256": "a5c68a46ac6b1f90960f0fc35070eefa8f3ef1c5b8354b0426033dd23b6e7338"
+  },
+  "before": {
+    "bytes": 11070,
+    "sha256": "c993b1f07d68770ea3de472ce788d5c987e4479275cd4c17889b322913b7ea46"
+  },
+  "edits": [
+    {
+      "after": "import fault_receipt,owned_ref131r7 as owned_ref\n",
+      "before": "import fault_receipt\n",
+      "count": 1
+    },
+    {
+      "after": "owned_ref.file_ref(C,c,",
+      "before": "c.ref(",
+      "count": 14
+    }
+  ]
+}
