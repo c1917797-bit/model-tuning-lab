@@ -1,0 +1,95 @@
+{
+  "r17": {
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r17/RESULT.json",
+      "bytes": 108120,
+      "sha256": "353bbf3128363d0eb092cd46c64d4b944f2665421bab795ffc65bd86da4a1c2d"
+    },
+    "primary": "ValueError('real foreign PID/UDA/start/program conflict; never canary authority')",
+    "secondary": [],
+    "elapsed": 398.20526704005897,
+    "summary": {
+      "CPU_child": {
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r17/cpu-preflight/CPU-CHILD.json",
+        "sha256": "c996d13f595ae6084685a9c44ad628806b925c2fb919b296005c18e42633e151"
+      },
+      "CPU_release": {
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r17/cpu-preflight/cleanup.json",
+        "sha256": "95bfb60ab2bb4d0a0eb8053ac2379ce8e391c5190c9b92c433450642dc5d4dc0"
+      },
+      "CPU_report": {
+        "bytes": 5518,
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r17/cpu-preflight/CPU.json",
+        "sha256": "c343a008ff5ed5dac672bfdb9472d70d41d4c718595d3e02d02efc14f19640f4"
+      },
+      "actual_software_child": {
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r17/cpu-preflight/SOFTWARE-CHILD.json",
+        "sha256": "b88ef987bc9e535b0c139fd76128984f2c05fad4b7825a9f7407096bb6d817a8"
+      },
+      "canary": {
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r17/dense/CANARY-CHILD.json",
+        "sha256": "e5e97f1b23c643bbfffd62317444a38937277ecf9bfb254abe4c77a03a065b8e"
+      },
+      "first_host_fault": {
+        "bytes": 1458,
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r17/HOST-FIRST-FAULT.json"
+      }
+    },
+    "source_unchanged": true
+  },
+  "r18": {
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r18/RESULT.json",
+      "bytes": 108087,
+      "sha256": "b3e445defaf08975070756665ee05dc304d47d9d8cc90f08a7de72b9229a929d"
+    },
+    "primary": "FileNotFoundError(2, 'No such file or directory')",
+    "secondary": [],
+    "elapsed": 197.9048462099163,
+    "summary": {
+      "CPU_child": {
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r18/cpu-preflight/CPU-CHILD.json",
+        "sha256": "040826989abcff6e43f12764a7f4b4d90c40133a9d5b2c82cfac173634f7d428"
+      },
+      "CPU_release": {
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r18/cpu-preflight/cleanup.json",
+        "sha256": "e422159db44f7d87ea91182952261292c79c2bd1f0d567fe4d8f6541e911faec"
+      },
+      "CPU_report": {
+        "bytes": 5518,
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r18/cpu-preflight/CPU.json",
+        "sha256": "d80733fd98a4f6dda202e28ad9f9a8461e0524e2c3d7d1fa50a5a963e9bf8a4d"
+      },
+      "actual_software_child": {
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r18/cpu-preflight/SOFTWARE-CHILD.json",
+        "sha256": "4d3dd5b7c64cb96e36af241d7483f443d8b5920c0a3a974bff8cf49d845a9726"
+      },
+      "canary": {
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r18/dense/CANARY-CHILD.json",
+        "sha256": "7c304305e4e10da8afa57d327fc3448bbe7d76bae0f98c4d1c869ae3160d8722"
+      },
+      "first_host_fault": {
+        "bytes": 2330,
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r18/HOST-FIRST-FAULT.json"
+      }
+    },
+    "source_unchanged": true
+  },
+  "r19": {
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r19/RESULT.json",
+      "bytes": 107916,
+      "sha256": "c05b71bc9ea2d87540269ab34c1e69a2f63daf0b481a33bb5d60b42e608b90d7"
+    },
+    "primary": "ValueError(\"actual original child failed {'path': '/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r19/cpu-preflight/SOFTWARE-CHILD.json', 'sha256': '42b0d1c8f5c36469e9f11082ff1fe800b5da42eb8370bbef3cafba145d2e6b47'}\")",
+    "secondary": [],
+    "elapsed": 30.549418829963543,
+    "summary": {
+      "first_host_fault": {
+        "bytes": 2394,
+        "path": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r19/HOST-FIRST-FAULT.json"
+      }
+    },
+    "source_unchanged": true
+  }
+}
