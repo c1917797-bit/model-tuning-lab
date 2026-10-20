@@ -1,0 +1,13 @@
+{
+  "schema": "bole.continuation-authority/v1",
+  "user_instruction": "请帮我继续穿刺一直到成功",
+  "received_utc": "2026-10-20T15:47:10Z",
+  "target": "chicaihong01/ma",
+  "repository": "/opt/host/vnf/austinov/model-tuning-lab",
+  "resource_scope": "owned BOLE work on physical NPU4-7; NPU0-3 protected; no foreign workload stop or HugeTLB change",
+  "current_phase": "CPU extraction then bounded single-card replay of all 64 FA frames from repair12",
+  "phase_seconds": 900,
+  "acceptance_unchanged": true,
+  "original_result": "/opt/host/vnf/austinov/run-bole-model131repair12-MAIN-20261020T123000Z/RESULT.json",
+  "conclusion_scope": "component diagnostics; full model, lifecycle, task and matched performance remain separate gates"
+}

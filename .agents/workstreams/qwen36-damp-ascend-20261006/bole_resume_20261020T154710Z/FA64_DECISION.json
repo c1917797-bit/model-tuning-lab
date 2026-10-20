@@ -1,0 +1,32 @@
+{
+  "schema": "bole.fa64.decision/v1",
+  "decision": "verified scoped FA boundary repair; full model and final acceptance pending",
+  "original_failed_frames": 23,
+  "candidate_failed_frames": 0,
+  "original_bitwise_reproduced_frames": 64,
+  "frame_count": 64,
+  "threshold_unchanged": ".001 + .01 * abs(independent reference), both FP64 and FP32",
+  "input_conversion": {
+    "changed_values": 24,
+    "peak_abs": 2.9802322387695312e-8,
+    "lossless": false,
+    "nonfinite": 0
+  },
+  "source": {
+    "bytes": 8699,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/fa64_v3/fa64_replay.py",
+    "sha256": "ac5bc6284faf7bdd603f49b504e04be9bc0f54584ea27d9701e9de80968de678"
+  },
+  "frames": {
+    "bytes": 21703743,
+    "path": "/opt/host/vnf/austinov/run-bole-fa64-20261020T154710Z-v2/extract/data/FRAMES.pt",
+    "sha256": "0ba589646469a68f4e40f2017184414f131f5d42a5ce81672665c0721ccc936d"
+  },
+  "result_path": "/opt/host/vnf/austinov/run-bole-fa64-20261020T154710Z-v3/replay/data/RESULT.json",
+  "cleanup_path": "/opt/host/vnf/austinov/run-bole-fa64-20261020T154710Z-v3/replay/CLEANUP.json",
+  "preserved_failures": [
+    "/opt/host/vnf/austinov/run-bole-fa64-20261020T154710Z/extract/FAILURE.json",
+    "/opt/host/vnf/austinov/run-bole-fa64-20261020T154710Z-v2/replay/FAILURE.json"
+  ],
+  "next": "apply identical FP16 input / BF16 output FIA boundary only to tree FA path in a new immutable model bundle; independent reference and original source remain unchanged"
+}

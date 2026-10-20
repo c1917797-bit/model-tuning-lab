@@ -1,0 +1,57 @@
+{
+  "schema": "bole.fa64.inputs/v2",
+  "raw_ranks": [
+    {
+      "raw": {
+        "bytes": 776474709,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair12-MAIN-20261020T123000Z/dense/receipts/BOLE-TREE-RANK-0.pt",
+        "sha256": "b1f746d6a813db9754d6495800cca11c9308e2de9ed98166e50120b71f29740a"
+      },
+      "receipt": {
+        "bytes": 2322,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair12-MAIN-20261020T123000Z/dense/receipts/BOLE-TREE-RANK-0.json",
+        "sha256": "655c7522bb9cd93349d9ae1a1e56c4cfe5ff440bd108e614f31b2d63465773a0"
+      }
+    },
+    {
+      "raw": {
+        "bytes": 776474709,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair12-MAIN-20261020T123000Z/dense/receipts/BOLE-TREE-RANK-1.pt",
+        "sha256": "1ef1054af1cb08a3c058b83a7003cc80b557928a363c624ced2edd8240449d3e"
+      },
+      "receipt": {
+        "bytes": 2322,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair12-MAIN-20261020T123000Z/dense/receipts/BOLE-TREE-RANK-1.json",
+        "sha256": "f31809081848f8e10c2a65a9d41de057876fa29f047114992ef3c43d9cc4ce7c"
+      }
+    },
+    {
+      "raw": {
+        "bytes": 776474709,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair12-MAIN-20261020T123000Z/dense/receipts/BOLE-TREE-RANK-2.pt",
+        "sha256": "f4cc629a64a3d4cb051af95ca010ae9662bf57be0feab9adf51816766b3dd514"
+      },
+      "receipt": {
+        "bytes": 2322,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair12-MAIN-20261020T123000Z/dense/receipts/BOLE-TREE-RANK-2.json",
+        "sha256": "49c823515d8005f9d8845747aae3ba30f17ab03c7a805463022f1ea67bece3ea"
+      }
+    },
+    {
+      "raw": {
+        "bytes": 776474709,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair12-MAIN-20261020T123000Z/dense/receipts/BOLE-TREE-RANK-3.pt",
+        "sha256": "878baee3735b89dc9a2be5814b1fabec985bfb886e253e5273c1b9b094afc617"
+      },
+      "receipt": {
+        "bytes": 2322,
+        "path": "/opt/host/vnf/austinov/run-bole-model131repair12-MAIN-20261020T123000Z/dense/receipts/BOLE-TREE-RANK-3.json",
+        "sha256": "7e97352c411dfcab68964ec7c350e6a34ce510d4ef715c7eba74f004df5ce6ba"
+      }
+    }
+  ],
+  "original_model_source": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/bole-model-root-repeat-witness-renew24h-v1-20261020-006-repair12-workerledger/SOURCE_BOUND.json",
+  "prior_failure": "/opt/host/vnf/austinov/run-bole-fa64-20261020T154710Z/extract/FAILURE.json",
+  "hypothesis": "FP16 boundary with explicit measured input conversion deltas; reject nonfinite conversions; unchanged independent FP64/FP32 pointwise tolerance .001+.01*abs(reference); no model/task/performance promotion",
+  "expected_original_failed_frames": 23
+}
