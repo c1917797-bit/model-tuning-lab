@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-auto/cpu_host.py", line 213, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+  File "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-auto/cpu_host.py", line 161, in main
+    with N.open_namespace(C,x,on)as(c,S,H,proof):
+  File "/usr/lib64/python3.9/contextlib.py", line 119, in __enter__
+    return next(self.gen)
+  File "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-auto/owner_namespace.py", line 76, in open_namespace
+    substrate=C.load(on['files']['owned_substrate.py'],'owned_substrate');c,S,H,pairs=substrate.load(out)
+  File "/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/owned_substrate.py", line 62, in load
+    external025.OUT=selected;external025.install(c,S,H)
+  File "/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/external025.py", line 31, in install
+    need(os.environ.get('DENSE090_EXTERNAL_OUTPUT_ENABLE')=='1','explicit source-bound external-output opt-in')
+  File "/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/external025.py", line 8, in need
+    if not v:raise ValueError(m)
+ValueError: explicit source-bound external-output opt-in

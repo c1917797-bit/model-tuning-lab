@@ -1,0 +1,36 @@
+{
+  "AST_python_files": 13,
+  "actual_generated_code_executed": false,
+  "actual_installed_ML_library_imported": false,
+  "actual_model_or_NPU_executed": false,
+  "actual_systemd_or_Docker_executed": false,
+  "actual_tokenizer_executed": false,
+  "command": "python3 -I -B -m unittest discover -s bole_service_proposals/task_cpu_owner_qualification_v10 -p 'test*.py' -q",
+  "default_OFF_and_help_entrypoints": [
+    "prepare_owner.py",
+    "cpu_steps.py",
+    "cpu_host.py",
+    "public_probe_gate.py"
+  ],
+  "frozen_v9_unchanged": true,
+  "full_software_qualification_accepted": false,
+  "model_ready": false,
+  "passed": 48,
+  "pure_tests": 48,
+  "schema": "bole.task-CPU-full-software-local-controls/v10",
+  "sole_runtime_delta": "one line: unchanged generated self-owned HE name expression followed by .lower()",
+  "stderr": "----------------------------------------------------------------------\nRan 48 tests in 0.496s\n\nOK\n",
+  "stdout": "",
+  "unchanged_v5_cpu_host_functions": [
+    "memory_view",
+    "host_binding",
+    "observe_cpu",
+    "child",
+    "create_cpu"
+  ],
+  "unchanged_v8_runtime_files": [
+    "owner_namespace.py",
+    "main_quiescence.py",
+    "cpu_import_guard.py"
+  ]
+}

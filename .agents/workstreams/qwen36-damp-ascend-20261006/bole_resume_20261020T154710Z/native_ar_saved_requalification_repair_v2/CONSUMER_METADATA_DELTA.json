@@ -1,0 +1,26 @@
+{
+  "edits": [
+    {
+      "after": "C.ref(__file__)==_SAVED_METADATA['files']['derived_math_consumer.py']",
+      "before": "C.ref(__file__)==m['files']['consume_pair.py']"
+    },
+    {
+      "after": "str(output)==_SAVED_METADATA['consumer_output_root']",
+      "before": "str(output)==m['pair_consumer_output_root']"
+    },
+    {
+      "after": "_http_provenance(C,source_ref,bundle,value,schema,header_prefix,frozen,_SAVED_METADATA)",
+      "before": "value['inputs_ref']==frozen['reference']"
+    }
+  ],
+  "math_thresholds_changed": false,
+  "native_greedy_identity_and_full_G1_consumer_unchanged": true,
+  "original": {
+    "bytes": 32306,
+    "path": "/opt/host/vnf/austinov/bole-native-ar-pair-20261020T154710Z-v5/consume_pair.py",
+    "sha256": "038d07720e10b35f153df8620ce197591a358a20fc5b879ccad5b2c50ecefa21"
+  },
+  "raw_receipt_source_identity_changed": false,
+  "schema": "bole.saved-pair-exact-metadata-delta/v2",
+  "whole_inverse_equal": true
+}

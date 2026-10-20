@@ -1,0 +1,114 @@
+{
+  "NPU": false,
+  "actual_model_or_tokenizer_or_sandbox_run": false,
+  "current_tasks": {
+    "GSM8K": 1319,
+    "HumanEval": 164,
+    "MMLU": 14042
+  },
+  "files": {
+    "EVIDENCE_SCHEMA.md": {
+      "bytes": 8801,
+      "sha256": "15b2a478e6dcc26218671f0e8e1b2eff8544ba37c67cae2433012502907e47e6"
+    },
+    "LOCAL_VALIDATION.json": {
+      "bytes": 926,
+      "sha256": "da928c8ed4756e1817cda37647270978c0ea137579151867b024e01c6bb86e84"
+    },
+    "PROTOCOL.json": {
+      "bytes": 4489,
+      "sha256": "cbe94f6e8ed4fa7b491fd4f3523ff3a52e620c782973343f255297a32c3dde4e"
+    },
+    "README.md": {
+      "bytes": 5697,
+      "sha256": "cf334ad7d7b572d3ba0e71f9b159e633546bc40c67ab495265798a8c7621c04f"
+    },
+    "compare_components.py": {
+      "bytes": 3221,
+      "sha256": "1cdfccf58d63f62de9d5e94c8125cc8927a71f0d9571825e9be6342a9e8a53fa"
+    },
+    "consume_results.py": {
+      "bytes": 11270,
+      "sha256": "25a8d0994b73eeb805322a1fea2ff8ffef8d4dd2abf882071d9cb4ef65d1acd2"
+    },
+    "decoder.py": {
+      "bytes": 6001,
+      "sha256": "45cfb481c33e69dec562e8dd3b2089dba08ba4da1e651c9196c91138d4185f9e"
+    },
+    "fixtures/GSM_ORIGINAL_FIRST_ROW.json": {
+      "bytes": 1591,
+      "sha256": "0d61e76d8d2ae5795a240fcabda0a49fe1efdfd9de05286a9040cf3b55bf1895"
+    },
+    "fixtures/GSM_RENDER011_FIRST_ROW.json": {
+      "bytes": 2235,
+      "sha256": "586e0b5b99218c2a8b41e7b478314976e62194551b97795ec1f9440d55fce61a"
+    },
+    "frozen/content_contract.py": {
+      "bytes": 1017,
+      "sha256": "7c97b4ef5350660866018726e69db0c2dca5cb275be80050d99fdc17e7969bde"
+    },
+    "frozen/gsm_scorer.py": {
+      "bytes": 13056,
+      "sha256": "a6abc4d1172517b0572919ab67cc49a0751f28f41dbcfb1a6a7e13f7a8120948"
+    },
+    "frozen/inputs004.py": {
+      "bytes": 12127,
+      "sha256": "0773169d441bfae70f8126a29f57a70c19c747cda37c4ee62b486c80a2b14c25"
+    },
+    "he_policy.py": {
+      "bytes": 4644,
+      "sha256": "1cc91c0369c318c155dfd124731ac13c60133a5f9a879853637e0d4b4f1e66b6"
+    },
+    "he_worker.py": {
+      "bytes": 7316,
+      "sha256": "48f45351b3645c7490e59a08b1d16e3e911fa234f081c8742d04de7435c46515"
+    },
+    "postprocess.py": {
+      "bytes": 3340,
+      "sha256": "f13cdd77ae6a510a3d47cd70f2534a1fd7abb69befff3982897988f8891313a4"
+    },
+    "prepare_packet.py": {
+      "bytes": 3882,
+      "sha256": "f5dd1d22920fce28698fd5865355764370a8c987380e68093212253947d1cfa1"
+    },
+    "provenance.py": {
+      "bytes": 8326,
+      "sha256": "a527afb66169fddf100893a5755dfb50ab65ca78dd0b2061aa1809417e5df0bf"
+    },
+    "request_plan.py": {
+      "bytes": 2131,
+      "sha256": "bfbf52b6fb05d6946c9891c8e9aaa3177b24bf05a398cd83a8e918e8746c5e0a"
+    },
+    "restore_GSM_inputs.py": {
+      "bytes": 2630,
+      "sha256": "83d90ffb2a3ee46070219fb435966b23258a1718219c704cb72e6b963ecfbbbf"
+    },
+    "score_tokens.py": {
+      "bytes": 6777,
+      "sha256": "b795a944f99a6dcb915e05d0e7ccad03097c4453a279fae1e509eae78133eab5"
+    },
+    "stage_he.py": {
+      "bytes": 5966,
+      "sha256": "326b12433de8541b5780ad7b7dc87313606c4e430526311d2eeb0b8068a5bfa4"
+    },
+    "task_contract.py": {
+      "bytes": 12079,
+      "sha256": "488a9083662205a40a8f4f6efea5f688cd00582047dbeb7a40bb9c248dbccae4"
+    },
+    "test_software.py": {
+      "bytes": 14679,
+      "sha256": "59cd637af2e7d2961f813e780f045506af1b3c3356c7a1e8de336f779cbd2e54"
+    }
+  },
+  "formal_task_accuracy_accepted": false,
+  "full_v012_input_replay_pending": true,
+  "local_tests": 38,
+  "local_tests_passed": 38,
+  "model_ready": false,
+  "model_task_client_and_lifecycle_integration_pending": true,
+  "performance_ready": false,
+  "same_image_CPU_owner_join_pending": true,
+  "schema": "bole.task-decoder-scorer-advisory-packet/v1",
+  "scope": "prospective v012 original-GSM-ID restoration, actual CPU decoder/source replay, strict three-task scorers, official HE sandbox and independent readers",
+  "status": "frozen advisory for MAIN review; default OFF"
+}

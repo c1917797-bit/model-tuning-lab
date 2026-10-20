@@ -1,0 +1,47 @@
+{
+  "schema": "bole.actual-MAIN-whole-owner-admission-lock/v1",
+  "unit": "bole-g2-v6-model-20261020t154710z.service",
+  "pid": 3563735,
+  "systemctl_argv": [
+    "/usr/bin/systemctl",
+    "show",
+    "bole-g2-v6-model-20261020t154710z.service",
+    "--property=Id,ActiveState,SubState,MainPID,ExecStart"
+  ],
+  "systemctl_properties": {
+    "MainPID": "3563735",
+    "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v6/host_service.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v6/SOURCE_BOUND.json\", \"bytes\": 475051, \"sha256\": \"41a3ffb818e9163515f4bc2e15ab46f2ffbd301ae8a28c7c14e2f209ef92cfd1\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6 ; ignore_errors=no ; start_time=[Tue 2026-10-20 22:58:28 UTC] ; stop_time=[n/a] ; pid=3563735 ; code=(null) ; status=0/0 }",
+    "Id": "bole-g2-v6-model-20261020t154710z.service",
+    "ActiveState": "active",
+    "SubState": "running"
+  },
+  "actual_python_argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v6/host_service.py",
+    "--execute",
+    "--source-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v6/SOURCE_BOUND.json\", \"bytes\": 475051, \"sha256\": \"41a3ffb818e9163515f4bc2e15ab46f2ffbd301ae8a28c7c14e2f209ef92cfd1\"}",
+    "--output",
+    "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6"
+  ],
+  "inherited_lock_fds": {
+    "3": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock"
+  },
+  "actual_kernel_lock": "26: FLOCK  ADVISORY  WRITE 3563735 fd:06:8405603 0 EOF",
+  "nonblocking_contender_exit_code": 1,
+  "lock": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "reader": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/observe_MAIN_admission_lock.py",
+    "bytes": 2570,
+    "sha256": "ccf9142c273367210726a714afddbb1c328c48f69d5ed355d986202d09a32c3a"
+  },
+  "observed_at_ns": 1792537108389199770,
+  "actual_lock_verified": true,
+  "formal_success": false
+}

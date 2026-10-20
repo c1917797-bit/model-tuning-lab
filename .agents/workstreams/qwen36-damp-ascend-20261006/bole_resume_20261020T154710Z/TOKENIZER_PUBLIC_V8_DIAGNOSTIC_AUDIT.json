@@ -1,0 +1,33 @@
+{
+  "schema": "bole.actual-public-tokenizer-diagnostic-audit/v1",
+  "owner": {
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v8-public-backend/RESULT.json",
+    "bytes": 138637,
+    "sha256": "4dc03ea12c548d90270a5d54e05eba9d7c4bbd405afb54836a82fbe06c8a42fd"
+  },
+  "child": {
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v8-public-backend/cpu-preflight/CHILD-import-probe.json",
+    "bytes": 92353,
+    "sha256": "a76e39de35910d65ccf4e5b3c2451d1526ed66efd70e22518cf2bcc9ff19b757"
+  },
+  "import_audit": {
+    "bytes": 21352,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v8-public-backend/cpu-preflight/TOKENIZER_IMPORT_TRACE.jsonl",
+    "sha256": "57db9fbf79d9ac837fd378179282722b291668347fc6618a4cb897ab48f92ed5"
+  },
+  "outcome": "public-factory-and-original-tiny-controls-completed",
+  "tokenizer_class": "transformers.tokenization_utils_tokenizers.TokenizersBackend",
+  "versions": {
+    "tokenizers": "0.22.2",
+    "transformers": "5.5.4"
+  },
+  "EOS": 248046,
+  "cleanup": false,
+  "forbidden_attempts": [],
+  "tiny_controls_pass": true,
+  "source_input_equal": true,
+  "source_map_entries": 356,
+  "diagnostic_only": true,
+  "full15525_qualified": false,
+  "formal_success": false
+}

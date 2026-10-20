@@ -1,0 +1,17 @@
+{
+  "schema": "bole.actual-saved-CPU-owner-failure/v1",
+  "owner": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-20261020T154710Z-v2/RESULT.json",
+    "bytes": 228287,
+    "sha256": "e8e9e470d2a77b4958cabed8cb159ad89d19a1c12e6faf76437586a343ad234d"
+  },
+  "primary": {
+    "error": "ValueError(\"actual original child failed {'path': '/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-20261020T154710Z-v2/cpu-consumer/SAVED-PAIR-INDEPENDENT-CHILD.json', 'sha256': '9988f7307fb60a6129e586bef683f8be4c059529a7fead79c5113cb9315fe84d'}\")",
+    "traceback": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/bole-native-ar-saved-cpu-20261020T154710Z-v2/saved_cpu_owner.py\", line 64, in main\n    summary['independent_child']=H.child(ctl,'SAVED-PAIR-INDEPENDENT',[\n  File \"/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/host_once.py\", line 28, in child\n    c.require(p.returncode==0,\"actual original child failed \"+str(r));return r\n  File \"/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/model_contract.py\", line 25, in require\n    if not v:raise ValueError(why)\nValueError: actual original child failed {'path': '/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-20261020T154710Z-v2/cpu-consumer/SAVED-PAIR-INDEPENDENT-CHILD.json', 'sha256': '9988f7307fb60a6129e586bef683f8be4c059529a7fead79c5113cb9315fe84d'}\n"
+  },
+  "secondary": [],
+  "source_equal": true,
+  "numeric_qualified": false,
+  "original_result_preserved": true,
+  "formal_success": false
+}

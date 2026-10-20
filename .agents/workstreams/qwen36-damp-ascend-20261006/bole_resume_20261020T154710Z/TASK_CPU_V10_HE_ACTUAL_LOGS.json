@@ -1,0 +1,16 @@
+{
+  "schema": "bole.actual-retained-HE-log-observation/v1",
+  "owned": {
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v10/he-controls/OWNED.json",
+    "bytes": 2607,
+    "sha256": "335f1516c1e8da580244d1ac822c7a90234221d8d7e57fc3e644565a075a0b95"
+  },
+  "cid": "be65f1289ba225d1a59126569efa3468bda0e5f38a180c330d6391d096e155a8",
+  "container_exit": 1,
+  "OOM": false,
+  "log_exit": 0,
+  "stdout": "",
+  "stderr": "2026-10-20T22:57:52.786070210Z Traceback (most recent call last):\n2026-10-20T22:57:52.786135150Z   File \"/source/he_worker.py\", line 109, in <module>\n2026-10-20T22:57:52.786147640Z     if __name__=='__main__':raise SystemExit(main())\n2026-10-20T22:57:52.786152770Z   File \"/source/he_worker.py\", line 106, in main\n2026-10-20T22:57:52.786157120Z     print(MARKER+C.canonical(run(mode,a.capsule_sha256)).decode(),flush=True);return 0\n2026-10-20T22:57:52.786161100Z   File \"/source/he_worker.py\", line 43, in run\n2026-10-20T22:57:52.786165490Z     runtime();capsule_path=P/'HE_CAPSULE.json';raw=capsule_path.read_bytes()\n2026-10-20T22:57:52.786169260Z   File \"/source/he_worker.py\", line 26, in runtime\n2026-10-20T22:57:52.786172960Z     C.need(os.environ.get('ASCEND_VISIBLE_DEVICES')==''and os.environ.get('HOME')=='/tmp'\n2026-10-20T22:57:52.786176630Z   File \"/source/task_contract.py\", line 34, in need\n2026-10-20T22:57:52.786180360Z     if not value:raise ValueError(message)\n2026-10-20T22:57:52.786183830Z ValueError: actual no-network namespace\n",
+  "container_restarted": false,
+  "read_only_observation": true
+}

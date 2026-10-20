@@ -1,0 +1,113 @@
+{
+  "CPU": 145,
+  "NPU": false,
+  "actual_execution_performed": false,
+  "actual_public_probe_prerequisite_required": true,
+  "change": "one line: unchanged generated self-owned HE name expression followed by .lower()",
+  "cleanup_seconds": 180,
+  "default_enabled": false,
+  "files": {
+    "DIAGNOSTIC_SOURCE_EXPECTED.json": {
+      "bytes": 2729,
+      "sha256": "840997a1e04f485a74d8ae19a40b61593631c3dba459d26c22a6e714d9308a3c"
+    },
+    "EVIDENCE_SCHEMA.md": {
+      "bytes": 3753,
+      "sha256": "89edcef87cb89e73209576f6f7148d5e73fb2fde18de9bbf899c3975278ac522"
+    },
+    "LOCAL_CONTROLS.json": {
+      "bytes": 1201,
+      "sha256": "be60c49a6860f1ecf50d5402e916cdc739623aa68f06be34451361f0a25461fa"
+    },
+    "POLICY_SCHEMA.md": {
+      "bytes": 3177,
+      "sha256": "dac1efec870e57f274ad4da519dc3c548ad39aeeb2092b0449d918062df3c836"
+    },
+    "README.md": {
+      "bytes": 7509,
+      "sha256": "76ca09e9709a8a757f3831bda7e10743ccb84146789bdba8028966cd53adeda6"
+    },
+    "SOURCE_FINDINGS.md": {
+      "bytes": 2673,
+      "sha256": "26121ec1fbd10bb54ca9012992a16ec26a1a6c9fcdc19674e4b657743b9eaaf6"
+    },
+    "TOKENIZER_SOURCE_EXPECTED.json": {
+      "bytes": 1712,
+      "sha256": "28a71ff1b869462007b18db85f6ecde8227c5d46b89a1c9a89b7702b32ec1063"
+    },
+    "cpu_host.py": {
+      "bytes": 19734,
+      "sha256": "3293adf977e720847fd200caa6fd11629696366d212b2c4478af62a6fa1c16f5"
+    },
+    "cpu_import_guard.py": {
+      "bytes": 3814,
+      "sha256": "2abb3811ce41f25ddd93d91253ef4a649173c37ac2c572a4809b24b2f061d36e"
+    },
+    "cpu_steps.py": {
+      "bytes": 6590,
+      "sha256": "dc16e3756242255e368dc5061b354557d55a7586a983e12a20620015af87adfa"
+    },
+    "he_owned.py": {
+      "bytes": 6114,
+      "sha256": "7af596c27e15eb2d8d9f0f33c6ec7b2a52f71e2d59e067148996cf682a46fb1e"
+    },
+    "main_quiescence.py": {
+      "bytes": 11020,
+      "sha256": "c818c0314aa6866988451f069124714b71132259604f80235a24209ecb742264"
+    },
+    "owner_common.py": {
+      "bytes": 9186,
+      "sha256": "6e58b91ee25c3701c31dea8694f82955b7c9ccc0f7c502e363cc9bad5346f846"
+    },
+    "owner_namespace.py": {
+      "bytes": 9104,
+      "sha256": "3b700d07462dd05f0626fcbf6fae123771058c2342aa8545854a04a13e01374d"
+    },
+    "prepare_owner.py": {
+      "bytes": 5642,
+      "sha256": "fdb9f6350c2d52b167409371b0db5b3b56cdd408d59b67eaede319dcf5cbf079"
+    },
+    "public_probe_gate.py": {
+      "bytes": 10785,
+      "sha256": "c1f0ad1478d842e4b3cb2b2ef75ef8da251d03e91602ecc9b156a380689c7e53"
+    },
+    "test_owner_pure.py": {
+      "bytes": 9919,
+      "sha256": "a768000b233b598de95772e37e00618970a55120b20001c07fbd5235911d2897"
+    },
+    "test_public_probe_pure.py": {
+      "bytes": 5380,
+      "sha256": "115b8f38b1988ef30446b2a3b7161d51bd574ba611f5398d213a1b4f15b6a333"
+    },
+    "test_quiescence_pure.py": {
+      "bytes": 11877,
+      "sha256": "612e6f337b27dd819b7c5e28c39e7575b510ae25e86f29227e25f67e7651e36b"
+    },
+    "test_tokenizer_probe_pure.py": {
+      "bytes": 4354,
+      "sha256": "2ec45fb7f02a4f9f3b9a671540766b10c71f9a516588b9045d0be77fc684e7f7"
+    }
+  },
+  "formal_task_accuracy_accepted": false,
+  "frozen_v2_task_packet_manifest_sha256": "33761994f0fcd18ec39f21ad0fa93a3fdfb11649d18a0a53f37667bc02abb37d",
+  "guest_memory_bytes": 8589934592,
+  "host_CPU": 166,
+  "local_pure_tests": 48,
+  "local_pure_tests_passed": 48,
+  "model_ready": false,
+  "original_summed_ancestor_CPU_budget": 7,
+  "original_v5_manifest_sha256": "9d05579a91c41a5aa21263871b45adb465967444f922b3767a21d376e3680666",
+  "original_v8_manifest_sha256": "c1b24441c91800ed1a5f8b95c18af7c1d88527a0c7631f636ba765c893ac3e99",
+  "original_v9_manifest_sha256": "a593c78cd1d044a8214837a2679ece6a9326a5985af55b40b8f57d7224d2f90c",
+  "performance_ready": false,
+  "phase_order": [
+    "cpu-preflight",
+    "he-controls",
+    "cpu-consumer"
+  ],
+  "phase_seconds": 3600,
+  "qualification_profile": "full-v012-public-backend/v2",
+  "schema": "bole.task-CPU-owner-full-software-advisory/v10",
+  "source_image_CPU_owner_software_controls_verified": false,
+  "status": "frozen prepared-only; actual all-three-phase v10 qualification pending; failed v9 retained"
+}
