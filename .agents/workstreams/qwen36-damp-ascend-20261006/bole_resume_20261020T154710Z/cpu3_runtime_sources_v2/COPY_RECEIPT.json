@@ -1,0 +1,24 @@
+{
+  "cid": "0ebc2acfa84df1bb1cc8d0b7899d4b942320fc7d206104bbf6f002ce1d239df9",
+  "stopped": true,
+  "files": {
+    "ompmultiprocessing.py": {
+      "container_path": "/vllm-workspace/vllm/vllm/utils/ompmultiprocessing.py",
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/cpu3_runtime_sources_v2/ompmultiprocessing.py",
+      "bytes": 11906,
+      "sha256": "ee9e6750e377904800cd4857ffc13e268c1bbc09dc2d20ead27d4a6bf648728c"
+    },
+    "cpu_binding.py": {
+      "container_path": "/vllm-workspace/vllm-ascend/vllm_ascend/cpu_binding.py",
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/cpu3_runtime_sources_v2/cpu_binding.py",
+      "bytes": 32841,
+      "sha256": "71719e397ab003b31ba5e46e1a6da4da658ae7221eeead04311b65ad4d12d533"
+    },
+    "ascend_config.py": {
+      "container_path": "/vllm-workspace/vllm-ascend/vllm_ascend/ascend_config.py",
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/cpu3_runtime_sources_v2/ascend_config.py",
+      "bytes": 46883,
+      "sha256": "8da61f88d8e5153fde5311ddc8de11cd8a361deb5f2efed5140640a5eeeb7c38"
+    }
+  }
+}

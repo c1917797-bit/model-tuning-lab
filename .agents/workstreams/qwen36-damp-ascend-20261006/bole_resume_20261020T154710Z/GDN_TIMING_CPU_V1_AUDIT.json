@@ -1,0 +1,24 @@
+{
+  "schema": "bole.gdn3-timing-sameimage-cold-audit/v1",
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn-timing-cpu-20261020T154710Z-v1/RESULT.json",
+    "bytes": 20651,
+    "sha256": "c16eff50faf09b5157b7e3c2f0ccf4ed5e6abddb6378b2e93692d6ef9671c594"
+  },
+  "stdout": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn-timing-cpu-20261020T154710Z-v1/stdout",
+    "bytes": 314,
+    "sha256": "d6a7d9af373c6f22b8a56f646b595d65282e8ef8af9d542919df0d4255aed2e4"
+  },
+  "stderr": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn-timing-cpu-20261020T154710Z-v1/stderr",
+    "bytes": 106,
+    "sha256": "56054c2a525924e36231abe64d37cbdb3347840ba98236e3203cecdd2e465ffd"
+  },
+  "pass_gate": true,
+  "all8_controls": true,
+  "installed_runtime_exact": true,
+  "NPU": false,
+  "actual_timing": false,
+  "formal_success": false
+}

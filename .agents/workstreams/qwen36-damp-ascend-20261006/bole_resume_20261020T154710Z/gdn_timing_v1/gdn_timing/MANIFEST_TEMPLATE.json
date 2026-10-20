@@ -1,0 +1,21 @@
+{
+  "schema": "bole.gdn3-warmed-timing-manifest/v1",
+  "files": {"time_gdn.py": null, "timing_paths.py": null},
+  "replay_manifest": null,
+  "replay_result": null,
+  "replay_independent": null,
+  "replay_release": null,
+  "runtime_sources": {"triton_jit": null, "triton_compiled": null, "ascend_compiler": null},
+  "admission": null,
+  "configuration": {
+    "warmup_pairs": 4,
+    "sample_pairs": 20,
+    "batch_iterations": 4,
+    "cpu_threads": 1,
+    "order": "alternate-AB-BA-by-global-frame-and-pair-parity",
+    "clock": "perf_counter_ns-with-symmetric-NPU-synchronize",
+    "terminal_policy": "actual-r23-selected",
+    "frames": "all192",
+    "layouts": ["contiguous", "column_strided"]
+  }
+}

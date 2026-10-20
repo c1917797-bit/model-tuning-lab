@@ -1,0 +1,94 @@
+{
+  "schema": "bole.G1-v2-actual-model-independent-audit/v1",
+  "source": {
+    "bytes": 109479,
+    "path": "/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/SOURCE_BOUND.json",
+    "sha256": "010914ebe1bf5d3e6b516103e1a376e24e0a0d965ac0a3a42d7aeb19fca57677"
+  },
+  "owner": {
+    "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/RESULT.json",
+    "bytes": 131517,
+    "sha256": "52030a932da1f3cd2392389a2d9246925e40c2d93186b5f67d41fba8cfa1e4fc"
+  },
+  "independent": {
+    "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/cpu-consumer/ATTRIBUTION.json",
+    "bytes": 12221,
+    "sha256": "8caf55b28f4a3c4108b8b932e9c664e08b3c28ea18f0bf4fc3bdf62de3538d53"
+  },
+  "consumer_inputs": {
+    "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/CONSUMER_INPUTS.json",
+    "bytes": 44151,
+    "sha256": "a5f34ccd4c5e402a7d0858cfe91552cb665468c0c4fc40a68f9db977675b549f"
+  },
+  "actual_server_command": {
+    "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/dense/receipts/SERVER_COMMAND.json",
+    "bytes": 1191,
+    "sha256": "540700585088e3fb056b9f4d85c865752c9213c97b2601b69fbe09e5e6788bf5"
+  },
+  "actual_inputs": {
+    "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/dense/INPUTS.json",
+    "bytes": 1101,
+    "sha256": "fdf5ccfcd33f3058dbf0316e40dc8304b4f95496a5a80041ae7ed9b4031778c0"
+  },
+  "cleanups": [
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/cpu-preflight/cleanup.json",
+      "bytes": 1245,
+      "sha256": "95766abef7684b5206dd85676741d41cd11ec4a14d27aed91d27a3e86e4370e2"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/dense/cleanup.json",
+      "bytes": 3593,
+      "sha256": "8c8906d13897ef01cdfdf6d71488cfcfc6bf9e5c5d4a47c89057d1826f044e27"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/cpu-consumer/cleanup.json",
+      "bytes": 1917,
+      "sha256": "b5327a0245d47c5179bc601708c3ca84c58fd6f224f7bedf2b434551d7b56577"
+    }
+  ],
+  "source_before_after_equal": true,
+  "primary": null,
+  "secondary": [],
+  "all_owned_stopped_retained": true,
+  "completed_request_count": 2,
+  "G1_experiment_pass": true,
+  "component_checks_pass": true,
+  "scheduler_committed_independently": true,
+  "actual_all4_retirement": true,
+  "actual_HTTP_output_token_ID_join": true,
+  "actual_distinct_strong_requests": true,
+  "independent_process_calibration_reuse": true,
+  "slot_reuse_observed": false,
+  "independent_aggregate_raw_cap_preserved": true,
+  "output_token_ids": [
+    {
+      "label": "tree-1",
+      "ids": [
+        79091,
+        1204
+      ]
+    },
+    {
+      "label": "tree-2",
+      "ids": [
+        79091,
+        1204
+      ]
+    },
+    {
+      "label": "retirement-barrier",
+      "ids": [
+        79091
+      ]
+    }
+  ],
+  "actual_next_counter_acknowledgements": 0,
+  "elapsed_seconds": 645.1523724400904,
+  "model_ready": false,
+  "native_AR_greedy_comparison_performed": false,
+  "task_ready": false,
+  "performance_ready": false,
+  "formal_success": false,
+  "next": "nativeAR bounded actual reference and G2 multi-step streaming qualification; normalEOS/max2048 tasks and three1024 paired performance remain pending"
+}

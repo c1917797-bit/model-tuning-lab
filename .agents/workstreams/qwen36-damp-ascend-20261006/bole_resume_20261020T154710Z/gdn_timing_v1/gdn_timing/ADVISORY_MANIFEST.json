@@ -1,0 +1,80 @@
+{
+  "E2E_measured": false,
+  "NPU": false,
+  "Torch_API_tested": false,
+  "actual_compile": false,
+  "actual_replay_success_unconfirmed": true,
+  "actual_timing": false,
+  "clock": "host perf_counter_ns + symmetric actual NPU sync, proposed only",
+  "exact_installed_primary_source_copies": {
+    "triton_ascend_compiler.py": {
+      "bytes": 53431,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/installed/triton_ascend_compiler.py",
+      "sha256": "253bdb0d9bf2d092c8c1ae40cc610b2d00c534b127f9d258e9e8e1a221934002"
+    },
+    "triton_compiled.py": {
+      "bytes": 18714,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/installed/triton_compiled.py",
+      "sha256": "4e432986cb567b94d282f9a2c2f9911a6c3718337289fa936f240282a6a5d54b"
+    },
+    "triton_jit.py": {
+      "bytes": 36630,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/installed/triton_jit.py",
+      "sha256": "8f170a849331e9ce75b0d2d05e0bcd6ad2f9de838bfb277e823617982d672aad"
+    }
+  },
+  "files": {
+    "ADMISSION_TEMPLATE.json": {
+      "bytes": 381,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing/ADMISSION_TEMPLATE.json",
+      "sha256": "cf7c2513eb302945e3eeb2da0ba68e77ff13a40f56dd01506a6d1b7dc42b834c"
+    },
+    "LOCAL_CHECKS.json": {
+      "bytes": 703,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing/LOCAL_CHECKS.json",
+      "sha256": "b3b5522518df5188ff9ff32998fb38c81665b07d0f6b084da1d982650b5c8169"
+    },
+    "MANIFEST_TEMPLATE.json": {
+      "bytes": 702,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing/MANIFEST_TEMPLATE.json",
+      "sha256": "9c0928c41f5ce39fe39e84d321864e35b2359ed2bd398d85f7846594214d30f3"
+    },
+    "README.md": {
+      "bytes": 7309,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing/README.md",
+      "sha256": "d46a323a0285d8b821bd1d1cb232270fa460cb3c8f963d10a239d063a0060120"
+    },
+    "check_stdlib.py": {
+      "bytes": 4350,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing/check_stdlib.py",
+      "sha256": "14d5e67493746ffdd8beedf2a979df74bab30a19d649ca3d7617e773f8cdd1e6"
+    },
+    "time_gdn.py": {
+      "bytes": 29551,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing/time_gdn.py",
+      "sha256": "42528490c2b12b6fb435056528161a034540a2075038066c3e154984a8b1ee53"
+    },
+    "timing_paths.py": {
+      "bytes": 3481,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing/timing_paths.py",
+      "sha256": "538c4d487c09cafe6f0cf0ce55bef01c25752d77a95fab32299dfae7d90fa121"
+    }
+  },
+  "formal_success": false,
+  "frozen_candidate_packet": {
+    "bytes": 4382,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_kernel/PROPOSAL_MANIFEST.json",
+    "sha256": "d5712c25d525f007654ba16a437ab78e6155233c8b05e7bd28ccc4b6abd031b2"
+  },
+  "frozen_replay_packet": {
+    "bytes": 4555,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_replay/ADVISORY_MANIFEST.json",
+    "sha256": "a0cbd03df708f5f149637b9d32dd74e9506fb245b4570cd166ab5fa230c55ceb"
+  },
+  "model_ready": false,
+  "prepared_only": true,
+  "schema": "bole.gdn3-warmed-timing-advisory-packet/v1",
+  "scope": "all192 actual frames/both layouts/O-P-U plus one actual selected state",
+  "successful_independent_replay_required_before_execute": true,
+  "ten_percent_E2E_claim": false
+}
