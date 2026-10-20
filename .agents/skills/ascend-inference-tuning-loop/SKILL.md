@@ -341,53 +341,12 @@ quality, and performance as separate fields; leave each unobserved gate
 pending rather than inferring it from a neighbouring pass.
 
 
-## BOLE E2E case study: verified outcome and recovery lessons (2026-10-20)
+## BOLE/GDN: saved-input recovery and bounded service qualification
 
-Use this case when a BOLE/native-MTP experiment passes admission but fails at
-full-model or independent-consumer validation.
-
-- **Verified successes:** after updating the active authorization in the nested
-  host and worker gates (not just the top-level manifest), the exact source
-  readset reached 312 entries and source audit passed. The same-image software
-  suite reached 136/136 only after the current authorization, command/output
-  joins, and worker-window binding were consistent. The bounded Ascend run then
-  created the TP4 container, launched four workers on physical cards 4–7,
-  produced per-rank native MTP load receipts and reached the actual request and
-  independent-consumer stages. These are stage successes, not paper acceptance.
-- **Verified failure:** the terminal result for
-  `run-bole-model131repair12-MAIN-20261020T123000Z` records
-  `model_ready=false`, `candidate_qualification=false`, and the primary fault
-  `original component mathematical gates failed` in the independent consumer.
-  Preserve the raw metrics/vectors and classify this as a numerical/component
-  gate failure; do not relabel it as a successful E2E or a performance result.
-- **Nested stale gates matter:** the top-level `contract090.py` and
-  `owned_substrate.py` were rebound, but the first software runs still failed
-  because `worker_bootstrap.py` retained the old time window. Search all
-  transitive launch, worker, controller, consumer, command, and receipt modules
-  for old batch IDs/cutoff constants before regenerating the readset. Never infer
-  closure from one passing source-audit report alone.
-- **Unique output is part of provenance:** reusing an already-created output
-  root correctly failed the launch gate. Allocate a new immutable output root
-  per attempt and update both the source contract and command manifest; do not
-  delete/overwrite a prior result just to make a retry fit.
-- **Preserve original assertions:** one retry exposed failures in historical
-  identity/inverse-edit tests. The right repair is to ledger the intended
-  source delta and separate the newly batch-bound worker gate from genuinely
-  immutable algorithm source—not to disable mathematical checks or broadly
-  rewrite expected results. The eventual 136/136 pass is only a software gate.
-- **Interpret load receipts narrowly:** the observed class was the unmodified
-  `Qwen3_5MTP`, with `BOLE=false` and `forward_modified=false`. This confirms
-  native MTP loading, not that the BOLE intervention is active. The independent
-  consumer must verify actual intervention attribution, numerical/component
-  invariants, and the registered model-level evidence before any promotion.
-- **Control-plane timeouts are ambiguous:** after an AWMCP timeout, poll the
-  original operation and inspect the remote process/container before retrying.
-  This run remained alive through worker startup and later reached the
-  independent consumer; launching a duplicate during that interval would have
-  competed for the same leased cards.
-
-For the next BOLE attempt, begin from the preserved terminal result and the
-independent consumer's raw per-component metrics. Make one causal repair,
-regenerate source and command refs, rerun the same-image suite, and only then
-admit a fresh bounded TP4 run. Keep the successful admission/load/request stages
-as stage evidence while the mathematical gate remains failed/pending.
+For precision-boundary diagnosis, saved-consumer recovery, hook installation
+order, dynamic backend provenance, or short-service evidence, read
+[saved-input diagnosis and bounded BOLE qualification](references/bole-saved-input-and-service-qualification.md).
+It retains the earlier failed entry and the later component/service successes
+with their different source identities. Neither history nor a short-request
+PASS replaces the missing production-control, long-output, task and formal
+performance gates. Use the latest explicit task contract for new experiments.
