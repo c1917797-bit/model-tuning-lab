@@ -1,0 +1,103 @@
+{
+  "NPU": false,
+  "Torch_API_tested": false,
+  "actual_compression_adequacy_proven": false,
+  "actual_replay": false,
+  "completed_candidate_files": {
+    "gdn3_fp32.py": {
+      "bytes": 11111,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_kernel/gdn3_fp32.py",
+      "sha256": "5e8ec97e7324de45d2e16b41e56751d652b2a7aab317da2699bf936eacddba59"
+    },
+    "gdn3_triton_kernels.py": {
+      "bytes": 5234,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_kernel/gdn3_triton_kernels.py",
+      "sha256": "ecaa84965b3520cb09fa1b1db6f3cc230f0ea591bb7b3a1964cabd1646ae68d1"
+    }
+  },
+  "component_replay_independent_pass": false,
+  "files": {
+    "ADMISSION_TEMPLATE.json": {
+      "bytes": 399,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_replay/ADMISSION_TEMPLATE.json",
+      "sha256": "6d84d3b1a5528837ff4859556567054bab3f27b35ba8aabed6b8f8a923092e83"
+    },
+    "LOCAL_CHECKS.json": {
+      "bytes": 701,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_replay/LOCAL_CHECKS.json",
+      "sha256": "7a2fde1b55c788a662cbcc85308583084abc74470ea406fa0308437a282257d0"
+    },
+    "MANIFEST_TEMPLATE.json": {
+      "bytes": 827,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_replay/MANIFEST_TEMPLATE.json",
+      "sha256": "d9b1ebb99391a77e8981e44f646f41dae5eac4643e9d5e5281d05b8d676e436c"
+    },
+    "README.md": {
+      "bytes": 11586,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_replay/README.md",
+      "sha256": "9afde3fb23275731ce662c47d232a1a1667deb63fa153974e8ae693dd69532ac"
+    },
+    "consume_gdn.py": {
+      "bytes": 14831,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_replay/consume_gdn.py",
+      "sha256": "09cfd5871b51c31660e0a8918d85486f8692ab46664e51443e3bebb1e7a806f4"
+    },
+    "replay_common.py": {
+      "bytes": 20306,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_replay/replay_common.py",
+      "sha256": "c13bc5156191cff4cce41e1c096215a33d63d0c8c72a7b65028cda8e81e9b0cf"
+    },
+    "replay_gdn.py": {
+      "bytes": 12936,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_replay/replay_gdn.py",
+      "sha256": "40545c53431c6b9c21ec6fde3357f3043a79b0841748f8171c1f5d13447c44c0"
+    }
+  },
+  "formal_success": false,
+  "model_ready": false,
+  "pending": "MAIN review, actual deployed source/admission tickets, owned NPU compile/replay and independent Devices[] consumer",
+  "prepared_only": true,
+  "provided_actual_rank0_receipt_copy": {
+    "bytes": 2252,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/BOLE-TREE-RANK-0.json",
+    "sha256": "1db83ae2aa31d08ade7599262d969d8b5d437caf2562862349952aef774e5e9c"
+  },
+  "qualified_local_source_copies": {
+    "consume_model.py": {
+      "bytes": 11717,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/consume_model.py",
+      "sha256": "c12c53d5def3b4b969b5a88b004430efe6f0e806b6428eb1d7ebe7941980203d"
+    },
+    "core112.py": {
+      "bytes": 1443,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/core112.py",
+      "sha256": "b7e3f3a91889e98c54195a0c5f5eb2a4c6cdf8fc9c667ece26d7250b3e6eebe7"
+    },
+    "diagnostic_export.py": {
+      "bytes": 1913,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/diagnostic_export.py",
+      "sha256": "c52928fc701338676f9857f5ef4f4c88523ed00214f38c2d4cbfda36f0b9388b"
+    },
+    "independent_model.py": {
+      "bytes": 14337,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/independent_model.py",
+      "sha256": "1cab05544b66b4ad29182371e9caf10f5c0ad12accfaea6bed7121d57fb92455"
+    },
+    "model_entry.py": {
+      "bytes": 30839,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/model_entry.py",
+      "sha256": "f0069203bce372c58abd0914f6977e81d582d432d1fb1277257eb25ea22c86fd"
+    },
+    "oracle112.py": {
+      "bytes": 775,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/oracle112.py",
+      "sha256": "ac20fef75c3c3e2806b090406e6b425bff51a5c19b2df38c368ef117f03fea6f"
+    },
+    "sourceio.py": {
+      "bytes": 1038,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/sourceio.py",
+      "sha256": "0bd97743aa2ac06ea55488a54f5045fd08cff2fdfa4869acc9b1414d2965a0cd"
+    }
+  },
+  "schema": "bole.gdn3-actual-replay-advisory-packet/v1"
+}

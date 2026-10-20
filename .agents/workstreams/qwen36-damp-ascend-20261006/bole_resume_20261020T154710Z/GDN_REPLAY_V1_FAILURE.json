@@ -1,0 +1,21 @@
+{
+  "schema": "bole.gdn3-loader-failure/v1",
+  "owner": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v1/RESULT.json",
+    "bytes": 12158,
+    "sha256": "25c00cbd7436e8c3d9aae7a90a9e7f28d6e855ee346ff0b72c91e1b9d38a8cbf"
+  },
+  "first_fault": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v1/data/FAILURE.json",
+    "bytes": 2777,
+    "sha256": "12c213050f53c512ded39b90e50e2702db971b88d2983ef2b8bc64b6e3191e52"
+  },
+  "primary": "ImportError('/tmp/triton/qSQE4Gjv-gPv1ev8lxPAVg/npu_utils.so: failed to map segment from shared object')",
+  "candidate_kernel_math_executed": false,
+  "source_before_after_equal": true,
+  "cleanup_errors": [],
+  "next_version": "gdn_replay_v2",
+  "repair": "explicit exec flag for owned /tmp tmpfs; same algorithm/driver bytes",
+  "mathematically_qualified": false,
+  "formal_success": false
+}
