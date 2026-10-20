@@ -1,0 +1,12 @@
+{
+  "local_review_copy": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v5/ar_host_namespace.py",
+  "original": {
+    "bytes": 4109,
+    "path": "/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v5/ar_host_namespace.py",
+    "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+  },
+  "resource_window_protection_functions_changed": false,
+  "unique_after": "    output=Path(inputs['output_root'])\n    producer=C.obj(inputs['saved_producer_result'])\n    C.need(output.is_absolute() and output.is_dir() and not output.is_symlink() and\n           producer['inputs']==inputs['original_owner_inputs'] and\n           producer['source']==inputs['AR_source'] and producer['primary'] is not None and\n           producer['secondary']==[] and producer['source_before']==producer['source_after'] and\n           not(output/'cpu-consumer').exists() and\n           Path(inputs['host_record_root']).parent==output and not Path(inputs['host_record_root']).exists(),\n           'exact stopped saved producer root; fresh declared CPU leaf and new host record leaf')",
+  "unique_before": "    C.need(Path(inputs['output_root']).is_absolute() and not Path(inputs['output_root']).exists(),\n           'new source-bound private output root before any025 admission')",
+  "whole_inverse_equal": true
+}

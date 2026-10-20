@@ -1,0 +1,27 @@
+{
+  "AST_python_files": 12,
+  "actual_generated_code_executed": false,
+  "actual_installed_ML_library_imported": false,
+  "actual_model_or_NPU_executed": false,
+  "actual_systemd_or_Docker_executed": false,
+  "actual_tokenizer_executed": false,
+  "command": "python3 -I -B -m unittest discover -s bole_service_proposals/task_cpu_owner_repair_v7 -p 'test*.py' -q",
+  "default_OFF_and_help_entrypoints": [
+    "prepare_owner.py",
+    "cpu_steps.py",
+    "cpu_host.py",
+    "tokenizer_probe.py"
+  ],
+  "diagnostic_only": true,
+  "frozen_CPU_v6_unchanged": true,
+  "frozen_HTTP_v1_unchanged": true,
+  "frozen_task_decoder_scorer_unchanged": true,
+  "model_ready": false,
+  "only_runtime_delta": "expected configuration_auto bytes63381/SHA6342126... plus inventory checksum",
+  "original_CPU_v5_unchanged": true,
+  "passed": 40,
+  "pure_tests": 40,
+  "schema": "bole.task-CPU-tokenizer-diagnostic-local-controls/v7",
+  "software_qualification_accepted": false,
+  "synthetic_audit_pre_execution_denial_test": true
+}

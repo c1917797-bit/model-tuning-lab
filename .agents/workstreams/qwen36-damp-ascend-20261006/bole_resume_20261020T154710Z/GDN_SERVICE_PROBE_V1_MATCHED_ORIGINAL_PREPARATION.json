@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_service_probe_g1/prepare_gdn_probe.py",
+    "--execute",
+    "--prior-G1-refs-json",
+    "{\"source\": {\"bytes\": 109479, \"path\": \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/SOURCE_BOUND.json\", \"sha256\": \"010914ebe1bf5d3e6b516103e1a376e24e0a0d965ac0a3a42d7aeb19fca57677\"}, \"owner\": {\"path\": \"/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/RESULT.json\", \"bytes\": 131517, \"sha256\": \"52030a932da1f3cd2392389a2d9246925e40c2d93186b5f67d41fba8cfa1e4fc\"}, \"bundle\": {\"bytes\": 44151, \"path\": \"/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/CONSUMER_INPUTS.json\", \"sha256\": \"a5f34ccd4c5e402a7d0858cfe91552cb665468c0c4fc40a68f9db977675b549f\"}, \"independent\": {\"path\": \"/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/cpu-consumer/ATTRIBUTION.json\", \"bytes\": 12221, \"sha256\": \"8caf55b28f4a3c4108b8b932e9c664e08b3c28ea18f0bf4fc3bdf62de3538d53\"}}",
+    "--replay-refs-json",
+    "{\"replay_manifest\": {\"bytes\": 4398, \"path\": \"/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2/MANIFEST.json\", \"sha256\": \"f18a2528fae6f482f1e30c0a8a2cc9d5ddf7661463c04dcc3bc965f2eca534fa\"}, \"replay_result\": {\"path\": \"/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2/data/REPLAY-RESULT.json\", \"bytes\": 1939, \"sha256\": \"e550e5c8ca9a9c3790f4954b18e62eeb00667b38f1146ee55ec6d9e1c7384426\"}, \"replay_independent\": {\"path\": \"/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2/consumer/INDEPENDENT.json\", \"bytes\": 1247867, \"sha256\": \"fa57d2ebf4c2e12a4927ba76aeef21af62efa1d4ef69821daaa9d98e6015772c\"}, \"replay_release\": {\"bytes\": 755, \"path\": \"/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2/RELEASE.json\", \"sha256\": \"d3306f548107aa8afba063d17752e035d0851dff90195165430dbd0af40b55db\"}}",
+    "--mode",
+    "matched_original",
+    "--new-root",
+    "/opt/host/vnf/austinov/bole-gdn-g1-probe-20261020T154710Z-v1-matched_original",
+    "--output-root",
+    "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-20261020T154710Z-v1-matched_original"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_service_probe_g1/prepare_gdn_probe.py\", line 170, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_service_probe_g1/prepare_gdn_probe.py\", line 152, in main\n    sr=ref(new/'SOURCE_BOUND.json');bound=obj(sr);CC=load('_gdn_bound_commands',new/'command_contract.py')\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_service_probe_g1/prepare_gdn_probe.py\", line 36, in load\n    s=importlib.util.spec_from_file_location(name,p);v=importlib.util.module_from_spec(s);s.loader.exec_module(v);return v\n  File \"<frozen importlib._bootstrap_external>\", line 850, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 228, in _call_with_frames_removed\n  File \"/opt/host/vnf/austinov/bole-gdn-g1-probe-20261020T154710Z-v1-matched_original/command_contract.py\", line 4, in <module>\n    import sourceio as C\nModuleNotFoundError: No module named 'sourceio'\n"
+}

@@ -1,0 +1,24 @@
+{
+  "schema": "bole.actual-G2-model-failure/v1",
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v5/RESULT.json",
+    "bytes": 431431,
+    "sha256": "e8ac2d39ead44148576d97b91d0c34db9fd0928a6450d68b16999dfe81fb883e"
+  },
+  "first_fault": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v5/HOST-FIRST-FAULT.json",
+    "bytes": 1113,
+    "sha256": "3dd377e9a6527c8812ed9b1fc870b4dd79bd14756e02a0129553d40411773cae"
+  },
+  "server_stderr": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v5/dense/server.stderr",
+    "bytes": 1793,
+    "sha256": "e0f0043774f5cb1139435b488fceb16da8e86e452042a67ff783762dd660a0c8"
+  },
+  "primary": "ValueError('one bounded native server startup')",
+  "secondary": [],
+  "source_equal": true,
+  "root_cause": "guest -I ignores CANN PYTHONPATH, acl import missing",
+  "original_failure_preserved": true,
+  "formal_success": false
+}
