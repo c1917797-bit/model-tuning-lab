@@ -1,0 +1,17 @@
+{
+  "schema": "bole.native-AR-v4-global-FD-inventory-failure/v1",
+  "primary": {
+    "error": "ValueError('bounded actual FD inventory')",
+    "phase": {
+      "name": "native-ar-server",
+      "ordinal": 5
+    },
+    "traceback": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v4/native_ar_host.py\", line 88, in main\n    ctl.observe('native-ar-startup')\n  File \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/observer_race_repair.py\", line 16, in observe\n    try:return original(self,label,initial=initial,cleanup=cleanup)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/safety_host.py\", line 203, in observe\n    holders=fd_holders();record[\"actual_device_fd_holders\"]=holders\n  File \"/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/safety_host.py\", line 76, in fd_holders\n    fds=list((p/\"fd\").iterdir());c.require(len(fds)<=16384,\"bounded actual FD inventory\")\n  File \"/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/model_contract.py\", line 25, in require\n    if not v:raise ValueError(why)\nValueError: bounded actual FD inventory\n"
+  },
+  "secondary": [],
+  "source_equal": true,
+  "elapsed": 301.72938559006434,
+  "current_fd_diagnostic": [],
+  "NPU_formal_pass": false,
+  "formal_success": false
+}

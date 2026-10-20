@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_control_ref_repair_v5/prepare_g2_control_v5.py",
+    "--execute",
+    "--failed-source-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v4/SOURCE_BOUND.json\", \"bytes\": 328177, \"sha256\": \"c20ff6d58e8ac9a44f20060f96b20c71c56ebaa4425eb33590f77e35644b0877\"}",
+    "--failed-owner-result-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v4-CPU/RESULT.json\", \"bytes\": 335666, \"sha256\": \"23360c6e8b079e3d2ab98bfcb399d8ce789928fdea0c27b0db5f5da14ac09e44\"}",
+    "--repair-manifest-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_control_ref_repair_v5/MANIFEST.json\", \"bytes\": 2289, \"sha256\": \"9de6d7f281af2006b6130519ffe1c88385e1c6fd5ccd45fb200f2753d0041c28\"}",
+    "--repair-overlay",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_control_ref_repair_v5",
+    "--new-root",
+    "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v5",
+    "--output-root",
+    "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v5"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"source\": {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v5/SOURCE_BOUND.json\", \"bytes\": 414541, \"sha256\": \"6dc571c598681f49b63a1c11b10f8be545b126fcfab12aa1cab7ea68cdae4006\"}, \"commands\": {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v5/COMMANDS.json\", \"bytes\": 3610, \"sha256\": \"08a63f3a621a87458f5335ec0d7ae36eec5dcdaff8f2f526fbe8a344606cd493\"}, \"prospective_sameimage_cases\": 258, \"original214_and42_fresh_rerun_required\": true, \"new_source_reader_controls\": 2, \"exact_readset_closure\": {\"missing\": [], \"required_count\": 1017, \"current_count\": 1309, \"required_sha256\": \"8811071726bc740cd28135a8bc6f668b9c6393c012746ea13d39f2aa1841fb56\"}, \"runtime_math_stream_CPUbudget_and_parent_wrapper_unchanged\": true, \"actual_sameimage_executed\": false, \"model_ready\": false, \"NPU\": false}\n",
+  "stderr": "",
+  "elapsed": 5.366189840016887
+}

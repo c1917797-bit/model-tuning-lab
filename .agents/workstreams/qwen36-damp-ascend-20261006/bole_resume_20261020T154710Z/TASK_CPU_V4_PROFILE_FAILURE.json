@@ -1,0 +1,14 @@
+{
+  "schema": "bole.task-CPU-v4-profile-failure/v1",
+  "primary": {
+    "error": "ValueError('original7CPU allocation matches explicit CPU145/root166')",
+    "phase": "cpu-preflight",
+    "traceback": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v4/cpu_host.py\", line 178, in main\n    phase='cpu-preflight';ctl=ctl_for(phase);create_cpu(c,S,ctl,x['task_source_unbound_ref'],readset,tokenizer)\n  File \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v4/cpu_host.py\", line 126, in create_cpu\n    C.need(ctl.cpu['host_cpu']==166 and ctl.cpu['guest_cpus'][0]==145 and len(ctl.cpu['reserve_cpus'])==2,'original7CPU allocation matches explicit CPU145/root166')\n  File \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v4/owner_common.py\", line 19, in need\n    if not value:raise ValueError(message)\nValueError: original7CPU allocation matches explicit CPU145/root166\n"
+  },
+  "secondary": [],
+  "source_equal": true,
+  "elapsed": 3.7225237200036645,
+  "namespace_restored": true,
+  "NPU": false,
+  "formal_success": false
+}

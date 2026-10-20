@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v5/cpu_host.py",
+    "--source-audit",
+    "--inputs-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v5/OWNER_INPUTS.json\", \"bytes\": 53012, \"sha256\": \"f97e27af938f7fb13679978246317bf2768f88d68b33311723af5ba299d98454\"}"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"inputs_ref\": {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v5/OWNER_INPUTS.json\", \"bytes\": 53012, \"sha256\": \"f97e27af938f7fb13679978246317bf2768f88d68b33311723af5ba299d98454\"}, \"readset_files\": 337, \"weight_hashes_performed\": false, \"NPU\": false, \"resources_admitted\": false}\n",
+  "stderr": ""
+}

@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_parent_software_repair_v4/prepare_g2_parent_v4.py",
+    "--execute",
+    "--failed-source-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v3/SOURCE_BOUND.json\", \"bytes\": 220181, \"sha256\": \"91002bf0dbda04826db5a1c4d3264b36da0bfaf4f4464feb50ce8ee05435c874\"}",
+    "--failed-owner-result-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v3-CPU/RESULT.json\", \"bytes\": 240698, \"sha256\": \"2835f03e31170405c093f900b0d02d3518bffba042e50f2442cb64bda6c6fe96\"}",
+    "--repair-manifest-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_parent_software_repair_v4/MANIFEST.json\", \"bytes\": 2465, \"sha256\": \"06ec8502f9bf17efd011d43db35a719e3e020f929f97e4e7d5fd2cdca9950ef5\"}",
+    "--repair-overlay",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_parent_software_repair_v4",
+    "--new-root",
+    "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v4",
+    "--output-root",
+    "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v4"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"source\": {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v4/SOURCE_BOUND.json\", \"bytes\": 328177, \"sha256\": \"c20ff6d58e8ac9a44f20060f96b20c71c56ebaa4425eb33590f77e35644b0877\"}, \"commands\": {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v4/COMMANDS.json\", \"bytes\": 3610, \"sha256\": \"d5758beb84f1ece8c279e51be115442f8aef5cc5e2a799715f40eb808bc66650\"}, \"prospective_sameimage_cases\": 258, \"original214_and28_fresh_rerun_required\": true, \"new_wrapper_controls\": 14, \"exact_readset_closure\": {\"missing\": [], \"required_count\": 724, \"current_count\": 1013, \"required_sha256\": \"1c2751254862f409f6b5d28f284e3c5a2119988f89f514d7777050fadfad09c6\"}, \"runtime_math_stream_CPUbudget_unchanged\": true, \"actual_sameimage_executed\": false, \"model_ready\": false, \"NPU\": false}\n",
+  "stderr": "",
+  "elapsed": 4.544008509954438
+}

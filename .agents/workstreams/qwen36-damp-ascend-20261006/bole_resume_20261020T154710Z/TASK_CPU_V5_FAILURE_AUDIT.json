@@ -1,0 +1,18 @@
+{
+  "schema": "bole.actual-failed-owner-preserved/v1",
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v5/RESULT.json",
+    "bytes": 130985,
+    "sha256": "431249b35ba4453812f94f558332154992ef6b53aa1330ae1f4b75528738d770"
+  },
+  "primary": {
+    "error": "ValueError('actual finite CPU child and live identity probe must succeed')",
+    "phase": "cpu-preflight",
+    "traceback": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v5/cpu_host.py\", line 181, in main\n    summary['CPU']=child(C,c,S,H,ctl,ir,'prepare-decode',1450,F)\n  File \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v5/cpu_host.py\", line 107, in child\n    C.need(process.returncode==0 and binding is not None,'actual finite CPU child and live identity probe must succeed')\n  File \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v5/owner_common.py\", line 19, in need\n    if not value:raise ValueError(message)\nValueError: actual finite CPU child and live identity probe must succeed\n"
+  },
+  "secondary": [],
+  "elapsed": null,
+  "source_before_after_equal": true,
+  "formal_success": false,
+  "scope": "failure retained; new exact-source followup required"
+}

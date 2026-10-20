@@ -1,0 +1,167 @@
+{
+  "E2E_measured": false,
+  "NPU": false,
+  "actual_GDN_service_independent_pass": false,
+  "actual_new_model_executed": false,
+  "actual_new_source_assembled": false,
+  "actual_passed_G1_prerequisite": {
+    "bundle": {
+      "bytes": 44151,
+      "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/CONSUMER_INPUTS.json",
+      "sha256": "a5f34ccd4c5e402a7d0858cfe91552cb665468c0c4fc40a68f9db977675b549f"
+    },
+    "independent": {
+      "bytes": 12221,
+      "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/cpu-consumer/ATTRIBUTION.json",
+      "sha256": "8caf55b28f4a3c4108b8b932e9c664e08b3c28ea18f0bf4fc3bdf62de3538d53"
+    },
+    "owner": {
+      "bytes": 131517,
+      "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/RESULT.json",
+      "sha256": "52030a932da1f3cd2392389a2d9246925e40c2d93186b5f67d41fba8cfa1e4fc"
+    },
+    "source": {
+      "bytes": 109479,
+      "path": "/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/SOURCE_BOUND.json",
+      "sha256": "010914ebe1bf5d3e6b516103e1a376e24e0a0d965ac0a3a42d7aeb19fca57677"
+    }
+  },
+  "actual_passed_replay_prerequisite": {
+    "replay_independent": {
+      "bytes": 1247867,
+      "path": "/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2/consumer/INDEPENDENT.json",
+      "sha256": "fa57d2ebf4c2e12a4927ba76aeef21af62efa1d4ef69821daaa9d98e6015772c"
+    },
+    "replay_manifest": {
+      "bytes": 4398,
+      "path": "/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2/MANIFEST.json",
+      "sha256": "f18a2528fae6f482f1e30c0a8a2cc9d5ddf7661463c04dcc3bc965f2eca534fa"
+    },
+    "replay_release": {
+      "bytes": 755,
+      "path": "/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2/RELEASE.json",
+      "sha256": "d3306f548107aa8afba063d17752e035d0851dff90195165430dbd0af40b55db"
+    },
+    "replay_result": {
+      "bytes": 1939,
+      "path": "/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2/data/REPLAY-RESULT.json",
+      "sha256": "e550e5c8ca9a9c3790f4954b18e62eeb00667b38f1146ee55ec6d9e1c7384426"
+    }
+  },
+  "actual_sameimage_executed": false,
+  "allowed_modes": [
+    "matched_original",
+    "candidate"
+  ],
+  "allowed_purpose": "service_numerical_only",
+  "builder": "prepare_gdn_probe.py",
+  "default_enabled": false,
+  "expected_GDN_service_frames": 384,
+  "files": {
+    "ACTUAL_INPUT_REFS.json": {
+      "bytes": 3166,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1/ACTUAL_INPUT_REFS.json",
+      "sha256": "698c56803ba2593d29604b1928a143c2989c25b993b585dede532c91a601bbc0"
+    },
+    "LOCAL_CHECKS.json": {
+      "bytes": 1051,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1/LOCAL_CHECKS.json",
+      "sha256": "f201e49f036f6506d9c5d315992d253aadeb35a39713e96cdcfa45efcf1edc00"
+    },
+    "README.md": {
+      "bytes": 10765,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1/README.md",
+      "sha256": "ff72d3e881d547d757460ad69b1c8182d765bdeaff225f127b82a1ac3741ab90"
+    },
+    "SOURCE_EDITS_PREVIEW.json": {
+      "bytes": 72471,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1/SOURCE_EDITS_PREVIEW.json",
+      "sha256": "79b65df9837ca957cdb3c5d76fa0bef7f215dc039824b69249b2090010bc7a07"
+    },
+    "TIMING_REPORTED.json": {
+      "bytes": 3745,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1/TIMING_REPORTED.json",
+      "sha256": "9fa12f13584c93bbe3742bd3b2cd8e6e08c6285ce37a53d0ab98454d08ef5d1c"
+    },
+    "consume_gdn_service.py": {
+      "bytes": 13044,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1/consume_gdn_service.py",
+      "sha256": "ee27f20d723a6c2ab38e114c7a46b977810a58ef2ea4123732296fd56afec4a2"
+    },
+    "gdn_probe_contract.py": {
+      "bytes": 6863,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1/gdn_probe_contract.py",
+      "sha256": "53ea94b413fcca7c8fcafaa151986d8bd0a4654053eb03f4b60fb9a067b682dc"
+    },
+    "gdn_probe_runtime.py": {
+      "bytes": 5505,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1/gdn_probe_runtime.py",
+      "sha256": "2b98ad1bb91a1f6c7fd033866154468ab3242d26f57095acdf3b14016a020c0e"
+    },
+    "gdn_service_gate.py": {
+      "bytes": 7263,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1/gdn_service_gate.py",
+      "sha256": "6633874bfbfc55f48bffdee812cf60f7e8a86153236efc9efac5c8849ec9f24d"
+    },
+    "gdn_service_seam.py": {
+      "bytes": 13601,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1/gdn_service_seam.py",
+      "sha256": "2718f7a6cb34a3e2e0eced9465be473e4acb68de828c453050722ca3bf0b6fe9"
+    },
+    "prepare_gdn_probe.py": {
+      "bytes": 12930,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1/prepare_gdn_probe.py",
+      "sha256": "b96c26d366d78f36cb2d764b0fd89487a4ac9752736e8d98011e6f8674b7fa60"
+    },
+    "test_gdn_probe_pure.py": {
+      "bytes": 9509,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1/test_gdn_probe_pure.py",
+      "sha256": "350f7bead9ca6b01098299cc28973d2b97e078d300ee55209cb4606504f646fa"
+    },
+    "test_gdn_service_pure.py": {
+      "bytes": 7603,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1/test_gdn_service_pure.py",
+      "sha256": "49fede3ca7fa421e86f10c8fa72e762459ed0451e1eff6e70029c19688c41a56"
+    }
+  },
+  "formal_success": false,
+  "frozen_predecessors": [
+    {
+      "bytes": 6166,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_integration/ADVISORY_MANIFEST.json",
+      "sha256": "37c3c888969e7c82d8ebdb08e8c8a1900b5ae5039fd881a429eb0606a167886c"
+    },
+    {
+      "bytes": 4382,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_kernel/PROPOSAL_MANIFEST.json",
+      "sha256": "d5712c25d525f007654ba16a437ab78e6155233c8b05e7bd28ccc4b6abd031b2"
+    },
+    {
+      "bytes": 4555,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_replay/ADVISORY_MANIFEST.json",
+      "sha256": "a0cbd03df708f5f149637b9d32dd74e9506fb245b4570cd166ab5fa230c55ceb"
+    },
+    {
+      "bytes": 3494,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_timing/ADVISORY_MANIFEST.json",
+      "sha256": "bdd11d2844433dbb1df4a4ed6fd5b42cba5512b4444a6b6e7309d08d664b6492"
+    },
+    {
+      "bytes": 5269,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v4/ADVISORY_MANIFEST.json",
+      "sha256": "f86b17c9473b9e6640238c49ab86220f93b5a8cf2163912e62d422574f21a230"
+    }
+  ],
+  "host_executed": false,
+  "mandatory_GDN_supplement": true,
+  "mandatory_original_complete_consumer": true,
+  "mandatory_target_image_tests": 232,
+  "model_ready": false,
+  "original025_resource_and_idle_gates_preserved": true,
+  "original_runtime_math_not_modified": true,
+  "performance_candidate_admitted": false,
+  "performance_ready": false,
+  "prepared_only": true,
+  "schema": "bole.gdn-g1-service-probe-advisory/v1",
+  "task_ready": false
+}

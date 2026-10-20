@@ -1,0 +1,96 @@
+{
+  "CPU": 145,
+  "NPU": false,
+  "actual_execution_performed": false,
+  "actual_tokenizer_source_count": 7,
+  "child_seconds": 300,
+  "cleanup_seconds": 180,
+  "diagnostic_only": true,
+  "files": {
+    "LOCAL_CONTROLS.json": {
+      "bytes": 871,
+      "sha256": "a66b62ea3044917792daa26de70389d9d87e993526505f475ab3051c7578b083"
+    },
+    "POLICY_SCHEMA.md": {
+      "bytes": 2672,
+      "sha256": "cc8a024a4056c5bd842e4284988969a0b5db1b7cdf5c7c6f1d27ade692e8a389"
+    },
+    "README.md": {
+      "bytes": 6371,
+      "sha256": "dac0afe2b47220b98e564f0e4cff0b1e6378f3490dd024e9277524fd9a255962"
+    },
+    "SOURCE_FINDINGS.md": {
+      "bytes": 2673,
+      "sha256": "26121ec1fbd10bb54ca9012992a16ec26a1a6c9fcdc19674e4b657743b9eaaf6"
+    },
+    "TOKENIZER_SOURCE_EXPECTED.json": {
+      "bytes": 1712,
+      "sha256": "e4c73cd1ddc8d89a3a2a0e8ece58cd77b1940fd39edce1d9f5a598194820a105"
+    },
+    "cpu_host.py": {
+      "bytes": 15556,
+      "sha256": "69be8ea5c3283127ebc98714ac19976df35a29de4b752ddeb603e66846407c73"
+    },
+    "cpu_import_guard.py": {
+      "bytes": 3814,
+      "sha256": "2abb3811ce41f25ddd93d91253ef4a649173c37ac2c572a4809b24b2f061d36e"
+    },
+    "cpu_steps.py": {
+      "bytes": 3347,
+      "sha256": "d9c03fc978da38bebe1c4ec1bb0f1d8b9af89359505e19fa0928fe32c1e1d00e"
+    },
+    "he_owned.py": {
+      "bytes": 6104,
+      "sha256": "be3b0e4a4924a4447cda301b2dd624e6cadb77c17959b52d945148fa1c4601dd"
+    },
+    "main_quiescence.py": {
+      "bytes": 9130,
+      "sha256": "f484c2ff52585f078652870f91f4f7bfb0d489fb3b3caf6ab3769a543cecd63b"
+    },
+    "owner_common.py": {
+      "bytes": 8814,
+      "sha256": "1b3ada8ceaadf6a8838aa7bd1c43838d1bef54764120c1be659dd6683bdfbaf6"
+    },
+    "owner_namespace.py": {
+      "bytes": 9104,
+      "sha256": "3b700d07462dd05f0626fcbf6fae123771058c2342aa8545854a04a13e01374d"
+    },
+    "prepare_owner.py": {
+      "bytes": 5531,
+      "sha256": "3747195595547a8b70943f43db4493848a81f7bfcb1070adfc0ac71c76e8a7ea"
+    },
+    "test_owner_pure.py": {
+      "bytes": 9916,
+      "sha256": "62cded4cf5f5c23008333d551cb62ef28243a96cd4f08c6499277cb42e1a0b3a"
+    },
+    "test_quiescence_pure.py": {
+      "bytes": 9782,
+      "sha256": "3caf36936cbdf10cff6bc9d57c2102b151899195740833902c7953360f7e6ec8"
+    },
+    "test_tokenizer_probe_pure.py": {
+      "bytes": 4323,
+      "sha256": "e2d45b3c3063046f53838659d79af184876e1c578cf37cf2234490ce1cb29870"
+    },
+    "tokenizer_probe.py": {
+      "bytes": 4367,
+      "sha256": "266db6bf9ed3f098d0107d19b8acbaa24c3f1d74181980745ef65153b6768723"
+    }
+  },
+  "formal_task_accuracy_accepted": false,
+  "frozen_task_packet_manifest_sha256": "f687ad69fa0226fe72565e8ed356b65244a475c570259c865e6b3cf68fcda851",
+  "host_CPU": 166,
+  "local_pure_tests": 40,
+  "local_pure_tests_passed": 40,
+  "model_ready": false,
+  "original_summed_ancestor_CPU_budget": 7,
+  "original_v5_manifest_sha256": "9d05579a91c41a5aa21263871b45adb465967444f922b3767a21d376e3680666",
+  "performance_ready": false,
+  "phase_seconds": 3600,
+  "schema": "bole.task-CPU-owner-tokenizer-import-diagnostic-advisory/v6",
+  "source_image_CPU_owner_software_controls_verified": false,
+  "status": "frozen diagnostic only; no full software qualification",
+  "tokenizer_probe_entries": [
+    "auto",
+    "public-backend"
+  ]
+}

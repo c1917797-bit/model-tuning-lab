@@ -1,0 +1,43 @@
+{
+  "actual_local_controls": 15,
+  "cold_CLIs": 8,
+  "AST_compile": true,
+  "checks": [
+    {
+      "argv": [
+        "python3",
+        "-I",
+        "-B",
+        "bole_service_proposals/native_ar_owner_repair_v5/test_framework_map_pure.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.378s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "python3",
+        "-I",
+        "-B",
+        "bole_service_proposals/native_ar_owner_repair_v5/test_runtime_closure_pure.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 13.931s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "python3",
+        "-I",
+        "-B",
+        "bole_service_proposals/native_ar_owner_repair_v5/test_fd_diagnostic_pure.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n"
+    }
+  ],
+  "NPU": false,
+  "actual_sameimage": false,
+  "formal_success": false
+}

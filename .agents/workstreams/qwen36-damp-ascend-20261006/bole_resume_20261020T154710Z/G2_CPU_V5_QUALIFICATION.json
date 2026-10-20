@@ -1,0 +1,37 @@
+{
+  "schema": "bole.actual-G2-software-qualification/v1",
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v5-CPU/RESULT.json",
+    "bytes": 431096,
+    "sha256": "6c67e4283d06b36b4a22083a9a12a2451d8ad03b663a0cbd5ae3491cb5b1fe99"
+  },
+  "report": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v5-CPU/cpu-preflight/SOFTWARE.stdout",
+    "bytes": 13397,
+    "sha256": "d287edaaf4a30029362ca39711b7acc54565f808c7d155486b10e1707297ebea"
+  },
+  "child": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v5-CPU/cpu-preflight/SOFTWARE-CHILD.json",
+    "bytes": 1281,
+    "sha256": "cf379813e8afd61a7c1fe73a838607fad3528de6de0e1b042b80ec228d94ce35"
+  },
+  "release": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v5-CPU/cpu-preflight/cleanup.json",
+    "bytes": 3649,
+    "sha256": "600e9eec51a6dc311081af4033bc2dbbbfaad6577218e7f62d66d9838db145ac"
+  },
+  "source": {
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v5/SOURCE_BOUND.json",
+    "bytes": 414541,
+    "sha256": "6dc571c598681f49b63a1c11b10f8be545b126fcfab12aa1cab7ea68cdae4006"
+  },
+  "tests": 258,
+  "historical_cases": 214,
+  "current_cases": 44,
+  "primary": null,
+  "secondary": [],
+  "source_equal": true,
+  "Devices": [],
+  "model_qualified": false,
+  "formal_success": false
+}

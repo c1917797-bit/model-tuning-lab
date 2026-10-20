@@ -1,0 +1,57 @@
+{
+  "schema": "bole.frozen-task-prompt-length-data-inventory/v1",
+  "effective_inputs_ref": {
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v5/cpu-preflight/effective-v012/EFFECTIVE_INPUTS.json",
+    "bytes": 4079,
+    "sha256": "9db971dc38d873e8ab81325d16b6e0727125ef7c6e71b5ea25df1fcc5c104831"
+  },
+  "source_run_CPU_qualification": false,
+  "tasks": {
+    "GSM8K": {
+      "count": 1319,
+      "min_prompt_tokens": 47,
+      "max_prompt_tokens": 212,
+      "smoke_prompt_tokens": {
+        "gsm8k-test-0000": 89,
+        "gsm8k-test-0001": 50
+      },
+      "rows_ref": {
+        "bytes": 2262736,
+        "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v5/cpu-preflight/effective-v012/GSM8K.rows.json",
+        "sha256": "a246213070e73ae911972d96d9f2acd1b9ea5cb219b935813b651af4b2fdfb36"
+      }
+    },
+    "HumanEval": {
+      "count": 164,
+      "min_prompt_tokens": 53,
+      "max_prompt_tokens": 417,
+      "smoke_prompt_tokens": {
+        "HumanEval/0": 134,
+        "HumanEval/1": 126
+      },
+      "rows_ref": {
+        "bytes": 564815,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-accuracy-render011-new48h-MAIN-20261015-001/cpu-preflight/producer/rendered/HumanEval.rows.json",
+        "sha256": "fa672e776989941d6ff37a12573af80a32a07b73212029a63204960f17878a90"
+      }
+    },
+    "MMLU": {
+      "count": 14042,
+      "min_prompt_tokens": 258,
+      "max_prompt_tokens": 3151,
+      "smoke_prompt_tokens": {
+        "mmlu-abstract_algebra-0000": 362,
+        "mmlu-abstract_algebra-0001": 377
+      },
+      "rows_ref": {
+        "bytes": 111519377,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-accuracy-render011-new48h-MAIN-20261015-001/cpu-preflight/producer/rendered/MMLU.rows.json",
+        "sha256": "6c588bb4285fa89f8e1f9b204dc5d9ed261d01e4baffcfb2b464b2e72495b098"
+      }
+    }
+  },
+  "only_source_token_ID_lengths_measured": true,
+  "tokenizer_provenance_verification_complete": false,
+  "model_executed": false,
+  "formal_success": false
+}

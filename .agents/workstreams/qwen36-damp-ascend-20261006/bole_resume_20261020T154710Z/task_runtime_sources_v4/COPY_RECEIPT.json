@@ -1,0 +1,23 @@
+{
+  "schema": "bole.actual-stopped-container-source-copy/v1",
+  "container_id": "0731d3f91b532c38d56aa30acde830ff0f6304d93db9baa66d25d59ea3d4c2dc",
+  "read_only": true,
+  "sources": {
+    "engine_core.py": {
+      "installed_path": "/vllm-workspace/vllm/vllm/v1/engine/core.py",
+      "host": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/task_runtime_sources_v4/engine_core.py",
+        "bytes": 91156,
+        "sha256": "cf9cbde601afb80925254aae814033abeab3817f9c4fe7bf01ca92edc9d10c2d"
+      }
+    },
+    "plugins_init.py": {
+      "installed_path": "/vllm-workspace/vllm/vllm/plugins/__init__.py",
+      "host": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/task_runtime_sources_v4/plugins_init.py",
+        "bytes": 2902,
+        "sha256": "4be66190ceaee9d0465f62ade801a8e94a907d7ab9fdb0a67fa14ce87448ae9f"
+      }
+    }
+  }
+}

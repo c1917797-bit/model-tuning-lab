@@ -1,0 +1,45 @@
+{
+  "schema": "bole.actual-MAIN-whole-owner-admission-lock/v1",
+  "unit": "bole-native-ar-20261020t154710z-v4.service",
+  "pid": 2607262,
+  "systemctl_argv": [
+    "/usr/bin/systemctl",
+    "show",
+    "bole-native-ar-20261020t154710z-v4.service",
+    "--property=Id,ActiveState,SubState,MainPID,ExecStart"
+  ],
+  "systemctl_properties": {
+    "MainPID": "2607262",
+    "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_NATIVE_AR_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v4/native_ar_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v4/INPUTS.json\", \"bytes\": 13055, \"sha256\": \"acb3b514ed9a468cd30f5d4b2e450c26de18f98d3037cf534b6d1c6520ce4b31\"} ; ignore_errors=no ; start_time=[Tue 2026-10-20 21:34:27 UTC] ; stop_time=[n/a] ; pid=2607262 ; code=(null) ; status=0/0 }",
+    "Id": "bole-native-ar-20261020t154710z-v4.service",
+    "ActiveState": "active",
+    "SubState": "running"
+  },
+  "actual_python_argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v4/native_ar_host.py",
+    "--execute",
+    "--inputs-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v4/INPUTS.json\", \"bytes\": 13055, \"sha256\": \"acb3b514ed9a468cd30f5d4b2e450c26de18f98d3037cf534b6d1c6520ce4b31\"}"
+  ],
+  "inherited_lock_fds": {
+    "3": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock"
+  },
+  "actual_kernel_lock": "25: FLOCK  ADVISORY  WRITE 2607262 fd:06:8405603 0 EOF",
+  "nonblocking_contender_exit_code": 1,
+  "lock": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "reader": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/observe_MAIN_admission_lock.py",
+    "bytes": 2570,
+    "sha256": "ccf9142c273367210726a714afddbb1c328c48f69d5ed355d986202d09a32c3a"
+  },
+  "observed_at_ns": 1792532067889091290,
+  "actual_lock_verified": true,
+  "formal_success": false
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "bole.G2-v4-sameimage-software-control-failure/v1",
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v4-CPU/RESULT.json",
+    "bytes": 335666,
+    "sha256": "23360c6e8b079e3d2ab98bfcb399d8ce789928fdea0c27b0db5f5da14ac09e44"
+  },
+  "primary": "ValueError(\"actual original child failed {'path': '/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v4-CPU/cpu-preflight/SOFTWARE-CHILD.json', 'sha256': '77fd6b35badacd101524f7fff34abb5b05b80f87d90f82c8960151541791f185'}\")",
+  "secondary": [],
+  "source_equal": true,
+  "elapsed": 76.72649109002668,
+  "parent_actual214_pass": true,
+  "current_tests42_errors1": true,
+  "reason": "test AST literal_eval rejects actual source dict constructor in REFS; complete source guard assertions not reached",
+  "NPU": false,
+  "formal_success": false
+}

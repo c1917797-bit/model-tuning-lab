@@ -1,0 +1,15 @@
+{
+  "schema": "bole.task-CPU-v3-admission-failure/v1",
+  "primary": {
+    "error": "ValueError('exact actual MAIN owned CID/image/name/source/controller labels')",
+    "phase": "cpu-preflight",
+    "traceback": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v3/cpu_host.py\", line 178, in main\n    phase='cpu-preflight';ctl=ctl_for(phase);create_cpu(c,S,ctl,x['task_source_unbound_ref'],readset,tokenizer)\n  File \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v3/cpu_host.py\", line 171, in ctl_for\n    ctl.protected=protected;owned.append(ctl);observe_cpu(ctl,role+'-admission',initial=True);protected=ctl.protected\n  File \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v3/cpu_host.py\", line 77, in observe_cpu\n    return Q.observe(ctl,r,ctl._main_quiescence_ref)\n  File \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v3/main_quiescence.py\", line 110, in observe\n    containers.append(dict(owned_ref=r,inspect_ref=ir,actual=stopped_owned(json.loads(raw['stdout']),e)))\n  File \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v3/main_quiescence.py\", line 91, in stopped_owned\n    C.need(x['Id']==e['cid']and x['Name']=='/'+e['name']and x['Image']==cfg['Image']==e['image']\n  File \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v3/owner_common.py\", line 19, in need\n    if not value:raise ValueError(message)\nValueError: exact actual MAIN owned CID/image/name/source/controller labels\n"
+  },
+  "secondary": [],
+  "source_equal": true,
+  "private_namespace_restored": true,
+  "elapsed_seconds": 2.59745533997193,
+  "NPU": false,
+  "model_executed": false,
+  "formal_success": false
+}

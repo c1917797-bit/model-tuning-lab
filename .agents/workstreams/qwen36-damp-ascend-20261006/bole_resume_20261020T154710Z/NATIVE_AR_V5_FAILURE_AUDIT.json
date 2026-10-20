@@ -1,0 +1,21 @@
+{
+  "schema": "bole.actual-failed-owner-preserved/v1",
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v5/RESULT.json",
+    "bytes": 187067,
+    "sha256": "08b9c9c52f7fa406fcc9dc49a8fd15a7ec126528c24029b41980c58773dfaa49"
+  },
+  "primary": {
+    "error": "ValueError('ordinary absolute Ref')",
+    "phase": {
+      "name": "dense-stop-retain",
+      "ordinal": 8
+    },
+    "traceback": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v5/native_ar_host.py\", line 150, in main\n    collect(bundle);collect(onbundle);collect(pair_ref)\n  File \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v5/native_ar_host.py\", line 147, in collect\n    for z in v.values():collect(z)\n  File \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v5/native_ar_host.py\", line 149, in collect\n    for z in v:collect(z)\n  File \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v5/native_ar_host.py\", line 147, in collect\n    for z in v.values():collect(z)\n  File \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v5/native_ar_host.py\", line 147, in collect\n    for z in v.values():collect(z)\n  File \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v5/native_ar_host.py\", line 145, in collect\n    if set(v)in({'path','bytes','sha256'},{'path','sha256'}):C.checked(v);extra.append(C.ref(v['path']))\n  File \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v5/ar_owner_common.py\", line 35, in checked\n    actual=ref(r['path'])\n  File \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v5/ar_owner_common.py\", line 25, in ref\n    p=Path(p);need(p.is_absolute() and p.is_file() and not any(v.is_symlink()for v in(p,*p.parents)), 'ordinary absolute Ref')\n  File \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v5/ar_owner_common.py\", line 21, in need\n    if not v:raise ValueError(m)\nValueError: ordinary absolute Ref\n"
+  },
+  "secondary": [],
+  "elapsed": 530.2392058899859,
+  "source_before_after_equal": true,
+  "formal_success": false,
+  "scope": "failure retained; new exact-source followup required"
+}

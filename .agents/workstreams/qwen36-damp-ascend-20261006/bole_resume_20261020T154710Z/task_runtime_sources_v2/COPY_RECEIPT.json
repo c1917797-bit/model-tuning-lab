@@ -1,0 +1,30 @@
+{
+  "stopped_readonly_CID": "0731d3f91b532c38d56aa30acde830ff0f6304d93db9baa66d25d59ea3d4c2dc",
+  "files": {
+    "gdn_attn.py": {
+      "host": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/task_runtime_sources_v2/gdn_attn.py",
+        "bytes": 22475,
+        "sha256": "27f5561c4b191f2be5a4a91820a6c64a38b755477b3f037178fb02bbc3bc1caf"
+      },
+      "installed": {
+        "path": "/vllm-workspace/vllm/vllm/v1/attention/backends/gdn_attn.py",
+        "bytes": 22475,
+        "sha256": "27f5561c4b191f2be5a4a91820a6c64a38b755477b3f037178fb02bbc3bc1caf"
+      }
+    },
+    "gdn_attn_builder.py": {
+      "host": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/task_runtime_sources_v2/gdn_attn_builder.py",
+        "bytes": 40595,
+        "sha256": "42cc0284b57193112b8a8ad19704aa3401f02294f0c36333c307d748f462fe16"
+      },
+      "installed": {
+        "path": "/vllm-workspace/vllm-ascend/vllm_ascend/ops/gdn_attn_builder.py",
+        "bytes": 40595,
+        "sha256": "42cc0284b57193112b8a8ad19704aa3401f02294f0c36333c307d748f462fe16"
+      }
+    }
+  },
+  "NPU": false
+}
