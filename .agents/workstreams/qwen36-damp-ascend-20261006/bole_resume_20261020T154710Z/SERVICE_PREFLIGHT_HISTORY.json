@@ -1,0 +1,90 @@
+{
+  "schema": "bole.service-preflight-repair-history/v1",
+  "rows": [
+    {
+      "version": 1,
+      "result": {
+        "path": "/opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v1-CPU/RESULT.json",
+        "bytes": 122172,
+        "sha256": "226f2308b47b2a49fa34db7ee9a273a27f0a5e2498d0ba2b1c53a93922481ed9"
+      },
+      "source": {
+        "bytes": 92719,
+        "path": "/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v1/SOURCE_BOUND.json",
+        "sha256": "8a47f827b9c008dbb906e603bcf3afad404c92b8bfe692aefb10ba6bedee0da8"
+      },
+      "primary": "ValueError(\"actual original child failed {'path': '/opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v1-CPU/cpu-preflight/SOFTWARE-CHILD.json', 'sha256': '7438a43691305c14fec042668e3be93738ff8ba28f6ec0394fc414633a6d80b3'}\")",
+      "secondary": [],
+      "source_before_after_equal": true,
+      "cause": "Historical diagnostic profile expected10; new explicit four-token service scope assertion added without changing math/resources.",
+      "actual_model_executed": false,
+      "formal_success": false
+    },
+    {
+      "version": 2,
+      "result": {
+        "path": "/opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v2-CPU/RESULT.json",
+        "bytes": 122491,
+        "sha256": "7245e8abec8e19f4515dd6820d48ded407aa7e8e338600dbd69f34eae0bc1147"
+      },
+      "source": {
+        "bytes": 93027,
+        "path": "/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v2/SOURCE_BOUND.json",
+        "sha256": "cf8441f7b53414031fb84abe03a224521131b3d9ac7fa33ad4a90177590dee35"
+      },
+      "primary": "ValueError(\"actual original child failed {'path': '/opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v2-CPU/cpu-preflight/SOFTWARE-CHILD.json', 'sha256': '65750ca2b9a6751742a87b5d40fddd70ebc1c808960bdecf4ebca1186f271358'}\")",
+      "secondary": [],
+      "source_before_after_equal": true,
+      "cause": "All176 actual tests passed; static AST count175 mismatched actual loaded176; fixed expected count to parent actual154+new22.",
+      "actual_model_executed": false,
+      "formal_success": false
+    },
+    {
+      "version": 3,
+      "result": {
+        "path": "/opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v3-CPU/RESULT.json",
+        "bytes": 122490,
+        "sha256": "ddc024df52d4117de3a09bf4a7201882fb0625053435fa143722d128c5a5f712"
+      },
+      "source": {
+        "bytes": 93027,
+        "path": "/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v3/SOURCE_BOUND.json",
+        "sha256": "9670c9e5bba573df6d383c87d670c77b8857f8ca671484259a230d0f98721ec2"
+      },
+      "primary": "ValueError(\"actual original child failed {'path': '/opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v3-CPU/cpu-preflight/SOFTWARE-CHILD.json', 'sha256': 'd0eff51a13e527b0cac7f3d72443ee781344b9d6783c49a0f81e57b4902a25c4'}\")",
+      "secondary": [],
+      "source_before_after_equal": true,
+      "cause": "All176 tests passed; direct runner import created upstream DeviceOperator import cycle; metadata probe now follows actual worker module import order.",
+      "actual_model_executed": false,
+      "formal_success": false
+    },
+    {
+      "version": 4,
+      "result": {
+        "path": "/opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v4-CPU/RESULT.json",
+        "bytes": 123210,
+        "sha256": "877f81e33bb043e7f7570760bad0c403568b28f5c9fda1630d57f27cac95978c"
+      },
+      "source": {
+        "bytes": 93556,
+        "path": "/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v4/SOURCE_BOUND.json",
+        "sha256": "bb880ddedcb6d05d3a6f442c394c26e724c8d0c8f1ebf34581b7bbdfe3966c86"
+      },
+      "primary": "ValueError(\"actual original child failed {'path': '/opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v4-CPU/cpu-preflight/SOFTWARE-CHILD.json', 'sha256': '6ed02b1646ea5795924616bd8f07ee01bda5b050b1fb89044c9e4c1d44b906a5'}\")",
+      "secondary": [],
+      "source_before_after_equal": true,
+      "cause": "Following worker import order exposed native C++ SOC/device initialization abort in Devices[]; v5 compiles all complete installed native sources without importing NPU classes. Actual after-load class/method ownership guards remain intact before BOLE executes.",
+      "actual_model_executed": false,
+      "formal_success": false
+    }
+  ],
+  "current_source": {
+    "bytes": 93556,
+    "path": "/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v5/SOURCE_BOUND.json",
+    "sha256": "3baa27005a443f612dc0f30755204a1766265b76f5f78fd21be713878e7c1f4d"
+  },
+  "scope": "first request C1/131/output4; original formal task/performance protocols unchanged",
+  "model_ready": false,
+  "actual_scheduler_executed": false,
+  "formal_success": false
+}
