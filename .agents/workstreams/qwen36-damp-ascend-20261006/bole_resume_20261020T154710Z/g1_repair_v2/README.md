@@ -1,0 +1,19 @@
+# G1-v2 exact metadata and historical-test repair
+
+This overlay repairs the seven failures observed in G1-v1's actual 211-case same-image run. It does not change the BOLE runtime, original numerical methods, calibration matrix, native kernels, resource limits or two-request G1 profile. Failed v1 and passed V6 remain untouched.
+
+`prepare_g1_repair_v2.py` creates a fresh `bole-g1-two-request-…-v2` source and matching model/CPU output names. Required arguments are `--execute --failed-source-ref <exact-v1-SOURCE_BOUND-Ref3> --failed-owner-result-ref <exact-failed-v1-CPU-RESULT-Ref3> --overlay <this-directory> --new-root <new-absolute-source> --output-root <matching-new-absolute-output>`. It rejects existing leaves and verifies the failed owner had a real primary failure, clean cleanup and unchanged sources. It reopens and verifies the actual successful V6 prerequisite refs already recorded by v1.
+
+The repair has three parts:
+
+- `COMMANDS.json` becomes the real current model/CPU/bind command set, using `host_service.py`, exact template/bound-source refs and v2 output paths. Current required tests are distinct from historical 154. `COMMANDS_G1.json` is a validated compatibility pointer to the same current commands. They are generated after binding and excluded from manifest files to avoid a hash cycle. The source-bound `command_contract.py` validates both files and adds their exact refs to the actual host readset, including source-before/source-after checks. Host source audit also follows this path.
+- `REGISTRY_EDITS131R10.json` retains every original R10 edit and original R3 hash. One exact full G1 delta is appended, with the actual current postimage hash. Reversing the complete ledger therefore restores the original R3 bytes; the original cache-observation test is unchanged. `REGISTRY_EDITS131R10.preview.json` is a path-independent locally generated preview of that exact plan.
+- `G1_LIFECYCLE_EDITS_V1.json` records exact current-to-passed-V6 source deltas. `g1_inverse.py` rejects undeclared current bytes and wrong before-image lineage. Historical FA and root-witness tests first restore this layer, then run their existing mathematical and inverse checks. All prior negative checks remain. The model-calibration test now follows the real Bridge → ProcessCalibration.acquire → one original MC.run → MC.validate → exact identity gate chain; it executes the real handle twice and verifies one run plus two validations.
+
+Only four existing test modules are overlaid. `test_cache_observation.py` and `test_owner_name_repair5.py` remain unchanged because their real ledger/command operands are repaired. Three new pure tests reject stale commands/source refs/outputs/counts, forged inverse bytes and malformed registry inverses. The prospective full same-image count is 214 = 211 + 3, pending the actual rerun.
+
+Local validation: all three new pure tests pass. All three repaired model-calibration tests pass against byte-identical actual MC/calibration/helper sources in an isolated software fixture. The real registry bytes reverse through the new layer and every original R10 edit to the original R3 hash. All overlay Python files compile; the builder's isolated default-OFF/help CLI passes. The full same-image suite and G1 model run have not been executed here.
+
+The builder preserves exact runtime/calibration bytes relative to failed v1, independently checks original numerical module bytes against passed V6, and checks nine actual Bridge mathematical method ASTs before creating the new inverse proof. It regenerates the original R14 full-source inverse and all metadata hashes from exact predecessors. No mathematical gate is replaced by a historical assertion.
+
+`local_fixture/` contains only disposable software-test copies. It is not an overlay and is excluded by the builder's explicit file list. G2 preparation is paused; no incomplete G2 source is part of this repair.

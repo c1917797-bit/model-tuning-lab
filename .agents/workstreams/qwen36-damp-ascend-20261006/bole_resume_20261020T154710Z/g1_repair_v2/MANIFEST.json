@@ -1,0 +1,109 @@
+{
+  "G2_paused": true,
+  "MC12_source_byteexact": true,
+  "actual_sameimage_tests_executed": false,
+  "all_overlay_sources_compile": true,
+  "commands": {
+    "canonical": "COMMANDS.json",
+    "compatibility": "COMMANDS_G1.json",
+    "excluded_from_manifest_files": true,
+    "generated_after_binding": true,
+    "historical_case_count": 154,
+    "included_in_actual_host_readset": true,
+    "validated_by": "command_contract.py"
+  },
+  "excluded_from_overlay": [
+    "local_fixture/",
+    "sourceio.py",
+    "REGISTRY_EDITS131R10.preview.json"
+  ],
+  "failed_v1_edited": false,
+  "files": {
+    "command_contract.py": {
+      "bytes": 3082,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_repair_v2/command_contract.py",
+      "sha256": "dc506a78963b93b56e10fbd5ae3822ddc937001d1461ae663b9f04f848d78e37"
+    },
+    "g1_inverse.py": {
+      "bytes": 1916,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_repair_v2/g1_inverse.py",
+      "sha256": "20103056223fe89cedac6566e72364821b29a983d02f48cb6c1025865a6f9323"
+    },
+    "host_service.py": {
+      "bytes": 12571,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_repair_v2/host_service.py",
+      "sha256": "4790dbf430fc111dacb1d73939088294b64704acad516b501dbf5893b1e71e97"
+    },
+    "prepare_g1_repair_v2.py": {
+      "bytes": 11749,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_repair_v2/prepare_g1_repair_v2.py",
+      "sha256": "a69839df048314e346291664e13fb43ad69b1c503bd9849857312e26adf14729"
+    },
+    "test_g1_repair_v2.py": {
+      "bytes": 4238,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_repair_v2/test_g1_repair_v2.py",
+      "sha256": "f0086c80c5d76ef150b0953540d7fb934cc54650336e6af0799532f161076319"
+    },
+    "test_model_calibration131r12.py": {
+      "bytes": 5186,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_repair_v2/test_model_calibration131r12.py",
+      "sha256": "e62c7b568396b2f0eee60e99363921001ad905b59fc60a7b80058c45035059c4"
+    },
+    "test_output_contract_repair4.py": {
+      "bytes": 3867,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_repair_v2/test_output_contract_repair4.py",
+      "sha256": "ad6b4c184c19d2eacd7a5606067b9d560ad3de913dd459392185c2e0e7a06999"
+    },
+    "test_repair14_delta.py": {
+      "bytes": 2204,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_repair_v2/test_repair14_delta.py",
+      "sha256": "8c72e4ba532ea9715641c8fbfaf35d3890eebcbde8a12318d14b8772ebe1b4da"
+    },
+    "test_root_repeat_witness.py": {
+      "bytes": 11953,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_repair_v2/test_root_repeat_witness.py",
+      "sha256": "eb633c13d0561463e8404d4078fccf7914d9ee4fc4d20de6d93a97bd3891a040"
+    }
+  },
+  "local_output": [
+    "test_command_scope_rejects_stale_source_output_entrypoint_and_count (test_g1_repair_v2.Tests.test_command_scope_rejects_stale_source_output_entrypoint_and_count) ... ok\ntest_exact_G1_inverse_rejects_undeclared_bytes_and_wrong_before_lineage (test_g1_repair_v2.Tests.test_exact_G1_inverse_rejects_undeclared_bytes_and_wrong_before_lineage) ... ok\ntest_registry_layer_preserves_original_R10_edits_and_rejects_wrong_postimage (test_g1_repair_v2.Tests.test_registry_layer_preserves_original_R10_edits_and_rejects_wrong_postimage) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.004s\n\nOK\n",
+    "test_entire_preregistered_set_not_subset_or_dynamic_expected (test_model_calibration131r12.Tests.test_entire_preregistered_set_not_subset_or_dynamic_expected) ... ok\ntest_original_matrix_source_and_full_real_call_edges (test_model_calibration131r12.Tests.test_original_matrix_source_and_full_real_call_edges) ... ok\ntest_serialized_full12_reader_and_wrong_raw_source_paths_fail (test_model_calibration131r12.Tests.test_serialized_full12_reader_and_wrong_raw_source_paths_fail) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.056s\n\nOK\n"
+  ],
+  "local_tests": 6,
+  "local_tests_passed": true,
+  "original_registry_R3_inverse_actual_bytes_pass": true,
+  "overlay_root": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_repair_v2",
+  "passed_V6_edited": false,
+  "pending": [
+    "fresh NEW-v2 freeze/source bind",
+    "actual complete214 same-image suite",
+    "actual G1 TP4 model experiment"
+  ],
+  "prospective_sameimage_tests": 214,
+  "readme": {
+    "bytes": 3921,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_repair_v2/README.md",
+    "sha256": "ad7cdc1ab14c3bfebde2b088d99ae62e95a564b3d8197eacd15f31ec4c51d752"
+  },
+  "registry_preview": {
+    "bytes": 17979,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_repair_v2/REGISTRY_EDITS131R10.preview.json",
+    "sha256": "c5e51f1b575f48e2935b27f3b663ab38b079b695304d357e2123f99ebc9ea592"
+  },
+  "retained_historical_refs": [
+    "g1_predecessor",
+    "g1_inverse.baseline_v6",
+    "g1_inverse.failed_g1_v1",
+    "g1_repair_v2.failed_source",
+    "g1_repair_v2.failed_owner"
+  ],
+  "runtime_model_math_modified": false,
+  "schema": "bole.G1-v2-repair-advisory/v1",
+  "source_metadata_remapping": [
+    "files",
+    "dependencies current local refs",
+    "service_runtime_source_snapshots",
+    "g1_overlay",
+    "g1_repair_v2_overlay"
+  ]
+}

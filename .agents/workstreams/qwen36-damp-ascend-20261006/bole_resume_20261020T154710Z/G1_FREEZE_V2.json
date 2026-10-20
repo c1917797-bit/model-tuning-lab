@@ -1,0 +1,24 @@
+{
+  "schema": "bole.g1-repair-v2-builder-execution/v1",
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g1_repair_v2/prepare_g1_repair_v2.py",
+    "--execute",
+    "--failed-source-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v1/SOURCE_BOUND.json\", \"bytes\": 104107, \"sha256\": \"845c1a86741a9b014e910256f847f45dd2dbbe0c81afec9abec07579fe6f1ca1\"}",
+    "--failed-owner-result-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v1-CPU/RESULT.json\", \"bytes\": 125081, \"sha256\": \"55602bda33954038e51c5269d1731204406aa5680b3db92ba1838bf9c40dbdcc\"}",
+    "--overlay",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g1_repair_v2",
+    "--new-root",
+    "/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2",
+    "--output-root",
+    "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2"
+  ],
+  "rc": 0,
+  "stdout": "{\"source\": {\"path\": \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/SOURCE_BOUND.json\", \"bytes\": 109479, \"sha256\": \"010914ebe1bf5d3e6b516103e1a376e24e0a0d965ac0a3a42d7aeb19fca57677\"}, \"commands\": {\"path\": \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/COMMANDS.json\", \"bytes\": 3524, \"sha256\": \"c292c6804dc5552c2bdeed369d86a82030530ab072cc8296da16823157fd5343\"}, \"compatibility_commands\": {\"path\": \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/COMMANDS_G1.json\", \"bytes\": 1699, \"sha256\": \"4fc3f45e92453e5c0370df1aae7ba6b29cd8a603913d24cfcd990709122420fa\"}, \"output\": \"/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2\", \"required_sameimage_cases\": 214, \"actual_sameimage_executed\": false, \"actual_scheduler_executed\": false, \"model_ready\": false}\n",
+  "stderr": "",
+  "actual_NPU": false
+}
