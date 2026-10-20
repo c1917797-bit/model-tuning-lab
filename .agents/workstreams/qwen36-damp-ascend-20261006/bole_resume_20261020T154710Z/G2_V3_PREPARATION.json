@@ -1,0 +1,32 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_host_builder_repair_v3/prepare_g2_host_v3.py",
+    "--execute",
+    "--parent-source-ref",
+    "{\"bytes\": 109479, \"path\": \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/SOURCE_BOUND.json\", \"sha256\": \"010914ebe1bf5d3e6b516103e1a376e24e0a0d965ac0a3a42d7aeb19fca57677\"}",
+    "--parent-owner-result-ref",
+    "{\"bytes\": 131517, \"path\": \"/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/RESULT.json\", \"sha256\": \"52030a932da1f3cd2392389a2d9246925e40c2d93186b5f67d41fba8cfa1e4fc\"}",
+    "--parent-qualification-ref",
+    "{\"bytes\": 12221, \"path\": \"/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/cpu-consumer/ATTRIBUTION.json\", \"sha256\": \"8caf55b28f4a3c4108b8b932e9c664e08b3c28ea18f0bf4fc3bdf62de3538d53\"}",
+    "--consumer-source-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_packet_v2/g2_long_output/g2_consumer.py\", \"bytes\": 7521, \"sha256\": \"0ee132b1acecf59306d8d023ce83f39eebe9dafcbf283ac0ab91f995c95c6549\"}",
+    "--executor-sources-json",
+    "{\"multiproc_executor\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/cpu3_runtime_sources_v1/multiproc_executor.py\", \"bytes\": 42333, \"sha256\": \"a2837f18010a1f3539ea062b0824ae6dacaced0ec5813910a4b6edef7875af18\"}, \"worker_base\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/cpu3_runtime_sources_v1/worker_base.py\", \"bytes\": 12895, \"sha256\": \"a04f83667cf3a3cadbc438eed59c708af5be3409d3f98e54612bd78e2f97e631\"}, \"ascend_worker\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/cpu3_runtime_sources_v1/ascend_worker.py\", \"bytes\": 48290, \"sha256\": \"c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3\"}, \"ompmultiprocessing\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/cpu3_runtime_sources_v2/ompmultiprocessing.py\", \"bytes\": 11906, \"sha256\": \"ee9e6750e377904800cd4857ffc13e268c1bbc09dc2d20ead27d4a6bf648728c\"}, \"cpu_binding\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/cpu3_runtime_sources_v2/cpu_binding.py\", \"bytes\": 32841, \"sha256\": \"71719e397ab003b31ba5e46e1a6da4da658ae7221eeead04311b65ad4d12d533\"}, \"ascend_config\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/cpu3_runtime_sources_v2/ascend_config.py\", \"bytes\": 46883, \"sha256\": \"8da61f88d8e5153fde5311ddc8de11cd8a361deb5f2efed5140640a5eeeb7c38\"}}",
+    "--advisory-manifest-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_packet_v2/g2_long_output/MANIFEST.json\", \"bytes\": 15972, \"sha256\": \"34119feffb6b8b910177731575a63181b02ef46b1670e2844f0813456a9c6f0d\"}",
+    "--original-builder-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_packet_v2/g2_long_output/prepare_g2.py\", \"bytes\": 10075, \"sha256\": \"f2cd77167dda0ce876d91065c0e096ee0a597aff7e66e1382526b578d4b463db\"}",
+    "--overlay",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_packet_v2/g2_long_output",
+    "--new-root",
+    "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v3",
+    "--output-root",
+    "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v3"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_host_builder_repair_v3/prepare_g2_host_v3.py\", line 235, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_host_builder_repair_v3/prepare_g2_host_v3.py\", line 227, in main\n    prerequisite_closure=audit_prerequisite_closure(sr)\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_host_builder_repair_v3/prepare_g2_host_v3.py\", line 98, in audit_prerequisite_closure\n    historical=source_readset(p['source']);actual=source_readset(source_ref)\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_host_builder_repair_v3/prepare_g2_host_v3.py\", line 91, in source_readset\n    need(result.returncode==0,'exact source-owned readset collection '+result.stderr[-3000:])\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_host_builder_repair_v3/prepare_g2_host_v3.py\", line 14, in need\n    if not v:raise ValueError(s)\nValueError: exact source-owned readset collection Traceback (most recent call last):\n  File \"<string>\", line 9, in <module>\n  File \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/command_contract.py\", line 47, in validate\n    validate_value(value,m,sr,template,historical)\n  File \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/command_contract.py\", line 27, in validate_value\n    C.need(all(value[key]==argv for key,argv in target.items()),\n  File \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/sourceio.py\", line 5, in need\n    if not v:raise ValueError(s)\nValueError: exact current runnable model/CPU/bind commands, source Refs and new output leaves\n\n"
+}

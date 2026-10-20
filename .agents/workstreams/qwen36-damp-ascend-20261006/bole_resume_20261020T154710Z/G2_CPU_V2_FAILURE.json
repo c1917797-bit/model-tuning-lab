@@ -1,0 +1,18 @@
+{
+  "schema": "bole.G2-sameimage-preflight-first-failure/v1",
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v2-CPU/RESULT.json",
+    "bytes": 239435,
+    "sha256": "35121fe08c261c26502e3d6726f9baaf68afff622b86839b9caf938bf5b207e9"
+  },
+  "software_stderr": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v2-CPU/cpu-preflight/SOFTWARE.stderr",
+    "bytes": 2222,
+    "sha256": "61ffbe783276e499f0c29fa8adc160bf3a83800bc47f7cee9f0d799268804e5f"
+  },
+  "source_before_after_equal": true,
+  "secondary": [],
+  "actual_NPU_executed": false,
+  "reason": "four exact parent RANK reports not in file mount readset; no numerical inference",
+  "formal_success": false
+}

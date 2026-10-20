@@ -1,0 +1,53 @@
+{
+  "CPU": 145,
+  "NPU": false,
+  "actual_execution_performed": false,
+  "cleanup_seconds": 180,
+  "files": {
+    "LOCAL_CONTROLS.json": {
+      "bytes": 706,
+      "sha256": "26caa707b4a5b76904082051b6383c4e7820473c115d5c4203271f1eff9b1ef2"
+    },
+    "README.md": {
+      "bytes": 8113,
+      "sha256": "8fa61e2522e73f0cc1d094b4f6eb505ca50b9ef79e2cc9522cbbe4eaefe9f7b7"
+    },
+    "cpu_host.py": {
+      "bytes": 18985,
+      "sha256": "b54708da4ede2c85156111c45313dcc54ed0015e907d932effce41d3f77b5f89"
+    },
+    "cpu_steps.py": {
+      "bytes": 5550,
+      "sha256": "b0b829f37af232630a30275630813356385e6642bf48e82b2c9e7b5d6d2188d4"
+    },
+    "he_owned.py": {
+      "bytes": 5886,
+      "sha256": "2a1a4ac808e32dfeaf3383d71a1a091ab8a01e97d360eda4f5ef16e9d5d7d200"
+    },
+    "owner_common.py": {
+      "bytes": 7456,
+      "sha256": "1265338dec147b4c451436ed3fe8569f77db00a4ee64862c885476f14a43ec6a"
+    },
+    "owner_namespace.py": {
+      "bytes": 6565,
+      "sha256": "27809ed5720984495b8dec16d9ad39b6314d7001dbdff9f33e2c30c514ac6048"
+    },
+    "prepare_owner.py": {
+      "bytes": 3796,
+      "sha256": "b75f3d619c5fc06a8fe42bcc5df71140ce637a922806a93f9f73552ddead16ce"
+    },
+    "test_owner_pure.py": {
+      "bytes": 8787,
+      "sha256": "6009ce59a21e75b3f932672166eafb6f9bd9c86517149afd6413df58c1fad8f3"
+    }
+  },
+  "frozen_task_packet_manifest_sha256": "f687ad69fa0226fe72565e8ed356b65244a475c570259c865e6b3cf68fcda851",
+  "host_CPU": 166,
+  "local_pure_tests": 16,
+  "local_pure_tests_passed": 16,
+  "model_ready": false,
+  "original_summed_ancestor_CPU_budget": 7,
+  "phase_seconds": 3600,
+  "schema": "bole.task-CPU-owner-advisory-packet/v1",
+  "status": "frozen for MAIN serial review/execution; default OFF"
+}

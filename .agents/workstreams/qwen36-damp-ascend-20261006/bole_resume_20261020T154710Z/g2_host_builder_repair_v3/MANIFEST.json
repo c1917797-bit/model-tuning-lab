@@ -1,0 +1,58 @@
+{
+  "actual_host_executed": false,
+  "directory_mounts_added": false,
+  "frozen": true,
+  "full_historical_prerequisite_closure_audited_before_CPU": true,
+  "inventory": {
+    "README.md": {
+      "bytes": 4363,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_host_builder_repair_v3/README.md",
+      "sha256": "630f9cbee86150e81a1adbceaefda8b292e4d6287224c1d9db086cb2dcb3111f"
+    },
+    "V2_TO_V3.patch": {
+      "bytes": 7393,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_host_builder_repair_v3/V2_TO_V3.patch",
+      "sha256": "d51980c7636c6817420b3406d7cd86ab48de8fad7a9a028b4207599535d4799d"
+    },
+    "assemble_command.py": {
+      "bytes": 1755,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_host_builder_repair_v3/assemble_command.py",
+      "sha256": "e0932dc06cce47b9c228155fddd6cd745664fb19f70e939ed639bda6e51410fb"
+    },
+    "audit_closure.py": {
+      "bytes": 702,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_host_builder_repair_v3/audit_closure.py",
+      "sha256": "26af3d3d3ed837cb37002e26602447eacc5169a7b2637a1e4e8554cb8d6bb449"
+    },
+    "prepare_g2_host_v3.py": {
+      "bytes": 16199,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_host_builder_repair_v3/prepare_g2_host_v3.py",
+      "sha256": "59ecabb021eb77493d9d6a9f328680f45028d92a438e7e4506c472b54f7f1e2b"
+    },
+    "test_parent_rank_refs.py": {
+      "bytes": 4293,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_host_builder_repair_v3/test_parent_rank_refs.py",
+      "sha256": "f0b4f66c8e92fde4d6441ec0630cea4d30c171625e08f835a67dcff3be4a07b5"
+    },
+    "test_portability.py": {
+      "bytes": 3014,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_host_builder_repair_v3/test_portability.py",
+      "sha256": "a7d1c23a3938c179712e59b4a548de5d4352c92908be184ac434e5266b86ecc9"
+    }
+  },
+  "local_pure_controls": 16,
+  "local_pure_pass": true,
+  "only_new_parent_data_dependencies": "four actual RANK report JSON Refs",
+  "original_G2_manifest": {
+    "bytes": 15972,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_long_output/MANIFEST.json",
+    "sha256": "34119feffb6b8b910177731575a63181b02ef46b1670e2844f0813456a9c6f0d"
+  },
+  "predecessor_repair_manifest": {
+    "bytes": 2056,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_host_builder_repair_v2/MANIFEST.json",
+    "sha256": "bea51e6333c6df9df17cd539efe78027c8e0bbfc18dbad9d7a05ac3105e8ad7b"
+  },
+  "runtime_oracles_28_controls_unchanged": true,
+  "schema": "bole.G2-host-parent-rank-readset-repair/v3"
+}

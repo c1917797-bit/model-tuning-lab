@@ -1,0 +1,60 @@
+{
+  "schema": "bole.native-ar-after-load-first-fault-audit/v1",
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v3/RESULT.json",
+    "bytes": 184389,
+    "sha256": "1503e5fa6c5777bd8c559b1aa1f51492e3d3bd6093d0b254d2e3ba2a94dc7a6b"
+  },
+  "preflight": {
+    "bytes": 14917,
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v3/cpu-preflight/PREFLIGHT.json",
+    "sha256": "6ca6b74fb76694b0a521cf4208fdf89634e335330e4588ed267282dd63696665"
+  },
+  "stdout": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v3/dense/server.stdout",
+    "bytes": 29875,
+    "sha256": "f204b1bec95d1fa7c57cf1591d7e446908256fc360701245fc4f80204e74cae4"
+  },
+  "stderr": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v3/dense/server.stderr",
+    "bytes": 14768,
+    "sha256": "ea3f3d9deff31d0e678328475b3609a3fd31fbbf1f336bc3d83549c450ff0928"
+  },
+  "load_snapshots": [
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v3/dense/receipts/NATIVE-AR-SNAPSHOT-RANK-0.json",
+      "bytes": 16175,
+      "sha256": "b5993bb54b9b89a29c0bc4e6c27b618d6f754d47d03c8e261c8ff1fb15ecc36f"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v3/dense/receipts/NATIVE-AR-SNAPSHOT-RANK-1.json",
+      "bytes": 16171,
+      "sha256": "f279e4cd89102b979b21675d9c208b912e8033f44f88669714884300cd2a4923"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v3/dense/receipts/NATIVE-AR-SNAPSHOT-RANK-2.json",
+      "bytes": 16170,
+      "sha256": "28c920d368cdc5b279775cf33daabd10a81e2416c8545eb26bbc39244cedb9fc"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v3/dense/receipts/NATIVE-AR-SNAPSHOT-RANK-3.json",
+      "bytes": 16171,
+      "sha256": "2630c987f644eacd914a85c60b06eb0c7468338dc36cc94652a668f1a51c084b"
+    }
+  ],
+  "source_before_after_equal": true,
+  "secondary": [],
+  "actual_target_model_all4_loaded": true,
+  "actual_HTTP_executed": false,
+  "worker_first_error": "KeyError('device_op') in frozen observer runtime source closure",
+  "host_primary": {
+    "error": "ValueError('AICore/HBM idle baseline unchanged')",
+    "phase": {
+      "name": "native-ar-server",
+      "ordinal": 5
+    },
+    "traceback": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v3/native_ar_host.py\", line 88, in main\n    ctl.observe('native-ar-startup')\n  File \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/observer_race_repair.py\", line 16, in observe\n    try:return original(self,label,initial=initial,cleanup=cleanup)\n  File \"/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/safety_host.py\", line 195, in observe\n    if self.cid is None or not rows:self.h.idle_one(text,card)\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py\", line 204, in idle_one\n    require(vals and vals[0]==\"0\" and re.search(r\"\\b28[0-9][0-9]\\s*/\\s*32768\\b\",parts[3]),\n  File \"/opt/host/vnf/austinov/model-tuning-lab/projects/kvbuffer-parallel-ascend/tools/full_matrix_host_v2/host.py\", line 32, in require\n    if not v:raise ValueError(why)\nValueError: AICore/HBM idle baseline unchanged\n"
+  },
+  "native_AR_reference_smoke_pass": false,
+  "formal_success": false
+}

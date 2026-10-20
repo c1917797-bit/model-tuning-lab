@@ -1,0 +1,109 @@
+--- frozen_repair_v2/prepare_g2_host_v2.py
++++ repair_v3/prepare_g2_host_v3.py
+@@ -47,6 +47,66 @@
+     return actual
+ 
+ 
++def parent_rank_reports(parent_source,qualification_ref):
++    qualification=obj(qualification_ref);references=qualification['ranks']
++    need(type(references)is list and len(references)==4 and len({r['path']for r in references})==4,
++         'four distinct actual independent parent rank report Refs')
++    requests=None
++    for rank,reference in enumerate(references):
++        need(ordinary_ref(reference['path'])==reference and
++             Path(reference['path'])==Path(qualification_ref['path']).parent/('RANK-%d.json'%rank),
++             'exact ordinary parent qualification sibling rank report')
++        row=obj(reference);items=row['requests']
++        need(row['source']==parent_source and len(items)==2 and
++             [v['generation']for v in items]==[1,2] and
++             all(v['rank']==rank and v['actual_final_retirement_observed']is True and
++                 v['component_checks_pass']is True and v['actual_next_counter_acknowledgements']==0 and
++                 len(v['output_token_ids'])==2 and v['model_ready']is False
++                 for v in items),
++             'actual both G1-v2 generations retired with original component gates on this source/rank')
++        identities=[(v['request'],v['output_token_ids'])for v in items]
++        need(len({v['request']for v in items})==2 and(requests is None or identities==requests),
++             'same two distinct actual request/output identities across all four parent reports')
++        requests=identities
++    return references
++
++
++READSET_PROGRAM = """import hashlib,json,sys
++from pathlib import Path
++sr=json.loads(sys.argv[1]);raw=Path(sr['path']).read_bytes()
++assert len(raw)==sr['bytes']and hashlib.sha256(raw).hexdigest()==sr['sha256']
++m=json.loads(raw);sys.path.insert(0,m['root'])
++import sourceio as C,bind_model as B,command_contract as CC
++assert C.ref(B.__file__)==m['files']['bind_model.py']
++assert C.ref(CC.__file__)==m['files']['command_contract.py']
++refs=[*B.readset(sr),*m['dependencies'],*CC.validate(C,sr,m)]
++for ref in refs:C.checked(ref)
++print(json.dumps(list({r['path']:r for r in refs}.values())))
++"""
++
++
++def source_readset(source_ref):
++    result=subprocess.run(['/usr/bin/python3','-I','-B','-c',READSET_PROGRAM,json.dumps(source_ref)],
++        capture_output=True,text=True,timeout=90)
++    need(result.returncode==0,'exact source-owned readset collection '+result.stderr[-3000:])
++    return json.loads(result.stdout)
++
++
++def audit_prerequisite_closure(source_ref):
++    current=obj(source_ref);p=current['g2_predecessor'];parent=obj(p['source'])
++    ranks=parent_rank_reports(p['source'],p['qualification'])
++    historical=source_readset(p['source']);actual=source_readset(source_ref)
++    required=[*historical,p['source'],p['owner_result'],p['qualification'],*ranks]
++    by_path={r['path']:r for r in actual}
++    missing=[r for r in required if by_path.get(r['path'])!=r]
++    need(not missing,'historical software/validation exact prerequisite closure missing '+json.dumps(missing))
++    digest=hashlib.sha256(json.dumps(sorted(required,key=lambda r:r['path']),sort_keys=True).encode()).hexdigest()
++    return dict(schema='bole.G2-parent-validation-and-software-readset-closure/v3',
++        current_readset_count=len(actual),historical_readset_count=len(historical),
++        independently_validated_parent_rank_reports=ranks,missing=[],required_refs_sha256=digest,
++        directory_mounts_added=False,NPU=False)
++
++
+ def main():
+     p=argparse.ArgumentParser(allow_abbrev=False);p.add_argument('--execute',action='store_true')
+     for key in('parent-source-ref','parent-owner-result-ref','parent-qualification-ref','consumer-source-ref','executor-sources-json','advisory-manifest-ref','original-builder-ref'):p.add_argument('--'+key)
+@@ -56,7 +116,9 @@
+     need(all(vars(a).values()),'all exact actual qualified parent/reader/installed sources and fresh leaves required')
+     sys.path.insert(0,str(a.overlay));import sourceio as C,g2_contract as G2,g2_host_adapter as HA,g2_validate as V,g2_executor_proof as EP
+     ps=json.loads(a.parent_source_ref);parent=obj(ps);po=json.loads(a.parent_owner_result_ref);pq=json.loads(a.parent_qualification_ref)
+-    V.parent_qualified(ps,parent,po,pq) # Fails before copying when actual model gate is pending.
++    V.parent_qualified(ps,parent,po,pq)
++    actual_parent_rank_reports=parent_rank_reports(ps,pq)
++    # Fails before copying when actual model gate is pending.
+     consumer=json.loads(a.consumer_source_ref);need(consumer==ref(a.overlay/'g2_consumer.py'),'explicit independently reviewed consumer source bytes')
+     executors=json.loads(a.executor_sources_json)
+     need(set(executors)=={'multiproc_executor','worker_base','ascend_worker','ompmultiprocessing','cpu_binding','ascend_config'},'exact complete native launcher source review operands')
+@@ -133,13 +195,16 @@
+     parent_refs=[ps,po,pq,parent['prepared_template'],ref(old/'SOURCE.json'),ref(old/'COMMANDS.json'),ref(old/'COMMANDS_G1.json'),
+         *parent['files'].values(),*parent['dependencies'],*executors.values(),consumer]
+     m['dependencies']=list({r['path']:r for r in[*[remap(r)for r in parent['dependencies']],*parent_refs,
+-        advisory_ref,original_builder_ref,repair_builder_ref,*actual_overlay.values()]}.values())
++        advisory_ref,original_builder_ref,repair_builder_ref,*actual_overlay.values(),*actual_parent_rank_reports]}.values())
+     m['g2_builder_portability_v2']=dict(schema='bole.actual-remote-overlay-portability/v2',
+         advisory_manifest=advisory_ref,original_frozen_builder=original_builder_ref,
+         actual_repair_builder=repair_builder_ref,original_advisory_paths_are_lineage_only=True,
+         runtime_and_28_controls_unchanged=True,
+         inventory={name:dict(advisory=manifest['inventory'].get(name,advisory_ref),
+             actual_overlay=actual_overlay[name],actual_bound=m['files'][name])for name in names})
++    m['g2_parent_prerequisites_v3']=dict(parent_source=ps,qualification=pq,
++        actual_rank_reports=actual_parent_rank_reports,actual_preparer=repair_builder_ref,
++        exact_file_mounts_only=True,runtime_and_28_controls_unchanged=True)
+     # New command closure remains generated after binding, never a manifest cycle.
+     m['command_scope']=dict(parent['command_scope'],compatibility_file='COMMANDS_G2.json')
+     for name in('SOURCE_TEMPLATE.json','SOURCE.json'):replace(new/name,m)
+@@ -159,8 +224,9 @@
+     replace(new/'COMMANDS_G2.json',dict(source=sr,template=template,commands=ref(new/'COMMANDS.json'),
+         model=commands['model'],CPU=commands['CPU'],required_sameimage_software_cases=m['service_required_sameimage_software_cases']))
+     cc.validate(cc.C,sr,bound)
++    prerequisite_closure=audit_prerequisite_closure(sr)
+     for f in new.rglob('*.py'):compile(f.read_bytes(),str(f),'exec')
+-    print(json.dumps(dict(source=sr,commands=ref(new/'COMMANDS.json'),new_software_cases=added,
++    print(json.dumps(dict(prerequisite_closure=prerequisite_closure,source=sr,commands=ref(new/'COMMANDS.json'),new_software_cases=added,
+         prospective_sameimage_cases=original_count+added,actual_sameimage_executed=False,
+         actual_scheduler_executed=False,model_ready=False,timing_is_formal=False)))
+     return 0
