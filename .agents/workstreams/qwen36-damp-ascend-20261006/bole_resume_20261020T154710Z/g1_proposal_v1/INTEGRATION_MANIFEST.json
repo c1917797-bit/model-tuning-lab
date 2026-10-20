@@ -1,0 +1,546 @@
+{
+  "G1_sameimage_suite_executed": false,
+  "HTTP_schema": "bole.actual-c1-two-request-service-HTTP/v1",
+  "actual_G1_execution": false,
+  "builder": "prepare_g1.py",
+  "builder_requires": [
+    "exact passed V6 SOURCE_BOUND Ref3",
+    "actual successful V6 owner RESULT Ref3",
+    "linked actual independent V6 ATTRIBUTION Ref3",
+    "exact original inverse SOURCE_TEMPLATE Ref3",
+    "fresh explicit G1 source/output leaves"
+  ],
+  "changed_or_new": [
+    "cache_observation.py",
+    "cache_registry.py",
+    "contract090.py",
+    "fa_prefill131r10.py",
+    "g1_contract.py",
+    "host_service.py",
+    "layer_slots131r10.py",
+    "live_owner.py",
+    "model_entry.py",
+    "model_process_calibration.py",
+    "prepare_g1.py",
+    "registration_audit131r11.py",
+    "server090.py",
+    "service_bridge.py",
+    "service_client.py",
+    "service_entry.py",
+    "service_metadata.py",
+    "service_runner.py",
+    "test_cache_budget131r16.py",
+    "test_g1_lifecycle.py",
+    "test_g1_parent_gate.py",
+    "test_service_client.py",
+    "worker_bootstrap.py",
+    "worker_entry.py"
+  ],
+  "consumer_files": {
+    "consume_service.py": {
+      "destination": "consume_service.py",
+      "proposal": {
+        "bytes": 73444,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/consumer_proposal/consume_service.py",
+        "sha256": "b2e19155efac0a76b35662ef87870ad44b42b154c84afc12124a77c2a2b1550f"
+      }
+    },
+    "test_g1_consumer_pure.py": {
+      "destination": "test_g1_consumer_pure.py",
+      "proposal": {
+        "bytes": 17374,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/consumer_proposal/test_g1_consumer_pure.py",
+        "sha256": "5e5235b496bd46ce554fe46c66f6b64f2d64065e7ef22d7f2d0235179e3447b7"
+      }
+    },
+    "test_service_fa_owner.py": {
+      "destination": "test_service_fa_owner.py",
+      "proposal": {
+        "bytes": 2830,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/consumer_proposal/test_service_fa_owner.py",
+        "sha256": "fe49806746f6eec2f70d812ae2932599bab8469deab4307c36db1fa2279496fa"
+      }
+    }
+  },
+  "consumer_overlay_directory": "consumer_proposal",
+  "consumer_packet_ready": true,
+  "consumer_source": "consumer_proposal/consume_service.py",
+  "consumer_tests": 21,
+  "default_enabled": false,
+  "default_off_commands": [
+    "service_client.py",
+    "service_entry.py",
+    "host_service.py",
+    "server090.py",
+    "prepare_g1.py"
+  ],
+  "enable_environment": "BOLE_G1_MULTI_REQUEST_ENABLE",
+  "exclude_top_level": [
+    "consume_service.py"
+  ],
+  "files": {
+    "bind_model.py": {
+      "baseline": {
+        "bytes": 2614,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/bind_model.py",
+        "sha256": "ff53049c69820a3fb1bd4b874019c798bf705f298b4225ab0a08e0cf62fddca8"
+      },
+      "proposal": {
+        "bytes": 2614,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/bind_model.py",
+        "sha256": "ff53049c69820a3fb1bd4b874019c798bf705f298b4225ab0a08e0cf62fddca8"
+      },
+      "role": "unchanged-support"
+    },
+    "cache_observation.py": {
+      "baseline": {
+        "bytes": 4519,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/cache_observation.py",
+        "sha256": "febb620cf3b9cc47733d3f7dcf196dfa4615cc47affb208b44e2473c3b6788ff"
+      },
+      "proposal": {
+        "bytes": 4779,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/cache_observation.py",
+        "sha256": "11962f857a38e11cf17d18a09d6f48980d0c33488c9f87b43c8da8811e50c6df"
+      },
+      "role": "changed"
+    },
+    "cache_registry.py": {
+      "baseline": {
+        "bytes": 6438,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/cache_registry.py",
+        "sha256": "d4df798008f2a6a14b1fadca274dce63786a58decba04c90f118691af07be4b4"
+      },
+      "proposal": {
+        "bytes": 6547,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/cache_registry.py",
+        "sha256": "befb35dbc49a2aaf740a1cf771568b145c131a516b1549938422a73c62e3a14c"
+      },
+      "role": "changed"
+    },
+    "contract090.py": {
+      "baseline": {
+        "bytes": 3533,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/contract090.py",
+        "sha256": "723e4eb527aa6abe714a018cbe1e5364e972479d60b1a53c7eac3215d00b49b2"
+      },
+      "proposal": {
+        "bytes": 3663,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/contract090.py",
+        "sha256": "b581a236077ebb3092768afbb5b757d1c270af25e9f4f3452b27b4b383942e59"
+      },
+      "role": "changed"
+    },
+    "eligibility.py": {
+      "baseline": {
+        "bytes": 1346,
+        "path": "/workspace/scratch/6d9e7cc63b51/service_work/eligibility.py",
+        "sha256": "b4866228a86456dbe4195cdf0978a29e2cbe613a221d5244669aa45427fbd62a"
+      },
+      "proposal": {
+        "bytes": 1346,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/eligibility.py",
+        "sha256": "b4866228a86456dbe4195cdf0978a29e2cbe613a221d5244669aa45427fbd62a"
+      },
+      "role": "unchanged-support"
+    },
+    "fa_prefill131r10.py": {
+      "baseline": {
+        "bytes": 6050,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/fa_prefill131r10.py",
+        "sha256": "aebd160c887f660caa1d6d8ac5cbb9050ff6d7b78adc2b13423d900485f983e7"
+      },
+      "proposal": {
+        "bytes": 6174,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/fa_prefill131r10.py",
+        "sha256": "9e3ba453f232faf0f9a36ae0f8b7c962d700c3115c98ba574b3d89a3d3650550"
+      },
+      "role": "changed"
+    },
+    "g1_contract.py": {
+      "proposal": {
+        "bytes": 633,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/g1_contract.py",
+        "sha256": "d245d53952350c0f874942e9d9cc2556dff078f74a74557b1db695624cc576c6"
+      },
+      "role": "new"
+    },
+    "host_service.py": {
+      "baseline": {
+        "bytes": 11732,
+        "path": "/workspace/scratch/6d9e7cc63b51/service_work/host_service.py",
+        "sha256": "80e5024f4de0200b3bb481d8ffffb8eca2439391f7082637607a9e2bea599476"
+      },
+      "proposal": {
+        "bytes": 12520,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/host_service.py",
+        "sha256": "003a3a27dfbc8da77871cdf3477c045dae861c4b2c1e70a0dd69cfc5a78508b4"
+      },
+      "role": "changed"
+    },
+    "layer_slots131r10.py": {
+      "baseline": {
+        "bytes": 3137,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/layer_slots131r10.py",
+        "sha256": "c30f012b978079c2949f2f9da3ada629d5c4887d86495f343c473ec2cc156d4c"
+      },
+      "proposal": {
+        "bytes": 3294,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/layer_slots131r10.py",
+        "sha256": "b30dcbe1c35942d795dc310ae39033a78ec8974bd346c1c7230aa3ae8e355653"
+      },
+      "role": "changed"
+    },
+    "live_owner.py": {
+      "baseline": {
+        "bytes": 11038,
+        "path": "/workspace/scratch/6d9e7cc63b51/service_work/live_owner.py",
+        "sha256": "f87789c5cdccafc8d2bd4ddab1170ce21ff3764377e80d0693d1f526f32a0073"
+      },
+      "proposal": {
+        "bytes": 11358,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/live_owner.py",
+        "sha256": "b1ad93a1347d6ee1657369ca2749e949659ee2c5793a26d4910e3b664a4f2bfe"
+      },
+      "role": "changed"
+    },
+    "model_calibration131r12.py": {
+      "baseline": {
+        "bytes": 6367,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/model_calibration131r12.py",
+        "sha256": "0d5dda08927ff35981e58ab722ceb545c78f179a285b72e2a706119d77319811"
+      },
+      "proposal": {
+        "bytes": 6367,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/model_calibration131r12.py",
+        "sha256": "0d5dda08927ff35981e58ab722ceb545c78f179a285b72e2a706119d77319811"
+      },
+      "role": "unchanged-support"
+    },
+    "model_entry.py": {
+      "baseline": {
+        "bytes": 30839,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/model_entry.py",
+        "sha256": "f0069203bce372c58abd0914f6977e81d582d432d1fb1277257eb25ea22c86fd"
+      },
+      "proposal": {
+        "bytes": 31624,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/model_entry.py",
+        "sha256": "ace026103e67826497afe1d4e19d8a8fcb1d9879719f84e09bdd1eaf54a089b7"
+      },
+      "role": "changed"
+    },
+    "model_process_calibration.py": {
+      "proposal": {
+        "bytes": 5185,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/model_process_calibration.py",
+        "sha256": "60e43ab6ea8a243d8303c2f9e7c433412d0f3bb41af75f0ad2cf530bad6d5654"
+      },
+      "role": "new"
+    },
+    "owned_create.py": {
+      "baseline": {
+        "bytes": 2122,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/owned_create.py",
+        "sha256": "f6df587ee2913a62b7f70193d57896381f713f6c039151b4db3f16c4baafa7f6"
+      },
+      "proposal": {
+        "bytes": 2122,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/owned_create.py",
+        "sha256": "f6df587ee2913a62b7f70193d57896381f713f6c039151b4db3f16c4baafa7f6"
+      },
+      "role": "unchanged-support"
+    },
+    "prefill_tail.py": {
+      "baseline": {
+        "bytes": 7499,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/prefill_tail.py",
+        "sha256": "93c662cdba98827f865ff6e3c6e217982bc8c4f296d06564620b4887cc4c0452"
+      },
+      "proposal": {
+        "bytes": 7499,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/prefill_tail.py",
+        "sha256": "93c662cdba98827f865ff6e3c6e217982bc8c4f296d06564620b4887cc4c0452"
+      },
+      "role": "unchanged-support"
+    },
+    "prepare_g1.py": {
+      "proposal": {
+        "bytes": 13048,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/prepare_g1.py",
+        "sha256": "189b5c4ffc884763f3204bdfeedf9eee4abfe05611db609346fc90cbaca9ee58"
+      },
+      "role": "new"
+    },
+    "registration_audit131r11.py": {
+      "baseline": {
+        "bytes": 2901,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/registration_audit131r11.py",
+        "sha256": "5f7408fb5a8d689a0e83614e75b9a5a0805e123150cdec252c0beeb65ca5a39a"
+      },
+      "proposal": {
+        "bytes": 3025,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/registration_audit131r11.py",
+        "sha256": "2246797c7d9b75015d6c95a7596a507dfe7836d034686c3d29c38db726312f27"
+      },
+      "role": "changed"
+    },
+    "server090.py": {
+      "baseline": {
+        "bytes": 2409,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/server090.py",
+        "sha256": "a774fe6cf747251754cfa6796b17d2ac747670713c51a6d1d4f884a078c300e2"
+      },
+      "proposal": {
+        "bytes": 2370,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/server090.py",
+        "sha256": "7bfd16829ca438a3fc366d87879c08c2f6e0d0fd76c67a7d7226f7cac2b11cd3"
+      },
+      "role": "changed"
+    },
+    "service_bridge.py": {
+      "baseline": {
+        "bytes": 6829,
+        "path": "/workspace/scratch/6d9e7cc63b51/service_work/service_bridge.py",
+        "sha256": "eca1b010b67a2604bcc01bc0f2c13f286f8381edd8c6b9d45eb853f98feb40e8"
+      },
+      "proposal": {
+        "bytes": 6768,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/service_bridge.py",
+        "sha256": "94513f85d254daccdd08c9048cfe90cda2c0fd440554dcd3906e83a8964d0f49"
+      },
+      "role": "changed"
+    },
+    "service_client.py": {
+      "baseline": {
+        "bytes": 3023,
+        "path": "/workspace/scratch/6d9e7cc63b51/service_work/service_client.py",
+        "sha256": "621515120c432fbd967aef08d3f2f40bd15a16c5e6a58381d98b2aef4e1cbf24"
+      },
+      "proposal": {
+        "bytes": 3067,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/service_client.py",
+        "sha256": "da5c9ab3014bf13deb4b50011404abcfbbdf58d2bb717ec0dbd5a1119da8acf0"
+      },
+      "role": "changed"
+    },
+    "service_entry.py": {
+      "baseline": {
+        "bytes": 3402,
+        "path": "/workspace/scratch/6d9e7cc63b51/service_work/service_entry.py",
+        "sha256": "d530ab13927faa2a19d8a5951e4dd02dc00beab98be2a0007e120562e9e422fa"
+      },
+      "proposal": {
+        "bytes": 3337,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/service_entry.py",
+        "sha256": "c91af7689ba5a6ae895ec96633d0a832f39592432914bd007912992d21f13ec8"
+      },
+      "role": "changed"
+    },
+    "service_fia.py": {
+      "baseline": {
+        "bytes": 2629,
+        "path": "/workspace/scratch/6d9e7cc63b51/service_work/service_fia.py",
+        "sha256": "6fab4d9af7307bd4b4aa8371dd7d8e38431a7a0dc0ff8e907cb89b786278bf24"
+      },
+      "proposal": {
+        "bytes": 2629,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/service_fia.py",
+        "sha256": "6fab4d9af7307bd4b4aa8371dd7d8e38431a7a0dc0ff8e907cb89b786278bf24"
+      },
+      "role": "unchanged-support"
+    },
+    "service_metadata.py": {
+      "baseline": {
+        "bytes": 5108,
+        "path": "/workspace/scratch/6d9e7cc63b51/service_work/service_metadata.py",
+        "sha256": "20767f04730b6ec58b59e5010f4f1c32bae9af7bd2c3b2a1db4ac058922eee2a"
+      },
+      "proposal": {
+        "bytes": 5108,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/service_metadata.py",
+        "sha256": "433b011069f11b2f0af7688f7774a9a1d30a3543a723b17d65357fd203eb5e10"
+      },
+      "role": "changed"
+    },
+    "service_runner.py": {
+      "baseline": {
+        "bytes": 38590,
+        "path": "/workspace/scratch/6d9e7cc63b51/service_work/service_runner.py",
+        "sha256": "08ef1c89a54f2870dec26263f97a3521d535cac98b5ff93df413ae3042f1e966"
+      },
+      "proposal": {
+        "bytes": 42829,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/service_runner.py",
+        "sha256": "371adf3c7ae5c8620b9c22e335d1544036e4b9287cb3bab9c216525a49b74a63"
+      },
+      "role": "changed"
+    },
+    "sourceio.py": {
+      "baseline": {
+        "bytes": 1038,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/sourceio.py",
+        "sha256": "0bd97743aa2ac06ea55488a54f5045fd08cff2fdfa4869acc9b1414d2965a0cd"
+      },
+      "proposal": {
+        "bytes": 1038,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/sourceio.py",
+        "sha256": "0bd97743aa2ac06ea55488a54f5045fd08cff2fdfa4869acc9b1414d2965a0cd"
+      },
+      "role": "unchanged-support"
+    },
+    "test_cache_budget131r16.py": {
+      "baseline": {
+        "bytes": 7258,
+        "path": "/workspace/scratch/6d9e7cc63b51/service_work/test_cache_budget131r16.py",
+        "sha256": "3c9ca203947665d0d4f0e67567498b36630f847c35fbbe1ee70e6be86b3f71ce"
+      },
+      "proposal": {
+        "bytes": 8334,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/test_cache_budget131r16.py",
+        "sha256": "435421adb005e0979318fd339d0378c889da426f015a96e05e7c144acd6045be"
+      },
+      "role": "changed"
+    },
+    "test_g1_lifecycle.py": {
+      "proposal": {
+        "bytes": 15466,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/test_g1_lifecycle.py",
+        "sha256": "62ba120fafb0f84c7d116ef18e12ff36dcd6d841e9fdd7a202daca10ed3b956d"
+      },
+      "role": "new"
+    },
+    "test_g1_parent_gate.py": {
+      "proposal": {
+        "bytes": 4391,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/test_g1_parent_gate.py",
+        "sha256": "5e03259ece71d4dbea7304294158f2e4cd0579f6447334b402fe70e41a05d35b"
+      },
+      "role": "new"
+    },
+    "test_service_client.py": {
+      "baseline": {
+        "bytes": 1826,
+        "path": "/workspace/scratch/6d9e7cc63b51/service_work/test_service_client.py",
+        "sha256": "76c7c437ccca2217a048c4cf5d66e906ecd82896284df2acb8f4e377bfa6ef32"
+      },
+      "proposal": {
+        "bytes": 1845,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/test_service_client.py",
+        "sha256": "c412f7dfe966993c57ea170118d4aa9abf087c744361ee06352302b9acf35da6"
+      },
+      "role": "changed"
+    },
+    "tp_consensus.py": {
+      "baseline": {
+        "bytes": 5846,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/tp_consensus.py",
+        "sha256": "88f0fdffb0fdbe2a8b344dd14d422b33fc526faff6a8298646861de5d6d7fac5"
+      },
+      "proposal": {
+        "bytes": 5846,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/tp_consensus.py",
+        "sha256": "88f0fdffb0fdbe2a8b344dd14d422b33fc526faff6a8298646861de5d6d7fac5"
+      },
+      "role": "unchanged-support"
+    },
+    "transaction.py": {
+      "baseline": {
+        "bytes": 7678,
+        "path": "/workspace/scratch/6d9e7cc63b51/service_work/transaction.py",
+        "sha256": "fdc008e7e2912da9efb7860cc19c781386340e1123fcca9dfb3c528eb6945a6a"
+      },
+      "proposal": {
+        "bytes": 7678,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/transaction.py",
+        "sha256": "fdc008e7e2912da9efb7860cc19c781386340e1123fcca9dfb3c528eb6945a6a"
+      },
+      "role": "unchanged-support"
+    },
+    "worker_bootstrap.py": {
+      "baseline": {
+        "bytes": 5571,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/worker_bootstrap.py",
+        "sha256": "8e804d29ea20a593c6b79e176fa8f5b7f44fdd02bbc0a7e8cee8173eb4f02d8e"
+      },
+      "proposal": {
+        "bytes": 7594,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/worker_bootstrap.py",
+        "sha256": "4bb5d762cdd7d5362942cb453e9fe81b1e14fac76770d4ed4b6a534da5a7a0cf"
+      },
+      "role": "changed"
+    },
+    "worker_entry.py": {
+      "baseline": {
+        "bytes": 8111,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/worker_entry.py",
+        "sha256": "666ba32893a3c899bd0872d58027eef2119a24d2da424dc9f6cddb303a2d7c11"
+      },
+      "proposal": {
+        "bytes": 8227,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/worker_entry.py",
+        "sha256": "d884899528bb11e2d1eca0f3938c6d1da4ad98f67972d3e4fe6e85bb7bef9a7e"
+      },
+      "role": "changed"
+    }
+  },
+  "live_sources_edited": false,
+  "local_unit_tests": {
+    "command": "python -m unittest -v test_g1_lifecycle test_service_client test_g1_parent_gate",
+    "consumer_command": "cd consumer_proposal && python -m unittest discover -v",
+    "consumer_tests": 21,
+    "devices": false,
+    "passed": true,
+    "tests": 15,
+    "torch_imported": false
+  },
+  "no_claims": [
+    "G1 actual model pass",
+    "G1 actual physical reuse",
+    "native AR equivalence",
+    "whole-model qualification",
+    "task accuracy",
+    "formal success",
+    "speedup"
+  ],
+  "parent_V6_actual_sameimage_tests": 179,
+  "pending": [
+    "full source binding",
+    "complete same-image Devices[] suite",
+    "actual TP4 two-request lifecycle and independent numerical/scheduler consumption",
+    "actual-data independent G1 consumer qualification"
+  ],
+  "producer_client_parent_tests": 15,
+  "profile": {
+    "max_output_tokens": 2,
+    "max_steps_per_request": 1,
+    "prefix": 131,
+    "request_count": 2,
+    "schema": "bole.c1-two-request-service/v1"
+  },
+  "proposal_root": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request",
+  "prospective_G1_sameimage_tests": 211,
+  "prospective_sameimage_test_delta": 32,
+  "raw_schema": "bole.actual-c1-two-request-service/v1",
+  "request_schema": "bole.actual-c1-two-request-item/v1",
+  "schema": "bole.g1-advisory-integration/v1",
+  "scope": {
+    "native_MTP_num_speculative_tokens": 8,
+    "native_retirement_barrier_output_tokens": 1,
+    "physical_slot_reuse_required": false,
+    "reuse_observation_required": true
+  },
+  "total_local_tests": 36,
+  "unchanged_support": [
+    "bind_model.py",
+    "eligibility.py",
+    "model_calibration131r12.py",
+    "owned_create.py",
+    "prefill_tail.py",
+    "service_fia.py",
+    "sourceio.py",
+    "tp_consensus.py",
+    "transaction.py"
+  ],
+  "worker_schema": "bole.actual-worker-two-request-receipt/v1"
+}

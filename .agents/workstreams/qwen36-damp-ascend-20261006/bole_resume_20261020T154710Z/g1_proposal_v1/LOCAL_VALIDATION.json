@@ -1,0 +1,295 @@
+{
+  "NPU": false,
+  "Torch_imported": false,
+  "actual_G1_model_executed": false,
+  "actual_scheduler_executed": false,
+  "cold_cli": [
+    {
+      "exit_code": 0,
+      "file": "service_client.py",
+      "mode": []
+    },
+    {
+      "exit_code": 0,
+      "file": "service_client.py",
+      "mode": [
+        "--help"
+      ]
+    },
+    {
+      "exit_code": 0,
+      "file": "service_entry.py",
+      "mode": []
+    },
+    {
+      "exit_code": 0,
+      "file": "service_entry.py",
+      "mode": [
+        "--help"
+      ]
+    },
+    {
+      "exit_code": 0,
+      "file": "host_service.py",
+      "mode": []
+    },
+    {
+      "exit_code": 0,
+      "file": "host_service.py",
+      "mode": [
+        "--help"
+      ]
+    },
+    {
+      "exit_code": 0,
+      "file": "server090.py",
+      "mode": []
+    },
+    {
+      "exit_code": 0,
+      "file": "server090.py",
+      "mode": [
+        "--help"
+      ]
+    },
+    {
+      "exit_code": 0,
+      "file": "prepare_g1.py",
+      "mode": []
+    },
+    {
+      "exit_code": 0,
+      "file": "prepare_g1.py",
+      "mode": [
+        "--help"
+      ]
+    },
+    {
+      "exit_code": 0,
+      "file": "consumer_proposal/consume_service.py",
+      "mode": []
+    },
+    {
+      "exit_code": 0,
+      "file": "consumer_proposal/consume_service.py",
+      "mode": [
+        "--help"
+      ]
+    }
+  ],
+  "compiled_files": 34,
+  "formal_success": false,
+  "full_sameimage_suite_executed": false,
+  "full_top_level_compile": true,
+  "host_access": false,
+  "independent_consumer_output": "test_actual_identity_oracle_accepts_two_sequential_lifecycles (test_g1_consumer_pure.Tests.test_actual_identity_oracle_accepts_two_sequential_lifecycles) ... ok\ntest_allocator_reuse_and_nonreuse_are_both_truthful_observations (test_g1_consumer_pure.Tests.test_allocator_reuse_and_nonreuse_are_both_truthful_observations) ... ok\ntest_claimed_reuse_cannot_replace_actual_mapping (test_g1_consumer_pure.Tests.test_claimed_reuse_cannot_replace_actual_mapping) ... ok\ntest_complete_future_journal_reserve_and_final_bytes_recomputed (test_g1_consumer_pure.Tests.test_complete_future_journal_reserve_and_final_bytes_recomputed) ... ok\ntest_default_off_and_help_are_standalone (test_g1_consumer_pure.Tests.test_default_off_and_help_are_standalone) ... ok\ntest_logical_charge_counts_repeated_tensors_and_rejects_opaque_or_device (test_g1_consumer_pure.Tests.test_logical_charge_counts_repeated_tensors_and_rejects_opaque_or_device) ... ok\ntest_missing_journal_ordinal_and_duplicate_ref_rejected (test_g1_consumer_pure.Tests.test_missing_journal_ordinal_and_duplicate_ref_rejected) ... ok\ntest_missing_or_duplicate_layer_slot_cannot_be_omitted_from_reuse (test_g1_consumer_pure.Tests.test_missing_or_duplicate_layer_slot_cannot_be_omitted_from_reuse) ... ok\ntest_one_remaining_output_never_accepts_a_child (test_g1_consumer_pure.Tests.test_one_remaining_output_never_accepts_a_child) ... ok\ntest_prior_owner_generation_version_and_native_counter_fail_before_math (test_g1_consumer_pure.Tests.test_prior_owner_generation_version_and_native_counter_fail_before_math) ... ok\ntest_second_ingress_before_first_retirement_rejected (test_g1_consumer_pure.Tests.test_second_ingress_before_first_retirement_rejected) ... ok\ntest_second_request_http_completion_without_worker_retirement_rejected (test_g1_consumer_pure.Tests.test_second_request_http_completion_without_worker_retirement_rejected) ... ok\ntest_two_request_logical_cap_cannot_be_inflated_or_underdeclared (test_g1_consumer_pure.Tests.test_two_request_logical_cap_cannot_be_inflated_or_underdeclared) ... ok\ntest_unaccounted_observer_or_undercharged_bytes_rejected (test_g1_consumer_pure.Tests.test_unaccounted_observer_or_undercharged_bytes_rejected) ... ok\ntest_v6_numerical_and_vocabulary_functions_unchanged (test_g1_consumer_pure.Tests.test_v6_numerical_and_vocabulary_functions_unchanged) ... ok\ntest_wrong_rank_process_identity_rejected (test_g1_consumer_pure.Tests.test_wrong_rank_process_identity_rejected) ... ok\ntest_after_owner_epoch_cannot_change (test_service_fa_owner.Tests.test_after_owner_epoch_cannot_change) ... ok\ntest_independent_reader_joins_observed12x_physical_to_kernel_expansion (test_service_fa_owner.Tests.test_independent_reader_joins_observed12x_physical_to_kernel_expansion) ... ok\ntest_same_physical_pages_with_fresh_second_generation_are_valid (test_service_fa_owner.Tests.test_same_physical_pages_with_fresh_second_generation_are_valid) ... ok\ntest_wrong_generation_and_replayed_prior_epoch_fail_closed (test_service_fa_owner.Tests.test_wrong_generation_and_replayed_prior_epoch_fail_closed) ... ok\ntest_wrong_request_geometry_page_row_and_cache_alias_fail_closed (test_service_fa_owner.Tests.test_wrong_request_geometry_page_row_and_cache_alias_fail_closed) ... ok\n\n----------------------------------------------------------------------\nRan 21 tests in 0.205s\n\nOK\n",
+  "independent_consumer_source_compile": true,
+  "independent_consumer_source_inventory": {
+    "consume_service.py": {
+      "bytes": 73444,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/consumer_proposal/consume_service.py",
+      "sha256": "b2e19155efac0a76b35662ef87870ad44b42b154c84afc12124a77c2a2b1550f"
+    },
+    "test_g1_consumer_pure.py": {
+      "bytes": 17374,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/consumer_proposal/test_g1_consumer_pure.py",
+      "sha256": "5e5235b496bd46ce554fe46c66f6b64f2d64065e7ef22d7f2d0235179e3447b7"
+    },
+    "test_service_fa_owner.py": {
+      "bytes": 2830,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/consumer_proposal/test_service_fa_owner.py",
+      "sha256": "fe49806746f6eec2f70d812ae2932599bab8469deab4307c36db1fa2279496fa"
+    }
+  },
+  "independent_consumer_tests": 21,
+  "independent_consumer_tests_passed": true,
+  "model_ready": false,
+  "prospective_sameimage_test_delta": 32,
+  "schema": "bole.g1-local-devicefree-validation/v1",
+  "source_binding_executed": false,
+  "source_inventory": {
+    "bind_model.py": {
+      "bytes": 2614,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/bind_model.py",
+      "sha256": "ff53049c69820a3fb1bd4b874019c798bf705f298b4225ab0a08e0cf62fddca8"
+    },
+    "cache_observation.py": {
+      "bytes": 4779,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/cache_observation.py",
+      "sha256": "11962f857a38e11cf17d18a09d6f48980d0c33488c9f87b43c8da8811e50c6df"
+    },
+    "cache_registry.py": {
+      "bytes": 6547,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/cache_registry.py",
+      "sha256": "befb35dbc49a2aaf740a1cf771568b145c131a516b1549938422a73c62e3a14c"
+    },
+    "consume_service.py": {
+      "bytes": 43275,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/consume_service.py",
+      "sha256": "e193efc32a72b442e578cf3a6a568d553a4eedbf738c869098eddd5bc80fd27d"
+    },
+    "contract090.py": {
+      "bytes": 3663,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/contract090.py",
+      "sha256": "b581a236077ebb3092768afbb5b757d1c270af25e9f4f3452b27b4b383942e59"
+    },
+    "eligibility.py": {
+      "bytes": 1346,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/eligibility.py",
+      "sha256": "b4866228a86456dbe4195cdf0978a29e2cbe613a221d5244669aa45427fbd62a"
+    },
+    "fa_prefill131r10.py": {
+      "bytes": 6174,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/fa_prefill131r10.py",
+      "sha256": "9e3ba453f232faf0f9a36ae0f8b7c962d700c3115c98ba574b3d89a3d3650550"
+    },
+    "g1_contract.py": {
+      "bytes": 633,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/g1_contract.py",
+      "sha256": "d245d53952350c0f874942e9d9cc2556dff078f74a74557b1db695624cc576c6"
+    },
+    "host_service.py": {
+      "bytes": 12520,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/host_service.py",
+      "sha256": "003a3a27dfbc8da77871cdf3477c045dae861c4b2c1e70a0dd69cfc5a78508b4"
+    },
+    "layer_slots131r10.py": {
+      "bytes": 3294,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/layer_slots131r10.py",
+      "sha256": "b30dcbe1c35942d795dc310ae39033a78ec8974bd346c1c7230aa3ae8e355653"
+    },
+    "live_owner.py": {
+      "bytes": 11358,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/live_owner.py",
+      "sha256": "b1ad93a1347d6ee1657369ca2749e949659ee2c5793a26d4910e3b664a4f2bfe"
+    },
+    "model_calibration131r12.py": {
+      "bytes": 6367,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/model_calibration131r12.py",
+      "sha256": "0d5dda08927ff35981e58ab722ceb545c78f179a285b72e2a706119d77319811"
+    },
+    "model_entry.py": {
+      "bytes": 31624,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/model_entry.py",
+      "sha256": "ace026103e67826497afe1d4e19d8a8fcb1d9879719f84e09bdd1eaf54a089b7"
+    },
+    "model_process_calibration.py": {
+      "bytes": 5185,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/model_process_calibration.py",
+      "sha256": "60e43ab6ea8a243d8303c2f9e7c433412d0f3bb41af75f0ad2cf530bad6d5654"
+    },
+    "owned_create.py": {
+      "bytes": 2122,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/owned_create.py",
+      "sha256": "f6df587ee2913a62b7f70193d57896381f713f6c039151b4db3f16c4baafa7f6"
+    },
+    "prefill_tail.py": {
+      "bytes": 7499,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/prefill_tail.py",
+      "sha256": "93c662cdba98827f865ff6e3c6e217982bc8c4f296d06564620b4887cc4c0452"
+    },
+    "prepare_g1.py": {
+      "bytes": 13048,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/prepare_g1.py",
+      "sha256": "189b5c4ffc884763f3204bdfeedf9eee4abfe05611db609346fc90cbaca9ee58"
+    },
+    "registration_audit131r11.py": {
+      "bytes": 3025,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/registration_audit131r11.py",
+      "sha256": "2246797c7d9b75015d6c95a7596a507dfe7836d034686c3d29c38db726312f27"
+    },
+    "server090.py": {
+      "bytes": 2370,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/server090.py",
+      "sha256": "7bfd16829ca438a3fc366d87879c08c2f6e0d0fd76c67a7d7226f7cac2b11cd3"
+    },
+    "service_bridge.py": {
+      "bytes": 6768,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/service_bridge.py",
+      "sha256": "94513f85d254daccdd08c9048cfe90cda2c0fd440554dcd3906e83a8964d0f49"
+    },
+    "service_client.py": {
+      "bytes": 3067,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/service_client.py",
+      "sha256": "da5c9ab3014bf13deb4b50011404abcfbbdf58d2bb717ec0dbd5a1119da8acf0"
+    },
+    "service_entry.py": {
+      "bytes": 3337,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/service_entry.py",
+      "sha256": "c91af7689ba5a6ae895ec96633d0a832f39592432914bd007912992d21f13ec8"
+    },
+    "service_fia.py": {
+      "bytes": 2629,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/service_fia.py",
+      "sha256": "6fab4d9af7307bd4b4aa8371dd7d8e38431a7a0dc0ff8e907cb89b786278bf24"
+    },
+    "service_metadata.py": {
+      "bytes": 5108,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/service_metadata.py",
+      "sha256": "433b011069f11b2f0af7688f7774a9a1d30a3543a723b17d65357fd203eb5e10"
+    },
+    "service_runner.py": {
+      "bytes": 42829,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/service_runner.py",
+      "sha256": "371adf3c7ae5c8620b9c22e335d1544036e4b9287cb3bab9c216525a49b74a63"
+    },
+    "sourceio.py": {
+      "bytes": 1038,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/sourceio.py",
+      "sha256": "0bd97743aa2ac06ea55488a54f5045fd08cff2fdfa4869acc9b1414d2965a0cd"
+    },
+    "test_cache_budget131r16.py": {
+      "bytes": 8334,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/test_cache_budget131r16.py",
+      "sha256": "435421adb005e0979318fd339d0378c889da426f015a96e05e7c144acd6045be"
+    },
+    "test_g1_lifecycle.py": {
+      "bytes": 15466,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/test_g1_lifecycle.py",
+      "sha256": "62ba120fafb0f84c7d116ef18e12ff36dcd6d841e9fdd7a202daca10ed3b956d"
+    },
+    "test_g1_parent_gate.py": {
+      "bytes": 4391,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/test_g1_parent_gate.py",
+      "sha256": "5e03259ece71d4dbea7304294158f2e4cd0579f6447334b402fe70e41a05d35b"
+    },
+    "test_service_client.py": {
+      "bytes": 1845,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/test_service_client.py",
+      "sha256": "c412f7dfe966993c57ea170118d4aa9abf087c744361ee06352302b9acf35da6"
+    },
+    "tp_consensus.py": {
+      "bytes": 5846,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/tp_consensus.py",
+      "sha256": "88f0fdffb0fdbe2a8b344dd14d422b33fc526faff6a8298646861de5d6d7fac5"
+    },
+    "transaction.py": {
+      "bytes": 7678,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/transaction.py",
+      "sha256": "fdc008e7e2912da9efb7860cc19c781386340e1123fcca9dfb3c528eb6945a6a"
+    },
+    "worker_bootstrap.py": {
+      "bytes": 7594,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/worker_bootstrap.py",
+      "sha256": "4bb5d762cdd7d5362942cb453e9fe81b1e14fac76770d4ed4b6a534da5a7a0cf"
+    },
+    "worker_entry.py": {
+      "bytes": 8227,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g1_multi_request/worker_entry.py",
+      "sha256": "d884899528bb11e2d1eca0f3938c6d1da4ad98f67972d3e4fe6e85bb7bef9a7e"
+    }
+  },
+  "tests": 15,
+  "total_local_tests": 36,
+  "unit_command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-m",
+    "unittest",
+    "-v",
+    "test_g1_lifecycle",
+    "test_service_client",
+    "test_g1_parent_gate"
+  ],
+  "unit_output": "test_original_matrix_once_and_all_original_receipts_revalidated_for_second_request (test_g1_lifecycle.CalibrationTests.test_original_matrix_once_and_all_original_receipts_revalidated_for_second_request) ... ok\ntest_preexisting_calibration_is_not_a_reuse_path (test_g1_lifecycle.CalibrationTests.test_preexisting_calibration_is_not_a_reuse_path) ... ok\ntest_reuse_rejects_changed_worker_model_source_rank_operator_or_generation (test_g1_lifecycle.CalibrationTests.test_reuse_rejects_changed_worker_model_source_rank_operator_or_generation) ... ok\ntest_reuse_reopens_receipts_and_rejects_changed_abi_and_complete_library_set (test_g1_lifecycle.CalibrationTests.test_reuse_reopens_receipts_and_rejects_changed_abi_and_complete_library_set) ... ok\ntest_actual_after_prefill_wrapper_admits_two_distinct_requests_and_leaves_barrier_native (test_g1_lifecycle.HookLifecycleTests.test_actual_after_prefill_wrapper_admits_two_distinct_requests_and_leaves_barrier_native) ... ok\ntest_actual_runner_retirement_hook_restores_request_scope_then_process_scope (test_g1_lifecycle.HookLifecycleTests.test_actual_runner_retirement_hook_restores_request_scope_then_process_scope) ... ok\ntest_all48_native_prefill_observers_can_be_restored_then_rearmed (test_g1_lifecycle.HookLifecycleTests.test_all48_native_prefill_observers_can_be_restored_then_rearmed) ... ok\ntest_g1_owner_allows_one_frame_and_requires_real_removal_after_two_outputs (test_g1_lifecycle.HookLifecycleTests.test_g1_owner_allows_one_frame_and_requires_real_removal_after_two_outputs) ... ok\ntest_reused_physical_slot_requires_new_strong_request_and_matching_generation (test_g1_lifecycle.HookLifecycleTests.test_reused_physical_slot_requires_new_strong_request_and_matching_generation) ... ok\ntest_missing_actual_returned_token_ids_fails_closed (test_service_client.Tests.test_missing_actual_returned_token_ids_fails_closed) ... ok\ntest_two_sequential_two_token_requests_and_native_retirement_barrier (test_service_client.Tests.test_two_sequential_two_token_requests_and_native_retirement_barrier) ... ok\ntest_both_actual_same_source_success_reports_are_required (test_g1_parent_gate.Tests.test_both_actual_same_source_success_reports_are_required) ... ok\ntest_missing_component_retirement_HTTP_or_scheduler_success_reject (test_g1_parent_gate.Tests.test_missing_component_retirement_HTTP_or_scheduler_success_reject) ... ok\ntest_owner_failure_wrong_report_link_or_changed_source_reject_before_freeze (test_g1_parent_gate.Tests.test_owner_failure_wrong_report_link_or_changed_source_reject_before_freeze) ... ok\ntest_parent_model_formal_or_performance_claim_is_not_a_bounded_v6_prerequisite (test_g1_parent_gate.Tests.test_parent_model_formal_or_performance_claim_is_not_a_bounded_v6_prerequisite) ... ok\n\n----------------------------------------------------------------------\nRan 15 tests in 0.025s\n\nOK\n",
+  "unit_tests_passed": true
+}

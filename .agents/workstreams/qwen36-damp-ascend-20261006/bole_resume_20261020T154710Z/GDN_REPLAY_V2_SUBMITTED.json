@@ -1,0 +1,44 @@
+{
+  "schema": "bole.gdn3-finite-unit-submission/v1",
+  "argv": [
+    "/usr/bin/systemd-run",
+    "--quiet",
+    "--unit=bole-gdn3-replay-20261020t154710z-v2",
+    "--property=Type=exec",
+    "--property=RemainAfterExit=yes",
+    "--property=Restart=no",
+    "--property=RuntimeMaxSec=1950",
+    "--property=TimeoutStopSec=120",
+    "--property=KillSignal=SIGTERM",
+    "--property=CPUAffinity=166",
+    "--property=MemoryMax=512M",
+    "--property=WorkingDirectory=/opt/host/vnf/austinov/model-tuning-lab",
+    "--property=StandardOutput=append:/opt/host/vnf/austinov/bole-gdn3-units-20261020T154710Z-v2/owner.stdout",
+    "--property=StandardError=append:/opt/host/vnf/austinov/bole-gdn3-units-20261020T154710Z-v2/owner.stderr",
+    "/usr/bin/env",
+    "BOLE_GDN3_OWNER_ENABLE=1",
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v2/owner.py",
+    "--execute",
+    "--output",
+    "/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2"
+  ],
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "independent_of_agentweb": true,
+  "runtime_seconds": 1950,
+  "phase_seconds": 1800,
+  "cleanup_seconds": 120,
+  "physical": [
+    4
+  ],
+  "protected": [
+    0,
+    1,
+    2,
+    3
+  ]
+}
