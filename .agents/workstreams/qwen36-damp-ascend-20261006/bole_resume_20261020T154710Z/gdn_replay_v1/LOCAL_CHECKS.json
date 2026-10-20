@@ -1,0 +1,22 @@
+{
+  "AST": true,
+  "NPU": false,
+  "NPU_compilation": false,
+  "Torch_API_tested": false,
+  "actual_replay": false,
+  "blob_cap_negative_check": true,
+  "bytecode_compile": true,
+  "completed_gdn_kernel_sources_unchanged": true,
+  "component_replay_independent_pass": false,
+  "compression_budget_proven_on_actual_tensors": false,
+  "default_OFF_and_help": true,
+  "formal_success": false,
+  "metadata_reserve_negative_check": true,
+  "missing_execute_args_rejected": true,
+  "model_ready": false,
+  "schema": "bole.gdn3-replay-local-stdlib-checks/v1",
+  "source_hash_negative_check": true,
+  "stdlib_byte_codec_cases": 32,
+  "tensor_runtime_imported": false,
+  "trailing_zlib_data_detection": true
+}

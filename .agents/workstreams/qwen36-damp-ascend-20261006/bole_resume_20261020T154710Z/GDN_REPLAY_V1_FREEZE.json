@@ -1,0 +1,81 @@
+{
+  "schema": "bole.gdn3-replay-source-freeze/v1",
+  "source_files": {
+    "INPUTS.json": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v1/INPUTS.json",
+      "bytes": 6272,
+      "sha256": "c990856a5d92e608219348f8db63c70a6bf8efd4f50171b5ce8f07d3f4af7279"
+    },
+    "boot.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v1/boot.py",
+      "bytes": 1532,
+      "sha256": "eccb8c3b2eb17c6f76fa69425187d9b2ff7c8076adea269d66772ddc74c5e13d"
+    },
+    "gdn3_fp32.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v1/gdn3_fp32.py",
+      "bytes": 11111,
+      "sha256": "5e8ec97e7324de45d2e16b41e56751d652b2a7aab317da2699bf936eacddba59"
+    },
+    "ADMISSION_TEMPLATE.json": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v1/ADMISSION_TEMPLATE.json",
+      "bytes": 399,
+      "sha256": "6d84d3b1a5528837ff4859556567054bab3f27b35ba8aabed6b8f8a923092e83"
+    },
+    "replay_gdn.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v1/replay_gdn.py",
+      "bytes": 12936,
+      "sha256": "40545c53431c6b9c21ec6fde3357f3043a79b0841748f8171c1f5d13447c44c0"
+    },
+    "LOCAL_CHECKS.json": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v1/LOCAL_CHECKS.json",
+      "bytes": 701,
+      "sha256": "7a2fde1b55c788a662cbcc85308583084abc74470ea406fa0308437a282257d0"
+    },
+    "replay_common.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v1/replay_common.py",
+      "bytes": 20306,
+      "sha256": "c13bc5156191cff4cce41e1c096215a33d63d0c8c72a7b65028cda8e81e9b0cf"
+    },
+    "consume_gdn.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v1/consume_gdn.py",
+      "bytes": 14831,
+      "sha256": "09cfd5871b51c31660e0a8918d85486f8692ab46664e51443e3bebb1e7a806f4"
+    },
+    "MANIFEST_TEMPLATE.json": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v1/MANIFEST_TEMPLATE.json",
+      "bytes": 827,
+      "sha256": "d9b1ebb99391a77e8981e44f646f41dae5eac4643e9d5e5281d05b8d676e436c"
+    },
+    "ADVISORY_MANIFEST.json": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v1/ADVISORY_MANIFEST.json",
+      "bytes": 4555,
+      "sha256": "a0cbd03df708f5f149637b9d32dd74e9506fb245b4570cd166ab5fa230c55ceb"
+    },
+    "gdn3_triton_kernels.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v1/gdn3_triton_kernels.py",
+      "bytes": 5234,
+      "sha256": "ecaa84965b3520cb09fa1b1db6f3cc230f0ea591bb7b3a1964cabd1646ae68d1"
+    },
+    "README.md": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v1/README.md",
+      "bytes": 11586,
+      "sha256": "9afde3fb23275731ce662c47d232a1a1667deb63fa153974e8ae693dd69532ac"
+    },
+    "owner.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v1/owner.py",
+      "bytes": 12512,
+      "sha256": "a9a25be997a5e0af4db5daf2a44213683dd7da1ec54aaaa4cb926bb75ce6f1e2"
+    }
+  },
+  "actual_source": {
+    "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r23/SOURCE_BOUND.json",
+    "bytes": 78768,
+    "sha256": "3b0843d87ced4cdfa3ee0f2ab753a1c1193e71ffdea15f64809098d8df3dac09"
+  },
+  "actual_frames": 192,
+  "layouts": 2,
+  "output_cap_bytes": 1073741824,
+  "NPU_executed": false,
+  "mathematically_qualified": false,
+  "formal_success": false
+}

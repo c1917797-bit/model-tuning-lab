@@ -1,0 +1,37 @@
+{
+  "schema": "bole.gdn3-actual-replay-manifest/v1",
+  "files": {
+    "replay_common.py": null,
+    "replay_gdn.py": null,
+    "consume_gdn.py": null
+  },
+  "references": {
+    "core112.py": null,
+    "oracle112.py": null,
+    "independent_model.py": null,
+    "model_entry.py": null,
+    "sourceio.py": null,
+    "diagnostic_export.py": null,
+    "consume_model.py": null
+  },
+  "candidate": {
+    "wrapper": null,
+    "kernels": null
+  },
+  "actual_source": null,
+  "receipts": [
+    {"rank": 0, "receipt": null},
+    {"rank": 1, "receipt": null},
+    {"rank": 2, "receipt": null},
+    {"rank": 3, "receipt": null}
+  ],
+  "admission": null,
+  "configuration": {
+    "forward_tile_v": 32,
+    "commit_tile_k": 32,
+    "commit_tile_v": 32,
+    "cpu_threads": 1,
+    "microtiming": false
+  },
+  "output_cap_bytes": 1073741824
+}
