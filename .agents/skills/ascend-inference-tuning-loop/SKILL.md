@@ -290,3 +290,104 @@ reference below before any new native admission; preserve original failures.
 For almost-tied token support, mixed-dtype packed-view persistence, or an
 unjustified CPU template, read [ranking and packed snapshots](references/ranking-and-packed-snapshots.md).
 Keep the failed run intact; a diagnostic hypothesis is not a revised acceptance gate.
+
+## Live E2E admission and evidence ladder
+
+Use this section whenever a source bundle is repaired, an authorization window
+is renewed, or a full-model Ascend run is started after a failed gate.
+
+1. Bind the exact current authorization identity (batch ID, start/cutoff,
+   resource scope) to the successor source, controller/worker gates, command
+   records, and a fresh unique output root. Refresh every manifest/readset and
+   inverse-edit ledger affected by the change. A valid hash/readset audit is
+   necessary but does not prove that every nested runtime gate was updated.
+2. Keep old batches immutable. Never reuse a prior output path or overwrite a
+   terminal receipt. A retry gets a new source root and a new output root.
+3. Run the same-image software suite before device admission. Fix source,
+   contract, or provenance mismatches at their owning layer; do not weaken
+   numerical assertions or edit tests merely to force a green suite. Update a
+   test only when the intended invariant genuinely changed, and retain
+   historical algorithm/reference checks.
+4. Treat these as distinct gates, in order: source audit; same-image software
+   preflight; physical-device admission; native model load; real HTTP/request
+   smoke; numerical and state correctness; task quality; matched performance
+   and resource measurements. A pass at one level cannot be promoted to a
+   later level.
+5. For Ascend proof, combine a fresh npu-smi snapshot with the exact container
+   device mappings, container/process state, and per-rank receipts. A software
+   report with Devices=[] is explicitly device-free and is not NPU evidence.
+   Host-side NPU telemetry or container existence alone is not enough.
+6. Interpret model-load receipts narrowly. A receipt that identifies the
+   unmodified native MTP class, says BOLE=false, and forward_modified=false
+   proves that the native loader ran; it does not prove the paper adaptation
+   is active, numerically correct, or accepted. Require the registered
+   algorithm-specific consumer and real request/numerical gates.
+7. Before retrying a long operation after a control-plane timeout, poll the
+   original operation and inspect the exact host/container process and output
+   milestones. A retryable AWMCP transport timeout is not proof the remote
+   process failed. Never launch a duplicate while the original owned server,
+   worker, or cleanup is still active.
+8. If a client fails on an ancillary command or admission utility, preserve its
+   terminal receipt and stderr, identify which process issued the command, and
+   classify the failure at that boundary. Do not call it a model numerical
+   failure without a model response; do not call it a successful smoke without
+   the actual HTTP result.
+
+Verification for this ladder: record the source/output refs and hashes, exact
+authorization batch, target peer, container image digest, CANN/framework
+versions, physical device mapping, per-rank receipts, client terminal result,
+and cleanup receipt. Keep model readiness, algorithm qualification, task
+quality, and performance as separate fields; leave each unobserved gate
+pending rather than inferring it from a neighbouring pass.
+
+
+## BOLE E2E case study: verified outcome and recovery lessons (2026-10-20)
+
+Use this case when a BOLE/native-MTP experiment passes admission but fails at
+full-model or independent-consumer validation.
+
+- **Verified successes:** after updating the active authorization in the nested
+  host and worker gates (not just the top-level manifest), the exact source
+  readset reached 312 entries and source audit passed. The same-image software
+  suite reached 136/136 only after the current authorization, command/output
+  joins, and worker-window binding were consistent. The bounded Ascend run then
+  created the TP4 container, launched four workers on physical cards 4–7,
+  produced per-rank native MTP load receipts and reached the actual request and
+  independent-consumer stages. These are stage successes, not paper acceptance.
+- **Verified failure:** the terminal result for
+  `run-bole-model131repair12-MAIN-20261020T123000Z` records
+  `model_ready=false`, `candidate_qualification=false`, and the primary fault
+  `original component mathematical gates failed` in the independent consumer.
+  Preserve the raw metrics/vectors and classify this as a numerical/component
+  gate failure; do not relabel it as a successful E2E or a performance result.
+- **Nested stale gates matter:** the top-level `contract090.py` and
+  `owned_substrate.py` were rebound, but the first software runs still failed
+  because `worker_bootstrap.py` retained the old time window. Search all
+  transitive launch, worker, controller, consumer, command, and receipt modules
+  for old batch IDs/cutoff constants before regenerating the readset. Never infer
+  closure from one passing source-audit report alone.
+- **Unique output is part of provenance:** reusing an already-created output
+  root correctly failed the launch gate. Allocate a new immutable output root
+  per attempt and update both the source contract and command manifest; do not
+  delete/overwrite a prior result just to make a retry fit.
+- **Preserve original assertions:** one retry exposed failures in historical
+  identity/inverse-edit tests. The right repair is to ledger the intended
+  source delta and separate the newly batch-bound worker gate from genuinely
+  immutable algorithm source—not to disable mathematical checks or broadly
+  rewrite expected results. The eventual 136/136 pass is only a software gate.
+- **Interpret load receipts narrowly:** the observed class was the unmodified
+  `Qwen3_5MTP`, with `BOLE=false` and `forward_modified=false`. This confirms
+  native MTP loading, not that the BOLE intervention is active. The independent
+  consumer must verify actual intervention attribution, numerical/component
+  invariants, and the registered model-level evidence before any promotion.
+- **Control-plane timeouts are ambiguous:** after an AWMCP timeout, poll the
+  original operation and inspect the remote process/container before retrying.
+  This run remained alive through worker startup and later reached the
+  independent consumer; launching a duplicate during that interval would have
+  competed for the same leased cards.
+
+For the next BOLE attempt, begin from the preserved terminal result and the
+independent consumer's raw per-component metrics. Make one causal repair,
+regenerate source and command refs, rerun the same-image suite, and only then
+admit a fresh bounded TP4 run. Keep the successful admission/load/request stages
+as stage evidence while the mathematical gate remains failed/pending.
