@@ -1,0 +1,26 @@
+{
+  "schema": "bole.advisory-generalization-geometry/v1",
+  "advisory_only": true,
+  "kernel_block_size": 128,
+  "actual_hybrid_ratio": 12,
+  "cases": [
+    {"prefix": 126, "max_processed_nodes": 2, "verify_nodes": 3, "real_destination_pages": 1, "private_scratch_pages": 2},
+    {"prefix": 127, "max_processed_nodes": 2, "verify_nodes": 3, "real_destination_pages": 2, "private_scratch_pages": 2},
+    {"prefix": 128, "max_processed_nodes": 2, "verify_nodes": 3, "real_destination_pages": 2, "private_scratch_pages": 2},
+    {"prefix": 131, "max_processed_nodes": 2, "verify_nodes": 3, "real_destination_pages": 2, "private_scratch_pages": 2},
+    {"prefix": 254, "max_processed_nodes": 2, "verify_nodes": 3, "real_destination_pages": 2, "private_scratch_pages": 3},
+    {"prefix": 255, "max_processed_nodes": 2, "verify_nodes": 3, "real_destination_pages": 3, "private_scratch_pages": 3},
+    {"prefix": 1153, "max_processed_nodes": 2, "verify_nodes": 3, "real_destination_pages": 10, "private_scratch_pages": 10},
+    {"prefix": 1534, "max_processed_nodes": 2, "verify_nodes": 3, "real_destination_pages": 12, "private_scratch_pages": 13},
+    {"prefix": 1535, "max_processed_nodes": 2, "verify_nodes": 3, "real_destination_pages": 13, "private_scratch_pages": 13}
+  ],
+  "lifetime_cases": [
+    {"prompt_tokens": 131, "output_tokens": 2, "min_target_steps": 1, "max_target_steps": 1, "final_processed_length": 132, "total_returned_sequence_length": 133},
+    {"prompt_tokens": 131, "output_tokens": 4, "min_target_steps": 2, "max_target_steps": 3, "final_processed_length": 134, "total_returned_sequence_length": 135},
+    {"prompt_tokens": 131, "output_tokens": 32, "min_target_steps": 16, "max_target_steps": 31, "final_processed_length": 162, "total_returned_sequence_length": 163},
+    {"prompt_tokens": 131, "output_tokens": 1024, "min_target_steps": 512, "max_target_steps": 1023, "final_processed_length": 1154, "total_returned_sequence_length": 1155}
+  ],
+  "qualification_capture_window_max_steps": 3,
+  "worst_case_full_trace_window_runs": {"output32": 11, "output1024": 341},
+  "note": "Geometry is arithmetic from source/evidence, not an executed model or numerical qualification. Actual admitted N and final budgets can reduce destination requirements; the current three-node adapter still checks its fixed max2 capacity."
+}

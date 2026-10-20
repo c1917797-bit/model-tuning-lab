@@ -1,0 +1,51 @@
+{
+  "schema": "bole.advisory-next-C1-gate/v1",
+  "advisory_only": true,
+  "requires": "actual corrected hybrid-mapping C1/131/output4 lifecycle independently passed",
+  "scope": {
+    "concurrency": 1,
+    "measured_for_performance": false,
+    "request_count": 2,
+    "prefix_tokens_per_request": 131,
+    "output_tokens_per_request": 2,
+    "max_target_steps_per_request": 1,
+    "ignore_eos": true,
+    "same_actual_token_ids_both_requests": true,
+    "request_headers_distinct": true,
+    "all_requests_use_BOLE_decode": true,
+    "native_only_final_retirement_barrier": true
+  },
+  "capture": {
+    "mode": "qualification",
+    "target_steps": "all actual target steps of both owned requests",
+    "max_logical_raw_bytes_per_rank_including_reserve": 1073741824,
+    "reserved_calibration_and_operand_bytes": 37748736,
+    "fail_if_aggregate_export_budget_exceeded": true
+  },
+  "expected_actual_mapping_fixture": {
+    "use_hybrid_blocks": true,
+    "blocks_per_phys_block": 12,
+    "physical_block_size": 1536,
+    "kernel_block_size": 128,
+    "example_request_physical_blocks": [1],
+    "example_CPU_kernel_pages": [12,13,14,15,16,17,18,19,20,21,22,23],
+    "physical_ids_may_differ_in_new_run": true
+  },
+  "must_observe": [
+    "actual separate native request objects and monotonic generation epochs",
+    "fresh per-request native-prefill tail and cache registration",
+    "same process survives first request retirement with BOLE enabled for second",
+    "each actual native ModelRunnerOutput contains exactly selected bonus",
+    "both frontend headers join worker request IDs and exact HTTP output token IDs",
+    "both requests removed from native request and input batch owners",
+    "all four ranks independently pass unchanged numeric and writeback bounds",
+    "owned cleanup and source immutability pass"
+  ],
+  "does_not_claim": [
+    "new child2 accepted-path coverage",
+    "variable prefix or allocator-growth qualification",
+    "1024-token generation",
+    "task accuracy",
+    "performance gain"
+  ]
+}

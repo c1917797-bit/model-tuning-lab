@@ -1,0 +1,118 @@
+{
+  "FP32_contraction_disabled_proven": false,
+  "NPU_compilation": false,
+  "NPU_execution": false,
+  "actual_saved_frame_replay": false,
+  "compiler_options": "installed Ascend backend defaults",
+  "device_admission_owner": "MAIN only",
+  "formal_success": false,
+  "geometry": {
+    "B": 1,
+    "Dk": 128,
+    "Dv": 128,
+    "H": 12,
+    "T": 3,
+    "depth": 1,
+    "initial_commit_tile_k": 32,
+    "initial_commit_tile_v": 32,
+    "initial_forward_tile_v": 32,
+    "parents": [
+      -1,
+      0,
+      0
+    ]
+  },
+  "installed_primary_source_files": {
+    "l2norm_ascend.py": {
+      "bytes": 2299,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/installed/l2norm_ascend.py",
+      "sha256": "07657e33f2240cf39e8dec9991d00022181b43946a8c1497c6c236bf4c230126"
+    },
+    "l2norm_native.py": {
+      "bytes": 4077,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/installed/l2norm_native.py",
+      "sha256": "520f4513ef4fc97e6b88dc07877cca8e29da0d34e44673fe989e3af002d86381"
+    },
+    "triton_ascend_compiler.py": {
+      "bytes": 53431,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/installed/triton_ascend_compiler.py",
+      "sha256": "253bdb0d9bf2d092c8c1ae40cc610b2d00c534b127f9d258e9e8e1a221934002"
+    }
+  },
+  "live_source_edited": false,
+  "local_checks": {
+    "AST": true,
+    "bytecode_compile": true,
+    "default_OFF_API": true,
+    "default_OFF_CLI": true,
+    "help": true,
+    "kernel_module_imported": false,
+    "stdlib_algebra_cases": 256,
+    "stdlib_algebra_peak_FP64_abs": 3.3306690738754696e-16,
+    "tensor_runtime_imported": false
+  },
+  "mathematically_qualified": false,
+  "model_ready": false,
+  "original_FP32_bounds_verified": false,
+  "production_dispatch_installed": false,
+  "proposal_files": {
+    "PROPOSAL_NOTES.md": {
+      "bytes": 9967,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_kernel/PROPOSAL_NOTES.md",
+      "sha256": "361d8145b387a1e115182abc6e7e662e20d16ccb4ea30410a7478aaf222556c1"
+    },
+    "check_algebra.py": {
+      "bytes": 3644,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_kernel/check_algebra.py",
+      "sha256": "0f51cd68c12df1cd0d63e959f82d578f5664fe48dc0feb0e26c2bc427f4e5778"
+    },
+    "gdn3_fp32.py": {
+      "bytes": 11111,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_kernel/gdn3_fp32.py",
+      "sha256": "5e8ec97e7324de45d2e16b41e56751d652b2a7aab317da2699bf936eacddba59"
+    },
+    "gdn3_triton_kernels.py": {
+      "bytes": 5234,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_kernel/gdn3_triton_kernels.py",
+      "sha256": "ecaa84965b3520cb09fa1b1db6f3cc230f0ea591bb7b3a1964cabd1646ae68d1"
+    }
+  },
+  "qualified_reference_files": {
+    "core112.py": {
+      "bytes": 1443,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/core112.py",
+      "sha256": "b7e3f3a91889e98c54195a0c5f5eb2a4c6cdf8fc9c667ece26d7250b3e6eebe7"
+    },
+    "independent_model.py": {
+      "bytes": 14337,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/independent_model.py",
+      "sha256": "1cab05544b66b4ad29182371e9caf10f5c0ad12accfaea6bed7121d57fb92455"
+    },
+    "model_entry.py": {
+      "bytes": 30839,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/model_entry.py",
+      "sha256": "f0069203bce372c58abd0914f6977e81d582d432d1fb1277257eb25ea22c86fd"
+    },
+    "native_seams.py": {
+      "bytes": 4619,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/native_seams.py",
+      "sha256": "663cfbe1cd213b2f08667685bbf2cc6a631819eb1aad052c06ada7ae7fdaf6cc"
+    },
+    "oracle112.py": {
+      "bytes": 775,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/oracle112.py",
+      "sha256": "ac20fef75c3c3e2806b090406e6b425bff51a5c19b2df38c368ef117f03fea6f"
+    },
+    "treeconv118.py": {
+      "bytes": 7760,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_reference/qualified/treeconv118.py",
+      "sha256": "88bac73b8652aeedb562df1fd292f6b4b3b34672b7f50158bbc2158d1af0f010"
+    }
+  },
+  "required_bounds": {
+    "combine": "AND",
+    "peak_abs": "2e-5 + 2e-4 * max_abs(reference)",
+    "relative_l2": 0.0002
+  },
+  "schema": "bole.gdn3-source-p-fp32-advisory-manifest/v1"
+}
