@@ -1,0 +1,50 @@
+{
+  "schema": "bole.saved-AR-CPU-repair-unit-submission/v3",
+  "unit": "bole-native-ar-saved-cpu-20261020t154710z-v3.service",
+  "argv": [
+    "/usr/bin/systemd-run",
+    "--quiet",
+    "--unit=bole-native-ar-saved-cpu-20261020t154710z-v3.service",
+    "--property=Type=exec",
+    "--property=RemainAfterExit=yes",
+    "--property=Restart=no",
+    "--property=RuntimeMaxSec=3900",
+    "--property=TimeoutStopSec=180",
+    "--property=KillSignal=SIGTERM",
+    "--property=CPUAffinity=166",
+    "--property=MemoryMax=512M",
+    "--property=WorkingDirectory=/opt/host/vnf/austinov/model-tuning-lab",
+    "--property=StandardOutput=append:/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native-ar-saved-cpu-v3.stdout",
+    "--property=StandardError=append:/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native-ar-saved-cpu-v3.stderr",
+    "/usr/bin/flock",
+    "--nonblock",
+    "--no-fork",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock",
+    "/usr/bin/env",
+    "BOLE_SAVED_AR_MAIN_ENABLE=1",
+    "DENSE090_EXTERNAL_OUTPUT_ENABLE=1",
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/bole-native-ar-saved-cpu-20261020T154710Z-v3/saved_cpu_owner.py",
+    "--execute",
+    "--inputs-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/bole-native-ar-saved-cpu-20261020T154710Z-v3/INPUTS.json\", \"bytes\": 10992, \"sha256\": \"0412becef80e96874ef64526bdf8435b08b1d16dd46aff15db911cbf51521232\"}"
+  ],
+  "inputs_ref": {
+    "path": "/opt/host/vnf/austinov/bole-native-ar-saved-cpu-20261020T154710Z-v3/INPUTS.json",
+    "bytes": 10992,
+    "sha256": "0412becef80e96874ef64526bdf8435b08b1d16dd46aff15db911cbf51521232"
+  },
+  "controller": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/submit_native_ar_saved_v3.py",
+    "bytes": 2696,
+    "sha256": "3ba2867a8cd9ef873797221e83fabcd16ca896267561e247d247263215bd124a"
+  },
+  "submit_exit": 0,
+  "stdout": "",
+  "stderr": "",
+  "phase_seconds": 3600,
+  "cleanup_seconds": 180,
+  "formal_success": false
+}

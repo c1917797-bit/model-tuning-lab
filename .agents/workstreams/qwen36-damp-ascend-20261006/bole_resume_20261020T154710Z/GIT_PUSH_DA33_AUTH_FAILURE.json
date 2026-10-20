@@ -1,0 +1,23 @@
+{
+  "schema": "bole.actual-git-checkpoint-push-blocker/v1",
+  "commit": "da33a7cc8d2d5e6bf1cf7ec09d02d16b953ebb54",
+  "branch": "work/qwen36-damp-ascend-20261006",
+  "https_operation": "exec-00000000000001b7",
+  "https_push_exit_code": 128,
+  "https_error": "fatal: could not read Username for 'https://github.com': terminal prompts disabled",
+  "existing_config_checked": {
+    "credential_helper_configured": false,
+    "GH_TOKEN_present": false,
+    "GITHUB_TOKEN_present": false,
+    "GIT_ASKPASS_present": false,
+    "SSH_AUTH_SOCK_present": false,
+    "gh_installed": false
+  },
+  "ssh_readonly_operation": "exec-00000000000001c7",
+  "ssh_exit_code": 128,
+  "ssh_error": "connect to host github.com port22 timed out",
+  "remote_configuration_changed": false,
+  "credential_written": false,
+  "push_verified": false,
+  "next": "retain commits locally, continue authorized validation; need authenticated existing Git transport before durable push"
+}

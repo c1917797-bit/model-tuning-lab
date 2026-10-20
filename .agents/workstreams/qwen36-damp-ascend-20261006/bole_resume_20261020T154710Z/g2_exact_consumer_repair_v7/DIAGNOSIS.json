@@ -1,0 +1,48 @@
+{
+  "actual_BOOT_ref": {
+    "bytes": 67545,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6/dense/receipts/STREAM/STREAM_CONSUMER_BOOT.json",
+    "sha256": "b0784e0b002f8a96fbc319166193584677e44575d366fd58b544fa68b90aec27"
+  },
+  "actual_elapsed_seconds": 639.135151620023,
+  "actual_fault_ref": {
+    "bytes": 1261,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6/HOST-FIRST-FAULT.json",
+    "sha256": "f51a820774dd2167313bee58fca022d52ff0b2170e1b220154707948ce02dd44"
+  },
+  "actual_full_argv": [
+    "/usr/local/python3.12.13/bin/python3",
+    "-B",
+    "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v6/g2_consumer.py",
+    "--execute",
+    "--bootstrap",
+    "--source-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v6/SOURCE_BOUND.json\", \"bytes\": 475051, \"sha256\": \"41a3ffb818e9163515f4bc2e15ab46f2ffbd301ae8a28c7c14e2f209ef92cfd1\"}"
+  ],
+  "actual_model_contract_ref": {
+    "bytes": 13660,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/model_contract.py",
+    "sha256": "82243c277890aef7c24ea5eb5fbfa0658b314a39c01d7b2a7ddf34b2bf363e9f"
+  },
+  "actual_owner_ref": {
+    "bytes": 528356,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6/RESULT.json",
+    "sha256": "b45284f06ef12fd7fbbbc91d65fd13469d57402c5dd6c66ffc706999b6b41e24"
+  },
+  "actual_python_matches_original025": true,
+  "actual_source_ref": {
+    "bytes": 475051,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v6/SOURCE_BOUND.json",
+    "sha256": "41a3ffb818e9163515f4bc2e15ab46f2ffbd301ae8a28c7c14e2f209ef92cfd1"
+  },
+  "all14_input_copies_exact": true,
+  "canonical_source_json_literal_equal": true,
+  "guard_runtime_executed_on_new_host": false,
+  "model_qualification": false,
+  "new_full_original_B_commandline_predicate": true,
+  "old_I_B_positional_guard": false,
+  "primary": "ValueError('actual exact-source independent consumer commandline')",
+  "schema": "bole.G2-v6-exact-consumer-argv-diagnosis/v1",
+  "secondary": [],
+  "source_unchanged_nonempty": true
+}

@@ -1,0 +1,18 @@
+{
+  "exit_code": 0,
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_exact_consumer_repair_v7/prepare_g2_consumer_v7.py",
+    "--execute",
+    "--failed-owner-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6/RESULT.json\", \"bytes\": 528356, \"sha256\": \"b45284f06ef12fd7fbbbc91d65fd13469d57402c5dd6c66ffc706999b6b41e24\"}",
+    "--prior-builder-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_control_ref_repair_v5/prepare_g2_control_v5.py\", \"bytes\": 16604, \"sha256\": \"ce4f5c41be679f0f969b7178e02667461a7f2f601d7c5c8f19c04dabb8f23dd3\"}",
+    "--manifest-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_exact_consumer_repair_v7/MANIFEST.json\", \"bytes\": 3049, \"sha256\": \"73229a22e2e675e0e08f3795217d4b45c60e1f09bb500ab5def25b70c1a0058a\"}"
+  ],
+  "stdout": "{\"source\": {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v7/SOURCE_BOUND.json\", \"bytes\": 542194, \"sha256\": \"a1f7238ccde08744e90a69a30b316bc10bfe1995e57d3898ced46779ee067032\"}, \"commands\": {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v7/COMMANDS.json\", \"bytes\": 3610, \"sha256\": \"b871bf1e0599fe73a45eae5ade839d646675e47a8057eb2e2eeb115d808b4a12\"}, \"prospective_sameimage_cases\": 266, \"original258_fresh_rerun\": true, \"new_controls\": 8, \"full_readset_missing\": [], \"consumer_oracle_runtime_math_resources_unchanged\": true, \"guest_original_B_retained\": true, \"actual_model_executed\": false, \"model_ready\": false, \"NPU\": false}\n",
+  "stderr": ""
+}

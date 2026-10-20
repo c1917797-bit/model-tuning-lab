@@ -1,0 +1,67 @@
+{
+  "NPU": false,
+  "actual_failed_owner": {
+    "bytes": 528356,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6/RESULT.json",
+    "sha256": "b45284f06ef12fd7fbbbc91d65fd13469d57402c5dd6c66ffc706999b6b41e24"
+  },
+  "actual_failed_source": {
+    "bytes": 475051,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v6/SOURCE_BOUND.json",
+    "sha256": "41a3ffb818e9163515f4bc2e15ab46f2ffbd301ae8a28c7c14e2f209ef92cfd1"
+  },
+  "actual_model_executed": false,
+  "actual_sameimage_executed": false,
+  "actual_source_assembled": false,
+  "consumer_oracle_native_math_128transaction_resource_stream_protocol_unchanged": true,
+  "default_enabled": false,
+  "documentation": {
+    "DIAGNOSIS.json": {
+      "bytes": 2181,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_exact_consumer_repair_v7/DIAGNOSIS.json",
+      "sha256": "1995dc66a390e90e73eb177c913cd50726e130fd990966c199025d746afedbf6"
+    },
+    "LOCAL_VALIDATION.json": {
+      "bytes": 810,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_exact_consumer_repair_v7/LOCAL_VALIDATION.json",
+      "sha256": "09cef2c0c2c04d431cbdcc39cb6df94354d8fc7350eb4054ae84096a8a2e2de1"
+    },
+    "README.md": {
+      "bytes": 6264,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_exact_consumer_repair_v7/README.md",
+      "sha256": "179a4e950bfa6318c23c9e26390488d5801cbe9209a5212ebb996b17cf613c5c"
+    }
+  },
+  "files": {
+    "audit_source_v7.py": {
+      "bytes": 3610,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_exact_consumer_repair_v7/audit_source_v7.py",
+      "sha256": "98f9ed127265810f090ca0e1b3174a3fa19cede50293c9dd3538da3f0dbb3ed2"
+    },
+    "g2_stream_owner.py": {
+      "bytes": 5917,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_exact_consumer_repair_v7/g2_stream_owner.py",
+      "sha256": "3d7d61e06e2de7e0680f4503530267bbb0cd87402b287d037cf89dd1562db8af"
+    },
+    "prepare_g2_consumer_v7.py": {
+      "bytes": 16853,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_exact_consumer_repair_v7/prepare_g2_consumer_v7.py",
+      "sha256": "ffcec0901e2d182c85572d93fd46e2538f8f07042f149aea899326549027c315"
+    },
+    "test_g2_consumer_argv.py": {
+      "bytes": 5117,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_exact_consumer_repair_v7/test_g2_consumer_argv.py",
+      "sha256": "a3ff9ba880a1d46be098f6c56ff6a8f7f013d51181699228b36a2de920499cb6"
+    }
+  },
+  "formal_success": false,
+  "local_AST": 4,
+  "local_defaultOFF_help": 4,
+  "local_pure_tests_passed": 8,
+  "model_ready": false,
+  "new_included_controls": 8,
+  "only_runtime_change": "exact consumer commandline owning guard from stale -I/-B positional layout to full original-B interpreter/script/flags/canonical source Ref argv",
+  "original258_controls_fresh_rerun_required": true,
+  "prospective_sameimage_cases": 266,
+  "schema": "bole.G2-v7-exact-consumer-commandline-repair/v1"
+}

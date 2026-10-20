@@ -1,0 +1,90 @@
+{
+  "schema": "bole.actual-G2-model-v6-causal-audit/v1",
+  "owner_result": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6/RESULT.json",
+    "bytes": 528356,
+    "sha256": "b45284f06ef12fd7fbbbc91d65fd13469d57402c5dd6c66ffc706999b6b41e24"
+  },
+  "first_fault": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6/HOST-FIRST-FAULT.json",
+    "bytes": 1261,
+    "sha256": "f51a820774dd2167313bee58fca022d52ff0b2170e1b220154707948ce02dd44"
+  },
+  "source": {
+    "bytes": 475051,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v6/SOURCE_BOUND.json",
+    "sha256": "41a3ffb818e9163515f4bc2e15ab46f2ffbd301ae8a28c7c14e2f209ef92cfd1"
+  },
+  "primary": "ValueError('actual exact-source independent consumer commandline')",
+  "secondary": [],
+  "elapsed_seconds": 639.135151620023,
+  "source_map_entries": 1608,
+  "source_before_after_nonempty_equal": true,
+  "actual_consumer_boot": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6/dense/receipts/STREAM/STREAM_CONSUMER_BOOT.json",
+    "bytes": 67545,
+    "sha256": "b0784e0b002f8a96fbc319166193584677e44575d366fd58b544fa68b90aec27"
+  },
+  "observed_guest_python_flags": [
+    "-B"
+  ],
+  "failing_source_expected_flags": [
+    "-I",
+    "-B"
+  ],
+  "classification": "ADAPTATION_IMPLEMENTATION",
+  "cause_status": "proved",
+  "cause": "host launch restores original guest -B/CANN semantics; independent consumer binder still demands former -I -B argv prefix",
+  "cleanup": {
+    "dense": {
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6/dense/cleanup.json",
+      "bytes": 1289,
+      "sha256": "e80ee17e54b17b6610fc41d800a8927769d9000791beddbac9cdb865ac26fc40"
+    },
+    "cpu-preflight": {
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6/cpu-preflight/cleanup.json",
+      "bytes": 6015,
+      "sha256": "d53e7772bb28052c8c53bd5268daf284d010d31eacbe01e3acde6d71c821533a"
+    },
+    "cpu-consumer": {
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6/cpu-consumer/cleanup.json",
+      "bytes": 1317,
+      "sha256": "555108ed8682afc9c82624cf62d5a62bea3ed2244a3800b1e38bebcfbc357de2"
+    }
+  },
+  "all_owned_stopped_retained": true,
+  "model_load_receipts": [
+    {
+      "bytes": 2858,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6/dense/receipts/MTP-LOAD-3536-1792537602714738780.json",
+      "sha256": "6089a5944685305f4cb32154c8414ded4a9199af73a16198cc33a2a50ba4b585"
+    },
+    {
+      "bytes": 2858,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6/dense/receipts/MTP-LOAD-3537-1792537602067138340.json",
+      "sha256": "eaee8c900c75c1c5d9c9be1026813ef40c16e3554016fad34296556e518f5fd6"
+    },
+    {
+      "bytes": 2858,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6/dense/receipts/MTP-LOAD-3538-1792537602196049380.json",
+      "sha256": "e4ec27ea3c09ddb817244b55caef63579f4c041ffa2d1230854a6cfe2dd63dae"
+    },
+    {
+      "bytes": 2858,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6/dense/receipts/MTP-LOAD-3539-1792537602349110740.json",
+      "sha256": "9e76ed324acebf311e656dfef430d1aa57e9cb0102bef30710aafdadf73ddbad"
+    }
+  ],
+  "actual_model_software_report": {
+    "bytes": 5576,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6/cpu-preflight/CPU.json",
+    "sha256": "5239a8851689130e8a309c5dcffb9092eec8a1f0ae9ff89a2d0cd1135c3dad3f"
+  },
+  "chosen_next": "new exact-full-consumer-argv source/output identity; preserve original maths/thresholds/resources",
+  "owner": "MAIN; runtime preparer",
+  "remaining_phase_seconds": 3600,
+  "cleanup_seconds": 180,
+  "cutoff_epoch": 1792597630,
+  "model_qualified": false,
+  "formal_success": false
+}

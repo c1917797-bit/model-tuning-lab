@@ -1,0 +1,39 @@
+{
+  "AST_files": 4,
+  "NPU": false,
+  "actual_model_executed": false,
+  "actual_original258_rerun": false,
+  "actual_source_assembled": false,
+  "defaultOFF_help": [
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "prepare_g2_consumer_v7.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "prepare_g2_consumer_v7.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "audit_source_v7.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "audit_source_v7.py"
+    }
+  ],
+  "full_owner_inverse": true,
+  "original258_sameimage_fresh_rerun_required": true,
+  "prospective_sameimage_cases": 266,
+  "pure_included_passed": 8,
+  "pure_included_tests": 8,
+  "schema": "bole.G2-v7-local-validation/v1"
+}

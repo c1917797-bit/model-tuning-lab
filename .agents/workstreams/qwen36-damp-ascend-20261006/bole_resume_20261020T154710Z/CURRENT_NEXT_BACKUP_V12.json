@@ -1,0 +1,71 @@
+{
+  "schema": "bole.CURRENT-NEXT-BACKUP/v1",
+  "as_of_UTC_epoch": 1792538457.2868795,
+  "current": {
+    "unit": "bole-native-ar-saved-cpu-20261020t154710z-v3.service",
+    "owner": "MAIN",
+    "phase_seconds": 3600,
+    "cleanup_seconds": 180,
+    "predecessors": [
+      "NATIVE_AR_SAVED_V3_PREPARATION.json",
+      "NATIVE_AR_SAVED_V3_SOURCE_AUDIT.json",
+      "NATIVE_AR_SAVED_V3_MAIN_LOCK_OBSERVED.json"
+    ],
+    "pending": "actual sameimage source preflight and complete original nativeAR/G1 numerical reader"
+  },
+  "next": [
+    {
+      "node": "HEruntime diagnostic",
+      "owner": "MAIN/consumer preparer",
+      "predecessor": "v10 actual runtime guard failure + explicit policyv2/CPU3 registry",
+      "remaining_budget_seconds": 3600,
+      "missing_gates": [
+        "diagnostic packet sourceaudit",
+        "actual environment/net namespace observation",
+        "minimal source-bound repair/full three phase qualification"
+      ]
+    },
+    {
+      "node": "G2v7 exact consumer argv repair",
+      "owner": "MAIN/runtime preparer",
+      "predecessor": "G2_MODEL_V6_FAILURE_AUDIT.json",
+      "remaining_budget_seconds": 3600,
+      "missing_gates": [
+        "frozen inverse sourceaudit",
+        "same-image software",
+        "TP4 model + all-step independent math/lifecycle"
+      ]
+    },
+    {
+      "node": "common effects finite CPU",
+      "owner": "MAIN/kernel preparer",
+      "predecessor": "actual nativeAR saved-v3 complete numerical PASS",
+      "remaining_budget_seconds": 3600,
+      "missing_gates": [
+        "actual builder/sourceaudit",
+        "same-image original reader"
+      ]
+    }
+  ],
+  "backup": [
+    {
+      "node": "GDN service matched-original/candidate v2",
+      "owner": "MAIN",
+      "remaining_budget_seconds": 3600,
+      "missing_gates": [
+        "actual232 software",
+        "both TP4 numerical/lifecycle arms"
+      ]
+    }
+  ],
+  "missing_final": [
+    "G3 fixed1024 all-step",
+    "new task-shape FIA and actual allocator growth",
+    "nativeAR/task ON six-request all-token identity and normalEOS",
+    "GSM8K/HumanEval/MMLU full quality",
+    "3matched captureOFF OFF/ON E2E pairs>=10%",
+    "opt-in rollback",
+    "authenticated Git push"
+  ],
+  "formal_success": false
+}
