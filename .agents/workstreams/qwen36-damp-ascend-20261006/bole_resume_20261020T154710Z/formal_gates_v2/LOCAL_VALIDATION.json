@@ -1,0 +1,15 @@
+{
+  "schema": "bole.formal-v2-preparation-validation/v1",
+  "pure_tests": 25,
+  "passed": true,
+  "cold_default_OFF": true,
+  "task_scope": [
+    "GSM8K",
+    "HumanEval",
+    "MMLU"
+  ],
+  "task_scope_source": "R115 explicit replacement; R118 renewal",
+  "actual_task_execution": false,
+  "actual_performance": false,
+  "formal_success": false
+}

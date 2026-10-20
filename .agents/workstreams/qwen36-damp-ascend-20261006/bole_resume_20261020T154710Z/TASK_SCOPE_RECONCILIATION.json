@@ -1,0 +1,33 @@
+{
+  "schema": "bole.latest-task-scope-reconciliation/v1",
+  "authority": {
+    "R115_TASK_ACCURACY_CONTRACT_20261013.json": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R115_TASK_ACCURACY_CONTRACT_20261013.json",
+      "bytes": 3159,
+      "sha256": "8cf88772303d26744866ef6f3d5c03fe1defe55b8a27755ff643179d6f1ab33b"
+    },
+    "R118_NEW12H_AUTHORITY_20261013.json": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/R118_NEW12H_AUTHORITY_20261013.json",
+      "bytes": 3832,
+      "sha256": "32b3d57baa8f5f843d95675de57e0e8d5579dd8766c9d3d9bd320f834af05a72"
+    }
+  },
+  "latest_tasks": [
+    "GSM8K",
+    "HumanEval",
+    "MMLU"
+  ],
+  "old_LongBench_list_explicitly_superseded": true,
+  "historical_sources_and_results_unchanged": true,
+  "no_union_with_superseded_task_lists": true,
+  "normal_EOS": true,
+  "thinking": false,
+  "max_tokens": 2048,
+  "max_pp_loss": 1,
+  "max_relative_loss_percent": 1,
+  "matched_performance_pairs": 3,
+  "performance_output_tokens": 1024,
+  "throughput_gain_min": 0.1,
+  "actual_tasks_executed": false,
+  "formal_success": false
+}

@@ -1,0 +1,88 @@
+{
+  "schema": "ascend.research-window/v1",
+  "id": "R118",
+  "start_utc": "2026-10-13T08:22:10Z",
+  "cutoff_utc": "2026-10-13T20:22:10Z",
+  "start_epoch": 1791879730,
+  "cutoff_epoch": 1791922930,
+  "duration_seconds": 43200,
+  "authority": {
+    "kind": "direct_human_message",
+    "text": "给你12个小时，继续穿刺",
+    "recording_basis": "First clock check following renewed human authorization; old windows remain immutable.",
+    "scheduling_update": "合理设计调度算法和启动的agent，各个论文的子agent能够高效的串行执行，最大的论文并发，从资源上来看NPU是并行无空挡的"
+  },
+  "workspace": "/opt/host/vnf/austinov/model-tuning-lab",
+  "branch": "work/qwen36-damp-ascend-20261006",
+  "baseline_commit": "859d474569c15f3854035b9c7ca7c928829cc3e1",
+  "device_scope": {
+    "allowed_physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected_physical": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "controller": "MAIN",
+    "concurrency": "Independent correctness stages may use disjoint physical-device leases after isolation/resource gates; TP4 model comparison remains exclusive. Unknown release retains lease."
+  },
+  "delivery": "Qwen3.6-27B vLLM-Ascend opt-in plugin/monkeypatch; reuse upstream sources, no original runtime/image changes.",
+  "acceptance": {
+    "numerical": "Preserve registered independent-reference NPU numerical/state/graph/lifecycle gates; 1% task loss is not a tensor tolerance.",
+    "performance": {
+      "paired_throughput_gain_min": 0.1,
+      "fixed_output_tokens": 1024,
+      "formal_pairs": 3,
+      "report": [
+        "TTFT",
+        "TPOT"
+      ],
+      "controls": "Same stack/checkpoint/inputs/concurrency/common optimizations; profiling off; no co-running NPU tests during performance."
+    },
+    "task_accuracy": {
+      "latest_human_suite": [
+        "GSM8K",
+        "HumanEval",
+        "MMLU"
+      ],
+      "sequence": [
+        "smoke",
+        "full"
+      ],
+      "enable_thinking": false,
+      "max_tokens": 2048,
+      "normal_eos": true,
+      "loss_limit_user": "1%",
+      "unit_not_explicitly_resolved": true,
+      "conservative_gate": "Require both <=1 percentage point and <=1% relative loss; report both, no tensor relaxation.",
+      "supersedes": "Stale LongBench-v2/GSM8K no-loss template is not the latest suite."
+    }
+  },
+  "execution_rules": [
+    "No new stage admitted unless worst-case duration including cleanup fits remaining window.",
+    "No overwriting historical source, failure or result directories; new successor identity and output each attempt.",
+    "A software-only ready package is not a NPU pass; record exact invocation, source hashes, mapping and operation handle.",
+    "Failure returns paper to device-free repair while other truly ready nodes are admitted.",
+    "Preparation can overlap device execution; within each paper respect numerical -> model -> paired screen -> repeat performance -> task accuracy dependencies.",
+    "HYPIC is a historical reference, not a new success; no training/distillation or MTP diversion.",
+    "No new hugepage release authority; previous 32 GiB grant spent.",
+    "No synthetic workload to claim full utilization; idle/unknown periods reported honestly."
+  ],
+  "agent_capacity": {
+    "total_slots": 4,
+    "main_slots": 1,
+    "preparation_slots": 3,
+    "assignments": {
+      "adakv_current_prepare": "SKVQ writer and full service successor",
+      "damp_operator_reuse": "AdaKV native precision matrix and model successor",
+      "mxr_resume_audit": "MXR actual FP32 solve seam and independent reference"
+    }
+  },
+  "initial_state": "New authority only. No new NPU result or model acceptance claimed.",
+  "handoff_predecessor": ".agents/workstreams/qwen36-damp-ascend-20261006/R117_WINDOW_TAIL_HANDOFF_20261013.json"
+}

@@ -1,0 +1,97 @@
+{
+  "schema": "bole.formal-acceptance-policy/v1",
+  "prepared_only": true,
+  "protocols": {
+    "USER_72H_PROTOCOL_20261009.json": {
+      "bytes": 1379,
+      "sha256": "b605d2a01118c4087e3450b3d800ef5bf40f6d0f882c1606a1e9117ed56151d1"
+    },
+    "NEW24H_AUTHORITY_20261016.json": {
+      "bytes": 3481,
+      "sha256": "e8c373b6664a4bdd80012428b686227a6f15c0535b3c57a7654fb7996c02cf28"
+    },
+    "R115_TASK_ACCURACY_CONTRACT_20261013.json": {
+      "bytes": 3159,
+      "sha256": "8cf88772303d26744866ef6f3d5c03fe1defe55b8a27755ff643179d6f1ab33b"
+    },
+    "R118_NEW12H_AUTHORITY_20261013.json": {
+      "bytes": 3832,
+      "sha256": "32b3d57baa8f5f843d95675de57e0e8d5579dd8766c9d3d9bd320f834af05a72"
+    }
+  },
+  "candidate_source": null,
+  "common_stack": null,
+  "current_authority": null,
+  "image_id": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "model_config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+  "physical_npus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_npus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "performance_output_tokens": 1024,
+  "task_max_tokens": 2048,
+  "formal_rounds": 3,
+  "tasks": [
+    "GSM8K",
+    "HumanEval",
+    "MMLU"
+  ],
+  "throughput_threshold": {
+    "n": 11,
+    "d": 10
+  },
+  "aggregation": {
+    "protocol_specifies_aggregation": false,
+    "prospective_acceptance": "all_three_pair_ratios",
+    "choice_origin": "Conservative prospective engineering rule; not an additional quoted user requirement",
+    "report": [
+      "each_pair",
+      "pooled_token_count_time",
+      "arithmetic_mean",
+      "median",
+      "geometric_mean"
+    ]
+  },
+  "timing": {
+    "throughput": "total_actual_output_tokens/(last_measured_end_ns-first_measured_submit_ns)",
+    "TTFT": "first_nonempty_token_delta_ns-submit_ns",
+    "TPOT": "(last_nonempty_token_delta_ns-first_nonempty_token_delta_ns)/(output_tokens-1)",
+    "clock": "CLOCK_MONOTONIC",
+    "warmup_required": true,
+    "arrival_policy": "closed_loop",
+    "profile_off": true,
+    "diagnostic_capture": false
+  },
+  "accuracy": {
+    "max_pp_loss": {
+      "n": 1,
+      "d": 1
+    },
+    "max_relative_loss_percent": {
+      "n": 1,
+      "d": 1
+    },
+    "baseline_zero_policy": "block_undefined"
+  },
+  "composition": {
+    "applies": null,
+    "decision_ref": null,
+    "component_sources": null
+  },
+  "variant_profiles": {},
+  "readers": {},
+  "invalidation_policy": "Retain every invalid round with its source-bound non-performance cause; rerun under a new ID, never drop a valid slow round",
+  "task_scope_precedence": {
+    "origin": "Explicit latest human replacement recorded in R115 and retained in R118/NEW24H",
+    "superseded": "Older LongBench-v2/GSM8K list applies only to historical results",
+    "union_of_old_lists": false
+  }
+}
