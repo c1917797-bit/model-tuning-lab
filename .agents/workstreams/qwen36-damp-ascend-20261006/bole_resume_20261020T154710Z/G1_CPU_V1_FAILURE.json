@@ -1,0 +1,42 @@
+{
+  "schema": "bole.g1-sameimage-software-failure/v1",
+  "source": {
+    "bytes": 104107,
+    "path": "/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v1/SOURCE_BOUND.json",
+    "sha256": "845c1a86741a9b014e910256f847f45dd2dbbe0c81afec9abec07579fe6f1ca1"
+  },
+  "owner": {
+    "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v1-CPU/RESULT.json",
+    "bytes": 125081,
+    "sha256": "55602bda33954038e51c5269d1731204406aa5680b3db92ba1838bf9c40dbdcc"
+  },
+  "software_stderr": {
+    "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v1-CPU/cpu-preflight/SOFTWARE.stderr",
+    "bytes": 39847,
+    "sha256": "5732185030ebcc4c71c46852e4f04572bfe845f86a18e3304c25267f0e93ee6c"
+  },
+  "first_host_fault": {
+    "bytes": 2411,
+    "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v1-CPU/HOST-FIRST-FAULT.json"
+  },
+  "primary": "ValueError(\"actual original child failed {'path': '/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v1-CPU/cpu-preflight/SOFTWARE-CHILD.json', 'sha256': '7c086a8598044102ae951ba48124dc4d42f821f8ef9218843e63862430cbdb01'}\")",
+  "secondary": [],
+  "source_before_after_equal": true,
+  "tests_attempted": 211,
+  "failed_test_headers": [
+    "ERROR: test_original_matrix_source_and_full_real_call_edges (test_model_calibration131r12.Tests.test_original_matrix_source_and_full_real_call_edges)",
+    "ERROR: test_actual_controller_constructor_all_roles_then_original_create_guard (test_owner_name_repair5.Tests.test_actual_controller_constructor_all_roles_then_original_create_guard)",
+    "FAIL: test_no_device_copy_and_registration_source_unchanged (test_cache_observation.Tests.test_no_device_copy_and_registration_source_unchanged)",
+    "FAIL: test_complete_inverse_and_source_command_output_joins (test_output_contract_repair4.Tests.test_complete_inverse_and_source_command_output_joins)",
+    "FAIL: test_real_cold_host_output_contract_accepts_only_new_model_and_CPU (test_output_contract_repair4.Tests.test_real_cold_host_output_contract_accepts_only_new_model_and_CPU)",
+    "FAIL: test_only_declared_FA_precision_boundary_and_inverse_negative (test_repair14_delta.Tests.test_only_declared_FA_precision_boundary_and_inverse_negative)",
+    "FAIL: test_real_integration_unchanged_sequential_and_no_operator_replacement (test_root_repeat_witness.Tests.test_real_integration_unchanged_sequential_and_no_operator_replacement)",
+    "Ran 211 tests in 7.740s",
+    "FAILED (failures=5, errors=2)"
+  ],
+  "actual_NPU_executed": false,
+  "model_ready": false,
+  "formal_success": false,
+  "classification": "source/command/inverse-ledger migration and moved calibration call-edge contract defects; numerical assertions unchanged",
+  "next": "NEW G1 v2 with actual command/readset/ledger rebinding; full same-image suite before TP4"
+}
