@@ -1,0 +1,21 @@
+{
+  "schema": "bole.gdn-timing-second-failure/v1",
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn3-timing-20261020T154710Z-v2/RESULT.json",
+    "bytes": 44406,
+    "sha256": "5d586cfc87d7dbb9804046d07e2c33eb74d9254b289335c158195035e73de481"
+  },
+  "failure": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn3-timing-20261020T154710Z-v2/data/FAILURE.json",
+    "bytes": 1502,
+    "sha256": "0146bd9548772b20672498d8eb781559dec22d303b681de51f5394354c3f84da"
+  },
+  "primary": {
+    "error": "ValueError('actual TIMING child failed')",
+    "traceback": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v2/gdn_timing_owner/timing_owner.py\", line 207, in main\n    child_ref = logs_until_done(cid, 'TIMING')\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v2/gdn_timing_owner/timing_owner.py\", line 156, in logs_until_done\n    C.need(value['State']['ExitCode'] == 0, 'actual '+label+' child failed')\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v2/gdn_timing_owner/timing_owner_common.py\", line 42, in need\n    raise ValueError(message)\nValueError: actual TIMING child failed\n"
+  },
+  "source_before_after_equal": true,
+  "all_owned_stopped_retained": true,
+  "cause": "CompiledKernel runner requires explicit grid[2]; original JIT pads missing dimensions to1; actual two binaries already source-proved; no samples yet",
+  "formal_success": false
+}

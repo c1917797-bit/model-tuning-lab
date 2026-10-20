@@ -1,0 +1,88 @@
+{
+  "NPU": false,
+  "bounded_pair_pass": false,
+  "closure_and_instance_guards_deferred_to_actual_original_observer": true,
+  "default_enabled": false,
+  "files": {
+    "LOCAL_CHECKS.json": {
+      "bytes": 641,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v2/LOCAL_CHECKS.json",
+      "sha256": "d98479f83278ebd3d52f65b26ea9e0c04dfb917c876def00e67557217025f4f4"
+    },
+    "README.md": {
+      "bytes": 3762,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v2/README.md",
+      "sha256": "caf2ba354551850b0d566e73bd7f58a8d44fb6a579c8be644a925559e16e8fa2"
+    },
+    "SOURCE_EDITS.json": {
+      "bytes": 12671,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v2/SOURCE_EDITS.json",
+      "sha256": "3221e0973d121f710eabc2c7d54bffe86df2503aea753c04d3fb2d6048897cb6"
+    },
+    "ar_host_namespace.py": {
+      "bytes": 4109,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v2/ar_host_namespace.py",
+      "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+    },
+    "ar_owner_common.py": {
+      "bytes": 8663,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v2/ar_owner_common.py",
+      "sha256": "fb0c10f06040d5e6fcae856b1587b5be9fd4c9fa95cbd52fbe03d4960fc2b576"
+    },
+    "ar_sameimage_preflight.py": {
+      "bytes": 6103,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v2/ar_sameimage_preflight.py",
+      "sha256": "9f9270c991fe9bf7897a2f30b97e414c1faff9a951f544febf9ef205a703eae1"
+    },
+    "ar_snapshot_bindings.py": {
+      "bytes": 2502,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v2/ar_snapshot_bindings.py",
+      "sha256": "35421924cd8fbc4d7989e0e1d70a33db61290e45187251391ddb3fbc06ec9f56"
+    },
+    "consume_pair_entry.py": {
+      "bytes": 9325,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v2/consume_pair_entry.py",
+      "sha256": "33d18abdf596757e947f9e5b93950312d7ded851dc54e6ec9cb86045040b47bf"
+    },
+    "native_ar_host.py": {
+      "bytes": 13981,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v2/native_ar_host.py",
+      "sha256": "fd551c1c6084e4920f7d8c111761cb3753948dc73aa3f28b0a8c0a031d8ed27f"
+    },
+    "prepare_native_owner.py": {
+      "bytes": 5014,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v2/prepare_native_owner.py",
+      "sha256": "4743fe81d44161c27a88be238600b571b8505931af08a2198073eb682ccf8d25"
+    },
+    "test_repair_pure.py": {
+      "bytes": 4716,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner_repair_v2/test_repair_pure.py",
+      "sha256": "3ff6052600d7851b94974f34b4a4734d73f628d249bf71a13e912129f3d6bc25"
+    }
+  },
+  "formal_success": false,
+  "host_executed": false,
+  "matched_common_plugin_effects_gate_pending": true,
+  "model_ready": false,
+  "native_AR_reference_smoke_pass": false,
+  "only_modified_runtime_file": "ar_sameimage_preflight.py",
+  "prepared_only": true,
+  "sameimage_executed": false,
+  "schema": "bole.native-ar-owner-repair-advisory/v2",
+  "unchanged_original_observer": {
+    "bytes": 29463,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/native_ar_observer.py",
+    "sha256": "3ccb13c1bd2da589e49ad46ce01f6544d346537136ebd13dafbabe0d8e6c26ac"
+  },
+  "v1_advisory": {
+    "bytes": 7891,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner/ADVISORY_MANIFEST.json",
+    "sha256": "098c8f3d3424d04acf17465143600466f0a67a4159338534327a3ab77df653e0"
+  },
+  "v5_preflight_source": {
+    "bytes": 4903,
+    "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/preflight114.py",
+    "sha256": "dd350e30348d56f1b0ec0cf9c9ca4a794374f7574ec5797c6423bf407e12ba07"
+  },
+  "worker_signal_sent": false
+}

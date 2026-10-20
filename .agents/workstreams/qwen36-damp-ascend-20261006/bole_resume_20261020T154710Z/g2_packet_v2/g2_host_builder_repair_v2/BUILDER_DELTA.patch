@@ -1,0 +1,77 @@
+--- frozen_G2/prepare_g2.py
++++ host_repair_v2/prepare_g2_host_v2.py
+@@ -1,4 +1,4 @@
+-"""Prepare one NEW smoke4 stream source; default OFF and no host/device execution."""
++"""Portable host preparer for the byteexact frozen G2 overlay; default OFF."""
+ import argparse
+ import ast
+ import hashlib
+@@ -24,9 +24,32 @@
+ def module(name,path):
+     spec=importlib.util.spec_from_file_location(name,path);v=importlib.util.module_from_spec(spec);spec.loader.exec_module(v);return v
+ 
++ADVISORY_MANIFEST=dict(bytes=15972,sha256='34119feffb6b8b910177731575a63181b02ef46b1670e2844f0813456a9c6f0d')
++ORIGINAL_BUILDER=dict(bytes=10075,sha256='f2cd77167dda0ce876d91065c0e096ee0a597aff7e66e1382526b578d4b463db')
++
++
++def ordinary_ref(path):
++    path=Path(path)
++    need(path.is_absolute()and path.is_file()and not any(p.is_symlink()for p in(path,*path.parents)),
++         'actual ordinary file/full path without symlink')
++    return ref(path)
++
++
++def portable_inventory(overlay,name,advisory):
++    need(type(name)is str and Path(name).name==name and name not in('.','..'),
++         'exact flat overlay filename')
++    need(type(advisory)is dict and set(advisory)=={'path','bytes','sha256'}and
++         Path(advisory['path']).is_absolute()and Path(advisory['path']).name==name,
++         'original advisory Ref3 path is lineage only, never a remote read target')
++    actual=ordinary_ref(Path(overlay)/name)
++    need(all(actual[k]==advisory[k]for k in('bytes','sha256')),
++         'exact reviewed overlay bytes/SHA despite different advisory/remote paths '+name)
++    return actual
++
++
+ def main():
+     p=argparse.ArgumentParser(allow_abbrev=False);p.add_argument('--execute',action='store_true')
+-    for key in('parent-source-ref','parent-owner-result-ref','parent-qualification-ref','consumer-source-ref','executor-sources-json'):p.add_argument('--'+key)
++    for key in('parent-source-ref','parent-owner-result-ref','parent-qualification-ref','consumer-source-ref','executor-sources-json','advisory-manifest-ref','original-builder-ref'):p.add_argument('--'+key)
+     for key in('overlay','new-root','output-root'):p.add_argument('--'+key,type=Path)
+     a=p.parse_args()
+     if not a.execute:print('{"enabled":false,"NPU":false}');return 0
+@@ -43,9 +66,16 @@
+     need(new.parent==out.parent==Path('/opt/host/vnf/austinov')and new.name.startswith('bole-g2-stream-smoke4-')and
+         out.name=='run-'+new.name and not new.exists()and not out.exists()and not Path(str(out)+'-CPU').exists(),
+         'unique NEW G2 source/model/CPU output leaves; failed predecessors never overwritten')
+-    manifest=obj(ref(a.overlay/'MANIFEST.json'));names=manifest['overlay_files']
++    advisory_ref=json.loads(a.advisory_manifest_ref);original_builder_ref=json.loads(a.original_builder_ref)
++    need(advisory_ref==ordinary_ref(a.overlay/'MANIFEST.json')and
++        all(advisory_ref[k]==v for k,v in ADVISORY_MANIFEST.items()),'exact byteoriginal frozen advisory MANIFEST Ref')
++    need(original_builder_ref==ordinary_ref(a.overlay/'prepare_g2.py')and
++        all(original_builder_ref[k]==v for k,v in ORIGINAL_BUILDER.items()),'exact byteoriginal frozen G2 builder Ref')
++    manifest=obj(advisory_ref);names=manifest['overlay_files'];actual_overlay={}
++    repair_builder_ref=ordinary_ref(Path(__file__).absolute())
+     for name in names:
+-        if name!='MANIFEST.json':need(ref(a.overlay/name)==manifest['inventory'][name],'exact reviewed overlay inventory '+name)
++        if name!='MANIFEST.json':actual_overlay[name]=portable_inventory(a.overlay,name,manifest['inventory'][name])
++        else:actual_overlay[name]=advisory_ref
+         need(Path(name).name==name and(a.overlay/name).is_file(),'exact flat overlay file')
+         if name.endswith('.py'):compile((a.overlay/name).read_bytes(),name,'exec')
+     shutil.copytree(old,new,ignore=shutil.ignore_patterns('__pycache__'))
+@@ -102,7 +132,14 @@
+     m['service_required_sameimage_software_cases']=original_count+added
+     parent_refs=[ps,po,pq,parent['prepared_template'],ref(old/'SOURCE.json'),ref(old/'COMMANDS.json'),ref(old/'COMMANDS_G1.json'),
+         *parent['files'].values(),*parent['dependencies'],*executors.values(),consumer]
+-    m['dependencies']=list({r['path']:r for r in[*[remap(r)for r in parent['dependencies']],*parent_refs]}.values())
++    m['dependencies']=list({r['path']:r for r in[*[remap(r)for r in parent['dependencies']],*parent_refs,
++        advisory_ref,original_builder_ref,repair_builder_ref,*actual_overlay.values()]}.values())
++    m['g2_builder_portability_v2']=dict(schema='bole.actual-remote-overlay-portability/v2',
++        advisory_manifest=advisory_ref,original_frozen_builder=original_builder_ref,
++        actual_repair_builder=repair_builder_ref,original_advisory_paths_are_lineage_only=True,
++        runtime_and_28_controls_unchanged=True,
++        inventory={name:dict(advisory=manifest['inventory'].get(name,advisory_ref),
++            actual_overlay=actual_overlay[name],actual_bound=m['files'][name])for name in names})
+     # New command closure remains generated after binding, never a manifest cycle.
+     m['command_scope']=dict(parent['command_scope'],compatibility_file='COMMANDS_G2.json')
+     for name in('SOURCE_TEMPLATE.json','SOURCE.json'):replace(new/name,m)

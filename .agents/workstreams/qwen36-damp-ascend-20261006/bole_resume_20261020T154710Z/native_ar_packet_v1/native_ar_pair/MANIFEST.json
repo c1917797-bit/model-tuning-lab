@@ -1,0 +1,96 @@
+{
+  "AST_pass": true,
+  "actual_NPU_execution": false,
+  "actual_model_data_consumed": false,
+  "bounded_pair_pass": false,
+  "default_OFF_and_help_pass": true,
+  "files": {
+    "EVIDENCE_SCHEMA.md": {
+      "bytes": 5695,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/EVIDENCE_SCHEMA.md",
+      "sha256": "ba322589c61aa30fda3ae972aa1c0e9627e275397d3cb7d4508748360b3e25cd"
+    },
+    "README.md": {
+      "bytes": 9130,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/README.md",
+      "sha256": "a04c5ff693b469e24d94012c87ee43caa392aeee8c1d20c8c3aae7fe98aaf54c"
+    },
+    "assemble_pair_inputs.py": {
+      "bytes": 1776,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/assemble_pair_inputs.py",
+      "sha256": "287052615f1dc424e8b6d664410fc4021ff56368792c881009f47c2f00e2e0a7"
+    },
+    "bole_native_ar_pair-0.0.0.dist-info/METADATA": {
+      "bytes": 63,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/bole_native_ar_pair-0.0.0.dist-info/METADATA",
+      "sha256": "a262be73d95369e4a5421085b2bd7426abcf801c04c22aec13d8a58967e5773b"
+    },
+    "bole_native_ar_pair-0.0.0.dist-info/entry_points.txt": {
+      "bytes": 74,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/bole_native_ar_pair-0.0.0.dist-info/entry_points.txt",
+      "sha256": "212b41a79c42ffe89aef5dfa98a67a9074faf2448b2a94a1112407bec6c793fb"
+    },
+    "consume_pair.py": {
+      "bytes": 32306,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/consume_pair.py",
+      "sha256": "038d07720e10b35f153df8620ce197591a358a20fc5b879ccad5b2c50ecefa21"
+    },
+    "launch_profile.py": {
+      "bytes": 3624,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/launch_profile.py",
+      "sha256": "0a0e715dfdfcdba2186bd9a641221dca13da46f99116bddabc222438413f15aa"
+    },
+    "native_ar_bootstrap.py": {
+      "bytes": 2222,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/native_ar_bootstrap.py",
+      "sha256": "2bd87a6d0b3bcaff9e2ba7e9ded3b38c23286332d88b7a8c560d3642e1f05760"
+    },
+    "native_ar_capture.py": {
+      "bytes": 2273,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/native_ar_capture.py",
+      "sha256": "5841ea8190c894f144e3d3afe62ee7e9025b22f8c64aed29cdf89ab8ec33e666"
+    },
+    "native_ar_observer.py": {
+      "bytes": 29463,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/native_ar_observer.py",
+      "sha256": "3ccb13c1bd2da589e49ad46ce01f6544d346537136ebd13dafbabe0d8e6c26ac"
+    },
+    "native_ar_server.py": {
+      "bytes": 2179,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/native_ar_server.py",
+      "sha256": "9e6b93a9d06ee1323b33b9c20d617222dd0d49f33e83bf8810cf3cc7bd2bb2ab"
+    },
+    "pair_contract.py": {
+      "bytes": 3356,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/pair_contract.py",
+      "sha256": "954eee044e63580a1e9c95431e11295909d36851931f8bbafd44a98f9e182f18"
+    },
+    "pair_entry.py": {
+      "bytes": 5406,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/pair_entry.py",
+      "sha256": "d6e9807f8816b8feb6a639220501ba8c55bdc5e86e9d60a50220c13728f14b3c"
+    },
+    "prepare_native_ar_pair.py": {
+      "bytes": 4099,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/prepare_native_ar_pair.py",
+      "sha256": "36a6506293754d23b0be1d5986d7c7827e4de6e3d82c0280594b54ea54ee2087"
+    },
+    "test_native_ar_pair.py": {
+      "bytes": 9492,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/test_native_ar_pair.py",
+      "sha256": "d1eec0db80ba6567a36c62c351bcda443cb7983eae53b734cd9ff1fd327207c3"
+    }
+  },
+  "formal_success": false,
+  "full_G2_independent_reader_supplied": false,
+  "global_FA_precision_alignment_qualified": false,
+  "local_synthetic_software_pass": true,
+  "local_synthetic_software_tests": 13,
+  "model_ready": false,
+  "performance_ready": false,
+  "plugin_effect_classification_performed": false,
+  "prepared_only": true,
+  "same_image_Torch_execution": false,
+  "schema": "bole.native-ar-pair-advisory-manifest/v1",
+  "task_ready": false
+}

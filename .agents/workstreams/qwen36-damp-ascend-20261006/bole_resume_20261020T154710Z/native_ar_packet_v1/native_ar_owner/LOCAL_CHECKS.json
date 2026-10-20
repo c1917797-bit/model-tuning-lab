@@ -1,0 +1,22 @@
+{
+  "AST_all_pass": true,
+  "NPU": false,
+  "actual_G1_local_document_hashes_checked": true,
+  "bounded_pair_pass": false,
+  "cold_default_help_cli_cases": 8,
+  "command": "python3 -B bole_service_proposals/native_ar_owner/test_native_owner_pure.py",
+  "exit_code": 0,
+  "formal_success": false,
+  "frozen_native_pair_all15_refs_unchanged": true,
+  "host_controller_executed": false,
+  "host_model_tensor_bytes_read": false,
+  "matched_common_plugin_effects_gate_pending": true,
+  "missing_argument_negative_cli_cases": 4,
+  "model_ready": false,
+  "native_AR_reference_smoke_pass": false,
+  "prepared_only": true,
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "sameimage_executed": false,
+  "schema": "bole.native-ar-owner-local-checks/v1",
+  "unittest_cases": 8
+}

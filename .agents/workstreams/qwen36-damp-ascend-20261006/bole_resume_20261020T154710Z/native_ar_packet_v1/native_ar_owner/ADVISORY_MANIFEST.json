@@ -1,0 +1,180 @@
+{
+  "E2E_measured": false,
+  "NPU": false,
+  "actual_025_local_sources": {
+    "cap48_provider.py": {
+      "bytes": 2056,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/cap48_provider.py",
+      "sha256": "51ec78ed1c1d9b9aab60f749988b799c8ec39ebe077eb5638aab86704440ad2a"
+    },
+    "external025.py": {
+      "bytes": 5198,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/external025.py",
+      "sha256": "8b65bbd0518a81b194459e087dd6a6003dcfbb07151940c031aaec31d29e3c62"
+    },
+    "fault_receipt.py": {
+      "bytes": 1183,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/fault_receipt.py",
+      "sha256": "1b719424df77cc62a16248e4583004e964c76dedf25349c1113c325ffb79440b"
+    },
+    "frontend_namespace131r18.py": {
+      "bytes": 5914,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/frontend_namespace131r18.py",
+      "sha256": "7abcf2ab5cb5b69f8e7437c2eed09552a28f5564adb6de354f48ea67e3d598dd"
+    },
+    "guest_canary.py": {
+      "bytes": 945,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/guest_canary.py",
+      "sha256": "4d19f8a4782a112a0300228e950715175cd4274fe0324af58258e00db2c72114"
+    },
+    "host_once.py": {
+      "bytes": 18170,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/host_once.py",
+      "sha256": "36844e41895b95e810b54ecae32994a96b21258ae8ad8d88fccaac19f035cf8c"
+    },
+    "identity_owner.py": {
+      "bytes": 3522,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/identity_owner.py",
+      "sha256": "aea24cd0b5ee3c31f8908ef5dd0f9b902ef0a2055d0226c5d45d761b5728aaa3"
+    },
+    "model_contract.py": {
+      "bytes": 13660,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/model_contract.py",
+      "sha256": "82243c277890aef7c24ea5eb5fbfa0658b314a39c01d7b2a7ddf34b2bf363e9f"
+    },
+    "observer_race_repair.py": {
+      "bytes": 1959,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/observer_race_repair.py",
+      "sha256": "f7d8fa2ea99cedb7373273a625dce39802a45d24fa291371a925d145cd28a609"
+    },
+    "output_scan131r8.py": {
+      "bytes": 6239,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/output_scan131r8.py",
+      "sha256": "db7f8d9301ef7225aebdc1cd12c07adaa3edcb125b2c173d03154aa0c47e5daa"
+    },
+    "owned_ref131r7.py": {
+      "bytes": 892,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/owned_ref131r7.py",
+      "sha256": "ad97f56ce3b0a18f38f7fc5679be21037ba961af2491ae303d94fad85e0b6ac7"
+    },
+    "owned_substrate.py": {
+      "bytes": 3579,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/owned_substrate.py",
+      "sha256": "17ca8d7e4992c95af629edd29b8af428a7ab1d66a7b8e7bcff1391d173a70b9d"
+    },
+    "safety_host.py": {
+      "bytes": 22338,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/safety_host.py",
+      "sha256": "20bda52a1c3fbc75db47104cbd4759faf91da1f39032d4730160983f7b9c0c30"
+    },
+    "worker_snapshot_owner.py": {
+      "bytes": 2299,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/worker_snapshot_owner.py",
+      "sha256": "bc0894c9aded1994dc0cf796537fd707d04d1c69174df5aa2d76cc90b1602bd2"
+    }
+  },
+  "actual_model_local_copy": {
+    "bytes": 5813,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_task_assets_reference/ACTUAL_MODEL_MANIFEST.json",
+    "sha256": "11ac18fa31878609b6b56a9c9213d12729cdb466d14c587efcf6d261566a706c"
+  },
+  "actual_predecessors": {
+    "G1_bundle": {
+      "bytes": 44151,
+      "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/CONSUMER_INPUTS.json",
+      "sha256": "a5f34ccd4c5e402a7d0858cfe91552cb665468c0c4fc40a68f9db977675b549f"
+    },
+    "G1_independent": {
+      "bytes": 12221,
+      "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/cpu-consumer/ATTRIBUTION.json",
+      "sha256": "8caf55b28f4a3c4108b8b932e9c664e08b3c28ea18f0bf4fc3bdf62de3538d53"
+    },
+    "G1_owner": {
+      "bytes": 131517,
+      "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/RESULT.json",
+      "sha256": "52030a932da1f3cd2392389a2d9246925e40c2d93186b5f67d41fba8cfa1e4fc"
+    },
+    "G1_source": {
+      "bytes": 109479,
+      "path": "/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/SOURCE_BOUND.json",
+      "sha256": "010914ebe1bf5d3e6b516103e1a376e24e0a0d965ac0a3a42d7aeb19fca57677"
+    },
+    "initial_profile": {
+      "bytes": 3344,
+      "path": "/opt/host/vnf/austinov/run-bole-native-reference-meta-20261020T154710Z-v1/LAUNCH_PROFILE.json",
+      "sha256": "519e2f3879acfcb6ee5c4802e47fff2d7f1925dfb1022e1026cd986275b77a78"
+    }
+  },
+  "actual_sameimage_executed": false,
+  "bounded_pair_pass": false,
+  "default_enabled": false,
+  "files": {
+    "LOCAL_CHECKS.json": {
+      "bytes": 791,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner/LOCAL_CHECKS.json",
+      "sha256": "9009f0a59d18138509348b8e0b431d88c0c9691249096038abbdb944022a9eeb"
+    },
+    "README.md": {
+      "bytes": 9676,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner/README.md",
+      "sha256": "07a34157fdab8d3ba60bd0c21e6fcac6095cbe3559dd3fd9d6403102690a7737"
+    },
+    "ar_host_namespace.py": {
+      "bytes": 4109,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner/ar_host_namespace.py",
+      "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+    },
+    "ar_owner_common.py": {
+      "bytes": 8663,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner/ar_owner_common.py",
+      "sha256": "fb0c10f06040d5e6fcae856b1587b5be9fd4c9fa95cbd52fbe03d4960fc2b576"
+    },
+    "ar_sameimage_preflight.py": {
+      "bytes": 5648,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner/ar_sameimage_preflight.py",
+      "sha256": "4f3c9f9e2430ce404cd0b14d6291e6fc4a69db07425e42659476eb10a27da58d"
+    },
+    "ar_snapshot_bindings.py": {
+      "bytes": 2502,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner/ar_snapshot_bindings.py",
+      "sha256": "35421924cd8fbc4d7989e0e1d70a33db61290e45187251391ddb3fbc06ec9f56"
+    },
+    "consume_pair_entry.py": {
+      "bytes": 9325,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner/consume_pair_entry.py",
+      "sha256": "33d18abdf596757e947f9e5b93950312d7ded851dc54e6ec9cb86045040b47bf"
+    },
+    "native_ar_host.py": {
+      "bytes": 13981,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner/native_ar_host.py",
+      "sha256": "fd551c1c6084e4920f7d8c111761cb3753948dc73aa3f28b0a8c0a031d8ed27f"
+    },
+    "prepare_native_owner.py": {
+      "bytes": 5014,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner/prepare_native_owner.py",
+      "sha256": "4743fe81d44161c27a88be238600b571b8505931af08a2198073eb682ccf8d25"
+    },
+    "test_native_owner_pure.py": {
+      "bytes": 5583,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_owner/test_native_owner_pure.py",
+      "sha256": "39fe5e8c6fb4fb2b0f231d1ab6e5e34495be14bdc52d1a8e9628ab8a0d24bbb8"
+    }
+  },
+  "formal_success": false,
+  "frozen_math_or_observer_rewritten": false,
+  "host_executed": false,
+  "matched_common_plugin_effects_gate_pending": true,
+  "model_ready": false,
+  "native_AR_reference_smoke_pass": false,
+  "original_native_pair_manifest": {
+    "bytes": 4440,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_pair/MANIFEST.json",
+    "sha256": "a213b6f5845192a26d23fb448165969ce0a49f4f5f739623efcd5bfcb35289ed"
+  },
+  "parent_metadata_adaptation_authorized": true,
+  "performance_ready": false,
+  "prepared_only": true,
+  "schema": "bole.native-ar-owner-advisory/v1",
+  "task_ready": false,
+  "worker_signal_sent": false
+}
