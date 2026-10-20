@@ -1,0 +1,28 @@
+{
+  "schema": "bole.model-ready-stage/v1",
+  "source": {
+    "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r15/SOURCE_BOUND.json",
+    "bytes": 75343,
+    "sha256": "9fc47a77bdc82682273d4b484a026be2858ccac37c06b4a447fe76ca22939d8b"
+  },
+  "output": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r15",
+  "software_cases": 145,
+  "software_pass": true,
+  "software_result": "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r15-CPU/RESULT.json",
+  "software_operation": "exec-00000000000019c4",
+  "model_operation": "exec-00000000000019c8",
+  "model_stage": "started; pending actual TP4 result",
+  "fa64_verified_result": "/opt/host/vnf/austinov/run-bole-fa64-20261020T154710Z-v3/replay/data/RESULT.json",
+  "preserved_software_failures": [
+    "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r13-CPU/RESULT.json",
+    "/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r14-CPU/RESULT.json"
+  ],
+  "qualification": {
+    "component_fixed_frames": true,
+    "full_model": false,
+    "scheduler_committed": false,
+    "task_quality": false,
+    "formal_performance": false
+  },
+  "next": "consume actual four-rank mathematical/precision-boundary receipts; preserve first fault and diagnose before any retry"
+}

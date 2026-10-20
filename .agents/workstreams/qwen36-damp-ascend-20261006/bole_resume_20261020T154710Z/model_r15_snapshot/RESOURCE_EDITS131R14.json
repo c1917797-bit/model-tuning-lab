@@ -1,0 +1,24 @@
+{
+  "after": {
+    "bytes": 2056,
+    "sha256": "51ec78ed1c1d9b9aab60f749988b799c8ec39ebe077eb5638aab86704440ad2a"
+  },
+  "before": {
+    "bytes": 2056,
+    "sha256": "0f7ea41e49bf0a0cdd4ed9d255e5b5b900471e66af4180f34d5c07aa5edc19a2"
+  },
+  "edits": [
+    {
+      "after": "\"\"\"Scoped host-only MEM32 provider shared by short011 and future pair025.\n",
+      "before": "\"\"\"Scoped host-only MEM48 provider shared by short011 and future pair025.\n"
+    },
+    {
+      "after": " S.MEM=32*c.GIB;S.RESERVE=8*c.GIB\n return dict(schema='mxr.scoped-cap32-provider/v1',original_source=dict(path=str(p),bytes=len(b),sha256=hashlib.sha256(b).hexdigest()),guest_model_GiB=32,guest_CPU_GiB=8,host_GiB=.5,RAM_reserve_GiB=8,model_initial_GiB=40.5,CPU_initial_GiB=40.5,dense_candidate_common=True,cgroup_OOM_is_failure_not_numerical_PASS=True)\n",
+      "before": " S.MEM=48*c.GIB;S.RESERVE=8*c.GIB\n return dict(schema='mxr.scoped-cap48-provider/v1',original_source=dict(path=str(p),bytes=len(b),sha256=hashlib.sha256(b).hexdigest()),guest_model_GiB=48,guest_CPU_GiB=8,host_GiB=.5,RAM_reserve_GiB=8,model_initial_GiB=56.5,CPU_initial_GiB=16.5,dense_candidate_common=True,cgroup_OOM_is_failure_not_numerical_PASS=True)\n"
+    },
+    {
+      "after": "  H._cap32_source_bound_contract=proof\n",
+      "before": "  H._cap48_source_bound_contract=proof\n"
+    }
+  ]
+}

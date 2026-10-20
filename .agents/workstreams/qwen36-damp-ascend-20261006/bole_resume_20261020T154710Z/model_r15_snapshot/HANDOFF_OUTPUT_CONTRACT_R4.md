@@ -1,0 +1,7 @@
+# BOLE output-contract repair4 — local preparation only
+
+R3 failure retained: its real Linux host090 --output-contract-only rejected the R3 COMMANDS model output (MAIN exec13cc). contract090 still named R2 output; owned_substrate owner label also named R2. This independent source changes only the two output constants and owner label; entry count increases 129 to 131 for two added controls. The historical 129 tests remain discovered. ROOT_WITNESS_EDITS preserves complete inversion through R3 to original sources; OUTPUT_CONTRACT_EDITS_R4 independently inverts all three changed Python files exactly to R3.
+
+The added cold test consumes actual COMMANDS model/CPU argv, maps only its script to this declared local copy, and appends --output-contract-only. No source/host/HAL or admission mocks. Both new outputs accepted; R2, R3 and malformed outputs rejected. The other control checks SOURCE, nested bind Ref, output and source/receipt/count joins plus complete inverse.
+
+All mathematical thresholds, four original forward bodies, projection capture/consumer, operator, resources, 32GiB guest, HBM reserve3GiB, whole3600/cleanup180 and renewed UTC cutoff remain byte-identical to R3. No actual component/result/PASS invented. Windows platform skips are not Linux evidence: sameimage CPU entry must run all131 without skips before canary/model. New output must not exist; runtime owner remains responsible for fresh admission. Frozen R2/R3 untouched. No remote action or device execution performed in this preparation.

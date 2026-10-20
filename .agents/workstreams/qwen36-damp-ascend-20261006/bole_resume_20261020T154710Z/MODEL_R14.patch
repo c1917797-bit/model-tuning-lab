@@ -1,0 +1,331 @@
+--- a/bind_model.py
++++ b/bind_model.py
+@@ -31,7 +31,7 @@
+  tr=json.loads(a.reviewed_template_ref);m=C.obj(tr)
+  C.need(tr==C.ref(P/'SOURCE_TEMPLATE.json')and m['root']==str(P)and m['prepared_only']is True,'actual deployed immutable reviewed model template')
+  for r in m['files'].values():C.checked(r)
+- authority=C.obj(m['authority_ref']);C.need(authority['start_epoch']==1792478882 and authority['cutoff_epoch']==1792651682 and authority['batch_id']=='MAIN-CONTINUE-20261020T064802Z-v3' and time.time()+3600<1792651682,'unchanged actual fixed window must contain whole model budget')
++ authority=C.obj(m['authority_ref']);C.need(authority['start_epoch']==1792511230 and authority['cutoff_epoch']==1792597630 and authority['batch_id']=='MAIN-BOLE-CONTINUE-20261020T154710Z' and time.time()+3600<1792597630,'unchanged actual fixed window must contain whole model budget')
+  component=json.loads(a.component_refs_json)
+  G.consume(C,component,gdn_math=m['files']['core112.py'],paged_math=m['files']['adapter.py']);V.join(C,dict(actual_118c=m['actual118c']))
+  m['prepared_only']=False;m['prepared_template']=tr;m['component_refs']=component
+--- a/consume_model.py
++++ b/consume_model.py
+@@ -96,6 +96,19 @@
+    tokens=raw['tree_context']['tokens'],target=raw['staged']['actual_target_logits'].clone()))
+   observation=raw['actual_native_prefill_input']
+   C.need(observation['sources']=={k:m['runtime_sources'][k]for k in('runner','base_runner','qwen35','qwen_next')},'actual native-input source join')
++  import fa_fp16_boundary as FB
++  C.need(C.ref(FB.__file__)==m['files']['fa_fp16_boundary.py'],'exact loaded FP16 FIA boundary source')
++  for layer in range(3,64,4):
++   cap=raw['tree_context']['captures'][layer];trial=cap['trial'];boundary=trial['fp16_boundary']
++   C.need(boundary['source']==m['files']['fa_fp16_boundary.py']and boundary['completed']is True and
++          boundary['input_dtype']=='torch.float16'and boundary['output_dtype']=='torch.bfloat16',
++          'all16 actual FA intervention receipts per rank')
++   for key in ('query','key','value'):
++    original=trial['native_before'][key];converted=original.to(t.float16)
++    C.need(bool(t.isfinite(converted).all()),'independent finite FP16 boundary input')
++    delta=(converted.double()-original.double()).abs()
++    expected=dict(changed=int((delta!=0).sum()),elements=delta.numel(),peak_abs=float(delta.max()))
++    C.need(boundary['cast'][key]==expected,'independent original BF16 to FP16 conversion ledger')
+   report,vectors=I.consume(t,raw,oracle112)
+   path=out/('VECTORS-rank%d.pt'%expected)
+   with path.open('xb')as f:t.save(vectors,f)
+--- a/contract090.py
++++ b/contract090.py
+@@ -2,9 +2,9 @@
+ import hashlib,importlib.util,json,sys,time
+ from pathlib import Path,PurePosixPath
+ P=Path(__file__).resolve().parent
+-START=1792478882;CUT=1792651682
+-OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model131repair12-MAIN-20261020T123000Z'
+-CPU_OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model131repair12-CPU-20261020T123000Z'
++START=1792511230;CUT=1792597630
++OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r14'
++CPU_OUTPUT_POSIX='/opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r14-CPU'
+ OUT=Path(OUTPUT_POSIX);CPU_OUT=Path(CPU_OUTPUT_POSIX)
+ from sourceio import need,ref,checked,obj,write
+ 
+--- a/entry.py
++++ b/entry.py
+@@ -14,7 +14,7 @@
+  if a.software:
+   import unittest
+   s=unittest.defaultTestLoader.discover(str(P),pattern='test*.py',top_level_dir=str(P))
+-  r=unittest.TextTestRunner().run(s);return 0 if r.wasSuccessful()and r.testsRun==136 else 3
++  r=unittest.TextTestRunner().run(s);return 0 if r.wasSuccessful()and r.testsRun==145 else 3
+  if a.component_refs_json:
+   import sourceio as C,component_gate as G
+   G.consume(C,json.loads(a.component_refs_json),gdn_math=C.ref(P/'core112.py'),paged_math=C.ref(P/'adapter.py'))
+--- a/model_entry.py
++++ b/model_entry.py
+@@ -202,7 +202,9 @@
+   ctx.captures[b['index']]=dict(kind='fa',trial=trial,actual_physical_pages=physical,actual_cache_identities=(tensor_id(b['key']),tensor_id(b['value'])),query=query.clone(),key=key.clone(),value=value.clone(),phase='BEFORE_NATIVE_PAGED_FA')
+   actual_fia=resolve_fia(self.C,self.fia_ref,self.prerequisites['components']['paged']['actual_fia_abi'],self.prerequisites['components']['paged']['source'])
+   need(actual_fia==self.fia,'same immutable actual FIA ABI value at each real adapter call')
+-  out,_=self.A.native(t,self.torch_npu,trial,actual_fia,sparse_mode=1)
++  from fa_fp16_boundary import FiaBoundary
++  boundary=FiaBoundary(t,self.torch_npu,trial)
++  out,_=self.A.native(t,boundary,trial,actual_fia,sparse_mode=1)
+   ctx.captures[b['index']]=dict(kind='fa',trial=trial,actual_physical_pages=physical,actual_cache_identities=(tensor_id(b['key']),tensor_id(b['value'])),query=query.clone(),key=key.clone(),value=value.clone(),output=out.clone())
+   return out.reshape(3,1536)
+ 
+@@ -419,4 +421,3 @@
+    except BaseException as secondary:ctx.secondary_faults=(repr(secondary),)
+    raise
+   finally:BUS.reset(token)
+-
+--- a/owned_substrate.py
++++ b/owned_substrate.py
+@@ -39,7 +39,7 @@
+ def load(output_root=None):
+  c=load_source('model_contract',REFS['model_contract'])
+  # Whole genuine actual025 IO/helper remains. Only new explicit task scope.
+- c.CUTOFF=1792651682;c.CUT='2026-10-22T06:48:02+00:00'
++ c.CUTOFF=1792597630;c.CUT='2026-10-22T06:48:02+00:00'
+  S=load_source('safety_host',REFS['safety_host'])
+  S.PHASE=3600;S.CLEANUP=180;S.OWNER='bole-root-r6-20261017-001'
+  original_env=S.environment
+@@ -62,4 +62,3 @@
+  external025.OUT=selected;external025.install(c,S,H)
+  return c,S,H,pairs
+ 
+-
+--- a/test_cache_budget131r16.py
++++ b/test_cache_budget131r16.py
+@@ -4,6 +4,7 @@
+ from types import SimpleNamespace
+ from unittest.mock import patch
+ import contract090 as C,server090 as S
++from repair14_ledger import previous_text
+ P=Path(__file__).resolve().parent
+ class Tests(unittest.TestCase):
+  def manifest(self):return json.loads((P/'SOURCE_TEMPLATE.json').read_bytes())
+@@ -39,7 +40,7 @@
+   import hashlib
+   edits=json.loads((P/'EDITS131R16.json').read_bytes());identity=json.loads((P/'IDENTITY_EDITS131R17.json').read_bytes());current=json.loads((P/'IDENTITY_EDITS131R18.json').read_bytes())
+   for n,row in edits.items():
+-   text=(P/n).read_text()
++   text=previous_text(P/n)
+    outer=json.loads((P/'ROOT_WITNESS_EDITS.json').read_bytes())
+    if n in outer:
+     d=outer[n];self.assertEqual(hashlib.sha256(text.encode()).hexdigest(),d['after']['sha256'])
+@@ -64,7 +65,8 @@
+   for n in('model_entry.py','consume_model.py','independent_model.py','core112.py','oracle112.py','adapter.py','treeconv118.py','native_seams.py','model_calibration131r12.py','cap48_provider.py','external025.py','evidence/ORIGINAL025_SAFETY.py'):
+    if n in old['files']:
+     outer=json.loads((P/'ROOT_WITNESS_EDITS.json').read_bytes())
+-    actual=outer[n]['before']if n in outer else{k:m['files'][n][k]for k in('bytes','sha256')}
++    prior=previous_text(P/n).encode()
++    actual=outer[n]['before']if n in outer else dict(bytes=len(prior),sha256=hashlib.sha256(prior).hexdigest())
+     self.assertEqual(actual,{k:old['files'][n][k]for k in('bytes','sha256')})
+   self.assertEqual(m['resources'],old['resources']);self.assertEqual(m['profile'],old['profile']);self.assertEqual(m['native_speculative_config'],old['native_speculative_config'])
+ if __name__=='__main__':unittest.main()
+--- a/test_fia_reference131r15.py
++++ b/test_fia_reference131r15.py
+@@ -56,8 +56,8 @@
+   cls=next(n for n in ast.parse((P/'model_entry.py').read_bytes()).body if isinstance(n,ast.ClassDef)and n.name=='Bridge');fa=next(n for n in cls.body if isinstance(n,ast.FunctionDef)and n.name=='_fa');text=ast.unparse(fa)
+   self.assertLess(text.index('actual_fia = resolve_fia('),text.index('self.A.native('));self.assertIn('trial, actual_fia, sparse_mode=1',text);self.assertIn('actual_fia == self.fia',text)
+  def test_new_window_active_gates_and_historical_math_unchanged(self):
+-  m=json.loads((P/'SOURCE_TEMPLATE.json').read_bytes());self.assertEqual(m['authority_ref'],C.ref(Path('/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/continuation_run_20261020T064802Z/AUTHORITY.json')))
++  m=json.loads((P/'SOURCE_TEMPLATE.json').read_bytes());self.assertEqual(m['authority_ref'],C.ref(Path('/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MODEL_AUTHORITY.json')))
+   for n in('contract090.py','bind_model.py','owned_substrate.py','worker_bootstrap.py'):
+-   text=(P/n).read_text(encoding='utf8');self.assertNotIn('1792220533',text);self.assertIn('1792651682',text)
++   text=(P/n).read_text(encoding='utf8');self.assertNotIn('1792220533',text);self.assertIn('1792597630',text)
+   self.assertEqual(m['resources']['guest_model_GiB'],32);self.assertEqual(m['resources']['initial_RAM_GiB'],40.5)
+ if __name__=='__main__':unittest.main()
+--- a/test_output_contract_repair4.py
++++ b/test_output_contract_repair4.py
+@@ -2,6 +2,7 @@
+ import hashlib,json,subprocess,sys,unittest
+ from pathlib import Path
+ import contract090 as C
++from repair14_ledger import previous_text
+ P=Path(__file__).resolve().parent
+ class Tests(unittest.TestCase):
+  def test_real_cold_host_output_contract_accepts_only_new_model_and_CPU(self):
+@@ -26,14 +27,14 @@
+   m=json.loads((P/'SOURCE_TEMPLATE.json').read_bytes());commands=json.loads((P/'COMMANDS.json').read_bytes())
+   sr=dict(path=m['root']+'/SOURCE_TEMPLATE.json',bytes=(P/'SOURCE_TEMPLATE.json').stat().st_size,sha256=hashlib.sha256((P/'SOURCE_TEMPLATE.json').read_bytes()).hexdigest())
+   self.assertEqual(commands['source'],sr);self.assertEqual(json.loads(commands['bind'][commands['bind'].index('--reviewed-template-ref')+1]),sr)
+-  self.assertEqual(commands['required_sameimage_software_cases'],136)
++  self.assertEqual(commands['required_sameimage_software_cases'],145)
+   self.assertEqual(m['output_root'],C.OUTPUT_POSIX);self.assertEqual(m['model_receipt_root'],C.OUTPUT_POSIX+'/dense/receipts')
+   for key,output in(('model',C.OUTPUT_POSIX),('CPU',C.CPU_OUTPUT_POSIX)):
+    self.assertEqual(commands[key][commands[key].index('--output')+1],output)
+    self.assertEqual(commands[key][commands[key].index('--execute')-1],m['root']+'/host090.py')
+   proof=json.loads((P/'OUTPUT_CONTRACT_EDITS_R4.json').read_bytes())
+   for name,row in proof.items():
+-   actual=(P/name).read_bytes();self.assertEqual(dict(bytes=len(actual),sha256=hashlib.sha256(actual).hexdigest()),row['after'])
++   actual=previous_text(P/name).encode('utf8');self.assertEqual(dict(bytes=len(actual),sha256=hashlib.sha256(actual).hexdigest()),row['after'])
+    text=actual.decode('utf8')
+    for edit in reversed(row['edits']):
+     self.assertEqual(text.count(edit['after']),1);text=text.replace(edit['after'],edit['before'])
+--- a/test_root_repeat_witness.py
++++ b/test_root_repeat_witness.py
+@@ -1,3 +1,4 @@
++from repair14_ledger import previous_text
+ """Real actual-source Python body replay on CPU, not backend or model proof."""
+ import ast,contextvars,inspect,json,sys,threading,types,unittest
+ from pathlib import Path
+@@ -127,11 +128,11 @@
+  def test_real_integration_unchanged_sequential_and_no_operator_replacement(self):
+   m=json.loads((P/'SOURCE_TEMPLATE.json').read_bytes());proof=json.loads((P/'ROOT_WITNESS_EDITS.json').read_bytes())
+   for name,p in proof.items():
+-   after=(P/name).read_text(encoding='utf8');restored=after
++   after=previous_text(P/name);restored=after
+    for e in reversed(p['edits']):self.assertEqual(restored.count(e['after']),1);restored=restored.replace(e['after'],e['before'])
+    self.assertEqual(__import__('hashlib').sha256(restored.encode()).hexdigest(),p['before']['sha256'])
+   original=json.loads((P/'evidence/HISTORICAL_SOURCE_TEMPLATE_ROOT_R18.json').read_bytes())
+-  self.assertEqual(C.ref(P/'model_entry.py')['sha256'],original['files']['model_entry.py']['sha256'])
++  self.assertEqual(__import__('hashlib').sha256(previous_text(P/'model_entry.py').encode()).hexdigest(),original['files']['model_entry.py']['sha256'])
+   for name in('native_seams.py','independent_model.py','core112.py','adapter.py','native_logits.py','native_dtype131r13.py','worker_entry.py'):
+    self.assertEqual(C.ref(P/name)['sha256'],original['files'][name]['sha256'])
+   text=(P/'model_smoke.py').read_text();self.assertIn('with witness:',text);self.assertIn('root_repeat_witness=witness.freeze()',text)
+--- a/worker_bootstrap.py
++++ b/worker_bootstrap.py
+@@ -71,8 +71,8 @@
+         'actual bound model entry source and component receipt refs')
+  import time
+  authority=C.obj(m['authority_ref'])
+- C.need(authority['start_epoch']==1792478882 and authority['cutoff_epoch']==1792651682 and
+-        1792478882<=time.time()<1792651682,'actual current batch hardware window')
++ C.need(authority['start_epoch']==1792511230 and authority['cutoff_epoch']==1792597630 and
++        1792511230<=time.time()<1792597630,'actual current batch hardware window')
+  for r in m['files'].values():C.checked(r)
+  for key in('qwen_patch','worker_patch_init','qwen_next_mtp_patch'):C.checked(m['runtime_sources'][key])
+  import worker_entry
+--- /dev/null
++++ b/fa_fp16_boundary.py
+@@ -0,0 +1,38 @@
++"""Opt-in TREE-only FIA precision boundary; mathematical reference is unchanged."""
++from sourceio import need,ref
++class FiaBoundary:
++    def __init__(self,t,delegate,trial):
++        self.t=t;self.delegate=delegate
++        need("fp16_boundary" not in trial,"one immutable boundary receipt per trial")
++        self.record=dict(source=ref(__file__),completed=False,input_dtype="torch.float16",
++                         output_dtype="torch.bfloat16",cast={})
++        trial["fp16_boundary"]=self.record
++    def npu_fused_infer_attention_score(self,**kwargs):
++        t=self.t;need(not self.record["completed"],"boundary call cannot repeat")
++        q,k,v=(kwargs[x] for x in ("query","key","value"))
++        need(q.shape==(1,6,3,256) and k.shape==v.shape==(2,1,128,256),"exact C1 three-node Q6/KV1/D256 boundary")
++        need(q.dtype==k.dtype==v.dtype==t.bfloat16,"original boundary input BF16")
++        need(kwargs["input_layout"]=="BNSD" and kwargs["block_size"]==128 and
++             kwargs["actual_seq_lengths"]==[3] and kwargs["actual_seq_lengths_kv"]==[134] and
++             kwargs["num_heads"]==6 and kwargs["num_key_value_heads"]==1 and kwargs["scale"]==256**-.5 and
++             kwargs["sparse_mode"]==1 and kwargs["pre_tokens"]==kwargs["next_tokens"]==2147483647 and
++             kwargs["inner_precise"]==2,"unchanged registered paged FIA arguments")
++        converted=dict(kwargs);before={}
++        for key in ("query","key","value"):
++            original=kwargs[key]
++            need(bool(t.isfinite(original).all()),"finite original QKV")
++            value=original.to(t.float16)
++            need(bool(t.isfinite(value).all()),"finite FP16 conversion")
++            delta=(value.double()-original.double()).abs()
++            self.record["cast"][key]=dict(changed=int((delta!=0).sum()),elements=delta.numel(),peak_abs=float(delta.max()))
++            converted[key]=value;before[key]=value.clone()
++        result=self.delegate.npu_fused_infer_attention_score(**converted)
++        for key,value in before.items():
++            need(t.equal(converted[key].contiguous().view(t.uint8),value.contiguous().view(t.uint8)),
++                 "FIA preserves converted inputs")
++        need(isinstance(result,(tuple,list)) and len(result)==2 and result[0].dtype==t.float16 and
++             result[0].shape==(1,6,3,256) and bool(t.isfinite(result[0]).all()),"actual finite FP16 FIA output")
++        output=result[0].to(t.bfloat16)
++        need(bool(t.isfinite(output).all()),"finite BF16 output boundary")
++        self.record["completed"]=True
++        return output,result[1]
+--- /dev/null
++++ b/test_fa_fp16_boundary.py
+@@ -0,0 +1,47 @@
++"""CPU boundary/negative controls; no HAL or kernel success is emulated."""
++import unittest,types
++import torch
++from fa_fp16_boundary import FiaBoundary
++def arguments():
++ return dict(query=torch.ones((1,6,3,256),dtype=torch.bfloat16),
++  key=torch.ones((2,1,128,256),dtype=torch.bfloat16),value=torch.ones((2,1,128,256),dtype=torch.bfloat16),
++  atten_mask=torch.zeros((1,1,3,256),dtype=torch.bool),block_table=torch.tensor([[0,1]],dtype=torch.int32),
++  input_layout="BNSD",block_size=128,actual_seq_lengths=[3],actual_seq_lengths_kv=[134],
++  num_key_value_heads=1,num_heads=6,scale=256**-.5,sparse_mode=1,
++  pre_tokens=2147483647,next_tokens=2147483647,inner_precise=2)
++def delegate(**kw):return torch.ones((1,6,3,256),dtype=torch.float16),None
++class Tests(unittest.TestCase):
++ def make(self,fn=delegate):
++  trial={};return FiaBoundary(torch,types.SimpleNamespace(npu_fused_infer_attention_score=fn),trial),trial
++ def test_cast_and_exact_parameters(self):
++  a=arguments();seen=[]
++  def called(**kw):
++   seen.append(kw)
++   for k in ("query","key","value"):self.assertEqual(kw[k].dtype,torch.float16)
++   for k in ("atten_mask","block_table"):self.assertIs(kw[k],a[k])
++   self.assertEqual(kw["inner_precise"],a["inner_precise"]);return delegate(**kw)
++  f,trial=self.make(called);out,_=f.npu_fused_infer_attention_score(**a)
++  self.assertEqual(out.dtype,torch.bfloat16);self.assertTrue(trial["fp16_boundary"]["completed"]);self.assertEqual(len(seen),1)
++ def test_wrong_shape_rejected(self):
++  f,_=self.make();a=arguments();a["query"]=a["query"][:,:,:1]
++  with self.assertRaisesRegex(ValueError,"three-node"):f.npu_fused_infer_attention_score(**a)
++ def test_wrong_dtype_rejected(self):
++  f,_=self.make();a=arguments();a["query"]=a["query"].float()
++  with self.assertRaisesRegex(ValueError,"input BF16"):f.npu_fused_infer_attention_score(**a)
++ def test_overflow_rejected(self):
++  f,_=self.make();a=arguments();a["query"].fill_(1e10)
++  with self.assertRaisesRegex(ValueError,"FP16 conversion"):f.npu_fused_infer_attention_score(**a)
++ def test_nonfinite_rejected(self):
++  f,_=self.make();a=arguments();a["query"].fill_(float("nan"))
++  with self.assertRaisesRegex(ValueError,"original QKV"):f.npu_fused_infer_attention_score(**a)
++ def test_wrong_output_dtype_rejected(self):
++  f,_=self.make(lambda **kw:(torch.ones((1,6,3,256),dtype=torch.bfloat16),None))
++  with self.assertRaisesRegex(ValueError,"FP16 FIA output"):f.npu_fused_infer_attention_score(**arguments())
++ def test_input_mutation_rejected(self):
++  def mutate(**kw):kw["query"].add_(1);return delegate(**kw)
++  f,_=self.make(mutate)
++  with self.assertRaisesRegex(ValueError,"preserves converted"):f.npu_fused_infer_attention_score(**arguments())
++ def test_second_call_rejected(self):
++  f,_=self.make();f.npu_fused_infer_attention_score(**arguments())
++  with self.assertRaisesRegex(ValueError,"cannot repeat"):f.npu_fused_infer_attention_score(**arguments())
++if __name__=="__main__":unittest.main()
+--- /dev/null
++++ b/repair14_ledger.py
+@@ -0,0 +1,21 @@
++"""Verify exact current bytes and reverse only the declared R14 source delta."""
++import hashlib,json
++from pathlib import Path
++P=Path(__file__).resolve().parent
++def digest(text):
++ b=text.encode("utf8");return dict(bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
++def reverse(name,actual):
++ ledger=json.loads((P/"FA_BOUNDARY_EDITS_R14.json").read_text())
++ if name not in ledger:return actual
++ row=ledger[name]
++ if digest(actual)!={k:row["after"][k]for k in ("bytes","sha256")}:
++  raise ValueError("current source differs from declared repair "+name)
++ for edit in reversed(row["edits"]):
++  if actual.count(edit["after"])!=1:raise ValueError("unambiguous inverse repair "+name)
++  actual=actual.replace(edit["after"],edit["before"])
++ if digest(actual)!={k:row["before"][k]for k in ("bytes","sha256")}:
++  raise ValueError("repair does not recover exact predecessor "+name)
++ return actual
++def previous_text(path):
++ path=Path(path)
++ return reverse(str(path.relative_to(P)),path.read_text())
+--- /dev/null
++++ b/test_repair14_delta.py
+@@ -0,0 +1,17 @@
++"""The new precision seam is exact; original mathematical code remains pinned."""
++import unittest,hashlib,json
++from pathlib import Path
++from repair14_ledger import previous_text,reverse
++P=Path(__file__).resolve().parent
++class Tests(unittest.TestCase):
++ def test_only_declared_FA_precision_boundary_and_inverse_negative(self):
++  actual=(P/"model_entry.py").read_text()
++  new="  from fa_fp16_boundary import FiaBoundary\n  boundary=FiaBoundary(t,self.torch_npu,trial)\n  out,_=self.A.native(t,boundary,trial,actual_fia,sparse_mode=1)"
++  old="  out,_=self.A.native(t,self.torch_npu,trial,actual_fia,sparse_mode=1)"
++  self.assertEqual(actual.count(new),1)
++  self.assertEqual(actual.replace(new,old),previous_text(P/"model_entry.py"))
++  with self.assertRaisesRegex(ValueError,"current source differs"):reverse("model_entry.py",actual+"# undeclared\n")
++  ledger=json.loads((P/"FA_BOUNDARY_EDITS_R14.json").read_text())
++  self.assertNotIn("independent_model.py",ledger);self.assertNotIn("oracle112.py",ledger)
++  self.assertNotIn("adapter.py",ledger);self.assertNotIn("core112.py",ledger)
++if __name__=="__main__":unittest.main()

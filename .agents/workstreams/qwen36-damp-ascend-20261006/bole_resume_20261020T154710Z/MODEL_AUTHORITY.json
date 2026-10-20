@@ -1,0 +1,25 @@
+{
+  "schema": "bole.continuation-model-authority/v1",
+  "batch_id": "MAIN-BOLE-CONTINUE-20261020T154710Z",
+  "user_instruction": "请帮我继续穿刺一直到成功",
+  "received_utc": "2026-10-20T15:47:10Z",
+  "start_epoch": 1792511230,
+  "cutoff_epoch": 1792597630,
+  "cutoff_kind": "technical admission horizon chosen by maintainer; user supplied no overall completion deadline",
+  "phase_seconds": 3600,
+  "cleanup_seconds": 180,
+  "physical": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_physical": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "scope": "BOLE continuation: component repair then same-image regression, TP4 model, lifecycle, task quality, matched performance; no foreign workload stops or HugeTLB changes",
+  "original_thresholds_unchanged": true
+}
