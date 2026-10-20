@@ -1,0 +1,22 @@
+{
+  "schema": "bole.gdn-timing-first-failure/v1",
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn3-timing-20261020T154710Z-v1/RESULT.json",
+    "bytes": 44406,
+    "sha256": "56e15f5e67135f88d52f13a72d5797219db98e92433ad3911afaf531442b73eb"
+  },
+  "child_failure": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn3-timing-20261020T154710Z-v1/data/FAILURE.json",
+    "bytes": 2459,
+    "sha256": "7c57703cbacdd95d9147043af8fed46b05d5bbaf2b1cce17d218413cf7f597fe"
+  },
+  "stderr": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn3-timing-20261020T154710Z-v1/TIMING.stderr",
+    "bytes": 2834,
+    "sha256": "e77f229f82eb346e338dbec3669a4375d7822bdc9b3461f8b72a5bc5dd79c6a4"
+  },
+  "cause": "inspect.getsourcefile(class) cannot resolve dynamic AscendBackend module; candidate compiled, no timing samples; not a math failure",
+  "source_before_after_equal": true,
+  "all_owned_stopped_retained": true,
+  "formal_success": false
+}

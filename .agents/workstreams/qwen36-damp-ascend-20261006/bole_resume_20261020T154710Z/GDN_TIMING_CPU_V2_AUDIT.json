@@ -1,0 +1,25 @@
+{
+  "schema": "bole.gdn-timing-repair-sameimage-audit/v2",
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn-timing-cpu-20261020T154710Z-v2b/RESULT.json",
+    "bytes": 23452,
+    "sha256": "cedee6108c5445d3a6196e765384b28f5f1cd925e454dbb6a5761e768e77edb2"
+  },
+  "stdout": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn-timing-cpu-20261020T154710Z-v2b/stdout",
+    "bytes": 351,
+    "sha256": "c2fa0c9005e4bcb8383b422d27a94a7c3847557bfedc9170a35740675699bb71"
+  },
+  "stderr": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn-timing-cpu-20261020T154710Z-v2b/stderr",
+    "bytes": 204,
+    "sha256": "0a78555d9deba59ff8adc193483d762d53a4b0097dd554fe4d84f8a20554efdb"
+  },
+  "pass_gate": true,
+  "offline_controls": 9,
+  "harness_v2_failure": "new reflection test private-temp mirror omitted timing source; retained stopped CPU outputv2; repaired only cold harness to copy unchanged timing pair",
+  "source_before_after_equal": true,
+  "NPU": false,
+  "actual_timing": false,
+  "formal_success": false
+}
