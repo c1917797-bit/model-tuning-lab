@@ -1,0 +1,32 @@
+{
+  "schema": "bole.G1-v2-actual-sameimage-audit/v1",
+  "source": {
+    "bytes": 109479,
+    "path": "/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/SOURCE_BOUND.json",
+    "sha256": "010914ebe1bf5d3e6b516103e1a376e24e0a0d965ac0a3a42d7aeb19fca57677"
+  },
+  "owner": {
+    "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2-CPU/RESULT.json",
+    "bytes": 129001,
+    "sha256": "b5fa06800a14686b0eb44856496f67c8aa087e9fb98a77b6627329c3a4fdc074"
+  },
+  "preflight": {
+    "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2-CPU/cpu-preflight/CPU.json",
+    "bytes": 5517,
+    "sha256": "c78a1e94b1a56ad129f5bdc700ac19a66cb7ad3b90eaea7ed7537ee9d40b194e"
+  },
+  "software": {
+    "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2-CPU/cpu-preflight/SOFTWARE.stderr",
+    "bytes": 32551,
+    "sha256": "9313769f6d102e66cea77e8877226e2988194dab632e72b12c121fa9d1835636"
+  },
+  "software_cases": 214,
+  "software_passed": true,
+  "source_before_after_equal": true,
+  "primary": null,
+  "secondary": [],
+  "owned_helper_stopped_retained": true,
+  "actual_NPU": false,
+  "model_ready": false,
+  "formal_success": false
+}
