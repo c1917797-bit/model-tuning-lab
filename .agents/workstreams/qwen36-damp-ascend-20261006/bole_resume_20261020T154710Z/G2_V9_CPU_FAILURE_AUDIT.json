@@ -1,0 +1,28 @@
+{
+  "actual_container_created": false,
+  "actual_model_executed": false,
+  "actual_sameimage_executed": false,
+  "cleanup_spent": 0.0,
+  "elapsed": 3.0129159099888057,
+  "first_fault_ref": {
+    "bytes": 2688,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v9-CPU/HOST-FIRST-FAULT.json",
+    "sha256": "f6ceb2cd4cbda009a3bd5c1387216e4e4028df4238db4293a08a919950df07ba"
+  },
+  "formal_success": false,
+  "owner_ref": {
+    "bytes": 849855,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v9-CPU/RESULT.json",
+    "sha256": "d4429c7642c40fa8e28b671e3e6d92bb2383cbd29baf110bdd7d37b142896e3c"
+  },
+  "primary": "AttributeError(\"module 'model_contract' has no attribute 'need'\")",
+  "schema": "bole.actual-G2-v9-precreate-failure-audit/v1",
+  "secondary": [],
+  "source": {
+    "bytes": 682545,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v9/SOURCE_BOUND.json",
+    "sha256": "7dafb83330946b4690824d188f688db8f445270e3c1f86d119c0728e269fef1f"
+  },
+  "source_equal": true,
+  "source_refs": 2605
+}

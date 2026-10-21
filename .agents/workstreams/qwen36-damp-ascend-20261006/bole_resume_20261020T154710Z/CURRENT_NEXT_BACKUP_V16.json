@@ -1,0 +1,41 @@
+{
+  "G2_v10_repair_pending": true,
+  "G2_v9_precreate_failure": {
+    "bytes": 1087,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V9_CPU_FAILURE_AUDIT.json",
+    "sha256": "52b7ab660db0e41f62c7b16f5e3177af5bf8b14d80173674c79c7373327ebd6a"
+  },
+  "HE_dependency_actual_owner": {
+    "bytes": 102557,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/RESULT.json",
+    "sha256": "42a2365931b2cabc00e5bf4ce754515ccd570709be5213db4b4927399d42ab4f"
+  },
+  "HE_dependency_independent": {
+    "bytes": 1384,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/HE_DEPENDENCY_V1_READBACK.json",
+    "sha256": "2933bdef46e64c85049130677d7ca6c5c4439ce23639bc20ff1642e4638b0520"
+  },
+  "HE_full_software_qualification_still_pending": true,
+  "MAIN_live_owner": false,
+  "authority_ref": {
+    "bytes": 764,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MODEL_AUTHORITY.json",
+    "sha256": "e3046914e360c6ee5c8abd6e18fcdd2f3afaa733247ad1522e9b4cde6e67dda8"
+  },
+  "formal_success": false,
+  "last_confirmed_pushed": "3fac6a64a166ea814781627b57b2c25b096e937f",
+  "native_AR_v4_numeric_failed_greedy_passed": {
+    "bytes": 2911,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_SAVED_V4_FAILURE_AUDIT.json",
+    "sha256": "e2223b0b163eed4abb16a7bab5c75c0c7aa1e9dc55cd552f97c2ee6d37fdd000"
+  },
+  "next": [
+    "freeze real-original025 callee fix v10, CPU then model only after exact successful readback",
+    "fullCPU13 real15525+43+20+HEcontrols+independentphase after dependency gate",
+    "saved nativeAR per-coordinate numerical diagnostic; no relaxed bound",
+    "G3 full1024 finite diagnostic after actual G2 model: original fits unknown allowed, observed completion required"
+  ],
+  "push_blocked_by_existing_origin_auth": true,
+  "schema": "bole.MAIN-evidence-checkpoint/v16",
+  "updated_UTC": "2026-10-21T01:05:21.493820+00:00"
+}
