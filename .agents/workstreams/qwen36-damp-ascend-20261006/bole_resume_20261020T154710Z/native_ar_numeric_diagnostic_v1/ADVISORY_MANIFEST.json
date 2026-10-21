@@ -1,0 +1,153 @@
+{
+  "NPU": false,
+  "actual_CPU_tensor_execution": false,
+  "actual_failed_numeric_v4": {
+    "bytes": 321017,
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/RESULT.json",
+    "sha256": "fec25ac1327951f460a1b59875f83650b68066ba00ab1f1e53de6c1243bb4a21"
+  },
+  "actual_host_readset_audited": false,
+  "all128_original_references_retained": true,
+  "cold_tensor_import_tripwires": 6,
+  "files": {
+    "ACTUAL_FAILURE_ANALYSIS.json": {
+      "bytes": 53674,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/ACTUAL_FAILURE_ANALYSIS.json",
+      "sha256": "edb0d72cf502799ab8c20b4cdb9de2a8b6d383be2a657ccb4ead8fffc61c2f31"
+    },
+    "ACTUAL_NUMERIC_V4_REFS.json": {
+      "bytes": 4837,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/ACTUAL_NUMERIC_V4_REFS.json",
+      "sha256": "c779b09215abda534a9879516f8092fe216afb5c62234cf5eb1e86061c6e78ab"
+    },
+    "LOCAL_CHECKS.json": {
+      "bytes": 1748,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/LOCAL_CHECKS.json",
+      "sha256": "e038b2af8e911ad7488851a164046b749e7f72c88cfd9bccccbfd9bbdfb14de8"
+    },
+    "README.md": {
+      "bytes": 7992,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/README.md",
+      "sha256": "0993fb0d5b0459998b7d663e308a83523e62b96aab3c23fbd7c6009caa4eadec"
+    },
+    "SOURCE_RELATIONSHIP.json": {
+      "bytes": 2312,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/SOURCE_RELATIONSHIP.json",
+      "sha256": "ac7115e03bf44e5fe7f449ef712dec6f449349c97bbedc10fccd46b9f4f8fe0c"
+    },
+    "ar_owner_common.py": {
+      "bytes": 19055,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/ar_owner_common.py",
+      "sha256": "5d0b9034706b9a942a4d7dd10870139959b22dfaab2cebbdddf25ba962e456a4"
+    },
+    "ar_saved_namespace.py": {
+      "bytes": 4109,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/ar_saved_namespace.py",
+      "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+    },
+    "numeric_common.py": {
+      "bytes": 6416,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/numeric_common.py",
+      "sha256": "09d821ffc3f017c12487d88b930be392bd2f8064ff4fb9eaa60b023ab54f345e"
+    },
+    "numeric_cpu_owner.py": {
+      "bytes": 8296,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/numeric_cpu_owner.py",
+      "sha256": "8eea3f7f534c6a9126f3e451f48ad6dc457766d4318a6129571b765584481e0d"
+    },
+    "numeric_diagnostic.py": {
+      "bytes": 10687,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/numeric_diagnostic.py",
+      "sha256": "f9b90c8126aa62ab22c2bd35c10bfd84e9341ca37e88618c8591ae779993c3fb"
+    },
+    "prepare_numeric_owner.py": {
+      "bytes": 2307,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/prepare_numeric_owner.py",
+      "sha256": "c7b0e9efeb2a27f595a073c659ddf986cb9f7411dea11d8c2cb172eec44f18a9"
+    },
+    "test_numeric_pure.py": {
+      "bytes": 12843,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/test_numeric_pure.py",
+      "sha256": "f359d6df25b1ce87c70a7e315cabaddd1ddccd4e57ec921dff7e1ab1f9c51032"
+    }
+  },
+  "flat_transfer": [
+    {
+      "bytes": 53674,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/ACTUAL_FAILURE_ANALYSIS.json",
+      "sha256": "edb0d72cf502799ab8c20b4cdb9de2a8b6d383be2a657ccb4ead8fffc61c2f31"
+    },
+    {
+      "bytes": 4837,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/ACTUAL_NUMERIC_V4_REFS.json",
+      "sha256": "c779b09215abda534a9879516f8092fe216afb5c62234cf5eb1e86061c6e78ab"
+    },
+    {
+      "bytes": 1748,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/LOCAL_CHECKS.json",
+      "sha256": "e038b2af8e911ad7488851a164046b749e7f72c88cfd9bccccbfd9bbdfb14de8"
+    },
+    {
+      "bytes": 7992,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/README.md",
+      "sha256": "0993fb0d5b0459998b7d663e308a83523e62b96aab3c23fbd7c6009caa4eadec"
+    },
+    {
+      "bytes": 2312,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/SOURCE_RELATIONSHIP.json",
+      "sha256": "ac7115e03bf44e5fe7f449ef712dec6f449349c97bbedc10fccd46b9f4f8fe0c"
+    },
+    {
+      "bytes": 19055,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/ar_owner_common.py",
+      "sha256": "5d0b9034706b9a942a4d7dd10870139959b22dfaab2cebbdddf25ba962e456a4"
+    },
+    {
+      "bytes": 4109,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/ar_saved_namespace.py",
+      "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+    },
+    {
+      "bytes": 6416,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/numeric_common.py",
+      "sha256": "09d821ffc3f017c12487d88b930be392bd2f8064ff4fb9eaa60b023ab54f345e"
+    },
+    {
+      "bytes": 8296,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/numeric_cpu_owner.py",
+      "sha256": "8eea3f7f534c6a9126f3e451f48ad6dc457766d4318a6129571b765584481e0d"
+    },
+    {
+      "bytes": 10687,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/numeric_diagnostic.py",
+      "sha256": "f9b90c8126aa62ab22c2bd35c10bfd84e9341ca37e88618c8591ae779993c3fb"
+    },
+    {
+      "bytes": 2307,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/prepare_numeric_owner.py",
+      "sha256": "c7b0e9efeb2a27f595a073c659ddf986cb9f7411dea11d8c2cb172eec44f18a9"
+    },
+    {
+      "bytes": 12843,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/test_numeric_pure.py",
+      "sha256": "f359d6df25b1ce87c70a7e315cabaddd1ddccd4e57ec921dff7e1ab1f9c51032"
+    }
+  ],
+  "formal_success": false,
+  "local_stdlib_controls": 10,
+  "pointwise_bound_changed": false,
+  "qualification_flags_false": true,
+  "resources_admitted": false,
+  "root_cause_proven": false,
+  "runtime_files": [
+    "ar_owner_common.py",
+    "ar_saved_namespace.py",
+    "numeric_common.py",
+    "prepare_numeric_owner.py",
+    "numeric_cpu_owner.py",
+    "numeric_diagnostic.py",
+    "ACTUAL_NUMERIC_V4_REFS.json"
+  ],
+  "schema": "bole.native-ar-numeric-diagnostic-advisory-manifest/v1",
+  "status": "frozen_prepared_only_unexecuted"
+}

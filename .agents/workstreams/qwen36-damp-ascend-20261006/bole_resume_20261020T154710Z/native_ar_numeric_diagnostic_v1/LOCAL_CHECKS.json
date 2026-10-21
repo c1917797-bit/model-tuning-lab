@@ -1,0 +1,29 @@
+{
+  "actual834_readset_reopened": false,
+  "actual_Device_CPU_run": false,
+  "actual_NPU_run": false,
+  "actual_Torch_import": false,
+  "actual_tensor_load": false,
+  "cold_default_help_tensor_import_tripwires": 6,
+  "command": "python3 -I -B bole_service_proposals/native_ar_numeric_diagnostic_v1/test_numeric_pure.py",
+  "controls": [
+    "All20 exact primary copies and complete128 prior frame distribution; 16fail/112pass, zero FP32/64 pass-bit disagreement",
+    "Literal original score, probability, V-reduction AST and exact pointwise bound",
+    "Exact actual predecessor metadata checks with explicit offline old-source load seam; false numeric success, failed G1 and unreleased owner rejected",
+    "Six defaultOFF/help tensor-import tripwires",
+    "AST/compile, weights_only CPU-only raw load, complete128 frame loops, original actual_native_fa call and export128MiB guard",
+    "Original025 common/namespace whole bytes unchanged",
+    "Real prepare\u2192copied fullRef module\u2192source-audit CLI metadata roundtrip; actual primary copy routing and upstream readset seam explicit; wrong fullpath/schema/hash negatives",
+    "Original observe before CPU0 guard/create; mathematical recomputation reported only after actual complete diagnostic result",
+    "Cold first-entry clock/1380 remaining/cutoff/no renewal negative controls",
+    "Both frozen numerical-v4 and mask-v4 manifests all original refs unchanged"
+  ],
+  "formal_success": false,
+  "mathematical_qualification": false,
+  "offline_metadata_CLI_full_host_readset_exercised": false,
+  "resources_admitted": false,
+  "schema": "bole.native-ar-numeric-diagnostic-local-controls/v1",
+  "status": "prepared_only_unexecuted",
+  "unittest_count": 10,
+  "unittest_pass": true
+}

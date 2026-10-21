@@ -1,0 +1,64 @@
+{
+  "actual_fullCPU14_executed": false,
+  "after_in_probe_before_map": false,
+  "after_inspect_new_ref": {
+    "bytes": 17500,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/inspect-1792544330773280650.json",
+    "sha256": "8241d0d0cff2ef9710ee14bb3477cdf0067926e5b82d89b5a4bc834e1c12d0b8"
+  },
+  "distinct_postrun_refs": 18,
+  "explicit_admission_fields": [
+    "binding_ref",
+    "namespace_ref",
+    "ready_ref",
+    "ack_ref",
+    "publication_ref"
+  ],
+  "explicit_owned_fields": [
+    "create_receipt"
+  ],
+  "explicit_release_fields": [
+    "after_inspect"
+  ],
+  "explicit_summary_keys": [
+    "CPU145_prestart_update",
+    "binding_ref",
+    "create_argv_ref",
+    "inherited_lock_ref",
+    "inspect_ref",
+    "logs_receipt",
+    "logs_ref",
+    "network_admission_ref",
+    "owned_ref",
+    "preflight_ref",
+    "release_ref",
+    "wait_receipt"
+  ],
+  "no_arbitrary_path_or_recursive_Ref_walk": true,
+  "normalizes_exact_Ref2_to_supplied_Ref3": true,
+  "offline_complete_actual_primary_copies_replayed": true,
+  "original_consume_direct_file_read_expressions": [
+    "owner_ref",
+    "x['stage_ref']",
+    "s['binding_ref']",
+    "s['owned_ref']",
+    "o['create_receipt']",
+    "s['inspect_ref']",
+    "s['wait_receipt']",
+    "s['logs_receipt']",
+    "s['release_ref']",
+    "release['after_inspect']",
+    "s['inherited_lock_ref']",
+    "s['network_admission_ref']",
+    "s['preflight_ref']",
+    "C.ref(P / 'DEPENDENCY_EXPECTED.json')",
+    "s['logs_ref']",
+    "s['create_argv_ref']",
+    "P / 'DEPENDENCY_EXPECTED.json'",
+    "s['logs_ref']"
+  ],
+  "original_reader_source_bytes": 12472,
+  "original_reader_source_sha256": "60d22925f5177efde2392a474e0a38f404d424898e5580c8ed7c486c79e9cb1b",
+  "qualification_accepted": false,
+  "schema": "bole.offline-explicit-HE-postrun-closure-audit/v1"
+}

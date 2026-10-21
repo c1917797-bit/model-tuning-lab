@@ -1,0 +1,164 @@
+{
+  "AST_files": 20,
+  "AST_names": [
+    "audit_source_v10.py",
+    "audit_source_v9.py",
+    "contract090.py",
+    "g1_contract.py",
+    "g2_callee_proof.py",
+    "g2_cold_clock.py",
+    "g2_cold_parent_output.py",
+    "g2_contract.py",
+    "g2_handoff.py",
+    "g2_handoff_cold.py",
+    "host_service.py",
+    "owned_create.py",
+    "owned_substrate.py",
+    "prepare_g2_callee_v10.py",
+    "prepare_g2_cold_v9.py",
+    "service_entry.py",
+    "sourceio.py",
+    "test_g2_cold_builder.py",
+    "test_g2_cold_callee_v10.py",
+    "test_g2_cold_clock.py"
+  ],
+  "Git": false,
+  "NPU": false,
+  "actual_cold_handoff_executed": false,
+  "actual_model_executed": false,
+  "actual_parent_failed_owner": {
+    "bytes": 849855,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v9-CPU/RESULT.json",
+    "sha256": "d4429c7642c40fa8e28b671e3e6d92bb2383cbd29baf110bdd7d37b142896e3c"
+  },
+  "actual_parent_fault": {
+    "bytes": 2688,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v9-CPU/HOST-FIRST-FAULT.json",
+    "sha256": "f6ceb2cd4cbda009a3bd5c1387216e4e4028df4238db4293a08a919950df07ba"
+  },
+  "actual_parent_source": {
+    "bytes": 682545,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v9/SOURCE_BOUND.json",
+    "sha256": "7dafb83330946b4690824d188f688db8f445270e3c1f86d119c0728e269fef1f"
+  },
+  "actual_parser_executed": false,
+  "actual_primary_files_verified": 4,
+  "actual_sameimage_executed": false,
+  "actual_source_assembled": false,
+  "defaultOFF_help": [
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "prepare_g2_callee_v10.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "prepare_g2_callee_v10.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "audit_source_v10.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "audit_source_v10.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "prepare_g2_cold_v9.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "prepare_g2_cold_v9.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "audit_source_v9.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "audit_source_v9.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "host_service.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "host_service.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "service_entry.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "service_entry.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "g2_handoff_cold.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "g2_handoff_cold.py"
+    }
+  ],
+  "elapsed_seconds": 1.2977018289966509,
+  "formal_success": false,
+  "host_creator_clock_candidate_unchanged": true,
+  "isolated_I_B_proof_import_checked": true,
+  "new_actual_callee_controls": 7,
+  "no_need_added_to_original025": true,
+  "numerical_qualification": false,
+  "original18_no_local_review_fallback_exercised": true,
+  "original_v9_byteequal_controls": 18,
+  "original_v9_test_files_whole_bytes_preserved": true,
+  "parent_CID_created": false,
+  "parent_elapsed_unchanged": 3.0129159099888057,
+  "parent_primary": "AttributeError(\"module 'model_contract' has no attribute 'need'\")",
+  "parent_secondary": [],
+  "parent_software_297_executed": false,
+  "parent_source_before_count": 2605,
+  "parent_source_nonempty_equal": true,
+  "passed": 25,
+  "prospective_arithmetic": "source-v8 fresh279 + source-v10 original18 + source-v10 new7 = 304",
+  "prospective_sameimage_cases": 304,
+  "pure_controls": 25,
+  "real_creator_called_to_uninvoked_Docker_boundary": true,
+  "real_original025_module_used": true,
+  "remote": false,
+  "schema": "bole.G2-v10-local-actual025-callee-validation/v1",
+  "skipped": 0,
+  "software_envelope_schema": "bole.G2-cold-clock-combined-software-gate/v9",
+  "unittest_stderr": "test_exact_parent_extract_preserves_noise_and_rejects_missing_duplicate_failed_wrong_source (test_g2_cold_builder.ActualEvidenceControls.test_exact_parent_extract_preserves_noise_and_rejects_missing_duplicate_failed_wrong_source) ... ok\ntest_retained_actual_parent279_parser_failure_is_not_cold_or_model_pass (test_g2_cold_builder.ActualEvidenceControls.test_retained_actual_parent279_parser_failure_is_not_cold_or_model_pass) ... ok\ntest_exact_declared_whole_inverses_recover_frozen_v8 (test_g2_cold_builder.BuilderControls.test_exact_declared_whole_inverses_recover_frozen_v8) ... ok\ntest_one_parent_rw_alias_rejects_shadowing_any_actual_input (test_g2_cold_builder.BuilderControls.test_one_parent_rw_alias_rejects_shadowing_any_actual_input) ... ok\ntest_ordinary_portable_refs_accept_bytes_only_and_reject_wrong_bytes_or_symlink (test_g2_cold_builder.BuilderControls.test_ordinary_portable_refs_accept_bytes_only_and_reject_wrong_bytes_or_symlink) ... ok\ntest_original_production_four_copy_and_atomic_functions_ast_unchanged (test_g2_cold_builder.BuilderControls.test_original_production_four_copy_and_atomic_functions_ast_unchanged) ... ok\ntest_prepare_audit_software_and_host_default_OFF_help (test_g2_cold_builder.BuilderControls.test_prepare_audit_software_and_host_default_OFF_help) ... ok\ntest_undeclared_host_create_or_capture_delta_cannot_invert_to_parent (test_g2_cold_builder.BuilderControls.test_undeclared_host_create_or_capture_delta_cannot_invert_to_parent) ... ok\ntest_all_original18_test_files_and_runtime_cold_seams_are_whole_byteequal (test_g2_cold_callee_v10.CalleeControls.test_all_original18_test_files_and_runtime_cold_seams_are_whole_byteequal) ... ok\ntest_exact_original18_fallback_resolves_bound_snapshot_without_local_review (test_g2_cold_callee_v10.CalleeControls.test_exact_original18_fallback_resolves_bound_snapshot_without_local_review) ... ok\ntest_new_preparer_and_audit_are_default_OFF_and_help (test_g2_cold_callee_v10.CalleeControls.test_new_preparer_and_audit_are_default_OFF_and_help) ... ok\ntest_real_original025_alias_and_real_creator_reach_next_boundary_without_Docker (test_g2_cold_callee_v10.CalleeControls.test_real_original025_alias_and_real_creator_reach_next_boundary_without_Docker) ... ok\ntest_real_original025_has_require_not_need_and_old_v9_failure_is_reproduced (test_g2_cold_callee_v10.CalleeControls.test_real_original025_has_require_not_need_and_old_v9_failure_is_reproduced) ... ok\ntest_real_original025_illegal_alias_and_actual_readset_shadow_fail_before_Docker (test_g2_cold_callee_v10.CalleeControls.test_real_original025_illegal_alias_and_actual_readset_shadow_fail_before_Docker) ... ok\ntest_real_original025_wrong_source_SHA_fails_before_alias_or_Docker (test_g2_cold_callee_v10.CalleeControls.test_real_original025_wrong_source_SHA_fails_before_alias_or_Docker) ... ok\ntest_actual_aggregate_pre_hash_with_sufficient_budget_crosses_same_gate (test_g2_cold_clock.ClockControls.test_actual_aggregate_pre_hash_with_sufficient_budget_crosses_same_gate) ... ok\ntest_actual_aggregate_slow_source_rejects_before_output_or_owner_without_reset (test_g2_cold_clock.ClockControls.test_actual_aggregate_slow_source_rejects_before_output_or_owner_without_reset) ... ok\ntest_actual_main_first_clock_and_every_original_owner_use_same_start (test_g2_cold_clock.ClockControls.test_actual_main_first_clock_and_every_original_owner_use_same_start) ... ok\ntest_actual_original_remaining_already_reserves180_once_and_allows_exact60 (test_g2_cold_clock.ClockControls.test_actual_original_remaining_already_reserves180_once_and_allows_exact60) ... ok\ntest_changed_actual_controller_clock_or_phase_cannot_create (test_g2_cold_clock.ClockControls.test_changed_actual_controller_clock_or_phase_cannot_create) ... ok\ntest_cutoff_and_cleanup_create_boundaries_fail_without_phase_extension (test_g2_cold_clock.ClockControls.test_cutoff_and_cleanup_create_boundaries_fail_without_phase_extension) ... ok\ntest_genuine_original_fresh_environment_prepare_accept_candidate_without_allowlist_change (test_g2_cold_clock.ClockControls.test_genuine_original_fresh_environment_prepare_accept_candidate_without_allowlist_change) ... ok\ntest_host_stages_candidate_then_original_cpu_arm_and_all_probe_paths_agree (test_g2_cold_clock.ClockControls.test_host_stages_candidate_then_original_cpu_arm_and_all_probe_paths_agree) ... ok\ntest_late_start_joint_reset_controller_reset_and_elapsed_reset_rejected (test_g2_cold_clock.ClockControls.test_late_start_joint_reset_controller_reset_and_elapsed_reset_rejected) ... ok\ntest_real_complete_saved_stage_and_host_verification_accept_only_candidate_root (test_g2_cold_clock.ClockControls.test_real_complete_saved_stage_and_host_verification_accept_only_candidate_root) ... ok\n\n----------------------------------------------------------------------\nRan 25 tests in 0.658s\n\nOK\n",
+  "unittest_stdout": "",
+  "whole_helper_inverse_checked": true
+}

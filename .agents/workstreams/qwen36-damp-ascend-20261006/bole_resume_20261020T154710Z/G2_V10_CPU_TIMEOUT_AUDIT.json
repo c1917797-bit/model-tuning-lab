@@ -1,0 +1,29 @@
+{
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/RESULT.json",
+    "bytes": 957044,
+    "sha256": "f2e0233bc5d13c0ac66d407568c5e09a7aee7d7a8601963783f0b008911dbbb9"
+  },
+  "source": {
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v10/SOURCE_BOUND.json",
+    "bytes": 752323,
+    "sha256": "af907e01b7143a476459095fad32db5110a940392584c40a4886763a03a9081c"
+  },
+  "first_fault": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/HOST-FIRST-FAULT.json",
+    "bytes": 2042,
+    "sha256": "7e08fc3cc1381429aec42738623e507fb6b58f8c72da22b600c499cb054616b4"
+  },
+  "primary": "ValueError('bounded original child; never retry')",
+  "secondary": [],
+  "source_equal_count": 2936,
+  "parent279_seconds": 96.67428704001941,
+  "current25_pass": true,
+  "current25_seconds": 1.66,
+  "whole_software_completed": false,
+  "NPU_admitted": false,
+  "model_ready": false,
+  "next": "new v11 explicit parent120/current60/metadata120 bounded stages within unchanged original3600+180",
+  "schema": "bole.primary-readback-audit/v1",
+  "formal_success": false
+}

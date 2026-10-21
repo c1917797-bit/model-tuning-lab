@@ -1,0 +1,149 @@
+{
+  "AST_python_files": 17,
+  "CLI_defaultOFF_and_help": 6,
+  "CPU": 145,
+  "CPU12_actual_dependency_copy_sha256": "e19327fafabebff5146347a058449bc80d78fe4427fd7bbef00883756535c310",
+  "CPU12_actual_failed_owner_sha256": "348cf6a20d91927df0707d197dc66508bf8bdef188bd5c7a9fa38fa55a32420a",
+  "HE_memory_bytes": 2147483648,
+  "HE_whole_seconds": 90,
+  "NPU": false,
+  "actual_execution_performed": false,
+  "actual_pre_import_private_netns_ACK_required": true,
+  "cleanup_seconds": 180,
+  "decoder4_and_fullCPU13_freeze_pending_actual_preflight": true,
+  "default_enabled": false,
+  "evaluator_called": false,
+  "files": {
+    "CPU12_ACTUAL_REFS.json": {
+      "bytes": 7126,
+      "sha256": "2c82fdcbc85cb4d6292359f910be6173c3702cefc26cd2867ea2c7bcea7fb381"
+    },
+    "DEPENDENCY_EXPECTED.json": {
+      "bytes": 2926,
+      "sha256": "1c7a0af00734e57a7a7fb6c9508053b57a8cfa2f1611b2186651d511627b55cb"
+    },
+    "HE_NETWORK_PROTOCOL.json": {
+      "bytes": 7087,
+      "sha256": "394580866ca139850ab2d51f6b566cf92b653098d2e706de44412e78f0208a8b"
+    },
+    "LOCAL_CONTROLS.json": {
+      "bytes": 371,
+      "sha256": "426196f7b16493796c0731af65784bcf035d55b1e181a02dcf8e74f0d2ad8e38"
+    },
+    "PREPARED_STATUS.json": {
+      "bytes": 314,
+      "sha256": "f6142ec17e851fc3ffacf565f25a25267cb01a693c7ebc50fd2f1cb6971ca9bb"
+    },
+    "PREVIOUS_CPU_EXPECTED.json": {
+      "bytes": 6417,
+      "sha256": "d043490aa80cb30ac406316c6267393373153b6e277d37ff27d767c3fd906a76"
+    },
+    "README.md": {
+      "bytes": 7583,
+      "sha256": "1eaad7ca7efdc00eeebc3ff03bed245e3e0c218f1f3e3f89fb89baae2a0c5d28"
+    },
+    "binding.py": {
+      "bytes": 5117,
+      "sha256": "8f8d4b7ccaad1e5f53c7685445e6d261c6cd3f1c3417c730e757a2ca9dda0a7d"
+    },
+    "he_admission.py": {
+      "bytes": 7537,
+      "sha256": "357206567f90b6cb9b3ac3ec321b32655fa938cab1623c8c23e58a676d6728ba"
+    },
+    "he_network_guard.py": {
+      "bytes": 13404,
+      "sha256": "a4ac36da9931659b737c4b24fff6017617348fb34babe607487ff4059a10f5c1"
+    },
+    "he_owned.py": {
+      "bytes": 6114,
+      "sha256": "7af596c27e15eb2d8d9f0f33c6ec7b2a52f71e2d59e067148996cf682a46fb1e"
+    },
+    "he_policy.py": {
+      "bytes": 4673,
+      "sha256": "5201b571c904e8b95743a05ad462f85a0e5e408e4ad6d1d0fc8f353003503c83"
+    },
+    "he_worker.py": {
+      "bytes": 7745,
+      "sha256": "979100e9c0f14113da8b79228fe34b19c206acf6fa418ce1b671dda01661e274"
+    },
+    "lock_evidence.py": {
+      "bytes": 5265,
+      "sha256": "583fa43426abdbde1c22388bb29c30279ce8389bc0362da1d63e66a13cc17671"
+    },
+    "main_quiescence.py": {
+      "bytes": 12864,
+      "sha256": "45af444dea25158cf59f16133679dd8f34a16edacca49a4d41466e2d2e44f0c0"
+    },
+    "network_evidence.py": {
+      "bytes": 7506,
+      "sha256": "6e706394d0bc706ffe6395a55898572600eade6b1545a13994468cf2992a829e"
+    },
+    "network_uapi/if.h": {
+      "bytes": 10925,
+      "sha256": "ecbf706671e421c9c7441e02936da46073e3562017ec074890a6f9954ba65388"
+    },
+    "network_uapi/if_arp.h": {
+      "bytes": 6589,
+      "sha256": "bf253dab740065daf6283a0d0fdeedf3c07acaf03271d0c50a723e0fdd895429"
+    },
+    "network_uapi/ipv6_route.h": {
+      "bytes": 1908,
+      "sha256": "e36a62c4bc6bcd8f480dae1f73342ddde8a151157f2ec1e8c20d55001db92690"
+    },
+    "network_uapi/route.h": {
+      "bytes": 2332,
+      "sha256": "c6130e51d9582f54f01f1beee7ea6248b680b19454e4f8b29a93da77176db519"
+    },
+    "owner_common.py": {
+      "bytes": 4006,
+      "sha256": "9be4bac9e4e5a7187f163ec3e9d794b498f543752ae26827588a3e50d6cdc49f"
+    },
+    "owner_namespace.py": {
+      "bytes": 9104,
+      "sha256": "3b700d07462dd05f0626fcbf6fae123771058c2342aa8545854a04a13e01374d"
+    },
+    "preflight_contract.py": {
+      "bytes": 9434,
+      "sha256": "7cd96f9fafeafdb11c5a6d18323a46c9b81c4c0ad5a1db32791372aada88c313"
+    },
+    "preflight_evidence.py": {
+      "bytes": 12472,
+      "sha256": "60d22925f5177efde2392a474e0a38f404d424898e5580c8ed7c486c79e9cb1b"
+    },
+    "preflight_host.py": {
+      "bytes": 8408,
+      "sha256": "c3560555c9f992676283efe965dd08bec532ffcc97c0d5a51472b30bcfc47c99"
+    },
+    "prepare_preflight.py": {
+      "bytes": 5220,
+      "sha256": "e718718b1b84460c287b21742709f15ede5b8d47705ee12bcdb66d2c3edbc2e7"
+    },
+    "task_contract.py": {
+      "bytes": 14149,
+      "sha256": "0a25cd512d94b4b870930e59930150c45587c369e2d421a7d0c91781770de148"
+    },
+    "test_preflight_pure.py": {
+      "bytes": 7102,
+      "sha256": "0b0ceda4978941c272c48d67249ede75f21680d57d7d32c78e7234fa02de769e"
+    }
+  },
+  "full15525_decode_repeated": false,
+  "full_software_qualification_accepted": false,
+  "generated_code_executed": false,
+  "host_CPU": 166,
+  "inherited_whole_owner_MAIN_lock_observation_required": true,
+  "local_pure_tests": 11,
+  "model_ready": false,
+  "new_PATH": "/usr/local/python3.12.13/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+  "official_evaluator_and_executor_unchanged": true,
+  "only_ENV_delta": "PATH prefix",
+  "original_CPU12_owner_and_namespace_and_ACK_six_helpers_byteexact": true,
+  "performance_ready": false,
+  "phase_seconds": 3600,
+  "reserve_CPU_budget": 2,
+  "schema": "bole.HE-dependency-preflight-advisory/v1",
+  "status": "frozen prepared only; actual PATH-dependent real sandbox imports pending",
+  "summed_ancestor_CPU_budget": 7,
+  "task_score_produced": false,
+  "worker_guard_and_UAPI_byteexact_decoder3": true
+}

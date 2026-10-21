@@ -1,0 +1,132 @@
+{
+  "PREFLIGHT_INPUTS.json": {
+    "bytes": 9974,
+    "path": "/opt/host/vnf/austinov/bole-task-cpu-he-dependency-20261020T154710Z-v1/PREFLIGHT_INPUTS.json",
+    "sha256": "314087c46c79400f5317d9dc9f160ec591ba1c8ca64da36134c2bda14874a2d7"
+  },
+  "PREFLIGHT_STAGE.json": {
+    "bytes": 1407,
+    "path": "/opt/host/vnf/austinov/bole-task-cpu-he-dependency-20261020T154710Z-v1/PREFLIGHT_STAGE.json",
+    "sha256": "f02d012858ec4fbd9eb5ef9fc272e8b2138f019de16122baefe52685ea0b016a"
+  },
+  "HE_DEPENDENCY_V1_READBACK.json": {
+    "bytes": 1384,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/HE_DEPENDENCY_V1_READBACK.json",
+    "sha256": "2933bdef46e64c85049130677d7ca6c5c4439ce23639bc20ff1642e4638b0520"
+  },
+  "MAIN_CPU3_REGISTRY_HE_DEPENDENCY_V1.json": {
+    "bytes": 2489,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_CPU3_REGISTRY_HE_DEPENDENCY_V1.json",
+    "sha256": "41ab6c751316b2d9d7bd4aadf289ddb44166712ca72abdc2686752a81d67cd9f"
+  },
+  "MAIN_CPU_QUIESCENCE_POLICY_HE_DEPENDENCY_V1.json": {
+    "bytes": 22577,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_CPU_QUIESCENCE_POLICY_HE_DEPENDENCY_V1.json",
+    "sha256": "f1135e0d44d08ed962b73047f17229d3508334d4cf7d69993c8dafd0403ae28f"
+  },
+  "PRIVATE_NAMESPACE.json": {
+    "bytes": 2187,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/PRIVATE_NAMESPACE.json",
+    "sha256": "e25d8771e1b3c1b9528f7603bf2790a2d5209a45070a1e853b6e5cf0927be448"
+  },
+  "RESULT.json": {
+    "bytes": 102557,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/RESULT.json",
+    "sha256": "42a2365931b2cabc00e5bf4ce754515ccd570709be5213db4b4927399d42ab4f"
+  },
+  "he-dependency-preflight/ACK-PUBLICATION.json": {
+    "bytes": 802,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/ACK-PUBLICATION.json",
+    "sha256": "a9d45e1f52a5351c756a73c87c328ef8ba54913f079373cd81223b66170df459"
+  },
+  "he-dependency-preflight/CREATE.json": {
+    "bytes": 3209,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/CREATE.json",
+    "sha256": "db18d30628d5aab6941b926fb3550b4ca92434b1190b6b315d201132bdca185c"
+  },
+  "he-dependency-preflight/CREATE.stdout": {
+    "bytes": 65,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/CREATE.stdout",
+    "sha256": "2287490b4bade76b38db25a5726cd93e70b9522babb97e1b09757862e728c9c2"
+  },
+  "he-dependency-preflight/CREATE_ARGV.json": {
+    "bytes": 1494,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/CREATE_ARGV.json",
+    "sha256": "e97340da3fba2ae3c76c8a472359b7f3ecfa9aa3f3bf47a289aa584a71d2abcd"
+  },
+  "he-dependency-preflight/DOCKER-INSPECT.json": {
+    "bytes": 10748,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/DOCKER-INSPECT.json",
+    "sha256": "613315f9b4213bbffcbfd8d2f897257d70bdf09839a10966aad28fbea9f769e7"
+  },
+  "he-dependency-preflight/HE-NET-ACK.json": {
+    "bytes": 813,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/HE-NET-ACK.json",
+    "sha256": "7a132fe41bef9ba6141ed7c0021f690696e56d9ba1433c705a9d8d185fb313e3"
+  },
+  "he-dependency-preflight/HE-NET-ADMISSION.json": {
+    "bytes": 1348,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/HE-NET-ADMISSION.json",
+    "sha256": "dd443a867fc969ab2abf59675944f57ca6315a77ddd2ec0f3df73169b8783807"
+  },
+  "he-dependency-preflight/HE-NET-NAMESPACE.json": {
+    "bytes": 770,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/HE-NET-NAMESPACE.json",
+    "sha256": "fa51e3ce78a96804cf2363522af79255f5c1a9c35739be4aaf2542bc518ece90"
+  },
+  "he-dependency-preflight/HE-NET-READY.json": {
+    "bytes": 4919,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/HE-NET-READY.json",
+    "sha256": "407bddb58e15ae9f05a9b7490e8da4e92a4164d96a05fc4ac06fa1c096f89252"
+  },
+  "he-dependency-preflight/HE-dependency-logs-1792544330687294980.json": {
+    "bytes": 18713,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/HE-dependency-logs-1792544330687294980.json",
+    "sha256": "1a0226198674a6c42cbf39d7f380900510afd663d13f92561181328c32f86d31"
+  },
+  "he-dependency-preflight/HE-dependency-wait-1792544330661549240.json": {
+    "bytes": 422,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/HE-dependency-wait-1792544330661549240.json",
+    "sha256": "8720a2ed3d5ac18e962897f8a9d1a60c5230ce9d0a49efcef28dd28dd0e1783f"
+  },
+  "he-dependency-preflight/INHERITED_MAIN_LOCK.json": {
+    "bytes": 1293,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/INHERITED_MAIN_LOCK.json",
+    "sha256": "60fa816d2ea71e6b556be40f372af7c75ea30d5d86cb43587d939df8be90f32c"
+  },
+  "he-dependency-preflight/LOG.stdout": {
+    "bytes": 16334,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/LOG.stdout",
+    "sha256": "1f74fd418c814c858d28d1106efad72a644e78243c9fe441c67c6814d1e35dcd"
+  },
+  "he-dependency-preflight/MAIN-QUIESCENCE-1792544329035447200.json": {
+    "bytes": 124494,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/MAIN-QUIESCENCE-1792544329035447200.json",
+    "sha256": "27b0a25da1915da0a49a11b000e470e0eb9d932637f0f4a13e9540a25cee286e"
+  },
+  "he-dependency-preflight/OWNED.json": {
+    "bytes": 2614,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/OWNED.json",
+    "sha256": "8bccc3950bc273dbe85092605cb2785a79d470d965aaaf2c79e9d7042f079dac"
+  },
+  "he-dependency-preflight/PREFLIGHT.json": {
+    "bytes": 11370,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/PREFLIGHT.json",
+    "sha256": "e287224815d5ad52c5fb9ff38a284258af1b5b3709b1b801c2843d6a6ee58eb9"
+  },
+  "he-dependency-preflight/PRESTART_CPU_UPDATE.json": {
+    "bytes": 607,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/PRESTART_CPU_UPDATE.json",
+    "sha256": "6617eebd7facd8bc767c98df8d36ebba5056aab5490cdfc9111926ffa8a52692"
+  },
+  "he-dependency-preflight/PROCESS-BINDING.json": {
+    "bytes": 5938,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/PROCESS-BINDING.json",
+    "sha256": "849861e95c9c135288af8fd7e65fb46f0f2ca21d7fa52cda27f1141f5a137308"
+  },
+  "he-dependency-preflight/cleanup.json": {
+    "bytes": 1317,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-dependency-20261020T154710Z-v1/he-dependency-preflight/cleanup.json",
+    "sha256": "c8c4876f773447e9c54dfba28bf1f83965987d3c86f5c4205d87fd5a0c5a3832"
+  }
+}

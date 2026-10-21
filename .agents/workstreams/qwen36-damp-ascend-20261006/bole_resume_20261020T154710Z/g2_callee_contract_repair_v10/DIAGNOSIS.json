@@ -1,0 +1,41 @@
+{
+  "actual_elapsed_unchanged": 3.0129159099888057,
+  "actual_parent_snapshot_missing": true,
+  "callee_actual": "original025 model_contract",
+  "callee_need_exists": false,
+  "callee_require_exists": true,
+  "cleanup_spent": 0,
+  "error_type": "builtins.AttributeError",
+  "fault": {
+    "bytes": 2688,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v9-CPU/HOST-FIRST-FAULT.json",
+    "sha256": "f6ceb2cd4cbda009a3bd5c1387216e4e4028df4238db4293a08a919950df07ba"
+  },
+  "missing_original18_source_snapshot": "safety_host.py",
+  "parameter_shadowed_sourceio_C": true,
+  "parent_297_executed": false,
+  "parent_CID_created": false,
+  "parent_parser_or_cold_or_NPU_executed": false,
+  "phase": {
+    "ordinal": 4,
+    "phase": "cpu-preflight",
+    "step": "create-start-inspect"
+  },
+  "primary": "AttributeError(\"module 'model_contract' has no attribute 'need'\")",
+  "repair": "rename actual025 parameter c; keep c.obj and unshadowed sourceio C.need; exact original source-only safety snapshot",
+  "result": {
+    "bytes": 849855,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v9-CPU/RESULT.json",
+    "sha256": "d4429c7642c40fa8e28b671e3e6d92bb2383cbd29baf110bdd7d37b142896e3c"
+  },
+  "runtime_clock_candidate_math_resources_changed": false,
+  "schema": "bole.actual-v9-callee-fault-and-control-snapshot-cause/v10",
+  "secondary": [],
+  "source": {
+    "bytes": 682545,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v9/SOURCE_BOUND.json",
+    "sha256": "7dafb83330946b4690824d188f688db8f445270e3c1f86d119c0728e269fef1f"
+  },
+  "source_map_entries": 2605,
+  "source_nonempty_equal": true
+}

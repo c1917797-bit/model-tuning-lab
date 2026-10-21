@@ -1,0 +1,26 @@
+{
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-numdiag-v1/RESULT.json",
+    "bytes": 305436,
+    "sha256": "32b78dd8fd12c8beeb63faa84a6c9ce86976d8042b203548f58e2a36dc9d498d"
+  },
+  "diagnostic": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-numdiag-v1/cpu-consumer/NUMERIC-DIAGNOSTIC.json",
+    "bytes": 3975,
+    "sha256": "884e07d156e4df76280da66b46f2b9e8ad7058e03e66895f5509f629c8bad7e4"
+  },
+  "systemd_terminal": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_NUMERIC_DIAGNOSTIC_V1_SYSTEMD_TERMINAL.json",
+    "bytes": 582,
+    "sha256": "ca9ba17fdcc96ce678c121be0cc7b447e7fbe80372b86df66020650a4b023adc"
+  },
+  "primary": null,
+  "secondary": [],
+  "sources_equal_count": 874,
+  "frame_count": 128,
+  "failed_frames": 16,
+  "violating_coordinates": 32,
+  "native_AR_numeric_pass": false,
+  "schema": "bole.primary-readback-audit/v1",
+  "formal_success": false
+}

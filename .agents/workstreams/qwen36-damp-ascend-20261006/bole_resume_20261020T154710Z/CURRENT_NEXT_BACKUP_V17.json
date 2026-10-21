@@ -1,0 +1,36 @@
+{
+  "schema": "bole.current-next-backup/v17",
+  "timestamp_epoch": 1792547921.4438877,
+  "source_audits": {
+    "NATIVE_AR_NUMERIC_DIAGNOSTIC_V1_ACTUAL_AUDIT.json": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_NUMERIC_DIAGNOSTIC_V1_ACTUAL_AUDIT.json",
+      "bytes": 998,
+      "sha256": "ce8dc61b2edb557d1cbbccc90733101bfd3d69493b56d33fb8baee49fea1f90d"
+    },
+    "TASK_CPU_V14_SUCCESS_AUDIT.json": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/TASK_CPU_V14_SUCCESS_AUDIT.json",
+      "bytes": 1111,
+      "sha256": "a10577a8c4a4e56d08c3cc5d93e185ffd0ad650356004b4240c5884096b3f267"
+    },
+    "G2_V10_CPU_TIMEOUT_AUDIT.json": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V10_CPU_TIMEOUT_AUDIT.json",
+      "bytes": 1162,
+      "sha256": "8884b6d209f01ac57f66f2217736c27bad247b55721cefff47a0e0661865ecb2"
+    }
+  },
+  "active_unit": "bole-native-ar-fsum-20261020t154710z-v1.service",
+  "fsum_inputs": {
+    "path": "/opt/host/vnf/austinov/bole-native-ar-fsum-control-v1/INPUTS.json",
+    "bytes": 7784,
+    "sha256": "8cc92215f51a32ba948a30c66e37fcb1af1f0d2de6cd0bb19df01426a2654619"
+  },
+  "fsum_diagnostic_pending": true,
+  "G2_v11": "local source preparation pending",
+  "HTTP_v3": "frozen local software packet; no HTTP or model execution",
+  "G3": "v7 source preparation only; actual valid G2 model predecessor still missing",
+  "GDN": "v2 late-entry clock discovered before execution; v3 preparation pending",
+  "formal_success": false,
+  "cutoff_unchanged": 1792597630,
+  "last_confirmed_pushed_commit": "3fac6a64a166ea814781627b57b2c25b096e937f",
+  "push_blocker": "HTTPS missing credential; SSH22 timeout; no identical retry"
+}

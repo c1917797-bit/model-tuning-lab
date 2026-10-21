@@ -1,0 +1,56 @@
+{
+  "constructor": "transformers.tokenization_utils_tokenizers.TokenizersBackend.from_pretrained",
+  "formal_task_accuracy_accepted": false,
+  "input_reencoding_permitted": false,
+  "kwargs": {
+    "local_files_only": true,
+    "trust_remote_code": false
+  },
+  "model_ready": false,
+  "native_sources": {
+    "configuration_auto.py": {
+      "bytes": 63381,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/transformers/models/auto/configuration_auto.py",
+      "sha256": "6342126faf6d43b4043dbb1bbfdde226e0273b181c8035c2a3ba32965187f281"
+    },
+    "configuration_utils.py": {
+      "bytes": 63302,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/transformers/configuration_utils.py",
+      "sha256": "10e733922abf79922234151ed77308df1d8f2c5cce10a158bd1e47a7ea9178d9"
+    },
+    "generic.py": {
+      "bytes": 35163,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/transformers/utils/generic.py",
+      "sha256": "dbc2e532b5a9f098ee5df9d1f10909551b1c8b42e06968df4f67039cf4948a3e"
+    },
+    "import_utils.py": {
+      "bytes": 114161,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/transformers/utils/import_utils.py",
+      "sha256": "c05e6063736902b07d0b48e4a326ae7985b75430bacbee48014c954fd4e6cb05"
+    },
+    "tokenization_auto.py": {
+      "bytes": 45679,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/transformers/models/auto/tokenization_auto.py",
+      "sha256": "bbfe4c497c7fa006fb50321adff83e07770a661b676401dc009da6b1d6757539"
+    },
+    "tokenization_utils_base.py": {
+      "bytes": 174898,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/transformers/tokenization_utils_base.py",
+      "sha256": "6c60e0607c9b298a891293d02af4527ea2444341a644bd218f5d4fc6ccc615b8"
+    },
+    "tokenization_utils_tokenizers.py": {
+      "bytes": 65550,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/transformers/tokenization_utils_tokenizers.py",
+      "sha256": "b76df59838488e19539bc50f2a8cf7c8f16c48ef96859fcc1236f5dfe467d29d"
+    }
+  },
+  "original_constructor": "transformers.AutoTokenizer.from_pretrained",
+  "original_decoder_sha256": "45cfb481c33e69dec562e8dd3b2089dba08ba4da1e651c9196c91138d4185f9e",
+  "original_package_manifest_sha256": "f687ad69fa0226fe72565e8ed356b65244a475c570259c865e6b3cf68fcda851",
+  "original_use_fast_option_discarded_by_V5_AutoTokenizer": true,
+  "same_original_tokenizer_assets_required": true,
+  "schema": "bole.prospective-tokenizer-construction/v2",
+  "scorer_rule_changes_permitted": false,
+  "software_qualified": false,
+  "status": "prepared only; actual public factory and full provenance qualification pending"
+}

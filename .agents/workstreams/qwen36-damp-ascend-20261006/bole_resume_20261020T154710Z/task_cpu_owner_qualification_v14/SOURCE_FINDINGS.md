@@ -1,0 +1,7 @@
+# Confirmed readset omission and bounded repair
+
+Source-owned E.consume performs a post-cleanup C.obj(release.after_inspect). Probe pre-create source maps cannot contain that newly created receipt. The supplied actual26 inventory included cleanup.json but not its after_inspect; CPU13 similarly omitted the normalized17500B Ref from its643 before-map/mounts. Actual complete primary copies establish the exact path/SHA/old probe CID/exited Pid0/Exit0. The CPU13 nested reader error text had been discarded; its exact missing-file traceback was not captured.
+
+New explicit fixed postrun closure covers all direct E.consume file reads and refuses unknown summary vocabulary. There is no recursive arbitrary Ref/path traversal or directory mount. Exact Ref2 to actual Ref3 normalization adds the missing after_inspect to the host readset and individual guest RO mounts; original independent reader recalculation remains mandatory. Actual nested stdout/stderr are preserved within finite caps on future failure. Six pure controls test closure, wrong Ref/summary/CID/live state, complete nested errors, badJSON/timeout and oversize.
+
+The actual import-only prerequisite remains historical module-import proof, never official controls or full qualification. All original15525/43+20/HE controls/independent third stage and every resource/authority/MAIN policy guard remain unchanged. CPU14 itself has no actual result yet.

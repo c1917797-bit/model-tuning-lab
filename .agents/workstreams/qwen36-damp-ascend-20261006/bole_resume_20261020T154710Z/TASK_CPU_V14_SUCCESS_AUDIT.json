@@ -1,0 +1,28 @@
+{
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/RESULT.json",
+    "bytes": 244257,
+    "sha256": "8403c75bdcdb74df6801b06c2e552fe0eec70a9053ddb663432fe4323be92dc5"
+  },
+  "inputs": {
+    "path": "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v14/OWNER_INPUTS.json",
+    "bytes": 63022,
+    "sha256": "91d364a8729efde66b9c6fa062c10fdc5f17669ab3a49639af03dc21297be394"
+  },
+  "systemd_terminal": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/TASK_CPU_V14_SYSTEMD_TERMINAL.json",
+    "bytes": 558,
+    "sha256": "a2b9982431360643fc8b3065db8a4ffe4aefe4c653868f444a075f5bd45af1ad"
+  },
+  "source_image_CPU_owner_software_controls_verified": true,
+  "source_input_equal_count": 647,
+  "private_namespace_restored_by_identity": true,
+  "primary": null,
+  "secondary": [],
+  "elapsed_seconds": 225.57451291999314,
+  "cleanup_spent": 34.46499808994122,
+  "task_score_produced": false,
+  "model_ready": false,
+  "schema": "bole.primary-readback-audit/v1",
+  "formal_success": false
+}

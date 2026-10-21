@@ -1,0 +1,9 @@
+# Full CPU13 evidence
+
+Source/input schema bole.task-finite-CPU-owner-inputs/v5; actual owner bole.actual-finite-task-CPU-owner/v5; profile full-v012-public-backend-network-isolation-python312/v4. The source records exact decoder4 manifest/source, original authority/rendered inputs/tokenizer native copies, G1/public-factory/HEdiag3 prerequisites, new HE_dependency_owner_ref and HE_dependency_independent_ref, complete current MAIN policy/CPU3 registry and helpers. New dependency metadata and frozen actual26 records enter the full before-after/mount closure.
+
+Summary keeps inherited_lock_ref, CPU, CPU_release, HE_binding, HE_network_admission, HE_owner_ref, HE_CPU145_prestart_update, HE_release, independent, independent_component_ref, independent_release. HE controls' saved owner evidence remains bole.actual-HE-sandbox-owner-evidence/v2 and original worker result/v2. ACK source/fullCID/PID/start/netns/root-pinned mount identities and atomic publication remain mandatory; after-evaluator network state remains independently checked. Runtime identity additionally matches the actual preflight-backed complete Python launcher and real NumPy/tqdm sources/version.
+
+All15525 rows and all original43+20 controls must be executed anew. HE rows must be exact correct/wrong/timeout with pass bits True/False/False and timeout text timed out. Independent third Devices[] phase reopens complete frozen inputs/source/gold/template and raw HE/ACK. A successful import preflight alone never supplies HE rows or full software qualification.
+
+Final success is published only after all owned controls stop/retain, nonempty full source maps compare equal, secondary[] and original module/global identities restore. All task-score/model/NPU/performance/formal flags remain false. Actual fullCPU13 RESULT is pending; this package provides no qualified owner Ref.

@@ -1,0 +1,191 @@
+{
+  "CPU_source_test_snapshot_name": "safety_host.py",
+  "CPU_source_test_snapshot_original": {
+    "bytes": 22338,
+    "path": "/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/safety_host.py",
+    "sha256": "20bda52a1c3fbc75db47104cbd4759faf91da1f39032d4730160983f7b9c0c30"
+  },
+  "Git": false,
+  "NPU": false,
+  "actual_failed_v9_CPU_owner": {
+    "bytes": 849855,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v9-CPU/RESULT.json",
+    "sha256": "d4429c7642c40fa8e28b671e3e6d92bb2383cbd29baf110bdd7d37b142896e3c"
+  },
+  "actual_failed_v9_source": {
+    "bytes": 682545,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v9/SOURCE_BOUND.json",
+    "sha256": "7dafb83330946b4690824d188f688db8f445270e3c1f86d119c0728e269fef1f"
+  },
+  "actual_first_fault": {
+    "bytes": 2688,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v9-CPU/HOST-FIRST-FAULT.json",
+    "sha256": "f6ceb2cd4cbda009a3bd5c1387216e4e4028df4238db4293a08a919950df07ba"
+  },
+  "actual_no_resource_integration_uses_whole_original_model_contract": true,
+  "actual_owner_original025_Refs_unchanged": true,
+  "actual_v10_cold_handoff_executed": false,
+  "actual_v10_model_executed": false,
+  "actual_v10_parser_executed": false,
+  "actual_v10_sameimage_executed": false,
+  "actual_v10_source_assembled": false,
+  "current_source_cases": 25,
+  "current_source_v10_new_real_callee_cases": 7,
+  "current_source_v10_original_v9_byteequal_cases": 18,
+  "default_enabled": false,
+  "fixed_cutoff": 1792597630,
+  "formal_success": false,
+  "frozen": true,
+  "host_access": false,
+  "local_validation": {
+    "bytes": 9123,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/LOCAL_VALIDATION.json",
+    "sha256": "1c5794e61a95c20f291a654d4809a6432e5287740d565ae6c8f9bf5a4197eb21"
+  },
+  "model_ready": false,
+  "new_CPU_output": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU",
+  "new_model_output": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10",
+  "new_source_root": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v10",
+  "no_additional_parent_alias": true,
+  "no_need_added_to_original025": true,
+  "numerical_qualification": false,
+  "original297_not_claimed_inplace_against_v10": true,
+  "original_main_first_clock_and_candidate_byteequal": true,
+  "original_math_full128_argv_atomic_metadata_and_resources_unchanged": true,
+  "original_per_rank_metadata_cap_bytes": 67108864,
+  "original_per_rank_raw_cap_bytes": 1073741824,
+  "original_phase_seconds": 3600,
+  "original_v8_fresh_historical_cases": 279,
+  "original_v9_test_files_byteexact": true,
+  "overlay_files": {
+    "audit_source_v10.py": {
+      "bytes": 4699,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/audit_source_v10.py",
+      "sha256": "f324c9ea4ac6be733790f90ed3c1b083ebd4ba2c6070242c07523193cab6ac7a"
+    },
+    "g2_callee_proof.py": {
+      "bytes": 3352,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/g2_callee_proof.py",
+      "sha256": "9e65e7b0e49f319185caab69d3c160e1cc57526eca37dadffca2a691a251af18"
+    },
+    "g2_cold_parent_output.py": {
+      "bytes": 7488,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/g2_cold_parent_output.py",
+      "sha256": "32471ec33208d1a30f58098a60c129691574a24898adf9f6825ae1d224e34717"
+    },
+    "prepare_g2_callee_v10.py": {
+      "bytes": 14780,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/prepare_g2_callee_v10.py",
+      "sha256": "2ec1ef4bd885cfe22c0e9e101b177bb0ddd4677486cd06c612cdb40689e3c25d"
+    },
+    "test_g2_cold_callee_v10.py": {
+      "bytes": 7613,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/test_g2_cold_callee_v10.py",
+      "sha256": "bcc855e8c2e5425ea308663464b5bee7f3bacce171d6cea231748fc0005456a4"
+    }
+  },
+  "prospective_sameimage_cases": 304,
+  "schema": "bole.G2-actual025-callee-contract-repair-proposal/v10",
+  "shared_cleanup_seconds": 180,
+  "snapshot_imported_as_controller": false,
+  "software_envelope_actual_source_is_v10": true,
+  "software_envelope_schema": "bole.G2-cold-clock-combined-software-gate/v9",
+  "support_inventory": {
+    "CALLEE_AUDIT.md": {
+      "bytes": 2636,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/CALLEE_AUDIT.md",
+      "sha256": "685f6539c6ca0c23d961087d594acf0ff0ca1d1ba7c8025455bc6477ea5fb52f"
+    },
+    "DIAGNOSIS.json": {
+      "bytes": 1684,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/DIAGNOSIS.json",
+      "sha256": "3b45bbc6ec581fbe526f521bea557e4693cad8a2909584220a482bf8c6f5365a"
+    },
+    "LOCAL_VALIDATION.json": {
+      "bytes": 9123,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/LOCAL_VALIDATION.json",
+      "sha256": "1c5794e61a95c20f291a654d4809a6432e5287740d565ae6c8f9bf5a4197eb21"
+    },
+    "README.md": {
+      "bytes": 6657,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/README.md",
+      "sha256": "63021d95dc0d7e04acf3e312f0f65b51b838a2ec2d2113cbed9f58707dec0d1a"
+    },
+    "audit_source_v9.py": {
+      "bytes": 4195,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/audit_source_v9.py",
+      "sha256": "82c582abbb3187b96828ba76a070cd4bccc5e1b69373924913a74e1b80287124"
+    },
+    "contract090.py": {
+      "bytes": 4119,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/contract090.py",
+      "sha256": "6b9bbeadb143bbe15cb5bf3780f807b1018c122efd8d63b8dfd29adda1c7029a"
+    },
+    "g1_contract.py": {
+      "bytes": 497,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/g1_contract.py",
+      "sha256": "b87fba5b897dd3cdc33d566b648760b11cf6b02eb58551d1f548483cf4c941d7"
+    },
+    "g2_cold_clock.py": {
+      "bytes": 3942,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/g2_cold_clock.py",
+      "sha256": "16d34037defad4901c2b9904995f074d6ed80e615591ddc031cd8dc085f2177f"
+    },
+    "g2_contract.py": {
+      "bytes": 1636,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/g2_contract.py",
+      "sha256": "4c64e6417ffc652d62504ddd981c4e1c16028d6567299441543dbc8129c76093"
+    },
+    "g2_handoff.py": {
+      "bytes": 14186,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/g2_handoff.py",
+      "sha256": "6b9e8ed833896717b7d939b25f6fcb38361d0ea74879de6baecc7ff994d66bb9"
+    },
+    "g2_handoff_cold.py": {
+      "bytes": 3692,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/g2_handoff_cold.py",
+      "sha256": "43fe83203ddbe1394fdead9af54241ed61abad08107f4034f5ee12f3d14c52fb"
+    },
+    "host_service.py": {
+      "bytes": 16118,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/host_service.py",
+      "sha256": "33accbad7d3928a142da8e5c7c4f986c68afeee429a49bed29155d7e4c2878e1"
+    },
+    "owned_create.py": {
+      "bytes": 3497,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/owned_create.py",
+      "sha256": "88ad331031bba1519bde7d07041a2fca3e8fcaf5bbd618884540fb3fc8f5f290"
+    },
+    "owned_substrate.py": {
+      "bytes": 3579,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/owned_substrate.py",
+      "sha256": "17ca8d7e4992c95af629edd29b8af428a7ab1d66a7b8e7bcff1391d173a70b9d"
+    },
+    "prepare_g2_cold_v9.py": {
+      "bytes": 18579,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/prepare_g2_cold_v9.py",
+      "sha256": "95aa625e849d8e34f535292994a8ae1515bc005fc9260429b7200564f37fbef1"
+    },
+    "service_entry.py": {
+      "bytes": 2247,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/service_entry.py",
+      "sha256": "30aa9f2021ab80270de896070eacd042e333f1644b42a3358955d4d97b4f2b43"
+    },
+    "sourceio.py": {
+      "bytes": 1038,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/sourceio.py",
+      "sha256": "0bd97743aa2ac06ea55488a54f5045fd08cff2fdfa4869acc9b1414d2965a0cd"
+    },
+    "test_g2_cold_builder.py": {
+      "bytes": 6318,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/test_g2_cold_builder.py",
+      "sha256": "127c0097deece88b70642fd8bb3c3022ca0482ebccc948386e9f20ec4cbc79df"
+    },
+    "test_g2_cold_clock.py": {
+      "bytes": 9562,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_callee_contract_repair_v10/test_g2_cold_clock.py",
+      "sha256": "27c01e6dc3e20904cca3b67cb7b7ce98f78e14b165d1a3d1aa0f0095ee71a23d"
+    }
+  },
+  "whole_helper_inverse_required": true
+}

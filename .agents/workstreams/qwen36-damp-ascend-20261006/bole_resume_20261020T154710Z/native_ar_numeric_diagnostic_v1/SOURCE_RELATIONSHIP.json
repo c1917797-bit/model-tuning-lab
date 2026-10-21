@@ -1,0 +1,52 @@
+{
+  "actual_frozen_mathematical_consumer": {
+    "bytes": 32513,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/derived_math_consumer.py",
+    "sha256": "2ffb602f31fc88e26c8529e28ae6e2f759a2dedc38caa72efa9d93f0c968a732"
+  },
+  "all128_original_function_calls_retained": true,
+  "four_stage_models": [
+    "final_output_RNE_only",
+    "scores_BF16_only",
+    "probabilities_BF16_only",
+    "scores_and_probabilities_BF16"
+  ],
+  "installed_projection": "Exact original numerical-v4 declared installedRef3\u2192same-SHA hostcopy map only; unknown ordinary references fail.",
+  "literal_reference_expressions_AST_equal": true,
+  "mathematical_consumer_modified": false,
+  "original_G1_full_math_not_reexecuted": true,
+  "original_saved_source_preflight_reused": true,
+  "pointwise_bound_unchanged": true,
+  "qualification_flags_always_false": true,
+  "schema": "bole.native-ar-numeric-diagnostic-source-relationship/v1",
+  "stage_models_are_qualified_oracles": false,
+  "stage_models_preregistered_before_actual_execution": true,
+  "unchanged_original_helpers": {
+    "ar_owner_common.py": {
+      "copied": {
+        "bytes": 19055,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/ar_owner_common.py",
+        "sha256": "5d0b9034706b9a942a4d7dd10870139959b22dfaab2cebbdddf25ba962e456a4"
+      },
+      "original": {
+        "bytes": 19055,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v4/ar_owner_common.py",
+        "sha256": "5d0b9034706b9a942a4d7dd10870139959b22dfaab2cebbdddf25ba962e456a4"
+      },
+      "whole_bytes_equal": true
+    },
+    "ar_saved_namespace.py": {
+      "copied": {
+        "bytes": 4109,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_numeric_diagnostic_v1/ar_saved_namespace.py",
+        "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+      },
+      "original": {
+        "bytes": 4109,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v4/ar_saved_namespace.py",
+        "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+      },
+      "whole_bytes_equal": true
+    }
+  }
+}

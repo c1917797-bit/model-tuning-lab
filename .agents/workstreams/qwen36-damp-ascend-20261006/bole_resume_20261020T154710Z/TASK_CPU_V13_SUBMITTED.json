@@ -1,0 +1,51 @@
+{
+  "schema": "bole.finite-fullCPU-unit-submission/v4",
+  "unit": "bole-task-cpu-20261020t154710z-v13.service",
+  "argv": [
+    "/usr/bin/systemd-run",
+    "--quiet",
+    "--unit=bole-task-cpu-20261020t154710z-v13.service",
+    "--property=Type=exec",
+    "--property=RemainAfterExit=yes",
+    "--property=Restart=no",
+    "--property=RuntimeMaxSec=3900",
+    "--property=TimeoutStopSec=180",
+    "--property=KillSignal=SIGTERM",
+    "--property=CPUAffinity=166",
+    "--property=MemoryMax=512M",
+    "--property=WorkingDirectory=/opt/host/vnf/austinov/model-tuning-lab",
+    "--property=StandardOutput=append:/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/task-cpu-v13.stdout",
+    "--property=StandardError=append:/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/task-cpu-v13.stderr",
+    "/usr/bin/flock",
+    "--nonblock",
+    "--no-fork",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock",
+    "/usr/bin/env",
+    "BOLE_TASK_CPU_MAIN_ENABLE=1",
+    "DENSE090_EXTERNAL_OUTPUT_ENABLE=1",
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v13/cpu_host.py",
+    "--execute",
+    "--inputs-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v13/OWNER_INPUTS.json\", \"bytes\": 63020, \"sha256\": \"f31b0e29e5098db2c3b291b7f7393c838cddf8a5080f60fd9b9ed1abf04ce407\"}"
+  ],
+  "inputs_ref": {
+    "path": "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v13/OWNER_INPUTS.json",
+    "bytes": 63020,
+    "sha256": "f31b0e29e5098db2c3b291b7f7393c838cddf8a5080f60fd9b9ed1abf04ce407"
+  },
+  "controller": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/submit_task_cpu_v13.py",
+    "bytes": 3139,
+    "sha256": "45d1ed2577a780a2b56bc8fe1d170d38705000e32a00f9abe8df4cc3604744ab"
+  },
+  "submit_exit": 0,
+  "stdout": "",
+  "stderr": "",
+  "phase_seconds": 3600,
+  "cleanup_seconds": 180,
+  "software_qualification_pending": true,
+  "formal_success": false
+}

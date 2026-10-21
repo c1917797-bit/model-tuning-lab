@@ -1,0 +1,178 @@
+{
+  "NPU": false,
+  "actual_CPU_Tensor_execution": false,
+  "actual_host_readset_audited": false,
+  "actual_post_finally_unit": {
+    "bytes": 582,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_NUMERIC_DIAGNOSTIC_V1_SYSTEMD_TERMINAL.json",
+    "sha256": "ca9ba17fdcc96ce678c121be0cc7b447e7fbe80372b86df66020650a4b023adc"
+  },
+  "actual_successful_NUMdiag": {
+    "bytes": 305436,
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-numdiag-v1/RESULT.json",
+    "sha256": "32b78dd8fd12c8beeb63faa84a6c9ce86976d8042b203548f58e2a36dc9d498d"
+  },
+  "all128_original_frames_retained": true,
+  "cold_tensor_import_tripwires": 6,
+  "files": {
+    "ACTUAL_NUMDIAG_ANALYSIS.json": {
+      "bytes": 348396,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/ACTUAL_NUMDIAG_ANALYSIS.json",
+      "sha256": "b70dbb7422e365753d3f2f8624e6b77f26809cf971b660351819ec36d96fa528"
+    },
+    "ACTUAL_NUMDIAG_REFS.json": {
+      "bytes": 5082,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/ACTUAL_NUMDIAG_REFS.json",
+      "sha256": "9c450ca491c782f6acccd62e5b3430a4e910acc1edbfbda5e7310969c2b23f38"
+    },
+    "ACTUAL_NUMDIAG_UNIT_REF.json": {
+      "bytes": 283,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/ACTUAL_NUMDIAG_UNIT_REF.json",
+      "sha256": "e4e8ad5d7bee8d0938cf73d1dd57926b42d93c4e62cadcba393f400c0d7321e3"
+    },
+    "INSTALLED_PROVENANCE_REQUEST.md": {
+      "bytes": 6430,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/INSTALLED_PROVENANCE_REQUEST.md",
+      "sha256": "725b8901815ac8f72601e006a8739f2414c34bf10102b64520b99617e8ff9fa6"
+    },
+    "LOCAL_CHECKS.json": {
+      "bytes": 1581,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/LOCAL_CHECKS.json",
+      "sha256": "e6fc275d791be87ec9e122f57015391a668a46ab6b9847351c50fc0a2bad0b66"
+    },
+    "README.md": {
+      "bytes": 7252,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/README.md",
+      "sha256": "281d3155f448bba1cd5fc802ada96eebbc18559ec871f024d7a5a693b84c7945"
+    },
+    "SOURCE_RELATIONSHIP.json": {
+      "bytes": 2723,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/SOURCE_RELATIONSHIP.json",
+      "sha256": "6f2354a0e5a0488722738472ad1d65b9e8a358269d1bd11dc54d014a91e685ec"
+    },
+    "ar_owner_common.py": {
+      "bytes": 19055,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/ar_owner_common.py",
+      "sha256": "5d0b9034706b9a942a4d7dd10870139959b22dfaab2cebbdddf25ba962e456a4"
+    },
+    "ar_saved_namespace.py": {
+      "bytes": 4109,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/ar_saved_namespace.py",
+      "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+    },
+    "fsum_common.py": {
+      "bytes": 7125,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/fsum_common.py",
+      "sha256": "29dc17e3e4570fd9bc94743663e74d071a9f44ac7c9199e65e1473e1dccb9c5d"
+    },
+    "fsum_cpu_owner.py": {
+      "bytes": 8467,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/fsum_cpu_owner.py",
+      "sha256": "385e7101cca46dd9c343fec966d0cf5a6ee5e39a879169ae69e9243f3a07e4a4"
+    },
+    "fsum_oracle.py": {
+      "bytes": 11911,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/fsum_oracle.py",
+      "sha256": "1169b00d48a12d46055ce5b1a3534a5120dd22a20119f77b3ed4431077857904"
+    },
+    "prepare_fsum_owner.py": {
+      "bytes": 2362,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/prepare_fsum_owner.py",
+      "sha256": "9b849ddd7d71b07bb621d656a53809920c1b6972d676e2c7b1e3248b4236a970"
+    },
+    "test_fsum_pure.py": {
+      "bytes": 12257,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/test_fsum_pure.py",
+      "sha256": "5bf59e2fc0b1b8db778297887f99dd9047c4d43b3f99cf0f3514fef3ac983e08"
+    }
+  },
+  "flat_transfer": [
+    {
+      "bytes": 348396,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/ACTUAL_NUMDIAG_ANALYSIS.json",
+      "sha256": "b70dbb7422e365753d3f2f8624e6b77f26809cf971b660351819ec36d96fa528"
+    },
+    {
+      "bytes": 5082,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/ACTUAL_NUMDIAG_REFS.json",
+      "sha256": "9c450ca491c782f6acccd62e5b3430a4e910acc1edbfbda5e7310969c2b23f38"
+    },
+    {
+      "bytes": 283,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/ACTUAL_NUMDIAG_UNIT_REF.json",
+      "sha256": "e4e8ad5d7bee8d0938cf73d1dd57926b42d93c4e62cadcba393f400c0d7321e3"
+    },
+    {
+      "bytes": 6430,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/INSTALLED_PROVENANCE_REQUEST.md",
+      "sha256": "725b8901815ac8f72601e006a8739f2414c34bf10102b64520b99617e8ff9fa6"
+    },
+    {
+      "bytes": 1581,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/LOCAL_CHECKS.json",
+      "sha256": "e6fc275d791be87ec9e122f57015391a668a46ab6b9847351c50fc0a2bad0b66"
+    },
+    {
+      "bytes": 7252,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/README.md",
+      "sha256": "281d3155f448bba1cd5fc802ada96eebbc18559ec871f024d7a5a693b84c7945"
+    },
+    {
+      "bytes": 2723,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/SOURCE_RELATIONSHIP.json",
+      "sha256": "6f2354a0e5a0488722738472ad1d65b9e8a358269d1bd11dc54d014a91e685ec"
+    },
+    {
+      "bytes": 19055,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/ar_owner_common.py",
+      "sha256": "5d0b9034706b9a942a4d7dd10870139959b22dfaab2cebbdddf25ba962e456a4"
+    },
+    {
+      "bytes": 4109,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/ar_saved_namespace.py",
+      "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+    },
+    {
+      "bytes": 7125,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/fsum_common.py",
+      "sha256": "29dc17e3e4570fd9bc94743663e74d071a9f44ac7c9199e65e1473e1dccb9c5d"
+    },
+    {
+      "bytes": 8467,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/fsum_cpu_owner.py",
+      "sha256": "385e7101cca46dd9c343fec966d0cf5a6ee5e39a879169ae69e9243f3a07e4a4"
+    },
+    {
+      "bytes": 11911,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/fsum_oracle.py",
+      "sha256": "1169b00d48a12d46055ce5b1a3534a5120dd22a20119f77b3ed4431077857904"
+    },
+    {
+      "bytes": 2362,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/prepare_fsum_owner.py",
+      "sha256": "9b849ddd7d71b07bb621d656a53809920c1b6972d676e2c7b1e3248b4236a970"
+    },
+    {
+      "bytes": 12257,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fsum_oracle_v1/test_fsum_pure.py",
+      "sha256": "5bf59e2fc0b1b8db778297887f99dd9047c4d43b3f99cf0f3514fef3ac983e08"
+    }
+  ],
+  "formal_success": false,
+  "pointwise_bound_changed": false,
+  "qualification_flags_false": true,
+  "resources_admitted": false,
+  "runtime_files": [
+    "ar_owner_common.py",
+    "ar_saved_namespace.py",
+    "fsum_common.py",
+    "prepare_fsum_owner.py",
+    "fsum_cpu_owner.py",
+    "fsum_oracle.py",
+    "ACTUAL_NUMDIAG_REFS.json",
+    "ACTUAL_NUMDIAG_UNIT_REF.json"
+  ],
+  "schema": "bole.native-ar-fsum-advisory-manifest/v1",
+  "status": "frozen_prepared_only_unexecuted",
+  "stdlib_tests": 8
+}

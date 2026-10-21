@@ -1,0 +1,2195 @@
+{
+  "FP32_FP64_pass_bit_disagreements": 0,
+  "actual_all_worker_retirements_verified": true,
+  "actual_native_TP_greedy_verified": true,
+  "actual_numeric_pass": false,
+  "actual_refs": {
+    "EXACT_INSTALLED_HOST_MAPPING.json": {
+      "bytes": 39875,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/EXACT_INSTALLED_HOST_MAPPING.json",
+      "sha256": "a023d2cc102dd4fc80a22f2e7ffe44fcbaa6858f101d9f579c2b722a178770b6"
+    },
+    "FIRST-FAULT.json": {
+      "bytes": 1091,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/FIRST-FAULT.json",
+      "sha256": "15663f1d0f0e4313405d3448a1703457ab3cb58b074ed3ea1fe9c76e66263a45"
+    },
+    "INPUTS.json": {
+      "bytes": 15313,
+      "path": "/opt/host/vnf/austinov/bole-native-ar-saved-cpu-control-v4/INPUTS.json",
+      "sha256": "6cf2fcea6ae9cb25a57449c91931215851281e9a16b84a6f0b3555d707d7b95c"
+    },
+    "MAIN-LOCK.json": {
+      "bytes": 348,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/MAIN-LOCK.json",
+      "sha256": "1fbd383e2778e9d8e8c18f68828b5c5383ac3c003aed930d3c12ffe70af667b4"
+    },
+    "PRIVATE_NAMESPACE.json": {
+      "bytes": 1980,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/PRIVATE_NAMESPACE.json",
+      "sha256": "5ed12ee215bb01abae17763a159d99128438143409f49b925b5b44a0bc8d1320"
+    },
+    "RESULT.json": {
+      "bytes": 321017,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/RESULT.json",
+      "sha256": "fec25ac1327951f460a1b59875f83650b68066ba00ab1f1e53de6c1243bb4a21"
+    },
+    "cpu-consumer/ATTRIBUTION.json": {
+      "bytes": 7084,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/ATTRIBUTION.json",
+      "sha256": "ffec79adc40448a3526fa2e0482f6d150e19f04e12e3e02faef60aa35a77b3e4"
+    },
+    "cpu-consumer/BOLE-INDEPENDENT-GATE/ATTRIBUTION.json": {
+      "bytes": 12252,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/BOLE-INDEPENDENT-GATE/ATTRIBUTION.json",
+      "sha256": "8b9b39e2a00d8f322cdd4f60bb29151a758c9b57551fd1f76da17d08043a4312"
+    },
+    "cpu-consumer/GUEST_CPU.json": {
+      "bytes": 2140,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/GUEST_CPU.json",
+      "sha256": "ba230803dbdc4ce79270cbe17bc65916b4eda3b987bd7ae8f89eebc64c84f930"
+    },
+    "cpu-consumer/NATIVE-MASK-CONTROLS.json": {
+      "bytes": 1025,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/NATIVE-MASK-CONTROLS.json",
+      "sha256": "88ab6289346fd762209d21e04c276844f7a85a0c84ca2f5cd5b4f52b181fb125"
+    },
+    "cpu-consumer/OWNED.json": {
+      "bytes": 176124,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/OWNED.json",
+      "sha256": "35a15647a87f8c4fe30046479061ce6834433a858d2162d267ce4e9ff106b3a3"
+    },
+    "cpu-consumer/RANK-0.json": {
+      "bytes": 92135,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/RANK-0.json",
+      "sha256": "6f14a2732cc2e70cf0dc6d90e7cfc5644c27640117c0a24f774c09c19fd33d13"
+    },
+    "cpu-consumer/RANK-1.json": {
+      "bytes": 92131,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/RANK-1.json",
+      "sha256": "5004398dc44907d3b5c3daee43c71ac6eccbcf12c38b6454f7ceb784d02c2348"
+    },
+    "cpu-consumer/RANK-2.json": {
+      "bytes": 92133,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/RANK-2.json",
+      "sha256": "8851a6b2b4e936c6442bcaaf8a12309262b4be99678dbe56bc4e59f8d738e5db"
+    },
+    "cpu-consumer/RANK-3.json": {
+      "bytes": 92132,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/RANK-3.json",
+      "sha256": "66d689a91eca9676722f25ecf0b93db325197895412b05b2adc67dc9ec186083"
+    },
+    "cpu-consumer/SAVED-PAIR-INDEPENDENT-CHILD.json": {
+      "bytes": 1838,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/SAVED-PAIR-INDEPENDENT-CHILD.json",
+      "sha256": "029040b213fc137304fadf64405f5207328fe206e290edf44fd961c89067b3ad"
+    },
+    "cpu-consumer/SAVED-PAIR-INDEPENDENT.stderr": {
+      "bytes": 968,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/SAVED-PAIR-INDEPENDENT.stderr",
+      "sha256": "60ced596a7f3fef0d893822bdb77b6db4e802e29f579466c31fc1428f5dd520f"
+    },
+    "cpu-consumer/SAVED-SOURCE-PREFLIGHT-CHILD.json": {
+      "bytes": 1886,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/SAVED-SOURCE-PREFLIGHT-CHILD.json",
+      "sha256": "f0eb171e358db6bc9522ad318adfefa1adbb737255d226aaf0de03cded2d465a"
+    },
+    "cpu-consumer/SAVED-SOURCE-PREFLIGHT.json": {
+      "bytes": 40546,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/SAVED-SOURCE-PREFLIGHT.json",
+      "sha256": "8273f970098da4212675f89e3a6cd782822f4307f48247307351836415c24c2b"
+    },
+    "cpu-consumer/cleanup.json": {
+      "bytes": 2329,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/cleanup.json",
+      "sha256": "ae259bc96c65f59f92f0b0a53740e409e00562a573c06c05376482b92be580a0"
+    }
+  },
+  "actual_token_identity_pass": true,
+  "all128_prior_rows": [
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.004050731658935547,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.00405105577630982,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 3,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.004130959510803223,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.0041307072244682885,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 7,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.010185718536376953,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.010186681775655515,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 11,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.011588573455810547,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.011591062015026132,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 15,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.0039108991622924805,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.003910524903564916,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 19,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.007779121398925781,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.007778835313777321,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 23,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.0151519775390625,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.015150867358721953,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 27,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.012688159942626953,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.012690784386812481,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 31,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.007665872573852539,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.0076636238479981245,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 35,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.00647735595703125,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.006477791896598362,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 39,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.02725982666015625,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.0272643531018808,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 43,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.008465051651000977,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.00846485425691279,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 47,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.00727081298828125,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.007271494341611451,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 51,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.012989521026611328,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.012988398806541568,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 55,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.029473304748535156,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.029473231842549907,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 59,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.07434463500976562,
+          "pointwise_pass": false
+        },
+        "FP64": {
+          "peak_abs": 0.07435807540900896,
+          "pointwise_pass": false
+        }
+      },
+      "generation": 1,
+      "layer": 63,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.00712132453918457,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.007121793836205814,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 3,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.004794120788574219,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.004793987774301733,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 7,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.014816761016845703,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.014821217307932955,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 11,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.009960651397705078,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.00995848408989719,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 15,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.004295229911804199,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.004295466279585769,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 19,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.006281614303588867,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.006281264309837553,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 23,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.015934467315673828,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.015934260850769988,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 27,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.011250972747802734,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.011251146398820744,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 31,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.0078029632568359375,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.0078028528013391885,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 35,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.007833242416381836,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.007834500243994125,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 39,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.014393806457519531,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.014394893522937657,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 43,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.028699874877929688,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.02870608131467911,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 47,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.008038759231567383,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.008039045078607199,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 51,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.015935420989990234,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.015933262511656388,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 55,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.030832290649414062,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.0308320963977593,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 59,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.07098579406738281,
+          "pointwise_pass": false
+        },
+        "FP64": {
+          "peak_abs": 0.07098757375095843,
+          "pointwise_pass": false
+        }
+      },
+      "generation": 2,
+      "layer": 63,
+      "rank": 0,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.003802657127380371,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.003802731050540631,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 3,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.006420135498046875,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.006420280629814368,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 7,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.006299257278442383,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.0062987977988235855,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 11,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.007962465286254883,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.007962898918817629,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 15,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.008010625839233398,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.00801127413733882,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 19,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.012408733367919922,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.0124105334429494,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 23,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.00828409194946289,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.008283208929559471,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 27,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.007504701614379883,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.007505585499191447,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 31,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.031200408935546875,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.03120810071779978,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 35,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.008915901184082031,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.008922713957964845,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 39,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.009584426879882812,
+          "pointwise_pass": false
+        },
+        "FP64": {
+          "peak_abs": 0.009585203064968795,
+          "pointwise_pass": false
+        }
+      },
+      "generation": 1,
+      "layer": 43,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.04754066467285156,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.04754421137014475,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 47,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.019804000854492188,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.01980401281133748,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 51,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.005387067794799805,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.0053864795643634444,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 55,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.21258544921875,
+          "pointwise_pass": false
+        },
+        "FP64": {
+          "peak_abs": 0.21258181980539348,
+          "pointwise_pass": false
+        }
+      },
+      "generation": 1,
+      "layer": 59,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.06887435913085938,
+          "pointwise_pass": false
+        },
+        "FP64": {
+          "peak_abs": 0.06886958795453779,
+          "pointwise_pass": false
+        }
+      },
+      "generation": 1,
+      "layer": 63,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.0043811798095703125,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.004381037092496376,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 3,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.007092714309692383,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.007092094841709695,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 7,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.0060307979583740234,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.006032578976655323,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 11,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.007294178009033203,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.00729373919045484,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 15,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.007849693298339844,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.00784921058392607,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 19,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.013284683227539062,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.013284800104024441,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 23,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.013357162475585938,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.013356920674214123,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 27,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.030771255493164062,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.030770326813675197,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 31,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.012989997863769531,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.012988918174281494,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 35,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.014192581176757812,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.014191411713719404,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 39,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.011739253997802734,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.011739002786209873,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 43,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.06251907348632812,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.06250877134818467,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 47,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.02115154266357422,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.02114983324652009,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 51,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.0067212581634521484,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.006721841205580503,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 55,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.20745086669921875,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.2074361060571448,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 59,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.06577110290527344,
+          "pointwise_pass": false
+        },
+        "FP64": {
+          "peak_abs": 0.06577605950703713,
+          "pointwise_pass": false
+        }
+      },
+      "generation": 2,
+      "layer": 63,
+      "rank": 1,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.004277706146240234,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.004277370462512309,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 3,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.00767970085144043,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.007682147850955001,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 7,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.005812644958496094,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.005812658909804647,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 11,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.005585193634033203,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.005584910350687089,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 15,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.00593113899230957,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.005931220923435454,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 19,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.00479888916015625,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.004797562127333954,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 23,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.014523029327392578,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.01452491695918745,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 27,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.05091667175292969,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.05092786797664317,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 31,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.028759002685546875,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.02876573284533812,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 35,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.008193254470825195,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.008193695253815747,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 39,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.03380298614501953,
+          "pointwise_pass": false
+        },
+        "FP64": {
+          "peak_abs": 0.03380472234661447,
+          "pointwise_pass": false
+        }
+      },
+      "generation": 1,
+      "layer": 43,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.0413970947265625,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.041386356563467785,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 47,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.01376962661743164,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.013776047404752134,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 51,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.016307353973388672,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.016308326130526574,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 55,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.034432411193847656,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.034422482147013156,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 59,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.06444358825683594,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.06444464986015674,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 63,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.004659414291381836,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.004660118571239602,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 3,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.0066547393798828125,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.0066548276664395445,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 7,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.009144783020019531,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.009144216783458337,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 11,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.008193731307983398,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.008193319918405884,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 15,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.00737309455871582,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.007372916002855057,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 19,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.006590843200683594,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.006590901329771359,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 23,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.009039640426635742,
+          "pointwise_pass": false
+        },
+        "FP64": {
+          "peak_abs": 0.009039269397953298,
+          "pointwise_pass": false
+        }
+      },
+      "generation": 2,
+      "layer": 27,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.03052043914794922,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.030535673400288843,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 31,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.015636444091796875,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.015637518525877248,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 35,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.008553266525268555,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.008553114131044648,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 39,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.01276397705078125,
+          "pointwise_pass": false
+        },
+        "FP64": {
+          "peak_abs": 0.012763398182107366,
+          "pointwise_pass": false
+        }
+      },
+      "generation": 2,
+      "layer": 43,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.02545642852783203,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.025464240619577083,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 47,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.016296863555908203,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.01629758404887216,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 51,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.016410350799560547,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.016410092147521205,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 55,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.03834056854248047,
+          "pointwise_pass": false
+        },
+        "FP64": {
+          "peak_abs": 0.03834373473789654,
+          "pointwise_pass": false
+        }
+      },
+      "generation": 2,
+      "layer": 59,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.06398582458496094,
+          "pointwise_pass": false
+        },
+        "FP64": {
+          "peak_abs": 0.06398310364371085,
+          "pointwise_pass": false
+        }
+      },
+      "generation": 2,
+      "layer": 63,
+      "rank": 2,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.00447237491607666,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.004472253413883243,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 3,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.002631664276123047,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.002631710444862545,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 7,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.004006028175354004,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.004005959856437258,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 11,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.0043784379959106445,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.004378162787174178,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 15,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.007757425308227539,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.00775818390516303,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 19,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.009199380874633789,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.009199724508281548,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 23,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.013535022735595703,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.013534074070792101,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 27,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.00875711441040039,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.008757509308535472,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 31,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.021239280700683594,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.021238699378958614,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 35,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.013703346252441406,
+          "pointwise_pass": false
+        },
+        "FP64": {
+          "peak_abs": 0.013707525486196914,
+          "pointwise_pass": false
+        }
+      },
+      "generation": 1,
+      "layer": 39,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.015357494354248047,
+          "pointwise_pass": false
+        },
+        "FP64": {
+          "peak_abs": 0.015357531296868565,
+          "pointwise_pass": false
+        }
+      },
+      "generation": 1,
+      "layer": 43,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.02232646942138672,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.02233014387054233,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 47,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.01839160919189453,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.01839357046455259,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 51,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.029712677001953125,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.029714761064814965,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 55,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.04228782653808594,
+          "pointwise_pass": false
+        },
+        "FP64": {
+          "peak_abs": 0.04229725574368359,
+          "pointwise_pass": false
+        }
+      },
+      "generation": 1,
+      "layer": 59,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.06136131286621094,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.061371593164622595,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 1,
+      "layer": 63,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.00457453727722168,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.004574783281159789,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 3,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.0024565458297729492,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.0024564914905813584,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 7,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.004056572914123535,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.004056523594287098,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 11,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.004020333290100098,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.004020427972065921,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 15,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.00867915153503418,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.008679026377496069,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 19,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.007179737091064453,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.007179877395254053,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 23,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.016220569610595703,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.01622020659014467,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 27,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.012165546417236328,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.012165803996076363,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 31,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.009269475936889648,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.009269196889243325,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 35,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.029052734375,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.02905980430920252,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 39,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.013463497161865234,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.013462282893708988,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 43,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.029626846313476562,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.029626579959828092,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 47,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.020153045654296875,
+          "pointwise_pass": false
+        },
+        "FP64": {
+          "peak_abs": 0.020152972902745425,
+          "pointwise_pass": false
+        }
+      },
+      "generation": 2,
+      "layer": 51,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.031520843505859375,
+          "pointwise_pass": false
+        },
+        "FP64": {
+          "peak_abs": 0.031516521126610186,
+          "pointwise_pass": false
+        }
+      },
+      "generation": 2,
+      "layer": 55,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.04308319091796875,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.04308506793352862,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 59,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    },
+    {
+      "checks": {
+        "FP32": {
+          "peak_abs": 0.06234550476074219,
+          "pointwise_pass": true
+        },
+        "FP64": {
+          "peak_abs": 0.0623420366157319,
+          "pointwise_pass": true
+        }
+      },
+      "generation": 2,
+      "layer": 63,
+      "rank": 3,
+      "route": "npu_fused_infer_attention_score"
+    }
+  ],
+  "common_effects_pass": false,
+  "failed_frame_counts_by_rank": [
+    2,
+    4,
+    5,
+    5
+  ],
+  "failed_frames": 16,
+  "formal_success": false,
+  "frame_count": 128,
+  "limitation": "Prior reports retain peaks and pass bits, not failing coordinates, reference values, error/bound ratios or score/probability tensors.",
+  "mathematics_recomputed_locally": false,
+  "model_ready": false,
+  "native_FA_math_qualified": false,
+  "next_diagnostic": "Reopen all four original immutable raw captures in finite Devices[] CPU helper; original ABI guard and literal FP32/FP64 oracle for all128 frames, retain every violating coordinate and complete outputs.",
+  "original_full_G1_pass": true,
+  "original_full_G1_report": {
+    "bytes": 12252,
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/BOLE-INDEPENDENT-GATE/ATTRIBUTION.json",
+    "sha256": "8b9b39e2a00d8f322cdd4f60bb29151a758c9b57551fd1f76da17d08043a4312"
+  },
+  "original_pointwise_bound": "0.001 + 0.01 * abs(truth)",
+  "performance_ready": false,
+  "primary": {
+    "error": "ValueError(\"actual original child failed {'path': '/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/SAVED-PAIR-INDEPENDENT-CHILD.json', 'sha256': '029040b213fc137304fadf64405f5207328fe206e290edf44fd961c89067b3ad'}\")",
+    "traceback": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/bole-native-ar-saved-cpu-control-v4/saved_cpu_owner.py\", line 73, in main\n    summary['independent_child']=H.child(ctl,'SAVED-PAIR-INDEPENDENT',[\n  File \"/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/host_once.py\", line 28, in child\n    c.require(p.returncode==0,\"actual original child failed \"+str(r));return r\n  File \"/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/model_contract.py\", line 25, in require\n    if not v:raise ValueError(why)\nValueError: actual original child failed {'path': '/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-v4/cpu-consumer/SAVED-PAIR-INDEPENDENT-CHILD.json', 'sha256': '029040b213fc137304fadf64405f5207328fe206e290edf44fd961c89067b3ad'}\n"
+  },
+  "qualification_oracle_changed": false,
+  "raw_tensors_loaded_locally": false,
+  "root_cause_proven": false,
+  "rounding_models_are_counterfactual_only": true,
+  "schema": "bole.native-ar-numeric-v4-source-review/v1",
+  "secondary": [],
+  "source_before_after_equal": true,
+  "source_count": 834,
+  "whole_primary_copies_checked": 20
+}
