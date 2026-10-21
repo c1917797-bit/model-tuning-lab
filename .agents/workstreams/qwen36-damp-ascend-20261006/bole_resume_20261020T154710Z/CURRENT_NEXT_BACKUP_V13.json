@@ -1,0 +1,77 @@
+{
+  "schema": "bole.CURRENT-NEXT-BACKUP/v1",
+  "as_of_UTC_epoch": 1792539384.2449095,
+  "current": {
+    "unit": "bole-g2-v7-model-20261020t154710z.service",
+    "owner": "MAIN",
+    "predecessors": [
+      "G2_V7_PREPARATION.json",
+      "G2_V7_SOURCE_AUDIT.json",
+      "G2_V7_MODEL_MAIN_LOCK_OBSERVED.json"
+    ],
+    "phase_seconds": 3600,
+    "cleanup_seconds": 180,
+    "pending": "full actual266 software then nativeTP4 load/two streamed requests/all-step originalmath"
+  },
+  "next": [
+    {
+      "node": "HEdiagv2",
+      "owner": "consumer preparer/MAIN",
+      "predecessors": [
+        "HE_RUNTIME_DIAGNOSTIC_V1_FAILURE_AUDIT.json"
+      ],
+      "phase_seconds": 3600,
+      "missing": [
+        "newfrozencompatibility/heldlockpacket",
+        "actualG2v7CPU3OWNED registry/policy",
+        "actualguardconditionreadback/fullCPUrepair"
+      ]
+    },
+    {
+      "node": "savednativeARmaskdiag",
+      "owner": "kernel preparer/MAIN",
+      "predecessors": [
+        "NATIVE_AR_SAVED_V3_FAILURE_AUDIT.json"
+      ],
+      "phase_seconds": 3600,
+      "missing": [
+        "frozenexactsameimageCPUdiagnostic",
+        "all4savedmaskmetadata/ABIproof",
+        "newindependentfullmathreader"
+      ]
+    },
+    {
+      "node": "G3v3",
+      "owner": "runtime preparer/MAIN",
+      "predecessors": [
+        "future actualG2v7 successfulmodel/fullmath/cleanup"
+      ],
+      "phase_seconds": 3600,
+      "missing": [
+        "frozenmetadata+parentstdout/ownedleafalias/coldentry",
+        "actualfull1024",
+        "costfitunknown"
+      ]
+    }
+  ],
+  "backup": [
+    {
+      "node": "GDNservicev2matchedoriginal/candidate",
+      "owner": "MAIN",
+      "phase_seconds": 3600,
+      "missing": [
+        "actual232CPU",
+        "bothrealTP4numeric/lifecyclearms"
+      ]
+    }
+  ],
+  "missing_final": [
+    "nativeAR/common-effects math",
+    "normalEOS/nativeAR alltokenidentity/newFIAshapes/allocatorgrowth",
+    "full15525quality all3tasks",
+    "3matchedOFF/ONcaptureOFF E2Epairs>=10%",
+    "optinrollback",
+    "authenticatedGitpush"
+  ],
+  "formal_success": false
+}

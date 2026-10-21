@@ -1,0 +1,22 @@
+{
+  "AST_python_files": 14,
+  "actual_Docker_or_systemctl_executed": false,
+  "actual_HE_evaluator_executed": false,
+  "actual_network_probe_executed": false,
+  "actual_tokenizer_or_model_or_NPU_executed": false,
+  "cold_entry_clock_before_source_readset_replay": true,
+  "command": "python3 -I -B -m unittest discover -s bole_service_proposals/task_he_runtime_diagnostic_v2 -p test*.py -q",
+  "cross_version_guard_preserves_complete_code_equality": true,
+  "default_OFF_and_help_entrypoints": 5,
+  "full_software_qualification_accepted": false,
+  "inherited_lock_tests_synthetic_no_acquire": true,
+  "network_safety_accepted": false,
+  "original3600_cleanup180_preserved": true,
+  "original_network_guard_relaxed": false,
+  "passed": 36,
+  "probe_Python38_grammar_checked": true,
+  "pure_tests": 36,
+  "schema": "bole.HE-runtime-diagnostic-local-controls/v2",
+  "stderr": "----------------------------------------------------------------------\nRan 36 tests in 0.585s\n\nOK\n",
+  "stdout": ""
+}

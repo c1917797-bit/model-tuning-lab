@@ -1,0 +1,413 @@
+{
+  "schema": "bole.actual-HE-isolation-diagnostic-audit/v3",
+  "inputs": {
+    "path": "/opt/host/vnf/austinov/bole-task-cpu-he-runtime-20261020T154710Z-v3/DIAGNOSTIC_INPUTS.json",
+    "bytes": 9794,
+    "sha256": "60033de2eed5829cf2040e5d8a2955cf93b976cdc04fe2f1cfcdb4d1cb32736c"
+  },
+  "owner": {
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v3/RESULT.json",
+    "bytes": 93877,
+    "sha256": "0e107f5515b68838c9187e82db577061fb25fe40703654262a6e73ee52d9deb3"
+  },
+  "summary": {
+    "CPU145_prestart_update": {
+      "bytes": 597,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v3/he-runtime-diagnostic/PRESTART_CPU_UPDATE.json",
+      "sha256": "f47b4548bca7ede0cfe44f91ecf3908beaea7b8ee1723f44f9b7f029418bbac9"
+    },
+    "binding_ref": {
+      "bytes": 5898,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v3/he-runtime-diagnostic/PROCESS-BINDING.json",
+      "sha256": "2683be00031708eac523da9ae78a5bb8b7f5ca5fc0b3190845d0d4f19dcb954f"
+    },
+    "create_argv_ref": {
+      "bytes": 1482,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v3/he-runtime-diagnostic/CREATE_ARGV.json",
+      "sha256": "d7010a53148b32ba24fe70770375fa6f8c13516b426b7db987492d758838c2a2"
+    },
+    "inherited_lock_ref": {
+      "bytes": 1290,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v3/he-runtime-diagnostic/INHERITED_MAIN_LOCK.json",
+      "sha256": "d74f0fb4a7edec78a66529c4956fcb41df71d02847482a8932834b13877afb66"
+    },
+    "inspect_ref": {
+      "bytes": 10728,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v3/he-runtime-diagnostic/DIAGNOSTIC_INSPECT.json",
+      "sha256": "187f8420f5322269bb1a6cee2640d3ff0df8ce746d0606cc7296bd6ed6b9ba54"
+    },
+    "logs_receipt": {
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v3/he-runtime-diagnostic/HE-probe-logs-1792540810922930610.json",
+      "sha256": "969baf7fbe81f76a689529b68583011f317cbb3d883fa410db1375f4f23697b8"
+    },
+    "logs_ref": {
+      "bytes": 5214,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v3/he-runtime-diagnostic/DIAGNOSTIC_LOG.stdout",
+      "sha256": "197856dc50f795142404f1683ef10fa852946b8a6c7844b3e9d3d0d1cf8b995a"
+    },
+    "net_namespace_ref": {
+      "bytes": 767,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v3/he-runtime-diagnostic/HOST_GUEST_NET_NAMESPACE.json",
+      "sha256": "78649d9f14a2813c0c304d0532bca20a5ac7db61c7587e444c9aaae3c3fea223"
+    },
+    "observation_ref": {
+      "bytes": 4994,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v3/he-runtime-diagnostic/OBSERVATION.json",
+      "sha256": "c9a47cfbfdf56bfa82e80cbd24ac02784aeac38fdfbea61e1c9591adc22cbe7c"
+    },
+    "owned_ref": {
+      "bytes": 2606,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v3/he-runtime-diagnostic/OWNED.json",
+      "sha256": "516355b322298157ee66ec0ecd8665719f8f81912be38864adc0206727cd352b"
+    },
+    "release_ref": {
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v3/he-runtime-diagnostic/cleanup.json",
+      "sha256": "fd64c954d1290052a07c038a0080bb6a970635dbcbfa146c668b5e33c2ae2418"
+    },
+    "wait_receipt": {
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v3/he-runtime-diagnostic/HE-probe-wait-1792540810896712100.json",
+      "sha256": "580cb1f24a23f07181dcb14ec7c64b2a5b1fc73faab5896977b9dba751cbe12a"
+    }
+  },
+  "independent": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/HE_RUNTIME_DIAGNOSTIC_V3_READBACK.json",
+    "bytes": 6036,
+    "sha256": "b0ed5eb4c9c48a23fb04f8c9b33bfd9ed6b172a334bde89a8243c7b67010a52e"
+  },
+  "observed": {
+    "complete": true,
+    "primary": null,
+    "secondary": [],
+    "source_input_nonempty_equal": true,
+    "elapsed_seconds": 16.4839969399618,
+    "original_runtime_guard": {
+      "called": true,
+      "error": "ValueError: actual no-network namespace",
+      "passed": false
+    },
+    "network_details": {
+      "guest_process": {
+        "pid": 1,
+        "start_ticks": 65805490
+      },
+      "interpretation_performed": false,
+      "network_safety_accepted": false,
+      "proc_routes": {
+        "if_inet6": {
+          "error": null,
+          "ok": true,
+          "text": ""
+        },
+        "ipv6_route": {
+          "error": null,
+          "ok": true,
+          "text": "00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n"
+        },
+        "route": {
+          "error": null,
+          "ok": true,
+          "text": "Iface\tDestination\tGateway \tFlags\tRefCnt\tUse\tMetric\tMask\t\tMTU\tWindow\tIRTT                                                       \n"
+        }
+      },
+      "schema": "bole.actual-HE-readonly-network-details/v1",
+      "sys_entries": [
+        {
+          "attributes": {
+            "carrier": {
+              "error": {
+                "errno": 20,
+                "type": "NotADirectoryError"
+              },
+              "ok": false,
+              "text": null
+            },
+            "flags": {
+              "error": {
+                "errno": 20,
+                "type": "NotADirectoryError"
+              },
+              "ok": false,
+              "text": null
+            },
+            "ifindex": {
+              "error": {
+                "errno": 20,
+                "type": "NotADirectoryError"
+              },
+              "ok": false,
+              "text": null
+            },
+            "iflink": {
+              "error": {
+                "errno": 20,
+                "type": "NotADirectoryError"
+              },
+              "ok": false,
+              "text": null
+            },
+            "operstate": {
+              "error": {
+                "errno": 20,
+                "type": "NotADirectoryError"
+              },
+              "ok": false,
+              "text": null
+            },
+            "type": {
+              "error": {
+                "errno": 20,
+                "type": "NotADirectoryError"
+              },
+              "ok": false,
+              "text": null
+            }
+          },
+          "is_dir": false,
+          "is_symlink": false,
+          "lstat": {
+            "device": 115,
+            "inode": 17903222,
+            "mode": 33188
+          },
+          "name": "bonding_masters",
+          "symlink_target": null
+        },
+        {
+          "attributes": {
+            "carrier": {
+              "error": {
+                "errno": 22,
+                "type": "OSError"
+              },
+              "ok": false,
+              "text": null
+            },
+            "flags": {
+              "error": null,
+              "ok": true,
+              "text": "0x1002\n"
+            },
+            "ifindex": {
+              "error": null,
+              "ok": true,
+              "text": "4\n"
+            },
+            "iflink": {
+              "error": null,
+              "ok": true,
+              "text": "0\n"
+            },
+            "operstate": {
+              "error": null,
+              "ok": true,
+              "text": "down\n"
+            },
+            "type": {
+              "error": null,
+              "ok": true,
+              "text": "1\n"
+            }
+          },
+          "is_dir": true,
+          "is_symlink": true,
+          "lstat": {
+            "device": 115,
+            "inode": 17903472,
+            "mode": 41471
+          },
+          "name": "erspan0",
+          "symlink_target": "../../devices/virtual/net/erspan0"
+        },
+        {
+          "attributes": {
+            "carrier": {
+              "error": {
+                "errno": 22,
+                "type": "OSError"
+              },
+              "ok": false,
+              "text": null
+            },
+            "flags": {
+              "error": null,
+              "ok": true,
+              "text": "0x80\n"
+            },
+            "ifindex": {
+              "error": null,
+              "ok": true,
+              "text": "2\n"
+            },
+            "iflink": {
+              "error": null,
+              "ok": true,
+              "text": "0\n"
+            },
+            "operstate": {
+              "error": null,
+              "ok": true,
+              "text": "down\n"
+            },
+            "type": {
+              "error": null,
+              "ok": true,
+              "text": "778\n"
+            }
+          },
+          "is_dir": true,
+          "is_symlink": true,
+          "lstat": {
+            "device": 115,
+            "inode": 17903308,
+            "mode": 41471
+          },
+          "name": "gre0",
+          "symlink_target": "../../devices/virtual/net/gre0"
+        },
+        {
+          "attributes": {
+            "carrier": {
+              "error": {
+                "errno": 22,
+                "type": "OSError"
+              },
+              "ok": false,
+              "text": null
+            },
+            "flags": {
+              "error": null,
+              "ok": true,
+              "text": "0x1002\n"
+            },
+            "ifindex": {
+              "error": null,
+              "ok": true,
+              "text": "3\n"
+            },
+            "iflink": {
+              "error": null,
+              "ok": true,
+              "text": "0\n"
+            },
+            "operstate": {
+              "error": null,
+              "ok": true,
+              "text": "down\n"
+            },
+            "type": {
+              "error": null,
+              "ok": true,
+              "text": "1\n"
+            }
+          },
+          "is_dir": true,
+          "is_symlink": true,
+          "lstat": {
+            "device": 115,
+            "inode": 17903390,
+            "mode": 41471
+          },
+          "name": "gretap0",
+          "symlink_target": "../../devices/virtual/net/gretap0"
+        },
+        {
+          "attributes": {
+            "carrier": {
+              "error": null,
+              "ok": true,
+              "text": "1\n"
+            },
+            "flags": {
+              "error": null,
+              "ok": true,
+              "text": "0x9\n"
+            },
+            "ifindex": {
+              "error": null,
+              "ok": true,
+              "text": "1\n"
+            },
+            "iflink": {
+              "error": null,
+              "ok": true,
+              "text": "1\n"
+            },
+            "operstate": {
+              "error": null,
+              "ok": true,
+              "text": "unknown\n"
+            },
+            "type": {
+              "error": null,
+              "ok": true,
+              "text": "772\n"
+            }
+          },
+          "is_dir": true,
+          "is_symlink": true,
+          "lstat": {
+            "device": 115,
+            "inode": 17903226,
+            "mode": 41471
+          },
+          "name": "lo",
+          "symlink_target": "../../devices/virtual/net/lo"
+        }
+      ]
+    },
+    "private_namespace": {
+      "bound_guest_host_pid": 44161,
+      "bound_guest_start_ticks": 65805490,
+      "comparisons": {
+        "guest_equals_host_init": false,
+        "guest_equals_owner": false,
+        "owner_equals_host_init": true
+      },
+      "container_id": "1f3ea80760cb871e0792df4ee3a873d3a03478a36cc798aff92f9e73fe12a1f9",
+      "namespaces": {
+        "guest": {
+          "file_identity": {
+            "device": 4,
+            "inode": 4026548624
+          },
+          "link": "net:[4026548624]",
+          "pid": 44161,
+          "start_ticks": 65805490
+        },
+        "host_init": {
+          "file_identity": {
+            "device": 4,
+            "inode": 4026532000
+          },
+          "link": "net:[4026532000]",
+          "pid": 1,
+          "start_ticks": 5
+        },
+        "owner": {
+          "file_identity": {
+            "device": 4,
+            "inode": 4026532000
+          },
+          "link": "net:[4026532000]",
+          "pid": 43041,
+          "start_ticks": 65804912
+        }
+      },
+      "network_safety_accepted": false,
+      "schema": "bole.actual-HE-host-guest-netns-observation/v1",
+      "setns_performed": false,
+      "sockets_or_ioctls_performed": false
+    }
+  },
+  "classification": {
+    "confidence": "proved original predicate false-positive; revised guard still pending",
+    "cause": "sysfs class directory includes regular bonding_masters and inert DOWN virtual interfaces in a distinct network namespace; two lo-only IPv6 REJECT entries without RTF_UP",
+    "qualification_accepted": false
+  },
+  "successor": {
+    "packet": "task_decoder_scorer_v3 and task_cpu_owner_qualification_v12",
+    "status": "preparation",
+    "preserved": "source/gold/template/provenance15525, original43decoder controls, official HE executor, threeRO mounts/networknone/capDropALL/UID65534/readonly/CPU1452GiB and full independent third stage",
+    "required": "pre-executor host-proved private netns plus state-based fail-closed interface/address/route check"
+  }
+}

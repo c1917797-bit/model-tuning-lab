@@ -1,0 +1,103 @@
+{
+  "NPU": false,
+  "actual_new_admission_or_diagnostic": false,
+  "actual_prior_CPU_profile_refs": {
+    "GUEST_CPU.json": {
+      "bytes": 2141,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-20261020T154710Z-v3/cpu-consumer/GUEST_CPU.json",
+      "sha256": "8951d2cb17be1f6be5189ceefec29fae39151442dbba2fc0e610b00c87590cb7"
+    },
+    "OWNED.json": {
+      "bytes": 163637,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-20261020T154710Z-v3/cpu-consumer/OWNED.json",
+      "sha256": "d8c1613deb8dbcf3dc4270a2cf49561a70bee7ddc2db8ee53b4fbb5966f3326a"
+    }
+  },
+  "files": {
+    "diag_common.py": {
+      "added_helper": "def original_CPU_profile(C,y,owner):\n    refs=C.obj(C.ref(Path(__file__).parent/'ACTUAL_CPU_PROFILE_REFS.json'))\n    C.need(y['actual_original_CPU_profile_refs']==refs,'exact actual saved-v3 CPU proof refs')\n    owned=C.obj(refs['OWNED.json']);guest=C.obj(refs['GUEST_CPU.json'])\n    release=C.obj(y['actual_v3_failure_refs']['cpu-consumer/cleanup.json'])\n    child=C.obj(y['actual_v3_failure_refs']['cpu-consumer/SAVED-PAIR-INDEPENDENT-CHILD.json'])\n    C.need(owned['arm']=='cpu-preflight'and owned['guest_cpus']==[0]and owned['source']==owner['source']and\n        owned['image']==C.IMAGE and owned['cid']==release['container']and\n        child['requested_argv'][:3]==['/usr/bin/docker','exec',owned['cid']]and\n        guest['affinity']==guest['effective_cpus']==guest['ancestor_cpuset']==[0]and\n        guest['effective_capacity']==1 and guest['cgroup']=='/docker/'+owned['cid']and\n        owned['cid']in guest['process']['cgroup'],\n        'actual original025 no-model helper selected CPU0 with one effective ancestor capacity')\n    return dict(schema='bole.actual-original025-no-model-CPU-profile/v1',refs=refs,\n        original_owned_cid=owned['cid'],original_guest_cpus=owned['guest_cpus'],affinity=guest['affinity'],\n        effective_cpus=guest['effective_cpus'],ancestor_cpuset=guest['ancestor_cpuset'],\n        effective_capacity=guest['effective_capacity'],original_admission_function_unchanged=True,\n        task_CPU145_profile_substituted=False)\n\n\n",
+      "after": {
+        "bytes": 9331,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v2/diag_common.py",
+        "sha256": "e43fd9fb92b8b610b45dfcbaa3a228b4755ecefa2e3f961400f14f2c0414115d"
+      },
+      "before": {
+        "bytes": 7703,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/diag_common.py",
+        "sha256": "ca1c71183365754b4f6984901a282d61914fa47f84ed68dac3dee89d47080e27"
+      },
+      "edits": [
+        {
+          "after": "FILES=('ar_owner_common.py','ar_saved_namespace.py','diag_common.py','prepare_mask_owner.py','mask_cpu_owner.py',\n       'mask_diagnostic.py','ACTUAL_V3_FAILURE_REFS.json','MASK_SOURCE_EVIDENCE.json','MASK_SOURCE_COPY_RECORD.json',\n       'ACTUAL_CPU_PROFILE_REFS.json')",
+          "before": "FILES=('ar_owner_common.py','ar_saved_namespace.py','diag_common.py','prepare_mask_owner.py','mask_cpu_owner.py',\n       'mask_diagnostic.py','ACTUAL_V3_FAILURE_REFS.json','MASK_SOURCE_EVIDENCE.json','MASK_SOURCE_COPY_RECORD.json')"
+        },
+        {
+          "after": "def readset(C,y,*,installed=False):\n    owner,oldy,B,x,m,objects=prior(C,y)\n    C.need(y['original_saved_inputs']==owner['inputs']and y['AR_source']==x['AR_source']and\n        y['authority']==x['authority'],'one unchanged actual saved input/source/authority chain')\n    _,_,on,refs,mapping=B.readset(C,oldy,installed=installed)\n    cpu_profile=original_CPU_profile(C,y,owner)\n    extras=C.obj(y['mask_source_evidence_ref'])\n    C.need(type(extras)is dict and 'attention_mask'in extras and len(extras)<=8,'explicit complete bounded mask/helper primary source map')\n    extra=[]\n    for key,row in extras.items():\n        C.need(type(row)is dict and set(row)=={'runtime_ref','host_ref'},'distinct installed/host Ref3 pair')\n        a,b=row['runtime_ref'],row['host_ref']\n        C.need(set(a)==set(b)=={'path','bytes','sha256'}and a['path']!=b['path']and\n            (a['bytes'],a['sha256'])==(b['bytes'],b['sha256']),'same actual complete source bytes/SHA at distinct paths')\n        if key=='attention_mask':C.need(a['path']=='/vllm-workspace/vllm-ascend/vllm_ascend/attention/attention_mask.py'and\n            (a['bytes'],a['sha256'])==(3783,'fb138c36ce381fb6ad65a620f30c6d85bd4d771ae2dfff5da947a67b2c2ba2a5'),\n            'exact actual mask-builder primary source; no inferred ABI source version')\n        C.checked(b);extra.append(b)\n        if installed:C.checked(a)\n    for r in [*y['files'].values(),*y['actual_v3_failure_refs'].values(),*cpu_profile['refs'].values(),owner['inputs'],y['mask_source_evidence_ref']]:\n        C.checked(r);extra.append(C.ref(r['path']))\n    # Reopen only actual Ref objects from failed receipts; never treat arbitrary\n    # strings/prefixes as mount exemptions. Existing saved map stays exact.\n    collected,_=B.collect(C,[owner,objects,y['actual_v3_failure_refs']],{v['installed']['path']:v for v in mapping['mapping']},installed=installed)\n    unique={}\n    for r in(*refs,*extra,*collected):\n        C.need(r['path']not in unique or unique[r['path']]==r,'one exact immutable diagnostic readset');unique[r['path']]=r\n    return x,m,on,list(unique.values()),dict(original_saved_mapping=mapping,mask_primary_sources=extras,\n        actual_original_CPU_profile=cpu_profile,installed_sources_reopened=installed,\n        numerical_replayed=False,mask_semantics_qualified=False)",
+          "before": "def readset(C,y,*,installed=False):\n    owner,oldy,B,x,m,objects=prior(C,y)\n    C.need(y['original_saved_inputs']==owner['inputs']and y['AR_source']==x['AR_source']and\n        y['authority']==x['authority'],'one unchanged actual saved input/source/authority chain')\n    _,_,on,refs,mapping=B.readset(C,oldy,installed=installed)\n    extras=C.obj(y['mask_source_evidence_ref'])\n    C.need(type(extras)is dict and 'attention_mask'in extras and len(extras)<=8,'explicit complete bounded mask/helper primary source map')\n    extra=[]\n    for key,row in extras.items():\n        C.need(type(row)is dict and set(row)=={'runtime_ref','host_ref'},'distinct installed/host Ref3 pair')\n        a,b=row['runtime_ref'],row['host_ref']\n        C.need(set(a)==set(b)=={'path','bytes','sha256'}and a['path']!=b['path']and\n            (a['bytes'],a['sha256'])==(b['bytes'],b['sha256']),'same actual complete source bytes/SHA at distinct paths')\n        if key=='attention_mask':C.need(a['path']=='/vllm-workspace/vllm-ascend/vllm_ascend/attention/attention_mask.py'and\n            (a['bytes'],a['sha256'])==(3783,'fb138c36ce381fb6ad65a620f30c6d85bd4d771ae2dfff5da947a67b2c2ba2a5'),\n            'exact actual mask-builder primary source; no inferred ABI source version')\n        C.checked(b);extra.append(b)\n        if installed:C.checked(a)\n    for r in [*y['files'].values(),*y['actual_v3_failure_refs'].values(),owner['inputs'],y['mask_source_evidence_ref']]:\n        C.checked(r);extra.append(C.ref(r['path']))\n    # Reopen only actual Ref objects from failed receipts; never treat arbitrary\n    # strings/prefixes as mount exemptions. Existing saved map stays exact.\n    collected,_=B.collect(C,[owner,objects,y['actual_v3_failure_refs']],{v['installed']['path']:v for v in mapping['mapping']},installed=installed)\n    unique={}\n    for r in(*refs,*extra,*collected):\n        C.need(r['path']not in unique or unique[r['path']]==r,'one exact immutable diagnostic readset');unique[r['path']]=r\n    return x,m,on,list(unique.values()),dict(original_saved_mapping=mapping,mask_primary_sources=extras,\n        installed_sources_reopened=installed,numerical_replayed=False,mask_semantics_qualified=False)"
+        }
+      ],
+      "whole_inverse_verified": true
+    },
+    "mask_cpu_owner.py": {
+      "added_helper": null,
+      "after": {
+        "bytes": 8058,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v2/mask_cpu_owner.py",
+        "sha256": "a94949cdddf425bac3db191bd74e79e96a5667a7198d86f38ef7a4220b84b0e6"
+      },
+      "before": {
+        "bytes": 7983,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/mask_cpu_owner.py",
+        "sha256": "c3b10762a8ec2c2142143752aa6d36d29be5797b3c064cf40c04fbfb04fc031b"
+      },
+      "edits": [
+        {
+          "after": "Devices[]CPU0",
+          "before": "Devices[]CPU145"
+        },
+        {
+          "after": "ctl.cpu['guest_cpus'][:1]==[0]",
+          "before": "ctl.cpu['guest_cpus'][:1]==[145]"
+        },
+        {
+          "after": "original actual one CPU0 profile",
+          "before": "original actual one CPU145 profile"
+        },
+        {
+          "after": "guest_CPU=0",
+          "before": "guest_CPU=145"
+        },
+        {
+          "after": "                original_CPU_profile_basis=mapping['actual_original_CPU_profile'],\n",
+          "before": ""
+        }
+      ],
+      "whole_inverse_verified": true
+    },
+    "prepare_mask_owner.py": {
+      "added_helper": null,
+      "after": {
+        "bytes": 2455,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v2/prepare_mask_owner.py",
+        "sha256": "386da72a6db4b86b83e276db78ab33c63e8f12b7ea0ca163323f0b790dec8e3c"
+      },
+      "before": {
+        "bytes": 2364,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/prepare_mask_owner.py",
+        "sha256": "1d9df6988ff56dead4f21f3e3bce6e04fa8e40aad0142f769f7f84bb8b6f13a1"
+      },
+      "edits": [
+        {
+          "after": "        actual_original_CPU_profile_refs=C.obj(C.ref(new/'ACTUAL_CPU_PROFILE_REFS.json')),\n",
+          "before": ""
+        }
+      ],
+      "whole_inverse_verified": true
+    }
+  },
+  "mask_metadata_child_bytes_unchanged": true,
+  "mask_semantics_qualified": false,
+  "original025_functions_budgets_reserve_unchanged": true,
+  "original_v1_preserved": true,
+  "schema": "bole.mask-original025-CPU-profile-delta/v2"
+}

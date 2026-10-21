@@ -1,0 +1,120 @@
+{
+  "HE_CPU": 145,
+  "HE_memory_bytes": 2147483648,
+  "NPU": false,
+  "actual_execution_performed": false,
+  "actual_interpreter_version_observed_locally": false,
+  "ancestor_CPU_budget": 7,
+  "cleanup_seconds": 180,
+  "default_enabled": false,
+  "diagnostic_revision": 2,
+  "explicit_probe_actual_entry_delta": "/source/he_worker.py -> /source/he_runtime_probe.py; only runtime() called",
+  "files": {
+    "CPU3_ACTUAL_ENTRIES.json": {
+      "bytes": 3394,
+      "sha256": "e15e04b05021bb1e44aaff62ae4ccb24953bcbea171ef42770cb6ddefc96ac2f"
+    },
+    "LOCAL_CONTROLS.json": {
+      "bytes": 996,
+      "sha256": "b8af96af0cb8c5e2013a73b4006c8dd5b3c54ed9ee557d8727bbc886913d997a"
+    },
+    "POLICY_SCHEMA.md": {
+      "bytes": 2789,
+      "sha256": "1c258184b92d43e6086625f8c5ee4855dba8a7be2dc6da657f8ff98d6de09a39"
+    },
+    "PREVIOUS_CPU_EXPECTED.json": {
+      "bytes": 2525,
+      "sha256": "c29908e4f662fa532c7adea54a6a6ee2bda6169c5ccc5168deb2e62e2678fbc0"
+    },
+    "README.md": {
+      "bytes": 7206,
+      "sha256": "b13c43747988607f021f4db652c2d42fbcce4ccee27ff3e45ed03a4693b4d91a"
+    },
+    "V1_ACTUAL_FAILURE_REFS.json": {
+      "bytes": 1537,
+      "sha256": "f5f9045835d928834ea9a2533a4a499f5c115bd044ba32347c20c31498e97f6f"
+    },
+    "diagnostic_host.py": {
+      "bytes": 13204,
+      "sha256": "745a8675cee59e21ffe823a59ccf522d59695699b3bbd6c67ef72a5766ae81a4"
+    },
+    "he_owned.py": {
+      "bytes": 6114,
+      "sha256": "7af596c27e15eb2d8d9f0f33c6ec7b2a52f71e2d59e067148996cf682a46fb1e"
+    },
+    "he_policy.py": {
+      "bytes": 4644,
+      "sha256": "1cc91c0369c318c155dfd124731ac13c60133a5f9a879853637e0d4b4f1e66b6"
+    },
+    "he_runtime_probe.py": {
+      "bytes": 4743,
+      "sha256": "f2866bfa8810e42204d832142241f49e210b33ab192f094dad0abb7714882b5a"
+    },
+    "lock_evidence.py": {
+      "bytes": 5265,
+      "sha256": "583fa43426abdbde1c22388bb29c30279ce8389bc0362da1d63e66a13cc17671"
+    },
+    "main_quiescence.py": {
+      "bytes": 12864,
+      "sha256": "45af444dea25158cf59f16133679dd8f34a16edacca49a4d41466e2d2e44f0c0"
+    },
+    "owner_common.py": {
+      "bytes": 6948,
+      "sha256": "3f568b762bf6e1f24cdb613203f6beae9277d672ec397f7ef4339bf58a1f062e"
+    },
+    "owner_namespace.py": {
+      "bytes": 9104,
+      "sha256": "3b700d07462dd05f0626fcbf6fae123771058c2342aa8545854a04a13e01374d"
+    },
+    "prepare_diagnostic.py": {
+      "bytes": 4369,
+      "sha256": "2d2394333af770101c88d000b568d20de9c404f5653f091b6ea3cfbacbc80c8d"
+    },
+    "prepare_registry.py": {
+      "bytes": 2075,
+      "sha256": "28830de500d63d2fcb6a0e8211e02929a5017167a688bb441fccfcd3e835db7c"
+    },
+    "probe_evidence.py": {
+      "bytes": 11963,
+      "sha256": "769eb74a3e88e12add1dff00593a797f88bbe54570e33d65abcea9164f287321"
+    },
+    "task_contract.py": {
+      "bytes": 13493,
+      "sha256": "25a5f59f4cdb6b25fc1dfed4245895520e347961f0f7a7ccfecbf14bd8fbcf73"
+    },
+    "test_diagnostic_pure.py": {
+      "bytes": 11527,
+      "sha256": "ec36f79a9493d0ae128366af35d8c14ea0263abf326b92b003075d92326f6998"
+    },
+    "test_quiescence_pure.py": {
+      "bytes": 13873,
+      "sha256": "2bdc2e8141914254ccb9ec6c392b6d831bab8402733cadd02cf55092d1efc7ae"
+    }
+  },
+  "frozen_policy_module_sha256": "45af444dea25158cf59f16133679dd8f34a16edacca49a4d41466e2d2e44f0c0",
+  "frozen_v2_task_packet_manifest_sha256": "33761994f0fcd18ec39f21ad0fa93a3fdfb11649d18a0a53f37667bc02abb37d",
+  "full_software_qualification_accepted": false,
+  "generated_code_executed": false,
+  "host_CPU": 166,
+  "identity_hold_seconds": 5,
+  "inherited_lock_observation": "read-only existing self FD/fdinfo + exact /proc/locks before sandbox create; no acquire/release",
+  "known_actual_CPU3_entry_count": 3,
+  "local_pure_tests": 36,
+  "local_pure_tests_passed": 36,
+  "model_ready": false,
+  "network_safety_accepted": false,
+  "original_HE_owner_namespace_and_resources_unchanged": true,
+  "original_guard_complete_code_equality_preserved": true,
+  "original_guard_source_unchanged": true,
+  "performance_ready": false,
+  "phase_seconds": 3600,
+  "policy_schema": "bole.MAIN-NPU-quiescence-policy/v2",
+  "prior_failed_CPU_v10_manifest_sha256": "0089e8184f9843c9f32d277dd0454b80e7af83d04e316f849680e1d32b0becbf",
+  "prior_failed_diagnostic_v1_manifest_sha256": "191d9d6f04d41ef9a341999e8c37afabcc51e132ca40b8ac3862d41d69b1272f",
+  "probe_seconds": 90,
+  "registry_schema": "bole.explicit-MAIN-CPU3-owned-registry/v1",
+  "reserve_CPU_budget": 2,
+  "schema": "bole.HE-runtime-isolation-diagnostic-advisory/v2",
+  "status": "frozen prepared-only; actual compatible interpreter/network observation/retirement/readback pending",
+  "task_score_produced": false
+}

@@ -1,0 +1,72 @@
+{
+  "CID": "8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43",
+  "argv": [
+    "/usr/bin/docker",
+    "cp",
+    "8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43:/vllm-workspace/vllm-ascend/vllm_ascend/attention/attention_mask.py",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_mask_sources_v1/attention_mask.py"
+  ],
+  "headers": [
+    {
+      "ref": {
+        "bytes": 2082,
+        "path": "/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v5/dense/receipts/NATIVE-AR-RANK-0.json",
+        "sha256": "049b95d9f78bcc95eadf580abe5ca9255a76bfc621a299c550ac11857a8410fb"
+      },
+      "text": "{\"cap_bytes\": 1073741824, \"cgroup\": \"13:blkio:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n12:freezer:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n11:memory:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n10:perf_event:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n9:rdma:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n8:pids:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n7:cpuset:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n6:net_cls,net_prio:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n5:hugetlb:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n4:devices:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n3:files:/\\n2:cpu,cpuacct:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n1:name=systemd:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n\", \"future_rank_journal_reserve\": 8388608, \"logical_tensor_bytes\": 152669936, \"model_ready\": false, \"pid\": 2970, \"primary\": null, \"rank\": 0, \"raw\": {\"bytes\": 152915063, \"path\": \"/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v5/dense/receipts/NATIVE-AR-RANK-0.pt\", \"sha256\": \"341bdb7488fbd9e203e3e842e0f42d5672cf693f2e5ec022a1b45792fab23c54\"}, \"receipt_reserve\": 65536, \"schema\": \"bole.actual-native-ar-worker-receipt/v1\", \"source\": {\"bytes\": 33944, \"path\": \"/opt/host/vnf/austinov/bole-native-ar-pair-20261020T154710Z-v5/SOURCE_BOUND.json\", \"sha256\": \"e018a5ee9b4f00fbd791eaecfb4ef34fc1297de46c34b57d25cdbf79f4613bb6\"}, \"stat\": \"2970 (VLLM::Worker_TP) R 2322 115 115 0 -1 4194560 1988937 2049245 3770 563 6098 1802 7112 695 20 0 84 0 65093298 8814696026112 749140 18446744073709551615 187650044788736 187650044791432 281474203541392 0 0 0 0 4096 1098925310 0 0 0 17 0 0 0 191 0 0 187650044857712 187650044858384 187650236911616 281474203544768 281474203544922 281474203544922 281474203549651 0\\n\"}\n"
+    },
+    {
+      "ref": {
+        "bytes": 2082,
+        "path": "/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v5/dense/receipts/NATIVE-AR-RANK-1.json",
+        "sha256": "cee3cfc5b759029662b208a04c1bc8d895752bda8ab8105efb31021dac34a9b1"
+      },
+      "text": "{\"cap_bytes\": 1073741824, \"cgroup\": \"13:blkio:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n12:freezer:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n11:memory:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n10:perf_event:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n9:rdma:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n8:pids:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n7:cpuset:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n6:net_cls,net_prio:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n5:hugetlb:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n4:devices:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n3:files:/\\n2:cpu,cpuacct:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n1:name=systemd:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n\", \"future_rank_journal_reserve\": 8388608, \"logical_tensor_bytes\": 152669936, \"model_ready\": false, \"pid\": 2971, \"primary\": null, \"rank\": 1, \"raw\": {\"bytes\": 152915063, \"path\": \"/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v5/dense/receipts/NATIVE-AR-RANK-1.pt\", \"sha256\": \"dfba2b9fe82b8d89b848f21c82cd87703ad929819c0a380316fe510329b976fc\"}, \"receipt_reserve\": 65536, \"schema\": \"bole.actual-native-ar-worker-receipt/v1\", \"source\": {\"bytes\": 33944, \"path\": \"/opt/host/vnf/austinov/bole-native-ar-pair-20261020T154710Z-v5/SOURCE_BOUND.json\", \"sha256\": \"e018a5ee9b4f00fbd791eaecfb4ef34fc1297de46c34b57d25cdbf79f4613bb6\"}, \"stat\": \"2971 (VLLM::Worker_TP) R 2322 115 115 0 -1 4194560 1949045 2052099 3190 458 6002 1743 7161 682 20 0 80 0 65093298 8814518312960 768530 18446744073709551615 187650171797504 187650171800200 281474291758736 0 0 0 0 4096 1098925310 0 0 0 17 1 0 0 138 0 0 187650171866480 187650171867152 187650382934016 281474291760320 281474291760474 281474291760474 281474291765203 0\\n\"}\n"
+    },
+    {
+      "ref": {
+        "bytes": 2082,
+        "path": "/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v5/dense/receipts/NATIVE-AR-RANK-2.json",
+        "sha256": "aef916524d9d7550ac32bb4ae4d4ff195bb036d9aa410cac3a1684a396c5dcc6"
+      },
+      "text": "{\"cap_bytes\": 1073741824, \"cgroup\": \"13:blkio:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n12:freezer:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n11:memory:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n10:perf_event:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n9:rdma:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n8:pids:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n7:cpuset:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n6:net_cls,net_prio:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n5:hugetlb:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n4:devices:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n3:files:/\\n2:cpu,cpuacct:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n1:name=systemd:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n\", \"future_rank_journal_reserve\": 8388608, \"logical_tensor_bytes\": 152669936, \"model_ready\": false, \"pid\": 2972, \"primary\": null, \"rank\": 2, \"raw\": {\"bytes\": 152915063, \"path\": \"/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v5/dense/receipts/NATIVE-AR-RANK-2.pt\", \"sha256\": \"4d79dc4442a539b5739617fe06c3656c9bb0a6dce415f144d0dad2c57a634700\"}, \"receipt_reserve\": 65536, \"schema\": \"bole.actual-native-ar-worker-receipt/v1\", \"source\": {\"bytes\": 33944, \"path\": \"/opt/host/vnf/austinov/bole-native-ar-pair-20261020T154710Z-v5/SOURCE_BOUND.json\", \"sha256\": \"e018a5ee9b4f00fbd791eaecfb4ef34fc1297de46c34b57d25cdbf79f4613bb6\"}, \"stat\": \"2972 (VLLM::Worker_TP) R 2322 115 115 0 -1 4194560 1954203 2063639 3538 684 6018 1767 7154 684 20 0 82 0 65093298 8814612131840 754217 18446744073709551615 187650842296320 187650842299016 281473904528320 0 0 0 0 4096 1098925310 0 0 0 17 0 0 0 178 0 0 187650842365296 187650842365968 187651665002496 281473904532672 281473904532826 281473904532826 281473904537555 0\\n\"}\n"
+    },
+    {
+      "ref": {
+        "bytes": 2082,
+        "path": "/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v5/dense/receipts/NATIVE-AR-RANK-3.json",
+        "sha256": "c4dce2d5bfa45b6ccda8e80001b7e6fc11a2d68d6350cd284c5fa9eefdeda2e6"
+      },
+      "text": "{\"cap_bytes\": 1073741824, \"cgroup\": \"13:blkio:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n12:freezer:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n11:memory:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n10:perf_event:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n9:rdma:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n8:pids:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n7:cpuset:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n6:net_cls,net_prio:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n5:hugetlb:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n4:devices:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n3:files:/\\n2:cpu,cpuacct:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n1:name=systemd:/docker/8c74ee1130b68269758bdb6f255c5d825962d4c94a167e709c3c06fc0c372d43\\n\", \"future_rank_journal_reserve\": 8388608, \"logical_tensor_bytes\": 152669936, \"model_ready\": false, \"pid\": 2973, \"primary\": null, \"rank\": 3, \"raw\": {\"bytes\": 152915063, \"path\": \"/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v5/dense/receipts/NATIVE-AR-RANK-3.pt\", \"sha256\": \"dccf4e90eaaba1ef07e0b07e0963f3514ad21f281a11c73d312658af22832974\"}, \"receipt_reserve\": 65536, \"schema\": \"bole.actual-native-ar-worker-receipt/v1\", \"source\": {\"bytes\": 33944, \"path\": \"/opt/host/vnf/austinov/bole-native-ar-pair-20261020T154710Z-v5/SOURCE_BOUND.json\", \"sha256\": \"e018a5ee9b4f00fbd791eaecfb4ef34fc1297de46c34b57d25cdbf79f4613bb6\"}, \"stat\": \"2973 (VLLM::Worker_TP) R 2322 115 115 0 -1 4194560 1976096 2070632 3759 461 6081 1810 7141 685 20 0 82 0 65093299 8814601285632 768816 18446744073709551615 187650488401920 187650488404616 281474120626752 0 0 0 0 4096 1098925310 0 0 0 17 2 0 0 187 0 0 187650488470896 187650488471568 187651109154816 281474120629440 281474120629594 281474120629594 281474120634323 0\\n\"}\n"
+    }
+  ],
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "imports": [
+    "import torch",
+    "from vllm.distributed import get_pcp_group",
+    "from vllm_ascend.platform import ModelConfig",
+    "from vllm_ascend.utils import singleton"
+  ],
+  "model_restarted": false,
+  "owned_ref": {
+    "bytes": 109946,
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-20261020T154710Z-v5/dense/OWNED.json",
+    "sha256": "70c4f4749148087e0a6b7b3f847301b5e352a5440846369d8a716f3d7bebc4d8"
+  },
+  "returncode": 0,
+  "runtime_ref": {
+    "bytes": 3783,
+    "path": "/vllm-workspace/vllm-ascend/vllm_ascend/attention/attention_mask.py",
+    "sha256": "fb138c36ce381fb6ad65a620f30c6d85bd4d771ae2dfff5da947a67b2c2ba2a5"
+  },
+  "schema": "bole.actual-stopped-AR-image-source-copy/v1",
+  "snapshot_ref": {
+    "bytes": 3783,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_mask_sources_v1/attention_mask.py",
+    "sha256": "fb138c36ce381fb6ad65a620f30c6d85bd4d771ae2dfff5da947a67b2c2ba2a5"
+  },
+  "source_execution": false,
+  "stderr": "",
+  "stdout": "",
+  "stopped_pid_zero_noexec": true
+}

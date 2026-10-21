@@ -1,0 +1,26 @@
+{
+  "schema": "bole.actual-retained-HE-diagnostic-log/v1",
+  "owned_ref": {
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v1/he-runtime-diagnostic/OWNED.json",
+    "bytes": 2606,
+    "sha256": "9beb1414c3340bac0eed63bc8104a07fe88acf2169912f6be5c10d56237a8c0c"
+  },
+  "result_ref": {
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v1/RESULT.json",
+    "bytes": 78456,
+    "sha256": "7fb068652c2ac5a00fdafbf9768e3b4585ad622ee19a95234d1e043a9fea01b9"
+  },
+  "release_ref": {
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v1/he-runtime-diagnostic/cleanup.json",
+    "bytes": 1955,
+    "sha256": "b1da9c6efafa32b46a00966c4e32519cbae61a9470849e38c618401c36a16dad"
+  },
+  "CID": "79ca58dcf11611bc982cd90735fb9fc2492f65dafb7da71f4b3a8c7f4ab1bb0f",
+  "container_exit": 1,
+  "OOM": false,
+  "log_exit": 0,
+  "stdout": "",
+  "stderr": "2026-10-20T23:31:04.181493390Z Traceback (most recent call last):\n2026-10-20T23:31:04.181545520Z   File \"/source/he_runtime_probe.py\", line 71, in <module>\n2026-10-20T23:31:04.181556930Z     if __name__=='__main__':raise SystemExit(main())\n2026-10-20T23:31:04.181561500Z   File \"/source/he_runtime_probe.py\", line 56, in main\n2026-10-20T23:31:04.181596170Z     original_guard(W.runtime,P/'he_worker.py','runtime')\n2026-10-20T23:31:04.181624830Z   File \"/source/he_runtime_probe.py\", line 34, in original_guard\n2026-10-20T23:31:04.181663570Z     walk(compile(path.read_bytes(),str(path),'exec'))\n2026-10-20T23:31:04.181672700Z   File \"/source/he_runtime_probe.py\", line 31, in walk\n2026-10-20T23:31:04.181728660Z     if code.co_qualname==name:found.append(code)\n2026-10-20T23:31:04.181741240Z AttributeError: 'code' object has no attribute 'co_qualname'. Did you mean: 'co_filename'?\n",
+  "container_restarted": false,
+  "lock_observer": "missed: owner ended before external observer; not claimed verified"
+}

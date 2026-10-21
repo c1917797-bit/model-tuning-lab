@@ -1,0 +1,39 @@
+{
+  "schema": "bole.actual-mask-v2-prepared-module-identity-diagnostic/v1",
+  "failed_prepare_record": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_MASK_V2_PREPARATION.json",
+    "bytes": 1622,
+    "sha256": "0e08861bda772d43e9400bb527ffb2e88da070e47988b77f487cee69c44e12e3"
+  },
+  "actual_inputs": {
+    "path": "/opt/host/vnf/austinov/bole-native-ar-mask-control-v2/INPUTS.json",
+    "bytes": 5511,
+    "sha256": "4a9e25ed743d3bba797a43d9444723655ea895eb703d026496c84e757ed7776b"
+  },
+  "packet_module_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_mask_diagnostic_v2/diag_common.py",
+    "bytes": 9331,
+    "sha256": "e43fd9fb92b8b610b45dfcbaa3a228b4755ecefa2e3f961400f14f2c0414115d"
+  },
+  "prepared_module_ref": {
+    "path": "/opt/host/vnf/austinov/bole-native-ar-mask-control-v2/diag_common.py",
+    "bytes": 9331,
+    "sha256": "e43fd9fb92b8b610b45dfcbaa3a228b4755ecefa2e3f961400f14f2c0414115d"
+  },
+  "input_module_ref": {
+    "bytes": 9331,
+    "path": "/opt/host/vnf/austinov/bole-native-ar-mask-control-v2/diag_common.py",
+    "sha256": "e43fd9fb92b8b610b45dfcbaa3a228b4755ecefa2e3f961400f14f2c0414115d"
+  },
+  "input_schema": "bole.native-ar-mask-diagnostic-inputs/v1",
+  "packet_source_pass": false,
+  "packet_error": "ValueError('new defaultOFF exact diagnostic source')",
+  "prepared_source_pass": true,
+  "whole_module_bytes_equal": true,
+  "different_actual_module_path": true,
+  "complete_readset_audited": false,
+  "resources_admitted": false,
+  "container_created": false,
+  "NPU": false,
+  "formal_success": false
+}

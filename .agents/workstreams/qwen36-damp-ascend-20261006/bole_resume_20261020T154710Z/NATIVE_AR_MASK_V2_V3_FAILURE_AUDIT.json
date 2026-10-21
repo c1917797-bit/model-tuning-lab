@@ -1,0 +1,53 @@
+{
+  "schema": "bole.saved-mask-diagnostic-causal-failure-audit/v1",
+  "v2": {
+    "preparation": "NATIVE_AR_MASK_V2_PREPARATION.json",
+    "discriminator": "NATIVE_AR_MASK_V2_PREPARED_MODULE_DIAGNOSTIC.json",
+    "cause": "packet module __file__ mismatched copied control full Ref; schema /v1 was the same at both ends",
+    "status": "failed immutable preparation"
+  },
+  "v3": {
+    "inputs": {
+      "path": "/opt/host/vnf/austinov/bole-native-ar-mask-control-v3/INPUTS.json",
+      "bytes": 5511,
+      "sha256": "f4bcc31d0fe26a82771a872c54dbad846fe31d38e945a894eda319ae14184c09"
+    },
+    "source_audit": "NATIVE_AR_MASK_V3_SOURCE_AUDIT.json",
+    "actual": {
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-mask-v3/RESULT.json",
+      "bytes": 278560,
+      "sha256": "d4c6d2d4e6d8d775e78e2c7ccecc5e4235b0fa8f353f85447a773fb6301b9f4f"
+    },
+    "primary": {
+      "error": "TypeError(\"'NoneType' object is not subscriptable\")",
+      "traceback": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/bole-native-ar-mask-control-v3/mask_cpu_owner.py\", line 51, in main\n    C.need(ctl.name.islower()and len(ctl.name)<80 and ctl.cpu['guest_cpus'][:1]==[0],\nTypeError: 'NoneType' object is not subscriptable\n"
+    },
+    "secondary": [],
+    "source_before_after_nonempty_equal": true,
+    "source_entries": 791,
+    "elapsed_seconds": 48.15581679996103,
+    "MAIN_lock": {
+      "actual_proc_locks": [
+        "25: FLOCK  ADVISORY  WRITE 98496 fd:06:8405603 0 EOF"
+      ],
+      "host_pid": 98496,
+      "inherited_FDs": [
+        3
+      ],
+      "inherited_MAIN_lock_verified": true,
+      "lock_acquired_by_this_helper": false,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock"
+    },
+    "summary": {},
+    "no_container_create_reached": true,
+    "cause": "new CPU profile check reads ctl.cpu while original controller initializes it to None; original observe(initial=True) is the owning assignment boundary",
+    "actual_tensor_observation_complete": false
+  },
+  "successor": {
+    "packet": "native_ar_mask_diagnostic_v4",
+    "minimal_repair": "split name guard before original admission observation and profile guard after actual observe(initial=True), before create",
+    "required": "actual controller-lifecycle aggregate regression and all prior controls/source equality; complete128frame metadata then separate unchanged numerical reader",
+    "NPU": false,
+    "formal_success": false
+  }
+}

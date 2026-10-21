@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/bole-task-cpu-he-runtime-20261020T154710Z-v2/diagnostic_host.py",
+    "--source-audit",
+    "--inputs-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-he-runtime-20261020T154710Z-v2/DIAGNOSTIC_INPUTS.json\", \"bytes\": 9073, \"sha256\": \"bc2065b93df1d803e39518dbd5f5c98fca2a5182dc1b79604c34fddfc439f49c\"}"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"inputs_ref\": {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-he-runtime-20261020T154710Z-v2/DIAGNOSTIC_INPUTS.json\", \"bytes\": 9073, \"sha256\": \"bc2065b93df1d803e39518dbd5f5c98fca2a5182dc1b79604c34fddfc439f49c\"}, \"readset_files\": 234, \"full_input_decode_repeated\": false, \"resources_admitted\": false, \"NPU\": false}\n",
+  "stderr": ""
+}

@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/task_he_runtime_diagnostic_v2/prepare_registry.py",
+    "--prepare",
+    "--base-policy-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_CPU_QUIESCENCE_BASE_FOR_HE_DIAGNOSTIC_V2.json\", \"bytes\": 24659, \"sha256\": \"7d9c185a2e587e7cd4ab22242d540fb1565bb2227b02a4a3f3f7f950d354cd45\"}",
+    "--entries-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/task_he_runtime_diagnostic_v2/CPU3_ACTUAL_ENTRIES.json\", \"bytes\": 3394, \"sha256\": \"e15e04b05021bb1e44aaff62ae4ccb24953bcbea171ef42770cb6ddefc96ac2f\"}",
+    "--authority-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MODEL_AUTHORITY.json\", \"bytes\": 764, \"sha256\": \"e3046914e360c6ee5c8abd6e18fcdd2f3afaa733247ad1522e9b4cde6e67dda8\"}",
+    "--registry-output",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_CPU3_EXPLICIT_REGISTRY_HE_DIAGNOSTIC_V2.json",
+    "--policy-output",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_CPU_QUIESCENCE_POLICY_HE_DIAGNOSTIC_V2.json"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"registry_ref\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_CPU3_EXPLICIT_REGISTRY_HE_DIAGNOSTIC_V2.json\", \"bytes\": 2489, \"sha256\": \"41ab6c751316b2d9d7bd4aadf289ddb44166712ca72abdc2686752a81d67cd9f\"}, \"policy_ref\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_CPU_QUIESCENCE_POLICY_HE_DIAGNOSTIC_V2.json\", \"bytes\": 20711, \"sha256\": \"5312708b8614a401ca667800eb6e9c1eba7075d3eac0244319607975d9f25382\"}, \"resources_admitted\": false, \"NPU\": false}\n",
+  "stderr": ""
+}

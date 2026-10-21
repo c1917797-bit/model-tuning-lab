@@ -1,0 +1,121 @@
+{
+  "actual_refs": {
+    "DIAGNOSTIC_INPUTS.json": {
+      "bytes": 9073,
+      "path": "/opt/host/vnf/austinov/bole-task-cpu-he-runtime-20261020T154710Z-v2/DIAGNOSTIC_INPUTS.json",
+      "sha256": "bc2065b93df1d803e39518dbd5f5c98fca2a5182dc1b79604c34fddfc439f49c"
+    },
+    "READBACK.json": {
+      "bytes": 2379,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/HE_RUNTIME_DIAGNOSTIC_V2_READBACK.json",
+      "sha256": "ed286c06a247283280f2fe70c55f2152b28c0ba474eb615b085fe089f4722694"
+    },
+    "RESULT.json": {
+      "bytes": 82545,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v2/RESULT.json",
+      "sha256": "6fc2dd28ea5991449fc787535eac989d0924cec1924e3c5aba7278f566fdf7e5"
+    },
+    "he-runtime-diagnostic/CREATE_ARGV.json": {
+      "bytes": 1482,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v2/he-runtime-diagnostic/CREATE_ARGV.json",
+      "sha256": "b71f90900416552cd85de01db46b81ae20dd8574ff2cc713512d7f33916c84f0"
+    },
+    "he-runtime-diagnostic/DIAGNOSTIC_INSPECT.json": {
+      "bytes": 10728,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v2/he-runtime-diagnostic/DIAGNOSTIC_INSPECT.json",
+      "sha256": "b8105aa6b3080ca394235fbcffd40b885eae8168ee95647303d9f00947c0253b"
+    },
+    "he-runtime-diagnostic/DIAGNOSTIC_LOG.stdout": {
+      "bytes": 1847,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v2/he-runtime-diagnostic/DIAGNOSTIC_LOG.stdout",
+      "sha256": "e2199f8151368de48b62b96ddeec0fd4acb7a12c61e7d676713047269277d404"
+    },
+    "he-runtime-diagnostic/INHERITED_MAIN_LOCK.json": {
+      "bytes": 1296,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v2/he-runtime-diagnostic/INHERITED_MAIN_LOCK.json",
+      "sha256": "4007346fa48af43a3494cf304337c2f512fd44b192d1d485d9f683ac31cd4e2f"
+    },
+    "he-runtime-diagnostic/OBSERVATION.json": {
+      "bytes": 1627,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v2/he-runtime-diagnostic/OBSERVATION.json",
+      "sha256": "7afa9363ff4af8874201987d02ad8d6aa50f3d9464b7372228f8410873063405"
+    },
+    "he-runtime-diagnostic/OWNED.json": {
+      "bytes": 2606,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v2/he-runtime-diagnostic/OWNED.json",
+      "sha256": "adb1cace1e66dc689f1ff8ad110b853307e45fcd0e6e2b3e588df0e733dbaa72"
+    },
+    "he-runtime-diagnostic/PROCESS-BINDING.json": {
+      "bytes": 5918,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v2/he-runtime-diagnostic/PROCESS-BINDING.json",
+      "sha256": "c9581515b8bf0b9ed1e01b0fedd02ac7e28def1f065120bcf3eb156f5436236c"
+    },
+    "he-runtime-diagnostic/cleanup.json": {
+      "bytes": 3677,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v2/he-runtime-diagnostic/cleanup.json",
+      "sha256": "08ecbe290679b0520ba5bd796507282208d01b3e2d331ef97043c5c589568494"
+    }
+  },
+  "diagnostic_only": true,
+  "qualified": false,
+  "schema": "bole.frozen-prior-HE-diagnostic-expected/v1",
+  "source_files": {
+    "diagnostic_host.py": {
+      "bytes": 13204,
+      "sha256": "745a8675cee59e21ffe823a59ccf522d59695699b3bbd6c67ef72a5766ae81a4"
+    },
+    "he_owned.py": {
+      "bytes": 6114,
+      "sha256": "7af596c27e15eb2d8d9f0f33c6ec7b2a52f71e2d59e067148996cf682a46fb1e"
+    },
+    "he_policy.py": {
+      "bytes": 4644,
+      "sha256": "1cc91c0369c318c155dfd124731ac13c60133a5f9a879853637e0d4b4f1e66b6"
+    },
+    "he_runtime_probe.py": {
+      "bytes": 4743,
+      "sha256": "f2866bfa8810e42204d832142241f49e210b33ab192f094dad0abb7714882b5a"
+    },
+    "lock_evidence.py": {
+      "bytes": 5265,
+      "sha256": "583fa43426abdbde1c22388bb29c30279ce8389bc0362da1d63e66a13cc17671"
+    },
+    "main_quiescence.py": {
+      "bytes": 12864,
+      "sha256": "45af444dea25158cf59f16133679dd8f34a16edacca49a4d41466e2d2e44f0c0"
+    },
+    "owner_common.py": {
+      "bytes": 6948,
+      "sha256": "3f568b762bf6e1f24cdb613203f6beae9277d672ec397f7ef4339bf58a1f062e"
+    },
+    "owner_namespace.py": {
+      "bytes": 9104,
+      "sha256": "3b700d07462dd05f0626fcbf6fae123771058c2342aa8545854a04a13e01374d"
+    },
+    "prepare_diagnostic.py": {
+      "bytes": 4369,
+      "sha256": "2d2394333af770101c88d000b568d20de9c404f5653f091b6ea3cfbacbc80c8d"
+    },
+    "prepare_registry.py": {
+      "bytes": 2075,
+      "sha256": "28830de500d63d2fcb6a0e8211e02929a5017167a688bb441fccfcd3e835db7c"
+    },
+    "probe_evidence.py": {
+      "bytes": 11963,
+      "sha256": "769eb74a3e88e12add1dff00593a797f88bbe54570e33d65abcea9164f287321"
+    },
+    "task_contract.py": {
+      "bytes": 13493,
+      "sha256": "25a5f59f4cdb6b25fc1dfed4245895520e347961f0f7a7ccfecbf14bd8fbcf73"
+    },
+    "test_diagnostic_pure.py": {
+      "bytes": 11527,
+      "sha256": "ec36f79a9493d0ae128366af35d8c14ea0263abf326b92b003075d92326f6998"
+    },
+    "test_quiescence_pure.py": {
+      "bytes": 13873,
+      "sha256": "2bdc2e8141914254ccb9ec6c392b6d831bab8402733cadd02cf55092d1efc7ae"
+    }
+  },
+  "source_manifest_sha256": "963d2e6fd6cf8a9b78014c4106e9f9134f6289463ceb220c3caeef3b15626da4"
+}

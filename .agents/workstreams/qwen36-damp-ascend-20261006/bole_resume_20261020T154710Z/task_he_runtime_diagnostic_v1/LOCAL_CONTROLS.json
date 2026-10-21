@@ -1,0 +1,20 @@
+{
+  "AST_python_files": 13,
+  "actual_Docker_or_systemctl_executed": false,
+  "actual_HE_evaluator_executed": false,
+  "actual_network_probe_executed": false,
+  "actual_tokenizer_or_model_or_NPU_executed": false,
+  "cold_entry_clock_before_source_readset_replay": true,
+  "command": "python3 -I -B -m unittest discover -s bole_service_proposals/task_he_runtime_diagnostic_v1 -p 'test*.py' -q",
+  "default_OFF_and_help_entrypoints": 5,
+  "full_software_qualification_accepted": false,
+  "network_safety_accepted": false,
+  "original3600_cleanup180_preserved": true,
+  "original_network_guard_relaxed": false,
+  "passed": 30,
+  "pure_tests": 30,
+  "schema": "bole.HE-runtime-diagnostic-local-controls/v1",
+  "scope": "pure synthetic source/schema/argv/registry/guard controls; no actual runtime/network operation",
+  "stderr": "----------------------------------------------------------------------\nRan 30 tests in 0.567s\n\nOK\n",
+  "stdout": ""
+}

@@ -1,0 +1,97 @@
+{
+  "MAIN_owns_deployment_and_actual_admission": true,
+  "NPU": false,
+  "all_qualification_flags_remain_false": true,
+  "checks": {
+    "AST_compile_files": 7,
+    "NPU": false,
+    "actual_Devices_empty_run": false,
+    "actual_failed_v3_G1_primary_copies_whole_SHA_checked": 6,
+    "actual_host_prepare_or_sourceaudit": false,
+    "actual_mask_primary_source_bytes": 3783,
+    "actual_mask_primary_source_sha256": "fb138c36ce381fb6ad65a620f30c6d85bd4d771ae2dfff5da947a67b2c2ba2a5",
+    "actual_rank_headers_whole_SHA_checked": 4,
+    "actual_saved_mask_inspected": false,
+    "cold_default_help_tensor_import_tripwires": 6,
+    "cold_entry_clock_before_source_replay": true,
+    "formal_success": false,
+    "mask_semantics_qualified": false,
+    "native_FA_math_qualified": false,
+    "original025_common_and_namespace_byte_equal": true,
+    "schema": "bole.native-ar-mask-local-checks/v1",
+    "source_declares_nonpooling_int8_upper2048": true,
+    "source_formula_is_not_actual_mask_inspection": true,
+    "status": "prepared_only",
+    "stdlib_unit_tests_passed": 11
+  },
+  "complete_original385_G1_source_closure_retained": true,
+  "files": {
+    "ACTUAL_V3_FAILURE_REFS.json": {
+      "bytes": 1594,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/ACTUAL_V3_FAILURE_REFS.json",
+      "sha256": "89bb327e5d16e58b62c5e52ad12eb99c9fe97642ebcfda92feb8a3580e84d57a"
+    },
+    "LOCAL_CHECKS.json": {
+      "bytes": 905,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/LOCAL_CHECKS.json",
+      "sha256": "b13e43a757d08f94be69ab59050a8d01d8c8e8d2a6f3471f9cf2b52682928c9c"
+    },
+    "MASK_SOURCE_COPY_RECORD.json": {
+      "bytes": 11374,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/MASK_SOURCE_COPY_RECORD.json",
+      "sha256": "8fee543445488ba9d3a22d91950d5e318890e5503f5924d5775ade635f0c8626"
+    },
+    "MASK_SOURCE_EVIDENCE.json": {
+      "bytes": 553,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/MASK_SOURCE_EVIDENCE.json",
+      "sha256": "3d4b26f0095747074ad849eab01af166831a4e9e7df005ec2ead829ef244c522"
+    },
+    "README.md": {
+      "bytes": 7182,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/README.md",
+      "sha256": "575bfb7c44589b0ca1f15ac1cfe017cac636de323509681918818c3f5e223496"
+    },
+    "ar_owner_common.py": {
+      "bytes": 19055,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/ar_owner_common.py",
+      "sha256": "5d0b9034706b9a942a4d7dd10870139959b22dfaab2cebbdddf25ba962e456a4"
+    },
+    "ar_saved_namespace.py": {
+      "bytes": 4109,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/ar_saved_namespace.py",
+      "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+    },
+    "diag_common.py": {
+      "bytes": 7703,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/diag_common.py",
+      "sha256": "ca1c71183365754b4f6984901a282d61914fa47f84ed68dac3dee89d47080e27"
+    },
+    "mask_cpu_owner.py": {
+      "bytes": 7983,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/mask_cpu_owner.py",
+      "sha256": "c3b10762a8ec2c2142143752aa6d36d29be5797b3c064cf40c04fbfb04fc031b"
+    },
+    "mask_diagnostic.py": {
+      "bytes": 10007,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/mask_diagnostic.py",
+      "sha256": "a12fae4077dbc9c5c4c9fc790ac27be9cf408431b4a45b642d1062fc090a810d"
+    },
+    "prepare_mask_owner.py": {
+      "bytes": 2364,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/prepare_mask_owner.py",
+      "sha256": "1d9df6988ff56dead4f21f3e3bce6e04fa8e40aad0142f769f7f84bb8b6f13a1"
+    },
+    "test_diag_pure.py": {
+      "bytes": 7280,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/test_diag_pure.py",
+      "sha256": "ffd5b22c5b55df72a84c12a54d4f37cb2741d836326a995448c9dad12eb245d0"
+    }
+  },
+  "formal_success": false,
+  "mask_semantics_qualified": false,
+  "mathematical_repair": false,
+  "native_FA_math_qualified": false,
+  "original_G1_math_rerun": false,
+  "schema": "bole.native-ar-mask-diagnostic-advisory/v1",
+  "status": "prepared_only_frozen"
+}

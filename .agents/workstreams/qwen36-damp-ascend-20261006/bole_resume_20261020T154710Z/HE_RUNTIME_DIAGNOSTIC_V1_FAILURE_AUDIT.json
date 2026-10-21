@@ -1,0 +1,39 @@
+{
+  "schema": "bole.actual-HE-diagnostic-v1-causal-audit/v1",
+  "owner_result": {
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v1/RESULT.json",
+    "bytes": 78456,
+    "sha256": "7fb068652c2ac5a00fdafbf9768e3b4585ad622ee19a95234d1e043a9fea01b9"
+  },
+  "raw_stopped_logs": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/HE_RUNTIME_DIAGNOSTIC_V1_ACTUAL_LOGS.json",
+    "bytes": 1958,
+    "sha256": "b01b90532983e09568d51585a99d661f9dbf4fd8b520fc619ded5bb8f652ce6c"
+  },
+  "cleanup": {
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v1/he-runtime-diagnostic/cleanup.json",
+    "bytes": 1955,
+    "sha256": "b1da9c6efafa32b46a00966c4e32519cbae61a9470849e38c618401c36a16dad"
+  },
+  "primary": {
+    "error": "ValueError('runtime diagnostic operational exit0 without OOM')",
+    "phase": "he-runtime-diagnostic",
+    "traceback": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/bole-task-cpu-he-runtime-20261020T154710Z-v1/diagnostic_host.py\", line 129, in main\n    C.need(actual['State']['ExitCode']==0 and not actual['State']['OOMKilled'],'runtime diagnostic operational exit0 without OOM')\n  File \"/opt/host/vnf/austinov/bole-task-cpu-he-runtime-20261020T154710Z-v1/owner_common.py\", line 22, in need\n    if not value:raise ValueError(message)\nValueError: runtime diagnostic operational exit0 without OOM\n"
+  },
+  "secondary": [],
+  "elapsed_seconds": 6.4780601899838075,
+  "source_input_nonempty_equal": true,
+  "source_entries": 226,
+  "classification": "ADAPTATION_IMPLEMENTATION",
+  "cause_status": "proved",
+  "cause": "source identity helper accesses code.co_qualname unavailable in actual HE Python before original runtime guard call",
+  "actual_Python_exact_version": "not yet observed",
+  "original_HE_runtime_guard_outcome": "unobserved in diagnosticv1; original v10 failed conjunction without subcondition receipt",
+  "flock_external_observer": "missed terminal-before-observe; not claimed verified",
+  "chosen_next": "newdiagv2 exact top-level compiled code identity compatible with actual interpreter plus internal read-only flock evidence and bounded version receipt",
+  "owner": "MAIN/consumer preparer",
+  "phase_seconds": 3600,
+  "cleanup_seconds": 180,
+  "cutoff_epoch": 1792597630,
+  "formal_success": false
+}

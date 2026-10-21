@@ -1,0 +1,14 @@
+{
+  "attention_mask": {
+    "host_ref": {
+      "bytes": 3783,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_mask_sources_v1/attention_mask.py",
+      "sha256": "fb138c36ce381fb6ad65a620f30c6d85bd4d771ae2dfff5da947a67b2c2ba2a5"
+    },
+    "runtime_ref": {
+      "bytes": 3783,
+      "path": "/vllm-workspace/vllm-ascend/vllm_ascend/attention/attention_mask.py",
+      "sha256": "fb138c36ce381fb6ad65a620f30c6d85bd4d771ae2dfff5da947a67b2c2ba2a5"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "schema": "bole.current-next-backup/v14",
+  "authority": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MODEL_AUTHORITY.json",
+  "CURRENT": {
+    "resource": "no live model or helper; mask diagnostic v3 terminal before create",
+    "status": "G2v7 failed provenance path handoff; HEv3 actual observation and independent readback complete; maskv3 proved controller initialization order failure",
+    "formal_success": false
+  },
+  "NEXT": [
+    {
+      "owner": "MAIN and runtime preparer",
+      "node": "G2v8 exact four-role metadata handoff",
+      "gate": "actual readonly source audit, fresh279software+parser and same-image Devices[] cold handoff before new TP4model",
+      "status": "preparing; G2v7 model failed unchanged numerical qualification"
+    },
+    {
+      "owner": "MAIN and kernel preparer",
+      "node": "mask diagnosticv4 then new source-bound nativeAR numerical reader",
+      "gate": "move profile guard after original assignment,128actual masks, complete source/ABI-supported repair and full original math",
+      "status": "preparing; v3 admitted no container"
+    },
+    {
+      "owner": "MAIN and consumer preparer",
+      "node": "decoder v3 + full CPU v12",
+      "gate": "state-based no-network predicate, private-netns proof before executor,15525original decode+HE controls+independent stage",
+      "status": "preparing"
+    }
+  ],
+  "BACKUP": [
+    {
+      "node": "GDN matched service probev2 botharms",
+      "status": "actual source preparations only; no software232/model acceptance"
+    },
+    {
+      "node": "G3 long outputv3",
+      "status": "frozen prepared only pinsG2v7 failed predecessor; future revision needs actualG2v8 and updated64MiB metadata allocation"
+    },
+    {
+      "node": "common finiteCPU effects owner v2",
+      "status": "prepared only blocked by actual nativeAR numeric prerequisite"
+    }
+  ],
+  "missing_formal": [
+    "all-frame G2 and fixed1024 G3 lifecycle",
+    "nativeAR full numeric and greedy identity",
+    "production task shapes/ownership/growth",
+    "all GSM8K1319/HumanEval164/MMLU14042 quality within both loss interpretations",
+    "three matched OFF/ON E2E performance pairs >=1.10 each plus all resource gates",
+    "rollback/common plugin effects and authenticated Git push"
+  ],
+  "git": {
+    "local_checkpoint_before_this": "e6c814e3f4c2e9d1e70a8552369b6a2de7535de7",
+    "last_confirmed_pushed": "3fac6a64a166ea814781627b57b2c25b096e937f",
+    "push_blocker": "actual HTTPS authentication unavailable; existing SSH port22 timed out; no changed credentials",
+    "evidence": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GIT_PUSH_DA33_AUTH_FAILURE.json"
+  },
+  "constraints": {
+    "allowed_physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected_physical": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "fixed7CPU": [
+      0,
+      1,
+      2,
+      3,
+      144,
+      145,
+      166
+    ],
+    "hostCPU": 166,
+    "CPUhelper_profiles": {
+      "task_and_G2": 145,
+      "original025_serial_no_model": 0
+    },
+    "phase_seconds": 3600,
+    "cleanup_seconds": 180,
+    "outer_MAIN_flock": "entire owner lifetime",
+    "original_thresholds_unchanged": true
+  }
+}

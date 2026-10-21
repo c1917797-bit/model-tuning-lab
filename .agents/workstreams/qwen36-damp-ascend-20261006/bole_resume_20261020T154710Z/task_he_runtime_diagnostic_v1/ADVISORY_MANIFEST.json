@@ -1,0 +1,107 @@
+{
+  "HE_CPU": 145,
+  "HE_memory_bytes": 2147483648,
+  "NPU": false,
+  "actual_execution_performed": false,
+  "ancestor_CPU_budget": 7,
+  "cleanup_seconds": 180,
+  "default_enabled": false,
+  "explicit_probe_actual_entry_delta": "/source/he_worker.py -> /source/he_runtime_probe.py; only runtime() called",
+  "files": {
+    "CPU3_ACTUAL_ENTRIES.json": {
+      "bytes": 2315,
+      "sha256": "2ea4178cab47acbba3118d00e29277e622349f86000016d8068db44cd3d49314"
+    },
+    "LOCAL_CONTROLS.json": {
+      "bytes": 948,
+      "sha256": "e0dc1bbc608b8f297dd49ba33b3923696395cb604101ac07bec448c1702f009b"
+    },
+    "POLICY_SCHEMA.md": {
+      "bytes": 2542,
+      "sha256": "bb463f6514a4b5a4e2449ce7f2e86fbe3e97b79b5f032acb8199c8059f80b650"
+    },
+    "PREVIOUS_CPU_EXPECTED.json": {
+      "bytes": 2525,
+      "sha256": "c29908e4f662fa532c7adea54a6a6ee2bda6169c5ccc5168deb2e62e2678fbc0"
+    },
+    "README.md": {
+      "bytes": 6645,
+      "sha256": "b4d3116b7f07dc23c4311ac1474098e9faee5e38677e7a772f647618638ef953"
+    },
+    "diagnostic_host.py": {
+      "bytes": 12804,
+      "sha256": "1fc90700cbaf6ba4bff03ce466298f2ee47dd268182b5df81d9eb256cfa656d9"
+    },
+    "he_owned.py": {
+      "bytes": 6114,
+      "sha256": "7af596c27e15eb2d8d9f0f33c6ec7b2a52f71e2d59e067148996cf682a46fb1e"
+    },
+    "he_policy.py": {
+      "bytes": 4644,
+      "sha256": "1cc91c0369c318c155dfd124731ac13c60133a5f9a879853637e0d4b4f1e66b6"
+    },
+    "he_runtime_probe.py": {
+      "bytes": 4082,
+      "sha256": "0126b2525c9e48b98b2aae3948be0793853e2192f11b94e6e5699b7eec79ec71"
+    },
+    "main_quiescence.py": {
+      "bytes": 12864,
+      "sha256": "45af444dea25158cf59f16133679dd8f34a16edacca49a4d41466e2d2e44f0c0"
+    },
+    "owner_common.py": {
+      "bytes": 6897,
+      "sha256": "a1e87472e4349225e6eb1ac5951b49177c73ae726f4eb7f498301bd2d34d7349"
+    },
+    "owner_namespace.py": {
+      "bytes": 9104,
+      "sha256": "3b700d07462dd05f0626fcbf6fae123771058c2342aa8545854a04a13e01374d"
+    },
+    "prepare_diagnostic.py": {
+      "bytes": 4347,
+      "sha256": "1306deb958cf21c3fe66362c041c3874c13006fa5d9141017bf5eab71707f1ac"
+    },
+    "prepare_registry.py": {
+      "bytes": 2075,
+      "sha256": "28830de500d63d2fcb6a0e8211e02929a5017167a688bb441fccfcd3e835db7c"
+    },
+    "probe_evidence.py": {
+      "bytes": 10286,
+      "sha256": "6c0fc9ff73318a76015f2db87dfb98fcf0ebc7deabe460abd987b80ee0705f47"
+    },
+    "task_contract.py": {
+      "bytes": 13493,
+      "sha256": "25a5f59f4cdb6b25fc1dfed4245895520e347961f0f7a7ccfecbf14bd8fbcf73"
+    },
+    "test_diagnostic_pure.py": {
+      "bytes": 6695,
+      "sha256": "f3b77b5d9ed23caeaff17d4380ce64f1ab3dffee67043cd1535f1989a07065ed"
+    },
+    "test_quiescence_pure.py": {
+      "bytes": 13873,
+      "sha256": "2bdc2e8141914254ccb9ec6c392b6d831bab8402733cadd02cf55092d1efc7ae"
+    }
+  },
+  "frozen_policy_module_sha256": "45af444dea25158cf59f16133679dd8f34a16edacca49a4d41466e2d2e44f0c0",
+  "frozen_v2_task_packet_manifest_sha256": "33761994f0fcd18ec39f21ad0fa93a3fdfb11649d18a0a53f37667bc02abb37d",
+  "full_software_qualification_accepted": false,
+  "generated_code_executed": false,
+  "host_CPU": 166,
+  "identity_hold_seconds": 5,
+  "known_actual_CPU3_entry_count": 2,
+  "local_pure_tests": 30,
+  "local_pure_tests_passed": 30,
+  "model_ready": false,
+  "network_safety_accepted": false,
+  "original_HE_owner_namespace_and_resources_unchanged": true,
+  "original_guard_source_unchanged": true,
+  "performance_ready": false,
+  "phase_seconds": 3600,
+  "policy_schema": "bole.MAIN-NPU-quiescence-policy/v2",
+  "prior_failed_CPU_v10_manifest_sha256": "0089e8184f9843c9f32d277dd0454b80e7af83d04e316f849680e1d32b0becbf",
+  "probe_seconds": 90,
+  "registry_schema": "bole.explicit-MAIN-CPU3-owned-registry/v1",
+  "reserve_CPU_budget": 2,
+  "schema": "bole.HE-runtime-isolation-diagnostic-advisory/v1",
+  "status": "frozen prepared-only; actual bounded observation/retirement/readback pending",
+  "task_score_produced": false
+}

@@ -1,0 +1,72 @@
+{
+  "CPU_manifest_sha256": "0089e8184f9843c9f32d277dd0454b80e7af83d04e316f849680e1d32b0becbf",
+  "CPU_source": {
+    "cpu_host.py": {
+      "bytes": 19734,
+      "sha256": "3293adf977e720847fd200caa6fd11629696366d212b2c4478af62a6fa1c16f5"
+    },
+    "cpu_import_guard.py": {
+      "bytes": 3814,
+      "sha256": "2abb3811ce41f25ddd93d91253ef4a649173c37ac2c572a4809b24b2f061d36e"
+    },
+    "cpu_steps.py": {
+      "bytes": 6590,
+      "sha256": "dc16e3756242255e368dc5061b354557d55a7586a983e12a20620015af87adfa"
+    },
+    "he_owned.py": {
+      "bytes": 6114,
+      "sha256": "7af596c27e15eb2d8d9f0f33c6ec7b2a52f71e2d59e067148996cf682a46fb1e"
+    },
+    "main_quiescence.py": {
+      "bytes": 11020,
+      "sha256": "c818c0314aa6866988451f069124714b71132259604f80235a24209ecb742264"
+    },
+    "owner_common.py": {
+      "bytes": 9186,
+      "sha256": "6e58b91ee25c3701c31dea8694f82955b7c9ccc0f7c502e363cc9bad5346f846"
+    },
+    "owner_namespace.py": {
+      "bytes": 9104,
+      "sha256": "3b700d07462dd05f0626fcbf6fae123771058c2342aa8545854a04a13e01374d"
+    },
+    "prepare_owner.py": {
+      "bytes": 5642,
+      "sha256": "fdb9f6350c2d52b167409371b0db5b3b56cdd408d59b67eaede319dcf5cbf079"
+    },
+    "public_probe_gate.py": {
+      "bytes": 10785,
+      "sha256": "c1f0ad1478d842e4b3cb2b2ef75ef8da251d03e91602ecc9b156a380689c7e53"
+    },
+    "test_owner_pure.py": {
+      "bytes": 9919,
+      "sha256": "a768000b233b598de95772e37e00618970a55120b20001c07fbd5235911d2897"
+    },
+    "test_public_probe_pure.py": {
+      "bytes": 5380,
+      "sha256": "115b8f38b1988ef30446b2a3b7161d51bd574ba611f5398d213a1b4f15b6a333"
+    },
+    "test_quiescence_pure.py": {
+      "bytes": 11877,
+      "sha256": "612e6f337b27dd819b7c5e28c39e7575b510ae25e86f29227e25f67e7651e36b"
+    },
+    "test_tokenizer_probe_pure.py": {
+      "bytes": 4354,
+      "sha256": "2ec45fb7f02a4f9f3b9a671540766b10c71f9a516588b9045d0be77fc684e7f7"
+    }
+  },
+  "full_qualification_accepted": false,
+  "original_he_policy": {
+    "bytes": 4644,
+    "sha256": "1cc91c0369c318c155dfd124731ac13c60133a5f9a879853637e0d4b4f1e66b6"
+  },
+  "original_he_worker": {
+    "bytes": 7316,
+    "sha256": "48f45351b3645c7490e59a08b1d16e3e911fa234f081c8742d04de7435c46515"
+  },
+  "original_task_contract": {
+    "bytes": 13493,
+    "sha256": "25a5f59f4cdb6b25fc1dfed4245895520e347961f0f7a7ccfecbf14bd8fbcf73"
+  },
+  "schema": "bole.HE-runtime-diagnostic-predecessor-source/v1",
+  "task_manifest_sha256": "33761994f0fcd18ec39f21ad0fa93a3fdfb11649d18a0a53f37667bc02abb37d"
+}

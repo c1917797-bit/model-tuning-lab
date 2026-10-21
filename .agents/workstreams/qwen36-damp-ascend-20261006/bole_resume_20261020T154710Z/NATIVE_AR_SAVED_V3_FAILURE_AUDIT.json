@@ -1,0 +1,55 @@
+{
+  "schema": "bole.actual-nativeAR-saved-v3-causal-audit/v1",
+  "owner_result": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-20261020T154710Z-v3/RESULT.json",
+    "bytes": 275439,
+    "sha256": "00dd451a8492832d05c5b448aab5639ebaf7c6bb48e988d0c60d2f7386e65cbd"
+  },
+  "child": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-20261020T154710Z-v3/cpu-consumer/SAVED-PAIR-INDEPENDENT-CHILD.json",
+    "bytes": 1943,
+    "sha256": "976d28af6653770780844c90f2cf6147e296a525b1f1d79a1370f3cce365924b"
+  },
+  "stderr": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-20261020T154710Z-v3/cpu-consumer/SAVED-PAIR-INDEPENDENT.stderr",
+    "bytes": 1249,
+    "sha256": "7a66d30f92dd5b728364ff31ae7f816c8f757e67edf70a2c4e79c061877e93bf"
+  },
+  "cleanup": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-20261020T154710Z-v3/cpu-consumer/cleanup.json",
+    "bytes": 4820,
+    "sha256": "08310b01d16fd01d70701e11b9a043ee2856c29e52264adfd5d1979d0a51d91e"
+  },
+  "actual_complete_G1_subconsumer": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-20261020T154710Z-v3/cpu-consumer/BOLE-INDEPENDENT-GATE/ATTRIBUTION.json",
+    "bytes": 12320,
+    "sha256": "ed2378a21f63db8af27f4689afff99855d99309110f460ddc7b606efa5762700"
+  },
+  "original_G1_subconsumer_pass": true,
+  "original_nativeAR_math_completed": false,
+  "source_before_after_nonempty_equal": true,
+  "source_map_entries": 768,
+  "secondary": [],
+  "owner_elapsed_seconds": 180.62926060007885,
+  "actual_cold_systemd_seconds": 219.702337,
+  "cold_start_included_in_owner_elapsed": false,
+  "actual_cold_within_original3600_plus180": true,
+  "primary": {
+    "error": "ValueError(\"actual original child failed {'path': '/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-20261020T154710Z-v3/cpu-consumer/SAVED-PAIR-INDEPENDENT-CHILD.json', 'sha256': '976d28af6653770780844c90f2cf6147e296a525b1f1d79a1370f3cce365924b'}\")",
+    "traceback": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/bole-native-ar-saved-cpu-20261020T154710Z-v3/saved_cpu_owner.py\", line 64, in main\n    summary['independent_child']=H.child(ctl,'SAVED-PAIR-INDEPENDENT',[\n  File \"/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/host_once.py\", line 28, in child\n    c.require(p.returncode==0,\"actual original child failed \"+str(r));return r\n  File \"/cache/cch/qwen36-paper-preparation-20261007/sparse/adakv-tp4-model-once-v1-025/model_contract.py\", line 25, in require\n    if not v:raise ValueError(why)\nValueError: actual original child failed {'path': '/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-20261020T154710Z-v3/cpu-consumer/SAVED-PAIR-INDEPENDENT-CHILD.json', 'sha256': '976d28af6653770780844c90f2cf6147e296a525b1f1d79a1370f3cce365924b'}\n"
+  },
+  "failed_boundary": "nativeFA saved-mask format guard before pointwise recomputation",
+  "cause_status": "source-supported hypothesis; actual saved-mask dtype/value/formula observation pending",
+  "hypothesis": "native get_splitfuse_attn_mask constructs int8 triangular0/1 but independent consumer assumes bool",
+  "primary_source_copy": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_mask_sources_v1/COPY.json",
+    "bytes": 1451,
+    "sha256": "9b52c6fe9a51cad5fe00967d71ebb12d00d61e0ffbb756afa2df1ac0174fcf62"
+  },
+  "chosen_next": "sameimage Devices[] all4 savedmask metadata diagnostic; no model rerun or relaxed threshold",
+  "owner": "MAIN/kernel preparer",
+  "phase_seconds": 3600,
+  "cleanup_seconds": 180,
+  "cutoff_epoch": 1792597630,
+  "formal_success": false
+}

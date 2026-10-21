@@ -1,0 +1,43 @@
+{
+  "NPU": false,
+  "actual_new_admission_or_qualification": false,
+  "actual_saved_v3_original_CPU_profile_refs": {
+    "GUEST_CPU.json": {
+      "bytes": 2141,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-20261020T154710Z-v3/cpu-consumer/GUEST_CPU.json",
+      "sha256": "8951d2cb17be1f6be5189ceefec29fae39151442dbba2fc0e610b00c87590cb7"
+    },
+    "OWNED.json": {
+      "bytes": 163637,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-saved-cpu-20261020T154710Z-v3/cpu-consumer/OWNED.json",
+      "sha256": "d8c1613deb8dbcf3dc4270a2cf49561a70bee7ddc2db8ee53b4fbb5966f3326a"
+    }
+  },
+  "common_v2_actual_execution_observed": false,
+  "common_v2_readme_with_inaccurate_CPU145_description_preserved": {
+    "bytes": 7950,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/common_plugin_effects_owner_v2/README.md",
+    "sha256": "b017831dbf34ca73541f6ade6c66c444dea29ba13aa86913aefafdd068d2acda"
+  },
+  "common_v2_runtime_has_CPU145_guard_or_report": false,
+  "common_v2_runtime_owner_preserved": {
+    "bytes": 8063,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/common_plugin_effects_owner_v2/common_cpu_owner.py",
+    "sha256": "b66f00254f0fc09c67918926d22f6a5e67a034025438d62fe4b5f269d13ecdef"
+  },
+  "formal_success": false,
+  "future_common_helper_CPU_must_follow_actual_original_controller_selection": true,
+  "mask_v1_incorrect_CPU145_guard_preserved": {
+    "bytes": 7983,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/mask_cpu_owner.py",
+    "sha256": "c3b10762a8ec2c2142143752aa6d36d29be5797b3c064cf40c04fbfb04fc031b"
+  },
+  "observed_effective_capacity": 1,
+  "observed_saved_v3_guest_CPU": [
+    0
+  ],
+  "original_CPU145_description_is_not_a_gate": true,
+  "original_frozen_results_or_sources_modified": false,
+  "schema": "bole.original025-no-model-CPU-description-correction/v1",
+  "source_only_fact_correction": true
+}
