@@ -1,0 +1,76 @@
+SOURCE12=dict(path='/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v12/SOURCE_BOUND.json',bytes=908497,sha256='6c925c8e827b4761926645b89c5897ef25d7e81a80664cb4b4def75076c05d15')
+ROOT=Path('/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v13')
+OUT=Path('/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v13')
+CPU_OUT=Path(str(OUT)+'-CPU')
+SOURCE=dict(path=str(ROOT/'SOURCE_BOUND.json'),bytes=994678,sha256='545e09b8bd8e598830cd81ab2ba3be6c5a6b775d1d35f263ed6d3519a4145345')
+RESULT=None
+UNIT_REF=None
+HTTP_MANIFEST=(1321,'5b29f5fe4647587a8e49e65291061c79a46e57709e62398bec234d6d11e1c6f7')
+HTTP_FILES={'g2_http_visibility_v13.py':(4644,'226f447e2944081dd0310ebe1b93e1b6253c76a2bf33dc99c9e68d61011cddbf'),'prepare_g2_http_v13.py':(14693,'9a5dd3de8fab53bd48807f44ff733678e8ce643dd16ffd5f2e1a48dc123634c1'),'test_g2_ack_http.py':(7694,'2151bd877bc0511b9339169e5fc675915dbdb80ad45652ed9c67732482302972')}
+SAVED_CPU341=dict(path='/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V12_CPU_READBACK.json',bytes=787650,sha256='259c07e794a336f66678b1c9caceb8c8200b157b897764f6e980c28c63904a5a')
+CPU341_READER=dict(path='/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_v12_cpu_readback_v2/readback_cpu.py',bytes=51180,sha256='bbd3f5502ab28f9fe5957c678114faaf34a9a5b70419c97c8681f22f83e18c33')
+CPU341_RESULT=dict(path='/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12-CPU/RESULT.json',bytes=1202315,sha256='d7f90208d7faf168fda68d61b08e15c066e00b0e37da54111445bd41b9b34cee')
+FAILED_MODEL12=dict(path='/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12/RESULT.json',bytes=1205776,sha256='046dd18f22d6e1df8ea138253fedfdc9862f89ba04e61858d2892dae008b7c0d')
+
+def source_modules(m):
+    sys.path.insert(0,str(ROOT));loaded={}
+    names=('sourceio','component_gate','predecessor118t','bind_model','command_contract','g2_cold_parent_output','g2_callee_proof','g2_cold_clock','g2_handoff','g2_contract','g2_host_adapter','external025','g2_ack_proof','g2_software_stages','prepare_g2_phases_v11','g2_executor_proof','owned_create','prepare_g2_ack_v12','g2_http_visibility_v13','prepare_g2_http_v13')
+    for name in names:
+        need(name not in sys.modules,'fresh independent reader source namespace '+name)
+        value=importlib.import_module(name);need(ref(value.__file__)==m['files'][name+'.py'],'exact actual source-owned original helper '+name);loaded[name]=value
+    return NS(**loaded)
+
+def source_gate(sr):
+    need(SOURCE is not None and sr==SOURCE,'only actual fully pinned prepared/audited SOURCE13, never caller substitution')
+    m=obj(sr);need(m['root']==str(ROOT)and m['output_root']==str(OUT)and m['prepared_only']is False and m['default_enabled']is False and m['service_required_sameimage_software_cases']==349,'actual defaultOFF source13 software349 profile')
+    for r in(*m['files'].values(),*m['dependencies']):checked(r)
+    runtime_snapshots=runtime_routes(m);parent=obj(SOURCE12)
+    for r in(*parent['files'].values(),*parent['dependencies']):checked(r)
+    proof=m['g2_http_visibility_v13'];need(proof['parent_source']==SOURCE12,'exact actual source12 parent layer')
+    manifest_ref=proof['manifest'];need((manifest_ref['bytes'],manifest_ref['sha256'])==HTTP_MANIFEST,'exact frozen new HTTP source layer manifest');obj(manifest_ref)
+    for name,wanted in HTTP_FILES.items():r=m['files'][name];need((r['bytes'],r['sha256'])==wanted,'whole reviewed new HTTP layer '+name)
+    preparer=proof['actual_preparer'];need((preparer['bytes'],preparer['sha256'])==HTTP_FILES['prepare_g2_http_v13.py']and checked(preparer).read_bytes()==checked(m['files']['prepare_g2_http_v13.py']).read_bytes(),'exact producer and byteequal source-owned preparer copy')
+    need(proof['new_HTTP_controls']==8 and proof['original_ACK_controls']==19 and proof['current_ACK_pattern_cases']==27 and proof['HTTP_output_relative']=='dense/receipts/STREAM'and proof['phase_seconds']==3600 and proof['cleanup_seconds']==180 and proof['fixed_cutoff']==1792597630,'explicit eight new HTTP controls, unchanged scope/budgets')
+    for k in('actual_current_stage_source_is_SOURCE_BOUND','inherited_current12_label_is_runner_compatibility_only','inherited_ACK_v12_descriptor_is_historical_layer','all_original341_test_files_byteexact','HTTP_files_counted_by_unchanged_finalizer','no_new_mount','no_new_RW_alias'):need(proof[k]is True,'explicit HTTP migration scope '+k)
+    changed={'host_service.py','contract090.py','G2_STREAM_EDITS_V1.json'};ledger=obj(proof['whole_current_inverse'])
+    need(ledger==obj(m['files']['G2_HTTP_EDITS_V13.json'])and ledger['schema']=='bole.exact-G2-HTTP-output-visibility-inverse/v13'and ledger['baseline']==SOURCE12 and set(ledger['files'])==changed,'complete exact three-file HTTP layer inverse')
+    for name,row in ledger['files'].items():need(row['before']==parent['files'][name]and row['after']==m['files'][name]and row['edits']==[dict(before=checked(row['before']).read_text(),after=checked(row['after']).read_text())],'complete original/current inverse operands '+name)
+    for name,r in parent['files'].items():
+        if name not in changed:need(checked(r).read_bytes()==checked(m['files'][name]).read_bytes(),'all source12 tests/ACK/runner/math128/client/finalizer/identity/clock whole bytes '+name)
+    mods=source_modules(m);H=mods.g2_http_visibility_v13;need(H.SOURCE12==SOURCE12 and H.HOST_REF==parent['files']['host_service.py'],'actual source-bound original HTTP host operands')
+    host_proof=H.audit_host(checked(parent['files']['host_service.py']).read_text(),checked(m['files']['host_service.py']).read_text());need(host_proof['whole_file_inverse']is True and host_proof['whole_AST_inverse']is True,'only actual producer output/readback two-anchor delta')
+    required=dict(parent['service_software_scope']);required['new_current_cases']=27
+    need(m['service_software_scope']==required and required['parent_source']==V8_SOURCE and required['controls_source']==V10_SOURCE and required['historical_stage_source']==V11_SOURCE,'same four source contexts; current12 label actually source13/27')
+    mods.g2_software_stages.scope(m,sr)
+    saved=obj(SAVED_CPU341);need(saved['source']==SOURCE12 and saved['result_ref']==CPU341_RESULT and saved['reader_ref']==CPU341_READER and saved['sameimage_341_parser_and_actual_cold_handoff_pass']is True and saved['all_owned_stopped_retained']is True and saved['reader_source_before_after_equal']is True and saved['numerical_model_qualification']is False,'exact actual source12 CPU341 qualification only')
+    checked(CPU341_READER)
+    for r in saved['independent_readback_refs']:checked(r)
+    C=mods.sourceio;canonical=C.ref(sr['path']);need(canonical==sr,'canonical source13 Ref for exact argv order')
+    oldcanonical=C.ref(SOURCE12['path']);need(oldcanonical==SOURCE12,'canonical exact source12 Ref')
+    oldrefs=[*mods.bind_model.readset(oldcanonical),*parent['dependencies'],*mods.command_contract.validate(C,oldcanonical,parent)];oldcomplete={}
+    for r in oldrefs:checked(r);need(r['path']not in oldcomplete or oldcomplete[r['path']]==r['sha256'],'no conflicting source12 closure');oldcomplete[r['path']]=r['sha256']
+    oldresult=obj(CPU341_RESULT);need(oldresult['source']==SOURCE12 and oldresult['cpu_only']is True and oldresult['primary']is None and oldresult['secondary']==[]and oldresult['source_before']==oldresult['source_after']==oldcomplete and oldcomplete and saved['source_readset_count']==len(oldcomplete),'actual original341 owner/source closure reopened')
+    failed=obj(FAILED_MODEL12);need(failed['source']==SOURCE12 and failed['cpu_only']is False and failed['primary']is not None and failed['secondary']==[]and failed['source_before']==failed['source_after']==oldcomplete,'actual failed MODEL12 retained only as failure provenance')
+    need(checked(m['files']['g2_ack_proof.py']).read_bytes()==checked(parent['files']['g2_ack_proof.py']).read_bytes(),'unchanged exact ACK fixture/inverse proof helper')
+    ack_parent,ack_observed,ack_cause=mods.prepare_g2_ack_v12.evidence();ack=parent['g2_ack_serialization_v12']
+    need(mods.prepare_g2_ack_v12.SOURCE==V11_SOURCE and ack['parent_source']==V11_SOURCE and all(ack[k]==v for k,v in ack_cause.items()),'original failed11 ACK-cause proof reexecuted from unchanged helper')
+    def top(source,name):
+        found=[n for n in ast.parse(source).body if isinstance(n,(ast.FunctionDef,ast.ClassDef))and n.name==name];need(len(found)==1,'one exact original definition '+name);return ast.dump(found[0],include_attributes=False)
+    oldchannel=checked(ack_parent['files']['g2_channel.py']).read_text();currentchannel=checked(m['files']['g2_channel.py']).read_text()
+    for name in('Sender','validate_ack'):need(top(oldchannel,name)==top(currentchannel,name),'original sender/semantic ACK validator unchanged '+name)
+    snapshot=mods.g2_callee_proof.verify_snapshot(parent);need(snapshot['snapshot_imported_as_controller']is False and snapshot['original_ref']==parent['g2_callee_contract_v10']['original025_sources']['safety_host']and m['g2_callee_contract_v10']['original025_sources']==parent['g2_callee_contract_v10']['original025_sources'],'genuine original025 API and CPU snapshot, never fake controller')
+    need(mods.g2_executor_proof.consume(m['stream_executor_sources'])==m['stream_executor_proof']and mods.g2_executor_proof.installed(m['stream_executor_sources'])==m['stream_runtime_sources'],'same actual launcher/CPU3 installed proof')
+    clock=mods.g2_cold_clock.validate(checked(m['files']['host_service.py']).read_text());need(clock['one_main_entry_clock']is True and clock['phase_seconds']==3600 and clock['shared_cleanup_seconds']==180 and clock['fixed_cutoff']==1792597630,'unchanged original cold entry/remaining/shared cleanup clock')
+    refs=[*mods.bind_model.readset(canonical),*m['dependencies'],*mods.command_contract.validate(C,canonical,m)];complete={}
+    for r in refs:checked(r);need(r['path']not in complete or complete[r['path']]==r['sha256'],'no conflicting current closed readset');complete[r['path']]=r['sha256']
+    mods.actual_ordered_readset=refs
+    for path,digest in oldcomplete.items():need(complete.get(path)==digest,'complete original source12 closure retained in current immutable readset')
+    need(complete.get(FAILED_MODEL12['path'])==FAILED_MODEL12['sha256'],'actual failed12 predecessor in immutable closure')
+    for r in ack_observed:need(complete.get(r['path'])==r['sha256'],'original ACK failure evidence closed in current readset')
+    commands=obj(ref(ROOT/'COMMANDS.json'));need(commands['required_sameimage_software_cases']==349,'actual current349 runnable command scope')
+    argv=[sys.executable,'-I','-B',str(checked(m['files']['prepare_g2_http_v13.py'])),'--source-audit','--source-ref',json.dumps(canonical)]
+    q=subprocess.run(argv,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=600,check=False);need(q.returncode==0,'actual new HTTP-layer readonly source audit reexecuted')
+    audited=one(q.stdout,'bole.G2-v13-HTTP-visibility-source-audit/v1');need(audited['source']==sr and audited['readset_count']==len(complete),'new source audit exact source and full current closure')
+    audit_record=dict(preparer_ref=m['files']['prepare_g2_http_v13.py'],argv=argv,returncode=q.returncode,stdout=q.stdout.decode('utf-8','strict'),stderr=q.stderr.decode('utf-8','strict'),result=audited)
+    authority=dict(source=SOURCE12,CPU341_qualification_ref=SAVED_CPU341,CPU341_reader_ref=CPU341_READER,CPU341_owner_ref=CPU341_RESULT,source12_readset_count=len(oldcomplete),all_retained_authority_refs_reopened=True,reused_as_current349_PASS=False,failed_MODEL12_ref=FAILED_MODEL12)
+    return m,mods,complete,commands,clock,dict(snapshot,runtime_host_snapshots=runtime_snapshots,HTTP_host_proof=host_proof,source12_unchanged_layer_authority=authority,v13_readonly_source_audit_reexecuted=audit_record)
