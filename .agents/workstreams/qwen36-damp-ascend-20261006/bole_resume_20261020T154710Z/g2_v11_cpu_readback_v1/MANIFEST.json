@@ -1,0 +1,96 @@
+{
+  "AST_files": 2,
+  "Git": false,
+  "NPU": false,
+  "actual_independent_readback_executed": false,
+  "actual_model_qualification": false,
+  "all_complete_raw_terminals_metadata_parser_cold_required": true,
+  "current11_fresh_cases": 18,
+  "default_enabled": false,
+  "exact_sameimage_case_count": 322,
+  "explicit_32_installed_to_host_snapshot_routes": true,
+  "formal_success": false,
+  "frozen": true,
+  "host_access": false,
+  "inventory": {
+    "LOCAL_TESTS.stderr": {
+      "bytes": 3368,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_v11_cpu_readback_v1/LOCAL_TESTS.stderr",
+      "sha256": "e75b321c22a612a791e7248b9362c5e4a2115ac2a921c5e5abcbdb6526105c6d"
+    },
+    "LOCAL_TESTS.stdout": {
+      "bytes": 0,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_v11_cpu_readback_v1/LOCAL_TESTS.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "LOCAL_VALIDATION.json": {
+      "bytes": 2518,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_v11_cpu_readback_v1/LOCAL_VALIDATION.json",
+      "sha256": "61eaff3f248abe65a261116cc25ee6ef3a7deec841be5a49100a93852f15ce23"
+    },
+    "README.md": {
+      "bytes": 5392,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_v11_cpu_readback_v1/README.md",
+      "sha256": "5bcddc04ccc8a7964f901e739c2c1fe88224f5fb43f34e2e19e886759e5a2921"
+    },
+    "readback_cpu.py": {
+      "bytes": 44491,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_v11_cpu_readback_v1/readback_cpu.py",
+      "sha256": "55a0832b1fe5f3595e0a52293aab9e4e0366125b16b2aa3852d9c6b05aef59fc"
+    },
+    "test_readback_pure.py": {
+      "bytes": 15504,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_v11_cpu_readback_v1/test_readback_pure.py",
+      "sha256": "6690fdc6ec6989dff0cdcb1a7da7c4683d8f258d16a5d38619e84d1a463dbc3f"
+    }
+  },
+  "local_validation": {
+    "bytes": 2518,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_v11_cpu_readback_v1/LOCAL_VALIDATION.json",
+    "sha256": "61eaff3f248abe65a261116cc25ee6ef3a7deec841be5a49100a93852f15ce23"
+  },
+  "original_phase_seconds": 3600,
+  "original_shared_cleanup_seconds": 180,
+  "original_source_owned_readset_commands_and_cold_readers_reexecuted": true,
+  "pure_cases": 19,
+  "qualification_filename": "G2_V11_CPU_READBACK.json",
+  "qualification_schema": "bole.actual-G2-v11-CPU-independent-qualification/v1",
+  "qualification_written": false,
+  "reader": {
+    "bytes": 44491,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_v11_cpu_readback_v1/readback_cpu.py",
+    "sha256": "55a0832b1fe5f3595e0a52293aab9e4e0366125b16b2aa3852d9c6b05aef59fc"
+  },
+  "required_output_fields": [
+    "source",
+    "result_ref",
+    "sameimage_322_parser_and_actual_cold_handoff_pass",
+    "all_owned_stopped_retained"
+  ],
+  "result_ref": {
+    "bytes": 1070384,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11-CPU/RESULT.json",
+    "sha256": "dfaed25ecf0b2bff4807cd2ce7a5c86e800aaab6416ef09a01c9ccf74f776fb8"
+  },
+  "schema": "bole.advisory-G2-v11-independent-CPU-readback/v1",
+  "skipped": 0,
+  "software_allocation_seconds": {
+    "controls": 60,
+    "metadata": 120,
+    "parent279": 120
+  },
+  "software_lane_cap_seconds": 300,
+  "source10_fresh_cases": 25,
+  "source8_fresh_cases": 279,
+  "source_overlay_manifest": {
+    "bytes": 10521,
+    "sha256": "bf3c31c8b13fc2de9e795456aebad2a50455feec675f1721eeaec2e47be74dcd"
+  },
+  "source_ref": {
+    "bytes": 824421,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v11/SOURCE_BOUND.json",
+    "sha256": "0cb8a78ee572778434b7b64f494fa42de46cdf4561c235effce3440a8b294f01"
+  },
+  "stdlib_only": true,
+  "unknown_ref_fallback": false
+}

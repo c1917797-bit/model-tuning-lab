@@ -1,0 +1,36 @@
+{
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/RESULT.json",
+    "bytes": 317648,
+    "sha256": "e6f94628b6996e93c819b8a6d80dc0ee8b54e3a531009c70d6fa4e0b2dc9ec8f"
+  },
+  "inputs": {
+    "path": "/opt/host/vnf/austinov/bole-native-ar-fsum-control-v1/INPUTS.json",
+    "bytes": 7784,
+    "sha256": "8cc92215f51a32ba948a30c66e37fcb1af1f0d2de6cd0bb19df01426a2654619"
+  },
+  "diagnostic": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/FSUM-ORACLE.json",
+    "bytes": 4277,
+    "sha256": "535e5a2c3fba8cd058cd9b183d323145a40852c9330fa66f907f0bcfbca7055c"
+  },
+  "unit_terminal": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_FSUM_V1_SYSTEMD_TERMINAL.json",
+    "bytes": 428,
+    "sha256": "3f0ad3fe9b1f0f812555200f5b5e2f85939bdc680f825964d1a9389ab6a10839"
+  },
+  "independent_scalar_oracle_completed": true,
+  "frame_count": 128,
+  "scalar_product_terms": 51904512,
+  "exp_terms": 101376,
+  "source_equal_count": 913,
+  "original_failed_frame_count": 16,
+  "original_violating_coordinate_count": 32,
+  "original_bound_preserved": true,
+  "mask_semantics_qualified": false,
+  "native_AR_numeric_pass": false,
+  "primary": null,
+  "secondary": [],
+  "schema": "bole.primary-readback-audit/v2",
+  "formal_success": false
+}

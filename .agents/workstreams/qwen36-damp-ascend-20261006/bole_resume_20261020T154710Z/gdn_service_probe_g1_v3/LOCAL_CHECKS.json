@@ -1,0 +1,32 @@
+{
+  "NPU": false,
+  "Torch_imported": false,
+  "actual_original_observe_or_create_exercised": false,
+  "actual_sameimage240_executed": false,
+  "actual_service_executed": false,
+  "all_pass": true,
+  "command": "python3 -I -B -m unittest discover -s bole_service_proposals/gdn_service_probe_g1_v3 -p 'test*.py'",
+  "controls": [
+    "Exact first main entry before parser/MAIN observation/source/replay hashes; same start alias, Joint, every controller and elapsed",
+    "Late-clock, renewal, missing gate and wrong observe/admission/create order rejected",
+    "Original3600/180/fixedcutoff/create60 numeric boundary negatives; reserve not doubled",
+    "Actual byteexact025 complete init/remaining methods exercised with isolated base/clock; controller entry mismatch rejected",
+    "Canonical original inherited MAIN observer AST pinned; no acquire/create/reimplementation",
+    "CPU/model exact one outer flock prefix, bind command unchanged",
+    "Clock/builder imports guarded against tensor runtimes",
+    "Whole allfive postimages inverse to frozen-v2 hashes, frozen-v2 manifest and unchanged runtime/math/original18 test bytes"
+  ],
+  "exact_original025_init_remaining_methods_exercised_with_explicit_clock_and_base_constructor_seams": true,
+  "formal_success": false,
+  "model_ready": false,
+  "new_clock_controls": 8,
+  "original_G1_cases": 214,
+  "original_v2_CPU232_executed": false,
+  "original_v2_controls_retained": 18,
+  "prospective_sameimage_original_plus_added": 240,
+  "resources_admitted": false,
+  "schema": "bole.gdn-G1-probe-v3-local-controls/v1",
+  "source_audit_admission": false,
+  "status": "prepared_only_unexecuted",
+  "unittest_count": 26
+}

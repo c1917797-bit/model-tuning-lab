@@ -1,0 +1,66 @@
+{
+  "AST_sources": [
+    {
+      "bytes": 44491,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_v11_cpu_readback_v1/readback_cpu.py",
+      "sha256": "55a0832b1fe5f3595e0a52293aab9e4e0366125b16b2aa3852d9c6b05aef59fc"
+    },
+    {
+      "bytes": 15504,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_v11_cpu_readback_v1/test_readback_pure.py",
+      "sha256": "6690fdc6ec6989dff0cdcb1a7da7c4683d8f258d16a5d38619e84d1a463dbc3f"
+    }
+  ],
+  "NPU": false,
+  "actual_RESULT_not_fabricated": true,
+  "actual_RESULT_ref": {
+    "bytes": 1070384,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11-CPU/RESULT.json",
+    "sha256": "dfaed25ecf0b2bff4807cd2ce7a5c86e800aaab6416ef09a01c9ccf74f776fb8"
+  },
+  "actual_SOURCE_ref": {
+    "bytes": 824421,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v11/SOURCE_BOUND.json",
+    "sha256": "0cb8a78ee572778434b7b64f494fa42de46cdf4561c235effce3440a8b294f01"
+  },
+  "actual_SOURCE_whole_SHA_reverified_locally": true,
+  "actual_independent_readback_executed": false,
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-I",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_v11_cpu_readback_v1",
+    "-p",
+    "test*.py",
+    "-v"
+  ],
+  "default_OFF_help_executions": 3,
+  "explicit_32_host_snapshot_routes": true,
+  "new_4stage_raw_terminal_clock_negative_controls": true,
+  "no_container_or_resource_calls": true,
+  "pure_tests": 19,
+  "qualification_written": false,
+  "reader": {
+    "bytes": 44491,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_v11_cpu_readback_v1/readback_cpu.py",
+    "sha256": "55a0832b1fe5f3595e0a52293aab9e4e0366125b16b2aa3852d9c6b05aef59fc"
+  },
+  "returncode": 0,
+  "schema": "bole.G2-v11-independent-CPU-reader-local-controls/v1",
+  "skipped": 0,
+  "source_owned_original_CANN_argv_and_derived_CPU_inspect_negative_controls": true,
+  "stderr": {
+    "bytes": 3368,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_v11_cpu_readback_v1/LOCAL_TESTS.stderr",
+    "sha256": "e75b321c22a612a791e7248b9362c5e4a2115ac2a921c5e5abcbdb6526105c6d"
+  },
+  "stdout": {
+    "bytes": 0,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_v11_cpu_readback_v1/LOCAL_TESTS.stdout",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

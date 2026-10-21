@@ -1,0 +1,142 @@
+{
+  "actual_304_combined_software_qualified": false,
+  "actual_cold_handoff_executed": false,
+  "actual_current25_complete": true,
+  "actual_current25_reported_seconds": 1.66,
+  "actual_model_executed": false,
+  "actual_nested_G1_214_elapsed_seconds": 51.589331859955564,
+  "actual_parent279_completed": true,
+  "actual_parent279_elapsed_seconds": 96.67428704001941,
+  "actual_parser_executed": false,
+  "actual_primary": "ValueError('bounded original child; never retry')",
+  "actual_primary_refs": {
+    "HOST-FIRST-FAULT.json": {
+      "bytes": 2042,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/HOST-FIRST-FAULT.json",
+      "sha256": "7e08fc3cc1381429aec42738623e507fb6b58f8c72da22b600c499cb054616b4"
+    },
+    "RESULT.json": {
+      "bytes": 957044,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/RESULT.json",
+      "sha256": "f2e0233bc5d13c0ac66d407568c5e09a7aee7d7a8601963783f0b008911dbbb9"
+    },
+    "cpu-preflight/G2-V9-PARENT-V8-SOFTWARE/EXTRACTION.json": {
+      "bytes": 16390,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/cpu-preflight/G2-V9-PARENT-V8-SOFTWARE/EXTRACTION.json",
+      "sha256": "a55a8b0ce015c4244235c9bfb705fb7f22df4663967a9bb833f13fb2eaa9ba3f"
+    },
+    "cpu-preflight/G2-V9-PARENT-V8-SOFTWARE/STDERR.raw": {
+      "bytes": 11148,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/cpu-preflight/G2-V9-PARENT-V8-SOFTWARE/STDERR.raw",
+      "sha256": "469f7517db1ca179bffd86fab5025a5f648f66239fa7976e647433388902575b"
+    },
+    "cpu-preflight/G2-V9-PARENT-V8-SOFTWARE/STDOUT.raw": {
+      "bytes": 13381,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/cpu-preflight/G2-V9-PARENT-V8-SOFTWARE/STDOUT.raw",
+      "sha256": "5ddcd74a2bd57949108134fa53f3c02edb4848696a20dffc60a2d217a6b4387e"
+    },
+    "cpu-preflight/G2-V9-PARENT-V8-SOFTWARE/TERMINAL.json": {
+      "bytes": 1537,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/cpu-preflight/G2-V9-PARENT-V8-SOFTWARE/TERMINAL.json",
+      "sha256": "71723c003d7a1ea6869e1da8d1b053333fa9b053a87153be5294484b76d427e8"
+    },
+    "cpu-preflight/GUEST_CPU.json": {
+      "bytes": 2149,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/cpu-preflight/GUEST_CPU.json",
+      "sha256": "5f68df1fca3925ea2fabc10fb71219f356f16e0912790155892f561bc7ec7920"
+    },
+    "cpu-preflight/OWNED.json": {
+      "bytes": 524374,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/cpu-preflight/OWNED.json",
+      "sha256": "ad26a43f48cef48c462f243883dd22396f6812abec29bb8fddfc3777e7bf7ac9"
+    },
+    "cpu-preflight/PARENT-G1-SOFTWARE/EXTRACTION.json": {
+      "bytes": 6919,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/cpu-preflight/PARENT-G1-SOFTWARE/EXTRACTION.json",
+      "sha256": "5aff00f5c50ad568850522d7fb70d3e6ba0aaa527d264770af88807d3d8f1502"
+    },
+    "cpu-preflight/PARENT-G1-SOFTWARE/TERMINAL.json": {
+      "bytes": 1587,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/cpu-preflight/PARENT-G1-SOFTWARE/TERMINAL.json",
+      "sha256": "991635c73526d7543fa56f8fc7aca7c121378c3948301a7e5d148d7bf77ebab6"
+    },
+    "cpu-preflight/PARENT-G1-SOFTWARE/stderr": {
+      "bytes": 32551,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/cpu-preflight/PARENT-G1-SOFTWARE/stderr",
+      "sha256": "21238f0364fdb305d67ce07e864960f14ce816c0543daf386573d8dd49287318"
+    },
+    "cpu-preflight/PARENT-G1-SOFTWARE/stdout": {
+      "bytes": 6069,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/cpu-preflight/PARENT-G1-SOFTWARE/stdout",
+      "sha256": "400bb6672a2f6752ea9872249ff79f7114dcfa66592249932042945362d7fdfe"
+    },
+    "cpu-preflight/SOFTWARE.stderr": {
+      "bytes": 4873,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/cpu-preflight/SOFTWARE.stderr",
+      "sha256": "a062c5134e85ccefb5e93a25f4e48f9ad200a5937de10be5bc17e3ef0a6971c0"
+    },
+    "cpu-preflight/SOFTWARE.stdout": {
+      "bytes": 438,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/cpu-preflight/SOFTWARE.stdout",
+      "sha256": "187ecaae1c6e9b6bdd9f18f19134eea83998bacbb61b5b171ea9aadf401d6f31"
+    },
+    "cpu-preflight/cleanup.json": {
+      "bytes": 1324,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/cpu-preflight/cleanup.json",
+      "sha256": "354cc8ff74f03d93a7d92abd54fc03dbebf1a94d84e39c7a81bc558a7a3734e0"
+    },
+    "cpu-preflight/inspect-1792546700986710550.json": {
+      "bytes": 2175375,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/cpu-preflight/inspect-1792546700986710550.json",
+      "sha256": "d2ebc8e2a82d6835ff1d2fc4059068f7d09c98d0daf96c939394f76596af0314"
+    },
+    "cpu-preflight/inspect-1792546716856978220.json": {
+      "bytes": 2175226,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/cpu-preflight/inspect-1792546716856978220.json",
+      "sha256": "c3b3ac3543ee0222e3201659d6bd60fb957fa46eec77eef5ed3e8d15370edc2f"
+    },
+    "cpu-preflight/stop-retain-1792546716752014300.json": {
+      "bytes": 776,
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU/cpu-preflight/stop-retain-1792546716752014300.json",
+      "sha256": "6620c8c4b9244a8ba25bb247c289ea76044208ec1c05e04fc603d867cbbfae41"
+    },
+    "source/COMMANDS.json": {
+      "bytes": 3620,
+      "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v10/COMMANDS.json",
+      "sha256": "ffcdcb1934e94dc9eb4a7d47ced43d5cc6bb3ce862ec5e315e8e5009f0c2a32b"
+    },
+    "source/SOURCE_BOUND.json": {
+      "bytes": 752323,
+      "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v10/SOURCE_BOUND.json",
+      "sha256": "af907e01b7143a476459095fad32db5110a940392584c40a4886763a03a9081c"
+    },
+    "source/preflight114.py": {
+      "bytes": 4903,
+      "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v10/preflight114.py",
+      "sha256": "dd350e30348d56f1b0ec0cf9c9ca4a794374f7574ec5797c6423bf407e12ba07"
+    },
+    "source/service_metadata.py": {
+      "bytes": 5292,
+      "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v10/service_metadata.py",
+      "sha256": "a4e5d33a8e1c5022ce9608eb73153090b82af7aa3ef8a4b356bf681bb4766a8b"
+    }
+  },
+  "actual_retained_cleanup": true,
+  "actual_secondary": [],
+  "actual_software_outer_cap_seconds": 120,
+  "actual_source_nonempty_2936_before_after_equal": true,
+  "current_metadata_completed": false,
+  "metadata_remaining_strictly_less_than_seconds": 21.665712959980592,
+  "new_source_aggregate_software_cap_seconds": 300,
+  "new_source_finite_software_allocation_seconds": {
+    "controls": 60,
+    "metadata": 120,
+    "parent279": 120
+  },
+  "old_elapsed_not_rewritten": true,
+  "original_fixed_cutoff": 1792597630,
+  "original_phase_seconds": 3600,
+  "original_shared_cleanup_seconds": 180,
+  "schema": "bole.actual-G2-v10-software-timeout-diagnosis/v11",
+  "specific_import_stack_identified": false
+}

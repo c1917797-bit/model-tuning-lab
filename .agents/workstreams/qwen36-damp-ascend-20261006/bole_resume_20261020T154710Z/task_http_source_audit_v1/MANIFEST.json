@@ -1,0 +1,52 @@
+{
+  "AST_python_files": 3,
+  "CPU14_rerun": false,
+  "actual_CPU14_full_execution_reused": true,
+  "actual_G2v11_success_independent_ref": null,
+  "actual_G2v11_success_owner_ref": null,
+  "actual_G2v11_success_source_ref": null,
+  "actual_HTTP_source_ref": null,
+  "actual_getter_executed_here": false,
+  "cold_clock_before_source_replay": true,
+  "default_enabled": false,
+  "files": {
+    "CPU14_ACTUAL_PRIMARY_EXPECTED.json": {
+      "bytes": 9973,
+      "sha256": "6b579f748687f2ade45357e5d6a62d1f940d4bf7b3885453eda0e2e463facedd"
+    },
+    "LOCAL_VALIDATION.json": {
+      "bytes": 525,
+      "sha256": "879ec6cdc2779d7ee3935ceb5f53a1e174591d7113b9f15e65c6c25460c7c4de"
+    },
+    "PENDING_G2V11_GATES.json": {
+      "bytes": 852,
+      "sha256": "62d3ec627d0cab0473656078ddfe44b3b416a4aec6f5182f939b62b4275718c5"
+    },
+    "README.md": {
+      "bytes": 9661,
+      "sha256": "1b8ae5278bb6272897ecbba5c0bc2a70132a4815cf47531cc5074965491f6096"
+    },
+    "audit_common.py": {
+      "bytes": 6417,
+      "sha256": "5399aaf65b217bb94b8c8a93e0e52b90f828cf456f0ae482a45135d5e40048ba"
+    },
+    "source_audit.py": {
+      "bytes": 17668,
+      "sha256": "b85119b84c20cf971097638bda9001571516f16ba3a257c1f4a16ed034919f11"
+    },
+    "test_source_audit.py": {
+      "bytes": 7950,
+      "sha256": "f49f223313a0f967d7feddb8abe022c94b20cfe99715a80d7b5c04f838f27546"
+    }
+  },
+  "fixed_HTTPv3_manifest_sha256": "fa3a0f55304a53a3006c616cfdd3a1dc035b86c1a3d978f1aae8a334b02680ec",
+  "fixed_decoder4_manifest_sha256": "248fe4f5ddd17cb9bad494d05e692ba0edee95fe4cb5c78bebcb58fc0a0a2129",
+  "formal_task_accuracy_accepted": false,
+  "model_constructed": false,
+  "model_ready": false,
+  "performance_ready": false,
+  "phase_seconds": 600,
+  "pure_controls": 19,
+  "schema": "bole.MAIN-HTTPv3-source-audit-advisory/v1",
+  "status": "frozen local source-only packet; actual complete MAIN getter and source preparation pending"
+}

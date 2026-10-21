@@ -1,0 +1,197 @@
+{
+  "OWNER_INPUTS.json": {
+    "bytes": 63022,
+    "path": "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v14/OWNER_INPUTS.json",
+    "sha256": "91d364a8729efde66b9c6fa062c10fdc5f17669ab3a49639af03dc21297be394"
+  },
+  "external/TASK_CPU_V14_SYSTEMD_TERMINAL.json": {
+    "bytes": 558,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/TASK_CPU_V14_SYSTEMD_TERMINAL.json",
+    "sha256": "a2b9982431360643fc8b3065db8a4ffe4aefe4c653868f444a075f5bd45af1ad"
+  },
+  "INHERITED_MAIN_LOCK.json": {
+    "bytes": 1289,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/INHERITED_MAIN_LOCK.json",
+    "sha256": "2bc960feb91b22d9d758fe8f5a5f7dc613bb7bf3ada3b3f4c7a2b81d58663c39"
+  },
+  "PRIVATE_NAMESPACE.json": {
+    "bytes": 2135,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/PRIVATE_NAMESPACE.json",
+    "sha256": "419374f11ab0ab78a90ee5eccf4ec8c0551c1289fd2eb460a1d184193f7c8215"
+  },
+  "RESULT.json": {
+    "bytes": 244257,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/RESULT.json",
+    "sha256": "8403c75bdcdb74df6801b06c2e552fe0eec70a9053ddb663432fe4323be92dc5"
+  },
+  "cpu-consumer/ATTRIBUTION.json": {
+    "bytes": 2171,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-consumer/ATTRIBUTION.json",
+    "sha256": "2c18b4a49f7069bbd7c6f4d11764e8c8ff58f8d476dc78ea7b1ff470b0f44b7f"
+  },
+  "cpu-consumer/CHILD-independent-reader.json": {
+    "bytes": 94054,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-consumer/CHILD-independent-reader.json",
+    "sha256": "63c58bb692b5cc46736c9b9969c38bec6e6d2b380f9c5ef271fb1e8a0bc0445d"
+  },
+  "cpu-consumer/CPU-CHILD-TERMINAL.json": {
+    "bytes": 3685,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-consumer/CPU-CHILD-TERMINAL.json",
+    "sha256": "5c1c3f675720585c53e267bd3903125c85c1776af40ed771150a7516291803aa"
+  },
+  "cpu-consumer/OWNED.json": {
+    "bytes": 499805,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-consumer/OWNED.json",
+    "sha256": "6291cb3cf13205d538e62b489d5ffa4f50e594cadbcb74e7af7a4e84e48dcb7d"
+  },
+  "cpu-consumer/PROCESS-BINDING.json": {
+    "bytes": 11305,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-consumer/PROCESS-BINDING.json",
+    "sha256": "e31c8cd83ace86ffdc39f634959c0afac8c3a50958d2f63fa98b3a387db83b25"
+  },
+  "cpu-consumer/cleanup.json": {
+    "bytes": 1221,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-consumer/cleanup.json",
+    "sha256": "4a476f9c7e98fed9ff23b495849436ba8e5fe4d9e458d85daced195ade65fefa"
+  },
+  "cpu-consumer/inspect-1792546450144752150.json": {
+    "bytes": 1895874,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-consumer/inspect-1792546450144752150.json",
+    "sha256": "3296bac9a0f71e1bf9b0769277c21600e15ebb7ddb6e268469fffaf3790fcdca"
+  },
+  "cpu-consumer/inspect-1792546465921461890.json": {
+    "bytes": 1896078,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-consumer/inspect-1792546465921461890.json",
+    "sha256": "23dd83c6d25ea2aac7c90e7e20a5434d613fdfe55c944392b906631d0c8b3aa1"
+  },
+  "cpu-preflight/CHILD-prepare-decode.json": {
+    "bytes": 93001,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-preflight/CHILD-prepare-decode.json",
+    "sha256": "25ae86d42c5e515bb51ef450c94c67b6d38243494d614e8bbda93a86573d9b56"
+  },
+  "cpu-preflight/CPU-CHILD-TERMINAL.json": {
+    "bytes": 1863,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-preflight/CPU-CHILD-TERMINAL.json",
+    "sha256": "ba18b6376388918c09572775cd99dc48d09fd8cc4823836e754aae1ddf63fe65"
+  },
+  "cpu-preflight/DECODER.json": {
+    "bytes": 5750,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-preflight/DECODER.json",
+    "sha256": "171ffda3f5a2b1d30f0f66e97d3f3041bf856ed8179dd0620724c0888dc12eb8"
+  },
+  "cpu-preflight/OWNED.json": {
+    "bytes": 139532,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-preflight/OWNED.json",
+    "sha256": "b4e4198d33c3ebe8ac5eeb23d06b63a96ffdb89da2632655cfcf5e3b9d62811a"
+  },
+  "cpu-preflight/PROCESS-BINDING.json": {
+    "bytes": 9471,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-preflight/PROCESS-BINDING.json",
+    "sha256": "48e44d8b06cabe05a17afdf27645d4437962ed78a4e07285aa8dbdc2a995c277"
+  },
+  "cpu-preflight/TASK_SOURCE_BOUND.json": {
+    "bytes": 10686,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-preflight/TASK_SOURCE_BOUND.json",
+    "sha256": "8bda8c57d2ee79867de8cbc1783cce9fda09dfd2a0a63438cb81131e1853bb09"
+  },
+  "cpu-preflight/cleanup.json": {
+    "bytes": 1225,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-preflight/cleanup.json",
+    "sha256": "89e42f5af2baf904b551aa245b4cd7c50076efe0d3a499d33ad7110de0275a70"
+  },
+  "cpu-preflight/effective-v012/EFFECTIVE_INPUTS.json": {
+    "bytes": 4082,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-preflight/effective-v012/EFFECTIVE_INPUTS.json",
+    "sha256": "2ef1cbc53f2e967a1a7262cd56c4d5f26c5e56244c208b8ee30186d9184b8210"
+  },
+  "cpu-preflight/he-public-controls/STAGE.json": {
+    "bytes": 1948,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-preflight/he-public-controls/STAGE.json",
+    "sha256": "dae4c6a241e9e3d5b748c0125f1b0b0e00860abf5e10696bdf8f875d2490ad9a"
+  },
+  "cpu-preflight/inspect-1792546353534007630.json": {
+    "bytes": 536125,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-preflight/inspect-1792546353534007630.json",
+    "sha256": "4e255d951edfa42cda652b60e40a7b57f1a7295a760c88c6ce2337bbe731b34e"
+  },
+  "cpu-preflight/inspect-1792546368949196800.json": {
+    "bytes": 536329,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-preflight/inspect-1792546368949196800.json",
+    "sha256": "ed82b008e8bcdf04280cb039dcd306a07905b668d1dec890fa0159db70736d04"
+  },
+  "he-controls/ACK-PUBLICATION.json": {
+    "bytes": 803,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/he-controls/ACK-PUBLICATION.json",
+    "sha256": "07c2cedf1cc4f75c485d3820dc2208febe4e40efeffb4b7886c51796e77b814a"
+  },
+  "he-controls/CREATE.stdout": {
+    "bytes": 65,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/he-controls/CREATE.stdout",
+    "sha256": "7b2745cafec330bd02611dac7fb509eee650c85d916926f68f1c84a68e18e488"
+  },
+  "he-controls/CREATE_ARGV.json": {
+    "bytes": 1514,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/he-controls/CREATE_ARGV.json",
+    "sha256": "d37c74c95b3fbd0d1379042b64e682ba9f7eebdbab3e5a20eb9d2556a680f26d"
+  },
+  "he-controls/DOCKER-INSPECT.json": {
+    "bytes": 10801,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/he-controls/DOCKER-INSPECT.json",
+    "sha256": "c14194cb398eb53164ecd59fbf5cee27a69acb85e1810bf2fcf228d93a47a6e7"
+  },
+  "he-controls/HE-NET-ACK.json": {
+    "bytes": 814,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/he-controls/HE-NET-ACK.json",
+    "sha256": "8b69894f98712e7403e4d72b6b266447b751cc0901257f01f0ec36416e4179fb"
+  },
+  "he-controls/HE-NET-ADMISSION.json": {
+    "bytes": 1223,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/he-controls/HE-NET-ADMISSION.json",
+    "sha256": "603a2be87ccb7186be1db570aa8f5ecde88885f719bff357639ea3641881d207"
+  },
+  "he-controls/HE-NET-NAMESPACE.json": {
+    "bytes": 772,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/he-controls/HE-NET-NAMESPACE.json",
+    "sha256": "68533cdf81ec4f3a1ae3882169b9b928b45ed23fb1acaf08a2dd142c73d76857"
+  },
+  "he-controls/HE-NET-READY.json": {
+    "bytes": 4919,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/he-controls/HE-NET-READY.json",
+    "sha256": "1dab2a86685fb771dd319c5ff8bd4290f490f357a1ecb84dae6713f13c317b5e"
+  },
+  "he-controls/HE-OWNER.json": {
+    "bytes": 1644,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/he-controls/HE-OWNER.json",
+    "sha256": "cf760f5ae8f0e431b2be28cdc729e7e1d21d770f6452009ed00b2272ffdb1981"
+  },
+  "he-controls/LOG.stdout": {
+    "bytes": 21694,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/he-controls/LOG.stdout",
+    "sha256": "ff3335a51e09d7f10316b97740b375258fcd48a856601b09622763e0033314f3"
+  },
+  "he-controls/OWNED.json": {
+    "bytes": 2637,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/he-controls/OWNED.json",
+    "sha256": "21aac442b483234753fa143badd2574a829c69ea9f4cfbbe9b0f02401246cf1b"
+  },
+  "he-controls/PROCESS-BINDING.json": {
+    "bytes": 5947,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/he-controls/PROCESS-BINDING.json",
+    "sha256": "02001b1828eda2a61f04e980dcc283b93274706cb3006ef6532ed916d5643ec8"
+  },
+  "he-controls/WAIT.stdout": {
+    "bytes": 2,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/he-controls/WAIT.stdout",
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "he-controls/cleanup.json": {
+    "bytes": 1217,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/he-controls/cleanup.json",
+    "sha256": "91d5612774e722935b7d7f26dca5cfdbf91a5dd8c21c45a2cec8b09794c275ad"
+  },
+  "he-controls/inspect-1792546378133288610.json": {
+    "bytes": 17552,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/he-controls/inspect-1792546378133288610.json",
+    "sha256": "c993d7214d3ae32af7c043382d96c9a0f243b03f71a8d82dc05fef0b40ad81d9"
+  }
+}

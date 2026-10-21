@@ -1,0 +1,35 @@
+{
+  "MAIN_complete_real_path_sourceaudit_still_required": true,
+  "actual_CPU14_input_ref": {
+    "bytes": 63022,
+    "path": "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v14/OWNER_INPUTS.json",
+    "sha256": "91d364a8729efde66b9c6fa062c10fdc5f17669ab3a49639af03dc21297be394"
+  },
+  "actual_CPU14_owner_ref": {
+    "bytes": 244257,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/RESULT.json",
+    "sha256": "8403c75bdcdb74df6801b06c2e552fe0eec70a9053ddb663432fe4323be92dc5"
+  },
+  "actual_G2_success_source_ref": null,
+  "actual_HE_control_rows_and_Python_library_profile_match": true,
+  "actual_HTTP_run": false,
+  "actual_fixed_postrun_supplement_present_in_source_before": true,
+  "actual_independent_ref": {
+    "bytes": 2171,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/cpu-consumer/ATTRIBUTION.json",
+    "sha256": "2c18b4a49f7069bbd7c6f4d11764e8c8ff58f8d476dc78ea7b1ff470b0f44b7f"
+  },
+  "actual_inherited_lock_owner_lifetime_fields_match": true,
+  "actual_model_ready": false,
+  "actual_nonce_source_fullCID_PID_and_private_namespace_fields_join": true,
+  "actual_root_atomic_publication_field_and_whole_ACK_digest_join": true,
+  "actual_source_status_and_component_fields_match": true,
+  "actual_supported19_code_pins_match": true,
+  "actual_three_retained_release_fullCID_image_zeroPID_inspects_match": true,
+  "host_only_full_C_CPU_proof_replay_performed_locally": false,
+  "local_qualified_guard_and_UAPI_protocol_checked": true,
+  "offline_actual_HE_network_facts_and_ACK_pure_replay": true,
+  "remote_full_input_and_tokenizer_readset_NOT_copied": true,
+  "schema": "bole.HTTPv3-offline-actualCPU14-source-field-audit/v1",
+  "whole_primary_files_checked": 39
+}

@@ -1,0 +1,42 @@
+{
+  "NPU": false,
+  "actual_CPU_source_result_unchanged": true,
+  "actual_MAIN_v2_readback_executed": false,
+  "actual_first_mount": "type=bind,source=/usr/local/Ascend/driver,destination=/usr/local/Ascend/driver,readonly",
+  "actual_local_complete_owner_chain_positives": 2,
+  "actual_ordered_readset_fixture": {
+    "bytes": 773410,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V11_READER_V2_ORDERED_READSET.json",
+    "sha256": "33d962e58becc24e26ab133cfc5dce15083db3872724e7caf257981991979500"
+  },
+  "actual_v1_failed_execution": {
+    "bytes": 2889,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V11_CPU_READBACK_EXECUTION.json",
+    "sha256": "6bcdd328b2ac80033ae0701c26bd09292c9908622892b94fcf8044c6c9b08c34"
+  },
+  "actual_whole_argv_lengths": {
+    "candidate": 5992,
+    "cpu_preflight": 6000
+  },
+  "cause": "original create_argv iterates insertion-order expected.mounts; persisted OWNED JSON sort_keys loses that order",
+  "first_different_argv_index": 86,
+  "fixture_only_for_local_controls": true,
+  "full_argv_equality_retained": true,
+  "negative_order_source_extra_readonly_CID_and_readset_order_rejected": true,
+  "observed_argv_never_used_to_derive_expected": true,
+  "production_reader_never_reads_fixture": true,
+  "production_repair": "actual source-owned owned_create.create recomputes expected from independently recalculated ordered source readset; private sentinel before first unique-name resource call",
+  "qualification_written": false,
+  "result_ref": {
+    "bytes": 1070384,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11-CPU/RESULT.json",
+    "sha256": "dfaed25ecf0b2bff4807cd2ce7a5c86e800aaab6416ef09a01c9ccf74f776fb8"
+  },
+  "schema": "bole.actual-independent-reader-create-order-fault/v2",
+  "source": {
+    "bytes": 824421,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v11/SOURCE_BOUND.json",
+    "sha256": "0cb8a78ee572778434b7b64f494fa42de46cdf4561c235effce3440a8b294f01"
+  },
+  "wrong_v1_first_mount_destination": "/adakv-results"
+}

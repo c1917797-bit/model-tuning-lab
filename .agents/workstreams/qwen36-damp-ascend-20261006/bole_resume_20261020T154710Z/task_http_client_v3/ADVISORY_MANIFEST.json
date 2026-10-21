@@ -1,0 +1,115 @@
+{
+  "AST_python_files": 8,
+  "BOLE_activation_proven": false,
+  "CLI_defaultOFF_and_help_cases": 12,
+  "CPU_owner_expected_code_files": 19,
+  "CPU_owner_inputs_result_schema_revision": 5,
+  "CPU_profile": "full-v012-public-backend-network-isolation-python312/v4",
+  "CPU_proof_evidence_refs_signature_unchanged": true,
+  "HTTP_source_schema": "bole.three-task-normalEOS-smoke/source/v3",
+  "MAIN_complete_real_path_sourceaudit_required": true,
+  "NPU": false,
+  "actual_G2_success_independent_ref": null,
+  "actual_G2_success_owner_ref": null,
+  "actual_G2_success_source_ref": null,
+  "actual_HTTP_execution_performed": false,
+  "actual_ON_model_runtime_admission_separately_required": true,
+  "actual_complete_remote_CPU_proof_getter_replayed_locally": false,
+  "actual_prior_CPU14_primary_copies_whole_verified": 39,
+  "barrier_request_count": 1,
+  "client_process_optin_protocol": "actual-client-process-source-bound-runpy/v1",
+  "client_process_shim_file": "client_entry.py",
+  "concurrency": 1,
+  "default_enabled": false,
+  "execution_closure_files": 8,
+  "files": {
+    "ACTUAL_CPU14_FIELD_AUDIT.json": {
+      "bytes": 1743,
+      "sha256": "322d9d6a976fdc5234b57752f941b29a5f4dad9dcc1e2344d3f07431ea889135"
+    },
+    "CPU_OWNER_EXPECTED.json": {
+      "bytes": 2133,
+      "sha256": "1b992ab2d3121f4382058f3ff7843591c137dc96d87f4109e570a33fcdf26713"
+    },
+    "EVIDENCE_SCHEMA.md": {
+      "bytes": 2160,
+      "sha256": "24a562a1a318dab88962100c7fa5b62fecc5a362cbf392bdd81c562127f90148"
+    },
+    "LOCAL_VALIDATION.json": {
+      "bytes": 608,
+      "sha256": "0ed6965d51c7ba66362551495a72d6a59b0ab2269142aa994d4929281a679a76"
+    },
+    "NATIVE_SOURCE_EXPECTED.json": {
+      "bytes": 2735,
+      "sha256": "2bb01c9d2ecf4db1790bf7e4ad3bc9dd4ee325185ea3d277a03591202a783b47"
+    },
+    "PENDING_RUNTIME_GATES.json": {
+      "bytes": 693,
+      "sha256": "063395e3f58ef66218bb2627638e0e269384f871d4e3d638d32ecff3a5cbcacf"
+    },
+    "README.md": {
+      "bytes": 9027,
+      "sha256": "6149dc51f8cef8b510fa77abab2dee201beee77fb22e2647398cb603c31c2220"
+    },
+    "bind_processes.py": {
+      "bytes": 5089,
+      "sha256": "6b02f628993d5ade958e27b3e8994fe26daf18debfe538fe3a9887bc60b8a459"
+    },
+    "client_entry.py": {
+      "bytes": 1971,
+      "sha256": "8307a93d4b44a81ac587ab5167a85b994ae98b2efd2b1c01f0ea0d7d588d3e89"
+    },
+    "consume_lifecycle.py": {
+      "bytes": 18892,
+      "sha256": "ac36ceb3750a67d000273cc10c011de479f2a26aa908c3f033e8a5aad957c495"
+    },
+    "http_client.py": {
+      "bytes": 7071,
+      "sha256": "624b40c06bc7373f620e0ba655d74fe7077f0189ef15fb18d575b05e42f3d31f"
+    },
+    "http_common.py": {
+      "bytes": 25497,
+      "sha256": "674a49a1dc2880e0e6596b95291ac84a749243564019a11637429db127775dcd"
+    },
+    "native_finish_observer.py": {
+      "bytes": 15754,
+      "sha256": "6aae2093d02f51bfa278eb1313d781bc67591a4da12fd3f34d5d97cf2a45155a"
+    },
+    "prepare_http.py": {
+      "bytes": 3668,
+      "sha256": "3992857ce9d506c7aa695de3ed574c3e506c607953d3ba6b05c69326229b2117"
+    },
+    "test_http_pure.py": {
+      "bytes": 21088,
+      "sha256": "4550334b3fbdf3c8070dfa62b443d364d6b2da0b0338bb62d24dfdc17fc70548"
+    }
+  },
+  "formal_task_accuracy_accepted": false,
+  "ignore_eos": false,
+  "local_pure_tests": 41,
+  "max_tokens": 2048,
+  "minimum_context_tokens": 5199,
+  "model_ready": false,
+  "native_AR_identity_proven": false,
+  "old_failed_CPU10_CPU13_allowed": false,
+  "original_four_execution_files_byteexact_HTTPv2": true,
+  "performance_ready": false,
+  "phase_seconds": 1800,
+  "raw_limit_bytes": 67108864,
+  "request_count": 6,
+  "request_seconds": 300,
+  "schema": "bole.task-normalEOS-HTTP-lifecycle-advisory/v3",
+  "status": "frozen prepared source; actual HTTP/model/BOLE and new G2 parent qualification pending",
+  "supported_actual_CPU14_inputs_ref": {
+    "bytes": 63022,
+    "path": "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v14/OWNER_INPUTS.json",
+    "sha256": "91d364a8729efde66b9c6fa062c10fdc5f17669ab3a49639af03dc21297be394"
+  },
+  "supported_actual_CPU14_owner_ref": {
+    "bytes": 244257,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v14/RESULT.json",
+    "sha256": "8403c75bdcdb74df6801b06c2e552fe0eec70a9053ddb663432fe4323be92dc5"
+  },
+  "supported_decoder4_manifest_sha256": "248fe4f5ddd17cb9bad494d05e692ba0edee95fe4cb5c78bebcb58fc0a0a2129",
+  "three_actual_release_after_inspect_explicit_dependencies": true
+}

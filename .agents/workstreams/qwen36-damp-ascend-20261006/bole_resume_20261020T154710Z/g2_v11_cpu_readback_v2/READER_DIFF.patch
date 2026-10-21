@@ -1,0 +1,84 @@
+--- frozen-v1/readback_cpu.py
++++ new-v2/readback_cpu.py
+@@ -103,7 +103,7 @@
+ def source_modules(m):
+     # These unchanged source-owned modules define only stdlib/read-only gates.
+     sys.path.insert(0,str(ROOT));loaded={}
+-    for name in('sourceio','component_gate','predecessor118t','bind_model','command_contract','g2_cold_parent_output','g2_callee_proof','g2_cold_clock','g2_handoff','g2_contract','g2_host_adapter','external025','g2_software_stages','prepare_g2_phases_v11','g2_executor_proof'):
++    for name in('sourceio','component_gate','predecessor118t','bind_model','command_contract','g2_cold_parent_output','g2_callee_proof','g2_cold_clock','g2_handoff','g2_contract','g2_host_adapter','external025','g2_software_stages','prepare_g2_phases_v11','g2_executor_proof','owned_create'):
+         need(name not in sys.modules,'fresh independent reader source namespace '+name)
+         value=importlib.import_module(name);need(ref(value.__file__)==m['files'][name+'.py'],'exact actual source-owned original helper '+name);loaded[name]=value
+     return NS(**loaded)
+@@ -142,6 +142,7 @@
+     C=mods.sourceio;canonical=C.ref(sr['path']);need(canonical==sr,'same actual canonical source Ref')
+     refs=[*mods.bind_model.readset(canonical),*m['dependencies'],*mods.command_contract.validate(C,canonical,m)];complete={}
+     for r in refs:checked(r);need(r['path']not in complete or complete[r['path']]==r['sha256'],'no conflicting actual closed readset');complete[r['path']]=r['sha256']
++    mods.actual_ordered_readset=refs
+     commands=obj(ref(ROOT/'COMMANDS.json'));need(commands['required_sameimage_software_cases']==322,'actual current runnable322 command scope')
+     for r in observed:need(complete.get(r['path'])==r['sha256'],'failed10 actual evidence included in immutable readset')
+     return m,mods,complete,commands,clock,dict(snapshot,runtime_host_snapshots=runtime_snapshots)
+@@ -183,11 +184,42 @@
+     rows=parse(v['stdout']);need(type(rows)is list and len(rows)==1,'one complete actual inspect row');return rr,v,rows[0]
+ 
+ 
+-def owner_chain(m,sr,leaf,release_ref,c,validator,extra_alias):
++class ReadonlyCreateBoundary(RuntimeError):pass
++
++
++def ordered_owner_expected(m,sr,leaf,owned,c,mods):
++    # Persisted OWNED is JSON sort_keys=True. Recreate the original insertion
++    # sequence from the actual creator and original ordered source readset;
++    # never take mount order from the observed create argv.
++    need(Path(leaf)in(CPU_OUT/'cpu-preflight',CPU_OUT/'candidate')and ref(mods.owned_create.__file__)==m['files']['owned_create.py'],'exact source-owned two-helper read-only creator')
++    refs=mods.actual_ordered_readset
++    need(type(refs)is list and refs and all(type(r)is dict and set(r)=={'path','bytes','sha256'}for r in refs),'actual original source-owned ordered full Ref3 readset')
++    calls=[]
++    def boundary(label,argv,**kwargs):
++        need(label=='unique-name'and argv==['/usr/bin/docker','ps','-a','--filter','name=^/'+owned['name']+'$','--format','{{.ID}}']and not kwargs,'original first exact unique-name boundary; no resource/Docker call executed')
++        calls.append((label,argv));raise ReadonlyCreateBoundary('original creator stopped before first resource command')
++    ctl=NS(out=Path(leaf),name=owned['name'],expected=None,call=boundary)
++    original=m['g2_callee_contract_v10']['original025_sources']['safety_host'];checked(original)
++    S=NS(__file__=original['path'],DOCKER='/usr/bin/docker')
++    try:mods.owned_create.create(c,S,ctl,sr,refs,'cpu-preflight',ROOT)
++    except ReadonlyCreateBoundary:pass
++    else:raise ValueError('original creator did not stop at exact first read-only boundary')
++    need(len(calls)==1 and type(ctl.expected)is dict and ctl.expected['cid']is None,'genuine original expected captured exactly once before create/start/inspect')
++    expected=ctl.expected
++    need(set(expected)=={'cid','name','image','arm','source','host_sha256','guest_cpus','mounts'}and all(owned[k]==v for k,v in expected.items()if k not in('cid','mounts')),'actual original expected core owner values exactly match retained OWNED')
++    need({key:list(value)for key,value in expected['mounts'].items()}==owned['mounts'],'complete original reconstructed mount keys/source/readonly/alias values equal retained OWNED; no unknown/extra mounts')
++    return dict(expected,cid=owned['cid'])
++
++
++def create_gate(create,owned,expected,validator):
++    need(create['exit_code']==0 and create['stdout'].strip()==owned['cid']and create['requested_argv']==validator.create(expected),'actual complete source-owned original create argv and full CID; original insertion order preserved')
++
++
++def owner_chain(m,sr,leaf,release_ref,c,validator,extra_alias,mods):
+     owned_ref=ref(leaf/'OWNED.json');owned=obj(owned_ref);cid=owned['cid'];need(type(cid)is str and re.fullmatch('[0-9a-f]{64}',cid)and owned['source']==sr and owned['arm']=='cpu-preflight'and owned['image']==c.IMAGE and owned['name']=='adakv-tp4-'+CPU_OUT.name+'-'+leaf.name and owned['guest_cpus']==[145]and owned['host_sha256']==validator.source['sha256']and owned['sources']=={'safety_host.py':validator.source['sha256']},'actual exact current CPU owner/source/name/image/controller')
+     mounts=owned['mounts'];need(mounts[str(ROOT)]==[str(ROOT),False]and mounts[str(leaf)]==[str(leaf),True]and mounts['/adakv-results']==[str(leaf),True]and mounts[str(extra_alias)]==[str(leaf),True]and all(not rw or Path(p)==leaf for p,rw in mounts.values()),'exact expected CPU owned leaf/readonly source/single declared alias')
+     guest_ref=ref(leaf/'GUEST_CPU.json');guest=obj(guest_ref);need(guest['effective_cpus']==[145]and guest['effective_capacity']==1 and guest['cgroup']=='/docker/'+cid and '/docker/'+cid in guest['process']['cgroup']and type(guest['process']['pid'])is int and guest['process']['pid']>0,'actual Devices[] helper CPU/cgroup identity')
+-    create_ref=normalize(owned['create_receipt']);create=obj(create_ref);need(create['exit_code']==0 and create['stdout'].strip()==cid and create['requested_argv']==validator.create(owned),'actual complete source-owned original create argv and full CID')
++    create_ref=normalize(owned['create_receipt']);create=obj(create_ref);expected=ordered_owner_expected(m,sr,leaf,owned,c,mods);create_gate(create,owned,expected,validator)
+     release_ref=normalize(release_ref);release=obj(release_ref);need(release['container']==cid and release['stopped']is True and release['retained']is True and release['deleted']is False and release['errors']==[]and release['primary_error']is None and release['protected_boundary']['own_on_protected']is False,'actual clean stopped-retained CPU helper release')
+     before_ref,before_raw,before=inspect_row(release['before_inspect'],cid);after_ref,after_raw,after=inspect_row(release['after_inspect'],cid)
+     for actual in(before,after):validator.validate(actual,owned)
+@@ -301,8 +333,8 @@
+     summary=result['summary'];need(set(summary)=={'actual_software_child','CPU_child','CPU_report','CPU_release','handoff_saved_stage','handoff_cold_child','handoff_cold_report','handoff_cold_release'},'complete actual two-helper CPU path, no skipped cold probe/model or caller result substitution')
+     declared=m['g2_callee_contract_v10']['original025_sources'];c=module(declared['model_contract'],'_g2_independent_original025_readback_facade');need(not hasattr(c,'need')and callable(c.require),'actual whole original025 facade, never a fake need module')
+     validator=safety_validator(m,mods,c);v8=obj(V8_SOURCE);parent_alias=Path(v8['output_root'])/'cpu-preflight'
+-    first,first_owned,_=owner_chain(m,sr,CPU_OUT/'cpu-preflight',summary['CPU_release'],c,validator,parent_alias)
+-    old=obj(m['g2_metadata_handoff_v8']['failed_source']);second,second_owned,before=owner_chain(m,sr,CPU_OUT/'candidate',summary['handoff_cold_release'],c,validator,Path(old['stream_channel_root']))
++    first,first_owned,_=owner_chain(m,sr,CPU_OUT/'cpu-preflight',summary['CPU_release'],c,validator,parent_alias,mods)
++    old=obj(m['g2_metadata_handoff_v8']['failed_source']);second,second_owned,before=owner_chain(m,sr,CPU_OUT/'candidate',summary['handoff_cold_release'],c,validator,Path(old['stream_channel_root']),mods)
+     need(first['cid']!=second['cid']and first['formal_deadline_monotonic']==second['formal_deadline_monotonic'],'distinct sequential CPU owners share one actual cold-main original phase deadline')
+     admission_ref,admission,args=software_args(sr,first['formal_deadline_monotonic']);outer=child(summary['actual_software_child'],c,first['cid'],args,CPU_OUT/'cpu-preflight','SOFTWARE');sw=software(sr,m,mods,outer,c,admission_ref,admission)
+     cpu_report_ref=summary['CPU_report'];need(cpu_report_ref['path']==str(CPU_OUT/'cpu-preflight/CPU.json'),'actual current native parser report');cpu=obj(cpu_report_ref)
+@@ -313,7 +345,7 @@
+     # Reopen the exact original source/command closure after all evidence reads.
+     source_after={r['path']:r['sha256']for r in[*mods.bind_model.readset(mods.sourceio.ref(sr['path'])),*m['dependencies'],*mods.command_contract.validate(mods.sourceio,mods.sourceio.ref(sr['path']),m)]};need(source_after==complete,'complete nonempty source/command input closure remained unchanged during readback')
+     need(not any(n=='torch'or n.startswith(('torch.','torch_npu','acl','numpy'))for n in sys.modules),'stdlib-only independent reader, no ML/accelerator import')
+-    return dict(schema='bole.actual-G2-v11-CPU-independent-qualification/v1',source=sr,result_ref=result_ref,sameimage_322_parser_and_actual_cold_handoff_pass=True,all_owned_stopped_retained=True,software=sw,native_parser=dict(report_ref=cpu_report_ref,child_ref=parser_child['record'],stdout_ref=parser_child['stdout'],stderr_ref=parser_child['stderr']),cold_handoff=cold,CPU_owners=[first,second],source_nonempty_before_after_equal=True,source_readset_count=len(complete),firstentry_clock=clock,shared_actual_cleanup_deadline_monotonic=first['formal_deadline_monotonic'],actual_elapsed=result['elapsed'],actual_cleanup_spent=result['cleanup_spent'],CPU_source_snapshot=snapshot,independent_readback_refs=list(READS.values()),reader_ref=ref(__file__),stdlib_only=True,actual_live_identity_qualified=False,model_ready=False,numerical_model_qualification=False,formal_success=False,NPU=False)
++    return dict(schema='bole.actual-G2-v11-CPU-independent-qualification/v2',source=sr,result_ref=result_ref,sameimage_322_parser_and_actual_cold_handoff_pass=True,all_owned_stopped_retained=True,software=sw,native_parser=dict(report_ref=cpu_report_ref,child_ref=parser_child['record'],stdout_ref=parser_child['stdout'],stderr_ref=parser_child['stderr']),cold_handoff=cold,CPU_owners=[first,second],source_nonempty_before_after_equal=True,source_readset_count=len(complete),firstentry_clock=clock,shared_actual_cleanup_deadline_monotonic=first['formal_deadline_monotonic'],actual_elapsed=result['elapsed'],actual_cleanup_spent=result['cleanup_spent'],CPU_source_snapshot=snapshot,independent_readback_refs=list(READS.values()),reader_ref=ref(__file__),stdlib_only=True,actual_live_identity_qualified=False,model_ready=False,numerical_model_qualification=False,formal_success=False,NPU=False)
+ 
+ 
+ def write_exclusive(path,value):

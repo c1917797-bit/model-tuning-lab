@@ -1,0 +1,140 @@
+"""Thin dense-only075/052 workflow over exact025 Joint/Controller. MAIN only."""
+import argparse,json,os,subprocess,sys,time
+from pathlib import Path
+P=Path(__file__).resolve().parent;sys.path.insert(0,str(P));import contract090 as C
+import g1_contract as G1
+def client_terminal(c,ctl,tokens,handled):
+ import owned_ref131r7 as owned_ref
+ label='client-'+str(tokens);receipt=dict(exit_code=ctl.client.returncode,actual_argv=ctl.client_argv,stdout=owned_ref.file_ref(C,c,ctl.out/(label+'.stdout')),stderr=owned_ref.file_ref(C,c,ctl.out/(label+'.stderr')),ownership_barriers_seen=sorted(handled),profile=tokens)
+ path=ctl.out/('CLIENT-TERMINAL-%d.json'%tokens);c.write(path,receipt);return owned_ref.file_ref(C,c,path)
+def main():
+ entry_start=time.monotonic()
+ p=argparse.ArgumentParser(allow_abbrev=False);p.add_argument('--execute',action='store_true');p.add_argument('--source-audit',action='store_true');p.add_argument('--output-contract-only',action='store_true');p.add_argument('--source-ref');p.add_argument('--output');p.add_argument('--cpu-only',action='store_true');a=p.parse_args()
+ if a.output_contract_only:
+  C.output_argument(a.output);print(json.dumps(dict(output=a.output,NPU=False,contract_only=True)));return 0
+ if not(a.execute or a.source_audit):print('{"enabled":false,"NPU":false}');return 0
+ import fault_receipt,owned_ref131r7 as owned_ref
+ sr=json.loads(a.source_ref);m=C.source(sr);C.need(m['service_experiment']==G1.SCOPE,'explicit G1 host profile');import bind_model,command_contract;readset=bind_model.readset(sr)+m['dependencies']+command_contract.validate(C,sr,m)
+ if a.source_audit:print(json.dumps(dict(source=sr,readset=len(readset),NPU=False,resources_admitted=False,candidate_qualification=False)));return 0
+ from g2_cold_clock import phase_admission,controller_admission
+ from g2_software_stages import host_run as software_host
+ phase_admission(C,entry_start)
+ a.output=C.output_argument(a.output);C.need(os.environ.get('BOLE_MODEL131_MAIN_ENABLE')=='1'and a.output==(C.CPU_OUT if a.cpu_only else C.OUT)and not a.output.exists(),'MAIN-only unique registered output')
+ actual_argv=[x.decode('utf8','strict')for x in Path('/proc/self/cmdline').read_bytes().split(b'\0')if x];C.need(len(actual_argv)>=4 and actual_argv[1:3]==['-I','-B']and Path(actual_argv[3]).resolve()==Path(__file__).resolve(),'actual source-bound -I/-B host CLI')
+ from owned_substrate import load
+ from owned_create import create
+ from g2_host_adapter import install as install_stream_host
+ import g2_contract as G2,g2_channel as CH
+ from worker_snapshot_owner import snapshot
+ import resource
+ os.sched_setaffinity(0,{166});soft,hard=resource.getrlimit(resource.RLIMIT_AS);C.need(hard==resource.RLIM_INFINITY,'original Go child AS wrapper');resource.setrlimit(resource.RLIMIT_AS,(512*2**20,hard))
+ start=entry_start;c,S,H,pairs=load(a.output);adapter=install_stream_host(C,c,S,H,m);a.output.mkdir(mode=0o700);joint=H.Joint(start);owned=[];primary=None;summary={};before={r['path']:r['sha256']for r in readset};phase=dict(phase='setup',step='ready',ordinal=0)
+ def mark(name,step):phase.update(phase=name,step=step,ordinal=phase['ordinal']+1)
+ def ctl_for(role,cpu=False,extra=(),leaf=None):
+  mark(role,'fresh-leaf');leaf=H.fresh_leaf(a.output/('cpu-consumer'if role=='stream-consumer'else role))if leaf is None else leaf;H.outputs(leaf);(leaf/'receipts').mkdir(exist_ok=True);mark(role,'controller');ctl=H.controller(S,joint)(argparse.Namespace(output_dir=leaf),start);owned.append(ctl);mark(role,'initial-observation');ctl.observe(role+'-admission',initial=True);controller_admission(C,c,S,ctl,entry_start);mark(role,'create-start-inspect');create(c,S,ctl,sr,[*readset,*extra],role if role=='stream-consumer'else('cpu-preflight'if cpu else role),P);return ctl
+ def child(ctl,label,args,limit):
+  mark(ctl.expected['arm'],'child-'+label);return H.child(ctl,label,args,limit,observe=ctl.expected['arm']!='cpu-preflight')
+ def spawn(ctl,args,label,stream=False):
+  mark(ctl.expected['arm'],'spawn-'+label);argv=c.docker_argv(ctl.cid,args);index=argv.index(c.PY);C.need(argv[index+1]=='-B','exact original guest Python argv');
+  if stream:argv[2:2]=['--env',G2.FLAG+'=1']
+  so=(ctl.out/(label+'.stdout')).open('x');se=(ctl.out/(label+'.stderr')).open('x');proc=subprocess.Popen(ctl.wrapper(argv),stdout=so,stderr=se,cwd=c.ROOT);so.close();se.close();return proc,argv
+ def close(ctl):
+  mark(ctl.expected['arm'],'cleanup-close');r=ctl.cleanup();ctl._pair_closed=True;mark(ctl.expected['arm'],'cleanup-receipt');v=c.obj(r);C.need(v['stopped']and v['retained']and not v['errors'],'actual retained release');return r
+ try:
+  cpu=ctl_for('cpu-preflight');summary['actual_software_child']=software_host(C,c,H,cpu,sr,entry_start);summary['CPU_child']=child(cpu,'CPU',[str(P/'preflight114.py'),'--execute','--source-ref',json.dumps(sr),'--output',str(cpu.out/'CPU.json')],120);report=c.obj(owned_ref.file_ref(C,c,cpu.out/'CPU.json'));C.need(report['source']==sr and report['pass_preflight']is True and report['Devices']==[]and report['native_runtime_parser_checked']is True and report['registry_arch_enumerated']is True,'real sameimage source preflight');summary['CPU_report']=owned_ref.file_ref(C,c,cpu.out/'CPU.json');summary['CPU_release']=close(cpu)
+  from g2_handoff import stage_saved_probe
+  coldleaf=H.fresh_leaf(a.output/'candidate');stage=stage_saved_probe(C,sr,coldleaf);summary['handoff_saved_stage']=stage
+  cold=ctl_for('cpu-preflight',cpu=True,leaf=coldleaf);summary['handoff_cold_child']=child(cold,'HANDOFF-COLD',[str(P/'g2_handoff_cold.py'),'--execute','--source-ref',json.dumps(sr),'--stage-ref',json.dumps(stage),'--output',str(cold.out/'HANDOFF-COLD.json')],60)
+  summary['handoff_cold_report']=C.ref(cold.out/'HANDOFF-COLD.json');coldreport=C.obj(summary['handoff_cold_report'])
+  C.need(coldreport['schema']=='bole.actual-Devices0-full-channel-handoff-cold/v1'and coldreport['source']==sr and coldreport['stage']==stage and coldreport['complete_saved_metadata_handoff']is True and coldreport['original_owner_inspection_source_resource_and_mount_assertions_preserved']is True and coldreport['all_four_original_files_guest_absent']is True and coldreport['original_functions']==['g2_channel.contract','g2_finalize.owned_channel']and coldreport['Devices']==[]and coldreport['Torch_imported']is False and coldreport['actual_live_identity_qualified']is False and coldreport['model_ready']is False,'actual sameimage Devices[] original full channel/owner-inspection cold handoff before any NPU admission')
+  summary['handoff_cold_release']=close(cold)
+  if not a.cpu_only:
+   mark('dense','checkpoint-model');c.model(c.MODEL_REF);denseleaf=H.fresh_leaf(a.output/'dense');(denseleaf/'receipts').mkdir();channelroot=denseleaf/'receipts/STREAM';channelroot.mkdir();
+   consumer=ctl_for('stream-consumer');consumer.server,consumer.server_argv=spawn(consumer,[str(P/'g2_consumer.py'),'--execute','--bootstrap','--source-ref',json.dumps(sr)],'stream-consumer',stream=True);
+   ctl=ctl_for('dense',leaf=denseleaf);summary['canary']=child(ctl,'CANARY',[str(P/'guest_canary.py'),'--output',str(ctl.out/'CANARY.json')],180);C.need(c.obj(owned_ref.file_ref(C,c,ctl.out/'CANARY.json'))['rows']==[dict(logical=i,values=[4.,5.])for i in range(4)],'genuine all4 tiny values; not model qualification')
+   ctl.server_started=H.utc();ctl.server,ctl.server_argv=spawn(ctl,[str(P/'server090.py'),'--execute','--source-ref',json.dumps(sr),'--receipt-root',str(ctl.out/'receipts')],'server');end=time.monotonic()+min(900,ctl.remaining(cap=900))
+   while True:
+    mark('dense-startup','server-poll');C.need(ctl.server.poll()is None and time.monotonic()<end,'one bounded native server startup');mark('dense-startup','protected-observation');ctl.observe('dense-startup')
+    argv=c.docker_argv(ctl.cid,['-c',"import urllib.request;assert urllib.request.urlopen('http://127.0.0.1:8230/health',timeout=2).status==200"]);mark('dense-startup','health-run');r=ctl.h.run(ctl.wrapper(argv),min(4,ctl.remaining(cap=4)));mark('dense-startup','health-receipt');c.write(ctl.out/('health-%d.json'%time.time_ns()),r)
+    if r['exit_code']==0:break
+    time.sleep(1)
+   from load_consumer114 import consume as consume_load
+   mark('dense-startup','mtp-load-read');load_rows=[C.obj(owned_ref.file_ref(C,c,f))for f in sorted((ctl.out/'receipts').glob('MTP-LOAD-*.json'))]
+   mark('dense-startup','mtp-load-consume');load_proof=consume_load(load_rows,report['actual_checkpoint_mtp_names'],m['installed_sources']['qwen_mtp'],m['files']['load_receipt111.py']);summary['MTP_load']=C.write(ctl.out/'MTP-LOAD-CONSUMPTION.json',load_proof)
+   summary['MTP_load_receipts']=[owned_ref.file_ref(C,c,f)for f in sorted((ctl.out/'receipts').glob('MTP-LOAD-*.json'))]
+   mark('stream-owner','all4-worker-snapshot-before-client');bootrows,bootbindings=snapshot(c,ctl,ctl.out/'receipts','BEFORE-STREAM')
+   deadline=time.monotonic()+min(60,consumer.remaining(cap=60))
+   while not(channelroot/'STREAM_CONSUMER_BOOT.json').is_file():
+    C.need(consumer.server.poll()is None and time.monotonic()<deadline,'actual independent source/Devices[] consumer BOOT');ctl.observe('stream-owner-await-BOOT');time.sleep(.1)
+   from g2_stream_owner import bind as bind_stream
+   from g2_handoff import ChannelWriter
+   writer=ChannelWriter(C,sr)
+   summary['stream_channel']=bind_stream(writer,c,S,source_ref=sr,model_ctl=ctl,cpu_ctl=consumer,
+       worker_rows=bootrows,worker_bindings=bootbindings,model_owner_ref=C.ref(ctl.out/'OWNED.json'),consumer_owner_ref=C.ref(consumer.out/'OWNED.json'))
+   summary['metadata_handoff']=writer.complete(summary['stream_channel'])
+   summary['stream_resource_profile']=adapter
+   ctl.client,ctl.client_argv=spawn(ctl,[str(P/'service_client.py'),'--execute','--source-ref',json.dumps(sr),'--output',str(ctl.out)],'model-smoke')
+   until=time.monotonic()+min(900,ctl.remaining(cap=900))
+   while ctl.client.poll()is None:
+    mark('model-smoke','client-server-poll');C.need(ctl.server.poll()is None and consumer.server.poll()in(None,0)and time.monotonic()<until,'one bounded actual model smoke client');mark('model-smoke','protected-observation');ctl.observe('model-smoke');time.sleep(.2)
+   mark('model-smoke','client-terminal-receipt');summary['actual_client_terminal']=C.write(ctl.out/'CLIENT-TERMINAL.json',dict(actual_argv=ctl.client_argv,exit_code=ctl.client.returncode,stdout=owned_ref.file_ref(C,c,ctl.out/'model-smoke.stdout'),stderr=owned_ref.file_ref(C,c,ctl.out/'model-smoke.stderr')))
+   C.need(ctl.client.returncode==0,'actual HTTP client failed; preserved terminal/stdout/stderr precede all aggregate assertions')
+   mark('model-smoke','worker-snapshot');rows,bindings=snapshot(c,ctl,ctl.out/'receipts','AFTER-MODEL')
+   C.need(len(rows)==4 and all(v['schema']=='dense.native-worker-snapshot/v090'and v['source_ref']==sr and v['native_core']is v['native_inverse']is True and v['allow_hf32']is False for v in rows),'all4 actual restored native class/precision proof')
+   C.need({v['pid']for v in rows}=={v['pid']for v in load_rows},'source-bound MTP loader and actual worker lifetimes')
+   summary['worker_bindings']=C.write(ctl.out/'WORKER_BINDINGS.json',bindings)
+   mark('model-smoke','numerical-consumer-terminal');deadline=time.monotonic()+min(300,consumer.remaining(cap=300))
+   while consumer.server.poll()is None:
+    C.need(time.monotonic()<deadline,'bounded independent full stream completion');ctl.observe('await-consumer-exit');time.sleep(.1)
+   summary['stream_consumer_terminal']=C.write(consumer.out/'STREAM-TERMINAL.json',dict(actual_argv=consumer.server_argv,exit_code=consumer.server.returncode,stdout=C.ref(consumer.out/'stream-consumer.stdout'),stderr=C.ref(consumer.out/'stream-consumer.stderr')))
+   C.need(consumer.server.returncode==0,'independent complete-frame numerical consumer failed; all failed/unACK raw retained')
+   mark('model-smoke','rank-receipt-read');receiptroot=ctl.out/'receipts';ranks=[]
+   for rank in range(4):
+    receipt=C.ref(receiptroot/('BOLE-TREE-RANK-%d.json'%rank));rv=C.obj(receipt)
+    C.need(rv['schema']=='bole.actual-worker-stream-receipt/v2'and rv['rank']==rank and rv['source']==sr and rv['primary']is None,'actual completed G2 rank/source capture')
+    ranks.append(dict(receipt=receipt,raw=rv['raw']))
+   journals=[C.ref(p)for p in sorted(receiptroot.glob('IDENTITY-*.json'))]
+   http_ref=C.ref(ctl.out/'HTTP_RESULT.json');http=C.obj(http_ref);response=C.obj(http['rows'][0]['response'])
+   assignments=[C.obj(r)['event']for r in journals if C.obj(r)['role']=='frontend'and C.obj(r)['event']['before_request_id']==response['id']+'-0']
+   C.need(len(assignments)==1,'one actual first source-bound assignment')
+   import identity_owner
+   frontend_binding=identity_owner.frontend(c,S,ctl,assignments[0])
+   bundle=dict(schema='bole.actual-stream-final-inputs/v2',source=sr,http=http_ref,journal=journals,
+       snapshots=rows,host_bindings=bindings,ranks=ranks,frontend_binding=frontend_binding,channel=summary['stream_channel'])
+   bundle_ref=C.write(channelroot/'FINAL_INPUTS.json',bundle)
+   # Original cleanup requires physical4..7 idle. Close the only NPU owner first;
+   # the Devices[] consumer remains alive solely for metadata finalization.
+   summary['model_release']=close(ctl)
+   mark('consumer','independent-final-join')
+   argv=c.docker_argv(consumer.cid,[str(P/'g2_finalize.py'),'--execute','--source-ref',json.dumps(sr),'--inputs-ref',json.dumps(bundle_ref),'--output',str(channelroot)])
+   argv[2:2]=['--env',G2.FLAG+'=1']
+   with(consumer.out/'FINAL.stdout').open('x')as so,(consumer.out/'FINAL.stderr').open('x')as se:
+    process=subprocess.Popen(consumer.wrapper(argv),stdout=so,stderr=se,cwd=c.ROOT)
+    consumer.client=process;consumer.client_argv=argv
+    deadline=time.monotonic()+min(300,consumer.remaining(cap=300))
+    while process.poll()is None:
+     C.need(time.monotonic()<deadline,'bounded independent final receipt/identity consumer');consumer.resources();time.sleep(.1)
+   C.need(process.returncode==0,'actual independent final identity/coverage/budget join failed')
+   summary['independent']=C.ref(channelroot/'ATTRIBUTION.json');value=C.obj(summary['independent'])
+   C.need(value['source']==sr and value['service_complete']is True and value['component_checks_pass']is True and value['every_frame_independently_consumed']is True and value['scheduler_committed_independently']is True and value['model_ready']is False,'actual independently consumed entire two-request multi-step diagnostic')
+   summary['independent_release']=close(consumer)
+ except BaseException as e:
+  primary=repr(e)
+  try:summary['first_host_fault']=fault_receipt.persist(a.output,sr,e,phase)
+  except BaseException as evidence_error:joint.secondary.append('first-fault-persistence '+repr(evidence_error))
+ finally:
+  for ctl in sorted(owned,key=lambda x:0 if x.expected and x.expected['arm']=='dense'else 1):
+   if ctl.cid and not getattr(ctl,'_pair_closed',False):
+    ctl.primary=primary
+    try:ctl.cleanup()
+    except BaseException as e:joint.secondary.append(repr(e))
+   joint.secondary.extend(ctl.secondary)
+  after={}
+  try:
+   for r in readset:C.checked(r);after[r['path']]=r['sha256']
+  except BaseException as e:joint.secondary.append('source-after '+repr(e))
+  joint.secondary.extend(S.formal_time_failures(joint.deadline))
+  if joint.cleanup_used>180:joint.secondary.append('shared cleanup180 exceeded')
+  rr=c.write(a.output/'RESULT.json',dict(schema='bole.actual-three-node-model-owned/v131',BOLE_diagnostic=True,model_ready=False,scheduler_committed=False,timing_is_formal=False,successful_raw_replay_available=False,cpu_only=a.cpu_only,source=sr,primary=primary,secondary=joint.secondary,summary=summary,source_before=before,source_after=after,phase_seconds=3600,cleanup_seconds=180,cleanup_spent=joint.cleanup_used,elapsed=time.monotonic()-start,actual_host_argv=actual_argv,host_pid=os.getpid(),candidate_qualification=False,performance_gain_measured=False,formal_performance=False,task_accuracy=False));print('MAIN_DENSE090 '+json.dumps(rr),flush=True)
+ return 3 if primary or joint.secondary or before!=after else 0
+if __name__=='__main__':raise SystemExit(main())

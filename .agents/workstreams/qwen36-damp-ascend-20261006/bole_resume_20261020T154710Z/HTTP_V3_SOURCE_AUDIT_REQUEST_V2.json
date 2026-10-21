@@ -1,0 +1,28 @@
+{
+  "schema": "bole.MAIN-HTTPv3-source-audit-request/v2",
+  "HTTP_packet_manifest_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/task_http_client_v3/ADVISORY_MANIFEST.json",
+    "bytes": 4444,
+    "sha256": "fa3a0f55304a53a3006c616cfdd3a1dc035b86c1a3d978f1aae8a334b02680ec"
+  },
+  "authority_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MODEL_AUTHORITY.json",
+    "bytes": 764,
+    "sha256": "e3046914e360c6ee5c8abd6e18fcdd2f3afaa733247ad1522e9b4cde6e67dda8"
+  },
+  "native_snapshot_manifest_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/task_http_runtime_sources_v3/INDEX.json",
+    "bytes": 7574,
+    "sha256": "c928f1d9d9240ee07e18895628cab916c4d64ab9e720b9819830d794fafdb18e"
+  },
+  "generation_config_ref": {
+    "path": "/cache/efim/Qwen3.6-27B/generation_config.json",
+    "bytes": 202,
+    "sha256": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e"
+  },
+  "arm": "ON",
+  "model": "qwen36-mxr-eager",
+  "report_root": "/opt/host/vnf/austinov/bole-task-http-source-audit-v2",
+  "plan_root": "/opt/host/vnf/austinov/bole-task-http-plan-on-v4",
+  "HTTP_root": "/opt/host/vnf/austinov/bole-task-http-source-v4"
+}

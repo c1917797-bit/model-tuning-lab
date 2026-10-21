@@ -1,0 +1,137 @@
+{
+  "NPU": false,
+  "actual_CPU232_or240_or_model_pass": false,
+  "cleanup_seconds": 180,
+  "do_not_double_wrap_MAIN_flock": true,
+  "existing_V6_R14_whole_inverse_ledgers_regenerated_after_final_postimages": true,
+  "fixed_cutoff": 1792597630,
+  "formal_success": false,
+  "frozen_v2_manifest": {
+    "bytes": 7809,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v2/ADVISORY_MANIFEST.json",
+    "sha256": "fd7f304db0aa741884561d3501927f832848673d823276dd1b96220a1162ef3d"
+  },
+  "new_MAIN_flock_outer_command_prefix": true,
+  "new_clock_helper": {
+    "bytes": 5592,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v3/gdn_probe_clock.py",
+    "sha256": "140eb11a25b8599c88107a68091cacd587671802a1764adb6fca2c9201459666"
+  },
+  "original025_clock_admission_source": {
+    "bytes": 3942,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_software_phase_repair_v11/g2_cold_clock.py",
+    "sha256": "16d34037defad4901c2b9904995f074d6ed80e615591ddc031cd8dc085f2177f"
+  },
+  "original025_complete_controller_source": {
+    "bytes": 22338,
+    "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/safety_host.py",
+    "sha256": "20bda52a1c3fbc75db47104cbd4759faf91da1f39032d4730160983f7b9c0c30"
+  },
+  "original_Joint_controller_remaining_cleanup_source_preserved": true,
+  "original_lock_observer_source": {
+    "bytes": 18903,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/saved_common.py",
+    "sha256": "9e79c49a440317456dd9cea6da03c12d9473bceb3c3d9f9ee6244b3d9aa7eb08"
+  },
+  "phase_seconds": 3600,
+  "physical_logical_map_unchanged": true,
+  "schema": "bole.gdn-G1-probe-v3-source-relationship/v1",
+  "unchanged": {
+    "consume_gdn_service.py": {
+      "copy": {
+        "bytes": 13044,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v3/consume_gdn_service.py",
+        "sha256": "ee27f20d723a6c2ab38e114c7a46b977810a58ef2ea4123732296fd56afec4a2"
+      },
+      "original": {
+        "bytes": 13044,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v2/consume_gdn_service.py",
+        "sha256": "ee27f20d723a6c2ab38e114c7a46b977810a58ef2ea4123732296fd56afec4a2"
+      },
+      "whole_bytes_equal": true
+    },
+    "gdn_probe_contract.py": {
+      "copy": {
+        "bytes": 6863,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v3/gdn_probe_contract.py",
+        "sha256": "53ea94b413fcca7c8fcafaa151986d8bd0a4654053eb03f4b60fb9a067b682dc"
+      },
+      "original": {
+        "bytes": 6863,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v2/gdn_probe_contract.py",
+        "sha256": "53ea94b413fcca7c8fcafaa151986d8bd0a4654053eb03f4b60fb9a067b682dc"
+      },
+      "whole_bytes_equal": true
+    },
+    "gdn_probe_runtime.py": {
+      "copy": {
+        "bytes": 5505,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v3/gdn_probe_runtime.py",
+        "sha256": "2b98ad1bb91a1f6c7fd033866154468ab3242d26f57095acdf3b14016a020c0e"
+      },
+      "original": {
+        "bytes": 5505,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v2/gdn_probe_runtime.py",
+        "sha256": "2b98ad1bb91a1f6c7fd033866154468ab3242d26f57095acdf3b14016a020c0e"
+      },
+      "whole_bytes_equal": true
+    },
+    "gdn_service_gate.py": {
+      "copy": {
+        "bytes": 7263,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v3/gdn_service_gate.py",
+        "sha256": "6633874bfbfc55f48bffdee812cf60f7e8a86153236efc9efac5c8849ec9f24d"
+      },
+      "original": {
+        "bytes": 7263,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v2/gdn_service_gate.py",
+        "sha256": "6633874bfbfc55f48bffdee812cf60f7e8a86153236efc9efac5c8849ec9f24d"
+      },
+      "whole_bytes_equal": true
+    },
+    "gdn_service_seam.py": {
+      "copy": {
+        "bytes": 13601,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v3/gdn_service_seam.py",
+        "sha256": "2718f7a6cb34a3e2e0eced9465be473e4acb68de828c453050722ca3bf0b6fe9"
+      },
+      "original": {
+        "bytes": 13601,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v2/gdn_service_seam.py",
+        "sha256": "2718f7a6cb34a3e2e0eced9465be473e4acb68de828c453050722ca3bf0b6fe9"
+      },
+      "whole_bytes_equal": true
+    },
+    "test_gdn_probe_pure.py": {
+      "copy": {
+        "bytes": 9509,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v3/test_gdn_probe_pure.py",
+        "sha256": "350f7bead9ca6b01098299cc28973d2b97e078d300ee55209cb4606504f646fa"
+      },
+      "original": {
+        "bytes": 9509,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v2/test_gdn_probe_pure.py",
+        "sha256": "350f7bead9ca6b01098299cc28973d2b97e078d300ee55209cb4606504f646fa"
+      },
+      "whole_bytes_equal": true
+    },
+    "test_gdn_service_pure.py": {
+      "copy": {
+        "bytes": 7603,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v3/test_gdn_service_pure.py",
+        "sha256": "49fede3ca7fa421e86f10c8fa72e762459ed0451e1eff6e70029c19688c41a56"
+      },
+      "original": {
+        "bytes": 7603,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v2/test_gdn_service_pure.py",
+        "sha256": "49fede3ca7fa421e86f10c8fa72e762459ed0451e1eff6e70029c19688c41a56"
+      },
+      "whole_bytes_equal": true
+    }
+  },
+  "whole_clock_inverse_authority": {
+    "bytes": 1050,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/gdn_service_probe_g1_v3/CLOCK_INVERSE_AUTHORITY.json",
+    "sha256": "95df063d8363a7460428410c27d8ceeae10877be377390f69d3ba69c2cb077cd"
+  }
+}

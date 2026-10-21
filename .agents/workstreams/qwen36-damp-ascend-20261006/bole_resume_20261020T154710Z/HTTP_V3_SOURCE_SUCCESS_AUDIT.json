@@ -1,0 +1,41 @@
+{
+  "report": {
+    "path": "/opt/host/vnf/austinov/bole-task-http-source-audit-v2/SOURCE_AUDIT.json",
+    "bytes": 470919,
+    "sha256": "168818dc63088be333aa016f39ab4b08d85b4560aa33fc1b2c0ef4384afb9454"
+  },
+  "source": {
+    "bytes": 6380,
+    "path": "/opt/host/vnf/austinov/bole-task-http-source-v4/HTTP_SOURCE.json",
+    "sha256": "8d8e72b8c399577742c874c1186824859c5084e237b6f4e5956eca7b871b4f6a"
+  },
+  "plan": {
+    "bytes": 862,
+    "path": "/opt/host/vnf/austinov/bole-task-http-plan-on-v4/REQUEST_PLAN.json",
+    "sha256": "f54f6ce6bdc1e06466d292ec64ca47d2ba39d7be94069bdba23c8953bfe8781f"
+  },
+  "source_equal_count": 786,
+  "unique_bytes": 266865333,
+  "original_cohort_counts": {
+    "GSM8K": 1319,
+    "HumanEval": 164,
+    "MMLU": 14042
+  },
+  "prompt_lengths": [
+    89,
+    50,
+    134,
+    126,
+    362,
+    377
+  ],
+  "fresh_files_created": 14,
+  "unchanged_source_copies": 11,
+  "new_metadata": 3,
+  "models": 0,
+  "HTTP_requests": 0,
+  "task_scores": 0,
+  "model_qualification": false,
+  "schema": "bole.primary-readback-audit/v2",
+  "formal_success": false
+}

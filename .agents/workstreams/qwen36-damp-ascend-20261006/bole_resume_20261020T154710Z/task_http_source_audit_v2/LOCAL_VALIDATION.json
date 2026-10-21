@@ -1,0 +1,40 @@
+{
+  "AST_python_files": 5,
+  "CPU14_rerun": false,
+  "NPU": false,
+  "actual_HTTP_source_prepared": false,
+  "actual_create_mutation_negative_controls": 20,
+  "actual_create_positive_controls": 4,
+  "actual_whole_primary_copies_verified": 42,
+  "cold_defaultOFF_help": [
+    {
+      "args": [],
+      "file": "source_audit.py",
+      "returncode": 0
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "file": "source_audit.py",
+      "returncode": 0
+    },
+    {
+      "args": [],
+      "file": "offline_actual_schema_check.py",
+      "returncode": 0
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "file": "offline_actual_schema_check.py",
+      "returncode": 0
+    }
+  ],
+  "complete_remote_MAIN_getter_executed": false,
+  "model_executed": false,
+  "pure_controls": 29,
+  "pure_controls_passed": true,
+  "schema": "bole.HTTP-getter-v2-local-software-validation/v1"
+}
