@@ -11,6 +11,7 @@ ENTRYPOINTS=('host_service.py','service_entry.py','g3_software_stages.py')
 SAFE_MATH=('core112.py','adapter.py','oracle112.py','native_seams.py','treeconv118.py','independent_model.py','model_entry.py','service_bridge.py','model_process_calibration.py','model_calibration131r12.py','calibrate_conv118.py','transaction.py','eligibility.py')
 LAYER=PARENT.R(PARENT.T/'g3_source13_layer_v4/LAYER_MANIFEST.json',6914,'c9d6f4079ceb6ba81014693af85437bc6ceea026c02fc6ceb564de939d76c57b')
 LAYER_INVERSE=PARENT.R(PARENT.T/'g3_source13_layer_v4/WHOLE_INVERSE.json',217663,'b95196606e50fe88c1162db9b58a46fafdc1a2468187acfdf2a6c5eb59ba827d')
+HANDOFF_LAYER=None
 SCOPE=dict(schema='bole.c1-single-request-fixed1024-stream-service/v3',profile='fixed1024',prefix=131,request_count=1,max_steps_per_request=1023,max_output_tokens=1024,capture_protocol='every-frame-independent-CPU-ACK/v1')
 def same_bytes(a,b):return C.checked(a).read_bytes()==C.checked(b).read_bytes()
 def history_fields(parent):return sorted({k for k in parent if k.startswith('g2_')}|{k for k in('g1_overlay','g1_repair_v2_overlay')if k in parent})
@@ -40,7 +41,7 @@ def validate(sr):
  C.need(type(m['dependencies'])is list,'explicit dependency Ref list');current_dependencies={}
  for r in m['dependencies']:
   PARENT.typed(r);C.need(r['path']not in current_dependencies or current_dependencies[r['path']]==r,'no conflicting prerequisite path');C.checked(r);current_dependencies[r['path']]=r
- d=m['g3_source_descriptor'];C.need(d['schema']=='bole.G3-source13-rebuild-descriptor/v1'and d['baseline_source']==PARENT.ACTUAL['source']and d['runtime_layer_manifest']==LAYER and d['runtime_layer_inverse']==LAYER_INVERSE,'new current descriptor separate from historical ledgers')
+ d=m['g3_source_descriptor'];C.need(HANDOFF_LAYER is not None,'pending exact G3 historical-contract namespace layer; current draft cannot admit execution');C.need(d['schema']=='bole.G3-source13-rebuild-descriptor/v1'and d['baseline_source']==PARENT.ACTUAL['source']and d['runtime_layer_manifest']==LAYER and d['runtime_layer_inverse']==LAYER_INVERSE,'new current descriptor separate from historical ledgers')
  prior=m['g3_predecessor'];C.need(set(prior)=={'source','owner_result','qualification','source_audit'},'four actual predecessor Ref operands')
  parent=C.obj(prior['source']);parentproof=PARENT.actual_qualified(prior['source'],parent,prior['owner_result'],prior['qualification'],source_audit_ref=prior['source_audit'])
  C.need(d['current_ref_maps']==list(REF_MAPS)and d['preserved_parent_fields']==history_fields(parent),'explicit current/history domains')

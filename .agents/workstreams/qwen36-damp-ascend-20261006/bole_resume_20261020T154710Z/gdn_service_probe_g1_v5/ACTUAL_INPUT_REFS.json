@@ -1,0 +1,78 @@
+{
+  "NPU": false,
+  "actual_new_probe_executed": false,
+  "formal_success": false,
+  "host_reopen_required": true,
+  "local_copies": [
+    {
+      "bytes": 109479,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/qualification/SOURCE_BOUND.json",
+      "sha256": "010914ebe1bf5d3e6b516103e1a376e24e0a0d965ac0a3a42d7aeb19fca57677"
+    },
+    {
+      "bytes": 131517,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/qualification/RESULT.json",
+      "sha256": "52030a932da1f3cd2392389a2d9246925e40c2d93186b5f67d41fba8cfa1e4fc"
+    },
+    {
+      "bytes": 12221,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/qualification/ATTRIBUTION.json",
+      "sha256": "8caf55b28f4a3c4108b8b932e9c664e08b3c28ea18f0bf4fc3bdf62de3538d53"
+    },
+    {
+      "bytes": 44151,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/qualification/CONSUMER_INPUTS.json",
+      "sha256": "a5f34ccd4c5e402a7d0858cfe91552cb665468c0c4fc40a68f9db977675b549f"
+    }
+  ],
+  "prior_G1": {
+    "bundle": {
+      "bytes": 44151,
+      "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/CONSUMER_INPUTS.json",
+      "sha256": "a5f34ccd4c5e402a7d0858cfe91552cb665468c0c4fc40a68f9db977675b549f"
+    },
+    "independent": {
+      "bytes": 12221,
+      "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/cpu-consumer/ATTRIBUTION.json",
+      "sha256": "8caf55b28f4a3c4108b8b932e9c664e08b3c28ea18f0bf4fc3bdf62de3538d53"
+    },
+    "owner": {
+      "bytes": 131517,
+      "path": "/opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2/RESULT.json",
+      "sha256": "52030a932da1f3cd2392389a2d9246925e40c2d93186b5f67d41fba8cfa1e4fc"
+    },
+    "source": {
+      "bytes": 109479,
+      "path": "/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/SOURCE_BOUND.json",
+      "sha256": "010914ebe1bf5d3e6b516103e1a376e24e0a0d965ac0a3a42d7aeb19fca57677"
+    }
+  },
+  "replay": {
+    "replay_independent": {
+      "bytes": 1247867,
+      "path": "/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2/consumer/INDEPENDENT.json",
+      "sha256": "fa57d2ebf4c2e12a4927ba76aeef21af62efa1d4ef69821daaa9d98e6015772c"
+    },
+    "replay_manifest": {
+      "bytes": 4398,
+      "path": "/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2/MANIFEST.json",
+      "sha256": "f18a2528fae6f482f1e30c0a8a2cc9d5ddf7661463c04dcc3bc965f2eca534fa"
+    },
+    "replay_release": {
+      "bytes": 755,
+      "path": "/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2/RELEASE.json",
+      "sha256": "d3306f548107aa8afba063d17752e035d0851dff90195165430dbd0af40b55db"
+    },
+    "replay_result": {
+      "bytes": 1939,
+      "path": "/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2/data/REPLAY-RESULT.json",
+      "sha256": "e550e5c8ca9a9c3790f4954b18e62eeb00667b38f1146ee55ec6d9e1c7384426"
+    }
+  },
+  "replay_reported_audit": {
+    "bytes": 2942,
+    "path": "/workspace/scratch/6d9e7cc63b51/GDN_REPLAY_V2_AUDIT.json",
+    "sha256": "76ab5d53fe7bd2156b42803ca6e328343a74aa43226b9c5dbb6d9d50b75c516a"
+  },
+  "schema": "bole.gdn-g1-probe-actual-prior-operands/v1"
+}

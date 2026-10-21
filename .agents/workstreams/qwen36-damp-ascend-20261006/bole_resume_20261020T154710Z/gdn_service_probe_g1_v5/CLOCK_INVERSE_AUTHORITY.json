@@ -1,0 +1,22 @@
+{
+  "NPU": false,
+  "actual_G1_source": {
+    "bytes": 109479,
+    "path": "/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/SOURCE_BOUND.json",
+    "sha256": "010914ebe1bf5d3e6b516103e1a376e24e0a0d965ac0a3a42d7aeb19fca57677"
+  },
+  "actual_execution_claimed": false,
+  "output_review_operand": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-CLOCK",
+  "schema": "bole.exact-clock-inverse-authority-to-frozen-GDN-v2/v1",
+  "v2_builder": {
+    "bytes": 12966,
+    "sha256": "09fe0aa3d6e7f6fb38fb61a3638959cbb0de3de1c3fd7c0faf3168b33fe3168c"
+  },
+  "whole_v2_overlay_sha256": {
+    "command_contract.py": "eca69c24989013ff69935f232cf020c50ca948d72edc74f9527d345246032c69",
+    "contract090.py": "021ad4d0af4ffd65d3327d70443e266127f74ae9494ba786ed955d33c8dc9797",
+    "host_service.py": "750b4805c01e08bb50125f67bd1241ec65879d01b0b74996b2e9d0736aea4452",
+    "server090.py": "e52f20d35c2534bd8d3ca949239ee2f16da0088cff66831b70061911be4cd355",
+    "service_bridge.py": "3c2209a58245a8161f62babec93fae7dbcdbb46e22f5895130d9d2a0478b4fe1"
+  }
+}

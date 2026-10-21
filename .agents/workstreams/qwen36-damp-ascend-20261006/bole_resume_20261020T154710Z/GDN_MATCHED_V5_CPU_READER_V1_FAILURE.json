@@ -1,0 +1,11 @@
+{
+  "schema": "bole.GDN-v5-CPU-metadata-reader-failure/v1",
+  "operation_id": "exec-00000000000003d8",
+  "exit_code": 1,
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 37, in <module>\nAssertionError\n",
+  "wrong_reader_assumption": "cpu-preflight CpusetCpus145",
+  "actual_original_create_and_inspect": "CpusetCpus0 guest_cpus[0]",
+  "source_edited": false,
+  "resource_changes": false,
+  "qualified": false
+}

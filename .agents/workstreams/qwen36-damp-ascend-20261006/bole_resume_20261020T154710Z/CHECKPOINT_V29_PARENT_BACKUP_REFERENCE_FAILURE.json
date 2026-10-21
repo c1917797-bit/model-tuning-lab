@@ -1,0 +1,9 @@
+{
+  "schema": "bole.checkpoint-precommit-failure/v1",
+  "operation_id": "exec-00000000000003f4",
+  "exit_code": 1,
+  "reason": "checkpoint version substitution accidentally referred to not-yet-created V29 as its own previous backup; corrected to actual V28",
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 23, in <module>\n  File \"<string>\", line 7, in ref\n  File \"/usr/lib64/python3.9/pathlib.py\", line 1187, in read_bytes\n    with self.open(mode='rb') as f:\n  File \"/usr/lib64/python3.9/pathlib.py\", line 1180, in open\n    return io.open(self, mode, buffering, encoding, errors, newline,\n  File \"/usr/lib64/python3.9/pathlib.py\", line 1038, in _opener\n    return self._accessor.open(self, flags, mode)\nFileNotFoundError: [Errno 2] No such file or directory: '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/CURRENT_NEXT_BACKUP_V29.json'\n",
+  "resource_changes": false,
+  "commit_performed": false
+}

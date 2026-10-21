@@ -1,0 +1,88 @@
+{
+  "NPU": false,
+  "actual_G3_source_ready": false,
+  "actual_cold_probe_executed": false,
+  "actual_live_identity_qualified": false,
+  "actual_preparer_ref": {
+    "bytes": 11877,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_cold_sidecar/derive_cold_namespace.py",
+    "sha256": "1dd8283bdff370bfe15bd3489a6e99823e27356b4a18b6658c95c46e3e3a02f8"
+  },
+  "baseline_cold_ref": {
+    "bytes": 3692,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v13/g2_handoff_cold.py",
+    "sha256": "43fe83203ddbe1394fdead9af54241ed61abad08107f4034f5ee12f3d14c52fb"
+  },
+  "baseline_source": {
+    "bytes": 994678,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v13/SOURCE_BOUND.json",
+    "sha256": "545e09b8bd8e598830cd81ab2ba3be6c5a6b775d1d35f263ed6d3519a4145345"
+  },
+  "cleanup_seconds": 180,
+  "default_enabled": false,
+  "derivation_ref": {
+    "bytes": 11158,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_cold_layer_v1/COLD_DERIVATION.json",
+    "sha256": "6ca19e9b6992e7279f9a4d9a54ec9c650d8bc9e53016e7e320e2b2bf8cc441d5"
+  },
+  "files": {
+    "COLD_DERIVATION.json": {
+      "bytes": 11158,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_cold_layer_v1/COLD_DERIVATION.json",
+      "sha256": "6ca19e9b6992e7279f9a4d9a54ec9c650d8bc9e53016e7e320e2b2bf8cc441d5"
+    },
+    "g3_cold_namespace.py": {
+      "bytes": 5152,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_cold_layer_v1/g3_cold_namespace.py",
+      "sha256": "e315d209ac5432853ab1085cdcfc4a619b976b7baaba1f4b6351ef9a7231fd1a"
+    },
+    "g3_handoff_cold.py": {
+      "bytes": 3470,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_cold_layer_v1/g3_handoff_cold.py",
+      "sha256": "db21f6779a9a3570141f14435eb89e5ab7271c2d1e320578840ce6f3a8ee482a"
+    }
+  },
+  "fixed_cutoff": 1792597630,
+  "formal_success": false,
+  "helper_ref": {
+    "bytes": 3470,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_cold_layer_v1/g3_handoff_cold.py",
+    "sha256": "db21f6779a9a3570141f14435eb89e5ab7271c2d1e320578840ce6f3a8ee482a"
+  },
+  "host_patch": {
+    "before_context": "reviewed host output after G3 stager and validator hooks",
+    "function": "patch_host_cold",
+    "host_not_yet_patched": true,
+    "implementation_ref": {
+      "bytes": 11877,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_cold_sidecar/derive_cold_namespace.py",
+      "sha256": "1dd8283bdff370bfe15bd3489a6e99823e27356b4a18b6658c95c46e3e3a02f8"
+    },
+    "new_literal": "g3_handoff_cold.py",
+    "old_literal": "g2_handoff_cold.py",
+    "unique_AST_constant": true
+  },
+  "model_ready": false,
+  "namespace_input_ref": {
+    "bytes": 5152,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_cold_namespace_proposal_v1/g3_cold_namespace.py",
+    "sha256": "e315d209ac5432853ab1085cdcfc4a619b976b7baaba1f4b6351ef9a7231fd1a"
+  },
+  "namespace_protocol": "bole.explicit-G3-saved-v7-metadata-namespace/v1",
+  "namespace_ref": {
+    "bytes": 5152,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_cold_layer_v1/g3_cold_namespace.py",
+    "sha256": "e315d209ac5432853ab1085cdcfc4a619b976b7baaba1f4b6351ef9a7231fd1a"
+  },
+  "original_two_functions": [
+    "g2_channel.contract",
+    "g2_finalize.owned_channel"
+  ],
+  "phase_seconds": 3600,
+  "prepared_only": true,
+  "production_handoff_changed": false,
+  "root": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_cold_layer_v1",
+  "schema": "bole.G3-source13-isolated-cold-modules/v1",
+  "software_lane_seconds": 300,
+  "software_protocol_changed": false
+}

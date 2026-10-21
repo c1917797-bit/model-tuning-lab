@@ -1,0 +1,76 @@
+{
+  "NPU": false,
+  "actual_preparer_ref": {
+    "bytes": 11877,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_cold_sidecar/derive_cold_namespace.py",
+    "sha256": "1dd8283bdff370bfe15bd3489a6e99823e27356b4a18b6658c95c46e3e3a02f8"
+  },
+  "after": "\"\"\"Actual Devices[] cold read of four complete saved metadata copies.\n\nThis calls the exact original v7 contract/finalizer functions on saved live\nsnapshots. It proves transport/readability, never present model/live identity.\n\"\"\"\nimport argparse\nimport importlib.util\nimport json\nimport os\nfrom pathlib import Path\nimport sys\nP=Path(__file__).resolve().parent;sys.path.insert(0,str(P))\n\n\ndef load(path,name):\n    spec=importlib.util.spec_from_file_location(name,path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module\n\n\ndef main():\n    parser=argparse.ArgumentParser(allow_abbrev=False);parser.add_argument('--execute',action='store_true')\n    for key in('source-ref','stage-ref','output'):parser.add_argument('--'+key)\n    a=parser.parse_args()\n    if not a.execute:print('{\"enabled\":false,\"NPU\":false}');return 0\n    import sourceio as C,g2_handoff as H\n    sr=json.loads(a.source_ref);stage=json.loads(a.stage_ref);m=H.source_guard(C,sr)\n    C.need(m['root']==str(P)and sr==C.ref(P/'SOURCE_BOUND.json')and m['prepared_only']is False and C.ref(__file__)==m['files']['g3_handoff_cold.py']and os.environ.get('ASCEND_RT_VISIBLE_DEVICES')==''and os.environ.get('TORCH_DEVICE_BACKEND_AUTOLOAD')=='0'and not list(Path('/dev').glob('davinci[0-9]*')),'exact actual bound Devices[] cold source, before any ML/backend import')\n    v=H.verify_saved_probe(C,sr,stage,guest=True);old=C.obj(v['evidence_source'])\n    originals={n:old['files'][n]for n in('g2_channel.py','g2_finalize.py','sourceio.py','g1_contract.py','g2_contract.py')}\n    for n in('sourceio.py','g1_contract.py'):C.need((m['files'][n]['bytes'],m['files'][n]['sha256'])==(originals[n]['bytes'],originals[n]['sha256']),'original source/contract support implementation byteexact '+n)\n    for r in originals.values():C.checked(r)\n    current_supports={n:m['files'][n]for n in('sourceio.py','g1_contract.py','g2_contract.py')}\n    for r in current_supports.values():C.checked(r)\n    from g3_cold_namespace import replay\n    first,second,namespace=replay(C,m,old,originals,v['evidence_source'],v['channel'])\n    C.need(first==second==C.obj(v['channel']),'original complete channel and independent owner/inspect assertions really execute')\n    H.verify_saved_probe(C,sr,stage,guest=True)\n    C.need(not any(n=='torch'or n.startswith(('torch.','torch_npu','acl'))for n in sys.modules),'no ML/NPU imports in complete metadata-read cold gate')\n    for r in originals.values():C.checked(r)\n    output=Path(a.output);C.need(output==Path(v['actual_probe_root'])/'HANDOFF-COLD.json','sole actual owned CPU probe output')\n    result=dict(schema='bole.actual-Devices0-full-channel-handoff-cold/v1',source=sr,stage=stage,evidence_source=v['evidence_source'],original_function_sources=originals,original_namespace_protocol=namespace,current_support_sources=current_supports,original_functions=['g2_channel.contract','g2_finalize.owned_channel'],all_four_original_files_guest_absent=True,complete_saved_metadata_handoff=True,original_owner_inspection_source_resource_and_mount_assertions_preserved=True,Ref2_inspect_actual_bytes_normalized=True,original_source_and_copies_unchanged=True,Devices=[],Torch_imported=False,actual_live_identity_qualified=False,saved_stopped_capture_only=True,model_ready=False,formal_success=False,NPU=False)\n    rr=C.write(output,result);print(json.dumps(dict(result=rr,model_ready=False,NPU=False)));return 0\n\n\nif __name__=='__main__':raise SystemExit(main())\n",
+  "all_edits_inside_main": true,
+  "baseline_cold_ref": {
+    "bytes": 3692,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v13/g2_handoff_cold.py",
+    "sha256": "43fe83203ddbe1394fdead9af54241ed61abad08107f4034f5ee12f3d14c52fb"
+  },
+  "baseline_source": {
+    "bytes": 994678,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v13/SOURCE_BOUND.json",
+    "sha256": "545e09b8bd8e598830cd81ab2ba3be6c5a6b775d1d35f263ed6d3519a4145345"
+  },
+  "baseline_whole_bytes": 3692,
+  "baseline_whole_sha256": "43fe83203ddbe1394fdead9af54241ed61abad08107f4034f5ee12f3d14c52fb",
+  "before": "\"\"\"Actual Devices[] cold read of four complete saved metadata copies.\n\nThis calls the exact original v7 contract/finalizer functions on saved live\nsnapshots. It proves transport/readability, never present model/live identity.\n\"\"\"\nimport argparse\nimport importlib.util\nimport json\nimport os\nfrom pathlib import Path\nimport sys\nP=Path(__file__).resolve().parent;sys.path.insert(0,str(P))\n\n\ndef load(path,name):\n    spec=importlib.util.spec_from_file_location(name,path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module\n\n\ndef main():\n    parser=argparse.ArgumentParser(allow_abbrev=False);parser.add_argument('--execute',action='store_true')\n    for key in('source-ref','stage-ref','output'):parser.add_argument('--'+key)\n    a=parser.parse_args()\n    if not a.execute:print('{\"enabled\":false,\"NPU\":false}');return 0\n    import sourceio as C,g2_handoff as H\n    sr=json.loads(a.source_ref);stage=json.loads(a.stage_ref);m=H.source_guard(C,sr)\n    C.need(m['root']==str(P)and sr==C.ref(P/'SOURCE_BOUND.json')and m['prepared_only']is False and C.ref(__file__)==m['files']['g2_handoff_cold.py']and os.environ.get('ASCEND_RT_VISIBLE_DEVICES')==''and os.environ.get('TORCH_DEVICE_BACKEND_AUTOLOAD')=='0'and not list(Path('/dev').glob('davinci[0-9]*')),'exact actual bound Devices[] cold source, before any ML/backend import')\n    v=H.verify_saved_probe(C,sr,stage,guest=True);old=C.obj(v['evidence_source'])\n    originals={n:old['files'][n]for n in('g2_channel.py','g2_finalize.py','sourceio.py','g1_contract.py','g2_contract.py')}\n    for n in('sourceio.py','g1_contract.py','g2_contract.py'):C.need((m['files'][n]['bytes'],m['files'][n]['sha256'])==(originals[n]['bytes'],originals[n]['sha256']),'original source/contract support implementation byteexact '+n)\n    for r in originals.values():C.checked(r)\n    original_channel=load(C.checked(originals['g2_channel.py']),'_g2_v8_exact_saved_v7_channel')\n    prior=sys.modules.get('g2_channel');sys.modules['g2_channel']=original_channel\n    try:original_finalizer=load(C.checked(originals['g2_finalize.py']),'_g2_v8_exact_saved_v7_finalizer')\n    finally:\n        if prior is None:sys.modules.pop('g2_channel',None)\n        else:sys.modules['g2_channel']=prior\n    first=original_channel.contract(C,v['evidence_source'],v['channel'])\n    second=original_finalizer.owned_channel(old,v['evidence_source'],v['channel'])\n    C.need(first==second==C.obj(v['channel']),'original complete channel and independent owner/inspect assertions really execute')\n    H.verify_saved_probe(C,sr,stage,guest=True)\n    C.need(not any(n=='torch'or n.startswith(('torch.','torch_npu','acl'))for n in sys.modules),'no ML/NPU imports in complete metadata-read cold gate')\n    for r in originals.values():C.checked(r)\n    output=Path(a.output);C.need(output==Path(v['actual_probe_root'])/'HANDOFF-COLD.json','sole actual owned CPU probe output')\n    result=dict(schema='bole.actual-Devices0-full-channel-handoff-cold/v1',source=sr,stage=stage,evidence_source=v['evidence_source'],original_function_sources=originals,original_functions=['g2_channel.contract','g2_finalize.owned_channel'],all_four_original_files_guest_absent=True,complete_saved_metadata_handoff=True,original_owner_inspection_source_resource_and_mount_assertions_preserved=True,Ref2_inspect_actual_bytes_normalized=True,original_source_and_copies_unchanged=True,Devices=[],Torch_imported=False,actual_live_identity_qualified=False,saved_stopped_capture_only=True,model_ready=False,formal_success=False,NPU=False)\n    rr=C.write(output,result);print(json.dumps(dict(result=rr,model_ready=False,NPU=False)));return 0\n\n\nif __name__=='__main__':raise SystemExit(main())\n",
+  "cold_helper_ref": {
+    "bytes": 3470,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_cold_layer_v1/g3_handoff_cold.py",
+    "sha256": "db21f6779a9a3570141f14435eb89e5ab7271c2d1e320578840ce6f3a8ee482a"
+  },
+  "cold_namespace_ref": {
+    "bytes": 5152,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_cold_layer_v1/g3_cold_namespace.py",
+    "sha256": "e315d209ac5432853ab1085cdcfc4a619b976b7baaba1f4b6351ef9a7231fd1a"
+  },
+  "edits": [
+    {
+      "after": "'g3_handoff_cold.py'",
+      "before": "'g2_handoff_cold.py'",
+      "end": 1129,
+      "start": 1109
+    },
+    {
+      "after": "('sourceio.py','g1_contract.py')",
+      "before": "('sourceio.py','g1_contract.py','g2_contract.py')",
+      "end": 1627,
+      "start": 1578
+    },
+    {
+      "after": "current_supports={n:m['files'][n]for n in('sourceio.py','g1_contract.py','g2_contract.py')}\n    for r in current_supports.values():C.checked(r)\n    from g3_cold_namespace import replay\n    first,second,namespace=replay(C,m,old,originals,v['evidence_source'],v['channel'])",
+      "before": "original_channel=load(C.checked(originals['g2_channel.py']),'_g2_v8_exact_saved_v7_channel')\n    prior=sys.modules.get('g2_channel');sys.modules['g2_channel']=original_channel\n    try:original_finalizer=load(C.checked(originals['g2_finalize.py']),'_g2_v8_exact_saved_v7_finalizer')\n    finally:\n        if prior is None:sys.modules.pop('g2_channel',None)\n        else:sys.modules['g2_channel']=prior\n    first=original_channel.contract(C,v['evidence_source'],v['channel'])\n    second=original_finalizer.owned_channel(old,v['evidence_source'],v['channel'])",
+      "end": 2400,
+      "start": 1845
+    },
+    {
+      "after": "original_function_sources=originals,original_namespace_protocol=namespace,current_support_sources=current_supports",
+      "before": "original_function_sources=originals",
+      "end": 3075,
+      "start": 3040
+    }
+  ],
+  "host_not_yet_patched": true,
+  "namespace_input_ref": {
+    "bytes": 5152,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_cold_namespace_proposal_v1/g3_cold_namespace.py",
+    "sha256": "e315d209ac5432853ab1085cdcfc4a619b976b7baaba1f4b6351ef9a7231fd1a"
+  },
+  "original_cold_kept_unchanged": true,
+  "original_guard_semantics_preserved": true,
+  "original_production_handoff_kept_unchanged": true,
+  "original_two_function_calls_preserved": true,
+  "outside_main_AST_unchanged": true,
+  "prepared_only": true,
+  "production_handoff_changed": false,
+  "schema": "bole.exact-G3-isolated-saved-cold-derivation/v1",
+  "software_protocol_changed": false,
+  "whole_AST_inverse": true,
+  "whole_text_inverse": true
+}
