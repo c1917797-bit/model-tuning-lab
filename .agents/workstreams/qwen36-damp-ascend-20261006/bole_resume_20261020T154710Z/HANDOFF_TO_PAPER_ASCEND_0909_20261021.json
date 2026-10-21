@@ -1,0 +1,883 @@
+{
+  "all_four_preparation_agents_completed": true,
+  "allowed_physical_NPUs": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "branch": "work/qwen36-damp-ascend-20261006",
+  "checkpoint_commit": "0321f257eb534d24b5097dd788947c624479e8cd",
+  "destination_chat": "Paper-to-Ascend 0909 NPU 4-7",
+  "do_not_terminate_or_delete": true,
+  "essential_evidence_refs": {
+    "CURRENT_NEXT_BACKUP_V30.json": {
+      "bytes": 11261,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/CURRENT_NEXT_BACKUP_V30.json",
+      "sha256": "ba963be5b2188425f15bacf782eb5d4d0439f79346dc63113f744819b355122c"
+    },
+    "G3_ACTUAL13_PARENT_PREPARE_FIXTURE_CONTROLS_V2.json": {
+      "bytes": 2246,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G3_ACTUAL13_PARENT_PREPARE_FIXTURE_CONTROLS_V2.json",
+      "sha256": "1e4f81dda2c131dd1270834c41e2d2e74c8c9b95f6c266beb9ac5f638faa07f9"
+    },
+    "G3_EXACT_LAYER17_DEPENDENCY_REPAIR_V2.json": {
+      "bytes": 98914,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G3_EXACT_LAYER17_DEPENDENCY_REPAIR_V2.json",
+      "sha256": "3e99300753dccc145106035261d16310533e0d8f76a0ddbfcb2784616d67546c"
+    },
+    "G3_SOURCE13_ACTUAL_SOURCE_PREPARATION_EXECUTION_V2.json": {
+      "bytes": 14422,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G3_SOURCE13_ACTUAL_SOURCE_PREPARATION_EXECUTION_V2.json",
+      "sha256": "e8cb2f475f2b39e94e2140be3943ad721c21352dc4f731e798e166dc81874730"
+    },
+    "G3_V1_CPU_FAILURE_AUDIT.json": {
+      "bytes": 4094,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G3_V1_CPU_FAILURE_AUDIT.json",
+      "sha256": "bab235a5bb7d9436f02a5b93dfb1d5bf37d7772a26e1eb86d025cc4f2ded767e"
+    },
+    "G3_V2_CPU_CONTROLLER_PREPARATION.json": {
+      "bytes": 984,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G3_V2_CPU_CONTROLLER_PREPARATION.json",
+      "sha256": "f95b05324f77bdb5b79e63f7ad75f67ffd52643b326edd4bd51554f943e50f87"
+    },
+    "G3_V2_HOST_SOURCE_AUDIT.json": {
+      "bytes": 1015,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G3_V2_HOST_SOURCE_AUDIT.json",
+      "sha256": "2121f9c1645569724de4d720782355bdbda9a74bac6d2af52e5273ec1499fb5b"
+    },
+    "GDN_CANDIDATE_V5_CPU_METADATA_READBACK.json": {
+      "bytes": 147317,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_CANDIDATE_V5_CPU_METADATA_READBACK.json",
+      "sha256": "b388170cca91234305d881b02703c7bcf906c72a50ea1310261ca4c25aeedc2f"
+    },
+    "GDN_CANDIDATE_V5_MODEL_SUBMITTED.json": {
+      "bytes": 3822,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_CANDIDATE_V5_MODEL_SUBMITTED.json",
+      "sha256": "1e7a073725fa1fa88c1e41e195f778ef5eff74efdda6d6f8963a84a89a49e2a5"
+    },
+    "GDN_MATCHED_V5_MODEL_METADATA_READBACK.json": {
+      "bytes": 170750,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_MATCHED_V5_MODEL_METADATA_READBACK.json",
+      "sha256": "0c9425eed0337253bc33616f575198f422c7231eb97bb5219cb0dabcffd6aebc"
+    },
+    "GDN_MATCHED_V5_MODEL_METADATA_READER_EXECUTION_V4.json": {
+      "bytes": 2788,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_MATCHED_V5_MODEL_METADATA_READER_EXECUTION_V4.json",
+      "sha256": "34e27b8ca3eb7231302ac0e598f02e6a47426ecba6b761ff6816edbd34795cc5"
+    },
+    "NATIVE_AR_EXACT174_ELF_COPY_EXECUTION_V1.json": {
+      "bytes": 2858,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_EXACT174_ELF_COPY_EXECUTION_V1.json",
+      "sha256": "82346b042877c98c9957f9aad7ebc438cad64f85045e3049210dd065393f52bd"
+    },
+    "gdn_matched_v5_installed_sources_v2/PROJECTIONS.json": {
+      "bytes": 6136,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_matched_v5_installed_sources_v2/PROJECTIONS.json",
+      "sha256": "24c624cbdf9b9fc859ad766a514c56aa63a9bf359ae000fed75e2659ab57f2be"
+    },
+    "native_ar_elf_bridge_v1/CATALOG.json": {
+      "bytes": 320726,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_elf_bridge_v1/CATALOG.json",
+      "sha256": "78e8a06c7e6e97b8565cef7f850d0fe17a91aad2aa98a95ab3aa24a484a2ece2"
+    }
+  },
+  "existing_admitted_controller_must_finish_original_budget": true,
+  "formal_success": false,
+  "fresh_state": {
+    "G3_v2_CPU_unit": {
+      "ActiveState": "inactive",
+      "ControlPID": "0",
+      "ExecMainStartTimestamp": "n/a",
+      "ExecMainStatus": "0",
+      "Id": "bole-g3-v2-cpu-20261020t154710z.service",
+      "LoadState": "not-found",
+      "MainPID": "0",
+      "RemainAfterExit": "no",
+      "Restart": "no",
+      "Result": "success",
+      "RuntimeMaxUSec": "infinity",
+      "SubState": "dead",
+      "TimeoutStopUSec": "10s"
+    },
+    "GDN_consumer_observed_report": {
+      "not_a_new_independent_reexecution": true,
+      "ref": {
+        "bytes": 3127,
+        "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-consumer/gdn/GDN-INDEPENDENT.json",
+        "sha256": "b19026809d955abaa7667b8d2520a1946650076ccde59218f78be6363181257b"
+      },
+      "value": {
+        "E2E_measured": false,
+        "NPU": false,
+        "actual_GDN_frames": 384,
+        "base_service_report": {
+          "bytes": 12131,
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-consumer/ATTRIBUTION.json",
+          "sha256": "020ffb49e09c04414c4660541f4e5409cd9973ce349353b2b1103a1e3a44b5c3"
+        },
+        "completed_request_count": 2,
+        "extension": {
+          "bytes": 5079,
+          "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-candidate-v5/GDN_EXTENSION.json",
+          "sha256": "2c2f69b936b9c47899a7e04fad2e4ba238b586bbd60d08180e809ae8ca913e84"
+        },
+        "formal_success": false,
+        "model_ready": false,
+        "new_service_prefixes_pass": true,
+        "performance_ready": false,
+        "qualification": {
+          "actual_software": {
+            "bytes": 6775,
+            "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-preflight/GDN-SOFTWARE-HANDOFF.json",
+            "sha256": "2c29ec13df757b3c5bc0160c46cdb9984ba2c64c4556d49ac8f9b38fff210d48"
+          },
+          "component_prerequisites_checked": true,
+          "extension": {
+            "bytes": 5079,
+            "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-candidate-v5/GDN_EXTENSION.json",
+            "sha256": "2c2f69b936b9c47899a7e04fad2e4ba238b586bbd60d08180e809ae8ca913e84"
+          },
+          "formal_success": false,
+          "independent_replay": {
+            "bytes": 1247867,
+            "path": "/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2/consumer/INDEPENDENT.json",
+            "sha256": "fa57d2ebf4c2e12a4927ba76aeef21af62efa1d4ef69821daaa9d98e6015772c"
+          },
+          "model_ready": false,
+          "new_service_prefixes_qualified": false,
+          "purpose": "service_numerical_only",
+          "replay_manifest": {
+            "bytes": 4398,
+            "path": "/opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2/MANIFEST.json",
+            "sha256": "f18a2528fae6f482f1e30c0a8a2cc9d5ddf7661463c04dcc3bc965f2eca534fa"
+          },
+          "schema": "bole.gdn3-service-component-prerequisites/v1",
+          "service_source": {
+            "bytes": 118267,
+            "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-candidate-v5/SOURCE_BOUND.json",
+            "sha256": "f4dca1e9a13efbe7921a2e6157e950d00727e634cc2b341e63eacbc1f3ded3f6"
+          },
+          "timing": null,
+          "timing_required_for_numerical_only": false
+        },
+        "ranks": [
+          {
+            "bytes": 56226,
+            "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-consumer/gdn/GDN-RANK-0.json",
+            "sha256": "bf8fa0913c38594f00d5035594390e8a1069a2c0f3cfa411fdb176f238657605"
+          },
+          {
+            "bytes": 56160,
+            "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-consumer/gdn/GDN-RANK-1.json",
+            "sha256": "9d8e325a12fa3a828605f18ef034caee81ea73b9e2e09bb63af2ca0197928175"
+          },
+          {
+            "bytes": 56207,
+            "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-consumer/gdn/GDN-RANK-2.json",
+            "sha256": "bc56d07c58721557d0c506820c1d107899272200cc28cc538d35a6156f9d7bd9"
+          },
+          {
+            "bytes": 56221,
+            "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-consumer/gdn/GDN-RANK-3.json",
+            "sha256": "04f823225fca7f11ae26abcf687e0fd34ec010ff53b0da6e43918be889090e1f"
+          }
+        ],
+        "schema": "bole.gdn3-service-independent/v1",
+        "scope": "bounded G1 two131/output2/root-only target each; all O/P/U and one actual selected state",
+        "source": {
+          "bytes": 118267,
+          "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-candidate-v5/SOURCE_BOUND.json",
+          "sha256": "f4dca1e9a13efbe7921a2e6157e950d00727e634cc2b341e63eacbc1f3ded3f6"
+        },
+        "whole_model_qualified": false
+      }
+    },
+    "MAIN_lock": {
+      "device": 64774,
+      "inode": 8405603,
+      "owners": [],
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock",
+      "proc_locks_key": "fd:06:8405603",
+      "released_at_snapshot": true
+    },
+    "all_loaded_bole_units_with_nonzero_PID": [],
+    "has_running_task": false,
+    "loaded_bole_unit_count": 89,
+    "observed_UTC": "2026-10-21T09:12:32.693848+00:00",
+    "observed_epoch": 1792573952.6938457,
+    "owned_containers": [
+      {
+        "cid": "f8c2c721b3087cb5649d863de5bbcb2be18bf0b08ae38103cbff2e4520000d54",
+        "cpuset": "0",
+        "devices": [],
+        "exec_ids": null,
+        "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+        "owned_ref": {
+          "bytes": 93634,
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-preflight/OWNED.json",
+          "sha256": "25ea62b4fae5c1d4c88f1ae040116f932b544e9eb8272d21059414143af7a3ca"
+        },
+        "role": "cpu-preflight",
+        "state": {
+          "Dead": false,
+          "Error": "",
+          "ExitCode": 137,
+          "FinishedAt": "2026-10-21T08:54:29.49754168Z",
+          "OOMKilled": false,
+          "Paused": false,
+          "Pid": 0,
+          "Restarting": false,
+          "Running": false,
+          "StartedAt": "2026-10-21T08:52:18.99813349Z",
+          "Status": "exited"
+        }
+      },
+      {
+        "cid": "bb9367d6fb02d1bed4e402b83757024b66f42f6443941835ebbde57ab760aec2",
+        "cpuset": "0,1,2,3",
+        "devices": [
+          {
+            "CgroupPermissions": "rwm",
+            "PathInContainer": "/dev/davinci0",
+            "PathOnHost": "/dev/davinci4"
+          },
+          {
+            "CgroupPermissions": "rwm",
+            "PathInContainer": "/dev/davinci1",
+            "PathOnHost": "/dev/davinci5"
+          },
+          {
+            "CgroupPermissions": "rwm",
+            "PathInContainer": "/dev/davinci2",
+            "PathOnHost": "/dev/davinci6"
+          },
+          {
+            "CgroupPermissions": "rwm",
+            "PathInContainer": "/dev/davinci3",
+            "PathOnHost": "/dev/davinci7"
+          },
+          {
+            "CgroupPermissions": "rwm",
+            "PathInContainer": "/dev/davinci_manager",
+            "PathOnHost": "/dev/davinci_manager"
+          },
+          {
+            "CgroupPermissions": "rwm",
+            "PathInContainer": "/dev/devmm_svm",
+            "PathOnHost": "/dev/devmm_svm"
+          },
+          {
+            "CgroupPermissions": "rwm",
+            "PathInContainer": "/dev/hisi_hdc",
+            "PathOnHost": "/dev/hisi_hdc"
+          }
+        ],
+        "exec_ids": null,
+        "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+        "owned_ref": {
+          "bytes": 95450,
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/dense/OWNED.json",
+          "sha256": "27919f77120c708741f0141cb1ee59a6e3533b90771cc266e891c57dd35dc87d"
+        },
+        "role": "dense",
+        "state": {
+          "Dead": false,
+          "Error": "",
+          "ExitCode": 137,
+          "FinishedAt": "2026-10-21T09:04:06.34596636Z",
+          "OOMKilled": false,
+          "Paused": false,
+          "Pid": 0,
+          "Restarting": false,
+          "Running": false,
+          "StartedAt": "2026-10-21T08:55:59.87716337Z",
+          "Status": "exited"
+        }
+      },
+      {
+        "cid": "4bdd290bfba672bab7fdb8baa278305ab3df625383ac1d7d7d2848214c247e84",
+        "cpuset": "0",
+        "devices": [],
+        "exec_ids": null,
+        "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+        "owned_ref": {
+          "bytes": 135543,
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-consumer/OWNED.json",
+          "sha256": "69f785c3b548d65bc0ca55cb76684fc15a47435221924d3e542950a0292b34c7"
+        },
+        "role": "cpu-consumer",
+        "state": {
+          "Dead": false,
+          "Error": "",
+          "ExitCode": 137,
+          "FinishedAt": "2026-10-21T09:05:22.31429838Z",
+          "OOMKilled": false,
+          "Paused": false,
+          "Pid": 0,
+          "Restarting": false,
+          "Running": false,
+          "StartedAt": "2026-10-21T09:04:11.97545558Z",
+          "Status": "exited"
+        }
+      }
+    ],
+    "properties": {
+      "ActiveState": "active",
+      "ControlPID": "0",
+      "ExecMainStartTimestamp": "Wed 2026-10-21 08:52:06 UTC",
+      "ExecMainStatus": "0",
+      "Id": "bole-gdn-candidate-v5-model-20261020t154710z.service",
+      "LoadState": "loaded",
+      "MainPID": "0",
+      "RemainAfterExit": "yes",
+      "Restart": "no",
+      "Result": "success",
+      "RuntimeMaxUSec": "1h 5min",
+      "SubState": "exited",
+      "TimeoutStopUSec": "3min"
+    },
+    "result": {
+      "candidate_independent_metadata_reader_not_yet_run": true,
+      "cleanup_spent": 54.12658222997561,
+      "elapsed": 800.1142681699712,
+      "observed_metadata_only": true,
+      "primary": null,
+      "ref": {
+        "bytes": 239441,
+        "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/RESULT.json",
+        "sha256": "7e313b8f64641fd97ebecebd79ae545c59dda6619166469efe68b3e09bc63aca"
+      },
+      "secondary": [],
+      "source_count": 732,
+      "source_equal": true,
+      "summary": {
+        "CPU_child": {
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-preflight/CPU-CHILD.json",
+          "sha256": "4ed80ee5cd626b7665469b99e9426f83c09ae10a0d3a5665a2772ef8aec5ac87"
+        },
+        "CPU_release": {
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-preflight/cleanup.json",
+          "sha256": "60b15f379f14f5bce797b1960fec3804ee9e7cf5fc92742b4195c540aa61d055"
+        },
+        "CPU_report": {
+          "bytes": 5508,
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-preflight/CPU.json",
+          "sha256": "fc13e385900d8d8eb7c3f0f6af129dde43d4c9065230d2be2329230177198e4f"
+        },
+        "GDN_independent": {
+          "bytes": 3127,
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-consumer/gdn/GDN-INDEPENDENT.json",
+          "sha256": "b19026809d955abaa7667b8d2520a1946650076ccde59218f78be6363181257b"
+        },
+        "GDN_independent_child": {
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-consumer/GDN-INDEPENDENT-CHILD.json",
+          "sha256": "483ff445a8c970e65901e6803ea06bab952fa86c42bbb690076deeb5dd880e97"
+        },
+        "GDN_software": {
+          "bytes": 6775,
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-preflight/GDN-SOFTWARE-HANDOFF.json",
+          "sha256": "2c29ec13df757b3c5bc0160c46cdb9984ba2c64c4556d49ac8f9b38fff210d48"
+        },
+        "MTP_load": {
+          "bytes": 1209,
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/dense/MTP-LOAD-CONSUMPTION.json",
+          "sha256": "aa9ccf4f144e6d6e9d728a077daba20b557eafc85edfa9d705d024af3169b02c"
+        },
+        "MTP_load_receipts": [
+          {
+            "bytes": 2847,
+            "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/dense/receipts/MTP-LOAD-3396-1792573191618485520.json",
+            "sha256": "283e39875ca1a9833c74b58993af255693907d75c84fc328579d97ed23562d50"
+          },
+          {
+            "bytes": 2847,
+            "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/dense/receipts/MTP-LOAD-3397-1792573191823624550.json",
+            "sha256": "2ee8e9a0303e55890dd4c53374212530bdc519a9a90d53e0e52d4569982c8113"
+          },
+          {
+            "bytes": 2847,
+            "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/dense/receipts/MTP-LOAD-3398-1792573191655832790.json",
+            "sha256": "e775b9399163c1433d1760fbf717b8bd257b32da095d9269589520e92232c2a4"
+          },
+          {
+            "bytes": 2847,
+            "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/dense/receipts/MTP-LOAD-3399-1792573191618548170.json",
+            "sha256": "5c7347a6edf5a0ed7b4da92abe2400db4bc749aaaa530cb858a20c889974bebf"
+          }
+        ],
+        "actual_client_terminal": {
+          "bytes": 1046,
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/dense/CLIENT-TERMINAL.json",
+          "sha256": "2806fc79c094be116d4fdc85999dffc380ff542d096c8e9a7b9032f94ec82b97"
+        },
+        "actual_software_child": {
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-preflight/SOFTWARE-CHILD.json",
+          "sha256": "2e709479ede42a6725bb786c18ba954d40283184cb01a9e38e4bb84730c3fc45"
+        },
+        "canary": {
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/dense/CANARY-CHILD.json",
+          "sha256": "0737b149d0b1dcf7067f24674671c6dd7c910f5fcbd5594eefd495a9118b3f8b"
+        },
+        "independent": {
+          "bytes": 12131,
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-consumer/ATTRIBUTION.json",
+          "sha256": "020ffb49e09c04414c4660541f4e5409cd9973ce349353b2b1103a1e3a44b5c3"
+        },
+        "independent_child": {
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-consumer/INDEPENDENT-CHILD.json",
+          "sha256": "3f655a6a831c9df4095c4cd382a768063e16ea0f0f0de421677bb789268047c0"
+        },
+        "independent_release": {
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-consumer/cleanup.json",
+          "sha256": "7dfd938f583d21e8d26d6a3e480a11c35dd164fff14a3cc1d760c83220c3d760"
+        },
+        "model_release": {
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/dense/cleanup.json",
+          "sha256": "d9e1d7db40882edb1d41ba283f24d4001e1cd189f3ea6b4e09fa97bf1e00f800"
+        },
+        "worker_bindings": {
+          "bytes": 18567,
+          "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/dense/WORKER_BINDINGS.json",
+          "sha256": "b0449a3b1cc8946928c18984b5ea63f311bb70d65388c520eb54da07c203879c"
+        }
+      }
+    },
+    "result_exists": true,
+    "unit": "bole-gdn-candidate-v5-model-20261020t154710z.service"
+  },
+  "handoff_queue": [
+    {
+      "already_admitted": true,
+      "new_submission": false,
+      "order": 1,
+      "state_at_write": {
+        "ActiveState": "active",
+        "ControlPID": "0",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 08:52:06 UTC",
+        "ExecMainStatus": "0",
+        "Id": "bole-gdn-candidate-v5-model-20261020t154710z.service",
+        "LoadState": "loaded",
+        "MainPID": "0",
+        "RemainAfterExit": "yes",
+        "Restart": "no",
+        "Result": "success",
+        "RuntimeMaxUSec": "1h 5min",
+        "SubState": "exited",
+        "TimeoutStopUSec": "3min"
+      },
+      "task": "existing candidate MODEL finite controller completion and natural cleanup"
+    },
+    {
+      "new_experiment_admission": false,
+      "order": 2,
+      "reader_prepared": false,
+      "task": "candidate MODEL full384/source/owner independent readback with exact own installed-source projection"
+    },
+    {
+      "admitted": false,
+      "all_original_gates_mandatory": true,
+      "controller_ref": {
+        "bytes": 8152,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/submit_g3_v2_cpu_v1.py",
+        "sha256": "3827569bc92320c2175c0b75c14c7a4d858d1bd0bfb9e01e6fe7923ec9bc595c"
+      },
+      "order": 3,
+      "task": "G3 v2 actual381/parser/saved-v7 cold"
+    },
+    {
+      "admitted": false,
+      "controller_prepared": false,
+      "order": 4,
+      "task": "one G3 finite fixed1024 actual MODEL only after381 passes"
+    },
+    {
+      "admitted": false,
+      "bind_adapter_prepared": false,
+      "order": 5,
+      "source_copies_ready": true,
+      "task": "AR174 canonical RO bind adapter; original CPU map gate before singleton4 all256 native calls"
+    },
+    {
+      "admitted": false,
+      "formal_success": false,
+      "order": 6,
+      "task": "formal full task quality and three paired fixed1024 E2E"
+    }
+  ],
+  "initial_handoff_observation": [
+    {
+      "branch": "work/qwen36-damp-ascend-20261006",
+      "branches": "main ead80810b7019bdc9ae410ebe883fc5dfbd8f0c2\npaper-to-ascend/drrqr-qwen38-result-not-met 9eed2e0e996994874ef987ee98c8cfe1127e768a\npaper-to-ascend/sliminfer-qwen36-result-no-npu-pivoted 164fb9b19985d57af44d7b43ea87a8510e091ff1\npaper-to-ascend/sparse-prefix-caching-qwen38-result-mixed-not-promoted 97a374e95eef267d0c03f896fae37aa1ee2508c5\nwork/ascend-quality-evaluation-skill-20260918 e78a0df2c5b7961e6da03bbc63ec21baafba5aec\nwork/dasc-qwen36-ascend-piercing-20260915 bf86d0e6d11e38662f8573386d48a9b30e9abd15\nwork/deltalog-qwen36-ascend-piercing-20260920 e4ff4e1d6e20f6023d1a65454700820dfbdce835\nwork/duet-qwen36-ascend-20260920 63a25ca16d610abd7fab868fdc856ca248e14c1f\nwork/epd-serve-qwen36-ascend-20260920 b0826187a00ae2c2cbf3450479ad797427a47393\nwork/good-enough-inversion-qwen36-ascend-piercing-20260920 50fcf007b2e76f897ad476e164394294de1a0ba3\nwork/kvbuffer-qwen36-ascend-piercing-20260920 d5c59876eaee1dc6a0cf425a7668830380d6371d\nwork/mxr-qwen36-ascend-piercing-20260918 b2414a5397b58285099507bc8f47e8a798da8894\nwork/quest-qwen36-ascend-piercing-20260923 d5c59876eaee1dc6a0cf425a7668830380d6371d\nwork/qwen35-experience-ingestion-20260909 b29838e721d858c1c2b73d4599d9081015fc0fb7\nwork/qwen35-performance-delivery b7e3e41f11fb4487d1640d8c0ca15bb32eb86123\nwork/qwen36-adakv-ascend-20260925 e63df715e045eb04eb73ba8bb391fabaff90fd48\nwork/qwen36-awq-w4a8-20260923 fa323a9bbd6506219422dbc6d596843f1926ede6\nwork/qwen36-damp-ascend-20261006 0321f257eb534d24b5097dd788947c624479e8cd\nwork/qwen36-deltalog-20260920 3d858b8489a4f621deff560dbfdb1455da399a57\nwork/qwen36-gdn-decode-megaop-20260920 69029e7cac5dec01c1548115527341eab3032783\nwork/qwen36-kascade-attention-20260923 e6f204f123272a12f8f571e335aa3e3b6e5cdf97\nwork/qwen36-kvarn-ascend-20260923 3790d65444341e47b3a100579aad8f289ebfde7c\nwork/qwen36-matmul-paper-screen-20260923 d96974c252590bb7758e6da54470d96860dff6bb\nwork/qwen36-paper-portfolio-synthesis-20260920 a4a9deff7b9b8805f8b68c4dfd36d0c315c90dc3\nwork/qwen36-quest-attention-20260923 612208539f2c3ddde1a9800a92cf3018f1765740\nwork/qwen36-self-indexing-20260923 8f1b3476e38e78eaa83dd8c19fb32426473b0868\nwork/qwen36-self-indexing-attention-20260923 5459a2af6ad7c11671fac8240a7120df50024571\nwork/qwen36-smoothquant-20260923 57640dfad1c16b71aa327388a9406463ac31e6ba\nwork/qwen36-sparq-attention-20260923 106527fca81a2c92b619e7440b8d0b4512bf98cd\nwork/qwen38-nvfp4-ascend-910b4-20260910 dc2bfdf7b28b74eac603dc1b35b9c13f000564e8\nwork/sparq-qwen36-ascend-piercing-20260923 d5c59876eaee1dc6a0cf425a7668830380d6371d\nwork/sparse-prefix-runtime-qwen36-ascend-20260920 63045b5af65590ebe71396b0b94de91c5a7e035f\nwork/ssm-tp-qwen36-ascend-20260920 52b4ec1b84af224e4e5178d6e4512573423732f4\nwork/tail-replay-qwen36-ascend-piercing-20260914 43bd4a8afa9a02a6d1ec5fc358125a3e017b88e2\n",
+      "epoch": 1792573490.4052885,
+      "head": "0321f257eb534d24b5097dd788947c624479e8cd",
+      "kind": "repository",
+      "status_total": 463,
+      "task_nonlog_status": [],
+      "tracked_changes": [
+        " M .agents/skills/ascend-benchmark-evidence/SKILL.md",
+        " M .agents/skills/chicaihong01-host-maintenance/SKILL.md",
+        " M .agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md"
+      ],
+      "worktrees": "worktree /opt/host/vnf/austinov/model-tuning-lab\nHEAD 0321f257eb534d24b5097dd788947c624479e8cd\nbranch refs/heads/work/qwen36-damp-ascend-20261006\n\nworktree /opt/host/vnf/austinov/worktrees/exp-20260904-qwen38-gdn-native-state-layout\nHEAD 9eed2e0e996994874ef987ee98c8cfe1127e768a\nbranch refs/heads/paper-to-ascend/drrqr-qwen38-result-not-met\n\nworktree /opt/host/vnf/austinov/worktrees/qwen35-experience-ingestion-20260909\nHEAD b29838e721d858c1c2b73d4599d9081015fc0fb7\nbranch refs/heads/work/qwen35-experience-ingestion-20260909\n\nworktree /opt/host/vnf/austinov/worktrees/qwen35-performance-delivery\nHEAD b7e3e41f11fb4487d1640d8c0ca15bb32eb86123\nbranch refs/heads/work/qwen35-performance-delivery\n\nworktree /opt/host/vnf/austinov/worktrees/qwen35-sparse-prefix-reproduction\nHEAD 97a374e95eef267d0c03f896fae37aa1ee2508c5\nbranch refs/heads/paper-to-ascend/sparse-prefix-caching-qwen38-result-mixed-not-promoted\n\nworktree /opt/host/vnf/austinov/worktrees/qwen38-nvfp4-ascend-910b4\nHEAD dc2bfdf7b28b74eac603dc1b35b9c13f000564e8\nbranch refs/heads/work/qwen38-nvfp4-ascend-910b4-20260910\n\nworktree /opt/host/vnf/austinov/worktrees/sliminfer-qwen36-ascend-piercing\nHEAD 164fb9b19985d57af44d7b43ea87a8510e091ff1\nbranch refs/heads/paper-to-ascend/sliminfer-qwen36-result-no-npu-pivoted\n\nworktree /opt/host/vnf/austinov/worktrees/tail-replay-qwen36-ascend-piercing\nHEAD 43bd4a8afa9a02a6d1ec5fc358125a3e017b88e2\nbranch refs/heads/work/tail-replay-qwen36-ascend-piercing-20260914\n\n"
+    },
+    {
+      "epoch": 1792573490.4376323,
+      "kind": "unit",
+      "unit": "bole-gdn-candidate-v5-model-20261020t154710z.service",
+      "value": {
+        "argv": [
+          "/usr/bin/systemctl",
+          "show",
+          "bole-gdn-candidate-v5-model-20261020t154710z.service",
+          "--property=Id,LoadState,ActiveState,SubState,Result,ExecMainStatus,MainPID,ControlPID,ExecMainStartTimestamp,ExecMainStartTimestampMonotonic,RuntimeMaxUSec,TimeoutStopUSec,RemainAfterExit,Restart"
+        ],
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "Restart=no\nTimeoutStopUSec=3min\nRuntimeMaxUSec=1h 5min\nRemainAfterExit=yes\nMainPID=764682\nControlPID=0\nResult=success\nExecMainStartTimestamp=Wed 2026-10-21 08:52:06 UTC\nExecMainStartTimestampMonotonic=689979787950\nExecMainStatus=0\nId=bole-gdn-candidate-v5-model-20261020t154710z.service\nLoadState=loaded\nActiveState=active\nSubState=running\n"
+      }
+    },
+    {
+      "epoch": 1792573490.4454713,
+      "kind": "unit",
+      "unit": "bole-g3-v2-cpu-20261020t154710z.service",
+      "value": {
+        "argv": [
+          "/usr/bin/systemctl",
+          "show",
+          "bole-g3-v2-cpu-20261020t154710z.service",
+          "--property=Id,LoadState,ActiveState,SubState,Result,ExecMainStatus,MainPID,ControlPID,ExecMainStartTimestamp,ExecMainStartTimestampMonotonic,RuntimeMaxUSec,TimeoutStopUSec,RemainAfterExit,Restart"
+        ],
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "Restart=no\nTimeoutStopUSec=10s\nRuntimeMaxUSec=infinity\nRemainAfterExit=no\nMainPID=0\nControlPID=0\nResult=success\nExecMainStartTimestamp=n/a\nExecMainStartTimestampMonotonic=0\nExecMainStatus=0\nId=bole-g3-v2-cpu-20261020t154710z.service\nLoadState=not-found\nActiveState=inactive\nSubState=dead\n"
+      }
+    },
+    {
+      "actual": [
+        {
+          "CpusetCpus": "0",
+          "Devices": [],
+          "ExecIDs": null,
+          "Id": "f8c2c721b3087cb5649d863de5bbcb2be18bf0b08ae38103cbff2e4520000d54",
+          "Image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+          "NanoCpus": 1000000000,
+          "State": {
+            "Dead": false,
+            "Error": "",
+            "ExitCode": 137,
+            "FinishedAt": "2026-10-21T08:54:29.49754168Z",
+            "OOMKilled": false,
+            "Paused": false,
+            "Pid": 0,
+            "Restarting": false,
+            "Running": false,
+            "StartedAt": "2026-10-21T08:52:18.99813349Z",
+            "Status": "exited"
+          }
+        }
+      ],
+      "cid": "f8c2c721b3087cb5649d863de5bbcb2be18bf0b08ae38103cbff2e4520000d54",
+      "inspect_exit": 0,
+      "inspect_stderr": "",
+      "kind": "owned",
+      "name": "adakv-tp4-run-bole-gdn-g1-probe-candidate-v5-cpu-preflight",
+      "owned_ref": {
+        "bytes": 93634,
+        "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-preflight/OWNED.json",
+        "sha256": "25ea62b4fae5c1d4c88f1ae040116f932b544e9eb8272d21059414143af7a3ca"
+      },
+      "role": "cpu-preflight",
+      "source": {
+        "bytes": 118267,
+        "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-candidate-v5/SOURCE_BOUND.json",
+        "sha256": "f4dca1e9a13efbe7921a2e6157e950d00727e634cc2b341e63eacbc1f3ded3f6"
+      }
+    },
+    {
+      "actual": [
+        {
+          "CpusetCpus": "0,1,2,3",
+          "Devices": [
+            {
+              "CgroupPermissions": "rwm",
+              "PathInContainer": "/dev/davinci0",
+              "PathOnHost": "/dev/davinci4"
+            },
+            {
+              "CgroupPermissions": "rwm",
+              "PathInContainer": "/dev/davinci1",
+              "PathOnHost": "/dev/davinci5"
+            },
+            {
+              "CgroupPermissions": "rwm",
+              "PathInContainer": "/dev/davinci2",
+              "PathOnHost": "/dev/davinci6"
+            },
+            {
+              "CgroupPermissions": "rwm",
+              "PathInContainer": "/dev/davinci3",
+              "PathOnHost": "/dev/davinci7"
+            },
+            {
+              "CgroupPermissions": "rwm",
+              "PathInContainer": "/dev/davinci_manager",
+              "PathOnHost": "/dev/davinci_manager"
+            },
+            {
+              "CgroupPermissions": "rwm",
+              "PathInContainer": "/dev/devmm_svm",
+              "PathOnHost": "/dev/devmm_svm"
+            },
+            {
+              "CgroupPermissions": "rwm",
+              "PathInContainer": "/dev/hisi_hdc",
+              "PathOnHost": "/dev/hisi_hdc"
+            }
+          ],
+          "ExecIDs": null,
+          "Id": "bb9367d6fb02d1bed4e402b83757024b66f42f6443941835ebbde57ab760aec2",
+          "Image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+          "NanoCpus": 4000000000,
+          "State": {
+            "Dead": false,
+            "Error": "",
+            "ExitCode": 137,
+            "FinishedAt": "2026-10-21T09:04:06.34596636Z",
+            "OOMKilled": false,
+            "Paused": false,
+            "Pid": 0,
+            "Restarting": false,
+            "Running": false,
+            "StartedAt": "2026-10-21T08:55:59.87716337Z",
+            "Status": "exited"
+          }
+        }
+      ],
+      "cid": "bb9367d6fb02d1bed4e402b83757024b66f42f6443941835ebbde57ab760aec2",
+      "inspect_exit": 0,
+      "inspect_stderr": "",
+      "kind": "owned",
+      "name": "adakv-tp4-run-bole-gdn-g1-probe-candidate-v5-dense",
+      "owned_ref": {
+        "bytes": 95450,
+        "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/dense/OWNED.json",
+        "sha256": "27919f77120c708741f0141cb1ee59a6e3533b90771cc266e891c57dd35dc87d"
+      },
+      "role": "dense",
+      "source": {
+        "bytes": 118267,
+        "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-candidate-v5/SOURCE_BOUND.json",
+        "sha256": "f4dca1e9a13efbe7921a2e6157e950d00727e634cc2b341e63eacbc1f3ded3f6"
+      }
+    },
+    {
+      "actual": [
+        {
+          "CpusetCpus": "0",
+          "Devices": [],
+          "ExecIDs": [
+            "b64200594f13e105aa60167bdeaf0766b1a85fea4191fa807b5af9fdc0028d43"
+          ],
+          "Id": "4bdd290bfba672bab7fdb8baa278305ab3df625383ac1d7d7d2848214c247e84",
+          "Image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+          "NanoCpus": 1000000000,
+          "State": {
+            "Dead": false,
+            "Error": "",
+            "ExitCode": 0,
+            "FinishedAt": "0001-01-01T00:00:00Z",
+            "OOMKilled": false,
+            "Paused": false,
+            "Pid": 900390,
+            "Restarting": false,
+            "Running": true,
+            "StartedAt": "2026-10-21T09:04:11.97545558Z",
+            "Status": "running"
+          }
+        }
+      ],
+      "cid": "4bdd290bfba672bab7fdb8baa278305ab3df625383ac1d7d7d2848214c247e84",
+      "inspect_exit": 0,
+      "inspect_stderr": "",
+      "kind": "owned",
+      "name": "adakv-tp4-run-bole-gdn-g1-probe-candidate-v5-cpu-consumer",
+      "owned_ref": {
+        "bytes": 135543,
+        "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/cpu-consumer/OWNED.json",
+        "sha256": "69f785c3b548d65bc0ca55cb76684fc15a47435221924d3e542950a0292b34c7"
+      },
+      "role": "cpu-consumer",
+      "source": {
+        "bytes": 118267,
+        "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-candidate-v5/SOURCE_BOUND.json",
+        "sha256": "f4dca1e9a13efbe7921a2e6157e950d00727e634cc2b341e63eacbc1f3ded3f6"
+      }
+    },
+    {
+      "exists": false,
+      "kind": "candidate-result"
+    },
+    {
+      "device": 64774,
+      "epoch": 1792573490.8408554,
+      "inode": 8405603,
+      "kind": "MAIN",
+      "owners": [
+        {
+          "argv": [
+            "/usr/bin/python3",
+            "-I",
+            "-B",
+            "/opt/host/vnf/austinov/bole-gdn-g1-probe-candidate-v5/host_service.py",
+            "--execute",
+            "--source-ref",
+            "{\"path\": \"/opt/host/vnf/austinov/bole-gdn-g1-probe-candidate-v5/SOURCE_BOUND.json\", \"bytes\": 118267, \"sha256\": \"f4dca1e9a13efbe7921a2e6157e950d00727e634cc2b341e63eacbc1f3ded3f6\"}",
+            "--output",
+            "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5"
+          ],
+          "cgroup": "13:blkio:/system.slice/bole-gdn-candidate-v5-model-20261020t154710z.service\n12:freezer:/system.slice/bole-gdn-candidate-v5-model-20261020t154710z.service\n11:memory:/system.slice/bole-gdn-candidate-v5-model-20261020t154710z.service\n10:perf_event:/\n9:rdma:/\n8:pids:/system.slice/bole-gdn-candidate-v5-model-20261020t154710z.service\n7:cpuset:/system.slice/bole-gdn-candidate-v5-model-20261020t154710z.service\n6:net_cls,net_prio:/\n5:hugetlb:/\n4:devices:/system.slice/bole-gdn-candidate-v5-model-20261020t154710z.service\n3:files:/\n2:cpu,cpuacct:/system.slice/bole-gdn-candidate-v5-model-20261020t154710z.service\n1:name=systemd:/system.slice/bole-gdn-candidate-v5-model-20261020t154710z.service\n",
+          "lock_FDs": [
+            "3"
+          ],
+          "lock_line": "27: FLOCK  ADVISORY  WRITE 764682 fd:06:8405603 0 EOF",
+          "pid": 764682
+        }
+      ],
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock",
+      "proc_locks_key": "fd:06:8405603"
+    },
+    {
+      "kind": "backup",
+      "ref": {
+        "bytes": 11693,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/CURRENT_NEXT_BACKUP_V29.json",
+        "sha256": "a451ad5364451d89049d92beb61f55fcfa6f6b7e92d393725ae57da65c6420cf"
+      }
+    },
+    {
+      "kind": "backup",
+      "ref": {
+        "bytes": 11261,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/CURRENT_NEXT_BACKUP_V30.json",
+        "sha256": "ba963be5b2188425f15bacf782eb5d4d0439f79346dc63113f744819b355122c"
+      }
+    },
+    {
+      "kind": "backup",
+      "ref": {
+        "bytes": 3494,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/CHECKPOINT_V30_FROZEN_SOURCE_WHITESPACE_AUDIT.json",
+        "sha256": "c5bc2135ad073180ec6f8e82d9a7444b6ef8c877a489a469b13ea1a9ea377f18"
+      }
+    }
+  ],
+  "markdown_ref": {
+    "bytes": 12893,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/HANDOFF_TO_PAPER_ASCEND_0909_20261021.md",
+    "sha256": "5d20180481513aa81a6bd258047fdbd5ed308b18df2141f733ebd75154b6d65a"
+  },
+  "native_AR_qualified": false,
+  "next_commands": {
+    "G3_CPU_only_after_current_owner_closed_and_all_original_gates": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/submit_g3_v2_cpu_v1.py",
+      "--execute",
+      "--controller-ref",
+      "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/submit_g3_v2_cpu_v1.py\", \"bytes\": 8152, \"sha256\": \"3827569bc92320c2175c0b75c14c7a4d858d1bd0bfb9e01e6fe7923ec9bc595c\"}"
+    ],
+    "no_command_executed_by_this_handoff": true,
+    "result_summary": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "-c",
+      "import pathlib,json; p=pathlib.Path('/opt/host/vnf/austinov/run-bole-gdn-g1-probe-candidate-v5/RESULT.json'); v=json.loads(p.read_text()) if p.exists() else None; print(json.dumps(dict(pending=v is None) if v is None else dict(primary=v['primary'],secondary=v['secondary'],source_count=len(v['source_before']),source_equal=v['source_before']==v['source_after'],elapsed=v['elapsed'],cleanup_spent=v['cleanup_spent'],summary=v['summary']),sort_keys=True))"
+    ],
+    "systemd_readonly": [
+      "/usr/bin/systemctl",
+      "show",
+      "bole-gdn-candidate-v5-model-20261020t154710z.service",
+      "--property=Id,ActiveState,SubState,Result,ExecMainStatus,MainPID,ControlPID"
+    ]
+  },
+  "no_background_preparation_or_scheduler_from_source": true,
+  "no_new_scheduler_started": true,
+  "normal_EOS_qualified": false,
+  "operation_handles": [
+    {
+      "exit_code": 0,
+      "kind": "candidate MODEL submission",
+      "operation_id": "exec-000000000000040b",
+      "state": "completed"
+    },
+    {
+      "exit_code": 0,
+      "kind": "matched MODEL metadata reader v4",
+      "operation_id": "exec-0000000000000414",
+      "state": "completed"
+    },
+    {
+      "exit_code": 0,
+      "kind": "G3 v2 CPU controller OFF/help preparation only",
+      "operation_id": "exec-0000000000000415",
+      "state": "completed"
+    },
+    {
+      "exit_code": 0,
+      "kind": "AR174 exact ELF readonly copies",
+      "operation_id": "exec-0000000000000417",
+      "state": "completed"
+    },
+    {
+      "exit_code": 0,
+      "kind": "AR readonly source inspection",
+      "operation_id": "exec-000000000000041a",
+      "state": "completed"
+    },
+    {
+      "exit_code": 0,
+      "kind": "V30 bookkeeping commit",
+      "operation_id": "exec-000000000000041b",
+      "state": "completed"
+    },
+    {
+      "exit_code": 0,
+      "kind": "handoff observation truncated by unrelated git status; replaced by041d",
+      "operation_id": "exec-000000000000041c",
+      "state": "completed"
+    },
+    {
+      "exit_code": 0,
+      "kind": "bounded handoff observation",
+      "operation_id": "exec-000000000000041d",
+      "state": "completed"
+    }
+  ],
+  "original_cutoff_UTC": "2026-10-21T15:47:10Z",
+  "original_cutoff_epoch": 1792597630,
+  "original_phase_seconds": 3600,
+  "performance_ready": false,
+  "protected_physical_NPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "queue_is_documentation_only": true,
+  "repository": "/opt/host/vnf/austinov/model-tuning-lab",
+  "repository_before_handoff_commit": {
+    "branch": "work/qwen36-damp-ascend-20261006",
+    "head": "0321f257eb534d24b5097dd788947c624479e8cd"
+  },
+  "schema": "bole.authorized-thread-transfer-handoff/v1",
+  "shared_cleanup_seconds": 180,
+  "source_experimental_writes_stopped": true,
+  "source_preparation_delegation_stopped": true,
+  "source_thread_id": "01a13944-6558-7f20-b211-f98c3163214b",
+  "task_ready": false,
+  "user_authorized_transfer": true,
+  "work_directory": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z"
+}
