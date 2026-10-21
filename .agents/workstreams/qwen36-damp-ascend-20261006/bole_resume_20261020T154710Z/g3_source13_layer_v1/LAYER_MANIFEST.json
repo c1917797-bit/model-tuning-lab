@@ -1,0 +1,56 @@
+{
+  "actors": {
+    "g2_finalize.py": {
+      "bytes": 17565,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v1/g2_finalize.py",
+      "sha256": "58bf0e8964bd7e1e27f7d1334ceb2c9dcfc333dbd48d657e0b63beef7ffa9de1"
+    },
+    "host_service.py": {
+      "bytes": 16159,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v1/host_service.py",
+      "sha256": "acc91d44a158921d965a99a650c0a8955d0fd35abebd0b862c19015efacd27c1"
+    }
+  },
+  "actual_sameimage_executed": false,
+  "actual_scheduler_executed": false,
+  "additional_G3_modules_pending": true,
+  "baseline_source": {
+    "bytes": 994678,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v13/SOURCE_BOUND.json",
+    "sha256": "545e09b8bd8e598830cd81ab2ba3be6c5a6b775d1d35f263ed6d3519a4145345"
+  },
+  "current_G3_original_cases": 32,
+  "donor_manifest": {
+    "bytes": 17849,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_long_output_v2/MANIFEST.json",
+    "sha256": "f02c246647df27615be5f39c48f485bad9af819ef273bebc6fa9dc123e110095"
+  },
+  "formal_frozen": false,
+  "formal_timing": false,
+  "kept_actual13_actor_refs": {
+    "g2_channel.py": {
+      "bytes": 16728,
+      "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v13/g2_channel.py",
+      "sha256": "f52484f64a63f4dd679c554006adba580b0edec341e35e0bceae039c4ac2e1af"
+    },
+    "g2_consumer.py": {
+      "bytes": 7492,
+      "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v13/g2_consumer.py",
+      "sha256": "3d66905a331165de4182c4885065935aaecab3774f35969c88160e67db00dc71"
+    }
+  },
+  "model_ready": false,
+  "parent_consumer_exit": null,
+  "parent_numerical_qualification": null,
+  "parent_owner_result": null,
+  "parent_source_audit": null,
+  "prospective_parent_fresh_cases": 349,
+  "prospective_total_before_additional_controls": 381,
+  "schema": "bole.G3-source13-two-actor-layer-preparation/v1",
+  "status": "PARTIAL_SOURCE_LAYER_ONLY_UNQUALIFIED",
+  "whole_inverse": {
+    "bytes": 100504,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v1/WHOLE_INVERSE.json",
+    "sha256": "a5efceffe2113e4bccadbbfaaa85a6ee33aa42b5f2a41477b5a285003d089b83"
+  }
+}

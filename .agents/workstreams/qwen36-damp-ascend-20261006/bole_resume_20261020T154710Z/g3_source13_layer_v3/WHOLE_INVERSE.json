@@ -1,0 +1,203 @@
+{
+  "ACKwire_and_channel_untouched": true,
+  "FIA_added_import": "import g3_fia_contract as DOMAIN\n",
+  "FIA_changed_class": "ServiceFiaBoundary",
+  "actual_G3_executed": false,
+  "baseline": {
+    "bytes": 994678,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v13/SOURCE_BOUND.json",
+    "sha256": "545e09b8bd8e598830cd81ab2ba3be6c5a6b775d1d35f263ed6d3519a4145345"
+  },
+  "contract_added_allocation_constants": [
+    "CALIBRATION_ALLOCATION",
+    "OTHER_EVIDENCE_ALLOCATION",
+    "FINAL_EVIDENCE_ALLOCATION"
+  ],
+  "contract_changed_assignments": [
+    "PROFILE_NAME",
+    "PROFILES",
+    "FLAG",
+    "REPORT_CAP"
+  ],
+  "contract_scope_literal_changes": {
+    "error_text": 1,
+    "request_count": 1,
+    "schema": 1
+  },
+  "coverage_changed_functions": [
+    "audit"
+  ],
+  "donor_refs": {
+    "g2_contract.py": {
+      "bytes": 1746,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_long_output_v2/g2_contract.py",
+      "sha256": "f9e545876a0e922f22408d88c997195abd3ffb4f023b9b2954e168988f47de0a"
+    },
+    "g2_coverage.py": {
+      "bytes": 4128,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_long_output_v2/g2_coverage.py",
+      "sha256": "5ca09d1eda66be9c6f30cfc28880c98a6a74a662988f9d99809fe0a339da4321"
+    },
+    "service_fia.py": {
+      "bytes": 3357,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_long_output_v2/service_fia.py",
+      "sha256": "256090262833945812d1f3c4f919f7f407209ca81f4df5ce6156c0ac90a8a417"
+    }
+  },
+  "files": {
+    "g2_contract.py": {
+      "after": {
+        "bytes": 1746,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v3/g2_contract.py",
+        "sha256": "f9e545876a0e922f22408d88c997195abd3ffb4f023b9b2954e168988f47de0a"
+      },
+      "before": {
+        "bytes": 1636,
+        "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v13/g2_contract.py",
+        "sha256": "4c64e6417ffc652d62504ddd981c4e1c16028d6567299441543dbc8129c76093"
+      },
+      "edits": [
+        {
+          "after": "\"\"\"Explicit new streaming diagnostic protocol; default OFF, fixed profiles.\"\"\"\nPROFILE_NAME = 'fixed1024'\nPROFILES = {'fixed1024': 1024}\nFLAG = 'BOLE_G3_STREAM_ENABLE'\nRAW_CAP = 2**30\nMETADATA_CAP = 64*2**20\n# Bound two serialized/loaded copies plus the retained cross-step checkpoint.\nFRAME_LOGICAL_CAP = 384*2**20\nCHECKPOINT_CAP = 128*2**20\nFRAME_WIRE_CAP = 448*2**20\nREPORT_CAP = 4000\nRELEASE_CAP = 1536\nEVENT_METADATA_CAP = 2048 + 3072 + RELEASE_CAP + REPORT_CAP\nCALIBRATION_ALLOCATION = 16*2**20\nOTHER_EVIDENCE_ALLOCATION = 3*2**20\nFINAL_EVIDENCE_ALLOCATION = 16*2**20\nPOLL_SECONDS = .05\nACK_TIMEOUT_SECONDS = 300\nBOOT_TIMEOUT_SECONDS = 900\n\n\ndef scope(name=PROFILE_NAME):\n    if name not in PROFILES:\n        raise ValueError('one explicitly frozen G3 profile')\n    output = PROFILES[name]\n    return dict(schema='bole.c1-single-request-fixed1024-stream-service/v3', profile=name,\n        prefix=131, request_count=1, max_steps_per_request=output-1,\n        max_output_tokens=output, capture_protocol='every-frame-independent-CPU-ACK/v1')\n\n\nSCOPE = scope()\nMAX_OUTPUT = SCOPE['max_output_tokens']\n\n\ndef capacity(length, allocated_kernel_pages, *, budget=MAX_OUTPUT):\n    if type(length)is not int or not 131<=length<=131+budget-2:\n        raise ValueError('exact current native length for fixed output budget')\n    # Three private branch rows are required even if only root is admitted.\n    if length+3>128*allocated_kernel_pages:\n        raise ValueError('initial actual allocation cannot hold padded tree')\n    return dict(committed_length=length, private_end_exclusive=length+3,\n        initial_kernel_capacity=128*allocated_kernel_pages,\n        active_kernel_pages=(length+2+127)//128,\n        physical_allocation_growth_proven=False)\n",
+          "before": "\"\"\"Explicit new streaming diagnostic protocol; default OFF, fixed profiles.\"\"\"\nPROFILE_NAME = 'smoke4'\nPROFILES = {'smoke4': 4, 'fixed1024': 1024}\nFLAG = 'BOLE_G2_STREAM_ENABLE'\nRAW_CAP = 2**30\nMETADATA_CAP = 64*2**20\n# Bound two serialized/loaded copies plus the retained cross-step checkpoint.\nFRAME_LOGICAL_CAP = 384*2**20\nCHECKPOINT_CAP = 128*2**20\nFRAME_WIRE_CAP = 448*2**20\nREPORT_CAP = 8192\nRELEASE_CAP = 1536\nEVENT_METADATA_CAP = 2048 + 3072 + RELEASE_CAP + REPORT_CAP\nPOLL_SECONDS = .05\nACK_TIMEOUT_SECONDS = 300\nBOOT_TIMEOUT_SECONDS = 900\n\n\ndef scope(name=PROFILE_NAME):\n    if name not in PROFILES:\n        raise ValueError('one explicitly frozen G2 profile')\n    output = PROFILES[name]\n    return dict(schema='bole.c1-two-request-stream-service/v2', profile=name,\n        prefix=131, request_count=2, max_steps_per_request=output-1,\n        max_output_tokens=output, capture_protocol='every-frame-independent-CPU-ACK/v1')\n\n\nSCOPE = scope()\nMAX_OUTPUT = SCOPE['max_output_tokens']\n\n\ndef capacity(length, allocated_kernel_pages, *, budget=MAX_OUTPUT):\n    if type(length)is not int or not 131<=length<=131+budget-2:\n        raise ValueError('exact current native length for fixed output budget')\n    # Three private branch rows are required even if only root is admitted.\n    if length+3>128*allocated_kernel_pages:\n        raise ValueError('initial actual allocation cannot hold padded tree')\n    return dict(committed_length=length, private_end_exclusive=length+3,\n        initial_kernel_capacity=128*allocated_kernel_pages,\n        active_kernel_pages=(length+2+127)//128,\n        physical_allocation_growth_proven=False)\n"
+        }
+      ]
+    },
+    "g2_coverage.py": {
+      "after": {
+        "bytes": 4128,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v3/g2_coverage.py",
+        "sha256": "5ca09d1eda66be9c6f30cfc28880c98a6a74a662988f9d99809fe0a339da4321"
+      },
+      "before": {
+        "bytes": 4102,
+        "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v13/g2_coverage.py",
+        "sha256": "7b84655015b4e944087e775c15e4a73bc7a9e5c935b4d916a57b418bf67d3c2c"
+      },
+      "edits": [
+        {
+          "after": "\"\"\"Independent complete retained coverage/ACK/output chain, no tensor inputs.\"\"\"\nimport sourceio as C\nimport g2_contract as G2\n\n\ndef audit(events,completed,requests):\n    C.need(len(completed)==len(requests)==1,'one complete actual long request summary')\n    cursor=0\n    for generation,(summary,item)in enumerate(zip(completed,requests),1):\n        rid=summary['request'];steps=item['steps'];stream=summary['output_token_ids'][:1];length=131\n        C.need(summary['generation']==generation and item['request']==dict(request=rid,generation=generation,slot=0,length=131,version=0)and\n            item['output_token_ids']==summary['output_token_ids']and G2.MAX_OUTPUT//2<=len(steps)<=G2.MAX_OUTPUT-1,\n            'exact generation/native owner/output count before coverage join')\n        event=events[cursor];cursor+=1\n        C.need(event['kind']=='open'and event['coverage']==dict(generation=generation,request=rid)and\n            item['open_event']==event,'complete actual request open event')\n        acknowledgements=[]\n        for ordinal,step in enumerate(steps):\n            event=events[cursor];cursor+=1;v=event['coverage'];emitted=step['emitted_tokens']\n            owner=dict(request=rid,generation=generation,slot=0,length=length,version=ordinal)\n            C.need(event['kind']=='step'and v['request']==rid and v['generation']==generation and\n                v['ordinal']==ordinal and v['length']==length and v['emitted_tokens']==emitted and\n                v['processed_nodes']in([0],[0,1],[0,2])and len(v['processed_nodes'])==len(emitted)and\n                1<=len(emitted)<=min(2,G2.MAX_OUTPUT-len(stream))and step['owner']==owner and\n                step['stream_event']==event,'every actual target frame in monotonic complete output coverage')\n            stream+=emitted;length+=len(v['processed_nodes']);publication=step['publication']\n            C.need(publication==dict(next_length=length,next_version=ordinal+1,emitted_tokens=emitted),\n                'retained actual selected publication joins exact coverage and output stream')\n            if ordinal<len(steps)-1:\n                ack=dict(schema='bole.service-native-scheduler-ack/v1',request=rid,previous_version=ordinal,\n                    version=ordinal+1,computed_tokens=length,next_root=emitted[-1],scheduler_committed=True,\n                    whole_model_qualification=False,final_success=False)\n                C.need(step['next_ack']==ack,'actual next CPU counter/root ACK joins preceding selected step')\n                acknowledgements.append(ack)\n            else:C.need(step['next_ack']is None,'final pending publication has actual retirement closure, no fabricated next forward')\n        retirement=item['retirement'];event=events[cursor];cursor+=1\n        C.need(stream==summary['output_token_ids']and len(stream)==G2.MAX_OUTPUT and\n            summary['steps']==len(steps)and summary['processed_tokens']==G2.MAX_OUTPUT-1 and\n            event['kind']=='retire'and event['coverage']==dict(generation=generation,request=rid,\n                steps=len(steps),output_tokens=G2.MAX_OUTPUT)and item['retire_event']==event and\n            retirement['schema']=='bole.service-owner-native-retirement/v1'and retirement['request']==rid and\n            retirement['generation']==generation and retirement['steps']==len(steps)and\n            retirement['next_counter_acknowledgements']==acknowledgements and\n            retirement['final_ack_by_retirement_pending']is True and retirement['last_publication']==dict(\n                owner=owner,next_length=length,next_version=len(steps),emitted_tokens=emitted),\n            'complete output/actual counter/retirement chain with no omitted successful segment')\n    C.need(cursor+1==len(events)and events[cursor]['kind']=='close'and\n        events[cursor]['coverage']==dict(request_count=1,output_budget=G2.MAX_OUTPUT),\n        'one final close after exactly all segments of the single long request')\n    return dict(request_count=1,complete_output_tokens=G2.MAX_OUTPUT,\n        target_step_count=sum(len(v['steps'])for v in requests),all_coverage=True,\n        final_pending_by_retirement=True)\n",
+          "before": "\"\"\"Independent complete retained coverage/ACK/output chain, no tensor inputs.\"\"\"\nimport sourceio as C\nimport g2_contract as G2\n\n\ndef audit(events,completed,requests):\n    C.need(len(completed)==len(requests)==2,'two complete actual request summaries')\n    cursor=0\n    for generation,(summary,item)in enumerate(zip(completed,requests),1):\n        rid=summary['request'];steps=item['steps'];stream=summary['output_token_ids'][:1];length=131\n        C.need(summary['generation']==generation and item['request']==dict(request=rid,generation=generation,slot=0,length=131,version=0)and\n            item['output_token_ids']==summary['output_token_ids']and 2<=len(steps)<=G2.MAX_OUTPUT-1,\n            'exact generation/native owner/output count before coverage join')\n        event=events[cursor];cursor+=1\n        C.need(event['kind']=='open'and event['coverage']==dict(generation=generation,request=rid)and\n            item['open_event']==event,'complete actual request open event')\n        acknowledgements=[]\n        for ordinal,step in enumerate(steps):\n            event=events[cursor];cursor+=1;v=event['coverage'];emitted=step['emitted_tokens']\n            owner=dict(request=rid,generation=generation,slot=0,length=length,version=ordinal)\n            C.need(event['kind']=='step'and v['request']==rid and v['generation']==generation and\n                v['ordinal']==ordinal and v['length']==length and v['emitted_tokens']==emitted and\n                v['processed_nodes']in([0],[0,1],[0,2])and len(v['processed_nodes'])==len(emitted)and\n                1<=len(emitted)<=min(2,G2.MAX_OUTPUT-len(stream))and step['owner']==owner and\n                step['stream_event']==event,'every actual target frame in monotonic complete output coverage')\n            stream+=emitted;length+=len(v['processed_nodes']);publication=step['publication']\n            C.need(publication==dict(next_length=length,next_version=ordinal+1,emitted_tokens=emitted),\n                'retained actual selected publication joins exact coverage and output stream')\n            if ordinal<len(steps)-1:\n                ack=dict(schema='bole.service-native-scheduler-ack/v1',request=rid,previous_version=ordinal,\n                    version=ordinal+1,computed_tokens=length,next_root=emitted[-1],scheduler_committed=True,\n                    whole_model_qualification=False,final_success=False)\n                C.need(step['next_ack']==ack,'actual next CPU counter/root ACK joins preceding selected step')\n                acknowledgements.append(ack)\n            else:C.need(step['next_ack']is None,'final pending publication has actual retirement closure, no fabricated next forward')\n        retirement=item['retirement'];event=events[cursor];cursor+=1\n        C.need(stream==summary['output_token_ids']and len(stream)==G2.MAX_OUTPUT and\n            summary['steps']==len(steps)and summary['processed_tokens']==G2.MAX_OUTPUT-1 and\n            event['kind']=='retire'and event['coverage']==dict(generation=generation,request=rid,\n                steps=len(steps),output_tokens=G2.MAX_OUTPUT)and item['retire_event']==event and\n            retirement['schema']=='bole.service-owner-native-retirement/v1'and retirement['request']==rid and\n            retirement['generation']==generation and retirement['steps']==len(steps)and\n            retirement['next_counter_acknowledgements']==acknowledgements and\n            retirement['final_ack_by_retirement_pending']is True and retirement['last_publication']==dict(\n                owner=owner,next_length=length,next_version=len(steps),emitted_tokens=emitted),\n            'complete output/actual counter/retirement chain with no omitted successful segment')\n    C.need(cursor+1==len(events)and events[cursor]['kind']=='close'and\n        events[cursor]['coverage']==dict(request_count=2,output_budget=G2.MAX_OUTPUT),\n        'one final close after exactly all segments of both requests')\n    return dict(request_count=2,complete_output_tokens=2*G2.MAX_OUTPUT,\n        target_step_count=sum(len(v['steps'])for v in requests),all_coverage=True,\n        final_pending_by_retirement=True)\n"
+        }
+      ]
+    },
+    "service_fia.py": {
+      "after": {
+        "bytes": 3357,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v3/service_fia.py",
+        "sha256": "256090262833945812d1f3c4f919f7f407209ca81f4df5ce6156c0ac90a8a417"
+      },
+      "before": {
+        "bytes": 2629,
+        "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v13/service_fia.py",
+        "sha256": "6fab4d9af7307bd4b4aa8371dd7d8e38431a7a0dc0ff8e907cb89b786278bf24"
+      },
+      "edits": [
+        {
+          "after": "\"\"\"Bounded service-prefix FIA experiment; each new prefix needs independent consumption.\"\"\"\nfrom sourceio import need,ref\nimport g3_fia_contract as DOMAIN\nclass ServiceFiaBoundary:\n def __init__(self,t,delegate,trial,source):\n  need(ref(__file__)==source,'exact service FIA experiment source')\n  length=trial['owner'].length\n  geometry=DOMAIN.shape(length)\n  need('fp16_boundary'not in trial,'one boundary receipt per service frame')\n  self.t=t;self.delegate=delegate;self.length=length;self.geometry=geometry\n  self.record=dict(source=source,completed=False,prefix_length=length,\n   input_dtype='torch.float16',output_dtype='torch.bfloat16',cast={},\n   scope='explicit fixed1024 C1/131..1153/one physical1536 allocation; every frame independently consumed',\n   scratch_kernel_pages=geometry['scratch_kernel_pages'],publication_kernel_pages=geometry['publication_kernel_pages'],\n   physical_allocation_growth_proven=False)\n  trial['fp16_boundary']=self.record\n def npu_fused_infer_attention_score(self,**kwargs):\n  t=self.t;need(not self.record['completed'],'one service FIA call')\n  q,k,v=(kwargs[x]for x in('query','key','value'))\n  need(q.shape==self.geometry['query_shape']and k.shape==v.shape==self.geometry['KV_shape']and\n       q.dtype==k.dtype==v.dtype==t.bfloat16,'source-owned service Q6/KV1/page128 BF16')\n  need(kwargs['input_layout']=='BNSD'and kwargs['block_size']==128 and\n   kwargs['actual_seq_lengths']==[3]and kwargs['actual_seq_lengths_kv']==[self.length+3]and\n   kwargs['num_heads']==6 and kwargs['num_key_value_heads']==1 and kwargs['scale']==256**-.5 and\n   kwargs['sparse_mode']==1 and kwargs['pre_tokens']==kwargs['next_tokens']==2147483647 and\n   kwargs['inner_precise']==2,'unchanged paged tree arguments and declared actual prefix')\n  need(kwargs['atten_mask'].shape==self.geometry['mask_shape']and kwargs['atten_mask'].dtype==t.bool and\n   kwargs['block_table'].shape==self.geometry['table_shape']and kwargs['block_table'].dtype==t.int32,\n   'actual native scratch mask/table covers declared long prefix plus all3 private rows')\n  expected=t.arange(self.geometry['scratch_kernel_pages'],dtype=t.int32,device=q.device).reshape(1,-1)\n  need(t.equal(kwargs['block_table'],expected),'original adapter-owned contiguous private scratch page table')\n  converted=dict(kwargs);before={}\n  for name in('query','key','value'):\n   original=kwargs[name];need(bool(t.isfinite(original).all()),'finite original service input')\n   value=original.to(t.float16);need(bool(t.isfinite(value).all()),'finite service FP16 conversion')\n   delta=(value.double()-original.double()).abs()\n   self.record['cast'][name]=dict(changed=int((delta!=0).sum()),elements=delta.numel(),peak_abs=float(delta.max()))\n   converted[name]=value;before[name]=value.clone()\n  result=self.delegate.npu_fused_infer_attention_score(**converted)\n  for name,value in before.items():\n   need(t.equal(converted[name].contiguous().view(t.uint8),value.contiguous().view(t.uint8)),'service FIA input unchanged')\n  need(isinstance(result,(tuple,list))and len(result)==2 and result[0].dtype==t.float16 and\n       result[0].shape==(1,6,3,256)and bool(t.isfinite(result[0]).all()),'finite actual service FIA output')\n  output=result[0].to(t.bfloat16);need(bool(t.isfinite(output).all()),'finite service BF16 output boundary')\n  self.record['completed']=True\n  return output,result[1]\n\n\n",
+          "before": "\"\"\"Bounded service-prefix FIA experiment; each new prefix needs independent consumption.\"\"\"\nfrom sourceio import need,ref\nclass ServiceFiaBoundary:\n def __init__(self,t,delegate,trial,source):\n  need(ref(__file__)==source,'exact service FIA experiment source')\n  length=trial['owner'].length\n  need(type(length)is int and 131<=length<=135,'only first3 service steps from131 prefix')\n  need('fp16_boundary'not in trial,'one boundary receipt per service frame')\n  self.t=t;self.delegate=delegate;self.length=length\n  self.record=dict(source=source,completed=False,prefix_length=length,\n   input_dtype='torch.float16',output_dtype='torch.bfloat16',cast={},\n   scope='experimental C1/131..135; no qualification inferred for a new prefix')\n  trial['fp16_boundary']=self.record\n def npu_fused_infer_attention_score(self,**kwargs):\n  t=self.t;need(not self.record['completed'],'one service FIA call')\n  q,k,v=(kwargs[x]for x in('query','key','value'))\n  need(q.shape==(1,6,3,256)and k.shape==v.shape==(2,1,128,256)and\n       q.dtype==k.dtype==v.dtype==t.bfloat16,'source-owned service Q6/KV1/page128 BF16')\n  need(kwargs['input_layout']=='BNSD'and kwargs['block_size']==128 and\n   kwargs['actual_seq_lengths']==[3]and kwargs['actual_seq_lengths_kv']==[self.length+3]and\n   kwargs['num_heads']==6 and kwargs['num_key_value_heads']==1 and kwargs['scale']==256**-.5 and\n   kwargs['sparse_mode']==1 and kwargs['pre_tokens']==kwargs['next_tokens']==2147483647 and\n   kwargs['inner_precise']==2,'unchanged paged tree arguments and declared actual prefix')\n  converted=dict(kwargs);before={}\n  for name in('query','key','value'):\n   original=kwargs[name];need(bool(t.isfinite(original).all()),'finite original service input')\n   value=original.to(t.float16);need(bool(t.isfinite(value).all()),'finite service FP16 conversion')\n   delta=(value.double()-original.double()).abs()\n   self.record['cast'][name]=dict(changed=int((delta!=0).sum()),elements=delta.numel(),peak_abs=float(delta.max()))\n   converted[name]=value;before[name]=value.clone()\n  result=self.delegate.npu_fused_infer_attention_score(**converted)\n  for name,value in before.items():\n   need(t.equal(converted[name].contiguous().view(t.uint8),value.contiguous().view(t.uint8)),'service FIA input unchanged')\n  need(isinstance(result,(tuple,list))and len(result)==2 and result[0].dtype==t.float16 and\n       result[0].shape==(1,6,3,256)and bool(t.isfinite(result[0]).all()),'finite actual service FIA output')\n  output=result[0].to(t.bfloat16);need(bool(t.isfinite(output).all()),'finite service BF16 output boundary')\n  self.record['completed']=True\n  return output,result[1]\n\n\n"
+        }
+      ]
+    }
+  },
+  "parent_MODEL_qualified": false,
+  "previous_files_whole_equal": {
+    "g2_finalize.py": {
+      "after": {
+        "bytes": 17565,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v3/g2_finalize.py",
+        "sha256": "58bf0e8964bd7e1e27f7d1334ceb2c9dcfc333dbd48d657e0b63beef7ffa9de1"
+      },
+      "before": {
+        "bytes": 17565,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v2/g2_finalize.py",
+        "sha256": "58bf0e8964bd7e1e27f7d1334ceb2c9dcfc333dbd48d657e0b63beef7ffa9de1"
+      }
+    },
+    "g2_numeric.py": {
+      "after": {
+        "bytes": 24956,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v3/g2_numeric.py",
+        "sha256": "e2b66454b354175e1b00708ebbb70cd562a707acce34e8678ea581d7b6c2da91"
+      },
+      "before": {
+        "bytes": 24956,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v2/g2_numeric.py",
+        "sha256": "e2b66454b354175e1b00708ebbb70cd562a707acce34e8678ea581d7b6c2da91"
+      }
+    },
+    "g3_fa_consumer.py": {
+      "after": {
+        "bytes": 2289,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v3/g3_fa_consumer.py",
+        "sha256": "eb535e8c67e70118cd22d0c6a97a1649674252c54e05269a05231b3b87211d86"
+      },
+      "before": {
+        "bytes": 2289,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v2/g3_fa_consumer.py",
+        "sha256": "eb535e8c67e70118cd22d0c6a97a1649674252c54e05269a05231b3b87211d86"
+      }
+    },
+    "g3_fia_contract.py": {
+      "after": {
+        "bytes": 1334,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v3/g3_fia_contract.py",
+        "sha256": "dba6a3d251b74277af4679502bc8242da63027ff379f2cb9cb0ea4f355e98400"
+      },
+      "before": {
+        "bytes": 1334,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v2/g3_fia_contract.py",
+        "sha256": "dba6a3d251b74277af4679502bc8242da63027ff379f2cb9cb0ea4f355e98400"
+      }
+    },
+    "g3_readset.py": {
+      "after": {
+        "bytes": 5646,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v3/g3_readset.py",
+        "sha256": "82cb2ffb494f5ece0b2f1cc728416f82795188ebcc9c72ac0e67f536c415b0a3"
+      },
+      "before": {
+        "bytes": 5646,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v2/g3_readset.py",
+        "sha256": "82cb2ffb494f5ece0b2f1cc728416f82795188ebcc9c72ac0e67f536c415b0a3"
+      }
+    },
+    "host_service.py": {
+      "after": {
+        "bytes": 16159,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v3/host_service.py",
+        "sha256": "acc91d44a158921d965a99a650c0a8955d0fd35abebd0b862c19015efacd27c1"
+      },
+      "before": {
+        "bytes": 16159,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v2/host_service.py",
+        "sha256": "acc91d44a158921d965a99a650c0a8955d0fd35abebd0b862c19015efacd27c1"
+      }
+    },
+    "service_client.py": {
+      "after": {
+        "bytes": 3080,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v3/service_client.py",
+        "sha256": "8ac77e09701558ec77928a2c42bdace68bbe8881fb6b4a271409d7b9e4e0481f"
+      },
+      "before": {
+        "bytes": 3080,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v2/service_client.py",
+        "sha256": "8ac77e09701558ec77928a2c42bdace68bbe8881fb6b4a271409d7b9e4e0481f"
+      }
+    }
+  },
+  "prior_inverse": {
+    "bytes": 65640,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v2/WHOLE_INVERSE.json",
+    "sha256": "0c1ba4ab2108244e26e7a687357724c4b46274d6b1dfa884aed178b6ee0da72a"
+  },
+  "prior_manifest": {
+    "bytes": 3804,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g3_source13_layer_v2/LAYER_MANIFEST.json",
+    "sha256": "3ff93eb40f0577c9c89e4e9c65569a6653d01b2328d78b1c596d3073b109f420"
+  },
+  "schema": "bole.actual13-to-G3-fixed1024-layer3-wholeinverse/v1",
+  "status": "PARTIAL_SOURCE_LAYER_ONLY_UNQUALIFIED",
+  "whole_inverse_verified": true
+}
