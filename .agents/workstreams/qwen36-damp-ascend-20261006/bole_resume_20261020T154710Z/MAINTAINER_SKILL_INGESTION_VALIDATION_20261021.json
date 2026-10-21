@@ -1,0 +1,209 @@
+{
+  "NPU": false,
+  "changed_files": [
+    {
+      "bytes": 22231,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/skills/ascend-inference-tuning-loop/SKILL.md",
+      "sha256": "e0d6296824a1b7f89bd1b6ffba002fa41db27ca1b59c8451a3ad5c06d590ac1e"
+    },
+    {
+      "bytes": 22608,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/skills/ascend-inference-tuning-loop/references/bole-saved-input-and-service-qualification.md",
+      "sha256": "e60f81fca9e1e13370bb4b4262b04e3540576ab24a159ce153a1cdb742cf3565"
+    },
+    {
+      "bytes": 5659,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/skills/mst-maintainer-handoff/SKILL.md",
+      "sha256": "0d106e2f246e030ac6fe68e3600b8782bbd44a4a7d4f060efcaec423b3e22257"
+    },
+    {
+      "bytes": 7357,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/skills.registry.yaml",
+      "sha256": "859621aa22543214b8b2bda7509a38e89f8f0b0986fb5e524926d1d177f5b1df"
+    },
+    {
+      "bytes": 7309,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/evals/transformation-cases/bole-evidence-and-controller-transfer-20261021.yaml",
+      "sha256": "72f9d8c24c426c23bfb98342c9ad58c23dcec14aedd62a5b35470542cf70db0f"
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "./scripts/validate-mst.sh"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "PASS: Maintainer Skill Tree structure is valid (20 skills)\n"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        ".agents/skills/ascend-inference-tuning-loop/SKILL.md",
+        ".agents/skills/ascend-inference-tuning-loop/references/bole-saved-input-and-service-qualification.md",
+        ".agents/skills/mst-maintainer-handoff/SKILL.md",
+        ".agents/skills.registry.yaml",
+        ".agents/evals/transformation-cases/bole-evidence-and-controller-transfer-20261021.yaml"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--stat",
+        "--",
+        ".agents/skills/ascend-inference-tuning-loop/SKILL.md",
+        ".agents/skills/ascend-inference-tuning-loop/references/bole-saved-input-and-service-qualification.md",
+        ".agents/skills/mst-maintainer-handoff/SKILL.md",
+        ".agents/skills.registry.yaml",
+        ".agents/evals/transformation-cases/bole-evidence-and-controller-transfer-20261021.yaml"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": " .agents/skills.registry.yaml                       |   5 +-\n .../skills/ascend-inference-tuning-loop/SKILL.md   |   3 +\n .../bole-saved-input-and-service-qualification.md  | 166 +++++++++++++++++++++\n .agents/skills/mst-maintainer-handoff/SKILL.md     |  29 +++-\n 4 files changed, 201 insertions(+), 2 deletions(-)\n"
+    }
+  ],
+  "decision_fixtures": 12,
+  "historical_evidence_refs": [
+    {
+      "bytes": 41801,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/HANDOFF_TO_PAPER_ASCEND_0909_20261021.json",
+      "sha256": "875e62d3510463d1854c191fccd2412cc511288f33968022928e9a9c1be8f729"
+    },
+    {
+      "bytes": 11261,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/CURRENT_NEXT_BACKUP_V30.json",
+      "sha256": "ba963be5b2188425f15bacf782eb5d4d0439f79346dc63113f744819b355122c"
+    },
+    {
+      "bytes": 170750,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_MATCHED_V5_MODEL_METADATA_READBACK.json",
+      "sha256": "0c9425eed0337253bc33616f575198f422c7231eb97bb5219cb0dabcffd6aebc"
+    },
+    {
+      "bytes": 147317,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_CANDIDATE_V5_CPU_METADATA_READBACK.json",
+      "sha256": "b388170cca91234305d881b02703c7bcf906c72a50ea1310261ca4c25aeedc2f"
+    },
+    {
+      "bytes": 4094,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G3_V1_CPU_FAILURE_AUDIT.json",
+      "sha256": "bab235a5bb7d9436f02a5b93dfb1d5bf37d7772a26e1eb86d025cc4f2ded767e"
+    },
+    {
+      "bytes": 98914,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G3_EXACT_LAYER17_DEPENDENCY_REPAIR_V2.json",
+      "sha256": "3e99300753dccc145106035261d16310533e0d8f76a0ddbfcb2784616d67546c"
+    },
+    {
+      "bytes": 14422,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G3_SOURCE13_ACTUAL_SOURCE_PREPARATION_EXECUTION_V2.json",
+      "sha256": "e8cb2f475f2b39e94e2140be3943ad721c21352dc4f731e798e166dc81874730"
+    },
+    {
+      "bytes": 2246,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G3_ACTUAL13_PARENT_PREPARE_FIXTURE_CONTROLS_V2.json",
+      "sha256": "1e4f81dda2c131dd1270834c41e2d2e74c8c9b95f6c266beb9ac5f638faa07f9"
+    },
+    {
+      "bytes": 1015,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G3_V2_HOST_SOURCE_AUDIT.json",
+      "sha256": "2121f9c1645569724de4d720782355bdbda9a74bac6d2af52e5273ec1499fb5b"
+    },
+    {
+      "bytes": 495,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_MATCHED_V5_INSTALLED_SOURCE_INSPECT_ORDER_DIAGNOSIS.json",
+      "sha256": "1faad2622cd677898e710f9c918b760b79045cabd96c1d6f69725a427099e532"
+    },
+    {
+      "bytes": 3101,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_MATCHED_V5_INSTALLED_SOURCE_COPY_EXECUTION_V1.json",
+      "sha256": "5756dcf365c1b3e6853e73ee986ae8d3b3c08f90a8b1d19979748aee0ccc8547"
+    },
+    {
+      "bytes": 2578,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_MATCHED_V5_INSTALLED_SOURCE_COPY_EXECUTION_V2.json",
+      "sha256": "05d740a80b6afdd821a6e5e3d249f1cf711826124d59963bee8a965cbd235033"
+    },
+    {
+      "bytes": 2263,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_MATCHED_V5_MODEL_METADATA_READER_EXECUTION_V1.json",
+      "sha256": "66990740a8472c9859d8db8dde554f499fd21f0b8f127ab8a62512365fb7705f"
+    },
+    {
+      "bytes": 3442,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_MATCHED_V5_MODEL_METADATA_READER_EXECUTION_V2.json",
+      "sha256": "91affaa37b43f8e1ee0ebc822232535148cd1aafb8db1ae3d89bd17b3ded7626"
+    },
+    {
+      "bytes": 2742,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_MATCHED_V5_MODEL_METADATA_READER_EXECUTION_V3.json",
+      "sha256": "24d80f571da81228c9a4ff61e6e7b74e8eb4ab6998c3abbda23cc89da253c0ff"
+    },
+    {
+      "bytes": 2788,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_MATCHED_V5_MODEL_METADATA_READER_EXECUTION_V4.json",
+      "sha256": "34e27b8ca3eb7231302ac0e598f02e6a47426ecba6b761ff6816edbd34795cc5"
+    },
+    {
+      "bytes": 2574,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_MATCHED_V5_MODEL_SUBMISSION_EXECUTION.json",
+      "sha256": "93d61db78e7c6524b37b6d53ce0e1309c593266ed676358ccbaa294e669b29f5"
+    },
+    {
+      "bytes": 2034,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_MATCHED_V5_MODEL_SUBMISSION_EXECUTION_V2.json",
+      "sha256": "ec89737c548b3af1a0462207842fb340287bb96b8d2ec70c03372a1d68ec0886"
+    },
+    {
+      "bytes": 4157,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_MATCHED_V4_MODEL_FAILURE_AUDIT_V2.json",
+      "sha256": "ba6cda7a281ca01b4a4834e31571197a44e60fbe17f27f63ded2a4a49577dd9b"
+    },
+    {
+      "bytes": 6136,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_matched_v5_installed_sources_v2/PROJECTIONS.json",
+      "sha256": "24c624cbdf9b9fc859ad766a514c56aa63a9bf359ae000fed75e2659ab57f2be"
+    },
+    {
+      "bytes": 320726,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_elf_bridge_v1/CATALOG.json",
+      "sha256": "78e8a06c7e6e97b8565cef7f850d0fe17a91aad2aa98a95ab3aa24a484a2ece2"
+    },
+    {
+      "bytes": 2858,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_EXACT174_ELF_COPY_EXECUTION_V1.json",
+      "sha256": "82346b042877c98c9957f9aad7ebc438cad64f85045e3049210dd065393f52bd"
+    },
+    {
+      "bytes": 3494,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/CHECKPOINT_V30_FROZEN_SOURCE_WHITESPACE_AUDIT.json",
+      "sha256": "c5bc2135ad073180ec6f8e82d9a7444b6ef8c877a489a469b13ea1a9ea377f18"
+    }
+  ],
+  "links_checked": 18,
+  "new_experiment": false,
+  "observed_epoch": 1792580800.2618752,
+  "passed": true,
+  "quick_skill_validator": [
+    {
+      "message": "Skill is valid!",
+      "passed": true,
+      "path": ".agents/skills/ascend-inference-tuning-loop/SKILL.md"
+    },
+    {
+      "message": "Skill is valid!",
+      "passed": true,
+      "path": ".agents/skills/mst-maintainer-handoff/SKILL.md"
+    }
+  ],
+  "registry_skills": 20,
+  "schema": "bole.maintainer-skill-ingestion-validation/v1",
+  "tensor_math_replayed": false
+}

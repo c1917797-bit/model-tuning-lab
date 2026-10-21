@@ -350,3 +350,6 @@ It retains the earlier failed entry and the later component/service successes
 with their different source identities. Neither history nor a short-request
 PASS replaces the missing production-control, long-output, task and formal
 performance gates. Use the latest explicit task contract for new experiments.
+For source-to-guest readset gaps, frozen-byte provenance, metadata-only reader
+recovery, exact ELF bindings and controller transfer, apply that reference's
+October21 closure and evidence-boundary rules before any new admission.

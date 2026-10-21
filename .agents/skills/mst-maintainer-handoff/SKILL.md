@@ -1,6 +1,6 @@
 ---
 name: mst-maintainer-handoff
-description: Use when adding, updating, or validating .agents/HANDOFF.md so a new maintainer agent can resume from current project status, active track, validation evidence, and next actions without reading the entire history log.
+description: Use when creating or verifying global or branch-local maintainer handoffs, including bounded runtime-controller transfer, live ownership, immutable deadlines, evidence scopes, and exact resume commands.
 ---
 
 # Maintainer Handoff
@@ -95,6 +95,33 @@ how do I recover if state is unclear?
 - Record partial validation honestly.
 - Keep runtime-user guidance out of `.agents/HANDOFF.md`.
 - Do not let `.agents/HANDOFF.md` replace backlog/checkpoints for autonomous loops; it is the human-readable resume surface.
+
+## Transfer of bounded runtime ownership
+
+When the user transfers an active workstream or stops new preparation, freeze
+source-side launches, source edits and preparation dispatch. Let already
+admitted finite controllers finish their original budget and own-only cleanup
+unless the user explicitly requests termination. Transfer does not renew the
+authority, admission deadline, phase clock or cleanup allowance.
+
+Record branch/HEAD, latest CURRENT/NEXT/BACKUP, unit/PID/CID and operation IDs,
+result roots, exact lock owner/FD and natural release conditions, proven and
+pending gates, first blockers and executable next commands. Distinguish a
+completed submission operation from the live systemd job; an expired operation
+record is not proof that the job ended. Do not copy credentials into handoff.
+
+Timestamp a fresh snapshot after collecting the handoff. If an admitted job
+finishes during transfer, retain the earlier observation as history and mark
+the later snapshot authoritative for that time. With RemainAfterExit=yes,
+active/exited and MainPID=ControlPID=0 is a terminal state; also verify every
+owned cleanup, PID0/noOOM/empty ExecIDs and actual lock release. Never delete a
+lock file, reset a unit or launch a second scheduler to manufacture quiescence.
+
+Commit the branch-local handoff, report remaining running tasks from the final
+snapshot, and stop source-side experimental writes. The receiver re-proves live
+identity/ownership and the original gates before its next admission. Historical
+peer IDs, CIDs and leases are not continuing authority. For the actual BOLE case,
+read [bounded service recovery](../ascend-inference-tuning-loop/references/bole-saved-input-and-service-qualification.md).
 
 ## Validation
 

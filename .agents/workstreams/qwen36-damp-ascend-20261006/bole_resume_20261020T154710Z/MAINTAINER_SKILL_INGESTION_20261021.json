@@ -1,0 +1,149 @@
+{
+  "schema": "bole.maintainer-experience-ingestion/v1",
+  "practice_source": {
+    "repository": "/opt/host/vnf/austinov/model-tuning-lab",
+    "branch": "work/qwen36-damp-ascend-20261006",
+    "evidence_commit": "0321f257eb534d24b5097dd788947c624479e8cd",
+    "handoff_commit": "51d9d9fd0bf3b12b7bc2ecd618e9b361555b4e0b"
+  },
+  "requested_scope": "Inherit verified successes and failures into existing maintainer skills; documentation and metadata checks only.",
+  "existing_skills_updated": [
+    "ascend-inference-tuning-loop",
+    "mst-maintainer-handoff"
+  ],
+  "classification": "Existing narrow skill updates, registry selection metadata and maintainer decision eval.",
+  "lessons": [
+    "Close all actual guest reads in both preparation dependencies and validator requirements; do not infer guest visibility from host audit.",
+    "Treat frozen bytes and each source lineage as exact identity; preserve inverse and failed records.",
+    "Recover metadata readers with exact role profiles, complete Mounts dictionaries, source-owned installed-file projections and actual enabled CLI validation.",
+    "Keep complete streaming hashes and approved child resource wrappers within original CPU/RAM/clock caps.",
+    "Separate ELF content equality from actual map dev/inode identity; copies alone cannot qualify native calls.",
+    "Transfer finite controller ownership without source-side relaunch, termination, deadline renewal or evidence deletion.",
+    "Preserve source/CPU/component/model/task/performance scopes and every unrun gate."
+  ],
+  "validation": {
+    "validation_ref": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAINTAINER_SKILL_INGESTION_VALIDATION_20261021.json",
+      "bytes": 10302,
+      "sha256": "db0b37987bbecff232911c30f919344e427eee7b50fe6849576c793e8ef4e883"
+    },
+    "passed": true,
+    "registry_skills": 20,
+    "quick_skill_validators": [
+      {
+        "path": ".agents/skills/ascend-inference-tuning-loop/SKILL.md",
+        "passed": true,
+        "message": "Skill is valid!"
+      },
+      {
+        "path": ".agents/skills/mst-maintainer-handoff/SKILL.md",
+        "passed": true,
+        "message": "Skill is valid!"
+      }
+    ],
+    "links_checked": 18,
+    "decision_fixtures": 12,
+    "commands": [
+      {
+        "argv": [
+          "./scripts/validate-mst.sh"
+        ],
+        "exit_code": 0,
+        "stdout": "PASS: Maintainer Skill Tree structure is valid (20 skills)\n",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "diff",
+          "--check",
+          "--",
+          ".agents/skills/ascend-inference-tuning-loop/SKILL.md",
+          ".agents/skills/ascend-inference-tuning-loop/references/bole-saved-input-and-service-qualification.md",
+          ".agents/skills/mst-maintainer-handoff/SKILL.md",
+          ".agents/skills.registry.yaml",
+          ".agents/evals/transformation-cases/bole-evidence-and-controller-transfer-20261021.yaml"
+        ],
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "argv": [
+          "git",
+          "diff",
+          "--stat",
+          "--",
+          ".agents/skills/ascend-inference-tuning-loop/SKILL.md",
+          ".agents/skills/ascend-inference-tuning-loop/references/bole-saved-input-and-service-qualification.md",
+          ".agents/skills/mst-maintainer-handoff/SKILL.md",
+          ".agents/skills.registry.yaml",
+          ".agents/evals/transformation-cases/bole-evidence-and-controller-transfer-20261021.yaml"
+        ],
+        "exit_code": 0,
+        "stdout": " .agents/skills.registry.yaml                       |   5 +-\n .../skills/ascend-inference-tuning-loop/SKILL.md   |   3 +\n .../bole-saved-input-and-service-qualification.md  | 166 +++++++++++++++++++++\n .agents/skills/mst-maintainer-handoff/SKILL.md     |  29 +++-\n 4 files changed, 201 insertions(+), 2 deletions(-)\n",
+        "stderr": ""
+      }
+    ],
+    "historical_metadata_files_reopened": 23
+  },
+  "changed_file_refs": [
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/skills/ascend-inference-tuning-loop/SKILL.md",
+      "bytes": 22231,
+      "sha256": "e0d6296824a1b7f89bd1b6ffba002fa41db27ca1b59c8451a3ad5c06d590ac1e"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/skills/ascend-inference-tuning-loop/references/bole-saved-input-and-service-qualification.md",
+      "bytes": 22608,
+      "sha256": "e60f81fca9e1e13370bb4b4262b04e3540576ab24a159ce153a1cdb742cf3565"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/skills/mst-maintainer-handoff/SKILL.md",
+      "bytes": 5659,
+      "sha256": "0d106e2f246e030ac6fe68e3600b8782bbd44a4a7d4f060efcaec423b3e22257"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/skills.registry.yaml",
+      "bytes": 7357,
+      "sha256": "859621aa22543214b8b2bda7509a38e89f8f0b0986fb5e524926d1d177f5b1df"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/evals/transformation-cases/bole-evidence-and-controller-transfer-20261021.yaml",
+      "bytes": 7309,
+      "sha256": "72f9d8c24c426c23bfb98342c9ad58c23dcec14aedd62a5b35470542cf70db0f"
+    }
+  ],
+  "independent_behavior_check": {
+    "agent": "/root/skill_forward_check",
+    "state": "completed",
+    "mode": "Fresh-context pure-text maintainer decisions; no tools, API credentials, filesystem or runtime actions.",
+    "scenarios": 5,
+    "observed_actions": [
+      "A: Exact eight-actor guest closure;10 preparation controls cannot claim300 suite.",
+      "B: Unique full Mounts dictionary comparison; RW change rejects; exact four-CPU role beats guessed three.",
+      "C: Timestamped final terminal snapshot supersedes older running note for that time; expired cutoff cannot renew; no restart or second scheduler.",
+      "D:174 ELF/PT_INTERP contents are source evidence; CPU identity/native256 and current numerical failure remain pending.",
+      "E: Confirm traceback before root cause; repair complete reader; same stopped-CID exact projection; expired submission record cannot relaunch a live job."
+    ],
+    "clarifications": [
+      "Require unique Destination inside each Mounts collection before canonicalization.",
+      "A repair rule does not authorize source-side writes after transfer or expiry.",
+      "Reexecute reader predicates without implying tensor-math replay; confirm actual assignment path for a new float error."
+    ],
+    "followup_change": "Added explicit traceback and assignment-path confirmation before attributing a new reader error to the old variable-shadowing cause."
+  },
+  "preservation": {
+    "other_preexisting_skill_modifications_not_staged": true,
+    "global_handoff_not_overwritten": true,
+    "raw_artifacts_not_modified": true,
+    "source_scheduler_not_resumed": true,
+    "admitted_jobs_not_terminated": true,
+    "container_or_NPU_mutations": false,
+    "new_numerical_or_performance_claim": false
+  },
+  "synchronization": {
+    "policy": "commit_implies_push on current workstream; preserve known authentication failure",
+    "remote_push_state": "blocked in prior host attempts: HTTPS missing username and SSH22 timeout; no unchanged authentication retry or credential/routing changes performed"
+  }
+}

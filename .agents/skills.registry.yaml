@@ -144,7 +144,10 @@ skills:
   - id: mst-maintainer-handoff
     path: .agents/skills/mst-maintainer-handoff
     status: stable
-    purpose: Generated from repository-transformation-v0.1.
+    purpose: Preserve global or branch-local resume state and transfer bounded runtime ownership without duplicate scheduling.
+    triggers:
+      - create or verify a maintainer or workstream handoff
+      - transfer a bounded controller and freeze source-side scheduling
   - id: mst-parallel-workstreams
     path: .agents/skills/mst-parallel-workstreams
     status: experimental

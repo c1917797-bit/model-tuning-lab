@@ -5,6 +5,18 @@ These are verified stage lessons, not a new technology acceptance report.
 Read the linked original records before reusing any result; an old PASS grants
 neither a new resource lease nor a later-stage PASS.
 
+## Contents
+
+- [Earlier scoped successes](#evidence-backed-successes-and-what-changed-the-next-action)
+- [Preparation failures](#failures-that-must-change-preparation)
+- [Regression scenarios](#reusable-regression-scenarios)
+- [Earlier source records](#source-records-and-remaining-acceptance)
+- [Retained first failed entry](#historical-first-failed-entry-retained-not-the-latest-state)
+- [Exact readsets and frozen bytes](#exact-readsets-and-frozen-bytes)
+- [Metadata-only recovery](#metadata-only-recovery)
+- [Executable-file identity](#executable-file-identity)
+- [Outcome boundaries and evidence anchors](#outcome-boundaries-and-evidence-anchors)
+
 ## Evidence-backed successes and what changed the next action
 
 1. **Reuse the exact failed inputs to discriminate causes.** The saved native-AR
@@ -165,3 +177,157 @@ independent consumer's raw per-component metrics. Make one causal repair,
 regenerate source and command refs, rerun the same-image suite, and only then
 admit a fresh bounded TP4 run. Keep the successful admission/load/request stages
 as stage evidence while the mathematical gate remains failed/pending.
+
+## Exact readsets and frozen bytes
+
+Apply these rules when a host audit passes but a declared guest entry or later
+consumer rejects an input. Preserve the failed run and repair a new source
+version; do not widen a directory mount or bypass the original checked Ref.
+
+- Enumerate every file reopened by the complete declared entry, including old
+  layer actors, inverse ledgers, private cold modules, fixture donors and nested
+  consumer inputs. Require those exact Refs in both preparation dependencies
+  and validator-required inputs, and derive the guest RO mount readset from that
+  closure. A host-readable path is not proof of guest visibility.
+- G3 v1's 5000-input audit passed while all17 old L4 actors were omitted from
+  the guest input set; its actual software child failed before running tests.
+  V2 included those17 in both builder dependencies and validator requirements:
+  current5017/required4647/parent4559 and ordered host audit5118 passed.
+  These count different collections; do not equate or sample them.
+- Keep v2's six pure Parent/Prepare controls separate from the still-unrun381
+  same-image suite and actual1024 output gate at the handoff checkpoint. Source,
+  AST, OFF/help and inverse proofs do not execute the enabled cold service path.
+- Treat frozen source bytes as an ABI. An extra final LF can invalidate a
+  qualified source even when Python semantics are unchanged. The GDN lineage
+  required qualified sourceio1037 bytes; the G2/G3 lineage retained its original
+  sourceio1038. Restore the correct whole-file version before sealing, record
+  the complete inverse delta, then rebind and audit. Do not normalize all
+  lineages, weaken the equality gate, or edit a live bound manifest.
+- If frozen copies contain historical whitespace, permit only exact
+  baseline-Ref-verified paths/findings in the checkpoint audit. Keep new
+  controllers and all other diff checks strict; do not blanket-ignore a
+  directory or change frozen bytes to make formatting green.
+
+## Metadata-only recovery
+
+Prefer a new bounded reader over recapturing qualified model tensors when the
+failure is in provenance, report interpretation or retained-source projection.
+
+1. Reconstruct the complete original source closure and original software gate.
+   Reopen every retained Ref using complete streaming SHA and stable-file checks.
+   Keep original raw files, source manifest, failed parent exit and output root
+   immutable. Charge the reader to its declared CPU/RAM/disk/clock budget.
+   A604MB rank file cannot be read whole under a512MiB address-space cap.
+   In this controller, retain the approved Docker/Go child AS wrapper and actual
+   RSS bound; do not raise caps to accommodate an unbounded reader.
+2. Derive a role's expected resource profile from its pinned source, actual
+   create argv, OWNED and saved inspect. A serial GDN model used four CPUs;
+   another stream model used three. A guessed profile in a checker is a checker
+   defect, not permission to mutate the completed model or accept arbitrary
+   CPU/device/memory settings. Preserve the false refusal and reexecute every
+   predicate with the exact intended role profile.
+3. Diagnose collection-order differences before changing equality. For Docker
+   Mounts, first require unique destinations, then compare complete mount
+   dictionaries keyed/sorted by destination. Preserve Source, Destination,
+   Type, RW, Mode, propagation and all other fields. Reject an attribute change,
+   duplicate, missing or extra mount. Do not sort away changes to State,
+   HostConfig, Config or security/resource fields.
+4. If two captured image-only framework sources are absent on the host, bind
+   exact guest Ref3 identities and all-four snapshot/host-binding occurrences.
+   Copy only those files from the same source-owned stopped-retained image/CID,
+   using readonly Docker cp without start/create/exec. Verify whole bytes and
+   saved/current stopped owner metadata before and after. Retain host copies
+   and a separate projection manifest as post-execution evidence; do not
+   retrofit the original SOURCE_BOUND or add a path-prefix exemption.
+   The matched-v5 case joined two files/31121 bytes against eight occurrences
+   each. Unknown installed Refs must still reject.
+5. Exercise the actual enabled reader CLI to its final collection/output path.
+   Default-OFF/help did not expose v3's argparse variable overwritten by a
+   numerical metric loop. Bind CLI arguments separately from per-metric values;
+   preserve the v3 failure and run all predicates again in v4. Confirm the actual
+   traceback and assignment path before attributing a new reader failure to the
+   same cause.
+6. State what the recovered reader did. The matched-v5 reader checked all384
+   saved O/P/U/selected metrics, full source/software/component and all-four MTP
+   load joins, stopped owners and840 retained Refs. It did not rerun tensor
+   mathematics, import Torch, query live NPU identity or qualify whole-model,
+   task, normal EOS or formal performance. Keep those flags false/pending.
+
+## Executable-file identity
+
+Use this distinction when ELF bytes match but strict executable maps identity
+does not. Full SHA/buildID equality and map device/inode equality prove
+different properties; neither substitutes for the other.
+
+- Retain the complete failing maps, mountinfo, stat and ELF inventory. The
+  actual diagnostic saw176 entries:174 overlay mismatches with matching inode
+  but mapdev8:8/stat0:77, one matching driver, one original explicit vdso skip.
+  Do not disable dev/inode checks, grant capabilities, or allow path prefixes.
+- The subsequent readonly copy preserved all174 original ELF contents,
+  1267866920 bytes, with largest file280680576. Parse the actual interpreter's
+  PT_INTERP and join its followed contents to the unique observed canonical
+  loader; do not guess loader paths or alter LD search behavior. Preserve
+  executable mode before freezing host files and record changed filesystem
+  objects honestly. Whole-copy source success is not mapped identity success.
+- A successor must declare all immutable host Refs and explicit canonical guest
+  RO aliases, including Python and loader, before container create. Validate
+  the original create baseline plus the exact alias delta, its argv inverse
+  and the complete actual mount closure; do not permit arbitrary extra RO.
+  First pass the original Devices[] CPU metadata/maps gate, then the original
+  physical4 singleton128 frames x two fillers =256 native calls.
+- Reject unknown libraries from lazy dlopen and preserve that failure. Expand
+  only a new source-reviewed exact catalog with actual observations, rerunning
+  all required gates. Do not fabricate a CPU PASS, warm up unknown operators,
+  change the numerical oracle or relax bounds to get past the next stage.
+- Keep earlier FP16 saved-control successes source-scoped. They do not settle
+  the later FIA path's original16-frame/32-coordinate numerical failure or prove
+  unchanged production native-AR behavior. Resolve each path's own source,
+  input, oracle and complete native-call evidence.
+
+## Outcome boundaries and evidence anchors
+
+Treat the following as a historical checkpoint at the authorized transfer,
+not current host state or a reusable lease. The source-side scheduler stopped;
+the09:12:32 UTC snapshot recorded the already-admitted candidate unit naturally
+active/exited with both PIDs0, stopped owned containers and released MAIN.
+Earlier09:04 prose still showed a running consumer; use the timestamped fresh
+JSON, not a stale sentence. Re-prove live state at a new takeover.
+
+| Scope at that checkpoint | Observed evidence | Still missing |
+| --- | --- | --- |
+| G2 source13 short stream | Two requests/four tokens, HTTP/ACK/retirement/MTP joins and independent4556 retained Refs | Actual long1024, normal EOS, task and formal performance |
+| GDN matched-v5 | Actual384 numerical frames, source732 equality and independent840-Ref metadata recovery | Candidate qualification or whole-model/task/performance acceptance |
+| GDN candidate-v5 CPU | Actual240 same-image controls/parser; independent732-source/738-Ref readback | A CPU pass cannot supply model or formal qualification |
+| GDN candidate-v5 MODEL | Handoff snapshot contains successful RESULT and a384-frame consumer report | Its own complete independent metadata reader remained pending; matched CID/source cannot substitute |
+| G3 v2 | Exact17 dependency repair, full source/host audit and six pure controls | Actual381 same-image/cold and1024 model were not run |
+| Native AR bridge | All174 exact ELF copies and actual PT_INTERP content join | Explicit RO bind adapter, original CPU identity gate and256 native calls; numerical failure unresolved |
+
+Apply [maintainer handoff](../../mst-maintainer-handoff/SKILL.md) when transferring
+a finite controller. Record original authority and remaining clocks; transfer
+does not restart or extend them. The historical window ended at1792597630
+(2026-10-21 15:47:10 UTC), phase3600/shared cleanup180; these are run-specific
+facts, not universal defaults. New work must use its own latest authorization.
+
+Reopen these records under the source-record directory above; use exact source
+and whole-file identities rather than borrowing their counts:
+
+- G3_V1_CPU_FAILURE_AUDIT.json, G3_EXACT_LAYER17_DEPENDENCY_REPAIR_V2.json,
+  G3_SOURCE13_ACTUAL_SOURCE_PREPARATION_EXECUTION_V2.json,
+  G3_ACTUAL13_PARENT_PREPARE_FIXTURE_CONTROLS_V2.json and G3_V2_HOST_SOURCE_AUDIT.json.
+- GDN_MATCHED_V5_MODEL_METADATA_READER_EXECUTION_V1.json through V4.json
+  (spell out the full stem for each), GDN_MATCHED_V5_MODEL_METADATA_READBACK.json,
+  GDN_CANDIDATE_V5_CPU_METADATA_READBACK.json and
+  GDN_MATCHED_V5_MODEL_SUBMISSION_EXECUTION.json / _V2.json.
+- GDN_MATCHED_V5_INSTALLED_SOURCE_INSPECT_ORDER_DIAGNOSIS.json,
+  GDN_MATCHED_V5_INSTALLED_SOURCE_COPY_EXECUTION_V1.json / _V2.json,
+  gdn_matched_v5_installed_sources_v2/PROJECTIONS.json.
+- native_ar_elf_bridge_v1/CATALOG.json,
+  NATIVE_AR_EXACT174_ELF_COPY_EXECUTION_V1.json,
+  CHECKPOINT_V30_FROZEN_SOURCE_WHITESPACE_AUDIT.json,
+  CURRENT_NEXT_BACKUP_V30.json and HANDOFF_TO_PAPER_ASCEND_0909_20261021.json.
+
+Source/evidence checkpoint0321f257 and transfer checkpoint51d9d9fd retain the
+successes and failures. The associated maintainer decision fixtures are
+[the evidence/transfer case](../../../evals/transformation-cases/bole-evidence-and-controller-transfer-20261021.yaml).
+This skill update only reopens metadata and checks maintainer decisions; it
+does not rerun an experiment or establish any new numerical, task or speed claim.
