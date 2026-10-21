@@ -1,0 +1,32 @@
+{
+  "edits": [
+    {
+      "after": "C.ref(__file__)==_SAVED_METADATA['files']['derived_math_consumer.py']",
+      "before": "C.ref(__file__)==m['files']['consume_pair.py']"
+    },
+    {
+      "after": "str(output)==_SAVED_METADATA['consumer_output_root']",
+      "before": "str(output)==m['pair_consumer_output_root']"
+    },
+    {
+      "after": "_http_provenance(C,source_ref,bundle,value,schema,header_prefix,frozen,_SAVED_METADATA)",
+      "before": "value['inputs_ref']==frozen['reference']"
+    },
+    {
+      "after": "        C.need(mask.dtype==t.int8 and mask.ndim==2 and tuple(mask.shape)==(2048,2048)\n               and mask.is_contiguous()and mask.stride()==(2048,1)and mask.storage_offset()==0\n               and t.equal(mask,t.triu(t.ones((2048,2048),dtype=t.int8,device='cpu'),diagonal=1)),\n               'exact actual full int8 upper2048 template; q1 right-down sees all132 keys')",
+      "before": "        C.need(mask.dtype==t.bool and mask.ndim==2 and min(mask.shape)>=132\n               and t.equal(mask[:132,:132],t.triu(t.ones((132,132),dtype=t.bool),diagonal=1)),\n               'actual native causal-mask bytes; unknown mask rejected')"
+    }
+  ],
+  "mask_ABI_guard_changed": true,
+  "math_thresholds_changed": false,
+  "native_greedy_identity_and_full_G1_consumer_unchanged": true,
+  "numerical_computation_and_pointwise_bounds_unchanged": true,
+  "original": {
+    "bytes": 32306,
+    "path": "/opt/host/vnf/austinov/bole-native-ar-pair-20261020T154710Z-v5/consume_pair.py",
+    "sha256": "038d07720e10b35f153df8620ce197591a358a20fc5b879ccad5b2c50ecefa21"
+  },
+  "raw_receipt_source_identity_changed": false,
+  "schema": "bole.saved-pair-mask-ABI-delta/v4",
+  "whole_inverse_equal": true
+}

@@ -1,0 +1,110 @@
+{
+  "AST_compile_files": 7,
+  "NPU": false,
+  "actual_Devices_empty_run": false,
+  "actual_causal_host_diagnostic_copy_rechecked": true,
+  "actual_failed_v3_G1_primary_copies_whole_SHA_checked": 6,
+  "actual_failure_precreate_cpu_None_typeerror": true,
+  "actual_failure_source_equal_path_count": 791,
+  "actual_host_prepare_or_sourceaudit": false,
+  "actual_mask_primary_source_bytes": 3783,
+  "actual_mask_primary_source_sha256": "fb138c36ce381fb6ad65a620f30c6d85bd4d771ae2dfff5da947a67b2c2ba2a5",
+  "actual_mask_v3_failure_primary_copies_whole_SHA_checked": 3,
+  "actual_new_CPU_admission": false,
+  "actual_new_host_prepare_or_full_sourceaudit": false,
+  "actual_original_CPU_profile_primary_copies_whole_SHA_checked": 2,
+  "actual_original_affinity_effective_ancestor": [
+    0
+  ],
+  "actual_original_capacity": 1,
+  "actual_original_guest_CPU": 0,
+  "actual_prepare_CLI_with_explicit_offline_predecessor_readset_seams": true,
+  "actual_rank_headers_whole_SHA_checked": 4,
+  "actual_saved_mask_inspected": false,
+  "actual_sourceaudit_CLI_with_explicit_offline_readset_seam": true,
+  "all_other_runtime_modules_byte_equal_v3": true,
+  "all_runtime_except_builder_and_owner_byte_equal_v2": true,
+  "changed_runtime_module_count_from_v2": 2,
+  "changed_runtime_module_count_from_v3": 1,
+  "cold_default_help_tensor_import_tripwires": 6,
+  "cold_entry_clock_before_source_replay": true,
+  "copied_source_rejects_wrong_schema_wrong_path_and_tampered_SHA": true,
+  "copied_source_schema_roundtrip_and_full_path_pass": true,
+  "cpu_None_then_observe_then_CPU0_guard_then_simulated_create": true,
+  "exact_builder_whole_byte_inverse_verified": true,
+  "exact_owner_whole_byte_inverse_verified": true,
+  "exact_runtime_whole_byte_inverses_verified": 3,
+  "formal_success": false,
+  "frozen_common_v2_README_claim145_corrected_in_separate_fact_record": true,
+  "frozen_common_v2_runtime_no145_guard_report": true,
+  "frozen_manifest_ref_counts_rechecked": {
+    "common_plugin_effects_owner_v2": 42,
+    "native_ar_mask_diagnostic_v1": 12,
+    "native_ar_saved_requalification_repair_v3": 19
+  },
+  "frozen_manifests_rechecked": {
+    "common_plugin_effects_owner_v2": {
+      "manifest": {
+        "bytes": 14905,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/common_plugin_effects_owner_v2/ADVISORY_MANIFEST.json",
+        "sha256": "4e9a39940d885902adea5a83253be5e0ca5cbbf2fb0b22782ac533d490940d35"
+      },
+      "verified_file_refs": 42
+    },
+    "native_ar_mask_diagnostic_v1": {
+      "manifest": {
+        "bytes": 4559,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/ADVISORY_MANIFEST.json",
+        "sha256": "85a8d4431df83e875a393cb2713c779d005be63758bf81a74361837a101dd15a"
+      },
+      "verified_file_refs": 12
+    },
+    "native_ar_mask_diagnostic_v2": {
+      "manifest": {
+        "bytes": 7089,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v2/ADVISORY_MANIFEST.json",
+        "sha256": "383be640fec0e88aa36f33bc00a74fcb3fa8336a0a99ec721c02e8e57eff9681"
+      },
+      "verified_file_refs": 17
+    },
+    "native_ar_mask_diagnostic_v3": {
+      "manifest": {
+        "bytes": 10965,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v3/ADVISORY_MANIFEST.json",
+        "sha256": "85c1ef0652bb930bdd574ebcb3d3b070a3d09df5c81c420885d422a6454bbb6f"
+      },
+      "verified_file_refs": 21
+    },
+    "native_ar_saved_requalification_repair_v3": {
+      "manifest": {
+        "bytes": 6834,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/ADVISORY_MANIFEST.json",
+        "sha256": "24a4ec59482e4cfaa3ec1ac46377666c804190d9814031e97f1225659824df8f"
+      },
+      "verified_file_refs": 19
+    }
+  },
+  "mask_metadata_child_byte_equal_v1": true,
+  "mask_semantics_qualified": false,
+  "name_guard_still_before_observe": true,
+  "native_FA_math_qualified": false,
+  "new0_guard_accepted_actual_profile": true,
+  "old145_guard_rejected_actual_profile": true,
+  "original025_admission_functions_budgets_reserve_unchanged": true,
+  "original025_common_and_namespace_byte_equal": true,
+  "original025_lifecycle_source_whole_SHA_verified": true,
+  "original_C_Ref_JSON_load_and_prepared_source_functions_exercised": true,
+  "original_observe_not_replaced": true,
+  "original_observe_resources_methods_exercised_with_explicit_offline_IO_fixtures": true,
+  "original_v3_None_subscript_counterexample_reproduced": true,
+  "path_identity_cause_proved_by_actual_host_record": true,
+  "poisoned_packet_source_readset_never_invoked_after_copy": true,
+  "schema": "bole.native-ar-mask-local-checks/v4",
+  "schema_mismatch_proved": false,
+  "source_declares_nonpooling_int8_upper2048": true,
+  "source_formula_is_not_actual_mask_inspection": true,
+  "status": "prepared_only",
+  "stdlib_unit_tests_passed": 19,
+  "unchanged_inputs_schema": "bole.native-ar-mask-diagnostic-inputs/v1",
+  "wrong_observed_CPU_and_observation_failure_reject_before_create": true
+}

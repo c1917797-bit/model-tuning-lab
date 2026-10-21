@@ -1,0 +1,79 @@
+{
+  "schema": "bole.actual-fullCPU-v12-failure-audit/v1",
+  "inputs": {
+    "path": "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v12/OWNER_INPUTS.json",
+    "bytes": 61920,
+    "sha256": "3007493dfd24cbd6d59a971e871091f876688a00701a380d6275215c5145245a"
+  },
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v12/RESULT.json",
+    "bytes": 188360,
+    "sha256": "348cf6a20d91927df0707d197dc66508bf8bdef188bd5c7a9fa38fa55a32420a"
+  },
+  "source_input_nonempty_equal": true,
+  "primary": {
+    "error": "ValueError('actual HE controls exit0 without OOM')",
+    "phase": "he-controls",
+    "traceback": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v12/cpu_host.py\", line 207, in main\n    C.need(actual['State']['ExitCode']==0 and not actual['State']['OOMKilled'],'actual HE controls exit0 without OOM')\n  File \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v12/owner_common.py\", line 23, in need\n    if not value:raise ValueError(message)\nValueError: actual HE controls exit0 without OOM\n"
+  },
+  "secondary": [],
+  "elapsed_seconds": 129.43792315002065,
+  "cleanup_spent": 17.74502112995833,
+  "private_inverse": true,
+  "first_phase": {
+    "binding": {
+      "bytes": 9471,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v12/cpu-preflight/PROCESS-BINDING.json",
+      "sha256": "13f2f6e37f4ddd0eef7287c0b0f4640e1827107c9e4fd408364285932ac60767"
+    },
+    "inspect_ref": {
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v12/cpu-preflight/inspect-1792542892704015550.json",
+      "sha256": "e4a7fb479f0a673eea5755f0472c8fa664710094ce3c09f9d3518b7c96139953"
+    },
+    "report": {
+      "bytes": 92335,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v12/cpu-preflight/CHILD-prepare-decode.json",
+      "sha256": "9144bbe6a35f5295fcff96c154cdf93824593e8dbd4bae669c3a4eaa9eccf30f"
+    },
+    "terminal": {
+      "bytes": 1862,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v12/cpu-preflight/CPU-CHILD-TERMINAL.json",
+      "sha256": "5184a0a323e279be26bc102d016007a85bb8ca9642c9a7aca947f6d8e76ec6c5"
+    }
+  },
+  "HE_binding": {
+    "bytes": 5901,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v12/he-controls/PROCESS-BINDING.json",
+    "sha256": "5084b9cc17d891bc34d0a95007daba188855a6d7b887fc1550dc3ede31aee94c"
+  },
+  "HE_network_admission": {
+    "bytes": 1223,
+    "path": "/opt/host/vnf/austinov/run-bole-task-cpu-20261020T154710Z-v12/he-controls/HE-NET-ADMISSION.json",
+    "sha256": "0259e559616ab4c74f5ef64b43ee3ea53ed7ddd78b3a48253715d94ad8dfc2b0"
+  },
+  "actual_logs": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/TASK_CPU_V12_HE_ACTUAL_LOGS.json",
+    "bytes": 6339,
+    "sha256": "ced8dcc72ca2006a327a25085ca625265653f6a59693c5804fa6fe2fd5cc55da"
+  },
+  "classification": {
+    "confidence": "proved actual guest traceback",
+    "layer": "same-image isolated interpreter dependency closure",
+    "reason": "frozen env-i PATH selects /usr/bin/python3 CPython3.10.12 with no NumPy; worker advances past new READY/host ACK then original human_eval.evaluation.py import numpy fails",
+    "official_evaluator_or_scoring_changed": false
+  },
+  "actual_scope": {
+    "all15525_first_phase": true,
+    "original43_and_new20_controls": true,
+    "HE_official_controls_executed": false,
+    "independent_third_phase": false,
+    "full_software_qualification": false,
+    "task_score_produced": false,
+    "formal_success": false
+  },
+  "successor": {
+    "packet": "prospective decoder-v4 and fullCPU-v13",
+    "precondition": "same-image uid65534 exact sandbox dependency-only probe using existing Python3.12 and genuine NumPy/tqdm/official imports; no installs, stubs or evaluator rewrite",
+    "status": "preparation; no new qualifiedRef"
+  }
+}

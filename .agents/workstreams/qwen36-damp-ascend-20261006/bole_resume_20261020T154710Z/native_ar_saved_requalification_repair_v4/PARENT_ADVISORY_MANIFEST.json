@@ -1,0 +1,122 @@
+{
+  "MAIN_owns_actual_admission": true,
+  "NPU": false,
+  "checks": {
+    "AST_compile_files": 10,
+    "NPU": false,
+    "actual_HTTP_ledger_formats_checked": 2,
+    "actual_HTTP_response_shapes_checked": 6,
+    "actual_host_source_audit": false,
+    "actual_numerical_requalification": false,
+    "actual_prior_failure_primary_files_whole_SHA_checked": 14,
+    "actual_sameimage_CPU_run": false,
+    "cold_default_help_import_tripwire_controls": 8,
+    "formal_success": false,
+    "metadata_whole_byte_inverse_pass": true,
+    "numerical_identity_functions_AST_equal": 6,
+    "original_fresh_namespace_byte_equal": true,
+    "schema": "bole.saved-native-ar-local-checks/v2",
+    "status": "prepared_only",
+    "stdlib_unit_tests_passed": 9
+  },
+  "files": {
+    "ACTUAL_FAILURE_REFS.json": {
+      "bytes": 3463,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/ACTUAL_FAILURE_REFS.json",
+      "sha256": "5711acc09ccf9b4e632bd5cee6189734629935f4641e9a85f32b916e5ae3fd47"
+    },
+    "ACTUAL_SAVED_REFS.json": {
+      "bytes": 1804,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/ACTUAL_SAVED_REFS.json",
+      "sha256": "8ce6fa7f2b6624232438d0816561549ab43765a11ca29bec2b301c637afa7d6a"
+    },
+    "CONSUMER_METADATA_DELTA.json": {
+      "bytes": 961,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/CONSUMER_METADATA_DELTA.json",
+      "sha256": "fadf480a15c3d6d15844120a22a11833a9faaf2c62b9e3f8452ee4c8dbf7fdd6"
+    },
+    "LOCAL_CHECKS.json": {
+      "bytes": 644,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/LOCAL_CHECKS.json",
+      "sha256": "2e7cb9eebbdf2d5164823e710c3847ff5107c1971d4d9ac54349a2a091fe68e7"
+    },
+    "NAMESPACE_DELTA.json": {
+      "bytes": 409,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/NAMESPACE_DELTA.json",
+      "sha256": "3f25b2c48534968b56ebd57388279c7a91759a1770df10a9f924c4de6cc4d971"
+    },
+    "PARENT_ADVISORY_MANIFEST.json": {
+      "bytes": 3831,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/PARENT_ADVISORY_MANIFEST.json",
+      "sha256": "00508eb29a9ecb002a9ffb72928c23b56bf7a054fafce2929efe0bef8bd297b2"
+    },
+    "PARENT_LOCAL_CHECKS.json": {
+      "bytes": 561,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/PARENT_LOCAL_CHECKS.json",
+      "sha256": "0a4922661550a841a37ade40493f902f8bde91b8165ef06459681ea8c01bd972"
+    },
+    "README.md": {
+      "bytes": 5036,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/README.md",
+      "sha256": "cd535c585dd4f31fab7d578340c7be04b96fa848b0d131557b2c505ec1aa9be0"
+    },
+    "ar_owner_common.py": {
+      "bytes": 19055,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/ar_owner_common.py",
+      "sha256": "5d0b9034706b9a942a4d7dd10870139959b22dfaab2cebbdddf25ba962e456a4"
+    },
+    "ar_saved_namespace.py": {
+      "bytes": 4109,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/ar_saved_namespace.py",
+      "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+    },
+    "derived_math_consumer.py": {
+      "bytes": 32385,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/derived_math_consumer.py",
+      "sha256": "93f954b737f8180bf0472b5b54a4fb32cdf96d93df1b3e02c16102ef95a43219"
+    },
+    "http_provenance.py": {
+      "bytes": 2802,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/http_provenance.py",
+      "sha256": "8c5a51ec5eb50b4ab35c28e50fb0629c511458f1e5a598fd52b49a827ed2e18b"
+    },
+    "prepare_saved_owner.py": {
+      "bytes": 2823,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/prepare_saved_owner.py",
+      "sha256": "c31ae1043ef22678308d39383ac96f6c6a20c7852e0dad26e6a34526908d5c7d"
+    },
+    "saved_common.py": {
+      "bytes": 12746,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/saved_common.py",
+      "sha256": "45c5fc6579b04773e8aaf512150a222acbb9d9839070895d1dde63e6aadbf388"
+    },
+    "saved_consume_entry.py": {
+      "bytes": 3645,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/saved_consume_entry.py",
+      "sha256": "f2de8dedb776b401ea31b7455297209d338989753d4494497d757407a0def19c"
+    },
+    "saved_cpu_owner.py": {
+      "bytes": 8455,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/saved_cpu_owner.py",
+      "sha256": "e37dd9d501db30740c09055d6e2ce2256e221f7659648801c326b21c9a3c626f"
+    },
+    "saved_preflight.py": {
+      "bytes": 1803,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/saved_preflight.py",
+      "sha256": "21c8b566f37881069ae52b0e2d7630f19e96535cd34911299ac47e4bd4cf9810"
+    },
+    "test_saved_pure.py": {
+      "bytes": 8106,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v2/test_saved_pure.py",
+      "sha256": "fdca5133e7410e7532ff9cb10aa5519a1445685b61aee4b7ceee4a3783ac4ead"
+    }
+  },
+  "formal_success": false,
+  "mathematical_thresholds_and_full_G1_consumer_unchanged": true,
+  "original_RESULT_receipts_and_raws_unchanged": true,
+  "original_producer_failed": true,
+  "prior_CPU_qualification_failed": true,
+  "schema": "bole.saved-native-ar-advisory/v2",
+  "source_metadata_inverse_verified": true,
+  "status": "prepared_only_frozen"
+}

@@ -1,0 +1,190 @@
+{
+  "Git": false,
+  "NPU": false,
+  "actual_failed_v7_owner": {
+    "bytes": 633477,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v7/RESULT.json",
+    "sha256": "ab8b73874ef56ddefe08d6f62d926bdad6d752c6eeb8bed0154231a1e81c9421"
+  },
+  "actual_failed_v7_source": {
+    "bytes": 542194,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v7/SOURCE_BOUND.json",
+    "sha256": "a1f7238ccde08744e90a69a30b316bc10bfe1995e57d3898ced46779ee067032"
+  },
+  "actual_live_identity_qualified": false,
+  "actual_model_executed": false,
+  "actual_sameimage_executed": false,
+  "actual_saved_snapshot_cold_executed": false,
+  "actual_source_assembled": false,
+  "complete_original_metadata_Ref2_normalization_required": true,
+  "default_enabled": false,
+  "diagnosis": {
+    "bytes": 3288,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/DIAGNOSIS.json",
+    "sha256": "4759cdc0a66598b7ff31c12f4e4c905a960bc0e801baa2c0e3fdbb93ad39cfb3"
+  },
+  "formal_success": false,
+  "frozen": true,
+  "host_access": false,
+  "local_controls": {
+    "AST_files": 23,
+    "defaultOFF_help": 16,
+    "new_included": 13,
+    "passed": 28,
+    "skipped": 0
+  },
+  "local_validation": {
+    "bytes": 2731,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/LOCAL_VALIDATION.json",
+    "sha256": "54732447bdccc4686314c627b4774643f2544e6962a9aaabd0c35fde49edd24b"
+  },
+  "model_ready": false,
+  "original15_stream_test_assertions_AST_exact": true,
+  "original_four_metadata_bytes": 3393478,
+  "original_math_and128transaction_unchanged": true,
+  "original_per_rank_aggregate_capture_cap_bytes": 1073741824,
+  "original_per_rank_metadata_cap_bytes": 67108864,
+  "original_phase_seconds": 3600,
+  "overlay_files": {
+    "audit_source_v8.py": {
+      "bytes": 4102,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/audit_source_v8.py",
+      "sha256": "a3a69b3086cf91b783594b0fb8795df760a9c4ce758a8f859a60efd50bab05bc"
+    },
+    "g2_channel.py": {
+      "bytes": 10001,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/g2_channel.py",
+      "sha256": "30fc3445edda52940d398db81fa480ba55d30739953ea831d5060c0c3fe31387"
+    },
+    "g2_handoff.py": {
+      "bytes": 14218,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/g2_handoff.py",
+      "sha256": "be2fdb903e1be3a1a160a06fb0b8b5db3a2c73815ab3820add62ddf8c74fdacb"
+    },
+    "g2_handoff_cold.py": {
+      "bytes": 3692,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/g2_handoff_cold.py",
+      "sha256": "43fe83203ddbe1394fdead9af54241ed61abad08107f4034f5ee12f3d14c52fb"
+    },
+    "host_service.py": {
+      "bytes": 15961,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/host_service.py",
+      "sha256": "0abf2c6b46f1564b218eb4e311743e9d71b3007b16cf94f59115ad49f9ebeccb"
+    },
+    "owned_create.py": {
+      "bytes": 3338,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/owned_create.py",
+      "sha256": "88c80410a98af469e00e6562bf8319326f776a9ab6effbafcd6b53b238e89f3e"
+    },
+    "prepare_g2_handoff_v8.py": {
+      "bytes": 16681,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/prepare_g2_handoff_v8.py",
+      "sha256": "aa0cbd02ccf5a01875c87d9fc4b5b3c33010fd531d8c620d99e24edf52df6c7b"
+    },
+    "test_g2_handoff.py": {
+      "bytes": 8779,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/test_g2_handoff.py",
+      "sha256": "c534600bf287153fde2ae5db3b5d44071dfeda70c3a50dac662af2ad86cb32b2"
+    },
+    "test_g2_handoff_builder.py": {
+      "bytes": 2572,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/test_g2_handoff_builder.py",
+      "sha256": "5c7bed9295011f18ea07c13fbb64a62d9f02215ca0c04eaac42b71641a112661"
+    },
+    "test_g2_stream.py": {
+      "bytes": 10290,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/test_g2_stream.py",
+      "sha256": "6ab94eb72ad81f27af78e6d28efdf52280b89dd20519efc654c1b5e771821d29"
+    }
+  },
+  "production_full_copy_guard_bytes": 8388608,
+  "production_full_ledger_cap_bytes": 16384,
+  "prospective_sameimage_cases": 279,
+  "sameimage_actual_saved_snapshot_full_contract_and_owner_reader_before_NPU_required": true,
+  "schema": "bole.G2-four-role-channel-handoff-repair-proposal/v8",
+  "shared_cleanup_seconds": 180,
+  "support_inventory": {
+    "DIAGNOSIS.json": {
+      "bytes": 3288,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/DIAGNOSIS.json",
+      "sha256": "4759cdc0a66598b7ff31c12f4e4c905a960bc0e801baa2c0e3fdbb93ad39cfb3"
+    },
+    "LOCAL_VALIDATION.json": {
+      "bytes": 2731,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/LOCAL_VALIDATION.json",
+      "sha256": "54732447bdccc4686314c627b4774643f2544e6962a9aaabd0c35fde49edd24b"
+    },
+    "README.md": {
+      "bytes": 9306,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/README.md",
+      "sha256": "be45ccda8f1d5e83a012dcb51ad726a6f3ba83f73e329a9aa318025f9685e0a1"
+    },
+    "contract090.py": {
+      "bytes": 4119,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/contract090.py",
+      "sha256": "6b9bbeadb143bbe15cb5bf3780f807b1018c122efd8d63b8dfd29adda1c7029a"
+    },
+    "g1_contract.py": {
+      "bytes": 497,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/g1_contract.py",
+      "sha256": "b87fba5b897dd3cdc33d566b648760b11cf6b02eb58551d1f548483cf4c941d7"
+    },
+    "g2_consumer.py": {
+      "bytes": 7521,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/g2_consumer.py",
+      "sha256": "0ee132b1acecf59306d8d023ce83f39eebe9dafcbf283ac0ab91f995c95c6549"
+    },
+    "g2_contract.py": {
+      "bytes": 1636,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/g2_contract.py",
+      "sha256": "4c64e6417ffc652d62504ddd981c4e1c16028d6567299441543dbc8129c76093"
+    },
+    "g2_finalize.py": {
+      "bytes": 17502,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/g2_finalize.py",
+      "sha256": "4fc550421e3403e40243c33a048887be9e262b51be208e5338c3c92b9b855f88"
+    },
+    "g2_host_adapter.py": {
+      "bytes": 4399,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/g2_host_adapter.py",
+      "sha256": "3df2119e322ea800efb1100d3c4dcfbea4760cafaea5689a7ff066c3f2f815b6"
+    },
+    "g2_numeric.py": {
+      "bytes": 24756,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/g2_numeric.py",
+      "sha256": "2e100b2f69c9c40a5022eaa067e015b184f86da37759ca904468e8f975d6996e"
+    },
+    "g2_reports.py": {
+      "bytes": 1640,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/g2_reports.py",
+      "sha256": "8d51a256a73cd63ffb40a28e4efdfa9ee17db3721a472f278c5edb40fef56b03"
+    },
+    "g2_stream_owner.py": {
+      "bytes": 5917,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/g2_stream_owner.py",
+      "sha256": "3d7d61e06e2de7e0680f4503530267bbb0cd87402b287d037cf89dd1562db8af"
+    },
+    "live_owner.py": {
+      "bytes": 11473,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/live_owner.py",
+      "sha256": "23374dc2867199bdd8279bc5fd6ea7176b8d8d1c5a8d569a87a1cc1ebdf9817e"
+    },
+    "server090.py": {
+      "bytes": 2439,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/server090.py",
+      "sha256": "6cc98b337284ec4e123833da7f8a2af30d4487a4cbe811c41fd13b7f20f7b6e7"
+    },
+    "service_client.py": {
+      "bytes": 3120,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/service_client.py",
+      "sha256": "5173eed3d830c598eb769ca9226345be80ffc060b10b25d771ba55719bee6a3e"
+    },
+    "sourceio.py": {
+      "bytes": 1038,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g2_channel_handoff_repair_v8/sourceio.py",
+      "sha256": "0bd97743aa2ac06ea55488a54f5045fd08cff2fdfa4869acc9b1414d2965a0cd"
+    }
+  },
+  "whole_consumer_and_finalizer_unchanged": true,
+  "whole_v7_argv_owner_and8controls_unchanged": true
+}

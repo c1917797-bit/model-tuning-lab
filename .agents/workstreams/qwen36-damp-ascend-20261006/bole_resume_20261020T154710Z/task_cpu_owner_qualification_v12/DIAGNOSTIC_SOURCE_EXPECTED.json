@@ -1,0 +1,77 @@
+{
+  "diagnostic_only": true,
+  "diagnostic_owner_manifest_sha256": "c1b24441c91800ed1a5f8b95c18af7c1d88527a0c7631f636ba765c893ac3e99",
+  "files": {
+    "LOCAL_CONTROLS.json": {
+      "bytes": 1140,
+      "sha256": "4dbe8a5cdf991b1057c8af5abd434fa5098b6243c64792f16d3e3316573ca530"
+    },
+    "POLICY_SCHEMA.md": {
+      "bytes": 3177,
+      "sha256": "dac1efec870e57f274ad4da519dc3c548ad39aeeb2092b0449d918062df3c836"
+    },
+    "README.md": {
+      "bytes": 7710,
+      "sha256": "df5d76e4b4bf1b22a1ae119db7f38bad95522ab3a85ae2a66fd80c1210eb6e35"
+    },
+    "SOURCE_FINDINGS.md": {
+      "bytes": 2673,
+      "sha256": "26121ec1fbd10bb54ca9012992a16ec26a1a6c9fcdc19674e4b657743b9eaaf6"
+    },
+    "TOKENIZER_SOURCE_EXPECTED.json": {
+      "bytes": 1712,
+      "sha256": "28a71ff1b869462007b18db85f6ecde8227c5d46b89a1c9a89b7702b32ec1063"
+    },
+    "cpu_host.py": {
+      "bytes": 15556,
+      "sha256": "69be8ea5c3283127ebc98714ac19976df35a29de4b752ddeb603e66846407c73"
+    },
+    "cpu_import_guard.py": {
+      "bytes": 3814,
+      "sha256": "2abb3811ce41f25ddd93d91253ef4a649173c37ac2c572a4809b24b2f061d36e"
+    },
+    "cpu_steps.py": {
+      "bytes": 3347,
+      "sha256": "d9c03fc978da38bebe1c4ec1bb0f1d8b9af89359505e19fa0928fe32c1e1d00e"
+    },
+    "he_owned.py": {
+      "bytes": 6104,
+      "sha256": "be3b0e4a4924a4447cda301b2dd624e6cadb77c17959b52d945148fa1c4601dd"
+    },
+    "main_quiescence.py": {
+      "bytes": 11020,
+      "sha256": "c818c0314aa6866988451f069124714b71132259604f80235a24209ecb742264"
+    },
+    "owner_common.py": {
+      "bytes": 8814,
+      "sha256": "2e9e76674b20be4a1edee4bc62b81775c8af560e3b0f58543b501125bb2504b4"
+    },
+    "owner_namespace.py": {
+      "bytes": 9104,
+      "sha256": "3b700d07462dd05f0626fcbf6fae123771058c2342aa8545854a04a13e01374d"
+    },
+    "prepare_owner.py": {
+      "bytes": 5531,
+      "sha256": "3747195595547a8b70943f43db4493848a81f7bfcb1070adfc0ac71c76e8a7ea"
+    },
+    "test_owner_pure.py": {
+      "bytes": 9916,
+      "sha256": "62cded4cf5f5c23008333d551cb62ef28243a96cd4f08c6499277cb42e1a0b3a"
+    },
+    "test_quiescence_pure.py": {
+      "bytes": 11877,
+      "sha256": "612e6f337b27dd819b7c5e28c39e7575b510ae25e86f29227e25f67e7651e36b"
+    },
+    "test_tokenizer_probe_pure.py": {
+      "bytes": 4323,
+      "sha256": "e2d45b3c3063046f53838659d79af184876e1c578cf37cf2234490ce1cb29870"
+    },
+    "tokenizer_probe.py": {
+      "bytes": 4367,
+      "sha256": "266db6bf9ed3f098d0107d19b8acbaa24c3f1d74181980745ef65153b6768723"
+    }
+  },
+  "frozen_v1_packet_manifest_sha256": "f687ad69fa0226fe72565e8ed356b65244a475c570259c865e6b3cf68fcda851",
+  "full_qualification_accepted": false,
+  "schema": "bole.public-tokenizer-diagnostic-prerequisite-source/v1"
+}

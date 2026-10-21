@@ -1,0 +1,232 @@
+{
+  "E2E_measured": false,
+  "MAIN_owns_actual_deployment_admission_and_launch": true,
+  "NPU": false,
+  "actual_completed_mask_metadata_prerequisite_required": true,
+  "actual_new_CPU_admission": false,
+  "actual_new_numerical_replay": false,
+  "checks": {
+    "NPU": false,
+    "Python_AST_compile_files": 12,
+    "actual_C_ref_obj_load_source_ticket_paths_exercised": true,
+    "actual_Torch_CPU_controls_executed_locally": false,
+    "actual_completed_mask_primary_copies_whole_SHA_verified": 13,
+    "actual_completed_metadata_frames_checked": 128,
+    "actual_full_host_readset_audited_locally": false,
+    "actual_mask_profile_combinations": 1,
+    "actual_metadata_not_promoted_to_numerical_or_semantic_gate": true,
+    "actual_metadata_source_before_after_equal_paths": 791,
+    "actual_new_CPU_admission": false,
+    "actual_new_host_prepare": false,
+    "actual_saved_tensor_math_replayed": false,
+    "cold_default_help_tensor_import_tripwires": 8,
+    "coldentry_single_phase_remaining1380_and_cutoff_controls": true,
+    "common_effects_pass": false,
+    "copied_prepare_and_sourceaudit_CLI_metadata_roundtrip": true,
+    "formal_success": false,
+    "frozen_manifests_rechecked": {
+      "native_ar_mask_diagnostic_v1": {
+        "file_refs_rechecked": 12,
+        "manifest": {
+          "bytes": 4559,
+          "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/ADVISORY_MANIFEST.json",
+          "sha256": "85a8d4431df83e875a393cb2713c779d005be63758bf81a74361837a101dd15a"
+        }
+      },
+      "native_ar_mask_diagnostic_v2": {
+        "file_refs_rechecked": 17,
+        "manifest": {
+          "bytes": 7089,
+          "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v2/ADVISORY_MANIFEST.json",
+          "sha256": "383be640fec0e88aa36f33bc00a74fcb3fa8336a0a99ec721c02e8e57eff9681"
+        }
+      },
+      "native_ar_mask_diagnostic_v3": {
+        "file_refs_rechecked": 21,
+        "manifest": {
+          "bytes": 10965,
+          "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v3/ADVISORY_MANIFEST.json",
+          "sha256": "85c1ef0652bb930bdd574ebcb3d3b070a3d09df5c81c420885d422a6454bbb6f"
+        }
+      },
+      "native_ar_mask_diagnostic_v4": {
+        "file_refs_rechecked": 25,
+        "manifest": {
+          "bytes": 13724,
+          "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v4/ADVISORY_MANIFEST.json",
+          "sha256": "2f66330fb185bd9215031270c07e30babd52b7e641c7c515204c81a3fe9be497"
+        }
+      },
+      "native_ar_saved_requalification_repair_v3": {
+        "file_refs_rechecked": 19,
+        "manifest": {
+          "bytes": 6834,
+          "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/ADVISORY_MANIFEST.json",
+          "sha256": "24a4ec59482e4cfaa3ec1ac46377666c804190d9814031e97f1225659824df8f"
+        }
+      }
+    },
+    "fullmask_byte_fixture_far_corruption_rejected": true,
+    "fullmask_guard_inverse_to_saved_v3_equal": true,
+    "future_actual_Torch_CPU_guard_negative_controls_required": 11,
+    "metadata_mutation_categories_rejected": 7,
+    "native_FA_math_qualified": false,
+    "offline_roundtrip_predecessor_and_readset_expansion_are_explicit_fixtures": true,
+    "original29_checkpoint_and_full_G1_mathematical_guard_preserved": true,
+    "original_consumer_whole_byte_inverse_edits": 4,
+    "original_numerical_and_identity_AST_after_guard_inverse_equal": true,
+    "schema": "bole.saved-native-ar-mask-ABI-local-checks/v4",
+    "status": "prepared_only",
+    "stdlib_tests_passed": 18
+  },
+  "common_effects_pass": false,
+  "default_enabled": false,
+  "exact_full2048_int8_observed_guard": true,
+  "exact_installed_host_mapping_only": true,
+  "files": {
+    "ACTUAL_FAILURE_REFS.json": {
+      "bytes": 3463,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/ACTUAL_FAILURE_REFS.json",
+      "sha256": "5711acc09ccf9b4e632bd5cee6189734629935f4641e9a85f32b916e5ae3fd47"
+    },
+    "ACTUAL_MASK_V4_REFS.json": {
+      "bytes": 3029,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/ACTUAL_MASK_V4_REFS.json",
+      "sha256": "cc0c5fc4ef6b06da177f6b3e8d86d79f08cbec41fad36439ea976f900990a7d8"
+    },
+    "ACTUAL_SAVED_REFS.json": {
+      "bytes": 1804,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/ACTUAL_SAVED_REFS.json",
+      "sha256": "8ce6fa7f2b6624232438d0816561549ab43765a11ca29bec2b301c637afa7d6a"
+    },
+    "ACTUAL_TORCH_NPU_VERSION_REFS.json": {
+      "bytes": 537,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/ACTUAL_TORCH_NPU_VERSION_REFS.json",
+      "sha256": "ed6c8e9bb2a746e8599cb23a7f33bf1e1de0fee3107b7bad31393b6752180dca"
+    },
+    "ACTUAL_V2_FAILURE_REFS.json": {
+      "bytes": 1523,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/ACTUAL_V2_FAILURE_REFS.json",
+      "sha256": "b0ce97b160c7b7892eb36e588b6a271780a64a93d979fb1660a03484acf0a742"
+    },
+    "CONSUMER_METADATA_DELTA.json": {
+      "bytes": 1723,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/CONSUMER_METADATA_DELTA.json",
+      "sha256": "05eca30b234d426eef57b7e6eed06cc81487170e1cff2cfce1f1d98b2ce0c8f5"
+    },
+    "LOCAL_CHECKS.json": {
+      "bytes": 3296,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/LOCAL_CHECKS.json",
+      "sha256": "7c7aa923486b51f759b9b26c95971f0865cc6a3cf05029a67880e415501400f6"
+    },
+    "NAMESPACE_DELTA.json": {
+      "bytes": 409,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/NAMESPACE_DELTA.json",
+      "sha256": "3f25b2c48534968b56ebd57388279c7a91759a1770df10a9f924c4de6cc4d971"
+    },
+    "NATIVE_MASK_ABI_REASONING.json": {
+      "bytes": 7711,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/NATIVE_MASK_ABI_REASONING.json",
+      "sha256": "46fafdefbe3b5702b374dafd82997801981a981b541c94c54b9ee5457a787ce2"
+    },
+    "PARENT_ADVISORY_MANIFEST.json": {
+      "bytes": 6100,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/PARENT_ADVISORY_MANIFEST.json",
+      "sha256": "5623e6b96db1f2ffbe3364cd159604cccb5c0f0dc9514e12fc0c60191c5f4bbf"
+    },
+    "PARENT_LOCAL_CHECKS.json": {
+      "bytes": 644,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/PARENT_LOCAL_CHECKS.json",
+      "sha256": "2e7cb9eebbdf2d5164823e710c3847ff5107c1971d4d9ac54349a2a091fe68e7"
+    },
+    "PARENT_SAVED_V3_CHECKS.json": {
+      "bytes": 926,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/PARENT_SAVED_V3_CHECKS.json",
+      "sha256": "506691cc777e4d4be457d74ffab46f35c7403db0bc7553b58215f4104f3dc8a1"
+    },
+    "PARENT_SAVED_V3_MANIFEST.json": {
+      "bytes": 6834,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/PARENT_SAVED_V3_MANIFEST.json",
+      "sha256": "24a4ec59482e4cfaa3ec1ac46377666c804190d9814031e97f1225659824df8f"
+    },
+    "README.md": {
+      "bytes": 7504,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/README.md",
+      "sha256": "c859928afed0cf6aae658c21b883341f037d5dd45c380e693683456863563d33"
+    },
+    "V4_SOURCE_DELTA.json": {
+      "bytes": 33905,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/V4_SOURCE_DELTA.json",
+      "sha256": "231d9ebf9639202b60841ee37a4f67dc5df7a788e99426a64b47e2124cee1a0c"
+    },
+    "ar_owner_common.py": {
+      "bytes": 19055,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/ar_owner_common.py",
+      "sha256": "5d0b9034706b9a942a4d7dd10870139959b22dfaab2cebbdddf25ba962e456a4"
+    },
+    "ar_saved_namespace.py": {
+      "bytes": 4109,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/ar_saved_namespace.py",
+      "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+    },
+    "derived_math_consumer.py": {
+      "bytes": 32513,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/derived_math_consumer.py",
+      "sha256": "2ffb602f31fc88e26c8529e28ae6e2f759a2dedc38caa72efa9d93f0c968a732"
+    },
+    "http_provenance.py": {
+      "bytes": 2802,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/http_provenance.py",
+      "sha256": "8c5a51ec5eb50b4ab35c28e50fb0629c511458f1e5a598fd52b49a827ed2e18b"
+    },
+    "mask_controls.py": {
+      "bytes": 2052,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/mask_controls.py",
+      "sha256": "a3ef1cf64a1b633c9e46f13aadc4d2f25c3d03032e0722e16d1267cc35be4695"
+    },
+    "mask_evidence.py": {
+      "bytes": 10015,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/mask_evidence.py",
+      "sha256": "1bffec32e7e5ef81b0b408903af1ea156a7ae1a7a586751db974f6e31509ec2e"
+    },
+    "prepare_saved_owner.py": {
+      "bytes": 3462,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/prepare_saved_owner.py",
+      "sha256": "c90f085e06607eb7bfefc29b3d299663bd782da318d56bee12c99123c2970cc8"
+    },
+    "saved_common.py": {
+      "bytes": 18903,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/saved_common.py",
+      "sha256": "9e79c49a440317456dd9cea6da03c12d9473bceb3c3d9f9ee6244b3d9aa7eb08"
+    },
+    "saved_consume_entry.py": {
+      "bytes": 4116,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/saved_consume_entry.py",
+      "sha256": "2d397d6d9c9c7a203ec65eb487522aef6197baf956b833f842d726abe55a6c78"
+    },
+    "saved_cpu_owner.py": {
+      "bytes": 9849,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/saved_cpu_owner.py",
+      "sha256": "08d0669d977cab819f732422477439e6e34b048a0109fd21e6b57bebd1a95ad6"
+    },
+    "saved_preflight.py": {
+      "bytes": 1803,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/saved_preflight.py",
+      "sha256": "21c8b566f37881069ae52b0e2d7630f19e96535cd34911299ac47e4bd4cf9810"
+    },
+    "test_saved_pure.py": {
+      "bytes": 20311,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v4/test_saved_pure.py",
+      "sha256": "b82bfbc780a2d4143ae26a2987a06f48adce314d4c43436b8f16b2806e7a69cb"
+    }
+  },
+  "formal_success": false,
+  "native_FA_math_qualified": false,
+  "original025_resource_namespace_controller_guards_preserved": true,
+  "original385_plus_completed791_source_closure_preserved": true,
+  "original_FP32_FP64_pointwise_bounds_and_all128_frames_preserved": true,
+  "original_full_G1_and29_checkpoint_streaming_guard_preserved": true,
+  "prior_producer_and_CPU_failures_preserved": true,
+  "schema": "bole.saved-native-ar-numerical-mask-ABI-advisory/v4",
+  "status": "prepared_only_frozen"
+}

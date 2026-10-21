@@ -1,0 +1,134 @@
+{
+  "MAIN_owns_actual_admission": true,
+  "NPU": false,
+  "checks": {
+    "AST_compile_files": 10,
+    "NPU": false,
+    "actual_G1_individual_readonly_mounts_correlated": 121,
+    "actual_HTTP_ledger_formats_checked": 2,
+    "actual_HTTP_response_shapes_checked": 6,
+    "actual_host_source_audit": false,
+    "actual_numerical_requalification": false,
+    "actual_prior_failure_primary_files_whole_SHA_checked": 20,
+    "actual_sameimage_CPU_run": false,
+    "cold_default_help_import_tripwire_controls": 8,
+    "exact_successful_G1_authority_source_map_entries": 385,
+    "formal_success": false,
+    "frozen_repair_v2_runtime_math_entry_files_byte_equal": 7,
+    "metadata_whole_byte_inverse_pass": true,
+    "numerical_identity_functions_AST_equal": 6,
+    "original_fresh_namespace_byte_equal": true,
+    "schema": "bole.saved-native-ar-local-checks/v3",
+    "source_closure_enumeration_test": "synthetic385 temporary ordinary files; not an actual host hash",
+    "status": "prepared_only",
+    "stdlib_unit_tests_passed": 12
+  },
+  "complete_successful_G1_source_before_equal_after_map_required": true,
+  "exact_G1_source_paths": 385,
+  "files": {
+    "ACTUAL_FAILURE_REFS.json": {
+      "bytes": 3463,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/ACTUAL_FAILURE_REFS.json",
+      "sha256": "5711acc09ccf9b4e632bd5cee6189734629935f4641e9a85f32b916e5ae3fd47"
+    },
+    "ACTUAL_SAVED_REFS.json": {
+      "bytes": 1804,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/ACTUAL_SAVED_REFS.json",
+      "sha256": "8ce6fa7f2b6624232438d0816561549ab43765a11ca29bec2b301c637afa7d6a"
+    },
+    "ACTUAL_V2_FAILURE_REFS.json": {
+      "bytes": 1523,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/ACTUAL_V2_FAILURE_REFS.json",
+      "sha256": "b0ce97b160c7b7892eb36e588b6a271780a64a93d979fb1660a03484acf0a742"
+    },
+    "CONSUMER_METADATA_DELTA.json": {
+      "bytes": 961,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/CONSUMER_METADATA_DELTA.json",
+      "sha256": "fadf480a15c3d6d15844120a22a11833a9faaf2c62b9e3f8452ee4c8dbf7fdd6"
+    },
+    "LOCAL_CHECKS.json": {
+      "bytes": 926,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/LOCAL_CHECKS.json",
+      "sha256": "506691cc777e4d4be457d74ffab46f35c7403db0bc7553b58215f4104f3dc8a1"
+    },
+    "NAMESPACE_DELTA.json": {
+      "bytes": 409,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/NAMESPACE_DELTA.json",
+      "sha256": "3f25b2c48534968b56ebd57388279c7a91759a1770df10a9f924c4de6cc4d971"
+    },
+    "PARENT_ADVISORY_MANIFEST.json": {
+      "bytes": 6100,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/PARENT_ADVISORY_MANIFEST.json",
+      "sha256": "5623e6b96db1f2ffbe3364cd159604cccb5c0f0dc9514e12fc0c60191c5f4bbf"
+    },
+    "PARENT_LOCAL_CHECKS.json": {
+      "bytes": 644,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/PARENT_LOCAL_CHECKS.json",
+      "sha256": "2e7cb9eebbdf2d5164823e710c3847ff5107c1971d4d9ac54349a2a091fe68e7"
+    },
+    "README.md": {
+      "bytes": 8537,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/README.md",
+      "sha256": "00dfbf1fc0926f642eec92e1d4bcabe181f44fe6f2258582b1ba845f32f930f3"
+    },
+    "ar_owner_common.py": {
+      "bytes": 19055,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/ar_owner_common.py",
+      "sha256": "5d0b9034706b9a942a4d7dd10870139959b22dfaab2cebbdddf25ba962e456a4"
+    },
+    "ar_saved_namespace.py": {
+      "bytes": 4109,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/ar_saved_namespace.py",
+      "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+    },
+    "derived_math_consumer.py": {
+      "bytes": 32385,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/derived_math_consumer.py",
+      "sha256": "93f954b737f8180bf0472b5b54a4fb32cdf96d93df1b3e02c16102ef95a43219"
+    },
+    "http_provenance.py": {
+      "bytes": 2802,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/http_provenance.py",
+      "sha256": "8c5a51ec5eb50b4ab35c28e50fb0629c511458f1e5a598fd52b49a827ed2e18b"
+    },
+    "prepare_saved_owner.py": {
+      "bytes": 2912,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/prepare_saved_owner.py",
+      "sha256": "7ac450d42062dcef56220c282c5b699d7984c09c98559a1b941cd58a2c4dc5eb"
+    },
+    "saved_common.py": {
+      "bytes": 17640,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/saved_common.py",
+      "sha256": "2f67a4a00ea527a6e18213d11a6e1bacc7d7c7a0ea521da52493de68e8ad50f8"
+    },
+    "saved_consume_entry.py": {
+      "bytes": 3645,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/saved_consume_entry.py",
+      "sha256": "f2de8dedb776b401ea31b7455297209d338989753d4494497d757407a0def19c"
+    },
+    "saved_cpu_owner.py": {
+      "bytes": 8677,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/saved_cpu_owner.py",
+      "sha256": "a5f9c48a570d365a1fe86efc1104dd74b4b0263d906587a641e595898dd9a4c4"
+    },
+    "saved_preflight.py": {
+      "bytes": 1803,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/saved_preflight.py",
+      "sha256": "21c8b566f37881069ae52b0e2d7630f19e96535cd34911299ac47e4bd4cf9810"
+    },
+    "test_saved_pure.py": {
+      "bytes": 11587,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/test_saved_pure.py",
+      "sha256": "c78089aca0e81140ca295e2f73f0c0d11f1e1558f782bcfc2edef22b4642510d"
+    }
+  },
+  "formal_success": false,
+  "mathematical_thresholds_and_full_G1_consumer_unchanged": true,
+  "original_RESULT_receipts_and_raws_unchanged": true,
+  "original_producer_failed": true,
+  "prior_CPU_v1_qualification_failed": true,
+  "prior_CPU_v2_qualification_failed": true,
+  "schema": "bole.saved-native-ar-advisory/v3",
+  "source_metadata_inverse_verified": true,
+  "status": "prepared_only_frozen"
+}

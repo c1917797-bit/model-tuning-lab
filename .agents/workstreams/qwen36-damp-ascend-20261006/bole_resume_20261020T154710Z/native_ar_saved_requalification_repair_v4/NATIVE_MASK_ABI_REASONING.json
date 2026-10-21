@@ -1,0 +1,152 @@
+{
+  "FP32_and_FP64_pointwise_bound": "abs(actual-truth)<=0.001+0.01*abs(truth)",
+  "NPU": false,
+  "actual_all128_metadata": {
+    "bytes": 645804,
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-mask-v4/cpu-consumer/MASKS.json",
+    "sha256": "d02ba959d52c019ef2b185979fb7f4bde9801732b2c4ac06c88770959db0b621"
+  },
+  "actual_all128_profile_unique": true,
+  "actual_metadata_owner": {
+    "bytes": 279433,
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-mask-v4/RESULT.json",
+    "sha256": "c0f9637f313146a2c0cec3067cc72a22ea80b1746509d902d2c3477d4ff23a4d"
+  },
+  "actual_new_savedCPU_replay": false,
+  "actual_primary_source_map": {
+    "attention_mask": {
+      "host_ref": {
+        "bytes": 3783,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_mask_sources_v1/attention_mask.py",
+        "sha256": "fb138c36ce381fb6ad65a620f30c6d85bd4d771ae2dfff5da947a67b2c2ba2a5"
+      },
+      "runtime_ref": {
+        "bytes": 3783,
+        "path": "/vllm-workspace/vllm-ascend/vllm_ascend/attention/attention_mask.py",
+        "sha256": "fb138c36ce381fb6ad65a620f30c6d85bd4d771ae2dfff5da947a67b2c2ba2a5"
+      }
+    }
+  },
+  "actual_recorded_dispatcher_schemas": {
+    "npu.npu_fused_infer_attention_score": {
+      "": "npu::npu_fused_infer_attention_score(Tensor query, Tensor key, Tensor value, *, Tensor? pse_shift=None, Tensor? atten_mask=None, SymInt[]? actual_seq_lengths=None, SymInt[]? actual_seq_lengths_kv=None, Tensor? dequant_scale1=None, Tensor? quant_scale1=None, Tensor? dequant_scale2=None, Tensor? quant_scale2=None, Tensor? quant_offset2=None, Tensor? antiquant_scale=None, Tensor? antiquant_offset=None, Tensor? key_antiquant_scale=None, Tensor? key_antiquant_offset=None, Tensor? value_antiquant_scale=None, Tensor? value_antiquant_offset=None, Tensor? block_table=None, Tensor? query_padding_size=None, Tensor? kv_padding_size=None, Tensor? key_shared_prefix=None, Tensor? value_shared_prefix=None, SymInt[]? actual_shared_prefix_len=None, Tensor? query_rope=None, Tensor? key_rope=None, Tensor? key_rope_antiquant_scale=None, int num_heads=1, float scale=1., int pre_tokens=2147483647, int next_tokens=2147483647, str input_layout=\"BSH\", int num_key_value_heads=0, int sparse_mode=0, int inner_precise=0, int block_size=0, int antiquant_mode=0, int key_antiquant_mode=0, int value_antiquant_mode=0, bool softmax_lse_flag=False) -> (Tensor, Tensor)",
+      "out": "npu::npu_fused_infer_attention_score.out(Tensor query, Tensor key, Tensor value, *, Tensor? pse_shift=None, Tensor? atten_mask=None, SymInt[]? actual_seq_lengths=None, SymInt[]? actual_seq_lengths_kv=None, Tensor? dequant_scale1=None, Tensor? quant_scale1=None, Tensor? dequant_scale2=None, Tensor? quant_scale2=None, Tensor? quant_offset2=None, Tensor? antiquant_scale=None, Tensor? antiquant_offset=None, Tensor? key_antiquant_scale=None, Tensor? key_antiquant_offset=None, Tensor? value_antiquant_scale=None, Tensor? value_antiquant_offset=None, Tensor? block_table=None, Tensor? query_padding_size=None, Tensor? kv_padding_size=None, Tensor? key_shared_prefix=None, Tensor? value_shared_prefix=None, SymInt[]? actual_shared_prefix_len=None, Tensor? query_rope=None, Tensor? key_rope=None, Tensor? key_rope_antiquant_scale=None, int num_heads=1, float scale=1., int pre_tokens=2147483647, int next_tokens=2147483647, str input_layout=\"BSH\", int num_key_value_heads=0, int sparse_mode=0, int inner_precise=0, int block_size=0, int antiquant_mode=0, int key_antiquant_mode=0, int value_antiquant_mode=0, bool softmax_lse_flag=False, Tensor? workspace=None, Tensor[] out) -> (Tensor, Tensor)"
+    }
+  },
+  "actual_version_primary_refs": {
+    "METADATA": {
+      "bytes": 21313,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/torch_npu_version_sources_v1/METADATA",
+      "sha256": "f2de008970f546dd403999c04c0a892fd30e6dea3e7e13c1fc5b4dddede8ee49"
+    },
+    "version.py": {
+      "bytes": 86,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/torch_npu_version_sources_v1/version.py",
+      "sha256": "f11e02e3acade31a81657136784872a1d70e2f232cab0ef19d3a605aec47424d"
+    }
+  },
+  "common_effects_pass": false,
+  "every_rank_generation_layer_head_output_element_required": true,
+  "formal_success": false,
+  "geometry": {
+    "Lkv": 132,
+    "Lq": 1,
+    "blocked_expression": "j > i + (Lkv - Lq)",
+    "blocked_key_count": 0,
+    "compressed_template_top_row_is_not_unequal_length_logical_mask": true,
+    "i": 0,
+    "provenance": "Mathematical inference from documented lower-right alignment, limited to this exact actual q1/KV132 scope.",
+    "visible_key_count": 132
+  },
+  "guard_change": "Exact observed int8 dtype/2048square/stride/offset/contiguity plus full4194304-element upper-triangle formula; no accepted-dtype union or crop.",
+  "mathematical_qualification": false,
+  "native_computation_unchanged": true,
+  "observed_explicit_kwargs_keys": [
+    "actual_seq_lengths",
+    "actual_seq_lengths_kv",
+    "atten_mask",
+    "block_size",
+    "block_table",
+    "input_layout",
+    "key",
+    "num_heads",
+    "num_key_value_heads",
+    "query",
+    "scale",
+    "sparse_mode",
+    "value"
+  ],
+  "observed_mask": {
+    "bool_dtype": false,
+    "contiguous": true,
+    "contiguous_byte_sha256": "d016ca7be6be829fd102f03317c3eed915d3df3d3fd54279a8858caea2dd57de",
+    "contiguous_bytes": 4194304,
+    "dtype": "torch.int8",
+    "element_size": 1,
+    "exact_zero_or_one_only": true,
+    "finite": true,
+    "formula_comparison_implies_operator_semantics": false,
+    "full_mask_formula_observations": {
+      "full_all_one": false,
+      "full_all_zero": false,
+      "full_bool_upper_triangle": false,
+      "full_exact_zero_one_upper_triangle": true,
+      "full_nonzero_equals_strict_lower_triangle": false,
+      "full_nonzero_equals_strict_upper_triangle": true
+    },
+    "mask_semantics_qualified": false,
+    "negative_present": false,
+    "numel": 4194304,
+    "present": true,
+    "shape": [
+      2048,
+      2048
+    ],
+    "storage_offset": 0,
+    "stride": [
+      2048,
+      1
+    ],
+    "unique_values_complete": true,
+    "unique_values_counts": [
+      {
+        "count": 2098176,
+        "value": 0
+      },
+      {
+        "count": 2096128,
+        "value": 1
+      }
+    ]
+  },
+  "observed_scalar_parameters": {
+    "actual_seq_lengths": [
+      1
+    ],
+    "actual_seq_lengths_kv": [
+      132
+    ],
+    "block_size": 128,
+    "input_layout": "TND",
+    "num_heads": 6,
+    "num_key_value_heads": 1,
+    "scale": 0.0625,
+    "sparse_mode": 3
+  },
+  "public_primary_sources": [
+    {
+      "purpose": "Mask types, compressed2048 mode3 and lower-right geometry; version-specific D256 support not established by this page.",
+      "url": "https://www.hiascend.com/document/detail/en/Pytorch/2610/apiref/customapi/docs/en/custom_APIs/torch_npu/torch_npu-npu_fused_infer_attention_score.md"
+    },
+    {
+      "purpose": "Different fusion API:1/True excludes,0/False keeps; lower-right compressed-mode semantic corroboration only.",
+      "url": "https://www.hiascend.com/doc_center/source/zh/CANNCommunityEdition/80RC1alpha003/apiref/fmkadptapi/ptaoplist_000442.html"
+    },
+    {
+      "purpose": "Project release declares torch2.10/TorchNPU2.10.0.post4+CANN9.1; not actual container CANN observation.",
+      "section": "v0.23.0 / Dependencies",
+      "url": "https://docs.vllm.ai/projects/ascend/en/main/user_guide/release_notes.html"
+    }
+  ],
+  "schema": "bole.exact-observed-native-FIA-mask-ABI-reasoning/v4"
+}

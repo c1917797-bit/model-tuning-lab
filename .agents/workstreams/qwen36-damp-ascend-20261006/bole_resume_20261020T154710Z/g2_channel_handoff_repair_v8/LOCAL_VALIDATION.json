@@ -1,0 +1,136 @@
+{
+  "AST_files": 23,
+  "Git": false,
+  "NPU": false,
+  "actual22_snapshots_verified": true,
+  "actual_model_executed": false,
+  "actual_sameimage_executed": false,
+  "actual_saved_snapshot_cold_executed": false,
+  "actual_source_assembled": false,
+  "defaultOFF_and_help": [
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "prepare_g2_handoff_v8.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "prepare_g2_handoff_v8.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "audit_source_v8.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "audit_source_v8.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "g2_handoff_cold.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "g2_handoff_cold.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "g2_consumer.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "g2_consumer.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "g2_finalize.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "g2_finalize.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "host_service.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "host_service.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "service_client.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "service_client.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "server090.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "server090.py"
+    }
+  ],
+  "elapsed_seconds": 1.9939385190009489,
+  "formal_success": false,
+  "frozen_G3_v3_unchanged": true,
+  "host_access": false,
+  "local_controls": 28,
+  "new_included_controls": 13,
+  "original_stream_assertion_methods_AST_exact": 15,
+  "passed": 28,
+  "prospective_arithmetic": "214 + (52 + 13) = 279",
+  "prospective_sameimage_cases": 279,
+  "schema": "bole.G2-v8-local-metadata-repair-validation/v1",
+  "skipped": 0,
+  "unittest_stderr": "----------------------------------------------------------------------\nRan 28 tests in 1.028s\n\nOK\n",
+  "unittest_stdout": "",
+  "whole_byteexact_actual_v7": [
+    "g2_stream_owner.py",
+    "g2_consumer.py",
+    "g2_finalize.py",
+    "sourceio.py",
+    "g1_contract.py",
+    "g2_contract.py",
+    "g2_reports.py",
+    "g2_host_adapter.py",
+    "live_owner.py",
+    "g2_numeric.py",
+    "service_client.py",
+    "server090.py"
+  ]
+}

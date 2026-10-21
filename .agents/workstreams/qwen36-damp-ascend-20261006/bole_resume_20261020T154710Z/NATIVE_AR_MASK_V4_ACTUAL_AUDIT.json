@@ -1,0 +1,75 @@
+{
+  "schema": "bole.actual-all128-native-AR-mask-metadata-audit/v1",
+  "inputs": {
+    "path": "/opt/host/vnf/austinov/bole-native-ar-mask-control-v4/INPUTS.json",
+    "bytes": 5511,
+    "sha256": "b3914fc609dd3b707a9d74c73d932c01afdeaa3c9d602dc8cae6d4b2daf3045d"
+  },
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-mask-v4/RESULT.json",
+    "bytes": 279433,
+    "sha256": "c0f9637f313146a2c0cec3067cc72a22ea80b1746509d902d2c3477d4ff23a4d"
+  },
+  "masks": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-mask-v4/cpu-consumer/MASKS.json",
+    "bytes": 645804,
+    "sha256": "d02ba959d52c019ef2b185979fb7f4bde9801732b2c4ac06c88770959db0b621"
+  },
+  "complete": true,
+  "ranks": 4,
+  "generations": 2,
+  "layers_per_generation": 16,
+  "frames": 128,
+  "source_entries": 791,
+  "source_nonempty_equal": true,
+  "elapsed_seconds": 178.31596214009915,
+  "cleanup_spent": 16.489179349970073,
+  "primary": null,
+  "secondary": [],
+  "mask": {
+    "dtype": "torch.int8",
+    "shape": [
+      2048,
+      2048
+    ],
+    "stride": [
+      2048,
+      1
+    ],
+    "storage_offset": 0,
+    "bytes": 4194304,
+    "sha256": "d016ca7be6be829fd102f03317c3eed915d3df3d3fd54279a8858caea2dd57de",
+    "zeros": 2098176,
+    "ones": 2096128,
+    "whole_exact_upper_triangle": true
+  },
+  "all128_parameters": {
+    "route": "npu_fused_infer_attention_score",
+    "input_layout": "TND",
+    "sparse_mode": 3,
+    "query_length": 1,
+    "KV_length": 132,
+    "heads": 6,
+    "KV_heads": 1,
+    "D": 256,
+    "scale": 0.0625,
+    "block_size": 128,
+    "explicit_kwargs_keys": 13
+  },
+  "scope": {
+    "mathematics_recomputed": false,
+    "mask_semantics_qualified": false,
+    "native_AR_numeric_pass": false,
+    "formal_success": false
+  },
+  "successor": {
+    "packet": "native_ar_saved_requalification_repair_v4",
+    "inputs": {
+      "path": "/opt/host/vnf/austinov/bole-native-ar-saved-cpu-control-v4/INPUTS.json",
+      "bytes": 15313,
+      "sha256": "6cf2fcea6ae9cb25a57449c91931215851281e9a16b84a6f0b3555d707d7b95c"
+    },
+    "source_audit": "pending or in progress; see actual source audit receipt",
+    "required": "11 real CPU Torch guard negative controls then unchanged original full G1/FP32/FP64/pointwise/greedy/lifecycle consumer"
+  }
+}

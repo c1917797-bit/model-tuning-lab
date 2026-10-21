@@ -1,0 +1,111 @@
+{
+  "AST_files": 15,
+  "AST_names": [
+    "audit_source_v9.py",
+    "contract090.py",
+    "g1_contract.py",
+    "g2_cold_clock.py",
+    "g2_cold_parent_output.py",
+    "g2_contract.py",
+    "g2_handoff.py",
+    "g2_handoff_cold.py",
+    "host_service.py",
+    "owned_create.py",
+    "prepare_g2_cold_v9.py",
+    "service_entry.py",
+    "sourceio.py",
+    "test_g2_cold_builder.py",
+    "test_g2_cold_clock.py"
+  ],
+  "Git": false,
+  "actual_cold_handoff_executed": false,
+  "actual_model_executed": false,
+  "actual_parent_copied_files_SHA_verified": 14,
+  "actual_sameimage_executed": false,
+  "actual_v9_source_assembled": false,
+  "controls": 18,
+  "current_source": "v9 new18",
+  "defaultOFF_help": [
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "prepare_g2_cold_v9.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "prepare_g2_cold_v9.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "audit_source_v9.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "audit_source_v9.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "service_entry.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "service_entry.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "host_service.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "host_service.py"
+    },
+    {
+      "args": [],
+      "exit_code": 0,
+      "file": "g2_handoff_cold.py"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "file": "g2_handoff_cold.py"
+    }
+  ],
+  "elapsed_seconds": 0.9525968340021791,
+  "formal_success": false,
+  "historical_source": "exact v8 source freshly rerun279 in future sameimage",
+  "local_devices": false,
+  "numerical_qualification": false,
+  "old_elapsed_rewritten": false,
+  "original279_test_files_mutated": false,
+  "original_cleanup_seconds": 180,
+  "original_external_policy_byteexact": true,
+  "original_fixed_cutoff": 1792597630,
+  "original_phase_seconds": 3600,
+  "original_production_copy_functions_AST_unchanged": true,
+  "passed": 18,
+  "prospective_arithmetic": "279 + 18 = 297",
+  "prospective_sameimage_cases": 297,
+  "remote": false,
+  "schema": "bole.G2-cold-clock-v9-local-validation/v1",
+  "skipped": 0,
+  "source_hash_time_now_counts": true,
+  "unittest_stderr": "test_exact_parent_extract_preserves_noise_and_rejects_missing_duplicate_failed_wrong_source (test_g2_cold_builder.ActualEvidenceControls.test_exact_parent_extract_preserves_noise_and_rejects_missing_duplicate_failed_wrong_source) ... ok\ntest_retained_actual_parent279_parser_failure_is_not_cold_or_model_pass (test_g2_cold_builder.ActualEvidenceControls.test_retained_actual_parent279_parser_failure_is_not_cold_or_model_pass) ... ok\ntest_exact_declared_whole_inverses_recover_frozen_v8 (test_g2_cold_builder.BuilderControls.test_exact_declared_whole_inverses_recover_frozen_v8) ... ok\ntest_one_parent_rw_alias_rejects_shadowing_any_actual_input (test_g2_cold_builder.BuilderControls.test_one_parent_rw_alias_rejects_shadowing_any_actual_input) ... ok\ntest_ordinary_portable_refs_accept_bytes_only_and_reject_wrong_bytes_or_symlink (test_g2_cold_builder.BuilderControls.test_ordinary_portable_refs_accept_bytes_only_and_reject_wrong_bytes_or_symlink) ... ok\ntest_original_production_four_copy_and_atomic_functions_ast_unchanged (test_g2_cold_builder.BuilderControls.test_original_production_four_copy_and_atomic_functions_ast_unchanged) ... ok\ntest_prepare_audit_software_and_host_default_OFF_help (test_g2_cold_builder.BuilderControls.test_prepare_audit_software_and_host_default_OFF_help) ... ok\ntest_undeclared_host_create_or_capture_delta_cannot_invert_to_parent (test_g2_cold_builder.BuilderControls.test_undeclared_host_create_or_capture_delta_cannot_invert_to_parent) ... ok\ntest_actual_aggregate_pre_hash_with_sufficient_budget_crosses_same_gate (test_g2_cold_clock.ClockControls.test_actual_aggregate_pre_hash_with_sufficient_budget_crosses_same_gate) ... ok\ntest_actual_aggregate_slow_source_rejects_before_output_or_owner_without_reset (test_g2_cold_clock.ClockControls.test_actual_aggregate_slow_source_rejects_before_output_or_owner_without_reset) ... ok\ntest_actual_main_first_clock_and_every_original_owner_use_same_start (test_g2_cold_clock.ClockControls.test_actual_main_first_clock_and_every_original_owner_use_same_start) ... ok\ntest_actual_original_remaining_already_reserves180_once_and_allows_exact60 (test_g2_cold_clock.ClockControls.test_actual_original_remaining_already_reserves180_once_and_allows_exact60) ... ok\ntest_changed_actual_controller_clock_or_phase_cannot_create (test_g2_cold_clock.ClockControls.test_changed_actual_controller_clock_or_phase_cannot_create) ... ok\ntest_cutoff_and_cleanup_create_boundaries_fail_without_phase_extension (test_g2_cold_clock.ClockControls.test_cutoff_and_cleanup_create_boundaries_fail_without_phase_extension) ... ok\ntest_genuine_original_fresh_environment_prepare_accept_candidate_without_allowlist_change (test_g2_cold_clock.ClockControls.test_genuine_original_fresh_environment_prepare_accept_candidate_without_allowlist_change) ... ok\ntest_host_stages_candidate_then_original_cpu_arm_and_all_probe_paths_agree (test_g2_cold_clock.ClockControls.test_host_stages_candidate_then_original_cpu_arm_and_all_probe_paths_agree) ... ok\ntest_late_start_joint_reset_controller_reset_and_elapsed_reset_rejected (test_g2_cold_clock.ClockControls.test_late_start_joint_reset_controller_reset_and_elapsed_reset_rejected) ... ok\ntest_real_complete_saved_stage_and_host_verification_accept_only_candidate_root (test_g2_cold_clock.ClockControls.test_real_complete_saved_stage_and_host_verification_accept_only_candidate_root) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 0.428s\n\nOK\n",
+  "unittest_stdout": ""
+}

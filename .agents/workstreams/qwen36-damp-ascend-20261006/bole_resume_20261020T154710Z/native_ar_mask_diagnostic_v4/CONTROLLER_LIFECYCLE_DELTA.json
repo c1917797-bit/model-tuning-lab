@@ -1,0 +1,152 @@
+{
+  "CPU0_original_profile_unchanged": true,
+  "NPU": false,
+  "actual_mask_v3_failure_refs": {
+    "FIRST-FAULT.json": {
+      "bytes": 360,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-mask-v3/FIRST-FAULT.json",
+      "sha256": "21d4be2f92252831b8efa087f5f78ab205aed4f397be572c2faac5338f15e9f6"
+    },
+    "INPUTS.json": {
+      "bytes": 5511,
+      "path": "/opt/host/vnf/austinov/bole-native-ar-mask-control-v3/INPUTS.json",
+      "sha256": "f4bcc31d0fe26a82771a872c54dbad846fe31d38e945a894eda319ae14184c09"
+    },
+    "RESULT.json": {
+      "bytes": 278560,
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-mask-v3/RESULT.json",
+      "sha256": "d4c6d2d4e6d8d775e78e2c7ccecc5e4235b0fa8f353f85447a773fb6301b9f4f"
+    }
+  },
+  "actual_saved_mask_inspected": false,
+  "after": {
+    "bytes": 8055,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v4/mask_cpu_owner.py",
+    "sha256": "81959556084545cfd1536645ad70626226a179eb18d6effe3b2e50e98246508a"
+  },
+  "aggregate_lifecycle_control": {
+    "actual_admission": false,
+    "cpu_None_to_allocation_then_profile_then_simulated_create": true,
+    "external_IO_explicit_offline_fixture": true,
+    "observation_failure_rejects_before_create": true,
+    "original_constructor_observe_resources_admission_controller_methods": true,
+    "v3_early_None_subscript_reproduced": true,
+    "wrong_observed_CPU_rejects_before_create": true
+  },
+  "before": {
+    "bytes": 8058,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v3/mask_cpu_owner.py",
+    "sha256": "a94949cdddf425bac3db191bd74e79e96a5667a7198d86f38ef7a4220b84b0e6"
+  },
+  "coldclock3600_cleanup180_resources_thresholds_unchanged": true,
+  "complete385_exact35_plus_mask_readset_unchanged": true,
+  "edits": [
+    {
+      "after": "            C.need(ctl.name.islower()and len(ctl.name)<80,'bounded lowercase owner name')\n            ctl.observe('saved-mask-CPU-admission',initial=True)\n            C.need(ctl.cpu['guest_cpus'][:1]==[0],'original actual one CPU0 profile')\n",
+      "before": "            C.need(ctl.name.islower()and len(ctl.name)<80 and ctl.cpu['guest_cpus'][:1]==[0],\n                'bounded lowercase owner name and original actual one CPU0 profile')\n            ctl.observe('saved-mask-CPU-admission',initial=True)\n"
+    }
+  ],
+  "field_lifecycle_review": [
+    {
+      "field": "name",
+      "first_use": "pre-observe bounded name guard",
+      "initialized_by": "H8.__init__ then S.Controller.__init__"
+    },
+    {
+      "field": "cpu",
+      "first_use": "post-observe CPU0 guard, before owned_create.create",
+      "initialized_by": "H8.__init__:None; S.resources:allocation inside observe(initial=True)"
+    },
+    {
+      "field": "cid",
+      "first_use": "inspect/child after successful owned_create.create; finally truthiness handles precreate failure",
+      "initialized_by": "H8.__init__:None; original create_owned success captures actual CID"
+    },
+    {
+      "field": "expected",
+      "first_use": "original create_owned/inspect, after assignment",
+      "initialized_by": "H8.__init__:None; owned_create.create constructs exact expected before create_owned"
+    },
+    {
+      "field": "secondary",
+      "first_use": "finally aggregation, including failures before CID",
+      "initialized_by": "H8.__init__:[]"
+    },
+    {
+      "field": "primary",
+      "first_use": "assigned before exact-owned cleanup on failure",
+      "initialized_by": "H8.__init__:None"
+    },
+    {
+      "field": "server,server_started,server_argv",
+      "first_use": "original child/cleanup after values are set or guarded for None",
+      "initialized_by": "S.__init__; H.child sets process/start/argv before child lifecycle"
+    },
+    {
+      "field": "cleanup_deadline",
+      "first_use": "original cleanup lane with whole unchanged180 budget",
+      "initialized_by": "H8.__init__:None; H.controller.cleanup obtains joint cleanup deadline before S.cleanup"
+    },
+    {
+      "field": "_mask_closed",
+      "first_use": "getattr(...,False) in finally, safe before successful cleanup",
+      "initialized_by": "owner after successful cleanup"
+    }
+  ],
+  "formal_success": false,
+  "mathematical_qualification": false,
+  "name_guard_before_observe": true,
+  "original_observe_not_replaced": true,
+  "original_primary_sources": {
+    "host_once": {
+      "bytes": 18170,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/host_once.py",
+      "sha256": "36844e41895b95e810b54ecae32994a96b21258ae8ad8d88fccaac19f035cf8c"
+    },
+    "host_run_h8": {
+      "bytes": 40202,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/host_run_h8.py",
+      "sha256": "4ddd75d6ce7558f0131992da3a5514df43dfb4b33f45674722ba5769ecef5e20"
+    },
+    "owned_substrate": {
+      "bytes": 3579,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/owned_substrate.py",
+      "sha256": "17ca8d7e4992c95af629edd29b8af428a7ab1d66a7b8e7bcff1391d173a70b9d"
+    },
+    "safety_host": {
+      "bytes": 22338,
+      "path": "/workspace/scratch/6d9e7cc63b51/g1_review_v2/safety_host.py",
+      "sha256": "20bda52a1c3fbc75db47104cbd4759faf91da1f39032d4730160983f7b9c0c30"
+    }
+  },
+  "profile_guard_after_observe_before_create": true,
+  "schema": "bole.mask-original025-controller-lifecycle-delta/v4",
+  "unchanged_runtime": {
+    "ar_owner_common.py": {
+      "bytes": 19055,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v4/ar_owner_common.py",
+      "sha256": "5d0b9034706b9a942a4d7dd10870139959b22dfaab2cebbdddf25ba962e456a4"
+    },
+    "ar_saved_namespace.py": {
+      "bytes": 4109,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v4/ar_saved_namespace.py",
+      "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+    },
+    "diag_common.py": {
+      "bytes": 9331,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v4/diag_common.py",
+      "sha256": "e43fd9fb92b8b610b45dfcbaa3a228b4755ecefa2e3f961400f14f2c0414115d"
+    },
+    "mask_diagnostic.py": {
+      "bytes": 10007,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v4/mask_diagnostic.py",
+      "sha256": "a12fae4077dbc9c5c4c9fc790ac27be9cf408431b4a45b642d1062fc090a810d"
+    },
+    "prepare_mask_owner.py": {
+      "bytes": 2803,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v4/prepare_mask_owner.py",
+      "sha256": "839d8eef78fc86dfc4b0b8bb65fd418571808334a54a4bc8bf2f73d36be847fb"
+    }
+  },
+  "whole_byte_inverse_verified": true
+}

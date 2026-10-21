@@ -1,0 +1,142 @@
+{
+  "NPU": false,
+  "actual_model_or_tokenizer_or_sandbox_run": false,
+  "actual_public_factory_qualified": false,
+  "constructor_protocol": "transformers-public-TokenizersBackend.from_pretrained/v2",
+  "constructor_source_ref": {
+    "bytes": 2707,
+    "sha256": "a815923db0c762c89ac433905ee6f359ebb76720424fa9c961fd8379146ebe2b"
+  },
+  "current_tasks": {
+    "GSM8K": 1319,
+    "HumanEval": 164,
+    "MMLU": 14042
+  },
+  "files": {
+    "DECODER_CONSTRUCTOR.json": {
+      "bytes": 2707,
+      "sha256": "a815923db0c762c89ac433905ee6f359ebb76720424fa9c961fd8379146ebe2b"
+    },
+    "EVIDENCE_SCHEMA.md": {
+      "bytes": 9738,
+      "sha256": "59e63252f7242ee1810d6bbf6df42e97000f63fb5a00a84bb12b70e9b270cabb"
+    },
+    "LOCAL_VALIDATION.json": {
+      "bytes": 1049,
+      "sha256": "e7a3eb71f34b75fdbb3efd6ccd367cc7d784cc16744730a4a78a11a1d14122fc"
+    },
+    "PROTOCOL.json": {
+      "bytes": 5221,
+      "sha256": "a219e8b7dcbfad4045a612bce30f98b1a425ef0704160feff2aa101537e39933"
+    },
+    "README.md": {
+      "bytes": 8450,
+      "sha256": "e22827389c907220b46691e70f3b5a29c09272cb81153f71eafea052df0560b8"
+    },
+    "SOURCE_FINDINGS.md": {
+      "bytes": 2354,
+      "sha256": "be13215ee72a656b171aed54eeeb334d07fa84c5a6ed926eee497185cbd3aa47"
+    },
+    "compare_components.py": {
+      "bytes": 3221,
+      "sha256": "1cdfccf58d63f62de9d5e94c8125cc8927a71f0d9571825e9be6342a9e8a53fa"
+    },
+    "consume_results.py": {
+      "bytes": 11270,
+      "sha256": "25a8d0994b73eeb805322a1fea2ff8ffef8d4dd2abf882071d9cb4ef65d1acd2"
+    },
+    "decoder.py": {
+      "bytes": 8110,
+      "sha256": "e981f063f515a7a0d62e7a9ad16aca806b94406afada62b74628a331b82c68b6"
+    },
+    "fixtures/GSM_ORIGINAL_FIRST_ROW.json": {
+      "bytes": 1591,
+      "sha256": "0d61e76d8d2ae5795a240fcabda0a49fe1efdfd9de05286a9040cf3b55bf1895"
+    },
+    "fixtures/GSM_RENDER011_FIRST_ROW.json": {
+      "bytes": 2235,
+      "sha256": "586e0b5b99218c2a8b41e7b478314976e62194551b97795ec1f9440d55fce61a"
+    },
+    "frozen/content_contract.py": {
+      "bytes": 1017,
+      "sha256": "7c97b4ef5350660866018726e69db0c2dca5cb275be80050d99fdc17e7969bde"
+    },
+    "frozen/decoder_v1.py": {
+      "bytes": 6001,
+      "sha256": "45cfb481c33e69dec562e8dd3b2089dba08ba4da1e651c9196c91138d4185f9e"
+    },
+    "frozen/gsm_scorer.py": {
+      "bytes": 13056,
+      "sha256": "a6abc4d1172517b0572919ab67cc49a0751f28f41dbcfb1a6a7e13f7a8120948"
+    },
+    "frozen/inputs004.py": {
+      "bytes": 12127,
+      "sha256": "0773169d441bfae70f8126a29f57a70c19c747cda37c4ee62b486c80a2b14c25"
+    },
+    "frozen/original_packet_manifest.json": {
+      "bytes": 3950,
+      "sha256": "f687ad69fa0226fe72565e8ed356b65244a475c570259c865e6b3cf68fcda851"
+    },
+    "he_policy.py": {
+      "bytes": 4644,
+      "sha256": "1cc91c0369c318c155dfd124731ac13c60133a5f9a879853637e0d4b4f1e66b6"
+    },
+    "he_worker.py": {
+      "bytes": 7316,
+      "sha256": "48f45351b3645c7490e59a08b1d16e3e911fa234f081c8742d04de7435c46515"
+    },
+    "postprocess.py": {
+      "bytes": 3340,
+      "sha256": "f13cdd77ae6a510a3d47cd70f2534a1fd7abb69befff3982897988f8891313a4"
+    },
+    "prepare_packet.py": {
+      "bytes": 4106,
+      "sha256": "195cb54cb06ed472eba434e34298918f7acf02839b7ab5fe6a29ee252f6b11b0"
+    },
+    "provenance.py": {
+      "bytes": 8326,
+      "sha256": "a527afb66169fddf100893a5755dfb50ab65ca78dd0b2061aa1809417e5df0bf"
+    },
+    "request_plan.py": {
+      "bytes": 2131,
+      "sha256": "bfbf52b6fb05d6946c9891c8e9aaa3177b24bf05a398cd83a8e918e8746c5e0a"
+    },
+    "restore_GSM_inputs.py": {
+      "bytes": 2630,
+      "sha256": "83d90ffb2a3ee46070219fb435966b23258a1718219c704cb72e6b963ecfbbbf"
+    },
+    "score_tokens.py": {
+      "bytes": 6777,
+      "sha256": "b795a944f99a6dcb915e05d0e7ccad03097c4453a279fae1e509eae78133eab5"
+    },
+    "stage_he.py": {
+      "bytes": 5966,
+      "sha256": "326b12433de8541b5780ad7b7dc87313606c4e430526311d2eeb0b8068a5bfa4"
+    },
+    "task_contract.py": {
+      "bytes": 13493,
+      "sha256": "25a5f59f4cdb6b25fc1dfed4245895520e347961f0f7a7ccfecbf14bd8fbcf73"
+    },
+    "test_constructor_pure.py": {
+      "bytes": 3933,
+      "sha256": "6d2b58cdd71d6f80144c300df227fdff048a94d814bb730f8c12fc9d18bfcc17"
+    },
+    "test_software.py": {
+      "bytes": 14679,
+      "sha256": "59cd637af2e7d2961f813e780f045506af1b3c3356c7a1e8de336f779cbd2e54"
+    }
+  },
+  "formal_task_accuracy_accepted": false,
+  "full_software_qualification_pending": true,
+  "full_v012_input_replay_pending": true,
+  "local_tests": 43,
+  "local_tests_passed": 43,
+  "model_ready": false,
+  "model_task_client_and_lifecycle_integration_pending": true,
+  "original_packet_manifest_sha256": "f687ad69fa0226fe72565e8ed356b65244a475c570259c865e6b3cf68fcda851",
+  "performance_ready": false,
+  "same_image_CPU_owner_join_pending": true,
+  "schema": "bole.task-decoder-scorer-advisory-packet/v2",
+  "scope": "prospective public TokenizersBackend factory with original v012 IDs/scorers/complete replay and HE sandbox unchanged",
+  "status": "frozen advisory for MAIN review; default OFF; actual public path/full software qualification pending"
+}

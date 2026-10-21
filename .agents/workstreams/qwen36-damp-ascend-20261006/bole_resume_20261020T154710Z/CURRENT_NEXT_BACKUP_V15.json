@@ -1,0 +1,90 @@
+{
+  "schema": "bole.current-next-backup/v15",
+  "authority": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MODEL_AUTHORITY.json",
+  "CURRENT": {
+    "status": "no live model or helper; saved nativeAR-v4 readonly source audit running, all previous leases released",
+    "formal_success": false,
+    "latest": {
+      "G2": "v8 actual279/parser PASS, cold leaf gate failed; v9 frozen pending real preparation",
+      "native_AR": "all128 masks actually observed; new saved numerical-v4 prepared source, no numeric verdict",
+      "tasks": "v12 first15525 and network READY/ACK succeeded, official import NumPy absent; full qualification false"
+    }
+  },
+  "NEXT": [
+    {
+      "node": "saved nativeAR-v4 full CPU numerical replay",
+      "owner": "MAIN",
+      "ready": "actual source prepared; audit required before finite unit",
+      "inputs": {
+        "path": "/opt/host/vnf/austinov/bole-native-ar-saved-cpu-control-v4/INPUTS.json",
+        "bytes": 15313,
+        "sha256": "6cf2fcea6ae9cb25a57449c91931215851281e9a16b84a6f0b3555d707d7b95c"
+      }
+    },
+    {
+      "node": "G2-v9 CPU297/parser/cold then TP4model",
+      "owner": "MAIN/runtime preparer",
+      "ready": "frozen packet, actual source assembly pending",
+      "software_scope": "279 exact v8 parent +18 current v9 controls"
+    },
+    {
+      "node": "HE Python3.12 dependency-only exact sandbox then fullCPU-v13",
+      "owner": "consumer preparer/MAIN",
+      "ready": "actual source/binary copies verified, import probe not yet run"
+    }
+  ],
+  "BACKUP": [
+    {
+      "node": "G3-v4 rebase",
+      "status": "UNFROZEN draft only; needs actual G2-v9 successful model, cost fit and metadata proof"
+    },
+    {
+      "node": "common plugin CPU effects",
+      "status": "old v2 prepared only pins saved-v3; future source-bound saved-v4 acceptance required after actual numerical success"
+    },
+    {
+      "node": "GDN service-v2 matched arms",
+      "status": "two actual source preparations only"
+    }
+  ],
+  "pending_formal": [
+    "G2 complete numerical/lifecycle and full1024 G3",
+    "nativeAR/common and task-runtime/native-OFF control integrations",
+    "task shapes/ownership/growth and all15525 matched quality",
+    "three matched OFF/ON performance pairs >=1.10 plus resource/rollback gates",
+    "authenticated Git push"
+  ],
+  "git": {
+    "checkpoint_before_this": "fbc25b21c8a697dacfc9dd72780f920878453a7e",
+    "last_confirmed_pushed": "3fac6a64a166ea814781627b57b2c25b096e937f",
+    "blocker": "actual HTTPS authentication unavailable, SSH22 timed out; no auth change/repeated retry"
+  },
+  "constraints": {
+    "physical": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "fixed7CPU": [
+      0,
+      1,
+      2,
+      3,
+      144,
+      145,
+      166
+    ],
+    "hostCPU": 166,
+    "phase_seconds": 3600,
+    "cleanup_seconds": 180,
+    "outer_MAIN_lock": "entire-owner lifetime",
+    "numerical_bounds_unchanged": true
+  }
+}

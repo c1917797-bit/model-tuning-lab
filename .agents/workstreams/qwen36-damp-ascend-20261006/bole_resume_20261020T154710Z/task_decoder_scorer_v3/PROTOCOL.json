@@ -1,0 +1,84 @@
+{
+  "GSM8K": {
+    "actual_decoder": "must decode the fixed segment and all restored prompts; exact source-pinned full single-user/thinkOFF frame and official question/gold coverage",
+    "extraction": "first regex #### (\\-?[0-9\\.\\,]+), strip match and remove commas only; exact numeric-string equality; invalid is incorrect; no last-match/fallback/body-number parser",
+    "inputs": "reuse all original1319 complete token lists; compare every011 row; only the same12-token format instruction insertion before user EOS is allowed; no retokenization",
+    "instruction_ids": [
+      198,
+      5423,
+      279,
+      1534,
+      4087,
+      303,
+      279,
+      3443,
+      25435,
+      361,
+      3946,
+      13867
+    ],
+    "scorer": "unchanged whole original gsm_scorer.py SHA256 a6abc4d1172517b0572919ab67cc49a0751f28f41dbcfb1a6a7e13f7a8120948"
+  },
+  "HumanEval": {
+    "completion_transform": "unwrap only a whole-output single fence (python or no language), removing only the envelope and its delimiting linebreaks; no nested/multiple fences; then remove the exact original official prompt only if it is the exact initial substring; preserve all other bytes/indentation; no AST/fuzzy repair",
+    "executor": "unchanged openai/human-eval commit6d43fb980f9fee3c892a914eda09951f772ad10d evaluation.py and execution.py; k=[1], n_workers=1, timeout=3.0",
+    "inputs": "reuse exact011 rows_ref, metadata and prompt token IDs; all164 official prompt/test/entrypoint/canonical_solution provenance; no prompt encode/render call",
+    "sandbox": "MAIN-owned actual runc container: same immutable image ID; network none; Devices[]; env-i without secrets; uid65534; read-only root and exactly3 public read-only mounts; private IPC; no capabilities/no-new-privileges; 2GiB RAM+swap bound, CPU1, PIDs64, nofile128/fsize8MiB, private /tmp256MiB; actual inspect/CID/wait/stdout must be independently joined",
+    "software_controls": "original HumanEval/0 canonical_solution passes; explicit wrong solution fails; infinite loop times out; never emit a benchmark/task score for controls"
+  },
+  "LongBench_v2_in_current_scope": false,
+  "MMLU": {
+    "aggregation": "micro correct/14042, no case dropping",
+    "extraction": "first nonempty line, trim only outside line whitespace; anchored uppercase A-D, optional exact Answer: prefix; after the letter require end, whitespace, period or right parenthesis; invalid is incorrect; no body search or last-answer heuristic",
+    "inputs": "reuse exact011 rows_ref, metadata and full5shot token IDs; all14042 test rows/57subjects; replay original author formatter over actual dev/test CSVs and official gold",
+    "protocol_change_explicit": "new generative completion extraction; old likelihood evaluate.py is retained only for author formatting/provenance, never described as a deployed generative scorer"
+  },
+  "authority": "new source-bound current authority required; keep all historical artifacts/cutoffs immutable; no old main/window mutation",
+  "comparison": "OFF/ON use identical complete inputs, policy, stack, concurrency and common optimizations. Per-request actual BOLE activation, worker EOS/retirement, native AR identity, model/stack/common-effect proofs and paired formal threshold checks remain external mandatory gates. This component reader never promotes them.",
+  "decoder_construction": {
+    "actual_semantics_required": "same version/class/seven assets/EOS/cleanup, source code guards and complete15525 old-ID/source/gold/template plus original tiny controls",
+    "input_tokens_and_scorers_changed": false,
+    "no_accelerator_guard_relaxed": false,
+    "prior_auto_decoder_retained_unchanged": true,
+    "protocol": "transformers-public-TokenizersBackend.from_pretrained/v2",
+    "status": "prospective before task model output; actual equivalence/full CPU qualification pending"
+  },
+  "formal_accuracy_accepted": false,
+  "generation": {
+    "ignore_eos": false,
+    "max_tokens": 2048,
+    "n": 1,
+    "return_token_ids": true,
+    "seed": 0,
+    "stream": false,
+    "temperature": 0,
+    "thinking_enabled_by_frozen_complete_frame": false,
+    "top_p": 1
+  },
+  "input_protocol": "three-task-chat-no-thinking-generative2048-GSM-original-format-restored/v012",
+  "minimum_model_context_tokens": 5199,
+  "model_ready": false,
+  "outputs": "actual raw request/HTTP200 response refs; exact returned token IDs decoded by original7 tokenizer files and original transformers5.5.4/tokenizers0.22.2; server text and usage must match; no retokenized output or silent resume; stop and length counts separately reported; length requires actual2048 IDs; EOS if returned must be last; capped output remains visible, not asserted to be natural EOS",
+  "schema": "bole.three-task-prospective-protocol/v012",
+  "smoke_ids": {
+    "GSM8K": [
+      "gsm8k-test-0000",
+      "gsm8k-test-0001"
+    ],
+    "HumanEval": [
+      "HumanEval/0",
+      "HumanEval/1"
+    ],
+    "MMLU": [
+      "mmlu-abstract_algebra-0000",
+      "mmlu-abstract_algebra-0001"
+    ]
+  },
+  "status": "prepared-only; freeze before any task model output; no performance or accuracy result",
+  "task_ready": false,
+  "tasks": {
+    "GSM8K": 1319,
+    "HumanEval": 164,
+    "MMLU": 14042
+  }
+}

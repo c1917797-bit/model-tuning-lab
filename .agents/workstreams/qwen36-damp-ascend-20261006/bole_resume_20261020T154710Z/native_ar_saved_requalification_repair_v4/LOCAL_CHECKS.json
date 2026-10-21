@@ -1,0 +1,74 @@
+{
+  "NPU": false,
+  "Python_AST_compile_files": 12,
+  "actual_C_ref_obj_load_source_ticket_paths_exercised": true,
+  "actual_Torch_CPU_controls_executed_locally": false,
+  "actual_completed_mask_primary_copies_whole_SHA_verified": 13,
+  "actual_completed_metadata_frames_checked": 128,
+  "actual_full_host_readset_audited_locally": false,
+  "actual_mask_profile_combinations": 1,
+  "actual_metadata_not_promoted_to_numerical_or_semantic_gate": true,
+  "actual_metadata_source_before_after_equal_paths": 791,
+  "actual_new_CPU_admission": false,
+  "actual_new_host_prepare": false,
+  "actual_saved_tensor_math_replayed": false,
+  "cold_default_help_tensor_import_tripwires": 8,
+  "coldentry_single_phase_remaining1380_and_cutoff_controls": true,
+  "common_effects_pass": false,
+  "copied_prepare_and_sourceaudit_CLI_metadata_roundtrip": true,
+  "formal_success": false,
+  "frozen_manifests_rechecked": {
+    "native_ar_mask_diagnostic_v1": {
+      "file_refs_rechecked": 12,
+      "manifest": {
+        "bytes": 4559,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v1/ADVISORY_MANIFEST.json",
+        "sha256": "85a8d4431df83e875a393cb2713c779d005be63758bf81a74361837a101dd15a"
+      }
+    },
+    "native_ar_mask_diagnostic_v2": {
+      "file_refs_rechecked": 17,
+      "manifest": {
+        "bytes": 7089,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v2/ADVISORY_MANIFEST.json",
+        "sha256": "383be640fec0e88aa36f33bc00a74fcb3fa8336a0a99ec721c02e8e57eff9681"
+      }
+    },
+    "native_ar_mask_diagnostic_v3": {
+      "file_refs_rechecked": 21,
+      "manifest": {
+        "bytes": 10965,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v3/ADVISORY_MANIFEST.json",
+        "sha256": "85c1ef0652bb930bdd574ebcb3d3b070a3d09df5c81c420885d422a6454bbb6f"
+      }
+    },
+    "native_ar_mask_diagnostic_v4": {
+      "file_refs_rechecked": 25,
+      "manifest": {
+        "bytes": 13724,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_mask_diagnostic_v4/ADVISORY_MANIFEST.json",
+        "sha256": "2f66330fb185bd9215031270c07e30babd52b7e641c7c515204c81a3fe9be497"
+      }
+    },
+    "native_ar_saved_requalification_repair_v3": {
+      "file_refs_rechecked": 19,
+      "manifest": {
+        "bytes": 6834,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_saved_requalification_repair_v3/ADVISORY_MANIFEST.json",
+        "sha256": "24a4ec59482e4cfaa3ec1ac46377666c804190d9814031e97f1225659824df8f"
+      }
+    }
+  },
+  "fullmask_byte_fixture_far_corruption_rejected": true,
+  "fullmask_guard_inverse_to_saved_v3_equal": true,
+  "future_actual_Torch_CPU_guard_negative_controls_required": 11,
+  "metadata_mutation_categories_rejected": 7,
+  "native_FA_math_qualified": false,
+  "offline_roundtrip_predecessor_and_readset_expansion_are_explicit_fixtures": true,
+  "original29_checkpoint_and_full_G1_mathematical_guard_preserved": true,
+  "original_consumer_whole_byte_inverse_edits": 4,
+  "original_numerical_and_identity_AST_after_guard_inverse_equal": true,
+  "schema": "bole.saved-native-ar-mask-ABI-local-checks/v4",
+  "status": "prepared_only",
+  "stdlib_tests_passed": 18
+}

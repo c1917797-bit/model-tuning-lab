@@ -1,0 +1,22 @@
+{
+  "AST_compile_files": 7,
+  "NPU": false,
+  "actual_Devices_empty_run": false,
+  "actual_failed_v3_G1_primary_copies_whole_SHA_checked": 6,
+  "actual_host_prepare_or_sourceaudit": false,
+  "actual_mask_primary_source_bytes": 3783,
+  "actual_mask_primary_source_sha256": "fb138c36ce381fb6ad65a620f30c6d85bd4d771ae2dfff5da947a67b2c2ba2a5",
+  "actual_rank_headers_whole_SHA_checked": 4,
+  "actual_saved_mask_inspected": false,
+  "cold_default_help_tensor_import_tripwires": 6,
+  "cold_entry_clock_before_source_replay": true,
+  "formal_success": false,
+  "mask_semantics_qualified": false,
+  "native_FA_math_qualified": false,
+  "original025_common_and_namespace_byte_equal": true,
+  "schema": "bole.native-ar-mask-local-checks/v1",
+  "source_declares_nonpooling_int8_upper2048": true,
+  "source_formula_is_not_actual_mask_inspection": true,
+  "status": "prepared_only",
+  "stdlib_unit_tests_passed": 11
+}

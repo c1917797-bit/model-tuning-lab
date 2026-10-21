@@ -1,0 +1,110 @@
+{
+  "schema": "bole.actual-G2-v8-devicefree-failure-audit/v1",
+  "source": {
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v8/SOURCE_BOUND.json",
+    "bytes": 612583,
+    "sha256": "ae03ae1e05711105642b4d07763384f38ed190f1defa4a9ac748389e88daa601"
+  },
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v8-CPU/RESULT.json",
+    "bytes": 741019,
+    "sha256": "f95e50f77bf77cdd6ed453596698f84f5152e1fd6f6a17565d9b8813a27b0765"
+  },
+  "source_before_after_nonempty_equal": true,
+  "source_entries": 2267,
+  "primary": {
+    "cleanup_not_started": true,
+    "errno": null,
+    "error_repr": "ValueError('exact fresh064 opt stage; no broad opt escape')",
+    "error_type": "builtins.ValueError",
+    "fail_closed": true,
+    "filename": null,
+    "filename2": null,
+    "phase": {
+      "ordinal": 8,
+      "phase": "cpu-preflight",
+      "step": "cleanup-receipt"
+    },
+    "recovery_attempted": false,
+    "schema": "bole.first-host-fault/v131r5",
+    "source": {
+      "bytes": 612583,
+      "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v8/SOURCE_BOUND.json",
+      "sha256": "ae03ae1e05711105642b4d07763384f38ed190f1defa4a9ac748389e88daa601"
+    },
+    "traceback": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v8/host_service.py\", line 42, in main\n    coldleaf=H.fresh_leaf(a.output/'handoff-preflight');stage=stage_saved_probe(C,sr,coldleaf);summary['handoff_saved_stage']=stage\n  File \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v8/external025.py\", line 40, in fresh\n    p=c.ordinary(path);need(p.parent==OUT and p.name in('cpu-preflight','dense','candidate','cpu-consumer')and p.parent.is_dir()and not p.exists(),'exact fresh064 opt stage; no broad opt escape');p.mkdir(mode=0o700);return p\n  File \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v8/external025.py\", line 8, in need\n    if not v:raise ValueError(m)\nValueError: exact fresh064 opt stage; no broad opt escape\n"
+  },
+  "actual_scope": {
+    "software_cases": 279,
+    "historical214_and_current65": true,
+    "unique_success_summary": true,
+    "child_exit": 0,
+    "current65_zero_skip": true,
+    "parser": true,
+    "cold_handoff": false,
+    "NPU": false,
+    "numerical_qualified": false
+  },
+  "release": {
+    "cpu-preflight/cleanup.json": {
+      "ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v8-CPU/cpu-preflight/cleanup.json",
+        "bytes": 1269,
+        "sha256": "91b1365cd8fb60bc7cc216a8a891b0f384150f1c0cf7763143e87153936c0d2a"
+      },
+      "data": {
+        "after_inspect": {
+          "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v8-CPU/cpu-preflight/inspect-1792542255757674090.json",
+          "sha256": "1ed82243df5f6a2e47555d3134408f717107090c654babc19c9b0b1b257851ac"
+        },
+        "before_inspect": {
+          "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v8-CPU/cpu-preflight/inspect-1792542240074978160.json",
+          "sha256": "ff1ad7933e3370e863ed2dd9075e63132f35a5b49dcd23afcada8d8b7b1945ec"
+        },
+        "container": "b104a43b705a899f8a5faed09ce1406692085c953dc32722f8959aa2217e6970",
+        "deleted": false,
+        "errors": [],
+        "primary_error": null,
+        "protected_boundary": {
+          "baseline": [],
+          "external_added": [],
+          "external_changed": [],
+          "external_removed": [],
+          "external_unchanged_claimed": false,
+          "observed": [],
+          "own_on_protected": false,
+          "schema": "sparq.protected-boundary/v1"
+        },
+        "release_smi": {
+          "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v8-CPU/cpu-preflight/release-1792542256849679760.json",
+          "sha256": "359cddbe3ba767d2eca597cd54f1d3ae5677a279514f38b8071af854488cee26"
+        },
+        "retained": true,
+        "stop_receipt": {
+          "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v8-CPU/cpu-preflight/stop-retain-1792542255663591060.json",
+          "sha256": "60d4e70ddaa6b8e849a0f4bb1ef28fffddefb9670e21443d1d2e20219ceeb463"
+        },
+        "stopped": true
+      }
+    }
+  },
+  "causes": [
+    {
+      "confidence": "proved actual first fault",
+      "layer": "new cold-stage leaf vs original controller allowlist",
+      "reason": "handoff-preflight is rejected by the exact original external025 fresh/environment/prepare allowlists"
+    },
+    {
+      "confidence": "proved source ordering",
+      "layer": "whole-owner phase clock",
+      "reason": "v8 inherited v7 late start after source/readset hashes; old elapsed retained unchanged"
+    }
+  ],
+  "successor": {
+    "packet": "g2_cold_clock_repair_v9",
+    "fix": "coldentry first statement plus original legal exclusive candidate leaf; original external025/math/279 test bytes retained",
+    "prospective_software": "fresh source-v8 279 plus current-source-v9 18, separately identified",
+    "NPU_prerequisites": "actual new source audit, parser and complete Devices[] cold handoff, source equality and clean releases",
+    "formal_success": false
+  }
+}

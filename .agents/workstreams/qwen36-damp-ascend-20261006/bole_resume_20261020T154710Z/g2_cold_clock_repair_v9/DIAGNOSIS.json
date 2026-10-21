@@ -1,0 +1,37 @@
+{
+  "NPU": false,
+  "actual_NPU_admitted": false,
+  "actual_handoff_started": false,
+  "actual_model_pass": false,
+  "actual_parser_pass": true,
+  "actual_software279_pass": true,
+  "actual_software279_source": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v8",
+  "audit": {
+    "bytes": 2301,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V8_SOURCE_AUDIT.json",
+    "sha256": "f6d942fa73c768efd2bd9b2a780f016e06ac828e43c313a66c33037545291d82"
+  },
+  "fault": {
+    "bytes": 1403,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v8-CPU/HOST-FIRST-FAULT.json",
+    "sha256": "daa6512954d145b2c15594e2c5fe905c8d65e9283494a4960ad663df9d1876a4"
+  },
+  "late_clock_source_fact": "main source/readset/command checks precede start=time.monotonic() in actual v7 and v8",
+  "late_elapsed_is_historical_not_rewritten": true,
+  "leaf_cause": "exact original external025 fresh/environment/prepare allow only cpu-preflight,dense,candidate,cpu-consumer",
+  "owner": {
+    "bytes": 741019,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v8-CPU/RESULT.json",
+    "sha256": "f95e50f77bf77cdd6ed453596698f84f5152e1fd6f6a17565d9b8813a27b0765"
+  },
+  "primary": "ValueError('exact fresh064 opt stage; no broad opt escape')",
+  "repair": "main first entry_start retained throughout original phase; original allowed candidate cold leaf",
+  "schema": "bole.actual-G2-v8-late-clock-and-exact-leaf-cause/v9",
+  "secondary": [],
+  "source": {
+    "bytes": 612583,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v8/SOURCE_BOUND.json",
+    "sha256": "ae03ae1e05711105642b4d07763384f38ed190f1defa4a9ac748389e88daa601"
+  },
+  "source_nonempty_equal": true
+}

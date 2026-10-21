@@ -1,0 +1,294 @@
+{
+  "actual_new_guard_execution": false,
+  "facts": {
+    "guest": {
+      "pid": 1,
+      "start_ticks": 65805490
+    },
+    "net_namespace": {
+      "device": 4,
+      "inode": 4026548624,
+      "link": "net:[4026548624]"
+    },
+    "privilege": {
+      "CapAmb": "0000000000000000",
+      "CapBnd": "0000000000000000",
+      "CapEff": "0000000000000000",
+      "CapInh": "0000000000000000",
+      "CapPrm": "0000000000000000",
+      "NoNewPrivs": "1",
+      "Uid": "65534\t65534\t65534\t65534"
+    },
+    "proc_files": {
+      "dev": "Inter-|   Receive                                                |  Transmit\n face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed\n    lo:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0\n  gre0:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0\ngretap0:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0\nerspan0:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0\n",
+      "if_inet6": "",
+      "ipv6_route": "00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n00000000000000000000000000000000 00 00000000000000000000000000000000 00 00000000000000000000000000000000 ffffffff 00000001 00000000 00200200       lo\n",
+      "route": "Iface\tDestination\tGateway \tFlags\tRefCnt\tUse\tMetric\tMask\t\tMTU\tWindow\tIRTT                                                       \n"
+    },
+    "schema": "bole.actual-HE-network-guard-facts/v1",
+    "sys_entries": [
+      {
+        "attributes": {
+          "carrier": {
+            "error": {
+              "errno": 20,
+              "type": "NotADirectoryError"
+            },
+            "ok": false,
+            "text": null
+          },
+          "flags": {
+            "error": {
+              "errno": 20,
+              "type": "NotADirectoryError"
+            },
+            "ok": false,
+            "text": null
+          },
+          "ifindex": {
+            "error": {
+              "errno": 20,
+              "type": "NotADirectoryError"
+            },
+            "ok": false,
+            "text": null
+          },
+          "iflink": {
+            "error": {
+              "errno": 20,
+              "type": "NotADirectoryError"
+            },
+            "ok": false,
+            "text": null
+          },
+          "operstate": {
+            "error": {
+              "errno": 20,
+              "type": "NotADirectoryError"
+            },
+            "ok": false,
+            "text": null
+          },
+          "type": {
+            "error": {
+              "errno": 20,
+              "type": "NotADirectoryError"
+            },
+            "ok": false,
+            "text": null
+          }
+        },
+        "is_dir": false,
+        "is_symlink": false,
+        "lstat": {
+          "device": 115,
+          "inode": 17903222,
+          "mode": 33188
+        },
+        "name": "bonding_masters",
+        "symlink_target": null
+      },
+      {
+        "attributes": {
+          "carrier": {
+            "error": {
+              "errno": 22,
+              "type": "OSError"
+            },
+            "ok": false,
+            "text": null
+          },
+          "flags": {
+            "error": null,
+            "ok": true,
+            "text": "0x1002\n"
+          },
+          "ifindex": {
+            "error": null,
+            "ok": true,
+            "text": "4\n"
+          },
+          "iflink": {
+            "error": null,
+            "ok": true,
+            "text": "0\n"
+          },
+          "operstate": {
+            "error": null,
+            "ok": true,
+            "text": "down\n"
+          },
+          "type": {
+            "error": null,
+            "ok": true,
+            "text": "1\n"
+          }
+        },
+        "is_dir": true,
+        "is_symlink": true,
+        "lstat": {
+          "device": 115,
+          "inode": 17903472,
+          "mode": 41471
+        },
+        "name": "erspan0",
+        "symlink_target": "../../devices/virtual/net/erspan0"
+      },
+      {
+        "attributes": {
+          "carrier": {
+            "error": {
+              "errno": 22,
+              "type": "OSError"
+            },
+            "ok": false,
+            "text": null
+          },
+          "flags": {
+            "error": null,
+            "ok": true,
+            "text": "0x80\n"
+          },
+          "ifindex": {
+            "error": null,
+            "ok": true,
+            "text": "2\n"
+          },
+          "iflink": {
+            "error": null,
+            "ok": true,
+            "text": "0\n"
+          },
+          "operstate": {
+            "error": null,
+            "ok": true,
+            "text": "down\n"
+          },
+          "type": {
+            "error": null,
+            "ok": true,
+            "text": "778\n"
+          }
+        },
+        "is_dir": true,
+        "is_symlink": true,
+        "lstat": {
+          "device": 115,
+          "inode": 17903308,
+          "mode": 41471
+        },
+        "name": "gre0",
+        "symlink_target": "../../devices/virtual/net/gre0"
+      },
+      {
+        "attributes": {
+          "carrier": {
+            "error": {
+              "errno": 22,
+              "type": "OSError"
+            },
+            "ok": false,
+            "text": null
+          },
+          "flags": {
+            "error": null,
+            "ok": true,
+            "text": "0x1002\n"
+          },
+          "ifindex": {
+            "error": null,
+            "ok": true,
+            "text": "3\n"
+          },
+          "iflink": {
+            "error": null,
+            "ok": true,
+            "text": "0\n"
+          },
+          "operstate": {
+            "error": null,
+            "ok": true,
+            "text": "down\n"
+          },
+          "type": {
+            "error": null,
+            "ok": true,
+            "text": "1\n"
+          }
+        },
+        "is_dir": true,
+        "is_symlink": true,
+        "lstat": {
+          "device": 115,
+          "inode": 17903390,
+          "mode": 41471
+        },
+        "name": "gretap0",
+        "symlink_target": "../../devices/virtual/net/gretap0"
+      },
+      {
+        "attributes": {
+          "carrier": {
+            "error": null,
+            "ok": true,
+            "text": "1\n"
+          },
+          "flags": {
+            "error": null,
+            "ok": true,
+            "text": "0x9\n"
+          },
+          "ifindex": {
+            "error": null,
+            "ok": true,
+            "text": "1\n"
+          },
+          "iflink": {
+            "error": null,
+            "ok": true,
+            "text": "1\n"
+          },
+          "operstate": {
+            "error": null,
+            "ok": true,
+            "text": "unknown\n"
+          },
+          "type": {
+            "error": null,
+            "ok": true,
+            "text": "772\n"
+          }
+        },
+        "is_dir": true,
+        "is_symlink": true,
+        "lstat": {
+          "device": 115,
+          "inode": 17903226,
+          "mode": 41471
+        },
+        "name": "lo",
+        "symlink_target": "../../devices/virtual/net/lo"
+      }
+    ]
+  },
+  "projection_only": true,
+  "qualified": false,
+  "schema": "bole.actual-HEv3-offline-projection-fixture/v1",
+  "source_refs": [
+    {
+      "bytes": 4994,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v3/he-runtime-diagnostic/OBSERVATION.json",
+      "sha256": "c9a47cfbfdf56bfa82e80cbd24ac02784aeac38fdfbea61e1c9591adc22cbe7c"
+    },
+    {
+      "bytes": 5898,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v3/he-runtime-diagnostic/PROCESS-BINDING.json",
+      "sha256": "2683be00031708eac523da9ae78a5bb8b7f5ca5fc0b3190845d0d4f19dcb954f"
+    },
+    {
+      "bytes": 767,
+      "path": "/opt/host/vnf/austinov/run-bole-task-cpu-he-runtime-20261020T154710Z-v3/he-runtime-diagnostic/HOST_GUEST_NET_NAMESPACE.json",
+      "sha256": "78649d9f14a2813c0c304d0532bca20a5ac7db61c7587e444c9aaae3c3fea223"
+    }
+  ]
+}
