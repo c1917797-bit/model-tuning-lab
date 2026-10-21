@@ -1,0 +1,184 @@
+{
+  "default_enabled": false,
+  "diagnostic_seconds": 600,
+  "files": {
+    "diagnostic": {
+      "bytes": 19468,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_map_owner_packet_v2/map_identity_diagnostic.py",
+      "sha256": "1b96f3bac601e491f42481a0a479f53f573ac8d27dc605f0cd0abf810bb205e8"
+    },
+    "library_maps": {
+      "bytes": 5771,
+      "path": "/opt/host/vnf/austinov/bole-native-ar-fia-control-v2/library_maps.py",
+      "sha256": "b1a0231cfb11fcd9a18cc0153ad2fb93098d58dd7aba642c20ecf69438bbbc82"
+    },
+    "metadata_cpu": {
+      "bytes": 6882,
+      "path": "/opt/host/vnf/austinov/bole-native-ar-fia-control-v2/metadata_cpu.py",
+      "sha256": "62af3bf2f3398512ad529d9a37deaf19da1d5ba3818cab99d255735ba5836813"
+    }
+  },
+  "imports": [
+    {
+      "kind": "module",
+      "name": "torch",
+      "ref": {
+        "bytes": 106868,
+        "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch/__init__.py",
+        "sha256": "51c90fe34a7cf869517d1bab4cd114498790e169ec668f1a154c35ec64117a5e"
+      }
+    },
+    {
+      "kind": "module",
+      "name": "torch_npu",
+      "ref": {
+        "bytes": 2435,
+        "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/__init__.py",
+        "sha256": "a21f553fb9ac12f087cfdf0fb61a583be3c864d3785cff9920ec862f565d6072"
+      }
+    },
+    {
+      "kind": "file",
+      "name": "pair_contract",
+      "ref": {
+        "bytes": 3356,
+        "path": "/opt/host/vnf/austinov/bole-native-ar-pair-20261020T154710Z-v5/pair_contract.py",
+        "sha256": "954eee044e63580a1e9c95431e11295909d36851931f8bbafd44a98f9e182f18"
+      }
+    },
+    {
+      "kind": "file",
+      "name": "_fia_metadata_frozen_math",
+      "ref": {
+        "bytes": 32513,
+        "path": "/opt/host/vnf/austinov/bole-native-ar-saved-cpu-control-v4/derived_math_consumer.py",
+        "sha256": "2ffb602f31fc88e26c8529e28ae6e2f759a2dedc38caa72efa9d93f0c968a732"
+      }
+    },
+    {
+      "kind": "file",
+      "name": "_fia_metadata_frozen_diagnostic",
+      "ref": {
+        "bytes": 10687,
+        "path": "/opt/host/vnf/austinov/bole-native-ar-numdiag-control-v1/numeric_diagnostic.py",
+        "sha256": "f9b90c8126aa62ab22c2bd35c10bfd84e9341ca37e88618c8591ae779993c3fb"
+      }
+    },
+    {
+      "kind": "file",
+      "name": "_fia_metadata_arena",
+      "ref": {
+        "bytes": 3397,
+        "path": "/opt/host/vnf/austinov/bole-native-ar-fia-control-v2/arena_layout.py",
+        "sha256": "309f3dd9c04b69226dc63ae7f08e425e8e5c911d1a15d7e9a0670a6b0f8b5f85"
+      }
+    },
+    {
+      "kind": "file",
+      "name": "_fia_metadata_maps",
+      "ref": {
+        "bytes": 5771,
+        "path": "/opt/host/vnf/austinov/bole-native-ar-fia-control-v2/library_maps.py",
+        "sha256": "b1a0231cfb11fcd9a18cc0153ad2fb93098d58dd7aba642c20ecf69438bbbc82"
+      }
+    }
+  ],
+  "known_files": [
+    {
+      "ELF": null,
+      "alias_ref": {
+        "bytes": 106868,
+        "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch/__init__.py",
+        "sha256": "51c90fe34a7cf869517d1bab4cd114498790e169ec668f1a154c35ec64117a5e"
+      },
+      "canonical_ref": null
+    },
+    {
+      "ELF": null,
+      "alias_ref": {
+        "bytes": 2435,
+        "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/__init__.py",
+        "sha256": "a21f553fb9ac12f087cfdf0fb61a583be3c864d3785cff9920ec862f565d6072"
+      },
+      "canonical_ref": null
+    },
+    {
+      "ELF": null,
+      "alias_ref": {
+        "bytes": 3356,
+        "path": "/opt/host/vnf/austinov/bole-native-ar-pair-20261020T154710Z-v5/pair_contract.py",
+        "sha256": "954eee044e63580a1e9c95431e11295909d36851931f8bbafd44a98f9e182f18"
+      },
+      "canonical_ref": null
+    },
+    {
+      "ELF": null,
+      "alias_ref": {
+        "bytes": 32513,
+        "path": "/opt/host/vnf/austinov/bole-native-ar-saved-cpu-control-v4/derived_math_consumer.py",
+        "sha256": "2ffb602f31fc88e26c8529e28ae6e2f759a2dedc38caa72efa9d93f0c968a732"
+      },
+      "canonical_ref": null
+    },
+    {
+      "ELF": null,
+      "alias_ref": {
+        "bytes": 10687,
+        "path": "/opt/host/vnf/austinov/bole-native-ar-numdiag-control-v1/numeric_diagnostic.py",
+        "sha256": "f9b90c8126aa62ab22c2bd35c10bfd84e9341ca37e88618c8591ae779993c3fb"
+      },
+      "canonical_ref": null
+    },
+    {
+      "ELF": null,
+      "alias_ref": {
+        "bytes": 3397,
+        "path": "/opt/host/vnf/austinov/bole-native-ar-fia-control-v2/arena_layout.py",
+        "sha256": "309f3dd9c04b69226dc63ae7f08e425e8e5c911d1a15d7e9a0670a6b0f8b5f85"
+      },
+      "canonical_ref": null
+    },
+    {
+      "ELF": null,
+      "alias_ref": {
+        "bytes": 5771,
+        "path": "/opt/host/vnf/austinov/bole-native-ar-fia-control-v2/library_maps.py",
+        "sha256": "b1a0231cfb11fcd9a18cc0153ad2fb93098d58dd7aba642c20ecf69438bbbc82"
+      },
+      "canonical_ref": null
+    }
+  ],
+  "library_name": "_fia_metadata_maps",
+  "output_dir": "/opt/host/vnf/austinov/run-bole-native-ar-map-v2/cpu-preflight/map-identity",
+  "schema": "bole.native-ar-map-identity-diagnostic-inputs/v1",
+  "source_refs": [
+    {
+      "bytes": 15602,
+      "path": "/opt/host/vnf/austinov/bole-native-ar-fia-control-v2/INPUTS.json",
+      "sha256": "767c1e9209805f1f9eed6a6861482254ae884656e7747674a69dfa82eda1bb92"
+    },
+    {
+      "bytes": 13176,
+      "path": "/opt/host/vnf/austinov/bole-native-ar-fia-control-v2/replay_cpu_owner.py",
+      "sha256": "57ccd1de84de0132a2cacf5c18fcf0d56ca6eec5b09926333c9a006a7c1d7732"
+    },
+    {
+      "bytes": 25100,
+      "path": "/opt/host/vnf/austinov/bole-native-ar-fia-control-v2/replay_common.py",
+      "sha256": "372419613667e0c3235ad8159278e065a79757d999678615cd0b302c41a974bc"
+    },
+    {
+      "bytes": 2496,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_map_diagnostic_v1/TORCH_IMPORT_SOURCE_COPY.json",
+      "sha256": "249ba0c097a99d5572ed31b59e550f8f28b4cf34d8ec1d43c9245dd2d0875d5b"
+    },
+    {
+      "bytes": 106868,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_map_diagnostic_v1/torch_init_image_copy.txt",
+      "sha256": "51c90fe34a7cf869517d1bab4cd114498790e169ec668f1a154c35ec64117a5e"
+    }
+  ],
+  "sys_path": [
+    "/opt/host/vnf/austinov/bole-native-ar-pair-20261020T154710Z-v5"
+  ]
+}

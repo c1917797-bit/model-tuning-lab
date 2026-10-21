@@ -1,0 +1,314 @@
+[
+  {
+    "host_ref": {
+      "bytes": 213,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-provenance-v1/03-ascend_toolkit_install.info",
+      "sha256": "a9b17ef608ebeb70ade09cde1c12a545eb5e8f3e5312f6806ca0d368b0464848"
+    },
+    "installed_ref": {
+      "bytes": 213,
+      "path": "/usr/local/Ascend/ascend-toolkit/latest/aarch64-linux/ascend_toolkit_install.info",
+      "sha256": "a9b17ef608ebeb70ade09cde1c12a545eb5e8f3e5312f6806ca0d368b0464848"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 3433,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-provenance-v3/04-aclnn_fused_infer_attention_score.h",
+      "sha256": "226c13bed903a0391ede60dcbe6b0d19e4fa18cd782763005dd034b83496d297"
+    },
+    "installed_ref": {
+      "bytes": 3433,
+      "path": "/usr/local/Ascend/ascend-toolkit/latest/include/aclnnop/aclnn_fused_infer_attention_score.h",
+      "sha256": "226c13bed903a0391ede60dcbe6b0d19e4fa18cd782763005dd034b83496d297"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 3400,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-provenance-v3/05-aclnn_fused_infer_attention_score_v5.h",
+      "sha256": "68e8b6c4ec1f566fe8303b580aac45d983107121eef33b073a13104891509a2a"
+    },
+    "installed_ref": {
+      "bytes": 3400,
+      "path": "/usr/local/Ascend/ascend-toolkit/latest/include/aclnnop/aclnn_fused_infer_attention_score_v5.h",
+      "sha256": "68e8b6c4ec1f566fe8303b580aac45d983107121eef33b073a13104891509a2a"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 3494,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-provenance-v3/07-aclnn_incre_flash_attention.h",
+      "sha256": "3fb27cdba92173cd9a4894c259696a1d36589f06167b265056a260f587ec4cad"
+    },
+    "installed_ref": {
+      "bytes": 3494,
+      "path": "/usr/local/Ascend/ascend-toolkit/latest/include/aclnnop/aclnn_incre_flash_attention.h",
+      "sha256": "3fb27cdba92173cd9a4894c259696a1d36589f06167b265056a260f587ec4cad"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 3391,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-provenance-v3/06-aclnn_incre_flash_attention_v4.h",
+      "sha256": "08edca7fc4a00f7254c54f2949b9a4f7c5e1de24d510330d2fde9d2f6abb231c"
+    },
+    "installed_ref": {
+      "bytes": 3391,
+      "path": "/usr/local/Ascend/ascend-toolkit/latest/include/aclnnop/aclnn_incre_flash_attention_v4.h",
+      "sha256": "08edca7fc4a00f7254c54f2949b9a4f7c5e1de24d510330d2fde9d2f6abb231c"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 1255736,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-linked-libraries-v1/04-libascend_dump.so",
+      "sha256": "f1e5a58449299e93c36abc08bb0955483b08ed4f5cabd08d7dd8023f2312a1af"
+    },
+    "installed_ref": {
+      "bytes": 1255736,
+      "path": "/usr/local/Ascend/ascend-toolkit/latest/lib64/libascend_dump.so",
+      "sha256": "f1e5a58449299e93c36abc08bb0955483b08ed4f5cabd08d7dd8023f2312a1af"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 133024,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-linked-libraries-v1/08-libc_sec.so",
+      "sha256": "964df648e2dc8e04516b3919e259ca5a933d48dc3c4b88d4d558e7de212342e6"
+    },
+    "installed_ref": {
+      "bytes": 133024,
+      "path": "/usr/local/Ascend/ascend-toolkit/latest/lib64/libc_sec.so",
+      "sha256": "964df648e2dc8e04516b3919e259ca5a933d48dc3c4b88d4d558e7de212342e6"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 329544,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-linked-libraries-v1/03-libexe_graph.so",
+      "sha256": "92245f33c93523ecf99614c735afa89b95b443aaac876ca09c4a088fb512249e"
+    },
+    "installed_ref": {
+      "bytes": 329544,
+      "path": "/usr/local/Ascend/ascend-toolkit/latest/lib64/libexe_graph.so",
+      "sha256": "92245f33c93523ecf99614c735afa89b95b443aaac876ca09c4a088fb512249e"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 5774144,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-linked-libraries-v1/02-libge_common_base.so",
+      "sha256": "bcc38d1b7a882f9aa546f62e710dbc259a1f7fc52927d49fec5c7acab62084ff"
+    },
+    "installed_ref": {
+      "bytes": 5774144,
+      "path": "/usr/local/Ascend/ascend-toolkit/latest/lib64/libge_common_base.so",
+      "sha256": "bcc38d1b7a882f9aa546f62e710dbc259a1f7fc52927d49fec5c7acab62084ff"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 4328144,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-linked-libraries-v1/01-libnnopbase.so",
+      "sha256": "308dda461704a6e5f70de6e0eac4495e9829b9cec3328563b75a5b382c6e438b"
+    },
+    "installed_ref": {
+      "bytes": 4328144,
+      "path": "/usr/local/Ascend/ascend-toolkit/latest/lib64/libnnopbase.so",
+      "sha256": "308dda461704a6e5f70de6e0eac4495e9829b9cec3328563b75a5b382c6e438b"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 44155312,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-provenance-v1/08-libopapi.so",
+      "sha256": "3e10def2f7158482f3967b9db6ad2707cca8691198ddae8cc52bbbaf61bb2675"
+    },
+    "installed_ref": {
+      "bytes": 44155312,
+      "path": "/usr/local/Ascend/ascend-toolkit/latest/lib64/libopapi.so",
+      "sha256": "3e10def2f7158482f3967b9db6ad2707cca8691198ddae8cc52bbbaf61bb2675"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 264128,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-linked-libraries-v1/05-libprofapi.so",
+      "sha256": "fcb6a88c039a6226233e5c1c10f8129141114135bd26cc0dc40a8e8965487106"
+    },
+    "installed_ref": {
+      "bytes": 264128,
+      "path": "/usr/local/Ascend/ascend-toolkit/latest/lib64/libprofapi.so",
+      "sha256": "fcb6a88c039a6226233e5c1c10f8129141114135bd26cc0dc40a8e8965487106"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 4138976,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-linked-libraries-v1/06-libregister.so",
+      "sha256": "84d4cb58dbe0ef3e59e6466f2ada7c2fcee9de9ead1d3845672948b561c569fa"
+    },
+    "installed_ref": {
+      "bytes": 4138976,
+      "path": "/usr/local/Ascend/ascend-toolkit/latest/lib64/libregister.so",
+      "sha256": "84d4cb58dbe0ef3e59e6466f2ada7c2fcee9de9ead1d3845672948b561c569fa"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 135584,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-linked-libraries-v1/07-libunified_dlog.so",
+      "sha256": "b5f9f04eea31fc121ba4dfa356620e900502b02207042d59c65824f29fa0733f"
+    },
+    "installed_ref": {
+      "bytes": 135584,
+      "path": "/usr/local/Ascend/ascend-toolkit/latest/lib64/libunified_dlog.so",
+      "sha256": "b5f9f04eea31fc121ba4dfa356620e900502b02207042d59c65824f29fa0733f"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 281,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-provenance-v1/04-version.info",
+      "sha256": "841279757459d4eabc1c8cfea69d3e1dc0fc9db3eb0c18100294cd5c1301b9e6"
+    },
+    "installed_ref": {
+      "bytes": 281,
+      "path": "/usr/local/Ascend/ascend-toolkit/latest/opp/version.info",
+      "sha256": "841279757459d4eabc1c8cfea69d3e1dc0fc9db3eb0c18100294cd5c1301b9e6"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 446557,
+      "path": "/opt/host/vnf/austinov/bole-installed-torch-wheel-record-v1/RECORD",
+      "sha256": "df85bdd4e140c3bf0ac277b5b499c8b046adc4b2dc3c8dfab20c9bb43fd872fd"
+    },
+    "installed_ref": {
+      "bytes": 446557,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu-2.10.0.post4.dist-info/RECORD",
+      "sha256": "df85bdd4e140c3bf0ac277b5b499c8b046adc4b2dc3c8dfab20c9bb43fd872fd"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 339177,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-linked-libraries-v1/00-_C.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "e04d0028f79428e9c27fee1e6ab88e70abcbf319354ef821719575e936bf859c"
+    },
+    "installed_ref": {
+      "bytes": 339177,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/_C.cpython-312-aarch64-linux-gnu.so",
+      "sha256": "e04d0028f79428e9c27fee1e6ab88e70abcbf319354ef821719575e936bf859c"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 2435,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-provenance-v1/00-__init__.py",
+      "sha256": "a21f553fb9ac12f087cfdf0fb61a583be3c864d3785cff9920ec862f565d6072"
+    },
+    "installed_ref": {
+      "bytes": 2435,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/__init__.py",
+      "sha256": "a21f553fb9ac12f087cfdf0fb61a583be3c864d3785cff9920ec862f565d6072"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 4679,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-dispatch-v1/01-_exports.py",
+      "sha256": "1a9fdbdb0ed0b505ad7017b671d1886d1bde5521e30e32791ed5bd2c88ceb838"
+    },
+    "installed_ref": {
+      "bytes": 4679,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/_init/core/_exports.py",
+      "sha256": "1a9fdbdb0ed0b505ad7017b671d1886d1bde5521e30e32791ed5bd2c88ceb838"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 7088,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-provenance-v3/00-module_loader.py",
+      "sha256": "4ef503e59f2b7b8cf06412aff9d3e2b730c42bcfe8d7f72b0d90f36ba35b5b34"
+    },
+    "installed_ref": {
+      "bytes": 7088,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/_init/core/module_loader.py",
+      "sha256": "4ef503e59f2b7b8cf06412aff9d3e2b730c42bcfe8d7f72b0d90f36ba35b5b34"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 1212,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-provenance-v3/01-runtime_lifecycle.py",
+      "sha256": "b6797ddff3e8e535949343c8f7cdafb00b063b0dd0b21b71540d14b1ee19a9c2"
+    },
+    "installed_ref": {
+      "bytes": 1212,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/_init/core/runtime_lifecycle.py",
+      "sha256": "b6797ddff3e8e535949343c8f7cdafb00b063b0dd0b21b71540d14b1ee19a9c2"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 6563,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-provenance-v3/03-patch_manager.py",
+      "sha256": "bda93a83de1ba6e950401f24d1240b8c15eed178bb89ada56de55222aa59ed34"
+    },
+    "installed_ref": {
+      "bytes": 6563,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/_init/patches/patch_manager.py",
+      "sha256": "bda93a83de1ba6e950401f24d1240b8c15eed178bb89ada56de55222aa59ed34"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 3444,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-provenance-v3/02-registry_manager.py",
+      "sha256": "566b0721b08f5614c6018cfd7165f62eb8871395019bd08e689e086b04cbe5a1"
+    },
+    "installed_ref": {
+      "bytes": 3444,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/_init/registry/registry_manager.py",
+      "sha256": "566b0721b08f5614c6018cfd7165f62eb8871395019bd08e689e086b04cbe5a1"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 82429241,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-provenance-v1/06-libtorch_npu.so",
+      "sha256": "83fb9a0eb249aef6bca7f8463047fcb4d3062cc4849f17ddf31a5e050c838842"
+    },
+    "installed_ref": {
+      "bytes": 82429241,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/lib/libtorch_npu.so",
+      "sha256": "83fb9a0eb249aef6bca7f8463047fcb4d3062cc4849f17ddf31a5e050c838842"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 206,
+      "path": "/opt/host/vnf/austinov/bole-installed-operator-dispatch-v1/00-__init__.py",
+      "sha256": "cbbc0a9ba60b5ead864fa6279c7f982f52b1fa99d095cbb3dbfb225e23b2213b"
+    },
+    "installed_ref": {
+      "bytes": 206,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/op_plugin/__init__.py",
+      "sha256": "cbbc0a9ba60b5ead864fa6279c7f982f52b1fa99d095cbb3dbfb225e23b2213b"
+    }
+  },
+  {
+    "host_ref": {
+      "bytes": 106868,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_map_diagnostic_v1/torch_init_image_copy.txt",
+      "sha256": "51c90fe34a7cf869517d1bab4cd114498790e169ec668f1a154c35ec64117a5e"
+    },
+    "installed_ref": {
+      "bytes": 106868,
+      "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch/__init__.py",
+      "sha256": "51c90fe34a7cf869517d1bab4cd114498790e169ec668f1a154c35ec64117a5e"
+    }
+  }
+]
