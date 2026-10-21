@@ -1,0 +1,105 @@
+{
+  "schema": "bole.MAIN-G2-v11-actual-failed-MODEL-audit/v1",
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11/RESULT.json",
+    "bytes": 1072961,
+    "sha256": "cddfa40ed93a663b5a34102121db4c7bb64df7b92282e18b49c94cc241a0861c"
+  },
+  "primary": "ValueError('one bounded actual model smoke client')",
+  "secondary": [],
+  "source_before_after_equal": true,
+  "unique_sources": 3280,
+  "elapsed": 859.7463600999909,
+  "cleanup_spent": 70.22719814977609,
+  "whole_primary_files": 73,
+  "owners": [
+    {
+      "role": "cpu-preflight",
+      "CID": "4ab0af8c9a9817e36ef7ae25f83a056b053a4cc7a700ce08447a64d2ee4c7d68",
+      "stopped_retained": true,
+      "PID": 0,
+      "ExecIDs": null,
+      "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+      "cpus": "145",
+      "devices": 0,
+      "cleanup": {
+        "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11/cpu-preflight/cleanup.json",
+        "bytes": 1257,
+        "sha256": "7500ba5ac964fb6649a7e17e79e6105b41084e88a232cfad069441e855ccbd9a"
+      },
+      "after_inspect": {
+        "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11/cpu-preflight/inspect-1792550463133032660.json",
+        "bytes": 2452691,
+        "sha256": "55ae4ea11edfb814862e18ace7c80ee7359f60fddf2681c05ca6f14adca3e429"
+      }
+    },
+    {
+      "role": "candidate",
+      "CID": "9f5884d069751d622742d0f728f18a241f20367161396528af0e1e96ccd4c73e",
+      "stopped_retained": true,
+      "PID": 0,
+      "ExecIDs": null,
+      "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+      "cpus": "145",
+      "devices": 0,
+      "cleanup": {
+        "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11/candidate/cleanup.json",
+        "bytes": 1241,
+        "sha256": "dd89e81298f2c35d4b7b9493ae54b5d8718b192b3785d017f3ef3cd4b1b37dff"
+      },
+      "after_inspect": {
+        "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11/candidate/inspect-1792550485505982440.json",
+        "bytes": 2449261,
+        "sha256": "746192ae443e5acde5422ab219418539087a0b061d2f9bdd64aed3b6e934e1c8"
+      }
+    },
+    {
+      "role": "cpu-consumer",
+      "CID": "3a5f01503aa31e18c54e5451b2a9f46738acfa6a6cce012ecb0fd85baff1feb4",
+      "stopped_retained": true,
+      "PID": 0,
+      "ExecIDs": null,
+      "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+      "cpus": "145",
+      "devices": 0,
+      "cleanup": {
+        "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11/cpu-consumer/cleanup.json",
+        "bytes": 1306,
+        "sha256": "7f335f5c59a08634b905d4652b3fdb20a6344cc6dad5d8c9936748323aa10099"
+      },
+      "after_inspect": {
+        "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11/cpu-consumer/inspect-1792551106854703860.json",
+        "bytes": 2451702,
+        "sha256": "d224976242c55cb85fed5c573b5c90b02caa29b87783a53771d45e293f4fdb32"
+      }
+    },
+    {
+      "role": "dense",
+      "CID": "d49525fcfc1c30fcf83449498312de83697e849577140e3087d8d1fbef8b1298",
+      "stopped_retained": true,
+      "PID": 0,
+      "ExecIDs": null,
+      "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+      "cpus": "0,1,2",
+      "devices": 7,
+      "cleanup": {
+        "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11/dense/cleanup.json",
+        "bytes": 1278,
+        "sha256": "82680425d67868df7ffb158126c9b5674aabfc47b625ac9e5b26911b103c2798"
+      },
+      "after_inspect": {
+        "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11/dense/inspect-1792551089203455170.json",
+        "bytes": 2453374,
+        "sha256": "1ba06f3f8a1b88bf42d9139fbee770d42449631506a3b023c2e87974252601ec"
+      }
+    }
+  ],
+  "MODEL_qualification": false,
+  "formal_success": false,
+  "unit_terminal": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V11_MODEL_SYSTEMD_TERMINAL.json",
+    "bytes": 365,
+    "sha256": "bd8e0c1fb22eb04bba46dfa47ce77cbe8633ff023a4c4a54203864a35b3567de"
+  },
+  "next": "New v12 lossless ACK wire under unchanged3072 cap; no MODEL promotion from failed stream"
+}

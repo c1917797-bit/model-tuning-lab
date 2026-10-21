@@ -1,0 +1,150 @@
+{
+  "actual_CPU_Tensor_execution": false,
+  "actual_NPU_execution": false,
+  "actual_fsum_predecessor": {
+    "bytes": 317648,
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/RESULT.json",
+    "sha256": "e6f94628b6996e93c819b8a6d80dc0ee8b54e3a531009c70d6fa4e0b2dc9ec8f"
+  },
+  "actual_host_readset_audited": false,
+  "actual_independent_consumption": false,
+  "actual_loaded_libraries": false,
+  "actual_replay_completed": false,
+  "cleanup_seconds": 180,
+  "cold_default_help_tripwires": 10,
+  "common_effects_pass": false,
+  "files": {
+    "ACTUAL_FSUM_REFS.json": {
+      "bytes": 5531,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/ACTUAL_FSUM_REFS.json",
+      "sha256": "e836d5b78343d632a9ed1dbb7dcebb16dde508f5e4dbd44e6334bf0cdc6e3618"
+    },
+    "INSTALLED_DISPATCH_REFS.json": {
+      "bytes": 640,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/INSTALLED_DISPATCH_REFS.json",
+      "sha256": "561d4432b6cb074a5b9be481071313930d3c7874bf2432714866bce3213e2dbe"
+    },
+    "INSTALLED_LINKED_REFS.json": {
+      "bytes": 3001,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/INSTALLED_LINKED_REFS.json",
+      "sha256": "b8e9ee76cc3eea655a5a3c8a03e5d7e6b5a36d815e10ae75e7f21955594e5345"
+    },
+    "INSTALLED_PROVENANCE_REFS.json": {
+      "bytes": 5201,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/INSTALLED_PROVENANCE_REFS.json",
+      "sha256": "c3d507847e652824d618aea4ecada55b57de208d179bc510e1d7e062f5ef9a62"
+    },
+    "LOCAL_CHECKS.json": {
+      "bytes": 2277,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/LOCAL_CHECKS.json",
+      "sha256": "38aa85e82fe17611f1d607f4464ca9646712732320ff19edfd470c26037378f2"
+    },
+    "README.md": {
+      "bytes": 13188,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/README.md",
+      "sha256": "ef85c3d19e5e1500954b4c7e308178ba4444c3919671914d129144b5bf47aa40"
+    },
+    "SOURCE_RELATIONSHIP.json": {
+      "bytes": 2630,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/SOURCE_RELATIONSHIP.json",
+      "sha256": "1ad709fcba99a03b7ec1a7fffb56efb497e12263389cd494409da373e5ae0c04"
+    },
+    "ar_owner_common.py": {
+      "bytes": 19055,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/ar_owner_common.py",
+      "sha256": "5d0b9034706b9a942a4d7dd10870139959b22dfaab2cebbdddf25ba962e456a4"
+    },
+    "ar_saved_namespace.py": {
+      "bytes": 4109,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/ar_saved_namespace.py",
+      "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+    },
+    "arena_layout.py": {
+      "bytes": 3397,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/arena_layout.py",
+      "sha256": "309f3dd9c04b69226dc63ae7f08e425e8e5c911d1a15d7e9a0670a6b0f8b5f85"
+    },
+    "consume_replay.py": {
+      "bytes": 10965,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/consume_replay.py",
+      "sha256": "7c494c71c2ed5e273f40582aae2fc74338f5f3ce654331fb37af9ec51667b4cc"
+    },
+    "library_maps.py": {
+      "bytes": 5771,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/library_maps.py",
+      "sha256": "b1a0231cfb11fcd9a18cc0153ad2fb93098d58dd7aba642c20ecf69438bbbc82"
+    },
+    "metadata_cpu.py": {
+      "bytes": 6882,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/metadata_cpu.py",
+      "sha256": "62af3bf2f3398512ad529d9a37deaf19da1d5ba3818cab99d255735ba5836813"
+    },
+    "prepare_replay_owner.py": {
+      "bytes": 2655,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/prepare_replay_owner.py",
+      "sha256": "b34b39f199e40e139a59642088b82deffa0ce73acd4ec2e9810aea0bab284a95"
+    },
+    "replay_common.py": {
+      "bytes": 24463,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/replay_common.py",
+      "sha256": "08235b5649698784a072c268cf2b8179d95195685e13f583f36d1a2f9c0b63e0"
+    },
+    "replay_cpu_owner.py": {
+      "bytes": 13176,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/replay_cpu_owner.py",
+      "sha256": "57ccd1de84de0132a2cacf5c18fcf0d56ca6eec5b09926333c9a006a7c1d7732"
+    },
+    "replay_fia.py": {
+      "bytes": 12557,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/replay_fia.py",
+      "sha256": "04779c97596e90ba31e54ec0993fed5a47d7d7c53cb96fd8ba98f615491bb149"
+    },
+    "singleton_profile.py": {
+      "bytes": 5770,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/singleton_profile.py",
+      "sha256": "fa04506ebdaf0117ecd106c88c744192932bac870195c98f6b0044b9c422ecdf"
+    },
+    "test_replay_pure.py": {
+      "bytes": 19470,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/test_replay_pure.py",
+      "sha256": "91e359f7b4a3fcb4ec1b8f7ae07d7aba528b90403c7494ae71320a3ab08109af"
+    }
+  },
+  "first_main_clock": true,
+  "flat_file_count_including_manifest": 20,
+  "formal_success": false,
+  "local_checks": {
+    "bytes": 2277,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/LOCAL_CHECKS.json",
+    "sha256": "38aa85e82fe17611f1d607f4464ca9646712732320ff19edfd470c26037378f2"
+  },
+  "logical": [
+    0
+  ],
+  "native_AR_numeric_pass": false,
+  "native_FA_math_qualified": false,
+  "original025_controller_methods_preserved": true,
+  "original_native_numerical_failure_preserved": true,
+  "original_resource_PHYSICAL": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "performance_ready": false,
+  "phase_seconds": 3600,
+  "physical": [
+    4
+  ],
+  "required_MAIN_lock": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock",
+  "runtime_files": 15,
+  "same_operator_all128_two_filler_calls": 256,
+  "schema": "bole.native-ar-FIA-advisory-packet/v1",
+  "source_relationship": {
+    "bytes": 2630,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/SOURCE_RELATIONSHIP.json",
+    "sha256": "1ad709fcba99a03b7ec1a7fffb56efb497e12263389cd494409da373e5ae0c04"
+  },
+  "status": "frozen_prepared_only_unexecuted",
+  "stdlib_tests": 16
+}

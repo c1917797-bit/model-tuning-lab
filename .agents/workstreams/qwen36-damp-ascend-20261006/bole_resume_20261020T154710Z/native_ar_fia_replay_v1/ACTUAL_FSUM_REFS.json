@@ -1,0 +1,117 @@
+{
+  "RESULT.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/RESULT.json",
+    "bytes": 317648,
+    "sha256": "e6f94628b6996e93c819b8a6d80dc0ee8b54e3a531009c70d6fa4e0b2dc9ec8f"
+  },
+  "INPUTS.json": {
+    "path": "/opt/host/vnf/austinov/bole-native-ar-fsum-control-v1/INPUTS.json",
+    "bytes": 7784,
+    "sha256": "8cc92215f51a32ba948a30c66e37fcb1af1f0d2de6cd0bb19df01426a2654619"
+  },
+  "UNIT_TERMINAL.json": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_FSUM_V1_SYSTEMD_TERMINAL.json",
+    "bytes": 428,
+    "sha256": "3f0ad3fe9b1f0f812555200f5b5e2f85939bdc680f825964d1a9389ab6a10839"
+  },
+  "MAIN-LOCK.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/MAIN-LOCK.json",
+    "bytes": 350,
+    "sha256": "085b49ced2b8cfb05e80dda12226aa75f9418b056b15127e4d7cd962c12564ab"
+  },
+  "PRIVATE_NAMESPACE.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/PRIVATE_NAMESPACE.json",
+    "bytes": 1955,
+    "sha256": "81c0f6e4d502916b109e2274dbe17ab6bf0d62baec6e190202ae87bc867a434f"
+  },
+  "SOURCE-MAPPING.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/SOURCE-MAPPING.json",
+    "bytes": 41410,
+    "sha256": "b793f3dae8bd7d8c6a20ea71fa7cd452afc5558ada1cd3c9bf7e6ac43f6d993b"
+  },
+  "cpu-consumer/OWNED.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/OWNED.json",
+    "bytes": 193061,
+    "sha256": "1df383df553b71f9a084812725b8e77c01f03b22644cc9651aa586400bf2a94c"
+  },
+  "cpu-consumer/GUEST_CPU.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/GUEST_CPU.json",
+    "bytes": 2141,
+    "sha256": "9e7c5fa758b0fce4615eae00873b591396a21e46cb7c7cb73d42846ad653ac98"
+  },
+  "cpu-consumer/FSUM-ORACLE.stdout": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/FSUM-ORACLE.stdout",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "cpu-consumer/FSUM-ORACLE.stderr": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/FSUM-ORACLE.stderr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "cpu-consumer/inspect-1792547918326095280.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/inspect-1792547918326095280.json",
+    "bytes": 785778,
+    "sha256": "6efe0e468696dd88534976da561249035dc23091129f109c53e3d11c20d933e9"
+  },
+  "cpu-consumer/FSUM-ORACLE.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/FSUM-ORACLE.json",
+    "bytes": 4277,
+    "sha256": "535e5a2c3fba8cd058cd9b183d323145a40852c9330fa66f907f0bcfbca7055c"
+  },
+  "cpu-consumer/FSUM-ORACLE-CHILD.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/FSUM-ORACLE-CHILD.json",
+    "bytes": 1793,
+    "sha256": "fb05362dd17eaba9052e5686accef5d393ec9371cc071692be3f348508aabee6"
+  },
+  "cpu-consumer/cleanup.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/cleanup.json",
+    "bytes": 1173,
+    "sha256": "4c771780032e252d6081d3d8ae8812f8355bae990b1b3da0589b42f1fa2088f6"
+  },
+  "cpu-consumer/SAVED-SOURCE-PREFLIGHT.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/SAVED-SOURCE-PREFLIGHT.json",
+    "bytes": 40546,
+    "sha256": "8273f970098da4212675f89e3a6cd782822f4307f48247307351836415c24c2b"
+  },
+  "cpu-consumer/SAVED-SOURCE-PREFLIGHT-CHILD.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/SAVED-SOURCE-PREFLIGHT-CHILD.json",
+    "bytes": 1867,
+    "sha256": "deaa8c6222f3f90d5fcb35fc538e3ed92bb434814db71356997907673cbb3b31"
+  },
+  "cpu-consumer/inspect-1792548097618284810.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/inspect-1792548097618284810.json",
+    "bytes": 786042,
+    "sha256": "d10c8f52211f50f23482d84c44790416da3b54909cd05f59ca6836e821650284"
+  },
+  "cpu-consumer/inspect-1792548112958772770.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/inspect-1792548112958772770.json",
+    "bytes": 785983,
+    "sha256": "43dd8466e6bb3588edb5b8de1affd545aa38db9a74f75741c54c3ed43b9c3250"
+  },
+  "cpu-consumer/stop-retain-1792548112902394580.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/stop-retain-1792548112902394580.json",
+    "bytes": 777,
+    "sha256": "7ce6d878d27d9d9cc3a200172152971c4b26af506b7862ca5f5ca71a4fac802a"
+  },
+  "FSUM-RANK-0.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/FSUM-RANK-0.json",
+    "bytes": 34215,
+    "sha256": "3479e686d1cf0440504e386ec17d073036c971e8bc4edead8de2902669c87cf8"
+  },
+  "FSUM-RANK-1.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/FSUM-RANK-1.json",
+    "bytes": 33477,
+    "sha256": "32781af4632bd4ac7dea996a25d929aba8745a5f2f135b88d6f0b00b346fe31e"
+  },
+  "FSUM-RANK-2.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/FSUM-RANK-2.json",
+    "bytes": 37023,
+    "sha256": "a9423f2e24e054f1477713e57fd0d1cb5dc885a213cc58c718fd08579a84f31f"
+  },
+  "FSUM-RANK-3.json": {
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/cpu-consumer/FSUM-RANK-3.json",
+    "bytes": 33524,
+    "sha256": "aa1cec2197d5693b633f8fbebc5a3403076609c3cd379d0cd483b6b55b14ca9b"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schema": "bole.MAIN-current-next-backup/v19",
+  "observed_epoch": 1792552375.7285016,
+  "host": "chicaihong01/ma",
+  "latest_commit_before_this": "f22c2371b6f8a114f3b1b168571421cddcd24079",
+  "formal_success": false,
+  "G2": {
+    "CPU_v11_actual_PASS": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V11_CPU_READBACK.json",
+      "bytes": 697570,
+      "sha256": "85bbbfad1da334a134d9ed82ac2776c46fdc2da24cf84554f715c58a4a4ec4b7"
+    },
+    "MODEL_v11_failed": {
+      "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11/RESULT.json",
+      "bytes": 1072961,
+      "sha256": "cddfa40ed93a663b5a34102121db4c7bb64df7b92282e18b49c94cc241a0861c"
+    },
+    "failure_audit": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V11_MODEL_FAILURE_AUDIT.json",
+      "bytes": 4402,
+      "sha256": "341003c5c9ec2dc7dcb2576c444c20691b0b75de7060ef0bb5c69997a8075ce3"
+    },
+    "terminal": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V11_MODEL_SYSTEMD_TERMINAL.json",
+      "bytes": 365,
+      "sha256": "bd8e0c1fb22eb04bba46dfa47ce77cbe8633ff023a4c4a54203864a35b3567de"
+    },
+    "fault": "Complete seq1 ACK3307B exceeds unchanged3072; lossless v12 encoding2846B preparing; first rank0STEP mathPASS only",
+    "MODEL_qualification": false
+  },
+  "native_AR": {
+    "prior_fsum_oracle_PASS": {
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/RESULT.json",
+      "bytes": 317648,
+      "sha256": "e6f94628b6996e93c819b8a6d80dc0ee8b54e3a531009c70d6fa4e0b2dc9ec8f"
+    },
+    "original_failed_frames": 16,
+    "original_failed_coords": 32,
+    "replay_inputs": {
+      "path": "/opt/host/vnf/austinov/bole-native-ar-fia-control-v1/INPUTS.json",
+      "bytes": 9615,
+      "sha256": "4ec84d8afc471fdd5bc5fdc26d61f7a1cfbd1a9da46ae654d8e758871c6c600f"
+    },
+    "preparation": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_FIA_V1_PREPARATION.json",
+      "bytes": 434,
+      "sha256": "6f8be16f7f8e210268ff25b35591aadc53b9904bbee625458f43185c9864a28c"
+    },
+    "source_audit": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_FIA_V1_SOURCE_AUDIT.json",
+      "bytes": 503,
+      "sha256": "11b8792b588314293f0c6489c101c88c469be6d12cdf6d6936151f694034501a"
+    },
+    "submission": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_FIA_V1_SUBMITTED.json",
+      "bytes": 2353,
+      "sha256": "3740fad279c0b237923a07369c1cb49d547c5d3e0260cf88c33fcac020d13dc3"
+    },
+    "live_unit": "bole-native-ar-fia-20261020t154710z-v1.service",
+    "diagnostic_pending": true,
+    "numeric_pass": false
+  },
+  "task_HTTP": {
+    "actual_source": {
+      "path": "/opt/host/vnf/austinov/bole-task-http-source-v4/HTTP_SOURCE.json",
+      "bytes": 6380,
+      "sha256": "8d8e72b8c399577742c874c1186824859c5084e237b6f4e5956eca7b871b4f6a"
+    },
+    "model_requests": 0,
+    "full_task_quality": false
+  },
+  "GDN": "v3matchedsource+sourceaudit744 PASS; CPU240/matched+candidate services pending",
+  "G3": "v8source-only prepared. MODEL4Refs remainnull. fixed1024SSE client+independentreader23 localPASS only. No actualtiming/formalowner.",
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MODEL_AUTHORITY.json",
+    "bytes": 764,
+    "sha256": "e3046914e360c6ee5c8abd6e18fcdd2f3afaa733247ad1522e9b4cde6e67dda8"
+  },
+  "next": [
+    "Finish bounded256 singleton diagnostic and independent consumption/cleanup; no numerical promotion",
+    "Freeze G2v12 lossless complete ACK under3072 and same300 software lane, new CPU then MODEL",
+    "Bind real successful MODEL into G3 full1024 and task/runtime/HEtasks-only, GDN bothservices, full15525 OFFONquality and3captureOFFformal1024pairs"
+  ],
+  "push": "Known HTTPS missing credential and SSH22timeout. No identical retry/no credential substitution."
+}
