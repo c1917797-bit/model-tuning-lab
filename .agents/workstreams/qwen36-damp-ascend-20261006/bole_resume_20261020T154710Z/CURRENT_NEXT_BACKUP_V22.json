@@ -1,0 +1,105 @@
+{
+  "HEAD_before": "0e0abdc863f89a5ac088f9b8014dc69141aa21e4",
+  "branch": "work/qwen36-damp-ascend-20261006",
+  "current": {
+    "G2_v12_MODEL": {
+      "HTTP_client_and_stream_consumer_exit0": true,
+      "all4_nine_frames_and_36_ACKs": true,
+      "cleanup": {
+        "bytes": 3772,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V12_MODEL_FAILURE_AUDIT.json",
+        "sha256": "446e665d3c411771af36d1ecb2d8763359d78f0c6cb8ce1e90ff24b6001b291c"
+      },
+      "full_MODEL_qualified": false,
+      "result": {
+        "bytes": 1205776,
+        "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12/RESULT.json",
+        "sha256": "046dd18f22d6e1df8ea138253fedfdc9862f89ba04e61858d2892dae008b7c0d"
+      },
+      "status": "FAILED_FINAL_HTTP_VISIBILITY",
+      "unit": {
+        "bytes": 317,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V12_MODEL_SYSTEMD_TERMINAL.json",
+        "sha256": "170acc3121167f707bb93f11ca2e9e40a15fe08f50d909dfb66e66bb063e7a50"
+      }
+    },
+    "G2_v13": {
+      "CPU_submitter": {
+        "bytes": 3972,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/submit_g2_v13_cpu.py",
+        "sha256": "0d5859e11aa825b1f4381f77ceebe0fe1d63f87b0d7883c95539a0f510004cbd"
+      },
+      "actual_CPU_ref": null,
+      "actual_MODEL_ref": null,
+      "commands": {
+        "bytes": 3620,
+        "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v13/COMMANDS.json",
+        "sha256": "93b6cf7022a491e4d7e048c87b0bc889c18ce822da2f2c82a9111ab4be9623c3"
+      },
+      "host27": {
+        "bytes": 3438,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V13_MAIN_HOST_ACK27.json",
+        "sha256": "5577dc3512486e101fa8a06922cae6d96b295ea1075a0446fa3343db3bbfd740"
+      },
+      "preparation": {
+        "bytes": 1152,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V13_PREPARATION.json",
+        "sha256": "a5cb775a7a75c4123f221841fed9f059df92e855c91488e323df63b47a2843d8"
+      },
+      "prospective_fresh_cases": 349,
+      "source": {
+        "bytes": 994678,
+        "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v13/SOURCE_BOUND.json",
+        "sha256": "545e09b8bd8e598830cd81ab2ba3be6c5a6b775d1d35f263ed6d3519a4145345"
+      },
+      "source_audit": {
+        "bytes": 3618,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V13_SOURCE_AUDIT.json",
+        "sha256": "cba97cf1167c477df8035f83e5d8cde2005dc513f7f1bdcc8d0c2707a47ace64"
+      },
+      "status": "SOURCE_PREPARED_HOST27_AND_AUDIT_PASS_CPU_MODEL_PENDING"
+    },
+    "native_AR_v2": {
+      "NPU_operator_run_qualified": false,
+      "observed_fault": "maps inode/device belongs to current exact backing file",
+      "output_root": "/opt/host/vnf/austinov/run-bole-native-ar-fia-v2",
+      "preparation": {
+        "bytes": 2197,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_FIA_V2_PREPARATION.json",
+        "sha256": "59da212008ae8631804bf5b589f16b97d012456f29cf7e64b432b9d2662976f4"
+      },
+      "source_audit": {
+        "bytes": 858,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_FIA_V2_SOURCE_AUDIT.json",
+        "sha256": "1350ee15f00f1b1b656ac122debf765230181ec700abcf1434a86f6b71ac341d"
+      },
+      "status": "LIVE_FINITE_OWNER_METADATA_FAULT_CLEANUP_PENDING",
+      "submitted": {
+        "bytes": 2355,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_FIA_V2_SUBMITTED.json",
+        "sha256": "866468d3801c65500a5366e85638c45b5f8cc2690bfbdb474e78595930982c83"
+      },
+      "unit": "bole-native-ar-fia-20261020t154710z-v2.service"
+    }
+  },
+  "fixed_cutoff_epoch": 1792597630,
+  "formal_success": false,
+  "local_executor_unavailable": true,
+  "next": [
+    "Wait native AR v2 complete result and systemd terminal; re-open retained helper cleanup and preserve fault.",
+    "Run existing new defaultOFF submit_g2_v13_cpu.py --execute only after actual AR v2 terminal is saved.",
+    "Read back fresh349/parser/cold with new independent CPU349 reader; current runtime agent authoring pure-text assembler.",
+    "Submit G2 v13 MODEL only after independent CPU349 pass, complete all4 stream and final identity/budget gate.",
+    "Prepare G3 from actual remote g3_long_output_v2 only; bind successful future v13 MODEL, never failed12 or inaccessible localv8.",
+    "Diagnose native library maps inside exact no-device owner; preserve actual map/stat evidence, no guard weakening."
+  ],
+  "observed_epoch": 1792557164.663614,
+  "predecessor": {
+    "bytes": 6782,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/CURRENT_NEXT_BACKUP_V21.json",
+    "sha256": "32a7eb42b3bfec260060f413f30cc098fd65d66190af023a9425e9156770201d"
+  },
+  "remote_AWMCP_working": true,
+  "schema": "bole.actual-current-next-backup/v22",
+  "verification_not_persisted": true
+}

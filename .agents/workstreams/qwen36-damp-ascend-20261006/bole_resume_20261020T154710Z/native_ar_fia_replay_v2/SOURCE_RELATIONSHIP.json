@@ -1,0 +1,92 @@
+{
+  "actual_NPU_execution": false,
+  "actual_operator_calls_required": 256,
+  "all_frozen_sources_unchanged": true,
+  "complete_KV_shape": [
+    4584,
+    128,
+    256
+  ],
+  "complete_KV_stride": [
+    32768,
+    256,
+    1
+  ],
+  "fillers": [
+    "all_zero",
+    "finite_alternating"
+  ],
+  "formal_success": false,
+  "library_join": {
+    "CPU_catalog_is_NPU_loaded_proof": false,
+    "actual_alias_canonical_join_required": true,
+    "actual_maps_before_after_each_call_required": true,
+    "basename_prefix_RPATH_exemption": false,
+    "full_SHA_ELF_recomputed_each_call_before_after": true,
+    "stopped_image_catalog_is_loaded_proof": false,
+    "unknown_paths_fail": true
+  },
+  "native_FA_math_qualified": false,
+  "offsets": [
+    2933760,
+    153142272
+  ],
+  "original025_common": {
+    "bytes": 19055,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/ar_owner_common.py",
+    "sha256": "5d0b9034706b9a942a4d7dd10870139959b22dfaab2cebbdddf25ba962e456a4"
+  },
+  "original025_namespace": {
+    "bytes": 4109,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v1/ar_saved_namespace.py",
+    "sha256": "8610a0493909533eed79e3ea98f5d5c3ace326057d64366f75b8aad05980e713"
+  },
+  "original_FP64_violation_coordinates": 32,
+  "original_failure_frames": 16,
+  "original_frame_count": 128,
+  "original_math_bound": "0.001 + 0.01*abs(truth)",
+  "precision_or_inner_precise_changed": false,
+  "schema": "bole.native-ar-FIA-source-relationship/v1",
+  "singleton": {
+    "all_original_controller_method_objects_preserved": true,
+    "device_map_operand": [
+      "enumerate(PHYSICAL)",
+      "enumerate((4,))"
+    ],
+    "full_inverse_and_identity_restore_required": true,
+    "inspect_count_operand": [
+      "len(dev)==(0 if cpu else 7)",
+      "len(dev)==(0 if cpu else 4)"
+    ],
+    "resource_PHYSICAL_preserved": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "visibility": [
+      "0,1,2,3",
+      "0"
+    ]
+  },
+  "source_bound_fsum_predecessor": {
+    "bytes": 317648,
+    "path": "/opt/host/vnf/austinov/run-bole-native-ar-fsum-v1/RESULT.json",
+    "sha256": "e6f94628b6996e93c819b8a6d80dc0ee8b54e3a531009c70d6fa4e0b2dc9ec8f"
+  },
+  "status": "prepared_only_unexecuted",
+  "storage_elements": 303350784,
+  "timing": {
+    "cleanup": 180,
+    "consumer": 900,
+    "deadline_renewal": false,
+    "first_main_clock_before_hashing": true,
+    "metadata": 600,
+    "phase": 3600,
+    "remaining_minimum": 2580,
+    "replay": 900,
+    "same_Joint_controller_clock": true
+  },
+  "unused_arena_reconstruction": true,
+  "valid132_unchanged": true
+}

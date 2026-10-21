@@ -1,0 +1,58 @@
+{
+  "schema": "bole.finite-native-FA-same-operator-diagnostic-submission/v1",
+  "unit": "bole-native-ar-fia-20261020t154710z-v2.service",
+  "argv": [
+    "/usr/bin/systemd-run",
+    "--quiet",
+    "--unit=bole-native-ar-fia-20261020t154710z-v2.service",
+    "--property=Type=exec",
+    "--property=RemainAfterExit=yes",
+    "--property=Restart=no",
+    "--property=RuntimeMaxSec=3900",
+    "--property=TimeoutStopSec=180",
+    "--property=KillSignal=SIGTERM",
+    "--property=CPUAffinity=166",
+    "--property=MemoryMax=512M",
+    "--property=WorkingDirectory=/opt/host/vnf/austinov/model-tuning-lab",
+    "--property=StandardOutput=append:/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native-ar-fia-v2.stdout",
+    "--property=StandardError=append:/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native-ar-fia-v2.stderr",
+    "/usr/bin/flock",
+    "--nonblock",
+    "--no-fork",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock",
+    "/usr/bin/env",
+    "BOLE_NATIVE_FIA_REPLAY_MAIN_ENABLE=1",
+    "DENSE090_EXTERNAL_OUTPUT_ENABLE=1",
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/bole-native-ar-fia-control-v2/replay_cpu_owner.py",
+    "--execute",
+    "--inputs-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/bole-native-ar-fia-control-v2/INPUTS.json\", \"bytes\": 15602, \"sha256\": \"767c1e9209805f1f9eed6a6861482254ae884656e7747674a69dfa82eda1bb92\"}"
+  ],
+  "inputs": {
+    "path": "/opt/host/vnf/austinov/bole-native-ar-fia-control-v2/INPUTS.json",
+    "bytes": 15602,
+    "sha256": "767c1e9209805f1f9eed6a6861482254ae884656e7747674a69dfa82eda1bb92"
+  },
+  "controller": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/submit_native_ar_fia_v2.py",
+    "bytes": 4776,
+    "sha256": "063ab92eafff8c9a33e10aca3b4e4c011e28cdd78f5df6721b72f9dcfb3514d7"
+  },
+  "submit_exit": 0,
+  "stdout": "",
+  "stderr": "",
+  "phase_seconds": 3600,
+  "cleanup_seconds": 180,
+  "physical": [
+    4
+  ],
+  "logical": [
+    0
+  ],
+  "diagnostic_pending": true,
+  "native_FA_math_qualified": false,
+  "formal_success": false
+}
