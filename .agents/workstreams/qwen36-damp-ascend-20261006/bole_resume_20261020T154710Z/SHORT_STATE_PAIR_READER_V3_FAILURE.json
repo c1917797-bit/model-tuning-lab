@@ -1,0 +1,19 @@
+{
+  "schema": "bole.short-state-pair-reader-failure/v1",
+  "scope": "metadata-only independent ON/OFF reader after both bounded TP4 arms completed",
+  "operation_id": "exec-000000000000064e",
+  "exit_code": 1,
+  "reader": "bole_performance_profile_prepare_20261021/successor_layer/state_digest_gate_v3/compare_completed_short.py",
+  "output": "bole_performance_profile_prepare_20261021/successor_layer/SHORT_STATE_PAIR_RESULT_v2.json",
+  "output_written": false,
+  "on_result": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-ON-v2/RESULT.json",
+  "off_result": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-OFF-v2/RESULT.json",
+  "first_failed_predicate": "compare_completed_short.py host() calls R.obj(ref) for summary['CPU_release']; summary supplies path and sha256 without bytes, while R.obj requires exact path, bytes and sha256",
+  "exception": "ValueError: exact bounded whole evidence Ref",
+  "failure_class": "independent-reader/report-contract mismatch before state comparison",
+  "not_a_state_mismatch": true,
+  "paired_state_equality_verified": false,
+  "formal_performance_verified": false,
+  "next_action": "New reader version: check exact summary shape, reopen bounded whole cleanup file, compare computed sha256 with declared summary sha256, then retain every original cleanup and state predicate. Do not rerun NPU arms for this metadata-only fault.",
+  "source_preservation": "No original ON/OFF source, result or raw receipt was modified by this failed reader."
+}

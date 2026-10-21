@@ -50,6 +50,12 @@ neither a new resource lease nor a later-stage PASS.
    cases). Independent original-bound checks passed; P and post-call inputs were
    checked bitwise. This is numerical qualification of that component, not its
    service integration or a measured speedup.
+5. **Separate a completed arm from a completed pair.** The later short-state
+   BOLE ON and OFF v2 arms each finished their bounded TP4 request and
+   all-rank state-receipt checks with no host primary or cleanup error. The
+   arm reports still set model/performance qualification false. An independent
+   ON/OFF reader must join the exact source, HTTP, state and cleanup evidence
+   before state equality can be claimed; two green arm reports do not imply it.
 
 ## Failures that must change preparation
 
@@ -78,6 +84,25 @@ neither a new resource lease nor a later-stage PASS.
   rows. Never relax the scorer to conceal an input-contract defect. Use the
   latest explicit task scope for new runs; do not silently union superseded task
   lists or claim smoke accuracy as full scoring.
+- **Test the real bound MODEL entry, not only its preflight.** The short-state
+  v1 package passed source audit and same-image software preflight, then its
+  actual MODEL entry rejected a streaming client absent from the declared
+  dependency closure before NPU work. The new v2 binds both the client and
+  timing donor exact Refs into dependencies and adds real-entry positive and
+  missing/stale-operand negatives. Collect every runtime-dereferenced operand,
+  require exact closure membership and execute the entry prefix without an
+  owner before device admission. Preserve the pre-NPU failure and use a new
+  source/output identity; a preflight PASS cannot stand in for that entry.
+- **Validate the producer's evidence-reference shape in the independent
+  reader.** After both v2 arms completed, the first short-pair reader stopped
+  before state comparison: cleanup summaries carried path and SHA but no byte
+  count, whereas its strict Ref reader required path, bytes and SHA. This is a
+  reader/report-contract failure, not a state mismatch. In a new reader version,
+  accept only the documented summary shape, reopen the whole file with a
+  bounded read, check its computed SHA against the summary, and then run every
+  original cleanup and state predicate. Retain the failed reader execution;
+  neither loosen the digest equality gate nor rerun the NPU arms for this
+  metadata-only defect.
 
 ## Reusable regression scenarios
 
@@ -89,6 +114,8 @@ neither a new resource lease nor a later-stage PASS.
 | Dynamic backend reflection failure | Check actual method identity/file hashes; negative unknown method; rerun affected timing gate | No samples means no benefit |
 | Device-free reader cannot fit | Repair actual affinity/streaming and joint budget; reuse qualified capture | Needlessly recapture or raise reserves |
 | Prompt/scorer mismatch | Freeze new input identity; exact diff and real tokenizer/scorer checks | Rewrite old inputs or loosen scoring |
+| Real entry missing declared operand | Execute actual bound MODEL prefix plus missing/stale Ref negatives | CPU preflight implies NPU readiness |
+| Paired reader rejects partial cleanup Ref | Reopen exact path, bound bytes, compare declared SHA, then apply all original predicates | Call two completed arms state-equal or recapture NPU |
 
 These checks are future regression requirements, not a claim that new software
 or NPU tests were executed during this documentation update. Reuse the existing
@@ -113,6 +140,14 @@ All paths below are under
 - `GDN_TIMING_V1_FAILURE.json`, `GDN_TIMING_CPU_V2_AUDIT.json`: failure and
   device-free repair, no timing samples.
 - `TASK_SCOPE_RECONCILIATION.json`: latest frozen task scope and missing scores.
+- `bole_performance_profile_prepare_20261021/successor_layer/state_digest_gate_v3/DELIVERY.json`:
+  short-v1 missing-client closure diagnosis and v2 exact source identities.
+  The ON/OFF v2 host results are under
+  `/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-{ON,OFF}-v2/RESULT.json`.
+  The first `compare_completed_short.py` invocation failed at the partial
+  cleanup Ref before comparing states; paired equality and formal performance
+  remain unverified. See `SHORT_STATE_PAIR_READER_V3_FAILURE.json` for the
+  exact operation and first failed predicate.
 
 The ingestion checkpoint records which audit files were read and which raw
 identity checks remain unconfirmed. These are recorded experiment results, not
