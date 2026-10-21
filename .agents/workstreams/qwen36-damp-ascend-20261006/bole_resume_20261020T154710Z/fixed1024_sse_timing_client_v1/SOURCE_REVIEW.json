@@ -1,0 +1,594 @@
+{
+  "NPU": false,
+  "actual_HTTP": false,
+  "actual_MODEL_four_Refs": null,
+  "actual_image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "actual_production_qualification": null,
+  "actual_stopped_copy_CID": "f5d6ffba4d2978ed844e099d03194c18f550e6d4157be12f1801824ec71066fd",
+  "actual_v11_full_SOURCE": {
+    "bytes": 824421,
+    "path": "/workspace/scratch/6d9e7cc63b51/g2_review_v11_source/SOURCE_BOUND.json",
+    "sha256": "0cb8a78ee572778434b7b64f494fa42de46cdf4561c235effce3440a8b294f01"
+  },
+  "after_inspect_ref": {
+    "bytes": 710564,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/task_http_runtime_sources_v3/AFTER_INSPECT.json",
+    "sha256": "a2c09447363ca7e2febc747547af6803565e1f6eb860637630c5a4c9ffe24b00"
+  },
+  "before_inspect_ref": {
+    "bytes": 710564,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/task_http_runtime_sources_v3/BEFORE_INSPECT.json",
+    "sha256": "e7a1975560ea6ba1f507903a0474f1b1c8febd61c6006763d2b6f2825875f6c1"
+  },
+  "explicit_streaming_changes_from_current_nonstream_client": [
+    "stream=True",
+    "stream_options.include_usage=True",
+    "echo=False explicitly matches protocol default"
+  ],
+  "fixed_input_recipe_exact": {
+    "actual_tokenizer_required": true,
+    "add_special_tokens": false,
+    "take_first_tokens": 131,
+    "text": "Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. ",
+    "tokenizer": "/models/Qwen3.6-27B"
+  },
+  "fixed_input_recipe_source": {
+    "actual_tokenizer_input_Ref_pending": true,
+    "exact_inputs_function": "def inputs(tokenizer):\n ids=tokenizer.encode('Explain how trees grow. '*256,add_special_tokens=False)\n C.need(len(ids)>=131 and all(type(x)is int and 0<=x<tokenizer.vocab_size for x in ids), 'actual tokenizer IDs, not string lengths')\n return ids[:131]",
+    "full_original_source": {
+      "bytes": 3064,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/g3_long_output_v3/service_client.py",
+      "sha256": "269a3c262205fdb699abda488b0ca3bbdaa2d16281192dd2da509d423ef5b422"
+    }
+  },
+  "formal_success": false,
+  "full_inspect_local_copy_present": false,
+  "protocol_actual_host_snapshot": {
+    "bytes": 21247,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v11/evidence/service_runtime/completion_protocol.py",
+    "sha256": "93c720549f2a9ef217d7c2a60710225c862032517520dd9ba693d4820f55365c"
+  },
+  "protocol_runtime_ref": {
+    "bytes": 21247,
+    "path": "/vllm-workspace/vllm/vllm/entrypoints/openai/completion/protocol.py",
+    "sha256": "93c720549f2a9ef217d7c2a60710225c862032517520dd9ba693d4820f55365c"
+  },
+  "schema": "bole.fixed1024-SSE-actual-installed-source-review/v1",
+  "serving": {
+    "runtime_ref": {
+      "bytes": 27822,
+      "path": "/vllm-workspace/vllm/vllm/entrypoints/openai/completion/serving.py",
+      "sha256": "c67bff55fa29c5f89000c3afdc9c7c66305612b13a8a1d85976e5872cee086d7"
+    },
+    "snapshot_ref": {
+      "bytes": 27822,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/task_http_runtime_sources_v3/completion_serving.py",
+      "sha256": "c67bff55fa29c5f89000c3afdc9c7c66305612b13a8a1d85976e5872cee086d7"
+    }
+  },
+  "snapshot_closure_local": {
+    "bytes": 7574,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/references/NATIVE_INDEX.json",
+    "sha256": "c928f1d9d9240ee07e18895628cab916c4d64ab9e720b9819830d794fafdb18e"
+  },
+  "snapshot_copy_receipt_local": {
+    "bytes": 7053,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/references/NATIVE_COPY_RECEIPT.json",
+    "sha256": "60758ecec7b80235ce6aa645b826b48a38b2502ceac34ec129b0159d937583ec"
+  },
+  "source_anchors": {
+    "completion_protocol.py": {
+      "exact_lines": [
+        {
+          "line": 145,
+          "text": "    return_token_ids: bool | None = Field("
+        },
+        {
+          "line": 146,
+          "text": "        default=None,"
+        },
+        {
+          "line": 147,
+          "text": "        description=("
+        },
+        {
+          "line": 148,
+          "text": "            \"If specified, the result will include token IDs alongside the \""
+        },
+        {
+          "line": 149,
+          "text": "            \"generated text. In streaming mode, prompt_token_ids is included \""
+        },
+        {
+          "line": 150,
+          "text": "            \"only in the first chunk, and token_ids contains the delta tokens \""
+        },
+        {
+          "line": 151,
+          "text": "            \"for each chunk. This is useful for debugging or when you \""
+        },
+        {
+          "line": 152,
+          "text": "            \"need to map generated text back to input tokens.\""
+        },
+        {
+          "line": 153,
+          "text": "        ),"
+        },
+        {
+          "line": 154,
+          "text": "    )"
+        },
+        {
+          "line": 335,
+          "text": "            spaces_between_special_tokens=self.spaces_between_special_tokens,"
+        },
+        {
+          "line": 336,
+          "text": "            include_stop_str_in_output=self.include_stop_str_in_output,"
+        },
+        {
+          "line": 337,
+          "text": "            output_kind=RequestOutputKind.DELTA"
+        },
+        {
+          "line": 338,
+          "text": "            if self.stream"
+        },
+        {
+          "line": 339,
+          "text": "            else RequestOutputKind.FINAL_ONLY,"
+        },
+        {
+          "line": 340,
+          "text": "            structured_outputs=self.structured_outputs,"
+        },
+        {
+          "line": 341,
+          "text": "            logit_bias=self.logit_bias,"
+        },
+        {
+          "line": 342,
+          "text": "            allowed_token_ids=self.allowed_token_ids,"
+        },
+        {
+          "line": 343,
+          "text": "            extra_args=extra_args or None,"
+        },
+        {
+          "line": 527,
+          "text": "class CompletionResponseStreamChoice(OpenAIBaseModel):"
+        },
+        {
+          "line": 528,
+          "text": "    index: int"
+        },
+        {
+          "line": 529,
+          "text": "    text: str"
+        },
+        {
+          "line": 530,
+          "text": "    logprobs: CompletionLogProbs | None = None"
+        },
+        {
+          "line": 531,
+          "text": "    finish_reason: str | None = None"
+        },
+        {
+          "line": 532,
+          "text": "    stop_reason: int | str | None = Field("
+        },
+        {
+          "line": 533,
+          "text": "        default=None,"
+        },
+        {
+          "line": 534,
+          "text": "        description=("
+        },
+        {
+          "line": 535,
+          "text": "            \"The stop string or token id that caused the completion \""
+        },
+        {
+          "line": 536,
+          "text": "            \"to stop, None if the completion finished for some other reason \""
+        },
+        {
+          "line": 537,
+          "text": "            \"including encountering the EOS token\""
+        },
+        {
+          "line": 538,
+          "text": "        ),"
+        },
+        {
+          "line": 539,
+          "text": "    )"
+        },
+        {
+          "line": 540,
+          "text": "    # not part of the OpenAI spec but for tracing the tokens"
+        },
+        {
+          "line": 541,
+          "text": "    # prompt tokens is put into choice to align with CompletionResponseChoice"
+        },
+        {
+          "line": 542,
+          "text": "    prompt_token_ids: list[int] | None = None"
+        },
+        {
+          "line": 543,
+          "text": "    token_ids: list[int] | None = None"
+        },
+        {
+          "line": 544,
+          "text": ""
+        },
+        {
+          "line": 545,
+          "text": ""
+        },
+        {
+          "line": 546,
+          "text": "class CompletionStreamResponse(OpenAIBaseModel):"
+        },
+        {
+          "line": 547,
+          "text": "    id: str = Field(default_factory=lambda: f\"cmpl-{random_uuid()}\")"
+        },
+        {
+          "line": 548,
+          "text": "    object: str = \"text_completion\""
+        },
+        {
+          "line": 549,
+          "text": "    created: int = Field(default_factory=lambda: int(time.time()))"
+        },
+        {
+          "line": 550,
+          "text": "    model: str"
+        },
+        {
+          "line": 551,
+          "text": "    choices: list[CompletionResponseStreamChoice]"
+        },
+        {
+          "line": 552,
+          "text": "    usage: UsageInfo | None = Field(default=None)"
+        },
+        {
+          "line": 553,
+          "text": "    # Set only on the final chunk of a stream to mirror non-streaming responses"
+        },
+        {
+          "line": 554,
+          "text": "    # without the per-chunk serialization overhead."
+        },
+        {
+          "line": 555,
+          "text": "    system_fingerprint: str | None = None"
+        }
+      ],
+      "full_source": {
+        "bytes": 21247,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/references/completion_protocol.py",
+        "sha256": "93c720549f2a9ef217d7c2a60710225c862032517520dd9ba693d4820f55365c"
+      }
+    },
+    "completion_serving.py": {
+      "exact_lines": [
+        {
+          "line": 224,
+          "text": "        if request.stream:"
+        },
+        {
+          "line": 225,
+          "text": "            return self.completion_stream_generator("
+        },
+        {
+          "line": 226,
+          "text": "                request,"
+        },
+        {
+          "line": 227,
+          "text": "                engine_inputs,"
+        },
+        {
+          "line": 228,
+          "text": "                result_generator,"
+        },
+        {
+          "line": 229,
+          "text": "                request_id,"
+        },
+        {
+          "line": 230,
+          "text": "                created_time,"
+        },
+        {
+          "line": 231,
+          "text": "                model_name,"
+        },
+        {
+          "line": 232,
+          "text": "                num_prompts=num_prompts,"
+        },
+        {
+          "line": 233,
+          "text": "                tokenizer=tokenizer,"
+        },
+        {
+          "line": 234,
+          "text": "                request_metadata=request_metadata,"
+        },
+        {
+          "line": 235,
+          "text": "            )"
+        },
+        {
+          "line": 398,
+          "text": "                        id=request_id,"
+        },
+        {
+          "line": 399,
+          "text": "                        object=\"text_completion\","
+        },
+        {
+          "line": 400,
+          "text": "                        created=created_time,"
+        },
+        {
+          "line": 401,
+          "text": "                        model=model_name,"
+        },
+        {
+          "line": 402,
+          "text": "                        choices=["
+        },
+        {
+          "line": 403,
+          "text": "                            CompletionResponseStreamChoice("
+        },
+        {
+          "line": 404,
+          "text": "                                index=i,"
+        },
+        {
+          "line": 405,
+          "text": "                                text=delta_text,"
+        },
+        {
+          "line": 406,
+          "text": "                                logprobs=logprobs,"
+        },
+        {
+          "line": 407,
+          "text": "                                finish_reason=finish_reason,"
+        },
+        {
+          "line": 408,
+          "text": "                                stop_reason=stop_reason,"
+        },
+        {
+          "line": 409,
+          "text": "                                prompt_token_ids=prompt_token_ids_to_return,"
+        },
+        {
+          "line": 410,
+          "text": "                                token_ids=("
+        },
+        {
+          "line": 411,
+          "text": "                                    as_list(output.token_ids)"
+        },
+        {
+          "line": 412,
+          "text": "                                    if request.return_token_ids"
+        },
+        {
+          "line": 413,
+          "text": "                                    else None"
+        },
+        {
+          "line": 414,
+          "text": "                                ),"
+        },
+        {
+          "line": 415,
+          "text": "                            )"
+        },
+        {
+          "line": 416,
+          "text": "                        ],"
+        },
+        {
+          "line": 417,
+          "text": "                    )"
+        },
+        {
+          "line": 418,
+          "text": "                    # Stamp on terminal chunk only when no trailing usage chunk"
+        },
+        {
+          "line": 419,
+          "text": "                    # will follow (that one is the true final message)."
+        },
+        {
+          "line": 420,
+          "text": "                    if ("
+        },
+        {
+          "line": 421,
+          "text": "                        not include_usage"
+        },
+        {
+          "line": 422,
+          "text": "                        and self.system_fingerprint is not None"
+        },
+        {
+          "line": 423,
+          "text": "                        and finish_reason is not None"
+        },
+        {
+          "line": 424,
+          "text": "                    ):"
+        },
+        {
+          "line": 425,
+          "text": "                        chunk.system_fingerprint = self.system_fingerprint"
+        },
+        {
+          "line": 426,
+          "text": "                    if include_continuous_usage:"
+        },
+        {
+          "line": 427,
+          "text": "                        prompt_tokens = num_prompt_tokens[prompt_idx]"
+        },
+        {
+          "line": 428,
+          "text": "                        completion_tokens = previous_num_tokens[i]"
+        },
+        {
+          "line": 429,
+          "text": "                        chunk.usage = UsageInfo("
+        },
+        {
+          "line": 430,
+          "text": "                            prompt_tokens=prompt_tokens,"
+        },
+        {
+          "line": 431,
+          "text": "                            completion_tokens=completion_tokens,"
+        },
+        {
+          "line": 432,
+          "text": "                            total_tokens=prompt_tokens + completion_tokens,"
+        },
+        {
+          "line": 433,
+          "text": "                        )"
+        },
+        {
+          "line": 434,
+          "text": ""
+        },
+        {
+          "line": 435,
+          "text": "                    response_json = chunk.model_dump_json(exclude_unset=True)"
+        },
+        {
+          "line": 436,
+          "text": "                    yield f\"data: {response_json}\\n\\n\""
+        },
+        {
+          "line": 451,
+          "text": "            if include_usage:"
+        },
+        {
+          "line": 452,
+          "text": "                final_usage_chunk = CompletionStreamResponse("
+        },
+        {
+          "line": 453,
+          "text": "                    id=request_id,"
+        },
+        {
+          "line": 454,
+          "text": "                    created=created_time,"
+        },
+        {
+          "line": 455,
+          "text": "                    model=model_name,"
+        },
+        {
+          "line": 456,
+          "text": "                    choices=[],"
+        },
+        {
+          "line": 457,
+          "text": "                    usage=final_usage_info,"
+        },
+        {
+          "line": 458,
+          "text": "                    system_fingerprint=self.system_fingerprint,"
+        },
+        {
+          "line": 459,
+          "text": "                )"
+        },
+        {
+          "line": 460,
+          "text": "                final_usage_data = final_usage_chunk.model_dump_json("
+        },
+        {
+          "line": 461,
+          "text": "                    exclude_unset=False, exclude_none=True"
+        },
+        {
+          "line": 462,
+          "text": "                )"
+        },
+        {
+          "line": 463,
+          "text": "                yield f\"data: {final_usage_data}\\n\\n\""
+        },
+        {
+          "line": 464,
+          "text": ""
+        },
+        {
+          "line": 465,
+          "text": "            # report to FastAPI middleware aggregate usage across all choices"
+        },
+        {
+          "line": 466,
+          "text": "            request_metadata.final_usage_info = final_usage_info"
+        },
+        {
+          "line": 467,
+          "text": ""
+        },
+        {
+          "line": 468,
+          "text": "        except GenerationError as e:"
+        },
+        {
+          "line": 469,
+          "text": "            yield f\"data: {self._convert_generation_error_to_streaming_response(e)}\\n\\n\""
+        },
+        {
+          "line": 470,
+          "text": "        except Exception as e:"
+        },
+        {
+          "line": 471,
+          "text": "            logger.exception(\"Error in completion stream generator.\")"
+        },
+        {
+          "line": 472,
+          "text": "            data = self.create_streaming_error_response(e)"
+        },
+        {
+          "line": 473,
+          "text": "            yield f\"data: {data}\\n\\n\""
+        },
+        {
+          "line": 474,
+          "text": "        yield \"data: [DONE]\\n\\n\""
+        }
+      ],
+      "full_source": {
+        "bytes": 27822,
+        "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/references/completion_serving.py",
+        "sha256": "c67bff55fa29c5f89000c3afdc9c7c66305612b13a8a1d85976e5872cee086d7"
+      }
+    }
+  },
+  "status": "SOURCE_ONLY",
+  "timing_boundary_inference": "Assign a completed SSE event the receive_monotonic_ns of the actual read1 chunk containing its terminal blank line; every delta token shares that event time, without interpolation.",
+  "wire_inference": "Actual request.stream selects completion_stream_generator; return_token_ids yields output.token_ids as per-event delta in choices[0].token_ids; optional prompt_token_ids is separate; usage choices=[] and [DONE] contain no generated tokens."
+}

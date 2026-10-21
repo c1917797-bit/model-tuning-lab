@@ -1,0 +1,630 @@
+{
+  "schema": "bole.GDN-v4-exact-fixture-inverse/v1",
+  "old_source": {
+    "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/SOURCE_BOUND.json",
+    "bytes": 112215,
+    "sha256": "f1c1c96aee26844daaf538d516bd65791d83ada35737f3b10aef198329d69e88"
+  },
+  "old_test": {
+    "bytes": 9509,
+    "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_gdn_probe_pure.py",
+    "sha256": "350f7bead9ca6b01098299cc28973d2b97e078d300ee55209cb4606504f646fa"
+  },
+  "new_test": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_service_probe_g1_v4/test_gdn_probe_pure.py",
+    "bytes": 9539,
+    "sha256": "70b1c1980aeb34dc9f2be91af545589018ecdecac68b44f5bbe63151461bd3ea"
+  },
+  "before_text": "\"\"\"Pure source/control tests; no tensor/native import or admission exercised.\"\"\"\nimport ast\nimport copy\nimport hashlib\nimport importlib.util\nimport json\nimport os\nfrom pathlib import Path\nimport subprocess\nimport sys\nimport tempfile\nfrom types import SimpleNamespace as NS\nimport unittest\nfrom unittest.mock import patch\n\nP=Path(__file__).resolve().parent\ndef module(name,file):\n    s=importlib.util.spec_from_file_location(name,P/file);v=importlib.util.module_from_spec(s);s.loader.exec_module(v);return v\nQ=module('_probe_pure_contract','gdn_probe_contract.py');R=module('_probe_pure_runtime','gdn_probe_runtime.py')\nB=module('_probe_pure_builder','prepare_gdn_probe.py')\n\nclass C:\n    need=staticmethod(B.need);ref=staticmethod(B.ref);checked=staticmethod(B.checked);obj=staticmethod(B.obj);write=staticmethod(B.write)\n\ndef report():\n    return dict(schema='bole.g1-cold-aggregate-software/v1',source={'unit-source':1},tests=231,all_tests_passed=True,\n        complete_readset_audited=True,NPU=False,actual_scheduler_executed=False,actual_cold_cli=[dict(exit_code=0)for _ in range(10)])\n\n\nclass Tests(unittest.TestCase):\n    def test_trailing_runtime_log_preserved_unique_schema_not_last_line(self):\n        v=report();text='prelude log\\n'+json.dumps(v)+'\\n[INFO] process group destroyed\\n'\n        self.assertEqual(Q.json_report(C,text,v['source'],231),v)\n\n    def test_duplicate_stale_missing_wrong_count_failure_reports_reject(self):\n        v=report()\n        for text in ('runtime shutdown only',json.dumps(v)+'\\n'+json.dumps(v),json.dumps(dict(v,source={'stale':1})),\n                     json.dumps(dict(v,tests=214)),json.dumps(dict(v,all_tests_passed=False)),\n                     json.dumps(dict(v,actual_cold_cli=[dict(exit_code=0)]))):\n            with self.assertRaises(ValueError):Q.json_report(C,text,v['source'],231)\n\n    def test_synthetic_CPU_handoff_join_and_wrong_terminal_reject(self):\n        # CPU metadata unit fixtures only. The source token is deliberately\n        # not a Ref3, so this cannot admit the real source/replay/model gate.\n        with tempfile.TemporaryDirectory(dir=P)as directory:\n            root=Path(directory);v=report();cid='1'*64\n            (root/'SOFTWARE.stdout').write_text(json.dumps(v)+'\\n[INFO] shutdown complete\\n')\n            (root/'SOFTWARE.stderr').write_text('unit metadata, no tensor runtime\\n')\n            inspect=C.write(root/'inspect.json',dict(stdout=json.dumps([dict(Id=cid,Image=Q.IMAGE,\n                              State=dict(Running=False),HostConfig=dict(Devices=[]))])))\n            release=C.write(root/'release.json',dict(container=cid,stopped=True,retained=True,errors=[],after_inspect=inspect))\n            child=dict(exit_code=0,child_termination_observed=True,stdout_ref=C.ref(root/'SOFTWARE.stdout'),\n                       stderr_ref=C.ref(root/'SOFTWARE.stderr'),requested_argv=['/usr/bin/docker','exec',cid,'unit-python','/unit/service_entry.py','--software'])\n            childref=C.write(root/'child.json',child);m=dict(service_required_sameimage_software_cases=231,\n                                                         files={'service_entry.py':dict(path='/unit/service_entry.py')})\n            r=Q.materialize_software(C,root,childref,release,v['source'],m)\n            self.assertEqual(Q.software(C,r,v['source'],m),v)\n            gate=C.obj(r);self.assertFalse(gate['actual_NPU_admission_granted'])\n            badchild=C.write(root/'badchild.json',dict(child,exit_code=3))\n            bad=C.write(root/'badgate.json',dict(gate,child=badchild))\n            with self.assertRaises(ValueError):Q.software(C,bad,v['source'],m)\n\n    def test_explicit_default_off_and_cold_builder(self):\n        with patch.dict(os.environ,{},clear=True):self.assertFalse(R.install(object(),object(),C,{})['enabled'])\n        for args in([],['--help']):\n            r=subprocess.run([sys.executable,'-I','-B',str(P/'prepare_gdn_probe.py'),*args],capture_output=True,text=True,timeout=10)\n            self.assertEqual(r.returncode,0,r.stderr)\n            if not args:self.assertFalse(json.loads(r.stdout)['enabled'])\n        r=subprocess.run([sys.executable,'-I','-B',str(P/'prepare_gdn_probe.py'),'--execute'],capture_output=True,text=True,timeout=10)\n        self.assertNotEqual(r.returncode,0)\n\n    def test_exact_ref_skip_only_and_drift_fails(self):\n        installed=dict(path='/vllm-workspace/unit-absent.py',bytes=4,sha256='1'*64)\n        self.assertEqual(R.collect(C,[installed],installed_refs=[installed]),[])\n        with self.assertRaises((ValueError,FileNotFoundError)):R.collect(C,[dict(installed,bytes=5)],installed_refs=[installed])\n        with tempfile.TemporaryDirectory(dir=P)as directory:\n            p=Path(directory)/'fixture';p.write_text('unit\\n');r=C.ref(p)\n            self.assertEqual(R.collect(C,[r,r]),[r])\n            with self.assertRaises(ValueError):R.collect(C,[r,dict(r,sha256='2'*64)])\n\n    def test_actual_overlay_source_boundaries_and_unchanged_math(self):\n        # Host donor bytes are provided only during MAIN assembly. Locally the\n        # exact installed-source manifest and matching copied primary files\n        # are available; no host paths or fake model owner are constructed.\n        if (P.parents[1]/'g1_review_v2/qualification/SOURCE_BOUND.json').is_file():\n            W=P.parents[1];on=json.loads((W/'g1_review_v2/qualification/SOURCE_BOUND.json').read_bytes())\n            paths={n:W/'bole_service_proposals/g1_multi_request'/n for n in('service_bridge.py','server090.py')}\n            paths.update({'contract090.py':W/'g1_review_v2/contract090.py','host_service.py':W/'bole_service_proposals/g1_repair_v2/host_service.py',\n                          'command_contract.py':W/'bole_service_proposals/g1_repair_v2/command_contract.py'})\n            donor=copy.deepcopy(on)\n            for n,p in paths.items():\n                r=C.ref(p);self.assertEqual((r['bytes'],r['sha256']),(on['files'][n]['bytes'],on['files'][n]['sha256']));donor['files'][n]=r\n        else:\n            # In the assembled actual packet, source-derived new hook operands\n            # must have exact whole-file G1 inverses to real donor sources.\n            m=json.loads((P/'SOURCE_TEMPLATE.json').read_bytes());donor=C.obj(C.obj(m['gdn_service_extension']['source'])['prior_G1']['source'])\n        changed=B.overlays(donor,Path('/opt/host/vnf/austinov/run-bole-gdn-g1-probe-UNIT'))\n        before=ast.parse(C.checked(donor['files']['service_bridge.py']).read_bytes());after=ast.parse(changed['service_bridge.py'])\n        f=lambda tree,name:ast.dump(next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name==name),include_attributes=False)\n        self.assertEqual(f(before,'_fa'),f(after,'_fa'))\n        self.assertIn('GP.handoff_readset',changed['host_service.py'])\n        self.assertIn(\"'--gdn-software-gate-ref'\",changed['host_service.py'])\n        self.assertIn(\"'--owned-probe-consumer'\",changed['host_service.py'])\n        for n,text in changed.items():compile(ast.parse(text),n,'exec')\n        with self.assertRaises(ValueError):B.overlays(dict(donor,output_root='/unexpected-output'),Path('/new'))\n\n    def test_owned_bridge_restore_restores_seam_then_exact_original(self):\n        calls=[]\n        class Bridge:\n            def restore(self):calls.append('native-bridge');return 'native-return'\n        class Control:\n            def restore(self):calls.append('seam')\n        control=Control();seam=NS(Controller=Control,install=lambda *a,**k:control)\n        fake=NS(software=lambda *a:None,load=lambda *a:seam)\n        bridge=Bridge();m=dict(root='/UNIT',files={'gdn_probe_runtime.py':{'unit':1},'gdn_service_seam.py':{'unit-seam':1}},gdn_service_extension={'source':{'extension':1}});bridge.own_source=m\n        class Guard:\n            need=staticmethod(C.need)\n            ref=staticmethod(lambda p:{'unit':1})\n            obj=staticmethod(lambda r:m)\n        with patch.object(R,'helper',return_value=fake),patch.dict(os.environ,{'BOLE_GDN_SERVICE_FUSION_ENABLE':'1','BOLE_GDN_SERVICE_SOFTWARE_REF':'{}'}):\n            R.install(bridge,object(),Guard,m)\n        self.assertIn('restore',bridge.__dict__)\n        self.assertEqual(bridge.restore(),'native-return');self.assertEqual(calls,['seam','native-bridge']);self.assertNotIn('restore',bridge.__dict__)\n\n    def test_failed_abort_preserves_original_exception(self):\n        primary=ValueError('original control fault')\n        def fail(ctx):raise RuntimeError('private abort control fault')\n        R.abort(NS(_bole_gdn_extension=NS(abort=fail)),object(),primary)\n        self.assertEqual(str(primary),'original control fault');self.assertIn('private abort',primary.__notes__[0])\n\n    def test_runtime_modules_never_import_tensors_at_module_load(self):\n        script=\"import importlib.util,sys; from pathlib import Path; p=Path(sys.argv[1]); \" + \\\n            \"s=importlib.util.spec_from_file_location('cold',p); v=importlib.util.module_from_spec(s); s.loader.exec_module(v); \" + \\\n            \"assert not any(k.split('.')[0] in ('torch','torch_npu','triton','vllm','vllm_ascend') for k in sys.modules)\"\n        for name in('gdn_probe_contract.py','gdn_probe_runtime.py','gdn_service_gate.py','gdn_service_seam.py'):\n            r=subprocess.run([sys.executable,'-I','-B','-c',script,str(P/name)],capture_output=True,text=True,timeout=10)\n            self.assertEqual(r.returncode,0,r.stderr)\n        for name in B.ADDED:compile(ast.parse((P/name).read_bytes()),str(P/name),'exec')\n\n\nif __name__=='__main__':unittest.main()\n",
+  "after_text": "\"\"\"Pure source/control tests; no tensor/native import or admission exercised.\"\"\"\nimport ast\nimport copy\nimport hashlib\nimport importlib.util\nimport json\nimport os\nfrom pathlib import Path\nimport subprocess\nimport sys\nimport tempfile\nfrom types import SimpleNamespace as NS\nimport unittest\nfrom unittest.mock import patch\n\nP=Path(__file__).resolve().parent\ndef module(name,file):\n    s=importlib.util.spec_from_file_location(name,P/file);v=importlib.util.module_from_spec(s);s.loader.exec_module(v);return v\nQ=module('_probe_pure_contract','gdn_probe_contract.py');R=module('_probe_pure_runtime','gdn_probe_runtime.py')\nB=module('_probe_pure_builder','prepare_gdn_probe.py')\n\nclass C:\n    need=staticmethod(B.need);ref=staticmethod(B.ref);checked=staticmethod(B.checked);obj=staticmethod(B.obj);write=staticmethod(B.write)\n\ndef report():\n    return dict(schema='bole.g1-cold-aggregate-software/v1',source={'unit-source':1},tests=231,all_tests_passed=True,\n        complete_readset_audited=True,NPU=False,actual_scheduler_executed=False,actual_cold_cli=[dict(exit_code=0)for _ in range(10)])\n\n\nclass Tests(unittest.TestCase):\n    def test_trailing_runtime_log_preserved_unique_schema_not_last_line(self):\n        v=report();text='prelude log\\n'+json.dumps(v)+'\\n[INFO] process group destroyed\\n'\n        self.assertEqual(Q.json_report(C,text,v['source'],231),v)\n\n    def test_duplicate_stale_missing_wrong_count_failure_reports_reject(self):\n        v=report()\n        for text in ('runtime shutdown only',json.dumps(v)+'\\n'+json.dumps(v),json.dumps(dict(v,source={'stale':1})),\n                     json.dumps(dict(v,tests=214)),json.dumps(dict(v,all_tests_passed=False)),\n                     json.dumps(dict(v,actual_cold_cli=[dict(exit_code=0)]))):\n            with self.assertRaises(ValueError):Q.json_report(C,text,v['source'],231)\n\n    def test_synthetic_CPU_handoff_join_and_wrong_terminal_reject(self):\n        # CPU metadata unit fixtures only. The source token is deliberately\n        # not a Ref3, so this cannot admit the real source/replay/model gate.\n        with tempfile.TemporaryDirectory(dir='/adakv-results')as directory:\n            root=Path(directory);v=report();cid='1'*64\n            (root/'SOFTWARE.stdout').write_text(json.dumps(v)+'\\n[INFO] shutdown complete\\n')\n            (root/'SOFTWARE.stderr').write_text('unit metadata, no tensor runtime\\n')\n            inspect=C.write(root/'inspect.json',dict(stdout=json.dumps([dict(Id=cid,Image=Q.IMAGE,\n                              State=dict(Running=False),HostConfig=dict(Devices=[]))])))\n            release=C.write(root/'release.json',dict(container=cid,stopped=True,retained=True,errors=[],after_inspect=inspect))\n            child=dict(exit_code=0,child_termination_observed=True,stdout_ref=C.ref(root/'SOFTWARE.stdout'),\n                       stderr_ref=C.ref(root/'SOFTWARE.stderr'),requested_argv=['/usr/bin/docker','exec',cid,'unit-python','/unit/service_entry.py','--software'])\n            childref=C.write(root/'child.json',child);m=dict(service_required_sameimage_software_cases=231,\n                                                         files={'service_entry.py':dict(path='/unit/service_entry.py')})\n            r=Q.materialize_software(C,root,childref,release,v['source'],m)\n            self.assertEqual(Q.software(C,r,v['source'],m),v)\n            gate=C.obj(r);self.assertFalse(gate['actual_NPU_admission_granted'])\n            badchild=C.write(root/'badchild.json',dict(child,exit_code=3))\n            bad=C.write(root/'badgate.json',dict(gate,child=badchild))\n            with self.assertRaises(ValueError):Q.software(C,bad,v['source'],m)\n\n    def test_explicit_default_off_and_cold_builder(self):\n        with patch.dict(os.environ,{},clear=True):self.assertFalse(R.install(object(),object(),C,{})['enabled'])\n        for args in([],['--help']):\n            r=subprocess.run([sys.executable,'-I','-B',str(P/'prepare_gdn_probe.py'),*args],capture_output=True,text=True,timeout=10)\n            self.assertEqual(r.returncode,0,r.stderr)\n            if not args:self.assertFalse(json.loads(r.stdout)['enabled'])\n        r=subprocess.run([sys.executable,'-I','-B',str(P/'prepare_gdn_probe.py'),'--execute'],capture_output=True,text=True,timeout=10)\n        self.assertNotEqual(r.returncode,0)\n\n    def test_exact_ref_skip_only_and_drift_fails(self):\n        installed=dict(path='/vllm-workspace/unit-absent.py',bytes=4,sha256='1'*64)\n        self.assertEqual(R.collect(C,[installed],installed_refs=[installed]),[])\n        with self.assertRaises((ValueError,FileNotFoundError)):R.collect(C,[dict(installed,bytes=5)],installed_refs=[installed])\n        with tempfile.TemporaryDirectory(dir='/adakv-results')as directory:\n            p=Path(directory)/'fixture';p.write_text('unit\\n');r=C.ref(p)\n            self.assertEqual(R.collect(C,[r,r]),[r])\n            with self.assertRaises(ValueError):R.collect(C,[r,dict(r,sha256='2'*64)])\n\n    def test_actual_overlay_source_boundaries_and_unchanged_math(self):\n        # Host donor bytes are provided only during MAIN assembly. Locally the\n        # exact installed-source manifest and matching copied primary files\n        # are available; no host paths or fake model owner are constructed.\n        if (P.parents[1]/'g1_review_v2/qualification/SOURCE_BOUND.json').is_file():\n            W=P.parents[1];on=json.loads((W/'g1_review_v2/qualification/SOURCE_BOUND.json').read_bytes())\n            paths={n:W/'bole_service_proposals/g1_multi_request'/n for n in('service_bridge.py','server090.py')}\n            paths.update({'contract090.py':W/'g1_review_v2/contract090.py','host_service.py':W/'bole_service_proposals/g1_repair_v2/host_service.py',\n                          'command_contract.py':W/'bole_service_proposals/g1_repair_v2/command_contract.py'})\n            donor=copy.deepcopy(on)\n            for n,p in paths.items():\n                r=C.ref(p);self.assertEqual((r['bytes'],r['sha256']),(on['files'][n]['bytes'],on['files'][n]['sha256']));donor['files'][n]=r\n        else:\n            # In the assembled actual packet, source-derived new hook operands\n            # must have exact whole-file G1 inverses to real donor sources.\n            m=json.loads((P/'SOURCE_TEMPLATE.json').read_bytes());donor=C.obj(C.obj(m['gdn_service_extension']['source'])['prior_G1']['source'])\n        changed=B.overlays(donor,Path('/opt/host/vnf/austinov/run-bole-gdn-g1-probe-UNIT'))\n        before=ast.parse(C.checked(donor['files']['service_bridge.py']).read_bytes());after=ast.parse(changed['service_bridge.py'])\n        f=lambda tree,name:ast.dump(next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name==name),include_attributes=False)\n        self.assertEqual(f(before,'_fa'),f(after,'_fa'))\n        self.assertIn('GP.handoff_readset',changed['host_service.py'])\n        self.assertIn(\"'--gdn-software-gate-ref'\",changed['host_service.py'])\n        self.assertIn(\"'--owned-probe-consumer'\",changed['host_service.py'])\n        for n,text in changed.items():compile(ast.parse(text),n,'exec')\n        with self.assertRaises(ValueError):B.overlays(dict(donor,output_root='/unexpected-output'),Path('/new'))\n\n    def test_owned_bridge_restore_restores_seam_then_exact_original(self):\n        calls=[]\n        class Bridge:\n            def restore(self):calls.append('native-bridge');return 'native-return'\n        class Control:\n            def restore(self):calls.append('seam')\n        control=Control();seam=NS(Controller=Control,install=lambda *a,**k:control)\n        fake=NS(software=lambda *a:None,load=lambda *a:seam)\n        bridge=Bridge();m=dict(root='/UNIT',files={'gdn_probe_runtime.py':{'unit':1},'gdn_service_seam.py':{'unit-seam':1}},gdn_service_extension={'source':{'extension':1}});bridge.own_source=m\n        class Guard:\n            need=staticmethod(C.need)\n            ref=staticmethod(lambda p:{'unit':1})\n            obj=staticmethod(lambda r:m)\n        with patch.object(R,'helper',return_value=fake),patch.dict(os.environ,{'BOLE_GDN_SERVICE_FUSION_ENABLE':'1','BOLE_GDN_SERVICE_SOFTWARE_REF':'{}'}):\n            R.install(bridge,object(),Guard,m)\n        self.assertIn('restore',bridge.__dict__)\n        self.assertEqual(bridge.restore(),'native-return');self.assertEqual(calls,['seam','native-bridge']);self.assertNotIn('restore',bridge.__dict__)\n\n    def test_failed_abort_preserves_original_exception(self):\n        primary=ValueError('original control fault')\n        def fail(ctx):raise RuntimeError('private abort control fault')\n        R.abort(NS(_bole_gdn_extension=NS(abort=fail)),object(),primary)\n        self.assertEqual(str(primary),'original control fault');self.assertIn('private abort',primary.__notes__[0])\n\n    def test_runtime_modules_never_import_tensors_at_module_load(self):\n        script=\"import importlib.util,sys; from pathlib import Path; p=Path(sys.argv[1]); \" + \\\n            \"s=importlib.util.spec_from_file_location('cold',p); v=importlib.util.module_from_spec(s); s.loader.exec_module(v); \" + \\\n            \"assert not any(k.split('.')[0] in ('torch','torch_npu','triton','vllm','vllm_ascend') for k in sys.modules)\"\n        for name in('gdn_probe_contract.py','gdn_probe_runtime.py','gdn_service_gate.py','gdn_service_seam.py'):\n            r=subprocess.run([sys.executable,'-I','-B','-c',script,str(P/name)],capture_output=True,text=True,timeout=10)\n            self.assertEqual(r.returncode,0,r.stderr)\n        for name in B.ADDED:compile(ast.parse((P/name).read_bytes()),str(P/name),'exec')\n\n\nif __name__=='__main__':unittest.main()\n",
+  "whole_inverse": true,
+  "test_files": 51,
+  "methods": 240,
+  "unchanged_methods": 238,
+  "changed_methods": [
+    "Tests.test_exact_ref_skip_only_and_drift_fails",
+    "Tests.test_synthetic_CPU_handoff_join_and_wrong_terminal_reject"
+  ],
+  "all_original_test_refs": {
+    "test_cache_budget131r16.py": {
+      "bytes": 8334,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_cache_budget131r16.py",
+      "sha256": "435421adb005e0979318fd339d0378c889da426f015a96e05e7c144acd6045be"
+    },
+    "test_cache_observation.py": {
+      "bytes": 3359,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_cache_observation.py",
+      "sha256": "b5abafc3c8cb644b537dcb5de9ce346a2fc69c4f851a8e929b927dcd95c8f1d1"
+    },
+    "test_cache_registry.py": {
+      "bytes": 5556,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_cache_registry.py",
+      "sha256": "77348d98d19404f937d75b9ab69e32803230d753d690bc4ac791e65d432cfe28"
+    },
+    "test_context_identity.py": {
+      "bytes": 2402,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_context_identity.py",
+      "sha256": "833bda547bbe6933bf9ca3ad4488e2ced7be1a2ce9196cbdbb2486c19ddc24a6"
+    },
+    "test_declared_layout.py": {
+      "bytes": 1322,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_declared_layout.py",
+      "sha256": "8383a9165fd0fb334c23988055447b831981d8763c637f439089d227bc7f66bb"
+    },
+    "test_eligibility.py": {
+      "bytes": 2098,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_eligibility.py",
+      "sha256": "108efa2a8123b7dc689c9c143c7c195297f3241739cbf54951272b69a7291c57"
+    },
+    "test_fa_fp16_boundary.py": {
+      "bytes": 2945,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_fa_fp16_boundary.py",
+      "sha256": "07fa7ad818e8a82b72ac10a6cfe345bde22117ea31ca23acf56ed406826730fe"
+    },
+    "test_fa_mapping131r10.py": {
+      "bytes": 4453,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_fa_mapping131r10.py",
+      "sha256": "409f4cfe90b8a8669aeb474e98bb8320c3f6f3c12b1abcf97b401ae50ccd937c"
+    },
+    "test_fault_receipt.py": {
+      "bytes": 3016,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_fault_receipt.py",
+      "sha256": "0ba5073c8c5b81bc17c236ef9f53e3cebce6dd7f17e9ccf678df7cb29276cab0"
+    },
+    "test_fia_reference131r15.py": {
+      "bytes": 5442,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_fia_reference131r15.py",
+      "sha256": "60ac7b3a5cab398f0f3128056bd3314dd222bde8fbc65a8ba5c6ae9dd9d00659"
+    },
+    "test_frontend_namespace131r18.py": {
+      "bytes": 7349,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_frontend_namespace131r18.py",
+      "sha256": "729d1f988c410c01b8a642182071944132a6167b6964009788fa792af6f1ca3e"
+    },
+    "test_g1_consumer_pure.py": {
+      "bytes": 17374,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_g1_consumer_pure.py",
+      "sha256": "5e5235b496bd46ce554fe46c66f6b64f2d64065e7ef22d7f2d0235179e3447b7"
+    },
+    "test_g1_lifecycle.py": {
+      "bytes": 15466,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_g1_lifecycle.py",
+      "sha256": "62ba120fafb0f84c7d116ef18e12ff36dcd6d841e9fdd7a202daca10ed3b956d"
+    },
+    "test_g1_parent_gate.py": {
+      "bytes": 4391,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_g1_parent_gate.py",
+      "sha256": "5e03259ece71d4dbea7304294158f2e4cd0579f6447334b402fe70e41a05d35b"
+    },
+    "test_g1_repair_v2.py": {
+      "bytes": 4238,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_g1_repair_v2.py",
+      "sha256": "f0086c80c5d76ef150b0953540d7fb934cc54650336e6af0799532f161076319"
+    },
+    "test_gdn_copy_identity.py": {
+      "bytes": 5913,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_gdn_copy_identity.py",
+      "sha256": "58b8a78d150a887484a566ca2b1717f142d96839decadd7fc084e4195cec903d"
+    },
+    "test_gdn_probe_clock.py": {
+      "bytes": 10621,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_gdn_probe_clock.py",
+      "sha256": "a32c82887b2add30605ddac87fccbeef3047b13d5ae2072da43c3508476bc8a6"
+    },
+    "test_gdn_probe_pure.py": {
+      "bytes": 9509,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_gdn_probe_pure.py",
+      "sha256": "350f7bead9ca6b01098299cc28973d2b97e078d300ee55209cb4606504f646fa"
+    },
+    "test_gdn_service_pure.py": {
+      "bytes": 7603,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_gdn_service_pure.py",
+      "sha256": "49fede3ca7fa421e86f10c8fa72e762459ed0451e1eff6e70029c19688c41a56"
+    },
+    "test_layer_slots131r10.py": {
+      "bytes": 3012,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_layer_slots131r10.py",
+      "sha256": "8681c869e2003f05cf191c7faf9e133e76576b7feb6ee7a219e7858435af3622"
+    },
+    "test_live_owner.py": {
+      "bytes": 6604,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_live_owner.py",
+      "sha256": "eca43182fd49aa4fff07f3169b73a149fcb31bdd5061c65811f282a9853c5b12"
+    },
+    "test_logits_observation131r13.py": {
+      "bytes": 2352,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_logits_observation131r13.py",
+      "sha256": "1cabd535902484719abca91df719c9b5a990bbde4c7fcc76b908338330bce4fd"
+    },
+    "test_model_calibration131r12.py": {
+      "bytes": 5186,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_model_calibration131r12.py",
+      "sha256": "e62c7b568396b2f0eee60e99363921001ad905b59fc60a7b80058c45035059c4"
+    },
+    "test_model_entry.py": {
+      "bytes": 8982,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_model_entry.py",
+      "sha256": "72084fcda73cb707e56d1148f107def25a9a4fe3ae1da9eb1f088b8191013807"
+    },
+    "test_mtp_entry.py": {
+      "bytes": 2607,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_mtp_entry.py",
+      "sha256": "d27968644cdad941cedd7dd7cd221e767bbcf2d3c669c48658ca3577a9577d49"
+    },
+    "test_native_ar_boundary.py": {
+      "bytes": 2831,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_native_ar_boundary.py",
+      "sha256": "748539e81e4f781bfab845dc2e6bcf369d9e750251bc00dec40339ee9645aec6"
+    },
+    "test_native_dtype131r13.py": {
+      "bytes": 4905,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_native_dtype131r13.py",
+      "sha256": "20d9cbdeedfcca8c027dd5f6db6be96cbc1fc2e4f5b701e8c4dc2e830aa7e7d9"
+    },
+    "test_native_input.py": {
+      "bytes": 7387,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_native_input.py",
+      "sha256": "dc3180dc6e180bbfd5d8eedf3a1da1c2a857b991e8f17a1324a465418e1fe103"
+    },
+    "test_native_seams.py": {
+      "bytes": 2474,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_native_seams.py",
+      "sha256": "65a5016014e31d89613e3d0a70b8e6eea90597d92ddea0c9940004598aa3d6c8"
+    },
+    "test_observer_race_repair.py": {
+      "bytes": 3107,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_observer_race_repair.py",
+      "sha256": "080983bb975ff61539f9dec221f2d83a35fd5c0b758aadfaaed2bf61b2bda9d3"
+    },
+    "test_output_contract_repair4.py": {
+      "bytes": 3867,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_output_contract_repair4.py",
+      "sha256": "ad6b4c184c19d2eacd7a5606067b9d560ad3de913dd459392185c2e0e7a06999"
+    },
+    "test_output_scan131r8.py": {
+      "bytes": 6587,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_output_scan131r8.py",
+      "sha256": "325d9f1db3c6187ef6181eb57f829e9d2deaa40eed4c049ad772aa979461ead5"
+    },
+    "test_owned_ref131r7.py": {
+      "bytes": 2693,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_owned_ref131r7.py",
+      "sha256": "82709a4df48efda6c7ea31e8dab51a5041ea170f880d81f88f7198fe586fb40c"
+    },
+    "test_owner_name_repair5.py": {
+      "bytes": 3810,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_owner_name_repair5.py",
+      "sha256": "ab80106facec9a7ba074d14f63099e14fe2259e7642f25168930a11ed416326b"
+    },
+    "test_patch_identity.py": {
+      "bytes": 5839,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_patch_identity.py",
+      "sha256": "6472fc06d1e7b188cf718f6a7b7c38b066e177326657a374f7b48c651d600c93"
+    },
+    "test_prefill_tail.py": {
+      "bytes": 4893,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_prefill_tail.py",
+      "sha256": "d0b9424e04fb11b8d8fa376c408bd2d8ef22433903612f6fb638c86abd1ba5d9"
+    },
+    "test_projection_actual_routes.py": {
+      "bytes": 3724,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_projection_actual_routes.py",
+      "sha256": "6faa3b4a071643d97c284ed5467f6c20e0ddcbeeefdc385ed02d8fd266c448f5"
+    },
+    "test_projection_internal.py": {
+      "bytes": 1690,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_projection_internal.py",
+      "sha256": "881a52b4c849cf9efe626e53ca229086f454d005fbed4d9cd7473b5a3ba0125a"
+    },
+    "test_projection_scope_repair6.py": {
+      "bytes": 4121,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_projection_scope_repair6.py",
+      "sha256": "c145c0bb4f6bacd38c2d8e220aa9ba60cb9e223aa940dd24cf77c91efa6a79df"
+    },
+    "test_projection_trace.py": {
+      "bytes": 3527,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_projection_trace.py",
+      "sha256": "62aa1d9bc6bc1bd0332826f15efc84e59a2db84e2b34c91be5503bda596c9479"
+    },
+    "test_registration_audit131r11.py": {
+      "bytes": 3044,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_registration_audit131r11.py",
+      "sha256": "c0e7e0d364ee750be99030870b2b30e1af84d93e2bb9b0c76dcf0390187ec94e"
+    },
+    "test_repair14_delta.py": {
+      "bytes": 2204,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_repair14_delta.py",
+      "sha256": "8c72e4ba532ea9715641c8fbfaf35d3890eebcbde8a12318d14b8772ebe1b4da"
+    },
+    "test_resource131r14.py": {
+      "bytes": 4349,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_resource131r14.py",
+      "sha256": "790c2e557b1625177e9897e3566f1cd64c0d1633022283d4fa6cf5ddb84ba23c"
+    },
+    "test_root_repeat_witness.py": {
+      "bytes": 11953,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_root_repeat_witness.py",
+      "sha256": "eb633c13d0561463e8404d4078fccf7914d9ee4fc4d20de6d93a97bd3891a040"
+    },
+    "test_service_client.py": {
+      "bytes": 1845,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_service_client.py",
+      "sha256": "c412f7dfe966993c57ea170118d4aa9abf087c744361ee06352302b9acf35da6"
+    },
+    "test_service_fa_owner.py": {
+      "bytes": 2830,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_service_fa_owner.py",
+      "sha256": "fe49806746f6eec2f70d812ae2932599bab8469deab4307c36db1fa2279496fa"
+    },
+    "test_service_prefix.py": {
+      "bytes": 2027,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_service_prefix.py",
+      "sha256": "31b6694d18b7f48f2eff04e847391ccc0e136dc8e9f418585cc274a752df229c"
+    },
+    "test_snapshot_publication131r17.py": {
+      "bytes": 5606,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_snapshot_publication131r17.py",
+      "sha256": "94f46ba172e6f8601a25bbc09b7c5e6598800114f1ba44a71cf74d62a3ea09a4"
+    },
+    "test_tp_consensus.py": {
+      "bytes": 3056,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_tp_consensus.py",
+      "sha256": "e697b56983f36f0cd6a54a96cc10ea87978f390ac5e0d9c75e27a08fd667dcb9"
+    },
+    "test_transaction.py": {
+      "bytes": 4117,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_transaction.py",
+      "sha256": "5cfa767c5b71de85021b4eb4043c89df20d68d31b4522123bae0c7bfe7def401"
+    },
+    "test_whole_frontdoor.py": {
+      "bytes": 8593,
+      "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/test_whole_frontdoor.py",
+      "sha256": "482202f232e60ae86cf6c0b12a524dce506c1b74ba90cdb5b21f25ddbfcde511"
+    }
+  },
+  "original_methods": {
+    "test_cache_budget131r16.py": {
+      "Tests.test_real_builder_source_parser_engine_budget_join_and_stacked_knobs_reject": "f15f95897d88c5189e8f81217e982d70f1051d2a85e43a591822cc332323e9cf",
+      "Tests.test_actual_CPU_preflight_budget_join_expression_and_receipt_dataflow": "556555013578d841421b9165e13b56840f1feeb433a2424574c00f27180cc130",
+      "Tests.test_actual_enabled_server_main_to_runpy_saves_same_command_and_source_budget": "5ac4fae671f79c428ea6ab026d835e423155cf9815b639e24fa329b54efc4abc",
+      "Tests.test_complete_runtime_inverse_original_math_and_HBM_guard_unchanged": "eb5468635b679c25d55eff416f4d41ca5a5ff55cb8297374646809f67e6435be"
+    },
+    "test_cache_observation.py": {
+      "Tests.test_heterogeneous_metadata_recorded_without_admission": "fe6c05c22c83229c0b74d26cbb63694ecad2065e62ecbe98ccce3823921b6455",
+      "Tests.test_wrong_request_or_context_reject": "3a0061475f11bafdfc6c8b268088fb4000b12c5147a11b5bc0365d8fb7fd162c",
+      "Tests.test_no_device_copy_and_registration_source_unchanged": "c484b8c857698a466c5fe976e4127c0cf669ace0202fd8c623afdaa3f2a55095"
+    },
+    "test_cache_registry.py": {
+      "Tests.test_actual_get_context_and_all64_registration": "6c2e478eb8070409d7f199eb6eff182362b7a4f5f88ff9b36adaa907db08615e",
+      "Tests.test_unallocated_or_bad_native_slot_mapping_rejected": "7f89780f14b72ca2e3f5f771b2a06779ec1b36a6f5358be87836e605c4e4c7f6"
+    },
+    "test_context_identity.py": {
+      "Tests.test_actual_one_layer_stdlib_contextmanager_identity": "001debe7b686d26499808e2f7175363ede4530532f0d23ac8335491c34bf649c",
+      "Tests.test_wrong_wrapper_and_wrong_closure_reject": "4ce2623013f33f52b1e0bc2aa49191e8d17815fd920f4ac4a8cf1290cab92235",
+      "Tests.test_inner_mutation_and_stdlib_factory_mutation_reject": "20b44f6dd89d72d8f7ff0b47dd5dfdd3cc6230761e0f8df4c3db38a818fc6d55",
+      "Tests.test_cold_I_actual_install_to_first_native_boundary": "e9726cfc11ea9b77c95778de38154b2fff79801dae81046014c3f512182322d4"
+    },
+    "test_declared_layout.py": {
+      "Tests.test_actual_cold_entry_only_declared_tree_and_missing_helper_reject": "4f31a0a414b618fa1b7b048381f3c9ca789098493c86c4d6cc021304a01687a1"
+    },
+    "test_eligibility.py": {
+      "Tests.test_three_admitted_rows_choose_root_and_both_children": "601c72dcef7d2ea69cef939f142f6d29170c207b7f4d76fa6f52bd5b9a29cd98",
+      "Tests.test_truncated_schedule_never_accepts_unadmitted_child": "616b47c9e7e80d92d440576f795059ea6591f64080fa9bee5fb37de2e1d3addc",
+      "Tests.test_native_compaction_preserves_root_and_reorders_only_second_child": "5f205371a853657b2d43270782d0609f211fb431b9b2d86a222a4ca0eab3d767",
+      "Tests.test_final_native_output_budget_requires_root_only": "84ea90a79bec981d25de42b13c87a826cbdf955d8a5b04f6a843850a116ced69",
+      "Tests.test_duplicate_children_bad_counts_and_noninteger_ids_rejected": "2b41a5ab21d0ebaefa989ade9a8b9cd4d57918de96c06e6b028d8fd58022c960"
+    },
+    "test_fa_fp16_boundary.py": {
+      "Tests.test_cast_and_exact_parameters": "8c16c61a75c801d8405b469ec313de5584fa060de8fce62d83cf06790a99efd5",
+      "Tests.test_wrong_shape_rejected": "e22fd95deaae904d18734a7b9059bdd2a730ba981274e5f0d618c4a438206311",
+      "Tests.test_wrong_dtype_rejected": "7a8827ba94b6471c35a435a4838efa49c046757d40a43248e699deb63a2b3a72",
+      "Tests.test_overflow_rejected": "16e0fa71c75bfdf2ea07e748159aec7a804524ca70a81e38fa76815bf1205380",
+      "Tests.test_nonfinite_rejected": "ab9fc919e4e1478945ac5eb47a946ddf6060c538e4129aad248d11fa4bf585d0",
+      "Tests.test_wrong_output_dtype_rejected": "795476bb17ecebc7c6c230a5439604af074ea97d5e927504cc8d4eb4733dcf1c",
+      "Tests.test_input_mutation_rejected": "7f8b980c84606fd8c6581ffc505dbe83139d3927d7eafa250b6eab7baf214f24",
+      "Tests.test_second_call_rejected": "4b9a35595c313c7e8dafe5fd445a532246e2e84ee8610d67a10386367aaf6d7a"
+    },
+    "test_fa_mapping131r10.py": {
+      "Tests.test_actual_context_none_and_all64_registry_complete": "85e2a927f80fc0f4e48474533f6b5339cb5fe1d652ff27600327e7030f067907",
+      "Tests.test_actual_observed_physical1_expands12through23_not_stale_request": "228bb96a34b0004f9ad8f0b6c4b81b14e27d4caf888b35465fd7804bf4ff16e1",
+      "Tests.test_nonempty_generic_unknown_view_or_wrong_actual_value_refuses": "7e50c53d1beab3121733a8754f80ef6e25f6477366d7a1053256d14e1a1961bf",
+      "Tests.test_actual_source_context_omits_generic_and_backend_uses_meta": "304e55499fc60584adead9996ca03ee6fbde4c8bd36a23cef11691dec90d6c60",
+      "CaptureTests.test_real_capture_serializes_all64_before_registration": "037918a86e79d2008a1392bd60305cc307d13b878c940916dd9cc8699af7281c"
+    },
+    "test_fault_receipt.py": {
+      "Tests.test_exact_missing_executable_before_cleanup": "01bb6632680ecd8defe20c65ac2f17a5a3c574a8158ef4a25137f0dc86e6d7ee",
+      "Tests.test_both_paths_and_full_traceback": "4e2121c55308d1ce864e8b337d8dfa78a4e21c5e0d43f8930c75af47afc65a13",
+      "Tests.test_real_host_except_persists_before_original_finally": "6cf13b79e25873e085302667820a76587dca7e76e6b3302da3caafbb76b17cbd"
+    },
+    "test_fia_reference131r15.py": {
+      "Tests.test_actual_producer_ref_binding_and_real_adapter_boundary": "e0c81ebc3c99c810bef8948176a726d001e86ee0c7fd06fa7d3d3c00e17835f9",
+      "Tests.test_unknown_ref_hash_source_and_ref2_rejected_by_real_IO": "cd12e95790a1c63a261a2ccc9b62f343b16c51f2a37690237abbf385049c384e",
+      "Tests.test_default_OFF_and_cached_value_cannot_bypass_reopen": "4f29356eae4b8486bc2e0c0a5711b1a8980f1620758f7f5208e86b7b981f09b0",
+      "Tests.test_new_window_active_gates_and_historical_math_unchanged": "4faec39e4ba3cec6e17e19e30ab0d26986712f438f71f321e875627d9998cc42"
+    },
+    "test_frontend_namespace131r18.py": {
+      "Tests.test_real_frontend_function_namespace_probe_and_stable_identity_contract": "258544939b597baa79426440d2cdb08f2b65a6d9ad483eba6487b9938cafb251",
+      "Tests.test_actual_r17_failure_shape_never_host_resolve_or_basename": "9a0eb8f000638c8abca6a98a0e01c689b6bb5429784ee01e2ea42f3d31e618e2",
+      "Tests.test_actual_linux_proc_exe_root_fd_and_complete_stream": "621371500ec6086b3adf6df2e93806817d8fb5d96ef42389e0a5c72dc7ba320c",
+      "Tests.test_actual_linux_namespace_absolute_symlink_escapes_wrong_binary_deleted_and_race": "298115ee61703248aeeeadf1009cb5e6d894c41bc41dfd394f9a98423040851e",
+      "Tests.test_stream_hash_identity_wrong_extent_unlinked_and_not_executable_reject": "ca0c33cda31e43448f6e17fbb0aa2a2bfe0d9c77392a46bdc23be857ffb6e27d"
+    },
+    "test_g1_consumer_pure.py": {
+      "Tests.test_default_off_and_help_are_standalone": "0d6c608ca814526501fa30c0b98770d74467d42f1598a26e54d7e0e643ef2997",
+      "Tests.test_v6_numerical_and_vocabulary_functions_unchanged": "c6c49bb5a70aa6bdf2b8ab491067dd187e9ada2c6e385bbe4fcfb32d7f67fc6f",
+      "Tests.test_one_remaining_output_never_accepts_a_child": "dd818493b762742d31a614c7767cbce973c08307e25f2e792f6fa80fc7426c26",
+      "Tests.test_prior_owner_generation_version_and_native_counter_fail_before_math": "97d166688df07047f54ba20aef1812d058ea9c225a31ee28f30e12a55cb087af",
+      "Tests.test_logical_charge_counts_repeated_tensors_and_rejects_opaque_or_device": "16d6194407d5c68c92e575def5a6c10ac830f60d6f12c1c874633ab7c58666b6",
+      "Tests.test_allocator_reuse_and_nonreuse_are_both_truthful_observations": "f1b761ad76e1acc87e452a3cf9edcab355933d6f6c6313d455a852885f52879e",
+      "Tests.test_claimed_reuse_cannot_replace_actual_mapping": "7b121e2bf8d1f407eade6fb90b3c7e61829a0aa3fef173e65a522a2566c7072f",
+      "Tests.test_missing_or_duplicate_layer_slot_cannot_be_omitted_from_reuse": "16f426e5eed1da92cf0a2fb16d86eefa92ebae7cd45e4cc958d7908b65221e52",
+      "Tests.test_complete_future_journal_reserve_and_final_bytes_recomputed": "147c94337e7de30a7a4af7793a1ba8de385ce3de93126caa683e920381f784b3",
+      "Tests.test_unaccounted_observer_or_undercharged_bytes_rejected": "13c028ed4f8d7baf00d02885209e96d93bc8cc9a988474136a162d2566b24d10",
+      "Tests.test_two_request_logical_cap_cannot_be_inflated_or_underdeclared": "6be7c19f7d5b22940f034684b68c91e18296d0fa8f2537d98523eeac37809fb0",
+      "Tests.test_actual_identity_oracle_accepts_two_sequential_lifecycles": "7d261cf6ce8a4a55499d83ae0f7dbc0fcf707be144e98af38a08a83edf02c69c",
+      "Tests.test_second_request_http_completion_without_worker_retirement_rejected": "4ab61ddffcca0d163ef6a48dd52afaa59c6d9db3bd63cc7c36e00c6503f97dc0",
+      "Tests.test_wrong_rank_process_identity_rejected": "3cad12cd60f29247fb13e7d66ec444f9528e028326d3ed35a5ac805a01b742ec",
+      "Tests.test_second_ingress_before_first_retirement_rejected": "98273da2146ef52a4f6cb200c010a68929b3170ae2e3f89b8590d99fc63cb6b1",
+      "Tests.test_missing_journal_ordinal_and_duplicate_ref_rejected": "537076624e7ea37922899d282db854b0c7c24e13f140895559515f1acb86d64a"
+    },
+    "test_g1_lifecycle.py": {
+      "CalibrationTests.test_original_matrix_once_and_all_original_receipts_revalidated_for_second_request": "07909d2eae96bf6faeebf9f5059deca36a163bfba612b1c4c88108d2a2efa36d",
+      "CalibrationTests.test_preexisting_calibration_is_not_a_reuse_path": "06397ddec3ccfbce920cdb3d6aa911ff1c8a69e2bb547a313dff24dc8e8e376e",
+      "CalibrationTests.test_reuse_rejects_changed_worker_model_source_rank_operator_or_generation": "34fcf0ec501f3d733ac25d19ddcc6e04cc1a0a3681cd30645346c6b4714cf5c1",
+      "CalibrationTests.test_reuse_reopens_receipts_and_rejects_changed_abi_and_complete_library_set": "de9b4c03bb096444d372cf5c103fa5914f332aa7ed47f570e52415deaa0332e1",
+      "HookLifecycleTests.test_g1_owner_allows_one_frame_and_requires_real_removal_after_two_outputs": "443589aa5643d2378b12e1ad31208a6de668e2eb089c20fbe078452a2419cf4b",
+      "HookLifecycleTests.test_actual_runner_retirement_hook_restores_request_scope_then_process_scope": "22047e84a2c853629fe92355a1be6f1035e39a83eabb1ff943f12d5cc0d0e6f2",
+      "HookLifecycleTests.test_actual_after_prefill_wrapper_admits_two_distinct_requests_and_leaves_barrier_native": "2b5c281d05b0d1611d5417c901ac8f07b7861d0bf2df894a38be6371d515e4af",
+      "HookLifecycleTests.test_all48_native_prefill_observers_can_be_restored_then_rearmed": "41ff6c976670d5d809e892b5714c6e341e1c958e4b68fb4046c1314b07d16605",
+      "HookLifecycleTests.test_reused_physical_slot_requires_new_strong_request_and_matching_generation": "ae09906f59f656f318d7db96404f1af7cb0503ac976c9c511916b346a9e4d202"
+    },
+    "test_g1_parent_gate.py": {
+      "Tests.test_both_actual_same_source_success_reports_are_required": "f21bbace0d643e5f83f30f33c7cb3b4b58e65c91cdf7cf49d22440e82f4a7a9a",
+      "Tests.test_owner_failure_wrong_report_link_or_changed_source_reject_before_freeze": "95a6b8a8bc032b763bccc07fe263d1ed9228e4cdd72b8b6b4a504e7fabd8bf27",
+      "Tests.test_missing_component_retirement_HTTP_or_scheduler_success_reject": "d76a0ff751338d0ee7ca5d27da70981ed906c087a3a0c5a82ac108db44ef039c",
+      "Tests.test_parent_model_formal_or_performance_claim_is_not_a_bounded_v6_prerequisite": "60fb8fc71603ffa379380cecc53eaacff0b3de14f625b4c68bffab5f3df2809b"
+    },
+    "test_g1_repair_v2.py": {
+      "Tests.test_command_scope_rejects_stale_source_output_entrypoint_and_count": "433a2fd452e244c1b29765f0a29c2a81d9ea755704183807de4d4a632e7f8678",
+      "Tests.test_exact_G1_inverse_rejects_undeclared_bytes_and_wrong_before_lineage": "5a8234ad8bae178d0de79497174405069c0f5fbb0c03538217bc5999c734bf9f",
+      "Tests.test_registry_layer_preserves_original_R10_edits_and_rejects_wrong_postimage": "8cb1274db005e85430d6c121c93669230f29a34ced1a87f0eafd28925ed61f28"
+    },
+    "test_gdn_copy_identity.py": {
+      "Tests.test_actual_producer_copy_reproduces_old_receiver_failure": "082420e06f86ea6fca5a6774f6093c1019fa9297aff6eb3562efe5dfed20036a",
+      "Tests.test_replacements_and_error_record_before_rejection": "69c657b2bffe25fb051c676784e1951fffd4401ea546b05688689ae9168cebec",
+      "Tests.test_actual_worker_object_selection_and_unknown_source_refuse": "8a0c7c122ed140dcd639fc2bf47197d806383ef8d3bb7891dace944b3106f050"
+    },
+    "test_gdn_probe_clock.py": {
+      "Tests.test_actual_host_first_clock_shared_Joint_controller_and_elapsed_source": "b1d1b6965b162d3a68359bc4407e3c9fc765b2e2da3026a688ea382071eeae18",
+      "Tests.test_late_clock_or_controller_reset_or_early_profile_callee_is_rejected": "db9ef7ff85179fece2cec33bae522bb3dcbfb1226a208eca4f2fa1491c39a106",
+      "Tests.test_phase_clock_budget_includes_prehash_and_cleanup_without_double_reserve": "41acc77008d932fc0782c8cb392a39f5f4a075da9d3502b0ac0f7ff37e8741b7",
+      "Tests.test_original025_real_init_and_remaining_callee_same_clock": "299bdf59a848c1c8f8a8fa319aaa52132c7c7e6e4db11f284a227bc6826e0db2",
+      "Tests.test_exact_inherited_MAIN_observer_function_AST_from_successful_AR_source": "aad4604f268fdde7e433b329e0e1273da5f337454baf4d3d7399c0f43e64e647",
+      "Tests.test_commands_wrap_both_execute_arms_with_exact_MAIN_and_bind_stays_unlocked": "1d44f61a05b0271e1b791053c6c82f11329c06d427ccd345e4161201b66e32c1",
+      "Tests.test_new_clock_and_builder_cold_imports_without_tensor_runtimes": "0887c5a4c105f29c360e3d433b4d30bc3d9fc3d7541d50eedd27c43bbd9f27b6",
+      "Tests.test_new_clock_overlay_inverse_to_exact_original_G1_and_frozen_v2_unchanged": "e186989d6565011d689c376b383b337ae788aa9b546956f4f8c5441e6ca9ec99"
+    },
+    "test_gdn_probe_pure.py": {
+      "Tests.test_trailing_runtime_log_preserved_unique_schema_not_last_line": "c19a54e9b6b0a9eae42f00d93a244f4661f52391fbfc05e13d0ff7cc9afb9e63",
+      "Tests.test_duplicate_stale_missing_wrong_count_failure_reports_reject": "296cd1beebd9c89ac82baa4b441be311edfb15057dc6c7d8dca33be740202c7e",
+      "Tests.test_synthetic_CPU_handoff_join_and_wrong_terminal_reject": "5a1cc99fb25995560cc0f56b2284721865d6400dd218d1ef78bdba053d4ec9d8",
+      "Tests.test_explicit_default_off_and_cold_builder": "66697c9ebaa552440795b3db1611ff10ec7b1528274ae45f7a2449cfd4a87f5c",
+      "Tests.test_exact_ref_skip_only_and_drift_fails": "106d43bbab14384ffc6cb41a421047b3c524c3ac605887810b2ccbb011ec1499",
+      "Tests.test_actual_overlay_source_boundaries_and_unchanged_math": "3f1dd61760f1b3005e613c110662ec956979dad63867ddbaa15e4dc4800f4bb6",
+      "Tests.test_owned_bridge_restore_restores_seam_then_exact_original": "c28f84ea56ac0d6f43336b39cc40ab067b51504ad6327cc947001f74cda21627",
+      "Tests.test_failed_abort_preserves_original_exception": "897c16f5c63ee017c8fed61509cec06db9aacb962ecf01a4cdd8fb5c7a48b56a",
+      "Tests.test_runtime_modules_never_import_tensors_at_module_load": "6203e3fb4469b92598debc3b3363a9a077d469a6e878229d2086e3047c6a7783"
+    },
+    "test_gdn_service_pure.py": {
+      "PureTests.test_default_off_touches_no_bridge": "ddf57626ef17b6f545db925894c3da7a4783cc58246b76fa2f142273d042a867",
+      "PureTests.test_owned_control_calls_once_per_layer": "6b02efbfd2460bfefe2815b3452a3fdb3411d56652cc0b65ff76cccc2b4d7468",
+      "PureTests.test_stage_failure_restores_private_facade": "400f5ff3c47e44847663d882fea3de04b686848965272bae9a91fb6e95aff15e",
+      "PureTests.test_live_alias_is_rejected_before_plan_return": "09564a21419ab82486a04093761d9ee81871956382d89aca5fc8494a2e66eb7b",
+      "PureTests.test_unknown_replacement_is_not_clobbered": "8afdd34b42622c936f58b9500ce9682b7fd265dd6453811fccca5f90fe57e076",
+      "PureTests.test_owned_install_restore_preserves_inherited_methods": "4780d350a32a7a5d6436f6fbc6564cc85656d25b19b0a0efbf89553c58508ad7",
+      "PureTests.test_abort_only_drops_failed_private_bookkeeping": "2288b89d1d726bc480b9dbd55da29d11ca65d94ff5b137e497fb8b81d3617a73",
+      "PureTests.test_forward_has_no_all_three_state_commit": "0a6905b5fc3846c4bdada6f91c391deaf8def35d717b5d8621841ed3563796e2",
+      "PureTests.test_cold_default_off_and_help": "f18950326b7c09019d0d753b1437561568ece51307ed3ca8eecff80c28df38dd"
+    },
+    "test_layer_slots131r10.py": {
+      "Tests.test_three_groups_actual_slots_not_logical_zero": "99683c285088a81e8067717dd2ba451f5f40c8cb38616b36d52edc28b3a3c4fb",
+      "Tests.test_mutated_live_request_table_metadata_or_arena_rejected": "8cc81dfe474cba5d809815cd635d0affc8d26a9e0f6b25944cf07948773fbb88",
+      "Tests.test_opaque_binding_omitted_but_identity_preserved": "ad0646dab0565fa965179c33db997c76915cfc5ebfeef4318e935f149c41a02c"
+    },
+    "test_live_owner.py": {
+      "Tests.test_actual_group_table_arena_rebindings_rejected": "3863e9f3e3823a3b97de5288a45550232e2fd6ccb3dee7be2b74f95528d91fc1",
+      "Tests.test_actual_fa_group_table_request_and_cache_alias_rebindings_rejected": "b8327a702e6dcb894a1dfe74b987800d83a90f0ca3084b9707cdb5225f3ff24c",
+      "Tests.test_actual_twelve_kernel_pages_per_physical_block_expansion": "bd5b8a3b10095844d32fefeea15c1244c6cde917afbb8c093f9fe0ef634fee81",
+      "Tests.test_next_native_counter_root_and_accepted_count_acknowledge_once": "05b34502accb10c0c02965917eaa39f805640526a27a0b752395b982a6a029bf",
+      "Tests.test_wrong_native_input_or_second_open_frame_rejected": "413891ab52351e0d1bf804f45106c831c59b77d3cbce1d0495fed9142aba0a91",
+      "Tests.test_unadmitted_scheduler_draft_and_stale_counter_rejected": "84c043f65f13cea274f4c8440ae769ddf0ecdf8b31488de66a3b9b74bfedcb2b",
+      "Tests.test_native_removal_is_required_and_final_ack_stays_independent": "89495e2c41d8c3d7a1c598df1996018307d89559fe9706a25e80e1dbdba5047d"
+    },
+    "test_logits_observation131r13.py": {
+      "Tests.test_dtype_vs_nonfinite_distinguished_without_cast": "5e98f8e6f203f632b88a9a45d93fc13db3e3571811ffba13de67b9cc6bb1866e",
+      "Tests.test_valid_and_padding_nonfinite_are_not_relaxed": "447b66c66608b597e946d25d26bb59166bcec856ae467ecdcbc8a34310cfc4f8",
+      "Tests.test_full_original_dtype_raw_exclusive_and_wrong_root_refuse": "bf0c0a2e4163f807879f1f7333ae4ef81216e74f01b9b45e0bd3ab4e2ed1764d",
+      "Tests.test_actual_callback_before_canonical_and_original_body_unchanged": "de16f8ae39d8fc8884ce6cc85af56ce9195a2d58f6a2239dd335541a7ed8e013"
+    },
+    "test_model_calibration131r12.py": {
+      "Tests.test_entire_preregistered_set_not_subset_or_dynamic_expected": "7b34a1d71b7e7694177ecca04f518c723c49fbe7674755dcdbd41382a2dd2c35",
+      "Tests.test_serialized_full12_reader_and_wrong_raw_source_paths_fail": "e67d7ae504187c2aaf88b3f5dc02f285724e70c322304592ff6fa6ed2dba6b3e",
+      "Tests.test_original_matrix_source_and_full_real_call_edges": "87ff36e16ae5c8836e082adb68dad006b9bb26b02d5572a068b481ea9b9d8e36"
+    },
+    "test_model_entry.py": {
+      "Tests.test_real_qwen_forward_post_RoPE_and_outer_gating_preserved": "269358e2ad56102a55c39218fb83674643ae7564a3f620569bfa09bd0148c4df",
+      "Tests.test_actual_source_contains_real_hook_seam_not_preRoPE": "fb3c65e7ac1500be36d878a9e43190d0f2ba829447c90beb12e00045f9143aed",
+      "Tests.test_context_all64_order_repeat_fail": "ed44eb4f640d64903b32ec06f4970ff83b7e7a9783ba0a0b4c05958804737aa5",
+      "Tests.test_default_OFF_does_not_touch_model": "46fb6ddb9a040924e1fdeedc9be292908755ac7169f7a319732348c7fa7267e6",
+      "Tests.test_actual_worker_load_body_returns_before_discovery": "5a00ad03f6f6763eed3e09fb8ec553a7229ea66cb3b3b2d90741ab38f86dc420",
+      "Tests.test_worker_audit_OFF_never_imports_backend": "7a9c7781c4f1cd29b3737a7612bf50dd1e67d1f7308765aea7de16e8e92e0d65",
+      "Tests.test_real_install_all64_keyword_routes_and_restore": "d93e54b7e37d72105a039dcdae93cf34d1761547eba60a669240dcc39b6efe24",
+      "Tests.test_ON_missing_real_predecessors_reject_before_backend": "00705ed2ad097d8b80ed71d29f1becf2c38d066ea9124a523c0e12423d151a46",
+      "Tests.test_actual_prefill_context_callback_once_dummy_and_recursion": "f7886b052cee774c68c659511cdf6319d6445ae7542850ce462ab745b21c7df9",
+      "Tests.test_bounded_export_excludes_pool_and_opaque_runtime": "967af24cb2f58bae32daa0ad7cda4c8c7e975a377d3a244f36be64e980513d9c"
+    },
+    "test_mtp_entry.py": {
+      "Tests.test_off": "423f5bf6fddf882332675b1b26157c81d68cdfcb1fe58f005270f13b39479095",
+      "Tests.test_real_bound_hook_preserves_original_and_first_logits": "385dabcfc0c675d3ac0f4da39f2d7682b8f014884c1b8c5de615c40acd6d8ac9",
+      "Tests.test_wrong_source_before_install": "e443776a5e7897ec75660aa24f8fcc2f76415154712e733f417e5d4af393c331",
+      "Tests.test_nonfinite_not_cleaned_into_valid_draft": "2395c0e638f7813210836d660c6bc04de37cf3a529799b4bd7c7ab945b228f1c"
+    },
+    "test_native_ar_boundary.py": {
+      "Tests.test132_and133_keep_actual_arguments_and_BF16_output": "f2c220344880b0be4e26304da88040b3645ae50299656307c3d0437dec8a0530",
+      "Tests.test_wrong_geometry_or_operation_knob_rejected_before_delegate": "a3b30485142554cde68025c75d2eb09e25aacdfc55440c809be09096cdee35f1",
+      "Tests.test_mutated_converted_input_rejected": "a3786c4a42c14ddac50946da455adeed613d24a8552f5e113593c54f92309b69",
+      "Tests.test_fp16_overflow_and_unknown_source_rejected": "d5d9493b316e0c7f1a6694d531837c32514a0876f8ca729e9f1a30b3c3021fdc"
+    },
+    "test_native_dtype131r13.py": {
+      "Tests.test_all_finite_bf16_values_roundtrip_and_signed_zero_without_mutation": "506548a252ece8416cefd5ee4438d624a82ed4dd192268b84a691c285a42d84b",
+      "Tests.test_nan_inf_other_dtype_and_dimension_still_reject": "a425825e43f84a1e6522f27709ec24da67ad0d90071907cd243b3e750ca8c977",
+      "Tests.test_actual_override_normal_body_dtype_gather_slice_and_source_controls": "77941e661dd4b0f0670756019149e241f303af56c26446ffbbdc9ab34c7802ce"
+    },
+    "test_native_input.py": {
+      "Tests.test_actual_source_embedded_int32_and_reject_corruption": "99b0ccfd50d044a98a37730191ef54bd39633578bbb9115d2fd613e06327c58a",
+      "Tests.test_direct_dtype_and_mm_reject": "9163d484de053c00c589288c001602b1cc56e6065847922c7a40ab078929df55",
+      "Tests.test_actual_native_prepare_mm_inputs_keeps_none_and_embeddings": "f6cd05b3c7a26998124bb22ddf24db6f3b8e76f0f598323c25b1af6a43e9741f",
+      "Tests.test_actual_HF_top_config_has_no_vocab_forwarder": "b253d07c343e5e8cd19fd7b4bc04b7432c49885b95b2c2c447e1021e1a4c5956",
+      "Tests.test_unique_actual_text_LM_owner_and_MTP_config": "d0bccbca1c0c197e07b761faf47d1f5dc25736e7d7716387c1caaa47060c6b42",
+      "Tests.test_real_prefill_wrapper_preserves_native_embedded_arguments": "f74386d1cf0b7025744976bdff40871e22162163c862e77b71482b1debcc819a"
+    },
+    "test_native_seams.py": {
+      "Tests.test_true_native_orientation_and_alias": "e4f9ad74bc215dda1b390b43f0be2aab9c755a91922cb3a7df1cd903a8c56d57",
+      "Tests.test_actual12arg_frontdoor_ancestor_not_flatten": "42f0129f98799994a00d508051a9c4735e5254b32ac03f9418f8d354ee182d31",
+      "Tests.test_positions_generation_and_partial_path": "32482f6f4432f6563b84d5f76b9be029d99df29583c6364523a57b26eca4c7dd",
+      "Tests.test_no_cpu_or_missing_ARM_as_native_proof": "f9bfb4f66c94728e134540a0d8451385732cab13ab120ae2a56bc53260af64c9"
+    },
+    "test_observer_race_repair.py": {
+      "Tests.test_proved_exit_keeps_stale_and_fresh_and_reexecutes_original_once": "af42ae7596d7603fa78658d6b5d981cd2acc2147e96b299b83c83a6630c790c8",
+      "Tests.test_snapshot_still_reports_pid_is_rejected": "eb81dc2b7a4e97b1e378c56b89b19665fa06993f88ee9b05905ce20c6fad2514",
+      "Tests.test_reused_or_live_proc_identity_is_rejected": "c9e468cc00fc641c658a142d9c19e1de24f03277f0c42f918fa5764a303b0c0b",
+      "Tests.test_real_foreign_target_conflict_never_retried": "4faf3280f172a62bde2c07d6e2b03b1cd7f1279661369cf7328e3a69920a442b",
+      "Tests.test_unrelated_missing_file_never_retried": "a191a9872915a7d35d1c775685981c331bb5f6f244da4f83cbf085f8fbd470d6"
+    },
+    "test_output_contract_repair4.py": {
+      "Tests.test_real_cold_host_output_contract_accepts_only_new_model_and_CPU": "38194dd1c74f9edec5851ec6133b7f4c22195b62d418b25c93c238221985582f",
+      "Tests.test_complete_inverse_and_source_command_output_joins": "77ac8456e5fb585a468f1d0ea74f9188d3d8095bef04f273975cdb1053cb643d"
+    },
+    "test_output_scan131r8.py": {
+      "Tests.test_actual_host_load_before_mkdir_then_first_pin_and_replacement_reject": "592885eca28d6dc325703528a86dbe6252056d5ee0f1004d16a836230f8c1a8a",
+      "Tests.test_complete_success_and_all_bytes": "e7124d8fe74c0728c0226a2c7da9053f79fae1022148af45fb6ab31cce2a8449",
+      "Tests.test_inside_enoent_restarts_entire_tree_and_journal_is_counted": "5455203db63dd805761dcb625b080193f1b458b6f66fb775f41d4052d7e90b34",
+      "Tests.test_third_enoent_fails_closed_without_partial_sum": "46dfada6db3f4f70c6bb78b0a1519ddaa708a3a9ff1aa7259edffa199e77efa6",
+      "Tests.test_outside_unknown_permission_and_deadline_reject": "3481bca1998bd9bc912ab404e5cebcec1d6a3304ebbf86f41ff80383c00fd6f6",
+      "Tests.test_actual_whole_source_inverse_and_wrong_source_refuse": "e673f2872e0c5643209de2ca1e45b53b79c306e32a87b2f758880a7e8a44b5a6",
+      "Tests.test_actual_resources_body_installed_preserves_limits_and_summary": "e82978bb86ff3690f76605e842fab5c5f7a303fdb8dfd329423c1cabcc8702e6"
+    },
+    "test_owned_ref131r7.py": {
+      "Tests.test_actual_ref2_rejected_by_strict_reader_then_exact_ref3_reads": "aed45005454ca372d47f0f4cc234478df79d6174371b46fc818f36ce2820bb68",
+      "Tests.test_path_hash_keys_and_mutation_reject": "8b4bcd8380492b5e029cbe8a1ff80f41a3f3133126a41a9b1d3bddf4d7badfe0",
+      "Tests.test_complete_host_has_no_c_ref_to_strict_reader_leak": "30c35c92097ee768074d389f17ce1c21890bfe1982c59c623bd7bd857e4a9982",
+      "Tests.test_model_bundle_exact_ref3_fields_reach_actual_strict_reader": "06a51dc1adcb833886191d9174760ce5655716ffefa50136d5fb0c2c3a2ba5b8"
+    },
+    "test_owner_name_repair5.py": {
+      "Tests.test_actual_controller_constructor_all_roles_then_original_create_guard": "142951d92c2043c172c776d664ee5b8f7b58ad259bd8e99f5ba31ef4435fdb7a"
+    },
+    "test_patch_identity.py": {
+      "Tests.test_real_assignment_all_three_identities": "263c5ab09570c652ac8553f781ada4550403ab1ad85faaf53bfef9fa6dff413f",
+      "Tests.test_unknown_wrapper_and_same_source_wrong_function_reject": "c38650bb8fbf58d112530a04b45ee9f078b09c6bd58f9937a9980f396f02e69c",
+      "Tests.test_foreign_target_replacement_and_bad_pin_reject": "7733397c2168afb7b14188634969dfb12a601981b45cb16ddb6bf713cccea75f",
+      "Tests.test_real_FA_body_post_fused_rope_then_native_attention": "646b6a892f3c693ea0db830fbda0e44ac908e72e363ae9845f70f322a06372de"
+    },
+    "test_prefill_tail.py": {
+      "Tests.test_wide_leading_view_and_all_extra_bytes_immutable": "ce8ccd19371aee0bf37ac2d24affc1e8c458abafc7ad1af6037efcbc491dbd1e",
+      "Tests.test_no_spec_or_partial_or_wrongslot_window": "c60efeb0417e5bc2383e1550e03edced447e7c999ffc3cf0efe44a84441cde97",
+      "Tests.test_wrong_request_and_before_native_rejected": "9d071058d0d497214e7dfccb399d110405f79dc22ae960e40e5ddb0f84e828a6",
+      "Tests.test_actual_builder_2d_conv_block_table_first_column": "ad9d0c279feafe056f7e9df9bd06e16564e91e4c70abeb353c158a06ab052c41",
+      "Tests.test_complete_48_original_core_capture_before_bind_and_extra_corruption": "60811dcaa026246abb7ee77a520dda79761d1aa10348283c44d0e9972189b84f"
+    },
+    "test_projection_actual_routes.py": {
+      "Tests.test_actual_out_proj_selector_is_not_o_proj_branch": "b83c58d20d99aa426e2f190b8bbefa38e0b8e7edcce72d717815a87b24886134",
+      "Tests.test_actual_custom_route_one_call_preserves_objects": "2b840a60122898ac739afaf1cbfc158bca806ab277c47d9b50ef248cf1ca385f",
+      "Tests.test_actual_generic_route_local_then_collective_once": "f3259fc8c17be0f2b72c8046f992201fcbdc3dde92d1a1c94b3aade05b689a87",
+      "Tests.test_actual_quant_apply_keeps_weight_and_input": "1776d4050f61ed272f2d5160ebc94cb3b28d66c179e30aaac14b0d0e71e9494b"
+    },
+    "test_projection_internal.py": {
+      "Tests.test_independent_root_comparison_keeps_failure_diagnostic": "98622a135f8f96362464f1d80958a3a2f639c0808dcd30c14493c829e55c4d09",
+      "Tests.test_missing_root_or_duplicate_boundary_refuses": "81dd42c096c752dc09dce672631db63cd5bf42da52f40d5851edc510459d8a9d",
+      "Tests.test_real_witness_and_consumer_actual_integration": "7111b27443834a3ca75f896c23fbfa66bc8b124941052f58df6906da42d86193"
+    },
+    "test_projection_scope_repair6.py": {
+      "Tests.test_actual_input_column_different_quant_instance_reproduces_R5_then_fixed": "cb1ce7b0139a66f8f7cbecfe1d26e70dc6bb49f64aaccb6a7b8b5d28a296572f",
+      "Tests.test_shared_quant_instance_still_requires_active_outproj_and_actual_layer": "177b2c4f2ab4325150d2899b2cfdcae8679337290558b13af0047169d18e23a9",
+      "Tests.test_inside_target_projection_foreign_layer_rejected_before_second_GEMM": "c0e2ed23a0a22cc3b9ad6249d6ad3fce9a11c457737d535bcb7f5d492d00a919",
+      "Tests.test_target_projection_matching_code_foreign_globals_still_rejected": "ba8f4b972c421adcc3066b01a43911dac52022b6015e7391efe66873083e9537"
+    },
+    "test_projection_trace.py": {
+      "Tests.test_actual_complete_source_body_four_calls_trace_no_extra_ops": "8caed582209e348c8449bffc1a556821c6842f41c0356c21039ef7edbe6142d5",
+      "Tests.test_source_or_wrapped_body_mismatch_refuses_before_trace": "aa76c7e743888b2757b68a395788f3c1866949ce5d67a530897a1509c74e49a5",
+      "Tests.test_unknown_quant_source_refuses": "8858b7ad472984dd39933b61164b4d8eca8cefd1a3a39f250936ac1e43b2da48"
+    },
+    "test_registration_audit131r11.py": {
+      "Tests.test_exact_pass_and_every_mismatch_still_fail_no_subset": "f58bcfd70d4a9666e723a085d1c4b331205570f4c13d4e78cca7e0b0d0938ba1",
+      "Tests.test_real_serialized_operands_written_before_gate_failure": "a738c941f87f3c236a2e6ea9e006efc6d0c799552af21c352a3c8519d7490e57",
+      "Tests.test_actual_Bridge_persists_before_unchanged_identity_need": "88f58db2481771a81a176481203efe649a3951e8f2b3a247a67df910cb61625e"
+    },
+    "test_repair14_delta.py": {
+      "Tests.test_only_declared_FA_precision_boundary_and_inverse_negative": "c14d1ec5674f8d74881812156994f12c0b292c673e3c56f76a1d3d8b59ccecdb"
+    },
+    "test_resource131r14.py": {
+      "Tests.test_same_source_globals_and_original32_plus_reserve_formula": "3f41d41507ace3148a6e70a6b3483b43f2f9e699e098b48d560ff0610b07de96",
+      "Tests.test_actual_model32_cpu8_create_arguments": "1568320c452da60ba44b17dcfa1da561b2eda376d7e16c7fd30556422821fece",
+      "Tests.test_actual_inspect_exact32_and_wrong_cap_swap_reject": "352acd1b9d098834e2f070a00073deff0f2639b4fcce4e4a7ce651adc683ec8d",
+      "Tests.test_original_prepare_preconditions_and_scan_live_globals": "62a675d41e36e32a46f07fb2459a393be403681ce1175fcfd6145c45d4b5168d"
+    },
+    "test_root_repeat_witness.py": {
+      "Tests.test_complete_actual_three_bodies_trace_positive_and_mlp_discrimination": "6e6bcfad11167e0dee2df7102c79bd958c175d24f2b71466451ce1d950ad52ae",
+      "Tests.test_private_clone_mutation_vs_legitimate_original_reuse": "b9885a4c91048967cc6a3ac075efc8e9eae7f08d600e1df441bb2d4c165a43b4",
+      "Tests.test_actual_source_line_contract_and_mismatched_source_reject": "1eb92ac6f00950d98af05a87a9218935eac2450510e1088293e008c01abdf2f9",
+      "Tests.test_exception_and_existing_trace_restore_exact_namespace": "b9a4bb808b15aed27634b8891ef085f4259f7f32fcda1b79f82c986a938d3206",
+      "Tests.test_budget_before_clone_missing_boundary_and_wrong_owner_refuse": "75d4661cd52d933a24e98e70725d9c02c12aead8767a0d89407b98f20a3fd60c",
+      "Tests.test_real_integration_unchanged_sequential_and_no_operator_replacement": "ca02343a385c07437cb15de71755d3ee67f4b2c811cebaaaab5c9714d7ea42e6",
+      "Tests.test_actual_installed_worker_wrapper_source_and_bound_old_closure": "43e0c4c01a9dc2ad74a512f01f159c9fd6ca43cad4df88c5bbca142998a0982c",
+      "Tests.test_late_legacy_capture_drift_not_called_native_compute_difference": "f759ad1f13e53e677beca5d6c8c2a7d31e45e24e5ac9dc81406fba6891bb14cd"
+    },
+    "test_service_client.py": {
+      "Tests.test_two_sequential_two_token_requests_and_native_retirement_barrier": "951b10b0e6293520011c65291309952a4369d84297032041e541f97ddab69163",
+      "Tests.test_missing_actual_returned_token_ids_fails_closed": "b3bd53a3e2d648f55c2b547f79f171cbece1bad5c4dfafdf840e67f17ce8f073"
+    },
+    "test_service_fa_owner.py": {
+      "Tests.test_independent_reader_joins_observed12x_physical_to_kernel_expansion": "2ef576023682c11f4d0d3b5a7baf64dd27e9dd2d7446b296467c0335e866f537",
+      "Tests.test_wrong_request_geometry_page_row_and_cache_alias_fail_closed": "5e8b7bf5c9e323c27c601baac4a269c7442362ac715a69cb7091f5198cdf8fc1",
+      "Tests.test_wrong_generation_and_replayed_prior_epoch_fail_closed": "224ec8a29c02f9a27a4cd6f8344298b7484ec5cf27fb6bfc72c91693a445da02",
+      "Tests.test_same_physical_pages_with_fresh_second_generation_are_valid": "32b8757ba0c796c1f60a159cd0663a1dded623ec6432e7fe6de42868a7dbf23a",
+      "Tests.test_after_owner_epoch_cannot_change": "f10697345f060b5a06e0ee34e3622b3971263cfe07a64a55ca27dedb66d691ba"
+    },
+    "test_service_prefix.py": {
+      "Tests.test_actual_tree_convolution_preparer_accepts_each_bounded_service_prefix": "201e64308a42648d9a002b56ab3d57eb96791c26bf5be94170c4adab8cd6607b",
+      "Tests.test_actual_paged_preparer_builds_owned_prefix_and_sibling_mask_at_each_length": "f9576ace3bffb55004aa08850589218c72ee779248f09ac72bcdfa6669bb099f"
+    },
+    "test_snapshot_publication131r17.py": {
+      "Tests.test_declared_exact_donor_cold_and_missing_or_mutated_donor_reject": "53e5189423d43679171453478a758ac70faf00ac78c3d1aa28018effb44e6120",
+      "Tests.test_actual_cold_publish_stage_link_fsync_glob_stdjson_roundtrip": "09fd17f0bb5744b142e997a3cd28cee2382f809b29b2def06a1c189e974ec231",
+      "Tests.test_existing_destination_nan_and_cap_fail_before_publication": "c1035a63eafe55b6b7d4fb969e33841a8e96bde45edcb00139a4b34a9f5cf819",
+      "Tests.test_real_staging_fsync_then_link_failure_retains_original_bytes": "f9af6e84cd2a25142173f5aafb8048ce59a65c31c4843c26a21086bd737e94e9",
+      "Tests.test_write_fsync_or_extent_failure_never_links_and_retains_stage": "57f13a95c5c7b20faa778fa3d9d8faa078a86a74fc04c68760b9796b45f315e3"
+    },
+    "test_tp_consensus.py": {
+      "Tests.test_all128_real_destinations_written_then_restored_with_padding": "e7d2fa7d8dfa0f45d136eb3b0f224aa58dc55344070cdb19d917e10b14bf9baf",
+      "Tests.test_wrongrank_path_and_substitute_destination_rejected": "179c611dc9885845992456b5d84f9efd00f18361ce0abc0c9ea2eabd936a2fc3"
+    },
+    "test_transaction.py": {
+      "Tests.test_all128_destinations_persist_and_strided_padding_stays_untouched": "60807dcfb0009a69edbd168dfb77e512fc79155189963e7bc78fb267e828fa13",
+      "Tests.test_decision_mismatch_fails_before_any_write": "7fa84c09242055b3f9447d12af13eeaeb8a7f39ee690e51cd959412407a95aec",
+      "Tests.test_failure_after_all_writes_restores_all128_preimages": "355f03154a2cd34ed5794aa09db0504f83cb45c86bfa706e4ae4f28e58d56cec",
+      "Tests.test_stale_owner_after_consensus_never_publishes": "47db889c62b1062288ff4e58e59aa2a0a70e6f91685c04cfdc7b327edf8fffd5",
+      "Tests.test_malformed_owner_child_and_bonus_fail_before_any_write": "862bf1b6e8d8cd2679930367e60d0b7b1cac04dc52bd4d3f57253afae136c129",
+      "Tests.test_all4_bonus_disagreement_fails_before_any_write": "7238430949e4a41b4ef4f53b093bdcc9792b54f0a62b2696477d1f57d3948586",
+      "Tests.test_ack_requires_native_length_root_identity_and_is_one_shot": "33155dd8d741232445b87a4dadf338df2a370f641bd84e2a2472407841027bc3"
+    },
+    "test_whole_frontdoor.py": {
+      "Tests.test_complete_defaultOFF_entrypoints_without_backend": "7ca3cab5a79c168d6a49a3a2c3a8f6d7390baf274cdd27e2ae422b90ae01fceb",
+      "Tests.test_actual_complete_command_builder_and_output_contract": "8165e5e17d12d75c354a3b218998503c71447aa13ac4e66f0eb304ad91f69bf5",
+      "Tests.test_real_HTTP_client_to_first_boundary_and_two_responses": "7b2c706b12d5e0677d5996d2a882003057ac11db98e80e63647187b3fa75249f",
+      "Tests.test_actual_serialized_assignment_all4_retirement_and_wrong_suffix_reject": "442b573ec03eb78bf3fd6b1702bc57baaae78494b81c7f9d5e4ae92b348a5bd7",
+      "Tests.test_owner_full_inverse_and_CPUconsumer_role": "c3502222d347c64ebde280fc0a14120731784a5fef13463688efb9035c5ced20",
+      "Tests.test_actual_four_shard_vocabulary_join_and_wrong_global_rejection": "fb3f01a6c23d847841ae3012e98ab55eafb16f0e51dddbfa5907a4bfa56a1fe3"
+    }
+  },
+  "actual_sameimage_executed": false
+}

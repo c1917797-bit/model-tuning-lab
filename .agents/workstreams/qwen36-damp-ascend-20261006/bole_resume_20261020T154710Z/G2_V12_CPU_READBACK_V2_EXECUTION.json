@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_v12_cpu_readback_v2/readback_cpu.py",
+    "--execute",
+    "--source-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v12/SOURCE_BOUND.json\", \"bytes\": 908497, \"sha256\": \"6c925c8e827b4761926645b89c5897ef25d7e81a80664cb4b4def75076c05d15\"}",
+    "--result-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12-CPU/RESULT.json\", \"bytes\": 1202315, \"sha256\": \"d7f90208d7faf168fda68d61b08e15c066e00b0e37da54111445bd41b9b34cee\"}",
+    "--unit-terminal-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V12_CPU_SYSTEMD_TERMINAL.json\", \"bytes\": 361, \"sha256\": \"f98de0d3d059dd979f24ab662d50c8908d1be5caa604825372c3aeceb69341c3\"}",
+    "--output",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V12_CPU_READBACK.json"
+  ],
+  "reader": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_v12_cpu_readback_v2/readback_cpu.py",
+    "bytes": 51180,
+    "sha256": "bbd3f5502ab28f9fe5957c678114faaf34a9a5b70419c97c8681f22f83e18c33"
+  },
+  "exit_code": 0,
+  "stdout": "{\"qualification_ref\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V12_CPU_READBACK.json\", \"bytes\": 787650, \"sha256\": \"259c07e794a336f66678b1c9caceb8c8200b157b897764f6e980c28c63904a5a\"}, \"source\": {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v12/SOURCE_BOUND.json\", \"bytes\": 908497, \"sha256\": \"6c925c8e827b4761926645b89c5897ef25d7e81a80664cb4b4def75076c05d15\"}, \"result_ref\": {\"path\": \"/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12-CPU/RESULT.json\", \"bytes\": 1202315, \"sha256\": \"d7f90208d7faf168fda68d61b08e15c066e00b0e37da54111445bd41b9b34cee\"}, \"finite_unit_ref\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V12_CPU_SYSTEMD_TERMINAL.json\", \"bytes\": 361, \"sha256\": \"f98de0d3d059dd979f24ab662d50c8908d1be5caa604825372c3aeceb69341c3\"}, \"sameimage_341_parser_and_actual_cold_handoff_pass\": true, \"all_owned_stopped_retained\": true, \"model_ready\": false, \"NPU\": false}\n",
+  "stderr": ""
+}

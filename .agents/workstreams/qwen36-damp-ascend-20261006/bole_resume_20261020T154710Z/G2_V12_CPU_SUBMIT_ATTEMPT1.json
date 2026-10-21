@@ -1,0 +1,15 @@
+{
+  "script": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/submit_g2_v12_cpu.py",
+    "bytes": 2832,
+    "sha256": "9aef367e3ae11f642dc818b5eafb1116cb5708426015a1d978163bb6ec6540cd"
+  },
+  "no_unit_submitted": true,
+  "assertion": "G2 actual COMMANDS are intentionally unwrapped; GDN COMMANDS include outerflock",
+  "new_script": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/submit_g2_v12_cpu_v2.py",
+    "bytes": 2938,
+    "sha256": "b04cbf098a3e7e81713e98c6d93480346f5dc31a58ea4a3734232d87a75fdab3"
+  },
+  "new_submission_adds_exactly_one_outer_MAIN_flock": true
+}

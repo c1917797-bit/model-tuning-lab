@@ -1,0 +1,37 @@
+[
+  {
+    "argv": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_service_probe_g1_v4/prepare_gdn_probe.py"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"enabled\":false,\"NPU\":false,\"prepared_only\":true}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_service_probe_g1_v4/prepare_gdn_probe.py",
+      "--help"
+    ],
+    "exit_code": 0,
+    "stdout": "usage: prepare_gdn_probe.py [-h] [--execute]\n                            [--prior-G1-refs-json PRIOR_G1_REFS_JSON]\n                            [--replay-refs-json REPLAY_REFS_JSON]\n                            [--mode {matched_original,candidate}]\n                            [--new-root NEW_ROOT] [--output-root OUTPUT_ROOT]\n\nDefault-OFF fresh source builder for actual G1 service GDN numerical probe. No\nDocker/device/Git admission. MAIN executes this against real pinned parent\nevidence and then independently owns the original finite same-image workflow.\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --execute\n  --prior-G1-refs-json PRIOR_G1_REFS_JSON\n  --replay-refs-json REPLAY_REFS_JSON\n  --mode {matched_original,candidate}\n  --new-root NEW_ROOT\n  --output-root OUTPUT_ROOT\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_service_probe_g1_v4/prepare_gdn_probe.py",
+      "--execute"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_service_probe_g1_v4/prepare_gdn_probe.py\", line 191, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_service_probe_g1_v4/prepare_gdn_probe.py\", line 102, in main\n    need(all(vars(a).values()),'exact actual G1/replay chains, matched mode and new absent source/output leaves')\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_service_probe_g1_v4/prepare_gdn_probe.py\", line 22, in need\n    if not v:raise ValueError(s)\nValueError: exact actual G1/replay chains, matched mode and new absent source/output leaves\n"
+  }
+]

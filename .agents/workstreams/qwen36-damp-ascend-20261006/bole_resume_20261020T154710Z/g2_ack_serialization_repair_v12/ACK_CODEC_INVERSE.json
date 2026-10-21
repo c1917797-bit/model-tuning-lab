@@ -1,0 +1,49 @@
+{
+  "all20_semantic_fields_and_full_Ref3_and_cgroup_retained": true,
+  "baseline": {
+    "bytes": 824421,
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v11/SOURCE_BOUND.json",
+    "sha256": "0cb8a78ee572778434b7b64f494fa42de46cdf4561c235effce3440a8b294f01"
+  },
+  "canonical_still3197": true,
+  "new_wire2846": true,
+  "numerical_model_qualification": false,
+  "old_wire_3307": true,
+  "original3072_wire_cap_unchanged": true,
+  "original_complete_Sender_and_validator_functions": [
+    "need",
+    "ref",
+    "checked",
+    "contract",
+    "validate_ack",
+    "Sender",
+    "Sender.__init__",
+    "Sender.metadata_bytes",
+    "Sender.send",
+    "Sender.retain_failure"
+  ],
+  "pairs": {
+    "g2_channel.py": {
+      "after_bytes": 16728,
+      "after_sha256": "f52484f64a63f4dd679c554006adba580b0edec341e35e0bceae039c4ac2e1af",
+      "before_bytes": 10001,
+      "before_sha256": "30fc3445edda52940d398db81fa480ba55d30739953ea831d5060c0c3fe31387",
+      "whole_inverse": true
+    },
+    "g2_consumer.py": {
+      "after_bytes": 7492,
+      "after_sha256": "3d66905a331165de4182c4885065935aaecab3774f35969c88160e67db00dc71",
+      "before_bytes": 7521,
+      "before_sha256": "0ee132b1acecf59306d8d023ce83f39eebe9dafcbf283ac0ab91f995c95c6549",
+      "whole_inverse": true
+    },
+    "g2_finalize.py": {
+      "after_bytes": 17504,
+      "after_sha256": "8d8b3a9af2c069792a3d923af0a43ff6ba7b8e4effba5681a17cdfb2bbcccfda",
+      "before_bytes": 17502,
+      "before_sha256": "4fc550421e3403e40243c33a048887be9e262b51be208e5338c3c92b9b855f88",
+      "whole_inverse": true
+    }
+  },
+  "schema": "bole.actual-v11-to-v12-lossless-ACK-inverse/v1"
+}

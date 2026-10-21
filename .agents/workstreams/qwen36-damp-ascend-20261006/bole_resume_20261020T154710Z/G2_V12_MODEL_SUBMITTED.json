@@ -1,0 +1,64 @@
+{
+  "schema": "bole.finite-G2-v12-MODEL-submission/v1",
+  "unit": "bole-g2-v12-model-20261020t154710z.service",
+  "argv": [
+    "/usr/bin/systemd-run",
+    "--quiet",
+    "--unit=bole-g2-v12-model-20261020t154710z.service",
+    "--property=Type=exec",
+    "--property=RemainAfterExit=yes",
+    "--property=Restart=no",
+    "--property=RuntimeMaxSec=3900",
+    "--property=TimeoutStopSec=180",
+    "--property=KillSignal=SIGTERM",
+    "--property=CPUAffinity=166",
+    "--property=MemoryMax=512M",
+    "--property=WorkingDirectory=/opt/host/vnf/austinov/model-tuning-lab",
+    "--property=StandardOutput=append:/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2-v12-model.stdout",
+    "--property=StandardError=append:/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2-v12-model.stderr",
+    "/usr/bin/flock",
+    "--nonblock",
+    "--no-fork",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock",
+    "/usr/bin/env",
+    "BOLE_MODEL131_MAIN_ENABLE=1",
+    "DENSE090_EXTERNAL_OUTPUT_ENABLE=1",
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v12/host_service.py",
+    "--execute",
+    "--source-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v12/SOURCE_BOUND.json\", \"bytes\": 908497, \"sha256\": \"6c925c8e827b4761926645b89c5897ef25d7e81a80664cb4b4def75076c05d15\"}",
+    "--output",
+    "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12"
+  ],
+  "source": {
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v12/SOURCE_BOUND.json",
+    "bytes": 908497,
+    "sha256": "6c925c8e827b4761926645b89c5897ef25d7e81a80664cb4b4def75076c05d15"
+  },
+  "commands": {
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v12/COMMANDS.json",
+    "bytes": 3620,
+    "sha256": "90634912628ba38bb1d9087915d963ab99fa9aaf7d4e2ee20770784267672bb6"
+  },
+  "CPU_qualification": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V12_CPU_READBACK.json",
+    "bytes": 787650,
+    "sha256": "259c07e794a336f66678b1c9caceb8c8200b157b897764f6e980c28c63904a5a"
+  },
+  "controller": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/submit_g2_v12_model.py",
+    "bytes": 5235,
+    "sha256": "3c0e98c236c8362538f5f9449b6be73b9f99b7de3c25021a2e3dfe1d4bbfb4ce"
+  },
+  "submit_exit": 0,
+  "stdout": "",
+  "stderr": "",
+  "phase_seconds": 3600,
+  "cleanup_seconds": 180,
+  "NPU_requested": true,
+  "MODEL_qualification_pending": true,
+  "formal_success": false
+}

@@ -1,0 +1,41 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_v12_cpu_readback_v1/readback_cpu.py",
+    "--execute",
+    "--source-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v12/SOURCE_BOUND.json\", \"bytes\": 908497, \"sha256\": \"6c925c8e827b4761926645b89c5897ef25d7e81a80664cb4b4def75076c05d15\"}",
+    "--result-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12-CPU/RESULT.json\", \"bytes\": 1202315, \"sha256\": \"d7f90208d7faf168fda68d61b08e15c066e00b0e37da54111445bd41b9b34cee\"}",
+    "--unit-terminal-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V12_CPU_SYSTEMD_TERMINAL.json\", \"bytes\": 361, \"sha256\": \"f98de0d3d059dd979f24ab662d50c8908d1be5caa604825372c3aeceb69341c3\"}",
+    "--output",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V12_CPU_READBACK.json"
+  ],
+  "reader": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_v12_cpu_readback_v1/readback_cpu.py",
+    "bytes": 51062,
+    "sha256": "b37e73e0bb174feec44757d1b32dee97d3fa67ce26f3a704d334abfb8f8dc6fa"
+  },
+  "cold": [
+    {
+      "flags": [],
+      "exit_code": 0,
+      "stdout": "{\"enabled\":false,\"NPU\":false}\n",
+      "stderr": ""
+    },
+    {
+      "flags": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout": "usage: readback_cpu.py [-h] [--execute] [--source-ref SOURCE_REF]\n                       [--result-ref RESULT_REF]\n                       [--unit-terminal-ref UNIT_TERMINAL_REF]\n                       [--output OUTPUT]\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --execute\n  --source-ref SOURCE_REF\n  --result-ref RESULT_REF\n  --unit-terminal-ref UNIT_TERMINAL_REF\n  --output OUTPUT\n",
+      "stderr": ""
+    }
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_v12_cpu_readback_v1/readback_cpu.py\", line 420, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_v12_cpu_readback_v1/readback_cpu.py\", line 416, in main\n    r=write_exclusive(a.output,value);print(json.dumps(dict(qualification_ref=r,source=sr,result_ref=result,finite_unit_ref=unit_ref,sameimage_341_parser_and_actual_cold_handoff_pass=True,all_owned_stopped_retained=True,model_ready=False,NPU=False)));return 0\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_v12_cpu_readback_v1/readback_cpu.py\", line 393, in write_exclusive\n    path=Path(path);need(path.is_absolute()and path.name=='G2_V11_CPU_READBACK.json'and path.parent.is_dir()and not any(p.is_symlink()for p in(path,*path.parents))and not path.exists()and not any(path.is_relative_to(x)for x in(ROOT,OUT,CPU_OUT,Path(V10_SOURCE['path']).parent,Path(V9_SOURCE['path']).parent,Path(V8_SOURCE['path']).parent)),'exact new ordinary qualification output; never overwrite source/evidence')\n  File \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_v12_cpu_readback_v1/readback_cpu.py\", line 85, in need\n    if not v:raise ValueError(message)\nValueError: exact new ordinary qualification output; never overwrite source/evidence\n"
+}

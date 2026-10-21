@@ -1,0 +1,55 @@
+{
+  "schema": "bole.G2-v12-reader-output-context-only-repair/v2",
+  "before": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_v12_cpu_readback_v1/readback_cpu.py",
+    "bytes": 51062,
+    "sha256": "b37e73e0bb174feec44757d1b32dee97d3fa67ce26f3a704d334abfb8f8dc6fa"
+  },
+  "after": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_v12_cpu_readback_v2/readback_cpu.py",
+    "bytes": 51180,
+    "sha256": "bbd3f5502ab28f9fe5957c678114faaf34a9a5b70419c97c8681f22f83e18c33"
+  },
+  "failed_execution": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V12_CPU_READBACK_EXECUTION.json",
+    "bytes": 3853,
+    "sha256": "ef5d43f461546d90b40d10e8a9768111091ba24b477d8e7fa8663f98bb9e4b08"
+  },
+  "old_guard": "path.name=='G2_V11_CPU_READBACK.json'",
+  "new_guard": "path==Path('/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V12_CPU_READBACK.json')",
+  "whole_inverse": true,
+  "old_write_function": "def write_exclusive(path,value):\n    path=Path(path);need(path.is_absolute()and path.name=='G2_V11_CPU_READBACK.json'and path.parent.is_dir()and not any(p.is_symlink()for p in(path,*path.parents))and not path.exists()and not any(path.is_relative_to(x)for x in(ROOT,OUT,CPU_OUT,Path(V10_SOURCE['path']).parent,Path(V9_SOURCE['path']).parent,Path(V8_SOURCE['path']).parent)),'exact new ordinary qualification output; never overwrite source/evidence')\n    data=(json.dumps(value,sort_keys=True,allow_nan=False)+'\\n').encode();fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)\n    with os.fdopen(fd,'wb')as stream:stream.write(data);stream.flush();os.fsync(stream.fileno())\n    fd=os.open(path.parent,os.O_RDONLY|os.O_DIRECTORY)\n    try:os.fsync(fd)\n    finally:os.close(fd)\n    return ref(path)",
+  "new_write_function": "def write_exclusive(path,value):\n    path=Path(path);need(path.is_absolute()and path==Path('/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V12_CPU_READBACK.json')and path.parent.is_dir()and not any(p.is_symlink()for p in(path,*path.parents))and not path.exists()and not any(path.is_relative_to(x)for x in(ROOT,OUT,CPU_OUT,Path(V10_SOURCE['path']).parent,Path(V9_SOURCE['path']).parent,Path(V8_SOURCE['path']).parent)),'exact new ordinary qualification output; never overwrite source/evidence')\n    data=(json.dumps(value,sort_keys=True,allow_nan=False)+'\\n').encode();fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)\n    with os.fdopen(fd,'wb')as stream:stream.write(data);stream.flush();os.fsync(stream.fileno())\n    fd=os.open(path.parent,os.O_RDONLY|os.O_DIRECTORY)\n    try:os.fsync(fd)\n    finally:os.close(fd)\n    return ref(path)",
+  "other_definitions_AST_unchanged": [
+    "ReadonlyCreateBoundary",
+    "checked",
+    "child",
+    "cold_gate",
+    "create_gate",
+    "execute",
+    "finite",
+    "inspect_row",
+    "main",
+    "metadata",
+    "module",
+    "need",
+    "normalize",
+    "obj",
+    "one",
+    "ordered_owner_expected",
+    "owner_chain",
+    "parse",
+    "ref",
+    "runtime_routes",
+    "safety_validator",
+    "software",
+    "software_args",
+    "source_gate",
+    "source_modules",
+    "stage",
+    "unit_gate",
+    "zero_skip"
+  ],
+  "source_or_CPU_rerun": false,
+  "actual_qualification_pending": true
+}

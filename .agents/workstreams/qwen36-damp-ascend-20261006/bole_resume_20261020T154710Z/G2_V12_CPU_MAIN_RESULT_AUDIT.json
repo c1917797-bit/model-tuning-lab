@@ -1,0 +1,93 @@
+{
+  "schema": "bole.MAIN-G2-v12-CPU-primary-result-audit/v1",
+  "observed_epoch": 1792554723.6868448,
+  "source": {
+    "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v12/SOURCE_BOUND.json",
+    "bytes": 908497,
+    "sha256": "6c925c8e827b4761926645b89c5897ef25d7e81a80664cb4b4def75076c05d15"
+  },
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12-CPU/RESULT.json",
+    "bytes": 1202315,
+    "sha256": "d7f90208d7faf168fda68d61b08e15c066e00b0e37da54111445bd41b9b34cee"
+  },
+  "software_result": {
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12-CPU/cpu-preflight/G2-V12-SOFTWARE/RESULT.json",
+    "bytes": 26155,
+    "sha256": "46a280ed55a4ee689427cd0fbd35e01b4fa13b3d0be5e313e56c5eb88d5bec72"
+  },
+  "fresh_software_contexts": {
+    "source8": 279,
+    "source10": 25,
+    "source11": 18,
+    "current12": 19
+  },
+  "source_count": 3679,
+  "source_equal": true,
+  "primary": null,
+  "secondary": [],
+  "elapsed": 241.18684653996024,
+  "cleanup_spent": 34.05267060000915,
+  "owners": [
+    {
+      "role": "cpu-preflight",
+      "OWNED": {
+        "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12-CPU/cpu-preflight/OWNED.json",
+        "bytes": 671244,
+        "sha256": "eef393dcde0e7a880a006398e397ca1d1dff532d3d41fdf314432df42d7614d5"
+      },
+      "cleanup": {
+        "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12-CPU/cpu-preflight/cleanup.json",
+        "bytes": 1273,
+        "sha256": "e66b0e89b6512bddfb9a472781bf02d8b8a62f442c80ec3790d142b7bdd0b4c8"
+      },
+      "after_inspect": {
+        "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12-CPU/cpu-preflight/inspect-1792554514440097020.json",
+        "bytes": 2777516,
+        "sha256": "b991e0416dff0e18db2f8a30c45bbf35835e3fd78481b5b6d146ba6c840ff4db"
+      },
+      "CID": "502e880b4f9cdca2d97e09e8b000cb3dc533077785309f1d9eeff10eecce0301",
+      "PID": 0,
+      "stopped_retained": true
+    },
+    {
+      "role": "candidate",
+      "OWNED": {
+        "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12-CPU/candidate/OWNED.json",
+        "bytes": 670376,
+        "sha256": "64c6a9d9a5e188c41141c9c12de07a84c8604fa1b93a184edbdf52fc1f3cf728"
+      },
+      "cleanup": {
+        "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12-CPU/candidate/cleanup.json",
+        "bytes": 1257,
+        "sha256": "f88045b31c2fffe27e42c0b4bd5769449316bb6b6d451bff1de0529b5f74357e"
+      },
+      "after_inspect": {
+        "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12-CPU/candidate/inspect-1792554537238333970.json",
+        "bytes": 2774089,
+        "sha256": "f3619f7248e7e3dcd0968ebae937ca06d8ef9c76f1ace1295a75283ef331d74f"
+      },
+      "CID": "f4ac604e3b936083b69cbc67365fa9c0da972a4a1301bff5321d601006e58dba",
+      "PID": 0,
+      "stopped_retained": true
+    }
+  ],
+  "native_parser": {
+    "bytes": 5577,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12-CPU/cpu-preflight/CPU.json",
+    "sha256": "2b83cd81e86c82d4c8a75ec4cf07e7e25492ef0f0bd36560fceb82537823b433"
+  },
+  "cold": {
+    "bytes": 2257,
+    "path": "/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12-CPU/candidate/HANDOFF-COLD.json",
+    "sha256": "52d6dd661ca9d746c842512fff4f5894ff28c3968e0b1c52666b1b81c402f761"
+  },
+  "unit_terminal": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/G2_V12_CPU_SYSTEMD_TERMINAL.json",
+    "bytes": 361,
+    "sha256": "f98de0d3d059dd979f24ab662d50c8908d1be5caa604825372c3aeceb69341c3"
+  },
+  "independent_qualification_pending": true,
+  "MODEL_qualified": false,
+  "formal_success": false
+}

@@ -1,0 +1,55 @@
+{
+  "AST_files": 19,
+  "cold_checks": [
+    {
+      "file": "prepare_g2_ack_v12.py",
+      "flags": [],
+      "exit_code": 0,
+      "stdout": "{\"enabled\":false,\"NPU\":false}\n",
+      "stderr": ""
+    },
+    {
+      "file": "prepare_g2_ack_v12.py",
+      "flags": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout": "usage: prepare_g2_ack_v12.py [-h] [--execute] [--manifest-ref MANIFEST_REF]\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --execute\n  --manifest-ref MANIFEST_REF\n",
+      "stderr": ""
+    },
+    {
+      "file": "audit_source_v12.py",
+      "flags": [],
+      "exit_code": 0,
+      "stdout": "{\"enabled\":false,\"NPU\":false}\n",
+      "stderr": ""
+    },
+    {
+      "file": "audit_source_v12.py",
+      "flags": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout": "usage: audit_source_v12.py [-h] [--execute] [--source-ref SOURCE_REF]\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --execute\n  --source-ref SOURCE_REF\n",
+      "stderr": ""
+    },
+    {
+      "file": "g2_exact_controls.py",
+      "flags": [],
+      "exit_code": 0,
+      "stdout": "{\"enabled\":false,\"NPU\":false}\n",
+      "stderr": ""
+    },
+    {
+      "file": "g2_exact_controls.py",
+      "flags": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout": "usage: g2_exact_controls.py [-h] [--execute] [--source-ref SOURCE_REF]\n                            [--role {source10,source11,current12}]\n\noptional arguments:\n  -h, --help            show this help message and exit\n  --execute\n  --source-ref SOURCE_REF\n  --role {source10,source11,current12}\n",
+      "stderr": ""
+    }
+  ],
+  "actual_NPU": false,
+  "actual_sameimage": false
+}

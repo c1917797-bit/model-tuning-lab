@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_ack_serialization_repair_v12/finalize_packet_v2.py"
+  ],
+  "script": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_ack_serialization_repair_v12/finalize_packet_v2.py",
+    "bytes": 5355,
+    "sha256": "dbd7bcc9f09dd65bfbc7be6d151c937ab272d9e8dd15bb71bbfd97b714497f00"
+  },
+  "exit_code": 0,
+  "stdout": "{\"manifest\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_ack_serialization_repair_v12/MANIFEST.json\", \"bytes\": 6678, \"sha256\": \"90b8fbfaa69cd2075fd596224f51ef822020115fa189c6e7356376daaecaa46f\"}, \"flat\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_ack_serialization_repair_v12/FLAT_TRANSFER.json\", \"bytes\": 259361, \"sha256\": \"a31ce7e2a224e94447cde73f080e8a78a1b41984bb8e3d082915e4e6580ddde3\"}, \"prospective_sameimage\": 341, \"AST_files\": 19, \"OFF_help_checks\": 6, \"actual_model_qualified\": false}\n",
+  "stderr": ""
+}

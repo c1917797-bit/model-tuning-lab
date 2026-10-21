@@ -1,0 +1,58 @@
+V11_SOURCE=dict(path='/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v11/SOURCE_BOUND.json',bytes=824421,sha256='0cb8a78ee572778434b7b64f494fa42de46cdf4561c235effce3440a8b294f01')
+ROOT=Path('/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v12')
+OUT=Path('/opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v12')
+CPU_OUT=Path(str(OUT)+'-CPU')
+SOURCE=dict(path=str(ROOT/'SOURCE_BOUND.json'),bytes=908497,sha256='6c925c8e827b4761926645b89c5897ef25d7e81a80664cb4b4def75076c05d15')
+RESULT=None
+ACK_MANIFEST=(6678,'90b8fbfaa69cd2075fd596224f51ef822020115fa189c6e7356376daaecaa46f')
+ACK_AUDIT=(4613,'8fea08308fc18a817481a236694a636c5eec6f9ec1ee24f365c7839f0b1f870c')
+ACK_PREPARER=(14137,'decce5414b917d26b1e9c5d2627aa37e228223111c031b2b62150578937ab4cb')
+
+def source_modules(m):
+    sys.path.insert(0,str(ROOT));loaded={}
+    names=('sourceio','component_gate','predecessor118t','bind_model','command_contract','g2_cold_parent_output','g2_callee_proof','g2_cold_clock','g2_handoff','g2_contract','g2_host_adapter','external025','g2_ack_proof','g2_software_stages','prepare_g2_phases_v11','g2_executor_proof','owned_create','prepare_g2_ack_v12')
+    for name in names:
+        need(name not in sys.modules,'fresh independent reader source namespace '+name)
+        value=importlib.import_module(name);need(ref(value.__file__)==m['files'][name+'.py'],'exact actual source-owned original helper '+name);loaded[name]=value
+    return NS(**loaded)
+
+def source_gate(sr):
+    need(SOURCE is not None and sr==SOURCE,'only actual fully pinned prepared/audited v12 SOURCE; pending actual Ref never qualifies')
+    m=obj(sr);need(m['root']==str(ROOT)and m['output_root']==str(OUT)and m['prepared_only']is False and m['default_enabled']is False and m['service_required_sameimage_software_cases']==341,'actual bound defaultOFF four-source341 source')
+    for r in(*m['files'].values(),*m['dependencies']):checked(r)
+    runtime_snapshots=runtime_routes(m)
+    proof=m['g2_ack_serialization_v12'];manifest_ref=proof['manifest']
+    need((manifest_ref['bytes'],manifest_ref['sha256'])==ACK_MANIFEST,'exact reviewed remotely frozen v12 ACK packet');manifest=obj(manifest_ref)
+    copies=[r for r in m['files'].values()if(r['bytes'],r['sha256'])==ACK_MANIFEST]
+    need(len(copies)==1 and checked(copies[0]).read_bytes()==checked(manifest_ref).read_bytes(),'one exact source-owned packet manifest copy')
+    need(len(manifest['overlay_files'])==13,'all thirteen v12 overlay operands declared')
+    for name,wanted in manifest['overlay_files'].items():need((m['files'][name]['bytes'],m['files'][name]['sha256'])==(wanted['bytes'],wanted['sha256']),'whole frozen v12 overlay '+name)
+    need((m['files']['prepare_g2_ack_v12.py']['bytes'],m['files']['prepare_g2_ack_v12.py']['sha256'])==ACK_PREPARER and proof['actual_preparer']==m['files']['prepare_g2_ack_v12.py'],'actual pinned v12 source preparer')
+    mods=source_modules(m);B=mods.prepare_g2_ack_v12;parent,observed,cause=B.evidence()
+    need(B.SOURCE==V11_SOURCE and all(proof[k]==v for k,v in cause.items())and proof['parent_source']==V11_SOURCE,'actual failed v11 MODEL retained only as failure provenance')
+    need(proof['wire_schema']=='bole.actual-independent-frame-ACK-wire/v3'and proof['semantic_schema']=='bole.actual-independent-frame-ACK/v2'and proof['original322_tests_byteexact']is True and proof['software_sources_fresh']==dict(source8=279,source10=25,source11=18,current12=19)and proof['no_old_whole_software_replay']is True and proof['no_new_RW_alias']is True and proof['actual_parser_and_cold_before_NPU_required']is True,'explicit lossless ACK protocol and exact four software contexts')
+    for name,r in parent['files'].items():
+        if name not in B.CHANGED:need(checked(r).read_bytes()==checked(m['files'][name]).read_bytes(),'all original322 tests/math128/metadata/parser/transport/resources whole bytes '+name)
+    ledger=obj(proof['whole_current_inverse'])
+    need(ledger==obj(m['files']['G2_ACK_EDITS_V12.json'])and ledger['baseline']==V11_SOURCE and set(ledger['files'])==set(B.CHANGED),'complete declared v12 whole-file inverse')
+    for name,row in ledger['files'].items():need(row['before']==parent['files'][name]and row['after']==m['files'][name]and row['edits']==[dict(before=checked(row['before']).read_text(),after=checked(row['after']).read_text())],'complete original/current file operands '+name)
+    scope=m['service_software_scope']
+    required=dict(schema='bole.G2-four-source-ACK-staged-software-scope/v12',parent_source=V8_SOURCE,parent_exact_cases=279,parent_suite_runs_in_separate_exact_source_process=True,controls_source=V10_SOURCE,controls_source_cases=25,controls_run_only_tests_in_exact_source_process=True,historical_stage_source=V11_SOURCE,historical_stage_cases=18,current_pattern='test_g2_ack*.py',new_current_cases=19,allocation_seconds=dict(parent279=120.,controls=60.,metadata=120.),aggregate_cap_seconds=300.)
+    need(all(scope[k]==v for k,v in required.items()),'four exact-source contexts and unchanged finite300 allocation')
+    mods.g2_software_stages.scope(m,sr)
+    snapshot=mods.g2_callee_proof.verify_snapshot(m);need(snapshot['snapshot_imported_as_controller']is False and snapshot['original_ref']==m['g2_callee_contract_v10']['original025_sources']['safety_host'],'source-only CPU safety snapshot genuine original025 bytes')
+    need(mods.g2_executor_proof.consume(m['stream_executor_sources'])==m['stream_executor_proof']and mods.g2_executor_proof.installed(m['stream_executor_sources'])==m['stream_runtime_sources'],'actual whole launcher/CPU3 installed source proof on explicit host snapshots')
+    clock=mods.g2_cold_clock.validate(checked(m['files']['host_service.py']).read_text());need(clock['one_main_entry_clock']is True and clock['phase_seconds']==3600 and clock['shared_cleanup_seconds']==180 and clock['fixed_cutoff']==1792597630,'actual source-owned MAIN firstentry/Joint/remaining/cleanup clock')
+    C=mods.sourceio;canonical=C.ref(sr['path']);need(canonical==sr,'same actual canonical source Ref')
+    refs=[*mods.bind_model.readset(canonical),*m['dependencies'],*mods.command_contract.validate(C,canonical,m)];complete={}
+    for r in refs:checked(r);need(r['path']not in complete or complete[r['path']]==r['sha256'],'no conflicting actual closed readset');complete[r['path']]=r['sha256']
+    mods.actual_ordered_readset=refs
+    commands=obj(ref(ROOT/'COMMANDS.json'));need(commands['required_sameimage_software_cases']==341,'actual current runnable341 command scope')
+    for r in observed:need(complete.get(r['path'])==r['sha256'],'failed11 actual evidence included in immutable source readset')
+    audit_ref=m['files']['audit_source_v12.py'];need((audit_ref['bytes'],audit_ref['sha256'])==ACK_AUDIT,'exact source-owned readonly v12 audit implementation')
+    argv=[sys.executable,'-I','-B',str(checked(audit_ref)),'--execute','--source-ref',json.dumps(canonical)]
+    q=subprocess.run(argv,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=600,check=False)
+    need(q.returncode==0,'actual source-owned readonly whole-ACK/inverse audit reexecuted successfully')
+    audited=one(q.stdout,'bole.G2-v12-lossless-ACK-wire-readonly-audit/v1');need(audited['source']==sr and audited['readset_count']==len(complete),'fresh actual source audit joins complete current immutable closure')
+    audit_record=dict(audit_ref=audit_ref,argv=argv,returncode=q.returncode,stdout=q.stdout.decode('utf-8','strict'),stderr=q.stderr.decode('utf-8','strict'),result=audited)
+    return m,mods,complete,commands,clock,dict(snapshot,runtime_host_snapshots=runtime_snapshots,v12_readonly_audit_reexecuted=audit_record)

@@ -1,0 +1,53 @@
+{
+  "schema": "bole.MAIN-GDN-v4-CPU-full240-primary-audit/v1",
+  "source": {
+    "bytes": 112215,
+    "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v4/SOURCE_BOUND.json",
+    "sha256": "9f4e1a0535aa5279a07135ebd33ceadf0fa321ace6ee869bccc71caf98a57e1f"
+  },
+  "result": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-matched-v4-CPU/RESULT.json",
+    "bytes": 233293,
+    "sha256": "49655230cbbbc32d062e1310873353f00b087e96e645544a3cdf5cf4260726fa"
+  },
+  "source_count": 726,
+  "source_equal": true,
+  "primary": null,
+  "secondary": [],
+  "software_stdout": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-matched-v4-CPU/cpu-preflight/SOFTWARE.stdout",
+    "bytes": 6047,
+    "sha256": "01190b992c034a1623ba11c911cb7b472d31e83b10640397f65ae3650b5afd02"
+  },
+  "software_stderr": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-matched-v4-CPU/cpu-preflight/SOFTWARE.stderr",
+    "bytes": 36416,
+    "sha256": "2b0042bd1128c40735ee644f11ea5ed4ba518710b29f4be0df89ebc06ffd9fd0"
+  },
+  "all240_zero_skip": true,
+  "OWNED": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-matched-v4-CPU/cpu-preflight/OWNED.json",
+    "bytes": 92328,
+    "sha256": "13926274efc09071bfb5477663c4beabeaa1115dea04fb4988e4e3d8dbd90d10"
+  },
+  "after_inspect": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-matched-v4-CPU/cpu-preflight/inspect-1792554822785751630.json",
+    "bytes": 387708,
+    "sha256": "0ef9d3f7fd703393c137e2a367de30982832dd96878e04788bd8d5df37892a91"
+  },
+  "cleanup": {
+    "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-matched-v4-CPU/cpu-preflight/cleanup.json",
+    "bytes": 1217,
+    "sha256": "5a0a255231ae493033d2bec07d3f371c45238b80d0419d2d498a6d174c98e7c9"
+  },
+  "CID": "027d30ec3e6c5cc284e1d01ec78c1b3aa240c52c52e90745cf1e4718d53b4e31",
+  "stopped_retained": true,
+  "PID": 0,
+  "unit_terminal": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/GDN_MATCHED_V4_CPU_SYSTEMD_TERMINAL.json",
+    "bytes": 369,
+    "sha256": "a35ebed249e520e21bbf38284315f7a08cc47cee1dea77db6f0474b21d29ccf1"
+  },
+  "MODEL_qualified": false,
+  "formal_success": false
+}

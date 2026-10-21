@@ -1,0 +1,1772 @@
+{
+  "schema": "bole.MAIN-complete-unit-controller-join/v1",
+  "observed_epoch": 1792553074.2494104,
+  "complete_observation": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_COMPLETE_UNIT_OBSERVATION_V20.json",
+    "bytes": 163157,
+    "sha256": "0241babde5f139e49804b7cb83506b2b0b318043687c71cd8183c85d8eac7c27"
+  },
+  "prior_policy": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_CPU_QUIESCENCE_POLICY_TASK_CPU_V14.json",
+    "bytes": 23595,
+    "sha256": "7e350605a6b447f553115a86146a737adfc1b31d18b9c525f7e5b7a4f39a634b"
+  },
+  "units": [
+    {
+      "unit": "bole-fa64-r16-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r16/host090.py",
+        "bytes": 11841,
+        "sha256": "a59be9c1173adadfda8c3f58cf0f32a7debada32620fae6f7e5be255100c9c46"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r16/host090.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r16/SOURCE_BOUND.json\", \"bytes\": 75817, \"sha256\": \"36715a4ffa440d906620e92d0e474ffe761508e671ab4a5d6bc910afd8b61dbb\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r16-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 16:35:00 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 16:35:02 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r16/host090.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r16/SOURCE_BOUND.json\", \"bytes\": 75817, \"sha256\": \"36715a4ffa440d906620e92d0e474ffe761508e671ab4a5d6bc910afd8b61dbb\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r16-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-fa64-r16-cpu-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-fa64-r16-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-fa64-r16-model-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r16/host090.py",
+        "bytes": 11841,
+        "sha256": "a59be9c1173adadfda8c3f58cf0f32a7debada32620fae6f7e5be255100c9c46"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r16/host090.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r16/SOURCE_BOUND.json\", \"bytes\": 75817, \"sha256\": \"36715a4ffa440d906620e92d0e474ffe761508e671ab4a5d6bc910afd8b61dbb\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r16 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 16:38:46 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 16:39:17 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r16/host090.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r16/SOURCE_BOUND.json\", \"bytes\": 75817, \"sha256\": \"36715a4ffa440d906620e92d0e474ffe761508e671ab4a5d6bc910afd8b61dbb\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r16 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-fa64-r16-model-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-fa64-r16-model-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-fa64-r17-model-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r17/host090.py",
+        "bytes": 11686,
+        "sha256": "9f699539826de79ea31d126acff239def9ea04999876898b4250f2973d35f2f7"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r17/host090.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r17/SOURCE_BOUND.json\", \"bytes\": 75343, \"sha256\": \"bb7947a51d1c05466d32d968176ed3d14e8cde4a5f296b8c42cc01e173505571\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r17 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 16:41:28 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 16:48:06 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r17/host090.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r17/SOURCE_BOUND.json\", \"bytes\": 75343, \"sha256\": \"bb7947a51d1c05466d32d968176ed3d14e8cde4a5f296b8c42cc01e173505571\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r17 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-fa64-r17-model-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-fa64-r17-model-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-fa64-r18-model-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r18/host090.py",
+        "bytes": 11686,
+        "sha256": "9f699539826de79ea31d126acff239def9ea04999876898b4250f2973d35f2f7"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r18/host090.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r18/SOURCE_BOUND.json\", \"bytes\": 75343, \"sha256\": \"7125bc164e9f17b01693a1ca4947d55c36c79ba96234f2ec356ecc37ff77075c\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r18 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 16:50:45 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 16:54:03 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r18/host090.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r18/SOURCE_BOUND.json\", \"bytes\": 75343, \"sha256\": \"7125bc164e9f17b01693a1ca4947d55c36c79ba96234f2ec356ecc37ff77075c\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r18 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-fa64-r18-model-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-fa64-r18-model-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-fa64-r19-model-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r19/host090.py",
+        "bytes": 11686,
+        "sha256": "9f699539826de79ea31d126acff239def9ea04999876898b4250f2973d35f2f7"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r19/host090.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r19/SOURCE_BOUND.json\", \"bytes\": 75797, \"sha256\": \"f679f0f77b0388197451508221affe5567fe438d386b803a8f9eeaf8a561437e\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r19 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 16:56:13 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 16:56:44 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r19/host090.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r19/SOURCE_BOUND.json\", \"bytes\": 75797, \"sha256\": \"f679f0f77b0388197451508221affe5567fe438d386b803a8f9eeaf8a561437e\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r19 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-fa64-r19-model-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-fa64-r19-model-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-fa64-r20-model-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r20/host090.py",
+        "bytes": 11686,
+        "sha256": "9f699539826de79ea31d126acff239def9ea04999876898b4250f2973d35f2f7"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r20/host090.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r20/SOURCE_BOUND.json\", \"bytes\": 75797, \"sha256\": \"e59e37af610e87b27d21ae457c5b0795ee2c1d017c1ad4aee3ac416b6da3c0ea\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r20 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 16:57:14 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 17:07:17 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r20/host090.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r20/SOURCE_BOUND.json\", \"bytes\": 75797, \"sha256\": \"e59e37af610e87b27d21ae457c5b0795ee2c1d017c1ad4aee3ac416b6da3c0ea\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r20 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-fa64-r20-model-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-fa64-r20-model-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-fa64-r21-model-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r21/host090.py",
+        "bytes": 11686,
+        "sha256": "9f699539826de79ea31d126acff239def9ea04999876898b4250f2973d35f2f7"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r21/host090.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r21/SOURCE_BOUND.json\", \"bytes\": 78768, \"sha256\": \"ca98773b2ed7b6aa7ceff572291083d6debfaa676f971e65dadf168b92fcc20f\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r21 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 17:29:44 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 17:32:51 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r21/host090.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r21/SOURCE_BOUND.json\", \"bytes\": 78768, \"sha256\": \"ca98773b2ed7b6aa7ceff572291083d6debfaa676f971e65dadf168b92fcc20f\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r21 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-fa64-r21-model-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-fa64-r21-model-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-fa64-r22-model-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r22/host090.py",
+        "bytes": 11686,
+        "sha256": "9f699539826de79ea31d126acff239def9ea04999876898b4250f2973d35f2f7"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r22/host090.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r22/SOURCE_BOUND.json\", \"bytes\": 78768, \"sha256\": \"26e06a58b5ba65339216b3addb50f48ef1a85291c557ee80872e685b5f676cf3\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r22 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 17:35:28 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 17:39:17 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r22/host090.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r22/SOURCE_BOUND.json\", \"bytes\": 78768, \"sha256\": \"26e06a58b5ba65339216b3addb50f48ef1a85291c557ee80872e685b5f676cf3\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r22 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-fa64-r22-model-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-fa64-r22-model-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-fa64-r23-model-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r23/host090.py",
+        "bytes": 11686,
+        "sha256": "9f699539826de79ea31d126acff239def9ea04999876898b4250f2973d35f2f7"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r23/host090.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r23/SOURCE_BOUND.json\", \"bytes\": 78768, \"sha256\": \"3b0843d87ced4cdfa3ee0f2ab753a1c1193e71ffdea15f64809098d8df3dac09\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r23 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 17:49:40 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 18:00:06 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r23/host090.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-model-fa64-fp16-20261020T154710Z-r23/SOURCE_BOUND.json\", \"bytes\": 78768, \"sha256\": \"3b0843d87ced4cdfa3ee0f2ab753a1c1193e71ffdea15f64809098d8df3dac09\"} --output /opt/host/vnf/austinov/run-bole-model-fa64-fp16-20261020T154710Z-r23 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-fa64-r23-model-20261020t154710z.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-fa64-r23-model-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-g1-v1-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v1/host_service.py",
+        "bytes": 12520,
+        "sha256": "003a3a27dfbc8da77871cdf3477c045dae861c4b2c1e70a0dd69cfc5a78508b4"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v1/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v1/SOURCE_BOUND.json\", \"bytes\": 104107, \"sha256\": \"845c1a86741a9b014e910256f847f45dd2dbbe0c81afec9abec07579fe6f1ca1\"} --output /opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v1-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 19:58:20 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 19:58:51 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v1/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v1/SOURCE_BOUND.json\", \"bytes\": 104107, \"sha256\": \"845c1a86741a9b014e910256f847f45dd2dbbe0c81afec9abec07579fe6f1ca1\"} --output /opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v1-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-g1-v1-cpu-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-g1-v1-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-g1-v2-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/host_service.py",
+        "bytes": 12571,
+        "sha256": "4790dbf430fc111dacb1d73939088294b64704acad516b501dbf5893b1e71e97"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/SOURCE_BOUND.json\", \"bytes\": 109479, \"sha256\": \"010914ebe1bf5d3e6b516103e1a376e24e0a0d965ac0a3a42d7aeb19fca57677\"} --output /opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 20:12:52 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 20:14:52 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/SOURCE_BOUND.json\", \"bytes\": 109479, \"sha256\": \"010914ebe1bf5d3e6b516103e1a376e24e0a0d965ac0a3a42d7aeb19fca57677\"} --output /opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-g1-v2-cpu-20261020t154710z.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-g1-v2-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-g1-v2-model-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/host_service.py",
+        "bytes": 12571,
+        "sha256": "4790dbf430fc111dacb1d73939088294b64704acad516b501dbf5893b1e71e97"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/host_service.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/SOURCE_BOUND.json\", \"bytes\": 109479, \"sha256\": \"010914ebe1bf5d3e6b516103e1a376e24e0a0d965ac0a3a42d7aeb19fca57677\"} --output /opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 20:15:55 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 20:26:41 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/host_service.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g1-two-request-20261020T154710Z-v2/SOURCE_BOUND.json\", \"bytes\": 109479, \"sha256\": \"010914ebe1bf5d3e6b516103e1a376e24e0a0d965ac0a3a42d7aeb19fca57677\"} --output /opt/host/vnf/austinov/run-bole-g1-two-request-20261020T154710Z-v2 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-g1-v2-model-20261020t154710z.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-g1-v2-model-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-g2-v10-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v10/host_service.py",
+        "bytes": 16118,
+        "sha256": "33accbad7d3928a142da8e5c7c4f986c68afeee429a49bed29155d7e4c2878e1"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v10/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v10/SOURCE_BOUND.json\", \"bytes\": 752323, \"sha256\": \"af907e01b7143a476459095fad32db5110a940392584c40a4886763a03a9081c\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 01:36:15 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 01:38:38 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v10/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v10/SOURCE_BOUND.json\", \"bytes\": 752323, \"sha256\": \"af907e01b7143a476459095fad32db5110a940392584c40a4886763a03a9081c\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v10-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-g2-v10-cpu-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-g2-v10-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-g2-v11-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v11/host_service.py",
+        "bytes": 16149,
+        "sha256": "f056b4e7a579aa48d755c0466bbfb318d496703fa700dc9f64dcd506cbe328df"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v11/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v11/SOURCE_BOUND.json\", \"bytes\": 824421, \"sha256\": \"0cb8a78ee572778434b7b64f494fa42de46cdf4561c235effce3440a8b294f01\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 02:09:11 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 02:13:09 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v11/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v11/SOURCE_BOUND.json\", \"bytes\": 824421, \"sha256\": \"0cb8a78ee572778434b7b64f494fa42de46cdf4561c235effce3440a8b294f01\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-g2-v11-cpu-20261020t154710z.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-g2-v11-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-g2-v11-model-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v11/host_service.py",
+        "bytes": 16149,
+        "sha256": "f056b4e7a579aa48d755c0466bbfb318d496703fa700dc9f64dcd506cbe328df"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v11/host_service.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v11/SOURCE_BOUND.json\", \"bytes\": 824421, \"sha256\": \"0cb8a78ee572778434b7b64f494fa42de46cdf4561c235effce3440a8b294f01\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 02:37:29 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 02:51:49 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v11/host_service.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v11/SOURCE_BOUND.json\", \"bytes\": 824421, \"sha256\": \"0cb8a78ee572778434b7b64f494fa42de46cdf4561c235effce3440a8b294f01\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v11 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-g2-v11-model-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-g2-v11-model-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-g2-v2-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v2/host_service.py",
+        "bytes": 14525,
+        "sha256": "4f49f39e48c51f5a5d96059b33385e5e7bcb4d31e99030ad2ac5e592900ea7cb"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v2/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v2/SOURCE_BOUND.json\", \"bytes\": 217765, \"sha256\": \"8ec7b3d7f7f8d070124adce92971059285026f688799645ff14342e85dbfa153\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v2-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 20:57:00 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 20:57:21 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v2/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v2/SOURCE_BOUND.json\", \"bytes\": 217765, \"sha256\": \"8ec7b3d7f7f8d070124adce92971059285026f688799645ff14342e85dbfa153\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v2-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-g2-v2-cpu-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-g2-v2-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-g2-v3-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v3/host_service.py",
+        "bytes": 14525,
+        "sha256": "4f49f39e48c51f5a5d96059b33385e5e7bcb4d31e99030ad2ac5e592900ea7cb"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v3/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v3/SOURCE_BOUND.json\", \"bytes\": 220181, \"sha256\": \"91002bf0dbda04826db5a1c4d3264b36da0bfaf4f4464feb50ce8ee05435c874\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v3-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 21:30:42 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 21:31:57 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v3/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v3/SOURCE_BOUND.json\", \"bytes\": 220181, \"sha256\": \"91002bf0dbda04826db5a1c4d3264b36da0bfaf4f4464feb50ce8ee05435c874\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v3-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-g2-v3-cpu-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-g2-v3-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-g2-v4-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v4/host_service.py",
+        "bytes": 14525,
+        "sha256": "4f49f39e48c51f5a5d96059b33385e5e7bcb4d31e99030ad2ac5e592900ea7cb"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v4/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v4/SOURCE_BOUND.json\", \"bytes\": 328177, \"sha256\": \"c20ff6d58e8ac9a44f20060f96b20c71c56ebaa4425eb33590f77e35644b0877\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v4-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 21:45:04 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 21:46:21 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v4/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v4/SOURCE_BOUND.json\", \"bytes\": 328177, \"sha256\": \"c20ff6d58e8ac9a44f20060f96b20c71c56ebaa4425eb33590f77e35644b0877\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v4-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-g2-v4-cpu-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-g2-v4-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-g2-v5-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v5/host_service.py",
+        "bytes": 14525,
+        "sha256": "4f49f39e48c51f5a5d96059b33385e5e7bcb4d31e99030ad2ac5e592900ea7cb"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v5/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v5/SOURCE_BOUND.json\", \"bytes\": 414541, \"sha256\": \"6dc571c598681f49b63a1c11b10f8be545b126fcfab12aa1cab7ea68cdae4006\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v5-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 22:16:19 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 22:19:07 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v5/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v5/SOURCE_BOUND.json\", \"bytes\": 414541, \"sha256\": \"6dc571c598681f49b63a1c11b10f8be545b126fcfab12aa1cab7ea68cdae4006\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v5-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-g2-v5-cpu-20261020t154710z.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-g2-v5-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-g2-v5-model-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v5/host_service.py",
+        "bytes": 14525,
+        "sha256": "4f49f39e48c51f5a5d96059b33385e5e7bcb4d31e99030ad2ac5e592900ea7cb"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v5/host_service.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v5/SOURCE_BOUND.json\", \"bytes\": 414541, \"sha256\": \"6dc571c598681f49b63a1c11b10f8be545b126fcfab12aa1cab7ea68cdae4006\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v5 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 22:19:57 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 22:25:24 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v5/host_service.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v5/SOURCE_BOUND.json\", \"bytes\": 414541, \"sha256\": \"6dc571c598681f49b63a1c11b10f8be545b126fcfab12aa1cab7ea68cdae4006\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v5 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-g2-v5-model-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-g2-v5-model-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-g2-v6-model-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v6/host_service.py",
+        "bytes": 14491,
+        "sha256": "c45a3725fd36de1834f345e24a47c73c557f8e7dead6ad39eb98ab9187614791"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v6/host_service.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v6/SOURCE_BOUND.json\", \"bytes\": 475051, \"sha256\": \"41a3ffb818e9163515f4bc2e15ab46f2ffbd301ae8a28c7c14e2f209ef92cfd1\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 22:58:28 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 23:09:08 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v6/host_service.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v6/SOURCE_BOUND.json\", \"bytes\": 475051, \"sha256\": \"41a3ffb818e9163515f4bc2e15ab46f2ffbd301ae8a28c7c14e2f209ef92cfd1\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v6 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-g2-v6-model-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-g2-v6-model-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-g2-v8-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v8/host_service.py",
+        "bytes": 15961,
+        "sha256": "0abf2c6b46f1564b218eb4e311743e9d71b3007b16cf94f59115ad49f9ebeccb"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v8/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v8/SOURCE_BOUND.json\", \"bytes\": 612583, \"sha256\": \"ae03ae1e05711105642b4d07763384f38ed190f1defa4a9ac748389e88daa601\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v8-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 00:21:29 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 00:24:17 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v8/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v8/SOURCE_BOUND.json\", \"bytes\": 612583, \"sha256\": \"ae03ae1e05711105642b4d07763384f38ed190f1defa4a9ac748389e88daa601\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v8-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-g2-v8-cpu-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-g2-v8-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-g2-v9-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v9/host_service.py",
+        "bytes": 16118,
+        "sha256": "33accbad7d3928a142da8e5c7c4f986c68afeee429a49bed29155d7e4c2878e1"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v9/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v9/SOURCE_BOUND.json\", \"bytes\": 682545, \"sha256\": \"7dafb83330946b4690824d188f688db8f445270e3c1f86d119c0728e269fef1f\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v9-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 00:59:38 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 00:59:41 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v9/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v9/SOURCE_BOUND.json\", \"bytes\": 682545, \"sha256\": \"7dafb83330946b4690824d188f688db8f445270e3c1f86d119c0728e269fef1f\"} --output /opt/host/vnf/austinov/run-bole-g2-stream-smoke4-20261020T154710Z-v9-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-g2-v9-cpu-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-g2-v9-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-gdn-matched-v3-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/host_service.py",
+        "bytes": 14092,
+        "sha256": "69361989d14b0311f4aec8d3ddefbdef31aedc1e43e2d33347cae4f42c75c37c"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 BOLE_GDN_PROBE_MAIN_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/SOURCE_BOUND.json\", \"bytes\": 112215, \"sha256\": \"f1c1c96aee26844daaf538d516bd65791d83ada35737f3b10aef198329d69e88\"} --output /opt/host/vnf/austinov/run-bole-gdn-g1-probe-matched-v3-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 03:15:52 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 03:16:38 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 BOLE_GDN_PROBE_MAIN_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v3/SOURCE_BOUND.json\", \"bytes\": 112215, \"sha256\": \"f1c1c96aee26844daaf538d516bd65791d83ada35737f3b10aef198329d69e88\"} --output /opt/host/vnf/austinov/run-bole-gdn-g1-probe-matched-v3-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-gdn-matched-v3-cpu-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-gdn-matched-v3-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-gdn3-replay-20261020t154710z-v1.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v1/owner.py",
+        "bytes": 12512,
+        "sha256": "a9a25be997a5e0af4db5daf2a44213683dd7da1ec54aaaa4cb926bb75ce6f1e2"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_GDN3_OWNER_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v1/owner.py --execute --output /opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v1 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 19:26:10 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 19:26:58 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_GDN3_OWNER_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v1/owner.py --execute --output /opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v1 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-gdn3-replay-20261020t154710z-v1.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-gdn3-replay-20261020t154710z-v1.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-gdn3-replay-20261020t154710z-v2.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v2/owner.py",
+        "bytes": 12517,
+        "sha256": "18ce957ef0a8130e64d73f7c73a99536e19f283ea68e09620c6b328fd089a195"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_GDN3_OWNER_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v2/owner.py --execute --output /opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 19:52:18 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 19:56:15 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_GDN3_OWNER_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_replay_v2/owner.py --execute --output /opt/host/vnf/austinov/run-bole-gdn3-replay-20261020T154710Z-v2 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-gdn3-replay-20261020t154710z-v2.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-gdn3-replay-20261020t154710z-v2.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-gdn3-timing-20261020t154710z-v1.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v1/gdn_timing_owner/timing_owner.py",
+        "bytes": 17126,
+        "sha256": "3e333b6559474121f8b025a7401e78c951a1dd3d9296f83c6e89b327cb804c24"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_GDN3_TIMING_OWNER_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v1/gdn_timing_owner/timing_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v1/INPUTS.json\", \"bytes\": 5287, \"sha256\": \"0f625a7867998473dd0ce599c728d5c2430721e0344a80b2c7c0a9fd2683cafc\"} --output /opt/host/vnf/austinov/run-bole-gdn3-timing-20261020T154710Z-v1 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 20:40:07 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 20:41:24 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_GDN3_TIMING_OWNER_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v1/gdn_timing_owner/timing_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v1/INPUTS.json\", \"bytes\": 5287, \"sha256\": \"0f625a7867998473dd0ce599c728d5c2430721e0344a80b2c7c0a9fd2683cafc\"} --output /opt/host/vnf/austinov/run-bole-gdn3-timing-20261020T154710Z-v1 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-gdn3-timing-20261020t154710z-v1.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-gdn3-timing-20261020t154710z-v1.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-gdn3-timing-20261020t154710z-v2.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v2/gdn_timing_owner/timing_owner.py",
+        "bytes": 17126,
+        "sha256": "3e333b6559474121f8b025a7401e78c951a1dd3d9296f83c6e89b327cb804c24"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_GDN3_TIMING_OWNER_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v2/gdn_timing_owner/timing_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v2/INPUTS.json\", \"bytes\": 5287, \"sha256\": \"be53a4d10d6a37cd1a1026b89d902cb17fe8b371e7b9d31133e894c34c1350d3\"} --output /opt/host/vnf/austinov/run-bole-gdn3-timing-20261020T154710Z-v2 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 20:47:25 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 20:48:38 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_GDN3_TIMING_OWNER_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v2/gdn_timing_owner/timing_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v2/INPUTS.json\", \"bytes\": 5287, \"sha256\": \"be53a4d10d6a37cd1a1026b89d902cb17fe8b371e7b9d31133e894c34c1350d3\"} --output /opt/host/vnf/austinov/run-bole-gdn3-timing-20261020T154710Z-v2 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-gdn3-timing-20261020t154710z-v2.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-gdn3-timing-20261020t154710z-v2.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-gdn3-timing-20261020t154710z-v3.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v3/gdn_timing_owner/timing_owner.py",
+        "bytes": 17126,
+        "sha256": "3e333b6559474121f8b025a7401e78c951a1dd3d9296f83c6e89b327cb804c24"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_GDN3_TIMING_OWNER_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v3/gdn_timing_owner/timing_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v3/INPUTS.json\", \"bytes\": 5287, \"sha256\": \"2b4ee50cd0abe010d9f688a1c29fa04af0814b2163d4eae223eec725e2e57222\"} --output /opt/host/vnf/austinov/run-bole-gdn3-timing-20261020T154710Z-v3 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 21:24:53 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 21:29:07 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_GDN3_TIMING_OWNER_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v3/gdn_timing_owner/timing_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/gdn_timing_v3/INPUTS.json\", \"bytes\": 5287, \"sha256\": \"2b4ee50cd0abe010d9f688a1c29fa04af0814b2163d4eae223eec725e2e57222\"} --output /opt/host/vnf/austinov/run-bole-gdn3-timing-20261020T154710Z-v3 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-gdn3-timing-20261020t154710z-v3.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-gdn3-timing-20261020t154710z-v3.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-he-runtime-diagnostic-20261020t154710z-v3.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-task-cpu-he-runtime-20261020T154710Z-v3/diagnostic_host.py",
+        "bytes": 13521,
+        "sha256": "e188291e36275c62a71614f2a78c86b7c6b80684e7d102252041038e2ba7c7bd"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-he-runtime-20261020T154710Z-v3/diagnostic_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-he-runtime-20261020T154710Z-v3/DIAGNOSTIC_INPUTS.json\", \"bytes\": 9794, \"sha256\": \"60033de2eed5829cf2040e5d8a2955cf93b976cdc04fe2f1cfcdb4d1cb32736c\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 23:59:55 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 00:00:12 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-he-runtime-20261020T154710Z-v3/diagnostic_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-he-runtime-20261020T154710Z-v3/DIAGNOSTIC_INPUTS.json\", \"bytes\": 9794, \"sha256\": \"60033de2eed5829cf2040e5d8a2955cf93b976cdc04fe2f1cfcdb4d1cb32736c\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-he-runtime-diagnostic-20261020t154710z-v3.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-he-runtime-diagnostic-20261020t154710z-v3.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-native-ar-20261020t154710z-v3.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v3/native_ar_host.py",
+        "bytes": 13981,
+        "sha256": "fd551c1c6084e4920f7d8c111761cb3753948dc73aa3f28b0a8c0a031d8ed27f"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_NATIVE_AR_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v3/native_ar_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v3/INPUTS.json\", \"bytes\": 12465, \"sha256\": \"b59d95087f05e5b6ea98d171a13bb0a5f1a52604762caedf993e34e8942ed8f8\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 21:01:41 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 21:07:44 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_NATIVE_AR_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v3/native_ar_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v3/INPUTS.json\", \"bytes\": 12465, \"sha256\": \"b59d95087f05e5b6ea98d171a13bb0a5f1a52604762caedf993e34e8942ed8f8\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-native-ar-20261020t154710z-v3.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-native-ar-20261020t154710z-v3.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-native-ar-20261020t154710z-v4.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v4/native_ar_host.py",
+        "bytes": 13981,
+        "sha256": "fd551c1c6084e4920f7d8c111761cb3753948dc73aa3f28b0a8c0a031d8ed27f"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_NATIVE_AR_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v4/native_ar_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v4/INPUTS.json\", \"bytes\": 13055, \"sha256\": \"acb3b514ed9a468cd30f5d4b2e450c26de18f98d3037cf534b6d1c6520ce4b31\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 21:34:27 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 21:39:56 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_NATIVE_AR_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v4/native_ar_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v4/INPUTS.json\", \"bytes\": 13055, \"sha256\": \"acb3b514ed9a468cd30f5d4b2e450c26de18f98d3037cf534b6d1c6520ce4b31\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-native-ar-20261020t154710z-v4.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-native-ar-20261020t154710z-v4.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-native-ar-20261020t154710z-v5.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v5/native_ar_host.py",
+        "bytes": 14095,
+        "sha256": "5b5324e668035a050b6a3eff79fe39bbad7521c3a743500b22855c435da8abfd"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_NATIVE_AR_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v5/native_ar_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v5/INPUTS.json\", \"bytes\": 13282, \"sha256\": \"be8386dc43e1be83c7b187f2cab8b9b5cd272625fcc1e7f5868caa1cb56258bd\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 21:56:16 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 22:05:33 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_NATIVE_AR_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v5/native_ar_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-owner-20261020T154710Z-v5/INPUTS.json\", \"bytes\": 13282, \"sha256\": \"be8386dc43e1be83c7b187f2cab8b9b5cd272625fcc1e7f5868caa1cb56258bd\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-native-ar-20261020t154710z-v5.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-native-ar-20261020t154710z-v5.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-native-ar-fia-20261020t154710z-v1.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-native-ar-fia-control-v1/replay_cpu_owner.py",
+        "bytes": 13176,
+        "sha256": "57ccd1de84de0132a2cacf5c18fcf0d56ca6eec5b09926333c9a006a7c1d7732"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_NATIVE_FIA_REPLAY_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-fia-control-v1/replay_cpu_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-fia-control-v1/INPUTS.json\", \"bytes\": 9615, \"sha256\": \"4ec84d8afc471fdd5bc5fdc26d61f7a1cfbd1a9da46ae654d8e758871c6c600f\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 03:11:36 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 03:13:21 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_NATIVE_FIA_REPLAY_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-fia-control-v1/replay_cpu_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-fia-control-v1/INPUTS.json\", \"bytes\": 9615, \"sha256\": \"4ec84d8afc471fdd5bc5fdc26d61f7a1cfbd1a9da46ae654d8e758871c6c600f\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-native-ar-fia-20261020t154710z-v1.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-native-ar-fia-20261020t154710z-v1.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-native-ar-fia-v1-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_replay_v1/owner.py",
+        "bytes": 6734,
+        "sha256": "4cd86cf5bdc30e52338c6617fcde50a656cfdcbf7b87a03267187853fb9fb539"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_replay_v1/owner.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 17:22:40 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 17:23:01 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_replay_v1/owner.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-native-ar-fia-v1-20261020t154710z.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-native-ar-fia-v1-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-native-ar-fsum-20261020t154710z-v1.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-native-ar-fsum-control-v1/fsum_cpu_owner.py",
+        "bytes": 8467,
+        "sha256": "385e7101cca46dd9c343fec966d0cf5a6ee5e39a879169ae69e9243f3a07e4a4"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_NATIVE_FSUM_ORACLE_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-fsum-control-v1/fsum_cpu_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-fsum-control-v1/INPUTS.json\", \"bytes\": 7784, \"sha256\": \"8cc92215f51a32ba948a30c66e37fcb1af1f0d2de6cd0bb19df01426a2654619\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 01:56:59 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 02:01:57 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_NATIVE_FSUM_ORACLE_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-fsum-control-v1/fsum_cpu_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-fsum-control-v1/INPUTS.json\", \"bytes\": 7784, \"sha256\": \"8cc92215f51a32ba948a30c66e37fcb1af1f0d2de6cd0bb19df01426a2654619\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-native-ar-fsum-20261020t154710z-v1.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-native-ar-fsum-20261020t154710z-v1.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-native-ar-mask-diagnostic-20261020t154710z-v3.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-native-ar-mask-control-v3/mask_cpu_owner.py",
+        "bytes": 8058,
+        "sha256": "a94949cdddf425bac3db191bd74e79e96a5667a7198d86f38ef7a4220b84b0e6"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_NATIVE_MASK_DIAGNOSTIC_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-mask-control-v3/mask_cpu_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-mask-control-v3/INPUTS.json\", \"bytes\": 5511, \"sha256\": \"f4bcc31d0fe26a82771a872c54dbad846fe31d38e945a894eda319ae14184c09\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 00:05:42 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 00:06:30 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_NATIVE_MASK_DIAGNOSTIC_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-mask-control-v3/mask_cpu_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-mask-control-v3/INPUTS.json\", \"bytes\": 5511, \"sha256\": \"f4bcc31d0fe26a82771a872c54dbad846fe31d38e945a894eda319ae14184c09\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-native-ar-mask-diagnostic-20261020t154710z-v3.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-native-ar-mask-diagnostic-20261020t154710z-v3.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-native-ar-mask-diagnostic-20261020t154710z-v4.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-native-ar-mask-control-v4/mask_cpu_owner.py",
+        "bytes": 8055,
+        "sha256": "81959556084545cfd1536645ad70626226a179eb18d6effe3b2e50e98246508a"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_NATIVE_MASK_DIAGNOSTIC_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-mask-control-v4/mask_cpu_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-mask-control-v4/INPUTS.json\", \"bytes\": 5511, \"sha256\": \"b3914fc609dd3b707a9d74c73d932c01afdeaa3c9d602dc8cae6d4b2daf3045d\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 00:15:44 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 00:18:43 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_NATIVE_MASK_DIAGNOSTIC_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-mask-control-v4/mask_cpu_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-mask-control-v4/INPUTS.json\", \"bytes\": 5511, \"sha256\": \"b3914fc609dd3b707a9d74c73d932c01afdeaa3c9d602dc8cae6d4b2daf3045d\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-native-ar-mask-diagnostic-20261020t154710z-v4.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-native-ar-mask-diagnostic-20261020t154710z-v4.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-native-ar-numdiag-20261020t154710z-v1.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-native-ar-numdiag-control-v1/numeric_cpu_owner.py",
+        "bytes": 8296,
+        "sha256": "8eea3f7f534c6a9126f3e451f48ad6dc457766d4318a6129571b765584481e0d"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_NATIVE_NUMERIC_DIAGNOSTIC_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-numdiag-control-v1/numeric_cpu_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-numdiag-control-v1/INPUTS.json\", \"bytes\": 7112, \"sha256\": \"8edd96f8c8bb4c1207c0ff4deaf0a1a1034c435c23357817efff6ecfa5c86d7a\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 01:23:55 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 01:28:47 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_NATIVE_NUMERIC_DIAGNOSTIC_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-numdiag-control-v1/numeric_cpu_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-numdiag-control-v1/INPUTS.json\", \"bytes\": 7112, \"sha256\": \"8edd96f8c8bb4c1207c0ff4deaf0a1a1034c435c23357817efff6ecfa5c86d7a\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-native-ar-numdiag-20261020t154710z-v1.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-native-ar-numdiag-20261020t154710z-v1.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-native-ar-saved-cpu-20261020t154710z-v1.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-native-ar-saved-cpu-20261020T154710Z-v1/saved_cpu_owner.py",
+        "bytes": 8042,
+        "sha256": "cc8cdfc3348ac288daa721d090f603be8f8320db632681bcda16c2737ea23550"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_SAVED_AR_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-saved-cpu-20261020T154710Z-v1/saved_cpu_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-saved-cpu-20261020T154710Z-v1/INPUTS.json\", \"bytes\": 4952, \"sha256\": \"e142ba57ebd69cbc9f8c0c41c6d2a95c640eaa8e8dae9ac798d03333537446e7\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 22:33:46 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 22:36:46 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_SAVED_AR_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-saved-cpu-20261020T154710Z-v1/saved_cpu_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-saved-cpu-20261020T154710Z-v1/INPUTS.json\", \"bytes\": 4952, \"sha256\": \"e142ba57ebd69cbc9f8c0c41c6d2a95c640eaa8e8dae9ac798d03333537446e7\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-native-ar-saved-cpu-20261020t154710z-v1.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-native-ar-saved-cpu-20261020t154710z-v1.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-native-ar-saved-cpu-20261020t154710z-v4.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-native-ar-saved-cpu-control-v4/saved_cpu_owner.py",
+        "bytes": 9849,
+        "sha256": "08d0669d977cab819f732422477439e6e34b048a0109fd21e6b57bebd1a95ad6"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_SAVED_AR_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-saved-cpu-control-v4/saved_cpu_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-saved-cpu-control-v4/INPUTS.json\", \"bytes\": 15313, \"sha256\": \"6cf2fcea6ae9cb25a57449c91931215851281e9a16b84a6f0b3555d707d7b95c\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 00:43:30 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 00:49:16 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_SAVED_AR_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-native-ar-saved-cpu-control-v4/saved_cpu_owner.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-native-ar-saved-cpu-control-v4/INPUTS.json\", \"bytes\": 15313, \"sha256\": \"6cf2fcea6ae9cb25a57449c91931215851281e9a16b84a6f0b3555d707d7b95c\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-native-ar-saved-cpu-20261020t154710z-v4.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-native-ar-saved-cpu-20261020t154710z-v4.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-r20-saved-consumer-r1-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r1.py",
+        "bytes": 7179,
+        "sha256": "fb388fc1f67af9a036cb1f6569f368c1b9778eb718841e7bd1ffe756b63b9466"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r1.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 17:11:30 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 17:11:30 UTC",
+        "ExecMainStatus": "215",
+        "ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r1.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-r20-saved-consumer-r1-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-r20-saved-consumer-r1-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-r20-saved-consumer-r1b-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r1.py",
+        "bytes": 7179,
+        "sha256": "fb388fc1f67af9a036cb1f6569f368c1b9778eb718841e7bd1ffe756b63b9466"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r1.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "signal",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 17:12:19 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 17:12:19 UTC",
+        "ExecMainStatus": "9",
+        "ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r1.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-r20-saved-consumer-r1b-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-r20-saved-consumer-r1b-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-r20-saved-consumer-r2-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r2.py",
+        "bytes": 7278,
+        "sha256": "84c0887ac9953f8c9ce7b5f0cfa0414f0d294a6c41d5b63187ea426f424e81b2"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r2.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 17:13:24 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 17:14:08 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r2.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-r20-saved-consumer-r2-20261020t154710z.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-r20-saved-consumer-r2-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-r20-saved-consumer-r3-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r3.py",
+        "bytes": 7237,
+        "sha256": "0dbe40ef1394e4d15274b7a5f284ba092f69ba909db9cfc2ce88e9d5de0b0797"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r3.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 17:17:05 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 17:17:34 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r3.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-r20-saved-consumer-r3-20261020t154710z.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-r20-saved-consumer-r3-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-r20-saved-consumer-r4-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r4.py",
+        "bytes": 7234,
+        "sha256": "759e3643a2c50c4185f53196f0d1b4bdf637c0d0e148c837939d94aeabd82c27"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r4.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 17:31:59 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 17:32:33 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_saved_consumer_r20_r4.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-r20-saved-consumer-r4-20261020t154710z.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-r20-saved-consumer-r4-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-service-cpu-v2-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_service_cpu_v2.py",
+        "bytes": 4539,
+        "sha256": "86981f0e1fe519f0c206ee0ef9bdba571ce512824f9dd9d9211232e8f0a6b055"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_service_cpu_v2.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 17:52:11 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 17:52:25 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_service_cpu_v2.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-service-cpu-v2-20261020t154710z.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-service-cpu-v2-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-service-cpu-v3-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_service_cpu_v3.py",
+        "bytes": 4675,
+        "sha256": "fe2febd86efe17a06520bb959389f92f98bf12d59df8e3160ebd4d31ff10006b"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_service_cpu_v3.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 18:16:08 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 18:16:22 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/run_service_cpu_v3.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-service-cpu-v3-20261020t154710z.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-service-cpu-v3-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-service-v1-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v1/host_service.py",
+        "bytes": 11732,
+        "sha256": "80e5024f4de0200b3bb481d8ffffb8eca2439391f7082637607a9e2bea599476"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v1/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v1/SOURCE_BOUND.json\", \"bytes\": 92719, \"sha256\": \"8a47f827b9c008dbb906e603bcf3afad404c92b8bfe692aefb10ba6bedee0da8\"} --output /opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v1-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 18:30:02 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 18:30:33 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v1/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v1/SOURCE_BOUND.json\", \"bytes\": 92719, \"sha256\": \"8a47f827b9c008dbb906e603bcf3afad404c92b8bfe692aefb10ba6bedee0da8\"} --output /opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v1-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-service-v1-cpu-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-service-v1-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-service-v2-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v2/host_service.py",
+        "bytes": 11732,
+        "sha256": "80e5024f4de0200b3bb481d8ffffb8eca2439391f7082637607a9e2bea599476"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v2/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v2/SOURCE_BOUND.json\", \"bytes\": 93027, \"sha256\": \"cf8441f7b53414031fb84abe03a224521131b3d9ac7fa33ad4a90177590dee35\"} --output /opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v2-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 18:32:45 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 18:33:16 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v2/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v2/SOURCE_BOUND.json\", \"bytes\": 93027, \"sha256\": \"cf8441f7b53414031fb84abe03a224521131b3d9ac7fa33ad4a90177590dee35\"} --output /opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v2-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-service-v2-cpu-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-service-v2-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-service-v3-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v3/host_service.py",
+        "bytes": 11732,
+        "sha256": "80e5024f4de0200b3bb481d8ffffb8eca2439391f7082637607a9e2bea599476"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v3/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v3/SOURCE_BOUND.json\", \"bytes\": 93027, \"sha256\": \"9670c9e5bba573df6d383c87d670c77b8857f8ca671484259a230d0f98721ec2\"} --output /opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v3-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 18:34:15 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 18:35:30 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v3/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v3/SOURCE_BOUND.json\", \"bytes\": 93027, \"sha256\": \"9670c9e5bba573df6d383c87d670c77b8857f8ca671484259a230d0f98721ec2\"} --output /opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v3-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-service-v3-cpu-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-service-v3-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-service-v4-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v4/host_service.py",
+        "bytes": 11732,
+        "sha256": "80e5024f4de0200b3bb481d8ffffb8eca2439391f7082637607a9e2bea599476"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v4/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v4/SOURCE_BOUND.json\", \"bytes\": 93556, \"sha256\": \"bb880ddedcb6d05d3a6f442c394c26e724c8d0c8f1ebf34581b7bbdfe3966c86\"} --output /opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v4-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 18:37:45 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 18:38:56 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v4/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v4/SOURCE_BOUND.json\", \"bytes\": 93556, \"sha256\": \"bb880ddedcb6d05d3a6f442c394c26e724c8d0c8f1ebf34581b7bbdfe3966c86\"} --output /opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v4-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-service-v4-cpu-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-service-v4-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-service-v5-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v5/host_service.py",
+        "bytes": 11732,
+        "sha256": "80e5024f4de0200b3bb481d8ffffb8eca2439391f7082637607a9e2bea599476"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v5/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v5/SOURCE_BOUND.json\", \"bytes\": 93556, \"sha256\": \"3baa27005a443f612dc0f30755204a1766265b76f5f78fd21be713878e7c1f4d\"} --output /opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v5-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 18:40:37 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 18:42:37 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v5/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v5/SOURCE_BOUND.json\", \"bytes\": 93556, \"sha256\": \"3baa27005a443f612dc0f30755204a1766265b76f5f78fd21be713878e7c1f4d\"} --output /opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v5-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-service-v5-cpu-20261020t154710z.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-service-v5-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-service-v5-model-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v5/host_service.py",
+        "bytes": 11732,
+        "sha256": "80e5024f4de0200b3bb481d8ffffb8eca2439391f7082637607a9e2bea599476"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v5/host_service.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v5/SOURCE_BOUND.json\", \"bytes\": 93556, \"sha256\": \"3baa27005a443f612dc0f30755204a1766265b76f5f78fd21be713878e7c1f4d\"} --output /opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v5 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 18:44:17 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 18:52:50 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v5/host_service.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v5/SOURCE_BOUND.json\", \"bytes\": 93556, \"sha256\": \"3baa27005a443f612dc0f30755204a1766265b76f5f78fd21be713878e7c1f4d\"} --output /opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v5 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-service-v5-model-20261020t154710z.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-service-v5-model-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-service-v6-cpu-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v6/host_service.py",
+        "bytes": 11732,
+        "sha256": "80e5024f4de0200b3bb481d8ffffb8eca2439391f7082637607a9e2bea599476"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v6/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v6/SOURCE_BOUND.json\", \"bytes\": 94072, \"sha256\": \"0893ed7249d167272608203e32faf54cc8574d32ac21686371fd051c57fb3600\"} --output /opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v6-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 18:57:18 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 18:59:19 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v6/host_service.py --execute --cpu-only --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v6/SOURCE_BOUND.json\", \"bytes\": 94072, \"sha256\": \"0893ed7249d167272608203e32faf54cc8574d32ac21686371fd051c57fb3600\"} --output /opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v6-CPU ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-service-v6-cpu-20261020t154710z.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-service-v6-cpu-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-service-v6-model-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v6/host_service.py",
+        "bytes": 11732,
+        "sha256": "80e5024f4de0200b3bb481d8ffffb8eca2439391f7082637607a9e2bea599476"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v6/host_service.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v6/SOURCE_BOUND.json\", \"bytes\": 94072, \"sha256\": \"0893ed7249d167272608203e32faf54cc8574d32ac21686371fd051c57fb3600\"} --output /opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v6 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 19:03:19 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 19:14:16 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_MODEL131_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v6/host_service.py --execute --source-ref {\"path\": \"/opt/host/vnf/austinov/bole-continuous-service-20261020T154710Z-v6/SOURCE_BOUND.json\", \"bytes\": 94072, \"sha256\": \"0893ed7249d167272608203e32faf54cc8574d32ac21686371fd051c57fb3600\"} --output /opt/host/vnf/austinov/run-bole-continuous-service-20261020T154710Z-v6 ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-service-v6-model-20261020t154710z.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-service-v6-model-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-target-conflict-watch-20261020t154710z.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/observe_target_conflicts.py",
+        "bytes": 2734,
+        "sha256": "bad1c572c1f628fe5bda049bac196140f8d861afb726c17a85f786be2ac1489e"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/observe_target_conflicts.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 17:48:04 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 17:58:04 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/python3 ; argv[]=/usr/bin/python3 -I -B /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/observe_target_conflicts.py ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-target-conflict-watch-20261020t154710z.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-target-conflict-watch-20261020t154710z.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-task-cpu-20261020t154710z-v1.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v1/cpu_host.py",
+        "bytes": 18985,
+        "sha256": "b54708da4ede2c85156111c45313dcc54ed0015e907d932effce41d3f77b5f89"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v1/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v1/OWNER_INPUTS.json\", \"bytes\": 52333, \"sha256\": \"a5a94e16e2789530a252943c5f818c1210954853a4546048b96ae893db95af93\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 21:15:43 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 21:15:46 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v1/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v1/OWNER_INPUTS.json\", \"bytes\": 52333, \"sha256\": \"a5a94e16e2789530a252943c5f818c1210954853a4546048b96ae893db95af93\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-task-cpu-20261020t154710z-v1.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-task-cpu-20261020t154710z-v1.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-task-cpu-20261020t154710z-v12.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v12/cpu_host.py",
+        "bytes": 21138,
+        "sha256": "ad0d2421c797f586e20693b17c381abc59d52c9cbac98dab63657e169a607756"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v12/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v12/OWNER_INPUTS.json\", \"bytes\": 61920, \"sha256\": \"3007493dfd24cbd6d59a971e871091f876688a00701a380d6275215c5145245a\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 00:33:06 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 00:35:15 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v12/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v12/OWNER_INPUTS.json\", \"bytes\": 61920, \"sha256\": \"3007493dfd24cbd6d59a971e871091f876688a00701a380d6275215c5145245a\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-task-cpu-20261020t154710z-v12.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-task-cpu-20261020t154710z-v12.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-task-cpu-20261020t154710z-v13.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v13/cpu_host.py",
+        "bytes": 21538,
+        "sha256": "ba1bf05c7dd341769771f4b41c6816b5cda6b08446d6899af10814472d34bab5"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v13/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v13/OWNER_INPUTS.json\", \"bytes\": 63020, \"sha256\": \"f31b0e29e5098db2c3b291b7f7393c838cddf8a5080f60fd9b9ed1abf04ce407\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 01:08:43 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 01:09:14 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v13/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v13/OWNER_INPUTS.json\", \"bytes\": 63020, \"sha256\": \"f31b0e29e5098db2c3b291b7f7393c838cddf8a5080f60fd9b9ed1abf04ce407\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-task-cpu-20261020t154710z-v13.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-task-cpu-20261020t154710z-v13.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    },
+    {
+      "unit": "bole-task-cpu-20261020t154710z-v14.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v14/cpu_host.py",
+        "bytes": 21538,
+        "sha256": "ba1bf05c7dd341769771f4b41c6816b5cda6b08446d6899af10814472d34bab5"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v14/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v14/OWNER_INPUTS.json\", \"bytes\": 63022, \"sha256\": \"91d364a8729efde66b9c6fa062c10fdc5f17669ab3a49639af03dc21297be394\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 01:30:42 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 01:34:27 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v14/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v14/OWNER_INPUTS.json\", \"bytes\": 63022, \"sha256\": \"91d364a8729efde66b9c6fa062c10fdc5f17669ab3a49639af03dc21297be394\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-task-cpu-20261020t154710z-v14.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-task-cpu-20261020t154710z-v14.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-task-cpu-20261020t154710z-v3.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v3/cpu_host.py",
+        "bytes": 19286,
+        "sha256": "c4ab2e436aaea5aa51434d04b27d7e7bd9d927ad4348862d26159eefdecf2c83"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v3/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v3/OWNER_INPUTS.json\", \"bytes\": 53012, \"sha256\": \"b90784c01278a1cb687ffb8dd1dd98496861f5a9fdfdeaf50c7031610c27a5d9\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 21:32:41 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 21:32:45 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v3/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v3/OWNER_INPUTS.json\", \"bytes\": 53012, \"sha256\": \"b90784c01278a1cb687ffb8dd1dd98496861f5a9fdfdeaf50c7031610c27a5d9\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-task-cpu-20261020t154710z-v3.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-task-cpu-20261020t154710z-v3.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-task-cpu-20261020t154710z-v4.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v4/cpu_host.py",
+        "bytes": 19286,
+        "sha256": "c4ab2e436aaea5aa51434d04b27d7e7bd9d927ad4348862d26159eefdecf2c83"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v4/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v4/OWNER_INPUTS.json\", \"bytes\": 53012, \"sha256\": \"c48d5bf25c32f6f18da5758c36478faf3678645886740bcdafd72b5a542a84cd\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 21:41:39 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 21:41:44 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v4/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v4/OWNER_INPUTS.json\", \"bytes\": 53012, \"sha256\": \"c48d5bf25c32f6f18da5758c36478faf3678645886740bcdafd72b5a542a84cd\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-task-cpu-20261020t154710z-v4.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-task-cpu-20261020t154710z-v4.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-task-cpu-20261020t154710z-v5.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v5/cpu_host.py",
+        "bytes": 19381,
+        "sha256": "80926eb68b4cab8ccab95e993af5924cb32bb0ad0bbd36adc34cb6a481bde4c8"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v5/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v5/OWNER_INPUTS.json\", \"bytes\": 53012, \"sha256\": \"f97e27af938f7fb13679978246317bf2768f88d68b33311723af5ba299d98454\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 21:50:28 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 21:51:49 UTC",
+        "ExecMainStatus": "3",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v5/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v5/OWNER_INPUTS.json\", \"bytes\": 53012, \"sha256\": \"f97e27af938f7fb13679978246317bf2768f88d68b33311723af5ba299d98454\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-task-cpu-20261020t154710z-v5.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-task-cpu-20261020t154710z-v5.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-task-cpu-20261020t154710z-v8-auto.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-auto/cpu_host.py",
+        "bytes": 15556,
+        "sha256": "69be8ea5c3283127ebc98714ac19976df35a29de4b752ddeb603e66846407c73"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-auto/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-auto/OWNER_INPUTS.json\", \"bytes\": 57552, \"sha256\": \"bdac2fb211bff5a49f7ddb014f6a0d1e0fb6d3273f997d3241ab0258b53b57c3\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 22:37:46 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 22:37:48 UTC",
+        "ExecMainStatus": "1",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-auto/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-auto/OWNER_INPUTS.json\", \"bytes\": 57552, \"sha256\": \"bdac2fb211bff5a49f7ddb014f6a0d1e0fb6d3273f997d3241ab0258b53b57c3\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-task-cpu-20261020t154710z-v8-auto.service",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/run/systemd/transient/bole-task-cpu-20261020t154710z-v8-auto.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-task-cpu-20261020t154710z-v8b-auto.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-auto/cpu_host.py",
+        "bytes": 15556,
+        "sha256": "69be8ea5c3283127ebc98714ac19976df35a29de4b752ddeb603e66846407c73"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-auto/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-auto/OWNER_INPUTS.json\", \"bytes\": 57552, \"sha256\": \"bdac2fb211bff5a49f7ddb014f6a0d1e0fb6d3273f997d3241ab0258b53b57c3\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 22:41:15 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 22:41:47 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-auto/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-auto/OWNER_INPUTS.json\", \"bytes\": 57552, \"sha256\": \"bdac2fb211bff5a49f7ddb014f6a0d1e0fb6d3273f997d3241ab0258b53b57c3\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-task-cpu-20261020t154710z-v8b-auto.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-task-cpu-20261020t154710z-v8b-auto.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-task-cpu-20261020t154710z-v8b-public-backend.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-public-backend/cpu_host.py",
+        "bytes": 15556,
+        "sha256": "69be8ea5c3283127ebc98714ac19976df35a29de4b752ddeb603e66846407c73"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-public-backend/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-public-backend/OWNER_INPUTS.json\", \"bytes\": 58002, \"sha256\": \"4a425ee1ecdf441242fb052a147a8186e0a4285dc4c599d3cc14277c39da06da\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Tue 2026-10-20 22:42:16 UTC",
+        "ExecMainExitTimestamp": "Tue 2026-10-20 22:42:48 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-public-backend/cpu_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v8-public-backend/OWNER_INPUTS.json\", \"bytes\": 58002, \"sha256\": \"4a425ee1ecdf441242fb052a147a8186e0a4285dc4c599d3cc14277c39da06da\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-task-cpu-20261020t154710z-v8b-public-backend.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-task-cpu-20261020t154710z-v8b-public-backend.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": false
+    },
+    {
+      "unit": "bole-task-cpu-he-dependency-20261020t154710z-v1.service",
+      "controller_ref": {
+        "path": "/opt/host/vnf/austinov/bole-task-cpu-he-dependency-20261020T154710Z-v1/preflight_host.py",
+        "bytes": 8408,
+        "sha256": "c3560555c9f992676283efe965dd08bec532ffcc97c0d5a51472b30bcfc47c99"
+      },
+      "actual_ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-he-dependency-20261020T154710Z-v1/preflight_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-he-dependency-20261020T154710Z-v1/PREFLIGHT_INPUTS.json\", \"bytes\": 9974, \"sha256\": \"314087c46c79400f5317d9dc9f160ec591ba1c8ca64da36134c2bda14874a2d7\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "properties": {
+        "Type": "exec",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainStartTimestamp": "Wed 2026-10-21 00:58:43 UTC",
+        "ExecMainExitTimestamp": "Wed 2026-10-21 00:58:51 UTC",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/flock ; argv[]=/usr/bin/flock --nonblock --no-fork /opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock /usr/bin/env BOLE_TASK_CPU_MAIN_ENABLE=1 DENSE090_EXTERNAL_OUTPUT_ENABLE=1 /usr/bin/python3 -I -B /opt/host/vnf/austinov/bole-task-cpu-he-dependency-20261020T154710Z-v1/preflight_host.py --execute --inputs-ref {\"path\": \"/opt/host/vnf/austinov/bole-task-cpu-he-dependency-20261020T154710Z-v1/PREFLIGHT_INPUTS.json\", \"bytes\": 9974, \"sha256\": \"314087c46c79400f5317d9dc9f160ec591ba1c8ca64da36134c2bda14874a2d7\"} ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "Id": "bole-task-cpu-he-dependency-20261020t154710z-v1.service",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "FragmentPath": "/run/systemd/transient/bole-task-cpu-he-dependency-20261020t154710z-v1.service",
+        "Transient": "yes"
+      },
+      "historical_policy_entry_preserved": true
+    }
+  ],
+  "errors": [
+    {
+      "unit": "bole-g2-v7-model-20261020t154710z.service",
+      "error": "AssertionError('historical full controller identity')",
+      "candidates": [
+        "/opt/host/vnf/austinov/bole-g2-stream-smoke4-20261020T154710Z-v7/host_service.py"
+      ]
+    },
+    {
+      "unit": "bole-he-runtime-diagnostic-20261020t154710z-v1.service",
+      "error": "AssertionError('historical full controller identity')",
+      "candidates": [
+        "/opt/host/vnf/austinov/bole-task-cpu-he-runtime-20261020T154710Z-v1/diagnostic_host.py"
+      ]
+    },
+    {
+      "unit": "bole-he-runtime-diagnostic-20261020t154710z-v2.service",
+      "error": "AssertionError('historical full controller identity')",
+      "candidates": [
+        "/opt/host/vnf/austinov/bole-task-cpu-he-runtime-20261020T154710Z-v2/diagnostic_host.py"
+      ]
+    },
+    {
+      "unit": "bole-native-ar-saved-cpu-20261020t154710z-v2.service",
+      "error": "AssertionError('historical full controller identity')",
+      "candidates": [
+        "/opt/host/vnf/austinov/bole-native-ar-saved-cpu-20261020T154710Z-v2/saved_cpu_owner.py"
+      ]
+    },
+    {
+      "unit": "bole-native-ar-saved-cpu-20261020t154710z-v3.service",
+      "error": "AssertionError('historical full controller identity')",
+      "candidates": [
+        "/opt/host/vnf/austinov/bole-native-ar-saved-cpu-20261020T154710Z-v3/saved_cpu_owner.py"
+      ]
+    },
+    {
+      "unit": "bole-task-cpu-20261020t154710z-v10.service",
+      "error": "AssertionError('historical full controller identity')",
+      "candidates": [
+        "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v10/cpu_host.py"
+      ]
+    },
+    {
+      "unit": "bole-task-cpu-20261020t154710z-v9.service",
+      "error": "AssertionError('historical full controller identity')",
+      "candidates": [
+        "/opt/host/vnf/austinov/bole-task-cpu-20261020T154710Z-v9/cpu_host.py"
+      ]
+    }
+  ],
+  "all_controller_fullSHA_matches": false,
+  "unit_count": 68,
+  "models_OWNED_current_join_pending": true,
+  "policy_admitted": false,
+  "formal_success": false
+}

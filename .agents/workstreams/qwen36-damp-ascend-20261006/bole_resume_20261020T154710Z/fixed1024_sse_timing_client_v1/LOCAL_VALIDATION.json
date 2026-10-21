@@ -1,0 +1,131 @@
+{
+  "AST": [
+    {
+      "bytes": 1679,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/evidence.py",
+      "sha256": "9fc7ec4a4737c1edd386b6e7926367d1a12b2b35ed237faad1005a972caa7ab4"
+    },
+    {
+      "bytes": 6215,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/fixed1024_client.py",
+      "sha256": "0639cbe6e00a4c54eab3f9afe4886b47fbcc10737756b4fcbe46e57ae389dbf8"
+    },
+    {
+      "bytes": 12992,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/independent_reader.py",
+      "sha256": "9ffba3df8c2417e2249f368ebe7573f093e6a45f62e5bcefc1186259f08f273c"
+    },
+    {
+      "bytes": 21247,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/references/completion_protocol.py",
+      "sha256": "93c720549f2a9ef217d7c2a60710225c862032517520dd9ba693d4820f55365c"
+    },
+    {
+      "bytes": 27822,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/references/completion_serving.py",
+      "sha256": "c67bff55fa29c5f89000c3afdc9c7c66305612b13a8a1d85976e5872cee086d7"
+    },
+    {
+      "bytes": 4263,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/review_source.py",
+      "sha256": "0249ac96cebbe0bed4b0bb0712d5b2556ca7d1a5e69f5f0e3bf834459ad209e2"
+    },
+    {
+      "bytes": 12352,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/test_sse_controls.py",
+      "sha256": "19e603a3651cc1a8ff555622fc385f51e1ac41bdd682b226a7651dfe919e26db"
+    },
+    {
+      "bytes": 2201,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/validate_local.py",
+      "sha256": "dabfe2de3bfd7cbe0677a1ede6f260139b81cbce01bd2dd940ec5fef078d9f29"
+    }
+  ],
+  "CLI_modes": [
+    {
+      "args": [],
+      "file": "fixed1024_client.py",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"enabled\":false,\"HTTP\":false,\"NPU\":false}\n"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "file": "fixed1024_client.py",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "usage: fixed1024_client.py [-h] [--execute]\n\noptions:\n  -h, --help  show this help message and exit\n  --execute\n"
+    },
+    {
+      "args": [
+        "--execute"
+      ],
+      "file": "fixed1024_client.py",
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/fixed1024_client.py\", line 83, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n                                             ^^^^^^\n  File \"/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/fixed1024_client.py\", line 82, in main\n    execute()\n  File \"/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/fixed1024_client.py\", line 77, in execute\n    raise ValueError('SOURCE_ONLY: actual MODEL four Refs, captureOFF production qualification and paired owner remain null; live HTTP/timing execute is forbidden')\nValueError: SOURCE_ONLY: actual MODEL four Refs, captureOFF production qualification and paired owner remain null; live HTTP/timing execute is forbidden\n",
+      "stdout": ""
+    },
+    {
+      "args": [],
+      "file": "independent_reader.py",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\"enabled\":false,\"HTTP\":false,\"NPU\":false,\"formal_qualification\":false}\n"
+    },
+    {
+      "args": [
+        "--help"
+      ],
+      "file": "independent_reader.py",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "usage: independent_reader.py [-h] [--execute]\n\noptions:\n  -h, --help  show this help message and exit\n  --execute\n"
+    },
+    {
+      "args": [
+        "--execute"
+      ],
+      "file": "independent_reader.py",
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/independent_reader.py\", line 122, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n                                             ^^^^^^\n  File \"/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/independent_reader.py\", line 121, in main\n    qualified_three_pairs()\n  File \"/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/independent_reader.py\", line 115, in qualified_three_pairs\n    need(all(r is not None for r in MODEL_FOUR_REFS.values())and FIXED1024_CORRECTNESS_QUALIFICATION is not None and CAPTURE_OFF_PRODUCTION_QUALIFICATION is not None and PAIRED_OWNER_REF is not None and SOURCE_BOUND_OWNER_REVIEWER_REF is not None,'SOURCE_ONLY: real MODEL four Refs, captureOFF production qualification, original all4/7CPU/clock/cleanup and paired owner remain pending')\n  File \"/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/evidence.py\", line 6, in need\n    if not v:raise ValueError(s)\n             ^^^^^^^^^^^^^^^^^^^\nValueError: SOURCE_ONLY: real MODEL four Refs, captureOFF production qualification, original all4/7CPU/clock/cleanup and paired owner remain pending\n",
+      "stdout": ""
+    }
+  ],
+  "MODEL_four_refs": {
+    "owner_result": null,
+    "qualification": null,
+    "source": null,
+    "source_audit": null
+  },
+  "actual_HTTP": false,
+  "actual_NPU": false,
+  "actual_fixed1024_run": false,
+  "actual_matched_pairs": false,
+  "actual_process": false,
+  "actual_source_review": {
+    "bytes": 24796,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/SOURCE_REVIEW.json",
+    "sha256": "47ecb43949b5166fbb1244133a0bb07cbb6b437fb5c18bcacb287211c6678536"
+  },
+  "all_passed": true,
+  "capture_OFF_production_qualification": null,
+  "controlled_fixtures_only": true,
+  "controlled_unittest_cases": 23,
+  "expected_failures": 0,
+  "formal_qualification": false,
+  "full_unittest_stderr": {
+    "bytes": 3761,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/UNITTEST_STDERR.txt",
+    "sha256": "bdd1ad51e8a410a04aec04c4cae6e9308197ce827dd47d972ae73c9e59bf23e4"
+  },
+  "independent_parser_imports_no_client": true,
+  "paired_owner": null,
+  "passed": 23,
+  "resources_admitted": false,
+  "schema": "bole.fixed1024-SSE-local-only-validation/v1",
+  "skipped": 0,
+  "source_bound_owner_reviewer": null,
+  "status": "SOURCE_ONLY_UNQUALIFIED"
+}

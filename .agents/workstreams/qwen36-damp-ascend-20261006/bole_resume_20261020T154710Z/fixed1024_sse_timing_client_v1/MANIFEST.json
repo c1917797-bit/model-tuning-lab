@@ -1,0 +1,153 @@
+{
+  "E2E_per_pair_threshold": {
+    "denominator": 10,
+    "numerator": 11
+  },
+  "TPOT_additional_threshold": null,
+  "TTFT_additional_threshold": null,
+  "actual_G3_qualification": false,
+  "actual_HTTP": false,
+  "actual_MODEL_four_refs": {
+    "owner_result": null,
+    "qualification": null,
+    "source": null,
+    "source_audit": null
+  },
+  "actual_NPU": false,
+  "actual_fixed1024_correctness_qualification": null,
+  "actual_formal_performance": false,
+  "actual_input_Ref": null,
+  "actual_owner": false,
+  "actual_source_bound_owner_reviewer": null,
+  "capture_OFF_production_qualification": null,
+  "client": {
+    "bytes": 6215,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/fixed1024_client.py",
+    "sha256": "0639cbe6e00a4c54eab3f9afe4886b47fbcc10737756b4fcbe46e57ae389dbf8"
+  },
+  "coalesced_tokens_same_actual_receive_time": true,
+  "concurrency": 1,
+  "default_enabled": false,
+  "execute_enabled": false,
+  "fixed_cutoff_epoch": 1792597630,
+  "formal_owner_frozen": false,
+  "full_raw_SSE_and_all_chunk_records": true,
+  "future_integration": {
+    "bytes": 3092,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/INTEGRATION_CONTRACT.json",
+    "sha256": "bb36c0ea3f374165446e65df114fd2c8456d30dd75c15ae4eb12e308bb9f579a"
+  },
+  "ignore_eos": true,
+  "independent_reader": {
+    "bytes": 12992,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/independent_reader.py",
+    "sha256": "9ffba3df8c2417e2249f368ebe7573f093e6a45f62e5bcefc1186259f08f273c"
+  },
+  "inventory": {
+    "INPUTS_TEMPLATE.json": {
+      "bytes": 7722,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/INPUTS_TEMPLATE.json",
+      "sha256": "93268045e3bd381d73d043dbe1caa770c695e01f71a5e05d8ed3374abfe6a6d8"
+    },
+    "INTEGRATION_CONTRACT.json": {
+      "bytes": 3092,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/INTEGRATION_CONTRACT.json",
+      "sha256": "bb36c0ea3f374165446e65df114fd2c8456d30dd75c15ae4eb12e308bb9f579a"
+    },
+    "LOCAL_VALIDATION.json": {
+      "bytes": 6921,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/LOCAL_VALIDATION.json",
+      "sha256": "993fe283c57451eb768171741b361f4a0f104bfb0bc994d03e6c42b2a35bbc86"
+    },
+    "README.md": {
+      "bytes": 6063,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/README.md",
+      "sha256": "ab7d3eb18772941beecd85c9f34af0ab1cd5d12497572eb2952d58ae1fb64141"
+    },
+    "SOURCE_REVIEW.json": {
+      "bytes": 24796,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/SOURCE_REVIEW.json",
+      "sha256": "47ecb43949b5166fbb1244133a0bb07cbb6b437fb5c18bcacb287211c6678536"
+    },
+    "UNITTEST_STDERR.txt": {
+      "bytes": 3761,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/UNITTEST_STDERR.txt",
+      "sha256": "bdd1ad51e8a410a04aec04c4cae6e9308197ce827dd47d972ae73c9e59bf23e4"
+    },
+    "evidence.py": {
+      "bytes": 1679,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/evidence.py",
+      "sha256": "9fc7ec4a4737c1edd386b6e7926367d1a12b2b35ed237faad1005a972caa7ab4"
+    },
+    "fixed1024_client.py": {
+      "bytes": 6215,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/fixed1024_client.py",
+      "sha256": "0639cbe6e00a4c54eab3f9afe4886b47fbcc10737756b4fcbe46e57ae389dbf8"
+    },
+    "independent_reader.py": {
+      "bytes": 12992,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/independent_reader.py",
+      "sha256": "9ffba3df8c2417e2249f368ebe7573f093e6a45f62e5bcefc1186259f08f273c"
+    },
+    "references/NATIVE_COPY_RECEIPT.json": {
+      "bytes": 7053,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/references/NATIVE_COPY_RECEIPT.json",
+      "sha256": "60758ecec7b80235ce6aa645b826b48a38b2502ceac34ec129b0159d937583ec"
+    },
+    "references/NATIVE_INDEX.json": {
+      "bytes": 7574,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/references/NATIVE_INDEX.json",
+      "sha256": "c928f1d9d9240ee07e18895628cab916c4d64ab9e720b9819830d794fafdb18e"
+    },
+    "references/completion_protocol.py": {
+      "bytes": 21247,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/references/completion_protocol.py",
+      "sha256": "93c720549f2a9ef217d7c2a60710225c862032517520dd9ba693d4820f55365c"
+    },
+    "references/completion_serving.py": {
+      "bytes": 27822,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/references/completion_serving.py",
+      "sha256": "c67bff55fa29c5f89000c3afdc9c7c66305612b13a8a1d85976e5872cee086d7"
+    },
+    "review_source.py": {
+      "bytes": 4263,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/review_source.py",
+      "sha256": "0249ac96cebbe0bed4b0bb0712d5b2556ca7d1a5e69f5f0e3bf834459ad209e2"
+    },
+    "test_sse_controls.py": {
+      "bytes": 12352,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/test_sse_controls.py",
+      "sha256": "19e603a3651cc1a8ff555622fc385f51e1ac41bdd682b226a7651dfe919e26db"
+    },
+    "validate_local.py": {
+      "bytes": 2201,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/validate_local.py",
+      "sha256": "dabfe2de3bfd7cbe0677a1ede6f260139b81cbce01bd2dd940ec5fef078d9f29"
+    }
+  },
+  "local_controlled_cases": 23,
+  "local_passed": 23,
+  "local_validation": {
+    "bytes": 6921,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/LOCAL_VALIDATION.json",
+    "sha256": "993fe283c57451eb768171741b361f4a0f104bfb0bc994d03e6c42b2a35bbc86"
+  },
+  "matched_pairs": 3,
+  "no_short_or_nonstream_or_CPU_ACK_timing_substitute": true,
+  "ordered_generated_token_IDs": true,
+  "original4rank_7CPU_phase3600_cleanup180_cutoff_unchanged": true,
+  "paired_owner": null,
+  "reader_independently_replays_raw": true,
+  "request_input_tokens": 131,
+  "request_output_tokens": 1024,
+  "schema": "bole.fixed1024-SSE-source-only-packet/v1",
+  "skipped": 0,
+  "source_only_final": true,
+  "source_review": {
+    "bytes": 24796,
+    "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/fixed1024_sse_timing_client_v1_preparation/SOURCE_REVIEW.json",
+    "sha256": "47ecb43949b5166fbb1244133a0bb07cbb6b437fb5c18bcacb287211c6678536"
+  },
+  "status": "SOURCE_ONLY_UNQUALIFIED",
+  "stream": true
+}

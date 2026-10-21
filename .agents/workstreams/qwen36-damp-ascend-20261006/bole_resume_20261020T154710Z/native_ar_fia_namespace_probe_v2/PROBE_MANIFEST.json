@@ -1,0 +1,25 @@
+{
+  "NPU": false,
+  "actual_namespace_probe_pending": true,
+  "files": {
+    "ar_owner_common.py": {
+      "bytes": 19055,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v2/ar_owner_common.py",
+      "sha256": "5d0b9034706b9a942a4d7dd10870139959b22dfaab2cebbdddf25ba962e456a4"
+    },
+    "namespace_compile_probe.py": {
+      "bytes": 7297,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v2/namespace_compile_probe.py",
+      "sha256": "c9b54024922abe7f5e5064031b277868184938ed930fe5dada7bb9262fcf9e96"
+    },
+    "singleton_profile.py": {
+      "bytes": 6682,
+      "path": "/workspace/scratch/6d9e7cc63b51/bole_service_proposals/native_ar_fia_replay_v2/singleton_profile.py",
+      "sha256": "b4843a436f79337bd5fb55817b2445c7a15202e1fa19887683be0ee8418c3101"
+    }
+  },
+  "resources_admitted": false,
+  "schema": "bole.native-AR-FIA-source-only-probe-packet/v2",
+  "status": "frozen_probe_sources_actual_MAIN_probe_pending",
+  "whole_code_guard_preserved": true
+}

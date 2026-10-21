@@ -1,0 +1,60 @@
+{
+  "MODEL_four_refs": {
+    "owner_result": null,
+    "qualification": null,
+    "source": null,
+    "source_audit": null
+  },
+  "actual_common_main_clock_ref": null,
+  "actual_common_process_options_ref": null,
+  "actual_process_identities_ref": null,
+  "actual_resource_profile_ref": null,
+  "actual_stream_traces": null,
+  "capture_OFF_production_qualification_ref": null,
+  "concurrency": 1,
+  "daemon_cpu_capacity": 7,
+  "deadline_renewal": false,
+  "default_enabled": false,
+  "execute_supported": false,
+  "fixed1024_correctness_qualification_ref": null,
+  "fixed_cutoff_epoch": 1792597630,
+  "formal_success": false,
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "input_recipe": {
+    "actual_tokenizer_input_ref": null,
+    "actual_tokenizer_required": true,
+    "add_special_tokens": false,
+    "take_first_tokens": 131,
+    "text": "Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. Explain how trees grow. ",
+    "tokenizer": "/models/Qwen3.6-27B"
+  },
+  "matched_pairs": 3,
+  "paired_owner_ref": null,
+  "phase_seconds": 3600,
+  "physical_devices": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "request": {
+    "echo": false,
+    "ignore_eos": true,
+    "max_tokens": 1024,
+    "model": "qwen36-mxr-eager",
+    "n": 1,
+    "prompt": null,
+    "return_token_ids": true,
+    "stream": true,
+    "stream_options": {
+      "include_usage": true
+    },
+    "temperature": 0,
+    "top_p": 1
+  },
+  "same_image_runtime_refs": null,
+  "schema": "bole.fixed1024-SSE-source-only-input-contract/v1",
+  "shared_cleanup_seconds": 180,
+  "source_bound_owner_reviewer_ref": null,
+  "status": "SOURCE_ONLY_UNQUALIFIED"
+}

@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v4/host_service.py",
+    "--source-audit",
+    "--source-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v4/SOURCE_BOUND.json\", \"bytes\": 112215, \"sha256\": \"9f4e1a0535aa5279a07135ebd33ceadf0fa321ace6ee869bccc71caf98a57e1f\"}"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"source\": {\"path\": \"/opt/host/vnf/austinov/bole-gdn-g1-probe-matched-v4/SOURCE_BOUND.json\", \"bytes\": 112215, \"sha256\": \"9f4e1a0535aa5279a07135ebd33ceadf0fa321ace6ee869bccc71caf98a57e1f\"}, \"readset\": 744, \"NPU\": false, \"resources_admitted\": false, \"candidate_qualification\": false}\n",
+  "stderr": ""
+}

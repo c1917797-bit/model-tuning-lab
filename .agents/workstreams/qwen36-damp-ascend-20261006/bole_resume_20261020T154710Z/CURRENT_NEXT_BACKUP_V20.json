@@ -1,0 +1,66 @@
+{
+  "schema": "bole.MAIN-current-next-backup/v20",
+  "observed_epoch": 1792553275.9608808,
+  "formal_success": false,
+  "current_live_resource_unit": null,
+  "latest_commit_before_this": "992b71e5c94423ec261fa71d92a6ed88db6e259f",
+  "G2": "v11MODEL failed completeACK3307>3072; firstSTEP rank0mathPASSonly; 4owners stoppedretained/PIDs0/3280sourceeq. v12 losslesswire2846B+19controls complete locally; now reconstructing same-source final packet onhost due localexecutor outage. NewCPU341 thenMODEL stillpending.",
+  "AR": {
+    "v1_failed_result": {
+      "path": "/opt/host/vnf/austinov/run-bole-native-ar-fia-v1/RESULT.json",
+      "bytes": 344663,
+      "sha256": "a2a728f558c812d18059886be334353445b14c9699a56888bba602315a8312a6"
+    },
+    "primary": "ValueError('actual exact installed readonly function before singleton change device_map')",
+    "source_equal": true,
+    "source_count": 1010,
+    "no_containers_created": true,
+    "v2_actual_sourceonly_probe": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_FIA_V2_NAMESPACE_PROBE.json",
+      "bytes": 7020,
+      "sha256": "2f93b69fb6605444d1b708bc51ff288610a9952c3b2ae573c98c156c90afbef2"
+    },
+    "probe_pass": true,
+    "finally_objects_restored": true,
+    "v2_full_runtime_pending": true,
+    "native_numeric_pass": false
+  },
+  "GDN": {
+    "v3_failed_result": {
+      "path": "/opt/host/vnf/austinov/run-bole-gdn-g1-probe-matched-v3-CPU/RESULT.json",
+      "bytes": 229623,
+      "sha256": "b6a6a68d081563f3544ae8ab9116031302ca16084135863e6579bdfb3b92fb50"
+    },
+    "source_equal": true,
+    "source_count": 717,
+    "CPU240": "238PASS/2ROfixture errors; newv4 only2 tempdir literals to existing/adakv-results. Original240/runtime/math/caps unchanged; noqualification."
+  },
+  "task_inventory": {
+    "actual75": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_COMPLETE_UNIT_OBSERVATION_V20.json",
+      "bytes": 163157,
+      "sha256": "0241babde5f139e49804b7cb83506b2b0b318043687c71cd8183c85d8eac7c27"
+    },
+    "controller_join_partial": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_COMPLETE_UNIT_CONTROLLER_JOIN_V20.json",
+      "bytes": 153174,
+      "sha256": "17692d0d04cdd141af0d883ac5de2d5c65516c3f462166a6250c9f94a435187e"
+    },
+    "policy_admitted": false,
+    "bound64_now_insufficient": true,
+    "successor96_source_design_only": true,
+    "note": "7oldcontrollerRefs are exact MAIN submitters, not actualhost entry; preserve both and strictjoin, not changed bytes. Freshcomplete policy before tasks, retain originalCPU14parser/data facts only with their exactsource scope."
+  },
+  "G3_SSE": "SOURCE-only23controls copiedtoT/fixed1024_sse_timing_client_v1; noactualMODEL/fixed1024/formalowner/timing.",
+  "authority": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MODEL_AUTHORITY.json",
+    "bytes": 764,
+    "sha256": "e3046914e360c6ee5c8abd6e18fcdd2f3afaa733247ad1522e9b4cde6e67dda8"
+  },
+  "next": [
+    "Host rebuildG2v12 thennewCPU341/MODELcomplete stream",
+    "Host reconstructGDNv4 onlytestfixture paths and ARv2 exactcompile+probe-join; preserveoldfailures",
+    "AfterMODELsuccess bindG3/full1024/tasks staged341+HTTP/HEnewsource completepolicy, GDNservices/full15525quality/3captureOFFtimingpairs"
+  ],
+  "push_blocker": "KnownHTTPS missingcredential/SSH22timeout; noidenticalretry/noauthsubstitution"
+}

@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "/usr/bin/flock",
+    "--nonblock",
+    "--no-fork",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock",
+    "/usr/bin/env",
+    "DENSE090_EXTERNAL_OUTPUT_ENABLE=1",
+    "BOLE_NATIVE_FIA_NAMESPACE_PROBE_ENABLE=1",
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_fia_namespace_probe_v2/namespace_compile_probe.py",
+    "--probe",
+    "--v1-inputs-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/bole-native-ar-fia-control-v1/INPUTS.json\", \"bytes\": 9615, \"sha256\": \"4ec84d8afc471fdd5bc5fdc26d61f7a1cfbd1a9da46ae654d8e758871c6c600f\"}",
+    "--v2-profile-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_ar_fia_namespace_probe_v2/singleton_profile.py\", \"bytes\": 6682, \"sha256\": \"b4843a436f79337bd5fb55817b2445c7a15202e1fa19887683be0ee8418c3101\"}",
+    "--unused-output-root",
+    "/opt/host/vnf/austinov/run-bole-native-ar-fia-probe2",
+    "--output",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_FIA_V2_NAMESPACE_PROBE.json"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"output\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/NATIVE_AR_FIA_V2_NAMESPACE_PROBE.json\", \"bytes\": 7020, \"sha256\": \"2f93b69fb6605444d1b708bc51ff288610a9952c3b2ae573c98c156c90afbef2\"}, \"source_only_probe_pass\": true, \"NPU\": false}\n",
+  "stderr": ""
+}

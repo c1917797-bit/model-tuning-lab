@@ -1,0 +1,14 @@
+{
+  "schema": "bole.MAIN-v12-freeze-CLI-context-failure/v1",
+  "script": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/g2_ack_serialization_repair_v12/finalize_packet.py",
+    "bytes": 5379,
+    "sha256": "167e35af3ec2fd015efee44769741ab8b30a262570897d2edba622c4c87be5e6"
+  },
+  "exit_code": 1,
+  "primary": "direct isolated execution of an imported helper lacks its parent service_entry sys.path bootstrap",
+  "failed_entry": "g2_software_stages.py",
+  "actor_or_runtime_changed": false,
+  "source_created": false,
+  "fix": "Only actual standalone CLI files are OFF/help checked. Staged helper remains byte-identical and is exercised by source-owned parent in actual CPU341."
+}
