@@ -1,0 +1,340 @@
+{
+  "schema": "bole.short-pair-reader-v4-retained-diagnostic-v1-decision/2026-10-22",
+  "recorded_utc": "2026-10-22T07:36:49Z",
+  "deadline_utc": "2026-10-22T12:38:41Z",
+  "source_branch": "work/qwen36-damp-ascend-20261006",
+  "previous_head": "ae474631292b926adebd4bca109b29c6417a3fd4",
+  "status": "SHORT_PAIR_FAIL_NOT_ADMITTED",
+  "failure_classification": {
+    "old_reader": "evidence_reader_schema_mismatch",
+    "v4_pair": "strict_state_and_semantic_pair_gate_failure",
+    "underlying_cause": "unresolved; first retained difference before first BOLE TREE publication; prefill/calibration/initial-MTP interval not separated"
+  },
+  "reader_v4": {
+    "execution": {
+      "path": "/opt/host/vnf/austinov/run-bole-short-pair-reader-v4-20261022T070247Z/EXECUTION.json",
+      "bytes": 3721,
+      "sha256": "41202d391c8165138555b22e6b07c12d98e88cee456be8a757e35027bac163d1"
+    },
+    "source": [
+      {
+        "bytes": 3957,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/short_pair_reader_v4_20261022/cleanup_summary.py",
+        "sha256": "1c2e014303bec214cff2e19d8c428eee1a13d69c3f8b525308b3ae958faf9687"
+      },
+      {
+        "bytes": 3300,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/short_pair_reader_v4_20261022/compare_completed_short.py",
+        "sha256": "dd653ae8be7d83f3b83c0f1d069b64af4d4be2a72ec5d60dff49f0024a21d8df"
+      },
+      {
+        "bytes": 9367,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/short_pair_reader_v4_20261022/test_cleanup_summary.py",
+        "sha256": "a61245c9774fa80bc185cbd9830356102856f958c3e52193c6ba50589c6dfdfc"
+      },
+      {
+        "bytes": 6493,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/short_pair_reader_v4_20261022/run_reader_once.py",
+        "sha256": "2cfb8436fdfc67ae7ea8395d4852bfde0bc11bce69ef2822668710cf4aa7010b"
+      }
+    ],
+    "regression_tests": 21,
+    "regression_passed": true,
+    "pair_exit_code": 1,
+    "first_failed_original_predicate": "all four ranks/two generations/two frames",
+    "original_inputs_unchanged": true,
+    "original_input_count": 124,
+    "original_result_rewritten": false,
+    "NPU_rerun": false
+  },
+  "retained_diagnostic": {
+    "operation_id": "exec-0000000000000673",
+    "execution": {
+      "bytes": 2260,
+      "path": "/opt/host/vnf/austinov/run-bole-short-pair-diagnostic-v1-20261022T072523Z/EXECUTION.json",
+      "sha256": "c827af3c6a863d3fd889b6596a4cc796af6b0b8e52a42df217e3e805a66eaad5"
+    },
+    "result": {
+      "bytes": 4432793,
+      "path": "/opt/host/vnf/austinov/run-bole-short-pair-diagnostic-v1-20261022T072523Z/DIAGNOSTIC.json",
+      "sha256": "3d615eeeb0d9ae010ba7ec2602f82567b7b772bce46d1a8bbde520f736dec30f"
+    },
+    "exit_code": 0,
+    "diagnostic_only": true,
+    "complete_input_readset_unchanged": true,
+    "input_ref_count": 136,
+    "frame_counts": {
+      "common": 32,
+      "off": 32,
+      "on": 36
+    },
+    "on_only_keys": [
+      [
+        0,
+        1,
+        4
+      ],
+      [
+        1,
+        1,
+        4
+      ],
+      [
+        2,
+        1,
+        4
+      ],
+      [
+        3,
+        1,
+        4
+      ]
+    ],
+    "off_only_keys": [],
+    "per_rank_generation": [
+      {
+        "rank": 0,
+        "generation": 1,
+        "on_steps": 5,
+        "off_steps": 4
+      },
+      {
+        "rank": 0,
+        "generation": 2,
+        "on_steps": 4,
+        "off_steps": 4
+      },
+      {
+        "rank": 1,
+        "generation": 1,
+        "on_steps": 5,
+        "off_steps": 4
+      },
+      {
+        "rank": 1,
+        "generation": 2,
+        "on_steps": 4,
+        "off_steps": 4
+      },
+      {
+        "rank": 2,
+        "generation": 1,
+        "on_steps": 5,
+        "off_steps": 4
+      },
+      {
+        "rank": 2,
+        "generation": 2,
+        "on_steps": 4,
+        "off_steps": 4
+      },
+      {
+        "rank": 3,
+        "generation": 1,
+        "on_steps": 5,
+        "off_steps": 4
+      },
+      {
+        "rank": 3,
+        "generation": 2,
+        "on_steps": 4,
+        "off_steps": 4
+      }
+    ],
+    "http_tokens": [
+      {
+        "differences": [],
+        "first_difference_index": null,
+        "label": "warmup",
+        "off_id": "cmpl-bole-perf-131-warmup",
+        "off_tokens": [
+          79091,
+          1204,
+          12052,
+          271,
+          248068,
+          198,
+          8160,
+          579
+        ],
+        "on_id": "cmpl-bole-perf-131-warmup",
+        "on_tokens": [
+          79091,
+          1204,
+          12052,
+          271,
+          248068,
+          198,
+          8160,
+          579
+        ],
+        "same_prompt": true
+      },
+      {
+        "differences": [
+          {
+            "index": 2,
+            "off": 12052,
+            "on": 37498
+          },
+          {
+            "index": 7,
+            "off": 12052,
+            "on": 37498
+          }
+        ],
+        "first_difference_index": 2,
+        "label": "measured",
+        "off_id": "cmpl-bole-perf-131-measured",
+        "off_tokens": [
+          79091,
+          1204,
+          12052,
+          2965,
+          13,
+          79091,
+          1204,
+          12052
+        ],
+        "on_id": "cmpl-bole-perf-131-measured",
+        "on_tokens": [
+          79091,
+          1204,
+          37498,
+          2965,
+          13,
+          79091,
+          1204,
+          37498
+        ],
+        "same_prompt": true
+      },
+      {
+        "differences": [],
+        "first_difference_index": null,
+        "label": "retirement-barrier",
+        "off_id": "cmpl-bole-perf-131-retirement-barrier",
+        "off_tokens": [
+          79091
+        ],
+        "on_id": "cmpl-bole-perf-131-retirement-barrier",
+        "on_tokens": [
+          79091
+        ],
+        "same_prompt": true
+      }
+    ],
+    "all_digest_differences": {
+      "different": 7108,
+      "sha_different": 7108,
+      "metadata_different": 384,
+      "field_sets": {
+        "sha256": 6724,
+        "bytes,sha256,shape": 384
+      }
+    }
+  },
+  "earliest_retained_difference": {
+    "generation": 1,
+    "ordinal": 0,
+    "ranks": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "same_prompt": true,
+    "same_committed_output_prefix": true,
+    "same_root": true,
+    "same_all_proposal_tokens": true,
+    "same_recorded_semantics": true,
+    "gdn_state_before_different_per_rank": 47,
+    "gdn_conv_before_different_per_rank": 47,
+    "total_gdn_layers": 48,
+    "first_different_layer": 1,
+    "layer0_before_and_after_equal": true,
+    "fa_selected_key_value_after_all_16_layers_different": true,
+    "first_fa_layer": 3,
+    "precise_boundary": "stage_selected_path clones destination after isolated TREE forward and unchanged-anchor checks, before publication; earlier native prefill / calibration / initial MTP boundaries have no separately retained exact tensor witnesses",
+    "raw_numeric_magnitude_available": false,
+    "causal_attribution_proven": false
+  },
+  "live_orientation_refs": [
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-retained-review-20261022T072523Z/DIAGNOSTIC_PROJECTION.json",
+      "bytes": 228536,
+      "sha256": "6c3364e222841e78a14d0f67ce198b571c21ffaddf2f001a68f357dbd1ddc2c1"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-retained-review-20261022T072523Z/DIAGNOSTIC_V1_OPERATION.json",
+      "bytes": 4624,
+      "sha256": "44aa8e243473c0d1e106dac53db4e7eb2a1f0401f24ed91047d77645a1b9db7e"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-retained-review-20261022T072523Z/LIVE_RELEASE_SNAPSHOT.json",
+      "bytes": 100256,
+      "sha256": "a4fd5ad488f76731a784d65821d6a5ae76c6e18709b2a9838f225688e77b25d6"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-retained-review-20261022T072523Z/ORIENTATION.json",
+      "bytes": 33983,
+      "sha256": "d2d16f64ca297885ce4186196c9d883c47a54540f1bbad554fb8bcc350ee2bd1"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-retained-review-20261022T072523Z/READER_V4_OPERATION.json",
+      "bytes": 5896,
+      "sha256": "29156e218e119c3dc0aa3678bbc4be4ef37ffce241fbb62ab0ae74118cb35046"
+    }
+  ],
+  "project_validation": {
+    "execution": {
+      "path": "/opt/host/vnf/austinov/run-bole-retained-review-20261022T072523Z/VALIDATION.json",
+      "bytes": 654,
+      "sha256": "f997a52f0999dea7ef980a17e6190d2820d14e8917a05c5fa5375cad791d1432"
+    },
+    "schema": "bole.retained-review-project-validation/v1",
+    "command": [
+      "./scripts/validate-mst.sh"
+    ],
+    "started_epoch": 1792654566.3071554,
+    "ended_epoch": 1792654566.4215906,
+    "exit_code": 0,
+    "timed_out": false,
+    "stdout": {
+      "path": "/opt/host/vnf/austinov/run-bole-retained-review-20261022T072523Z/VALIDATE.stdout",
+      "bytes": 59,
+      "sha256": "a0de6af6505edc59ef401af2e2e67a0a0cdc3124d04d84332fadbd7529bcae80"
+    },
+    "stderr": {
+      "path": "/opt/host/vnf/austinov/run-bole-retained-review-20261022T072523Z/VALIDATE.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "scope": {
+    "no_NPU_execution_this_stage": true,
+    "no_old_arm_rerun": true,
+    "no_old_result_modification": true,
+    "full_model_1024_pair": false,
+    "formal_TTFT_TPOT": false,
+    "throughput_ge_10pct": false,
+    "final_GSM8K_HumanEval_MMLU": false,
+    "paired_state_gate_passed": false,
+    "performance_admitted": false,
+    "technology_success": false
+  },
+  "next_actions": [
+    "Retain exact failed v4 pair; do not compare only common keys or weaken numerical predicates.",
+    "Finish narrow source review of the pre-first-TREE interval; distinguish proof from hypotheses.",
+    "Any discriminating future device diagnostic must use a new source/output identity, fresh physical4-7 and ownership/resource admission, and the existing hard deadline.",
+    "Low-observation source must independently pass true-device numerical/multistep/lifecycle gates before any dense/candidate screen; its source preparation or individual-arm completion does not admit it.",
+    "No performance or task result may be inferred from this read-only stage."
+  ],
+  "shared_worktree": "Three existing tracked modifications and historical untracked files were preserved; only this stage's newly created explicit paths are candidates for staging.",
+  "transient_transport": {
+    "snapshot_patch_outcome_initially_unknown": true,
+    "read_only_reconciliation_operation": "exec-0000000000000689",
+    "snapshot_directory_absent_confirmed": true,
+    "recovery": "created fresh directory with mkdir(exist_ok=False), wrote new text snapshots, and independently hashed all five files; no blind mutation retry"
+  }
+}
