@@ -401,3 +401,34 @@ replays, terminal raw-file rehashing and verified own-only release. None supplie
 formal throughput or task quality. Reusable lesson: a successful isolated
 discriminator should shorten the next production test, not grow an unrelated
 source/profiling campaign.
+
+The subsequent production V7 diagnostic completed two131-input/8-output
+requests. All eight real worker observations reported the explicit common
+flag; sixteen complete pre/post files (21463040 bytes) matched across the two
+requests and post-reduction agreed across four TP ranks. The independent
+consumer also reexecuted the original HTTP/state/lifecycle join (32 rank
+frames). This supports repeatability at the captured first prefill projection,
+not BOLE mathematics, general decode determinism, task quality or speed.
+See STARTUP_HEALTH_REPAIR_CHECKPOINT_20261022T215000Z.md in the workstream.
+
+## Bounded startup calls and recorded operands
+
+- Distinguish an HTTP socket timeout from the outer container command deadline.
+  The V6 production startup failed because a4-second Docker/env/Python call
+  raised TimeoutExpired; the model had not completed a request. A fresh V7
+  source bounded that call by min(30,startup remaining,phase remaining), kept
+  the inner2-second HTTP timeout and original overall budgets, and completed.
+  These numbers describe this case, not universal defaults. Preserve the
+  timeout failure and classify it as startup control, not a paper no-go.
+- A timed-out Docker client does not establish that its guest probe exited.
+  Do not catch and retry unknown live probes. Here TimeoutExpired remained
+  fatal and triggered the original own-only cleanup; only completed nonzero
+  health calls could loop. Test server exit and budget exhaustion as well as
+  slow completed probes before another model load.
+- Some legacy command contracts compare the complete serialized JSON operand.
+  A semantically equal Ref with reordered keys can therefore fail the actual
+  command gate. Reuse the operand recorded in immutable COMMANDS, including
+  nested configuration serialization, rather than reconstructing it with
+  sorted keys. The small command_operand_binding_prepare helper exercises the
+  actual source_inputs positive/negative path. This is a compatibility seam,
+  not a reason to impose key-order rules on unrelated JSON or weaken gates.
