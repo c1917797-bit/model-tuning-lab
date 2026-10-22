@@ -1,0 +1,40 @@
+{
+  "schema": "bole.collective-replay-main-review/v1",
+  "reviewer": "MAIN",
+  "input_ref": {
+    "path": "/opt/host/vnf/austinov/run-bole-collective-controls-20261022T204700Z-v1/default-INPUT.json",
+    "bytes": 2820,
+    "sha256": "11524c50da65e803e5d8215812e0c3bf703f812585a5e6f3743c16012be77102"
+  },
+  "controller_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/reduction_collective_replay_20261022T201500Z/controller_prepare/replay_host.py",
+    "bytes": 17662,
+    "sha256": "7d2009c6a4ebf14e6d515e3f14254eb64426559c08990f23f5e510e870bd7801"
+  },
+  "approved": true,
+  "NPU_executed": false,
+  "same_image_software_ref": {
+    "path": "/opt/host/vnf/austinov/run-bole-collective-controls-20261022T204700Z-v1/SOFTWARE_CANONICAL.json",
+    "bytes": 4885,
+    "sha256": "10213dcf77a3322a4e3cf6822b3959521ea9532bf3ad1aefdf06208d6e195bdc"
+  },
+  "variant": "default",
+  "review_basis": {
+    "worker_source_reviewed": true,
+    "controller_source_reviewed": true,
+    "namespace_source_reviewed": true,
+    "actual_host_API_controls": "exec-0000000000000818",
+    "actual_DeviceFree_image_execution": "exec-000000000000081d",
+    "actual_input_source_audit": "exec-0000000000000822",
+    "original_invalid_json_wrapper_preserved": true,
+    "format_recovery_only": "SOFTWARE_FORMAT_RECOVERY.json",
+    "previous_model_owner_stopped_and_released": "exec-0000000000000815"
+  },
+  "conditions": [
+    "MAIN lock held through own cleanup and final receipt",
+    "Original32GiB/8.5GiB resource guards and protected0-3 unchanged; fresh controller admission mandatory",
+    "Only standalone same-input reduction diagnosis; WORLD is not production TP group",
+    "Input mapping Ref describes producer; current replay mapping is checked by controller inspect",
+    "No performance/BOLE/task qualification; one fresh non-overwriting variant"
+  ]
+}

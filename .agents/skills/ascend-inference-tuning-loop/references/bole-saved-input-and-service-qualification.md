@@ -16,6 +16,7 @@ neither a new resource lease nor a later-stage PASS.
 - [Metadata-only recovery](#metadata-only-recovery)
 - [Executable-file identity](#executable-file-identity)
 - [Outcome boundaries and evidence anchors](#outcome-boundaries-and-evidence-anchors)
+- [Native collective repeatability](#native-collective-repeatability)
 
 ## Evidence-backed successes and what changed the next action
 
@@ -366,3 +367,37 @@ successes and failures. The associated maintainer decision fixtures are
 [the evidence/transfer case](../../../evals/transformation-cases/bole-evidence-and-controller-transfer-20261021.yaml).
 This skill update only reopens metadata and checks maintainer decisions; it
 does not rerun an experiment or establish any new numerical, task or speed claim.
+
+## Native collective repeatability
+
+Use when identical pre-reduction tensors produce different downstream model
+states. Do not immediately classify this as a paper-algorithm defect.
+
+- Save the complete per-rank pre/post tensors and actual runtime flags before
+  modifying math. Verify finite values, source/shape/dtype, request/rank identity,
+  cross-rank agreement and stable raw hashes with an independent consumer.
+- A high-precision exact sum is a useful reference, but differs from a specified
+  finite-precision reduction order. A mismatch alone does not prove the native
+  collective is incorrect. Possible BF16 addition trees checked per coordinate
+  are diagnostic, not proof of one globally shared tree or full error coverage.
+- Reuse captured pre-inputs for a small native same-image repeated collective
+  test. Change one explicit configuration variable. Reset inputs before each
+  call, verify full outputs, and record all-rank flags and observed library Refs.
+  An unset HCCL flag is not proof its effective native setting is false.
+- In the October22 case, default replay produced eight different full outputs
+  per rank; explicit HCCL_DETERMINISTIC=true produced one output across eight
+  calls, with four-rank agreement in both variants. This supports a common
+  reduction-configuration hypothesis, not BOLE qualification or an HCCL bug claim.
+  The standalone WORLD communicator is not the production vLLM TP group.
+- The next discriminating test is the actual production path: bind the common
+  configuration before worker initialization, verify it in every real worker,
+  then rerun the relevant original numerical/state checks. Apply any adopted
+  common setting equally to native control and candidate; remeasure both.
+  Keep original failed/variable outputs and unchanged numerical thresholds.
+
+Evidence: workstream COLLECTIVE_CAUSAL_CHECKPOINT_20261022T210000Z.md records
+the whole-model V5 capture, independent partial BF16 analysis, both actual NPU
+replays, terminal raw-file rehashing and verified own-only release. None supplies
+formal throughput or task quality. Reusable lesson: a successful isolated
+discriminator should shorten the next production test, not grow an unrelated
+source/profiling campaign.
