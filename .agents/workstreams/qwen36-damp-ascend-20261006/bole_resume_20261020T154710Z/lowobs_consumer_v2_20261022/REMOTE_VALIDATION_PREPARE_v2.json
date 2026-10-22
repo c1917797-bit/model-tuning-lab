@@ -1,0 +1,100 @@
+{
+  "NPU_executed": false,
+  "before_after_includes": "8 package inputs, 2 frozen R3 baselines, 2 existing unittest runtime source files, this runner; six exact controls-zone input copies also checked",
+  "cause": {
+    "classification": "environment",
+    "failure": "-S excludes pre-existing host site that supplies missing unittest; failure before original 7 controls",
+    "source": "MAIN actual exec069d failure and exec069e/exec069f read-only diagnosis"
+  },
+  "diff": {
+    "bytes": 7121,
+    "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/REMOTE_VALIDATION_RUNNER_V1_TO_V2.diff",
+    "sha256": "9f98d7ead4759025928c798e041347ffe281609d5a1de2ba1047354bfd9609e6"
+  },
+  "fix": "Only new runner: same four child stages use -I -B; same controls child checks pinned actual unittest import origins then runpy starts unchanged test file with reset argv. No installation or site edits.",
+  "formal_performance": false,
+  "hard_report_deadline_utc": "2026-10-22T12:38:41Z",
+  "local_validation": {
+    "local_tests_rerun": false,
+    "origin_wrapper_syntax_compiled": true,
+    "runner_executed": false,
+    "runner_syntax_compiled": true
+  },
+  "numerical_qualification": false,
+  "paired_gate_pass": false,
+  "performance_admitted": false,
+  "prepared_utc": "2026-10-22T08:11:04.800187+00:00",
+  "prior_short_pair_fail_unchanged": true,
+  "remote_deployed": false,
+  "remote_exclusive_output": "/opt/host/vnf/austinov/run-bole-lowobs-consumer-source-check-v2-20261022T081000Z",
+  "remote_validation_executed": false,
+  "runner": {
+    "bytes": 14471,
+    "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/remote_validate_source_only_v2.py",
+    "sha256": "2c611575429ea1b1151be9847dd27640e2e5d75ca2c36472214bdecc8a514843"
+  },
+  "runtime_consume_executed": false,
+  "runtime_origin_refs": [
+    {
+      "bytes": 3761,
+      "path": "/usr/local/lib/qwen35-pytest-8.4.2-py39/site-packages/unittest/__init__.py",
+      "sha256": "07bdf1fff20e4121ba61cfb64ea3c404d54ac56b053475a3a105907f48685210"
+    },
+    {
+      "bytes": 99215,
+      "path": "/usr/local/lib/qwen35-pytest-8.4.2-py39/site-packages/unittest/mock.py",
+      "sha256": "883176927e3c64d328716635b294523a9be16bbe3ac0f5792947897535f34844"
+    }
+  ],
+  "schema": "bole.lowobs-consumer-remote-validation-prepare/v2",
+  "status": "PREPARED_LOCAL_ONLY_PENDING_MAIN_DEPLOYMENT",
+  "task_accuracy": false,
+  "technology_success": false,
+  "unchanged_deployed_v1_local_copy": {
+    "bytes": 12471,
+    "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/remote_validate_source_only_v1.py",
+    "sha256": "a5fca3f24a47d94d0566286f2efe8cbcfb97cb7e50030dd3691584b445268973"
+  },
+  "unchanged_pinned_package_inputs": [
+    {
+      "bytes": 4850,
+      "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/read_short_results_v2.py",
+      "sha256": "48bf3d952a932d0733c620bcc09a5d5f1a4f19e52d97512759b9597b42a07f69"
+    },
+    {
+      "bytes": 8828,
+      "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/consume_pair_v2.py",
+      "sha256": "cee870a32b8f2087d63bb3c9f2d3dbd81efa6a317ad0eb044f86478f5943c0c0"
+    },
+    {
+      "bytes": 3957,
+      "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/cleanup_summary.py",
+      "sha256": "1c2e014303bec214cff2e19d8c428eee1a13d69c3f8b525308b3ae958faf9687"
+    },
+    {
+      "bytes": 5135,
+      "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/test_cleanup_boundary.py",
+      "sha256": "3740e69cfbcd99d1e2bfe4233959faf65ee62e502fd0e3378f6630b52bca4f18"
+    },
+    {
+      "bytes": 5981,
+      "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/verify_source_invariants.py",
+      "sha256": "4befbfad36cc092038626cd41bd47a2b0385c820a363aedf3f2fdf47b2d953c3"
+    },
+    {
+      "bytes": 5416,
+      "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/SOURCE_ONLY_MANIFEST.json",
+      "sha256": "e8d9244c1865d1d596e0616c657aa52595e412290c4c4d5866497015b47f6686"
+    },
+    {
+      "bytes": 1245,
+      "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/fixtures/original_ON_v2/cpu-preflight/cleanup.json",
+      "sha256": "f933c4c006a3eaa29745bd1de5b2939d4c407a456ead0e9d149dc20286bf69cd"
+    },
+    {
+      "bytes": 1213,
+      "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/fixtures/original_ON_v2/dense/cleanup.json",
+      "sha256": "54bcb155380f1d0b5762a3b22433a8592c8cf0352d355b7f53825351475d562d"
+    }
+  ]
+}

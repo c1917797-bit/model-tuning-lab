@@ -1,0 +1,138 @@
+{
+  "MAIN_lock": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock",
+  "old_cids": [
+    "40c6b48039182b29b47a4a4283ba17f414570f5a5465d6c2865a0b595866b45a",
+    "54246001fc180995c8e021a27f8f5b14f237fe6e92dd62dcb4acadc3dfae0411",
+    "c4a669cc4b20e5f013e92ce22ac89f6eccf7236286464bd2f7b7b8ac9bf3bdc9",
+    "961b3501d0b739216264e2027115a3245d0e391709a408ed9ac2943bcd1f083d"
+  ],
+  "old_units": [
+    "bole-short-on-v2-model-20261021t123841z.service",
+    "bole-short-off-v2-model-20261021t123841z.service"
+  ],
+  "source_root": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v1-20261022T080000Z",
+  "output_root": "/opt/host/vnf/austinov/run-bole-boundary-ON-v1-20261022T080000Z",
+  "model_root": "/cache/efim/Qwen3.6-27B",
+  "fixed_cutoff": 1792672721,
+  "old_containers": [
+    {
+      "id": "40c6b48039182b29b47a4a4283ba17f414570f5a5465d6c2865a0b595866b45a",
+      "name": "/adakv-tp4-run-bole-short-state-20261021T123841Z-ON-v2-cpu-preflight",
+      "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+      "labels": {
+        "model-tuning-lab.arm": "cpu-preflight",
+        "model-tuning-lab.controller-sha256": "20bda52a1c3fbc75db47104cbd4759faf91da1f39032d4730160983f7b9c0c30",
+        "model-tuning-lab.owner": "bole-root-r6-20261017-001",
+        "model-tuning-lab.run": "adakv-tp4-run-bole-short-state-20261021T123841Z-ON-v2-cpu-preflight",
+        "model-tuning-lab.source-manifest-sha256": "a285ac43d953cf257255ec4848d8719b613010bf339491e2a39d20d2f3b73b8f"
+      }
+    },
+    {
+      "id": "54246001fc180995c8e021a27f8f5b14f237fe6e92dd62dcb4acadc3dfae0411",
+      "name": "/adakv-tp4-run-bole-short-state-20261021T123841Z-ON-v2-dense",
+      "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+      "labels": {
+        "model-tuning-lab.arm": "dense",
+        "model-tuning-lab.controller-sha256": "20bda52a1c3fbc75db47104cbd4759faf91da1f39032d4730160983f7b9c0c30",
+        "model-tuning-lab.owner": "bole-root-r6-20261017-001",
+        "model-tuning-lab.run": "adakv-tp4-run-bole-short-state-20261021T123841Z-ON-v2-dense",
+        "model-tuning-lab.source-manifest-sha256": "a285ac43d953cf257255ec4848d8719b613010bf339491e2a39d20d2f3b73b8f"
+      }
+    },
+    {
+      "id": "c4a669cc4b20e5f013e92ce22ac89f6eccf7236286464bd2f7b7b8ac9bf3bdc9",
+      "name": "/adakv-tp4-run-bole-short-state-20261021T123841Z-OFF-v2-cpu-preflight",
+      "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+      "labels": {
+        "model-tuning-lab.arm": "cpu-preflight",
+        "model-tuning-lab.controller-sha256": "20bda52a1c3fbc75db47104cbd4759faf91da1f39032d4730160983f7b9c0c30",
+        "model-tuning-lab.owner": "bole-root-r6-20261017-001",
+        "model-tuning-lab.run": "adakv-tp4-run-bole-short-state-20261021T123841Z-OFF-v2-cpu-preflight",
+        "model-tuning-lab.source-manifest-sha256": "ee9c2633dd33ccf449dd881d65e6100d478bc4439b4e966bf19961b69e2c2b70"
+      }
+    },
+    {
+      "id": "961b3501d0b739216264e2027115a3245d0e391709a408ed9ac2943bcd1f083d",
+      "name": "/adakv-tp4-run-bole-short-state-20261021T123841Z-OFF-v2-dense",
+      "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+      "labels": {
+        "model-tuning-lab.arm": "dense",
+        "model-tuning-lab.controller-sha256": "20bda52a1c3fbc75db47104cbd4759faf91da1f39032d4730160983f7b9c0c30",
+        "model-tuning-lab.owner": "bole-root-r6-20261017-001",
+        "model-tuning-lab.run": "adakv-tp4-run-bole-short-state-20261021T123841Z-OFF-v2-dense",
+        "model-tuning-lab.source-manifest-sha256": "ee9c2633dd33ccf449dd881d65e6100d478bc4439b4e966bf19961b69e2c2b70"
+      }
+    }
+  ],
+  "historical_identity_operands": [
+    {
+      "owned": {
+        "bytes": 1224371,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-ON-v2/cpu-preflight/OWNED.json",
+        "sha256": "7d57ff15e24d97ede5fae8d8908dadb4597ea67f32d451c9273f1529f077ea3d"
+      },
+      "create": {
+        "bytes": 2866169,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-ON-v2/cpu-preflight/create-1792594163109707480.json",
+        "sha256": "b41fac7d10cf28f1ad83abc42aceb0ad7a7d07e33635cf944f00707c81b741c7"
+      },
+      "source": {
+        "bytes": 1503149,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_performance_profile_prepare_20261021/successor_layer/bound-short-ON-v2/SOURCE_BOUND.json",
+        "sha256": "a285ac43d953cf257255ec4848d8719b613010bf339491e2a39d20d2f3b73b8f"
+      }
+    },
+    {
+      "owned": {
+        "bytes": 1224325,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-ON-v2/dense/OWNED.json",
+        "sha256": "8148e1fbe8b4c00860a05eec87261532250adb654c9a3ba025f234e364530260"
+      },
+      "create": {
+        "bytes": 2866757,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-ON-v2/dense/create-1792594342971501670.json",
+        "sha256": "aac7200372c4fde1876264c68ed1762496f1951551819d07272c03f60b0f5569"
+      },
+      "source": {
+        "bytes": 1503149,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_performance_profile_prepare_20261021/successor_layer/bound-short-ON-v2/SOURCE_BOUND.json",
+        "sha256": "a285ac43d953cf257255ec4848d8719b613010bf339491e2a39d20d2f3b73b8f"
+      }
+    },
+    {
+      "owned": {
+        "bytes": 1224379,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-OFF-v2/cpu-preflight/OWNED.json",
+        "sha256": "1c5ddc126a2601a93415a08b4943b8f93409d6a6dd6d8057f0476c2f0e69abed"
+      },
+      "create": {
+        "bytes": 2866183,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-OFF-v2/cpu-preflight/create-1792595060679493010.json",
+        "sha256": "bf0c897df6ed237486ef90ee9d5ea6a5e9482a6ab8f5fa7f1c52c325121a2d5f"
+      },
+      "source": {
+        "bytes": 1503858,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_performance_profile_prepare_20261021/successor_layer/bound-short-OFF-v2/SOURCE_BOUND.json",
+        "sha256": "ee9c2633dd33ccf449dd881d65e6100d478bc4439b4e966bf19961b69e2c2b70"
+      }
+    },
+    {
+      "owned": {
+        "bytes": 1224333,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-OFF-v2/dense/OWNED.json",
+        "sha256": "307d35132ddcfe7f6fe3f50c3bc4e8d7cbe6310da6e8deefc1891fe1e39bea15"
+      },
+      "create": {
+        "bytes": 2866771,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-OFF-v2/dense/create-1792595250689010230.json",
+        "sha256": "fb644543d55853382a1a5758016246ed01e0c643ae1d898d7edf2d5b9c081b87"
+      },
+      "source": {
+        "bytes": 1503858,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_performance_profile_prepare_20261021/successor_layer/bound-short-OFF-v2/SOURCE_BOUND.json",
+        "sha256": "ee9c2633dd33ccf449dd881d65e6100d478bc4439b4e966bf19961b69e2c2b70"
+      }
+    }
+  ],
+  "qualification": false
+}

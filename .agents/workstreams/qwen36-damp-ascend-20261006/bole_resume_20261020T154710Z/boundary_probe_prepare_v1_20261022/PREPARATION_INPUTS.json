@@ -1,0 +1,69 @@
+{
+  "schema": "bole.boundary-preparation-inputs/v1",
+  "source_only": true,
+  "NPU": false,
+  "files": [
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/boundary_probe_v1.py",
+      "bytes": 30245,
+      "sha256": "24f12bae4c583d076d264e435578138de37ffddbf98e8175314b684ae420657b"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/boundary_delta.py",
+      "bytes": 9525,
+      "sha256": "17b95c2ed565f3aead8a4a6ac783f5ce9a6c66c99e168449c0d1e293fe9abf3c"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/test_boundary_probe_v1.py",
+      "bytes": 8959,
+      "sha256": "4f345ee0968f845875726d847fc6d94cd95c88525493fad6db85c8780e470e7c"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/metadata_envelope.py",
+      "bytes": 7913,
+      "sha256": "8a501e7d166261f7367a142843084f8040ece8e6f0803799df596664e5431a11"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/boundary_integration.py",
+      "bytes": 5271,
+      "sha256": "00a7fc7a806d558cbbb9c0672608a02c423e3d6351038aa98c1f105e39f5fc4a"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/boundary_validation.py",
+      "bytes": 10201,
+      "sha256": "12e86c9e82a5238f6556dd7110adeee34da2057dc1579d5e0bb319a9e5f0b429"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/test_boundary_integration.py",
+      "bytes": 5735,
+      "sha256": "4e093b2c8ed89ab6568609d2a7ea356e1a924728993199aeb0631b518907fff8"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/prepare_boundary.py",
+      "bytes": 11609,
+      "sha256": "efcc7f00d433c78b690441e5947eb43e3aeb6f733b1b6668332fbe00e04f2452"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/run_boundary_controls.py",
+      "bytes": 7703,
+      "sha256": "011a4ab26d8e0bc3498b27de5f3209cb3b3d0774844bbce5723345d4113d7380"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/audit_boundary_source.py",
+      "bytes": 4631,
+      "sha256": "318abb0246fce440ba877c8428cbcc1dd90caea7846be76a884c5e26cb4b5533"
+    },
+    {
+      "bytes": 1851,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_performance_profile_prepare_20261021/successor_layer/bound-short-ON-v2/short_binding_delta.py",
+      "sha256": "4406fdeaff1965c2c3ce2adf859b1969bd29c102344c1f51204da037b81470d9"
+    },
+    {
+      "bytes": 6933,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_performance_profile_prepare_20261021/successor_layer/bound-short-ON-v2/performance_validate.py",
+      "sha256": "c45e114ab03fd35a47c85c8dd6f70bb71bbc406fa08be151222d082d8d57d824"
+    }
+  ],
+  "original_twenty_controls_replaced": false,
+  "performance_admitted": false
+}

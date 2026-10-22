@@ -1,0 +1,78 @@
+--- frozen-R3/read_short_results.py
++++ lowobs-consumer-v2/read_short_results_v2.py
+@@ -12,13 +12,21 @@
+ def obj(r):
+  need(type(r)is dict and set(r)=={'path','bytes','sha256'}and type(r['bytes'])is int and 0<r['bytes']<=16*2**20,'bounded exact Ref')
+  need(ref(r['path'])==r,'immutable complete evidence');return json.loads(Path(r['path']).read_bytes())
++def cleanup_obj(summary,expected_path):
++ p=Path(__file__).resolve().parent/'cleanup_summary.py'
++ need(p.is_file()and not any(x.is_symlink()for x in(p,*p.parents)),'ordinary pinned cleanup helper')
++ with p.open('rb')as f:b=f.read(3958)
++ need(len(b)==3957 and hashlib.sha256(b).hexdigest()=='1c2e014303bec214cff2e19d8c428eee1a13d69c3f8b525308b3ae958faf9687','exact copied cleanup summary helper')
++ scope={'__name__':'_bole_lowobs_cleanup_summary_v2','__file__':str(p)}
++ exec(compile(b,str(p),'exec'),scope)
++ return scope['read_cleanup_summary'](summary,expected_path)[1]
+ def arm(sr,rr):
+  m=obj(sr);v=obj(rr);out=Path(m['output_root'])
+  need(Path(rr['path'])==out/'RESULT.json'and v['source']==sr and v['schema']=='bole.actual-three-node-model-owned/v131'
+   and v['cpu_only']is False and v['primary']is None and v['secondary']==[]and v['source_before']==v['source_after'],'actual complete model source/result')
+  s=v['summary']
+  for k in ('model_release','CPU_release'):
+-  r=obj(s[k]);need(r['stopped']is True and r['retained']is True and r['errors']==[],'actual release')
++  r=cleanup_obj(s[k],out/('dense'if k=='model_release'else'cpu-preflight')/'cleanup.json');need(r['stopped']is True and r['retained']is True and r['errors']==[],'actual release')
+  c=obj(s['CPU_report']);need(c['source']==sr and c['pass_preflight']is True and c['Devices']==[],'same-image preflight')
+  c=obj(s['actual_client_terminal']);need(c['exit_code']==0,'actual complete client')
+  need(len(s['worker_snapshots'])==4,'all4 worker snapshots')
+@@ -39,7 +47,7 @@
+  return result
+ def main():
+  p=argparse.ArgumentParser(allow_abbrev=False);p.add_argument('--on-result-ref',required=True,type=json.loads);p.add_argument('--off-result-ref',required=True,type=json.loads)
+- a=p.parse_args();out=ROOT/'LOWOBS_SHORT_NPU_COMPARE_v1.json';need(not out.exists(),'exclusive actual comparison output')
++ a=p.parse_args();out=ROOT/'LOWOBS_SHORT_NPU_COMPARE_v2.json';need(not out.exists(),'exclusive actual comparison output')
+  result=consume(a.on_result_ref,a.off_result_ref)
+  with out.open('xb')as f:f.write((json.dumps(result,sort_keys=True)+'\n').encode());f.flush();os.fsync(f.fileno())
+  print(json.dumps(dict(result=ref(out),state_digest_equal=result['state_digest_equal'],NPU_executed_here=False,formal_performance=False)))
+--- frozen-R3/consume_pair.py
++++ lowobs-consumer-v2/consume_pair_v2.py
+@@ -1,6 +1,7 @@
+ """Independent saved-result paired screen reader; never invokes candidate computation."""
+-import argparse,hashlib,json,math
++import argparse,hashlib,json,math,os
+ from pathlib import Path
++ROOT=Path(__file__).resolve().parent
+ def need(v,s):
+  if not v:raise ValueError(s)
+ def ref(p):
+@@ -10,6 +11,14 @@
+  p=Path(r['path']);need(p.is_absolute()and type(r['bytes'])is int and 0<r['bytes']<=16*2**20,'bounded metadata')
+  b=p.read_bytes();need(len(b)==r['bytes']and hashlib.sha256(b).hexdigest()==r['sha256'],'immutable metadata')
+  return json.loads(b)
++def cleanup_obj(summary,expected_path):
++ p=Path(__file__).resolve().parent/'cleanup_summary.py'
++ need(p.is_file()and not any(x.is_symlink()for x in(p,*p.parents)),'ordinary pinned cleanup helper')
++ with p.open('rb')as f:b=f.read(3958)
++ need(len(b)==3957 and hashlib.sha256(b).hexdigest()=='1c2e014303bec214cff2e19d8c428eee1a13d69c3f8b525308b3ae958faf9687','exact copied cleanup summary helper')
++ scope={'__name__':'_bole_lowobs_cleanup_summary_v2','__file__':str(p)}
++ exec(compile(b,str(p),'exec'),scope)
++ return scope['read_cleanup_summary'](summary,expected_path)[1]
+ def finite(x):return type(x)in(int,float)and math.isfinite(x)
+ def metrics(row):
+  t=row['timing'];n=t['output_tokens'];d=t['duration_s'];f=t['ttft_ms']
+@@ -21,7 +30,7 @@
+   and r['primary']is None and r['secondary']==[] and r['source_before']==r['source_after'],'complete successful actual model result')
+  s=r['summary'];need(m['performance_arm']==s['performance_arm']==want,'actual arm')
+  for key in ('model_release','CPU_release'):
+-  release=obj(s[key]);need(release['stopped']is True and release['retained']is True and release['errors']==[],'actual owned release')
++  release=cleanup_obj(s[key],out/('dense'if key=='model_release'else'cpu-preflight')/'cleanup.json');need(release['stopped']is True and release['retained']is True and release['errors']==[],'actual owned release')
+  cpu=obj(s['CPU_report']);need(cpu['pass_preflight']is True and cpu['source']==sr and cpu['Devices']==[],'actual same-image preflight')
+  term=obj(s['actual_client_terminal']);need(term['exit_code']==0,'actual streaming client exit')
+  root=out/'dense';httpref=s['streaming_validation']['HTTP'];http=obj(httpref)
+@@ -81,4 +90,7 @@
+ if __name__=='__main__':
+  p=argparse.ArgumentParser(allow_abbrev=False)
+  for n in ('native-source','native-result','bole-source','bole-result'):p.add_argument('--'+n,required=True,type=json.loads)
+- x=p.parse_args();print(json.dumps(consume(x.native_source,x.native_result,x.bole_source,x.bole_result),sort_keys=True))
++ x=p.parse_args();out=ROOT/'LOWOBS_FIXED131_PAIR_SCREEN_v2.json';need(not out.exists(),'exclusive actual paired-screen output')
++ result=consume(x.native_source,x.native_result,x.bole_source,x.bole_result)
++ with out.open('xb')as f:f.write((json.dumps(result,sort_keys=True)+'\n').encode());f.flush();os.fsync(f.fileno())
++ print(json.dumps(result,sort_keys=True))

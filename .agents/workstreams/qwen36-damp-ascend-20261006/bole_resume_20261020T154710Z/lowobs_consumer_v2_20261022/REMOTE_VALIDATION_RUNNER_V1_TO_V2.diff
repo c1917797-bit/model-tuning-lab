@@ -1,0 +1,113 @@
+--- remote_validate_source_only_v1.py
++++ remote_validate_source_only_v2.py
+@@ -16,7 +16,7 @@
+ WS = Path('/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z')
+ PACKAGE = WS / 'lowobs_consumer_v2_20261022'
+ BASELINE = WS / 'bole_performance_profile_prepare_20261021/successor_layer/formal_pair_prepare_v1/revision3'
+-OUTPUT = Path('/opt/host/vnf/austinov/run-bole-lowobs-consumer-source-check-20261022T080000Z')
++OUTPUT = Path('/opt/host/vnf/austinov/run-bole-lowobs-consumer-source-check-v2-20261022T081000Z')
+ WHOLE_SECONDS, CHILD_SECONDS = 90, 25
+ READ_CAP, LOG_CAP, OUTPUT_CAP = 2**17, 2**20, 16 * 2**20
+ PINS = {
+@@ -33,6 +33,28 @@
+     'read_short_results.py': (4204, 'ebcee4f6a9cc3cbb8cd6b47b3c6ce947ceb01dab83398eca8188ac68cd2102d0'),
+     'consume_pair.py': (7899, '5c11717e03c958661411c102c407c8f8b773d599d45f42b245f8c257b44196d9'),
+ }
++UNITTEST_PINS = {
++    '/usr/local/lib/qwen35-pytest-8.4.2-py39/site-packages/unittest/__init__.py': (3761, '07bdf1fff20e4121ba61cfb64ea3c404d54ac56b053475a3a105907f48685210'),
++    '/usr/local/lib/qwen35-pytest-8.4.2-py39/site-packages/unittest/mock.py': (99215, '883176927e3c64d328716635b294523a9be16bbe3ac0f5792947897535f34844'),
++}
++CONTROL_WRAPPER = '''import hashlib,json,runpy,sys
++from pathlib import Path
++import unittest,unittest.mock
++expected=json.loads(sys.argv[1]); script=sys.argv[2]; rows=[]
++for module,want in zip((unittest,unittest.mock),expected):
++    path=Path(module.__file__)
++    if str(path)!=want['path'] or not path.is_file() or any(p.is_symlink() for p in (path,*path.parents)):
++        raise ValueError('exact ordinary actual unittest import origin')
++    with path.open('rb') as stream:
++        data=stream.read(want['bytes']+1)
++    actual=dict(path=str(path),bytes=len(data),sha256=hashlib.sha256(data).hexdigest())
++    if actual!=want:
++        raise ValueError('exact actual unittest import source Ref')
++    rows.append(actual)
++print(json.dumps(dict(actual_unittest_import_origins=rows,source_only=True,NPU_executed=False)),flush=True)
++sys.argv=[script]
++runpy.run_path(script,run_name='__main__')
++'''
+ RUNTIME_RESULTS = ('LOWOBS_SHORT_NPU_COMPARE_v2.json', 'LOWOBS_FIXED131_PAIR_SCREEN_v2.json')
+ 
+ 
+@@ -138,7 +160,7 @@
+     started = time.monotonic()
+     deadline = started + WHOLE_SECONDS
+     self_path = ordinary(Path(__file__).absolute())
+-    need(self_path == PACKAGE / 'remote_validate_source_only_v1.py', 'fixed reviewed runner path')
++    need(self_path == PACKAGE / 'remote_validate_source_only_v2.py', 'fixed reviewed runner path')
+     ordinary(PACKAGE, directory=True)
+     ordinary(OUTPUT.parent, directory=True)
+     os.umask(0o077)
+@@ -148,13 +170,8 @@
+     error, before_complete, staged_unchanged = None, False, False
+     inputs = [(PACKAGE / name, pin) for name, pin in PINS.items()]
+     inputs += [(BASELINE / name, pin) for name, pin in BASE_PINS.items()]
++    inputs += [(Path(path), pin) for path, pin in UNITTEST_PINS.items()]
+     inputs.append((self_path, None))  # MAIN pins this runner's SHA before deployment.
+-    write(OUTPUT / 'START.json', dict(schema='bole.lowobs-consumer-source-check-start/v1',
+-          started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+-          package=str(PACKAGE), baseline=str(BASELINE), output=str(OUTPUT),
+-          whole_seconds=WHOLE_SECONDS, child_seconds=CHILD_SECONDS,
+-          stdout_stderr_cap_each=LOG_CAP, output_cap=OUTPUT_CAP,
+-          source_only=True, NPU_executed=False, runtime_consume_executed=False))
+     try:
+         data = {}
+         for path, pin in inputs:
+@@ -164,6 +181,15 @@
+                  'exact pinned input: ' + str(path))
+             data[path] = body
+         before_complete = True
++        unittest_refs = [r for r in before if r['path'] in UNITTEST_PINS]
++        write(OUTPUT / 'START.json', dict(schema='bole.lowobs-consumer-source-check-start/v2',
++              started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
++              package=str(PACKAGE), baseline=str(BASELINE), output=str(OUTPUT),
++              whole_seconds=WHOLE_SECONDS, child_seconds=CHILD_SECONDS,
++              stdout_stderr_cap_each=LOG_CAP, output_cap=OUTPUT_CAP,
++              unittest_source_refs=unittest_refs,
++              unittest_origin_basis='MAIN observed import origin exec069e and full source Refs exec069f; controls wrapper rechecks imports',
++              source_only=True, NPU_executed=False, runtime_consume_executed=False))
+         for name in RUNTIME_RESULTS:
+             need(not (PACKAGE / name).exists(), 'no model-consumer output in source-only package')
+         write(OUTPUT / 'INPUTS_BEFORE.json', before)
+@@ -185,9 +211,10 @@
+             need((actual['bytes'], actual['sha256']) == PINS[name], 'exact control-zone copy')
+             staged.append(actual)
+         write(OUTPUT / 'CONTROL_INPUTS_BEFORE.json', staged)
+-        python = [sys.executable, '-I', '-B', '-S']  # No site packages or startup customization.
++        python = [sys.executable, '-I', '-B']  # Existing host unittest is supplied through site; no install/edit.
+         jobs = (
+-            ('controls', python + [str(zone / 'test_cleanup_boundary.py')]),
++            ('controls', python + ['-c', CONTROL_WRAPPER, json.dumps(unittest_refs),
++                                  str(zone / 'test_cleanup_boundary.py')]),
+             ('invariants', python + [str(PACKAGE / 'verify_source_invariants.py'),
+                                     '--baseline-dir', str(BASELINE)]),
+             ('short_help', python + [str(PACKAGE / 'read_short_results_v2.py'), '--help']),
+@@ -200,6 +227,10 @@
+                  'source-only child failed: ' + name)
+         controls = read(OUTPUT / 'controls.stderr', LOG_CAP)[0].decode('utf-8')
+         need('Ran 7 tests' in controls and controls.rstrip().endswith('OK'), 'exact seven controls completed')
++        origins = json.loads(read(OUTPUT / 'controls.stdout', LOG_CAP)[0])
++        need(origins['actual_unittest_import_origins'] == unittest_refs
++             and origins['source_only'] is True and origins['NPU_executed'] is False,
++             'same controls child used exact pinned actual unittest origins')
+         invariant = json.loads(read(OUTPUT / 'invariants.stdout', LOG_CAP)[0])
+         need(invariant['source_invariants_pass'] is True and invariant['source_only'] is True
+              and invariant['NPU_executed'] is False and invariant['paired_gate_pass'] is False
+@@ -232,7 +263,7 @@
+     within_budget = time.monotonic() <= deadline
+     passed = (error is None and unchanged and staged_unchanged and len(stages) == 4
+               and used + LOG_CAP <= OUTPUT_CAP and within_budget)
+-    result = dict(schema='bole.lowobs-consumer-remote-source-check/v1',
++    result = dict(schema='bole.lowobs-consumer-remote-source-check/v2',
+                   status='PASS_SOURCE_ONLY' if passed else 'FAIL_SOURCE_ONLY',
+                   error=error, source_inputs_unchanged=unchanged, control_inputs_unchanged=staged_unchanged,
+                   within_whole_budget=within_budget,

@@ -1,0 +1,29 @@
+{
+  "NPU": false,
+  "added_bytes": 1338313,
+  "all_files": 148,
+  "bounded_device_read_bytes": 515220032,
+  "bounded_other_total_with_headroom": 3071857,
+  "device_read_cap": 536870912,
+  "exact_raw_bytes": 836352,
+  "fabricated_bounds_only": true,
+  "largest_metadata_file": {
+    "bytes": 51151,
+    "event": "COMPLETE"
+  },
+  "maximum_conv_width": 16,
+  "maximum_draft_inventory_tensors": 8,
+  "metadata_cap": 524288,
+  "metadata_files": 130,
+  "metadata_upper_bound_bytes": 501961,
+  "original_other_actual_max": 1668008,
+  "original_other_cap": 3145728,
+  "per_metadata_file_cap": 131072,
+  "qualification": false,
+  "raw_cap": 836352,
+  "raw_files": 18,
+  "retained_other_headroom": 65536,
+  "runtime_recounts_actual_original_buckets": true,
+  "schema": "bole.boundary-source-only-capacity-calculation/v1",
+  "statement": "Capacity calculation only; no device run or numerical result."
+}

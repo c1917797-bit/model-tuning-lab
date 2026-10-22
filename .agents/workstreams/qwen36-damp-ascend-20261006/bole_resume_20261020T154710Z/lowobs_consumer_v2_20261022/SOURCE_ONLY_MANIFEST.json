@@ -1,0 +1,128 @@
+{
+  "NPU_executed": false,
+  "baseline_consumers": [
+    {
+      "local_copy": {
+        "bytes": 4204,
+        "path": "/workspace/scratch/e65c435145b1/formal_review_input/read_short_results.py",
+        "sha256": "ebcee4f6a9cc3cbb8cd6b47b3c6ce947ceb01dab83398eca8188ac68cd2102d0"
+      },
+      "remote_path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_performance_profile_prepare_20261021/successor_layer/formal_pair_prepare_v1/revision3/read_short_results.py"
+    },
+    {
+      "local_copy": {
+        "bytes": 7899,
+        "path": "/workspace/scratch/e65c435145b1/formal_review_input/consume_pair.py",
+        "sha256": "5c11717e03c958661411c102c407c8f8b773d599d45f42b245f8c257b44196d9"
+      },
+      "remote_path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_performance_profile_prepare_20261021/successor_layer/formal_pair_prepare_v1/revision3/consume_pair.py"
+    }
+  ],
+  "exact_diff": {
+    "bytes": 5693,
+    "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/PATCH.diff",
+    "sha256": "8fa4b7c5f392227a3032342942f520052920fdbabd671fa4defff5440e541b7f"
+  },
+  "formal_performance": false,
+  "helper_origin": {
+    "bytes": 3957,
+    "path": "/workspace/scratch/e65c435145b1/reader_v4_draft/cleanup_summary.py",
+    "sha256": "1c2e014303bec214cff2e19d8c428eee1a13d69c3f8b525308b3ae958faf9687"
+  },
+  "numerical_qualification": false,
+  "old_short_pair_status": "FAIL remains unchanged; no NPU admission",
+  "paired_gate_pass": false,
+  "performance_admitted": false,
+  "preservation": {
+    "all_original_performance_predicates_unchanged": true,
+    "all_original_qualification_flags_unchanged": true,
+    "frozen_inputs_unchanged": true,
+    "generic_Ref3_unchanged": true,
+    "original_arm_logic_unchanged_except_cleanup_read": true,
+    "original_cleanup_predicates_unchanged": true,
+    "state_comparator_unchanged": true
+  },
+  "project_validate_mst_run_here": false,
+  "readme": {
+    "bytes": 4335,
+    "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/README.md",
+    "sha256": "972fbaeeea9956faf8822bf76fe376b0116815c341768e48da107f55d0b2dd55"
+  },
+  "remote_deployed": false,
+  "result_policy": {
+    "exclusive_open_mode": "xb",
+    "existing_results_overwritten": false,
+    "relative_to_new_consumer_directory": true,
+    "runtime_results_created": [],
+    "screen_result": "LOWOBS_FIXED131_PAIR_SCREEN_v2.json",
+    "short_result": "LOWOBS_SHORT_NPU_COMPARE_v2.json"
+  },
+  "retained_original_cleanup_fixtures": [
+    {
+      "local_exact_bytes": {
+        "bytes": 1245,
+        "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/fixtures/original_ON_v2/cpu-preflight/cleanup.json",
+        "sha256": "f933c4c006a3eaa29745bd1de5b2939d4c407a456ead0e9d149dc20286bf69cd"
+      },
+      "local_ref_path_rebased_for_controls_only": true,
+      "new_experiment": false,
+      "original_producer_Ref2": {
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-ON-v2/cpu-preflight/cleanup.json",
+        "sha256": "f933c4c006a3eaa29745bd1de5b2939d4c407a456ead0e9d149dc20286bf69cd"
+      }
+    },
+    {
+      "local_exact_bytes": {
+        "bytes": 1213,
+        "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/fixtures/original_ON_v2/dense/cleanup.json",
+        "sha256": "54bcb155380f1d0b5762a3b22433a8592c8cf0352d355b7f53825351475d562d"
+      },
+      "local_ref_path_rebased_for_controls_only": true,
+      "new_experiment": false,
+      "original_producer_Ref2": {
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-ON-v2/dense/cleanup.json",
+        "sha256": "54bcb155380f1d0b5762a3b22433a8592c8cf0352d355b7f53825351475d562d"
+      }
+    }
+  ],
+  "runtime_consume_executed": false,
+  "runtime_files": [
+    {
+      "bytes": 4850,
+      "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/read_short_results_v2.py",
+      "sha256": "48bf3d952a932d0733c620bcc09a5d5f1a4f19e52d97512759b9597b42a07f69"
+    },
+    {
+      "bytes": 8828,
+      "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/consume_pair_v2.py",
+      "sha256": "cee870a32b8f2087d63bb3c9f2d3dbd81efa6a317ad0eb044f86478f5943c0c0"
+    },
+    {
+      "bytes": 3957,
+      "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/cleanup_summary.py",
+      "sha256": "1c2e014303bec214cff2e19d8c428eee1a13d69c3f8b525308b3ae958faf9687"
+    }
+  ],
+  "schema": "bole.lowobs-consumer-source-only-manifest/v2",
+  "source_only": true,
+  "status": "PREPARED_FOR_MAIN_REVIEW",
+  "task_accuracy": false,
+  "technology_success": false,
+  "validation": {
+    "bytes": 1894,
+    "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/validation_v1/VALIDATION.json",
+    "sha256": "9f7e280479b1a07d5e79e83f34d2514b0c854877ea9c8b95f1b1913c543f6b05"
+  },
+  "validation_sources": [
+    {
+      "bytes": 5135,
+      "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/test_cleanup_boundary.py",
+      "sha256": "3740e69cfbcd99d1e2bfe4233959faf65ee62e502fd0e3378f6630b52bca4f18"
+    },
+    {
+      "bytes": 5981,
+      "path": "/workspace/scratch/e65c435145b1/lowobs_consumer_v2_draft/verify_source_invariants.py",
+      "sha256": "4befbfad36cc092038626cd41bd47a2b0385c820a363aedf3f2fdf47b2d953c3"
+    }
+  ]
+}

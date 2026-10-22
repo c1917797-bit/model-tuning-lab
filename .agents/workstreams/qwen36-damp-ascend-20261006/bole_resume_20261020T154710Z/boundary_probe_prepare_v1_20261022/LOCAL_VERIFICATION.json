@@ -1,0 +1,154 @@
+{
+  "NPU": false,
+  "artifacts": {
+    "DESIGN.md": {
+      "bytes": 17180,
+      "path": "/workspace/scratch/e65c435145b1/boundary_probe_draft/DESIGN.md",
+      "sha256": "7fcff3855e98d09586f21be576c9c0f215ca3daad7ac1a76237a448e303abd68"
+    },
+    "METADATA_ENVELOPE.json": {
+      "bytes": 894,
+      "path": "/workspace/scratch/e65c435145b1/boundary_probe_draft/METADATA_ENVELOPE.json",
+      "sha256": "50234aeecd7e06b46b82be267d6724415606af7f2bd2105ade54609b767d6edc"
+    },
+    "boundary_delta.py": {
+      "bytes": 9525,
+      "path": "/workspace/scratch/e65c435145b1/boundary_probe_draft/boundary_delta.py",
+      "sha256": "17b95c2ed565f3aead8a4a6ac783f5ce9a6c66c99e168449c0d1e293fe9abf3c"
+    },
+    "boundary_probe_v1.py": {
+      "bytes": 30245,
+      "path": "/workspace/scratch/e65c435145b1/boundary_probe_draft/boundary_probe_v1.py",
+      "sha256": "24f12bae4c583d076d264e435578138de37ffddbf98e8175314b684ae420657b"
+    },
+    "metadata_envelope.py": {
+      "bytes": 7913,
+      "path": "/workspace/scratch/e65c435145b1/boundary_probe_draft/metadata_envelope.py",
+      "sha256": "8a501e7d166261f7367a142843084f8040ece8e6f0803799df596664e5431a11"
+    },
+    "test_boundary_probe_v1.py": {
+      "bytes": 8959,
+      "path": "/workspace/scratch/e65c435145b1/boundary_probe_draft/test_boundary_probe_v1.py",
+      "sha256": "4f345ee0968f845875726d847fc6d94cd95c88525493fad6db85c8780e470e7c"
+    }
+  },
+  "cpu_controls": {
+    "NPU": false,
+    "exit_code": 0,
+    "stderr": "test_admission_recounts_real_files_including_foreign_partial (__main__.BoundaryControls.test_admission_recounts_real_files_including_foreign_partial) ... ok\ntest_both_optins_and_exact_typed_declaration_required (__main__.BoundaryControls.test_both_optins_and_exact_typed_declaration_required) ... ok\ntest_disabled_never_accesses_runtime_or_owner (__main__.BoundaryControls.test_disabled_never_accesses_runtime_or_owner) ... ok\ntest_exact_logical_scope_and_bounded_raw_reservation (__main__.BoundaryControls.test_exact_logical_scope_and_bounded_raw_reservation) ... ok\ntest_exclusive_write_and_sticky_no_retry (__main__.BoundaryControls.test_exclusive_write_and_sticky_no_retry) ... ok\ntest_foreign_hook_replacement_is_not_removed (__main__.BoundaryControls.test_foreign_hook_replacement_is_not_removed) ... ok\ntest_inactive_hooks_return_none_and_remove_only_own_handles (__main__.BoundaryControls.test_inactive_hooks_return_none_and_remove_only_own_handles) ... ok\ntest_original_other_and_global_caps_are_enforced (__main__.BoundaryControls.test_original_other_and_global_caps_are_enforced) ... ok\ntest_per_file_and_total_raw_caps_before_write (__main__.BoundaryControls.test_per_file_and_total_raw_caps_before_write) ... ok\ntest_plain_exclusive_directory_and_filenames (__main__.BoundaryControls.test_plain_exclusive_directory_and_filenames) ... ok\ntest_wrong_boundary_order_is_sticky_before_tensor_read (__main__.BoundaryControls.test_wrong_boundary_order_is_sticky_before_tensor_read) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.013s\n\nOK\n",
+    "stdout": "",
+    "tests": 11
+  },
+  "exact_once_rendered_preview": {
+    "command_contract.py": {
+      "bytes": 3396,
+      "sha256": "f71a0abef73fdd22d865cb5bf5bb59af36be985c57842546d930870fc157543c",
+      "syntax_compiled": true
+    },
+    "g3_budget.py": {
+      "bytes": 4227,
+      "sha256": "f3f0a2b335deceac91ad48ec74b702998d66690319294601b4e217f8eab1c50c",
+      "syntax_compiled": true
+    },
+    "host_service.py": {
+      "bytes": 16496,
+      "sha256": "fe6c1f30ae18739e6474cb5e321b8474751b147615e27107407bb8b53d686517",
+      "syntax_compiled": true
+    },
+    "model_process_calibration.py": {
+      "bytes": 5538,
+      "sha256": "cc9b9be7117fe70af75d606f2ae4fe244b4da79f72c6812ae36d2a8c327f5804",
+      "syntax_compiled": true
+    },
+    "performance_host.py": {
+      "bytes": 6958,
+      "sha256": "4ddb6f48220423577aaeaf232bb1fb05ecf94d4199bf816d271a81f3b5171b8b",
+      "syntax_compiled": true
+    },
+    "prefill_tail.py": {
+      "bytes": 7815,
+      "sha256": "5c942c7e0520431932f292e609c9a4d73e5ab5593501ba41efc0a811fdf6c430",
+      "syntax_compiled": true
+    },
+    "service_runner.py": {
+      "bytes": 51445,
+      "sha256": "c6ad32911880d888b74ac9bbaad6feded792daff58252fed9f648402890ba61d",
+      "syntax_compiled": true
+    }
+  },
+  "metadata_envelope": {
+    "exit_code": 0,
+    "result": {
+      "NPU": false,
+      "added_bytes": 1338313,
+      "all_files": 148,
+      "bounded_device_read_bytes": 515220032,
+      "bounded_other_total_with_headroom": 3071857,
+      "device_read_cap": 536870912,
+      "exact_raw_bytes": 836352,
+      "fabricated_bounds_only": true,
+      "largest_metadata_file": {
+        "bytes": 51151,
+        "event": "COMPLETE"
+      },
+      "maximum_conv_width": 16,
+      "maximum_draft_inventory_tensors": 8,
+      "metadata_cap": 524288,
+      "metadata_files": 130,
+      "metadata_upper_bound_bytes": 501961,
+      "original_other_actual_max": 1668008,
+      "original_other_cap": 3145728,
+      "per_metadata_file_cap": 131072,
+      "qualification": false,
+      "raw_cap": 836352,
+      "raw_files": 18,
+      "retained_other_headroom": 65536,
+      "runtime_recounts_actual_original_buckets": true,
+      "schema": "bole.boundary-source-only-capacity-calculation/v1",
+      "statement": "Capacity calculation only; no device run or numerical result."
+    },
+    "stderr": ""
+  },
+  "original_numerical_gate_run": false,
+  "original_results_modified": false,
+  "qualification": false,
+  "remote_actions": false,
+  "schema": "bole.boundary-source-local-verification/v1",
+  "unchanged_parent_source_inputs": {
+    "command_contract.py": {
+      "bytes": 3358,
+      "path": "/workspace/scratch/e65c435145b1/probe_builder_input/command_contract.py",
+      "sha256": "d3fe0d694d6dd0e707b0b0158c116b94500f7dc673cf76dea59348eaff260eab"
+    },
+    "g3_budget.py": {
+      "bytes": 3371,
+      "path": "/workspace/scratch/e65c435145b1/probe_builder_input/g3_budget.py",
+      "sha256": "393993b390f87b0a57b149f45b74c8c97873445e37f2a67cd647197eeb895eae"
+    },
+    "host_service.py": {
+      "bytes": 16263,
+      "path": "/workspace/scratch/e65c435145b1/probe_builder_input/host_service.py",
+      "sha256": "c47ab542ad0691c3358378a043fbb85380b772b23c7e3a707e34c9eccb78bd4c"
+    },
+    "model_process_calibration.py": {
+      "bytes": 5185,
+      "path": "/workspace/scratch/e65c435145b1/old_runtime_review/model_process_calibration.py",
+      "sha256": "60e43ab6ea8a243d8303c2f9e7c433412d0f3bb41af75f0ad2cf530bad6d5654"
+    },
+    "performance_host.py": {
+      "bytes": 6748,
+      "path": "/workspace/scratch/e65c435145b1/probe_builder_input/performance_host.py",
+      "sha256": "e84f28128852599005fb192eaf3409e7e8d51796c3e1759f31f3ea3f4909ea98"
+    },
+    "prefill_tail.py": {
+      "bytes": 7499,
+      "path": "/workspace/scratch/e65c435145b1/old_runtime_review/prefill_tail.py",
+      "sha256": "93c662cdba98827f865ff6e3c6e217982bc8c4f296d06564620b4887cc4c0452"
+    },
+    "service_runner.py": {
+      "bytes": 50254,
+      "path": "/workspace/scratch/e65c435145b1/old_runtime_review/service_runner.py",
+      "sha256": "5aadec49440c0768dea5f1563125c7303752e5df0059adfdd3b2dcd3d1362b8c"
+    }
+  }
+}

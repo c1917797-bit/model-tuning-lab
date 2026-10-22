@@ -1,0 +1,150 @@
+{
+  "schema": "bole.boundary-probe-main-source-review/v1",
+  "source_only": true,
+  "NPU_executed": false,
+  "paired_gate_pass": false,
+  "performance_admitted": false,
+  "parent": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_performance_profile_prepare_20261021/successor_layer/bound-short-ON-v2/SOURCE_BOUND.json",
+    "bytes": 1503149,
+    "sha256": "a285ac43d953cf257255ec4848d8719b613010bf339491e2a39d20d2f3b73b8f"
+  },
+  "helpers": {
+    "boundary_probe_v1.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/boundary_probe_v1.py",
+      "bytes": 30245,
+      "sha256": "24f12bae4c583d076d264e435578138de37ffddbf98e8175314b684ae420657b"
+    },
+    "boundary_delta.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/boundary_delta.py",
+      "bytes": 9525,
+      "sha256": "17b95c2ed565f3aead8a4a6ac783f5ce9a6c66c99e168449c0d1e293fe9abf3c"
+    },
+    "boundary_integration.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/boundary_integration.py",
+      "bytes": 5271,
+      "sha256": "00a7fc7a806d558cbbb9c0672608a02c423e3d6351038aa98c1f105e39f5fc4a"
+    },
+    "boundary_validation.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/boundary_validation.py",
+      "bytes": 10201,
+      "sha256": "12e86c9e82a5238f6556dd7110adeee34da2057dc1579d5e0bb319a9e5f0b429"
+    }
+  },
+  "control_refs": [
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/test_boundary_probe_v1.py",
+      "bytes": 8959,
+      "sha256": "4f345ee0968f845875726d847fc6d94cd95c88525493fad6db85c8780e470e7c"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/test_boundary_integration.py",
+      "bytes": 5735,
+      "sha256": "4e093b2c8ed89ab6568609d2a7ea356e1a924728993199aeb0631b518907fff8"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/metadata_envelope.py",
+      "bytes": 7913,
+      "sha256": "8a501e7d166261f7367a142843084f8040ece8e6f0803799df596664e5431a11"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/run_boundary_controls.py",
+      "bytes": 7703,
+      "sha256": "011a4ab26d8e0bc3498b27de5f3209cb3b3d0774844bbce5723345d4113d7380"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/PREPARATION_INPUTS.json",
+      "bytes": 3985,
+      "sha256": "bb287807a93a07265b8000006b2566fe1503b34797037fb5666ecaef4e7dd68a"
+    },
+    {
+      "path": "/usr/local/lib/qwen35-pytest-8.4.2-py39/site-packages/unittest/__init__.py",
+      "bytes": 3761,
+      "sha256": "07bdf1fff20e4121ba61cfb64ea3c404d54ac56b053475a3a105907f48685210"
+    },
+    {
+      "path": "/usr/local/lib/qwen35-pytest-8.4.2-py39/site-packages/unittest/mock.py",
+      "bytes": 99215,
+      "sha256": "883176927e3c64d328716635b294523a9be16bbe3ac0f5792947897535f34844"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v1-20261022T080000Z/RESULT.json",
+      "bytes": 3770,
+      "sha256": "b3848db334a6e6ac7c45815db1f67169d5c22dba7514ee9bd7f5287e2400aed5"
+    },
+    {
+      "bytes": 0,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v1-20261022T080000Z/probe_controls.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1039,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v1-20261022T080000Z/probe_controls.stderr",
+      "sha256": "ad569866e1d38c2a43c12a22783c7a1bb2cd310fdc58595acd8db78bf3bfb1d2"
+    },
+    {
+      "bytes": 0,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v1-20261022T080000Z/integration_controls.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 819,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v1-20261022T080000Z/integration_controls.stderr",
+      "sha256": "99b3367b04322eb53c4a0d5df910f5a48bbab1d8343425c9e04b7b8b4e98a427"
+    },
+    {
+      "bytes": 894,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v1-20261022T080000Z/metadata_capacity.stdout",
+      "sha256": "50234aeecd7e06b46b82be267d6724415606af7f2bd2105ade54609b767d6edc"
+    },
+    {
+      "bytes": 0,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v1-20261022T080000Z/metadata_capacity.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v1-20261022T080000Z/INPUTS_BEFORE.json",
+      "bytes": 4102,
+      "sha256": "f372fcc2678ce361c6c6d94510b8dafffefd4a419332d0944824bd1bac77b40d"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v1-20261022T080000Z/INPUTS_AFTER.json",
+      "bytes": 4102,
+      "sha256": "f372fcc2678ce361c6c6d94510b8dafffefd4a419332d0944824bd1bac77b40d"
+    }
+  ],
+  "independent_review": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v1_20261022/BOUNDARY_INDEPENDENT_REVIEW.md",
+    "bytes": 16650,
+    "sha256": "f24aa642e351cd5294e1fe112eef4749f45ad22b6c29f40d1cf80844574ae145"
+  },
+  "review_disposition": "MAIN read all four helpers and three orchestration scripts; independent source review complete. Binding/source audit only. A separate fresh physical admission and original same-image controls remain required.",
+  "source_controls": {
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v1-20261022T080000Z/RESULT.json",
+      "bytes": 3770,
+      "sha256": "b3848db334a6e6ac7c45815db1f67169d5c22dba7514ee9bd7f5287e2400aed5"
+    },
+    "observer": 11,
+    "integration": 8,
+    "scope": "host CPU controls plus fabricated capacity calculation only; original twenty same-image controls not replaced"
+  },
+  "outer_execution_bounds": {
+    "address_space_bytes": 536870912,
+    "cpu_seconds": 150,
+    "file_bytes": 16777216,
+    "core_bytes": 0,
+    "alarm_seconds": 180,
+    "awmcp_timeout_seconds": 190
+  },
+  "purpose": "ON only; two bounded eight-token requests; locate earliest observed native/prefill/calibration/MTP boundary difference. No root cause assumed.",
+  "prior_pair_result": "FAIL; actual per-rank frame/key sets differ. Original results and comparator predicate unchanged.",
+  "within_arm_evidence": "Both original ON and OFF first-frame state/conv witnesses are not bit-reproducible between their two requests; original before witness is selected-path staging, not native prefill return.",
+  "limitations": [
+    "Blocking D2H changes scheduling.",
+    "Full131 stage/state hashes are producer witnesses; only last8 values of nine stages retained.",
+    "Draft active write footprint and alias exclusion remain unproved.",
+    "No numerical threshold relaxed or new numerical/performance/accuracy pass asserted."
+  ],
+  "hard_cutoff_utc": "2026-10-22T12:38:41Z"
+}
