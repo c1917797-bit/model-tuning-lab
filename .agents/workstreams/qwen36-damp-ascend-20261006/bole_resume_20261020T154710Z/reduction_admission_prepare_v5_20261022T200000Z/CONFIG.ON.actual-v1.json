@@ -1,0 +1,291 @@
+{
+  "authorization_ref": {
+    "bytes": 1918,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/reduction_probe_prepare_v5_20261022T200000Z/ON/AUTHORIZATION_CONTINUATION.json",
+    "sha256": "9359fa9322ee1c5fc656a53a8261d81bc4b61eec36453c34aa763797f3ff68e1"
+  },
+  "build_record_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/reduction_probe_prepare_v5_20261022T200000Z/ON/BUILD_RECORD.json",
+    "bytes": 1303498,
+    "sha256": "ad0761a214620e2fb253b71011825c5bf1f4872ca958ae44b007f15747f26c30"
+  },
+  "commands_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-reduction-ON-v5_20261022T200000Z/COMMANDS.json",
+    "bytes": 4760,
+    "sha256": "eb8b81b0e97d56b14834d24e73d9aa23c6b3457c5b251b4f15a655f3e72f63b8"
+  },
+  "evidence_root": "/opt/host/vnf/austinov/run-bole-reduction-main-admission-ON_v5_20261022T200000Z",
+  "main_lock": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/MAIN_ADMISSION.lock",
+  "old_owners": [
+    {
+      "cid": "40c6b48039182b29b47a4a4283ba17f414570f5a5465d6c2865a0b595866b45a",
+      "cleanup_ref": {
+        "bytes": 1245,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-ON-v2/cpu-preflight/cleanup.json",
+        "sha256": "f933c4c006a3eaa29745bd1de5b2939d4c407a456ead0e9d149dc20286bf69cd"
+      },
+      "host_result_ref": {
+        "bytes": 2174724,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-ON-v2/RESULT.json",
+        "sha256": "2e3326ee281ace496cf7d97a02eafee9e6b91029143c6f3b1f5bebbc4197a442"
+      },
+      "owned_ref": {
+        "bytes": 1224371,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-ON-v2/cpu-preflight/OWNED.json",
+        "sha256": "7d57ff15e24d97ede5fae8d8908dadb4597ea67f32d451c9273f1529f077ea3d"
+      },
+      "source_ref": {
+        "bytes": 1503149,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_performance_profile_prepare_20261021/successor_layer/bound-short-ON-v2/SOURCE_BOUND.json",
+        "sha256": "a285ac43d953cf257255ec4848d8719b613010bf339491e2a39d20d2f3b73b8f"
+      }
+    },
+    {
+      "cid": "54246001fc180995c8e021a27f8f5b14f237fe6e92dd62dcb4acadc3dfae0411",
+      "cleanup_ref": {
+        "bytes": 1213,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-ON-v2/dense/cleanup.json",
+        "sha256": "54bcb155380f1d0b5762a3b22433a8592c8cf0352d355b7f53825351475d562d"
+      },
+      "host_result_ref": {
+        "bytes": 2174724,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-ON-v2/RESULT.json",
+        "sha256": "2e3326ee281ace496cf7d97a02eafee9e6b91029143c6f3b1f5bebbc4197a442"
+      },
+      "owned_ref": {
+        "bytes": 1224325,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-ON-v2/dense/OWNED.json",
+        "sha256": "8148e1fbe8b4c00860a05eec87261532250adb654c9a3ba025f234e364530260"
+      },
+      "source_ref": {
+        "bytes": 1503149,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_performance_profile_prepare_20261021/successor_layer/bound-short-ON-v2/SOURCE_BOUND.json",
+        "sha256": "a285ac43d953cf257255ec4848d8719b613010bf339491e2a39d20d2f3b73b8f"
+      }
+    },
+    {
+      "cid": "c4a669cc4b20e5f013e92ce22ac89f6eccf7236286464bd2f7b7b8ac9bf3bdc9",
+      "cleanup_ref": {
+        "bytes": 1249,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-OFF-v2/cpu-preflight/cleanup.json",
+        "sha256": "76905e5ef267584bd8f8a6cd95bd113e062b5e5e4a7be79152e82c97bcc912df"
+      },
+      "host_result_ref": {
+        "bytes": 2174785,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-OFF-v2/RESULT.json",
+        "sha256": "69c9d9ed8fb914b0418ec7d38d623cf708454fc71053e0effd78364b1bebd89b"
+      },
+      "owned_ref": {
+        "bytes": 1224379,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-OFF-v2/cpu-preflight/OWNED.json",
+        "sha256": "1c5ddc126a2601a93415a08b4943b8f93409d6a6dd6d8057f0476c2f0e69abed"
+      },
+      "source_ref": {
+        "bytes": 1503858,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_performance_profile_prepare_20261021/successor_layer/bound-short-OFF-v2/SOURCE_BOUND.json",
+        "sha256": "ee9c2633dd33ccf449dd881d65e6100d478bc4439b4e966bf19961b69e2c2b70"
+      }
+    },
+    {
+      "cid": "961b3501d0b739216264e2027115a3245d0e391709a408ed9ac2943bcd1f083d",
+      "cleanup_ref": {
+        "bytes": 3595,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-OFF-v2/dense/cleanup.json",
+        "sha256": "b51e48f781132defe1dd7f6a3cbdd8d222a2cbaca163d1e84d1de2f855d92fd6"
+      },
+      "host_result_ref": {
+        "bytes": 2174785,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-OFF-v2/RESULT.json",
+        "sha256": "69c9d9ed8fb914b0418ec7d38d623cf708454fc71053e0effd78364b1bebd89b"
+      },
+      "owned_ref": {
+        "bytes": 1224333,
+        "path": "/opt/host/vnf/austinov/run-bole-short-state-20261021T123841Z-OFF-v2/dense/OWNED.json",
+        "sha256": "307d35132ddcfe7f6fe3f50c3bc4e8d7cbe6310da6e8deefc1891fe1e39bea15"
+      },
+      "source_ref": {
+        "bytes": 1503858,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_performance_profile_prepare_20261021/successor_layer/bound-short-OFF-v2/SOURCE_BOUND.json",
+        "sha256": "ee9c2633dd33ccf449dd881d65e6100d478bc4439b4e966bf19961b69e2c2b70"
+      }
+    },
+    {
+      "cid": "6433f9740a1acc4be305d35456436dbccdaf0a91d6884e283259ea22dec99ef5",
+      "cleanup_ref": {
+        "bytes": 1233,
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v1-20261022T080000Z/cpu-preflight/cleanup.json",
+        "sha256": "3978a08412f37c13ea859a5ceb005c4511fb8f3afc6cd7b1059e14f894c462b7"
+      },
+      "host_result_ref": {
+        "bytes": 2389206,
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v1-20261022T080000Z/RESULT.json",
+        "sha256": "25b24adf212dc9ba93331b16d52e2a4c046f1b5aee9432f19dc4895acffa3a8c"
+      },
+      "owned_ref": {
+        "bytes": 1412962,
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v1-20261022T080000Z/cpu-preflight/OWNED.json",
+        "sha256": "7957fda81b3e904948edf0b3f8b1fba0886f17bf2327ce00ea5bb78de39f1e9d"
+      },
+      "source_ref": {
+        "bytes": 1630998,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v1-20261022T080000Z/SOURCE_BOUND.json",
+        "sha256": "702e3feba7de9e4365b472189c9bf0662fdc35f1e08e0e535c863b62e132dbdc"
+      }
+    },
+    {
+      "cid": "a25d55a819562ffbf2135ba1017bb52ae2e3ca9c3ee2998486540bbbaebd4cf0",
+      "cleanup_ref": {
+        "bytes": 1201,
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v1-20261022T080000Z/dense/cleanup.json",
+        "sha256": "3d006528440dbf6412c5b5e07a4068f0c80e020e8045af9f2b2bc0fc9a17c6cf"
+      },
+      "host_result_ref": {
+        "bytes": 2389206,
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v1-20261022T080000Z/RESULT.json",
+        "sha256": "25b24adf212dc9ba93331b16d52e2a4c046f1b5aee9432f19dc4895acffa3a8c"
+      },
+      "owned_ref": {
+        "bytes": 1412916,
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v1-20261022T080000Z/dense/OWNED.json",
+        "sha256": "de99fdf018f2fd9d171c542477b51dcc08d3304561488c3486682ac11175cc4b"
+      },
+      "source_ref": {
+        "bytes": 1630998,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v1-20261022T080000Z/SOURCE_BOUND.json",
+        "sha256": "702e3feba7de9e4365b472189c9bf0662fdc35f1e08e0e535c863b62e132dbdc"
+      }
+    },
+    {
+      "cid": "0a5ed053d4d08915b8748e0f6facbc6f3fad820ff1f46d1eefe0f4bc6626d955",
+      "owned_ref": {
+        "bytes": 1414912,
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/cpu-preflight/OWNED.json",
+        "sha256": "bd5297f2d8e8bfcea5d02b1fdb4612faf453db55bfdf3c5a1a4c87b7f4008316"
+      },
+      "cleanup_ref": {
+        "bytes": 3665,
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/cpu-preflight/cleanup.json",
+        "sha256": "d6bac282789816103226cf8e273acb2e1791673561919111c803c239cdc7c0fb"
+      },
+      "source_ref": {
+        "bytes": 1638841,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/SOURCE_BOUND.json",
+        "sha256": "d28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df"
+      },
+      "host_result_ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/RESULT.json",
+        "bytes": 2375646,
+        "sha256": "4ad705377892c1136dbc945c8353904739e6189ed4b52dea2df3cc12731ef1da"
+      }
+    },
+    {
+      "cid": "eb21e660585ed4e758476504bc0b409a02b777d875516e2925f00a9e8efaa8cf",
+      "owned_ref": {
+        "bytes": 1414866,
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/dense/OWNED.json",
+        "sha256": "45859b745214ec0f19d728d018d438a02dcff61104084726446baedf29e74ba8"
+      },
+      "cleanup_ref": {
+        "bytes": 1733,
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/dense/cleanup.json",
+        "sha256": "8529bd3c5d26385a59dd634696297826b719253553280303cb3604f10c285679"
+      },
+      "source_ref": {
+        "bytes": 1638841,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/SOURCE_BOUND.json",
+        "sha256": "d28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df"
+      },
+      "host_result_ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/RESULT.json",
+        "bytes": 2375646,
+        "sha256": "4ad705377892c1136dbc945c8353904739e6189ed4b52dea2df3cc12731ef1da"
+      }
+    },
+    {
+      "cid": "79c06ff95a70e957a5afd7e7ac1dc46932e7b45e4afde72fd56d0d4f996eab7c",
+      "owned_ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v4-textonly_20261022T171000Z/dense/OWNED.json",
+        "bytes": 1418084,
+        "sha256": "465163d220fa4122b17737d4f7aaa93fdcf192e6e3e5e286ddac6eaa90ebb206"
+      },
+      "cleanup_ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v4-textonly_20261022T171000Z/dense/cleanup.json",
+        "bytes": 1237,
+        "sha256": "e594e2e5bf9dce4eecae4fe943fcfb2d738bf97e0eef5ffb6db8e585a4a8bf11"
+      },
+      "source_ref": {
+        "bytes": 1644617,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v4-textonly_20261022T171000Z/SOURCE_BOUND.json",
+        "sha256": "d25264b5eda1d2a45fb3bab7ce1ca331296a9640a2e42112f802d4db69a7f127"
+      },
+      "host_result_ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v4-textonly_20261022T171000Z/RESULT.json",
+        "bytes": 2405525,
+        "sha256": "d947a7dc1ccb84fb439226feccc137763c4b58090ff87535140b76fdddb8f598"
+      }
+    },
+    {
+      "cid": "4e17856a927a9bbccce9d145db5151c1c14e1688357124f9773fd878ac6003ec",
+      "owned_ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v4-textonly_20261022T171000Z/cpu-preflight/OWNED.json",
+        "bytes": 1418130,
+        "sha256": "1b7f8ce52a4695c3da52ba5ca239983bea2e3c779d63213f90fef336ae2ea149"
+      },
+      "cleanup_ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v4-textonly_20261022T171000Z/cpu-preflight/cleanup.json",
+        "bytes": 6031,
+        "sha256": "26360ea0e90916e837b972792da7a03dfc8b05d2e069fe0fac93df7d9eac084b"
+      },
+      "source_ref": {
+        "bytes": 1644617,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v4-textonly_20261022T171000Z/SOURCE_BOUND.json",
+        "sha256": "d25264b5eda1d2a45fb3bab7ce1ca331296a9640a2e42112f802d4db69a7f127"
+      },
+      "host_result_ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v4-textonly_20261022T171000Z/RESULT.json",
+        "bytes": 2405525,
+        "sha256": "d947a7dc1ccb84fb439226feccc137763c4b58090ff87535140b76fdddb8f598"
+      }
+    }
+  ],
+  "output_root": "/opt/host/vnf/austinov/run-bole-reduction-ON-v5_20261022T200000Z",
+  "schema": "bole.continuation-main-config/v1",
+  "scope": "reduction_ON_v5_20261022T200000Z",
+  "snapshot_execution_ref": {
+    "path": "/opt/host/vnf/austinov/run-bole-reduction-snapshot-20261022T202700Z-v1/EXECUTION.json",
+    "bytes": 1544,
+    "sha256": "1ea099a8ed3120ffb0401d685fc781c2a00b574eb6e220d97ea273d477ac38db"
+  },
+  "snapshot_program_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/reduction_admission_prepare_v5_20261022T200000Z/final_snapshot_ON_v5.py",
+    "bytes": 33878,
+    "sha256": "fd0acddfd01f7b974ce2ce4a76b889af3ae7a83c565b5d39579abd545dded321"
+  },
+  "snapshot_ref": {
+    "path": "/opt/host/vnf/austinov/run-bole-reduction-snapshot-20261022T202700Z-v1/SNAPSHOT.json",
+    "bytes": 2372504,
+    "sha256": "df6848a82db0fd13c44dd5a3934537bdf6bf0a25389a9c27033e5760d2e1407c"
+  },
+  "source_audit_program_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/reduction_probe_prepare_v5_20261022T200000Z/ON/audit_boundary_source.py",
+    "bytes": 7377,
+    "sha256": "8b6ade333640b376fad0e1554d4863e4a2bf32eb29fdd7fc235460f7f1e96d39"
+  },
+  "source_audit_ref": {
+    "path": "/opt/host/vnf/austinov/run-bole-reduction-ON-v5_20261022T200000Z-SOURCE-AUDIT/SOURCE_AUDIT.json",
+    "bytes": 1424218,
+    "sha256": "52d968acd7b32e39d7657d05cdfc2bba11ca54a2415cc791c9816905896d741f"
+  },
+  "source_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-reduction-ON-v5_20261022T200000Z/SOURCE_BOUND.json",
+    "bytes": 1643301,
+    "sha256": "5ac4e1404f51f2bccf43d4a45b5be2bcbac4f4f3a90b79af0dabb5ab463ceeb8"
+  },
+  "source_root": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-reduction-ON-v5_20261022T200000Z",
+  "template": false,
+  "current_owned_substrate_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-reduction-ON-v5_20261022T200000Z/owned_substrate.py",
+    "bytes": 3579,
+    "sha256": "27a239407e8e1fcab40c9698cab12904772abacfdbca3a0e16e078c01f197df3"
+  }
+}
