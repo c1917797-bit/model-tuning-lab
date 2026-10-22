@@ -308,11 +308,14 @@ is renewed, or a full-model Ascend run is started after a failed gate.
    numerical assertions or edit tests merely to force a green suite. Update a
    test only when the intended invariant genuinely changed, and retain
    historical algorithm/reference checks.
-4. Treat these as distinct gates, in order: source audit; same-image software
-   preflight; physical-device admission; native model load; real HTTP/request
-   smoke; numerical and state correctness; task quality; matched performance
-   and resource measurements. A pass at one level cannot be promoted to a
-   later level.
+4. Keep source audit, same-image software preflight, physical-device admission,
+   native model load, real HTTP/request smoke, numerical/state correctness,
+   matched performance and task quality distinct. When the frozen task is
+   performance-first, run one matched whole-model screening after numerical
+   correctness, before expensive full task evaluation. Only promising
+   candidates proceed to the declared repetitions and smoke-then-full task
+   gates. Final acceptance still requires both; no neighbouring PASS supplies
+   a missing gate. Do not impose a universal task-before-performance order.
 5. For Ascend proof, combine a fresh npu-smi snapshot with the exact container
    device mappings, container/process state, and per-rank receipts. A software
    report with Devices=[] is explicitly device-free and is not NPU evidence.
@@ -353,3 +356,6 @@ performance gates. Use the latest explicit task contract for new experiments.
 For source-to-guest readset gaps, frozen-byte provenance, metadata-only reader
 recovery, exact ELF bindings and controller transfer, apply that reference's
 October21 closure and evidence-boundary rules before any new admission.
+For copied renderer/module-cache defects, prepared-versus-bound identities,
+current-clock seams and replay-versus-generation authorization, read that
+reference's reachable-entry section before calling the next packet ready.

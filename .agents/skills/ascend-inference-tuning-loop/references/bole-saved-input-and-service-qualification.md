@@ -17,6 +17,7 @@ neither a new resource lease nor a later-stage PASS.
 - [Executable-file identity](#executable-file-identity)
 - [Outcome boundaries and evidence anchors](#outcome-boundaries-and-evidence-anchors)
 - [Native collective repeatability](#native-collective-repeatability)
+- [Reachable entry and consumer seams](#reachable-entry-and-consumer-seams)
 
 ## Evidence-backed successes and what changed the next action
 
@@ -432,3 +433,51 @@ See STARTUP_HEALTH_REPAIR_CHECKPOINT_20261022T215000Z.md in the workstream.
   sorted keys. The small command_operand_binding_prepare helper exercises the
   actual source_inputs positive/negative path. This is a compatibility seam,
   not a reason to impose key-order rules on unrelated JSON or weaken gates.
+
+## Reachable entry and consumer seams
+
+Apply these scoped lessons when migrating a reviewed preparation bundle into
+the real model/consumer entry, not as a new global validation framework.
+
+- A copied renderer can accidentally import its already-adapted worker helpers
+  as parent helpers. The short8 successor exposed this at the actual entry,
+  although helper controls passed. Bind the external parent bytes and isolate
+  their module namespace; restore module objects and search paths on success
+  and failure. For shared-name renderers, include a preloaded-wrong-module
+  control as well as a fresh isolated CLI. An import path alone is not proof
+  that the expected parent implementation ran.
+- Exercise generated requests through the actual downstream consumer. The
+  strict timing client used seed0 while the inherited arithmetic expected no
+  seed; earlier synthetic rows hid the mismatch. Reconcile the exact request
+  body in both real arms and the comparator, without changing the acceptance
+  math. Distinct trials also need globally distinct request identities and
+  their own immutable source/output bindings. A PREPARED manifest is not a
+  SOURCE_BOUND owner identity: reconstruct the full template, explicitly check
+  the binding transition, then join the actual bound Ref at the consumer.
+- Follow the reachable clock path, not every historical literal. The short8
+  source validator used the current authority but its phase/controller helper
+  still rejected against an old cutoff. Repair that actual seam while keeping
+  the original main-entry clock, phase and cleanup. Never renew an expired
+  window by editing a constant. Read and verify the MAIN-reviewed source
+  identity before executing a new renderer; do not trust a helper merely
+  because it recomputes its own template. An in-memory public-entry test that
+  stops before ownership/devices is a software test, not actual binding or
+  NPU admission.
+- Separate historical generation evidence from current CPU replay permission.
+  A replay adapter may use recorded generation times only after independently
+  reconstructing the real owner/source/raw/stop evidence; it cannot issue new
+  HTTP requests under the old ticket. Keep the original scorer and complete
+  input verifier unchanged, retain the original raw envelope, and identify any
+  derived replay envelope separately. Test the actual rendered consumer's
+  inverse too: the transport bridge's literal backslash-n initially differed
+  from the renderer's real newline and rejected valid output. A bounded entry
+  or scorer spy is not a complete lifecycle, tokenizer or task-score result.
+
+Evidence anchors: CLOCK_AND_LONG160_PREPARATION_CHECKPOINT.md and
+formal_pair_ready_prepare_v1/FINAL_SIX_SOURCE_HANDOFF.md under the workstream
+directory above, plus the source-only tests in fastpath_clock_seam_prepare_v1,
+formal_bound_lineage_prepare_v1 and accuracy_transport_decoder_binding_prepare_v1.
+The original operation responses are retained outside Git under
+/opt/host/vnf/austinov/run-bole-followup-preparation-evidence-20261022T230600Z-v1/.
+These preparations establish no additional NPU numerical, task or throughput
+result. Keep absent real bindings, loaded-worker proof and final gates pending.
