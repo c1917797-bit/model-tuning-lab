@@ -1,0 +1,298 @@
+{
+  "schema": "bole.independent-continuation-admission-static-review/v2",
+  "status": "LIMITED_STATIC_PASS_NO_DISPATCH_APPROVAL",
+  "reviewer": "/root/final_evidence_review",
+  "reviewed_utc": "2026-10-22T12:59:01.348588+00:00",
+  "scope": "Independent local source review of the exact four stable v4 code files, config/docs and saved author local-control records. No remote reads by this reviewer; no main/check-only or NPU execution. MAIN alone decides and records final source freezing and real admission.",
+  "exact_code_refs": {
+    "main_admission_v4.py": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/main_admission_v4.py",
+      "bytes": 31959,
+      "sha256": "fdb867c17f5b4ec9da34a3b9203482df437df8a20bfcee2dcd0cad3f01f126e6"
+    },
+    "historical_owner_context_v1.py": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/historical_owner_context_v1.py",
+      "bytes": 13079,
+      "sha256": "63aecade69f568496412e4aff43de422151bca3d835389b678486e40ee162e75"
+    },
+    "complete_inspect_receipt_v1.py": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/complete_inspect_receipt_v1.py",
+      "bytes": 3807,
+      "sha256": "05d212afa6d84af8f0a665c4d1605c756e1e603b52c533e983bc866e13804e5a"
+    },
+    "restore_snapshot_mounts_v1.py": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/restore_snapshot_mounts_v1.py",
+      "bytes": 6438,
+      "sha256": "8177437cda4df4d85db41392588fff18ce8422598d73bdc163ab950b26a32f9c"
+    }
+  },
+  "metadata_and_control_refs": {
+    "CONFIG.template.v4.json": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/CONFIG.template.v4.json",
+      "bytes": 9567,
+      "sha256": "57caf56f35319f161717a5f414862dbd4614febb697797ee52f80af852d6b902"
+    },
+    "REVIEW_V4.json": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/REVIEW_V4.json",
+      "bytes": 4595,
+      "sha256": "7d3f40abbe2e4215106d25971abbaa19b159eb0833989be67db6924cc66db834"
+    },
+    "README_V4.md": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/README_V4.md",
+      "bytes": 7725,
+      "sha256": "651f7c26ea3ccbce026e4fe151d2ed7983364cd79a8b7c86dd9a4789f992e2ac"
+    },
+    "LAUNCH_CONTRACT_V4.md": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/LAUNCH_CONTRACT_V4.md",
+      "bytes": 3780,
+      "sha256": "aba107adf6fa8dd3ad91392d4b402bb2c386f2e8e3408841fe6603b5b165a3d3"
+    },
+    "LOCAL_CONTROLS_V4.json": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/LOCAL_CONTROLS_V4.json",
+      "bytes": 1414,
+      "sha256": "77ad0865734e0af8fc7dfdb554247523f3d7f506b243123379b1cc9181296269"
+    },
+    "CONTEXT_CODEC_CONTROLS_V4.json": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/CONTEXT_CODEC_CONTROLS_V4.json",
+      "bytes": 2227,
+      "sha256": "69ffe4254d233217363917d7c5b84a38b3f38626288296f06ba02bf5daafbaed"
+    },
+    "LOCAL_INPUTS_V4.json": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/LOCAL_INPUTS_V4.json",
+      "bytes": 4421,
+      "sha256": "8b234326157e25a3011c5e073467b0fbad76d1f2a67a5849d0aadf5a12eb947a"
+    },
+    "test_local_controls_v4.py": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/test_local_controls_v4.py",
+      "bytes": 7424,
+      "sha256": "a834a1f96da8fa12a4c70ff73cbc133c96a09a444d3e7231cf80724eb227f16e"
+    },
+    "test_context_and_codec_v4.py": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/test_context_and_codec_v4.py",
+      "bytes": 12010,
+      "sha256": "e26a3e6a90a3e93f4bec50644502d20fce3fb568437883a734f068ecc98a35d6"
+    }
+  },
+  "review_input_refs": [
+    {
+      "path": "/workspace/scratch/e65c435145b1/continuation_actual/QUALIFIED_SOURCE_REFS.json",
+      "bytes": 3086,
+      "sha256": "73dd667f0698bf704afc26ca67d633d08939e40f038cf1653be8604810228261"
+    },
+    {
+      "path": "/workspace/scratch/e65c435145b1/continuation_actual/SOURCE_CONTEXTS.json",
+      "bytes": 33231,
+      "sha256": "532e894001e81178e1b72655802662814dce672a0929bc718add4e365c121748"
+    },
+    {
+      "path": "/workspace/scratch/e65c435145b1/continuation_actual/CONTEXT_INSTALLERS.json",
+      "bytes": 14008,
+      "sha256": "514a444aa3fa88a3bf372ed4a355c5ed074d00acc2a79d89055f59f225d5fa38"
+    },
+    {
+      "path": "/workspace/scratch/e65c435145b1/final_snapshot_draft/HISTORICAL_OWNER_CHAINS.json",
+      "bytes": 26976,
+      "sha256": "238f230a94c6cb4b656b4be85cee146db102ecaaa8b4c97864452367743e7353"
+    },
+    {
+      "path": "/workspace/scratch/e65c435145b1/final_snapshot_draft/final_snapshot_v4.py",
+      "bytes": 25626,
+      "sha256": "5991a9d0b2ea40cb0732cd592e72aa61e5e83ef3f75fb9179dca97f732f696e8"
+    },
+    {
+      "path": "/workspace/scratch/e65c435145b1/admission_review_draft/fresh_snapshot_v4.py",
+      "bytes": 19376,
+      "sha256": "8c0b3105354708f3942f798d67a057ef16e11c5b10b538106166dafce61c1968"
+    },
+    {
+      "path": "/workspace/scratch/e65c435145b1/boundary_resource_input/original025_model_contract.py",
+      "bytes": 13660,
+      "sha256": "82243c277890aef7c24ea5eb5fbfa0658b314a39c01d7b2a7ddf34b2bf363e9f"
+    },
+    {
+      "path": "/workspace/scratch/e65c435145b1/formal_review_input/source/base/safety_host.py",
+      "bytes": 22338,
+      "sha256": "20bda52a1c3fbc75db47104cbd4759faf91da1f39032d4730160983f7b9c0c30"
+    },
+    {
+      "path": "/workspace/scratch/e65c435145b1/formal_review_input/source/base/host_once.py",
+      "bytes": 18170,
+      "sha256": "36844e41895b95e810b54ecae32994a96b21258ae8ad8d88fccaac19f035cf8c"
+    },
+    {
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_independent_review/CONTEXT_CHAIN_REVIEW.json",
+      "bytes": 3581,
+      "sha256": "d8300895bb9c6b18ab17a312f03500e87f3a043abee160dbfe04706dd451885e"
+    },
+    {
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_independent_review/REVIEW_V3.json",
+      "bytes": 9069,
+      "sha256": "01a352a5b81f20cdd94855ded4f23cef08a9fc198286be1911157d08ef3affea"
+    }
+  ],
+  "prior_findings": {
+    "B1": {
+      "status": "RESOLVED_IN_REVIEWED_V4_SOURCE",
+      "resolution": "Each of the six historical CIDs gets a separate pure validator built from its exact old source/output and original whole function ASTs. All historical create, before/after inspect and fresh current inspect calls use that context. The active new OUT/c/S are never rebound.",
+      "real_raw_six_chain_integration_proven": false
+    },
+    "I1": {
+      "status": "RESOLVED_IN_REVIEWED_V4_SOURCE_AND_ENTRY_CONTRACT",
+      "resolution": "The original DENSE090_EXTERNAL_OUTPUT_ENABLE=1 prerequisite is explicitly required before owned_substrate.load and documented as an outer env argv item in both modes; dispatch separately requires BOLE_CONTINUATION_MAIN_ENABLE=1. Original guard retained.",
+      "actual_parent_process_environment_verified": false
+    },
+    "I2": {
+      "status": "RESOLVED_IN_REVIEWED_V4_SOURCE",
+      "resolution": "Every complete current old-owner inspect receipt is retained in live through an independently loaded strict zlib+base64 envelope, including original stdout and all metadata. Pack verifies complete roundtrip before publication. Check-only and execute both keep the original16MiB whole-evidence bound.",
+      "actual_host_complete_receipts_produced": false
+    }
+  },
+  "definite_static_blockers_remaining": [],
+  "precise_static_checks": {
+    "v3_v4_changed_top_level_functions": [
+      "current_live_checks",
+      "historical_owners",
+      "main",
+      "source_inputs"
+    ],
+    "exact_v3_create_argv_order_restoration_unchanged": true,
+    "six_old_owner_config_specs_unchanged": true,
+    "historical_helper": "Complete original/current helper bodies independently pinned and reread; old/new nested environment ASTs equal; original c constants/require and S pure functions compiled into private namespaces; genuine original cap32.prepare mutates private S only; full original external/g2 derive and nonconsumer environment branch retained; fixed owner role and source identity; active globals/resource/output fingerprint before and after construction/invocation.",
+    "cap32": "Original64GiB source-global/pre-provider checks precede the already bound32GiB model/8GiB reserve/0.5GiB host values. The current original initial RAM gate remains40.5GiB; no new73GiB admission requirement or newly lowered threshold is introduced.",
+    "installer_closure": "Full1959B observer and6239B output-scan bodies reviewed via MAIN projections; only Controller.observe and Controller.resources/_SCAN_BUDGET are modified by those original installers. They are not executed in historical contexts. Their exact source-owned Refs are reread by the helper.",
+    "codec": "Exact schema, original stdout UTF8 bytes/SHA, compressed bytes/SHA, complete metadata and whole canonical-receipt bytes/SHA. Strict canonical base64; typed raw length<=8MiB; output-limited decompression; EOF=true and no unused/unconsumed/trailing/concatenated data; strict UTF8 and rejection of replacement character; full roundtrip equality before returning envelope.",
+    "decoder": "Original complete mount decoder unchanged. Entire table/ordered arrays/bindings/CID/pass/ordinal/counts and canonical bytes/SHA checked; ordering and duplicate multiplicity retained; no partial mutation before all validation succeeds.",
+    "lock": "Existing ordinary nofollow MAIN lock, nonblocking exclusive flock before final live checks, inode/device recheck before exec, inheritable FD explicitly set and verified. Original exact source model argv is execed; no wrapper model command reconstruction.",
+    "limits": "Predispatch180s monotonic/alarm; CPU166; softAS512MiB/hardunlimited; both CPU and FSIZE soft/hard must be unlimited at entry and pre-exec; alarm cancelled only before exact model exec. Original phase3600 includes shared cleanup180; full initial prepare3780 preserved.",
+    "clock": {
+      "start_epoch": 1792670455,
+      "new_cutoff_epoch": 1792692055,
+      "duration_seconds": 21600,
+      "unchanged_old_report_cutoff_epoch": 1792672721,
+      "snapshot_freshness_seconds": 180
+    },
+    "actual_resource_checks": "Original idle/HBM/FD and independent FD inventory; full old owner/current unit checks; RAM/swap/disk/Docker/CPU and protected-boundary predicates; disappearing PIDs retained. Current source controller remains responsible for rechecking before every create. No live success inferred.",
+    "source_and_authority": "Exact audit/build/source/command/authority/authorization joins and original source/command validators remain; complete input readset reverified before dispatch. Filled source/audit/build/commands/auditor Refs equal MAIN QUALIFIED_SOURCE_REFS exactly."
+  },
+  "author_saved_local_control_evidence": [
+    {
+      "record": {
+        "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/LOCAL_CONTROLS_V4.json",
+        "bytes": 1414,
+        "sha256": "77ad0865734e0af8fc7dfdb554247523f3d7f506b243123379b1cc9181296269"
+      },
+      "tests": 11,
+      "exit_code": 0,
+      "source_refs_verified": true,
+      "scope": "Existing pure-data/default-OFF controls adapted only by three launcher filename substitutions; not host integration."
+    },
+    {
+      "record": {
+        "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/CONTEXT_CODEC_CONTROLS_V4.json",
+        "bytes": 2227,
+        "sha256": "69ffe4254d233217363917d7c5b84a38b3f38626288296f06ba02bf5daafbaed"
+      },
+      "tests": 5,
+      "exit_code": 0,
+      "source_refs_verified": true,
+      "scope": "Source-derived private-context and codec controls, using synthetic OWNED/inspect objects plus local reference and safety-path transports. Three historical sources times two roles; preserved bad resource/device/env/label and corrupt stream rejection. Not six actual raw historical chains."
+    }
+  ],
+  "controls_reexecuted_by_this_reviewer": false,
+  "remaining_before_real_dispatch": [
+    "MAIN must create and verify a separately frozen launcher with exact three helper Refs and independently recorded final launcher identity.",
+    "Fill immutable config with exact actual authorization plus fresh successful snapshot/program/execution refs; template remains true now.",
+    "Read actual old terminal unit configuration and preserve its original host/phase/cleanup/limit contracts when choosing the new bounded unit.",
+    "Use original env opt-ins, fresh process and inheritable-lock context; provide genuine exact MAIN resource review.",
+    "Actual complete six raw historical chains, current full inspect checks, source-owned validator integration and new live resource checks must succeed; no such success is claimed here.",
+    "Snapshot must be<=180 seconds old at entry and predispatch. Original resource/source checks and current source controller per-create checks remain mandatory."
+  ],
+  "current_draft_state": {
+    "REVIEWED_FROZEN": false,
+    "RESTORE_PIN": null,
+    "HISTORICAL_CONTEXT_PIN": null,
+    "COMPLETE_RECEIPT_PIN": null,
+    "template": true,
+    "unfilled_config_refs": [
+      "authorization_ref",
+      "snapshot_execution_ref",
+      "snapshot_program_ref",
+      "snapshot_ref"
+    ]
+  },
+  "MAIN_actual_source_freeze_and_source_audit_recorded_separately": {
+    "freeze": {
+      "NPU": false,
+      "commands": {
+        "bytes": 4880,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/COMMANDS.json",
+        "sha256": "8abb00b1e0ff4a240bb3932725fb342fa1bb576bcf23284c1c77284cd000f66a"
+      },
+      "performance_admitted": false,
+      "receipt": {
+        "bytes": 1299299,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v3_continuation_20261022T120055Z/BUILD_RECORD.json",
+        "sha256": "89e94c8cad8ff1d2769d033d7a3e6c1cff638992c97ab4799d645e5aa25872e4"
+      },
+      "source": {
+        "bytes": 1638841,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/SOURCE_BOUND.json",
+        "sha256": "d28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df"
+      },
+      "source_only": true
+    },
+    "auditor_program": {
+      "bytes": 7159,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_source_audit_v4_continuation_20261022T120055Z/audit_boundary_source_v4.py",
+      "sha256": "274f85c96758523796704b3bf45e4457be35cde45b787e4089aca61e1ab6ee8a"
+    },
+    "source_audit": {
+      "result": {
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-source-audit-v4-continuation_20261022T120055Z/RESULT.json",
+        "bytes": 725,
+        "sha256": "2d1b765da76e01215ef86639b37c0804718a851d307580cd761c1a1f83105647"
+      },
+      "audit": {
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-source-audit-v4-continuation_20261022T120055Z/SOURCE_AUDIT.json",
+        "bytes": 1424700,
+        "sha256": "08c783e7989397f25a6db83fa9d1f1d86807e9154a8691058f6ee5d510a62cc6"
+      },
+      "error": null,
+      "source_only": true,
+      "NPU": false
+    },
+    "freeze_execution": {
+      "bytes": 10179,
+      "path": "/opt/host/vnf/austinov/run-bole-continuation-source-freeze-v1-20261022T124000Z/EXECUTION.json",
+      "sha256": "006f50a6c9e327dd963423fa299b549e17ae26717032980a0cd620554acf127d"
+    },
+    "audit_execution": {
+      "path": "/opt/host/vnf/austinov/run-bole-continuation-source-audit-outer-v1-20261022T124100Z/EXECUTION.json",
+      "bytes": 2458,
+      "sha256": "3c8c0e022dda6df280125a7fa457d52ab0f285c694d685b592a9dd438a37c9a3"
+    },
+    "MAIN_review": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v3_continuation_20261022T120055Z/MAIN_REVIEW.json",
+      "bytes": 8183,
+      "sha256": "141caba52d0aed2b8cfae6d4010a58e21e015bb3097ec38ef9f3403a9a4d3020"
+    },
+    "controls_inspection": {
+      "bytes": 22125,
+      "path": "/opt/host/vnf/austinov/run-bole-continuation-control-review-v1-20261022T123800Z/CHECK.json",
+      "sha256": "1d188f47371e28c193a90d955cffdd19e3568cf416119f1417afcf5d437956df"
+    },
+    "NPU": false
+  },
+  "source_FREEZE_or_AUDIT_implies_launcher_admission": false,
+  "old_pair_FAIL_overridden": false,
+  "old_24h_deadline_extended": false,
+  "approved_dispatch": false,
+  "resources_admitted": false,
+  "owner_created": false,
+  "remote_execution_by_this_reviewer": false,
+  "NPU": false,
+  "paired_gate_pass": false,
+  "numerical_qualified": false,
+  "performance_admitted": false,
+  "formal_performance": false
+}

@@ -1,0 +1,100 @@
+{
+  "schema": "bole.independent-historical-context-chain-static/v1",
+  "observed_utc": "2026-10-22T12:48:03.905440+00:00",
+  "status": "NO_ADDITIONAL_BLOCKER_IN_REVIEWED_INSTALLER_EFFECT_SCOPE",
+  "remote_source_context_projection_ref": {
+    "path": "/opt/host/vnf/austinov/run-bole-continuation-context-read-v1-20261022T124500Z/PROJECTION.json",
+    "bytes": 29931,
+    "sha256": "3b2d987ce4790190c4067ee4756559593d0c3de835843a59dc25027203e9a23e"
+  },
+  "remote_installer_projection_ref": {
+    "path": "/opt/host/vnf/austinov/run-bole-continuation-context-read-v1-20261022T124500Z/INSTALLERS.json",
+    "bytes": 12862,
+    "sha256": "7710965fb3f0f51e4f8d817bca5966bee500f1bbff57507b113b185cd0da29b5"
+  },
+  "local_body_refs_verified": [
+    {
+      "bytes": 5198,
+      "sha256": "8b65bbd0518a81b194459e087dd6a6003dcfbb07151940c031aaec31d29e3c62"
+    },
+    {
+      "bytes": 4399,
+      "sha256": "3df2119e322ea800efb1100d3c4dcfbea4760cafaea5689a7ff066c3f2f815b6"
+    },
+    {
+      "bytes": 3579,
+      "sha256": "4ff2d6f19d87897ded40a860ee37f1225ca428594720d4ba8c8c238256f77bb7"
+    },
+    {
+      "bytes": 2056,
+      "sha256": "51ec78ed1c1d9b9aab60f749988b799c8ec39ebe077eb5638aab86704440ad2a"
+    },
+    {
+      "bytes": 3579,
+      "sha256": "fa39a66478b766260cee0709d20fe69c30303cb1ba65ca0a7dfaf99ab162ee89"
+    },
+    {
+      "bytes": 1959,
+      "sha256": "f7d8fa2ea99cedb7373273a625dce39802a45d24fa291371a925d145cd28a609"
+    },
+    {
+      "bytes": 6239,
+      "sha256": "db7f8d9301ef7225aebdc1cd12c07adaa3edcb125b2c173d03154aa0c47e5daa"
+    }
+  ],
+  "full_new_owned_substrate_inverse_equals_old_with_only_cutoff_epoch_and_iso_delta": true,
+  "all_four_source_resource_and_stream_profiles_exactly_equal": true,
+  "resources": {
+    "Docker_reserve_GiB": 8.5,
+    "RAMreserve_GiB": 8,
+    "guest_CPU_GiB": 8,
+    "guest_model_GiB": 32,
+    "host_GiB": 0.5,
+    "initial_RAM_GiB": 40.5,
+    "opt_initial_GiB": 40.5,
+    "shared_cleanup_seconds": 180,
+    "whole_seconds": 3600
+  },
+  "stream_resource_profile": {
+    "TP_world_size": 4,
+    "consumer": [
+      145
+    ],
+    "consumer_budget": 1,
+    "formal_timing": false,
+    "host": [
+      166
+    ],
+    "host_budget": 1,
+    "model": [
+      0,
+      1,
+      2
+    ],
+    "model_budget": 3,
+    "reserve": [
+      3,
+      144
+    ],
+    "reserve_budget": 2,
+    "schema": "bole.untimed-stream-CPU-budget/v1",
+    "total_budget": 7
+  },
+  "installer_effects": {
+    "observer_race_repair.py": [
+      "Reads/replaces S.Controller.observe; no assignment to pure create/inspect environment, device_map, labels, c.ROOT/IMAGE/GIB/require."
+    ],
+    "output_scan131r8.py": [
+      "Registers S._SCAN_BUDGET; compiles only original resources method in S scope then pops temporary resources global and replaces S.Controller.resources; no assignment to pure create/inspect environment, device_map, labels, c.ROOT/IMAGE/GIB/require."
+    ],
+    "cap48_provider.py": [
+      "Checks original MEM64/GIB, RESERVE8.5GiB and host0.5GiB plus genuine function-global identity, then sets MEM32GiB/RESERVE8GiB. This is the already bound provider; final initial ordinary RAM is40.5GiB, not73GiB."
+    ]
+  },
+  "scope": "Static comparison of complete exact texts supplied by MAIN; child did not remotely reopen the references or execute any installer. New historical context helper and launcher v4 remain to be reviewed once stable.",
+  "remote_operations_by_this_reviewer": false,
+  "runtime_controls_executed_by_this_reviewer": false,
+  "historical_context_v4_reviewed": false,
+  "resources_admitted": false,
+  "NPU": false
+}

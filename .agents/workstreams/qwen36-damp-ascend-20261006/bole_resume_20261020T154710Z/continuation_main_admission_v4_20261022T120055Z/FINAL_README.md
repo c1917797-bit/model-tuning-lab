@@ -1,0 +1,11 @@
+# Final local MAIN admission package v4
+
+MAIN explicitly approved the reviewed four-source v4 draft and requested this separate final package. The only launcher changes are the frozen-source marker and three complete helper Ref3 values. All function and class ASTs, plus the entire launcher after the four inverse substitutions, match the reviewed draft exactly. Helpers are byte-identical. See FINAL_INVERSE_PROOF.json and FINAL_FREEZE_MINIMAL.diff.
+
+The final launcher is default OFF: absence of --check-only/--execute prints only its disabled status. The frozen marker is a source binding, not a resource admission. CONFIG.template.v4.json remains an unapproved template with no fresh snapshot or actual resource review. MAIN must separately produce the complete current config and genuine MAIN review only after the fresh successful snapshot and original six historical chains can be verified. No real MAIN/resource/NPU action was executed by this packaging task.
+
+The provenance directory contains exact copies of the original draft, independent limited review, author launch contract, 11+5 actual local-control records and corresponding historical test sources. Their original local paths and status fields are intentionally preserved; they describe the pre-freeze draft. The copied tests are provenance and have not been rerun from this final directory. They do not establish actual six-chain, remote MAIN, numerical, paired, performance or task-accuracy qualification.
+
+Use the inner argv in provenance/LAUNCH_CONTRACT_V4.md with the final main_admission_v4.py path in this package. Preserve DENSE090_EXTERNAL_OUTPUT_ENABLE=1 before load and BOLE_CONTINUATION_MAIN_ENABLE=1 only for dispatch, CPU166, host512MiB, original source phase3600 and shared cleanup180. No separate outer flock: the launcher itself retains the existing MAIN lock through exec. Both inherited CPU and FSIZE limits must be unlimited; AS hard unlimited, soft512MiB. The outer-unit reconciliation is based on MAIN's reported original unit observation and does not claim a new live observation.
+
+The two authoring-time deadlines remain distinct: the old report cutoff2026-10-22T12:38:41Z was not extended; the separately authorized continuation internal cutoff is2026-10-22T18:00:55Z. All existing fit and freshness gates remain in the exact code.

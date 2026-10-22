@@ -1,0 +1,98 @@
+{
+  "schema": "bole.continuation-predevice-source-checkpoint/v1",
+  "checkpoint_scope": "predevice source state; no live resource observation",
+  "old_report_deadline": "2026-10-22T12:38:41Z",
+  "old_window_extended": false,
+  "explicit_new_user_authority": "可以继续穿刺一直到成功",
+  "source_commit": {
+    "status": "PASS_COMMIT_PUSH_LOCAL_REMOTE_VERIFICATION_PENDING",
+    "commit": "c1127348fcac5156f20df2f0dcfb5984eb20c8ee",
+    "primary": null,
+    "receipt": {
+      "path": "/opt/host/vnf/austinov/run-bole-continuation-source-commit-v2-20261022T125500Z/COMMIT_PUSH.json",
+      "bytes": 37508,
+      "sha256": "02e0de09dc0ba14d8e3d3c8fa128819b1dda059327a740c5e76dd9f67c9d3b68"
+    }
+  },
+  "source_remote_verification": {
+    "result": {
+      "schema": "bole.independent-remote-ref-verification/v1",
+      "observed_epoch": 1792673562.5553548,
+      "commit": "c1127348fcac5156f20df2f0dcfb5984eb20c8ee",
+      "remote_stdout": "c1127348fcac5156f20df2f0dcfb5984eb20c8ee\trefs/heads/work/qwen36-damp-ascend-20261006\n",
+      "remote_stderr": "",
+      "remote_exit_code": 0,
+      "local_stdout": "c1127348fcac5156f20df2f0dcfb5984eb20c8ee\n",
+      "pass": true,
+      "source_only": true,
+      "NPU": false
+    },
+    "receipt": {
+      "path": "/opt/host/vnf/austinov/run-bole-continuation-source-commit-v2-20261022T125500Z/REMOTE_REF_VERIFICATION.json",
+      "bytes": 435,
+      "sha256": "0b85b150a09e265a83bc8d7de08ba00cea8aedce13dbcb1b2e1e44607b8ea2f7"
+    }
+  },
+  "reader_controls_execution": {
+    "bytes": 5302,
+    "path": "/opt/host/vnf/austinov/run-bole-projection-reader-controls-v2-continuation_20261022T120055Z/EXECUTION.json",
+    "sha256": "5aef1901a98b6b9ebf72810ee573186f7296107fccaf02c8509743e03111f67d"
+  },
+  "reader_control_independent_reopen": {
+    "path": "/opt/host/vnf/austinov/run-bole-continuation-reader-control-review-v1-20261022T130000Z/CHECK.json",
+    "bytes": 7249,
+    "sha256": "d00b5896a871f5a60845f8c9a1aaa6dc2e3e6b254b7cbf153b4b484d6750e0dc"
+  },
+  "reader_controls_actual_host_count": 15,
+  "reader_host_runtime": "Python 3.9.9",
+  "reader_input_count": 6,
+  "reader_controls_only": true,
+  "launcher_runtime": [
+    {
+      "bytes": 32846,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/continuation_main_admission_v4_20261022T120055Z/main_admission_v4.py",
+      "sha256": "4a1c5cee0bf6916bc97309c733acbe2337bfe751d003d94996566b752946c116"
+    },
+    {
+      "bytes": 13079,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/continuation_main_admission_v4_20261022T120055Z/historical_owner_context_v1.py",
+      "sha256": "63aecade69f568496412e4aff43de422151bca3d835389b678486e40ee162e75"
+    },
+    {
+      "bytes": 3807,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/continuation_main_admission_v4_20261022T120055Z/complete_inspect_receipt_v1.py",
+      "sha256": "05d212afa6d84af8f0a665c4d1605c756e1e603b52c533e983bc866e13804e5a"
+    },
+    {
+      "bytes": 6438,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/continuation_main_admission_v4_20261022T120055Z/restore_snapshot_mounts_v1.py",
+      "sha256": "8177437cda4df4d85db41392588fff18ce8422598d73bdc163ab950b26a32f9c"
+    }
+  ],
+  "source_qualified": {
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-audit-v4-continuation_20261022T120055Z/RESULT.json",
+      "bytes": 725,
+      "sha256": "2d1b765da76e01215ef86639b37c0804718a851d307580cd761c1a1f83105647"
+    },
+    "audit": {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-audit-v4-continuation_20261022T120055Z/SOURCE_AUDIT.json",
+      "bytes": 1424700,
+      "sha256": "08c783e7989397f25a6db83fa9d1f1d86807e9154a8691058f6ee5d510a62cc6"
+    },
+    "error": null,
+    "source_only": true,
+    "NPU": false
+  },
+  "historical_six_chain_actual_integration": "pending",
+  "new_fresh_snapshot": "pending",
+  "current_resource_admission": "pending",
+  "original_short_pair": "FAIL_FULL_FRAME_KEYSET_36_VS_32_UNCHANGED",
+  "new_NPU_executed": false,
+  "paired_gate_pass": false,
+  "numerical_qualified": false,
+  "performance_admitted": false,
+  "formal_performance": false,
+  "task_accuracy": false,
+  "next": "Fresh complete host snapshot and genuine MAIN review; exact original historical chains/current live checks before bounded new projection diagnostic; independent reader after release. No direct diagnostic-to-performance promotion."
+}

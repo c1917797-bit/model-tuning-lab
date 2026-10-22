@@ -1,0 +1,43 @@
+{
+  "FROZEN": false,
+  "NPU": false,
+  "actual_argv": [
+    "python",
+    "-I",
+    "-B",
+    "continuation_admission_v1_draft/test_local_controls_v4.py"
+  ],
+  "all_pass": true,
+  "formal_performance": false,
+  "numerical_qualified": false,
+  "observed_utc": "2026-10-22T12:55:05.543298+00:00",
+  "owner_created": false,
+  "paired_gate_pass": false,
+  "performance_admitted": false,
+  "remote_execution": false,
+  "resources_admitted": false,
+  "schema": "bole.continuation-main-local-controls/v4",
+  "source_refs": [
+    {
+      "bytes": 31959,
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/main_admission_v4.py",
+      "sha256": "fdb867c17f5b4ec9da34a3b9203482df437df8a20bfcee2dcd0cad3f01f126e6"
+    },
+    {
+      "bytes": 6438,
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/restore_snapshot_mounts_v1.py",
+      "sha256": "8177437cda4df4d85db41392588fff18ce8422598d73bdc163ab950b26a32f9c"
+    },
+    {
+      "bytes": 7424,
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/test_local_controls_v4.py",
+      "sha256": "a834a1f96da8fa12a4c70ff73cbc133c96a09a444d3e7231cf80724eb227f16e"
+    }
+  ],
+  "tests": 11,
+  "tool_receipt": {
+    "chunk_id": "eb4da8",
+    "exit_code": 0,
+    "output": "...........\n----------------------------------------------------------------------\nRan 11 tests in 0.080s\n\nOK\n"
+  }
+}

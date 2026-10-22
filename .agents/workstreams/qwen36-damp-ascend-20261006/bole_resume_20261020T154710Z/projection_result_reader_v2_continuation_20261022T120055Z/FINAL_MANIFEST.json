@@ -1,0 +1,76 @@
+{
+  "MAIN_explicit_local_freeze_instruction_received": true,
+  "MAIN_runtime_or_admission_PASS_created": false,
+  "NPU": false,
+  "authority_controls_rerun": false,
+  "authority_test_copy_local_only": {
+    "bytes": 10343,
+    "path": "/workspace/scratch/e65c435145b1/continuation_reader_final_v1/test_continuation_authority_v2.py",
+    "sha256": "fd3b5d730db3cc5e3ed171cf484c2b5c7ffca2e670b2a9bbb354582b94a8a502"
+  },
+  "candidate_and_drafts_preserved": true,
+  "fixed_actual_output": "/opt/host/vnf/austinov/run-bole-projection-reader-v2-continuation_20261022T120055Z",
+  "fixed_auditor_program_ref": {
+    "bytes": 7159,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_source_audit_v4_continuation_20261022T120055Z/audit_boundary_source_v4.py",
+    "sha256": "274f85c96758523796704b3bf45e4457be35cde45b787e4089aca61e1ab6ee8a"
+  },
+  "fixed_controls_output": "/opt/host/vnf/austinov/run-bole-projection-reader-controls-v2-continuation_20261022T120055Z",
+  "fixed_source_audit_ref": {
+    "bytes": 1424700,
+    "path": "/opt/host/vnf/austinov/run-bole-boundary-source-audit-v4-continuation_20261022T120055Z/SOURCE_AUDIT.json",
+    "sha256": "08c783e7989397f25a6db83fa9d1f1d86807e9154a8691058f6ee5d510a62cc6"
+  },
+  "fixed_source_ref": {
+    "bytes": 1638841,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/SOURCE_BOUND.json",
+    "sha256": "d28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df"
+  },
+  "formal_performance": false,
+  "host_controls_executed_here": false,
+  "no_self_hash_embedded_in_wrapper": true,
+  "numerical_qualified": false,
+  "package": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_result_reader_v2_continuation_20261022T120055Z",
+  "paired_gate_pass": false,
+  "performance_admitted": false,
+  "reader_frozen": true,
+  "reader_main_executed_here": false,
+  "remote_deployed_here": false,
+  "review_evidence": [
+    {
+      "bytes": 6534,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_result_reader_v2_continuation_20261022T120055Z/FINAL_INVERSE_PROOF.json",
+      "sha256": "306126ecca314e716ffc6772c66879b3e6d73cdba6b6f9a55930f41adc16f062"
+    }
+  ],
+  "runtime_files": [
+    {
+      "bytes": 99832,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_result_reader_v2_continuation_20261022T120055Z/read_projection_result_v2.py",
+      "sha256": "19bfdd2005ea0881fcd61415bc51d10af1d7e1d244425642224df75255a8a38e"
+    },
+    {
+      "bytes": 27253,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_result_reader_v2_continuation_20261022T120055Z/run_projection_reader_once_v2.py",
+      "sha256": "28f0234ca12768970fb82fa776b52aaeba282cc361cc3df7b3a870e501c6a6f6"
+    },
+    {
+      "bytes": 22892,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_result_reader_v2_continuation_20261022T120055Z/test_projection_reader_v2.py",
+      "sha256": "95bb9d170475f2f564b33809e992f46445368907b42f6513ed18a45775d05b86"
+    }
+  ],
+  "schema": "bole.continuation-reader-final-package/v1",
+  "status": "FINAL_LOCAL_SOURCE_AWAITING_MAIN_BYTE_REVIEW_AND_DEPLOYMENT",
+  "task_accuracy": false,
+  "unchanged_original_projection_control_count": 15,
+  "wrapper_frozen": true,
+  "wrapper_projection_test_pin": [
+    22892,
+    "95bb9d170475f2f564b33809e992f46445368907b42f6513ed18a45775d05b86"
+  ],
+  "wrapper_reader_pin": [
+    99832,
+    "19bfdd2005ea0881fcd61415bc51d10af1d7e1d244425642224df75255a8a38e"
+  ]
+}

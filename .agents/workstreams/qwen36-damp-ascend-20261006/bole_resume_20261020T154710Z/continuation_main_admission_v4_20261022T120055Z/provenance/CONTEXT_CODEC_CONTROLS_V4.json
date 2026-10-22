@@ -1,0 +1,64 @@
+{
+  "FROZEN": false,
+  "NPU": false,
+  "accepted_old_context_rejected_active_new_output": true,
+  "active_context_fingerprint_unchanged": true,
+  "actual_argv": [
+    "python",
+    "-I",
+    "-B",
+    "continuation_admission_v1_draft/test_context_and_codec_v4.py"
+  ],
+  "actual_six_historical_raw_chains_executed": false,
+  "all_pass": true,
+  "formal_performance": false,
+  "numerical_qualified": false,
+  "observed_utc": "2026-10-22T12:55:05.543298+00:00",
+  "owner_created": false,
+  "paired_gate_pass": false,
+  "performance_admitted": false,
+  "preserved_rejections": [
+    "foreign role",
+    "wrong old output root",
+    "changed active output",
+    "64GiB memory",
+    "physical0 mapping",
+    "duplicate/wrong HOME",
+    "foreign owner label",
+    "bad base64",
+    "declared raw size mismatch",
+    "changed receipt metadata",
+    "truncated zlib",
+    "trailing zlib bytes",
+    "concatenated zlib streams",
+    "potential lossy UTF8 replacement"
+  ],
+  "remote_execution": false,
+  "resources_admitted": false,
+  "schema": "bole.continuation-main-context-codec-controls/v1",
+  "source_derived_cases": "Three real saved source contexts times two synthetic owner roles; original helper bodies and original predicate code, local reference/path transports",
+  "source_refs": [
+    {
+      "bytes": 13079,
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/historical_owner_context_v1.py",
+      "sha256": "63aecade69f568496412e4aff43de422151bca3d835389b678486e40ee162e75"
+    },
+    {
+      "bytes": 3807,
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/complete_inspect_receipt_v1.py",
+      "sha256": "05d212afa6d84af8f0a665c4d1605c756e1e603b52c533e983bc866e13804e5a"
+    },
+    {
+      "bytes": 12010,
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/test_context_and_codec_v4.py",
+      "sha256": "e26a3e6a90a3e93f4bec50644502d20fce3fb568437883a734f068ecc98a35d6"
+    }
+  ],
+  "synthetic_owner_and_inspect": true,
+  "tests": 5,
+  "tool_receipt": {
+    "chunk_id": "04d984",
+    "exit_code": 0,
+    "output": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.342s\n\nOK\n"
+  }
+}

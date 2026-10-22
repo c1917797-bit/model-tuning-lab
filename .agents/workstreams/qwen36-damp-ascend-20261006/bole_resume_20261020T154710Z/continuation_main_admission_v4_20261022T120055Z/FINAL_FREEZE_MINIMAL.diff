@@ -1,0 +1,24 @@
+--- reviewed-draft/main_admission_v4.py
++++ final/main_admission_v4.py
+@@ -22,7 +22,7 @@
+ import time
+ 
+ sys.dont_write_bytecode = True
+-REVIEWED_FROZEN = False
++REVIEWED_FROZEN = True
+ WS = Path('/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z')
+ SCOPE = 'continuation_20261022T120055Z'
+ SOURCE = WS / ('bound-boundary-ON-v3-' + SCOPE)
+@@ -48,9 +48,9 @@
+ SNAPSHOT_HELPER = dict(path=str(WS/'boundary_admission_v4_20261022/fresh_snapshot_v4.py'),
+     bytes=19376, sha256='8c0b3105354708f3942f798d67a057ef16e11c5b10b538106166dafce61c1968')
+ SNAPSHOT_PROGRAM_PIN = (25626, '5991a9d0b2ea40cb0732cd592e72aa61e5e83ef3f75fb9179dca97f732f696e8')
+-RESTORE_PIN = None  # MAIN binds final helper bytes during source review.
+-HISTORICAL_CONTEXT_PIN = None
+-COMPLETE_RECEIPT_PIN = None
++RESTORE_PIN = {'path': '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/continuation_main_admission_v4_20261022T120055Z/restore_snapshot_mounts_v1.py', 'bytes': 6438, 'sha256': '8177437cda4df4d85db41392588fff18ce8422598d73bdc163ab950b26a32f9c'}  # MAIN binds final helper bytes during source review.
++HISTORICAL_CONTEXT_PIN = {'path': '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/continuation_main_admission_v4_20261022T120055Z/historical_owner_context_v1.py', 'bytes': 13079, 'sha256': '63aecade69f568496412e4aff43de422151bca3d835389b678486e40ee162e75'}
++COMPLETE_RECEIPT_PIN = {'path': '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/continuation_main_admission_v4_20261022T120055Z/complete_inspect_receipt_v1.py', 'bytes': 3807, 'sha256': '05d212afa6d84af8f0a665c4d1605c756e1e603b52c533e983bc866e13804e5a'}
+ 
+ 
+ def need(value, message):

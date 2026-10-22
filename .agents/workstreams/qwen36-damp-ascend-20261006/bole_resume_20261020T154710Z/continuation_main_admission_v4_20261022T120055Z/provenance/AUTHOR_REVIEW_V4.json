@@ -1,0 +1,113 @@
+{
+  "FROZEN": false,
+  "NPU": false,
+  "active_sources": [
+    {
+      "bytes": 31959,
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/main_admission_v4.py",
+      "sha256": "fdb867c17f5b4ec9da34a3b9203482df437df8a20bfcee2dcd0cad3f01f126e6"
+    },
+    {
+      "bytes": 13079,
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/historical_owner_context_v1.py",
+      "sha256": "63aecade69f568496412e4aff43de422151bca3d835389b678486e40ee162e75"
+    },
+    {
+      "bytes": 3807,
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/complete_inspect_receipt_v1.py",
+      "sha256": "05d212afa6d84af8f0a665c4d1605c756e1e603b52c533e983bc866e13804e5a"
+    },
+    {
+      "bytes": 6438,
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/restore_snapshot_mounts_v1.py",
+      "sha256": "8177437cda4df4d85db41392588fff18ce8422598d73bdc163ab950b26a32f9c"
+    }
+  ],
+  "actual_current_main_check_executed": false,
+  "actual_historical_raw_chains_executed": false,
+  "config_template": {
+    "bytes": 9567,
+    "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/CONFIG.template.v4.json",
+    "sha256": "57caf56f35319f161717a5f414862dbd4614febb697797ee52f80af852d6b902"
+  },
+  "current_missing_config_keys": [
+    "authorization_ref",
+    "snapshot_execution_ref",
+    "snapshot_program_ref",
+    "snapshot_ref"
+  ],
+  "current_source_audit_pass_source_only": true,
+  "fixes": {
+    "B1": "Private exact historical source/output validator; current active globals never rebound",
+    "I1": "Original DENSE090_EXTERNAL_OUTPUT_ENABLE required before source load",
+    "I2": "All current complete inspect receipts retained losslessly under unchanged final16MiB cap"
+  },
+  "formal_performance": false,
+  "helper_runtime_pins_set": false,
+  "independent_final_static_review_pending": true,
+  "launcher_frozen": false,
+  "limitations": [
+    "Complete actual raw six-chain and real-source admission integration still unexecuted",
+    "Fresh complete successful snapshot <=180s required; historical snapshot is not admission",
+    "Genuine MAIN resource review and final frozen launcher/helper Refs still required"
+  ],
+  "local_control_records": [
+    {
+      "bytes": 1414,
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/LOCAL_CONTROLS_V4.json",
+      "sha256": "77ad0865734e0af8fc7dfdb554247523f3d7f506b243123379b1cc9181296269"
+    },
+    {
+      "bytes": 2227,
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/CONTEXT_CODEC_CONTROLS_V4.json",
+      "sha256": "69ffe4254d233217363917d7c5b84a38b3f38626288296f06ba02bf5daafbaed"
+    }
+  ],
+  "local_controls_passed": 16,
+  "local_input_record": {
+    "bytes": 4421,
+    "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/LOCAL_INPUTS_V4.json",
+    "sha256": "8b234326157e25a3011c5e073467b0fbad76d1f2a67a5849d0aadf5a12eb947a"
+  },
+  "new_internal_cutoff_epoch": 1792692055,
+  "new_start_epoch": 1792670455,
+  "numerical_qualified": false,
+  "observed_utc": "2026-10-22T12:55:05.543298+00:00",
+  "old_report_cutoff_epoch": 1792672721,
+  "old_window_extended": false,
+  "owner_created": false,
+  "paired_gate_pass": false,
+  "performance_admitted": false,
+  "phase_seconds": 3600,
+  "preserved_versions": [
+    {
+      "bytes": 27750,
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/main_admission_v1.py",
+      "sha256": "e15245b2e42388f067a70d1556f005417e1f1fde891281e603b9ecbde85e588d"
+    },
+    {
+      "bytes": 28801,
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/main_admission_v2.py",
+      "sha256": "0e6dd4664e7825cbeebfde3496e4d8d16eb882b62b3b582271170a756f7ad659"
+    },
+    {
+      "bytes": 30686,
+      "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/main_admission_v3.py",
+      "sha256": "5e6cc9c61febfdab0df5d2dc366287cbbaa8c4353387fe427580292cfb29ddfc"
+    }
+  ],
+  "remote_execution": false,
+  "resource_main_review_exists": false,
+  "resources_admitted": false,
+  "schema": "bole.continuation-main-local-draft-review/v4",
+  "shared_cleanup_seconds": 180,
+  "source_frozen_by_MAIN": true,
+  "source_qualification_ref": {
+    "bytes": 3086,
+    "path": "/workspace/scratch/e65c435145b1/continuation_actual/QUALIFIED_SOURCE_REFS.json",
+    "sha256": "73dd667f0698bf704afc26ca67d633d08939e40f038cf1653be8604810228261"
+  },
+  "status": "LOCAL_SOURCE_CONTROLS_PASS_DEFAULT_OFF_NOT_FROZEN",
+  "template": true,
+  "whole_prepare_seconds": 3780
+}

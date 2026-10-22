@@ -1,0 +1,85 @@
+{
+  "schema": "bole.independent-main-final-pin-only-review/v1",
+  "status": "PASS_PIN_ONLY_SOURCE_IDENTITY_NO_RUNTIME_APPROVAL",
+  "reviewer": "/root/final_evidence_review",
+  "reviewed_utc": "2026-10-22T13:02:18.849971+00:00",
+  "MAIN_explicit_pin_only_freeze_instruction_received": true,
+  "final_launcher_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/continuation_main_admission_v4_20261022T120055Z/main_admission_v4.py",
+    "bytes": 32846,
+    "sha256": "4a1c5cee0bf6916bc97309c733acbe2337bfe751d003d94996566b752946c116"
+  },
+  "local_final_launcher": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_admission_final_v4/main_admission_v4.py",
+    "bytes": 32846,
+    "sha256": "4a1c5cee0bf6916bc97309c733acbe2337bfe751d003d94996566b752946c116"
+  },
+  "reviewed_draft": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_admission_v1_draft/main_admission_v4.py",
+    "bytes": 31959,
+    "sha256": "fdb867c17f5b4ec9da34a3b9203482df437df8a20bfcee2dcd0cad3f01f126e6"
+  },
+  "copied_reviewed_draft_provenance": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_admission_final_v4/provenance/REVIEWED_DRAFT_main_admission_v4.py",
+    "bytes": 31959,
+    "sha256": "fdb867c17f5b4ec9da34a3b9203482df437df8a20bfcee2dcd0cad3f01f126e6"
+  },
+  "exact_changed_assignment_values": [
+    "COMPLETE_RECEIPT_PIN",
+    "HISTORICAL_CONTEXT_PIN",
+    "RESTORE_PIN",
+    "REVIEWED_FROZEN"
+  ],
+  "independently_constructed_AST_value_span_inverse_complete_bytes_equal": true,
+  "inverse_sha256": "fdb867c17f5b4ec9da34a3b9203482df437df8a20bfcee2dcd0cad3f01f126e6",
+  "entire_module_AST_after_inverse_equal": true,
+  "all_top_level_function_and_class_AST_unchanged": true,
+  "function_and_class_count": 17,
+  "three_helper_whole_files_byte_equal_to_reviewed_draft": true,
+  "runtime_helper_refs": [
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/continuation_main_admission_v4_20261022T120055Z/restore_snapshot_mounts_v1.py",
+      "bytes": 6438,
+      "sha256": "8177437cda4df4d85db41392588fff18ce8422598d73bdc163ab950b26a32f9c"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/continuation_main_admission_v4_20261022T120055Z/historical_owner_context_v1.py",
+      "bytes": 13079,
+      "sha256": "63aecade69f568496412e4aff43de422151bca3d835389b678486e40ee162e75"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/continuation_main_admission_v4_20261022T120055Z/complete_inspect_receipt_v1.py",
+      "bytes": 3807,
+      "sha256": "05d212afa6d84af8f0a665c4d1605c756e1e603b52c533e983bc866e13804e5a"
+    }
+  ],
+  "final_REVIEWED_FROZEN": true,
+  "default_execution_opt_in_requirements_unchanged": true,
+  "independent_v4_static_review": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_admission_independent_review/REVIEW_V4.json",
+    "bytes": 17113,
+    "sha256": "e34246ebb993717c48c4b0c3a40efd1e6d50a2398da888e79a129c052f13a84c"
+  },
+  "author_inverse_proof_ref": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_admission_final_v4/FINAL_INVERSE_PROOF.json",
+    "bytes": 7555,
+    "sha256": "050c2aa2a35ac5fab42525d71a1c026757a0e7435a256b1a61fbc1cba98a3848"
+  },
+  "author_inverse_proof_was_not_used_as_independent_algorithm": true,
+  "scope": "Exactly four top-level assignment value changes, three complete helper identities and whole-byte/AST inverse. No controls rerun, source body edits, remote deployment, current main check, historical chain execution or NPU operations by this reviewer.",
+  "tests_executed": false,
+  "controls_rerun": false,
+  "remote_execution": false,
+  "actual_main_check_executed": false,
+  "actual_six_historical_raw_chains_executed": false,
+  "approved_dispatch": false,
+  "resources_admitted": false,
+  "owner_created": false,
+  "NPU": false,
+  "paired_gate_pass": false,
+  "numerical_qualified": false,
+  "performance_admitted": false,
+  "formal_performance": false,
+  "task_accuracy": false,
+  "remaining": "MAIN must verify deployed identities, bind actual immutable config and genuine review, obtain a fresh complete snapshot and pass real source/history/current-resource gates. Pin-only review does not substitute any of those."
+}

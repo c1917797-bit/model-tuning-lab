@@ -1,0 +1,180 @@
+{
+  "MAIN_pin_approval_basis": "Explicit parent MAIN task instruction approving exact eight bound pins after review and instructing local final reader/wrapper toggles; this is not a runtime or resource-admission approval receipt.",
+  "NPU": false,
+  "all_other_bytes_unchanged": true,
+  "candidate_binding_inverse": {
+    "bytes": 11951,
+    "path": "/workspace/scratch/e65c435145b1/continuation_reader_bind_prepare_v1/BINDING_INVERSE_PROOF.json",
+    "sha256": "e76b2f3cfd6c756bb98c2aef82395baeab3cfcfa7dbcf9da30536620b2321f96"
+  },
+  "candidate_binding_plan": {
+    "bytes": 17637,
+    "path": "/workspace/scratch/e65c435145b1/continuation_reader_bind_prepare_v1/FINAL_BINDING_PLAN.json",
+    "sha256": "69af05463c7d040a34d6cbd8e8ff58511db87ad8157f96a3fc1dd0c796bf923c"
+  },
+  "eight_approved_reader_pins_not_changed": true,
+  "full_final_reader_hash_computed_before_wrapper_binding": true,
+  "full_final_wrapper_hash_computed_after_last_pin_and_toggle": true,
+  "host_controls_executed": false,
+  "python39_grammar_valid": true,
+  "reader_all_other_AST_unchanged": true,
+  "reader_before": {
+    "bytes": 99833,
+    "path": "/workspace/scratch/e65c435145b1/continuation_reader_bind_prepare_v1/read_projection_result_v2.py",
+    "sha256": "5297b1d06619693bcc84b6297fcf4454486494970debef3da7c4fd3196611cf4"
+  },
+  "reader_exact_replacements": [
+    {
+      "after": "REVIEWED_EXTENSION_FROZEN = True",
+      "before": "REVIEWED_EXTENSION_FROZEN = False",
+      "occurrences": 1
+    }
+  ],
+  "reader_final_local": {
+    "bytes": 99832,
+    "path": "/workspace/scratch/e65c435145b1/continuation_reader_final_v1/read_projection_result_v2.py",
+    "sha256": "19bfdd2005ea0881fcd61415bc51d10af1d7e1d244425642224df75255a8a38e"
+  },
+  "reader_final_remote": {
+    "bytes": 99832,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_result_reader_v2_continuation_20261022T120055Z/read_projection_result_v2.py",
+    "sha256": "19bfdd2005ea0881fcd61415bc51d10af1d7e1d244425642224df75255a8a38e"
+  },
+  "reader_frozen": true,
+  "reader_functions_classes_AST_unchanged": [
+    "need",
+    "sha",
+    "uint",
+    "canonical",
+    "canonical_ref",
+    "typed_ref",
+    "file_identity",
+    "parents_identity",
+    "whole_file",
+    "Readset",
+    "strict_json",
+    "ref_map",
+    "declaration",
+    "projection_declaration",
+    "projection_source_bindings",
+    "projection_function_node",
+    "projection_reduction_sites",
+    "projection_text",
+    "projection_tensor_metadata",
+    "projection_alias",
+    "validate_projection_record",
+    "continuation_authority_lineage",
+    "independent_audit_lineage",
+    "source_and_audit",
+    "original_readers",
+    "owned_ref",
+    "validate_host",
+    "validate_original_arm",
+    "expected_names",
+    "geometry",
+    "slot_record",
+    "inventory",
+    "validate_order",
+    "validate_boundary_rank",
+    "terminal_budget",
+    "differences",
+    "tokens",
+    "bf16_compare",
+    "hash_comparison",
+    "compare_rank",
+    "compare_http",
+    "projection_stage_join",
+    "compare_projection_rank",
+    "compare_projection_ranks",
+    "main"
+  ],
+  "reader_inverse_whole_file_equal": true,
+  "reader_main_executed": false,
+  "remote_actions": false,
+  "schema": "bole.continuation-reader-final-freeze-inverse/v1",
+  "six_authority_controls_rerun": false,
+  "status": "LOCAL_FINAL_BYTES_CHECKED_RUNTIME_NOT_EXECUTED",
+  "tests": [
+    {
+      "after": {
+        "bytes": 22892,
+        "path": "/workspace/scratch/e65c435145b1/continuation_reader_final_v1/test_projection_reader_v2.py",
+        "sha256": "95bb9d170475f2f564b33809e992f46445368907b42f6513ed18a45775d05b86"
+      },
+      "before": {
+        "bytes": 22892,
+        "path": "/workspace/scratch/e65c435145b1/continuation_reader_bind_prepare_v1/test_projection_reader_v2.py",
+        "sha256": "95bb9d170475f2f564b33809e992f46445368907b42f6513ed18a45775d05b86"
+      },
+      "byte_identical": true,
+      "executed_here": false
+    },
+    {
+      "after": {
+        "bytes": 10343,
+        "path": "/workspace/scratch/e65c435145b1/continuation_reader_final_v1/test_continuation_authority_v2.py",
+        "sha256": "fd3b5d730db3cc5e3ed171cf484c2b5c7ffca2e670b2a9bbb354582b94a8a502"
+      },
+      "before": {
+        "bytes": 10343,
+        "path": "/workspace/scratch/e65c435145b1/continuation_reader_bind_prepare_v1/test_continuation_authority_v2.py",
+        "sha256": "fd3b5d730db3cc5e3ed171cf484c2b5c7ffca2e670b2a9bbb354582b94a8a502"
+      },
+      "byte_identical": true,
+      "executed_here": false
+    }
+  ],
+  "wrapper_all_other_AST_unchanged": true,
+  "wrapper_before": {
+    "bytes": 27128,
+    "path": "/workspace/scratch/e65c435145b1/continuation_reader_bind_prepare_v1/run_projection_reader_once_v2.py",
+    "sha256": "4c8d913e90a02467e4c8a59d3cd38515b9c62ea85a0d8e0ff132d77a4099bf12"
+  },
+  "wrapper_exact_replacements": [
+    {
+      "after": "'read_projection_result_v2.py': (99832, '19bfdd2005ea0881fcd61415bc51d10af1d7e1d244425642224df75255a8a38e')",
+      "before": "'read_projection_result_v2.py': (None, None)",
+      "occurrences": 1
+    },
+    {
+      "after": "'test_projection_reader_v2.py': (22892, '95bb9d170475f2f564b33809e992f46445368907b42f6513ed18a45775d05b86')",
+      "before": "'test_projection_reader_v2.py': (None, None)",
+      "occurrences": 1
+    },
+    {
+      "after": "REVIEWED_WRAPPER_FROZEN = True",
+      "before": "REVIEWED_WRAPPER_FROZEN = False",
+      "occurrences": 1
+    }
+  ],
+  "wrapper_final_local": {
+    "bytes": 27253,
+    "path": "/workspace/scratch/e65c435145b1/continuation_reader_final_v1/run_projection_reader_once_v2.py",
+    "sha256": "28f0234ca12768970fb82fa776b52aaeba282cc361cc3df7b3a870e501c6a6f6"
+  },
+  "wrapper_final_remote": {
+    "bytes": 27253,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_result_reader_v2_continuation_20261022T120055Z/run_projection_reader_once_v2.py",
+    "sha256": "28f0234ca12768970fb82fa776b52aaeba282cc361cc3df7b3a870e501c6a6f6"
+  },
+  "wrapper_frozen": true,
+  "wrapper_functions_classes_AST_unchanged": [
+    "need",
+    "canonical",
+    "json_value",
+    "typed_ref",
+    "identity",
+    "parents",
+    "read",
+    "write",
+    "write_trace",
+    "limits",
+    "start_ticks",
+    "child",
+    "validate_control_result",
+    "validate_actual_result",
+    "main"
+  ],
+  "wrapper_inverse_whole_file_equal": true,
+  "wrapper_main_executed": false
+}
