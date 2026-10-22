@@ -1,0 +1,72 @@
+{
+  "NPU_executed_by_checkpoint": false,
+  "raw_outputs_unchanged": true,
+  "refs": [
+    {
+      "bytes": 17555,
+      "path": "/opt/host/vnf/austinov/run-bole-startup-failure-summary-v1-20261022T170600Z/SUMMARY.json",
+      "sha256": "0510a0b8dea2d2917e300a35ee4f7b3cf2c5c19a3f95b1f81f5f9527ddc78d1e"
+    },
+    {
+      "bytes": 12036,
+      "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/READ.json",
+      "sha256": "12496fb8365271f6cf04255cc27bac305d4bcf297f8d8e842798169b2ab605bb"
+    },
+    {
+      "bytes": 80593,
+      "path": "/opt/host/vnf/austinov/run-bole-textonly-source-and-failure-read-v1-20261022T171200Z/READ.json",
+      "sha256": "3a57d8026278b31c11083773469f3fe754ce033d6e5b380528d0e1a180be91c3"
+    },
+    {
+      "bytes": 40717,
+      "path": "/opt/host/vnf/austinov/run-bole-textonly-parent-and-tokenizer-read-v1-20261022T172000Z/READ.json",
+      "sha256": "5038b52506801b82b543d7282c78461b5a0f9b1f9b1f7836428f113a016c76d1"
+    },
+    {
+      "bytes": 65484,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/dense/server.stdout",
+      "sha256": "7ba30529f202fee7401103e1cc650ac3c7d2ee4b71df7536dc40b38d54743edf"
+    },
+    {
+      "bytes": 2375646,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/RESULT.json",
+      "sha256": "4ad705377892c1136dbc945c8353904739e6189ed4b52dea2df3cc12731ef1da"
+    },
+    {
+      "bytes": 3325862,
+      "path": "/opt/host/vnf/austinov/run-bole-startup-failure-inspection-v2-20261022T170200Z/INSPECTION.json",
+      "sha256": "d3bf4aa2fe5be4a687f3210a244c1590fd451ea491b213c259c758561618af9d"
+    },
+    {
+      "bytes": 1638841,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/SOURCE_BOUND.json",
+      "sha256": "d28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df"
+    },
+    {
+      "bytes": 3218,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/HOST-FIRST-FAULT.json",
+      "sha256": "0e92f860a05174461cd0292540786d6d3025cd9243cd445fd97aa663309645e6"
+    },
+    {
+      "bytes": 1414912,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/cpu-preflight/OWNED.json",
+      "sha256": "bd5297f2d8e8bfcea5d02b1fdb4612faf453db55bfdf3c5a1a4c87b7f4008316"
+    },
+    {
+      "bytes": 3665,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/cpu-preflight/cleanup.json",
+      "sha256": "d6bac282789816103226cf8e273acb2e1791673561919111c803c239cdc7c0fb"
+    },
+    {
+      "bytes": 1414866,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/dense/OWNED.json",
+      "sha256": "45859b745214ec0f19d728d018d438a02dcff61104084726446baedf29e74ba8"
+    },
+    {
+      "bytes": 1733,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/dense/cleanup.json",
+      "sha256": "8529bd3c5d26385a59dd634696297826b719253553280303cb3604f10c285679"
+    }
+  ],
+  "schema": "bole.completed-startup-failure-inputs/v1"
+}

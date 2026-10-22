@@ -1,0 +1,108 @@
+{
+  "schema": "bole.projection-summary-independent-static-review/v1",
+  "status": "LIMITED_STATIC_PASS_NO_RESULT_OR_ADMISSION",
+  "reviewer": "final_evidence_review",
+  "reviewed_source": {
+    "path": "/workspace/scratch/e65c435145b1/projection_summary_extract_v1_draft/extract_projection_summary_v1.py",
+    "bytes": 18938,
+    "sha256": "2a422bcdf74535bf7def49ebcf14780183585cfde732f5a23feae7ecbb33d4f9"
+  },
+  "reader_source": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_reader_final_v1/read_projection_result_v2.py",
+    "bytes": 99832,
+    "sha256": "19bfdd2005ea0881fcd61415bc51d10af1d7e1d244425642224df75255a8a38e"
+  },
+  "qualified_index": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_actual/QUALIFIED_SOURCE_REFS.json",
+    "bytes": 3086,
+    "sha256": "73dd667f0698bf704afc26ca67d633d08939e40f038cf1653be8604810228261"
+  },
+  "author_metadata": [
+    {
+      "path": "/workspace/scratch/e65c435145b1/projection_summary_extract_v1_draft/SCHEMA_EXPECTATION_v2.json",
+      "bytes": 6291,
+      "sha256": "e155b0d516489b7458267e45974eb46a0b0ba950699d9289f9dc9cf6a16caa2a"
+    },
+    {
+      "path": "/workspace/scratch/e65c435145b1/projection_summary_extract_v1_draft/LOCAL_CHECKS_v2.json",
+      "bytes": 779,
+      "sha256": "4463c6e42e7c09f93f1e52974f5ad23b5526e0a6936a3c6dde28cbe08e14d7b8"
+    }
+  ],
+  "review_method": "Full local extractor read plus targeted original-reader interface read and independent AST-only pin extraction. No source imported or executed by this reviewer; no control rerun. Author local helper controls are source-bound records only.",
+  "checks": [
+    {
+      "id": "identity",
+      "result": "PASS_STATIC",
+      "detail": "Exact expected source/audit references equal the MAIN-provided local qualified-source index. Expected reader bytes/SHA equal the complete local final reader. No remote source reopened by this reviewer."
+    },
+    {
+      "id": "missing_null_false",
+      "result": "PASS_STATIC",
+      "detail": "fields uses key membership and preserves explicit null/false. Unavailable stages retain observed=false plus exact reason. Missing transition interval and optional join fields become present=false,value=null."
+    },
+    {
+      "id": "shape_and_hash",
+      "result": "PASS_STATIC",
+      "detail": "All five stages retain shape,dtype,bytes,geometry and both availability and logical metadata comparisons. First hash difference and first coverage difference remain separate; no inferred numerical equivalence from unlike tensor spans."
+    },
+    {
+      "id": "raw_scope",
+      "result": "PASS_STATIC",
+      "detail": "Original core/norm/outproj rows are copied with full131 producer-witness scope, last8 BF16 metrics and their no-threshold/no-qualification flags. Finite or relative-L2 values are not converted into task accuracy claims."
+    },
+    {
+      "id": "cross_rank",
+      "result": "PASS_STATIC",
+      "detail": "Two generations times five stages with all four rank observations are retained. Unknown equality remains null, distinct TP shards need not be equal, equality_required and numerical_qualification remain false."
+    },
+    {
+      "id": "dispatch_and_weight",
+      "result": "PASS_STATIC",
+      "detail": "Active metadata, roles, calls, exceptions and supported reduction callsites are copied. Weight/bias version or format null values survive unchanged; no weight-content or callee/HCCL/kernel-source proof is claimed. The five runtime-source mapping and rank complete_ref are copied for traceability."
+    },
+    {
+      "id": "integrity_scope",
+      "result": "PASS_STATIC",
+      "detail": "Producer flags are named saved_reader_flags. The extractor rereads only the diagnostic and its own source as complete files, with SHA/size/stat/ancestor identity before/after. Nested readset equality is read from the diagnostic; no nested evidence is reopened."
+    },
+    {
+      "id": "qualification_scope",
+      "result": "PASS_STATIC",
+      "detail": "All saved false qualification flags are required false. Summary status states NOT_GATE; original pair replacement/rerun stay false; first observation is not cause; initial state equivalence is not assumed. The complete original limitations list is copied."
+    },
+    {
+      "id": "historical_pair",
+      "result": "PASS_STATIC",
+      "detail": "Historical FAIL retains a fixed execution Ref and explicit reopened_by_extractor=false / historical provenance. It is not a new paired evaluation."
+    },
+    {
+      "id": "bounded_io",
+      "result": "PASS_STATIC",
+      "detail": "Whole input <=32MiB; own source <=128KiB; output <=256KiB; AS <=512MiB,CPU <=30s,FSIZE <=256KiB,core0. Time checks use a60s deadline. No model/reader import, subprocess, service or NPU action; output uses create-exclusive nofollow. Output overflow fails without truncation; actual-output size and runtime success are not established here."
+    },
+    {
+      "id": "strict_json",
+      "result": "PASS_STATIC",
+      "detail": "Duplicate keys and nonfinite constants are rejected; finite_float additionally rejects numeric exponent overflow. No missing/null boolean coercion is introduced."
+    }
+  ],
+  "definite_blockers": [],
+  "scope_limits": {
+    "remote_reads_by_reviewer": false,
+    "actual_projection_diagnostic_read": false,
+    "extractor_main_executed": false,
+    "independent_reader_executed": false,
+    "full_diagnostic_fixture_executed": false,
+    "original_15_or_6_controls_rerun": false,
+    "NPU_executed_by_reviewer": false,
+    "numerical_admission": false,
+    "performance_admission": false,
+    "task_accuracy_acceptance": false
+  },
+  "pending": [
+    "MAIN must supply the exact actual completed diagnostic Ref; this review does not assert its availability or success.",
+    "Actual bounded extraction and stable full-file reads must succeed; no output-size claim is inferred from static inspection.",
+    "Any later result must retain saved reader interpretation limits and cannot replace the original full-pair FAIL or final acceptance."
+  ]
+}

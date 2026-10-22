@@ -1,0 +1,254 @@
+{
+  "schema": "bole.boundary-probe-main-source-review/v2-continuation",
+  "reviewer": "MAIN",
+  "reviewed_utc": "2026-10-22 17:28:31 UTC",
+  "NPU_executed": false,
+  "source_only": true,
+  "paired_gate_pass": false,
+  "performance_admitted": false,
+  "parent": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_performance_profile_prepare_20261021/successor_layer/bound-short-ON-v2/SOURCE_BOUND.json",
+    "bytes": 1503149,
+    "sha256": "a285ac43d953cf257255ec4848d8719b613010bf339491e2a39d20d2f3b73b8f"
+  },
+  "helpers": {
+    "boundary_probe_v1.py": {
+      "bytes": 31338,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v4_textonly_20261022T171000Z/boundary_probe_v1.py",
+      "sha256": "14c69907adffb9ed5661f6ffd6023f85ab58730af69232b9a54a4ff6883e4bdf"
+    },
+    "boundary_delta.py": {
+      "bytes": 9827,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v4_textonly_20261022T171000Z/boundary_delta.py",
+      "sha256": "56efb9a324ce9f15d468409e95dbed00694a681a780432349c96159e94c793be"
+    },
+    "boundary_integration.py": {
+      "bytes": 20601,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v4_textonly_20261022T171000Z/boundary_integration.py",
+      "sha256": "05a0d2e92b785aeb849942148899dbb58c6bffecbe1274a5e44b7cca54bfe533"
+    },
+    "boundary_validation.py": {
+      "bytes": 12640,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v4_textonly_20261022T171000Z/boundary_validation.py",
+      "sha256": "47de042e6f2b5f829449aa33f9a32bf71cb50346cfd1e9048c30c692669984e0"
+    },
+    "projection_probe_v1.py": {
+      "bytes": 30248,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v4_textonly_20261022T171000Z/projection_probe_v1.py",
+      "sha256": "4c442d86077efcb64e0d7f845d77accabe9b310e844c88a2a9731b2c3b450765"
+    }
+  },
+  "continuation_authorization": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v4_textonly_20261022T171000Z/AUTHORIZATION_CONTINUATION.json",
+    "bytes": 1887,
+    "sha256": "4cf0473b53bc6107a76a84610d9a513814f8008896e93b82872cf3408f61fb1e"
+  },
+  "text_only_config": {
+    "language_model_only": true,
+    "skip_mm_profiling": false,
+    "enable_mm_embeds": false,
+    "limit_mm_per_prompt": {}
+  },
+  "text_only_preparation_evidence": {
+    "failed_startup_result": {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/RESULT.json",
+      "bytes": 2375646,
+      "sha256": "4ad705377892c1136dbc945c8353904739e6189ed4b52dea2df3cc12731ef1da"
+    },
+    "actual_cpu_parser_caller": {
+      "bytes": 5282,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/preflight114.py",
+      "sha256": "0207b0a4f628be6e5c460cc54868d0daf1f12fdf8dbe61f3dd02b9d85901fcf6"
+    },
+    "native_source_receipts": [
+      {
+        "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/READ.json",
+        "bytes": 12036,
+        "sha256": "12496fb8365271f6cf04255cc27bac305d4bcf297f8d8e842798169b2ab605bb"
+      },
+      {
+        "path": "/opt/host/vnf/austinov/run-bole-textonly-source-and-failure-read-v1-20261022T171200Z/READ.json",
+        "bytes": 80593,
+        "sha256": "3a57d8026278b31c11083773469f3fe754ce033d6e5b380528d0e1a180be91c3"
+      }
+    ],
+    "native_source_snapshots": {
+      "/vllm-workspace/vllm/vllm/v1/worker/gpu_model_runner.py": {
+        "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/0_gpu_model_runner.py",
+        "bytes": 334736,
+        "sha256": "6250ca0670c4593aa2f7c4567c9c71d6cb3d8182624a985d4d4e33d5bf054666"
+      },
+      "/vllm-workspace/vllm/vllm/model_executor/models/qwen3_vl.py": {
+        "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/1_qwen3_vl.py",
+        "bytes": 111366,
+        "sha256": "2935e09be47a893f09176cddb1beb6ed2e73666459de2bfbb08aca50b3e08969"
+      },
+      "/vllm-workspace/vllm/vllm/config/multimodal.py": {
+        "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/2_multimodal.py",
+        "bytes": 13957,
+        "sha256": "2ca78ef40f8bdae73ef26af648b6384c1ece4108d1fcfda27cd00e60c013ca14"
+      },
+      "/vllm-workspace/vllm/vllm/engine/arg_utils.py": {
+        "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/3_arg_utils.py",
+        "bytes": 111675,
+        "sha256": "3ade2488897d08b5c1fd4ddb815eb5743169907d59741a47867185caab7f250d"
+      },
+      "/vllm-workspace/vllm-ascend/vllm_ascend/worker/model_runner_v1.py": {
+        "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/4_model_runner_v1.py",
+        "bytes": 258160,
+        "sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968"
+      },
+      "/vllm-workspace/vllm-ascend/vllm_ascend/worker/worker.py": {
+        "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/5_worker.py",
+        "bytes": 48290,
+        "sha256": "c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3"
+      },
+      "/vllm-workspace/vllm/vllm/multimodal/encoder_budget.py": {
+        "bytes": 7111,
+        "path": "/opt/host/vnf/austinov/run-bole-textonly-source-and-failure-read-v1-20261022T171200Z/0_encoder_budget.py",
+        "sha256": "76aaf25bb8755f7232c5f89cd15173a2bb08d8cdaaaa10797199a49448a5b49b"
+      },
+      "/vllm-workspace/vllm/vllm/multimodal/registry.py": {
+        "bytes": 12967,
+        "path": "/opt/host/vnf/austinov/run-bole-textonly-source-and-failure-read-v1-20261022T171200Z/1_registry.py",
+        "sha256": "d4627c89d3459ce35a729e0940a0c5be5b54793b40192c1c068416b57a0a82fd"
+      },
+      "/vllm-workspace/vllm/vllm/model_executor/models/qwen3_5.py": {
+        "bytes": 29662,
+        "path": "/opt/host/vnf/austinov/run-bole-textonly-source-and-failure-read-v1-20261022T171200Z/2_qwen3_5.py",
+        "sha256": "04f3de5372973770d71c5c05f2e8a5e221ec52b62cca7a1e302d9201b61b8adc"
+      },
+      "/vllm-workspace/vllm/vllm/model_executor/models/interfaces.py": {
+        "bytes": 52512,
+        "path": "/opt/host/vnf/austinov/run-bole-textonly-source-and-failure-read-v1-20261022T171200Z/3_interfaces.py",
+        "sha256": "62ae344c350b8445f364bded9cf5a0a3887caae062873d266487aedfd55e3dd7"
+      },
+      "/vllm-workspace/vllm/vllm/model_executor/models/utils.py": {
+        "bytes": 30902,
+        "path": "/opt/host/vnf/austinov/run-bole-textonly-source-and-failure-read-v1-20261022T171200Z/4_utils.py",
+        "sha256": "5c4b438be5dee3478b1a1445cb9ec2cfa6362992bd7290bde7113b43cb57e880"
+      },
+      "/vllm-workspace/vllm/vllm/config/model.py": {
+        "bytes": 91921,
+        "path": "/opt/host/vnf/austinov/run-bole-textonly-source-and-failure-read-v1-20261022T171200Z/5_model.py",
+        "sha256": "cf5aeb9e16d6cac82426cf7e8d140741b35c503ae8b9e1fc9ba3dde53c585a62"
+      }
+    }
+  },
+  "control_refs": [
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v4_textonly_20261022T171000Z/PREPARATION_INPUTS.json",
+      "bytes": 12218,
+      "sha256": "82ccb03f72af8e55c215a396e2a40d383a745032e628d8dfa9c53443017fe63a"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z/INPUTS_AFTER.json",
+      "bytes": 11620,
+      "sha256": "6cf189042718cabb283f2bf9666c04276d0bb8500e133022568d716e9d8e2eb8"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z/INPUTS_BEFORE.json",
+      "bytes": 11620,
+      "sha256": "6cf189042718cabb283f2bf9666c04276d0bb8500e133022568d716e9d8e2eb8"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z/RESULT.json",
+      "bytes": 4834,
+      "sha256": "f323a89f5088fa4df7e4623411398315b10c082b6457e2603192ee1e1564e064"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z/integration_controls.json",
+      "bytes": 1017,
+      "sha256": "6598202a448f83f2952f41f8416776b15d29933414aafd4848f26b9b6fade2da"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z/integration_controls.stderr",
+      "bytes": 819,
+      "sha256": "b115236674068254ed7efc52c19c7f3720e75fbdf25f5505c31a1343e243025d"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z/integration_controls.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z/metadata_capacity.json",
+      "bytes": 786,
+      "sha256": "733b1788a142d601d5b86ddb04b6d82c977ab3bae776b386497c6c841ebba7f3"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z/metadata_capacity.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z/metadata_capacity.stdout",
+      "bytes": 1030,
+      "sha256": "6db05e929eaeb147f40e4e977772494edf00e4a86cff041b4f352b2a9c1d3916"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z/probe_controls.json",
+      "bytes": 782,
+      "sha256": "2a733331c82da799cf0a54bb58a8ec53c19225208d0ea82b6ce379f06d120a62"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z/probe_controls.stderr",
+      "bytes": 1039,
+      "sha256": "ad569866e1d38c2a43c12a22783c7a1bb2cd310fdc58595acd8db78bf3bfb1d2"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z/probe_controls.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z/projection_controls.json",
+      "bytes": 799,
+      "sha256": "eae20b96f631ef6914b3ed0f6af547f65aa7ef11146a866dfd03f802cf459e2c"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z/projection_controls.stderr",
+      "bytes": 1344,
+      "sha256": "63eca46343257e3f534e06b60c1e855ddc9291731b2259a78e476e636fddc5b6"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z/projection_controls.stdout",
+      "bytes": 43,
+      "sha256": "cca60b3c15149319eb81161f436b4fa3630019f2d65deda2858e1b42915ec9a7"
+    }
+  ],
+  "controls_inspection_receipt": {
+    "path": "/opt/host/vnf/austinov/run-bole-textonly-control-review-v1-20261022T172600Z/CHECK.json",
+    "bytes": 35859,
+    "sha256": "212ff4107f6a974f00b82b461ef33c493a7fee4e17d7b2e69484c9dfeedf3bb5"
+  },
+  "independent_source_review": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/textonly_preparation_review_20261022T171000Z/INDEPENDENT_REVIEW.json",
+    "bytes": 13310,
+    "sha256": "834af6361630d1bc270f1931c885a9c8a608109ef6f85f10f7421275e05ed18d"
+  },
+  "review_scope": "Whole deployed source, exact inverse and unchanged runtime mathematics; actual host source controls and all 44 before/after inputs independently reopened. Approval to freeze and independently audit this new diagnostic source only. No native parser, resource, numerical, state, performance or task admission.",
+  "checks": {
+    "before_after_input_count": 44,
+    "all_actual_controls_reopened": true,
+    "control_counts": [
+      11,
+      8,
+      16
+    ],
+    "native_configuration_supported_by_twelve_actual_source_snapshots": true,
+    "real_parser_and_EngineArgs_execution_pending": true,
+    "original_twenty_sameimage_executed": false,
+    "old_report_cutoff_unchanged": true,
+    "old_window_extended": false,
+    "phase_seconds": 3600,
+    "cleanup_seconds": 180,
+    "prepare_admission_seconds": 3780,
+    "source_internal_cutoff_epoch": 1792710600,
+    "failed_v3_primary_preserved": true,
+    "old_ON_OFF_pair_still_failed": true,
+    "model_mathematics_unchanged": true,
+    "numerical_thresholds_unchanged": true,
+    "resource_admission": false
+  }
+}

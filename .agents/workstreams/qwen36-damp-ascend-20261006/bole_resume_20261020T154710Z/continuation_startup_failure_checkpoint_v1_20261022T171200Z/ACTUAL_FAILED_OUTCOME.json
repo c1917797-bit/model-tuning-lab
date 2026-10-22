@@ -1,0 +1,242 @@
+{
+  "receipt": {
+    "bytes": 17555,
+    "path": "/opt/host/vnf/austinov/run-bole-startup-failure-summary-v1-20261022T170600Z/SUMMARY.json",
+    "sha256": "0510a0b8dea2d2917e300a35ee4f7b3cf2c5c19a3f95b1f81f5f9527ddc78d1e"
+  },
+  "result": {
+    "fields": {
+      "BOLE_diagnostic": false,
+      "actual_host_argv": [
+        "/usr/bin/python3",
+        "-I",
+        "-B",
+        "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/host_service.py",
+        "--execute",
+        "--source-ref",
+        "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/SOURCE_BOUND.json\", \"bytes\": 1638841, \"sha256\": \"d28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df\"}",
+        "--output",
+        "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z"
+      ],
+      "candidate_qualification": false,
+      "cleanup_seconds": 180,
+      "cleanup_spent": 40.35200875008013,
+      "cpu_only": false,
+      "elapsed": 1097.174797869986,
+      "formal_performance": false,
+      "host_pid": 4184444,
+      "model_ready": false,
+      "performance_gain_measured": false,
+      "phase_seconds": 3600,
+      "primary": "TimeoutExpired(['/usr/bin/prlimit', '--as=unlimited', '--', '/usr/bin/docker', 'exec', 'eb21e660585ed4e758476504bc0b409a02b777d875516e2925f00a9e8efaa8cf', '/bin/bash', '-c', 'source /usr/local/Ascend/cann-9.1.0/set_env.sh && exec \"$@\"', 'kvbp-diagnostic', '/usr/local/python3.12.13/bin/python3', '-B', '-c', \"import urllib.request;assert urllib.request.urlopen('http://127.0.0.1:8230/health',timeout=2).status==200\"], 4)",
+      "scheduler_committed": false,
+      "schema": "bole.actual-three-node-model-owned/v131",
+      "secondary": [],
+      "source": {
+        "bytes": 1638841,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/SOURCE_BOUND.json",
+        "sha256": "d28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df"
+      },
+      "successful_raw_replay_available": false,
+      "summary": {
+        "CPU_child": {
+          "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/cpu-preflight/CPU-CHILD.json",
+          "sha256": "06cb14fa2d7da0e4228994312a543687b6a93bd18eb91131c98f102849d7050c"
+        },
+        "CPU_release": {
+          "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/cpu-preflight/cleanup.json",
+          "sha256": "d6bac282789816103226cf8e273acb2e1791673561919111c803c239cdc7c0fb"
+        },
+        "CPU_report": {
+          "bytes": 5707,
+          "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/cpu-preflight/CPU.json",
+          "sha256": "d21968d44c51fc84fc5d1eafd808f150448624b34e3a3930318caf8676f6326a"
+        },
+        "actual_software_child": {
+          "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/cpu-preflight/SOFTWARE-CHILD.json",
+          "sha256": "66ded479d88a5a86f84582039b57bf8bdb423e9138bdbafd60e27bd167527fb0"
+        },
+        "all_observers_disabled": false,
+        "canary": {
+          "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/dense/CANARY-CHILD.json",
+          "sha256": "615b56d6dc9bd049b10b18fe4a4411afc9d562f0ba79c0bff1fbde1a0376179d"
+        },
+        "diagnostic_channel_cold_handoff": {
+          "applicable": false,
+          "reason": "no diagnostic channel in this successor; original parent proof separately reopened"
+        },
+        "diagnostic_channel_enabled": false,
+        "first_host_fault": {
+          "bytes": 3218,
+          "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/HOST-FIRST-FAULT.json"
+        },
+        "independent_cpu_ack_enabled": false,
+        "performance_arm": "bole"
+      },
+      "task_accuracy": false,
+      "timing_is_formal": false
+    },
+    "inputs": [
+      {
+        "bytes": 2375646,
+        "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/RESULT.json",
+        "sha256": "4ad705377892c1136dbc945c8353904739e6189ed4b52dea2df3cc12731ef1da"
+      },
+      {
+        "bytes": 3325862,
+        "path": "/opt/host/vnf/austinov/run-bole-startup-failure-inspection-v2-20261022T170200Z/INSPECTION.json",
+        "sha256": "d3bf4aa2fe5be4a687f3210a244c1590fd451ea491b213c259c758561618af9d"
+      }
+    ],
+    "inspection_observation_epoch": 1792688850.482461,
+    "inspection_snapshot": {
+      "disk": {
+        "/cache/efim/Qwen3.6-27B": {
+          "free": 10254127104,
+          "total": 2163350618112,
+          "used": 2043128553472
+        },
+        "/opt/host/vnf/austinov": {
+          "free": 150942400512,
+          "total": 263086084096,
+          "used": 98705133568
+        },
+        "/var/lib/docker": {
+          "free": 0,
+          "total": 7298117632,
+          "used": 7253860352
+        }
+      },
+      "git_branch": {
+        "argv": [
+          "/usr/local/bin/git",
+          "branch",
+          "--show-current"
+        ],
+        "epoch": 1792688851.9596908,
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "work/qwen36-damp-ascend-20261006\n"
+      },
+      "git_head": {
+        "argv": [
+          "/usr/local/bin/git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "epoch": 1792688851.9567115,
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "0c0068b34590cb5699aa789c110281c0f5957721\n"
+      },
+      "git_index": {
+        "argv": [
+          "/usr/local/bin/git",
+          "diff",
+          "--cached",
+          "--name-only"
+        ],
+        "epoch": 1792688852.0266445,
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": ""
+      },
+      "git_tracked": {
+        "argv": [
+          "/usr/local/bin/git",
+          "status",
+          "--porcelain=v1",
+          "--untracked-files=no"
+        ],
+        "epoch": 1792688852.0190978,
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": " M .agents/skills/ascend-benchmark-evidence/SKILL.md\n M .agents/skills/chicaihong01-host-maintenance/SKILL.md\n M .agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md\n"
+      },
+      "meminfo": "MemTotal:       2113084888 kB\nMemFree:        75974356 kB\nMemAvailable:   76290284 kB\nBuffers:          586944 kB\nCached:         10375900 kB\nSwapCached:            0 kB\nActive:          6627996 kB\nInactive:        7482460 kB\nActive(anon):    1386952 kB\nInactive(anon):  4400852 kB\nActive(file):    5241044 kB\nInactive(file):  3081608 kB\nUnevictable:     1940360 kB\nMlocked:         1940360 kB\nSwapTotal:             0 kB\nSwapFree:              0 kB\nDirty:             26996 kB\nWriteback:             0 kB\nAnonPages:       5084080 kB\nMapped:           277484 kB\nShmem:           2614664 kB\nKReclaimable:    1522904 kB\nSlab:            3272200 kB\nSReclaimable:    1522904 kB\nSUnreclaim:      1749296 kB\nKernelStack:       55376 kB\nPageTables:        34900 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    52006636 kB\nCommitted_AS:   18815568 kB\nVmallocTotal:   135286226880 kB\nVmallocUsed:     1629220 kB\nVmallocChunk:          0 kB\nPercpu:           748032 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:     16384 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nCmaTotal:              0 kB\nCmaFree:               0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:        2009071616 kB\n",
+      "old_interrupted_inspection_exists": false,
+      "owned_containers": [
+        {
+          "argv": [
+            "/usr/bin/docker",
+            "inspect",
+            "--format",
+            "{\"Id\":{{json .Id}},\"Image\":{{json .Image}},\"State\":{{json .State}},\"ExecIDs\":{{json .ExecIDs}},\"Labels\":{{json .Config.Labels}},\"Devices\":{{json .HostConfig.Devices}}}",
+            "eb21e660585ed4e758476504bc0b409a02b777d875516e2925f00a9e8efaa8cf"
+          ],
+          "epoch": 1792688851.7612307,
+          "exit_code": 0,
+          "stderr": "",
+          "stdout": "{\"Id\":\"eb21e660585ed4e758476504bc0b409a02b777d875516e2925f00a9e8efaa8cf\",\"Image\":\"sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1\",\"State\":{\"Dead\":false,\"Error\":\"\",\"ExitCode\":137,\"FinishedAt\":\"2026-10-22T13:48:27.85628452Z\",\"OOMKilled\":false,\"Paused\":false,\"Pid\":0,\"Restarting\":false,\"Running\":false,\"StartedAt\":\"2026-10-22T13:33:48.21826198Z\",\"Status\":\"exited\"},\"ExecIDs\":null,\"Labels\":{\"model-tuning-lab.arm\":\"dense\",\"model-tuning-lab.controller-sha256\":\"20bda52a1c3fbc75db47104cbd4759faf91da1f39032d4730160983f7b9c0c30\",\"model-tuning-lab.owner\":\"bole-root-r6-20261017-001\",\"model-tuning-lab.run\":\"adakv-tp4-run-bole-boundary-ON-v3-continuation_20261022T120055Z-dense\",\"model-tuning-lab.source-manifest-sha256\":\"d28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df\",\"org.opencontainers.image.version\":\"22.04\"},\"Devices\":[{\"CgroupPermissions\":\"rwm\",\"PathInContainer\":\"/dev/davinci0\",\"PathOnHost\":\"/dev/davinci4\"},{\"CgroupPermissions\":\"rwm\",\"PathInContainer\":\"/dev/davinci1\",\"PathOnHost\":\"/dev/davinci5\"},{\"CgroupPermissions\":\"rwm\",\"PathInContainer\":\"/dev/davinci2\",\"PathOnHost\":\"/dev/davinci6\"},{\"CgroupPermissions\":\"rwm\",\"PathInContainer\":\"/dev/davinci3\",\"PathOnHost\":\"/dev/davinci7\"},{\"CgroupPermissions\":\"rwm\",\"PathInContainer\":\"/dev/davinci_manager\",\"PathOnHost\":\"/dev/davinci_manager\"},{\"CgroupPermissions\":\"rwm\",\"PathInContainer\":\"/dev/devmm_svm\",\"PathOnHost\":\"/dev/devmm_svm\"},{\"CgroupPermissions\":\"rwm\",\"PathInContainer\":\"/dev/hisi_hdc\",\"PathOnHost\":\"/dev/hisi_hdc\"}]}\n"
+        },
+        {
+          "argv": [
+            "/usr/bin/docker",
+            "inspect",
+            "--format",
+            "{\"Id\":{{json .Id}},\"Image\":{{json .Image}},\"State\":{{json .State}},\"ExecIDs\":{{json .ExecIDs}},\"Labels\":{{json .Config.Labels}},\"Devices\":{{json .HostConfig.Devices}}}",
+            "0a5ed053d4d08915b8748e0f6facbc6f3fad820ff1f46d1eefe0f4bc6626d955"
+          ],
+          "epoch": 1792688851.9451234,
+          "exit_code": 0,
+          "stderr": "",
+          "stdout": "{\"Id\":\"0a5ed053d4d08915b8748e0f6facbc6f3fad820ff1f46d1eefe0f4bc6626d955\",\"Image\":\"sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1\",\"State\":{\"Dead\":false,\"Error\":\"\",\"ExitCode\":137,\"FinishedAt\":\"2026-10-22T13:32:24.26595021Z\",\"OOMKilled\":false,\"Paused\":false,\"Pid\":0,\"Restarting\":false,\"Running\":false,\"StartedAt\":\"2026-10-22T13:30:27.69989112Z\",\"Status\":\"exited\"},\"ExecIDs\":null,\"Labels\":{\"model-tuning-lab.arm\":\"cpu-preflight\",\"model-tuning-lab.controller-sha256\":\"20bda52a1c3fbc75db47104cbd4759faf91da1f39032d4730160983f7b9c0c30\",\"model-tuning-lab.owner\":\"bole-root-r6-20261017-001\",\"model-tuning-lab.run\":\"adakv-tp4-run-bole-boundary-ON-v3-continuation_20261022T120055Z-cpu-preflight\",\"model-tuning-lab.source-manifest-sha256\":\"d28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df\",\"org.opencontainers.image.version\":\"22.04\"},\"Devices\":[]}\n"
+        }
+      ],
+      "smi": {
+        "argv": [
+          "/usr/local/sbin/npu-smi",
+          "info"
+        ],
+        "epoch": 1792688851.5850863,
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "+------------------------------------------------------------------------------------------------+\n| npu-smi 25.2.0                   Version: 25.2.0                                               |\n+---------------------------+---------------+----------------------------------------------------+\n| NPU   Name                | Health        | Power(W)    Temp(C)           Hugepages-Usage(page)|\n| Chip                      | Bus-Id        | AICore(%)   Memory-Usage(MB)  HBM-Usage(MB)        |\n+===========================+===============+====================================================+\n| 0     910B4               | OK            | 92.1        37                0    / 0             |\n| 0                         | 0000:C1:00.0  | 0           0    / 0          2876 / 32768         |\n+===========================+===============+====================================================+\n| 1     910B4               | OK            | 83.6        36                0    / 0             |\n| 0                         | 0000:C2:00.0  | 0           0    / 0          2876 / 32768         |\n+===========================+===============+====================================================+\n| 2     910B4               | OK            | 88.5        37                0    / 0             |\n| 0                         | 0000:81:00.0  | 0           0    / 0          2875 / 32768         |\n+===========================+===============+====================================================+\n| 3     910B4               | OK            | 86.8        39                0    / 0             |\n| 0                         | 0000:82:00.0  | 0           0    / 0          2869 / 32768         |\n+===========================+===============+====================================================+\n| 4     910B4               | OK            | 93.6        43                0    / 0             |\n| 0                         | 0000:01:00.0  | 0           0    / 0          2868 / 32768         |\n+===========================+===============+====================================================+\n| 5     910B4               | OK            | 96.1        41                0    / 0             |\n| 0                         | 0000:02:00.0  | 0           0    / 0          2872 / 32768         |\n+===========================+===============+====================================================+\n| 6     910B4               | OK            | 94.7        42                0    / 0             |\n| 0                         | 0000:41:00.0  | 0           0    / 0          2867 / 32768         |\n+===========================+===============+====================================================+\n| 7     910B4               | OK            | 85.7        43                0    / 0             |\n| 0                         | 0000:42:00.0  | 0           0    / 0          2866 / 32768         |\n+===========================+===============+====================================================+\n+---------------------------+---------------+----------------------------------------------------+\n| NPU     Chip              | Process id    | Process name             | Process memory(MB)      |\n+===========================+===============+====================================================+\n| No running processes found in NPU 0                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 1                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 2                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 3                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 4                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 5                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 6                                                            |\n+===========================+===============+====================================================+\n| No running processes found in NPU 7                                                            |\n+===========================+===============+====================================================+\n"
+      },
+      "unit": {
+        "argv": [
+          "/usr/bin/systemctl",
+          "show",
+          "bole-boundary-on-v3-continuation-20261022t120055z-u3.service",
+          "--no-pager",
+          "--property=Id,LoadState,ActiveState,SubState,MainPID,ControlPID,Result,ExecMainStatus,ControlGroup"
+        ],
+        "epoch": 1792688850.492574,
+        "exit_code": 0,
+        "stderr": "",
+        "stdout": "MainPID=0\nControlPID=0\nResult=exit-code\nExecMainStatus=3\nControlGroup=\nId=bole-boundary-on-v3-continuation-20261022t120055z-u3.service\nLoadState=loaded\nActiveState=failed\nSubState=failed\n"
+      }
+    },
+    "not_qualification": true,
+    "observed_epoch": 1792688909.484767,
+    "root_keys": [
+      "BOLE_diagnostic",
+      "actual_host_argv",
+      "candidate_qualification",
+      "cleanup_seconds",
+      "cleanup_spent",
+      "cpu_only",
+      "elapsed",
+      "formal_performance",
+      "host_pid",
+      "model_ready",
+      "performance_gain_measured",
+      "phase_seconds",
+      "primary",
+      "scheduler_committed",
+      "schema",
+      "secondary",
+      "source",
+      "source_after",
+      "source_before",
+      "successful_raw_replay_available",
+      "summary",
+      "task_accuracy",
+      "timing_is_formal"
+    ],
+    "schema": "bole.completed-startup-failure-summary/v1",
+    "source_after_count": 6306,
+    "source_before_after_equal": true,
+    "source_before_count": 6306
+  }
+}

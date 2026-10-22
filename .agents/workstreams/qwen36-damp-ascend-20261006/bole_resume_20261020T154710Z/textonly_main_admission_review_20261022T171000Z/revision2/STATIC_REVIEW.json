@@ -1,0 +1,84 @@
+{
+  "schema": "bole.textonly-admission-static-source-review/v1",
+  "scope": "local-unfrozen-source-only",
+  "compile_only": true,
+  "source_programs_executed": false,
+  "MAIN_executed": false,
+  "remote": false,
+  "NPU": false,
+  "resources_admitted": false,
+  "numerical_qualified": false,
+  "performance_admitted": false,
+  "old_main_functions_whole_AST_unchanged": [
+    "need",
+    "canonical",
+    "parse",
+    "typed_ref",
+    "Readset",
+    "load_exact",
+    "original_labels",
+    "stopped",
+    "command_ok",
+    "inspect_receipt",
+    "exact_created_argv",
+    "current_live_checks",
+    "require_exec_limits",
+    "snapshot_inputs"
+  ],
+  "main_changed_functions": [
+    "historical_owners",
+    "source_inputs",
+    "main"
+  ],
+  "main_added_functions": [
+    "historical_host_result"
+  ],
+  "snapshot_changed_functions": [
+    "main"
+  ],
+  "snapshot_added_functions": [
+    "continuation_identities"
+  ],
+  "snapshot_complete_lossless_mount_and_oversize_functions_unchanged": true,
+  "historical_context_changed_functions": [
+    "build"
+  ],
+  "exact_shared_helpers": [
+    {
+      "name": "complete_inspect_receipt_v1.py",
+      "bytes": 3807,
+      "sha256": "05d212afa6d84af8f0a665c4d1605c756e1e603b52c533e983bc866e13804e5a",
+      "whole_body_identical": true
+    },
+    {
+      "name": "restore_snapshot_mounts_v1.py",
+      "bytes": 6438,
+      "sha256": "8177437cda4df4d85db41392588fff18ce8422598d73bdc163ab950b26a32f9c",
+      "whole_body_identical": true
+    },
+    {
+      "name": "fresh_snapshot_v4.py",
+      "bytes": 19376,
+      "sha256": "8c0b3105354708f3942f798d67a057ef16e11c5b10b538106166dafce61c1968",
+      "whole_body_identical": true
+    }
+  ],
+  "original_six_owner_specifications_unchanged": true,
+  "new_exact_owner_count": 8,
+  "old_units_plus_exact_new_failed_unit": 4,
+  "batch_start_utc": "2026-10-22T17:10:00+00:00",
+  "batch_cutoff_utc": "2026-10-22T23:10:00+00:00",
+  "old_report_cutoff_utc": "2026-10-22T12:38:41+00:00",
+  "limits_unchanged": {
+    "phase_seconds": 3600,
+    "cleanup_seconds": 180,
+    "prepare_seconds": 3780,
+    "predispatch_max_seconds": 180,
+    "snapshot_max_command_bytes": 8388608,
+    "snapshot_max_final_bytes": 16777216,
+    "soft_host_AS_bytes": 536870912,
+    "owner_memory_bytes": 34359738368,
+    "host_reserve_bytes": 8589934592
+  },
+  "no_dispatch_authorization_in_this_report": true
+}

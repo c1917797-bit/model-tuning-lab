@@ -1,0 +1,115 @@
+{
+  "freeze": {
+    "NPU": false,
+    "commands": {
+      "bytes": 4840,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v4-textonly_20261022T171000Z/COMMANDS.json",
+      "sha256": "0791ab34357060da8d8b5523eaff80a102d2c0f139f0e11851d0f0e86594c2da"
+    },
+    "performance_admitted": false,
+    "receipt": {
+      "bytes": 1302545,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v4_textonly_20261022T171000Z/BUILD_RECORD.json",
+      "sha256": "4794dcc499f884f8392b329906117d3d3e2dccd9dfb47fd124e39777553438c9"
+    },
+    "source": {
+      "bytes": 1644617,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v4-textonly_20261022T171000Z/SOURCE_BOUND.json",
+      "sha256": "d25264b5eda1d2a45fb3bab7ce1ca331296a9640a2e42112f802d4db69a7f127"
+    },
+    "source_only": true
+  },
+  "audit": {
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-audit-v5-textonly_20261022T171000Z/RESULT.json",
+      "bytes": 717,
+      "sha256": "f138e60542c6909df9591aa1a8f78abac6354bf4e516234275123f7d11803f60"
+    },
+    "audit": {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-audit-v5-textonly_20261022T171000Z/SOURCE_AUDIT.json",
+      "bytes": 1426287,
+      "sha256": "bff34641356802a741fa24d9fcfc6b5c7a427021e9fbfa15b50dff3860153024"
+    },
+    "error": null,
+    "source_only": true,
+    "NPU": false
+  },
+  "audit_dispatch": {
+    "dispatch": {
+      "path": "/opt/host/vnf/austinov/run-bole-textonly-source-audit-dispatch-v2-20261022T173300Z/DISPATCH.json",
+      "bytes": 2590,
+      "sha256": "6be9053c76c2f121e2c34ca21ef5b227d38cb4da6f68407a142cb383acd460e2"
+    },
+    "source_context": {
+      "path": "/opt/host/vnf/austinov/run-bole-textonly-source-audit-dispatch-v2-20261022T173300Z/SOURCE_CONTEXT.json",
+      "bytes": 19996,
+      "sha256": "491f34ce08399364b46c01014763e76ba818cddc86172a6c4530680e33cf81a8"
+    },
+    "preserved_failure": {
+      "path": "/opt/host/vnf/austinov/run-bole-textonly-source-audit-dispatch-v2-20261022T173300Z/AUDIT_DISPATCH_V1_FAILURE.json",
+      "bytes": 1475,
+      "sha256": "956dcc568e8409ef506be93a49a8a55c89d82df2b7fd76856613342cbc2b1a65"
+    }
+  },
+  "audit_program": {
+    "bytes": 7157,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_source_audit_v5_textonly_20261022T171000Z/audit_boundary_source_v5.py",
+    "sha256": "f156eb5bd3e88fe7e163db661524e37131c568efd202feb8f597ca2b06ce1fb0"
+  },
+  "failed_history_controls": {
+    "receipt": {
+      "path": "/opt/host/vnf/austinov/run-bole-textonly-failed-history-controls-v1-20261022T172800Z/RESULT.json",
+      "bytes": 5981,
+      "sha256": "0f610f7ed78a05c456323db4375f89ed7ed0893f8c37d5721af9cc744e5e9614"
+    },
+    "status": "PASS_JOIN_CONTROLS_ONLY",
+    "cases": [
+      {
+        "name": "actual-cpu-preflight",
+        "status": "PASS_JOIN_ONLY"
+      },
+      {
+        "name": "actual-dense",
+        "status": "PASS_JOIN_ONLY"
+      },
+      {
+        "name": "null-primary-must-not-rewrite-failure",
+        "status": "EXPECTED_REJECTION"
+      },
+      {
+        "name": "model-ready-must-stay-false",
+        "status": "EXPECTED_REJECTION"
+      },
+      {
+        "name": "changed-full-source-after",
+        "status": "EXPECTED_REJECTION"
+      },
+      {
+        "name": "secondary-error",
+        "status": "EXPECTED_REJECTION"
+      },
+      {
+        "name": "dense-null-cleanup-primary",
+        "status": "EXPECTED_REJECTION"
+      },
+      {
+        "name": "CPU-release-Ref2-not-invented-Ref3",
+        "status": "EXPECTED_REJECTION"
+      },
+      {
+        "name": "other-owner-cannot-use-failed-allowance",
+        "status": "EXPECTED_REJECTION"
+      }
+    ]
+  },
+  "source_controls": {
+    "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z/RESULT.json",
+    "bytes": 4834,
+    "sha256": "f323a89f5088fa4df7e4623411398315b10c082b6457e2603192ee1e1564e064"
+  },
+  "control_review": {
+    "path": "/opt/host/vnf/austinov/run-bole-textonly-control-review-v1-20261022T172600Z/CHECK.json",
+    "bytes": 35859,
+    "sha256": "212ff4107f6a974f00b82b461ef33c493a7fee4e17d7b2e69484c9dfeedf3bb5"
+  }
+}

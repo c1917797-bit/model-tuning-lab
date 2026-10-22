@@ -1,0 +1,51 @@
+--- historical_owner_context_v1.py
++++ historical_owner_context_textonly_v1.py
+@@ -3,7 +3,7 @@
+ Every input is read through the caller's exact whole-file readset. Private
+ namespaces use the original full function ASTs and original cap32 provider.
+ The active new S/c/external module is fingerprinted, never rebound or restored.
+-Only the six registered cpu-preflight/dense historical owners are in scope.
++Only the eight registered cpu-preflight/dense historical owners are in scope.
+ """
+ import ast
+ import hashlib
+@@ -31,7 +31,10 @@
+     'observer_race_repair.py': (1959, 'f7d8fa2ea99cedb7373273a625dce39802a45d24fa291371a925d145cd28a609'),
+     'output_scan131r8.py': (6239, 'db7f8d9301ef7225aebdc1cd12c07adaa3edcb125b2c173d03154aa0c47e5daa')}
+ OLD_OWNED = (3579, '4ff2d6f19d87897ded40a860ee37f1225ca428594720d4ba8c8c238256f77bb7')
+-NEW_OWNED = (3579, 'fa39a66478b766260cee0709d20fe69c30303cb1ba65ca0a7dfaf99ab162ee89')
++CONTINUATION_OWNED = (3579, 'fa39a66478b766260cee0709d20fe69c30303cb1ba65ca0a7dfaf99ab162ee89')
++NEW_OWNED = None  # Bind whole actual text-only owned_substrate bytes after source review.
++CONTINUATION_SOURCE = {'bytes': 1638841, 'path': '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/SOURCE_BOUND.json', 'sha256': 'd28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df'}
++CONTINUATION_CIDS = {'0a5ed053d4d08915b8748e0f6facbc6f3fad820ff1f46d1eefe0f4bc6626d955', 'eb21e660585ed4e758476504bc0b409a02b777d875516e2925f00a9e8efaa8cf'}
+ 
+ 
+ def need(value, message):
+@@ -97,7 +100,7 @@
+ 
+ def build(readset, historical, owned, current, active_S):
+     before = active_fingerprint(active_S)
+-    need(owned['arm'] in ('cpu-preflight', 'dense'), 'only original six nonconsumer historical roles')
++    need(owned['arm'] in ('cpu-preflight', 'dense'), 'only original eight nonconsumer historical roles')
+     output, root = Path(historical['output_root']), Path(historical['root'])
+     leaf = Path(owned['mounts']['/adakv-results'][0])
+     need(output.is_absolute() and root.is_absolute() and leaf.parent == output and
+@@ -119,7 +122,17 @@
+         need(old_body == new_body, 'whole original/current helper bodies identical')
+         bodies[name] = old_body
+         refs += [old_ref, new_ref]
+-    for source, expected, key in ((historical, OLD_OWNED, 'old_owned'), (current, NEW_OWNED, 'new_owned')):
++    historical_owned_pin = OLD_OWNED
++    if owned['cid'] in CONTINUATION_CIDS:
++        need(owned['source'] == CONTINUATION_SOURCE and
++             historical['root'] == str(Path(CONTINUATION_SOURCE['path']).parent),
++             'exact two later continuation owners bind their genuine historical substrate')
++        historical_owned_pin = CONTINUATION_OWNED
++    else:
++        need(owned['source'] != CONTINUATION_SOURCE,
++             'later historical substrate is never accepted for another owner')
++    need(NEW_OWNED is not None, 'current whole text-only substrate pin is not frozen')
++    for source, expected, key in ((historical, historical_owned_pin, 'old_owned'), (current, NEW_OWNED, 'new_owned')):
+         reference = source['files']['owned_substrate.py']
+         need(Path(reference['path']) == Path(source['root'])/'owned_substrate.py' and
+              (reference['bytes'], reference['sha256']) == expected, 'exact whole old/new owned substrate')

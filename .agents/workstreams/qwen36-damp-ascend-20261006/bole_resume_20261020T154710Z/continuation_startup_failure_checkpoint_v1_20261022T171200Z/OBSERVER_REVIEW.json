@@ -1,0 +1,264 @@
+{
+  "schema": "bole.startup-observer-local-review/v1",
+  "prepared_utc": "2026-10-22T13:53:32.871112+00:00",
+  "status": "ACTUAL_STARTUP_FAILURE_BOUNDARY_REVIEW_CAUSE_UNRESOLVED",
+  "review_scope": {
+    "local_readonly": true,
+    "remote_operation_by_reviewer": false,
+    "model_or_NPU_execution_by_reviewer": false,
+    "CPU_controls_executed": false,
+    "source_modified": false,
+    "current_host_release_independently_observed": false
+  },
+  "actual_failed_run": {
+    "source_sha256": "d28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df",
+    "cid": "eb21e660585ed4e758476504bc0b409a02b777d875516e2925f00a9e8efaa8cf",
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "real_NPU_startup_observed": true,
+    "diagnostic_request_completion_observed": false,
+    "log_snapshot_complete_bytes": 65484,
+    "log_snapshot_last_error_utc": "2026-10-22T13:38:22Z"
+  },
+  "observations": [
+    {
+      "id": "O1",
+      "fact": "MM encoder memory-profile dummy image of maximum feature size; encoder budget 16384 tokens and one image item.",
+      "evidence": "server_log_original_content lines186; native_0_gpu_model_runner.py:6168-6246"
+    },
+    {
+      "id": "O2",
+      "fact": "TP0 guest PID3259 chip4 and TP1 guest PID3260 chip5 expose asynchronous AI Core failures at qwen3_vl.rot_pos_emb host-to-device copy of1048576 bytes.",
+      "evidence": "server_log_original_content lines188-230,334-376",
+      "failures": [
+        {
+          "guest_rank": 0,
+          "guest_pid": 3259,
+          "reported_chip_id": 4,
+          "reported_error": "L0B read/write conflict in MTE same address",
+          "core_id": 11,
+          "device_error_hex": "0x8000004000",
+          "reported_device_time": "2026-10-22T13:38:22.040121Z"
+        },
+        {
+          "guest_rank": 1,
+          "guest_pid": 3260,
+          "reported_chip_id": 5,
+          "reported_error": "L0A read/write conflict in MTE same address",
+          "core_id": 10,
+          "device_error_hex": "0x4000000800",
+          "reported_device_time": "2026-10-22T13:38:22.984234Z"
+        }
+      ]
+    },
+    {
+      "id": "O3",
+      "fact": "Native vision forward already invokes x.to and patch_embed, then fast_pos_embed_interpolate before the failing copy. The actual faulting kernel is not identified.",
+      "evidence": "native_1_qwen3_vl.py:661-687,727-732,792-809"
+    },
+    {
+      "id": "O4",
+      "fact": "Six local native source bytes match the supplied independent docker-cp double-read receipt. Reviewer did not independently run docker-cp.",
+      "evidence": "native_read_receipt_mirror"
+    },
+    {
+      "id": "O5",
+      "fact": "plog creation warnings name readonly /root/ascend/log/run/plog paths. These limit available evidence; causality for AI Core failure is unproved.",
+      "evidence": "server_log_original_content lines70-75"
+    }
+  ],
+  "observer_installation_and_activation": {
+    "installation_can_precede_MM_profile": true,
+    "actual_G0_INSTALL_receipts_opened_by_reviewer": false,
+    "initial_scope": false,
+    "target": "The actual language Qwen3_5Model; boundary hooks on GDN layer0 norm/out_proj/post_attention_layernorm/MLP; projection instance wrapper on GDN0 out_proj.forward only.",
+    "profile_guard": "Saved prefill_tail.core returns original immediately when ctx.in_profile_run is True, and without selected genuine prefill metadata. Delta does not alter that guard. Current Ascend dummy context sets in_profile_run=is_profile.",
+    "active_guard": "Genuine C1 native request row0, exact131 tokens, ordered48 GDN layers, generation1/2; only native_core_enter at layer0 sets scope True.",
+    "projection_trace_guard": "sys.settrace and actual D2H hashes occur only inside _invoke after _scope; scope False calls original bound projection directly.",
+    "installation_work": "Python source/identity/accounting checks, instance wrapper and hook registration; no new observer tensor transfer or math invocation seen in constructors.",
+    "static_conclusion": "No direct new observer call or traced target is identified in visual rot_pos_emb stack; direct MM tensor capture is excluded by reviewed target and scope guards, contingent on actual installed source/objects. Installation and timing effects are not empirically excluded.",
+    "saved_runtime_limit": "Supporting saved worker_bootstrap has old authority clock and saved rendered service_runner/prefill_tail are historical renderer outputs; they are used for unchanged function-body/guard reasoning, not claimed as fresh current runtime Ref3s. Current BP/PP and renderer bytes are separately pinned; actual runtime join still needs source-bound install evidence."
+  },
+  "classification": {
+    "phase": "model startup; determine_available_memory / multimodal encoder profile",
+    "class": "runtime/environment-or-adaptation failure; specific cause unresolved",
+    "not_established": [
+      "BOLE numerical mismatch",
+      "projection quantization error",
+      "physical hardware defect",
+      "rotary kernel defect",
+      "observer-caused error",
+      "observer empirically exonerated",
+      "successful current cleanup or free devices"
+    ]
+  },
+  "language_model_only_new_branch": {
+    "suitability": "Conditionally suitable for the explicitly text-only tasks; new declared common dense/candidate configuration, not a proven fix.",
+    "native_flag": "--language-model-only",
+    "source_proved": "Native CLI forwards language_model_only; MultiModalConfig.get_limit_per_prompt returns0 for every modality. Native profile calls encoder only under supports_mm_inputs / positive encoder budget / nonempty modality item budget.",
+    "zero_limits_not_runtime_proof": true,
+    "skip_mm_profiling_distinction": "--skip-mm-profiling skips measurement, retains modality support, and shifts MM activation/cache peak estimation responsibility; not the same declared text-only configuration.",
+    "required_unread_closure": [
+      "/vllm-workspace/vllm/vllm/multimodal/encoder_budget.py",
+      "/vllm-workspace/vllm/vllm/multimodal/registry.py",
+      "/vllm-workspace/vllm/vllm/model_executor/models/qwen3_5.py",
+      "/vllm-workspace/vllm/vllm/model_executor/models/interfaces.py",
+      "Follow only if delegated: models/utils.py for disabled tower/weight loader."
+    ],
+    "before_acceptance": "Fresh actual configuration and effective MM limits/budget, resolved model/tower/loading route, completed native startup, then unchanged real numeric/multistep/lifecycle gates and exact same config paired screening. All earlier FAIL evidence stays authoritative for its old config.",
+    "underlying_MM_kernel_fixed": false,
+    "new_branch_implemented_or_admitted": false
+  },
+  "minimum_next_readonly_evidence": [
+    "Terminal controller RESULT/primary+secondary and original cleanup/owned/inspect receipts; new fresh device/process/FD/container snapshot after bounded owner terminal, no old-free assumption.",
+    "Four source-bound BOUNDARY-Rn/G0-INSTALL.json or explicit absence, and immutable inventory of any G1/G2/projection files. Installation does not imply requests; lack of stdout observer frames does not imply no installation.",
+    "If exact current installation context still needed: current pinned worker_bootstrap.py, service_runner.py, prefill_tail.py, worker_entry.py refs/bodies and worker identity journal; do not substitute historical clock file.",
+    "Existing CANN/device error records for chip4/5 with PID/timestamp/task/stream/operator/kernel/address details; record unavailable readonly-plog evidence explicitly. No blocking-env rerun is proposed.",
+    "For proposed text-only branch, read only the native budget/registry/tower implementation closure listed above, then require fresh execution evidence before claiming it actually skips encoder."
+  ],
+  "qualification": {
+    "numeric_gate_pass": false,
+    "multistep_state_gate_pass": false,
+    "lifecycle_gate_pass": false,
+    "paired_gate_pass": false,
+    "performance_qualified": false,
+    "accuracy_qualified": false,
+    "historical_pair_FAIL_resolved": false,
+    "admission_approval": false
+  },
+  "input_refs": {
+    "server_log_mirror": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_startup_failure_v1/server_stdout_read.json",
+      "bytes": 66517,
+      "sha256": "9645489c8944cd0f48001bf96999a6a21d038baef64f064c9c86cf0a1b7fcbf3"
+    },
+    "native_read_receipt_mirror": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_startup_failure_v1/NATIVE_READ.json",
+      "bytes": 12899,
+      "sha256": "acba631e49a2bc44b7809e408a1ffca092317530e673b831cd093ec1b46c0002"
+    },
+    "qualified_source_refs": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_actual/QUALIFIED_SOURCE_REFS.json",
+      "bytes": 3086,
+      "sha256": "73dd667f0698bf704afc26ca67d633d08939e40f038cf1653be8604810228261"
+    },
+    "projection_probe": {
+      "path": "/workspace/scratch/e65c435145b1/projection_prepare_v3_continuation_draft/projection_probe_v1.py",
+      "bytes": 30248,
+      "sha256": "4c442d86077efcb64e0d7f845d77accabe9b310e844c88a2a9731b2c3b450765"
+    },
+    "boundary_probe": {
+      "path": "/workspace/scratch/e65c435145b1/projection_prepare_v3_continuation_draft/boundary_probe_v1.py",
+      "bytes": 31338,
+      "sha256": "14c69907adffb9ed5661f6ffd6023f85ab58730af69232b9a54a4ff6883e4bdf"
+    },
+    "boundary_integration": {
+      "path": "/workspace/scratch/e65c435145b1/projection_prepare_v3_continuation_draft/boundary_integration.py",
+      "bytes": 9879,
+      "sha256": "6d86ce8b5b4114966cd8d6e1d16ace80ccbc5fc6fb2a55a73ddf15cf3f33501b"
+    },
+    "boundary_delta": {
+      "path": "/workspace/scratch/e65c435145b1/projection_prepare_v3_continuation_draft/boundary_delta.py",
+      "bytes": 9827,
+      "sha256": "56efb9a324ce9f15d468409e95dbed00694a681a780432349c96159e94c793be"
+    },
+    "saved_worker_entry": {
+      "path": "/workspace/scratch/e65c435145b1/old_runtime_review/worker_entry.py",
+      "bytes": 8227,
+      "sha256": "d884899528bb11e2d1eca0f3938c6d1da4ad98f67972d3e4fe6e85bb7bef9a7e"
+    },
+    "saved_worker_bootstrap": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_clock_inputs/worker_bootstrap.py",
+      "bytes": 6634,
+      "sha256": "12df1cbbe2692e602843ca9cba131f7f9050743d1faf4cbfcfc97897b35dbdac"
+    },
+    "saved_rendered_service_runner": {
+      "path": "/workspace/scratch/e65c435145b1/boundary_probe_draft/rendered_v3/service_runner.py",
+      "bytes": 51445,
+      "sha256": "c6ad32911880d888b74ac9bbaad6feded792daff58252fed9f648402890ba61d"
+    },
+    "saved_rendered_prefill_tail": {
+      "path": "/workspace/scratch/e65c435145b1/boundary_probe_draft/rendered_v3/prefill_tail.py",
+      "bytes": 7815,
+      "sha256": "5c942c7e0520431932f292e609c9a4d73e5ab5593501ba41efc0a811fdf6c430"
+    },
+    "server_log_original_content": {
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/dense/server.stdout",
+      "bytes": 65484,
+      "sha256": "7ba30529f202fee7401103e1cc650ac3c7d2ee4b71df7536dc40b38d54743edf",
+      "obtained_from": "server_log_mirror.content",
+      "line_count": 428
+    },
+    "native_0_gpu_model_runner.py": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_startup_failure_v1/native_sources/0_gpu_model_runner.py",
+      "bytes": 334736,
+      "sha256": "6250ca0670c4593aa2f7c4567c9c71d6cb3d8182624a985d4d4e33d5bf054666",
+      "guest_path": "/vllm-workspace/vllm/vllm/v1/worker/gpu_model_runner.py",
+      "host_saved_ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/0_gpu_model_runner.py",
+        "bytes": 334736,
+        "sha256": "6250ca0670c4593aa2f7c4567c9c71d6cb3d8182624a985d4d4e33d5bf054666"
+      },
+      "mirror_rehashed": true
+    },
+    "native_1_qwen3_vl.py": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_startup_failure_v1/native_sources/1_qwen3_vl.py",
+      "bytes": 111366,
+      "sha256": "2935e09be47a893f09176cddb1beb6ed2e73666459de2bfbb08aca50b3e08969",
+      "guest_path": "/vllm-workspace/vllm/vllm/model_executor/models/qwen3_vl.py",
+      "host_saved_ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/1_qwen3_vl.py",
+        "bytes": 111366,
+        "sha256": "2935e09be47a893f09176cddb1beb6ed2e73666459de2bfbb08aca50b3e08969"
+      },
+      "mirror_rehashed": true
+    },
+    "native_2_multimodal.py": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_startup_failure_v1/native_sources/2_multimodal.py",
+      "bytes": 13957,
+      "sha256": "2ca78ef40f8bdae73ef26af648b6384c1ece4108d1fcfda27cd00e60c013ca14",
+      "guest_path": "/vllm-workspace/vllm/vllm/config/multimodal.py",
+      "host_saved_ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/2_multimodal.py",
+        "bytes": 13957,
+        "sha256": "2ca78ef40f8bdae73ef26af648b6384c1ece4108d1fcfda27cd00e60c013ca14"
+      },
+      "mirror_rehashed": true
+    },
+    "native_3_arg_utils.py": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_startup_failure_v1/native_sources/3_arg_utils.py",
+      "bytes": 111675,
+      "sha256": "3ade2488897d08b5c1fd4ddb815eb5743169907d59741a47867185caab7f250d",
+      "guest_path": "/vllm-workspace/vllm/vllm/engine/arg_utils.py",
+      "host_saved_ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/3_arg_utils.py",
+        "bytes": 111675,
+        "sha256": "3ade2488897d08b5c1fd4ddb815eb5743169907d59741a47867185caab7f250d"
+      },
+      "mirror_rehashed": true
+    },
+    "native_4_model_runner_v1.py": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_startup_failure_v1/native_sources/4_model_runner_v1.py",
+      "bytes": 258160,
+      "sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968",
+      "guest_path": "/vllm-workspace/vllm-ascend/vllm_ascend/worker/model_runner_v1.py",
+      "host_saved_ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/4_model_runner_v1.py",
+        "bytes": 258160,
+        "sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968"
+      },
+      "mirror_rehashed": true
+    },
+    "native_5_worker.py": {
+      "path": "/workspace/scratch/e65c435145b1/continuation_startup_failure_v1/native_sources/5_worker.py",
+      "bytes": 48290,
+      "sha256": "c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3",
+      "guest_path": "/vllm-workspace/vllm-ascend/vllm_ascend/worker/worker.py",
+      "host_saved_ref": {
+        "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/5_worker.py",
+        "bytes": 48290,
+        "sha256": "c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3"
+      },
+      "mirror_rehashed": true
+    }
+  }
+}

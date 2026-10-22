@@ -1,0 +1,24 @@
+{
+  "NPU": false,
+  "actual_diagnostic_read": false,
+  "actual_main_executed": false,
+  "checks": [
+    "absent",
+    "explicit_null",
+    "explicit_false",
+    "duplicate_key",
+    "nan",
+    "overflow_float",
+    "absent_fused_stage_preserves_null_and_reason"
+  ],
+  "python39_syntax": true,
+  "remote": false,
+  "schema": "bole.summary-extractor-local-checks/v1",
+  "scope": "Pure presence/parser helpers only; no full diagnostic fixture, no main, no original reader controls, no actual result qualification.",
+  "source": {
+    "bytes": 18938,
+    "path": "/workspace/scratch/e65c435145b1/projection_summary_extract_v1_draft/extract_projection_summary_v1.py",
+    "sha256": "2a422bcdf74535bf7def49ebcf14780183585cfde732f5a23feae7ecbb33d4f9"
+  },
+  "source_unchanged": true
+}

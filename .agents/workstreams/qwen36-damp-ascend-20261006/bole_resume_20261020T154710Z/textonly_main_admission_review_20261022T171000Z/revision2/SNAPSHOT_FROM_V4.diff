@@ -1,0 +1,162 @@
+--- final_snapshot_v4.py
++++ final_snapshot_textonly_v1.py
+@@ -18,6 +18,7 @@
+ import time
+ 
+ sys.dont_write_bytecode = True
++REVIEWED_FROZEN = False
+ WS = Path('/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z')
+ HELPER = dict(path=str(WS/'boundary_admission_v4_20261022/fresh_snapshot_v4.py'),
+     bytes=19376, sha256='8c0b3105354708f3942f798d67a057ef16e11c5b10b538106166dafce61c1968')
+@@ -25,7 +26,19 @@
+ DIAGNOSTIC = dict(path='/opt/host/vnf/austinov/run-bole-boundary-reader-v2-20261022T080000Z/BOUNDARY_DIAGNOSTIC.json',
+     bytes=5011374, sha256='c2260812c8bda323b4b0b363f770c6becb9a613ee1e1c850b456f6a9a852d9f2')
+ OLD_OUTPUT = Path('/opt/host/vnf/austinov/run-bole-boundary-ON-v1-20261022T080000Z')
+-NEW_OUTPUT = Path('/opt/host/vnf/austinov/run-bole-boundary-ON-v2-20261022T100000Z')
++NEW_OUTPUT = Path('/opt/host/vnf/austinov/run-bole-boundary-ON-v4-textonly_20261022T171000Z')
++NEW_SOURCE = WS/'bound-boundary-ON-v4-textonly_20261022T171000Z'
++CONTINUATION_OUTPUT = Path('/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z')
++CONTINUATION_SOURCE = {'bytes': 1638841, 'path': '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/SOURCE_BOUND.json', 'sha256': 'd28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df'}
++CONTINUATION_CIDS = {'cpu-preflight': '0a5ed053d4d08915b8748e0f6facbc6f3fad820ff1f46d1eefe0f4bc6626d955', 'dense': 'eb21e660585ed4e758476504bc0b409a02b777d875516e2925f00a9e8efaa8cf'}
++CONTINUATION_OWNED_REFS = {'cpu-preflight': {'bytes': 1414912,
++                   'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/cpu-preflight/OWNED.json',
++                   'sha256': 'bd5297f2d8e8bfcea5d02b1fdb4612faf453db55bfdf3c5a1a4c87b7f4008316'},
++ 'dense': {'bytes': 1414866,
++           'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/dense/OWNED.json',
++           'sha256': '45859b745214ec0f19d728d018d438a02dcff61104084726446baedf29e74ba8'}}
++OWNER = 'bole-root-r6-20261017-001'
++HOST_SHA = '20bda52a1c3fbc75db47104cbd4759faf91da1f39032d4730160983f7b9c0c30'
+ IMAGE = 'sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1'
+ BOUNDARY_SOURCE_SHA = '702e3feba7de9e4365b472189c9bf0662fdc35f1e08e0e535c863b62e132dbdc'
+ FIRST_FOUR = {
+@@ -38,8 +51,9 @@
+     'dense': 'a25d55a819562ffbf2135ba1017bb52ae2e3ca9c3ee2998486540bbbaebd4cf0'}
+ UNITS = ('bole-short-on-v2-model-20261021t123841z.service',
+          'bole-short-off-v2-model-20261021t123841z.service',
+-         'bole-boundary-on-v1-model-20261022t080000z.service')
+-CUTOFF = 1792672721
++         'bole-boundary-on-v1-model-20261022t080000z.service',
++         'bole-boundary-on-v3-continuation-20261022t120055z-u3.service')
++START, CUTOFF, OLD_REPORT_CUTOFF = 1792689000, 1792710600, 1792672721
+ CAP = 16 * 2**20
+ 
+ 
+@@ -126,6 +140,46 @@
+         expected.append(baseline)
+         evidence.append(row)
+     return expected, evidence
++
++
++def continuation_identities(H):
++    """Add two independently pinned OWNED identities from the failed v3 run.
++
++    Reading identities here grants no lifecycle/model qualification. MAIN still
++    rereads create, complete inspect, stop/release and original failed RESULT.
++    """
++    need(type(CONTINUATION_OWNED_REFS) is dict and
++         set(CONTINUATION_OWNED_REFS) == set(CONTINUATION_CIDS),
++         'actual complete two-owner OWNED pins must be bound before observation')
++    source_ref, source_raw = read_ref(CONTINUATION_SOURCE['path'], expected=CONTINUATION_SOURCE)
++    source = json.loads(source_raw)
++    need(source['root'] == str(Path(CONTINUATION_SOURCE['path']).parent) and
++         source['output_root'] == str(CONTINUATION_OUTPUT),
++         'exact immutable failed continuation source/output identity')
++    identities, joins, refs = [], [], [source_ref]
++    for arm, cid in CONTINUATION_CIDS.items():
++        H.bounded()
++        expected = CONTINUATION_OWNED_REFS[arm]
++        need(type(expected) is dict and set(expected) == {'path', 'bytes', 'sha256'} and
++             Path(expected['path']) == CONTINUATION_OUTPUT/arm/'OWNED.json',
++             'complete original per-arm OWNED Ref3 at the exact historical output')
++        ref, raw = read_ref(expected['path'], expected=expected)
++        owned = json.loads(raw)
++        need(owned['cid'] == cid and owned['arm'] == arm and owned['image'] == IMAGE and
++             owned['source'] == CONTINUATION_SOURCE and owned['host_sha256'] == HOST_SHA and
++             owned['sources']['safety_host.py'] == HOST_SHA and
++             type(owned['name']) is str and owned['name'] and
++             Path(owned['mounts']['/adakv-results'][0]) == CONTINUATION_OUTPUT/arm,
++             'exact original CID/arm/image/source/controller/name/output join')
++        labels = {'model-tuning-lab.arm': arm,
++            'model-tuning-lab.controller-sha256': HOST_SHA,
++            'model-tuning-lab.owner': OWNER, 'model-tuning-lab.run': owned['name'],
++            'model-tuning-lab.source-manifest-sha256': CONTINUATION_SOURCE['sha256']}
++        identities.append(dict(id=cid, image=IMAGE, name='/' + owned['name'], labels=labels))
++        joins.append(dict(arm=arm, id=cid, source=source_ref, owned=ref,
++            identity_from_original_OWNED=True, lifecycle_qualified=False, numerical_qualified=False))
++        refs.append(ref)
++    return identities, joins, refs
+ 
+ 
+ def ids_from_inventory(H, result):
+@@ -332,6 +386,8 @@
+     signal.signal(signal.SIGALRM, alarm)
+     signal.alarm(180)
+     try:
++        need(REVIEWED_FROZEN is True and CONTINUATION_OWNED_REFS is not None,
++             'draft is not frozen/reviewed; no active observation permitted')
+         os.sched_setaffinity(0, {166})
+         need(os.sched_getaffinity(0) == {166}, 'host CPU166 inspection affinity')
+         soft, hard = resource.getrlimit(resource.RLIMIT_AS)
+@@ -344,13 +400,14 @@
+         spec.loader.exec_module(H)
+         H.START = started
+         H.ERRORS = errors
+-        need(H.CUTOFF == CUTOFF and H.MAX_INSPECTION_SECONDS == 180 and
++        need(H.CUTOFF == OLD_REPORT_CUTOFF and H.MAX_INSPECTION_SECONDS == 180 and
+              H.MAX_FINAL_BYTES == CAP and H.DOCKER == '/usr/bin/docker' and
+              H.SMI == '/usr/local/sbin/npu-smi', 'unchanged reviewed helper constants')
+         rereads.append(helper_ref)
+         result['observed_start_utc'] = H.utc()
+         epoch = time.time()
+-        result['clock'] = dict(epoch=epoch, cutoff_epoch=CUTOFF,
++        result['clock'] = dict(epoch=epoch, start_epoch=START, cutoff_epoch=CUTOFF,
++            historical_report_cutoff_epoch=OLD_REPORT_CUTOFF, old_window_extended=False,
+             seconds_until_cutoff=CUTOFF-epoch, original_prepare3780_fits=epoch+3780<CUTOFF,
+             original_source_whole3600_fits=epoch+3600<CUTOFF,
+             time_observation_is_not_authority_extension=True)
+@@ -363,17 +420,20 @@
+                  type(r.get('labels')) is dict for r in old),
+              'exact first four configured historical owners')
+         lock = Path(config.get('main_lock', config.get('MAIN_lock', '')))
+-        need(lock == WS/'MAIN_ADMISSION.lock' and config.get('fixed_cutoff') == CUTOFF,
++        need(lock == WS/'MAIN_ADMISSION.lock' and config.get('fixed_cutoff') == OLD_REPORT_CUTOFF,
+              'one original MAIN lock and unchanged hard deadline')
+         diagnostic_ref, diagnostic_body = read_ref(DIAGNOSTIC['path'], expected=DIAGNOSTIC)
+         rereads.append(diagnostic_ref)
+         latest, joins = latest_identities(H, json.loads(diagnostic_body))
+-        old = list(old) + latest
+-        need(len(old) == 6 and len({r['id'] for r in old}) == 6,
+-             'all six distinct exact historical CIDs')
++        continuation, continuation_joins, continuation_refs = continuation_identities(H)
++        rereads.extend(continuation_refs)
++        old = list(old) + latest + continuation
++        need(len(old) == 8 and len({r['id'] for r in old}) == 8,
++             'all eight distinct exact historical CIDs')
+         result['historical_identity_inputs'] = dict(helper=helper_ref, config=config_ref,
+             first_four_from_config=True, first_four_OWNED_not_rederived_here=True,
+-            independent_diagnostic=diagnostic_ref, latest_two_saved_inspect_joins=joins)
++            independent_diagnostic=diagnostic_ref, latest_two_saved_inspect_joins=joins,
++            failed_continuation_two_OWNED_joins=continuation_joins)
+         for row in joins:
+             rereads.extend(row['inspected_refs'])
+         result['self_process'] = H.proc(os.getpid())
+@@ -387,7 +447,9 @@
+             'Declarations and visibility variables are not proof of actual allocation.')
+         paths = [Path('/cache/efim/Qwen3.6-27B'), WS, OLD_OUTPUT,
+                  WS/'bound-boundary-ON-v1-20261022T080000Z',
+-                 WS/'bound-boundary-ON-v2-20261022T100000Z', NEW_OUTPUT, Path(str(NEW_OUTPUT)+'-CPU')]
++                 WS/'bound-boundary-ON-v2-20261022T100000Z', CONTINUATION_OUTPUT,
++                 Path(CONTINUATION_SOURCE['path']).parent, NEW_SOURCE,
++                 NEW_OUTPUT, Path(str(NEW_OUTPUT)+'-CPU')]
+         result['paths_and_disks'] = [H.path_info(path) for path in paths]
+         result['running_inventory_before'] = H.run([H.DOCKER, 'ps', '-q', '--no-trunc'])
+         running = ids_from_inventory(H, result['running_inventory_before'])
+@@ -434,7 +496,7 @@
+             read_ref(reference['path'], expected=reference)
+         result['evidence_inputs_unchanged'] = True
+         result['complete_mount_tables'] = share_complete_mount_members(H, result)
+-        result['aggregate_peak_rss'] = H.rss(['final_snapshot_v4.py'])
++        result['aggregate_peak_rss'] = H.rss(['final_snapshot_textonly_v1.py'])
+     except BaseException as exc:
+         errors.append(type(exc).__name__ + ': ' + str(exc))
+     finally:

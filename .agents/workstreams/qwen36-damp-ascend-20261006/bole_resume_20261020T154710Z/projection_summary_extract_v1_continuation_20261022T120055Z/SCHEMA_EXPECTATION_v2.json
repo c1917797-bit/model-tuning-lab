@@ -1,0 +1,199 @@
+{
+  "actual_diagnostic_path": "/opt/host/vnf/austinov/run-bole-projection-reader-v2-continuation_20261022T120055Z/PROJECTION_DIAGNOSTIC.json",
+  "actual_host_result_path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/RESULT.json",
+  "actual_result_available_in_this_preparation": false,
+  "execution": {
+    "address_space_cap_bytes": 536870912,
+    "argv_template": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "<reviewed-extractor-absolute-path>",
+      "--diagnostic-ref",
+      "<exact actual Ref3 JSON>",
+      "--output",
+      "<new absolute summary file>"
+    ],
+    "core_bytes": 0,
+    "cpu_seconds": 30,
+    "no_NPU": true,
+    "no_reader_import_or_execution": true,
+    "no_remote_actions_by_preparer": true,
+    "output_exclusive": true,
+    "parent_directory_must_exist": true,
+    "runtime_imports": [
+      "argparse",
+      "hashlib",
+      "json",
+      "math",
+      "os",
+      "pathlib",
+      "resource",
+      "stat",
+      "time"
+    ],
+    "wall_seconds": 60
+  },
+  "fixed_audit_ref": {
+    "bytes": 1424700,
+    "path": "/opt/host/vnf/austinov/run-bole-boundary-source-audit-v4-continuation_20261022T120055Z/SOURCE_AUDIT.json",
+    "sha256": "08c783e7989397f25a6db83fa9d1f1d86807e9154a8691058f6ee5d510a62cc6"
+  },
+  "fixed_reader_ref": {
+    "bytes": 99832,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_result_reader_v2_continuation_20261022T120055Z/read_projection_result_v2.py",
+    "sha256": "19bfdd2005ea0881fcd61415bc51d10af1d7e1d244425642224df75255a8a38e"
+  },
+  "fixed_source_ref": {
+    "bytes": 1638841,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/SOURCE_BOUND.json",
+    "sha256": "d28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df"
+  },
+  "input_cap_bytes": 33554432,
+  "input_integrity_scope": "Diagnostic and extractor source full SHA/stable identity before and after extraction. Nested original readset is NOT reopened.",
+  "input_joins": {
+    "boundary_files_all_ranks": 600,
+    "boundary_files_per_rank": 150,
+    "cross_rank_order": [
+      [
+        1,
+        "projection_input"
+      ],
+      [
+        1,
+        "quant_return"
+      ],
+      [
+        1,
+        "pre_reduce"
+      ],
+      [
+        1,
+        "post_reduce"
+      ],
+      [
+        1,
+        "projection_return"
+      ],
+      [
+        2,
+        "projection_input"
+      ],
+      [
+        2,
+        "quant_return"
+      ],
+      [
+        2,
+        "pre_reduce"
+      ],
+      [
+        2,
+        "post_reduce"
+      ],
+      [
+        2,
+        "projection_return"
+      ]
+    ],
+    "generations": [
+      1,
+      2
+    ],
+    "native_input_names": [
+      "mixed_qkv",
+      "b",
+      "a"
+    ],
+    "projection_internal": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "projection_runtime_sources_count": 5,
+    "rank_complete_ref_preserved": true,
+    "ranks": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "retained_native_stages": [
+      "layer0_core_output",
+      "layer0_gated_norm",
+      "layer0_out_projection"
+    ],
+    "stage_order": [
+      "projection_input",
+      "quant_return",
+      "pre_reduce",
+      "post_reduce",
+      "projection_return"
+    ],
+    "state_endpoint_transitions_per_rank": 12
+  },
+  "input_ref3_keys": [
+    "path",
+    "bytes",
+    "sha256"
+  ],
+  "input_schema": "bole.completed-projection-within-arm-diagnostic/v1",
+  "output_cap_bytes": 262144,
+  "output_schema": "bole.saved-projection-diagnostic-summary/v1",
+  "preparation_only": true,
+  "presence_contract": {
+    "absent_is_not_false": true,
+    "explicit_false_is_present": true,
+    "explicit_null_is_present": true,
+    "explicitly_unavailable_stage_reasons": [
+      "fused_no_python_local_result",
+      "no_reduce_callsite_executed"
+    ],
+    "missing_interval_contains_unobserved_work_remains_null": true,
+    "representation": {
+      "present": "bool; key membership in source object",
+      "value": "exact source value or null if absent"
+    }
+  },
+  "required_false_flags": [
+    "source_only",
+    "model_ready",
+    "paired_gate_pass",
+    "numerical_admitted",
+    "independent_algorithm_numerical_qualification",
+    "performance_admitted",
+    "formal_performance",
+    "task_accuracy",
+    "NPU_executed_by_reader",
+    "cause_determined",
+    "original_pair_gate_replaced",
+    "original_pair_gate_rerun"
+  ],
+  "required_true_flags": [
+    "diagnostic_only",
+    "source_validation_reopened",
+    "original_host_and_single_arm_gates_revalidated",
+    "boundary_record_integrity_validated",
+    "projection_internal_integrity_validated",
+    "original_inputs_unchanged",
+    "complete_whole_sha_readset_unchanged",
+    "file_identity_unchanged"
+  ],
+  "retained_semantics": {
+    "cross_rank": "Exact original per-generation/per-stage observations; different TP ranks may contain different shards; no equality requirement.",
+    "dispatch": "Exact per-generation active metadata, source roles, calls, exceptions and supported reduction callsites. The original five runtime/host-snapshot mappings are retained in order for source_index interpretation.",
+    "first_differences": "Copied from independently validated diagnostic; no new cause or threshold inference.",
+    "hash_scope": "Full actual logical tensor producer SHA witnesses; no new projection raw tensors; geometry retained for shape/span differences.",
+    "historical_pair": "Previously saved FAIL with exact historical execution Ref; not reopened or re-evaluated by extractor.",
+    "state_transitions": "All 12 endpoint transitions. changed_hashes uses count, first row, and SHA of entire canonical list; full list remains in diagnostic.",
+    "weights": "Metadata only. weight_bytes_hashed=false; backend_format_observed=false; equality not proved."
+  },
+  "schema": "bole.saved-projection-summary-schema-expectation/v1",
+  "source": {
+    "bytes": 18938,
+    "path": "/workspace/scratch/e65c435145b1/projection_summary_extract_v1_draft/extract_projection_summary_v1.py",
+    "sha256": "2a422bcdf74535bf7def49ebcf14780183585cfde732f5a23feae7ecbb33d4f9"
+  },
+  "version": 2
+}

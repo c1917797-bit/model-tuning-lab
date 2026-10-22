@@ -1,0 +1,85 @@
+{
+  "MAIN_executed": false,
+  "NPU": false,
+  "actual_generated_owned_substrate_ref": {
+    "bytes": 3579,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v4-textonly_20261022T171000Z/owned_substrate.py",
+    "sha256": "27a239407e8e1fcab40c9698cab12904772abacfdbca3a0e16e078c01f197df3"
+  },
+  "current_resource_admission": false,
+  "exact_inverse": {
+    "final_snapshot_textonly_v1.py": {
+      "changes": [
+        [
+          "REVIEWED_FROZEN = False",
+          "REVIEWED_FROZEN = True"
+        ]
+      ],
+      "exact_inverse": true,
+      "original_bytes": 30124,
+      "original_sha256": "a3ea3f14729278fb175c03362362d27e1b522a984eb2bc329e1e6e998b1f890f"
+    },
+    "historical_owner_context_textonly_v1.py": {
+      "changes": [
+        [
+          "NEW_OWNED = None  # Bind whole actual text-only owned_substrate bytes after source review.",
+          "NEW_OWNED = (3579, '27a239407e8e1fcab40c9698cab12904772abacfdbca3a0e16e078c01f197df3')  # Actual frozen text-only source, independently audited."
+        ]
+      ],
+      "exact_inverse": true,
+      "original_bytes": 14255,
+      "original_sha256": "8a72b0c59a57b43ece81e99ad0941fa482fddcaaa89457e27d0df78b9b2caff6"
+    },
+    "main_admission_textonly_v1.py": {
+      "changes": [
+        [
+          "REVIEWED_FROZEN = False",
+          "REVIEWED_FROZEN = True"
+        ],
+        [
+          "SNAPSHOT_PROGRAM_PIN = None  # MAIN binds actual reviewed new producer bytes.",
+          "SNAPSHOT_PROGRAM_PIN = (30123, 'd5543dd25349a0905b83a006e5f31e9de1c1d9dda11aee8716787996822caac4')"
+        ],
+        [
+          "HISTORICAL_CONTEXT_PIN = None  # MAIN binds actual reviewed new historical context bytes.",
+          "HISTORICAL_CONTEXT_PIN = {'path': '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/textonly_main_admission_v1_20261022T171000Z/historical_owner_context_textonly_v1.py', 'bytes': 14309, 'sha256': 'b85aeef34973b1052b8e25b6a20508946ae143f3c8c41270927952cd42b620ff'}"
+        ]
+      ],
+      "exact_inverse": true,
+      "original_bytes": 46674,
+      "original_sha256": "b06bf0459f4653761b81fde8d5eb40424326381ee13db3f479e7805fb2a75369"
+    }
+  },
+  "files": {
+    "CONFIG.template.textonly_v1.json": {
+      "bytes": 10518,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/textonly_main_admission_v1_20261022T171000Z/CONFIG.template.textonly_v1.json",
+      "sha256": "b4334c3fd7c6ab4374cf12a501b36d701434bb0e10a6f8c9cad5e2b9e0a8fa2f"
+    },
+    "final_snapshot_textonly_v1.py": {
+      "bytes": 30123,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/textonly_main_admission_v1_20261022T171000Z/final_snapshot_textonly_v1.py",
+      "sha256": "d5543dd25349a0905b83a006e5f31e9de1c1d9dda11aee8716787996822caac4"
+    },
+    "historical_owner_context_textonly_v1.py": {
+      "bytes": 14309,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/textonly_main_admission_v1_20261022T171000Z/historical_owner_context_textonly_v1.py",
+      "sha256": "b85aeef34973b1052b8e25b6a20508946ae143f3c8c41270927952cd42b620ff"
+    },
+    "main_admission_textonly_v1.py": {
+      "bytes": 46936,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/textonly_main_admission_v1_20261022T171000Z/main_admission_textonly_v1.py",
+      "sha256": "96bc1c9a679e46fa624b0908e0c174d082c59da89e70dce0b1e159ddf6f4c43d"
+    }
+  },
+  "numerical_qualified": false,
+  "owner_created": false,
+  "performance_admitted": false,
+  "schema": "bole.textonly-main-final-source-freeze/v1",
+  "source_context_ref": {
+    "bytes": 19996,
+    "path": "/opt/host/vnf/austinov/run-bole-textonly-source-audit-dispatch-v2-20261022T173300Z/SOURCE_CONTEXT.json",
+    "sha256": "491f34ce08399364b46c01014763e76ba818cddc86172a6c4530680e33cf81a8"
+  },
+  "source_only": true
+}

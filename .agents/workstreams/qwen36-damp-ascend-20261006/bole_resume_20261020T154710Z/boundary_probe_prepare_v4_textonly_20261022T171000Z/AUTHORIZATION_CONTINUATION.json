@@ -1,0 +1,44 @@
+{
+  "authority_kind": "explicit_user_continuation",
+  "batch_id": "MAIN-BOLE-BOUNDARY-TEXTONLY-20261022T171000Z-ON-V4",
+  "cleanup_seconds": 180,
+  "document": {
+    "bytes": 5005,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v4_textonly_20261022T171000Z/AUTHORIZATION_CONTINUATION.md",
+    "sha256": "f0bc5bb6b550bda6d31081ad6e75a0cd8e4a5382eec94515de32549127b29ac4"
+  },
+  "formal_performance_admitted": false,
+  "internal_batch_cutoff_epoch": 1792710600,
+  "internal_batch_cutoff_utc": "2026-10-22T23:10:00+00:00",
+  "internal_batch_limit_seconds": 21600,
+  "internal_batch_start_epoch": 1792689000,
+  "internal_limit_is_not_user_promised_result_window": true,
+  "model_path": "/cache/efim/Qwen3.6-27B",
+  "numerical_thresholds_unchanged": true,
+  "old_hard_report_deadline_utc": "2026-10-22T12:38:41+00:00",
+  "old_window_extended": false,
+  "output_root": "/opt/host/vnf/austinov/run-bole-boundary-ON-v4-textonly_20261022T171000Z",
+  "phase_seconds": 3600,
+  "physical_npus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_physical_npus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "record_time_is_chat_checkpoint_not_exact_message_timestamp": true,
+  "recorded_utc": "2026-10-22T17:19:28.687926+00:00",
+  "resource_owner_created": false,
+  "schema": "bole.explicit-continuation-authorization/v1",
+  "scope": "ON only; two bounded eight-token text-only requests; native-boundary and projection-callsite diagnosis; no performance admission",
+  "source_frozen": false,
+  "source_root": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v4-textonly_20261022T171000Z",
+  "tensor_parallel_size": 4,
+  "user_statement": "可以继续穿刺一直到成功",
+  "whole_prepare_admission_seconds": 3780
+}

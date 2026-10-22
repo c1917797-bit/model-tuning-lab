@@ -1,0 +1,442 @@
+--- v3/boundary_integration.py
++++ textonly-v4/boundary_integration.py
+@@ -17,23 +17,22 @@
+     sha256='c45e114ab03fd35a47c85c8dd6f70bb71bbc406fa08be151222d082d8d57d824')
+ OLD_SOFTWARE_COORDINATOR_REF = dict(path=PARENT_ROOT + '/performance_software_stages.py',
+     bytes=5440, sha256='b862faa3ac7763c34af4055e48fef2c3d1140eea023e10de71d73770d13f05cd')
+-CHILD_ROOT = WORKSTREAM + '/bound-boundary-ON-v3-continuation_20261022T120055Z'
+-CHILD_OUTPUT = '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z'
+-CHILD_BATCH = 'MAIN-BOLE-BOUNDARY-CONTINUATION-20261022T120055Z-ON-V3'
+-CHILD_AUTHORITY_SCOPE = 'ON only; two bounded eight-token requests; native-boundary and projection-callsite diagnosis; no performance admission'
+-PREPARATION_ROOT = WORKSTREAM + '/boundary_probe_prepare_v3_continuation_20261022T120055Z'
+-AUTHORIZATION_REF = dict(path=PREPARATION_ROOT + '/AUTHORIZATION_CONTINUATION.json',
+-    bytes=1886, sha256='e0808a184326bfcf70e5ce158c7a00dac03b5f7aeab2aabc99b7c99618e40fac')
+-AUTHORIZATION_DOCUMENT_REF = dict(path=PREPARATION_ROOT + '/AUTHORIZATION_CONTINUATION.md',
+-    bytes=3956, sha256='3bd808a5012bbe447b2a48bbc611116771f9f65a0b40f8c99e02c702000de0ba')
+-START_EPOCH = 1792670455
+-CUTOFF_EPOCH = 1792692055
+-CUTOFF_ISO = '2026-10-22T18:00:55+00:00'
++CHILD_ROOT = WORKSTREAM + '/bound-boundary-ON-v4-textonly_20261022T171000Z'
++CHILD_OUTPUT = '/opt/host/vnf/austinov/run-bole-boundary-ON-v4-textonly_20261022T171000Z'
++CHILD_BATCH = 'MAIN-BOLE-BOUNDARY-TEXTONLY-20261022T171000Z-ON-V4'
++CHILD_AUTHORITY_SCOPE = 'ON only; two bounded eight-token text-only requests; native-boundary and projection-callsite diagnosis; no performance admission'
++PREPARATION_ROOT = WORKSTREAM + '/boundary_probe_prepare_v4_textonly_20261022T171000Z'
++# Actual locally frozen authorization bytes; remote deployment is still pending.
++AUTHORIZATION_REF = {'path': '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v4_textonly_20261022T171000Z/AUTHORIZATION_CONTINUATION.json', 'bytes': 1887, 'sha256': '4cf0473b53bc6107a76a84610d9a513814f8008896e93b82872cf3408f61fb1e'}
++AUTHORIZATION_DOCUMENT_REF = {'path': '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v4_textonly_20261022T171000Z/AUTHORIZATION_CONTINUATION.md', 'bytes': 5005, 'sha256': 'f0bc5bb6b550bda6d31081ad6e75a0cd8e4a5382eec94515de32549127b29ac4'}
++START_EPOCH = 1792689000
++CUTOFF_EPOCH = 1792710600
++CUTOFF_ISO = '2026-10-22T23:10:00+00:00'
+ OLD_REPORT_CUTOFF = 1792672721
+ PHASE_SECONDS = 3600
+ CLEANUP_SECONDS = 180
+ ORIGINAL_VALIDATOR_AUTHORITY_GATE = " C.need(authority['schema']=='bole.short-state-authority/v1' and authority['start_epoch']==1792586321 and authority['cutoff_epoch']==1792672721 and authority['phase_seconds']==3600 and authority['cleanup_seconds']==180,'explicit new user24h authority; fixed phase cleanup')\n"
+-CONTINUATION_VALIDATOR_AUTHORITY_GATE = " C.need(authority['schema']=='bole.short-state-authority/v1' and authority['start_epoch']==1792670455 and authority['cutoff_epoch']==1792692055 and authority['phase_seconds']==3600 and authority['cleanup_seconds']==180,'explicit user continuation; finite new batch with fixed phase cleanup')\n"
++CONTINUATION_VALIDATOR_AUTHORITY_GATE = " C.need(authority['schema']=='bole.short-state-authority/v1' and authority['start_epoch']==1792689000 and authority['cutoff_epoch']==1792710600 and authority['phase_seconds']==3600 and authority['cleanup_seconds']==180,'explicit user continuation; finite new batch with fixed phase cleanup')\n"
+ OLD_RUNTIME = ('service_runner.py', 'live_owner.py', 'bole_performance_profile.py',
+     'performance_service_client.py', 'host_service.py', 'performance_host.py', 'command_contract.py')
+ EXTRA_RUNTIME = ('prefill_tail.py', 'model_process_calibration.py', 'g3_budget.py')
+@@ -42,7 +41,13 @@
+                     'boundary_integration.py', 'boundary_validation.py', 'projection_probe_v1.py')
+ FLAG = 'BOLE_NATIVE_BOUNDARY_PROBE_ENABLE'
+ MANIFEST_FIELDS = ('boundary_parent_source', 'boundary_probe_profile',
+-                   'boundary_reviewed_helpers', 'boundary_control_refs', 'projection_probe_profile')
++                   'boundary_reviewed_helpers', 'boundary_control_refs', 'projection_probe_profile',
++                   'text_only_config', 'text_only_preparation_evidence')
++TEXT_ONLY_CONFIG = dict(language_model_only=True, skip_mm_profiling=False,
++                        enable_mm_embeds=False, limit_mm_per_prompt={})
++TEXT_ONLY_PREPARATION_EVIDENCE = {'failed_startup_result': {'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/RESULT.json', 'bytes': 2375646, 'sha256': '4ad705377892c1136dbc945c8353904739e6189ed4b52dea2df3cc12731ef1da'}, 'actual_cpu_parser_caller': {'bytes': 5282, 'path': '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/preflight114.py', 'sha256': '0207b0a4f628be6e5c460cc54868d0daf1f12fdf8dbe61f3dd02b9d85901fcf6'}, 'native_source_receipts': [{'path': '/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/READ.json', 'bytes': 12036, 'sha256': '12496fb8365271f6cf04255cc27bac305d4bcf297f8d8e842798169b2ab605bb'}, {'path': '/opt/host/vnf/austinov/run-bole-textonly-source-and-failure-read-v1-20261022T171200Z/READ.json', 'bytes': 80593, 'sha256': '3a57d8026278b31c11083773469f3fe754ce033d6e5b380528d0e1a180be91c3'}], 'native_source_snapshots': {'/vllm-workspace/vllm/vllm/v1/worker/gpu_model_runner.py': {'path': '/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/0_gpu_model_runner.py', 'bytes': 334736, 'sha256': '6250ca0670c4593aa2f7c4567c9c71d6cb3d8182624a985d4d4e33d5bf054666'}, '/vllm-workspace/vllm/vllm/model_executor/models/qwen3_vl.py': {'path': '/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/1_qwen3_vl.py', 'bytes': 111366, 'sha256': '2935e09be47a893f09176cddb1beb6ed2e73666459de2bfbb08aca50b3e08969'}, '/vllm-workspace/vllm/vllm/config/multimodal.py': {'path': '/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/2_multimodal.py', 'bytes': 13957, 'sha256': '2ca78ef40f8bdae73ef26af648b6384c1ece4108d1fcfda27cd00e60c013ca14'}, '/vllm-workspace/vllm/vllm/engine/arg_utils.py': {'path': '/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/3_arg_utils.py', 'bytes': 111675, 'sha256': '3ade2488897d08b5c1fd4ddb815eb5743169907d59741a47867185caab7f250d'}, '/vllm-workspace/vllm-ascend/vllm_ascend/worker/model_runner_v1.py': {'path': '/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/4_model_runner_v1.py', 'bytes': 258160, 'sha256': '94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968'}, '/vllm-workspace/vllm-ascend/vllm_ascend/worker/worker.py': {'path': '/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/5_worker.py', 'bytes': 48290, 'sha256': 'c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3'}, '/vllm-workspace/vllm/vllm/multimodal/encoder_budget.py': {'bytes': 7111, 'path': '/opt/host/vnf/austinov/run-bole-textonly-source-and-failure-read-v1-20261022T171200Z/0_encoder_budget.py', 'sha256': '76aaf25bb8755f7232c5f89cd15173a2bb08d8cdaaaa10797199a49448a5b49b'}, '/vllm-workspace/vllm/vllm/multimodal/registry.py': {'bytes': 12967, 'path': '/opt/host/vnf/austinov/run-bole-textonly-source-and-failure-read-v1-20261022T171200Z/1_registry.py', 'sha256': 'd4627c89d3459ce35a729e0940a0c5be5b54793b40192c1c068416b57a0a82fd'}, '/vllm-workspace/vllm/vllm/model_executor/models/qwen3_5.py': {'bytes': 29662, 'path': '/opt/host/vnf/austinov/run-bole-textonly-source-and-failure-read-v1-20261022T171200Z/2_qwen3_5.py', 'sha256': '04f3de5372973770d71c5c05f2e8a5e221ec52b62cca7a1e302d9201b61b8adc'}, '/vllm-workspace/vllm/vllm/model_executor/models/interfaces.py': {'bytes': 52512, 'path': '/opt/host/vnf/austinov/run-bole-textonly-source-and-failure-read-v1-20261022T171200Z/3_interfaces.py', 'sha256': '62ae344c350b8445f364bded9cf5a0a3887caae062873d266487aedfd55e3dd7'}, '/vllm-workspace/vllm/vllm/model_executor/models/utils.py': {'bytes': 30902, 'path': '/opt/host/vnf/austinov/run-bole-textonly-source-and-failure-read-v1-20261022T171200Z/4_utils.py', 'sha256': '5c4b438be5dee3478b1a1445cb9ec2cfa6362992bd7290bde7113b43cb57e880'}, '/vllm-workspace/vllm/vllm/config/model.py': {'bytes': 91921, 'path': '/opt/host/vnf/austinov/run-bole-textonly-source-and-failure-read-v1-20261022T171200Z/5_model.py', 'sha256': 'cf5aeb9e16d6cac82426cf7e8d140741b35c503ae8b9e1fc9ba3dde53c585a62'}}}
++TEXT_ONLY_CONTROL_CONTRACT_REF = dict(path=PARENT_ROOT+'/contract090.py', bytes=4301,
++    sha256='15cef57335428e4c0419bc10f0dbab4c43d9ec1d563e4cbc6fda18f436a8394c')
+ 
+ 
+ def need(value, message):
+@@ -70,6 +75,7 @@
+ 
+ def check_continuation_payload(value):
+     """Check the fixed recorded authority; callers also check both whole Refs."""
++    require_frozen_inputs()
+     expected = dict(schema='bole.explicit-continuation-authorization/v1',
+         authority_kind='explicit_user_continuation', user_statement='可以继续穿刺一直到成功',
+         document=AUTHORIZATION_DOCUMENT_REF, old_window_extended=False,
+@@ -161,5 +167,99 @@
+     text = once(text, line, line + ' import boundary_validation as BV\n'
+                 + ' BV.validate(C,sr,m,reviewed=BOUNDARY_REVIEWED_FILES)\n')
+     text = once(text, ORIGINAL_VALIDATOR_AUTHORITY_GATE, CONTINUATION_VALIDATOR_AUTHORITY_GATE)
+-    ast.parse(text)
+-    return text
++    line = " expected['contract090.py']=B.bind_outputs(C.checked(parent['files']['contract090.py']).read_text(),m['output_root'])\n"
++    text = once(text, line, line + TEXT_ONLY_VALIDATOR_RENDER_LINE)
++    ast.parse(text)
++    return text
++
++
++TEXT_ONLY_VALIDATOR_RENDER_LINE = " expected['contract090.py']=BV.I.render_text_only_contract(expected['contract090.py'])\n"
++
++
++def complete_ref(reference, *, expected_path=None):
++    need(type(reference) is dict and set(reference) == {'path', 'bytes', 'sha256'}
++         and type(reference['path']) is str and reference['path'].startswith('/')
++         and '/..' not in reference['path'] and '\\' not in reference['path']
++         and type(reference['bytes']) is int and 0 < reference['bytes'] <= 32 * 2**20
++         and type(reference['sha256']) is str and len(reference['sha256']) == 64
++         and all(char in '0123456789abcdef' for char in reference['sha256'])
++         and (expected_path is None or reference['path'] == expected_path),
++         'frozen actual complete Ref, never an unbound placeholder')
++    return reference
++
++
++def text_only_input_refs():
++    evidence = TEXT_ONLY_PREPARATION_EVIDENCE
++    return [evidence['failed_startup_result'], evidence['actual_cpu_parser_caller'],
++            *evidence['native_source_receipts'], *evidence['native_source_snapshots'].values()]
++
++
++def require_frozen_inputs():
++    complete_ref(AUTHORIZATION_REF, expected_path=PREPARATION_ROOT+'/AUTHORIZATION_CONTINUATION.json')
++    complete_ref(AUTHORIZATION_DOCUMENT_REF, expected_path=PREPARATION_ROOT+'/AUTHORIZATION_CONTINUATION.md')
++    need(type(TEXT_ONLY_PREPARATION_EVIDENCE) is dict and
++         set(TEXT_ONLY_PREPARATION_EVIDENCE) == {'failed_startup_result', 'actual_cpu_parser_caller',
++             'native_source_receipts', 'native_source_snapshots'} and
++         type(TEXT_ONLY_PREPARATION_EVIDENCE['native_source_receipts']) is list and
++         len(TEXT_ONLY_PREPARATION_EVIDENCE['native_source_receipts']) == 2 and
++         type(TEXT_ONLY_PREPARATION_EVIDENCE['native_source_snapshots']) is dict and
++         len(TEXT_ONLY_PREPARATION_EVIDENCE['native_source_snapshots']) == 12,
++         'fixed failed-startup/native twelve-source preparation evidence')
++    refs = text_only_input_refs()
++    for reference in refs:
++        complete_ref(reference)
++    need(len({reference['path'] for reference in refs}) == len(refs),
++         'unique complete text-only preparation evidence paths')
++    return True
++
++
++TEXT_ONLY_CONTRACT_FUNCTION = """
++
++
++def text_only_config(argv,m,*,args=None,engine=None):
++ expected=dict(language_model_only=True,skip_mm_profiling=False,enable_mm_embeds=False,limit_mm_per_prompt={})
++ value=m.get('text_only_config')
++ need(type(value)is dict and set(value)==set(expected) and all(type(value[key])is type(wanted) and value[key]==wanted for key,wanted in expected.items()),'one explicit common text-only configuration')
++ if argv is not None:
++  need(type(argv)is list and all(type(token)is str for token in argv) and argv.count('--language-model-only')==1,'one actual bare native language-model-only option')
++  forbidden=('--no-language-model-only','--skip-mm-profiling','--no-skip-mm-profiling','--enable-mm-embeds','--no-enable-mm-embeds','--limit-mm-per-prompt')
++  need(not any(token==flag or token.startswith(flag+'=') or token.startswith(flag+'.') for token in argv for flag in forbidden) and not any(token.startswith('--language-model-only=') or token.startswith('--language-model-only.') for token in argv),'no skip-profiling, embedding, or modality-limit override')
++ for actual in(args,engine):
++  if actual is not None:
++   need(all(hasattr(actual,key) for key in expected),'actual parser and EngineArgs expose every native text-only field')
++   need(all(type(getattr(actual,key))is type(wanted) and getattr(actual,key)==wanted for key,wanted in expected.items()),'actual parser and EngineArgs match source text-only fields')
++ return expected
++"""
++
++TEXT_ONLY_CONTRACT_DELTAS = (
++    (" need(m['cache_memory_config']==dict(gpu_memory_utilization=0.8,kv_cache_memory_bytes=None,num_gpu_blocks_override=None),'one common utilization-only memory profile')\n",
++     " need(m['cache_memory_config']==dict(gpu_memory_utilization=0.8,kv_cache_memory_bytes=None,num_gpu_blocks_override=None),'one common utilization-only memory profile')\n text_only_config(None,m)\n"),
++    (' return explicit_lazy_argv(args)\n',
++     " forbidden=('--language-model-only','--no-language-model-only','--skip-mm-profiling','--no-skip-mm-profiling','--enable-mm-embeds','--no-enable-mm-embeds','--limit-mm-per-prompt')\n"
++     " need(not any(token==flag or token.startswith(flag+'=') or token.startswith(flag+'.') for token in args for flag in forbidden),'no pre-existing native text-only or MM override')\n"
++     " args+=['--language-model-only']\n"
++     ' return explicit_lazy_argv(args)\n'),
++    (' return expected\n', ' text_only_config(argv,m,args=args,engine=engine)\n return expected\n'),
++)
++
++
++def reverse_text_only_contract(text):
++    text = once(text, TEXT_ONLY_CONTRACT_FUNCTION, '')
++    for before, after in reversed(TEXT_ONLY_CONTRACT_DELTAS):
++        text = once(text, after, before)
++    ast.parse(text)
++    return text
++
++
++def render_text_only_contract(old_text):
++    """Only one native argv flag plus manifest/actual parser joins; no model imports."""
++    need(type(old_text) is str and 'def text_only_config(' not in old_text,
++         'one original unmodified command contract, never an already rendered source')
++    text = old_text
++    for before, after in TEXT_ONLY_CONTRACT_DELTAS:
++        text = once(text, before, after)
++    text += TEXT_ONLY_CONTRACT_FUNCTION
++    ast.parse(text)
++    need(reverse_text_only_contract(text) == old_text,
++         'whole original command and memory profile restored by exact inverse')
++    return text
+--- v3/boundary_validation.py
++++ textonly-v4/boundary_validation.py
+@@ -16,12 +16,20 @@
+ 
+ def validate(C, source_ref, manifest, *, reviewed):
+     m = manifest
++    I.require_frozen_inputs()
+     pins = I.normalize_reviewed_helpers(reviewed)
+     C.need(I.canonical(m.get('boundary_reviewed_helpers')) == I.canonical(pins),
+            'manifest and actual validator carry identical MAIN-reviewed helper pins')
+     C.need(m.get('boundary_parent_source') == I.PARENT_REF,
+            'one exact completed old ON short parent; no alternate lineage')
+     parent = C.obj(I.PARENT_REF)
++    C.need(I.canonical(m.get('text_only_config')) == I.canonical(I.TEXT_ONLY_CONFIG)
++           and I.canonical(m.get('text_only_preparation_evidence')) ==
++               I.canonical(I.TEXT_ONLY_PREPARATION_EVIDENCE),
++           'exact explicit common text-only config and whole native-source/failed-startup evidence')
++    C.need(ref_identity(m['files']['preflight114.py']) ==
++           ref_identity(I.TEXT_ONLY_PREPARATION_EVIDENCE['actual_cpu_parser_caller']),
++           'unchanged actual native parser and EngineArgs caller, never a substitute')
+     C.need(parent['files']['short_binding_delta.py'] == I.OLD_SHORT_DELTA_REF
+            and parent['files']['performance_validate.py'] == I.OLD_VALIDATOR_REF,
+            'fixed old ON source owns the exact original delta and validator')
+@@ -158,7 +166,8 @@
+         dependencies[reference['path']] = reference
+     required_parent_refs = [I.PARENT_REF, parent['prepared_template'], parent['authority_ref'],
+                             *parent['files'].values(), *parent['dependencies'],
+-                            I.AUTHORIZATION_REF, I.AUTHORIZATION_DOCUMENT_REF]
++                            I.AUTHORIZATION_REF, I.AUTHORIZATION_DOCUMENT_REF,
++                            *I.text_only_input_refs()]
+     for reference in required_parent_refs:
+         C.need(dependencies.get(reference['path']) == reference,
+                'complete original ON lineage retained in host before/after readset')
+--- v3/prepare_boundary.py
++++ textonly-v4/prepare_boundary.py
+@@ -20,9 +20,9 @@
+ WS = Path('/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z')
+ PARENT = dict(path=str(WS / 'bole_performance_profile_prepare_20261021/successor_layer/bound-short-ON-v2/SOURCE_BOUND.json'),
+               bytes=1503149, sha256='a285ac43d953cf257255ec4848d8719b613010bf339491e2a39d20d2f3b73b8f')
+-ROOT = WS / 'bound-boundary-ON-v3-continuation_20261022T120055Z'
+-OUT = Path('/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z')
+-BATCH = 'MAIN-BOLE-BOUNDARY-CONTINUATION-20261022T120055Z-ON-V3'
++ROOT = WS / 'bound-boundary-ON-v4-textonly_20261022T171000Z'
++OUT = Path('/opt/host/vnf/austinov/run-bole-boundary-ON-v4-textonly_20261022T171000Z')
++BATCH = 'MAIN-BOLE-BOUNDARY-TEXTONLY-20261022T171000Z-ON-V4'
+ HELPERS = ('boundary_probe_v1.py', 'boundary_delta.py',
+            'boundary_integration.py', 'boundary_validation.py', 'projection_probe_v1.py')
+ CLOCK_FILES = ('bind_model.py', 'contract090.py', 'g2_cold_clock.py',
+@@ -78,10 +78,10 @@
+ 
+ 
+ def freeze(review_ref):
+-    need(HERE == WS / 'boundary_probe_prepare_v3_continuation_20261022T120055Z', 'assigned preparation directory')
++    need(HERE == WS / 'boundary_probe_prepare_v4_textonly_20261022T171000Z', 'assigned preparation directory')
+     need(not ROOT.exists() and not OUT.exists() and not Path(str(OUT) + '-CPU').exists(),
+          'fresh diagnostic source and both output identities; no overwrite or failed rerun')
+-    need(1792670455 <= time.time() and time.time() + 3780 < 1792692055,
++    need(1792689000 <= time.time() and time.time() + 3780 < 1792710600,
+          'whole unchanged phase and cleanup inside the separately authorized finite batch')
+     review = obj(review_ref)
+     need(review['schema'] == 'bole.boundary-probe-main-source-review/v2-continuation' and
+@@ -118,6 +118,7 @@
+     sys.path.insert(0, str(HERE))
+     sys.path.insert(1, old['root'])
+     import boundary_integration as BI
++    BI.require_frozen_inputs()
+     import boundary_delta as BD
+     import boundary_probe_v1 as BP
+     import projection_probe_v1 as PP
+@@ -126,12 +127,15 @@
+     need(P.PIN == old['short_parent_source'], 'original qualified numerical lineage')
+     need(review['continuation_authorization'] == BI.AUTHORIZATION_REF,
+          'MAIN review explicitly names this separate continuation authority')
+-    for reference in (BI.AUTHORIZATION_REF, BI.AUTHORIZATION_DOCUMENT_REF):
++    need(review['text_only_config'] == BI.TEXT_ONLY_CONFIG and
++         review['text_only_preparation_evidence'] == BI.TEXT_ONLY_PREPARATION_EVIDENCE,
++         'MAIN reviewed this new common text-only configuration and actual evidence')
++    for reference in (BI.AUTHORIZATION_REF, BI.AUTHORIZATION_DOCUMENT_REF, *BI.text_only_input_refs()):
+         include(reference)
+     BI.check_continuation_payload(obj(BI.AUTHORIZATION_REF))
+     authority = BI.continuation_authority(obj(old['authority_ref']), old['authority_ref'])
+-    need(authority['batch_id'] == BATCH and authority['start_epoch'] == 1792670455
+-         and authority['cutoff_epoch'] == 1792692055 and
++    need(authority['batch_id'] == BATCH and authority['start_epoch'] == 1792689000
++         and authority['cutoff_epoch'] == 1792710600 and
+          authority['phase_seconds'] == 3600 and authority['cleanup_seconds'] == 180,
+          'new exact authority identity with unaltered original phase and cleanup')
+     checked(authority['user_authorization_ref'])
+@@ -155,6 +159,7 @@
+     need(set(changed) == set(D.RUNTIME), 'complete exact expanded runtime delta')
+     changed['contract090.py'] = B.bind_outputs(
+         checked(parent['files']['contract090.py']).read_text(), str(OUT))
++    changed['contract090.py'] = BI.render_text_only_contract(changed['contract090.py'])
+     for name in CLOCK_FILES:
+         changed[name] = clock(changed.get(name,
+             checked(parent['files'][name]).read_text()), authority)
+@@ -182,6 +187,8 @@
+         boundary_parent_source=PARENT,
+         boundary_probe_profile=copy.deepcopy(BP.DECLARATION),
+         projection_probe_profile=copy.deepcopy(PP.DECLARATION),
++        text_only_config=copy.deepcopy(BI.TEXT_ONLY_CONFIG),
++        text_only_preparation_evidence=copy.deepcopy(BI.TEXT_ONLY_PREPARATION_EVIDENCE),
+         boundary_reviewed_helpers=pins,
+         boundary_control_refs=copy.deepcopy(review['control_refs']))
+     for scope_key in ('performance_software_scope', 'service_software_scope'):
+@@ -230,7 +237,7 @@
+         commands=command_ref, source_only=True, owner_created=False, NPU=False,
+         paired_gate_pass=False, performance_admitted=False, formal_performance=False,
+         parent=PARENT, review=review_ref, original_inputs_unchanged=True,
+-        original_readset=list(readset.values()), fixed_cutoff=1792692055,
++        original_readset=list(readset.values()), fixed_cutoff=1792710600,
+         historical_report_cutoff=1792672721, old_window_extended=False,
+         phase_seconds=3600, cleanup_seconds=180)
+     receipt = exclusive(HERE / 'BUILD_RECORD.json', result)
+--- v3/test_boundary_integration.py
++++ textonly-v4/test_boundary_integration.py
+@@ -6,6 +6,7 @@
+ from pathlib import Path
+ import sys
+ import unittest
++from types import SimpleNamespace
+ 
+ sys.dont_write_bytecode = True
+ sys.path.insert(0, str(Path(__file__).resolve().parent))
+@@ -21,6 +22,7 @@
+         cls.old_validator = (ORIGINAL_ROOT/'performance_validate.py').read_text()
+         cls.old_coordinator = (ORIGINAL_ROOT/'performance_software_stages.py').read_text()
+         cls.old_authority = json.loads((ORIGINAL_ROOT/'SHORT_AUTHORITY.json').read_bytes())
++        cls.old_contract = I.pinned_text((ORIGINAL_ROOT/'contract090.py').read_text(), I.TEXT_ONLY_CONTROL_CONTRACT_REF)
+         cls.pins = {name: dict(bytes=10, sha256='a'*64) for name in I.REVIEWED_HELPERS}
+ 
+     def test_delta_reversible_exact_old_body(self):
+@@ -41,11 +43,54 @@
+         text = I.once(text, 'BOUNDARY_REVIEWED_FILES = '+repr(pins)+'\n', '')
+         text = I.once(text, ' import boundary_validation as BV\n BV.validate(C,sr,m,reviewed=BOUNDARY_REVIEWED_FILES)\n', '')
+         text = I.once(text, I.CONTINUATION_VALIDATOR_AUTHORITY_GATE, I.ORIGINAL_VALIDATOR_AUTHORITY_GATE)
++        text = I.once(text, I.TEXT_ONLY_VALIDATOR_RENDER_LINE, '')
+         self.assertEqual(text, self.old_validator)
+         coordinator = I.render_current_software_coordinator(self.old_coordinator)
+         self.assertEqual(coordinator.count(str(I.CUTOFF_EPOCH)), 3)
+         self.assertEqual(coordinator.replace(str(I.CUTOFF_EPOCH), str(I.OLD_REPORT_CUTOFF)),
+                          self.old_coordinator)
++
++        # This is a pure source/guard control, not the native parser or a ModelConfig.
++        contract = I.render_text_only_contract(self.old_contract)
++        self.assertEqual(I.reverse_text_only_contract(contract), self.old_contract)
++        with self.assertRaises(ValueError):
++            I.render_text_only_contract(contract)
++        node = next(n for n in ast.parse(contract).body
++                    if isinstance(n, ast.FunctionDef) and n.name == 'text_only_config')
++        namespace = dict(need=I.need)
++        exec(compile(ast.fix_missing_locations(ast.Module(body=[node], type_ignores=[])),
++                     '<new-pure-text-only-guard>', 'exec'), namespace)
++        guard = namespace['text_only_config']
++        manifest = dict(text_only_config=copy.deepcopy(I.TEXT_ONLY_CONFIG))
++        argv = ['--language-model-only']
++        self.assertEqual(guard(argv, manifest,
++            args=SimpleNamespace(**I.TEXT_ONLY_CONFIG), engine=SimpleNamespace(**I.TEXT_ONLY_CONFIG)),
++            I.TEXT_ONLY_CONFIG)
++        for flag in ('--skip-mm-profiling', '--enable-mm-embeds', '--limit-mm-per-prompt',
++                     '--no-language-model-only', '--language-model-only=true', '--language-model-only'):
++            with self.subTest(flag=flag), self.assertRaises(ValueError):
++                guard(argv+[flag], manifest)
++        for field, bad in [('language_model_only', 1), ('language_model_only', False),
++                           ('skip_mm_profiling', True), ('enable_mm_embeds', True),
++                           ('limit_mm_per_prompt', {'image': 0})]:
++            invalid = dict(I.TEXT_ONLY_CONFIG, **{field: bad})
++            with self.subTest(manifest_field=field), self.assertRaises(ValueError):
++                guard(argv, dict(text_only_config=invalid))
++            with self.subTest(parser_field=field), self.assertRaises(ValueError):
++                guard(argv, manifest, args=SimpleNamespace(**invalid))
++            with self.subTest(engine_field=field), self.assertRaises(ValueError):
++                guard(argv, manifest, engine=SimpleNamespace(**invalid))
++        with self.assertRaises(ValueError):
++            guard(argv, manifest, args=SimpleNamespace())
++        # The old memory checker/return remains exact after removing its one join.
++        old_memory = next(n for n in ast.parse(self.old_contract).body
++                         if isinstance(n, ast.FunctionDef) and n.name == 'cache_memory_config')
++        new_memory = next(n for n in ast.parse(contract).body
++                         if isinstance(n, ast.FunctionDef) and n.name == 'cache_memory_config')
++        new_memory.body = [n for n in new_memory.body if not (isinstance(n, ast.Expr)
++            and isinstance(n.value, ast.Call) and isinstance(n.value.func, ast.Name)
++            and n.value.func.id == 'text_only_config')]
++        self.assertEqual(ast.dump(old_memory), ast.dump(new_memory))
+ 
+     def test_exact_delta_and_validator_pins_reject_modified_baselines(self):
+         with self.assertRaises(ValueError):
+@@ -99,7 +144,7 @@
+         for retained in ("expected=D.runtime(originals)",
+                          "for name,text in expected.items():C.need(C.checked(m['files'][name]).read_text()==text",
+                          "base=bind_model.readset(sr)+command_contract.validate(C,sr,m)",
+-                         "authority['cutoff_epoch']==1792692055"):
++                         "authority['cutoff_epoch']==1792710600"):
+             self.assertIn(retained, text)
+         self.assertNotIn(I.ORIGINAL_VALIDATOR_AUTHORITY_GATE, text)
+         self.assertIn(I.CONTINUATION_VALIDATOR_AUTHORITY_GATE, text)
+@@ -111,8 +156,8 @@
+         self.assertEqual(new['historical_authority_ref'], prior_ref)
+         self.assertEqual(new['user_authorization_ref'], I.AUTHORIZATION_REF)
+         self.assertEqual((new['start_epoch'], new['cutoff_epoch'], new['phase_seconds'], new['cleanup_seconds']),
+-                         (1792670455, 1792692055, 3600, 180))
+-        for key, bad in [('phase_seconds', 3599), ('cleanup_seconds', 179), ('cutoff_epoch', 1792692055)]:
++                         (1792689000, 1792710600, 3600, 180))
++        for key, bad in [('phase_seconds', 3599), ('cleanup_seconds', 179), ('cutoff_epoch', 1792710600)]:
+             malformed = dict(authority, **{key: bad})
+             with self.subTest(authority_key=key), self.assertRaises(ValueError):
+                 I.continuation_authority(malformed, prior_ref)
+@@ -121,7 +166,7 @@
+         self.assertIs(I.check_continuation_payload(payload), payload)
+         for key, bad in [('old_window_extended', True), ('phase_seconds', 3599),
+                          ('cleanup_seconds', 179), ('physical_npus', [0, 1, 2, 3]),
+-                         ('formal_performance_admitted', True), ('internal_batch_cutoff_epoch', 1792692056)]:
++                         ('formal_performance_admitted', True), ('internal_batch_cutoff_epoch', 1792710601)]:
+             malformed = dict(payload, **{key: bad})
+             with self.subTest(ticket_key=key), self.assertRaises(ValueError):
+                 I.check_continuation_payload(malformed)
+--- v3/run_boundary_controls.py
++++ textonly-v4/run_boundary_controls.py
+@@ -11,10 +11,12 @@
+ from pathlib import Path
+ 
+ WS = Path('/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z')
+-ROOT = WS / 'boundary_probe_prepare_v3_continuation_20261022T120055Z'
++ROOT = WS / 'boundary_probe_prepare_v4_textonly_20261022T171000Z'
+ OLD = WS / 'bole_performance_profile_prepare_20261021/successor_layer/bound-short-ON-v2'
+-OUT = Path('/opt/host/vnf/austinov/run-bole-boundary-source-controls-v3-continuation_20261022T120055Z')
++OUT = Path('/opt/host/vnf/austinov/run-bole-boundary-source-controls-v4-textonly_20261022T171000Z')
+ OLD_CONTROL_INPUTS = (
++    dict(path=str(OLD/'contract090.py'), bytes=4301,
++         sha256='15cef57335428e4c0419bc10f0dbab4c43d9ec1d563e4cbc6fda18f436a8394c'),
+     dict(path=str(OLD/'short_binding_delta.py'), bytes=1851,
+          sha256='4406fdeaff1965c2c3ce2adf859b1969bd29c102344c1f51204da037b81470d9'),
+     dict(path=str(OLD/'performance_validate.py'), bytes=6933,
+--- v3/audit_boundary_source_v4.py
++++ textonly-v4/audit_boundary_source_v5.py
+@@ -15,9 +15,9 @@
+ from pathlib import Path
+ 
+ WS = Path('/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z')
+-PREP = WS/'boundary_source_audit_v4_continuation_20261022T120055Z'
+-ROOT = WS/'bound-boundary-ON-v3-continuation_20261022T120055Z'
+-OUT = Path('/opt/host/vnf/austinov/run-bole-boundary-source-audit-v4-continuation_20261022T120055Z')
++PREP = WS/'boundary_source_audit_v5_textonly_20261022T171000Z'
++ROOT = WS/'bound-boundary-ON-v4-textonly_20261022T171000Z'
++OUT = Path('/opt/host/vnf/austinov/run-bole-boundary-source-audit-v5-textonly_20261022T171000Z')
+ 
+ 
+ def need(value, why):
+@@ -47,10 +47,10 @@
+     program_bytes=program.read_bytes()
+     need(args.audit_program_ref==dict(path=str(program),bytes=len(program_bytes),sha256=hashlib.sha256(program_bytes).hexdigest()),
+          'whole independent auditor Ref before validation')
+-    need(Path(__file__).resolve()==PREP/'audit_boundary_source_v4.py' and
++    need(Path(__file__).resolve()==PREP/'audit_boundary_source_v5.py' and
+          Path(args.source_ref['path'])==ROOT/'SOURCE_BOUND.json' and not OUT.exists(),
+          'fresh exact source-audit identity')
+-    need(1792670455<=time.time() and time.time()+3780<1792692055,
++    need(1792689000<=time.time() and time.time()+3780<1792710600,
+          'unchanged complete phase must fit the separately authorized finite continuation')
+     OUT.mkdir(mode=0o700); os.umask(0o077)
+     for key,cap in ((resource.RLIMIT_AS,512*2**20),(resource.RLIMIT_CPU,150),
+@@ -65,7 +65,7 @@
+         import sourceio as C
+         import performance_validate as V
+         m=C.obj(args.source_ref)
+-        need(C.ref(__file__)==args.audit_program_ref, 'actual independent v4 auditor exact source')
++        need(C.ref(__file__)==args.audit_program_ref, 'actual independent v5 text-only auditor exact source')
+         original_auditor=dict(path=str(WS/'boundary_probe_prepare_v1_20261022/audit_boundary_source.py'),
+             bytes=4631,sha256='318abb0246fce440ba877c8428cbcc1dd90caea7846be76a884c5e26cb4b5533')
+         need(original_auditor in m['dependencies'], 'original v1 auditor remains in unchanged runtime readset')
+@@ -105,7 +105,7 @@
+             original_audit_source=original_auditor,recorded_source_argument=recorded_argument,
+             original_twenty_controls=list(proof['tests']),NPU=False,paired_gate_pass=False,
+             numerical_qualified=False,performance_admitted=False,formal_performance=False,
+-            hard_cutoff=1792692055,historical_report_cutoff=1792672721,
++            hard_cutoff=1792710600,historical_report_cutoff=1792672721,
+             old_window_extended=False,elapsed_s=time.monotonic()-started))
+     except BaseException as exc:
+         error=repr(exc)

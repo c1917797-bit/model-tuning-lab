@@ -1,0 +1,118 @@
+{
+  "NPU": false,
+  "actual_diagnostic_available": false,
+  "actual_main_executed": false,
+  "actual_output_size_not_yet_observed": true,
+  "argv_template": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_summary_extract_v1_continuation_20261022T120055Z/extract_projection_summary_v1.py",
+    "--diagnostic-ref",
+    "<exact actual PROJECTION_DIAGNOSTIC Ref3 JSON>",
+    "--output",
+    "<new absolute ordinary output path>"
+  ],
+  "exact_diagnostic_path": "/opt/host/vnf/austinov/run-bole-projection-reader-v2-continuation_20261022T120055Z/PROJECTION_DIAGNOSTIC.json",
+  "files": [
+    {
+      "local_ref": {
+        "bytes": 18938,
+        "path": "/workspace/scratch/e65c435145b1/projection_summary_extract_v1_draft/extract_projection_summary_v1.py",
+        "sha256": "2a422bcdf74535bf7def49ebcf14780183585cfde732f5a23feae7ecbb33d4f9"
+      },
+      "planned_remote_ref": {
+        "bytes": 18938,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_summary_extract_v1_continuation_20261022T120055Z/extract_projection_summary_v1.py",
+        "sha256": "2a422bcdf74535bf7def49ebcf14780183585cfde732f5a23feae7ecbb33d4f9"
+      },
+      "repo_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_summary_extract_v1_continuation_20261022T120055Z/extract_projection_summary_v1.py"
+    },
+    {
+      "local_ref": {
+        "bytes": 6291,
+        "path": "/workspace/scratch/e65c435145b1/projection_summary_extract_v1_draft/SCHEMA_EXPECTATION_v2.json",
+        "sha256": "e155b0d516489b7458267e45974eb46a0b0ba950699d9289f9dc9cf6a16caa2a"
+      },
+      "planned_remote_ref": {
+        "bytes": 6291,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_summary_extract_v1_continuation_20261022T120055Z/SCHEMA_EXPECTATION_v2.json",
+        "sha256": "e155b0d516489b7458267e45974eb46a0b0ba950699d9289f9dc9cf6a16caa2a"
+      },
+      "repo_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_summary_extract_v1_continuation_20261022T120055Z/SCHEMA_EXPECTATION_v2.json"
+    },
+    {
+      "local_ref": {
+        "bytes": 779,
+        "path": "/workspace/scratch/e65c435145b1/projection_summary_extract_v1_draft/LOCAL_CHECKS_v2.json",
+        "sha256": "4463c6e42e7c09f93f1e52974f5ad23b5526e0a6936a3c6dde28cbe08e14d7b8"
+      },
+      "planned_remote_ref": {
+        "bytes": 779,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_summary_extract_v1_continuation_20261022T120055Z/LOCAL_CHECKS_v2.json",
+        "sha256": "4463c6e42e7c09f93f1e52974f5ad23b5526e0a6936a3c6dde28cbe08e14d7b8"
+      },
+      "repo_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_summary_extract_v1_continuation_20261022T120055Z/LOCAL_CHECKS_v2.json"
+    },
+    {
+      "local_ref": {
+        "bytes": 6304,
+        "path": "/workspace/scratch/e65c435145b1/projection_summary_extract_v1_draft/README.md",
+        "sha256": "7552f3537373bdee418557c92c56538f2408f53e05c15eb8a4822ea9c2a0d0cb"
+      },
+      "planned_remote_ref": {
+        "bytes": 6304,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_summary_extract_v1_continuation_20261022T120055Z/README.md",
+        "sha256": "7552f3537373bdee418557c92c56538f2408f53e05c15eb8a4822ea9c2a0d0cb"
+      },
+      "repo_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_summary_extract_v1_continuation_20261022T120055Z/README.md"
+    },
+    {
+      "local_ref": {
+        "bytes": 6038,
+        "path": "/workspace/scratch/e65c435145b1/projection_summary_extract_v1_draft/INDEPENDENT_STATIC_REVIEW.json",
+        "sha256": "ce480b07e7e990281e6ef0b0504bca6cc5264b12abff51784bdd6f499b34c7b4"
+      },
+      "planned_remote_ref": {
+        "bytes": 6038,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_summary_extract_v1_continuation_20261022T120055Z/INDEPENDENT_STATIC_REVIEW.json",
+        "sha256": "ce480b07e7e990281e6ef0b0504bca6cc5264b12abff51784bdd6f499b34c7b4"
+      },
+      "repo_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_summary_extract_v1_continuation_20261022T120055Z/INDEPENDENT_STATIC_REVIEW.json"
+    },
+    {
+      "local_ref": {
+        "bytes": 1903,
+        "path": "/workspace/scratch/e65c435145b1/projection_summary_extract_v1_draft/INDEPENDENT_STATIC_REVIEW.md",
+        "sha256": "745e0ca3bf74035131479e547bdbbfb07e60b803dc9a1ed13f324b8174f68472"
+      },
+      "planned_remote_ref": {
+        "bytes": 1903,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_summary_extract_v1_continuation_20261022T120055Z/INDEPENDENT_STATIC_REVIEW.md",
+        "sha256": "745e0ca3bf74035131479e547bdbbfb07e60b803dc9a1ed13f324b8174f68472"
+      },
+      "repo_relative_path": ".agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_summary_extract_v1_continuation_20261022T120055Z/INDEPENDENT_STATIC_REVIEW.md"
+    }
+  ],
+  "independent_review_scope": "Limited static schema/pin/provenance review only. No main, original controls, remote or NPU.",
+  "inputs_reopened_at_runtime": [
+    "actual diagnostic full bytes twice",
+    "extractor source full bytes twice"
+  ],
+  "limits": {
+    "address_space_bytes": 536870912,
+    "cpu_seconds": 30,
+    "input_bytes": 33554432,
+    "output_bytes": 262144,
+    "wall_seconds": 60
+  },
+  "nested_evidence_reopened": false,
+  "original_pair_status": "Historical FAIL retained, explicitly not freshly reopened here",
+  "proposed_remote_package": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/projection_summary_extract_v1_continuation_20261022T120055Z",
+  "reader_modified": false,
+  "remote_deployed_by_preparer": false,
+  "schema": "bole.projection-summary-extractor-prepared-package/v1",
+  "source_only_local_preparation": true,
+  "status": "LIMITED_STATIC_REVIEW_COMPLETE_AWAITING_MAIN_BYTE_REVIEW_AND_ACTUAL_RESULT",
+  "thresholds_modified": false
+}

@@ -1,0 +1,266 @@
+--- main_admission_v4.py
++++ main_admission_textonly_v1.py
+@@ -1,4 +1,4 @@
+-"""MAIN-only continuation launcher draft. Default OFF and not frozen.
++"""MAIN-only text-only continuation launcher draft. Default OFF and not frozen.
+ 
+ No dispatch is possible until MAIN freezes this source, supplies exact current
+ Refs, and writes a genuine review. It execs the unchanged source-owned model
+@@ -22,14 +22,14 @@
+ import time
+ 
+ sys.dont_write_bytecode = True
+-REVIEWED_FROZEN = True
++REVIEWED_FROZEN = False
+ WS = Path('/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z')
+-SCOPE = 'continuation_20261022T120055Z'
+-SOURCE = WS / ('bound-boundary-ON-v3-' + SCOPE)
+-OUTPUT = Path('/opt/host/vnf/austinov/run-bole-boundary-ON-v3-' + SCOPE)
+-EVIDENCE = Path('/opt/host/vnf/austinov/run-bole-continuation-main-admission-v4-' + SCOPE)
++SCOPE = 'textonly_20261022T171000Z'
++SOURCE = WS / ('bound-boundary-ON-v4-' + SCOPE)
++OUTPUT = Path('/opt/host/vnf/austinov/run-bole-boundary-ON-v4-' + SCOPE)
++EVIDENCE = Path('/opt/host/vnf/austinov/run-bole-textonly-main-admission-v1-' + SCOPE)
+ LOCK = WS / 'MAIN_ADMISSION.lock'
+-START, CUT, OLD_REPORT_CUT = 1792670455, 1792692055, 1792672721
++START, CUT, OLD_REPORT_CUT = 1792689000, 1792710600, 1792672721
+ PHASE, CLEANUP, PREPARE = 3600, 180, 3780
+ IMAGE = 'sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1'
+ OWNER = 'bole-root-r6-20261017-001'
+@@ -40,17 +40,115 @@
+     'c4a669cc4b20e5f013e92ce22ac89f6eccf7236286464bd2f7b7b8ac9bf3bdc9',
+     '961b3501d0b739216264e2027115a3245d0e391709a408ed9ac2943bcd1f083d',
+     '6433f9740a1acc4be305d35456436dbccdaf0a91d6884e283259ea22dec99ef5',
+-    'a25d55a819562ffbf2135ba1017bb52ae2e3ca9c3ee2998486540bbbaebd4cf0'}
++    'a25d55a819562ffbf2135ba1017bb52ae2e3ca9c3ee2998486540bbbaebd4cf0',
++    '0a5ed053d4d08915b8748e0f6facbc6f3fad820ff1f46d1eefe0f4bc6626d955',
++    'eb21e660585ed4e758476504bc0b409a02b777d875516e2925f00a9e8efaa8cf'}
+ OLD_UNITS = (
+     'bole-short-on-v2-model-20261021t123841z.service',
+     'bole-short-off-v2-model-20261021t123841z.service',
+-    'bole-boundary-on-v1-model-20261022t080000z.service')
++    'bole-boundary-on-v1-model-20261022t080000z.service',
++    'bole-boundary-on-v3-continuation-20261022t120055z-u3.service')
+ SNAPSHOT_HELPER = dict(path=str(WS/'boundary_admission_v4_20261022/fresh_snapshot_v4.py'),
+     bytes=19376, sha256='8c0b3105354708f3942f798d67a057ef16e11c5b10b538106166dafce61c1968')
+-SNAPSHOT_PROGRAM_PIN = (25626, '5991a9d0b2ea40cb0732cd592e72aa61e5e83ef3f75fb9179dca97f732f696e8')
++SNAPSHOT_PROGRAM_PIN = None  # MAIN binds actual reviewed new producer bytes.
+ RESTORE_PIN = {'path': '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/continuation_main_admission_v4_20261022T120055Z/restore_snapshot_mounts_v1.py', 'bytes': 6438, 'sha256': '8177437cda4df4d85db41392588fff18ce8422598d73bdc163ab950b26a32f9c'}  # MAIN binds final helper bytes during source review.
+-HISTORICAL_CONTEXT_PIN = {'path': '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/continuation_main_admission_v4_20261022T120055Z/historical_owner_context_v1.py', 'bytes': 13079, 'sha256': '63aecade69f568496412e4aff43de422151bca3d835389b678486e40ee162e75'}
++HISTORICAL_CONTEXT_PIN = None  # MAIN binds actual reviewed new historical context bytes.
+ COMPLETE_RECEIPT_PIN = {'path': '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/continuation_main_admission_v4_20261022T120055Z/complete_inspect_receipt_v1.py', 'bytes': 3807, 'sha256': '05d212afa6d84af8f0a665c4d1605c756e1e603b52c533e983bc866e13804e5a'}
++
++# One already failed historical startup may be accepted only as a completed
++# lifecycle chain. This never rewrites its primary or claims model readiness.
++FAILED_HISTORY_SOURCE = {'bytes': 1638841, 'path': '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/SOURCE_BOUND.json', 'sha256': 'd28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df'}
++FAILED_HISTORY_RESULT = {'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/RESULT.json', 'bytes': 2375646, 'sha256': '4ad705377892c1136dbc945c8353904739e6189ed4b52dea2df3cc12731ef1da'}
++FAILED_HISTORY_CIDS = {'0a5ed053d4d08915b8748e0f6facbc6f3fad820ff1f46d1eefe0f4bc6626d955', 'eb21e660585ed4e758476504bc0b409a02b777d875516e2925f00a9e8efaa8cf'}
++FAILED_HISTORY_PRIMARY = 'TimeoutExpired([\'/usr/bin/prlimit\', \'--as=unlimited\', \'--\', \'/usr/bin/docker\', \'exec\', \'eb21e660585ed4e758476504bc0b409a02b777d875516e2925f00a9e8efaa8cf\', \'/bin/bash\', \'-c\', \'source /usr/local/Ascend/cann-9.1.0/set_env.sh && exec "$@"\', \'kvbp-diagnostic\', \'/usr/local/python3.12.13/bin/python3\', \'-B\', \'-c\', "import urllib.request;assert urllib.request.urlopen(\'http://127.0.0.1:8230/health\',timeout=2).status==200"], 4)'
++FAILED_HISTORY_FIELDS = {'BOLE_diagnostic': False,
++ 'actual_host_argv': ['/usr/bin/python3',
++                      '-I',
++                      '-B',
++                      '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/host_service.py',
++                      '--execute',
++                      '--source-ref',
++                      '{"path": '
++                      '"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/SOURCE_BOUND.json", '
++                      '"bytes": 1638841, "sha256": '
++                      '"d28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df"}',
++                      '--output',
++                      '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z'],
++ 'candidate_qualification': False,
++ 'cleanup_seconds': 180,
++ 'cleanup_spent': 40.35200875008013,
++ 'cpu_only': False,
++ 'elapsed': 1097.174797869986,
++ 'formal_performance': False,
++ 'host_pid': 4184444,
++ 'model_ready': False,
++ 'performance_gain_measured': False,
++ 'phase_seconds': 3600,
++ 'primary': "TimeoutExpired(['/usr/bin/prlimit', '--as=unlimited', '--', '/usr/bin/docker', 'exec', "
++            "'eb21e660585ed4e758476504bc0b409a02b777d875516e2925f00a9e8efaa8cf', '/bin/bash', '-c', 'source "
++            '/usr/local/Ascend/cann-9.1.0/set_env.sh && exec "$@"\', \'kvbp-diagnostic\', '
++            '\'/usr/local/python3.12.13/bin/python3\', \'-B\', \'-c\', "import urllib.request;assert '
++            'urllib.request.urlopen(\'http://127.0.0.1:8230/health\',timeout=2).status==200"], 4)',
++ 'scheduler_committed': False,
++ 'schema': 'bole.actual-three-node-model-owned/v131',
++ 'secondary': [],
++ 'source': {'bytes': 1638841,
++            'path': '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/SOURCE_BOUND.json',
++            'sha256': 'd28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df'},
++ 'successful_raw_replay_available': False,
++ 'summary': {'CPU_child': {'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/cpu-preflight/CPU-CHILD.json',
++                           'sha256': '06cb14fa2d7da0e4228994312a543687b6a93bd18eb91131c98f102849d7050c'},
++             'CPU_release': {'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/cpu-preflight/cleanup.json',
++                             'sha256': 'd6bac282789816103226cf8e273acb2e1791673561919111c803c239cdc7c0fb'},
++             'CPU_report': {'bytes': 5707,
++                            'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/cpu-preflight/CPU.json',
++                            'sha256': 'd21968d44c51fc84fc5d1eafd808f150448624b34e3a3930318caf8676f6326a'},
++             'actual_software_child': {'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/cpu-preflight/SOFTWARE-CHILD.json',
++                                       'sha256': '66ded479d88a5a86f84582039b57bf8bdb423e9138bdbafd60e27bd167527fb0'},
++             'all_observers_disabled': False,
++             'canary': {'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/dense/CANARY-CHILD.json',
++                        'sha256': '615b56d6dc9bd049b10b18fe4a4411afc9d562f0ba79c0bff1fbde1a0376179d'},
++             'diagnostic_channel_cold_handoff': {'applicable': False,
++                                                 'reason': 'no diagnostic channel in this successor; '
++                                                           'original parent proof separately reopened'},
++             'diagnostic_channel_enabled': False,
++             'first_host_fault': {'bytes': 3218,
++                                  'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/HOST-FIRST-FAULT.json'},
++             'independent_cpu_ack_enabled': False,
++             'performance_arm': 'bole'},
++ 'task_accuracy': False,
++ 'timing_is_formal': False}
++FAILED_HISTORY_OWNERS = {'0a5ed053d4d08915b8748e0f6facbc6f3fad820ff1f46d1eefe0f4bc6626d955': {'cid': '0a5ed053d4d08915b8748e0f6facbc6f3fad820ff1f46d1eefe0f4bc6626d955',
++                                                                      'owned_ref': {'bytes': 1414912,
++                                                                                    'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/cpu-preflight/OWNED.json',
++                                                                                    'sha256': 'bd5297f2d8e8bfcea5d02b1fdb4612faf453db55bfdf3c5a1a4c87b7f4008316'},
++                                                                      'cleanup_ref': {'bytes': 3665,
++                                                                                      'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/cpu-preflight/cleanup.json',
++                                                                                      'sha256': 'd6bac282789816103226cf8e273acb2e1791673561919111c803c239cdc7c0fb'},
++                                                                      'source_ref': {'bytes': 1638841,
++                                                                                     'path': '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/SOURCE_BOUND.json',
++                                                                                     'sha256': 'd28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df'},
++                                                                      'host_result_ref': {'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/RESULT.json',
++                                                                                          'bytes': 2375646,
++                                                                                          'sha256': '4ad705377892c1136dbc945c8353904739e6189ed4b52dea2df3cc12731ef1da'}},
++ 'eb21e660585ed4e758476504bc0b409a02b777d875516e2925f00a9e8efaa8cf': {'cid': 'eb21e660585ed4e758476504bc0b409a02b777d875516e2925f00a9e8efaa8cf',
++                                                                      'owned_ref': {'bytes': 1414866,
++                                                                                    'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/dense/OWNED.json',
++                                                                                    'sha256': '45859b745214ec0f19d728d018d438a02dcff61104084726446baedf29e74ba8'},
++                                                                      'cleanup_ref': {'bytes': 1733,
++                                                                                      'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/dense/cleanup.json',
++                                                                                      'sha256': '8529bd3c5d26385a59dd634696297826b719253553280303cb3604f10c285679'},
++                                                                      'source_ref': {'bytes': 1638841,
++                                                                                     'path': '/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-boundary-ON-v3-continuation_20261022T120055Z/SOURCE_BOUND.json',
++                                                                                     'sha256': 'd28e57b46ae913182ff8ebc0f35a1c631f12fce647376af495a4b59c4d8e10df'},
++                                                                      'host_result_ref': {'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/RESULT.json',
++                                                                                          'bytes': 2375646,
++                                                                                          'sha256': '4ad705377892c1136dbc945c8353904739e6189ed4b52dea2df3cc12731ef1da'}}}
++FAILED_HISTORY_FIRST_FAULT = {'bytes': 3218,
++ 'path': '/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/HOST-FIRST-FAULT.json',
++ 'sha256': '0e92f860a05174461cd0292540786d6d3025cd9243cd445fd97aa663309645e6'}
++TEXT_ONLY_CONFIG = dict(language_model_only=True, skip_mm_profiling=False,
++                        enable_mm_embeds=False, limit_mm_per_prompt={})
+ 
+ 
+ def need(value, message):
+@@ -196,11 +294,63 @@
+     return True
+ 
+ 
++def historical_host_result(readset, spec, owned, result, cleanup):
++    # All common original source, time and cleanup predicates are mandatory for
++    # both histories. A complete failure remains a failure in the evidence.
++    need(result['source'] == owned['source'] and
++         result['phase_seconds'] == PHASE and result['cleanup_seconds'] == CLEANUP and
++         result['secondary'] == [] and result['source_before'] == result['source_after'] and
++         result['cleanup_spent'] <= CLEANUP,
++         'pinned completed historical host RESULT joins original source/time scope')
++    if owned['cid'] not in FAILED_HISTORY_CIDS:
++        need(result['primary'] is None, 'original six historical hosts require literal null primary')
++        return dict(kind='completed-null-primary', model_qualification=False)
++    need(spec == FAILED_HISTORY_OWNERS[owned['cid']] and
++         spec['source_ref'] == owned['source'] == FAILED_HISTORY_SOURCE and
++         spec['host_result_ref'] == FAILED_HISTORY_RESULT,
++         'exact two failed-startup OWNED/cleanup/source/result identities only')
++    need(type(FAILED_HISTORY_PRIMARY) is str and FAILED_HISTORY_PRIMARY and
++         result['primary'] == FAILED_HISTORY_PRIMARY,
++         'literal observed original failed-startup primary; no generic failure allowance')
++    need(set(result) == set(FAILED_HISTORY_FIELDS) | {'source_before', 'source_after'} and
++         all(result[key] == value for key, value in FAILED_HISTORY_FIELDS.items()) and
++         len(result['source_before']) == len(result['source_after']) == 6306,
++         'exact complete original failed RESULT structure and saved failure fields preserved')
++    fault = readset.obj(FAILED_HISTORY_FIRST_FAULT)
++    need(fault['schema'] == 'bole.first-host-fault/v131r5' and
++         fault['source'] == FAILED_HISTORY_SOURCE and fault['error_repr'] == result['primary'] and
++         fault['error_type'] == 'subprocess.TimeoutExpired' and
++         fault['phase'] == dict(ordinal=14, phase='dense', step='spawn-server') and
++         fault['cleanup_not_started'] is True and fault['fail_closed'] is True and
++         fault['recovery_attempted'] is False and
++         result['summary']['first_host_fault'] ==
++             {key: FAILED_HISTORY_FIRST_FAULT[key] for key in ('path', 'bytes')},
++         'pinned original startup fault precedes cleanup; producer path/bytes join is exact')
++    cleanup_ref2 = {key: spec['cleanup_ref'][key] for key in ('path', 'sha256')}
++    if owned['arm'] == 'cpu-preflight':
++        need(result['summary']['CPU_release'] == cleanup_ref2 and cleanup['primary_error'] is None,
++             'original CPU release Ref2 joins whole pinned cleanup without fabricating byte field')
++        join_kind = 'original-host-summary-CPU_release'
++    else:
++        need(owned['arm'] == 'dense' and 'model_release' not in result['summary'] and
++             cleanup['primary_error'] == repr(result['primary']),
++             'failed dense cleanup keeps exact repr(primary); absent model_release stays absent')
++        # The exception skipped summary.model_release. The independently pinned
++        # dense cleanup is joined by exact source/owner plus original first fault.
++        # Its full before/stop/after/release/idle predicates were checked above.
++        join_kind = 'independently-pinned-dense-cleanup-and-first-fault'
++    return dict(kind='completed-failed-startup-lifecycle-only',
++        host_result_ref=FAILED_HISTORY_RESULT, first_fault_ref=FAILED_HISTORY_FIRST_FAULT,
++        cleanup_ref=spec['cleanup_ref'], cleanup_join=join_kind,
++        original_primary_preserved=True, model_qualification=False,
++        numerical_qualified=False, performance_admitted=False)
++
++
+ def historical_owners(readset, config, snapshot, S, manifest, history):
+     specifications = config['old_owners']
+-    need(type(specifications) is list and len(specifications) == 6 and
++    need(type(specifications) is list and len(specifications) == 8 and
+          {row['cid'] for row in specifications} == OLD_CIDS,
+-         'all six historical exact owners, including latest two independent OWNED bindings')
++         'all eight historical exact owners, including two completed failed-startup lifecycle chains')
+     current = {key: {row['Id']: row for row in snapshot[key]['containers']}
+                for key in ('inspect_before', 'inspect_old_after')}
+     owners, contexts, proofs = [], {}, []
+@@ -239,11 +389,7 @@
+         for physical in (4, 5, 6, 7):
+             S.H.frozen().idle_one(released['stdout'], physical)
+         result = readset.obj(spec['host_result_ref'])
+-        need(result['source'] == owned['source'] and
+-             result['phase_seconds'] == PHASE and result['cleanup_seconds'] == CLEANUP and
+-             result['primary'] is None and result['secondary'] == [] and
+-             result['source_before'] == result['source_after'] and result['cleanup_spent'] <= CLEANUP,
+-             'pinned completed historical host RESULT joins original source/time scope')
++        host_outcome = historical_host_result(readset, spec, owned, result, cleanup)
+         labels = original_labels(owned)
+         for key in ('inspect_before', 'inspect_old_after'):
+             row = current[key][owned['cid']]
+@@ -260,7 +406,7 @@
+              'complete old identity/state stable across independent observation')
+         owners.append(owned)
+         contexts[owned['cid']] = context
+-        proofs.append(context.proof)
++        proofs.append(dict(context.proof, historical_host_outcome=host_outcome))
+     return owners, contexts, proofs
+ 
+ 
+@@ -298,6 +444,8 @@
+     need(manifest['root'] == str(SOURCE) and manifest['output_root'] == str(OUTPUT) and
+          manifest['default_enabled'] is False and manifest['prepared_only'] is False,
+          'fresh default-OFF bound source and output identity')
++    need(manifest['text_only_config'] == TEXT_ONLY_CONFIG,
++         'explicit native text-only service configuration, never implicit profile bypass')
+     need(audit['schema'] == 'bole.boundary-source-admission/v1' and audit['source'] == sr and
+          audit['source_validated'] is True and audit['original_inputs_unchanged'] is True and
+          audit['host_readset_exact'] is True and audit['hard_cutoff'] == CUT and
+@@ -335,7 +483,7 @@
+         need(audited.get(reference['path']) == reference, 'all source/authority/commands in exact audited readset')
+     authority = readset.obj(manifest['authority_ref'])
+     need(authority['start_epoch'] == START and authority['cutoff_epoch'] == CUT and
+-         authority['cutoff_iso'] == '2026-10-22T18:00:55+00:00' and
++         authority['cutoff_iso'] == '2026-10-22T23:10:00+00:00' and
+          authority['phase_seconds'] == PHASE and authority['cleanup_seconds'] == CLEANUP and
+          authority['user_authorization_ref'] == config['authorization_ref'],
+          'separate real new authorization, unchanged individual phase and cleanup')
+@@ -464,7 +612,9 @@
+     lock_fd = None
+     try:
+         need(REVIEWED_FROZEN is True and RESTORE_PIN is not None and
+-             HISTORICAL_CONTEXT_PIN is not None and COMPLETE_RECEIPT_PIN is not None,
++             HISTORICAL_CONTEXT_PIN is not None and COMPLETE_RECEIPT_PIN is not None and
++             SNAPSHOT_PROGRAM_PIN is not None and FAILED_HISTORY_PRIMARY is not None and
++             set(FAILED_HISTORY_OWNERS) == FAILED_HISTORY_CIDS,
+              'draft is not frozen/reviewed; no active read or dispatch permitted')
+         need(args.config_ref and args.review_ref, 'exact complete config and genuine MAIN review Refs required')
+         signal.signal(signal.SIGALRM, lambda signum, frame: (_ for _ in ()).throw(TimeoutError('whole180-second MAIN predispatch cap')))

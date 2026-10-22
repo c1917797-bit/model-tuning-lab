@@ -1,0 +1,136 @@
+{
+  "server_log_mirror": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_startup_failure_v1/server_stdout_read.json",
+    "bytes": 66517,
+    "sha256": "9645489c8944cd0f48001bf96999a6a21d038baef64f064c9c86cf0a1b7fcbf3"
+  },
+  "native_read_receipt_mirror": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_startup_failure_v1/NATIVE_READ.json",
+    "bytes": 12899,
+    "sha256": "acba631e49a2bc44b7809e408a1ffca092317530e673b831cd093ec1b46c0002"
+  },
+  "qualified_source_refs": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_actual/QUALIFIED_SOURCE_REFS.json",
+    "bytes": 3086,
+    "sha256": "73dd667f0698bf704afc26ca67d633d08939e40f038cf1653be8604810228261"
+  },
+  "projection_probe": {
+    "path": "/workspace/scratch/e65c435145b1/projection_prepare_v3_continuation_draft/projection_probe_v1.py",
+    "bytes": 30248,
+    "sha256": "4c442d86077efcb64e0d7f845d77accabe9b310e844c88a2a9731b2c3b450765"
+  },
+  "boundary_probe": {
+    "path": "/workspace/scratch/e65c435145b1/projection_prepare_v3_continuation_draft/boundary_probe_v1.py",
+    "bytes": 31338,
+    "sha256": "14c69907adffb9ed5661f6ffd6023f85ab58730af69232b9a54a4ff6883e4bdf"
+  },
+  "boundary_integration": {
+    "path": "/workspace/scratch/e65c435145b1/projection_prepare_v3_continuation_draft/boundary_integration.py",
+    "bytes": 9879,
+    "sha256": "6d86ce8b5b4114966cd8d6e1d16ace80ccbc5fc6fb2a55a73ddf15cf3f33501b"
+  },
+  "boundary_delta": {
+    "path": "/workspace/scratch/e65c435145b1/projection_prepare_v3_continuation_draft/boundary_delta.py",
+    "bytes": 9827,
+    "sha256": "56efb9a324ce9f15d468409e95dbed00694a681a780432349c96159e94c793be"
+  },
+  "saved_worker_entry": {
+    "path": "/workspace/scratch/e65c435145b1/old_runtime_review/worker_entry.py",
+    "bytes": 8227,
+    "sha256": "d884899528bb11e2d1eca0f3938c6d1da4ad98f67972d3e4fe6e85bb7bef9a7e"
+  },
+  "saved_worker_bootstrap": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_clock_inputs/worker_bootstrap.py",
+    "bytes": 6634,
+    "sha256": "12df1cbbe2692e602843ca9cba131f7f9050743d1faf4cbfcfc97897b35dbdac"
+  },
+  "saved_rendered_service_runner": {
+    "path": "/workspace/scratch/e65c435145b1/boundary_probe_draft/rendered_v3/service_runner.py",
+    "bytes": 51445,
+    "sha256": "c6ad32911880d888b74ac9bbaad6feded792daff58252fed9f648402890ba61d"
+  },
+  "saved_rendered_prefill_tail": {
+    "path": "/workspace/scratch/e65c435145b1/boundary_probe_draft/rendered_v3/prefill_tail.py",
+    "bytes": 7815,
+    "sha256": "5c942c7e0520431932f292e609c9a4d73e5ab5593501ba41efc0a811fdf6c430"
+  },
+  "server_log_original_content": {
+    "path": "/opt/host/vnf/austinov/run-bole-boundary-ON-v3-continuation_20261022T120055Z/dense/server.stdout",
+    "bytes": 65484,
+    "sha256": "7ba30529f202fee7401103e1cc650ac3c7d2ee4b71df7536dc40b38d54743edf",
+    "obtained_from": "server_log_mirror.content",
+    "line_count": 428
+  },
+  "native_0_gpu_model_runner.py": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_startup_failure_v1/native_sources/0_gpu_model_runner.py",
+    "bytes": 334736,
+    "sha256": "6250ca0670c4593aa2f7c4567c9c71d6cb3d8182624a985d4d4e33d5bf054666",
+    "guest_path": "/vllm-workspace/vllm/vllm/v1/worker/gpu_model_runner.py",
+    "host_saved_ref": {
+      "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/0_gpu_model_runner.py",
+      "bytes": 334736,
+      "sha256": "6250ca0670c4593aa2f7c4567c9c71d6cb3d8182624a985d4d4e33d5bf054666"
+    },
+    "mirror_rehashed": true
+  },
+  "native_1_qwen3_vl.py": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_startup_failure_v1/native_sources/1_qwen3_vl.py",
+    "bytes": 111366,
+    "sha256": "2935e09be47a893f09176cddb1beb6ed2e73666459de2bfbb08aca50b3e08969",
+    "guest_path": "/vllm-workspace/vllm/vllm/model_executor/models/qwen3_vl.py",
+    "host_saved_ref": {
+      "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/1_qwen3_vl.py",
+      "bytes": 111366,
+      "sha256": "2935e09be47a893f09176cddb1beb6ed2e73666459de2bfbb08aca50b3e08969"
+    },
+    "mirror_rehashed": true
+  },
+  "native_2_multimodal.py": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_startup_failure_v1/native_sources/2_multimodal.py",
+    "bytes": 13957,
+    "sha256": "2ca78ef40f8bdae73ef26af648b6384c1ece4108d1fcfda27cd00e60c013ca14",
+    "guest_path": "/vllm-workspace/vllm/vllm/config/multimodal.py",
+    "host_saved_ref": {
+      "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/2_multimodal.py",
+      "bytes": 13957,
+      "sha256": "2ca78ef40f8bdae73ef26af648b6384c1ece4108d1fcfda27cd00e60c013ca14"
+    },
+    "mirror_rehashed": true
+  },
+  "native_3_arg_utils.py": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_startup_failure_v1/native_sources/3_arg_utils.py",
+    "bytes": 111675,
+    "sha256": "3ade2488897d08b5c1fd4ddb815eb5743169907d59741a47867185caab7f250d",
+    "guest_path": "/vllm-workspace/vllm/vllm/engine/arg_utils.py",
+    "host_saved_ref": {
+      "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/3_arg_utils.py",
+      "bytes": 111675,
+      "sha256": "3ade2488897d08b5c1fd4ddb815eb5743169907d59741a47867185caab7f250d"
+    },
+    "mirror_rehashed": true
+  },
+  "native_4_model_runner_v1.py": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_startup_failure_v1/native_sources/4_model_runner_v1.py",
+    "bytes": 258160,
+    "sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968",
+    "guest_path": "/vllm-workspace/vllm-ascend/vllm_ascend/worker/model_runner_v1.py",
+    "host_saved_ref": {
+      "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/4_model_runner_v1.py",
+      "bytes": 258160,
+      "sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968"
+    },
+    "mirror_rehashed": true
+  },
+  "native_5_worker.py": {
+    "path": "/workspace/scratch/e65c435145b1/continuation_startup_failure_v1/native_sources/5_worker.py",
+    "bytes": 48290,
+    "sha256": "c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3",
+    "guest_path": "/vllm-workspace/vllm-ascend/vllm_ascend/worker/worker.py",
+    "host_saved_ref": {
+      "path": "/opt/host/vnf/austinov/run-bole-startup-native-source-read-v1-20261022T134900Z/5_worker.py",
+      "bytes": 48290,
+      "sha256": "c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3"
+    },
+    "mirror_rehashed": true
+  }
+}
