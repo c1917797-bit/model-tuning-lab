@@ -1,0 +1,158 @@
+{
+  "schema": "bole.boundary-probe-main-source-review/v2-continuation",
+  "NPU_executed": false,
+  "continuation_authorization": {
+    "bytes": 1886,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v3_continuation_20261022T120055Z/AUTHORIZATION_CONTINUATION.json",
+    "sha256": "e0808a184326bfcf70e5ce158c7a00dac03b5f7aeab2aabc99b7c99618e40fac"
+  },
+  "helpers": {
+    "boundary_delta.py": {
+      "bytes": 9827,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v3_continuation_20261022T120055Z/boundary_delta.py",
+      "sha256": "56efb9a324ce9f15d468409e95dbed00694a681a780432349c96159e94c793be"
+    },
+    "boundary_integration.py": {
+      "bytes": 9879,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v3_continuation_20261022T120055Z/boundary_integration.py",
+      "sha256": "6d86ce8b5b4114966cd8d6e1d16ace80ccbc5fc6fb2a55a73ddf15cf3f33501b"
+    },
+    "boundary_probe_v1.py": {
+      "bytes": 31338,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v3_continuation_20261022T120055Z/boundary_probe_v1.py",
+      "sha256": "14c69907adffb9ed5661f6ffd6023f85ab58730af69232b9a54a4ff6883e4bdf"
+    },
+    "boundary_validation.py": {
+      "bytes": 12004,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v3_continuation_20261022T120055Z/boundary_validation.py",
+      "sha256": "c4846f9b49255143e005995ce609cfae3ecbdf1f6e5b28d9259cf2fb32351614"
+    },
+    "projection_probe_v1.py": {
+      "bytes": 30248,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v3_continuation_20261022T120055Z/projection_probe_v1.py",
+      "sha256": "4c442d86077efcb64e0d7f845d77accabe9b310e844c88a2a9731b2c3b450765"
+    }
+  },
+  "paired_gate_pass": false,
+  "parent": {
+    "bytes": 1503149,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_performance_profile_prepare_20261021/successor_layer/bound-short-ON-v2/SOURCE_BOUND.json",
+    "sha256": "a285ac43d953cf257255ec4848d8719b613010bf339491e2a39d20d2f3b73b8f"
+  },
+  "performance_admitted": false,
+  "source_only": true,
+  "reviewer": "MAIN",
+  "reviewed_utc": "2026-10-22T12:39:00Z",
+  "control_refs": [
+    {
+      "bytes": 9238,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/boundary_probe_prepare_v3_continuation_20261022T120055Z/PREPARATION_INPUTS.json",
+      "sha256": "077501196df24d30a38ea0d69585db25850c327152f36c29eb1f303221cc6326"
+    },
+    {
+      "bytes": 4883,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v3-continuation_20261022T120055Z/RESULT.json",
+      "sha256": "265afe1772e3bbfd2511173a037d5354266aabb3105059f45f385ab90f9286a2"
+    },
+    {
+      "bytes": 8648,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v3-continuation_20261022T120055Z/INPUTS_BEFORE.json",
+      "sha256": "50f744501db8b03dfb28cde00f1f94de04f7badd662fb8b4248be5b3631e86dd"
+    },
+    {
+      "bytes": 8648,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v3-continuation_20261022T120055Z/INPUTS_AFTER.json",
+      "sha256": "50f744501db8b03dfb28cde00f1f94de04f7badd662fb8b4248be5b3631e86dd"
+    },
+    {
+      "bytes": 794,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v3-continuation_20261022T120055Z/probe_controls.json",
+      "sha256": "20e0633e55dda996d889c4e66f4b9562fd44a09b50dc931f15ce57904ad7f9dd"
+    },
+    {
+      "bytes": 0,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v3-continuation_20261022T120055Z/probe_controls.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1039,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v3-continuation_20261022T120055Z/probe_controls.stderr",
+      "sha256": "fbf7bb8f1c6f8bb000c64db8be458b46bf2862ee00d127047fedbc7a05f3ea19"
+    },
+    {
+      "bytes": 1029,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v3-continuation_20261022T120055Z/integration_controls.json",
+      "sha256": "583f2830ee82170fa934560b9c5da9c7380b9f19d5a1eef09788a5703dbd78be"
+    },
+    {
+      "bytes": 0,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v3-continuation_20261022T120055Z/integration_controls.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 819,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v3-continuation_20261022T120055Z/integration_controls.stderr",
+      "sha256": "d747ad610984cdabb2acf4b73d21db1840bbc57860b150ad76d8f529ae29fd16"
+    },
+    {
+      "bytes": 812,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v3-continuation_20261022T120055Z/projection_controls.json",
+      "sha256": "e8e97854721c572ac78b96651ebbf84e919f4b545eaebc1e38a06969d12712ad"
+    },
+    {
+      "bytes": 43,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v3-continuation_20261022T120055Z/projection_controls.stdout",
+      "sha256": "cca60b3c15149319eb81161f436b4fa3630019f2d65deda2858e1b42915ec9a7"
+    },
+    {
+      "bytes": 1344,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v3-continuation_20261022T120055Z/projection_controls.stderr",
+      "sha256": "4df9abac799b65e99ccdb18b67f406125f94211908608968654698f935cf8bf5"
+    },
+    {
+      "bytes": 798,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v3-continuation_20261022T120055Z/metadata_capacity.json",
+      "sha256": "cd04be6ad753f9ba7318020ad5c923a89f212abc701c09866db270fdf2e978e5"
+    },
+    {
+      "bytes": 1030,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v3-continuation_20261022T120055Z/metadata_capacity.stdout",
+      "sha256": "6db05e929eaeb147f40e4e977772494edf00e4a86cff041b4f352b2a9c1d3916"
+    },
+    {
+      "bytes": 0,
+      "path": "/opt/host/vnf/austinov/run-bole-boundary-source-controls-v3-continuation_20261022T120055Z/metadata_capacity.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "review_scope": "Actual host source controls and exact 22 deployed preparation inputs; continuation authority isolated from original 24h report cutoff. Source-only approval to freeze and independently audit this diagnostic, with all original numerical and lifetime thresholds retained.",
+  "checks": {
+    "all_28_control_inputs_reopened_unchanged": true,
+    "unique_before_after_with_descriptor": 29,
+    "control_counts": [
+      11,
+      8,
+      16
+    ],
+    "capacity_calculation_only": true,
+    "old_report_cutoff_unchanged": true,
+    "phase_seconds": 3600,
+    "cleanup_seconds": 180,
+    "prepare_admission_seconds": 3780,
+    "source_internal_cutoff_epoch": 1792692055,
+    "original_twenty_sameimage_executed": false,
+    "six_clock_generated_validator_audit_pending": true,
+    "resource_admission": false,
+    "matmul_weight_bytes_proven": false
+  },
+  "independent_source_review": {
+    "scope": "22 exact core files, declared authority and clock inverse transformations; no runtime/owner qualification",
+    "report_sha256": "05ec2d3be2c8c060b7a6351851c4c153598f06a16185365861177d2c0dc1c7fc",
+    "report_bytes": 11749
+  },
+  "controls_inspection_receipt": {
+    "bytes": 22125,
+    "path": "/opt/host/vnf/austinov/run-bole-continuation-control-review-v1-20261022T123800Z/CHECK.json",
+    "sha256": "1d188f47371e28c193a90d955cffdd19e3568cf416119f1417afcf5d437956df"
+  }
+}
