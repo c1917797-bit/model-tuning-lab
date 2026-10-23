@@ -6,8 +6,10 @@ import sys
 
 HERE=Path(__file__).resolve().parent
 PARENT=HERE.parent/'formal_pair_ready_prepare_v1/strict-source-proposal-v3/prepared-source-bole'
-NAMES=('g3_fia_contract.py','service_fia.py','cache_registry.py','live_owner.py','model_entry.py','fa_prefill131r10.py','service_runner.py')
+NAMES=('g3_fia_contract.py','service_fia.py','cache_registry.py','live_owner.py','model_entry.py','service_bridge.py','fa_prefill131r10.py','service_runner.py')
 PARENT_IDENTITIES={"adapter.py":{"bytes":8622,"sha256":"37369161fbadad74e0f727c62e769069277d6f2696f7a8b2d88d67e92d93dc59"},"cache_registry.py":{"bytes":6547,"sha256":"befb35dbc49a2aaf740a1cf771568b145c131a516b1549938422a73c62e3a14c"},"core112.py":{"bytes":1443,"sha256":"b7e3f3a91889e98c54195a0c5f5eb2a4c6cdf8fc9c667ece26d7250b3e6eebe7"},"fa_prefill131r10.py":{"bytes":6174,"sha256":"9e3ba453f232faf0f9a36ae0f8b7c962d700c3115c98ba574b3d89a3d3650550"},"g2_numeric.py":{"bytes":24956,"sha256":"e2b66454b354175e1b00708ebbb70cd562a707acce34e8678ea581d7b6c2da91"},"g3_fia_contract.py":{"bytes":1334,"sha256":"dba6a3d251b74277af4679502bc8242da63027ff379f2cb9cb0ea4f355e98400"},"independent_model.py":{"bytes":14336,"sha256":"cdffc7dcb59b744788c2b736a5607e7218a9e13595b0f6a7d10f450a4fb6ad72"},"live_owner.py":{"bytes":11777,"sha256":"589aedf227797f8f08d3d2efc8c5236e768bdc5a2712f9068e44834952d7f6a8"},"model_entry.py":{"bytes":32009,"sha256":"8684325946bfb2d5cf1ab972c10be98f86c8b95605f676c709668277b360d0b9"},"oracle112.py":{"bytes":774,"sha256":"6ba6709289ee37cf54c13faf0bff43f361f06276049774bc3b1cd58456aa3a70"},"service_fia.py":{"bytes":3764,"sha256":"61203de14e3bd0680aeada666372200d776dd05869055bae15947132cf559a24"},"service_runner.py":{"bytes":51175,"sha256":"730ff8d03824d5da0cbe960eb1f2e47dddabae22b282b610e2deee6fb8119d6a"},"tp_consensus.py":{"bytes":5982,"sha256":"39334eaae500d515985ae5c775bb9bed90f20648d89a3ec78f382a1d0fafe73e"},"transaction.py":{"bytes":7968,"sha256":"44f1438febd6c4de3a59f6a5a10ceae6e1849b2d63eac411fc80e40ef88bde6c"}}
+
+PARENT_IDENTITIES['service_bridge.py']={'bytes':7063,'sha256':'8fae536aac8bcadf0479098d0f38a45ae2890018fd9c24d70cfe6e6b76c5edf7'}
 
 def need(v,s):
     if not v:raise ValueError(s)
@@ -59,6 +61,12 @@ def adapt(original):
     needle='  trial=self.A.prepare(t,owner,query.reshape(3,6,256),key.reshape(3,1,256),value.reshape(3,1,256),compact_k,compact_v,tuple(range(pages)))'
     model=one(model,needle,needle+"\n  if o.length>=2048:trial['native_geometry']=b['native_geometry']")
     files['model_entry.py']=model.encode()
+    bridge=files['service_bridge.py'].decode()
+    bridge=one(bridge," owner=self.A.Owner(o.request,o.generation,o.slot,o.length,o.version)\n",
+        " if o.length>=2048:\n  import fa_native_geometry as NG\n  need(self.C.ref(NG.__file__)==self.own_source['files']['fa_native_geometry.py'],'source-reviewed actual service geometry module')\n  NG.require(b.get('native_geometry')).check(o.length)\n owner=self.A.Owner(o.request,o.generation,o.slot,o.length,o.version)\n")
+    needle=' trial=self.A.prepare(t,owner,query.reshape(3,6,256),key.reshape(3,1,256),value.reshape(3,1,256),compact_k,compact_v,tuple(range(pages)))'
+    bridge=one(bridge,needle,needle+"\n if o.length>=2048:trial['native_geometry']=b['native_geometry']")
+    files['service_bridge.py']=bridge.encode()
     mapping=files['fa_prefill131r10.py'].decode()
     mapping=one(mapping,"need(type(length)is int and length==131 and context.attn_metadata is metadata,'same actual first-prefill context')",
         "need(type(length)is int and length in(131,2048)and context.attn_metadata is metadata,'same actual native-prefill context')\n if length==2048:need(os.environ.get('BOLE_NATIVE_2K_GEOMETRY_ENABLE')=='1','native2k metadata observer default OFF')")

@@ -1,0 +1,35 @@
+{
+  "schema": "native.2k-prefill-command-plan/v1",
+  "enabled": false,
+  "NPU": false,
+  "source_complete": false,
+  "source_bound_ref": null,
+  "MAIN_review_ref": null,
+  "authority_ref": null,
+  "source_root": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-native-2k-prefill-observation-v1",
+  "output_root": "/opt/host/vnf/austinov/run-native-2k-prefill-observation-v1",
+  "source_only": {
+    "default": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_2k_prefill_observation_prepare_v1/render_observation.py"
+    ],
+    "review": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_2k_prefill_observation_prepare_v1/render_observation.py",
+      "--review"
+    ],
+    "controls": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/native_2k_prefill_observation_prepare_v1/test_native_2k.py"
+    ]
+  },
+  "actual_model_command_ref": null,
+  "actual_CPU_command_ref": null,
+  "reason": "Original native3/131 gate deliberately unchanged; new metadata-only source/clock/command binding plus real same-image/new limited window required. Not READY."
+}

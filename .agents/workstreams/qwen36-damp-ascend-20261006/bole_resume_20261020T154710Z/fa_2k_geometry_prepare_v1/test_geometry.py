@@ -139,12 +139,95 @@ class Source(unittest.TestCase):
         self.assertIn("trial['native_geometry']=b['native_geometry']",model)
         self.assertIn('native_geometry.attach(rows)',self.bundle['files']['cache_registry.py'].decode())
         self.assertIn("DOMAIN.shape(length,trial.get('native_geometry'))",self.bundle['files']['service_fia.py'].decode())
+        bridge=self.bundle['files']['service_bridge.py'].decode()
+        self.assertIn("NG.require(b.get('native_geometry')).check(o.length)",bridge)
+        self.assertIn("trial['native_geometry']=b['native_geometry']",bridge)
+        self.assertEqual(set(self.bundle['inverse_delta']),set(R.NAMES)|{'fa_native_geometry.py'})
     def test_inverse_rejects_modified_source(self):
         b=copy.deepcopy(self.bundle);b['files']['service_fia.py']+=b'\n'
         with self.assertRaises(ValueError):R.inverse(b)
     def test_no_whole_source_or_NPU_claim(self):
         self.assertFalse(self.bundle['whole_source_ready']);self.assertFalse(self.bundle['NPU'])
         self.assertTrue(self.bundle['prepared_only'])
+
+class ActualServiceOverride(unittest.TestCase):
+    def run_override(self,length,*,missing=False,wrong_source=False):
+        # Run the actual installer, actual rendered override and actual boundary
+        # constructor. Tensor algebra is synthetic; no delegate/NPU is executed.
+        import ast,dataclasses
+        parent=R.read_parent();bundle=R.adapt(parent)
+        class Tensor:
+            def __init__(self,shape,dtype='bf16',device='npu'):
+                self.shape=shape;self.dtype=dtype;self.device=types.SimpleNamespace(type=device)
+            def reshape(self,*shape):return Tensor(shape,self.dtype,self.device.type)
+            def __getitem__(self,index):return self
+            def copy_(self,value):return self
+            def index_select(self,dim,index):return self
+            def clone(self):return self
+        key=Tensor((128,128,1,256));value=Tensor(key.shape)
+        geo=Lifetime().fixture()
+        geo.layer.kv_cache=[key,value];geo.layer.impl.key_cache=key;geo.layer.impl.value_cache=value
+        geo=dataclasses.replace(geo,key=key,value=value,key_identity=id(key),value_identity=id(value))
+        owner=types.SimpleNamespace(request='r',generation=1,slot=0,length=length,version=0)
+        ctx=types.SimpleNamespace(owner=owner,mode='TREE',captures={},visit=lambda *a:None)
+        bus=types.SimpleNamespace(get=lambda:None)
+        class Base:
+            def _fa(self,*a):pass
+            def _physical_slot(self,*a):pass
+        bridge=Base();bridge.saved=[None]*64;bridge.t=types.SimpleNamespace(long='i64')
+        bridge.t.tensor=lambda values,**kw:Tensor((len(values),),kw['dtype'])
+        bridge.t.zeros=lambda shape,**kw:Tensor(shape,kw['dtype'])
+        bridge.t.zeros_like=lambda value:Tensor(value.shape,value.dtype)
+        bridge.collect_performance_diagnostics=True;bridge.collect_observation_only=True
+        bridge.C=types.SimpleNamespace(ref=lambda p:p);bridge.fia_ref='fia-ref';bridge.fia='fia'
+        bridge.prerequisites={'components':{'paged':{'actual_fia_abi':'abi','source':'source'}}}
+        bridge.torch_npu=None
+        bridge.own_source={'files':{'fa_native_geometry.py':G.__file__,'service_fia.py':'derived/service_fia.py'}}
+        if wrong_source:bridge.own_source['files']['fa_native_geometry.py']='wrong-module'
+        trials=[]
+        def prepare(t,o,*args):
+            self.assertIs(o,owner);trial={'owner':o};trials.append(trial);return trial
+        bridge.A=types.SimpleNamespace(Owner=lambda *a:owner,prepare=prepare)
+        live=types.SimpleNamespace(current=lambda:owner)
+        b={'index':3,'table':geo.facts['table'],'key':key,'value':value}
+        if not missing:b['native_geometry']=geo
+        sourceio=types.ModuleType('sourceio');sourceio.need=G.need;sourceio.ref=lambda p:p
+        domain=types.ModuleType('g3_fia_contract')
+        with patch.dict(sys.modules,{'sourceio':sourceio,'fa_native_geometry':G,'g3_fia_contract':domain}):
+            exec(compile(bundle['files']['g3_fia_contract.py'],'derived/domain','exec'),domain.__dict__)
+            boundary={'__file__':'derived/service_fia.py','__name__':'_actual_derived_fia'}
+            exec(compile(bundle['files']['service_fia.py'],'derived/service_fia.py','exec'),boundary)
+            ActualBoundary=boundary['ServiceFiaBoundary']
+            class Reached(Exception):pass
+            def boundary_stop(t,delegate,trial,source,**kw):
+                ActualBoundary(t,delegate,trial,source,**kw)
+                if length>=2048:self.assertIs(trial['native_geometry'],geo)
+                else:self.assertNotIn('native_geometry',trial)
+                raise Reached()
+            tree=ast.parse(bundle['files']['service_bridge.py'])
+            names={'_fa','_physical','_validate','install_methods'}
+            unit=ast.fix_missing_locations(ast.Module(body=[x for x in tree.body if isinstance(x,ast.FunctionDef)and x.name in names],type_ignores=[]))
+            namespace=dict(types=types,E=types.SimpleNamespace(BUS=bus,Bridge=Base),BUS=bus,
+                G1=types.SimpleNamespace(SCOPE='service-scope'),need=G.need,tensor_id=id,
+                resolve_fia=lambda *a:'fia',ServiceFiaBoundary=boundary_stop)
+            exec(compile(unit,'actual-rendered-service-override','exec'),namespace)
+            namespace['__file__']='derived/service_bridge.py'
+            namespace['install_methods'](bridge,live,bridge.C,
+                {'service_experiment':'service-scope','files':{'service_bridge.py':'derived/service_bridge.py'}})
+            self.assertIs(bridge._fa.__func__,namespace['_fa'])
+            bus.get=lambda:ctx
+            if missing and length>=2048 or wrong_source:
+                with self.assertRaises(ValueError):bridge._fa(b,Tensor((3,1536)),Tensor((3,256)),Tensor((3,256)))
+                self.assertFalse(trials)
+            else:
+                with self.assertRaises(Reached):bridge._fa(b,Tensor((3,1536)),Tensor((3,256)),Tensor((3,256)))
+                self.assertEqual(len(trials),1);self.assertIs(ctx.captures[3]['trial'],trials[0])
+    def test_actual_installer_to_boundary_native2048_and3070(self):
+        for length in(2048,3070):self.run_override(length)
+    def test_actual_installer_missing_geometry_or_wrong_module_refuses(self):
+        self.run_override(2048,missing=True);self.run_override(2048,wrong_source=True)
+    def test_actual_legacy131_override_needs_no_new_geometry(self):
+        self.run_override(131,missing=True)
 
 if __name__=='__main__':
     if sys.argv[1:]!=['--check']:raise SystemExit('default OFF: software --check only')

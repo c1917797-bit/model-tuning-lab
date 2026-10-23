@@ -55,14 +55,43 @@ No 25th native page, allocation growth or real native 2k geometry is claimed.
    requires actual strong native geometry instead of removing the gate.
 2. Actual `after_prefill` still fixes input/RoPE/hidden/registry/owner to 131.
    The geometry partial node deliberately does not open those independent
-   gates. A separate exact service-input ABI successor is being prepared.
+   gates. The separate exact service-input ABI successor is now prepared:
+   operation 0aac passed five software controls, and 0acc rechecked them
+   after the real override repair. The real callback software test stops
+   before Bridge construction; actual Owner execution is not claimed.
 3. The first numerical tap only hashed Q/K/V after the actual delegate.
    The stable numerical node now hashes all five inputs and independently
    joins mask/table in their original dtype. The omitted witness is fixed,
    not silently accepted.
 4. Native-only 2048/1 observation is being prepared from the actual native-AR
    source, without BOLE/MTP intervention. HTTP-to-worker request-ID linkage
-   must follow pinned server behavior, not guessed header equality.
+   follows pinned completion-serving behavior and the actual observed
+   assignment before/after event, not guessed header equality. The stable
+   metadata packet passed nine software controls in 0abe. Owning/source gates,
+   whole runtime input-processor binding and actual NPU observation remain
+   pending; the packet cannot execute by itself.
+5. Review of the actual installer proved that `service_bridge._fa` replaces
+   `model_entry._fa`. The first geometry node only wired the latter, so the
+   real service trial would lack geometry. The successor now wires both.
+   Operation 0acc ran 22 geometry software controls, including the actual
+   installer, rendered override and FIA boundary constructor before the
+   native delegate. These are synthetic-ABI controls, not tensor mathematics.
+6. Source-derived capture accounting exposed another preparation failure.
+   With the observed native FP32 GDN shape and 11-wide BF16 convolution arena,
+   native24 FA pages and private25 scratch, operation 0aca's deliberately
+   synthetic shape ledger ran the original clone guard and showed at least
+   404,041,536 logical bytes, exceeding 384 MiB by 1,388,352 bytes before
+   several additional operands. This is a conditional source-size lower
+   bound, NOT measured NPU memory/RSS or an actual 2k numerical failure.
+   The initial manual estimate overcounted FA BF16 bytes by two; it is
+   corrected, not used as evidence. FA before/after K/V totals 96 MiB,
+   not 192 MiB. With only a 3-wide convolution arena the same partial ledger
+   does not prove overflow. State-evidence deduplication is being designed;
+   it must preserve actual before/after, full byte checks, the independent
+   oracle, original thresholds and all 128 writes without raising caps.
+7. Whole-source composition still needs the explicit new 2k stream scope:
+   the original `G2.scope()` describes prefix131. Prepared callback routing
+   does not silently change that metadata/consumer contract.
 
 All entries above are implementation/evidence defects or incomplete integration,
 not proof that BOLE has no value.

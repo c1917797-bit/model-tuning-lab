@@ -5,7 +5,7 @@ observed page count has been created. The131 source and inverse remain intact.
 
 ## Actual mechanism
 
-The original model_entry._fa gathers ceil((L+2)/128) native publication pages.
+The original model_entry._fa and actual service_bridge._fa gather ceil((L+2)/128) native publication pages.
 The unchanged adapter.prepare allocates ceil((L+3)/128) PRIVATE pages and puts
 root/left/right at L,L+1,L+2. Commit writes only root or root+one child to native
 positions L or L,L+1. For2048 input/1024 output, MAX_BEFORE3070 therefore needs
@@ -23,7 +23,7 @@ the same strong binding to the actual cache registry. Every later check refuses
 request/slot reuse, alias rebound, native table changes or insufficient
 accepted-path capacity. No native allocation/growth is implemented or inferred.
 
-render_geometry.adapt changes only seven existing source files plus the new
+render_geometry.adapt changes only eight existing source files plus the new
 geometry helper. It routes real model staging, service FIA shapes and live owner
 allocation checks through the observed native geometry for2k, while keeping the
 original131 path, adapter mathematics, independent references, TP consensus and
@@ -31,6 +31,12 @@ transactions byte-for-byte. All native scratch mask/table/padding checks and
 FIA argument values remain. The original metadata observer retains its2MiB
 limit; no bucket or raw budget is increased. The model native-ar sequential
 controls and independent numerical consumer remain separate and unqualified.
+
+The service installer replaces Bridge._fa with service_bridge._fa. Both paths
+must check the same live native geometry and attach it to the actual prepared
+trial before ServiceFiaBoundary construction. Merely fixing model_entry._fa
+does not reach the production override. The original2635546 preparation lacked
+that override propagation and is retained as history, not a validated2k route.
 
 The native-after-prefill service callback now contains the actual bind_all call.
 This component deliberately does NOT remove the rest of the131 input/GDN/source
@@ -46,6 +52,13 @@ full table/slot joins, insufficient-page rejection before indexing,24 versus25,
 all allowed publication indices, stale request/table/storage refusal, defaultOFF,
 unknown geometry refusal, complete inverse and unchanged algorithm/oracle bytes.
 No test fabricates a numerical PASS or a native allocation receipt.
+
+The production override control executes the actual install_methods AST,
+the actual rendered service_bridge._fa and the actual ServiceFiaBoundary
+constructor with explicitly synthetic tensor objects and live-type predicates.
+It proves trial geometry propagation and missing/wrong-source rejection for
+2048 and3070, plus the original131 route without new geometry. It stops before
+the native delegate; no tensor mathematics or NPU behavior is inferred.
 
 For the next legitimate native2k NPU observation, the existing original
 after_prefill callback must reach the new bind_all hook with actual returned
