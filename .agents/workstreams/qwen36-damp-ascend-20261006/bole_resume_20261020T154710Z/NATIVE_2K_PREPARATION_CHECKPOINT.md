@@ -185,6 +185,45 @@ Original0b24/0b28 responses: external followup evidence root,
 bole2k-composition-0b28-tool-responses.json (20689 bytes, SHA256
 `846e1eedf733a5dedc9a78fa319091c07bfa01eef64d7c4bf661e87aa88c50fb`).
 
+## Three finite nodes closed — still no device authority
+
+The actual short8 whole-source successor now composes the complete Q419
+source, exact2048 input/client/state-reader changes, current clock seam and
+b53 codec into424 files. After preserving0b46's old source-profile refusal,
+the successor changes only that exact preregistered input-length operand.
+Author0b4a then actually timed out at30.001s because its tool request used
+the unsupported timeoutSeconds field, not the formal timeout field. MAIN
+confirmed terminal timedOut/error=timeout, preserved it and used timeout180
+for one causally repaired control. MAIN0b4f completed0 in41.863s: complete
+validator/SOURCE/command/phase through the original predevice boundary,
+with missing authority, wrong helper/source and missing actual geometry,
+prefill/joint evidence rejected. No physical template/bind/review was issued.
+
+runtime_joint_ledger_prepare_v1 now calls the existing long reservation from
+the actual sink before export, charges a bounded dynamic wire quota, checks
+durable real wire before reload and joins original report/RELEASE before ACK.
+Partial writes are retained with exact Refs and no ACK. Original0b45's seven
+software controls are retained. MAIN found that first pre-export refusal did
+not latch failure; the successor now prevents any later attempt on that same
+ledger, rethrowing the original refusal. MAIN0b4c passed four affected controls.
+Positive downstream tests explicitly mock the still-unmeasured temporary
+predecessor: they are stage-wiring tests, not real joint admission. Two CPU
+copies,128/64MiB reservations and original caps remain; actual serializer
+temporary high-water is unmeasured and production admission remains closed.
+
+cpu_export_lifetime_prepare_v1 prepares the exact original export/save/reopen
+prefix for future real Torch CPU small and conditional-first2k controls.
+Actual0b48 checked only source/AST, syntax and CLI/defaultOFF; no Torch was
+imported. Full-size input is a synthetic conditional subset, not a native
+frame. CPU storage sharing cannot stand in for NPU D2H storage. Actual Tensor,
+PSS/RSS/HWM, independent bitwise reload and failure-retention outcomes are
+pending. Model NPU capture is explicitly unmeasured, not reported as zero.
+
+All three finite preparation owners have stopped further source expansion.
+Do not add more software mocks to substitute for the missing same-image and
+NPU evidence. The requested new limited6h device window has not been approved;
+no old clock is extended. Current work remains source-only, not final success.
+
 ## Remaining acceptance edges
 
 The current nodes are partial, not a complete bound executable source.
