@@ -1,0 +1,58 @@
+{
+  "schema": "bole.representative2k-frozen-input-definition/v1",
+  "preparation_only": true,
+  "screening_only": true,
+  "synthetic": true,
+  "no_general_gain_claim": true,
+  "input_content_scope": "repeated Explain text: fixed-length synthetic smoke/screening only; not representative real workload",
+  "formal_dataset_preregistration_required": true,
+  "formal_diverse_token_id_inputs_ref": null,
+  "authority_ref": null,
+  "actual_input_ref": null,
+  "checkpoint": "/cache/efim/Qwen3.6-27B",
+  "tokenizer_mount": "/models/Qwen3.6-27B",
+  "recipe": {
+    "text": "Explain how trees grow. ",
+    "repeat": 1024,
+    "add_special_tokens": false,
+    "take_first_tokens": 2048,
+    "require_at_least_encoded_tokens": 2048,
+    "padding": false
+  },
+  "performance": {
+    "input_tokens": 2048,
+    "output_tokens": 1024,
+    "concurrency": 1,
+    "TP": 4,
+    "physical_NPUs": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "warmup_output": 1024,
+    "measured_output": 1024,
+    "unmeasured_barrier_output": 1,
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 0,
+    "ignore_eos": true,
+    "profiling": false,
+    "common_HCCL_DETERMINISTIC": "true",
+    "HF32": false
+  },
+  "arms": {
+    "native_ar": {
+      "MTP": 0,
+      "BOLE": false
+    },
+    "bole": {
+      "MTP": 8,
+      "BOLE": true
+    }
+  },
+  "actual_native_prefill_ref": null,
+  "independent_2k_numeric_qualification_ref": null,
+  "joint_actual_raw_budget_ref": null,
+  "whole_source_admission_ref": null
+}
