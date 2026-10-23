@@ -1,4 +1,17 @@
-# CURRENT R23 PARTIAL-EVIDENCE HOST REPAIR; NO DEVICE AUTHORIZATION
+# CURRENT 2026-10-23 RESUME AND MAINTAINER LESSON INGESTION
+
+Human requests continued reproduction and success/failure Skill ingestion.
+Historical replay0c34 verifies44raw hashes, R23 eleven host controls and29Skill
+structure;0c43 quick_validate29/registry29/7links/6decision scenarios PASS.
+HYPIC_LESSONS_INGESTION_20261023.json records scope; no new NPU result.
+Do not mistake historical live wording below or task.execution_state for a live job.
+Next bounded hypothesis: C2 window block-table D2H is not covered by R20 GDN
+metadata reuse. Prepare source-proven forward-only snapshot and negative controls,
+then freeze new integrated ON/OFF contract; keep finite/lease/completion/ownership.
+Fullquality and same-source performance/lifecycle remain incomplete. Old cutoff
+is historical, not automatically extended by this document. No new device run.
+
+# HISTORICAL R23 PARTIAL-EVIDENCE HOST REPAIR; NO DEVICE RUN
 
 New formal_quality_r23_tp4.py retains interrupted fullquality responses from
 strictjournal, preserving executionerror/validfalse. Oldcontroller and R22raw unchanged.

@@ -53,6 +53,24 @@ every primary metric passes its progression threshold and no safety, quality,
 or tail-risk gate fails. Preserve the stopped result; do not consume a full
 matrix to reconfirm a clearly missed gate.
 
+## Interrupted and partial evidence
+
+Persist each request's identity, response/error, finish reason and timing as it
+completes, before waiting for the whole cohort. Test interruption through the
+controller's actual failure/finally path, not only its success path. A recovery
+reader must reject duplicate or mismatched identities and malformed records;
+retain the original execution error and invalid/incomplete classification.
+Never rewrite immutable raw evidence or infer task correctness from HTTP success.
+
+Before a long phase, budget startup, unscored producers, scored work, audit and
+release using observed wall time. If it cannot fit an authorized window, prepare
+offline or freeze an explicitly authorized resumable protocol; do not silently
+extend the window, shrink the denominator or stitch incompatible attempts.
+A missing handle or observation timeout alone is not an execution terminal.
+
+See [the HYPIC case](../paper-to-ascend/references/hypic-independent-port-lessons.md)
+for the demonstrated lost-summary failure and a host-only retention repair.
+
 ## Comparability Gate
 
 Do not compare results when material source, model, hardware, driver, firmware,

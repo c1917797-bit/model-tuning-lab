@@ -22,7 +22,7 @@ Use this reference when creating or reviewing a concrete quality experiment.
 
 ```json
 {
-  "max_output_tokens": 2048,
+  "max_output_tokens": 1024,
   "ignore_eos": false,
   "seed": 0,
   "temperature": 0,
@@ -31,6 +31,11 @@ Use this reference when creating or reviewing a concrete quality experiment.
   "repetitions_per_arm_and_dataset": 3
 }
 ```
+
+This example is non-thinking. If thinking is selected, freeze its 2048-token
+cap in both arms; an explicit user/dataset contract takes precedence. Record
+`stop` and `length` separately; natural stopping does not imply zero truncation.
+Do not drop capped or failed samples after seeing results.
 
 Record any additional sampling and stopping parameters. A changed field creates
 a new ruler and requires a fresh baseline.
@@ -59,7 +64,9 @@ Report each run and:
 - paired per-sample wins, losses, and unchanged count when meaningful;
 - per-category/task deltas;
 - confidence interval or paired bootstrap when the scorer supports it;
-- deterministic-canary equality and within-arm variance.
+- within-arm variance and the applicable deterministic/lossless or approximate
+  treatment criteria; dataset answer exact-match is not candidate/native token
+  equality.
 
 Do not use an arbitrary universal “one percentage point is noise” rule.
 Interpret the predeclared tolerance together with the measured baseline
@@ -67,9 +74,11 @@ variability, paired samples, dataset size, and critical-category gates.
 
 ## Lifecycle
 
-Performance and quality use separate service lifecycles:
+Performance and quality use separate service lifecycles. The sequence below
+avoids diagnostic carry-over; it does not require positive performance before a
+separately authorized quality study:
 
-1. finish performance and stop that service;
+1. stop any prior performance/diagnostic service;
 2. start the frozen quality baseline, wait for health, record identity, warm up
    if the contract requires it, and run three quality repetitions;
 3. stop the baseline;

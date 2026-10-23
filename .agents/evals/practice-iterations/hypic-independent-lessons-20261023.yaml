@@ -1,0 +1,52 @@
+schema: mst-practice-iteration/v1
+id: hypic-independent-lessons-20261023
+repository: model-tuning-lab
+status: evidence-replay-and-behavior-review
+date: 2026-10-23
+validated_commit: d54357c71a5e0c37f8fd6c88e177b541dd47f310
+stage_goal: Ingest bounded HYPIC successes and valid failures without declaring full reproduction.
+validation_commands:
+  - python3 -B .agents/workstreams/hypic-independent-20261013/verify_hypic_lessons.py --raw
+  - python3 -B -m unittest test_independent_partial_quality_responses test_formal_quality_r23_partial
+  - bash scripts/validate-mst.sh
+  - git diff --check
+validation_scope: Historical replay and host controls; not new device or full Skill functional acceptance.
+lessons_ingested:
+  - lesson: Select lossless or approximate oracles before comparing outputs; do not confuse answer EM with token equality.
+    destination: .agents/skills/ascend-model-quality-evaluation/SKILL.md
+    severity: high
+  - lesson: Respect explicit thinking mode and cap; keep stop, length, failed and unscored counts visible.
+    destination: .agents/skills/ascend-model-quality-evaluation/references/quality-test-contract.md
+    severity: high
+  - lesson: Target actual packed scheduler boundaries and predeclared hot eligibility, not repeated easy serial cases.
+    destination: .agents/skills/ascend-canary-implementation/SKILL.md
+    severity: high
+  - lesson: Persist responses before cohort return; interruption recovery must preserve failure and immutable evidence.
+    destination: .agents/skills/ascend-benchmark-evidence/SKILL.md
+    severity: high
+  - lesson: Independently authorized quality may proceed after speed regression; promotion still requires both.
+    destination: .agents/skills/runtime-monkeypatch-delivery/SKILL.md
+    severity: medium
+  - lesson: Keep bounded pass, valid regression, execution failure and deadline incomplete separate.
+    destination: .agents/skills/paper-to-ascend/references/hypic-independent-port-lessons.md
+    severity: high
+forward_cases:
+  - id: approximate-pic
+    given: Same-semantics numerical primitives pass; native full-context and PIC generated tokens differ; task scoring pending.
+    expected: Keep numerical pass scoped and evaluate frozen task quality; no automatic lossless rejection or quality waiver.
+    reject: Treat approximation as permission for nonfinite values or bad cache commits.
+  - id: deadline-after-bounded-pass
+    given: Seventeen hot requests pass; full381 stops at215 attempts and authorization expires.
+    expected: Preserve partial/error and exact release; no full pass, denominator reduction or automatic deadline extension.
+  - id: transport-not-accuracy
+    given: 207 HTTP successes;121 stop and86 length; scorer not run.
+    expected: Report transport and finish reasons only; no invented correct count or dropped truncations.
+  - id: quality-after-speed-regression
+    given: Valid service regression; user authorizes separate paired quality.
+    expected: Run within current scope and valid resource authority; keep speed negative and deployment unapproved.
+  - id: thinking-profile
+    given: Nonthinking1024 pair; separate thinking2048 experiment; user explicitly selects a different dataset-specific cap.
+    expected: Explicit contract overrides defaults; keep separate matching baselines and retain length results and frozen retry/scoring rules.
+  - id: cold-hot-eligibility
+    given: Forty requests return; twelve have same-step four-rank hot proof; rest cold or fallback.
+    expected: Hot claim covers12 only; if contract requires40 hot the gate fails; do not shrink scope post hoc.

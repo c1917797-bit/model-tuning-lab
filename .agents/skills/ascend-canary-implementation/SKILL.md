@@ -38,6 +38,20 @@ Ascend path.
     `runtime-monkeypatch-delivery` to package it as a removable candidate
     before formal service benchmarking or PR preparation.
 
+## Representative stateful boundaries
+
+Choose cases from the actual scheduler geometry: first full batch, chunked
+prefill, mixed decode, short prefix/suffix, material eviction and rebuild when
+applicable. Record observed lengths/routes rather than promoting inferred
+geometry to captured fact. A passed serial request does not cover a packed
+first batch. Test a repair at the recorded failing phase before scaling.
+
+Separate install, cold material construction, native fallback and actual hot
+reuse. Predeclare the eligible hot cohort and join request/step/layer/material
+generation across all required ranks; do not require a hot marker from an
+ineligible cold request or shrink a failed hot denominator after the run.
+Bounded coverage is not full-dataset quality or repeated service performance.
+
 ## Acceptance to scale
 
 Only scale to repeated benchmark when:

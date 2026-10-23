@@ -70,6 +70,10 @@ categories.
 7. paired reference-backed quality repetitions;
 8. disable, uninstall, restart, and resource-release rollback.
 
+This is the default promotion sequence, not permission to block a separately
+authorized quality-only study after a performance regression. Numerical and
+resource safety remain prerequisites; all promotion gates still apply.
+
 Do not spend the full matrix after a preregistered gate fails. Do not use a
 microbenchmark, profile, or compile-cache hit as a service-level win.
 

@@ -50,7 +50,10 @@ inapplicable; they are not silently exempt.
    performance work.
 8. Run the preregistered c1 fail-fast, then the complete repeated performance
    matrix only if every progression gate passes.
-9. Run the independent paired quality contract only after performance passes.
+9. Run the independent paired quality contract. Performance-first is the
+   default efficiency order, not a correctness dependency: a separately
+   authorized quality study may proceed after valid performance regression.
+   Preserve both decisions; promotion still requires both gates to pass.
 10. Exercise disable, uninstall, restart, and resource-release rollback.
 11. Record the terminal state and evidence hashes. Remove rejected hooks from
     the safe runtime tree while preserving their commits and artifacts.

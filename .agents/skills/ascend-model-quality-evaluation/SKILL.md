@@ -1,6 +1,6 @@
 ---
 name: ascend-model-quality-evaluation
-description: Use to design, run, compare, or review Ascend inference accuracy and model-quality evaluations; freeze a paired baseline/candidate ruler, use a 2048-token quality cap, measure baseline variability, and prevent performance evidence from being relabeled as quality evidence.
+description: Use to design, run, compare, or review Ascend inference accuracy and model-quality evaluations; freeze a mode-appropriate paired baseline/candidate ruler, measure baseline variability, and prevent performance evidence from being relabeled as quality evidence.
 ---
 
 # Ascend Model Quality Evaluation
@@ -14,14 +14,17 @@ latency, throughput, and resource claims.
 
 ## Default Paper-to-Ascend quality ruler
 
-Unless the owning experiment freezes a stricter dataset-specific contract, use:
+The owning experiment and current user instructions choose the ruler; do not
+replace an explicit contract with a Skill default. For a new experiment without
+an explicit dataset-specific contract, use:
 
 - baseline and candidate evaluated on the same dataset files, sample IDs,
   order, prompts, chat template, tokenizer, postprocessor, and scorer;
-- `max_output_tokens=2048`;
-- natural stopping with `ignore_eos=false`; 2048 is a cap, not a requirement
-  that every sample generate 2048 tokens;
-- `seed=0`, `temperature=0`, and thinking disabled;
+- thinking disabled: `max_output_tokens=1024`; thinking enabled: cap 2048;
+- natural stopping with `ignore_eos=false`; the limit is a cap, not a required
+  output length or proof that every response reaches EOS;
+- `seed=0`, `temperature=0`, and non-thinking by default; preserve an explicitly
+  selected thinking mode in both arms;
 - concurrency 32 and three complete repetitions per arm and dataset;
 - a fresh service lifecycle for quality after performance measurement;
 - LongBench-v2 and GSM8K when reproducing the current HYPIC ruler; include
@@ -46,9 +49,12 @@ results.
    tokenizer revision, preprocessing, answer extraction, postprocessing,
    request concurrency, generation settings, timeout/retry policy, and
    evaluator revision.
-4. Run a deterministic short canary before the full suite. For outputs of at
-   most 512 tokens where deterministic execution is expected, require zero
-   within-arm variance and exact baseline/candidate token equality.
+4. Declare whether the treatment is lossless or intentionally approximate.
+   Use exact baseline/candidate token equality only for a predeclared lossless
+   deterministic control under the same semantics. For approximate reuse such
+   as PIC, validate same-semantics numerical primitives independently, measure
+   within-arm variability, and judge task quality with the frozen scorer and
+   tolerance; different full-context output tokens alone are not a defect.
 5. Measure the baseline three times to establish its own NPU variability.
    Record per-sample results, aggregate score, run-to-run range, failures,
    timeouts, retries, finish reasons, and length-limit rate.
@@ -72,11 +78,12 @@ A quality pass requires all applicable conditions:
   by the aggregate mean;
 - the candidate delta is within the predeclared tolerance informed by measured
   baseline variability;
-- deterministic canaries satisfy their exact-match requirement;
+- lossless deterministic controls satisfy their declared exact-match rule;
+  approximate treatments satisfy their applicable numerical and task criteria;
 - treatment activation and physical Ascend execution are proven.
 
 If a required dataset is missing, the service changes identity during the run,
-the 2048-token cap is not actually applied, or artifacts disagree, fail closed
+the frozen generation cap or thinking mode is not actually applied, or artifacts disagree, fail closed
 as `invalid` or `inconclusive`; do not substitute another dataset silently.
 
 ## Evidence and claims
@@ -90,6 +97,13 @@ observed on this frozen suite within measured baseline variability.”
 
 Do not claim universal losslessness, mathematical equivalence, or quality
 preservation across models, hardware, topology, traffic, or output caps.
+
+Performance and quality are separate evidence axes. A performance regression
+blocks an acceleration claim, not a separately authorized quality evaluation.
+Neither axis can excuse the other at final acceptance. Keep every expected
+sample, request failure and length-limit result in the declared denominator.
+For interrupted runs, see the durable-evidence rule in
+`ascend-benchmark-evidence`; request success is not task correctness.
 
 For the reusable contract and report fields, read
 [quality-test-contract.md](references/quality-test-contract.md).

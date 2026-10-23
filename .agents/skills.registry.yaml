@@ -36,6 +36,7 @@ skills:
       - compare an optimization with its baseline
       - accept or reject a performance claim
       - translate an operator microbenchmark to service impact
+      - audit interrupted or partially retained benchmark evidence
     scope:
       - configs/**
       - scripts/**
@@ -45,7 +46,7 @@ skills:
   - id: ascend-model-quality-evaluation
     path: .agents/skills/ascend-model-quality-evaluation
     status: experimental
-    purpose: Produce reproducible paired Ascend model-quality evidence with a 2048-token quality cap and measured baseline variability.
+    purpose: Produce reproducible paired Ascend quality evidence with mode-appropriate caps, applicable lossless or approximate criteria, and measured baseline variability.
     triggers:
       - test Ascend model accuracy or quality
       - compare baseline and candidate quality
@@ -164,6 +165,7 @@ skills:
       - minimal paper implementation
       - one-variable inference canary
       - runtime monkeypatch activation proof
+      - validate packed scheduler boundaries or cold versus hot reuse
       - 最小可验证实现
     scope:
       - configs/**
@@ -266,6 +268,7 @@ skills:
       - audit paper implementation completeness
       - distinguish paper-exact and derivative implementations
       - 论文方法链完整性核验
+      - ingest independent HYPIC success failure and incomplete evidence
     scope:
       - AGENTS.md
       - docs/**

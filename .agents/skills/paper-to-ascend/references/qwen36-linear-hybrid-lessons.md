@@ -57,7 +57,9 @@ and advances the queue unless new evidence changes the gate.
      comparison;
    - TP service worker dispatch and loaded-binary proof;
    - a small service canary before the fixed performance run;
-   - final task accuracy only after performance remains viable.
+   - final task accuracy after performance screening by default; a separately
+     authorized quality study may proceed after regression without changing
+     the negative speed decision.
 6. **Measure the service.** For the current formal performance contract use
    fixed 1024 output tokens and report throughput, TTFT, and TPOT. Profiling is
    diagnostic and must be disabled for the formal comparison. Kernel-duration

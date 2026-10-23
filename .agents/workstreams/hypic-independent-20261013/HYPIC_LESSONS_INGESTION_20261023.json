@@ -1,0 +1,30 @@
+{
+  "schema": "hypic-lessons-ingestion/v1",
+  "date": "2026-10-23",
+  "evidence_checkpoint": "d54357c71a5e0c37f8fd6c88e177b541dd47f310",
+  "scope": "Maintainer rules and historical replay only; no new device run or reproduction acceptance",
+  "validation": {
+    "historical_raw_replay": "exec-0000000000000c34 PASS;44 raw hashes and report arithmetic",
+    "partial_response_tests": "exec-0000000000000c34 PASS;11 host controls",
+    "skill_structure": "exec-0000000000000c34 PASS;29 skills",
+    "quick_validate_registry_links": "exec-0000000000000c43 PASS;29 skills/29 registry entries/7 links/6 scenarios",
+    "independent_behavior_review": "six scenarios reviewed; two nonblocking clarifications applied",
+    "diff_check": "exec-0000000000000c34 PASS"
+  },
+  "changes": [
+    "Separate approximate PIC task quality from same-semantics numerical oracles and lossless controls",
+    "Honor explicit thinking/output contracts; default nonthinking1024/thinking2048",
+    "Permit authorized independent quality after performance regression without changing promotion gates",
+    "Target observed packed scheduler geometry and predeclared hot eligibility",
+    "Keep interrupted response evidence durable without changing failure status",
+    "Budget initialization, producer, scoring, audit and release under actual authority"
+  ],
+  "current_reproduction": {
+    "mechanism": "bounded17 pass only",
+    "speed": "R21 first pair negative:TPOT+8.332568%;TTFTP95+14.613058%",
+    "quality": "R22 deadline incomplete:215 attempts/207 request-success; matching381 baseline absent",
+    "lifecycle": "current package device acceptance incomplete",
+    "full_goal_complete": false
+  },
+  "publication": "pending;branch-local, no main change"
+}

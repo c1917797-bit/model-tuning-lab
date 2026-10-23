@@ -68,8 +68,8 @@ For performance work, also use:
 
 For accuracy, semantic-quality, deterministic-canary, or lossless claims, also
 use `ascend-model-quality-evaluation`. Its default Paper-to-Ascend quality
-ruler uses a 2048-token natural-stopping cap and requires a fresh baseline when
-that cap or any evaluator invariant changes.
+ruler freezes thinking mode, a mode-appropriate natural-stopping cap, and a
+fresh baseline whenever the cap or another evaluator invariant changes.
 
 When the task is to reproduce a prior paper/practice result, historical ruler,
 or adoption claim, use `paper-to-ascend-reproduction` to freeze the scientific
@@ -145,6 +145,13 @@ Reuse existing task ownership instead of creating a permanent worktree for
 each paper considered.
 
 ## Lessons already learned
+
+For an independent stateful-cache implementation, interrupted evaluation, or a
+claim that a successful Canary proves the paper, read
+[HYPIC independent-port lessons](references/hypic-independent-port-lessons.md).
+It separates numerical implementation, approximate task quality, service speed,
+and lifecycle evidence; its historical counts are not universal gates.
+
 
 - Dynamic MoE showed that theoretically reduced compute can still regress
   end-to-end latency when routing or packing overhead dominates.
