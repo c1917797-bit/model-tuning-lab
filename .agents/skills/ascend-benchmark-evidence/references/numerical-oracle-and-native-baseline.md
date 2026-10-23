@@ -52,3 +52,14 @@ Evidence and limitations: [actual binding and numerical-baseline case](
 For subnormal failures, inspect actual operand/output bits and absolute error as well as relative error. Per-product FP32 rounding can impose a relative floor even when conversion, state and guards are correct. Distinguish this from flush-to-zero using immutable raw and an independent rounding model. An arithmetic-order repair is a new candidate and must retain overflow/cancellation tests; a CPU prediction cannot qualify its NPU implementation.
 
 Persist each independent predicate and its raw identity before an aggregate assertion can terminate the consumer. A successful diagnostic owner proves complete inspection, not numerical qualification; failed boundary rows still block admission. Recover existing complete raw rather than repeating NPU execution merely to recover an omitted verdict.
+
+For chunked GDN, distinguish a conditional inverse of the **actual rounded A**
+from the full canonical recurrence built independently from original Q/K/g/beta.
+Passing the former does not imply correct WY/H state propagation. Label an
+oracle's own solve-residual separately from residuals measured on native or
+candidate outputs; zero oracle self-residual is not exact candidate arithmetic.
+A larger frozen matrix may reveal candidate-only misses even when earlier frames
+showed shared native/candidate misses. Retain all three comparisons per frame,
+attribute the first differing edge with counterfactual intermediates, and reserve
+new failed frames as holdouts rather than waiving them as native precision.
+Evidence: [saved-worker full48 diagnostic](../../../workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261023T073553Z/MXR_FULL48_DIAGNOSTIC_20261023.md).
