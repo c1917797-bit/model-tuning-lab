@@ -1,5 +1,5 @@
 """Pure Python metadata/source controls, never Torch or NPU numerical evidence."""
-import ast,copy,importlib.util,io,json,sys,types,unittest
+import ast,copy,importlib.util,io,json,os,sys,types,unittest
 from contextlib import redirect_stdout
 from pathlib import Path
 from unittest.mock import patch
@@ -110,6 +110,66 @@ class Controls(unittest.TestCase):
         self.assertFalse(self.bundle['whole_source_ready']);self.assertFalse(self.bundle['NPU'])
         bad=copy.deepcopy(self.bundle);bad['files']['g2_contract.py']+=b'\n'
         with self.assertRaises(ValueError):R.inverse(bad)
+
+    def test_explicit_native2048_scope_keeps_original_other_fields_and_caps(self):
+        self.assertEqual(self.old.scope()['prefix'],131)
+        expected=dict(self.old.scope(),prefix=2048)
+        self.assertEqual(self.new.scope(),expected);self.assertEqual(self.new.SCOPE,expected)
+        for name in('MAX_OUTPUT','RAW_CAP','METADATA_CAP','FRAME_LOGICAL_CAP','CHECKPOINT_CAP','FRAME_WIRE_CAP'):
+            self.assertEqual(getattr(self.new,name),getattr(self.old,name))
+        with self.assertRaises(ValueError):self.new.scope('smoke4')
+        # Real source validator/math remain unmodified and deliberately pending.
+        base=R.PARENT
+        tree=ast.parse((base/'g3_validate.py').read_bytes())
+        fixed=next(x.value for x in tree.body if isinstance(x,ast.Assign)and any(isinstance(y,ast.Name)and y.id=='SCOPE'for y in x.targets))
+        old_scope={x.arg:ast.literal_eval(x.value)for x in fixed.keywords}
+        self.assertNotEqual(old_scope,self.new.SCOPE);self.assertEqual(old_scope['prefix'],131)
+    def test_actual_channel_scope_join_rejects_legacy_or_mixed_metadata(self):
+        base=R.PARENT;tree=ast.parse((base/'g2_channel.py').read_bytes())
+        function=next(x for x in tree.body if isinstance(x,ast.FunctionDef)and x.name=='contract')
+        class ReachedHostVerifier(Exception):pass
+        def stop(*a):raise ReachedHostVerifier()
+        handoff=types.ModuleType('g2_handoff');handoff.verify=stop
+        sr={'path':'source'};cr={'path':'channel'}
+        manifest={'stream_consumer_source':{'path':'consumer'}}
+        channel=dict(schema='bole.owned-independent-stream-channel/v2',source=sr,scope=self.new.SCOPE,
+            consumer_source=manifest['stream_consumer_source'],consumer_Devices=[],
+            consumer_container_independent=True,host_ownership_audited=True,
+            actual_worker_identities=[{'pid':i+1}for i in range(4)],
+            consumer_owner_ref={'path':'cpu-owner'},model_owner_ref={'path':'model-owner'})
+        checks=[]
+        C=types.SimpleNamespace(obj=lambda ref:manifest if ref==sr else channel,checked=lambda ref:checks.append(ref))
+        ns=dict(G2=self.new,need=R.need,Path=Path)
+        exec(compile(ast.Module(body=[function],type_ignores=[]),'actual-channel-contract','exec'),ns)
+        with patch.dict(sys.modules,{'g2_handoff':handoff}):
+            # Success stops BEFORE real ownership proof; this grants no channel.
+            with self.assertRaises(ReachedHostVerifier):ns['contract'](C,sr,cr)
+            self.assertEqual(len(checks),3)
+            for wrong in(self.old.SCOPE,dict(self.new.SCOPE,prefix=True),dict(self.new.SCOPE,max_output_tokens=160)):
+                checks.clear();channel['scope']=wrong
+                with self.assertRaises(ValueError):ns['contract'](C,sr,cr)
+                self.assertFalse(checks)
+        consumer=ast.parse((base/'g2_consumer.py').read_bytes())
+        main=next(x for x in consumer.body if isinstance(x,ast.FunctionDef)and x.name=='main')
+        gate=next(x for x in main.body if isinstance(x,ast.Expr)and isinstance(x.value,ast.Call)and
+            isinstance(x.value.func,ast.Attribute)and x.value.func.attr=='need')
+        path='source-owned-consumer'
+        m=dict(service_experiment=self.new.SCOPE,stream_consumer_source=path,files={'g2_consumer.py':path})
+        ns=dict(C=types.SimpleNamespace(need=R.need,ref=lambda p:p),G2=self.new,m=m,os=os,__file__=path)
+        with patch.dict(os.environ,{self.new.FLAG:'1'}):
+            exec(compile(ast.Module(body=[gate],type_ignores=[]),'actual-consumer-scope-prefix','exec'),ns)
+            m['service_experiment']=self.old.SCOPE
+            with self.assertRaises(ValueError):
+                exec(compile(ast.Module(body=[gate],type_ignores=[]),'actual-consumer-mixed-scope','exec'),ns)
+    def test_scope_label_cannot_pass_original131_numeric_registration(self):
+        tree=ast.parse((R.PARENT/'g2_state.py').read_bytes())
+        fn=next(x for x in tree.body if isinstance(x,ast.FunctionDef)and x.name=='open_rank')
+        ns=dict(C=types.SimpleNamespace(need=R.need),
+            N=types.SimpleNamespace(equal=lambda *a:None,mtp_join=lambda *a:None),
+            G1=types.SimpleNamespace(REQUEST_SCHEMA='original-request'))
+        exec(compile(ast.Module(body=[fn],type_ignores=[]),'actual-original-numeric-open','exec'),ns)
+        raw=dict(schema='original-request',request=dict(generation=1,slot=0,length=2048,version=0))
+        with self.assertRaisesRegex(ValueError,'registration'):ns['open_rank'](None,{},raw)
 
 if __name__=='__main__':
     if sys.argv[1:]!=['--check']:raise SystemExit('default OFF: source-only --check')

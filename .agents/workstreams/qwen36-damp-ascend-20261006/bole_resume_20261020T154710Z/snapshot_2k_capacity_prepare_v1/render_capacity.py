@@ -40,6 +40,9 @@ def adapt(original):
     for n in('g2_contract.py','service_runner.py'):need(n in out,'actual snapshot/capacity source '+n)
     old='def capacity(length, allocated_kernel_pages, *, budget=MAX_OUTPUT):'
     text=out['g2_contract.py'].decode()
+    scope_old='prefix=131, request_count=1, max_steps_per_request=output-1,'
+    need(text.count(scope_old)==1,'exact source-only native2k stream prefix declaration')
+    text=text.replace(scope_old,'prefix=2048, request_count=1, max_steps_per_request=output-1,',1)
     need(text.count(old)==1,'exact original G2.capacity function signature')
     text=text.replace(old,'def _capacity_131(length, allocated_kernel_pages, *, budget=MAX_OUTPUT):',1)
     out['g2_contract.py']=(text+CAPACITY).encode()

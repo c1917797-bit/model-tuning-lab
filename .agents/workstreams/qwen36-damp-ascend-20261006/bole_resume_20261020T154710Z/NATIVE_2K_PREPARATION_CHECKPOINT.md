@@ -86,12 +86,51 @@ No 25th native page, allocation growth or real native 2k geometry is claimed.
    The initial manual estimate overcounted FA BF16 bytes by two; it is
    corrected, not used as evidence. FA before/after K/V totals 96 MiB,
    not 192 MiB. With only a 3-wide convolution arena the same partial ledger
-   does not prove overflow. State-evidence deduplication is being designed;
+   does not prove overflow. State-evidence deduplication is now source-prepared;
    it must preserve actual before/after, full byte checks, the independent
    oracle, original thresholds and all 128 writes without raising caps.
-7. Whole-source composition still needs the explicit new 2k stream scope:
-   the original `G2.scope()` describes prefix131. Prepared callback routing
-   does not silently change that metadata/consumer contract.
+7. The snapshot successor now explicitly derives the new 2k stream metadata
+   scope from the original prefix131 scope. Operation 0af1 passed ten software
+   controls, including the actual channel and consumer's first metadata gates.
+   All other limits remain unchanged. The original legacy numerical entry
+   still rejects a 2048 owner: metadata is not mathematical qualification.
+
+## Reviewed diagnostic-budget and same-frame evidence repair
+
+The native callback formerly required output1024 even for numerical diagnostics,
+blocking the intended smoke8 and multistep160 stages. The repaired callback and
+independent numeric domain accept only complete, typed, source-declared
+8/160/1024 qualification profiles with matching actual input/output budgets.
+Without that qualification declaration, formal performance remains1024-only.
+Operation 0b07 passed six callback and seven numeric-domain software controls
+plus both real renderer CLIs. No tensor error bound, capacity or coverage was
+relaxed. An 8-token result cannot qualify160 or1024.
+
+`state_capture_codec_prepare_v1` retains two complete actual native state bases
+per GDN layer and replaces four redundant roles with192 strict same-frame
+references. Full actual stage witnesses precede transaction publication; the
+CPU reader rehashes the saved bases/views before the unchanged independent
+oracle and128-write checks. Actual bad/base payloads are retained on mismatch,
+with no ACK. MAIN and an independent reviewer inspected the real service
+transaction seam, renderer and decoder. Operation 0aff's nine software controls
+and0b08's updated composition control are not Torch/NPU qualification.
+
+For the same conditional lower-bound subset, this removes144MiB, leaving
+241.324MiB at the worst25-page scratch geometry. The first2048-prefix frame
+requires only17 private pages, so its corresponding subset may be225.324MiB.
+Neither is an actual wire/RSS measurement. The long helper still charges
+retained-first + two current logical copies + current wire + checkpoint +
+metadata: even this codec does not establish joint fit. Its runtime gate and
+the independent2k runtime gate remain unconditionally closed. No cross-frame
+reference or enlarged memory reserve was introduced.
+
+Original0b07/0af1/0af2 responses are externally retained at
+`/opt/host/vnf/austinov/run-bole-followup-preparation-evidence-20261022T230600Z-v1/QUALIFIER_BUDGET_SOFTWARE_ORIGINAL_RESPONSES_0b07_0af1_0af2_V1.json`
+(27866 bytes, SHA256 `564f2179902ecedaf865f516c58c8f8993ec7a964682e7915f029dc63ba05f2a`).
+Old operation-registry handles later returned not_found; original responses
+were preserved, not replaced with rerun results. MAIN0b1d rehashed/compiled
+the ten changed scope/budget source files and passed MST20. No new source
+binding, Docker start or NPU load occurred during this source-only stage.
 
 All entries above are implementation/evidence defects or incomplete integration,
 not proof that BOLE has no value.

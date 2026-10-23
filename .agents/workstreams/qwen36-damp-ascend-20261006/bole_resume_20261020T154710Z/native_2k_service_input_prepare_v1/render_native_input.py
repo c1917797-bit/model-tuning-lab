@@ -1,10 +1,10 @@
-"""One reversible service_runner native2048/1024 callback ABI; source only."""
+"""Reversible native2048 callback: explicit qualifiers8/160/1024; formal1024."""
 from pathlib import Path
 import hashlib,json,sys
 HERE=Path(__file__).resolve().parent
 PARENT=HERE.parent/'formal_pair_ready_prepare_v1/strict-source-proposal-v3/prepared-source-bole'
 GEOMETRY={'bytes':10907,'sha256':'3c7b6059320206757be8fbadcba70f701781579e84e975aa460bf1ffab6e7382'}
-SNAPSHOT={'bytes':4499,'sha256':'1e8b46d699ac35458b7bdf57cf061c908609d8f72ed0371fc7440b6c7cbe6ee7'}
+SNAPSHOT={'bytes':4765,'sha256':'1f4e0462a4e1b0fe6af9397e800e750738d88397cda7f02e74846a424be1e3eb'}
 G2={'bytes':1746,'sha256':'f9e545876a0e922f22408d88c997195abd3ffb4f023b9b2954e168988f47de0a'}
 def need(v,s):
  if not v:raise ValueError(s)
@@ -13,8 +13,24 @@ def once(text,old,new):
  return text.replace(old,new,1)
 DOMAIN="""        scope=m['performance_profile']['scope']
         E.need(type(scope.get('input_tokens'))is int and scope['input_tokens']==2048 and
-            type(scope.get('output_tokens'))is int and scope['output_tokens']==1024,
-            'source-reviewed actual2048/fixed1024 callback only')
+            type(scope.get('output_tokens'))is int,
+            'source-reviewed actual2048 callback and typed actual output budget')
+        qualification=m.get('fastpath_numeric_qualification')
+        if qualification is None:
+            E.need(scope['output_tokens']==1024 and
+                os.environ.get('BOLE_FASTPATH_NUMERIC_QUALIFICATION_ENABLE')in(None,'','0'),
+                'formal performance remains fixed1024 and is not a numerical qualifier')
+        else:
+            E.need(type(qualification)is dict and scope['output_tokens']in(8,160,1024) and
+                os.environ.get('BOLE_FASTPATH_NUMERIC_QUALIFICATION_ENABLE')=='1',
+                'explicit diagnostic8/160/1024 qualification flag and budget')
+            expected_qualification=dict(schema='bole.fastpath-numeric-qualification-profile/v1',
+                enabled=True,input_tokens=2048,output_tokens=scope['output_tokens'],generations=2,
+                logical_frame_cap=384*2**20,independent_reference=True,formal_performance=False)
+            E.need(set(qualification)==set(expected_qualification)and all(
+                type(qualification[k])is type(v)and qualification[k]==v
+                for k,v in expected_qualification.items()),
+                'same complete source-pinned qualification and actual performance profile budget')
         native_input=kw['native_input']
         E.need(type(native_input)is dict and native_input['actual_token_ids']is ids and
             native_input['request_id']==kw['request_id'] and

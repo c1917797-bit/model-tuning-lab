@@ -1,4 +1,4 @@
-"""Independent 2048/1024 reference domain. No candidate imports or runtime admission."""
+"""Independent2048 qualification domain; formal performance remains1024 only."""
 import hashlib,json,math
 INPUT=2048
 OUTPUT=1024
@@ -7,25 +7,46 @@ FRAME_CAP=384*2**20
 RETAINED_CAP=2**30
 def need(v,s):
  if not v:raise ValueError(s)
-def shape(length):
- need(type(length)is int and INPUT<=length<=INPUT+OUTPUT-2,'actual 2k/output1024 owner prefix, not131 or labels')
+def qualification_budget(m):
+ p=m.get('fastpath_numeric_qualification');need(type(p)is dict,'explicit source-bound numerical qualifier, not formal performance')
+ output=p.get('output_tokens')
+ need(type(output)is int and output in(8,160,1024),'only typed explicit8/160/1024 qualifier budgets')
+ expected=dict(schema='bole.fastpath-numeric-qualification-profile/v1',enabled=True,input_tokens=INPUT,
+  output_tokens=output,generations=2,logical_frame_cap=FRAME_CAP,independent_reference=True,formal_performance=False)
+ need(set(p)==set(expected)and all(type(p[k])is type(v)and p[k]==v for k,v in expected.items()),
+  'complete exact source-pinned2k qualifier declaration')
+ scope=m['performance_profile']['scope']
+ need(type(scope)is dict and type(scope.get('input_tokens'))is int and scope['input_tokens']==INPUT and
+  type(scope.get('output_tokens'))is int and scope['output_tokens']==output,
+  'qualifier and actual source profile must have identical input/output budget')
+ return output
+def shape(length,output_tokens=OUTPUT):
+ need(type(output_tokens)is int and output_tokens in(8,160,1024),'typed explicit independent qualifier budget')
+ need(type(length)is int and INPUT<=length<=INPUT+output_tokens-2,'actual2k prefix inside the same declared output budget')
  native=(length+2+127)//128;scratch=(length+3+127)//128
  return dict(length=length,publication_kernel_pages=native,scratch_kernel_pages=scratch,
   query_shape=(1,6,3,256),KV_shape=(scratch,1,128,256),mask_shape=(1,1,3,scratch*128),table_shape=(1,scratch))
-def publication_indices(length,table,path):
- shape(length);need(path in([0],[0,1],[0,2]),'inclusive root plus at most one accepted sibling')
+def publication_indices(length,table,path,*,output_tokens=OUTPUT):
+ shape(length,output_tokens);need(type(path)is list and all(type(x)is int for x in path)and
+  path in([0],[0,1],[0,2]),'inclusive root plus at most one accepted sibling')
  need(type(table)in(list,tuple)and len(table)>=(length+2+127)//128 and
   all(type(x)is int and x>=0 for x in table)and len(set(table))==len(table),'actual complete native pages, no invented scratch page')
  # Child2 is private scratch index L+2, but its ACCEPTED permanent destination is L+1.
  return [table[(length+j)//128]*128+(length+j)%128 for j in range(len(path))]
-def frame_domain(frame):
- o=frame['owner'];g=shape(o['length'])
- need(type(o['version'])is int and 0<=o['version']<=1022 and o['version']==frame['ordinal']and
+def frame_domain(frame,m):
+ output=qualification_budget(m);o=frame['owner'];g=shape(o['length'],output)
+ need(type(o['version'])is int and type(frame['ordinal'])is int and
+  0<=o['version']<=output-2 and o['version']==frame['ordinal']and
+  type(o['slot'])is int and o['slot']==0 and type(o['request'])is str and bool(o['request'])and
+  type(frame['generation'])is int and type(o['generation'])is int and
   frame['generation']==o['generation']in(1,2),'actual frame/version/generation')
  if o['version']==0:need(o['length']==2048,'first actual owner follows full2048 native prefill')
  p=frame['publication'];path=frame['staged']['processed_nodes']
- need(path in([0],[0,1],[0,2])and p['processed_nodes']==path and p['next_length']==o['length']+len(path)
-  and p['next_version']==o['version']+1 and len(path)<=3071-o['length']
+ need(type(path)is list and all(type(x)is int for x in path)and path in([0],[0,1],[0,2])and
+  type(p['processed_nodes'])is list and all(type(x)is int for x in p['processed_nodes'])and
+  p['processed_nodes']==path and type(p['next_length'])is int and type(p['next_version'])is int and
+  p['next_length']==o['length']+len(path)
+  and p['next_version']==o['version']+1 and len(path)<=INPUT+output-1-o['length']
   and o['version']<=o['length']-2048<=2*o['version'],'actual root/accepted child/output budget only; never third permanent slot')
  return g
 def fixed_pages(previous,current):
@@ -53,8 +74,8 @@ def prefill(t,observed,ids,expected_sources):
   bits(t,a,b,'native BEFORE-forward embeds equal independent source-pinned lookup')
  return dict(input_tokens=2048,actual_input_mode=mode,numerical_qualified=False)
 def added_capture_budget(length,*,base_logical_bytes=None,actual_wire_bytes=None,retained_first_bytes=None,
-                         checkpoint_bytes=None,combined_metadata_bytes=None,failed_frame_bytes=None):
- g=shape(length);s=g['scratch_kernel_pages']
+                         checkpoint_bytes=None,combined_metadata_bytes=None,failed_frame_bytes=None,output_tokens=OUTPUT):
+ g=shape(length,output_tokens);s=g['scratch_kernel_pages']
  # Full observed BF16 K/V, actual bool mask, actual int32 table for EACH16FA.
  per_layer=2*s*128*256*2+3*s*128+s*4
  added=16*per_layer
@@ -88,7 +109,7 @@ def delegate_digests(proof,expected):
   need(proof['converted_before'][n]==proof['converted_after'][n]==expected[n],
    'actual delegate full operand independently reconstructed and unchanged '+n)
 def scratch(t,C,m,row,anchor,owner,digest):
- g=shape(owner['length']);proof=row['actual_2k_FIA_operands']
+ g=shape(owner['length'],qualification_budget(m));proof=row['actual_2k_FIA_operands']
  need(proof['schema']=='bole.actual-2k-FIA-operands/v1'and proof['owner']==owner and
   proof['layer']==anchor['layer']and proof['source']==m['files']['service_fia.py']and
   proof['stage']=='returned'and proof['boundary_completed']is True,

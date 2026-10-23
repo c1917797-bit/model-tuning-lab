@@ -1,0 +1,94 @@
+{
+  "schema": "bole.state-capture-codec-preparation-evidence/v1",
+  "prepared_only": true,
+  "NPU": false,
+  "numerical_qualified": false,
+  "formal_performance": false,
+  "parent_commit": "73a9726c201c9358b73b031a6062ba409862d85b",
+  "actual_historical_shape_read": {
+    "operation": "exec-0000000000000ac6",
+    "reopened": "exec-0000000000000aed",
+    "scope": "historical131 native cache metadata, not new2k",
+    "ref": {
+      "path": "/opt/host/vnf/austinov/run-bole-reduction-ON-v7-startup_20261022T215000Z/dense/receipts/BOLE-PREFILL-CACHE-REQUEST-01-RANK-0.json",
+      "bytes": 71560,
+      "sha256": "e31017280945d28379f25a6aab4d5381ea7822e7e71be80d5a3ee425a4ada3e8"
+    },
+    "state_shape": [
+      359,
+      12,
+      128,
+      128
+    ],
+    "state_dtype": "torch.float32",
+    "conv_shape": [
+      359,
+      11,
+      2560
+    ],
+    "conv_dtype": "torch.bfloat16",
+    "new2k_shape_observed": false
+  },
+  "arithmetic_correction": {
+    "original_estimate_mib": 408,
+    "error": "FA counted twice: actual 16*24*128*256*2bytes*2KV*2snapshots=100663296B=96MiB, not192MiB.",
+    "six_state_roles_bytes": 226492416,
+    "FA_native24_before_after_bytes": 100663296,
+    "lower_bound_conditional_on_native24_and_conv11_bytes": 404041536,
+    "lower_bound_mib": 385.32403564453125,
+    "codec_saved_four_roles_bytes": 150994944,
+    "encoded_same_subset_bytes": 253046592,
+    "encoded_same_subset_mib": 241.32403564453125,
+    "warning": "These are lower bounds from exact source shape objects, not observed2k wire/RAM or proof of joint fit. Proposal/rollback model-owned allocations remain unchanged."
+  },
+  "lower_bound_actual_record": {
+    "args": [
+      "-I",
+      "-B",
+      "-c",
+      "from pathlib import Path\nimport ast,hashlib,json,math,types\nroot=Path(\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/fastpath_numeric_bridge_prepare_v1\")\nns={'__name__':'size_only_actual_observer'};exec(compile((root/'fastpath_numeric_observer.py').read_bytes(),'actual-observer-readonly','exec'),ns)\nclass Tensor:\n def __init__(self,shape,size):self.shape=shape;self.size=size\n def numel(self):return math.prod(self.shape)\n def element_size(self):return self.size\n def detach(self):return self\n def clone(self):return Tensor(self.shape,self.size)\nt=types.SimpleNamespace(Tensor=Tensor)\ndef T(shape,size=2):return Tensor(shape,size)\ndef frame(width):\n before=[dict(native_state=T((12,128,128),4),full_conv_slot=T((1,width,2560)))for _ in range(48)]\n after=[dict(native_state=T((12,128,128),4),full_conv_slot=T((1,width,2560)))for _ in range(48)]\n captures=[]\n for _ in range(48):\n  captures.append(dict(state=T((1,12,128,128),4),keys=T((1,12,3,128),4),\n   normalized_inputs=(T((1,12,3,128),4),T((1,12,3,128),4),T((1,12,3,128),4),T((1,12,3),4),T((1,12,3),4)),\n   precast_output=T((1,12,3,128),4),factors=(T((1,12,3),4),T((1,12,3,128),4)),output=T((3,12,128)),\n   conv_trial=dict(initial=T((1,3,2560)),inputs=T((3,2560)),histories=T((3,3,2560)),after=T((3,3,2560))),\n   raw_projected=T((3,2560)),weight=T((2560,4)),actual_convolved=T((3,2560)),actual_conv_tail=T((3,3,2560))))\n writes=[dict(kind='state',before=T((12,128,128),4),after=T((12,128,128),4))for _ in range(48)]\n writes += [dict(kind='conv',before=T((3,2560)),after=T((3,2560)))for _ in range(48)]\n observed=[T((12,128,128),4)for _ in range(48)]+[T((3,2560))for _ in range(48)]\n fa_before=[dict(key=T((24,128,1,256)),value=T((24,128,1,256)))for _ in range(16)]\n fa_after=[dict(key=T((24,128,1,256)),value=T((24,128,1,256)))for _ in range(16)]\n fa_capture=[dict(query=T((3,1536)),key=T((3,256)),value=T((3,256)),output=T((3,6,256)),\n  actual_2k_FIA_operands=dict(native_before=dict(key=T((25,1,128,256)),value=T((25,1,128,256)),atten_mask=T((1,1,3,3200),1),block_table=T((1,25),4))))for _ in range(16)]\n return dict(before_GDN=before,after_GDN=after,captures=captures,staged=dict(writes=writes),observed_applied=observed,\n             before_FA=fa_before,after_FA=fa_after,fa_captures=fa_capture)\nsink=ast.parse((root/'fastpath_numeric_sink.py').read_bytes())\nf=next(n for n in sink.body if isinstance(n,ast.FunctionDef)and n.name=='logical_bytes')\nsn={};exec(compile(ast.Module(body=[f],type_ignores=[]),'actual sink size function','exec'),sn)\nout={}\nfor width in (3,11):\n payload=frame(width);logical=sn['logical_bytes'](t,payload)\n o=ns['Observer'].__new__(ns['Observer']);o.t=t;o.used=0\n try:o._capture(payload);guard='accepted'\n except ValueError as e:guard=str(e)\n out[str(width)]=dict(logical_lower_bound=logical,MiB=logical/2**20,cap=384*2**20,\n                     excess=logical-384*2**20,actual_observer_guard=guard,\n                     categories={k:sn['logical_bytes'](t,v)for k,v in payload.items()})\nprint(json.dumps(dict(synthetic_shape_ledger_only=True,no_Torch_no_NPU=True,results=out),sort_keys=True))\n"
+    ],
+    "cancelled": false,
+    "command": "/usr/bin/python3",
+    "cwd": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z",
+    "durationMs": 98,
+    "error": null,
+    "exitCode": 0,
+    "id": "exec-0000000000000aca",
+    "lane": "quick",
+    "state": "completed",
+    "stderr": "",
+    "stdout": "{\"no_Torch_no_NPU\": true, \"results\": {\"11\": {\"MiB\": 385.32403564453125, \"actual_observer_guard\": \"qualification clone budget before allocation\", \"cap\": 402653184, \"categories\": {\"after_FA\": 50331648, \"after_GDN\": 40452096, \"before_FA\": 50331648, \"before_GDN\": 40452096, \"captures\": 54087936, \"fa_captures\": 52928064, \"observed_applied\": 38486016, \"staged\": 76972032}, \"excess\": 1388352, \"logical_lower_bound\": 404041536}, \"3\": {\"MiB\": 381.57403564453125, \"actual_observer_guard\": \"accepted\", \"cap\": 402653184, \"categories\": {\"after_FA\": 50331648, \"after_GDN\": 38486016, \"before_FA\": 50331648, \"before_GDN\": 38486016, \"captures\": 54087936, \"fa_captures\": 52928064, \"observed_applied\": 38486016, \"staged\": 76972032}, \"excess\": -2543808, \"logical_lower_bound\": 400109376}}, \"synthetic_shape_ledger_only\": true}\n",
+    "timedOut": false
+  },
+  "software_controls": {
+    "operation": "exec-0000000000000aff",
+    "exit": 0,
+    "tests": 9,
+    "seconds": 2.363,
+    "scope": "host metadata/FakeTensor ABI, actual source AST transaction seam/inverse, filesystem failure writer ABI; no Torch/NPU/tensor math"
+  },
+  "long_joint_blocker": {
+    "actual_read": "exec-0000000000000b06",
+    "formula": "retained_first_wire + 2*current_logical + current_wire + checkpoint + metadata",
+    "conditional_wire_equals_encoded_lower_bound": true,
+    "conservative_same_worst_first_current_bytes": 1213512960,
+    "conservative_same_worst_first_current_MiB": 1157.296142578125,
+    "actual_first_wire_measured": false,
+    "first_private_pages_requirement": 17,
+    "worst_current_private_pages_requirement": 25,
+    "first17_current25_subset_estimate_MiB": 1141.296142578125,
+    "not_inevitable_frame2_failure": true,
+    "excess_over_one_GiB_bytes": 139771136,
+    "resolved_by_this_same_frame_codec": false,
+    "possible_immediate_previous_checkpoint_design_only": true,
+    "cross_frame_refs_currently_supported": false
+  },
+  "pending": [
+    "real same-image Torch CPU decoding/stride serialization and original independent consumer on captured raw",
+    "real NPU full-digest witnesses at actual before-publication and post-publication timings",
+    "actual native2k geometry, full common-source composition/validator/producer/command binding in legal authority",
+    "joint observer/model GPU clone + raw wire + CPU decode/oracle + retainedfirst/checkpoint/failed/temporary high-water",
+    "numeric/state gates,160 progression,formal1024 native_AR/candidate performance and final tasks"
+  ]
+}

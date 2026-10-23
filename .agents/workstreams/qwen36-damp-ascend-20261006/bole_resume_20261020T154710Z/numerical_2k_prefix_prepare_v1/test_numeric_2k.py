@@ -4,6 +4,11 @@ from pathlib import Path
 P=Path(__file__).resolve().parent;sys.path.insert(0,str(P))
 import numeric_prefix_2k as N
 import render_numeric_2k as R
+def manifest(output=1024):
+ return dict(fastpath_numeric_qualification=dict(schema='bole.fastpath-numeric-qualification-profile/v1',
+  enabled=True,input_tokens=2048,output_tokens=output,generations=2,logical_frame_cap=384*2**20,
+  independent_reference=True,formal_performance=False),
+  performance_profile=dict(scope=dict(input_tokens=2048,output_tokens=output)))
 class Controls(unittest.TestCase):
  def test_native24_private25_boundary(self):
   for L in(2048,2174,2175,2176,3069,3070):
@@ -60,18 +65,60 @@ class Controls(unittest.TestCase):
    owner=dict(request='r',generation=1,slot=0,length=L,version=v)
    return dict(owner=owner,ordinal=v,generation=1,staged=dict(processed_nodes=[0,2]),
     publication=dict(processed_nodes=[0,2],next_length=L+2,next_version=v+1))
-  a=f(2048,0);b=f(2050,1);self.assertEqual(N.frame_domain(a)['length'],2048)
+  a=f(2048,0);b=f(2050,1);self.assertEqual(N.frame_domain(a,manifest())['length'],2048)
   rows=[dict(layer=i,physical_pages=list(range(24)),ownership={'actual':'same'})for i in range(3,64,4)]
   a['after_FA']=copy.deepcopy(rows);b['before_FA']=copy.deepcopy(rows);N.fixed_pages(a,b)
   b['before_FA'][0]['physical_pages'].append(24)
   with self.assertRaises(ValueError):N.fixed_pages(a,b)
   bad=f(2049,0)
-  with self.assertRaises(ValueError):N.frame_domain(bad)
+  with self.assertRaises(ValueError):N.frame_domain(bad,manifest())
+ def test_declared_short1601024_owner_and_remaining_budget(self):
+  def frame(length,version,path):
+   owner=dict(request='r',generation=1,slot=0,length=length,version=version)
+   return dict(owner=owner,ordinal=version,generation=1,staged=dict(processed_nodes=path),
+    publication=dict(processed_nodes=path,next_length=length+len(path),next_version=version+1))
+  for output in(8,160,1024):
+   m=manifest(output);last=2048+output-2
+   self.assertEqual(N.qualification_budget(m),output)
+   self.assertEqual(N.frame_domain(frame(2048,0,[0,2]),m)['length'],2048)
+   self.assertEqual(N.frame_domain(frame(last,output-2,[0]),m)['length'],last)
+   with self.assertRaises(ValueError):N.frame_domain(frame(last,output-2,[0,2]),m)
+   with self.assertRaises(ValueError):N.frame_domain(frame(last+1,output-2,[0]),m)
+   with self.assertRaises(ValueError):N.frame_domain(frame(last,output-1,[0]),m)
+   self.assertFalse(N.added_capture_budget(last,output_tokens=output)['runtime_admitted'])
+  # The8-token owner's later prefix cannot be treated as admitted1024 coverage.
+  with self.assertRaises(ValueError):N.shape(3070,8)
+  with self.assertRaises(ValueError):N.added_capture_budget(3070,output_tokens=8)
+  for key,value in(('schema','wrong'),('enabled',1),('generations',True),('formal_performance',True),
+   ('input_tokens',131),('output_tokens',True),('logical_frame_cap',2**30)):
+   bad=manifest(8);bad['fastpath_numeric_qualification'][key]=value
+   with self.assertRaises(ValueError):N.qualification_budget(bad)
+  with self.assertRaises(ValueError):N.qualification_budget({})
+  bad=manifest(8);bad['performance_profile']['scope']['output_tokens']=1024
+  with self.assertRaises(ValueError):N.qualification_budget(bad)
+  for which in('generation','ordinal','version','path','published_path','next_version','slot'):
+   bad=frame(2048,0,[0])
+   if which=='version':bad['owner']['version']=False
+   elif which=='slot':bad['owner']['slot']=False
+   elif which=='path':bad['staged']['processed_nodes']=[False];bad['publication']['processed_nodes']=[False]
+   elif which=='published_path':bad['publication']['processed_nodes']=[False]
+   elif which=='next_version':bad['publication']['next_version']=True
+   else:bad[which]=True
+   with self.assertRaises(ValueError):N.frame_domain(bad,manifest(8))
+  tree=ast.parse((P/'numeric_prefix_2k.py').read_text())
+  fn=next(x for x in tree.body if isinstance(x,ast.FunctionDef)and x.name=='scratch')
+  self.assertTrue(any(isinstance(x,ast.Call)and isinstance(x.func,ast.Name)and x.func.id=='shape'and
+   len(x.args)==2 and isinstance(x.args[1],ast.Call)and x.args[1].func.id=='qualification_budget'
+   for x in ast.walk(fn)))
  def test_real_source_adapter_inverse_and_original_oracle_bytes(self):
   before=R.read_actual();b=R.adapt(before);self.assertEqual(R.inverse(b),before)
   self.assertEqual(set(b['delta']),{'fastpath_numeric_consumer.py','fastpath_numeric_observer.py','service_bridge.py','service_fia.py','numeric_prefix_2k.py'})
   text=b['files']['fastpath_numeric_consumer.py'].decode()
   self.assertIn('PREFIX.scratch',text);self.assertIn('PREFIX.require_runtime_admission',text)
+  self.assertIn('PREFIX.frame_domain(frame,m)',text)
+  observer=b['files']['fastpath_numeric_observer.py'].decode()
+  self.assertIn("p['output_tokens']in(8,160,1024)",observer)
+  self.assertIn('PREFIX.qualification_budget(m)',observer)
   for name in('generalized_attention','actual_readers','selected_conv_write','cpu_digest_source','actual_cpu_digest'):
    old=next(n for n in ast.parse(before['fastpath_numeric_consumer.py']).body if isinstance(n,ast.FunctionDef)and n.name==name)
    new=next(n for n in ast.parse(text).body if isinstance(n,ast.FunctionDef)and n.name==name)

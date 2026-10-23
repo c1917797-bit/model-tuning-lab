@@ -49,7 +49,7 @@ def adapt(files):
  def edit(name,a,b):out[name]=once(out[name].decode(),a,b).encode()
  edit('fastpath_numeric_consumer.py',
   "    need(C.ref(__file__)==m['files']['fastpath_numeric_consumer.py'],'actual source-owned independent consumer')",
-  "    need(C.ref(__file__)==m['files']['fastpath_numeric_consumer.py'],'actual source-owned independent consumer')\n    import numeric_prefix_2k as PREFIX\n    need(C.ref(PREFIX.__file__)==m['files']['numeric_prefix_2k.py'],'actual source-owned independent 2k numeric domain')\n    PREFIX.require_runtime_admission(C,m,frame)\n    PREFIX.frame_domain(frame)")
+  "    need(C.ref(__file__)==m['files']['fastpath_numeric_consumer.py'],'actual source-owned independent consumer')\n    import numeric_prefix_2k as PREFIX\n    need(C.ref(PREFIX.__file__)==m['files']['numeric_prefix_2k.py'],'actual source-owned independent 2k numeric domain')\n    PREFIX.require_runtime_admission(C,m,frame)\n    PREFIX.frame_domain(frame,m)")
  edit('fastpath_numeric_consumer.py',
   "            before=before_f[i];after=after_f[i];N.fa_owner(before,after,row,owner)",
   "            before=before_f[i];after=after_f[i];N.fa_owner(before,after,row,owner)\n            _D,_digest=actual_cpu_digest(C,m)\n            metric['actual_private_scratch']=PREFIX.scratch(t,C,m,row,before,owner,_digest)")
@@ -57,11 +57,9 @@ def adapt(files):
   "    if previous is not None:",
   "    if previous is not None:\n        PREFIX.fixed_pages(previous,frame)")
  edit('fastpath_numeric_observer.py','input_tokens=131,output_tokens=','input_tokens=2048,output_tokens=')
- edit('fastpath_numeric_observer.py',"type(p['output_tokens'])is int and p['output_tokens']in(8,160,1024)",
-  "type(p['output_tokens'])is int and p['output_tokens']==1024")
  edit('fastpath_numeric_observer.py',
   "        p=m['fastpath_numeric_qualification']",
-  "        import numeric_prefix_2k as PREFIX\n        need(C.ref(PREFIX.__file__)==m['files']['numeric_prefix_2k.py'],'source-owned 2k independent domain')\n        PREFIX.require_runtime_admission(C,m,None)\n        p=m['fastpath_numeric_qualification']")
+  "        import numeric_prefix_2k as PREFIX\n        need(C.ref(PREFIX.__file__)==m['files']['numeric_prefix_2k.py'],'source-owned 2k independent domain')\n        PREFIX.qualification_budget(m)\n        PREFIX.require_runtime_admission(C,m,None)\n        p=m['fastpath_numeric_qualification']")
  edit('fastpath_numeric_observer.py',
   "        self.current['captures'][b['index']]=self._capture(dict(kind='fa',query=query,key=key,value=value,\n            output=output,actual_physical_pages=physical_pages,actual_cache_identities=cache_identities))",
   "        row=self.current['captures'][b['index']]\n        need(row['actual_2k_FIA_operands']['stage']=='returned'and row['actual_2k_FIA_operands']['boundary_completed']is True,'actual operand witness before completed FA capture')\n        row.update(self._capture(dict(kind='fa',query=query,key=key,value=value,\n            output=output,actual_physical_pages=physical_pages,actual_cache_identities=cache_identities)))")

@@ -1,5 +1,6 @@
 """Software callback-entry discrimination. Fakes are never real NPU qualification."""
-import ast,copy,sys,types,unittest
+import ast,copy,os,sys,types,unittest
+from unittest.mock import patch
 from pathlib import Path
 P=Path(__file__).resolve().parent;sys.path.insert(0,str(P))
 import render_native_input as R
@@ -32,7 +33,7 @@ class Controls(unittest.TestCase):
   with self.assertRaises(ValueError):R.adapt(self.original)
   with self.assertRaises(ValueError):R.adapt(self.geometry['files'])
   with self.assertRaises(ValueError):R.adapt(self.bundle['files'])
- def fixture(self,mutate=None,fast=False):
+ def fixture(self,mutate=None,fast=False,budget=1024,qualification=False,flag=None):
   source=ast.parse(self.bundle['files']['service_runner.py'])
   install=next(x for x in source.body if isinstance(x,ast.FunctionDef)and x.name=='install')
   callback=copy.deepcopy(next(x for x in install.body if isinstance(x,ast.FunctionDef)and x.name=='after_prefill'))
@@ -47,7 +48,10 @@ class Controls(unittest.TestCase):
    actual_CPU_token_ids=list(range(2048)),request_prompt_token_ids=list(range(2048)))
   kw=dict(input_ids=ids,positions=positions,request=request,request_id='request',native_input=ni,
    hidden=Tensor((2048,5120),'bf16'),metadata=object(),forward_context=object())
-  m=dict(performance_profile=dict(scope=dict(input_tokens=2048,output_tokens=1024)),files=files,actual118c={'capture':'before-bridge'})
+  m=dict(performance_profile=dict(scope=dict(input_tokens=2048,output_tokens=budget)),files=files,actual118c={'capture':'before-bridge'})
+  if qualification:m['fastpath_numeric_qualification']=dict(schema='bole.fastpath-numeric-qualification-profile/v1',
+   enabled=True,input_tokens=2048,output_tokens=budget,generations=2,logical_frame_cap=384*2**20,
+   independent_reference=True,formal_performance=False)
   events=[];geometry=object();worker=object();inner=object();ctx=object()
   def bind(*a,**k):
    self.assertIs(k['input_ids'],ids);self.assertIs(k['request'],request);events.append(('bind',k));return geometry
@@ -64,14 +68,15 @@ class Controls(unittest.TestCase):
   modules['fa_native_geometry'].bind_all=bind
   modules['cache_observation'].capture=capture;modules['fa_prefill131r10'].capture=capture
   C=types.SimpleNamespace(ref=lambda x:x,obj=obj)
-  ns=dict(E=types.SimpleNamespace(need=R.need),state=state,m=m,refs=refs,C=C,torch=types.SimpleNamespace(Tensor=Tensor,int32='i32',int64='i64',bfloat16='bf16'),
+  ns=dict(E=types.SimpleNamespace(need=R.need),state=state,m=m,refs=refs,C=C,os=os,torch=types.SimpleNamespace(Tensor=Tensor,int32='i32',int64='i64',bfloat16='bf16'),
    source_ref='source',worker=worker,inner=inner,get_attention_context=ctx,group=types.SimpleNamespace(rank_in_group=0),
    fast_performance=fast,restore_tail=lambda:events.append(('restore',None)),R=types.SimpleNamespace(register=reg))
   if mutate:mutate(kw,m,modules)
   prior={k:sys.modules.get(k)for k in modules};present={k:k in sys.modules for k in modules}
   try:
    sys.modules.update(modules);exec(compile(unit,'actual-rendered-after-prefill','exec'),ns)
-   ns['after_prefill'](**kw)
+   with patch.dict(os.environ,{'BOLE_FASTPATH_NUMERIC_QUALIFICATION_ENABLE':('1'if qualification else'0')if flag is None else flag}):
+    ns['after_prefill'](**kw)
   finally:
    for k in modules:
     if present[k]:sys.modules[k]=prior[k]
@@ -80,6 +85,20 @@ class Controls(unittest.TestCase):
  def test_actual_rendered_callback_prefix_reaches_original_bridge_seam(self):
   for fast in(False,True):
    with self.assertRaises(StopBeforeBridge):self.fixture(fast=fast)
+ def test_qualification_budgets_match_actual_rendered_callback(self):
+  for budget in(8,160,1024):
+   for fast in(False,True):
+    with self.assertRaises(StopBeforeBridge):self.fixture(fast=fast,budget=budget,qualification=True)
+  for budget in(8,160):
+   with self.assertRaises(ValueError):self.fixture(budget=budget,qualification=False)
+  with self.assertRaises(ValueError):self.fixture(qualification=False,flag='1')
+  with self.assertRaises(ValueError):self.fixture(budget=8,qualification=True,flag='0')
+  for key,value in(('schema','wrong'),('output_tokens',160),('enabled',1),('generations',True),
+   ('input_tokens',131),('formal_performance',True),('logical_frame_cap',2**30)):
+   def change(k,m,n,key=key,value=value):m['fastpath_numeric_qualification'][key]=value
+   with self.subTest(key=key):
+    with self.assertRaises(ValueError):self.fixture(change,budget=8,qualification=True)
+  with self.assertRaises(ValueError):self.fixture(budget=True,qualification=True)
  def test_actual_rendered_callback_real_domain_negative_controls(self):
   changes=[
    lambda k,m,n:m['performance_profile']['scope'].update(input_tokens=131),
