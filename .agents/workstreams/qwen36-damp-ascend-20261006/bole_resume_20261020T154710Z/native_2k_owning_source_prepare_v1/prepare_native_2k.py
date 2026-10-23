@@ -129,6 +129,20 @@ def active_cutoff(sr):
  # Source-only native suite count is distinct from historical20/381 receipts.
  t=one(t,'tests=20','tests=9',2);t=one(t,"v['tests']==20","v['tests']==9")
  files['performance_software_stages.py']=t.encode()
+ # The real guest coordinator imports Budget from this module. Its original
+ # absolute cutoff is a separate reachable seam from the caller's three sites.
+ t=files['g2_software_stages.py'].decode()
+ t=one(t,"cutoff==1792710600 and lane_deadline-now<=cutoff-wall-CLEANUP+0.01",
+       "cutoff==_native2k_budget_cutoff() and lane_deadline-now<=cutoff-wall-CLEANUP+0.01")
+ t+='''
+
+def _native2k_budget_cutoff():
+ import contract090 as OWNER
+ m=OWNER.obj(OWNER.ref(Path(__file__).resolve().parent/'SOURCE_BOUND.json'))
+ C.need(C.ref(__file__)==m['files']['g2_software_stages.py'],'actual source-owned native2k guest budget')
+ return OWNER._native2k_helper(m).execution_window(OWNER,m,clock=True,require_phase=False)['cutoff_epoch']
+'''
+ files['g2_software_stages.py']=t.encode()
  t=files['performance_exact_controls.py'].decode();t=one(t,'==20','==9',2);files['performance_exact_controls.py']=t.encode()
  t=files['g3_budget.py'].decode()
  t=one(t,"    other=set(base.glob('*RANK-%d.json'%rank))-finals",

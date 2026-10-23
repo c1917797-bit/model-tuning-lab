@@ -1,0 +1,29 @@
+{
+  "schema": "native2k.MAIN-reviewed-metadata-execution-authority/v1",
+  "approved": true,
+  "start_epoch": 1792740953,
+  "cutoff_epoch": 1792827353,
+  "scope": {
+    "kind": "native-prefill-geometry-only",
+    "input_tokens": 2048,
+    "output_tokens": 1,
+    "request_count": 1,
+    "concurrency": 1,
+    "physical_NPUs": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "common_environment": {
+      "HCCL_DETERMINISTIC": "true"
+    },
+    "phase_seconds": 3600,
+    "cleanup_seconds": 180
+  },
+  "MAIN_review_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261023T073553Z/NATIVE2K_MAIN_REVIEW_V2.json",
+    "bytes": 154966,
+    "sha256": "786f02fc44da6b015ea77f42192a8a64e8354c51c71a2efcfd0919972b3a7b50"
+  }
+}

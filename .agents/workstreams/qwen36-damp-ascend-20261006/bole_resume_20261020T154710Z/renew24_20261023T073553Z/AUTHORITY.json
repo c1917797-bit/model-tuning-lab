@@ -1,0 +1,53 @@
+{
+  "schema": "bole.user-renewed-bounded-window/v1",
+  "start_utc": "2026-10-23T07:35:53Z",
+  "cutoff_utc": "2026-10-24T07:35:53Z",
+  "timezone": "Europe/Moscow",
+  "start_local": "2026-10-23T10:35:53+03:00",
+  "cutoff_local": "2026-10-24T10:35:53+03:00",
+  "human_instruction": "请继续",
+  "context": "Continue the immediately preceding proposed 24-hour BOLE verification plan",
+  "physical_NPUs": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_NPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "cleanup_included": true,
+  "previous_windows_immutable": true,
+  "baseline_commit": "a3b912b3707f7b5e10c0a6fe70659188a9f7eaa6",
+  "acceptance": {
+    "whole_model_paired_throughput_gain_min_percent": 10,
+    "performance_output_tokens": 1024,
+    "report": [
+      "TTFT",
+      "TPOT"
+    ],
+    "quality_tasks": [
+      "GSM8K",
+      "HumanEval",
+      "MMLU"
+    ],
+    "thinking": false,
+    "quality_max_tokens": 2048,
+    "normal_EOS": true,
+    "quality_loss_pp_max": 1,
+    "quality_loss_relative_percent_max": 1,
+    "smoke_does_not_replace_full": true
+  },
+  "milestones_hours": [
+    1,
+    4,
+    8,
+    12,
+    20,
+    24
+  ],
+  "no_guarantee_of_algorithm_success": true
+}
