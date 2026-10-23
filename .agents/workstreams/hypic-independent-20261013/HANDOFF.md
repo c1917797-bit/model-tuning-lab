@@ -1,4 +1,19 @@
-# CURRENT 2026-10-23 RESOURCE BUDGET AUDITED; STILL WAIT, NO OWNED NPU JOB
+# CURRENT 2026-10-23 BOUNDED WAIT FOLLOWUP CLOSED; NO DEVICE RUN
+
+R24_WAIT_FOLLOWUP_TERMINAL_20261023.json records last read-only0ea4:
+three external benchmark harnesses still live; instant physical table empty
+is not task termination. Exact owned-label containers/controllers absent;
+R1/R2raw roots absent and417source bindings unchanged. No resource to release.
+Only a few minutes remained before unchanged13:00UTC stop, insufficient for
+fresh OFF/audit/ON startup+requests+release. No launch, deadline extension,
+threshold change or foreign-task interference. This is not an expired-time claim.
+App confirmed deletion of only hypic bounded followup. Full goal stays incomplete/
+blocked; future R2 needs newly authorized sufficient stable0-3 window and fresh
+actual task-end/source/direct/model/image/input/port/newroot admission.
+Current-source matrix/full paired381/lifecycle/29functional remain unaccepted.
+Last liveconfirmed workbranch b6ce36fe; main23ec33d7 unchanged.
+
+# HISTORICAL 2026-10-23 RESOURCE BUDGET AUDITED; STILL WAIT, NO OWNED NPU JOB
 
 HYPIC_REMAINING_DEVICE_BUDGET_20261023.json separates hash-verified historical
 R21/R22 timings from conditional current-source planning. Parent0dd6 verifies

@@ -1,0 +1,123 @@
+{
+  "schema": "hypic-r24-wait-followup-terminal/v1",
+  "date": "2026-10-23",
+  "state": "FOLLOWUP_CLOSED_INCOMPLETE_INSUFFICIENT_REMAINING_BUDGET",
+  "code_checkpoint": "24627e7dc3d4749530c4225f904f184f6b9bb2ce",
+  "parent_checkpoint": "b6ce36fe8be22152571ef8c9e4a3f4cbb7adf66c",
+  "absolute_stop_utc": "2026-10-23T13:00:00Z",
+  "decision": "External tasks had not terminated and only a few minutes remained before the unchanged bound, insufficient for a fresh two-arm startup/request/audit/release sequence. Close followup without launching or extending authorization. This does not claim the deadline had already elapsed.",
+  "human_direction": "先等待外部任务结束",
+  "final_read_only_check": {
+    "operation": "exec-0000000000000ea4",
+    "host_utc": "2026-10-23T12:54:40.610298+00:00",
+    "client_observation_nonce": "observation_nonce=2026-10-23 12:55:01 UTC",
+    "route": "fresh chicaihong01/ma; force_direct; peer_direct",
+    "physical_processes_at_instant": [],
+    "permission_errors": 0,
+    "foreign_live_benchmark_roots": [
+      {
+        "pid": 1032845,
+        "ppid": 88128,
+        "start_ticks": 87271739,
+        "state": "S",
+        "cmd": [
+          "bash",
+          "/work/cannbench/fixes/fn_p1/.harness/run_perf_op.sh",
+          "fn_p1",
+          "ForeachNorm",
+          "1",
+          "/work/cannbench/briefs/perf_foreach_norm.md"
+        ]
+      },
+      {
+        "pid": 1064774,
+        "ppid": 88128,
+        "start_ticks": 87292432,
+        "state": "S",
+        "cmd": [
+          "bash",
+          "/work/cannbench/fixes/gm_p2/.harness/run_perf_op.sh",
+          "gm_p2",
+          "GroupedMatmul",
+          "0",
+          "/work/cannbench/briefs/perf_grouped_matmul.md"
+        ]
+      },
+      {
+        "pid": 1478576,
+        "ppid": 88128,
+        "start_ticks": 87519866,
+        "state": "S",
+        "cmd": [
+          "bash",
+          "/work/cannbench/fixes/dsq_p1/.harness/run_perf_op.sh",
+          "dsq_p1",
+          "DequantSwigluQuant",
+          "2",
+          "/work/cannbench/briefs/perf_dequant_swiglu_quant.md"
+        ]
+      }
+    ],
+    "foreign_cgroup": "efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6",
+    "interpretation": "Actual benchmark harnesses remained live. Momentary empty NPU table is not task termination; persistent container/dispatcher alone is not occupancy.",
+    "owned_label_containers": "",
+    "ownership_checks": {
+      "final_own_check": true,
+      "contracts": {
+        "OFF": {
+          "sha256": "2deab16ffe0b18e82c63b79561e9562d1713e398de3dac42da7250038fdaefa9",
+          "sources": 417,
+          "raw_root_exists": false
+        },
+        "ON": {
+          "sha256": "16be2d0426ed555e50bbd4d1fa94d7206b2194f0c1a951cbd84dbf86cb39fbc1",
+          "sources": 417,
+          "raw_root_exists": false
+        }
+      },
+      "live_task_controller_candidates": [],
+      "r2_raw_roots": {
+        "/cache/cch/hypic-independent-20261013/c2-block-table-r24-off-canary-r2": false,
+        "/cache/cch/hypic-independent-20261013/c2-block-table-r24-on-canary-r2": false
+      }
+    },
+    "head": "b6ce36fe8be22152571ef8c9e4a3f4cbb7adf66c",
+    "worktree_clean": true
+  },
+  "device_run": false,
+  "hypic_requests": 0,
+  "owned_resources_created": false,
+  "external_tasks_modified": false,
+  "algorithm_or_thresholds_changed": false,
+  "automation": {
+    "id": "hypic",
+    "state": "DELETED",
+    "tool": "automation_update mode=delete",
+    "scope": "Only this bounded R24 wait followup; other thread automations untouched"
+  },
+  "retained_failure": {
+    "controller": "exec-0000000000000d55",
+    "report": "R24_OFF_R1_ADMISSION_FAILURE_20261023.json",
+    "classification": "predevice foreign-occupancy admission race; no root/container; R1 names reserved, not retried"
+  },
+  "offline_work": {
+    "tests": 1150,
+    "full_host_operation": "exec-0000000000000d3b",
+    "source_bindings": 417,
+    "runtime_bindings": 415,
+    "independent_review": "Actual fixed-image native entry/eager/metadata API plus emit/sink/auditor join review found no concrete static fatal mismatch; not device acceptance",
+    "source_review_operation": "exec-0000000000000e0b",
+    "resource_budget_report": "HYPIC_REMAINING_DEVICE_BUDGET_20261023.json",
+    "limits": "CPU/source/counter proofs are not actual D2H, numerical, speed, paired quality or full paper acceptance."
+  },
+  "remaining": [
+    "New source-bound R2 OFF then independent audit/release before ON in a newly authorized sufficient stable physical0-3 window; never reuse R1",
+    "Current-source uninstrumented matched screen and G1-G4 three-round performance",
+    "Full127x3 scored per arm paired natural-EOS quality; nonthinking1024/thinking2048 same ruler, no denominator reduction",
+    "Actual disabled/uninstalled/restart/native restoration and exact self-owned release",
+    "Complete Paper-to-Ascend and all29 functional Skill acceptance with scoped evidence"
+  ],
+  "whole_goal_complete": false,
+  "main_modified": false,
+  "next_action": "Keep full goal incomplete/blocked. Await a new explicitly authorized sufficient device window after actual foreign task termination; fresh route/source/model/image/input/ports/root admission required. No automatic deadline extension or unattended relaunch."
+}
