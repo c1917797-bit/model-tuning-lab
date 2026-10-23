@@ -1,0 +1,43 @@
+{
+  "schema": "hypic-host-readiness/v1",
+  "date": "2026-10-23",
+  "candidate": "C2 block-table forward snapshot",
+  "state": "DEFAULT_OFF_HOST_COMPONENT_ONLY",
+  "source_checkpoint": "c5060f768306c81cce9ce2c78ffee7ecc2024d87",
+  "hashes": {
+    "independent_c2_metadata.py": "db93b5e021b3fadc9be0ac4db2c9302e85459f4e9e43411fa860be4589e40b44",
+    "independent_c2_block_table_snapshot.py": "216655c669d55b4383e2335df02163e564acf83deaa6cff28644a0f791c6d732",
+    "test_independent_c2_block_table_snapshot.py": "e8c15cf955f95c7370753d6134714f60e4ea4a8f07f0f5ebfc60f1023262a62d"
+  },
+  "tests": {
+    "focused": {
+      "operation": "exec-0000000000000c59",
+      "passed": 27,
+      "scope": "24new+3existing CPU controls"
+    },
+    "full_host": {
+      "operation": "exec-0000000000000c61",
+      "passed": 1060,
+      "exit": 0,
+      "scope": "host unittest discovery only"
+    },
+    "diff_check": "exec-0000000000000c5d PASS"
+  },
+  "observation": {
+    "default_cpu_calls": 3,
+    "candidate_cpu_calls": 1,
+    "equal_metadata": true,
+    "native_table_clone_preserved": true,
+    "scope": "CPU Tensor.cpu invocation count, not NPU D2H or speed"
+  },
+  "old_source_bindings_stale": true,
+  "limits": [
+    "Not wired into model/C2 hook or loader",
+    "No new manifest/contract/device phase",
+    "Source-reviewed ordinary eager boundary only; external writer absence not proven",
+    "No NPU values/ordering/critical-path improvement",
+    "R21 performance negative and R22 quality incomplete unchanged",
+    "No lifecycle/29Skill functional/full paper acceptance"
+  ],
+  "next": "Source-bound eager-only forward/group wiring, negative controls, then fresh actual resource admission and a bounded same-protocol ON/OFF integrated diagnostic"
+}

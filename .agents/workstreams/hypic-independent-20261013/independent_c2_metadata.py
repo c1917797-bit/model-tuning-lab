@@ -7,7 +7,8 @@ from dataclasses import replace
 import torch
 
 
-def window_metadata(native, window, *, request_row, cache_hit_state,allow_mixed=False):
+def window_metadata(native, window, *, request_row, cache_hit_state,allow_mixed=False,
+                    block_table_reader=None, request_identity=None):
     if (not native.causal or (not allow_mixed and (native.num_decodes or native.num_decode_tokens))
             or native.prefill is not None or native.decode_meta is not None
             or native.kvcomp_metadata is not None):
@@ -22,7 +23,16 @@ def window_metadata(native, window, *, request_row, cache_hit_state,allow_mixed=
         raise ValueError("nonempty retained query/slot coverage required")
     if window.logical_positions!=tuple(range(window.kv_end-n,window.kv_end)):
         raise ValueError("query window is not right-aligned to logical KV endpoint")
-    ids=tuple(int(x) for x in native.block_tables[request_row,:len(window.block_ids)].detach().cpu().tolist())
+    if block_table_reader is None:
+        ids=tuple(int(x) for x in native.block_tables[request_row,:len(window.block_ids)].detach().cpu().tolist())
+    else:
+        if not callable(block_table_reader):
+            raise ValueError("explicit C2 block-table reader required")
+        ids=block_table_reader(native,request_row,len(window.block_ids),
+                              request_identity=request_identity)
+        if (not isinstance(ids,tuple) or len(ids)!=len(window.block_ids)
+                or any(type(x) is not int for x in ids)):
+            raise ValueError("complete integer block-table snapshot required")
     if ids!=window.block_ids:
         raise ValueError("live block table changed after cache binding")
     def tensor(values,template):

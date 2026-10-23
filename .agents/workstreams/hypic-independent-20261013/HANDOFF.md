@@ -1,5 +1,14 @@
 # CURRENT 2026-10-23 RESUME AND MAINTAINER LESSON INGESTION
 
+Published/liveverifiedc5060f76 contains maintainer lessons; mainunchanged.
+C2 block-table snapshot component27focused0c59/1060fullhost0c61 PASS;
+defaultCPUreadcount3->1/equalmetadata/nativeclone, NOT NPU D2H orspeed.
+C2_BLOCK_TABLE_R24_HOST_READINESS_20261023.json and successor plan record
+source-reviewed eager boundary/mutablealias risk. No hook/loader/manifest
+wiring and no new device phase. Metadata sourcehash changed: old packages
+and device contracts are stale and cannot launch. Freeze a new bounded
+source-bound ON/OFF diagnostic after wiring/negative controls; no guardremoval.
+
 Human requests continued reproduction and success/failure Skill ingestion.
 Historical replay0c34 verifies44raw hashes, R23 eleven host controls and29Skill
 structure;0c43 quick_validate29/registry29/7links/6decision scenarios PASS.
