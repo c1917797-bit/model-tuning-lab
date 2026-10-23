@@ -1,0 +1,31 @@
+{
+  "schema": "native2k.pending-owning-handoff/v1",
+  "source_blueprint_complete": true,
+  "actual_source_bound_ref": null,
+  "MAIN_review_ref": null,
+  "authority_ref": null,
+  "sameimage_preflight_ref": null,
+  "source_root": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-native-2k-prefill-observation-v1",
+  "output_root": "/opt/host/vnf/austinov/run-native-2k-prefill-observation-v1",
+  "scope_kind": "native2048/1 metadata only",
+  "phase_seconds": 3600,
+  "cleanup_seconds": 180,
+  "NPU": false,
+  "numerical_qualified": false,
+  "formal_performance": false,
+  "task_accuracy": false,
+  "remaining": [
+    "actual MAIN source/runtime pins and new limited user window",
+    "source materialization/binding/real COMMANDS/audit",
+    "same-image9/native parser/ABI and source mounts",
+    "fresh physical4-7 owner/process/mapping and joint actual resource/metadata budget",
+    "native2048/1 hook, independent consumer, outer stopped-retained release"
+  ],
+  "forbidden": [
+    "NPU0-3",
+    "old window renewal",
+    "fake actual authority or bound source",
+    "131 numerical PASS promoted to2k",
+    "native metadata promoted to BOLE performance or numerical qualification"
+  ]
+}

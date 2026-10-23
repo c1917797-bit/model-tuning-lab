@@ -152,6 +152,39 @@ joint admission. That integration and actual peak proof remain missing, and
 both hard runtime refusals remain closed. Prefer this smaller proven lifetime
 repair before adding complex cross-frame reference mechanisms.
 
+## Native metadata owning blueprint and whole-map composition
+
+The separate native_2k_owning_source_prepare_v1 blueprint now contains420
+source files. Actual public-entry controls reconstruct the full expected
+source, read its dependencies, validate the original command contract and
+reach the original phase/predevice boundary in memory. Operation0b0d passed
+five software controls (27.587s); physical authority/review/bind/output remain
+absent. The new source/helper identities are checked before helper execution.
+The actual original g3 budget now additionally charges exactly the shared
+NATIVE2K-ASSIGNMENT.json; no resource limit was raised. This is native2048/1
+metadata preparation, not BOLE mathematics or actual observed allocation.
+
+Actual input_processor bytes were copied from the exact task-owned stopped
+V7 container without start/create/exec, with full owner/config/mount checks.
+The copy tool, source pins and pending handoff are preserved; generated source
+projections and raw operation responses are not included in this Git stage.
+The original response archive is43944 bytes, SHA256
+`e580de5a487f9f6c43ad4a1478a1b0ef2460814057b9410539f21dd31f381fcb`,
+at native_2k_owning_source_prepare_v1/ACTUAL_OPERATION_RESPONSES.json.
+It retains failed fixture0b01 and successful0b05/0b09/0b0d separately.
+
+bole_2k_composition_prepare_v1 applies the six actual component APIs to the
+complete402-file BOLE parent: qualification taps, geometry, snapshot, native
+input, numeric2k and same-frame codec. Operation0b28 passed complete-map
+compile (409 files/313 Python files), reverse restoration of all402 parent
+files and missing-order/wrong-pin/double-codec/after-drift/module-cache controls.
+This test pins the OLD codec at6f8461ee; it does not cover b53e7360's later
+CPU-export lifetime repair. The manifest itself remains historical131, and
+whole2k producer/validator/clock/profile/runtime integration is not claimed.
+Original0b24/0b28 responses: external followup evidence root,
+bole2k-composition-0b28-tool-responses.json (20689 bytes, SHA256
+`846e1eedf733a5dedc9a78fa319091c07bfa01eef64d7c4bf661e87aa88c50fb`).
+
 ## Remaining acceptance edges
 
 The current nodes are partial, not a complete bound executable source.
