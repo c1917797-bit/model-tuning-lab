@@ -1,4 +1,18 @@
-# CURRENT 2026-10-23 WAIT FOR EXTERNAL TASK END; NO OWNED NPU JOB
+# CURRENT 2026-10-23 RESOURCE BUDGET AUDITED; STILL WAIT, NO OWNED NPU JOB
+
+HYPIC_REMAINING_DEVICE_BUDGET_20261023.json separates hash-verified historical
+R21/R22 timings from conditional current-source planning. Parent0dd6 verifies
+four immutable raw hashes;0de3 independently derives40-request monotonic spans.
+Current-source12 performance cells, full paired381/arm quality and actual
+lifecycle remain incomplete. Conditional resource reserve20-26h is not a promise
+or new authorization; baseline quality duration/current candidate speed unknown.
+45min is a bounded diagnostic window, not the full reproduction budget.
+Runtime/config/manifest/contract frozen bytes and13:00UTC stop are unchanged.
+Human chose wait; latest0ddf11:50:28UTC still foreign kernel_eval PID1136914
+onphysicalNPU0 in cannbench_ds; no owned container/job. Do not use a transient
+empty process table, interfere with foreign jobs, reuseR1, or extend the window.
+
+# PREVIOUS 2026-10-23 WAIT FOR EXTERNAL TASK END; NO OWNED NPU JOB
 
 Human explicitly chose先等待外部任务结束. Do not restart on a transientempty
 NPU snapshot, stop/modifyforeign tasks, reuseR1 or extend13:00UTC bound.

@@ -26,7 +26,9 @@
     "device_run": false,
     "readiness": "C2_BLOCK_TABLE_R24_WIRING_READINESS_20261023.json",
     "tests": 1150,
-    "active_controller": null
+    "active_controller": null,
+    "remaining_resource_budget_report": "HYPIC_REMAINING_DEVICE_BUDGET_20261023.json",
+    "resource_budget_state": "Conditional20-26h plan from hash-verified historical traces; actual upperboundunknown; no extension of13:00UTC bound or reduction of acceptance."
   },
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",

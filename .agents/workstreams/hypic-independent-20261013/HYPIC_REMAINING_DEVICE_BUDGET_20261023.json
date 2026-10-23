@@ -1,0 +1,166 @@
+{
+  "schema": "hypic-remaining-resource-budget/v1",
+  "date": "2026-10-23",
+  "source_checkpoint": "6d40484aa5ff5dd578eb249d2bdd130c575225c8",
+  "scope": "Read-only historical timing audit and conditional resource planning; not current R24 NPU validation, a completion guarantee, or permission to extend the bounded run.",
+  "human_direction": "先等待外部任务结束",
+  "absolute_stop_utc": "2026-10-23T13:00:00Z",
+  "owned_npu_job": false,
+  "current_required_work": {
+    "integrated_snapshot_canary": "New R2 OFF then independent audit/release before ON; reserve failed R1 unchanged. Instrumented timing cannot establish formal speed.",
+    "same_source_performance": {
+      "required_cells": 12,
+      "groups": [
+        "G1",
+        "G2",
+        "G3",
+        "G4"
+      ],
+      "rounds": 3,
+      "accepted_current_source_cells": 0,
+      "requests_per_cell": 40,
+      "concurrency": 16,
+      "fixed_output_tokens": 1024
+    },
+    "paired_quality": {
+      "samples_per_round": 127,
+      "rounds": 3,
+      "scored_per_arm": 381,
+      "unscored_producers_per_arm": 381,
+      "arms": 2,
+      "total_requests": 1524,
+      "natural_eos": true,
+      "default_enable_thinking": false,
+      "non_thinking_max_tokens": 1024,
+      "thinking_max_tokens": 2048,
+      "baseline_treatment_same_ruler": true
+    },
+    "actual_lifecycle": "Disable/enable/uninstall/restart and exact self-owned release with independent raw audit; old host readiness is not a device pass.",
+    "final_evidence": "Same-source matrix, paired task quality, mechanism/source/isolation/release audits, terminal report and Skill mappings."
+  },
+  "historical_evidence": {
+    "performance": {
+      "source": "Old R21 independently valid negative first pair; not R24 acceptance",
+      "root_prefix": "/cache/cch/hypic-independent-20261013/",
+      "raw_sha256": {
+        "formal-r21-c2-finite-g1-r1/result.json": "d180045e253256e44a34a56ba4e5bc3b916c63b1ec33abdd647ed0c5e6a9e39c",
+        "formal-r21-c2-finite-g3-r1/result.json": "614cad37fc4bf16903b111d9bbd41be74b4ab7e38385030b0b19638d834bd23b"
+      },
+      "metrics_field": "performance-unit.json results[*].metrics.{started,ended}",
+      "measured_span_formula": "max(metrics.ended) - min(metrics.started), over the 40 scored requests; excludes warmups",
+      "measured": [
+        {
+          "arm": "g1",
+          "count": 40,
+          "started_min": 319518.26615481,
+          "ended_max": 320726.70297836,
+          "measured_seconds": 1208.4368235500297,
+          "sha256": "18edc2188e20797714d30af48173ba440ff81c1b691ec5436efee9a8be43580b"
+        },
+        {
+          "arm": "g3",
+          "count": 40,
+          "started_min": 317643.41359429,
+          "ended_max": 318979.79798665,
+          "measured_seconds": 1336.3843923600507,
+          "sha256": "57efd25c3ce4a9b339e3ad4f2fd71a0b75a876389ade953a88585ac4ce611ab8"
+        }
+      ],
+      "approx_stage_minutes": {
+        "g1": 25.81,
+        "g3": 28.81
+      },
+      "stage_timing_limit": "Stage subdivisions and these total-minute estimates use timestamp brackets; only per-request monotonic span above is exact.",
+      "old_pair_decision": "Negative whole-HYPIC first screen; speed evidence cannot override quality or count as current-source cells."
+    },
+    "quality": {
+      "source": "Old f408eff0 R22 interrupted HYPIC arm; matching baseline was not run",
+      "root": "/cache/cch/hypic-independent-20261013/full-quality-r22-hypic-r1",
+      "raw_sha256": {
+        "events": "e903eac30c902a4f54cf4a8dfe65f156f8b01522bf8645a0bcff27a8c0be75f1",
+        "result": "71f15cd9d3c6b86eed0480f0ba75d7731fac89e789bae3484397fb9934d206f7"
+      },
+      "producers": 215,
+      "scored_attempts": 215,
+      "request_successes": 207,
+      "cutoff_failures": 8,
+      "finish_counts": {
+        "stop": 121,
+        "length": 86
+      },
+      "successful_output_tokens": {
+        "n": 207,
+        "minimum": 132,
+        "mean": 826.7391304347826,
+        "median": 924,
+        "maximum": 1024
+      },
+      "completed_batches": 26,
+      "observed_batches": 27,
+      "ordinary_completed_batch_seconds_approx": [
+        384,
+        443
+      ],
+      "first_cold_batch_seconds": 561.0863199234009,
+      "stage_minutes_approx": 186.45,
+      "limit": "Not 381 acceptance or a complete paired score. Finish reason length remains reported, not silently reclassified or retried. Baseline duration and later cache/material growth are unknown."
+    }
+  },
+  "conditional_resource_budget": {
+    "assumptions": [
+      "External task really finished and a stable physical0-3 window exists",
+      "Candidate passes without further repair or rerun",
+      "No foreign-task interruption",
+      "Frozen protocol and full denominators unchanged",
+      "Old R21/R22 timings only supply planning references; current-source speed and baseline quality duration remain unknown"
+    ],
+    "hours": {
+      "performance_matrix": [
+        6,
+        8
+      ],
+      "paired_quality": [
+        10,
+        14
+      ],
+      "integrated_canary": [
+        0.75,
+        1.25
+      ],
+      "actual_lifecycle": [
+        0.75,
+        1.5
+      ],
+      "final_joint_audit_report": [
+        0.5,
+        1
+      ]
+    },
+    "accounting": "Performance allocation already includes per-stage audit/switching; final_joint_audit_report is only the final cross-stage audit/report and may partly overlap.",
+    "arithmetic_sum_hours": [
+      18,
+      25.75
+    ],
+    "project_reserve_hours": [
+      20,
+      26
+    ],
+    "completion_upper_bound": "unknown",
+    "quality_scenario_only": "Holding old interrupted HYPIC batch behavior suggests roughly5.2-6.1h per arm, but the unmeasured baseline, new code and later rebuild growth prevent a duration guarantee.",
+    "authorization": "No new full40/381 waves or 12/24h extension are authorized by this estimate. Current bounded stop remains13:00UTC.",
+    "gate_order": "After the bounded OFF/ON numerical/mechanism audit, use a newly frozen uninstrumented matched screen; classify failures without changing gates, then complete all required current-source matrix/quality/lifecycle evidence. Quality is not blocked merely by negative speed."
+  },
+  "verification": {
+    "parent_raw_hash_check": "exec-0000000000000dd6 exit0",
+    "parent_monotonic_span_check": "exec-0000000000000de3 exit0",
+    "read_only_batch_analysis": "exec-0000000000000db5 exit0",
+    "no_test_or_device_run_for_this_audit": true
+  },
+  "non_claims": [
+    "No paper reproduction success",
+    "No R24 NPU speed or quality proof",
+    "No final deployment acceptance",
+    "No main synchronization or all29 functional Skill acceptance",
+    "No change to frozen runtime, manifest, contract, raw roots or thresholds"
+  ]
+}
