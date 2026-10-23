@@ -1,4 +1,25 @@
-# CURRENT 2026-10-23 R24 WIRING FROZEN; NO NEW DEVICE RUN
+# CURRENT 2026-10-23 WAIT FOR EXTERNAL TASK END; NO OWNED NPU JOB
+
+Human explicitly chose先等待外部任务结束. Do not restart on a transientempty
+NPU snapshot, stop/modifyforeign tasks, reuseR1 or extend13:00UTC bound.
+Published/liveverified24627e7d source+contracts;main23ec33d7unchanged.
+1150CPU0d3b PASS;417host/415runtime static0d3c PASS. No newNPUacceptance.
+OFF admission0d53 passed11:17:55UTC with0-3empty/portsfree/newrootabsent;
+controller0d55 then exit1 Physical0-3occupiedbeforeadmission, before rawmkdir/
+containercreation/request. Independent0d5a at11:20:45UTC proves417sources,
+rawrootabsent/noownedlabelcontainers; foreignNPU0PID863090 python3/tmp/smoke2.py
+in cannbench_ds cgroup. Earlier598144kernel_eval was also sameexternalcontainer.
+R24_OFF_R1_ADMISSION_FAILURE_20261023.json preserves exactfailure/evidence.
+
+Wait until actual external benchmark task terminates, not merely blankprocess
+table moment. Then only freshma/direct/source/physical0-3/8233HCCL/newrootproof
+and sufficientbudget before2026-10-23T13:00:00Z allow newsource-boundR2 contracts/
+roots, OFF then independentaudit beforeON. R1contract/rawnames reserved;no retry.
+At13:00 stop newstarts, preserve/release exact ownedstage ifany, end thisbounded
+followup; no automatic12/24h extension. Performance/quality/lifecycle/29functional
+unfinished; do not mark whole goalcomplete. Do not touchotherthread automations.
+
+# HISTORICAL 2026-10-23 R24 WIRING FROZEN; NO NEW DEVICE RUN
 
 1150fullCPU0d0e/73focused0ce1/17nativeentry0d0a/29structure0d00 PASS.
 0d0f pinnedimage source+compile proof has no torch/NPU import.

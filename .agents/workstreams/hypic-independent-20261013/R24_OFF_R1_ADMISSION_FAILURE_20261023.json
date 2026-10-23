@@ -1,0 +1,46 @@
+{
+  "schema": "hypic-r24-predevice-admission-failure/v1",
+  "date": "2026-10-23",
+  "checkpoint": "24627e7dc3d4749530c4225f904f184f6b9bb2ce",
+  "controller": "exec-0000000000000d55",
+  "contract": "C2_BLOCK_TABLE_R24_OFF_CANARY_R1_CONTRACT.json",
+  "contract_sha256": "2deab16ffe0b18e82c63b79561e9562d1713e398de3dac42da7250038fdaefa9",
+  "result": "FAILED_BEFORE_RAW_ROOT_OR_CONTAINER_CREATION",
+  "controller_exit": 1,
+  "error": "Physical0-3 occupied before admission",
+  "controller_stderr": "Traceback (most recent call last):\n  File \"/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/formal_r15_tp4.py\", line 440, in <module>\n    if __name__==\"__main__\":main()\n  File \"/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/formal_r15_tp4.py\", line 438, in main\n    if args.run:run_contract(contract)\n  File \"/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/formal_r15_tp4.py\", line 184, in run_contract\n    if first[\"foreign\"]:raise RuntimeError(\"Physical0-3 occupied before admission\")\nRuntimeError: Physical0-3 occupied before admission\n",
+  "admission_pass": {
+    "operation": "exec-0000000000000d53",
+    "utc": "2026-10-23T11:17:55.706125+00:00",
+    "physical_processes": []
+  },
+  "independent_aftercheck": {
+    "operation": "exec-0000000000000d5a",
+    "utc": "2026-10-23T11:20:45.715737+00:00",
+    "source_bindings_verified": 417,
+    "contract_sha256": "2deab16ffe0b18e82c63b79561e9562d1713e398de3dac42da7250038fdaefa9",
+    "raw_root_exists": false,
+    "owned_label_containers": "",
+    "physical_processes": [
+      [
+        0,
+        863090
+      ]
+    ],
+    "identities": [
+      {
+        "physical": 0,
+        "pid": 863090,
+        "cmdline": "python3 /tmp/smoke2.py ",
+        "cgroup": "13:blkio:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n12:freezer:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n11:memory:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n10:perf_event:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n9:rdma:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n8:pids:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n7:cpuset:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n6:net_cls,net_prio:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n5:hugetlb:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n4:devices:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n3:files:/\n2:cpu,cpuacct:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n1:name=systemd:/docker/efc5e45e8a54690e412cd3e148791f57733385ae0b97f87d0bb3b777e17873f6\n"
+      }
+    ]
+  },
+  "device_run": false,
+  "owned_resources_created": false,
+  "meaning": "Admission race with external task, not an algorithm/numerical/speed result. No HYPIC request or worker ran; no raw root exists. Contract/rootR1 reserved as failed attempt and not retried.",
+  "human_direction": "先等待外部任务结束",
+  "next": "Wait for actual foreign task termination, not one transient empty NPU snapshot. Do not stop/modify foreign jobs. Only after termination and fresh idle/direct/source/ports proof may freeze newR2 roots within existing13:00UTC stop; no unchanged retry or deadline extension.",
+  "frozen_stop_utc": "2026-10-23T13:00:00Z",
+  "full_goal_complete": false
+}
