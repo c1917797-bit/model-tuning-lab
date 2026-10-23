@@ -50,6 +50,10 @@ def adapt(files):
     out['fastpath_numeric_observer.py'] = s
     s = out['fastpath_numeric_sink.py']
     s = once(s, 'import json\n', 'import json\nimport state_capture_codec as SC\n')
+    # Complete durable saving before releasing the CPU export. The independent
+    # saved-file reload and all original reader predicates remain unchanged.
+    s = once(s, "    ref=C.ref(path)\n",
+        "    del raw # completed CPU export before independent saved-file read\n    ref=C.ref(path)\n")
     # Original independent reader executes on decoded complete tensors, unchanged.
     marker = "    report=N.consume_frame(t,C,m,source,saved['payload'],previous=previous)"
     s = once(s, marker, """    C.need(C.ref(SC.__file__)==m['files']['state_capture_codec.py'],

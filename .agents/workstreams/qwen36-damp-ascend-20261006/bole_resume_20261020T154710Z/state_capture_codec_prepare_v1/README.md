@@ -41,6 +41,31 @@ Concrete remaining long-stream blocker (actual0b06): the existing long helper ch
 
 A possible next bounded design, not implemented here, is immediate validated previous-after checkpoint to current-before dedup for exactly128 actual before tensors (48 state,48 full conv,16 FA K/V pairs). For this conditional geometry that removes90783744B=86.578125MiB per nonfirst frame, leaving a154.7459106MiB current subset; with the conservative241.324MiB first subset the analogous ledger is about897.5617676MiB before omitted overhead. Every current-before NPU full hash, previous original ACK/report and source/request/rank/next-length/version, exact physical slot/pages and checkpoint full bytes must be joined before restoring views. First frame remains complete, different request/generation/new page cannot borrow a previous checkpoint, failures retain the actual unequal payload. Current codec deliberately supports **only same-frame refs** and rejects this future cross-frame representation. This is a design lead, not an admission or measured fit.
 
+## CPU export lifetime repair (not a budget waiver)
+
+The actual sink retains CPU `raw` after `t.save` and throughout independent
+`t.load`/consumption. The renderer now releases only that finished CPU export
+after save, flush, fsync and stream close, before opening the saved file again.
+The outer observer retains NPU capture objects, not this CPU export. Actual
+model/proposal/rollback state and independent saved-file reloading are untouched.
+A source-prefix weak-reference control discriminates the original overlapping
+Python owner from the repaired lifetime. It does not prove Torch serialization
+internals, allocator release or RSS/PSS high-water; those remain same-image and
+NPU prerequisites. No reserve or admission predicate is reduced.
+
+The long `raw_reservation` formula is a reviewed design/helper calculation,
+not yet called by the actual sink. Its missing runtime integration is an
+explicit remaining edge, not an already enforced combined budget. Current
+hard runtime refusal remains in force. This lifetime repair alone does not
+establish1GiB joint fit or authorize NPU execution.
+
+Operation0b25 passed four targeted software controls in3.399s: actual sink
+save/reopen lifetime (original overlap discriminated), current numeric2k
+composition/inverse, preserved caps/oracle entry and actual transaction hook
+order. This was host Python, not Torch or NPU. Original full response:
+`/opt/host/vnf/austinov/run-bole-followup-preparation-evidence-20261022T230600Z-v1/MAIN_CPU_EXPORT_LIFETIME_0b25_V1.json`
+(10472 bytes, SHA256 `992ecb9c91283a9556ff6b1b093ec8f149afbb358ef46ab7dda6ec9b7746a48c`).
+
 ## Software evidence and next actual step
 
 Actual0aff:9 software controls passed in2.363s, no skips, no Torch/NPU. Tests cover192 refs, strict corruption negatives, no proposal mutation, actual transaction seam ordering, whole inverse, current numeric2k/FIA composition, default OFF/unbound rejection, and real exclusive temporary-file Ref/fsync ABI. The file writer test serializes explicit software fixture bytes, **not real tensor evidence**.

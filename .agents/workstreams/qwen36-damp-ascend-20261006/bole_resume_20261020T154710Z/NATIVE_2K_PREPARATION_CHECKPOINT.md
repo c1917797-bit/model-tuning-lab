@@ -135,6 +135,23 @@ binding, Docker start or NPU load occurred during this source-only stage.
 All entries above are implementation/evidence defects or incomplete integration,
 not proof that BOLE has no value.
 
+## CPU export liveness: smaller causal repair
+
+Read-only source tracing proved that the sink retains CPU export `raw` while
+independently loading another complete CPU frame. The rendered successor now
+releases only this finished export after the actual save/flush/fsync/close and
+before C.ref/t.load. It does not release the outer NPU capture, skip independent
+saved-file reopening, delete evidence or reduce any reserve. Operation0b25 ran
+four targeted software controls (3.399s), including the actual sink-prefix
+weak-reference discriminator and current numeric2k inverse/oracle/cap seams.
+This proves Python ownership at that seam, not Torch allocator/storage peak.
+
+The long raw_reservation function is currently a software/design helper; it is
+not wired into the actual sink. Its formula above is not a claimed runtime
+joint admission. That integration and actual peak proof remain missing, and
+both hard runtime refusals remain closed. Prefer this smaller proven lifetime
+repair before adding complex cross-frame reference mechanisms.
+
 ## Remaining acceptance edges
 
 The current nodes are partial, not a complete bound executable source.

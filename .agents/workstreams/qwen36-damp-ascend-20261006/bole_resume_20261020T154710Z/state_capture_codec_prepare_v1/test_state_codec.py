@@ -290,5 +290,59 @@ class Controls(unittest.TestCase):
         self.assertEqual(S.STATE_BYTES * 48 * 4, 144 * 2**20)
 
 
+
+    def test_actual_save_releases_export_before_independent_reopen(self):
+        # Execute the actual sink save/reopen prefix. Weakrefs prove Python
+        # ownership only; real Torch storage/serializer high-water stays pending.
+        import weakref
+
+        class Exported:
+            pass
+
+        def run_prefix(text):
+            tree = ast.parse(text)
+            sink = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == 'sink')
+            def assigned(node, name):
+                return isinstance(node, ast.Assign) and any(
+                    isinstance(x, ast.Name) and x.id == name for x in node.targets)
+            start = next(i for i, n in enumerate(sink.body) if assigned(n, 'raw'))
+            stop = next(i for i, n in enumerate(sink.body) if assigned(n, 'previous'))
+            fn = ast.FunctionDef(name='actual_save_reopen_prefix',
+                args=ast.arguments(posonlyargs=[], args=[], kwonlyargs=[], kw_defaults=[], defaults=[]),
+                body=sink.body[start:stop], decorator_list=[])
+            watched, events = [], []
+            def export(*a, **k):
+                value = Exported()
+                watched.append(weakref.ref(value))
+                return dict(logical_tensor_bytes=1, payload=value)
+            def save(raw, stream):
+                self.assertIs(raw['payload'], watched[-1]())
+                events.append('save')
+                stream.write(b'{"schema":"bole.model-diagnostic-primitives/v1","logical_tensor_bytes":1}')
+            def load(path, **kw):
+                self.assertIsNone(watched[-1](), 'CPU export still alive at independent reopen')
+                events.append('independent_reopen')
+                return json.loads(Path(path).read_bytes())
+            with tempfile.TemporaryDirectory(prefix='bole-export-lifetime-') as tmp:
+                def ref(path):
+                    data = Path(path).read_bytes()
+                    return dict(path=str(path), bytes=len(data), sha256=hashlib.sha256(data).hexdigest())
+                C = types.SimpleNamespace(need=S.need, ref=ref, checked=lambda r: Path(r['path']))
+                ns = dict(t=types.SimpleNamespace(save=save, load=load), C=C,
+                    c=dict(root=Path(tmp), used=0), X=types.SimpleNamespace(export=export),
+                    logical=1, frame=dict(generation=1, ordinal=0), os=os)
+                exec(compile(ast.fix_missing_locations(ast.Module(body=[fn], type_ignores=[])),
+                             'actual-sink-save-reopen-prefix', 'exec'), ns)
+                ns['actual_save_reopen_prefix']()
+                self.assertEqual(events, ['save', 'independent_reopen'])
+
+        original = load_actual()
+        with self.assertRaisesRegex(AssertionError, 'CPU export still alive'):
+            run_prefix(original['fastpath_numeric_sink.py'])
+        rendered, inverse = R.adapt(original)
+        run_prefix(rendered['fastpath_numeric_sink.py'])
+        self.assertEqual(R.undo(rendered, inverse), original)
+
+
 if __name__ == '__main__':
     unittest.main()
