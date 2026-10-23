@@ -29,6 +29,9 @@ def c2_install_route(config):
     config=dict(config)
     layer_barrier=config.pop("c2_layer_completion_barrier",False)
     finite_gate=config.pop("c2_layer_finite_gate",False)
+    block_snapshot=config.pop("c2_block_table_snapshot",False)
+    if type(block_snapshot)is not bool or block_snapshot and not layer_barrier:
+        raise ValueError("C2 block-table snapshot requires explicit layer barrier")
     if type(finite_gate)is not bool or finite_gate and not layer_barrier:
         raise ValueError("C2 finite gate requires explicit layer barrier")
     if type(layer_barrier) is not bool:
@@ -37,11 +40,15 @@ def c2_install_route(config):
         from experimental_c2_layer_barrier import install_compact_c2
     else:
         from independent_compact_c2_hook import install_compact_c2
-    if finite_gate:
+    if finite_gate or block_snapshot:
         original_install=install_compact_c2
         def install_compact_c2(stage,*,enabled=False,emit=None):
-            return original_install(stage,enabled=enabled,emit=emit,finite_gate=True)
+            options={}
+            if finite_gate:options["finite_gate"]=True
+            if block_snapshot:options["block_table_snapshot"]=True
+            return original_install(stage,enabled=enabled,emit=emit,**options)
     install_compact_c2.c2_layer_finite_gate=finite_gate
+    install_compact_c2.c2_block_table_snapshot=block_snapshot
     return config,install_compact_c2,layer_barrier
 
 def c1_install_route(config):
@@ -116,11 +123,18 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
     if not callable(emit):raise ValueError('activation evidence sink required')
     config,prefill_prompt_snapshot=snapshot_install_route(config)
     config,forward_metadata_snapshot=metadata_snapshot_install_route(config)
+    c2_block_table_diagnostic=config.pop("c2_block_table_diagnostic",False)
+    if type(c2_block_table_diagnostic)is not bool:
+        raise ValueError("explicit C2 block-table diagnostic boolean required")
     snapshot_probe_batches=config.pop("prompt_snapshot_probe_batches",0)
     if (type(snapshot_probe_batches)is not int or not 0<=snapshot_probe_batches<=2
             or snapshot_probe_batches and not prefill_prompt_snapshot):
         raise ValueError("explicit bounded snapshot probe requires enabled snapshot treatment")
     config,install_compact_c2,layer_barrier=c2_install_route(config)
+    c2_block_table_snapshot=install_compact_c2.c2_block_table_snapshot
+    if c2_block_table_snapshot:
+        from independent_c2_block_table_snapshot import verify_c2_snapshot_runtime_contract
+        verify_c2_snapshot_runtime_contract()
     config,install_compact_gdn,native_batch=c1_install_route(config)
     # Official ops registration precedes runtime imports; never patch source files.
     import vllm_ascend.ops
@@ -160,22 +174,30 @@ def activate_compact_hypic(config,*,enabled=False,emit=None,request_progress_lim
               'tokens_sha256':material.identity.tokens_sha256,
               'transition_shape':list(material.affine.transition.shape),
               'zero_state_shape':list(material.affine.zero_state.shape)})
+    runner_options={}
+    if c2_block_table_snapshot or c2_block_table_diagnostic:
+        runner_options["record_attention_groups"]=True
+    model_options={"metadata_snapshot":forward_metadata_snapshot}
+    if c2_block_table_snapshot:model_options["c2_block_table_snapshot"]=True
     stop=install_owned_chain((
         lambda:activate_compact_runner(enabled=True,allow_mixed=stage.enable_mixed,emit=emit,
                                       request_limit=request_progress_limit,
                                       prefill_prompt_snapshot=prefill_prompt_snapshot,
-                                      prompt_snapshot_probe_batches=snapshot_probe_batches),
+                                      prompt_snapshot_probe_batches=snapshot_probe_batches,
+                                      **runner_options),
         lambda:stage.install_producer(enabled=True,publish=publish),
         lambda:install_compact_gdn(stage,enabled=True,emit=emit),
         lambda:install_compact_c2(stage,enabled=True,emit=emit),
         lambda:install_compact_model(Qwen3_5Model,enabled=True,
             verify_source=verify_model_source,select=stage.select_compact,emit=emit,
-            metadata_snapshot=forward_metadata_snapshot)))
+            **model_options)))
     try:
         import os
         emit({'event':'compact_hypic_hooks_installed','pid':os.getpid(),
               'default_disabled':True,'c2_layer_completion_barrier':layer_barrier,
               'c2_layer_finite_gate':install_compact_c2.c2_layer_finite_gate,
+              'c2_block_table_snapshot':c2_block_table_snapshot,
+              'c2_block_table_diagnostic':c2_block_table_diagnostic,
               'native_decode_batch':native_batch,
               'c1_async_material_transfer':stage.compact_store.async_material_transfer,
               'c1_async_material_verify':stage.compact_store.verify_async_transfer,

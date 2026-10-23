@@ -1,4 +1,4 @@
-"""Default-off C2 block-table validation snapshots; not wired into serving.
+"""Default-off, forward-owned C2 block-table validation snapshots.
 
 A caller must independently source-prove metadata immutability for this exact
 forward/group. CPU validation snapshots never replace native device block tables.
@@ -88,6 +88,10 @@ class _C2BlockTableSnapshot:
             raise ValueError("native metadata/block table changed during forward")
         return table
 
+    def bind_native(self, native):
+        """Bind the source-verified group object before any layer can use it."""
+        self._validate(native)
+
     def read(self, native, request_row, block_count, *, request_identity):
         table = self._validate(native)
         if (type(request_row) is not int or request_row not in self._rows
@@ -139,3 +143,100 @@ def c2_block_table_snapshot_scope(requests, *, request_rows=None, enabled=False,
     finally:
         snapshot.close()
         _CURRENT.reset(token)
+
+
+def active_c2_block_table_snapshot():
+    """Return only the current scope; read() still enforces task/thread owner."""
+    return _CURRENT.get()
+
+
+# Exact source contract for the selected official image. Read, do not import,
+# nested runtime modules during the worker import hook (avoids import cycles).
+_SOURCE_FILES = {
+    "vllm": {
+        "model_executor/models/qwen3_5.py": "04f3de5372973770d71c5c05f2e8a5e221ec52b62cca7a1e302d9201b61b8adc",
+        "model_executor/models/qwen3_next.py": "8d614ce262ab9340585f9a2ad4ab117228f076e3672fcb5f04930ff0a38223ae",
+        "forward_context.py": "1c6fa51e9a02a120fed5e7357afb1190516cbdfefd1c644dfcd860603f1527c5",
+        "config/compilation.py": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+        "compilation/decorators.py": "dd7167637a478aeaea3f2410a727ddefc702bda1d9bf632831c2a8b4811ebb1e",
+    },
+    "vllm_ascend": {
+        "worker/model_runner_v1.py": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968",
+        "attention/attention_v1.py": "80005aba42bcf61247cc0d91502a0f1338194a4b38dd82bc521f6d3c84958390",
+        "worker/block_table.py": "8f77809c12af3bd9d56974edbbe5c792995f2620aadfe62411806f2e68d2ef0a",
+    },
+}
+
+
+def verify_c2_snapshot_runtime_contract():
+    """Verify pinned source bytes only; forward eligibility is checked later."""
+    import hashlib
+    from pathlib import Path
+    import sys
+    for package, files in _SOURCE_FILES.items():
+        root_module = sys.modules.get(package)
+        origin = getattr(root_module, "__file__", None)
+        if not origin:
+            raise ValueError("C2 snapshot live package origin missing")
+        root = Path(origin).resolve().parent
+        for relative, expected in files.items():
+            path = root / relative
+            module_name = package + "." + relative[:-3].replace("/", ".")
+            imported = sys.modules.get(module_name)
+            if imported is not None:
+                actual = getattr(imported, "__file__", None)
+                if not actual or Path(actual).resolve() != path.resolve():
+                    raise ValueError("C2 snapshot imported source path drift")
+            if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+                raise ValueError("C2 snapshot official source drift: " + relative)
+
+
+def validate_c2_snapshot_forward(selection, context, runtime):
+    """Admit only the already captured ordinary eager, single-group forward.
+
+    Native prepare writes the persistent table before forward; no snapshot
+    survives that forward. Version-less inference tensors are NOT a proof.
+    The pinned source path, real runtime capture and supported mode jointly
+    delimit the candidate. The device trial must still validate stream/order.
+    """
+    mode = getattr(context, "cudagraph_runtime_mode", None)
+    if (getattr(mode, "name", None) != "NONE" or getattr(mode, "value", None) != 0
+            or getattr(context, "ubatch_slices", "missing") is not None):
+        raise ValueError("C2 snapshot requires ordinary eager non-ubatch forward")
+    metadata = getattr(context, "attn_metadata", None)
+    if type(metadata) is not dict or runtime is None:
+        raise ValueError("C2 snapshot needs exact native metadata/runtime capture")
+    plans = tuple(selection.plans)
+    identities = tuple((p.request_id, p.rank, p.step) for p in plans)
+    _requests_and_rows(identities, None)
+    if (tuple(p.request_id for p in plans) != tuple(runtime.request_ids)
+            or any((p.rank, p.step) != (runtime.rank, runtime.step) for p in plans)
+            or runtime.prompt_logprobs or selection.prompt_logprobs
+            or tuple(selection.cache_slices) != tuple(runtime.cache_slices)
+            or tuple(selection.attention_groups) != tuple(runtime.attention_groups)
+            or tuple(selection.writable_kv_slots) != tuple(runtime.writable_kv_slots)):
+        raise ValueError("C2 snapshot selection/native capture drift")
+    groups = tuple(selection.attention_groups)
+    if len(groups) != 1:
+        raise ValueError("C2 snapshot supports one exact attention group")
+    group, names = groups[0]
+    names = tuple(names)
+    if not names or len(set(names)) != len(names) or any(n not in metadata for n in names):
+        raise ValueError("C2 snapshot full-attention metadata missing")
+    native = metadata[names[0]]
+    if any(metadata[name] is not native for name in names):
+        raise ValueError("C2 snapshot attention group object drift")
+    if (native.causal is not True or native.prefill is not None
+            or native.decode_meta is not None or native.kvcomp_metadata is not None
+            or native.num_decode_tokens != native.num_decodes
+            or native.num_decodes < 0 or native.num_prefills < 1):
+        raise ValueError("C2 snapshot unsupported CP/spec/metadata path")
+    rows = []
+    for plan in plans:
+        caches = [c for c in selection.cache_slices
+                  if c.request_id == plan.request_id and c.group == group]
+        if len(caches) != 1 or (caches[0].rank, caches[0].step) != (plan.rank, plan.step):
+            raise ValueError("C2 snapshot request/group capture mismatch")
+        rows.append(caches[0].row)
+    _requests_and_rows(identities, tuple(rows))
+    return identities, tuple(rows), native

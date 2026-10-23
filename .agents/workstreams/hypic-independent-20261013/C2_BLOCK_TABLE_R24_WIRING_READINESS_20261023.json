@@ -1,0 +1,67 @@
+{
+  "schema": "hypic-r24-wiring-readiness/v1",
+  "date": "2026-10-23",
+  "state": "HOST_INTEGRATED_AND_FROZEN_NOT_DEVICE_ACCEPTED",
+  "device_run": false,
+  "full_goal_complete": false,
+  "host_tests": {
+    "focused73": "exec-0000000000000ce1",
+    "native_forward17": "exec-0000000000000d0a",
+    "full1150": "exec-0000000000000d3b",
+    "structure29": "exec-0000000000000d00",
+    "static_freeze": "exec-0000000000000d3c",
+    "actual_image_source": "exec-0000000000000d0f"
+  },
+  "retained_failures": [
+    {
+      "operation": "exec-0000000000000cc7",
+      "classification": "new native capture unit fixture requested group5 with group0 fixture caches; corrected fixture group only; production guard retained"
+    },
+    {
+      "operation": "exec-0000000000000d29",
+      "classification": "precommit staged diff caught extra EOF blank lines in two new guard files; whitespace normalized, source closures rehashed,1150tests and fullstatic bindings rerun; no device root existed"
+    }
+  ],
+  "freeze": {
+    "configuration_valid": true,
+    "device_run": false,
+    "pairs": {
+      "OFF": {
+        "contract_sha256": "2deab16ffe0b18e82c63b79561e9562d1713e398de3dac42da7250038fdaefa9",
+        "manifest_sha256": "9079d31571313fbf2258df158f7fcf49ba68f4ab92ba1dc3412378484139ecfc",
+        "host_sources": 417,
+        "runtime_sources": 415,
+        "raw_root_absent": true
+      },
+      "ON": {
+        "contract_sha256": "16be2d0426ed555e50bbd4d1fa94d7206b2194f0c1a951cbd84dbf86cb39fbc1",
+        "manifest_sha256": "50eebbd9793dd38edbfafc1cfe506661a26da66cd78538cdcfe4060931d5a35b",
+        "host_sources": 417,
+        "runtime_sources": 415,
+        "raw_root_absent": true
+      }
+    },
+    "docker_root": "/cache/docker",
+    "docker_root_device": 2056,
+    "cache_device": 2056,
+    "frozen_stop_utc": "2026-10-23T13:00:00Z"
+  },
+  "treatment": "Default-off forward-only C2 CPU block-table validation snapshot; native device clone and every window block/slot/lease/finite/completion check retained.",
+  "identity": "One27B/physical0-3/singleTP4; no prior HYPIC algorithm import/copy/mount; C3 excluded.",
+  "entry_guard": "Actual Qwen3_5Model inherited Qwen3NextModel.forward code/global/default identity; reject unknown installed/late wrapper and instance override; actual CompilationMode.NONE plus do_not_compile True. Pinned fresh image and owned read-only source only, not general hostile-plugin safety.",
+  "audit": "Unchanged R21 numerical/source/physical/isolation/release auditor first; then independent source-verified native group capture joined to16 layers/fourrank/request/step/PID/manifest/window counters. Instrumented timing is not formal speed.",
+  "resource_observations": {
+    "first": "exec-0000000000000cf1 physicalNPU3 PID598144; 0cf4/0cf6 confirms CannBench kernel_eval in running cannbench_ds; untouched",
+    "later": "exec-0000000000000d06 at11:00:37UTC physical0-3 empty; roots absent; not a reservation",
+    "space": "7.8GiB /cache; old bounded raw13MB/31MB. DockerRootDir resolves/cache/docker; task tmp/compiledcache/raw all/cache. No cleanup."
+  },
+  "next_gate": "Commit and publish labelled host checkpoint, then fresh direct source/device/port/root admission. Run OFF bounded Canary, independently audit, only then fresh ON. Any failure retains immutable root, no retry unchanged.",
+  "deadline": "2026-10-23T13:00:00Z",
+  "remaining": [
+    "Current source first matched uninstrumented G1/G3 performance screen, then G1-G4 three repeated cells only after viable result",
+    "Full127x3 per arm same ruler natural EOS quality; nonthinking1024/thinking2048",
+    "Disable/uninstall/restart/native restoration/exact release",
+    "Scope-specific Paper-to-Ascend and29Skill functional evidence"
+  ],
+  "historical_decision": "R21 TPOT+8.332568%/TTFTP95+14.613058% regression unchanged; R22 fullquality incomplete/unpaired; no deployment/main/full-Skill claim"
+}

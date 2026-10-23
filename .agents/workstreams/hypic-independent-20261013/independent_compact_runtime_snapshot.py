@@ -70,8 +70,11 @@ def capture_compact_runtime(runner,requests):
 
 
 def activate_compact_runner(*,enabled=False,allow_mixed=False,emit=None,request_limit=128,
-                            prefill_prompt_snapshot=False,prompt_snapshot_probe_batches=0):
+                            prefill_prompt_snapshot=False,prompt_snapshot_probe_batches=0,
+                            record_attention_groups=False):
     if not enabled:return lambda:None
+    if type(record_attention_groups)is not bool or record_attention_groups and not callable(emit):
+        raise ValueError("explicit native group diagnostic requires evidence sink")
     if type(prefill_prompt_snapshot)is not bool:
         raise ValueError("explicit prefill prompt snapshot boolean required")
     if (type(prompt_snapshot_probe_batches)is not int or not 0<=prompt_snapshot_probe_batches<=2
@@ -92,7 +95,15 @@ def activate_compact_runner(*,enabled=False,allow_mixed=False,emit=None,request_
         if not requests or runner.use_cp:return
         if not allow_mixed and any(r.scheduled_tokens<=1 for r in requests):return
         if allow_mixed and all(r.scheduled_tokens<=1 for r in requests):return
-        CURRENT_RUNTIME_SNAPSHOT.set(capture_compact_runtime(runner,requests))
+        snapshot=capture_compact_runtime(runner,requests)
+        if record_attention_groups:
+            emit({'event':'compact_native_attention_groups_captured',
+                  'rank':snapshot.rank,'step':snapshot.step,
+                  'request_ids':list(snapshot.request_ids),
+                  'attention_groups':[{'group':gid,'layers':list(names)}
+                                      for gid,names in snapshot.attention_groups],
+                  'source':'verified-native-full-attention-spec'})
+        CURRENT_RUNTIME_SNAPSHOT.set(snapshot)
     probe_seen=0
     def freeze(runner,args,kwargs):
         nonlocal probe_seen

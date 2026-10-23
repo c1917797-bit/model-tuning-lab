@@ -8,7 +8,10 @@ from pathlib import Path
 import hashlib,inspect
 
 
-def install_compact_c2(stage,*,enabled=False,emit=None,finite_gate=False):
+def install_compact_c2(stage,*,enabled=False,emit=None,finite_gate=False,
+                       block_table_snapshot=False):
+    if type(block_table_snapshot)is not bool:
+        raise ValueError('explicit C2 block-table snapshot boolean required')
     if not enabled:return lambda:None
     if type(finite_gate)is not bool:raise ValueError('explicit C2 finite gate boolean required')
     if not callable(emit):raise ValueError('C2 evidence sink required')
@@ -81,6 +84,13 @@ def install_compact_c2(stage,*,enabled=False,emit=None,finite_gate=False):
         groups=[gid for gid,names in selected.attention_groups if layer.layer_name in names]
         if len(groups)!=1:raise ValueError('full-attention group association missing')
         group=groups[0];prepared=[];offset=0;all_slots=set()
+        snapshot=None
+        if block_table_snapshot:
+            from independent_c2_block_table_snapshot import active_c2_block_table_snapshot
+            snapshot=active_c2_block_table_snapshot()
+            if snapshot is None:
+                raise ValueError('selected C2 layer requires owning block-table snapshot scope')
+            snapshot_before=(snapshot.reads,snapshot.hits)
         guard=None;hot_requests=[]
         if finite_gate:
             from independent_layer_finite_guard import LayerFiniteGuard
@@ -95,10 +105,14 @@ def install_compact_c2(stage,*,enabled=False,emit=None,finite_gate=False):
                 if all_slots.intersection(cache.slots):raise ValueError('cross-request scheduled KV alias')
                 all_slots.update(cache.slots)
                 binding=bind_c2_cache(plan,cache,writable_slots=owned[0])
+                metadata_options={}
+                if snapshot is not None:
+                    metadata_options={"block_table_reader":snapshot.read,
+                                      "request_identity":(plan.request_id,plan.rank,plan.step)}
                 if isinstance(plan,NativeQueryPlan):
                     metas=tuple(window_metadata(attn_metadata,w,request_row=cache.row,
                         cache_hit_state=AscendAttentionState.PrefillCacheHit,
-                        allow_mixed=mixed) for w in binding.windows)
+                        allow_mixed=mixed,**metadata_options) for w in binding.windows)
                     prepared.append((plan,binding,None,offset,None,None,metas))
                     offset+=len(plan.retained_offsets)
                     continue
@@ -118,7 +132,7 @@ def install_compact_c2(stage,*,enabled=False,emit=None,finite_gate=False):
                     raise ValueError('nonfinite compact public KV')
                 metas=tuple(window_metadata(attn_metadata,w,request_row=cache.row,
                     cache_hit_state=AscendAttentionState.PrefillCacheHit,
-                    allow_mixed=mixed) for w in binding.windows)
+                    allow_mixed=mixed,**metadata_options) for w in binding.windows)
                 prepared.append((plan,binding,generation,offset,k,v,metas));offset+=len(plan.retained_offsets)
             if any(t.shape[0]!=offset for t in (query,key,value,output)):
                 raise ValueError('compact C2 projected row coverage mismatch')
@@ -147,6 +161,13 @@ def install_compact_c2(stage,*,enabled=False,emit=None,finite_gate=False):
                     'skipped_body_queries':plan.skipped_tokens,'query_windows':len(binding.windows)}
             complete_layer(prepared,execute=execute,synchronize=torch.npu.synchronize,
                            receipt=receipt,emit=emit)
+            if snapshot is not None:
+                emit({'event':'c2_block_table_snapshot_layer_checked',
+                    'rank':selected.plans[0].rank,'step':selected.plans[0].step,
+                    'layer':layer.layer_name,'group':group,
+                    'request_ids':[p.request_id for p in selected.plans],
+                    'reads_delta':snapshot.reads-snapshot_before[0],
+                    'hits_delta':snapshot.hits-snapshot_before[1]})
         return output
     wrapped._independent_compact_c2_owned=True;cls.forward=wrapped
     def stop():

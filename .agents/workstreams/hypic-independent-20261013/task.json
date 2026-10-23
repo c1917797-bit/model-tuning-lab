@@ -9,7 +9,22 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R23_HOST_REPAIR_AND_C2_SUCCESSOR_PREPARATION",
+  "execution_state": "R24_FROZEN_HOST_READY_PENDING_BOUNDED_ADMISSION",
+  "r24_resume": {
+    "date": "2026-10-23",
+    "human_request": "我的hypic论文复现成功了吗，如果没有，还需要做什么，请继续，我要把这个论文复现成功",
+    "scope": "Current human resume authorizes bounded27B/physical0-3/singleTP4 independentC1/C2 continuation, not another12/24h unattended extension or expired automation reactivation.",
+    "contracts": [
+      "C2_BLOCK_TABLE_R24_OFF_CANARY_R1_CONTRACT.json",
+      "C2_BLOCK_TABLE_R24_ON_CANARY_R1_CONTRACT.json"
+    ],
+    "absolute_stop_utc": "2026-10-23T13:00:00Z",
+    "state": "HOST_FROZEN_PENDING_ACTUAL_IDLE_ADMISSION",
+    "device_run": false,
+    "readiness": "C2_BLOCK_TABLE_R24_WIRING_READINESS_20261023.json",
+    "tests": 1150,
+    "active_controller": null
+  },
   "integration_state": "not-ready",
   "objective": "Independently reimplement the HYPIC algorithm/operator monkeypatch for the supplied successful single-instance experiment, retain its established benchmark workflow, and validate Paper-to-Ascend end to end on27B physicalNPU0–3 TP4.",
   "authority": {
@@ -158,7 +173,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "C2 forward block-table candidate has27focused/1060full host tests PASS; default-off and NOT wired. Next source-bound eager forward/group hook wiring and negative controls, then freeze NEW bounded ON/OFF contract/root with fresh physical0-3/port/space admission. Keep R21speed negative/R22fullquality incomplete; no old raw reuse or stale manifest launch.",
+  "next_action": "R24 OFF/ON boundedCanary frozen417host/415runtime/13:00UTCstop;1150CPUtests pass only. Publish then freshma/direct/source/physical0-3/8233HCCL/newroot admission. Run OFF, independent audit, then fresh ON. Preserve failures/oldroots; no guard relaxation or final success claim.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -166,7 +181,7 @@
     "followup_minutes": 10,
     "latest_human_override": "Human said 继续穿刺24小时 on2026-10-16; fresh start06:48:09UTC. Same27B physical0-3 TP4 independentC1/C2; no distributedC3/dualTP2.",
     "at_deadline": "Stop new device stages, retain and release exact owned services according to controller, report actual completion; keep unfinished goal active.",
-    "followup_state": "EXPIRED; delete hypic-24 confirmed not_found in app after deadline. No new device starts authorized."
+    "followup_state": "EXPIRED; hypic-24 deleted. Historical deadline not current live job. Latest human-resumed bounded work inr24_resume; no unattended automation reactivation."
   },
   "workload": {
     "source": "User-supplied successful-case attachment",
@@ -197,9 +212,9 @@
   },
   "publication": {
     "state": "liveverified",
-    "published_commit": "ffa5b94f9a02af0ac6ebc00567864ce9c716fbe4",
+    "published_commit": "909831e723e97a9c0b689535fe1cb9d0fe332e99",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "scope": "R22 bounded17 independent NPU acceptance and full381 live tracking only; not complete task quality/performance/lifecycle or main integration"
+    "scope": "Last liveverified909831e7 includes maintainer lessons and defaultoff CPU component only; new wiring not yet published/device accepted"
   },
   "math_reference": {
     "state": "cpu-reference-passed",

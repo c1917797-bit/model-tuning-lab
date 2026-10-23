@@ -1,4 +1,25 @@
-# CURRENT 2026-10-23 RESUME AND MAINTAINER LESSON INGESTION
+# CURRENT 2026-10-23 R24 WIRING FROZEN; NO NEW DEVICE RUN
+
+1150fullCPU0d0e/73focused0ce1/17nativeentry0d0a/29structure0d00 PASS.
+0d0f pinnedimage source+compile proof has no torch/NPU import.
+DefaultOFF now wired modelscope/C2reader; ON checks actual native code/globals/
+wrapper ownership and actual CompilationMode.NONE. Nativegroup capture independent;
+finite/lease/slot/numerical/completion/release retained. New auditor first wraps
+unchangedR21, then exact fourrank/request/step/layer/PID/source/window join.
+
+C2_BLOCK_TABLE_R24_{OFF,ON}_CANARY_R1_CONTRACT.json: newroots,415runtime/417host,
+sharedstop2026-10-23T13:00:00Z;0d1b staticPASS only. Onepublic+2hotprivate fixed1024
+perarm, bothdiagnosticON/shortsuffixON, onlysnapshot flag differs. Notformal speed.
+C2_BLOCK_TABLE_R24_WIRING_READINESS_20261023.json records scope. Human resumed
+reproduction, not another12/24h unattended window; oldautomation staysdeleted.
+Noownedmodeljob;119b historicalterminal.0cf1 foreignNPU3 PID598144 in running
+cannbench_ds untouched;0d06 at11:00:37UTC later0-3empty/rootsabsent is notreservation.
+Docker/cache7.8GiB;raw/tmp/compilepaths/cache;nocleanup. Next publish then fresh
+ma/direct/source/physical0-3/8233HCCL/newroot admission. OFFauditpass beforeON;
+failures keep raw, no unchanged retry. R21speednegative/R22qualityincomplete;
+fullgoal/performance/quality/lifecycle/29functional unfinished;mainunchanged.
+
+# HISTORICAL 2026-10-23 RESUME AND MAINTAINER LESSON INGESTION
 
 Published/liveverifiedc5060f76 contains maintainer lessons; mainunchanged.
 C2 block-table snapshot component27focused0c59/1060fullhost0c61 PASS;

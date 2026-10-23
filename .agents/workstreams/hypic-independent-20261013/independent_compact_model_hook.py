@@ -20,8 +20,11 @@ class CompactModelSelection:
 
 
 def install_compact_model(model_class,*,enabled=False,verify_source=None,
-                          select=None,emit=None,metadata_snapshot=False):
+                          select=None,emit=None,metadata_snapshot=False,
+                          c2_block_table_snapshot=False):
     if not enabled:return lambda:None
+    if type(c2_block_table_snapshot) is not bool:
+        raise ValueError('explicit C2 block-table snapshot boolean required')
     if type(metadata_snapshot) is not bool:
         raise ValueError('explicit metadata snapshot boolean required')
     if not all(callable(x) for x in (verify_source,select,emit)):
@@ -31,9 +34,16 @@ def install_compact_model(model_class,*,enabled=False,verify_source=None,
     original=model_class.forward
     if getattr(original,'_independent_compact_model_owned',False):
         raise RuntimeError('compact model hook already installed')
+    native_c2_forward=None
+    if c2_block_table_snapshot:
+        from independent_c2_native_forward import (
+            verify_c2_native_forward,assert_c2_owned_forward)
+        native_c2_forward=verify_c2_native_forward(model_class,original)
 
     @wraps(original)
     def wrapped(self,input_ids,positions,intermediate_tensors=None,inputs_embeds=None):
+        if c2_block_table_snapshot:
+            assert_c2_owned_forward(self,model_class,wrapped,native_c2_forward)
         selection=select(self,input_ids,positions,intermediate_tensors,inputs_embeds)
         if selection is None:
             return original(self,input_ids,positions,intermediate_tensors,inputs_embeds)
@@ -76,13 +86,24 @@ def install_compact_model(model_class,*,enabled=False,verify_source=None,
         if compact_ids is None and compact_embeds is None:
             raise ValueError('model input absent')
         token=CURRENT_COMPACT_MODEL.set(selection)
-        metadata_evidence=None
+        metadata_evidence=None;c2_metadata_evidence=None
         try:
             with ExitStack() as resources:
                 if metadata_snapshot:
                     from independent_step_metadata_cache import forward_snapshot_scope
                     metadata_evidence=resources.enter_context(forward_snapshot_scope(
                         tuple((p.request_id,p.rank,p.step) for p in plans),enabled=True))
+                if c2_block_table_snapshot:
+                    from independent_c2_block_table_snapshot import (
+                        c2_block_table_snapshot_scope,validate_c2_snapshot_forward)
+                    from independent_runner_context import CURRENT_RUNTIME_SNAPSHOT
+                    from vllm.forward_context import get_forward_context
+                    identities,request_rows,native=validate_c2_snapshot_forward(
+                        selection,get_forward_context(),CURRENT_RUNTIME_SNAPSHOT.get())
+                    c2_metadata_evidence=resources.enter_context(c2_block_table_snapshot_scope(
+                        identities,request_rows=request_rows,enabled=True,
+                        source_verified_immutable=True))
+                    c2_metadata_evidence.bind_native(native)
                 if selection.material_guard is not None:
                     resources.enter_context(selection.material_guard)
                 output=original(self,compact_ids,positions.index_select(-1,index),None,compact_embeds)
@@ -96,6 +117,9 @@ def install_compact_model(model_class,*,enabled=False,verify_source=None,
                   'step':plans[0].step,'original_rows':total,'retained_rows':len(rows),
                   'sampled_rows':list(samples),'request_ids':[p.request_id for p in plans],
                   'forward_metadata_snapshot':metadata_snapshot,
+                  'c2_block_table_snapshot':c2_block_table_snapshot,
+                  'c2_block_table_snapshot_reads':c2_metadata_evidence.reads if c2_metadata_evidence is not None else 0,
+                  'c2_block_table_snapshot_hits':c2_metadata_evidence.hits if c2_metadata_evidence is not None else 0,
                   'metadata_snapshot_reads':metadata_evidence.reads if metadata_evidence is not None else 0,
                   'metadata_snapshot_hits':metadata_evidence.hits if metadata_evidence is not None else 0,
                   'scope':'model row pruning; layer mechanism proof required separately'})
