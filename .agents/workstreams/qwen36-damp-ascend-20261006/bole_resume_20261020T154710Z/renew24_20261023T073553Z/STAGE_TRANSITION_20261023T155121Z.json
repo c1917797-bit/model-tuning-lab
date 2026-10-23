@@ -1,0 +1,120 @@
+{
+  "schema": "ascend.paper-stage-transition/v1",
+  "observed_utc": "2026-10-23T15:51:21Z",
+  "authority_window": {
+    "start_utc": "2026-10-23T07:35:53Z",
+    "cutoff_utc": "2026-10-24T07:35:53Z",
+    "cleanup_included": true,
+    "original_goal_clock_not_rewritten": true
+  },
+  "physical_NPUs": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_NPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "previous": {
+    "name": "native32k-readiness-v5",
+    "operation": "exec-0000000000000fcd",
+    "exit_code": 3,
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-native32k-readiness-v5/RESULT.json",
+      "bytes": 3014347,
+      "sha256": "8091abc3b8ba4d90150ca32ae6adf92f13d17fdd33abe27a6d579bd6de587e6e"
+    },
+    "source": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bound-native32k-readiness-v5/SOURCE_BOUND.json",
+      "bytes": 2133887,
+      "sha256": "d7f64f1051f1f6b134217ff8226ca84e24f5a8b577cb6bb60d35e2b056764f8e"
+    },
+    "same_image_current_tests": {
+      "passed": 5,
+      "skipped": 0,
+      "elapsed_seconds": 55.83795572002418
+    },
+    "first_fault": "ValueError('actual retained release')",
+    "first_fault_phase": "cpu-preflight/cleanup-receipt",
+    "cause_evidence": {
+      "observed_utc": "2026-10-23T15:45:25.675836Z",
+      "physical_NPU": 5,
+      "unowned_compute_pids": [
+        173650,
+        150061
+      ],
+      "smi_receipt": {
+        "path": "/opt/host/vnf/austinov/run-native32k-readiness-v5/cpu-preflight/release-1792770325675924800.json",
+        "sha256": "08a09e4b7f61edda6ea9ba8492815a2418edc865b6cc3765b7a867da12f97bab"
+      }
+    },
+    "owned_release": {
+      "cid": "68b144681542370793e877bf01a950873bb289e16c29e45bd2b39dbd253a7237",
+      "stopped": true,
+      "retained": true,
+      "pid": 0,
+      "oom_killed": false,
+      "Devices": [],
+      "receipt_errors_retained": true
+    },
+    "model_execution": false,
+    "paper_numeric_failure": false,
+    "performance_result": false
+  },
+  "current": {
+    "name": "deltalog-v5-first-real-decode",
+    "operation": "exec-0000000000000fe0",
+    "dispatch_utc": "2026-10-23T15:51:21Z",
+    "source": {
+      "bytes": 358070,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/deltalog-current-three-tree-20261023-v5-model/SOURCE_MANIFEST.json",
+      "sha256": "1871205b61dac510aca01b03f711a3a9a938af3d14c1796cb783568c1c11c897"
+    },
+    "source_audit_operation": "exec-0000000000000fcb",
+    "source_audit_exit": 0,
+    "source_audit_not_NPU_evidence": true,
+    "prebind_sameimage_passed": 253,
+    "payload_software_passed": 26,
+    "original_bound_suite_255_pending": true,
+    "output": "/opt/host/vnf/austinov/run-deltalog-current-three-tree-20261023-v5-model",
+    "firstdecode_only": true,
+    "continuous_8_and_160_not_qualified": true,
+    "performance_ready": false,
+    "task_accuracy": false,
+    "whole_seconds": 3600,
+    "cleanup_seconds": 270,
+    "duplicate_launch_forbidden": true
+  },
+  "next_and_backup": [
+    {
+      "node": "DL continuous 8-step lossless collector + independent reconstruction",
+      "owner": "reduction_boundary_audit",
+      "status": "implementation-in-progress",
+      "NPU_admission": false
+    },
+    {
+      "node": "MXR layer21 continuous-H causal consumer over retained146587535B",
+      "owner": "reduction_admission_prepare",
+      "status": "math draft stable; original owned CPU adapter being prepared",
+      "NPU_admission": false
+    },
+    {
+      "node": "BOLE 32K short8 to fixed1024 paired-screen adaptation",
+      "owner": "next_probe_source_design",
+      "status": "producer-consumer/policy adaptation in progress",
+      "NPU_admission": false
+    }
+  ],
+  "claims": {
+    "new_usable_technique": false,
+    "whole_model_paired_gain_measured": false,
+    "full_task_accuracy_passed": false,
+    "window_utilization": "unmeasured",
+    "no_dummy_load": true
+  },
+  "recovery_rule": "Keep all terminal failures immutable. Before any successor, inspect original live handle, source identity, exact release and fresh physical resources. External occupation is not a numerical failure. No unchanged deterministic retry."
+}
