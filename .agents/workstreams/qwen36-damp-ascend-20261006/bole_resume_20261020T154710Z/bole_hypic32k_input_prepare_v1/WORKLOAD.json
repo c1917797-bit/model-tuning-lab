@@ -1,0 +1,55 @@
+{
+  "schema": "bole.hypic-matched-input-workload/v1",
+  "status": "definition_frozen_adapter_pending",
+  "source_user_instruction": "Bole的输入改成和HYPIC的输入是一样的",
+  "model": "/cache/efim/Qwen3.6-27B",
+  "physical_NPUs": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "tensor_parallel": 4,
+  "performance": {
+    "input_tokens": 32768,
+    "shared_prefix_tokens": 16384,
+    "segment_ends": [
+      16384,
+      32768
+    ],
+    "output_tokens": 1024,
+    "ignore_eos": true,
+    "requests": 40,
+    "concurrency": 16,
+    "warmup_requests": 2,
+    "warmup_mode": "concurrent_materialization_gate",
+    "paired_runs": 3
+  },
+  "common_control": {
+    "hypic_enabled": false,
+    "prefix_cache_enabled": false,
+    "same_input_payloads_and_order": true,
+    "same_generic_optimizations": true,
+    "profiling_enabled": false
+  },
+  "historical_input_reference": {
+    "path": "/cache/cch/hypic-qwen36-formal-npu4-7-tp4-budget40960-20260906/no-cache/performance.run1.json",
+    "bytes": 15830,
+    "sha256": "f9c9f0288dce13b2fc4df72cf64fab60972be4847d138fc59599e12dfade1650"
+  },
+  "input_generator_source": "/cache/cch/hypic_vllm_ascend-v0.8.5/tools/benchmark_shared_prefix.py",
+  "correctness_smoke": {
+    "same_32768_token_input_domain": true,
+    "smaller_request_count_and_output_permitted": true,
+    "old_2048_cases": "regression_only_not_formal_performance"
+  },
+  "window": {
+    "start_epoch": 1792740953,
+    "cutoff_epoch": 1792827353,
+    "cleanup_included": true
+  },
+  "qualification": false,
+  "performance_result": false,
+  "execution_ready": false,
+  "immutable_old_experiments": true
+}

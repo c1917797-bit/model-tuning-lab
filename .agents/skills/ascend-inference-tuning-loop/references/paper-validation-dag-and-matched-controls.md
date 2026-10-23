@@ -264,6 +264,45 @@ failed. Preserve raw per-case values before asserting so the next adaptation
 addresses a measured cause. Both cases are scoped preparation/integration
 evidence, not performance or final task results.
 
+## Keep current execution separate from historical reconstruction
+
+A source manifest's declared inventory is not proof of its transitive runtime
+readset. The BOLE V2/V3 failures showed two distinct gaps: authority/review
+were omitted, then the full reconstruction opened 13 historical short-source
+files and four preparation helpers that the validator's returned readset did
+not report. A green host source audit did not prove those files were visible
+inside the guest.
+
+For a new execution source:
+
+- Trace the actual public entry's source/preflight reads without device work,
+  compare the complete observed ordinary-file set with the proposed exact RO
+  mounts, and reject all missing/conflicting entries together before dispatch.
+  Static Ref inventory and mocked helper checks do not replace this check.
+- Keep history for reproducibility, but do not make recursive reconstruction
+  of every historical preparation tree a default per-worker runtime obligation.
+  Prefer a self-contained current plugin/input/reference capsule, with a
+  separately recorded full source audit. Refactoring must preserve the actual
+  independent numerical, state, resource and authorization gates.
+- Deduplicate identical complete Refs before hashing within one validation
+  phase; reject same-path/different-content conflicts. Do not cache a PASS
+  across experiments or remove the final full source-after verification.
+- A user input-length change must update one typed workload definition that
+  drives prompt generation, model length, cache/page geometry, runtime
+  admission, receipts and result validation. Do not silently change concurrency
+  merely because the reference experiment used another value. An input packet
+  alone does not make the model adapter READY.
+- Prepare the performance successor alongside the plugin. Once the relevant
+  real-NPU gate passes, move to a small paired fixed-1024 E2E screen; do not
+  require final task accuracy or unrelated historical test suites first.
+  Expand correctness to the measured scope and repeat promising pairs before
+  final acceptance. Never time a known numerically failing candidate as a
+  qualified performance result.
+
+Measure these changes with phase timestamps, unique checked-Ref/open counts,
+actual same-image entry results and time to the next NPU/E2E node. Source-file
+count, new wrappers and more test cases are not progress by themselves.
+
 ## Verification
 
 Run `./scripts/validate-mst.sh` and focused `git diff --check`. Inspect the

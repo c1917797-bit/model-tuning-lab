@@ -1,0 +1,163 @@
+{
+  "schema": "ascend.runtime-closure-repair-stage/v1",
+  "timestamp_utc": "2026-10-23T12:10:00Z",
+  "scope": "Repair repeated pre-algorithm integration failures; not a numerical or performance qualification.",
+  "window": {
+    "start": "2026-10-23T07:35:53Z",
+    "end": "2026-10-24T07:35:53Z",
+    "unchanged": true
+  },
+  "actual_failure": {
+    "operation": "exec-0000000000000db2",
+    "exit_code": 3,
+    "reason": "Guest SOFTWARE could not read historical pinned source; not an algorithm result.",
+    "result": {
+      "path": "/opt/host/vnf/austinov/run-bole2k-short8-runtime-v3/RESULT.json",
+      "bytes": 2173912,
+      "sha256": "e7887bd3f60c62bfa2ebdd1a40707836ae92ed09eaa34202e341635d97dbcfba"
+    },
+    "missing_actual_files": 17,
+    "missing_donor_files": 13,
+    "missing_preparation_helpers": 4,
+    "original_preserved": true
+  },
+  "repairs": [
+    "Add independently required real transitive files to the actual readset producer; do not only strengthen a validator.",
+    "Fail before container creation on missing/conflicting/writable or wrong-path dependencies, and inspect actual mounts after creation.",
+    "Compare typed Ref JSON operands semantically while preserving all other exact command tokens, environment, source identities and output paths.",
+    "Deduplicate exact Ref hashing only within the same validation invocation; keep full source-after checks and reject conflicts.",
+    "Use one explicit 32768/16384/1024 workload definition; retain existing C1 and do not infer HYPIC C16 support."
+  ],
+  "software_evidence": [
+    {
+      "operation": "exec-0000000000000e0e",
+      "exit_code": 0,
+      "duration_ms": 15150,
+      "files": 432,
+      "python_compiled": 336,
+      "whole_inverse": true
+    },
+    {
+      "operation": "exec-0000000000000e12",
+      "exit_code": 0,
+      "duration_ms": 38720,
+      "actual_original_readset_and_validator": true,
+      "result": {
+        "schema": "bole.v4.actual-readset-integration-controls/v1",
+        "original": 6454,
+        "proof": 5933,
+        "complete": 5950,
+        "actual17_added": true,
+        "required_unique_checks": 5950,
+        "maximum_checks_per_path": 1,
+        "mount_coverage": {
+          "required": 5950,
+          "actual_mounts": 5515
+        },
+        "negative_controls": {
+          "conflicting_ref": true,
+          "missing_proof_source": true,
+          "missing_exact_mount": true,
+          "writable_dependency": true
+        },
+        "complete_source_compiled": 432,
+        "whole_inverse": true,
+        "source_bound": false,
+        "container_started": false,
+        "NPU": false,
+        "numerical_qualification": false
+      }
+    },
+    {
+      "operation": "exec-0000000000000dfd",
+      "exit_code": 0,
+      "actual_old_failure_reproduced": true,
+      "equivalent_ref_order_passes": true,
+      "negative_controls": [
+        "missing_optin",
+        "wrong_output",
+        "wrong_source_hash",
+        "duplicate_ref_key"
+      ]
+    },
+    {
+      "operation": "exec-0000000000000df5",
+      "exit_code": 0,
+      "maintainer_skill_count": 20,
+      "validation": "PASS"
+    }
+  ],
+  "reviewed_source_refs": [
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/skills/ascend-inference-tuning-loop/references/paper-validation-dag-and-matched-controls.md",
+      "bytes": 18584,
+      "sha256": "7d8e44d2e03aebb74611f9dd144233a1fdcfafd2616e548051664c2491d60536"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole2k_runtime_complete_prepare_v4/complete_runtime_blueprint.py",
+      "bytes": 16387,
+      "sha256": "df7c7b93336e575432d815daec131981878a2a7ce240bbf4501760f4c754291b"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole2k_runtime_complete_prepare_v4/test_actual_readset.py",
+      "bytes": 3780,
+      "sha256": "7902d7fe3ba60ef7ef58a41854e2f3a334ce80d30bce5b1af9caeb69a3736f62"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_mount_coverage_prepare_v2/coverage_v2.py",
+      "bytes": 16488,
+      "sha256": "e52e0817385e1c7a9c84c27cfe7fa5f7e067dd157b4ab1cbeacf55c27bc5a0d4"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_mount_coverage_prepare_v2/audit_validator_reads.py",
+      "bytes": 4893,
+      "sha256": "474cafcfca4dd51242518f310663520a3e865629760f6789bbd78df0a655ec76"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/runtime_command_ref_normalization_prepare_v1/command_ref_delta.py",
+      "bytes": 4151,
+      "sha256": "a059be4aa80df56d088f95b45b20e1f5297a397489993429f4c4f45604bea2e4"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_hypic32k_input_prepare_v1/WORKLOAD_V2.json",
+      "bytes": 2042,
+      "sha256": "2d03e1d9b4357b98f403c1f61424bb1253c4c171d5e260bbbcd6e19066df0efd"
+    }
+  ],
+  "relevant_NPU_diagnostic": {
+    "operation": "exec-0000000000000dd8",
+    "scope": "Good Enough layer37 actual stability, not qualification",
+    "native_repeat_bitwise": true,
+    "candidate_repeat_bitwise": true,
+    "S15": {
+      "output_frob": 0.0009427095547482845,
+      "state_frob": 0.0020702059218520434
+    },
+    "S15refine": {
+      "output_frob": 0.0009134302554991762,
+      "state_frob": 0.0021617137869488776
+    },
+    "unchanged_state_limit": 0.002,
+    "state_gate": "FAIL",
+    "container_stopped_retained": true,
+    "claim": "Current candidate/native-pair state gate failed; not a global paper invalidity claim."
+  },
+  "readiness": {
+    "new_bole_source_bound": false,
+    "new_32k_container_started": false,
+    "NPU_qualified": false,
+    "whole_model_performance": false,
+    "task_accuracy": false
+  },
+  "next": [
+    "Compose native32k own source and new explicit input-aware resource profile, without borrowing candidate qualification or silently changing old caps.",
+    "Run real source-bound/public-entry same-image closure once after source review.",
+    "Only qualified 32k candidates enter same-stack native/candidate fixed1024 paired screen; then promising three pairs and task accuracy."
+  ],
+  "source_retention_note": "New source programs are versioned here; historical pinned source/control and raw evidence paths remain the exact readset and archive operands. This record does not claim a fresh-checkout fully self-contained artifact.",
+  "unrelated_dirty_files_excluded": [
+    ".agents/skills/ascend-benchmark-evidence/SKILL.md",
+    ".agents/skills/chicaihong01-host-maintenance/SKILL.md",
+    ".agents/workstreams/qwen36-damp-ascend-20261006/HANDOFF.md"
+  ]
+}
