@@ -1,5 +1,7 @@
 # Root-cause classification must select the next experiment
 
+For stateful construction, prefill, publication/ACK or allocation-profile failures, read [native runtime contract preflight](native-runtime-contract-preflight.md) before repeating a model startup. Preserve the existing numerical/resource gates and evidence boundaries.
+
 ## Structured results are not necessarily the last stdout line
 
 A successful child can print its exact result Ref and then emit a driver exit

@@ -1,0 +1,134 @@
+{
+  "schema": "bole.v16-terminal-causal-record/v1",
+  "observed_utc": "2026-10-24T05:51:14Z",
+  "window": {
+    "start_epoch": 1792740953,
+    "cutoff_epoch": 1792827353,
+    "extended": false
+  },
+  "experiment": {
+    "operation": "exec-0000000000001431",
+    "exit_code": 3,
+    "duration_ms": 1279741,
+    "output": "/opt/host/vnf/austinov/run-bole32k-lossless-profile-disk-short8-v16-20261024",
+    "result_sha256": "3028f15dddafc54551e998bfae2d53be66f286a235f28a84b6e48025e2f76f51",
+    "source": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/SOURCE_BOUND.json",
+      "bytes": 1727366,
+      "sha256": "3d052df4d27e55b87d2b53eced2dcdc5280f3cd9deacaa514f55062cad7b837d"
+    },
+    "source_before_equals_after": true,
+    "secondary": []
+  },
+  "first_fault": {
+    "classification": "ENVIRONMENT_OR_SCHEDULING",
+    "subtype": "diagnostic-conservative-RAM-admission",
+    "proven": "worker_resource_v2.check:138 rejects cgroup usage plus active reservations; G1O3/pre_reload rank1 at05:35:53Z",
+    "actual_limit_bytes": 51539607552,
+    "per_rank_reservation_bytes": 8455716864,
+    "all_four_reservations_bytes": 33822867456,
+    "remaining_usage_allowance_bytes": 17716740096,
+    "exact_first_refused_usage": "not retained",
+    "memory_stat_at_first_fault": "not retained",
+    "filecache_causation": "hypothesis, not proved",
+    "later_shared_failure_caption": "secondary sticky propagation; persistent failed string was overwritten",
+    "old_error_caption_32GiB": "stale string; actual source and receipts limit48GiB"
+  },
+  "coverage": {
+    "same_image_original25": true,
+    "actual_four_TP_model_weights": true,
+    "numeric_reports": {
+      "ranks": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "generation": 1,
+      "ordinals": [
+        0,
+        1,
+        2
+      ],
+      "count": 12,
+      "all_frame_checks_passed": true,
+      "all128_state_writes_verified": true,
+      "domain_complete": false
+    },
+    "http": {
+      "output_ids": [
+        1622,
+        13,
+        14569,
+        8427,
+        411,
+        2193,
+        13
+      ],
+      "done": false,
+      "request": "first warmup32K/max8"
+    },
+    "numeric_qualified": false,
+    "whole_model_pass": false,
+    "formal_performance": false,
+    "task_accuracy": false
+  },
+  "cleanup": {
+    "cid": "a43b62b85ad910bc3bc2fef3999d831da78cac3e1dca74bf6f33cffa92af0e4e",
+    "stopped": true,
+    "retained": true,
+    "deleted": false,
+    "errors": [],
+    "own_on_protected": false,
+    "actual_inspect": {
+      "Running": false,
+      "Pid": 0,
+      "OOMKilled": false,
+      "FinishedAt": "2026-10-24T05:37:08.5890304Z"
+    },
+    "fresh_physical_4_7": {
+      "no_compute_processes": true,
+      "AICore_percent": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "HBM_MiB": [
+        2871,
+        2874,
+        2869,
+        2868
+      ]
+    },
+    "continuous_utilization": "unmeasured"
+  },
+  "evidence_operations": [
+    "exec-000000000000143f",
+    "exec-0000000000001440",
+    "exec-0000000000001441",
+    "exec-0000000000001442"
+  ],
+  "next": {
+    "decision": "DIAGNOSE",
+    "owner": "MAIN; g3_handoff_review prepares, next_probe_source_design independently reviews",
+    "candidate": "new own immutable FA-cache advisory policy plus bounded memory.stat/first-refusal observation; not yet actual verified",
+    "unchanged": [
+      "48GiB model cap",
+      "all original reservations",
+      "full cgroup usage accounting",
+      "sticky first failure",
+      "independent numerical gates",
+      "original window"
+    ],
+    "not_allowed": [
+      "unchanged V16 rerun",
+      "global cache drop",
+      "foreign/PT/source file advice",
+      "delete raw evidence",
+      "raise RAM or loosen math"
+    ],
+    "related160": "four successor source bundles passed1439 but actual predecessor/time-fit missing; do not launch",
+    "final_acceptance": "missing matched1024 three-pair throughput/TTFT/TPOT and GSM8K/HumanEval/MMLU; not achievable by source-only evidence"
+  }
+}
