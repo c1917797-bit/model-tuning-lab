@@ -1,0 +1,94 @@
+{
+  "schema": "bole.causal-stage/v1",
+  "classification": "ADAPTATION_IMPLEMENTATION",
+  "causal_confidence": "proved-runtime-clock-reentry; memory-benefit-unmeasured",
+  "decision": "REPAIR_NO_DEVICE",
+  "operation": "exec-000000000000146d",
+  "exit": 3,
+  "output": "/opt/host/vnf/austinov/run-bole32k-own-fa-cache-diagnostic-short8-v1-20261024",
+  "result_ref": {
+    "bytes": 2249336,
+    "sha256": "6ccd58c2159c5bb6994537a6802dd2fb41c5fba70c3faa909e530e3818b03dda"
+  },
+  "first_fault": {
+    "stderr_bytes": 3392,
+    "stderr_sha256": "78be0ec12d1d2b5a61e84593064e02feaf77294ef86a67c398499a6400400b68",
+    "chain": [
+      "server090.py:87 runpy",
+      "vLLM load_general_plugins",
+      "native_receipt090.py:9 register",
+      "contract090.py:37 source",
+      "qualification_source_validate.py:80 execution_window"
+    ],
+    "exception": "ValueError: whole phase+cleanup inside actual authority; no old/current deadline reset"
+  },
+  "time": {
+    "original_cutoff": "2026-10-24T07:35:53Z",
+    "phase_seconds": 3600,
+    "cleanup_seconds": 180,
+    "latest_new_full_reserve_start": "2026-10-24T06:32:53Z",
+    "previous_063553_boundary": "wrong arithmetic; retained and corrected, not new authority",
+    "downstream_requirement": "verify existing immutable parent phase and remaining time; never renew full phase or disable clock/owner checks",
+    "fresh_full_phase_fits_now": false
+  },
+  "evidence_scope": {
+    "same_image_preflight": "passed",
+    "four_device_arithmetic_canary": "passed, not BOLE/model qualification",
+    "model_weights_loaded": false,
+    "bole_numeric_qualified": false,
+    "cache_reclamation_benefit": "unmeasured",
+    "paired_performance": "not run",
+    "task_accuracy": "not run",
+    "source_before_equals_after": true,
+    "secondary": []
+  },
+  "cleanup": {
+    "read_operation": "exec-0000000000001472",
+    "ref": {
+      "bytes": 1306,
+      "sha256": "6e908169c365acb9988da8002988954689270fe64314a467a4a2661f5f9022a0"
+    },
+    "container": "bb3f1f0aa0722e9d0f4187d96714621a5094334a6ebcf7ab53735c07d5ca360b",
+    "stopped": true,
+    "retained": true,
+    "deleted": false,
+    "errors": [],
+    "pid": 0,
+    "oom_killed": false,
+    "finished": "2026-10-24T06:33:26.24918012Z",
+    "physical_4_7_snapshot": {
+      "running_processes": 0,
+      "aicore_percent": 0,
+      "hbm_MiB": [
+        2870,
+        2874,
+        2869,
+        2868
+      ]
+    },
+    "continuous_utilization": "unmeasured"
+  },
+  "source_refs": {
+    "preparation": {
+      "bytes": 18487,
+      "sha256": "8de6db427366657dd7e2a7026d0339926ca8a2f830f435128c266591fc72dae6"
+    },
+    "bound": {
+      "bytes": 1747381,
+      "sha256": "0b097069abec882f5f354fe259deaf188d52fe64bf0598f499042cf233adf6d8"
+    },
+    "commands": {
+      "bytes": 4326,
+      "sha256": "0fe05c3fd8d0accb0601f07c26bc3df636eb48b3c35ce817bbb3b1d5107bf810"
+    }
+  },
+  "unchanged": [
+    "original cutoff/3600+180",
+    "48GiB RAM and full active reservations",
+    "numeric math and thresholds",
+    "complete registered coverage",
+    "physical4-7 only"
+  ],
+  "next": "prepare minimal source-specific verified parent/child phase handoff and actual-entry positive/negative regressions; no new model admission under expired full-reserve boundary",
+  "paper_verdict": "inconclusive; implementation failure is not paper rejection"
+}

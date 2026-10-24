@@ -1,0 +1,316 @@
+{
+  "schema": "bole.own-fa-cache-diagnostic-source-preparation/v1",
+  "stage": "SOURCE_PREPARATION_ONLY",
+  "root": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024",
+  "base_commit": "919672f48046e945cb621106ef45b36e7bbc10c1",
+  "default_enabled": false,
+  "execution_ready": false,
+  "source_bound": false,
+  "NPU": false,
+  "same_image": false,
+  "cache_effect_proven": false,
+  "causal_filecache_proven": false,
+  "resources": {
+    "model_memory_bytes": 51539607552,
+    "per_rank_reservation": 8455716864,
+    "all_rank_reservations": 33822867456,
+    "physical_npus": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "phase_seconds": 3600,
+    "cleanup_seconds": 180,
+    "deadline_utc": "2026-10-24T07:35:53Z",
+    "latest_full_phase_start_utc": "2026-10-24T06:35:53Z"
+  },
+  "files": {
+    "adapt_cache_diagnostic.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/adapt_cache_diagnostic.py",
+      "bytes": 2096,
+      "sha256": "28b7ba267e48c25338743a8651ff545f6f4dfa057cb56d9b1aeae6b06479252c"
+    },
+    "fa_block_store.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/fa_block_store.py",
+      "bytes": 10738,
+      "sha256": "4ae276e7b799b8c40e5344a7867b195765e9d6c564f12decc729a7cddc066ec9"
+    },
+    "fa_cache_advisory.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/fa_cache_advisory.py",
+      "bytes": 9046,
+      "sha256": "684834f22b625539bc87f0abbbbdaca112fa3bad11651a22289ea21624dcda5c"
+    },
+    "ram_terminal_join.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/ram_terminal_join.py",
+      "bytes": 6492,
+      "sha256": "a041e773470662c9e4da8de59222688f5a6b2b4b2da4b23d100a1efbfeea270c"
+    },
+    "runtime_lossless_imports.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/runtime_lossless_imports.py",
+      "bytes": 16556,
+      "sha256": "5be3ebff0287227cd4a07c00d80babf25e7b2be8bbe7ccb855f77e962f3f4ef3"
+    },
+    "test_fa_cache_diagnostic.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/test_fa_cache_diagnostic.py",
+      "bytes": 13751,
+      "sha256": "f03285be97211350e575a6ca0cbcb1b8993cde27ca7b2271fbb7f7cb6be177c6"
+    },
+    "worker_resource_v2.py": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/worker_resource_v2.py",
+      "bytes": 13070,
+      "sha256": "2492863bdc0b1df4af7ab93f255323905a04698d81a60b78aca9ca750a25671e"
+    }
+  },
+  "parents": {
+    "SOURCE_TEMPLATE.json": {
+      "bytes": 1727023,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/SOURCE_TEMPLATE.json",
+      "sha256": "f0230415d68432115ff020ba7a18bd107f110618902e1a51edff9545e843c0ef"
+    },
+    "fa_block_store.py": {
+      "bytes": 10603,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/fa_block_store.py",
+      "sha256": "a4fc9d7619438b80cedcbe90f1f02d7487b1b197393468fc69dd807949d6b6a3"
+    },
+    "preflight114.py": {
+      "bytes": 5764,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/preflight114.py",
+      "sha256": "86ca4e86216639b75548c165e4f7048b548bf03da5f79bc50ce6c11c0d72c4ca"
+    },
+    "ram_terminal_join.py": {
+      "bytes": 6391,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/ram_terminal_join.py",
+      "sha256": "ce8a084ed6143e5e4af0242f5766bee78963c525afe8de096250c885c11bfab7"
+    },
+    "runtime_lossless_imports.py": {
+      "bytes": 15505,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/runtime_lossless_imports.py",
+      "sha256": "600873d012062d4018befcf4bbec407388f7fa9ae9b65b92b222c0b854aa728d"
+    },
+    "server090.py": {
+      "bytes": 4224,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/server090.py",
+      "sha256": "1076e807ffe4b5608992a6856f858cdb12137787e60d32b9f9e39163577683f8"
+    },
+    "worker_resource_v2.py": {
+      "bytes": 12638,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/worker_resource_v2.py",
+      "sha256": "625a469655adf00c0d56db418aabf794ea83bb676d78160c750c0054d142f5c8"
+    }
+  },
+  "software": {
+    "target": "chicaihong01/ma host Python CPU145, AS512MiB; no container",
+    "actual_entry_controls": {
+      "operation": "exec-000000000000145a",
+      "exit_code": 0,
+      "tests": 18,
+      "duration_ms": 1801,
+      "math_or_NPU": false,
+      "kernel_proc_and_fadvise_doubled": true
+    },
+    "final_full_render": {
+      "operation": "exec-000000000000145d",
+      "exit_code": 0,
+      "files": 470,
+      "whole_inverse": true,
+      "duration_ms": 78425
+    },
+    "actual_v16_content_comparison": {
+      "operation": "exec-0000000000001460",
+      "exit_code": 0,
+      "duration_ms": 97611,
+      "files": 470,
+      "equal_actual_v16": 461,
+      "removed": [],
+      "diff": {
+        "contract090.py": {
+          "before": {
+            "bytes": 4331,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/contract090.py",
+            "sha256": "10a06b77a5a342dbc836abba0675ee6075c855dc35a4849d02ffae0f436d955a"
+          },
+          "after": {
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/prepared-source-short8-cache-diagnostic-v1/contract090.py",
+            "bytes": 4333,
+            "sha256": "59a935c3cd27723c7d7e83e685d0baa5ec9f150e47ca7015fc4f69d8664f1775"
+          }
+        },
+        "preflight114.py": {
+          "before": {
+            "bytes": 5764,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/preflight114.py",
+            "sha256": "86ca4e86216639b75548c165e4f7048b548bf03da5f79bc50ce6c11c0d72c4ca"
+          },
+          "after": {
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/prepared-source-short8-cache-diagnostic-v1/preflight114.py",
+            "bytes": 5896,
+            "sha256": "050e22f7ab381e15fa31ba747e0be82d8281c1ead1c584ffbf3e6ee002ded29f"
+          }
+        },
+        "server090.py": {
+          "before": {
+            "bytes": 4224,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/server090.py",
+            "sha256": "1076e807ffe4b5608992a6856f858cdb12137787e60d32b9f9e39163577683f8"
+          },
+          "after": {
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/prepared-source-short8-cache-diagnostic-v1/server090.py",
+            "bytes": 4529,
+            "sha256": "726179dd8c91716a8c233bc96658e8a9cdcdcafbcc457c410157ebdf93b38d41"
+          }
+        },
+        "worker_resource_v2.py": {
+          "before": {
+            "bytes": 12638,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/worker_resource_v2.py",
+            "sha256": "625a469655adf00c0d56db418aabf794ea83bb676d78160c750c0054d142f5c8"
+          },
+          "after": {
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/prepared-source-short8-cache-diagnostic-v1/worker_resource_v2.py",
+            "bytes": 13070,
+            "sha256": "2492863bdc0b1df4af7ab93f255323905a04698d81a60b78aca9ca750a25671e"
+          }
+        },
+        "ram_terminal_join.py": {
+          "before": {
+            "bytes": 6391,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/ram_terminal_join.py",
+            "sha256": "ce8a084ed6143e5e4af0242f5766bee78963c525afe8de096250c885c11bfab7"
+          },
+          "after": {
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/prepared-source-short8-cache-diagnostic-v1/ram_terminal_join.py",
+            "bytes": 6492,
+            "sha256": "a041e773470662c9e4da8de59222688f5a6b2b4b2da4b23d100a1efbfeea270c"
+          }
+        },
+        "fa_block_store.py": {
+          "before": {
+            "bytes": 10603,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/fa_block_store.py",
+            "sha256": "a4fc9d7619438b80cedcbe90f1f02d7487b1b197393468fc69dd807949d6b6a3"
+          },
+          "after": {
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/prepared-source-short8-cache-diagnostic-v1/fa_block_store.py",
+            "bytes": 10738,
+            "sha256": "4ae276e7b799b8c40e5344a7867b195765e9d6c564f12decc729a7cddc066ec9"
+          }
+        },
+        "runtime_lossless_imports.py": {
+          "before": {
+            "bytes": 15505,
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/runtime_lossless_imports.py",
+            "sha256": "600873d012062d4018befcf4bbec407388f7fa9ae9b65b92b222c0b854aa728d"
+          },
+          "after": {
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/prepared-source-short8-cache-diagnostic-v1/runtime_lossless_imports.py",
+            "bytes": 16556,
+            "sha256": "5be3ebff0287227cd4a07c00d80babf25e7b2be8bbe7ccb855f77e962f3f4ef3"
+          }
+        },
+        "fa_cache_advisory.py": {
+          "before": null,
+          "after": {
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/prepared-source-short8-cache-diagnostic-v1/fa_cache_advisory.py",
+            "bytes": 9046,
+            "sha256": "684834f22b625539bc87f0abbbbdaca112fa3bad11651a22289ea21624dcda5c"
+          }
+        },
+        "adapt_cache_diagnostic.py": {
+          "before": null,
+          "after": {
+            "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/prepared-source-short8-cache-diagnostic-v1/adapt_cache_diagnostic.py",
+            "bytes": 2096,
+            "sha256": "28b7ba267e48c25338743a8651ff545f6f4dfa057cb56d9b1aeae6b06479252c"
+          }
+        }
+      },
+      "external6": {
+        "cache_operand_fa_block_store_py": {
+          "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/fa_block_store.py",
+          "bytes": 10738,
+          "sha256": "4ae276e7b799b8c40e5344a7867b195765e9d6c564f12decc729a7cddc066ec9"
+        },
+        "cache_parent_fa_block_store_py": {
+          "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/fa_block_store.py",
+          "bytes": 10603,
+          "sha256": "a4fc9d7619438b80cedcbe90f1f02d7487b1b197393468fc69dd807949d6b6a3"
+        },
+        "cache_operand_worker_resource_v2_py": {
+          "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/worker_resource_v2.py",
+          "bytes": 13070,
+          "sha256": "2492863bdc0b1df4af7ab93f255323905a04698d81a60b78aca9ca750a25671e"
+        },
+        "cache_parent_worker_resource_v2_py": {
+          "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/worker_resource_v2.py",
+          "bytes": 12638,
+          "sha256": "625a469655adf00c0d56db418aabf794ea83bb676d78160c750c0054d142f5c8"
+        },
+        "cache_operand_ram_terminal_join_py": {
+          "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/ram_terminal_join.py",
+          "bytes": 6492,
+          "sha256": "a041e773470662c9e4da8de59222688f5a6b2b4b2da4b23d100a1efbfeea270c"
+        },
+        "cache_parent_ram_terminal_join_py": {
+          "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_profile_disk_ledger_v16_prepare_20261024/prepared-source-short8-v16/ram_terminal_join.py",
+          "bytes": 6391,
+          "sha256": "ce8a084ed6143e5e4af0242f5766bee78963c525afe8de096250c885c11bfab7"
+        }
+      },
+      "whole_inverse": true,
+      "NPU": false
+    }
+  },
+  "readset_consumer_chain": [
+    "qualification_source_validate.validate: read each short2k_helper_ref before renderer; extend complete proof.readset with dependencies",
+    "host_service.complete_readset: merge m.dependencies and proof.readset; verify each exact Ref",
+    "owned_create.create: every external readset Ref becomes exact readonly file mount; guest_readset_coverage precreate and actual inspect proof"
+  ],
+  "scope": [
+    "Only immutable owned FA B-SHA.bin; strict actual source/CID/cgroup/rank/root inode binding, same dirfd leaf open/hash/fsync/DONTNEED",
+    "Keep PT/raw evidence, file integrity, original guard formulas/reservations and sticky failure",
+    "Bounded selected memory.stat scalars in existing RAM records and first_refusal; diagnostic failure does not replace original guard exception",
+    "No CPU cost probe, kernel/mathematics/threshold/selected-state/HTTP change"
+  ],
+  "pending": [
+    "MAIN complete source review and source-specific current authority",
+    "once-only materialize, source bind, independent source audit and exact RO mount coverage",
+    "actual same-image CPU contract/parser and syscall availability; host controls do not prove image seccomp policy",
+    "fresh physical4-7 admission and actual short8 NPU qualification; cache effect/cause remains unproven until actual memory.stat",
+    "160 numerical qualification then independent formal performance and task accuracy remain unpassed"
+  ],
+  "commands": {
+    "host_source_check": [
+      "/usr/bin/taskset",
+      "-c",
+      "145",
+      "/usr/bin/prlimit",
+      "--as=536870912",
+      "--cpu=120",
+      "--",
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/runtime_lossless_imports.py",
+      "--check"
+    ],
+    "materialize_MAIN_only": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/runtime_lossless_imports.py",
+      "--prepare",
+      "--authority-ref",
+      "<ACTUAL_NEW_MAIN_SOURCE_SPECIFIC_REF_JSON>"
+    ],
+    "bind_MAIN_only": [
+      "/usr/bin/python3",
+      "-I",
+      "-B",
+      "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/prepared-source-short8-cache-diagnostic-v1/qualification_source_producer.py",
+      "--bind",
+      "--template-ref",
+      "<ACTUAL_MATERIALIZE_PREPARED_TEMPLATE_REF_JSON>"
+    ]
+  }
+}

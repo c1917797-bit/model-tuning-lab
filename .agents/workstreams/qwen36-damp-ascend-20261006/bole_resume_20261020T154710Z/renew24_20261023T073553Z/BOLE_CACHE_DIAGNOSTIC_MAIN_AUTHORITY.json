@@ -1,0 +1,31 @@
+{
+  "schema": "bole.MAIN-reviewed-fastpath-short8-qualification-authority/v1",
+  "approved": true,
+  "start_epoch": 1792740953,
+  "cutoff_epoch": 1792827353,
+  "scope": {
+    "arm": "bole",
+    "cleanup_seconds": 180,
+    "common_environment": {
+      "HCCL_DETERMINISTIC": "true"
+    },
+    "concurrency": 1,
+    "formal_performance": false,
+    "generations": 2,
+    "input_tokens": 32768,
+    "model_memory_GiB": 48,
+    "output_tokens": 8,
+    "phase_seconds": 3600,
+    "physical_NPUs": [
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "MAIN_review_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261023T073553Z/BOLE_CACHE_DIAGNOSTIC_MAIN_REVIEW.json",
+    "bytes": 220387,
+    "sha256": "43247d1572bb0d4735abcfb163cd6d80b62d99a52237d65236ae0afd5f8f8bd3"
+  }
+}
