@@ -1,0 +1,34 @@
+{
+  "schema": "bole.phase-runtime-pending-review/v1",
+  "source_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/phase_runtime_renderer_v2/runtime_lossless_imports.py",
+    "bytes": 6954,
+    "sha256": "e294f405b8558ffeffd19949a89826180c1c218387bda55a61f162c776d2fd8c"
+  },
+  "main_read_complete": true,
+  "author_compile_only_operation": "exec-0000000000001491",
+  "renderer_executed": false,
+  "materialized": false,
+  "source_bound": false,
+  "device_ready": false,
+  "NPU": false,
+  "blocked_action": "parent render may consume previously denied BOLE v14 three-source paths; do not execute without explicit narrow authorization",
+  "denied_prefix": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_output_scan_v14_prepare_20261024/prepared-source-short8-v14",
+  "denied_files": [
+    "runtime_joint_ledger.py",
+    "worker_resource_v2.py",
+    "resource32k_runtime.py"
+  ],
+  "requested_scope": "host-only generation/hash/inverse; no source-body export, history mutation, Docker or NPU",
+  "authority_cutoff_unchanged": "2026-10-24T07:35:53Z",
+  "parent_stage_remote_head": "81bd8bd05aa3ab37aa7cb1dead9486ddf56343f6",
+  "next_command_only_after_permission": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/phase_runtime_renderer_v2/runtime_lossless_imports.py",
+    "--check"
+  ],
+  "new_root_not_created": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/phase_runtime_renderer_v2/prepared-source-short8-shared-phase-v2",
+  "new_output_not_created": "/opt/host/vnf/austinov/run-bole32k-cache-shared-phase-short8-v2-20261024"
+}
