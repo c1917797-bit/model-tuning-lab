@@ -1,0 +1,159 @@
+{
+  "schema": "mxr.readonly-cpu-upstream-bridge-inputs/v1",
+  "continuous_source": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/mxr_continuous_h_counterfactual_prepare_v1/continuous_h.py",
+    "bytes": 14093,
+    "sha256": "29abb053bbf05155a21134e7ef5ea513b4b4fda30ebbf76beff905b9fba1e9a1"
+  },
+  "existing_attribution": {
+    "path": "/opt/host/vnf/austinov/run-mxr-event-single6-owned-main-MXR_CONTINUOUS_H_CPU_001/cpu/ATTRIBUTION.json",
+    "bytes": 592883,
+    "sha256": "bdf6f02e17856e716ff313f728c9d433a5eb38df88c6f215806130273085df19"
+  },
+  "actual_probe": {
+    "bytes": 3990,
+    "path": "/opt/host/vnf/austinov/run-mxr-event-single6-owned-main-WU_NATIVE2048_CHUNK31_NPU_20261023_V2/physical6/numeric/PROBE.json",
+    "sha256": "ae4ac42873bc750f1bd496ca470df7c306e8e4176c408e9590b1d1e7f120d3b7"
+  },
+  "actual_source": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/mxr_private_terminal_observer_prepare_v2_20261023/prepared-source/SOURCE_MANIFEST.json",
+    "bytes": 151216,
+    "sha256": "3f3d79ad102d32a9792c8b55d4509bd54a7e090b5eb99be558834832fc2b43a1"
+  },
+  "actual_reference_source": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/mxr_private_terminal_observer_prepare_v2_20261023/prepared-source/wu_boundary.py",
+    "bytes": 16551,
+    "sha256": "8543969ec8d7e77ad613fc4657c2f6f6965ebf3d66dc8a8d7a708f0adbcc3734"
+  },
+  "wy_source": {
+    "path": "/cache/austinov/src/vllm-ascend/vllm_ascend/ops/triton/fla/wy_fast.py",
+    "bytes": 4307,
+    "sha256": "51e23f0876d91ae09b32ae70aa03318b2440b7bd3ba029c0d9838869359597ef"
+  },
+  "fixed_inputs": {
+    "arms": [
+      {
+        "bytes": 48863493,
+        "path": "/opt/host/vnf/austinov/run-mxr-event-single6-owned-main-CURRENT24H_MXR_L21_CAUSAL_NPU_001/physical6/numeric/actual-native/rank0-frame-016/saved_candidate.pt",
+        "sha256": "eb5d2060d0fad06087d690c40e8f3c8b678c65882587d2444f0f71a6bee4c5e7"
+      },
+      {
+        "bytes": 48861509,
+        "path": "/opt/host/vnf/austinov/run-mxr-event-single6-owned-main-CURRENT24H_MXR_L21_CAUSAL_NPU_001/physical6/numeric/actual-native/rank0-frame-016/native.pt",
+        "sha256": "f2e915e78b41b53d619f735ea8623f9e2dc2bb8f84a4d56e50cac6116d6e2980"
+      },
+      {
+        "bytes": 48862533,
+        "path": "/opt/host/vnf/austinov/run-mxr-event-single6-owned-main-CURRENT24H_MXR_L21_CAUSAL_NPU_001/physical6/numeric/actual-native/rank0-frame-016/cpu64_cast.pt",
+        "sha256": "1aa677e9a5c1f59a24b7e165a99cf8e17b77d21e4b176d07503533430cb03ea1"
+      }
+    ],
+    "canonical": {
+      "bytes": 4691,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-model-new24h-v1-098-repair5/boundary_oracle.py",
+      "sha256": "7fd2e64783f4516a99f116dc66502ff8e6b6d5591f7a1076e7ed1e6cfa9a408a"
+    },
+    "case": {
+      "case_id": "rank0-frame-016",
+      "core": {
+        "bytes": 1300,
+        "path": "/opt/host/vnf/austinov/run-mxr-two-residual-model098repair5-main-NEW24H_MXR098R5_001/candidate/model/capture/worker-441/core-binding-016.json",
+        "sha256": "73994b3ed21fd037b4467c1a607eaf0630276b9ea9d67d696dab331917fb5e81"
+      },
+      "expected_saved_gate": false,
+      "index": 16,
+      "pid": 441,
+      "prefix": "language_model.model.layers.21.linear_attn",
+      "rank": 0,
+      "raw": {
+        "bytes": 32142009,
+        "path": "/opt/host/vnf/austinov/run-mxr-two-residual-model098repair5-main-NEW24H_MXR098R5_001/candidate/model/capture/worker-441/raw/frame-016/RAW.pt",
+        "sha256": "17f6f484dc5f8a99dd759e3ad1899a2c84177df682133d13ead2c6bbffa7f7ba"
+      },
+      "raw_sidecar": {
+        "bytes": 5944,
+        "path": "/opt/host/vnf/austinov/run-mxr-two-residual-model098repair5-main-NEW24H_MXR098R5_001/candidate/model/capture/worker-441/raw/frame-016/RAW.STORAGE.json",
+        "sha256": "9362de8a48a898f714c599b932b82a3690fd54ea163b7f140efbb851426b3ad4"
+      },
+      "tokens": 2048
+    },
+    "codec": {
+      "bytes": 3214,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-two-residual-model-new24h-v1-098-repair5/lossless_raw.py",
+      "sha256": "8bd51ca033cd39847c6206dd5094ea15ceccc61d44fe520d013416e51fa5b6c4"
+    },
+    "conditional": {
+      "bytes": 8793,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/mxr_layer21_causal_prepare_v1/prepared-source/CONDITIONAL_REFERENCE.py.txt",
+      "sha256": "0b6ec9c5df39d261aa092458cd8feb7143622f8bfb52c4316076861bbbdfca1a"
+    },
+    "donor": {
+      "bytes": 22594,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-third-residual-saved3frame-new24h-v1-125/guest_core.py",
+      "sha256": "691b8be9c0e863dd9e3ef8720e2efa876c5efecf49b12d46f420da318c3ab389"
+    },
+    "metrics": {
+      "bytes": 10097,
+      "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/mxr-r118-capture-20261013-001/consume_capture.py",
+      "sha256": "7c31e87b409ef095e5789a2bc1b71a987a69dc237789c125ad749a69fecec6c3"
+    },
+    "report": {
+      "bytes": 244600,
+      "path": "/opt/host/vnf/austinov/run-mxr-event-single6-owned-main-CURRENT24H_MXR_L21_CAUSAL_NPU_001/physical6/numeric/CONSUMED.json",
+      "sha256": "2206bbf2addf73b8c699c3970a4db06adb7fee47d42257cbc2b0ed211cb573f4"
+    },
+    "schema": "mxr.continuous-h-fixed-input/v1"
+  },
+  "g_producer_sources": [
+    {
+      "path": "/cache/austinov/src/vllm-ascend/vllm_ascend/ops/triton/fla/chunk.py",
+      "bytes": 16312,
+      "sha256": "6f93b9face32999c93976fccaeb2d6a9d8dc85c8c41d3d26d92e1820f62d7ca5"
+    },
+    {
+      "path": "/cache/austinov/src/vllm-ascend/vllm_ascend/ops/triton/fla/cumsum.py",
+      "bytes": 4937,
+      "sha256": "af45679800aa2c49f8587194f6744e3d9c7cabe7658eef9ec37f0a665a70c47d"
+    }
+  ],
+  "g_producer_function_names": [
+    "chunk_local_cumsum",
+    "chunk_local_cumsum_scalar",
+    "chunk_local_cumsum_scalar_kernel",
+    "chunk_gated_delta_rule_fwd"
+  ],
+  "g_precision_facts": {
+    "source_evidence": "actual deployed source Ref check 1219; not local-copy byte pins",
+    "chunk_size": 64,
+    "caller": "chunk_gated_delta_rule_fwd -> chunk_local_cumsum(g, chunk_size=64, cu_seqlens=cu_seqlens, block_indices=block_indices_cumsum); no scale/reverse/head_first/output_dtype override",
+    "defaults": "scale=None; reverse=False; head_first=False; output_dtype=torch.float",
+    "scan": "3D B,T,H input -> scalar kernel; tl.load(...).to(tl.float32); each chunk64 scanned with tl.cumsum(axis=0, reverse=False); no scale multiplication when scale=None",
+    "store": "tl.store(..., b_o.to(s.dtype.element_ty)); original guest validate_frame pins raw g=float32, so this actual case stores FP32 to FP32 output",
+    "exponential_domain": "no exp/log-base conversion in cumsum caller; WY uses tl.exp(G); native H uses use_exp2=False",
+    "canonical_difference": "unchanged boundary_oracle evaluates FP64 torch.cumsum of original FP32 g then rounds once to FP32; native FP32 scan association is not declared instruction-exact equivalent",
+    "layout": "Hentry.reshape(1,12,32,128,128)[0] and Vnew.reshape(1,12,2048,128)[0] copied from pinned already-verified continuous_h.consume; native H ABI tapped before final public-wrapper transpose"
+  },
+  "minimum_read_only_mount_keys": [
+    "continuous_source",
+    "existing_attribution",
+    "actual_probe",
+    "actual_source",
+    "actual_reference_source",
+    "wy_source",
+    "g_producer_sources[0]",
+    "g_producer_sources[1]",
+    "fixed_inputs.donor",
+    "fixed_inputs.canonical",
+    "fixed_inputs.codec",
+    "fixed_inputs.metrics",
+    "fixed_inputs.arms[0]",
+    "fixed_inputs.arms[1]",
+    "fixed_inputs.arms[2]",
+    "fixed_inputs.case.raw",
+    "fixed_inputs.case.raw_sidecar"
+  ],
+  "cutoff_epoch": 1792827353,
+  "output": "/opt/host/vnf/austinov/run-mxr-event-single6-owned-main-MXR_UPSTREAM_BRIDGE_CPU_20261024_V1/cpu/BRIDGE.json",
+  "qualification": false,
+  "new_NPU_execution": false
+}

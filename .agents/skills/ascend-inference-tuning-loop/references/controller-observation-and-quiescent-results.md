@@ -248,3 +248,36 @@ remain required.
 - Keep worker/HTTP first failures separate from later host observer failures. Residual HBM after workers exit is not evidence of foreign occupation. Preserve timestamped SMI/process/ownership evidence and require an exact released-CID check.
 - A lower actual container cap is a new resource experiment, not a relaxed reserve or a claim of universal peak fit. Create, inspect, cgroup observer, live globals and any copied resource globals must agree; OOM remains failure. Separate stale error-label captions from effective arithmetic and observed RAM changes.
 - A remote timeout is an unknown outcome until independently checked. Recover executor receipts with the same idempotency key; inspect patch bytes before retrying. Re-read UTC after every unusually long call/yield. Never reset an elapsed experiment window, manufacture card utilization, or launch a late successor because an earlier tool call was delayed.
+
+## Preserve compound guard operands, not just their error label
+
+The Oct23 BOLE V5 short8 owner passed its Devices[] preflight and all-four tiny
+canaries, then failed the compound PID/UDA/start/program guard during startup.
+Its raw SMI retained physical5/PID3224862, but actual_compute was serialized
+before the proof was appended. The exception name alone therefore cannot prove
+which predicate failed or identify that PID's container. A different, earlier
+physical5 process was independently attributed; do not transfer that identity.
+
+A narrow diagnostic successor should retain the exact original guard's captured
+PID/start/cgroup, own CID/server-start and per-predicate outcomes before cleanup,
+then rethrow the original error. Preserve AND short-circuiting: not-evaluated
+operands and uncaptured executable paths remain unknown. A later /proc read is
+new evidence, not the missing same-instant value. Diagnostic write failures must
+not replace the primary exception; instrumentation grants no retry or admission.
+Keep the failed source/output and distinguish this ownership failure from model
+mathematics or task accuracy.
+
+## Give Devices[] stages their actual ownership domain
+
+BOLE V4's cleanup-only repair was insufficient: initial observe ran before the
+CPU role's expected create/inspect existed and still demanded unrelated NPU idle.
+V5 bound a source-owned CPU-preflight intent before that first observation,
+consumed it only for the exact original deviceless create, and required actual
+Devices[] inspect plus own-only stop/reap/release. Its actual source-bound CPU
+entry completed with no primary/secondary error; this did not qualify the model.
+
+Inspect the actual controller before copying that repair. MXR's existing L21
+resource_scope already used an empty card domain for card=None, and its real
+upstream-bridge CPU owner completed while keeping the NPU branch and protected
+boundary unchanged. Reuse correct scoped ownership; do not add redundant wrappers
+or remove shared RAM/disk/CPU, source, own PID/CID or cleanup checks.
