@@ -1,0 +1,30 @@
+{
+  "schema": "ascend-campaign-window/v1",
+  "id": "renew24-20261024T075143Z",
+  "start": "2026-10-24T07:51:43Z",
+  "cutoff": "2026-10-25T07:51:43Z",
+  "start_epoch": 1792828303,
+  "cutoff_epoch": 1792914703,
+  "timezone": "Europe/Moscow",
+  "local_start": "2026-10-24 10:51:43",
+  "local_cutoff": "2026-10-25 10:51:43",
+  "authorized_by": "user: 再给24小时，要做到多线准备，卡上无空挡，尽快完成完整验收",
+  "physical_npus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_npus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "dispatcher": "MAIN",
+  "parallel_preparation": true,
+  "device_rule": "compatible disjoint correctness only; TP4 model and all timing exclusive",
+  "existing_resource_and_accuracy_gates_unchanged": true,
+  "history_immutable": true,
+  "individual_controller_authority_binding": "required; this campaign record alone is not a controller admission"
+}

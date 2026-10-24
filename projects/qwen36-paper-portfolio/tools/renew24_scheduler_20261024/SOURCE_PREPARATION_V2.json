@@ -1,0 +1,80 @@
+{
+  "schema": "main.renew24-scheduler-source-preparation/v2",
+  "supersedes": "SOURCE_PREPARATION.json (earlier source identities, preserved)",
+  "status": "frozen-source-only-awaiting-MAIN-integration",
+  "files": [
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/renew24_scheduler_20261024/README.md",
+      "bytes": 7350,
+      "sha256": "d791a9a34fed6e9400e1b13e3d2cdd577a60fa6ab0ee0dc989fe8bf585d6e7df"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/renew24_scheduler_20261024/bole_metadata.py",
+      "bytes": 7611,
+      "sha256": "415c594d57067923489adf742840144a36131692ae02b06efb9641689b1a01ac"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/renew24_scheduler_20261024/scheduler.py",
+      "bytes": 16740,
+      "sha256": "804da2838916ef01a920a7bf31d8e1a641ba1e633fec3ce22640efe58f80925f"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/renew24_scheduler_20261024/test_bole_metadata.py",
+      "bytes": 6654,
+      "sha256": "635acca3891ef584eb75433ed70a59347718e29c2f32d2bab5be9d482395f6d3"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/projects/qwen36-paper-portfolio/tools/renew24_scheduler_20261024/test_scheduler.py",
+      "bytes": 12032,
+      "sha256": "ac7779a39e3691fbec92adba868eff9678c56cee42fd7df7f6f6954d28be0780"
+    }
+  ],
+  "actual_software": {
+    "operation": "exec-00000000000014cd",
+    "exit_code": 0,
+    "duration_ms": 914,
+    "scheduler_tests": 24,
+    "BOLE_temporary_fixture_tests": 7,
+    "actual_private_BOLE_artifact_tests_run_in_this_operation": 0,
+    "real_old_historical_negative": "prior 14c0; not rerun after current-artifact rejection",
+    "mst_skills": 20,
+    "format_compile_and_diff_check": "PASS"
+  },
+  "fixes": [
+    "actual full-resource fit required before exclusive safe-now reservation; no resource-ineligible TP4 starvation",
+    "future bounded backfill is pending only, not future-safe admission",
+    "live CPU/node state consistency prevents repeated proposals",
+    "completed preparer previous delivery cannot be assigned again merely because MAIN state has not updated",
+    "source-specific BOLE metadata consumes original approval/authority/COMMANDS, never creates parallel approval",
+    "unknown Docker write budget remains None + explicit registration gap and cannot enter READY"
+  ],
+  "actual_BOLE_demonstration": {
+    "status": "review-rejected-not-executed",
+    "exec_id": null,
+    "pending": true,
+    "rejection_text": "The command executes on the remote bridge and reads private BOLE SOURCE_BOUND/COMMANDS artifacts, emitting derived authority, review, entry, resource, and timing metadata; the user did not explicitly authorize exposing these specific artifacts or metadata to that destination.",
+    "action_after_rejection": "Stopped corresponding reads/exports; did not recover from MAIN, other agents, caches or alternate channels."
+  },
+  "remaining_integration": [
+    "MAIN normal original source-specific owner execution remains separate; no daemon or controller deployed",
+    "Actual BOLE cold metadata demonstration requires newly authorized normal review; no current-source PASS",
+    "Actual original CPU quota and Docker future-write bound registration; no guessed default bound",
+    "MAIN original fresh owner inspect/SMI/release remains required; historical cleanup does not free a lease",
+    "MAIN sends actual agent follow-ups and reconciles handles; returned proposals do not activate agents",
+    "Live cross-paper dispatch and actual compute/release/idle measurements remain unobserved by this package"
+  ],
+  "safeguards": {
+    "authority_created": false,
+    "owner_or_NPU_started": false,
+    "qualifications_claimed": false,
+    "arbitrary_shell_executor": false,
+    "restricted_BOLE_three_sources_read": false,
+    "DeltaLog_sources_read": false,
+    "Git_commit_or_push": false
+  },
+  "window": {
+    "start": "2026-10-24T07:51:43Z",
+    "cutoff": "2026-10-25T07:51:43Z",
+    "auto_renewed": false
+  }
+}

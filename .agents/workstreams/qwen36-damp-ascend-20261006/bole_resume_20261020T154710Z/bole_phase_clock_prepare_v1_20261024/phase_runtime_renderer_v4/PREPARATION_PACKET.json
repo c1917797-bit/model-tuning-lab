@@ -1,0 +1,130 @@
+{
+  "schema": "bole.phase-clock-source-preparation/v4",
+  "source_only": true,
+  "ready_for_MAIN_review": true,
+  "execution_ready": false,
+  "campaign_window": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261024T075143Z/WINDOW.json",
+    "start_epoch": 1792828303,
+    "cutoff_epoch": 1792914703,
+    "authority_created": false
+  },
+  "actual_checks": {
+    "current_operation": "exec-00000000000014b9",
+    "exit": 0,
+    "tests": 14,
+    "elapsed_ms": 115633,
+    "actual_public_producer": true,
+    "materialize_in_temporary_software_directory": true,
+    "files": 472,
+    "inverse_delta": 7,
+    "whole_inverse": true,
+    "authority_is_in_memory_fixture_only": true,
+    "parent_first_render_actual_then_cached": true,
+    "original_authority_validator_assertions_used": true,
+    "previous_fixture_failure": "FIRST_SOFTWARE_FAILURE_14b5.json",
+    "unchanged_helper_evidence": "../phase_runtime_renderer_v3/SOFTWARE_14a5.json",
+    "sameimage": false,
+    "NPU": false
+  },
+  "preparation_refs": {
+    "phase_adapter": {
+      "bytes": 2026,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/phase_runtime_renderer_v3/assets/adapt_phase_clock.py",
+      "sha256": "b1b7fbe6ecda968b7c4fdbebe2f1cf43950984d5aaf983eec4d3d28c71a86cac"
+    },
+    "phase_helper": {
+      "bytes": 10121,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/phase_runtime_renderer_v3/assets/shared_phase_clock.py",
+      "sha256": "d110f4cfc4fd2a3298ea2a0a66206452f6320b3c28a0b0f5c8f1d1581edfa587"
+    },
+    "phase_parent_renderer": {
+      "bytes": 16556,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_fa_cache_diagnostic_prepare_v1_20261024/runtime_lossless_imports.py",
+      "sha256": "5be3ebff0287227cd4a07c00d80babf25e7b2be8bbe7ccb855f77e962f3f4ef3"
+    },
+    "phase_runtime": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/phase_runtime_renderer_v4/runtime_lossless_imports.py",
+      "bytes": 7246,
+      "sha256": "c663f0beb42e05ec569b3618a97cb659f780cc4559cf93ffa30ab0a34c9c33d7"
+    }
+  },
+  "producer": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/phase_runtime_renderer_v4/qualification_source_producer.py",
+    "bytes": 6847,
+    "sha256": "8bb91b8f9b5be5ceb85e7897289969abba5ad93bdebb8c99ccaccf29455c9721"
+  },
+  "root": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/phase_runtime_renderer_v4/prepared-source-short8-shared-phase-v4",
+  "output": "/opt/host/vnf/austinov/run-bole32k-cache-shared-phase-short8-v4-20261024",
+  "authority_schema": "bole.MAIN-reviewed-fastpath-short8-qualification-authority/v1",
+  "authority_keys": [
+    "schema",
+    "approved",
+    "start_epoch",
+    "cutoff_epoch",
+    "scope",
+    "MAIN_review_ref"
+  ],
+  "review_schema": "bole.MAIN-fastpath-short8-qualification-source-review/v1",
+  "review_fields_from_manifest": {
+    "source_root": "root",
+    "output_root": "output_root",
+    "files": "files",
+    "parent_preparation_readset": "qualification_parent_preparation_readset",
+    "historical_short_source": "qualification_historical_short_source",
+    "short2k_helper_refs": "short2k_helper_refs"
+  },
+  "scope": {
+    "input_tokens": 32768,
+    "output_tokens": 8,
+    "concurrency": 1,
+    "generations": 2,
+    "arm": "bole",
+    "physical_NPUs": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "common_environment": {
+      "HCCL_DETERMINISTIC": "true"
+    },
+    "phase_seconds": 3600,
+    "cleanup_seconds": 180,
+    "formal_performance": false,
+    "model_memory_GiB": 48
+  },
+  "materialize_argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/phase_runtime_renderer_v4/qualification_source_producer.py",
+    "--prepare",
+    "--base-root",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/phase_runtime_renderer_v4",
+    "--authority-ref",
+    "<actual MAIN V4 authority Ref3 JSON>"
+  ],
+  "bind_argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/phase_runtime_renderer_v4/prepared-source-short8-shared-phase-v4/qualification_source_producer.py",
+    "--bind",
+    "--template-ref",
+    "<actual V4 SOURCE_TEMPLATE Ref3 JSON>"
+  ],
+  "postbind": "Original bind writes SOURCE_BOUND and COMMANDS. MAIN may use exact COMMANDS.model alone: original model workflow includes same-image CPU, validated CPU release, fresh device checks, then model. Separate COMMANDS.CPU followed by model duplicates the same preflight.",
+  "mount_closure": "Original host_service.complete_readset -> guest_readset_coverage.required/index_coverage; phase preparation four Refs explicitly in dependencies and short2k_helper_refs. Original owned_create adds exact per-role readonly phase dir and original inspect validates RW=false. Actual guest closure untested.",
+  "remaining": [
+    "MAIN actual V4 review/authority branch full render and inverse",
+    "MAIN actual materialize/physical audit/bind/COMMANDS",
+    "Actual same-image CPU and guest shared-clock custody; model entry retains these gates",
+    "Current-source NPU numeric scope, then160 and formal performance remain unqualified"
+  ],
+  "renderer": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/phase_runtime_renderer_v4/runtime_lossless_imports.py",
+    "bytes": 7246,
+    "sha256": "c663f0beb42e05ec569b3618a97cb659f780cc4559cf93ffa30ab0a34c9c33d7"
+  }
+}
