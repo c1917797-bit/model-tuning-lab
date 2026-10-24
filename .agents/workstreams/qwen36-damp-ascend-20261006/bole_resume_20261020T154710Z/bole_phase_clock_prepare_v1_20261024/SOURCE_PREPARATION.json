@@ -1,0 +1,122 @@
+{
+  "schema": "bole.phase-clock-source-preparation/v1",
+  "prepared_only": true,
+  "default_enabled": false,
+  "device_ready": false,
+  "qualified": false,
+  "parent_failed_operation": "exec-000000000000146d",
+  "parent_failed_result_sha256": "6ccd58c2159c5bb6994537a6802dd2fb41c5fba70c3faa909e530e3818b03dda",
+  "source_files": [
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/shared_phase_clock.py",
+      "bytes": 9288,
+      "sha256": "deec7d583b5c94c196511269546fdd86e909623b91c0555d21371957cabbac30"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/adapt_phase_clock.py",
+      "bytes": 2026,
+      "sha256": "b1b7fbe6ecda968b7c4fdbebe2f1cf43950984d5aaf983eec4d3d28c71a86cac"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/test_phase_clock.py",
+      "bytes": 11279,
+      "sha256": "18d64239036b3496cee8b75477624702b3e2eced3e1966bda9cb5d15f6bc7cc1"
+    }
+  ],
+  "frozen_prior_21_control_sources": [
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/v1frozen/shared_phase_clock.py",
+      "bytes": 9243,
+      "sha256": "740eadf1c9fa5eab599cc5f6b937f07029b78aa585ac2fbe1f2d4f61b738d1e6"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/v1frozen/adapt_phase_clock.py",
+      "bytes": 2026,
+      "sha256": "b1b7fbe6ecda968b7c4fdbebe2f1cf43950984d5aaf983eec4d3d28c71a86cac"
+    },
+    {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/v1frozen/test_phase_clock.py",
+      "bytes": 10373,
+      "sha256": "db7b056cfe3b2bb9dd6b45ad46591fb02c6066736d7bbc55cecdafc534a4140a"
+    }
+  ],
+  "software": {
+    "author_operation": "exec-0000000000001489",
+    "durable_receipt": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_phase_clock_prepare_v1_20261024/SOFTWARE_1489.json",
+      "bytes": 2302,
+      "sha256": "eef06a6ed9a5322ae706a924035b239fa3c41674df2151aefb0e1e126c38117c"
+    },
+    "main_operation": "exec-000000000000148d",
+    "main_exit": 0,
+    "main_control_count": 24,
+    "main_test_seconds": 1.329,
+    "MST_skills": 20,
+    "diff_check": 0,
+    "scope": "real modified contract/native plugin/publisher code with explicit kernel/mount/time/authority/source/Torch doubles; host CPU145/512MiB; not same-image or NPU"
+  },
+  "main_source_review": {
+    "complete_three_sources": true,
+    "adjacent_originals": [
+      "host_service.py",
+      "owned_create.py",
+      "server090.py",
+      "contract090.py",
+      "g2_cold_clock.py",
+      "native_receipt090.py",
+      "external025.py",
+      "cpu_precreate_policy.py",
+      "owned_substrate.py"
+    ],
+    "four_module_inverse": true,
+    "manifest_only_new_field": "phase_clock_contract",
+    "full_source_closure_verified": false,
+    "new_runtime_source_materialized": false
+  },
+  "main_actual_historical_read_replay": {
+    "operation": "exec-000000000000148c",
+    "exit": 0,
+    "count": 5,
+    "types": [
+      "OWNED with nlink2",
+      "inspect with nlink1 and nlink2"
+    ],
+    "read_only": true,
+    "new_NPU_evidence": false,
+    "OWNED": {
+      "bytes": 1263248,
+      "sha256": "eee396b2b772785d1e32ec5986b292404c8b5dd2d0384f2f2cb8a31e32ad52c4"
+    }
+  },
+  "first_preparation_failure": {
+    "claimed_operation": "exec-0000000000001481",
+    "current_operation_get": "not_found",
+    "original_direct_receipt": "unavailable; not reconstructed",
+    "original_initial_source": "not separately retained",
+    "scope": "early unbound helper development failure; do not describe as complete preserved failure packet"
+  },
+  "remaining": [
+    "integrate into a complete distinct source template/readset/inverse and MAIN source review",
+    "same-image original creator/environment/RO mount plus real CID/boot/time namespace and phase handoff",
+    "fresh fitting explicitly authorized phase; no original deadline reset",
+    "BOLE short8 full two-request numerical/state completion; cache/RAM fix still unverified",
+    "related160 full scope timefit and correctness",
+    "fixed1024 native AR/BOLE matched screening then three formal pairs",
+    "GSM8K/HumanEval/MMLU smoke then full accuracy"
+  ],
+  "authority": {
+    "unchanged_cutoff": "2026-10-24T07:35:53Z",
+    "unchanged_phase_seconds": 3600,
+    "unchanged_cleanup_seconds": 180,
+    "latest_new_full_reserve_start": "2026-10-24T06:32:53Z",
+    "new_model_phase_admitted": false,
+    "new_authority_created": false
+  },
+  "safety": [
+    "no old frozen source/result changed",
+    "no card/container/clock runtime launched",
+    "no threshold or resource budget changes",
+    "no denied DeltaLog or BOLE task source reads",
+    "not a paper-negative or performance result"
+  ]
+}
