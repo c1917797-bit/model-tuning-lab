@@ -1,0 +1,60 @@
+{
+  "schema": "mxr.MAIN-reviewed-context-successor-authority/v1",
+  "approved": true,
+  "preparation_window_ref": {
+    "bytes": 660,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261023T073553Z/BACKUP_PREPARATION_WINDOW_V1.json",
+    "sha256": "e5e10cdb3487b3fe2152054b23ccbf1b22b9d2c9a5d70b071d79eb75612fb2ba"
+  },
+  "prepared_template_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/mxr_three_tile_rounding_prepare_v6_20261024/prepared-source/SOURCE_TEMPLATE.json",
+    "bytes": 320229,
+    "sha256": "b2a8737952dae47a1f154b8d766ad07f719d81d3bbb1662fe70e9f71285c519b"
+  },
+  "source_root": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/mxr_three_tile_rounding_prepare_v6_20261024/prepared-source",
+  "outputs": {
+    "CPU": "/opt/host/vnf/austinov/run-mxr-event-single6-owned-main-THREE_TILE_ROUNDING_CPU_20261024_V6",
+    "NPU": "/opt/host/vnf/austinov/run-mxr-event-single6-owned-main-THREE_TILE_ROUNDING_NPU_20261024_V6"
+  },
+  "physical": [
+    6
+  ],
+  "protected": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "start_epoch": 1792740953,
+  "cutoff_epoch": 1792827353,
+  "resources": {
+    "cache_budget_bytes": 536870912,
+    "child_seconds": 300,
+    "cleanup_seconds": 90,
+    "disk_reserve_bytes": 8589934592,
+    "evidence_bytes": 536870912,
+    "guest_bytes": 8589934592,
+    "host_bytes": 536870912,
+    "host_reserve_bytes": 8589934592,
+    "logical": [
+      0
+    ],
+    "output_budget_bytes": 4294967296,
+    "phase_seconds": 600,
+    "physical": [
+      6
+    ],
+    "protected": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "raw_shard_bytes": 452984832
+  },
+  "MAIN_review_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261023T073553Z/MXR_THREE_TILE_V6_MAIN_REVIEW.json",
+    "bytes": 31889,
+    "sha256": "c37e02c3addfff100d7c3060dcdbc9833f2cb53afe0bb2c7d1551ccd61b5cee4"
+  }
+}

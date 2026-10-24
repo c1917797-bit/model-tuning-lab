@@ -1,0 +1,288 @@
+{
+  "schema": "bole.V10-followup-source-only-operations/v1",
+  "actual_execution": false,
+  "operations": [
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-I\",\n          \"-B\",\n          \"-c\",\n          \"import os,resource,sys,importlib.util,json,ast,hashlib\\nfrom pathlib import Path\\nassert 145 in os.sched_getaffinity(0);os.sched_setaffinity(0,{145});resource.setrlimit(resource.RLIMIT_AS,(512*2**20,512*2**20))\\nws=Path(\\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z\\\");qp=ws/'bole_related160_v10_input_prepare_20261024';fp=ws/'bole_formal_v10_input_pin_prepare_20261024'\\ndef mod(p,n):\\n s=importlib.util.spec_from_file_location(n,p);m=importlib.util.module_from_spec(s);sys.modules[n]=m;s.loader.exec_module(m);return m\\nQ=mod(qp/'related_qualification.py','_q10_real')\\nfor capture in('rawON','rawOFF'):\\n b=Q.render(base_root=qp/('bole-v10-20261024-related160-'+capture));Q.inverse(b)\\n print(json.dumps(dict(arm=capture,files=len(b['files']),inverse=True,output=b['manifest']['output_root'],authority=b['manifest']['qualification_authority_ref'])))\\n F=mod(qp/'followup_input.py','_actual_follow_input')\\n calls=[]\\n for n in ast.walk(ast.parse(b['files']['input_preflight.py'])):\\n  if isinstance(n,ast.For)and isinstance(n.target,ast.Tuple)and[n.id for n in n.target.elts]==['role','index','count']:calls=ast.literal_eval(n.iter)\\n print(json.dumps(dict(actual_request_roles=calls)))\\n try:Q.check_control_predecessor(b['manifest'])\\n except Exception as e:print(json.dumps(dict(missing_actual_predecessor_rejected=type(e).__name__)))\\n else:raise AssertionError('missing predecessor accepted')\\nR=mod(fp/'formal_runtime.py','formal_composer')\\nb=R.render(fp/'bole-v10-20261024-formal-test',arm='bole');R.inverse(b);print(json.dumps(dict(formal_files=len(b['files']),inverse=True)))\\nS=mod(fp/'short8_source_pin.py','_v10_pin_real')\\nfor v in('v8','v9'):\\n sr=dict(path=str(ws/('bole_textonly_v8_prepare_20261024'if v=='v8'else'bole_client_input_v9_prepare_20261024')/('prepared-source-short8-'+v)/'SOURCE_BOUND.json'),bytes=1,sha256='0'*64)\\n try:S.exact_target(sr)\\n except ValueError:pass\\n else:raise AssertionError('old pin accepted')\\ntry:S.consume(b['manifest'])\\nexcept ValueError as e:print(json.dumps(dict(missing_formal_prerequisite_rejected=True,error=str(e))))\\nelse:raise AssertionError('missing prerequisite accepted')\\nfor d in(qp,fp):\\n for p in d.iterdir():\\n  if p.is_file():\\n   raw=p.read_bytes()\\n   if p.suffix=='.py':compile(raw,str(p),'exec')\\n   assert raw.endswith(b'\\\\n')and not raw.endswith(b'\\\\n\\\\n')and all(line.rstrip()==line for line in raw.splitlines())\\n   print(json.dumps(dict(path=str(p),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())))\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": null,\n        \"durationMs\": 22540,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-0000000000001325\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"arm\\\": \\\"rawON\\\", \\\"files\\\": 477, \\\"inverse\\\": true, \\\"output\\\": \\\"/opt/host/vnf/austinov/bole-v10-20261024-related160-rawON\\\", \\\"authority\\\": null}\\n{\\\"actual_request_roles\\\": [[\\\"warmup\\\", -1, 160], [\\\"measured\\\", 0, 160], [\\\"retirement-barrier\\\", 1, 1]]}\\n{\\\"missing_actual_predecessor_rejected\\\": \\\"ValueError\\\"}\\n{\\\"arm\\\": \\\"rawOFF\\\", \\\"files\\\": 477, \\\"inverse\\\": true, \\\"output\\\": \\\"/opt/host/vnf/austinov/bole-v10-20261024-related160-rawOFF\\\", \\\"authority\\\": null}\\n{\\\"actual_request_roles\\\": [[\\\"warmup\\\", -1, 160], [\\\"measured\\\", 0, 160], [\\\"retirement-barrier\\\", 1, 1]]}\\n{\\\"missing_actual_predecessor_rejected\\\": \\\"ValueError\\\"}\\n{\\\"formal_files\\\": 482, \\\"inverse\\\": true}\\n{\\\"missing_formal_prerequisite_rejected\\\": true, \\\"error\\\": \\\"MAIN-pinned actual prerequisite Refs\\\"}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_related160_v10_input_prepare_20261024/followup_input.py\\\", \\\"bytes\\\": 2415, \\\"sha256\\\": \\\"b4100d3b2e6e7a3e8d301d1bc4118e75fb29e2bf88c58692603ef8c98f5f7314\\\"}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_related160_v10_input_prepare_20261024/related_qualification.py\\\", \\\"bytes\\\": 7621, \\\"sha256\\\": \\\"4dbdc50f275bee2480d1d27552d58e33c3c127dba37f41bd66e5f4c983f37758\\\"}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_related160_v10_input_prepare_20261024/README.md\\\", \\\"bytes\\\": 922, \\\"sha256\\\": \\\"c4489e60846b94df7dbd1a47861b4a8599ac974e67373451717afdbc0359be65\\\"}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_formal_v10_input_pin_prepare_20261024/formal_runtime.py\\\", \\\"bytes\\\": 7522, \\\"sha256\\\": \\\"56bdec704007d1a44f103329ecf3169ddc55f19649ed9454db4dcf73dff2261c\\\"}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_formal_v10_input_pin_prepare_20261024/short8_source_pin.py\\\", \\\"bytes\\\": 8608, \\\"sha256\\\": \\\"c121c64421331a49c48731242a65e2a31bc6f3f5c647343ebb3ec6255f68f26b\\\"}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_formal_v10_input_pin_prepare_20261024/README.md\\\", \\\"bytes\\\": 922, \\\"sha256\\\": \\\"c4489e60846b94df7dbd1a47861b4a8599ac974e67373451717afdbc0359be65\\\"}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 409,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 409,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 409\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 409,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 409\n      }\n    },\n    \"traceId\": \"a4d61555-6555-4b8f-b93a-a835ab79d419\"\n  },\n  \"operationId\": \"exec-0000000000001325\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+        }
+      ],
+      "structuredContent": {
+        "action": null,
+        "canonicalDownloadUrl": null,
+        "canonicalUrl": null,
+        "dataPlane": null,
+        "downloadUrls": null,
+        "error": null,
+        "found": true,
+        "kind": "exec",
+        "ok": true,
+        "operation": {
+          "channel": "control",
+          "fallbackUsed": false,
+          "gatewayInstanceId": "tpc-rgw-01",
+          "logicalGatewayId": "tpc",
+          "ok": true,
+          "result": {
+            "found": true,
+            "lane": "job",
+            "ok": true,
+            "record": {
+              "args": [
+                "-I",
+                "-B",
+                "-c",
+                "import os,resource,sys,importlib.util,json,ast,hashlib\nfrom pathlib import Path\nassert 145 in os.sched_getaffinity(0);os.sched_setaffinity(0,{145});resource.setrlimit(resource.RLIMIT_AS,(512*2**20,512*2**20))\nws=Path(\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z\");qp=ws/'bole_related160_v10_input_prepare_20261024';fp=ws/'bole_formal_v10_input_pin_prepare_20261024'\ndef mod(p,n):\n s=importlib.util.spec_from_file_location(n,p);m=importlib.util.module_from_spec(s);sys.modules[n]=m;s.loader.exec_module(m);return m\nQ=mod(qp/'related_qualification.py','_q10_real')\nfor capture in('rawON','rawOFF'):\n b=Q.render(base_root=qp/('bole-v10-20261024-related160-'+capture));Q.inverse(b)\n print(json.dumps(dict(arm=capture,files=len(b['files']),inverse=True,output=b['manifest']['output_root'],authority=b['manifest']['qualification_authority_ref'])))\n F=mod(qp/'followup_input.py','_actual_follow_input')\n calls=[]\n for n in ast.walk(ast.parse(b['files']['input_preflight.py'])):\n  if isinstance(n,ast.For)and isinstance(n.target,ast.Tuple)and[n.id for n in n.target.elts]==['role','index','count']:calls=ast.literal_eval(n.iter)\n print(json.dumps(dict(actual_request_roles=calls)))\n try:Q.check_control_predecessor(b['manifest'])\n except Exception as e:print(json.dumps(dict(missing_actual_predecessor_rejected=type(e).__name__)))\n else:raise AssertionError('missing predecessor accepted')\nR=mod(fp/'formal_runtime.py','formal_composer')\nb=R.render(fp/'bole-v10-20261024-formal-test',arm='bole');R.inverse(b);print(json.dumps(dict(formal_files=len(b['files']),inverse=True)))\nS=mod(fp/'short8_source_pin.py','_v10_pin_real')\nfor v in('v8','v9'):\n sr=dict(path=str(ws/('bole_textonly_v8_prepare_20261024'if v=='v8'else'bole_client_input_v9_prepare_20261024')/('prepared-source-short8-'+v)/'SOURCE_BOUND.json'),bytes=1,sha256='0'*64)\n try:S.exact_target(sr)\n except ValueError:pass\n else:raise AssertionError('old pin accepted')\ntry:S.consume(b['manifest'])\nexcept ValueError as e:print(json.dumps(dict(missing_formal_prerequisite_rejected=True,error=str(e))))\nelse:raise AssertionError('missing prerequisite accepted')\nfor d in(qp,fp):\n for p in d.iterdir():\n  if p.is_file():\n   raw=p.read_bytes()\n   if p.suffix=='.py':compile(raw,str(p),'exec')\n   assert raw.endswith(b'\\n')and not raw.endswith(b'\\n\\n')and all(line.rstrip()==line for line in raw.splitlines())\n   print(json.dumps(dict(path=str(p),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())))\n"
+              ],
+              "cancelled": false,
+              "command": "/usr/bin/python3",
+              "cwd": null,
+              "durationMs": 22540,
+              "error": null,
+              "exitCode": 0,
+              "id": "exec-0000000000001325",
+              "lane": "job",
+              "state": "completed",
+              "stderr": "",
+              "stdout": "{\"arm\": \"rawON\", \"files\": 477, \"inverse\": true, \"output\": \"/opt/host/vnf/austinov/bole-v10-20261024-related160-rawON\", \"authority\": null}\n{\"actual_request_roles\": [[\"warmup\", -1, 160], [\"measured\", 0, 160], [\"retirement-barrier\", 1, 1]]}\n{\"missing_actual_predecessor_rejected\": \"ValueError\"}\n{\"arm\": \"rawOFF\", \"files\": 477, \"inverse\": true, \"output\": \"/opt/host/vnf/austinov/bole-v10-20261024-related160-rawOFF\", \"authority\": null}\n{\"actual_request_roles\": [[\"warmup\", -1, 160], [\"measured\", 0, 160], [\"retirement-barrier\", 1, 1]]}\n{\"missing_actual_predecessor_rejected\": \"ValueError\"}\n{\"formal_files\": 482, \"inverse\": true}\n{\"missing_formal_prerequisite_rejected\": true, \"error\": \"MAIN-pinned actual prerequisite Refs\"}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_related160_v10_input_prepare_20261024/followup_input.py\", \"bytes\": 2415, \"sha256\": \"b4100d3b2e6e7a3e8d301d1bc4118e75fb29e2bf88c58692603ef8c98f5f7314\"}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_related160_v10_input_prepare_20261024/related_qualification.py\", \"bytes\": 7621, \"sha256\": \"4dbdc50f275bee2480d1d27552d58e33c3c127dba37f41bd66e5f4c983f37758\"}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_related160_v10_input_prepare_20261024/README.md\", \"bytes\": 922, \"sha256\": \"c4489e60846b94df7dbd1a47861b4a8599ac974e67373451717afdbc0359be65\"}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_formal_v10_input_pin_prepare_20261024/formal_runtime.py\", \"bytes\": 7522, \"sha256\": \"56bdec704007d1a44f103329ecf3169ddc55f19649ed9454db4dcf73dff2261c\"}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_formal_v10_input_pin_prepare_20261024/short8_source_pin.py\", \"bytes\": 8608, \"sha256\": \"c121c64421331a49c48731242a65e2a31bc6f3f5c647343ebb3ec6255f68f26b\"}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_formal_v10_input_pin_prepare_20261024/README.md\", \"bytes\": 922, \"sha256\": \"c4489e60846b94df7dbd1a47861b4a8599ac974e67373451717afdbc0359be65\"}\n",
+              "timedOut": false
+            },
+            "state": "completed"
+          },
+          "rgwHttp": "http://agentweb:17888",
+          "rgwRouting": {
+            "attemptErrors": [],
+            "strategy": "peer-hot3-with-command-retry"
+          },
+          "routeDecision": "peer_direct",
+          "sessionId": null,
+          "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+          "targetRole": "upstream",
+          "timings": {
+            "awmcp": {
+              "attemptCount": 1,
+              "rgwRequestMs": 409,
+              "rgwResponseDecodeMs": 0,
+              "rgwResponseHeadersMs": 409,
+              "routeCacheHit": true,
+              "routeLookupMode": "command-cache",
+              "routeLookupMs": 0,
+              "totalMs": 409
+            },
+            "rgw": {
+              "dispatchMs": 0,
+              "journalMs": 0,
+              "peerRoundTripMs": 409,
+              "routeLookupMs": 0,
+              "totalMs": 409
+            }
+          },
+          "traceId": "a4d61555-6555-4b8f-b93a-a835ab79d419"
+        },
+        "operationId": "exec-0000000000001325",
+        "phase": "completed",
+        "previewUrls": null,
+        "progress": null,
+        "publicUrl": null,
+        "publicationId": null,
+        "result": null,
+        "retryable": false,
+        "schema": "agentweb.operation/v1",
+        "status": "completed",
+        "succeeded": true,
+        "terminal": true
+      },
+      "isError": false
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-I\",\n          \"-B\",\n          \"-c\",\n          \"import os,resource,runpy\\nassert 145 in os.sched_getaffinity(0);os.sched_setaffinity(0,{145});resource.setrlimit(resource.RLIMIT_AS,(512*2**20,512*2**20))\\nrunpy.run_path(\\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_formal_v10_input_pin_prepare_20261024/check_pin.py\\\",run_name='__main__')\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": null,\n        \"durationMs\": 76626,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-000000000000132b\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"exact_current_short_source_delta\\\": true, \\\"changed_files\\\": 16, \\\"wrong_V8_V9_rejected\\\": true, \\\"unreviewed_source_change_rejected\\\": true, \\\"missing_actual_prerequisite_rejected\\\": true, \\\"NPU\\\": false, \\\"numerical_qualified\\\": false}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 403,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 403,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 403\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 403,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 403\n      }\n    },\n    \"traceId\": \"7f11bcf7-2027-4f1d-9d66-6efc6f26e936\"\n  },\n  \"operationId\": \"exec-000000000000132b\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+        }
+      ],
+      "structuredContent": {
+        "action": null,
+        "canonicalDownloadUrl": null,
+        "canonicalUrl": null,
+        "dataPlane": null,
+        "downloadUrls": null,
+        "error": null,
+        "found": true,
+        "kind": "exec",
+        "ok": true,
+        "operation": {
+          "channel": "control",
+          "fallbackUsed": false,
+          "gatewayInstanceId": "tpc-rgw-01",
+          "logicalGatewayId": "tpc",
+          "ok": true,
+          "result": {
+            "found": true,
+            "lane": "job",
+            "ok": true,
+            "record": {
+              "args": [
+                "-I",
+                "-B",
+                "-c",
+                "import os,resource,runpy\nassert 145 in os.sched_getaffinity(0);os.sched_setaffinity(0,{145});resource.setrlimit(resource.RLIMIT_AS,(512*2**20,512*2**20))\nrunpy.run_path(\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_formal_v10_input_pin_prepare_20261024/check_pin.py\",run_name='__main__')\n"
+              ],
+              "cancelled": false,
+              "command": "/usr/bin/python3",
+              "cwd": null,
+              "durationMs": 76626,
+              "error": null,
+              "exitCode": 0,
+              "id": "exec-000000000000132b",
+              "lane": "job",
+              "state": "completed",
+              "stderr": "",
+              "stdout": "{\"exact_current_short_source_delta\": true, \"changed_files\": 16, \"wrong_V8_V9_rejected\": true, \"unreviewed_source_change_rejected\": true, \"missing_actual_prerequisite_rejected\": true, \"NPU\": false, \"numerical_qualified\": false}\n",
+              "timedOut": false
+            },
+            "state": "completed"
+          },
+          "rgwHttp": "http://agentweb:17888",
+          "rgwRouting": {
+            "attemptErrors": [],
+            "strategy": "peer-hot3-with-command-retry"
+          },
+          "routeDecision": "peer_direct",
+          "sessionId": null,
+          "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+          "targetRole": "upstream",
+          "timings": {
+            "awmcp": {
+              "attemptCount": 1,
+              "rgwRequestMs": 403,
+              "rgwResponseDecodeMs": 0,
+              "rgwResponseHeadersMs": 403,
+              "routeCacheHit": true,
+              "routeLookupMode": "command-cache",
+              "routeLookupMs": 0,
+              "totalMs": 403
+            },
+            "rgw": {
+              "dispatchMs": 0,
+              "journalMs": 0,
+              "peerRoundTripMs": 403,
+              "routeLookupMs": 0,
+              "totalMs": 403
+            }
+          },
+          "traceId": "7f11bcf7-2027-4f1d-9d66-6efc6f26e936"
+        },
+        "operationId": "exec-000000000000132b",
+        "phase": "completed",
+        "previewUrls": null,
+        "progress": null,
+        "publicUrl": null,
+        "publicationId": null,
+        "result": null,
+        "retryable": false,
+        "schema": "agentweb.operation/v1",
+        "status": "completed",
+        "succeeded": true,
+        "terminal": true
+      },
+      "isError": false
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-I\",\n          \"-B\",\n          \"-c\",\n          \"import os,resource,sys,importlib.util,ast,json,hashlib\\nfrom pathlib import Path\\nassert 145 in os.sched_getaffinity(0);os.sched_setaffinity(0,{145});resource.setrlimit(resource.RLIMIT_AS,(512*2**20,512*2**20))\\np=Path(\\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_formal_v10_input_pin_prepare_20261024\\\")\\ns=importlib.util.spec_from_file_location('formal_composer',p/'formal_runtime.py');R=importlib.util.module_from_spec(s);sys.modules[s.name]=R;s.loader.exec_module(R)\\nb=R.render(p/'bole-v10-formal-native-control',arm='native_ar');R.inverse(b)\\nrows=[]\\nfor n in ast.walk(ast.parse(b['files']['input_preflight.py'])):\\n if isinstance(n,ast.For)and isinstance(n.target,ast.Tuple)and[n.id for n in n.target.elts]==['role','index','count']:rows=ast.literal_eval(n.iter)\\nassert [r[2]for r in rows]==[1024,1024,1]\\nprint(json.dumps(dict(native_arm_source_inverse=True,files=len(b['files']),actual_request_roles=rows,HTTP=False,NPU=False)))\\nq=p/'check_pin.py';raw=q.read_bytes();compile(raw,str(q),'exec');assert raw.endswith(b'\\\\n')and not raw.endswith(b'\\\\n\\\\n');print(json.dumps(dict(path=str(q),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())))\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": null,\n        \"durationMs\": 8766,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-000000000000132d\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"native_arm_source_inverse\\\": true, \\\"files\\\": 482, \\\"actual_request_roles\\\": [[\\\"warmup\\\", -1, 1024], [\\\"measured\\\", 0, 1024], [\\\"retirement-barrier\\\", 1, 1]], \\\"HTTP\\\": false, \\\"NPU\\\": false}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_formal_v10_input_pin_prepare_20261024/check_pin.py\\\", \\\"bytes\\\": 1692, \\\"sha256\\\": \\\"74a7c653125395ae3761c5192e10e014e8a81c423e53740279cf63b61caf9e86\\\"}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 740,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 740,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 740\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 740,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 740\n      }\n    },\n    \"traceId\": \"f589f035-4dd0-41b0-a4cb-7a444c89b63e\"\n  },\n  \"operationId\": \"exec-000000000000132d\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+        }
+      ],
+      "structuredContent": {
+        "action": null,
+        "canonicalDownloadUrl": null,
+        "canonicalUrl": null,
+        "dataPlane": null,
+        "downloadUrls": null,
+        "error": null,
+        "found": true,
+        "kind": "exec",
+        "ok": true,
+        "operation": {
+          "channel": "control",
+          "fallbackUsed": false,
+          "gatewayInstanceId": "tpc-rgw-01",
+          "logicalGatewayId": "tpc",
+          "ok": true,
+          "result": {
+            "found": true,
+            "lane": "job",
+            "ok": true,
+            "record": {
+              "args": [
+                "-I",
+                "-B",
+                "-c",
+                "import os,resource,sys,importlib.util,ast,json,hashlib\nfrom pathlib import Path\nassert 145 in os.sched_getaffinity(0);os.sched_setaffinity(0,{145});resource.setrlimit(resource.RLIMIT_AS,(512*2**20,512*2**20))\np=Path(\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_formal_v10_input_pin_prepare_20261024\")\ns=importlib.util.spec_from_file_location('formal_composer',p/'formal_runtime.py');R=importlib.util.module_from_spec(s);sys.modules[s.name]=R;s.loader.exec_module(R)\nb=R.render(p/'bole-v10-formal-native-control',arm='native_ar');R.inverse(b)\nrows=[]\nfor n in ast.walk(ast.parse(b['files']['input_preflight.py'])):\n if isinstance(n,ast.For)and isinstance(n.target,ast.Tuple)and[n.id for n in n.target.elts]==['role','index','count']:rows=ast.literal_eval(n.iter)\nassert [r[2]for r in rows]==[1024,1024,1]\nprint(json.dumps(dict(native_arm_source_inverse=True,files=len(b['files']),actual_request_roles=rows,HTTP=False,NPU=False)))\nq=p/'check_pin.py';raw=q.read_bytes();compile(raw,str(q),'exec');assert raw.endswith(b'\\n')and not raw.endswith(b'\\n\\n');print(json.dumps(dict(path=str(q),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())))\n"
+              ],
+              "cancelled": false,
+              "command": "/usr/bin/python3",
+              "cwd": null,
+              "durationMs": 8766,
+              "error": null,
+              "exitCode": 0,
+              "id": "exec-000000000000132d",
+              "lane": "job",
+              "state": "completed",
+              "stderr": "",
+              "stdout": "{\"native_arm_source_inverse\": true, \"files\": 482, \"actual_request_roles\": [[\"warmup\", -1, 1024], [\"measured\", 0, 1024], [\"retirement-barrier\", 1, 1]], \"HTTP\": false, \"NPU\": false}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_formal_v10_input_pin_prepare_20261024/check_pin.py\", \"bytes\": 1692, \"sha256\": \"74a7c653125395ae3761c5192e10e014e8a81c423e53740279cf63b61caf9e86\"}\n",
+              "timedOut": false
+            },
+            "state": "completed"
+          },
+          "rgwHttp": "http://agentweb:17888",
+          "rgwRouting": {
+            "attemptErrors": [],
+            "strategy": "peer-hot3-with-command-retry"
+          },
+          "routeDecision": "peer_direct",
+          "sessionId": null,
+          "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+          "targetRole": "upstream",
+          "timings": {
+            "awmcp": {
+              "attemptCount": 1,
+              "rgwRequestMs": 740,
+              "rgwResponseDecodeMs": 0,
+              "rgwResponseHeadersMs": 740,
+              "routeCacheHit": true,
+              "routeLookupMode": "command-cache",
+              "routeLookupMs": 0,
+              "totalMs": 740
+            },
+            "rgw": {
+              "dispatchMs": 0,
+              "journalMs": 0,
+              "peerRoundTripMs": 740,
+              "routeLookupMs": 0,
+              "totalMs": 740
+            }
+          },
+          "traceId": "f589f035-4dd0-41b0-a4cb-7a444c89b63e"
+        },
+        "operationId": "exec-000000000000132d",
+        "phase": "completed",
+        "previewUrls": null,
+        "progress": null,
+        "publicUrl": null,
+        "publicationId": null,
+        "result": null,
+        "retryable": false,
+        "schema": "agentweb.operation/v1",
+        "status": "completed",
+        "succeeded": true,
+        "terminal": true
+      },
+      "isError": false
+    }
+  ]
+}

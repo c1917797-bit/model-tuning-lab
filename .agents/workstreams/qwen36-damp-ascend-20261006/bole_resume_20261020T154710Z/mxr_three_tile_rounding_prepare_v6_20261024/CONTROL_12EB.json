@@ -1,0 +1,84 @@
+{
+  "action": null,
+  "canonicalDownloadUrl": null,
+  "canonicalUrl": null,
+  "dataPlane": null,
+  "downloadUrls": null,
+  "error": null,
+  "found": true,
+  "kind": "exec",
+  "ok": true,
+  "operation": {
+    "channel": "control",
+    "fallbackUsed": false,
+    "gatewayInstanceId": "tpc-rgw-01",
+    "logicalGatewayId": "tpc",
+    "ok": true,
+    "result": {
+      "found": true,
+      "lane": "job",
+      "ok": true,
+      "record": {
+        "args": [
+          "-I",
+          "-B",
+          "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/mxr_three_tile_rounding_prepare_v6_20261024/test_trace_scope.py"
+        ],
+        "cancelled": false,
+        "command": "/usr/bin/python3",
+        "cwd": "/opt/host/vnf/austinov/model-tuning-lab",
+        "durationMs": 2012,
+        "error": null,
+        "exitCode": 0,
+        "id": "exec-00000000000012eb",
+        "lane": "job",
+        "state": "completed",
+        "stderr": "",
+        "stdout": "{\"passed\": true, \"trace_contract\": {\"schema\": \"mxr.three-tile-actual-trace-contract/v1\", \"source\": {\"fixture\": true}, \"positive_calls\": 6, \"negative_controls\": 15, \"actual_classes\": true, \"complete_source_call_sites\": true, \"old_trace_preserved\": true, \"events\": 12, \"event_cap\": 64, \"record_cap\": 2048, \"NPU\": false, \"qualification\": false, \"performance\": false}, \"same_image_hook\": true, \"changed_files\": [\"event_host.py\", \"event_software.py\", \"prepare_successor.py\", \"successor_bindings.py\", \"rounding_capture.py\", \"rounding_stage_trace.py\", \"trace_contract_check.py\"], \"whole_source_inverse\": true, \"Torch\": false, \"NPU\": false, \"source_materialized\": false, \"refs\": [{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/mxr_three_tile_rounding_prepare_v6_20261024/prepare_successor.py\", \"bytes\": 14855, \"sha256\": \"165d11d36b53a4b3f1167381c8886eab5cb5ce9d8fc16bde5b142f04c6bee3f0\"}, {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/mxr_three_tile_rounding_prepare_v6_20261024/rounding_capture.py\", \"bytes\": 16311, \"sha256\": \"7ed380e8f254d4620f56321401434075c2863ecc725adf3c1d30bf18e5f2d412\"}, {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/mxr_three_tile_rounding_prepare_v6_20261024/test_rounding.py\", \"bytes\": 2711, \"sha256\": \"a184072346cd8b1b170cdcb36a79800c95e6993b3b7666e33ea3cc3b6c8b162b\"}, {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/mxr_three_tile_rounding_prepare_v6_20261024/test_trace_scope.py\", \"bytes\": 2798, \"sha256\": \"36ae57f4a800e0671912396487f8def6ce8c15bce6f97efc70c777bfccd6b01b\"}, {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/mxr_three_tile_rounding_prepare_v6_20261024/trace_contract_check.py\", \"bytes\": 5263, \"sha256\": \"d94e2952efd30c5242b837f72000f5fcbe0f251e87ed1571fc64cb4bd7cb5240\"}]}\n",
+        "timedOut": false
+      },
+      "state": "completed"
+    },
+    "rgwHttp": "http://agentweb:17888",
+    "rgwRouting": {
+      "attemptErrors": [],
+      "strategy": "peer-hot3-with-command-retry"
+    },
+    "routeDecision": "peer_direct",
+    "sessionId": null,
+    "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "targetRole": "upstream",
+    "timings": {
+      "awmcp": {
+        "attemptCount": 1,
+        "rgwRequestMs": 746,
+        "rgwResponseDecodeMs": 0,
+        "rgwResponseHeadersMs": 746,
+        "routeCacheHit": true,
+        "routeLookupMode": "command-cache",
+        "routeLookupMs": 0,
+        "totalMs": 746
+      },
+      "rgw": {
+        "dispatchMs": 0,
+        "journalMs": 0,
+        "peerRoundTripMs": 746,
+        "routeLookupMs": 0,
+        "totalMs": 746
+      }
+    },
+    "traceId": "0c61cc9a-3e56-45cf-9f52-2cbb71590b1f"
+  },
+  "operationId": "exec-00000000000012eb",
+  "phase": "completed",
+  "previewUrls": null,
+  "progress": null,
+  "publicUrl": null,
+  "publicationId": null,
+  "result": null,
+  "retryable": false,
+  "schema": "agentweb.operation/v1",
+  "status": "completed",
+  "succeeded": true,
+  "terminal": true
+}

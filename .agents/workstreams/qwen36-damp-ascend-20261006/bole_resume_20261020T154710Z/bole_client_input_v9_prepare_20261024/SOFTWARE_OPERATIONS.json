@@ -1,0 +1,195 @@
+{
+  "schema": "bole.V9-source-only-original-tool-responses/v1",
+  "actual_tokenizer_execution": false,
+  "NPU": false,
+  "operations": [
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-I\",\n          \"-B\",\n          \"-c\",\n          \"import os,resource,sys,importlib.util,json,hashlib,subprocess,ast\\nfrom pathlib import Path\\nassert 144 in os.sched_getaffinity(0);os.sched_setaffinity(0,{144});resource.setrlimit(resource.RLIMIT_AS,(512*2**20,512*2**20))\\np=Path(\\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024\\\")\\nsubprocess.run([sys.executable,'-I','-B',str(p/'check_input.py')],check=True)\\nq=subprocess.run([sys.executable,'-I','-B',str(p/'runtime_lossless_imports.py')],capture_output=True,text=True,check=True);assert json.loads(q.stdout)==dict(enabled=False,source_bound=False,NPU=False)\\nq=subprocess.run([sys.executable,'-I','-B',str(p/'runtime_lossless_imports.py'),'--prepare'],capture_output=True,text=True);assert q.returncode!=0 and 'new exact MAIN authority mandatory'in q.stderr\\ns=importlib.util.spec_from_file_location('_v9_final',p/'runtime_lossless_imports.py');M=importlib.util.module_from_spec(s);sys.modules[s.name]=M;s.loader.exec_module(M)\\nb=M.render();M.inverse(b)\\nprint(json.dumps(dict(files=len(b['files']),inverse=True,root=b['manifest']['root'],output=b['manifest']['output_root'],authority=b['manifest']['qualification_authority_ref'],default_OFF=True,missing_authority_rejected=True,actual_tokenizer_pending=True)))\\nfor f in p.iterdir():\\n if f.is_file():\\n  raw=f.read_bytes()\\n  if f.suffix=='.py':compile(raw,str(f),'exec')\\n  assert raw.endswith(b'\\\\n')and not raw.endswith(b'\\\\n\\\\n');assert all(line.rstrip()==line for line in raw.splitlines())\\n  print(json.dumps(dict(path=str(f),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())))\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": null,\n        \"durationMs\": 74301,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-0000000000001310\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"source_controls\\\": 7, \\\"whole_input_functions_unchanged\\\": true, \\\"real_generator_import\\\": true, \\\"actual_tokenizer_execution\\\": false, \\\"pending\\\": \\\"same-image original120-second CPU child; full42-case generation\\\", \\\"NPU\\\": false}\\n{\\\"files\\\": 462, \\\"inverse\\\": true, \\\"root\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/prepared-source-short8-v9\\\", \\\"output\\\": \\\"/opt/host/vnf/austinov/run-bole32k-lossless-client-input-short8-v9-20261024\\\", \\\"authority\\\": null, \\\"default_OFF\\\": true, \\\"missing_authority_rejected\\\": true, \\\"actual_tokenizer_pending\\\": true}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/adapt_input_preflight.py\\\", \\\"bytes\\\": 3152, \\\"sha256\\\": \\\"4d35ac101c6384e63ad3bf76cce91e85406cf121d2911692d01aa7c2ecd157cb\\\"}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/input_preflight.py\\\", \\\"bytes\\\": 4283, \\\"sha256\\\": \\\"e761c74d40c6e8cda7be02214400e546e2ace3bbe8454341b5b30347ba6a04ab\\\"}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/runtime_lossless_imports.py\\\", \\\"bytes\\\": 11588, \\\"sha256\\\": \\\"2495988e656330a8bb50c9f4bd4912faa58a77743cbf4497a5c0730bd0f846b1\\\"}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/check_input.py\\\", \\\"bytes\\\": 2858, \\\"sha256\\\": \\\"4b855ad75a11090fc2f0d5e5db617ae5236c917fee884259566409aa622e6460\\\"}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/README.md\\\", \\\"bytes\\\": 2441, \\\"sha256\\\": \\\"172f236a52c12abdf555ff7de7eba9fce42938fcd5086966d2ff447014a68239\\\"}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"http://agentweb:17888\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 414,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 414,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 414\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 414,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 414\n      }\n    },\n    \"traceId\": \"4b96f96c-7ced-44ee-99c1-1da586b8ae37\"\n  },\n  \"operationId\": \"exec-0000000000001310\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+        }
+      ],
+      "structuredContent": {
+        "action": null,
+        "canonicalDownloadUrl": null,
+        "canonicalUrl": null,
+        "dataPlane": null,
+        "downloadUrls": null,
+        "error": null,
+        "found": true,
+        "kind": "exec",
+        "ok": true,
+        "operation": {
+          "channel": "control",
+          "fallbackUsed": false,
+          "gatewayInstanceId": "tpc-rgw-01",
+          "logicalGatewayId": "tpc",
+          "ok": true,
+          "result": {
+            "found": true,
+            "lane": "job",
+            "ok": true,
+            "record": {
+              "args": [
+                "-I",
+                "-B",
+                "-c",
+                "import os,resource,sys,importlib.util,json,hashlib,subprocess,ast\nfrom pathlib import Path\nassert 144 in os.sched_getaffinity(0);os.sched_setaffinity(0,{144});resource.setrlimit(resource.RLIMIT_AS,(512*2**20,512*2**20))\np=Path(\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024\")\nsubprocess.run([sys.executable,'-I','-B',str(p/'check_input.py')],check=True)\nq=subprocess.run([sys.executable,'-I','-B',str(p/'runtime_lossless_imports.py')],capture_output=True,text=True,check=True);assert json.loads(q.stdout)==dict(enabled=False,source_bound=False,NPU=False)\nq=subprocess.run([sys.executable,'-I','-B',str(p/'runtime_lossless_imports.py'),'--prepare'],capture_output=True,text=True);assert q.returncode!=0 and 'new exact MAIN authority mandatory'in q.stderr\ns=importlib.util.spec_from_file_location('_v9_final',p/'runtime_lossless_imports.py');M=importlib.util.module_from_spec(s);sys.modules[s.name]=M;s.loader.exec_module(M)\nb=M.render();M.inverse(b)\nprint(json.dumps(dict(files=len(b['files']),inverse=True,root=b['manifest']['root'],output=b['manifest']['output_root'],authority=b['manifest']['qualification_authority_ref'],default_OFF=True,missing_authority_rejected=True,actual_tokenizer_pending=True)))\nfor f in p.iterdir():\n if f.is_file():\n  raw=f.read_bytes()\n  if f.suffix=='.py':compile(raw,str(f),'exec')\n  assert raw.endswith(b'\\n')and not raw.endswith(b'\\n\\n');assert all(line.rstrip()==line for line in raw.splitlines())\n  print(json.dumps(dict(path=str(f),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())))\n"
+              ],
+              "cancelled": false,
+              "command": "/usr/bin/python3",
+              "cwd": null,
+              "durationMs": 74301,
+              "error": null,
+              "exitCode": 0,
+              "id": "exec-0000000000001310",
+              "lane": "job",
+              "state": "completed",
+              "stderr": "",
+              "stdout": "{\"source_controls\": 7, \"whole_input_functions_unchanged\": true, \"real_generator_import\": true, \"actual_tokenizer_execution\": false, \"pending\": \"same-image original120-second CPU child; full42-case generation\", \"NPU\": false}\n{\"files\": 462, \"inverse\": true, \"root\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/prepared-source-short8-v9\", \"output\": \"/opt/host/vnf/austinov/run-bole32k-lossless-client-input-short8-v9-20261024\", \"authority\": null, \"default_OFF\": true, \"missing_authority_rejected\": true, \"actual_tokenizer_pending\": true}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/adapt_input_preflight.py\", \"bytes\": 3152, \"sha256\": \"4d35ac101c6384e63ad3bf76cce91e85406cf121d2911692d01aa7c2ecd157cb\"}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/input_preflight.py\", \"bytes\": 4283, \"sha256\": \"e761c74d40c6e8cda7be02214400e546e2ace3bbe8454341b5b30347ba6a04ab\"}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/runtime_lossless_imports.py\", \"bytes\": 11588, \"sha256\": \"2495988e656330a8bb50c9f4bd4912faa58a77743cbf4497a5c0730bd0f846b1\"}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/check_input.py\", \"bytes\": 2858, \"sha256\": \"4b855ad75a11090fc2f0d5e5db617ae5236c917fee884259566409aa622e6460\"}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/README.md\", \"bytes\": 2441, \"sha256\": \"172f236a52c12abdf555ff7de7eba9fce42938fcd5086966d2ff447014a68239\"}\n",
+              "timedOut": false
+            },
+            "state": "completed"
+          },
+          "rgwHttp": "http://agentweb:17888",
+          "rgwRouting": {
+            "attemptErrors": [],
+            "strategy": "peer-hot3-with-command-retry"
+          },
+          "routeDecision": "peer_direct",
+          "sessionId": null,
+          "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+          "targetRole": "upstream",
+          "timings": {
+            "awmcp": {
+              "attemptCount": 1,
+              "rgwRequestMs": 414,
+              "rgwResponseDecodeMs": 0,
+              "rgwResponseHeadersMs": 414,
+              "routeCacheHit": true,
+              "routeLookupMode": "command-cache",
+              "routeLookupMs": 0,
+              "totalMs": 414
+            },
+            "rgw": {
+              "dispatchMs": 0,
+              "journalMs": 0,
+              "peerRoundTripMs": 414,
+              "routeLookupMs": 0,
+              "totalMs": 414
+            }
+          },
+          "traceId": "4b96f96c-7ced-44ee-99c1-1da586b8ae37"
+        },
+        "operationId": "exec-0000000000001310",
+        "phase": "completed",
+        "previewUrls": null,
+        "progress": null,
+        "publicUrl": null,
+        "publicationId": null,
+        "result": null,
+        "retryable": false,
+        "schema": "agentweb.operation/v1",
+        "status": "completed",
+        "succeeded": true,
+        "terminal": true
+      },
+      "isError": false
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"action\": null,\n  \"canonicalDownloadUrl\": null,\n  \"canonicalUrl\": null,\n  \"dataPlane\": null,\n  \"downloadUrls\": null,\n  \"error\": null,\n  \"found\": true,\n  \"kind\": \"exec\",\n  \"ok\": true,\n  \"operation\": {\n    \"channel\": \"control\",\n    \"fallbackUsed\": false,\n    \"gatewayInstanceId\": \"tpc-rgw-01\",\n    \"logicalGatewayId\": \"tpc\",\n    \"ok\": true,\n    \"result\": {\n      \"found\": true,\n      \"lane\": \"job\",\n      \"ok\": true,\n      \"record\": {\n        \"args\": [\n          \"-I\",\n          \"-B\",\n          \"-c\",\n          \"import os,resource,sys,importlib.util,json,hashlib\\nfrom pathlib import Path\\nassert 144 in os.sched_getaffinity(0);os.sched_setaffinity(0,{144});resource.setrlimit(resource.RLIMIT_AS,(512*2**20,512*2**20))\\np=Path(\\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024\\\")\\ns=importlib.util.spec_from_file_location('_v9_schema_final',p/'runtime_lossless_imports.py');M=importlib.util.module_from_spec(s);sys.modules[s.name]=M;s.loader.exec_module(M)\\nb=M.render();M.inverse(b)\\nprint(json.dumps(dict(files=len(b['files']),whole_inverse=True,actual_tokenizer_pending=True,actual_schema_validation_pending=True,authority=b['manifest']['qualification_authority_ref'],NPU=False)))\\nfor f in p.iterdir():\\n if f.is_file():\\n  raw=f.read_bytes()\\n  if f.suffix=='.py':compile(raw,str(f),'exec')\\n  assert raw.endswith(b'\\\\n')and not raw.endswith(b'\\\\n\\\\n');assert all(line.rstrip()==line for line in raw.splitlines())\\n  print(json.dumps(dict(path=str(f),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())))\\n\"\n        ],\n        \"cancelled\": false,\n        \"command\": \"/usr/bin/python3\",\n        \"cwd\": null,\n        \"durationMs\": 73921,\n        \"error\": null,\n        \"exitCode\": 0,\n        \"id\": \"exec-0000000000001313\",\n        \"lane\": \"job\",\n        \"state\": \"completed\",\n        \"stderr\": \"\",\n        \"stdout\": \"{\\\"files\\\": 462, \\\"whole_inverse\\\": true, \\\"actual_tokenizer_pending\\\": true, \\\"actual_schema_validation_pending\\\": true, \\\"authority\\\": null, \\\"NPU\\\": false}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/adapt_input_preflight.py\\\", \\\"bytes\\\": 3152, \\\"sha256\\\": \\\"4d35ac101c6384e63ad3bf76cce91e85406cf121d2911692d01aa7c2ecd157cb\\\"}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/input_preflight.py\\\", \\\"bytes\\\": 5374, \\\"sha256\\\": \\\"b536ecb15442e328f3bde3d7de4f7ba886d56d3fa38f0398ec5fdd6ad4b730af\\\"}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/runtime_lossless_imports.py\\\", \\\"bytes\\\": 11588, \\\"sha256\\\": \\\"2495988e656330a8bb50c9f4bd4912faa58a77743cbf4497a5c0730bd0f846b1\\\"}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/check_input.py\\\", \\\"bytes\\\": 2858, \\\"sha256\\\": \\\"4b855ad75a11090fc2f0d5e5db617ae5236c917fee884259566409aa622e6460\\\"}\\n{\\\"path\\\": \\\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/README.md\\\", \\\"bytes\\\": 2441, \\\"sha256\\\": \\\"172f236a52c12abdf555ff7de7eba9fce42938fcd5086966d2ff447014a68239\\\"}\\n\",\n        \"timedOut\": false\n      },\n      \"state\": \"completed\"\n    },\n    \"rgwHttp\": \"https://agentweb-tpc.yxsbase.win\",\n    \"rgwRouting\": {\n      \"attemptErrors\": [],\n      \"strategy\": \"peer-hot3-with-command-retry\"\n    },\n    \"routeDecision\": \"peer_direct\",\n    \"sessionId\": null,\n    \"targetPeerId\": \"lgw_a6109c51076a4a2c9d2674ca5a8704a0\",\n    \"targetRole\": \"upstream\",\n    \"timings\": {\n      \"awmcp\": {\n        \"attemptCount\": 1,\n        \"rgwRequestMs\": 1009,\n        \"rgwResponseDecodeMs\": 0,\n        \"rgwResponseHeadersMs\": 1008,\n        \"routeCacheHit\": true,\n        \"routeLookupMode\": \"command-cache\",\n        \"routeLookupMs\": 0,\n        \"totalMs\": 1009\n      },\n      \"rgw\": {\n        \"dispatchMs\": 0,\n        \"journalMs\": 0,\n        \"peerRoundTripMs\": 416,\n        \"routeLookupMs\": 0,\n        \"totalMs\": 416\n      }\n    },\n    \"traceId\": \"1b6c7750-1373-44f9-88a8-5e1bf73e191b\"\n  },\n  \"operationId\": \"exec-0000000000001313\",\n  \"phase\": \"completed\",\n  \"previewUrls\": null,\n  \"progress\": null,\n  \"publicUrl\": null,\n  \"publicationId\": null,\n  \"result\": null,\n  \"retryable\": false,\n  \"schema\": \"agentweb.operation/v1\",\n  \"status\": \"completed\",\n  \"succeeded\": true,\n  \"terminal\": true\n}"
+        }
+      ],
+      "structuredContent": {
+        "action": null,
+        "canonicalDownloadUrl": null,
+        "canonicalUrl": null,
+        "dataPlane": null,
+        "downloadUrls": null,
+        "error": null,
+        "found": true,
+        "kind": "exec",
+        "ok": true,
+        "operation": {
+          "channel": "control",
+          "fallbackUsed": false,
+          "gatewayInstanceId": "tpc-rgw-01",
+          "logicalGatewayId": "tpc",
+          "ok": true,
+          "result": {
+            "found": true,
+            "lane": "job",
+            "ok": true,
+            "record": {
+              "args": [
+                "-I",
+                "-B",
+                "-c",
+                "import os,resource,sys,importlib.util,json,hashlib\nfrom pathlib import Path\nassert 144 in os.sched_getaffinity(0);os.sched_setaffinity(0,{144});resource.setrlimit(resource.RLIMIT_AS,(512*2**20,512*2**20))\np=Path(\"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024\")\ns=importlib.util.spec_from_file_location('_v9_schema_final',p/'runtime_lossless_imports.py');M=importlib.util.module_from_spec(s);sys.modules[s.name]=M;s.loader.exec_module(M)\nb=M.render();M.inverse(b)\nprint(json.dumps(dict(files=len(b['files']),whole_inverse=True,actual_tokenizer_pending=True,actual_schema_validation_pending=True,authority=b['manifest']['qualification_authority_ref'],NPU=False)))\nfor f in p.iterdir():\n if f.is_file():\n  raw=f.read_bytes()\n  if f.suffix=='.py':compile(raw,str(f),'exec')\n  assert raw.endswith(b'\\n')and not raw.endswith(b'\\n\\n');assert all(line.rstrip()==line for line in raw.splitlines())\n  print(json.dumps(dict(path=str(f),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())))\n"
+              ],
+              "cancelled": false,
+              "command": "/usr/bin/python3",
+              "cwd": null,
+              "durationMs": 73921,
+              "error": null,
+              "exitCode": 0,
+              "id": "exec-0000000000001313",
+              "lane": "job",
+              "state": "completed",
+              "stderr": "",
+              "stdout": "{\"files\": 462, \"whole_inverse\": true, \"actual_tokenizer_pending\": true, \"actual_schema_validation_pending\": true, \"authority\": null, \"NPU\": false}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/adapt_input_preflight.py\", \"bytes\": 3152, \"sha256\": \"4d35ac101c6384e63ad3bf76cce91e85406cf121d2911692d01aa7c2ecd157cb\"}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/input_preflight.py\", \"bytes\": 5374, \"sha256\": \"b536ecb15442e328f3bde3d7de4f7ba886d56d3fa38f0398ec5fdd6ad4b730af\"}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/runtime_lossless_imports.py\", \"bytes\": 11588, \"sha256\": \"2495988e656330a8bb50c9f4bd4912faa58a77743cbf4497a5c0730bd0f846b1\"}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/check_input.py\", \"bytes\": 2858, \"sha256\": \"4b855ad75a11090fc2f0d5e5db617ae5236c917fee884259566409aa622e6460\"}\n{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_client_input_v9_prepare_20261024/README.md\", \"bytes\": 2441, \"sha256\": \"172f236a52c12abdf555ff7de7eba9fce42938fcd5086966d2ff447014a68239\"}\n",
+              "timedOut": false
+            },
+            "state": "completed"
+          },
+          "rgwHttp": "https://agentweb-tpc.yxsbase.win",
+          "rgwRouting": {
+            "attemptErrors": [],
+            "strategy": "peer-hot3-with-command-retry"
+          },
+          "routeDecision": "peer_direct",
+          "sessionId": null,
+          "targetPeerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+          "targetRole": "upstream",
+          "timings": {
+            "awmcp": {
+              "attemptCount": 1,
+              "rgwRequestMs": 1009,
+              "rgwResponseDecodeMs": 0,
+              "rgwResponseHeadersMs": 1008,
+              "routeCacheHit": true,
+              "routeLookupMode": "command-cache",
+              "routeLookupMs": 0,
+              "totalMs": 1009
+            },
+            "rgw": {
+              "dispatchMs": 0,
+              "journalMs": 0,
+              "peerRoundTripMs": 416,
+              "routeLookupMs": 0,
+              "totalMs": 416
+            }
+          },
+          "traceId": "1b6c7750-1373-44f9-88a8-5e1bf73e191b"
+        },
+        "operationId": "exec-0000000000001313",
+        "phase": "completed",
+        "previewUrls": null,
+        "progress": null,
+        "publicUrl": null,
+        "publicationId": null,
+        "result": null,
+        "retryable": false,
+        "schema": "agentweb.operation/v1",
+        "status": "completed",
+        "succeeded": true,
+        "terminal": true
+      },
+      "isError": false
+    }
+  ]
+}

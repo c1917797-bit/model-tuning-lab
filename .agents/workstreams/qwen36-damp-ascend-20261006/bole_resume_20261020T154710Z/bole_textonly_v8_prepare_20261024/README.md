@@ -1,0 +1,13 @@
+# BOLE V8 common text-only configuration (prepared only)
+
+Native V7 failed during multimodal profiling before any model request or BOLE numerical result. The asynchronous AICore timeout at a visual .to call does not identify the first failing kernel. This packet is a common workload configuration correction, not a paper performance gain.
+
+Actual stopped owned CID 5af9234a3df9a9aaa59f70be9d4e40500e6e5f0fd959cea3b27c19ee39ef5bd3 was read only. Its v0.23 arg_utils:1211 registers --limit-mm-per-prompt using MultiModalConfig limit_per_prompt parsing. Actual config get_limit_per_prompt:310-324 returns count0. Registry supports_multimodal_inputs:125-138 returns false when all supported modalities have zero quotas, except explicitly enabled multimodal embeddings. GPU runner binds supports_mm_inputs from this registry:492; profile_run:6170 gates visual warmup, with embed_multimodal at6216 inside the positive encoder-budget branch. Ascend profile_run delegates the inherited profiling path. No upstream runtime file is modified.
+
+adapt_textonly.py changes only the common paired_argv function and actual preflight114 EngineArgs seam, plus a source-owned helper. Both dense/native-AR and candidate receive --limit-mm-per-prompt '{"image":0,"video":0}'. The original source-pinned MTP spec is untouched. preflight checks actual serve parser args, AsyncEngineArgs, and real current-image MultiModalConfig quotas, and writes their values into the parser receipt. Same-image parser execution remains pending; host controls do not fake its success.
+
+runtime_lossless_imports.py retains V7 CPUprecreate/release and guard diagnostics. New exclusive source is prepared-source-short8-v8; output is /opt/host/vnf/austinov/run-bole32k-lossless-textonly-short8-v8-20261024. Input32768/two generations/output8, model/TP4/physical4-7, math/oracles/state evidence/resources/cutoff remain unchanged. No approval, materialization, owner, Docker exec/start, or NPU operation was performed.
+
+Device-free narrow controls: python3 -I -B check_textonly.py --check. Complete 460-source render/inverse/compile ran in12c5; its later argv fixture incorrectly guessed the inherited MTP spec and was rejected, retained as a fixture failure. New check derives the real spec from the actual profile constant. Do not call this a same-image/parser25 PASS.
+
+MAIN next: review exact new source, source-specific ticket, runtime_lossless_imports.py --prepare, generated producer --bind and source-audit, original Devices[] preflight (including real parsed zero-quota assertion), then one admitted TP4 native/candidate short8 run. Default no ticket rejects. No25/46 full suite was rerun here. HYPIC historical CLI equivalence was not established and is not used as current v0.23 proof.
