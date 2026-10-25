@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R36_R2_THREE_ARM_SUPPORTED_BOUNDED_EFFECT_RELEASED_R37_FORMAL_PENDING",
+  "execution_state": "R37_R2_HOST19_AUTOMATIC_IMAGE_READY_NO_DEVICE",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -440,7 +440,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "R36 all3 independent audits and raw replay passed8.5622pct same-HYPIC diagnostic effect/drift0.8884pct. Execute R37_FINAL_SOURCE_FORMAL_FIRST_PAIR_PLAN_20261025.json: narrow actual formal delivery/launch/auditor gates then new same-source G1/G3 full40/c16/fixed1024. No R30 control reuse or profile64 extrapolation; fixed06:36:27UTC.",
+  "next_action": "Commit/publish coherent source/readiness, then fresh ma/direct/source/model/image/input/newroot/physical0-3/102ports/cache/budget admission and G1 only. Independent original40/native/physical/live-release audit before fresh G3.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -479,9 +479,9 @@
   },
   "publication": {
     "state": "liveverified_previous_checkpoint",
-    "published_commit": "312f3b9b0b4be078e634b634635bbf8b595c86f3",
+    "published_commit": "c3f09b656e78d759a087b4e548dd2c8de2c26eb3",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "scope": "Previous published B1 valid/A2 tracking checkpoint; next local checkpoint records three-arm diagnostic result, not formal/native/fullpaper acceptance.",
+    "scope": "Previous liveverified R36 bounded effect and R37 plan. New local HOST/readiness source checkpoint is not new device/formal speed acceptance.",
     "tls_verification": "Per-command OpenSSL sslVerify=true. Desktop unrestricted approved Git route resolves DNS-thread failure seen only in restricted process; no TLS weakening."
   },
   "math_reference": {
@@ -1326,9 +1326,23 @@
     "raw_decision_sha256": "d8059a624df7816915b5bab8fba46247b4fdda49d7940537b2566f06f977083c"
   },
   "r37_final_source_formal": {
-    "state": "PLANNED_NOT_IMPLEMENTED_OR_DEVICE_ACCEPTED",
+    "state": "R37_R2_HOST19_AUTOMATIC_IMAGE_READY_NO_DEVICE",
     "plan": "R37_FINAL_SOURCE_FORMAL_FIRST_PAIR_PLAN_20261025.json",
     "active_controller": null,
-    "full_goal_complete": false
+    "full_goal_complete": false,
+    "readiness": "R37_HOST_IMAGE_READINESS_20261025.json",
+    "host_tests": 19,
+    "contracts": {
+      "G1": "FORMAL_STEP_R37_G1_R2_20261025_CONTRACT.json",
+      "G3": "FORMAL_STEP_R37_G3_R2_20261025_CONTRACT.json"
+    },
+    "r1_closed_contracts": [
+      "FORMAL_STEP_R37_G1_R1_20261025_CONTRACT.json",
+      "FORMAL_STEP_R37_G3_R1_20261025_CONTRACT.json"
+    ],
+    "controller": "host_audits/r37_formal_controller.py",
+    "auditor": "host_audits/r37_formal_audit.py",
+    "common_source_bindings": 454,
+    "runtime_python_sources": 434
   }
 }

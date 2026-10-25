@@ -1,0 +1,170 @@
+{
+  "schema": "hypic-r37-host-image-readiness/v1",
+  "state": "HOST19_AND_ACTUAL_AUTOMATIC_IMAGE_STARTUP_PASS_NO_NPU_YET",
+  "source_sha256": {
+    "FORMAL_STEP_R37_G1_CONFIG_20261025.json": "4e4eae80ffa895613a91287b742d57bf76f3e74e3e1b899280858689b90b3176",
+    "FORMAL_STEP_R37_G1_MANIFEST_20261025.json": "969fe4c78af1e426824397c8f4f6262975617ee60b6c1e58d851655a64d989d8",
+    "FORMAL_STEP_R37_G1_R1_20261025_CONTRACT.json": "0dcd38ea8cef1a4432ae8625bd498305d11f1e017e56fd59da55d62ffeff2dad",
+    "FORMAL_STEP_R37_G1_R2_20261025_CONTRACT.json": "46ac4e1ab18c6c80dc602ab825f2e13b353a0b3d543866913ce456b22442fa66",
+    "FORMAL_STEP_R37_G3_CONFIG_20261025.json": "271e158c9755d344dd28a1111c20c573404e46c2007d3435bae9e7b180274a1e",
+    "FORMAL_STEP_R37_G3_MANIFEST_20261025.json": "14ab030b1ce99e9affd9b4b29fdf4a831cb4931a2bf5ff2afc8109bd71af1e58",
+    "FORMAL_STEP_R37_G3_R1_20261025_CONTRACT.json": "a0a102479e73590006b164b3cd901eb072806d9b4c99b9504adc4d258c880258",
+    "FORMAL_STEP_R37_G3_R2_20261025_CONTRACT.json": "c1b46785eb6b734e0b93daadebceca7fe324126d2ed598acd8160bb11c82b253",
+    "host_audits/r37_formal_audit.py": "4c24fb8b335d767a0bb2c23fd825145e4629eda4c60636c049403326eb3409e8",
+    "host_audits/r37_formal_controller.py": "b1d0c6613c9660caf1fb961e74b2fef05cd517348a8c4d5f8d92ed3e05ed2e24",
+    "host_audits/r37_formal_policy.py": "235f7905040713ea36b150fac2a989dfc667e276a8250bd230803fbea3fd9cc1",
+    "host_audits/r37_launch_capsule.py": "ef5dad73925a56500d42ac056fbabfdc719adcaab878b0d91aa4155b8e108f47",
+    "host_audits/test_r37_formal.py": "be39663556875fa206378ef13292feee96f168d3855889d52f638bb714051375"
+  },
+  "common_sources": 454,
+  "runtime_python_sources": 434,
+  "runtime_python_unchanged_from_R36": true,
+  "formal_checks": {
+    "G1": {
+      "active_manifest_sha256": "969fe4c78af1e426824397c8f4f6262975617ee60b6c1e58d851655a64d989d8",
+      "configuration_valid": true,
+      "controller_sha256": "b1d0c6613c9660caf1fb961e74b2fef05cd517348a8c4d5f8d92ed3e05ed2e24",
+      "device_run": false,
+      "graph_runtime": {
+        "candidate_enabled": false,
+        "capture_sizes": [
+          1,
+          4,
+          8,
+          16,
+          24,
+          32
+        ],
+        "compilation_mode": 3,
+        "cudagraph_mode": "FULL_DECODE_ONLY",
+        "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+        "official_debug_logging": false,
+        "profile": "selective-prefill-native-decode-v1"
+      },
+      "policy": {
+        "algorithm_on": false,
+        "group": "G1",
+        "pdc_on": false
+      },
+      "prerequisite": {
+        "historical_timing_reused": false,
+        "python_sources": 434,
+        "r33_observer_removed_only": true,
+        "report": "R36_THREE_ARM_DECISION_20261025.json",
+        "runtime_python_identical_to_R36": true,
+        "scope": "R36 bounded NPU math/graph/durability evidence; not formal native speed or full task quality",
+        "sha256": "10b536ce5cc174e98fd112badd73a8e24bafc11e7068d1af1604ba1af1606a7e"
+      },
+      "source_bindings": 454
+    },
+    "G3": {
+      "active_manifest_sha256": "14ab030b1ce99e9affd9b4b29fdf4a831cb4931a2bf5ff2afc8109bd71af1e58",
+      "configuration_valid": true,
+      "controller_sha256": "b1d0c6613c9660caf1fb961e74b2fef05cd517348a8c4d5f8d92ed3e05ed2e24",
+      "device_run": false,
+      "graph_runtime": {
+        "candidate_enabled": true,
+        "capture_sizes": [
+          1,
+          4,
+          8,
+          16,
+          24,
+          32
+        ],
+        "compilation_mode": 3,
+        "cudagraph_mode": "FULL_DECODE_ONLY",
+        "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+        "official_debug_logging": false,
+        "profile": "selective-prefill-native-decode-v1"
+      },
+      "policy": {
+        "algorithm_on": true,
+        "group": "G3",
+        "pdc_on": false
+      },
+      "prerequisite": {
+        "historical_timing_reused": false,
+        "python_sources": 434,
+        "r33_observer_removed_only": true,
+        "report": "R36_THREE_ARM_DECISION_20261025.json",
+        "runtime_python_identical_to_R36": true,
+        "scope": "R36 bounded NPU math/graph/durability evidence; not formal native speed or full task quality",
+        "sha256": "10b536ce5cc174e98fd112badd73a8e24bafc11e7068d1af1604ba1af1606a7e"
+      },
+      "source_bindings": 454
+    }
+  },
+  "host_tests": {
+    "operation": "exec-00000000000019ca",
+    "passed": 19,
+    "actual_constructor_tests": true
+  },
+  "initial_host_failure": {
+    "operation": "exec-00000000000019c8",
+    "passed": 14,
+    "failed": 5,
+    "cause": "New HOST read helper called json.loads on the retained reader's already parsed dict. Fixed before any model/device allocation; not an algorithm failure.",
+    "old_policy_sha256": "f2674c77a016fecd8b56d6829e93dcc8dceacf72dc19b677ff43a49641287f23",
+    "repair": {
+      "before": "def read(root,name):return json.loads(old.native._read(old.native._inside(root,name)))",
+      "after": "def read(root,name):return old.native._read(old.native._inside(root,name))"
+    },
+    "r1_contracts_closed_not_launched": true
+  },
+  "actual_launch_capsules": {
+    "operation": "exec-00000000000019cb",
+    "G1": {
+      "source_bindings": 454,
+      "algorithm_environment": [],
+      "probe_mount": false,
+      "device_allocation": false
+    },
+    "G3": {
+      "source_bindings": 454,
+      "automatic_environment": [
+        "PYTHONPATH=/probe/step_durability_r36:/probe:/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:/usr/local/Ascend/ascend-toolkit/latest/opp/built-in/op_impl/ai_core/tbe:/usr/local/Ascend/cann-9.1.0/python/site-packages:/usr/local/Ascend/cann-9.1.0/opp/built-in/op_impl/ai_core/tbe:",
+        "INDEPENDENT_CACHE_DIAGNOSTIC=1",
+        "INDEPENDENT_DIAGNOSTIC_ROOT=/scratch/diagnostics",
+        "INDEPENDENT_DIAGNOSTIC_BATCHES=2",
+        "INDEPENDENT_GRAPH_HYPIC=1",
+        "INDEPENDENT_GRAPH_MANIFEST=/probe/FORMAL_STEP_R37_G3_MANIFEST_20261025.json",
+        "INDEPENDENT_GRAPH_RAW=/scratch/diagnostics",
+        "INDEPENDENT_EVIDENCE_STEP_DURABILITY=1",
+        "INDEPENDENT_EVIDENCE_IO_BUDGET=0",
+        "INDEPENDENT_PREFIX_TERMINAL_ONLY=0"
+      ],
+      "device_allocation": false
+    },
+    "scope": "Actual original base constructor intercepted at Docker run. Physical/port telemetry mocked only here; no admission evidence."
+  },
+  "pinned_image": {
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "G1": {
+      "operation": "exec-00000000000019cc",
+      "automatic_native_algorithm_absent": true,
+      "probe_mount": false
+    },
+    "G3": {
+      "operation": "exec-00000000000019cd",
+      "automatic_sitecustomize": "/probe/step_durability_r36/sitecustomize.py",
+      "actual_bound_manifest": "FORMAL_STEP_R37_G3_MANIFEST_20261025.json",
+      "step_durability": true,
+      "r33_observer_absent": true,
+      "owned_importer_install_restore": true
+    },
+    "npu_devices_exposed": false,
+    "native_worker_or_model_executed": false
+  },
+  "existing_actual_writer_fence_failure_and_defaultoff_controls": "Unchanged R36 source hashes and accepted HOST51/image1933/three-arm NPU proofs reused; not rerun without a new concern.",
+  "mst_structure": "PASS: Maintainer Skill Tree structure is valid (29 skills)",
+  "mst_functional_acceptance": false,
+  "contracts": {
+    "G1": "FORMAL_STEP_R37_G1_R2_20261025_CONTRACT.json",
+    "G3": "FORMAL_STEP_R37_G3_R2_20261025_CONTRACT.json"
+  },
+  "next": "Commit/publish coherent source/readiness, then fresh ma/direct/source/model/image/input/newroot/physical0-3/102ports/cache/budget admission and G1 only. Independent original40/native/physical/live-release audit before fresh G3.",
+  "absolute_stop_utc": "2026-10-26T06:36:27Z",
+  "scope": "HOST/source/actual launch/pinned-image CPU startup only. No new NPU acceptance, formal native speed, full quality/lifecycle or wholepaper claim.",
+  "full_goal_complete": false
+}
