@@ -1,0 +1,19 @@
+{
+  "schema": "hypic-r32-decision-host-readiness/v1",
+  "state": "CPU_ONLY_NOT_CAUSAL_ACCEPTANCE",
+  "test_operation": "exec-0000000000001726",
+  "passed": 6,
+  "decision_script": "host_audits/r32_gate_cast_decision.py",
+  "tests": "host_audits/test_r32_gate_cast_decision.py",
+  "required": "All A1/B1/A2 exact contracts, prior independent live-release audits, fresh raw/source replay, matching426runtime/source/protocol, exactly one config boolean difference.",
+  "formula": {
+    "control_mean": "(A1+A2)/2",
+    "control_relative_drift_percent": "abs(A2-A1)/control_mean*100",
+    "B_gain_percent": "(1-B1/control_mean)*100",
+    "drift_limit": 5,
+    "screen_gain": 5
+  },
+  "boundary": "A miniature diagnostic result is not formal1024 repeats, fullpairedquality, lifecycle,29Skill functional acceptance or wholepaper success. Negative/inconclusive evidence retained; no automatic new-device retry.",
+  "active_controller": "exec-0000000000001725",
+  "source_frozen_during_run": true
+}

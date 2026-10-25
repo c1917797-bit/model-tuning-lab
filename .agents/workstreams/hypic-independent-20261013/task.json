@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R32_GATE_CAST_SINGLE_VARIABLE_HOST_READY",
+  "execution_state": "R32_A1_ORIGINAL_GATE_CAST_CONTROL_RUNNING_EXACT1725",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -425,7 +425,7 @@
     "service_ports": [
       8233
     ],
-    "state": "No owned NPU job. R31 released independently; CPU-only exporter/archive complete. R32A1/B1/A2notstarted. Current source new422/common426, reprove physical0-3 andports/newrootbeforelaunch. Fixedstop18:07:17UTC."
+    "state": "R32 A1 exact1725 live on originalma a6109; immutable rawgate-cast-r32-a1-20261025; onlyphysical0-3/8233. Do not startB1/A2 or change426runtime/commonbindings until exactterminal/independentlive-releaseaudit. Stop18:07:17UTC."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -440,7 +440,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Publish checkpoint then fresh ma/direct/source/model/image/input/physical0-3+ports/cache/newroot admission; start A1 only. Independent r32_gate_cast_audit.py must pass with live release before B1 then A2. No automatic retries on any failed/unknown unit.",
+  "next_action": "Poll exact1725 originalma and rawroot; terminal then independent host_audits/r32_gate_cast_audit.py --contract GATE_CAST_R32_A1_20261025_CONTRACT.json --live-release --output exclusiveexternalA1audit. Valid/released A1 only then fresh B1admission; no blind retries.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -496,7 +496,20 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": null,
+  "active_attempt": {
+    "state": "RUNNING_NOT_ACCEPTED",
+    "operation": "exec-0000000000001725",
+    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "connector": "awmcp",
+    "arm": "A1",
+    "contract": "GATE_CAST_R32_A1_20261025_CONTRACT.json",
+    "contract_sha256": "e161cd6fae08096ffe01f3dabcbf5dfad92a6d297bce5e84032f709e42a4ff3a",
+    "raw_root": "/cache/cch/hypic-independent-20261013/gate-cast-r32-a1-20261025",
+    "launch_checkpoint": "52527ccce224690e8d024930946caeac8f9da880",
+    "admission_operation": "exec-0000000000001724",
+    "observed_running_utc": "2026-10-25T14:59:25Z",
+    "rule": "Track exact original peer/handle/raw; timeout/unknown never restart. Runtime422/common426 and bound HOST tools frozen while live."
+  },
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
@@ -808,13 +821,26 @@
     ],
     "start_utc": "2026-10-25T06:07:17Z",
     "absolute_stop_utc": "2026-10-25T18:07:17Z",
-    "state": "R32_SINGLE_VARIABLE_HOST_READY",
+    "state": "R32_A1_ORIGINAL_GATE_CAST_CONTROL_RUNNING_EXACT1725",
     "plan": "R24_R2_RENEWAL_PLAN_20261025.json",
     "contracts": [
       "C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json",
       "C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json"
     ],
-    "active_controller": null,
+    "active_controller": {
+      "state": "RUNNING_NOT_ACCEPTED",
+      "operation": "exec-0000000000001725",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "connector": "awmcp",
+      "arm": "A1",
+      "contract": "GATE_CAST_R32_A1_20261025_CONTRACT.json",
+      "contract_sha256": "e161cd6fae08096ffe01f3dabcbf5dfad92a6d297bce5e84032f709e42a4ff3a",
+      "raw_root": "/cache/cch/hypic-independent-20261013/gate-cast-r32-a1-20261025",
+      "launch_checkpoint": "52527ccce224690e8d024930946caeac8f9da880",
+      "admission_operation": "exec-0000000000001724",
+      "observed_running_utc": "2026-10-25T14:59:25Z",
+      "rule": "Track exact original peer/handle/raw; timeout/unknown never restart. Runtime422/common426 and bound HOST tools frozen while live."
+    },
     "last_hypic_graph_controller": {
       "operation_id": "exec-000000000000160b",
       "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
@@ -854,7 +880,7 @@
       "observed_running_utc": "2026-10-25T07:37:26Z",
       "rule": "Track exact original peer and handle; timeout/missing requires raw and actual process inspection, never restart."
     },
-    "resource_lease": "No owned NPU job. R31 released independently; CPU-only exporter/archive complete. R32A1/B1/A2notstarted. Current source new422/common426, reprove physical0-3 andports/newrootbeforelaunch. Fixedstop18:07:17UTC.",
+    "resource_lease": "R32 A1 exact1725 live on originalma a6109; immutable rawgate-cast-r32-a1-20261025; onlyphysical0-3/8233. Do not startB1/A2 or change426runtime/commonbindings until exactterminal/independentlive-releaseaudit. Stop18:07:17UTC.",
     "scope": "Same full independent27B/physical0-3/TP4 C1/C2 three-stage goal; C3/dualTP2 excluded; original successful code not reused",
     "prior_failure": "R24_OFF_R1_ADMISSION_FAILURE_20261023.json",
     "prior_followup": "R24_WAIT_FOLLOWUP_TERMINAL_20261023.json remains immutable history",
@@ -924,7 +950,7 @@
       "G3_evidence": "R27_G3_GRAPH_CAPTURE_FAILURE_20261025.json",
       "G3_independent_audit": "exec-0000000000001628"
     },
-    "latest_confirmed_publication": "880c325f463a016828d23a3e2a24c025b7918a55",
+    "latest_confirmed_publication": "52527ccce224690e8d024930946caeac8f9da880",
     "pending_publication": {
       "checkpoint": "283de3b13c05042ed57ebe4cc90329454cab4b32",
       "evidence": "R24_R2_PUBLICATION_FAILURE_20261025.json",
@@ -950,7 +976,7 @@
     }
   },
   "r32_single_variable": {
-    "state": "HOST_READY_NOT_DEVICE_STARTED",
+    "state": "A1_RUNNING_NOT_ACCEPTED",
     "plan": "R32_MODEL_GUIDED_SINGLE_VARIABLE_PLAN_20261025.json",
     "primary_variable": "C1 short-boundary gate-cast placement only",
     "next": "Implement only the selected gate-cast placement switch, source-audit and focused exact-value controls; freeze new bounded integrated contracts. No unchanged negative12matrix, no new profile recapture for offline-parser problems.",
@@ -981,6 +1007,19 @@
         "raw_root": "/cache/cch/hypic-independent-20261013/gate-cast-r32-a2-20261025"
       }
     ],
-    "active_controller": null
+    "active_controller": {
+      "state": "RUNNING_NOT_ACCEPTED",
+      "operation": "exec-0000000000001725",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "connector": "awmcp",
+      "arm": "A1",
+      "contract": "GATE_CAST_R32_A1_20261025_CONTRACT.json",
+      "contract_sha256": "e161cd6fae08096ffe01f3dabcbf5dfad92a6d297bce5e84032f709e42a4ff3a",
+      "raw_root": "/cache/cch/hypic-independent-20261013/gate-cast-r32-a1-20261025",
+      "launch_checkpoint": "52527ccce224690e8d024930946caeac8f9da880",
+      "admission_operation": "exec-0000000000001724",
+      "observed_running_utc": "2026-10-25T14:59:25Z",
+      "rule": "Track exact original peer/handle/raw; timeout/unknown never restart. Runtime422/common426 and bound HOST tools frozen while live."
+    }
   }
 }

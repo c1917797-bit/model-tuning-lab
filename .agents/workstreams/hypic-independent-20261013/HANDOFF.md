@@ -1,3 +1,9 @@
+# CURRENT R32 A1 ORIGINAL-CAST CONTROL RUNNING EXACT1725
+
+Launchcheckpoint52527ccce224690e8d024930946caeac8f9da880 published/liveverified; freshdirectma admission1724at14:57:05UTC validates426common/422Python,source/model/image/input/newroot,physical0-3empty/noexternalbench/noownedcontroller/102portsbindable/cache5.04GB. Exact1725runningverified14:59:25UTC on ma a6109. Contract GATE_CAST_R32_A1_20261025_CONTRACT.json SHAe161cd6f..., raw/cache/cch/hypic-independent-20261013/gate-cast-r32-a1-20261025. Common observers/first-private-shape equality, A1 per-token gate casts; no profiler/PDC/guard/logging change.
+
+Track exact originalpeer/1725/raw; live or unclear neverrestart. Runtime422/common426/configs/manifests and bound HOSTdriver/auditor frozen. Terminal independently run r32_gate_cast_audit.py --contract SAME --live-release --output externalexclusiveA1audit. Requires16privatewarm+16measured64/fourworker48C1+16C2/fullprivatechanged-pathshadow/source/continuousphysical/exactrelease. Only valid/released A1thenfreshB1,thenA2. New unbound HOST decision/docs may advance while live; no runtime/prototype edits. R30negative/wholegoalunfinished/stop18:07:17UTC unchanged.
+
 # CURRENT R32 ONE-VARIABLE GATE-CAST EXPERIMENT HOST-READY, NOT STARTED
 
 Changed only gate conversion placement, exposed through default-off source-owned removable aliases in C1prefix/suffix. Common A/B observer and actual-first-shape private output/state equality vs retained per-token recurrence; finite/completion/evidence/fsync/PDC/graph unchanged. 26focused CPU controls171e PASS, actualTP4 HK4/HV12/DK128/DV128 confirmed from config69db4. Static1722 verifies all3newcontracts/sourceclosures/29structure/diff. New422runtimePython/common426bindings; originalR30/R31roots/425manifests preserved. R32_GATE_CAST_HOST_READINESS_20261025.json has exactbindings/contract hashes.
