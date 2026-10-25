@@ -1,3 +1,9 @@
+# CURRENT R34 A1 VALID/RELEASED; ENABLED B1 RUNNING EXACT1880
+
+A1old182fhandleexpiredafterterminal;exactraw1878provedresultvalid16HTTP/48warm,noerrors,exactCIDa13065b5...removed. Independent1879PASS16/16fourworkerhot,8privateNPUstates,actualwarmproofBEFOREtimer,309cleanisolation,432sources,liveexactrelease. Diagnosticcontrolmakespan117.112125610s,notspeedgain/formal1024. SummaryR34_A1_RENEWAL_AUDIT_20261025.json;originalindependentaudit/cache/cch/hypic-independent-20261013/r34-a1-renewal-independent-audit-r1-20261025.jsonSHA9ac60e6d....
+
+Freshma/direct187c19:09:44UTC:B1sources432/image/modelconfig+index/newroot/physical0-3empty/102portsfree/cache11.31GB. EnabledB1exactexec-0000000000001880RUNNINGconfirmed19:11:11UTC,originalma a6109,launchcheckpoint0dccc64990afa59168f0250db0fb7c465305def0;contractPREFIX_TERMINAL_R34_B1_RENEWAL_20261025_CONTRACT.jsonSHA016f2799...,raw/cache/cch/hypic-independent-20261013/prefix-terminal-r34-b1-renewal-20261025. Trackexacthandle/raw,nounknownrestart;boundruntime/HOSTfrozen. Onlyvalidindependentr34_prefix_terminal_audit.py--live-releaseafterB1terminalpermitsfreshA2.48warm/4rank8/39preproof/gatesunchanged.Windowends2026-10-26T06:36:27Z;fullgoalunfinished.
+
 # CURRENT R34 A1 CONTROL RUNNING EXACT182F IN RENEWED12H WINDOW
 
 Unboundnewhost_audits/r34_prefix_terminal_decision.pyreadsactualnewR34renewalcontractsandreplaysr34independentaudits;183aactualcontractpairing/commonwindow/onlyoneconfigbooleananddirectCLIimportPASS. R34_TRACKING_DECISION_READINESS_20261025.jsonbindshelperSHA. After3validlive-releaseauditsuse--a1-audit/--b1-audit/--a2-audit--outputnewexclusivepathfromworkstreamcwd. OriginalR33decision/rootstayshistorical. No432runtime/boundHOSTchangesornewdeviceallocationforthishelpervalidation.

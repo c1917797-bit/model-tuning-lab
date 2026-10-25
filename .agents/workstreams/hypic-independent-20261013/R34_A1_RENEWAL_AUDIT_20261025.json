@@ -1,0 +1,32 @@
+{
+  "schema": "hypic-r34-a1-renewal-audit-summary/v1",
+  "audit_path": "/cache/cch/hypic-independent-20261013/r34-a1-renewal-independent-audit-r1-20261025.json",
+  "audit_sha256": "9ac60e6da431e63717201f88d56691c2813642154d100f7cbb0931258456390f",
+  "hot": 16,
+  "isolation_samples": 309,
+  "live_release_verified": true,
+  "makespan_seconds": 117.11212561000139,
+  "private_state_checks": 8,
+  "raw_sha256": {
+    "events.jsonl": "0b36f7e4b2664cbb0833c1c383aedbebfe907df0f268568a1b4b5dff35b168e3",
+    "launch.json": "fb2018a13f3371d746242d8a3d4084a671bd0cc45b0baada14d7b134196ebaef",
+    "performance-unit.json": "3f861caa31bf7dd6ed65bb600b5847a257f9ddf0d35dff55735639d2ef03632d",
+    "release.json": "0e23e35f2a6a4edede9b734c1ff8457e490cb8a432f0d1cdab4a720f28b31e32",
+    "result.json": "c4c065fcf947d82a7d3e6453a048cf7b16204a4254ee7054c46cb4bc75ac15f6",
+    "service-start.json": "eac24d14005f78c3f55a8a79b87b7b7f9cca0b1bac79da076ddb8a6358268d06",
+    "service.log": "12fe06e52d9f13b135c01709df92bf4aa2bdd02d08bf0489e8017acf35c09cd9"
+  },
+  "requests": 16,
+  "scope": "Valid bounded control, not a three-arm speed result.",
+  "source_bindings": 432,
+  "warm": 48,
+  "controller": "exec-000000000000182f",
+  "handle_expired_after_terminal": true,
+  "terminal_inspection": "exec-0000000000001878",
+  "independent_audit": "exec-0000000000001879",
+  "contract": "PREFIX_TERMINAL_R34_A1_RENEWAL_20261025_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r34-a1-renewal-20261025",
+  "state": "VALID_BOUNDED_CONTROL_INDEPENDENTLY_AUDITED_RELEASED",
+  "three_arm_decision_accepted": false,
+  "full_goal_complete": false
+}
