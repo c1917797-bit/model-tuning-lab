@@ -1,0 +1,244 @@
+{
+  "terminal_unit_valid": true,
+  "timing": {
+    "requests": 40,
+    "unique_ids": 40,
+    "weighted_tpot_ms": 116.25413966796714,
+    "ttft_p95_ms": 199607.2333001066,
+    "tpot_p95_ms": 137.7024244726499
+  },
+  "isolation_samples": 324,
+  "source_bindings": 425,
+  "raw_sha256": {
+    "result.json": "b1bb88d85002c932efaf8ba1cded9669c6d19a387897d407e06bbb534ae9c7d3",
+    "events.jsonl": "0f656ecc4819f33b46ef415df84d6eae1bb89c4edec7f08759e5568a3ef1c1b6",
+    "performance-unit.json": "870a6d90f563af93b90a9c03851d74756b1dc3175d4f740c70969cad2c469e0c",
+    "release.json": "601aae930195473a131d1c6cb092341313c7f46bf3e3cccb63f4020aac4a7eb3"
+  },
+  "scope": "one actual full40 same-source graph G1/G3 phase; necessary mechanism/safety evidence overhead counted. Matched/repeated speed,paired quality,lifecycle andwholepaper remain separate",
+  "live_release_verified": true,
+  "graph": {
+    "workers": {
+      "0": 57,
+      "1": 58,
+      "2": 59,
+      "3": 60
+    },
+    "compile_complete_lines": [
+      213
+    ],
+    "replay_directly_observed_rank": 0,
+    "replay_lines": [
+      313
+    ],
+    "service_log_sha256": "ad38c24e89ca4c213d484d3fdad850e9dc86ca9f8ffc67bf18dd6b51ea2f8587",
+    "scope": "actual native INFO replay; capture compatibility proved by same-source R29 canary, not per-token/all-rank completed replay counts"
+  },
+  "physical": {
+    "ranks": {
+      "0": {
+        "inner_pid": 57,
+        "host_pid": 1526938,
+        "physical_npu": 0
+      },
+      "1": {
+        "inner_pid": 58,
+        "host_pid": 1526939,
+        "physical_npu": 1
+      },
+      "2": {
+        "inner_pid": 59,
+        "host_pid": 1526940,
+        "physical_npu": 2
+      },
+      "3": {
+        "inner_pid": 60,
+        "host_pid": 1526941,
+        "physical_npu": 3
+      }
+    },
+    "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+  },
+  "policy": {
+    "group": "G3",
+    "algorithm_on": true,
+    "pdc_on": false
+  },
+  "numerical_prerequisite": {
+    "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+    "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43",
+    "python_sources": 421,
+    "scope": "same runtime Python and bounded graph/numerical prerequisites; not formal quality"
+  },
+  "r30_info_format_audit": {
+    "definition": "R30_INFO_FORMAT_AUDIT_20261025.json",
+    "definition_sha256": "dc048790a82faad5bc19a2ba22dd7cde920c3d035cd279a39897dc7ab23c0b12",
+    "source_sha256": {
+      "host_audits/r30b_graph_formal_audit.py": "b464b2d3d20341d5c9f735b78ad6fe1dafc42a3c7963cc479954934faeaa327b",
+      "host_audits/r30_graph_formal_audit.py": "b60c8c8138a4ad39528e0a9a5a5a492fe5a1fee80b57fb9d5178d74515b53398",
+      "host_audits/r26_group_performance.py": "72378fc059526b3b8dcd332280746bd210323b59f41ac2dd23742444960353c2",
+      "host_audits/r27_graph_canary_audit.py": "ad9b0b414c81c76f295ddd00228ce2ad64ff24fd10734f6eaf78ef0b9136df1c"
+    },
+    "change": "Only official INFO record.filename vs DEBUG relpath; original numerical/transport/hot/source/release criteria retained",
+    "old_frozen_auditor_preserved": true
+  },
+  "formal_graph_profile_verified": true,
+  "hot": {
+    "accepted_hot_coverage": true,
+    "denominator": 40,
+    "covered_count": 40,
+    "missing": [],
+    "worker_pids": {
+      "0": 57,
+      "1": 58,
+      "2": 59,
+      "3": 60
+    },
+    "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+  },
+  "full_report": {
+    "path": "/cache/cch/hypic-independent-20261013/r30-g3-host-audit-r1-20261025.json",
+    "sha256": "f90c415325f9aa1cf85bc3e78ee34f8c059e7e6201742ca6cf01c4c9f6078ffc",
+    "bytes": 78681,
+    "keys": [
+      "terminal_unit_valid",
+      "timing",
+      "isolation_samples",
+      "source_bindings",
+      "raw_sha256",
+      "scope",
+      "packed",
+      "physical",
+      "hot",
+      "request_map",
+      "live_release_verified",
+      "partition",
+      "lazy",
+      "metadata_snapshot",
+      "c2_finite",
+      "c2_block_table_snapshot",
+      "graph",
+      "numerical_prerequisite",
+      "formal_graph_profile_verified",
+      "r30_host_audit",
+      "r30_info_format_audit",
+      "policy"
+    ]
+  },
+  "components": {
+    "packed": {
+      "keys": [
+        "packed_performance_receipts_verified",
+        "workers",
+        "requests",
+        "packed_groups",
+        "shadow_requests",
+        "multi_hot_shadow_layers",
+        "scope"
+      ]
+    },
+    "request_map": {
+      "keys": [
+        "cmpl-af75865a91b3366b",
+        "cmpl-af501a57c323ca62",
+        "cmpl-a2fa7b78d9c0780c",
+        "cmpl-bed19ea74f03ed8c",
+        "cmpl-b9b3c4bbb44907ed",
+        "cmpl-bab03cdba2e69014",
+        "cmpl-b788ff37fbc3cd21",
+        "cmpl-96b32a8b43ff1973",
+        "cmpl-9738ea6b7ec4debd",
+        "cmpl-bb347e6dead3d53b",
+        "cmpl-ac9183583cd6dd92",
+        "cmpl-99c83bf9bb3e6cc3",
+        "cmpl-b0c604774215270a",
+        "cmpl-872996bec489eb40",
+        "cmpl-aa78b07d81b0febb",
+        "cmpl-96b7cba500f0f03e",
+        "cmpl-a845302c52d95617",
+        "cmpl-b0f4bbf45fc92e91",
+        "cmpl-96917340c197f151",
+        "cmpl-91c04df00fe01b1f",
+        "cmpl-90e42690a47adf1e",
+        "cmpl-ae4ef1f9f816b5a1",
+        "cmpl-be0491946b2020b4",
+        "cmpl-bcbc11f7d5097c8b",
+        "cmpl-ad0f6d3b688b77e3",
+        "cmpl-aae54b83657ff440",
+        "cmpl-a63dc75f249a360a",
+        "cmpl-9b4366eb49453df2",
+        "cmpl-9df5a5d1ddbdf344",
+        "cmpl-a2036c5bb10406dc",
+        "cmpl-a6f5e65301b28c79",
+        "cmpl-a96e98151fcd5333",
+        "cmpl-8e0a600ac575a245",
+        "cmpl-aba052409667779c",
+        "cmpl-bbed7bd9a68027d4",
+        "cmpl-806693cc9339a491",
+        "cmpl-9024881b679b561e",
+        "cmpl-a86b72a04de025b8",
+        "cmpl-ad74911b3146ed65",
+        "cmpl-857506727d0dfdf8"
+      ]
+    },
+    "partition": {
+      "keys": [
+        "enabled",
+        "groups",
+        "completed",
+        "workers"
+      ]
+    },
+    "lazy": {
+      "keys": [
+        "lazy",
+        "completed_receipts"
+      ]
+    },
+    "metadata_snapshot": {
+      "keys": [
+        "forwards",
+        "request_ids"
+      ]
+    },
+    "c2_finite": {
+      "keys": [
+        "layers",
+        "request_layer_completions",
+        "scope"
+      ]
+    },
+    "c2_block_table_snapshot": {
+      "keys": [
+        "enabled",
+        "forwards",
+        "checked_layers",
+        "request_layer_completions",
+        "reads",
+        "hits",
+        "expected_group",
+        "expected_layers",
+        "group_source",
+        "native_captures",
+        "per_forward",
+        "scope"
+      ]
+    },
+    "r30_host_audit": {
+      "keys": [
+        "host_audits/r30_graph_formal_audit.py",
+        "host_audits/r26_group_performance.py",
+        "host_audits/r27_graph_canary_audit.py"
+      ]
+    }
+  },
+  "audit_operation": "exec-00000000000016a8",
+  "initial_untruncated_capture_operation": "exec-00000000000016a7",
+  "controller_operation": "exec-0000000000001693",
+  "original_observer_failure": {
+    "operation": "exec-00000000000016a5",
+    "exit_code": 1,
+    "reason": "Preserved known INFO filename/DEBUG relative path observation mismatch; no numerical or source criteria changed",
+    "stderr": "Traceback (most recent call last):\n  File \"/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/host_audits/r30_graph_formal_audit.py\", line 234, in <module>\n    print(json.dumps(audit(args.contract,live_release=args.live_release)))\n  File \"/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/host_audits/r30_graph_formal_audit.py\", line 218, in audit\n    info=parse_info_graph(native._read(raw/\"service.log\",json_value=False))\n  File \"/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/host_audits/r30_graph_formal_audit.py\", line 161, in parse_info_graph\n    raise ValueError(\"actual four-worker INFO startup and local-first compile/replay required\")\nValueError: actual four-worker INFO startup and local-first compile/replay required\n"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "hypic-r30-first-pair-decision/v1",
+  "utc": "2026-10-25T12:14:00Z",
+  "status": "VALID_MECHANISM_NO_NET_SPEED_GAIN",
+  "G1": {
+    "evidence": "R30_G1_GRAPH_FORMAL_AUDIT_20261025.json",
+    "audit": "exec-0000000000001688",
+    "requests": 40,
+    "tpot_ms": 94.99547617189137
+  },
+  "G3": {
+    "evidence": "R30_G3_GRAPH_FORMAL_AUDIT_20261025.json",
+    "audit": "exec-00000000000016a8",
+    "requests": 40,
+    "hot_fourworker_48C1_16C2": 40,
+    "isolations": 324,
+    "released": true,
+    "tpot_ms": 116.25413966796714
+  },
+  "delta": {
+    "weighted_tpot_ms": 21.25866349607577,
+    "mean_ttft_ms": 50542.44956075854,
+    "mean_postfirst_ms": 21768.871419981588,
+    "mean_client_duration_ms": 72311.32098074013,
+    "client_makespan_s": 199.07967402983923,
+    "tpot_percent": 22.378606174476,
+    "ttft_p95_percent": 122.95241450067915
+  },
+  "cost_decomposition": "R30_PAIR_COST_DECOMPOSITION_20261025.json",
+  "causal_limit": "Current algorithm activation versus native at matched graph profile. TTFT includes queueing; postfirst includes overlapping service work. Graph compatibility alone did not establish speed gain; no cross-version graph-only, logging, copy or C1-kernel causal attribution.",
+  "action": "Do not fill unchanged negative12matrix. Keep graph. Bound in-service cost attribution for fsync vs C1 private-material lease vs full selected layer at same representative integrated workload, without adding synchronization or changing algorithm/guards. Choose one behavior switch only after observed budget; then OFF/ON matched experiment. Not an independent GDN task.",
+  "full_goal_accepted": false,
+  "stop_utc": "2026-10-25T18:07:17Z"
+}
