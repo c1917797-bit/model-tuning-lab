@@ -1,0 +1,43 @@
+{
+  "schema": "hypic-r33-prefix-code-readiness/v1",
+  "state": "HOST22_TESTS_PASS_NOT_DEVICE_CONTRACT_READY",
+  "primary_variable": "Skip only unused per-token output matmul/assembly in source-verified short-prefix terminal caller; suffix and state arithmetic unchanged.",
+  "source_strategy": "All422 R32 runtime Python bytes untouched. Four added Python files, one new bootstrap path. Original R32 roots/contracts/auditor failures retained.",
+  "runtime_files": [
+    "prefix_terminal_r33/__init__.py",
+    "prefix_terminal_r33/terminal_math.py",
+    "prefix_terminal_r33/patch.py",
+    "prefix_terminal_r33/sitecustomize.py",
+    "prefix_terminal_r33/run_with_patch.sh"
+  ],
+  "host_files": [
+    "host_audits/r33_prefix_terminal_trial.py",
+    "host_audits/r33_prefix_terminal_evidence.py",
+    "host_audits/r33_prefix_terminal_audit.py",
+    "host_audits/test_r33_prefix_terminal.py"
+  ],
+  "cpu_operation": "exec-0000000000001750",
+  "cpu_cases": 22,
+  "official_image_versions": {
+    "syntax": "PASS",
+    "official_image_versions": "{\"vllm\": \"0.23.0+empty\", \"vllm-ascend\": \"0.23.0\", \"torch\": \"2.10.0+cpu\", \"torch-npu\": \"2.10.0.post4\"}"
+  },
+  "common_protocol": {
+    "private_warm_waves": 3,
+    "private_warm_requests": 48,
+    "measured_requests": 16,
+    "concurrency": 16,
+    "input": 32768,
+    "output": 64,
+    "profiler": false,
+    "expected_actual_prefix_lengths": [
+      8,
+      39
+    ],
+    "pre_timer_worker_evidence_prefix_sha256": true,
+    "first_unseen_timed_shape_rejected": true
+  },
+  "package_and_device_status": "Still need code-checkpoint-bound MANIFEST, source/argv/entrypoint tests, same-source contracts and independent audit; no R33 NPU run.",
+  "absolute_stop_utc": "2026-10-25T18:07:17Z",
+  "full_goal_complete": false
+}
