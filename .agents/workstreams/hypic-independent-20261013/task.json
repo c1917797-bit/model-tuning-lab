@@ -496,19 +496,7 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": {
-    "state": "RUNNING",
-    "operation": "exec-00000000000018e2",
-    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
-    "connector": "awmcp",
-    "contract": "EVIDENCE_IO_R35_OBSERVE_R1_20261025_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/evidence-io-r35-observe-r1-20261025",
-    "launch_checkpoint": "42229bcce554dcdf9b3bc748ae48c0dfb5c33052",
-    "admission_operation": "exec-00000000000018e1",
-    "absolute_stop_utc": "2026-10-26T06:36:27Z",
-    "auditor": "host_audits/r35_evidence_io_audit.py",
-    "rule": "Poll exact original ma/operation/raw. Unknown/running never restart. Runtime441 and bound HOST sources frozen. Terminal independent IO accounting/numerical/hot/source/isolation/exact live release required; diagnostic timing never service gain."
-  },
+  "active_attempt": null,
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
@@ -1212,9 +1200,9 @@
     "full_goal_complete": false
   },
   "r35_evidence_io_budget": {
-    "state": "BOUNDED_DEVICE_IO_DIAGNOSTIC_RUNNING_NOT_ACCEPTED",
+    "state": "VALID_MATERIAL_SELECTED_STEP_IO_BUDGET_NOT_SPEED_ACCEPTANCE",
     "plan": "R35_EVIDENCE_IO_BUDGET_PLAN_20261025.json",
-    "next": "Fresh physical source/model/image/input/port/new-root admission, then one R35 bounded real IO budget observation with original writes/fsync and all warm/numerical/hot/isolation/release gates.",
+    "next": "R36_STEP_DURABILITY_PLAN_20261025.json",
     "baseline_treatment": "Retain original prefix output path; rejected R34 terminal-only flag disabled.",
     "full_goal_complete": false,
     "host_validation": "R35_EVIDENCE_IO_OBSERVER_HOST_VALIDATION_20261025.json",
@@ -1227,7 +1215,7 @@
       "host_audits/test_r35_evidence_io_budget.py": "7759e9b3ebac87978fac7dd3ca0ed2c48959c359a6a748915a74687842f38221",
       "independent_evidence_io_budget.py": "ecc3e7b84f01380d6e5cab0f4cf0644f43f7bba8c3e2f48a1450cc1c02221b47"
     },
-    "live_loaded": false,
+    "live_loaded": true,
     "package_code_validation": "R35_PACKAGE_CODE_READINESS_20261025.json",
     "controller": "host_audits/r35_evidence_io_controller.py",
     "auditor": "host_audits/r35_evidence_io_audit.py",
@@ -1236,6 +1224,20 @@
     "static_image_validation": "R35_STATIC_IMAGE_READINESS_20261025.json",
     "contract": "EVIDENCE_IO_R35_OBSERVE_R1_20261025_CONTRACT.json",
     "code_checkpoint": "dd6d0a1dcdb9c93d21c274e4a4e6440167a278ef",
-    "active_controller": "exec-00000000000018e2"
+    "active_controller": null,
+    "decision": "R35_DEVICE_IO_DECISION_20261025.json",
+    "last_completed_controller": {
+      "operation": "exec-00000000000018e2",
+      "state": "VALID_AUDITED_RELEASED",
+      "audit_operation": "exec-00000000000018e8",
+      "audit_path": "/cache/cch/hypic-independent-20261013/r35-io-independent-audit-r1-20261025.json",
+      "audit_sha256": "2939ad7562aa5be504321f83ea12714ab88e428fa2080599f8ac230d16b51057"
+    }
+  },
+  "r36_step_durability": {
+    "state": "PLANNED_NOT_IMPLEMENTED_NOT_DEVICE_ACCEPTED",
+    "plan": "R36_STEP_DURABILITY_PLAN_20261025.json",
+    "next": "Implement bounded default-off own evidence durability cadence helper and actual-writer failure/ordering controls; package/image gate then new-source A/B/A. No NPU task active.",
+    "full_goal_complete": false
   }
 }

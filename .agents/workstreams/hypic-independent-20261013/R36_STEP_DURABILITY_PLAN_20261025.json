@@ -1,0 +1,68 @@
+{
+  "schema": "hypic-r36-selected-step-durability-plan/v1",
+  "state": "PLANNED_NOT_IMPLEMENTED_NOT_DEVICE_ACCEPTED",
+  "prerequisite": "R35_DEVICE_IO_DECISION_20261025.json",
+  "authority": {
+    "absolute_stop_utc": "2026-10-26T06:36:27Z",
+    "model": "27B",
+    "tp": 4,
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "foreign_untouched": true
+  },
+  "causal_model": {
+    "symptom": "R30 final-source formal40 TPOT95.00->116.25ms remains negative.",
+    "observed": "R35 independent325sample/16hot/8NPUstate valid: eachrank11662original fsync calls in14timed selectedsteps; rank total10.54-11.21s, conditional sum per-step max11.214344030s over122.508543370s.",
+    "opportunity": "Conditional selected-step fsync budget9.1539pct; actual E2E reduction unproven, cross-rank waits and changed overlap may absorb it. Do not sumfourranks or use this fraction as formal1024 prediction.",
+    "candidate": "Only change durability cadence inside verified selected model steps: every original event still written in same order, defer its file fsync until step completion fence; all evidence durable before completion callback returns. Outside selected context keeps original per-event fsync.",
+    "milestone": "At least5pct same-source diagnostic makespan reduction with control drift<=5pct and every guard; if survives, final-source formal1024 matched benchmark is separate mandatory gate.",
+    "disproof": "Incomplete/late durability, lost/changed events, guard/numerical/hot/ownership failure, drift>5pct, or net gain<5pct stops route; no unchanged rerun."
+  },
+  "constraints": [
+    "Defaultoff/source-bound explicit switch, separate removable package; R35timingobserver off in ALL R36performance arms.",
+    "Original math/operator/runner/scheduler/guard code unchanged; no old successful algorithm imports/copies.",
+    "Actual emitter retains all original writes/counters/byte ceilings and event order; no event filtering, batching writes, asynchronous sink, deletion or skipped finite/completion checks.",
+    "Only selected model context may defer fsync; reject mismatched identities, overlapping/abandoned contexts, recursion, wrongFD and pending-count/byte overflow.",
+    "At the original compact_model_rows_completed emitter fence, fsync all prior source evidence including completion record before original callback returns. A bounded durable commit receipt may follow, with its extra overhead retained in candidate timing.",
+    "Outside model context, public material/install/native progress and other events preserve original immediate fsync. Defaultoff behavior/source-body controls compare actual original writer.",
+    "Original callback/write/fsync exceptions propagate; unfinished/error cleanup must attempt exact ownedFD durability without turning an error into successful completion. Bound incomplete-step crash exposure explicitly; missing receipt invalidates audit.",
+    "No benchmark until actual source writer failure/order/byte/FD/bounds/disabled/rollback controls plus official pinned-image import/restore controls pass.",
+    "Historical R35raw/contracts/sources remain immutable at42229bcc; new runtime bindings and new roots required."
+  ],
+  "host_controls": [
+    "Actual source writer OFFbyte/counter/exception equivalence.",
+    "ONmany events still produce identical original ordered bytes; pending<=boundedstep, completion fsync precedes returned callback and durable receipt.",
+    "Inject fsync failure at completion: no success receipt/model return; original error retained; exactFD cleanup.",
+    "Nonselected events immediatefsync, mixed/interleaved invalidcontexts failclosed, nested recursion/wrongFD/bounds rejected.",
+    "Uninstall/defaultoff restores aliases without losing pending completed evidence; executable/hash drift rejected."
+  ],
+  "device_protocol": {
+    "arms": [
+      "A1 original per-event durability",
+      "B1 selected-step completion durability",
+      "A2 original per-event durability"
+    ],
+    "same_source": true,
+    "observer_enabled": false,
+    "original_prefix_output": true,
+    "pdc": false,
+    "requests": 16,
+    "concurrency": 16,
+    "input_tokens": 32768,
+    "output_tokens": 64,
+    "private_warmup": 48,
+    "actual_shapes_before_timer": [
+      8,
+      39
+    ],
+    "private_npu_state_checks": 8,
+    "required": "All16requests fourworker48C1/16C2, complete raw original events plus exact selected-step durable fences, continuous physical isolation, source/import/graph identity, precise live release. Before each next arm independent preceding audit and fresh source/idle/newroot admission."
+  },
+  "durability_claim_scope": "Only completed selected model-step evidence is guaranteed durable before that step returns; uncompleted step records may be not yet fsynced during a fatal crash. Preserve partial raw evidence and classify interrupted runs incomplete. This is evidence-sink policy, not HYPIC algorithm correctness.",
+  "progression": "New contract and immutable roots only after HOST/image gates. Audit A1/B1/A2 before decision. If positive, rebaseline final sourceG1/G3 formal1024 then complete requiredG1-G4x3/quality/lifecycle only with actual remaining budget; do not shrink units or extend deadline.",
+  "full_goal_complete": false
+}

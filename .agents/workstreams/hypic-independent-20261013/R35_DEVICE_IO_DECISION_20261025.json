@@ -1,0 +1,93 @@
+{
+  "schema": "hypic-r35-device-io-decision/v1",
+  "state": "VALID_MATERIAL_SELECTED_STEP_IO_BUDGET_NOT_SPEED_ACCEPTANCE",
+  "controller": "exec-00000000000018e2",
+  "controller_handle_expired_after_terminal": true,
+  "raw_terminal_proof_operation": "exec-00000000000018e7",
+  "launch_checkpoint": "42229bcce554dcdf9b3bc748ae48c0dfb5c33052",
+  "contract": "EVIDENCE_IO_R35_OBSERVE_R1_20261025_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/evidence-io-r35-observe-r1-20261025",
+  "independent_audit": {
+    "operation": "exec-00000000000018e8",
+    "path": "/cache/cch/hypic-independent-20261013/r35-io-independent-audit-r1-20261025.json",
+    "sha256": "2939ad7562aa5be504321f83ea12714ab88e428fa2080599f8ac230d16b51057",
+    "valid": true,
+    "hot_covered": 16,
+    "requests": 16,
+    "private_warmup": 48,
+    "private_npu_state_checks": 8,
+    "source_bindings": 441,
+    "isolation_samples": 325,
+    "exact_live_release_verified": true
+  },
+  "diagnostic_makespan_seconds": 122.50854337005876,
+  "io_budget": {
+    "actual_selected_step_io_valid": true,
+    "all_observed_model_steps": 224,
+    "http_requests": 16,
+    "ranks": [
+      {
+        "rank": 0,
+        "associated_steps": 14,
+        "original_emit_calls": 11662,
+        "original_fsync_calls": 11662,
+        "emit_step_unions_ns": 12069263470,
+        "fsync_step_unions_ns": 10608807980,
+        "original_written_bytes": 5332090,
+        "extra_budget_rows": 14
+      },
+      {
+        "rank": 1,
+        "associated_steps": 14,
+        "original_emit_calls": 11662,
+        "original_fsync_calls": 11662,
+        "emit_step_unions_ns": 12045323070,
+        "fsync_step_unions_ns": 11210157530,
+        "original_written_bytes": 5332090,
+        "extra_budget_rows": 14
+      },
+      {
+        "rank": 2,
+        "associated_steps": 14,
+        "original_emit_calls": 11662,
+        "original_fsync_calls": 11662,
+        "emit_step_unions_ns": 12228119760,
+        "fsync_step_unions_ns": 10722957520,
+        "original_written_bytes": 5332090,
+        "extra_budget_rows": 14
+      },
+      {
+        "rank": 3,
+        "associated_steps": 14,
+        "original_emit_calls": 11662,
+        "original_fsync_calls": 11662,
+        "emit_step_unions_ns": 12021710660,
+        "fsync_step_unions_ns": 10541350240,
+        "original_written_bytes": 5332090,
+        "extra_budget_rows": 14
+      }
+    ],
+    "maximum_rank_emit_step_unions_ns": 12228119760,
+    "maximum_rank_fsync_step_unions_ns": 11210157530,
+    "whole_service_saving_inferred": false,
+    "fsync_or_durability_treatment": false,
+    "scope": "Timed-request-associated selected model steps only. Per-rank sums of step unions, not a four-rank walltime sum or guaranteed removable service cost; extra diagnostic rows and outside-context/native-progress excluded."
+  },
+  "opportunity": {
+    "raw_analysis_operation": "exec-00000000000018f5",
+    "aligned_steps": 14,
+    "rank_step_request_sets_equal": true,
+    "step_max_unions_ns": {
+      "emit_interval_union_ns": 12246865410,
+      "fsync_interval_union_ns": 11214344030
+    },
+    "conditional_fsync_fraction": 0.091539281437092,
+    "conditional_emit_fraction": 0.09996743960138496,
+    "scope": "Conditional selected-step opportunity estimate, assumes complete removal and no overlap/compensation; no predicted or measured service saving. Does not include outside-context IO or extra diagnostic rows."
+  },
+  "interpretation": "Actual measured selected-step original fsync cost is material for a bounded one-variable screen. Per-rank11662calls/14timed-associatedsteps. Not four-rank44second service saving; conditional step-max fsync opportunity about9.15pct is not measured speedup and cannot be extrapolated to formal1024. R30 formal negative remains.",
+  "decision": "Admit only a separately preregistered default-off selected-model-step durability cadence candidate; retain all original event writes, algorithm/numerical/ownership/completion gates and durable evidence before completed model step returns. No R34 output-treatment rerun.",
+  "next": "R36_STEP_DURABILITY_PLAN_20261025.json",
+  "r30_formal_decision_unchanged": true,
+  "full_goal_complete": false
+}
