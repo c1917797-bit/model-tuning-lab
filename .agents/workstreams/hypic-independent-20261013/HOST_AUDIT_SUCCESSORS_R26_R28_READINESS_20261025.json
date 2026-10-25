@@ -1,0 +1,41 @@
+{
+  "schema": "hypic-host-audit-successors-readiness/v1",
+  "created_utc": "2026-10-25T07:55:00Z",
+  "scope": "HOST-only successors enable existing formal PDC-group and genuine R23 quality evidence to be audited; no runtime source changes or NPU acceptance",
+  "r26": {
+    "production": "host_audits/r26_group_performance.py",
+    "sha256": "72378fc059526b3b8dcd332280746bd210323b59f41ac2dd23742444960353c2",
+    "test_source": "host_audits/test_r26_group_performance.py",
+    "test_sha256": "8048529c9ce6ae0738e2aefe8678f2b2706a27cba729a45662d2297a448522db",
+    "tests": 21,
+    "operation": "exec-0000000000001564",
+    "review": "Retains unchanged R18 full40 terminal base and actual G1-G4 axes; G2 aggregate native PDC counters, G4 also all40/four-rank PIC starts and native prefix progress. Existing R17 helper retains no-full-copy/native-absence/four-worker guard. Limited current eager profile, not graph acceptance.",
+    "requires": "Separately bind production host auditor and freeze actual new group contract; current live R25 must retain its own frozen audit."
+  },
+  "r28": {
+    "production": "host_audits/r28_quality_terminal.py",
+    "sha256": "4babed71534aa0ebe00f6c06c50ca36e3c15febbf8cb781a71dedc46433e40cb",
+    "test_source": "host_audits/test_r28_quality_terminal.py",
+    "test_sha256": "ca387f1d13a317edd27f301ed8caaed6b9e36d61e8bb83fe47e2b142b9ce456a",
+    "tests": 31,
+    "operation": "exec-000000000000157d",
+    "review": "Real R23 controller/file/source/launch binding; no fake R16 alias or invented import. All127x3 scored including stop/length; 126 unique materials do not reduce381 hot denominator; shared/current or rebuilt generation accepted. Reuses only AST-selected generic scorer functions. Arm validity returns quality NOT_DECIDED; actual paired decision remains missing.",
+    "test_coverage_limit": "End-to-end synthetic baseline branch plus direct shared/rebuilt generation treatment controls; not an end-to-end synthetic treatment assembly or device proof.",
+    "requires": "New complete current-source per-arm contracts, full catalog configuration and actual immutable full381 raw evidence."
+  },
+  "current_r25": {
+    "runtime_python_unchanged": 413,
+    "host_bindings_unchanged": 418,
+    "verified_operation": "exec-000000000000158b",
+    "live_controller": "exec-0000000000001573",
+    "inference_allowlist_excludes": "host_audits/ and graph_candidate/; both are not loaded by the current run",
+    "fixed_stop_utc": "2026-10-25T18:07:17Z"
+  },
+  "no_claims": [
+    "No new NPU result",
+    "Not three-round performance",
+    "Not paired full quality",
+    "Not lifecycle/whole paper/29 functional Skills",
+    "No change to original acceptance threshold or current R25 source"
+  ]
+}

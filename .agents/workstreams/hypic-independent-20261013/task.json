@@ -598,8 +598,9 @@
       "G1_evidence": "R25_G1_AUDIT_20261025.json",
       "G1_timing": {"weighted_tpot_ms": 280.0677875400396, "ttft_p95_ms": 346747.93185002636, "tpot_p95_ms": 292.48924112300756},
       "runtime_parity_gap": "Provided success text used FULL_DECODE_ONLY; current eager is an implementation compatibility restriction. Preserve this first pair; verify graph-compatible native decode before blind full-matrix expansion.",
-      "audit_G4_gap": "Inherited R18 partition auditor hardcodes G3; G4 adaptation still required before it is accepted."
+      "audit_G4_gap": "HOST R26 actual-axis G1-G4 successor implemented/reviewed;21CPU tests1564, not actual G2/G4 acceptance. New contracts must bind it separately; current R25 audit remains frozen."
     },
+    "host_audit_successors": {"report": "HOST_AUDIT_SUCCESSORS_R26_R28_READINESS_20261025.json", "state": "HOST_ONLY_REVIEWED_CPU_TESTED_NOT_DEVICE_ACCEPTANCE", "runtime_source_changed": false},
     "latest_confirmed_publication": "56144d0097cec8960ebefc5ce6b0939519031216",
     "pending_publication": {
       "checkpoint": "283de3b13c05042ed57ebe4cc90329454cab4b32",
