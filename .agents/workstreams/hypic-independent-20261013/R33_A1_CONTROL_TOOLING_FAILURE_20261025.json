@@ -1,0 +1,66 @@
+{
+  "schema": "hypic-r33-control-tooling-failure/v1",
+  "controller": "exec-000000000000175c",
+  "contract": "PREFIX_TERMINAL_R33_A1_20261025_CONTRACT.json",
+  "contract_sha256": "7c9604878205769df3d8c574eb7d71cf582fa939bbbb45429d6140e037600f69",
+  "launch_checkpoint": "3c2575e349b93b9ac4df4fbfcfba64f691aa5d64",
+  "independent_review_operation": "exec-0000000000001760",
+  "review": {
+    "control_warm_component_valid": true,
+    "warm_responses": 48,
+    "hot_covered": 48,
+    "private_npu_state_checks": 8,
+    "lengths_by_rank": {
+      "0": [
+        8,
+        39
+      ],
+      "1": [
+        8,
+        39
+      ],
+      "2": [
+        8,
+        39
+      ],
+      "3": [
+        8,
+        39
+      ]
+    },
+    "full_arm_valid": false,
+    "timer_started": false,
+    "error": {
+      "type": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/cache/cch/hypic-independent-20261013/prefix-terminal-r33-a1-20261025/service.log'"
+    },
+    "isolation_samples": 289,
+    "owned_container_removed": true,
+    "port_free": true,
+    "physical0_3_now": [],
+    "raw_sha256": {
+      "result.json": "e7044d7752bc9b836b61c48c37e9917665d7a32191d10b9656e20ed1e6bb2ff3",
+      "release.json": "0a15978ccaabfd0a2c64fdde1fccdd14602b0d283c8fce4d2e352d226567bc43",
+      "events.jsonl": "1822c8f4239152c71ac3ecbd7f94d28b81ca8b8dfeb2a7bc9ba1dea523a4cc9d",
+      "service.log": "62d5d3b2889b4848751dcf751072f4101f20bee770543b89dd9d1b9a1a64c0d4",
+      "launch.json": "e35c3b41f204f745929dafe07dd274f80088ad94ef86ff09ee993fe14bdecdfc",
+      "service-start.json": "4025a2ee111e0a6c0c8932634280e2b932c8ad68767712e006d67b21308bb129"
+    }
+  },
+  "classification": "FAILED_HOST_ARTIFACT_LIFECYCLE_NOT_ALGORITHM_TRUTH",
+  "source_producer": "formal_r15_tp4.py writes service.log only during final teardown. The R33 pre-timer checker incorrectly read it while the container was live.",
+  "test_gap": "The first CPU unit fixture pre-created service.log and masked the real producer timeline. R34 regression runs the actual control unit without this terminal file and supplies only the owned live Docker log producer.",
+  "accepted_claims": [
+    "48unscored warm HTTP responses and same-request4worker48C1/16C2proof",
+    "8actual private terminal state comparisons pass across rank0-3/length8,39",
+    "continuous isolation289samples and exact own release"
+  ],
+  "forbidden_claims": [
+    "R33arm accepted",
+    "measured16 completed",
+    "speed/cause confirmed",
+    "enabled prefix candidate service path accepted",
+    "fullpaper reproduced"
+  ],
+  "old_roots_contracts_runtime_untouched": true
+}

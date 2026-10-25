@@ -1,0 +1,23 @@
+{
+  "schema": "hypic-r34-host-artifact-lifecycle-readiness/v1",
+  "state": "HOST_VALIDATED_NO_DEVICE_CONTRACTS_OR_RUN",
+  "primary_treatment_unchanged": "Prefix terminal-only unused output removal; R34changes only common HOST data producer lifecycle.",
+  "test_operation": "exec-0000000000001770",
+  "tests_passed": 4,
+  "regressions": [
+    "Original terminal service.log is absent while the service is alive",
+    "Correct producer uses exact own CID/image/task/physical0-3 mapping before live logs",
+    "Foreign metadata rejected before log reads",
+    "Snapshot is exclusive and actual control unit completes48warm/proof/16timer fixture without service.log"
+  ],
+  "source_frame": "All432R33runtime/config/package bindings unchanged; new unbound HOST successor files only.",
+  "controller": "host_audits/r34_prefix_terminal_trial.py",
+  "auditor": "host_audits/r34_prefix_terminal_audit.py",
+  "helper": "host_audits/r34_live_native_log.py",
+  "candidate_math_npu_status": "Only R33control private-shadow states proven; no enabled B1 model path or performance win.",
+  "latest_authority_stop_utc": "2026-10-25T18:07:17Z",
+  "minimum_device_arm_budget_seconds": 1500,
+  "current_no_new_device_reason": "Remaining window is below the frozen25min startup/request/audit/release budget. Do not lower the budget or bypass failed phase gates to fit time.",
+  "next": "Preserve failures and partial component proof; bind new R34contracts/new roots to a sufficiently authorized execution window, then full same-source A1/B1/A2. Never rerun the R33 roots or call its warmups performance.",
+  "full_goal_complete": false
+}

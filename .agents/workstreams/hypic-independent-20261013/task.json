@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R33_PREFIX_TERMINAL_PACKAGE_HOST_READY_NO_DEVICE",
+  "execution_state": "R33_HOST_LIFECYCLE_FAILED_RELEASED_R34_HOST4PASS_WINDOW_INSUFFICIENT",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -1054,7 +1054,7 @@
     "scope": "Evidence replay and forward case specifications, not blind Skill behavior or29functional acceptance."
   },
   "r33_prefix_terminal_model": {
-    "state": "PACKAGE_HOST_READY_NEW3ARM_CONTRACTS_UNUSED",
+    "state": "FAILED_HOST_ARTIFACT_LIFECYCLE_NOT_ALGORITHM_FAILURE",
     "plan": "R33_PREFIX_TERMINAL_A_B_A_PLAN_20261025.json",
     "readiness": "R33_PREFIX_TERMINAL_HOST_READINESS_20261025.json",
     "controller": "host_audits/r33_prefix_terminal_trial.py",
@@ -1083,6 +1083,38 @@
         "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r33-a2-20261025"
       }
     ],
-    "next": "Publish package checkpoint then fresh direct ma/source/model/image/input/physical0-3/ports/cache/time/newroot admission; A1 only. Terminal independent audit before nextarm. Runtime/boundHOST immutable while live."
+    "next": "R33 route closed: no B1/A2 under the known-broken controller. R34 fixes the live-log producer on HOST only; new same-source contracts/root and sufficient authorized time required before device restart.",
+    "last_completed_controller": {
+      "state": "FAILED_HOST_ARTIFACT_LIFECYCLE_RELEASED",
+      "operation": "exec-000000000000175c",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "connector": "awmcp",
+      "arm": "A1",
+      "contract": "PREFIX_TERMINAL_R33_A1_20261025_CONTRACT.json",
+      "contract_sha256": "7c9604878205769df3d8c574eb7d71cf582fa939bbbb45429d6140e037600f69",
+      "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r33-a1-20261025",
+      "launch_checkpoint": "3c2575e349b93b9ac4df4fbfcfba64f691aa5d64",
+      "code_checkpoint": "3366381724fae9fd96ec9040b6e172ed523cc9ad",
+      "admission_operation": "exec-000000000000175b",
+      "observed_running_utc": "2026-10-25T17:17:36Z",
+      "rule": "Exact original ma/handle/raw; live or unknown neverrestart.432common runtime/config/package and boundHOST sources immutable.",
+      "terminal_state": "FAILED_HOST_ARTIFACT_LIFECYCLE_RELEASED",
+      "independent_component_review": "exec-0000000000001760",
+      "evidence": "R33_A1_CONTROL_TOOLING_FAILURE_20261025.json",
+      "full_arm_valid": false,
+      "timer_started": false
+    }
+  },
+  "r34_live_log_fix": {
+    "state": "HOST4PASS_NO_DEVICE_EXPERIMENT",
+    "controller": "host_audits/r34_prefix_terminal_trial.py",
+    "auditor": "host_audits/r34_prefix_terminal_audit.py",
+    "helper": "host_audits/r34_live_native_log.py",
+    "tests": "host_audits/test_r34_live_native_log.py",
+    "test_operation": "exec-0000000000001770",
+    "passed": 4,
+    "runtime_source_bindings_432_unchanged": true,
+    "readiness": "R34_HOST_ARTIFACT_LIFECYCLE_READINESS_20261025.json",
+    "scope": "Correct actual artifact producer/phase only; full A/B/A scope and warm/numerical gates preserved. No new roots/contracts/NPU runs; no speed acceptance."
   }
 }
