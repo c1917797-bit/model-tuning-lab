@@ -168,7 +168,10 @@ case record, not universal requirements for the next paper.
 The Skill entrypoint remains unchanged. Before this addition, the 2026-10-16
 case's frozen document replay already failed its older Skill-source pin
 (operation 160d); this reference append does not repair or conceal that failure.
-A successor case may use the frozen validator's `--case` data input and current
-Skill sources while preserving the old case and its true partial scope.
+The separate [source-pin successor case](../../../workstreams/hypic-independent-20261013/PAPER_TO_ASCEND_INDEPENDENT_HYPIC_CASE_20261025_LESSONS_PIN.json)
+uses current Skill sources while preserving the old case and its historical
+partial scope. Replay it with `python3 -B validate_independent_hypic_case.py
+--case PAPER_TO_ASCEND_INDEPENDENT_HYPIC_CASE_20261025_LESSONS_PIN.json
+--document-only` from that workstream. This checks document bindings only.
 Historical replay, a new reference, or bounded graph evidence does not certify
 the full Paper-to-Ascend workflow or all 29 Skills.

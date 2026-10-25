@@ -1,0 +1,73 @@
+{
+  "schema": "paper-to-ascend-lesson-validation/v1",
+  "date": "2026-10-25",
+  "status": "SCOPED_LEARNING_VALIDATED_NOT_FULL_PAPER_OR_SKILL_ACCEPTANCE",
+  "reviewed_parent_commit": "cf491d28be9ac34c674d40c08daab6763b0a2e2e",
+  "files": {
+    "reference": ".agents/skills/paper-to-ascend/references/hypic-independent-port-lessons.md",
+    "decision_ledger": "HYPIC_REUSE_DECISIONS_R25_R27_20261025.json",
+    "source_pin_successor": "PAPER_TO_ASCEND_INDEPENDENT_HYPIC_CASE_20261025_LESSONS_PIN.json"
+  },
+  "verification": {
+    "skill_quick_validation": {
+      "operation": "exec-000000000000161e",
+      "passed": true
+    },
+    "historical_raw_replay": {
+      "operation": "exec-0000000000001620",
+      "passed": true,
+      "raw_hashes": 44,
+      "full_reproduction": false
+    },
+    "structure": {
+      "operation": "exec-0000000000001621",
+      "passed": true,
+      "skills": 29,
+      "functional_acceptance": false
+    },
+    "source_pin_successor": {
+      "operation": "exec-000000000000162b",
+      "passed": true,
+      "mapped_skills": 6,
+      "evidence_files": 10,
+      "document_only": true,
+      "raw_phase_replay_verified": false,
+      "recorded_release_is_historical": true
+    },
+    "final_source_evidence": {
+      "operation": "exec-0000000000001630",
+      "passed": true,
+      "checks": 21,
+      "old_case_and_frozen_validator_preserved": true
+    }
+  },
+  "decision_transfer_spot_check": {
+    "method": "Independent context-free reviewer received curated decision rules and a new approximate token-pruning paper scenario. This was not a whole-Skill tool execution.",
+    "scenario": "40 matched requests completed, all pruning active, service12percent slower, CPU numerical unit tests pass, graph mode unknown, fullquality absent,4hours remain.",
+    "observed_choices": [
+      "Verify actual compilation profile and preserve source/protocol first.",
+      "Choose one bounded attribution or matched correction instead of expanding unchanged matrix.",
+      "Use separately frozen task-quality assessment with explicit partial coverage; do not demand native fullcontext token equality."
+    ],
+    "observed_reporting": "Mechanism and bounded numeric checks do not establish service gain or fullquality; regression cause remains unproven.",
+    "reviewer_cautions": [
+      "Pin the actual successful commit when citing historical success; do not make availability of another implementation a prerequisite for independent implementation.",
+      "A matched source version permits the intended algorithm treatment difference; it does not require identical baseline and candidate bytes.",
+      "Graph, four ranks, C1/C2 and device numbers are case-specific."
+    ]
+  },
+  "historical_failure_preserved": {
+    "case": "PAPER_TO_ASCEND_INDEPENDENT_HYPIC_CASE_20261016.json",
+    "before_operation": "exec-000000000000160d",
+    "after_operation": "exec-0000000000001625",
+    "reason": "Pre-existing historical Skill-source pin drift; original case unchanged."
+  },
+  "claims_excluded": [
+    "New device validation from this lesson update",
+    "Causal attribution of the entire R25 performance regression",
+    "R27 warmup repair success",
+    "Complete paper reproduction",
+    "All29Skill functional acceptance",
+    "main synchronization"
+  ]
+}
