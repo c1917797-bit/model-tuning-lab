@@ -1,0 +1,160 @@
+{
+  "schema": "hypic-r31-warm-profile-plan/v1",
+  "state": "HOST_READY_NOT_DEVICE_ACCEPTED",
+  "parent_checkpoint": "ef12bb01423da820fa5cd077d149e843f3159a01",
+  "reason": "R30 actual matched graph first pair is valid but negative: TPOT +22.378606%, measured client span +199.079674s. Preserve this result; collect one bounded current-source attribution before selecting a single behavior change.",
+  "hypotheses": [
+    {
+      "rank": 1,
+      "name": "Repeated C1 material cloning/H2D/lease cost",
+      "test": "Official current-source CPU/NPU timeline and copy records, with actual layer/material geometry. Measure budget before residency OFF/ON; acquisition-count reduction is not latency gain."
+    },
+    {
+      "rank": 2,
+      "name": "Dispatch, operator or synchronization serialization",
+      "test": "Per-step kernel/API intervals and rank spread; retain all guards. Sum overlapping intervals only for ranking, not removable wall time."
+    },
+    {
+      "rank": 3,
+      "name": "Evidence fsync/host I/O",
+      "test": "Prior host calibration is not in-service causality. Profiler gaps alone cannot identify fsync; use a separately scoped host observation or single-variable durability-frequency experiment only if the remaining budget warrants it."
+    }
+  ],
+  "profile_protocol": {
+    "runtime": "Same R30 421Python/425common source bindings, same active manifests/configs, official image and27B. No algorithm/runner/scheduler source changes.",
+    "first": "G3",
+    "native_control": "G1 only if needed for comparable attribution after inspecting current G3 capture",
+    "input_tokens": 32768,
+    "concurrency": 16,
+    "output_tokens": 64,
+    "formal_performance_output_tokens": 1024,
+    "profile64_not_formal_performance": true,
+    "warmups": "Retained public/private warmups, then16same-process private-shape64 warmups before capture",
+    "captured_requests": 16,
+    "max_iterations": 16,
+    "delay_iterations": 0,
+    "level": "Level1",
+    "aic_metrics": "PipeUtilization",
+    "activities": [
+      "CPU",
+      "NPU"
+    ],
+    "graph": "mode3/FULL_DECODE_ONLY",
+    "logging": "INFO",
+    "pdc": false,
+    "stack": false,
+    "memory": false,
+    "scope": "Profiled prefill/mixed early iterations only; later decode is not inferred. Metadata/trace completeness must be verified for four actual workers."
+  },
+  "contracts": {
+    "G1": {
+      "path": "WARM_GRAPH_COST_R31_G1_R1_20261025_CONTRACT.json",
+      "sha256": "aa907c5832fc7164ea43fef6af8930593da988b6f77c74f592ecb77647df402a",
+      "raw_root": "/cache/cch/hypic-independent-20261013/warm-graph-cost-r31-g1-r1-20261025",
+      "checked": {
+        "configuration_valid": true,
+        "device_run": false,
+        "device_admission_performed": false,
+        "controller_sha256": "fa5c4c9181a5434472c45b640a32821a56d1f0ff6096b8e64d810a4e0188811b",
+        "base_controller_sha256": "b26fa6006fd780b19aff3fd804a464e04aeb374b97152d9a24165157e1ee0100",
+        "graph_runtime": {
+          "profile": "selective-prefill-native-decode-v1",
+          "candidate_enabled": false,
+          "compilation_mode": 3,
+          "cudagraph_mode": "FULL_DECODE_ONLY",
+          "capture_sizes": [
+            1,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+          "official_debug_logging": false
+        },
+        "active_manifest_sha256": "7854000798eeb376849b2d0dc7b116a6503cd61db78ba15e2452a558b32aff58",
+        "source_bindings": 425,
+        "profile": {
+          "requests": 16,
+          "output_tokens": 64,
+          "max_iterations": 16,
+          "delay_iterations": 0
+        },
+        "prerequisite": {
+          "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+          "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43",
+          "python_sources": 421,
+          "scope": "same runtime Python and bounded graph/numerical prerequisites; not formal quality",
+          "original_source_contract": "FORMAL_GRAPH_R30_G1_R1_20261025_CONTRACT.json",
+          "original_source_sha256": "93b51310cd9bf14ea89fe260d455099181fe9865743052df5a081f7f5a01a820",
+          "protocol_difference": "Actual same-runtime diagnostic64 outputs; original formal1024 unchanged. No speed/quality equivalence claim."
+        }
+      }
+    },
+    "G3": {
+      "path": "WARM_GRAPH_COST_R31_G3_R1_20261025_CONTRACT.json",
+      "sha256": "7460755599b99541177dbe3e2bc6efc9e153b3d1af8db3347f46c1f67c8ca925",
+      "raw_root": "/cache/cch/hypic-independent-20261013/warm-graph-cost-r31-g3-r1-20261025",
+      "checked": {
+        "configuration_valid": true,
+        "device_run": false,
+        "device_admission_performed": false,
+        "controller_sha256": "fa5c4c9181a5434472c45b640a32821a56d1f0ff6096b8e64d810a4e0188811b",
+        "base_controller_sha256": "b26fa6006fd780b19aff3fd804a464e04aeb374b97152d9a24165157e1ee0100",
+        "graph_runtime": {
+          "profile": "selective-prefill-native-decode-v1",
+          "candidate_enabled": true,
+          "compilation_mode": 3,
+          "cudagraph_mode": "FULL_DECODE_ONLY",
+          "capture_sizes": [
+            1,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+          "official_debug_logging": false
+        },
+        "active_manifest_sha256": "edb19beed1b0dc5434e088c3274d87c2a6363599315bc851b3c9b4a5aaf56614",
+        "source_bindings": 425,
+        "profile": {
+          "requests": 16,
+          "output_tokens": 64,
+          "max_iterations": 16,
+          "delay_iterations": 0
+        },
+        "prerequisite": {
+          "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+          "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43",
+          "python_sources": 421,
+          "scope": "same runtime Python and bounded graph/numerical prerequisites; not formal quality",
+          "original_source_contract": "FORMAL_GRAPH_R30_G3_R1_20261025_CONTRACT.json",
+          "original_source_sha256": "278fc2663df36a562d2b65b3bb291d1bcfe6fab5bc2a89ff089b0b9fc84a3489",
+          "protocol_difference": "Actual same-runtime diagnostic64 outputs; original formal1024 unchanged. No speed/quality equivalence claim."
+        }
+      }
+    }
+  },
+  "physical_npus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "tp": 4,
+  "port": 8233,
+  "hccl_ports": [
+    26300,
+    26400
+  ],
+  "profile_bytes_ceiling": 2147483648,
+  "cache_free_floor": 4294967296,
+  "cleanup": "Inherited exact-owned-CID/source/physical guard and cleanup, with bounded profile storage guard. Never stop external tasks;4-7 forbidden.",
+  "admission": "Fresh ma (fallbackauthorizedmb/mc), host-development force_direct proof, same source/model/image/input, actualphysical0-3 and ports idle/newroot. Unknown controller terminality means track exactpeer/handle/raw without restart.",
+  "after_collection": "Independent16HTTP/16hot fourworker source/physical/release audit, then four-worker trace completeness, serialized copy/kernel/host-gap/rank timing analysis. Choose one behavior variable; no unchanged12matrix expansion and no causal attribution from code differences.",
+  "full_goal_accepted": false,
+  "absolute_stop_utc": "2026-10-25T18:07:17Z"
+}

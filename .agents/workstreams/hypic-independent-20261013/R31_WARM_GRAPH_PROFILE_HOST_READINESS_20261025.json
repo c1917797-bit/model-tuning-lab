@@ -1,0 +1,242 @@
+{
+  "schema": "hypic-r31-host-readiness/v1",
+  "state": "HOST_ONLY_NOT_NPU_VALIDATED",
+  "static_operation": "exec-00000000000016c5",
+  "host_controls": {
+    "source_bytes_unchanged": true,
+    "contracts": {
+      "G1": {
+        "path": "WARM_GRAPH_COST_R31_G1_R1_20261025_CONTRACT.json",
+        "sha256": "aa907c5832fc7164ea43fef6af8930593da988b6f77c74f592ecb77647df402a",
+        "raw_root": "/cache/cch/hypic-independent-20261013/warm-graph-cost-r31-g1-r1-20261025",
+        "checked": {
+          "configuration_valid": true,
+          "device_run": false,
+          "device_admission_performed": false,
+          "controller_sha256": "fa5c4c9181a5434472c45b640a32821a56d1f0ff6096b8e64d810a4e0188811b",
+          "base_controller_sha256": "b26fa6006fd780b19aff3fd804a464e04aeb374b97152d9a24165157e1ee0100",
+          "graph_runtime": {
+            "profile": "selective-prefill-native-decode-v1",
+            "candidate_enabled": false,
+            "compilation_mode": 3,
+            "cudagraph_mode": "FULL_DECODE_ONLY",
+            "capture_sizes": [
+              1,
+              4,
+              8,
+              16,
+              24,
+              32
+            ],
+            "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+            "official_debug_logging": false
+          },
+          "active_manifest_sha256": "7854000798eeb376849b2d0dc7b116a6503cd61db78ba15e2452a558b32aff58",
+          "source_bindings": 425,
+          "profile": {
+            "requests": 16,
+            "output_tokens": 64,
+            "max_iterations": 16,
+            "delay_iterations": 0
+          },
+          "prerequisite": {
+            "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+            "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43",
+            "python_sources": 421,
+            "scope": "same runtime Python and bounded graph/numerical prerequisites; not formal quality",
+            "original_source_contract": "FORMAL_GRAPH_R30_G1_R1_20261025_CONTRACT.json",
+            "original_source_sha256": "93b51310cd9bf14ea89fe260d455099181fe9865743052df5a081f7f5a01a820",
+            "protocol_difference": "Actual same-runtime diagnostic64 outputs; original formal1024 unchanged. No speed/quality equivalence claim."
+          }
+        }
+      },
+      "G3": {
+        "path": "WARM_GRAPH_COST_R31_G3_R1_20261025_CONTRACT.json",
+        "sha256": "7460755599b99541177dbe3e2bc6efc9e153b3d1af8db3347f46c1f67c8ca925",
+        "raw_root": "/cache/cch/hypic-independent-20261013/warm-graph-cost-r31-g3-r1-20261025",
+        "checked": {
+          "configuration_valid": true,
+          "device_run": false,
+          "device_admission_performed": false,
+          "controller_sha256": "fa5c4c9181a5434472c45b640a32821a56d1f0ff6096b8e64d810a4e0188811b",
+          "base_controller_sha256": "b26fa6006fd780b19aff3fd804a464e04aeb374b97152d9a24165157e1ee0100",
+          "graph_runtime": {
+            "profile": "selective-prefill-native-decode-v1",
+            "candidate_enabled": true,
+            "compilation_mode": 3,
+            "cudagraph_mode": "FULL_DECODE_ONLY",
+            "capture_sizes": [
+              1,
+              4,
+              8,
+              16,
+              24,
+              32
+            ],
+            "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+            "official_debug_logging": false
+          },
+          "active_manifest_sha256": "edb19beed1b0dc5434e088c3274d87c2a6363599315bc851b3c9b4a5aaf56614",
+          "source_bindings": 425,
+          "profile": {
+            "requests": 16,
+            "output_tokens": 64,
+            "max_iterations": 16,
+            "delay_iterations": 0
+          },
+          "prerequisite": {
+            "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+            "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43",
+            "python_sources": 421,
+            "scope": "same runtime Python and bounded graph/numerical prerequisites; not formal quality",
+            "original_source_contract": "FORMAL_GRAPH_R30_G3_R1_20261025_CONTRACT.json",
+            "original_source_sha256": "278fc2663df36a562d2b65b3bb291d1bcfe6fab5bc2a89ff089b0b9fc84a3489",
+            "protocol_difference": "Actual same-runtime diagnostic64 outputs; original formal1024 unchanged. No speed/quality equivalence claim."
+          }
+        }
+      }
+    },
+    "runtime_python": 421,
+    "common_bindings": 425,
+    "tests": {
+      "exit_code": 0,
+      "stderr": "test_actual_candidate_base_consumes_graph_and_profiler_argv (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_actual_native_base_consumes_graph_and_profiler_argv (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_default_checks_both_actual_contracts_without_device (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_foreign_device_and_oversized_profile_rejected (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_storage_guard_targets_only_exact_owned_cid (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_wrong_real_controller_identity_rejected (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_exact_private_warmup_precedes_capture (test_independent_warm_profile_workload.WarmProfileTests) ... ok\ntest_measured_failures_preserved_and_stopped (test_independent_warm_profile_workload.WarmProfileTests) ... ok\ntest_warmup_failure_retained_without_profile_start (test_independent_warm_profile_workload.WarmProfileTests) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 4.120s\n\nOK\n"
+    },
+    "structure": {
+      "exit_code": 0,
+      "stdout": "PASS: Maintainer Skill Tree structure is valid (29 skills)\n",
+      "stderr": ""
+    },
+    "diff": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "prior_host_failures": [
+    {
+      "operation": "exec-00000000000016ba",
+      "scope": "Pre-device HOST graph dictionary expected nonexistent formal_logging field;fixed to original R30 contract layout"
+    },
+    {
+      "operation": "exec-00000000000016be",
+      "scope": "Original1024canary validator cannot be applied directly to actual64profile. Fixed with honest original source-anchor validation and explicit64diagnostic scope, without rewriting original identities."
+    }
+  ],
+  "image_inventory": {
+    "operation": "exec-00000000000016b3",
+    "device_nodes": [],
+    "tools": {
+      "msprof": "/usr/local/Ascend/ascend-toolkit/latest/bin/msprof",
+      "asys": "/usr/local/Ascend/cann-9.1.0/tools/ascend_system_advisor/asys/asys",
+      "strace": null
+    },
+    "packages": {
+      "torch": "2.10.0+cpu",
+      "torch-npu": "2.10.0.post4",
+      "vllm": "0.23.0+empty",
+      "vllm-ascend": "0.23.0"
+    },
+    "sources": {
+      "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/profiler/__init__.py": {
+        "sha256": "33052fc6beb72aa7f7ebc2b7bc642f9116e947e802f7df0251c6c1de7355db0e",
+        "bytes": 831
+      },
+      "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/profiler/profiler.py": {
+        "sha256": "1a04902572383b74a401449e73929b2c4ce728d6c81bb59341876b03c7a82168",
+        "bytes": 15760
+      },
+      "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/profiler/_dynamic_profiler/__init__.py": {
+        "sha256": "75ad4f4c2943325f88064ad2beae890b59674be2bf0404b30afc5584dc4de4bb",
+        "bytes": 13
+      },
+      "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/profiler/analysis/__init__.py": {
+        "sha256": "75ad4f4c2943325f88064ad2beae890b59674be2bf0404b30afc5584dc4de4bb",
+        "bytes": 13
+      },
+      "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/profiler/analysis/prof_config/__init__.py": {
+        "sha256": "75ad4f4c2943325f88064ad2beae890b59674be2bf0404b30afc5584dc4de4bb",
+        "bytes": 13
+      },
+      "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/profiler/analysis/prof_common_func/__init__.py": {
+        "sha256": "75ad4f4c2943325f88064ad2beae890b59674be2bf0404b30afc5584dc4de4bb",
+        "bytes": 13
+      },
+      "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/profiler/analysis/prof_bean/__init__.py": {
+        "sha256": "75ad4f4c2943325f88064ad2beae890b59674be2bf0404b30afc5584dc4de4bb",
+        "bytes": 13
+      },
+      "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/profiler/analysis/prof_parse/__init__.py": {
+        "sha256": "75ad4f4c2943325f88064ad2beae890b59674be2bf0404b30afc5584dc4de4bb",
+        "bytes": 13
+      },
+      "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/profiler/analysis/prof_view/__init__.py": {
+        "sha256": "75ad4f4c2943325f88064ad2beae890b59674be2bf0404b30afc5584dc4de4bb",
+        "bytes": 13
+      },
+      "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/profiler/analysis/prof_view/cann_parse/__init__.py": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/profiler/analysis/prof_view/prof_db_parse/__init__.py": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/profiler/analysis/prof_view/prepare_parse/__init__.py": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "/vllm-workspace/vllm/vllm/profiler/__init__.py": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    }
+  },
+  "official_profiler_source": {
+    "operation": "exec-00000000000016bb",
+    "path": "/vllm-workspace/vllm-ascend/vllm_ascend/profiler/torch_npu_profiler.py",
+    "sha256": "0c9ffcaf695a9b1fcb44a51bdd92e69f763a7c5be64a8efbd498d6536b9e09e5",
+    "source": "#\n# Copyright (c) 2026 Huawei Technologies Co., Ltd. All Rights Reserved.\n# Copyright 2023 The vLLM team.\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this file except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#     http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n# This file is a part of the vllm-ascend project.\n#\n\nfrom contextlib import suppress\nfrom typing import Any\n\nimport torch_npu\nfrom vllm.config import ProfilerConfig\nfrom vllm.profiler.wrapper import WorkerProfiler\n\nimport vllm_ascend.envs as envs_ascend\nfrom vllm_ascend.ascend_config import get_ascend_config\n\n\nclass TorchNPUProfilerWrapper(WorkerProfiler):\n    \"\"\"Subclass of vLLM ``WorkerProfiler`` that wires in ``torch_npu.profiler``.\"\"\"\n\n    def __init__(self, profiler_config: ProfilerConfig, trace_name: str) -> None:\n        super().__init__(profiler_config)\n        self.profiler: Any = self._create_profiler(profiler_config, trace_name)\n\n    @staticmethod\n    def _create_profiler(profiler_config: ProfilerConfig, trace_name: str) -> Any:\n        if profiler_config.profiler != \"torch\":\n            raise RuntimeError(f\"Unrecognized profiler: {profiler_config.profiler}\")\n        if not profiler_config.torch_profiler_dir:\n            raise RuntimeError(\"torch_profiler_dir cannot be empty.\")\n        msmonitor_use_daemon = envs_ascend.MSMONITOR_USE_DAEMON\n        with suppress(RuntimeError):\n            msmonitor_use_daemon = get_ascend_config().msmonitor_use_daemon\n        if msmonitor_use_daemon:\n            raise RuntimeError(\"MSMONITOR_USE_DAEMON and torch profiler cannot be both enabled at the same time.\")\n\n        experimental_config = torch_npu.profiler._ExperimentalConfig(\n            export_type=torch_npu.profiler.ExportType.Text,\n            profiler_level=torch_npu.profiler.ProfilerLevel.Level1,\n            msprof_tx=False,\n            aic_metrics=torch_npu.profiler.AiCMetrics.PipeUtilization,\n            l2_cache=False,\n            op_attr=False,\n            data_simplification=True,\n            record_op_args=False,\n            gc_detect_threshold=None,\n        )\n\n        return torch_npu.profiler.profile(\n            activities=[\n                torch_npu.profiler.ProfilerActivity.CPU,\n                torch_npu.profiler.ProfilerActivity.NPU,\n            ],\n            with_stack=False,\n            profile_memory=profiler_config.torch_profiler_with_memory,\n            # NOTE: torch_npu.profiler.with_modules is equivalent to torch.profiler.with_stack.\n            # The with_stack option in torch_npu.profiler introduces significant time overhead.\n            with_modules=profiler_config.torch_profiler_with_stack,\n            experimental_config=experimental_config,\n            on_trace_ready=torch_npu.profiler.tensorboard_trace_handler(\n                profiler_config.torch_profiler_dir,\n                worker_name=trace_name,\n            ),\n        )\n\n    def _start(self) -> None:\n        self.profiler.start()\n\n    def _stop(self) -> None:\n        self.profiler.stop()\n\n    def _profiler_step(self) -> bool:\n        return True\n"
+  },
+  "host_tool_inventory": {
+    "operation": "exec-00000000000016ae",
+    "result": {
+      "tools": {
+        "strace": null,
+        "timeout": "/usr/bin/timeout",
+        "perf": null,
+        "bpftrace": null,
+        "msprof": null,
+        "asys": null
+      },
+      "versions": {
+        "timeout": [
+          "timeout (GNU coreutils) 9.0",
+          "Copyright (C) 2021 Free Software Foundation, Inc."
+        ]
+      },
+      "ptrace_scope": "2",
+      "cannbot_candidates": [
+        {
+          "path": "/home/mtuser/cch/cannbot-skills",
+          "exists": false,
+          "head": null
+        },
+        {
+          "path": "/cache/cch/cannbot-skills",
+          "exists": true,
+          "head": ""
+        }
+      ],
+      "cache_available": 9149595648
+    }
+  },
+  "expert_reference": {
+    "archive": "/cache/cch/cannbot-skills",
+    "operation": "exec-00000000000016c6",
+    "scope": "Archive expert guidance is not local proof; inspected perf-plugin archive has no SKILL.md entries. No external implementation or black-box optimizer executed."
+  },
+  "runtime_unchanged": true,
+  "device_run": false,
+  "full_goal_accepted": false
+}
