@@ -1,0 +1,14 @@
+{
+  "schema": "hypic-r34-tracking-decision-readiness/v1",
+  "operation": "exec-000000000000183a",
+  "exit_code": 0,
+  "result": {
+    "task_active_controller_verified": true,
+    "actual_renewed_contract_pairing_pass": true,
+    "decision_direct_cli_import_pass": true,
+    "no_device_work": true,
+    "decision_sha256": "bab95457ece1d6a33be17b419be04eb6268b6c95d8b6d2292c81e9960fad8453"
+  },
+  "scope": "Only new unbound decision CLI/actual contract pairing and task-handle consistency. No completed device arm or speed acceptance.",
+  "full_goal_complete": false
+}

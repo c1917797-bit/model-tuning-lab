@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R34_RENEWED12H_THREE_ARM_READY_BEFORE_ADMISSION",
+  "execution_state": "R34_RENEWED12H_A1_RUNNING_EXACT182F",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -1152,7 +1152,7 @@
     "human_reply": "续跑12小时，继续完整验收",
     "start_utc": "2026-10-25T18:36:27Z",
     "absolute_stop_utc": "2026-10-26T06:36:27Z",
-    "state": "R34_NEW_CONTRACTS_READY_BEFORE_ADMISSION",
+    "state": "R34_A1_RUNNING_EXACT182F",
     "plan": "R34_RENEWAL_12H_PLAN_20261025.json",
     "automation": {
       "id": "hypic-12",
@@ -1174,8 +1174,40 @@
         "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r34-a2-renewal-20261025"
       }
     },
-    "active_controller": null,
+    "active_controller": {
+      "state": "RUNNING_NOT_ACCEPTED",
+      "operation": "exec-000000000000182f",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "connector": "awmcp",
+      "arm": "A1",
+      "contract": "PREFIX_TERMINAL_R34_A1_RENEWAL_20261025_CONTRACT.json",
+      "contract_sha256": "177e1963058b90509b9b5d827f0650876488d71e32a0d43ba5485cab3126544f",
+      "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r34-a1-renewal-20261025",
+      "launch_checkpoint": "9ea95c958784b98ecba12990ecfd11412e995f40",
+      "readiness_operation": "exec-000000000000182a",
+      "observed_running_utc": "2026-10-25T18:44:28Z",
+      "auditor": "host_audits/r34_prefix_terminal_audit.py",
+      "absolute_stop_utc": "2026-10-26T06:36:27Z",
+      "rule": "Exact original ma/handle/raw only; running or unknown neverrestart. All432runtime/common andboundHOSTsources frozen. Terminal independent audit with live-release required beforeB1."
+    },
+    "decision": "host_audits/r34_prefix_terminal_decision.py",
+    "decision_readiness": "R34_TRACKING_DECISION_READINESS_20261025.json",
     "scope": "Same full three-stage goal; immediate causal16/c16/32768/64A/B/A does not replace final-source G1-G4x3/127x3quality/lifecycle."
   },
-  "active_attempt": null
+  "active_attempt": {
+    "state": "RUNNING_NOT_ACCEPTED",
+    "operation": "exec-000000000000182f",
+    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "connector": "awmcp",
+    "arm": "A1",
+    "contract": "PREFIX_TERMINAL_R34_A1_RENEWAL_20261025_CONTRACT.json",
+    "contract_sha256": "177e1963058b90509b9b5d827f0650876488d71e32a0d43ba5485cab3126544f",
+    "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r34-a1-renewal-20261025",
+    "launch_checkpoint": "9ea95c958784b98ecba12990ecfd11412e995f40",
+    "readiness_operation": "exec-000000000000182a",
+    "observed_running_utc": "2026-10-25T18:44:28Z",
+    "auditor": "host_audits/r34_prefix_terminal_audit.py",
+    "absolute_stop_utc": "2026-10-26T06:36:27Z",
+    "rule": "Exact original ma/handle/raw only; running or unknown neverrestart. All432runtime/common andboundHOSTsources frozen. Terminal independent audit with live-release required beforeB1."
+  }
 }
