@@ -1,0 +1,61 @@
+{
+  "schema": "hypic-r33-prefix-terminal-aba-plan/v1",
+  "date": "2026-10-25",
+  "primary_variable": "Prefix terminal caller skips unused per-token output matmul/assembly; allstate updates,querynormalization,observers,suffix,castplacement,finite/completion/PDC/IO unchanged.",
+  "code_checkpoint": "3366381724fae9fd96ec9040b6e172ed523cc9ad",
+  "prior": "R32_GATE_CAST_ABA_INCONCLUSIVE_20261025.json",
+  "math_host_controls": "R33_PREFIX_TERMINAL_CODE_READINESS_20261025.json",
+  "common_protocol": {
+    "input_tokens": 32768,
+    "output_tokens": 64,
+    "ignore_eos": true,
+    "requests": 16,
+    "c": 16,
+    "private_warm_waves": 3,
+    "private_warm_requests": 48,
+    "public_native_warmups": 4,
+    "profiler": false,
+    "pre_timer_actual_shapes": [
+      8,
+      39
+    ],
+    "four_worker_private_state_equality": true,
+    "original_worker_log_prefixes_sealed_before_timer": true
+  },
+  "order": [
+    "A1",
+    "independent audit/release",
+    "B1",
+    "independent audit/release",
+    "A2",
+    "independent audit/release",
+    "preregistered decision"
+  ],
+  "primary_metric": "unprofiled16request client makespan after actual warm proof",
+  "screen_gain_percent": 5,
+  "control_drift_limit_percent": 5,
+  "all_three_independent_valid_arms_required": true,
+  "abort": "Any numeric,ownership,isolation,source or common warmproof failure; preserve and independently audit, no automatic repeat or gate changes.",
+  "authority": {
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tp": 4,
+    "model": "27B",
+    "absolute_stop_utc": "2026-10-25T18:07:17Z",
+    "minimum_remaining_before_new_arm_seconds": 1500,
+    "budget_reason": "R32 physical startup+two additional fixed64token warmwaves+audit/cleanup allowance; admission also requires current source/cache/resource checks. Time insufficient means leave missing arms unaccepted, no deadline extension."
+  },
+  "full_goal_complete": false,
+  "claims_not_allowed": [
+    "formal1024 performance",
+    "full127x3quality",
+    "lifecycle complete",
+    "paper reproduced",
+    "29Skill functionality",
+    "main synchronized"
+  ]
+}

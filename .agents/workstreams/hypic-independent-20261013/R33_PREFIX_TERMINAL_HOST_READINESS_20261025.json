@@ -1,0 +1,152 @@
+{
+  "schema": "hypic-r33-host-readiness/v1",
+  "operation": "exec-0000000000001758",
+  "focused_cpu_operation": "exec-0000000000001755",
+  "focused_cpu_passes": 23,
+  "checks": {
+    "A1": {
+      "configuration_valid": true,
+      "device_run": false,
+      "controller_sha256": "098318e1397940a36cff8841cb22ded13db851ce6b40e07ad0f6c7ff36b86096",
+      "graph_runtime": {
+        "candidate_enabled": true,
+        "capture_sizes": [
+          1,
+          4,
+          8,
+          16,
+          24,
+          32
+        ],
+        "compilation_mode": 3,
+        "cudagraph_mode": "FULL_DECODE_ONLY",
+        "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+        "official_debug_logging": false,
+        "profile": "selective-prefill-native-decode-v1"
+      },
+      "active_manifest_sha256": "b6c4ebbe4daa529fc185b9323d45e96139ac8d94d001adf783cba78684d7553f",
+      "source_bindings": 432,
+      "prerequisite": {
+        "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+        "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43",
+        "python_sources": 426,
+        "scope": "Same retained422Python and graph identity; new prefix terminal adapter requires actual private state/warmproof.",
+        "runtime_differences": [
+          "graph_candidate/activation.py",
+          "independent_gate_cast_delivery.py",
+          "independent_recurrent_boundary.py"
+        ],
+        "runtime_additions": [
+          "prefix_terminal_r33/__init__.py",
+          "prefix_terminal_r33/patch.py",
+          "prefix_terminal_r33/sitecustomize.py",
+          "prefix_terminal_r33/terminal_math.py"
+        ]
+      },
+      "arm": "A1"
+    },
+    "B1": {
+      "configuration_valid": true,
+      "device_run": false,
+      "controller_sha256": "098318e1397940a36cff8841cb22ded13db851ce6b40e07ad0f6c7ff36b86096",
+      "graph_runtime": {
+        "candidate_enabled": true,
+        "capture_sizes": [
+          1,
+          4,
+          8,
+          16,
+          24,
+          32
+        ],
+        "compilation_mode": 3,
+        "cudagraph_mode": "FULL_DECODE_ONLY",
+        "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+        "official_debug_logging": false,
+        "profile": "selective-prefill-native-decode-v1"
+      },
+      "active_manifest_sha256": "44fcf36f5514c58defa71834b5bcb33a4ddbbe9ec39ac45d1636b9138ef354b0",
+      "source_bindings": 432,
+      "prerequisite": {
+        "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+        "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43",
+        "python_sources": 426,
+        "scope": "Same retained422Python and graph identity; new prefix terminal adapter requires actual private state/warmproof.",
+        "runtime_differences": [
+          "graph_candidate/activation.py",
+          "independent_gate_cast_delivery.py",
+          "independent_recurrent_boundary.py"
+        ],
+        "runtime_additions": [
+          "prefix_terminal_r33/__init__.py",
+          "prefix_terminal_r33/patch.py",
+          "prefix_terminal_r33/sitecustomize.py",
+          "prefix_terminal_r33/terminal_math.py"
+        ]
+      },
+      "arm": "B1"
+    },
+    "A2": {
+      "configuration_valid": true,
+      "device_run": false,
+      "controller_sha256": "098318e1397940a36cff8841cb22ded13db851ce6b40e07ad0f6c7ff36b86096",
+      "graph_runtime": {
+        "candidate_enabled": true,
+        "capture_sizes": [
+          1,
+          4,
+          8,
+          16,
+          24,
+          32
+        ],
+        "compilation_mode": 3,
+        "cudagraph_mode": "FULL_DECODE_ONLY",
+        "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+        "official_debug_logging": false,
+        "profile": "selective-prefill-native-decode-v1"
+      },
+      "active_manifest_sha256": "b6c4ebbe4daa529fc185b9323d45e96139ac8d94d001adf783cba78684d7553f",
+      "source_bindings": 432,
+      "prerequisite": {
+        "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+        "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43",
+        "python_sources": 426,
+        "scope": "Same retained422Python and graph identity; new prefix terminal adapter requires actual private state/warmproof.",
+        "runtime_differences": [
+          "graph_candidate/activation.py",
+          "independent_gate_cast_delivery.py",
+          "independent_recurrent_boundary.py"
+        ],
+        "runtime_additions": [
+          "prefix_terminal_r33/__init__.py",
+          "prefix_terminal_r33/patch.py",
+          "prefix_terminal_r33/sitecustomize.py",
+          "prefix_terminal_r33/terminal_math.py"
+        ]
+      },
+      "arm": "A2"
+    },
+    "package": "runtime monkeypatch package contract: PASS",
+    "official_bridge": {
+      "exit": 0,
+      "stdout": "source-bound bridge install/restore PASS\n",
+      "stderr": ""
+    },
+    "disabled": {
+      "exit": 0,
+      "stdout": "disabled no import PASS\n",
+      "stderr": ""
+    },
+    "invalid_enabled": {
+      "exit": 78,
+      "failed_closed": true,
+      "stderr_tail": "3.12.13/lib/python3.12/pathlib.py\", line 1027, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/python3.12.13/lib/python3.12/pathlib.py\", line 1013, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/probe/absent-r33-manifest.json'\n"
+    }
+  },
+  "runtime_python": 426,
+  "common_bindings": 432,
+  "device_allocated": false,
+  "code_checkpoint": "3366381724fae9fd96ec9040b6e172ed523cc9ad",
+  "scope": "Host/package/official CPU-only bootstrap contract proof only. No actual NPU allocation,activation,state,service gain or paper acceptance yet."
+}

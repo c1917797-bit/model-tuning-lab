@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R32_ABA_INCONCLUSIVE_TIMED_FIRST_USE_R33_PREFIX_MODEL_CPU_ONLY",
+  "execution_state": "R33_PREFIX_TERMINAL_PACKAGE_HOST_READY_NO_DEVICE",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -1054,11 +1054,35 @@
     "scope": "Evidence replay and forward case specifications, not blind Skill behavior or29functional acceptance."
   },
   "r33_prefix_terminal_model": {
-    "state": "HOST_CPU_COUNTERFACTUAL_ONLY_NOT_INSTALLED",
-    "plan": "HYPIC_MODEL_GUIDED_NEXT_ACTION_20261025.json",
-    "host_model": "host_audits/r33_prefix_terminal_cpu_model.py",
-    "cpu_cases": 12,
-    "cpu_operation": "exec-000000000000174a",
-    "source_or_npu_modified": false
+    "state": "PACKAGE_HOST_READY_NEW3ARM_CONTRACTS_UNUSED",
+    "plan": "R33_PREFIX_TERMINAL_A_B_A_PLAN_20261025.json",
+    "readiness": "R33_PREFIX_TERMINAL_HOST_READINESS_20261025.json",
+    "controller": "host_audits/r33_prefix_terminal_trial.py",
+    "auditor": "host_audits/r33_prefix_terminal_audit.py",
+    "code_checkpoint": "3366381724fae9fd96ec9040b6e172ed523cc9ad",
+    "runtime_python": 426,
+    "source_bindings": 432,
+    "focused_cpu_tests": 23,
+    "focused_test_operation": "exec-0000000000001755",
+    "official_image_preflight": "exec-0000000000001758",
+    "active_controller": null,
+    "contracts": [
+      {
+        "arm": "A1",
+        "contract": "PREFIX_TERMINAL_R33_A1_20261025_CONTRACT.json",
+        "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r33-a1-20261025"
+      },
+      {
+        "arm": "B1",
+        "contract": "PREFIX_TERMINAL_R33_B1_20261025_CONTRACT.json",
+        "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r33-b1-20261025"
+      },
+      {
+        "arm": "A2",
+        "contract": "PREFIX_TERMINAL_R33_A2_20261025_CONTRACT.json",
+        "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r33-a2-20261025"
+      }
+    ],
+    "next": "Publish package checkpoint then fresh direct ma/source/model/image/input/physical0-3/ports/cache/time/newroot admission; A1 only. Terminal independent audit before nextarm. Runtime/boundHOST immutable while live."
   }
 }
