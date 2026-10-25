@@ -1,0 +1,49 @@
+{
+  "schema": "hypic-selective-graph-canary-plan/v1",
+  "created_utc": "2026-10-25T09:14:58.853984+00:00",
+  "order": [
+    "G1",
+    "independent-live-audit",
+    "G3",
+    "independent-live-audit"
+  ],
+  "contracts": {
+    "G1": {
+      "path": "GRAPH_R27_G1_CANARY_R1_20261025_CONTRACT.json",
+      "sha256": "8f8e9fc9cf8f4dafa0b4732eba8feae36dbdb05af6c017292a9cd46a52d6cdda",
+      "raw_root": "/cache/cch/hypic-independent-20261013/graph-r27-g1-canary-r1-20261025"
+    },
+    "G3": {
+      "path": "GRAPH_R27_G3_CANARY_R1_20261025_CONTRACT.json",
+      "sha256": "d689f2f65c2b984754933754ddbe18c8b724593b114f0788af72d101b6c913dc",
+      "raw_root": "/cache/cch/hypic-independent-20261013/graph-r27-g3-canary-r1-20261025"
+    }
+  },
+  "runtime_python": 420,
+  "runtime_bindings": 422,
+  "host_bindings": 424,
+  "first_pair_predecessor": "R25_FIRST_PAIR_DECISION_20261025.json",
+  "host_tests": {
+    "router_and_loader_before_quality": {
+      "operation": "exec-00000000000015af",
+      "tests": 58
+    },
+    "quality_loader_and_actual_official_ABI": {
+      "operation": "exec-00000000000015d1",
+      "tests": 16
+    },
+    "controller": {
+      "operation": "exec-00000000000015ab",
+      "tests": 29
+    },
+    "auditor": {
+      "operation": "exec-00000000000015cd",
+      "tests": 33
+    }
+  },
+  "source_policy": "No old successful algorithm/operator/runner/scheduler import; unchanged officialimage27B/physical0-3TP4; all current independent helpers preserved",
+  "graph_evidence_scope": "Fourowned-rank FULL capture; actual local-firstTP0 replay directly logged, successful actual3TP4 requests; not eachrequest/token or four completed replay count",
+  "quality_loader_support": "Optional existing QualityEvidencePolicy and catalog scheduler integrated before future formal source freeze; this single-public canary does not validate full127x3 quality",
+  "absolute_stop_utc": "2026-10-25T18:07:17Z",
+  "scope": "Bounded compatibility/numerical/mechanism only; all G1-G4x3 performance/fullpairedquality/lifecycle/wholegoal still required"
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "hypic-r27-host-readiness/v1",
+  "scope": "Disabled-by-default source-bound selective graph candidate; CPU/static proof only before real 27B TP4 native/HYPIC canaries",
+  "predecessor": "R25_FIRST_PAIR_DECISION_20261025.json",
+  "source": {
+    "unchanged_prior_python": 413,
+    "new_runtime_python": 7,
+    "runtime_bindings": 422,
+    "host_bindings": 424,
+    "runtime_sha256": {
+      "graph_candidate/__init__.py": "81dafb86a44db963b46b5f31caec2537cf7e478fd6d2696f884b28600b2e03ee",
+      "graph_candidate/activation.py": "304e61e91e67c56c4881b43f83d1bf015e040b421975dc81323c31dedee3493a",
+      "graph_candidate/source_contract.py": "311acfa4fd1f9f790bbf4fd0b11aa970f45f3d186b9eb5b373b3077115939eef",
+      "graph_candidate/entry_router.py": "2a514f70a90133af3ef58b330acd33f8f75eaf704358a92723f2d39d35519bed",
+      "graph_candidate/prefill_bridge.py": "5996cfbb1b69ee66036e71841f505fb1e2c671f07b96905ad4129278a02566bf",
+      "graph_candidate/worker_loader.py": "2f0d26ac3dd623bc1f3aae751feac73ec6291159614ad8b1345623bcdf9b76d1",
+      "graph_candidate/bootstrap/sitecustomize.py": "e0b38aeacffbba85febac6e955b36b23f1ab3cd144d7c93837599b6748c663ee"
+    },
+    "controller_sha256": "50a97e444fb14b3cd3a0b39833e861e3f9d0aba6f7d1682a1673858e7fec5342",
+    "auditor_sha256": "ad9b0b414c81c76f295ddd00228ce2ad64ff24fd10734f6eaf78ef0b9136df1c"
+  },
+  "validation": {
+    "contracts_static_operation": "exec-00000000000015db",
+    "G1_configuration_valid": true,
+    "G3_configuration_valid": true,
+    "source_byte_checks": true,
+    "router_before_quality": {
+      "operation": "exec-00000000000015af",
+      "tests": 58,
+      "scope": "includes actual pinned official dynamic-input helper; CPU, not NPU"
+    },
+    "quality_loader_delta": {
+      "operation": "exec-00000000000015d1",
+      "tests": 16,
+      "scope": "targeted real quality policy/catalog routing and actual official ABI; not fullquality"
+    },
+    "controller": {
+      "operation": "exec-00000000000015ab",
+      "tests": 29
+    },
+    "auditor": {
+      "operation": "exec-00000000000015cd",
+      "tests": 33
+    },
+    "root_review": "Read production router/source binder/prefill bridge/activation/loader and HOST controller/auditor; independent review corrected actual forward signature ABI and official local-first replay logging scope"
+  },
+  "contracts": {
+    "G1": {
+      "path": "GRAPH_R27_G1_CANARY_R1_20261025_CONTRACT.json",
+      "sha256": "8f8e9fc9cf8f4dafa0b4732eba8feae36dbdb05af6c017292a9cd46a52d6cdda",
+      "raw_root": "/cache/cch/hypic-independent-20261013/graph-r27-g1-canary-r1-20261025"
+    },
+    "G3": {
+      "path": "GRAPH_R27_G3_CANARY_R1_20261025_CONTRACT.json",
+      "sha256": "d689f2f65c2b984754933754ddbe18c8b724593b114f0788af72d101b6c913dc",
+      "raw_root": "/cache/cch/hypic-independent-20261013/graph-r27-g3-canary-r1-20261025"
+    }
+  },
+  "default_disabled": true,
+  "source_policy": "Only current independent helper code + new adapters; never import/mount/copy prior successful HYPIC implementation",
+  "remaining": [
+    "Fresh ma/direct/host/branch/actual0-3/8233/HCCL102ports/source/model/image/input/newraw admission",
+    "Actual native G1 and independent HYPIC G3 pinned-image startup/3 fixed-output requests",
+    "Independent source/mechanism/numerical/snapshot/capture/local-firstreplay/physical/live-release audit",
+    "New matched formal performance/full naturalEOS pairedquality/lifecycle/29functional gates"
+  ],
+  "fixed_stop_utc": "2026-10-25T18:07:17Z",
+  "no_claim": "No real compiler or NPU graph success, no speed/quality/wholepaper acceptance"
+}
