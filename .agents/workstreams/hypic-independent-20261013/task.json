@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R30_G1_GRAPH_FORMAL_RUNNING_EXACT1672",
+  "execution_state": "R31_ATTRIBUTION_RECOVERED_R32_SINGLE_VARIABLE_SELECTED",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -89,7 +89,7 @@
     "cost_decomposition": "R30_PAIR_COST_DECOMPOSITION_20261025.json"
   },
   "r31_cost_profile": {
-    "state": "G3_RUNNING_NOT_ACCEPTED",
+    "state": "FOUR_RANK_HARDWARE_CSV_RECOVERED_CPU_ONLY",
     "plan": "R31_WARM_GRAPH_PROFILE_PLAN_20261025.json",
     "readiness": "R31_WARM_GRAPH_PROFILE_HOST_READINESS_20261025.json",
     "contracts": {
@@ -185,8 +185,12 @@
       }
     },
     "first_group": "G3",
-    "active_controller": {
-      "state": "RUNNING_NOT_ACCEPTED",
+    "active_controller": null,
+    "scope": "bounded current-source warmedc16/32768/64 official attribution, not formal1024 speed/fullquality;425runtime bindings unchanged",
+    "cache_parity_repair": "Final HOST/static16c9 includes actual cache argv/directory assertions; R30 runtime425bytes unchanged.",
+    "static_operation": "exec-00000000000016c9",
+    "last_controller": {
+      "state": "VALID_COLLECTION_AUDITED_RELEASED",
       "operation": "exec-00000000000016ce",
       "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
       "connector": "awmcp",
@@ -198,11 +202,20 @@
       "observed_running_utc": "2026-10-25T12:58:52Z",
       "scope": "bounded warmedc16/32768/64 official current-source cost capture, not formal1024speed/quality",
       "auditor": "host_audits/r31_warm_profile_audit.py",
-      "audit_output": "/cache/cch/hypic-independent-20261013/r31-g3-independent-audit-r1-20261025.json"
+      "audit_output": "/cache/cch/hypic-independent-20261013/r31-g3-independent-audit-r1-20261025.json",
+      "terminal_state": "VALID_COLLECTION_AUDITED_RELEASED",
+      "independent_audit": "exec-00000000000016d4",
+      "evidence": "R31_G3_COLLECTION_AUDIT_20261025.json"
     },
-    "scope": "bounded current-source warmedc16/32768/64 official attribution, not formal1024 speed/fullquality;425runtime bindings unchanged",
-    "cache_parity_repair": "Final HOST/static16c9 includes actual cache argv/directory assertions; R30 runtime425bytes unchanged.",
-    "static_operation": "exec-00000000000016c9"
+    "collection_evidence": "R31_G3_COLLECTION_AUDIT_20261025.json",
+    "offline_export_state": "R31_OFFLINE_EXPORT_STATE_20261025.json",
+    "active_offline_operation": null,
+    "cost_report": {
+      "report": "/cache/cch/hypic-independent-20261013/r31-g3-offline-analysis-r1-20261025/four-rank-hardware-cost-r6.json",
+      "sha256": "3fdd8b5d1e07ec89fd9a880c964c019655a0c1a4a756569f65c78e6462fd951c",
+      "operation": "exec-000000000000170e",
+      "candidate_ledger": "R32_MODEL_GUIDED_SINGLE_VARIABLE_PLAN_20261025.json"
+    }
   },
   "r29_warmup": {
     "state": "BOUNDED_NPU_ACCEPTED_NOT_SPEED_OR_FULL_QUALITY",
@@ -412,7 +425,7 @@
     "service_ports": [
       8233
     ],
-    "state": "R27 G3 terminal160b failure/0HTTP/370clean; independent1628 source424/raw8hash/4physicalPID/liveCIDabsent/8233free/0-3empty. No owned live stage."
+    "state": "R31 device16ce terminal/independent16d4 valid and exact released. CPU-only offline export1706 completed; no owned live NPU job."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -427,7 +440,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Track exact R31G3 exec16ce/originalma/raw. Terminal run host_audits/r31_warm_profile_audit.py --contract WARM_GRAPH_COST_R31_G3_R1_20261025_CONTRACT.json --live-release --output /cache/cch/hypic-independent-20261013/r31-g3-independent-audit-r1-20261025.json. Verify16profile+16privatewarm64 HTTP,16hotfourrank48/16,425source/graph/physical/release then actual fourworker trace integrity and cost attribution. No profiled64 speed/quality claim; decide one behavior switch from budget.",
+  "next_action": "Implement only the selected gate-cast placement switch, source-audit and focused exact-value controls; freeze new bounded integrated contracts. No unchanged negative12matrix, no new profile recapture for offline-parser problems.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -483,21 +496,7 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": {
-    "state": "RUNNING_NOT_ACCEPTED",
-    "operation": "exec-00000000000016ce",
-    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
-    "connector": "awmcp",
-    "contract": "WARM_GRAPH_COST_R31_G3_R1_20261025_CONTRACT.json",
-    "contract_sha256": "5f9e8601a1f7f4030f77535fb02d557e6a9acfce9e883092ae8aa2979cb16699",
-    "raw_root": "/cache/cch/hypic-independent-20261013/warm-graph-cost-r31-g3-r1-20261025",
-    "checkpoint": "7872ab3c3acd48970b264252c083ab341aaaabed",
-    "admission_operation": "exec-00000000000016cd",
-    "observed_running_utc": "2026-10-25T12:58:52Z",
-    "scope": "bounded warmedc16/32768/64 official current-source cost capture, not formal1024speed/quality",
-    "auditor": "host_audits/r31_warm_profile_audit.py",
-    "audit_output": "/cache/cch/hypic-independent-20261013/r31-g3-independent-audit-r1-20261025.json"
-  },
+  "active_attempt": null,
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
@@ -809,28 +808,13 @@
     ],
     "start_utc": "2026-10-25T06:07:17Z",
     "absolute_stop_utc": "2026-10-25T18:07:17Z",
-    "state": "R31_G3_WARM_PROFILE_RUNNING_EXACT16CE",
+    "state": "R31_COLLECTION_RELEASED_CPU_EXPORT_ROUTE_TEST16EA",
     "plan": "R24_R2_RENEWAL_PLAN_20261025.json",
     "contracts": [
       "C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json",
       "C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json"
     ],
-    "active_controller": {
-      "state": "RUNNING_NOT_ACCEPTED",
-      "operation": "exec-00000000000016ce",
-      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
-      "connector": "awmcp",
-      "contract": "WARM_GRAPH_COST_R31_G3_R1_20261025_CONTRACT.json",
-      "contract_sha256": "5f9e8601a1f7f4030f77535fb02d557e6a9acfce9e883092ae8aa2979cb16699",
-      "raw_root": "/cache/cch/hypic-independent-20261013/warm-graph-cost-r31-g3-r1-20261025",
-      "checkpoint": "7872ab3c3acd48970b264252c083ab341aaaabed",
-      "admission_operation": "exec-00000000000016cd",
-      "observed_running_utc": "2026-10-25T12:58:52Z",
-      "scope": "bounded warmedc16/32768/64 official current-source cost capture, not formal1024speed/quality",
-      "auditor": "host_audits/r31_warm_profile_audit.py",
-      "audit_output": "/cache/cch/hypic-independent-20261013/r31-g3-independent-audit-r1-20261025.json",
-      "operation_id": "exec-00000000000016ce"
-    },
+    "active_controller": null,
     "last_hypic_graph_controller": {
       "operation_id": "exec-000000000000160b",
       "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
@@ -870,7 +854,7 @@
       "observed_running_utc": "2026-10-25T07:37:26Z",
       "rule": "Track exact original peer and handle; timeout/missing requires raw and actual process inspection, never restart."
     },
-    "resource_lease": "Exact owned R31G3 exec16ce at ma a6109, newraw warm-graph-cost-r31-g3-r1-20261025. Track samepeer/handle/raw until terminal. Runtime425/guards unchanged. Profilecap2GiB/cachefreefloor4GiB;only0-3. No restart or source edits while running/unclear;stop18:07:17UTC.",
+    "resource_lease": "No owned NPUstage.16ce terminalexit0/16d4 verifies16hotfourworker/267clean/425sources/exactCIDremoved/portfree/finalphysical0-3empty. CPU-only offline exporter16ea active, no numberedNPUdevice mapped. Original capture immutable; no recapture. Deadline18:07:17UTC unchanged.",
     "scope": "Same full independent27B/physical0-3/TP4 C1/C2 three-stage goal; C3/dualTP2 excluded; original successful code not reused",
     "prior_failure": "R24_OFF_R1_ADMISSION_FAILURE_20261023.json",
     "prior_followup": "R24_WAIT_FOLLOWUP_TERMINAL_20261023.json remains immutable history",
@@ -940,7 +924,7 @@
       "G3_evidence": "R27_G3_GRAPH_CAPTURE_FAILURE_20261025.json",
       "G3_independent_audit": "exec-0000000000001628"
     },
-    "latest_confirmed_publication": "7872ab3c3acd48970b264252c083ab341aaaabed",
+    "latest_confirmed_publication": "af2b51e1b271bf24dfa262177947d00cc4cfce1c",
     "pending_publication": {
       "checkpoint": "283de3b13c05042ed57ebe4cc90329454cab4b32",
       "evidence": "R24_R2_PUBLICATION_FAILURE_20261025.json",
@@ -964,5 +948,11 @@
       "independent_audit": "exec-00000000000016a8",
       "evidence": "R30_G3_GRAPH_FORMAL_AUDIT_20261025.json"
     }
+  },
+  "r32_single_variable": {
+    "state": "PREREGISTERED_DRAFT_NOT_IMPLEMENTED",
+    "plan": "R32_MODEL_GUIDED_SINGLE_VARIABLE_PLAN_20261025.json",
+    "primary_variable": "C1 short-boundary gate-cast placement only",
+    "next": "Implement only the selected gate-cast placement switch, source-audit and focused exact-value controls; freeze new bounded integrated contracts. No unchanged negative12matrix, no new profile recapture for offline-parser problems."
   }
 }

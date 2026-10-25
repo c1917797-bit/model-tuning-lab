@@ -1,0 +1,77 @@
+{
+  "schema": "hypic-r31-offline-export-state/v1",
+  "state": "FOUR_RANK_HARDWARE_CSV_RECOVERED_CPU_ONLY",
+  "cpu_only": true,
+  "collection_evidence": "R31_G3_COLLECTION_AUDIT_20261025.json",
+  "original_files_unchanged": true,
+  "original_tree_sha256": "08d81e3f309dd94d55efe435794d7fd07a56b514dd94d38fb72caa8cfabd58a0",
+  "copy_manifest_sha256": "6a4fb6014bcc56e9d0e717d94855396f140f7a01a97cf38297e34e9d671ad3b2",
+  "analysis_root": "/cache/cch/hypic-independent-20261013/r31-g3-offline-analysis-r1-20261025",
+  "original_bytes": 1497302902,
+  "offline_api": {
+    "operation": "exec-00000000000016df",
+    "returncode": 0,
+    "csvs": 0,
+    "accepted": false,
+    "reason": "Underlying CANNExportParser failed for all4ranks; process0 alone is not artifact acceptance.",
+    "log": "/cache/cch/hypic-independent-20261013/r31-g3-offline-analysis-r1-20261025/offline-parser.log"
+  },
+  "native_export_counterexample": {
+    "operation": "exec-00000000000016e9",
+    "returncode": 255,
+    "args": [
+      "/usr/local/Ascend/ascend-toolkit/latest/bin/msprof",
+      "--export=on",
+      "--output=/analysis/profile/rank0_58_20261025130941427_ascend_pt/PROF_000001_20261025130941484_00000058ICIFQOGO"
+    ],
+    "cwd": "/workspace",
+    "stdout": "DrvMngGetConsoleLogLevel failed. (g_conLogLevel=3)\n[ERROR] Init platform by driver faild!\n",
+    "stderr": "",
+    "log": "/analysis/msprof-direct-rank0-r1.log",
+    "scope": "Direct native exporter under identical no-NPU CPU-only environment; platform-init failure is an observed parser/toolchain failure, not HYPIC kernel attribution."
+  },
+  "active_test": null,
+  "next": "Implement only the selected gate-cast placement switch, source-audit and focused exact-value controls; freeze new bounded integrated contracts. No unchanged negative12matrix, no new profile recapture for offline-parser problems.",
+  "full_goal_accepted": false,
+  "recovery": {
+    "rank0_operation": "exec-00000000000016f7",
+    "ranks123_operation": "exec-0000000000001706",
+    "entry_sha256": "f110cac92111fb3bb36904422f6e66469d434f9dc13f57b41c892caa941d8bdb",
+    "documented_commands": [
+      "python msprof.py import -dir PROF",
+      "python msprof.py export summary -dir PROF --format csv"
+    ],
+    "artifacts": "5 nonempty CSV families perrank; actual schema/rows checked1700, four-rank summaries170e",
+    "report": "/cache/cch/hypic-independent-20261013/r31-g3-offline-analysis-r1-20261025/four-rank-hardware-cost-r6.json",
+    "sha256": "3fdd8b5d1e07ec89fd9a880c964c019655a0c1a4a756569f65c78e6462fd951c",
+    "cpu_only_no_npu_devices": true,
+    "no_npu_recapture": true
+  },
+  "preserved_attempts": [
+    {
+      "operation": "exec-00000000000016ea",
+      "reason": "Python entry requires subcommands, old native CLI ABI returnedusage2."
+    },
+    {
+      "operation": "exec-00000000000016ef",
+      "reason": "5GiB CPU scratch guard rejected before work."
+    },
+    {
+      "operation": "exec-00000000000016f4",
+      "reason": "Four CPUtrace archives losslessly preserved; complete JSON parse failed because derived JSON has no final closing array."
+    },
+    {
+      "operation": "exec-00000000000016f8",
+      "reason": "CPU export uses bare array, not traceEvents object; parser fixed against observed format without modifying input."
+    }
+  ],
+  "storage": {
+    "trace_archives": "/cache/cch/hypic-independent-20261013/r31-g3-offline-analysis-r1-20261025/cpu-trace-archive-r4.json",
+    "derived_database_archives": "/cache/cch/hypic-independent-20261013/r31-g3-offline-analysis-r1-20261025/derived-msprof-db-archive-r7.json",
+    "database_archive_operation": "exec-0000000000001713",
+    "lossless_verified": true,
+    "last_free_bytes": 4357365760,
+    "scope": "Only derived CPU duplicates archived; original NPU files unchanged. Recheck cache/physical/ports before any future device admission."
+  },
+  "causal_scope": "Offline exporter recovery is not HYPIC algorithm-cause proof. Hardware attribution ranks experiments only; partial CPU prefix limitations retained."
+}

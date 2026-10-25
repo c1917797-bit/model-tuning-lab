@@ -1,0 +1,38 @@
+{
+  "schema": "hypic-r31-postrun-analysis-validation/v1",
+  "state": "POSTRUN_DATA_BINDING_AND_STRUCTURE_VALID",
+  "operation": "exec-0000000000001715",
+  "data_binding_checks": "pass",
+  "structure_skills": 29,
+  "diff_check": true,
+  "runtime_changed": false,
+  "focused_checks": [
+    {
+      "command": [
+        "bash",
+        "scripts/validate-mst.sh"
+      ],
+      "returncode": 0,
+      "stdout": "PASS: Maintainer Skill Tree structure is valid (29 skills)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "prelaunch_test_failure_preserved": {
+    "operation": "exec-0000000000001714",
+    "result": "6 HOST tests ran;5passed,1error on consumed G3 root",
+    "error": "ValueError: new immutable profile root required",
+    "classification": "Prelaunch-only assertion rerun after immutable profile root was consumed. No source change or old-root deletion required; postrun independent16d4 remains authority.",
+    "no_new_npu_job": true
+  },
+  "scope": "Curated four-rank attribution and preregistered single-variable plan; no new runtime implementation/NPU/causal speed/fullquality acceptance."
+}

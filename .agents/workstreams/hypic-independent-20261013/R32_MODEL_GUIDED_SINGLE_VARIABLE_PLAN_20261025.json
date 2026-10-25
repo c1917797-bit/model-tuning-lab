@@ -1,0 +1,174 @@
+{
+  "schema": "hypic-model-guided-single-variable-diagnosis/v1",
+  "date": "2026-10-25",
+  "state": "MEASURED_PRIORITY_FROZEN_NO_CAUSAL_ALGORITHM_ACCEPTANCE",
+  "human_direction": "Replace exhaustive search with a small model and a few likely routes; source differences are clues, causes require a single-variable experiment.",
+  "model": {
+    "equation": "delta_service = -saved_prefill + added_material_handling + added_coordination + evidence_IO + changed_decode_queue",
+    "identifiability": "R30 one matched negative pair identifies total effect only. Components need bounded attribution and one-variable treatment. Profile64 cannot be scaled to formal1024 or full381 quality.",
+    "formal_evidence": "R30_FIRST_PAIR_DECISION_20261025.json",
+    "tpot_regression_percent": 22.378606174476,
+    "ttft_p95_regression_percent": 122.95241450067915
+  },
+  "evidence": {
+    "collection": "R31_G3_COLLECTION_AUDIT_20261025.json",
+    "hardware_report": "/cache/cch/hypic-independent-20261013/r31-g3-offline-analysis-r1-20261025/four-rank-hardware-cost-r6.json",
+    "hardware_sha256": "3fdd8b5d1e07ec89fd9a880c964c019655a0c1a4a756569f65c78e6462fd951c",
+    "hardware_operation": "exec-000000000000170e",
+    "four_ranks_exported_cpu_only": true,
+    "trace_window_seconds": [
+      93.514309016,
+      93.5117474,
+      93.50931958,
+      93.51044156
+    ],
+    "stream_sync_api_seconds": [
+      17.74883483,
+      17.787620710000002,
+      17.37154475,
+      17.3995986
+    ],
+    "device_async_copy_union_seconds": [
+      0.0164701869979684,
+      0.01631556000204771,
+      0.01631217999958206,
+      0.016016880004222286
+    ],
+    "cpu_prefix": {
+      "path": "/cache/cch/hypic-independent-20261013/r31-g3-offline-analysis-r1-20261025/cpu-rank0-complete-prefix-r6.json",
+      "operation": "exec-0000000000001701",
+      "complete_records": 1980165,
+      "array_closed": false,
+      "partial_overlap_count": 9,
+      "envelope_seconds": 93.24671725,
+      "copy_self_seconds": 24.374791,
+      "finite_scalar_union_seconds": 0.481164
+    },
+    "copy_context": {
+      "path": "/cache/cch/hypic-independent-20261013/r31-g3-offline-analysis-r1-20261025/cpu-rank0-complete-prefix-r7.json",
+      "operation": "exec-000000000000170c",
+      "leading_contexts": [
+        {
+          "context": "vllm::qwen_gdn_attention_core / aten::_to_copy",
+          "calls": 17409,
+          "inclusive_us": 17616829.75,
+          "union_us": 17616829.75
+        },
+        {
+          "context": "vllm::unified_attention_with_output / aten::_to_copy",
+          "calls": 4682,
+          "inclusive_us": 2760954,
+          "union_us": 2760954
+        },
+        {
+          "context": "vllm::unified_attention_with_output / aten::clone",
+          "calls": 2144,
+          "inclusive_us": 2085849.25,
+          "union_us": 2085849.25
+        },
+        {
+          "context": "vllm::qwen_gdn_attention_core / aten::clone",
+          "calls": 41040,
+          "inclusive_us": 1972555.5,
+          "union_us": 1972555.5
+        }
+      ]
+    },
+    "limitations": [
+      "CPU event prefix is actual but incomplete JSON array; no synthetic repaired data.",
+      "CPU copy/sync durations can include device wait. API/group durations overlap and are not additive or removable walltime.",
+      "C1 custom-op association is not a Python callsite, H2D/D2H direction or specific gate-cast attribution.",
+      "No G1 profile control captured. This is ranking, not proof that all costs are added by HYPIC.",
+      "R31 capture64 is not formal1024 speed or full quality acceptance."
+    ]
+  },
+  "candidates": [
+    {
+      "priority": 1,
+      "id": "C1_SHORT_BOUNDARY_GATE_CAST_PLACEMENT",
+      "status": "FIRST_FALSIFIABLE_TEST_SELECTED_NOT_IMPLEMENTED",
+      "classification": "CPU launch / synchronization",
+      "measured_symptom": "rank0 C1/GDN _to_copy-contained copy_ spans17.616830s vs C2 2.760954s; four ranks stream-sync APIs17.37-17.79s, raw device async-copy16.0-16.5ms.",
+      "source_clue": "independent_recurrent_boundary.py converts log_decay[0,i] and beta[0,i] inside each of up to64 token steps; not yet a measured callsite cause.",
+      "single_variable": "Move only existing gate dtype conversions from each token to whole-span preparation, preserving target dtype, values, recurrence arithmetic order and scalar/stream completion guards.",
+      "opportunity_bound": "Total C1-associated copy_17.62s is only a broad optimistic containing budget (~18.9% of93.25s CPU envelope). Gate-cast share is unknown; predicted benefit must not equal that total. 2*L gate conversion sites ->2 whole-span conversion sites.",
+      "disproof": "If exact cast-site counts do not fall as intended, correctness differs, or matched A/B/A fails the preregistered screen, reject this explanation without bundling another treatment.",
+      "unchanged": [
+        "C1/C2 equations and per-token arithmetic order",
+        "short-prefix/suffix selection and all lengths",
+        "finite guards and layer completion barriers",
+        "evidence events/fsync policy",
+        "PDC off, graph/decode policy, image/model/input/protocol",
+        "public/private leases and ownership"
+      ]
+    },
+    {
+      "priority": 2,
+      "id": "RECEIPT_DURABILITY_IO",
+      "status": "DEFERRED_UNTIL_FIRST_TEST_DECISION",
+      "classification": "CPU evidence I/O",
+      "source_clue": "graph_candidate/worker_loader.py fsyncs every emitted event. Host calibration is not in-service critical-path attribution.",
+      "single_variable": "First measure only actual fsync elapsed/count with bounded observation; if meaningful, test one declared durability cadence while retaining all receipt bytes, ordering, terminal seals and failure preservation.",
+      "opportunity_bound": "Unattributed custom-op CPU self time is not fsync time. No numeric causal budget until observed.",
+      "disproof": "Small in-service budget or loss of required durable fail-closed evidence rejects the proposed cadence. Never remove logging and numerical guards together."
+    },
+    {
+      "priority": 3,
+      "id": "GLOBAL_LAYER_COMPLETION_BARRIERS",
+      "status": "LOW_PRIORITY_NO_BARRIER_REMOVAL_NOW",
+      "classification": "synchronization",
+      "measured_symptom": "device-wide sync API total1.626-1.643s/rank, much smaller than stream-sync-associated time.",
+      "single_variable": "Only consider source-proven exact-stream/event completion replacing an overbroad barrier; retain all dependencies/receipts and quarantine unknown completion.",
+      "opportunity_bound": "Observed direct API time under~1.8% of captured wall; insufficient alone for5% screen. Queue effects not proven.",
+      "disproof": "No larger measured critical-path dependency budget means do not implement."
+    }
+  ],
+  "deprioritized": [
+    {
+      "id": "RAW_TRANSFER_BANDWIDTH_ONLY",
+      "reason": "Observed async hardware-copy union~0.016s/rank. Faster bandwidth alone does not explain tens of seconds CPU copy waiting."
+    },
+    {
+      "id": "FINITE_CHECK_REMOVAL",
+      "reason": "Rank0 finite/scalar CPU union0.481s; IsFinite+ReduceAll hardware sum~0.145s. Retain safety guards; no evidence they dominate."
+    }
+  ],
+  "experiment": {
+    "id": "R32_GATE_CAST_HOIST_A_B_A",
+    "state": "PREREGISTERED_DRAFT_NOT_DEVICE_READY",
+    "control": "Same new source with explicit feature off; current original per-token conversions.",
+    "treatment": "Same source with only gate-cast placement switch on. Source allowlist/difference audit must prove no second behavioral change.",
+    "order": [
+      "A1",
+      "B1",
+      "A2"
+    ],
+    "diagnostic_unit": {
+      "input_tokens": 32768,
+      "output_tokens": 64,
+      "requests": 16,
+      "concurrency": 16,
+      "pdc": false,
+      "thinking": false
+    },
+    "scope": "Integrated27B TP4 HYPIC requests; no independent GDN substitute. Both arms profiler-off for timing. New source-bound contracts/raw roots after implementation/host proof; current R31 roots immutable.",
+    "controls": [
+      "same pinned image/model/input/physical0-3/ports/warmup sequence/graph policy",
+      "fresh service per arm, same warmup shape; no compiled startup charged to one arm only",
+      "all required fourworker48C1/16C2 mechanism/source/numerical/isolation/release evidence",
+      "exact step/shape gate-cast activation/count proof",
+      "one source-level behavioral diff; no cache residency/logging/guard change"
+    ],
+    "host_gate": "Focused exact-value controls forlength1/8/64, FP64/FP32/BF16, grouped heads and noncontiguous inputs; default-off identity; invalid controls fail. CPU passes are not NPU acceptance.",
+    "primary_metric": "unprofiled16-request client makespan after same warmup",
+    "drift_limit_percent": 5,
+    "screen_gain_percent": 5,
+    "pass_rule": "Both A controls valid with<=5% relative drift; B makespan <=0.95*mean(A1,A2), intended cast-count reduction, all correctness/mechanism/isolation/release gates. Otherwise rejected or inconclusive as applicable, never success by source resemblance.",
+    "abort": "Any numerical/ownership/isolation failure; >20% makespan regression beyond same valid control. Preserve failed root, no blind retries.",
+    "confirmation": "Survivor needs new matched formal1024 source-specific pair/repetitions and existing fullquality/lifecycle gates. Diagnostic gain cannot rewrite R30 or certify the paper.",
+    "absolute_stop_utc": "2026-10-25T18:07:17Z"
+  },
+  "next": "Implement only the selected gate-cast placement switch, source-audit and focused exact-value controls; freeze new bounded integrated contracts. No unchanged negative12matrix, no new profile recapture for offline-parser problems.",
+  "full_goal_complete": false,
+  "runtime_changed_in_this_checkpoint": false
+}

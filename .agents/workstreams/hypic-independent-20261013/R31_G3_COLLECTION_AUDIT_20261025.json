@@ -1,0 +1,279 @@
+{
+  "profile_transport_mechanism_valid": true,
+  "profiled_requests": 16,
+  "private_shape_warmup": 16,
+  "output_tokens": 64,
+  "source_bindings": 425,
+  "isolation_samples": 267,
+  "graph": {
+    "compile_complete_lines": [
+      212
+    ],
+    "replay_directly_observed_rank": 0,
+    "replay_lines": [
+      300
+    ],
+    "scope": "actual native INFO replay; capture compatibility proved by same-source R29 canary, not per-token/all-rank completed replay counts",
+    "service_log_sha256": "35820ba0c7434cfdab241f1420a4064200b7cbe8615e09c6981b334c94a66405",
+    "workers": {
+      "0": 58,
+      "1": 59,
+      "2": 60,
+      "3": 61
+    }
+  },
+  "physical": {
+    "ranks": {
+      "0": {
+        "host_pid": 2139673,
+        "inner_pid": 58,
+        "physical_npu": 0
+      },
+      "1": {
+        "host_pid": 2139674,
+        "inner_pid": 59,
+        "physical_npu": 1
+      },
+      "2": {
+        "host_pid": 2139675,
+        "inner_pid": 60,
+        "physical_npu": 2
+      },
+      "3": {
+        "host_pid": 2139676,
+        "inner_pid": 61,
+        "physical_npu": 3
+      }
+    },
+    "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+  },
+  "source_prerequisite": {
+    "original_source_contract": "FORMAL_GRAPH_R30_G3_R1_20261025_CONTRACT.json",
+    "original_source_sha256": "278fc2663df36a562d2b65b3bb291d1bcfe6fab5bc2a89ff089b0b9fc84a3489",
+    "protocol_difference": "Actual same-runtime diagnostic64 outputs; original formal1024 unchanged. No speed/quality equivalence claim.",
+    "python_sources": 421,
+    "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+    "scope": "same runtime Python and bounded graph/numerical prerequisites; not formal quality",
+    "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43"
+  },
+  "live_release_verified": true,
+  "profile_inventory": {
+    "bytes": 1497302902,
+    "files": 1112,
+    "profiler_info": [
+      {
+        "path": "profile/rank3_61_20261025130941427_ascend_pt/profiler_info_3.json",
+        "sha256": "547afea963aa1aa5c78d551a5ba50daf134ec6efa3784543b2cab639f0cfeeba"
+      },
+      {
+        "path": "profile/rank0_58_20261025130941427_ascend_pt/profiler_info_0.json",
+        "sha256": "300fbd48e485721beaccdd462b643bd5e511ced53d611fe6eaef4c3dad87a27f"
+      },
+      {
+        "path": "profile/rank2_60_20261025130941427_ascend_pt/profiler_info_2.json",
+        "sha256": "2b71d6116dc85a5f84ac694ed42bbf8ae9c1a8d53ef5d23731ba29529a92aab3"
+      },
+      {
+        "path": "profile/rank1_59_20261025130941427_ascend_pt/profiler_info_1.json",
+        "sha256": "b169d7c1dd9b4662818e36f75233455a5d3023a44c75a502a235170f28b1acd4"
+      }
+    ],
+    "trace_integrity_and_cost_attribution": "PENDING_SEPARATE_FOURWORKER_KERNEL_TIMELINE_ANALYSIS"
+  },
+  "raw_sha256": {
+    "events.jsonl": "6151f03ecb5196489940470f5f96686332e9d18b8f93a83e1ffde96acff1c0a1",
+    "launch.json": "b2862887cdd0a0c2d2873edf9c2d03d2829d2c1528be76d458e7c1a1ddb004db",
+    "profile-unit.json": "3089e251093f6d904809dfb16600c1e840531a704832bad1602211e23493c3d2",
+    "release.json": "cb65651f50cd1b5a1ef3d859ef3fd4c069344497c86735da60457037477665c0",
+    "result.json": "5ca2d5448a0a5e1f6000571dfc89665cf6a7ed81bcc827aa2a4c8809eff46f8e",
+    "service-start.json": "fb59df5d64c867b2a635397dd5ed7acfeab94e958ee1f469041ef50045a3bb3b",
+    "service.log": "35820ba0c7434cfdab241f1420a4064200b7cbe8615e09c6981b334c94a66405"
+  },
+  "worker_sha256": {
+    "compact-worker-58.jsonl": "648a3b49e13e98395925949b6c019c8370ab488fb22d8c013d889b734947458d",
+    "compact-worker-59.jsonl": "0b95f6c18711eed77eab0b7a51a5df6e963b89e5f56a2997ce164446b2b2db14",
+    "compact-worker-60.jsonl": "5e2aa5219ee1a017b7549d0a524e949691f6ef7d237a3163a37b92ed2846da0a",
+    "compact-worker-61.jsonl": "42ba0795714c9715e305e06830adc3b38a45ea95a9d02e867b8b7ed0b9ee8358"
+  },
+  "scope": "bounded warmedc16/32768/64 collection/source/HTTP/hot/physical/release only. Trace completeness, costs, causal treatment, formal1024 performance/full quality/lifecycle remain separate.",
+  "hot": {
+    "accepted_hot_coverage": true,
+    "denominator": 16,
+    "covered_count": 16,
+    "missing": [],
+    "worker_pids": {
+      "0": 58,
+      "1": 59,
+      "2": 60,
+      "3": 61
+    },
+    "scope": "bounded16same-stepfourrank48C1/16C2; legacy helper literal says full40 but explicit denominator here is16"
+  },
+  "full_report": {
+    "path": "/cache/cch/hypic-independent-20261013/r31-g3-independent-audit-r1-20261025.json",
+    "sha256": "b9e40b40e14082ca76b4f508aca98be400c1e6ea2c616bf9a70dabcf2528e453",
+    "bytes": 54688
+  },
+  "controller_operation": "exec-00000000000016ce",
+  "audit_operation": "exec-00000000000016d4",
+  "collection_only_not_cost_acceptance": true,
+  "fourworker_metadata_join": [
+    {
+      "path": "profile/rank3_61_20261025130941427_ascend_pt/profiler_info_3.json",
+      "sha256": "547afea963aa1aa5c78d551a5ba50daf134ec6efa3784543b2cab639f0cfeeba",
+      "rank": 3,
+      "inner_pid": 61,
+      "physical": {
+        "host_pid": 2139676,
+        "inner_pid": 61,
+        "physical_npu": 3
+      },
+      "profile_window_seconds": 93.84785845,
+      "activities": [
+        "ProfilerActivity.CPU",
+        "ProfilerActivity.NPU"
+      ],
+      "record_shapes": false,
+      "with_stack": false,
+      "experimental": {
+        "_profiler_level": "Level1",
+        "_aic_metrics": "ACL_AICORE_PIPE_UTILIZATION",
+        "_l2_cache": false,
+        "_msprof_tx": false,
+        "_mstx": false,
+        "_data_simplification": true,
+        "record_op_args": false,
+        "_export_type": [
+          "text"
+        ],
+        "_host_sys": [],
+        "_op_attr": false,
+        "_gc_detect_threshold": null,
+        "_mstx_domain_include": [],
+        "_mstx_domain_exclude": [],
+        "_sys_io": false,
+        "_sys_interconnection": false
+      },
+      "cann_version": "9.1.0",
+      "torch_npu_version": "2.10.0.post4"
+    },
+    {
+      "path": "profile/rank0_58_20261025130941427_ascend_pt/profiler_info_0.json",
+      "sha256": "300fbd48e485721beaccdd462b643bd5e511ced53d611fe6eaef4c3dad87a27f",
+      "rank": 0,
+      "inner_pid": 58,
+      "physical": {
+        "host_pid": 2139673,
+        "inner_pid": 58,
+        "physical_npu": 0
+      },
+      "profile_window_seconds": 93.80933106,
+      "activities": [
+        "ProfilerActivity.CPU",
+        "ProfilerActivity.NPU"
+      ],
+      "record_shapes": false,
+      "with_stack": false,
+      "experimental": {
+        "_profiler_level": "Level1",
+        "_aic_metrics": "ACL_AICORE_PIPE_UTILIZATION",
+        "_l2_cache": false,
+        "_msprof_tx": false,
+        "_mstx": false,
+        "_data_simplification": true,
+        "record_op_args": false,
+        "_export_type": [
+          "text"
+        ],
+        "_host_sys": [],
+        "_op_attr": false,
+        "_gc_detect_threshold": null,
+        "_mstx_domain_include": [],
+        "_mstx_domain_exclude": [],
+        "_sys_io": false,
+        "_sys_interconnection": false
+      },
+      "cann_version": "9.1.0",
+      "torch_npu_version": "2.10.0.post4"
+    },
+    {
+      "path": "profile/rank2_60_20261025130941427_ascend_pt/profiler_info_2.json",
+      "sha256": "2b71d6116dc85a5f84ac694ed42bbf8ae9c1a8d53ef5d23731ba29529a92aab3",
+      "rank": 2,
+      "inner_pid": 60,
+      "physical": {
+        "host_pid": 2139675,
+        "inner_pid": 60,
+        "physical_npu": 2
+      },
+      "profile_window_seconds": 93.9203815,
+      "activities": [
+        "ProfilerActivity.CPU",
+        "ProfilerActivity.NPU"
+      ],
+      "record_shapes": false,
+      "with_stack": false,
+      "experimental": {
+        "_profiler_level": "Level1",
+        "_aic_metrics": "ACL_AICORE_PIPE_UTILIZATION",
+        "_l2_cache": false,
+        "_msprof_tx": false,
+        "_mstx": false,
+        "_data_simplification": true,
+        "record_op_args": false,
+        "_export_type": [
+          "text"
+        ],
+        "_host_sys": [],
+        "_op_attr": false,
+        "_gc_detect_threshold": null,
+        "_mstx_domain_include": [],
+        "_mstx_domain_exclude": [],
+        "_sys_io": false,
+        "_sys_interconnection": false
+      },
+      "cann_version": "9.1.0",
+      "torch_npu_version": "2.10.0.post4"
+    },
+    {
+      "path": "profile/rank1_59_20261025130941427_ascend_pt/profiler_info_1.json",
+      "sha256": "b169d7c1dd9b4662818e36f75233455a5d3023a44c75a502a235170f28b1acd4",
+      "rank": 1,
+      "inner_pid": 59,
+      "physical": {
+        "host_pid": 2139674,
+        "inner_pid": 59,
+        "physical_npu": 1
+      },
+      "profile_window_seconds": 93.90021721,
+      "activities": [
+        "ProfilerActivity.CPU",
+        "ProfilerActivity.NPU"
+      ],
+      "record_shapes": false,
+      "with_stack": false,
+      "experimental": {
+        "_profiler_level": "Level1",
+        "_aic_metrics": "ACL_AICORE_PIPE_UTILIZATION",
+        "_l2_cache": false,
+        "_msprof_tx": false,
+        "_mstx": false,
+        "_data_simplification": true,
+        "record_op_args": false,
+        "_export_type": [
+          "text"
+        ],
+        "_host_sys": [],
+        "_op_attr": false,
+        "_gc_detect_threshold": null,
+        "_mstx_domain_include": [],
+        "_mstx_domain_exclude": [],
+        "_sys_io": false,
+        "_sys_interconnection": false
+      },
+      "cann_version": "9.1.0",
+      "torch_npu_version": "2.10.0.post4"
+    }
+  ],
+  "capture_limits": "16 submitted requests are not asserted fully inside16iteration trace window. Source warning on stop-in-RECORD preserved. record_shapes/with_stack/sys_io false; gaps do not directly identify fsync or tensor-specific copy causality."
+}
