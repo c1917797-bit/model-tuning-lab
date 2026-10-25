@@ -1,4 +1,27 @@
-# CURRENT 2026-10-25 R27 NATIVE GRAPH G1 RUNNING EXACT15ec
+# CURRENT 2026-10-25 R27 NATIVE G1 GRAPH AUDITED; G3 NEXT
+
+NativeG1 controller15ec exit0:3responses/199cleanisolation/exactownedCIDremoved/
+8233free/finalphysical0-3empty. Independent15fb exit0 bounded_graph_canary_valid,
+actualmode3/FULL_DECODE_ONLY/noeager/native noalgorithm. All4owned workers
+capturedsizes1/4/8/16/24/32; onlylocal-firstTP0replaydirectlylogged as official
+info_once scope requires.3successfulTP4requests/complete terminal/physicalPIDjoin/
+liveexactreleaseverified. Not per-token/allrank completed replay counts or speed.
+R27_G1_AUDIT_20261025.json binds8rawhashes; service.logSHA bba1a775...
+
+No owned live device job. Next freshma/direct/424source/model-image-input/
+physical0-3/8233+HCCL102ports/newraw gate then only newR27G3canary. Must use
+GRAPH_R27_G3_CANARY_R1_20261025_CONTRACT.json; no rerun of G1/raw reuse.
+Terminal independent host_audits/r27_graph_canary_audit.py --contract ... --live-release.
+Default-off residency/C2grouping prototypes underoptimization_candidates stay
+outsidecurrent422runtime/424host, never loaded or edited into the frozen run.
+
+Latestlivepublished541576ad/main23ec33d7unchanged (40rawGitobjects/27WSpaths,
+FF/liveverified). NewG1terminaldocs pendinglocalcommit/publication. Wholegoal
+incomplete: graphcompatibility is onlyone cost hypothesis; original3ad material
+residency/C2grouping/logging differences are real but individualcosts unquantified.
+Fixedstop2026-10-25T18:07:17Z remains, only0-3/no foreign modifications.
+
+# EARLIER 2026-10-25 R27 NATIVE GRAPH G1 RUNNING EXACT15ec
 
 Fresh15ea directma admission09:24:16UTC passed424sources/model/image/input,
 actualphysical0-3empty/102portsbindable/noexternalbenchmark/newroot/cache9.27GB.
