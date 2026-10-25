@@ -76,6 +76,20 @@ def activate_graph_candidate(config, *, enabled=False, emit=None,
         base_source = verify_support(base, source_bindings.get(base.__name__))
         verify_raw_function(base, base_source, base.activate_compact_hypic,
                             name="activate_compact_hypic")
+        gate_cast_stop = None
+        gate_cast_diagnostic = config.get("c1_gate_cast_diagnostic", False)
+        gate_cast_hoisted = config.get("c1_gate_cast_hoist", False)
+        if type(gate_cast_diagnostic) is not bool or type(gate_cast_hoisted) is not bool:
+            raise ValueError("explicit gate-cast placement controls required")
+        if gate_cast_hoisted and not gate_cast_diagnostic:
+            raise ValueError("gate-cast hoist needs common diagnostic observer")
+        base_config = {k:v for k,v in config.items()
+                       if k not in ("c1_gate_cast_diagnostic","c1_gate_cast_hoist")}
+        if gate_cast_diagnostic:
+            from independent_gate_cast_delivery import install_gate_cast_placement
+            gate_cast_stop = install_gate_cast_placement(enabled=True,
+                hoisted=gate_cast_hoisted, emit=emit, source_bindings=source_bindings)
+            resources.callback(gate_cast_stop)
         native = capture_native_bundle()
         from .native_warmup import NativeWarmupProof
         startup_proof = NativeWarmupProof.from_runtime()
@@ -111,7 +125,7 @@ def activate_graph_candidate(config, *, enabled=False, emit=None,
 
         helper.install_compact_model = install_bridge
         try:
-            stop_base = base.activate_compact_hypic(config, enabled=True, emit=emit,
+            stop_base = base.activate_compact_hypic(base_config, enabled=True, emit=emit,
                 request_progress_limit=request_progress_limit)
         finally:
             if helper.install_compact_model is not install_bridge:
@@ -142,6 +156,8 @@ def activate_graph_candidate(config, *, enabled=False, emit=None,
         expected_slots = []
 
         def assert_owned():
+            if gate_cast_stop is not None:
+                gate_cast_stop.assert_ownership()
             native.assert_saved_native()
             bridge.assert_ownership()
             if (helper.install_compact_model is not original_install

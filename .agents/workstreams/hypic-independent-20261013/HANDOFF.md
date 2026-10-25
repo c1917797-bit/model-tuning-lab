@@ -1,3 +1,11 @@
+# CURRENT R32 ONE-VARIABLE GATE-CAST EXPERIMENT HOST-READY, NOT STARTED
+
+Changed only gate conversion placement, exposed through default-off source-owned removable aliases in C1prefix/suffix. Common A/B observer and actual-first-shape private output/state equality vs retained per-token recurrence; finite/completion/evidence/fsync/PDC/graph unchanged. 26focused CPU controls171e PASS, actualTP4 HK4/HV12/DK128/DV128 confirmed from config69db4. Static1722 verifies all3newcontracts/sourceclosures/29structure/diff. New422runtimePython/common426bindings; originalR30/R31roots/425manifests preserved. R32_GATE_CAST_HOST_READINESS_20261025.json has exactbindings/contract hashes.
+
+No owned NPUjob; A1/B1/A2 have not started. Next publish thischeckpoint, fresh ma/direct plus426source/image/model/input/newroot/physical0-3/8233+HCCL/cache admission, then only A1. Driverpython3 -B host_audits/r32_gate_cast_trial.py --contract GATE_CAST_R32_A1_20261025_CONTRACT.json --run. Independent auditor --contract SAME --live-release --output externalexclusivepath; require16privatewarm+16measured64responses,16/16fourworker48/16hot, actual NPU exact first-shape comparisons and prewarmed timedshapes, exactsource/isolation/release. Onlyvalid/released A1thenfreshB1thenA2. No profiler; genuine unchangedformal owner reused via explicitlydiagnostic HOSTworkload substitution, not a full40formal claim. R30negative/fullformal/fullquality/lifecycle/29functional unchanged;stop18:07:17UTC.
+
+CPUanalysis storage only:32generated SQLite outputs absentoriginalcopy manifest losslessly archived+SHAverified1721; sourceNPUcapture/CSV/report untouched; free~5.04GB now, futureadmissionmustrecheck. No foreigncleanup. New algorithm cause/speed/NPU correctness unproved.
+
 # CURRENT R31 FOUR-RANK COST EXPORT RECOVERED; R32 ONE-VARIABLE PLAN FROZEN
 
 Same immutable R31 collection16ce remains independently valid/released16d4. CPU-only official Python documented import/export16f7(rank0),1706(ranks1-3) recovered5nonempty CSV families/rank;170e four-rank cost report SHA3fdd8b5d... outsideGit. No newNPUcapture or runtime425byte changes. Native255/platform-init and PythonABI usage2 failures preserved, not algorithm causes. Losslessly archived only generated CPUanalysis duplicates; original NPUdata unchanged. No owned live NPUjob; fresh device/port/source/cache admission still required.

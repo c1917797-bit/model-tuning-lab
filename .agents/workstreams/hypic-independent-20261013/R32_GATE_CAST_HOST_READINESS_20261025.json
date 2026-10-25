@@ -1,0 +1,260 @@
+{
+  "schema": "hypic-r32-gate-cast-host-readiness/v1",
+  "state": "HOST_READY_NOT_DEVICE_ACCEPTED",
+  "tests": {
+    "operation": "exec-000000000000171e",
+    "passed": 26,
+    "scope": "13 boundary/delivery +6 HOST +7 independent evidence CPU controls; not NPU acceptance",
+    "model_heads": {
+      "dtype": "bfloat16",
+      "head_dim": 256,
+      "linear_conv_kernel_dim": 4,
+      "linear_key_head_dim": 128,
+      "linear_num_key_heads": 16,
+      "linear_num_value_heads": 48,
+      "linear_value_head_dim": 128,
+      "mamba_ssm_dtype": "float32",
+      "num_attention_heads": 24,
+      "num_key_value_heads": 4
+    }
+  },
+  "static_operation": "exec-0000000000001722",
+  "static": {
+    "contracts": [
+      {
+        "arm": "A1",
+        "contract": "GATE_CAST_R32_A1_20261025_CONTRACT.json",
+        "sha256": "e161cd6fae08096ffe01f3dabcbf5dfad92a6d297bce5e84032f709e42a4ff3a",
+        "raw_root": "/cache/cch/hypic-independent-20261013/gate-cast-r32-a1-20261025",
+        "checked": {
+          "configuration_valid": true,
+          "device_run": false,
+          "controller_sha256": "c4de486e1d334113f879544f2a1a8460d954bdfb96ec9f6885f1eb592c2aa3fe",
+          "graph_runtime": {
+            "candidate_enabled": true,
+            "capture_sizes": [
+              1,
+              4,
+              8,
+              16,
+              24,
+              32
+            ],
+            "compilation_mode": 3,
+            "cudagraph_mode": "FULL_DECODE_ONLY",
+            "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+            "official_debug_logging": false,
+            "profile": "selective-prefill-native-decode-v1"
+          },
+          "active_manifest_sha256": "d315c084cd0b678380dca6131c15f3ce1987baf4b7b6cfddc969108f2f0b4f20",
+          "source_bindings": 426,
+          "prerequisite": {
+            "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+            "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43",
+            "python_sources": 422,
+            "scope": "Original historical graph/numerical source anchor only; new gate placement needs actual first-shape private NPU checks.",
+            "runtime_differences": [
+              "graph_candidate/activation.py",
+              "independent_gate_cast_delivery.py",
+              "independent_recurrent_boundary.py"
+            ]
+          },
+          "arm": "A1"
+        }
+      },
+      {
+        "arm": "B1",
+        "contract": "GATE_CAST_R32_B1_20261025_CONTRACT.json",
+        "sha256": "ef032d4aa1f042bd9ea6fe4d0a345dccfd4bff7f1513dc52558b55790ae0b9f6",
+        "raw_root": "/cache/cch/hypic-independent-20261013/gate-cast-r32-b1-20261025",
+        "checked": {
+          "configuration_valid": true,
+          "device_run": false,
+          "controller_sha256": "c4de486e1d334113f879544f2a1a8460d954bdfb96ec9f6885f1eb592c2aa3fe",
+          "graph_runtime": {
+            "candidate_enabled": true,
+            "capture_sizes": [
+              1,
+              4,
+              8,
+              16,
+              24,
+              32
+            ],
+            "compilation_mode": 3,
+            "cudagraph_mode": "FULL_DECODE_ONLY",
+            "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+            "official_debug_logging": false,
+            "profile": "selective-prefill-native-decode-v1"
+          },
+          "active_manifest_sha256": "2dcb0915be047b3ec657ae2c83ca5c9f5396bea300147e671464080118872538",
+          "source_bindings": 426,
+          "prerequisite": {
+            "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+            "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43",
+            "python_sources": 422,
+            "scope": "Original historical graph/numerical source anchor only; new gate placement needs actual first-shape private NPU checks.",
+            "runtime_differences": [
+              "graph_candidate/activation.py",
+              "independent_gate_cast_delivery.py",
+              "independent_recurrent_boundary.py"
+            ]
+          },
+          "arm": "B1"
+        }
+      },
+      {
+        "arm": "A2",
+        "contract": "GATE_CAST_R32_A2_20261025_CONTRACT.json",
+        "sha256": "9679d1773b5ddc1f8b43dce082e87e5a31cd38337bce8b90aa2c7b4f1c9da70a",
+        "raw_root": "/cache/cch/hypic-independent-20261013/gate-cast-r32-a2-20261025",
+        "checked": {
+          "configuration_valid": true,
+          "device_run": false,
+          "controller_sha256": "c4de486e1d334113f879544f2a1a8460d954bdfb96ec9f6885f1eb592c2aa3fe",
+          "graph_runtime": {
+            "candidate_enabled": true,
+            "capture_sizes": [
+              1,
+              4,
+              8,
+              16,
+              24,
+              32
+            ],
+            "compilation_mode": 3,
+            "cudagraph_mode": "FULL_DECODE_ONLY",
+            "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+            "official_debug_logging": false,
+            "profile": "selective-prefill-native-decode-v1"
+          },
+          "active_manifest_sha256": "d315c084cd0b678380dca6131c15f3ce1987baf4b7b6cfddc969108f2f0b4f20",
+          "source_bindings": 426,
+          "prerequisite": {
+            "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+            "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43",
+            "python_sources": 422,
+            "scope": "Original historical graph/numerical source anchor only; new gate placement needs actual first-shape private NPU checks.",
+            "runtime_differences": [
+              "graph_candidate/activation.py",
+              "independent_gate_cast_delivery.py",
+              "independent_recurrent_boundary.py"
+            ]
+          },
+          "arm": "A2"
+        }
+      }
+    ],
+    "checks": [
+      {
+        "command": [
+          "bash",
+          "scripts/validate-mst.sh"
+        ],
+        "returncode": 0,
+        "stdout": "PASS: Maintainer Skill Tree structure is valid (29 skills)\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    ],
+    "focused_tests": 26,
+    "focused_test_operation": "exec-000000000000171e",
+    "test_sources": {
+      "test_gate_cast_placement.py": "44797665ab5c31ec26f1ebe1e9107a7920ad29cdb8e6b63ee27f0f4169e57b2d",
+      "host_audits/test_r32_gate_cast_trial.py": "93dbe3e77c02d27af18acc10dd53c40694c48015b53b09daaa41b0808da57092",
+      "host_audits/test_r32_gate_cast_audit.py": "c6e2b92981bdab3afb107be3515ffea7c598dbb9096f41fdbf6be539de844140"
+    },
+    "runtime_python": 422,
+    "common_source_bindings": 426,
+    "new_device_run": false,
+    "status": " M .agents/workstreams/hypic-independent-20261013/graph_candidate/activation.py\n M .agents/workstreams/hypic-independent-20261013/independent_recurrent_boundary.py\n?? .agents/workstreams/hypic-independent-20261013/GATE_CAST_R32_A1_20261025_CONTRACT.json\n?? .agents/workstreams/hypic-independent-20261013/GATE_CAST_R32_A2_20261025_CONTRACT.json\n?? .agents/workstreams/hypic-independent-20261013/GATE_CAST_R32_A_CONFIG_20261025.json\n?? .agents/workstreams/hypic-independent-20261013/GATE_CAST_R32_A_MANIFEST_20261025.json\n?? .agents/workstreams/hypic-independent-20261013/GATE_CAST_R32_B1_20261025_CONTRACT.json\n?? .agents/workstreams/hypic-independent-20261013/GATE_CAST_R32_B_CONFIG_20261025.json\n?? .agents/workstreams/hypic-independent-20261013/GATE_CAST_R32_B_MANIFEST_20261025.json\n?? .agents/workstreams/hypic-independent-20261013/host_audits/r32_gate_cast_audit.py\n?? .agents/workstreams/hypic-independent-20261013/host_audits/r32_gate_cast_trial.py\n?? .agents/workstreams/hypic-independent-20261013/host_audits/test_r32_gate_cast_audit.py\n?? .agents/workstreams/hypic-independent-20261013/host_audits/test_r32_gate_cast_trial.py\n?? .agents/workstreams/hypic-independent-20261013/independent_gate_cast_delivery.py\n?? .agents/workstreams/hypic-independent-20261013/optimization_candidates/\n?? .agents/workstreams/hypic-independent-20261013/test_gate_cast_placement.py\n"
+  },
+  "old_reference_commit": "880c325f463a016828d23a3e2a24c025b7918a55",
+  "controller_source_sha256": {
+    "host_audits/r32_gate_cast_trial.py": "c4de486e1d334113f879544f2a1a8460d954bdfb96ec9f6885f1eb592c2aa3fe",
+    "formal_r15_tp4.py": "bf55661d61618a7f83537ce6bf477b66e80ccaf097ac714938ceee9bdf199d33",
+    "independent_warm_profile_workload.py": "cb654969303cb8e901a8c1be823de540f8e30143378f784a830f5aaaae6da67d",
+    "host_audits/r30_graph_formal_controller.py": "d5cd81682811eab27dc50f7ed123b3ec84a6f01019e8f2748606be7d8ce8c5ed",
+    "host_audits/r27_graph_controller.py": "50a97e444fb14b3cd3a0b39833e861e3f9d0aba6f7d1682a1673858e7fec5342"
+  },
+  "audit_source_sha256": {
+    "host_audits/r32_gate_cast_audit.py": "1962b73c41550b1b855e9d7bae6adf40267a66766c2ed87daf2d3b280732da75",
+    "host_audits/r30b_graph_formal_audit.py": "b464b2d3d20341d5c9f735b78ad6fe1dafc42a3c7963cc479954934faeaa327b",
+    "host_audits/r30_graph_formal_audit.py": "b60c8c8138a4ad39528e0a9a5a5a492fe5a1fee80b57fb9d5178d74515b53398",
+    "host_audits/r26_group_performance.py": "72378fc059526b3b8dcd332280746bd210323b59f41ac2dd23742444960353c2",
+    "host_audits/r27_graph_canary_audit.py": "ad9b0b414c81c76f295ddd00228ce2ad64ff24fd10734f6eaf78ef0b9136df1c"
+  },
+  "contracts": [
+    {
+      "arm": "A1",
+      "contract": "GATE_CAST_R32_A1_20261025_CONTRACT.json",
+      "sha256": "e161cd6fae08096ffe01f3dabcbf5dfad92a6d297bce5e84032f709e42a4ff3a",
+      "raw_root": "/cache/cch/hypic-independent-20261013/gate-cast-r32-a1-20261025"
+    },
+    {
+      "arm": "B1",
+      "contract": "GATE_CAST_R32_B1_20261025_CONTRACT.json",
+      "sha256": "ef032d4aa1f042bd9ea6fe4d0a345dccfd4bff7f1513dc52558b55790ae0b9f6",
+      "raw_root": "/cache/cch/hypic-independent-20261013/gate-cast-r32-b1-20261025"
+    },
+    {
+      "arm": "A2",
+      "contract": "GATE_CAST_R32_A2_20261025_CONTRACT.json",
+      "sha256": "9679d1773b5ddc1f8b43dce082e87e5a31cd38337bce8b90aa2c7b4f1c9da70a",
+      "raw_root": "/cache/cch/hypic-independent-20261013/gate-cast-r32-a2-20261025"
+    }
+  ],
+  "scope": "One gate-cast placement variable, common diagnostic observer and first-shape actual-input equality before outer native commit. Both controls and B use same new422Python/common426source closure. CPU/source controls are not NPU or speed proof.",
+  "numerical": {
+    "configured_tp4_shape": {
+      "key_heads": 4,
+      "value_heads": 12,
+      "key_width": 128,
+      "value_width": 128
+    },
+    "lengths": [
+      1,
+      8,
+      64
+    ],
+    "dtypes": [
+      "float64",
+      "float32",
+      "bfloat16"
+    ],
+    "default_matches_original": true,
+    "changed_path_cpu_bitwise_equal": true,
+    "real_npu_checks": "pending, both arms require private first-shape full output/state exact comparison",
+    "earlier_171c": "18 generic-focused controls included8valuehead example. Final171e26controls uses actual configured12valueheads, verified from model config69db4...; no prior NPU geometry acceptance claimed."
+  },
+  "scratch_archive": {
+    "manifest": "/cache/cch/hypic-independent-20261013/r31-g3-offline-analysis-r1-20261025/derived-sqlite-archive-r8.json",
+    "sha256": "da420f32b94c1939ee9d726ce4032cbfaa01ac9bb28a9050a87883096663dfe7",
+    "files": 32,
+    "uncompressed_bytes": 997318656,
+    "archive_bytes": 309220392,
+    "free_bytes": 5044854784,
+    "lossless_verified": true
+  },
+  "bounds": {
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tp": 4,
+    "port": 8233,
+    "absolute_stop_utc": "2026-10-25T18:07:17Z"
+  },
+  "next": "Publish checkpoint then fresh ma/direct/source/model/image/input/physical0-3+ports/cache/newroot admission; start A1 only. Independent r32_gate_cast_audit.py must pass with live release before B1 then A2. No automatic retries on any failed/unknown unit."
+}

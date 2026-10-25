@@ -1,7 +1,7 @@
 {
   "schema": "hypic-model-guided-single-variable-diagnosis/v1",
   "date": "2026-10-25",
-  "state": "MEASURED_PRIORITY_FROZEN_NO_CAUSAL_ALGORITHM_ACCEPTANCE",
+  "state": "MODEL_SELECTED_FIRST_VARIABLE_HOST_READY_NOT_NPU_PROVEN",
   "human_direction": "Replace exhaustive search with a small model and a few likely routes; source differences are clues, causes require a single-variable experiment.",
   "model": {
     "equation": "delta_service = -saved_prefill + added_material_handling + added_coordination + evidence_IO + changed_decode_queue",
@@ -86,7 +86,7 @@
     {
       "priority": 1,
       "id": "C1_SHORT_BOUNDARY_GATE_CAST_PLACEMENT",
-      "status": "FIRST_FALSIFIABLE_TEST_SELECTED_NOT_IMPLEMENTED",
+      "status": "IMPLEMENTED_DEFAULT_OFF_CPU_VERIFIED_NOT_NPU_PROVEN",
       "classification": "CPU launch / synchronization",
       "measured_symptom": "rank0 C1/GDN _to_copy-contained copy_ spans17.616830s vs C2 2.760954s; four ranks stream-sync APIs17.37-17.79s, raw device async-copy16.0-16.5ms.",
       "source_clue": "independent_recurrent_boundary.py converts log_decay[0,i] and beta[0,i] inside each of up to64 token steps; not yet a measured callsite cause.",
@@ -135,7 +135,7 @@
   ],
   "experiment": {
     "id": "R32_GATE_CAST_HOIST_A_B_A",
-    "state": "PREREGISTERED_DRAFT_NOT_DEVICE_READY",
+    "state": "HOST_READY_NOT_DEVICE_STARTED",
     "control": "Same new source with explicit feature off; current original per-token conversions.",
     "treatment": "Same source with only gate-cast placement switch on. Source allowlist/difference audit must prove no second behavioral change.",
     "order": [
@@ -166,9 +166,11 @@
     "pass_rule": "Both A controls valid with<=5% relative drift; B makespan <=0.95*mean(A1,A2), intended cast-count reduction, all correctness/mechanism/isolation/release gates. Otherwise rejected or inconclusive as applicable, never success by source resemblance.",
     "abort": "Any numerical/ownership/isolation failure; >20% makespan regression beyond same valid control. Preserve failed root, no blind retries.",
     "confirmation": "Survivor needs new matched formal1024 source-specific pair/repetitions and existing fullquality/lifecycle gates. Diagnostic gain cannot rewrite R30 or certify the paper.",
-    "absolute_stop_utc": "2026-10-25T18:07:17Z"
+    "absolute_stop_utc": "2026-10-25T18:07:17Z",
+    "readiness": "R32_GATE_CAST_HOST_READINESS_20261025.json",
+    "common_runtime_observer": "Both arms same source-bound observer and actual first-shape private output/state comparison vs retained per-token casts, before outer native commit. Timed shapes must have same-process warm proof. Dispatcher counts are Tensor.to call sites, not measured hardware transfers."
   },
-  "next": "Implement only the selected gate-cast placement switch, source-audit and focused exact-value controls; freeze new bounded integrated contracts. No unchanged negative12matrix, no new profile recapture for offline-parser problems.",
+  "next": "Publish checkpoint then fresh ma/direct/source/model/image/input/physical0-3+ports/cache/newroot admission; start A1 only. Independent r32_gate_cast_audit.py must pass with live release before B1 then A2. No automatic retries on any failed/unknown unit.",
   "full_goal_complete": false,
   "runtime_changed_in_this_checkpoint": false
 }
