@@ -1,0 +1,23 @@
+{
+  "schema": "hypic-r32b-id-join-readiness/v1",
+  "state": "HOST_FORMAT_FIX_TESTED_ORIGINAL_A1_REPLAY_VALID",
+  "observer": {
+    "definition": "R32B_ID_JOIN_OBSERVER_20261025.json",
+    "sha256": "0fb1c2e4205f0ec7550ce1fd742838e19166c9287570be33ee6f4ec5b2a04212",
+    "sources": {
+      "host_audits/r32b_gate_cast_audit.py": "b2f8f07e58e7d599c474a12e2ea5b7829c9b57bb6fdf8a3980e4ead3e2541a88",
+      "audit_full40_hot_coverage.py": "27350f6952031387c0106cf66a6f59c9d2157b99d0d3cba927a618f85a6e3d3b"
+    },
+    "runtime_changed": false
+  },
+  "source_format_cases": 7,
+  "decision_cases": 6,
+  "test_operation": "exec-0000000000001736",
+  "old_failure": "R32_A1_ORIGINAL_AUDIT_FAILURE_20261025.json",
+  "A1": "R32_A1_AUDIT_20261025.json",
+  "original_source_semantics_preserved": true,
+  "numerical_and_warmup_rules_unchanged": true,
+  "runtime_common_bindings": 426,
+  "new_npu_runs": 0,
+  "scope": "One explicit observer successor, same original contract/raw. Parent/native IDs uniquely join as source-proven by existing hot auditor. No successful HYPIC speed/quality reclassification."
+}

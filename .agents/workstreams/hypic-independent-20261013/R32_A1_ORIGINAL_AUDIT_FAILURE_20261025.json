@@ -1,0 +1,38 @@
+{
+  "schema": "hypic-r32-observer-failure/v1",
+  "operation": "exec-000000000000172c",
+  "exitCode": 1,
+  "stderr": "Traceback (most recent call last):\n  File \"/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/host_audits/r32_gate_cast_audit.py\", line 166, in <module>\n    a=p.parse_args();r=audit(a.contract,live_release=a.live_release);data=(json.dumps(r,sort_keys=True)+\"\\n\").encode()\n  File \"/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/host_audits/r32_gate_cast_audit.py\", line 150, in audit\n    gate_cast=audit_gate_cast_evidence(events,ids,info,manifest,c[\"r32_arm\"])\n  File \"/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/host_audits/r32_gate_cast_audit.py\", line 49, in audit_gate_cast_evidence\n    raise ValueError(\"measured gate shapes were not validated in same-process warmup\")\nValueError: measured gate shapes were not validated in same-process warmup\n",
+  "original_auditor": "host_audits/r32_gate_cast_audit.py",
+  "original_auditor_sha256": "1962b73c41550b1b855e9d7bae6adf40267a66766c2ed87daf2d3b280732da75",
+  "controller": "exec-0000000000001725",
+  "contract": "GATE_CAST_R32_A1_20261025_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/gate-cast-r32-a1-20261025",
+  "cause": "Observer used exact equality between HTTP parent IDs and native internal suffixed IDs; no timed records joined. Existing _audit_hot already used unique parent+'-' namespace join.",
+  "initial_hypothesis_corrected": "Generic error mentioned warmup, but cold-shape explanation was unproved and discarded. Actual1730 unique native16/timed1152/cold0; no warmup/numerical/timing rule changed.",
+  "counterexample": {
+    "unique_native_http_join": 16,
+    "raw_exact_intersection_count": 0,
+    "joined_timed_observations": 1152,
+    "cold_joined_timed": 0,
+    "timed_shape_counts": {
+      "8": 960,
+      "39": 192
+    },
+    "timing_not_used": true,
+    "source_rule": "same unique api_id+'-' internal namespace rule as already-passed audit_full40_hot_coverage._audit_hot; join from native body receipts, not only variable-exposed short spans"
+  },
+  "old_auditor_unchanged": true,
+  "runtime_contracts_or_raw_changed": false,
+  "new_observer": {
+    "definition": "R32B_ID_JOIN_OBSERVER_20261025.json",
+    "sha256": "0fb1c2e4205f0ec7550ce1fd742838e19166c9287570be33ee6f4ec5b2a04212",
+    "sources": {
+      "host_audits/r32b_gate_cast_audit.py": "b2f8f07e58e7d599c474a12e2ea5b7829c9b57bb6fdf8a3980e4ead3e2541a88",
+      "audit_full40_hot_coverage.py": "27350f6952031387c0106cf66a6f59c9d2157b99d0d3cba927a618f85a6e3d3b"
+    },
+    "runtime_changed": false
+  },
+  "npu_rerun": false,
+  "scope": "HOST observer ID format failure, not algorithm or numerical failure; original failed result retained."
+}

@@ -1,3 +1,11 @@
+# CURRENT R32 A1 VALID/RELEASED, ORIGINAL ID-JOIN AUDIT FAILURE PRESERVED; B1 NEXT
+
+1725exit0, independent corrected observer1733valid:16measured+16privatewarm64responses,16/16fourworker48C1/16C2hot,8actual privateNPU exactoutput/state comparisons forlength8/39 across4ranks,426sources/260cleanphysical samples/exactCIDd46f4fd2...removed/8233free/final0-3empty. A1unprofiled16requestmakespan118.700323570s; onecontrol only, no cause/gainclaim. Fullauditexternalr32b-a1-independent-audit-r1-20261025.json SHA245cf59b...; curatedR32_A1_AUDIT_20261025.json.
+
+Original1962auditor172c failed: exact HTTP/nativeID intersection empty, not unprewarmed shape. Actual1730 source-proven unique api_id+'-' join16 yields1152timedobservations,cold0. Earlier warmup explanation discarded, no gate relaxed. Originalaudit/contracts/raw/runtime426allunchanged; distinct R32B_ID_JOIN_OBSERVER_20261025.json SHA0fb1c2e4 bindsnewHOSTauditorb2f8f07e. SevenID/negativecases+6decisionCPUtests1736PASS. Failed172c retained inR32_A1_ORIGINAL_AUDIT_FAILURE_20261025.json. NPUdata notrerun.
+
+Next publishobservercheckpoint, freshma/direct/426source/image/model/input/physical0-3+ports/cache/newroot, then originalunusedB1contractef032d4a...viaunchangedc4de HOSTdriver. Terminal use r32b_gate_cast_audit.py --definition R32B_ID_JOIN_OBSERVER_20261025.json --live-release --output exclusiveexternalB1audit. Valid/releasedB1thenfreshA2. Runtime/source/protocol and all original numerical/warmup/isolation/release thresholds unchanged; newHOSTobserver only. Fullformal1024/fullpairedquality/lifecycle/29functional unfinished;stop18:07:17UTC unchanged.
+
 # CURRENT R32 A1 ORIGINAL-CAST CONTROL RUNNING EXACT1725
 
 Launchcheckpoint52527ccce224690e8d024930946caeac8f9da880 published/liveverified; freshdirectma admission1724at14:57:05UTC validates426common/422Python,source/model/image/input/newroot,physical0-3empty/noexternalbench/noownedcontroller/102portsbindable/cache5.04GB. Exact1725runningverified14:59:25UTC on ma a6109. Contract GATE_CAST_R32_A1_20261025_CONTRACT.json SHAe161cd6f..., raw/cache/cch/hypic-independent-20261013/gate-cast-r32-a1-20261025. Common observers/first-private-shape equality, A1 per-token gate casts; no profiler/PDC/guard/logging change.

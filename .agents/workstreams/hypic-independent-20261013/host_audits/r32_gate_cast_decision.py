@@ -1,7 +1,7 @@
 """HOST-only preregistered A/B/A decision over independently re-audited R32 arms."""
 import argparse,hashlib,json,math,os
 from pathlib import Path
-from host_audits import r32_gate_cast_audit as reviewer
+from host_audits import r32b_gate_cast_audit as reviewer
 
 def decision(a1,b1,a2):
     values=(a1,b1,a2)
@@ -21,7 +21,7 @@ def decision(a1,b1,a2):
 
 def canonical(x):return json.loads(json.dumps(x,sort_keys=True))
 
-def load_arm(arm,path):
+def load_arm(arm,path,definition):
     cp=Path("GATE_CAST_R32_"+arm+"_20261025_CONTRACT.json").resolve()
     c=json.loads(cp.read_bytes())
     if c.get("r32_arm")!=arm:raise ValueError("exact arm contract required")
@@ -31,7 +31,7 @@ def load_arm(arm,path):
     data=p.read_bytes();sealed=json.loads(data)
     if sealed.get("live_release_verified")is not True:
         raise ValueError("prior independent live-release audit required")
-    fresh=reviewer.audit(cp,live_release=False)
+    fresh=reviewer.audit(cp,live_release=False,definition=definition)
     previous=dict(sealed,live_release_verified=False)
     if canonical(previous)!=canonical(fresh):
         raise ValueError("saved independent audit differs from fresh immutable evidence")
@@ -42,8 +42,8 @@ def load_arm(arm,path):
     return c,fresh,{"contract":cp.name,"contract_sha256":hashlib.sha256(cp.read_bytes()).hexdigest(),
         "audit":str(p),"audit_sha256":hashlib.sha256(data).hexdigest()}
 
-def audit_pair(paths):
-    rows=[load_arm(arm,paths[arm])for arm in("A1","B1","A2")]
+def audit_pair(paths,definition):
+    rows=[load_arm(arm,paths[arm],definition)for arm in("A1","B1","A2")]
     contracts=[x[0]for x in rows]
     keys=("image","model","model_config_sha256","physical_npus","tp","port","hccl_ports",
         "cpu_set","enable_thinking","enable_prefix_caching","max_output_tokens",
@@ -69,8 +69,9 @@ def audit_pair(paths):
 if __name__=="__main__":
     p=argparse.ArgumentParser()
     for arm in("a1","b1","a2"):p.add_argument("--"+arm+"-audit",required=True)
+    p.add_argument("--definition",required=True)
     p.add_argument("--output",required=True);a=p.parse_args()
-    result=audit_pair({"A1":a.a1_audit,"B1":a.b1_audit,"A2":a.a2_audit})
+    result=audit_pair({"A1":a.a1_audit,"B1":a.b1_audit,"A2":a.a2_audit},a.definition)
     data=(json.dumps(result,sort_keys=True)+"\n").encode()
     out=Path(a.output)
     with out.open("xb")as f:f.write(data);f.flush();os.fsync(f.fileno())

@@ -1,0 +1,27 @@
+{
+  "analysis_unit": "SOURCE_PROVEN_NATIVE_REQUEST_ID_JOIN",
+  "correction": "Same unique response api_id+'-' native request namespace join already required by _audit_hot, using actual native body receipts. Old exact intersection was empty, not failed warmup. All original timing-warm/finite/shape/source/physical/release rules retained.",
+  "counterexample": {
+    "actual_timed_observations": 1152,
+    "cold_timed_shapes": 0,
+    "old_exact_intersection": 0,
+    "operation": "exec-0000000000001730",
+    "unique_http_native_join": 16
+  },
+  "frozen_before_B1": true,
+  "original_auditor_sha256": "1962b73c41550b1b855e9d7bae6adf40267a66766c2ed87daf2d3b280732da75",
+  "original_failure_operation": "exec-000000000000172c",
+  "runtime_contracts_or_raw_changed": false,
+  "schema": "hypic-r32b-id-join-observer/v1",
+  "source_sha256": {
+    "audit_full40_hot_coverage.py": "27350f6952031387c0106cf66a6f59c9d2157b99d0d3cba927a618f85a6e3d3b",
+    "host_audits/r32b_gate_cast_audit.py": "b2f8f07e58e7d599c474a12e2ea5b7829c9b57bb6fdf8a3980e4ead3e2541a88"
+  },
+  "tests": {
+    "operation": "exec-0000000000001731",
+    "passed": 6,
+    "scope": "actual ID namespace, ambiguity, prefix collision and retained warm/finite/PID/source/dispatch controls; no NPU rerun"
+  },
+  "thresholds_changed": false,
+  "warmup_gate_changed": false
+}
