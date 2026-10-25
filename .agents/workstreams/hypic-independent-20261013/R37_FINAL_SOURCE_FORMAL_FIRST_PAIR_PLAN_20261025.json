@@ -1,0 +1,71 @@
+{
+  "schema": "hypic-r37-final-source-first-pair-plan/v1",
+  "state": "PLANNED_NOT_IMPLEMENTED_OR_DEVICE_ACCEPTED",
+  "prerequisite": {
+    "report": "R36_THREE_ARM_DECISION_20261025.json",
+    "raw_path": "/cache/cch/hypic-independent-20261013/r36-r2-three-arm-decision-20261025.json",
+    "raw_sha256": "d8059a624df7816915b5bab8fba46247b4fdda49d7940537b2566f06f977083c",
+    "state": "SUPPORTED_BOUNDED_STEP_DURABILITY_EFFECT"
+  },
+  "absolute_stop_utc": "2026-10-26T06:36:27Z",
+  "scope": {
+    "model": "/cache/efim/Qwen3.6-27B",
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tp": 4,
+    "distributed_c3": false,
+    "old_hypic_code_reuse": false
+  },
+  "hypothesis": "The selected-step durability policy with unchanged original per-event writes may improve final-source HYPIC formal service behavior. R36 diagnostic64 cannot predict its formal1024 magnitude or native comparison.",
+  "frozen_comparison": {
+    "first": "G1 native without PDC or algorithm imports/mounts",
+    "second": "G3 independent C1/C2 with selected-step durability; no PDC",
+    "same_source_tree_and_bound_host_helpers": true,
+    "input_tokens": 32768,
+    "native_prefix_tokens": 8192,
+    "pic_tokens": 16384,
+    "relocated_tokens": [
+      1024,
+      7168
+    ],
+    "requests": 40,
+    "concurrency": 16,
+    "warmup_requests": 2,
+    "fixed_output_tokens": 1024,
+    "enable_thinking": false,
+    "ignore_eos": true,
+    "exact_input_artifact": "/cache/cch/hypic-independent-20261013/formal-token-streams-r1/tokens.json",
+    "input_sha256": "50f528fa8eb439c56219b0161b16bf12fb2a8fd80effab87d89d725a4cc4c72f",
+    "reuse_r30_control_or_timing": false,
+    "profiler": false,
+    "io_cost_observer": false,
+    "prefix_terminal_only": false
+  },
+  "implementation_gates": [
+    "Read actual source/config paths and retained formal owner; preserve formal full40 client/metrics/isolation/cleanup, not R36 diagnostic workload substitution.",
+    "Create narrow disabled-by-default formal delivery/controller/auditor; keep original native G1 launch with no probe imports or mounts. Bind all current runtime sources and exact HOST helpers under new manifests/contracts/roots; no rewriting R36/R30 bindings.",
+    "Retain original formal performance configuration and all numerical/ownership guards. Explicitly account for any R33 diagnostic-only keys and prove no hidden first-use oracle inside timed requests; no unmeasured algorithm treatment.",
+    "Exercise actual base-consumed constructor/env with Docker allocation intercepted, then automatic pinned-image startup OFF/ON and source/restore controls. No explicit-enable-only proof.",
+    "New focused HOST controls for source/config/actual launch/native purity/request denominator/durability evidence failures; run Maintainer Skill Tree structure check separately from29functional acceptance.",
+    "Fresh physical0-3/8233/26300-26400/source/model/image/input/newroot/storage>=4GiB/deadline admission before G1. Independently valid original40 transport/timing/native graph/physical/exact release before fresh G3.",
+    "G3 must retain actual40/40four-worker48C1/16C2 mechanism, source/config/finite/math prerequisites, byte/count/completion/durability fences, continuous isolation and exact release. Accepted small-canary states do not establish full task quality."
+  ],
+  "decision_rules": [
+    "Use original formal protocol metrics and acceptance criteria; R36 screen5pct and control drift do not substitute for formal native/repeated acceptance.",
+    "First pair is a screening result only, even if positive. Before a net native benefit is proven, do not extrapolate R36 percent, recycle historical G1, or fill unchanged negative matrix.",
+    "A supported final-source native first pair permits G1-G4x3matched matrix including genuine PDC accounting. Then full127x3each-arm natural-EOS quality and actual disable/uninstall/restart/exact release plus independent audit remain.",
+    "Any failure preserves exact root and phase evidence; no source mutation or device restart while terminal unknown. New treatment only after measured budget/model and declared single-variable contract."
+  ],
+  "remaining_goal": [
+    "G1-G4 three matched formal rounds",
+    "127x3 each-arm natural-EOS paired quality: nonthinking1024 or thinking2048, same ruler",
+    "actual disable/uninstall/restart/exact release and raw audit",
+    "Paper-to-Ascend relevant Skill functional acceptance",
+    "29 Skill functional acceptance"
+  ],
+  "full_goal_complete": false
+}

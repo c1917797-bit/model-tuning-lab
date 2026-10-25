@@ -1,0 +1,53 @@
+{
+  "schema": "hypic-r36-a2-r2-audit-summary/v1",
+  "state": "VALID_ORIGINAL_DURABILITY_CONTROL_AUDITED_RELEASED",
+  "controller": "exec-000000000000199e",
+  "terminal_proof": "Original result.json plus terminal journal; connector handle expired before observation, not used as terminal proof.",
+  "contract": "STEP_DURABILITY_R36_A2_R2_20261025_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-a2-r2-20261025",
+  "launch_checkpoint": "40aa89a8b8402ef77aab492ce72f75a872451dde",
+  "independent_audit": {
+    "operation": "exec-00000000000019b1",
+    "path": "/cache/cch/hypic-independent-20261013/r36-a2-r2-independent-audit-20261025.json",
+    "sha256": "31d0f673f34a123e51f02b7c4e5aebfd142610923b3bc3ac0cbaa1a9329d8df5",
+    "valid": true,
+    "live_release_verified": true
+  },
+  "diagnostic_requests": 16,
+  "hot_fourworker_48C1_16C2": 16,
+  "private_shape_warmup": 48,
+  "actual_private_npu_state_checks": 8,
+  "source_bindings": 450,
+  "isolation_samples": 315,
+  "diagnostic_makespan_seconds": 119.07002045004629,
+  "durability": {
+    "actual_completed_model_steps": 224,
+    "durable_fences": 0,
+    "enabled": false,
+    "fsync_syscall_trace_proven": false,
+    "http_requests": 16,
+    "ranks": [
+      {
+        "rank": 0,
+        "timed_associated_model_steps": 14
+      },
+      {
+        "rank": 1,
+        "timed_associated_model_steps": 14
+      },
+      {
+        "rank": 2,
+        "timed_associated_model_steps": 14
+      },
+      {
+        "rank": 3,
+        "timed_associated_model_steps": 14
+      }
+    ],
+    "scope": "Source-bound successful controller plus complete raw byte/count/fence and cohort checks. Fence receipt follows completion sync and is itself synced before callback returns by verified policy. Not a syscall trace, performance result, or durability guarantee for an interrupted incomplete step.",
+    "selected_step_durability_valid": true,
+    "speed_gain_inferred": false
+  },
+  "scope": "Original-durability A2 control at diagnostic64 only. Three-arm replay in separate decision; no formal1024/native/fullpaper claim.",
+  "full_goal_complete": false
+}
