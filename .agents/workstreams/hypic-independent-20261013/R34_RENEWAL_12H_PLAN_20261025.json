@@ -1,0 +1,59 @@
+{
+  "schema": "hypic-r34-renewed-window/v1",
+  "start_utc": "2026-10-25T18:36:27Z",
+  "absolute_stop_utc": "2026-10-26T06:36:27Z",
+  "human_reply": "续跑12小时，继续完整验收",
+  "scope": "Full three-stage goal unchanged; this immediate diagnostic decides one variable before final-source formal acceptance.",
+  "immediate_order": [
+    "A1",
+    "independent audit and exact release",
+    "B1",
+    "independent audit and exact release",
+    "A2",
+    "independent audit and exact release",
+    "same-source three-arm decision"
+  ],
+  "contracts": {
+    "A1": {
+      "path": "PREFIX_TERMINAL_R34_A1_RENEWAL_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r34-a1-renewal-20261025"
+    },
+    "B1": {
+      "path": "PREFIX_TERMINAL_R34_B1_RENEWAL_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r34-b1-renewal-20261025"
+    },
+    "A2": {
+      "path": "PREFIX_TERMINAL_R34_A2_RENEWAL_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r34-a2-renewal-20261025"
+    }
+  },
+  "source_checkpoint": "6acccc8208600103541c6472272d6d23f203eee5",
+  "runtime_code_checkpoint": "3366381724fae9fd96ec9040b6e172ed523cc9ad",
+  "runtime_bindings": 432,
+  "thresholds": {
+    "control_drift_max_percent": 5,
+    "bounded_gain_screen_percent": 5
+  },
+  "common_warmup": "48privatewarm;4rank8/39full-terminal-state proof; sealed owned live-log snapshot before timer; unseen timedshape invalid.",
+  "minimum_remaining_seconds_per_arm": 1500,
+  "failure_rule": "Preserve failed immutable root; no unknown restart or automatic relaxed retry.",
+  "following": [
+    "If clean material gain, freeze final-source G1-G4x3 matching formal1024 performance and full127x3each-arm naturalEOS quality.",
+    "If insufficient, stop treating prefix-output count as a root cause; measure next ranked actual critical-path budget before a new one-variable repair.",
+    "Actual disable/uninstall/restart and independent release/source/physical audit, then relatedSkill and29functional acceptance."
+  ],
+  "automation": {
+    "id": "hypic-12",
+    "interval_minutes": 10,
+    "stop_utc": "2026-10-26T06:36:27Z",
+    "quiet_unchanged": true
+  },
+  "foreign_untouched": true,
+  "physical_npus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "full_goal_complete": false
+}

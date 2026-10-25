@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "AUTHORITY_EXPIRED_RELEASE_VERIFIED_R34_HOST5_LESSONS_REPLAYED",
+  "execution_state": "R34_RENEWED12H_THREE_ARM_READY_BEFORE_ADMISSION",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -1147,5 +1147,35 @@
     "state": "HISTORICAL_RAW_REPLAY_PASSED_NOT_BLIND_SKILL_ACCEPTANCE",
     "scope": "48actualwarm/8privatecontrolstates/sourceproducer/historicalprofile replay. Enabledtreatment,causalspeed,fullpaper,29functional unaccepted."
   },
-  "window_close_20261025": "HYPIC_WINDOW_CLOSE_20261025.json"
+  "window_close_20261025": "HYPIC_WINDOW_CLOSE_20261025.json",
+  "renewal_20261025_evening": {
+    "human_reply": "续跑12小时，继续完整验收",
+    "start_utc": "2026-10-25T18:36:27Z",
+    "absolute_stop_utc": "2026-10-26T06:36:27Z",
+    "state": "R34_NEW_CONTRACTS_READY_BEFORE_ADMISSION",
+    "plan": "R34_RENEWAL_12H_PLAN_20261025.json",
+    "automation": {
+      "id": "hypic-12",
+      "state": "ACTIVE",
+      "interval_minutes": 10,
+      "absolute_stop_utc": "2026-10-26T06:36:27Z"
+    },
+    "contracts": {
+      "A1": {
+        "path": "PREFIX_TERMINAL_R34_A1_RENEWAL_20261025_CONTRACT.json",
+        "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r34-a1-renewal-20261025"
+      },
+      "B1": {
+        "path": "PREFIX_TERMINAL_R34_B1_RENEWAL_20261025_CONTRACT.json",
+        "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r34-b1-renewal-20261025"
+      },
+      "A2": {
+        "path": "PREFIX_TERMINAL_R34_A2_RENEWAL_20261025_CONTRACT.json",
+        "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r34-a2-renewal-20261025"
+      }
+    },
+    "active_controller": null,
+    "scope": "Same full three-stage goal; immediate causal16/c16/32768/64A/B/A does not replace final-source G1-G4x3/127x3quality/lifecycle."
+  },
+  "active_attempt": null
 }
