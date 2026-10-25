@@ -1,0 +1,83 @@
+{
+  "attribution_gap": {
+    "prefix_specific_walltime_budget": null,
+    "reason": "No exact source/shape/critical-path association or baseline profile control. CPU API wait and device work overlap.",
+    "record_op_args": false,
+    "record_shapes": false,
+    "with_stack": false
+  },
+  "equation": "T = useful_compute + boundary_state + discarded_outputs + transfer_wait + evidence + coordination_queue; only discarded_outputs changes in the current treatment.",
+  "formal_same_protocol_requirement": {
+    "G1_tpot_ms": 94.99547617189137,
+    "G3_tpot_ms": 116.25413966796714,
+    "fraction_of_current_G3_tpot_to_remove": 0.18286371183677874,
+    "meaning": "Necessary recovery of measured TPOT only; not a prediction of diagnostic64 or a component.",
+    "save_ms_per_output_token_to_break_even": 21.25866349607577
+  },
+  "full_goal_complete": false,
+  "input_sha256": {
+    "/cache/cch/hypic-independent-20261013/r31-g3-offline-analysis-r1-20261025/cpu-rank0-complete-prefix-r7.json": "9d4ed53f85684fa59ca5a42000c6639728d1dd40952898ff5fa5c462f612c5b2",
+    "/cache/cch/hypic-independent-20261013/r31-g3-offline-analysis-r1-20261025/four-rank-hardware-cost-r6.json": "3fdd8b5d1e07ec89fd9a880c964c019655a0c1a4a756569f65c78e6462fd951c",
+    "/cache/cch/hypic-independent-20261013/r31-g3-offline-analysis-r1-20261025/profile/rank0_58_20261025130941427_ascend_pt/profiler_info_0.json": "300fbd48e485721beaccdd462b643bd5e511ced53d611fe6eaef4c3dad87a27f",
+    "R30_FIRST_PAIR_DECISION_20261025.json": "037d894dd8a47033da9cb84a90cc34f17356f2040ec9f1cb1c0c207bc171cdbf"
+  },
+  "new_device_work": false,
+  "next_decision": {
+    "do_not_claim": "No whole-regression explanation, estimated millisecond saving or formal1024 success from dispatch counts/profile64.",
+    "if_not_material": "Stop expanding this route. Quantify source-owned evidence fsync critical-path budget before any durability-cadence treatment; preserve guards.",
+    "low_direct_budget_routes": [
+      "Raw async copy bandwidth alone",
+      "Global completion guard removal"
+    ],
+    "primary": "When renewed, one same-source prefix-output A/B/A with real warm proof and independent audits; evaluate measured gain against paired drift."
+  },
+  "predictions": {
+    "causal_status": "Unconfirmed; enabled service arm and three valid controls absent.",
+    "end_to_end_gain": null,
+    "prefix_source_matmul_sites": "2L to L, not 50percent whole service",
+    "retained": "All state arithmetic/order, query normalization/input observer, gate casts, suffix, material/evidence IO and completion guards."
+  },
+  "profile64_four_ranks": [
+    {
+      "device_async_copy_union_seconds": 0.0164701869979684,
+      "device_sync_api_sum_seconds": 1.64126356,
+      "envelope_seconds": 93.514309016,
+      "rank": 0,
+      "stream_sync_api_sum_seconds": 17.74883483
+    },
+    {
+      "device_async_copy_union_seconds": 0.01631556000204771,
+      "device_sync_api_sum_seconds": 1.64322551,
+      "envelope_seconds": 93.5117474,
+      "rank": 1,
+      "stream_sync_api_sum_seconds": 17.787620710000002
+    },
+    {
+      "device_async_copy_union_seconds": 0.01631217999958206,
+      "device_sync_api_sum_seconds": 1.63356137,
+      "envelope_seconds": 93.50931958,
+      "rank": 2,
+      "stream_sync_api_sum_seconds": 17.37154475
+    },
+    {
+      "device_async_copy_union_seconds": 0.016016880004222286,
+      "device_sync_api_sum_seconds": 1.62622889,
+      "envelope_seconds": 93.51044156,
+      "rank": 3,
+      "stream_sync_api_sum_seconds": 17.3995986
+    }
+  ],
+  "rank0_partial_cpu_all_matmul": {
+    "calls": 11120,
+    "inclusive_seconds": 0.4145535,
+    "scope": "All observed aten::matmul CPU spans, not prefix-only, not full hardware cost or removable walltime. Event trace has an incomplete final closure.",
+    "self_seconds": 0.2072865
+  },
+  "schema": "hypic-r34-break-even-model/v1",
+  "source_sha256": {
+    "host_audits/model_r34_break_even.py": "8654c70d527227c96ec3efb851133022caddc5e95234399b10c0322c68abbf47"
+  },
+  "operation": "exec-000000000000180a",
+  "exit_code": 0,
+  "evidence_checkpoint": "1ce767dc4eb8b430ec96d58ece54d65882d96204"
+}

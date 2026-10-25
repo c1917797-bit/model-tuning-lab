@@ -1129,6 +1129,14 @@
       "incomplete_startup_negative_controls": 2,
       "new_device_work": false
     },
+    "break_even_model": {
+      "report": "R34_BREAK_EVEN_MODEL_20261025.json",
+      "operation": "exec-000000000000180a",
+      "required_tpot_reduction_fraction_of_current_G3": 0.18286371183677874,
+      "prefix_specific_walltime_budget": null,
+      "end_to_end_gain_prediction": null,
+      "scope": "Evidence-bound prioritization only; profile64 cannot predict formal1024, prefix site counts not whole-service saving."
+    },
     "historical_anchor_does_not_pin_current_authority": true,
     "current_authority_not_extended": true
   },
