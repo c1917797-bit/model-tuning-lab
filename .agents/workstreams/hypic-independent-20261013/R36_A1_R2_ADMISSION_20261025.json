@@ -1,0 +1,61 @@
+{
+  "schema": "hypic-r36-a1-r2-admission-summary/v1",
+  "operation": "exec-0000000000001958",
+  "utc": "2026-10-25T22:08:15.060358+00:00",
+  "launch_checkpoint": "89ab1638a91e9e86585657529154cb076602bfe7",
+  "published_live_verified": true,
+  "source_check": {
+    "configuration_valid": true,
+    "device_run": false,
+    "controller_sha256": "9ebe496b79e2af3abf0a256280beb4da65c8b87f0c01af243a8487efd8d6f940",
+    "graph_runtime": {
+      "candidate_enabled": true,
+      "capture_sizes": [
+        1,
+        4,
+        8,
+        16,
+        24,
+        32
+      ],
+      "compilation_mode": 3,
+      "cudagraph_mode": "FULL_DECODE_ONLY",
+      "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+      "official_debug_logging": false,
+      "profile": "selective-prefill-native-decode-v1"
+    },
+    "active_manifest_sha256": "ee86d7b731ef7a2bcbab5648d69154cfef1e4450b11d630f05c4c4ad6e75e6b0",
+    "source_bindings": 450,
+    "prerequisite": {
+      "report": "R35_DEVICE_IO_DECISION_20261025.json",
+      "sha256": "12949b22d4658f7c9b576a4c0cee4627247d3e5041111f245b66fd111cd38079",
+      "python_sources": 434,
+      "runtime_additions": [
+        "independent_evidence_step_durability.py",
+        "step_durability_r36/__init__.py",
+        "step_durability_r36/patch.py",
+        "step_durability_r36/sitecustomize.py"
+      ],
+      "changed_own_loader": [
+        "graph_candidate/worker_loader.py"
+      ],
+      "durability_enabled": false,
+      "scope": "Same original math/event writes/guards, only default-off selected-step durability cadence changes. Measured original IO budget is an opportunity, not predicted speed."
+    },
+    "arm": "A1"
+  },
+  "physical0_3_processes": [],
+  "physical0_3_foreign": [],
+  "ports_free": 102,
+  "cache_available_bytes": 10987163648,
+  "new_root_absent": true,
+  "owned_container_absent": true,
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "model_config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+  "model_index_sha256": "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b",
+  "input_sha256": "50f528fa8eb439c56219b0161b16bf12fb2a8fd80effab87d89d725a4cc4c72f",
+  "remaining_seconds": 30493.136409282684,
+  "controller": "exec-0000000000001959",
+  "automatic_startup_gate": "R36_R2_AUTOMATIC_LAUNCH_READINESS_20261025.json",
+  "full_goal_complete": false
+}

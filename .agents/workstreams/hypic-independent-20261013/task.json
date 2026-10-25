@@ -496,7 +496,21 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": null,
+  "active_attempt": {
+    "state": "RUNNING",
+    "operation": "exec-0000000000001959",
+    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "connector": "awmcp",
+    "arm": "A1",
+    "cohort": "R2",
+    "contract": "STEP_DURABILITY_R36_A1_R2_20261025_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-a1-r2-20261025",
+    "launch_checkpoint": "89ab1638a91e9e86585657529154cb076602bfe7",
+    "admission_operation": "exec-0000000000001958",
+    "auditor": "host_audits/r36_step_durability_audit.py",
+    "absolute_stop_utc": "2026-10-26T06:36:27Z",
+    "rule": "Track exact original peer/handle/raw only; running or unknown never restart. 450runtime/common and boundHOST frozen. Terminal independent numerical/hot/byte-durability-policy/source/isolation/exact live release before B1."
+  },
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
@@ -1235,7 +1249,7 @@
     }
   },
   "r36_step_durability": {
-    "state": "R2_ACTUAL_BASE_CAPSULE_AND_AUTOMATIC_IMAGE_STARTUP_VALID_DEVICE_PENDING",
+    "state": "R2_A1_ORIGINAL_DURABILITY_CONTROL_RUNNING",
     "plan": "R36_STEP_DURABILITY_PLAN_20261025.json",
     "next": "Publish this checkpoint, fresh source/model/image/input/newroot/physical0-3/102ports/storage/budget admission, then A1 only. Independent valid exactrelease audit before new B1 and A2. OldR1wholecohort remains closed.",
     "full_goal_complete": false,
@@ -1292,6 +1306,7 @@
         "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-a2-r2-20261025"
       }
     },
-    "automatic_startup_readiness": "R36_R2_AUTOMATIC_LAUNCH_READINESS_20261025.json"
+    "automatic_startup_readiness": "R36_R2_AUTOMATIC_LAUNCH_READINESS_20261025.json",
+    "active_controller": "exec-0000000000001959"
   }
 }
