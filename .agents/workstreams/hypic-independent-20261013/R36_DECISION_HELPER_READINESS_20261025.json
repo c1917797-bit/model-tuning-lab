@@ -1,0 +1,33 @@
+{
+  "schema": "hypic-r36-decision-helper-readiness/v1",
+  "state": "HOST12_PREREGISTERED_DECISION_READY_THREE_ARMS_PENDING",
+  "base_checkpoint": "1a40a3e681211224e6ceb96f4371365868209e69",
+  "source_sha256": {
+    "host_audits/r36_step_durability_decision.py": "324ef735a3d5454feff2f1835a9cec8203e4aa1740c0a8517c53555dbe1591b6",
+    "host_audits/test_r36_step_durability_decision.py": "2e738d3afe91ec25de7c1665f223cd04773c96fb98768a4337f3057e86bd1b88"
+  },
+  "tests": {
+    "operation": "exec-0000000000001960",
+    "exit_code": 0,
+    "passed": 12,
+    "scope": "Decision thresholds, actual R2 identity/source/manifest matching and negative protocol/config controls; not device or performance acceptance."
+  },
+  "direct_cli_import": true,
+  "meta_operation": "exec-0000000000001963",
+  "decision_rule": {
+    "gain_percent_at_least": 5,
+    "control_drift_percent_at_most": 5,
+    "control_mean": "(A1+A2)/2",
+    "inconclusive_if_drift_exceeded": true,
+    "all_three_valid_independent_audits_required": true,
+    "independent_raw_audits_replayed_before_decision": true,
+    "exact_saved_live_release_proof_required": true
+  },
+  "single_variable": "Identical434Python/450runtime map/config in A1/B1/A2; only B1manifest step_durability metadata. Every arm original prefix path and IOtimingobserveroff.",
+  "comparison_scope": "Same HYPIC implementation durability variant only, not HYPIC vsnativeG1; R30formalnegative unchanged. Profile64 is not formal1024 or fullpaper result.",
+  "cli": "python3 -B host_audits/r36_step_durability_decision.py --a1-audit ABS_A1 --b1-audit ABS_B1 --a2-audit ABS_A2 --output NEW_EXCLUSIVE_EXTERNAL_JSON",
+  "active_device_controller": "exec-0000000000001959",
+  "device_source_changes": false,
+  "new_device_allocation": false,
+  "full_goal_complete": false
+}

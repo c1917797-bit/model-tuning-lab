@@ -1,3 +1,9 @@
+# CURRENT R36 R2 A1 STILL LIVE1959; UNBOUND HOST DECISION12 READY
+
+Exact1959stillRUNNING;22:13:33rawsnapshot124cleanobservationsprovesactualownedCIDbed7c1f0...andphysical0-3 PIDs2717857-60/namespace60-63,450sourcesunchanged. No restart/live runtimeedit. New UNBOUND HOST r36_step_durability_decision.pySHA324ef735...keepspreregistered5pctgain/drift<=5pct,all3validindependentaudits/live-releaseproof+freshrawreplay,matchedR2source/configandONLYoneB1manifestdurabilitymetadata.1960PASS12newHOSTthreshold/actualR2contract/mutationcontrols;1963directCLIimportPASS. R36_DECISION_HELPER_READINESS_20261025.jsonbindshelper. No newNPUallocation/450runtime orboundHOSTsourcechange.
+
+DecisioncomparisonisSAMEHYPICdurabilityvariant,NOTversusnativeG1;R30formalnegativeunchanged/profile64notformal1024. AftervalidA1audit/exactrelease,freshB1thenA2;onlyafter3auditsrunhelperwith--a1-audit/--b1-audit/--a2-audit--outputNEWexclusiveexternalJSON. Unsupportedgainorcontroldriftstopsroute,noautomaticrepeats/gaterelaxation. Active1959contractSTEP_DURABILITY_R36_A1_R2_20261025_CONTRACT.json/rawstep-durability-r36-a1-r2-20261025;fixed06:36:27UTCdeadline/fullgoalremain.
+
 # CURRENT R36 R2 A1 CONTROL RUNNING EXACT1959; ALL BOUND SOURCES FROZEN
 
 NewcorrectedR2checkpoint89ab1638a91e9e86585657529154cb076602bfe7published/liveverified,mainunchanged.1950/1951actualbase-consumedcapsules+1953OFF/1954ONautomaticPythonstartupCPUimagepass. Freshma/direct1958at22:08:15UTCproves450sources/newrootabsent/physical0-3empty/102portsfree/image/modelconfig+index/inputidentity/cache10.99GB/30493secondsremaining. OriginaldurabilityA1R2exactexec-0000000000001959ma a6109confirmedRUNNING; raw/cache/cch/hypic-independent-20261013/step-durability-r36-a1-r2-20261025; contractSTEP_DURABILITY_R36_A1_R2_20261025_CONTRACT.json. No unknownrestart or bindingrewrite;R1wholecohortremainsclosed.
