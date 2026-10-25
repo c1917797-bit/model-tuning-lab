@@ -1,0 +1,39 @@
+{
+  "schema": "hypic-r35-evidence-io-budget-plan/v1",
+  "state": "PLANNED_NOT_IMPLEMENTED_NOT_DEVICE_ACCEPTED",
+  "authority": {
+    "start_utc": "2026-10-25T18:36:27Z",
+    "absolute_stop_utc": "2026-10-26T06:36:27Z",
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "model": "27B singleTP4",
+    "foreign_untouched": true
+  },
+  "predecessor": "R34_THREE_ARM_DECISION_20261025.json",
+  "purpose": "Measure actual source-owned evidence emitter and its fsync component in the real selected model steps; no durability/algorithm treatment yet.",
+  "reason": "R34 source output-matmul reduction gave0.198pct screened difference vs1.308pct control drift, below5pct. Source graph_candidate/worker_loader.py fsyncs every event; R31 opaque Python self/copy-wait budgets do not attribute that cost.",
+  "single_change": "Default-disabled bounded timing observer around unchanged emitter and exact original per-event fsync. Retain every original write, numerical/completion/ownership guard and request evidence.",
+  "expected_effect": null,
+  "critical_path_budget_before_measurement": null,
+  "scope": "Diagnostic16/c16/32768/64 with actual warmproof. Timed diagnostics are not optimization performance, and profile64 cannot predict formal1024.",
+  "measurements": [
+    "per-rank/per-step/event-group original emit calls and elapsed intervals",
+    "actual os.fsync calls and elapsed intervals on owned evidence FD",
+    "written event/byte counters, filtered/failed outcomes and extra diagnostic-row accounting",
+    "same-request fourworker mechanism/numerical/source/isolation/release"
+  ],
+  "guardrails": [
+    "No source algorithm/math/operator/runner/scheduler change; only own loader diagnostic branch/helper.",
+    "Defaultoff passes unchanged raw writer body/behavior controls; enabled keeps original fsync exactlyonce per original event.",
+    "Bounded observer state, no recursive measurement or hidden dropped events; original exception must propagate and owned cleanup tested.",
+    "Keep R34 first-shape proof before timing and all guards; direct source/import/graph preflight before device.",
+    "New frozen source/contract/root; active source/data immutable; no R34 rerun or source identity reuse for new bytes."
+  ],
+  "decision_rule": "If actual removable sink/fsync budget is small, reject that route; if material, preregister a separate one-variable treatment preserving completed-request durability and evidence. Do not attribute whole regression from source counts or overlapping sums.",
+  "following_full_goal": "Final sourceG1-G4x3,127x3each-arm matched naturalEOS quality,actual lifecycle andrelatedSkill/29functional acceptance remain, regardless of this partial diagnostic.",
+  "full_goal_complete": false
+}

@@ -1,0 +1,53 @@
+{
+  "schema": "hypic-r34-three-arm-decision-summary/v1",
+  "operation": "exec-00000000000018c0",
+  "exit_code": 0,
+  "original_artifact": "/cache/cch/hypic-independent-20261013/r34-three-arm-decision-r1-20261025.json",
+  "original_sha256": "6735a14371a3f4d91ddfdc78148113af9adec07b6a3aaab91a825996e4bed2c2",
+  "state": "INSUFFICIENT_NET_GAIN_AT_SCREEN_THRESHOLD",
+  "A1_seconds": 117.11212561000139,
+  "B1_seconds": 117.6488165401388,
+  "A2_seconds": 118.6534494899679,
+  "control_mean_seconds": 117.88278754998464,
+  "control_relative_drift_percent": 1.307505456903927,
+  "B_gain_percent": 0.198477669818109,
+  "drift_limit_percent": 5,
+  "screen_gain_percent": 5,
+  "scope": "One integrated16/c16/32768/64 A/B/A diagnostic; not formal1024 repeated performance, fullquality or wholepaper acceptance.",
+  "full_goal_complete": false,
+  "arms": [
+    {
+      "contract": "PREFIX_TERMINAL_R34_A1_RENEWAL_20261025_CONTRACT.json",
+      "contract_sha256": "177e1963058b90509b9b5d827f0650876488d71e32a0d43ba5485cab3126544f",
+      "audit": "/cache/cch/hypic-independent-20261013/r34-a1-renewal-independent-audit-r1-20261025.json",
+      "audit_sha256": "9ac60e6da431e63717201f88d56691c2813642154d100f7cbb0931258456390f"
+    },
+    {
+      "contract": "PREFIX_TERMINAL_R34_B1_RENEWAL_20261025_CONTRACT.json",
+      "contract_sha256": "016f2799d91b4c360ca511fadad0dd0ccf50ec714354ca09456c3aff8f2d9cce",
+      "audit": "/cache/cch/hypic-independent-20261013/r34-b1-renewal-independent-audit-r1-20261025.json",
+      "audit_sha256": "8a8e8b93058513c289011af338b7d5a4f9698509df508fcde23257e87d538a15"
+    },
+    {
+      "contract": "PREFIX_TERMINAL_R34_A2_RENEWAL_20261025_CONTRACT.json",
+      "contract_sha256": "faaffcfbc02986bfa1b20858e76d4070b755f409a42e6f6d226856126802a3b7",
+      "audit": "/cache/cch/hypic-independent-20261013/r34-a2-renewal-independent-audit-r1-20261025.json",
+      "audit_sha256": "10463df3900ad669683ea3b6e9b246beaec0139ef59d2aab89cf2b091767be8e"
+    }
+  ],
+  "independent_audits_replayed": true,
+  "raw_results_rewritten": false,
+  "accepted_control_warm_requests_per_arm": 48,
+  "actual_private_npu_state_checks_per_arm": 8,
+  "physical_npus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "source_bindings": 432,
+  "A2_independent_audit": "exec-00000000000018bc",
+  "A2_live_release_verified": true,
+  "next": "Stop expanding prefix-unused-output route; quantify evidence sink/fsync budget before any different treatment.",
+  "formal_r30_negative_unchanged": true
+}

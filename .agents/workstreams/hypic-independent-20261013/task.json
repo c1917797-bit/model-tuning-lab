@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R34_RENEWED12H_A1_B1_VALID_A2_RUNNING_EXACT18A0",
+  "execution_state": "R34_VALID_THREE_ARM_SCREEN_NEGATIVE_NEXT_IO_BUDGET",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -496,22 +496,7 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": {
-    "state": "RUNNING_NOT_ACCEPTED",
-    "operation": "exec-00000000000018a0",
-    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
-    "connector": "awmcp",
-    "arm": "A2",
-    "contract": "PREFIX_TERMINAL_R34_A2_RENEWAL_20261025_CONTRACT.json",
-    "contract_sha256": "faaffcfbc02986bfa1b20858e76d4070b755f409a42e6f6d226856126802a3b7",
-    "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r34-a2-renewal-20261025",
-    "launch_checkpoint": "6c135dfdf4b0dbd93064f16b775f7f3245fa6b40",
-    "admission_operation": "exec-000000000000189f",
-    "observed_running_utc": "2026-10-25T19:31:05Z",
-    "auditor": "host_audits/r34_prefix_terminal_audit.py",
-    "absolute_stop_utc": "2026-10-26T06:36:27Z",
-    "rule": "Exact original ma/handle/raw only; live or unknown neverrestart.432runtime/common/boundHOST frozen. A2 independent audit/live release, then r34 three-arm source/evidence replay beforedecision."
-  },
+  "active_attempt": null,
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
@@ -1151,7 +1136,7 @@
     "human_reply": "续跑12小时，继续完整验收",
     "start_utc": "2026-10-25T18:36:27Z",
     "absolute_stop_utc": "2026-10-26T06:36:27Z",
-    "state": "R34_A1_B1_VALID_A2_RUNNING_EXACT18A0",
+    "state": "R34_THREE_ARM_VALID_INSUFFICIENT_NET_GAIN",
     "plan": "R34_RENEWAL_12H_PLAN_20261025.json",
     "automation": {
       "id": "hypic-12",
@@ -1173,8 +1158,18 @@
         "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r34-a2-renewal-20261025"
       }
     },
-    "active_controller": {
-      "state": "RUNNING_NOT_ACCEPTED",
+    "active_controller": null,
+    "decision": "host_audits/r34_prefix_terminal_decision.py",
+    "decision_readiness": "R34_TRACKING_DECISION_READINESS_20261025.json",
+    "scope": "Same full three-stage goal; immediate causal16/c16/32768/64A/B/A does not replace final-source G1-G4x3/127x3quality/lifecycle.",
+    "A1_result": "R34_A1_RENEWAL_AUDIT_20261025.json",
+    "A1_audit_path": "/cache/cch/hypic-independent-20261013/r34-a1-renewal-independent-audit-r1-20261025.json",
+    "B1_admission": "R34_B1_RENEWAL_ADMISSION_20261025.json",
+    "B1_result": "R34_B1_RENEWAL_AUDIT_20261025.json",
+    "B1_audit_path": "/cache/cch/hypic-independent-20261013/r34-b1-renewal-independent-audit-r1-20261025.json",
+    "A2_admission": "R34_A2_RENEWAL_ADMISSION_20261025.json",
+    "last_completed_controller": {
+      "state": "VALID_AUDITED_RELEASED",
       "operation": "exec-00000000000018a0",
       "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
       "connector": "awmcp",
@@ -1187,16 +1182,28 @@
       "observed_running_utc": "2026-10-25T19:31:05Z",
       "auditor": "host_audits/r34_prefix_terminal_audit.py",
       "absolute_stop_utc": "2026-10-26T06:36:27Z",
-      "rule": "Exact original ma/handle/raw only; live or unknown neverrestart.432runtime/common/boundHOST frozen. A2 independent audit/live release, then r34 three-arm source/evidence replay beforedecision."
+      "rule": "Exact original ma/handle/raw only; live or unknown neverrestart.432runtime/common/boundHOST frozen. A2 independent audit/live release, then r34 three-arm source/evidence replay beforedecision.",
+      "terminal_controller_exit_code": 0,
+      "independent_audit": "exec-00000000000018bc",
+      "decision_operation": "exec-00000000000018c0"
     },
-    "decision": "host_audits/r34_prefix_terminal_decision.py",
-    "decision_readiness": "R34_TRACKING_DECISION_READINESS_20261025.json",
-    "scope": "Same full three-stage goal; immediate causal16/c16/32768/64A/B/A does not replace final-source G1-G4x3/127x3quality/lifecycle.",
-    "A1_result": "R34_A1_RENEWAL_AUDIT_20261025.json",
-    "A1_audit_path": "/cache/cch/hypic-independent-20261013/r34-a1-renewal-independent-audit-r1-20261025.json",
-    "B1_admission": "R34_B1_RENEWAL_ADMISSION_20261025.json",
-    "B1_result": "R34_B1_RENEWAL_AUDIT_20261025.json",
-    "B1_audit_path": "/cache/cch/hypic-independent-20261013/r34-b1-renewal-independent-audit-r1-20261025.json",
-    "A2_admission": "R34_A2_RENEWAL_ADMISSION_20261025.json"
+    "decision_result": "R34_THREE_ARM_DECISION_20261025.json"
+  },
+  "r34_three_arm": {
+    "state": "INSUFFICIENT_NET_GAIN_AT_SCREEN_THRESHOLD",
+    "decision": "R34_THREE_ARM_DECISION_20261025.json",
+    "raw_decision": "/cache/cch/hypic-independent-20261013/r34-three-arm-decision-r1-20261025.json",
+    "raw_sha256": "6735a14371a3f4d91ddfdc78148113af9adec07b6a3aaab91a825996e4bed2c2",
+    "gain_percent": 0.198477669818109,
+    "control_drift_percent": 1.307505456903927,
+    "route_expansion_stopped": true,
+    "full_goal_complete": false
+  },
+  "r35_evidence_io_budget": {
+    "state": "PLANNED_NOT_IMPLEMENTED_NOT_DEVICE_ACCEPTED",
+    "plan": "R35_EVIDENCE_IO_BUDGET_PLAN_20261025.json",
+    "next": "Implement/test default-off actual emitter/fsync cost observer, then new source-bound bounded integration only. No durability or algorithm treatment yet.",
+    "baseline_treatment": "Retain original prefix output path; rejected R34 terminal-only flag disabled.",
+    "full_goal_complete": false
   }
 }
