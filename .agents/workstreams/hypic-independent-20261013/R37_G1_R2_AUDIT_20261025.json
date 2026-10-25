@@ -1,0 +1,81 @@
+{
+  "schema": "hypic-r37-g1-r2-formal-summary/v1",
+  "state": "VALID_FULL40_NATIVE_CONTROL_AUDITED_RELEASED",
+  "controller": "exec-00000000000019d2",
+  "controller_exit_code": 0,
+  "contract": "FORMAL_STEP_R37_G1_R2_20261025_CONTRACT.json",
+  "launch_checkpoint": "3e5483dd46df2162f593050ee4f55d1dbe7d5944",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-step-r37-g1-r2-20261025",
+  "independent_audit": {
+    "operation": "exec-00000000000019dd",
+    "path": "/cache/cch/hypic-independent-20261013/r37-g1-r2-independent-audit-20261025.json",
+    "sha256": "aa544ab654f7a10116ff4b36979dbaa009a32d8c0f3b2266d9c176c67bdb26b7",
+    "valid": true,
+    "live_release_verified": true
+  },
+  "timing": {
+    "requests": 40,
+    "tpot_p95_ms": 118.83959705073721,
+    "ttft_p95_ms": 89248.62486985512,
+    "unique_ids": 40,
+    "weighted_tpot_ms": 95.04516940235135
+  },
+  "source_bindings": 454,
+  "isolation_samples": 272,
+  "physical": {
+    "ranks": {
+      "0": {
+        "host_pid": 3447402,
+        "inner_pid": 58,
+        "physical_npu": 0
+      },
+      "1": {
+        "host_pid": 3447404,
+        "inner_pid": 59,
+        "physical_npu": 1
+      },
+      "2": {
+        "host_pid": 3447413,
+        "inner_pid": 60,
+        "physical_npu": 2
+      },
+      "3": {
+        "host_pid": 3447414,
+        "inner_pid": 61,
+        "physical_npu": 3
+      }
+    },
+    "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+  },
+  "graph": {
+    "compile_complete_lines": [
+      207
+    ],
+    "replay_directly_observed_rank": 0,
+    "replay_lines": [
+      300
+    ],
+    "scope": "actual native INFO replay; capture compatibility proved by same-source R29 canary, not per-token/all-rank completed replay counts",
+    "service_log_sha256": "6a59590928a6b668bf3431ee351ddbadb0528f7248ae9134cd4ad0a46ad3d017",
+    "workers": {
+      "0": 58,
+      "1": 59,
+      "2": 60,
+      "3": 61
+    }
+  },
+  "graph_scope_qualification": "The reused INFO parser's scope string mentions historical same-source R29. R37 does not claim its434 runtime Python equals R29; current bounded prerequisite is R36. Actual pinned official worker source/INFO startup/compile/replay and live four-rank physical joins are retained direct observations. This label is not an extra R29-based acceptance.",
+  "native_algorithm_mounts_or_imports": false,
+  "preaudit_release_observations": [
+    {
+      "operation": "exec-00000000000019db",
+      "state": "Actual container absent and physical0-3empty; bind not yet available, so audit/start withheld."
+    },
+    {
+      "operation": "exec-00000000000019dc",
+      "state": "All102actualbinds now free; unchanged independent audit19dd then passed. No process stop/mutation, device rerun or source/guard change."
+    }
+  ],
+  "scope": "One actual current-source native full40/c16/fixed1024 control; no paired speed, three rounds, PDC, quality, lifecycle or fullpaper conclusion.",
+  "full_goal_complete": false
+}

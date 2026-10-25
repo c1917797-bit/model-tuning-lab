@@ -1,0 +1,55 @@
+{
+  "cache_available_bytes": 10667425792,
+  "device_allocation": false,
+  "head": "c1f661acc6251e22c2aceeccfb8b3f208c02da25",
+  "host": "Euler",
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "input_sha256": "50f528fa8eb439c56219b0161b16bf12fb2a8fd80effab87d89d725a4cc4c72f",
+  "model_config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+  "model_index_sha256": "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b",
+  "new_root_absent": true,
+  "owned_name_absent": true,
+  "physical0_3_foreign": [],
+  "physical0_3_processes": [],
+  "ports_free": 102,
+  "remaining_seconds": 24102.251195907593,
+  "schema": "hypic-r37-real-admission/v1",
+  "source": {
+    "active_manifest_sha256": "14ab030b1ce99e9affd9b4b29fdf4a831cb4931a2bf5ff2afc8109bd71af1e58",
+    "configuration_valid": true,
+    "controller_sha256": "b1d0c6613c9660caf1fb961e74b2fef05cd517348a8c4d5f8d92ed3e05ed2e24",
+    "device_run": false,
+    "graph_runtime": {
+      "candidate_enabled": true,
+      "capture_sizes": [
+        1,
+        4,
+        8,
+        16,
+        24,
+        32
+      ],
+      "compilation_mode": 3,
+      "cudagraph_mode": "FULL_DECODE_ONLY",
+      "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+      "official_debug_logging": false,
+      "profile": "selective-prefill-native-decode-v1"
+    },
+    "policy": {
+      "algorithm_on": true,
+      "group": "G3",
+      "pdc_on": false
+    },
+    "prerequisite": {
+      "historical_timing_reused": false,
+      "python_sources": 434,
+      "r33_observer_removed_only": true,
+      "report": "R36_THREE_ARM_DECISION_20261025.json",
+      "runtime_python_identical_to_R36": true,
+      "scope": "R36 bounded NPU math/graph/durability evidence; not formal native speed or full task quality",
+      "sha256": "10b536ce5cc174e98fd112badd73a8e24bafc11e7068d1af1604ba1af1606a7e"
+    },
+    "source_bindings": 454
+  },
+  "utc": "2026-10-25T23:54:46.246456+00:00"
+}
