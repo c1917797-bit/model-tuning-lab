@@ -9,7 +9,41 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R29_BOUNDED_GRAPH_PASSED_COST_MODEL_SELECTED_FIRST_PAIR_NEXT",
+  "execution_state": "R30_GRAPH_FIRST_PAIR_HOST_READY_FRESH_ADMISSION_NEXT",
+  "r30_first_pair": {
+    "state": "HOST_READY_NOT_DEVICE_STARTED",
+    "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
+    "readiness": "R30_GRAPH_FIRST_PAIR_HOST_READINESS_20261025.json",
+    "contracts": {
+      "G1": {
+        "path": "FORMAL_GRAPH_R30_G1_R1_20261025_CONTRACT.json",
+        "sha256": "93b51310cd9bf14ea89fe260d455099181fe9865743052df5a081f7f5a01a820",
+        "raw_root": "/cache/cch/hypic-independent-20261013/formal-graph-r30-g1-r1-20261025"
+      },
+      "G3": {
+        "path": "FORMAL_GRAPH_R30_G3_R1_20261025_CONTRACT.json",
+        "sha256": "278fc2663df36a562d2b65b3bb291d1bcfe6fab5bc2a89ff089b0b9fc84a3489",
+        "raw_root": "/cache/cch/hypic-independent-20261013/formal-graph-r30-g3-r1-20261025"
+      }
+    },
+    "runtime_python": 421,
+    "common_source_bindings": 425,
+    "study_source_map_sha256": "8a69978bde847de5f58d474c8442004672c154c242fe2931c0b53f4a99b1b168",
+    "host_tests": {
+      "operation": "exec-0000000000001662",
+      "passed": 16
+    },
+    "static_operation": "exec-0000000000001668",
+    "order": [
+      "G1",
+      "independent audit/release",
+      "G3",
+      "independent audit/release",
+      "first pair decision"
+    ],
+    "scope": "One new actual matched graph first pair, no old eager timing reuse. Full12matrix/fullpairedquality/lifecycle/29functional remain.",
+    "active_controller": null
+  },
   "r29_warmup": {
     "state": "BOUNDED_NPU_ACCEPTED_NOT_SPEED_OR_FULL_QUALITY",
     "contract": "GRAPH_R29_G3_CANARY_R1_20261025_CONTRACT.json",
@@ -612,7 +646,7 @@
     ],
     "start_utc": "2026-10-25T06:07:17Z",
     "absolute_stop_utc": "2026-10-25T18:07:17Z",
-    "state": "R29_BOUNDED_GRAPH_PASSED_COST_MODEL_SELECTED_FIRST_PAIR_NEXT",
+    "state": "R30_GRAPH_FIRST_PAIR_HOST_READY_FRESH_ADMISSION_NEXT",
     "plan": "R24_R2_RENEWAL_PLAN_20261025.json",
     "contracts": [
       "C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json",
@@ -688,7 +722,7 @@
     },
     "host_audit_successors": {"report": "HOST_AUDIT_SUCCESSORS_R26_R28_READINESS_20261025.json", "state": "HOST_ONLY_REVIEWED_CPU_TESTED_NOT_DEVICE_ACCEPTANCE", "runtime_source_changed": false},
     "r27_graph": {"plan":"R27_GRAPH_CANARY_PLAN_20261025.json","G1_evidence":"R27_G1_AUDIT_20261025.json","G1_valid":true,"G1_independent_audit":"exec-00000000000015fb","G3_started":true,"scope":"boundedcompatibility, not speed/fullquality","G3_state":"FAILED_GRAPH_CAPTURE_0HTTP_RELEASE_VERIFIED","G3_evidence":"R27_G3_GRAPH_CAPTURE_FAILURE_20261025.json","G3_independent_audit":"exec-0000000000001628"},
-    "latest_confirmed_publication": "00a486ee052484c04884f6af7ed49065980fe020",
+    "latest_confirmed_publication": "3b38689128a282a0eb942359c005da348b0a4aa3",
     "pending_publication": {
       "checkpoint": "283de3b13c05042ed57ebe4cc90329454cab4b32",
       "evidence": "R24_R2_PUBLICATION_FAILURE_20261025.json",

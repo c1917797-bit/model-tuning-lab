@@ -1,0 +1,59 @@
+{
+  "schema": "hypic-graph-current-first-pair/v1",
+  "created_utc": "2026-10-25T11:15:21.587827+00:00",
+  "cost_model": "HYPIC_COST_MODEL_AND_PRIORITY_20261025.json",
+  "order": [
+    "G1",
+    "independent-live-audit",
+    "G3",
+    "independent-live-audit",
+    "first-pair-decision"
+  ],
+  "contracts": {
+    "G1": {
+      "path": "FORMAL_GRAPH_R30_G1_R1_20261025_CONTRACT.json",
+      "sha256": "93b51310cd9bf14ea89fe260d455099181fe9865743052df5a081f7f5a01a820",
+      "raw_root": "/cache/cch/hypic-independent-20261013/formal-graph-r30-g1-r1-20261025"
+    },
+    "G3": {
+      "path": "FORMAL_GRAPH_R30_G3_R1_20261025_CONTRACT.json",
+      "sha256": "278fc2663df36a562d2b65b3bb291d1bcfe6fab5bc2a89ff089b0b9fc84a3489",
+      "raw_root": "/cache/cch/hypic-independent-20261013/formal-graph-r30-g3-r1-20261025"
+    }
+  },
+  "runtime_python": 421,
+  "runtime_bindings": 423,
+  "common_launch_bindings": 425,
+  "study_source_map_sha256": "8a69978bde847de5f58d474c8442004672c154c242fe2931c0b53f4a99b1b168",
+  "host_tests": {
+    "operation": "exec-0000000000001662",
+    "passed": 16,
+    "scope": "Actual base argv generation intercepted before allocation; actual source-bound INFO log controls and timed policies. No new NPU run."
+  },
+  "protocol": {
+    "input_tokens": 32768,
+    "native_prefix_tokens": 8192,
+    "public_segment_tokens": 16384,
+    "relocated_offsets": [
+      1024,
+      7168
+    ],
+    "output_tokens": 1024,
+    "concurrency": 16,
+    "requests": 40,
+    "retries": 0,
+    "measured_http_timeout_seconds": 1800,
+    "warmup_http_timeout_seconds": 900,
+    "warmups": "Two public plus two private, all four unscored; source-owned workload unchanged",
+    "thinking": false,
+    "eos": "ignore_eos for performance only",
+    "graph": "CompilationMode3/FULL_DECODE_ONLY/enforce_eagerFalse",
+    "official_logging": "Common INFO, no captured DEBUG workload",
+    "pdc": false
+  },
+  "interpretation": "New same-profile native/algorithm first screen; no cross-version speed pooling or compile-only causality from R25 comparison. No resident/grouped/logging policy treatment added.",
+  "if_positive": "Complete requested G1-G4x3 current-source matched matrix/fullpaired quality/lifecycle; add real PDC observer source binding before G2/G4 execution.",
+  "if_negative": "Preserve negative result; only measured one-variable residual-cost branch per small model, no blind expansion of unchanged12matrix.",
+  "absolute_stop_utc": "2026-10-25T18:07:17Z",
+  "full_goal_accepted": false
+}

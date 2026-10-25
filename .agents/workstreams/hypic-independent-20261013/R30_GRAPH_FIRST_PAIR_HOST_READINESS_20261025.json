@@ -1,0 +1,122 @@
+{
+  "schema": "hypic-r30-formal-graph-host-readiness/v1",
+  "parent_checkpoint": "3b38689128a282a0eb942359c005da348b0a4aa3",
+  "code_source_unchanged_from_accepted_R29": true,
+  "host_tests": {
+    "operation": "exec-0000000000001662",
+    "passed": 16,
+    "scope": "Actual base run_contract builds argv then is deliberately stopped by CPU fixture before Docker allocation; both original native and candidate INFO controls; actual pinned historical log negative/positive cases."
+  },
+  "static": {
+    "operation": "exec-0000000000001668",
+    "offline_configuration": {
+      "G1": {
+        "configuration_valid": true,
+        "device_run": false,
+        "device_admission_performed": false,
+        "controller_sha256": "d5cd81682811eab27dc50f7ed123b3ec84a6f01019e8f2748606be7d8ce8c5ed",
+        "base_controller_sha256": "bf55661d61618a7f83537ce6bf477b66e80ccaf097ac714938ceee9bdf199d33",
+        "graph_runtime": {
+          "profile": "selective-prefill-native-decode-v1",
+          "compilation_mode": 3,
+          "cudagraph_mode": "FULL_DECODE_ONLY",
+          "capture_sizes": [
+            1,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+          "official_debug_logging": false,
+          "candidate_enabled": false
+        },
+        "policy": {
+          "group": "G1",
+          "algorithm_on": false,
+          "pdc_on": false
+        },
+        "active_manifest_sha256": "7854000798eeb376849b2d0dc7b116a6503cd61db78ba15e2452a558b32aff58",
+        "source_bindings": 425,
+        "prerequisite": {
+          "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+          "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43",
+          "python_sources": 421,
+          "scope": "same runtime Python and bounded graph/numerical prerequisites; not formal quality"
+        }
+      },
+      "G3": {
+        "configuration_valid": true,
+        "device_run": false,
+        "device_admission_performed": false,
+        "controller_sha256": "d5cd81682811eab27dc50f7ed123b3ec84a6f01019e8f2748606be7d8ce8c5ed",
+        "base_controller_sha256": "bf55661d61618a7f83537ce6bf477b66e80ccaf097ac714938ceee9bdf199d33",
+        "graph_runtime": {
+          "profile": "selective-prefill-native-decode-v1",
+          "compilation_mode": 3,
+          "cudagraph_mode": "FULL_DECODE_ONLY",
+          "capture_sizes": [
+            1,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+          "official_debug_logging": false,
+          "candidate_enabled": true
+        },
+        "policy": {
+          "group": "G3",
+          "algorithm_on": true,
+          "pdc_on": false
+        },
+        "active_manifest_sha256": "edb19beed1b0dc5434e088c3274d87c2a6363599315bc851b3c9b4a5aaf56614",
+        "source_bindings": 425,
+        "prerequisite": {
+          "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+          "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43",
+          "python_sources": 421,
+          "scope": "same runtime Python and bounded graph/numerical prerequisites; not formal quality"
+        }
+      }
+    },
+    "same_common_425_source_map": true,
+    "runtime_python": 421,
+    "different_actual_arm_manifests_preserved": true,
+    "no_framework_import_or_NPU_allocation": true,
+    "structure29": true,
+    "parent_head": "3b38689128a282a0eb942359c005da348b0a4aa3"
+  },
+  "controller_sources": {
+    "host_audits/r30_graph_formal_controller.py": "d5cd81682811eab27dc50f7ed123b3ec84a6f01019e8f2748606be7d8ce8c5ed",
+    "host_audits/r27_graph_controller.py": "50a97e444fb14b3cd3a0b39833e861e3f9d0aba6f7d1682a1673858e7fec5342",
+    "formal_r15_tp4.py": "bf55661d61618a7f83537ce6bf477b66e80ccaf097ac714938ceee9bdf199d33"
+  },
+  "auditor_sources": {
+    "host_audits/r30_graph_formal_audit.py": "b60c8c8138a4ad39528e0a9a5a5a492fe5a1fee80b57fb9d5178d74515b53398",
+    "host_audits/r26_group_performance.py": "72378fc059526b3b8dcd332280746bd210323b59f41ac2dd23742444960353c2",
+    "host_audits/r27_graph_canary_audit.py": "ad9b0b414c81c76f295ddd00228ce2ad64ff24fd10734f6eaf78ef0b9136df1c"
+  },
+  "contracts": {
+    "G1": {
+      "path": "FORMAL_GRAPH_R30_G1_R1_20261025_CONTRACT.json",
+      "sha256": "93b51310cd9bf14ea89fe260d455099181fe9865743052df5a081f7f5a01a820",
+      "raw_root": "/cache/cch/hypic-independent-20261013/formal-graph-r30-g1-r1-20261025"
+    },
+    "G3": {
+      "path": "FORMAL_GRAPH_R30_G3_R1_20261025_CONTRACT.json",
+      "sha256": "278fc2663df36a562d2b65b3bb291d1bcfe6fab5bc2a89ff089b0b9fc84a3489",
+      "raw_root": "/cache/cch/hypic-independent-20261013/formal-graph-r30-g3-r1-20261025"
+    }
+  },
+  "common_study_source_map_sha256": "8a69978bde847de5f58d474c8442004672c154c242fe2931c0b53f4a99b1b168",
+  "identity_split": "contract.controller_sha256 remains genuine imported baseBF556; host_controller_sha256 separately binds actual new driver. No source/launch alias.",
+  "timed_mode_delta": "Relative to R29 same421Python, c1_performance_mode on, numericshadow/divergence off, head policyhead0, snapshotprobe0. All operator math, completion/finite/slot/snapshot/receipts retained; commonINFO avoids CanaryDEBUG in E2E.",
+  "native_control": "Fresh native G1, no algorithm package/mount/environment, same common425 provenance only. Actual arm manifests differ intentionally.",
+  "device_run": false,
+  "absolute_stop_utc": "2026-10-25T18:07:17Z",
+  "whole_goal_accepted": false
+}

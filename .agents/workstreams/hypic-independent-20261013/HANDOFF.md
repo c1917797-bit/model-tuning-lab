@@ -1,3 +1,34 @@
+# CURRENT 2026-10-25 R30 FULL40 GRAPH FIRST PAIR HOST-READY; NO OWNED LIVE JOB
+
+New HOST controller/auditor are outside inferenceallowlist; original421Python
+unchanged from R29 bounded graph/numerical proof1653.16CPU1662PASS exercises
+actualbase argvconstruction then stopsbeforeDocker; native/HYPIC realINFO log
+controls passwithoutDEBUGcapture. Static1668PASS validatesboth realconfigs/
+sourceclosures/default noframeworkimport/29structure. No R30device run yet.
+Samecommon425study map8a69978b...; actualG1manifest78540007.../G3edb19bee...
+are intentionally different. Owner controllerBF556 and HOSTadapterd5cd8168...
+are recorded separately; no fakecontrollerhash. Actual base owns guard/cleanup.
+
+Formal INFO inbotharms replaces canaryDEBUG. Heavyshadow/divergence/probes off;
+headpolicyhead0 and allmath/finite/completion/slot/snapshot/mechanism receipts
+retained. No residency/C2grouping/logging-policy treatment bundled. NativeG1
+must be actualnopackage/noenvironment/noPROBEmount. FreshG1baseline is required.
+Use host_audits/r30_graph_formal_controller.py --run --contract
+FORMAL_GRAPH_R30_G1_R1_20261025_CONTRACT.json (93b51310...). Onlyafter independent
+host_audits/r30_graph_formal_audit.py --contract SAME --live-release passes,
+freshG3admission and FORMAL_GRAPH_R30_G3_R1_20261025_CONTRACT.json (278fc266...).
+Rawformal-graph-r30-{g1,g3}-r1-20261025 roots must notexist. Source/ma/direct/
+physical0-3/8233+HCCLactualidle beforeeverylaunch. Exactlive/unknownneverrestart.
+Full40/c16/fixed1024/32Kinput/sourcewarmups4unscored; actual measuredtimeout1800,
+warmup900, absolute18:07:17UTC guardunchanged. Onepair not allmatrix acceptance.
+
+Plan R30_GRAPH_FIRST_PAIR_PLAN_20261025.json; readinessR30_GRAPH_FIRST_PAIR_HOST_READINESS_20261025.json.
+Ifpositive, pursue remainingG1-G4x3/fullpairedquality/lifecycle. Ifnegative, use
+costmodel onlyconditionalonevariable attribution; no exhaustiveunchangedmatrix.
+PDCG2/G4 need real observer successor beforelaunch; this HOSTpairrejects them.
+Latestlivepub3b386891/main23ec unchanged; currentHOST/preflightstage localpending
+owncheckpoint/publication. No4-7/foreignmutations; fullthree-stagegoal incomplete.
+
 # CURRENT 2026-10-25 R29 GRAPH REPAIR AUDITED; COST MODEL SELECTS ONE FIRST PAIR
 
 164a terminalexit0:3HTTP/217cleanisolation/only0-3/exactCID9095dcce...removed/
