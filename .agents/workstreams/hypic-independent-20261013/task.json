@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R35_IO_OBSERVER_HOST15_PLUS_LOADER14PASS_PACKAGE_PENDING",
+  "execution_state": "R35_PACKAGE_CODE_HOST_READY_MANIFEST_IMAGE_PENDING",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -1200,9 +1200,9 @@
     "full_goal_complete": false
   },
   "r35_evidence_io_budget": {
-    "state": "HOST_COMPONENT_ONLY_NOT_IMAGE_OR_DEVICE_ACCEPTED",
+    "state": "PACKAGE_CODE_HOST_READY_NOT_IMAGE_OR_DEVICE_ACCEPTED",
     "plan": "R35_EVIDENCE_IO_BUDGET_PLAN_20261025.json",
-    "next": "Freeze new R35 manifest/contract/controller with source identities, then pinned official image helper/import/writer preflight and actual fourcard bounded observation. No new NPU started.",
+    "next": "Freeze new ON/OFF manifest and one diagnostic contract using the forthcoming code checkpoint; static package + exact pinned image install/restore/helper/disabled controls; only then fresh physical admission/run.",
     "baseline_treatment": "Retain original prefix output path; rejected R34 terminal-only flag disabled.",
     "full_goal_complete": false,
     "host_validation": "R35_EVIDENCE_IO_OBSERVER_HOST_VALIDATION_20261025.json",
@@ -1215,6 +1215,11 @@
       "host_audits/test_r35_evidence_io_budget.py": "7759e9b3ebac87978fac7dd3ca0ed2c48959c359a6a748915a74687842f38221",
       "independent_evidence_io_budget.py": "ecc3e7b84f01380d6e5cab0f4cf0644f43f7bba8c3e2f48a1450cc1c02221b47"
     },
-    "live_loaded": false
+    "live_loaded": false,
+    "package_code_validation": "R35_PACKAGE_CODE_READINESS_20261025.json",
+    "controller": "host_audits/r35_evidence_io_controller.py",
+    "auditor": "host_audits/r35_evidence_io_audit.py",
+    "package": "evidence_io_r35",
+    "auditor_cpu_cases": 8
   }
 }

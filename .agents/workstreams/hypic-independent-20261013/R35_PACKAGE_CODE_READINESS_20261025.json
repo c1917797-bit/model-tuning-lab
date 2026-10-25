@@ -1,0 +1,22 @@
+{
+  "schema": "hypic-r35-package-code-readiness/v1",
+  "operation": "exec-00000000000018d5",
+  "auditor_cpu_cases_passed": 8,
+  "direct_host_cli_imports": "PASS",
+  "disabled_launcher": "PASS",
+  "source_sha256": {
+    "evidence_io_r35/__init__.py": "d5fef2224da55cf97d2c8b480218e69a7f023c3554c0dee56935dff20ce42219",
+    "evidence_io_r35/patch.py": "7210ad378a4a0386c65f3475658461f4db8b8d9ccdfc893ff2f0118fbaff2cf0",
+    "evidence_io_r35/run_with_patch.sh": "bcee54f1e99756e147649d580597d85a5c6a50b7c4657c8a4f339f2f2c44f8bf",
+    "evidence_io_r35/sitecustomize.py": "c86e395abdd230bce991ec62e08ec38a1e7fe72d8de8f6a1fe783b937e7ab577",
+    "host_audits/r35_evidence_io_audit.py": "98197336d66a5590815ae7c34b5e9780cb883272c3ab84ecd05c91603fc5e88d",
+    "host_audits/r35_evidence_io_controller.py": "7c13859a55c2f339ab7838f43df08d14f74ded0d8749151c8a195267d8e9b8e3",
+    "host_audits/r35_io_evidence.py": "5cc4b96f0bffdfe0cc3c1223ef9483ce522b501b6107d61095d47fa55cd66624",
+    "host_audits/test_r35_io_evidence.py": "93b8f4b998cc94fa8a749d0bfcee790b38b4716f1e8fcf946ad4ee8a5c8cfb30"
+  },
+  "observer_host_cases_passed": 15,
+  "old_loader_regressions_passed": 14,
+  "scope": "Package/bootstrap code, independent IO accounting and CLI controls only; manifest/official-image/fourworker/NPU observation still pending.",
+  "new_device_work": false,
+  "full_goal_complete": false
+}
