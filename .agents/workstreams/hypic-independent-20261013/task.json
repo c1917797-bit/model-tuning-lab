@@ -1235,9 +1235,21 @@
     }
   },
   "r36_step_durability": {
-    "state": "PLANNED_NOT_IMPLEMENTED_NOT_DEVICE_ACCEPTED",
+    "state": "CORE_AND_BOOTSTRAP_HOST_VERIFIED_MANIFEST_CONTROLLER_IMAGE_DEVICE_PENDING",
     "plan": "R36_STEP_DURABILITY_PLAN_20261025.json",
-    "next": "Implement bounded default-off own evidence durability cadence helper and actual-writer failure/ordering controls; package/image gate then new-source A/B/A. No NPU task active.",
-    "full_goal_complete": false
+    "next": "Add narrow same-source A1/B1/A2 HOST controller and independent raw-byte/record/fence auditor; bind forthcoming actual code checkpoint in package+ON/OFF manifests, run pinned-image OFF/ON import/restore/actualwriter controls, then fresh physical admission. No NPU launch before these gates.",
+    "full_goal_complete": false,
+    "host_readiness": "R36_CORE_HOST_READINESS_20261025.json",
+    "host_controls": 51,
+    "runtime_source_sha256": {
+      "independent_evidence_step_durability.py": "07ab66f93c705dd20ba1254d5a9d3a7864d1707e0b60c5021a38c5f6f5d1f1fb",
+      "graph_candidate/worker_loader.py": "f4d4866f2f379989d88fab59fa5bf943c782325df10f0b3a66231e3006f9d920",
+      "host_audits/test_r36_evidence_step_durability.py": "1419c49ebe173993161e092012613f0d39a7302c5da03641370a512a03387915",
+      "step_durability_r36/__init__.py": "dcfbc04e4b4191e4cf8382f8e47f969725945197caf13dbc83c67957413db167",
+      "step_durability_r36/patch.py": "b59dc50254256378178a8366c140fad7f042fe0e264aaa4851e4dd11becb90d1",
+      "step_durability_r36/sitecustomize.py": "0d71ea2d895cdfb7784d01e750f42c65b7c88b9f4c55ea69f38bbac8f9377b2f",
+      "step_durability_r36/run_with_patch.sh": "caf16748d9ee7c1d2c2bd25f792579964807c9509cb289314b6407e25dfa8d19"
+    },
+    "new_npu_work": false
   }
 }

@@ -1,0 +1,53 @@
+{
+  "schema": "hypic-r36-core-host-readiness/v1",
+  "state": "CORE_AND_BOOTSTRAP_HOST_VERIFIED_MANIFEST_CONTROLLER_IMAGE_DEVICE_PENDING",
+  "base_checkpoint": "12b53277a639744a21dd3e0832d5bbd0c557804a",
+  "prerequisite": "R35_DEVICE_IO_DECISION_20261025.json",
+  "plan": "R36_STEP_DURABILITY_PLAN_20261025.json",
+  "tests": {
+    "operation": "exec-000000000000190f",
+    "exit_code": 0,
+    "total_passed": 51,
+    "new_durability_controls": 22,
+    "retained_io_controls": 15,
+    "retained_loader_regressions": 14,
+    "result": "51 passed in0.84s",
+    "scope": "HOST real original-source writer byte/order/fsync-completion failure controls, not native model/worker or service speed."
+  },
+  "source_sha256": {
+    "independent_evidence_step_durability.py": "07ab66f93c705dd20ba1254d5a9d3a7864d1707e0b60c5021a38c5f6f5d1f1fb",
+    "graph_candidate/worker_loader.py": "f4d4866f2f379989d88fab59fa5bf943c782325df10f0b3a66231e3006f9d920",
+    "host_audits/test_r36_evidence_step_durability.py": "1419c49ebe173993161e092012613f0d39a7302c5da03641370a512a03387915",
+    "step_durability_r36/__init__.py": "dcfbc04e4b4191e4cf8382f8e47f969725945197caf13dbc83c67957413db167",
+    "step_durability_r36/patch.py": "b59dc50254256378178a8366c140fad7f042fe0e264aaa4851e4dd11becb90d1",
+    "step_durability_r36/sitecustomize.py": "0d71ea2d895cdfb7784d01e750f42c65b7c88b9f4c55ea69f38bbac8f9377b2f",
+    "step_durability_r36/run_with_patch.sh": "caf16748d9ee7c1d2c2bd25f792579964807c9509cb289314b6407e25dfa8d19"
+  },
+  "package": "step_durability_r36",
+  "flags": {
+    "INDEPENDENT_EVIDENCE_STEP_DURABILITY": "default0; explicit1 plus bound metadata only",
+    "INDEPENDENT_EVIDENCE_IO_BUDGET": "must0 in every treatment/control arm",
+    "INDEPENDENT_PREFIX_TERMINAL_ONLY": "must0"
+  },
+  "controls": {
+    "default_disabled_no_helper_import": true,
+    "all_original_writer_bytes_retained": true,
+    "raw_emitter_body_original_equivalence": true,
+    "completion_and_receipt_fsync_before_callback_return": true,
+    "injected_completion_or_receipt_failure_never_success": true,
+    "original_exception_identity_and_cleanup_notes": true,
+    "foreign_fd_and_overlapping_context_rejected": true,
+    "pending_count_byte_and_step_bounds": true,
+    "uncompleted_step_close_flushes_and_invalidates": true,
+    "executable_source_tamper_refused": true,
+    "disabled_launcher": true,
+    "invalid_flags_refused": true
+  },
+  "durability_scope": "Completed selected model-step evidence fsynced before its callback returns. Fatal crash may lose not-yet-completed step durability; interrupted runs remain incomplete. Outside-context events retain original fsync.",
+  "runtime_live": false,
+  "new_npu_work": false,
+  "source_bindings_warning": "Loader hash changed after R35 terminal/audit. Historical R35raw/contracts source checkpoint42229bcc unchanged; do not rewrite hashes or replay R35oncurrenttree. Freeze new R36 source maps/contracts.",
+  "next": "Add narrow same-source A1/B1/A2 HOST controller and independent raw-byte/record/fence auditor; bind forthcoming actual code checkpoint in package+ON/OFF manifests, run pinned-image OFF/ON import/restore/actualwriter controls, then fresh physical admission. No NPU launch before these gates.",
+  "deadline": "2026-10-26T06:36:27Z",
+  "formal_speed_quality_or_full_goal_accepted": false
+}

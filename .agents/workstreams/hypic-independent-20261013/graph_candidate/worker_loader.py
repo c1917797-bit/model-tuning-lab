@@ -42,6 +42,29 @@ def _io_budget_enabled(manifest):
     return True
 
 
+
+def _step_durability_enabled(manifest):
+    value=os.environ.get("INDEPENDENT_EVIDENCE_STEP_DURABILITY","0")
+    if value not in("0","1"):
+        raise ValueError("explicit step durability environment required")
+    setting=manifest.get("step_durability")
+    if setting is None:
+        if value!="0":raise ValueError("step durability needs bound manifest")
+        return False
+    if(setting!={"enabled":True,"profile":"selected-model-step-durability-v1"}or value!="1"
+       or "independent_evidence_step_durability.py"not in manifest["source_sha256"]):
+        raise ValueError("step durability manifest/environment mismatch")
+    return True
+
+def _close_durability(policy,error=None):
+    if policy is None:return
+    try:policy.close()
+    except BaseException as cleanup:
+        if error is None:raise
+        if hasattr(error,"add_note"):
+            error.add_note("Owned durability close failed: "+type(cleanup).__name__+": "+str(cleanup)[:512])
+
+
 def _uninstall_owned():
     global _finder, _stop, _scheduler_stop
     if _stop is not None:
@@ -159,8 +182,11 @@ def enable():
     policy = _take_quality_policy(config)
     limits = evidence_limits(config.pop("evidence_limits", None))
     io_enabled = _io_budget_enabled(manifest)
-    if io_enabled and policy is not None:
-        raise ValueError("IO diagnostic requires the full original evidence profile")
+    step_enabled = _step_durability_enabled(manifest)
+    if io_enabled and step_enabled:
+        raise ValueError("IO observation and durability treatment are separate")
+    if (io_enabled or step_enabled) and policy is not None:
+        raise ValueError("IO diagnostic/treatment requires the full original evidence profile")
     scheduler_enabled = config.pop("scheduler_admission_enabled", False)
     if type(scheduler_enabled) is not bool:
         raise ValueError("explicit scheduler admission boolean required")
@@ -236,8 +262,22 @@ def enable():
                     fsync(fd)
                     count += 1
                     size += len(data)
+            durability = None
             try:
                 emit = raw_emit
+                if step_enabled:
+                    import independent_evidence_step_durability as step_module
+                    from .prefill_bridge import verify_support
+                    source = verify_support(step_module, manifest["source_sha256"]["independent_evidence_step_durability.py"])
+                    for name in ("selected_step", "make_durability"):
+                        verify_raw_function(step_module, source, getattr(step_module, name), name=name)
+                    for name, value in vars(step_module.StepDurability).items():
+                        if inspect.isfunction(value):
+                            verify_raw_function(step_module, source, value, name=name,
+                                qualname="StepDurability." + name)
+                    durability = step_module.make_durability(fd, os.fsync, lambda: (count, size))
+                    fsync = durability.fsync
+                    emit = durability.wrap(raw_emit)
                 if io_enabled:
                     import independent_evidence_io_budget as io_module
                     from .prefill_bridge import verify_support
@@ -266,14 +306,24 @@ def enable():
                 from .activation import activate_graph_candidate
                 remove = activate_graph_candidate(config, enabled=True, emit=emit,
                     source_bindings=source_bindings, request_progress_limit=limits["max_requests"])
-            except BaseException:
-                os.close(fd)
-                raise
-            def stop():
+            except BaseException as error:
                 try:
-                    remove()
+                    _close_durability(durability, error)
                 finally:
                     os.close(fd)
+                raise
+            def stop():
+                failure = None
+                try:
+                    remove()
+                except BaseException as error:
+                    failure = error
+                    raise
+                finally:
+                    try:
+                        _close_durability(durability, failure)
+                    finally:
+                        os.close(fd)
             _stop = stop
             if _finder not in sys.meta_path:
                 stop()
