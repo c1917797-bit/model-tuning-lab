@@ -281,3 +281,65 @@ resource_scope already used an empty card domain for card=None, and its real
 upstream-bridge CPU owner completed while keeping the NPU branch and protected
 boundary unchanged. Reuse correct scoped ownership; do not add redundant wrappers
 or remove shared RAM/disk/CPU, source, own PID/CID or cleanup checks.
+
+## A finite remote operation needs a terminal consumer
+
+A submitted MODEL operation is not continuous scheduling. Bind an owner for
+terminal recovery and the exact next consumer before calling the chain active.
+Account for admission failures before the original owner creates RESULT.json:
+retain a separate dispatch terminal with the actual exception/exit and whether
+the registered model command was ever invoked. A RESULT-only waiter cannot
+close that path. Keep its receipt distinct from the model owner's RESULT.
+
+A narrow bootstrap may execute only the source-hashed, original model and
+consumer argv. Preserve the child's actual entry, original resource/clock gates,
+single-dispatch claim and original numerical consumer. Test real no-RESULT
+process exit and startup rejection. A wait timeout must not silently kill an
+owner or release an unknown lease. Source preparation, tested process handoff,
+live model completion and numerical acceptance are separate states.
+
+Operation retention can expire before chat resumes. not_found alone is neither
+running nor released. Reconcile the original immutable terminal/source-before-
+after, exact owned CID stop/exit and current overlapping-device state. If the
+evidence cannot close the lease, keep UNKNOWN; do not wait forever for a deleted
+control-plane record when equivalent final evidence is actually available.
+
+Use actual compound-guard operands and installed globals. Captions32GiB/73GiB
+can be stale while effective limits are48GiB/56.5GiB; measure before proposing
+a resource change. A later healthy host snapshot is new admission evidence,
+not a rewrite of a prior RAM/disk refusal.
+
+For multi-rank diagnostic capture, reserve all simultaneously active CPU copies
+against actual loaded usage. If serialization is required, acquire before
+reservation/export and release only after original independent-report validation
+and reservation retirement. Preserve lock-outside allocations in actual usage,
+reject stale/failed reservations, and prove no collective lies in the held
+closure. Do not discount filecache, raise tensor tolerances or count this
+diagnostic scheduling change as algorithm performance.
+
+A prepared downstream packet pinned to an old source/window is not READY.
+Verify the actual predecessor consumer's exact source and time contract while
+the current device phase runs. Reuse unchanged affected-code controls with
+explicit equivalence; retain new source identity for changed execution metadata.
+Include slow preparation/cold-admission costs when judging deadline slack.
+
+Evidence: [Oct25 source, resource and dispatch recovery](../../../workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261024T075143Z/SCHEDULING_REPAIR_CHECKPOINT.md).
+## Cost validation without weakening evidence
+Before repeating a model gate, compare its actual startup, frame count and
+independent-consumer cost with owner, client, individual HTTP and cleanup clocks.
+Output tokens are not the diagnostic commit count; include the real permitted
+commit bound. A monitor timeout with less than one second left can be the terminal
+symptom of an underbudgeted phase, not a numerical defect. Repair all active
+nested clocks in a distinct reviewed source within the unchanged human cutoff.
+
+Choose a verification optimization from the actual executed path and whole
+retained-frame timing. A fast synthetic indexing component may not match the
+real reader; AST reversibility alone does not prove builtin binding, mapping or
+Tensor semantics. Preserve failed applicability controls. A successful
+same-frame metric match with negligible cost change is a closed prototype,
+not an algorithm speedup or justification for another model run.
+
+Offline mathematical-cost diagnostics must state omitted live-owner checks and
+remain unqualified. They may identify the cause and test an implementation
+change; only the original admitted NPU and scope consumers advance acceptance.
+Do not cache evidence content or skip SHA checks merely to make a replay faster.
