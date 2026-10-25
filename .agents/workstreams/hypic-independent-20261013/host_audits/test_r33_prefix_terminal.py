@@ -122,3 +122,30 @@ def test_fixed48warm_then_proof_then16_and_no_timer_on_missing_shape(monkeypatch
     else:
         with pytest.raises(ValueError,match="length8/39"):owner.run_unit(artifact,**args)
         assert len(calls)==48 and not any(x["event"]=="r33-begin"for x in records)
+
+def test_bridge_passes_nested_package_bindings_to_actual_installer(monkeypatch):
+    from graph_candidate import activation,worker_loader,source_contract
+    modules=[patch,terminal_math,baseline,prefix,suffix,activation]
+    full={m.__name__:hashlib.sha256(Path(m.__file__).read_bytes()).hexdigest()for m in modules}
+    manifest={"source_sha256":{n.replace(".","/")+".py":h for n,h in full.items()}}
+    cfg={"r33_prefix_terminal_diagnostic":True,"r33_prefix_terminal_only":False}
+    monkeypatch.setenv("INDEPENDENT_PREFIX_TERMINAL_ONLY","0")
+    monkeypatch.setattr(worker_loader,"_manifest",lambda p:(p,manifest,cfg))
+    old_verify=source_contract.verify_raw_function
+    def fixture_verify(module,src,fn,**kw):
+        if module is activation:return
+        return old_verify(module,src,fn,**kw)
+    monkeypatch.setattr(source_contract,"verify_raw_function",fixture_verify)
+    delegated=[]
+    def fixture_base(config,**kwargs):
+        assert not any(k.startswith("r33_")for k in config)
+        delegated.append(kwargs["source_bindings"]);return lambda:None
+    monkeypatch.setattr(activation,"activate_graph_candidate",fixture_base)
+    original=prefix.recurrent_boundary
+    restore=patch.install_activation_bridge("fixture-only")
+    # The unchanged worker loader deliberately sends only top-level bindings.
+    top={n:h for n,h in full.items()if "."not in n}
+    stop=activation.activate_graph_candidate(cfg,enabled=True,emit=lambda x:None,source_bindings=top)
+    assert prefix.recurrent_boundary is not original and delegated==[top]
+    stop();restore()
+    assert prefix.recurrent_boundary is original

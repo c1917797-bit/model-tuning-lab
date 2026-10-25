@@ -140,7 +140,7 @@ def install_activation_bridge(manifest_path):
                            request_progress_limit=request_progress_limit)
         try:
             stop_prefix=install_prefix_terminal(enabled=enabled,terminal_only=terminal_only,
-                emit=emit,source_bindings=source_bindings)
+                emit=emit,source_bindings=bindings)
         except BaseException:
             stop_base();restore();raise
         def stop():
