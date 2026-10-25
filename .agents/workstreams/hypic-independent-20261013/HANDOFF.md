@@ -1,4 +1,54 @@
-# CURRENT 2026-10-25 R27 NATIVE G1 GRAPH AUDITED; G3 NEXT
+# CURRENT 2026-10-25 R27 G3 GRAPH STARTUP FAILED; RELEASE INDEPENDENTLY VERIFIED
+
+160b terminalexit1 Nativehealthdeadline:0HTTP,370cleanisolation,only0-3,
+exactCID43ddac34...removed/8233free/final0-3empty. Independent1628 exit0
+verifies424source bytes/8rawSHA/4rankPID-cgroup-physicaljoin/live exactCIDabsence/
+physical0-3empty/portfree. R27_G3_GRAPH_CAPTURE_FAILURE_20261025.json preserves
+originalraw service.logSHA a43e19be... and complete scoped cause. No ownedlivejob.
+
+NativeG1 completedAOT09:29:36 beforeFULLcapture09:30:07. G3 enteredcapture
+09:45:19 then firstcompiled entry_router.installed insidecapture;09:45:38 all4
+hit107027 streamiscaptured. FirstTP3stack: ACL194→native_call→aot_compile→
+compiler_interface164 npugraph_ex_compile→set_compile_mode→npu_config102
+synchronize. This directly identifies compiler-in-capture, not C1/C2 request math.
+Upstream all-NONE skip may wrongly suppress nonrequest compilewarmups. Prepare
+only source-owned nativewarmup route, preserve actualPICprefill/math/snapshot/
+ownership, prove compile-before-capture in newcontract/newroot. Do not rerunR27.
+
+No stage running. Old424 stillbyteverified at failure; preserve sourceGitcheckpoint
+before any newvariant patch. PrototypeC1/C2 defaultoff/disjoint; codecounters/CPU
+oracles not DMA or speed proof. Skillreference work distinguishes measuredoutcome,
+sourcecapability,hypothesis,environmentblock. Historical Skillpin failure remains
+truthful; a separatepartialscope successor may rebind currentSkillblob via --case.
+Fixedstop2026-10-25T18:07:17Z,only0-3,foreignuntouched; wholegoal incomplete.
+Latestlivepub541576ad/main23ec33d7 unchanged; later localmetadata pendingpublish.
+
+# EARLIER 2026-10-25 R27 HYPIC GRAPH G3 RUNNING EXACT160b
+
+NativeG1 independently15fb accepted/released, evidenceR27_G1_AUDIT_20261025.json.
+Fresh160a G3admission09:41:09UTC verified424bindings/currentmodel-image-input,
+actualphysical0-3empty/102portsbindable/noexternalbenchmark/newroot/cache9.26GB.
+1606 was read-only baseline-report schema/key mismatch before device allocation;
+correctedactualR27G1proof, no frozencontract/ruler change or stage/root reuse.
+G3 directma launch returnedrunningexec-000000000000160b at09:41:59UTC,
+originalpeerlgw_a6109c51076a4a2c9d2674ca5a8704a0, checkpointb9ccb6a03523c848cbff5174686830850087fe20,
+raw/cache/cch/hypic-independent-20261013/graph-r27-g3-canary-r1-20261025.
+Track exacthandle/originalpeer; running/unknownneverrestart. Terminal independent
+python3 -B host_audits/r27_graph_canary_audit.py --contract
+GRAPH_R27_G3_CANARY_R1_20261025_CONTRACT.json --live-release.
+No graph-HYPICcompatibility/quality/speed success claimed yet. New defaultoff
+optimization_candidates/C1residency/C2grouping and Skill reference work are disjoint
+fromcurrent422/424; never edit current bound bytes or import unapproved prototypes.
+Native graph evidence is all4capture+local-firstTP0replay, not allrank completedcall
+coverage. Fixedstop18:07:17UTC/only0-3/noforeignmutation remain. Wholegoal incomplete.
+
+Latestlivepub541576ad/main23ec33d7unchanged;newb9ccb6a0G1audit/tracking arelocal
+until ownFF/livepublication. Userexplicitly wants why-worked/why-failed lessons in
+maintainerSkill for nextpaper; proof/hypothesis/resourceblocks stay distinguished,
+no universalextra graph/GDN/lossless gates. Existing historicalcase pin mismatch
+mustremain labeled pre-existing; do not edit424 frozen verifier to hide it.
+
+# EARLIER 2026-10-25 R27 NATIVE G1 GRAPH AUDITED; G3 NEXT
 
 NativeG1 controller15ec exit0:3responses/199cleanisolation/exactownedCIDremoved/
 8233free/finalphysical0-3empty. Independent15fb exit0 bounded_graph_canary_valid,

@@ -1,0 +1,142 @@
+{
+  "schema": "hypic-r27-graph-capture-failure/v1",
+  "contract": "GRAPH_R27_G3_CANARY_R1_20261025_CONTRACT.json",
+  "contract_sha256": "d689f2f65c2b984754933754ddbe18c8b724593b114f0788af72d101b6c913dc",
+  "raw_root": "/cache/cch/hypic-independent-20261013/graph-r27-g3-canary-r1-20261025",
+  "controller_operation": "exec-000000000000160b",
+  "independent_audit_operation": "exec-0000000000001628",
+  "audit": {
+    "failed_phase_independently_verified": true,
+    "controller_result": {
+      "valid": false,
+      "error": {
+        "type": "TimeoutError",
+        "message": "Native health deadline"
+      },
+      "guard_errors": [],
+      "isolation_samples": 370,
+      "responses": 0,
+      "worker_pids": [
+        341107,
+        341108,
+        341109,
+        341110
+      ],
+      "physical_devices_seen": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "release": {
+        "owned_container": "43ddac347312135ea8643426bc6bcacc6fd2a9a1b4739a40c3d578ce25bfaef6",
+        "removed": true,
+        "port_free": true,
+        "final_physical_processes": []
+      }
+    },
+    "requests": 0,
+    "source_bindings": 424,
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 58,
+          "host_pid": 341107,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 59,
+          "host_pid": 341108,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 60,
+          "host_pid": 341109,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 61,
+          "host_pid": 341110,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "live_release_verified": true,
+    "scope": "failed graph startup/0HTTP; no numerical,mechanism,speed,quality acceptance",
+    "raw_sha256": {
+      "result.json": "5717c0ee0ca87f985e7323354fa057880239d96e443d648a8fd3660d26134364",
+      "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "events.jsonl": "b3ccf0c3a636335e8cec489bb28613146597c95304af56cef56eba11f0082a3f",
+      "isolation.json": "45800846294d986dbc655b1b0ea893a072813b81be42199bbc1b51b918a3b7cd",
+      "release.json": "db54e85fcdf6913109f1736a2931db9f7d9cabef4e4ec0f08d129a727a118724",
+      "service-start.json": "bbd8d750be96af119cc89d5f9e26182be412cebd19bb01d086e787a5a7a3c3fc",
+      "launch.json": "f80257432d597d6d106a9838d17c60d26b15f82122cf736d9cb2b2e724a356dc",
+      "service.log": "a43e19be562cd7bfd544fd8ec7d7a7a8fffdce73ae39bd5f98a568a521b50cd6"
+    },
+    "graph_capture_error_observed": {
+      "code": 107027,
+      "message": "stream is captured",
+      "source": "service.log"
+    },
+    "worker_activation_events": {
+      "compact-worker-58.jsonl": [
+        "graph_native_worker_import_verified",
+        "compact_hypic_hooks_installed",
+        "graph_candidate_hooks_installed"
+      ],
+      "compact-worker-59.jsonl": [
+        "graph_native_worker_import_verified",
+        "compact_hypic_hooks_installed",
+        "graph_candidate_hooks_installed"
+      ],
+      "compact-worker-60.jsonl": [
+        "graph_native_worker_import_verified",
+        "compact_hypic_hooks_installed",
+        "graph_candidate_hooks_installed"
+      ],
+      "compact-worker-61.jsonl": [
+        "graph_native_worker_import_verified",
+        "compact_hypic_hooks_installed",
+        "graph_candidate_hooks_installed"
+      ]
+    }
+  },
+  "native_control": {
+    "evidence": "R27_G1_AUDIT_20261025.json",
+    "auditor": "exec-00000000000015fb",
+    "bounded_graph_canary_valid": true,
+    "service_log_sha256": "bba1a77583d4bcd041234204ac418d48b084de46e8a18d3b9e98988d1fa8f78b"
+  },
+  "root_cause_evidence": {
+    "level": "direct stack and runtime ordering, not hypothetical NPU failure",
+    "G1_timestamps_as_logged": {
+      "dynamo_transformation": "09:28:26",
+      "graph_compile_finished": "09:29:29",
+      "torch_compile_finished": "09:29:36",
+      "first_full_capture": "09:30:07"
+    },
+    "G3_timestamps_as_logged": {
+      "first_full_capture": "09:45:19",
+      "first_compile_of_installed_forward": "09:45:19 after capture began",
+      "capture_error": "09:45:38"
+    },
+    "direct_stack": [
+      "acl_graph.py:194 runnable",
+      "entry_router.py:184/110 native_call",
+      "decorators.py:663 aot_compile",
+      "wrapper.py:167",
+      "compiler_interface.py:164 npugraph_ex_compile",
+      "torch.npu.set_compile_mode(jit_compile=False)",
+      "torch_npu/npu/npu_config.py:102 synchronize",
+      "107027: stream is captured"
+    ],
+    "direct_cause": "First native AOT compilation occurred inside ACL graph capture. Compiler's synchronous device mode switch is incompatible with an active capture.",
+    "upstream_hypothesis": "Current selective router applies official skip_compiled=True to every NONE call, including native non-request compile warmups. Verify source-owned warmup route and test sequence before claiming repair.",
+    "next_minimum_falsification": "Only authorize genuine source-owned non-request compiler warmup through original native_call; preserve actual PIC prefill eager/snapshot/math/ownership gates. New source contract/root, require compilation complete before first capture and actual successful hot requests.",
+    "scope": "No HYPIC request ran, so no C1/C2 numerical, task-quality or speed conclusion. Native G1 shows the base pinned graph profile works."
+  },
+  "old_raw_unchanged": true,
+  "frozen_source_bindings_at_failure": 424,
+  "full_reproduction_accepted": false
+}

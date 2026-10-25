@@ -1,0 +1,27 @@
+{
+  "admission_valid": true,
+  "arm": "R27_G3_HYPIC_GRAPH",
+  "utc": "2026-10-25T09:41:09.948090+00:00",
+  "head": "b9ccb6a03523c848cbff5174686830850087fe20",
+  "baseline_audit": "exec-00000000000015fb",
+  "baseline_result_sha256": "012f37d84b6ee1d813f33f64a19e3a902835960a749b343e252e08237266bb86",
+  "source_bindings": 424,
+  "bound_source_bytes_unchanged": true,
+  "untracked_isolated_future_files": [
+    ".agents/workstreams/hypic-independent-20261013/optimization_candidates/c2_grouped.py",
+    ".agents/workstreams/hypic-independent-20261013/optimization_candidates/test_c2_grouped.py"
+  ],
+  "physical0_3": [],
+  "foreign_benchmark_tasks": [],
+  "owned_controllers": [],
+  "ports_bindable": 102,
+  "cache_available_bytes": 9263108096,
+  "new_raw_root": "/cache/cch/hypic-independent-20261013/graph-r27-g3-canary-r1-20261025",
+  "device_run": false,
+  "read_only_adapter_recovery": {
+    "failed_operation": "exec-0000000000001606",
+    "reason": "Copied probe selected prior R25 baseline report, whose schema has group rather than R27 arm; corrected to actual R27 G1 proof",
+    "device_phase_created": false,
+    "frozen_contract_or_threshold_changed": false
+  }
+}
