@@ -1,0 +1,38 @@
+{
+  "actual_control_private_states": 8,
+  "actual_startup_final_worker_parity": true,
+  "actual_warm_shape_lengths": [
+    8,
+    39
+  ],
+  "actual_worker_streams": 4,
+  "archived_startup_bytes": 41478,
+  "archived_startup_sha256": "1a9f7e8da9da155aab4fe8da16ce6fe69d4db66cfd7b0b089f7a8657023bb501",
+  "enabled_candidate_proven": false,
+  "fixture_scope": "Identity adapter constructed from historical service-start receipt; log bytes and worker evidence are actual archive. No live Docker or device query.",
+  "full_goal_complete": false,
+  "incomplete_startup_negative_controls": 2,
+  "live_container_producer_verified": false,
+  "new_device_work": false,
+  "original_raw_sha256": {
+    "events.jsonl": "1822c8f4239152c71ac3ecbd7f94d28b81ca8b8dfeb2a7bc9ba1dea523a4cc9d",
+    "launch.json": "e35c3b41f204f745929dafe07dd274f80088ad94ef86ff09ee993fe14bdecdfc",
+    "release.json": "0a15978ccaabfd0a2c64fdde1fccdd14602b0d283c8fce4d2e352d226567bc43",
+    "result.json": "e7044d7752bc9b836b61c48c37e9917665d7a32191d10b9656e20ed1e6bb2ff3",
+    "service-start.json": "4025a2ee111e0a6c0c8932634280e2b932c8ad68767712e006d67b21308bb129",
+    "service.log": "62d5d3b2889b4848751dcf751072f4101f20bee770543b89dd9d1b9a1a64c0d4"
+  },
+  "original_raw_unchanged": true,
+  "production_live_log_helper_and_parser": "PASS",
+  "raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r33-a1-20261025",
+  "schema": "hypic-r34-archived-producer-replay/v1",
+  "source_sha256": {
+    "host_audits/r34_live_native_log.py": "17f97432a4ee27dd94b891cce99626cb924f2438a977492fa553e058e31c96a4",
+    "host_audits/r34_prefix_terminal_trial.py": "f9fae3aa18c0482b457cbf2947c3c434609b89f264cdbacc6aaa7045e16d5ecd",
+    "host_audits/replay_r34_archived_producer.py": "3a99f851b2c75e5c71f28b38f34f01b3d1566bcd869e09b04c7f5d40f8bfbdbb"
+  },
+  "timed_experiment_valid": false,
+  "operation": "exec-00000000000017f0",
+  "exit_code": 0,
+  "evidence_checkpoint": "605403622944d165e381b7d5ca1f9d722bb26843"
+}

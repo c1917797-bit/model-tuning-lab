@@ -1122,6 +1122,13 @@
     "runtime_source_bindings_432_unchanged": true,
     "readiness": "R34_HOST_ARTIFACT_LIFECYCLE_READINESS_20261025.json",
     "scope": "Correct actual artifact producer/phase only; full A/B/A scope and warm/numerical gates preserved. No new roots/contracts/NPU runs; no speed acceptance.",
+    "archived_producer_replay": {
+      "operation": "exec-00000000000017f0",
+      "report": "R34_ARCHIVED_PRODUCER_REPLAY_20261025.json",
+      "state": "ACTUAL_ARCHIVE_FORMAT_PASS_NO_LIVE_PRODUCER_OR_DEVICE_ACCEPTANCE",
+      "incomplete_startup_negative_controls": 2,
+      "new_device_work": false
+    },
     "historical_anchor_does_not_pin_current_authority": true,
     "current_authority_not_extended": true
   },
