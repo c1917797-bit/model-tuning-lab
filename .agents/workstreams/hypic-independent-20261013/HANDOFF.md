@@ -1,4 +1,29 @@
-# CURRENT 2026-10-25 R25 FIRST PAIR VALID BUT SLOWER; NO OWNED LIVE JOB
+# CURRENT 2026-10-25 R27 NATIVE GRAPH G1 RUNNING EXACT15ec
+
+Fresh15ea directma admission09:24:16UTC passed424sources/model/image/input,
+actualphysical0-3empty/102portsbindable/noexternalbenchmark/newroot/cache9.27GB.
+Controller exec-00000000000015ec returnedrunning09:25:16UTC; originalma peer
+lgw_a6109c51076a4a2c9d2674ca5a8704a0, checkpoint82f258b53123d9e5ceb3d26d9c4b7e35a9ef1aa3.
+Raw/cache/cch/hypic-independent-20261013/graph-r27-g1-canary-r1-20261025.
+R27 native G1 has no algorithm package/mount/env. Actual mode3/FULL_DECODE_ONLY,
+enforceeagerFalse/commonDEBUG;3fixedoutputpayloads, not speed/quality evidence.
+Track exacthandle/originalpeer; running/unknownneverrestart. Terminal run
+python3 -B host_audits/r27_graph_canary_audit.py --contract
+GRAPH_R27_G1_CANARY_R1_20261025_CONTRACT.json --live-release.
+Only valid independently released G1 then fresh G3 admission/newroot. No4-7.
+
+R27 uses420Python/422runtime/424host entries;old413Python unchanged. Candidate
+now supports optional oldquality policy/catalog loader before later formalfreeze;
+this canary does not prove fullquality. Currentimplementation is NOT an established
+complete equivalent of successful3ad: real reference comparison found material
+residency/C2groupedcopy and durablelogging differences. Graph is one unresolved
+compatibility/cost hypothesis, cannot alone explain R25+14.18%. Do not claim
+samealgorithmcode/equivalence or successful replication from body-skipcounts.
+Fixedstop2026-10-25T18:07:17Z remains. R25validnegative firstpair retained.
+Latestlivepubdf9a90f8/main23ec33d7unchanged;82fgraph checkpoint locallycommitted,
+publication pending explicitFF/liveproof. Currenttrackingdocs newer still.
+
+# EARLIER 2026-10-25 R25 FIRST PAIR VALID BUT SLOWER; NO OWNED LIVE JOB
 
 G3 exact1573 terminalexit0:40/40responses,472cleanisolation,onlyphysical0-3,
 exactownedCID0d161da1...removed/8233free/final0-3empty. Independent frozenR25
