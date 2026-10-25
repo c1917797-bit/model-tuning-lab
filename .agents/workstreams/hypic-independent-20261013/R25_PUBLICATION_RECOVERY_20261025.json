@@ -1,0 +1,11 @@
+{
+  "schema": "hypic-publication-recovery/v1",
+  "observed_utc": "2026-10-25T07:02:02Z",
+  "old_failure": "R24_R2_PUBLICATION_FAILURE_20261025.json",
+  "changed_condition": "Desktop readonly ls-remote recovered after prior TLS handshake failure; then normal FF push and live ls-remote succeeded.",
+  "verified_work_branch": "work/hypic-independent-20261013",
+  "verified_head": "1ce39797b2ecc1b7b9e562c739cb2f18b19430f8",
+  "verified_main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+  "original_git_objects_preserved": true,
+  "scope": "R24 bounded OFF/ON audit acceptance and R25 formal preparation only; no formalperformance/fullquality/wholepaper acceptance."
+}

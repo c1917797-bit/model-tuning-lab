@@ -523,14 +523,26 @@
     ],
     "start_utc": "2026-10-25T06:07:17Z",
     "absolute_stop_utc": "2026-10-25T18:07:17Z",
-    "state": "R24_R2_PAIR_ACCEPTED_R25_FIRST_PAIR_READY",
+    "state": "R24_R2_PAIR_ACCEPTED_FORMAL_R25_G1_RUNNING",
     "plan": "R24_R2_RENEWAL_PLAN_20261025.json",
     "contracts": [
       "C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json",
       "C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json"
     ],
-    "active_controller": null,
-    "resource_lease": "R24 OFF and ON terminal+independent live-release accepted; no reservation. Fresh source/physical0-3/ports/newroot admission before formal G1.",
+    "active_controller": {
+      "operation_id": "exec-0000000000001547",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "arm": "G1",
+      "phase": "FORMAL_R25_ROUND1",
+      "contract": "FORMAL_R25_G1_R1_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/formal-r25-current-g1-r1-20261025",
+      "launch_checkpoint": "1ce39797b2ecc1b7b9e562c739cb2f18b19430f8",
+      "admission_operation": "exec-0000000000001546",
+      "admission_utc": "2026-10-25T07:02:18.024935+00:00",
+      "observed_running_utc": "2026-10-25T07:03:26Z",
+      "rule": "Track exact original peer/handle; missing/timeout requires immutable raw/process check, never blindrestart."
+    },
+    "resource_lease": "1546 fresh07:02:18 source418/prereq/image/model/input/physical0-3/102ports/newroot valid; G1 exact1547 now continuousguarded. No external task interference or4-7allocation.",
     "scope": "Same full independent27B/physical0-3/TP4 C1/C2 three-stage goal; C3/dualTP2 excluded; original successful code not reused",
     "prior_failure": "R24_OFF_R1_ADMISSION_FAILURE_20261023.json",
     "prior_followup": "R24_WAIT_FOLLOWUP_TERMINAL_20261023.json remains immutable history",
@@ -563,7 +575,7 @@
       "scope": "bounded2hot/4rank;not formal speed/fullquality"
     },
     "formal_first_pair": {
-      "state": "STATIC_VALIDATED_NOT_LAUNCHED",
+      "state": "G1_RUNNING",
       "plan": "R25_FIRST_PAIR_PLAN_20261025.json",
       "static_operation": "exec-0000000000001543",
       "static_evidence": "R25_FIRST_PAIR_STATIC_20261025.json",
@@ -573,11 +585,12 @@
       "common_host_bindings": 418,
       "audit_G4_gap": "Inherited R18 partition auditor hardcodes G3; G4 adaptation still required before it is accepted."
     },
-    "latest_confirmed_publication": "1d0afe65a3ec01ecf3b0aa4eedb0e9ffdcc61a94",
+    "latest_confirmed_publication": "1ce39797b2ecc1b7b9e562c739cb2f18b19430f8",
     "pending_publication": {
       "checkpoint": "283de3b13c05042ed57ebe4cc90329454cab4b32",
       "evidence": "R24_R2_PUBLICATION_FAILURE_20261025.json",
-      "status": "TLS_HANDSHAKE_FAILURE_NO_RETRY_WITHOUT_CHANGED_NETWORK"
+      "status": "RESOLVED_BY_VERIFIED_1ce39797_FF_PUBLICATION",
+      "recovery_evidence": "R25_PUBLICATION_RECOVERY_20261025.json"
     }
   }
 }

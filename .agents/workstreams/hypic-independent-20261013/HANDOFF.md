@@ -1,4 +1,23 @@
-# CURRENT 2026-10-25 R24R2 PAIR AUDITED; FORMAL R25 G1/G3 READY
+# CURRENT 2026-10-25 FORMAL R25 G1 RUNNING EXACT1547
+
+Fresh1546 admission07:02:18UTC source418/prereq/rawdigests/currentimage-model-input,
+physical0-3empty/102portsbindable/noexternalharness/newroots valid. Freshma/direct
+formal G1 launch returnedrunningexec-0000000000001547 at07:03:26UTC,
+originalpeerlgw_a6109c51076a4a2c9d2674ca5a8704a0,
+launchcheckpoint1ce39797b2ecc1b7b9e562c739cb2f18b19430f8,
+raw/cache/cch/hypic-independent-20261013/formal-r25-current-g1-r1-20261025.
+Nativeofficialservice, noHYPICpackage, PDCoff, full40/c16/fixed1024 plus4unscored
+warmups. Protocol/pair/stop remain frozen. This is running, not acceptedperformance.
+Follow exacthandle/originalpeer; unknown/missingrequiresraw/processcheck, neverrestart.
+Onterminal run frozen R25_FORMAL_AUDIT_DEFINITION_20261025.json command/args plus
+--contract FORMAL_R25_G1_R1_20261025_CONTRACT.json --live-release; audit and release
+before freshG3admission. G3 stillnotstarted. Whole3stagegoal incomplete.
+Desktopnetwork readonly recovered; normalFFpush/live ls-remote verified1ce39797,
+main23ec33d7 unchanged, originalobjects preserved. R25_PUBLICATION_RECOVERY records
+recovery of prior283failure; no main/quality/all29functional claim.
+Fixedstop2026-10-25T18:07:17Z; renewedhypic-12followup userconfirmedenabled.
+
+# EARLIER 2026-10-25 R24R2 PAIR AUDITED; FORMAL R25 G1/G3 READY
 
 ON152d exit0,3responses,219cleanisolation,exactownedcontainer removed,
 portfree/final0-3empty. Independent153a exit0 boundedvalid/source417/physical/
