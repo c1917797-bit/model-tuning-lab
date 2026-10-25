@@ -1,0 +1,306 @@
+{
+  "schema": "hypic-small-cost-model-and-priority/v1",
+  "date": "2026-10-25",
+  "status": "EVIDENCE_BASED_TRIAGE_NOT_CAUSAL_ATTRIBUTION_OR_ACCEPTANCE",
+  "parent_checkpoint": "00a486ee052484c04884f6af7ed49065980fe020",
+  "human_direction": "Replace exhaustive code-difference trials with a small cost model; shortlist likely/high-payoff routes and confirm causes with single-variable experiments.",
+  "model": {
+    "critical_path_identity": "Delta_service_time = -saved_native_prefill + extra_material + extra_coordination + extra_evidence_IO + changed_decode_or_queue_cost",
+    "assumptions": [
+      "Terms are exclusive critical-path contributions. Overlapping kernel/API/CPU/rank sums must not be added as wall time.",
+      "One matched pair provides one net difference and cannot identify all unknown cost terms. Source differences are candidate mechanisms, not fitted causes.",
+      "Operation-count reuse bounds require comparable per-call work and stable shape/generation; they are not measured latency savings.",
+      "Existing performance ruler divides postfirst duration by completion_tokens=1024, not1023. Keep that same ruler for both arms."
+    ],
+    "target": "Model parity threshold is arithmetic for this negative first pair, not a new universal gate or a change to final acceptance."
+  },
+  "sources": {
+    "r25_G1": {
+      "file": "R25_G1_AUDIT_20261025.json",
+      "performance_unit_sha256": "24fc28c0c1d0984fdb816dd51f7bc79537688e7a011256597d015c747c574d75"
+    },
+    "r25_G3": {
+      "file": "R25_G3_AUDIT_20261025.json",
+      "performance_unit_sha256": "9a18ebb87a8ff92b3b6f27480eab0ba327a2d166170a5fe4bbd7bec3476d44a7",
+      "worker_files": [
+        {
+          "file": "compact-worker-59.jsonl",
+          "sha256": "a73cc797fad5259bea171d1c5c41bdd48941fe48af383fffa2dc469ab8c5af5b",
+          "events": 33312,
+          "bytes": 14957240
+        },
+        {
+          "file": "compact-worker-60.jsonl",
+          "sha256": "97899ec640aea5b97bf7773aef209a32642988c71a4bfcbe6e149dd656744fa4",
+          "events": 33312,
+          "bytes": 14957240
+        },
+        {
+          "file": "compact-worker-61.jsonl",
+          "sha256": "8477087b891ea4b73d63014b5f443f45c049b69992ab8c13b3c97a5bb437b07b",
+          "events": 33312,
+          "bytes": 14957240
+        },
+        {
+          "file": "compact-worker-62.jsonl",
+          "sha256": "63dcebb2a5b5a40e6459ccd17a95798d4fdd509129cf86b0d9b3e925d215ca47",
+          "events": 33312,
+          "bytes": 14957240
+        }
+      ]
+    },
+    "historical_profile": {
+      "file": "PROFILE_G3_R19_EARLYMIXED_PARSED_AUDIT_20261016.json",
+      "sha256": "4e201210837806687b31147d13d96f17b37ab5b823bcb017d76b9046d64bc513",
+      "scope": "Different source/version, mixed-prefill64-token profile.43-44percent kernel-envelope gaps screen host/sync possibilities only; not current R25 cost or removable time."
+    },
+    "evidence_operations": [
+      "exec-000000000000164e",
+      "exec-0000000000001652",
+      "exec-0000000000001655"
+    ],
+    "io_calibration": {
+      "schema": "host-only-evidence-io-calibration/v1",
+      "root": "/cache/cch/hypic-independent-20261013/cost-model-fsync-calibration-r1-20261025",
+      "source_scope": "Storage/CPU calibration, not actual in-service fsync attribution or an accepted HYPIC speed result. Concurrent runtime, payload, critical path,filesystem and scheduling differences remain.",
+      "summary_sha256": "b201dfd4597851281b2c98e8f1b95a340513b4b13c4cc66539b226f98e3446e1",
+      "cpu_affinity": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "events_per_worker": 256,
+      "workers": 4,
+      "arms": {
+        "close_flush_only": {
+          "makespan_ms": 18.41814,
+          "mean_emit_ms": 0.063927919921875,
+          "p95_emit_ms": 0.07206,
+          "mean_fsync_ms": 0,
+          "p95_fsync_ms": 0,
+          "max_fsync_ms": 0
+        },
+        "event_fsync": {
+          "makespan_ms": 237.43658,
+          "mean_emit_ms": 0.864733564453125,
+          "p95_emit_ms": 1.16808,
+          "mean_fsync_ms": 0.73423271484375,
+          "p95_fsync_ms": 0.99221,
+          "max_fsync_ms": 1.90934
+        }
+      },
+      "operation": "exec-0000000000001656"
+    }
+  },
+  "observed": {
+    "g1_weighted_tpot_ms": 280.0677875400396,
+    "g3_weighted_tpot_ms": 319.76932657006216,
+    "tpot_delta_ms": 39.70153903002256,
+    "candidate_tpot_fraction_to_remove_for_parity": 0.12415680845899979,
+    "g1": {
+      "metric_denominator": [
+        "completion_tokens"
+      ],
+      "completion_tokens": [
+        1024
+      ],
+      "request_makespan_s": 1209.8603635500185,
+      "mean_postfirst_s": 286.78941444100053,
+      "mean_ttft_s": 121.69772776024475,
+      "mean_latency_s": 408.4871422012453
+    },
+    "g3": {
+      "metric_denominator": [
+        "completion_tokens"
+      ],
+      "completion_tokens": [
+        1024
+      ],
+      "request_makespan_s": 1409.5174538400024,
+      "mean_postfirst_s": 327.4437904077437,
+      "mean_ttft_s": 157.1167394195072,
+      "mean_latency_s": 484.5605298272509
+    },
+    "co_batched_hot_waves": [
+      {
+        "step": 10,
+        "members": [
+          {
+            "index": 5,
+            "segment_start": 11776
+          },
+          {
+            "index": 6,
+            "segment_start": 12288
+          }
+        ],
+        "equal_anchor": false
+      },
+      {
+        "step": 14,
+        "members": [
+          {
+            "index": 10,
+            "segment_start": 14336
+          },
+          {
+            "index": 11,
+            "segment_start": 14848
+          }
+        ],
+        "equal_anchor": false
+      },
+      {
+        "step": 1039,
+        "members": [
+          {
+            "index": 21,
+            "segment_start": 13312
+          },
+          {
+            "index": 22,
+            "segment_start": 13824
+          }
+        ],
+        "equal_anchor": false
+      }
+    ],
+    "deltas": {
+      "request_makespan_s": 199.6570902899839,
+      "mean_postfirst_s": 40.654375966743146,
+      "mean_ttft_s": 35.419011659262466,
+      "mean_latency_s": 76.07338762600557
+    },
+    "conditional_fsync_ms_to_equal_full_wallgap_one_serial_critical_rank": 5.993548579790583,
+    "conditional_fsync_ms_if_all_four_rank_calltimes_serialized": 1.4983871449476458,
+    "current_event_counts": {
+      "files": [
+        {
+          "file": "compact-worker-59.jsonl",
+          "sha256": "a73cc797fad5259bea171d1c5c41bdd48941fe48af383fffa2dc469ab8c5af5b",
+          "events": 33312,
+          "bytes": 14957240
+        },
+        {
+          "file": "compact-worker-60.jsonl",
+          "sha256": "97899ec640aea5b97bf7773aef209a32642988c71a4bfcbe6e149dd656744fa4",
+          "events": 33312,
+          "bytes": 14957240
+        },
+        {
+          "file": "compact-worker-61.jsonl",
+          "sha256": "8477087b891ea4b73d63014b5f443f45c049b69992ab8c13b3c97a5bb437b07b",
+          "events": 33312,
+          "bytes": 14957240
+        },
+        {
+          "file": "compact-worker-62.jsonl",
+          "sha256": "63dcebb2a5b5a40e6459ccd17a95798d4fdd509129cf86b0d9b3e925d215ca47",
+          "events": 33312,
+          "bytes": 14957240
+        }
+      ],
+      "event_total": 133248,
+      "per_worker_events": 33312,
+      "hot_c2_placements": 2560,
+      "hot_c2_layer_wave_groups": 2368,
+      "hot_c2_placements_per_layer_wave": {
+        "1": 2176,
+        "2": 192
+      },
+      "hypothetical_grouping_max_call_reduction": 0.07499999999999996,
+      "mixed_native_gdn_retained_rows": {
+        "1": 60096,
+        "36": 192,
+        "503": 192,
+        "517": 192,
+        "2532": 192,
+        "3566": 192,
+        "5115": 192,
+        "6661": 192,
+        "8172": 192,
+        "8182": 192,
+        "8183": 192,
+        "8190": 192,
+        "9746": 192,
+        "10203": 192,
+        "11237": 192,
+        "11264": 192,
+        "11804": 192,
+        "12288": 192,
+        "12800": 192,
+        "13824": 192
+      },
+      "selected_steps_per_rank": {
+        "0": 37,
+        "1": 37,
+        "2": 37,
+        "3": 37
+      },
+      "c1_generation_counts_per_rank_layer": {
+        "1": 192
+      },
+      "c1_barriers_total": 7104,
+      "c2_barriers_total": 2368
+    },
+    "logged_mixed_decode_one_token_request_steps": 313,
+    "meaning": "Most1024-token decode request-steps are not the selected mixed C1/C2 path. Do not blame every decode token on that custom path."
+  },
+  "calibrated_IO_sensitivity": {
+    "mean_fsync_ms": 0.73423271484375,
+    "extra_mean_emit_ms": 0.80080564453125,
+    "projected_one_worker_fsync_seconds": 24.458760196874998,
+    "projected_all_four_cumulative_fsync_seconds": 97.83504078749999,
+    "projected_one_worker_extra_emission_seconds": 26.676437630625003,
+    "projected_all_four_cumulative_extra_emission_seconds": 106.70575052250001,
+    "observed_service_makespan_extra_seconds": 199.6570902899839,
+    "interpretation": "At calibration mean, even the sum of all four extra emission times is below the199.66s wall gap. Logging can contribute, but this calibration does not support it as the sole explanation. The sums are conditional cumulative times, not measured service-wall savings or hard live upper bounds."
+  },
+  "priority": [
+    {
+      "rank": 1,
+      "route": "Correct native graph/compile path then one fresh matched G1/G3 graph first screen",
+      "evidence": "R29 warmup-only single-variable functional repair now independently accepted1653, unlike failedR27. Historical success used FULL_DECODE_ONLY; native G1 and new HYPIC graph compatibility both observed.",
+      "next": "Prepare HOST identity/audit adapter for full40 graph requests, then fresh native G1 and current HYPIC G3 same protocol. Compare algorithm activation at the same graph profile. Do not treat R25-to-R29 differences as compile-only causal evidence.",
+      "falsification": "If same-profile full40 G3 remains slower, graph compatibility did not itself establish net HYPIC benefit; preserve the result, do not expand unchanged12matrix."
+    },
+    {
+      "rank": 2,
+      "route": "Cross-wave canonical C1 material residency, only after measuring transfer share if first screen remains negative",
+      "evidence": "37selected waves per rank, one generation in each of192rank/layer combinations. Current source already shares one acquisition per body/layer/wave. Persistent residency could conditionally reduce repeated acquisitions37to1, about97.3percent of acquisition count; transfer time and actual byte budget not yet measured.",
+      "next": "One bounded representative integrated diagnostic measures material bytes/time and completion; only if it can explain a material residual, test residency OFF/ON with same code/profile/input/output/guards. Keep shared-WY dependent on current QKV; never cache request-private state.",
+      "falsification": "If copy/lease critical-path share is too small, or the resident budget/completion semantics do not hold, do not run a full residency matrix."
+    },
+    {
+      "rank": 3,
+      "route": "Separate evidence I/O from device coordination; conditional lower-priority attribution",
+      "evidence": "33312durable events per worker; per-rank1776C1 and592C2precommit barriers. Host calibration meanfsync0.734ms and extra emission0.801ms are measurable, but cannot alone account for the observed full wall gap under that calibration.",
+      "next": "Measure exact owned in-service sink/coordination time if needed, then change only one logging/coordination policy. Retain all numerical criteria, slot/generation ownership and required receipts; never switch off checks and logging together to manufacture a gain.",
+      "falsification": "If the upper plausible critical-path contribution cannot account for a useful residual, shelve it. Counts/gaps alone do not prove sync cost."
+    }
+  ],
+  "deferred": [
+    {
+      "route": "C2 within-wave anchor grouping",
+      "evidence": "2560hot placements in2368rank/layer/wave groups:2176single,192double. Exactly3dual-hot waves per rank/layer; all3have different anchors. Ideal segment-copy call aggregation40to37 is only7.5percent under equal-work assumptions, and current same-anchor rotation reuse opportunity is zero.",
+      "decision": "Do not prioritize this existing CPU prototype for NPU testing now. This is a current-workload batching opportunity bound, not an impossibility theorem or a hard end-to-end speed cap."
+    }
+  ],
+  "execution_policy": {
+    "active_NPU_stage": null,
+    "last_stage": "R29_G3 bounded accepted/released",
+    "next_device_study": "One fresh matched graph G1/G3 first screen only after exact HOST full40 integration/audit is ready and fresh admission passes.",
+    "conditional_branches": "At most the two shortlisted residual-cost branches; one treatment at a time, stop an explanation when falsified. Do not exhaust all combinations.",
+    "if_positive": "Proceed to requested G1-G4x3 same-source repeated performance,full paired quality and lifecycle; modeling does not replace final gates.",
+    "absolute_stop_utc": "2026-10-25T18:07:17Z",
+    "only_physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "foreign_tasks_untouched": true
+  },
+  "full_goal_accepted": false
+}

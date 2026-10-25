@@ -1,0 +1,508 @@
+{
+  "schema": "hypic-r29-warmup-repair-independent-audit/v1",
+  "contract": "GRAPH_R29_G3_CANARY_R1_20261025_CONTRACT.json",
+  "contract_sha256": "d075ed64ec385025c74a2e7a8072f1eb223204812ecf05a6c7e2e347956b18f7",
+  "raw_root": "/cache/cch/hypic-independent-20261013/graph-r29-g3-warmup-r1-20261025",
+  "controller_operation": "exec-000000000000164a",
+  "auditor_operation": "exec-0000000000001653",
+  "digest_operation": "exec-0000000000001658",
+  "launch_checkpoint": "00a486ee052484c04884f6af7ed49065980fe020",
+  "controller_terminal": {
+    "valid": true,
+    "error": null,
+    "guard_errors": [],
+    "responses": 3,
+    "isolation_samples": 217,
+    "physical_devices_seen": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "owned_container_removed": true,
+    "port_free": true,
+    "final_physical_processes": []
+  },
+  "raw_sha256": {
+    "result.json": "fd547ee8e2227cbe4fd98bb13914644d502de8b34d8c3d910aeaae6ade34ec65",
+    "responses.json": "bb6ce15dcd9193ab26397c80bc5be1ef94ddc582b150d61e5af7b789e58778ef",
+    "events.jsonl": "c1a97548d36ee990b2ea129ba578f869a664ac04330d070f7a668a10c48f9632",
+    "isolation.json": "3b9ccf367250a0a57403e7de17e5ec04c5f3a811d6549b6a382692871e1e5a57",
+    "release.json": "45550a4edc0d47ba900549f8c2feb69fa859e53560c8767a9210e8f9b5d6eba5",
+    "service-start.json": "6934bf7d2bf86a43475457a1bd83d4cc942f43a7f4dc1130cbf4a707ac7c2013",
+    "launch.json": "028838d46d13f4d26cb9c4e0761c60f633cd51fd6171f964782df3dbf2a0ffe3",
+    "service.log": "9af7c9fe93f8050029135da5f53708c7e710bcbb29b9c36df0e6fdfa2efbc957"
+  },
+  "worker_evidence_sha256": {
+    "diagnostics/compact-worker-59.jsonl": "22024aed73cf2bcbfb1f6ddb2c822fe04bc52eca1011866d1e71a4a03a0dc12c",
+    "diagnostics/compact-worker-60.jsonl": "3b8fad339807921d9fd51fceefa1b076b518086392d8db84c57fefdaa33a3ab1",
+    "diagnostics/compact-worker-61.jsonl": "bdcbb8b07e4bb680ff7f300f86e9a18c2e725658a899c3024b138a3064166a96",
+    "diagnostics/compact-worker-62.jsonl": "070973708283d818b39f38b055380b2ee2fdd24b25e479f3d8d54ed142686e09"
+  },
+  "responses": 3,
+  "isolation_samples": 217,
+  "audit": {
+    "valid": true,
+    "bounded_mechanism_audited": true,
+    "arm": "G3",
+    "controller_sha256": "50a97e444fb14b3cd3a0b39833e861e3f9d0aba6f7d1682a1673858e7fec5342",
+    "base_controller_sha256": "bf55661d61618a7f83537ce6bf477b66e80ccaf097ac714938ceee9bdf199d33",
+    "graph_execution_verified": true,
+    "graph_evidence_status": "OFFICIAL_NATIVE_PATH_REACHED_SUCCESSFUL_TERMINAL",
+    "live_release_verified": true,
+    "isolation_samples": 217,
+    "quality_acceptance": "NOT_DECIDED",
+    "scope": "bounded3 responses/two private requests with source/mechanism/physical/isolation/release and official native graph path evidence; not formal speed/fullquality/per-token graph coverage; first compiler ordering independently verified, not speed or fullquality",
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 2,
+      "covered": [
+        "cmpl-a12a9cf50b0aae73",
+        "cmpl-aa47c68daa7a23a3"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 59,
+        "1": 60,
+        "2": 61,
+        "3": 62
+      },
+      "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+    },
+    "probe": {
+      "0": {
+        "original_thread_cpu_ns": 30043510,
+        "prefill_only_thread_cpu_ns": 82320,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "1": {
+        "original_thread_cpu_ns": 31346990,
+        "prefill_only_thread_cpu_ns": 79350,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "2": {
+        "original_thread_cpu_ns": 29719070,
+        "prefill_only_thread_cpu_ns": 72770,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "3": {
+        "original_thread_cpu_ns": 31540810,
+        "prefill_only_thread_cpu_ns": 72620,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      }
+    },
+    "partition": {
+      "groups": 384,
+      "completed_receipts": 384,
+      "numeric_shadows": 192,
+      "four_rank_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      },
+      "sampled_numeric_not_full_quality": true
+    },
+    "lazy_snapshot": {
+      "receipts": 384,
+      "skipped_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      },
+      "retained_shadow_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      }
+    },
+    "metadata_snapshot": {
+      "forwards": 8,
+      "request_ids": {
+        "0": [
+          "cmpl-a12a9cf50b0aae73-0-a6806530",
+          "cmpl-aa47c68daa7a23a3-0-bbca8dd2"
+        ],
+        "1": [
+          "cmpl-a12a9cf50b0aae73-0-a6806530",
+          "cmpl-aa47c68daa7a23a3-0-bbca8dd2"
+        ],
+        "2": [
+          "cmpl-a12a9cf50b0aae73-0-a6806530",
+          "cmpl-aa47c68daa7a23a3-0-bbca8dd2"
+        ],
+        "3": [
+          "cmpl-a12a9cf50b0aae73-0-a6806530",
+          "cmpl-aa47c68daa7a23a3-0-bbca8dd2"
+        ]
+      }
+    },
+    "c2_finite": {
+      "layers": 128,
+      "request_layer_completions": 128,
+      "scope": "all observed hot C2 completions have exact preceding same-layer/rank/step finite gate"
+    },
+    "c2_snapshot": {
+      "enabled": true,
+      "forwards": 8,
+      "checked_layers": 128,
+      "request_layer_completions": 192,
+      "reads": 8,
+      "hits": 312,
+      "expected_group": null,
+      "expected_layers": [
+        "language_model.model.layers.11.self_attn.attn",
+        "language_model.model.layers.15.self_attn.attn",
+        "language_model.model.layers.19.self_attn.attn",
+        "language_model.model.layers.23.self_attn.attn",
+        "language_model.model.layers.27.self_attn.attn",
+        "language_model.model.layers.3.self_attn.attn",
+        "language_model.model.layers.31.self_attn.attn",
+        "language_model.model.layers.35.self_attn.attn",
+        "language_model.model.layers.39.self_attn.attn",
+        "language_model.model.layers.43.self_attn.attn",
+        "language_model.model.layers.47.self_attn.attn",
+        "language_model.model.layers.51.self_attn.attn",
+        "language_model.model.layers.55.self_attn.attn",
+        "language_model.model.layers.59.self_attn.attn",
+        "language_model.model.layers.63.self_attn.attn",
+        "language_model.model.layers.7.self_attn.attn"
+      ],
+      "group_source": "verified-native-full-attention-spec",
+      "native_captures": 12,
+      "per_forward": [
+        {
+          "rank": 0,
+          "step": 2,
+          "group": 0,
+          "request_ids": [
+            "cmpl-a12a9cf50b0aae73-0-a6806530"
+          ],
+          "layers": 16,
+          "reads": 1,
+          "hits": 31
+        },
+        {
+          "rank": 0,
+          "step": 4,
+          "group": 0,
+          "request_ids": [
+            "cmpl-a12a9cf50b0aae73-0-a6806530",
+            "cmpl-aa47c68daa7a23a3-0-bbca8dd2"
+          ],
+          "layers": 16,
+          "reads": 1,
+          "hits": 47
+        },
+        {
+          "rank": 1,
+          "step": 2,
+          "group": 0,
+          "request_ids": [
+            "cmpl-a12a9cf50b0aae73-0-a6806530"
+          ],
+          "layers": 16,
+          "reads": 1,
+          "hits": 31
+        },
+        {
+          "rank": 1,
+          "step": 4,
+          "group": 0,
+          "request_ids": [
+            "cmpl-a12a9cf50b0aae73-0-a6806530",
+            "cmpl-aa47c68daa7a23a3-0-bbca8dd2"
+          ],
+          "layers": 16,
+          "reads": 1,
+          "hits": 47
+        },
+        {
+          "rank": 2,
+          "step": 2,
+          "group": 0,
+          "request_ids": [
+            "cmpl-a12a9cf50b0aae73-0-a6806530"
+          ],
+          "layers": 16,
+          "reads": 1,
+          "hits": 31
+        },
+        {
+          "rank": 2,
+          "step": 4,
+          "group": 0,
+          "request_ids": [
+            "cmpl-a12a9cf50b0aae73-0-a6806530",
+            "cmpl-aa47c68daa7a23a3-0-bbca8dd2"
+          ],
+          "layers": 16,
+          "reads": 1,
+          "hits": 47
+        },
+        {
+          "rank": 3,
+          "step": 2,
+          "group": 0,
+          "request_ids": [
+            "cmpl-a12a9cf50b0aae73-0-a6806530"
+          ],
+          "layers": 16,
+          "reads": 1,
+          "hits": 31
+        },
+        {
+          "rank": 3,
+          "step": 4,
+          "group": 0,
+          "request_ids": [
+            "cmpl-a12a9cf50b0aae73-0-a6806530",
+            "cmpl-aa47c68daa7a23a3-0-bbca8dd2"
+          ],
+          "layers": 16,
+          "reads": 1,
+          "hits": 47
+        }
+      ],
+      "scope": "exact snapshot source/worker/forward/group/layer/request/order/count join only"
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 59,
+          "host_pid": 747611,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 60,
+          "host_pid": 747612,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 61,
+          "host_pid": 747615,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 62,
+          "host_pid": 747617,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "source_bindings": 425,
+    "bounded_graph_canary_valid": true,
+    "graph": {
+      "official_native_graph_path_reached": true,
+      "official_format_source_sha256": {
+        "vllm/distributed/parallel_state.py": "df02e5386bc83e6ac644ff46f0297fdd19003bd55584c629840348a5fda8473f",
+        "vllm_ascend/compilation/acl_graph.py": "27f3b838f223dec86113649625f65b158969a30ce0265271d6a3ce1403db2491",
+        "vllm/v1/executor/multiproc_executor.py": "a2837f18010a1f3539ea062b0824ae6dacaced0ec5813910a4b6edef7875af18",
+        "vllm/utils/system_utils.py": "26127b114d896f776da2d5ba90eac5a023704150f07b1703eb66252bedf7eaa6",
+        "vllm/logger.py": "233720900b1207434e4824bbddcf86dba0dc8557a0bfe78a639545462a9e85b5",
+        "vllm/logging_utils/formatter.py": "d8caa69bf25884f6d4f59ca1b3c27e1162f7ab775874b236afc32e0696d5fe7c",
+        "vllm/forward_context.py": "1c6fa51e9a02a120fed5e7357afb1190516cbdfefd1c644dfcd860603f1527c5"
+      },
+      "log_sha256": "9af7c9fe93f8050029135da5f53708c7e710bcbb29b9c36df0e6fdfa2efbc957",
+      "worker_pids": {
+        "0": 59,
+        "1": 60,
+        "2": 61,
+        "3": 62
+      },
+      "physical": {
+        "ranks": {
+          "0": {
+            "inner_pid": 59,
+            "host_pid": 747611,
+            "physical_npu": 0
+          },
+          "1": {
+            "inner_pid": 60,
+            "host_pid": 747612,
+            "physical_npu": 1
+          },
+          "2": {
+            "inner_pid": 61,
+            "host_pid": 747615,
+            "physical_npu": 2
+          },
+          "3": {
+            "inner_pid": 62,
+            "host_pid": 747617,
+            "physical_npu": 3
+          }
+        },
+        "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+      },
+      "capture_ranks": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replay_directly_observed_ranks": [
+        0
+      ],
+      "source_default_local_first_replay_rank": 0,
+      "ordinary_worker_diagnostic_lines": [],
+      "per_rank": {
+        "0": {
+          "capture_lines": [
+            4778,
+            4782,
+            4787,
+            4791,
+            4795,
+            4801
+          ],
+          "capture_sizes_observed": [
+            1,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "replay_lines": [
+            5048
+          ]
+        },
+        "1": {
+          "capture_lines": [
+            4777,
+            4783,
+            4786,
+            4790,
+            4794,
+            4802
+          ],
+          "capture_sizes_observed": [
+            1,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "replay_lines": []
+        },
+        "2": {
+          "capture_lines": [
+            4780,
+            4784,
+            4788,
+            4793,
+            4797,
+            4800
+          ],
+          "capture_sizes_observed": [
+            1,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "replay_lines": []
+        },
+        "3": {
+          "capture_lines": [
+            4779,
+            4785,
+            4789,
+            4792,
+            4796,
+            4803
+          ],
+          "capture_sizes_observed": [
+            1,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "replay_lines": []
+        }
+      },
+      "scope": "four owned ranks reached native FULL capture; local-first TP0 replay directly logged plus successful TP4 requests/terminal; pre-operation logs do not prove four-rank completed replay calls or per-request/token coverage"
+    },
+    "compile_order": {
+      "first_compile_before_own_capture_ranks": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "successful_compile_completion_directly_observed_rank": 0,
+      "per_rank": {
+        "0": {
+          "first_compile_line": 3697,
+          "first_capture_line": 4778,
+          "compile_complete_lines": [
+            4771
+          ]
+        },
+        "1": {
+          "first_compile_line": 3698,
+          "first_capture_line": 4777,
+          "compile_complete_lines": []
+        },
+        "2": {
+          "first_compile_line": 3696,
+          "first_capture_line": 4780,
+          "compile_complete_lines": []
+        },
+        "3": {
+          "first_compile_line": 3699,
+          "first_capture_line": 4779,
+          "compile_complete_lines": []
+        }
+      },
+      "service_log_sha256": "9af7c9fe93f8050029135da5f53708c7e710bcbb29b9c36df0e6fdfa2efbc957",
+      "scope": "per-worker first compile starts before own capture; official local-first TP0 successful compile completion precedes own capture; not four direct completion logs or per-token graph coverage"
+    },
+    "warmup_repair_bounded_valid": true
+  },
+  "scope": "Bounded startup compiler ordering +3HTTP/2hot fourrank48C1/16C2 and existing numerical/snapshot checks; source425/clean isolation/live exactrelease. Generic inner helper text full40 does not change actual two-hot denominator. No speed,fullquality,lifecycle orwholepaper acceptance."
+}

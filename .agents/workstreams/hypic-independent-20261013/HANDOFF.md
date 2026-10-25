@@ -1,3 +1,51 @@
+# CURRENT 2026-10-25 R29 GRAPH REPAIR AUDITED; COST MODEL SELECTS ONE FIRST PAIR
+
+164a terminalexit0:3HTTP/217cleanisolation/only0-3/exactCID9095dcce...removed/
+8233free/finalphysicalempty. Independent1653 exit0 source425/2of2fourrank48C1+
+16C2/numerical-snapshot/actualcaptureall4+localTP0replay/liveexactreleasePASS.
+Firstcompile starts precede owncapture all4; official local-firstTP0 successful
+compilecompletion before owncapture. R29_G3_WARMUP_CANARY_AUDIT_20261025.json
+binds8raw+4workerhashes. Boundedwarmupordering fixed, notspeed/fullquality.
+No owned live NPU job; do not rerun R27/R29 or reuse their rawroots.
+
+User explicitly rejects exhaustive trials. HYPIC_COST_MODEL_AND_PRIORITY_20261025.json
+uses currentR25raw and host-only fsync calibration1656: candidate needs12.416%
+TPOT-time removal for parity; service40requestspan extra199.66s.33312events/worker,
+37selectedwaves/oneC1generation; C2only3dualhotwaves and allanchorsdifferent,so
+within-waveC2groupingdeprioritized. Calibration meanfsync0.734ms is notinservice
+causality. Do not equate summedrank/API timings or gaps with removablewalltime.
+CurrentTPOTdenominator is1024completiontokens, not1023; model uses actual ruler.
+
+NEXT: prepare exact HOST full40 graph controller/audit identity adapter then ONE
+fresh matched nativeG1/currentG3 graph firstpair. Current R27 canary audit only
+supports3responses; R26group audit is eager-only, so neither can falsely certify
+formalgraph40. Keep runtime425frozen; model says no speculative residency/grouping/
+loggingbundle. If positive, complete requestedG1-G4x3/381perarmquality/lifecycle.
+If negative, only measured material-residency or separateIO/coordinationbranch,
+onevariable at a time. C2prototype staysdefaultoff. Wholegoal remains incomplete.
+Latestlivepublished00a486ee/main23ec unchanged; terminal/modeltracking newerlocal.
+Fixedstop2026-10-25T18:07:17Z,only0-3/foreignuntouched/4-7neveruse.
+
+# CURRENT 2026-10-25 R29 G3 WARMUP-ONLY TEST RUNNING EXACT164a
+
+Fresh1649 admission10:25:46UTC checked425sourcebindings/model-image-input,
+actualphysical0-3empty/102portsbindable/noforeignbenchmark/noownedjob/newroot.
+Freshma directlaunch10:26:49UTC returnedrunningexec-000000000000164a;
+originalpeerlgw_a6109c51076a4a2c9d2674ca5a8704a0, checkpoint00a486ee052484c04884f6af7ed49065980fe020.
+Raw/cache/cch/hypic-independent-20261013/graph-r29-g3-warmup-r1-20261025.
+Follow exacthandle/originalpeer; live/unknown neverrestart. Terminal audit with
+host_audits/r29_graph_compile_order.py --contract GRAPH_R29_G3_CANARY_R1_20261025_CONTRACT.json --live-release.
+RealNPUcompile/capture/hot/numerical success notclaimed. Current425bytes immutable.
+
+Latest human asks smallcostmodel to stop exhaustive trials: use verified existing
+end-to-end/profile/counter evidence, shortlist mostlikely/highestpayoff causes,
+then single-variable falsification. The current warmup-only test alreadyfollows
+that constraint; no bundled residency/grouping/logging changes. Preparemodel
+whileit runs; do not fill unchangednegative12matrix or repeatpassedCPU tests.
+ScopeallG1-G4x3/381pairedquality/lifecycle/29functional remains; never substitute
+modeling for these finalgates. Fixedstop18:07:17UTC/only0-3/foreignuntouched.
+Latestlivepub00a486ee/main23ecunchanged; runtime68/host9/staticpassed onlyHOST.
+
 # CURRENT 2026-10-25 R29 WARMUP REPAIR HOST-VERIFIED; NO OWNED LIVE NPU JOB
 
 R29 changes only source-owned official non-request NONE compilewarmup routing.

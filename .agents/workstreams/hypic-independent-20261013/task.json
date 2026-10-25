@@ -9,9 +9,9 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R29_WARMUP_REPAIR_HOST_VERIFIED_READY_FOR_FRESH_ADMISSION",
+  "execution_state": "R29_BOUNDED_GRAPH_PASSED_COST_MODEL_SELECTED_FIRST_PAIR_NEXT",
   "r29_warmup": {
-    "state": "HOST_VERIFIED_NOT_DEVICE_ACCEPTED",
+    "state": "BOUNDED_NPU_ACCEPTED_NOT_SPEED_OR_FULL_QUALITY",
     "contract": "GRAPH_R29_G3_CANARY_R1_20261025_CONTRACT.json",
     "contract_sha256": "d075ed64ec385025c74a2e7a8072f1eb223204812ecf05a6c7e2e347956b18f7",
     "manifest": "GRAPH_R29_G3_MANIFEST_20261025.json",
@@ -29,8 +29,30 @@
     },
     "static": "exec-0000000000001646",
     "native_control_reused": "R27_G1_AUDIT_20261025.json",
-    "new_device_run": false,
-    "scope": "Only compiler warmup routing changed;413priorPython and actual C1/C2 math/safety gates unchanged. Real graph hot requests,full speed/quality/lifecycle/29functional still unproved."
+    "new_device_run": true,
+    "scope": "Only compiler warmup routing changed;413priorPython and actual C1/C2 math/safety gates unchanged. Real graph hot requests,full speed/quality/lifecycle/29functional still unproved.",
+    "latest_human_direction": "Replace exhaustive trials with a small end-to-end cost model, shortlist likely causes and confirm with single-variable bounded experiments. This current warmup-only treatment is the existing first test.",
+    "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+    "independent_audit": "exec-0000000000001653",
+    "last_controller": {
+      "state": "TERMINAL_BOUNDED_VALID_AUDITED_RELEASED",
+      "operation": "exec-000000000000164a",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "connector": "awmcp",
+      "contract": "GRAPH_R29_G3_CANARY_R1_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/graph-r29-g3-warmup-r1-20261025",
+      "checkpoint": "00a486ee052484c04884f6af7ed49065980fe020",
+      "admission_operation": "exec-0000000000001649",
+      "observed_running_utc": "2026-10-25T10:26:49Z",
+      "independent_audit": "exec-0000000000001653",
+      "terminal_report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json"
+    }
+  },
+  "cost_model_20261025": {
+    "report": "HYPIC_COST_MODEL_AND_PRIORITY_20261025.json",
+    "state": "SOURCE_BOUND_SMALL_MODEL_NOT_CAUSAL_ACCEPTANCE",
+    "next": "One fresh matched graph full40 first pair, then only conditional one-variable residual attribution;C2grouping deferred.",
+    "full_goal_scope_unchanged": true
   },
   "maintainer_learning_20261025": {
     "published": "0a1bc9bfc14bafd8aa11006f9259d201f0cb9f1b",
@@ -267,16 +289,17 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "TERMINAL_FAILURE_RELEASE_VERIFIED",
-    "operation": "exec-000000000000160b",
+    "state": "TERMINAL_BOUNDED_VALID_AUDITED_RELEASED",
+    "operation": "exec-000000000000164a",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "contract": "GRAPH_R27_G3_CANARY_R1_20261025_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/graph-r27-g3-canary-r1-20261025",
-    "checkpoint": "b9ccb6a03523c848cbff5174686830850087fe20",
-    "admission_operation": "exec-000000000000160a",
-    "independent_audit": "exec-0000000000001628",
-    "terminal_report": "R27_G3_GRAPH_CAPTURE_FAILURE_20261025.json"
+    "contract": "GRAPH_R29_G3_CANARY_R1_20261025_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/graph-r29-g3-warmup-r1-20261025",
+    "checkpoint": "00a486ee052484c04884f6af7ed49065980fe020",
+    "admission_operation": "exec-0000000000001649",
+    "observed_running_utc": "2026-10-25T10:26:49Z",
+    "independent_audit": "exec-0000000000001653",
+    "terminal_report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json"
   },
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
@@ -589,7 +612,7 @@
     ],
     "start_utc": "2026-10-25T06:07:17Z",
     "absolute_stop_utc": "2026-10-25T18:07:17Z",
-    "state": "R29_WARMUP_REPAIR_HOST_VERIFIED_READY_FOR_FRESH_ADMISSION",
+    "state": "R29_BOUNDED_GRAPH_PASSED_COST_MODEL_SELECTED_FIRST_PAIR_NEXT",
     "plan": "R24_R2_RENEWAL_PLAN_20261025.json",
     "contracts": [
       "C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json",
@@ -613,7 +636,7 @@
       "observed_running_utc": "2026-10-25T07:37:26Z",
       "rule": "Track exact original peer and handle; timeout/missing requires raw and actual process inspection, never restart."
     },
-    "resource_lease": "No owned active stage. Failure1628 independently verified exactrelease/physicalempty and424frozenbytes; preserve original raw. New warmup fix and fresh admission required.",
+    "resource_lease": "No owned live stage. R29 independent1653 verified425bytes,2hot/3HTTP,actualgraph/compiler order,217clean samples and exactlive release. Next one matched graph first screen selected by cost model.",
     "scope": "Same full independent27B/physical0-3/TP4 C1/C2 three-stage goal; C3/dualTP2 excluded; original successful code not reused",
     "prior_failure": "R24_OFF_R1_ADMISSION_FAILURE_20261023.json",
     "prior_followup": "R24_WAIT_FOLLOWUP_TERMINAL_20261023.json remains immutable history",
@@ -665,7 +688,7 @@
     },
     "host_audit_successors": {"report": "HOST_AUDIT_SUCCESSORS_R26_R28_READINESS_20261025.json", "state": "HOST_ONLY_REVIEWED_CPU_TESTED_NOT_DEVICE_ACCEPTANCE", "runtime_source_changed": false},
     "r27_graph": {"plan":"R27_GRAPH_CANARY_PLAN_20261025.json","G1_evidence":"R27_G1_AUDIT_20261025.json","G1_valid":true,"G1_independent_audit":"exec-00000000000015fb","G3_started":true,"scope":"boundedcompatibility, not speed/fullquality","G3_state":"FAILED_GRAPH_CAPTURE_0HTTP_RELEASE_VERIFIED","G3_evidence":"R27_G3_GRAPH_CAPTURE_FAILURE_20261025.json","G3_independent_audit":"exec-0000000000001628"},
-    "latest_confirmed_publication": "0a1bc9bfc14bafd8aa11006f9259d201f0cb9f1b",
+    "latest_confirmed_publication": "00a486ee052484c04884f6af7ed49065980fe020",
     "pending_publication": {
       "checkpoint": "283de3b13c05042ed57ebe4cc90329454cab4b32",
       "evidence": "R24_R2_PUBLICATION_FAILURE_20261025.json",

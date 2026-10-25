@@ -1,0 +1,43 @@
+{
+  "schema": "hypic-r29-device-admission/v1",
+  "admission_valid": true,
+  "arm": "R29_G3_NATIVE_WARMUP_REPAIR",
+  "utc": "2026-10-25T10:25:46.236412+00:00",
+  "head": "00a486ee052484c04884f6af7ed49065980fe020",
+  "baseline_audit": "exec-00000000000015fb",
+  "baseline_result_sha256": "012f37d84b6ee1d813f33f64a19e3a902835960a749b343e252e08237266bb86",
+  "source_bindings": 425,
+  "bound_source_bytes_unchanged": true,
+  "untracked_isolated_future_files": [
+    ".agents/workstreams/hypic-independent-20261013/optimization_candidates/c1_residency.py",
+    ".agents/workstreams/hypic-independent-20261013/optimization_candidates/c1_residency_adapter.py",
+    ".agents/workstreams/hypic-independent-20261013/optimization_candidates/c1_residency_test.py",
+    ".agents/workstreams/hypic-independent-20261013/optimization_candidates/c2_grouped.py",
+    ".agents/workstreams/hypic-independent-20261013/optimization_candidates/test_c2_grouped.py"
+  ],
+  "physical0_3": [],
+  "foreign_benchmark_tasks": [],
+  "owned_controllers": [],
+  "ports_bindable": 102,
+  "cache_available_bytes": 9255006208,
+  "new_raw_root": "/cache/cch/hypic-independent-20261013/graph-r29-g3-warmup-r1-20261025",
+  "device_run": false,
+  "route": {
+    "mode": "force_direct",
+    "logical_gateway": "tpc",
+    "peer": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "route_decision": "peer_direct"
+  },
+  "controller": {
+    "state": "RUNNING_NOT_ACCEPTED",
+    "operation": "exec-000000000000164a",
+    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "connector": "awmcp",
+    "contract": "GRAPH_R29_G3_CANARY_R1_20261025_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/graph-r29-g3-warmup-r1-20261025",
+    "checkpoint": "00a486ee052484c04884f6af7ed49065980fe020",
+    "admission_operation": "exec-0000000000001649",
+    "observed_running_utc": "2026-10-25T10:26:49Z"
+  },
+  "absolute_stop_utc": "2026-10-25T18:07:17Z"
+}
