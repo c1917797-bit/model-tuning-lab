@@ -1,0 +1,72 @@
+{
+  "schema": "hypic-r36-a1-r1-launch-failure/v1",
+  "state": "FAILED_HOST_LAUNCH_WIRING_ZERO_REQUESTS_RELEASED",
+  "controller": "exec-0000000000001938",
+  "launch_checkpoint": "4b4834fc4e1033bbe01f4569976438ae203507e2",
+  "contract": "STEP_DURABILITY_R36_A1_R1_20261025_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-a1-r1-20261025",
+  "independent_release_audit": {
+    "operation": "exec-0000000000001939",
+    "path": "/cache/cch/hypic-independent-20261013/r36-a1-r1-terminal-release-audit-20261025.json",
+    "sha256": "9d4d778b860a2cb1c63be15180f2a63d69ae0cf5c3dad08759af1bd2b88d594c",
+    "controller": "exec-0000000000001938",
+    "live_snapshot_utc": "2026-10-25T21:47:35.879378+00:00",
+    "native_worker_or_algorithm_proven": false,
+    "new_npu_stage_accepted": false,
+    "owned_container_absent": true,
+    "physical0_3_empty": true,
+    "ports_free": 102,
+    "raw_sha256": {
+      "events.jsonl": "87314108906ada3488968cca1f1530529d6ee363ac7f4e39385c3319e52ac163",
+      "isolation.json": "b036e53bb92b5a8f2a46e20ba635013d2085ce1bdcaf0fbd3c4dd1dd975a98ad",
+      "launch.json": "eb3e9042d45989937ab2c8649ccfa0abb4afad5531bbbabe234f46f16d673737",
+      "preflight.json": "fab9e70c81f3a0535700525c806aaa5d324ca094cc394fcfd49682cdad59433e",
+      "release.json": "3c1c2af5ff919b431f278991f9043c7fd348e4e6cdabdd9e77863a1fdac476bf",
+      "responses.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "result.json": "032e65e06194aadbde659c40dac3b18ae45b59e48543d76d293e959730aa8ce9",
+      "service-start.json": "c5c64d5200f956ae47e1a8e33cbad44da1a06627405ec74552acdaf1a8dff75c",
+      "service.log": "37e9f28966d0255142b9769c83b1fd6125fd05585d7e9bc3de145e9d3bb30639"
+    },
+    "schema": "hypic-r36-a1-r1-terminal-release-audit/v1",
+    "source_bindings": 450,
+    "terminal": {
+      "error": {
+        "message": "Owned native service exited before health",
+        "type": "RuntimeError"
+      },
+      "guard_errors": [],
+      "isolation_samples": 2,
+      "physical_devices_seen": [],
+      "release": {
+        "final_physical_processes": [],
+        "owned_container": "04a45b93c8f39dc4dddaf395dfde588da42e1fccf35887910adb6013cfadf25b",
+        "port_free": true,
+        "removed": true
+      },
+      "responses": 0,
+      "valid": false,
+      "worker_pids": []
+    }
+  },
+  "actual_launch_environment": [
+    "PYTHONPATH=/probe/evidence_io_r35:/probe:/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:/usr/local/Ascend/ascend-toolkit/latest/opp/built-in/op_impl/ai_core/tbe:/usr/local/Ascend/cann-9.1.0/python/site-packages:/usr/local/Ascend/cann-9.1.0/opp/built-in/op_impl/ai_core/tbe:",
+    "INDEPENDENT_CACHE_DIAGNOSTIC=1",
+    "INDEPENDENT_DIAGNOSTIC_ROOT=/scratch/diagnostics",
+    "INDEPENDENT_DIAGNOSTIC_BATCHES=2",
+    "INDEPENDENT_GRAPH_HYPIC=1",
+    "INDEPENDENT_GRAPH_MANIFEST=/probe/EVIDENCE_IO_R35_ON_MANIFEST_20261025.json",
+    "INDEPENDENT_GRAPH_RAW=/scratch/diagnostics",
+    "INDEPENDENT_PREFIX_TERMINAL_ONLY=0",
+    "INDEPENDENT_EVIDENCE_IO_BUDGET=0",
+    "INDEPENDENT_EVIDENCE_STEP_DURABILITY=0"
+  ],
+  "original_error": "Traceback (most recent call last):\n  File \"/probe/evidence_io_r35/sitecustomize.py\", line 14, in <module>\n    _remove_io_bootstrap=enable()\n                         ^^^^^^^^\n  File \"/probe/evidence_io_r35/patch.py\", line 9, in enable\n    _,manifest,_=worker_loader._manifest(path)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/probe/graph_candidate/worker_loader.py\", line 132, in _manifest\n    raise ValueError(\"graph package source drift: \" + str(name))\nValueError: graph package source drift: graph_candidate/worker_loader.py\n",
+  "cause": "HOST adapter kept PYTHONPATH pointing at evidence_io_r35 and cache_diagnostic.compact_manifest at R35 ON, while checker validated successor_manifest=R36 OFF. Old automatic sitecustomize correctly rejected changed loader source before native workers or requests.",
+  "ownership": "Own adapter omission, not foreign contention or algorithm/IO-cadence result.",
+  "r1_cohort_closed": [
+    "A1 failed immutable root",
+    "B1 unstarted old-source contract retained but prohibited",
+    "A2 unstarted old-source contract retained but prohibited"
+  ],
+  "full_goal_complete": false
+}

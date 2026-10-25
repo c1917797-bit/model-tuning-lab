@@ -1235,9 +1235,9 @@
     }
   },
   "r36_step_durability": {
-    "state": "FROZEN_SAME_SOURCE_A_B_A_STATIC_IMAGE_VALID_DEVICE_PENDING",
+    "state": "HOST_LAUNCH_WIRING_FIX_VERIFIED_R2_AUTOMATIC_STARTUP_GATE_PENDING",
     "plan": "R36_STEP_DURABILITY_PLAN_20261025.json",
-    "next": "Fresh admission then A1 original durability, independent r36_step_durability_audit.py--live-release; only valid/exactlyreleased A1 permits new B1 admission, then A2. No root reuse or threshold changes.",
+    "next": "Freeze NEW R2 A1/B1/A2 contracts and roots with cache_diagnostic.compact_manifest=successor_manifest and new HOST9ebe496b hash; exercise real base-consumed argv plus automatic sitecustomize in pinned CPU-only image for OFF and ON, then fresh physical admission. Explicit package.enable image test alone was insufficient to prove startup wiring.",
     "full_goal_complete": false,
     "host_readiness": "R36_CORE_HOST_READINESS_20261025.json",
     "host_controls": 51,
@@ -1254,7 +1254,17 @@
     "static_image_validation": "R36_STATIC_IMAGE_READINESS_20261025.json",
     "auditor": "host_audits/r36_step_durability_audit.py",
     "controller": "host_audits/r36_step_durability_controller.py",
-    "contracts": {
+    "r1_failure": "R36_A1_R1_LAUNCH_FAILURE_20261025.json",
+    "launch_repair": "R36_LAUNCH_WIRING_REPAIR_20261025.json",
+    "last_failed_attempt": {
+      "operation": "exec-0000000000001938",
+      "contract": "STEP_DURABILITY_R36_A1_R1_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-a1-r1-20261025",
+      "state": "FAILED_HOST_LAUNCH_WIRING_ZERO_REQUESTS_RELEASED",
+      "release_audit": "/cache/cch/hypic-independent-20261013/r36-a1-r1-terminal-release-audit-20261025.json",
+      "audit_sha256": "9d4d778b860a2cb1c63be15180f2a63d69ae0cf5c3dad08759af1bd2b88d594c"
+    },
+    "r1_closed_contracts": {
       "A1": {
         "path": "STEP_DURABILITY_R36_A1_R1_20261025_CONTRACT.json",
         "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-a1-r1-20261025"

@@ -59,6 +59,8 @@ def prerequisite(c,root):
         "scope":"Same original math/event writes/guards, only default-off selected-step durability cadence changes. Measured original IO budget is an opportunity, not predicted speed."}
 
 def check_contract(c,*,source_root=W,require_new_root=True):
+    if c.get("cache_diagnostic",{}).get("compact_manifest")!=c.get("successor_manifest"):
+        raise ValueError("validation and base-launch manifest slots must agree")
     root=Path(source_root).resolve();sources=c["host_controller_source_sha256"]
     retained.native._sources(root,sources)
     if (sources.get(ENTRY)!=sha(__file__)or c["host_controller_sha256"]!=sha(__file__)
@@ -103,10 +105,22 @@ def run_contract(c,*,source_root=W):
             argv=data["argv"];old_path="PYTHONPATH=/probe/graph_candidate/bootstrap:/probe:"
             matches=[i for i,x in enumerate(argv)if x.startswith(old_path)]
             if len(matches)!=1:raise ValueError("one source-owned bootstrap path required")
-            i=matches[0];argv[i]=argv[i].replace(old_path,"PYTHONPATH=/probe/evidence_io_r35:/probe:",1)
+            i=matches[0];argv[i]=argv[i].replace(old_path,"PYTHONPATH=/probe/step_durability_r36:/probe:",1)
             image_index=argv.index(c["image"])
             argv[image_index:image_index]=["-e","INDEPENDENT_PREFIX_TERMINAL_ONLY=0","-e","INDEPENDENT_EVIDENCE_IO_BUDGET=0",
                 "-e","INDEPENDENT_EVIDENCE_STEP_DURABILITY="+("1"if c["r33_arm"]=="B1"else"0")]
+            expected={
+                "INDEPENDENT_GRAPH_MANIFEST=":"INDEPENDENT_GRAPH_MANIFEST=/probe/"+c["successor_manifest"],
+                "INDEPENDENT_EVIDENCE_STEP_DURABILITY=":"INDEPENDENT_EVIDENCE_STEP_DURABILITY="+("1"if c["r33_arm"]=="B1"else"0"),
+                "INDEPENDENT_EVIDENCE_IO_BUDGET=":"INDEPENDENT_EVIDENCE_IO_BUDGET=0",
+                "INDEPENDENT_PREFIX_TERMINAL_ONLY=":"INDEPENDENT_PREFIX_TERMINAL_ONLY=0"}
+            if any([x for x in argv if x.startswith(prefix)]!=[value]for prefix,value in expected.items()):
+                raise ValueError("actual base-consumed durability launch environment differs")
+            if len([x for x in argv if x.startswith("PYTHONPATH=/probe/step_durability_r36:/probe:")])!=1:
+                raise ValueError("actual durability bootstrap missing from base-consumed argv")
+            data["r36_launch_identity"]={"bootstrap":"step_durability_r36",
+                "manifest":c["successor_manifest"],"durability_enabled":c["r33_arm"]=="B1",
+                "io_observer_enabled":False,"prefix_terminal_only":False}
             if "--profiler-config"in data["argv"]:raise ValueError("R33 cannot enable profiler")
             data["r33_trial"]={"arm":c["r33_arm"],"profiler_enabled":False,
                 "host_sources":c["host_controller_source_sha256"],"diagnostic":SPEC,

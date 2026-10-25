@@ -1,0 +1,33 @@
+{
+  "schema": "hypic-r36-launch-wiring-repair/v1",
+  "state": "HOST_LAUNCH_WIRING_FIX_VERIFIED_R2_AUTOMATIC_STARTUP_GATE_PENDING",
+  "failure": "R36_A1_R1_LAUNCH_FAILURE_20261025.json",
+  "source_sha256": {
+    "graph_candidate/worker_loader.py": "f4d4866f2f379989d88fab59fa5bf943c782325df10f0b3a66231e3006f9d920",
+    "host_audits/r36_step_durability_controller.py": "9ebe496b79e2af3abf0a256280beb4da65c8b87f0c01af243a8487efd8d6f940",
+    "host_audits/test_r36_launch_wiring.py": "5c4dc9b1dd978cbed58cf6edc566fc04efe6a0dce0cf3dec9df7b52bd233a5a4",
+    "independent_evidence_step_durability.py": "07ab66f93c705dd20ba1254d5a9d3a7864d1707e0b60c5021a38c5f6f5d1f1fb"
+  },
+  "changes": [
+    "Checker rejects disagreement between validated successor_manifest and actual base cache_diagnostic.compact_manifest before source/admission work.",
+    "Actual HOST wrapper rewrites bootstrap to step_durability_r36 and validates the unique base-consumed manifest/IOoff/stepflag/prefixoff argv before Docker execution.",
+    "Additional r36_launch_identity records actual bootstrap and treatment flags."
+  ],
+  "regression": {
+    "initial_operation": "exec-000000000000193d",
+    "refined_negative_operation": "exec-000000000000193f",
+    "negative_scope": "Old checker incorrectly accepted distinct manifest slots. Original native failure log independently proves wrong automatic entrypoint. Rehearsal fixture required additional fake cleanup ss/git and SystemExit handling; those fixture failures are not algorithm evidence.",
+    "passed_operation": "exec-0000000000001944",
+    "passed_cases": 2,
+    "actual_retained_base_builder_consumed": true,
+    "external_commands_replaced_no_docker_or_npu": true,
+    "retained_independent_auditor_cases": 21,
+    "retained_core_cases": 51
+  },
+  "unchanged": "All434runtime Python and450runtime/common source bindings unchanged; only unbound HOST controller/test changed. Core loaderf4d4866f and policy07ab66f9 unchanged.",
+  "warning": "R1 HOST hashes intentionally stale after fix. Never overwrite R1 contracts/raw or launch old B1/A2.",
+  "next": "Freeze NEW R2 A1/B1/A2 contracts and roots with cache_diagnostic.compact_manifest=successor_manifest and new HOST9ebe496b hash; exercise real base-consumed argv plus automatic sitecustomize in pinned CPU-only image for OFF and ON, then fresh physical admission. Explicit package.enable image test alone was insufficient to prove startup wiring.",
+  "new_npu_work": false,
+  "deadline": "2026-10-26T06:36:27Z",
+  "speed_quality_or_full_goal_accepted": false
+}
