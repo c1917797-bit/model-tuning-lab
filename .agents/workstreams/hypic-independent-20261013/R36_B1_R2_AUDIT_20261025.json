@@ -1,0 +1,90 @@
+{
+  "schema": "hypic-r36-b1-r2-audit-summary/v1",
+  "state": "VALID_SELECTED_STEP_DURABILITY_ARM_AUDITED_RELEASED",
+  "controller": "exec-000000000000197f",
+  "controller_exit_code": 0,
+  "contract": "STEP_DURABILITY_R36_B1_R2_20261025_CONTRACT.json",
+  "launch_checkpoint": "02c87160a2f13ad802b5f28c3b1c20bcee1f921b",
+  "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-b1-r2-20261025",
+  "independent_audit": {
+    "operation": "exec-0000000000001999",
+    "path": "/cache/cch/hypic-independent-20261013/r36-b1-r2-independent-audit-after-port-release-20261025.json",
+    "sha256": "9557654df5fc257d3eac156705e4ee9420f056cafc9bb6ffa55f706e5077c33d",
+    "valid": true,
+    "live_release_verified": true
+  },
+  "diagnostic_requests": 16,
+  "hot_fourworker_48C1_16C2": 16,
+  "private_shape_warmup": 48,
+  "actual_private_npu_state_checks": 8,
+  "source_bindings": 450,
+  "isolation_samples": 314,
+  "diagnostic_makespan_seconds": 108.39350151014514,
+  "durability": {
+    "actual_completed_model_steps": 224,
+    "durable_fences": 224,
+    "enabled": true,
+    "fsync_syscall_trace_proven": false,
+    "http_requests": 16,
+    "ranks": [
+      {
+        "deferred_fsync_requests": 11648,
+        "original_fsync_requests": 11662,
+        "original_written_bytes": 5332378,
+        "original_written_events": 11662,
+        "rank": 0,
+        "source_completion_and_receipt_fsync_calls": 28,
+        "timed_associated_model_steps": 14
+      },
+      {
+        "deferred_fsync_requests": 11648,
+        "original_fsync_requests": 11662,
+        "original_written_bytes": 5332378,
+        "original_written_events": 11662,
+        "rank": 1,
+        "source_completion_and_receipt_fsync_calls": 28,
+        "timed_associated_model_steps": 14
+      },
+      {
+        "deferred_fsync_requests": 11648,
+        "original_fsync_requests": 11662,
+        "original_written_bytes": 5332378,
+        "original_written_events": 11662,
+        "rank": 2,
+        "source_completion_and_receipt_fsync_calls": 28,
+        "timed_associated_model_steps": 14
+      },
+      {
+        "deferred_fsync_requests": 11648,
+        "original_fsync_requests": 11662,
+        "original_written_bytes": 5332378,
+        "original_written_events": 11662,
+        "rank": 3,
+        "source_completion_and_receipt_fsync_calls": 28,
+        "timed_associated_model_steps": 14
+      }
+    ],
+    "scope": "Source-bound successful controller plus complete raw byte/count/fence and cohort checks. Fence receipt follows completion sync and is itself synced before callback returns by verified policy. Not a syscall trace, performance result, or durability guarantee for an interrupted incomplete step.",
+    "selected_step_durability_valid": true,
+    "speed_gain_inferred": false
+  },
+  "audit_attempt_history": [
+    {
+      "operation": "exec-0000000000001991",
+      "phase": "PRESPAWN",
+      "error": "Relative cwd caused spawn ENOENT; no auditor process/output; corrected absolute cwd."
+    },
+    {
+      "operation": "exec-0000000000001993",
+      "phase": "LIVE_RELEASE_BIND",
+      "error": "Address already in use on exact service port; no audit output or device restart."
+    },
+    {
+      "operation": "exec-0000000000001997",
+      "phase": "READ_ONLY_RELEASE_REVIEW",
+      "result": "Same owned container absent, physical0-3 processes empty, exact service-port ss rows empty and actual bind now succeeds. Changed live premise permitted audit1999; no guard/source change."
+    }
+  ],
+  "scope": "Same-HYPIC diagnostic64 selected-step durability treatment only; A2 and three-arm independent replay remain. No native or formal1024 gain, syscall trace, full quality or paper acceptance.",
+  "full_goal_complete": false
+}

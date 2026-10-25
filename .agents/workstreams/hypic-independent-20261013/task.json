@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R35_PACKAGE_CODE_HOST_READY_MANIFEST_IMAGE_PENDING",
+  "execution_state": "R36_R2_A1_B1_VALID_RELEASED_A2_RUNNING",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -440,7 +440,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Poll exact1739/originalma/raw; terminal independentlyaudit r32b_gate_cast_audit.py --contract GATE_CAST_R32_B1_20261025_CONTRACT.json --definition R32B_ID_JOIN_OBSERVER_20261025.json --live-release --output newexternalB1audit. Onlyvalid/releasedB1thenfreshA2. No source/protocol/threshold changes or blindretry.",
+  "next_action": "Track exact A2 controller199e on original ma a6109 and original root. Terminal independent r36 audit --live-release to new output; all three valid audits then fixed5pct gain/drift<=5pct decision replay. Runtime/common450 and boundHOST remain frozen.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -478,10 +478,11 @@
     ]
   },
   "publication": {
-    "state": "liveverified",
-    "published_commit": "b6ce36fe8be22152571ef8c9e4a3f4cbb7adf66c",
+    "state": "liveverified_previous_checkpoint",
+    "published_commit": "40aa89a8b8402ef77aab492ce72f75a872451dde",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "scope": "Last liveconfirmed checkpoint includes resource budget and frozen R24 host wiring only; no R24 NPU or final HYPIC acceptance."
+    "scope": "Previous published A1 valid/B1 running checkpoint. This local next checkpoint records B1 valid and A2 active; no native/formal/fullpaper acceptance.",
+    "tls_verification": "Per-command OpenSSL backend with sslVerify=true; no persistent TLS weakening."
   },
   "math_reference": {
     "state": "cpu-reference-passed",
@@ -498,18 +499,18 @@
   },
   "active_attempt": {
     "state": "RUNNING",
-    "operation": "exec-000000000000197f",
+    "operation": "exec-000000000000199e",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
-    "arm": "B1",
+    "arm": "A2",
     "cohort": "R2",
-    "contract": "STEP_DURABILITY_R36_B1_R2_20261025_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-b1-r2-20261025",
-    "launch_checkpoint": "02c87160a2f13ad802b5f28c3b1c20bcee1f921b",
-    "admission_operation": "exec-000000000000197c",
+    "contract": "STEP_DURABILITY_R36_A2_R2_20261025_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-a2-r2-20261025",
+    "launch_checkpoint": "40aa89a8b8402ef77aab492ce72f75a872451dde",
+    "admission_operation": "exec-000000000000199c",
     "auditor": "host_audits/r36_step_durability_audit.py",
     "absolute_stop_utc": "2026-10-26T06:36:27Z",
-    "rule": "Original peer/handle/raw only; no unknown restart. 450runtime/common and boundHOST freeze. B1 must prove all original writes and actual byte-count/model/durable-fence reconciliation plus retained numerical/hot/isolation/exact live release. Only valid/released B1 permits fresh A2."
+    "rule": "Original peer/handle/raw only; no unknown restart. 450runtime/common and boundHOST frozen. A2 original durability control; independent valid exact-release audit before three-arm replay. No speed/native/formal extrapolation from A1/B1 pair."
   },
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
@@ -1249,9 +1250,9 @@
     }
   },
   "r36_step_durability": {
-    "state": "R2_A1_VALID_RELEASED_B1_STEP_DURABILITY_RUNNING",
+    "state": "R36_R2_A1_B1_VALID_RELEASED_A2_RUNNING",
     "plan": "R36_STEP_DURABILITY_PLAN_20261025.json",
-    "next": "Publish this checkpoint, fresh source/model/image/input/newroot/physical0-3/102ports/storage/budget admission, then A1 only. Independent valid exactrelease audit before new B1 and A2. OldR1wholecohort remains closed.",
+    "next": "Track exact A2 controller199e on original ma a6109 and original root. Terminal independent r36 audit --live-release to new output; all three valid audits then fixed5pct gain/drift<=5pct decision replay. Runtime/common450 and boundHOST remain frozen.",
     "full_goal_complete": false,
     "host_readiness": "R36_CORE_HOST_READINESS_20261025.json",
     "host_controls": 51,
@@ -1264,7 +1265,7 @@
       "step_durability_r36/sitecustomize.py": "0d71ea2d895cdfb7784d01e750f42c65b7c88b9f4c55ea69f38bbac8f9377b2f",
       "step_durability_r36/run_with_patch.sh": "caf16748d9ee7c1d2c2bd25f792579964807c9509cb289314b6407e25dfa8d19"
     },
-    "new_npu_work": false,
+    "new_npu_work": true,
     "static_image_validation": "R36_STATIC_IMAGE_READINESS_20261025.json",
     "auditor": "host_audits/r36_step_durability_audit.py",
     "controller": "host_audits/r36_step_durability_controller.py",
@@ -1307,30 +1308,31 @@
       }
     },
     "automatic_startup_readiness": "R36_R2_AUTOMATIC_LAUNCH_READINESS_20261025.json",
-    "active_controller": "exec-000000000000197f",
+    "active_controller": "exec-000000000000199e",
     "decision_helper": "host_audits/r36_step_durability_decision.py",
     "decision_readiness": "R36_DECISION_HELPER_READINESS_20261025.json",
     "results": {
-      "A1": "R36_A1_R2_AUDIT_20261025.json"
+      "A1": "R36_A1_R2_AUDIT_20261025.json",
+      "B1": "R36_B1_R2_AUDIT_20261025.json"
     },
     "last_completed_controller": {
       "state": "VALID_AUDITED_RELEASED",
-      "operation": "exec-0000000000001959",
+      "operation": "exec-000000000000197f",
       "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
       "connector": "awmcp",
-      "arm": "A1",
+      "arm": "B1",
       "cohort": "R2",
-      "contract": "STEP_DURABILITY_R36_A1_R2_20261025_CONTRACT.json",
-      "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-a1-r2-20261025",
-      "launch_checkpoint": "89ab1638a91e9e86585657529154cb076602bfe7",
-      "admission_operation": "exec-0000000000001958",
+      "contract": "STEP_DURABILITY_R36_B1_R2_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-b1-r2-20261025",
+      "launch_checkpoint": "02c87160a2f13ad802b5f28c3b1c20bcee1f921b",
+      "admission_operation": "exec-000000000000197c",
       "auditor": "host_audits/r36_step_durability_audit.py",
       "absolute_stop_utc": "2026-10-26T06:36:27Z",
-      "rule": "Track exact original peer/handle/raw only; running or unknown never restart. 450runtime/common and boundHOST frozen. Terminal independent numerical/hot/byte-durability-policy/source/isolation/exact live release before B1.",
+      "rule": "Original peer/handle/raw only; no unknown restart. 450runtime/common and boundHOST freeze. B1 must prove all original writes and actual byte-count/model/durable-fence reconciliation plus retained numerical/hot/isolation/exact live release. Only valid/released B1 permits fresh A2.",
       "terminal_controller_exit_code": 0,
-      "independent_audit": "exec-0000000000001974",
-      "audit_path": "/cache/cch/hypic-independent-20261013/r36-a1-r2-independent-audit-20261025.json",
-      "audit_sha256": "ca97c076a154a5545228a5567cb5ad987f2d886c0adeb043435a6a46bdca24ca"
+      "independent_audit": "exec-0000000000001999",
+      "audit_path": "/cache/cch/hypic-independent-20261013/r36-b1-r2-independent-audit-after-port-release-20261025.json",
+      "audit_sha256": "9557654df5fc257d3eac156705e4ee9420f056cafc9bb6ffa55f706e5077c33d"
     }
   }
 }
