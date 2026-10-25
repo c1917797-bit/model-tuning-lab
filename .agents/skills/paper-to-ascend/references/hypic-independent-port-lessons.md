@@ -150,8 +150,8 @@ For a later paper, keep four short fields: **proved**, **hypothesis**,
 **environmental blocker**, and **next minimum falsification**. Select the first
 missing causal link rather than repeatedly exercising a passed component.
 
-Here the next graph question is the already-authorized bounded HYPIC counterpart,
-then one fresh matched graph pair if it passes. Residency/C2 batching/I/O claims
+At the R27 checkpoint above, the next graph question was the authorized bounded
+HYPIC counterpart, then one fresh matched graph pair if it passed. Residency/C2 batching/I/O claims
 need a bounded attribution measurement before choosing one repair. A RoPE
 rounding hypothesis needs same-input primitive evidence and then the frozen
 paired task-quality evaluation; PIC/native full-context token equality is not
@@ -175,3 +175,54 @@ partial scope. Replay it with `python3 -B validate_independent_hypic_case.py
 --document-only` from that workstream. This checks document bindings only.
 Historical replay, a new reference, or bounded graph evidence does not certify
 the full Paper-to-Ascend workflow or all 29 Skills.
+
+## 2026-10-25 addendum: preserve device data; repair the observation
+
+These are measured tooling/decision lessons, not a successful speed result.
+The [profile and ID-join ledger](../../../workstreams/hypic-independent-20261013/HYPIC_PROFILE_ID_LEARNING_20261025.json)
+pins the reports and this reference. R30's matched graph pair remained slower;
+R32 A1 is one valid control and B1 was running at this snapshot.
+
+- **A parser exit code is not an artifact gate.** R31 collected four actual
+  worker profiles and released the service. The daemon could not parse them;
+  the first CPU-only analysis returned zero despite failed hardware export.
+  Preserve the original binary capture, parse a verified copy, and require
+  nonempty per-rank hardware tables with the expected device identity. The
+  tested CANN9.1 package's native entry failed platform initialization without
+  device access; its official Python frontend recovered the tables using its
+  documented import/export subcommands. Frontend APIs are version-specific:
+  inspect the installed help/source rather than copying native flags to Python,
+  adding device access, or recapturing the model for a parser problem.
+- **Partial data has partial scope.** The failed export left a CPU-event JSON
+  array without its closing delimiter. Complete event records supported a
+  labelled prefix analysis; they did not become a complete trace by inventing
+  a delimiter. Preserve originals and hashes. Overlapping API/kernel spans,
+  duplicate communication rows and four-rank totals are not additive walltime.
+- **A string mismatch is not missing execution.** R32's first gate observer
+  compared HTTP parent IDs directly with native suffixed request IDs, joining
+  zero rows. The already source-bound hot auditor used a unique producer-owned
+  parent/internal relation. Reusing that relation recovered 16 unique requests
+  and 1,152 timed gate observations, all already warm; numerical, warmup,
+  isolation and release rules stayed unchanged. Preserve the failed auditor
+  and name its successor. Derive each runtime's namespace from its producer;
+  the historical hyphen rule is not a universal string heuristic.
+- **Inspect the failed predicate before changing a gate.** The shared error
+  combined an empty join with a false warmup flag. The first explanation blamed
+  warmup before checking the branches. Actual records disproved that account.
+  Use real serialized IDs in counterfactual tests, including ambiguous IDs,
+  prefix collisions and requests with no short-span exposure. A component
+  need not execute for every request merely because the full-model mechanism
+  covers the cohort.
+- **Rank hypotheses, then test one switch.** Here CPU copy time greatly
+  exceeded raw device-copy time, directing attention to waits and dispatch,
+  not bandwidth alone. Actual beta BF16-to-FP32 observations made a gate-cast
+  placement test relevant; they did not establish its benefit. R32 changes only
+  cast placement with common observations/checks, then compares A/B/A with
+  predeclared drift and gain screens. Keep source clues, observed costs,
+  causal experiments and final speed/quality/lifecycle acceptance separate.
+
+Replay the new ledger with the host-only
+`host_audits/verify_profile_id_learning.py --ledger HYPIC_PROFILE_ID_LEARNING_20261025.json`
+from the workstream. It checks historical artifact bindings and the actual A1
+ID/evidence replay without querying current devices. It is not a blind behavioral
+Skill evaluation, a fresh occupancy proof, or certification of all 29 Skills.

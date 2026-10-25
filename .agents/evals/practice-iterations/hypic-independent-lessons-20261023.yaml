@@ -50,3 +50,15 @@ forward_cases:
   - id: cold-hot-eligibility
     given: Forty requests return; twelve have same-step four-rank hot proof; rest cold or fallback.
     expected: Hot claim covers12 only; if contract requires40 hot the gate fails; do not shrink scope post hoc.
+  - id: cpu-export-exit-zero-without-hardware
+    given: Native collection completed; CPU export returns zero but hardware tables are missing.
+    expected: Preserve capture and failed analysis; inspect the installed frontend and reparse a verified copy, requiring nonempty per-rank tables before attribution.
+    reject: Recapture the model or claim kernel evidence from exit status alone.
+  - id: parent-native-request-namespace
+    given: Full hot audit joins16 parent/native requests; a new observer's exact string intersection is empty.
+    expected: Inspect producer identity and reuse a unique source-proven join; preserve the failed observer and unchanged numerical, warmup and resource gates.
+    reject: Infer missing execution or relax a warmup rule from a compound error without checking its predicates.
+  - id: cost-is-not-cause
+    given: CPU copy spans exceed hardware copy time; a suspected cast path is observed but A/B/A is incomplete.
+    expected: Rank bounded hypotheses and execute one-variable confirmation; keep component exposure, causal timing and final paper acceptance distinct.
+    reject: Call a source difference or an installed hook the cause of whole-service regression.

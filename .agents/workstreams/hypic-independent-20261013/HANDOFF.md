@@ -1,3 +1,15 @@
+# CURRENT R32 B1 VALID/RELEASED; A2 DRIFT CONTROL NEXT
+
+1739exit0, independent173evalid:16/16fourworkerhot,8actualNPUprivateoutput/state checks,426sources,251cleanphysicalsamples,exactCIDf5637ab3...removed/portsfree/final0-3empty. Unprofiled diagnosticmakespan116.800387260s vsA1 118.700323570s (~1.60% lower), not a cause/speed acceptance. Source-executed conversion sites60672to4608 acrosswarm+timed waves, not hardware-copy counts. Frozen5%gain and5%control-drift gates unchanged. NextfreshA2contract9679d177...,rawgate-cast-r32-a2-20261025, same426source and originalcastfalse. Terminalr32b audit thenr32 decision--definition. Alloldroots/failures preserved; no formal1024/fullquality/lifecycle acceptance;stop18:07:17UTC.
+
+RequestedSkilllearning adds actualofflineprofile/IDjoin lessons and3forwardcase specifications;173b evidence/source replay and29structurePASS,173c bundledentrypointmetadataPASS. No blindbehavior/29functional claim. Runtime426 unchanged.
+
+# CURRENT R32 B1 HOISTED-CAST TREATMENT RUNNING EXACT1739
+
+A1valid/released1733,16/16hot,118.700323570s control; original172cIDobserverfailure retained. Observercheckpoint62fce8e358f17038df42bdc941a62c2658f2c407published/liveverified. Freshdirectma admission1738at15:35:54UTC validatesunchanged426common/422Python,samestudy97414d5a...,source/model/image/input,A1auditSHA245cf59b...,physical0-3empty/noexternalbench/noownedcontroller/102ports/cache4.99GB/newroot.
+
+B1 exact1739started on originalma a6109; contractef032d4a...,raw/cache/cch/hypic-independent-20261013/gate-cast-r32-b1-20261025. Onlygate-cast placementtruevsA1false; commonobserver/warmup/finite/completion/fsync/graph/PDC unchanged. RuntimeandboundHOSTsources frozenwhilelive. Poll exacthandle/raw, neverrestart ontimeout/unknown. Terminal use r32b_gate_cast_audit.py --contract B1 --definition R32B_ID_JOIN_OBSERVER_20261025.json --live-release --output exclusiveexternalB1audit. Originalauditor1962 preserved; successoronlyfixesHTTPparent/nativeIDjoin, allwarm/numerical/physical/release gatesunchanged. Onlyvalid/releasedB1thenfreshA2; no cause/gainclaim beforeA/B/A. Stop18:07:17UTC/fullgoalunfinished.
+
 # CURRENT R32 A1 VALID/RELEASED, ORIGINAL ID-JOIN AUDIT FAILURE PRESERVED; B1 NEXT
 
 1725exit0, independent corrected observer1733valid:16measured+16privatewarm64responses,16/16fourworker48C1/16C2hot,8actual privateNPU exactoutput/state comparisons forlength8/39 across4ranks,426sources/260cleanphysical samples/exactCIDd46f4fd2...removed/8233free/final0-3empty. A1unprofiled16requestmakespan118.700323570s; onecontrol only, no cause/gainclaim. Fullauditexternalr32b-a1-independent-audit-r1-20261025.json SHA245cf59b...; curatedR32_A1_AUDIT_20261025.json.

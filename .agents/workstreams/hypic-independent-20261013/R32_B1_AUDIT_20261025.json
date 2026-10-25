@@ -1,0 +1,77 @@
+{
+  "schema": "hypic-r32-arm-evidence/v1",
+  "arm": "B1",
+  "controller": "exec-0000000000001739",
+  "independent_audit": "exec-000000000000173e",
+  "contract": "GATE_CAST_R32_B1_20261025_CONTRACT.json",
+  "contract_sha256": "ef032d4aa1f042bd9ea6fe4d0a345dccfd4bff7f1513dc52558b55790ae0b9f6",
+  "launch_checkpoint": "62fce8e358f17038df42bdc941a62c2658f2c407",
+  "audit": {
+    "bounded_gate_cast_arm_valid": true,
+    "diagnostic_makespan_seconds": 116.8003872600384,
+    "gate_cast": {
+      "actual_npu_private_shape_checks": 8,
+      "arm": "B1",
+      "dispatch_sites": 4608,
+      "hoisted": true,
+      "observations": 2304,
+      "response_internal_join": {
+        "cmpl-83eb23598440ae93": "cmpl-83eb23598440ae93-0-87b7b67d",
+        "cmpl-864d98a58b7bcc27": "cmpl-864d98a58b7bcc27-0-97daaf88",
+        "cmpl-895a8c1b5c36ee5e": "cmpl-895a8c1b5c36ee5e-0-83df0ba6",
+        "cmpl-89e6ebd0490e04f9": "cmpl-89e6ebd0490e04f9-0-a89d7621",
+        "cmpl-8b1fe5324f1dcb22": "cmpl-8b1fe5324f1dcb22-0-a7438bff",
+        "cmpl-8d4f57e946a01bf1": "cmpl-8d4f57e946a01bf1-0-8024182c",
+        "cmpl-8e37d6addd4b9a64": "cmpl-8e37d6addd4b9a64-0-baf3ab87",
+        "cmpl-9148c5e9d43f37b3": "cmpl-9148c5e9d43f37b3-0-bbb73ea4",
+        "cmpl-97ed9db755e2bc5a": "cmpl-97ed9db755e2bc5a-0-a2fda5e1",
+        "cmpl-9b6b3ceb7e97ba49": "cmpl-9b6b3ceb7e97ba49-0-b3f56394",
+        "cmpl-a20238b7a7ffb771": "cmpl-a20238b7a7ffb771-0-bb70e930",
+        "cmpl-a8b441de576891a4": "cmpl-a8b441de576891a4-0-b2b01b82",
+        "cmpl-a98225feddc733ff": "cmpl-a98225feddc733ff-0-81c867db",
+        "cmpl-b03ad2012961afd5": "cmpl-b03ad2012961afd5-0-a04e9f7c",
+        "cmpl-b124c58d1eda18b5": "cmpl-b124c58d1eda18b5-0-bf4365d5",
+        "cmpl-b6fc8186aff1eaa2": "cmpl-b6fc8186aff1eaa2-0-9d1a2f97"
+      },
+      "scope": "Source-executed Tensor.to dispatch sites, not hardware-copy count; wave association only",
+      "timed_observations": 1152
+    },
+    "source_bindings": 426,
+    "isolation_samples": 251,
+    "observer_definition": {
+      "analysis_unit": "SOURCE_PROVEN_NATIVE_REQUEST_ID_JOIN",
+      "original_audit_failure_preserved": true,
+      "path": "R32B_ID_JOIN_OBSERVER_20261025.json",
+      "sha256": "0fb1c2e4205f0ec7550ce1fd742838e19166c9287570be33ee6f4ec5b2a04212"
+    },
+    "raw_sha256": {
+      "events.jsonl": "623d464967bf469e2efd530853d67fd1fddcd60a701cdadbc736ba6d14ee6f17",
+      "launch.json": "1009b1e101c302ae3f3d4eaa6a591b51c1bd90fb801a65af383bf68c1abc3560",
+      "performance-unit.json": "ed622e44769fdc01832a098f464e4696f6d8a958969c299c5a3f30ced5b51e6e",
+      "release.json": "edd8c293b92cfd73a266cfe5c8bbb21ba12c1d3167b37b84e192cfa21de43dfc",
+      "result.json": "4535dc519aee8ed6c145efa2cd9f596b33ef8a25f7429583c6586723b5a94ea1",
+      "service-start.json": "47ed52c9ddc94ac37e29659a5f91f49289816b3e3d02c0e24e8d1ed29061c697",
+      "service.log": "16f66e0cd86d2541d9007054827c0f0eba2cd4cc6ebef5163fa0050d9a3725b3"
+    },
+    "worker_sha256": {
+      "compact-worker-57.jsonl": "65cb98fcc72bb5311cdb8a3323beb875b49b831196263d71a0f7865703509294",
+      "compact-worker-58.jsonl": "1d1e008404652d4e504384e295d62e454096cf52ab092f46fd6054d051fd0078",
+      "compact-worker-59.jsonl": "40b5e2f2aa20b2159a8accfa213bd243f6ee96dc66a4ed04a97bd632141be97b",
+      "compact-worker-60.jsonl": "1b7652196bec7d818c17e9bf0f13fc8f1d5b235bb61c2c2c48c727b3c7fe316e"
+    },
+    "live_release_verified": true,
+    "scope": "Unprofiled integrated16/c16/32768/64 gate-placement arm; private-shape/source/HTTP/hot/physical/release only. A/B/A decision, formal1024 repeats/fullquality/lifecycle remain separate.",
+    "hot": {
+      "covered": 16,
+      "denominator": 16,
+      "worker_pids": {
+        "0": 57,
+        "1": 58,
+        "2": 59,
+        "3": 60
+      }
+    },
+    "audit_file": "/cache/cch/hypic-independent-20261013/r32b-b1-independent-audit-r1-20261025.json",
+    "audit_sha256": "cf877491c3ee5993a9962deaccb1c9aa5dbc248abd79c2d97a5a237084d1d275"
+  }
+}

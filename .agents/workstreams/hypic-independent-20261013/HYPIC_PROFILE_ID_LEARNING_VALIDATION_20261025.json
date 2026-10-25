@@ -1,0 +1,66 @@
+{
+  "schema": "hypic-profile-id-learning-validation/v1",
+  "date": "2026-10-25",
+  "ledger": "HYPIC_PROFILE_ID_LEARNING_20261025.json",
+  "ledger_sha256": "1d853a8c98cb4e8f7aa0a5c03ab4cd2e4079d996f1702aa74d5591251418964e",
+  "operation": "exec-000000000000173b",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-B",
+        "host_audits/verify_profile_id_learning.py",
+        "--ledger",
+        "HYPIC_PROFILE_ID_LEARNING_20261025.json"
+      ],
+      "returncode": 0,
+      "stdout": "{\"artifact_and_A1_evidence_replay\": \"PASS\", \"current_device_query\": false, \"full_reproduction_accepted\": false, \"new_npu_work\": false, \"scope\": \"historical hashes,4rank hardware and actual source-bound A1 observation only; not independent blind Skill behavior or29functional acceptance\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "validate_independent_hypic_case.py",
+        "--case",
+        "PAPER_TO_ASCEND_INDEPENDENT_HYPIC_CASE_20261025_LESSONS_PIN.json",
+        "--document-only"
+      ],
+      "returncode": 0,
+      "stdout": "{\"case_document_bindings_verified\": true, \"mapped_skills\": [\"ascend-benchmark-evidence\", \"ascend-canary-implementation\", \"ascend-model-quality-evaluation\", \"chicaihong01-host-maintenance\", \"paper-to-ascend\", \"runtime-monkeypatch-delivery\"], \"evidence_files\": 10, \"raw_phase_replay_verified\": false, \"recorded_release_is_historical\": true, \"scope\": \"one bounded full40 evidence chain replay only; no fresh occupancy,matchedspeedup,quality,lifecycle or29functional acceptance\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "bash",
+        "scripts/validate-mst.sh"
+      ],
+      "returncode": 0,
+      "stdout": "PASS: Maintainer Skill Tree structure is valid (29 skills)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "relative_links": 3,
+  "active_B1_source_bindings_unchanged": 426,
+  "skill_entrypoint_changed": false,
+  "scope": "reference/evidence replay only; no blind Skill behavior or newNPUwork",
+  "entrypoint_validation": {
+    "operation": "exec-000000000000173c",
+    "exit": 0,
+    "stdout": "Skill is valid!\n",
+    "scope": "bundled skill-creator quick_validate, existing entrypoint metadata only"
+  },
+  "full_reproduction_accepted": false,
+  "blind_skill_behavior_verified": false,
+  "all29_functional_verified": false
+}

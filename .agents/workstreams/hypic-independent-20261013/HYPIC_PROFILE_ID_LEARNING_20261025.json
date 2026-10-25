@@ -1,0 +1,30 @@
+{
+  "A1": {
+    "path": "/cache/cch/hypic-independent-20261013/r32b-a1-independent-audit-r1-20261025.json",
+    "sha256": "245cf59bc7d66c34657682cd63a53df20f88850a6aeeed91b17cd2f6573f961f"
+  },
+  "current_runtime_scope": "B1 exact1739running; no B/A/A causal result or finalquality/lifecycle acceptance yet.",
+  "evidence_checkpoint": "62fce8e358f17038df42bdc941a62c2658f2c407",
+  "evidence_sha256": {
+    "R30_FIRST_PAIR_DECISION_20261025.json": "037d894dd8a47033da9cb84a90cc34f17356f2040ec9f1cb1c0c207bc171cdbf",
+    "R31_G3_COLLECTION_AUDIT_20261025.json": "35937cee90d17cb296b08ead472aaf19f2dfd341631ba7e9f3f96c8eb3e1b369",
+    "R31_OFFLINE_EXPORT_STATE_20261025.json": "7575716e4f5eca1c1b9139d612181be54639a4c31f91d2c43f84a318fbc5e9be",
+    "R32B_ID_JOIN_OBSERVER_20261025.json": "0fb1c2e4205f0ec7550ce1fd742838e19166c9287570be33ee6f4ec5b2a04212",
+    "R32_A1_AUDIT_20261025.json": "1c2128f8dc9c17da1434e8a04655bd6e03f4d64bc5262fb8b7d145677b33bc8c",
+    "R32_A1_ORIGINAL_AUDIT_FAILURE_20261025.json": "0e126528f41a48776562f6948b2d5b5516def52dedb7e29774e2dddad5b58d20"
+  },
+  "full_reproduction_accepted": false,
+  "hardware": {
+    "path": "/cache/cch/hypic-independent-20261013/r31-g3-offline-analysis-r1-20261025/four-rank-hardware-cost-r6.json",
+    "sha256": "3fdd8b5d1e07ec89fd9a880c964c019655a0c1a4a756569f65c78e6462fd951c"
+  },
+  "maintainer_documents_sha256": {
+    ".agents/evals/practice-iterations/hypic-independent-lessons-20261023.yaml": "319e877699e0e2a8f1a3c88eb0c782820f2230dae566f606158b3bdd0132ff75",
+    ".agents/skills/paper-to-ascend/references/hypic-independent-port-lessons.md": "77d29378fbfe39169a0b0146843caa4f8422ef00765c5ca38a2b93a00255f805"
+  },
+  "observer_definition": "R32B_ID_JOIN_OBSERVER_20261025.json",
+  "schema": "hypic-profile-id-learning/v1",
+  "scope": "Maintainer reference/forward scenarios plus actual immutable report/hardware/A1 source replay. No blind behavioral test or29functional certification.",
+  "state": "HISTORICAL_ARTIFACT_AND_OBSERVER_LEARNING_NOT_FULL_FUNCTIONAL_ACCEPTANCE",
+  "verifier_source_sha256": "4f05630bc2740281f02ee3f3e418ff1c968493626ccdbb8c81c109c17e209747"
+}
