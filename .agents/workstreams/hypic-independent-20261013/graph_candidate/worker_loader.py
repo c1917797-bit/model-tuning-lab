@@ -27,6 +27,21 @@ _stop = None
 _scheduler_stop = None
 
 
+
+def _io_budget_enabled(manifest):
+    value=os.environ.get("INDEPENDENT_EVIDENCE_IO_BUDGET","0")
+    if value not in("0","1"):
+        raise ValueError("explicit evidence IO observer environment required")
+    setting=manifest.get("evidence_io_budget")
+    if setting is None:
+        if value!="0":raise ValueError("enabled evidence IO observer needs bound manifest")
+        return False
+    if(setting!={"enabled":True,"profile":"owned-evidence-io-budget-v1"}or value!="1"
+       or "independent_evidence_io_budget.py"not in manifest["source_sha256"]):
+        raise ValueError("evidence IO observer manifest/environment mismatch")
+    return True
+
+
 def _uninstall_owned():
     global _finder, _stop, _scheduler_stop
     if _stop is not None:
@@ -143,6 +158,9 @@ def enable():
     config = resolve_catalog_config(config)
     policy = _take_quality_policy(config)
     limits = evidence_limits(config.pop("evidence_limits", None))
+    io_enabled = _io_budget_enabled(manifest)
+    if io_enabled and policy is not None:
+        raise ValueError("IO diagnostic requires the full original evidence profile")
     scheduler_enabled = config.pop("scheduler_admission_enabled", False)
     if type(scheduler_enabled) is not bool:
         raise ValueError("explicit scheduler admission boolean required")
@@ -197,7 +215,8 @@ def enable():
             fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
             lock = threading.Lock()
             count = size = 0
-            def emit(event):
+            fsync = os.fsync
+            def raw_emit(event):
                 nonlocal count, size
                 if policy is not None:
                     event = policy.select(event)
@@ -214,10 +233,24 @@ def enable():
                         if written <= 0:
                             raise OSError("short graph evidence write")
                         view = view[written:]
-                    os.fsync(fd)
+                    fsync(fd)
                     count += 1
                     size += len(data)
             try:
+                emit = raw_emit
+                if io_enabled:
+                    import independent_evidence_io_budget as io_module
+                    from .prefill_bridge import verify_support
+                    source = verify_support(io_module, manifest["source_sha256"]["independent_evidence_io_budget.py"])
+                    for name in ("selected_step", "interval_union_ns", "make_budget"):
+                        verify_raw_function(io_module, source, getattr(io_module, name), name=name)
+                    for name, value in vars(io_module.EvidenceIOBudget).items():
+                        if inspect.isfunction(value):
+                            verify_raw_function(io_module, source, value, name=name,
+                                qualname="EvidenceIOBudget." + name)
+                    budget = io_module.make_budget(fd, os.fsync, lambda: (count, size))
+                    fsync = budget.fsync
+                    emit = budget.wrap(raw_emit)
                 emit.source_manifest_sha256 = manifest_hash
                 emit.stage_capture_root = str(raw)
                 if policy is not None:

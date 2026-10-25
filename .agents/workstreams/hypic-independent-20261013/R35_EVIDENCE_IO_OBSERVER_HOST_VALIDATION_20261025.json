@@ -1,0 +1,39 @@
+{
+  "schema": "hypic-r35-io-host-component-validation/v1",
+  "state": "HOST_COMPONENT_ONLY_NOT_IMAGE_OR_DEVICE_ACCEPTED",
+  "source_checkpoint_parent": "719557121d87dc7b4ad6184b76e695aa76c32650",
+  "source_sha256": {
+    "graph_candidate/worker_loader.py": "d16e646be7a2145880c92fab1d40eadb9623a3ddc3d519a26044b40db0a056c5",
+    "host_audits/test_r35_evidence_io_budget.py": "7759e9b3ebac87978fac7dd3ca0ed2c48959c359a6a748915a74687842f38221",
+    "independent_evidence_io_budget.py": "ecc3e7b84f01380d6e5cab0f4cf0644f43f7bba8c3e2f48a1450cc1c02221b47"
+  },
+  "original_loader_sha256": "eb3c6f79b4a49287a274ca25e28cc3e363fde3f4b8de099c7a641d04ce481ade",
+  "observer_tests": {
+    "operation": "exec-00000000000018c8",
+    "passed": 15,
+    "scope": "Actual original/new raw-writer body AST and byte equality; enabled production-body write/fsync accounting; bounds/filter/failure/FD/recursion/seal/context/source-tamper controls. No real NPU."
+  },
+  "existing_loader_regressions": {
+    "operation": "exec-00000000000018ce",
+    "passed": 14,
+    "scope": "Existing CPU native-importer/loader controls, not fourworker NPU activation."
+  },
+  "earlier_core_tests": {
+    "operation": "exec-00000000000018c7",
+    "passed": 10
+  },
+  "default_off": true,
+  "original_per_event_fsync_preserved": true,
+  "observation_scope": "Selected model context through compact_model_rows_completed; outside/post-context native progress excluded. One additional unmeasured budget row per sealed step is explicit diagnostic overhead.",
+  "production_changes": [
+    "Own graph_candidate/worker_loader.py optional manifest/env-bound observer wiring",
+    "New independent_evidence_io_budget.py"
+  ],
+  "algorithm_operator_runner_scheduler_source_changed": false,
+  "old_source_replay": "R34 raw/contracts remain immutable; replay their old binding from frozen71955712 before loader diagnostic source change. Do not rewrite old hashes to match new code.",
+  "next": "Freeze new R35 manifest/contract/controller with source identities, then pinned official image helper/import/writer preflight and actual fourcard bounded observation. No new NPU started.",
+  "actual_image_preflight_passed": false,
+  "new_device_started": false,
+  "speed_accepted": false,
+  "full_goal_complete": false
+}

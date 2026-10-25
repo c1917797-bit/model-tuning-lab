@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R34_VALID_THREE_ARM_SCREEN_NEGATIVE_NEXT_IO_BUDGET",
+  "execution_state": "R35_IO_OBSERVER_HOST15_PLUS_LOADER14PASS_PACKAGE_PENDING",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -1200,10 +1200,21 @@
     "full_goal_complete": false
   },
   "r35_evidence_io_budget": {
-    "state": "PLANNED_NOT_IMPLEMENTED_NOT_DEVICE_ACCEPTED",
+    "state": "HOST_COMPONENT_ONLY_NOT_IMAGE_OR_DEVICE_ACCEPTED",
     "plan": "R35_EVIDENCE_IO_BUDGET_PLAN_20261025.json",
-    "next": "Implement/test default-off actual emitter/fsync cost observer, then new source-bound bounded integration only. No durability or algorithm treatment yet.",
+    "next": "Freeze new R35 manifest/contract/controller with source identities, then pinned official image helper/import/writer preflight and actual fourcard bounded observation. No new NPU started.",
     "baseline_treatment": "Retain original prefix output path; rejected R34 terminal-only flag disabled.",
-    "full_goal_complete": false
+    "full_goal_complete": false,
+    "host_validation": "R35_EVIDENCE_IO_OBSERVER_HOST_VALIDATION_20261025.json",
+    "observer_tests": 15,
+    "loader_regressions": 14,
+    "default_off": true,
+    "old_runtime_checkpoint": "719557121d87dc7b4ad6184b76e695aa76c32650",
+    "new_runtime_source_sha256": {
+      "graph_candidate/worker_loader.py": "d16e646be7a2145880c92fab1d40eadb9623a3ddc3d519a26044b40db0a056c5",
+      "host_audits/test_r35_evidence_io_budget.py": "7759e9b3ebac87978fac7dd3ca0ed2c48959c359a6a748915a74687842f38221",
+      "independent_evidence_io_budget.py": "ecc3e7b84f01380d6e5cab0f4cf0644f43f7bba8c3e2f48a1450cc1c02221b47"
+    },
+    "live_loaded": false
   }
 }
