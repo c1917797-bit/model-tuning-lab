@@ -1,3 +1,7 @@
+# CURRENT R30 G3 GRAPH FULL40 RUNNING EXACT1693
+
+Launchcheckpointcf2fd501; freshdirectma admission1692 at11:50:56UTC verified425runtime/commonbindings, model/image/input/R29/observer, realphysical0-3empty,102portsbindable, newroot. Originalunusedcontract278fc266; raw /cache/cch/hypic-independent-20261013/formal-graph-r30-g3-r1-20261025. Track same ma peer a6109 and exact1693; terminal/handleunclear neverrestart. Terminal preserve original frozen audit failure; use explicit r30b corrected observer definition dc048790, independent40hotfourrank48/16/source/finite/graph/physical/release audit. Do not rerun validG1. Sameprotocolfirstpair only; no causality from wholevariant/crossversiondiff. Deadline18:07:17UTC/fullgoalunchanged.
+
 # CURRENT 2026-10-25 R30 G1 VALID/RELEASED, G3 NEXT
 
 G1 exec1672 exit0; independent corrected observer1688 validates40responses/425sources/267cleanphysical0-3samples and exactownedCID removal/8233free/final0-3empty. TPOT94.995476ms;TTFTP95 89529.074510ms. Nativebaseline only, no matchedG3 result yet. Original frozen audit1685 failed on INFO filename vs DEBUG relative-path schema; failure and b60auditor preserved in R30_G1_GRAPH_FORMAL_AUDIT_20261025.json. Nine actual official-formatter CPU controls1684 pass. R30_INFO_FORMAT_AUDIT_20261025.json binds successor r30b b464b2d3, original contracts/raw and retained numerical/transport/hot/source/physical/release rules. No runtime changes or NPU rerun. Use r30b --contract ... --definition R30_INFO_FORMAT_AUDIT_20261025.json --live-release for explicit corrected audit.

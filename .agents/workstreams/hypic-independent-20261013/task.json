@@ -11,7 +11,7 @@
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
   "execution_state": "R30_G1_GRAPH_FORMAL_RUNNING_EXACT1672",
   "r30_first_pair": {
-    "state": "G1_VALID_AUDITED_RELEASED_G3_NOT_STARTED",
+    "state": "G1_VALID_G3_RUNNING_NOT_ACCEPTED",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
     "readiness": "R30_GRAPH_FIRST_PAIR_HOST_READINESS_20261025.json",
     "contracts": {
@@ -42,7 +42,20 @@
       "first pair decision"
     ],
     "scope": "One new actual matched graph first pair, no old eager timing reuse. Full12matrix/fullpairedquality/lifecycle/29functional remain.",
-    "active_controller": null,
+    "active_controller": {
+      "state": "RUNNING_NOT_ACCEPTED",
+      "operation": "exec-0000000000001693",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "connector": "awmcp",
+      "contract": "FORMAL_GRAPH_R30_G3_R1_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/formal-graph-r30-g3-r1-20261025",
+      "checkpoint": "cf2fd5014b1ef431394a26b9c418a1751c839763",
+      "admission_operation": "exec-0000000000001692",
+      "observed_running_utc": "2026-10-25T11:51:17Z",
+      "auditor": "host_audits/r30b_graph_formal_audit.py",
+      "observer_definition": "R30_INFO_FORMAT_AUDIT_20261025.json",
+      "observer_definition_sha256": "dc048790a82faad5bc19a2ba22dd7cde920c3d035cd279a39897dc7ab23c0b12"
+    },
     "last_completed_controller": {
       "state": "RUNNING_NOT_ACCEPTED",
       "operation": "exec-0000000000001672",
@@ -298,7 +311,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Fresh direct ma admission then original unused R30 G3 full40 contract278fc266, same425bindings and graph/INFO/1024/c16/input ruler; explicit corrected HOST observer definition3067b527. No changed-device restart. One matched first pair does not establish repeated gain or wholepaper success.",
+  "next_action": "Track exact ma exec1693/raw R30G3. Terminal original frozen audit then explicit r30b --contract FORMAL_GRAPH_R30_G3_R1_20261025_CONTRACT.json --definition R30_INFO_FORMAT_AUDIT_20261025.json --live-release; validate40fourrankhot/source/numeric/physical/release. Compare to audited R30G1 only. If stillnegative, cost-model selected one-variable ablation; no attribution from code differences or cross-version eager vs graph timings.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -354,7 +367,20 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": null,
+  "active_attempt": {
+    "state": "RUNNING_NOT_ACCEPTED",
+    "operation": "exec-0000000000001693",
+    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "connector": "awmcp",
+    "contract": "FORMAL_GRAPH_R30_G3_R1_20261025_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/formal-graph-r30-g3-r1-20261025",
+    "checkpoint": "cf2fd5014b1ef431394a26b9c418a1751c839763",
+    "admission_operation": "exec-0000000000001692",
+    "observed_running_utc": "2026-10-25T11:51:17Z",
+    "auditor": "host_audits/r30b_graph_formal_audit.py",
+    "observer_definition": "R30_INFO_FORMAT_AUDIT_20261025.json",
+    "observer_definition_sha256": "dc048790a82faad5bc19a2ba22dd7cde920c3d035cd279a39897dc7ab23c0b12"
+  },
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
@@ -666,13 +692,28 @@
     ],
     "start_utc": "2026-10-25T06:07:17Z",
     "absolute_stop_utc": "2026-10-25T18:07:17Z",
-    "state": "R30_G1_VALID_RELEASED_G3_NEXT",
+    "state": "R30_G3_GRAPH_FORMAL_RUNNING_EXACT1693",
     "plan": "R24_R2_RENEWAL_PLAN_20261025.json",
     "contracts": [
       "C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json",
       "C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json"
     ],
-    "active_controller": null,
+    "active_controller": {
+      "state": "RUNNING_NOT_ACCEPTED",
+      "operation": "exec-0000000000001693",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "connector": "awmcp",
+      "contract": "FORMAL_GRAPH_R30_G3_R1_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/formal-graph-r30-g3-r1-20261025",
+      "checkpoint": "cf2fd5014b1ef431394a26b9c418a1751c839763",
+      "admission_operation": "exec-0000000000001692",
+      "observed_running_utc": "2026-10-25T11:51:17Z",
+      "auditor": "host_audits/r30b_graph_formal_audit.py",
+      "observer_definition": "R30_INFO_FORMAT_AUDIT_20261025.json",
+      "observer_definition_sha256": "dc048790a82faad5bc19a2ba22dd7cde920c3d035cd279a39897dc7ab23c0b12",
+      "operation_id": "exec-0000000000001693",
+      "arm": "R30_G3_GRAPH_FORMAL"
+    },
     "last_hypic_graph_controller": {
       "operation_id": "exec-000000000000160b",
       "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
@@ -712,7 +753,7 @@
       "observed_running_utc": "2026-10-25T07:37:26Z",
       "rule": "Track exact original peer and handle; timeout/missing requires raw and actual process inspection, never restart."
     },
-    "resource_lease": "No live owned stage. G1 exec1672 completed40; independent corrected observer1688 verifies425sources,267cleanisolation and exactlive release. Original format failure1685 preserved. G3 next freshadmission.",
+    "resource_lease": "Exact owned R30G3 exec1693, cf2fd501 launchcheckpoint. Track original ma/handle/raw; no restart while running/unclear. Admission1692 physical0-3empty/102portsbindable/425source/manifest/model/image/input/observer unchanged. Deadline18:07:17UTC.",
     "scope": "Same full independent27B/physical0-3/TP4 C1/C2 three-stage goal; C3/dualTP2 excluded; original successful code not reused",
     "prior_failure": "R24_OFF_R1_ADMISSION_FAILURE_20261023.json",
     "prior_followup": "R24_WAIT_FOLLOWUP_TERMINAL_20261023.json remains immutable history",

@@ -1,0 +1,55 @@
+{
+  "admission_valid": true,
+  "group": "R30_G3_INDEPENDENT_HYPIC_GRAPH_FORMAL",
+  "utc": "2026-10-25T11:50:56.059337+00:00",
+  "head": "cf2fd5014b1ef431394a26b9c418a1751c839763",
+  "prerequisite": {
+    "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+    "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43",
+    "python_sources": 421,
+    "scope": "same runtime Python and bounded graph/numerical prerequisites; not formal quality"
+  },
+  "source_bindings": 425,
+  "study_source_map_sha256": "8a69978bde847de5f58d474c8442004672c154c242fe2931c0b53f4a99b1b168",
+  "bound_source_bytes_unchanged": true,
+  "physical0_3": [],
+  "foreign_benchmark_tasks": [],
+  "owned_controllers": [],
+  "ports_bindable": 102,
+  "cache_available_bytes": 9223839744,
+  "new_raw_root": "/cache/cch/hypic-independent-20261013/formal-graph-r30-g3-r1-20261025",
+  "observer_definition": {
+    "definition": "R30_INFO_FORMAT_AUDIT_20261025.json",
+    "definition_sha256": "dc048790a82faad5bc19a2ba22dd7cde920c3d035cd279a39897dc7ab23c0b12",
+    "source_sha256": {
+      "host_audits/r30b_graph_formal_audit.py": "b464b2d3d20341d5c9f735b78ad6fe1dafc42a3c7963cc479954934faeaa327b",
+      "host_audits/r30_graph_formal_audit.py": "b60c8c8138a4ad39528e0a9a5a5a492fe5a1fee80b57fb9d5178d74515b53398",
+      "host_audits/r26_group_performance.py": "72378fc059526b3b8dcd332280746bd210323b59f41ac2dd23742444960353c2",
+      "host_audits/r27_graph_canary_audit.py": "ad9b0b414c81c76f295ddd00228ce2ad64ff24fd10734f6eaf78ef0b9136df1c"
+    },
+    "change": "Only official INFO record.filename vs DEBUG relpath; original numerical/transport/hot/source/release criteria retained",
+    "old_frozen_auditor_preserved": true
+  },
+  "prior_G1_valid": true,
+  "device_run": false,
+  "operation": "exec-0000000000001692",
+  "no_device_precheck_failure": {
+    "operation": "exec-0000000000001691",
+    "reason": "G3 sources are cache_diagnostic map, baseline-only key absent; read-only check fixed before any allocation",
+    "root_created": false
+  },
+  "launch": {
+    "state": "RUNNING_NOT_ACCEPTED",
+    "operation": "exec-0000000000001693",
+    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "connector": "awmcp",
+    "contract": "FORMAL_GRAPH_R30_G3_R1_20261025_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/formal-graph-r30-g3-r1-20261025",
+    "checkpoint": "cf2fd5014b1ef431394a26b9c418a1751c839763",
+    "admission_operation": "exec-0000000000001692",
+    "observed_running_utc": "2026-10-25T11:51:17Z",
+    "auditor": "host_audits/r30b_graph_formal_audit.py",
+    "observer_definition": "R30_INFO_FORMAT_AUDIT_20261025.json",
+    "observer_definition_sha256": "dc048790a82faad5bc19a2ba22dd7cde920c3d035cd279a39897dc7ab23c0b12"
+  }
+}
