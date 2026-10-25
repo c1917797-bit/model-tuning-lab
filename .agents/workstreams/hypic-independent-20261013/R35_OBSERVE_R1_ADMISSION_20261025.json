@@ -1,0 +1,59 @@
+{
+  "schema": "hypic-r35-admission-summary/v1",
+  "operation": "exec-00000000000018e1",
+  "utc": "2026-10-25T20:47:56.544603+00:00",
+  "launch_checkpoint": "42229bcce554dcdf9b3bc748ae48c0dfb5c33052",
+  "published_live_verified": true,
+  "source_check": {
+    "configuration_valid": true,
+    "device_run": false,
+    "controller_sha256": "7c13859a55c2f339ab7838f43df08d14f74ded0d8749151c8a195267d8e9b8e3",
+    "graph_runtime": {
+      "candidate_enabled": true,
+      "capture_sizes": [
+        1,
+        4,
+        8,
+        16,
+        24,
+        32
+      ],
+      "compilation_mode": 3,
+      "cudagraph_mode": "FULL_DECODE_ONLY",
+      "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+      "official_debug_logging": false,
+      "profile": "selective-prefill-native-decode-v1"
+    },
+    "active_manifest_sha256": "144739b5f34f44dc6f2b277fd510819a77f47ddda65bb3a9583ca7d3c659f0ae",
+    "source_bindings": 441,
+    "prerequisite": {
+      "report": "R34_THREE_ARM_DECISION_20261025.json",
+      "sha256": "60788bcfbe5f1a4ea5e2f5627624dc5e103fe06fe2b3e097388bab8f70c201e4",
+      "python_sources": 430,
+      "runtime_additions": [
+        "evidence_io_r35/__init__.py",
+        "evidence_io_r35/patch.py",
+        "evidence_io_r35/sitecustomize.py",
+        "independent_evidence_io_budget.py"
+      ],
+      "changed_own_loader": [
+        "graph_candidate/worker_loader.py"
+      ],
+      "scope": "R34 valid numerical/hot control, unchanged algorithm Python and original emitter/fsync; only bounded IO observer wiring changed. Not formal quality/speed."
+    },
+    "arm": "A1"
+  },
+  "physical0_3_processes": [],
+  "physical0_3_foreign": [],
+  "ports_free": 102,
+  "cache_available_bytes": 11089956864,
+  "new_root_absent": true,
+  "owned_container_absent": true,
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "model_config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+  "model_index_sha256": "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b",
+  "input_sha256": "50f528fa8eb439c56219b0161b16bf12fb2a8fd80effab87d89d725a4cc4c72f",
+  "remaining_seconds": 35311.66995739937,
+  "controller": "exec-00000000000018e2",
+  "full_goal_complete": false
+}

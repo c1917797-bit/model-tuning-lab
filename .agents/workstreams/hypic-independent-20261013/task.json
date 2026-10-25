@@ -496,7 +496,19 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": null,
+  "active_attempt": {
+    "state": "RUNNING",
+    "operation": "exec-00000000000018e2",
+    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "connector": "awmcp",
+    "contract": "EVIDENCE_IO_R35_OBSERVE_R1_20261025_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/evidence-io-r35-observe-r1-20261025",
+    "launch_checkpoint": "42229bcce554dcdf9b3bc748ae48c0dfb5c33052",
+    "admission_operation": "exec-00000000000018e1",
+    "absolute_stop_utc": "2026-10-26T06:36:27Z",
+    "auditor": "host_audits/r35_evidence_io_audit.py",
+    "rule": "Poll exact original ma/operation/raw. Unknown/running never restart. Runtime441 and bound HOST sources frozen. Terminal independent IO accounting/numerical/hot/source/isolation/exact live release required; diagnostic timing never service gain."
+  },
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
@@ -1200,7 +1212,7 @@
     "full_goal_complete": false
   },
   "r35_evidence_io_budget": {
-    "state": "STATIC_AND_PINNED_IMAGE_CPU_READY_DEVICE_BUDGET_PENDING",
+    "state": "BOUNDED_DEVICE_IO_DIAGNOSTIC_RUNNING_NOT_ACCEPTED",
     "plan": "R35_EVIDENCE_IO_BUDGET_PLAN_20261025.json",
     "next": "Fresh physical source/model/image/input/port/new-root admission, then one R35 bounded real IO budget observation with original writes/fsync and all warm/numerical/hot/isolation/release gates.",
     "baseline_treatment": "Retain original prefix output path; rejected R34 terminal-only flag disabled.",
@@ -1223,6 +1235,7 @@
     "auditor_cpu_cases": 8,
     "static_image_validation": "R35_STATIC_IMAGE_READINESS_20261025.json",
     "contract": "EVIDENCE_IO_R35_OBSERVE_R1_20261025_CONTRACT.json",
-    "code_checkpoint": "dd6d0a1dcdb9c93d21c274e4a4e6440167a278ef"
+    "code_checkpoint": "dd6d0a1dcdb9c93d21c274e4a4e6440167a278ef",
+    "active_controller": "exec-00000000000018e2"
   }
 }
