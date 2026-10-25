@@ -1,0 +1,12 @@
+{
+  "schema": "hypic-r34-host-authority-lifecycle-validation/v1",
+  "operation": "exec-0000000000001792",
+  "tests_passed": 5,
+  "controller_sha256": "f9fae3aa18c0482b457cbf2947c3c434609b89f264cdbacc6aaa7045e16d5ecd",
+  "new_device_started": false,
+  "new_authority_granted": false,
+  "historical_identity_vs_current_authority_separated": true,
+  "prior_lifecycle_operation": "exec-0000000000001770",
+  "scope": "Synthetic in-memory future deadline tests only. Historical runtime source identity separated from current human execution grant; current18:07:17UTC authority is unchanged. No R34 contract/device start or timing acceptance.",
+  "full_goal_complete": false
+}

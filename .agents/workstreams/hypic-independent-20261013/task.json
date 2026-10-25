@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R33_HOST_LIFECYCLE_FAILED_RELEASED_R34_HOST4PASS_WINDOW_INSUFFICIENT",
+  "execution_state": "R33_HOST_LIFECYCLE_FAILED_RELEASED_R34_HOST5PASS_WINDOW_INSUFFICIENT",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -1111,10 +1111,12 @@
     "auditor": "host_audits/r34_prefix_terminal_audit.py",
     "helper": "host_audits/r34_live_native_log.py",
     "tests": "host_audits/test_r34_live_native_log.py",
-    "test_operation": "exec-0000000000001770",
-    "passed": 4,
+    "test_operation": "exec-0000000000001792",
+    "passed": 5,
     "runtime_source_bindings_432_unchanged": true,
     "readiness": "R34_HOST_ARTIFACT_LIFECYCLE_READINESS_20261025.json",
-    "scope": "Correct actual artifact producer/phase only; full A/B/A scope and warm/numerical gates preserved. No new roots/contracts/NPU runs; no speed acceptance."
+    "scope": "Correct actual artifact producer/phase only; full A/B/A scope and warm/numerical gates preserved. No new roots/contracts/NPU runs; no speed acceptance.",
+    "historical_anchor_does_not_pin_current_authority": true,
+    "current_authority_not_extended": true
   }
 }

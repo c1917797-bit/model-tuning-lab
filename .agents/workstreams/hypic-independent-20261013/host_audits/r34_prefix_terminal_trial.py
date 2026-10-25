@@ -23,7 +23,7 @@ def prerequisite(c,root):
     old=json.loads(anchor.read_bytes());prior=prior_owner.prerequisite(old,root)
     for key in("image","model","model_config_sha256","physical_npus","tp","port","hccl_ports",
                "cpu_set","enable_thinking","formal_token_artifact","enable_prefix_caching",
-               "enforce_eager","graph_runtime","absolute_stop_utc"):
+               "enforce_eager","graph_runtime"):
         if c.get(key)!=old.get(key):raise ValueError("R33 changed retained identity: "+key)
     old_mf=json.loads((root/old["successor_manifest"]).read_bytes())
     new_mf=json.loads((root/c["successor_manifest"]).read_bytes())

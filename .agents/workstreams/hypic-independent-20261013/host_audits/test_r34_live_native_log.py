@@ -55,3 +55,13 @@ def test_actual_control_unit_without_terminal_log(monkeypatch,tmp_path):
     assert not(tmp_path/"service.log").exists()and(tmp_path/"r34-warm-native.log").exists()
     names=[x["event"]for x in records]
     assert names.index("r33-warm-proof")<names.index("r33-begin")<names.index("r33-response")
+
+def test_historical_source_anchor_is_not_a_current_execution_grant(monkeypatch):
+    # Synthetic in-memory deadline only: no contract write, admission or device run.
+    from host_audits import r34_prefix_terminal_trial as owner
+    c=json.loads((W/"PREFIX_TERMINAL_R33_B1_20261025_CONTRACT.json").read_text())
+    c["absolute_stop_utc"]="2040-01-01T00:00:00Z"
+    result=owner.prerequisite(c,W)
+    assert result["python_sources"]==426
+    # Actual run/check_contract still validates its own frozen execution deadline;
+    # agent admission must tie that new contract to a current human grant.
