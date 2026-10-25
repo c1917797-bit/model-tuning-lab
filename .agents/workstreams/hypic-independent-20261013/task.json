@@ -9,9 +9,9 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R30_GRAPH_FIRST_PAIR_HOST_READY_FRESH_ADMISSION_NEXT",
+  "execution_state": "R30_G1_GRAPH_FORMAL_RUNNING_EXACT1672",
   "r30_first_pair": {
-    "state": "HOST_READY_NOT_DEVICE_STARTED",
+    "state": "G1_VALID_AUDITED_RELEASED_G3_NOT_STARTED",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
     "readiness": "R30_GRAPH_FIRST_PAIR_HOST_READINESS_20261025.json",
     "contracts": {
@@ -42,7 +42,39 @@
       "first pair decision"
     ],
     "scope": "One new actual matched graph first pair, no old eager timing reuse. Full12matrix/fullpairedquality/lifecycle/29functional remain.",
-    "active_controller": null
+    "active_controller": null,
+    "last_completed_controller": {
+      "state": "RUNNING_NOT_ACCEPTED",
+      "operation": "exec-0000000000001672",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "connector": "awmcp",
+      "contract": "FORMAL_GRAPH_R30_G1_R1_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/formal-graph-r30-g1-r1-20261025",
+      "checkpoint": "90af117cc08c57e3c2d0ecd6d9c6643bf19b2613",
+      "admission_operation": "exec-000000000000166f",
+      "observed_running_utc": "2026-10-25T11:22:58Z",
+      "terminal_state": "VALID_CORRECTED_OBSERVER_AUDITED_RELEASED",
+      "independent_audit": "exec-0000000000001688",
+      "evidence": "R30_G1_GRAPH_FORMAL_AUDIT_20261025.json",
+      "original_observer_failure": "exec-0000000000001685"
+    },
+    "G1_evidence": "R30_G1_GRAPH_FORMAL_AUDIT_20261025.json",
+    "G1_timing": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 94.99547617189137,
+      "ttft_p95_ms": 89529.07450997736,
+      "tpot_p95_ms": 118.7075061914129
+    },
+    "observer_format_correction": {
+      "definition": "R30_INFO_FORMAT_AUDIT_20261025.json",
+      "sha256": "dc048790a82faad5bc19a2ba22dd7cde920c3d035cd279a39897dc7ab23c0b12",
+      "auditor": "host_audits/r30b_graph_formal_audit.py",
+      "cpu_tests": 9,
+      "operation": "exec-0000000000001684",
+      "old_failure_preserved": true,
+      "scope": "HOST INFO producer format only; original runtime/contracts/numerical/transport/hot/isolation/release unchanged"
+    }
   },
   "r29_warmup": {
     "state": "BOUNDED_NPU_ACCEPTED_NOT_SPEED_OR_FULL_QUALITY",
@@ -266,7 +298,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Preserve R27 G3 graph startup failure and1628 independent release/source proof. Repair only source-owned compiler warmup routing: old all-NONE skip delayed first AOT compile until capture, which called forbidden synchronize. New contract/root after narrow sequence regression. Keep C1/C2 math/guards and separate excluded optimization prototypes. Fixed stop18:07:17UTC; wholegoal incomplete.",
+  "next_action": "Fresh direct ma admission then original unused R30 G3 full40 contract278fc266, same425bindings and graph/INFO/1024/c16/input ruler; explicit corrected HOST observer definition3067b527. No changed-device restart. One matched first pair does not establish repeated gain or wholepaper success.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -322,19 +354,7 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": {
-    "state": "TERMINAL_BOUNDED_VALID_AUDITED_RELEASED",
-    "operation": "exec-000000000000164a",
-    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
-    "connector": "awmcp",
-    "contract": "GRAPH_R29_G3_CANARY_R1_20261025_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/graph-r29-g3-warmup-r1-20261025",
-    "checkpoint": "00a486ee052484c04884f6af7ed49065980fe020",
-    "admission_operation": "exec-0000000000001649",
-    "observed_running_utc": "2026-10-25T10:26:49Z",
-    "independent_audit": "exec-0000000000001653",
-    "terminal_report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json"
-  },
+  "active_attempt": null,
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
@@ -646,15 +666,37 @@
     ],
     "start_utc": "2026-10-25T06:07:17Z",
     "absolute_stop_utc": "2026-10-25T18:07:17Z",
-    "state": "R30_GRAPH_FIRST_PAIR_HOST_READY_FRESH_ADMISSION_NEXT",
+    "state": "R30_G1_VALID_RELEASED_G3_NEXT",
     "plan": "R24_R2_RENEWAL_PLAN_20261025.json",
     "contracts": [
       "C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json",
       "C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json"
     ],
     "active_controller": null,
-    "last_hypic_graph_controller": {"operation_id":"exec-000000000000160b","peer_id":"lgw_a6109c51076a4a2c9d2674ca5a8704a0","arm":"R27_G3_HYPIC_GRAPH","contract":"GRAPH_R27_G3_CANARY_R1_20261025_CONTRACT.json","raw_root":"/cache/cch/hypic-independent-20261013/graph-r27-g3-canary-r1-20261025","launch_checkpoint":"b9ccb6a03523c848cbff5174686830850087fe20","admission_operation":"exec-000000000000160a","observed_running_utc":"2026-10-25T09:41:59Z","terminal_state":"FAILURE_RELEASE_VERIFIED","independent_audit":"exec-0000000000001628"},
-    "last_graph_controller": {"operation_id":"exec-00000000000015ec","peer_id":"lgw_a6109c51076a4a2c9d2674ca5a8704a0","arm":"R27_G1_NATIVE_GRAPH","contract":"GRAPH_R27_G1_CANARY_R1_20261025_CONTRACT.json","raw_root":"/cache/cch/hypic-independent-20261013/graph-r27-g1-canary-r1-20261025","launch_checkpoint":"82f258b53123d9e5ceb3d26d9c4b7e35a9ef1aa3","admission_operation":"exec-00000000000015ea","observed_running_utc":"2026-10-25T09:25:16Z","terminal_state":"VALID_AUDITED_RELEASED","independent_audit":"exec-00000000000015fb"},
+    "last_hypic_graph_controller": {
+      "operation_id": "exec-000000000000160b",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "arm": "R27_G3_HYPIC_GRAPH",
+      "contract": "GRAPH_R27_G3_CANARY_R1_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/graph-r27-g3-canary-r1-20261025",
+      "launch_checkpoint": "b9ccb6a03523c848cbff5174686830850087fe20",
+      "admission_operation": "exec-000000000000160a",
+      "observed_running_utc": "2026-10-25T09:41:59Z",
+      "terminal_state": "FAILURE_RELEASE_VERIFIED",
+      "independent_audit": "exec-0000000000001628"
+    },
+    "last_graph_controller": {
+      "operation_id": "exec-00000000000015ec",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "arm": "R27_G1_NATIVE_GRAPH",
+      "contract": "GRAPH_R27_G1_CANARY_R1_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/graph-r27-g1-canary-r1-20261025",
+      "launch_checkpoint": "82f258b53123d9e5ceb3d26d9c4b7e35a9ef1aa3",
+      "admission_operation": "exec-00000000000015ea",
+      "observed_running_utc": "2026-10-25T09:25:16Z",
+      "terminal_state": "VALID_AUDITED_RELEASED",
+      "independent_audit": "exec-00000000000015fb"
+    },
     "last_controller": {
       "terminal_state": "VALID_AUDITED_RELEASED",
       "independent_audit": "exec-00000000000015b0",
@@ -670,7 +712,7 @@
       "observed_running_utc": "2026-10-25T07:37:26Z",
       "rule": "Track exact original peer and handle; timeout/missing requires raw and actual process inspection, never restart."
     },
-    "resource_lease": "No owned live stage. R29 independent1653 verified425bytes,2hot/3HTTP,actualgraph/compiler order,217clean samples and exactlive release. Next one matched graph first screen selected by cost model.",
+    "resource_lease": "No live owned stage. G1 exec1672 completed40; independent corrected observer1688 verifies425sources,267cleanisolation and exactlive release. Original format failure1685 preserved. G3 next freshadmission.",
     "scope": "Same full independent27B/physical0-3/TP4 C1/C2 three-stage goal; C3/dualTP2 excluded; original successful code not reused",
     "prior_failure": "R24_OFF_R1_ADMISSION_FAILURE_20261023.json",
     "prior_followup": "R24_WAIT_FOLLOWUP_TERMINAL_20261023.json remains immutable history",
@@ -716,18 +758,51 @@
       "common_host_bindings": 418,
       "G1_independent_audit": "exec-0000000000001568",
       "G1_evidence": "R25_G1_AUDIT_20261025.json",
-      "G1_timing": {"weighted_tpot_ms": 280.0677875400396, "ttft_p95_ms": 346747.93185002636, "tpot_p95_ms": 292.48924112300756},
+      "G1_timing": {
+        "weighted_tpot_ms": 280.0677875400396,
+        "ttft_p95_ms": 346747.93185002636,
+        "tpot_p95_ms": 292.48924112300756
+      },
       "runtime_parity_gap": "Provided success text used FULL_DECODE_ONLY; current eager is an implementation compatibility restriction. Preserve this first pair; verify graph-compatible native decode before blind full-matrix expansion.",
       "audit_G4_gap": "HOST R26 actual-axis G1-G4 successor implemented/reviewed;21CPU tests1564, not actual G2/G4 acceptance. New contracts must bind it separately; current R25 audit remains frozen."
     },
-    "host_audit_successors": {"report": "HOST_AUDIT_SUCCESSORS_R26_R28_READINESS_20261025.json", "state": "HOST_ONLY_REVIEWED_CPU_TESTED_NOT_DEVICE_ACCEPTANCE", "runtime_source_changed": false},
-    "r27_graph": {"plan":"R27_GRAPH_CANARY_PLAN_20261025.json","G1_evidence":"R27_G1_AUDIT_20261025.json","G1_valid":true,"G1_independent_audit":"exec-00000000000015fb","G3_started":true,"scope":"boundedcompatibility, not speed/fullquality","G3_state":"FAILED_GRAPH_CAPTURE_0HTTP_RELEASE_VERIFIED","G3_evidence":"R27_G3_GRAPH_CAPTURE_FAILURE_20261025.json","G3_independent_audit":"exec-0000000000001628"},
-    "latest_confirmed_publication": "3b38689128a282a0eb942359c005da348b0a4aa3",
+    "host_audit_successors": {
+      "report": "HOST_AUDIT_SUCCESSORS_R26_R28_READINESS_20261025.json",
+      "state": "HOST_ONLY_REVIEWED_CPU_TESTED_NOT_DEVICE_ACCEPTANCE",
+      "runtime_source_changed": false
+    },
+    "r27_graph": {
+      "plan": "R27_GRAPH_CANARY_PLAN_20261025.json",
+      "G1_evidence": "R27_G1_AUDIT_20261025.json",
+      "G1_valid": true,
+      "G1_independent_audit": "exec-00000000000015fb",
+      "G3_started": true,
+      "scope": "boundedcompatibility, not speed/fullquality",
+      "G3_state": "FAILED_GRAPH_CAPTURE_0HTTP_RELEASE_VERIFIED",
+      "G3_evidence": "R27_G3_GRAPH_CAPTURE_FAILURE_20261025.json",
+      "G3_independent_audit": "exec-0000000000001628"
+    },
+    "latest_confirmed_publication": "90af117cc08c57e3c2d0ecd6d9c6643bf19b2613",
     "pending_publication": {
       "checkpoint": "283de3b13c05042ed57ebe4cc90329454cab4b32",
       "evidence": "R24_R2_PUBLICATION_FAILURE_20261025.json",
       "status": "RESOLVED_BY_VERIFIED_1ce39797_FF_PUBLICATION",
       "recovery_evidence": "R25_PUBLICATION_RECOVERY_20261025.json"
+    },
+    "last_completed_graph_formal": {
+      "state": "RUNNING_NOT_ACCEPTED",
+      "operation": "exec-0000000000001672",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "connector": "awmcp",
+      "contract": "FORMAL_GRAPH_R30_G1_R1_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/formal-graph-r30-g1-r1-20261025",
+      "checkpoint": "90af117cc08c57e3c2d0ecd6d9c6643bf19b2613",
+      "admission_operation": "exec-000000000000166f",
+      "observed_running_utc": "2026-10-25T11:22:58Z",
+      "terminal_state": "VALID_CORRECTED_OBSERVER_AUDITED_RELEASED",
+      "independent_audit": "exec-0000000000001688",
+      "evidence": "R30_G1_GRAPH_FORMAL_AUDIT_20261025.json",
+      "original_observer_failure": "exec-0000000000001685"
     }
   }
 }

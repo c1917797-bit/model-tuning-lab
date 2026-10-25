@@ -1,0 +1,110 @@
+{
+  "terminal_unit_valid": true,
+  "timing": {
+    "requests": 40,
+    "unique_ids": 40,
+    "weighted_tpot_ms": 94.99547617189137,
+    "ttft_p95_ms": 89529.07450997736,
+    "tpot_p95_ms": 118.7075061914129
+  },
+  "isolation_samples": 267,
+  "source_bindings": 425,
+  "raw_sha256": {
+    "result.json": "8cd9ac020e992ea9428afc05f32826e488cf6eccf87332c8f45a9f752cfc013d",
+    "events.jsonl": "325fe3bd5827372e89129b12847fc9dea789615f908a9cbd28d641a1d7e7aed8",
+    "performance-unit.json": "905b241766c88e43dc658092585b0b0aae94bc19594bbfe55d8bb5bf2720272a",
+    "release.json": "55f041b255497410758f08a6be74fbe3232c48da1d39a76c246be411b4ea2570"
+  },
+  "scope": "one actual full40 same-source graph G1/G3 phase; necessary mechanism/safety evidence overhead counted. Matched/repeated speed,paired quality,lifecycle andwholepaper remain separate",
+  "live_release_verified": true,
+  "partition": {
+    "enabled": false,
+    "groups": 0,
+    "completed": 0
+  },
+  "graph": {
+    "workers": {
+      "0": 58,
+      "1": 59,
+      "2": 60,
+      "3": 61
+    },
+    "compile_complete_lines": [
+      207
+    ],
+    "replay_directly_observed_rank": 0,
+    "replay_lines": [
+      299
+    ],
+    "service_log_sha256": "3a4709b6db03984293e6fdbe500af692e4a32fc76b6d5d73469dd1cd4734430f",
+    "scope": "actual native INFO replay; capture compatibility proved by same-source R29 canary, not per-token/all-rank completed replay counts"
+  },
+  "physical": {
+    "ranks": {
+      "0": {
+        "inner_pid": 58,
+        "host_pid": 1257318,
+        "physical_npu": 0
+      },
+      "1": {
+        "inner_pid": 59,
+        "host_pid": 1257321,
+        "physical_npu": 1
+      },
+      "2": {
+        "inner_pid": 60,
+        "host_pid": 1257325,
+        "physical_npu": 2
+      },
+      "3": {
+        "inner_pid": 61,
+        "host_pid": 1257329,
+        "physical_npu": 3
+      }
+    },
+    "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+  },
+  "numerical_prerequisite": {
+    "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+    "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43",
+    "python_sources": 421,
+    "scope": "same runtime Python and bounded graph/numerical prerequisites; not formal quality"
+  },
+  "formal_graph_profile_verified": true,
+  "r30_host_audit": {
+    "host_audits/r30_graph_formal_audit.py": "b60c8c8138a4ad39528e0a9a5a5a492fe5a1fee80b57fb9d5178d74515b53398",
+    "host_audits/r26_group_performance.py": "72378fc059526b3b8dcd332280746bd210323b59f41ac2dd23742444960353c2",
+    "host_audits/r27_graph_canary_audit.py": "ad9b0b414c81c76f295ddd00228ce2ad64ff24fd10734f6eaf78ef0b9136df1c"
+  },
+  "r30_info_format_audit": {
+    "definition": "R30_INFO_FORMAT_AUDIT_20261025.json",
+    "definition_sha256": "dc048790a82faad5bc19a2ba22dd7cde920c3d035cd279a39897dc7ab23c0b12",
+    "source_sha256": {
+      "host_audits/r30b_graph_formal_audit.py": "b464b2d3d20341d5c9f735b78ad6fe1dafc42a3c7963cc479954934faeaa327b",
+      "host_audits/r30_graph_formal_audit.py": "b60c8c8138a4ad39528e0a9a5a5a492fe5a1fee80b57fb9d5178d74515b53398",
+      "host_audits/r26_group_performance.py": "72378fc059526b3b8dcd332280746bd210323b59f41ac2dd23742444960353c2",
+      "host_audits/r27_graph_canary_audit.py": "ad9b0b414c81c76f295ddd00228ce2ad64ff24fd10734f6eaf78ef0b9136df1c"
+    },
+    "change": "Only official INFO record.filename vs DEBUG relpath; original numerical/transport/hot/source/release criteria retained",
+    "old_frozen_auditor_preserved": true
+  },
+  "policy": {
+    "group": "G1",
+    "algorithm_on": false,
+    "pdc_on": false
+  },
+  "audit_operation": "exec-0000000000001688",
+  "controller_operation": "exec-0000000000001672",
+  "original_observer_failure": {
+    "operation": "exec-0000000000001685",
+    "exit_code": 1,
+    "reason": "Actual INFO uses record.filename; frozen auditor expected DEBUG relpath",
+    "frozen_source_sha256": "b60c8c8138a4ad39528e0a9a5a5a492fe5a1fee80b57fb9d5178d74515b53398",
+    "stderr": "Traceback (most recent call last):\n  File \"/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/host_audits/r30_graph_formal_audit.py\", line 234, in <module>\n    print(json.dumps(audit(args.contract,live_release=args.live_release)))\n  File \"/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/host_audits/r30_graph_formal_audit.py\", line 218, in audit\n    info=parse_info_graph(native._read(raw/\"service.log\",json_value=False))\n  File \"/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/host_audits/r30_graph_formal_audit.py\", line 161, in parse_info_graph\n    raise ValueError(\"actual four-worker INFO startup and local-first compile/replay required\")\nValueError: actual four-worker INFO startup and local-first compile/replay required\n"
+  },
+  "formatter_regression": {
+    "operation": "exec-0000000000001684",
+    "passed": 9,
+    "scope": "Actual official formatter AST, identical INFO record varied only global logging mode; parser missing/reordered/foreign negative controls. No new NPU run."
+  }
+}

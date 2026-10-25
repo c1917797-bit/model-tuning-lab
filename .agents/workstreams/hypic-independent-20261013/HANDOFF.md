@@ -1,3 +1,30 @@
+# CURRENT 2026-10-25 R30 G1 VALID/RELEASED, G3 NEXT
+
+G1 exec1672 exit0; independent corrected observer1688 validates40responses/425sources/267cleanphysical0-3samples and exactownedCID removal/8233free/final0-3empty. TPOT94.995476ms;TTFTP95 89529.074510ms. Nativebaseline only, no matchedG3 result yet. Original frozen audit1685 failed on INFO filename vs DEBUG relative-path schema; failure and b60auditor preserved in R30_G1_GRAPH_FORMAL_AUDIT_20261025.json. Nine actual official-formatter CPU controls1684 pass. R30_INFO_FORMAT_AUDIT_20261025.json binds successor r30b b464b2d3, original contracts/raw and retained numerical/transport/hot/source/physical/release rules. No runtime changes or NPU rerun. Use r30b --contract ... --definition R30_INFO_FORMAT_AUDIT_20261025.json --live-release for explicit corrected audit.
+
+Next fresh direct ma admission, same425source bytes/model/image/input and actual0-3/8233/HCCLfree/newroot; then original unused R30G3 contract278fc266 via unchanged d5cd HOSTcontroller. One matched graph first pair then model-selected single-variable attribution; no blind12matrix from negative firstpair. Deadline18:07:17UTC unchanged. Full paper/quality/lifecycle/29functional notcomplete.
+
+# CURRENT 2026-10-25 R30 NATIVE G1 FULL40 GRAPH RUNNING EXACT1672
+
+Fresh166f admission11:21:50UTC passed common425sources/3HOSTcontroller+3audit
+bindings/model-image-input/R29prerequisite12rawhash/currentHEAD90af117c,
+actualphysical0-3empty/102portsbindable/noexternalbenchmark/noownedjob/newroot.
+Freshma forceddirect launch11:22:58UTC returnedrunningexec-0000000000001672;
+originalpeerlgw_a6109c51076a4a2c9d2674ca5a8704a0, checkpoint90af117cc08c57e3c2d0ecd6d9c6643bf19b2613,
+raw/cache/cch/hypic-independent-20261013/formal-graph-r30-g1-r1-20261025.
+Actualnative noPROBE/noalgorithm; full40/c16/fixed1024/32K/sourcewarmups4unscored,
+mode3FULL_DECODE_ONLY/commonINFO. Running, notacceptedperformance. NoG3start.
+Track exacthandle/originalpeer/raw; live/unknownneverrestart. Terminal independent
+python3 -B host_audits/r30_graph_formal_audit.py --contract
+FORMAL_GRAPH_R30_G1_R1_20261025_CONTRACT.json --live-release.
+Only independentvalid+released G1 then freshG3admission/source/newroot check.
+
+Allcommon425/runtime421/HOSTdriver/audit bytes frozenwhilethis unitruns. Offline
+newHOST/docs paths may advance, but no runtime/inplaceconfig/prototype bundling.
+Latestlivepub90af117c/main23ec unchanged (13ownedpaths/19rawGitobjectsFFverified).
+One matchedfirstscreenselectedbycostmodel; not allmatrix/quality/lifecycle/29
+acceptance. Fixedstop2026-10-25T18:07:17Z;only0-3/foreignuntouched/no4-7.
+
 # CURRENT 2026-10-25 R30 FULL40 GRAPH FIRST PAIR HOST-READY; NO OWNED LIVE JOB
 
 New HOST controller/auditor are outside inferenceallowlist; original421Python
