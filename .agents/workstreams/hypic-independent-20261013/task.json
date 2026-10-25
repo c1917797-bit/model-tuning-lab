@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R25_G1_AUDITED_G3_RUNNING",
+  "execution_state": "R25_FIRST_PAIR_VALID_NO_SPEED_GAIN_R27_HOST_REVIEW",
   "r24_resume": {
     "date": "2026-10-23",
     "human_request": "我的hypic论文复现成功了吗，如果没有，还需要做什么，请继续，我要把这个论文复现成功",
@@ -165,7 +165,7 @@
     "service_ports": [
       8233
     ],
-    "state": "Current R25 G3 exec-0000000000001573 owns physical0-3 TP4 and port8233 under continuous isolation; exact release pending. Old11f3 release is historical."
+    "state": "R25 G3 terminal1573 exit0 and independent15b0 verify exactCIDabsent/8233free/physical0-3empty. No current owned device stage; every future launch requires fresh admission."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -180,7 +180,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Track exact R25 G3 controller1573/originalma/raw; on terminal independently audit with frozen R25 definition and exact release, then compare accepted G1/G3 first pair. Preserve current413 Python bytes. Resolve graph execution compatibility before blind matrix expansion. Fixed stop2026-10-25T18:07:17Z.",
+  "next_action": "R25 matched eager first pair independently valid but TPOT+14.1757%/TTFTP95+22.0752%; preserve report and do not blindly expand unchanged variant. Freeze/review R27 selective-prefill/native-compiled-decode package, actual HOST launcher and independent graph audit; then fresh idle/source/ports/direct admission for new bounded native G1 and HYPIC G3 graph canaries. Deadline2026-10-25T18:07:17Z unchanged.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -237,7 +237,7 @@
     "device_use": false
   },
   "active_attempt": {
-    "state": "RUNNING",
+    "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-0000000000001573",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
     "connector": "awmcp",
@@ -245,7 +245,8 @@
     "raw_root": "/cache/cch/hypic-independent-20261013/formal-r25-current-g3-r1-20261025",
     "checkpoint": "56144d0097cec8960ebefc5ce6b0939519031216",
     "admission_operation": "exec-0000000000001571",
-    "independent_audit": null
+    "independent_audit": "exec-00000000000015b0",
+    "terminal_report": "R25_G3_AUDIT_20261025.json"
   },
   "historical_active_attempt_20261017": {
     "state": "TERMINAL_DEADLINE_INCOMPLETE_RELEASE_VERIFIED",
@@ -534,13 +535,16 @@
     ],
     "start_utc": "2026-10-25T06:07:17Z",
     "absolute_stop_utc": "2026-10-25T18:07:17Z",
-    "state": "R25_G1_INDEPENDENTLY_VALIDATED_G3_RUNNING",
+    "state": "R25_FIRST_PAIR_VALID_NO_SPEED_GAIN_R27_HOST_REVIEW",
     "plan": "R24_R2_RENEWAL_PLAN_20261025.json",
     "contracts": [
       "C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json",
       "C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json"
     ],
-    "active_controller": {
+    "active_controller": null,
+    "last_controller": {
+      "terminal_state": "VALID_AUDITED_RELEASED",
+      "independent_audit": "exec-00000000000015b0",
       "operation_id": "exec-0000000000001573",
       "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
       "arm": "G3",
@@ -553,7 +557,7 @@
       "observed_running_utc": "2026-10-25T07:37:26Z",
       "rule": "Track exact original peer and handle; timeout/missing requires raw and actual process inspection, never restart."
     },
-    "resource_lease": "G1 independent1568 valid40/source418/425clean/ownedrelease;1571 freshG3admission passed. G3exact1573 continuousguard,0-3only; untrackedfuturehost/graph files disjoint from frozen source and notloaded.",
+    "resource_lease": "No current owned job; both R25 arms independently source/physical/isolation/release valid. G3 40/40hot/472clean;15b0 release. Fresh admission required for any R27.",
     "scope": "Same full independent27B/physical0-3/TP4 C1/C2 three-stage goal; C3/dualTP2 excluded; original successful code not reused",
     "prior_failure": "R24_OFF_R1_ADMISSION_FAILURE_20261023.json",
     "prior_followup": "R24_WAIT_FOLLOWUP_TERMINAL_20261023.json remains immutable history",
@@ -586,7 +590,10 @@
       "scope": "bounded2hot/4rank;not formal speed/fullquality"
     },
     "formal_first_pair": {
-      "state": "G1_VALIDATED_G3_RUNNING",
+      "state": "FIRST_PAIR_VALID_NO_SPEED_GAIN",
+      "G3_evidence": "R25_G3_AUDIT_20261025.json",
+      "G3_independent_audit": "exec-00000000000015b0",
+      "decision": "R25_FIRST_PAIR_DECISION_20261025.json",
       "plan": "R25_FIRST_PAIR_PLAN_20261025.json",
       "static_operation": "exec-0000000000001543",
       "static_evidence": "R25_FIRST_PAIR_STATIC_20261025.json",
@@ -601,7 +608,7 @@
       "audit_G4_gap": "HOST R26 actual-axis G1-G4 successor implemented/reviewed;21CPU tests1564, not actual G2/G4 acceptance. New contracts must bind it separately; current R25 audit remains frozen."
     },
     "host_audit_successors": {"report": "HOST_AUDIT_SUCCESSORS_R26_R28_READINESS_20261025.json", "state": "HOST_ONLY_REVIEWED_CPU_TESTED_NOT_DEVICE_ACCEPTANCE", "runtime_source_changed": false},
-    "latest_confirmed_publication": "56144d0097cec8960ebefc5ce6b0939519031216",
+    "latest_confirmed_publication": "4989dba3bd26496665bafec4d5082834a4c588c1",
     "pending_publication": {
       "checkpoint": "283de3b13c05042ed57ebe4cc90329454cab4b32",
       "evidence": "R24_R2_PUBLICATION_FAILURE_20261025.json",

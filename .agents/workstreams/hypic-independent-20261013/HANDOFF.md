@@ -1,4 +1,35 @@
-# CURRENT 2026-10-25 G1 AUDITED; FORMAL G3 RUNNING EXACT1573
+# CURRENT 2026-10-25 R25 FIRST PAIR VALID BUT SLOWER; NO OWNED LIVE JOB
+
+G3 exact1573 terminalexit0:40/40responses,472cleanisolation,onlyphysical0-3,
+exactownedCID0d161da1...removed/8233free/final0-3empty. Independent frozenR25
+15b0 exit0 verifies418bindings/40of40same-stepfourrank48C1/16C2hot/physicaljoin/
+snapshot148forwards,148reads,26220hits/exactrelease. R25_G3_AUDIT_20261025.json
+binds raw hashes. This execution is valid, not an optimization success.
+
+Matchedcurrent eager G1/G3 weightedTPOT280.06778754 ->319.76932657ms(+14.1757%);
+TTFTP95346747.93185 ->423293.25704ms(+22.0752%). Onefirstpaironly, notmedian.
+R25_FIRST_PAIR_DECISION_20261025.json preserves negative decision and canonical
+common418source map0f7ecad6... separately from real distinct arm manifests.
+Do not pool this eager profile with future graph data or transfer old absoluteclaims.
+Do not expand unchanged eager variant blindly. Quality/fullmatrix/lifecycle remain.
+
+Next R27 has NEW isolated graph_candidate components (defaultoff;sourcebound),
+HOST launcher and thin independent audit underreview. CPU58/29 and actualofficial
+ABI/helper checks are HOST evidence, not realcompiler/NPUgraphproof. Officialnative
+G1 staysunpatched; candidate uses actualVLLM_COMPILE/FULL_DECODE_ONLY with per-call
+NONE prefill bypass and unchanged realC1/C2/snapshot/materialchecks. Newbounded
+G1/G3 contracts/rawroots must bind all actualnewbytes,3realpayloads/commonDEBUG,
+source-ownednativeimport/capture/replay/PID/requests/isolation/release. No newdevice
+stage started. Every launch freshma/direct/physical0-3/8233/HCCL/newroot admission.
+Fixedstop18:07:17UTC; wholegoal incomplete, no4-7/foreignmodifications.
+
+Latestlivepublished4989dba3; main23ec33d7 unchanged. Host-only R26/R28 audit
+successors scoped and published; not G2/G4/quality NPU acceptance. Publication
+receiptR25_HOST_SUCCESSORS_PUBLICATION_20261025.json. CurrentR25 terminal docs
+are newer local work until own explicitFF/livepublication. Newcandidate untracked
+until parentreview/freeze; never include it accidentally in a docs checkpoint.
+
+# EARLIER 2026-10-25 G1 AUDITED; FORMAL G3 RUNNING EXACT1573
 
 G1 controller1547 exit0,40/40,425cleanisolation,exactownedrelease. Frozen
 independent1568 exit0 terminal_unit_validtrue,source418/live-release. Samehandle

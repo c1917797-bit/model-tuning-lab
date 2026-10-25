@@ -1,0 +1,84 @@
+{
+  "schema": "hypic-matched-first-pair-decision/v1",
+  "created_utc": "2026-10-25 08:12:05 UTC",
+  "study": "R25 current independent C1/C2, eager first screen",
+  "G1_evidence": "R25_G1_AUDIT_20261025.json",
+  "G3_evidence": "R25_G3_AUDIT_20261025.json",
+  "both_arms_independently_valid": true,
+  "measured_cells": 2,
+  "requested_matrix_cells": 12,
+  "common_source_under_study": {
+    "canonical_definition": "SHA256 of JSON-serialized common host source map with sorted keys and separators(',',':'); not an actual activation manifest",
+    "sha256": "0f7ecad6b2fb3813552941d66a4b7f9621c36614ddf3644bbbdcf90ae5c6e35c",
+    "host_bindings": 418,
+    "runtime_python": 413,
+    "actual_arm_manifest_sha256": {
+      "G1": "f8bcae7aad3c3bd7f792165b5be44a67e928b7cd27e7df7eed1cc8920902b060",
+      "G3": "f4774a21cc80b0bde0ae5c7f7128ddad5e1c8fa0815cd52ce7ff1377f11568c7"
+    }
+  },
+  "protocol": {
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "model_config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tp": 4,
+    "cpu_set": "112-191",
+    "enforce_eager": true,
+    "pdc": false,
+    "input_tokens": 32768,
+    "native_prefix_tokens": 8192,
+    "pic_tokens": 16384,
+    "relocation": "1024-7168, deterministic index%13",
+    "output_tokens": 1024,
+    "requests_per_arm": 40,
+    "concurrency": 16,
+    "unscored_warmups": 4,
+    "retries": 0
+  },
+  "timing": {
+    "G1": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 280.0677875400396,
+      "ttft_p95_ms": 346747.93185002636,
+      "tpot_p95_ms": 292.48924112300756
+    },
+    "G3": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 319.7693265700621,
+      "ttft_p95_ms": 423293.25703997165,
+      "tpot_p95_ms": 342.08872479484853
+    },
+    "change_percent": {
+      "weighted_tpot": 14.1756891710892,
+      "ttft_p95": 22.075207422737364,
+      "tpot_p95": 16.957712181618923
+    },
+    "positive_change_means": "slower"
+  },
+  "mechanism": {
+    "G3_hot": "40/40 same-step four-rank48C1/16C2 accepted; body rows actually skipped",
+    "isolation_samples": {
+      "G1": 425,
+      "G3": 472
+    },
+    "owned_release_both_independently_verified": true
+  },
+  "decision": "NO_SPEED_GAIN_CURRENT_EAGER_VARIANT_FIRST_SCREEN",
+  "action": "Preserve immutable negative first pair; do not expand unchanged eager variant blindly. Freeze and test selective prefill/native compiled-decode compatibility in a new bounded source-bound contract before any new matched study.",
+  "quality": "Not measured by fixed-output performance; old task-quality conclusions not changed",
+  "limits": [
+    "One pair, not three rounds or median",
+    "Eager is our implementation compatibility restriction; original supplied case used FULL_DECODE_ONLY",
+    "Graph compatibility is a hypothesis, not established cause or speedup",
+    "Different runtime profiles must not be pooled",
+    "Not whole paper, lifecycle, main or29functional acceptance"
+  ],
+  "absolute_stop_utc": "2026-10-25T18:07:17Z"
+}
