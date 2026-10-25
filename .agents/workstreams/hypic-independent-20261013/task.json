@@ -523,25 +523,14 @@
     ],
     "start_utc": "2026-10-25T06:07:17Z",
     "absolute_stop_utc": "2026-10-25T18:07:17Z",
-    "state": "R24_R2_OFF_VALIDATED_ON_RUNNING",
+    "state": "R24_R2_PAIR_ACCEPTED_R25_FIRST_PAIR_READY",
     "plan": "R24_R2_RENEWAL_PLAN_20261025.json",
     "contracts": [
       "C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json",
       "C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json"
     ],
-    "active_controller": {
-      "operation_id": "exec-000000000000152d",
-      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
-      "arm": "ON",
-      "contract": "C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json",
-      "raw_root": "/cache/cch/hypic-independent-20261013/c2-block-table-r24-on-canary-r2-20261025",
-      "launch_checkpoint": "9f60f23f92348217ab1fa94eb56f5be699981a4c",
-      "admission_operation": "exec-000000000000152c",
-      "admission_utc": "2026-10-25T06:40:51.090500+00:00",
-      "observed_running_utc": "2026-10-25T06:41:41Z",
-      "rule": "Poll exact original peer/handle and raw/process; unknown is not terminal and never justifies restart."
-    },
-    "resource_lease": "OFF1512/1524 accepted and released;152c fresh06:40:51 admission source417/image/model/input/newroot,actual0-3empty/102portsbindable/noexternalchains. ON152d owns continuousguarded stage; snapshot is not a reservation.",
+    "active_controller": null,
+    "resource_lease": "R24 OFF and ON terminal+independent live-release accepted; no reservation. Fresh source/physical0-3/ports/newroot admission before formal G1.",
     "scope": "Same full independent27B/physical0-3/TP4 C1/C2 three-stage goal; C3/dualTP2 excluded; original successful code not reused",
     "prior_failure": "R24_OFF_R1_ADMISSION_FAILURE_20261023.json",
     "prior_followup": "R24_WAIT_FOLLOWUP_TERMINAL_20261023.json remains immutable history",
@@ -563,6 +552,26 @@
       "evidence": "R24_R2_OFF_AUDIT_20261025.json",
       "bounded_canary_valid": true,
       "scope": "3 fixed-output requests,2 hot private requests; not full40 performance/381quality/wholepaper"
+    },
+    "last_completed_ON": {
+      "controller": "exec-000000000000152d",
+      "independent_audit": "exec-000000000000153a",
+      "evidence": "R24_R2_ON_AUDIT_20261025.json",
+      "bounded_canary_valid": true,
+      "snapshot_reads": 8,
+      "snapshot_hits": 312,
+      "scope": "bounded2hot/4rank;not formal speed/fullquality"
+    },
+    "formal_first_pair": {
+      "state": "STATIC_VALIDATED_NOT_LAUNCHED",
+      "plan": "R25_FIRST_PAIR_PLAN_20261025.json",
+      "static_operation": "exec-0000000000001543",
+      "static_evidence": "R25_FIRST_PAIR_STATIC_20261025.json",
+      "G1_contract": "FORMAL_R25_G1_R1_20261025_CONTRACT.json",
+      "G3_contract": "FORMAL_R25_G3_R1_20261025_CONTRACT.json",
+      "same_runtime_python": 413,
+      "common_host_bindings": 418,
+      "audit_G4_gap": "Inherited R18 partition auditor hardcodes G3; G4 adaptation still required before it is accepted."
     },
     "latest_confirmed_publication": "1d0afe65a3ec01ecf3b0aa4eedb0e9ffdcc61a94",
     "pending_publication": {

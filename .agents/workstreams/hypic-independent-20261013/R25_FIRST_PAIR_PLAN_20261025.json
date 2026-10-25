@@ -1,0 +1,62 @@
+{
+  "schema": "hypic-formal-first-pair/v1",
+  "state": "READY_NOT_LAUNCHED",
+  "groups": [
+    "G1",
+    "G3"
+  ],
+  "round": 1,
+  "contracts": [
+    "FORMAL_R25_G1_R1_20261025_CONTRACT.json",
+    "FORMAL_R25_G3_R1_20261025_CONTRACT.json"
+  ],
+  "run": {
+    "command": "taskset",
+    "args": [
+      "-c",
+      "0",
+      "python3",
+      "-B",
+      "formal_r15_tp4.py",
+      "--contract",
+      "<arm-contract>",
+      "--run"
+    ]
+  },
+  "audit_definition": "R25_FORMAL_AUDIT_DEFINITION_20261025.json",
+  "order": "G1 actual native first; independently audit exact release, then fresh G3 admission. No unknown-state restart.",
+  "source": "Same413 frozen current independent Python bytes; native G1 loads none of the package, G3 only five heavy-diagnostic/perf config fields differ from accepted R24ON. Retained safety and mechanism receipts are included in E2E.",
+  "ruler": {
+    "measured": 40,
+    "concurrency": 16,
+    "input_tokens": 32768,
+    "output_tokens": 1024,
+    "retries": 0,
+    "unscored_public_warmups": 2,
+    "unscored_hot_warmups": 2,
+    "physical": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tp": 4,
+    "pdc": false
+  },
+  "absolute_stop_utc": "2026-10-25T18:07:17Z",
+  "prerequisite": {
+    "OFF_audit": "exec-0000000000001524",
+    "ON_audit": "exec-000000000000153a",
+    "ON_evidence": "R24_R2_ON_AUDIT_20261025.json",
+    "ON_evidence_sha256": "b6c4a2ac742c8fb755f874cf4c0f483290d2b23b6ef482b346bb7e508ce3e2e8"
+  },
+  "draft_static": "1538 passed after1536 adapter-argv assembly error corrected; no source/runtime/device experiment retry",
+  "superseded_drafts": [
+    "DRAFT_FORMAL_R25_G1_R1_20261025_CONTRACT.json",
+    "DRAFT_FORMAL_R25_G3_R1_20261025_CONTRACT.json"
+  ],
+  "future_matrix_gap": "G2/G4 plus repeats remain required. Existing inherited R18 partition auditor hardcodes G3, so G4 cannot be claimed covered or blindly run through this first-pair audit. Adapt correctly before G4; no scope reduction of full goal.",
+  "remaining": "12 matrix cells not yet current-source accepted; full127x3/arm naturalEOS quality and lifecycle/29functionalSkill remain incomplete.",
+  "superseded_drafts_status": "Removed task-owned unlaunched proposal files before checkpoint; no original raw roots/evidence or actual experiments removed.",
+  "static_evidence": "R25_FIRST_PAIR_STATIC_20261025.json"
+}

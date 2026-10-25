@@ -1,4 +1,31 @@
-# CURRENT 2026-10-25 R24R2 OFF VALIDATED; ON RUNNING EXACT152d
+# CURRENT 2026-10-25 R24R2 PAIR AUDITED; FORMAL R25 G1/G3 READY
+
+ON152d exit0,3responses,219cleanisolation,exactownedcontainer removed,
+portfree/final0-3empty. Independent153a exit0 boundedvalid/source417/physical/
+numericshadows192/hot2of2/finite128/live-release valid. Snapshot8forwardreads,
+312hits/128checkedlayers/192request-layercompletions joinedexactly; notspeed.
+R24_R2_ON_AUDIT_20261025.json hashb6c4a2ac binds rawresult9c0ccd11,
+responsesdd51c37a and release6047a54b. Oneproducer1token plus twohot1024,
+allignoreEOS/length; not naturalEOS quality or native/PIC losslessequivalence.
+
+R25_FIRST_PAIR_PLAN_20261025.json and final FORMAL_R25_G1/G3_R1_20261025_CONTRACT
+are prospective formal full40/c16 same413Python/currentmodel-image-input-CPU-eager
+firstpair. G1 actualnative no package; G3only5heavy-diagnostic/perf configfields
+changed from R24ON, retained safety/mechanism receipt overhead countedinE2E.
+Runtimecommon415/host418; frozen audit composes actualfull40base plus snapshotjoin,
+binds acceptedONproof, not the3responseCanary audit. Static1538proveddraft rejection
+without acceptedONproof;1536validationadapter argv error fixed, noNPUrestart.
+1543 finalstatic PASS: actual ONreport bound, common418/Pythonunchanged, same ruler,
+CLIconfigvalid. R25_FIRST_PAIR_STATIC_20261025.json preserves limitedscope.
+Task-owned unlaunched DRAFT_* proposals removed beforecheckpoint; no rawattempt existed.
+Use final namedcontracts. Before run freshidentity/root/physical/ports gate and savehandle.
+G1 first; audit and exact release before fresh G3. No current controller afterR24.
+Do not blindly expand G4: inherited R18 partition audit hardcodesG3; properG4audit
+adaptation remains required, fullG1-G4x3/quality/lifecycle/29functional scope intact.
+Latestremote1d0afe65, newerlocalpendingTLSrecovery; don't repeat failedpush unchanged.
+Stop18:07:17UTC unchanged, no newdeviceafterstop; wholegoal not complete.
+
+# EARLIER 2026-10-25 R24R2 OFF VALIDATED; ON RUNNING EXACT152d
 
 ONfresh152c admission06:40:51UTC valid:417sourcebindings unchanged,
 image/model/input/contract hash correct,newONrootabsent,actualphysical0-3empty,

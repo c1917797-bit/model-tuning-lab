@@ -1,0 +1,36 @@
+{
+  "static_valid": true,
+  "contracts": {
+    "FORMAL_R25_G1_R1_20261025_CONTRACT.json": {
+      "sha256": "a1cb8e4b73de372b76fdebfc04fed7d9fae25e822d8d290da36c495ec28864b4",
+      "raw_root": "/cache/cch/hypic-independent-20261013/formal-r25-current-g1-r1-20261025",
+      "host_bindings": 418
+    },
+    "FORMAL_R25_G3_R1_20261025_CONTRACT.json": {
+      "sha256": "1e3a5bb627b0466eb58c7d18e74e5bcf4ee1f6a9eb34c6d9e6d496d805a33c5a",
+      "raw_root": "/cache/cch/hypic-independent-20261013/formal-r25-current-g3-r1-20261025",
+      "host_bindings": 418
+    }
+  },
+  "G3_delta": [
+    "c1_first_divergence",
+    "c1_first_divergence_head_policy",
+    "c1_layer_shadow_validation",
+    "c1_performance_mode",
+    "prompt_snapshot_probe_batches"
+  ],
+  "Python_source_changed": false,
+  "common_host_bindings": 418,
+  "bound_accepted_R24_ON": true,
+  "G4_audit_gap_retained": true,
+  "validate_mst": "PASS: Maintainer Skill Tree structure is valid (29 skills)",
+  "no_device_run": true,
+  "operation": "exec-0000000000001543",
+  "prior_draft_controls": {
+    "initial_adapter_failure": "exec-0000000000001536 command omitted executable; no device work",
+    "corrected_validation": "exec-0000000000001538 fail-closed before accepted ON report",
+    "superseded_unlaunched_drafts_removed": true
+  },
+  "scope": "configuration/source/ruler/prerequisite/CLI syntax checks only; no formal device result yet",
+  "bound_ON_report_sha256": "b6c4a2ac742c8fb755f874cf4c0f483290d2b23b6ef482b346bb7e508ce3e2e8"
+}

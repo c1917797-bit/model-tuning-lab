@@ -1,0 +1,19 @@
+{
+  "schema": "hypic-formal-audit-command/v1",
+  "purpose": "Compose existing full40 and exact snapshot audits; read-only, no device allocation",
+  "command": "taskset",
+  "args": [
+    "-c",
+    "0",
+    "python3",
+    "-B",
+    "-c",
+    "import argparse,hashlib,json\nfrom pathlib import Path\nfrom audit_r21_c2_finite_performance import audit as audit_performance\nfrom audit_r24_c2_snapshot_canary import audit_snapshot_receipts\np=argparse.ArgumentParser();p.add_argument('--contract',required=True);p.add_argument('--live-release',action='store_true')\na=p.parse_args();cp=Path(a.contract).resolve();c=json.loads(cp.read_text())\ndefinition=cp.parent/c['formal_audit_definition']['path']\nif hashlib.sha256(definition.read_bytes()).hexdigest()!=c['formal_audit_definition']['sha256']:raise ValueError('frozen formal audit definition drift')\nprior=cp.parent/c['required_canary_contract']\nif hashlib.sha256(prior.read_bytes()).hexdigest()!=c['required_canary_sha256']:raise ValueError('required R24 canary contract drift')\ne=c['numerical_prerequisite_evidence'];ep=cp.parent/e['path']\nif not ep.is_file() or ep.is_symlink() or hashlib.sha256(ep.read_bytes()).hexdigest()!=e['sha256']:raise ValueError('accepted R24 ON evidence missing or drifted')\nproof=json.loads(ep.read_text())\nif proof.get('arm')!='ON' or proof.get('contract')!=c['required_canary_contract'] or not proof['audit']['bounded_canary_valid'] or not proof['audit']['live_release_verified']:raise ValueError('R24 ON prerequisite not accepted')\nfor n,h in proof['raw_sha256'].items():\n f=Path(proof['raw_root'])/n\n if f.is_symlink() or hashlib.sha256(f.read_bytes()).hexdigest()!=h:raise ValueError('R24 immutable raw evidence drift')\ngroup=c['performance_group']\nif group not in ('G1','G3'):raise ValueError('R25 first-pair audit supports only G1/G3; G2/G4 adaptation not yet frozen')\nreport=audit_performance(cp,live_release=a.live_release)\nif group=='G3':\n mp=cp.parent/c['successor_manifest']\n if c['cache_diagnostic']['compact_manifest']!=c['successor_manifest']:raise ValueError('actual/successor manifest mismatch')\n m=json.loads(mp.read_text());cfg=json.loads((cp.parent/m['config']).read_text())\n if any(cfg.get(k)is not True for k in ('c2_block_table_snapshot','c2_block_table_diagnostic','c2_layer_completion_barrier','c2_layer_finite_gate')):raise ValueError('retained snapshot safety/evidence mode drift')\n events=[]\n for f in sorted((Path(c['raw_root'])/'diagnostics').glob('compact-worker-*.jsonl')):\n  if f.is_symlink()or not f.is_file():raise ValueError('regular actual worker logs required')\n  events.extend(json.loads(line)for line in f.read_text().splitlines())\n workers={int(rank):pid for rank,pid in report['hot']['worker_pids'].items()}\n report['c2_block_table_snapshot']=audit_snapshot_receipts(events,workers,hashlib.sha256(mp.read_bytes()).hexdigest(),enabled=True,expected_group=None,expected_layers=c['c2_snapshot_acceptance']['layers'])\nelif group!='G1' or c.get('cache_diagnostic'):\n raise ValueError('actual native control required')\nreport['prerequisite']='hash-bound accepted bounded R24 ON; not native/PIC lossless equivalence'\nreport['scope']='one current-source full40 arm, retained safety and mechanism receipts included in E2E; paired/repeated performance/fullquality/lifecycle separate'\nprint(json.dumps(report))\n"
+  ],
+  "append_args": [
+    "--contract",
+    "<arm-contract>",
+    "--live-release"
+  ],
+  "scope": "Current-source first full40 G1 native/G3 independent pair only. Required accepted R24 ON evidence hash. G2/G4 remain required later; inherited R18 group guard needs proper adaptation before G4 can be accepted."
+}

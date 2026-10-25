@@ -1,0 +1,353 @@
+{
+  "schema": "hypic-r24-bounded-independent-audit/v1",
+  "arm": "ON",
+  "contract": "C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json",
+  "contract_sha256": "a484d8fbefbec0c9f8f86892133891050d9c9df1688b8fd8d7a0b8bdc367390b",
+  "launch_commit": "9f60f23f92348217ab1fa94eb56f5be699981a4c",
+  "controller_operation": "exec-000000000000152d",
+  "auditor_operation": "exec-000000000000153a",
+  "peer": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "raw_root": "/cache/cch/hypic-independent-20261013/c2-block-table-r24-on-canary-r2-20261025",
+  "controller_terminal": {
+    "valid": true,
+    "error": null,
+    "guard_errors": [],
+    "isolation_samples": 219,
+    "responses": 3,
+    "worker_pids": [
+      2804067,
+      2804068,
+      2804070,
+      2804073
+    ],
+    "physical_devices_seen": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "release": {
+      "owned_container": "b50bd97d9e313cab7a6c66c1dd50dcc1b316b6fd78217f89818adc7d24ed5dc5",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    }
+  },
+  "observed_payloads": [
+    {
+      "index": 0,
+      "input_tokens": 16640,
+      "max_tokens": 1,
+      "completion_tokens": 1,
+      "ignore_eos": true,
+      "finish_reason": "length"
+    },
+    {
+      "index": 1,
+      "input_tokens": 32768,
+      "max_tokens": 1024,
+      "completion_tokens": 1024,
+      "ignore_eos": true,
+      "finish_reason": "length"
+    },
+    {
+      "index": 2,
+      "input_tokens": 32768,
+      "max_tokens": 1024,
+      "completion_tokens": 1024,
+      "ignore_eos": true,
+      "finish_reason": "length"
+    }
+  ],
+  "raw_sha256": {
+    "result.json": "9c0ccd11123a768f201b8953cfdd1157a94e55453d12abf5b9c943fb45a142cd",
+    "responses.json": "dd51c37ab8b4b5e09f97cb41964166aad579fc847fe6468fd5b7c7348f6ad776",
+    "release.json": "6047a54b3c578416320b584dd63758a36db97b750b795aa19aef73cf5b50c854"
+  },
+  "raw_digest_operation": "exec-000000000000153c",
+  "audit": {
+    "bounded_canary_valid": true,
+    "hot": {
+      "accepted_hot_coverage": true,
+      "denominator": 2,
+      "covered": [
+        "cmpl-98bfa1740d33edc0",
+        "cmpl-882b427840b8d854"
+      ],
+      "missing": [],
+      "worker_pids": {
+        "0": 58,
+        "1": 59,
+        "2": 60,
+        "3": 61
+      },
+      "scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate"
+    },
+    "probe": {
+      "0": {
+        "original_thread_cpu_ns": 27673860,
+        "prefill_only_thread_cpu_ns": 56020,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "1": {
+        "original_thread_cpu_ns": 29456160,
+        "prefill_only_thread_cpu_ns": 64120,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "2": {
+        "original_thread_cpu_ns": 30213020,
+        "prefill_only_thread_cpu_ns": 72160,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      },
+      "3": {
+        "original_thread_cpu_ns": 27787620,
+        "prefill_only_thread_cpu_ns": 62440,
+        "steps": [
+          3,
+          5
+        ],
+        "orders": [
+          [
+            "original",
+            "prefill_only"
+          ]
+        ]
+      }
+    },
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 58,
+          "host_pid": 2804067,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 59,
+          "host_pid": 2804068,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 60,
+          "host_pid": 2804070,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 61,
+          "host_pid": 2804073,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "source_bindings": 417,
+    "isolation_samples": 219,
+    "live_release_verified": true,
+    "scope": "bounded R24 unchanged R21 numerical/mechanism/source/physical/isolation/release plus exact C2 snapshot receipts; not formal speed or full task quality",
+    "partition": {
+      "groups": 384,
+      "completed_receipts": 384,
+      "numeric_shadows": 192,
+      "four_rank_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      },
+      "sampled_numeric_not_full_quality": true
+    },
+    "lazy_snapshot": {
+      "receipts": 384,
+      "skipped_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      },
+      "retained_shadow_layers": {
+        "0": 48,
+        "1": 48,
+        "2": 48,
+        "3": 48
+      }
+    },
+    "metadata_snapshot": {
+      "forwards": 8,
+      "request_ids": {
+        "0": [
+          "cmpl-882b427840b8d854-0-a8582754",
+          "cmpl-98bfa1740d33edc0-0-aaa55971"
+        ],
+        "1": [
+          "cmpl-882b427840b8d854-0-a8582754",
+          "cmpl-98bfa1740d33edc0-0-aaa55971"
+        ],
+        "2": [
+          "cmpl-882b427840b8d854-0-a8582754",
+          "cmpl-98bfa1740d33edc0-0-aaa55971"
+        ],
+        "3": [
+          "cmpl-882b427840b8d854-0-a8582754",
+          "cmpl-98bfa1740d33edc0-0-aaa55971"
+        ]
+      }
+    },
+    "c2_finite": {
+      "layers": 128,
+      "request_layer_completions": 128,
+      "scope": "all observed hot C2 completions have exact preceding same-layer/rank/step finite gate"
+    },
+    "c2_block_table_snapshot": {
+      "enabled": true,
+      "forwards": 8,
+      "checked_layers": 128,
+      "request_layer_completions": 192,
+      "reads": 8,
+      "hits": 312,
+      "expected_group": null,
+      "expected_layers": [
+        "language_model.model.layers.11.self_attn.attn",
+        "language_model.model.layers.15.self_attn.attn",
+        "language_model.model.layers.19.self_attn.attn",
+        "language_model.model.layers.23.self_attn.attn",
+        "language_model.model.layers.27.self_attn.attn",
+        "language_model.model.layers.3.self_attn.attn",
+        "language_model.model.layers.31.self_attn.attn",
+        "language_model.model.layers.35.self_attn.attn",
+        "language_model.model.layers.39.self_attn.attn",
+        "language_model.model.layers.43.self_attn.attn",
+        "language_model.model.layers.47.self_attn.attn",
+        "language_model.model.layers.51.self_attn.attn",
+        "language_model.model.layers.55.self_attn.attn",
+        "language_model.model.layers.59.self_attn.attn",
+        "language_model.model.layers.63.self_attn.attn",
+        "language_model.model.layers.7.self_attn.attn"
+      ],
+      "group_source": "verified-native-full-attention-spec",
+      "native_captures": 12,
+      "per_forward": [
+        {
+          "rank": 0,
+          "step": 2,
+          "group": 0,
+          "request_ids": [
+            "cmpl-98bfa1740d33edc0-0-aaa55971"
+          ],
+          "layers": 16,
+          "reads": 1,
+          "hits": 31
+        },
+        {
+          "rank": 0,
+          "step": 4,
+          "group": 0,
+          "request_ids": [
+            "cmpl-882b427840b8d854-0-a8582754",
+            "cmpl-98bfa1740d33edc0-0-aaa55971"
+          ],
+          "layers": 16,
+          "reads": 1,
+          "hits": 47
+        },
+        {
+          "rank": 1,
+          "step": 2,
+          "group": 0,
+          "request_ids": [
+            "cmpl-98bfa1740d33edc0-0-aaa55971"
+          ],
+          "layers": 16,
+          "reads": 1,
+          "hits": 31
+        },
+        {
+          "rank": 1,
+          "step": 4,
+          "group": 0,
+          "request_ids": [
+            "cmpl-882b427840b8d854-0-a8582754",
+            "cmpl-98bfa1740d33edc0-0-aaa55971"
+          ],
+          "layers": 16,
+          "reads": 1,
+          "hits": 47
+        },
+        {
+          "rank": 2,
+          "step": 2,
+          "group": 0,
+          "request_ids": [
+            "cmpl-98bfa1740d33edc0-0-aaa55971"
+          ],
+          "layers": 16,
+          "reads": 1,
+          "hits": 31
+        },
+        {
+          "rank": 2,
+          "step": 4,
+          "group": 0,
+          "request_ids": [
+            "cmpl-882b427840b8d854-0-a8582754",
+            "cmpl-98bfa1740d33edc0-0-aaa55971"
+          ],
+          "layers": 16,
+          "reads": 1,
+          "hits": 47
+        },
+        {
+          "rank": 3,
+          "step": 2,
+          "group": 0,
+          "request_ids": [
+            "cmpl-98bfa1740d33edc0-0-aaa55971"
+          ],
+          "layers": 16,
+          "reads": 1,
+          "hits": 31
+        },
+        {
+          "rank": 3,
+          "step": 4,
+          "group": 0,
+          "request_ids": [
+            "cmpl-882b427840b8d854-0-a8582754",
+            "cmpl-98bfa1740d33edc0-0-aaa55971"
+          ],
+          "layers": 16,
+          "reads": 1,
+          "hits": 47
+        }
+      ],
+      "scope": "exact snapshot source/worker/forward/group/layer/request/order/count join only"
+    }
+  },
+  "numerical_limits": "192 C1 shadows compare selected complete output/state/conv buffers packed/partitioned vs serial using same public material; not independently regenerated material or native/PIC semantic equivalence. C2 finite/identity/order/slot/completion and snapshot reuse joins are not fullattention/RoPE numerical equivalence.",
+  "interpretation": "Bounded diagnostic: one producer1token plus two private hot1024token requests, ignore_eos and length. Hot denominator2, not full40 despite inherited helper scope text. Snapshot8reads/312hits conserved across8forwards/4ranks,128checkedlayers. Not speed, naturalEOS task quality, lifecycle or wholepaper acceptance."
+}
