@@ -95,13 +95,13 @@
     "contracts": {
       "G1": {
         "path": "WARM_GRAPH_COST_R31_G1_R1_20261025_CONTRACT.json",
-        "sha256": "aa907c5832fc7164ea43fef6af8930593da988b6f77c74f592ecb77647df402a",
+        "sha256": "ddd0fcc8fcb3f39ee022d17552db9d01389466ce96385a5584d6f436d66a6c7e",
         "raw_root": "/cache/cch/hypic-independent-20261013/warm-graph-cost-r31-g1-r1-20261025",
         "checked": {
           "configuration_valid": true,
           "device_run": false,
           "device_admission_performed": false,
-          "controller_sha256": "fa5c4c9181a5434472c45b640a32821a56d1f0ff6096b8e64d810a4e0188811b",
+          "controller_sha256": "0add3c7efc7b4cbf88436ede3e042b00b2f5a684f19b7aceb46dda7b9e9f7e6a",
           "base_controller_sha256": "b26fa6006fd780b19aff3fd804a464e04aeb374b97152d9a24165157e1ee0100",
           "graph_runtime": {
             "profile": "selective-prefill-native-decode-v1",
@@ -140,13 +140,13 @@
       },
       "G3": {
         "path": "WARM_GRAPH_COST_R31_G3_R1_20261025_CONTRACT.json",
-        "sha256": "7460755599b99541177dbe3e2bc6efc9e153b3d1af8db3347f46c1f67c8ca925",
+        "sha256": "5f9e8601a1f7f4030f77535fb02d557e6a9acfce9e883092ae8aa2979cb16699",
         "raw_root": "/cache/cch/hypic-independent-20261013/warm-graph-cost-r31-g3-r1-20261025",
         "checked": {
           "configuration_valid": true,
           "device_run": false,
           "device_admission_performed": false,
-          "controller_sha256": "fa5c4c9181a5434472c45b640a32821a56d1f0ff6096b8e64d810a4e0188811b",
+          "controller_sha256": "0add3c7efc7b4cbf88436ede3e042b00b2f5a684f19b7aceb46dda7b9e9f7e6a",
           "base_controller_sha256": "b26fa6006fd780b19aff3fd804a464e04aeb374b97152d9a24165157e1ee0100",
           "graph_runtime": {
             "profile": "selective-prefill-native-decode-v1",
@@ -186,7 +186,9 @@
     },
     "first_group": "G3",
     "active_controller": null,
-    "scope": "bounded current-source warmedc16/32768/64 official attribution, not formal1024 speed/fullquality;425runtime bindings unchanged"
+    "scope": "bounded current-source warmedc16/32768/64 official attribution, not formal1024 speed/fullquality;425runtime bindings unchanged",
+    "cache_parity_repair": "Final HOST/static16c9 includes actual cache argv/directory assertions; R30 runtime425bytes unchanged.",
+    "static_operation": "exec-00000000000016c9"
   },
   "r29_warmup": {
     "state": "BOUNDED_NPU_ACCEPTED_NOT_SPEED_OR_FULL_QUALITY",

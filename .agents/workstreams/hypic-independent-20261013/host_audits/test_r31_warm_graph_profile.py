@@ -77,6 +77,9 @@ class RealProfileBoundaryTests(unittest.TestCase):
                 driver.retained.native.COMPILATION)
             env=driver.retained.native._environment(captured[0])
             self.assertEqual(env["VLLM_LOGGING_LEVEL"],"INFO")
+            self.assertEqual(env["TRITON_CACHE_DIR"],"/scratch/compiled-cache")
+            self.assertTrue((Path(c["raw_root"])/"compiled-cache").is_dir())
+            self.assertEqual(launch["profile_cache_environment"],{"TRITON_CACHE_DIR":"/scratch/compiled-cache"})
             self.assertNotIn("--enforce-eager",captured[0])
             self.assertIn("--no-enable-prefix-caching",captured[0])
             if group=="G3":

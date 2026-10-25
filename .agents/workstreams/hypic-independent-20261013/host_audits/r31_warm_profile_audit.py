@@ -54,7 +54,10 @@ def audit(path,*,live_release=False):
     argv=launch["argv"];env=native._environment(argv)
     if (json.loads(native._option(argv,"--profiler-config"))!=owner.profiler_config(spec)
             or json.loads(native._option(argv,"--compilation-config"))!=native.COMPILATION
-            or env.get("VLLM_LOGGING_LEVEL")!="INFO"or "--enforce-eager"in argv
+            or env.get("VLLM_LOGGING_LEVEL")!="INFO"
+            or env.get("TRITON_CACHE_DIR")!="/scratch/compiled-cache"
+            or launch.get("profile_cache_environment")!={"TRITON_CACHE_DIR":"/scratch/compiled-cache"}
+            or "--enforce-eager"in argv
             or "--no-enable-prefix-caching"not in argv or "--enable-prefix-caching"in argv):
         raise ValueError("actual same graph/INFO/noPDC/official profile argv required")
     unit=native._read(raw/"profile-unit.json")

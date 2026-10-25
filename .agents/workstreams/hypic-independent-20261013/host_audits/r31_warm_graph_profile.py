@@ -184,6 +184,12 @@ def run_contract(c,*,source_root=WORKSTREAM,base_module=base):
             launches+=1
             _rewrite_launch(data,c,checked)
             argv=data["argv"]
+            if "TRITON_CACHE_DIR" in retained.native._environment(argv):
+                raise ValueError("unexpected retained profile cache override")
+            (raw/"compiled-cache").mkdir(exist_ok=False)
+            image_index=argv.index(c["image"])
+            argv[image_index:image_index]=["-e","TRITON_CACHE_DIR=/scratch/compiled-cache"]
+            data["profile_cache_environment"]={"TRITON_CACHE_DIR":"/scratch/compiled-cache"}
             actual=json.loads(retained.native._option(argv,"--profiler-config"))
             if actual!=profiler_config(checked["profile"]):
                 raise ValueError("actual official profiler argv differs")

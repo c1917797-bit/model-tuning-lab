@@ -1,19 +1,19 @@
 {
   "schema": "hypic-r31-host-readiness/v1",
   "state": "HOST_ONLY_NOT_NPU_VALIDATED",
-  "static_operation": "exec-00000000000016c5",
+  "static_operation": "exec-00000000000016c9",
   "host_controls": {
     "source_bytes_unchanged": true,
     "contracts": {
       "G1": {
         "path": "WARM_GRAPH_COST_R31_G1_R1_20261025_CONTRACT.json",
-        "sha256": "aa907c5832fc7164ea43fef6af8930593da988b6f77c74f592ecb77647df402a",
+        "sha256": "ddd0fcc8fcb3f39ee022d17552db9d01389466ce96385a5584d6f436d66a6c7e",
         "raw_root": "/cache/cch/hypic-independent-20261013/warm-graph-cost-r31-g1-r1-20261025",
         "checked": {
           "configuration_valid": true,
           "device_run": false,
           "device_admission_performed": false,
-          "controller_sha256": "fa5c4c9181a5434472c45b640a32821a56d1f0ff6096b8e64d810a4e0188811b",
+          "controller_sha256": "0add3c7efc7b4cbf88436ede3e042b00b2f5a684f19b7aceb46dda7b9e9f7e6a",
           "base_controller_sha256": "b26fa6006fd780b19aff3fd804a464e04aeb374b97152d9a24165157e1ee0100",
           "graph_runtime": {
             "profile": "selective-prefill-native-decode-v1",
@@ -52,13 +52,13 @@
       },
       "G3": {
         "path": "WARM_GRAPH_COST_R31_G3_R1_20261025_CONTRACT.json",
-        "sha256": "7460755599b99541177dbe3e2bc6efc9e153b3d1af8db3347f46c1f67c8ca925",
+        "sha256": "5f9e8601a1f7f4030f77535fb02d557e6a9acfce9e883092ae8aa2979cb16699",
         "raw_root": "/cache/cch/hypic-independent-20261013/warm-graph-cost-r31-g3-r1-20261025",
         "checked": {
           "configuration_valid": true,
           "device_run": false,
           "device_admission_performed": false,
-          "controller_sha256": "fa5c4c9181a5434472c45b640a32821a56d1f0ff6096b8e64d810a4e0188811b",
+          "controller_sha256": "0add3c7efc7b4cbf88436ede3e042b00b2f5a684f19b7aceb46dda7b9e9f7e6a",
           "base_controller_sha256": "b26fa6006fd780b19aff3fd804a464e04aeb374b97152d9a24165157e1ee0100",
           "graph_runtime": {
             "profile": "selective-prefill-native-decode-v1",
@@ -100,7 +100,7 @@
     "common_bindings": 425,
     "tests": {
       "exit_code": 0,
-      "stderr": "test_actual_candidate_base_consumes_graph_and_profiler_argv (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_actual_native_base_consumes_graph_and_profiler_argv (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_default_checks_both_actual_contracts_without_device (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_foreign_device_and_oversized_profile_rejected (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_storage_guard_targets_only_exact_owned_cid (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_wrong_real_controller_identity_rejected (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_exact_private_warmup_precedes_capture (test_independent_warm_profile_workload.WarmProfileTests) ... ok\ntest_measured_failures_preserved_and_stopped (test_independent_warm_profile_workload.WarmProfileTests) ... ok\ntest_warmup_failure_retained_without_profile_start (test_independent_warm_profile_workload.WarmProfileTests) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 4.120s\n\nOK\n"
+      "stderr": "test_actual_candidate_base_consumes_graph_and_profiler_argv (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_actual_native_base_consumes_graph_and_profiler_argv (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_default_checks_both_actual_contracts_without_device (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_foreign_device_and_oversized_profile_rejected (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_storage_guard_targets_only_exact_owned_cid (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_wrong_real_controller_identity_rejected (host_audits.test_r31_warm_graph_profile.RealProfileBoundaryTests) ... ok\ntest_exact_private_warmup_precedes_capture (test_independent_warm_profile_workload.WarmProfileTests) ... ok\ntest_measured_failures_preserved_and_stopped (test_independent_warm_profile_workload.WarmProfileTests) ... ok\ntest_warmup_failure_retained_without_profile_start (test_independent_warm_profile_workload.WarmProfileTests) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 4.118s\n\nOK\n"
     },
     "structure": {
       "exit_code": 0,
@@ -238,5 +238,16 @@
   },
   "runtime_unchanged": true,
   "device_run": false,
-  "full_goal_accepted": false
+  "full_goal_accepted": false,
+  "prior_static_operation": "exec-00000000000016c5",
+  "cache_parity_repair": {
+    "prior_checkpoint": "08858a92d1820d49b7db70820ea5c98e4a29f3ac",
+    "scope": "Retained profile base b26 lacks the TRITON_CACHE_DIR override used by actual R30 formal base BF556. HOST adapter now creates exclusive raw/compiled-cache and supplies /scratch/compiled-cache, matching R30. Avoid rootFS100% startup failure; no runtime/algorithm source change.",
+    "new_controller_sha256": "0add3c7efc7b4cbf88436ede3e042b00b2f5a684f19b7aceb46dda7b9e9f7e6a",
+    "new_auditor_sha256": "2677da6df5cc9b0185da26cada3c02eb8ff1cf0e4043e5a114e10239512e9171",
+    "actual_base_argv_cache_test": true,
+    "operation": "exec-00000000000016c9",
+    "tests": 9,
+    "device_run": false
+  }
 }
