@@ -1,4 +1,22 @@
-# CURRENT 2026-10-25 RENEWED12H; R24R2 STATIC READY, NO DEVICE YET
+# CURRENT 2026-10-25 R24R2 OFF RUNNING; EXACT CONTROLLER1512
+
+Fresh1511 admission06:22:55UTC passed source417/runtime415, image/model/input,
+newraw/containerabsence, actualphysical0-3empty,102portsbindable and external
+benchmarkchainsended. This is not a reservation. Direct ma launch atpublished
+checkpoint1d0afe65 returned running exec-0000000000001512, originalpeer
+lgw_a6109c51076a4a2c9d2674ca5a8704a0. Controller and runtime source bytes unchanged.
+OFFraw/cache/cch/hypic-independent-20261013/c2-block-table-r24-off-canary-r2-20261025.
+Poll exacthandle/originalpeer, then raw/process fallback; live/unclear neverrestart.
+OFF terminal requires audit_r24_c2_snapshot_canary.py --contract
+C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json --live-release;
+only independently valid OFF plus exact owned release permits freshONadmission.
+Deadline18:07:17UTC remains enforced. ONnotstarted; no numerical/speed acceptance.
+Formalpreparation review found snapshotON stillforces group/layer receipts even
+when diagnosticfalse: do not call timing clean by togglinglabel. AfterR24 terminal,
+freeze minimal actual timed evidence strategy and join snapshotproof; do not alter
+frozen Python/config/manifest bytes whilethiscontroller runs.
+
+# EARLIER 2026-10-25 RENEWED12H; R24R2 STATIC READY, NO DEVICE YET
 
 Static1507 PASS: two new contracts differ fromR1 only five whitelisted fields;
 417host/415runtime, actual image/model/input hashes, CLI import/configuration,
