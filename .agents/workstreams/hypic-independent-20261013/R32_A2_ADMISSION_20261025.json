@@ -1,0 +1,28 @@
+{
+  "admission_valid": true,
+  "arm": "A2",
+  "utc": "2026-10-25T15:58:22.590698+00:00",
+  "head": "258860b521895537455e316eef509fc6adc6f456",
+  "hostname": "Euler",
+  "physical0_3": [],
+  "foreign_benchmark_tasks": [],
+  "owned_controllers": [],
+  "ports_bindable": 102,
+  "cache_available_bytes": 4933586944,
+  "new_raw_root": "/cache/cch/hypic-independent-20261013/gate-cast-r32-a2-20261025",
+  "source_bindings": 426,
+  "study_source_map_sha256": "97414d5ade246004e2a530fb7d7cce4383bee53c89b75981ff28609d6d6c2cca",
+  "contract_sha256": "9679d1773b5ddc1f8b43dce082e87e5a31cd38337bce8b90aa2c7b4f1c9da70a",
+  "prerequisite": {
+    "report": "R29_G3_WARMUP_CANARY_AUDIT_20261025.json",
+    "sha256": "ddc1875cf1bee861ef98bb7b4187438e7631cd065a3ce7527ae87c2f2387cf43",
+    "python_sources": 422,
+    "scope": "Original historical graph/numerical source anchor only; new gate placement needs actual first-shape private NPU checks.",
+    "runtime_differences": [
+      "graph_candidate/activation.py",
+      "independent_gate_cast_delivery.py",
+      "independent_recurrent_boundary.py"
+    ]
+  },
+  "device_run": false
+}

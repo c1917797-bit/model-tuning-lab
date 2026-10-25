@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R32_B1_VALID_RELEASED_A2_DRIFT_CONTROL_NEXT",
+  "execution_state": "R32_ABA_INCONCLUSIVE_TIMED_FIRST_USE_R33_PREFIX_MODEL_CPU_ONLY",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -257,8 +257,8 @@
   },
   "cost_model_20261025": {
     "report": "HYPIC_COST_MODEL_AND_PRIORITY_20261025.json",
-    "state": "SOURCE_BOUND_SMALL_MODEL_NOT_CAUSAL_ACCEPTANCE",
-    "next": "Do not fill unchanged negative12matrix. Keep graph. Bound in-service cost attribution for fsync vs C1 private-material lease vs full selected layer at same representative integrated workload, without adding synchronization or changing algorithm/guards. Choose one behavior switch only after observed budget; then OFF/ON matched experiment. Not an independent GDN task.",
+    "state": "R32_PARKED_INCONCLUSIVE_R33_PREFIX_TERMINAL_SELECTED",
+    "next": "Use the prefix-only unused-output mathematical/CPU model, then one common new warmup/source contract and single-variable integrated experiment. fsync needs actual observed budget; do not change guards or add blind matrix waves.",
     "full_goal_scope_unchanged": true,
     "latest_actual_pair": "R30_FIRST_PAIR_DECISION_20261025.json"
   },
@@ -982,10 +982,10 @@
     }
   },
   "r32_single_variable": {
-    "state": "A1_B1_VALID_RELEASED_A2_PENDING_NO_CAUSE_CLAIM",
+    "state": "INCONCLUSIVE_A2_FIRST_USE_OBSERVER_IN_TIMED_REGION",
     "plan": "R32_MODEL_GUIDED_SINGLE_VARIABLE_PLAN_20261025.json",
     "primary_variable": "C1 short-boundary gate-cast placement only",
-    "next": "Fresh same-source A2 original-cast control, then preregistered three-arm decision only. B1vsA1 difference alone is not a causal/speed acceptance.",
+    "next": "Park cast placement; do not relax audit or blindly repeat. See HYPIC_MODEL_GUIDED_NEXT_ACTION_20261025.json for prefix unused-output one-variable model and common warmup design repair.",
     "readiness": "R32_GATE_CAST_HOST_READINESS_20261025.json",
     "controller": "host_audits/r32_gate_cast_trial.py",
     "auditor": "host_audits/r32b_gate_cast_audit.py",
@@ -1015,25 +1015,24 @@
     ],
     "active_controller": null,
     "last_completed_controller": {
-      "state": "VALID_AUDITED_RELEASED",
-      "operation": "exec-0000000000001739",
+      "state": "CONTROLLER_RELEASED_ARM_AUDIT_FAILED_WARMUP",
+      "operation": "exec-0000000000001744",
       "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
       "connector": "awmcp",
-      "arm": "B1",
-      "contract": "GATE_CAST_R32_B1_20261025_CONTRACT.json",
-      "contract_sha256": "ef032d4aa1f042bd9ea6fe4d0a345dccfd4bff7f1513dc52558b55790ae0b9f6",
-      "raw_root": "/cache/cch/hypic-independent-20261013/gate-cast-r32-b1-20261025",
-      "launch_checkpoint": "62fce8e358f17038df42bdc941a62c2658f2c407",
-      "admission_operation": "exec-0000000000001738",
-      "observed_running_utc": "2026-10-25T15:36:00Z",
+      "arm": "A2",
+      "contract": "GATE_CAST_R32_A2_20261025_CONTRACT.json",
+      "contract_sha256": "9679d1773b5ddc1f8b43dce082e87e5a31cd38337bce8b90aa2c7b4f1c9da70a",
+      "raw_root": "/cache/cch/hypic-independent-20261013/gate-cast-r32-a2-20261025",
+      "launch_checkpoint": "258860b521895537455e316eef509fc6adc6f456",
+      "admission_operation": "exec-0000000000001743",
+      "observed_running_utc": "2026-10-25T15:59:05Z",
       "auditor": "host_audits/r32b_gate_cast_audit.py",
       "definition": "R32B_ID_JOIN_OBSERVER_20261025.json",
-      "definition_sha256": "0fb1c2e4205f0ec7550ce1fd742838e19166c9287570be33ee6f4ec5b2a04212",
       "rule": "Exact original peer/handle/raw; live or unknown neverrestart.426runtime/common andboundHOST sources frozen.",
-      "terminal_state": "VALID_AUDITED_RELEASED",
-      "independent_audit": "exec-000000000000173e",
-      "evidence": "R32_B1_AUDIT_20261025.json",
-      "diagnostic_makespan_seconds": 116.8003872600384
+      "terminal_state": "CONTROLLER_RELEASED_ARM_AUDIT_FAILED_WARMUP",
+      "independent_audit": "exec-0000000000001747",
+      "release_review": "exec-0000000000001749",
+      "evidence": "R32_GATE_CAST_ABA_INCONCLUSIVE_20261025.json"
     },
     "observer_definition": {
       "path": "R32B_ID_JOIN_OBSERVER_20261025.json",
@@ -1046,11 +1045,20 @@
     "B1": {
       "evidence": "R32_B1_AUDIT_20261025.json",
       "seconds": 116.8003872600384
-    }
+    },
+    "decision": "R32_GATE_CAST_ABA_INCONCLUSIVE_20261025.json"
   },
   "maintainer_profile_id_learning_20261025": {
     "ledger": "HYPIC_PROFILE_ID_LEARNING_20261025.json",
     "validation": "HYPIC_PROFILE_ID_LEARNING_VALIDATION_20261025.json",
     "scope": "Evidence replay and forward case specifications, not blind Skill behavior or29functional acceptance."
+  },
+  "r33_prefix_terminal_model": {
+    "state": "HOST_CPU_COUNTERFACTUAL_ONLY_NOT_INSTALLED",
+    "plan": "HYPIC_MODEL_GUIDED_NEXT_ACTION_20261025.json",
+    "host_model": "host_audits/r33_prefix_terminal_cpu_model.py",
+    "cpu_cases": 12,
+    "cpu_operation": "exec-000000000000174a",
+    "source_or_npu_modified": false
   }
 }

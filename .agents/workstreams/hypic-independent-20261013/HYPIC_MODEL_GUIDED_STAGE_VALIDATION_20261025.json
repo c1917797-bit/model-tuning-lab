@@ -1,0 +1,45 @@
+{
+  "schema": "hypic-model-guided-stage-validation/v1",
+  "operation": "exec-000000000000174b",
+  "cpu_operation": "exec-000000000000174a",
+  "source_bindings_all3_unchanged": 426,
+  "r33_cpu_cases": 12,
+  "r33_runtime_installed": false,
+  "checks": [
+    {
+      "command": [
+        "bash",
+        "scripts/validate-mst.sh"
+      ],
+      "exit": 0,
+      "stdout": "PASS: Maintainer Skill Tree structure is valid (29 skills)\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "host_audits/verify_profile_id_learning.py",
+        "--ledger",
+        "HYPIC_PROFILE_ID_LEARNING_20261025.json"
+      ],
+      "exit": 0,
+      "stdout": "{\"artifact_and_A1_evidence_replay\": \"PASS\", \"current_device_query\": false, \"full_reproduction_accepted\": false, \"new_npu_work\": false, \"scope\": \"historical hashes,4rank hardware and actual source-bound A1 observation only; not independent blind Skill behavior or29functional acceptance\"}\n",
+      "stderr": ""
+    }
+  ],
+  "host_model_sha256": "063724dab037e9884154699f61425c10380d48f1f0a35cc7fd5fd21be70b88fe",
+  "R32_three_arm_accepted": false,
+  "new_NPU_run": false,
+  "scope": "Current unchanged426sources and historical evidence replay; new HOST prefix-operation model only. R32 A2 warmup failed and no causal screen accepted; no R33 runtime/NPU/formalquality/speed acceptance."
+}

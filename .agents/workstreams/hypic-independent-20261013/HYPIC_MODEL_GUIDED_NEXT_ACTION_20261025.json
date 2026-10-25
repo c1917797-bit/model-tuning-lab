@@ -1,0 +1,96 @@
+{
+  "schema": "hypic-model-guided-next-hypothesis/v1",
+  "date": "2026-10-25",
+  "state": "R33_PREFIX_UNUSED_OUTPUT_HOST_ONLY_NOT_NPU_READY",
+  "human_direction": "Small cost model, few likely routes, code differences are clues; one variable and matched experiment are required for cause.",
+  "previous_decision": "R32_GATE_CAST_ABA_INCONCLUSIVE_20261025.json",
+  "model": {
+    "equation": "delta_elapsed = -useful_prefill_saved + extra_boundary_work + material_and_evidence_overhead + coordination + queue_change",
+    "non_additivity": "CPU API waits, hardware tasks and copies overlap; four rank times are not added.93s profile64 cannot substitute formal1024/fullquality.",
+    "observation": "R31 shows C1-associated copy-wait, but source-executed gate conversion sites are not hardware copies or removable time."
+  },
+  "candidates": [
+    {
+      "priority": 1,
+      "id": "PREFIX_TERMINAL_UNUSED_OUTPUT",
+      "state": "CPU_EXACT_STATE_AND_OPERATION_MODEL_ONLY",
+      "source_clue": "Prefix caller discards recurrent outputs and keeps final state, while the short recurrence still computes q@H and stacks outputs at every token.",
+      "mathematical_reason": "H_t=f(k_t,v_t,g_t,beta_t,H_prev) is independent of y_t. Keep all state arithmetic/order, query normalization, input observers, suffix outputs and numerical/ownership/evidence guards.",
+      "single_variable": "Only skip per-token output matmul and output assembly in the source-verified prefix terminal-only caller.",
+      "cpu_evidence": {
+        "operation": "exec-000000000000174a",
+        "output": "/cache/cch/hypic-independent-20261013/r33-prefix-terminal-cpu-model-r1-20261025.json",
+        "sha256": "53384fdf151c4cd6e08b75e6397f0c7475ceae8249a0fad0f628c0413ce25bbb",
+        "cpu_cases_passed": 12,
+        "npu_run": false,
+        "runtime_installed": false,
+        "identity": {
+          "caller_source_sha256": "210d9031eb36aaa6efefbfbebc474c218d0fc152847d19ccbffb9adb2d9bca19",
+          "counterfactual_ast_sha256": "5cc43e1dcd80dc7dd8bec184943d7ee3c9f158e9fa3f24e5ee9a59b803bf3ef4",
+          "device_run": false,
+          "query_normalization_and_input_observer_retained": true,
+          "reference_source_sha256": "fa97420f915d0efebfb9568b3ba7306030441cf409c24521f3551ee55dfe23a7",
+          "removed_sites": [
+            "outputs.append((queries[i].unsqueeze(-2) @ state).squeeze(-2) * dk ** (-0.5))"
+          ],
+          "rewritten_assembly": [
+            "torch.stack(outputs)[None].to(v.dtype)"
+          ],
+          "runtime_installed": false,
+          "state_arithmetic_or_order_changed": false
+        }
+      },
+      "operation_prediction": "CPU bmm/mm dispatch count2*L toL in12actual-head shape/dtype cases; not a device-kernel count or walltime prediction.",
+      "causal_status": "Unconfirmed; no service adapter installed and no new NPU experiment started.",
+      "next_gate": "Create a removable default-disabled prefix-only adapter and common source/config contracts; prove install/rollback and actual fourworker terminal equality. Correct common warmup coverage before timing. One declared treatment only, then matched control/treatment/control; no cast/IO/barrier changes bundled."
+    },
+    {
+      "priority": 2,
+      "id": "EVIDENCE_FSYNC_IO",
+      "state": "MEASURE_CRITICAL_PATH_BEFORE_TREATMENT",
+      "source_clue": "Source-owned emitter fsyncs each persisted worker event.",
+      "measured_budget": null,
+      "single_variable": "First observe exact-owned fsync count/elapsed in an integrated bounded request, without changing durability. Only a meaningful observed budget justifies a separately frozen cadence experiment.",
+      "invalidation": "Host disk calibration or summed event counts alone cannot establish service critical-path cost; keep all evidence and fail-closed behavior."
+    },
+    {
+      "priority": 3,
+      "id": "GLOBAL_COMPLETION_BARRIER",
+      "state": "DEFER_LOW_DIRECT_BUDGET",
+      "measured_budget": "R31 device-wide sync API1.626-1.643s/rank in~93.51s windows.",
+      "next": "Retain completion guarantees; no barrier removal without stronger dependency/critical-path evidence."
+    }
+  ],
+  "parked": [
+    {
+      "id": "GATE_CAST_PLACEMENT",
+      "decision": "R32_A2 invalidates the preregistered three-arm screen. A1/B1 only1.6006% descriptive difference. No confirmed gain or zero-effect claim; do not repeat unchanged casts/old roots."
+    },
+    {
+      "id": "RAW_COPY_BANDWIDTH",
+      "reason": "R31 actual async device-copy union~16ms/rank is a low direct budget; CPU copy wait is not proof of bandwidth saturation."
+    },
+    {
+      "id": "FINITE_GUARD_REMOVAL",
+      "reason": "Observed finite/scalar CPUunion~0.481s; safety guards remain."
+    }
+  ],
+  "common_design_repair": {
+    "lesson": "A fixed16-request warmup did not cover length39 inA2; first-use numerical checks entered the timed wave.",
+    "required": "Freeze a new bounded warmup/proof phase that verifies actual expected timed shapes for every worker BEFORE a measured start; unseen timed shapes remain invalid. No inferred warmup from request count, no guessed subtraction, no relaxed original results."
+  },
+  "authority": {
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "model": "27B",
+    "tp": 4,
+    "absolute_stop_utc": "2026-10-25T18:07:17Z",
+    "foreign_workloads_untouched": true
+  },
+  "full_goal_complete": false,
+  "formal_speed_or_quality_accepted": false
+}

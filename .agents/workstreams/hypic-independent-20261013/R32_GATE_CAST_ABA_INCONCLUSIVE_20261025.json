@@ -1,0 +1,109 @@
+{
+  "schema": "hypic-r32-aba-inconclusive/v1",
+  "date": "2026-10-25",
+  "state": "INCONCLUSIVE_A2_FIRST_USE_NUMERICAL_OBSERVER_IN_TIMED_REGION",
+  "same_source_map_sha256": "97414d5ade246004e2a530fb7d7cce4383bee53c89b75981ff28609d6d6c2cca",
+  "A1": {
+    "accepted_bounded_arm": true,
+    "seconds": 118.70032357005402,
+    "evidence": "R32_A1_AUDIT_20261025.json"
+  },
+  "B1": {
+    "accepted_bounded_arm": true,
+    "seconds": 116.8003872600384,
+    "evidence": "R32_B1_AUDIT_20261025.json"
+  },
+  "A2": {
+    "accepted_bounded_arm": false,
+    "seconds_descriptive_only": 124.25900051998906,
+    "controller": "exec-0000000000001744",
+    "audit_failed": "exec-0000000000001747",
+    "investigation": "exec-0000000000001748",
+    "release_review": {
+      "output": "/cache/cch/hypic-independent-20261013/r32-a2-release-and-failure-review-r1-20261025.json",
+      "sha256": "56bb638f0c143329507f13417051068a4ea7a01892652df77a33199b735ba40d",
+      "review": {
+        "release_review_valid": true,
+        "exact_owned_cid": "7507eecc5a70a63547d4d6c68476bdf0a4f9011e3fc319f648288be1e1af793b",
+        "current_physical0_3": [],
+        "port_free": true,
+        "hot_covered": 16,
+        "hot_denominator": 16,
+        "fourworker_physical_verified": true,
+        "isolation_samples": 262,
+        "actual_private_npu_shape_checks_passed": 8,
+        "source_bindings": 426,
+        "warmup_gate_accepted": false,
+        "bounded_arm_accepted": false,
+        "cause_of_speed_regression_confirmed": false,
+        "original_audit_operation": "exec-0000000000001747",
+        "raw_sha256": {
+          "result.json": "6e9f16dad239cd1b1f46841e3a81bff50eb1a09f85ac06817e68b18400a6bd8e",
+          "release.json": "1553e2bc5c0ed82a70c2278853ad36a2188596d3e2d50b67bb7055d34ea169ef",
+          "performance-unit.json": "ecdc1f1e1b6834d9796d271d242e6cd90a41a4678bb502c208c53adc803d913d",
+          "events.jsonl": "a5385120b364ae1b6337932c74a2d525af3c5f06b5d079f0aa6398a84b8d89b3",
+          "service-start.json": "f65cf22a9aff1c06f1e4e5e8b699721ebe863bb29b3836e8b3395a47f5cdffdc",
+          "service.log": "9a02cc37068832e5317951d2a5128e273b5b59e2a64d0692282b2e1e02d85b92",
+          "launch.json": "d7c366048130fef5e9795ceddf255dc23b902a080d9244722a2237c375d858e5"
+        }
+      }
+    },
+    "measured_gate_observations": 1152,
+    "cold_first_uses": 4,
+    "warm_observed_lengths": {
+      "('prefix', 8)": 960
+    },
+    "cold_observations": [
+      {
+        "rank": 0,
+        "step": 146,
+        "phase": "prefix",
+        "length": 39,
+        "first_shape_already_validated": false,
+        "scope": "selected wave; not an individual layer receipt"
+      },
+      {
+        "rank": 1,
+        "step": 146,
+        "phase": "prefix",
+        "length": 39,
+        "first_shape_already_validated": false,
+        "scope": "selected wave; not an individual layer receipt"
+      },
+      {
+        "rank": 2,
+        "step": 146,
+        "phase": "prefix",
+        "length": 39,
+        "first_shape_already_validated": false,
+        "scope": "selected wave; not an individual layer receipt"
+      },
+      {
+        "rank": 3,
+        "step": 146,
+        "phase": "prefix",
+        "length": 39,
+        "first_shape_already_validated": false,
+        "scope": "selected wave; not an individual layer receipt"
+      }
+    ],
+    "private_numeric_checks_passed": 8,
+    "worker_sha256": {
+      "compact-worker-59.jsonl": "aa3fd5f1d5f16316b0b98e64cf358cb6f19caef2014c6ae32951681fe3a488da",
+      "compact-worker-62.jsonl": "6a15f80d871c8185bfa2aad337903a0efdc2a9c92fd2d4e9dbcc75ea559de944",
+      "compact-worker-61.jsonl": "2f1414cf09e96b4f8e3bb68ff72d9a5145a675b6672f0f7ff00394666cdae61a",
+      "compact-worker-60.jsonl": "e71a4cabed8dacf57f3dd70f2978375576f171a9f15a34d6f9256284e810cdea"
+    }
+  },
+  "preregistered": {
+    "control_drift_limit_percent": 5,
+    "screen_gain_percent": 5,
+    "all_three_independent_arm_audits_required": true
+  },
+  "accepted_gain_percent": null,
+  "cause_confirmed": false,
+  "full_goal_complete": false,
+  "raw_or_gates_changed": false,
+  "learning": "Fixed warmup request count does not ensure actual same-process shape coverage under dynamic scheduling. Confirm actual legal timed-shape warm evidence before starting a timing region; an unseen shape's first-use numerical observer inside timed work invalidates the causal screen.",
+  "next": "Park this cast-placement hypothesis: A1/B1 descriptive difference1.60% is insufficient causal evidence and A2 is not accepted. Do not rerun old contracts, remove cases, subtract guessed observer cost or relax warm/numeric gates. Prioritize the source/math-modelled unused prefix outputs, with the warmup design corrected in a NEW common protocol before any A/B timing."
+}
