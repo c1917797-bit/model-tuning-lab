@@ -1200,9 +1200,9 @@
     "full_goal_complete": false
   },
   "r35_evidence_io_budget": {
-    "state": "PACKAGE_CODE_HOST_READY_NOT_IMAGE_OR_DEVICE_ACCEPTED",
+    "state": "STATIC_AND_PINNED_IMAGE_CPU_READY_DEVICE_BUDGET_PENDING",
     "plan": "R35_EVIDENCE_IO_BUDGET_PLAN_20261025.json",
-    "next": "Freeze new ON/OFF manifest and one diagnostic contract using the forthcoming code checkpoint; static package + exact pinned image install/restore/helper/disabled controls; only then fresh physical admission/run.",
+    "next": "Fresh physical source/model/image/input/port/new-root admission, then one R35 bounded real IO budget observation with original writes/fsync and all warm/numerical/hot/isolation/release gates.",
     "baseline_treatment": "Retain original prefix output path; rejected R34 terminal-only flag disabled.",
     "full_goal_complete": false,
     "host_validation": "R35_EVIDENCE_IO_OBSERVER_HOST_VALIDATION_20261025.json",
@@ -1220,6 +1220,9 @@
     "controller": "host_audits/r35_evidence_io_controller.py",
     "auditor": "host_audits/r35_evidence_io_audit.py",
     "package": "evidence_io_r35",
-    "auditor_cpu_cases": 8
+    "auditor_cpu_cases": 8,
+    "static_image_validation": "R35_STATIC_IMAGE_READINESS_20261025.json",
+    "contract": "EVIDENCE_IO_R35_OBSERVE_R1_20261025_CONTRACT.json",
+    "code_checkpoint": "dd6d0a1dcdb9c93d21c274e4a4e6440167a278ef"
   }
 }

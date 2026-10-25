@@ -1,0 +1,59 @@
+{
+  "schema": "hypic-r35-static-image-readiness/v1",
+  "state": "STATIC_AND_PINNED_IMAGE_CPU_PREFLIGHT_VALID_NOT_NPU",
+  "code_checkpoint": "dd6d0a1dcdb9c93d21c274e4a4e6440167a278ef",
+  "static_operation": "exec-00000000000018db",
+  "static_exit_code": 0,
+  "static_report": "{\"launcher_sha256\": \"bcee54f1e99756e147649d580597d85a5c6a50b7c4657c8a4f339f2f2c44f8bf\", \"loader_sha256\": \"c86e395abdd230bce991ec62e08ec38a1e7fe72d8de8f6a1fe783b937e7ab577\", \"manifest_sha256\": \"d837935c40acb770a020cbdf7118d08070430b1c31910bc5c2e7354cc72a06ee\", \"name\": \"hypic-owned-evidence-io-budget-r35\", \"not_runtime_activation_or_delivery_acceptance\": true, \"patch_sha256\": \"7210ad378a4a0386c65f3475658461f4db8b8d9ccdfc893ff2f0118fbaff2cf0\", \"required_roles\": [\"TP rank0\", \"TP rank1\", \"TP rank2\", \"TP rank3\"], \"schema\": \"runtime-monkeypatch-package-static-check/v1\", \"static_identity_valid\": true}\n{\"contract_check\": {\"configuration_valid\": true, \"device_run\": false, \"controller_sha256\": \"7c13859a55c2f339ab7838f43df08d14f74ded0d8749151c8a195267d8e9b8e3\", \"graph_runtime\": {\"candidate_enabled\": true, \"capture_sizes\": [1, 4, 8, 16, 24, 32], \"compilation_mode\": 3, \"cudagraph_mode\": \"FULL_DECODE_ONLY\", \"official_compilation_source_sha256\": \"301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913\", \"official_debug_logging\": false, \"profile\": \"selective-prefill-native-decode-v1\"}, \"active_manifest_sha256\": \"144739b5f34f44dc6f2b277fd510819a77f47ddda65bb3a9583ca7d3c659f0ae\", \"source_bindings\": 441, \"prerequisite\": {\"report\": \"R34_THREE_ARM_DECISION_20261025.json\", \"sha256\": \"60788bcfbe5f1a4ea5e2f5627624dc5e103fe06fe2b3e097388bab8f70c201e4\", \"python_sources\": 430, \"runtime_additions\": [\"evidence_io_r35/__init__.py\", \"evidence_io_r35/patch.py\", \"evidence_io_r35/sitecustomize.py\", \"independent_evidence_io_budget.py\"], \"changed_own_loader\": [\"graph_candidate/worker_loader.py\"], \"scope\": \"R34 valid numerical/hot control, unchanged algorithm Python and original emitter/fsync; only bounded IO observer wiring changed. Not formal quality/speed.\"}, \"arm\": \"A1\"}, \"new_device_work\": false}\n",
+  "image_operation": "exec-00000000000018dd",
+  "image_exit_code": 0,
+  "image_report": {
+    "actual_image_original_writer_and_fsync_control": true,
+    "actual_image_python": "3.12.13",
+    "actual_installed_native_worker_source_sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968",
+    "actual_observer_executable_source_guards": true,
+    "fourworker_activation_proven": false,
+    "manifest_off_on_and_owned_loader_install_restore": [
+      {
+        "actual_own_loader_enable_stop": true,
+        "flag": "0",
+        "model_loaded": false,
+        "native_worker_import_executed": false
+      },
+      {
+        "actual_own_loader_enable_stop": true,
+        "flag": "1",
+        "model_loaded": false,
+        "native_worker_import_executed": false
+      }
+    ],
+    "native_worker_registration_proven": false,
+    "new_npu_work": false,
+    "schema": "hypic-r35-pinned-image-preflight/v1",
+    "scope": "Actual pinned-image package/module/importer installation and writer controls only; no NPU devices exposed, no native worker/model execution.",
+    "speed_or_quality_accepted": false,
+    "versions": {
+      "torch": "2.10.0+cpu",
+      "torch-npu": "2.10.0.post4",
+      "vllm": "0.23.0+empty",
+      "vllm-ascend": "0.23.0"
+    }
+  },
+  "failed_preflight": {
+    "operation": "exec-00000000000018dc",
+    "exit_code": 1,
+    "reason": "Editable installed package is outside site-packages; distribution.locate_file was not the actual import origin. Preflight resolved the actual top-level import spec; native worker source unchanged.",
+    "stderr": "Traceback (most recent call last):\n  File \"/probe/host_audits/r35_image_preflight.py\", line 78, in <module>\n    a=p.parse_args();print(json.dumps(run(a.on,a.off),sort_keys=True))\n                                      ^^^^^^^^^^^^^^^\n  File \"/probe/host_audits/r35_image_preflight.py\", line 15, in run\n    assert hashlib.sha256(worker.read_bytes()).hexdigest()==worker_loader.WORKER_SHA256\n                          ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/python3.12.13/lib/python3.12/pathlib.py\", line 1019, in read_bytes\n    with self.open(mode='rb') as f:\n         ^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/python3.12.13/lib/python3.12/pathlib.py\", line 1013, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/usr/local/python3.12.13/lib/python3.12/site-packages/vllm_ascend/worker/model_runner_v1.py'\n"
+  },
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "cpu_preflight_no_device_exposure": true,
+  "contract": "EVIDENCE_IO_R35_OBSERVE_R1_20261025_CONTRACT.json",
+  "deadline": "2026-10-26T06:36:27Z",
+  "runtime_source_bindings": 441,
+  "runtime_python_sources": 430,
+  "full_goal_complete": false,
+  "actual_four_worker_activation": false,
+  "io_cost_measured": false,
+  "speed_quality_accepted": false,
+  "next": "Fresh physical source/model/image/input/port/new-root admission, then one R35 bounded real IO budget observation with original writes/fsync and all warm/numerical/hot/isolation/release gates."
+}

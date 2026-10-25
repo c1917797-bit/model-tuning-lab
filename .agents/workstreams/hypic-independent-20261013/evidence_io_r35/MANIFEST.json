@@ -1,0 +1,47 @@
+{
+  "schema": "runtime-monkeypatch-delivery/v1",
+  "name": "hypic-owned-evidence-io-budget-r35",
+  "status": "draft",
+  "source_contract": {
+    "image_digest": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "framework_version": "vllm0.23.0+empty/vllm-ascend0.23.0/torch-npu2.10.0.post4",
+    "cann_version": "9.1.0 (pinned-image R31 metadata)",
+    "live_module": "graph_candidate.worker_loader",
+    "live_object": "enable",
+    "source_sha256": "d16e646be7a2145880c92fab1d40eadb9623a3ddc3d519a26044b40db0a056c5"
+  },
+  "treatment": {
+    "switch": "INDEPENDENT_EVIDENCE_IO_BUDGET",
+    "enabled_value": "1",
+    "default_disabled": true,
+    "single_primary_variable": true,
+    "diagnostic_only": true,
+    "patch_file": "patch.py",
+    "patch_sha256": "7210ad378a4a0386c65f3475658461f4db8b8d9ccdfc893ff2f0118fbaff2cf0",
+    "loader_file": "sitecustomize.py",
+    "loader_sha256": "c86e395abdd230bce991ec62e08ec38a1e7fe72d8de8f6a1fe783b937e7ab577",
+    "launcher_file": "run_with_patch.sh",
+    "launcher_sha256": "bcee54f1e99756e147649d580597d85a5c6a50b7c4657c8a4f339f2f2c44f8bf",
+    "entrypoint": "patch:enable"
+  },
+  "activation": {
+    "marker_prefix": "r35_evidence_io_budget_step",
+    "required_roles": [
+      "TP rank0",
+      "TP rank1",
+      "TP rank2",
+      "TP rank3"
+    ],
+    "disabled_control_required": true
+  },
+  "rollback": {
+    "disable_command": "INDEPENDENT_EVIDENCE_IO_BUDGET=0 INDEPENDENT_PREFIX_TERMINAL_ONLY=0 INDEPENDENT_GRAPH_HYPIC=1 INDEPENDENT_GRAPH_MANIFEST=/probe/EVIDENCE_IO_R35_OFF_MANIFEST_20261025.json ./run_with_patch.sh \"$@\"",
+    "uninstall_command": "INDEPENDENT_GRAPH_HYPIC=0 INDEPENDENT_EVIDENCE_IO_BUDGET=0 INDEPENDENT_PREFIX_TERMINAL_ONLY=0 ./run_with_patch.sh \"$@\""
+  },
+  "evidence": {
+    "experiment_id": "hypic-evidence-io-budget-r35-20261025",
+    "branch": "work/hypic-independent-20261013",
+    "commit": "dd6d0a1dcdb9c93d21c274e4a4e6440167a278ef",
+    "scope": "HOST15observer/14loader/8auditor controls; no image/worker/NPU cost or performance acceptance."
+  }
+}
