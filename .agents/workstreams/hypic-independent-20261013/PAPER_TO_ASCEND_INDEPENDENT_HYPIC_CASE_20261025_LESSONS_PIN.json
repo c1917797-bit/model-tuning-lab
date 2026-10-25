@@ -1,0 +1,228 @@
+{
+  "schema": "paper-to-ascend-independent-hypic-case/v1",
+  "status": "PARTIAL_BOUNDED_VERIFIED_NOT_FULL_FUNCTIONAL_ACCEPTANCE",
+  "paper_revision": "2607.01299v2",
+  "identity": "independent single-instance adapted C1/C2 port; C3 explicitly excluded by human scope, not whole-paper result reproduction",
+  "scope": {
+    "model": "Qwen3.6-27B / Qwen3_5ForConditionalGeneration",
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tp": 4,
+    "reuse_old_algorithm_code": false,
+    "official_image_unchanged": true,
+    "training_or_quantization": false
+  },
+  "skill_mapping": [
+    {
+      "skill": "paper-to-ascend",
+      "requirements": [
+        "method-chain versus backend separation",
+        "bounded decision scope",
+        "constraint feasibility"
+      ],
+      "evidence": [
+        "C1_PACKED_R14_TERMINAL_20261015.json",
+        "C1_PACKED_R14_PDC_TERMINAL_20261015.json",
+        "FORMAL_R15_20261016_G3_R1_TERMINAL.json"
+      ],
+      "proved": "integrated C1/C2 mechanism and bounded numerical controls; architecture48linear/16full",
+      "unproved": "full formal performance and naturalEOS taskquality; no overall paper adoption"
+    },
+    {
+      "skill": "ascend-canary-implementation",
+      "requirements": [
+        "one falsifiable implementation repair",
+        "actual mutable-state/private precommit control"
+      ],
+      "proved": "canonical short-prefix recurrence terminal actually feeds cached composition; R13 failure retained, R14 16/16 independent audit0857 passed without tolerance relaxation",
+      "unproved": "general all-input model equivalence or finalquality"
+    },
+    {
+      "skill": "ascend-benchmark-evidence",
+      "requirements": [
+        "exact denominator",
+        "actual fourworker hot proof",
+        "independent observational join"
+      ],
+      "proved": "16 exact HTTP/runtime bijection; fourrank48C1/16C2; original ID and conditional-cap audit failures retained; renewed full40 exact indices/40HTTPIDs/fourrank48C1+16C2 same-step; independent09a1 timing/source/567clean/exactrelease passed",
+      "lesson": "A conditional instrumentation event is not a universal mechanism invariant. Audit actual first runner computed prefix and immutable per-request PIC geometry, preserve original frozen FAIL and identify revised observational decision explicitly.",
+      "unproved": "matchedG1comparison, all12 repeated phases, realG2/G4 nativecounter observation",
+      "evidence": [
+        "FORMAL_R15_20261016_G3_R1_TERMINAL.json",
+        "FORMAL_R15_20261016_G3_R1_CONTRACT.json"
+      ]
+    },
+    {
+      "skill": "chicaihong01-host-maintenance",
+      "requirements": [
+        "fresh direct route",
+        "physical to namespace identity",
+        "continuous isolation",
+        "exact own release"
+      ],
+      "proved": "R14 216 and PDC219 clean isolation samples; actual PID/cgroup/NSpid; exact owned containers removed; renewedG3 567clean,actual host2775467-70/NSpid59-62,exact079f release09a1",
+      "unproved": "future occupancy; every successor must freshly admit",
+      "evidence": [
+        "FORMAL_R15_20261016_G3_R1_LIVE_NAMESPACE.json",
+        "FORMAL_R15_20261016_G3_R1_TERMINAL.json"
+      ]
+    },
+    {
+      "skill": "runtime-monkeypatch-delivery",
+      "requirements": [
+        "default disabled",
+        "source-bound removable hooks",
+        "separate numerical versus timed execution"
+      ],
+      "proved": "R15 explicit defaultOFF performance switch leaves canary shadow mandatory,496CPU host regression,141bindings; full40 timed path terminal0967/independent09a1 valid, no numericalshadow events",
+      "unproved": "full repeatedperformance/quality and actual disabled/uninstall/restart lifecycle"
+    },
+    {
+      "skill": "ascend-model-quality-evaluation",
+      "requirements": [
+        "same ruler and full paired denominator"
+      ],
+      "proved": "protocol only: latest human nonthinking1024/thinking2048 naturalEOS, same arms",
+      "unproved": "full127x3 paired quality in this independent campaign; do not import oldR19 verdict as new evidence"
+    }
+  ],
+  "evidence": {
+    "C1_PACKED_R14_TERMINAL_20261015.json": {
+      "sha256": "6ee5e2d3a3454b15a364c43eee27d92396cb800a2f6ad741a02f31020f926efc"
+    },
+    "C1_PACKED_R14_PDC_TERMINAL_20261015.json": {
+      "sha256": "19501e81c52925eaf35a2c98a03441554d24fe73cfc15ff2e5f3e4b125e7e613"
+    },
+    "C1_PDC_ORIGINAL_AUDIT_FAILURE_20261015.json": {
+      "sha256": "3f9d806d8d45ac51c5a1385dac24574fdb51e12f81bcbec3e8f1ba27ca159080"
+    },
+    "C1_PACKED_R15_HOST_READINESS_20261015.json": {
+      "sha256": "15d6271677c13642a69a47d82c87c1ca190f8dcc78218f07cb2b9d54f5fc3818"
+    },
+    "FORMAL_R15_G3_R1_LIVE_NAMESPACE.json": {
+      "sha256": "7d30a9d609d10000f9e5caa3b79b5fa38db9db21a862c0505274d29fe7cfd837"
+    },
+    "FORMAL_R15_20261016_G3_R1_TERMINAL.json": {
+      "sha256": "384c81ed31e93897c0dd8e8b5838da1ac3317822e73cb9c4a18917016edcbf8a"
+    },
+    "FORMAL_R15_20261016_G3_R1_CONTRACT.json": {
+      "sha256": "98d0d340f93354ab39c2bf6337aa66a3af310167a54659b223c81309f0897b16"
+    },
+    "FORMAL_R15_20261016_G3_R1_LIVE_NAMESPACE.json": {
+      "sha256": "c4fba1f53bf2d39b72fb017454c23c0cf0c0cca37a109d92bef874a7e5491b2a"
+    },
+    "FORMAL_NATIVE_PDC_HOST_READINESS_20261016.json": {
+      "sha256": "777d4de14dedf7bd33d13d95c2eb8ea0fa350d5d1f83fca85d45022880226541"
+    },
+    "PREFILL_PROMPT_SNAPSHOT_HOST_READINESS_20261016.json": {
+      "sha256": "7a2e57ac459e91a2a3c3d5bfedcd8e99b3fb47439fb21cecd6c1642e3c14d2bb"
+    }
+  },
+  "negative_results": [
+    {
+      "operation": "exec-000000000000080c",
+      "scope": "R13 actual failed-head numeric path",
+      "verdict": "failed",
+      "lesson": "same equations do not imply same BF16 batching/branch order"
+    },
+    {
+      "operation": "exec-000000000000084d",
+      "scope": "post-run HTTP/runtime string identity audit",
+      "verdict": "failed-retained; separate strict bijection correction"
+    },
+    {
+      "operation": "exec-000000000000087b",
+      "scope": "required conditionalcap event for every request",
+      "verdict": "failed-retained; revised actual-hit proof0887 separately labelled"
+    },
+    {
+      "operation": "exec-000000000000099d",
+      "scope": "firstG3 terminal live strictportbind",
+      "verdict": "failed-retained; later09a0 noTCP/listener and strictbindPASS,unchangedaudit09a1PASS;initialTCPcause notproven"
+    }
+  ],
+  "live_not_accepted": {
+    "operation": "exec-000000000000089b",
+    "phase": "R15G3/R1 full40 fixed1024",
+    "state": "TERMINAL_INVALID_DEADLINE_INTERRUPTED",
+    "successful": 18,
+    "required": 40,
+    "no_new_claims": true
+  },
+  "remaining": [
+    "all12 same-source matched formal phases; currently1valid, no matched speedup established",
+    "full127x3 each-arm naturalEOS paired quality, nonthinking1024/thinking2048",
+    "disable/uninstall/restart lifecycle plus exact release",
+    "Paper-to-Ascend end-to-end functional acceptance",
+    "all29 archived Skill functional acceptance",
+    "authorized serialized integration/main verification"
+  ],
+  "publication": "work branch only; remote live verify required, main unchanged",
+  "full_goal_accepted": false,
+  "skill_sources": {
+    "paper-to-ascend": "d2c1df74da4cc9dfde2baa15cf2837e0e72ce757e9815961afd8974b63f2321b",
+    "ascend-canary-implementation": "9e33a2be7c7b774619abeeb95f8af8721c1a4819a1b7d8b4a0997e40d3242db3",
+    "ascend-benchmark-evidence": "ae72495f3930ba9da2be8dfabb3cd449a85835e5e6060b965af93a1c13592910",
+    "chicaihong01-host-maintenance": "8d8e7070d76af3becab77fbdf095740dfc38f98dfbabc8534eb9b03caf13c3d8",
+    "runtime-monkeypatch-delivery": "cac159b43cf96a9632f6085c9955dbbdffd0ba40562b257068576e7845be7368",
+    "ascend-model-quality-evaluation": "438eb3965d86b04aa0748518e8d761c5b757ea1e93da155765f84e405e87e093"
+  },
+  "new_valid_phase": {
+    "name": "renewed20261016 G3/R1",
+    "requests": 40,
+    "summary": "FORMAL_R15_20261016_G3_R1_TERMINAL.json",
+    "contract": "FORMAL_R15_20261016_G3_R1_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/formal-r15-20261016-g3-r1",
+    "audit": "exec-00000000000009a1",
+    "independent_audit_exit": 0,
+    "optimization_accepted": false,
+    "quality_accepted": false,
+    "lifecycle_accepted": false,
+    "scope": "one full40 timed/source/allfourrank48C1+16C2/isolation/release phase; not a matched speedup or fullSkill acceptance"
+  },
+  "current_matrix": {
+    "valid": 1,
+    "total": 12,
+    "running": "G1/R1 exact09a6",
+    "not_started": 10
+  },
+  "preparatory_components": {
+    "native_pdc": "37CPU controls, prospective G2/G4 wrappers/contracts; no real nativecounter device proof",
+    "prompt_snapshot": "17targeted and550CPU regressions plus pinnedimageCPUonly localcost; helper NOTwired into service"
+  },
+  "derivation": {
+    "kind": "source-pin successor for an unchanged historical partial case, not a new device run",
+    "date": "2026-10-25",
+    "derived_from": "PAPER_TO_ASCEND_INDEPENDENT_HYPIC_CASE_20261016.json",
+    "derived_from_sha256": "8216b7faf89cd5a9d7b5ca132821ee9db523013b6db12aedb8721ba0939a6873",
+    "observed_repository_head": "b9ccb6a03523c848cbff5174686830850087fe20",
+    "changed_fields": [
+      "skill_sources",
+      "derivation"
+    ],
+    "current_skill_git_blobs": {
+      "paper-to-ascend": "4bd45fe980a67e1d087294879a23e80af9fc8559",
+      "ascend-canary-implementation": "d0e81e1489c9dfe8d075a55a0c52afdff944d6a5",
+      "ascend-benchmark-evidence": "1edc719ae88e0a2eb023a24f93e527bd220a9db9",
+      "chicaihong01-host-maintenance": "4f226c75f5cf92c16b02524e7666c941dd147afb",
+      "runtime-monkeypatch-delivery": "29e9588aeea5a47b329c269087b663cfb7f6e7b6",
+      "ascend-model-quality-evaluation": "5a7a024855786b2278e82681e7df09aaabbbf68b"
+    },
+    "historical_evidence_unchanged": true,
+    "historical_raw_unchanged": true,
+    "new_valid_phase_unchanged": true,
+    "historical_matrix_fields_unchanged": true,
+    "scope": "All experiment, evidence, matrix, mechanism, numerical, quality and lifecycle statements retain their original R15 snapshot scope. The current Skill source pins permit document-binding replay only; they do not create fresh NPU evidence or overall functional acceptance.",
+    "historical_failure_preserved": {
+      "before_reference_append": "exec-000000000000160d",
+      "after_reference_append": "exec-0000000000001625",
+      "reason": "pre-existing paper-to-ascend SKILL.md source-pin drift",
+      "original_case_modified": false
+    },
+    "validation_policy": "Use the unchanged validate_independent_hypic_case.py --case <this successor> --document-only. Do not replace the old failure in historical evals; raw replay and new device claims require their own valid evidence."
+  }
+}

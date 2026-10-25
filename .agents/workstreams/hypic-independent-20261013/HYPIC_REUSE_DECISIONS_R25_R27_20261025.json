@@ -1,0 +1,338 @@
+{
+  "schema": "paper-to-ascend-curated-decision-lessons/v1",
+  "date": "2026-10-25",
+  "status": "CURATED_SOURCE_AND_BOUNDED_EVIDENCE_NOT_FULL_REPRODUCTION",
+  "kind": "curated maintainer learning, not raw experiment output",
+  "skill": "paper-to-ascend",
+  "current_checkpoint_observed": "b9ccb6a03523c848cbff5174686830850087fe20",
+  "source_policy": "Read original Git objects for ideas/protocol only. No old algorithm/operator/runner/scheduler copied, imported, mounted or executed.",
+  "historical_reference": {
+    "repository": "/cache/cch/hypic_vllm_ascend-hotproof-20261008",
+    "original_commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
+    "working_HEAD_observed_separately": "4429e35177979c874bf053ab29789e4773f39b22",
+    "interpretation": "The working HEAD4429 is not substituted for original3ad."
+  },
+  "evidence_sha256": {
+    "R27_G3_GRAPH_CAPTURE_FAILURE_20261025.json": "7d77ea5420cd26028121716885a6b99fe413358eec63e9ddf746f3c3cc1c67cd",
+    "R25_FIRST_PAIR_DECISION_20261025.json": "4e839dc3d78cd79e4ac0db6e793b2d837f5c0d020b1588d43cb516a640aae964",
+    "R25_G1_AUDIT_20261025.json": "454819592fa08d7ef83f0dbfa4b4fb2189be14efdf7c8be37e99dd7db00ac0fc",
+    "R25_G3_AUDIT_20261025.json": "22a81bd63e7b33ab0d3e6252512da1134c082478d5be7b6c0445bb36d34d13d8",
+    "R27_G1_AUDIT_20261025.json": "dd2eacf3b86d90ec3d74f36dbaaee98ce904d81f37a82d2f99d620f74a90a2d4",
+    "R27_GRAPH_HOST_READINESS_20261025.json": "ca0d42c5dd9c6e4d384962ef61795e83d20ee26b410912767d613ed3e39c0049",
+    "validate_independent_hypic_case.py": "cdb58812390f7009f62b641a31957fed2980f6ed6a8f71db75f6ca2b21e6b843",
+    "verify_hypic_lessons.py": "70e04843646d8d59549f2678a965ff2e31296008684d1e458d30bbd1ddf8b810"
+  },
+  "source_sha256": {
+    "3ad:hypic_vllm_ascend/material.py": {
+      "commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
+      "git_blob": "28896fd2bd8959729f03b1fdb221e00bdd265828",
+      "sha256": "cd677063af4e296be00d12ae9f148fc384cdf4f29b376170f89cd56eb5cf6f68"
+    },
+    "3ad:hypic_vllm_ascend/patches/gdn.py": {
+      "commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
+      "git_blob": "aac44af25fd1971169418694979db118ee4b07a2",
+      "sha256": "72d58fdf03a4317ee4493ac475cd4b059ae3ed7f9138243446737a860537623d"
+    },
+    "3ad:hypic_vllm_ascend/patches/attention.py": {
+      "commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
+      "git_blob": "25e667c1fbc4cd8b2384542f2b15bb636df0999e",
+      "sha256": "0e13fbf953f40d3e6103fc7e4b1858755d8992d108d8b1763659aa29fb502876"
+    },
+    "3ad:hypic_vllm_ascend/diagnostics.py": {
+      "commit": "3ad0967589304cd8fc4e7cff02f48ecc6125c89f",
+      "git_blob": "bc341714ae40470eb4ad68ae9e686d73f8394994",
+      "sha256": "035084679dcc1f9ac2cfff9714415218d326d6efd8a4960ed6ad023940afdf08"
+    },
+    "independent_public_pool.py": {
+      "sha256": "296284a65199bf63d55aff32503ead7206292cb1f525dd281186e0d5c8c55190",
+      "matches_R27_frozen_source": true,
+      "lines": 56
+    },
+    "independent_compact_material_pool.py": {
+      "sha256": "88595a25d94a15ef06ee1fd4eb84a150f484430ba596439487610b88a1bf5543",
+      "matches_R27_frozen_source": true,
+      "lines": 122
+    },
+    "independent_c1_packed_prepare.py": {
+      "sha256": "5762f20b45c9b5ac3e10be27172bffba846f308788df715849d029cf1f4c6858",
+      "matches_R27_frozen_source": true,
+      "lines": 58
+    },
+    "independent_c1_packed_backend.py": {
+      "sha256": "e38fdbbce7c9bd5e42d2a19d8bc69fc0213b651fd25fbf77eff5695d507065e0",
+      "matches_R27_frozen_source": true,
+      "lines": 130
+    },
+    "experimental_c2_layer_barrier.py": {
+      "sha256": "3a9fe22b595e2072f5c17e8fa255c6b33c70d2fedcaade0363375fef32818dbd",
+      "matches_R27_frozen_source": true,
+      "lines": 177
+    },
+    "independent_c2_reference.py": {
+      "sha256": "a0a512f723a0503b6ed6e082665a2655f9458719a831224f419a7a28e0abcdcf",
+      "matches_R27_frozen_source": true,
+      "lines": 46
+    },
+    "independent_compact_loader.py": {
+      "sha256": "68f85ad6544bbff8c90da0c091c6ae87ac0823b56b9b00b804cb4f7bd8c79c84",
+      "matches_R27_frozen_source": true,
+      "lines": 79
+    },
+    "graph_candidate/worker_loader.py": {
+      "sha256": "2f0d26ac3dd623bc1f3aae751feac73ec6291159614ad8b1345623bcdf9b76d1",
+      "matches_R27_frozen_source": true,
+      "lines": 265
+    }
+  },
+  "proved": [
+    {
+      "id": "r25-valid-negative",
+      "evidence": "R25_FIRST_PAIR_DECISION_20261025.json",
+      "scope": "one matched eager G1/G3 first screen,40 fixed1024 requests each,c16,noPDC;2/12 cells",
+      "g1_weighted_tpot_ms": 280.0677875400396,
+      "g3_weighted_tpot_ms": 319.7693265700621,
+      "tpot_change_percent": 14.1756891710892,
+      "ttft_p95_change_percent": 22.075207422737364,
+      "hot": "G3 40/40 same-step fourrank48C1/16C2",
+      "conclusion": "Real body pruning can coexist with slower whole service. Preserve negative decision; no unchanged matrix expansion."
+    },
+    {
+      "id": "r27-native-graph-only",
+      "evidence": "R27_G1_AUDIT_20261025.json",
+      "controller": "exec-00000000000015ec",
+      "auditor": "exec-00000000000015fb",
+      "responses": 3,
+      "isolation_samples": 199,
+      "live_release_verified": true,
+      "capture_ranks": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "replay_directly_observed_ranks": [
+        0
+      ],
+      "conclusion": "Native G1 VLLM_COMPILE/FULL_DECODE_ONLY bounded compatibility passed; not HYPIC G3 compatibility, speed,fullquality or per-token graph coverage."
+    },
+    {
+      "id": "logging-scope",
+      "evidence": "R27_G1_AUDIT_20261025.json",
+      "source": "vllm/logger.py96-105,127-134;distributed/parallel_state.py2224-2232",
+      "conclusion": "Official info_once defaults to local-first logging. Missing replay lines from other ranks are not evidence those ranks did not replay; do not invent a four-replay-line gate."
+    },
+    {
+      "id": "rope-parameter-fit",
+      "model_config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+      "fields": {
+        "head_dim": 256,
+        "partial_rotary_factor": 0.25,
+        "rotary_dim": 64,
+        "rope_theta": 10000000,
+        "rope_type": "default",
+        "dtype": "bfloat16"
+      },
+      "current_source": "experimental_c2_layer_barrier.py123-128;independent_c2_reference.py5-25",
+      "conclusion": "Configured 27B text-case geometry and relocation delta fit. FP32 newly computed sin/cos and official BF16 cache arithmetic are different paths; parameter fit is not bitwise equality or task-quality acceptance."
+    }
+  ],
+  "r27_graph_startup_failure": {
+    "evidence": "R27_G3_GRAPH_CAPTURE_FAILURE_20261025.json",
+    "controller": "exec-000000000000160b",
+    "auditor": "exec-0000000000001628",
+    "requests": 0,
+    "isolation_samples": 370,
+    "source_bindings": 424,
+    "live_release_verified": true,
+    "proved_direct_cause": "First native AOT compilation occurred inside ACL graph capture. Compiler's synchronous device mode switch is incompatible with an active capture.",
+    "timestamps_as_logged": {
+      "native_G1": {
+        "dynamo_transformation": "09:28:26",
+        "graph_compile_finished": "09:29:29",
+        "torch_compile_finished": "09:29:36",
+        "first_full_capture": "09:30:07"
+      },
+      "candidate_G3": {
+        "first_full_capture": "09:45:19",
+        "first_compile_of_installed_forward": "09:45:19 after capture began",
+        "capture_error": "09:45:38"
+      }
+    },
+    "first_stack": [
+      "acl_graph.py:194 runnable",
+      "entry_router.py:184/110 native_call",
+      "decorators.py:663 aot_compile",
+      "wrapper.py:167",
+      "compiler_interface.py:164 npugraph_ex_compile",
+      "torch.npu.set_compile_mode(jit_compile=False)",
+      "torch_npu/npu/npu_config.py:102 synchronize",
+      "107027: stream is captured"
+    ],
+    "upstream_hypothesis": "Current selective router applies official skip_compiled=True to every NONE call, including native non-request compile warmups. Verify source-owned warmup route and test sequence before claiming repair.",
+    "next_minimum_falsification": "Only authorize genuine source-owned non-request compiler warmup through original native_call; preserve actual PIC prefill eager/snapshot/math/ownership gates. New source contract/root, require compilation complete before first capture and actual successful hot requests.",
+    "scope": "Failed graph startup with zero HTTP requests. No C1/C2 numerical, speed or task-quality conclusion; this ordering failure does not quantify or explain all R25 eager regression. Warmup routing repair is not yet experimentally validated."
+  },
+  "source_capability_comparison": [
+    {
+      "area": "C1 residency and wave reuse",
+      "reference": {
+        "file": "hypic_vllm_ascend/material.py",
+        "lines": [
+          581,
+          640
+        ],
+        "finding": "auto selection can keep GDN material on NPU when budget/watermark allow; otherwise CPU. Actual selected residency/hit counts for successful run remain unmeasured."
+      },
+      "reference_wave": {
+        "file": "hypic_vllm_ascend/patches/gdn.py",
+        "lines": [
+          963,
+          979
+        ],
+        "finding": "stage shared conv/state/transition tensors by segment within a layer wave."
+      },
+      "current": {
+        "files": {
+          "independent_compact_material_pool.py": [
+            100,
+            122
+          ],
+          "independent_public_pool.py": [
+            47,
+            54
+          ],
+          "independent_c1_packed_prepare.py": [
+            21,
+            26
+          ],
+          "independent_c1_packed_backend.py": [
+            60,
+            69
+          ]
+        },
+        "finding": "canonical C1 is CPU resident; private CPU clone and device transfer. Current packed prepare already acquires once per unique body/layer per wave and already uses shared WY; it is incorrect to describe it as one T/S transfer per request."
+      },
+      "classification": "source capability, not measured cause of R25 regression"
+    },
+    {
+      "area": "C2 placement batching",
+      "reference": {
+        "file": "hypic_vllm_ascend/patches/attention.py",
+        "lines": [
+          1188,
+          1255
+        ],
+        "finding": "stages K/V, groups placements by anchor, rotates per anchor then batches cache writes."
+      },
+      "current": {
+        "file": "experimental_c2_layer_barrier.py",
+        "lines": [
+          116,
+          151
+        ],
+        "finding": "acquires private K/V/positions, relocates and writes per selected plan; anchor grouping is not present in this path."
+      },
+      "classification": "source capability, not measured benefit or safe replacement proof"
+    },
+    {
+      "area": "evidence I/O",
+      "reference": {
+        "file": "hypic_vllm_ascend/diagnostics.py",
+        "lines": [
+          70,
+          98
+        ],
+        "finding": "emitter appends/write/closes; no per-event fsync in this function."
+      },
+      "current": {
+        "files": {
+          "independent_compact_loader.py": [
+            58,
+            62
+          ],
+          "graph_candidate/worker_loader.py": [
+            199,
+            216
+          ]
+        },
+        "finding": "emitter performs per-event fsync under lock; this is a visible durability/overhead policy difference."
+      },
+      "classification": "timing contribution not measured; do not remove durability or hot evidence to claim speed"
+    },
+    {
+      "area": "RoPE finite precision",
+      "reference": {
+        "file": "hypic_vllm_ascend/patches/attention.py",
+        "lines": [
+          219,
+          258
+        ],
+        "finding": "uses registered native cos/sin cache row and converts it to key dtype."
+      },
+      "current": {
+        "file": "independent_c2_reference.py",
+        "lines": [
+          5,
+          25
+        ],
+        "finding": "computes delta-angle sin/cos in FP32 for BF16 keys and casts result back."
+      },
+      "classification": "operation order/rounding differs; no defect or losslessness established from source alone"
+    }
+  ],
+  "hypotheses_and_next_minimum_falsification": [
+    {
+      "hypothesis": "Eager compatibility restriction materially affects absolute runtime or candidate gap.",
+      "support": "R25 is matched eager; historical provided protocol used FULL_DECODE_ONLY. R27 G1 establishes native graph feasibility only.",
+      "next": "Finish the already-authorized bounded G3 counterpart. If compatible, freeze one fresh matched graph G1/G3 performance pair; do not pool it with eager timings or fill all12 cells first."
+    },
+    {
+      "hypothesis": "Residency or C2 per-plan copies/rotations consume useful critical-path time.",
+      "support": "Source differences above; no actual old residency/hit-rate or current attributed time measured.",
+      "next": "Use a bounded diagnostic on the existing representative case to count/time material acquisition and C2 copy/rotation/cache-write by body/layer/wave/anchor. Only then choose one independently implemented repair; retain ownership and numerical checks."
+    },
+    {
+      "hypothesis": "Durable evidence writes materially contribute to service overhead.",
+      "support": "Per-event fsync source difference only.",
+      "next": "Measure existing write/fsync cost before altering it. Any diagnostic instrumentation/durability treatment needs its own evidence identity; do not relabel instrumented timing as formal speed or silently discard raw receipts."
+    },
+    {
+      "hypothesis": "RoPE rounding contributes to task differences.",
+      "support": "Parameter fit but differing BF16 arithmetic paths; no causal attribution.",
+      "next": "Compare same frozen keys/positions on one observed layer/shape using the two independently specified arithmetic paths, then use the authorized full paired task-quality ruler. Do not demand PIC/native full-context token equality or infer task accuracy from a small residual."
+    }
+  ],
+  "historical_environment_blocker": {
+    "evidence": "R24_OFF_R1_ADMISSION_FAILURE_20261023.json",
+    "controller": "exec-0000000000000d55",
+    "independent_check": "exec-0000000000000d5a",
+    "result": "External task occupied physical0-3 before admission; no HYPIC raw root/container/request created.",
+    "meaning": "Environmental admission failure, not algorithm/numerical/performance evidence; not a statement of current occupancy.",
+    "next_minimum": "Observe real external task termination and fresh authorized ownership before a new attempt; do not stop foreign work or infer reservation from transient idle."
+  },
+  "reuse_for_next_paper": [
+    "Find the first missing causal link and predeclare the smallest experiment that could disprove the proposed explanation.",
+    "Inspect the actual source and runtime profile early; historical success establishes a possible route, not interchangeable source,checkpoint,token stream or absolute timing.",
+    "Keep measured outcome, source capability, causal hypothesis and environmental blocker in separate fields.",
+    "Use evidence producer semantics to decide what a missing log means; instrumentation counts are not universal mechanism invariants.",
+    "Choose an oracle for the actual mathematical/task claim. C1/GDN, four workers,local-first logging,physical0-3,port/cap and tolerances are this case, not requirements for every paper."
+  ],
+  "binding_preservation": {
+    "skill_entrypoint": ".agents/skills/paper-to-ascend/SKILL.md",
+    "skill_sha256_unchanged": "d2c1df74da4cc9dfde2baa15cf2837e0e72ce757e9815961afd8974b63f2321b",
+    "skill_git_blob_unchanged": "4bd45fe980a67e1d087294879a23e80af9fc8559",
+    "reference_sha256_before_append": "99efd6683557385a326409ec9dd87293be2663e3f009dbda88b4069c8da9970c",
+    "reference_hash_pin_search": "No tracked digest reference found; current frozen verifiers bind SKILL.md/report/raw/repair sources, not this reference.",
+    "historical_case_before_edit": {
+      "file": "PAPER_TO_ASCEND_INDEPENDENT_HYPIC_CASE_20261016.json",
+      "operation": "exec-000000000000160d",
+      "exit": 1,
+      "reason": "pre-existing paper-to-ascend SKILL.md source drift; old pin226e5539... differs from currentd2c1df74...",
+      "case_or_pin_modified": false
+    },
+    "frozen_python_modified": false,
+    "task_or_handoff_modified": false
+  },
+  "full_reproduction_accepted": false,
+  "skill_functional_acceptance": "NOT_DECIDED"
+}

@@ -92,3 +92,83 @@ The ingestion eval `hypic-independent-lessons-20261023.yaml` tests decision
 boundaries, not a claim that all 29 Skills function. Its replay checks historical
 raw hashes and report arithmetic without allocating NPUs. Revalidate source,
 environment and authority before any later device phase.
+
+## 2026-10-25 addendum: explain why, then choose the next small experiment
+
+This adds decision evidence to the historical snapshot above. Read the
+[source-bound decision ledger](../../../workstreams/hypic-independent-20261013/HYPIC_REUSE_DECISIONS_R25_R27_20261025.json)
+for exact commits, files, hashes, line ranges and the remaining uncertainty.
+It is curated learning, not a new raw experiment or a completed reproduction.
+
+### Outcomes established by the current evidence
+
+- **R25 is a useful negative result.** Both eager G1/G3 arms completed 40 fixed-
+  output requests and independent audits; G3 had 40/40 same-step four-rank 48/16
+  body-skip coverage. Weighted TPOT nevertheless rose 280.067788 to 319.769327 ms
+  (+14.175689%), and TTFT P95 rose 22.075207%. This shows that real mechanism
+  activation did not yield service acceleration for that variant. It does not
+  show the paper is impossible, nor justify filling the unchanged 12-cell matrix.
+- **R27 G1 resolves only native graph feasibility.** The bounded native control
+  completed three requests, 199 clean isolation observations and live release.
+  Four ranks logged native FULL capture; the local-first rank directly logged
+  replay. It does not establish the HYPIC counterpart, graph speed or full task
+  quality. Keep a later graph pair separate from R25 eager timings.
+- **R27 G3 isolates a startup ordering failure.** It served zero HTTP requests;
+  independent source/isolation/release checks passed with 370 clean observations.
+  Native G1 finished compilation at 09:29:36 before capture at 09:30:07. G3
+  began capture at 09:45:19, first compiled the installed forward inside it,
+  then failed at 09:45:38: `npugraph_ex_compile -> set_compile_mode ->
+  npu_config.synchronize -> 107027 (stream is captured)`. The direct cause is
+  established. Whether applying `skip_compiled=True` to every NONE call also
+  suppressed a genuine compiler warmup remains the upstream hypothesis.
+  The next small test should route only source-proven non-request warmups
+  through native compilation, retaining actual PIC prefill/snapshot/lease gates.
+  This is not a validated repair, a task-quality result or an explanation of
+  the whole R25 eager regression.
+- **Read the evidence producer before inventing a gate.** In this pinned vLLM,
+  `info_once` defaults to local-first logging. Requiring a replay line from
+  every worker would reject a valid run because of logger suppression. This
+  lesson is to derive observability from source, not to require this logger,
+  rank count or a graph experiment for every paper.
+
+### Source capability is not measured causality
+
+The original successful source was read from Git commit `3ad0967`, separately
+from that checkout's `4429e35` HEAD. No reference algorithm code was executed,
+copied, imported or mounted.
+
+| Source observation | What it does and does not explain |
+| --- | --- |
+| Original C1 supports budget/watermark-dependent NPU residency and shared staged materials; the current pool uses CPU canonical data/private copies and device transfers | A plausible cost difference. Actual old residency/hit rates and attributed time are unknown. Current C1 already packs waves, shares WY, and acquires once per unique body/layer/wave; do not falsely call it repeated per-request T/S upload. |
+| Original C2 groups placements by segment/anchor; current C2 acquires, relocates and writes per selected plan | A candidate batching opportunity, not evidence that copying the implementation is needed or that it caused 14% regression. |
+| Original evidence emitter append/write/closes; current emitter also fsyncs each event | A durability/overhead policy difference. Its service cost has not been isolated; do not remove evidence durability to manufacture a win. |
+| Current 27B RoPE geometry fits its config; FP32 newly computed sin/cos differs from the official BF16-cache path | Parameter agreement is not finite-precision identity, a numerical defect, or proof of lossless task quality. |
+
+### Reuse the decision, not all of this campaign's machinery
+
+For a later paper, keep four short fields: **proved**, **hypothesis**,
+**environmental blocker**, and **next minimum falsification**. Select the first
+missing causal link rather than repeatedly exercising a passed component.
+
+Here the next graph question is the already-authorized bounded HYPIC counterpart,
+then one fresh matched graph pair if it passes. Residency/C2 batching/I/O claims
+need a bounded attribution measurement before choosing one repair. A RoPE
+rounding hypothesis needs same-input primitive evidence and then the frozen
+paired task-quality evaluation; PIC/native full-context token equality is not
+the default approximation oracle.
+
+A resource admission failure is separate again: R24 OFF R1 encountered an
+external task before creating a container or request. That was environmental
+blocking, not an HYPIC result and not proof of today's occupancy. Concrete
+devices, ports, verification transport, output caps and deadlines remain in the
+case record, not universal requirements for the next paper.
+
+### Preserve the learning's own provenance
+
+The Skill entrypoint remains unchanged. Before this addition, the 2026-10-16
+case's frozen document replay already failed its older Skill-source pin
+(operation 160d); this reference append does not repair or conceal that failure.
+A successor case may use the frozen validator's `--case` data input and current
+Skill sources while preserving the old case and its true partial scope.
+Historical replay, a new reference, or bounded graph evidence does not certify
+the full Paper-to-Ascend workflow or all 29 Skills.
