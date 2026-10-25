@@ -1,4 +1,19 @@
-# CURRENT 2026-10-25 R24R2 OFF RUNNING; EXACT CONTROLLER1512
+# CURRENT 2026-10-25 R24R2 OFF PASSED INDEPENDENT AUDIT; ON NOT STARTED
+
+OFF1512 exit0 validtrue,3/3responses,231cleanisolation,exactCIDremoved,
+8233free/finalphysicalempty. Independent1524 exit0,bounded_canary_validtrue,
+417sourcebindings,live-releaseverified,fourrankphysical/PIDjoin,hot2/2,
+48C1layers/rank,192numericshadows,128finitehotC2completions. SnapshotOFF
+0reads/0hits,no checkedlayers,all16layer/forward/requestjoins accepted.
+R24_R2_OFF_AUDIT_20261025.json preserves report and explicit limitedscope:
+helpergeneric'full40' text is NOT actualdenominator; currenthotdenominator2.
+FreshONadmission is next, no oldrootreuse or unreviewed restart.
+Userconfirmed HYPIC12h followup visible andenabled. Fixedstop18:07:17UTC unchanged.
+Necessary nativegroup/snapshot receipts can remain in formalE2E with their
+overhead disclosed; zero logging is NOT an extra acceptancegate. Close heavy
+numericshadow/divergence/probes in formal config, retain safety/mechanism proof.
+
+# EARLIER 2026-10-25 R24R2 OFF RUNNING; EXACT CONTROLLER1512
 
 06:29UTC originalobjectrelay imported local283de3b1, but desktop ordinaryFFpush
 failed schannel SEC_E_ILLEGAL_MESSAGE TLS handshake. R24_R2_PUBLICATION_FAILURE_20261025.json
