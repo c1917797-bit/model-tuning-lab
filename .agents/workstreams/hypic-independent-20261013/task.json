@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R24_FOLLOWUP_CLOSED_INCOMPLETE_NO_DEVICE_RUN",
+  "execution_state": "R24_R2_RENEWED_12H_STATIC_READY",
   "r24_resume": {
     "date": "2026-10-23",
     "human_request": "我的hypic论文复现成功了吗，如果没有，还需要做什么，请继续，我要把这个论文复现成功",
@@ -180,7 +180,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "R24 wait followup closed with no device run: external benchmark tasks remained live and insufficient budget remained before unchanged13:00UTC stop; no deadline extension. PreserveR1; full goal incomplete/blocked. FutureR2 requires newly authorized sufficient stable0-3 window, actual task termination and fresh source/direct/ports/root proof.",
+  "next_action": "Renewed12h through2026-10-25T18:07:17Z. Freeze/publish newR24R2 contracts with unchanged417/415 source; fresh direct source/image/model/input/root/physical0-3/ports/foreign-task terminal admission, OFF then independent audit/exact release beforeON. Only decisive missing gates thereafter; no raw reuse or threshold change.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -515,5 +515,26 @@
     "report": "R22_FIRSTBATCH_CANARY_R1_TERMINAL_20261017.json",
     "full_quality": false,
     "performance": false
+  },
+  "renewal_20261025": {
+    "human_authorization": [
+      "重新授权穿刺",
+      "继续12小时"
+    ],
+    "start_utc": "2026-10-25T06:07:17Z",
+    "absolute_stop_utc": "2026-10-25T18:07:17Z",
+    "state": "STATIC_VALIDATED_NOT_LAUNCHED",
+    "plan": "R24_R2_RENEWAL_PLAN_20261025.json",
+    "contracts": [
+      "C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json",
+      "C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json"
+    ],
+    "active_controller": null,
+    "resource_lease": "Not reserved;1502read-onlyidle, repeat immediate admission before devices",
+    "scope": "Same full independent27B/physical0-3/TP4 C1/C2 three-stage goal; C3/dualTP2 excluded; original successful code not reused",
+    "prior_failure": "R24_OFF_R1_ADMISSION_FAILURE_20261023.json",
+    "prior_followup": "R24_WAIT_FOLLOWUP_TERMINAL_20261023.json remains immutable history",
+    "readiness": "R24_R2_READINESS_20261025.json",
+    "static_operation": "exec-0000000000001507"
   }
 }

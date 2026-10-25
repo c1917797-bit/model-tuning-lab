@@ -1,0 +1,129 @@
+{
+  "schema": "hypic-renewed-12h-r24-r2/v1",
+  "date": "2026-10-25",
+  "state": "PREPARED_NOT_DEVICE_ACCEPTED",
+  "authorization": {
+    "human_messages": [
+      "重新授权穿刺",
+      "继续12小时"
+    ],
+    "start_utc": "2026-10-25T06:07:17Z",
+    "absolute_stop_utc": "2026-10-25T18:07:17Z",
+    "timezone": "Europe/Moscow",
+    "stop_local": "2026-10-25T21:07:17+03:00",
+    "rule": "Explicit renewed12h authorization supersedes expired prior windows; no automatic extension. Same full three-stage goal retained."
+  },
+  "source": {
+    "checkpoint": "8c04695c247117d29912c635ed54fbcb4fa4decf",
+    "code_checkpoint": "24627e7dc3d4749530c4225f904f184f6b9bb2ce",
+    "branch": "work/hypic-independent-20261013",
+    "host_bindings": 417,
+    "runtime_bindings": 415,
+    "unchanged_source_verification": "exec-0000000000001505",
+    "note": "Current independent C1/C2 only; no copied/imported/mounted prior successful HYPIC algorithm/operator/runner/scheduler. Configs/manifests/controller/oracles unchanged."
+  },
+  "resource_orientation": {
+    "operation": "exec-0000000000001502",
+    "registry_operation": "exec-0000000000001503",
+    "timestamp_utc": "2026-10-25T06:09:47Z",
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tp": 4,
+    "model": "/cache/efim/Qwen3.6-27B",
+    "port": 8233,
+    "hccl_ports": [
+      26300,
+      26400
+    ],
+    "physical_processes": [],
+    "bindable_ports": 102,
+    "owned_controllers": 0,
+    "owned_label_containers": 0,
+    "foreign_benchmark_live_chains": false,
+    "passive_foreign_container_not_occupancy": true,
+    "cache_available_bytes": 9140858880,
+    "docker_root": "/cache/docker",
+    "root_free_bytes": 0,
+    "safety": "No cleanup/system/foreign-task modification; all generated paths on/cache. Fresh per-action admission and continuous guard required; snapshot is not reservation.",
+    "worktree_registration": "Existing user-selected cache worktree registered in/cache/cch/model-tuning-lab-hypic-e2e-20261006/.git, not the separate canonical/opt Git common directory; no clone/tree created or migrated."
+  },
+  "scientific_question": "Does a source-bound one-eager-forward C2 CPU block-table validation snapshot preserve the existing same-semantics numerical, slot/ownership/completion mechanism while replacing repeated host validation reads? This is an instrumented integrated diagnostic, not formal speed or task quality.",
+  "single_switch": "c2_block_table_snapshot false vs true; all other independent C1/C2 and diagnostic settings identical",
+  "protocol": {
+    "requests": "one public producer then two concurrent distinct hot private32768-input requests per arm",
+    "request_waves": [
+      [
+        0
+      ],
+      [
+        1,
+        2
+      ]
+    ],
+    "fixed_output_tokens": 1024,
+    "required_four_rank_layers": {
+      "C1": 48,
+      "C2": 16
+    },
+    "baseline": "R24 OFF is current independent algorithm with snapshot disabled, NOT G1 native algorithm-off",
+    "control_then_candidate": true,
+    "forbidden_changes": [
+      "No threshold relaxation",
+      "No denominator reduction",
+      "No native full-context tensor/token equality requirement for approximate PIC",
+      "No old raw root overwrite/reuse",
+      "No independent GDN task substituted for integration",
+      "No physical4-7/C3/dualTP2"
+    ]
+  },
+  "contracts": {
+    "OFF": {
+      "file": "C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/c2-block-table-r24-off-canary-r2-20261025",
+      "container_name": "hypic-independent-c2-block-table-r24-off-canary-r2-20261025"
+    },
+    "ON": {
+      "file": "C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/c2-block-table-r24-on-canary-r2-20261025",
+      "container_name": "hypic-independent-c2-block-table-r24-on-canary-r2-20261025"
+    }
+  },
+  "reopening_premise": "R1 was pre-device resource-admission failure, not algorithm rejection. New human12h authorization and fresh1502observed prior foreign benchmark chains absent permit a new immutable attempt, subject to immediate repeat admission.",
+  "r1_to_r2_change_whitelist": [
+    "absolute_stop_utc",
+    "raw_root",
+    "container_name",
+    "purpose",
+    "protocol_notes.deadline_scope"
+  ],
+  "stages": [
+    {
+      "id": "R24-R2",
+      "action": "Fresh OFF admission/run; independent audit_r24_c2_snapshot_canary --live-release; only if valid and exactrelease fresh ON admission/run/audit",
+      "budget_hours_reference": [
+        0.75,
+        1.25
+      ],
+      "claim": "Bounded mechanism/numerical/source/isolation/release only"
+    },
+    {
+      "id": "same-source-screen",
+      "action": "After R24 valid, freeze new clean uninstrumented matched nativeG1/currentG3 first screen using same model/source/ruler and newroots; no historical baseline substitution",
+      "claim": "First pair only; not three-repeat matrix"
+    },
+    {
+      "id": "full-evidence",
+      "action": "If progression permits, finish G1-G4 three-round same-source matrix, same-ruler full127x3 scored perarm natural-EOS quality and executed lifecycle; preserve failures/incomplete units. Negative speed blocks acceleration/promotion but not separately valid quality evidence.",
+      "budget_rule": "Use real observed phase time. Before each long unit include startup/producers/audit/release; freeze and validate resumability if needed. No late unit that cannot fit, no silent extension or smaller denominator."
+    }
+  ],
+  "remaining_resource_budget": "HYPIC_REMAINING_DEVICE_BUDGET_20261023.json is conditional20-26h total planning, not current speed proof or a promise to finish all within12h.",
+  "at_deadline": "No new devices; preserve raw and stop/release only exact owned resources through frozen controller. Audit/reconcile remaining units, delete only this followup, keep full goal incomplete unless actually proven.",
+  "publication": "Existing human authorization permits regression-validated scope-labelled diagnostics on same work branch, not main. Git relay preserves original objects; live verification required.",
+  "full_goal_complete": false,
+  "device_run": false
+}

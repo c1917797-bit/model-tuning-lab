@@ -1,4 +1,30 @@
-# CURRENT 2026-10-23 BOUNDED WAIT FOLLOWUP CLOSED; NO DEVICE RUN
+# CURRENT 2026-10-25 RENEWED12H; R24R2 STATIC READY, NO DEVICE YET
+
+Static1507 PASS: two new contracts differ fromR1 only five whitelisted fields;
+417host/415runtime, actual image/model/input hashes, CLI import/configuration,
+29Skill structure/diff all valid; no repeated1150tests and no device run.
+R24_R2_READINESS_20261025.json preserves proof. Publish then freshadmission.
+
+Human explicitly重新授权穿刺 then继续12小时. New fixedstop2026-10-25T18:07:17Z
+(Moscow21:07:17) supersedes prior expired windows; full three-stage goal unchanged.
+R24_R2_RENEWAL_PLAN_20261025.json and new datedR2 OFF/ON contracts preserve
+417host/415runtime, source8c04695c/code24627e7d, exact same algorithm/guards/
+thresholds/cohort. R1 and all previous raw evidence unchanged. R2 onlychanges
+root/name/purpose/absolute stop/deadline text. No new numerical/speed acceptance.
+Read-only1502/1503 proves0-3empty/102portsbindable/noownedcontroller/container,
+oldforeignbenchmark livechains absent; passivecontainer/tailnotoccupancy.
+1505proves all417/415 hashes andHEADblobs. These snapshots are not reservations.
+Existingcachetree is registered in its existing/cache/cch/model-tuning-lab-hypic-e2e-20261006/.git,
+not the separate canonical/opt Git common; no newclone/tree or migration.
+Next validate/publish then immediate freshma/direct/source/image/model/input/newroot/
+physical0-3/ports/task-end admission. RunOFF exactcontroller, independentlyaudit
+R24 pluslive-release before freshON. Live/unclear neverrestart; guardisolates0-3,
+foreignuntouched/4-7forbidden. Diagnostic timing is not formalperformance.
+Then current-source clean matchedscreen and fullperformance/pairedquality/lifecycle
+remain required.12h is executionwindow, not a guarantee or reduced successscope.
+Atstop no newdevices, preserve/releaseexactownedstage, reportremaining/closefollowup.
+
+# HISTORICAL 2026-10-23 BOUNDED WAIT FOLLOWUP CLOSED; NO DEVICE RUN
 
 R24_WAIT_FOLLOWUP_TERMINAL_20261023.json records last read-only0ea4:
 three external benchmark harnesses still live; instant physical table empty

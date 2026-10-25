@@ -1,0 +1,58 @@
+{
+  "schema": "hypic-r24-r2-readiness/v1",
+  "state": "STATIC_VALIDATED_NOT_DEVICE_ACCEPTED",
+  "date": "2026-10-25",
+  "operation": "exec-0000000000001507",
+  "source_review": "exec-0000000000001505",
+  "resource_observation": "exec-0000000000001502",
+  "worktree_registry_observation": "exec-0000000000001503",
+  "validation": {
+    "configuration_and_closure_valid": true,
+    "device_run": false,
+    "stop_utc": "2026-10-25T18:07:17Z",
+    "arms": {
+      "OFF": {
+        "contract": "C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json",
+        "contract_sha256": "7ebdf8df1b463df0dfb18f140ebbd0e318cad4a62514857525be7612a3f4301c",
+        "manifest_sha256": "9079d31571313fbf2258df158f7fcf49ba68f4ab92ba1dc3412378484139ecfc",
+        "host_bindings": 417,
+        "runtime_bindings": 415,
+        "raw_root": "/cache/cch/hypic-independent-20261013/c2-block-table-r24-off-canary-r2-20261025",
+        "container": "hypic-independent-c2-block-table-r24-off-canary-r2-20261025",
+        "whitelist": [
+          "absolute_stop_utc",
+          "container_name",
+          "protocol_notes.deadline_scope",
+          "purpose",
+          "raw_root"
+        ],
+        "configuration_cli_valid": true
+      },
+      "ON": {
+        "contract": "C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json",
+        "contract_sha256": "a484d8fbefbec0c9f8f86892133891050d9c9df1688b8fd8d7a0b8bdc367390b",
+        "manifest_sha256": "50eebbd9793dd38edbfafc1cfe506661a26da66cd78538cdcfe4060931d5a35b",
+        "host_bindings": 417,
+        "runtime_bindings": 415,
+        "raw_root": "/cache/cch/hypic-independent-20261013/c2-block-table-r24-on-canary-r2-20261025",
+        "container": "hypic-independent-c2-block-table-r24-on-canary-r2-20261025",
+        "whitelist": [
+          "absolute_stop_utc",
+          "container_name",
+          "protocol_notes.deadline_scope",
+          "purpose",
+          "raw_root"
+        ],
+        "configuration_cli_valid": true
+      }
+    },
+    "structure": "PASS: Maintainer Skill Tree structure is valid (29 skills)",
+    "runtime_python_unchanged": true,
+    "host_regression_reused": "1150PASS0d3b exact frozen source, not rerun;1505HEADblob and byte proof",
+    "budget_scope": "Bounded diagnostic first; actual stage admission still required"
+  },
+  "deadline_utc": "2026-10-25T18:07:17Z",
+  "device_run": false,
+  "full_goal_complete": false,
+  "next": "Commit/publish planned checkpoint, then fresh immediate admission and OFF --run; exact handle/root tracking, terminal independent audit/live-release before ON."
+}
