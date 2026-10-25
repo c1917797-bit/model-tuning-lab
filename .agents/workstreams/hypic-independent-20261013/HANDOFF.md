@@ -1,3 +1,28 @@
+# CURRENT 2026-10-25 R29 WARMUP REPAIR HOST-VERIFIED; NO OWNED LIVE NPU JOB
+
+R29 changes only source-owned official non-request NONE compilewarmup routing.
+FULL decode gate unchanged; real PIC/prefill NONE remains eager. Actual NONE
+native descriptor is num_reqsNone/uniformFalse; source-owned dummy/warmup locals
+prove puredecode without forging FULL metadata. CPU1640:68pass/0skip;1637 initial
+layerflag miss retained and corrected. HOSTorderaudit1643:9controls plus original
+nativeG1 pass/failedG3 rejection; official info_once(local) requires TP0 completion,
+not inventedfourcompletionlogs. Static1646:424manifest/425launchsources, disabled
+no frameworkimport,29structurePASS. All are HOSTevidence, no NPUrepairpass yet.
+
+Use NEW GRAPH_R29_G3_CANARY_R1_20261025_CONTRACT.json (d075ed64...) and raw
+/cache/cch/hypic-independent-20261013/graph-r29-g3-warmup-r1-20261025.
+Controllerunchanged host_audits/r27_graph_controller.py --run --contract NEW;
+terminal independent host_audits/r29_graph_compile_order.py --contract NEW --live-release.
+Prior R27G1 nativebounded control reused only through explicit unchanged activated
+image/model/profile/request/CPU/noalgorithm identity and8rawhashes. No formal speed
+reuse; future graph speed needs freshmatchedpair. R27G3failedroot/old413 unchanged.
+Fresh ma/direct/physical0-3/8233/HCCL/newroot gate before run. No4-7/foreignmutation.
+
+Learning/reference/source-pin successor published/liveverified0a1bc9bf;
+main23ec unchanged. See HYPIC_LESSONS_VALIDATION_20261025.json. CurrentR29code/
+newcontracts pending own checkpoint and publication. Fixedstop18:07:17UTC remains.
+Full G1-G4x3 matchedspeed,381/armquality,lifecycle and29functional still required.
+
 # CURRENT 2026-10-25 R27 G3 GRAPH STARTUP FAILED; RELEASE INDEPENDENTLY VERIFIED
 
 160b terminalexit1 Nativehealthdeadline:0HTTP,370cleanisolation,only0-3,

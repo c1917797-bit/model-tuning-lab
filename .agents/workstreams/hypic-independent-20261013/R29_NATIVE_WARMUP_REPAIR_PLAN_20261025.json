@@ -1,0 +1,119 @@
+{
+  "schema": "hypic-native-warmup-repair-plan/v1",
+  "created_utc": "2026-10-25T10:20:56.683492+00:00",
+  "predecessor_failure": "R27_G3_GRAPH_CAPTURE_FAILURE_20261025.json",
+  "predecessor_contract_preserved": "GRAPH_R27_G3_CANARY_R1_20261025_CONTRACT.json",
+  "native_control_reused": {
+    "report": "R27_G1_AUDIT_20261025.json",
+    "sha256": "dd2eacf3b86d90ec3d74f36dbaaee98ce904d81f37a82d2f99d620f74a90a2d4",
+    "contract": "GRAPH_R27_G1_CANARY_R1_20261025_CONTRACT.json",
+    "contract_sha256": "8f8e9fc9cf8f4dafa0b4732eba8feae36dbdb05af6c017292a9cd46a52d6cdda",
+    "raw_root": "/cache/cch/hypic-independent-20261013/graph-r27-g1-canary-r1-20261025",
+    "raw_sha256": {
+      "result.json": "012f37d84b6ee1d813f33f64a19e3a902835960a749b343e252e08237266bb86",
+      "responses.json": "eb14f36f5dd3f584e99c52824d39b8903a35aa30459a9e1184aa222249800471",
+      "events.jsonl": "894139f33c195b3496c816e50bc787889145f199d50a77e8fc2df95a6c4c6e1c",
+      "isolation.json": "c7097c707620f4de07b29d6795f32903d2c1734909742edbbb28a53942401ed4",
+      "release.json": "7f2eb862291fbb8d615d9ecdaff2544985638dc170c47a99b60654bd01cfdfe3",
+      "service-start.json": "05539343fd0b37c8b3eefdbdc2628c726f7026d4e6254d6e1cde5174c40749c1",
+      "launch.json": "cca0ee8ce479dd44094bae5b2c1d2f2b5c5823a1d8361ceffb77261eb17d7a91",
+      "service.log": "bba1a77583d4bcd041234204ac418d48b084de46e8a18d3b9e98988d1fa8f78b"
+    },
+    "matching_activated_native_fields": [
+      "image",
+      "model",
+      "model_config_sha256",
+      "physical_npus",
+      "tp",
+      "port",
+      "hccl_ports",
+      "cpu_set",
+      "request_repeats",
+      "max_output_tokens",
+      "enable_thinking",
+      "formal_performance",
+      "formal_quality",
+      "enforce_eager",
+      "enable_prefix_caching",
+      "formal_token_artifact",
+      "request_waves",
+      "absolute_stop_utc",
+      "controller_sha256",
+      "host_controller_source_sha256"
+    ],
+    "native_profile": {
+      "profile": "selective-prefill-native-decode-v1",
+      "candidate_enabled": false,
+      "compilation_mode": 3,
+      "cudagraph_mode": "FULL_DECODE_ONLY",
+      "capture_sizes": [
+        1,
+        4,
+        8,
+        16,
+        24,
+        32
+      ],
+      "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+      "official_debug_logging": true
+    },
+    "justification": "G1 had no probe mount/environment/algorithm. Only G3-only candidate files changed. Reuse bounded native feasibility/source/request protocol evidence, never old physical idle or formal speed. Future formal speed requires a fresh matched pair.",
+    "does_not_equalize_actual_arm_manifests": true
+  },
+  "contract": "GRAPH_R29_G3_CANARY_R1_20261025_CONTRACT.json",
+  "contract_sha256": "d075ed64ec385025c74a2e7a8072f1eb223204812ecf05a6c7e2e347956b18f7",
+  "raw_root": "/cache/cch/hypic-independent-20261013/graph-r29-g3-warmup-r1-20261025",
+  "runtime_source_bindings": 424,
+  "launch_source_bindings": 425,
+  "original_python413_unchanged": true,
+  "changed_existing_runtime": {
+    "graph_candidate/activation.py": [
+      "304e61e91e67c56c4881b43f83d1bf015e040b421975dc81323c31dedee3493a",
+      "2e07e57ed55eff731659fd23e3e02b306752580c98a33596cf5a5056ab5ccfaf"
+    ],
+    "graph_candidate/entry_router.py": [
+      "2a514f70a90133af3ef58b330acd33f8f75eaf704358a92723f2d39d35519bed",
+      "9f3cae04ffc46af72fb410b19b0b1274111ccd6bd9f3d8c673d068692a8ce1a2"
+    ],
+    "graph_candidate/worker_loader.py": [
+      "2f0d26ac3dd623bc1f3aae751feac73ec6291159614ad8b1345623bcdf9b76d1",
+      "eb3c6f79b4a49287a274ca25e28cc3e363fde3f4b8de099c7a641d04ce481ade"
+    ]
+  },
+  "new_runtime": {
+    "graph_candidate/native_warmup.py": "95bba6cc840fd7275c59edcd4b23fde880b20ed3f511db1618424f878f62051e"
+  },
+  "host_tests": {
+    "runtime": {
+      "operation": "exec-0000000000001640",
+      "passed": 68,
+      "skipped": 0
+    },
+    "independent_compile_order": {
+      "operation": "exec-0000000000001643",
+      "passed": 9,
+      "old_native_raw_control": "accepted order",
+      "old_failed_raw_control": "rejected order/no success fabricated"
+    }
+  },
+  "launch_command": [
+    "python3",
+    "-B",
+    "host_audits/r27_graph_controller.py",
+    "--run",
+    "--contract",
+    "GRAPH_R29_G3_CANARY_R1_20261025_CONTRACT.json"
+  ],
+  "independent_audit_command": [
+    "python3",
+    "-B",
+    "host_audits/r29_graph_compile_order.py",
+    "--contract",
+    "GRAPH_R29_G3_CANARY_R1_20261025_CONTRACT.json",
+    "--live-release"
+  ],
+  "default_disabled": true,
+  "numeric_safety_and_requested_hot_denominator_unchanged": true,
+  "absolute_stop_utc": "2026-10-25T18:07:17Z",
+  "scope": "One new bounded G3 repair; success would establish graph compatibility/numerical/mechanism on these requests only. Full G1-G4x3 speed,381perarm quality,lifecycle and29functional remain required."
+}

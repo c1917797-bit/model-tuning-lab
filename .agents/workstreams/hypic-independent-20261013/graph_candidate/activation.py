@@ -77,11 +77,13 @@ def activate_graph_candidate(config, *, enabled=False, emit=None,
         verify_raw_function(base, base_source, base.activate_compact_hypic,
                             name="activate_compact_hypic")
         native = capture_native_bundle()
+        from .native_warmup import NativeWarmupProof
+        startup_proof = NativeWarmupProof.from_runtime()
         original_install = helper.install_compact_model
 
         def assert_entry(model):
             if (len(router_box) != 1 or router_box[0]._entry_model is not model
-                    or router_box[0]._native_decode):
+                    or router_box[0]._native_execution):
                 raise RuntimeError("prefill lacks source-owned selective entry")
 
         def install_bridge(cls, *, enabled=False, verify_source=None, select=None,
@@ -163,7 +165,8 @@ def activate_graph_candidate(config, *, enabled=False, emit=None,
             compilation_mode=CompilationMode, graph_mode=CUDAGraphMode,
             forward_context_class=ForwardContext, batch_descriptor_class=BatchDescriptor,
             get_context=get_forward_context, is_compiling=torch.compiler.is_compiling,
-            assert_ownership=assert_owned, prefill_forward=bridge.forward)
+            assert_ownership=assert_owned, prefill_forward=bridge.forward,
+            startup_proof=startup_proof)
         router_box.append(router)
         stop_router = router.install(enabled=True, layers=(
             (native.gdn_class, "_forward_core", native.gdn, gdn),
@@ -177,6 +180,7 @@ def activate_graph_candidate(config, *, enabled=False, emit=None,
               "profile": "selective-prefill-native-decode-v1",
               "default_disabled": True, "native_decode_before_pic_contextvars": True,
               "selected_prefill_real_snapshot_owner": True,
+              "source_owned_native_compile_warmup": True,
               "compiler_or_graph_execution_proven": False,
               "scope": "source-bound installation; device proof pending"})
         return resources.pop_all().close

@@ -1,0 +1,61 @@
+{
+  "schema": "hypic-r29-native-warmup-host-readiness/v1",
+  "created_utc": "2026-10-25T10:23:10Z",
+  "parent_checkpoint": "0a1bc9bfc14bafd8aa11006f9259d201f0cb9f1b",
+  "default_disabled": true,
+  "runtime": {
+    "state": "HOST_VERIFIED_NOT_DEVICE_ACCEPTED",
+    "contract": "GRAPH_R29_G3_CANARY_R1_20261025_CONTRACT.json",
+    "contract_sha256": "d075ed64ec385025c74a2e7a8072f1eb223204812ecf05a6c7e2e347956b18f7",
+    "manifest": "GRAPH_R29_G3_MANIFEST_20261025.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/graph-r29-g3-warmup-r1-20261025",
+    "plan": "R29_NATIVE_WARMUP_REPAIR_PLAN_20261025.json",
+    "readiness": "R29_NATIVE_WARMUP_HOST_READINESS_20261025.json",
+    "runtime_tests": {
+      "operation": "exec-0000000000001640",
+      "passed": 68,
+      "skipped": 0
+    },
+    "order_audit_tests": {
+      "operation": "exec-0000000000001643",
+      "passed": 9
+    },
+    "static": "exec-0000000000001646",
+    "native_control_reused": "R27_G1_AUDIT_20261025.json",
+    "new_device_run": false,
+    "scope": "Only compiler warmup routing changed;413priorPython and actual C1/C2 math/safety gates unchanged. Real graph hot requests,full speed/quality/lifecycle/29functional still unproved."
+  },
+  "tests_before_final": {
+    "operation": "exec-0000000000001637",
+    "state": "FAILED_OLD_NATIVE_DECODE_FLAG_NOT_UNIFIED_IN_LAYER",
+    "correction": "Unified model/layer native execution gate. Actual NONE descriptor then checked against pinned official force_eager dispatcher before final1640."
+  },
+  "source_review": {
+    "native_source_bound_stack": true,
+    "warmup_and_capture_source": "6250ca0670c4593aa2f7c4567c9c71d6cb3d8182624a985d4d4e33d5bf054666",
+    "dummy_runner_source": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968",
+    "actual_none_descriptor": "num_reqs=None,uniform=False; pure decode follows source-bound real warmup/dummy locals, not a relabeled FULL descriptor",
+    "actual_full_gate": "Unchanged zero-prefill/pureone-token/realdescriptor/ownership checks",
+    "original413_unchanged": true,
+    "old_contracts_and_raw_unchanged": true
+  },
+  "static": {
+    "operation": "exec-0000000000001646",
+    "manifest_sources": 424,
+    "launch_sources": 425,
+    "host_controller_sources": 2,
+    "default_disabled_no_framework_import": true,
+    "structure29_pass": true,
+    "device_admission_performed": false
+  },
+  "compile_order": {
+    "operation": "exec-0000000000001643",
+    "nine_controls_passed": true,
+    "historical_native_G1_order_verified": true,
+    "historical_failed_G3_order_rejected": true,
+    "local_first_completion_rank": 0,
+    "no_invented_cross_rank_completion_barrier": true
+  },
+  "remaining": "Fresh direct route/source/model/image/input/physical0-3 and ports/newroot admission; real G3 canary then independent actual graph/compiler/hot/numerical/isolation/release audit. No speed/quality/fullgoal acceptance.",
+  "absolute_stop_utc": "2026-10-25T18:07:17Z"
+}

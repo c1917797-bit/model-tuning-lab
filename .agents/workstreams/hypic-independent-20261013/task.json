@@ -9,7 +9,37 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R27_G3_GRAPH_CAPTURE_FAILED_WARMUP_REPAIR_NEXT",
+  "execution_state": "R29_WARMUP_REPAIR_HOST_VERIFIED_READY_FOR_FRESH_ADMISSION",
+  "r29_warmup": {
+    "state": "HOST_VERIFIED_NOT_DEVICE_ACCEPTED",
+    "contract": "GRAPH_R29_G3_CANARY_R1_20261025_CONTRACT.json",
+    "contract_sha256": "d075ed64ec385025c74a2e7a8072f1eb223204812ecf05a6c7e2e347956b18f7",
+    "manifest": "GRAPH_R29_G3_MANIFEST_20261025.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/graph-r29-g3-warmup-r1-20261025",
+    "plan": "R29_NATIVE_WARMUP_REPAIR_PLAN_20261025.json",
+    "readiness": "R29_NATIVE_WARMUP_HOST_READINESS_20261025.json",
+    "runtime_tests": {
+      "operation": "exec-0000000000001640",
+      "passed": 68,
+      "skipped": 0
+    },
+    "order_audit_tests": {
+      "operation": "exec-0000000000001643",
+      "passed": 9
+    },
+    "static": "exec-0000000000001646",
+    "native_control_reused": "R27_G1_AUDIT_20261025.json",
+    "new_device_run": false,
+    "scope": "Only compiler warmup routing changed;413priorPython and actual C1/C2 math/safety gates unchanged. Real graph hot requests,full speed/quality/lifecycle/29functional still unproved."
+  },
+  "maintainer_learning_20261025": {
+    "published": "0a1bc9bfc14bafd8aa11006f9259d201f0cb9f1b",
+    "live_verified": true,
+    "reference": ".agents/skills/paper-to-ascend/references/hypic-independent-port-lessons.md",
+    "decisions": "HYPIC_REUSE_DECISIONS_R25_R27_20261025.json",
+    "validation": "HYPIC_LESSONS_VALIDATION_20261025.json",
+    "scope": "Source/evidence learning and historical document bindings, not completed reproduction."
+  },
   "r24_resume": {
     "date": "2026-10-23",
     "human_request": "我的hypic论文复现成功了吗，如果没有，还需要做什么，请继续，我要把这个论文复现成功",
@@ -559,7 +589,7 @@
     ],
     "start_utc": "2026-10-25T06:07:17Z",
     "absolute_stop_utc": "2026-10-25T18:07:17Z",
-    "state": "R27_G3_GRAPH_CAPTURE_FAILED_WARMUP_REPAIR_NEXT",
+    "state": "R29_WARMUP_REPAIR_HOST_VERIFIED_READY_FOR_FRESH_ADMISSION",
     "plan": "R24_R2_RENEWAL_PLAN_20261025.json",
     "contracts": [
       "C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json",
@@ -635,7 +665,7 @@
     },
     "host_audit_successors": {"report": "HOST_AUDIT_SUCCESSORS_R26_R28_READINESS_20261025.json", "state": "HOST_ONLY_REVIEWED_CPU_TESTED_NOT_DEVICE_ACCEPTANCE", "runtime_source_changed": false},
     "r27_graph": {"plan":"R27_GRAPH_CANARY_PLAN_20261025.json","G1_evidence":"R27_G1_AUDIT_20261025.json","G1_valid":true,"G1_independent_audit":"exec-00000000000015fb","G3_started":true,"scope":"boundedcompatibility, not speed/fullquality","G3_state":"FAILED_GRAPH_CAPTURE_0HTTP_RELEASE_VERIFIED","G3_evidence":"R27_G3_GRAPH_CAPTURE_FAILURE_20261025.json","G3_independent_audit":"exec-0000000000001628"},
-    "latest_confirmed_publication": "541576ade0f467659c230021e251d64438dcd723",
+    "latest_confirmed_publication": "0a1bc9bfc14bafd8aa11006f9259d201f0cb9f1b",
     "pending_publication": {
       "checkpoint": "283de3b13c05042ed57ebe4cc90329454cab4b32",
       "evidence": "R24_R2_PUBLICATION_FAILURE_20261025.json",

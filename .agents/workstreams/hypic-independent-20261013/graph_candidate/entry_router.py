@@ -1,7 +1,8 @@
 """Selective compiler bypass with an owned native-decode authorization.
 
 The source-owned outer entry runs in Python before the compiler. It authorizes
-only the pinned FULL uniform one-token decode route. The compiled model/layer
+the pinned FULL uniform one-token decode route and its source-owned NONE
+compile warmup, while real NONE requests stay eager. The compiled model/layer
 adapters consult this plain gate before any HYPIC ContextVars. No mode or
 do_not_compile flag is rewritten. Native G1 does not use these adapters.
 """
@@ -19,7 +20,7 @@ class SelectiveEntryRouter:
     def __init__(self, *, model_class, native_call, native_forward,
                  compilation_mode, graph_mode, forward_context_class,
                  batch_descriptor_class, get_context, is_compiling,
-                 assert_ownership, prefill_forward):
+                 assert_ownership, prefill_forward, startup_proof=None):
         self.model_class = model_class
         self.native_call = native_call
         self.native_forward = native_forward
@@ -31,10 +32,12 @@ class SelectiveEntryRouter:
         self.is_compiling = is_compiling
         self.assert_ownership = assert_ownership
         self.prefill_forward = prefill_forward
+        self.startup_proof = startup_proof
         self._lock = Lock()
         self._entry_model = None
         self._entry_thread = None
         self._native_decode = False
+        self._native_execution = False
         self._installed = False
         self._owned = []
 
@@ -69,11 +72,17 @@ class SelectiveEntryRouter:
             return False
         if mode is not self.graph_mode.FULL:
             raise ValueError("PIECEWISE or mixed FULL graph is outside this candidate")
+        self._pure_decode_context(context)
+        return True
+
+    def _zero_prefill_metadata(self, context):
         metadata = getattr(context, "attn_metadata", None)
         if (type(metadata) is not dict or not metadata
                 or any(type(getattr(item, "num_prefills", None)) is not int
                        or item.num_prefills != 0 for item in metadata.values())):
             raise ValueError("FULL route requires actual zero-prefill native metadata")
+    def _pure_decode_context(self, context):
+        self._zero_prefill_metadata(context)
         descriptor = context.batch_descriptor
         if (type(descriptor) is not self.batch_descriptor_class
                 or descriptor.uniform is not True
@@ -87,6 +96,22 @@ class SelectiveEntryRouter:
             raise ValueError("source-owned FULL pure one-token decode descriptor required")
         return True
 
+    def _native_warmup_context(self, context):
+        self._zero_prefill_metadata(context)
+        descriptor = context.batch_descriptor
+        # Actual NPU force_eager dispatch returns BatchDescriptor(num_tokens),
+        # whose num_reqs=None and uniform=False. Pure-decode semantics come
+        # from the source-owned warmup/dummy locals, not a relabeled descriptor.
+        if (type(descriptor) is not self.batch_descriptor_class
+                or type(descriptor.num_tokens) is not int
+                or descriptor.num_tokens <= 0
+                or descriptor.num_reqs is not None
+                or descriptor.uniform is not False
+                or descriptor.has_lora is not False
+                or descriptor.num_active_loras != 0
+                or context.skip_compiled is not False):
+            raise ValueError("actual native NONE warmup descriptor required")
+
     def _call(self, model, *args, **kwargs):
         # This outer function must never itself be traced or called concurrently.
         if self.is_compiling():
@@ -99,16 +124,23 @@ class SelectiveEntryRouter:
             self.assert_ownership()
             context = self.get_context()
             native_decode = self._profile(model, context)
+            native_execution = native_decode
+            if (not native_execution and self.startup_proof is not None
+                    and self.startup_proof.allows(model, context)):
+                self._native_warmup_context(context)
+                native_execution = True
             prior_skip = context.skip_compiled
             self._entry_model = model
             self._entry_thread = get_ident()
             self._native_decode = native_decode
-            if not native_decode:
+            self._native_execution = native_execution
+            if not native_execution:
                 # Official decorator supports this field. Only this exact call
                 # is bypassed; the actual compilation config stays unchanged.
                 context.skip_compiled = True
             return self.native_call(model, *args, **kwargs)
         finally:
+            self._native_execution = False
             self._native_decode = False
             self._entry_model = None
             self._entry_thread = None
@@ -119,7 +151,7 @@ class SelectiveEntryRouter:
     def model_forward(self, model, *args, **kwargs):
         # Keep authorization first: an authorized native decode trace must never
         # reach ContextVars, source inspection, locks or PIC branch selection.
-        if self._native_decode and self._entry_model is model:
+        if self._native_execution and self._entry_model is model:
             if not self.is_compiling() and get_ident() != self._entry_thread:
                 raise RuntimeError("decode outside owning native entry thread")
             return self.native_forward(model, *args, **kwargs)
@@ -132,7 +164,7 @@ class SelectiveEntryRouter:
     def layer_forward(self, native, hypic):
         @wraps(native)
         def routed(layer, *args, **kwargs):
-            if self._native_decode and self._entry_model is not None:
+            if self._native_execution and self._entry_model is not None:
                 if not self.is_compiling() and get_ident() != self._entry_thread:
                     raise RuntimeError("decode outside owning native entry thread")
                 return native(layer, *args, **kwargs)
@@ -196,7 +228,7 @@ class SelectiveEntryRouter:
             raise
 
         def stop():
-            if self._entry_model is not None or self._native_decode:
+            if self._entry_model is not None or self._native_execution:
                 raise RuntimeError("cannot uninstall during model execution")
             if not self._installed:
                 raise RuntimeError("graph entry is not installed")

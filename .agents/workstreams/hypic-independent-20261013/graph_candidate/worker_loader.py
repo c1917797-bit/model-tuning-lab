@@ -79,6 +79,7 @@ def _manifest(path):
         "graph_candidate/__init__.py", "graph_candidate/activation.py",
         "graph_candidate/source_contract.py", "graph_candidate/entry_router.py",
         "graph_candidate/prefill_bridge.py", "graph_candidate/worker_loader.py",
+        "graph_candidate/native_warmup.py",
         "graph_candidate/bootstrap/sitecustomize.py",
         "independent_compact_activation.py", "independent_compact_model_hook.py",
         "independent_c2_block_table_snapshot.py", "independent_runner_context.py",
