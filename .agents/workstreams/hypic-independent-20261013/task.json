@@ -523,14 +523,25 @@
     ],
     "start_utc": "2026-10-25T06:07:17Z",
     "absolute_stop_utc": "2026-10-25T18:07:17Z",
-    "state": "R24_R2_OFF_INDEPENDENTLY_VALIDATED_ON_NOT_STARTED",
+    "state": "R24_R2_OFF_VALIDATED_ON_RUNNING",
     "plan": "R24_R2_RENEWAL_PLAN_20261025.json",
     "contracts": [
       "C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json",
       "C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json"
     ],
-    "active_controller": null,
-    "resource_lease": "OFF1512 terminal3responses/231clean isolation; independent1524 verifies exact owned release. No reservation; fresh actual0-3/ports/source/newONroot admission still required before ON.",
+    "active_controller": {
+      "operation_id": "exec-000000000000152d",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "arm": "ON",
+      "contract": "C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/c2-block-table-r24-on-canary-r2-20261025",
+      "launch_checkpoint": "9f60f23f92348217ab1fa94eb56f5be699981a4c",
+      "admission_operation": "exec-000000000000152c",
+      "admission_utc": "2026-10-25T06:40:51.090500+00:00",
+      "observed_running_utc": "2026-10-25T06:41:41Z",
+      "rule": "Poll exact original peer/handle and raw/process; unknown is not terminal and never justifies restart."
+    },
+    "resource_lease": "OFF1512/1524 accepted and released;152c fresh06:40:51 admission source417/image/model/input/newroot,actual0-3empty/102portsbindable/noexternalchains. ON152d owns continuousguarded stage; snapshot is not a reservation.",
     "scope": "Same full independent27B/physical0-3/TP4 C1/C2 three-stage goal; C3/dualTP2 excluded; original successful code not reused",
     "prior_failure": "R24_OFF_R1_ADMISSION_FAILURE_20261023.json",
     "prior_followup": "R24_WAIT_FOLLOWUP_TERMINAL_20261023.json remains immutable history",
@@ -540,6 +551,7 @@
     "renewed_followup": {
       "automation_id": "hypic-12",
       "state": "ACTIVE",
+      "human_confirmed_enabled": true,
       "interval_minutes": 10,
       "stop_utc": "2026-10-25T18:07:17Z",
       "scope": "Same full three-stage goal; exact live controller tracking, independent audits, fresh admission and decisive next missing gate. Delete this followup after stop and owned-resource release audit."

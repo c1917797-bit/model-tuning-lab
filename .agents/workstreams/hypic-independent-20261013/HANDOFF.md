@@ -1,4 +1,24 @@
-# CURRENT 2026-10-25 R24R2 OFF PASSED INDEPENDENT AUDIT; ON NOT STARTED
+# CURRENT 2026-10-25 R24R2 OFF VALIDATED; ON RUNNING EXACT152d
+
+ONfresh152c admission06:40:51UTC valid:417sourcebindings unchanged,
+image/model/input/contract hash correct,newONrootabsent,actualphysical0-3empty,
+102portsbindable,externalbenchmarkchainsabsent,OFFresultSHA2857d0fb exact.
+R24_R2_ON_ADMISSION_20261025.json preserves proof. Freshma/direct launch returned
+running exec-000000000000152d, originalpeerlgw_a6109c51076a4a2c9d2674ca5a8704a0,
+checkpoint9f60f23f92348217ab1fa94eb56f5be699981a4c,
+raw/cache/cch/hypic-independent-20261013/c2-block-table-r24-on-canary-r2-20261025.
+No completion/ONnumerical/snapshot acceptance claimed yet. Track exacthandle;
+missinghandle requires raw/process check, never blindrestart.
+Terminal requires audit_r24_c2_snapshot_canary.py --contract
+C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json --live-release.
+After accepted pair/release proceed actual missing same-source formalG1/G3 pair;
+retain necessary mechanism receipts inE2E, close heavyweightshadow/probes inconfig,
+do not turn zero logging into extra gate. Full objective remains incomplete.
+Latestlivepublished1d0afe65;283de3b1 and later local descendants pending network,
+no repeatedTLSfailurepush/mainclaim. Humanconfirmed renewedfollowupenabled.
+Stop2026-10-25T18:07:17Z unchanged.
+
+# EARLIER 2026-10-25 R24R2 OFF PASSED INDEPENDENT AUDIT; ON NOT STARTED
 
 OFF1512 exit0 validtrue,3/3responses,231cleanisolation,exactCIDremoved,
 8233free/finalphysicalempty. Independent1524 exit0,bounded_canary_validtrue,
