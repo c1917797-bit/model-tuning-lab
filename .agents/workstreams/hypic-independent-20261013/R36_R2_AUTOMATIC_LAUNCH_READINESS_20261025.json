@@ -1,0 +1,99 @@
+{
+  "schema": "hypic-r36-r2-automatic-launch-readiness/v1",
+  "state": "R2_ACTUAL_BASE_CAPSULE_AND_AUTOMATIC_IMAGE_STARTUP_VALID_DEVICE_PENDING",
+  "predecessor_failure": "R36_A1_R1_LAUNCH_FAILURE_20261025.json",
+  "host_repair": "R36_LAUNCH_WIRING_REPAIR_20261025.json",
+  "controller_sha256": "9ebe496b79e2af3abf0a256280beb4da65c8b87f0c01af243a8487efd8d6f940",
+  "runtime_core_checkpoint": "baebfeb968ccfd561ec09dc9dace573f6170ffe1",
+  "runtime_python": 434,
+  "runtime_common_bindings": 450,
+  "runtime_source_changed_since_r1": false,
+  "capsule": {
+    "source": "host_audits/r36_launch_capsule.py",
+    "source_sha256": "58d5c8425fdb2be34c6724d0aabd42d9cf536c5dc56241ac0a385792001860c4",
+    "A1_operation": "exec-0000000000001950",
+    "B1_and_A2_operation": "exec-0000000000001951",
+    "A1_manifest": "STEP_DURABILITY_R36_OFF_MANIFEST_20261025.json",
+    "B1_manifest": "STEP_DURABILITY_R36_ON_MANIFEST_20261025.json",
+    "A2_static_valid": true,
+    "A1_base_consumed_environment": [
+      "PYTHONPATH=/probe/step_durability_r36:/probe:/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:/usr/local/Ascend/ascend-toolkit/latest/opp/built-in/op_impl/ai_core/tbe:/usr/local/Ascend/cann-9.1.0/python/site-packages:/usr/local/Ascend/cann-9.1.0/opp/built-in/op_impl/ai_core/tbe:",
+      "INDEPENDENT_CACHE_DIAGNOSTIC=1",
+      "INDEPENDENT_DIAGNOSTIC_ROOT=/scratch/diagnostics",
+      "INDEPENDENT_DIAGNOSTIC_BATCHES=2",
+      "INDEPENDENT_GRAPH_HYPIC=1",
+      "INDEPENDENT_GRAPH_MANIFEST=/probe/STEP_DURABILITY_R36_OFF_MANIFEST_20261025.json",
+      "INDEPENDENT_GRAPH_RAW=/scratch/diagnostics",
+      "INDEPENDENT_PREFIX_TERMINAL_ONLY=0",
+      "INDEPENDENT_EVIDENCE_IO_BUDGET=0",
+      "INDEPENDENT_EVIDENCE_STEP_DURABILITY=0"
+    ],
+    "B1_base_consumed_environment": [
+      "PYTHONPATH=/probe/step_durability_r36:/probe:/usr/local/Ascend/ascend-toolkit/latest/python/site-packages:/usr/local/Ascend/ascend-toolkit/latest/opp/built-in/op_impl/ai_core/tbe:/usr/local/Ascend/cann-9.1.0/python/site-packages:/usr/local/Ascend/cann-9.1.0/opp/built-in/op_impl/ai_core/tbe:",
+      "INDEPENDENT_CACHE_DIAGNOSTIC=1",
+      "INDEPENDENT_DIAGNOSTIC_ROOT=/scratch/diagnostics",
+      "INDEPENDENT_DIAGNOSTIC_BATCHES=2",
+      "INDEPENDENT_GRAPH_HYPIC=1",
+      "INDEPENDENT_GRAPH_MANIFEST=/probe/STEP_DURABILITY_R36_ON_MANIFEST_20261025.json",
+      "INDEPENDENT_GRAPH_RAW=/scratch/diagnostics",
+      "INDEPENDENT_PREFIX_TERMINAL_ONLY=0",
+      "INDEPENDENT_EVIDENCE_IO_BUDGET=0",
+      "INDEPENDENT_EVIDENCE_STEP_DURABILITY=1"
+    ],
+    "scope": "Actual retained base builder and R36 wrapper consumed these arguments, intercepted before Docker run. Only rehearsal scratch path changes; physical/port checks are mocked here and require separate fresh real admission.",
+    "physical_admission_proven": false
+  },
+  "automatic_pinned_image": {
+    "A1": {
+      "operation": "exec-0000000000001953",
+      "exit_code": 0,
+      "report": {
+        "actual_automatic_sitecustomize": "/probe/step_durability_r36/sitecustomize.py",
+        "actual_manifest": "/probe/STEP_DURABILITY_R36_OFF_MANIFEST_20261025.json",
+        "arm": "A1",
+        "native_worker_or_model_executed": false,
+        "npu_devices_exposed": false,
+        "own_importer_installed_then_restored": true,
+        "schema": "hypic-r36-automatic-startup-cpu/v1",
+        "scope": "Automatic Python startup from actual base-consumed environment, CPU-only; not fourworker/model/speed proof.",
+        "step_flag": "0"
+      }
+    },
+    "B1": {
+      "operation": "exec-0000000000001954",
+      "exit_code": 0,
+      "report": {
+        "actual_automatic_sitecustomize": "/probe/step_durability_r36/sitecustomize.py",
+        "actual_manifest": "/probe/STEP_DURABILITY_R36_ON_MANIFEST_20261025.json",
+        "arm": "B1",
+        "native_worker_or_model_executed": false,
+        "npu_devices_exposed": false,
+        "own_importer_installed_then_restored": true,
+        "schema": "hypic-r36-automatic-startup-cpu/v1",
+        "scope": "Automatic Python startup from actual base-consumed environment, CPU-only; not fourworker/model/speed proof.",
+        "step_flag": "1"
+      }
+    },
+    "no_device_flags": true,
+    "no_model_mount_or_native_worker_execution": true,
+    "additional_gate": "Python automatically imports actual step_durability_r36/sitecustomize from the base-consumed environment; then verifies manifest/flag/importer and restores. This covers the R1 gap left by explicit package.enable calls."
+  },
+  "contracts": {
+    "A1": {
+      "path": "STEP_DURABILITY_R36_A1_R2_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-a1-r2-20261025"
+    },
+    "B1": {
+      "path": "STEP_DURABILITY_R36_B1_R2_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-b1-r2-20261025"
+    },
+    "A2": {
+      "path": "STEP_DURABILITY_R36_A2_R2_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-a2-r2-20261025"
+    }
+  },
+  "deadline": "2026-10-26T06:36:27Z",
+  "new_npu_work": false,
+  "numerical_speed_quality_or_full_goal_accepted": false,
+  "next": "Publish this checkpoint, fresh source/model/image/input/newroot/physical0-3/102ports/storage/budget admission, then A1 only. Independent valid exactrelease audit before new B1 and A2. OldR1wholecohort remains closed."
+}

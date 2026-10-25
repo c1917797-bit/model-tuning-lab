@@ -1235,9 +1235,9 @@
     }
   },
   "r36_step_durability": {
-    "state": "HOST_LAUNCH_WIRING_FIX_VERIFIED_R2_AUTOMATIC_STARTUP_GATE_PENDING",
+    "state": "R2_ACTUAL_BASE_CAPSULE_AND_AUTOMATIC_IMAGE_STARTUP_VALID_DEVICE_PENDING",
     "plan": "R36_STEP_DURABILITY_PLAN_20261025.json",
-    "next": "Freeze NEW R2 A1/B1/A2 contracts and roots with cache_diagnostic.compact_manifest=successor_manifest and new HOST9ebe496b hash; exercise real base-consumed argv plus automatic sitecustomize in pinned CPU-only image for OFF and ON, then fresh physical admission. Explicit package.enable image test alone was insufficient to prove startup wiring.",
+    "next": "Publish this checkpoint, fresh source/model/image/input/newroot/physical0-3/102ports/storage/budget admission, then A1 only. Independent valid exactrelease audit before new B1 and A2. OldR1wholecohort remains closed.",
     "full_goal_complete": false,
     "host_readiness": "R36_CORE_HOST_READINESS_20261025.json",
     "host_controls": 51,
@@ -1277,6 +1277,21 @@
         "path": "STEP_DURABILITY_R36_A2_R1_20261025_CONTRACT.json",
         "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-a2-r1-20261025"
       }
-    }
+    },
+    "contracts": {
+      "A1": {
+        "path": "STEP_DURABILITY_R36_A1_R2_20261025_CONTRACT.json",
+        "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-a1-r2-20261025"
+      },
+      "B1": {
+        "path": "STEP_DURABILITY_R36_B1_R2_20261025_CONTRACT.json",
+        "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-b1-r2-20261025"
+      },
+      "A2": {
+        "path": "STEP_DURABILITY_R36_A2_R2_20261025_CONTRACT.json",
+        "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-a2-r2-20261025"
+      }
+    },
+    "automatic_startup_readiness": "R36_R2_AUTOMATIC_LAUNCH_READINESS_20261025.json"
   }
 }
