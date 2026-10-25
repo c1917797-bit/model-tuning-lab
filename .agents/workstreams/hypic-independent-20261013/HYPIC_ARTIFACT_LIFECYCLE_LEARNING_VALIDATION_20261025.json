@@ -1,0 +1,32 @@
+{
+  "schema": "hypic-artifact-lifecycle-learning-validation/v1",
+  "operation": "exec-00000000000017cd",
+  "exit_code": 0,
+  "result": {
+    "R33_full_arm_valid": false,
+    "R33_warm_component_replayed": true,
+    "all29_functional_verified": false,
+    "blind_skill_behavior_verified": false,
+    "current_device_query": false,
+    "enabled_candidate_proven": false,
+    "full_reproduction_accepted": false,
+    "historical_A1_profile_replay": "PASS",
+    "new_npu_work": false,
+    "private_control_state_checks": 8,
+    "source_producer_lifecycle_verified": true,
+    "warm_requests": 48
+  },
+  "structure": {
+    "operation": "exec-00000000000017d2",
+    "exit_code": 0,
+    "skills": 29,
+    "scope": "structure only"
+  },
+  "existing_case": {
+    "operation": "exec-00000000000017d1",
+    "exit_code": 0,
+    "scope": "document bindings only"
+  },
+  "full_goal_complete": false,
+  "blind_forward_cases_executed": false
+}

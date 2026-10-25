@@ -1,0 +1,38 @@
+{
+  "A1": {
+    "path": "/cache/cch/hypic-independent-20261013/r32b-a1-independent-audit-r1-20261025.json",
+    "sha256": "245cf59bc7d66c34657682cd63a53df20f88850a6aeeed91b17cd2f6573f961f"
+  },
+  "current_runtime_scope": "R33 A1 failed before timing and released; R34 HOST5 passed, no enabled-treatment model run or causal speed result. Device authority expired 2026-10-25T18:07:17Z.",
+  "evidence_checkpoint": "bf4bf7e7edbc1af62c8289a1bce3a6494eb0873f",
+  "evidence_sha256": {
+    "R30_FIRST_PAIR_DECISION_20261025.json": "037d894dd8a47033da9cb84a90cc34f17356f2040ec9f1cb1c0c207bc171cdbf",
+    "R31_G3_COLLECTION_AUDIT_20261025.json": "35937cee90d17cb296b08ead472aaf19f2dfd341631ba7e9f3f96c8eb3e1b369",
+    "R31_OFFLINE_EXPORT_STATE_20261025.json": "7575716e4f5eca1c1b9139d612181be54639a4c31f91d2c43f84a318fbc5e9be",
+    "R32B_ID_JOIN_OBSERVER_20261025.json": "0fb1c2e4205f0ec7550ce1fd742838e19166c9287570be33ee6f4ec5b2a04212",
+    "R32_A1_AUDIT_20261025.json": "1c2128f8dc9c17da1434e8a04655bd6e03f4d64bc5262fb8b7d145677b33bc8c",
+    "R32_A1_ORIGINAL_AUDIT_FAILURE_20261025.json": "0e126528f41a48776562f6948b2d5b5516def52dedb7e29774e2dddad5b58d20",
+    "R33_A1_CONTROL_TOOLING_FAILURE_20261025.json": "c6a8173c1c0f42e5d187a0199f372a3ea5ab7864763037a2f0a3b024126a2847",
+    "R34_HOST_AUTHORITY_LIFECYCLE_VALIDATION_20261025.json": "e5ef8b88b5a5b1da160420c6d27d20e7ad2ec6702e75e245717d963d57b99a54",
+    "host_audits/r34_live_native_log.py": "17f97432a4ee27dd94b891cce99626cb924f2438a977492fa553e058e31c96a4",
+    "host_audits/r34_prefix_terminal_audit.py": "2fd2e6aa7c097036d67af43f3221f14f9b3156e6bad1f270718e02a26025c6ff",
+    "host_audits/r34_prefix_terminal_trial.py": "f9fae3aa18c0482b457cbf2947c3c434609b89f264cdbacc6aaa7045e16d5ecd",
+    "host_audits/verify_artifact_lifecycle_learning.py": "dea4f9f535fcafa2b18be877f9c120cc4a73cb7e5b78d58b4a7307f68101e5de"
+  },
+  "full_reproduction_accepted": false,
+  "hardware": {
+    "path": "/cache/cch/hypic-independent-20261013/r31-g3-offline-analysis-r1-20261025/four-rank-hardware-cost-r6.json",
+    "sha256": "3fdd8b5d1e07ec89fd9a880c964c019655a0c1a4a756569f65c78e6462fd951c"
+  },
+  "maintainer_documents_sha256": {
+    ".agents/evals/practice-iterations/hypic-independent-lessons-20261023.yaml": "2d5a6d9ddd7be6d32d98a2ddf1bf8d7e1438b636f68ff658e863200cfb28dbc8",
+    ".agents/skills/paper-to-ascend/references/hypic-independent-port-lessons.md": "5eab88f86d1c5edaace7f91229bf85fff54341953d1b3591f73c8ad207aa5ccf"
+  },
+  "observer_definition": "R32B_ID_JOIN_OBSERVER_20261025.json",
+  "schema": "hypic-artifact-lifecycle-learning/v1",
+  "scope": "Replays immutable R32 A1/profile and R33 real control warm/numerical/release evidence plus current document/source bindings; forward scenarios are unevaluated specifications, not blind Skill or29functional acceptance.",
+  "state": "HISTORICAL_REPLAY_AND_FORWARD_SPECIFICATIONS_NOT_FULL_FUNCTIONAL_ACCEPTANCE",
+  "verifier_source_sha256": "4f05630bc2740281f02ee3f3e418ff1c968493626ccdbb8c81c109c17e209747",
+  "predecessor": "HYPIC_PROFILE_ID_LEARNING_20261025.json",
+  "lifecycle_verifier_source_sha256": "dea4f9f535fcafa2b18be877f9c120cc4a73cb7e5b78d58b4a7307f68101e5de"
+}

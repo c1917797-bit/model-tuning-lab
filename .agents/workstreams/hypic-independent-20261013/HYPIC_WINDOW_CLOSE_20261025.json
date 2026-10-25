@@ -1,0 +1,32 @@
+{
+  "schema": "hypic-20261025-window-close/v1",
+  "absolute_stop_utc": "2026-10-25T18:07:17Z",
+  "new_device_work_after_stop": false,
+  "release_probe": {
+    "operation": "exec-00000000000017aa",
+    "observed_utc": "2026-10-25T18:08:10Z",
+    "result": {
+      "exact_own_cid_absent": true,
+      "exact_cid": "d74c9ab275ee2c57b46bd7ed204b5f74593eda2a83c6e2194e288206cedd2edf",
+      "own_controllers": [],
+      "physical0_3_process_count_now": 0,
+      "foreign_present_now": false,
+      "new_device_allocated": false,
+      "goal_complete": false
+    }
+  },
+  "automation_cleanup": [
+    {
+      "id": "hypic",
+      "delete_status": "not_found"
+    },
+    {
+      "id": "hypic-12",
+      "delete_status": "not_found"
+    }
+  ],
+  "automation_scope": "Only exact known identifiers for this thread were requested; other thread automations untouched; no fleet-wide deletion claim.",
+  "current_execution": "No active own model/controller; R34 has HOST5 tests only, no new contract/root/device run.",
+  "required_next": "Explicit renewed device authority with sufficient budget and fresh same-source A/B/A contracts/roots/admission. In the meantime only offline work.",
+  "full_goal_complete": false
+}

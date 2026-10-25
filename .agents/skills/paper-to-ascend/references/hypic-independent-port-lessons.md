@@ -226,3 +226,48 @@ Replay the new ledger with the host-only
 from the workstream. It checks historical artifact bindings and the actual A1
 ID/evidence replay without querying current devices. It is not a blind behavioral
 Skill evaluation, a fresh occupancy proof, or certification of all 29 Skills.
+
+## 2026-10-25 addendum: artifact producers have a lifecycle
+
+R33's control completed 48 unscored warm requests, with four-rank 48-C1/16-C2
+hot proof and eight full private terminal-state comparisons. The controller
+then failed **before timing**: it read `service.log` while the retained owner
+only saves that file in final teardown. This is a control-plane execution
+failure, not a measured regression or a C1 numerical failure. The enabled
+prefix-output optimization still lacks its real-model acceptance.
+
+The [lifecycle learning successor](../../../workstreams/hypic-independent-20261013/HYPIC_ARTIFACT_LIFECYCLE_LEARNING_20261025.json)
+binds the failure and current documents. The earlier profile/ID ledger remains
+a historical document snapshot; use this successor for current-tree replay.
+
+- Map each consumed artifact to its actual producer and availability phase.
+  A terminal export is unavailable during live pre-timing checks. Use the
+  appropriate live producer when necessary; in this case it is a bounded log
+  snapshot from the exact owned running container, after checking its identity.
+  Seal the snapshot before timing and compare its worker identities with the
+  final record. Do not fabricate a terminal file or loosen the numerical gate.
+- Test the production control function with artifacts absent until their real
+  lifecycle phase. R33's first CPU fixture pre-created the terminal log and
+  masked the defect. R34's regression calls the actual workload/control unit
+  without that file; it replaces only the external producer and also rejects
+  foreign identity and overwrite attempts. A passing helper in an impossible
+  fixture does not establish an end-to-end pipeline.
+- Keep shadow numerics, enabled execution, and timing separate. A control
+  process can run the candidate on private shadow tensors and prove equality
+  while its real model still uses the original path. A common installation
+  marker or a false treatment flag does not prove the enabled candidate ran.
+  Count only the responses and exposure actually observed; warm requests do
+  not become scored or timed requests after a later controller failure.
+- Keep historical identity separate from present authority. A source anchor's
+  deadline is neither a new execution grant nor a universal fixed date for
+  successors. A new run needs current authority, a new frozen contract/root,
+  adequate measured startup/request/audit/release budget, and comparable
+  limits across its own paired arms. The local 8/39 shapes and window budget
+  belong to this case, not to every paper.
+
+Replay with `python3 -B host_audits/verify_artifact_lifecycle_learning.py
+--ledger HYPIC_ARTIFACT_LIFECYCLE_LEARNING_20261025.json` from the workstream.
+This rechecks historical raw evidence and document bindings without querying
+current devices. The forward scenarios below are specifications, not completed
+blind behavioral tests; neither this update nor the HOST regressions certify
+the full paper workflow or all 29 Skills.

@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R33_HOST_LIFECYCLE_FAILED_RELEASED_R34_HOST5PASS_WINDOW_INSUFFICIENT",
+  "execution_state": "AUTHORITY_EXPIRED_RELEASE_VERIFIED_R34_HOST5_LESSONS_REPLAYED",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -824,29 +824,13 @@
     ],
     "start_utc": "2026-10-25T06:07:17Z",
     "absolute_stop_utc": "2026-10-25T18:07:17Z",
-    "state": "R32_B1_HOISTED_GATE_CAST_RUNNING_EXACT1739",
+    "state": "EXPIRED_OWN_RESOURCES_RELEASED",
     "plan": "R24_R2_RENEWAL_PLAN_20261025.json",
     "contracts": [
       "C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json",
       "C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json"
     ],
-    "active_controller": {
-      "state": "RUNNING_NOT_ACCEPTED",
-      "operation": "exec-0000000000001739",
-      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
-      "connector": "awmcp",
-      "arm": "B1",
-      "contract": "GATE_CAST_R32_B1_20261025_CONTRACT.json",
-      "contract_sha256": "ef032d4aa1f042bd9ea6fe4d0a345dccfd4bff7f1513dc52558b55790ae0b9f6",
-      "raw_root": "/cache/cch/hypic-independent-20261013/gate-cast-r32-b1-20261025",
-      "launch_checkpoint": "62fce8e358f17038df42bdc941a62c2658f2c407",
-      "admission_operation": "exec-0000000000001738",
-      "observed_running_utc": "2026-10-25T15:36:00Z",
-      "auditor": "host_audits/r32b_gate_cast_audit.py",
-      "definition": "R32B_ID_JOIN_OBSERVER_20261025.json",
-      "definition_sha256": "0fb1c2e4205f0ec7550ce1fd742838e19166c9287570be33ee6f4ec5b2a04212",
-      "rule": "Exact original peer/handle/raw; live or unknown neverrestart.426runtime/common andboundHOST sources frozen."
-    },
+    "active_controller": null,
     "last_hypic_graph_controller": {
       "operation_id": "exec-000000000000160b",
       "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
@@ -886,7 +870,7 @@
       "observed_running_utc": "2026-10-25T07:37:26Z",
       "rule": "Track exact original peer and handle; timeout/missing requires raw and actual process inspection, never restart."
     },
-    "resource_lease": "Exact B1 controller1739live,originalma a6109,launchcheckpoint62fce8e3,rawgate-cast-r32-b1-20261025. A1valid/released; only0-3; do notstartA2orchange426boundruntime/hostsources. Stop18:07:17UTC.",
+    "resource_lease": "None. Exact own CID absent and no own controller in expiry probe17aa at18:08UTC. No device work authorized beyond18:07:17UTC.",
     "scope": "Same full independent27B/physical0-3/TP4 C1/C2 three-stage goal; C3/dualTP2 excluded; original successful code not reused",
     "prior_failure": "R24_OFF_R1_ADMISSION_FAILURE_20261023.json",
     "prior_followup": "R24_WAIT_FOLLOWUP_TERMINAL_20261023.json remains immutable history",
@@ -895,11 +879,16 @@
     "next_formal_preparation": "R24_R2_NEXT_FORMAL_PREPARATION_20261025.md",
     "renewed_followup": {
       "automation_id": "hypic-12",
-      "state": "ACTIVE",
+      "state": "APP_EXACT_ID_NOT_FOUND_AT_EXPIRY_CLEANUP",
       "human_confirmed_enabled": true,
       "interval_minutes": 10,
       "stop_utc": "2026-10-25T18:07:17Z",
-      "scope": "Same full three-stage goal; exact live controller tracking, independent audits, fresh admission and decisive next missing gate. Delete this followup after stop and owned-resource release audit."
+      "scope": "Same full three-stage goal; exact live controller tracking, independent audits, fresh admission and decisive next missing gate. Delete this followup after stop and owned-resource release audit.",
+      "cleanup": {
+        "automation_id": "hypic-12",
+        "delete_status": "not_found",
+        "other_threads_touched": false
+      }
     },
     "last_completed_arm": {
       "arm": "OFF",
@@ -956,7 +945,7 @@
       "G3_evidence": "R27_G3_GRAPH_CAPTURE_FAILURE_20261025.json",
       "G3_independent_audit": "exec-0000000000001628"
     },
-    "latest_confirmed_publication": "62fce8e358f17038df42bdc941a62c2658f2c407",
+    "latest_confirmed_publication": "bf4bf7e7edbc1af62c8289a1bce3a6494eb0873f",
     "pending_publication": {
       "checkpoint": "283de3b13c05042ed57ebe4cc90329454cab4b32",
       "evidence": "R24_R2_PUBLICATION_FAILURE_20261025.json",
@@ -979,6 +968,23 @@
       "terminal_state": "VALID_AUDITED_RELEASED_NEGATIVE_SPEED",
       "independent_audit": "exec-00000000000016a8",
       "evidence": "R30_G3_GRAPH_FORMAL_AUDIT_20261025.json"
+    },
+    "historical_controller_snapshot": {
+      "state": "RUNNING_NOT_ACCEPTED",
+      "operation": "exec-0000000000001739",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "connector": "awmcp",
+      "arm": "B1",
+      "contract": "GATE_CAST_R32_B1_20261025_CONTRACT.json",
+      "contract_sha256": "ef032d4aa1f042bd9ea6fe4d0a345dccfd4bff7f1513dc52558b55790ae0b9f6",
+      "raw_root": "/cache/cch/hypic-independent-20261013/gate-cast-r32-b1-20261025",
+      "launch_checkpoint": "62fce8e358f17038df42bdc941a62c2658f2c407",
+      "admission_operation": "exec-0000000000001738",
+      "observed_running_utc": "2026-10-25T15:36:00Z",
+      "auditor": "host_audits/r32b_gate_cast_audit.py",
+      "definition": "R32B_ID_JOIN_OBSERVER_20261025.json",
+      "definition_sha256": "0fb1c2e4205f0ec7550ce1fd742838e19166c9287570be33ee6f4ec5b2a04212",
+      "rule": "Exact original peer/handle/raw; live or unknown neverrestart.426runtime/common andboundHOST sources frozen."
     }
   },
   "r32_single_variable": {
@@ -1106,7 +1112,7 @@
     }
   },
   "r34_live_log_fix": {
-    "state": "HOST4PASS_NO_DEVICE_EXPERIMENT",
+    "state": "HOST5PASS_NO_DEVICE_EXPERIMENT",
     "controller": "host_audits/r34_prefix_terminal_trial.py",
     "auditor": "host_audits/r34_prefix_terminal_audit.py",
     "helper": "host_audits/r34_live_native_log.py",
@@ -1118,5 +1124,13 @@
     "scope": "Correct actual artifact producer/phase only; full A/B/A scope and warm/numerical gates preserved. No new roots/contracts/NPU runs; no speed acceptance.",
     "historical_anchor_does_not_pin_current_authority": true,
     "current_authority_not_extended": true
-  }
+  },
+  "maintainer_artifact_lifecycle_learning_20261025": {
+    "ledger": "HYPIC_ARTIFACT_LIFECYCLE_LEARNING_20261025.json",
+    "validation": "HYPIC_ARTIFACT_LIFECYCLE_LEARNING_VALIDATION_20261025.json",
+    "operation": "exec-00000000000017cd",
+    "state": "HISTORICAL_RAW_REPLAY_PASSED_NOT_BLIND_SKILL_ACCEPTANCE",
+    "scope": "48actualwarm/8privatecontrolstates/sourceproducer/historicalprofile replay. Enabledtreatment,causalspeed,fullpaper,29functional unaccepted."
+  },
+  "window_close_20261025": "HYPIC_WINDOW_CLOSE_20261025.json"
 }
