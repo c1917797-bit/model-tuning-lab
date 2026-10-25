@@ -1,0 +1,28 @@
+{
+  "admission_valid": true,
+  "arm": "G3",
+  "utc": "2026-10-25T07:36:09.450200+00:00",
+  "head": "56144d0097cec8960ebefc5ce6b0939519031216",
+  "baseline_audit": "exec-0000000000001568",
+  "baseline_result_sha256": "f14e38fd6606a4bf70d1195d68881a26a8304cfd1e1166876a97c7fefda59cc0",
+  "source_bindings": 418,
+  "bound_source_bytes_unchanged": true,
+  "untracked_isolated_future_files": [
+    ".agents/workstreams/hypic-independent-20261013/R25_G1_AUDIT_20261025.json",
+    ".agents/workstreams/hypic-independent-20261013/host_audits/r26_group_performance.py",
+    ".agents/workstreams/hypic-independent-20261013/host_audits/test_r26_group_performance.py"
+  ],
+  "physical0_3": [],
+  "foreign_benchmark_tasks": [],
+  "owned_controllers": [],
+  "ports_bindable": 102,
+  "cache_available_bytes": 9353895936,
+  "new_raw_root": "/cache/cch/hypic-independent-20261013/formal-r25-current-g3-r1-20261025",
+  "device_run": false,
+  "preflight_adapter_failure": {
+    "operation": "exec-000000000000156f",
+    "reason": "git ls-files returned cwd-relative paths; own curated evidence was misclassified",
+    "device_started": false
+  },
+  "correction": "Use git ls-files --full-name. No frozen contract/source/ruler change and no device experiment retry."
+}

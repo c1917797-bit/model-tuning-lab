@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R24_R2_RENEWED_12H_STATIC_READY",
+  "execution_state": "R25_G1_AUDITED_G3_RUNNING",
   "r24_resume": {
     "date": "2026-10-23",
     "human_request": "我的hypic论文复现成功了吗，如果没有，还需要做什么，请继续，我要把这个论文复现成功",
@@ -165,7 +165,7 @@
     "service_ports": [
       8233
     ],
-    "state": "Released;11f3 independent exactCIDabsent/physical0-3empty/8233bindfree. No active lease."
+    "state": "Current R25 G3 exec-0000000000001573 owns physical0-3 TP4 and port8233 under continuous isolation; exact release pending. Old11f3 release is historical."
   },
   "generation_policy": {
     "non_thinking_max_output_tokens": 1024,
@@ -180,7 +180,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Renewed12h through2026-10-25T18:07:17Z. Freeze/publish newR24R2 contracts with unchanged417/415 source; fresh direct source/image/model/input/root/physical0-3/ports/foreign-task terminal admission, OFF then independent audit/exact release beforeON. Only decisive missing gates thereafter; no raw reuse or threshold change.",
+  "next_action": "Track exact R25 G3 controller1573/originalma/raw; on terminal independently audit with frozen R25 definition and exact release, then compare accepted G1/G3 first pair. Preserve current413 Python bytes. Resolve graph execution compatibility before blind matrix expansion. Fixed stop2026-10-25T18:07:17Z.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -237,6 +237,17 @@
     "device_use": false
   },
   "active_attempt": {
+    "state": "RUNNING",
+    "operation": "exec-0000000000001573",
+    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "connector": "awmcp",
+    "contract": "FORMAL_R25_G3_R1_20261025_CONTRACT.json",
+    "raw_root": "/cache/cch/hypic-independent-20261013/formal-r25-current-g3-r1-20261025",
+    "checkpoint": "56144d0097cec8960ebefc5ce6b0939519031216",
+    "admission_operation": "exec-0000000000001571",
+    "independent_audit": null
+  },
+  "historical_active_attempt_20261017": {
     "state": "TERMINAL_DEADLINE_INCOMPLETE_RELEASE_VERIFIED",
     "operation": "exec-000000000000119b",
     "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
@@ -523,26 +534,26 @@
     ],
     "start_utc": "2026-10-25T06:07:17Z",
     "absolute_stop_utc": "2026-10-25T18:07:17Z",
-    "state": "R24_R2_PAIR_ACCEPTED_FORMAL_R25_G1_RUNNING",
+    "state": "R25_G1_INDEPENDENTLY_VALIDATED_G3_RUNNING",
     "plan": "R24_R2_RENEWAL_PLAN_20261025.json",
     "contracts": [
       "C2_BLOCK_TABLE_R24_OFF_CANARY_R2_20261025_CONTRACT.json",
       "C2_BLOCK_TABLE_R24_ON_CANARY_R2_20261025_CONTRACT.json"
     ],
     "active_controller": {
-      "operation_id": "exec-0000000000001547",
+      "operation_id": "exec-0000000000001573",
       "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
-      "arm": "G1",
+      "arm": "G3",
       "phase": "FORMAL_R25_ROUND1",
-      "contract": "FORMAL_R25_G1_R1_20261025_CONTRACT.json",
-      "raw_root": "/cache/cch/hypic-independent-20261013/formal-r25-current-g1-r1-20261025",
-      "launch_checkpoint": "1ce39797b2ecc1b7b9e562c739cb2f18b19430f8",
-      "admission_operation": "exec-0000000000001546",
-      "admission_utc": "2026-10-25T07:02:18.024935+00:00",
-      "observed_running_utc": "2026-10-25T07:03:26Z",
-      "rule": "Track exact original peer/handle; missing/timeout requires immutable raw/process check, never blindrestart."
+      "contract": "FORMAL_R25_G3_R1_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/formal-r25-current-g3-r1-20261025",
+      "launch_checkpoint": "56144d0097cec8960ebefc5ce6b0939519031216",
+      "admission_operation": "exec-0000000000001571",
+      "admission_utc": "2026-10-25T07:36:09.450200+00:00",
+      "observed_running_utc": "2026-10-25T07:37:26Z",
+      "rule": "Track exact original peer and handle; timeout/missing requires raw and actual process inspection, never restart."
     },
-    "resource_lease": "1546 fresh07:02:18 source418/prereq/image/model/input/physical0-3/102ports/newroot valid; G1 exact1547 now continuousguarded. No external task interference or4-7allocation.",
+    "resource_lease": "G1 independent1568 valid40/source418/425clean/ownedrelease;1571 freshG3admission passed. G3exact1573 continuousguard,0-3only; untrackedfuturehost/graph files disjoint from frozen source and notloaded.",
     "scope": "Same full independent27B/physical0-3/TP4 C1/C2 three-stage goal; C3/dualTP2 excluded; original successful code not reused",
     "prior_failure": "R24_OFF_R1_ADMISSION_FAILURE_20261023.json",
     "prior_followup": "R24_WAIT_FOLLOWUP_TERMINAL_20261023.json remains immutable history",
@@ -575,7 +586,7 @@
       "scope": "bounded2hot/4rank;not formal speed/fullquality"
     },
     "formal_first_pair": {
-      "state": "G1_RUNNING",
+      "state": "G1_VALIDATED_G3_RUNNING",
       "plan": "R25_FIRST_PAIR_PLAN_20261025.json",
       "static_operation": "exec-0000000000001543",
       "static_evidence": "R25_FIRST_PAIR_STATIC_20261025.json",
@@ -583,9 +594,13 @@
       "G3_contract": "FORMAL_R25_G3_R1_20261025_CONTRACT.json",
       "same_runtime_python": 413,
       "common_host_bindings": 418,
+      "G1_independent_audit": "exec-0000000000001568",
+      "G1_evidence": "R25_G1_AUDIT_20261025.json",
+      "G1_timing": {"weighted_tpot_ms": 280.0677875400396, "ttft_p95_ms": 346747.93185002636, "tpot_p95_ms": 292.48924112300756},
+      "runtime_parity_gap": "Provided success text used FULL_DECODE_ONLY; current eager is an implementation compatibility restriction. Preserve this first pair; verify graph-compatible native decode before blind full-matrix expansion.",
       "audit_G4_gap": "Inherited R18 partition auditor hardcodes G3; G4 adaptation still required before it is accepted."
     },
-    "latest_confirmed_publication": "1ce39797b2ecc1b7b9e562c739cb2f18b19430f8",
+    "latest_confirmed_publication": "56144d0097cec8960ebefc5ce6b0939519031216",
     "pending_publication": {
       "checkpoint": "283de3b13c05042ed57ebe4cc90329454cab4b32",
       "evidence": "R24_R2_PUBLICATION_FAILURE_20261025.json",

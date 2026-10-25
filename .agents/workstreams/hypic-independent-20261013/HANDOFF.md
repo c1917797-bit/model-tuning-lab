@@ -1,4 +1,39 @@
-# CURRENT 2026-10-25 FORMAL R25 G1 RUNNING EXACT1547
+# CURRENT 2026-10-25 G1 AUDITED; FORMAL G3 RUNNING EXACT1573
+
+G1 controller1547 exit0,40/40,425cleanisolation,exactownedrelease. Frozen
+independent1568 exit0 terminal_unit_validtrue,source418/live-release. Samehandle
+PS transport pollfailed then recovered; no audit/workloadrestart. Timing:
+weightedTPOT280.06778754ms,TTFTP95346747.93185ms,TPOTP95292.48924112ms.
+R25_G1_AUDIT_20261025.json binds rawSHA. Onebaseline, no speedbenefitclaim.
+
+Fresh1571G3admission passed sources418/actualmodel-image-input/102ports/0-3empty,
+noexternalharness,newroot.156f was read-only relativeGitpathcheck error, fixed
+--full-name; no devicephase existed/failed or frozenrulerchange. Known new future
+host/graph sourcefiles are disjoint/notloaded; all418frozenbytes unchanged.
+G3directma launchreturnedrunning exec-0000000000001573,
+originalpeerlgw_a6109c51076a4a2c9d2674ca5a8704a0, checkpoint56144d0097cec8960ebefc5ce6b0939519031216,
+raw/cache/cch/hypic-independent-20261013/formal-r25-current-g3-r1-20261025.
+Track exactly; live/unknownneverrestart. Onterminal frozenR25auditdefinition
+command/args plus --contract FORMAL_R25_G3_R1_20261025_CONTRACT.json --live-release.
+Then comparecompletefirstpair, preserve negative/scope; no blindmatrixexpansion.
+
+Protocolparity review found originalprovidedcase FULL_DECODE_ONLY, no enforceeager.
+Current eager is our compatibilityrestriction, not paper requirement. FreshEagerpair
+internally matched, oldabsoluteTTFT/TPOT not transferable; graphcompatibility is a
+separate hypothesis and stillunproven. Pinned Ascend runner requires VLLM_COMPILE
+for ACL graph; NONE+graphflag alone does notwork. Selective prefill compilerbypass/
+nativecompileddecode candidate is being prepared in NEW isolated defaultdisabled
+paths only; existing413Python/R25configuration/sourcebytes remainfrozen.
+
+NewR26HOST-only groupaudit/twofiles has21CPUcontrols, not G2/G4deviceacceptance.
+Quality127samples/126uniqueeligiblematerials is digestdedup, not fallback;
+all381scored/381producer requests perarm under currentbatchorder remainrequired.
+R23 retainedqualitycontroller needs explicit HOST auditidentityadapter, no fakeR16SHA.
+Actualarmmanifestf8bcae7a/f4774a21 differintentionally; futurematrixcanonical
+commonstudy identity mustremain separate from actualactivationmanifest, never relabel.
+Latestlivepub56144d0/main23ec33d7 unchanged; fixedstop18:07:17UTC, wholegoalincomplete.
+
+# EARLIER 2026-10-25 FORMAL R25 G1 RUNNING EXACT1547
 
 Fresh1546 admission07:02:18UTC source418/prereq/rawdigests/currentimage-model-input,
 physical0-3empty/102portsbindable/noexternalharness/newroots valid. Freshma/direct

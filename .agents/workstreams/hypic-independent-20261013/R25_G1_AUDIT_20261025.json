@@ -1,0 +1,63 @@
+{
+  "schema": "hypic-formal-arm-independent-audit/v1",
+  "group": "G1",
+  "round": 1,
+  "contract": "FORMAL_R25_G1_R1_20261025_CONTRACT.json",
+  "contract_sha256": "a1cb8e4b73de372b76fdebfc04fed7d9fae25e822d8d290da36c495ec28864b4",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-r25-current-g1-r1-20261025",
+  "controller_operation": "exec-0000000000001547",
+  "auditor_operation": "exec-0000000000001568",
+  "auditor_poll_recovery": "A PS transport error was re-polled on the same handle; not restarted",
+  "controller_terminal": {
+    "valid": true,
+    "error": null,
+    "guard_errors": [],
+    "isolation_samples": 425,
+    "responses": 40,
+    "worker_pids": [
+      3010506,
+      3010509,
+      3010511,
+      3010514
+    ],
+    "physical_devices_seen": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "release": {
+      "owned_container": "f014398516c17c6a146bd01945574cadb4d3bd0cd00e726f843ec8072ac40cea",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    }
+  },
+  "audit": {
+    "terminal_unit_valid": true,
+    "timing": {
+      "requests": 40,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 280.0677875400396,
+      "ttft_p95_ms": 346747.93185002636,
+      "tpot_p95_ms": 292.48924112300756
+    },
+    "isolation_samples": 425,
+    "source_bindings": 418,
+    "raw_sha256": {
+      "result.json": "f14e38fd6606a4bf70d1195d68881a26a8304cfd1e1166876a97c7fefda59cc0",
+      "events.jsonl": "c76b52b34926c35c21abe0ed6620a7c5adf58d1b8a3eb2a171a5e2eba1659211",
+      "performance-unit.json": "24fc28c0c1d0984fdb816dd51f7bc79537688e7a011256597d015c747c574d75",
+      "release.json": "76cee156d61231b0f247654b84d7ff1246f39b6e237524ee36be4c261a84e365"
+    },
+    "scope": "one current-source full40 arm, retained safety and mechanism receipts included in E2E; paired/repeated performance/fullquality/lifecycle separate",
+    "live_release_verified": true,
+    "partition": {
+      "enabled": false,
+      "groups": 0,
+      "completed": 0
+    },
+    "prerequisite": "hash-bound accepted bounded R24 ON; not native/PIC lossless equivalence"
+  },
+  "interpretation": "One current-source eager native full40 arm accepted; not paired benefit, three-round matrix, fullquality, lifecycle or wholepaper acceptance. R25 actual per-arm manifest remains distinct from common source-under-study identity."
+}
