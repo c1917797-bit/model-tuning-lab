@@ -1,0 +1,234 @@
+{
+  "schema": "hypic-r36-static-image-readiness/v1",
+  "state": "FROZEN_SAME_SOURCE_A_B_A_STATIC_IMAGE_VALID_DEVICE_PENDING",
+  "core_checkpoint": "baebfeb968ccfd561ec09dc9dace573f6170ffe1",
+  "host_validation": {
+    "core_operation": "exec-000000000000190f",
+    "core_cases": 51,
+    "audit_operation": "exec-000000000000192c",
+    "audit_cases": 21,
+    "audit_source_sha256": {
+      "host_audits/r36_durability_evidence.py": "3bf3b3391049f5ad8ac86862791a9ba82190f51d6ba7bf23cd257242b9a5bd50",
+      "host_audits/r36_step_durability_audit.py": "17d0ad6d69c9009ede0a40456882a36cdf56a8bc8cad0d1e67145c22bc7a9373",
+      "host_audits/r36_step_durability_controller.py": "0c169568e3384cc04f03917dde0ba4ca5519a9df58dad529f37d6e9dfc2b87ce",
+      "host_audits/test_r36_durability_evidence.py": "efd39dbf2a66dfe46e9a510fb7940440463da1b05bd8dfef46154c95d22f0e61"
+    },
+    "original_control_archive_replay": {
+      "actual_completed_model_steps": 224,
+      "durable_fences": 0,
+      "enabled": false,
+      "fsync_syscall_trace_proven": false,
+      "http_requests": 16,
+      "ranks": [
+        {
+          "rank": 0,
+          "timed_associated_model_steps": 14
+        },
+        {
+          "rank": 1,
+          "timed_associated_model_steps": 14
+        },
+        {
+          "rank": 2,
+          "timed_associated_model_steps": 14
+        },
+        {
+          "rank": 3,
+          "timed_associated_model_steps": 14
+        }
+      ],
+      "scope": "Source-bound successful controller plus complete raw byte/count/fence and cohort checks. Fence receipt follows completion sync and is itself synced before callback returns by verified policy. Not a syscall trace, performance result, or durability guarantee for an interrupted incomplete step.",
+      "selected_step_durability_valid": true,
+      "speed_gain_inferred": false
+    },
+    "archive_raw_root": "/cache/cch/hypic-independent-20261013/prefix-terminal-r34-a1-renewal-20261025",
+    "scope": "Separate HOST51core/loader and21independent-fence/CLI controls; original valid R34control raw format replay only, not new device proof."
+  },
+  "static_operation": "exec-0000000000001931",
+  "static_package": {
+    "launcher_sha256": "caf16748d9ee7c1d2c2bd25f792579964807c9509cb289314b6407e25dfa8d19",
+    "loader_sha256": "0d71ea2d895cdfb7784d01e750f42c65b7c88b9f4c55ea69f38bbac8f9377b2f",
+    "manifest_sha256": "66d7a6c254eef24f2b2f78532b5fac75d2c6bd02e0ed7b58fa7e199e892300fa",
+    "name": "hypic-selected-step-evidence-durability-r36",
+    "not_runtime_activation_or_delivery_acceptance": true,
+    "patch_sha256": "b59dc50254256378178a8366c140fad7f042fe0e264aaa4851e4dd11becb90d1",
+    "required_roles": [
+      "TP rank0",
+      "TP rank1",
+      "TP rank2",
+      "TP rank3"
+    ],
+    "schema": "runtime-monkeypatch-package-static-check/v1",
+    "static_identity_valid": true
+  },
+  "contracts": {
+    "A1": {
+      "active_manifest_sha256": "ee86d7b731ef7a2bcbab5648d69154cfef1e4450b11d630f05c4c4ad6e75e6b0",
+      "arm": "A1",
+      "configuration_valid": true,
+      "controller_sha256": "0c169568e3384cc04f03917dde0ba4ca5519a9df58dad529f37d6e9dfc2b87ce",
+      "device_run": false,
+      "graph_runtime": {
+        "candidate_enabled": true,
+        "capture_sizes": [
+          1,
+          4,
+          8,
+          16,
+          24,
+          32
+        ],
+        "compilation_mode": 3,
+        "cudagraph_mode": "FULL_DECODE_ONLY",
+        "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+        "official_debug_logging": false,
+        "profile": "selective-prefill-native-decode-v1"
+      },
+      "prerequisite": {
+        "changed_own_loader": [
+          "graph_candidate/worker_loader.py"
+        ],
+        "durability_enabled": false,
+        "python_sources": 434,
+        "report": "R35_DEVICE_IO_DECISION_20261025.json",
+        "runtime_additions": [
+          "independent_evidence_step_durability.py",
+          "step_durability_r36/__init__.py",
+          "step_durability_r36/patch.py",
+          "step_durability_r36/sitecustomize.py"
+        ],
+        "scope": "Same original math/event writes/guards, only default-off selected-step durability cadence changes. Measured original IO budget is an opportunity, not predicted speed.",
+        "sha256": "12949b22d4658f7c9b576a4c0cee4627247d3e5041111f245b66fd111cd38079"
+      },
+      "source_bindings": 450
+    },
+    "A2": {
+      "active_manifest_sha256": "ee86d7b731ef7a2bcbab5648d69154cfef1e4450b11d630f05c4c4ad6e75e6b0",
+      "arm": "A2",
+      "configuration_valid": true,
+      "controller_sha256": "0c169568e3384cc04f03917dde0ba4ca5519a9df58dad529f37d6e9dfc2b87ce",
+      "device_run": false,
+      "graph_runtime": {
+        "candidate_enabled": true,
+        "capture_sizes": [
+          1,
+          4,
+          8,
+          16,
+          24,
+          32
+        ],
+        "compilation_mode": 3,
+        "cudagraph_mode": "FULL_DECODE_ONLY",
+        "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+        "official_debug_logging": false,
+        "profile": "selective-prefill-native-decode-v1"
+      },
+      "prerequisite": {
+        "changed_own_loader": [
+          "graph_candidate/worker_loader.py"
+        ],
+        "durability_enabled": false,
+        "python_sources": 434,
+        "report": "R35_DEVICE_IO_DECISION_20261025.json",
+        "runtime_additions": [
+          "independent_evidence_step_durability.py",
+          "step_durability_r36/__init__.py",
+          "step_durability_r36/patch.py",
+          "step_durability_r36/sitecustomize.py"
+        ],
+        "scope": "Same original math/event writes/guards, only default-off selected-step durability cadence changes. Measured original IO budget is an opportunity, not predicted speed.",
+        "sha256": "12949b22d4658f7c9b576a4c0cee4627247d3e5041111f245b66fd111cd38079"
+      },
+      "source_bindings": 450
+    },
+    "B1": {
+      "active_manifest_sha256": "a38581f837e7fd76c7ea4af9672eb0b73c797ae056f7de330f7084a8f0a204f6",
+      "arm": "B1",
+      "configuration_valid": true,
+      "controller_sha256": "0c169568e3384cc04f03917dde0ba4ca5519a9df58dad529f37d6e9dfc2b87ce",
+      "device_run": false,
+      "graph_runtime": {
+        "candidate_enabled": true,
+        "capture_sizes": [
+          1,
+          4,
+          8,
+          16,
+          24,
+          32
+        ],
+        "compilation_mode": 3,
+        "cudagraph_mode": "FULL_DECODE_ONLY",
+        "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+        "official_debug_logging": false,
+        "profile": "selective-prefill-native-decode-v1"
+      },
+      "prerequisite": {
+        "changed_own_loader": [
+          "graph_candidate/worker_loader.py"
+        ],
+        "durability_enabled": true,
+        "python_sources": 434,
+        "report": "R35_DEVICE_IO_DECISION_20261025.json",
+        "runtime_additions": [
+          "independent_evidence_step_durability.py",
+          "step_durability_r36/__init__.py",
+          "step_durability_r36/patch.py",
+          "step_durability_r36/sitecustomize.py"
+        ],
+        "scope": "Same original math/event writes/guards, only default-off selected-step durability cadence changes. Measured original IO budget is an opportunity, not predicted speed.",
+        "sha256": "12949b22d4658f7c9b576a4c0cee4627247d3e5041111f245b66fd111cd38079"
+      },
+      "source_bindings": 450
+    }
+  },
+  "image_operation": "exec-0000000000001933",
+  "image_preflight_source": "host_audits/r36_image_preflight.py",
+  "image_report": {
+    "actual_durability_executable_source_guards": true,
+    "actual_image_original_writes_and_step_completion_fsync_control": true,
+    "actual_image_python": "3.12.13",
+    "actual_installed_native_worker_source_sha256": "94d75dbeb5d23ab5b383cdc69114167392b967994bb21342cf748b733ba9a968",
+    "fourworker_activation_proven": false,
+    "manifest_off_on_and_owned_loader_install_restore": [
+      {
+        "actual_own_loader_enable_stop": true,
+        "flag": "0",
+        "model_loaded": false,
+        "native_worker_import_executed": false
+      },
+      {
+        "actual_own_loader_enable_stop": true,
+        "flag": "1",
+        "model_loaded": false,
+        "native_worker_import_executed": false
+      }
+    ],
+    "native_worker_registration_proven": false,
+    "new_npu_work": false,
+    "schema": "hypic-r36-pinned-image-preflight/v1",
+    "scope": "Actual pinned-image package/module/importer installation and actual step completion durability controls only; no NPU devices exposed, no native worker/model execution.",
+    "speed_or_quality_accepted": false,
+    "versions": {
+      "torch": "2.10.0+cpu",
+      "torch-npu": "2.10.0.post4",
+      "vllm": "0.23.0+empty",
+      "vllm-ascend": "0.23.0"
+    }
+  },
+  "freeze": {
+    "absolute_stop_utc": "2026-10-26T06:36:27Z",
+    "auditor_sha256": "17d0ad6d69c9009ede0a40456882a36cdf56a8bc8cad0d1e67145c22bc7a9373",
+    "code_checkpoint": "baebfeb968ccfd561ec09dc9dace573f6170ffe1",
+    "common_sources": 450,
+    "controller_sha256": "0c169568e3384cc04f03917dde0ba4ca5519a9df58dad529f37d6e9dfc2b87ce",
+    "manifest_sources": 437,
+    "runtime_python": 434,
+    "study_source_map_sha256": "6ca76366f7ed398e7e1ad8f1e2c37dbfe574c82f460bf14fe71b73173966c9e4"
+  },
+  "scope": "Same-source434Python/450bindings, original unchanged math/event writes, IOtimingobserver0 and prefix-output-treatment0 in every arm. Only B1 selected-step fsync cadence1; A1/A2 retain original cadence. Actual image install/restore and original-writer durability controls passed without devices.",
+  "new_npu_work": false,
+  "formal_speed_quality_or_full_goal_accepted": false,
+  "next": "Fresh admission then A1 original durability, independent r36_step_durability_audit.py--live-release; only valid/exactlyreleased A1 permits new B1 admission, then A2. No root reuse or threshold changes."
+}
