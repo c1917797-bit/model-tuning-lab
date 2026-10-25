@@ -1,0 +1,54 @@
+{
+  "schema": "hypic-r36-a1-r2-audit-summary/v1",
+  "state": "VALID_ORIGINAL_DURABILITY_CONTROL_AUDITED_RELEASED",
+  "controller": "exec-0000000000001959",
+  "controller_exit_code": 0,
+  "contract": "STEP_DURABILITY_R36_A1_R2_20261025_CONTRACT.json",
+  "contract_sha256": "50548f1230e3e2652afdd26469994779630dd9d44bdc9d6cb67720068454e45a",
+  "launch_checkpoint": "89ab1638a91e9e86585657529154cb076602bfe7",
+  "raw_root": "/cache/cch/hypic-independent-20261013/step-durability-r36-a1-r2-20261025",
+  "independent_audit": {
+    "operation": "exec-0000000000001974",
+    "path": "/cache/cch/hypic-independent-20261013/r36-a1-r2-independent-audit-20261025.json",
+    "sha256": "ca97c076a154a5545228a5567cb5ad987f2d886c0adeb043435a6a46bdca24ca",
+    "valid": true,
+    "live_release_verified": true
+  },
+  "diagnostic_requests": 16,
+  "hot_fourworker_48C1_16C2": 16,
+  "private_shape_warmup": 48,
+  "actual_private_npu_state_checks": 8,
+  "source_bindings": 450,
+  "isolation_samples": 326,
+  "diagnostic_makespan_seconds": 118.01685051992536,
+  "durability": {
+    "actual_completed_model_steps": 224,
+    "durable_fences": 0,
+    "enabled": false,
+    "fsync_syscall_trace_proven": false,
+    "http_requests": 16,
+    "ranks": [
+      {
+        "rank": 0,
+        "timed_associated_model_steps": 14
+      },
+      {
+        "rank": 1,
+        "timed_associated_model_steps": 14
+      },
+      {
+        "rank": 2,
+        "timed_associated_model_steps": 14
+      },
+      {
+        "rank": 3,
+        "timed_associated_model_steps": 14
+      }
+    ],
+    "scope": "Source-bound successful controller plus complete raw byte/count/fence and cohort checks. Fence receipt follows completion sync and is itself synced before callback returns by verified policy. Not a syscall trace, performance result, or durability guarantee for an interrupted incomplete step.",
+    "selected_step_durability_valid": true,
+    "speed_gain_inferred": false
+  },
+  "scope": "Bounded16/c16/32768/64 original durability control only; same-shape prewarm and fixed state checks, not full numerical/task quality or formal1024/native comparison. No gain from one arm.",
+  "full_goal_complete": false
+}

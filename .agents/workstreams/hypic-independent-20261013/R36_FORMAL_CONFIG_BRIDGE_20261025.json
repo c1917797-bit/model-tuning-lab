@@ -1,0 +1,34 @@
+{
+  "schema": "hypic-r36-formal-config-bridge/v1",
+  "state": "READ_ONLY_CONFIGURATION_BRIDGE_NOT_PERFORMANCE_TRANSFER",
+  "operation": "exec-0000000000001970",
+  "R30_formal_vs_R36_config_bridge": [
+    {
+      "config": "FORMAL_GRAPH_R30_G3_CONFIG_20261025.json",
+      "config_differences": {
+        "r33_prefix_terminal_diagnostic": {
+          "R30": null,
+          "R36": true
+        },
+        "r33_prefix_terminal_only": {
+          "R30": null,
+          "R36": false
+        }
+      },
+      "contract": "FORMAL_GRAPH_R30_G3_R1_20261025_CONTRACT.json",
+      "manifest": "FORMAL_GRAPH_R30_G3_MANIFEST_20261025.json",
+      "new_evidence_profile": null,
+      "old_evidence_profile": null,
+      "output_tokens": 1024
+    }
+  ],
+  "device_allocation": false,
+  "performance_transfer_inferred": false,
+  "config_sha256": {
+    "FORMAL_GRAPH_R30_G3_CONFIG_20261025.json": "5272d007d60524f84f79ab93f525ca0e26d82aade013bcfff5733feb6fb653ed",
+    "STEP_DURABILITY_R36_CONFIG_20261025.json": "979b6068ec1090fefee56f0d8f25eeb9132f80407b156aea6258e35c712841b8"
+  },
+  "interpretation": "Original R30formalG3 and R36config both retain full unfiltered evidence policy; differences are R33prefix-output diagnostic enabled and terminal-onlyFalse. Profile64vsformal1024 remains a changed workload and runtime source identities differ. A positive R36screen cannot replace a fresh final-source G1/G3 formal1024 comparison.",
+  "old_control_measurement_reuse_allowed": false,
+  "new_npu_work": false
+}
