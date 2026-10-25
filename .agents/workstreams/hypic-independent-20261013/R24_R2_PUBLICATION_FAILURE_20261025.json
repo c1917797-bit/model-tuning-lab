@@ -1,0 +1,15 @@
+{
+  "schema": "hypic-publication-attempt/v1",
+  "observed_utc": "2026-10-25T06:29:42Z",
+  "attempted_head": "283de3b13c05042ed57ebe4cc90329454cab4b32",
+  "base": "1d0afe65a3ec01ecf3b0aa4eedb0e9ffdcc61a94",
+  "branch": "work/hypic-independent-20261013",
+  "import_original_objects": true,
+  "push_exit_code": 1,
+  "error": "schannel InitializeSecurityContext SEC_E_ILLEGAL_MESSAGE (0x80090326), fatal TLS handshake alert",
+  "last_confirmed_remote_head": "1d0afe65a3ec01ecf3b0aa4eedb0e9ffdcc61a94",
+  "last_confirmed_main": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
+  "status": "LOCAL_CHECKPOINT_PENDING_PUBLICATION",
+  "next": "Do not disable TLS verification or repeatedly retry unchanged network; preserve original commits, use existing FF object relay once verified connectivity changes, then live ls-remote before claim.",
+  "device_impact": "No restart or source/config changes; exact OFF controller1512 remains authoritative."
+}

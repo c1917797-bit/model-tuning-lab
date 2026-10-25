@@ -1,5 +1,13 @@
 # CURRENT 2026-10-25 R24R2 OFF RUNNING; EXACT CONTROLLER1512
 
+06:29UTC originalobjectrelay imported local283de3b1, but desktop ordinaryFFpush
+failed schannel SEC_E_ILLEGAL_MESSAGE TLS handshake. R24_R2_PUBLICATION_FAILURE_20261025.json
+preserves attempt; lastliveconfirmed remote remains1d0afe65/main23ec33d7.
+Do not repeat unchangedfailedpush or disable TLS verification.
+Read-only1519/151c: startupcompleted06:28:17UTC, health20006:28:18; fourworker
+OFFinstallreceipts observed, no requestcompletion or fourrankhot acceptance yet.
+Raw journal06:28:06 stillcleanowned0-3. This is startup progress, not canarypass.
+
 Fresh1511 admission06:22:55UTC passed source417/runtime415, image/model/input,
 newraw/containerabsence, actualphysical0-3empty,102portsbindable and external
 benchmarkchainsended. This is not a reservation. Direct ma launch atpublished

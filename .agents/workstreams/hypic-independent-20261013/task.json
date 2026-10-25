@@ -555,6 +555,11 @@
       "stop_utc": "2026-10-25T18:07:17Z",
       "scope": "Same full three-stage goal; exact live controller tracking, independent audits, fresh admission and decisive next missing gate. Delete this followup after stop and owned-resource release audit."
     },
-    "latest_confirmed_publication": "1d0afe65a3ec01ecf3b0aa4eedb0e9ffdcc61a94"
+    "latest_confirmed_publication": "1d0afe65a3ec01ecf3b0aa4eedb0e9ffdcc61a94",
+    "pending_publication": {
+      "checkpoint": "283de3b13c05042ed57ebe4cc90329454cab4b32",
+      "evidence": "R24_R2_PUBLICATION_FAILURE_20261025.json",
+      "status": "TLS_HANDSHAKE_FAILURE_NO_RETRY_WITHOUT_CHANGED_NETWORK"
+    }
   }
 }
