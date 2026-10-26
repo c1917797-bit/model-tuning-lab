@@ -56,6 +56,26 @@ def _step_durability_enabled(manifest):
         raise ValueError("step durability manifest/environment mismatch")
     return True
 
+def _component_budget_enabled(manifest):
+    value=os.environ.get("INDEPENDENT_COMPONENT_COST_BUDGET","0")
+    if value not in("0","1"):raise ValueError("explicit component observer environment required")
+    setting=manifest.get("component_cost_budget")
+    if setting is None:
+        if value!="0":raise ValueError("component observer requires bound manifest")
+        return False
+    if(setting!={"enabled":True,"profile":"selected-component-cost-v1"}or value!="1"
+       or "independent_component_cost_budget.py"not in manifest["source_sha256"]):
+        raise ValueError("component observer manifest/environment differs")
+    return True
+
+def _close_component(component,error=None):
+    if component is None:return
+    try:component.stop()
+    except BaseException as cleanup:
+        if error is None:raise
+        if hasattr(error,"add_note"):
+            error.add_note("Owned component observer close failed: "+str(cleanup)[:256])
+
 def _close_durability(policy,error=None):
     if policy is None:return
     try:policy.close()
@@ -183,6 +203,10 @@ def enable():
     limits = evidence_limits(config.pop("evidence_limits", None))
     io_enabled = _io_budget_enabled(manifest)
     step_enabled = _step_durability_enabled(manifest)
+    component_enabled = _component_budget_enabled(manifest)
+    if component_enabled and (not step_enabled or io_enabled or policy is not None
+            or any(k in config for k in ("r33_prefix_terminal_diagnostic","r33_prefix_terminal_only"))):
+        raise ValueError("component observation retains step durability/full evidence without R33 or IO observers")
     if io_enabled and step_enabled:
         raise ValueError("IO observation and durability treatment are separate")
     if (io_enabled or step_enabled) and policy is not None:
@@ -263,6 +287,8 @@ def enable():
                     count += 1
                     size += len(data)
             durability = None
+            component = None
+            remove = None
             try:
                 emit = raw_emit
                 if step_enabled:
@@ -291,6 +317,16 @@ def enable():
                     budget = io_module.make_budget(fd, os.fsync, lambda: (count, size))
                     fsync = budget.fsync
                     emit = budget.wrap(raw_emit)
+                if component_enabled:
+                    import independent_component_cost_budget as cost_module
+                    from .prefill_bridge import verify_support
+                    source = verify_support(cost_module, manifest["source_sha256"]["independent_component_cost_budget.py"])
+                    verify_raw_function(cost_module,source,cost_module.make_component_budget,name="make_component_budget")
+                    for name,value in vars(cost_module.ComponentBudget).items():
+                        if inspect.isfunction(value):
+                            verify_raw_function(cost_module,source,value,name=name,qualname="ComponentBudget."+name)
+                    component = cost_module.make_component_budget(raw_emit,step_module.selected_step)
+                    emit = component.wrap_emit(emit)
                 emit.source_manifest_sha256 = manifest_hash
                 emit.stage_capture_root = str(raw)
                 if policy is not None:
@@ -306,8 +342,15 @@ def enable():
                 from .activation import activate_graph_candidate
                 remove = activate_graph_candidate(config, enabled=True, emit=emit,
                     source_bindings=source_bindings, request_progress_limit=limits["max_requests"])
+                if component is not None:
+                    component.install(source_bindings,manifest_path.parent)
             except BaseException as error:
                 try:
+                    if remove is not None:
+                        try:remove()
+                        except BaseException as cleanup:
+                            if hasattr(error,"add_note"):error.add_note("Owned activation cleanup failed: "+str(cleanup)[:256])
+                    _close_component(component,error)
                     _close_durability(durability, error)
                 finally:
                     os.close(fd)
@@ -315,6 +358,7 @@ def enable():
             def stop():
                 failure = None
                 try:
+                    _close_component(component)
                     remove()
                 except BaseException as error:
                     failure = error

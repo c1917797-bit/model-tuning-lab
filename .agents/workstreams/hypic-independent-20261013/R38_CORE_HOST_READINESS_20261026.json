@@ -1,0 +1,55 @@
+{
+  "schema": "hypic-r38-core-host-readiness/v1",
+  "state": "CORE20_LOADER14_HOST_PASS_NO_IMAGE_OR_NPU_YET",
+  "source_sha256": {
+    "component_budget_r38/__init__.py": "f0e47f85ac8de8b77e8686cad60301876acafba85cc511c0a09f9fe32950418d",
+    "component_budget_r38/patch.py": "79f745e34a3822da013f339a08760e32ee7222772537e87bb810b98b88e90413",
+    "component_budget_r38/run_with_patch.sh": "0766ec9b0a439dadefb824600b57fc042593d65182f9a7aaf65fbb809a408e50",
+    "component_budget_r38/sitecustomize.py": "67881e71ff0bb7f0771354c04b33757757c700b33e150df747ae2b215dbc76bd",
+    "graph_candidate/worker_loader.py": "7a0a9532126b0b5cb8f5e9dbb02a840512a0c2dfd7ad885a100493ed81dc30a9",
+    "host_audits/test_r38_component_cost_budget.py": "97b84e32973b8e59553542bce081b6b36059b38f57103ccea69185aacf11a028",
+    "host_audits/test_r38_loader_switch.py": "e387dc2c870b9131860f5b9503e54dc3a5963dbdd686185362a3599718ea6f8f",
+    "independent_component_cost_budget.py": "95aef23f08719377a68171f71486e0072573d2c761c337ec6afe9821c5963a7c"
+  },
+  "helper_tests": {
+    "operation": "exec-0000000000001a1a",
+    "passed": 20,
+    "scope": "Nested inclusive/exclusive accounting, original argument/result/exception identity, scope and limits, source-owned install/restore, foreign mutation fail-closed; actual original writer+R36fence+newreceipt sequence, CPU synthetic four-rank byte parser replay. Not NPU proof."
+  },
+  "loader_tests": {
+    "operation": "exec-0000000000001a37",
+    "passed": 14,
+    "scope": "Defaultoff/explicit source switch, invalid activation rejection, disabled actual launcher, cleanup exception preservation, exact raw_emit AST unchanged from4056062d."
+  },
+  "implementation": {
+    "default_off": true,
+    "groups": [
+      "c1_packed_prepare",
+      "c1_prefix_alignment",
+      "mixed_native_prepare",
+      "layer_finite_validate"
+    ],
+    "targets": "Exact original source-owned exports; dynamic known caller imports verified in source, no generic unwrap/search.",
+    "post_activation_install": true,
+    "original_component_source_files_unchanged": true,
+    "original_math_and_finite_coverage_unchanged": true,
+    "original_event_writes_and_R36_fences_unchanged": true,
+    "receipt_order": "Original model completion, original R36 durable fence, new r38_component_budget_step, new r38_component_budget_flush; extra receipts use original raw writer after the selected-step fence.",
+    "timing_scope": "CPU original-call spans including prior queued NPU waits, nested functions and observer bookkeeping. Inclusive/exclusive/root union are not removable GPU time or service gain.",
+    "probe_overhead": "Metadata timing plus first receipt emit duration; second flush record's own write is counted and explicitly unmeasured. No zero-overhead claim.",
+    "observer_records_per_completed_selected_step": 2,
+    "returns_before_callback_complete": true,
+    "partial_or_failed_steps_never_accepted": true
+  },
+  "old_performance_source_checkpoint": "4056062d515b696ee7a1cec7862a2303cfa1740f",
+  "old_loader_sha256": "f4d4866f2f379989d88fab59fa5bf943c782325df10f0b3a66231e3006f9d920",
+  "new_loader_sha256": "7a0a9532126b0b5cb8f5e9dbb02a840512a0c2dfd7ad885a100493ed81dc30a9",
+  "old_manifests_raw_and_contracts_immutable": true,
+  "new_manifests_and_controller_pending": true,
+  "new_npu_work": false,
+  "mst_structure": "PASS: Maintainer Skill Tree structure is valid (29 skills)",
+  "mst_functional_acceptance": false,
+  "next": "Create source-bound ON/OFF package manifests using this actual forthcoming code checkpoint, HOST bounded16/c16/fixed1024 controller plus independent raw count/nesting/durability audit. Actual base-consumed constructor, automatic pinned-image startup and exact original-function install/restore/CPU finite controls before fresh device admission. No R33warm48 or oldcanary repeats, no oldmanifest rebind.",
+  "absolute_stop_utc": "2026-10-26T06:36:27Z",
+  "full_goal_complete": false
+}

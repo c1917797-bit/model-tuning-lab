@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+for value in "${INDEPENDENT_GRAPH_HYPIC:-0}" "${INDEPENDENT_COMPONENT_COST_BUDGET:-0}"; do
+    case "$value" in 0|1) ;; *) exit 64 ;; esac
+done
+root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+export PYTHONPATH="$root/component_budget_r38:$root:${PYTHONPATH:-}"
+export INDEPENDENT_GRAPH_HYPIC="${INDEPENDENT_GRAPH_HYPIC:-0}"
+export INDEPENDENT_COMPONENT_COST_BUDGET="${INDEPENDENT_COMPONENT_COST_BUDGET:-0}"
+export INDEPENDENT_EVIDENCE_IO_BUDGET="${INDEPENDENT_EVIDENCE_IO_BUDGET:-0}"
+export INDEPENDENT_PREFIX_TERMINAL_ONLY="${INDEPENDENT_PREFIX_TERMINAL_ONLY:-0}"
+exec "$@"

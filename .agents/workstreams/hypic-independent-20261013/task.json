@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R37_FIRST_PAIR_VALID_NO_NATIVE_SPEED_GAIN_ALL_RELEASED_R38_BUDGET_PENDING",
+  "execution_state": "CORE20_LOADER14_HOST_PASS_NO_IMAGE_OR_NPU_YET",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -440,7 +440,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Execute R38_COMPONENT_BUDGET_PLAN_20261026.json: one bounded source-bound component cost observation of C1prefix/packed preparation plus mixed-native/finite checks, preserving R36durability and all guards. No unsupported per-token IO or already-batched finite rewrite; no repeats of negative formal matrix. Fixed06:36:27UTC.",
+  "next_action": "Create source-bound ON/OFF package manifests using this actual forthcoming code checkpoint, HOST bounded16/c16/fixed1024 controller plus independent raw count/nesting/durability audit. Actual base-consumed constructor, automatic pinned-image startup and exact original-function install/restore/CPU finite controls before fresh device admission. No R33warm48 or oldcanary repeats, no oldmanifest rebind.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -479,9 +479,9 @@
   },
   "publication": {
     "state": "liveverified_previous_checkpoint",
-    "published_commit": "626f8cc498cc7c86b9e0e362ece81aaa9ecfc888",
+    "published_commit": "4056062d515b696ee7a1cec7862a2303cfa1740f",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "scope": "Previous liveverified G1valid/G3running checkpoint. Next local checkpoint closes both actual formal arms with independent replay and negative result; no wholepaper acceptance.",
+    "scope": "Previous liveverified R37 negative comparison/R38plan. New local observer/core bootstrap passes34HOST controls only, not image/NPU/component budget or service improvement.",
     "tls_verification": "Per-command OpenSSL sslVerify=true. Desktop unrestricted approved Git route resolves DNS-thread failure seen only in restricted process; no TLS weakening."
   },
   "math_reference": {
@@ -1389,9 +1389,22 @@
     "raw_decision_sha256": "afddc368e51119d600d611ad401cdd99707e049521b1a2524d486d1b6141a71b"
   },
   "r38_component_budget": {
-    "state": "PREREGISTERED_MEASUREMENT_PLAN_NOT_IMPLEMENTED_OR_DEVICE_ACCEPTED",
+    "state": "CORE20_LOADER14_HOST_PASS_NO_IMAGE_OR_NPU_YET",
     "plan": "R38_COMPONENT_BUDGET_PLAN_20261026.json",
     "active_controller": null,
-    "full_goal_complete": false
+    "full_goal_complete": false,
+    "host_readiness": "R38_CORE_HOST_READINESS_20261026.json",
+    "core_tests": 20,
+    "loader_tests": 14,
+    "source_sha256": {
+      "component_budget_r38/__init__.py": "f0e47f85ac8de8b77e8686cad60301876acafba85cc511c0a09f9fe32950418d",
+      "component_budget_r38/patch.py": "79f745e34a3822da013f339a08760e32ee7222772537e87bb810b98b88e90413",
+      "component_budget_r38/run_with_patch.sh": "0766ec9b0a439dadefb824600b57fc042593d65182f9a7aaf65fbb809a408e50",
+      "component_budget_r38/sitecustomize.py": "67881e71ff0bb7f0771354c04b33757757c700b33e150df747ae2b215dbc76bd",
+      "graph_candidate/worker_loader.py": "7a0a9532126b0b5cb8f5e9dbb02a840512a0c2dfd7ad885a100493ed81dc30a9",
+      "host_audits/test_r38_component_cost_budget.py": "97b84e32973b8e59553542bce081b6b36059b38f57103ccea69185aacf11a028",
+      "host_audits/test_r38_loader_switch.py": "e387dc2c870b9131860f5b9503e54dc3a5963dbdd686185362a3599718ea6f8f",
+      "independent_component_cost_budget.py": "95aef23f08719377a68171f71486e0072573d2c761c337ec6afe9821c5963a7c"
+    }
   }
 }
