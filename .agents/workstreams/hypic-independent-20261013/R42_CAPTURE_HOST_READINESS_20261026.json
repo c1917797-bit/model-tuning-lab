@@ -1,0 +1,100 @@
+{
+  "schema": "hypic-r42-host-readiness/v1",
+  "state": "FOUR_ORIGINAL_FLAG_CONTROLS_FOUR_NEW_HOST_GATES_ACTUAL_CONSTRUCTOR_PASS_NO_NPU_TRACE",
+  "failure_prerequisite": {
+    "report": "R41_G1_R1_CAPTURE_FAILURE_20261026.json",
+    "contract": "PROFILE_R41_G1_R1_20261026_CONTRACT.json",
+    "contract_sha256": "4bf0a55c78898a1f363f0a546e254f90887fdf2d4c10dfdcdf0f8f42e6820d1a",
+    "audit": "/cache/cch/hypic-independent-20261013/r41-g1-r1-failure-release-audit-20261026.json",
+    "audit_sha256": "20c91fdfe7c338c114a11f5f2af6dab7eed72bfd457569eff93a009081906591",
+    "phase": "Native worker Python interpreter segfault at automatic profiler stop; raw traces not closed,40/40 requests failed; exact resources independently released."
+  },
+  "primary_inference_profiler_delta": {
+    "field": "torch_profiler_with_stack",
+    "from": true,
+    "to": false,
+    "actual_backend_delta": [
+      "with_modules"
+    ],
+    "all_other_profiler_arguments_unchanged": true,
+    "algorithm_runtime_changed": false
+  },
+  "original_config_mapper": {
+    "operation": "exec-0000000000001c4a",
+    "passed": 4,
+    "controls": [
+      "exact original backend changes only with_modules and preserves CPU/NPU Level1/PipeUtilization",
+      "unsupported profiler rejected",
+      "missing output directory rejected",
+      "conflicting daemon rejected"
+    ],
+    "original_source_sha256": "0c9ffcaf695a9b1fcb44a51bdd92e69f763a7c5be64a8efbd498d6536b9e09e5",
+    "sole_backend_argument_delta": [
+      "with_modules"
+    ],
+    "candidate_with_modules": false,
+    "activities": [
+      "CPU",
+      "NPU"
+    ],
+    "scope": "Original class AST with fake backend configuration mapping only; no NPU profiling, segfault cure or performance claim.",
+    "script": "host_audits/r42_official_profiler_flag_probe.py"
+  },
+  "host_admission_tests": {
+    "operation": "exec-0000000000001c4f",
+    "passed": 4,
+    "scope": "Actual false-only new source closure preserving all old R41 six source files; old closed flag, invalid storage reservation or missing independently released failure rejected."
+  },
+  "retained_controls": {
+    "R41_trace_and_HTTP_controls": 18,
+    "R41_math_owner_source_controls": 7,
+    "R41_original_boundary_controls": 5,
+    "repeated": false,
+    "scope": "Source-identical reviewed R41 trace helper is reused; no duplicate unchanged tests. These controls do not establish NPU profiler stability."
+  },
+  "actual_native_constructor": {
+    "operation": "exec-0000000000001c5e",
+    "path": "/cache/cch/hypic-independent-20261013/r42-g1-r1-final-source-launch-capsule-20261026.json",
+    "sha256": "79f7d8710b90cc3d17b3cd0d8e8737dd2e4580d3da5e94764c7d60f48b63e45f",
+    "contract_sha256": "9dc1500eb91add5b2234e3b7f308e52c63907007aceb8af631a689bde9b9a778",
+    "new_device_allocation": false,
+    "physical_admission_proven": false,
+    "source_bindings": 465,
+    "runtime_python": 438,
+    "retained_host_sources": 32,
+    "outer_source_closure": 6,
+    "actual_profile_config": {
+      "profiler": "torch",
+      "torch_profiler_dir": "/scratch/profiles",
+      "ignore_frontend": true,
+      "torch_profiler_with_stack": false,
+      "torch_profiler_with_memory": false,
+      "delay_iterations": 0,
+      "max_iterations": 7
+    },
+    "actual_audit_import": true,
+    "profile_arg": "{\"delay_iterations\":0,\"ignore_frontend\":true,\"max_iterations\":7,\"profiler\":\"torch\",\"torch_profiler_dir\":\"/scratch/profiles\",\"torch_profiler_with_memory\":false,\"torch_profiler_with_stack\":false}"
+  },
+  "source_sha256": {
+    "host_audits/r42_profile_controller.py": "8477a6bec1506cb24f239dab9cec304022aec3c102399a36303aaed8bc4565da",
+    "host_audits/r42_profile_audit.py": "7c1c585cf1d60bd182606e2d4b4e82ab3d0f0aca8d0f85d3c0b9c2bf998b0e8a",
+    "host_audits/r42_profile_capsule.py": "96b835bc4a5f2e47984f38d331ac876165084c460084e56ae1d6ccd1d512f4e1",
+    "host_audits/r42_profile_policy.py": "278897b837725c1af9997a1739778b58acf164278ebdce88176e882f0ed65208",
+    "R42_NO_PYTHON_TRACER_SINGLE_VARIABLE_PLAN_20261026.json": "305e2b42474b16a681025d0880e24259e94a0c99a0fd2662f021546d524950c7",
+    "host_audits/r41_profile_trace.py": "46fdb2acaa01352a31a808b88a71a39bd7cfa63e2e391f7cc971bbfbcaafe74c"
+  },
+  "protected_R41_sources": "All6 original R41 source hashes remain intact; old contract/raw/partial520MB/error-release audit preserved.",
+  "new_contract": "PROFILE_R42_G1_R1_20261026_CONTRACT.json",
+  "raw_root": "/cache/cch/hypic-independent-20261013/critical-path-r42-g1-r1-20261026",
+  "allocation_budget": {
+    "minimum_remaining_seconds": 3300,
+    "minimum_free_cache_bytes": 9126805504,
+    "next_G3_minimum_remaining_seconds": 2400,
+    "fixed_stop": "2026-10-26T06:36:27Z",
+    "scope": "New administrative admission model grounded in valid R40 raw lifecycle spans; no metric, mathematical guard, storage floor or deadline relaxation."
+  },
+  "next": "Publish actual code/contract checkpoint before fresh ma/direct/source/model/image/input/newroot+name/empty0-3/strict102ports/reservedspace/budget admission. NativeG1 only; independent original requests/graph/source/physical/isolation/exactrelease plus fourrank real closed CPU/NPUtrace before G3 newcontract/newroot/pointerSHA.",
+  "full_goal_complete": false,
+  "earlier_constructor_operation": "exec-0000000000001c50",
+  "final_audit_guard": "Explicitly rejects segfault encountered in original service log in addition to all trace/request/numeric/source/release gates."
+}
