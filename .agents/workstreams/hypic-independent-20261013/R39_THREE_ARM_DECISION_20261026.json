@@ -1,0 +1,70 @@
+{
+  "schema": "hypic-r39-three-arm-summary/v1",
+  "state": "SUPPORTED_BOUNDED_TARGET_WARMUP_COUNT_EFFECT",
+  "independent_replay": {
+    "operation": "exec-0000000000001b06",
+    "path": "/cache/cch/hypic-independent-20261013/r39-three-arm-decision-r1-20261026.json",
+    "sha256": "aaaf8e763e685e1e7beef217aa629a4a8ba5b02b778722e8dc50e378ae436e42",
+    "all_original_audits_replayed": true
+  },
+  "decision": {
+    "A1_seconds": 257.1227395099122,
+    "A2_seconds": 246.86546296998858,
+    "B1_extra_full_target_warmup_seconds": 103.25260529993102,
+    "B1_measured_plus_extra_warmup_seconds": 312.2795922399964,
+    "B1_seconds": 209.0269869400654,
+    "accept_gain_percent_at_least": 5,
+    "algorithm_changed": false,
+    "all_arms_actual16_and_fourworker_hot": true,
+    "all_original_audits_recorded_exact_live_release": true,
+    "arithmetic_extra_cost_over_observed_unit_saving": 2.4030612011616377,
+    "arithmetic_ratio_not_an_amortization_or_future_speed_prediction": true,
+    "arms": [
+      {
+        "arm": "A1",
+        "audit": "/cache/cch/hypic-independent-20261013/r39-a1-r1-independent-audit-20261026.json",
+        "audit_sha256": "a76ed5de92a479fd397575e89f204738909f7a0a08b6b4a683012208cfabd609",
+        "contract": "TARGET_WARMUP_R39_A1_R1_20261026_CONTRACT.json",
+        "contract_sha256": "7172d61a31032fe4ee7f11b470376602e2cb86c929d044e3fccf9b19966c3715",
+        "independent_full_raw_replay": true
+      },
+      {
+        "arm": "B1",
+        "audit": "/cache/cch/hypic-independent-20261013/r39-b1-r1-independent-audit-20261026.json",
+        "audit_sha256": "afde673167a7d8b672bbc8863bd20663cd5454f2101e78e8cadd8420aa9f0243",
+        "contract": "TARGET_WARMUP_R39_B1_R1_20261026_CONTRACT.json",
+        "contract_sha256": "14b5121eb66731e40c0436982311ff351c25b992db8621c900cb52073761dfc5",
+        "independent_full_raw_replay": true
+      },
+      {
+        "arm": "A2",
+        "audit": "/cache/cch/hypic-independent-20261013/r39-a2-r1-independent-audit-20261026.json",
+        "audit_sha256": "7c00691c20d2c1340f618b29a18bf157127c67c7305c2a7ccd1fa4f8a9de4cbc",
+        "contract": "TARGET_WARMUP_R39_A2_R1_20261026_CONTRACT.json",
+        "contract_sha256": "5ee0dc0fca6b5f144d167bd3dee91d04642bb304c04517f3587266cd39588f53",
+        "independent_full_raw_replay": true
+      }
+    ],
+    "compiler_cause_proven": false,
+    "control_drift_percent": 4.07044311333168,
+    "control_mean_seconds": 251.9941012399504,
+    "full_goal_complete": false,
+    "max_control_drift_percent": 5,
+    "measured_single_variable": "0/2/0 extra full target warmup requests; four cache preparations common",
+    "measured_unit_gain_percent": 17.05084130480159,
+    "native_speed_gain_proven": false,
+    "plan_sha256": "2337af999ea2006d073041ba4632ff194ebe990cc0b46c6f21d6a2b969f3fbb8",
+    "predeclared_plan_commit": "026b571b5b46a4401643fb55c5e41b82d43fad2f",
+    "schema": "hypic-r39-three-arm-decision/v1",
+    "scope": "One bounded protocol contrast only. A warmup-count effect is not a compiler diagnosis, algorithm/native/formal40 speed gain, full paired quality, lifecycle or paper acceptance.",
+    "single_unit_including_extra_warmup_gain_percent": -23.923373881931383,
+    "state": "SUPPORTED_BOUNDED_TARGET_WARMUP_COUNT_EFFECT"
+  },
+  "all_three_arms_exact_released": true,
+  "source_bindings": 463,
+  "runtime_python": 438,
+  "bound_host_sources": 24,
+  "next": "R40: freeze equal actual targetwarm2 plus4cachepreps on bothnative/HYPIC formal40/c16/32768/fixed1024; exclude component/IO/shape profilers, retain math/finite/completion/ownership/durable evidence. New HOST controller/auditor/tests/actual builder and newsource manifests/contracts beforefreshNPU. No retrospective old-negative reclassification.",
+  "formal_native_speed_gain": false,
+  "whole_goal_complete": false
+}
