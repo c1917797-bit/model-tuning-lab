@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R40_G1_VALID_RELEASED_G3_CONSTRUCTOR_PASS_PENDING_PUBLICATION_FRESH_ADMISSION",
+  "execution_state": "R40_EQUAL_TARGETWARM2_FORMAL_G3_RUNNING_EXACT1B7F",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -497,7 +497,29 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": null,
+  "active_attempt": {
+    "state": "RUNNING_STARTUP_NOT_YET_REQUEST_PROOF",
+    "operation": "exec-0000000000001b7f",
+    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "connector": "awmcp",
+    "group": "G3",
+    "contract": "FORMAL_WARM_R40_G3_R1_20261026_CONTRACT.json",
+    "contract_sha256": "f69fd61e8eca690905ceecdddeb9ef18e4055d3e090629307d83bfc7d4cdb9cd",
+    "raw_root": "/cache/cch/hypic-independent-20261013/formal-warm-r40-g3-r1-20261026",
+    "launch_checkpoint": "4d77e3de462537729c41c0093a8f2834280271a8",
+    "admission_operation": "exec-0000000000001b7e",
+    "admission": "R40_G3_R1_ADMISSION_20261026.json",
+    "observed_running_utc": "2026-10-26T04:01:10Z",
+    "auditor": "host_audits/r40_formal_audit.py",
+    "audit_output": "/cache/cch/hypic-independent-20261013/r40-g3-r1-independent-audit-20261026.json",
+    "absolute_stop_utc": "2026-10-26T06:36:27Z",
+    "rule": "Originalma/exact1b7f/rawonly/liveunknownneverrestart. Freeze438runtime/465common/32HOST;G3only same4cacheprep+2actualtargetwarm+formal40/c16/fixed1024/0retry,componentIOprefixobserversOFF. Actual40+warm2fourworker48C1/16C2/finite+snapshot+R36bytefences/source/graph/physical/isolation/exactCID+0-3+102portsrelease required. OnlyvalidG3 permits standalonec4b748de pairtool FULLreplay bothoriginalaudits+actualG1predecessorSHAchain;primaryweightedTPOTgain AND TTFTP95nonregressionbeforematrix. Extra warmcostreport;oldnegative/fullquality/lifecycle/fullgoalremainunaccepted.",
+    "previous_audit": {
+      "group": "G1",
+      "path": "/cache/cch/hypic-independent-20261013/r40-g1-r1-independent-audit-20261026.json",
+      "sha256": "ed04de3b64f0a2375ae2e26975e309ab50bc171af620fc8fd89380832b229441"
+    }
+  },
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
@@ -1501,9 +1523,31 @@
     "decision": "R39_THREE_ARM_DECISION_20261026.json"
   },
   "r40_formal_protocol": {
-    "state": "R40_G1_VALID_RELEASED_G3_CONSTRUCTOR_PASS_PENDING_PUBLICATION_FRESH_ADMISSION",
+    "state": "R40_EQUAL_TARGETWARM2_FORMAL_G3_RUNNING_EXACT1B7F",
     "plan": "R40_EQUAL_TARGET_WARM_FORMAL_PLAN_20261026.json",
-    "active_controller": null,
+    "active_controller": {
+      "state": "RUNNING_STARTUP_NOT_YET_REQUEST_PROOF",
+      "operation": "exec-0000000000001b7f",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "connector": "awmcp",
+      "group": "G3",
+      "contract": "FORMAL_WARM_R40_G3_R1_20261026_CONTRACT.json",
+      "contract_sha256": "f69fd61e8eca690905ceecdddeb9ef18e4055d3e090629307d83bfc7d4cdb9cd",
+      "raw_root": "/cache/cch/hypic-independent-20261013/formal-warm-r40-g3-r1-20261026",
+      "launch_checkpoint": "4d77e3de462537729c41c0093a8f2834280271a8",
+      "admission_operation": "exec-0000000000001b7e",
+      "admission": "R40_G3_R1_ADMISSION_20261026.json",
+      "observed_running_utc": "2026-10-26T04:01:10Z",
+      "auditor": "host_audits/r40_formal_audit.py",
+      "audit_output": "/cache/cch/hypic-independent-20261013/r40-g3-r1-independent-audit-20261026.json",
+      "absolute_stop_utc": "2026-10-26T06:36:27Z",
+      "rule": "Originalma/exact1b7f/rawonly/liveunknownneverrestart. Freeze438runtime/465common/32HOST;G3only same4cacheprep+2actualtargetwarm+formal40/c16/fixed1024/0retry,componentIOprefixobserversOFF. Actual40+warm2fourworker48C1/16C2/finite+snapshot+R36bytefences/source/graph/physical/isolation/exactCID+0-3+102portsrelease required. OnlyvalidG3 permits standalonec4b748de pairtool FULLreplay bothoriginalaudits+actualG1predecessorSHAchain;primaryweightedTPOTgain AND TTFTP95nonregressionbeforematrix. Extra warmcostreport;oldnegative/fullquality/lifecycle/fullgoalremainunaccepted.",
+      "previous_audit": {
+        "group": "G1",
+        "path": "/cache/cch/hypic-independent-20261013/r40-g1-r1-independent-audit-20261026.json",
+        "sha256": "ed04de3b64f0a2375ae2e26975e309ab50bc171af620fc8fd89380832b229441"
+      }
+    },
     "whole_goal_complete": false,
     "readiness": "R40_HOST_READINESS_20261026.json",
     "controller": "host_audits/r40_formal_controller.py",
@@ -1549,6 +1593,7 @@
     },
     "pair_decision_helper": "host_audits/r40_pair_decision.py",
     "pair_decision_readiness": "R40_PAIR_DECISION_READINESS_20261026.json",
-    "G3_constructor": "R40_G3_R1_LAUNCH_READINESS_20261026.json"
+    "G3_constructor": "R40_G3_R1_LAUNCH_READINESS_20261026.json",
+    "G3_admission": "R40_G3_R1_ADMISSION_20261026.json"
   }
 }
