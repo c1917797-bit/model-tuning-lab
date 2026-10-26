@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R41_CAPTURE_HOST25_NATIVE_CONSTRUCTOR_IMAGE_CLASS_READY_G1_ADMISSION_PENDING",
+  "execution_state": "R41_OFFICIAL_PROFILE_NATIVE_G1_RUNNING_EXACT1C25",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -440,7 +440,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Publish checkpoint; fresh ma/direct and physical0-3/all102ports/source/model/image/input/root/name/cache/remaining>=4500s admission, then G1only. Independent original transport/mechanism/source/isolation/release + realfourrankclosedparsedtrace audit before G3contract. Actual NPU trace/critical-path attribution remains pending. NewG3 only after genuineG1trace audit pathSHA; keep438/465/32+6 frozen; profile diagnostic only, don't reclassify R40negative. No repeated passedHOST/CPU controls.",
+  "next_action": "Poll original ma/exact1c25 and its original raw root only; do not restart or edit438/465/32+6 frozen files. At actual terminal independently audit original full40+warm/trace/graph/source/isolation/exactrelease, then only if validfourrankparsedtrace+all102ports release freeze G3sameclosure/newroot and genuinepreviousauditSHA. Diagnostic timing never speed gain.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -478,10 +478,10 @@
     ]
   },
   "publication": {
-    "state": "previous_checkpoint_live_verified_new_R41_capture_pending",
-    "published_commit": "550d0e8a79d14121ebdade639363385bd89eb1ee",
+    "state": "liveverified_previous_checkpoint",
+    "published_commit": "ba9d3a915303b35b7e7ce836573f30afe620ae27",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "scope": "Official boundary5CPU controls/R41plan liveverified; new HOST25 capture/actual builder/imageclass stage pending coherent publication. No NPU trace/quality/lifecycle/fullgoal acceptance."
+    "scope": "R41 HOST25/actual native launch builder/class-load code and new native contract liveverified beforedevice startup. Current exact1c25 startup tracking pending coherentcheckpoint; no NPU trace or speed/quality/fullgoal acceptance."
   },
   "math_reference": {
     "state": "cpu-reference-passed",
@@ -496,7 +496,25 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": null,
+  "active_attempt": {
+    "state": "RUNNING_STARTUP_NOT_YET_REQUEST_OR_TRACE_PROOF",
+    "operation": "exec-0000000000001c25",
+    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "connector": "awmcp",
+    "group": "G1",
+    "contract": "PROFILE_R41_G1_R1_20261026_CONTRACT.json",
+    "contract_sha256": "4bf0a55c78898a1f363f0a546e254f90887fdf2d4c10dfdcdf0f8f42e6820d1a",
+    "raw_root": "/cache/cch/hypic-independent-20261013/critical-path-r41-g1-r1-20261026",
+    "owned_container": "ad6dd08f6b437a7fe00063a3aca0c5483cf99b707195b53cc3c80ba0db73c465",
+    "launch_checkpoint": "ba9d3a915303b35b7e7ce836573f30afe620ae27",
+    "admission_operation": "exec-0000000000001c21",
+    "admission": "R41_G1_R1_ADMISSION_20261026.json",
+    "controller": "host_audits/r41_profile_controller.py",
+    "auditor": "host_audits/r41_profile_audit.py",
+    "audit_output": "/cache/cch/hypic-independent-20261013/r41-g1-r1-independent-audit-20261026.json",
+    "absolute_stop_utc": "2026-10-26T06:36:27Z",
+    "rule": "Original ma/exact1c25/raw only, live/unknown neverrestart. All438runtime/465common/32retainedHOST+6outerHOST source frozen. Only tracking/HANDOFF/admission outside closure may change. Same4preps+2targetwarm+full40/c16/fixed1024 with boundedofficialProfiler, not performance. Require original transport/graph/source/physical/isolation/exactCID/all102ports release +fourrankrealCPU/NPUclosedparsedtrace/auto-stop/no hidden failure. Valid parsed exact releasedG1 before G3newcontract/root actualpreviousauditSHA; G3minimumremaining2400s. No newdevice after fixed deadline."
+  },
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
@@ -1570,9 +1588,27 @@
     "allow_repetition_matrix": false
   },
   "r41_critical_path": {
-    "state": "HOST25_ACTUAL_NATIVE_CONSTRUCTOR_AND_OFFICIAL_CLASS_LOAD_PASS_NO_NPU_TRACE",
+    "state": "R41_OFFICIAL_PROFILE_NATIVE_G1_RUNNING_EXACT1C25",
     "plan": "R41_CRITICAL_PATH_DIAGNOSTIC_PLAN_20261026.json",
-    "active_controller": null,
+    "active_controller": {
+      "state": "RUNNING_STARTUP_NOT_YET_REQUEST_OR_TRACE_PROOF",
+      "operation": "exec-0000000000001c25",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "connector": "awmcp",
+      "group": "G1",
+      "contract": "PROFILE_R41_G1_R1_20261026_CONTRACT.json",
+      "contract_sha256": "4bf0a55c78898a1f363f0a546e254f90887fdf2d4c10dfdcdf0f8f42e6820d1a",
+      "raw_root": "/cache/cch/hypic-independent-20261013/critical-path-r41-g1-r1-20261026",
+      "owned_container": "ad6dd08f6b437a7fe00063a3aca0c5483cf99b707195b53cc3c80ba0db73c465",
+      "launch_checkpoint": "ba9d3a915303b35b7e7ce836573f30afe620ae27",
+      "admission_operation": "exec-0000000000001c21",
+      "admission": "R41_G1_R1_ADMISSION_20261026.json",
+      "controller": "host_audits/r41_profile_controller.py",
+      "auditor": "host_audits/r41_profile_audit.py",
+      "audit_output": "/cache/cch/hypic-independent-20261013/r41-g1-r1-independent-audit-20261026.json",
+      "absolute_stop_utc": "2026-10-26T06:36:27Z",
+      "rule": "Original ma/exact1c25/raw only, live/unknown neverrestart. All438runtime/465common/32retainedHOST+6outerHOST source frozen. Only tracking/HANDOFF/admission outside closure may change. Same4preps+2targetwarm+full40/c16/fixed1024 with boundedofficialProfiler, not performance. Require original transport/graph/source/physical/isolation/exactCID/all102ports release +fourrankrealCPU/NPUclosedparsedtrace/auto-stop/no hidden failure. Valid parsed exact releasedG1 before G3newcontract/root actualpreviousauditSHA; G3minimumremaining2400s. No newdevice after fixed deadline."
+    },
     "full_goal_complete": false,
     "cpu_boundary_readiness": "R41_OFFICIAL_PROFILER_BOUNDARY_READINESS_20261026.json",
     "readiness": "R41_CAPTURE_HOST_READINESS_20261026.json",
@@ -1580,6 +1616,7 @@
     "auditor": "host_audits/r41_profile_audit.py",
     "contract": "PROFILE_R41_G1_R1_20261026_CONTRACT.json",
     "contract_sha256": "4bf0a55c78898a1f363f0a546e254f90887fdf2d4c10dfdcdf0f8f42e6820d1a",
-    "host_tests": 25
+    "host_tests": 25,
+    "admission": "R41_G1_R1_ADMISSION_20261026.json"
   }
 }

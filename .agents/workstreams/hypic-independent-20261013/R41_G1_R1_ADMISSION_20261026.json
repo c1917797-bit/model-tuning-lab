@@ -1,0 +1,90 @@
+{
+  "schema": "hypic-r41-real-admission/v1",
+  "utc": "2026-10-26T05:01:47.952280+00:00",
+  "host": "Euler",
+  "head": "ba9d3a915303b35b7e7ce836573f30afe620ae27",
+  "branch": "work/hypic-independent-20261013",
+  "source": {
+    "configuration_valid": true,
+    "device_run": false,
+    "controller_sha256": "2eec44609aaa4b3cc9861883dc8e85d29a1705c344b18ea94c9d7fdd14d3af0d",
+    "source_bindings": 465,
+    "host_source_bindings": 32,
+    "runtime_python": 438,
+    "active_manifest_sha256": "7d72170d3201b4698e9d8a0819248ad8d76d54ea0d761ad5a8f7f16a8dd210bb",
+    "policy": {
+      "group": "G1",
+      "algorithm_on": false,
+      "pdc_on": false
+    },
+    "graph_runtime": {
+      "candidate_enabled": false,
+      "capture_sizes": [
+        1,
+        4,
+        8,
+        16,
+        24,
+        32
+      ],
+      "compilation_mode": 3,
+      "cudagraph_mode": "FULL_DECODE_ONLY",
+      "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+      "official_debug_logging": false,
+      "profile": "selective-prefill-native-decode-v1"
+    },
+    "prerequisite": {
+      "report": "R39_THREE_ARM_DECISION_20261026.json",
+      "sha256": "8ce5d9e649d2ff5b3cca9ef7e4d5e018378e65823f90fb07468106f9b7037c91"
+    },
+    "scope": "Diagnostic collection only; same immutable R40 inference bytes/transport. No speed or quality acceptance.",
+    "r41_sources": {
+      "host_audits/r41_profile_policy.py": "74989d3e00d2e5483efc19bf1744f9ef445ca3927a30644c128071461605fb6f",
+      "host_audits/r41_profile_trace.py": "46fdb2acaa01352a31a808b88a71a39bd7cfa63e2e391f7cc971bbfbcaafe74c",
+      "host_audits/r41_profile_controller.py": "4b254b77078af616b2c662f786d420d163a5a9446eb551c967f065e121270a7a",
+      "host_audits/r41_profile_audit.py": "2f16abbf5f1009170f69ffce88cb8648bb9dd55832f64c8ca13249ccdc9c8faf",
+      "host_audits/r41_profile_capsule.py": "e4b887feb13b13a9de2d5d5692ce97f3a38215b2da74ed2f631ed70d88710985",
+      "R41_CRITICAL_PATH_DIAGNOSTIC_PLAN_20261026.json": "b9c8175f865b32d95dddcbdcb50d84594f7970e68ae9d6e59d2a2f593281a1ee"
+    },
+    "r41_profiler": {
+      "profiler": "torch",
+      "torch_profiler_dir": "/scratch/profiles",
+      "ignore_frontend": true,
+      "torch_profiler_with_stack": true,
+      "torch_profiler_with_memory": false,
+      "delay_iterations": 0,
+      "max_iterations": 7
+    }
+  },
+  "model_config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+  "model_index_sha256": "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b",
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "input_sha256": "50f528fa8eb439c56219b0161b16bf12fb2a8fd80effab87d89d725a4cc4c72f",
+  "previous_audit": null,
+  "new_root_absent": true,
+  "owned_name_absent": true,
+  "physical0_3_processes": [],
+  "physical0_3_foreign": [],
+  "ports_free": 102,
+  "cache_available_bytes": 10208493568,
+  "remaining_seconds": 5679.047723054886,
+  "device_allocation": false,
+  "operation": "exec-0000000000001c21",
+  "launch_checkpoint_live_verified": "ba9d3a915303b35b7e7ce836573f30afe620ae27",
+  "original_peer": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "route": "force_direct/peer_direct",
+  "actual_controller_admission": {
+    "preflight_utc": "2026-10-26T05:02:58.768568+00:00",
+    "physical_processes": [],
+    "foreign": [],
+    "container_id": "ad6dd08f6b437a7fe00063a3aca0c5483cf99b707195b53cc3c80ba0db73c465",
+    "actual_devices": [
+      "/dev/davinci0",
+      "/dev/davinci1",
+      "/dev/davinci2",
+      "/dev/davinci3"
+    ],
+    "operation": "exec-0000000000001c25"
+  },
+  "scope": "Read-only precheck1c21 followed by actual own controller fresh physical/port preflight and exact4device service-start. Startup request/trace proof pending."
+}
