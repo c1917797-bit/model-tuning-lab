@@ -1,0 +1,29 @@
+{
+  "schema": "hypic-r41-official-profiler-boundary-readiness/v1",
+  "state": "FIVE_ORIGINAL_SOURCE_CPU_CONTROLS_PASS_NO_NPU_CAPTURE",
+  "operation": "exec-0000000000001bd7",
+  "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "route": "force_direct/peer_direct",
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "devices": [],
+  "network": "none",
+  "readonly": true,
+  "passed": 5,
+  "controls": [
+    "max7 stops on8th worker step, active until explicit stop",
+    "explicit stop resets counters before restart",
+    "delayed start and >cap observed on original class",
+    "start error caught, no recording proof from successful call return",
+    "stop error caught, running state false cannot prove exported trace"
+  ],
+  "original_source_path": "/vllm-workspace/vllm/vllm/profiler/wrapper.py",
+  "sha256": "31f8a33afd23e67a2ade5a95d0d837a03b0a9164d5b18acf561d948c9ae6c06c",
+  "scope": "AST-selected original official WorkerProfiler class with fake _start/_stop only; no torch import/NPU trace/inference proof.",
+  "pending": [
+    "Actual serving WorkerProfiler.step call path/frequency and imported source identity",
+    "HOST bounded capture/workload/source map/new contract and base-consumed profiler launch",
+    "Failed/missing/oversized/partial four-rank trace and parser failure audit controls",
+    "Fresh NPU admission and actual trace collection/phase mapping/critical-path comparison; no NPU proof from five CPU controls"
+  ],
+  "full_goal_complete": false
+}

@@ -1,0 +1,145 @@
+{
+  "schema": "hypic-r41-critical-path-diagnostic-plan/v1",
+  "state": "OFFICIAL_SOURCE_AND_FIVE_CPU_BOUNDARY_CONTROLS_PASS_CAPTURE_HOST_PENDING",
+  "kind": "diagnostic_not_optimization",
+  "deadline_utc": "2026-10-26T06:36:27Z",
+  "predecessor": {
+    "checkpoint": "ca196648310792b361195bb9e49f2ea854fe92d2",
+    "decision": "R40_FIRST_PAIR_DECISION_20261026.json",
+    "raw_decision_sha256": "8a3738d8e34422eccdafd5f4ee9d83429a545d7e5875e71eeab19221fa2f30b1",
+    "performance_state": "VALID_FIRST_PAIR_NO_NET_GAIN_OR_TAIL_REGRESSION",
+    "source_bindings": 465,
+    "runtime_python": 438,
+    "active_owned_job": null
+  },
+  "cost_model": {
+    "definition": "Required reduction of current G3 value to match fresh equal-ruler G1; necessary recovery only, not predicted attainable benefit.",
+    "required_tpot_reduction_percent": 13.792122790107875,
+    "required_ttft_p95_reduction_percent": 49.545014601623095,
+    "no_pooling": "R38 spans use16/c16/fixed1024 with observers and no2targetwarm; conditional hotspot ranking only, no summing four ranks/nested spans, no direct R40 critical-path attribution.",
+    "R38_reference": {
+      "decision": "R38_COMPONENT_COST_DECISION_20261026.json",
+      "audit_sha256": "c7cbcb7eb14d8c2ec16d00c79dcde2b4c2829f2c5951439dbad5d5b31606fcf8",
+      "makespan_seconds": 248.137924,
+      "per_step_maxrank_exclusive_seconds": {
+        "c1_packed_prepare": 69.55643781,
+        "mixed_native_prepare": 19.5518131,
+        "c1_prefix_alignment": 1.14500462,
+        "layer_finite_validate": 0.60908018
+      },
+      "first_c1_peak_seconds": 32.16518304
+    }
+  },
+  "hypotheses_ranked": [
+    {
+      "priority": 1,
+      "hypothesis": "Packed C1 preparation causes CPU/NPU synchronization or packing/data movement on the prefilling critical path and interferes with concurrent decode.",
+      "evidence": "Largest existing conditional selected-function span; R40 tail and TPOT remain worse after equal warmup.",
+      "not_proven": "A Python call span includes queued device waits; neither exclusive CPU work nor removable service time is established.",
+      "confirm": "Correlate all-rank CPU launch/gaps, NPU transfers/kernels and dependency ordering around real prefill; quantify timeline union/critical path at actual shapes.",
+      "disprove": "C1 calls overlap other work or their critical-path union cannot cover meaningful necessary recovery."
+    },
+    {
+      "priority": 2,
+      "hypothesis": "Mixed native fallback, graph/batch transitions or cross-rank waiting dominate residual overhead.",
+      "evidence": "Second-largest existing conditional selected-function span; current graph proof is bounded replay evidence, not every-token/all-rank graph coverage.",
+      "confirm": "Map decode graph replay/eager transition, actual batch sizes and HCCL cross-rank spread to the same captured window.",
+      "disprove": "Matched native/HYPIC critical path has no material additional fallback/graph/communication gap."
+    }
+  ],
+  "closed_or_deprioritized": [
+    "Do not rerun R34 prefix-output or unchanged R40 formal matrix.",
+    "Do not multiply R36/R39 bounded effects into service forecasts.",
+    "Do not remove finite/snapshot/event ownership guards. Their small observed spans supply no admitted recovery budget."
+  ],
+  "official_image_inventory": {
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "operations": [
+      "exec-0000000000001bc6",
+      "exec-0000000000001bc8",
+      "exec-0000000000001bca",
+      "exec-0000000000001bce"
+    ],
+    "container_boundary": "CPU filesystem read only, --network none --read-only; no devices/ports/model/dataset mounts, no torch/NPU import or allocation.",
+    "python": "/usr/local/python3.12.13/bin/python3",
+    "editable_mapping": {
+      "vllm_ascend": "/vllm-workspace/vllm-ascend/vllm_ascend",
+      "vllm": "/vllm-workspace/vllm/vllm"
+    },
+    "tools": {
+      "msprof": "/usr/local/Ascend/ascend-toolkit/latest/bin/msprof",
+      "asys": "/usr/local/Ascend/cann-9.1.0/tools/ascend_system_advisor/asys/asys"
+    },
+    "source_sha256": {
+      "/vllm-workspace/vllm-ascend/vllm_ascend/profiler/torch_npu_profiler.py": "0c9ffcaf695a9b1fcb44a51bdd92e69f763a7c5be64a8efbd498d6536b9e09e5",
+      "/vllm-workspace/vllm-ascend/vllm_ascend/worker/worker.py": "c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3",
+      "/vllm-workspace/vllm/vllm/config/profiler.py": "981161215276d72564567d368d05d086621c831b2d1da79c8a8cff6963b5a305",
+      "/vllm-workspace/vllm/vllm/profiler/wrapper.py": "31f8a33afd23e67a2ade5a95d0d837a03b0a9164d5b18acf561d948c9ae6c06c",
+      "/vllm-workspace/vllm/vllm/entrypoints/serve/profile/api_router.py": "b943c3a2201134e2d0b38bfa86d00e8b5685f5be6a54f6c7178dee784c1b78e5"
+    },
+    "supported_route": "Official --profiler-config.profiler=torch and torch_profiler_dir; POST /start_profile and /stop_profile, lazily per worker. No framework rewrite.",
+    "observed_constraints": [
+      "Actual editable packages are /vllm-workspace, absent from naive sys.path directory search; resolve mapping and real import path, not a guessed site-packages path.",
+      "Actual TorchNPUProfilerWrapper uses Level1/PipeUtilization CPU+NPU, with_modules from torch_profiler_with_stack, with_stack=False.",
+      "NPU wrapper does not forward torch_profiler_record_shapes or torch schedule warmup/active settings; do not claim those are effective merely from CLI config.",
+      "WorkerProfiler auto-stops when profiling_for_iters > max_iterations, not >=. Need original-source HOST boundary controls and actual step-call mapping before choosing exact <=8-step bound.",
+      "Profiler start/stop catches/logs exceptions. HTTP200 alone does not prove collection. Require four-rank raw files, valid trace spans and closed parse before attribution.",
+      "msmonitor daemon conflicts with torch profiler; verify actual runtime config before launch."
+    ],
+    "boundary_controls": {
+      "operation": "exec-0000000000001bd7",
+      "passed": 5,
+      "source_sha256": "31f8a33afd23e67a2ade5a95d0d837a03b0a9164d5b18acf561d948c9ae6c06c",
+      "probe": "host_audits/r41_official_profiler_boundary_probe.py",
+      "readiness": "R41_OFFICIAL_PROFILER_BOUNDARY_READINESS_20261026.json",
+      "scope": "AST-selected original official WorkerProfiler class with fake _start/_stop only; no torch import/NPU trace/inference proof."
+    }
+  },
+  "capture_admission": {
+    "implementation": "New bounded HOST controller/workload/auditor only; freeze new common source map/contracts/new roots. Keep438algorithm Python bytes/math/finite/snapshot/eventwrites/durability unchanged. Official profiler configuration is diagnostic variable; component/IO/prefix observers remainOFF.",
+    "before_device": [
+      "Read narrow cannbot guidance if present; prove actual serving imported profiler objects and worker step path/source hashes.",
+      "Original-source HOST tests for cap/stop/error/missing trace behavior; actual base-consumed launch constructor/profile args/source and pinned image load.",
+      "Freeze matched native/HYPIC diagnostic workload and exact target warmups, first-phase trigger and actual captured step scope. Distinguish prefill/decode by trace evidence, not assumed labels.",
+      "Fresh ma/direct, image/model/input/source/new root and name, empty physical0-3 and all102ports, >=4GiB free cache; observed startup/request/trace parse+audit+cleanup budget must fit fixed deadline.",
+      "Only first arm valid/parsed/exact released allows fresh admission of matched second arm; original peer/exact handle/raw only; no unknown restart."
+    ],
+    "bounds": "Prefer one bounded <=8-worker-step CPU+NPU capture after actual full target warmups; verify the exact cap semantics first. Full1024 workload may continue outside record window. Enforce raw size/free-space/deadline guards in HOST, retain original data, always stop/parse profiler before exact cleanup.",
+    "analysis": "Timeline gaps -> phase/step latency -> operators/kernels+actual shapes if emitted -> memory transfers -> HCCL/rank spread -> source; do not sum overlapping streams/ranks as removable time.",
+    "scope": "Diagnostic timings are not new performance evidence. No local algorithm treatment before a material measured critical-path opportunity and one-variable numerical/quality guard."
+  },
+  "quality_preparation": {
+    "state": "FROZEN_INPUTS_READ_ONLY_CURRENT_GRAPH_CATALOG_EXECUTION_NOT_VALIDATED",
+    "inputs_sha256": "2f61c72fe1d8b3cb7f468e670674764e89a471da8ea229d07f3c87dff3d013c0",
+    "catalog_sha256": "fb13827a063b32df1131e17bf4b29ea008380d55ab0a2e7debe8a845e30ed792",
+    "samples": 127,
+    "repetitions": 3,
+    "scored_each_arm": 381,
+    "unscored_public_producers_each_arm": 381,
+    "batch_samples": 8,
+    "generation": {
+      "max_tokens": 1024,
+      "temperature": 0,
+      "seed": 0,
+      "ignore_eos": false,
+      "enable_thinking": false
+    },
+    "prompt_token_range": {
+      "min": 10352,
+      "median": 22924,
+      "max": 39642,
+      "sum_per_repeat": 2967281,
+      "sum_three_repeats": 8901843
+    },
+    "prior_canary": {
+      "source_runtime_python": 221,
+      "requests": 17,
+      "completion_tokens_sum": 13991,
+      "finish_stop": 13,
+      "finish_length": 4,
+      "scope": "Old eager17 bounded catalog proof only. No current438 full381/per-arm runtime budget. Do not extrapolate linear timing or alter denominator."
+    },
+    "remaining": "Current graph loader supports catalog/evidence policy in source, but actual full quality launch/audit mapping, baseline variability and current-source budget still needed. Old eager source/disabled lifecycle policies must not be relabeled as graph438 proof."
+  },
+  "full_goal_complete": false
+}
