@@ -1,0 +1,89 @@
+{
+  "schema": "hypic-r40-g3-audit-summary/v1",
+  "state": "FORMAL40_EQUALWARM_HYPIC_VALID_AUDITED_EXACT_RELEASED_NEGATIVE_PAIR",
+  "controller": {
+    "operation": "exec-0000000000001b7f",
+    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "exit_code": 0,
+    "duration_ms": 1107090,
+    "raw_root": "/cache/cch/hypic-independent-20261013/formal-warm-r40-g3-r1-20261026",
+    "owned_container": "182ed5abc1c8f1b2c7a2f8606a4e88e5e12d85bbd4679a27109aa24f5c6072cf",
+    "removed": true
+  },
+  "independent_audit": {
+    "operation": "exec-0000000000001bae",
+    "path": "/cache/cch/hypic-independent-20261013/r40-g3-r1-independent-audit-20261026.json",
+    "sha256": "59787ebf727a00f97d8d685945c88cb1087f3e3779a20e253f7925567e26ab26",
+    "valid": true,
+    "live_release_verified": true
+  },
+  "proof": {
+    "requests": 40,
+    "target_warmups": 2,
+    "common_cache_preparations": 4,
+    "four_worker_hot_coverage": 40,
+    "C1_layers": 48,
+    "C2_layers": 16,
+    "isolation_samples": 336,
+    "physical": {
+      "ranks": {
+        "0": {
+          "host_pid": 1359089,
+          "inner_pid": 59,
+          "physical_npu": 0
+        },
+        "1": {
+          "host_pid": 1359090,
+          "inner_pid": 60,
+          "physical_npu": 1
+        },
+        "2": {
+          "host_pid": 1359091,
+          "inner_pid": 61,
+          "physical_npu": 2
+        },
+        "3": {
+          "host_pid": 1359092,
+          "inner_pid": 62,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "source_bindings": 465,
+    "runtime_python": 438,
+    "host_sources": 32,
+    "graph": {
+      "compile_complete_lines": [
+        211
+      ],
+      "replay_directly_observed_rank": 0,
+      "replay_lines": [
+        289
+      ],
+      "scope": "actual native INFO replay; capture compatibility proved by same-source R29 canary, not per-token/all-rank completed replay counts",
+      "service_log_sha256": "62cb84c84620d67dc9e56983f48b377dce01f413bf341e6aca3e2f204f7db50f",
+      "workers": {
+        "0": 59,
+        "1": 60,
+        "2": 61,
+        "3": 62
+      }
+    },
+    "finite_snapshot_durability": "Original independent full raw replay accepted; no observer or source changes"
+  },
+  "timing": {
+    "requests": 40,
+    "tpot_p95_ms": 130.45792805655765,
+    "ttft_p95_ms": 161661.79345012642,
+    "unique_ids": 40,
+    "weighted_tpot_ms": 110.05279715968186
+  },
+  "warm_cost": {
+    "extra_target_warmup_seconds": 103.5459084699396,
+    "measured_makespan_seconds": 494.54778927983716,
+    "measured_plus_target_warmup_seconds": 598.0936977497768
+  },
+  "scope": "One actual arm only; pair decision separately replays both original audits. Full quality/repeated performance/lifecycle/29Skill acceptance unfinished.",
+  "full_goal_complete": false
+}

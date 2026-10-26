@@ -1,0 +1,93 @@
+{
+  "actual_target_warmups_each_arm": 2,
+  "all_original_audits_record_exact_live_release": true,
+  "allow_repetition_matrix": false,
+  "arms": [
+    {
+      "audit": "/cache/cch/hypic-independent-20261013/r40-g1-r1-independent-audit-20261026.json",
+      "audit_sha256": "ed04de3b64f0a2375ae2e26975e309ab50bc171af620fc8fd89380832b229441",
+      "contract": "FORMAL_WARM_R40_G1_R1_20261026_CONTRACT.json",
+      "contract_sha256": "51cd249487e7928d4ce58f8ebf0cb017d4da5d10cb4a396188f79fa34115c07e",
+      "full_original_raw_replay": true,
+      "group": "G1"
+    },
+    {
+      "audit": "/cache/cch/hypic-independent-20261013/r40-g3-r1-independent-audit-20261026.json",
+      "audit_sha256": "59787ebf727a00f97d8d685945c88cb1087f3e3779a20e253f7925567e26ab26",
+      "contract": "FORMAL_WARM_R40_G3_R1_20261026_CONTRACT.json",
+      "contract_sha256": "f69fd61e8eca690905ceecdddeb9ef18e4055d3e090629307d83bfc7d4cdb9cd",
+      "full_original_raw_replay": true,
+      "group": "G3"
+    }
+  ],
+  "common_cache_preparations": 4,
+  "comparison": "G3/G1-1; lower is better",
+  "concurrency": 16,
+  "delta_percent": {
+    "ttft_p95_ms": 98.19647000277779,
+    "weighted_tpot_ms": 15.998680441379975
+  },
+  "first_pair_only": true,
+  "formal_quality_accepted": false,
+  "full_goal_complete": false,
+  "lifecycle_accepted": false,
+  "matched_first_pair_raw_valid": true,
+  "measured_requests_each_arm": 40,
+  "output_tokens": 1024,
+  "predeclared_plan_commit": "b18abb1d57ff714bca4c454d17bfcf5306417fd3",
+  "predeclared_plan_sha256": "72facc83db08c2d1a4fe2a33d1962c35609c71ecc75b661fb5fe1bb0c17b9ffd",
+  "repeated_performance_accepted": false,
+  "runtime_python": 438,
+  "schema": "hypic-r40-first-pair-decision/v1",
+  "scope": "One actual equal2targetwarm+4cacheprep full40 pair only; primary/tail screen governs expansion. Extra warm costs retained, old negatives untouched; no compiler diagnosis or fullpaper/repetition/quality/lifecycle/29Skill acceptance.",
+  "source_bindings": 465,
+  "state": "VALID_FIRST_PAIR_NO_NET_GAIN_OR_TAIL_REGRESSION",
+  "target_warm_cost": {
+    "G1": {
+      "actual_target_warmups": 2,
+      "common_cache_preparations": 4,
+      "extra_target_warmup_seconds": 73.43525203992613,
+      "formal40_transport_lifecycle_valid": true,
+      "measured_makespan_seconds": 354.7254291600548,
+      "measured_plus_target_warmup_seconds": 428.1606811999809,
+      "scope": "One matched ruler arm; not paired native speed/fullquality/lifecycle acceptance."
+    },
+    "G3": {
+      "actual_target_warmups": 2,
+      "common_cache_preparations": 4,
+      "extra_target_warmup_seconds": 103.5459084699396,
+      "formal40_transport_lifecycle_valid": true,
+      "measured_makespan_seconds": 494.54778927983716,
+      "measured_plus_target_warmup_seconds": 598.0936977497768,
+      "scope": "One matched ruler arm; not paired native speed/fullquality/lifecycle acceptance."
+    }
+  },
+  "timing": {
+    "G1": {
+      "requests": 40,
+      "tpot_p95_ms": 118.62639523451435,
+      "ttft_p95_ms": 81566.43428001553,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 94.87418024147019
+    },
+    "G3": {
+      "requests": 40,
+      "tpot_p95_ms": 130.45792805655765,
+      "ttft_p95_ms": 161661.79345012642,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 110.05279715968186
+    }
+  },
+  "raw_decision": {
+    "operation": "exec-0000000000001bb5",
+    "path": "/cache/cch/hypic-independent-20261013/r40-first-pair-decision-r1-20261026.json",
+    "sha256": "8a3738d8e34422eccdafd5f4ee9d83429a545d7e5875e71eeab19221fa2f30b1"
+  },
+  "host_launch_correction": {
+    "failed_operation": "exec-0000000000001bb1",
+    "error": "Direct script invocation lacked package import path: ModuleNotFoundError host_audits. No output created and no device allocation.",
+    "correction": "Use python3 -B -m host_audits.r40_pair_decision from owning workstream. Same source and full raw replay succeeded."
+  },
+  "decision": "Do not expand this unchanged candidate to G2/G4 or repeated performance matrix. Equal actual warmup did not recover net native gain. This rejects current implementation performance, not the paper.",
+  "next": "Quality and rollback remain independent gates; prepare current-source catalog graph readiness and real budget before any new NPU admission. Do not shorten381/sample ruler or extrapolate prior eager17 canary."
+}
