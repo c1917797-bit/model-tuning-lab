@@ -1,0 +1,194 @@
+{
+  "budget_rule_scope": {
+    "does_not_fit_blocks_requested_pair_only": true,
+    "formal_pair_may_not_be_split_or_shrunk_to_evade_gate": true,
+    "independent_stage_requires_its_own_frozen_budget_cleanup_authorization": true,
+    "new_model_NPU_pair_permitted_here": false,
+    "this_checkpoint_MAIN_explicitly_source_only": true
+  },
+  "control_boundaries": {
+    "algorithm_performance_claimed": false,
+    "category": "evidence_visibility_adapters",
+    "original_consumer_executed": false,
+    "terminal_actual_guest_executed": false,
+    "terminal_view_elapsed_s": 1.7939986700657755,
+    "terminal_view_tests": 20,
+    "typed_actual_guest_verified": false,
+    "typed_prototype_elapsed_s": 24.365888450061902,
+    "typed_prototype_tests": 21
+  },
+  "coordination_contract": {
+    "authority": "Current collaboration tool contract supplied in this session",
+    "does_not_expand_runtime_authorization": true,
+    "followup_task_triggers_idle_turn": true,
+    "send_message_starts_turn": false
+  },
+  "current_state": {
+    "MAIN_review_ref": null,
+    "V15": "PARTIAL_NOT_READY",
+    "V15_current_direct_controls": "R5_INDEPENDENT_CURRENT_DIRECT_CONTROLS_REGISTRATION_ONLY_PASS",
+    "V15_observer_import_binding": "R4_INDEPENDENT_SOURCE_DELTA_PASS_NO_GUEST",
+    "V17_short8_scope_passed": true,
+    "actual_guest_qualification": false,
+    "cutoff_epoch": 1793022703,
+    "formal_performance": false,
+    "goal_complete": false,
+    "model_commands_generated": false,
+    "new_NPU_permitted": false,
+    "new_model_permitted": false,
+    "new_pair_permitted": false,
+    "original_start_epoch": 1792828303,
+    "source_bound": false,
+    "task_accuracy": false
+  },
+  "evidence": {
+    "EXECUTION_1aaa_TERMINAL.json": {
+      "bytes": 2868,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261025T174037Z/EXECUTION_1aaa_TERMINAL.json",
+      "sha256": "82569eff7125eaeb17b61d6e6712833a6bee7be4509bf3500bb0579033836920"
+    },
+    "EXECUTION_BUDGET_SOURCE_ONLY_AFTER_1ce4_20261026.json": {
+      "bytes": 1968,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261025T174037Z/EXECUTION_BUDGET_SOURCE_ONLY_AFTER_1ce4_20261026.json",
+      "sha256": "95bac0a253045c999ca5846850d835a4b37a9a7ed58559e43dabdb95d1686ff1"
+    },
+    "EXECUTION_DIAGNOSTIC_1c70_TERMINAL.json": {
+      "bytes": 2194,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261025T174037Z/EXECUTION_DIAGNOSTIC_1c70_TERMINAL.json",
+      "sha256": "c8f38fa1a00c1a46b802aaf02c2dd0b038d38017569ca1b3d1d8224ae7a7b509"
+    },
+    "EXECUTION_DIAGNOSTIC_1ca7_TERMINAL.json": {
+      "bytes": 1979,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261025T174037Z/EXECUTION_DIAGNOSTIC_1ca7_TERMINAL.json",
+      "sha256": "f0177c83b69425addf873ee9ff96997dc05bf2d1a61c82e7223f6ba692749c47"
+    },
+    "EXECUTION_DIAGNOSTIC_1ce4_TERMINAL.json": {
+      "bytes": 2848,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261025T174037Z/EXECUTION_DIAGNOSTIC_1ce4_TERMINAL.json",
+      "sha256": "733365a087834a00284c8dd1846f9f43a8d179473828716c62928356292d548e"
+    },
+    "V15R4_import_binding_review": {
+      "bytes": 2771,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_e2e_successor_readiness_20261025/v15_source_review_20261026/V15R4_IMPORT_BINDING_REVIEW.json",
+      "sha256": "fe35f564f8d3e1b9cb22c0b0b521854eb0fb432df7bfccb0b007e42c7df60def"
+    },
+    "V15R4_registration_failure": {
+      "bytes": 3193,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/diagnostic_guest_evidence_view_v15r4_20261026/FINAL_REGISTRATION_GAP.json",
+      "sha256": "30d29a48b3c0853813e3f44ae1804cca5f2b676787d445d51ce03cabd28a56e5"
+    },
+    "V15R5_current_controls_review": {
+      "bytes": 6699,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_e2e_successor_readiness_20261025/v15_source_review_20261026/V15R5_CURRENT_CONTROLS_REVIEW.json",
+      "sha256": "eebffc3d382f3e9a39f7946af6b5f79a916a69ad773c0eb65e38a01aa7b7899d"
+    },
+    "V15R5_final_receipt": {
+      "bytes": 1119,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/diagnostic_guest_evidence_view_v15r5_20261026/FINAL_REVIEW_RECEIPT.json",
+      "sha256": "7d43e61a982abfff7e0fb8b21477a42e6494d60e747cb4a1a375f762ef41814f"
+    },
+    "V15R5_source_handoff": {
+      "bytes": 7031,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/diagnostic_guest_evidence_view_v15r5_20261026/FINAL_SOURCE_HANDOFF.json",
+      "sha256": "314889fc21fd0fa3b029b4f4e91aaccd1142c75f8fceb4b88e63182629b1ea39"
+    },
+    "V15_independent_review": {
+      "bytes": 8126,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_e2e_successor_readiness_20261025/v15_source_review_20261026/V15_INDEPENDENT_SOURCE_REVIEW.json",
+      "sha256": "18a3800a7bf7688dc911ee46969d3b27808f0171c683c4521a51ad845ceeec25"
+    },
+    "V15_source_only_dispatch": {
+      "bytes": 4477,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261025T174037Z/EXECUTION_SOURCE_WIRING_V15_20261026T101256Z.json",
+      "sha256": "750856d04317bf00b9f6d8bd44fd032cb703433450c22debb3c596458e784be4"
+    },
+    "V15_source_preparation": {
+      "bytes": 8621,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/diagnostic_guest_evidence_view_v15_20261026/SOURCE_PREPARATION.json",
+      "sha256": "05e95aea1cacdf304b128dd2c044ddcc7471865fd456262fdb6334b9e585e517"
+    },
+    "V17_host": {
+      "bytes": 2282848,
+      "path": "/opt/host/vnf/austinov/run-bole32k-short8-actual-controller-v17-20261026/RESULT.json",
+      "sha256": "a7d2b4994744461a13c1486252c58832a238635e11ba4f339cbaf8ed5d1a9c9c"
+    },
+    "V17_owner": {
+      "bytes": 1427,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_actual_controller_successor_v17_20261026/MAIN_DISPATCH_v17/OWNER_RESULT.json",
+      "sha256": "715b26b159594707da313d79458e2525ce1a07758c522682c9d26c010d9ae00d"
+    },
+    "V17_short8_scope": {
+      "bytes": 17152816,
+      "path": "/opt/host/vnf/austinov/run-bole32k-short8-actual-controller-v17-20261026/FASTPATH_NUMERIC_SCOPE_RESULT.json",
+      "sha256": "4b6c08fa0abc15dcf72f4a2d92c6e8fd8c59d6eda37cc2c61ba9934326fccbe6"
+    },
+    "WINDOW_EXTENSION_20261025.json": {
+      "bytes": 643,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261025T174037Z/WINDOW_EXTENSION_20261025.json",
+      "sha256": "305a992d5301838ec2263a60d81a91fa446772476b4da710c269c146c4f1ea32"
+    },
+    "latest_observation": {
+      "bytes": 7000,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261025T174037Z/OBSERVATIONS/DIAG_1ce4_20261026T111426Z.json",
+      "sha256": "cf11c3033e870184885f1b1b8d1a6bcc71363b2aa8ec122f5142d5d0062a29b7"
+    },
+    "typed21": {
+      "bytes": 1718,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/diagnostic_tree_coverage_prototype_v2_20261026/UNIT_RESULT.json",
+      "sha256": "eba7d606698697530a81506c3a4290a1a35e9d76961d1920c1738982e2cef6c1"
+    },
+    "typed_first_timeout": {
+      "bytes": 1964,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/diagnostic_tree_coverage_prototype_v1_20261026/FIRST_UNIT_TIMEOUT.json",
+      "sha256": "552dc17c2f35dbccce7591c70bbc395debb46babf7fbeb71a91764f616c90730"
+    },
+    "view20": {
+      "bytes": 5190,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/diagnostic_terminal_view_contract_v2_20261026/UNIT_RESULT.json",
+      "sha256": "7578fd7db44adb044571dc3ef912e3546acb2d4f59d27d4b627020c9d2e6a7a8"
+    }
+  },
+  "governance_read": [
+    {
+      "bytes": 1527,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/AGENTS.md",
+      "sha256": "020aa2d10873a8459e5c8237751485dc2102907a8aa0d663b8db56062f395401"
+    },
+    {
+      "bytes": 35082,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/skills/paper-to-ascend/SKILL.md",
+      "sha256": "4de8e2c3d2b1730f7a0d1a5337ebc18e47d8b42738586dbb31964736feb32df4"
+    },
+    {
+      "bytes": 3437,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/skills/mst-experience-ingestion/SKILL.md",
+      "sha256": "d1bef440de73fc18a5f3a76220d01fe040867c882466223f1895726c04209b5b"
+    },
+    {
+      "bytes": 5659,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/skills/mst-maintainer-handoff/SKILL.md",
+      "sha256": "0d106e2f246e030ac6fe68e3600b8782bbd44a4a7d4f060efcaec423b3e22257"
+    },
+    {
+      "bytes": 40591,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/skills/ascend-inference-tuning-loop/references/failure-root-cause-and-next-action.md",
+      "sha256": "ed7dbe6311a49e221d5a68ecedc4e3149961cb639217f4ce7ad549968b57dad9"
+    },
+    {
+      "bytes": 18584,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/skills/ascend-inference-tuning-loop/references/paper-validation-dag-and-matched-controls.md",
+      "sha256": "7d8e44d2e03aebb74611f9dd144233a1fdcfafd2616e548051664c2491d60536"
+    }
+  ],
+  "governance_read_base_HEAD": "335fb43884602cbc652d4afc0e72accfc0e5923e",
+  "pending_evidence": "R4 import and R5 direct-control registration source deltas are closed. MAIN source review/binding and real guest closure/qualification are not passed; no performance or accuracy result.",
+  "prior_draft_preserved": {
+    "bytes": 5497,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/maintainer_coherent_draft_20261026/MAINTAINER_EXPERIENCE_DRAFT.md",
+    "sha256": "a60ab5c06ae5c34a7da3893cbcf243bbfad2c3b10d3cde561aaa77d96a59d3a1"
+  },
+  "purpose": "One documentation checkpoint; no runtime qualification or dispatch authority.",
+  "revision": "R2",
+  "schema": "BOLE.maintainer-coherent-evidence-index/v1",
+  "snapshot_utc": "2026-10-26T12:01:21Z"
+}

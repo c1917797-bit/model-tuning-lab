@@ -522,3 +522,7 @@ not require retraining unless retraining is explicitly in scope.
   applicability gate and workstream checkpoint are in Git.
 - Do not commit papers, model weights, datasets, checkpoints, raw profiler
   traces, credentials, or AWMCP verification values.
+
+## Bound source versus guest-entry readiness
+
+A bound source or pure-control PASS does not advance the actual guest software-entry gate. When source/preflight reconstruction, typed evidence views, or dynamic imports disagree with real guest execution, use [Guest-entry evidence closure](references/guest-entry-evidence-closure.md) to classify the first missing contract and choose the next action. Keep the existing attribution, matched-control, and authorization rules; this reference records execution gaps rather than a new universal gate set.

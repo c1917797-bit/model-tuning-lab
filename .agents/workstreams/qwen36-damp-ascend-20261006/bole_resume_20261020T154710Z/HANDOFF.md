@@ -1,4 +1,15 @@
 # BOLE continuation, 2026-10-20
+
+## BOLE maintainer checkpoint — 2026-10-26 (source-only)
+
+- Long-term goal is not complete. There is no accepted formal performance or task-accuracy result from this continuation.
+- V17 real short8 NPU scope passed; this is not long-run, fixed1024 paired performance, or final accuracy acceptance.
+- V15 remains PARTIAL/NOT_READY. R4's import-binding correction has an independent source-only PASS. Its separate final registration failure is retained; R5 preview/inverse and independent current-direct-controls review closed only the stale three-ref registration gap. MAIN review is None; no SOURCE_BOUND, model COMMANDS, actual guest, or qualification exists.
+- The typed21 and view20 results are pure software controls, not guest/NPU qualification. The first 1d46 timeout and all prior failed operations remain preserved; do not restart them.
+- Original start stays 1792828303; cutoff stays 1793022703. Current persisted authority permits source preparation only; new model/NPU/pair admission is closed. Do not infer permission from an old BOUND entry.
+- Next: do not repeat the closed R4/R5 source deltas. Review the remaining real BOUND/guest-visibility prerequisites only within current source authority; keep NOT_READY until a lawful guest scope is independently admitted and actually passes. A pair that does not fit is blocked as that pair; separate stages need their own frozen budget, cleanup and authorization. This checkpoint's explicit MAIN source-only prohibition still closes all new model/NPU/pair starts.
+- Details: [maintainer evidence index](renew24_20261025T174037Z/MAINTAINER_EVIDENCE_20261026T111819Z.json); [conditional guest-entry guidance](../../../skills/paper-to-ascend/references/guest-entry-evidence-closure.md). This is one coherent checkpoint, not a new experiment or a periodic all-paper report.
+
 User: continue until success. This is an in-progress diagnostic checkpoint, not success.
 
 - Branch work/qwen36-damp-ascend-20261006, host chicaihong01/ma. Canonical root /opt/host/vnf/austinov/model-tuning-lab. Own subtask is this directory; unrelated dirty skills/HANDOFF are untouched.

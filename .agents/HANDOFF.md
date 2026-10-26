@@ -1,5 +1,10 @@
 # Maintainer Handoff
 
+## BOLE source-only handoff — 2026-10-26
+
+Read the current [BOLE workstream handoff](workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/HANDOFF.md) before dispatch. V17 short8 scope passed, but formal performance/accuracy are not accepted; V15 remains PARTIAL/NOT_READY: R4 import binding and R5's current-direct-controls registration are source-only passes, with no actual BOUND/guest. This checkpoint's explicit MAIN authority closes new model/NPU/pair admission. Use the linked evidence index and preserve the original start/cutoff.
+
+
 ## 0. Status
 
 - Last updated: 2026-09-04.
