@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R39_B1_VALID_RELEASED_A2_CONTRACT_FROZEN_PENDING_FRESH_ADMISSION",
+  "execution_state": "R39_A2_FINAL_TARGET0_CONTROL_RUNNING_EXACT1AEF",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -497,7 +497,30 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": null,
+  "active_attempt": {
+    "state": "RUNNING_STARTUP_NOT_YET_REQUEST_PROOF",
+    "operation": "exec-0000000000001aef",
+    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "connector": "awmcp",
+    "arm": "A2",
+    "target_warmup_count": 0,
+    "contract": "TARGET_WARMUP_R39_A2_R1_20261026_CONTRACT.json",
+    "contract_sha256": "5ee0dc0fca6b5f144d167bd3dee91d04642bb304c04517f3587266cd39588f53",
+    "raw_root": "/cache/cch/hypic-independent-20261013/target-warmup-r39-a2-r1-20261026",
+    "launch_checkpoint": "a2fb434b6949223ee3a9ec7b8440bda7bf436c55",
+    "admission_operation": "exec-0000000000001aee",
+    "admission": "R39_A2_R1_ADMISSION_20261026.json",
+    "observed_running_utc": "2026-10-26T02:47:55Z",
+    "auditor": "host_audits/r39_warmup_audit.py",
+    "audit_output": "/cache/cch/hypic-independent-20261013/r39-a2-r1-independent-audit-20261026.json",
+    "previous_audit": {
+      "arm": "B1",
+      "path": "/cache/cch/hypic-independent-20261013/r39-b1-r1-independent-audit-20261026.json",
+      "sha256": "afde673167a7d8b672bbc8863bd20663cd5454f2101e78e8cadd8420aa9f0243"
+    },
+    "absolute_stop_utc": "2026-10-26T06:36:27Z",
+    "rule": "Original ma/exact1aef/raw only; live/unknown neverrestart. Freeze438runtime/463common/24HOST acrossall3arms. A2 target0 after4preps/measured16fixed1024; actual fourworker48C1/16C2hot16/interval/durability/finite/snapshot/source/isolation/exactCID+0-3+all102portsrelease required. Only actual A2audit valid/released permits standalone45a2360d full3arm rawreplay,5pctgain/5pctdrift andextra warmcost; no compiler/native/formal/quality success inferred."
+  },
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
@@ -1441,9 +1464,32 @@
     }
   },
   "r39_target_warmup": {
-    "state": "R39_B1_VALID_RELEASED_A2_CONTRACT_FROZEN_PENDING_FRESH_ADMISSION",
+    "state": "R39_A2_FINAL_TARGET0_CONTROL_RUNNING_EXACT1AEF",
     "plan": "R39_TARGET_PATH_WARMUP_CAUSAL_PLAN_20261026.json",
-    "active_controller": null,
+    "active_controller": {
+      "state": "RUNNING_STARTUP_NOT_YET_REQUEST_PROOF",
+      "operation": "exec-0000000000001aef",
+      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+      "connector": "awmcp",
+      "arm": "A2",
+      "target_warmup_count": 0,
+      "contract": "TARGET_WARMUP_R39_A2_R1_20261026_CONTRACT.json",
+      "contract_sha256": "5ee0dc0fca6b5f144d167bd3dee91d04642bb304c04517f3587266cd39588f53",
+      "raw_root": "/cache/cch/hypic-independent-20261013/target-warmup-r39-a2-r1-20261026",
+      "launch_checkpoint": "a2fb434b6949223ee3a9ec7b8440bda7bf436c55",
+      "admission_operation": "exec-0000000000001aee",
+      "admission": "R39_A2_R1_ADMISSION_20261026.json",
+      "observed_running_utc": "2026-10-26T02:47:55Z",
+      "auditor": "host_audits/r39_warmup_audit.py",
+      "audit_output": "/cache/cch/hypic-independent-20261013/r39-a2-r1-independent-audit-20261026.json",
+      "previous_audit": {
+        "arm": "B1",
+        "path": "/cache/cch/hypic-independent-20261013/r39-b1-r1-independent-audit-20261026.json",
+        "sha256": "afde673167a7d8b672bbc8863bd20663cd5454f2101e78e8cadd8420aa9f0243"
+      },
+      "absolute_stop_utc": "2026-10-26T06:36:27Z",
+      "rule": "Original ma/exact1aef/raw only; live/unknown neverrestart. Freeze438runtime/463common/24HOST acrossall3arms. A2 target0 after4preps/measured16fixed1024; actual fourworker48C1/16C2hot16/interval/durability/finite/snapshot/source/isolation/exactCID+0-3+all102portsrelease required. Only actual A2audit valid/released permits standalone45a2360d full3arm rawreplay,5pctgain/5pctdrift andextra warmcost; no compiler/native/formal/quality success inferred."
+    },
     "full_goal_complete": false,
     "readiness": "R39_HOST_READINESS_20261026.json",
     "controller": "host_audits/r39_warmup_controller.py",
@@ -1494,6 +1540,8 @@
       "B1": "R39_B1_R1_AUDIT_20261026.json"
     },
     "B1_constructor": "R39_B1_R1_LAUNCH_READINESS_20261026.json",
-    "B1_admission": "R39_B1_R1_ADMISSION_20261026.json"
+    "B1_admission": "R39_B1_R1_ADMISSION_20261026.json",
+    "A2_constructor": "R39_A2_R1_LAUNCH_READINESS_20261026.json",
+    "A2_admission": "R39_A2_R1_ADMISSION_20261026.json"
   }
 }
