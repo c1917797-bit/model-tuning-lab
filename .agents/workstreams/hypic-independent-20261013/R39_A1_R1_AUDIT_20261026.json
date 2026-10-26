@@ -1,0 +1,102 @@
+{
+  "schema": "hypic-r39-arm-audit-summary/v1",
+  "state": "VALID_AUDITED_EXACT_RELEASED_NO_CAUSAL_OR_NATIVE_SPEED_CLAIM",
+  "arm": "A1",
+  "target_warmup_count": 0,
+  "contract": "TARGET_WARMUP_R39_A1_R1_20261026_CONTRACT.json",
+  "contract_sha256": "7172d61a31032fe4ee7f11b470376602e2cb86c929d044e3fccf9b19966c3715",
+  "controller": "exec-0000000000001ac7",
+  "controller_exit_code": 0,
+  "independent_audit": {
+    "operation": "exec-0000000000001ad7",
+    "path": "/cache/cch/hypic-independent-20261013/r39-a1-r1-independent-audit-20261026.json",
+    "sha256": "a76ed5de92a479fd397575e89f204738909f7a0a08b6b4a683012208cfabd609",
+    "valid": true,
+    "exact_live_release_verified": true
+  },
+  "diagnostic_requests": 16,
+  "output_tokens": 1024,
+  "actual_hot_covered": 16,
+  "isolation_samples": 255,
+  "common_source_bindings": 463,
+  "runtime_python": 438,
+  "diagnostic_makespan_seconds": 257.1227395099122,
+  "target_warmups": {
+    "actual_target_warmup_count": 0,
+    "common_cache_preparations": 4,
+    "extra_target_warmup_seconds": 0,
+    "extra_warm_latency_excluded_from_measured_unit_but_recorded": true,
+    "scope": "Explicit one-variable protocol contrast; no algorithm change or native speed acceptance.",
+    "warm_request_ids": []
+  },
+  "first_use_signal": {
+    "max_measured_single_C1_call_ns": 31663246810,
+    "scope": "Observed CPU-call peak only; no compiler or removable-time cause established."
+  },
+  "durability": {
+    "actual_completed_model_steps": 56,
+    "durable_fences": 56,
+    "enabled": true,
+    "fsync_syscall_trace_proven": false,
+    "http_requests": 16,
+    "ranks": [
+      {
+        "deferred_fsync_requests": 11184,
+        "original_fsync_requests": 11198,
+        "original_written_bytes": 5015482,
+        "original_written_events": 11198,
+        "rank": 0,
+        "source_completion_and_receipt_fsync_calls": 28,
+        "timed_associated_model_steps": 14
+      },
+      {
+        "deferred_fsync_requests": 11184,
+        "original_fsync_requests": 11198,
+        "original_written_bytes": 5015482,
+        "original_written_events": 11198,
+        "rank": 1,
+        "source_completion_and_receipt_fsync_calls": 28,
+        "timed_associated_model_steps": 14
+      },
+      {
+        "deferred_fsync_requests": 11184,
+        "original_fsync_requests": 11198,
+        "original_written_bytes": 5015482,
+        "original_written_events": 11198,
+        "rank": 2,
+        "source_completion_and_receipt_fsync_calls": 28,
+        "timed_associated_model_steps": 14
+      },
+      {
+        "deferred_fsync_requests": 11184,
+        "original_fsync_requests": 11198,
+        "original_written_bytes": 5015482,
+        "original_written_events": 11198,
+        "rank": 3,
+        "source_completion_and_receipt_fsync_calls": 28,
+        "timed_associated_model_steps": 14
+      }
+    ],
+    "scope": "Source-bound successful controller plus complete raw byte/count/fence and cohort checks. Fence receipt follows completion sync and is itself synced before callback returns by verified policy. Not a syscall trace, performance result, or durability guarantee for an interrupted incomplete step.",
+    "selected_step_durability_valid": true,
+    "speed_gain_inferred": false
+  },
+  "raw_sha256": {
+    "events.jsonl": "5c0fdb703f35d4f62226d69b026c07067d5b16f9a20914ae6781da66da01f9a9",
+    "launch.json": "c512e2db00c7de619877b8de27a43db9e9b2070c1bcea2afc67ee3b4111d58cf",
+    "performance-unit.json": "260c985dff0948d15aeed99fd270677cf732b3dadc4d03bd9cd5d0725bcfdca9",
+    "release.json": "09b683be943d68afb8809af6f1e6a3c72c7bb9cbeec3a6c8b16497e110239cca",
+    "responses.json": "a90bdb5dc76e737bdfeb3cb625b96ec3ca95405e516288d64c37229ba3fc3d92",
+    "result.json": "0ca7cb3ccc372ad1e72bceaf294aecc072c2d4b4612a424e1f6d203e8a50bce3",
+    "service-start.json": "3deff0caae92714edc94157985156d37e58cf476fa4bb52c62adb04eca303a4a",
+    "service.log": "ee1f7e35bdd76e99acd4b1949e307039fdd1da4474cdca70bd7709c708cb04cb"
+  },
+  "worker_sha256": {
+    "compact-worker-57.jsonl": "06247f341991d417904bf921ec9fce9c5a53c26fea6a42938480ce9da6a164f3",
+    "compact-worker-58.jsonl": "048bab509d348a8f2a891ee94a3cde7bf3ed074547150b0cfd5857c272f52a2e",
+    "compact-worker-59.jsonl": "26caf9387b42bf9bb548331e06fd0504601d4b826fcc2c565b90be7aa3f92828",
+    "compact-worker-60.jsonl": "993e6ad6c3448da874b6b999b4dc446fa1da6b47242b85a0b7ce2ecbc5f3a347"
+  },
+  "scope": "One R39 warmup-count arm; explicit four cache preparations and0or2 full target warmups. Same runtime/math/guards and measured16/c16/fixed1024; full three-arm cause decision, native/formal performance and quality remain separate.",
+  "whole_goal_complete": false
+}
