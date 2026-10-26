@@ -1,0 +1,68 @@
+{
+  "schema": "hypic-r37-first-pair-decision/v1",
+  "both_arms_actual40_no_retry": true,
+  "exact_live_release_verified_both": true,
+  "full_goal_complete": false,
+  "groups": [
+    {
+      "audit": "/cache/cch/hypic-independent-20261013/r37-g1-r2-independent-audit-20261025.json",
+      "audit_sha256": "aa544ab654f7a10116ff4b36979dbaa009a32d8c0f3b2266d9c176c67bdb26b7",
+      "contract": "FORMAL_STEP_R37_G1_R2_20261025_CONTRACT.json",
+      "contract_sha256": "46ac4e1ab18c6c80dc602ab825f2e13b353a0b3d543866913ce456b22442fa66",
+      "group": "G1"
+    },
+    {
+      "audit": "/cache/cch/hypic-independent-20261013/r37-g3-r2-independent-audit-20261025.json",
+      "audit_sha256": "6025425b2fe202373458bff9b681e4bb140392384fc87f9a73fef98b2c777a22",
+      "contract": "FORMAL_STEP_R37_G3_R2_20261025_CONTRACT.json",
+      "contract_sha256": "c1b46785eb6b734e0b93daadebceca7fe324126d2ed598acd8160bb11c82b253",
+      "group": "G3"
+    }
+  ],
+  "independent_audits_replayed": true,
+  "metrics": {
+    "tpot_p95_ms": {
+      "G1": 118.83959705073721,
+      "G3": 129.62601111325966,
+      "G3_reduction_percent": -9.076447859308479,
+      "G3_regression_percent": 9.076447859308479
+    },
+    "ttft_p95_ms": {
+      "G1": 89248.62486985512,
+      "G3": 192992.26928991266,
+      "G3_reduction_percent": -116.24116850129562,
+      "G3_regression_percent": 116.24116850129562
+    },
+    "weighted_tpot_ms": {
+      "G1": 95.04516940235135,
+      "G3": 109.07121225707783,
+      "G3_reduction_percent": -14.757239050572402,
+      "G3_regression_percent": 14.757239050572402
+    }
+  },
+  "native_speed_gain_proven": false,
+  "necessary_current_G3_TPOT_reduction_fraction_to_match_native": 0.12859527793335135,
+  "r30_negative_unchanged": true,
+  "r36_bounded_same_HYPIC_effect_not_extrapolated": true,
+  "raw_results_rewritten": false,
+  "same_current_454_source_map": true,
+  "scope": "One actual same-source full40/c16/fixed1024 G1/G3 first pair; no repeated/PDC/fullquality/lifecycle or wholepaper acceptance.",
+  "state": "FIRST_PAIR_VALID_NO_NATIVE_SPEED_GAIN",
+  "independent_replay": {
+    "operation": "exec-00000000000019fa",
+    "path": "/cache/cch/hypic-independent-20261013/r37-first-pair-decision-20261026.json",
+    "sha256": "afddc368e51119d600d611ad401cdd99707e049521b1a2524d486d1b6141a71b"
+  },
+  "code_checkpoint": "3e5483dd46df2162f593050ee4f55d1dbe7d5944",
+  "source_history_checkpoint": "626f8cc498cc7c86b9e0e362ece81aaa9ecfc888",
+  "next": "R38_COMPONENT_BUDGET_PLAN_20261026.json",
+  "interpretation": "R36 is a controlled within-HYPIC diagnostic improvement, while this new same-source formal native comparison remains negative. Cross-checkpoint R30-to-R37 timing is historical and cannot attribute all change to durability.",
+  "warmup_count_qualification": {
+    "actual_unscored_http_requests": 4,
+    "pic_producer": 2,
+    "native_prefix": 2,
+    "source": "independent_formal_warmups.build_warmups/execute_warmups",
+    "scope": "Both actual source-bound arms use identical4unscored preparation requests. Earlier R37 plan's unqualified warmup_requests=2 did not specify two per kind; preserve that declaration and this actual count, not a retroactive two-total claim. No final requested-protocol acceptance; future formal protocol must explicitly freeze measured warmup vs cache preparation counts."
+  },
+  "final_requested_protocol_acceptance": false
+}

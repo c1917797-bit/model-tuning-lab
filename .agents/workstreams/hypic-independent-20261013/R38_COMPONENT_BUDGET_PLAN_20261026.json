@@ -1,0 +1,134 @@
+{
+  "schema": "hypic-r38-model-guided-component-budget-plan/v1",
+  "state": "PREREGISTERED_MEASUREMENT_PLAN_NOT_IMPLEMENTED_OR_DEVICE_ACCEPTED",
+  "absolute_stop_utc": "2026-10-26T06:36:27Z",
+  "prerequisite": {
+    "report": "R37_FIRST_PAIR_DECISION_20261026.json",
+    "raw_decision": "/cache/cch/hypic-independent-20261013/r37-first-pair-decision-20261026.json",
+    "raw_sha256": "afddc368e51119d600d611ad401cdd99707e049521b1a2524d486d1b6141a71b",
+    "state": "FIRST_PAIR_VALID_NO_NATIVE_SPEED_GAIN"
+  },
+  "current_valid_observation": {
+    "formal_protocol": "full40/c16/32768/fixed1024, no PDC, current434runtimePython",
+    "G1": {
+      "requests": 40,
+      "tpot_p95_ms": 118.83959705073721,
+      "ttft_p95_ms": 89248.62486985512,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 95.04516940235135
+    },
+    "G3": {
+      "requests": 40,
+      "tpot_p95_ms": 129.62601111325966,
+      "ttft_p95_ms": 192992.26928991266,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 109.07121225707783
+    },
+    "necessary_current_G3_TPOT_reduction_fraction_to_match_native": 0.12859527793335135,
+    "predicted_reduction": null,
+    "actual_G3_worker_events_per_rank": {
+      "c1_layer_precommit_validated": 1776,
+      "c1_packed_wave_prepared": 1776,
+      "c1_prefix_terminal_route": 2832,
+      "c2_block_table_snapshot_layer_checked": 592,
+      "c2_layer_precommit_validated": 592,
+      "compact_c2_queries_completed": 640,
+      "compact_gdn_body_composed": 1920,
+      "compact_hypic_hooks_installed": 1,
+      "compact_model_rows_completed": 37,
+      "compact_native_attention_groups_captured": 42,
+      "compact_public_kv_published": 16,
+      "compact_public_state_published": 48,
+      "graph_candidate_hooks_installed": 1,
+      "graph_native_worker_import_verified": 1,
+      "mixed_native_c2_completed": 5312,
+      "mixed_native_gdn_completed": 15936,
+      "native_decode_batch_completed": 1728,
+      "native_request_progress": 64,
+      "r36_evidence_step_durable": 37
+    },
+    "actual_selected_steps_per_rank": 37,
+    "actual_mixed_native_plan_steps": 36,
+    "actual_original_events_per_rank": 33314,
+    "original_events_within_sealed_selected_steps_per_rank": 33141,
+    "original_events_outside_selected_steps_per_rank": 173,
+    "four_rank_walltime_sum_forbidden": true
+  },
+  "pruning": [
+    {
+      "route": "Per-token native decode evidence fsync as the sole residual cause",
+      "finding": "No emit or fsync occurs in source-owned pure native-decode outer/layer route; actual graph markers are startup-only and only173original events/rank lie outside selected steps across this formal unit. Counts do not establish their walltime, but do not support the assumed per-output-token logging pattern.",
+      "action": "Do not create a decode-logging cadence treatment on this unsupported premise."
+    },
+    {
+      "route": "Merge per-request scalar finite waits into one per layer",
+      "finding": "Existing LayerFiniteGuard.validate already stacks device finite reductions and performs one scalar item per layer. There are1776C1 and592C2 precommit receipts/rank, not proof of an unmerged per-request scalar implementation.",
+      "action": "Measure actual guard/reduction/queued-wait span; do not claim an already implemented aggregation is a new fix."
+    },
+    {
+      "route": "Discarded prefix-output construction",
+      "finding": "R34 valid A/B/A gain0.1985pct<5pct with1.3075pctdrift.",
+      "action": "Closed; no expansion or rerun."
+    }
+  ],
+  "ranked_hypotheses": [
+    {
+      "rank": 1,
+      "target": "C1 packed preparation and actual-prefix terminal alignment",
+      "source_sites": [
+        "independent_c1_packed_prepare.prepare_packed_layer",
+        "independent_c1_short_prefix.align_short_prefix_terminals"
+      ],
+      "basis": "Current1776packed wave receipts/2832prefix route receipts per rank, plus historical R31 copy/synchronization attribution as a prior only. Source-side prefix arithmetic and state/conv copies remain; R34 only pruned discarded output work.",
+      "claim": "Unmeasured current per-group walltime; no removable-time or service gain estimate."
+    },
+    {
+      "rank": 2,
+      "target": "Mixed native-row preparation and existing per-layer finite checks",
+      "source_sites": [
+        "independent_native_decode_prepare.prepare_native_decode",
+        "independent_layer_finite_guard.LayerFiniteGuard.validate"
+      ],
+      "basis": "Current36mixed steps,1728native decode batch receipts and15936native GDN row receipts/rank. Private state preparation, retained finite reductions and layer completion may delay concurrent decodes.",
+      "claim": "Measured token TPOT is end-to-end streaming under mixed scheduling, not isolated pure-decode kernel latency. Guard span can include waiting for prior queued NPU work and is only a conditional upper bound."
+    },
+    {
+      "rank": 3,
+      "target": "Outer entry ownership/profile validation",
+      "source_sites": [
+        "graph_candidate.entry_router.SelectiveEntryRouter._call"
+      ],
+      "basis": "Current source shows bounded in-memory callable/module/slot identity checks; no per-call source-file hashing or event IO in the pure native route.",
+      "action": "Lower priority. Do not add a guard-removal treatment without measured material cost."
+    }
+  ],
+  "next_single_diagnostic": {
+    "goal": "One source-bound default-off component cost observation of the top two hypotheses; no algorithm or durability treatment.",
+    "runtime_baseline": "R37 G3 with step durability1, original writes and per-step fences, no IO timing observer, no R33 shape/output observer",
+    "requests": 16,
+    "concurrency": 16,
+    "input_tokens": 32768,
+    "fixed_output_tokens": 1024,
+    "performance_claim": false,
+    "whole_goal_unchanged": true,
+    "no_48_private_R33_prewarm_or_repeated_old_canary": "No R33 observer or48privatewarmups. Preserve actual source-bound preparation sequence:2PICproducer+2nativeprefix=4unscored HTTP requests, explicitly frozen as diagnostic preparation, not two total. Existing numerical prerequisites are retained.",
+    "requirements": [
+      "Read exact imported component owners, aliases and startup/runtime source guards before wrapping; reject an unsupported hook boundary.",
+      "Default off, explicit source-bound manifest/switch, exact post-activation owned wrappers around unchanged original functions. Preserve args, returns, original exceptions, math, finite coverage, completion/commit order, every original event and fsync policy.",
+      "Measure bounded actual rank/step/request-set component intervals and calls, not arbitrary GDN tasks. Finite method identity must be associated through actual selected context; do not invent layer labels from counters.",
+      "Account for nesting: packed preparation includes prefix alignment. Report inclusive/exclusive or interval unions, and max-rank/per-step opportunities; never add nested spans or four-rank durations as service savings.",
+      "Emit bounded observation only at verified model-step completion with original durability fences preserved. Quantify additional diagnostic overhead; reject recursive/duplicate/missing/unsealed or owner-changed records.",
+      "HOST tests cover disabled path, original source and exception identity, nested timing, limits, exact ownership/uninstall, and no dropped/reordered original evidence; exercise actual automatic pinned-image startup using actual constructor environment before device allocation.",
+      "Freeze new code/contract/root; do not rewrite R37/R36 raw roots or old source bindings. Fresh ma/direct/source/model/image/input/0-3/102ports/newroot/storage/time admission. Original peer/handle/raw tracking and exact release audit.",
+      "Independent audit must reconcile observed counts with actual current C1/native/finite/model receipts and actual timed HTTP cohort; complete controls and exact release before selecting any treatment."
+    ]
+  },
+  "next_treatment_rule": "Only a measured material group budget admits a new single-variable A/B/A candidate. Budget is an upper bound, not proof all time is removable; preserve safety and require final-source formal native comparison after a supported bounded effect. If budget is insufficient, reject that route rather than repeat unchanged formal40 or fill the negative12matrix.",
+  "remaining_acceptance": [
+    "Final-source G1-G4x3 matched formal performance",
+    "127x3each-arm natural-EOS same-ruler quality",
+    "Actual disable/uninstall/restart/exact release",
+    "Paper-to-Ascend relevant Skills and29functional acceptance"
+  ],
+  "full_goal_complete": false
+}

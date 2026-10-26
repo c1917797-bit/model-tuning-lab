@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R37_R2_G1_VALID_RELEASED_G3_FORMAL_RUNNING",
+  "execution_state": "R37_FIRST_PAIR_VALID_NO_NATIVE_SPEED_GAIN_ALL_RELEASED_R38_BUDGET_PENDING",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -440,7 +440,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Track original ma/exact19df/raw only; running/unknown neverrestart. 454runtime/common and10boundHOST remain frozen through terminal matched-pair audit. Require actual40/40fourworker48C1/16C2, all original byte/count/durability fences, finite/snapshot/mechanism/source/continuousisolation/exact live release. Only then compare to accepted R37G1; no R30control reuse or profile64 extrapolation.",
+  "next_action": "Execute R38_COMPONENT_BUDGET_PLAN_20261026.json: one bounded source-bound component cost observation of C1prefix/packed preparation plus mixed-native/finite checks, preserving R36durability and all guards. No unsupported per-token IO or already-batched finite rewrite; no repeats of negative formal matrix. Fixed06:36:27UTC.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -479,9 +479,9 @@
   },
   "publication": {
     "state": "liveverified_previous_checkpoint",
-    "published_commit": "c1f661acc6251e22c2aceeccfb8b3f208c02da25",
+    "published_commit": "626f8cc498cc7c86b9e0e362ece81aaa9ecfc888",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "scope": "Previous liveverified G1 admission/tracking checkpoint. New local G1 audit/G3 tracking is not a formal native benefit or wholepaper conclusion.",
+    "scope": "Previous liveverified G1valid/G3running checkpoint. Next local checkpoint closes both actual formal arms with independent replay and negative result; no wholepaper acceptance.",
     "tls_verification": "Per-command OpenSSL sslVerify=true. Desktop unrestricted approved Git route resolves DNS-thread failure seen only in restricted process; no TLS weakening."
   },
   "math_reference": {
@@ -497,22 +497,7 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": {
-    "state": "RUNNING",
-    "operation": "exec-00000000000019df",
-    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
-    "connector": "awmcp",
-    "group": "G3",
-    "cohort": "R2",
-    "contract": "FORMAL_STEP_R37_G3_R2_20261025_CONTRACT.json",
-    "raw_root": "/cache/cch/hypic-independent-20261013/formal-step-r37-g3-r2-20261025",
-    "launch_checkpoint": "c1f661acc6251e22c2aceeccfb8b3f208c02da25",
-    "admission_operation": "exec-00000000000019de",
-    "admission": "R37_G3_R2_ADMISSION_20261025.json",
-    "auditor": "host_audits/r37_formal_audit.py",
-    "absolute_stop_utc": "2026-10-26T06:36:27Z",
-    "rule": "Track original ma/exact19df/raw only; running/unknown neverrestart. 454runtime/common and10boundHOST remain frozen through terminal matched-pair audit. Require actual40/40fourworker48C1/16C2, all original byte/count/durability fences, finite/snapshot/mechanism/source/continuousisolation/exact live release. Only then compare to accepted R37G1; no R30control reuse or profile64 extrapolation."
-  },
+  "active_attempt": null,
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
@@ -1341,9 +1326,9 @@
     "raw_decision_sha256": "d8059a624df7816915b5bab8fba46247b4fdda49d7940537b2566f06f977083c"
   },
   "r37_final_source_formal": {
-    "state": "R37_R2_G1_VALID_RELEASED_G3_FORMAL_RUNNING",
+    "state": "FIRST_PAIR_VALID_NO_NATIVE_SPEED_GAIN_ALL_RELEASED",
     "plan": "R37_FINAL_SOURCE_FORMAL_FIRST_PAIR_PLAN_20261025.json",
-    "active_controller": "exec-00000000000019df",
+    "active_controller": null,
     "full_goal_complete": false,
     "readiness": "R37_HOST_IMAGE_READINESS_20261025.json",
     "host_tests": 19,
@@ -1362,7 +1347,8 @@
     "code_checkpoint": "3e5483dd46df2162f593050ee4f55d1dbe7d5944",
     "admission": "R37_G3_R2_ADMISSION_20261025.json",
     "results": {
-      "G1": "R37_G1_R2_AUDIT_20261025.json"
+      "G1": "R37_G1_R2_AUDIT_20261025.json",
+      "G3": "R37_G3_R2_AUDIT_20261026.json"
     },
     "G1_timing": {
       "requests": 40,
@@ -1372,23 +1358,40 @@
       "weighted_tpot_ms": 95.04516940235135
     },
     "last_completed_controller": {
-      "state": "VALID_AUDITED_RELEASED",
-      "operation": "exec-00000000000019d2",
+      "state": "VALID_AUDITED_RELEASED_NO_NATIVE_GAIN",
+      "operation": "exec-00000000000019df",
       "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
       "connector": "awmcp",
-      "group": "G1",
+      "group": "G3",
       "cohort": "R2",
-      "contract": "FORMAL_STEP_R37_G1_R2_20261025_CONTRACT.json",
-      "raw_root": "/cache/cch/hypic-independent-20261013/formal-step-r37-g1-r2-20261025",
-      "launch_checkpoint": "3e5483dd46df2162f593050ee4f55d1dbe7d5944",
-      "admission_operation": "exec-00000000000019d1",
-      "admission": "R37_G1_R2_ADMISSION_20261025.json",
+      "contract": "FORMAL_STEP_R37_G3_R2_20261025_CONTRACT.json",
+      "raw_root": "/cache/cch/hypic-independent-20261013/formal-step-r37-g3-r2-20261025",
+      "launch_checkpoint": "c1f661acc6251e22c2aceeccfb8b3f208c02da25",
+      "admission_operation": "exec-00000000000019de",
+      "admission": "R37_G3_R2_ADMISSION_20261025.json",
       "auditor": "host_audits/r37_formal_audit.py",
       "absolute_stop_utc": "2026-10-26T06:36:27Z",
-      "rule": "Track exact original ma/handle/raw. Running or terminal unknown neverrestart; handle expiration is not terminal proof. 454runtime/common and all10boundHOST frozen through matched G1/G3 cohort. G1 independent actual40/nativegraph/physical/live-release audit before fresh G3 admission.",
-      "independent_audit": "exec-00000000000019dd",
-      "audit_path": "/cache/cch/hypic-independent-20261013/r37-g1-r2-independent-audit-20261025.json",
-      "audit_sha256": "aa544ab654f7a10116ff4b36979dbaa009a32d8c0f3b2266d9c176c67bdb26b7"
-    }
+      "rule": "Track original ma/exact19df/raw only; running/unknown neverrestart. 454runtime/common and10boundHOST remain frozen through terminal matched-pair audit. Require actual40/40fourworker48C1/16C2, all original byte/count/durability fences, finite/snapshot/mechanism/source/continuousisolation/exact live release. Only then compare to accepted R37G1; no R30control reuse or profile64 extrapolation.",
+      "terminal_proof": "Original raw terminal/result; expired handle not terminal proof",
+      "independent_audit": "exec-00000000000019f6",
+      "audit_path": "/cache/cch/hypic-independent-20261013/r37-g3-r2-independent-audit-20261025.json",
+      "audit_sha256": "6025425b2fe202373458bff9b681e4bb140392384fc87f9a73fef98b2c777a22"
+    },
+    "G3_timing": {
+      "requests": 40,
+      "tpot_p95_ms": 129.62601111325966,
+      "ttft_p95_ms": 192992.26928991266,
+      "unique_ids": 40,
+      "weighted_tpot_ms": 109.07121225707783
+    },
+    "decision": "R37_FIRST_PAIR_DECISION_20261026.json",
+    "raw_decision": "/cache/cch/hypic-independent-20261013/r37-first-pair-decision-20261026.json",
+    "raw_decision_sha256": "afddc368e51119d600d611ad401cdd99707e049521b1a2524d486d1b6141a71b"
+  },
+  "r38_component_budget": {
+    "state": "PREREGISTERED_MEASUREMENT_PLAN_NOT_IMPLEMENTED_OR_DEVICE_ACCEPTED",
+    "plan": "R38_COMPONENT_BUDGET_PLAN_20261026.json",
+    "active_controller": null,
+    "full_goal_complete": false
   }
 }

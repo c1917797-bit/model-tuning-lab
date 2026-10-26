@@ -1,0 +1,89 @@
+{
+  "schema": "hypic-r37-g3-r2-formal-summary/v1",
+  "state": "VALID_FULL40_ALGORITHM_ARM_AUDITED_RELEASED_NOT_SPEED_ACCEPTED",
+  "controller": "exec-00000000000019df",
+  "terminal_proof": "Original result.json and one successful terminal journal after handle expired; connector expiration was not terminal proof.",
+  "contract": "FORMAL_STEP_R37_G3_R2_20261025_CONTRACT.json",
+  "launch_checkpoint": "c1f661acc6251e22c2aceeccfb8b3f208c02da25",
+  "code_checkpoint": "3e5483dd46df2162f593050ee4f55d1dbe7d5944",
+  "raw_root": "/cache/cch/hypic-independent-20261013/formal-step-r37-g3-r2-20261025",
+  "independent_audit": {
+    "operation": "exec-00000000000019f6",
+    "path": "/cache/cch/hypic-independent-20261013/r37-g3-r2-independent-audit-20261025.json",
+    "sha256": "6025425b2fe202373458bff9b681e4bb140392384fc87f9a73fef98b2c777a22",
+    "valid": true,
+    "live_release_verified": true
+  },
+  "timing": {
+    "requests": 40,
+    "tpot_p95_ms": 129.62601111325966,
+    "ttft_p95_ms": 192992.26928991266,
+    "unique_ids": 40,
+    "weighted_tpot_ms": 109.07121225707783
+  },
+  "source_bindings": 454,
+  "isolation_samples": 326,
+  "hot_fourworker_48C1_16C2": {
+    "denominator": 40,
+    "covered": 40,
+    "missing": 0
+  },
+  "durability": {
+    "actual_completed_model_steps": 148,
+    "durable_fences": 148,
+    "enabled": true,
+    "fsync_syscall_trace_proven": false,
+    "http_requests": 40,
+    "ranks": [
+      {
+        "deferred_fsync_requests": 33104,
+        "original_fsync_requests": 33141,
+        "original_written_bytes": 14847689,
+        "original_written_events": 33141,
+        "rank": 0,
+        "source_completion_and_receipt_fsync_calls": 74,
+        "timed_associated_model_steps": 37
+      },
+      {
+        "deferred_fsync_requests": 33104,
+        "original_fsync_requests": 33141,
+        "original_written_bytes": 14847689,
+        "original_written_events": 33141,
+        "rank": 1,
+        "source_completion_and_receipt_fsync_calls": 74,
+        "timed_associated_model_steps": 37
+      },
+      {
+        "deferred_fsync_requests": 33104,
+        "original_fsync_requests": 33141,
+        "original_written_bytes": 14847689,
+        "original_written_events": 33141,
+        "rank": 2,
+        "source_completion_and_receipt_fsync_calls": 74,
+        "timed_associated_model_steps": 37
+      },
+      {
+        "deferred_fsync_requests": 33104,
+        "original_fsync_requests": 33141,
+        "original_written_bytes": 14847689,
+        "original_written_events": 33141,
+        "rank": 3,
+        "source_completion_and_receipt_fsync_calls": 74,
+        "timed_associated_model_steps": 37
+      }
+    ],
+    "scope": "Source-bound successful controller plus complete raw byte/count/fence and cohort checks. Fence receipt follows completion sync and is itself synced before callback returns by verified policy. Not a syscall trace, performance result, or durability guarantee for an interrupted incomplete step.",
+    "selected_step_durability_valid": true,
+    "speed_gain_inferred": false
+  },
+  "graph_scope_qualification": "The reused INFO parser's scope string mentions historical same-source R29. R37 does not claim its434 runtime Python equals R29; current bounded prerequisite is R36. Actual pinned official worker source/INFO startup/compile/replay and live four-rank physical joins are retained direct observations. This label is not an extra R29-based acceptance.",
+  "scope": "One actual full40/c16/fixed1024 G3 arm; full pair decision separate. No task-quality, three-round/PDC/lifecycle/wholepaper success.",
+  "full_goal_complete": false,
+  "warmup_count_qualification": {
+    "actual_unscored_http_requests": 4,
+    "pic_producer": 2,
+    "native_prefix": 2,
+    "source": "independent_formal_warmups.build_warmups/execute_warmups",
+    "scope": "Both actual source-bound arms use identical4unscored preparation requests. Earlier R37 plan's unqualified warmup_requests=2 did not specify two per kind; preserve that declaration and this actual count, not a retroactive two-total claim. No final requested-protocol acceptance; future formal protocol must explicitly freeze measured warmup vs cache preparation counts."
+  }
+}
