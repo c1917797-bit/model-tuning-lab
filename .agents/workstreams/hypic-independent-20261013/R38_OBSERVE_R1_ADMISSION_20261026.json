@@ -1,0 +1,57 @@
+{
+  "schema": "hypic-r38-real-admission/v1",
+  "utc": "2026-10-26T01:23:21.844267+00:00",
+  "host": "Euler",
+  "head": "d3ac1ae0fe7d00aacde5fa0bb630213d85b446ba",
+  "branch": "work/hypic-independent-20261013",
+  "source": {
+    "configuration_valid": true,
+    "device_run": false,
+    "controller_sha256": "bb6557897d277f7c91278a263140a388e6b55bfef70a8843cb9d3d57623b3382",
+    "graph_runtime": {
+      "candidate_enabled": true,
+      "capture_sizes": [
+        1,
+        4,
+        8,
+        16,
+        24,
+        32
+      ],
+      "compilation_mode": 3,
+      "cudagraph_mode": "FULL_DECODE_ONLY",
+      "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+      "official_debug_logging": false,
+      "profile": "selective-prefill-native-decode-v1"
+    },
+    "active_manifest_sha256": "64fb900282dc3e8e8f7ddb643c9d615081e7226c4a5fd9c1485f90b38aa66670",
+    "source_bindings": 463,
+    "prerequisite": {
+      "report": "R37_FIRST_PAIR_DECISION_20261026.json",
+      "sha256": "1b8a6084d01b10708b49891f6defe53cac3b2ad2cc6e11fbfa901d1967ac05e2",
+      "raw_decision_sha256": "afddc368e51119d600d611ad401cdd99707e049521b1a2524d486d1b6141a71b",
+      "runtime_python": 438,
+      "original_math_sources_unchanged": true,
+      "scope": "R37 first-pair negative retained; CPU-span observation is not a speed treatment."
+    },
+    "protocol": {
+      "requests": 16,
+      "concurrency": 16,
+      "output_tokens": 1024,
+      "unscored_preparations": 4,
+      "retries": 0
+    }
+  },
+  "model_config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+  "model_index_sha256": "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b",
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "input_sha256": "50f528fa8eb439c56219b0161b16bf12fb2a8fd80effab87d89d725a4cc4c72f",
+  "new_root_absent": true,
+  "owned_name_absent": true,
+  "physical0_3_processes": [],
+  "physical0_3_foreign": [],
+  "ports_free": 102,
+  "cache_available_bytes": 10578235392,
+  "remaining_seconds": 18785.155736923218,
+  "device_allocation": false
+}
