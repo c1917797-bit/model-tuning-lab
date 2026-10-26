@@ -1,0 +1,83 @@
+{
+  "schema": "hypic-r41-g1-capture-failure/v1",
+  "state": "FAILED_OFFICIAL_PYTHON_TRACER_STOP_SEGFAULT_ALL_RELEASED",
+  "operation": "exec-0000000000001c25",
+  "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "exit_code": 1,
+  "duration_ms": 591139,
+  "contract": "PROFILE_R41_G1_R1_20261026_CONTRACT.json",
+  "contract_sha256": "4bf0a55c78898a1f363f0a546e254f90887fdf2d4c10dfdcdf0f8f42e6820d1a",
+  "raw_root": "/cache/cch/hypic-independent-20261013/critical-path-r41-g1-r1-20261026",
+  "owned_container": "ad6dd08f6b437a7fe00063a3aca0c5483cf99b707195b53cc3c80ba0db73c465",
+  "journal": {
+    "attempted": 40,
+    "successful": 0,
+    "failed": 40,
+    "terminal_responses_field": 0,
+    "scope": "Terminal responses0 is not zero attempts; all40failed actual records preserved in events.jsonl. Outer stop URLError masks service failure in terminal; original log and journal establish phase."
+  },
+  "observed_phase": {
+    "start_profile_http": 200,
+    "start_log_line": 298,
+    "auto_stop_log_line": 322,
+    "first_segmentation_fault_region": "service.log lines326-433",
+    "messages": [
+      "Incorrect schedule: Stop profiler while current state is RECORD which may result in incomplete parsed data.",
+      "Max profiling iterations reached. Stopping profiler...",
+      "Segfault encountered",
+      "_PyInterpreterState_GET / _PyObject_Free"
+    ],
+    "engine_worker_death": "Worker proc VllmWorker-3 died unexpectedly",
+    "final_error": "URLError Connection refused during stop_profile after service crash",
+    "classification": "Instrumentation failure in actual native arm, not HYPIC math/performance or paper truth."
+  },
+  "raw_partial_profiler": {
+    "files": 260,
+    "bytes": 520289368,
+    "rank_directories": 4,
+    "closed_profiler_info": 0,
+    "parsed_traces": 0,
+    "accepted": false
+  },
+  "independent_release": {
+    "operation": "exec-0000000000001c3e",
+    "release_audit_path": "/cache/cch/hypic-independent-20261013/r41-g1-r1-failure-release-audit-20261026.json",
+    "release_audit_sha256": "20c91fdfe7c338c114a11f5f2af6dab7eed72bfd457569eff93a009081906591",
+    "journal_failed_requests": 40,
+    "partial_profiler_files": 260,
+    "partial_profiler_bytes": 520289368,
+    "physical": {
+      "ranks": {
+        "0": {
+          "inner_pid": 59,
+          "host_pid": 1802338,
+          "physical_npu": 0
+        },
+        "1": {
+          "inner_pid": 60,
+          "host_pid": 1802339,
+          "physical_npu": 1
+        },
+        "2": {
+          "inner_pid": 61,
+          "host_pid": 1802340,
+          "physical_npu": 2
+        },
+        "3": {
+          "inner_pid": 62,
+          "host_pid": 1802342,
+          "physical_npu": 3
+        }
+      },
+      "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+    },
+    "isolation_samples": 209,
+    "foreign_observed": false,
+    "all_source_closures_unchanged": true,
+    "exact_container_absent": true,
+    "current_physical0_3_empty": true,
+    "strict_ports_free": 102
+  },
+  "closed_route": "Do not rerun unchanged R41with_stackTrue. Retain all R1 code/contract/raw/partial520MB trees. No R41G3 admitted without valid native trace.",
+  "full_goal_complete": false
+}

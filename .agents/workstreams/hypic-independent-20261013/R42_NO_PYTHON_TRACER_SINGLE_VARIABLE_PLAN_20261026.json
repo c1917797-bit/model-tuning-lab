@@ -1,0 +1,121 @@
+{
+  "schema": "hypic-r42-no-python-tracer-plan/v1",
+  "state": "PLANNED_SINGLE_PROFILER_FLAG_CONTROL_NOT_ALGORITHM_CHANGE",
+  "kind": "instrumentation_failure_recovery_diagnostic",
+  "authority": {
+    "stop_utc": "2026-10-26T06:36:27Z",
+    "model": "27B",
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tp": 4,
+    "c3": false,
+    "other_npus_forbidden": [
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "failure_prerequisite": {
+    "report": "R41_G1_R1_CAPTURE_FAILURE_20261026.json",
+    "contract": "PROFILE_R41_G1_R1_20261026_CONTRACT.json",
+    "contract_sha256": "4bf0a55c78898a1f363f0a546e254f90887fdf2d4c10dfdcdf0f8f42e6820d1a",
+    "audit": "/cache/cch/hypic-independent-20261013/r41-g1-r1-failure-release-audit-20261026.json",
+    "audit_sha256": "20c91fdfe7c338c114a11f5f2af6dab7eed72bfd457569eff93a009081906591",
+    "phase": "Native worker Python interpreter segfault at automatic profiler stop; raw traces not closed,40/40 requests failed; exact resources independently released."
+  },
+  "primary_variable": {
+    "field": "torch_profiler_with_stack",
+    "control": true,
+    "candidate": false,
+    "actual_official_mapping": "TorchNPUProfilerWrapper._create_profiler forwards this to with_modules; with_stack staysFalse in both. New choice removes Python function/module tracer while preserving CPU+NPU activities/Level1/PipeUtilization.",
+    "official_wrapper_sha256": "0c9ffcaf695a9b1fcb44a51bdd92e69f763a7c5be64a8efbd498d6536b9e09e5",
+    "causal_status": "Hypothesis only: Python tracer/finalization is implicated by frames, not established root cause. Accept only bounded failure-phase survival with real four-rank complete traces and requests; no universal cause claim."
+  },
+  "unchanged": {
+    "algorithm_python": 438,
+    "common_source_bindings": 465,
+    "retained_host_sources": 32,
+    "math_and_weights": true,
+    "finite_snapshot_durability_eventwrites_ownership": true,
+    "transport": {
+      "requests": 40,
+      "concurrency": 16,
+      "prompt_tokens": 32768,
+      "fixed_output_tokens": 1024,
+      "cache_preparations": 4,
+      "target_warmups": 2,
+      "retries": 0
+    },
+    "profiler": {
+      "profiler": "torch",
+      "torch_profiler_dir": "/scratch/profiles",
+      "ignore_frontend": true,
+      "torch_profiler_with_memory": false,
+      "delay_iterations": 0,
+      "max_iterations": 7
+    },
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "trace_budget": {
+      "total_bytes": 2147483648,
+      "single_trace_bytes": 268435456,
+      "metadata_closure_seconds": 300,
+      "cache_floor_bytes": 4294967296
+    }
+  },
+  "budget": {
+    "observed_valid_R40_units": {
+      "g1": {
+        "preflight_utc": "2026-10-26T03:34:45.858328+00:00",
+        "last_isolation_utc": "2026-10-26T03:49:35.139092+00:00",
+        "observed_preflight_to_last_guard_seconds": 889.280764,
+        "samples": 285,
+        "result_valid": true
+      },
+      "g3": {
+        "preflight_utc": "2026-10-26T04:00:47.241669+00:00",
+        "last_isolation_utc": "2026-10-26T04:19:06.092676+00:00",
+        "observed_preflight_to_last_guard_seconds": 1098.851007,
+        "samples": 336,
+        "result_valid": true
+      }
+    },
+    "definition": "Observed original preflight-to-last-isolation span is not total service lifetime; add explicit capture/parse/audit/cleanup allowance. This is an admission model, not measured corrected-profile duration or speed.",
+    "base_observed_seconds": 1988.131771,
+    "added_capture_allowance_seconds": 600,
+    "added_audit_release_margin_seconds": 660,
+    "planned_pair_minimum_remaining_seconds": 3300,
+    "candidate_arm_minimum_remaining_seconds": 2400,
+    "minimum_cache_free_before_G1_bytes": 9126805504,
+    "minimum_cache_free_before_G3_bytes": 6979321856,
+    "absolute_deadline_unchanged": true,
+    "administrative_gate_change": "R41G1 minimum4500 replaced by3300 only under new R42 contract, based on now available valid same-source890/1099second units plus1260second allowance. It changes admission, not inference/profiler treatment; actual allocation still rejected if insufficient budget/free space."
+  },
+  "execution": {
+    "order": [
+      "Freeze/commit/publish failure+plan",
+      "New source-bound R42HOST controls and actual native constructor, no old algorithm imports",
+      "Fresh direct/source/model/image/input/new root+name/empty0-3/strict102ports/cache/time admission",
+      "New native G1 only",
+      "Actual independent40+warm/source/physical/isolation/exactrelease+fourrankCPU/NPUclosedtrace audit",
+      "Only if native valid/released and >=2400s then new matched HYPICG3 contract/root; both useFalse"
+    ],
+    "preserve_R41_files": true,
+    "source_policy": "New HOST R42 policy/controller/auditor/capsule plus unchanged reviewed R41trace helper and this plan. No R41source overwrite, no change438runtime/465common/32retainedHOST.",
+    "raw_roots": [
+      "/cache/cch/hypic-independent-20261013/critical-path-r42-g1-r1-20261026",
+      "/cache/cch/hypic-independent-20261013/critical-path-r42-g3-r1-20261026"
+    ],
+    "failure_rule": "If corrected failure phase persists, preserve new root and close unchanged retries. No reduced ruler/guard, no blind rerun or force cleanup of foreign tasks."
+  },
+  "acceptance": {
+    "native_corrected_capture": "40unique requests and actual2targetwarm/4preps, original native algorithm absence/graph/source/physical/isolation/exact live102portrelease, no segfault or profile/parser error, four PID/rank-bound CPU+NPU metadata+parsed traces.",
+    "paired_diagnostic": "Matching native/HYPIC current438 source and scope; phase/overlap/cross-rank timeline analysis only. Profiler timing is never speed. Missing callstack/shape evidence explicitly reported; no arbitrary attribution.",
+    "full_goal_complete": false
+  },
+  "remaining": "R40 performance negative unchanged. Full381 eacharm naturalEOS quality, actual graph disable/uninstall/restart and completePaper-to-Ascend/29functional remain incomplete."
+}
