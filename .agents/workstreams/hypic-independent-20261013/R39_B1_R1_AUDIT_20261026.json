@@ -1,0 +1,130 @@
+{
+  "schema": "hypic-r39-arm-audit-summary/v1",
+  "state": "VALID_AUDITED_EXACT_RELEASED_NO_CAUSAL_OR_NATIVE_SPEED_CLAIM",
+  "arm": "B1",
+  "target_warmup_count": 2,
+  "contract": "TARGET_WARMUP_R39_B1_R1_20261026_CONTRACT.json",
+  "contract_sha256": "14b5121eb66731e40c0436982311ff351c25b992db8621c900cb52073761dfc5",
+  "controller": "exec-0000000000001add",
+  "controller_exit_code": 0,
+  "independent_audit": {
+    "operation": "exec-0000000000001ae7",
+    "path": "/cache/cch/hypic-independent-20261013/r39-b1-r1-independent-audit-20261026.json",
+    "sha256": "afde673167a7d8b672bbc8863bd20663cd5454f2101e78e8cadd8420aa9f0243",
+    "valid": true,
+    "exact_live_release_verified": true
+  },
+  "diagnostic_requests": 16,
+  "output_tokens": 1024,
+  "actual_hot_covered": 16,
+  "isolation_samples": 266,
+  "common_source_bindings": 463,
+  "runtime_python": 438,
+  "diagnostic_makespan_seconds": 209.0269869400654,
+  "target_warmups": {
+    "actual_target_warmup_count": 2,
+    "common_cache_preparations": 4,
+    "extra_target_warmup_seconds": 103.25260529993102,
+    "extra_warm_latency_excluded_from_measured_unit_but_recorded": true,
+    "hot": {
+      "accepted_hot_coverage": true,
+      "covered": [
+        "cmpl-9da18be18cb57022",
+        "cmpl-967fd4f5669f70f7"
+      ],
+      "denominator": 2,
+      "legacy_helper_scope": "full40 same-step all-rank/all-layer body-skip coverage only; HTTP/source/physical/isolation/performance/quality separate",
+      "missing": [],
+      "scope": "Exact two unscored full target warmups, not measured denominator.",
+      "worker_pids": {
+        "0": 57,
+        "1": 58,
+        "2": 59,
+        "3": 60
+      }
+    },
+    "scope": "Explicit one-variable protocol contrast; no algorithm change or native speed acceptance.",
+    "warm_request_ids": [
+      "cmpl-9da18be18cb57022",
+      "cmpl-967fd4f5669f70f7"
+    ]
+  },
+  "first_use_signal": {
+    "max_measured_single_C1_call_ns": 6146434810,
+    "scope": "Observed CPU-call peak only; no compiler or removable-time cause established."
+  },
+  "durability": {
+    "actual_completed_model_steps": 64,
+    "durable_fences": 64,
+    "enabled": true,
+    "fsync_syscall_trace_proven": false,
+    "http_requests": 16,
+    "ranks": [
+      {
+        "deferred_fsync_requests": 11360,
+        "original_fsync_requests": 11374,
+        "original_written_bytes": 5116824,
+        "original_written_events": 11374,
+        "rank": 0,
+        "source_completion_and_receipt_fsync_calls": 28,
+        "timed_associated_model_steps": 14
+      },
+      {
+        "deferred_fsync_requests": 11360,
+        "original_fsync_requests": 11374,
+        "original_written_bytes": 5116824,
+        "original_written_events": 11374,
+        "rank": 1,
+        "source_completion_and_receipt_fsync_calls": 28,
+        "timed_associated_model_steps": 14
+      },
+      {
+        "deferred_fsync_requests": 11360,
+        "original_fsync_requests": 11374,
+        "original_written_bytes": 5116824,
+        "original_written_events": 11374,
+        "rank": 2,
+        "source_completion_and_receipt_fsync_calls": 28,
+        "timed_associated_model_steps": 14
+      },
+      {
+        "deferred_fsync_requests": 11360,
+        "original_fsync_requests": 11374,
+        "original_written_bytes": 5116824,
+        "original_written_events": 11374,
+        "rank": 3,
+        "source_completion_and_receipt_fsync_calls": 28,
+        "timed_associated_model_steps": 14
+      }
+    ],
+    "scope": "Source-bound successful controller plus complete raw byte/count/fence and cohort checks. Fence receipt follows completion sync and is itself synced before callback returns by verified policy. Not a syscall trace, performance result, or durability guarantee for an interrupted incomplete step.",
+    "selected_step_durability_valid": true,
+    "speed_gain_inferred": false
+  },
+  "raw_sha256": {
+    "events.jsonl": "ef0f1a05d56417ae3c70df933eee76d37c878e2891336383f8d58cdd52e01a43",
+    "launch.json": "cd5dd7b9325044a0f97527398b8e887dd5319c718e053b94a42a9166a59447c4",
+    "performance-unit.json": "16ad841edf18a0e283299eeeb8bcf85b8793224db9e1d2c7c8635c4014f52c1f",
+    "release.json": "909e2365cf44bf217ea73a76a67fd0a5fb6ea0ec8db144cb5c23aab5684657fc",
+    "responses.json": "85da970de14010b6675d72008fe1d79859377f2a93764c80e1734bf828699d06",
+    "result.json": "4e20e533c8e4cbef27a98081287e728f4f2037f5aad60ae33bbbdbc9feba2953",
+    "service-start.json": "d7d9ac93e1dcaf91647eda392340f7f18452462f4cc6f21a7bfabdc4fd1f2be8",
+    "service.log": "f00c7cbf19012812cb3c39fefe63286b3bb83c7f6bbcbb52b03da293a6ae090c"
+  },
+  "worker_sha256": {
+    "compact-worker-57.jsonl": "5b84a664d1fab00b66134ba0ce55cad83f433a983eb396fe6d13b4777397f99b",
+    "compact-worker-58.jsonl": "c6a0af278274b3340faf4b25d03c743f3d1aa34131b0e6ca919cac9006b6dea3",
+    "compact-worker-59.jsonl": "1aef5e5330d66e86bc3141910cc5b0929e22a8c6d57736656367785868fcc015",
+    "compact-worker-60.jsonl": "089ad9b9f1fa7f6abbf56cd6da98846d66f2a98f1a1729a6abbb5237fc13e16e"
+  },
+  "scope": "One R39 warmup-count arm; explicit four cache preparations and0or2 full target warmups. Same runtime/math/guards and measured16/c16/fixed1024; full three-arm cause decision, native/formal performance and quality remain separate.",
+  "whole_goal_complete": false,
+  "first_release_audit_observation": {
+    "operation": "exec-0000000000001ae5",
+    "exit": 1,
+    "error": "OSError errno98 strict port bind while release settled; no output created",
+    "read_only_followup": "exec-0000000000001ae6:all102strictbindfree,outputabsent; unchanged full auditor1ae7 passed",
+    "gates_relaxed": false,
+    "device_restart": false
+  }
+}

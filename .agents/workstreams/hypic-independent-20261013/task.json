@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R39_B1_TWO_FULL_TARGET_WARMUPS_RUNNING_EXACT1ADD",
+  "execution_state": "R39_B1_VALID_RELEASED_A2_CONTRACT_FROZEN_PENDING_FRESH_ADMISSION",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -497,30 +497,7 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": {
-    "state": "RUNNING_STARTUP_NOT_YET_REQUEST_PROOF",
-    "operation": "exec-0000000000001add",
-    "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
-    "connector": "awmcp",
-    "arm": "B1",
-    "target_warmup_count": 2,
-    "contract": "TARGET_WARMUP_R39_B1_R1_20261026_CONTRACT.json",
-    "contract_sha256": "14b5121eb66731e40c0436982311ff351c25b992db8621c900cb52073761dfc5",
-    "raw_root": "/cache/cch/hypic-independent-20261013/target-warmup-r39-b1-r1-20261026",
-    "launch_checkpoint": "2039a8014e93b7f88ec10e3aede8233964579ae6",
-    "admission_operation": "exec-0000000000001adc",
-    "admission": "R39_B1_R1_ADMISSION_20261026.json",
-    "observed_running_utc": "2026-10-26T02:29:13Z",
-    "auditor": "host_audits/r39_warmup_audit.py",
-    "audit_output": "/cache/cch/hypic-independent-20261013/r39-b1-r1-independent-audit-20261026.json",
-    "previous_audit": {
-      "arm": "A1",
-      "path": "/cache/cch/hypic-independent-20261013/r39-a1-r1-independent-audit-20261026.json",
-      "sha256": "a76ed5de92a479fd397575e89f204738909f7a0a08b6b4a683012208cfabd609"
-    },
-    "absolute_stop_utc": "2026-10-26T06:36:27Z",
-    "rule": "Original ma/exact1add/raw only; live/unknown neverrestart. Freeze438runtime/463common/24HOST acrossall3arms. B1 only adds2fulltargetwarmups after4preps/before actual16fixed1024; requires actualwarm2transport+fourworker48C1/16C2hot and measuredhot16,interval/durability/finite/snapshot/source/isolation/exactCID+0-3+all102portsrelease. Only independent valid B1audit allows newA2target0contract/root pinnedB1auditSHA; no causal/native/formal/quality decision beforeall3arms."
-  },
+  "active_attempt": null,
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
@@ -1464,10 +1441,24 @@
     }
   },
   "r39_target_warmup": {
-    "state": "R39_B1_TWO_FULL_TARGET_WARMUPS_RUNNING_EXACT1ADD",
+    "state": "R39_B1_VALID_RELEASED_A2_CONTRACT_FROZEN_PENDING_FRESH_ADMISSION",
     "plan": "R39_TARGET_PATH_WARMUP_CAUSAL_PLAN_20261026.json",
-    "active_controller": {
-      "state": "RUNNING_STARTUP_NOT_YET_REQUEST_PROOF",
+    "active_controller": null,
+    "full_goal_complete": false,
+    "readiness": "R39_HOST_READINESS_20261026.json",
+    "controller": "host_audits/r39_warmup_controller.py",
+    "auditor": "host_audits/r39_warmup_audit.py",
+    "contracts": {
+      "A1": "TARGET_WARMUP_R39_A1_R1_20261026_CONTRACT.json",
+      "B1": "TARGET_WARMUP_R39_B1_R1_20261026_CONTRACT.json",
+      "A2": "TARGET_WARMUP_R39_A2_R1_20261026_CONTRACT.json"
+    },
+    "host_tests": 26,
+    "admission": "R39_A1_R1_ADMISSION_20261026.json",
+    "decision_helper": "host_audits/r39_warmup_decision.py",
+    "decision_readiness": "R39_DECISION_HELPER_READINESS_20261026.json",
+    "last_completed_controller": {
+      "state": "VALID_AUDITED_EXACT_RELEASED_NO_CAUSAL_OR_NATIVE_SPEED_CLAIM",
       "operation": "exec-0000000000001add",
       "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
       "connector": "awmcp",
@@ -1488,48 +1479,19 @@
         "sha256": "a76ed5de92a479fd397575e89f204738909f7a0a08b6b4a683012208cfabd609"
       },
       "absolute_stop_utc": "2026-10-26T06:36:27Z",
-      "rule": "Original ma/exact1add/raw only; live/unknown neverrestart. Freeze438runtime/463common/24HOST acrossall3arms. B1 only adds2fulltargetwarmups after4preps/before actual16fixed1024; requires actualwarm2transport+fourworker48C1/16C2hot and measuredhot16,interval/durability/finite/snapshot/source/isolation/exactCID+0-3+all102portsrelease. Only independent valid B1audit allows newA2target0contract/root pinnedB1auditSHA; no causal/native/formal/quality decision beforeall3arms."
-    },
-    "full_goal_complete": false,
-    "readiness": "R39_HOST_READINESS_20261026.json",
-    "controller": "host_audits/r39_warmup_controller.py",
-    "auditor": "host_audits/r39_warmup_audit.py",
-    "contracts": {
-      "A1": "TARGET_WARMUP_R39_A1_R1_20261026_CONTRACT.json",
-      "B1": "TARGET_WARMUP_R39_B1_R1_20261026_CONTRACT.json"
-    },
-    "host_tests": 26,
-    "admission": "R39_A1_R1_ADMISSION_20261026.json",
-    "decision_helper": "host_audits/r39_warmup_decision.py",
-    "decision_readiness": "R39_DECISION_HELPER_READINESS_20261026.json",
-    "last_completed_controller": {
-      "state": "VALID_AUDITED_EXACT_RELEASED_NO_CAUSAL_OR_NATIVE_SPEED_CLAIM",
-      "operation": "exec-0000000000001ac7",
-      "peer_id": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
-      "connector": "awmcp",
-      "arm": "A1",
-      "target_warmup_count": 0,
-      "contract": "TARGET_WARMUP_R39_A1_R1_20261026_CONTRACT.json",
-      "raw_root": "/cache/cch/hypic-independent-20261013/target-warmup-r39-a1-r1-20261026",
-      "launch_checkpoint": "eb6d7204d211652f915eb48adbf0d9ff9624f53b",
-      "admission_operation": "exec-0000000000001ac6",
-      "admission": "R39_A1_R1_ADMISSION_20261026.json",
-      "observed_running_utc": "2026-10-26T02:04:06Z",
-      "auditor": "host_audits/r39_warmup_audit.py",
-      "audit_output": "/cache/cch/hypic-independent-20261013/r39-a1-r1-independent-audit-20261026.json",
-      "absolute_stop_utc": "2026-10-26T06:36:27Z",
-      "rule": "Original ma/exact1ac7/raw only; live/unknown neverrestart. Freeze runtime438/common463/24HOST acrossall3arms. A1 original0targetwarm; require independent actual16+fourworkerhot/interval/durability/finite/snapshot/source/isolation/exactCID+0-3+102portsrelease before freeze B1contract/newroot with predecessor audit SHA; only B1 adds2 full target warmups. No causal/native/formal/quality claim from A1.",
+      "rule": "Original ma/exact1add/raw only; live/unknown neverrestart. Freeze438runtime/463common/24HOST acrossall3arms. B1 only adds2fulltargetwarmups after4preps/before actual16fixed1024; requires actualwarm2transport+fourworker48C1/16C2hot and measuredhot16,interval/durability/finite/snapshot/source/isolation/exactCID+0-3+all102portsrelease. Only independent valid B1audit allows newA2target0contract/root pinnedB1auditSHA; no causal/native/formal/quality decision beforeall3arms.",
       "terminal_exit_code": 0,
       "independent_audit": {
-        "operation": "exec-0000000000001ad7",
-        "path": "/cache/cch/hypic-independent-20261013/r39-a1-r1-independent-audit-20261026.json",
-        "sha256": "a76ed5de92a479fd397575e89f204738909f7a0a08b6b4a683012208cfabd609",
+        "operation": "exec-0000000000001ae7",
+        "path": "/cache/cch/hypic-independent-20261013/r39-b1-r1-independent-audit-20261026.json",
+        "sha256": "afde673167a7d8b672bbc8863bd20663cd5454f2101e78e8cadd8420aa9f0243",
         "valid": true,
         "exact_live_release_verified": true
       }
     },
     "results": {
-      "A1": "R39_A1_R1_AUDIT_20261026.json"
+      "A1": "R39_A1_R1_AUDIT_20261026.json",
+      "B1": "R39_B1_R1_AUDIT_20261026.json"
     },
     "B1_constructor": "R39_B1_R1_LAUNCH_READINESS_20261026.json",
     "B1_admission": "R39_B1_R1_ADMISSION_20261026.json"
