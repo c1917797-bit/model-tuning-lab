@@ -65,6 +65,9 @@ Re-prove this in the actual container/session before a new claim.
    NPU IDs, process IDs, port, visible devices, and model/runtime identity.
 4. Inspect the real serving environment for profiler tools. Prefer the profiler
    path already integrated into vLLM-Ascend before adding new instrumentation.
+   For worker-side start/stop collection, read
+   [profiler lifecycle evidence](references/profiler-lifecycle-evidence.md)
+   before freezing configuration, output-validity gates, and the time budget.
 5. Consult `cannbot-skills` when present for CANN/profiler/operator guidance,
    but record any referenced rule as external expert guidance unless locally
    reproduced.

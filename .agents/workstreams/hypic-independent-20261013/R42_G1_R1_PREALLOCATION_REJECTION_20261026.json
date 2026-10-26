@@ -1,0 +1,47 @@
+{
+  "schema": "hypic-r42-preallocation-rejection/v1",
+  "state": "HOST_READY_BUT_PREALLOCATION_BUDGET_REJECTED_NO_NPU",
+  "recorded_utc": "2026-10-26T05:50:00Z",
+  "source_commit": "da90faedab60d464e49f8dbbae1ef584606b300e",
+  "original_peer": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "operation": "exec-0000000000001c6c",
+  "contract": "PROFILE_R42_G1_R1_20261026_CONTRACT.json",
+  "contract_sha256": "9dc1500eb91add5b2234e3b7f308e52c63907007aceb8af631a689bde9b9a778",
+  "independent_preallocation_audit": {
+    "operation": "exec-0000000000001c6d",
+    "path": "/cache/cch/hypic-independent-20261013/r42-g1-r1-preallocation-budget-audit-20261026.json",
+    "sha256": "c99424f63d3656d42f585e42cb23cc4ed4671fb00dca010083ef9b667fe353fd"
+  },
+  "observed": {
+    "schema": "hypic-r42-preallocation-budget-rejection/v1",
+    "operation": "exec-0000000000001c6c",
+    "exit_code": 1,
+    "failure_phase": "launcher authoritative-budget margin assertion before runpy/controller/allocation",
+    "contract_sha256": "9dc1500eb91add5b2234e3b7f308e52c63907007aceb8af631a689bde9b9a778",
+    "raw_root_absent": true,
+    "container_name_absent": true,
+    "device_allocation": false,
+    "strict_ports_free": 102,
+    "current_physical0_3": [],
+    "foreign": [],
+    "observed_utc": "2026-10-26T05:42:51.643260+00:00",
+    "all_source_closures_unchanged": true,
+    "minimum_remaining_seconds": 3300,
+    "additional_conservative_clock_transport_margin_seconds": 90,
+    "absolute_stop_utc": "2026-10-26T06:36:27Z",
+    "recovery_candidate_NPU_verified": false,
+    "full_goal_complete": false,
+    "scope": "Preallocation refusal only. No NPU recovery attempt, no evidence of profiler repair or speed. Preserve R41 failed original root and R42 unallocated contract; no weaker ruler/deadline/budget retry."
+  },
+  "decision": "No R42 NPU recovery attempt occurred. Preserve original R41 failed root and unallocated R42 contract. Do not reduce the fixed full40 ruler, 3300-second admission budget, 90-second clock/transport margin or fixed deadline to retry this window.",
+  "next_action": "Offline profiler lifecycle lesson integration and handoff only; no new R42 device startup in this window. At deadline delete only hypic-12 after checking exact owned state.",
+  "full_goal_complete": false,
+  "maintainer_skill_integration": {"skill":"ascend-cannbot-profiler","reference":"references/profiler-lifecycle-evidence.md","validation_operation":"exec-0000000000001c76","quick_validate":"PASS","reference_links":4,"evidence_hash":"PASS","validate_mst":"29 Skill structure PASS only; no claim of functional acceptance","git_diff_check":"PASS"},
+  "remaining": [
+    "R42 actual native/G3 clean four-rank profiler validation and causal attribution",
+    "positive final-source G1-G4 repeated formal1024 performance",
+    "full127x3 each-arm natural-EOS quality",
+    "actual disable/uninstall/restart lifecycle",
+    "Paper-to-Ascend and 29 Skill functional acceptance"
+  ]
+}
