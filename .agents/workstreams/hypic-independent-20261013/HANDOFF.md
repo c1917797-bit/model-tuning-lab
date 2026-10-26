@@ -1,3 +1,7 @@
+# CURRENT R39 A1 EXACT1AC7 RUNNING; OFFLINE THREE-ARM DECISION TOOL READY
+
+R39A1continuesoriginal1ac7/ma/raw,all438runtime/463common/24HOSTfrozen. AddedONLYstandaloneHOST host_audits/r39_warmup_decision.py plus9newlogiccontrols1ad1PASS;neitherinruntime norcurrentHOSTclosure,checked1ad2boundbytesunchanged. R39_DECISION_HELPER_READINESS_20261026.json. Toolpinsoriginalpublished026b571bplanbytes/5pctgain/5pctdrift,replaysALL3originalaudits/raw andsource/transport/interval/mechanism proofs,requiresoriginalexactreleaseandpredecessorauditSHAchain,reportsextrawarmupdurationandmeasured-plus-warmuptotal/arithmetictradeoff. Completeactual3armreplaypending,notcause/algorithm/nativewin. DoNOTrunbeforeA1/B1/A2allvalid;no new NPUorcurrentlyrunning-sourcechange. ExistingexactA1trackingandaudit/B1admissionorderbelowunchanged.
+
 # CURRENT R39 A1 CONTROL RUNNING EXACT1AC7; ALL THREE-ARM SOURCES FROZEN
 
 Codeeb6d7204 published/liveverified;freshma/direct1ac6at02:03:46UTCproves463runtime/common+24HOST/modelconfig69db+indexa8ad/image660ce/input50f528/newroot+ownnameabsent/emptyphysical0-3/102freeports/cache10.496GB/16360secremaining. R39_A1_R1_ADMISSION_20261026.json. Actualcontroller exec-0000000000001ac7 originalma a6109 RUNNING; A1targetwarm0/commoncacheprep4/measured16-c16-32768-fixed1024,notformalperformance. Contract TARGET_WARMUP_R39_A1_R1_20261026_CONTRACT.json; raw /cache/cch/hypic-independent-20261013/target-warmup-r39-a1-r1-20261026. Startup/requestproofpending,notcauseorperformanceacceptance.

@@ -1,0 +1,21 @@
+{
+  "schema": "hypic-r39-decision-helper-readiness/v1",
+  "state": "HOST9_LOGIC_CONTROLS_PASS_REAL_THREE_ARM_REPLAY_PENDING",
+  "source_sha256": {
+    "host_audits/r39_warmup_decision.py": "45a2360d70e0bd3217a3508a1a725bf5825ea6551d7f5a6102286556ed51193b",
+    "host_audits/test_r39_warmup_decision.py": "3fe686fd3aa3e016078729a19cdd9056e93aba105163b02c8511ac7f6badfc71"
+  },
+  "test_operation": "exec-0000000000001ad1",
+  "passed": 9,
+  "predeclared_plan_commit": "026b571b5b46a4401643fb55c5e41b82d43fad2f",
+  "predeclared_plan_sha256": "2337af999ea2006d073041ba4632ff194ebe990cc0b46c6f21d6a2b969f3fbb8",
+  "gain_gate_percent": 5,
+  "control_drift_gate_percent": 5,
+  "original_extra_warmup_time_reported": true,
+  "runtime_common_and_bound_HOST_unchanged": true,
+  "not_imported_or_mounted_as_inference_code": true,
+  "full_raw_audits_replay_pending": true,
+  "new_npu_work": false,
+  "full_goal_complete": false,
+  "scope": "Offline three-arm decision tool outside current463common/24HOST closure; tests prove arithmetic/threshold/invalid-input/warm-cost controls only, not complete actual study or a compiler/algorithm/native speed cause."
+}
