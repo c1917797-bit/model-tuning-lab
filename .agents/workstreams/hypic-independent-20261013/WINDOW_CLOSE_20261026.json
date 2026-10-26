@@ -1,0 +1,36 @@
+{
+  "schema": "hypic-authorized-window-close/v1",
+  "state": "WINDOW_EXPIRED_FULL_GOAL_UNACCEPTED",
+  "fixed_deadline_utc": "2026-10-26T06:36:27Z",
+  "authoritative_close_check_utc": "2026-10-26 06:37:02 UTC",
+  "source_checkpoint": "6ab66c907417c28ab997e350f3d831404fa5ce32",
+  "owned_state_audit": {
+    "operation": "exec-0000000000001cab",
+    "path": "/cache/cch/hypic-independent-20261013/window-close-owned-state-20261026.json",
+    "sha256": "cd752f98a57913f02dce5d367143affe9d89d19d4441e095209b88becaa51f80"
+  },
+  "owned_active_attempt": null,
+  "new_npu_startup_after_deadline": false,
+  "foreign_workloads_modified": false,
+  "automation": {
+    "id": "hypic-12",
+    "delete_status": "deleted",
+    "scope": "only this thread's automation"
+  },
+  "outcomes": {
+    "r40": "Valid matched full40 first pair negative: TPOT +15.9986804414%, TTFTP95 +98.1964700028%; no repeat matrix admission.",
+    "r41": "Native official profiler stop crashed four workers; 40 actual requests failed; partial data preserved, no complete critical-path trace. Independent exact release verified.",
+    "r42": "False-only official profiler candidate passed CPU/HOST controls, but preallocation budget rejected; no NPU repair trial.",
+    "maintainer_skill": "Profiler lifecycle evidence integrated and published; 29-Skill structure only passed, functional acceptance incomplete."
+  },
+  "remaining": [
+    "Validate profiler lifecycle on actual native then algorithm arms under a newly authorized adequate window and newly frozen contracts; original failed/unexecuted evidence immutable.",
+    "Use valid device timelines to bound and test one causal performance treatment; unchanged R34/R40 routes remain closed.",
+    "Final-source G1-G4 three matched formal1024 performance repetitions with positive primary/tail gates.",
+    "Full127x3 each-arm natural-EOS paired quality under frozen 1024 nonthinking or2048 thinking ruler.",
+    "Actual disable/uninstall/restart lifecycle and independent ownership/release audit.",
+    "Paper-to-Ascend and 29 Skill functional acceptance."
+  ],
+  "next_action": "Retain evidence and disabled candidate. No further device work or automatic loop under this expired authorization. A future authorized window must start from current files, preserve negative results, establish whole diagnostic budget before implementation, and freeze a new contract/root without weakening acceptance gates.",
+  "full_goal_complete": false
+}
