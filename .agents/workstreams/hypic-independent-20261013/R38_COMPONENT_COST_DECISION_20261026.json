@@ -1,0 +1,252 @@
+{
+  "schema": "hypic-r38-observed-component-cost/v1",
+  "state": "VALID_COMPONENT_OBSERVATION_AUDITED_RELEASED_NO_SPEED_ACCEPTANCE",
+  "contract": "COMPONENT_BUDGET_R38_OBSERVE_R1_20261026_CONTRACT.json",
+  "controller": "exec-0000000000001a89",
+  "independent_audit": {
+    "operation": "exec-0000000000001aaf",
+    "path": "/cache/cch/hypic-independent-20261013/r38-observe-r1-independent-audit-20261026.json",
+    "sha256": "c7cbcb7eb14d8c2ec16d00c79dcde2b4c2829f2c5951439dbad5d5b31606fcf8",
+    "valid": true,
+    "exact_live_release_verified": true
+  },
+  "diagnostic_requests": 16,
+  "output_tokens": 1024,
+  "unscored_preparations": 4,
+  "source_bindings": 463,
+  "runtime_python": 438,
+  "actual_hot_covered": 16,
+  "isolation_samples": 250,
+  "components": {
+    "completed_fourrank_steps": 14,
+    "extra_receipt_records": 112,
+    "group_conditional_budgets": {
+      "c1_packed_prepare": {
+        "per_step_maxrank_exclusive_ns": 69556437810,
+        "per_step_maxrank_inclusive_ns": 70674319310
+      },
+      "c1_prefix_alignment": {
+        "per_step_maxrank_exclusive_ns": 1145004620,
+        "per_step_maxrank_inclusive_ns": 1145004620
+      },
+      "layer_finite_validate": {
+        "per_step_maxrank_exclusive_ns": 609080180,
+        "per_step_maxrank_inclusive_ns": 609080180
+      },
+      "mixed_native_prepare": {
+        "per_step_maxrank_exclusive_ns": 19551813100,
+        "per_step_maxrank_inclusive_ns": 19551813100
+      }
+    },
+    "per_rank": {
+      "0": {
+        "calls": 2912,
+        "pid": 58,
+        "root_union_ns": 88977063190,
+        "steps": 14
+      },
+      "1": {
+        "calls": 2912,
+        "pid": 59,
+        "root_union_ns": 89961908620,
+        "steps": 14
+      },
+      "2": {
+        "calls": 2912,
+        "pid": 60,
+        "root_union_ns": 89201809800,
+        "steps": 14
+      },
+      "3": {
+        "calls": 2912,
+        "pid": 61,
+        "root_union_ns": 89244085260,
+        "steps": 14
+      }
+    },
+    "per_step_maxrank_first_receipt_emit_ns": 16143330,
+    "per_step_maxrank_probe_metadata_ns": 415077000,
+    "per_step_maxrank_root_union_ns": 90537074460,
+    "raw_group_totals_not_service_time": {
+      "c1_packed_prepare": {
+        "calls": 2688,
+        "exclusive_observed_ns": 274789967200,
+        "inclusive_ns": 279273785370
+      },
+      "c1_prefix_alignment": {
+        "calls": 2688,
+        "exclusive_observed_ns": 4483818170,
+        "inclusive_ns": 4483818170
+      },
+      "layer_finite_validate": {
+        "calls": 3584,
+        "exclusive_observed_ns": 2359079960,
+        "inclusive_ns": 2359079960
+      },
+      "mixed_native_prepare": {
+        "calls": 2688,
+        "exclusive_observed_ns": 75752001540,
+        "inclusive_ns": 75752001540
+      }
+    },
+    "scope": "Observed selected original CPU calls include queued NPU waits and nested probe effects. Inclusive groups overlap; do not add group budgets or four ranks as service savings. No causal/removable/speed claim.",
+    "second_receipt_write_unmeasured": true
+  },
+  "diagnostic_makespan_seconds": 248.1379238399677,
+  "step_http_partition": [
+    {
+      "step": 5,
+      "ids": 1,
+      "measured_ids": 1,
+      "warm_ids": 0,
+      "unmapped": [],
+      "native_one_rows": 0,
+      "c1_max_observed_ns": 32165183040
+    },
+    {
+      "step": 6,
+      "ids": 2,
+      "measured_ids": 2,
+      "warm_ids": 0,
+      "unmapped": [],
+      "native_one_rows": 48,
+      "c1_max_observed_ns": 31586300
+    },
+    {
+      "step": 7,
+      "ids": 4,
+      "measured_ids": 4,
+      "warm_ids": 0,
+      "unmapped": [],
+      "native_one_rows": 96,
+      "c1_max_observed_ns": 5530967010
+    },
+    {
+      "step": 8,
+      "ids": 6,
+      "measured_ids": 6,
+      "warm_ids": 0,
+      "unmapped": [],
+      "native_one_rows": 144,
+      "c1_max_observed_ns": 43077230
+    },
+    {
+      "step": 9,
+      "ids": 8,
+      "measured_ids": 8,
+      "warm_ids": 0,
+      "unmapped": [],
+      "native_one_rows": 192,
+      "c1_max_observed_ns": 5831522850
+    },
+    {
+      "step": 10,
+      "ids": 7,
+      "measured_ids": 7,
+      "warm_ids": 0,
+      "unmapped": [],
+      "native_one_rows": 240,
+      "c1_max_observed_ns": 5496068980
+    },
+    {
+      "step": 11,
+      "ids": 9,
+      "measured_ids": 9,
+      "warm_ids": 0,
+      "unmapped": [],
+      "native_one_rows": 288,
+      "c1_max_observed_ns": 44128210
+    },
+    {
+      "step": 12,
+      "ids": 11,
+      "measured_ids": 11,
+      "warm_ids": 0,
+      "unmapped": [],
+      "native_one_rows": 384,
+      "c1_max_observed_ns": 45893510
+    },
+    {
+      "step": 13,
+      "ids": 12,
+      "measured_ids": 12,
+      "warm_ids": 0,
+      "unmapped": [],
+      "native_one_rows": 432,
+      "c1_max_observed_ns": 49983490
+    },
+    {
+      "step": 14,
+      "ids": 12,
+      "measured_ids": 12,
+      "warm_ids": 0,
+      "unmapped": [],
+      "native_one_rows": 480,
+      "c1_max_observed_ns": 34332170
+    },
+    {
+      "step": 1030,
+      "ids": 11,
+      "measured_ids": 11,
+      "warm_ids": 0,
+      "unmapped": [],
+      "native_one_rows": 480,
+      "c1_max_observed_ns": 30508030
+    },
+    {
+      "step": 1031,
+      "ids": 11,
+      "measured_ids": 11,
+      "warm_ids": 0,
+      "unmapped": [],
+      "native_one_rows": 480,
+      "c1_max_observed_ns": 29127000
+    },
+    {
+      "step": 1032,
+      "ids": 11,
+      "measured_ids": 11,
+      "warm_ids": 0,
+      "unmapped": [],
+      "native_one_rows": 480,
+      "c1_max_observed_ns": 29126460
+    },
+    {
+      "step": 1033,
+      "ids": 11,
+      "measured_ids": 11,
+      "warm_ids": 0,
+      "unmapped": [],
+      "native_one_rows": 480,
+      "c1_max_observed_ns": 28871880
+    }
+  ],
+  "observed_first_target_call": {
+    "rank": 0,
+    "step": 5,
+    "c1_max_call_ns": 32165183040,
+    "actual_measured_http_identity": true,
+    "compilation_cause_proven": false
+  },
+  "raw_sha256": {
+    "events.jsonl": "0e0b14b867fd4d1383e6ded8cc11fab343a05993b202e478e5c019e598a7cf6d",
+    "launch.json": "9b4e7ea433e34b41a36056a4bc9f7d24d177dc402c9c130ea71c7f9fee29c06c",
+    "performance-unit.json": "b261dd3c778f6800866ad93fe2a686af9ffdd2be3d7771dbafc0ee263a075347",
+    "release.json": "3ffa35bf2b26155774f767f0e01fa89e5c4e4bac96ac08376c7f69cb70835d5e",
+    "responses.json": "5af01172735f7bfecafc821226223a3c4c86653c3a77747b06272eefb092c5d2",
+    "result.json": "90efa2f97571de1efc4ea1de92a899a38580bb5082f692d5248fc50e753aad80",
+    "service-start.json": "43350403a91af920e76a02cb7708fa9108d3f5a268642e5ac256616077ccca8b",
+    "service.log": "bda5ff3b14936fcb4c980d1bb5630ae8b5db63c88cdf17d494f1eed86b0b639e"
+  },
+  "worker_sha256": {
+    "compact-worker-58.jsonl": "ee66551989e1edac0c7ed37d0c6fc79a111e0677c6d23b36de0fcfbf44ee4d05",
+    "compact-worker-59.jsonl": "1c63d3cb07a1e783312bac97e8d2b71372015e94b869de5e48961f275b1b7393",
+    "compact-worker-60.jsonl": "31cf0b0e2edd6a9ebcc31e24c0bc750850e0e35ed1169a5d1d8fbdb807844d31",
+    "compact-worker-61.jsonl": "754b3226e0911f87fec77bf6c1447f1dd22ed99573710f9a2c80acc3d7ccc376"
+  },
+  "interpretation": "Every observed selected step maps to measured HTTP IDs, none to four preparation IDs. Prefix and finite CPU-call spans are small conditional budgets; C1 preparation contains a32s first measured single-call peak and5.5s peaks. These are clues, not isolated/removable GPU time or causal compiler proof.",
+  "r37_formal_negative_unchanged": true,
+  "native_speed_gain_proven": false,
+  "full_goal_complete": false,
+  "next": "R39_TARGET_PATH_WARMUP_CAUSAL_PLAN_20261026.json"
+}

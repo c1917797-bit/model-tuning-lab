@@ -1,0 +1,77 @@
+{
+  "schema": "hypic-r39-single-variable-plan/v1",
+  "state": "MODEL_SELECTED_NOT_IMPLEMENTED_OR_RUN",
+  "objective": "Test whether first use of actual independent C1/C2 target path materially explains measured overhead; retain algorithm/math/events/finite/completion/ownership guards.",
+  "basis": {
+    "report": "R38_COMPONENT_COST_DECISION_20261026.json",
+    "raw_audit": {
+      "operation": "exec-0000000000001aaf",
+      "path": "/cache/cch/hypic-independent-20261013/r38-observe-r1-independent-audit-20261026.json",
+      "sha256": "c7cbcb7eb14d8c2ec16d00c79dcde2b4c2829f2c5951439dbad5d5b31606fcf8",
+      "valid": true,
+      "exact_live_release_verified": true
+    },
+    "first_target_call_rank0_seconds": 32.16518304,
+    "diagnostic_total_seconds": 248.1379238399677,
+    "conditional_first_call_fraction": 0.1296262277939602,
+    "causal_compilation_attribution": false
+  },
+  "pruned": [
+    {
+      "route": "prefix alignment/output expansion",
+      "reason": "R34 causal test already below threshold; R38 maxrank conditional group1.145s, <0.5pct of248.14s observation; do notexpand."
+    },
+    {
+      "route": "finite-guard synchronization removal",
+      "reason": "Existing single scalar wait/layer already aggregates all request tensors; actual0.609s conditional span <0.25pct, insufficient; preserveallfiniteguards."
+    },
+    {
+      "route": "batch native-one C1 cache snapshots",
+      "reason": "Source shows redundant per-row snapshots for layout.native_one_rows; keep as fallback clue only. No leaf-specific cost or causal evidence yet, so do notimplement as the next speed treatment."
+    }
+  ],
+  "single_variable": {
+    "name": "target_path_warmup_count",
+    "A1": 0,
+    "B1": 2,
+    "A2": 0,
+    "common_cache_preparations": 4,
+    "extra_target_warmups": "Two actual full32768/fixed1024 requests before measured unit; explicit separate from twoPIC+two native-prefix preparation requests. Sequential, same full target path, no R33warm48 or private shape oracle.",
+    "warm_inputs": "Derive from frozen first two cases using one distinct existing-vocabulary token at private position8192, strictly before each public segment. Preserve8192 native-prefix and exact16384 public segment, full length and relocation geometry. Freeze payload hashes; warm IDs cannot count as measured or become full-PDC repeated prompts.",
+    "algorithm_change": false,
+    "protocol_change": true,
+    "ruler_acceptance": "This is a causal protocol study, not algorithm speed acceptance. Old negative results stay unchanged. A later new matched G1-G4 formal ruler must explicitly declare preparation and measured-target warmup counts."
+  },
+  "protocol": {
+    "requests": 16,
+    "concurrency": 16,
+    "input_tokens": 32768,
+    "output_tokens": 1024,
+    "retries": 0,
+    "thinking": false,
+    "formal_performance": false,
+    "formal_quality": false,
+    "component_observer": true,
+    "step_durability": true,
+    "io_observer": false,
+    "prefix_terminal_only": false,
+    "pdc": false
+  },
+  "progression": {
+    "one_source_map_all_arms": true,
+    "original_root_per_arm": true,
+    "source_frozen_across_arms": true,
+    "A1_audit_release_before_B1": true,
+    "B1_audit_release_before_A2": true,
+    "full16_fourrank48C1_16C2_required": true,
+    "warm2_actual_hot_and_transport_proof_required_in_B": true,
+    "accept_effect_gain_percent_at_least": 5,
+    "max_control_drift_percent": 5,
+    "extra_warm_latency_recorded": true,
+    "first_call_does_not_prove_compilation": true,
+    "no_cause_claim_without_all_three_arms": true
+  },
+  "next": "Implement narrow source-bound HOST warmup-only wrapper and independent warm/16/source/interval/isolation/release audit. Focused inputs/no-retry/actual constructor gates and current pinned image reused only for unchanged runtime438; fresh physical admission required for each new root. No algorithm mutation.",
+  "absolute_stop_utc": "2026-10-26T06:36:27Z",
+  "full_goal_complete": false
+}
