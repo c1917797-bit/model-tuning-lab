@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R40_VALID_NEGATIVE_RELEASED_R41_OFFICIAL_PROFILER_HOST_READINESS_PENDING",
+  "execution_state": "R41_CAPTURE_HOST25_NATIVE_CONSTRUCTOR_IMAGE_CLASS_READY_G1_ADMISSION_PENDING",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -440,7 +440,7 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "R41_CRITICAL_PATH_DIAGNOSTIC_PLAN_20261026.json: reuse5 original official WorkerProfiler CPU controls1bd7 (recorded script/readiness), do NOT rerun them unchanged. Verify actual serving worker.step call path and profiler imported source; implement bounded HOST capture/workload/trace completeness+parser/error audit and actual base-consumed launch before new source-bound contracts/new roots/fresh matched admission. Keep438algorithm/math/finite/snapshot/ownership unchanged. C1 packing critical-path interference first, native fallback/graph/rank waiting second; diagnostic overhead is not speed. No new algorithm treatment until material critical-path budget. Full381eacharm quality and graph disable/uninstall/restart remain pending; old eager221 proof cannot transfer.",
+  "next_action": "Publish checkpoint; fresh ma/direct and physical0-3/all102ports/source/model/image/input/root/name/cache/remaining>=4500s admission, then G1only. Independent original transport/mechanism/source/isolation/release + realfourrankclosedparsedtrace audit before G3contract. Actual NPU trace/critical-path attribution remains pending. NewG3 only after genuineG1trace audit pathSHA; keep438/465/32+6 frozen; profile diagnostic only, don't reclassify R40negative. No repeated passedHOST/CPU controls.",
   "overnight": {
     "timezone": "Europe/Moscow",
     "end_local": "2026-10-17T09:48:09+03:00",
@@ -478,11 +478,10 @@
     ]
   },
   "publication": {
-    "state": "liveverified_previous_checkpoint",
-    "published_commit": "ca196648310792b361195bb9e49f2ea854fe92d2",
+    "state": "previous_checkpoint_live_verified_new_R41_capture_pending",
+    "published_commit": "550d0e8a79d14121ebdade639363385bd89eb1ee",
     "main_unchanged": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
-    "scope": "Actual R40 equalwarm full40 negative pair and exact release published/liveverified. New R41 read-only inventory/plan pending publication; no NPU profiler trace/quality/lifecycle/fullgoal acceptance.",
-    "tls_verification": "Per-command OpenSSL sslVerify=true; original host Git objects only."
+    "scope": "Official boundary5CPU controls/R41plan liveverified; new HOST25 capture/actual builder/imageclass stage pending coherent publication. No NPU trace/quality/lifecycle/fullgoal acceptance."
   },
   "math_reference": {
     "state": "cpu-reference-passed",
@@ -1571,10 +1570,16 @@
     "allow_repetition_matrix": false
   },
   "r41_critical_path": {
-    "state": "OFFICIAL_SOURCE_AND_FIVE_CPU_BOUNDARY_CONTROLS_PASS_CAPTURE_HOST_PENDING",
+    "state": "HOST25_ACTUAL_NATIVE_CONSTRUCTOR_AND_OFFICIAL_CLASS_LOAD_PASS_NO_NPU_TRACE",
     "plan": "R41_CRITICAL_PATH_DIAGNOSTIC_PLAN_20261026.json",
     "active_controller": null,
     "full_goal_complete": false,
-    "cpu_boundary_readiness": "R41_OFFICIAL_PROFILER_BOUNDARY_READINESS_20261026.json"
+    "cpu_boundary_readiness": "R41_OFFICIAL_PROFILER_BOUNDARY_READINESS_20261026.json",
+    "readiness": "R41_CAPTURE_HOST_READINESS_20261026.json",
+    "controller": "host_audits/r41_profile_controller.py",
+    "auditor": "host_audits/r41_profile_audit.py",
+    "contract": "PROFILE_R41_G1_R1_20261026_CONTRACT.json",
+    "contract_sha256": "4bf0a55c78898a1f363f0a546e254f90887fdf2d4c10dfdcdf0f8f42e6820d1a",
+    "host_tests": 25
   }
 }
