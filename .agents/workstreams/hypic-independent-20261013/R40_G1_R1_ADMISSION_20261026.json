@@ -1,0 +1,55 @@
+{
+  "schema": "hypic-r40-real-admission/v1",
+  "utc": "2026-10-26T03:34:22.137009+00:00",
+  "host": "Euler",
+  "head": "da63a2578200d987e73e212d83d03069786f97de",
+  "branch": "work/hypic-independent-20261013",
+  "source": {
+    "configuration_valid": true,
+    "device_run": false,
+    "controller_sha256": "2eec44609aaa4b3cc9861883dc8e85d29a1705c344b18ea94c9d7fdd14d3af0d",
+    "source_bindings": 465,
+    "host_source_bindings": 32,
+    "runtime_python": 438,
+    "active_manifest_sha256": "7d72170d3201b4698e9d8a0819248ad8d76d54ea0d761ad5a8f7f16a8dd210bb",
+    "policy": {
+      "group": "G1",
+      "algorithm_on": false,
+      "pdc_on": false
+    },
+    "graph_runtime": {
+      "candidate_enabled": false,
+      "capture_sizes": [
+        1,
+        4,
+        8,
+        16,
+        24,
+        32
+      ],
+      "compilation_mode": 3,
+      "cudagraph_mode": "FULL_DECODE_ONLY",
+      "official_compilation_source_sha256": "301f785491044b4428aec617b8a98161ab7ffc424fc2bfb0f2ab26bed6ee6913",
+      "official_debug_logging": false,
+      "profile": "selective-prefill-native-decode-v1"
+    },
+    "prerequisite": {
+      "report": "R39_THREE_ARM_DECISION_20261026.json",
+      "sha256": "8ce5d9e649d2ff5b3cca9ef7e4d5e018378e65823f90fb07468106f9b7037c91"
+    },
+    "scope": "Current accepted original mathematics, equal explicit2targetwarm+4preps/full40 ruler; no native speed claim before actual matched arms."
+  },
+  "model_config_sha256": "69db4eb7196bc8190813231b3018ca05d8c2e3abc7b1af19d55c157af44a9d9c",
+  "model_index_sha256": "a8ad2c26fb707ff8c245806315b03e3b4b74595528492423af5dae0ce39b4d9b",
+  "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "input_sha256": "50f528fa8eb439c56219b0161b16bf12fb2a8fd80effab87d89d725a4cc4c72f",
+  "previous_audit": null,
+  "new_root_absent": true,
+  "owned_name_absent": true,
+  "physical0_3_processes": [],
+  "physical0_3_foreign": [],
+  "ports_free": 102,
+  "cache_available_bytes": 10262728704,
+  "remaining_seconds": 10924.862993955612,
+  "device_allocation": false
+}
