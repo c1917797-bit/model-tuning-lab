@@ -1,0 +1,31 @@
+{
+  "schema": "hypic-r40-pair-reader-schema-fix/v1",
+  "state": "HOST6PASS_AND_ACTUAL_NATIVE_FULL_RAW_REPLAY_EQUAL_G3_PENDING",
+  "failure": {
+    "operation": "exec-0000000000001b85",
+    "original_source_sha256": "c4b748debd8b4e74e869fe178cd68d4396bdac7ad0f44a6cd7babe551fc2ebce",
+    "error": "Read-only base audit omits live_release_verified; prior comparator expected explicitFalse. All other complete fields equal."
+  },
+  "change": "Normalize only omitted/false read-only release marker when comparing full raw replay. Original audit MUST contain live_release_verified is True. Raw/timing/source/mechanism proofs unchanged; alteredraw ormissing/falseoriginalrelease rejected.",
+  "source_sha256": {
+    "host_audits/r40_pair_decision.py": "894f12c93964a2395e22181cecbfbb9a454ddfab1701f053f948fc87b9624791",
+    "host_audits/test_r40_pair_decision.py": "ca57e8baafadd472e631578d43a555359aa0d607bb26edba1054f3c6990f9938"
+  },
+  "focused_tests": {
+    "operation": "exec-0000000000001b88",
+    "new_passed": 6,
+    "previous13_unchanged": true
+  },
+  "actual_native_full_raw_replay": {
+    "operation": "exec-0000000000001b8a",
+    "equal": true,
+    "original_audit": "/cache/cch/hypic-independent-20261013/r40-g1-r1-independent-audit-20261026.json",
+    "original_audit_sha256": "ed04de3b64f0a2375ae2e26975e309ab50bc171af620fc8fd89380832b229441",
+    "actual_live_release_still_required": true
+  },
+  "excluded_from_bound465_common_32HOST": true,
+  "currently_running_source_unchanged": true,
+  "actual_G3_full_raw_replay_pending": true,
+  "new_device_allocation": false,
+  "scope": "Standalone HOST reader correction only; original G1/G3auditors/contracts/raw/465common+32HOST and experiment gates untouched. G3exact1b7f continues. No matched native speed/fullquality/lifecycle acceptance."
+}

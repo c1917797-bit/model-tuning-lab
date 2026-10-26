@@ -19,3 +19,21 @@ def test_bad_denominator_or_candidate_never_a_gain(bad):
         with pytest.raises(ValueError):calculate(*rows)
 def test_unit_and_metric_names_not_interchanged():
     with pytest.raises(ValueError):calculate({"tpot_p95_ms":100,"ttft_p95_ms":1000},{"weighted_tpot_ms":90,"ttft_p95_ms":900})
+
+@pytest.mark.parametrize("marker",["absent",False])
+def test_release_marker_readonly_schema_normalization_preserves_original_true(marker):
+    from host_audits.r40_pair_decision import verify_replay
+    original={"live_release_verified":True,"timing":{"weighted_tpot_ms":94.874},"raw_sha256":{"events":"abc"}}
+    replay={"timing":{"weighted_tpot_ms":94.874},"raw_sha256":{"events":"abc"}}
+    if marker!="absent":replay["live_release_verified"]=marker
+    verify_replay(original,replay)
+@pytest.mark.parametrize("case",["original_missing","original_false","replay_true","raw_changed"])
+def test_release_marker_normalization_does_not_relax_actual_release_or_raw_proof(case):
+    from host_audits.r40_pair_decision import verify_replay
+    original={"live_release_verified":True,"raw_sha256":{"events":"abc"}}
+    replay={"raw_sha256":{"events":"abc"}}
+    if case=="original_missing":del original["live_release_verified"]
+    elif case=="original_false":original["live_release_verified"]=False
+    elif case=="replay_true":replay["live_release_verified"]=True
+    else:replay["raw_sha256"]["events"]="changed"
+    with pytest.raises(ValueError):verify_replay(original,replay)

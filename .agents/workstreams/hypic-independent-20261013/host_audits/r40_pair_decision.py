@@ -15,6 +15,14 @@ def calculate(g1,g3):
     return {"state":"PROVISIONAL_FIRST_PAIR_POSITIVE_NOT_REPEATED_ACCEPTANCE"if proceed else"VALID_FIRST_PAIR_NO_NET_GAIN_OR_TAIL_REGRESSION",
         "delta_percent":delta,"allow_repetition_matrix":proceed,"comparison":"G3/G1-1; lower is better",
         "first_pair_only":True,"full_goal_complete":False}
+def verify_replay(original,replay):
+    if(original.get("live_release_verified")is not True
+       or replay.get("live_release_verified")not in(None,False)):
+        raise ValueError("original actual live release and read-only replay semantics required")
+    expected=copy.deepcopy(original);expected.pop("live_release_verified")
+    observed=copy.deepcopy(replay);observed.pop("live_release_verified",None)
+    if observed!=expected:raise ValueError("complete original raw replay differs")
+
 def run(contracts,audits):
     if len(contracts)!=2 or len(audits)!=2:raise ValueError("two actual original arm contracts/audits required")
     root=Path.cwd().resolve()
@@ -37,9 +45,8 @@ def run(contracts,audits):
            or original.get("live_release_verified")is not True
            or original.get("r40_launch_identity",{}).get("group")!=group):
             raise ValueError("actual complete independently valid/released arm required")
-        expected=copy.deepcopy(original);expected["live_release_verified"]=False
         replay=json.loads(json.dumps(audit(cp,live_release=False),sort_keys=True))
-        if replay!=expected:raise ValueError("complete original raw replay differs: "+group)
+        verify_replay(original,replay)
         cs.append(c);reports.append(original);refs.append({"group":group,"contract":cp.name,
             "contract_sha256":sha(cp),"audit":str(ap),"audit_sha256":sha(ap),"full_original_raw_replay":True})
     keys=("image","model","model_config_sha256","cpu_set","physical_npus","tp","port","hccl_ports",
