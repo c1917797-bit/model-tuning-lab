@@ -1,0 +1,15 @@
+{
+  "schema": "hypic-r40-pair-decision-helper-readiness/v1",
+  "state": "HOST13PASS_ACTUAL_TWO_ARM_RAW_REPLAY_PENDING",
+  "source_sha256": {
+    "host_audits/r40_pair_decision.py": "c4b748debd8b4e74e869fe178cd68d4396bdac7ad0f44a6cd7babe551fc2ebce",
+    "host_audits/test_r40_pair_decision.py": "90cb9e57e4b8e4c8a82c03b53a039e6e67b503dec803fa114a068731eca4c452"
+  },
+  "operation": "exec-0000000000001b61",
+  "passed": 13,
+  "predeclared_plan_commit": "b18abb1d57ff714bca4c454d17bfcf5306417fd3",
+  "source_map_bound_in_device_contract": false,
+  "inference_mounted_or_imported": false,
+  "bound438runtime465common32HOST_unchanged": true,
+  "scope": "StandaloneHOSTonly pair tool excluded from frozen launch closure. Requires two actual original valid+released audits, fullrawreplay, same465/32/model/input/ruler andnativepredecessorSHA; primaryTPOT andTTFTP95both required by pre-G1plan. Warm costsreported. NoactualG3/repeated/native/fullquality/lifecycleclaim yet."
+}

@@ -1,0 +1,138 @@
+{
+  "schema": "hypic-r40-arm-audit-summary/v1",
+  "state": "FORMAL40_EQUALWARM_NATIVE_VALID_AUDITED_EXACT_RELEASED_NO_PAIR_CLAIM",
+  "group": "G1",
+  "contract": "FORMAL_WARM_R40_G1_R1_20261026_CONTRACT.json",
+  "contract_sha256": "51cd249487e7928d4ce58f8ebf0cb017d4da5d10cb4a396188f79fa34115c07e",
+  "controller": "exec-0000000000001b3f",
+  "controller_exit": 0,
+  "independent_audit": {
+    "operation": "exec-0000000000001b64",
+    "path": "/cache/cch/hypic-independent-20261013/r40-g1-r1-independent-audit-20261026.json",
+    "sha256": "ed04de3b64f0a2375ae2e26975e309ab50bc171af620fc8fd89380832b229441",
+    "valid": true,
+    "exact_live_release_verified": true
+  },
+  "source_bindings": 465,
+  "runtime_python": 438,
+  "host_source_bindings": 32,
+  "timing": {
+    "requests": 40,
+    "tpot_p95_ms": 118.62639523451435,
+    "ttft_p95_ms": 81566.43428001553,
+    "unique_ids": 40,
+    "weighted_tpot_ms": 94.87418024147019
+  },
+  "target_warmups": {
+    "actual_target_warmups": 2,
+    "common_cache_preparations": 4,
+    "extra_target_warmup_seconds": 73.43525203992613,
+    "formal40_transport_lifecycle_valid": true,
+    "measured_makespan_seconds": 354.7254291600548,
+    "measured_plus_target_warmup_seconds": 428.1606811999809,
+    "measured_request_ids": [
+      "cmpl-85b52f81781f9422",
+      "cmpl-b8a36458cb9db35d",
+      "cmpl-816e1ad102dff473",
+      "cmpl-96e6de3425ef6f96",
+      "cmpl-af8ec2654d748768",
+      "cmpl-9bdc486902a40bfe",
+      "cmpl-923f54e635f4e031",
+      "cmpl-94f4f1465c31cbae",
+      "cmpl-88fa1546eff4e9a3",
+      "cmpl-9516db8e8a04db31",
+      "cmpl-a644f507f1794375",
+      "cmpl-90a1bb81e246f16a",
+      "cmpl-9f3858717964f415",
+      "cmpl-b6463ccf5f0a0550",
+      "cmpl-ba9d7a0755fab013",
+      "cmpl-ba53af53d0f43113",
+      "cmpl-9a14fecd24a86570",
+      "cmpl-a487b2aada7dae1d",
+      "cmpl-af97be5606f1ffcf",
+      "cmpl-b390b9ba8f59b525",
+      "cmpl-960561206edd895f",
+      "cmpl-8ade209878feb8a7",
+      "cmpl-9bcb1047e9fc8a9b",
+      "cmpl-81ab2e8df3c0a2f3",
+      "cmpl-a6236b5ccc5e73f6",
+      "cmpl-ba92a8bb19e6f794",
+      "cmpl-b9ffb36ed14c9d4a",
+      "cmpl-b5077aa348de96a0",
+      "cmpl-ae20abd5aa0af4fb",
+      "cmpl-95c0b42acf73ea9f",
+      "cmpl-a00db01ddad826c3",
+      "cmpl-a60db043879539ea",
+      "cmpl-888731727e0fc2ea",
+      "cmpl-a30dd64382ddfbed",
+      "cmpl-8c1a67107a80efcc",
+      "cmpl-9f24f63b9c0cfb21",
+      "cmpl-bed461fbebb3c07a",
+      "cmpl-95e1cf1127c2aaad",
+      "cmpl-a8509112ba915f90",
+      "cmpl-88411ef3de0903d3"
+    ],
+    "scope": "One matched ruler arm; not paired native speed/fullquality/lifecycle acceptance.",
+    "warm_request_ids": [
+      "cmpl-9ff2eab70660cdf1",
+      "cmpl-aba2f26943472b3d"
+    ]
+  },
+  "graph": {
+    "compile_complete_lines": [
+      207
+    ],
+    "replay_directly_observed_rank": 0,
+    "replay_lines": [
+      284
+    ],
+    "scope": "actual native INFO replay; capture compatibility proved by same-source R29 canary, not per-token/all-rank completed replay counts",
+    "service_log_sha256": "46f473d7f924985086fc66948b611e46f3a993ddfb43e7ac39fcd95ca61a25e7",
+    "workers": {
+      "0": 57,
+      "1": 58,
+      "2": 59,
+      "3": 60
+    }
+  },
+  "physical": {
+    "ranks": {
+      "0": {
+        "host_pid": 1164873,
+        "inner_pid": 57,
+        "physical_npu": 0
+      },
+      "1": {
+        "host_pid": 1164874,
+        "inner_pid": 58,
+        "physical_npu": 1
+      },
+      "2": {
+        "host_pid": 1164875,
+        "inner_pid": 59,
+        "physical_npu": 2
+      },
+      "3": {
+        "host_pid": 1164876,
+        "inner_pid": 60,
+        "physical_npu": 3
+      }
+    },
+    "scope": "explicit live PID/cgroup/physical join only; source and continuous isolation independently required"
+  },
+  "isolation_samples": 285,
+  "raw_sha256": {
+    "events.jsonl": "b34b3cc651d495c364c3c7cdfc906cf783aff564a592a00c40bbf20425611e45",
+    "launch.json": "27248ba2cc02a2ea52c50b33bf62a9fd1076860dc9f67652924c77a0c1a32f50",
+    "performance-unit.json": "47c450650b09d93ba69dd26a36e27244f18bdf6d80a4a546e792e9397a552cf2",
+    "release.json": "68241d6c7f3f67adc79f803ee5b6f333d17254946d816444ed044ed19a572003",
+    "responses.json": "639fd9fbd65aa0e151dce2fbfbccc9734ac746dd25da1cd03f689fdc7f0f28ce",
+    "result.json": "67124ac02a4d5e539c29a44989e4ca7387605d8181285380ff26cd3bd79f9659",
+    "service-start.json": "d23ba9f91a3482ea6369c05775704a192caa470ee838ed279c2bf4ca639e21c5",
+    "service.log": "46f473d7f924985086fc66948b611e46f3a993ddfb43e7ac39fcd95ca61a25e7"
+  },
+  "worker_sha256": {},
+  "native_algorithm_absent": true,
+  "scope": "One actual current-source full40/c16/fixed1024 equal2targetwarm+4preps G1 or G3 arm; warm cost explicitly reported. Paired/repeated native speed/PDC/fullquality/lifecycle separate.",
+  "whole_goal_complete": false
+}
