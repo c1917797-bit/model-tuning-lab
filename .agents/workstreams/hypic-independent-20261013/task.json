@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "CORE20_LOADER14_HOST_PASS_NO_IMAGE_OR_NPU_YET",
+  "execution_state": "HOST18_IMAGE_MANUAL_AUTO_AND_ACTUAL_CONSTRUCTOR_PASS_NO_NPU",
   "r30_first_pair": {
     "state": "FIRST_PAIR_VALID_NO_NET_SPEED_GAIN",
     "plan": "R30_GRAPH_FIRST_PAIR_PLAN_20261025.json",
@@ -1389,7 +1389,7 @@
     "raw_decision_sha256": "afddc368e51119d600d611ad401cdd99707e049521b1a2524d486d1b6141a71b"
   },
   "r38_component_budget": {
-    "state": "CORE20_LOADER14_HOST_PASS_NO_IMAGE_OR_NPU_YET",
+    "state": "HOST18_IMAGE_MANUAL_AUTO_AND_ACTUAL_CONSTRUCTOR_PASS_NO_NPU",
     "plan": "R38_COMPONENT_BUDGET_PLAN_20261026.json",
     "active_controller": null,
     "full_goal_complete": false,
@@ -1405,6 +1405,13 @@
       "host_audits/test_r38_component_cost_budget.py": "97b84e32973b8e59553542bce081b6b36059b38f57103ccea69185aacf11a028",
       "host_audits/test_r38_loader_switch.py": "e387dc2c870b9131860f5b9503e54dc3a5963dbdd686185362a3599718ea6f8f",
       "independent_component_cost_budget.py": "95aef23f08719377a68171f71486e0072573d2c761c337ec6afe9821c5963a7c"
-    }
+    },
+    "host_image_readiness": "R38_HOST_IMAGE_READINESS_20261026.json",
+    "execution_tests": 18,
+    "contract": "COMPONENT_BUDGET_R38_OBSERVE_R1_20261026_CONTRACT.json",
+    "common_source_bindings": 463,
+    "runtime_python_sources": 438,
+    "controller": "host_audits/r38_component_controller.py",
+    "auditor": "host_audits/r38_component_audit.py"
   }
 }

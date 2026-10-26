@@ -1,0 +1,47 @@
+{
+  "schema": "runtime-monkeypatch-delivery/v1",
+  "name": "hypic-component-cost-budget-r38",
+  "status": "draft",
+  "source_contract": {
+    "image_digest": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "framework_version": "vllm0.23.0+empty/vllm-ascend0.23.0/torch-npu2.10.0.post4",
+    "cann_version": "9.1.0 (pinned-image metadata)",
+    "live_module": "graph_candidate.worker_loader",
+    "live_object": "enable",
+    "source_sha256": "7a0a9532126b0b5cb8f5e9dbb02a840512a0c2dfd7ad885a100493ed81dc30a9"
+  },
+  "treatment": {
+    "switch": "INDEPENDENT_COMPONENT_COST_BUDGET",
+    "enabled_value": "1",
+    "default_disabled": true,
+    "single_primary_variable": true,
+    "diagnostic_only": true,
+    "patch_file": "patch.py",
+    "patch_sha256": "79f745e34a3822da013f339a08760e32ee7222772537e87bb810b98b88e90413",
+    "loader_file": "sitecustomize.py",
+    "loader_sha256": "67881e71ff0bb7f0771354c04b33757757c700b33e150df747ae2b215dbc76bd",
+    "launcher_file": "run_with_patch.sh",
+    "launcher_sha256": "0766ec9b0a439dadefb824600b57fc042593d65182f9a7aaf65fbb809a408e50",
+    "entrypoint": "patch:enable"
+  },
+  "activation": {
+    "marker_prefix": "r38_component_budget_step",
+    "required_roles": [
+      "TP rank0",
+      "TP rank1",
+      "TP rank2",
+      "TP rank3"
+    ],
+    "disabled_control_required": true
+  },
+  "rollback": {
+    "disable_command": "INDEPENDENT_COMPONENT_COST_BUDGET=0 INDEPENDENT_GRAPH_MANIFEST=/probe/COMPONENT_BUDGET_R38_OFF_MANIFEST_20261026.json ./run_with_patch.sh \"$@\"",
+    "uninstall_command": "INDEPENDENT_GRAPH_HYPIC=0 INDEPENDENT_COMPONENT_COST_BUDGET=0 ./run_with_patch.sh \"$@\""
+  },
+  "evidence": {
+    "experiment_id": "hypic-component-cost-r38-20261026",
+    "branch": "work/hypic-independent-20261013",
+    "commit": "060c5b4820f2cac590019e34b3cb67362fc34bb7",
+    "scope": "HOST34 control cases only; pinned-image startup and actual component install/restore next; no NPU cost or speed accepted."
+  }
+}
