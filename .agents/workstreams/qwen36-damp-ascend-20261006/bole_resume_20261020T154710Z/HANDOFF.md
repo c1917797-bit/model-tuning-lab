@@ -1,5 +1,64 @@
 # BOLE continuation, 2026-10-20
 
+## Current source-entry repair — 2026-10-27
+
+The current human window is [WINDOW_AUTHORIZATION_20261026.json](renew24_20261026T184709Z/WINDOW_AUTHORIZATION_20261026.json): original project start1792828303 is preserved, cutoff1793126829 (2026-10-27T18:47:09Z), physical4--7 only. Older admission statements below are history. The complete5400+180 model phase's latest admission1793121249 has passed; do not shrink its budget, renew the clock, or launch it under an expired admission horizon.
+
+Latest real native source preparation was MB exec-0000000000000123, terminal exit1 after144.461s, not an observation timeout. Its exact PID428984/startticks123850411 is absent. The first fault was the strict actual-control forward-source guard at _software_phase_copy:327; source-short8/template/BOUND/model output were not produced and no model was started. See [NATIVE_ATTEMPT_TERMINAL.json](renew24_20261026T184709Z/short8_budget5400_prepare_v1/NATIVE_ATTEMPT_TERMINAL.json),2717B/SHA25674d2c9864976c5f85ee4f63f1cfe58e6311c335b91931aa3eb0bfadd16868644.
+
+The minimal successor synchronizes four embedded budget integers10800->5400 while preserving the original strict source guard and complete byte inverse. It is STATIC ONLY; real producer-path validation is still pending. Its [SOURCE_REPAIR_STATIC_ONLY.json](renew24_20261026T184709Z/short8_budget5400_forward_fix_v1/SOURCE_REPAIR_STATIC_ONLY.json) is5472B/SHA2566cae655a0e82eeaaf04652fa1a83f24a72c9e1bd149ac4e55381d4d822455d19. Three approximate local control fixtures failed and are retained; none supplies a native PASS. After this documentation checkpoint, any source-only continuation must capture the real new HEAD and use a fresh non-overwriting output. It grants no model/NPU, cleanup, deadline or numerical-gate relaxation.
+
+## Fused GDN matrix192 checkpoint — 2026-10-27 (operator only)
+
+- Highest new completed scope: actual physical NPU4 / guest0 replay of 192 unique
+  saved G1/O0 cases, covering 48 GDN layers from each of four source TP ranks.
+  This is four-rank *data*, not a new TP4 execution. The independent audit checked
+  every child result: 18 original checks per case (3456), exactly one actual
+  candidate NPU call per case, and 192/192 bitwise-unchanged inputs. Library,
+  adapter, source and rank/layer/capture/native-frame Ref bindings all matched.
+- The independent FP64/original-state judgement and original conjunctive
+  tolerances are unchanged. Worst relative L2: P 2.36804e-8, U 1.22921e-6,
+  Y 4.24593e-7, selected state 1.58225e-7. Raw outputs total 611697600 bytes;
+  inode-deduplicated allocated output is 615116800 bytes, below the frozen
+  805306368-byte cap. Retain all original failures and error receipts.
+- Structural lesson: the real payload has 64 mixed-layer captures keyed by
+  model layer and a 48-entry GDN-native list. Use the independently checked
+  real four-frame join, never the same integer for both domains. V4's layer4
+  precheck failure selected an FA capture and made no candidate call for that
+  failed case. The final V5 selector was exercised on all 192 actual inputs in
+  a device-free 4.668297-second check; this was identity/schema evidence only.
+- Repeated-entrypoint lesson: the original main exits through SystemExit.
+  Actual two-successive-call and refusal controls established the strict
+  receiver contract. A generator had overwritten a repaired fragment; review
+  and bind the final emitted bytes, not the proposed fragment.
+- Storage route CLOSED for this measured candidate: compact clone saved zero
+  bytes on the real frame (100238119 bytes before and after, identical SHA;
+  logical bytes equal unique backing-storage bytes). Keep the original saver,
+  consumer, aliases/strides and RAW caps. This single-frame finding does not
+  establish the full long160 retention budget.
+- Boundaries remain explicit: no new model/TP4 short8 lifecycle qualification,
+  long160 qualification, whole-model throughput or task accuracy is claimed.
+  Goal remains incomplete. Continue only the separately admitted native model
+  successor; do not repeat this unchanged operator matrix. This patch grants
+  no new execution, cleanup, storage or deadline authority. The current batch
+  authority's cutoff remains 1793126829; re-read actual owner/queue/authority
+  before any next admission. The following older checkpoints retain their
+  historical scope and are not current launch permission.
+
+Evidence (exact complete Refs are in the pending patch manifest):
+- [Independent actual192 audit](renew24_20261026T184709Z/fused_gdn_matrix_independent_review_v1/V5_ACTUAL_RESULT_AUDIT.json):
+  6728 B, SHA256 08d6f16066c67c7d5d913ce1dff4603a855751d9a3eb8d1d4500faccc3285c33.
+- [Actual-selector CPU owner](renew24_20261026T184709Z/ABI_SELECTOR_MAIN_v5/OWNER_RESULT.json):
+  784 B, SHA256 73844a6b522c734a907c6e338b50c468ea8403ae298edebe4e9cdb159634b08b.
+- [Final-driver exit controls](renew24_20261026T184709Z/fused_gdn_matrix_gate_v4/ACTUAL_RECEIVER_CONTROLS.json):
+  1131 B, SHA256 a062f548500b724a16561fe0126dd2356ebbe75029d8d2c693f0398d885fad20.
+- [Preserved generator/exit failure and inverse](renew24_20261026T184709Z/fused_gdn_matrix_gate_v4/SOURCE_DELTA_REVIEW.json):
+  2207 B, SHA256 ed79e40ec03eae221e96885a3ec376f77294eae73dd7a7a814684232b2eeca25.
+- [Compact-clone route closure](renew24_20261026T184709Z/long160_tensor_storage_audit_v2/CONCLUSION.json):
+  2108 B, SHA256 52922debf8d098b7cb7afae594747d950774476e0d7475373a5c0d47506c6846.
+- [MAIN saved final release](renew24_20261026T184709Z/fused_gdn_matrix_MAIN_v5/FINAL_RELEASE.json):
+  626 B, SHA256 42095f8f49f763bae4a74d3a93eb41cfce7d3a4363c8a14b4e92a3b2687aca67.
+
 ## BOLE maintainer checkpoint — 2026-10-26 (source-only)
 
 - Long-term goal is not complete. There is no accepted formal performance or task-accuracy result from this continuation.

@@ -62,7 +62,61 @@ Concrete evidence, failures and limitations are in the [2026-10-15 case](
 ../../../../docs/knowledge-base/ascend-infra/cases/runtime-binding-and-single-factor-evidence-20261015.md).
 These gates do not replace whole-model matched performance and task accuracy.
 
+## Validate the boundaries, not only the component
+
+- Keep fixture modules out of the production import search path. Check the
+  actual imported file and current configuration in a cold process; when a
+  failure depends on collection order, reproduce it before repairing isolation.
+  Retain semantic assertions and then rerun the affected same-image suite.
+- Exercise the producer-to-consumer contract using the actual report schema
+  and CLI/output rules. A correct inner result can still be rejected by a stale
+  outer schema predicate or by placing input inside an output that must not yet
+  exist. Repair that boundary explicitly, without renaming old reports or
+  changing the independent mathematics.
+- A reduced diagnostic must preserve launch geometry when geometry may explain
+  the failure: full shape/stride, sequence metadata and grid first, compact saved
+  evidence second. A device-synchronization timeout alone does not identify the
+  failing kernel or establish an algorithmic no-go.
+
+These checks target demonstrated integration failures; they are not a reason
+to repeat already qualified, unchanged algorithm matrices or grow an unrelated
+preflight framework.
+
 For native-prefill/recurrent precision boundaries, verification-only streamed
 raw checks and non-atomic compiler-child observation, see the
 [native-boundary and saved-raw recovery supplement](
 ../../../../docs/knowledge-base/ascend-infra/cases/native-boundary-and-savedraw-recovery-20261015.md).
+
+## Saved-frame identity and repeated-entrypoint seams
+
+When extending a saved-frame replay across mixed model layers, distinguish a
+capture map's actual model-layer keys from a recurrent-only list's ordinal
+indices. Join them from the same pinned real payload and its metadata for each
+source rank. Retain kind, rank, generation, ordinal and model-layer guards;
+neither iteration order nor a filename is an identity proof.
+
+For a changed selector, call that exact emitted runtime selector once on its
+real saved inputs in the pinned image without devices before another device
+admission. This is a cheap schema/identity check, not mathematical or NPU
+qualification. Do not repeat unchanged mathematical suites for this purpose.
+
+A wrapper around a process-oriented entrypoint must verify its actual exit
+protocol across at least two consecutive calls and negative cases. Where the
+original entrypoint raises SystemExit, accept only the declared exact integer
+success code; reject bool, None, strings, nonzero codes and unexpected normal
+return, and preserve unrelated exceptions. Initialize process-wide thread
+settings once rather than once per case.
+
+Check the final emitted driver, not only a repaired fragment or generator.
+After the last generation step, verify its byte/AST delta and exact Ref before
+dispatch; regeneration can reintroduce a rejected body. Preserve the original
+oracle, tolerances, input-immutability checks, failed outputs and private error
+evidence. A component matrix remains component evidence even when every case
+passes; the service/state lifecycle still needs its own actual qualification.
+
+For a configuration transform that retains embedded old/new source snapshots,
+change the corresponding configuration tokens in every snapshot and preserve
+the strict source equality and whole-byte inverse. Validate the actual producer
+call path and its original preprocessing order: an isolated helper fixture or
+CLI help can pass while the real caller still fails. A static inverse alone is
+not evidence that native source preparation or model admission succeeded.
