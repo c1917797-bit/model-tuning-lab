@@ -120,3 +120,17 @@ the strict source equality and whole-byte inverse. Validate the actual producer
 call path and its original preprocessing order: an isolated helper fixture or
 CLI help can pass while the real caller still fails. A static inverse alone is
 not evidence that native source preparation or model admission succeeded.
+
+For EOS lifecycle adaptation, preserve the pinned engine's separate worker,
+scheduler and HTTP domains: worker bookkeeping may retain sampled suffix tokens
+that the scheduler excludes from the returned output. Do not invent a stricter
+worker-prefix rule or fabricate a finish reason from a finished-ID alone. Check
+the native-held request, typed finished-ID set, effective sampling parameters,
+actual HTTP prefix/termination and every rank's retirement independently.
+Unmodified native stop logic can be an independent software oracle, while a
+field fixture that bypasses the native constructor is not native ABI evidence.
+
+Before adding instrumentation, prove what existing successful verify, publish,
+ACK and closed-frame receipts already establish in the pinned execution mode.
+Reuse existing per-request calibration witnesses where sufficient; keep graph
+replay and fallback scopes explicit, and avoid redundant per-kernel I/O.

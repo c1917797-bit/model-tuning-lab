@@ -1,5 +1,48 @@
 # BOLE continuation, 2026-10-20
 
+## Current window closed — 2026-10-27
+
+The human cutoff1793126829 (18:47:09Z) has passed without a new grant. No new
+experiment is admitted. Fresh close at18:48:31Z found all exact owned source,
+backup and publish processes terminal, the two last owned containers stopped
+with PID0, and no processes on physical4--7. NPU0--3 were not modified.
+Full-window utilization is UNMEASURED, not inferred from this snapshot.
+
+Highest new scopes are the operator192 replay below and actual native source
+preparation MB016a: exit0 in155.826s,473 files checked, strict render/inverse/
+materialize returned. Its template is1751706B/SHA256
+3daaa6050f2829bd74260ebe45694ae59e621cef29fe4a729764c13c96c82649.
+There is still no current SOURCE_BOUND, COMMANDS, model output, paired
+performance or final task-accuracy acceptance. Both binding and command writing
+require the complete5400+180 phase to fit the active clock; do not bypass this
+gate or reuse the expired template as a new authorization.
+
+EOS retirement source now has31 standard-Python comparisons to unchanged native
+stop logic; the calibration metadata join has21 synthetic/source controls.
+Neither proves native-constructor ABI, actual task activation, HTTP/TP4 joins or
+full15525-question lifetime. The EOS/task caller integration remains pending.
+Preserve the existing dynamic N/N+1 lifecycle when composing these thin deltas;
+do not replace the whole task owner with a shorter-lived performance owner.
+
+Old55 backup and independent content/ACL/xattr/hardlink verification completed,
+but no container or raw cache copy was deleted. The extra64-file/768MiB raw
+archive proposal is unapproved; unknown old quota is not an available balance.
+Stable cache capacity and a new real human window are required before model
+admission. Automatic-task pause was attempted, but the supported API rejected
+the missing full configuration; pause is unconfirmed. Do not claim it paused
+merely because experiments closed.
+
+All generated evidence remains on the canonical host, outside Git. Resolve
+these small indices there: renew24_20261026T184709Z/window_close_20261027/
+WINDOW_CLOSED.json (5999B/SHA256
+c6e4cf2523554dbc50681c685a7ddf7b437d22230d42b3880188713eb18f514b),
+EXECUTION_SUCCESSOR_PREPARATION_INDEX_20261027.json, and the source-only original
+API continuation index under short8_budget5400_forward_fixed_prepare_v2/
+final_binding_readonly/. Capture the real current HEAD for a newly authorized
+source. Start the independent short8 gate after lawful binding/resources;
+prepare the later EOS/full-task work in parallel, rather than delaying that
+gate. No goal completion or paper-wide no-go is established.
+
 ## Current source-entry repair — 2026-10-27
 
 The current human window is [WINDOW_AUTHORIZATION_20261026.json](renew24_20261026T184709Z/WINDOW_AUTHORIZATION_20261026.json): original project start1792828303 is preserved, cutoff1793126829 (2026-10-27T18:47:09Z), physical4--7 only. Older admission statements below are history. The complete5400+180 model phase's latest admission1793121249 has passed; do not shrink its budget, renew the clock, or launch it under an expired admission horizon.
