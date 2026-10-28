@@ -1,0 +1,62 @@
+{
+  "schema": "hypic-r44-bounded-profiler-successor-plan/v1",
+  "state": "PROSPECTIVE_SOURCE_AND_CONSTRUCTOR_VALIDATION_REQUIRED_NO_DEVICE_RUN",
+  "reason": {
+    "operation": "exec-000000000000019d",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g3-full-offline-admission-rejection-20261028.json",
+    "sha256": "45c69bdb17c69d26a2c9162d0e4de869157f656e40d6ad58263071840085ac28"
+  },
+  "previous_case_preserved": "R43G1 fulltrace valid; R43G3 full40 mechanism/math/release valid but strictfulltrace unaccepted; keep all raw/probe data and original gates.",
+  "single_variable": {
+    "old_max_iterations": 7,
+    "new_max_iterations": 2,
+    "stop_semantics_required": "third step() stops profiler BEFORE third model execute; do not claim3 completed captures"
+  },
+  "unchanged": {
+    "model": "27B",
+    "physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tp": 4,
+    "distributed_C3": false,
+    "runtime_sources": 438,
+    "common_bindings": 465,
+    "retained_host_sources": 32,
+    "algorithm_math_source_unchanged": true,
+    "preparations": 4,
+    "target_warmups": 2,
+    "measured_requests": 40,
+    "concurrency": 16,
+    "input_tokens": 32768,
+    "fixed_output_tokens": 1024,
+    "profiler_stack": false,
+    "no_PDC": true,
+    "quality_criteria_unchanged": true,
+    "source_math_finite_hot_physical_isolation_and_exact_release_required": true,
+    "canonical_trace_limit_bytes": 268435456,
+    "canonical_tree_limit_bytes": 2147483648,
+    "absolute_stop_utc": "2026-10-29T19:15:24Z"
+  },
+  "sizing": {
+    "actual_R43_one_rank_trace_bytes": 422048632,
+    "proportional_trace_bytes_2_of_7": 120585323.42857143,
+    "actual_R43_one_rank_total_bytes": 776417763,
+    "proportional_four_rank_bytes_2_of_7": 887334586.2857143,
+    "estimate_not_guarantee": true,
+    "actual_file_gates_still_required": true
+  },
+  "required_next": [
+    "New R44 HOST envelope/source bindings/contracts/new roots for BOTH native and G3; retain old R43/R42 files unchanged.",
+    "Reuse reviewed generic launch/audit tools, no old HYPIC algorithm/operator/runner/scheduler imports.",
+    "Focused guards prove only profiler count changes, callbacks restore on failures, actual constructor emits count2 and exact source/owner/raw paths before allocation.",
+    "Freeze matched same-image CPU postprocessing, exact Decimal/all-record preservation and independent actualrank+alloriginal guards; no cap increase or discarded events.",
+    "New freshma/direct/source/model/image/input/empty0-3/102ports/newroot/storage/full pipeline budget before each device start.",
+    "Actual native capture/independent full trace+release accepted before matched G3; not reuse R43seven-step as a two-step control.",
+    "No automatic additional cap decrement, unchanged rerun or matrix expansion if this bounded successor fails."
+  ],
+  "purpose": "Recover bounded comparable diagnostic evidence; not an algorithm or service-performance improvement.",
+  "full_goal_complete": false
+}

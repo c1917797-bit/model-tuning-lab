@@ -1,0 +1,106 @@
+{
+  "schema": "hypic-r43-g3-postprocess-decision/v1",
+  "state": "MECHANISM_MATH_RELEASE_VALID_TRACE_VOLUME_ADMISSION_REJECTED",
+  "raw_capture": {
+    "schema": "hypic-r43-g3-raw-terminal/v1",
+    "state": "RAW40_VALID_OWNER_RELEASED_INDEPENDENT_AUDITS_PENDING",
+    "original_controller": "exec-000000000000018c",
+    "original_controller_observation": "operation_not_found is not terminal evidence; actual raw terminal + no matching controller process + exact ownedCID absent establish completed capture",
+    "contract_sha256": "1ea0d7c494b13ad36e741016dbb61bf11501280e27be42e7e11e579e026975de",
+    "raw_root": "/opt/host/vnf/cch-hypic-independent-20261028/critical-path-r43-g3-r1-20261028",
+    "result_sha256": "8014a9f1fa6aaf58e7624b32d9af3a9e4087f6a624c04cfd95377de1454983ef",
+    "release_sha256": "e4ab12d2dac063e5e5021cf6839903308e272b761b86c073697c3870e2dc250d",
+    "performance_unit_sha256": "dc6a402f9b9765fde1206870f064060e7a9b551e0039ea28be2d86e37de09d75",
+    "events_sha256": "c8614aa9e7b5220a62032702867f23720336d7cc39cfcd67e6bb6000db9d7dd7",
+    "result": {
+      "valid": true,
+      "error": null,
+      "guard_errors": [],
+      "isolation_samples": 308,
+      "responses": 40,
+      "worker_pids": [
+        826115,
+        826116,
+        826117,
+        826118
+      ],
+      "physical_devices_seen": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "release": {
+        "owned_container": "cb2e49a8ea471cbf113de79327bf3302a227d340eb3def040b496280bf2e43bf",
+        "removed": true,
+        "port_free": true,
+        "final_physical_processes": []
+      }
+    },
+    "controller_processes_observed": [],
+    "exact_container_absent": true,
+    "independent_release_math_hot_trace_pending": true,
+    "performance_acceptance": false,
+    "full_goal_complete": false
+  },
+  "release_only": {
+    "operation": "exec-0000000000000199",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g3-r1-capture-release-only-20261028.json",
+    "sha256": "5a9de8d33313bc6fdc27000f69d0934a4b52353f0f4fe9441e42aa4f491589b1",
+    "actual_four_rank_hot_coverage": 40,
+    "total_requests": 40,
+    "raw_profile_files": 696,
+    "raw_profile_bytes": 809803161,
+    "four_rank_trace_valid": false,
+    "live_release_verified": true
+  },
+  "single_rank_official_parse_probe": {
+    "operation": "exec-000000000000019b",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g3-rank0-parse-budget-probe-20261028/result.json",
+    "sha256": "cfc32763762969e5f9260ebb9ee0cc3867b4f259781e3d0275365d25ec108aab",
+    "result": {
+      "schema": "hypic-r43-one-rank-parse-budget-result/v1",
+      "exit_code": 0,
+      "actual_mapping": {
+        "id": "0f9cd4ab6a762d9bf1ce034bf9aa58381e8e442765cde609820e030c9cf54b0a",
+        "devices": [
+          {
+            "PathOnHost": "/dev/davinci_manager",
+            "PathInContainer": "/dev/davinci_manager",
+            "CgroupPermissions": "rwm"
+          }
+        ],
+        "network": "none",
+        "privileged": false
+      },
+      "plan_sha256": "d3f23e44b47e528d7c7579ddfc879b0f44262d9117979346380d1ddb24a57a1e",
+      "original_rank0_unchanged": true,
+      "total_output_bytes": 776417763,
+      "traces": [
+        {
+          "path": "profiles/rank0_59_20261028210924370_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+          "bytes": 422048632,
+          "sha256": "439f5f189de61a603970bcabc322274f651b523e09a543ebc381321b96f2a5e2"
+        }
+      ],
+      "canonical_trace_limit_bytes": 268435456,
+      "canonical_total_limit_bytes": 2147483648,
+      "any_single_trace_exceeds_frozen_limit": true,
+      "four_rank_trace_valid": false,
+      "no_npu_allocation": true,
+      "new_performance_acceptance": false,
+      "full_goal_complete": false
+    }
+  },
+  "independent_budget_rejection": {
+    "operation": "exec-000000000000019d",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g3-full-offline-admission-rejection-20261028.json",
+    "sha256": "45c69bdb17c69d26a2c9162d0e4de869157f656e40d6ad58263071840085ac28"
+  },
+  "unchanged_four_rank_parser_not_started": true,
+  "old_sources_and_file_gates_unchanged": true,
+  "no_owned_active_npu_or_cpu_stage": true,
+  "next": "Prepare ONE R44 matched diagnostic successor with only official max_iterations7->2. New same-source native/G3 contracts and exclusive roots required; keep full40/c16/32768/fixed1024/4prep/2targetwarm, all numerical/ownership/physical/isolation/release/256MiBtrace/2GiBtree gates. Validate wrapper restoration, exact launch constructor, current image/source and complete budget before any device start. No auto cap sweep if it fails. Do not call evidence-volume rejection an algorithm failure or performance rootcause.",
+  "full_goal_complete": false,
+  "new_performance_acceptance": false
+}

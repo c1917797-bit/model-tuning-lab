@@ -1,0 +1,80 @@
+{
+  "schema": "hypic-r43-predeclared-pair-cost-attribution-model/v1",
+  "state": "METHOD_ONLY_PAIR_TRACE_NOT_YET_ACCEPTED",
+  "evidence": {
+    "native_full_audit": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-normalized-supplemental-audit-20261028.json",
+      "sha256": "397dc661f47b82421e4da27fc77cbb4a2fb8ab9e316e6cb3f7ec2aa8ac583b21"
+    },
+    "G3_release_only": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g3-r1-capture-release-only-20261028.json",
+      "sha256": "5a9de8d33313bc6fdc27000f69d0934a4b52353f0f4fe9441e42aa4f491589b1"
+    },
+    "native_schema_linear": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-trace-layout-linear-r2-20261028.json",
+      "sha256": "de9e8948b2f4f8edd4bc5dbc5f6e4aaf9c7f63bb61885c0f48f2f7e4c6d6ff96",
+      "events": 602289,
+      "distinct_flow_names": 26978
+    },
+    "discarded_aux_method": {
+      "operation": "exec-0000000000000192",
+      "reason": "quadratic per-flow-name event rescan hit180s; CPU-only, no original mutation; preserved timeout evidence; corrected0194 is single-pass"
+    },
+    "active_manifest": {
+      "name": "FORMAL_WARM_R40_G3_MANIFEST_20261026.json",
+      "sha256": "b3d5d3c6b7731f4c3827f1f793069e77d3121945ae2898dcccb6f22778a72890"
+    },
+    "active_core": {
+      "file": "independent_compact_model_hook.py",
+      "sha256": "5957156078843ce277e9a4c0f904d841a4bd6a94ec451808c12c328250b90c73",
+      "clue": "Actual original model is called with input_ids/positions selected to compact rows before all model layers; source therefore includes model-level pruning, not just a C2 planner. Runtime GEMM shape comparison remains required."
+    },
+    "active_config": {
+      "name": "FORMAL_STEP_R37_G3_CONFIG_20261025.json",
+      "sha256": "271e158c9755d344dd28a1111c20c573404e46c2007d3435bae9e7b180274a1e",
+      "C1_partitioned_render": true,
+      "C2_layer_barrier": true
+    },
+    "hardware_shape_feasibility": "Actual official op_summary includes Input Shapes/Output Shapes/TaskDuration/cube and memory counters; native rank0 MatMul example32768x5120 by4096x5120 ->32768x4096. Use accepted per-rank CSV byte bindings, not a call-count proxy."
+  },
+  "three_conditional_routes": [
+    {
+      "id": "H1",
+      "question": "Does extra C1/C2 private rendering/composition/material work cancel dense-row savings?",
+      "evidence_needed": "All four rank actual GEMM dimensions/FLOP geometry and added operation families/device intervals, bound to model token work and selected observation scope.",
+      "single_variable_after_evidence": "One identified backend/material/shape implementation change with identical equations and guards; do not predetermine a code fix."
+    },
+    {
+      "id": "H2",
+      "question": "Do extra host/device handoffs, synchronization or owner-state bookkeeping leave real device gaps?",
+      "evidence_needed": "Typed exact async_npu/taskqueue/HostToDevice flow joins, preserve fan-out/ambiguous/unmatched endpoints; attribute real compute/communication occupancy separately, not inclusive CPU waits.",
+      "single_variable_after_evidence": "One proven handoff/check batching mechanism, preserving every numerical/ownership/completion guard; full matched unprofiled measurement needed."
+    },
+    {
+      "id": "H3",
+      "question": "Does fresh compilation enter measured work after the fixed two target warmups?",
+      "evidence_needed": "Actual measured-window compiler logs/trace correlation. Compilation observed only during warmup is insufficient.",
+      "single_variable_after_evidence": "Only if demonstrated, one source/cache/shape correction; no repeating the rejected warmup-count sweep."
+    }
+  ],
+  "method_guards": [
+    "R43 full pair is not accepted: G3 trace size violates frozen gate; no causal attribution yet.",
+    "O(events) or O(events log events) processing only; no scan for every distinct flow name.",
+    "Read correlation IDs as exact Python integers/strings with type/category/rank; never round-trip actual IDs through JavaScript doubles (>2^53).",
+    "HostToDevice start/end counts differ; handle fan-out and capture-boundary endpoints, never drop them to fake matching.",
+    "Real compute PID from exact Ascend Hardware metadata, communication separately; exclude AI Core Freq/Overlap Analysis/CANN host runtime from compute-active union.",
+    "No summing overlapping durations/ranks, no treating CPU queued wait as removable cost.",
+    "First N captured model steps are a bounded diagnostic, not formal1024 or full decode coverage; require actual token/shape comparability.",
+    "TPOT can regress from prefill/decode scheduling interleaving; do not assume bad TPOT means decode code is the cause.",
+    "R34 prefix-unused-output0.1985% belowgate and R39 extra-warm whole-cost regression remain closed; do not repeat or switch fsync cadence without observed budget.",
+    "Only a final single-variable full40 matched non-profiled experiment plus quality/rollback gates can establish a causal net gain."
+  ],
+  "known_service_result": {
+    "R40_weighted_TPOT_ms_native": 94.8741802415,
+    "R40_weighted_TPOT_ms_G3": 110.0527971597,
+    "necessary_G3_TPOT_recovery_fraction_to_match_native": 0.13792122790094996,
+    "TTFT_P95_regression_percent": 98.1965,
+    "no_profile_timing_extrapolation": true
+  },
+  "full_goal_complete": false
+}
