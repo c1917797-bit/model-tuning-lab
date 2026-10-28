@@ -1,0 +1,57 @@
+{
+  "schema": "hypic-r43-renewal-reflection-plan/v1",
+  "authority": {
+    "start": "2026-10-28T19:15:24Z",
+    "deadline": "2026-10-29T19:15:24Z"
+  },
+  "human": "反思为什么达不成，然后再继续穿刺24小时",
+  "scope": "27B physical0-3 singleTP4 independentC1/C2, old successful algorithm/operator/runner/scheduler code excluded, existing independent algorithm frozen until causal evidence",
+  "base": "be931e61c42de385a8a6d5575f18aab54529689a",
+  "reflection": [
+    {
+      "failure": "Progress was tracked through implementation and host gates before a positive comparable service result.",
+      "evidence": "R40 full40 matched2warm TPOT+15.9987%, TTFTP95+98.1965%; hot coverage and source/math checks do not establish speed.",
+      "correction": "Use a fail-fast matched screen; do not expand unchanged negative route."
+    },
+    {
+      "failure": "Selected CPU costs and fewer calls were insufficient causal attribution.",
+      "evidence": "R34 three-arm gain0.1985% below5%; R38 exclusive selected CPU spans can include queued device waits; R39 measured-only gain17.05% becomes whole-unit loss23.92% including added warm.",
+      "correction": "Do not combine effects or call counts. Require actual device timeline opportunity bounds, then one variable A/B/A."
+    },
+    {
+      "failure": "Profiler construction and large adapter/contract work consumed budget before the stop/export device gate was established.",
+      "evidence": "R41 native stop four-worker segfault/40failed; R42 false-only CPU/HOST ready but budget refused before allocation.",
+      "correction": "Re-use unchanged reviewed tools; explicitly test whole lifecycle first. Freeze a new renewal envelope, not a new algorithm copy or audit rewrite."
+    },
+    {
+      "failure": "Deep historical contract inheritance and repeated status checks increased control-plane cost without closing the active uncertainty.",
+      "evidence": "Immutable R40/R42 policies retain expired absolute deadlines; old source closures must remain unchanged.",
+      "correction": "Add one small, explicitly audited renewal envelope, preserve old validation and exact runtime. No duplicated math code, no repeated passed CPU suite."
+    }
+  ],
+  "known_gap": {
+    "tpot_recovery_fraction_of_g3_required": 0.13792123,
+    "tail_recovery_fraction_of_g3_required": 0.49545015,
+    "interpretation": "Necessary just to match R40 native, not a predicted benefit. Must identify nonoverlapped removable budget sufficient for the metric."
+  },
+  "first_candidate": {
+    "mechanism": "Official with_stack/module tracer false already predeclared R42; test on actual native then same-source HYPIC.",
+    "status": "No prior NPU validation; no rootcause/workaround claim.",
+    "unchanged": "438runtime/465common/32HOST and originalR41/R42 six-source closures, same full40c16-32768-fixed1024+4prep+2targetwarm/noPDC/no retry, numerical/finite/snapshot/eventwrites/ownership guards.",
+    "success": "Four actual rank/PID-bound complete parsed CPU+NPU traces, all40 requests andwarm identities valid, no profiler/parser/segfault failure, source/physical/isolation/exactrelease audit.",
+    "failure": "Preserve root and phase, stop unchanged route. Only one materially changed next diagnostic after raw phase review.",
+    "administrative_differences": "New24-hour absolute deadline and new persistent raw-root volume, preserving same inference/profiler math, guards and original storage headroom in dedicated capture volume; /cache Docker floor retained separately."
+  },
+  "budget": {
+    "native_minimum_remaining_seconds": 3300,
+    "hypic_minimum_remaining_seconds": 2400,
+    "clock_transport_margin_seconds": 90,
+    "native_cache_reserve_bytes": 9126805504,
+    "hypic_cache_reserve_bytes": 6979321856,
+    "initial_cache_available_bytes": 7579176960,
+    "storage_state": "Cache below original native reserve; persistent /opt/host/vnf ext4 has48,927,866,880available bytes. New raw roots on dedicated /opt/host/vnf/cch-hypic-independent-20261028; reserve original8.5GiB(native)/6.5GiB(G3) there plus unchanged4GiB /cache floor. All old roots remain untouched. This administrative storage relocation is explicit and profile timing is never service performance.",
+    "diagnostic_pair_time_box_hours": 2,
+    "rule": "After one pair or deterministic stop failure, decide next causal route; no uncapped profiler infrastructure work."
+  },
+  "remaining": "Final-source G1-G4 three repeated formal1024 matched performance, full127x3 each-arm naturalEOS quality, actual disable/uninstall/restart, independentaudit, Paper-to-Ascend and29functional gates; unchanged scopes. Full goal not complete."
+}
