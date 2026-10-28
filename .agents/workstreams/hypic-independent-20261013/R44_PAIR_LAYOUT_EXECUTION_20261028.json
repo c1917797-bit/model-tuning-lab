@@ -1,0 +1,39 @@
+{
+  "schema": "hypic-r44-pair-layout-execution/v1",
+  "helper": "host_audits/r44_pair_layout.py",
+  "helper_sha256": "bfb5f6dc77432a90757f0a9a5be14ea8f90117dea4534f5fb2ae6bf3005e54f0",
+  "method": {
+    "path": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/R44_PAIR_ATTRIBUTION_ANALYSIS_PLAN_20261028.json",
+    "sha256": "dbe994f484ec9616fe80e517c4e157312a8dad5b442fb545a50b134c3496768e"
+  },
+  "acceptance": {
+    "path": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/R44_PAIR_DIAGNOSTIC_ACCEPTANCE_20261028.json",
+    "sha256": "deadaad6e1574cb4a4c1918cb4de63d32fe853d9f5c214ee50483c92fd8aefbe"
+  },
+  "reports": {
+    "G1": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-normalized-supplemental-audit-20261028.json",
+      "sha256": "33ae5bc5624d632a6717e048a73081997c5986287810fc2b1ad279d644cc7397"
+    },
+    "G3": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-normalized-supplemental-audit-20261028.json",
+      "sha256": "f374bbc84b02f5fc020660eca7993e0f17f685057527e7e61eb572bb0d37f2f0"
+    }
+  },
+  "normalized_roots": {
+    "G1": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-normalized-trace-20261028",
+    "G3": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-normalized-trace-20261028"
+  },
+  "output_root": "/opt/host/vnf/cch-hypic-independent-20261028/r44-pair-layout-r1-20261028",
+  "timeout_seconds": 300,
+  "limits": {
+    "cpu": "0",
+    "timeout_seconds": 300,
+    "max_address_space_bytes": 4294967296,
+    "trace_bytes": 268435456,
+    "tree_bytes": 2147483648,
+    "complexity": "O(events) or O(events log events), one rank in memory at a time; no per-distinct-flow-name rescan"
+  },
+  "no_devices": true,
+  "new_inference": false
+}
