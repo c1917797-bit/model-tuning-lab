@@ -1,0 +1,151 @@
+{
+  "schema": "hypic-r44-host-readiness/v1",
+  "state": "HOST_PASS_NOT_NPU_ACCEPTANCE",
+  "contract": "PROFILE_R44_G1_R1_20261028_CONTRACT.json",
+  "tests": {
+    "operation": "exec-00000000000001a5",
+    "passed": 24,
+    "scope": "Exact count-only delta, wrong-ruler rejection, nested-scope rejection, callback restoration including controller and parse/normalize/audit faults, metadata/PID completeness and source drift"
+  },
+  "actual_launch": {
+    "operation": "exec-00000000000001a3",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-actual-launch-capsule-20261028.json",
+    "sha256": "70df68e92d7ec290fcc4723e5f3949ec894c926f9ecbef4e14983bce8f1c5b4a",
+    "devices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "allocated": false,
+    "profile": {
+      "delay_iterations": 0,
+      "ignore_frontend": true,
+      "max_iterations": 2,
+      "profiler": "torch",
+      "torch_profiler_dir": "/scratch/profiles",
+      "torch_profiler_with_memory": false,
+      "torch_profiler_with_stack": false
+    },
+    "callbacks_restored": true
+  },
+  "official_boundary": {
+    "operation": "exec-00000000000001a6",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-official-count2-boundary-20261028.json",
+    "sha256": "7eae6764f06d72627b46d30d69d95fac7728f3b72d03b30ff30bd73531c095c8",
+    "result": {
+      "source_sha256": "31f8a33afd23e67a2ade5a95d0d837a03b0a9164d5b18acf561d948c9ae6c06c",
+      "states": [
+        {
+          "step": 1,
+          "running": true,
+          "active": true,
+          "count": 1,
+          "stops": 0
+        },
+        {
+          "step": 2,
+          "running": true,
+          "active": true,
+          "count": 2,
+          "stops": 0
+        },
+        {
+          "step": 3,
+          "running": false,
+          "active": true,
+          "count": 3,
+          "stops": 1
+        }
+      ],
+      "calls": [
+        "start",
+        "stop"
+      ],
+      "worker_call_sites": [
+        {
+          "path": "/vllm-workspace/vllm/vllm/v1/worker/gpu_worker.py",
+          "sha256": "61eb2c62031337ca131d5610b5d5b2998630e159b48e1066b8d80bb68b4594ef",
+          "line": 780,
+          "context": [
+            "        # add trace annotation so that we can easily distinguish",
+            "        # context/generation request numbers in each iteration.",
+            "        # A context request is a request that has not yet generated any tokens",
+            "        if not self.profiler:",
+            "            return nullcontext()",
+            "",
+            "        self.profiler.step()",
+            "",
+            "        iteration_details = compute_iteration_details(scheduler_output)",
+            "",
+            "        annotation = \"\".join(",
+            "            [",
+            "                \"execute_context_\",",
+            "                str(iteration_details.num_ctx_requests),",
+            "                \"(\",",
+            "                str(iteration_details.num_ctx_tokens),",
+            "                \")_generation_\",",
+            "                str(iteration_details.num_generation_requests),",
+            "                \"(\",",
+            "                str(iteration_details.num_generation_tokens),",
+            "                \")\",",
+            "            ]",
+            "        )"
+          ]
+        },
+        {
+          "path": "/vllm-workspace/vllm-ascend/vllm_ascend/worker/worker.py",
+          "sha256": "c392da56095b255d47fe5ad7ffdfbedd269fe69851690e89a8d2ed44c073f6c3",
+          "line": 645,
+          "context": [
+            "                tensor_dict,",
+            "                comm_handles=comm_handles,",
+            "                comm_postprocess=comm_postprocess,",
+            "            )",
+            "",
+            "        if self.profiler is not None:",
+            "            self.profiler.step()",
+            "",
+            "        output = self.model_runner.execute_model(scheduler_output, intermediate_tensors)",
+            "        if isinstance(output, (ModelRunnerOutput, AsyncModelRunnerOutput, NoneType)):",
+            "            return output",
+            "",
+            "        assert isinstance(output, IntermediateTensors)",
+            "        parallel_config = self.vllm_config.parallel_config",
+            "        assert parallel_config.distributed_executor_backend != (\"external_launcher\") and not get_pp_group().is_last_rank",
+            "        # If flashcomm1 is used, this all_gather_group parameter needs to be removed, otherwise",
+            "        # it will conflict with the all-gather operation in flashcomm1.",
+            "        if enable_sp():",
+            "            all_gather_group = None",
+            "        else:",
+            "            all_gather_group = get_tp_group()",
+            "        self._pp_send_work = get_pp_group().isend_tensor_dict(",
+            "            output.tensors,"
+          ]
+        }
+      ],
+      "scope": "AST-selected actual official class; fake start/stop only; no trace or inference evidence"
+    }
+  },
+  "source_closure": {
+    "R44_BOUNDED_PROFILE_SUCCESSOR_PLAN_20261028.json": "66439a7a1bb743233a8c3d443e57050613f80d0b9881bb9466921ee3ef64e600",
+    "host_audits/r44_launch_capsule.py": "775c2571ccb2c221f4e1ec6b9dd0912f3b322865e2a78ecd032e7927fce2633b",
+    "host_audits/r44_postprocess.py": "8c9498fdd924ad2fb58d07ec5dbdc9955748ecbb88b67215e00c6ad014818b2c",
+    "host_audits/r44_profile_audit.py": "a74558411112d46cc1f37745ee336d14714de5178f993a1e1ec273fac1098b71",
+    "host_audits/r44_profile_controller.py": "20a8e0b06c6450b00e33819dd60bfd657402fa933e705d485151264f45ac1061",
+    "host_audits/r44_profile_policy.py": "ae5c333756e5bce73c278468cdcef43c8a77a928570683a4175dc18ac1f579ea",
+    "host_audits/r44_scope.py": "021e63a5b7114c3bc4a90db3a6b09049f1d392196cb135f985f24c103b680cfe"
+  },
+  "retained_postprocess": {
+    "host_audits/r43_offline_parse_manager.py": "00b6221835f8f6cb7e8f8328b5f1c6430e2967fdb93a8c74ade636e82da2c527",
+    "host_audits/r43_trace_timestamp_copy.py": "0b8466742c3b63a597cf278632b4952001c80a7180b35ffab4cb6c263b5e507e",
+    "host_audits/r43_normalized_supplemental_audit.py": "d5ae521cfeb9ced1763ce5ad0eede334c6792f386e5352f1b293353b816ff244",
+    "host_audits/r41_profile_trace.py": "46fdb2acaa01352a31a808b88a71a39bd7cfa63e2e391f7cc971bbfbcaafe74c"
+  },
+  "prior_decision": "R43_G3_OFFLINE_VOLUME_DECISION_20261028.json",
+  "interpretation": "Official count2 third step stops before third Ascend worker execute_model. CPU controls and intercepted constructor prove configuration/boundary only; actual trace size/completeness, math, isolation and release still require real capture and independent audit.",
+  "full_goal_complete": false,
+  "new_performance_acceptance": false,
+  "contract_sha256": "2ef97cc8884b2b59d00d7751d6197a40c3d634386be64c3a2687ee6e178c8dee",
+  "constructor_serialization_sha256": "704907a27630c4f91bd38bc6e70dc28662e123c820cd9b8d09fe471e44ce51e7"
+}

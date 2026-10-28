@@ -1,0 +1,93 @@
+{
+  "schema": "hypic-r44-matched-offline-trace-protocol/v1",
+  "state": "FROZEN_BEFORE_NATIVE_COUNT2_CAPTURE",
+  "purpose": "Diagnostic observability only; no performance acceptance",
+  "authority": {
+    "stop_utc": "2026-10-29T19:15:24Z"
+  },
+  "profile": {
+    "delay_iterations": 0,
+    "ignore_frontend": true,
+    "max_iterations": 2,
+    "profiler": "torch",
+    "torch_profiler_dir": "/scratch/profiles",
+    "torch_profiler_with_memory": false,
+    "torch_profiler_with_stack": false
+  },
+  "arm_order": [
+    "G1 actual full supplemental acceptance and release",
+    "G3 same source bindings, profile count and postprocessing; bind actual G1 audit path/SHA"
+  ],
+  "fixed_ruler": {
+    "preparations": 4,
+    "actual_target_warmups": 2,
+    "requests": 40,
+    "concurrency": 16,
+    "input_tokens": 32768,
+    "output_tokens": 1024,
+    "fixed_output": true,
+    "pdc": false,
+    "physical_npu": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tp": 4
+  },
+  "source_closure": {
+    "R44_BOUNDED_PROFILE_SUCCESSOR_PLAN_20261028.json": "66439a7a1bb743233a8c3d443e57050613f80d0b9881bb9466921ee3ef64e600",
+    "host_audits/r44_launch_capsule.py": "775c2571ccb2c221f4e1ec6b9dd0912f3b322865e2a78ecd032e7927fce2633b",
+    "host_audits/r44_postprocess.py": "8c9498fdd924ad2fb58d07ec5dbdc9955748ecbb88b67215e00c6ad014818b2c",
+    "host_audits/r44_profile_audit.py": "a74558411112d46cc1f37745ee336d14714de5178f993a1e1ec273fac1098b71",
+    "host_audits/r44_profile_controller.py": "20a8e0b06c6450b00e33819dd60bfd657402fa933e705d485151264f45ac1061",
+    "host_audits/r44_profile_policy.py": "ae5c333756e5bce73c278468cdcef43c8a77a928570683a4175dc18ac1f579ea",
+    "host_audits/r44_scope.py": "021e63a5b7114c3bc4a90db3a6b09049f1d392196cb135f985f24c103b680cfe"
+  },
+  "retained_postprocess": {
+    "host_audits/r43_offline_parse_manager.py": "00b6221835f8f6cb7e8f8328b5f1c6430e2967fdb93a8c74ade636e82da2c527",
+    "host_audits/r43_trace_timestamp_copy.py": "0b8466742c3b63a597cf278632b4952001c80a7180b35ffab4cb6c263b5e507e",
+    "host_audits/r43_normalized_supplemental_audit.py": "d5ae521cfeb9ced1763ce5ad0eede334c6792f386e5352f1b293353b816ff244",
+    "host_audits/r41_profile_trace.py": "46fdb2acaa01352a31a808b88a71a39bd7cfa63e2e391f7cc971bbfbcaafe74c"
+  },
+  "limits": {
+    "max_trace_bytes": 268435456,
+    "max_tree_bytes": 2147483648,
+    "full_pipeline_seconds": 7200,
+    "clock_transport_margin_seconds": 90,
+    "manager_parse": {
+      "cpu": "112-119",
+      "memory": "8g",
+      "pids": 256,
+      "network": "none",
+      "devices": [
+        "/dev/davinci_manager"
+      ],
+      "timeout_seconds": 900,
+      "max_process_number": 2,
+      "export_type": [
+        "text"
+      ],
+      "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1"
+    },
+    "raw_reserve_bytes": {
+      "G1": 9126805504,
+      "G3": 6979321856
+    },
+    "cache_floor_bytes": 4294967296
+  },
+  "per_arm_sequence": [
+    "Original immutable capture raw root; independent original source/math/hot/finite/durability/physical/isolation/live-release checks; missing parsed trace may yield explicit release-ONLY, never acceptance",
+    "New source-bound parse plan using actual contract and release proof SHA; same official manager-only parse into a NEW copy, unchanged originals and all actual four-rank metadata",
+    "Retain direct canonical schema failure if official timestamp strings rejected; no bypass or gate change",
+    "New source-bound normalization plan binding actual parsed trace/result SHA. One shared four-rank Decimal origin, unchanged us, all events/fields/flow IDs/durations/order and exact decimal roundtrip; no clipping or discards",
+    "New source-bound supplemental plan linking actual raw/parsed/normalized source/result SHA; original canonical audit_tree plus ALL original guards and exact live release replayed; R44 finish validates actual count2 launch receipt"
+  ],
+  "per_arm_roots": {
+    "G1": "r44-g1-r1",
+    "G3": "r44-g3-r1"
+  },
+  "plan_materialization": "Actual-data SHA and PID-dependent rank filenames are bound only after each prior phase exists. Each plan must include r44_wrapper_sha256 and r44_source_sha256. Helper/auditor hashes remain original functions' own source hashes. Both arms use this same frozen workflow.",
+  "failure_rule": "Preserve each original root and failed gate. No unchanged retry, cap scan, threshold increase, event discard or count7/count2 comparison.",
+  "full_goal_complete": false
+}
