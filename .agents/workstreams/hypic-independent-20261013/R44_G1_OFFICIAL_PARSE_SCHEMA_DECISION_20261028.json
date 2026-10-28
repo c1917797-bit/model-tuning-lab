@@ -1,0 +1,106 @@
+{
+  "schema": "hypic-r44-native-official-parse-decision/v1",
+  "state": "OFFICIAL_FOUR_RANK_COMPLETE_ORIGINAL_TIMESTAMP_SCHEMA_REJECTION_PRESERVED",
+  "operation": "exec-00000000000001b5",
+  "exit_code": 1,
+  "official_container_exit": 0,
+  "parser_result": {
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-offline-manager-parse-20261028/result.json",
+    "sha256": "a57a8b2fae8648ebeabb076bfac09055267442e67834bb4aedd1e4130736a494"
+  },
+  "independent_proof": {
+    "operation": "exec-00000000000001b8",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-offline-schema-failure-independent-20261028.json",
+    "sha256": "6d76d398b1cad10cb2b3848a4d77591b64e028b203e2b893fbed2fc59625b8a7"
+  },
+  "actual": {
+    "schema": "hypic-r44-official-parse-schema-failure-independent/v1",
+    "operation": "exec-00000000000001b5",
+    "parser_inner_exit": 0,
+    "parser_result_sha256": "a57a8b2fae8648ebeabb076bfac09055267442e67834bb4aedd1e4130736a494",
+    "parser_plan_sha256": "4411974c43a92c9ce92303fb7ab14b1d9c6fc9234f70cd8b6efa3008611dc59b",
+    "original_capture_files": 304,
+    "original_capture_bytes": 41805383,
+    "original_raw_sha_unchanged": true,
+    "parsed_copy_original_bytes_unchanged": true,
+    "parse_begin": 4,
+    "parse_end": 4,
+    "no_parser_error_markers": true,
+    "traces": [
+      {
+        "path": "rank0_59_20261028223158503_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+        "bytes": 19092757,
+        "sha256": "508f4b3e523f0df98b242a7dfce2555325df9f942e1aee2786c42c075f7e0345",
+        "events": 101514,
+        "first_complete_types": {
+          "ts": "str",
+          "dur": "float"
+        }
+      },
+      {
+        "path": "rank1_60_20261028223158502_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+        "bytes": 19075865,
+        "sha256": "fcfa65b21bbfeb103e3556d326b3e7bdba9dd2fb4c501c9597f2fc4202a6cefe",
+        "events": 101513,
+        "first_complete_types": {
+          "ts": "str",
+          "dur": "float"
+        }
+      },
+      {
+        "path": "rank2_61_20261028223158502_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+        "bytes": 19076372,
+        "sha256": "c65b80c9e2f9d0fb68ddd7ca0014d087269fdf0c401b4e096cb1ee5f36c0412b",
+        "events": 101507,
+        "first_complete_types": {
+          "ts": "str",
+          "dur": "float"
+        }
+      },
+      {
+        "path": "rank3_62_20261028223158502_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+        "bytes": 19077215,
+        "sha256": "3659224485d863403a7518984041caeef8ece04b8c89997895e1b6e424511d8c",
+        "events": 101512,
+        "first_complete_types": {
+          "ts": "str",
+          "dur": "float"
+        }
+      }
+    ],
+    "tree_bytes": 151524036,
+    "tree_files": 412,
+    "exact_cpu_container_absent": true,
+    "physical0_3_empty": true,
+    "strict_ports_free": 102,
+    "actual_container": {
+      "devices": [
+        {
+          "CgroupPermissions": "rwm",
+          "PathInContainer": "/dev/davinci_manager",
+          "PathOnHost": "/dev/davinci_manager"
+        }
+      ],
+      "id": "eda34ffe94e5ea7cb602e20eca5b148bc8c365ceeeea986cce32dca28aa0c9c0",
+      "network": "none",
+      "privileged": false
+    },
+    "four_rank_trace_valid": false,
+    "failure_preserved": {
+      "message": "finite nonnegative complete event spans required",
+      "type": "ValueError"
+    },
+    "source7": {
+      "R44_BOUNDED_PROFILE_SUCCESSOR_PLAN_20261028.json": "66439a7a1bb743233a8c3d443e57050613f80d0b9881bb9466921ee3ef64e600",
+      "host_audits/r44_launch_capsule.py": "775c2571ccb2c221f4e1ec6b9dd0912f3b322865e2a78ecd032e7927fce2633b",
+      "host_audits/r44_postprocess.py": "8c9498fdd924ad2fb58d07ec5dbdc9955748ecbb88b67215e00c6ad014818b2c",
+      "host_audits/r44_profile_audit.py": "a74558411112d46cc1f37745ee336d14714de5178f993a1e1ec273fac1098b71",
+      "host_audits/r44_profile_controller.py": "20a8e0b06c6450b00e33819dd60bfd657402fa933e705d485151264f45ac1061",
+      "host_audits/r44_profile_policy.py": "ae5c333756e5bce73c278468cdcef43c8a77a928570683a4175dc18ac1f579ea",
+      "host_audits/r44_scope.py": "021e63a5b7114c3bc4a90db3a6b09049f1d392196cb135f985f24c103b680cfe"
+    },
+    "scope": "Official four-rank exports completed; original strict timestamp-string schema rejection preserved. Pending exact Decimal copy and full supplemental; no acceptance or performance claim."
+  },
+  "next": "Only already frozen exact Decimal timestamp-copy adaptation, with all original helpers, records and unchanged canonical acceptance limits. No inference or official parse rerun.",
+  "full_goal_complete": false
+}
