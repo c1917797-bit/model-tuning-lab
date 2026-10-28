@@ -1,0 +1,24 @@
+{
+  "schema": "hypic-r43-cann-driver-init-decision/v1",
+  "state": "DIRECT_EXPORT_PINPOINTS_DRIVER_PLATFORM_INITIALIZATION_FAILURE",
+  "probe": {
+    "operation": "exec-000000000000016a",
+    "root": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-msprof-export-probe-20261028",
+    "result_sha256": "34d07a0e59fd0b311bb02bb8f35c809d5eea0d2cb8e93ac6b0bb3ff7ea5b1403",
+    "plan_sha256": "995924ed722802b541dc2086086647cebd3d904883e3c3e977c0252d6fc29c2b",
+    "docker_exit": 0,
+    "msprof_exit": 255,
+    "stdout_exact": "DrvMngGetConsoleLogLevel failed. (g_conLogLevel=3)\\n[ERROR] Init platform by driver faild!\\n",
+    "stderr_empty": true,
+    "original_rank0_unchanged": true,
+    "no_npu_allocation": true
+  },
+  "known": "Official same-image CANN export command fails before device timeline export, not during inference. Earlier torch_npu wrapper swallowed command output and container exit0 hid actual255. Malformed CPU-only/partial trace is rejected.",
+  "hypothesis": "CPU-only parser mounts driver library but exposes no driver-manager control device. Platform metadata initialization may require that control interface. Missing control access is not yet proven as sole cause; inspect required interface or test one declared control-access variable.",
+  "next": "No unchanged full4 parse rerun and no NPU inference rerun. Preserve all original/failed/probe roots. A bounded one-rank same-image/source/input/CPU/memory/pid export counterfactual may add only required driver-manager metadata control access after proving scope; expose no physical /dev/davinci0-7 compute devices, modify no foreign workload. If this changes export to valid output, freeze matching CPU offline parse successor on a new copy; require genuine fourrankCPU+NPU traces and all original independent guards before G3.",
+  "native_capture_valid_as_transport": true,
+  "native_diagnostic_trace_valid": false,
+  "active_owned_npu_service": false,
+  "full_goal_complete": false,
+  "performance_negative_unchanged": true
+}
