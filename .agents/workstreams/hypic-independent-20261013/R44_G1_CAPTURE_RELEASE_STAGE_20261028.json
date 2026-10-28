@@ -1,0 +1,62 @@
+{
+  "schema": "hypic-r44-native-capture-release-stage/v1",
+  "state": "FULL40_CAPTURE_AND_INDEPENDENT_RELEASE_ONLY_VALID_TRACE_PENDING",
+  "controller": {
+    "operation": "exec-00000000000001ab",
+    "exit_code": 0,
+    "result": {
+      "valid": true,
+      "error": null,
+      "guard_errors": [],
+      "isolation_samples": 283,
+      "responses": 40,
+      "worker_pids": [
+        1671667,
+        1671672,
+        1671676,
+        1671677
+      ],
+      "physical_devices_seen": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "release": {
+        "owned_container": "149f130c7f081c6bf363687ed5bd93913b003a30fd4b17b85fd9e2ebcc6b4d36",
+        "removed": true,
+        "port_free": true,
+        "final_physical_processes": []
+      }
+    },
+    "raw_root": "/opt/host/vnf/cch-hypic-independent-20261028/critical-path-r44-g1-r1-20261028",
+    "result_sha256": "dba350481bd5204a0dc4471e5c3c5d348c41dfe68cf379ae52bb1ceb7cc1e51d"
+  },
+  "initial_strict_release_failure": {
+    "operation": "exec-00000000000001b2",
+    "exit_code": 1,
+    "gate": "OSError98 at strict8233 bind immediately after controller terminal",
+    "preserved": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-immediate-release-audit-failure-20261028.json",
+      "sha256": "fa43addade33cf6ac20f3652a0c118f4169030b7e267080d5087f4981e9767b1"
+    }
+  },
+  "changed_precondition": {
+    "operation": "exec-00000000000001b3",
+    "strict_ports_free": 102,
+    "actual_listeners": [],
+    "physical0_3": [],
+    "exact_cid_absent": true,
+    "source_unchanged": true,
+    "interpretation": "Later actual strict binds all pass; preserve failed audit and rerun only independent audit after changed release precondition. No inference rerun or relaxed socket option."
+  },
+  "independent_release": {
+    "operation": "exec-00000000000001b4",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-capture-release-only-r2-20261028.json",
+    "sha256": "58383cfaf56bb59c8df0a8d12e925b155be0c2d3207e141f5e46eead10a2d024",
+    "valid_release_only": true,
+    "four_rank_trace_valid": false
+  },
+  "next": "Same frozen source-bound manager-only full-four offline parse, new copy, exact timestamp adapter and original full supplemental before G3. No speed or reproduction acceptance.",
+  "full_goal_complete": false
+}

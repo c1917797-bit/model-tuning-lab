@@ -1,0 +1,53 @@
+{
+  "schema": "hypic-r44-offline-manager-parse-plan/v1",
+  "state": "SOURCE_BOUND_RELEASED_CAPTURE_NEW_COPY_PARSE_PENDING",
+  "contract": "PROFILE_R44_G1_R1_20261028_CONTRACT.json",
+  "contract_sha256": "2ef97cc8884b2b59d00d7751d6197a40c3d634386be64c3a2687ee6e178c8dee",
+  "release_proof": {
+    "operation": "exec-00000000000001b4",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-capture-release-only-r2-20261028.json",
+    "sha256": "58383cfaf56bb59c8df0a8d12e925b155be0c2d3207e141f5e46eead10a2d024"
+  },
+  "helper": "host_audits/r43_offline_parse_manager.py",
+  "helper_sha256": "00b6221835f8f6cb7e8f8328b5f1c6430e2967fdb93a8c74ade636e82da2c527",
+  "official_profiler_sha256": "1a04902572383b74a401449e73929b2c4ce728d6c81bb59341876b03c7a82168",
+  "official_interface": "torch_npu.profiler.profiler.analyse(path,max_process_number=2,export_type=['text'])",
+  "analysis_root": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-offline-manager-parse-20261028",
+  "container_name": "hypic-r44-g1-offline-manager-parse-20261028",
+  "limits": {
+    "cpu": "112-119",
+    "memory": "8g",
+    "pids": 256,
+    "max_process_number": 2,
+    "timeout_seconds": 900,
+    "no_network": true,
+    "no_npu_devices": false,
+    "no_physical_compute_devices": true,
+    "devices": [
+      "/dev/davinci_manager"
+    ]
+  },
+  "manager_export_evidence": [
+    {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-msprof-export-probe-20261028/result.json",
+      "sha256": "34d07a0e59fd0b311bb02bb8f35c809d5eea0d2cb8e93ac6b0bb3ff7ea5b1403"
+    },
+    {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-msprof-manager-b1-20261028/result.json",
+      "sha256": "2f3661ee63fc1fa7a6444ce67d90f415018ab1dda9f5b5d7642cf11e89749d7a"
+    }
+  ],
+  "r44_wrapper_sha256": "8c9498fdd924ad2fb58d07ec5dbdc9955748ecbb88b67215e00c6ad014818b2c",
+  "r44_source_sha256": {
+    "R44_BOUNDED_PROFILE_SUCCESSOR_PLAN_20261028.json": "66439a7a1bb743233a8c3d443e57050613f80d0b9881bb9466921ee3ef64e600",
+    "host_audits/r44_launch_capsule.py": "775c2571ccb2c221f4e1ec6b9dd0912f3b322865e2a78ecd032e7927fce2633b",
+    "host_audits/r44_postprocess.py": "8c9498fdd924ad2fb58d07ec5dbdc9955748ecbb88b67215e00c6ad014818b2c",
+    "host_audits/r44_profile_audit.py": "a74558411112d46cc1f37745ee336d14714de5178f993a1e1ec273fac1098b71",
+    "host_audits/r44_profile_controller.py": "20a8e0b06c6450b00e33819dd60bfd657402fa933e705d485151264f45ac1061",
+    "host_audits/r44_profile_policy.py": "ae5c333756e5bce73c278468cdcef43c8a77a928570683a4175dc18ac1f579ea",
+    "host_audits/r44_scope.py": "021e63a5b7114c3bc4a90db3a6b09049f1d392196cb135f985f24c103b680cfe"
+  },
+  "matched_protocol": "R44_MATCHED_OFFLINE_TRACE_PROTOCOL_20261028.json",
+  "procedure": "Only source-bound R44 wrapper adapts original R43 policy scope. Original helper byte-identical; same official analyse on full four-rank new copy with manager metadata only, no davinci0-7 compute devices. Preserve strict original timestamp schema failure and originals. No full trace acceptance until exact Decimal copy plus independent full supplemental.",
+  "full_goal_complete": false
+}
