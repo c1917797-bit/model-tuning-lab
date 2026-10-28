@@ -1,0 +1,46 @@
+{
+  "schema": "hypic-r43-offline-parser-failure/v1",
+  "state": "OFFLINE_CANN_EXPORT_FAILED_TRACE_INVALID",
+  "original_capture": {
+    "operation": "exec-0000000000000150",
+    "requests": 40,
+    "isolation_samples": 282,
+    "release_only": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-capture-release-only-20261028.json",
+      "sha256": "7c1f45bf0ea7cd9a9323bca378fd78aa4ed8283a089b34b8d4bbaf356b1e3070",
+      "valid_release_only": true,
+      "transport_passed_before_trace": true,
+      "four_rank_trace_valid": false,
+      "profile_files": 392,
+      "profile_bytes": 229866558,
+      "full_goal_complete": false
+    },
+    "segfault_reproduced": false,
+    "scope": "No valid critical-path/profile acceptance yet; no performance gain claim."
+  },
+  "offline_parse": {
+    "operation": "exec-0000000000000165",
+    "controller_exit": 1,
+    "official_container_exit": 0,
+    "result_path": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-offline-parse-20261028/result.json",
+    "result_sha256": "19d0bd8dada5dfb95c589553648c0ad3e2fdea9cd1134b8bce85deb8f522209f",
+    "helper_sha256": "44913d1bd0bf084559d2aa82c43c257fdb6aca685e4e93177c8c8faa838d6eae",
+    "four_rank_trace_valid": false,
+    "original_capture_unchanged": true,
+    "cpu_container": "4b189520ae924f7284ca0ce0dc7e80e802eed80d4f69561f9b7bdd2a109e63a5",
+    "cpu_container_absent": true,
+    "failure": "Official four rank CANNExportParser exits nonzero, but analyse swallows errors and container exits0. TraceView dependencies fail. Strict JSON parse rejects malformed trace at char47266366. Do not accept files existing or exit0.",
+    "official_export_source": "Actual pinned image _cann_export.py inspected0169; TEXT export uses [msprof,--export=on,--output=<PROF>] with capture_output=True and discards command stdout/stderr on failure."
+  },
+  "next_probe": {
+    "operation": "exec-000000000000016a",
+    "state": "RUNNING_OR_TERMINAL_MUST_POLL_ORIGINAL",
+    "root": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-msprof-export-probe-20261028",
+    "cpu_container_name": "hypic-r43-msprof-export-probe-20261028",
+    "no_npu_allocation": true,
+    "scope": "One hash-verified rank0 copy; same official failing CANN command and limits, collect underlying stdout/stderr hidden by wrapper. Observation only, not unchanged NPU/treatment retry. Original capture and failed parse root preserved."
+  },
+  "next_action": "Poll original016a/root; inspect actual CANN export exit/stdout/stderr before choosing exactly one evidence-supported parser environment/source fix on a new copy. No unchanged full4 parse rerun, no G3 until genuinely complete parsed native proof plus independent audit.",
+  "full_goal_complete": false,
+  "performance_negative_unchanged": true
+}

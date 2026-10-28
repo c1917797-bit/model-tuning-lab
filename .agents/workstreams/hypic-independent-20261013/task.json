@@ -440,7 +440,8 @@
     "failure": "Classify and repair concrete implementation/environment failures; preserve immutable attempts and continue within authorized scope"
   },
   "retention": "Keep named branch and checkpoint; integrate reusable verified rules and accepted code through serialized main review",
-  "next_action": "Track original ma exactCPU-only exec0165 and analysis_root from active_attempt. No NPU allocated/no NPU rerun. At terminal inspect result.json, parser.stdout/stderr, exact CPUcontainer cleanup, originalraw unchanged and four actual parsed ranktraces. If parsed valid, create source-bound supplemental independent audit retaining ALL originalR43 source/math/requests/warm/physical/isolation/live-release and binding parsedcopy to original392SHA; original015b failure remains. Onlygenuinevalidnativeproof allows matchedG3newcontract/newroot/same5frozenruntimeouterclosure+sameofflineprocedure. IfCPUparsefailed/unknown preserve and track original, do not restart.",
+  "next_action": "Poll original016a/root; inspect actual CANN export exit/stdout/stderr before choosing exactly one evidence-supported parser environment/source fix on a new copy. No unchanged full4 parse rerun, no G3 until genuinely complete parsed native proof plus independent audit.",
+  "r43_offline_parse_failure": "R43_OFFLINE_PARSE_FAILURE_20261028.json",
   "r43_renewal_diagnostic": {"state":"NATIVE_TRANSPORT_RELEASE_VALID_DAEMON_PARSE_GAP","readiness":"R43_CAPTURE_HOST_READINESS_20261028.json","contract":"PROFILE_R43_G1_R1_20261028_CONTRACT.json","contract_sha256":"8afbdd8da1a8300b01d96fef8c7ea8a1103566e538232ec372f01385621e2e67","active_controller":null,"raw_root":"/opt/host/vnf/cch-hypic-independent-20261028/critical-path-r43-g1-r1-20261028","full_goal_complete":false,"release_only_proof":{"operation":"exec-0000000000000160","path":"/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-capture-release-only-20261028.json","sha256":"7c1f45bf0ea7cd9a9323bca378fd78aa4ed8283a089b34b8d4bbaf356b1e3070"},"offline_plan":"R43_OFFLINE_PARSE_PLAN_20261028.json"},
   "window_close": "WINDOW_CLOSE_20261026.json",
   "authorization_window_state": "RENEWED_24H_FULL_GOAL_UNACCEPTED",
@@ -500,7 +501,7 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": {"stage":"R43_CPU_ONLY_OFFLINE_PARSE","state":"RUNNING","peer_id":"lgw_a6109c51076a4a2c9d2674ca5a8704a0","operation_id":"exec-0000000000000165","analysis_root":"/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-offline-parse-20261028","original_raw_root":"/opt/host/vnf/cch-hypic-independent-20261028/critical-path-r43-g1-r1-20261028","container_name":"hypic-r43-g1-offline-parse-20261028","plan":"R43_OFFLINE_PARSE_PLAN_20261028.json","helper_sha256":"44913d1bd0bf084559d2aa82c43c257fdb6aca685e4e93177c8c8faa838d6eae","no_npu_allocation":true,"timeout_seconds":900,"absolute_stop_utc":"2026-10-29T19:15:24Z"},
+  "active_attempt": {"stage":"R43_CPU_ONLY_CANN_EXPORT_PROBE","state":"RUNNING_OR_TERMINAL_MUST_POLL_ORIGINAL","peer_id":"lgw_a6109c51076a4a2c9d2674ca5a8704a0","operation_id":"exec-000000000000016a","analysis_root":"/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-msprof-export-probe-20261028","container_name":"hypic-r43-msprof-export-probe-20261028","no_npu_allocation":true,"probe_timeout_seconds":120,"original_raw_root":"/opt/host/vnf/cch-hypic-independent-20261028/critical-path-r43-g1-r1-20261028","absolute_stop_utc":"2026-10-29T19:15:24Z"},
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
