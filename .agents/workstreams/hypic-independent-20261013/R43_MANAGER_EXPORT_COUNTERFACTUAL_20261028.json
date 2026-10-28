@@ -1,0 +1,33 @@
+{
+  "schema": "hypic-r43-manager-export-counterfactual/v1",
+  "state": "SAME_INPUT_EXPORT_CHANGED_255_TO_0_WITH_MANAGER_ONLY",
+  "control": {
+    "operation": "exec-000000000000016a",
+    "result_sha256": "34d07a0e59fd0b311bb02bb8f35c809d5eea0d2cb8e93ac6b0bb3ff7ea5b1403",
+    "actual_msprof_exit": 255
+  },
+  "treatment": {
+    "operation": "exec-0000000000000170",
+    "root": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-msprof-manager-b1-20261028",
+    "result_sha256": "2f3661ee63fc1fa7a6444ce67d90f415018ab1dda9f5b5d7642cf11e89749d7a",
+    "plan_sha256": "a5ff611815d0b02fc12bbadcae0ab32ecaf18aa1366690ab4e37e1a43be870b6",
+    "actual_msprof_exit": 0,
+    "actual_mapping": {
+      "id": "1e89e1297b1452370492aec8c1ca4a999f7252011400c9207da56dbd9ebc0239",
+      "devices": [
+        {
+          "PathOnHost": "/dev/davinci_manager",
+          "PathInContainer": "/dev/davinci_manager",
+          "CgroupPermissions": "rwm"
+        }
+      ],
+      "privileged": false,
+      "network": "none"
+    },
+    "original_rank0_unchanged": true
+  },
+  "variable": "Only add /dev/davinci_manager metadata control. Same exact official command/inner code/source/input/image/CPU/memory/pids/network. New own container/output root administrative only.",
+  "inference": "Supports missing manager-control access as cause of this offline CANN platform initialization/export failure. Does not establish end-to-end HYPIC performance or valid four-rank trace; no physical davinci0-7 exposed.",
+  "next": "Freeze same-manager official four-rank offline analyse successor on a new verified copy with unchanged canonical trace audit. Native supplemental full independent audit required before G3. Preserve all failures and original source5/runtime closures.",
+  "full_goal_complete": false
+}

@@ -1,3 +1,7 @@
+# CURRENT MANAGER-ONLY EXPORT COUNTERFACTUAL SUCCEEDED; FOUR-RANK TRACE STILL PENDING
+
+R43_MANAGER_EXPORT_COUNTERFACTUAL_20261028.json: original CPUprobe016a actualmsprof255 vs same exact rank0 official export0170actual0, only /dev/davinci_manager control added. No physical compute devices; originalrank0unchanged, ownmanagerCPUcontainer terminal. ResultSHA2f3661ee63fc1fa7a6444ce67d90f415018ab1dda9f5b5d7642cf11e89749d7a. This supports parser platform-init access fault, NOT HYPIC speed/whole reproduction. Preserve original015b/0165 failures. Freeze new-source-bound manager-only offline helper/plan/new copy; strict genuine4rankCPU+NPU audit and ALL original transport/math/source/warm/physical/isolation/release remain before G3. No unchangedNPU rerun. Deadline2026-10-29T19:15:24Z unchanged.
+
 # CURRENT CANN EXPORT ROOT FAILURE PINPOINTED: DRIVER PLATFORM INIT; NO ACTIVE OWN SERVICE/PARSER
 
 R43_CANN_DRIVER_INIT_DECISION_20261028.json. OriginalCPUprobe016a terminalexit0, actualsameofficialmsprof --export=on commandexit255: DrvMngGetConsoleLogLevel failed / Init platform by driver faild. Root/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-msprof-export-probe-20261028/result.json SHA34d07a0e59fd0b311bb02bb8f35c809d5eea0d2cb8e93ac6b0bb3ff7ea5b1403; planSHA995924ed...; originalrank0unchanged/noNPUallocation. Thisexposesoriginalwrapper-suppressedCANNstderr/stdout, notanewinferencefailure. Alloriginal/failedparse/proberoots preserved. Noacceptedprofile/G3admission.
