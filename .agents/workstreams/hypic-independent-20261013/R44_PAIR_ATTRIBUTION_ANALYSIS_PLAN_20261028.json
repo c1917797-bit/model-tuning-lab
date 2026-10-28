@@ -1,0 +1,103 @@
+{
+  "schema": "hypic-r44-pair-attribution-analysis-plan/v1",
+  "state": "METHOD_FROZEN_SCHEMA_AND_SHAPE_ORIENTATION_NEXT_NO_TREATMENT",
+  "input_acceptance": "R44_PAIR_DIAGNOSTIC_ACCEPTANCE_20261028.json",
+  "reports": {
+    "G1": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-normalized-supplemental-audit-20261028.json",
+      "sha256": "33ae5bc5624d632a6717e048a73081997c5986287810fc2b1ad279d644cc7397"
+    },
+    "G3": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-normalized-supplemental-audit-20261028.json",
+      "sha256": "f374bbc84b02f5fc020660eca7993e0f17f685057527e7e61eb572bb0d37f2f0"
+    }
+  },
+  "normalized": {
+    "G1": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-normalized-trace-20261028/result.json",
+      "sha256": "41c4120778201bf4bcb883a72698217dc52f0feadc6b0785d1659eb21806ac96",
+      "keys": [
+        "four_rank_trace_valid",
+        "full_goal_complete",
+        "helper_sha256",
+        "new_performance_acceptance",
+        "official_parsed_unchanged",
+        "origin_us",
+        "original_failed_audit_preserved",
+        "plan_sha256",
+        "profiler",
+        "rows",
+        "schema",
+        "units"
+      ]
+    },
+    "G3": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-normalized-trace-20261028/result.json",
+      "sha256": "3fe5b44fb20cb67f5f33b1b79a9caef6a3ae7a3a3aa95eac15eb4c6cc576835a",
+      "keys": [
+        "four_rank_trace_valid",
+        "full_goal_complete",
+        "helper_sha256",
+        "new_performance_acceptance",
+        "official_parsed_unchanged",
+        "origin_us",
+        "original_failed_audit_preserved",
+        "plan_sha256",
+        "profiler",
+        "rows",
+        "schema",
+        "units"
+      ]
+    }
+  },
+  "predeclared_model": "R43_PAIR_COST_ATTRIBUTION_MODEL_20261028.json",
+  "hypotheses": [
+    "H1 added C1/C2 render/material/devicework cancels actual dense-row savings",
+    "H2 actual handoff/sync device gaps rather than inclusive CPU queue spans",
+    "H3 genuine measured-window compilation only; npu_fx_compiler inference annotation alone is not evidence of compilation"
+  ],
+  "first_operation": "New read-only CPU bounded exact-source layout/shape orientation across ALL eight accepted rank traces and their bound CANN CSV exports, no inference/profile rerun.",
+  "processing_limits": {
+    "cpu": "0",
+    "timeout_seconds": 300,
+    "max_address_space_bytes": 4294967296,
+    "trace_bytes": 268435456,
+    "tree_bytes": 2147483648,
+    "complexity": "O(events) or O(events log events), one rank in memory at a time; no per-distinct-flow-name rescan"
+  },
+  "output_root": "/opt/host/vnf/cch-hypic-independent-20261028/r44-pair-layout-r1-20261028",
+  "method_guards": [
+    "Check actual complete report and exact trace/CSV SHA inputs before processing; never mutate raw/parsed/normalized sources",
+    "Preserve exact Python int/string correlation IDs with rank/type/category/name; examples display IDs only as strings; never JSdouble roundtrip",
+    "Retain all fan-out/unmatched/ambiguous endpoints and unknown task classes; no deletion to manufacture matching",
+    "Actual phase/token/shape/call work first; bound diagnostic counter2 is not full decode/formal1024 coverage",
+    "Actual AscendHardware compute vs communication/wait separated; exclude Freq/OverlapAnalysis/CANNhost from active compute",
+    "No sum of overlapping streams/ranks, no CPU waiting span or total operator time treated as removable time",
+    "Read official Input/Output Shapes, TaskDuration, TaskType/core/stream/communication fields; record missing fields and unmatched classes instead of guessing",
+    "Only after real opportunity bound can close material R40 gap choose ONE changed source seam, then unprofiled same-protocol causal experiment; no unchanged matrix expansion"
+  ],
+  "scientific_checks_required": [
+    "Exact IDs above2^53 distinct; int/string types remain distinct",
+    "Fan-out, missing source/target and ambiguous flows remain counted",
+    "Interval union/intersection handles overlap and disjoint gaps without summing ranks",
+    "Nonfinite/negative durations rejected; diagnostic metadata not fabricated into compute"
+  ],
+  "external_guidance": {
+    "source": "/cache/cch/cannbot-skills, current archive is not a Git checkout (rev-parse128)",
+    "scope": "Expert documentation consulted, not locally reproduced algorithm proof; no scripts or manual component/sample workflow invoked",
+    "documents": {
+      "model/model-infer-perf-breakdown/SKILL.md": "3c23d1a7a1893f705c16e3ecc89e40e7eda1460a478d9527acf8309fb7ffcaf9",
+      "model/model-infer-profiling/SKILL.md": "226d8b4d0b2889afde1e31ded6f8fe35c1be9b4664a7aebeaf327f4b557238fb"
+    }
+  },
+  "known_service_result": {
+    "R40_weighted_TPOT_ms_native": 94.8741802415,
+    "R40_weighted_TPOT_ms_G3": 110.0527971597,
+    "necessary_G3_TPOT_recovery_fraction_to_match_native": 0.13792122790094996,
+    "TTFT_P95_regression_percent": 98.1965,
+    "no_profile_timing_extrapolation": true
+  },
+  "new_device_run": false,
+  "new_performance_acceptance": false,
+  "full_goal_complete": false
+}

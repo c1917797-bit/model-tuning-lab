@@ -1,0 +1,269 @@
+{
+  "schema": "hypic-r44-matched-pair-diagnostic-acceptance/v1",
+  "state": "BOTH_COUNT2_ARMS_FULL_DIAGNOSTIC_GUARDS_TRACE_AND_RELEASE_VALID",
+  "arms": {
+    "G1": {
+      "report": {
+        "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-normalized-supplemental-audit-20261028.json",
+        "sha256": "33ae5bc5624d632a6717e048a73081997c5986287810fc2b1ad279d644cc7397"
+      },
+      "policy": {
+        "algorithm_on": false,
+        "group": "G1",
+        "pdc_on": false
+      },
+      "source7": {
+        "R44_BOUNDED_PROFILE_SUCCESSOR_PLAN_20261028.json": "66439a7a1bb743233a8c3d443e57050613f80d0b9881bb9466921ee3ef64e600",
+        "host_audits/r44_launch_capsule.py": "775c2571ccb2c221f4e1ec6b9dd0912f3b322865e2a78ecd032e7927fce2633b",
+        "host_audits/r44_postprocess.py": "8c9498fdd924ad2fb58d07ec5dbdc9955748ecbb88b67215e00c6ad014818b2c",
+        "host_audits/r44_profile_audit.py": "a74558411112d46cc1f37745ee336d14714de5178f993a1e1ec273fac1098b71",
+        "host_audits/r44_profile_controller.py": "20a8e0b06c6450b00e33819dd60bfd657402fa933e705d485151264f45ac1061",
+        "host_audits/r44_profile_policy.py": "ae5c333756e5bce73c278468cdcef43c8a77a928570683a4175dc18ac1f579ea",
+        "host_audits/r44_scope.py": "021e63a5b7114c3bc4a90db3a6b09049f1d392196cb135f985f24c103b680cfe"
+      },
+      "profile": {
+        "delay_iterations": 0,
+        "ignore_frontend": true,
+        "max_iterations": 2,
+        "profiler": "torch",
+        "torch_profiler_dir": "/scratch/profiles",
+        "torch_profiler_with_memory": false,
+        "torch_profiler_with_stack": false
+      },
+      "rank_workers": {
+        "0": 59,
+        "1": 60,
+        "2": 61,
+        "3": 62
+      },
+      "trace_rows": {
+        "0": {
+          "trace": "rank0_59_20261028223158503_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+          "trace_sha256": "ac833a3700bae8004e628d124a76ce7bdbf1e811e9d232d4474f60046438cd71",
+          "metadata": "rank0_59_20261028223158503_ascend_pt/profiler_info_0.json",
+          "metadata_sha256": "46437d44ad88fcbc54debd62c182bc255f6c3190c63896ad1995c1e2bce28905",
+          "worker_pid": 59,
+          "events": 101514
+        },
+        "1": {
+          "trace": "rank1_60_20261028223158502_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+          "trace_sha256": "0f49477886091b6f26cbd33a966b72aa010c56b1aac8ceb40a62e19566b22c57",
+          "metadata": "rank1_60_20261028223158502_ascend_pt/profiler_info_1.json",
+          "metadata_sha256": "f9fe86cdd1dc233180fb78badad3cc0ab42e7328959759e827b2226ce9e0dd59",
+          "worker_pid": 60,
+          "events": 101513
+        },
+        "2": {
+          "trace": "rank2_61_20261028223158502_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+          "trace_sha256": "afa445b0331c7e72662bafa631479821ce3936d4844cc3d4d82220576b8a4579",
+          "metadata": "rank2_61_20261028223158502_ascend_pt/profiler_info_2.json",
+          "metadata_sha256": "6619c2e1441997e66e37a81cf58766c43986d6f1338169c8994aed8dc1abd5b6",
+          "worker_pid": 61,
+          "events": 101507
+        },
+        "3": {
+          "trace": "rank3_62_20261028223158502_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+          "trace_sha256": "85057c8ae337ffd3f5b23f0c42b00bb9f1b4c6a0e087f69d7f750505e6aae61a",
+          "metadata": "rank3_62_20261028223158502_ascend_pt/profiler_info_3.json",
+          "metadata_sha256": "065ad23bd6f8814658d0d39e043c5002cb13e1ba6cf0a66bfd8c80880095a8b6",
+          "worker_pid": 62,
+          "events": 101512
+        }
+      },
+      "normalized_tree_bytes": 138569669,
+      "raw_files": 304,
+      "all_original_guards_rerun": true,
+      "hot": {
+        "accepted": null,
+        "covered": 0,
+        "denominator": null,
+        "missing": null
+      },
+      "c2_finite": null,
+      "target_warmup_keys": [
+        "actual_target_warmups",
+        "common_cache_preparations",
+        "extra_target_warmup_seconds",
+        "formal40_transport_lifecycle_valid",
+        "measured_makespan_seconds",
+        "measured_plus_target_warmup_seconds",
+        "measured_request_ids",
+        "scope",
+        "warm_request_ids"
+      ]
+    },
+    "G3": {
+      "report": {
+        "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-normalized-supplemental-audit-20261028.json",
+        "sha256": "f374bbc84b02f5fc020660eca7993e0f17f685057527e7e61eb572bb0d37f2f0"
+      },
+      "policy": {
+        "algorithm_on": true,
+        "group": "G3",
+        "pdc_on": false
+      },
+      "source7": {
+        "R44_BOUNDED_PROFILE_SUCCESSOR_PLAN_20261028.json": "66439a7a1bb743233a8c3d443e57050613f80d0b9881bb9466921ee3ef64e600",
+        "host_audits/r44_launch_capsule.py": "775c2571ccb2c221f4e1ec6b9dd0912f3b322865e2a78ecd032e7927fce2633b",
+        "host_audits/r44_postprocess.py": "8c9498fdd924ad2fb58d07ec5dbdc9955748ecbb88b67215e00c6ad014818b2c",
+        "host_audits/r44_profile_audit.py": "a74558411112d46cc1f37745ee336d14714de5178f993a1e1ec273fac1098b71",
+        "host_audits/r44_profile_controller.py": "20a8e0b06c6450b00e33819dd60bfd657402fa933e705d485151264f45ac1061",
+        "host_audits/r44_profile_policy.py": "ae5c333756e5bce73c278468cdcef43c8a77a928570683a4175dc18ac1f579ea",
+        "host_audits/r44_scope.py": "021e63a5b7114c3bc4a90db3a6b09049f1d392196cb135f985f24c103b680cfe"
+      },
+      "profile": {
+        "delay_iterations": 0,
+        "ignore_frontend": true,
+        "max_iterations": 2,
+        "profiler": "torch",
+        "torch_profiler_dir": "/scratch/profiles",
+        "torch_profiler_with_memory": false,
+        "torch_profiler_with_stack": false
+      },
+      "rank_workers": {
+        "0": 58,
+        "1": 59,
+        "2": 60,
+        "3": 61
+      },
+      "trace_rows": {
+        "0": {
+          "trace": "rank0_58_20261028230419262_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+          "trace_sha256": "39daad9fec735463e4f02256f8dafaf8b647b4631cdbccfbf39338e020795a13",
+          "metadata": "rank0_58_20261028230419262_ascend_pt/profiler_info_0.json",
+          "metadata_sha256": "d58713c76f335c9cdab782f1a0096bfab0fa39c5b6de0265fd9d8a7445917c08",
+          "worker_pid": 58,
+          "events": 404678
+        },
+        "1": {
+          "trace": "rank1_59_20261028230419261_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+          "trace_sha256": "df1f074a386250e0eb803c096eb0798cd2180d4c9940fa44ce3339350466d7cb",
+          "metadata": "rank1_59_20261028230419261_ascend_pt/profiler_info_1.json",
+          "metadata_sha256": "605db1085874fdfa9cc9275cbab364effa8ffceabbe7bbd34002c6136041aacf",
+          "worker_pid": 59,
+          "events": 404669
+        },
+        "2": {
+          "trace": "rank2_60_20261028230419261_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+          "trace_sha256": "993c3cc1bfa09b709864173c1f73834e8361aa7f8ca7a5d4c3e2afc60de0ca57",
+          "metadata": "rank2_60_20261028230419261_ascend_pt/profiler_info_2.json",
+          "metadata_sha256": "c522b655501582560411be1419a38756a777a3a008ad9956cfb23ade531f43c6",
+          "worker_pid": 60,
+          "events": 404664
+        },
+        "3": {
+          "trace": "rank3_61_20261028230419261_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json",
+          "trace_sha256": "284bb497bc61228f5bc08160a9e0f1b591fe8a8817013f9561053b752a76e0d6",
+          "metadata": "rank3_61_20261028230419261_ascend_pt/profiler_info_3.json",
+          "metadata_sha256": "5049e0f08f746f4349fa3d4ce0bbbb06ca97aaccebceb10ccf22a05d52f67536",
+          "worker_pid": 61,
+          "events": 404665
+        }
+      },
+      "normalized_tree_bytes": 516085006,
+      "raw_files": 336,
+      "all_original_guards_rerun": true,
+      "hot": {
+        "accepted": true,
+        "covered": 40,
+        "denominator": 40,
+        "missing": []
+      },
+      "c2_finite": {
+        "layers": 2496,
+        "request_layer_completions": 2688,
+        "scope": "all observed hot C2 completions have exact preceding same-layer/rank/step finite gate"
+      },
+      "target_warmup_keys": [
+        "actual_target_warmups",
+        "common_cache_preparations",
+        "extra_target_warmup_seconds",
+        "formal40_transport_lifecycle_valid",
+        "hot",
+        "measured_makespan_seconds",
+        "measured_plus_target_warmup_seconds",
+        "measured_request_ids",
+        "scope",
+        "warm_request_ids"
+      ]
+    }
+  },
+  "normalized": {
+    "G1": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-normalized-trace-20261028/result.json",
+      "sha256": "41c4120778201bf4bcb883a72698217dc52f0feadc6b0785d1659eb21806ac96",
+      "keys": [
+        "four_rank_trace_valid",
+        "full_goal_complete",
+        "helper_sha256",
+        "new_performance_acceptance",
+        "official_parsed_unchanged",
+        "origin_us",
+        "original_failed_audit_preserved",
+        "plan_sha256",
+        "profiler",
+        "rows",
+        "schema",
+        "units"
+      ]
+    },
+    "G3": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-normalized-trace-20261028/result.json",
+      "sha256": "3fe5b44fb20cb67f5f33b1b79a9caef6a3ae7a3a3aa95eac15eb4c6cc576835a",
+      "keys": [
+        "four_rank_trace_valid",
+        "full_goal_complete",
+        "helper_sha256",
+        "new_performance_acceptance",
+        "official_parsed_unchanged",
+        "origin_us",
+        "original_failed_audit_preserved",
+        "plan_sha256",
+        "profiler",
+        "rows",
+        "schema",
+        "units"
+      ]
+    }
+  },
+  "independent_operations": {
+    "G1": "exec-00000000000001bb",
+    "G3": "exec-00000000000001cf"
+  },
+  "comparability": {
+    "same_source7": true,
+    "common_sources": 465,
+    "runtime_python": 438,
+    "host_sources": 32,
+    "model": "Qwen3.6-27B",
+    "physical_npu": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tp": 4,
+    "pdc": false,
+    "actual_target_warmups": 2,
+    "preparations": 4,
+    "full_requests": 40,
+    "concurrency": 16,
+    "input_tokens": 32768,
+    "fixed_output_tokens": 1024,
+    "max_profiler_iterations": 2,
+    "postprocess": "R44_MATCHED_OFFLINE_TRACE_PROTOCOL_20261028.json"
+  },
+  "events_preserved": {
+    "G1": 406046,
+    "G3": 1618676
+  },
+  "preserved_failures": [
+    "G1 immediate strict-port audit01b2",
+    "G1 canonical string timestamp schema01b5",
+    "G3 canonical string timestamp schema01c6"
+  ],
+  "scope": "Complete source-bound diagnostic evidence, not new service performance, causal root cause, full generation quality or paper reproduction acceptance. Measured phase/token work must be established before comparison; no profile-to-formal1024 extrapolation.",
+  "critical_path_attributed": false,
+  "new_performance_acceptance": false,
+  "full_goal_complete": false
+}
