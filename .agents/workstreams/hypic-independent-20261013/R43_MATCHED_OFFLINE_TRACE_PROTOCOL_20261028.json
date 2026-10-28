@@ -1,0 +1,99 @@
+{
+  "schema": "hypic-r43-matched-offline-trace-protocol/v1",
+  "state": "FROZEN_BEFORE_G3_CAPTURE",
+  "native_accepted_report": {
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-normalized-supplemental-audit-20261028.json",
+    "sha256": "397dc661f47b82421e4da27fc77cbb4a2fb8ab9e316e6cb3f7ec2aa8ac583b21"
+  },
+  "groups": [
+    "G1",
+    "G3"
+  ],
+  "capture_source5": {
+    "R43_RENEWAL_REFLECTION_PLAN_20261028.json": "30c69c452323b2ed27270b5eab0f9fb9f8a4a9016893da76c3eb8e19d64059bc",
+    "host_audits/r43_launch_capsule.py": "10524bc78d966da3becd8d69d77fee3e8de3aabef3b747fbd3c467568c9445f4",
+    "host_audits/r43_profile_audit.py": "468d06052a08f530e5bae49a198ae10fc3d5dbf8f207b788e779dd4ef6b79ae0",
+    "host_audits/r43_profile_controller.py": "431a43fc0e6aa8e4ef9b12f441ef8ca1374f2219ad83fbae00499a8c3397a0b8",
+    "host_audits/r43_renewal_policy.py": "7818df311e711ace05bbda7fe539288bfa0e343a74f187476ce70d01cb80930e"
+  },
+  "common_bindings": 465,
+  "runtime_python": 438,
+  "retained_host_sources": 32,
+  "official_image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+  "algorithm_and_data_protocol_unchanged": true,
+  "capture": {
+    "preparations": 4,
+    "target_warmups": 2,
+    "requests": 40,
+    "concurrency": 16,
+    "input_tokens": 32768,
+    "output_tokens": 1024,
+    "pdc_on": false,
+    "profiler": {
+      "profiler": "torch",
+      "torch_profiler_dir": "/scratch/profiles",
+      "ignore_frontend": true,
+      "torch_profiler_with_stack": false,
+      "torch_profiler_with_memory": false,
+      "delay_iterations": 0,
+      "max_iterations": 7
+    },
+    "profile_times_not_speed": true
+  },
+  "source_sha256": {
+    "host_audits/r43_offline_parse_manager.py": "00b6221835f8f6cb7e8f8328b5f1c6430e2967fdb93a8c74ade636e82da2c527",
+    "host_audits/r43_trace_timestamp_copy.py": "0b8466742c3b63a597cf278632b4952001c80a7180b35ffab4cb6c263b5e507e",
+    "host_audits/r43_normalized_supplemental_audit.py": "d5ae521cfeb9ced1763ce5ad0eede334c6792f386e5352f1b293353b816ff244",
+    "host_audits/r41_profile_trace.py": "46fdb2acaa01352a31a808b88a71a39bd7cfa63e2e391f7cc971bbfbcaafe74c"
+  },
+  "release_only_preprocessing": {
+    "reviewed_original_operation": "exec-0000000000000160",
+    "reuse_scope": "Same original full-source/math/transport/workerphysical/isolation/live-release independent audit reaches exact missing parsed trace gate; preserve explicit false trace/full-diagnostic status. New group/contract/owned paths only. Verify actual renewal receipt and original profile inventory hashes; never admit G3 or final acceptance from release-only proof.",
+    "required": {
+      "valid_release_only": true,
+      "exact_owned_container_absent": true,
+      "four_rank_trace_valid": false
+    }
+  },
+  "official_parse": {
+    "same_official_analyse_source_sha256": "1a04902572383b74a401449e73929b2c4ce728d6c81bb59341876b03c7a82168",
+    "manager_metadata_control_only": true,
+    "no_physical_davinci0_7_compute_devices": true,
+    "cpu": "112-119",
+    "memory": "8g",
+    "pids": 256,
+    "network": "none",
+    "max_process_number": 2,
+    "export_type": [
+      "text"
+    ],
+    "timeout_seconds": 900,
+    "original_capture_not_mounted": true,
+    "exclusive_new_copy_required": true
+  },
+  "normalization": {
+    "single_common_origin": "floor(min(all timestamp values across all four rank traces)) microseconds",
+    "exact_decimal_roundtrip_required": true,
+    "relative_time_units": "us unchanged",
+    "duration_changed": false,
+    "events_dropped": false,
+    "all_non_ts_fields_and_order_preserved": true,
+    "nonfinite_or_negative_duration_rejected": true,
+    "old_canonical_audit_source_unchanged": true,
+    "original_capture_and_official_parse_immutable": true
+  },
+  "supplemental_full_audit": "New source-bound per-arm plan binds actual contract/parserresult/copyresult hashes, same helpers and actual original4rankPID. Re-read ALL records/non-tsfields/durations/order/flowIDs/exacttime relations; unchanged canonical gate plus every original fullsource/math/warm/40/physical/isolation/102ports/exactCID release. Preserve all prior failures. No completion/speed from profiler times.",
+  "admission": {
+    "minimum_pipeline_budget_seconds": 7200,
+    "raw_reserve_gib_G3": 6.5,
+    "cache_floor_gib": 4,
+    "foreign_tasks_never_modified": true,
+    "only_physical_npus": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "full_goal_complete": false
+}

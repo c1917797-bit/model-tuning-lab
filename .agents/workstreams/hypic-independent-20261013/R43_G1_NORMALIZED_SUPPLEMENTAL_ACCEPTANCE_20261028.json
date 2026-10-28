@@ -1,0 +1,38 @@
+{
+  "schema": "hypic-r43-native-supplemental-acceptance/v1",
+  "state": "NATIVE_DIAGNOSTIC_FULL_GUARDS_TRACE_AND_RELEASE_VALID",
+  "operation": "exec-0000000000000188",
+  "report": {
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-normalized-supplemental-audit-20261028.json",
+    "sha256": "397dc661f47b82421e4da27fc77cbb4a2fb8ab9e316e6cb3f7ec2aa8ac583b21"
+  },
+  "actual": {
+    "r43_diagnostic_transport_valid": true,
+    "live_release_verified": true,
+    "real_requests": 40,
+    "target_warmups": 2,
+    "common_preparations": 4,
+    "profiler_four_rank_trace_valid": true,
+    "events": 2409354,
+    "canonical_gate_unchanged": true,
+    "all_records_exact_decimal_normalization_replayed": true
+  },
+  "source5": {
+    "R43_RENEWAL_REFLECTION_PLAN_20261028.json": "30c69c452323b2ed27270b5eab0f9fb9f8a4a9016893da76c3eb8e19d64059bc",
+    "host_audits/r43_launch_capsule.py": "10524bc78d966da3becd8d69d77fee3e8de3aabef3b747fbd3c467568c9445f4",
+    "host_audits/r43_profile_audit.py": "468d06052a08f530e5bae49a198ae10fc3d5dbf8f207b788e779dd4ef6b79ae0",
+    "host_audits/r43_profile_controller.py": "431a43fc0e6aa8e4ef9b12f441ef8ca1374f2219ad83fbae00499a8c3397a0b8",
+    "host_audits/r43_renewal_policy.py": "7818df311e711ace05bbda7fe539288bfa0e343a74f187476ce70d01cb80930e"
+  },
+  "source_bindings": 465,
+  "host_sources": 32,
+  "runtime_python": 438,
+  "preserved_failures": [
+    "015b original direct trace missing",
+    "0165 no-manager CANN export failure",
+    "0174 strict string timestamp type rejection"
+  ],
+  "performance_acceptance": false,
+  "critical_path_attributed": false,
+  "full_goal_complete": false
+}
