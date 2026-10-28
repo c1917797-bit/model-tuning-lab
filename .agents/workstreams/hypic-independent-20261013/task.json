@@ -9,7 +9,7 @@
   "original_base": "23ec33d7d692bb77d17fb5b81aabacf57adad5c7",
   "base_remote_freshness": "fetch0154 timeout; cached base only; refresh before ready/integration",
   "worktree": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
-  "execution_state": "R44_G3_MANAGER_ONLY_CPU_PARSE_ACTIVE_EXACT01c6",
+  "execution_state": "R44_G3_FOUR_OFFICIAL_EXPORTS_COMPLETE_TIMESTAMP_COPY_READY",
   "r43_g3_volume_decision": {"path":"R43_G3_OFFLINE_VOLUME_DECISION_20261028.json","state":"MECHANISM_MATH_RELEASE_VALID_TRACE_VOLUME_ADMISSION_REJECTED","rejection":{"operation":"exec-000000000000019d","path":"/opt/host/vnf/cch-hypic-independent-20261028/r43-g3-full-offline-admission-rejection-20261028.json","sha256":"45c69bdb17c69d26a2c9162d0e4de869157f656e40d6ad58263071840085ac28"}},
   "r44_bounded_profile_plan": {"path":"R44_BOUNDED_PROFILE_SUCCESSOR_PLAN_20261028.json","state":"HOST24_ACTUAL_CONSTRUCTOR_AND_BOUNDARY_PASS_NATIVE_PENDING"},
   "r43_g3_raw_terminal": {"schema":"hypic-r43-g3-raw-terminal/v1","state":"RAW40_VALID_OWNER_RELEASED_INDEPENDENT_AUDITS_PENDING","original_controller":"exec-000000000000018c","original_controller_observation":"operation_not_found is not terminal evidence; actual raw terminal + no matching controller process + exact ownedCID absent establish completed capture","contract_sha256":"1ea0d7c494b13ad36e741016dbb61bf11501280e27be42e7e11e579e026975de","raw_root":"/opt/host/vnf/cch-hypic-independent-20261028/critical-path-r43-g3-r1-20261028","result_sha256":"8014a9f1fa6aaf58e7624b32d9af3a9e4087f6a624c04cfd95377de1454983ef","release_sha256":"e4ab12d2dac063e5e5021cf6839903308e272b761b86c073697c3870e2dc250d","performance_unit_sha256":"dc6a402f9b9765fde1206870f064060e7a9b551e0039ea28be2d86e37de09d75","events_sha256":"c8614aa9e7b5220a62032702867f23720336d7cc39cfcd67e6bb6000db9d7dd7","result":{"valid":true,"error":null,"guard_errors":[],"isolation_samples":308,"responses":40,"worker_pids":[826115,826116,826117,826118],"physical_devices_seen":[0,1,2,3],"release":{"owned_container":"cb2e49a8ea471cbf113de79327bf3302a227d340eb3def040b496280bf2e43bf","removed":true,"port_free":true,"final_physical_processes":[]}},"controller_processes_observed":[],"exact_container_absent":true,"independent_release_math_hot_trace_pending":true,"performance_acceptance":false,"full_goal_complete":false},
@@ -509,7 +509,7 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": {"state":"CPU_PARSE_RUNNING_OR_TERMINAL_UNCONFIRMED","operation":"exec-00000000000001c6","peer_id":"lgw_a6109c51076a4a2c9d2674ca5a8704a0","connector":"awmcp","route":"force_direct/peer_direct","plan":"R44_G3_OFFLINE_MANAGER_PARSE_PLAN_20261028.json","raw_root":"/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-offline-manager-parse-20261028","container_name":"hypic-r44-g3-offline-manager-parse-20261028","container_id":"97b2819982b35fd9131dcf819d1f8f637d2859392d7381ff5b7e634ae3fbcd07","compute_devices":[],"metadata_control_only":"/dev/davinci_manager","next":"Track original peer/01c6/newcopy. Actual official four complete parsed outputs and original SHA plus exactCPUrelease required. Preserve original timestamp schema rejection, then same Decimal complete-copy and full independent supplemental; no paired critical-path/speed claim before both accepted."},
+  "active_attempt": null,
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",

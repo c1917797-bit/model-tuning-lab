@@ -1,0 +1,66 @@
+{
+  "schema": "hypic-r44-exact-timestamp-copy-plan/v1",
+  "state": "OFFLINE_FORMAT_ONLY_NO_INFERENCE",
+  "contract": "PROFILE_R44_G3_R1_20261028_CONTRACT.json",
+  "contract_sha256": "56a22e379fd08dfb034c0ef27cf9d784742813f456f153bc8c81a7df8f4614f3",
+  "helper": "host_audits/r43_trace_timestamp_copy.py",
+  "helper_sha256": "0b8466742c3b63a597cf278632b4952001c80a7180b35ffab4cb6c263b5e507e",
+  "parsed_root": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-offline-manager-parse-20261028",
+  "parser_result_sha256": "667e7f0f8455ccd0d6d44d05f23b3393a4651e195ace8de48aef337dc829394a",
+  "normalized_root": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-normalized-trace-20261028",
+  "trace_sha256": {
+    "rank0_58_20261028230419262_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json": "d408ab5a175f68a7408164e44b2090caff4fe6dae3703b3ddb2b086792927a1b",
+    "rank1_59_20261028230419261_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json": "a6724fcb2d55ab861389693d22e57742c58faf2434e46ed84dbda16d8efad3e2",
+    "rank2_60_20261028230419261_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json": "16ffb37201c53d9692c1ddd0c563d3cd1efb7f77447f933a7219d78c1fc48c72",
+    "rank3_61_20261028230419261_ascend_pt/ASCEND_PROFILER_OUTPUT/trace_view.json": "552ed7f8fe35f04ac31d56b869a7bc99661c27b4913259798f0a9f486d8d355b"
+  },
+  "release_proof": {
+    "operation": "exec-00000000000001c4",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-capture-release-only-20261028.json",
+    "sha256": "8f1b3501bf5b345581f26dca57b039cd38b8c194a50043942f82d8c4f5b12c57"
+  },
+  "official_timestamp_producer": {
+    "operation": "exec-000000000000017c",
+    "image": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "trace_event_manager_sha256": "52339b602f6b29276ba99d798d7d1e269edc1dfd664e4a8a3672f861e48b1638",
+    "constant_sha256": "4643479478fb31a8cce3b5838edb4ec61bb159d04846de99ec62f383dede5b31",
+    "actual_producer": "create_x_event uses ts=convert_ns2us_str(event.ts), dur=convert_ns2us_float(event.dur); convert_ns2us_str requires integer ns and inserts decimal point3 places. Timestamp strings are an explicit official precision-preserving representation."
+  },
+  "format_contract": {
+    "single_common_origin": "floor(min(all timestamp values across all four rank traces)) microseconds",
+    "exact_decimal_roundtrip_required": true,
+    "relative_time_units": "us unchanged",
+    "duration_changed": false,
+    "events_dropped": false,
+    "all_non_ts_fields_and_order_preserved": true,
+    "nonfinite_or_negative_duration_rejected": true,
+    "old_canonical_audit_source_unchanged": true,
+    "original_capture_and_official_parse_immutable": true
+  },
+  "limits": {
+    "cpu": "0",
+    "timeout_seconds": 600,
+    "no_container_or_device": true,
+    "min_output_headroom_bytes": 8589934592,
+    "canonical_max_total_bytes": 2147483648,
+    "canonical_max_trace_bytes": 268435456
+  },
+  "r44_wrapper_sha256": "8c9498fdd924ad2fb58d07ec5dbdc9955748ecbb88b67215e00c6ad014818b2c",
+  "r44_source_sha256": {
+    "R44_BOUNDED_PROFILE_SUCCESSOR_PLAN_20261028.json": "66439a7a1bb743233a8c3d443e57050613f80d0b9881bb9466921ee3ef64e600",
+    "host_audits/r44_launch_capsule.py": "775c2571ccb2c221f4e1ec6b9dd0912f3b322865e2a78ecd032e7927fce2633b",
+    "host_audits/r44_postprocess.py": "8c9498fdd924ad2fb58d07ec5dbdc9955748ecbb88b67215e00c6ad014818b2c",
+    "host_audits/r44_profile_audit.py": "a74558411112d46cc1f37745ee336d14714de5178f993a1e1ec273fac1098b71",
+    "host_audits/r44_profile_controller.py": "20a8e0b06c6450b00e33819dd60bfd657402fa933e705d485151264f45ac1061",
+    "host_audits/r44_profile_policy.py": "ae5c333756e5bce73c278468cdcef43c8a77a928570683a4175dc18ac1f579ea",
+    "host_audits/r44_scope.py": "021e63a5b7114c3bc4a90db3a6b09049f1d392196cb135f985f24c103b680cfe"
+  },
+  "matched_protocol": "R44_MATCHED_OFFLINE_TRACE_PROTOCOL_20261028.json",
+  "actual_parser_independent_proof": {
+    "operation": "exec-00000000000001c9",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-offline-schema-failure-independent-20261028.json",
+    "sha256": "a2ac432da86f6e690bd4f3ff6d805f38cb20df9e124e0a67dd5e57d064ab686a"
+  },
+  "next": "Run once on this exclusive full COPY; all raw/official outputs unchanged. Independently replay every record, exact shared-origin Decimal offset, canonical four-rank CPU+NPU and ALL original source/math/physical/isolation/release guards. No G3 until full supplemental acceptance.",
+  "full_goal_complete": false
+}
