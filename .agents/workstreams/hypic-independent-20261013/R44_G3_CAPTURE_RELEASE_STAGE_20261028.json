@@ -1,0 +1,56 @@
+{
+  "schema": "hypic-r44-g3-capture-release-stage/v1",
+  "state": "RAW40_VALID_AND_INDEPENDENT_RELEASE_ONLY_VALID_TRACE_PENDING",
+  "original_controller": "exec-00000000000001be",
+  "observation": "operation_not_found is not terminal evidence; original raw result, actual controller absence and exact CID absence establish terminal capture. Do not restart or keep polling old01be as active.",
+  "raw_root": "/opt/host/vnf/cch-hypic-independent-20261028/critical-path-r44-g3-r1-20261028",
+  "raw_result_sha256": "775eb2accbecbe0b43bb2d063d741a4182d18c58944db3e6b025fe2a495eae83",
+  "raw_result": {
+    "valid": true,
+    "error": null,
+    "guard_errors": [],
+    "isolation_samples": 329,
+    "responses": 40,
+    "worker_pids": [
+      1982351,
+      1982352,
+      1982353,
+      1982354
+    ],
+    "physical_devices_seen": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "release": {
+      "owned_container": "142bfd53f1dbb6bd594249755881d6819b5301e05bd3005bab10bcccb8b7e063",
+      "removed": true,
+      "port_free": true,
+      "final_physical_processes": []
+    }
+  },
+  "raw_release_sha256": "fe81a591cfe12f22559552736630a74de9f0cd28e90b1c249ef8358af359bd12",
+  "actual_controller_processes": [],
+  "exact_cid_absent": true,
+  "independent_release": {
+    "operation": "exec-00000000000001c4",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-capture-release-only-20261028.json",
+    "sha256": "8f1b3501bf5b345581f26dca57b039cd38b8c194a50043942f82d8c4f5b12c57",
+    "valid_release_only": true,
+    "four_rank_trace_valid": false,
+    "all_original_guards_reached_before_trace": true
+  },
+  "raw_profile_files": 336,
+  "raw_profile_bytes": 151718180,
+  "worker_mapping": {
+    "0": 58,
+    "1": 59,
+    "2": 60,
+    "3": 61
+  },
+  "all329_isolation_clean": true,
+  "next": "Same frozen full-four manager-only official parse/Decimal exact copy/full independent supplemental. No old7step mixing, rerun, gate increase or service speed conclusion.",
+  "full_goal_complete": false,
+  "new_performance_acceptance": false
+}
