@@ -503,7 +503,7 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": null,
+  "active_attempt": {"state":"RUNNING_CPU_OFFLINE_MANAGER_PARSE_NO_INFERENCE","operation":"exec-0000000000000174","peer_id":"lgw_a6109c51076a4a2c9d2674ca5a8704a0","connector":"awmcp","plan":"R43_OFFLINE_MANAGER_PARSE_PLAN_20261028.json","helper":"host_audits/r43_offline_parse_manager.py","helper_sha256":"00b6221835f8f6cb7e8f8328b5f1c6430e2967fdb93a8c74ade636e82da2c527","raw_root":"/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-offline-manager-parse-20261028","container_name":"hypic-r43-g1-offline-manager-parse-20261028","checkpoint":"8e00499985d5b759671af2a7893d7c91022a8065","rule":"Originalpeer/exact0174/newcopyroot only. Unknown/running neverrestart. Managercontrol metadataonly, no physical compute devices/inference. Immutable original392hashes, source5/runtime oldclosures, canonical4rankCPU+NPUtrace gate unchanged. Terminal independent exactCPUrelease/provenance/supplemental fulloriginalaudit beforeG3."},
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
