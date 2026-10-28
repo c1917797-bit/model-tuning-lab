@@ -1,0 +1,39 @@
+{
+  "schema": "hypic-r44-normalized-supplemental-audit-plan/v1",
+  "state": "INDEPENDENT_ALL_ORIGINAL_GUARDS_AND_EXACT_COPY_REPLAY_REQUIRED",
+  "contract": {
+    "path": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/PROFILE_R44_G1_R1_20261028_CONTRACT.json",
+    "sha256": "2ef97cc8884b2b59d00d7751d6197a40c3d634386be64c3a2687ee6e178c8dee"
+  },
+  "offline_plan": {
+    "path": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/R44_G1_OFFLINE_MANAGER_PARSE_PLAN_20261028.json",
+    "sha256": "4411974c43a92c9ce92303fb7ab14b1d9c6fc9234f70cd8b6efa3008611dc59b"
+  },
+  "offline_result": {
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-offline-manager-parse-20261028/result.json",
+    "sha256": "a57a8b2fae8648ebeabb076bfac09055267442e67834bb4aedd1e4130736a494"
+  },
+  "normalization_plan": {
+    "path": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/R44_G1_EXACT_TIMESTAMP_COPY_PLAN_20261028.json",
+    "sha256": "68d786ef89ec8046139dbef625521d86f3207db4511d4b8a3872f7981c4df64e"
+  },
+  "normalization_result": {
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-normalized-trace-20261028/result.json",
+    "sha256": "41c4120778201bf4bcb883a72698217dc52f0feadc6b0785d1659eb21806ac96"
+  },
+  "auditor": "host_audits/r43_normalized_supplemental_audit.py",
+  "auditor_sha256": "d5ae521cfeb9ced1763ce5ad0eede334c6792f386e5352f1b293353b816ff244",
+  "r44_wrapper_sha256": "8c9498fdd924ad2fb58d07ec5dbdc9955748ecbb88b67215e00c6ad014818b2c",
+  "r44_source_sha256": {
+    "R44_BOUNDED_PROFILE_SUCCESSOR_PLAN_20261028.json": "66439a7a1bb743233a8c3d443e57050613f80d0b9881bb9466921ee3ef64e600",
+    "host_audits/r44_launch_capsule.py": "775c2571ccb2c221f4e1ec6b9dd0912f3b322865e2a78ecd032e7927fce2633b",
+    "host_audits/r44_postprocess.py": "8c9498fdd924ad2fb58d07ec5dbdc9955748ecbb88b67215e00c6ad014818b2c",
+    "host_audits/r44_profile_audit.py": "a74558411112d46cc1f37745ee336d14714de5178f993a1e1ec273fac1098b71",
+    "host_audits/r44_profile_controller.py": "20a8e0b06c6450b00e33819dd60bfd657402fa933e705d485151264f45ac1061",
+    "host_audits/r44_profile_policy.py": "ae5c333756e5bce73c278468cdcef43c8a77a928570683a4175dc18ac1f579ea",
+    "host_audits/r44_scope.py": "021e63a5b7114c3bc4a90db3a6b09049f1d392196cb135f985f24c103b680cfe"
+  },
+  "matched_protocol": "R44_MATCHED_OFFLINE_TRACE_PROTOCOL_20261028.json",
+  "scope": "Same exact original full source/math/warm/full40/actualrank physical/isolation/live-release and canonical trace audit on strictly verified full official normalization COPY. No new inference or performance acceptance. Original direct failed gates preserved.",
+  "full_goal_complete": false
+}
