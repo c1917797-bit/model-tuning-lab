@@ -1,0 +1,45 @@
+{
+  "schema": "hypic-r43-offline-parse-plan/v1",
+  "state": "NATIVE_CAPTURE_TRANSPORT_AND_RELEASE_PASS_PARSING_REQUIRED",
+  "original_controller": {
+    "operation": "exec-0000000000000150",
+    "exit_code": 0,
+    "requests": 40,
+    "isolation_samples": 282,
+    "owned_container_removed": true,
+    "segfault_observed": false
+  },
+  "contract": "PROFILE_R43_G1_R1_20261028_CONTRACT.json",
+  "contract_sha256": "8afbdd8da1a8300b01d96fef8c7ea8a1103566e538232ec372f01385621e2e67",
+  "release_proof": {
+    "operation": "exec-0000000000000160",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-capture-release-only-20261028.json",
+    "sha256": "7c1f45bf0ea7cd9a9323bca378fd78aa4ed8283a089b34b8d4bbaf356b1e3070"
+  },
+  "failure_phase": {
+    "audit0158": "Strict live bind was still pending immediately after release; subsequent all102 strict binds passed with no listener/current process.",
+    "audit015b": "No closed parsed rank trace. Four workers log profiling data cannot be parsed during daemon process; official recommendation is offline analyse.",
+    "metadata": "Four ranks0-3, actual workerPIDs60-63, CPU+NPU/Level1/PipeUtil, with_stackFalse/with_modulesFalse, finite start/end info;392raw files229866558bytes.",
+    "classification": "Original strict diagnostic audit remains invalid pending genuine offline parse and supplemental independent audit. Transport/release-only report is not a valid diagnostic predecessor."
+  },
+  "helper": "host_audits/r43_offline_parse.py",
+  "helper_sha256": "44913d1bd0bf084559d2aa82c43c257fdb6aca685e4e93177c8c8faa838d6eae",
+  "official_profiler_sha256": "1a04902572383b74a401449e73929b2c4ce728d6c81bb59341876b03c7a82168",
+  "official_interface": "torch_npu.profiler.profiler.analyse(path,max_process_number=2,export_type=['text'])",
+  "source_probe": "exec-000000000000015e; actual immutable serving image function/signature/source SHA inspected CPU-only",
+  "analysis_root": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-offline-parse-20261028",
+  "container_name": "hypic-r43-g1-offline-parse-20261028",
+  "limits": {
+    "cpu": "112-119",
+    "memory": "8g",
+    "pids": 256,
+    "max_process_number": 2,
+    "timeout_seconds": 900,
+    "no_network": true,
+    "no_npu_devices": true
+  },
+  "procedure": "Hash all source files against release proof; new exclusive copy; verify copied bytes; original capture is not mounted in parser; official same image source-bound analyse in non-daemon main process. Save actual logs/exit/input manifest. Require strict existing fourrankPID/CPU+NPU complete parsed trace audit, preserve original raw and failed audit evidence. No NPU rerun.",
+  "next": "If parsing succeeds, version and source-bind supplemental independent offline-trace audit that retains all original R43 guards and binds parsed copy to original raw hashes; original failed command not relabeled passed. Only valid parsed native supplemental proof permits same-source G3 newroot/newcontract with same offline procedure frozen before launch. If parse fails preserve exact CPU root/handle/log and change only evidence-supported next variable.",
+  "scope": "Post-processing diagnosis only; no new service performance, causal tracer rootcause, quality or full-goal claim.",
+  "full_goal_complete": false
+}
