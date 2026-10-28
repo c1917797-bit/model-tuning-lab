@@ -504,7 +504,7 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": null,
+  "active_attempt": {"state":"RUNNING_CPU_EXACT_TIMESTAMP_COPY_NO_INFERENCE","operation":"exec-0000000000000182","peer_id":"lgw_a6109c51076a4a2c9d2674ca5a8704a0","connector":"awmcp","plan":"R43_EXACT_TIMESTAMP_COPY_PLAN_20261028.json","plan_sha256":"cb5e7f07fcb2c8c4af677bf7241efde2ff97fbc5c47e5cfb3a6e48b277f29cd7","raw_root":"/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-normalized-trace-20261028","checkpoint":"c1ab71bcfceba6d82ed907efac14d68a39e101df","rule":"Originalma/exact0182/new normalized COPY only; running/unknown neverrestart. No container/NPU/profiler rerun. Originalcapture/officialparsed/source5/runtime immutable. Canonical strict full4trace after exact-decimal/all-event retention. Terminal normalized result + independent original-guard supplemental audit before G3."},
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
