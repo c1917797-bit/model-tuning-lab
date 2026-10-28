@@ -505,7 +505,7 @@
     "existing_hypic_present": false,
     "device_use": false
   },
-  "active_attempt": null,
+  "active_attempt": {"state":"RUNNING_INDEPENDENT_NATIVE_SUPPLEMENTAL_CPU_AUDIT","operation":"exec-0000000000000188","peer_id":"lgw_a6109c51076a4a2c9d2674ca5a8704a0","connector":"awmcp","plan":"R43_G1_NORMALIZED_SUPPLEMENTAL_AUDIT_PLAN_20261028.json","source_auditor":"host_audits/r43_normalized_supplemental_audit.py","source_auditor_sha256":"d5ae521cfeb9ced1763ce5ad0eede334c6792f386e5352f1b293353b816ff244","raw_root":"/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-normalized-trace-20261028","output":"/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-normalized-supplemental-audit-20261028.json","checkpoint":"726431c3025998662d552f5f237302da7e244c62","rule":"Originalma/exact0188/roots only. No NPU/container/inference. Replay original392+officialparsed+every normalizedevent, canonical4rankCPU+NPU, ALL originalsource/math/40/2warm/4prep/physical/isolation/exactrelease. Running/unknown neverrestart. Only genuine supplemental valid/pathSHA native predecessor permits same-source G3."},
   "last_r27_g1_attempt": {
     "state": "TERMINAL_VALID_AUDITED_RELEASED",
     "operation": "exec-00000000000015ec",
