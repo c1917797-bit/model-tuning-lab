@@ -1,0 +1,152 @@
+{
+  "schema": "hypic-r44-pair-layout-orientation/v1",
+  "state": "EXACT_SOURCE_EIGHT_RANK_ORIENTATION_COMPLETE_CAUSE_UNATTRIBUTED",
+  "operation": "exec-00000000000001d6",
+  "result": {
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-pair-layout-r1-20261028/result.json",
+    "sha256": "8ec00a902146345e1dfdcfd436549d8f1551596d30e5efafc570ba8dbfe422f2"
+  },
+  "post_input_verification": {
+    "operation": "exec-00000000000001d8",
+    "exit_code": 0,
+    "eight_rank_trace_and_official_csv_sha_unchanged": true
+  },
+  "elapsed_seconds": 37.62643806007691,
+  "input_scope": "Both accepted count2 arms, all8rank traces and exact official kernel_details.csv; no new inference/devices.",
+  "observed_rank0_examples": {
+    "G1": {
+      "events": 101514,
+      "projection": {
+        "input_shapes": "\"32768,5120;4096,5120\"",
+        "output_shapes": "\"32768,4096\"",
+        "dtype": "DT_BF16;DT_BF16",
+        "type": "MatMulV3",
+        "csv_rows": 5220
+      },
+      "MatMulV3_hardware_calls": 256,
+      "compiled_inference_annotation_count": 1
+    },
+    "G3": {
+      "events": 404678,
+      "projection": {
+        "input_shapes": "\"16392,5120;4096,5120\"",
+        "output_shapes": "\"16392,4096\"",
+        "dtype": "DT_BF16;DT_BF16",
+        "type": "MatMulV3",
+        "csv_rows": 16367
+      },
+      "MatMulV3_hardware_calls": 512,
+      "compiled_inference_annotation_count": 0,
+      "observed_CANN_aclrtSynchronizeStream_calls": 1507,
+      "observed_hardware_IndexSelect_calls": 2068,
+      "observed_hardware_IsFinite_calls": 640,
+      "observed_hardware_ReduceAll_calls": 768
+    }
+  },
+  "flow_coverage": {
+    "G1": {
+      "categories": {
+        "HostToDevice": {
+          "ends": 6259,
+          "fan_out": 132,
+          "intermediate": 0,
+          "keys": 4431,
+          "missing_start": 129,
+          "one_to_one": 4170,
+          "starts": 4302
+        },
+        "async_npu": {
+          "ends": 4301,
+          "intermediate": 0,
+          "keys": 4301,
+          "one_to_one": 4301,
+          "starts": 4301
+        },
+        "async_task_queue": {
+          "ends": 4364,
+          "intermediate": 0,
+          "keys": 4364,
+          "one_to_one": 4364,
+          "starts": 4364
+        }
+      },
+      "examples": {
+        "HostToDevice": {
+          "id_string": "65253438128128",
+          "id_type": "str",
+          "name": "HostToDevice65253438128128"
+        },
+        "async_npu": {
+          "id_string": "1793226718718561933",
+          "id_type": "int",
+          "name": "torch_to_npu"
+        },
+        "async_task_queue": {
+          "id_string": "339651",
+          "id_type": "int",
+          "name": "enqueue_to_dequeue"
+        }
+      },
+      "scope": "Typed rank-local category/name/ID cardinality only; fan-out/unmatched/ambiguous retained. No inferred causal edges.",
+      "unsupported_id_events": 0
+    },
+    "G3": {
+      "categories": {
+        "HostToDevice": {
+          "ends": 18902,
+          "fan_out": 260,
+          "intermediate": 0,
+          "keys": 18642,
+          "one_to_one": 18382,
+          "starts": 18642
+        },
+        "async_npu": {
+          "ends": 18642,
+          "intermediate": 0,
+          "keys": 18642,
+          "one_to_one": 18642,
+          "starts": 18642
+        },
+        "async_task_queue": {
+          "ends": 18740,
+          "intermediate": 0,
+          "keys": 18740,
+          "one_to_one": 18740,
+          "starts": 18740
+        }
+      },
+      "examples": {
+        "HostToDevice": {
+          "id_string": "376758826172416",
+          "id_type": "str",
+          "name": "HostToDevice376758826172416"
+        },
+        "async_npu": {
+          "id_string": "1793228659532296824",
+          "id_type": "int",
+          "name": "torch_to_npu"
+        },
+        "async_task_queue": {
+          "id_string": "350933",
+          "id_type": "int",
+          "name": "enqueue_to_dequeue"
+        }
+      },
+      "scope": "Typed rank-local category/name/ID cardinality only; fan-out/unmatched/ambiguous retained. No inferred causal edges.",
+      "unsupported_id_events": 0
+    }
+  },
+  "direct_shape_finding": "Representative actual BF16 projection changes M32768 to16392 at identical5120x4096 geometry. Model-level row compaction executes on NPU; the current runtime is not merely a planner. This is one observed shape, not proof that total captured work halves.",
+  "limitations": [
+    "Same configured counter2 does not prove same phase/token work or call count; observed MatMulV3 call counts differ and G3 has no npu_fx_compiler inference annotation in the captured trace.",
+    "Raw CANN/Hardware counts and CPU queued spans are clues, not causal overhead, removable wall time or service performance.",
+    "Native aclrtSynchronizeStream count is not inferred as zero from its absence in Top16; exact all-rank counts needed next.",
+    "Official CSV uses actual Type column; initial generic OP Type-only summary was empty, not absence of operators. Read exact Type and Accelerator Core in successor.",
+    "Communication AivKernel fragments, EVENT_WAIT/RECORD/RESET, AI Core Freq and OverlapAnalysis must not be confused with useful compute; no overlapping/rank duration sums.",
+    "No code treatment admitted; finite/numerical/ownership/completion/durability guards cannot simply be disabled to obtain a speedup."
+  ],
+  "next": "Establish actual captured phase, per-shape/all-rank geometry and work; correlate exact flow endpoints with real hardware activity/gaps and measured-window compiler/source paths. Use true covered fraction and optimistic service bound to select ONE supported mechanism, followed by matched unprofiled causal experiment. No unchanged profile or formal matrix expansion.",
+  "critical_path_attributed": false,
+  "new_performance_acceptance": false,
+  "full_goal_complete": false
+}
