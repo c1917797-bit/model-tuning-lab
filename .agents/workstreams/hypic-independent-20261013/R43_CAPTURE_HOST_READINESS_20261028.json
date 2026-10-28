@@ -1,0 +1,49 @@
+{
+  "schema": "hypic-r43-host-readiness/v1",
+  "state": "NEW_RENEWAL_STORAGE_GUARDS8_AND_ACTUAL_CONSTRUCTOR_PASS_NO_NPU",
+  "plan_commit": "df4bb438066415fe192fde39fd2313c4ab76ab24",
+  "plan": "R43_RENEWAL_REFLECTION_PLAN_20261028.json",
+  "contract": {
+    "path": "PROFILE_R43_G1_R1_20261028_CONTRACT.json",
+    "sha256": "8afbdd8da1a8300b01d96fef8c7ea8a1103566e538232ec372f01385621e2e67"
+  },
+  "new_host_controls": {
+    "operation": "exec-000000000000014c",
+    "count": 8,
+    "pass": true,
+    "scope": "Only new renewal/ruler/source/predecessor/separate-volume capacity/deadline controls; old suites not rerun."
+  },
+  "actual_constructor": {
+    "operation": "exec-000000000000014c",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r43-g1-r1-actual-launch-capsule-20261028.json",
+    "sha256": "37d0f23f1dff6041ba9557d9c5b1fd2ef5450672bdd78e5ec3578c4124870c89",
+    "new_device_allocation": false,
+    "physical_admission_proven": false,
+    "callbacks_restored": true
+  },
+  "source_sha256": {
+    "R43_RENEWAL_REFLECTION_PLAN_20261028.json": "30c69c452323b2ed27270b5eab0f9fb9f8a4a9016893da76c3eb8e19d64059bc",
+    "host_audits/r43_launch_capsule.py": "10524bc78d966da3becd8d69d77fee3e8de3aabef3b747fbd3c467568c9445f4",
+    "host_audits/r43_profile_audit.py": "468d06052a08f530e5bae49a198ae10fc3d5dbf8f207b788e779dd4ef6b79ae0",
+    "host_audits/r43_profile_controller.py": "431a43fc0e6aa8e4ef9b12f441ef8ca1374f2219ad83fbae00499a8c3397a0b8",
+    "host_audits/r43_renewal_policy.py": "7818df311e711ace05bbda7fe539288bfa0e343a74f187476ce70d01cb80930e"
+  },
+  "retained": {
+    "runtime_python": 438,
+    "common_sources": 465,
+    "host_sources": 32,
+    "r42_outer_sources": 6,
+    "old_contracts_and_failed_roots": "unchanged",
+    "tracer": false
+  },
+  "fresh_orientation": {
+    "operation": "exec-0000000000000147",
+    "physical0_3_processes": [],
+    "cache_available_bytes": 7579176960,
+    "new_persistent_volume_available_bytes": 48927866880,
+    "scope": "Prior read-only snapshot only; must re-admit all sources/model/image/input/exactports/newroot/name/cards/budget immediately before startup."
+  },
+  "full_goal_complete": false,
+  "new_performance_acceptance": false,
+  "next": "Publish source/contract/readiness checkpoint, then fresh actual admission and original R43 native controller only. At terminal run r43_profile_audit; valid fourrank closed traces+full40+exactrelease before new G3 contract with actual native audit pathSHA."
+}
