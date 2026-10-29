@@ -1,0 +1,73 @@
+{
+  "schema": "hypic-r45-resource-admission-decision/v1",
+  "state": "PREALLOCATION_REJECTED_FOREIGN_RUNNING_DECLARATIONS_USER_RULE_DECISION_PENDING",
+  "contract": {
+    "path": "COMPILATION_BUDGET_R45_G3_R1_20261029_CONTRACT.json",
+    "sha256": "e71c37d24e3d203086a76c7854872e806160314df0c8b1aa18a75e75075107f0"
+  },
+  "failed_admission": {
+    "operation": "exec-0000000000000228",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r45-g3-r1-fresh-admission-20261029.json",
+    "sha256": "319453eee67f0fa1c560e28cb6db3995062914f7e5487df14be17f9ed5065429"
+  },
+  "independent_rejection": {
+    "operation": "exec-0000000000000229",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r45-g3-r1-declaration-admission-rejection-20261029.json",
+    "sha256": "c1fc6c8c905b81fe1d0d7730aa494acead181f278011128dca4fed6680cb28f9"
+  },
+  "blockers": [
+    {
+      "container_id": "87ab8b2137c62e965c4ed88ce241b306794316cc04625770648a1d1c3bd1caaa",
+      "name": "/Maxon4ick_vllm",
+      "claims": [
+        "/dev/davinci0",
+        "/dev/davinci1",
+        "/dev/davinci2",
+        "/dev/davinci3"
+      ],
+      "running": true
+    },
+    {
+      "container_id": "b1bdc14809b54739c9f0a9aa4f55abf163fe0e467cc5171ff3cd5fe37a0f4e90",
+      "name": "/e00927329_910b_bench",
+      "claims": [
+        "/dev/davinci0",
+        "/dev/davinci1",
+        "/dev/davinci2",
+        "/dev/davinci3"
+      ],
+      "running": true
+    },
+    {
+      "container_id": "e93f8e1ca42b64baf2bfa4ae59289f10dbaabc6069f70e7aa44e7956a9b0f54b",
+      "name": "/agentgpu-910b4-qwen35-4b-v0",
+      "claims": [
+        "/dev/davinci0",
+        "/dev/davinci1",
+        "/dev/davinci2",
+        "/dev/davinci3"
+      ],
+      "running": true
+    }
+  ],
+  "actual_target_npu_processes": [],
+  "own_container_not_created": true,
+  "own_root_not_created": true,
+  "new_device_allocation": false,
+  "foreign_modification": false,
+  "source_and_contract_unchanged": true,
+  "governing_default": {
+    "skill": ".agents/skills/chicaihong01-host-maintenance/SKILL.md",
+    "quote": "By default, running containers and live processes are active occupancy claims;",
+    "interpretation": "Running explicit PathOnHost physical0-3 device declarations block allocation even when current npu-smi has no target process. This is a default Skill rule, not evidence that the containers are currently computing."
+  },
+  "user_decision_requested": {
+    "question": "Wait for device declarations to release, or explicitly authorize use of actually idle0-3 with fresh physical/ports/source/budget and continuous isolation; never stop or modify foreign containers.",
+    "answer_pending": true,
+    "no_timeout_implied_approval": true
+  },
+  "next_action": "Keep all R45 source/contract/old failure roots frozen. Await the already asked resource-rule decision or actual release of all running0-3 claims. Do not ask repeatedly or start under unchanged claims. A genuine changed premise needs a fresh admission report/new evidence filename and full7290s budget before the first device attempt; no NPU attempt has started.",
+  "real_compilation_budget_measured": false,
+  "native_speed_gain_proven": false,
+  "full_goal_complete": false
+}
