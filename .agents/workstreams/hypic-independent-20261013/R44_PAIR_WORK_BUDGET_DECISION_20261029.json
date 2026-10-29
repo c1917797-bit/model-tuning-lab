@@ -1,0 +1,135 @@
+{
+  "schema": "hypic-r44-observed-work-budget-decision/v1",
+  "state": "EIGHT_RANK_CAPTURE_WORK_MISMATCH_AND_GAP_COARRAY_OBSERVED_NO_TREATMENT",
+  "operation": "exec-00000000000001de",
+  "result": {
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-pair-work-budget-r1-20261029/result.json",
+    "sha256": "c044581e778fc92c206d0c146050c8bf073143301d6f972e24bbdb176802639a"
+  },
+  "post_input_verification": {
+    "operation": "exec-00000000000001e1",
+    "all8traces_csv_and_reports_unchanged": true
+  },
+  "elapsed_seconds": 37.84694122988731,
+  "helper_sha256": "ca71f4601985b25bc888e6f1b9615c20e00da9e637e5e09b7cd5bfb2a39fbe99",
+  "focused_controls": {
+    "operation": "exec-00000000000001dd",
+    "passed": 9
+  },
+  "actual_per_rank_work": {
+    "G1": {
+      "projection_rows_chronological": [
+        32768,
+        1
+      ],
+      "projection_calls_each": [
+        48,
+        48
+      ],
+      "MatMulV3_calls": 256,
+      "MatMulV2_calls": 354,
+      "validated_2d_matmul_flops": "398972958801920",
+      "unmodeled_matmul_calls": 0,
+      "CANN_stream_sync_calls": 25
+    },
+    "G3": {
+      "projection_rows_chronological": [
+        16392,
+        24584
+      ],
+      "projection_calls_each": [
+        48,
+        48
+      ],
+      "MatMulV3_calls": 512,
+      "MatMulV2_calls": 98,
+      "validated_2d_matmul_flops": "498896737402880",
+      "unmodeled_BatchMatMulV2_calls": 96,
+      "CANN_stream_sync_calls": 2083
+    },
+    "all_four_ranks_same_geometry_counts": true
+  },
+  "per_rank_observed_intervals": {
+    "G1": {
+      "0": {
+        "non_control_hardware_horizon_us": "4643823.684",
+        "non_control_hardware_union_us": "4509875.40900",
+        "observed_non_control_gaps_us": "133948.27500",
+        "cann_stream_sync_calls": 25,
+        "cann_stream_sync_union_us": "2488094.92",
+        "sync_coincident_with_observed_gaps_us": "587.07950"
+      },
+      "1": {
+        "non_control_hardware_horizon_us": "4645099.50",
+        "non_control_hardware_union_us": "4508498.86",
+        "observed_non_control_gaps_us": "136600.64",
+        "cann_stream_sync_calls": 25,
+        "cann_stream_sync_union_us": "2488123.50",
+        "sync_coincident_with_observed_gaps_us": "574.75"
+      },
+      "2": {
+        "non_control_hardware_horizon_us": "4643333.260",
+        "non_control_hardware_union_us": "4509616.820",
+        "observed_non_control_gaps_us": "133716.440",
+        "cann_stream_sync_calls": 25,
+        "cann_stream_sync_union_us": "2488092.78",
+        "sync_coincident_with_observed_gaps_us": "598.430"
+      },
+      "3": {
+        "non_control_hardware_horizon_us": "4642865.26",
+        "non_control_hardware_union_us": "4509599.56",
+        "observed_non_control_gaps_us": "133265.70",
+        "cann_stream_sync_calls": 25,
+        "cann_stream_sync_union_us": "2487906.16",
+        "sync_coincident_with_observed_gaps_us": "597.01"
+      }
+    },
+    "G3": {
+      "0": {
+        "non_control_hardware_horizon_us": "16250406.003",
+        "non_control_hardware_union_us": "6421997.24250",
+        "observed_non_control_gaps_us": "9828408.76050",
+        "cann_stream_sync_calls": 2083,
+        "cann_stream_sync_union_us": "2610442.11",
+        "sync_coincident_with_observed_gaps_us": "28478.23350"
+      },
+      "1": {
+        "non_control_hardware_horizon_us": "16250768.880",
+        "non_control_hardware_union_us": "6667380.460",
+        "observed_non_control_gaps_us": "9583388.420",
+        "cann_stream_sync_calls": 2083,
+        "cann_stream_sync_union_us": "3054300.40",
+        "sync_coincident_with_observed_gaps_us": "20056.285"
+      },
+      "2": {
+        "non_control_hardware_horizon_us": "16240674.64",
+        "non_control_hardware_union_us": "6421778.78",
+        "observed_non_control_gaps_us": "9818895.86",
+        "cann_stream_sync_calls": 2083,
+        "cann_stream_sync_union_us": "2767116.75",
+        "sync_coincident_with_observed_gaps_us": "21195.18"
+      },
+      "3": {
+        "non_control_hardware_horizon_us": "16246263.20",
+        "non_control_hardware_union_us": "6400741.82",
+        "observed_non_control_gaps_us": "9845521.38",
+        "cann_stream_sync_calls": 2083,
+        "cann_stream_sync_union_us": "2644673.75",
+        "sync_coincident_with_observed_gaps_us": "20044.79"
+      }
+    }
+  },
+  "findings": [
+    "Real pruning reaches the NPU, but equal configured count2 does not capture equivalent matrix work. Native observed projection row runs32768 then1; G3 runs16392 then24584. Runs are not independently proven forward/phase boundaries.",
+    "G3 captured validated2DMatMul FLOPs are ~25% higher than native within this unequal capture.96G3 batched matrix multiplications remain explicitly unmodeled; no total-FLOP or service extrapolation.",
+    "CANN stream-sync calls25->2083 are exact all-rank counts. G3 sync spans intersect only20.0-28.5ms of observed9.58-9.85s non-control hardware gaps per rank. Raw sync span totals2.6-3.05s cannot be equated to removable gaps.",
+    "Observed gaps include unclassified work/host/profiler effects. No dependency/source path or service-covered fraction has been proved; do not call the gaps removable.",
+    "Native npu_fx_compiler inference annotation is not compilation proof; G3 absence is not proof of no graphs. Do not infer compilation root cause."
+  ],
+  "next": "Use exact existing trace flows and current source to identify actual forward/prefill/decode boundaries and reasons for second-run workload; attribute observed gaps to exclusive CPU/source regions with missing/ambiguous dependencies retained. Priority is phase/source parity and whether graph/eager paths differ, not blind synchronization removal. Need a realistic unprofiled service opportunity bound before ONE intervention; preserve all math/finite/owner/completion/durability gates. No unchanged inference/profile/matrix rerun.",
+  "no_active_owned_stage": true,
+  "new_devices": false,
+  "causal_root_cause_proven": false,
+  "service_speed_gain_proven": false,
+  "full_goal_complete": false
+}

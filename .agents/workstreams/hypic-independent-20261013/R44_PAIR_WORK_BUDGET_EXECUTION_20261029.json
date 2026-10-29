@@ -1,0 +1,54 @@
+{
+  "schema": "hypic-r44-observed-work-budget-plan/v1",
+  "helper": "host_audits/r44_pair_work_budget.py",
+  "helper_sha256": "ca71f4601985b25bc888e6f1b9615c20e00da9e637e5e09b7cd5bfb2a39fbe99",
+  "method": {
+    "path": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/R44_PAIR_ATTRIBUTION_ANALYSIS_PLAN_20261028.json",
+    "sha256": "dbe994f484ec9616fe80e517c4e157312a8dad5b442fb545a50b134c3496768e"
+  },
+  "acceptance": {
+    "path": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/R44_PAIR_DIAGNOSTIC_ACCEPTANCE_20261028.json",
+    "sha256": "deadaad6e1574cb4a4c1918cb4de63d32fe853d9f5c214ee50483c92fd8aefbe"
+  },
+  "reports": {
+    "G1": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-normalized-supplemental-audit-20261028.json",
+      "sha256": "33ae5bc5624d632a6717e048a73081997c5986287810fc2b1ad279d644cc7397"
+    },
+    "G3": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-normalized-supplemental-audit-20261028.json",
+      "sha256": "f374bbc84b02f5fc020660eca7993e0f17f685057527e7e61eb572bb0d37f2f0"
+    }
+  },
+  "normalized_roots": {
+    "G1": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-normalized-trace-20261028",
+    "G3": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-normalized-trace-20261028"
+  },
+  "output_root": "/opt/host/vnf/cch-hypic-independent-20261028/r44-pair-work-budget-r1-20261029",
+  "timeout_seconds": 300,
+  "limits": {
+    "cpu": "0",
+    "timeout_seconds": 300,
+    "max_address_space_bytes": 4294967296,
+    "trace_bytes": 268435456,
+    "tree_bytes": 2147483648,
+    "complexity": "O(events) or O(events log events), one rank in memory at a time; no per-distinct-flow-name rescan"
+  },
+  "no_devices": true,
+  "new_inference": false,
+  "layout_helper_sha256": "bfb5f6dc77432a90757f0a9a5be14ea8f90117dea4534f5fb2ae6bf3005e54f0",
+  "method_limits": [
+    "All eight accepted trace+CSV inputs, actual Type/Core and validated 2D GEMM dimensions only; preserve unmodeled shapes.",
+    "Decimal official epoch-us minus actual per-arm common origin; exact typed Python IDs.",
+    "Projection chronological runs are not inferred forward boundaries; no count2 phase equivalence assumption.",
+    "Observed non-control hardware union and gaps per rank; unknown/memcpy/comm fragments remain included conservatively, event controls separate.",
+    "CANN stream-sync overlap with device gaps is coincidence only, not causal removable wall-time.",
+    "No across-rank/overlap sums, no profile-to-formal1024 extrapolation; no service benefit/compile root-cause claim.",
+    "No new source/inference/treatment; original guard/profiler/runtime bytes unchanged."
+  ],
+  "focused_controls": {
+    "operation": "exec-00000000000001dd",
+    "passed": 9,
+    "new_tests_only": true
+  }
+}
