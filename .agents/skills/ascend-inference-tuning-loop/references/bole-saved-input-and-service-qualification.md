@@ -481,3 +481,61 @@ The original operation responses are retained outside Git under
 /opt/host/vnf/austinov/run-bole-followup-preparation-evidence-20261022T230600Z-v1/.
 These preparations establish no additional NPU numerical, task or throughput
 result. Keep absent real bindings, loaded-worker proof and final gates pending.
+
+## Production installation and outer-owner command closure — October29
+
+- A helper installation test does not prove production activation. In G6, the
+  identity-hook installer was placed after an unconditional return: the helper
+  checks passed while actual owned.load retained the original Controller.call.
+  For a changed install seam, verify the complete COMMANDS opt-ins, real cold
+  production loading path, final method code/source identity and the relevant
+  callback edge before device admission. Keep transport-interposed boundaries
+  explicitly scoped. Preserve the original mathematical and ownership guards;
+  this proof establishes installation, not NPU correctness or performance.
+- A prepared launch packet includes the outer owner and every mandatory Ref,
+  in addition to COMMANDS.model. The first model_v6 owner invocation exited in
+  argparse because --archive-completion-ref was omitted; it had not created a
+  model output or entered algorithm execution. Check the actual outer parser
+  contract and complete argv once, and supply each required Ref from its real
+  authorized ledger with exact path/bytes/SHA. Keep the exit2 attempt as an
+  entry-wiring failure. A corrected owner start is not a model or performance
+  PASS and does not authorize repeating completed archive/cleanup work.
+
+## Diagnose the first mathematical failure before another model run
+
+- Preserve the earliest causal traceback and split an aggregate verdict into
+  its actual per-layer checks. In model_v6 the later occupied-slot error was
+  secondary to the original layer-math failure. Its FA-labelled aggregate also
+  checked GDN and convolution; it did not identify an FA-only defect.
+- Replay the exact saved NPU frame through the unchanged independent numerical
+  leaves before changing code. This is diagnostic reference work, not a new
+  NPU execution or a model PASS. Here the 16 attention and 48 convolution
+  checks passed while GDN output/U/state failed in 43 of 48 layers and P in
+  38. Do not widen thresholds or reject the paper from that result.
+- Check small algebraic invariants first. For the actual three-node fork,
+  P at the root must equal its positive gamma and each child includes its
+  parent gamma. Passive storage inspection can distinguish values, layout,
+  and aliasing without another container or NPU run. Preserve storage shape,
+  stride, offset, source hash and the scope of every exclusion.
+- Follow the actual captured branch and every argument hop. The saved inputs
+  matched the canonical tree branch; changing the static native-AR tuple was
+  unsupported. Selected processed_nodes described a commit path, not the
+  number of nodes passed to verify. Do not infer executed mode from an output
+  directory name.
+- Component coverage and static library pins do not prove the production
+  callee. The prior 192 cases covered the same shape, fork/depth, library and
+  nontrivial gamma, yet the model frame failed. The next discriminating device
+  probe must capture the actual final callable, mode and loaded BOLE library
+  identity alongside its exact input and independent reference.
+- Interpret audit fields in their recorded phase and original consumer
+  contract. The pre-gate library receipt intentionally had model_ready=false;
+  comparison to an older calibration was not the current same-model identity
+  verdict. Recompute the original comparisons before declaring a new blocker.
+- If no bounded, authorized single-case entry is ready, record that gap and
+  prepare a separately reviewed diagnostic-only entry for a failed input.
+  Its authentic source/failed-owner/RAW lineage must not fabricate a successful
+  numeric ACK. Keep the original qualification gate unchanged and make the
+  diagnostic result ineligible for original short8 or performance acceptance.
+  Do not modify a CPU launch packet into a device
+  launcher, borrow a prior matrix PASS, rerun an unchanged model failure, or
+  manufacture utilization. Recheck the fixed deadline before admission.

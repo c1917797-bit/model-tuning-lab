@@ -1,5 +1,71 @@
 # BOLE continuation, 2026-10-20
 
+## Latest actual model checkpoint — 2026-10-29
+
+The current human window is renew24_20261028T192856Z; its authorization file
+fixes cutoff1793302136 (2026-10-29T19:28:56Z). Original start1792828303 stays
+unchanged. No new or continued experiment is allowed at or after that cutoff.
+The older closed-window sections below remain historical.
+
+G7b SOURCE_BOUND403557adf2af6340ac5e5732881be9e470031af2be6b6d1bf5583700db4ee72d
+fixed the proven unreachable observer installer; the initial outer-owner
+missing-argument attempt is preserved. Corrected model_v6 operation07dd
+actually ran TP4 Qwen3.6-27B, exited3 after1015.185334682s and has terminal
+3dfc49ace4b8c2cbce4946c5a715b5c01bbebcee3ed2a8fefc67544c3920a4fb.
+The CPU25/25 and canary pass establish no NPU model numeric or throughput PASS.
+
+The unchanged independent replay of its real rank1/G1/O0 frame passed all
+16 FA and 48 convolution checks, but failed 43/48 GDN output/U/state checks
+and38/48 P checks. The later occupied capture slot was a secondary exception.
+No candidate BOLE result, valid paired performance or task accuracy exists.
+Do not reject the paper or relax the original numerical bounds.
+
+Current evidence, all in renew24_20261028T192856Z:
+
+- EXECUTION_CANN_MODEL_V6_GDN_ATTRIBUTION_20261029T185041Z.json,
+  4281B/123c4ce047f20fd2b76601de0347a282bb70e859b9a2a7c346068e97b3b9cdad.
+- EXECUTION_CANN_MODEL_V6_DIAGNOSTICS_FRESH_RELEASE_20261029T184943Z.json,
+  4635B/3af5eec0546109df3b4c472d19bee99e66c81b05e5b6dac6806ceff3c4994bb0:
+  exact model and diagnostic containers exited/Pid0, old owner/workers absent,
+  physical4–7 no compute processes. This is a timestamped snapshot only.
+- FA_saved_frame_replay_prepare_v1/output_all64_v1/RESULT.json,
+  173771B/eb4fc98e8d7b9b843d27d329c685e4009caf38734e6276d818f42f0e6446c680.
+- FA_saved_frame_replay_prepare_v1/INDEPENDENT_P_STORAGE_LAYOUT_HANDOFF_20261029T185947Z.json,
+  11632B/af03e7b8daf2a30688401373d17e5f4aa6f20415a5eda8c783c432c75247b6fe.
+- FA_saved_frame_replay_prepare_v1/STATIC_KERNEL_CALL_MATRIX_COVERAGE_HANDOFF_20261029T1907Z.json,
+  6510B/5738c02f70cd16c1f025285bc5307c8824ffdb4c8ae0de6d9dec63a9022ad308.
+- FA_saved_frame_replay_prepare_v1/NATIVE_LIBRARY_BEFORE_GATE_AUDIT_20261029T190512Z.json,
+  6602B/4c1b6aa9ff2a78c55b32af903e9efd438fcfdc9a4eb0e006ec971170ef3767f7.
+
+The actual stored fork/canonical inputs are established, not a static AR
+tuple. No cross-layer storage reuse or pure P layout permutation explains
+the failure. The original component192 really passed the same shape, fork,
+depth, library and nontrivial gamma; that static coverage still does not
+prove the model's actual final callee, loaded BOLE library or mode/context.
+Those production identities remain unproved. The library before-gate audit
+false fields are expected at that phase; current same-model identities match.
+
+Next: prepare one bounded saved-case NPU probe that records those identities
+before/after the actual call. The old single-case qualification entry requires
+a successful frame ACK and a CPU replay matching its recorded Y/P/U before
+device admission; it cannot diagnose this failed frame. A separate opt-in
+diagnostic-only entry is being drafted in
+renew24_20261028T192856Z/single_saved_gdn_failed_case_source_only_prepare_20261029T1912Z.
+It must retain device/resource/window/cleanup guards and use real failed-owner,
+source and RAW lineage, while its output remains ineligible for qualification.
+The model identity helper is separately drafted in
+renew24_20261028T192856Z/single_case_actual_callee_prepare_v1_20261029T1912Z;
+neither preparation is a bound or executed successor.
+The diagnostic must compare output/P/U/state to the independent
+FP64 reference. No ready single-case native argv or source binding exists in
+this checkpoint. Separate drafts must not claim READY/PASS or use the CPU
+packet as a device launcher. No new whole-model5400+180 stage is admitted from
+this checkpoint. Do not repeat192, change services, consume old cleanup or
+hugepage allowances, or affect NPU0–3. Formal long correctness, three matched
+32K/fixed1024/c1 pairs and GSM8K/HumanEval/MMLU remain pending.
+
+
+
 ## Current window closed — 2026-10-27
 
 The human cutoff1793126829 (18:47:09Z) has passed without a new grant. No new

@@ -1,5 +1,27 @@
 # Maintainer Handoff
 
+## BOLE numerical-failure checkpoint — 2026-10-29
+
+Use the current [BOLE workstream handoff](workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/HANDOFF.md)
+and the latest append-only EXECUTION record by timestamp. The human window has
+the fixed cutoff 2026-10-29T19:28:56Z (epoch1793302136); it does not reset the
+original start1792828303 and grants no automatic extension.
+
+Actual model_v6 (operation exec-00000000000007dd) exited3 after1015.185s.
+Its built-in CPU25/25 and four-device canary passed; real TP4 dense loaded on
+NPU4–7 and generated a numerical capture, then failed the independent GDN
+math checks. Candidate BOLE, whole-model performance and task accuracy did
+not pass or run to completion. Older V17/component results do not qualify
+this source. No successful new technique is claimed.
+
+The four owned workers and exact containers were freshly verified released
+at18:49:43Z. That snapshot is not a 30-minute utilization measurement. The
+next device step needs a reviewed single-case entry with the real captured
+input, actual callee/library identity and independent reference. Source-only
+preparation is not device readiness. Do not repeat the unchanged failed model.
+
+
+
 ## BOLE source-only handoff — 2026-10-26
 
 Read the current [BOLE workstream handoff](workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/HANDOFF.md) before dispatch. V17 short8 scope passed, but formal performance/accuracy are not accepted; V15 remains PARTIAL/NOT_READY: R4 import binding and R5's current-direct-controls registration are source-only passes, with no actual BOUND/guest. This checkpoint's explicit MAIN authority closes new model/NPU/pair admission. Use the linked evidence index and preserve the original start/cutoff.
