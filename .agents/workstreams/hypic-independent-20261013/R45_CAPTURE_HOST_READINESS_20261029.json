@@ -1,0 +1,69 @@
+{
+  "schema": "hypic-r45-host-readiness/v1",
+  "state": "STRICT_DIAGNOSTIC_HOST_AND_ACTUAL_CONSTRUCTOR_VALID_FRESH_DEVICE_ADMISSION_PENDING",
+  "code_checkpoint": "8c1a857f8a3e4a5e38d49df6b3dd0329702b69cf",
+  "contract": {
+    "path": "COMPILATION_BUDGET_R45_G3_R1_20261029_CONTRACT.json",
+    "sha256": "e71c37d24e3d203086a76c7854872e806160314df0c8b1aa18a75e75075107f0"
+  },
+  "host_source_sha256": {
+    "R45_COMPILATION_CAUSAL_BUDGET_PLAN_20261029.json": "9ccd579bde3e44a024a02d94be9ceef82921163aec4253e5ea4fcfa9879e0fa3",
+    "host_audits/r45_compilation_evidence.py": "4c806b4bc392542db68a306c09e546fa6884bbeaa718e6d15d7480cef2f6501e",
+    "host_audits/r45_diagnostic_audit.py": "29c34e85521dafee908cac3cdb57c7e932a80ab70a50700e29c5a2d9ce03238a",
+    "host_audits/r45_diagnostic_controller.py": "6c0eb2aa194b20134fc3d545d3451945da1e08d17b5db89424ab35dc4f6b9809",
+    "host_audits/r45_diagnostic_policy.py": "72c969285a3fe18022492ae5e9bd1b7e7a20b7d1a041d86fd31e07188a579ac8",
+    "host_audits/r45_launch_capsule.py": "248bb2b1b00ac0ad40ad3633d2bd15809ca1922eef8c57f82d42741f4d8fea07"
+  },
+  "source_bindings": 472,
+  "runtime_python": 442,
+  "original_runtime_python_unchanged": 438,
+  "controls": {
+    "operation": "exec-0000000000000220",
+    "passed": 27,
+    "breakdown": {
+      "event_scientific": 16,
+      "host_contract_clock_callback": 11
+    },
+    "raw": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r45-host-controls-20261029/result.json",
+      "sha256": "c94084f328949a911df012652598f7b042fc59d2b45fc901390a01598e44351c"
+    },
+    "initial_failure": {
+      "operation": "exec-000000000000021d",
+      "reason": "Boolean False incorrectly equated to rank0 in health schema; explicit integer type fixed, failed record retained."
+    }
+  },
+  "clock": {
+    "operation": "exec-0000000000000222",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r45-clock-source-proof-20261029/result.json",
+    "sha256": "dc669bbdc917d2870d91ddd7aae127d175e5df8569780d5c534b5122d7ca6595",
+    "sameimage_no_devices": true,
+    "exact_cpu_container_absent": true,
+    "scope": "Actual CLOCK_MONOTONIC sources and CPU/host namespace bracket. Actual serving-worker namespace still must be observed in isolation samples."
+  },
+  "actual_constructor": {
+    "operation": "exec-0000000000000224",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r45-g3-r1-actual-launch-capsule-20261029.json",
+    "sha256": "a77d234117e6ce620a024fdf48254b350bc40413da3d8d1de8d0d4feb694f9dd",
+    "actual_base_and_r45_wrapper": true,
+    "new_device_allocation": false,
+    "physical_admission_proven": false,
+    "callbacks_restored": true,
+    "compute_devices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "torch_profiler": false,
+    "scope": "Actual unchanged owner constructor intercepted before Docker run; only temporary scratch raw-root override and mocked physical/ports for rehearsal."
+  },
+  "observer_interval_scope": "Exact begin/end/native-call clocks, nested/thread identities, per-worker bounds and health. Native-call unions include unknown waits/nested end-write probe costs; only an optimistic upper bound. No inclusive or rank sum as service savings.",
+  "budget_rule": "Actual request first-content/ended clocks outward by1ULP, same-clock source/live-worker namespace required. Cross-rank intervals union, not sum; bound per-request overlap and optimistic16. Insufficient upper rejects route; sufficient upper never proves exclusive blocking or admits a kernel rewrite.",
+  "new_device_admission": false,
+  "active_attempt": null,
+  "native_speed_gain_proven": false,
+  "real_compilation_budget_measured": false,
+  "full_goal_complete": false,
+  "next_action": "Publish this frozen diagnostic checkpoint, then fresh exact ma/direct source/model/index/image/input/new-root/new-name/vacant0-3+102ports/raw6.5GiB+cache4GiB/full7290s admission. Only then one original-controller G3 full40 unprofiled observation; preserve source and track exact original peer/handle/root. Terminal independent r45_diagnostic_audit all original guards plus actual four-worker observation and clock binding."
+}
