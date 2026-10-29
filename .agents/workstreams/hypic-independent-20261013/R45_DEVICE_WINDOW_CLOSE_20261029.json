@@ -1,0 +1,89 @@
+{
+  "schema": "hypic-r45-device-window-close/v1",
+  "state": "NO_DEVICE_START_INSUFFICIENT_FULL_BUDGET",
+  "observed_utc": "2026-10-29T17:16:39.757590+00:00",
+  "absolute_stop_utc": "2026-10-29T19:15:24Z",
+  "minimum_remaining_seconds": 7290,
+  "latest_possible_start_utc": "2026-10-29T17:13:54Z",
+  "remaining_seconds_floor": 7124,
+  "source_checkpoint": "eb86381e134d80e88f6d49b319d0e191f814cba1",
+  "contract": {
+    "path": "COMPILATION_BUDGET_R45_G3_R1_20261029_CONTRACT.json",
+    "sha256": "e71c37d24e3d203086a76c7854872e806160314df0c8b1aa18a75e75075107f0"
+  },
+  "resource_observation": {
+    "operation": "exec-0000000000000272",
+    "utc": "2026-10-29T17:15:56.312774+00:00",
+    "claims": [
+      {
+        "id": "87ab8b2137c62e965c4ed88ce241b306794316cc04625770648a1d1c3bd1caaa",
+        "name": "/Maxon4ick_vllm",
+        "running": true,
+        "claims": [
+          "/dev/davinci0",
+          "/dev/davinci1",
+          "/dev/davinci2",
+          "/dev/davinci3"
+        ]
+      },
+      {
+        "id": "b1bdc14809b54739c9f0a9aa4f55abf163fe0e467cc5171ff3cd5fe37a0f4e90",
+        "name": "/e00927329_910b_bench",
+        "running": true,
+        "claims": [
+          "/dev/davinci0",
+          "/dev/davinci1",
+          "/dev/davinci2",
+          "/dev/davinci3"
+        ]
+      },
+      {
+        "id": "e93f8e1ca42b64baf2bfa4ae59289f10dbaabc6069f70e7aa44e7956a9b0f54b",
+        "name": "/agentgpu-910b4-qwen35-4b-v0",
+        "running": true,
+        "claims": [
+          "/dev/davinci0",
+          "/dev/davinci1",
+          "/dev/davinci2",
+          "/dev/davinci3"
+        ]
+      }
+    ],
+    "target_processes": [],
+    "own_raw_root_exists": false
+  },
+  "own_container_observation": {
+    "operation": "exec-0000000000000273",
+    "query_exit": 0,
+    "matches": ""
+  },
+  "prior_admission_failure": {
+    "operation": "exec-0000000000000228",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r45-g3-r1-fresh-admission-20261029.json",
+    "sha256": "319453eee67f0fa1c560e28cb6db3995062914f7e5487df14be17f9ed5065429"
+  },
+  "prior_independent_rejection": {
+    "operation": "exec-0000000000000229",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r45-g3-r1-declaration-admission-rejection-20261029.json",
+    "sha256": "c1fc6c8c905b81fe1d0d7730aa494acead181f278011128dca4fed6680cb28f9"
+  },
+  "interpretation": "R45 never launched. Earlier foreign declaration rejection is preserved. Even release of claims or a resource-rule answer now cannot supply the frozen full7290s before the fixed deadline. This is a window/resource refusal, not an observer/kernel failure or evidence of zero compilation cost.",
+  "actions": [
+    "No new NPU or replacement protocol under this authorization; do not shorten warm/request/audit/release budgets or extend deadline.",
+    "Keep all runtime/HOST source, frozen contract, original roots and failed outcomes unchanged.",
+    "Do not repeat old CPU/profile/performance runs or ask the resource-rule question again.",
+    "At the fixed deadline, re-read live task and exact owned resources; preserve evidence, release only any identity-proven owned resources according to frozen controller, report actual remaining scope, delete only hypic-24."
+  ],
+  "remaining_scope": [
+    "R45 actual four-worker compilation observation and independent full audit; causal blocking/service budget decision.",
+    "One admitted equivalent-math causal runtime variable and matched unprofiled A/B/A including startup/warm cost.",
+    "Final-source G1-G4 three formal1024 rounds.",
+    "127x3 natural-EOS paired quality EACH arm, non-thinking1024/thinking2048 same ruler.",
+    "Actual disable/uninstall/restart/release and Paper-to-Ascend/29 functional acceptance."
+  ],
+  "performance_success": false,
+  "paper_reproduction_complete": false,
+  "full_goal_complete": false,
+  "foreign_tasks_modified": false,
+  "deadline_extended": false
+}
