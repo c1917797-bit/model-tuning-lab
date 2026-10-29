@@ -1,0 +1,73 @@
+{
+  "schema": "hypic-renewal-window-terminal/v1",
+  "state": "AUTHORIZATION_EXPIRED_FULL_GOAL_INCOMPLETE_NO_ACTIVE_OWNED_STAGE",
+  "authorization_start_utc": "2026-10-28T19:15:24Z",
+  "absolute_stop_utc": "2026-10-29T19:15:24Z",
+  "observed_utc": "2026-10-29T19:16:39.986129+00:00",
+  "remaining_authorized_seconds": 0,
+  "source_checkpoint": "77e898d41c7040e0db23f3e87c50226017a75f53",
+  "branch": "work/hypic-independent-20261013",
+  "live_observation": {
+    "operation": "exec-0000000000000282",
+    "peer": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "route_decision": "peer_direct",
+    "hostname": "Euler",
+    "repo": "/cache/cch/model-tuning-lab-hypic-independent-20261013",
+    "active_attempt": null,
+    "own_r45_root": "/opt/host/vnf/cch-hypic-independent-20261028/compilation-budget-r45-g3-r1-20261029",
+    "own_r45_root_exists": false,
+    "own_r45_container_name": "hypic-compilation-budget-r45-g3-r1-20261029",
+    "exact_container_query": {
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "own_r45_controller_processes": [],
+    "running_hypic_named_containers": {
+      "operation": "exec-0000000000000284",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "preserved_evidence_sha256": {
+    "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/R45_DEVICE_WINDOW_CLOSE_20261029.json": "c60159263e0a2796673be44f411020a20a753ce94740974fb41e1aff613086b4",
+    "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/COMPILATION_BUDGET_R45_G3_R1_20261029_CONTRACT.json": "e71c37d24e3d203086a76c7854872e806160314df0c8b1aa18a75e75075107f0",
+    "/opt/host/vnf/cch-hypic-independent-20261028/r45-g3-r1-fresh-admission-20261029.json": "319453eee67f0fa1c560e28cb6db3995062914f7e5487df14be17f9ed5065429",
+    "/opt/host/vnf/cch-hypic-independent-20261028/r45-g3-r1-declaration-admission-rejection-20261029.json": "c1fc6c8c905b81fe1d0d7730aa494acead181f278011128dca4fed6680cb28f9",
+    "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-normalized-supplemental-audit-20261028.json": "33ae5bc5624d632a6717e048a73081997c5986287810fc2b1ad279d644cc7397",
+    "/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-normalized-supplemental-audit-20261028.json": "f374bbc84b02f5fc020660eca7993e0f17f685057527e7e61eb572bb0d37f2f0"
+  },
+  "resource_disposition": "No identity-proven owned active stage or R45 allocation was found. No release controller was run, no container/process stopped, no foreign resources modified. R45 never started under this authorization; its original root/name remain absent. Earlier diagnostic releases retain their original independent reports.",
+  "window_disposition": "The frozen full7290s device-start window had already closed at17:13:54UTC. No shortened/replacement protocol or new device start was used; the fixed authorization expired without extension.",
+  "accepted_scope": [
+    "R44 count2 two-arm full diagnostic acceptance and original independent release evidence only; no performance/paper acceptance.",
+    "R45 default-off observer/facade and HOST scientific controls, same-image CPU clock and pre-Docker constructor readiness only; no actual four-worker/NPU compilation/service-budget evidence."
+  ],
+  "negative_result_retained": {
+    "r40_tpot_before_ms": "94.8741802415",
+    "r40_tpot_after_ms": "110.0527971597",
+    "r40_tpot_regression_percent": "+15.9987",
+    "r40_ttft_p95_regression_percent": "+98.1965",
+    "r45_admission": "Original0228/0229 foreign-running-declaration refusal remains a resource admission refusal, not observer/algorithm failure. No compilation cost inferred from cache-artifact duration or CPU/device-gap overlap."
+  },
+  "remaining_scope": [
+    "R45 actual four-worker compilation observation and independent full audit; causal blocking/service budget decision.",
+    "One admitted equivalent-math causal runtime variable and matched unprofiled A/B/A including startup/warm cost.",
+    "Final-source G1-G4 three formal1024 rounds.",
+    "127x3 natural-EOS paired quality EACH arm, non-thinking1024/thinking2048 same ruler.",
+    "Actual disable/uninstall/restart/release and Paper-to-Ascend/29 functional acceptance."
+  ],
+  "full_goal_complete": false,
+  "performance_success": false,
+  "paper_reproduction_complete": false,
+  "functional_29_acceptance": false,
+  "deadline_extended": false,
+  "foreign_tasks_modified": false,
+  "runtime_or_host_source_changed": false,
+  "automation": {
+    "id": "hypic-24",
+    "disposition": "Delete only this automation after terminal tracking preservation/publication attempt. No other automation is in scope."
+  },
+  "followup_boundary": "No further experiment execution under this expired authorization. Any future work requires a new human authorization with fresh resources and the unchanged scientific gates."
+}

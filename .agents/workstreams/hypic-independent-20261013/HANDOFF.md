@@ -1,3 +1,9 @@
+# CURRENT 24H AUTHORIZATION EXPIRED: FULL GOAL INCOMPLETE; NO ACTIVE OWNED STAGE
+
+WINDOW_TERMINAL_20261029.json records fresh direct-ma audit0282 at2026-10-29T19:16:39.986129+00:00: active_attempt null, exact R45 root/container/controller absent; fresh0284 running hypic-name query empty. Fixed deadline19:15:24UTC expired, remaining authorized time0. R45 never launched, so no cleanup controller was run and no foreign resource was modified. Frozen contract, original0228/0229 refusal and both R44 independent reports retain exact hashes.
+
+R44 remains two-arm diagnostic acceptance only. R45 remains CPU/HOST component readiness only. R40 formal negative result remains unchanged. Full goal still lacks real four-worker compiler budget and causal repair, matched unprofiled A/B/A including startup/warm, final-source G1-G4x3formal1024,127x3natural-EOS paired quality EACH arm, actual disable/uninstall/restart/release and Paper-to-Ascend/29functional acceptance. No new device/CPU experiment, reduced protocol, extension, main update or full-goal completion is authorized. Preserve all evidence; delete only hypic-24 after terminal tracking preservation/publication attempt. Future experiment work needs renewed human authorization.
+
 # CURRENT R45 DEVICE-START WINDOW CLOSED: FULL7290S NO LONGER AVAILABLE
 
 R45_DEVICE_WINDOW_CLOSE_20261029.json records actual0272/0273 observations at17:15:56/17:16:39UTC. Fixed deadline19:15:24UTC, required7290s, latest possible start17:13:54UTC; remainingfloor7124s at0273 is insufficient. R45 never launched: own rawroot absent and exact-name container query empty. Three original running0-3 declarations still present. Preserve original0228/0229 refusals and all frozen source/contracts/roots. No algorithm/observer failure, compile-budget result, speed success or full-goal acceptance is inferred.
