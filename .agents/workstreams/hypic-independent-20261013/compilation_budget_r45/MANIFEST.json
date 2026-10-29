@@ -1,0 +1,57 @@
+{
+  "schema": "runtime-monkeypatch-delivery/v1",
+  "name": "hypic-r45-compilation-observation",
+  "status": "partial-component",
+  "source_contract": {
+    "image_digest": "sha256:660ce23a83574fdcd28ba126b07615829c06770c06fbdf6533f03cc4d90acdb1",
+    "framework_version": "vllm_ascend0.23.0/vllm0.23.0+empty; triton_ascend3.2.2/triton3.5.0",
+    "cann_version": "9.1.0",
+    "live_module": "triton.runtime.jit",
+    "live_object": "JITFunction",
+    "source_sha256": "8f170a849331e9ce75b0d2d05e0bcd6ad2f9de838bfb277e823617982d672aad",
+    "additional_sources": {
+      "triton.compiler.compiler": "4e432986cb567b94d282f9a2c2f9911a6c3718337289fa936f240282a6a5d54b"
+    },
+    "methods": [
+      "JITFunction.create_binder",
+      "JITFunction._do_compile",
+      "compiler.compile aliases",
+      "CompiledKernel._init_handles"
+    ]
+  },
+  "treatment": {
+    "switch": "INDEPENDENT_COMPILATION_BUDGET",
+    "enabled_value": "1",
+    "patch_file": "patch.py",
+    "entrypoint": "patch:activate",
+    "patch_sha256": "5f7fc2319fbb02053033ff91d7f52f4b1310295ba9d9ebe0362223386c5be11a",
+    "loader_file": "sitecustomize.py",
+    "loader_sha256": "17fd5caf2c7ae3ce02bbcaaf8755e7c114fad0ed97d38a300ff43e9e5a53786d",
+    "launcher_file": "run_with_patch.sh",
+    "launcher_sha256": "c852c18c89b2cf303e4155bf6ac98af1abe0dabeed90af5fa46ece85c3df8028",
+    "single_primary_variable": true,
+    "variable": "Bounded source-owned compile/cache/load observation; no math or cache-policy change",
+    "diagnostic_max_calls_per_worker": 512
+  },
+  "activation": {
+    "marker_prefix": "r45_compilation_",
+    "required_roles": [
+      "worker"
+    ],
+    "disabled_control_required": true
+  },
+  "rollback": {
+    "disable_command": "INDEPENDENT_COMPILATION_BUDGET=0 and restart exact owned service",
+    "uninstall_command": "Remove this owned package from the mount and restart; explicit stop restores captured original compiler aliases"
+  },
+  "evidence": {
+    "experiment_id": "hypic-r45-compilation-causal-budget-20261029",
+    "branch": "work/hypic-independent-20261013",
+    "commit": "494e90c2566963a5a46778dbec25fb275d3eb275",
+    "commit_scope": "Exact package code checkpoint; manifest is a later self-hash-independent control record"
+  },
+  "scope": "HOST18+bootstrap3 and official-image CPU source-slot wiring only. Not worker-loader integration, model/TP activation, NPU compilation, numerical/performance/quality or rollback acceptance.",
+  "worker_integration_complete": false,
+  "new_device_admission": false,
+  "full_goal_complete": false
+}

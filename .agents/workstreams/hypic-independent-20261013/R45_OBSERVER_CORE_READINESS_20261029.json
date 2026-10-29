@@ -1,0 +1,56 @@
+{
+  "schema": "hypic-r45-observer-core-readiness/v1",
+  "state": "SOURCE_BOUND_CORE_AND_CPU_IMAGE_WIRING_VALID_WORKER_INTEGRATION_PENDING",
+  "code_checkpoint": "494e90c2566963a5a46778dbec25fb275d3eb275",
+  "core_controls": {
+    "operation": "exec-0000000000000200",
+    "passed": 18
+  },
+  "bootstrap_controls": {
+    "operation": "exec-0000000000000202",
+    "passed": 3
+  },
+  "official_source_probe": {
+    "operation": "exec-00000000000001fd",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r45-compiler-source-probe-20261029/result.json",
+    "sha256": "7b5f767a11efebfa6ff4ade499237215821c53e364babbfc200558b07194392a",
+    "no_devices": true
+  },
+  "official_image_wiring": {
+    "operation": "exec-0000000000000201",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r45-observer-image-wiring-r2-20261029/result.json",
+    "sha256": "b127c2424c55dce813edd306113bc299f0685102a23a592f7f205f974fb1f640",
+    "patch_sha256": "5f7fc2319fbb02053033ff91d7f52f4b1310295ba9d9ebe0362223386c5be11a",
+    "actual_native_functions_and_aliases_restored": true,
+    "exact_cpu_container_absent": true,
+    "no_backend_compilation_or_inference": true,
+    "stderr": "can not use command: npu-smi info",
+    "scope": "Triton import attempted an unavailable metadata query inside a no-device container; no successful physical compute exposure/allocation. Actual before-hook cancellation and already-loaded handle branch only."
+  },
+  "earlier_wiring": {
+    "operation": "exec-00000000000001ff",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r45-observer-image-wiring-20261029/result.json",
+    "sha256": "b318556bd727dca176df0391952cdce18ae86c6bb80b34ade4b61ad9fc87841b",
+    "scope_correction": "Earlier no_device_call field was overbroad because import attempted npu-smi info. R2 labels no backend compilation/device allocation; old record is retained."
+  },
+  "runtime_source_scope": "All original438 runtime files and old R43/R42 source remain byte-identical; only a new default-off namespace and HOST tests were added. No current serving loader modified.",
+  "observer_behavior": [
+    "Exact bounded per-worker call IDs and integer monotonic clocks; key SHA and constexpr metadata; nested parent/child intervals retain actual original-call boundaries.",
+    "Source-owned compiler aliases, original method code and class identities checked; compiler aliases captured by an actual JIT binder are tracked and restored.",
+    "Async compilation is marked, not assumed blocking; missing/unassigned metadata is explicit. Initialized handle fast paths remain unobserved passthrough.",
+    "Healthy original results/arguments/exceptions are preserved. Diagnostic observer bounds, recursion, source/ownership drift and writer errors fail closed and are not algorithm failures; original upstream exception has priority over an end-writer error."
+  ],
+  "remaining": [
+    "Source-owned namespace worker loader/bootstrap integration that preserves all original runtime files; no edits or blind replacements of legacy loaders/algorithm/hooks.",
+    "Frozen R45 HOST controller/policy/actual constructor capture and independent observer-event audit with same warm2/full40 ruler, 4worker activation and exact source/math/physical/isolation/durability/release guards.",
+    "Static package validation with exact code-commit/file hashes; final manifest must be refreshed after any loader/patch-byte change.",
+    "Only then fresh full-budget/new-root admission for one unprofiled observation; no existing NPU attempt or new algorithm fix.",
+    "Measured nonoverlapping blocking and request-overlap upper bound vs38.819s absolute optimistic threshold before choosing or rejecting task_num-only route."
+  ],
+  "next_action": "Implement new compilation_budget_r45 worker-loader facade from this thread's reviewed generic startup controller, retaining original graph_candidate/worker_loader.py and all original438 source bytes. Install observer only after original native worker module finishes registration, with explicit bound manifest/env and rank callback; restore exact slots on failure/uninstall. Then R45 HOST envelope/auditor/constructor guards. Do not run another unchanged core test or image probe if these source files do not change.",
+  "active_attempt": null,
+  "new_device_admission": false,
+  "real_compiler_budget_measured": false,
+  "native_speed_gain_proven": false,
+  "full_goal_complete": false
+}
