@@ -26,12 +26,14 @@
     "entrypoint": "patch:activate",
     "patch_sha256": "5f7fc2319fbb02053033ff91d7f52f4b1310295ba9d9ebe0362223386c5be11a",
     "loader_file": "sitecustomize.py",
-    "loader_sha256": "17fd5caf2c7ae3ce02bbcaaf8755e7c114fad0ed97d38a300ff43e9e5a53786d",
+    "loader_sha256": "9ec0da17bf7f5ba7f3a9fd67a799d94a3e7e763e935c8a25679fb8302a8d32c6",
     "launcher_file": "run_with_patch.sh",
     "launcher_sha256": "c852c18c89b2cf303e4155bf6ac98af1abe0dabeed90af5fa46ece85c3df8028",
     "single_primary_variable": true,
     "variable": "Bounded source-owned compile/cache/load observation; no math or cache-policy change",
-    "diagnostic_max_calls_per_worker": 512
+    "diagnostic_max_calls_per_worker": 512,
+    "worker_facade_file": "worker_loader.py",
+    "worker_facade_sha256": "864d9e5ff186ba5070cf958010e382360f98cb6cda9580faaf10a61254303df3"
   },
   "activation": {
     "marker_prefix": "r45_compilation_",
@@ -47,11 +49,12 @@
   "evidence": {
     "experiment_id": "hypic-r45-compilation-causal-budget-20261029",
     "branch": "work/hypic-independent-20261013",
-    "commit": "494e90c2566963a5a46778dbec25fb275d3eb275",
+    "commit": "748f9cffc938525dce0cfe8d5a2026130065b5b2",
     "commit_scope": "Exact package code checkpoint; manifest is a later self-hash-independent control record"
   },
-  "scope": "HOST18+bootstrap3 and official-image CPU source-slot wiring only. Not worker-loader integration, model/TP activation, NPU compilation, numerical/performance/quality or rollback acceptance.",
+  "scope": "Source-owned startup facade implemented; HOST14+updated bootstrap3 and official-image CPU factory/source/slot uninstall verified. Native worker execution, four-rank activation, NPU budget, disabled service control, performance, quality and rollback acceptance remain pending.",
   "worker_integration_complete": false,
   "new_device_admission": false,
-  "full_goal_complete": false
+  "full_goal_complete": false,
+  "worker_facade_source_implemented": true
 }

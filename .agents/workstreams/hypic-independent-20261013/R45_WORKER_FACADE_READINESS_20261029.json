@@ -1,0 +1,53 @@
+{
+  "schema": "hypic-r45-worker-facade-readiness/v1",
+  "state": "SOURCE_OWNED_FACADE_CPU_VALID_HOST_OWNER_AUDIT_PENDING",
+  "code_checkpoint": "748f9cffc938525dce0cfe8d5a2026130065b5b2",
+  "runtime_added": {
+    "compilation_budget_r45/__init__.py": "c5fa81977eb8873e99884ebdea774788f99000800437f2fc418eca9a0509affe",
+    "compilation_budget_r45/sitecustomize.py": "9ec0da17bf7f5ba7f3a9fd67a799d94a3e7e763e935c8a25679fb8302a8d32c6",
+    "compilation_budget_r45/patch.py": "5f7fc2319fbb02053033ff91d7f52f4b1310295ba9d9ebe0362223386c5be11a",
+    "compilation_budget_r45/worker_loader.py": "864d9e5ff186ba5070cf958010e382360f98cb6cda9580faaf10a61254303df3"
+  },
+  "original_runtime_python": 438,
+  "original_runtime_unchanged": true,
+  "active_manifest": {
+    "path": "R45_COMPILATION_BUDGET_ON_MANIFEST_20261029.json",
+    "sha256": "b9977660866abeb1dced1fb2cbcb0df2b210a3beccc31394d70e5e6970931c78",
+    "python_files": 442
+  },
+  "controls": {
+    "operation": "exec-000000000000020c",
+    "new_loader_controls": 14,
+    "updated_bootstrap_controls": 3
+  },
+  "official_image_cpu_wiring": {
+    "operation": "exec-0000000000000217",
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r45-worker-loader-image-20261029/result.json",
+    "sha256": "ce9247652b3ed0a7ce90355f2729b3d400d4b4b293a991765d0da7d95ecc80e5",
+    "exit": 0,
+    "exact_cpu_container_absent": true,
+    "native_worker_import_executed": false,
+    "physical_compute_exposed": false,
+    "backend_compilation": false,
+    "stderr": "can not use command: npu-smi info",
+    "scope": "Actual new facade manifest/raw-function checks and observer factory/source-owned compiler slot install/uninstall; no inference or TP activation."
+  },
+  "behavior": [
+    "Original native worker importer/source verification executes before observer factory, then unchanged graph activation. Original438 algorithm/runner/scheduler sources unchanged.",
+    "R45 explicit source manifest/environment/profile/maxcalls512; durability retained and IO/component/R33/quality observers excluded.",
+    "Original raw-event writer AST matches unchanged graph loader; original errors win while all owned cleanup stages are attempted.",
+    "Exact TP4 group rank, explicit unassigned preinitialization, no invented rank; unknown active old loader rejected."
+  ],
+  "remaining": [
+    "Implement strict R45 diagnostic HOST policy/controller and independent event auditor retaining all original math/source/hot/finite/durability/physical/isolation/release guards.",
+    "Audit exact begin/end, per-worker bounded count/health and source identity; distinguish nested/native API/load and async/unassigned evidence. No inclusive/rank sums as service cost.",
+    "Bind original first/last-token timestamps and shared monotonic clock to actual observation intervals or explicit optimistic16 upper bound. Known or unmeasured observation overhead is not removable compilation cost.",
+    "Actual constructor intercept beforeDocker, official-image startup path and all needed guards; fresh7200+90s, empty0-3+102ports/raw/cache admission before ONE full40 unprofiledG3 diagnostic.",
+    "Only sufficient causal budget permits one kernel variable; R40negative/formalquality/lifecycle/Paper/29functional remain."
+  ],
+  "active_attempt": null,
+  "new_device_admission": false,
+  "real_compiler_budget_measured": false,
+  "native_speed_gain_proven": false,
+  "full_goal_complete": false
+}
