@@ -1,0 +1,106 @@
+{
+  "schema": "hypic-r44-phase-gap-decision/v1",
+  "state": "MATCHED_REQUEST_PHASE_DIFFERENCE_AND_C1_GAP_LOCALIZATION_VALID_COMPILER_CAUSE_PENDING",
+  "operation": "exec-00000000000001f1",
+  "result": {
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-phase-gap-r1-20261029/result.json",
+    "sha256": "1fe520772cba9f9c4a464768818a06b386c9df1b2bbab52a2429421f5346db5b"
+  },
+  "elapsed_seconds": 48.56365819997154,
+  "independent_post_read": {
+    "operation": "exec-00000000000001f2",
+    "helper_plan_runtime_all8trace_csv_reports_workers_unchanged": true
+  },
+  "focused_controls": {
+    "operation": "exec-00000000000001f0",
+    "passed": 7
+  },
+  "helper_sha256": "40c2620d3442971f51ef1bef60046b0483182343ce8c0f3fd5ea4c04e9857bc3",
+  "cache_and_official_source_evidence": {
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-phase-cache-source-evidence-r1-20261029/result.json",
+    "sha256": "7436a023572e6cbadc45c5ef58ba69b3db4343ac182bacd358ced0e1a0a70d9b",
+    "cache_metadata_and_selected_artifact_hashes_mtimes_unchanged": true,
+    "no_devices": true,
+    "operation": "exec-00000000000001f9"
+  },
+  "actual_all_four_rank_phase_work": {
+    "native_embedding_inputs": [
+      32768,
+      1
+    ],
+    "G3_embedding_inputs": [
+      32768,
+      40960
+    ],
+    "G3_projected_rows": [
+      16392,
+      24584
+    ],
+    "G3_first_measured_step": 2053,
+    "G3_second_measured_step": 2054,
+    "G3_second_request_composition": [
+      {
+        "kind": "native_decode",
+        "original_and_retained": 1,
+        "actual_C1_layers": 48
+      },
+      {
+        "kind": "hot_full_private_prefill",
+        "original": 32768,
+        "retained": 16392,
+        "actual_C1_layers": 48
+      },
+      {
+        "kind": "native_chunked_prefill",
+        "original_and_retained": 8191,
+        "actual_C1_layers": 48
+      }
+    ],
+    "unique_embedding_CSV_task_stream_start_and_exact_typed_incoming_flow_endpoints_verified": true,
+    "CPU_hardware_queue_delay_preserved_not_reclassified_as_compute": true
+  },
+  "per_rank_observed_G3_gap_coverage_us": {
+    "0": {
+      "gdn_other_recorded_scope": "7441399.79150",
+      "gdn_with_nested_guard_op_span": "18411.77450",
+      "no_recorded_main_thread_scope": "359108.21175",
+      "other_recorded_main_thread_scope": "61316.97150",
+      "other_registered_custom_op": "1948172.01125"
+    },
+    "1": {
+      "gdn_other_recorded_scope": "7168271.730",
+      "gdn_with_nested_guard_op_span": "18879.940",
+      "no_recorded_main_thread_scope": "379062.170",
+      "other_recorded_main_thread_scope": "61644.795",
+      "other_registered_custom_op": "1955529.785"
+    },
+    "2": {
+      "gdn_other_recorded_scope": "7328725.05",
+      "gdn_with_nested_guard_op_span": "18672.20",
+      "no_recorded_main_thread_scope": "374255.41",
+      "other_recorded_main_thread_scope": "64727.86",
+      "other_registered_custom_op": "2032515.34"
+    },
+    "3": {
+      "gdn_other_recorded_scope": "7381652.13",
+      "gdn_with_nested_guard_op_span": "28392.81",
+      "no_recorded_main_thread_scope": "369979.43",
+      "other_recorded_main_thread_scope": "66119.70",
+      "other_registered_custom_op": "1999377.31"
+    }
+  },
+  "findings": [
+    "Native second captured input is a one-token forward; G3 second is a real mixed batch1+32768+8191=40960 before pruning,24584 after. All4ranks and48C1 layer request receipts conserve rows. Equal count2 is not phase/work matching.",
+    "Most observed G3 non-control gaps temporally overlap registered GDN/C1 CPU scopes: other-GDN7.17-7.44s per rank, nested guard-op18.4-28.4ms, other registered ops1.95-2.03s. This is disjoint temporal localization, not removable cost or a root-cause proof.",
+    "Source retains native FULL uniform decode authorization before PIC ContextVars and bypasses compilation only for actual NONE requests; installation or absence of an annotation does not prove graph execution/disablement.",
+    "Retained cache has a measured-window KKT artifact. Warm HYPIC loop upper bound3084 and mixed-batch bound4620 are baked into distinct TTIR. Both have identical pointer dtypes including int64 cu_seqlens, so dtype normalization is not the selected cause.",
+    "Official kernel SHA bcd1e9d8d4ec4f44ba24955ac9b85c6ce26e019802e12c49337f11a31bf64a98 declares T/B do_not_specialize but task_num tl.constexpr. task_num=NT*B*H:257*12=3084 vs385*12=4620. Do not infer dynamic T padding is needed.",
+    "Measured variant TTIR1793228663816000000ns and binary1793228669408000000ns bracket5.592s artifact materialization inside second G3 capture. Filesystem times do not identify complete/exclusive compiler-call duration, cache-lock waiting or causal service impact.",
+    "CPU source-only official-image probe01f7 exited0, no devices, exact source container absent. Original cache metadata/artifact SHA and mtimes independently unchanged when archived01f9. No algorithm/runtime math/guards changed."
+  ],
+  "next": "R45_COMPILATION_CAUSAL_BUDGET_PLAN_20261029.json: source-bind actual Triton compile/cache/load call chain, implement default-off bounded observational receipts preserving calls/results/exceptions, then one fully admitted same-ruler unprofiled G3 diagnostic. Quantify actual exclusive blocking compile/cache intervals and request-overlap upper bound before admitting ONE task_num specialization intervention. Do not rewrite kernel, seed caches, add warms, pad shapes or remove guards from these clues alone.",
+  "no_active_owned_stage": true,
+  "causal_compiler_root_proven": false,
+  "new_performance_acceptance": false,
+  "full_goal_complete": false
+}

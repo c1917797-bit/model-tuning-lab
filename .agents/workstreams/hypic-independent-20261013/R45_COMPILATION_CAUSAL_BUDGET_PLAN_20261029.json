@@ -1,0 +1,60 @@
+{
+  "schema": "hypic-r45-compilation-causal-budget-plan/v1",
+  "state": "SOURCE_BOUND_OBSERVER_READINESS_REQUIRED_NO_DEVICE_ADMISSION_YET",
+  "authority": "User24h continuation; unchanged end2026-10-29T19:15:24Z",
+  "basis": "R44_PHASE_GAP_DECISION_20261029.json",
+  "candidate_hypothesis": "Measured mixed-batch NT changes KKT constexpr task_num and induces additional host compilation/cache waits inside C1. Artifact evidence is a clue; actual causal blocking budget remains unmeasured.",
+  "not_selected": [
+    "int64 vs int32 normalization: same HYPIC warm/measurement pointer types",
+    "T/B padding: official T/B already do_not_specialize",
+    "extra whole-path target warmup: R39 closed negative whole-cost route",
+    "disabling finite/completion/ownership/durability or unexplained sync removal"
+  ],
+  "next_single_operation": "CPU source-only inspect actual official-image Triton JIT compile/cache/load call chain and exact kernel metadata representation; no imports or changes to old successful HYPIC implementations.",
+  "observer_requirements": [
+    "Default off, removable, explicit source/manifest binding and bounded events/bytes; no math/kernel/metadata/cache policy change.",
+    "Wrap only exact source-owned upstream compile/cache/load slots after verifying code/path/hash. Preserve argument objects, original return/exception behavior and ownership; restore all owned slots on failure/uninstall.",
+    "Record exact integer monotonic start/end/thread/rank/kernel/source/constexpr task_num/cache signature; record ambiguous/unselected ownership, never fabricate selected-step joins.",
+    "Nested compiler/load/lock spans retain parent links; union/exclusive accounting with no rank sums or duplicate waits. No inclusive CPU duration called removable time.",
+    "Fresh cold independent per-attempt cache policy unchanged; do not seed original cache, add warms, alter batch/prompt/output sizes or change original roots.",
+    "Focused new tests for exceptions, recursion/reentrancy, drift, event bounds, no lost calls, exact IDs/clocks, nested exclusive intervals and writer failure; validate actual official-image wiring before any NPU allocation."
+  ],
+  "possible_diagnostic_after_readiness": {
+    "group": "G3",
+    "model": "27B",
+    "physical": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "TP": 4,
+    "requests": 40,
+    "HTTP_concurrency": 16,
+    "prompt_tokens": 32768,
+    "max_model_len": 40960,
+    "max_num_batched_tokens": 40960,
+    "max_output_tokens": 1024,
+    "preparations": 4,
+    "actual_target_warmups": 2,
+    "pdc": false,
+    "torch_profiler": false,
+    "algorithm_source_and_all_math_finite_owner_completion_durability_guards_unchanged": true,
+    "scope": "Diagnostic observation only, not matched performance acceptance. One new source-bound contract/root after constructor/identity/full source/model/image/input/actual vacancy/isolation/raw/cache/time-budget admission."
+  },
+  "budget_gate": {
+    "R40_weighted_tpot_ms_native": 94.8741802415,
+    "R40_weighted_tpot_ms_G3": 110.0527971597,
+    "output_transition_denominator": 40920,
+    "required_weighted_latency_recovery_seconds": 621.1090042927442,
+    "absolute_optimistic_blocking_union_seconds_if_all16_requests_decoding": 38.81931276829651,
+    "notes": [
+      "Formula is a necessary optimistic bound from formal TPOT gap; actual active decode overlap is less than16 when prefill is present.",
+      "Bound must use exact non-overlapping compiler/cache/load blocking intervals and actual request first/last token intervals where available. If missing, use explicit conservative maximum and mark unidentifiable parts.",
+      "If even optimistic measured budget cannot cover original gap, reject task_num-only performance route; do not implement a promising-looking kernel change.",
+      "If enough, freeze exactly ONE code variable (potential runtime task_num without math/body changes only if official NPU compiler supports it), prove guards/numerics, then new unprofiled same-identity causal A/B/A including warm/startup costs. No benefits before results."
+    ]
+  },
+  "new_device_admission": false,
+  "full_goal_complete": false
+}

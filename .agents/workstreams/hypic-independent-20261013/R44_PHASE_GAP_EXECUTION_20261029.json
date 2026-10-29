@@ -1,0 +1,77 @@
+{
+  "schema": "hypic-r44-phase-gap-plan/v1",
+  "helper": "host_audits/r44_phase_gap.py",
+  "helper_sha256": "40c2620d3442971f51ef1bef60046b0483182343ce8c0f3fd5ea4c04e9857bc3",
+  "method": {
+    "path": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/R44_PAIR_ATTRIBUTION_ANALYSIS_PLAN_20261028.json",
+    "sha256": "dbe994f484ec9616fe80e517c4e157312a8dad5b442fb545a50b134c3496768e"
+  },
+  "acceptance": {
+    "path": "/cache/cch/model-tuning-lab-hypic-independent-20261013/.agents/workstreams/hypic-independent-20261013/R44_PAIR_DIAGNOSTIC_ACCEPTANCE_20261028.json",
+    "sha256": "deadaad6e1574cb4a4c1918cb4de63d32fe853d9f5c214ee50483c92fd8aefbe"
+  },
+  "reports": {
+    "G1": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-normalized-supplemental-audit-20261028.json",
+      "sha256": "33ae5bc5624d632a6717e048a73081997c5986287810fc2b1ad279d644cc7397"
+    },
+    "G3": {
+      "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-normalized-supplemental-audit-20261028.json",
+      "sha256": "f374bbc84b02f5fc020660eca7993e0f17f685057527e7e61eb572bb0d37f2f0"
+    }
+  },
+  "normalized_roots": {
+    "G1": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g1-r1-normalized-trace-20261028",
+    "G3": "/opt/host/vnf/cch-hypic-independent-20261028/r44-g3-r1-normalized-trace-20261028"
+  },
+  "output_root": "/opt/host/vnf/cch-hypic-independent-20261028/r44-phase-gap-r1-20261029",
+  "timeout_seconds": 300,
+  "limits": {
+    "cpu": "0",
+    "timeout_seconds": 300,
+    "max_address_space_bytes": 4294967296,
+    "trace_bytes": 268435456,
+    "tree_bytes": 2147483648,
+    "complexity": "O(events) or O(events log events), one rank in memory at a time; no per-distinct-flow-name rescan"
+  },
+  "no_devices": true,
+  "new_inference": false,
+  "layout_helper_sha256": "bfb5f6dc77432a90757f0a9a5be14ea8f90117dea4534f5fb2ae6bf3005e54f0",
+  "method_limits": [
+    "Match actual embedding hardware with official CSV by exact Name/TaskID/StreamID/start time after shared Decimal origin; reject missing/duplicate anchors.",
+    "Require actual two main-thread embedding calls; device windows are anchored intervals, not assumed whole-forward causal paths.",
+    "Exact typed incoming endpoint flow cardinality retained; no forced one-to-one or inferred unmatched edges.",
+    "Disjoint partition observed gaps by nested GDN/guard/other custom/other main thread/unrecorded time; temporal coverage is not causal removal.",
+    "G3 actual per-request selected-step48layer receipts and row-conservation; first-observed progress is partial and cannot fabricate missing decode records.",
+    "Native FULL decode source authorization before PIC and selected NONE bypass verified in current source, which is byte-identical to captured source. Installation/annotation is not graph execution proof.",
+    "No across-rank or nested CPU span sums, no new inference/profiler, no speed/quality acceptance."
+  ],
+  "focused_controls": {
+    "operation": "exec-00000000000001f0",
+    "passed": 7
+  },
+  "helper_sources": {
+    "host_audits/r44_phase_gap.py": "40c2620d3442971f51ef1bef60046b0483182343ce8c0f3fd5ea4c04e9857bc3",
+    "host_audits/r44_pair_layout.py": "bfb5f6dc77432a90757f0a9a5be14ea8f90117dea4534f5fb2ae6bf3005e54f0",
+    "host_audits/r44_pair_work_budget.py": "ca71f4601985b25bc888e6f1b9615c20e00da9e637e5e09b7cd5bfb2a39fbe99"
+  },
+  "runtime_source_sha256": {
+    "graph_candidate/entry_router.py": "9f3cae04ffc46af72fb410b19b0b1274111ccd6bd9f3d8c673d068692a8ce1a2",
+    "graph_candidate/prefill_bridge.py": "5996cfbb1b69ee66036e71841f505fb1e2c671f07b96905ad4129278a02566bf",
+    "graph_candidate/activation.py": "b35c12766211bce2378cd216b767a08bd5cc4413329047da02225cbeb98c58ac",
+    "independent_runtime_adapter.py": "696af2756d7f4ece5fb1fa6ae3e8fd126651bf4a8e15c4005d07b0ea0775dd50",
+    "independent_compact_gdn_hook.py": "3bddcc9aebd0d8e491e71ac886037a39d33714b68c3e5a3275e304b3e7000b45"
+  },
+  "captured_runtime_source_ref": "fbb80c36",
+  "current_runtime_source_diff_verified_empty": true,
+  "work_budget": {
+    "path": "/opt/host/vnf/cch-hypic-independent-20261028/r44-pair-work-budget-r1-20261029/result.json",
+    "sha256": "c044581e778fc92c206d0c146050c8bf073143301d6f972e24bbdb176802639a"
+  },
+  "g3_worker_root": "/opt/host/vnf/cch-hypic-independent-20261028/critical-path-r44-g3-r1-20261028/diagnostics",
+  "selected_steps": [
+    2053,
+    2054
+  ],
+  "selected_step_basis": "4preparations +2actualtargetwarm*1024output steps; first measured model step2053. Actual row receipts checked separately; no timestamp bridge fabricated."
+}
