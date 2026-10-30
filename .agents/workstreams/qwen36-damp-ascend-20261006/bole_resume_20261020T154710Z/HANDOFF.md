@@ -1,5 +1,76 @@
 # BOLE continuation, 2026-10-20
 
+## Latest dual-paper continuation — 2026-10-30
+
+The user authorized a new24-hour BOLE and DeltaLog window, from
+2026-10-30T11:51:04Z to2026-10-31T11:51:04Z (Moscow14:51:04), cutoff1793447464.
+Original start1792828303 is retained. The authority is
+`../dual_resume_20261030T115104Z/WINDOW_AUTHORIZATION_20261030.json`,
+1969B/81f0b73c247cc1716c53b012103154ec385d8a10dc090ca10f9faf634a641a28.
+The older window sections below are immutable history, not the current grant.
+
+Read the latest append-only EXECUTION record by real timestamp in
+`../dual_resume_20261030T115104Z` and its original receipts. Source bodies and
+RAW remain on chicaihong01. MAIN alone schedules physical4–7, protects0–3 and
+keeps TP4 timing exclusive; completed preparation does not self-admit devices.
+
+BOLE: the original8e7 failed-frame numerical result remains failed. The new
+candidate preserves the original kernel and adapter and changes the verify
+launch to drain the registered torch_npu queue. Actual CPU-only compilation
+03ad completed/released, and materialization03c7 exited0. Its library is
+732528B/f65d7eced4ac9f66f2d525d079786bf15e5e67270a70ed3b6ed794fa5b068a2a;
+the compiled index is2545B/29228255a851f49ee0f25ecc9c85c4e5ef57d6ed3ca0b0951b780d607872f26e.
+This is not an NPU PASS. Singlephysical4 packets are prepared: original8e7
+with synchronization after the device cast for causal diagnosis, followed by
+the proper queue candidate with all seven independent numerical checks.
+Neither new device owner has started. Original18, wrapper/consumer, actual
+callee192 and model gates still need real same-candidate predecessor evidence.
+
+DeltaLog: CPU004's guest exited0 and passed its software/frontdoor/process
+controls. These do not prove native NPU mathematics or160-step correctness.
+The native controller03c3 exited3 after93.3147s because the storage installer
+returned a list where postverification calls a verifier object. The original
+N16 consumer rejects that primary failure and has no independent recovery Ref.
+The minimal compatible return interface passed the actual host installation
+and postverification calls using the original read-only guards; a wrong legacy
+Ref was rejected. CPU005 source preparation remains unbound pending the exact
+old-close lineage and budget prerequisite. Keep CPU004's exit3 and all files.
+
+The worker's two affected historical-Lease source regressions actually passed
+in0400:2 tests,0 errors/failures, no framework/container/NPU. The first runner
+had incorrectly forbidden the original inert timeout probe; its failure is
+retained. This is not the historical253/255 suite or CPU/N16/worker acceptance.
+Current three-role authority and ordinary-D payload-provider integration remain
+preparation; no current v0.23 paired-performance readiness is claimed.
+
+Two explicit permissions are pending at this checkpoint:
+
+- New physical archive: exactly512 old KIVI POOL files,3871866880B, at most4GiB
+  total on the independent disk with at least100GiB free. No archive or source
+  deletion has executed. Fresh actual dependency/mount checks are required.
+- CPU004 unused logical reservation:235051B retained from its original1GiB row,
+  unused1073506773B. Automatic review rejected approval/apply because continuing
+  experiments did not explicitly authorize this accounting change and temporary
+  receipt-alias deletion. No approval/apply/receipt was created. The concrete
+  code and complete retention seal are ready, but must wait for explicit user
+  approval; never route the same mutation through another agent or peer.
+
+The second action preserves every original row/file and does not enlarge the
+34GiB+1MiB scope; it is separate from the physical archive. CPU003's earlier
+close is consumed once. CPU005 plus N16 cannot borrow a future CPU004 release.
+Only after an actual approved close may the final source bind that receipt.
+
+The17:41:57Z snapshot found physical4–7 idle, AICore0 and baseline HBM;
+Docker free5660966912B was below the unchanged device admission floor.
+It is not a continuous utilization measurement and must be refreshed before
+any device action. Do not run a dummy load or lower gates to hide the gap.
+
+No new whole-model numerical, paired performance or final task PASS exists.
+After actual required correctness, the next performance screen remains the
+frozen32K-input/fixed1024-output/c1 matched diagnostic, then promising candidates
+need three formal pairs and GSM8K/HumanEval/MMLU smoke/full acceptance.
+Do not extend the current cutoff or count historical HYPIC as a new success.
+
 ## Latest actual model checkpoint — 2026-10-29
 
 The current human window is renew24_20261028T192856Z; its authorization file

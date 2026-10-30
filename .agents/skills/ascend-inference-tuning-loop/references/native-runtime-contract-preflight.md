@@ -24,6 +24,46 @@ A native/reference failure triggers an oracle-applicability investigation, not a
 
 Task grades must refer to the verified generation body, not merely matching source/phase/arm metadata. When adapting a source envelope, invert it with the original checked transform and compare the whole object against the verified original RAW. Keep generated-code execution in its separately authorized sandbox.
 
+## Real caller interfaces and faithful device-free controls
+
+Source hashes and a constructed file plan prove identity, not that an installed
+helper returns the interface its next consumer calls. Before another expensive
+startup, execute the affected caller through installation and postverification
+with its real immutable inputs. Check the returned capability and the exact
+argument passed to it; a list of verified inputs is not a verifier object.
+Include the actual outer CLI output leaf and the consumer's schema version.
+Keep focused construction controls distinct from real-image and NPU evidence.
+
+A device-free control must preserve the registered guard's semantics. Trace
+its required read-only commands, wrappers, interpreter, arguments and timeouts
+before adding a test fence. Blocking every subprocess can replace an expected
+timeout with a harness exception, or reject an existing read-only inspection
+wrapped by a resource-limit utility. Permit only the original reviewed calls
+needed by that control; keep experiment starts, container/device mutations and
+unregistered commands outside its scope. Classify an added fence's refusal as
+a test-harness defect, preserve it, and repeat the affected control after repair.
+Do not weaken the production guard or report a paper/numerical failure.
+
+Keep guest, native controller and recording-wrapper terminals separate. A
+guest's software PASS followed by a host postverification error leaves the
+native stage failed; a wrapper exiting successfully after recording it does
+not turn that exit into success. Reuse unaffected evidence only through the
+registered consumer's supported recovery contract. If it rejects the failed
+native result and has no recovery input, fix the actual interface and prepare
+a new bounded affected stage. Preserve the original exit and result instead
+of inventing a generic PASS/recovery schema.
+
+Derive each stage's time and resource limits from the executed assignment and
+callee, including any clipping by the remaining owner lease. A nominal numeric
+budget in a manifest is not automatically the CPU stage's lease. An outer
+observation limit may leave room for cleanup; it cannot extend the inner lease
+or the human cutoff.
+
+The October30 examples and their exact evidence are summarized in the
+[BOLE/DeltaLog continuation handoff](../../../workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/HANDOFF.md).
+They establish repaired source/control interfaces and scoped software results,
+not NPU mathematics, whole-model performance or task acceptance.
+
 ## Evidence and next action
 
 Record the failure class (wiring, implementation, numerical, reference, resource or invalid experiment), exact source/operation/output and the evidence that selects the next action. Transport observation failure is not experiment failure: recover a live operation with the same idempotency identity instead of restarting it.
