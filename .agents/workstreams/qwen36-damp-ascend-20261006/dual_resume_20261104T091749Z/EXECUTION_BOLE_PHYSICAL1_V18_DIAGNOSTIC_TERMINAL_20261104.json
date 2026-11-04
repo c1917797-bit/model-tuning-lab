@@ -1,0 +1,77 @@
+{
+  "schema": "ascend.dual-paper-stage-handoff/v1",
+  "recorded_at_utc": "2026-11-04 16:56:57 UTC",
+  "state": "TERMINAL_SINGLE_FRAME_DIAGNOSTIC_NOT_QUALIFIED",
+  "operationId": "exec-00000000000007bb",
+  "peerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "owner_PID": 2233361,
+  "owner_startticks": "192780472",
+  "CID": "029413132d35f6ba9799b5da4a1c8785983d36b35f6168b8de2d3e11747938fb",
+  "container_terminal": {
+    "Status": "exited",
+    "Running": false,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 0,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-11-04T16:42:42.3489254Z",
+    "FinishedAt": "2026-11-04T16:42:57.25998723Z"
+  },
+  "authority": "DEVICE_SCOPE_AUTHORIZATION_20261104_0_3.json",
+  "cutoff_epoch": 1793870269,
+  "original_start_epoch": 1792828303,
+  "allowed_physical": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "selected_physical": [
+    1
+  ],
+  "guest_device_node": "/dev/davinci0",
+  "guest_logical_device": 0,
+  "protected_physical": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_container": "vllm-au-test",
+  "actual_NPU_verify_calls": 1,
+  "NPU_checks_passed": 7,
+  "historical_P_U_Y_replay_mismatches": 3,
+  "short8_PASS": false,
+  "operator_qualification_PASS": false,
+  "model_PASS": false,
+  "performance_PASS": false,
+  "accuracy_PASS": false,
+  "diagnostic_review_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261104T091749Z/BOLE_PHYSICAL1_V18_INDEPENDENT_DIAGNOSTIC_REVIEW_20261104.json",
+    "bytes": 8600,
+    "sha256": "1ac97dba2c096681c3874b313c0c955c88ccdee833510c161e1a7cc2b0e0d1ad"
+  },
+  "fresh_SMI_and_metrics_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261104T091749Z/BOLE_PHYSICAL1_V18_FRESH_SMI_AND_METRICS_20261104.json",
+    "bytes": 9128,
+    "sha256": "1350d72b42932697588ac4e9a9f66ef2b62e9cf9dbb0f825a897a06811c699cd"
+  },
+  "owner_absent": true,
+  "device1_no_compute_PID_at_epoch": 1793811144.5130517,
+  "device1_driver_namespace_unoccupied_at_epoch": 1793810972.4841022,
+  "physical0_blocker": "UDA Conflict open udevid=0 ns_id=0; original owning PID/container remains unproved; no stop/reset/service or namespace changes requested.",
+  "next_ready": "NOT_READY: verify actual production callee/capture conventions against saved frame, particularly state layout, qk normalization/scale and gate order before a new source-bound qualifying run.",
+  "blockers_for_TP4": "physical0 driver namespace conflict remains; do not restart old physical4-7 model commands",
+  "preserve_false_qualifications": true,
+  "stream_change_causality": "UNPROVEN: no same-card old/new binary A/B",
+  "source_only_v17_submission": "No operation handle returned; last probe1793810217.6601977 found no v17 factory/receipt/final owner and no matching writer PID. Do not replay unknown original command; it contained no NPU start.",
+  "debug_proc_caution": "No repeat namespace_node reads: public implementation may recycle idle registrations on read; installed-source behavior not yet confirmed. Device0 still occupied on subsequent udevice snapshot.",
+  "scheduler_30min": "UNMEASURED: bounded stage timestamps exist; no continuous utilization evidence.",
+  "no_new_cleanup_or_hugepage_budget": true,
+  "source_and_RAW_host_only": true,
+  "local_git_before": "7a72480fd70ecc834f553a2b5d9d4a7fd1f21ce5",
+  "remote_push": "UNCONFIRMED after prior TLS error; no proxy/credential changes"
+}

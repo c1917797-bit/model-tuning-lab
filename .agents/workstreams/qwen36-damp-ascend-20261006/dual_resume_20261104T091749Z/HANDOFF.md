@@ -1,3 +1,17 @@
+# Current stage: physical1 real NPU diagnostic completed; qualification pending
+
+Updated 2026-11-04 16:56:57 UTC. Latest authority permits physical0–3 only; preserve physical4–7 and vllm-au-test. Frozen cutoff remains 2026-11-05T09:17:49Z (1793870269).
+
+- Actual entry exec-00000000000007bb / ma: owner2233361/start192780472; exact CID 029413132d35f6ba9799b5da4a1c8785983d36b35f6168b8de2d3e11747938fb. Guest and owner exited0. This is a single saved-frame diagnostic, not a model or qualification PASS.
+- Seven NPU P/U/Y/state metrics match the FP64 oracle; inputs remained bitwise unchanged. Three recorded production P/U/Y replay metrics still fail. Review: BOLE_PHYSICAL1_V18_INDEPENDENT_DIAGNOSTIC_REVIEW_20261104.json; fresh release: BOLE_PHYSICAL1_V18_FRESH_SMI_AND_METRICS_20261104.json.
+- Physical1 host node is mapped to guest /dev/davinci0; logical0 is intentional. ASCEND_VISIBLE_DEVICES=1, ASCEND_RT_VISIBLE_DEVICES=0. Do not reject the guest alias as access to physical0.
+- Physical0 is genuinely blocked at the driver UDA namespace layer (udevid0/ns_id0); owner unproved. This is distinct from compute occupancy. Do not blame or stop vllm-au-test from its broad device declaration. Do not reset or alter service/shared modes.
+- No extra full CPU suites or mirrored preflight: the native owner already validates fixed operands with actual globals. Preserve all native guards. Source-only preparation failures and precreate V16 failure are not algorithm failures.
+- Read latest EXECUTION_BOLE_PHYSICAL1_V18_DIAGNOSTIC_TERMINAL_20261104.json. Next host-only work is production routing/capture contract review in PRODUCTION_GDN_CONTRACT_NEXT_20261104.md. No genuinely ready successor yet; do not fake READY/MAIN/consumer PASS or rerun old qualification packages.
+- All short8/state/long160/model/performance/accuracy qualifications remain false. Source and RAW stay on chicaihong01. No cleanup/hugepage allowance added; no deadline extension. Thirty-minute utilization remains unmeasured.
+- Treat older text below as history; old V9 and old scope/status must not override this section.
+
+
 # BOLE / DeltaLog — current device-scope handoff
 
 The latest human instruction is “你改用0-3卡”. Physical NPU0–3 are authorized for this window. Preserve physical4–7 and vllm-au-test; do not stop it or its processes. The old protect0–3 rule is superseded only for this device scope. No deadline or cleanup-budget extension.
