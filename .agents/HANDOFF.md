@@ -158,3 +158,8 @@ Active worktrees at this handoff:
 ```
 
 Dynamic MoE is audit-only on its retained remote branch; recreate a worktree from that remote branch only if a future MoE target justifies reopening it.
+
+
+## BOLE f65 registered wrapper one-frame closure, 2026-11-04
+
+Branch-local evidence: .agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261104T091749Z/HANDOFF.md. Physical1 f65 wrapper and saved-output FP64 readback passed original18 checks; this is one-frame qualification, not model, performance or task acceptance. Current physical0-3 authority/cutoff1793870269 preserves4-7/vllm-au-test; other isolated workstream records remain authoritative for their own scope.

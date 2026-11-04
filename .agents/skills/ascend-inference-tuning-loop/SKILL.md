@@ -365,3 +365,8 @@ For captured-production versus standalone numerical discrepancies, follow
 [actual library and runtime consumer attribution](references/production-library-dispatch-attribution.md).
 Keep diagnostic completion, wrapper qualification and model acceptance distinct;
 revalidate the real runtime identity predicate when artifact Refs change.
+
+
+## BOLE f65 registered wrapper one-frame closure, 2026-11-04
+
+For rebuilt libraries, close complete registered Ref identity and genuine new proof, self-file pin, transitive imports/mounts, all owner-required inputs and fresh mutable roots. Keep predecessor file/CID/PID/start and numerical/ACK schemas consistent. Apply the detailed runtime attribution reference. One-frame success does not qualify matrix, state, model, performance or task accuracy.
