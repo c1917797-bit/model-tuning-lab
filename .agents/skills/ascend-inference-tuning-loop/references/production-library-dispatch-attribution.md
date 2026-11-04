@@ -22,3 +22,7 @@ Observed case, 2026-11-04: BOLE physical1 newf65/old8e7/newf65, same adapter7118
 5. Original FP64 saved-output readback is independent verification, not a repeated algorithm CPU suite. Its frozen CPU-only device tag does not authorize real NPU access; actual owner mapping and no-device consumer inspect prove separate facts.
 6. After child remote I/O hangs without handles, use MAIN calls and bounded offline agent review. No returned artifact means no READY successor. Bound metadata by role instead of dumping dirty trees or full Ref collections.
 7. Docker NoSuchObject is absence, not exited. An explicit successor must bind healthy same-daemon/full-list and no-writer evidence on producer and consumer sides, preserving historical ledger/file hashes without fabricated State/ExitCode/OOM.
+
+### Physical-scope labels and original192 evidence
+
+The newf65 matrix executed on physical1 using saved four-source-rank x48-layer inputs:192 original cases/3456 original predicates. Independent RAW-hash/identity audit is not a second numerical recomputation. Runtime identity filenames and binary/wrapper FullRefs are separate; metric dictionaries require explicit passed fields. Preserve stale physical4 aggregate with exact actual-card proof. Real registered-consumer derived acceptance is limited to components; TP4 model/performance/accuracy remain unqualified.

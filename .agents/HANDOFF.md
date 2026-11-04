@@ -163,3 +163,7 @@ Dynamic MoE is audit-only on its retained remote branch; recreate a worktree fro
 ## BOLE f65 registered wrapper one-frame closure, 2026-11-04
 
 Branch-local evidence: .agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261104T091749Z/HANDOFF.md. Physical1 f65 wrapper and saved-output FP64 readback passed original18 checks; this is one-frame qualification, not model, performance or task acceptance. Current physical0-3 authority/cutoff1793870269 preserves4-7/vllm-au-test; other isolated workstream records remain authoritative for their own scope.
+
+## 2026-11-04 physical0–3 actual matrix192 / Delta precise close
+
+Authoritative branch-local continuation: .agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261104T091749Z/HANDOFF.md, latest physical1 matrix192/CPU004-close section. Physical4–7 preserved;0 driver reservation owner unknown. Matrix stale device label awaits explicit registered correction consumer. Delta176 files complete after final report collision; original capture005/nativebind pending. No model/performance/accuracy acceptance. Frozen Nov5 09:17:49Z cutoff unchanged.

@@ -370,3 +370,6 @@ revalidate the real runtime identity predicate when artifact Refs change.
 ## BOLE f65 registered wrapper one-frame closure, 2026-11-04
 
 For rebuilt libraries, close complete registered Ref identity and genuine new proof, self-file pin, transitive imports/mounts, all owner-required inputs and fresh mutable roots. Keep predecessor file/CID/PID/start and numerical/ACK schemas consistent. Apply the detailed runtime attribution reference. One-frame success does not qualify matrix, state, model, performance or task accuracy.
+
+- Device-scope changes require agreement between owner mapping, REQUEST, execution guard, observer and emitted report. Saved source TP ranks differ from physical execution cards. Preserve a mislabelled original result; require a narrowly provenance-bound registered consumer correction before model promotion, without repeating numerical work for a label.
+- Native materialization preview and execution need distinct immutable report paths. Check all anti-overwrite destinations before generating a source tree. If only final report publication fails, preserve exit1 and verify exact file set/FullRefs/no-writers for separate source-completeness recovery; this never creates SOURCE_BOUND or test PASS.
