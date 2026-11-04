@@ -1,0 +1,54 @@
+{
+  "schema": "ascend.physical0-v9-independent-review/v1",
+  "original_operation": "exec-000000000000076a",
+  "independent_read_operation": "exec-000000000000076b",
+  "peerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "observed_epoch": 1793802890.8295074,
+  "owner": {
+    "pid": 908286,
+    "startticks": "191963775",
+    "current_pid_absent": true
+  },
+  "container": {
+    "CID": "a71264f7015793f74aa379325786006fd54b6369486fbe66e1f5bcf340c168b7",
+    "Status": "exited",
+    "Running": false,
+    "Pid": 0,
+    "ExitCode": 3,
+    "OOMKilled": false
+  },
+  "physical0": {
+    "healthy": true,
+    "AICore": 0,
+    "HBM_MiB": 2886,
+    "total_HBM_MiB": 32768,
+    "compute_processes": "none at observation"
+  },
+  "protected_external": {
+    "CID": "69ba2e9a3033473a346fe70782d7a959723782f4a1a48d03d41ba90b29c4bffb",
+    "name": "vllm-au-test",
+    "Running": true,
+    "Pid": 2774483,
+    "action": "preserved; no stop issued"
+  },
+  "result_path": "bole_physical0_stream_queue_run_v9/result/RESULT.json",
+  "result_bytes": 5771,
+  "guest_error": {
+    "type": "ValueError",
+    "message": "one visible NPU required",
+    "file": "numeric_gate_failed_frame_diagnostic.py",
+    "line": 124
+  },
+  "actual_device_count": "not recorded; must diagnose before changing assumption",
+  "NPU_arithmetic_completed": false,
+  "diagnostic_execution_completed": false,
+  "NPU_numeric_false_metric_count": 0,
+  "numerical_conclusion": "inconclusive; failed before operator arithmetic",
+  "recorded_frame_status": "expected_input_mismatch",
+  "reference_ABI_checks": "passed; reference calculations are not NPU algorithm acceptance",
+  "model_qualified": false,
+  "performance_qualified": false,
+  "accuracy_qualified": false,
+  "cutoff_epoch": 1793870269,
+  "next": "Collect actual enumeration count and isolation evidence for physical0; retain old count guard until actual evidence supports a corrected contract; do not rerun unchanged V9."
+}

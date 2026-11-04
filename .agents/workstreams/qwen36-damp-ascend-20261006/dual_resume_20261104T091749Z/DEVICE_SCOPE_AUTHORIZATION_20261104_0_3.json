@@ -1,0 +1,99 @@
+{
+  "schema": "ascend.dual-paper-human-window/v1",
+  "start_epoch": 1793783869,
+  "cutoff_epoch": 1793870269,
+  "start_utc": "2026-11-04T09:17:49Z",
+  "cutoff_utc": "2026-11-05T09:17:49Z",
+  "original_project_start_epoch": 1792828303,
+  "original_48h_and_all_prior_windows_preserved": true,
+  "clock_choice": "Frozen at first verified clock for the user's November4 renewal; connection recovery does not reset this start.",
+  "human_answers": [
+    "新开24小时窗口",
+    "detalog和bole同时穿刺"
+  ],
+  "papers": [
+    "DeltaLog",
+    "BOLE"
+  ],
+  "target_host": "chicaihong01",
+  "canonical_repo": "/opt/host/vnf/austinov/model-tuning-lab",
+  "source_bodies": "host_only",
+  "physical_npu": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "protect_physical_npu": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "MAIN_unique_device_scheduler": true,
+  "preparation_parallel": true,
+  "independent_single_card_can_run_concurrently_if_all_resource_and_conflict_gates_pass": true,
+  "TP4_formal_pairs_serial_exclusive": true,
+  "new_cleanup_or_hugepage_budget": 0,
+  "services_may_be_changed": false,
+  "final_acceptance": {
+    "whole_model_throughput_improvement_min": 0.1,
+    "performance": {
+      "input_tokens": 32768,
+      "output_tokens": 1024,
+      "rounds": 3,
+      "profile": false,
+      "TTFT_TPOT_separate": true,
+      "identical_stack_input_concurrency_common_optimizations": true
+    },
+    "quality": {
+      "tasks": [
+        "GSM8K",
+        "HumanEval",
+        "MMLU"
+      ],
+      "thinking": false,
+      "max_output_tokens": 2048,
+      "normal_EOS": true,
+      "smoke_then_full": true,
+      "loss_limit": 0.01,
+      "report_pp_and_relative": true
+    }
+  },
+  "expired_tickets_may_be_reused_as_authority": false,
+  "automatic_extension": false,
+  "post_cutoff": "No new or continued experiment; verify exact owned terminal/release, preserve evidence and unfinished work, close renewal automation. Do not mark goal complete without final gates.",
+  "human_window_question": "call_1c54f104fcf345a8ab44bd202fb4bbf7",
+  "previous_authority_preserved": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261030T115104Z/WINDOW_AUTHORIZATION_20261030.json",
+    "bytes": 1969,
+    "sha256": "81f0b73c247cc1716c53b012103154ec385d8a10dc090ca10f9faf634a641a28"
+  },
+  "cpu004_unused_logical_close_permission": {
+    "human_question": "call_b23deba95faf4420a1a3a350bfd83545",
+    "human_answer": "允许上述精确逻辑预约关闭",
+    "unused_bytes": 1073506773,
+    "retained_bytes": 235051,
+    "preserve_original_row_and_all_results": true,
+    "scope_data_bytes": 36507222016,
+    "control_bytes": 1048576,
+    "total_scope_bytes": 36508270592,
+    "allow_cleanup_new_receipt_alias_only": true,
+    "apply_executed": false,
+    "requires_fresh_seal_no_writers_exact_terminal_and_no_prior_close": true
+  },
+  "physical_archive_new_authorization": false,
+  "source_or_CPU_or_NPU_PASS": false,
+  "device_scope_amendment": {
+    "human_instruction": "你改用0-3卡",
+    "supersedes_prior_device_scope_only": true,
+    "preserve_external_vllm_au_test": true,
+    "no_stop_external_container_or_processes": true,
+    "existing_time_window_unchanged": true,
+    "prior_current_authority": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261104T091749Z/WINDOW_AUTHORIZATION_20261104.json",
+      "bytes": 2975,
+      "sha256": "78f8f72d2fb53eae52bedbb3daa23b9199e0e3e8f779e11723eb96c27f1def53"
+    }
+  }
+}

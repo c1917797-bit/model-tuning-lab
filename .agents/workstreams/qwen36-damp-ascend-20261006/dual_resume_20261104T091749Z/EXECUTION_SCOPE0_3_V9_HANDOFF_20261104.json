@@ -1,0 +1,26 @@
+{
+  "schema": "ascend.device-scope-handoff/v1",
+  "device_scope": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "protected": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "cutoff_epoch": 1793870269,
+  "operationId": "exec-000000000000076a",
+  "peerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "state": "submitted; verify original operation and actual owner receipts",
+  "NPU_active": "unverified",
+  "numeric_PASS": false,
+  "performance_PASS": false,
+  "accuracy_PASS": false,
+  "owner": "run_bole_stream_queue_physical0_owner_v9_release.py",
+  "owner_sha256": "a03808c1812c08ed254febea555c3e9d026dd44225b4c7bd89dc02d3f612a981",
+  "handoff": "HANDOFF.md"
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "ascend.actual-terminal-and-next-node/v1",
+  "recorded_at_utc": "2026-11-04 14:46:48 UTC",
+  "observed_epoch": 1793802890.8295074,
+  "operationId": "exec-000000000000076a",
+  "peerId": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+  "owner_pid": 908286,
+  "owner_startticks": "191963775",
+  "container_id": "a71264f7015793f74aa379325786006fd54b6369486fbe66e1f5bcf340c168b7",
+  "actual_terminal": true,
+  "owner_exit": 3,
+  "guest_exit": 3,
+  "owner_absent_at_independent_observation": true,
+  "container_state_at_independent_observation": {
+    "Status": "exited",
+    "Running": false,
+    "Pid": 0,
+    "OOMKilled": false
+  },
+  "physical_scope": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "physical0_selected_for_this_case": true,
+  "protect": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "protected_external_preserved": true,
+  "NPU_operator_arithmetic_completed": false,
+  "numerical_PASS": false,
+  "model_PASS": false,
+  "performance_PASS": false,
+  "accuracy_PASS": false,
+  "primary_error": "ValueError: one visible NPU required",
+  "actual_device_count": "UNMEASURED",
+  "next_ready": false,
+  "next_required": "Minimal actual device enumeration and torch.npu/torch_npu module identity evidence before changing count==1 or the failed diagnostic; investigate CPU-reference import pollution as an unproved hypothesis.",
+  "source_review": "SCOPE0_3_V9_INDEPENDENT_REVIEW.json",
+  "handoff": "HANDOFF.md",
+  "cutoff_epoch": 1793870269,
+  "original_start_epoch": 1792828303,
+  "utilization_30min": "UNMEASURED; no continuous evidence",
+  "no_new_cleanup_or_hugepage_budget": true
+}
