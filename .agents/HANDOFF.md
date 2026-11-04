@@ -1,3 +1,11 @@
+# Current dual-paper checkpoint — 2026-11-04
+
+Read the [current dual-paper handoff](workstreams/qwen36-damp-ascend-20261006/dual_resume_20261104T091749Z/HANDOFF.md) and its newest EXECUTION record by actual timestamp before dispatch. The frozen window ends 2026-11-05T09:17:49Z (1793870269). DEVICE_SCOPE_AUTHORIZATION_20261104_0_3.json supersedes only the original window's device scope: use physical0–3; preserve4–7 and vllm-au-test. Original timing and historical closures remain unchanged.
+
+A real physical1 new/old/new single-frame BOLE comparison now reproduces zero numerical mismatches for the new f65 library twice and six mismatches for production8e7, with the same adapter. This is diagnostic attribution, not operator/model qualification or performance. Physical0 UDA ownership is still unproved; do not stop an unknown process or the protected container. DeltaLog's old CPU004 logical-close policy still binds the expired window; a current-window source successor is being prepared, with no close applied. Source bodies and RAW remain on chicaihong01.
+
+---
+
 # Maintainer Handoff
 
 ## BOLE numerical-failure checkpoint — 2026-10-29

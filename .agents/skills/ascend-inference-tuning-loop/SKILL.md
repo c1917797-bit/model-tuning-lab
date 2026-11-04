@@ -359,3 +359,9 @@ October21 closure and evidence-boundary rules before any new admission.
 For copied renderer/module-cache defects, prepared-versus-bound identities,
 current-clock seams and replay-versus-generation authorization, read that
 reference's reachable-entry section before calling the next packet ready.
+
+
+For captured-production versus standalone numerical discrepancies, follow
+[actual library and runtime consumer attribution](references/production-library-dispatch-attribution.md).
+Keep diagnostic completion, wrapper qualification and model acceptance distinct;
+revalidate the real runtime identity predicate when artifact Refs change.
