@@ -8,6 +8,45 @@ READY. MAIN admits physical0-3, prioritizing independent1-3 work. Preserve4-7
 and external workloads. Recheck physical0's current namespace state before TP4;
 do not assume the November4 condition survived the changed host boot.
 
+## Component-consumer stage completed, 2026-11-13
+
+The new f65/bc984 component descriptor was accepted by the actual native
+qualification consumer in exec-000000000000002f on the ma peer in boot
+`db1b9f7c-d116-41d1-9492-634883d1852d`. The result is
+[NATIVE_CONSUMER_RESULT.json](bole_f65_native_component_v1/bound_consumer_v2/NATIVE_CONSUMER_RESULT.json),
+8655 bytes, SHA256 `383d06a2872ba07a32f468f9e4779985c3d542722f92c6d04fe7bb5b61e5a84b`.
+It bound 615 actual dependencies in 4.6844642162323 seconds and reused the
+original192/3456 matrix and the separate one-frame independent FP64 evidence.
+The historical physical4 report label was preserved, while actual REQUEST,
+created-container mapping and execution/release evidence established physical1.
+This is component-consumer acceptance, not live TP4 or model qualification.
+
+Seven affected boundary negatives were all rejected in exec-0000000000000030:
+old-binary proof reuse, string-typed aggregate truth, missing case, extra compute
+mapping, matrix audit substituted for independent FP64, component promoted to
+model PASS, and new descriptor passed to the unchanged old consumer. See
+[BOUNDARY_NEGATIVE_CONTROLS_v1.json](bole_f65_native_component_v1/bound_consumer_v2/BOUNDARY_NEGATIVE_CONTROLS_v1.json),
+3229 bytes, SHA256 `1d45cdb892f9f7cdd5dcc0bae9f9e5405690eefa1fab0f6f5eed3665abd3bc4d`.
+These checks ran without NPU or new numerical recomputation. Original failed
+constructor/driver attempts remain immutable; their faults concerned schema
+dispatch, tuple pin ABI, reference role, keyword-only argument and flattened
+inspect/readset shape. They are not algorithm numerical failures.
+
+The original model producer's pure `prepare_mapping` was then called once with
+the genuine current authorization and a fresh source root. It failed closed at
+`exact diagnostic preparation root` in exec-0000000000000032; no source tree or
+model run was started. See
+[NATIVE_PURE_MAPPING_RESULT.json](bole_f65_native_model_prepare_v1/NATIVE_PURE_MAPPING_RESULT.json),
+3485 bytes, SHA256 `d66d92a68a95cdf6692ea69f4515bda8cc54d937b818a79c93c534642a6a7c2d`.
+Next: derive an isolated native producer for the new root and exact accepted
+helper/component references, preserving inverse checks; close current authority,
+physical scope, guest/owner/readset and resource admission before the integrated
+model entry. Do not rerun the unchanged failed pure mapping or old bound model.
+SOURCE_BOUND, model numerical/multistep, whole-model performance and task accuracy
+remain unpassed. DeltaLog still requires its actual current-authority capture005
+and native binding. No new device action or external workload stop occurred in
+this stage; continuous scheduling utilization remains unmeasured.
+
 ## Reconfirmed historical state
 
 Canonical HEAD before this documentation stage:
