@@ -68,6 +68,18 @@ Use one ID such as `exp-YYYYMMDD-short-name`, one `work/*` branch, and one
 - benchmark commands, repetitions, and artifact destinations;
 - rollback and cleanup commands.
 
+## Agent-assisted implementation and validation cost
+
+For a new or proved defective Ascend kernel, prefer a compatible native
+implementation or the maintained CANNBot workflow; verify actual tool and
+target support. For an already-qualified kernel, fix the demonstrated
+production binding or report defect without rewriting its math. Apply
+[agent-assisted kernel porting](references/agent-assisted-kernel-porting.md)
+to choose the tool, supply a complete operator contract, reuse unaffected
+evidence and move directly to the next real consumer. Tool installation,
+source delivery and a successful component test are separate from model
+qualification. Keep host-only source/RAW inside the authorized boundary.
+
 ## Stage Checkpoints
 
 Commit and immediately push each coherent stage:
@@ -303,11 +315,12 @@ is renewed, or a full-model Ascend run is started after a failed gate.
    necessary but does not prove that every nested runtime gate was updated.
 2. Keep old batches immutable. Never reuse a prior output path or overwrite a
    terminal receipt. A retry gets a new source root and a new output root.
-3. Run the same-image software suite before device admission. Fix source,
-   contract, or provenance mismatches at their owning layer; do not weaken
-   numerical assertions or edit tests merely to force a green suite. Update a
-   test only when the intended invariant genuinely changed, and retain
-   historical algorithm/reference checks.
+3. Reuse unchanged, hash-bound same-image software evidence and run focused
+   controls for the changed source/ABI/entry boundary before device admission.
+   If the actual model owner already includes its required CPU -> release ->
+   canary chain, do not launch that CPU suite separately. Fix mismatches at
+   their owning layer; preserve numerical assertions and historical checks.
+   A changed kernel still needs its affected numerical/state/model coverage.
 4. Keep source audit, same-image software preflight, physical-device admission,
    native model load, real HTTP/request smoke, numerical/state correctness,
    matched performance and task quality distinct. When the frozen task is

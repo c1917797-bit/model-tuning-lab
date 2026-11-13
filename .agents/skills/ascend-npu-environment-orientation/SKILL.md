@@ -30,12 +30,14 @@ proof that the intended NPU path executed.
 7. Run a minimal inference canary and capture a controlled-side event proving
    the intended NPU device executed the workload.
    If host `npu-smi` reports no compute PID but a new container reports zero
-   HAL devices, inspect kernel UDA conflict messages and read
-   `/proc/uda/namespace_node`. Map the matching `udevid` and `root_tgid`
-   through `/proc/<pid>/cgroup` to the exact container, then inspect its
-   process tree and mounts. An idle HBM/AICore reading does not rule out a
-   namespace-level device claim. Do not repeat the same failed canary or
-   relabel the failure as an operator numerical result.
+   HAL devices, inspect existing kernel UDA conflict messages and the
+   supported read-only `/proc/uda/udevice` status on this host. Use a recorded
+   `root_tgid`/PID/start identity and `/proc/<pid>/cgroup` to attribute an
+   actual holder to its container. Do not probe `/proc/uda/namespace_node`
+   as a status file; establish the installed driver's read semantics before
+   touching diagnostic proc entries. If the owner is unproved, keep it unknown.
+   Idle HBM/AICore does not rule out a namespace-level claim. Do not repeat an
+   unchanged failed canary or label it an operator numerical failure.
 8. Compare with the previous baseline. If any material field drifted, declare
    the old and new measurements non-comparable until re-baselined.
 9. Commit and push the orientation or re-baseline stage.

@@ -1,0 +1,45 @@
+{
+  "schema": "dual.manual-window-renewal/v1",
+  "papers": [
+    "BOLE",
+    "DeltaLog"
+  ],
+  "authorized_by": "user reply to call_97bf589596a544f1aa6bc81bf14d210e: 从你的本次答复起48小时",
+  "start_utc": "2026-11-13T03:21:17.480Z",
+  "cutoff_utc": "2026-11-15T03:21:17.480Z",
+  "start_epoch": 1794540077.48,
+  "cutoff_epoch": 1794712877.48,
+  "timezone": "Europe/Moscow",
+  "original_project_start_epoch": 1792828303,
+  "previous_window_immutable": true,
+  "previous_window_cutoff_utc": "2026-11-05T09:17:49Z",
+  "MAIN_only_device_admission": true,
+  "authorized_physical_devices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "independent_validation_priority": [
+    1,
+    2,
+    3
+  ],
+  "protected_physical_devices": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "preserve_external_workloads_including": "vllm-au-test; no stop/restart of unknown or other task containers",
+  "physical0_admission": "fresh identity/mapping/namespace evidence required; old conflict not assumed current",
+  "TP4": "0-3 exclusive and serial only after all physical mappings and admission gates close",
+  "source_and_RAW": "host-only",
+  "no_additional_cleanup_hugepage_or_service_authority": true,
+  "CPU004_close": "already completed; do not repeat or expand",
+  "requires_fresh_source_controller_worker_owner_readset_binding": true,
+  "no_automatic_extension": true,
+  "at_cutoff": "no new or continued experiments; verify exact owned terminal/release and preserve evidence",
+  "acceptance": "inherit latest frozen numerical/state, long-course, matched formal performance and GSM8K/HumanEval/MMLU task gates; no weakening",
+  "document_is_not_READY_or_PASS": true
+}

@@ -167,3 +167,12 @@ Branch-local evidence: .agents/workstreams/qwen36-damp-ascend-20261006/dual_resu
 ## 2026-11-04 physical0–3 actual matrix192 / Delta precise close
 
 Authoritative branch-local continuation: .agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261104T091749Z/HANDOFF.md, latest physical1 matrix192/CPU004-close section. Physical4–7 preserved;0 driver reservation owner unknown. Matrix stale device label awaits explicit registered correction consumer. Delta176 files complete after final report collision; original capture005/nativebind pending. No model/performance/accuracy acceptance. Frozen Nov5 09:17:49Z cutoff unchanged.
+
+## 2026-11-13 BOLE + DeltaLog manual 48-hour renewal
+
+Latest user-approved window and next actions:
+[renewal handoff](workstreams/qwen36-damp-ascend-20261006/dual_resume_20261113T032117Z/HANDOFF.md).
+Cutoff2026-11-15T03:21:17.480Z; old windows and original start are immutable.
+Prioritize independent physical1-3, preserve4-7 and all external workloads;
+physical0/TP4 needs fresh admission. No new model/performance/accuracy PASS.
+CANNBot routing and validation-cost lessons are linked from the tuning skill.
