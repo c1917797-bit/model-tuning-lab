@@ -1,5 +1,16 @@
 # BOLE + DeltaLog renewal — 2026-11-17
 
+## Verified progress at 2026-11-17T07:46Z
+
+- BOLE original native preview now returned all 476 files in 82.493 s. Actual operation exec-000000000000006e, peer ma/a6109, PID2647643/start34080951 on the current boot has terminated. Receipt: BOLE_MAPPING_V3_TERMINAL_ATTRIBUTION_20261117.json (1200 B, SHA256 109942e1b3f1d7e717af0a804381810f6beeadf5f24b7f207c35bd702e938ad3). Original RESULT is preserved; its source_mapping_failed label came from the auxiliary pickle operation AFTER mapping_returned. No need to rerun native preview for that archive failure. SOURCE_BOUND/READY/model/NPU remain false.
+- The earlier two actual preparation defects were bound-descriptor restaging and a stale 28-ref component readset. Separate minimal changes now consume the genuine f65 component and all 615 native dependency refs. Current prepared runtime is bole_native_prepare_v3/native_prepare/runtime_lossless_imports.py (298271 B, SHA256 4ab677709efa07c8ebb9d44a9fb47f688d380325d27ce02cb779ec9454e83d0a). Neither the math predicates nor historical evidence were weakened. Physical 0-3 owner/controller/guest/AUTH closure is still being prepared; old card4 source must not execute.
+- DeltaLog current source preparation identified actual CPU003/CPU004 history-reader and policy-version mismatches. CPU004 close already exists and must not run again. Exact retained content hashes, sizes, inode/mode/mtime and membership match; only 14 CPU003 and 26 CPU004 stat.dev fields changed after reboot. MAIN_CPU003_BOOT_DEV_RECONCILIATION_REVIEW_20261117.json and MAIN_CPU004_BOOT_DEV_RECONCILIATION_REVIEW_20261117.json under delta_prepare permit only that exact read-only remap for this boot/filesystem, not old apply/cleanup, broader acceptance or quota expansion. Actual receipt-pinned readers and current source closure are in progress; capture/bind/NPU have not run.
+- Latest hardware read: RESOURCE_READ_1794900835505097090.json (6768 B, SHA256 2328cd8c6a56f54fd65aadaf663be845bdc5a60e6673c075e04dbcc37b260f91). At epoch1794900834.376713 all 0-3 had no compute PID/AICore0, HBM2869/2868/2869/2870 MiB. UDA namespace1 remains on physical1 and namespace2 on physical3, ownership unknown. Preserve all external workloads. Physical0/2 are potential independent single-card targets only after fresh full admission. TP4 is not admitted.
+- No NPU READY item currently exists. MAIN waits for genuine complete entry/owner/guest/authority/readset/locks and budgets, then schedules promptly. Thirty-minute utilization and idle durations remain unmeasured without continuous evidence. No final model numerical/performance/accuracy PASS.
+- New authorization is unchanged: cutoff 2026-11-19T06:02:17Z. App goal still reports blocked from earlier connectivity; user has been asked to resume its UI continuation, while this authorized turn continues. Commit cf8b49dea31b198673cd46a8026aeade1203309d saved the new window and initial handoff. Remote ls-remote timed out; no push success claimed.
+
+## Initial renewal snapshot
+
 Window: [WINDOW_AUTHORIZATION_20261117.json](WINDOW_AUTHORIZATION_20261117.json).
 Start 2026-11-17T06:02:17Z; cutoff 2026-11-19T06:02:17Z (Europe/Moscow November19 09:02:17).
 Original project start1792828303 and all old windows/results remain immutable.

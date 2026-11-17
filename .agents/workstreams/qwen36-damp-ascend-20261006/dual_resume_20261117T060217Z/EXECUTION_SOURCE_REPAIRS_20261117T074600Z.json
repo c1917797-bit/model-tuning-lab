@@ -1,0 +1,62 @@
+{
+  "schema": "dual.actual-source-stage-execution/v1",
+  "recorded_epoch": 1794901812.6088192,
+  "manual_window_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261117T060217Z/WINDOW_AUTHORIZATION_20261117.json",
+    "bytes": 1625,
+    "sha256": "20c28cb20851888fc0d94e8982f7f60688efa102d2a1f8ad94d852ea97b1d154"
+  },
+  "boot": "15cc3f46-61ff-46ea-88fa-68f04ca59937",
+  "bole": {
+    "operation": "exec-000000000000006e",
+    "peer": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "original_result": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261117T060217Z/bole_mapping_probe_run_v3/RESULT.json",
+      "bytes": 2465,
+      "sha256": "19d6515d7af04e87cd30794564ce194d33a5f26c6932427ac608250aa85d7363"
+    },
+    "terminal_attribution": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261117T060217Z/BOLE_MAPPING_V3_TERMINAL_ATTRIBUTION_20261117.json",
+      "bytes": 1200,
+      "sha256": "109942e1b3f1d7e717af0a804381810f6beeadf5f24b7f207c35bd702e938ad3"
+    },
+    "source_mapping_returned": true,
+    "file_count": 476,
+    "post_return_pickle_failed": true,
+    "SOURCE_BOUND": false,
+    "READY": false,
+    "NPU_started": false
+  },
+  "delta": {
+    "current_phase": "receipt-pinned read-only history and renewed source closure",
+    "CPU003_reconciliation_review": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261117T060217Z/delta_prepare/MAIN_CPU003_BOOT_DEV_RECONCILIATION_REVIEW_20261117.json",
+      "bytes": 2558,
+      "sha256": "5bdc023a10fd19c7811498be9e34f31ab6bf3722ec3629a30aa58ddd8bbcc302"
+    },
+    "CPU004_reconciliation_review": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261117T060217Z/delta_prepare/MAIN_CPU004_BOOT_DEV_RECONCILIATION_REVIEW_20261117.json",
+      "bytes": 5732,
+      "sha256": "28332138a7ac149ee083097be10444a985245c8981d527e89724b892d95c4856"
+    },
+    "capture_started": false,
+    "SOURCE_BOUND": false,
+    "READY": false,
+    "NPU_started": false
+  },
+  "resource_observation_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261117T060217Z/RESOURCE_READ_1794900835505097090.json",
+    "bytes": 6768,
+    "sha256": "2328cd8c6a56f54fd65aadaf663be845bdc5a60e6673c075e04dbcc37b260f91"
+  },
+  "tp4_admitted": false,
+  "uda_unknown_reservations": [
+    1,
+    3
+  ],
+  "continuous_30min_utilization": "unmeasured",
+  "model_numeric_pass": false,
+  "performance_pass": false,
+  "accuracy_pass": false,
+  "cleanup_or_hugepage_budget_increase": 0
+}
