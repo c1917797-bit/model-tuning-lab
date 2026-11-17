@@ -128,3 +128,7 @@ Preserve exact AWMCP errors. Refresh topology after routing drift and retry only
 when the response marks the failure retryable. A control-plane timeout is not
 proof of host, command, container, or NPU failure; do not mutate the machine to
 compensate for an unproven diagnosis.
+
+### State16 evidence replay and execution-context failures (2026-11-17)
+
+See [the verified state16 replay lessons](references/20261117-state16-rejudge.md) before deriving a metric consumer or a bounded owner. Preserve original failures and actual NPU evidence; component replay is not model acceptance.

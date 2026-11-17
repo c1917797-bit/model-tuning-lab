@@ -1,3 +1,20 @@
+# Current verified stage — 2026-11-17T14:27:42.739365+00:00
+
+Read this checkpoint before older STARTED records. EXECUTION_STATE16_PASS_DELTA_NATIVE_BIND_20261117T142742Z.json is the latest stage index.
+
+- BOLE actual physical0 run completed16 verify+16 commit. Independent replay passed128/128 after repairing metric-context checks list/dict initialization; original FAIL and all58 RAW hashes remain unchanged. Replay exec01b4/CID ac1e7590285c196a51c811245bcc367a891cfbf40e864dec6bbc98fee2b5619e exited0 and released. Component synthetic16 only; model/long160/performance/accuracy remain unqualified.
+- Replay start failure01a6 was Docker local logging compression with max-file1;01af was a stale148-vs157 READSET count before output creation. Both failures preserved; no producer/NPU rerun.
+- DeltaLog native V15 capture01b9 and bind01bd completed. SOURCE_MANIFEST.json is206229B/13122ccd9478784e833eac29fcb47b5f3206259f467b575b9ede7edef81414d5, prepared_only=false. No separate SOURCE_BOUND.json is produced by this native entry; legacy status text must not be edited to pretend qualification. No CPU/NPU experiment started; no ledger change.
+- Current Delta successor requires the current-source released CPU owner and complete physical2 owner/guest/authority/mapping. If runtime includes CPU-release-device-canary, do not rerun standalone old022/255 suites.
+- Fresh14:20:58Z snapshot: all0–7 had no compute process/AICore0. Preserve physical1/3 hold and4–7; component BOLE0, Delta2 remain the intended single-card allocation. Continuous30-minute utilization/idle time unmeasured.
+- BOLE has no ready single-card160 or scheduler-slot/reset successor. TP4 needs the held cards available plus actual binding; existing model long160 is unwired and exceeds its original RAW budget. Do not create repeat16/192 load to fill cards.
+- Deadline remains2026-11-19T06:02:17Z. Goal not complete. App goal was still blocked when queried despite user resume; current-turn work is authorized, but do not claim automatic continuation from that state.
+- Maintainer lesson: .agents/skills/chicaihong01-host-maintenance/references/20261117-state16-rejudge.md.
+
+---
+
+Previous checkpoint retained below.
+
 # BOLE + DeltaLog renewal — 2026-11-17
 
 ## Verified progress at 2026-11-17T07:46Z
