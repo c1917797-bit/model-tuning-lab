@@ -1,0 +1,23 @@
+{
+  "authorization_cutoff_epoch": 1795679650,
+  "cooperative_MAIN_yield_path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_F65_PHYSICAL6_STANDBY_YIELD_20261124.json",
+  "created": 1795555164.418014,
+  "cumulative_case_limit_bytes": 20971520,
+  "deadline_epoch": 1795569564.4180098,
+  "native_case_seconds": 300,
+  "native_cleanup_seconds": 60,
+  "no_NPU_or_device_lock_while_waiting": true,
+  "outer_mutual_exclusion_lock": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_PHYSICAL6_SERIAL_DISPATCH.lock",
+  "physical": 6,
+  "pid": 3546237,
+  "previous_terminal_exit": 20,
+  "previous_wait_only_PID": 3041921,
+  "previous_wait_only_start_ticks": 39843111,
+  "previous_wait_only_terminal_operation": "exec-0000000000010711",
+  "required_Docker_available_B": 8589934592,
+  "runtime_meta": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_saved_gdn_f65_single_case_physical6_owner_run_v3",
+  "runtime_output": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_saved_gdn_f65_single_case_physical6_run_v3",
+  "schema": "bole.disk-threshold-standby/v1",
+  "start_ticks": 40031808,
+  "ticket": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_BOLE_F65_SAVED_GDN_PHYSICAL6_V3_20261124.json"
+}
