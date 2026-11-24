@@ -1,0 +1,83 @@
+{
+  "BOLE": {
+    "V2_admission_only_op_return_20_before_ticket": "exec-00000000000106a1",
+    "V2_ticket_or_either_runtime_root_exists": false,
+    "V3_original_gate_operation": "exec-0000000000010711",
+    "current_model_short8_PASS": false,
+    "diagnostic_package": {
+      "bytes": 8421,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/saved_gdn_f65_single_case_physical6_prepare_v3/DELIVERY_INDEX.json",
+      "sha256": "bbecdf80957043fbf973243f44dce0245d875f505f5a86e93b64d4e84fb2a4b4"
+    },
+    "exact_gate_live_at_observation": true,
+    "exact_owner_output_exists": false,
+    "gate_pid": 3041921,
+    "gate_start_ticks": 39843111,
+    "peer": "lgw_a6109c51076a4a2c9d2674ca5a8704a0",
+    "registered_F65_NPU_and_failed_model_operand_join": {
+      "bytes": 10934,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/BOLE_F65_REGISTERED_RANK1_L0_VS_MODEL_FAILURE_MATCHED_OPERANDS_20261124.json",
+      "sha256": "8e7cc5895417ff5fe90f3ff286cce48a7449fb0d64114fe142fdd41665742cd5"
+    },
+    "separate_direct_adapter_diagnostic_PASS": false,
+    "ticket_exists": false
+  },
+  "BOOT": "d72811d4-30fb-422d-8366-d564208746d4",
+  "DeltaLog": {
+    "CPU_NPU_numerical_PASS": false,
+    "last_measured_strict_usage_bytes": 1454319,
+    "native_capture_012_process_result": {
+      "bytes": 1464,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/native_capture_card6_v5r2_execution_20261124/RESULT.json",
+      "sha256": "f7c36620ce995499319262374dcf348fdc46d946e651c0e2890b2c5d7fa81652"
+    },
+    "new_budget_authority_received": false,
+    "op": "exec-00000000000105fb",
+    "original_limit_bytes": 1048576,
+    "primary": "CPU004 evidence writer exhausted retained per-directory 64 KiB; no new bound overlay or CPU guest. Prior V4 storage interface fix remains reusable.",
+    "runtime_and_H_writes_on_hold": true,
+    "source_control_stage": "current topology capture",
+    "strict_metadata_accounting": {
+      "bytes": 7344,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/card6_transition_prepare_v1/STRICT_CONTROL_METADATA_PENDING_APPROVAL_INTEGRATION_CONTRACT_20261124.json",
+      "sha256": "98011910f25dba13a76f70597036703e904f1135b61be033104278cfbfae1b0f"
+    }
+  },
+  "at_utc": "2026-11-24T21:08:57.889141+00:00",
+  "hardware_snapshot_only": {
+    "HBM_MiB": 3146,
+    "actual_DockerRootDir_free_bytes": 6969262080,
+    "aicore": "0",
+    "compute_PID_name_MiB_container": [
+      [
+        3352296,
+        "python",
+        "324",
+        "crc_operator_agent"
+      ]
+    ],
+    "last_30_min_utilization_unmeasured": true,
+    "physical_device": 6,
+    "short_diagnostic_min_bytes": 8589934592,
+    "udevice": {
+      "added_udevid": 6,
+      "chip_type": "cloud_v2",
+      "exclusive_holder_ns_id": null,
+      "shared_holder_ns_ids": null,
+      "status": "'ready, sia'",
+      "type": "davinci entity near real",
+      "udevid": 6
+    },
+    "user_external_jobs_preserved": true
+  },
+  "next": "Track original admission operation; continue genuine 4-7 model source binding and runtime callee attribution; DeltaLog waits for real metadata decision.",
+  "performance_acceptance": false,
+  "schema": "dual-stage-decision-after-matched-frame-and-delta-budget/v1",
+  "source": "chicaihong01",
+  "task_accuracy_acceptance": false,
+  "window_ref": {
+    "bytes": 1824,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/WINDOW_AUTHORIZATION_20261124.json",
+    "sha256": "1fdec2f6e59b57afe99662cb4b546cf66ec42fa7c5f3a2659c784ca2a1bbe66f"
+  }
+}

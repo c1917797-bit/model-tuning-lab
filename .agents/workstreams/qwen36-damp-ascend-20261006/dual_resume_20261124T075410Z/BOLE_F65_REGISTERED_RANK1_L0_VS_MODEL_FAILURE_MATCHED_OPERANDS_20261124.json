@@ -1,0 +1,258 @@
+{
+  "active_current_core": {
+    "bytes": 6419,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_v1/source-short8/core112.py",
+    "sha256": "bc984bc0b60eb196d297ce4fd82be1f1771e9922889a0dca076af21bae1c6b45"
+  },
+  "active_model_prepare_source": {
+    "bytes": 2101066,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_v1/source-short8/SOURCE_BOUND.json",
+    "sha256": "165a5e8563bf9456e2179d5db15049b49956278bb2df1b15b452893f74b9b0f5"
+  },
+  "current_f65_binary": {
+    "bytes": 732528,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261030T115104Z/bole_stream_queue_compile_run_v1/result/bole_tree_proto_v1.so",
+    "sha256": "f65d7eced4ac9f66f2d525d079786bf15e5e67270a70ed3b6ed794fa5b068a2a"
+  },
+  "current_model_short8_qualified": false,
+  "current_source_pinned_and_registered_case_verified_library": "f65d7eced4ac9f66f2d525d079786bf15e5e67270a70ed3b6ed794fa5b068a2a",
+  "device6_direct_adapter_diagnostic_completed": false,
+  "failed_frame_recorded_replays": {
+    "recorded_real_frame_P_replay": {
+      "passed": false,
+      "peak_abs": 0.4681345969438553,
+      "reference_l2": 4.998017578805708,
+      "relative_l2": 0.177906685533771
+    },
+    "recorded_real_frame_U_replay": {
+      "passed": false,
+      "peak_abs": 14.317255850415677,
+      "reference_l2": 3.2630389047687225,
+      "relative_l2": 9.477860613004207
+    },
+    "recorded_real_frame_Y_replay": {
+      "passed": false,
+      "peak_abs": 1.9720599949359894,
+      "reference_l2": 0.9154508445649718,
+      "relative_l2": 7.659270002087084
+    }
+  },
+  "failed_frame_replay_diagnostic_result": {
+    "bytes": 5809,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_saved_gdn_f65_single_case_run_v3/result/RESULT.json",
+    "sha256": "f98552d7e3f2ca0d6cfde97030946f4a700e3efa26fb26e2f72aa730fd77073a"
+  },
+  "failed_model_source": {
+    "bytes": 1792535,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261028T192856Z/short8_cann_matrix192_successor_prepare_v6r7b/native_prepare/source-short8/SOURCE_BOUND.json",
+    "sha256": "403557adf2af6340ac5e5732881be9e470031af2be6b6d1bf5583700db4ee72d"
+  },
+  "generation": 1,
+  "identical_adapter_oracle_native_seams_and_independent_model_refs": true,
+  "identical_seven_reference_ABI_checks": true,
+  "layer": 0,
+  "logical_tensor_method": "streamed SHA256 over the full selected logical view in index order, checked dtype and shape, separate stride/offset/storage length comparison; source archive integrity hash checked; no exported tensors",
+  "metric_denominator_semantics": "Registered NPU metrics use the oracle tensor norm. Recorded-replay metrics include the stored frame tensor norm. Relative errors are not acceleration measurements.",
+  "native_registered_wrapper": {
+    "bytes": 6419,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261104T091749Z/bole_stream_queue_wrapper_registered_adapter_prepare_v4/source/core112.py",
+    "sha256": "bc984bc0b60eb196d297ce4fd82be1f1771e9922889a0dca076af21bae1c6b45"
+  },
+  "next_discriminating_check": "At the real model boundary, bind actual loaded candidate binary/callee, tensor-parallel rank/layer/slot, and P/U/Y/state to the same request. Reuse registered component evidence; keep any direct-adapter diagnostic in its own scope.",
+  "observed_utc": "2026-11-24T21:07:37.945418+00:00",
+  "old_failed_model_core": {
+    "bytes": 6456,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261028T192856Z/short8_cann_matrix192_successor_prepare_v6r7b/native_prepare/source-short8/core112.py",
+    "sha256": "c68f1f0461c660c48f515dd59a1c87ae685d0f522fb8d2a7daea9f1a7d87ff9a"
+  },
+  "ordinal": 0,
+  "original_failed_model_source_pinned_library": "8e7f4e2a43e700e8535f754ffcba8fa2bc3b36b2d2fd32dc4ae4c19d020fdb9d",
+  "performance_or_accuracy_claim": false,
+  "rank": 1,
+  "registered_NPU_output": {
+    "bytes": 3185925,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261104T091749Z/bole_f65_registered_matrix192_run_v3/result/cases/R1-G1-O0-L00/NPU_OUTPUTS.pt",
+    "sha256": "e4a3d0be2b98c1120b41e4edb079167053656c370b01acec16a81da644db5011"
+  },
+  "registered_component_NPU_metrics": {
+    "NPU_P": {
+      "passed": true,
+      "peak_abs": 3.600339937293029e-08,
+      "reference_l2": 5.228903167356361,
+      "relative_l2": 1.608577275885082e-08
+    },
+    "NPU_U": {
+      "passed": true,
+      "peak_abs": 2.8811890233626514e-06,
+      "reference_l2": 31.100847355278667,
+      "relative_l2": 2.2588313838141098e-07
+    },
+    "NPU_Y": {
+      "passed": true,
+      "peak_abs": 7.306422318276162e-07,
+      "reference_l2": 7.475415113945446,
+      "relative_l2": 2.077438720301412e-07
+    },
+    "NPU_selected_state_0": {
+      "passed": true,
+      "peak_abs": 0.0,
+      "reference_l2": 131.288267834355,
+      "relative_l2": 0.0
+    },
+    "NPU_selected_state_1": {
+      "passed": true,
+      "peak_abs": 1.3182107085896178e-06,
+      "reference_l2": 131.8878545452869,
+      "relative_l2": 4.544714787408756e-08
+    },
+    "NPU_selected_state_2": {
+      "passed": true,
+      "peak_abs": 1.9440542100568337e-06,
+      "reference_l2": 131.674239451886,
+      "relative_l2": 5.7878770631096156e-08
+    },
+    "NPU_selected_state_3": {
+      "passed": true,
+      "peak_abs": 1.8555599279324042e-06,
+      "reference_l2": 131.4449942759898,
+      "relative_l2": 6.03875026825567e-08
+    }
+  },
+  "registered_frame": {
+    "bytes": 100238119,
+    "path": "/opt/host/vnf/austinov/run-bole32k-short8-actual-controller-v17-20261026/dense/receipts/FASTPATH-NUMERIC-R1/G1-O0.pt",
+    "sha256": "b558bde6431cf6d6cda7352eb9352a6d564adac42c8953f430a05b361fa3a13e"
+  },
+  "registered_frame_source": {
+    "bytes": 1756806,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_actual_controller_successor_v17_20261026/prepared-source-short8-actual-controller-v17/SOURCE_BOUND.json",
+    "sha256": "a8891a3335f3a44ed96222e49382ba177a1c932668e4f6ee8bf21b920fd60487"
+  },
+  "registered_matrix_case_request": {
+    "bytes": 7361,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261104T091749Z/bole_f65_registered_matrix192_run_v3/result/requests/R1-G1-O0-L00.json",
+    "sha256": "60ed8c84cf5888edfce4602cc2b8abcb85237414c9a070d486639f5db7817992"
+  },
+  "registered_native_case_result": {
+    "bytes": 7840,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261104T091749Z/bole_f65_registered_matrix192_run_v3/result/cases/R1-G1-O0-L00/RESULT.json",
+    "sha256": "9e0b10fff37a9fc10a19c54690191151b134355bcb3716a410c2a5c1adbf3ef7"
+  },
+  "registered_real_wrapper_commit_calls": 4,
+  "registered_real_wrapper_verify_calls": 1,
+  "request_generation_slot_length_version_same": true,
+  "runtime_callee_of_failed_model_established_by_source_alone": false,
+  "same_five_python_function_ASTs_between_old_and_new_core": true,
+  "saved_failed_frame": {
+    "bytes": 100205287,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261028T192856Z/short8_cann_matrix192_model_v6/dense/receipts/FASTPATH-NUMERIC-R1/G1-O0.pt",
+    "sha256": "2f4dbbd3510a24109a5d4d6d55016ffa52c4710b7fb6ad05351fe56ffcfcf032"
+  },
+  "schema": "bole.retained-f65-wrapper-versus-saved-model-frame/v1",
+  "scope": "On-host comparison of immutable recorded inputs, independent ABI checks and an earlier real NPU component execution. No new CPU numerical suite, NPU execution or acceptance.",
+  "tensor_comparison": {
+    "after_GDN.full_conv_slot": {
+      "same_dtype_shape": true,
+      "same_logical_bytes": false,
+      "same_offset": true,
+      "same_storage_length": true,
+      "same_stride": true
+    },
+    "after_GDN.native_state": {
+      "same_dtype_shape": true,
+      "same_logical_bytes": false,
+      "same_offset": true,
+      "same_storage_length": true,
+      "same_stride": true
+    },
+    "before_GDN.full_conv_slot": {
+      "same_dtype_shape": true,
+      "same_logical_bytes": true,
+      "same_offset": true,
+      "same_storage_length": true,
+      "same_stride": true
+    },
+    "before_GDN.native_state": {
+      "same_dtype_shape": true,
+      "same_logical_bytes": true,
+      "same_offset": true,
+      "same_storage_length": true,
+      "same_stride": true
+    },
+    "factors.0": {
+      "same_dtype_shape": true,
+      "same_logical_bytes": false,
+      "same_offset": true,
+      "same_storage_length": true,
+      "same_stride": true
+    },
+    "factors.1": {
+      "same_dtype_shape": true,
+      "same_logical_bytes": false,
+      "same_offset": true,
+      "same_storage_length": true,
+      "same_stride": true
+    },
+    "keys": {
+      "same_dtype_shape": true,
+      "same_logical_bytes": true,
+      "same_offset": true,
+      "same_storage_length": true,
+      "same_stride": true
+    },
+    "normalized_inputs.0": {
+      "same_dtype_shape": true,
+      "same_logical_bytes": true,
+      "same_offset": true,
+      "same_storage_length": true,
+      "same_stride": true
+    },
+    "normalized_inputs.1": {
+      "same_dtype_shape": true,
+      "same_logical_bytes": true,
+      "same_offset": true,
+      "same_storage_length": true,
+      "same_stride": true
+    },
+    "normalized_inputs.2": {
+      "same_dtype_shape": true,
+      "same_logical_bytes": true,
+      "same_offset": true,
+      "same_storage_length": true,
+      "same_stride": true
+    },
+    "normalized_inputs.3": {
+      "same_dtype_shape": true,
+      "same_logical_bytes": true,
+      "same_offset": true,
+      "same_storage_length": true,
+      "same_stride": true
+    },
+    "normalized_inputs.4": {
+      "same_dtype_shape": true,
+      "same_logical_bytes": true,
+      "same_offset": true,
+      "same_storage_length": true,
+      "same_stride": true
+    },
+    "output": {
+      "same_dtype_shape": true,
+      "same_logical_bytes": false,
+      "same_offset": true,
+      "same_storage_length": true,
+      "same_stride": true
+    },
+    "precast_output": {
+      "same_dtype_shape": true,
+      "same_logical_bytes": false,
+      "same_offset": true,
+      "same_storage_length": true,
+      "same_stride": true
+    }
+  },
+  "tree_parents": [
+    -1,
+    0,
+    0
+  ]
+}
