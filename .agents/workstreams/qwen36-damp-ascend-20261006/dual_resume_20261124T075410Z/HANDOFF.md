@@ -1,5 +1,15 @@
 # Current continuation — November 24
 
+## Active allocation and next experiment
+
+Use the [physical 4–7 amendment](DEVICE_SCOPE_AMENDMENT_PHYSICAL4_7_20261124.json) and the [approved window](WINDOW_AUTHORIZATION_20261124.json), which ends at 2026-11-26 07:54:10 UTC. Physical devices 0–3 and external workloads are protected. The [stage record](EXECUTION_MATCHED_F65_QUALIFICATION_AND_PERFORMANCE_SUCCESSOR_20261124.json) links the original receipts. Check newer EXECUTION records by modification time before dispatch.
+
+BOLE has a bound four-card model entry. Read its [native handoff](bole_prepare/native_current_short8_physical47_prepare_v1/NATIVE_PHYSICAL47_BOUND_HANDOFF_20261124.json) for the exact model and independent consumer commands. The first model result needed is a short8 run with real per-worker numerical and state evidence. The unchanged component already has independent checks for a saved frame and a 16-step synthetic sequence. Reuse these results. The historical same-card new/old/new comparison and the [matched metrics](BOLE_8E7_F65_MATCHED_OPERATOR_NUMERICS_AND_STREAM_CHANGE_20261124.json) locate a numerical difference between binaries. This evidence is scoped to the component.
+
+MAIN must confirm current resource ownership, Docker/output headroom and the physical-6 standby handle before taking the four-card lease. The [performance successor](performance_prepare/f2_f65_current47_source_only_v1/CURRENT_ENTRY_HANDOFF.json) requires the two original successful short8 result references before sealing. DeltaLog needs the [accounted metadata reservation](delta_prepare/card6_transition_prepare_v1/STRICT_CONTROL_METADATA_PENDING_APPROVAL_INTEGRATION_CONTRACT_20261124.json) resolved before its next write.
+
+## Earlier observations in this window
+
 ## BOLE on physical NPU 0
 
 The earlier 160-step component producer exited after torch_npu reported failure to enumerate ascend_hal devices. It made zero verify and commit calls. The actual device count and numerical outcome are unknown. See EXECUTION_BOLE_COMPONENT160_E975_TERMINAL_20261124.json.

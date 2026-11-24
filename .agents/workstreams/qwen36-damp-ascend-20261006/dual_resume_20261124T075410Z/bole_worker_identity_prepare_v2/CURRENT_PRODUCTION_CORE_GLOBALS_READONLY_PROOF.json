@@ -1,0 +1,40 @@
+{
+  "Bridge_core112_keyword_line": 392,
+  "Bridge_receives_same_imported_core_module": true,
+  "CPU_NPU_container_experiment": false,
+  "V2_direct_globals_resolution_valid_for_current_production_source": true,
+  "V3_not_needed": true,
+  "actual_core_ref": {
+    "bytes": 6419,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/source-short8/core112.py",
+    "sha256": "bc984bc0b60eb196d297ce4fd82be1f1771e9922889a0dca076af21bae1c6b45"
+  },
+  "actual_production_core_import_constructed": true,
+  "actual_verify_and_backend_getter_globals_same_as_module": true,
+  "actual_worker_runtime_not_executed": true,
+  "backend_cache_remains_None": true,
+  "backend_getter_calls": 0,
+  "compiled_ref_accessible_in_same_globals": true,
+  "load_artifact_calls": 0,
+  "original_model_entry_ref": {
+    "bytes": 32468,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/source-short8/model_entry.py",
+    "sha256": "46ab0880c051122cdfb77c533a0794f3674b575afe9cddda254d8e7f66a70a06"
+  },
+  "physical47_bound_source_ref": {
+    "bytes": 2115400,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/source-short8/SOURCE_BOUND.json",
+    "sha256": "99cdedb160af0debad8f212ef13d370389fdb430ecacff550185c935c76c866f"
+  },
+  "plain_import_line": 22,
+  "schema": "bole.current-production-core-module-globals-readonly-proof/v1",
+  "service_runner_no_core_attribute_reassignment": true,
+  "service_runner_ref": {
+    "bytes": 56449,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/source-short8/service_runner.py",
+    "sha256": "9d03273cc5c0bc71b7b705190e642b51bf1f258c15724ca9156352ec055acded"
+  },
+  "torch_present_after": false,
+  "torch_present_before": false,
+  "verify_calls": 0
+}

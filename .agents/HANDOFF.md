@@ -1,4 +1,10 @@
-# Current dual-paper checkpoint — 2026-11-04
+# Current dual-paper checkpoint — November 24, physical 4–7
+
+Read the [current DeltaLog and BOLE handoff](workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/HANDOFF.md) and its latest EXECUTION record by actual modification time. The approved window ends at 2026-11-26 07:54:10 UTC. MAIN may schedule physical 4–7 after fresh admission checks. Preserve physical 0–3 and external workloads.
+
+## Previous windows
+
+### November 4 checkpoint
 
 Read the [current dual-paper handoff](workstreams/qwen36-damp-ascend-20261006/dual_resume_20261104T091749Z/HANDOFF.md) and its newest EXECUTION record by actual timestamp before dispatch. The frozen window ends 2026-11-05T09:17:49Z (1793870269). DEVICE_SCOPE_AUTHORIZATION_20261104_0_3.json supersedes only the original window's device scope: use physical0–3; preserve4–7 and vllm-au-test. Original timing and historical closures remain unchanged.
 

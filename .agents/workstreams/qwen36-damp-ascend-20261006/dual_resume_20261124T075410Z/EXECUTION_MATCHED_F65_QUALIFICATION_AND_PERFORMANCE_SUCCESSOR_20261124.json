@@ -1,0 +1,98 @@
+{
+  "actual_current_scope": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "current_model_short8_pass": false,
+  "formal_paired_performance_result": null,
+  "historical_matched_numerics": {
+    "current_TP4": false,
+    "new_measurement_this_turn": false,
+    "new_passed": 7,
+    "old_passed": 1,
+    "total": 7,
+    "workload": "one retained R1 L0 frame"
+  },
+  "performance_successor_state": "data pins retargeted; actual host and scope references require the current independent short8 pass; no performance command dispatched",
+  "qualification_read_path_review": {
+    "F65_binary_sha256": "f65d7eced4ac9f66f2d525d079786bf15e5e67270a70ed3b6ed794fa5b068a2a",
+    "bound_sha256": "99cdedb160af0debad8f212ef13d370389fdb430ecacff550185c935c76c866f",
+    "frozen_consumer_enforces_device_scope_correction": true,
+    "full_matrix_independent_FP64_recomputed": false,
+    "matrix_actual_device": 1,
+    "matrix_reported_device": 4,
+    "single_frame_independent_FP64_checks": 18
+  },
+  "refs": {
+    "current_window": {
+      "bytes": 1824,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/WINDOW_AUTHORIZATION_20261124.json",
+      "sha256": "1fdec2f6e59b57afe99662cb4b546cf66ec42fa7c5f3a2659c784ca2a1bbe66f"
+    },
+    "deltalog_cap_accounting": {
+      "bytes": 7344,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/card6_transition_prepare_v1/STRICT_CONTROL_METADATA_PENDING_APPROVAL_INTEGRATION_CONTRACT_20261124.json",
+      "sha256": "98011910f25dba13a76f70597036703e904f1135b61be033104278cfbfae1b0f"
+    },
+    "historical_same_physical1_new_old_new": {
+      "bytes": 20516,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261104T091749Z/BOLE_NEW_OLD_NEW_CASE_REVIEW_20261104.json",
+      "sha256": "faa9d17401600ad970ed6fc3d5bf4f5393294f21982ffeca5e60248082ed772c"
+    },
+    "matched_metrics": {
+      "bytes": 5045,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/BOLE_8E7_F65_MATCHED_OPERATOR_NUMERICS_AND_STREAM_CHANGE_20261124.json",
+      "sha256": "de1e2afdf7243839153567f86bc29ae2323854ab6ed460e2b59adef2ccd59f2d"
+    },
+    "native_tp4_bind": {
+      "bytes": 7901,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/NATIVE_PHYSICAL47_BOUND_HANDOFF_20261124.json",
+      "sha256": "298334e64490435d7f026c48d5663421d362440eba2cb2f75464cf8718318ad5"
+    },
+    "optional_worker_identity_candidate": {
+      "bytes": 6067,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_worker_identity_prepare_v2/PHYSICAL47_SINGLE_DELTA_AND_SAFE_REBIND_HANDOFF.json",
+      "sha256": "21297a420d3d5b9901074bd52b96b01199e1152bbc52f94570836ef8b786e8ad"
+    },
+    "original_standby": {
+      "bytes": 4859,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/EXECUTION_BOLE_PHYSICAL47_NATIVE_BIND_AND_DISK_WAIT_20261124.json",
+      "sha256": "bf715bb8bffe912f71fb839760f0931210ad10669f307531b2874abc41ffbad9"
+    },
+    "performance_successor": {
+      "bytes": 11400,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_current47_source_only_v1/CURRENT_ENTRY_HANDOFF.json",
+      "sha256": "8e8f2b34f35a59e750d10511bc4b7ff80666a85c7571981bce9c331851cca585"
+    },
+    "physical_amendment": {
+      "bytes": 2008,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/DEVICE_SCOPE_AMENDMENT_PHYSICAL4_7_20261124.json",
+      "sha256": "7d757b431d8b28f740809e7c98fa784e7ee96f735826bdb541e47514d30e00d2"
+    }
+  },
+  "resource_observation": {
+    "Docker_free_bytes": 5941628928,
+    "SMI_compute_pids_on_4_through_7": [],
+    "UDA_exclusive_ns_4_through_7": [
+      4,
+      128,
+      null,
+      2
+    ],
+    "current_TP4_model_root_exists": false,
+    "output_free_bytes": 48521437184,
+    "standby_PID_start_confirmed": [
+      3546237,
+      40031808
+    ],
+    "standby_operation": "exec-00000000000109f7",
+    "standby_ticket_exists": false,
+    "utc": "2026-11-24T21:36:07Z",
+    "window_utilization": "unmeasured"
+  },
+  "schema": "paper-to-ascend.component-qualification-and-current-handoff/v1",
+  "task_accuracy_result": null,
+  "worker_identity_state": "single-file optional diagnostic prepared separately; unused by the immutable bound TP4 package"
+}

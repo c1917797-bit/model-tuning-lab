@@ -1,0 +1,94 @@
+{
+  "CPU_NPU_container_executed": false,
+  "H_RT_untouched": true,
+  "READY": false,
+  "baseline_bound_source_ref": {
+    "bytes": 2115400,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/source-short8/SOURCE_BOUND.json",
+    "sha256": "99cdedb160af0debad8f212ef13d370389fdb430ecacff550185c935c76c866f"
+  },
+  "baseline_commands_ref": {
+    "bytes": 4456,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/source-short8/COMMANDS.json",
+    "sha256": "f4176b3fefe5b20b7253a86db0c823ec67798ebae20b4704cfb6244a783e8f11"
+  },
+  "baseline_model_entry_ref": {
+    "bytes": 32468,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/source-short8/model_entry.py",
+    "sha256": "46ab0880c051122cdfb77c533a0794f3674b575afe9cddda254d8e7f66a70a06"
+  },
+  "baseline_native_bound_handoff_ref": {
+    "bytes": 7901,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/NATIVE_PHYSICAL47_BOUND_HANDOFF_20261124.json",
+    "sha256": "298334e64490435d7f026c48d5663421d362440eba2cb2f75464cf8718318ad5"
+  },
+  "baseline_unchanged": true,
+  "existing_RAW_binding": [
+    "existing Observer.gdn captures normalized inputs/factors(P,U)/precast output/output and before/after GDN state",
+    "identity static data lives once within the same frame; each GDN layer row references it with actual source/rank/layer/request owner",
+    "existing sink durable save and complete-frame Ref precede original independent numeric consume; numeric FAIL retains same saved RAW"
+  ],
+  "explicit_limits": [
+    "runtime worker attestation has not executed",
+    "no extra RAW file",
+    "no actual native dispatch pointer claim",
+    "core112 commit observation labels Python diagnostic state materialization rather than native f65 commit",
+    "null/other/missing maps or capture errors remain unknown evidence and never rewrite original numeric results"
+  ],
+  "inverse_metadata_ref": {
+    "bytes": 794,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_worker_identity_prepare_v2/AST_INVERSE_METADATA.json",
+    "sha256": "d03e71a22de8e51b4dfa430d0c0c2c781b54da483e1e5fda0e83f198d21c8bff"
+  },
+  "new_rebinding_requirements": [
+    "derive a new immutable physical47 source using original registered renderer; replace only reviewed model_entry role",
+    "recompute all actual current source/guest/owner/readset roles; retain historical qualification basis",
+    "MAIN review the new actual source roles plus complete model_entry AST inverse and source-only metadata regression",
+    "use original bind interface with the newly rendered source Ref and new output directory",
+    "issue source-specific qualification authority from the actual new MAIN source review; do not reuse old 919effe6 authority as approval for changed code",
+    "MAIN fresh resource/exact-task/physical mapping admission and serial device lock before any real qualification run"
+  ],
+  "old_bind_command_must_not_be_reexecuted_on_existing_baseline": true,
+  "original_bind_argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/source-short8/qualification_source_producer.py",
+    "--bind",
+    "--template-ref",
+    "{\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/source-short8/SOURCE_TEMPLATE.json\", \"bytes\": 2375943, \"sha256\": \"8a78fef3d15a5086491a699c93d81d47ac34ea1b45e9c801c6f7da14be66aca0\"}"
+  ],
+  "original_qualification_authority_Refs": {
+    "MAIN_review_ref": {
+      "bytes": 220266,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/MAIN_PHYSICAL47_SOURCE_REVIEW_20261124.json",
+      "sha256": "0627b232995f8c8f29fa5a5e8ecabaafa2af135e4729ae2495fd116777c63fc8"
+    }
+  },
+  "original_qualification_authority_fieldset": [
+    "MAIN_review_ref",
+    "approved",
+    "cutoff_epoch",
+    "schema",
+    "scope",
+    "start_epoch"
+  ],
+  "original_qualification_authority_ref": {
+    "bytes": 904,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/MAIN_PHYSICAL47_SHORT8_QUALIFICATION_AUTHORITY_20261124.json",
+    "sha256": "919effe60ab5f76a14dcd0c4a0f985793ea206be93ee77e297d61cff7da937b4"
+  },
+  "patch_contract_ref": {
+    "bytes": 2507,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_worker_identity_prepare_v2/PATCH_CONTRACT.json",
+    "sha256": "0c55d17f4cb0544a2cadbff38a778aa2c96341adf9cdcb0714185ec61da51ec5"
+  },
+  "prepared_model_entry_ref": {
+    "bytes": 44858,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_worker_identity_prepare_v2/model_entry.py",
+    "sha256": "02363021fb3fe4d1b62d2f263ea9a2d82482e5d0745deb6bf57551afe1da8423"
+  },
+  "schema": "bole.actual-worker-callee-physical47-single-source-delta-handoff/v1",
+  "single_source_delta": "model_entry.py only; qualification-only post-return observation; original math and existing numeric consumer unchanged",
+  "source_bound": false
+}
