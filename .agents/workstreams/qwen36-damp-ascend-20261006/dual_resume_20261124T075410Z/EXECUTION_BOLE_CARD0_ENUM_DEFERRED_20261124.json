@@ -1,0 +1,89 @@
+{
+  "actual_device_count": null,
+  "authorization": {
+    "bytes": 1284,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/BOLE_CARD0_ENUM_DIAGNOSTIC_AUTH_20261124.json",
+    "sha256": "40948d1c641ffcf7e77f80f8fd486b03af376ff46df0477f414799882e8db804"
+  },
+  "cumulative_output_bytes_before_any_guest": 22365,
+  "deferred": {
+    "exit_code": 1,
+    "guest_started": false,
+    "issued_admission": false,
+    "minimum_sampled_idle_s": 30,
+    "operation": "exec-000000000000f14f",
+    "peer": "ma",
+    "wait_seconds": 300
+  },
+  "monitor": {
+    "busy_samples": 9,
+    "duration_target_s": 100,
+    "longest_sampled_idle_span_s": 8.3,
+    "operation": "exec-000000000002dbb6",
+    "peer": "mc",
+    "samples": 25
+  },
+  "next_ready_contract": {
+    "bytes": 10820,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/device0_runtime_diagnostic_prepare_v4/CONTRACT.json",
+    "sha256": "e9d43cf584bb32204ef0bc983823d630608902d77b74f41ffb810e7c96c14e77"
+  },
+  "original_prestart_attempts": [
+    {
+      "CID": null,
+      "actual_guest_started": false,
+      "operation": "exec-000000000000ed33",
+      "original_owner_released": true,
+      "owner_result": {
+        "bytes": 673,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device0_runtime_diagnostic_owner_run_v1/OWNER_RESULT.json",
+        "sha256": "91759794411cdfa8d85f9983a53366d5e77bd5143ac85235bcdeb9c8a107471b"
+      },
+      "reason": "identity helper field mismatch",
+      "retained_runtime_bytes": 1768,
+      "started": {
+        "bytes": 1095,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device0_runtime_diagnostic_owner_run_v1/STARTED.json",
+        "sha256": "0e64e66d4c9b76b11632b91e96f1891446306d607510bf662e159f6c91c01099"
+      }
+    },
+    {
+      "CID": "155334fa0da45230cff63e025d4aa3bd6a30e57c1c4e816769e1e45ae56996a4",
+      "actual_guest_started": false,
+      "operation": "exec-000000000000ee20",
+      "original_owner_released": true,
+      "owner_result": {
+        "bytes": 823,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device0_runtime_diagnostic_owner_run_v2/OWNER_RESULT.json",
+        "sha256": "6ac7e05fdf5360bc168bbdf9974ae0b3fb21771f194ff39af57c1e0f013a54df"
+      },
+      "reason": "list used as a set element during created-container validation",
+      "retained_runtime_bytes": 12357,
+      "started": {
+        "bytes": 1099,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device0_runtime_diagnostic_owner_run_v2/STARTED.json",
+        "sha256": "bbaf2b0a902ce2cab90e69264b95a08ce66c7a8f6b6fabaf7bf349a21a144653"
+      }
+    },
+    {
+      "CID": null,
+      "actual_guest_started": false,
+      "operation": "exec-000000000000f10d",
+      "original_owner_released": true,
+      "owner_result": {
+        "bytes": 1488,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device0_runtime_diagnostic_owner_run_v3/OWNER_RESULT.json",
+        "sha256": "06aec820ef3d37066b53ec2b887650c7cef931cea1705bb9cc1ea671b415e0e5"
+      },
+      "reason": "physical0 compute became active before create",
+      "retained_runtime_bytes": 8240,
+      "started": {
+        "bytes": 1099,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device0_runtime_diagnostic_owner_run_v3/STARTED.json",
+        "sha256": "3e7b41b5f4c213fd3a9a84f1a72336fbae72e1fe5dd38c2948057ed116c18b65"
+      }
+    }
+  ],
+  "performance": null,
+  "schema": "bole.device-enumeration.pre-admission-checkpoint/v1"
+}

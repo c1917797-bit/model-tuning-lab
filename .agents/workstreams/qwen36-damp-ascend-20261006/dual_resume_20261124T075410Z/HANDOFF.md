@@ -2,13 +2,17 @@
 
 ## BOLE on physical NPU 0
 
-The one authorized 160-step component run reached Docker start at 13:57:15 UTC. The producer reported that torch_npu could not retrieve the ascend_hal device count, then exited before its first verify or commit. The independent checker received zero of 1,280 comparisons. Actual visible count and the cause at the driver or namespace level remain unknown. The owner and its exact container have exited. Terminal evidence is in EXECUTION_BOLE_COMPONENT160_E975_TERMINAL_20261124.json.
+The earlier 160-step component producer exited after torch_npu reported failure to enumerate ascend_hal devices. It made zero verify and commit calls. The actual device count and numerical outcome are unknown. See EXECUTION_BOLE_COMPONENT160_E975_TERMINAL_20261124.json.
 
-A separately authorized, single diagnostic may run on freshly idle physical 0 using the same image. BOLE_CARD0_ENUM_DIAGNOSTIC_AUTH_20261124.json fixes 90 seconds plus 30 seconds for cleanup and 1 MiB of output. Record availability and device count independently. Keep the existing workloads on 1, 3 and 4–7 intact. Physical 2 remains available for independently admitted DeltaLog work. Consult the latest execution receipts for the outcome.
+The separately approved 90-second enumeration diagnostic reached Docker create during the user-coordinated slot. Physical 0 was idle before create. Before start, the driver reported PID 2275602 using 576 MiB. The owner exited and its new container remained in created state with PID 0 and zero start time. The diagnostic guest has never started. Earlier failures in the diagnostic launcher involved a stale process identity field, an unhashable device mapping and an empty LogPath in Docker created state. The repaired branches were checked using real Docker state records.
+
+A subsequent live observation tied a different PID, 2296632, to container nms_v5_c by cgroup and Docker identity, using 292 MiB on physical 0. Its relationship to PID 2275602 is unknown. No external workload was stopped. The two receipts EXECUTION_BOLE_CARD0_ENUM_DEFERRED_20261124.json and EXECUTION_BOLE_CARD0_CONFIRMED_EXTERNAL_COMPUTE_20261124.json identify the exact attempts and outputs. These attempts retained 48,554 bytes altogether. Coordinate a slot in which nms_v5_c has actually stopped issuing work on card 0. Keep the current device and output limits.
 
 ## DeltaLog on physical NPU 2
 
-The S5 native capture and bind passed. MAIN verified the S6 source review against 21 references, including 12 programs, and independently reversed the 12 host AST edits to the S5 baseline. S6 source freeze succeeded. The original capture has a terminal result at delta_prepare/native_capture_v6_execution_20261124/RESULT.json with exit code 1. Check its attribution and any later execution receipt before scheduling an owner.
+S7 captured overlay 008 in 19.547 s and the original binder exited 0 in 11.220 s. Its SOURCE_MANIFEST.json is 216,810 bytes, SHA-256 95204a325c295b20cd50d23218d07948ff9b492d023b2d5ff88c078c6ecd3e75. The S6 failure and overlay 007 have been preserved. The current-control input and exact dispatch intent are in delta_prepare/software_reuse_current_control_prepare_v1/dispatch_current_control_v1.
+
+Original operation f14c exited 1 before the owner output directory existed. A read-only replay with the same arguments and address-space limit raised ValueError in r5_readonly_provenance.observe at line 63 during the pre-execution check. The replay made no reservation and launched no tests. See delta_prepare/sealer_control_prepare_v1/F14C_ORIGINAL_READONLY_PREFIX_EVALUATION_V2_20261124.json. Verify any later attribution or repair before dispatch. There is no new physical-2 numerical result or paired performance measurement from this run.
 
 ## Earlier checkpoint
 

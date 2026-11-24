@@ -1,0 +1,60 @@
+{
+  "cid": "90803ab4f751da4eac3a3bdfa6b3a0502d50bb38bf95150538504b685d5606a7",
+  "device_query_executed": false,
+  "dispatch_idempotency_key": "main1124-card0-enum-user-reserved-slot-first-guest-v4",
+  "docker_pid": 0,
+  "docker_status": "created",
+  "guest_files": 0,
+  "original_owner_released": true,
+  "owner": {
+    "bytes": 1968,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device0_runtime_diagnostic_owner_run_v4/OWNER_RESULT.json",
+    "sha256": "1bd1622a454bc7ef3320368b36384b695c4a58b04bab6bf62991344fe3a2c37a"
+  },
+  "owner_cleanup_elapsed_seconds": 1.1518989200121723,
+  "owner_pid": 2273653,
+  "owner_startticks": "37872903",
+  "precreate": {
+    "bytes": 4851,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device0_runtime_diagnostic_owner_run_v4/SMI_before_create_1_1.log",
+    "sha256": "8aed873e3f6c54f0dd4cce9b22e3fa4def76242b11938018b787f3e512d4fe77"
+  },
+  "prestart": {
+    "bytes": 4851,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device0_runtime_diagnostic_owner_run_v4/SMI_before_start_2_2.log",
+    "sha256": "9bbd8829e6c5d28b086105dcf59ce82bc263795cdb6148d9ab3aa01aa17ef3da"
+  },
+  "prestart_conflict": {
+    "MiB": 576,
+    "identity_unconfirmed": true,
+    "physical": 0,
+    "pid": 2275602
+  },
+  "previous_owner_scope": {
+    "bytes": 224,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device0_runtime_diagnostic_owner_run_v4/PREVIOUS_RELEASE.json",
+    "sha256": "bca6eb450eb231fc15622a664dffe98dab9a53052d6708d4973f0eafeb0891c9"
+  },
+  "prior": {
+    "bytes": 4093,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/EXECUTION_BOLE_CARD0_ENUM_DEFERRED_20261124.json",
+    "sha256": "b0bde5c05021e4445a81e7ccfa15a380f82ec3ed02e00f4bbdfdc7fe5be00757"
+  },
+  "retained_runtime_bytes_across_prestart_attempts": 48554,
+  "runtime_ready_observed": null,
+  "schema": "bole.device-enumeration.reserved-slot-prestart/v1",
+  "separate_live_observation": {
+    "MiB": 292,
+    "container": "nms_v5_c",
+    "epoch": 1795533679,
+    "matching_cgroup_and_cid_prefix": "0b4ecdd86d1b",
+    "operation": "exec-000000000002dbda",
+    "parent": 2225673,
+    "peer": "mc",
+    "physical": 0,
+    "pid": 2296632,
+    "startticks": 37882221
+  },
+  "started_at": "0001-01-01T00:00:00Z",
+  "transport_ack": "unknown; exact owner and docker checked independently"
+}
