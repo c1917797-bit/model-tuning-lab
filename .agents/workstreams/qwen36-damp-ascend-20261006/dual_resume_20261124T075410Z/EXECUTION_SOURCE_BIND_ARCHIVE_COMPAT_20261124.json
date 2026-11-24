@@ -1,0 +1,102 @@
+{
+  "schema": "dual.current-stage-checkpoint/v1",
+  "recorded_utc": "2026-11-24 10:28:01 UTC",
+  "manual_window_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/WINDOW_AUTHORIZATION_20261124.json",
+    "bytes": 1824,
+    "sha256": "1fdec2f6e59b57afe99662cb4b546cf66ec42fa7c5f3a2659c784ca2a1bbe66f"
+  },
+  "original_start_epoch": 1792828303,
+  "cutoff_epoch": 1795679650,
+  "devices": {
+    "single_card_candidates": [
+      0,
+      2
+    ],
+    "held": [
+      1,
+      3
+    ],
+    "protected": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "TP4_admitted": false,
+    "user_reconfirmed_single_card_hold": true
+  },
+  "current_own_NPU_experiments_launched": false,
+  "whole_30min_physical_utilization": "unmeasured; no continuous physical evidence",
+  "BOLE": {
+    "source_bind_operation": "exec-000000000000cc68",
+    "source_bound_ref": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_v1/source-short8/SOURCE_BOUND.json",
+      "bytes": 2101066,
+      "sha256": "165a5e8563bf9456e2179d5db15049b49956278bb2df1b15b452893f74b9b0f5"
+    },
+    "commands_ref": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_v1/source-short8/COMMANDS.json",
+      "bytes": 4222,
+      "sha256": "c973e3e7ed122e0682f75a61443cb67884ab8105e714e6ad19193740c62ae70c"
+    },
+    "component160": {
+      "status": "BUDGET_PENDING_NOT_READY",
+      "owner_ref": {
+        "bytes": 54390,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/component_state160_owner_prepare_v1/owner.py",
+        "sha256": "bae9f7902e9ddb11491035efe96277394661acf18eee7b4cf7e384a062b57f84"
+      },
+      "request_ref": {
+        "bytes": 12980,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/component_state160_prepare_v2/REQUEST.json",
+        "sha256": "942fb97bb030ec60fe6db830282b7856de1d5fcc46dd6f80e8b8e46b99aab389"
+      },
+      "original_cap_bytes": 268435456,
+      "proposed_cap_bytes": 2147483648,
+      "full_RAW_estimate_bytes": 1289970733,
+      "all82_Refs_independently_verified": true,
+      "budget_decision_pending": true,
+      "fresh_device_admission_pending": true
+    }
+  },
+  "DeltaLog": {
+    "status": "PREPARING_CURRENT_ACTUAL_CALLEE_V2",
+    "V1_source_frozen": true,
+    "V1_capture_failed_before_007": true,
+    "cause": "five active typed program Ref aliases executed old V15 readers despite current m.files declarations",
+    "historical_math_guest_ledger_refs_immutable": true,
+    "current_CPU_or_NPU_PASS": false,
+    "V2_preparation_original_key": "delta1124-v2-five-real-callees-readonly-guard-freeze-once",
+    "V2_preparation_outcome": "unknown; resolve original key and exact file bytes, do not restart"
+  },
+  "archive": {
+    "phase1_484_complete_verified": true,
+    "original_operation": "exec-000000000000ceb8",
+    "original8CLI_compatibility_passed": true,
+    "actual_elapsed_seconds": 245.04549121001037,
+    "all8_CPU_containers_terminal_and_PIDs_released": true,
+    "MAIN_review_ref": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_ARCHIVE_DOCKER_COMPATIBILITY_INDEPENDENT_REVIEW_20261124.json",
+      "bytes": 14718,
+      "sha256": "1054e92230b0eae336afb5c62ad345acfdade56183fbc426764137d975b7aa12"
+    },
+    "independent_MC_readonly_check": "exec-000000000002d254 exit0",
+    "global_mount_rename_or_delete_performed": false,
+    "phase3_not_NPU_prerequisite_after_independent_Docker_capacity_recovery": true
+  },
+  "control": {
+    "primary": "chicaihong01/ma",
+    "primary_flapping": true,
+    "MC_same_host_repo_boot_namespace_readonly_verified": true,
+    "MC_write_or_execution_fallback_user_decision": "pending",
+    "no_services_routes_credentials_changed": true
+  },
+  "acceptance": {
+    "whole_model_numerical": false,
+    "formal_performance": false,
+    "task_accuracy": false,
+    "goal_complete": false
+  },
+  "next": "BOLE0 component160 after real budget and fresh resource admission; Delta2 after actual current control/numeric source closure; preserve archive originals until actual RO/current-consumer and independent deletion gates."
+}
