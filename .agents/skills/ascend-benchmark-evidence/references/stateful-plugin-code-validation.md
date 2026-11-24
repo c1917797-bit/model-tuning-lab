@@ -134,3 +134,11 @@ Before adding instrumentation, prove what existing successful verify, publish,
 ACK and closed-frame receipts already establish in the pinned execution mode.
 Reuse existing per-request calibration witnesses where sufficient; keep graph
 replay and fallback scopes explicit, and avoid redundant per-kernel I/O.
+
+## Reuse a short recurrent-state result
+
+For a multi-step operator, answer two questions from the same device run. For the local comparison, give the independent reference the state that actually entered the current step. For the trajectory comparison, evolve the reference from the original state across the whole sequence. A first local mismatch identifies a failing transition. A trajectory mismatch with passing local comparisons points to error accumulating across steps.
+
+In the BOLE F65 short case, 16 updates each produced four quantities (P, U, output and updated state). Two comparisons per quantity yielded 64 local and 64 trajectory checks. A component pass requires every declared comparison to meet its original tolerance. A count of 128 is specific to this case. Record the real-frame seed and the repeated synthetic sequence alongside the result. Reuse this receipt while the operator, arithmetic, input, mapping semantics and reference remain applicable. If an actual model frame has already failed, replay that frame through the identified production callee and locate the first divergence before extending the synthetic sequence.
+
+When the guest exits before the first update, report the number of device steps actually completed. For zero visible devices, record availability, the returned device count and the original driver error separately. Correlate the guest's PID, start time and container ID with the driver log. On chicaihong01, the installed driver's reservation table can distinguish an idle compute engine from a device held by a namespace. Use only status reads whose semantics are established for that driver. See the [Ascend NPU environment orientation](../../ascend-npu-environment-orientation/SKILL.md).

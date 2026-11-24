@@ -1,0 +1,373 @@
+{
+  "schema": "BOLE.exact-UDA-driver-ownership-and-read-semantics/v1",
+  "scope": "metadata_only; no guest/HAL/device allocation or external stop",
+  "observations_are_snapshots_not_admission": true,
+  "source_refs": [
+    {
+      "path": "/usr/local/Ascend/driver/kernel/dbl/uda/uda_proc_fs.c",
+      "bytes": 7527,
+      "sha256": "844fa06ef08406f17634c8834dc2c08d08463806ba09afdedb9e60b3f8dd47d2"
+    },
+    {
+      "path": "/usr/local/Ascend/driver/kernel/dbl/uda/uda_access.c",
+      "bytes": 49390,
+      "sha256": "8948054441984127f1592915c10a8777c862cea44cacad949194789b909c50a1"
+    },
+    {
+      "path": "/usr/local/Ascend/driver/kernel/dbl/uda/uda_dev.c",
+      "bytes": 22094,
+      "sha256": "1e0ae60ffbde56eb3b35f081a0606bee5c6f48902022d1cb0f65da479668bff8"
+    }
+  ],
+  "namespace_node_read_proof": {
+    "proc_ops": [
+      "single_open",
+      "seq_read",
+      "seq_lseek",
+      "single_release"
+    ],
+    "no_write_handler": true,
+    "show_chain": [
+      "uda_ns_node_show:125",
+      "uda_for_each_ns_node_safe:283",
+      "uda_ns_node_single_show:110",
+      "seq_printf",
+      "uda_get_current_ns:110",
+      "uda_get_task_ns:105"
+    ],
+    "getter": "existing task->nsproxy->mnt_ns only",
+    "iterator": "mutex/list walk/callback only",
+    "no_occupy_allocate_deviceopen_in_read_chain": true
+  },
+  "udevice_read_proof": {
+    "show_chain": [
+      "uda_udev_show:90",
+      "uda_dev_inst_get:115",
+      "uda_udev_single_show:44",
+      "uda_dev_inst_put:141"
+    ],
+    "paired_existing_reference_only": true,
+    "exclusive_holder_printed_iff": "access.ns != NULL",
+    "shared_holders_printed_separately": true
+  },
+  "conflict_semantics": {
+    "function": "uda_occupy_dev_by_ns:900",
+    "conflict_log_line": 924,
+    "ns_id_argument": "access->ns_id",
+    "meaning": "existing holder namespace, not requesting namespace",
+    "requester_pid": 2510123
+  },
+  "kernel_and_fresh_compute_snapshot": {
+    "epoch": 1795551589.3142712,
+    "exact_attempt_kernel_rows": 149,
+    "unique_kernel_numeric_fields": [
+      [
+        "ns_id",
+        "4"
+      ],
+      [
+        "python3",
+        "2510123"
+      ],
+      [
+        "udevid",
+        "4"
+      ]
+    ],
+    "all_attempt_sized_numbers": [
+      2510123
+    ],
+    "kernel_sample_rows": [
+      {
+        "ts": "1795551264987538",
+        "driver_function": "uda_occupy_dev_by_ns",
+        "Conflict": true,
+        "fields": [
+          {
+            "key": "python3",
+            "value": "2510123"
+          },
+          {
+            "key": "udevid",
+            "value": "4"
+          },
+          {
+            "key": "ns_id",
+            "value": "4"
+          }
+        ],
+        "PID_sized_numbers": [
+          2510123
+        ],
+        "message_sha256": "dcd0d0e9758612a406a5a1ef3c5a1fd8f66b0dfab2487166a86188f7df716545"
+      },
+      {
+        "ts": "1795551264991521",
+        "driver_function": "uda_occupy_dev_by_ns",
+        "Conflict": true,
+        "fields": [
+          {
+            "key": "python3",
+            "value": "2510123"
+          },
+          {
+            "key": "udevid",
+            "value": "4"
+          },
+          {
+            "key": "ns_id",
+            "value": "4"
+          }
+        ],
+        "PID_sized_numbers": [
+          2510123
+        ],
+        "message_sha256": "dcd0d0e9758612a406a5a1ef3c5a1fd8f66b0dfab2487166a86188f7df716545"
+      },
+      {
+        "ts": "1795551264991571",
+        "driver_function": "uda_occupy_dev_by_ns",
+        "Conflict": true,
+        "fields": [
+          {
+            "key": "python3",
+            "value": "2510123"
+          },
+          {
+            "key": "udevid",
+            "value": "4"
+          },
+          {
+            "key": "ns_id",
+            "value": "4"
+          }
+        ],
+        "PID_sized_numbers": [
+          2510123
+        ],
+        "message_sha256": "dcd0d0e9758612a406a5a1ef3c5a1fd8f66b0dfab2487166a86188f7df716545"
+      }
+    ],
+    "npu_smi_exit": 0,
+    "physical4_7_processes": [],
+    "physical4_7_status_blocks": [
+      [
+        "| 4     910B4               | OK            | 91.7        43                0    / 0             |",
+        "| 0                         | 0000:01:00.0  | 0           0    / 0          2874 / 32768         |"
+      ],
+      [
+        "| 5     910B4               | OK            | 95.2        41                0    / 0             |",
+        "| 0                         | 0000:02:00.0  | 0           0    / 0          3101 / 32768         |"
+      ],
+      [
+        "| 6     910B4               | OK            | 99.3        42                0    / 0             |",
+        "| 0                         | 0000:41:00.0  | 0           0    / 0          3232 / 32768         |"
+      ],
+      [
+        "| 7     910B4               | OK            | 84.9        43                0    / 0             |",
+        "| 0                         | 0000:42:00.0  | 0           0    / 0          4901 / 32768         |"
+      ]
+    ],
+    "fresh_device_fd_holders": [],
+    "npu_smi_help_query_exit": 0,
+    "npu_smi_help_relevant_lines": [
+      "Usage: npu-smi info <watch|proc|-h|-m|-l|-t type> [Options...]",
+      "watch          Show all device's status in scrolling format",
+      "proc           Show device's matrix process status in scrolling format",
+      "-m             Show all device's mapping information",
+      "-l             Show all device's topology information",
+      "type: board, flash, memory, usages, sensors, temp, power, volt, mac-addr,",
+      "device-share, nve-level, aicpu-config, pcie-err, mcu-monitor,"
+    ],
+    "no_guest_or_HAL_or_device_allocation_invoked": true,
+    "absence_of_compute_or_FD_is_not_absence_of_UDA_reservation": true
+  },
+  "holder_identity_snapshot": {
+    "epoch": 1795551858.5685117,
+    "exact_driver_root_metadata": [
+      {
+        "driver_ns_id": 4,
+        "driver_root_tgid": 2793208,
+        "live": true,
+        "startticks": "36677843",
+        "ppid": 2793179,
+        "exe_basename": "sleep",
+        "mnt_namespace": "mnt:[4026549402]",
+        "pid_namespace": "pid:[4026549405]",
+        "cgroup_CIDs": [
+          "d72fa5e6fc0b9050512e00bd790ebb336498e7ea1cf7ea09fb630a26f2a15099"
+        ],
+        "exact_container_metadata": [
+          {
+            "Id": "d72fa5e6fc0b9050512e00bd790ebb336498e7ea1cf7ea09fb630a26f2a15099",
+            "Name": "/codex-conv3d-score-20261124-run-d4",
+            "Config_Image": "sha256:98b56a90cce32b070930a20be2cf9a5b5bc2b84bcb6d4717716b54ab0019b820",
+            "Image": "sha256:98b56a90cce32b070930a20be2cf9a5b5bc2b84bcb6d4717716b54ab0019b820",
+            "State": {
+              "Status": "running",
+              "Running": true,
+              "Pid": 2793208,
+              "StartedAt": "2026-11-24T12:00:25.08840413Z"
+            },
+            "Runtime": "runc",
+            "declared_devices": [
+              {
+                "PathOnHost": "/dev/davinci4",
+                "PathInContainer": "/dev/davinci4",
+                "CgroupPermissions": "rwm"
+              },
+              {
+                "PathOnHost": "/dev/davinci_manager",
+                "PathInContainer": "/dev/davinci_manager",
+                "CgroupPermissions": "rwm"
+              },
+              {
+                "PathOnHost": "/dev/devmm_svm",
+                "PathInContainer": "/dev/devmm_svm",
+                "CgroupPermissions": "rwm"
+              },
+              {
+                "PathOnHost": "/dev/hisi_hdc",
+                "PathInContainer": "/dev/hisi_hdc",
+                "CgroupPermissions": "rwm"
+              }
+            ],
+            "Privileged": false
+          }
+        ]
+      },
+      {
+        "driver_ns_id": 2,
+        "driver_root_tgid": 3171169,
+        "live": true,
+        "startticks": "27230506",
+        "ppid": 3171120,
+        "exe_basename": "sleep",
+        "mnt_namespace": "mnt:[4026548999]",
+        "pid_namespace": "pid:[4026549002]",
+        "cgroup_CIDs": [
+          "7199a6c9d37e693bdaabbb88e0378761e24ea67da06934aceb84d3923c471eb2"
+        ],
+        "exact_container_metadata": [
+          {
+            "Id": "7199a6c9d37e693bdaabbb88e0378761e24ea67da06934aceb84d3923c471eb2",
+            "Name": "/codex-transpose-opt-910b4.Rj3lzj-d7",
+            "Config_Image": "sha256:98b56a90cce32b070930a20be2cf9a5b5bc2b84bcb6d4717716b54ab0019b820",
+            "Image": "sha256:98b56a90cce32b070930a20be2cf9a5b5bc2b84bcb6d4717716b54ab0019b820",
+            "State": {
+              "Status": "running",
+              "Running": true,
+              "Pid": 3171169,
+              "StartedAt": "2026-11-23T09:45:51.62386562Z"
+            },
+            "Runtime": "runc",
+            "declared_devices": [
+              {
+                "PathOnHost": "/dev/davinci7",
+                "PathInContainer": "/dev/davinci7",
+                "CgroupPermissions": "rwm"
+              },
+              {
+                "PathOnHost": "/dev/davinci_manager",
+                "PathInContainer": "/dev/davinci_manager",
+                "CgroupPermissions": "rwm"
+              },
+              {
+                "PathOnHost": "/dev/devmm_svm",
+                "PathInContainer": "/dev/devmm_svm",
+                "CgroupPermissions": "rwm"
+              },
+              {
+                "PathOnHost": "/dev/hisi_hdc",
+                "PathInContainer": "/dev/hisi_hdc",
+                "CgroupPermissions": "rwm"
+              }
+            ],
+            "Privileged": false
+          }
+        ]
+      }
+    ],
+    "not_an_instruction_to_stop_any_container": true
+  },
+  "access_snapshot": {
+    "epoch": 1795551966.7938979,
+    "source_proven_seq_read_only_no_Hal_function_or_device_open": true,
+    "proc": "/proc/uda/udevice",
+    "bytes": 1403,
+    "sha256": "1f973be33c9a7689354620c26fbefca9b69ca7fe60e54c62f8ca17b4b5941b80",
+    "actual_udevid4_7_access_records": [
+      {
+        "udevid": 4,
+        "type": "davinci entity near real",
+        "status": "'ready, sia'",
+        "added_udevid": 4,
+        "chip_type": "cloud_v2",
+        "exclusive_holder_ns_id": 4,
+        "shared_holder_ns_ids": null
+      },
+      {
+        "udevid": 5,
+        "type": "davinci entity near real",
+        "status": "'ready, sia'",
+        "added_udevid": 5,
+        "chip_type": "cloud_v2",
+        "exclusive_holder_ns_id": 128,
+        "shared_holder_ns_ids": null
+      },
+      {
+        "udevid": 6,
+        "type": "davinci entity near real",
+        "status": "'ready, sia'",
+        "added_udevid": 6,
+        "chip_type": "cloud_v2",
+        "exclusive_holder_ns_id": null,
+        "shared_holder_ns_ids": null
+      },
+      {
+        "udevid": 7,
+        "type": "davinci entity near real",
+        "status": "'ready, sia'",
+        "added_udevid": 7,
+        "chip_type": "cloud_v2",
+        "exclusive_holder_ns_id": 2,
+        "shared_holder_ns_ids": null
+      }
+    ],
+    "exclusive_ns_absence_meaning": "uda_udev_single_show prints owner only when access.ns!=NULL; shared state printed separately. This is a current snapshot, not an authorization or future reservation.",
+    "no_guest_or_stop_or_share_change": true
+  },
+  "installed_torch_npu": {
+    "own_exited_CID": "7fa782f76ce09261c146c9b03f476526c619d9d4054ff730c05f674ed306514b",
+    "path": "/usr/local/python3.12.13/lib/python3.12/site-packages/torch_npu/npu/__init__.py",
+    "bytes": 25023,
+    "sha256": "355df777433fd8c85670db75d8aacf7fa076332092470d59b6ba26202ed7fd2f",
+    "metadata_only_in_memory_docker_cp": true,
+    "warning_path": [
+      "CDLL(libascend_hal.so):395",
+      "drvGetDevNum:398",
+      "rc != 0:401",
+      "warning+negative-result:402"
+    ],
+    "finding": "HAL library load and real drvGetDevNum call reached; nonzero HAL return, not missing library proved",
+    "exact_HAL_rc": "not captured",
+    "device_count_fallback": "_C._npu_getDeviceCount when HAL count negative",
+    "result_ref": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device4_runtime_diagnostic_run_v2/result/DIAGNOSTIC_RESULT.json",
+      "bytes": 5313,
+      "sha256": "9ff9de8a4384adfc0c1b40d8d987fac3dc1a28fed54be067214393c2de2dd4d1"
+    },
+    "available": false,
+    "device_count": 0
+  },
+  "conclusions": {
+    "physical4": "real existing ns4 holder attributed by driver ns_id+identify+root_tgid/start+cgroupCID+exactinspect; preserve external container",
+    "physical7": "real existing ns2 holder attributed by same exact chain; preserve external container",
+    "physical6": "no exclusive or shared UDA holder in access snapshot; must fresh recheck before action",
+    "physical5": "host ns128/root1 shown as holder; preemptability/actual requesting outcome not proved; no stop or device action authorized from this",
+    "no_numerical_algorithm_failure_proved": true,
+    "no_new_enum_authorized_or_executed": true,
+    "next_case_requires_main_serial_allocation": true
+  },
+  "no_external_workload_mutated": true
+}
