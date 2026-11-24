@@ -386,3 +386,5 @@ For rebuilt libraries, close complete registered Ref identity and genuine new pr
 
 - Device-scope changes require agreement between owner mapping, REQUEST, execution guard, observer and emitted report. Saved source TP ranks differ from physical execution cards. Preserve a mislabelled original result; require a narrowly provenance-bound registered consumer correction before model promotion, without repeating numerical work for a label.
 - Native materialization preview and execution need distinct immutable report paths. Check all anti-overwrite destinations before generating a source tree. If only final report publication fails, preserve exit1 and verify exact file set/FullRefs/no-writers for separate source-completeness recovery; this never creates SOURCE_BOUND or test PASS.
+
+For repeated preparation that is not reaching a real model consumer, read [evidence reuse and concrete next execution](../chicaihong01-host-maintenance/references/20261124-paper-to-card-recovery.md). It covers the verified BOLE state16 and DeltaLog CPU004 boundaries; no historical success grants a current owner or model PASS.
