@@ -1,4 +1,18 @@
-# Current continuation — November24 verified checkpoint
+# Current continuation — November 24
+
+## BOLE on physical NPU 0
+
+The one authorized 160-step component run reached Docker start at 13:57:15 UTC. The producer reported that torch_npu could not retrieve the ascend_hal device count, then exited before its first verify or commit. The independent checker received zero of 1,280 comparisons. Actual visible count and the cause at the driver or namespace level remain unknown. The owner and its exact container have exited. Terminal evidence is in EXECUTION_BOLE_COMPONENT160_E975_TERMINAL_20261124.json.
+
+A separately authorized, single diagnostic may run on freshly idle physical 0 using the same image. BOLE_CARD0_ENUM_DIAGNOSTIC_AUTH_20261124.json fixes 90 seconds plus 30 seconds for cleanup and 1 MiB of output. Record availability and device count independently. Keep the existing workloads on 1, 3 and 4–7 intact. Physical 2 remains available for independently admitted DeltaLog work. Consult the latest execution receipts for the outcome.
+
+## DeltaLog on physical NPU 2
+
+The S5 native capture and bind passed. MAIN verified the S6 source review against 21 references, including 12 programs, and independently reversed the 12 host AST edits to the S5 baseline. S6 source freeze succeeded. The original capture has a terminal result at delta_prepare/native_capture_v6_execution_20261124/RESULT.json with exit code 1. Check its attribution and any later execution receipt before scheduling an owner.
+
+## Earlier checkpoint
+
+### Archived continuation — November24 verified checkpoint
 
 Window: **2026-11-24T07:54:10Z → 2026-11-26T07:54:10Z**, Moscow Nov26 10:54:10. Original start1792828303 and all previous windows are immutable. Read WINDOW_AUTHORIZATION_20261124.json; no automatic extension.
 

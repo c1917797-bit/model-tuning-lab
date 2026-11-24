@@ -55,3 +55,9 @@
 - For a renewed DeltaLog package, resolve the actual caller’s output argument and each active observation writer. Compare any additional ledger-directory member to an original capture and bind receipt before admitting its exact hash. Keep the ordinary CPU and model acceptance branches intact when adding a narrow control-only validation.
 - When an inverse proof stores code strings alongside metadata, parse it on chicaihong01 and construct a new response containing only the permitted counts, booleans, byte lengths, and hashes. Truncating a serialized object after transport can still disclose code.
 - MA control/registration flapping is not an OS task terminal or proof of a credential failure. RGW can stay healthy while the peer disappears. A second peer's same-boot/repo/host-namespace read-only proof permits attribution, not silent write failover or bypass of approval. Keep original handles and verify actual receipts/PID/start/CID before a successor.
+
+## BOLE 单卡设备枚举失败（11 月 24 日）
+
+- 把容器启动、设备枚举、第一次算子调用和独立数值验收分别记账。e975 容器已启动，torch_npu 报告 ascend_hal 无法取得设备数；实际 verify 和 commit 都为零，数值结论记为未测。
+- 当设备可见性断言合并多个条件时，分别留存可用性、设备数、各自的异常和警告。历史 16 步使用相同镜像和设备映射曾进入计算，驱动版本和命名空间归因仍需本次证据。
+- 同镜像的有限设备诊断可以直接检验上述分歧。用确切容器 ID 核实退出，仅在资源与独立授权允许时执行。单次验证授权按实际 guest 启动记账。
