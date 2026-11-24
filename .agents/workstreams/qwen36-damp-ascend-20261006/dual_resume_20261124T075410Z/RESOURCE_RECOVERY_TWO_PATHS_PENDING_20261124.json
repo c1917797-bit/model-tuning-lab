@@ -1,0 +1,62 @@
+{
+  "awaits_new_explicit_user_reply": true,
+  "checked_epoch": 1795559462.0624976,
+  "docker_free_bytes_observed": 3707805696,
+  "expected_reclaim_with_both_bytes": 6527660032,
+  "mandatory_before_any_original_copy_cleanup": [
+    "approval for these exact source/target roots",
+    "recheck all ceilings, mount topology, no active writers and current/historical dependencies",
+    "complete lossless matching hashes, metadata, hard-links and restoration manifest",
+    "verify read-only original paths and real dependent reads; preserve original copies on failure"
+  ],
+  "no_new_copy_mount_delete_or_ownership_change": true,
+  "no_source_RAW_content_returned": true,
+  "previous_two_directory_authorization_inapplicable": true,
+  "projected_Docker_free_bytes_if_other_usage_static": 10235465728,
+  "proposed_aggregate_target_cap_bytes": 6710886400,
+  "rows": [
+    {
+      "cid": "dff9094f4a53c954f6ceac447dd6d075f312c057ca518dc79fbd81fe94d38563",
+      "exact_historical_exit": {
+        "bytes": 30905,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035-numeric16-new48h-MAIN-20261015-001/numeric/cleanup-after-inspect.json",
+        "sha256": "495e0e2adc42a1a8eefe990bdb6f6fe0ef245261e9c259462b61b476ea338c9f"
+      },
+      "exclusive_allocated_file_bytes": 3315466240,
+      "files": 229,
+      "logical_data_bytes": 3314965802,
+      "original_result": {
+        "bytes": 1262,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035-numeric16-new48h-MAIN-20261015-001/RESULT.json",
+        "sha256": "8c04507f23c33e5f76c40895437a48ca9a62133f7ec46596ac9b3a1c08dba9cf"
+      },
+      "source": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge035-numeric16-new48h-MAIN-20261015-001",
+      "target": "/opt/varlib/kubelet/deltalog-cache-recovery-035-base-20261124-v1",
+      "target_device": 64770,
+      "target_fs_free_bytes": 111639834624,
+      "target_minimum_free_bytes": 107374182400
+    },
+    {
+      "cid": "47747d6d0999c745c6bd8b90892a6d0436b96e0cb1b136a77a7b0ce6c88188b4",
+      "exact_historical_exit": {
+        "bytes": 29489,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair3-numeric16-new48h-MAIN-20261015-001/numeric/cleanup-after-inspect.json",
+        "sha256": "7fbe626f69fb9fec723d17d743f761b9ad7b9a7465a80233aff0011e7219b24e"
+      },
+      "exclusive_allocated_file_bytes": 3212193792,
+      "files": 208,
+      "logical_data_bytes": 3211760593,
+      "original_result": {
+        "bytes": 1230,
+        "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair3-numeric16-new48h-MAIN-20261015-001/RESULT.json",
+        "sha256": "3479bd027816eaa481fea9e0bec65e95a49111f57d3a53d0ebc951f541d27010"
+      },
+      "source": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair3-numeric16-new48h-MAIN-20261015-001",
+      "target": "/opt/host/vnf/austinov/deltalog-cache-recovery-024r3-20261124-v1",
+      "target_device": 64774,
+      "target_fs_free_bytes": 48521216000,
+      "target_minimum_free_bytes": 43486543872
+    }
+  ],
+  "schema": "deltalog.scope-limited-archive-option-under-review/v1"
+}

@@ -1,0 +1,115 @@
+{
+  "audit": {
+    "actual_policy": {
+      "(2048, False, 0, 1, 0)": 15525
+    },
+    "counts": {
+      "GSM8K": 1319,
+      "HumanEval": 164,
+      "MMLU": 14042
+    },
+    "full_match": true,
+    "has_duplicate_task_ids": false,
+    "numerical_rows": 15525,
+    "signatures": {
+      "full": "7e4895d75a9246b78b49b645fce464c6520249107a3157e9a31599867af09384",
+      "smoke": "47b3a93c89137181b086930b2b8610230ef1663639b5a759dda0474b22fd75af"
+    },
+    "smoke_counts": {
+      "GSM8K": 2,
+      "HumanEval": 2,
+      "MMLU": 2
+    },
+    "smoke_match": true,
+    "token_policy": {
+      "counts": {
+        "full": {
+          "all": {
+            "GSM8K": 1319,
+            "HumanEval": 164,
+            "MMLU": 14042
+          },
+          "exact_no_think_assistant_prefix": {
+            "GSM8K": 1319,
+            "HumanEval": 164,
+            "MMLU": 14042
+          },
+          "other": {}
+        },
+        "smoke": {
+          "all": {
+            "GSM8K": 2,
+            "HumanEval": 2,
+            "MMLU": 2
+          },
+          "exact_no_think_assistant_prefix": {
+            "GSM8K": 2,
+            "HumanEval": 2,
+            "MMLU": 2
+          },
+          "other": {}
+        }
+      },
+      "template": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+      "template_explicit": true,
+      "tokenizer": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42"
+    }
+  },
+  "generation_input_binding": {
+    "bytes": 13241,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_e2e_successor_readiness_20261025/accuracy_ready_20261025T1756Z/ACTUAL_INPUT_BINDING.json",
+    "sha256": "385d72714a27fec69af45fed696e2136d77d0c499c084f40986d9fba0839c6e9"
+  },
+  "generation_semantics": "greedy; max_tokens=2048, ignore_eos=false, min_tokens absent or 0, n=1; all tokenized prompts end with the current checked template assistant no-thinking prefix",
+  "historical_inputs": [
+    {
+      "arm": "ON",
+      "cohort": "smoke",
+      "input": {
+        "bytes": 10196,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_e2e_successor_readiness_20261025/accuracy_ready_20261025T1756Z/cohort_adapter_v1/smoke_ON/requests.jsonl",
+        "sha256": "28855bf856af729ba6265c1484a212605d4bce0f338523b2bebb8480c242f6de"
+      }
+    },
+    {
+      "arm": "OFF",
+      "cohort": "smoke",
+      "input": {
+        "bytes": 10196,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_e2e_successor_readiness_20261025/accuracy_ready_20261025T1756Z/cohort_adapter_v1/smoke_OFF/requests.jsonl",
+        "sha256": "28855bf856af729ba6265c1484a212605d4bce0f338523b2bebb8480c242f6de"
+      }
+    },
+    {
+      "arm": "ON",
+      "cohort": "full",
+      "input": {
+        "bytes": 59974052,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_e2e_successor_readiness_20261025/accuracy_ready_20261025T1756Z/cohort_adapter_v1/full_ON/requests.jsonl",
+        "sha256": "66d8c4e1045b5224f31daab5fb0ce0040980faa8945e1c38f88d3d4452ebe6ba"
+      }
+    },
+    {
+      "arm": "OFF",
+      "cohort": "full",
+      "input": {
+        "bytes": 59974052,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_e2e_successor_readiness_20261025/accuracy_ready_20261025T1756Z/cohort_adapter_v1/full_OFF/requests.jsonl",
+        "sha256": "66d8c4e1045b5224f31daab5fb0ce0040980faa8945e1c38f88d3d4452ebe6ba"
+      }
+    }
+  ],
+  "materialization_needed": false,
+  "next": "Use the same verified cohorts after numerical, state and paired performance gates. Bind actual current AR/BOLE generation, isolated HumanEval scoring and independent results. These input checks are not scores.",
+  "original_data_equality_ref": {
+    "bytes": 1131,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_e2e_successor_readiness_20261025/accuracy_ready_20261025T1756Z/INDEPENDENT_ORIGINAL_DATA_CHECK.json",
+    "sha256": "3ea13e0fde9339b93ab478e99698f5a617a8afffe6753563ab0d91040aa6b921"
+  },
+  "real_model_scores": null,
+  "schema": "paper-to-ascend.existing-task-input-parity-and-policy/v1",
+  "verified_read_operations": [
+    "exec-0000000000010cb4",
+    "exec-0000000000010ce3"
+  ]
+}

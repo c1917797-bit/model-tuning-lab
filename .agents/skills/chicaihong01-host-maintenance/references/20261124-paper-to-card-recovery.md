@@ -61,3 +61,13 @@
 - 把容器启动、设备枚举、第一次算子调用和独立数值验收分别记账。e975 容器已启动，torch_npu 报告 ascend_hal 无法取得设备数；实际 verify 和 commit 都为零，数值结论记为未测。
 - 当设备可见性断言合并多个条件时，分别留存可用性、设备数、各自的异常和警告。历史 16 步使用相同镜像和设备映射曾进入计算，驱动版本和命名空间归因仍需本次证据。
 - 同镜像的有限设备诊断可以直接检验上述分歧。用确切容器 ID 核实退出，仅在资源与独立授权允许时执行。单次验证授权按实际 guest 启动记账。
+
+## 原生资格发布与设备临界区（11 月 25 日）
+
+- 原生 prepare 已正确生成当前窗口、receipt 和 STREAM 路径时，不重复套用旧包的“五角色修复”。先比较真实字段；仅缺资格 AUTH 时，只发布该字段并保留原 unsigned。复用发布 helper 时同时验证其真实 globals 和当前 producer 的序列化契约：先用主机内小样本实际执行 helper，再以真实输入运行完整入口至首次权威写入前截断。AST 编译或字段形状通过不能替代这条接缝验证。发布与 bind 成功仍不是模型数值或性能 PASS。
+- CPU 释放时的设备快照不能覆盖随后 create/start 的竞态。以真实 create arm 区分设备阶段（可省略的 cpu 布尔不足以判定）；对当前明确授权的物理集合，在设备 create 前和 created/Pid0→start 前分别新鲜读取 UDA。created/Pid0 且没有正面 own-namespace 证据时仍要求该集合全无 holder；未知归属须拒绝，不能因 OWNED 文件存在而放行。保留原 exact-CID 身份、finally 清理和数值门，CPU arm 不增加设备访问；源码绑定及纯 metadata 回归不代表设备或模型已通过。
+
+本轮主机证据：
+
+- [单字段资格发布回执](../../../workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_deviceguard_prepare_v1/native_bind_authorization_publish_v1/PUBLISH_RECEIPT.json)（2619 B，SHA256 `d2f54281c68e0c9c6aaa125d07e11f4e168f475b2eac0363d88880f9ce5dcae5`）；[helper 实际回归](../../../workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_deviceguard_prepare_v1/NATIVE_QUALIFICATION_AUTHORITY_PUBLICATION_HELPER_REGRESSION_V2.json)；V3 原入口实际首写前截断为 MA `exec-000000000001138d`。
+- [双边 UDA 守卫 V2](../../../workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/physical47_device_guard_delta_v2/SOURCE_DELTA_REVIEW_INPUT.json)（8060 B，SHA256 `0c26f9ddd2dab11cee7a10bbcf7b5540b731b539121454be7c9820d47f653dd6`）；[created/Pid0 原清理合同](../../../workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/physical47_device_guard_delta_v2/CREATED_PID0_CLEANUP_CONTRACT.json)。
