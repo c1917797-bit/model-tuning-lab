@@ -1,0 +1,109 @@
+{
+  "AS_limit_bytes": 536870912,
+  "CPU_affinity_count": 1,
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/formal_three_trial_latency_gate_v1/verification/test_integer_targets.py"
+  ],
+  "exit": 0,
+  "no_original_software_suite_or_model_execution": true,
+  "result": {
+    "CPU_NPU_model_executed": false,
+    "checks": [
+      {
+        "name": "exact 9/10 TTFT and TPOT boundary passes every one of three real-row-shaped integer pairs",
+        "passed": true
+      },
+      {
+        "name": "all three original throughput >=11/10 inequalities remain true",
+        "passed": true
+      },
+      {
+        "name": "exact boundary TTFT integer sides equal",
+        "passed": true
+      },
+      {
+        "name": "exact boundary TPOT integer sides equal",
+        "passed": true
+      },
+      {
+        "name": "TTFT +1ns outside 9/10 fails despite sufficient throughput",
+        "passed": true
+      },
+      {
+        "name": "TPOT span +1ns outside 9/10 fails despite sufficient throughput",
+        "passed": true
+      },
+      {
+        "name": "exact 10pct throughput with unchanged TTFT is rejected",
+        "passed": true
+      },
+      {
+        "name": "exact 10pct throughput with only 9pct TPOT reduction is rejected",
+        "passed": true
+      },
+      {
+        "name": "one failing round cannot be replaced by a three-round average",
+        "passed": true
+      },
+      {
+        "name": "one screen only reports metrics and cannot pass formal three trials",
+        "passed": true
+      },
+      {
+        "name": "diagnostic CLI result remains nonformal",
+        "passed": true
+      },
+      {
+        "name": "two rounds rejected",
+        "passed": true
+      },
+      {
+        "name": "four rounds rejected",
+        "passed": true
+      },
+      {
+        "name": "bool is not a timing integer",
+        "passed": true
+      },
+      {
+        "name": "wrong1023 interval denominator rejected",
+        "passed": true
+      },
+      {
+        "name": "timing sum identity mismatch rejected",
+        "passed": true
+      },
+      {
+        "name": "zero baseline TPOT cannot claim a percentage reduction",
+        "passed": true
+      },
+      {
+        "name": "bool cannot substitute real pair ordinal",
+        "passed": true
+      },
+      {
+        "name": "three strict-target passes exit0",
+        "passed": true
+      },
+      {
+        "name": "three strict-target failure exits3 after report",
+        "passed": true
+      },
+      {
+        "name": "pure integer gate contains no float conversion or ratio division",
+        "passed": true
+      },
+      {
+        "name": "software fixtures do not claim original model or performance results",
+        "passed": true
+      }
+    ],
+    "passed": true,
+    "schema": "bole.three-trial-target-integer-boundary-regression/v1",
+    "synthetic_integer_controls_only": true
+  },
+  "stderr": ""
+}

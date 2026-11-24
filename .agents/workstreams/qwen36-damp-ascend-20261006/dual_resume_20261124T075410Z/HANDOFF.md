@@ -68,3 +68,7 @@ MA a6109's registry/control connection repeatedly disappears while RGW stays hea
 Latest device snapshot09:44UTC had physical0/2 idle baseline and external1/3 workloads. This is not current admission or full-window utilization. Continuous30min effective NPU utilization remains unmeasured. No dummy load.
 
 NEXT: approved-budget/fresh-resource BOLE0 state160; Delta2 true current-control+numeric16 closure; source-only successors in parallel. Archive backups remain until all actual gates. No model/performance/task acceptance, no goal completion. App goal API still reports blocked; do not claim unattended active goal state from a document.
+
+### BOLE 验收入口的源码修正
+
+物理 0 卡历史 16 步组件已独立通过 128 项，报告复算可复用原始数据。当前四卡整模型缺独立数值结果。最终三轮判定的源码已加入逐轮 TTFT 与 TPOT 各降低 10% 的整数判据，新角色仍须接入当期原生执行入口。正常 EOS 精度预览已对齐当前 F65 核与二进制；两臂真实上游仍为空。详情见 EXECUTION_CURRENT_QUALIFICATION_AND_FINAL_ACCEPTANCE_SOURCE_ONLY_20261124.json。
