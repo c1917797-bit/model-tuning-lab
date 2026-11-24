@@ -1,0 +1,162 @@
+{
+  "at_epoch": 1795562209.9674726,
+  "authorization": "pending; no archive, mounts or cleanup performed",
+  "combined_max_new_archive_bytes": 9126805504,
+  "conditions_before_cleanup": [
+    "new explicit authorization",
+    "freeze exact selected sources and prior two proposals only",
+    "confirm fully funded at current shared-filesystem usage",
+    "read back all bytes, metadata, full hashes and restoration manifests",
+    "no active writer or live experiment dependency; exact original job terminal",
+    "original paths mounted read-only and real affected consumers compatible",
+    "both independent disk floors retained"
+  ],
+  "deficit_if_docker_free_drops_to_zero": 178966528,
+  "docker_free_observed": 481345536,
+  "other_data_or_services_modified": false,
+  "prior_proposal": {
+    "bytes": 3196,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/RESOURCE_RECOVERY_TWO_PATHS_PENDING_20261124.json",
+    "sha256": "d128cd189b214cbf80c257ed0e7081ffb8589272f2f8359cbbff2748da9be153"
+  },
+  "projected_conditional_reclaim_bytes": 8947838976,
+  "projected_docker_free": 9429184512,
+  "schema": "model-tuning-lab.proposed-archive-option-prior-plus-sixteen-RAW-files/v1",
+  "source_only_dependency_findings": {
+    "all_transitive_consumers_verified": false,
+    "old_v4_source_manifest": "220302B/9ddb37c52fe69815d3131e160a4f714c3930db16095d71e3087b600583b4bace",
+    "original_024r2_program": "consume.py checks original absolute path, real nonsymlink, length and SHA; no direct raw device/inode rule identified",
+    "other_R5_inode_checks": "apply to different 088repair5 trees",
+    "writer_release_requires_fresh_recheck": true
+  },
+  "targets": [
+    {
+      "disk_floor": 107374182400,
+      "new_root": "/opt/varlib/kubelet/deltalog-cache-recovery-024r2-mixed16-000-004-20261124-v1",
+      "new_root_exists": false,
+      "projected_headroom_above_floor_excluding_manifest": 193880064,
+      "sources": [
+        {
+          "allocated": 151261184,
+          "bytes": 151258211,
+          "dev": 2056,
+          "inode": 99645681,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair2-numeric16-new48h-MAIN-20261015-001/numeric/result/mixed-B16-000.pt"
+        },
+        {
+          "allocated": 151261184,
+          "bytes": 151258211,
+          "dev": 2056,
+          "inode": 99645683,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair2-numeric16-new48h-MAIN-20261015-001/numeric/result/mixed-B16-001.pt"
+        },
+        {
+          "allocated": 151261184,
+          "bytes": 151258211,
+          "dev": 2056,
+          "inode": 99645684,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair2-numeric16-new48h-MAIN-20261015-001/numeric/result/mixed-B16-002.pt"
+        },
+        {
+          "allocated": 151261184,
+          "bytes": 151258211,
+          "dev": 2056,
+          "inode": 99645685,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair2-numeric16-new48h-MAIN-20261015-001/numeric/result/mixed-B16-003.pt"
+        },
+        {
+          "allocated": 151261184,
+          "bytes": 151258211,
+          "dev": 2056,
+          "inode": 99645686,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair2-numeric16-new48h-MAIN-20261015-001/numeric/result/mixed-B16-004.pt"
+        }
+      ]
+    },
+    {
+      "disk_floor": 43486543872,
+      "new_root": "/opt/host/vnf/austinov/deltalog-cache-recovery-024r2-mixed16-005-015-20261124-v1",
+      "new_root_exists": false,
+      "projected_headroom_above_floor_excluding_manifest": 136695808,
+      "sources": [
+        {
+          "allocated": 151261184,
+          "bytes": 151258211,
+          "dev": 2056,
+          "inode": 99645687,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair2-numeric16-new48h-MAIN-20261015-001/numeric/result/mixed-B16-005.pt"
+        },
+        {
+          "allocated": 151261184,
+          "bytes": 151258211,
+          "dev": 2056,
+          "inode": 99645691,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair2-numeric16-new48h-MAIN-20261015-001/numeric/result/mixed-B16-006.pt"
+        },
+        {
+          "allocated": 151261184,
+          "bytes": 151258211,
+          "dev": 2056,
+          "inode": 99645692,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair2-numeric16-new48h-MAIN-20261015-001/numeric/result/mixed-B16-007.pt"
+        },
+        {
+          "allocated": 151261184,
+          "bytes": 151258211,
+          "dev": 2056,
+          "inode": 99645693,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair2-numeric16-new48h-MAIN-20261015-001/numeric/result/mixed-B16-008.pt"
+        },
+        {
+          "allocated": 151261184,
+          "bytes": 151258211,
+          "dev": 2056,
+          "inode": 99645694,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair2-numeric16-new48h-MAIN-20261015-001/numeric/result/mixed-B16-009.pt"
+        },
+        {
+          "allocated": 151261184,
+          "bytes": 151258211,
+          "dev": 2056,
+          "inode": 99645695,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair2-numeric16-new48h-MAIN-20261015-001/numeric/result/mixed-B16-010.pt"
+        },
+        {
+          "allocated": 151261184,
+          "bytes": 151258211,
+          "dev": 2056,
+          "inode": 99645696,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair2-numeric16-new48h-MAIN-20261015-001/numeric/result/mixed-B16-011.pt"
+        },
+        {
+          "allocated": 151261184,
+          "bytes": 151258211,
+          "dev": 2056,
+          "inode": 99645699,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair2-numeric16-new48h-MAIN-20261015-001/numeric/result/mixed-B16-012.pt"
+        },
+        {
+          "allocated": 151261184,
+          "bytes": 151258211,
+          "dev": 2056,
+          "inode": 99645701,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair2-numeric16-new48h-MAIN-20261015-001/numeric/result/mixed-B16-013.pt"
+        },
+        {
+          "allocated": 151261184,
+          "bytes": 151258211,
+          "dev": 2056,
+          "inode": 99645702,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair2-numeric16-new48h-MAIN-20261015-001/numeric/result/mixed-B16-014.pt"
+        },
+        {
+          "allocated": 151261184,
+          "bytes": 151258211,
+          "dev": 2056,
+          "inode": 99645703,
+          "path": "/cache/cch/qwen36-paper-preparation-20261007/lowbit/run-dlbridge024repair2-numeric16-new48h-MAIN-20261015-001/numeric/result/mixed-B16-015.pt"
+        }
+      ]
+    }
+  ]
+}

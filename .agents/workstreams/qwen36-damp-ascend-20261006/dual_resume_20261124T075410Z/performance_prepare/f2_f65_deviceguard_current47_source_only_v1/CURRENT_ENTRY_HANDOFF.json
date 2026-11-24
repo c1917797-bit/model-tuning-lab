@@ -1,0 +1,218 @@
+{
+  "COMMANDS_generated": false,
+  "CPU_NPU_or_preview_executed": false,
+  "READY": false,
+  "SOURCE_BOUND": false,
+  "SOURCE_ONLY": true,
+  "actual_current_short8_source_ref": {
+    "bytes": 2119284,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_deviceguard_prepare_v1/source-short8/SOURCE_BOUND.json",
+    "sha256": "c4010038b48b2de99c26b19153414f8e3b5d2b71a1b838c2d2d6b126cf683459"
+  },
+  "common_protocol_from_actual_parent": {
+    "common": {
+      "HF32": false,
+      "async_scheduling": false,
+      "eager": true,
+      "mamba_cache_mode": "none",
+      "prefix_cache": false,
+      "profiling": false
+    },
+    "paired_common_environment": {
+      "HCCL_DETERMINISTIC": "true"
+    },
+    "same_F65_wrapper_current_candidate_ref": {
+      "bytes": 6419,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_deviceguard_prepare_v1/source-short8/core112.py",
+      "sha256": "bc984bc0b60eb196d297ce4fd82be1f1771e9922889a0dca076af21bae1c6b45"
+    },
+    "same_observer_refs_both_arms": {
+      "cpu_precreate_policy.py": {
+        "bytes": 5588,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_deviceguard_prepare_v1/source-short8/cpu_precreate_policy.py",
+        "sha256": "83ce6ca7a1f0320781dfdbfbac2b7719e2f9994f49b0f72c1fcc4c1c3e741ab0"
+      },
+      "observer_race_repair.py": {
+        "bytes": 23402,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_deviceguard_prepare_v1/source-short8/observer_race_repair.py",
+        "sha256": "9454cf119ad6ba70c7d1ccc175d120ad3f5e04fedb15939ef31f81715ea1e61e"
+      }
+    },
+    "source_files_parent": {
+      "bytes": 2119284,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_deviceguard_prepare_v1/source-short8/SOURCE_BOUND.json",
+      "sha256": "c4010038b48b2de99c26b19153414f8e3b5d2b71a1b838c2d2d6b126cf683459"
+    },
+    "workload_ref": {
+      "bytes": 2042,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/bole_hypic32k_input_prepare_v1/WORKLOAD_V2.json",
+      "sha256": "2d03e1d9b4357b98f403c1f61424bb1253c4c171d5e260bbbcd6e19066df0efd"
+    }
+  },
+  "fixed_measurement_protocol": {
+    "arms": [
+      "native_AR_dense",
+      "F65_BOLE_candidate"
+    ],
+    "cleanup_seconds_per_arm": 180,
+    "concurrency": 1,
+    "formal_acceptance": false,
+    "input_tokens": 32768,
+    "measured_requests": 1,
+    "output_tokens": 1024,
+    "phase_seconds_per_arm": 10800,
+    "profiling": false,
+    "warmup_requests": 1
+  },
+  "four_parent_pin_data_updates_and_window_only": {
+    "COMPOSER_VIEW_PAYLOAD_PENDING.py": [
+      {
+        "assignment": "_C68_CONFIG",
+        "data_only": true,
+        "line": 494,
+        "new_value_sha256": "5c4fa3382588cf1330797781d1fd8fa89a7d2c35d428c94d543809a77d9c58b1",
+        "old_value_sha256": "cf2d2cfc93509bf4ededa9bb1fcd286bc2fdaf7dd2cf7e6cf983271a795e5dd7",
+        "strict_byte_inverse": true
+      }
+    ],
+    "diagnostic_runtime.py": [
+      {
+        "assignment": "CUTOFF",
+        "data_only": true,
+        "line": 4,
+        "new_value_sha256": "524ee077f6c1c105830486f76e505942ef25e3ab5f4d01133a8d6d6459aa21b3",
+        "old_value_sha256": "9443c67648bc41204e619e8eb23facb1bdc898aed86dc804cb697befdf60009f",
+        "strict_byte_inverse": true
+      }
+    ],
+    "materialize_diagnostic_v16_PENDING.py": [
+      {
+        "assignment": "_CP_EXPECTED_SOURCE",
+        "data_only": true,
+        "line": 180,
+        "new_value_sha256": "dd536da5e2e76b609e69e15aff99c4eeb4a8585c28c71eb67a0fdb9516043ff5",
+        "old_value_sha256": "c9011b99d4866638dddd0e0eac47124a04110e468fcd36ce4726d504faa27c18",
+        "strict_byte_inverse": true
+      },
+      {
+        "assignment": "CUTOFF",
+        "data_only": true,
+        "line": 9,
+        "new_value_sha256": "524ee077f6c1c105830486f76e505942ef25e3ab5f4d01133a8d6d6459aa21b3",
+        "old_value_sha256": "9443c67648bc41204e619e8eb23facb1bdc898aed86dc804cb697befdf60009f",
+        "strict_byte_inverse": true
+      }
+    ],
+    "performance_delta.py": [
+      {
+        "assignment": "PARENT",
+        "data_only": true,
+        "line": 117,
+        "new_value_sha256": "dd536da5e2e76b609e69e15aff99c4eeb4a8585c28c71eb67a0fdb9516043ff5",
+        "old_value_sha256": "c9011b99d4866638dddd0e0eac47124a04110e468fcd36ce4726d504faa27c18",
+        "strict_byte_inverse": true
+      }
+    ],
+    "seal_actual_short8.py": [
+      {
+        "assignment": "EXPECTED_SOURCE",
+        "data_only": true,
+        "line": 4,
+        "new_value_sha256": "dd536da5e2e76b609e69e15aff99c4eeb4a8585c28c71eb67a0fdb9516043ff5",
+        "old_value_sha256": "c9011b99d4866638dddd0e0eac47124a04110e468fcd36ce4726d504faa27c18",
+        "strict_byte_inverse": true
+      }
+    ]
+  },
+  "must_remain_blocked_until": [
+    "actual short8 exact owned host RESULT completed/cleaned and actual original independent FASTPATH_NUMERIC_SCOPE_RESULT short8_numeric_scope_passed",
+    "seal reopens current actual source/host/scope using unchanged short8_prerequisite original consume, never synthetic or one-frame proof",
+    "if worker-identity successor changes source_ref, perform same exact four-pin data retarget to that truly qualified final source before seal; current99cd must not falsely match a future source",
+    "source preview of complete existing original composer; earlier pure fixture failures are not completion",
+    "actual independent MAIN source review and original bind generate unique current dense/candidate COMMANDS with same stack/input/flags",
+    "fresh native resource admission incl legacy40.5GiB opt gate, Docker reserve and true TP4 exclusive UDA/process lease; no disk quota increased"
+  ],
+  "new_quota_or_deadline_extension": false,
+  "not_claimed": [
+    "current F2 full composition preview",
+    "current F2 original-budget validation",
+    "global 21960-second pair hard-gate proof",
+    "new CPU software PASS",
+    "numeric/model/performance/accuracy PASS"
+  ],
+  "old_AR_is_recipe_only_not_current_measurement": true,
+  "old_AR_recipe_commands_ref": {
+    "bytes": 3562,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261028T192856Z/torch_bole_e2e_diagnostic_prepare_v1/b28torchb/b28torchb-native_ar/source-native_ar/COMMANDS.json",
+    "sha256": "2e24b9d4e095161a3b32237db9b0ea65769cfa039b92742ec57ee27f6c3fb625"
+  },
+  "original_native_bind_after_real_preview_and_MAIN_review": [
+    "python3",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_deviceguard_current47_source_only_v1/materialize_diagnostic_v16_READY.py",
+    "<ACTUAL_APPROVED_BIND_INPUT_JSON>",
+    "--name",
+    "b1124f65b",
+    "--bind"
+  ],
+  "original_native_preview_after_seal": [
+    "python3",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_deviceguard_current47_source_only_v1/materialize_diagnostic_v16_READY.py",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_deviceguard_current47_source_only_v1/BIND_INPUT_READY.json",
+    "--name",
+    "b1124f65p"
+  ],
+  "original_prerequisite_consumer_unchanged": true,
+  "original_seal_command_after_real_inputs": [
+    "python3",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_deviceguard_current47_source_only_v1/seal_actual_short8.py",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_deviceguard_current47_source_only_v1/BIND_INPUT_PENDING.json"
+  ],
+  "original_source_body_reused": true,
+  "original_source_refs": {
+    "COMPOSER_VIEW_PAYLOAD_PENDING.py": {
+      "bytes": 204437,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261028T192856Z/cann_matrix192_performance_successor_prepare_v2/COMPOSER_VIEW_PAYLOAD_PENDING.py",
+      "sha256": "42481ade49195b5e7cfdc5d9f9f9c6b7d681bbdeb9840cc44990543becc4ac06"
+    },
+    "F2_final_contract": {
+      "bytes": 5974,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261028T192856Z/cann_matrix192_performance_successor_prepare_v2/FINAL_DIAGNOSTIC_COMPOSITION_PENDING_CONTRACT_20261029T1646Z.json",
+      "sha256": "113d7b3ee627045f2b1331936117f8b8485af0d8028cf0e102ce1f893c2df046"
+    },
+    "diagnostic_runtime.py": {
+      "bytes": 6867,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261028T192856Z/cann_matrix192_performance_successor_prepare_v2/diagnostic_runtime.py",
+      "sha256": "dd688d42c1af7f2c3e602567543cc7c7eab6dd975e90d683e2b7f44cc35960ff"
+    },
+    "materialize_diagnostic_v16_PENDING.py": {
+      "bytes": 221191,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261028T192856Z/cann_matrix192_performance_successor_prepare_v2/materialize_diagnostic_v16_PENDING.py",
+      "sha256": "a6882f9fc7a4475729ff303ec31a929a8a49383a13e7e0071554cf1e2aecc5d0"
+    },
+    "performance_delta.py": {
+      "bytes": 10562,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261028T192856Z/cann_matrix192_performance_successor_prepare_v2/performance_delta.py",
+      "sha256": "fe20aac72fffc2c629d12a794624fa0ce4c719214dfb959bf81549cf649bb45b"
+    },
+    "seal_actual_short8.py": {
+      "bytes": 5094,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261028T192856Z/cann_matrix192_performance_successor_prepare_v2/seal_actual_short8.py",
+      "sha256": "eb29cb88d54525b9d97a3363bf0169fce954b0de39c9c99aeaf9f68faf6c5d7f"
+    },
+    "short8_prerequisite.py": {
+      "bytes": 3856,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261028T192856Z/cann_matrix192_performance_successor_prepare_v2/short8_prerequisite.py",
+      "sha256": "df6ec2cf3fdc12f02725985830add7d791feb73fc156ae945dc3b8b476969fde"
+    }
+  },
+  "schema": "bole.current-f65-4-7-F2-original-entry-source-retarget/v1",
+  "source_bound_model_short8_is_not_fixed1024_performance": true,
+  "true_remaining_inputs": {
+    "MAIN_review_ref": null,
+    "short8_host": null,
+    "short8_scope": null
+  }
+}

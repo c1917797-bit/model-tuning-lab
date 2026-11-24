@@ -1,0 +1,55 @@
+{
+  "CPU_NPU_container_executed": false,
+  "READY": false,
+  "actual_cleanup_seconds_input": 180,
+  "actual_original_targeted_functions_executed": false,
+  "actual_phase_seconds_input": 10800,
+  "composer_ref": {
+    "bytes": 204193,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_deviceguard_current47_source_only_v1/COMPOSER_VIEW_PAYLOAD_PENDING.py",
+    "sha256": "9d1d91c81dada166348c86ce456fed67edc0de65e2993c98203afd73e7fde2e3"
+  },
+  "error_type": "NameError",
+  "frames": [
+    {
+      "file": "<string>",
+      "function": "<module>",
+      "line": 31
+    },
+    {
+      "file": "<string>",
+      "function": "load",
+      "line": 25
+    },
+    {
+      "file": "<frozen importlib._bootstrap_external>",
+      "function": "exec_module",
+      "line": 850
+    },
+    {
+      "file": "<frozen importlib._bootstrap>",
+      "function": "_call_with_frames_removed",
+      "line": 228
+    },
+    {
+      "file": "COMPOSER_VIEW_PAYLOAD_PENDING.py",
+      "function": "<module>",
+      "line": 4
+    }
+  ],
+  "full_composer_preview_executed": false,
+  "host_scope_MAIN_refs_null": true,
+  "parent_source_ref": {
+    "bytes": 2119284,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_deviceguard_prepare_v1/source-short8/SOURCE_BOUND.json",
+    "sha256": "c4010038b48b2de99c26b19153414f8e3b5d2b71a1b838c2d2d6b126cf683459"
+  },
+  "performance_delta_ref": {
+    "bytes": 10538,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_deviceguard_current47_source_only_v1/performance_delta.py",
+    "sha256": "ab3d68597183afd254375a7a9e75eae256bd55265c5d8e384e22dc07774252f3"
+  },
+  "reason": "name 'Path' is not defined",
+  "schema": "bole.F2-registered-phase-controller-source-seam-readonly/v1",
+  "source_modified": false
+}
