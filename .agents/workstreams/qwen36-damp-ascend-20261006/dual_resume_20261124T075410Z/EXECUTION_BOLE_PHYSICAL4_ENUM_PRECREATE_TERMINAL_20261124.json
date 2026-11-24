@@ -1,0 +1,35 @@
+{
+  "CID": null,
+  "cumulative_cap_bytes": 1048576,
+  "cumulative_retained_bytes": 66134,
+  "docker_available_at_outer_dispatch_bytes": 7510102016,
+  "external_workload_seen_during_wait": "crc_operator_agent",
+  "failure": "Docker free-space floor at owner fresh check; no device enumeration or numerical run",
+  "formal_performance": false,
+  "further_dispatch": "only after actual disk recovery and fresh admission; reuse historical numerical evidence; no new disk allowance",
+  "guest_starts_across_diagnostic": 0,
+  "original_admission_attempt": "exec-000000000000fbcb",
+  "original_wait_and_owner_operation": "exec-000000000000fbf3",
+  "owner_PID_start_released": true,
+  "owner_docker_floor_bytes": 8589934592,
+  "owner_start_ref": {
+    "bytes": 1097,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device4_runtime_diagnostic_owner_run_v1/STARTED.json",
+    "sha256": "83447a9b25c5f0b26ac627ae83acbf164e8ef602ac190643dff07356da08d151"
+  },
+  "peer": "chicaihong01/ma",
+  "physical4_retained_bytes": 8882,
+  "prior_retained_bytes": 57252,
+  "scope_ref": {
+    "bytes": 2008,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/DEVICE_SCOPE_AMENDMENT_PHYSICAL4_7_20261124.json",
+    "sha256": "7d757b431d8b28f740809e7c98fa784e7ee96f735826bdb541e47514d30e00d2"
+  },
+  "stage": "BOLE same-image physical4 enumeration; owner terminated before Docker create",
+  "task_accuracy": false,
+  "terminal_ref": {
+    "bytes": 1480,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device4_runtime_diagnostic_owner_run_v1/OWNER_RESULT.json",
+    "sha256": "25a317fe569666f13a53e34862c1fd95f461ad4d031d95c3715311e1414b967b"
+  }
+}

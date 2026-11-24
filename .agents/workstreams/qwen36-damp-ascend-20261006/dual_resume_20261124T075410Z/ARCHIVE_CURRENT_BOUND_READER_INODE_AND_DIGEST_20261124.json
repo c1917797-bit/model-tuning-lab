@@ -1,0 +1,85 @@
+{
+  "R5_review": {
+    "bytes": 2754,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/sealer_control_prepare_v1/MAIN_R5_HISTORY_BOOT_DEVICE_RECONCILIATION_REVIEW_20261124.json",
+    "sha256": "ae6e1cf48a6380b4cf576f1da10dab016d921aa3aebd434a38718fc240c71dc1"
+  },
+  "candidate_alias_hits": [],
+  "exact_archive_file_inodes": 484,
+  "global_mapping_or_delete_authorized_by_this_observation": false,
+  "remaining": "Dynamic untyped/transitive references and current reader stat/member behavior still require final review before system-wide mapping and deletion.",
+  "scope": "Typed inputs for current Delta native/CPU and BOLE model/failed-frame; compare exact archive inode, content digest and physical host path. R5 strict historical roots checked separately.",
+  "seeds": {
+    "bole_firstfault": {
+      "counts": {
+        "host_visible": 20,
+        "typed_refs": 20
+      },
+      "seed": {
+        "bytes": 8491,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/saved_gdn_f65_single_case_physical4_prepare_v3/REQUEST_TEMPLATE.json",
+        "sha256": "87008bf438a596a381b60ba37c75da9fb7094e331fc356234320a41c36a44b9f"
+      }
+    },
+    "bole_firstfault_readset": {
+      "counts": {
+        "host_visible": 51,
+        "typed_refs": 51
+      },
+      "seed": {
+        "bytes": 17617,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/saved_gdn_f65_single_case_physical4_prepare_v3/STATIC_EXECUTION_READSET.json",
+        "sha256": "c7c2bf975bf21030589316464f86510f79cbda76374c892bb5cc600bf86543d1"
+      }
+    },
+    "bole_model": {
+      "counts": {
+        "host_visible": 6706,
+        "not_visible_on_host": 78,
+        "typed_refs": 6784
+      },
+      "seed": {
+        "bytes": 2101066,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_v1/source-short8/SOURCE_BOUND.json",
+        "sha256": "165a5e8563bf9456e2179d5db15049b49956278bb2df1b15b452893f74b9b0f5"
+      }
+    },
+    "delta_current_native": {
+      "counts": {
+        "host_visible": 442,
+        "typed_refs": 442
+      },
+      "seed": {
+        "bytes": 219963,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/native_current_source_card6_v2/SOURCE_MANIFEST.json",
+        "sha256": "15b821be14b2ccd434c2e22439a34737b2b5f953c2b6cf9d205c8d9b2790353a"
+      }
+    },
+    "delta_native_capture": {
+      "counts": {
+        "host_visible": 9,
+        "typed_refs": 9
+      },
+      "seed": {
+        "bytes": 6435,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/native_capture_card6_v2_execution_20261124/INPUT.json",
+        "sha256": "cb21fec8edc7cafd5ec1c7dd77b966b230f5af32d90fd5dd6f46cbbc827fa538"
+      }
+    },
+    "delta_real_cpu_request": {
+      "counts": {
+        "host_visible": 16,
+        "typed_refs": 16
+      },
+      "seed": {
+        "bytes": 7092,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/dispatch_current_control_card6_v2_001/CONTROL_REQUEST_INPUT.json",
+        "sha256": "a3f3487c088adb6bf98bbb147a68f7df43b7fbcbfa4cac1fa798ee15f4bc35fd"
+      }
+    }
+  },
+  "strict_R5_historical_tree_roots_disjoint": [
+    "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-cpu-MAIN-20261016-NEW24H-088-repair5-001",
+    "/opt/varlib/kubelet/mst-deltalog-new24h-20261016-061/run-numeric16-MAIN-20261016-NEW24H-088-repair5-001"
+  ]
+}

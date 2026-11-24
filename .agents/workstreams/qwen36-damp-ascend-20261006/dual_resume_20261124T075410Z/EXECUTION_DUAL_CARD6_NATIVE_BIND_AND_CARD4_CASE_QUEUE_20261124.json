@@ -1,0 +1,96 @@
+{
+  "BOLE": {
+    "case_runtime_meta": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_saved_gdn_f65_single_case_owner_run_v3",
+    "case_runtime_output": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_saved_gdn_f65_single_case_run_v3",
+    "enumeration_precreate_terminal": {
+      "bytes": 1874,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/EXECUTION_BOLE_PHYSICAL4_ENUM_PRECREATE_TERMINAL_20261124.json",
+      "sha256": "046cfcdbf97a543f8641f92c0d71fd5db16d8e986119acffb713d11c8df7fa71"
+    },
+    "last_confirmed_operation_state": "running",
+    "native_case_wait_operation": "exec-000000000000fea0",
+    "next": "follow original fea0; capacity and physical4 are rechecked before issuing an actual admission. Waiting is not NPU execution.",
+    "original_resource_gates": {
+      "actual_DockerRootDir_available_min_bytes": 8589934592,
+      "cleanup_seconds": 60,
+      "guest_cpus": 1,
+      "guest_memory_GiB": 4,
+      "max_output_bytes": 20971520,
+      "normal_MemAvailable_min_bytes": 13421772800,
+      "output_filesystem_available_min_bytes": 1094713344,
+      "phase_seconds": 300
+    },
+    "peer": "chicaihong01/ma",
+    "physical_candidate": 4,
+    "review_case_only_as_terminal_receipt_becomes_available": true,
+    "single_failed_frame_preparation": {
+      "bytes": 9773,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/saved_gdn_f65_single_case_physical4_prepare_v3/FINAL_DELIVERY_INDEX.json",
+      "sha256": "089d419441206fe6c04cc24dcebf67f7b5a4767bad1512b3618973a06f9d5a30"
+    }
+  },
+  "DeltaLog": {
+    "CPU005_root_absent": true,
+    "CPU_control_operation": "exec-000000000000fe3c",
+    "CPU_control_request": {
+      "bytes": 7092,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/dispatch_current_control_card6_v2_001/CONTROL_REQUEST_INPUT.json",
+      "sha256": "a3f3487c088adb6bf98bbb147a68f7df43b7fbcbfa4cac1fa798ee15f4bc35fd"
+    },
+    "bind_terminal": {
+      "bytes": 1399,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/native_bind_card6_v2_execution_20261124/RESULT.json",
+      "sha256": "361ac662d031584d6293c85f727bcb41fd9354aafee23b1075aadcfd2d819ca8"
+    },
+    "capture_terminal": {
+      "bytes": 1884,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/native_capture_card6_v2_execution_20261124/RESULT.json",
+      "sha256": "c11fbacdde4b992d2ce9f0992572a6424a0eea1b24d58fd26357d81f31095d82"
+    },
+    "exit": 1,
+    "host_owner_released": true,
+    "manifest": {
+      "bytes": 219963,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/native_current_source_card6_v2/SOURCE_MANIFEST.json",
+      "sha256": "15b821be14b2ccd434c2e22439a34737b2b5f953c2b6cf9d205c8d9b2790353a"
+    },
+    "needed_CPU003_original_bytes": 6271,
+    "needed_CPU003_original_sha256": "c0b039ab6e295ade27b09478ef0a5b137fdf5b440ea7724593b4558da25874a0",
+    "next": "validate entire active readset with exact historic CPU003 reference and reject missing/CPU004 substitution, preserve failed manifest and bind new source as required",
+    "numerical_run_started": false,
+    "observation": "Trace captured through host.target_closure to storage_bridge088r6.readset line 36; stored operation stderr truncated before exception tail. Independent actual manifest lookup confirms mandatory CPU003_ROOT_BASELINE.json key absent. CPU004 baseline is a different object.",
+    "original_host_PID": 1582260,
+    "peer": "chicaihong01/ma",
+    "physical_candidate": 6,
+    "real_bind_operation": "exec-000000000000fdcd",
+    "real_capture_operation": "exec-000000000000fd7f",
+    "start_ticks": 39274564
+  },
+  "authorized_archive": {
+    "current_reader_check": {
+      "bytes": 3944,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/ARCHIVE_CURRENT_BOUND_READER_INODE_AND_DIGEST_20261124.json",
+      "sha256": "c184c87ae7c9acc22210a3f0ef6b7c460cf550558b221947baedda0683d67ec2"
+    },
+    "estimated_freeable_bytes_from_exact_484_files": 6631931904,
+    "external_hardlink_blocks_bytes": 0,
+    "observed_freeable_not_yet_reclaimed": true,
+    "remaining": "Current transitive/stat/directory reader predicate coverage and formal pre-move/cleanup checks. Preserve both original directories."
+  },
+  "external_jobs_preserved": true,
+  "formal_performance": false,
+  "formal_task_accuracy": false,
+  "observed_30min_NPU_utilization": "unmeasured",
+  "physical_scope_ref": {
+    "bytes": 2008,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/DEVICE_SCOPE_AMENDMENT_PHYSICAL4_7_20261124.json",
+    "sha256": "7d757b431d8b28f740809e7c98fa784e7ee96f735826bdb541e47514d30e00d2"
+  },
+  "schema": "deltalog-bole.dual-real-phase-handoff/v1",
+  "whole_model_numerical_pass": false,
+  "window_ref": {
+    "bytes": 1824,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/WINDOW_AUTHORIZATION_20261124.json",
+    "sha256": "1fdec2f6e59b57afe99662cb4b546cf66ec42fa7c5f3a2659c784ca2a1bbe66f"
+  }
+}
