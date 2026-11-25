@@ -1,10 +1,10 @@
 # Qwen3.5 v0.23 runtime lessons
 
 Read this reference when maintaining Qwen3.x BF16 serving work that uses the
-official vLLM-Ascend v0.23 runtime family. The evidence was distilled from the
-`work/qwen35-performance-delivery` records through the 2026-09-22 delivery
-campaign. It is a closed-route and decision guide, not a live resource snapshot
-or a claim that the final Qwen3.5 performance objective has passed.
+official vLLM-Ascend v0.23 runtime family. The September delivery campaign and
+the November 25 projection and host recovery checks provide evidence for
+candidate admission, diagnosis, and reuse. Read live resource state and final
+acceptance from the active workstream.
 
 ## What worked
 
@@ -181,8 +181,11 @@ or a claim that the final Qwen3.5 performance objective has passed.
   provenance and license still need recording.
 - Do not start another device piercing run because a named operator looks fast.
   First use existing profiles and source to prove a non-overlapping complete
-  critical-path budget. The conservative budget must be at least twice the
-  remaining TPOT gap; otherwise reject it offline.
+  critical-path budget. Use the latest maintainer-approved screening rule.
+  For this campaign, require coverage of the formal gap plus a documented
+  measurement margin. The September two-times floor and its recorded
+  rejections are historical. The final performance and quality gates still
+  apply to the exact delivery.
 - A full-block profile analyzer must prove the ordered causal path, not merely
   pair a projection with a later recurrent or MMAR anchor. For GDN this means
   checking projection, causal convolution, gating, both L2-normalizations,
@@ -241,3 +244,62 @@ or a claim that the final Qwen3.5 performance objective has passed.
 Do not rerun a closed candidate unchanged. A retry needs a concrete changed
 premise such as a new supported kernel release, repaired ABI, different
 critical-path budget, or corrected evidence identity.
+
+## November 25 reference capture and rejection
+
+- Reuse a sealed official reference before spending more card time. On
+  physical NPU0 the official BF16 projection captured repeatable outputs for
+  four checkpoint TP shards at M=1. Each shard used learned weights and
+  synthetic hidden input. Preserve the official post-load and callable
+  identity, measured ND/NZ layout, exact input hash, scope and output hashes.
+  Slice each logical Q/K/V/Z segment for its TP rank before joining the
+  local shard. Sequential replay of four checkpoint ranks qualifies those
+  component outputs. Live TP4/HCCL and whole-model acceptance require
+  separate evidence.
+- Reject the exact binary at the first confirmed numerical failure. The
+  native rank0 replay at M=1 differed in 2 of 4,096 QKVZ BF16 values and 0
+  of 24 BA values. Its arrival and protocol record counts were clean and
+  the owned container and its PIDs were released. Keep that receipt and
+  skip the remaining ranks for the unchanged binary. Compilation, clean
+  protocol counters and static analysis cannot override the numerical gate.
+  If a wider admitted design still needs the projection, localize the
+  first arithmetic difference using the same reference. Keep the accepted
+  tolerance and evidence scope fixed.
+- Reuse the host's CANNBot and CANN tools before building another harness.
+  Locate the actual `cannbot-skills` checkout and confirm its revision and
+  target support. Use `ops-spec-gen` for the contract, the direct workflow
+  for a focused kernel, and an existing 910B-compatible registration
+  template when the operator needs registration. `ops-transformer` OpGen
+  creates the project scaffold. The confirmed November actions were the
+  OpGen CLI help and the CANNBot `ascendc-sync-audit` script against the
+  sealed R2 source included by the failed binary. Its two informational
+  `SYNC-12` entries did not resolve the mismatch. Record generated
+  artifacts, compilation and device validation only when each actually
+  occurs. An available agent image or documented workflow is capability
+  inventory.
+- Require the whole measured hotspot before generation. At the historical
+  c1 TPOT of 28.909 ms/token, the 8% target costs about 2.31 ms/token.
+  Removing BA alone had an optimistic ceiling of about 0.60 ms/token on
+  the corresponding profile. Close that isolated route before generating
+  or timing another kernel. Pin the full attributable boundary and separate
+  the upstream baseline from the local increment.
+- For an actual Prefill graph monkeypatch, snapshot graph counters after
+  warmup in both paired roles. Require replay of existing entries in the
+  measured client window on all four workers and inspect capture and
+  fallback separately. A c1 screen can qualify a TTFT component only.
+  A single-token natural EOS counts toward completed requests and TTFT,
+  with no TPOT interval. Preserve that request and mark incomplete TPOT
+  evidence accordingly.
+- A host reconnect leaves device ownership to be rechecked. In this case,
+  the restored route exposed an external privileged workload with a live
+  PID on physical NPU0 and a UDA namespace covering NPU0–3. The TP4 run
+  remained pending despite an available group lock. Apply the
+  [host maintenance workflow](../SKILL.md) before admission.
+
+Host evidence lives under `/opt/host/vnf/austinov/qwen35-diagnostics`:
+
+| Evidence | Relative path | SHA-256 |
+| --- | --- | --- |
+| Official reference receipt | `official-projection-reference-npu0-m1-20261125T063553Z-a6d2/host-result.json` | `cbec2ec342592fae1731f202c42a5a050d34e7f3b6f82ac98a0f0c5659650c4b` |
+| Staged fixture | `qwen35-official-projection-fixture-npu0-m1-20261125T063553Z-a6d2-stage/fixture-manifest.json` | `c444c21861307f98f33aebbfcc5f0da7e8c62fdfc39ebe33f1a510337736e408` |
+| Native failure receipt | `native-projection-check-npu0-m1-rank0-20261125T064201Z-7bd3/output/oracle/fixture/result.json` | `ef76d71d00e77253c5ba7e70702a4842def2a467332d64aba5c96fdfc7b65ad9` |

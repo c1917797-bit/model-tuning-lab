@@ -44,9 +44,10 @@ arguments. A clone intentionally does not contain the credential.
    session or infer the node role from a familiar peer prefix. A previously
    valid peer can remain reachable after it has moved from `ma` to `mc`.
 5. Load the AWMCP `host-development` skill contract before its first action and
-   again before every remote mutation. After a timeout, routing error, or long
-   pause, refresh topology and re-prove that the peer still owns
-   `chicaihong01/ma` before continuing.
+   again before every remote mutation. If the workstream requires a reload
+   before each remote operation, apply it to read probes and operation polling
+   as well. After a timeout, routing error, or long pause, refresh topology and
+   re-prove that the peer still owns `chicaihong01/ma` before continuing.
 6. Run `a_status` against the resolved peer.
 7. Accept the target only when the response identifies the intended peer and
    `routeDecision` is `peer_direct` or `upstream_local_peer`.
@@ -67,10 +68,15 @@ git worktree list --porcelain
 hostname
 uname -a
 docker ps
-npu-smi info
 ss -lntp
 grep -E '^(MemTotal|MemAvailable|Hugetlb):' /proc/meminfo
 ```
+
+For device-bound work, set the current authorized physical NPU scope before
+checking occupancy. On this 910B4 host use a per-device query such as
+`npu-smi info -t proc-mem -i <authorized-physical-id> -c 0` for each allowed
+card. If a scope is restricted, avoid commands that read the whole fleet.
+Skill-only edits need no device query.
 
 Read `.agents/HANDOFF.md`. For every relevant active `work/*` tree, read its
 `task.json` and branch-local `HANDOFF.md` before touching claimed files,
@@ -89,6 +95,13 @@ never reclaim a dirty, in-use, unpushed, unmerged, or unsuperseded worktree.
   lock. Container-local `ASCEND_RT_VISIBLE_DEVICES=0,1,2,3` and logical NPU
   numbers do not prove that physical NPU0-3 are occupied; they can represent
   physical NPU4-7 after remapping.
+- For a privileged container or an unexplained physical PID, inspect the
+  device namespace mapping in `/proc/uda/namespace_node` and use the
+  namespace root PID's cgroup to attribute the exact container. A missing
+  explicit Docker device mapping or an empty per-card process table does
+  not clear the reservation. A free lock also cannot clear external device
+  ownership. For a TP4 test, admit the complete authorized group only after
+  all four cards are available under the workstream's ownership rule.
 - Report container device declarations together with container state. By
   default, running containers and live processes are active occupancy claims;
   exited containers are historical provenance that still requires owner and
@@ -142,3 +155,11 @@ proof of host, command, container, or NPU failure and can occur after a command
 has already produced partial side effects. Before retrying, inspect the exact
 branch, worktree, container, process, or file target idempotently. Do not mutate
 the machine to compensate for an unproven diagnosis.
+
+If gateway health responds but topology omits the exact host, record the
+target route as unavailable. Confirm the identity of any approved alternate
+route before using it. A timeout or a missing operation ID after dispatch
+requires checking the original operation, unique run root, and exact owned
+container or process for terminal evidence before any relaunch. When the
+host returns, re-prove the route and take a fresh resource snapshot. The
+earlier connection problem and any new resource conflict are separate facts.
