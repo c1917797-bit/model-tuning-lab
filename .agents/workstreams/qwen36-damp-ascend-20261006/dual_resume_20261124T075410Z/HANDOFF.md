@@ -1,5 +1,9 @@
 # DeltaLog and BOLE on physical NPUs 4–7
 
+## 2026-11-25 UTC · DeltaLog 原生绑定完成
+
+原生采集和绑定分别以 8.65 秒和 6.51 秒成功退出。已生成物理 6 卡候选的 SOURCE_MANIFEST.json。首次进入软件复核时，host.py 因缺少本版本本地 HOST_AUTHORITY_RENEWAL_INVERSE.json 在创建容器前退出；下一步是补齐并验证当前版本的授权证明。NPU 数值、性能和精度均未测，BOLE 暂缓。原始回执见 EXECUTION_DELTA_NATIVE_CAPTURE_BOUND_CURRENT_HOST_INVERSE_MISSING_20261125.json。
+
 ## 2026-11-25 UTC · DeltaLog 源码冻结与采集入口
 
 本轮按用户指令暂缓 BOLE。在当前主机启动实例上恢复了 DeltaLog 两处只读挂载，484 个文件哈希一致。新预算已接入源码模板。首次实际启动在创建输出前退出；后续预检定位到 CPU004 证据写入函数仍通过旧目录下的锚点计算目标路径。待修复后，从原生采集与绑定接续。当前没有 NPU 数值或整模型性能结果。
