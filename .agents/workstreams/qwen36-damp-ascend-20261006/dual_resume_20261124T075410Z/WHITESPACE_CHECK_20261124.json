@@ -1,0 +1,16 @@
+{
+  "authored_documents_excluding_frozen_authority_check_rc": 0,
+  "authority_ref": {
+    "bytes": 1824,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/WINDOW_AUTHORIZATION_20261124.json",
+    "sha256": "1fdec2f6e59b57afe99662cb4b546cf66ec42fa7c5f3a2659c784ca2a1bbe66f"
+  },
+  "decision": "retain the already-recorded authority bytes and its hash; record its one EOF blank-line style warning, not a correctness or runtime PASS",
+  "full_check": {
+    "rc": 2,
+    "stdout": ".agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/WINDOW_AUTHORIZATION_20261124.json:53: new blank line at EOF.\n"
+  },
+  "new_experiments": 0,
+  "schema": "maintainer.stage-whitespace-verification/v1",
+  "utc": "2026-11-24T08:04:48.605040+00:00"
+}

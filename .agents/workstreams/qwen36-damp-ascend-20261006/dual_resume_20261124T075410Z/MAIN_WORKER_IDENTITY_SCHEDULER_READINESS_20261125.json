@@ -1,0 +1,31 @@
+{
+  "AST_equivalent_except_listed_identity_and_source_constants": true,
+  "handoff": {
+    "bytes": 6606,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_worker_identity_prepare_v1/NATIVE_WORKER_IDENTITY_PHYSICAL47_BOUND_HANDOFF_20261125.json",
+    "sha256": "1291ce0650bf8162845196f7b88a1df88c864db7d3d6280b85565e97baf61d62"
+  },
+  "inherited_human_window": "dual_resume_20261124T075410Z",
+  "no_lock_or_device_dispatch_in_readiness": true,
+  "phase_end_preserved": 1795569564.4180098,
+  "previous": {
+    "bytes": 24407,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_TP4_OR_PHYSICAL6_PRIORITY_20261124_DEVICE_GUARDED_V2.py",
+    "sha256": "0afa61bd3a399e27d81493859f25957b1042b891320653161c0f666dad583cd0"
+  },
+  "prior_waiter": {
+    "bytes": 2613,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_SHARED_BOLE4_OR_SINGLE6_STANDBY_20261124.json",
+    "sha256": "dc5e58501bd40457ad85ddfcac9214c66d8b3ce55cf012a4661493eed7bbd053"
+  },
+  "readiness_exit": 0,
+  "readiness_output": "{\"validated_commands\": {\"path\": \"/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_worker_identity_prepare_v1/source-short8/COMMANDS.json\", \"bytes\": 4600, \"sha256\": \"f0d26c642b00a77c0200d8d9259d52c36ce1589fcb9f4c7eb07052d26ec3d17f\"}, \"prior_released\": [\"dense\", \"cpu-preflight\"], \"old_wait_deadline\": 1795569564.4180098, \"dry_no_device_or_lock\": true}\n",
+  "release_and_live_guard_still_required": true,
+  "replacements_count": 21,
+  "schema": "bole.workerid.scheduler-successor-source-and-readiness/v1",
+  "source": {
+    "bytes": 24423,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_TP4_OR_PHYSICAL6_PRIORITY_WORKER_IDENTITY_20261125.py",
+    "sha256": "057aeae2b4004d7cad34416c1c6e21fcef2978b9f0c3e3ae8c97010dd786554a"
+  }
+}

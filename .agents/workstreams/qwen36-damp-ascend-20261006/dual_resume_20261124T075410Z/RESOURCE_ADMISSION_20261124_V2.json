@@ -1,0 +1,37 @@
+{
+  "DockerRootDir": "/cache/docker",
+  "boot_id": "d72811d4-30fb-422d-8366-d564208746d4",
+  "df_docker": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "Filesystem         1B-blocks          Used Available Use% Mounted on\n/dev/sda8      2163350618112 2055103754240         0 100% /cache\n"
+  },
+  "docker_filesystem": {
+    "available_bytes": 0,
+    "free_including_reserved_bytes": 108246827008,
+    "path": "/cache/docker",
+    "total_bytes": 2163350618112
+  },
+  "document_filesystem": {
+    "available_bytes": 49103966208,
+    "free_including_reserved_bytes": 62542516224,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab",
+    "total_bytes": 263086084096
+  },
+  "findmnt_docker": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "/cache /dev/sda8 ext4   rw,relatime,stripe=256\n"
+  },
+  "interpretation": "Use available_bytes for admission; free_including_reserved_bytes is not a quota or permission to alter ext4 reservation",
+  "no_mutation_or_experiment": true,
+  "prior_document_write_failure": {
+    "experiment_started": false,
+    "operation": "exec-000000000000b99f",
+    "partial_record_preserved": "RESOURCE_ADMISSION_20261124.json",
+    "type": "TypeError: PosixPath not JSON serializable"
+  },
+  "requires_fresh_check_before_next_action": true,
+  "schema": "dual.current-resource-admission-observation/v1",
+  "utc": "2026-11-24T08:01:57.430446+00:00"
+}

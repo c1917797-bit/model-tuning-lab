@@ -1,0 +1,21 @@
+{
+  "evidence_boundaries_preserved": true,
+  "independent_review": {
+    "all_passed": true,
+    "evidence_files_checked": 6,
+    "plan_review": "no blocking finding; READY status and explicit latency limits clarified",
+    "real_behavior_scenarios": 3
+  },
+  "links_resolve": true,
+  "mst": {
+    "rc": 0,
+    "stdout": "PASS: Maintainer Skill Tree structure is valid (20 skills)\n"
+  },
+  "new_experiments": 0,
+  "partial_resource_record_preserved": "RESOURCE_ADMISSION_20261124.json from failed document operation b99f; not staged",
+  "schema": "maintainer.lessons-plan-validation/v1",
+  "skill_creator_quick_validate": "both skills actual PASS at exec-000000000000b96b",
+  "source_RAW_not_published": true,
+  "utc": "2026-11-24T08:03:24.270914+00:00",
+  "window_epoch_duration_seconds": 172800
+}

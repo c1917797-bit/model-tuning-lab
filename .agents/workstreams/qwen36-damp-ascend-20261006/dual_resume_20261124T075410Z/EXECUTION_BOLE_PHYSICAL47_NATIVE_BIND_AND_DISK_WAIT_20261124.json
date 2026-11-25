@@ -1,0 +1,135 @@
+{
+  "COMMANDS": {
+    "bytes": 4456,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/source-short8/COMMANDS.json",
+    "sha256": "f4176b3fefe5b20b7253a86db0c823ec67798ebae20b4704cfb6244a783e8f11"
+  },
+  "DeltaLog_previous_terminal_and_pending_quota": {
+    "bytes": 3908,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/EXECUTION_MATCHED_F65_OPERANDS_AND_DELTA_CAPTURE012_TERMINAL_20261124.json",
+    "sha256": "24ba85517caffef337664119aa365f3347d382f077eef7411b26e04081d46b9f"
+  },
+  "SOURCE_BOUND": {
+    "bytes": 2115400,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/source-short8/SOURCE_BOUND.json",
+    "sha256": "99cdedb160af0debad8f212ef13d370389fdb430ecacff550185c935c76c866f"
+  },
+  "accuracy_benchmarks": false,
+  "actual_native_bind_seconds": 91.09066987037659,
+  "actual_source_only_bind_operation": "exec-00000000000109d7",
+  "actual_standby_process_alive_at_observation": true,
+  "handoff": {
+    "bytes": 7901,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/NATIVE_PHYSICAL47_BOUND_HANDOFF_20261124.json",
+    "sha256": "298334e64490435d7f026c48d5663421d362440eba2cb2f75464cf8718318ad5"
+  },
+  "last_observed_admission_only_snapshot": {
+    "Docker_available_B": 6198509568,
+    "Docker_reserve_GiB": 8.5,
+    "actual_UDA_holders": {
+      "4": [
+        4,
+        null
+      ],
+      "5": [
+        128,
+        null
+      ],
+      "6": [
+        null,
+        null
+      ],
+      "7": [
+        2,
+        null
+      ]
+    },
+    "epoch": 1795555229.7920952,
+    "new_TP4_model_output": false,
+    "opt_initial_GiB": 40.5,
+    "output_available_B": 48522158080,
+    "physical": {
+      "4": {
+        "aicore": "0",
+        "hbm": 2873,
+        "health": "OK",
+        "p": []
+      },
+      "5": {
+        "aicore": "0",
+        "hbm": 2875,
+        "health": "OK",
+        "p": []
+      },
+      "6": {
+        "aicore": "0",
+        "hbm": 3145,
+        "health": "OK",
+        "p": [
+          [
+            3547495,
+            "python",
+            "324",
+            "crc_operator_agent"
+          ]
+        ]
+      },
+      "7": {
+        "aicore": "0",
+        "hbm": 2874,
+        "health": "OK",
+        "p": []
+      }
+    }
+  },
+  "native_bind_result": {
+    "bytes": 3551,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/native_bind_execution_v1/RESULT.json",
+    "sha256": "f32c66c871deceea0e335517c085d54358fb6e22306dea777fe3ed79f16fd18c"
+  },
+  "no_new_cleanup_or_service_change": true,
+  "old_resource_wait_exit": 20,
+  "old_resource_wait_operation": "exec-0000000000010711",
+  "original_case_task_ticket_still_absent": true,
+  "original_standby_operation": "exec-00000000000109f7",
+  "qualified_execution_scope": {
+    "arm": "bole",
+    "cleanup_seconds": 180,
+    "common_environment": {
+      "HCCL_DETERMINISTIC": "true"
+    },
+    "concurrency": 1,
+    "formal_performance": false,
+    "generations": 2,
+    "input_tokens": 32768,
+    "model_memory_GiB": 48,
+    "output_tokens": 8,
+    "phase_seconds": 5400,
+    "physical_NPUs": [
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "qualified_short8_model_output": false,
+  "recorded_epoch": 1795555346.4089797,
+  "reference_and_candidate_benchmarks": false,
+  "resource_recovery_standby": {
+    "bytes": 1559,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_F65_PHYSICAL6_DISK_STANDBY_20261124.json",
+    "sha256": "7af3c1b094f1f7f23d64302d48d88e3541292cde98cafb58697ae0eafe5c2bba"
+  },
+  "schema": "dual.bole-physical47-native-bound-and-resource-admission/v1",
+  "source_files_bound": 476,
+  "source_related_to_actual_failed_frame": {
+    "bytes": 10934,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/BOLE_F65_REGISTERED_RANK1_L0_VS_MODEL_FAILURE_MATCHED_OPERANDS_20261124.json",
+    "sha256": "8e7cc5895417ff5fe90f3ff286cce48a7449fb0d64114fe142fdd41665742cd5"
+  },
+  "window": {
+    "bytes": 1824,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/WINDOW_AUTHORIZATION_20261124.json",
+    "sha256": "1fdec2f6e59b57afe99662cb4b546cf66ec42fa7c5f3a2659c784ca2a1bbe66f"
+  }
+}

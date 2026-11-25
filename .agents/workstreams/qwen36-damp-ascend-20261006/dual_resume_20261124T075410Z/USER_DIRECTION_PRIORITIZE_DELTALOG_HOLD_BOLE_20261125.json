@@ -1,0 +1,17 @@
+{
+  "BOLE_admission": "on hold at user request",
+  "DeltaLog": "continue original registered control, source binding and NPU stages to current real storage limit",
+  "cutoff_epoch": 1795679650,
+  "devices": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "epoch": 1795588430.1885293,
+  "reply_to": "call_12e4a2b04de6431c8005392b7c8c9f97",
+  "schema": "model-tuning-lab.user-workstream-priority/v1",
+  "scope": "current November 24–26 window",
+  "storage_cleanup_or_ext4_change": false,
+  "user_reply": "暂时保留 BOLE，先推进 DeltaLog 到磁盘允许的阶段"
+}

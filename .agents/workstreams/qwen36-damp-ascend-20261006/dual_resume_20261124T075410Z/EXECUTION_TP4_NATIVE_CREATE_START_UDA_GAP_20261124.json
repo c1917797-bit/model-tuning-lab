@@ -1,0 +1,68 @@
+{
+  "TP4_docker_required_bytes": 9126805504,
+  "TP4_or_performance_or_accuracy_new_result": false,
+  "active_tp4_model_output": false,
+  "archive_free_bytes": 111639834624,
+  "bound_source": {
+    "bytes": 2115400,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/source-short8/SOURCE_BOUND.json",
+    "sha256": "99cdedb160af0debad8f212ef13d370389fdb430ecacff550185c935c76c866f"
+  },
+  "device_scope": {
+    "bytes": 2008,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/DEVICE_SCOPE_AMENDMENT_PHYSICAL4_7_20261124.json",
+    "sha256": "7d757b431d8b28f740809e7c98fa784e7ee96f735826bdb541e47514d30e00d2"
+  },
+  "docker_free_bytes": 4103471104,
+  "isolated_six_priority_branch_operation": "exec-0000000000010e99",
+  "max_one_to_one_offload_with_100GiB_left": 4265652224,
+  "native_controller": {
+    "bytes": 22341,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/source-short8/safety_host.py",
+    "sha256": "be0f0fd9bf269080a9b786f1c0595bf1b4ac4b529eb0672435fc05d20ad64221"
+  },
+  "native_host_entry": {
+    "bytes": 23491,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_current_short8_physical47_prepare_v1/source-short8/host_service.py",
+    "sha256": "0a1b9952519662464722875d676580fd3aa0bc23f44c372b761fa6624377dea9"
+  },
+  "native_orchestration_gap": "After deviceless CPU release, current ctl_for and Controller.create have no fresh driver holder table check before device creation and between created-state inspect and start. SMI/FD/process validation and timing checks remain in place.",
+  "necessary_change": [
+    "check actual registered physical 4-7 UDA mapping at device create boundary",
+    "recheck actual holders immediately before device start; reject unknown ownership"
+  ],
+  "next": "Bind only a native source covering both device guard boundaries before activating the TP4-priority dispatcher. Keep the original single6 standby and its original deadline while working.",
+  "no_cleanup_performed": true,
+  "old_standby_identity": [
+    3546237,
+    40031808
+  ],
+  "old_standby_live": true,
+  "old_standby_operation": "exec-00000000000109f7",
+  "outer_candidate_armed": false,
+  "outer_priority_control_dry_ref": {
+    "bytes": 22211,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_TP4_OR_PHYSICAL6_PRIORITY_20261124_V1.py",
+    "sha256": "39b16186a8d481b07509c3c2f1a6cfb01755dc302060bb7a01cf36b981c1eadd"
+  },
+  "outer_priority_dry_validation_operation": "exec-0000000000010e8c",
+  "preexisting_single6_owner": {
+    "bytes": 27800,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/saved_gdn_f65_single_case_physical6_prepare_v3/owner.py",
+    "sha256": "5aeef1adaa338a5f2c8a66821d8338574bdda1f975a02d96be4d19b516ba6f03"
+  },
+  "previous_stage": {
+    "bytes": 4877,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/EXECUTION_MATCHED_F65_QUALIFICATION_AND_PERFORMANCE_SUCCESSOR_20261124.json",
+    "sha256": "6bbe4f19b46720870ae5ebd09a3b7fd4da00cda4eafbde364aff3d5d692eb4be"
+  },
+  "resource_at_epoch": 1795558838.2821066,
+  "schema": "dual.actual-tp4-resource-guard-gap/v1",
+  "single6_boundaries": "fresh includes _fresh_uda6 and is called before create and again between inspect and start",
+  "single6_ticket_exists": false,
+  "window": {
+    "bytes": 1824,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/WINDOW_AUTHORIZATION_20261124.json",
+    "sha256": "1fdec2f6e59b57afe99662cb4b546cf66ec42fa7c5f3a2659c784ca2a1bbe66f"
+  }
+}

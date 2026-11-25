@@ -1,0 +1,45 @@
+{
+  "schema": "dual.source-binding-followup-and-device-observation/v1",
+  "epoch": 1795527071.3512437,
+  "boot": "d72811d4-30fb-422d-8366-d564208746d4",
+  "source_stage_ref": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/EXECUTION_DELTALOG_NATIVE_SOURCE5_CAPTURE_BIND_20261124.json",
+    "bytes": 9915,
+    "sha256": "a3e774347a5eda116e24ed0dd10e3384a78ae262c3d2bd5b6be8172b3370a7bb"
+  },
+  "devices": {
+    "0": {
+      "listed_compute": [],
+      "ns_id": 0,
+      "root_tgid": 972211,
+      "container": {
+        "id": "0b4ecdd86d1bae0d2b40ab75c630554c460ee11360629d1a510a0348498655be",
+        "name": "/nms_v5_c",
+        "root_start_ticks": 775847
+      },
+      "explicit_idle_row": true
+    },
+    "2": {
+      "listed_compute": [
+        {
+          "pid": 346599,
+          "name": "python",
+          "device_mem_MiB": 2682
+        }
+      ],
+      "ns_id": 1,
+      "root_tgid": 1085067,
+      "container": {
+        "id": "1f3271224f38d5090fbea3ae2b18a0824eb1f0cb609c7fc967cfc4594b7f5b83",
+        "name": "/nms_v5_c3",
+        "root_start_ticks": 853605
+      },
+      "explicit_idle_row": false
+    }
+  },
+  "scope": "point observation; kernel reservation and real compute are reported independently",
+  "window_utilization": "unmeasured",
+  "delta_next": "integrate typed current controls and preserve ordinary result gates; validate on card2 once qualified",
+  "bole_next": "component160 candidate card0; preserve other workloads, recheck current authorization and per-run cap at admission",
+  "hardware_started_by_this_check": false
+}

@@ -1,0 +1,69 @@
+{
+  "actual_current_NPU_or_acceptance": {
+    "final_task_accuracy_result": null,
+    "four_card_short8": null,
+    "new_device_measurement": null,
+    "official_three_pair_result": null
+  },
+  "current_source_only": {
+    "TTFT_TPOT": "both latency reductions >=10% per genuine pair in addition to native throughput rule",
+    "formal3_delivery": {
+      "bytes": 6193,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/formal_three_trial_latency_gate_v1/DELIVERY_INDEX.json",
+      "sha256": "4a18b8573798011ff7f27daa79d1ab8a9f3ed7d3528036db96a6e9277f5f3035"
+    },
+    "frozen_accuracy_input_ref": {
+      "bytes": 4594,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/TASK_ACCURACY_FROZEN_INPUTS_REUSE_20261124.json",
+      "sha256": "fe433f20ee3799141b97f57bff37b9e6a272904be151c65dc9bf16e90db17030"
+    },
+    "normal_eos_native_ancestry_and_controls": {
+      "bytes": 2843,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/accuracy_prepare/f65_physical47_normal_eos_source_v1/SOURCE_LINEAGE_CONTROL.json",
+      "sha256": "2cce38a0720326e2d539c34f854c029b0a206da19217fdc6ff13d3d02b7d20f3"
+    },
+    "short8_original_consumer_negative_controls": {
+      "bytes": 3940,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/accuracy_prepare/upstream_admission_v1/NEGATIVE_REGRESSION_RESULT.json",
+      "sha256": "99c6c7b4ff3a38935b2971291a893edd230ae430eea2904228a19a0e95b15c73"
+    },
+    "three_pair_integer_cases": {
+      "bytes": 3040,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/formal_three_trial_latency_gate_v1/verification/INTEGER_BOUNDARY_RESULT.json",
+      "sha256": "dac0b9d034e2f4c266f21452a18588d0c5db3385cb3dfce5143d7ce9507530f5"
+    }
+  },
+  "device_launch_for_these_controls": false,
+  "epoch": 1795564411.7731862,
+  "historical_16_component": {
+    "comparisons": 128,
+    "component_calls": 16,
+    "host_main": {
+      "bytes": 26493,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261117T060217Z/MAIN_STATE16_INDEPENDENT_PASS_FRESH_RELEASE_20261117.json",
+      "sha256": "6fca953e8464df51170c2acd1a6cb5c6b6c2ca03a88df9421bc4fa333f53f2a9"
+    },
+    "independent": {
+      "bytes": 54690,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261117T060217Z/bole_f65_state16_rejudge_run_v2/result/INDEPENDENT_RESULT.json",
+      "sha256": "944252e2bf8965093a79a874293d6343c7983b7dc8083f7b2e917453fedb2fec"
+    },
+    "independent_replay_elapsed_seconds": 3.8882034299895167,
+    "producer_elapsed_seconds": 9.382754930004012,
+    "repeat_NPU_needed_for_report_only_change": false
+  },
+  "original_scheduler": {
+    "docker_free_MiB_in_that_sample": 184.1,
+    "full_model_output_existed_in_that_sample": false,
+    "last_observed_utc": "2026-11-24T23:50:43Z",
+    "pid": 890714,
+    "startticks": 40636743
+  },
+  "remaining": [
+    "genuine physical 4-7 short8 independent result",
+    "reopened full-model long160 independent consumer and result",
+    "current formal3 role registration in native source family; fresh per-stage host receipts",
+    "bind actual parents for OFF/ON, then normal EOS smoke and full task scores"
+  ],
+  "schema": "dual.acceptance.source-recovery/v1"
+}

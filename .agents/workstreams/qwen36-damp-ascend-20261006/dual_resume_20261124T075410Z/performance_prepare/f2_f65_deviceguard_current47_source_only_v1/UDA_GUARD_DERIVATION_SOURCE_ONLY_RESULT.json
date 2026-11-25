@@ -1,0 +1,83 @@
+{
+  "CPU_NPU_container_executed": false,
+  "F2_performance_delta_ref": {
+    "bytes": 10538,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_deviceguard_current47_source_only_v1/performance_delta.py",
+    "sha256": "ab3d68597183afd254375a7a9e75eae256bd55265c5d8e384e22dc07774252f3"
+  },
+  "MAIN_or_bind_authority_created": false,
+  "READY": false,
+  "actual_UDA_helper_functions_preserved": true,
+  "actual_create_boundary_guard_locations": [
+    {
+      "exact_original_guard_call_nodes": true,
+      "role": "host_service.py",
+      "whole_ctl_for_AST_identical": true
+    }
+  ],
+  "actual_prestart_Controller_create_AST_identical": true,
+  "actual_source_transform_completed": true,
+  "adapt_return_shape": {
+    "keys": [
+      "files",
+      "delta",
+      "parent",
+      "performance_ready",
+      "pending"
+    ],
+    "tuple_count": null,
+    "type": "dict"
+  },
+  "both_actual_UDA_guard_boundaries_preserved": true,
+  "derived_role_count": 480,
+  "full_composer_preview_executed": false,
+  "helper_locations": {
+    "_physical47_arm_uda_guard": [
+      "host_service.py"
+    ],
+    "_physical47_uda_boundary": [
+      "host_service.py"
+    ],
+    "_physical47_uda_parse": [
+      "host_service.py"
+    ]
+  },
+  "isolated_source_transform_only": true,
+  "parent_source_ref": {
+    "bytes": 2119284,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_deviceguard_prepare_v1/source-short8/SOURCE_BOUND.json",
+    "sha256": "c4010038b48b2de99c26b19153414f8e3b5d2b71a1b838c2d2d6b126cf683459"
+  },
+  "pending_MAIN_approval_null": true,
+  "pending_actual_null_keys": [
+    "MAIN_review_ref",
+    "short8_host",
+    "short8_scope"
+  ],
+  "pending_host_null": true,
+  "pending_scope_null": true,
+  "pending_source_parent_matches": true,
+  "phase_memory_constant_roles": {
+    "host_service.py": {},
+    "performance_host.py": {},
+    "safety_host.py": {
+      "PHASE": [
+        5400
+      ],
+      "RESERVE": [
+        8,
+        512,
+        1024,
+        2
+      ]
+    }
+  },
+  "required_next_evidence": "actual C401 short8 owner terminal/cleanup and original independent short8 scope PASS; then original seal, full composer preview, independent MAIN review and original bind",
+  "retarget_producer_ref": {
+    "bytes": 10490,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/retarget_f2_parent_data_v2.py",
+    "sha256": "5d9aa17020d82b089f4d00f297556cbeeb47168bcc8b577b7936d77a4df4168e"
+  },
+  "safety_host_whole_bytes_identical": true,
+  "schema": "bole.f2-current-deviceguard-parent-derivation-qualification/v1"
+}

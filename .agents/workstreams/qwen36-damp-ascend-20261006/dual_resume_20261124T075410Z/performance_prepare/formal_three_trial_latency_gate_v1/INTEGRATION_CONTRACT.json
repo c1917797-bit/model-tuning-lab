@@ -1,0 +1,60 @@
+{
+  "API": "consume(index_ref, hosts_ref)",
+  "CLI": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/formal_three_trial_latency_gate_v1/pair_rows.py",
+    "--consume",
+    "--index-ref",
+    "<actual current three-trial source-index Ref3 JSON>",
+    "--hosts-ref",
+    "<actual current terminal-hosts Ref3 JSON>",
+    "--output",
+    "<new not-existing output.json>"
+  ],
+  "TPOT_each_pair": "10 * ON.TPOT_numerator_ns <= 9 * OFF.TPOT_numerator_ns; both denominators exactly1023",
+  "TTFT_each_pair": "10 * ON.TTFT_ns <= 9 * OFF.TTFT_ns",
+  "actual_upstream_refs": {
+    "MAIN_review_and_native_bound_family_ref": null,
+    "current_full1024_correctness_and_captureOFF_qualification": null,
+    "current_qualified_three_trial_index_ref": null,
+    "six_current_terminal_host_refs": null
+  },
+  "all_source_RAW_remain_host": true,
+  "entry": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/formal_three_trial_latency_gate_v1/pair_rows.py",
+  "not_accepted": [
+    "caller supplied pairs/ratio/PASS",
+    "copied first pair used as three sources",
+    "average gain substituting per-round gate",
+    "old short8 or component result as fixed1024 qualification"
+  ],
+  "old_bound_or_current_F2_untouched": true,
+  "production_input_sources": [
+    "original M.validate_sources(index_ref)",
+    "original row(actual sourceRef,actual terminal hostRef)",
+    "original V.validate plus original HTTP/token/state/retirement consumer",
+    "original strict_token_timing.consume independently reopens complete raw SSE and integer receive observations",
+    "original M.checked_math 32K/1024 three-pair mathematics"
+  ],
+  "remaining_integration": [
+    "original F2 short8 independent consume success remains required",
+    "new12-role native family must be registered in current F2 formal materialization/source reviewer and bound; do not reuse old BOUND",
+    "current F2 10800-phase/window controller alignment must be applied to native helper family before runtime; this copied original family retains its unmodified3600 validator scope",
+    "three fresh matched pairs, full1024/long-run production qualification and immutable six terminal/cleanup/worker identity refs are not yet present"
+  ],
+  "report_fields": {
+    "formal_performance_targets_met": "true only when exactly3 actual native reopened pairs pass original throughput and both latency gates",
+    "formal_qualification": "original false retained; not task/model/paper acceptance",
+    "strict_three_trial_targets": "typed gate with every original integer metric, exact inequality, exact rational improvement and per-round result"
+  },
+  "runtime_exit_codes": {
+    "single_diagnostic_nonformal": 0,
+    "three_target_fail_after_report": 3,
+    "three_target_pass": 0
+  },
+  "schema": "bole.native-three-trial-latency-target-consumer-integration/v1",
+  "single_screen": "per-pair metrics only; every all_three flag false; existing diagnostic result unmodified otherwise",
+  "source_only": true,
+  "throughput_each_pair": "10 * OFF.T_total_ns >= 11 * ON.T_total_ns"
+}

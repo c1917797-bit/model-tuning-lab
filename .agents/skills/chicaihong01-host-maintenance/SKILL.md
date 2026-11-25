@@ -129,6 +129,14 @@ when the response marks the failure retryable. A control-plane timeout is not
 proof of host, command, container, or NPU failure; do not mutate the machine to
 compensate for an unproven diagnosis.
 
+### State16 evidence replay and execution-context failures (2026-11-17)
+
+See [the verified state16 replay lessons](references/20261117-state16-rejudge.md) before deriving a metric consumer or a bounded owner. Preserve original failures and actual NPU evidence; component replay is not model acceptance.
+
+### Evidence reuse and a real next execution edge
+
+For repeated BOLE/DeltaLog admission or reporting failures, read [the verified paper-to-card recovery lessons](references/20261124-paper-to-card-recovery.md). Preserve complete callable context, reuse unchanged evidence at its actual scope, and resolve boot/mount/capacity changes before scheduling.
+
 ## Diagnose a bound experiment before retrying
 
 When runtime authorization, ledger reservation, or resource admission blocks the first device step, use [the DeltaLog startup recovery decisions](references/bound-entry-recovery.md).

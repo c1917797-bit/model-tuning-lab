@@ -1,0 +1,58 @@
+{
+  "authorized_physical_devices": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "cutoff_epoch": 1795679650,
+  "cutoff_utc": "2026-11-26T07:54:10Z",
+  "main_only_device_admission": true,
+  "operator_allocation": {
+    "BOLE_single_card": 4,
+    "DeltaLog_single_card": 6,
+    "TP4_serial_exclusive": [
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "original_project_start_epoch": 1792828303,
+  "papers": [
+    "BOLE",
+    "DeltaLog"
+  ],
+  "parent_window": {
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/WINDOW_AUTHORIZATION_20261124.json",
+    "sha256": "1fdec2f6e59b57afe99662cb4b546cf66ec42fa7c5f3a2659c784ca2a1bbe66f",
+    "size": 1824
+  },
+  "preserve_external_workloads": true,
+  "prior_single_diagnostic": {
+    "cleanup_seconds": 30,
+    "cumulative_output_cap_bytes": 1048576,
+    "historical_scope_ref": {
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/BOLE_CARD0_ENUM_DIAGNOSTIC_AUTH_20261124.json",
+      "sha256": "40948d1c641ffcf7e77f80f8fd486b03af376ff46df0477f414799882e8db804",
+      "size": 1284
+    },
+    "logical_device": 0,
+    "max_total_guest_runs_across_old_and_new": 1,
+    "phase_seconds": 90,
+    "physical_device": 4,
+    "purpose": "remaining same-image device enumeration only; prior usage must be verified; no new 160-step or model allowance"
+  },
+  "protected_physical_devices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "requires_current_owner_guest_readset_locks_and_mapping": true,
+  "schema": "paper-physical-device-scope-amendment.v1",
+  "start_epoch": 1795506850,
+  "start_utc": "2026-11-24T07:54:10Z",
+  "unchanged_terms": "All original non-device window, budget, numerical, performance, quality, source locality, cleanup and preservation limits apply. The original card list is historical. Scope amendment alone is not admission or a numerical result.",
+  "user_instruction": "那你改用4-7卡继续穿刺"
+}

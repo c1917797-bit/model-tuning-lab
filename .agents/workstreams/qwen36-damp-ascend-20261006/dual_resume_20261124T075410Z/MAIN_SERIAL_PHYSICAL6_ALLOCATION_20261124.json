@@ -1,0 +1,76 @@
+{
+  "BOLE_cleanup_seconds": 60,
+  "BOLE_phase_limit_seconds": 300,
+  "BOLE_single_physical": 6,
+  "BOLE_source_workload": "one retained GDN failure frame, unchanged producer input/operator FP64 thresholds; independent enum already spent",
+  "DeltaLog_single_physical": 6,
+  "MAIN_only": true,
+  "TP4_comparison_requires_true_exclusive_physical_4_7": true,
+  "assignment_source": "MAIN rescheduling within explicit user physical 4-7 scope; no extension",
+  "authorized_physical_devices": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "cutoff_epoch": 1795679650,
+  "device_failure_ref": {
+    "bytes": 3358,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/EXECUTION_BOLE_ENUM_PHYSICAL4_EXACT_DRIVER_CONFLICT_20261124.json",
+    "sha256": "d68f749d1321045d5646b2e1a9e8df7377b631a9f8b9c093cd5c4d741e7d83e2"
+  },
+  "driver_ownership_evidence_ref": {
+    "bytes": 12999,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/BOLE_UDA_EXACT_READ_SEMANTICS_AND_CARD4_7_ATTRIBUTION_20261124.json",
+    "sha256": "723d82aa88a94193779987083714908280df7972cc682127ba7d8940e8da507f"
+  },
+  "execute_concurrently_on_physical6": false,
+  "execution_lease": false,
+  "inner_native_resource_checks_mandatory": true,
+  "logical_device": 0,
+  "maximum_cumulative_BOLE_case_bytes": 20971520,
+  "need_new_native_card6_owner_guest_readset_and_MAIN_ticket": true,
+  "new_cleanup_or_disk_budget": false,
+  "numerical_or_performance_PASS": false,
+  "original_operator_allocation_ref": {
+    "bytes": 2008,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/DEVICE_SCOPE_AMENDMENT_PHYSICAL4_7_20261124.json",
+    "sha256": "7d757b431d8b28f740809e7c98fa784e7ee96f735826bdb541e47514d30e00d2"
+  },
+  "previous_real_case_retained_bytes": 135796,
+  "previous_real_case_runtime_dirs": [
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_saved_gdn_f65_single_case_owner_run_v3",
+    "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_saved_gdn_f65_single_case_run_v3"
+  ],
+  "previous_real_run_ticket_ref": {
+    "bytes": 1993,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_BOLE_SAVED_GDN_F65_CASE_PHYSICAL4_20261124_V3.json",
+    "sha256": "f4f3dba96e7013ab445869e1b4e387b2673d29d0355421d9b49df11c6baaa1ae"
+  },
+  "protected_physical_devices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "reacquire_after_exact_PID_start_CID_release": true,
+  "recorded_epoch": 1795552409.9504838,
+  "remaining_case_bytes_at_observation": 20835724,
+  "require_fresh_compute_process_HBM_AICore_device_identity_outputfs_DockerRoot_and_RAM": true,
+  "require_fresh_udevice_access_no_exclusive_or_shared_holder": true,
+  "resources_to_preserve": [
+    4,
+    5,
+    7
+  ],
+  "retain_external_jobs": true,
+  "retained_file_count": 23,
+  "schema": "ascend.MAIN-serial-single-card-allocation/v1",
+  "shared_outer_serial_lock": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_PHYSICAL6_SERIAL_DISPATCH.lock",
+  "standalone_device_diagnostics_remaining": 0,
+  "window_ref": {
+    "bytes": 1824,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/WINDOW_AUTHORIZATION_20261124.json",
+    "sha256": "1fdec2f6e59b57afe99662cb4b546cf66ec42fa7c5f3a2659c784ca2a1bbe66f"
+  }
+}

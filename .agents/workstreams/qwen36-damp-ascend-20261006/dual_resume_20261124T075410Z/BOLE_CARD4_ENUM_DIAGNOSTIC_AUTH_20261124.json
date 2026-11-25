@@ -1,0 +1,83 @@
+{
+  "algorithm_execution": false,
+  "cleanup_seconds": 30,
+  "component160_rerun": false,
+  "cutoff_utc": "2026-11-26T07:54:10Z",
+  "device_scope_amendment_ref": {
+    "bytes": 2008,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/DEVICE_SCOPE_AMENDMENT_PHYSICAL4_7_20261124.json",
+    "sha256": "7d757b431d8b28f740809e7c98fa784e7ee96f735826bdb541e47514d30e00d2"
+  },
+  "logical_device": 0,
+  "main_only": true,
+  "max_runs": 1,
+  "model_load": false,
+  "output_cap_bytes": 1048576,
+  "parent_terminal_ref": {
+    "bytes": 3368,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/EXECUTION_BOLE_COMPONENT160_E975_TERMINAL_20261124.json",
+    "sha256": "e37008dfa923dc3810f273472c7146a64470df0e3b9f03083f1f6e923657289c"
+  },
+  "performance": false,
+  "permitted_observations": [
+    "independent torch.npu.is_available and device_count results, warnings and errors",
+    "software and driver versions",
+    "actual device mapping, device file metadata and namespace"
+  ],
+  "phase_seconds": 90,
+  "physical_device": 4,
+  "physical_devices": [
+    4
+  ],
+  "preserve_external_workloads": true,
+  "previous_authorization_ref": {
+    "bytes": 1284,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/BOLE_CARD0_ENUM_DIAGNOSTIC_AUTH_20261124.json",
+    "sha256": "40948d1c641ffcf7e77f80f8fd486b03af376ff46df0477f414799882e8db804"
+  },
+  "prior_real_guest_starts": 0,
+  "prior_runtime_bytes": 57252,
+  "prior_terminal_refs": [
+    {
+      "bytes": 673,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device0_runtime_diagnostic_owner_run_v1/OWNER_RESULT.json",
+      "sha256": "91759794411cdfa8d85f9983a53366d5e77bd5143ac85235bcdeb9c8a107471b"
+    },
+    {
+      "bytes": 823,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device0_runtime_diagnostic_owner_run_v2/OWNER_RESULT.json",
+      "sha256": "6ac7e05fdf5360bc168bbdf9974ae0b3fb21771f194ff39af57c1e0f013a54df"
+    },
+    {
+      "bytes": 1488,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device0_runtime_diagnostic_owner_run_v3/OWNER_RESULT.json",
+      "sha256": "06aec820ef3d37066b53ec2b887650c7cef931cea1705bb9cc1ea671b415e0e5"
+    },
+    {
+      "bytes": 1968,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device0_runtime_diagnostic_owner_run_v4/OWNER_RESULT.json",
+      "sha256": "1bd1622a454bc7ef3320368b36384b695c4a58b04bab6bf62991344fe3a2c37a"
+    },
+    {
+      "bytes": 1489,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device0_runtime_diagnostic_owner_run_v5/OWNER_RESULT.json",
+      "sha256": "c61f6f273a407ef65b5c640052073ec62dff1c9a6acc3c3b025600320639a1a9"
+    }
+  ],
+  "protected_devices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "schema": "bole.single-device-enumeration.user-authorization/v1",
+  "scope": "the remaining single same-image enumeration on freshly admitted physical NPU 4",
+  "stop_external_allowed": false,
+  "user_instruction": "那你改用4-7卡继续穿刺",
+  "window_end_utc": "2026-11-26T07:54:10Z",
+  "window_ref": {
+    "bytes": 1824,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/WINDOW_AUTHORIZATION_20261124.json",
+    "sha256": "1fdec2f6e59b57afe99662cb4b546cf66ec42fa7c5f3a2659c784ca2a1bbe66f"
+  }
+}

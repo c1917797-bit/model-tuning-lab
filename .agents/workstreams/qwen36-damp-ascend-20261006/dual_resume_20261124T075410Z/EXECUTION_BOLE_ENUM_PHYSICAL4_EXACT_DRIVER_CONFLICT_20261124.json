@@ -1,0 +1,80 @@
+{
+  "UTC": "2026-11-24T20:18:40.916309+00:00",
+  "authority": {
+    "bytes": 3876,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/BOLE_CARD4_ENUM_DIAGNOSTIC_AUTH_20261124.json",
+    "sha256": "c680d148046150e12e76a85efa0851bcdf20c2af09775ab15041e30b4b5ce1a0"
+  },
+  "device_count": 0,
+  "is_available": false,
+  "kernel_scope": "current boot, exact own init PIDs constrained to Docker start/finish, timestamps rounded out to seconds",
+  "next": "check read-only driver namespace ownership; preserve other jobs and do not repeat the spent diagnostic",
+  "numerical_result": null,
+  "observed_mapping": "physical4 host -> guest /dev/davinci0, observed major/minor 237:4",
+  "operation": "exec-0000000000010314",
+  "performance_result": null,
+  "private_target_evidence_retained_on_host": true,
+  "quota_used_real_guest_starts": 1,
+  "reservation_holder": "unverified: kernel event contains only the observed device and ns_id; cannot attribute an external owner",
+  "runs": [
+    {
+      "CID": "00f432cf400b1af3539461c52b50061cda8a7db10c2539a3079b73ffcef3eb81",
+      "driver_event": "Conflict open udevid",
+      "driver_function": "uda_occupy_dev_by_ns",
+      "end": "2026-11-24T20:05:34.72044509Z",
+      "in_window_match_digest": "577614599a2869c05e92f1f9f446ba16d63b5586d6feb3b25b422cb238648967",
+      "init_PIDs": [
+        2399834
+      ],
+      "matched_log_lines": 145,
+      "owner": {
+        "bytes": 1318,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_saved_gdn_f65_single_case_owner_run_v3/OWNER_RESULT.json",
+        "sha256": "42ff37de44eddfa8798c4bfe59cc0fabaaf66637dd762ec3c04b4309bcd2f863"
+      },
+      "start": "2026-11-24T20:05:22.80152441Z",
+      "udevid_ns_count": [
+        [
+          [
+            "4",
+            "4"
+          ],
+          145
+        ]
+      ]
+    },
+    {
+      "CID": "7fa782f76ce09261c146c9b03f476526c619d9d4054ff730c05f674ed306514b",
+      "driver_event": "Conflict open udevid",
+      "driver_function": "uda_occupy_dev_by_ns",
+      "end": "2026-11-24T20:14:32.43825799Z",
+      "in_window_match_digest": "aaa504be1747bdba23d13fe6206b18eb5c677f432cdebf87e63ff1c27fa03dd5",
+      "init_PIDs": [
+        2510123
+      ],
+      "matched_log_lines": 149,
+      "owner": {
+        "bytes": 1464,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device4_runtime_diagnostic_owner_run_v2/OWNER_RESULT.json",
+        "sha256": "d693da960a8bbdd302547b3175743375b2fd7f6d6d485928b9e771c6e41812a8"
+      },
+      "start": "2026-11-24T20:14:21.84856572Z",
+      "udevid_ns_count": [
+        [
+          [
+            "4",
+            "4"
+          ],
+          149
+        ]
+      ]
+    }
+  ],
+  "runtime_probe": {
+    "bytes": 5313,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_device4_runtime_diagnostic_run_v2/result/DIAGNOSTIC_RESULT.json",
+    "sha256": "9ff9de8a4384adfc0c1b40d8d987fac3dc1a28fed54be067214393c2de2dd4d1"
+  },
+  "schema": "bole.real-separate-device-enumeration-and-driver-attribution/v1",
+  "warning": "Can't get ascend_hal device count"
+}

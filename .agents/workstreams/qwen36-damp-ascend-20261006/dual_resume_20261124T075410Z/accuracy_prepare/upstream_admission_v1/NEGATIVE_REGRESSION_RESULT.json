@@ -1,0 +1,92 @@
+{
+  "CPU_NPU_model_generation_executed": false,
+  "READY": false,
+  "actual_original_helper_and_parent_constructed": true,
+  "actual_parent_return_type": "tuple",
+  "current_task_source_context_or_stage_created": false,
+  "formal3_consumer_registered": false,
+  "long160_whole_model_consumer_registered": false,
+  "module_ref": {
+    "bytes": 7019,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/accuracy_prepare/upstream_admission_v1/short8_admission.py",
+    "sha256": "c9ed4722a92ff79b85e3a5a55377492c86706963039a416c7f6760bb7994d2c7"
+  },
+  "negative_case_count": 8,
+  "negative_cases": [
+    {
+      "decision": "reject",
+      "name": "same_full_source_FAIL_only_receipt",
+      "reason": "original independent short8 report schema",
+      "rejected": true
+    },
+    {
+      "decision": "reject",
+      "name": "same_full_source_explicit_scope_FAIL",
+      "reason": "explicit original short8 affirmative decision",
+      "rejected": true
+    },
+    {
+      "decision": "reject",
+      "name": "real_single_case_component_result_is_not_whole_short8",
+      "reason": "original independent short8 report schema",
+      "rejected": true
+    },
+    {
+      "decision": "reject",
+      "name": "strict_Ref3_bad_hash",
+      "reason": "whole strict Ref3 equality",
+      "rejected": true
+    },
+    {
+      "decision": "reject",
+      "name": "source_manifest_is_not_qualification_report",
+      "reason": "original independent short8 report schema",
+      "rejected": true
+    },
+    {
+      "decision": "reject",
+      "name": "missing_scope_receipt",
+      "reason": "strict complete Ref3",
+      "rejected": true
+    },
+    {
+      "decision": "pending",
+      "name": "whole160_component_receipt_remains_pending",
+      "reason": "whole-model160 original independent consumer/schema not registered here; a single-card component160 or same-source receipt cannot qualify it",
+      "rejected": true
+    },
+    {
+      "decision": "pending",
+      "name": "whole160_missing_consumer_remains_pending",
+      "reason": "whole-model160 original independent consumer/schema not registered here; a single-card component160 or same-source receipt cannot qualify it",
+      "rejected": true
+    }
+  ],
+  "only_negative_fixture_refs": [
+    {
+      "bytes": 485,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/accuracy_prepare/upstream_admission_v1/negative_inputs/FAILED_SOURCE_ONLY.json",
+      "sha256": "6e1e9cdd60c0f88179433ef30428414d0f1f3e263d900c4f407312a36e24f325"
+    },
+    {
+      "bytes": 701,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/accuracy_prepare/upstream_admission_v1/negative_inputs/FAILED_ORIGINAL_SCOPE_DECISION.json",
+      "sha256": "8a4c912f5ae538c8dac0e45efb1826a7dea6b2d58045913ef29f74f3c2e4fc67"
+    }
+  ],
+  "original_independent_consumer_not_replaced": true,
+  "pending_input_ref": {
+    "bytes": 2540,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/accuracy_prepare/upstream_admission_v1/UPSTREAM_INPUT_PENDING.json",
+    "sha256": "e179059648d4a8a48bc78d69fa3d21b60b3e8dfaad553c4edbd071942ac39450"
+  },
+  "positive_fixture_or_PASS_created": false,
+  "positive_numeric_consume_executed": false,
+  "real_component_negative_ref": {
+    "bytes": 5809,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_saved_gdn_f65_single_case_run_v3/result/RESULT.json",
+    "sha256": "f98552d7e3f2ca0d6cfde97030946f4a700e3efa26fb26e2f72aa730fd77073a"
+  },
+  "registered_parent_literal_matches_full_current_source": true,
+  "schema": "bole.accuracy-short8-admission-source-only-negative-regression/v1"
+}

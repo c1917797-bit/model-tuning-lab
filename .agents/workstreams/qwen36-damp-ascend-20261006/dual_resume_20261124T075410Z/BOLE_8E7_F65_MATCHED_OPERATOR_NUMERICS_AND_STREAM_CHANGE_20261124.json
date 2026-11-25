@@ -1,0 +1,109 @@
+{
+  "component_change": "Verify launch stream accessor; kernel mathematics unchanged per source comparison.",
+  "current_model_qualified": false,
+  "direct_old_NPU_receipt": {
+    "bytes": 10331,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261030T115104Z/bole_diagnostic_run_v4/result/RESULT.json",
+    "sha256": "fc00c68bdf68a3319553b02e779c37b92cc70b978748678d8a1231cb8979169f"
+  },
+  "independent_operand_matching_receipt": {
+    "bytes": 10934,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/BOLE_F65_REGISTERED_RANK1_L0_VS_MODEL_FAILURE_MATCHED_OPERANDS_20261124.json",
+    "sha256": "8e7cc5895417ff5fe90f3ff286cce48a7449fb0d64114fe142fdd41665742cd5"
+  },
+  "layer": 0,
+  "metrics": {
+    "NPU_P": {
+      "new_pass": true,
+      "new_relative_l2": 1.608577275885082e-08,
+      "old_pass": false,
+      "old_relative_l2": 0.1700511003395466,
+      "reference_l2": 5.228903167356361
+    },
+    "NPU_U": {
+      "new_pass": true,
+      "new_relative_l2": 2.2588313838141098e-07,
+      "old_pass": false,
+      "old_relative_l2": 2.222596924089144,
+      "reference_l2": 31.100847355278667
+    },
+    "NPU_Y": {
+      "new_pass": true,
+      "new_relative_l2": 2.077438720301412e-07,
+      "old_pass": false,
+      "old_relative_l2": 0.2162771949127659,
+      "reference_l2": 7.475415113945446
+    },
+    "NPU_selected_state_0": {
+      "new_pass": true,
+      "new_relative_l2": 0.0,
+      "old_pass": true,
+      "old_relative_l2": 0.0,
+      "reference_l2": 131.288267834355
+    },
+    "NPU_selected_state_1": {
+      "new_pass": true,
+      "new_relative_l2": 4.544714787408756e-08,
+      "old_pass": false,
+      "old_relative_l2": 0.2930431086234627,
+      "reference_l2": 131.8878545452869
+    },
+    "NPU_selected_state_2": {
+      "new_pass": true,
+      "new_relative_l2": 5.7878770631096156e-08,
+      "old_pass": false,
+      "old_relative_l2": 0.4640806835234988,
+      "reference_l2": 131.674239451886
+    },
+    "NPU_selected_state_3": {
+      "new_pass": true,
+      "new_relative_l2": 6.03875026825567e-08,
+      "old_pass": false,
+      "old_relative_l2": 0.45598172777220847,
+      "reference_l2": 131.4449942759898
+    }
+  },
+  "new_binary_ref": {
+    "bytes": 732528,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261030T115104Z/bole_stream_queue_compile_run_v1/result/bole_tree_proto_v1.so",
+    "sha256": "f65d7eced4ac9f66f2d525d079786bf15e5e67270a70ed3b6ed794fa5b068a2a"
+  },
+  "new_passed_of_seven": 7,
+  "new_route": "registered production wrapper; four Python-wrapper commit calls",
+  "new_source_package": {
+    "bytes": 10608,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261030T115104Z/bole_oldkernel_stream_queue_candidate_prepare_v1/source/SOURCE_PACKAGE.json",
+    "sha256": "b0144feb2eca80c1d0b85d9be5152c737ef5e6c2cefac4ee647c913edd0a66aa"
+  },
+  "old_binary_ref": {
+    "bytes": 728352,
+    "path": "/opt/host/vnf/austinov/bole-core112-scalar-event-build-v5r2-20261029/result/bole_tree_proto_v1.so",
+    "sha256": "8e7f4e2a43e700e8535f754ffcba8fa2bc3b36b2d2fd32dc4ae4c19d020fdb9d"
+  },
+  "old_passed_of_seven": 1,
+  "old_route": "direct standalone adapter",
+  "old_source_package": {
+    "bytes": 9917,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261028T192856Z/core112_scalar_event_fix_v5r2/source/SOURCE_PACKAGE.json",
+    "sha256": "06778ebb1b15f0b805742cfc578a1f9632e3ec7ae739032105ff39488903f060"
+  },
+  "oracle_ref": {
+    "bytes": 774,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261026T184709Z/e2e_prepare_r22/b27n22b/b27n22b-bole/source-bole/oracle112.py",
+    "sha256": "6ba6709289ee37cf54c13faf0bff43f361f06276049774bc3b1cd58456aa3a70"
+  },
+  "paired_performance_measured": false,
+  "rank": 1,
+  "registered_new_NPU_receipt": {
+    "bytes": 7840,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261104T091749Z/bole_f65_registered_matrix192_run_v3/result/cases/R1-G1-O0-L00/RESULT.json",
+    "sha256": "9e0b10fff37a9fc10a19c54690191151b134355bcb3716a410c2a5c1adbf3ef7"
+  },
+  "schema": "bole-matched-component-numeric-results/v1",
+  "scope": "Historical NPU results on matching operands; the failed model worker runtime callee remains unconfirmed. These are numerical component diagnostics only.",
+  "verify_launch_queue_delta_ref": {
+    "bytes": 2311,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261030T115104Z/bole_oldkernel_stream_queue_candidate_prepare_v1/SOURCE_ONLY_DELTA.json",
+    "sha256": "16f5e16497e817fe0e9f0377157ba34d86df21176bffbbf9cdbc33e1173dc54c"
+  }
+}

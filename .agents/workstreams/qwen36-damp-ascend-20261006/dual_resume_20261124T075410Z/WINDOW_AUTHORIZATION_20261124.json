@@ -1,0 +1,53 @@
+{
+  "schema": "dual.manual-window-renewal/v1",
+  "papers": [
+    "BOLE",
+    "DeltaLog"
+  ],
+  "authorized_by": "user reply to call_51b80ff95bf348f891a62b914af47a52: 从本次答复起48小时（推荐）",
+  "time_basis": "first clock observation after user approval; no prior window or project start reset",
+  "start_utc": "2026-11-24T07:54:10Z",
+  "cutoff_utc": "2026-11-26T07:54:10Z",
+  "start_epoch": 1795506850,
+  "cutoff_epoch": 1795679650,
+  "timezone": "Europe/Moscow",
+  "original_project_start_epoch": 1792828303,
+  "previous_window": {
+    "start_utc": "2026-11-17T06:02:17Z",
+    "cutoff_utc": "2026-11-19T06:02:17Z",
+    "immutable": true
+  },
+  "source_and_RAW": "host-only",
+  "MAIN_only_device_admission": true,
+  "authorized_physical_devices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "held_physical_devices": [
+    1,
+    3
+  ],
+  "single_card_candidates": {
+    "BOLE": 0,
+    "DeltaLog": 2
+  },
+  "protected_physical_devices": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "preserve_external_workloads": true,
+  "TP4": "requires explicit resolution of user-held1/3 plus fresh exclusive0-3 ownership; currently not admitted",
+  "no_additional_cleanup_hugepage_or_service_authority": true,
+  "spent_cleanup_and_CPU004_close": "preserve original completion ledgers; never repeat or expand",
+  "requires_fresh_source_controller_guest_owner_readset_device_binding": true,
+  "acceptance": "inherit latest frozen numerical/state/lifecycle, matched formal performance and GSM8K/HumanEval/MMLU protocol; no weakening",
+  "no_automatic_extension": true,
+  "at_cutoff": "no new or continued experiments; retain originals and verify exact owned terminal/release",
+  "document_is_not_READY_or_PASS": true,
+  "user_latest_order": "first preserve verified success/failure lessons in maintainer skill; then write penetration plan"
+}
+

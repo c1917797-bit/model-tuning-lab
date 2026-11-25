@@ -1,0 +1,79 @@
+{
+  "alias_restore_bytes_reclaimed": 0,
+  "bole_archive_restore": {
+    "bytes": 705,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/restore_bole_v15_v16_readonly_after_boot_20261125_v1/RESULT.json",
+    "sha256": "10a6be1ffa12277c00e7a85dabc2dc6b9401a80b15e5d6448a3637499fa3fd03"
+  },
+  "bole_archive_sync_operation": "exec-0000000000000463",
+  "bole_full_RAW_rehash_repeated": false,
+  "boot_id": "e1ace9e6-110e-4d4b-a954-217eced8f83b",
+  "both_bole_original_result_refs_reopened": true,
+  "current_physical_devices": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "delta_archive_operation": "exec-0000000000000452",
+  "delta_archive_restore": {
+    "bytes": 768,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/restore_035r2_r4_readonly_after_boot_20261125_v1/RESULT.json",
+    "sha256": "0b47a9fe78fb372f86154c3363910cfaea3f0e31e94c4bba4c452c1a74a98900"
+  },
+  "delta_fully_rehashed_files": 484,
+  "delta_metadata_authority": {
+    "bytes": 2716,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/DELTALOG_STRICT_METADATA_2M_AUTHORIZATION_20261125.json",
+    "sha256": "dc6bd55a69bc1634b6f09b5533b07688f06cc6fbc1f0a9d8084eebfcaced9606"
+  },
+  "delta_original_op_registry_lookup": "not_found after dispatch; exact local owner result and PID/start are authoritative",
+  "device_snapshot": {
+    "4": {
+      "driver_namespace_ids": [
+        "0"
+      ],
+      "explicit_no_compute_pid": true
+    },
+    "5": {
+      "driver_namespace_ids": [
+        "0"
+      ],
+      "explicit_no_compute_pid": true
+    },
+    "6": {
+      "driver_namespace_ids": [
+        "0"
+      ],
+      "explicit_no_compute_pid": true
+    },
+    "7": {
+      "driver_namespace_ids": [
+        "0"
+      ],
+      "explicit_no_compute_pid": true
+    }
+  },
+  "docker_file_system": {
+    "f_bavail_bytes": 0,
+    "f_bfree_bytes": 102021025792,
+    "free_bytes_needed_for_single_if_unchanged": 16520069120,
+    "free_bytes_needed_for_tp4_if_unchanged": 17056940032,
+    "projected_usable_space_from_original_identified_set_if_unchanged": 1017704448,
+    "reserved_bytes": 109951160320,
+    "root": "/cache/docker",
+    "source": "/dev/sda8"
+  },
+  "epoch": 1795587723.0590086,
+  "host_utc": "2026-11-25T06:22:04Z",
+  "human_deadline_epoch": 1795679650,
+  "known_external_owner_of_driver_reservations": null,
+  "new_NPU_experiment": false,
+  "new_model_or_accuracy_result": null,
+  "previous_wait_terminal_ref": {
+    "bytes": 1435,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/EXECUTION_WORKER_IDENTITY_WAIT_EXPIRED_NO_DEVICE_DISPATCH_20261125.json",
+    "sha256": "0143801ee75f65312d15e7bd5cff21809a74878aa29a489035ba2be57f832948"
+  },
+  "schema": "model-tuning-lab.post-reboot-dual-preservation-and-metadata-authority/v1"
+}

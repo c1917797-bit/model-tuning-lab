@@ -1,0 +1,66 @@
+{
+  "accuracy_qualified": false,
+  "candidate_roles_reopened": [
+    "COMPILED_ARTIFACT.json",
+    "CPU_LOAD_RESULT.json",
+    "binary",
+    "consumer_owner",
+    "executed_wrapper",
+    "numeric_owner",
+    "operator_result",
+    "source_package"
+  ],
+  "config_ref": {
+    "bytes": 9952,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/accuracy_prepare/f65_physical47_normal_eos_source_v1/CONFIG.json",
+    "sha256": "d86245695ca3e22513e57c761411bd3a916208ad0427ae92638d9851c80c1bdd"
+  },
+  "configured_native_generator_ref": {
+    "bytes": 6605,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/accuracy_prepare/f65_physical47_normal_eos_source_v1/prepare_from_parent.py",
+    "sha256": "d6c63ddb08ea4bc149e39dc6e5062636126deb70737736984ff4431f050c0075"
+  },
+  "device_activity": false,
+  "frozen_cohorts_reopened": [
+    "full",
+    "state-smoke"
+  ],
+  "generation": {
+    "ignore_eos": false,
+    "max_tokens": 2048,
+    "seed": 0,
+    "temperature": 0,
+    "thinking_enabled": false
+  },
+  "has_qualified_generation_parent": false,
+  "negative_controls": [
+    {
+      "case": "short_component_as_parent",
+      "rejected_at": "short8 is not the qualified generation parent",
+      "request_ref": {
+        "bytes": 896,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/accuracy_prepare/f65_physical47_normal_eos_source_v1/short_component_as_parent_request.json",
+        "sha256": "3997bf8dc14641af1090f8bcd6df1a575eeaed6bc6e9fc2ea36e273d6e659c18"
+      },
+      "source_files_written_by_preview": false
+    },
+    {
+      "case": "historical_parent_without_qualification",
+      "rejected_at": "qualified generation parent is still pending or mismatched",
+      "request_ref": {
+        "bytes": 896,
+        "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/accuracy_prepare/f65_physical47_normal_eos_source_v1/historical_parent_without_qualification_request.json",
+        "sha256": "19bb6dd0ae6608050183e151b59a87599d5ff89044b2f568baf15e7cfcdbfab6"
+      },
+      "source_files_written_by_preview": false
+    }
+  ],
+  "performed_source_preview": false,
+  "real_current_core_ref": {
+    "bytes": 6419,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_deviceguard_prepare_v1/source-short8/core112.py",
+    "sha256": "bc984bc0b60eb196d297ce4fd82be1f1771e9922889a0dca076af21bae1c6b45"
+  },
+  "schema": "bole.f65-normal-eos-source-lineage-negative-control/v1",
+  "task_answers_generated": 0
+}

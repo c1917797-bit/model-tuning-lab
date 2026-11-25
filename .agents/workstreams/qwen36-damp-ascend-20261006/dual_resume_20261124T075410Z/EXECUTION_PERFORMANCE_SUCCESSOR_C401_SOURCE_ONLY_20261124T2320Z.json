@@ -1,0 +1,50 @@
+{
+  "current_running_wait_operation": "exec-0000000000011449",
+  "docker_available_bytes": 327548928,
+  "epoch": 1795562495.8069794,
+  "full_preview": false,
+  "guard_derivation_receipt": {
+    "bytes": 2848,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_deviceguard_current47_source_only_v1/UDA_GUARD_DERIVATION_SOURCE_ONLY_RESULT.json",
+    "sha256": "70382a72f3c692f4750bc2003a5633c5cfdd27f16144d68c05cb09606beff3ed"
+  },
+  "intermediate_phase_probe_receipt": {
+    "bytes": 2054,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_deviceguard_current47_source_only_v1/REGISTERED_PHASE_CONTROLLER_SOURCE_SEAM_RESULT.json",
+    "sha256": "bbb610e416641d97fd1ad668d0edeb4c8dd866da86ff15f97caee659a5a4f39b"
+  },
+  "next_required": "Original short8 owner and independent result. Then seal actual references, run the original full composition preview and verify effective phase, memory and driver guards before MAIN binds a comparison.",
+  "numerical_short8": null,
+  "original_source_only_retarget_handoff": {
+    "bytes": 11480,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_deviceguard_current47_source_only_v1/CURRENT_ENTRY_HANDOFF.json",
+    "sha256": "9efbfed616f845ef17c83e698fa81f052b987f20d8af4fbcd4160f622f077148"
+  },
+  "parent_binding": {
+    "bytes": 2119284,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_deviceguard_prepare_v1/source-short8/SOURCE_BOUND.json",
+    "sha256": "c4010038b48b2de99c26b19153414f8e3b5d2b71a1b838c2d2d6b126cf683459"
+  },
+  "pending_input": {
+    "bytes": 542,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_deviceguard_current47_source_only_v1/BIND_INPUT_PENDING.json",
+    "sha256": "7b0d2fa981dd639b0e7f7f66ed9d4d547f4d65c746e070145fad676e32697362"
+  },
+  "performance": null,
+  "phase_probe_attribution": "The isolated view import lacked its loader-injected Path. The production composer has a later phase alignment step. Effective 10800-second budget in the final artifact remains unmeasured.",
+  "previous_model_entry_stage": {
+    "bytes": 6827,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/EXECUTION_NATIVE_GUARDED_SHORT8_BOUND_SHARED_SCHEDULER_20261124T2301Z.json",
+    "sha256": "8255b44ec06056a1bc3adbb51c35049257f1258d162a35142d075fe91e293048"
+  },
+  "resource_proposal_unapproved": {
+    "bytes": 7082,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/RESOURCE_RECOVERY_024R2_16_FILES_OPTION_PENDING_20261124.json",
+    "sha256": "d0bafe4344e9573709328905595c4d8b215ad7366b970307d37e05bcac567372"
+  },
+  "schema": "model-tuning-lab.performance-successor-matched-to-guarded-short8-parent/v1",
+  "sealed": false,
+  "source_only": true,
+  "task_accuracy": null,
+  "waiter_PID_matches_now": true
+}

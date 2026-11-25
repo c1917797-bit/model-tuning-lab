@@ -1,0 +1,72 @@
+{
+  "NPU_numeric_executed": false,
+  "SOURCE_BOUND": true,
+  "bind_exit": 0,
+  "bind_seconds": 6.510542154312134,
+  "boot": "5eb8d63e-f2ce-4ad7-9643-1f2dc190998d",
+  "capture_exit": 0,
+  "capture_seconds": 8.650242328643799,
+  "cpu_control_exit": 1,
+  "cpu_control_output_created": false,
+  "cpu_control_owner_pid": 661409,
+  "cpu_control_owner_start": "525948",
+  "cpu_control_seconds": 0.11469626426696777,
+  "current_overlay_ref": {
+    "bytes": 35635,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261030T115104Z/delta_prepare/runtime_storage/scope-overlay-current-D-012/CURRENT_OVERLAY.json",
+    "sha256": "3bba159bb56f77d658995f9b13de84d14d43c070dab1ebcee18e79bbdae8c619"
+  },
+  "experiment_scope": "DeltaLog, physical card 6; BOLE held",
+  "focus": "Materialize and verify the current source-specific authority inverse, preserving historical references, then resume source-bound CPU005.",
+  "observed_at_utc": "2026-11-25T08:29:48.154242+00:00",
+  "paired_performance_result": null,
+  "receipts": [
+    {
+      "bytes": 3314,
+      "path": "delta_prepare/strict_metadata_2m_R5root_prepare_v1/ACTUAL_R5_INSTALL_CONTRACT_RESULT_V2.json",
+      "sha256": "9c44967ec48f7d4a0925a086ad8735b328f11b24fd82609399c38f4dadec05ef"
+    },
+    {
+      "bytes": 4227,
+      "path": "delta_prepare/strict_metadata_2m_R5root_prepare_v1/NATIVE_SOURCE_PUBLICATION_RESULT.json",
+      "sha256": "741a9e0ce52ab6abd80cdbf26ff7707d25a325c3fddbf810536181929cc5ef34"
+    },
+    {
+      "bytes": 1912,
+      "path": "delta_prepare/native_capture_card6_metadata2m_execution_20261125_v4/RESULT.json",
+      "sha256": "adf9ac152a31d2b7ef376cf28d32dcaba22efdd89ae751b8b20c4e756962e9e7"
+    },
+    {
+      "bytes": 1429,
+      "path": "delta_prepare/native_bind_card6_metadata2m_execution_20261125_v5/RESULT.json",
+      "sha256": "41ddab090f6394d61ff840f7f03c084bba19fa99dcaac68a403de90dab5b7c1b"
+    },
+    {
+      "bytes": 225310,
+      "path": "delta_prepare/native_current_source_card6_metadata2m_v3/SOURCE_MANIFEST.json",
+      "sha256": "7161c2cd629493237039dc8a088c5e4b3e1a1a18552c599c408760f0109bf129"
+    },
+    {
+      "bytes": 739,
+      "path": "delta_prepare/current_control_CPU005_prepare_20261125_v1/cpu005_native_dispatch_5eb8_v1/STARTED.json",
+      "sha256": "d7b3826856d40b34c11557cde5604d9b232030d3a3ce69f05c8119bc52870fe9"
+    },
+    {
+      "bytes": 545,
+      "path": "delta_prepare/current_control_CPU005_prepare_20261125_v1/cpu005_native_dispatch_5eb8_v1/TERMINAL.json",
+      "sha256": "467732dd3d9153798ac8530e0c5803b7338bd2fd3b7a5360de682425a9b04487"
+    }
+  ],
+  "schema": "deltalog.native-bound-current-host-sidecar/v1",
+  "trigger": {
+    "exception": "FileNotFoundError",
+    "function": "authority_renewal_inverse.verify_current",
+    "historical_manifest_role": {
+      "bytes": 2641,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/native_current_source_card6_v5r2/HOST_AUTHORITY_RENEWAL_INVERSE.json",
+      "sha256": "129d894a8b5495c30f5037ae17212b6d11ef34a71ffd60718ce47dfa344ea8fb"
+    },
+    "line": 94,
+    "required_local_filename": "HOST_AUTHORITY_RENEWAL_INVERSE.json"
+  }
+}
