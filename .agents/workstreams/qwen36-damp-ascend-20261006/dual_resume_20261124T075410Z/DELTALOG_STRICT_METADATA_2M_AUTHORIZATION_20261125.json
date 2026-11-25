@@ -1,0 +1,43 @@
+{
+  "alone_authorizes_device_execution": false,
+  "authorized": true,
+  "authorized_at_epoch": 1795586984.343961,
+  "authorized_by": "User replied 请解除阻塞继续跑 after the current decision explicitly identified raising the DeltaLog control metadata limit from 1 MiB to 2 MiB as the action requiring approval.",
+  "control_metadata_limit_bytes": 2097152,
+  "cutoff_epoch": 1795679650,
+  "cutoff_utc": "2026-11-26T07:54:10Z",
+  "device_scope_amendment_ref": {
+    "bytes": 2008,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/DEVICE_SCOPE_AMENDMENT_PHYSICAL4_7_20261124.json",
+    "sha256": "7d757b431d8b28f740809e7c98fa784e7ee96f735826bdb541e47514d30e00d2"
+  },
+  "integration_contract_ref": {
+    "bytes": 7344,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/card6_transition_prepare_v1/STRICT_CONTROL_METADATA_PENDING_APPROVAL_INTEGRATION_CONTRACT_20261124.json",
+    "sha256": "98011910f25dba13a76f70597036703e904f1135b61be033104278cfbfae1b0f"
+  },
+  "metering_roots": {
+    "H": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/sealer_control_prepare_v1",
+    "ROOT": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261030T115104Z/delta_prepare/runtime_storage"
+  },
+  "metering_scope": "H_recursive_all_files+ROOT_direct_metadata+next_payload",
+  "original_card6_scope_ref": {
+    "bytes": 1873,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/card6_transition_prepare_v1/CURRENT_D_CPU_N16_SCOPE_CARD6_20261124.json",
+    "sha256": "93bf68ef663e4e10e3654adb34ab9c715a6552e12a79ac6df34ce8b4092bae70"
+  },
+  "original_user_reply": "请解除阻塞继续跑",
+  "other_resource_or_cleanup_authority": false,
+  "preserve_original_data_RAW_storage_caps": true,
+  "preserve_original_leaf_and_directory_caps": true,
+  "preserve_other_writer_gates": true,
+  "previous_control_metadata_limit_bytes": 1048576,
+  "same_existing_metadata_counted": true,
+  "schema": "deltalog.strict-control-metadata-budget-authorization/v1",
+  "scope": "DeltaLog control metadata only, this existing human window",
+  "window_authority_ref": {
+    "bytes": 1824,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/WINDOW_AUTHORIZATION_20261124.json",
+    "sha256": "1fdec2f6e59b57afe99662cb4b546cf66ec42fa7c5f3a2659c784ca2a1bbe66f"
+  }
+}

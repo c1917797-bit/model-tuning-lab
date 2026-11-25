@@ -8,7 +8,7 @@ The current BOLE [four-card model and independent consumer](bole_prepare/native_
 
 After genuine short8 host and independent scope results, use the [current F2 sealer](performance_prepare/f2_f65_workeridentity_current47_strict3_coverage_source_only_v2/DELIVERY_INDEX.json). It checks that verified state records reach the last HTTP output token before the first 32K/fixed1024 paired diagnostic. The [coverage and long-run record](EXECUTION_HTTP_OUTPUT_STATE_COVERAGE_AND_LONG160_RETENTION_20261125.json) links the original evidence. The [current accuracy admission](accuracy_prepare/upstream_admission_v1/CURRENT_UPSTREAM_ADMISSION_HANDOFF_V5.json) consumes the same F2 family and registers the original long-run numerical comparison. Device results, paired performance and task accuracy remain pending.
 
-The DeltaLog [metadata reservation](delta_prepare/card6_transition_prepare_v1/STRICT_CONTROL_METADATA_PENDING_APPROVAL_INTEGRATION_CONTRACT_20261124.json) requires resolution before its next accounted write.
+The [2 MiB DeltaLog control metadata authorization](DELTALOG_STRICT_METADATA_2M_AUTHORIZATION_20261125.json) is in force for the existing window. Use it in the actual writers, with fresh boot-specific observations, before capture and binding. The [post-reboot receipt](EXECUTION_POSTBOOT_ARCHIVE_ALIAS_RESTORES_AND_DELTA_2M_AUTH_20261125.json) verifies restoration of both DeltaLog evidence roots and both BOLE historical report roots. On this boot DockerRoot has zero ordinary allocatable bytes. The reserved-block deficit adds to the space that must be freed before dispatch.
 
 ## Earlier observations in this window
 
