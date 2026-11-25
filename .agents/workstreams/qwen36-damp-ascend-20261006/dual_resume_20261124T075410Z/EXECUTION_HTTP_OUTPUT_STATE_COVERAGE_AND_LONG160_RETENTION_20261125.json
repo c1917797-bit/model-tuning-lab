@@ -1,0 +1,76 @@
+{
+  "accuracy_current": {
+    "bytes": 4669,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/accuracy_prepare/upstream_admission_v1/CURRENT_UPSTREAM_ADMISSION_HANDOFF_V5.json",
+    "sha256": "fc3178b91fdf0b8be755b50167cdcfae413aa620e5a2d5185651319c136ce2d0"
+  },
+  "actual_performance_entry": {
+    "bytes": 4006,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_workeridentity_current47_strict3_coverage_source_only_v2/DELIVERY_INDEX.json",
+    "sha256": "01d9e92ac2a2bc7b5c3e547145ad8e2854cea78ff77815234e4ef2c82e3c6049"
+  },
+  "bound_model": {
+    "bytes": 2123138,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_worker_identity_prepare_v1/source-short8/SOURCE_BOUND.json",
+    "sha256": "dc8ef923b48de46f3de105f51c6fc550c49a5455d0c1a654034326c23d359ba3"
+  },
+  "continuous_utilization": null,
+  "coverage_change": "Original load_arm validates contiguous per-step HTTP slices but does not test final cursor. The updated F2 prerequisite first uses the original numerical consumer, then checks the final covered cursor against the complete observed HTTP token count for each rank and generation. The additional check uses small source-bound metadata only.",
+  "current_source_closure": {
+    "bytes": 1472,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_workeridentity_current47_strict3_coverage_source_only_v2/ACTUAL_CURRENT_SOURCE_COVERAGE_CLOSURE.json",
+    "sha256": "acc5d3025e31083139ab089feadab93442e0440cb2722f9c7818da5e3d8d5d03"
+  },
+  "deltalog_new_device_evidence": null,
+  "focused_control_results": {
+    "bytes": 3183,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/http_state_coverage_gate_v1/PURE_INTEGER_METADATA_BOUNDARY_RESULT.json",
+    "sha256": "1285a793e9ba28e99182a602200773af78a3ef84cf40207961b27b9b0b0bf258"
+  },
+  "focused_control_scope": "14 pure metadata cases, no NPU or model execution",
+  "human_window": {
+    "bytes": 1824,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/WINDOW_AUTHORIZATION_20261124.json",
+    "sha256": "1fdec2f6e59b57afe99662cb4b546cf66ec42fa7c5f3a2659c784ca2a1bbe66f"
+  },
+  "integration": {
+    "bytes": 5423,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_workeridentity_current47_strict3_coverage_source_only_v2/ACTUAL_SEALER_COVERAGE_INTEGRATION.json",
+    "sha256": "7a33827b68e242bb91cd485413077dbdcc604a070b2a2ff52863f7ff969471e6"
+  },
+  "long160_consumer_index": {
+    "bytes": 7679,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/accuracy_prepare/upstream_admission_v1/WHOLE160_ORIGINAL_NUMERIC_CONSUMER_INDEX_V1.json",
+    "sha256": "9306ffcadd9d9c7c8c510f3ba5b81f52f480099c6770e8de2766d744554dfc73"
+  },
+  "model_binding_changed": false,
+  "new_model_numeric": null,
+  "paired_performance": null,
+  "recorded_epoch": 1795569063.4764755,
+  "schema": "model-tuning-lab.output-state-trajectory-closure/v1",
+  "shared_helper": {
+    "bytes": 7245,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/http_state_coverage_gate_v1/http_state_coverage.py",
+    "sha256": "6667be9c8197ab0125b2cd4329d050d99c8ed016fb568ff646231ed6c83fb879"
+  },
+  "task_accuracy": null,
+  "under_frozen_capture": {
+    "actual_160_disk_peak": null,
+    "actual_160_iterations": null,
+    "current_long160_source": null,
+    "current_profile_cap_bytes": 17448304640,
+    "fixed_bytes_deficit": 34330378240,
+    "fixed_bytes_lower_estimate": 51778682880,
+    "generation_count": 2,
+    "max_tokens_per_publication": 2,
+    "minimum_iterations_per_generation": 80,
+    "original_budget": {
+      "bytes": 6360,
+      "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/bole_resume_20261020T154710Z/renew24_20261028T192856Z/long160_execution_readiness_v1/ORIGINAL_CAPTURE_BUDGET.json",
+      "sha256": "937fb88740bfc15f186a22e3680953197bd1727453a97dc2564779d013d7160e"
+    },
+    "output_tokens_per_request": 160,
+    "prefill_output_tokens": 1,
+    "rank_count": 4
+  }
+}
