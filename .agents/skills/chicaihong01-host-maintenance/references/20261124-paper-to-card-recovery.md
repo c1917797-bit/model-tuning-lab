@@ -71,3 +71,9 @@
 
 - [单字段资格发布回执](../../../workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_deviceguard_prepare_v1/native_bind_authorization_publish_v1/PUBLISH_RECEIPT.json)（2619 B，SHA256 `d2f54281c68e0c9c6aaa125d07e11f4e168f475b2eac0363d88880f9ce5dcae5`）；[helper 实际回归](../../../workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_deviceguard_prepare_v1/NATIVE_QUALIFICATION_AUTHORITY_PUBLICATION_HELPER_REGRESSION_V2.json)；V3 原入口实际首写前截断为 MA `exec-000000000001138d`。
 - [双边 UDA 守卫 V2](../../../workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/physical47_device_guard_delta_v2/SOURCE_DELTA_REVIEW_INPUT.json)（8060 B，SHA256 `0c26f9ddd2dab11cee7a10bbcf7b5540b731b539121454be7c9820d47f653dd6`）；[created/Pid0 原清理合同](../../../workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/physical47_device_guard_delta_v2/CREATED_PID0_CLEANUP_CONTRACT.json)。
+
+## 整模型失败帧与配对索引（11 月 25 日）
+
+- 排查算子时，把已执行的 verify 调用、可见库身份和状态张量关联到同一请求、rank、层和槽位。库名或映射能够证明加载；原生派发指针若未采集，保留为未知。仅修改观察字段时，复用未变的组件数值证据。
+- 在首次上卡前，对照生产者传入的真实 trial 编号与独立读数程序的索引规则。这条 BOLE 路线的单轮是 0，三轮是 0、1、2。最终读数使用同一物化目录中的程序和控制文件。
+- 历史报告字段可沿用旧名称。核实独立程序实际比较的长度、真实 HTTP token、各 rank 状态与运行终态，再判断旧结果能否用于 160 步。

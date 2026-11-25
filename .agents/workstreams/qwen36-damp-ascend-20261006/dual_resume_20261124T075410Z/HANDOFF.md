@@ -72,3 +72,9 @@ NEXT: approved-budget/fresh-resource BOLE0 state160; Delta2 true current-control
 ### BOLE 验收入口的源码修正
 
 物理 0 卡历史 16 步组件已独立通过 128 项，报告复算可复用原始数据。当前四卡整模型缺独立数值结果。最终三轮判定的源码已加入逐轮 TTFT 与 TPOT 各降低 10% 的整数判据，新角色仍须接入当期原生执行入口。正常 EOS 精度预览已对齐当前 F65 核与二进制；两臂真实上游仍为空。详情见 EXECUTION_CURRENT_QUALIFICATION_AND_FINAL_ACCEPTANCE_SOURCE_ONLY_20261124.json。
+
+### 11 月 25 日，BOLE 四卡短测接入同帧算子身份记录
+
+唯一调度操作为 `exec-0000000000011ad8`，进程及原等待截止见 EXECUTION_WORKER_IDENTITY_NATIVE_BIND_SHARED_SCHEDULER_AND_F2_20261125.json。上一个待机操作 `11449` 已协作退出，退出码 21，未启实验。新版模型入口 `dc8ef923` 已通过原生绑定，可关联 Python 调用、已加载库与同帧 GDN 数据；实际模型派发仍须物理卡和存储条件同时满足。当前源不证明原生派发指针。
+
+首次 dense/BOLE 单轮索引采用 trial=0。只有这版模型源的真实 short8 host/scope 通过后，才使用 f2_f65_workeridentity_current47_strict3_source_only_v1 的原生 sealer。三轮正式比较使用 0、1、2；当前无数值、性能或任务精度实测可用于验收。

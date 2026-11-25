@@ -1,0 +1,43 @@
+{
+  "READY": false,
+  "SOURCE_BOUND": false,
+  "actual_source_transform_completed": true,
+  "entry_ref": {
+    "bytes": 5074,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_workeridentity_current47_strict3_source_only_v1/seal_actual_short8.py",
+    "sha256": "5888438a3e1b7a9532621c7b066651c3ed37fb53eca1df4991de5391b5b4f4e4"
+  },
+  "generator_ref": {
+    "bytes": 221602,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_workeridentity_current47_strict3_source_only_v1/materialize_diagnostic_v16_PENDING.py",
+    "sha256": "0505c9319a0ef83251b1c24564eb9a0ff9d7b65674fbeb3110c5b4c4f14114cc"
+  },
+  "no_CPU_NPU_preview_bind_executed": true,
+  "original_delivery_ref": {
+    "bytes": 7050,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_workeridentity_current47_strict3_source_only_v1/DELIVERY_INDEX.json",
+    "sha256": "d6e69b66a35b2b4dab8059cfcaa6a407597432d0dbed9385dc36ea07d86b52c5"
+  },
+  "parent_source_ref": {
+    "bytes": 2123138,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_worker_identity_prepare_v1/source-short8/SOURCE_BOUND.json",
+    "sha256": "dc8ef923b48de46f3de105f51c6fc550c49a5455d0c1a654034326c23d359ba3"
+  },
+  "performance_delta_ref": {
+    "bytes": 10542,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_workeridentity_current47_strict3_source_only_v1/performance_delta.py",
+    "sha256": "3301ea7a8d3b9997610e6be7d0e72c00e6ab39fc32e4bc739cde71c1fb56b532"
+  },
+  "prerequisite_ref": {
+    "bytes": 3856,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_workeridentity_current47_strict3_source_only_v1/short8_prerequisite.py",
+    "sha256": "df6ec2cf3fdc12f02725985830add7d791feb73fc156ae945dc3b8b476969fde"
+  },
+  "schema": "bole.workeridentity-F2-current-complete-source-only-index/v1",
+  "source_transform_completion_ref": {
+    "bytes": 1791,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_workeridentity_current47_strict3_source_only_v1/ACTUAL_SOURCE_TRANSFORM_COMPLETION.json",
+    "sha256": "0d97e0a93f3bc8fa83d111751578fe7fe0d8ffe476d70b26d6f544fda16864ea"
+  },
+  "upstream_short8_host_scope_MAIN_still_null": true
+}

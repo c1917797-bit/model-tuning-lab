@@ -1,0 +1,23 @@
+{
+  "common_lock_reacquired": true,
+  "disk_wait_deadline": 1795569564.4180098,
+  "exit": 21,
+  "experiment_started": false,
+  "observed_epoch": 1795566175.5685732,
+  "operation": "exec-0000000000011449",
+  "original_process_gone_or_reused": true,
+  "pid": 890714,
+  "schema": "bole.MAIN-exact-waiter-cooperative-release/v1",
+  "startticks": 40636743,
+  "target_dispatcher": {
+    "bytes": 24423,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_TP4_OR_PHYSICAL6_PRIORITY_WORKER_IDENTITY_20261125.py",
+    "sha256": "057aeae2b4004d7cad34416c1c6e21fcef2978b9f0c3e3ae8c97010dd786554a"
+  },
+  "ticket_or_outputs_present": false,
+  "yield_ref": {
+    "bytes": 1124,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_SHARED_BOLE4_OR_SINGLE6_STANDBY_YIELD_20261124.json",
+    "sha256": "8dda4a547766de1b81a3e63dec629fe609c93434ffbed656bc7bc251dd507bb1"
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "accuracy_runtime_qualified": false,
+  "current_model_commands_ref": {
+    "bytes": 4600,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_worker_identity_prepare_v1/source-short8/COMMANDS.json",
+    "sha256": "f0d26c642b00a77c0200d8d9259d52c36ce1589fcb9f4c7eb07052d26ec3d17f"
+  },
+  "current_model_numeric_pass": null,
+  "current_model_output_present": false,
+  "current_model_source_ref": {
+    "bytes": 2123138,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_worker_identity_prepare_v1/source-short8/SOURCE_BOUND.json",
+    "sha256": "dc8ef923b48de46f3de105f51c6fc550c49a5455d0c1a654034326c23d359ba3"
+  },
+  "current_sample_only": {
+    "device_driver_namespace_rows": [
+      {
+        "holder_namespace": 4,
+        "physical": 4,
+        "shared_namespaces": null
+      },
+      {
+        "holder_namespace": 128,
+        "physical": 5,
+        "shared_namespaces": null
+      },
+      {
+        "holder_namespace": null,
+        "physical": 6,
+        "shared_namespaces": null
+      },
+      {
+        "holder_namespace": 2,
+        "physical": 7,
+        "shared_namespaces": null
+      }
+    ],
+    "docker_available_bytes": 21233664,
+    "docker_floor_TP4_bytes": 9126805504,
+    "docker_floor_single6_bytes": 8589934592
+  },
+  "deltalog_original_terminal_checkpoint": {
+    "bytes": 3908,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/EXECUTION_MATCHED_F65_OPERANDS_AND_DELTA_CAPTURE012_TERMINAL_20261124.json",
+    "sha256": "24ba85517caffef337664119aa365f3347d382f077eef7411b26e04081d46b9f"
+  },
+  "formal_target_reached": false,
+  "historical_160_source_recovered": {
+    "bytes": 9365,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/accuracy_prepare/upstream_admission_v1/RECOVERED_WHOLE_MODEL_160_NATIVE_FAMILY.json",
+    "sha256": "4b8dd330b604878663b454377c8d7b548f00bae488628f0b77f46ef5d4462768"
+  },
+  "host_utc": "2026-11-25T00:39:04Z",
+  "human_window": {
+    "bytes": 1824,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/WINDOW_AUTHORIZATION_20261124.json",
+    "sha256": "1fdec2f6e59b57afe99662cb4b546cf66ec42fa7c5f3a2659c784ca2a1bbe66f"
+  },
+  "native_bind_exit": 0,
+  "native_bind_operation": "exec-0000000000011ac9",
+  "native_bind_seconds": 89.0633721500053,
+  "new_scheduler": {
+    "bytes": 24423,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_TP4_OR_PHYSICAL6_PRIORITY_WORKER_IDENTITY_20261125.py",
+    "sha256": "057aeae2b4004d7cad34416c1c6e21fcef2978b9f0c3e3ae8c97010dd786554a"
+  },
+  "new_scheduler_bound_owner": {
+    "bytes": 2628,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_WORKER_IDENTITY_TP4_OR_SINGLE6_STANDBY_20261125.json",
+    "sha256": "ce289d11a14e897ddcd66f49a3aa8eee51e9bb437fa608c7aea37355bcd319d1"
+  },
+  "new_scheduler_operation": "exec-0000000000011ad8",
+  "new_scheduler_pid": 1925452,
+  "new_scheduler_readiness": {
+    "bytes": 2221,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_WORKER_IDENTITY_SCHEDULER_READINESS_20261125.json",
+    "sha256": "a4b136d3d764794493b33f2422f2fb3626457133b938394e76732d1204fdc682"
+  },
+  "new_scheduler_startticks": 41135200,
+  "next": "Keep original worker-identity scheduler. Reopen its native terminal and independent result on change. Only after full real short8 source/host/scope use the F2 native sealer. If inputs and the failure are unchanged, reuse completed component and source controls. Preserve all external workloads and pending quotas.",
+  "official_3trial_source_only_latency_gate": {
+    "bytes": 3255,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/formal_three_trial_latency_gate_v1/INTEGRATION_CONTRACT.json",
+    "sha256": "399b87c6120f86d20c7b42cd656e5c0fd0d5611c259c2a6493b6d381a344629b"
+  },
+  "old_scheduler_cooperative_release": {
+    "bytes": 1024,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/MAIN_SHARED_STANDBY_YIELDED_TO_WORKER_IDENTITY_20261125.json",
+    "sha256": "bc8f407f28b17dee14f86a25167f7a1b78b9b326989730314282310367a60ba1"
+  },
+  "original_standby_deadline": 1795569564.4180098,
+  "performance_materialization_or_NPU": false,
+  "performance_or_task_metrics": null,
+  "performance_successor": {
+    "bytes": 2825,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/performance_prepare/f2_f65_workeridentity_current47_strict3_source_only_v1/CURRENT_DELIVERY_INDEX.json",
+    "sha256": "49dcf8be492d7ebaeb9c374439980c8c5c0b1b0ab42d221e55389f0cee956f3b"
+  },
+  "physical_amendment": {
+    "bytes": 2008,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/DEVICE_SCOPE_AMENDMENT_PHYSICAL4_7_20261124.json",
+    "sha256": "7d757b431d8b28f740809e7c98fa784e7ee96f735826bdb541e47514d30e00d2"
+  },
+  "recorded_epoch": 1795567144.274203,
+  "schema": "bole.current-worker-identity-native-binding-and-devices/v1",
+  "single6_ticket_present": false,
+  "source_binding_handoff": {
+    "bytes": 6606,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_worker_identity_prepare_v1/NATIVE_WORKER_IDENTITY_PHYSICAL47_BOUND_HANDOFF_20261125.json",
+    "sha256": "1291ce0650bf8162845196f7b88a1df88c864db7d3d6280b85565e97baf61d62"
+  },
+  "source_preparation_ref": {
+    "bytes": 10482,
+    "path": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/bole_prepare/native_short8_physical47_worker_identity_prepare_v1/NATIVE_WORKER_IDENTITY_PREPARED_REVIEW_HANDOFF.json",
+    "sha256": "4e602da157fdbfd3e7a5ee0cb903b543c32bd4f26a1f964cdfc8034dcb436220"
+  },
+  "window30_machine_utilization": "unmeasured; snapshots only. Original wait-only scheduler retired before any owned hardware execution."
+}
