@@ -1,0 +1,67 @@
+{
+  "NPU_or_performance_or_accuracy_result": false,
+  "boot_id": "5eb8d63e-f2ce-4ad7-9643-1f2dc190998d",
+  "effective_writer_output_anchor": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/sealer_control_prepare_v1/live_absence_v1_20261124/readonly_policy_anchor.py",
+  "expected_directory": "/opt/host/vnf/austinov/model-tuning-lab/.agents/workstreams/qwen36-damp-ascend-20261006/dual_resume_20261124T075410Z/delta_prepare/sealer_control_prepare_v1/live_absence_strict2m_v1_20261125",
+  "failure_sequence": [
+    "original outer guard contained old evidence directory literals and exited before output",
+    "successor preflight passed that guard and rejected the actual CPU004 writer destination before creating output"
+  ],
+  "history_files_independently_rechecked": 78,
+  "new_source_template": true,
+  "next": "Correct the actual writer destination, publish a distinct source version, then run original capture and bind.",
+  "original_capture_operation": "exec-0000000000000035",
+  "original_evidence": [
+    {
+      "bytes": 560,
+      "path": "USER_DIRECTION_PRIORITIZE_DELTALOG_HOLD_BOLE_20261125.json",
+      "sha256": "293e2a681c7abc20af4a1d1b0ac4410dd66d2e296b68eed8486d560db25c756b"
+    },
+    {
+      "bytes": 2716,
+      "path": "DELTALOG_STRICT_METADATA_2M_AUTHORIZATION_20261125.json",
+      "sha256": "dc6bd55a69bc1634b6f09b5533b07688f06cc6fbc1f0a9d8084eebfcaced9606"
+    },
+    {
+      "bytes": 765,
+      "path": "restore_035r2_r4_readonly_after_boot_20261125_v2/RESULT.json",
+      "sha256": "7a92d871727b4abd46ba69023079502371d89755dffd1565319bb059f1b477cf"
+    },
+    {
+      "bytes": 2971,
+      "path": "delta_prepare/current_boot_provenance_prepare_20261125_v2/MAIN_STORAGE_AND_ABSENCE_INDEPENDENT_CHECK.json",
+      "sha256": "ec4fb71473ef768dfaf07f65e2feb1f8b9df042da6d44e951d6c923375878b03"
+    },
+    {
+      "bytes": 2610,
+      "path": "delta_prepare/current_boot_provenance_prepare_20261125_v2/published_MAIN_reviews_v1/PUBLICATION_RESULT.json",
+      "sha256": "e62c9dac2fb78d31a88f3dab58b5d065adff5f79981598f9f881d97a1c822a1a"
+    },
+    {
+      "bytes": 4208,
+      "path": "delta_prepare/strict_metadata_2m_prepare_v3/NATIVE_SOURCE_PUBLICATION_RESULT.json",
+      "sha256": "c2ce2e9438038b6fcde32b1b586e422bfa827488e6049182656093cf9376e825"
+    },
+    {
+      "bytes": 240532,
+      "path": "delta_prepare/native_current_source_card6_metadata2m_v1/SOURCE_TEMPLATE.json",
+      "sha256": "bbe668b390076761d879988644ab3f01bc3d586f68295f84348429316612fd01"
+    },
+    {
+      "bytes": 1339,
+      "path": "delta_prepare/current_boot_capture_bind_prepare_20261125_v1/capture_source_only_v1/PREENTRY_0035_TERMINAL.json",
+      "sha256": "6b00b8de99f27ef7e96d9bf441a90cb90e027d5c2328f30ebad62797773b1473"
+    },
+    {
+      "bytes": 1859,
+      "path": "delta_prepare/current_boot_capture_bind_prepare_20261125_v1/CAPTURE_V3_ACTUAL_PREFLIGHT_TO_OUT_BOUNDARY.json",
+      "sha256": "efd9db3ed4a4966ae7e04cd7ada2f2634f3f8b201c27eb905e2ada398da8a100"
+    }
+  ],
+  "original_native_capture_completed": false,
+  "preference": "DeltaLog only, BOLE held",
+  "restore_hash_verified_files": 484,
+  "schema": "deltalog.postboot-source-freeze-capture-writer-path/v1",
+  "source_bound": false,
+  "verified_at_utc": "2026-11-25T07:38:03.523796+00:00"
+}

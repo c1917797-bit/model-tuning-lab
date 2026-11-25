@@ -1,5 +1,11 @@
 # DeltaLog and BOLE on physical NPUs 4–7
 
+## 2026-11-25 UTC · DeltaLog 源码冻结与采集入口
+
+本轮按用户指令暂缓 BOLE。在当前主机启动实例上恢复了 DeltaLog 两处只读挂载，484 个文件哈希一致。新预算已接入源码模板。首次实际启动在创建输出前退出；后续预检定位到 CPU004 证据写入函数仍通过旧目录下的锚点计算目标路径。待修复后，从原生采集与绑定接续。当前没有 NPU 数值或整模型性能结果。
+
+本阶段可复核依据见同目录 EXECUTION_DELTA_POSTBOOT_SOURCE_FREEZE_CAPTURE_WRITER_PATH_20261125.json。
+
 ## Active allocation and next experiment
 
 The [human window](WINDOW_AUTHORIZATION_20261124.json) ends at 2026-11-26 07:54:10 UTC. The [allocation](DEVICE_SCOPE_AMENDMENT_PHYSICAL4_7_20261124.json) covers physical 4–7. Preserve 0–3 and external workloads.
