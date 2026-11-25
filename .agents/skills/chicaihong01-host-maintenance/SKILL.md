@@ -128,3 +128,7 @@ Preserve exact AWMCP errors. Refresh topology after routing drift and retry only
 when the response marks the failure retryable. A control-plane timeout is not
 proof of host, command, container, or NPU failure; do not mutate the machine to
 compensate for an unproven diagnosis.
+
+## Diagnose a bound experiment before retrying
+
+When runtime authorization, ledger reservation, or resource admission blocks the first device step, use [the DeltaLog startup recovery decisions](references/bound-entry-recovery.md).
